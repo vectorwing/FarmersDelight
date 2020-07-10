@@ -15,7 +15,6 @@ public class ClientSetup
 	private static final Logger LOGGER = LogManager.getLogger();
 
 	public static void init(final FMLClientSetupEvent event) {
-		// do something that can only be done on the client
 		RenderTypeLookup.setRenderLayer(BlockInit.ONION_CROP.get(), RenderType.getCutout());
 	}
 }
