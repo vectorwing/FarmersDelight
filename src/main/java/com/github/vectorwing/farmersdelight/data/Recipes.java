@@ -62,7 +62,7 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ItemInit.CABBAGE.get())
 				.addIngredient(ItemInit.TOMATO.get())
 				.setGroup("farmersdelight")
-				.addCriterion("milk_bucket", InventoryChangeTrigger.Instance.forItems(Items.MILK_BUCKET))
+				.addCriterion("cooked_chicken", InventoryChangeTrigger.Instance.forItems(Items.COOKED_CHICKEN))
 				.build(consumer);
 	}
 }
