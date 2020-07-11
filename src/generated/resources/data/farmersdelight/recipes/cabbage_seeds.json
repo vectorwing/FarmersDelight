@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "farmersdelight",
+  "ingredients": [
+    {
+      "item": "farmersdelight:cabbage"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:cabbage_seeds"
+  }
+}

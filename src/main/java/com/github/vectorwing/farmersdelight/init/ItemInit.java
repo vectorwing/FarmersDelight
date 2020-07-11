@@ -15,8 +15,8 @@ public class ItemInit
 {
 	public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, FarmersDelight.MODID);
 
-	public static final RegistryObject<Item> CABBAGE_SEEDS = ITEMS.register("cabbage_seeds", () -> new Item(new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
-	public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds", () -> new Item(new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> CABBAGE_SEEDS = ITEMS.register("cabbage_seeds", () -> new BlockItem(BlockInit.CABBAGE_CROP.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds", () -> new BlockItem(BlockInit.TOMATO_CROP.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> RICE_PANICLE = ITEMS.register("rice_panicle", () -> new Item(new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> ONION_SEEDS = ITEMS.register("onion_seeds", () -> new BlockItem(BlockInit.ONION_CROP.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
@@ -28,8 +28,11 @@ public class ItemInit
 			() -> new Item(new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> ONION = ITEMS.register("onion",
 			() -> new Item(new Item.Properties().group(FarmersDelight.ITEM_GROUP).food(new Food.Builder().hunger(1).saturation(0.1F).build())));
+
 	public static final RegistryObject<Item> FRIED_EGG = ITEMS.register("fried_egg",
 			() -> new Item(new Item.Properties().group(FarmersDelight.ITEM_GROUP).food(new Food.Builder().hunger(4).saturation(0.3F).build())));
 	public static final RegistryObject<Item> MILK_BOTTLE = ITEMS.register("milk_bottle",
 			() -> new MilkBottleItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP).containerItem(Items.GLASS_BOTTLE).maxStackSize(16)));
+	public static final RegistryObject<Item> TOMATO_SAUCE = ITEMS.register("tomato_sauce",
+			() -> new Item(new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 }

@@ -1,14 +1,15 @@
 {
   "block.farmersdelight.stove": "Stove",
-  "block.farmersdelight.onions": "Onion Seeds",
-  "item.farmersdelight.tomato_seeds": "Tomato Seeds",
-  "item.farmersdelight.cabbage_seeds": "Cabbage Seeds",
-  "item.farmersdelight.rice_panicle": "Rice Panicle",
 
   "item.farmersdelight.tomato": "Tomato",
   "item.farmersdelight.rice": "Rice",
   "item.farmersdelight.onion": "Onion",
   "item.farmersdelight.cabbage": "Cabbage",
+
+  "block.farmersdelight.cabbages": "Cabbage Seeds",
+  "block.farmersdelight.onions": "Onion Seeds",
+  "block.farmersdelight.tomatoes": "Tomato Seeds",
+  "item.farmersdelight.rice_panicle": "Rice Panicle",
 
   "item.farmersdelight.tomato_sauce": "Tomato Sauce",
   "item.farmersdelight.milk_bottle": "Milk Bottle",

@@ -1,8 +1,10 @@
 package com.github.vectorwing.farmersdelight.init;
 
 import com.github.vectorwing.farmersdelight.FarmersDelight;
+import com.github.vectorwing.farmersdelight.blocks.CabbageCropBlock;
 import com.github.vectorwing.farmersdelight.blocks.OnionCropBlock;
 import com.github.vectorwing.farmersdelight.blocks.StoveBlock;
+import com.github.vectorwing.farmersdelight.blocks.TomatoCropBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
@@ -20,6 +22,10 @@ public class BlockInit
 					.hardnessAndResistance(0.5f, 15.0f).sound(SoundType.STONE)
 					.lightValue(13)));
 
+	public static final RegistryObject<Block> CABBAGE_CROP = BLOCKS.register("cabbages",
+			() -> new CabbageCropBlock(Block.Properties.from(Blocks.WHEAT)));
 	public static final RegistryObject<Block> ONION_CROP = BLOCKS.register("onions",
 			() -> new OnionCropBlock(Block.Properties.from(Blocks.WHEAT)));
+	public static final RegistryObject<Block> TOMATO_CROP = BLOCKS.register("tomatoes",
+			() -> new TomatoCropBlock(Block.Properties.from(Blocks.WHEAT)));
 }

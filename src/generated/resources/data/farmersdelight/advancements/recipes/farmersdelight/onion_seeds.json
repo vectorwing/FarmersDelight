@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:onion_seeds"
+    ]
+  },
+  "criteria": {
+    "cabbage": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:onion"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:onion_seeds"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "cabbage",
+      "has_the_recipe"
+    ]
+  ]
+}

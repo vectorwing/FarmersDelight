@@ -16,5 +16,7 @@ public class ClientSetup
 
 	public static void init(final FMLClientSetupEvent event) {
 		RenderTypeLookup.setRenderLayer(BlockInit.ONION_CROP.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(BlockInit.CABBAGE_CROP.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(BlockInit.TOMATO_CROP.get(), RenderType.getCutout());
 	}
 }

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "farmersdelight",
+  "ingredients": [
+    {
+      "item": "farmersdelight:onion"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:onion_seeds"
+  }
+}

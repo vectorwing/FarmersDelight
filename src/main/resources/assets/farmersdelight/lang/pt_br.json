@@ -6,10 +6,10 @@
   "item.farmersdelight.onion": "Cebola",
   "item.farmersdelight.cabbage": "Repolho",
 
-  "item.farmersdelight.tomato_seeds": "Sementes de tomate",
+  "block.farmersdelight.cabbages": "Sementes de repolho",
+  "block.farmersdelight.onions": "Sementes de cebola",
+  "block.farmersdelight.tomatoes": "Sementes de tomate",
   "item.farmersdelight.rice_panicle": "Panícula de arroz",
-  "item.farmersdelight.onion_seeds": "Sementes de cebola",
-  "item.farmersdelight.cabbage_seeds": "Sementes de repolho",
 
   "item.farmersdelight.tomato_sauce": "Molho de tomate",
   "item.farmersdelight.milk_bottle": "Garrafa de leite",
