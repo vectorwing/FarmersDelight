@@ -39,12 +39,7 @@ public class Recipes extends RecipeProvider
 		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.TOMATO_SEEDS.get())
 				.addIngredient(ItemInit.TOMATO.get())
 				.setGroup("farmersdelight")
-				.addCriterion("cabbage", InventoryChangeTrigger.Instance.forItems(ItemInit.TOMATO.get()))
-				.build(consumer);
-		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.ONION_SEEDS.get())
-				.addIngredient(ItemInit.ONION.get())
-				.setGroup("farmersdelight")
-				.addCriterion("cabbage", InventoryChangeTrigger.Instance.forItems(ItemInit.ONION.get()))
+				.addCriterion("tomato", InventoryChangeTrigger.Instance.forItems(ItemInit.TOMATO.get()))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.TOMATO_SAUCE.get())
 				.addIngredient(ItemInit.TOMATO.get())
@@ -53,11 +48,19 @@ public class Recipes extends RecipeProvider
 				.setGroup("farmersdelight")
 				.addCriterion("tomato", InventoryChangeTrigger.Instance.forItems(ItemInit.TOMATO.get()))
 				.build(consumer);
-		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.MILK_BOTTLE.get())
+		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.MILK_BOTTLE.get(), 3)
 				.addIngredient(Items.MILK_BUCKET)
 				.addIngredient(Items.GLASS_BOTTLE)
 				.addIngredient(Items.GLASS_BOTTLE)
 				.addIngredient(Items.GLASS_BOTTLE)
+				.setGroup("farmersdelight")
+				.addCriterion("milk_bucket", InventoryChangeTrigger.Instance.forItems(Items.MILK_BUCKET))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.CHICKEN_SANDWICH.get())
+				.addIngredient(Items.BREAD)
+				.addIngredient(Items.COOKED_CHICKEN)
+				.addIngredient(ItemInit.CABBAGE.get())
+				.addIngredient(ItemInit.TOMATO.get())
 				.setGroup("farmersdelight")
 				.addCriterion("milk_bucket", InventoryChangeTrigger.Instance.forItems(Items.MILK_BUCKET))
 				.build(consumer);

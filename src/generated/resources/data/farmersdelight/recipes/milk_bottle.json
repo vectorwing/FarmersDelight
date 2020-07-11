@@ -16,6 +16,7 @@
     }
   ],
   "result": {
-    "item": "farmersdelight:milk_bottle"
+    "item": "farmersdelight:milk_bottle",
+    "count": 3
   }
 }

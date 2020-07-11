@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "farmersdelight:onion_seeds"
+      "farmersdelight:chicken_sandwich"
     ]
   },
   "criteria": {
-    "cabbage": {
+    "milk_bucket": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:onion"
+            "item": "minecraft:milk_bucket"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "farmersdelight:onion_seeds"
+        "recipe": "farmersdelight:chicken_sandwich"
       }
     }
   },
   "requirements": [
     [
-      "cabbage",
+      "milk_bucket",
       "has_the_recipe"
     ]
   ]

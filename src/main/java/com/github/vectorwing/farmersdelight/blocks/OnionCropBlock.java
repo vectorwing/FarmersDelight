@@ -31,7 +31,7 @@ public class OnionCropBlock extends CropsBlock
 
 	@Override
 	protected IItemProvider getSeedsItem() {
-		return ItemInit.ONION_SEEDS.get();
+		return ItemInit.ONION.get();
 	}
 
 	@Override

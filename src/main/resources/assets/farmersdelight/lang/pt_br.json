@@ -1,19 +1,28 @@
 {
   "block.farmersdelight.stove": "Fogão",
 
+  "block.farmersdelight.cabbages": "Sementes de repolho",
+  "block.farmersdelight.onions": "Cebola",
+  "block.farmersdelight.tomatoes": "Sementes de tomate",
+
   "item.farmersdelight.tomato": "Tomate",
   "item.farmersdelight.rice": "Arroz",
-  "item.farmersdelight.onion": "Cebola",
   "item.farmersdelight.cabbage": "Repolho",
-
-  "block.farmersdelight.cabbages": "Sementes de repolho",
-  "block.farmersdelight.onions": "Sementes de cebola",
-  "block.farmersdelight.tomatoes": "Sementes de tomate",
   "item.farmersdelight.rice_panicle": "Panícula de arroz",
 
   "item.farmersdelight.tomato_sauce": "Molho de tomate",
   "item.farmersdelight.milk_bottle": "Garrafa de leite",
   "item.farmersdelight.fried_egg": "Ovo frito",
+  "item.farmersdelight.raw_pasta": "Macarrão cru",
+  "item.farmersdelight.cake_slice": "Fatia de bolo",
+  "item.farmersdelight.earthworm": "Minhoca",
+
+  "item.farmersdelight.flint_knife": "Faca de sílex",
+  "item.farmersdelight.iron_knife": "Faca de ferro",
+  "item.farmersdelight.golden_knife": "Faca de ouro",
+  "item.farmersdelight.diamond_knife": "Faca de diamante",
+
+  "item.farmersdelight.chicken_sandwich": "Sanduíche de frango",
 
   "itemGroup.farmersdelight": "Farmer's Delight"
 }

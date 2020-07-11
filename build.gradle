@@ -14,14 +14,10 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 version = '0.1'
-group = 'com.vectorwing.farmersdelight' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = 'com.github.vectorwing.farmersdelight' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'farmersdelight'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
-//
-//sourceSets {
-//    main.resources.srcDirs += 'src/generated/resources'
-//}
 
 minecraft {
     // The mappings can be changed at any time, and must be in the following format.
@@ -92,7 +88,7 @@ minecraft {
 }
 
 sourceSets.main.resources {
-    srcDir 'src/generated/resources'
+    srcDirs += 'src/generated/resources'
 }
 
 dependencies {
@@ -125,7 +121,7 @@ dependencies {
 jar {
     manifest {
         attributes([
-            "Specification-Title": "examplemod",
+            "Specification-Title": "farmersdelight",
             "Specification-Vendor": "examplemodsareus",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,
