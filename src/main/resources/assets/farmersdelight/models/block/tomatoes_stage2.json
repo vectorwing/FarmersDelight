@@ -1,5 +1,5 @@
 {
-  "parent": "block/cross",
+  "parent": "farmersdelight:block/crop-cross",
   "textures": {
     "cross": "farmersdelight:blocks/tomatoes_stage2"
   }

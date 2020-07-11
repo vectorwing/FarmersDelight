@@ -1,6 +1,8 @@
 package com.github.vectorwing.farmersdelight.setup;
 
 import com.github.vectorwing.farmersdelight.FarmersDelight;
+import com.github.vectorwing.farmersdelight.init.ItemInit;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -16,5 +18,10 @@ public class ModSetup
 
 	public static void init(final FMLCommonSetupEvent event)
 	{
+		ComposterBlock.CHANCES.put(ItemInit.CABBAGE_SEEDS.get(), 0.3F);
+		ComposterBlock.CHANCES.put(ItemInit.TOMATO_SEEDS.get(), 0.3F);
+		ComposterBlock.CHANCES.put(ItemInit.CABBAGE.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ItemInit.ONION.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ItemInit.TOMATO.get(), 0.65F);
 	}
 }
