@@ -1,9 +1,7 @@
 package com.github.vectorwing.farmersdelight.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.block.RedstoneTorchBlock;
+import net.minecraft.block.*;
+import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -25,9 +23,12 @@ import java.util.Random;
 
 public class StoveBlock extends HorizontalBlock
 {
-	public StoveBlock(Properties builder)
+	public StoveBlock()
 	{
-		super(builder);
+		super(Properties.create(Material.ROCK)
+				.hardnessAndResistance(2.0F, 6.0F)
+				.sound(SoundType.STONE)
+				.lightValue(13));
 		this.setDefaultState(this.getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH));
 	}
 

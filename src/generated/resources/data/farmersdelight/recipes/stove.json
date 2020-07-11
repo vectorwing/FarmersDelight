@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "group": "farmersdelight",
   "pattern": [
     "iii",
     "B B",
@@ -17,7 +18,6 @@
     }
   },
   "result": {
-    "item": "farmersdelight:stove",
-    "count": 1
+    "item": "farmersdelight:stove"
   }
 }

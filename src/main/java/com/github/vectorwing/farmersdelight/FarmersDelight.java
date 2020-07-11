@@ -1,10 +1,10 @@
 package com.github.vectorwing.farmersdelight;
 
-import com.github.vectorwing.farmersdelight.blocks.OnionCropBlock;
 import com.github.vectorwing.farmersdelight.init.BlockInit;
 import com.github.vectorwing.farmersdelight.init.ItemInit;
 import com.github.vectorwing.farmersdelight.setup.ClientSetup;
 import com.github.vectorwing.farmersdelight.setup.ModSetup;
+import net.minecraft.block.CropsBlock;
 import net.minecraft.item.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -48,7 +48,7 @@ public class FarmersDelight
         final IForgeRegistry<Item> registry = event.getRegistry();
 
         BlockInit.BLOCKS.getEntries().stream()
-                .filter(block -> !(block.get() instanceof OnionCropBlock))
+                .filter(block -> !(block.get() instanceof CropsBlock))
                 .map(RegistryObject::get).forEach(block -> {
             final Item.Properties properties = new Item.Properties().group(FarmersDelight.ITEM_GROUP);
             final BlockItem blockItem = new BlockItem(block, properties);

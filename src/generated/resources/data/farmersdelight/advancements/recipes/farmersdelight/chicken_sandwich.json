@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:chicken_sandwich"
+    ]
+  },
+  "criteria": {
+    "cooked_chicken": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:cooked_chicken"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:chicken_sandwich"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "cooked_chicken",
+      "has_the_recipe"
+    ]
+  ]
+}

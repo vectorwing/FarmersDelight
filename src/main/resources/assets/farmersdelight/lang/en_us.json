@@ -1,18 +1,28 @@
 {
   "block.farmersdelight.stove": "Stove",
-  "block.farmersdelight.onions": "Onion Seeds",
-  "item.farmersdelight.tomato_seeds": "Tomato Seeds",
-  "item.farmersdelight.cabbage_seeds": "Cabbage Seeds",
-  "item.farmersdelight.rice_panicle": "Rice Panicle",
+
+  "block.farmersdelight.cabbages": "Cabbage Seeds",
+  "block.farmersdelight.onions": "Onion",
+  "block.farmersdelight.tomatoes": "Tomato Seeds",
 
   "item.farmersdelight.tomato": "Tomato",
   "item.farmersdelight.rice": "Rice",
-  "item.farmersdelight.onion": "Onion",
   "item.farmersdelight.cabbage": "Cabbage",
+  "item.farmersdelight.rice_panicle": "Rice Panicle",
 
   "item.farmersdelight.tomato_sauce": "Tomato Sauce",
-  "item.farmersdelight.milk_bottle": "Milk Bottle",
   "item.farmersdelight.fried_egg": "Fried Egg",
+  "item.farmersdelight.milk_bottle": "Milk Bottle",
+  "item.farmersdelight.raw_pasta": "Raw Pasta",
+  "item.farmersdelight.cake_slice": "Slice of Cake",
+  "item.farmersdelight.earthworm": "Earthworm",
+
+  "item.farmersdelight.flint_knife": "Flint Knife",
+  "item.farmersdelight.iron_knife": "Iron Knife",
+  "item.farmersdelight.golden_knife": "Golden Knife",
+  "item.farmersdelight.diamond_knife": "Diamond Knife",
+
+  "item.farmersdelight.chicken_sandwich": "Chicken Sandwich",
 
   "itemGroup.farmersdelight": "Farmer's Delight"
 }
