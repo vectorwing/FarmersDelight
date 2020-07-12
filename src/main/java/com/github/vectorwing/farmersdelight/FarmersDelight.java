@@ -2,6 +2,7 @@ package com.github.vectorwing.farmersdelight;
 
 import com.github.vectorwing.farmersdelight.init.BlockInit;
 import com.github.vectorwing.farmersdelight.init.ItemInit;
+import com.github.vectorwing.farmersdelight.init.TileEntityInit;
 import com.github.vectorwing.farmersdelight.setup.ClientSetup;
 import com.github.vectorwing.farmersdelight.setup.ModSetup;
 import net.minecraft.block.CropsBlock;
@@ -39,6 +40,7 @@ public class FarmersDelight
 
         ItemInit.ITEMS.register(modEventBus);
         BlockInit.BLOCKS.register(modEventBus);
+        TileEntityInit.TILES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
