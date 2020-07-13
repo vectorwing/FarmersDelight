@@ -3,8 +3,8 @@ package com.github.vectorwing.farmersdelight;
 import com.github.vectorwing.farmersdelight.init.BlockInit;
 import com.github.vectorwing.farmersdelight.init.ItemInit;
 import com.github.vectorwing.farmersdelight.init.TileEntityInit;
-import com.github.vectorwing.farmersdelight.setup.ClientSetup;
-import com.github.vectorwing.farmersdelight.setup.ModSetup;
+import com.github.vectorwing.farmersdelight.setup.ClientEventHandler;
+import com.github.vectorwing.farmersdelight.setup.CommonEventHandler;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.item.*;
 import net.minecraftforge.common.MinecraftForge;
@@ -33,8 +33,8 @@ public class FarmersDelight
     };
 
     public FarmersDelight() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ModSetup::init);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(CommonEventHandler::init);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientEventHandler::init);
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 

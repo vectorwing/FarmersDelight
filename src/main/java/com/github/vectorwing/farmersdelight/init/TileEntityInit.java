@@ -9,7 +9,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class TileEntityInit
 {
-	public static final DeferredRegister<TileEntityType<?>> TILES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, FarmersDelight.MODID);
+	public static final DeferredRegister<TileEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, FarmersDelight.MODID);
 
 	public static final RegistryObject<TileEntityType<StoveBlockTile>> STOVE_TILE = TILES.register("stove",
 			() -> TileEntityType.Builder.create(StoveBlockTile::new, BlockInit.STOVE.get()).build(null));
