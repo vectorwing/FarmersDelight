@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "TranslatableComponent{key\u003d\u0027item.minecraft.egg\u0027, args\u003d[], siblings\u003d[], style\u003dStyle{hasParent\u003dfalse, color\u003dnull, bold\u003dnull, italic\u003dnull, underlined\u003dnull, obfuscated\u003dnull, clickEvent\u003dnull, hoverEvent\u003dnull, insertion\u003dnull}}": {
+    "fried_egg": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "TranslatableComponent{key\u003d\u0027item.minecraft.egg\u0027, args\u003d[], siblings\u003d[], style\u003dStyle{hasParent\u003dfalse, color\u003dnull, bold\u003dnull, italic\u003dnull, underlined\u003dnull, obfuscated\u003dnull, clickEvent\u003dnull, hoverEvent\u003dnull, insertion\u003dnull}}",
+      "fried_egg",
       "has_the_recipe"
     ]
   ]

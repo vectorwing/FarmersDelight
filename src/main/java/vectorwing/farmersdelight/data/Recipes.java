@@ -36,15 +36,15 @@ public class Recipes extends RecipeProvider
 		String namePrefix = new ResourceLocation(FarmersDelight.MODID, name).toString();
 		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ingredient),
 				result, experience, cookingTime)
-				.addCriterion(ingredient.asItem().getName().toString(), InventoryChangeTrigger.Instance.forItems(ingredient))
+				.addCriterion(name, InventoryChangeTrigger.Instance.forItems(ingredient))
 				.build(consumer);
 		CookingRecipeBuilder.cookingRecipe(Ingredient.fromItems(ingredient),
 				result, experience, cookingTime, IRecipeSerializer.CAMPFIRE_COOKING)
-				.addCriterion(ingredient.asItem().getName().toString(), InventoryChangeTrigger.Instance.forItems(ingredient))
+				.addCriterion(name, InventoryChangeTrigger.Instance.forItems(ingredient))
 				.build(consumer, namePrefix + "_from_campfire_cooking");
 		CookingRecipeBuilder.cookingRecipe(Ingredient.fromItems(ingredient),
 				result, experience, cookingTime, IRecipeSerializer.SMOKING)
-				.addCriterion(ingredient.asItem().getName().toString(), InventoryChangeTrigger.Instance.forItems(ingredient))
+				.addCriterion(name, InventoryChangeTrigger.Instance.forItems(ingredient))
 				.build(consumer, namePrefix + "_from_smoking");
 	}
 
