@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "farmersdelight",
+  "ingredients": [
+    {
+      "item": "minecraft:cake"
+    },
+    {
+      "tag": "forge:knives"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:cake_slice",
+    "count": 7
+  }
+}

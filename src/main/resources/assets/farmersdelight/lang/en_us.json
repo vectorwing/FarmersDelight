@@ -1,5 +1,6 @@
 {
   "block.farmersdelight.stove": "Stove",
+  "block.farmersdelight.cooking_pot": "Cooking Pot",
 
   "block.farmersdelight.cabbages": "Cabbage Seeds",
   "block.farmersdelight.onions": "Onion",
@@ -23,6 +24,7 @@
   "item.farmersdelight.diamond_knife": "Diamond Knife",
 
   "item.farmersdelight.chicken_sandwich": "Chicken Sandwich",
+  "item.farmersdelight.hamburger": "Hamburger",
 
   "itemGroup.farmersdelight": "Farmer's Delight"
 }

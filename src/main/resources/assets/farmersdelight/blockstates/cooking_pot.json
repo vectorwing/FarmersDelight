@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "farmersdelight:block/cooking_pot"
+    },
+    "facing=south": {
+      "model": "farmersdelight:block/cooking_pot",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "farmersdelight:block/cooking_pot",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "farmersdelight:block/cooking_pot",
+      "y": 90
+    }
+  }
+}

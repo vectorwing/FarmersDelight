@@ -1,5 +1,6 @@
 {
   "block.farmersdelight.stove": "Fogão",
+  "block.farmersdelight.cooking_pot": "Panela",
 
   "block.farmersdelight.cabbages": "Sementes de repolho",
   "block.farmersdelight.onions": "Cebola",
@@ -23,6 +24,7 @@
   "item.farmersdelight.diamond_knife": "Faca de diamante",
 
   "item.farmersdelight.chicken_sandwich": "Sanduíche de frango",
+  "item.farmersdelight.hamburger": "Hambúrguer",
 
   "itemGroup.farmersdelight": "Farmer's Delight"
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:fried_egg_from_campfire_cooking"
+    ]
+  },
+  "criteria": {
+    "TranslatableComponent{key\u003d\u0027item.minecraft.egg\u0027, args\u003d[], siblings\u003d[], style\u003dStyle{hasParent\u003dfalse, color\u003dnull, bold\u003dnull, italic\u003dnull, underlined\u003dnull, obfuscated\u003dnull, clickEvent\u003dnull, hoverEvent\u003dnull, insertion\u003dnull}}": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:egg"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:fried_egg_from_campfire_cooking"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "TranslatableComponent{key\u003d\u0027item.minecraft.egg\u0027, args\u003d[], siblings\u003d[], style\u003dStyle{hasParent\u003dfalse, color\u003dnull, bold\u003dnull, italic\u003dnull, underlined\u003dnull, obfuscated\u003dnull, clickEvent\u003dnull, hoverEvent\u003dnull, insertion\u003dnull}}",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "type": "farmersdelight:cake",
+  "conditions": [
+    {
+      "condition": "minecraft:match_tool",
+      "predicate": {
+        "tag": "forge:knives"
+      }
+    },
+    {
+      "condition": "block_state_property",
+      "block": "minecraft:cake"
+    }
+  ]
+}
