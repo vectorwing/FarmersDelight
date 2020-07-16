@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight;
 
+import net.minecraft.util.NonNullList;
 import vectorwing.farmersdelight.init.BlockInit;
 import vectorwing.farmersdelight.init.ItemInit;
 import vectorwing.farmersdelight.init.TileEntityInit;
@@ -25,12 +26,7 @@ public class FarmersDelight
     private static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "farmersdelight";
 
-    public static final ItemGroup ITEM_GROUP = new ItemGroup("farmersdelight") {
-        @Override
-        public ItemStack createIcon() {
-            return new ItemStack(ItemInit.CABBAGE.get());
-        }
-    };
+    public static final CreativeTab ITEM_GROUP = new CreativeTab("farmersdelight");
 
     public FarmersDelight() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(CommonEventHandler::init);

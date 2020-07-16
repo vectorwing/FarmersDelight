@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.client.tileentity.renderer;
 
 import vectorwing.farmersdelight.blocks.StoveBlock;
-import vectorwing.farmersdelight.blocks.StoveBlockTile;
+import vectorwing.farmersdelight.blocks.StoveTileEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.sun.javafx.geom.Vec2d;
 import net.minecraft.client.Minecraft;
@@ -14,13 +14,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 
-public class StoveBlockTileRenderer extends TileEntityRenderer<StoveBlockTile>
+public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
 {
-	public StoveBlockTileRenderer(TileEntityRendererDispatcher rendererDispatcher) {
+	public StoveTileEntityRenderer(TileEntityRendererDispatcher rendererDispatcher) {
 		super(rendererDispatcher);
 	}
 
-	public void render(StoveBlockTile tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
+	public void render(StoveTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		Direction direction = tileEntityIn.getBlockState().get(StoveBlock.FACING).getOpposite();
 		NonNullList<ItemStack> nonnulllist = tileEntityIn.getInventory();
 

@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.setup;
 
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.client.tileentity.renderer.StoveBlockTileRenderer;
+import vectorwing.farmersdelight.client.tileentity.renderer.StoveTileEntityRenderer;
 import vectorwing.farmersdelight.init.BlockInit;
 import vectorwing.farmersdelight.init.TileEntityInit;
 import net.minecraft.client.renderer.RenderType;
@@ -23,6 +23,6 @@ public class ClientEventHandler
 		RenderTypeLookup.setRenderLayer(BlockInit.CABBAGE_CROP.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(BlockInit.TOMATO_CROP.get(), RenderType.getCutout());
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.STOVE_TILE.get(),
-				StoveBlockTileRenderer::new);
+				StoveTileEntityRenderer::new);
 	}
 }

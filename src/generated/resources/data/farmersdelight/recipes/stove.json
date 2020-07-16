@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "farmersdelight",
   "pattern": [
     "iii",
     "B B",

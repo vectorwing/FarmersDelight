@@ -13,9 +13,9 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '0.1'
-group = 'com.github.vectorwing.farmersdelight' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'farmersdelight'
+version = '1.15.2-0.1.0'
+group = 'vectorwing.farmersdelight' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'FarmersDelight'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
@@ -122,11 +122,11 @@ jar {
     manifest {
         attributes([
             "Specification-Title": "farmersdelight",
-            "Specification-Vendor": "examplemodsareus",
+            "Specification-Vendor": "vectorwing",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"examplemodsareus",
+            "Implementation-Vendor" :"vectorwing",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }

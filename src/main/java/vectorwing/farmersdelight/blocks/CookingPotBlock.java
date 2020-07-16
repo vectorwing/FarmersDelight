@@ -40,24 +40,8 @@ public class CookingPotBlock extends Block
 		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
 	}
 
-	public BlockRenderType getRenderType(BlockState state) {
-		return BlockRenderType.MODEL;
-	}
-
-	public BlockState rotate(BlockState state, Rotation rot) {
-		return state.with(FACING, rot.rotate(state.get(FACING)));
-	}
-
-	public BlockState mirror(BlockState state, Mirror mirrorIn) {
-		return state.rotate(mirrorIn.toRotation(state.get(FACING)));
-	}
-
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
 		builder.add(FACING);
-	}
-
-	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
-		return false;
 	}
 }

@@ -14,13 +14,13 @@ issueTrackerURL="http://my.issue.tracker/" #optional
 # The modid of the mod
 modId="farmersdelight" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
-version="0.1" #mandatory
+version="1.15.2-0.1.0" #mandatory
  # A display name for the mod
 displayName="Farmer's Delight" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
-updateJSONURL="http://myurl.me/" #optional
+# updateJSONURL="" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
-displayURL="http://example.com/" #optional
+displayURL="https://github.com/vectorwing/FarmersDelight" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="examplemod.png" #optional
 # A text field displayed in the mod UI
@@ -29,7 +29,7 @@ credits="vectorwing" #optional
 authors="vectorwing" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-An expansion upon farming. Harvest, cook and explore!
+A lightweight expansion upon farming. Harvest, cook and explore!
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.examplemod]] #optional

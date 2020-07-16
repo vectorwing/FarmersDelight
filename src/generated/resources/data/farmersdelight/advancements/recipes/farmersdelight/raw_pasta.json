@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:raw_pasta"
+    ]
+  },
+  "criteria": {
+    "egg": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:egg"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:raw_pasta"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "egg",
+      "has_the_recipe"
+    ]
+  ]
+}

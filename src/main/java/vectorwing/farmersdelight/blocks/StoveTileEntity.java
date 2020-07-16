@@ -25,18 +25,18 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.Random;
 
-public class StoveBlockTile extends TileEntity implements IClearable, ITickableTileEntity
+public class StoveTileEntity extends TileEntity implements IClearable, ITickableTileEntity
 {
 	private final int MAX_STACK_SIZE = 6;
 	protected final NonNullList<ItemStack> inventory = NonNullList.withSize(MAX_STACK_SIZE, ItemStack.EMPTY);
 	private final int[] cookingTimes = new int[MAX_STACK_SIZE];
 	private final int[] cookingTotalTimes = new int[MAX_STACK_SIZE];
 
-	public StoveBlockTile(TileEntityType<?> tileEntityTypeIn) {
+	public StoveTileEntity(TileEntityType<?> tileEntityTypeIn) {
 		super(tileEntityTypeIn);
 	}
 
-	public StoveBlockTile()	{ this(TileEntityInit.STOVE_TILE.get()); }
+	public StoveTileEntity()	{ this(TileEntityInit.STOVE_TILE.get()); }
 
 	@Override
 	public void tick() {
