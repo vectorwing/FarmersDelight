@@ -59,7 +59,6 @@ public class Recipes extends RecipeProvider
 				.key('i', Items.IRON_INGOT)
 				.key('B', Blocks.BRICKS)
 				.key('C', Blocks.CAMPFIRE)
-				.setGroup("farmersdelight")
 				.addCriterion("campfire", InventoryChangeTrigger.Instance.forItems(Blocks.CAMPFIRE))
 				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(BlockInit.COOKING_POT.get())
@@ -69,7 +68,6 @@ public class Recipes extends RecipeProvider
 				.key('b', Items.BRICK)
 				.key('i', Items.IRON_INGOT)
 				.key('S', Items.WOODEN_SHOVEL)
-				.setGroup("farmersdelight")
 				.addCriterion("iron_ingot", InventoryChangeTrigger.Instance.forItems(Items.IRON_INGOT))
 				.build(consumer);
 	}
@@ -79,7 +77,6 @@ public class Recipes extends RecipeProvider
 				.patternLine("s ")
 				.key('m', Items.FLINT)
 				.key('s', Items.STICK)
-				.setGroup("farmersdelight")
 				.addCriterion("stick", InventoryChangeTrigger.Instance.forItems(Items.STICK))
 				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ItemInit.IRON_KNIFE.get())
@@ -87,7 +84,6 @@ public class Recipes extends RecipeProvider
 				.patternLine("s ")
 				.key('m', Items.IRON_INGOT)
 				.key('s', Items.STICK)
-				.setGroup("farmersdelight")
 				.addCriterion("iron_ingot", InventoryChangeTrigger.Instance.forItems(Items.IRON_INGOT))
 				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ItemInit.DIAMOND_KNIFE.get())
@@ -95,7 +91,6 @@ public class Recipes extends RecipeProvider
 				.patternLine("s ")
 				.key('m', Items.DIAMOND)
 				.key('s', Items.STICK)
-				.setGroup("farmersdelight")
 				.addCriterion("diamond", InventoryChangeTrigger.Instance.forItems(Items.DIAMOND))
 				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ItemInit.GOLDEN_KNIFE.get())
@@ -103,26 +98,22 @@ public class Recipes extends RecipeProvider
 				.patternLine("s ")
 				.key('m', Items.GOLD_INGOT)
 				.key('s', Items.STICK)
-				.setGroup("farmersdelight")
 				.addCriterion("gold_ingot", InventoryChangeTrigger.Instance.forItems(Items.GOLD_INGOT))
 				.build(consumer);
 	}
 	private void recipesIngredients(Consumer<IFinishedRecipe> consumer) {
 		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.CABBAGE_SEEDS.get())
 				.addIngredient(ItemInit.CABBAGE.get())
-				.setGroup("farmersdelight")
 				.addCriterion("cabbage", InventoryChangeTrigger.Instance.forItems(ItemInit.CABBAGE.get()))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.TOMATO_SEEDS.get())
 				.addIngredient(ItemInit.TOMATO.get())
-				.setGroup("farmersdelight")
 				.addCriterion("tomato", InventoryChangeTrigger.Instance.forItems(ItemInit.TOMATO.get()))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.TOMATO_SAUCE.get())
 				.addIngredient(ItemInit.TOMATO.get())
 				.addIngredient(ItemInit.TOMATO.get())
 				.addIngredient(Items.BOWL)
-				.setGroup("farmersdelight")
 				.addCriterion("tomato", InventoryChangeTrigger.Instance.forItems(ItemInit.TOMATO.get()))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.MILK_BOTTLE.get(), 3)
@@ -130,23 +121,44 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.GLASS_BOTTLE)
 				.addIngredient(Items.GLASS_BOTTLE)
 				.addIngredient(Items.GLASS_BOTTLE)
-				.setGroup("farmersdelight")
 				.addCriterion("milk_bucket", InventoryChangeTrigger.Instance.forItems(Items.MILK_BUCKET))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.RAW_PASTA.get())
+				.addIngredient(Items.WHEAT)
+				.addIngredient(Items.WHEAT)
+				.addIngredient(Items.EGG)
+				.addIngredient(new ItemTags.Wrapper(new ResourceLocation("forge", "knives")))
+				.addCriterion("egg", InventoryChangeTrigger.Instance.forItems(Items.EGG))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.CAKE_SLICE.get(), 7)
 				.addIngredient(Blocks.CAKE)
 				.addIngredient(new ItemTags.Wrapper(new ResourceLocation("forge", "knives")))
-				.setGroup("farmersdelight")
 				.addCriterion("cake", InventoryChangeTrigger.Instance.forItems(Blocks.CAKE))
 				.build(consumer);
 	}
 	private void recipesCraftedMeals(Consumer<IFinishedRecipe> consumer) {
+		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.FRESH_SALAD.get())
+				.addIngredient(ItemInit.CABBAGE.get())
+				.addIngredient(ItemInit.ONION.get())
+				.addIngredient(ItemInit.TOMATO.get())
+				.addIngredient(Items.BEETROOT)
+				.addIngredient(Items.BOWL)
+				.addCriterion("cabbage", InventoryChangeTrigger.Instance.forItems(ItemInit.CABBAGE.get()))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.BARBECUE_STICK.get(), 2)
+				.addIngredient(ItemInit.ONION.get())
+				.addIngredient(ItemInit.TOMATO.get())
+				.addIngredient(Items.COOKED_BEEF)
+				.addIngredient(Items.COOKED_CHICKEN)
+				.addIngredient(Items.STICK)
+				.addIngredient(Items.STICK)
+				.addCriterion("barbecue", InventoryChangeTrigger.Instance.forItems(Items.COOKED_BEEF))
+				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.CHICKEN_SANDWICH.get())
 				.addIngredient(Items.BREAD)
 				.addIngredient(Items.COOKED_CHICKEN)
 				.addIngredient(ItemInit.CABBAGE.get())
 				.addIngredient(ItemInit.TOMATO.get())
-				.setGroup("farmersdelight")
 				.addCriterion("cooked_chicken", InventoryChangeTrigger.Instance.forItems(Items.COOKED_CHICKEN))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.HAMBURGER.get())
@@ -155,7 +167,6 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ItemInit.CABBAGE.get())
 				.addIngredient(ItemInit.TOMATO.get())
 				.addIngredient(ItemInit.ONION.get())
-				.setGroup("farmersdelight")
 				.addCriterion("hamburger", InventoryChangeTrigger.Instance.forItems(Items.COOKED_BEEF))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(Items.CAKE)
@@ -166,7 +177,6 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ItemInit.CAKE_SLICE.get())
 				.addIngredient(ItemInit.CAKE_SLICE.get())
 				.addIngredient(ItemInit.CAKE_SLICE.get())
-				.setGroup("farmersdelight")
 				.addCriterion("cake_slice", InventoryChangeTrigger.Instance.forItems(ItemInit.CAKE_SLICE.get()))
 				.build(consumer);
 	}
