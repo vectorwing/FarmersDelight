@@ -44,8 +44,8 @@ public class StoveBlock extends Block
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		if (state.get(LIT)) {
 			TileEntity tileentity = worldIn.getTileEntity(pos);
-			if (tileentity instanceof StoveBlockTile) {
-				StoveBlockTile stovetileentity = (StoveBlockTile)tileentity;
+			if (tileentity instanceof StoveTileEntity) {
+				StoveTileEntity stovetileentity = (StoveTileEntity)tileentity;
 				ItemStack itemstack = player.getHeldItem(handIn);
 				Optional<CampfireCookingRecipe> optional = stovetileentity.findMatchingRecipe(itemstack);
 				if (optional.isPresent()) {
@@ -97,8 +97,8 @@ public class StoveBlock extends Block
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
 			TileEntity tileentity = worldIn.getTileEntity(pos);
-			if (tileentity instanceof StoveBlockTile) {
-				InventoryHelper.dropItems(worldIn, pos, ((StoveBlockTile)tileentity).getInventory());
+			if (tileentity instanceof StoveTileEntity) {
+				InventoryHelper.dropItems(worldIn, pos, ((StoveTileEntity)tileentity).getInventory());
 			}
 
 			super.onReplaced(state, worldIn, pos, newState, isMoving);
