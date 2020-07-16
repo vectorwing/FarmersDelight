@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "farmersdelight",
   "ingredients": [
     {
       "item": "farmersdelight:tomato"
