@@ -7,7 +7,11 @@ import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIntArray;
 import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.util.IntArray;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import vectorwing.farmersdelight.blocks.CookingPotTileEntity;
 import vectorwing.farmersdelight.init.BlockInit;
 import vectorwing.farmersdelight.init.ModContainerTypes;
@@ -17,12 +21,14 @@ import java.util.Objects;
 public class CookingPotContainer extends Container
 {
 	public final CookingPotTileEntity tileEntity;
+	private final IIntArray cookingPotData;
 	private final IWorldPosCallable canInteractWithCallable;
 
-	public CookingPotContainer(final int windowId, final PlayerInventory playerInventory, final CookingPotTileEntity tileEntity)
+	public CookingPotContainer(final int windowId, final PlayerInventory playerInventory, final CookingPotTileEntity tileEntity, IIntArray cookingPotDataIn)
 	{
 		super(ModContainerTypes.COOKING_POT.get(), windowId);
 		this.tileEntity = tileEntity;
+		this.cookingPotData = cookingPotDataIn;
 		this.canInteractWithCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
 
 		// Ingredient Slots - 2 Rows x 3 Columns
@@ -39,11 +45,14 @@ public class CookingPotContainer extends Container
 			}
 		}
 
+		// Meal Display
+		this.addSlot(new Slot(tileEntity, 6, 124, 26));
+
 		// Bowl Input
-		this.addSlot(new Slot(tileEntity, 6, 92, 55));
+		this.addSlot(new Slot(tileEntity, 7, 92, 55));
 
 		// Bowl Output
-		this.addSlot(new Slot(tileEntity, 7, 124, 55));
+		this.addSlot(new Slot(tileEntity, 8, 124, 55));
 
 		// Main Player Inventory
 		int startPlayerInvY = startY * 4 + 12;
@@ -58,6 +67,8 @@ public class CookingPotContainer extends Container
 		for (int column = 0; column < 9; ++column) {
 			this.addSlot(new Slot(playerInventory, column, startX + (column * slotSizePlus2), 142));
 		}
+
+		this.trackIntArray(cookingPotDataIn);
 	}
 
 	private static CookingPotTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
@@ -71,7 +82,7 @@ public class CookingPotContainer extends Container
 	}
 
 	public CookingPotContainer(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
-		this(windowId, playerInventory, getTileEntity(playerInventory, data));
+		this(windowId, playerInventory, getTileEntity(playerInventory, data), new IntArray(4));
 	}
 
 	@Override
@@ -81,7 +92,8 @@ public class CookingPotContainer extends Container
 
 	@Override
 	public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
-		int indexOutput = 7;
+		int indexMealDisplay = 6;
+		int indexOutput = 8;
 		int startPlayerInv = indexOutput + 1;
 		int endPlayerInv = startPlayerInv + 36;
 		ItemStack itemstack = ItemStack.EMPTY;
@@ -114,5 +126,17 @@ public class CookingPotContainer extends Container
 			slot.onTake(playerIn, itemstack1);
 		}
 		return itemstack;
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	public int getCookProgressionScaled() {
+		int i = this.cookingPotData.get(0);
+		int j = this.cookingPotData.get(1);
+		return j != 0 && i != 0 ? i * 24 / j : 0;
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	public boolean isHeated() {
+		return this.tileEntity.blockBelowIsHot();
 	}
 }

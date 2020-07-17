@@ -3,6 +3,7 @@ package vectorwing.farmersdelight.client.gui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.AbstractFurnaceContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -37,10 +38,20 @@ public class CookingPotScreen extends ContainerScreen<CookingPotContainer>
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+		// Render UI background
 		RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
 		this.minecraft.getTextureManager().bindTexture(BACKGROUND_TEXTURE);
 		int x = (this.width - this.xSize) / 2;
 		int y = (this.height - this.ySize) / 2;
 		this.blit(x, y, 0, 0, this.xSize, this.ySize);
+
+		// Render heat indicator
+		if (((CookingPotContainer)this.container).isHeated()) {
+			this.blit(x + 47, y + 55, 176, 0, 17, 15);
+		}
+
+		// Render progress arrow
+		int l = ((CookingPotContainer)this.container).getCookProgressionScaled();
+		this.blit(this.guiLeft + 89, this.guiTop + 25, 176, 15, l + 1, 16);
 	}
 }

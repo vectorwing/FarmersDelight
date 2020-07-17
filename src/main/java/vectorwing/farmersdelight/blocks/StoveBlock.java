@@ -72,10 +72,6 @@ public class StoveBlock extends Block
 		return state.get(LIT) ? super.getLightValue(state) : 0;
 	}
 
-//	public BlockRenderType getRenderType(BlockState state) {
-//		return BlockRenderType.MODEL;
-//	}
-
 	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
 		if (!worldIn.isRemote) {
 			boolean flag = state.get(LIT);
@@ -115,7 +111,7 @@ public class StoveBlock extends Block
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		if (stateIn.get(CampfireBlock.LIT)) {
 			double d0 = (double)pos.getX() + 0.5D;
-			double d1 = (double)pos.getY();
+			double d1 = pos.getY();
 			double d2 = (double)pos.getZ() + 0.5D;
 			if (rand.nextInt(10) == 0) {
 				worldIn.playSound(d0, d1, d2, SoundEvents.BLOCK_CAMPFIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
