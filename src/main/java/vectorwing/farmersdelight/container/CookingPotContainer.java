@@ -25,16 +25,25 @@ public class CookingPotContainer extends Container
 		this.tileEntity = tileEntity;
 		this.canInteractWithCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
 
-		// Main Inventory
+		// Ingredient Slots - 2 Rows x 3 Columns
 		int startX = 8;
 		int startY = 18;
+		int inputStartX = 30;
+		int inputStartY = 17;
 		int slotSizePlus2 = 18;
-		for (int row = 0; row < 3; ++row) {
-			for (int column = 0; column < 9; ++column) {
-				this.addSlot(new Slot(tileEntity, (row * 9) + column, startX + (column * slotSizePlus2),
-						startY + (row * slotSizePlus2)));
+		for (int row = 0; row < 2; ++row) {
+			for (int column = 0; column < 3; ++column) {
+				this.addSlot(new Slot(tileEntity, (row * 3) + column,
+						inputStartX + (column * slotSizePlus2),
+						inputStartY + (row * slotSizePlus2)));
 			}
 		}
+
+		// Bowl Input
+		this.addSlot(new Slot(tileEntity, 6, 92, 55));
+
+		// Bowl Output
+		this.addSlot(new Slot(tileEntity, 7, 124, 55));
 
 		// Main Player Inventory
 		int startPlayerInvY = startY * 4 + 12;
@@ -46,7 +55,6 @@ public class CookingPotContainer extends Container
 		}
 
 		// Hotbar
-		//int hotbarY = startPlayerInvY + (startPlayerInvY / 2) + 7;
 		for (int column = 0; column < 9; ++column) {
 			this.addSlot(new Slot(playerInventory, column, startX + (column * slotSizePlus2), 142));
 		}
@@ -73,16 +81,23 @@ public class CookingPotContainer extends Container
 
 	@Override
 	public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+		int indexOutput = 7;
+		int startPlayerInv = indexOutput + 1;
+		int endPlayerInv = startPlayerInv + 36;
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(index);
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
-			if (index < 36) {
-				if (!this.mergeItemStack(itemstack1, 36, this.inventorySlots.size(), true)) {
+			if (index == indexOutput) {
+				if (!this.mergeItemStack(itemstack1, startPlayerInv, endPlayerInv, true)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (!this.mergeItemStack(itemstack1, 0, 36, false)) {
+			} else if (index > indexOutput) {
+				if (!this.mergeItemStack(itemstack1, 0, indexOutput, false)) {
+					return ItemStack.EMPTY;
+				}
+			} else if (!this.mergeItemStack(itemstack1, startPlayerInv, endPlayerInv, false)) {
 				return ItemStack.EMPTY;
 			}
 
@@ -91,6 +106,12 @@ public class CookingPotContainer extends Container
 			} else {
 				slot.onSlotChanged();
 			}
+
+			if (itemstack1.getCount() == itemstack.getCount()) {
+				return ItemStack.EMPTY;
+			}
+
+			slot.onTake(playerIn, itemstack1);
 		}
 		return itemstack;
 	}

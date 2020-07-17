@@ -8,9 +8,7 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.LockableLootTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.tileentity.*;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -28,38 +26,85 @@ import vectorwing.farmersdelight.init.TileEntityInit;
 
 import javax.annotation.Nonnull;
 
-public class CookingPotTileEntity extends LockableLootTileEntity
+public class CookingPotTileEntity extends LockableTileEntity implements ITickableTileEntity
 {
-	private NonNullList<ItemStack> chestContents = NonNullList.withSize(27, ItemStack.EMPTY);
+	// Furnace-like Inventory
+	protected NonNullList<ItemStack> items = NonNullList.withSize(8, ItemStack.EMPTY);
 	protected int numPlayersUsing;
-	private IItemHandlerModifiable items = createHandler();
-	private LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> items);
+	private IItemHandlerModifiable baseHandler = createHandler();
+	private LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> baseHandler);
 
-	public CookingPotTileEntity(TileEntityType<?> tileEntityTypeIn)	{
-		super(tileEntityTypeIn);
-	}
+	public CookingPotTileEntity(TileEntityType<?> tileEntityTypeIn)	{ super(tileEntityTypeIn); }
 
-	public CookingPotTileEntity() {
-		this(TileEntityInit.COOKING_POT_TILE.get());
+	public CookingPotTileEntity() {	this(TileEntityInit.COOKING_POT_TILE.get()); }
+
+	@Override
+	public int getSizeInventory() {
+		return this.items.size();
 	}
 
 	@Override
-	public int getSizeInventory()
+	public boolean isEmpty()
 	{
-		return 27;
+		for(ItemStack itemstack : this.items) {
+			if (!itemstack.isEmpty()) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	@Override
-	protected NonNullList<ItemStack> getItems()
+	public ItemStack getStackInSlot(int index)
 	{
-		return this.chestContents;
+		return this.items.get(index);
 	}
 
 	@Override
-	protected void setItems(NonNullList<ItemStack> itemsIn)
+	public ItemStack decrStackSize(int index, int count)
 	{
-		this.chestContents = itemsIn;
+		return ItemStackHelper.getAndSplit(this.items, index, count);
 	}
+
+	@Override
+	public ItemStack removeStackFromSlot(int index)
+	{
+		return ItemStackHelper.getAndRemove(this.items, index);
+	}
+
+	@Override
+	public void setInventorySlotContents(int index, ItemStack stack)
+	{
+		ItemStack itemstack = this.items.get(index);
+		boolean flag = !stack.isEmpty() && stack.isItemEqual(itemstack) && ItemStack.areItemStackTagsEqual(stack, itemstack);
+		this.items.set(index, stack);
+		if (stack.getCount() > this.getInventoryStackLimit()) {
+			stack.setCount(this.getInventoryStackLimit());
+		}
+	}
+
+	@Override
+	public boolean isUsableByPlayer(PlayerEntity player)
+	{
+		if (this.world.getTileEntity(this.pos) != this) {
+			return false;
+		} else {
+			return player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
+		}
+	}
+//
+//	@Override
+//	protected NonNullList<ItemStack> getItems()
+//	{
+//		return this.items;
+//	}
+//
+//	@Override
+//	protected void setItems(NonNullList<ItemStack> itemsIn)
+//	{
+//		this.items = itemsIn;
+//	}
 
 	@Override
 	protected ITextComponent getDefaultName()
@@ -74,21 +119,17 @@ public class CookingPotTileEntity extends LockableLootTileEntity
 	}
 
 	@Override
-	public CompoundNBT write(CompoundNBT compound) {
-		super.write(compound);
-		if (!this.checkLootAndWrite(compound)) {
-			ItemStackHelper.saveAllItems(compound, this.chestContents);
-		}
-		return compound;
+	public void read(CompoundNBT compound) {
+		super.read(compound);
+		this.items = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
+		ItemStackHelper.loadAllItems(compound, this.items);
 	}
 
 	@Override
-	public void read(CompoundNBT compound) {
-		super.read(compound);
-		this.chestContents = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
-		if (!this.checkLootAndRead(compound)) {
-			ItemStackHelper.loadAllItems(compound, this.chestContents);
-		}
+	public CompoundNBT write(CompoundNBT compound) {
+		super.write(compound);
+		ItemStackHelper.saveAllItems(compound, this.items);
+		return compound;
 	}
 
 	@Override
@@ -140,12 +181,6 @@ public class CookingPotTileEntity extends LockableLootTileEntity
 		return 0;
 	}
 
-	public static void swapContents(CookingPotTileEntity te, CookingPotTileEntity otherTe) {
-		NonNullList<ItemStack> list = te.getItems();
-		te.setItems(otherTe.getItems());
-		otherTe.setItems(list);
-	}
-
 	@Override
 	public void updateContainingBlockInfo() {
 		super.updateContainingBlockInfo();
@@ -173,5 +208,17 @@ public class CookingPotTileEntity extends LockableLootTileEntity
 		if(itemHandler != null) {
 			itemHandler.invalidate();
 		}
+	}
+
+	@Override
+	public void clear()
+	{
+
+	}
+
+	@Override
+	public void tick()
+	{
+
 	}
 }
