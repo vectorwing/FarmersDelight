@@ -72,9 +72,9 @@ public class StoveBlock extends Block
 		return state.get(LIT) ? super.getLightValue(state) : 0;
 	}
 
-	public BlockRenderType getRenderType(BlockState state) {
-		return BlockRenderType.MODEL;
-	}
+//	public BlockRenderType getRenderType(BlockState state) {
+//		return BlockRenderType.MODEL;
+//	}
 
 	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
 		if (!worldIn.isRemote) {

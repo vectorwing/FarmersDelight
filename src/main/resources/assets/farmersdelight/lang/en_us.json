@@ -28,5 +28,7 @@
   "item.farmersdelight.chicken_sandwich": "Chicken Sandwich",
   "item.farmersdelight.hamburger": "Hamburger",
 
-  "itemGroup.farmersdelight": "Farmer's Delight"
+  "itemGroup.farmersdelight": "Farmer's Delight",
+
+  "container.farmersdelight.cooking_pot": "Cooking Pot"
 }

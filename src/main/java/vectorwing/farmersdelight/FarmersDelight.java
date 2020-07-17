@@ -1,8 +1,8 @@
 package vectorwing.farmersdelight;
 
-import net.minecraft.util.NonNullList;
 import vectorwing.farmersdelight.init.BlockInit;
 import vectorwing.farmersdelight.init.ItemInit;
+import vectorwing.farmersdelight.init.ModContainerTypes;
 import vectorwing.farmersdelight.init.TileEntityInit;
 import vectorwing.farmersdelight.setup.ClientEventHandler;
 import vectorwing.farmersdelight.setup.CommonEventHandler;
@@ -37,6 +37,7 @@ public class FarmersDelight
         ItemInit.ITEMS.register(modEventBus);
         BlockInit.BLOCKS.register(modEventBus);
         TileEntityInit.TILES.register(modEventBus);
+        ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }

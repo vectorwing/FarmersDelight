@@ -28,5 +28,7 @@
   "item.farmersdelight.chicken_sandwich": "Sanduíche de frango",
   "item.farmersdelight.hamburger": "Hambúrguer",
 
-  "itemGroup.farmersdelight": "Farmer's Delight"
+  "itemGroup.farmersdelight": "Farmer's Delight",
+
+  "container.farmersdelight.cooking_pot": "Panela"
 }
