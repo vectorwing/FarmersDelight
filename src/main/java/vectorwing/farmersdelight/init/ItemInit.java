@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.init;
 
-import vectorwing.farmersdelight.CreativeTab;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.items.Foods;
 import vectorwing.farmersdelight.items.KnifeItem;
@@ -48,8 +47,8 @@ public class ItemInit
 	public static final RegistryObject<Item> GOLDEN_KNIFE = ITEMS.register("golden_knife",
 			() -> new KnifeItem(ItemTier.GOLD, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
-	public static final RegistryObject<Item> FRESH_SALAD = ITEMS.register("fresh_salad",
-			() -> new MealItem(new Item.Properties().food(Foods.FRESH_SALAD).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> MIXED_SALAD = ITEMS.register("mixed_salad",
+			() -> new MealItem(new Item.Properties().food(Foods.MIXED_SALAD).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> BARBECUE_STICK = ITEMS.register("barbecue_stick",
 			() -> new Item(new Item.Properties().food(Foods.BARBECUE_STICK).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> CHICKEN_SANDWICH = ITEMS.register("chicken_sandwich",
@@ -59,6 +58,8 @@ public class ItemInit
 	public static final RegistryObject<Item> BEEF_STEW = ITEMS.register("beef_stew",
 			() -> new MealItem(new Item.Properties().food(Foods.BEEF_STEW).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> CHICKEN_SOUP = ITEMS.register("chicken_soup",
+			() -> new MealItem(new Item.Properties().food(Foods.CHICKEN_SOUP).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> VEGETABLE_SOUP = ITEMS.register("vegetable_soup",
 			() -> new MealItem(new Item.Properties().food(Foods.CHICKEN_SOUP).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> FISH_STEW = ITEMS.register("fish_stew",
 			() -> new MealItem(new Item.Properties().food(Foods.FISH_STEW).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));

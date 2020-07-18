@@ -11,8 +11,6 @@ import net.minecraft.inventory.IRecipeHolder;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.AbstractCookingRecipe;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.RecipeItemHelper;
@@ -47,6 +45,7 @@ import java.util.Random;
 public class CookingPotTileEntity extends LockableTileEntity implements IRecipeHolder, IRecipeHelperPopulator, ITickableTileEntity
 {
 	public final int INPUT_SIZE = 6;
+	public final int CONTAINER_INPUT = INPUT_SIZE + 1;
 	public final int INVENTORY_SIZE = INPUT_SIZE + 3;
 	protected NonNullList<ItemStack> items = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
 	private int cookTime;
@@ -98,6 +97,7 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 		boolean dirty = false;
 
 		if (!this.world.isRemote) {
+			// Process ingredients
 			if (isHeated && this.hasInput()) {
 				IRecipe<?> irecipe = this.world.getRecipeManager()
 						.getRecipe((IRecipeType<CookingPotRecipe>)this.recipeType, this, this.world).orElse(null);
@@ -115,6 +115,11 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 			} else if (this.cookTime > 0) {
 				this.cookTime = MathHelper.clamp(this.cookTime - 2, 0, this.cookTimeTotal);
 			}
+
+			if (!this.items.get(INPUT_SIZE).isEmpty() && !this.items.get(INPUT_SIZE + 1).isEmpty()) {
+				this.useStoredContainersOnMeal();
+			}
+
 		} else {
 			if (isHeated) {
 				this.addParticles();
@@ -123,6 +128,28 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 
 		if (dirty) {
 			this.markDirty();
+		}
+	}
+
+	/**
+	 * Attempts to generate an ItemStack output using the meal and the inputted container together.
+	 * If input and meal containers don't match, nothing happens.
+	 */
+	private void useStoredContainersOnMeal() {
+		ItemStack mealDisplay = this.items.get(INPUT_SIZE);
+		ItemStack containerInput = this.items.get(CONTAINER_INPUT);
+		ItemStack finalOutput = this.items.get(CONTAINER_INPUT + 1);
+		if (containerInput.isItemEqual(mealDisplay.getContainerItem()) && finalOutput.getCount() < finalOutput.getMaxStackSize()) {
+			int smallerStack = Math.min(mealDisplay.getCount(), containerInput.getCount());
+			int mealCount = Math.min(smallerStack, mealDisplay.getMaxStackSize() - finalOutput.getCount());
+			if (finalOutput.isEmpty()) {
+				containerInput.shrink(mealCount);
+				this.items.set(CONTAINER_INPUT + 1, mealDisplay.split(mealCount));
+			} else if (finalOutput.getItem() == mealDisplay.getItem()) {
+				mealDisplay.shrink(mealCount);
+				containerInput.shrink(mealCount);
+				finalOutput.grow(mealCount);
+			}
 		}
 	}
 
@@ -144,7 +171,7 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 					return true;
 				} else if (!currentOutput.isItemEqual(recipeOutput)) {
 					return false;
-				} else if (currentOutput.getCount() + recipeOutput.getCount() <= this.getInventoryStackLimit() && currentOutput.getCount() + recipeOutput.getCount() <= currentOutput.getMaxStackSize()) {
+				} else if (currentOutput.getCount() + recipeOutput.getCount() <= this.getInventoryStackLimit()) {
 					return true;
 				} else {
 					return currentOutput.getCount() + recipeOutput.getCount() <= recipeOutput.getMaxStackSize();
@@ -160,12 +187,13 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 			ItemStack recipeOutput = recipe.getRecipeOutput();
 			ItemStack currentOutput = this.items.get(INPUT_SIZE);
 			if (currentOutput.isEmpty()) {
-				this.items.set(6, recipeOutput.copy());
+				this.items.set(INPUT_SIZE, recipeOutput.copy());
 			} else if (currentOutput.getItem() == recipeOutput.getItem()) {
 				currentOutput.grow(recipeOutput.getCount());
 			}
 		}
 		for (int i = 0; i < INPUT_SIZE; ++i) {
+			// Spit leftover containers out
 			if (this.items.get(i).hasContainerItem()) {
 				Direction direction = this.getBlockState().get(CookingPotBlock.FACING).rotateYCCW();
 				ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5, this.items.get(i).getContainerItem());

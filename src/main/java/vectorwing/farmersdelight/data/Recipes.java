@@ -137,7 +137,7 @@ public class Recipes extends RecipeProvider
 				.build(consumer);
 	}
 	private void recipesCraftedMeals(Consumer<IFinishedRecipe> consumer) {
-		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.FRESH_SALAD.get())
+		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.MIXED_SALAD.get())
 				.addIngredient(ItemInit.CABBAGE.get())
 				.addIngredient(ItemInit.ONION.get())
 				.addIngredient(ItemInit.TOMATO.get())

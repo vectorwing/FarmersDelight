@@ -5,6 +5,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIntArray;
@@ -46,13 +47,13 @@ public class CookingPotContainer extends Container
 		}
 
 		// Meal Display
-		this.addSlot(new Slot(tileEntity, 6, 124, 26));
+		this.addSlot(new CookingPotMealSlot(tileEntity, 6, 124, 26));
 
 		// Bowl Input
 		this.addSlot(new Slot(tileEntity, 7, 92, 55));
 
 		// Bowl Output
-		this.addSlot(new Slot(tileEntity, 8, 124, 55));
+		this.addSlot(new CookingPotResultSlot(tileEntity, 8, 124, 55));
 
 		// Main Player Inventory
 		int startPlayerInvY = startY * 4 + 12;
@@ -92,7 +93,7 @@ public class CookingPotContainer extends Container
 
 	@Override
 	public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
-		int indexMealDisplay = 6;
+		int indexContainerInput = 7;
 		int indexOutput = 8;
 		int startPlayerInv = indexOutput + 1;
 		int endPlayerInv = startPlayerInv + 36;
@@ -106,7 +107,9 @@ public class CookingPotContainer extends Container
 					return ItemStack.EMPTY;
 				}
 			} else if (index > indexOutput) {
-				if (!this.mergeItemStack(itemstack1, 0, indexOutput, false)) {
+				if (itemstack1.getItem() == Items.BOWL && !this.mergeItemStack(itemstack1, indexContainerInput, indexContainerInput+1, false)) {
+					return ItemStack.EMPTY;
+				} else if (!this.mergeItemStack(itemstack1, 0, indexOutput, false)) {
 					return ItemStack.EMPTY;
 				}
 			} else if (!this.mergeItemStack(itemstack1, startPlayerInv, endPlayerInv, false)) {

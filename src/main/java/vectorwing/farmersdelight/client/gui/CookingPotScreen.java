@@ -3,11 +3,16 @@ package vectorwing.farmersdelight.client.gui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.AbstractFurnaceContainer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.container.CookingPotContainer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CookingPotScreen extends ContainerScreen<CookingPotContainer>
 {
@@ -27,6 +32,23 @@ public class CookingPotScreen extends ContainerScreen<CookingPotContainer>
 		this.renderBackground();
 		super.render(mouseX, mouseY, partialTicks);
 		this.renderHoveredToolTip(mouseX, mouseY);
+	}
+
+	protected void renderHoveredToolTip(int mouseX, int mouseY) {
+		if (this.minecraft.player.inventory.getItemStack().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.getHasStack()) {
+			if (this.hoveredSlot.slotNumber == 6) {
+				// TODO: I am 100% sure this entire hacky ordeal could be moved onto its own util. Consider doing that in the future.
+				List<String> tooltip = new ArrayList<>();
+				ItemStack meal = this.hoveredSlot.getStack();
+				String servedOn = new TranslationTextComponent(FarmersDelight.MODID + ".tooltip.meal_served_on").getFormattedText();
+				String container = meal.getContainerItem() != ItemStack.EMPTY ? meal.getContainerItem().getItem().getName().getFormattedText() : "None";
+				tooltip.add(meal.getItem().getName().getFormattedText());
+				tooltip.add(TextFormatting.GRAY + servedOn + container);
+				this.renderTooltip(tooltip, mouseX, mouseY);
+			} else {
+				this.renderTooltip(this.hoveredSlot.getStack(), mouseX, mouseY);
+			}
+		}
 	}
 
 	@Override

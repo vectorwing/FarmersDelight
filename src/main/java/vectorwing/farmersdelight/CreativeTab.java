@@ -53,7 +53,7 @@ public class CreativeTab extends ItemGroup
 		items.add(new ItemStack(ItemInit.GOLDEN_KNIFE.get()));
 	}
 	private void registerMeals(NonNullList<ItemStack> items) {
-		items.add(new ItemStack(ItemInit.FRESH_SALAD.get()));
+		items.add(new ItemStack(ItemInit.MIXED_SALAD.get()));
 		items.add(new ItemStack(ItemInit.BARBECUE_STICK.get()));
 		items.add(new ItemStack(ItemInit.CHICKEN_SANDWICH.get()));
 		items.add(new ItemStack(ItemInit.HAMBURGER.get()));

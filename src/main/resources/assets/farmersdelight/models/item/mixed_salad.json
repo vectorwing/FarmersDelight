@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "farmersdelight:items/fresh_salad"
+    "layer0": "farmersdelight:items/mixed_salad"
   }
 }

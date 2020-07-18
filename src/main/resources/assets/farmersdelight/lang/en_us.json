@@ -23,12 +23,13 @@
   "item.farmersdelight.golden_knife": "Golden Knife",
   "item.farmersdelight.diamond_knife": "Diamond Knife",
 
-  "item.farmersdelight.fresh_salad": "Mixed Salad",
+  "item.farmersdelight.mixed_salad": "Mixed Salad",
   "item.farmersdelight.barbecue_stick": "Barbecue on a Stick",
   "item.farmersdelight.chicken_sandwich": "Chicken Sandwich",
   "item.farmersdelight.hamburger": "Hamburger",
   "item.farmersdelight.beef_stew": "Beef Stew",
   "item.farmersdelight.chicken_soup": "Chicken Soup",
+  "item.farmersdelight.vegetable_soup": "Vegetable Soup",
   "item.farmersdelight.fish_stew": "Fish Stew",
   "item.farmersdelight.fried_rice": "Fried Rice",
   "item.farmersdelight.honey_glazed_ham": "Honey Glazed Ham",
@@ -38,5 +39,7 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "container.farmersdelight.cooking_pot": "Cooking Pot"
+  "container.farmersdelight.cooking_pot": "Cooking Pot",
+
+  "farmersdelight.tooltip.meal_served_on": "Served on: "
 }

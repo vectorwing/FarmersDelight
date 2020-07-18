@@ -21,7 +21,7 @@ public class Foods
 			.hunger(2).saturation(0.1f).build();
 
 	// Simple Meals (1 Star)
-	public static final Food FRESH_SALAD = (new Food.Builder())
+	public static final Food MIXED_SALAD = (new Food.Builder())
 			.hunger(6).saturation(0.5f).build();
 	public static final Food BARBECUE_STICK = (new Food.Builder())
 			.hunger(7).saturation(0.6f).build();
@@ -32,7 +32,9 @@ public class Foods
 	public static final Food BEEF_STEW = (new Food.Builder())
 			.hunger(10).saturation(0.9f).build();
 	public static final Food CHICKEN_SOUP = (new Food.Builder())
-			.hunger(10).saturation(0.8f).build();
+			.hunger(8).saturation(0.8f).build();
+	public static final Food VEGETABLE_SOUP = (new Food.Builder())
+			.hunger(8).saturation(0.8f).build();
 	public static final Food FISH_STEW = (new Food.Builder())
 			.hunger(8).saturation(0.8f).build();
 	public static final Food FRIED_RICE = (new Food.Builder())
