@@ -7,6 +7,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
@@ -55,6 +56,17 @@ public class CookingPotBlock extends Block
 			}
 		}
 		return ActionResultType.SUCCESS;
+	}
+
+	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+		if (state.getBlock() != newState.getBlock()) {
+			TileEntity tileentity = worldIn.getTileEntity(pos);
+			if (tileentity instanceof CookingPotTileEntity) {
+				InventoryHelper.dropItems(worldIn, pos, ((CookingPotTileEntity)tileentity).getDroppableInventory());
+			}
+
+			super.onReplaced(state, worldIn, pos, newState, isMoving);
+		}
 	}
 
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {

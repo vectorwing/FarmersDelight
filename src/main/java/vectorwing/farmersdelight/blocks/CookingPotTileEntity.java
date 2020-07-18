@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ItemStackHelper;
@@ -28,6 +29,7 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.container.CookingPotContainer;
 import vectorwing.farmersdelight.init.TileEntityInit;
+import vectorwing.farmersdelight.utils.Utils;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -98,7 +100,8 @@ public class CookingPotTileEntity extends LockableTileEntity implements ITickabl
 
 		if (!this.world.isRemote) {
 			if (isHeated && this.hasInput()) {
-				if (this.areInputsFood()) {
+//				if (this.areInputsFood()) {
+				if (true) {
 					++this.cookTime;
 					if (this.cookTime == this.cookTimeTotal) {
 						this.cookTime = 0;
@@ -130,6 +133,12 @@ public class CookingPotTileEntity extends LockableTileEntity implements ITickabl
 			output.grow(result.getCount());
 		}
 		for (int i = 0; i < INPUT_SIZE; ++i) {
+			if (this.items.get(i).hasContainerItem()) {
+				Direction direction = this.getBlockState().get(CookingPotBlock.FACING).rotateYCCW();
+				ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5, this.items.get(i).getContainerItem());
+				entity.setMotion(direction.getXOffset() * 0.1F, 0.2F, direction.getZOffset() * 0.1F);
+				world.addEntity(entity);
+			}
 			this.items.get(i).shrink(1);
 		}
 	}
@@ -166,6 +175,18 @@ public class CookingPotTileEntity extends LockableTileEntity implements ITickabl
 	public int getSizeInventory() {
 		return this.items.size();
 	}
+
+	/**
+	 * Returns every stored ItemStack in the pot, except for prepared meals.
+	 */
+	public NonNullList<ItemStack> getDroppableInventory() {
+		NonNullList<ItemStack> drops = NonNullList.create();
+		for (int i = 0; i < INVENTORY_SIZE; ++i) {
+			if (i != INPUT_SIZE) drops.add(this.items.get(i));
+		}
+		return drops;
+	}
+
 
 	@Override
 	public boolean isEmpty() {

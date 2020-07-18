@@ -1,5 +1,9 @@
 package vectorwing.farmersdelight;
 
+import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.registry.Registry;
+import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.init.BlockInit;
 import vectorwing.farmersdelight.init.ItemInit;
 import vectorwing.farmersdelight.init.ModContainerTypes;
@@ -31,6 +35,7 @@ public class FarmersDelight
     public FarmersDelight() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(CommonEventHandler::init);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientEventHandler::init);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, this::registerRecipeSerializers);
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -40,6 +45,12 @@ public class FarmersDelight
         ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    private void registerRecipeSerializers (RegistryEvent.Register<IRecipeSerializer<?>> event) {
+
+        Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(FarmersDelight.MODID, "cooking"), CookingPotRecipe.TYPE);
+        event.getRegistry().register(CookingPotRecipe.SERIALIZER);
     }
 
     @SubscribeEvent
