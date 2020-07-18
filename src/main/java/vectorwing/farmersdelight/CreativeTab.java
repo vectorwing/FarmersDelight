@@ -57,5 +57,13 @@ public class CreativeTab extends ItemGroup
 		items.add(new ItemStack(ItemInit.BARBECUE_STICK.get()));
 		items.add(new ItemStack(ItemInit.CHICKEN_SANDWICH.get()));
 		items.add(new ItemStack(ItemInit.HAMBURGER.get()));
+		items.add(new ItemStack(ItemInit.BEEF_STEW.get()));
+		items.add(new ItemStack(ItemInit.CHICKEN_SOUP.get()));
+		items.add(new ItemStack(ItemInit.FISH_STEW.get()));
+		items.add(new ItemStack(ItemInit.FRIED_RICE.get()));
+		items.add(new ItemStack(ItemInit.HONEY_GLAZED_HAM.get()));
+		items.add(new ItemStack(ItemInit.PASTA_WITH_MEATBALLS.get()));
+		items.add(new ItemStack(ItemInit.STEAK_AND_POTATOES.get()));
+		items.add(new ItemStack(ItemInit.VEGETABLE_NOODLES.get()));
 	}
 }

@@ -1,20 +1,28 @@
 package vectorwing.farmersdelight.blocks;
 
+import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.IRecipeHelperPopulator;
+import net.minecraft.inventory.IRecipeHolder;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.crafting.AbstractCookingRecipe;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.RecipeItemHelper;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
@@ -28,13 +36,15 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.container.CookingPotContainer;
+import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.init.TileEntityInit;
-import vectorwing.farmersdelight.utils.Utils;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Map;
 import java.util.Random;
 
-public class CookingPotTileEntity extends LockableTileEntity implements ITickableTileEntity
+public class CookingPotTileEntity extends LockableTileEntity implements IRecipeHolder, IRecipeHelperPopulator, ITickableTileEntity
 {
 	public final int INPUT_SIZE = 6;
 	public final int INVENTORY_SIZE = INPUT_SIZE + 3;
@@ -67,30 +77,19 @@ public class CookingPotTileEntity extends LockableTileEntity implements ITickabl
 			return 2;
 		}
 	};
+	private final Map<ResourceLocation, Integer> recipes = Maps.newHashMap();
+	protected final IRecipeType<? extends CookingPotRecipe> recipeType;
 
 	protected int numPlayersUsing;
 	private IItemHandlerModifiable baseHandler = createHandler();
 	private LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> baseHandler);
 
-	public CookingPotTileEntity(TileEntityType<?> tileEntityTypeIn)	{ super(tileEntityTypeIn); }
-
-	public CookingPotTileEntity() {	this(TileEntityInit.COOKING_POT_TILE.get()); }
-
-	// TODO: Temporary filled slot check, in order to test the cooking mechanic itself. Make a recipe handler!
-	private boolean hasInput() {
-		for (int i = 0; i < INPUT_SIZE; ++i) {
-			if (!this.items.get(i).isEmpty()) return true;
-		}
-		return false;
+	public CookingPotTileEntity(TileEntityType<?> tileEntityTypeIn, IRecipeType<? extends CookingPotRecipe> recipeTypeIn) {
+		super(tileEntityTypeIn);
+		this.recipeType = recipeTypeIn;
 	}
 
-	// TODO: Temporary validity check, in order to test the cooking mechanic itself. Make a recipe handler!
-	private boolean areInputsFood() {
-		for (int i = 0; i < INPUT_SIZE; ++i) {
-			if (!this.items.get(i).isEmpty() && !this.items.get(i).isFood()) return false;
-		}
-		return true;
-	}
+	public CookingPotTileEntity() {	this(TileEntityInit.COOKING_POT_TILE.get(), CookingPotRecipe.TYPE); }
 
 	@Override
 	public void tick()
@@ -100,15 +99,18 @@ public class CookingPotTileEntity extends LockableTileEntity implements ITickabl
 
 		if (!this.world.isRemote) {
 			if (isHeated && this.hasInput()) {
-//				if (this.areInputsFood()) {
-				if (true) {
+				IRecipe<?> irecipe = this.world.getRecipeManager()
+						.getRecipe((IRecipeType<CookingPotRecipe>)this.recipeType, this, this.world).orElse(null);
+				if (this.canCook(irecipe)) {
 					++this.cookTime;
 					if (this.cookTime == this.cookTimeTotal) {
 						this.cookTime = 0;
 						this.cookTimeTotal = 200;
-						this.cook();
+						this.cook(irecipe);
 						dirty = true;
 					}
+				} else {
+					this.cookTime = 0;
 				}
 			} else if (this.cookTime > 0) {
 				this.cookTime = MathHelper.clamp(this.cookTime - 2, 0, this.cookTimeTotal);
@@ -124,13 +126,44 @@ public class CookingPotTileEntity extends LockableTileEntity implements ITickabl
 		}
 	}
 
-	private void cook() {
-		ItemStack result = new ItemStack(Items.DIAMOND); // TODO: Obviously not final. Make a recipe handler. :P
-		ItemStack output = this.items.get(6);
-		if (output.isEmpty()) {
-			this.items.set(6, result.copy());
-		} else if (output.getItem() == result.getItem()) {
-			output.grow(result.getCount());
+	private boolean hasInput() {
+		for (int i = 0; i < INPUT_SIZE; ++i) {
+			if (!this.items.get(i).isEmpty()) return true;
+		}
+		return false;
+	}
+
+	protected boolean canCook(@Nullable IRecipe<?> recipeIn) {
+		if (this.hasInput() && recipeIn != null) {
+			ItemStack recipeOutput = recipeIn.getRecipeOutput();
+			if (recipeOutput.isEmpty()) {
+				return false;
+			} else {
+				ItemStack currentOutput = this.items.get(INPUT_SIZE);
+				if (currentOutput.isEmpty()) {
+					return true;
+				} else if (!currentOutput.isItemEqual(recipeOutput)) {
+					return false;
+				} else if (currentOutput.getCount() + recipeOutput.getCount() <= this.getInventoryStackLimit() && currentOutput.getCount() + recipeOutput.getCount() <= currentOutput.getMaxStackSize()) {
+					return true;
+				} else {
+					return currentOutput.getCount() + recipeOutput.getCount() <= recipeOutput.getMaxStackSize();
+				}
+			}
+		} else {
+			return false;
+		}
+	}
+
+	private void cook(@Nullable IRecipe<?> recipe) {
+		if (recipe != null && this.canCook(recipe)) {
+			ItemStack recipeOutput = recipe.getRecipeOutput();
+			ItemStack currentOutput = this.items.get(INPUT_SIZE);
+			if (currentOutput.isEmpty()) {
+				this.items.set(6, recipeOutput.copy());
+			} else if (currentOutput.getItem() == recipeOutput.getItem()) {
+				currentOutput.grow(recipeOutput.getCount());
+			}
 		}
 		for (int i = 0; i < INPUT_SIZE; ++i) {
 			if (this.items.get(i).hasContainerItem()) {
@@ -353,5 +386,24 @@ public class CookingPotTileEntity extends LockableTileEntity implements ITickabl
 	public void clear()
 	{
 
+	}
+
+	@Override
+	public void fillStackedContents(RecipeItemHelper helper)
+	{
+
+	}
+
+	@Override
+	public void setRecipeUsed(@Nullable IRecipe<?> recipe)
+	{
+
+	}
+
+	@Nullable
+	@Override
+	public IRecipe<?> getRecipeUsed()
+	{
+		return null;
 	}
 }

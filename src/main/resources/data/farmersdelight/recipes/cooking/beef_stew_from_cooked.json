@@ -2,7 +2,7 @@
   "type": "farmersdelight:cooking",
   "ingredients": [
     {
-      "item": "minecraft:beef"
+      "item": "minecraft:cooked_beef"
     },
     {
       "item": "minecraft:carrot"
@@ -12,6 +12,6 @@
     }
   ],
   "result": {
-    "item": "farmersdelight:raw_pasta"
+    "item": "farmersdelight:beef_stew"
   }
 }
