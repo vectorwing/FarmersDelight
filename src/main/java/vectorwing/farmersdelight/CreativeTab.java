@@ -30,6 +30,7 @@ public class CreativeTab extends ItemGroup
 	private void registerWorkstations(NonNullList<ItemStack> items) {
 		items.add(new ItemStack(BlockInit.STOVE.get()));
 		items.add(new ItemStack(BlockInit.COOKING_POT.get()));
+		items.add(new ItemStack(BlockInit.BASKET.get()));
 	}
 	private void registerCrops(NonNullList<ItemStack> items) {
 		items.add(new ItemStack(ItemInit.CABBAGE.get()));

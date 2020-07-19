@@ -12,9 +12,10 @@ public class BlockInit
 {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FarmersDelight.MODID);
 
-	// MACHINES
+	// FUNCTIONAL
 	public static final RegistryObject<Block> STOVE = BLOCKS.register("stove", StoveBlock::new);
 	public static final RegistryObject<Block> COOKING_POT = BLOCKS.register("cooking_pot", CookingPotBlock::new);
+	public static final RegistryObject<Block> BASKET = BLOCKS.register("basket", BasketBlock::new);
 
 	// CROPS
 	public static final RegistryObject<Block> CABBAGE_CROP = BLOCKS.register("cabbages",

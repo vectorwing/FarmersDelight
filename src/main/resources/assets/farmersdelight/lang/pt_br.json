@@ -1,6 +1,7 @@
 {
   "block.farmersdelight.stove": "Fogão",
   "block.farmersdelight.cooking_pot": "Panela",
+  "block.farmersdelight.basket": "Cesto",
 
   "block.farmersdelight.cabbages": "Sementes de repolho",
   "block.farmersdelight.onions": "Cebola",
@@ -41,5 +42,6 @@
 
   "container.farmersdelight.cooking_pot": "Panela",
 
-  "farmersdelight.tooltip.meal_served_on": "Servido em: "
+  "farmersdelight.tooltip.meal_served_on": "Servido em: ",
+  "farmersdelight.tooltip.cooking_pot.servings": "Contém %s porções de:"
 }
