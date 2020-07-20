@@ -6,14 +6,14 @@
   "block.farmersdelight.cabbages": "Sementes de repolho",
   "block.farmersdelight.onions": "Cebola",
   "block.farmersdelight.tomatoes": "Sementes de tomate",
+  "block.farmersdelight.rice_crop": "Arroz",
 
   "item.farmersdelight.tomato": "Tomate",
-  "item.farmersdelight.rice": "Arroz",
   "item.farmersdelight.cabbage": "Repolho",
   "item.farmersdelight.rice_panicle": "Panícula de arroz",
 
   "item.farmersdelight.tomato_sauce": "Molho de tomate",
-  "item.farmersdelight.milk_bottle": "Garrafa de leite",
+  "item.farmersdelight.milk_bottle": "Frasco de leite",
   "item.farmersdelight.fried_egg": "Ovo frito",
   "item.farmersdelight.raw_pasta": "Macarrão cru",
   "item.farmersdelight.cake_slice": "Fatia de bolo",
@@ -40,8 +40,10 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "container.farmersdelight.cooking_pot": "Panela",
+  "farmersdelight.container.cooking_pot": "Panela",
+  "farmersdelight.containercooking_pot.served_on": "Servido em: ",
 
-  "farmersdelight.tooltip.meal_served_on": "Servido em: ",
-  "farmersdelight.tooltip.cooking_pot.servings": "Contém %s porções de:"
+  "farmersdelight.tooltip.cooking_pot.empty": "Vazia",
+  "farmersdelight.tooltip.cooking_pot.single_serving": "Contém 1 porção de:",
+  "farmersdelight.tooltip.cooking_pot.many_servings": "Contém %s porções de:"
 }

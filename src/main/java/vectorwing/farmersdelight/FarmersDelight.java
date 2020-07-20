@@ -4,8 +4,8 @@ import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.init.BlockInit;
-import vectorwing.farmersdelight.init.ItemInit;
+import vectorwing.farmersdelight.init.ModBlocks;
+import vectorwing.farmersdelight.init.ModItems;
 import vectorwing.farmersdelight.init.ModContainerTypes;
 import vectorwing.farmersdelight.init.TileEntityInit;
 import vectorwing.farmersdelight.setup.ClientEventHandler;
@@ -39,8 +39,8 @@ public class FarmersDelight
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ItemInit.ITEMS.register(modEventBus);
-        BlockInit.BLOCKS.register(modEventBus);
+        ModItems.ITEMS.register(modEventBus);
+        ModBlocks.BLOCKS.register(modEventBus);
         TileEntityInit.TILES.register(modEventBus);
         ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
 
@@ -48,7 +48,6 @@ public class FarmersDelight
     }
 
     private void registerRecipeSerializers (RegistryEvent.Register<IRecipeSerializer<?>> event) {
-
         Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(FarmersDelight.MODID, "cooking"), CookingPotRecipe.TYPE);
         event.getRegistry().register(CookingPotRecipe.SERIALIZER);
     }
@@ -57,15 +56,13 @@ public class FarmersDelight
     public static void onRegisterItems(final RegistryEvent.Register<Item> event) {
         final IForgeRegistry<Item> registry = event.getRegistry();
 
-        BlockInit.BLOCKS.getEntries().stream()
-                .filter(block -> !(block.get() instanceof CropsBlock))
-                .map(RegistryObject::get).forEach(block -> {
-            final Item.Properties properties = new Item.Properties().group(FarmersDelight.ITEM_GROUP);
-            final BlockItem blockItem = new BlockItem(block, properties);
-            blockItem.setRegistryName(block.getRegistryName());
-            registry.register(blockItem);
-        });
-
-        LOGGER.debug("Registered BlockItems!");
+//        ModBlocks.BLOCKS.getEntries().stream()
+//                .filter(block -> !(block.get() instanceof CropsBlock))
+//                .map(RegistryObject::get).forEach(block -> {
+//            final Item.Properties properties = new Item.Properties().group(FarmersDelight.ITEM_GROUP);
+//            final BlockItem blockItem = new BlockItem(block, properties);
+//            blockItem.setRegistryName(block.getRegistryName());
+//            registry.register(blockItem);
+//        });
     }
 }

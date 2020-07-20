@@ -10,7 +10,10 @@ import net.minecraft.inventory.IRecipeHelperPopulator;
 import net.minecraft.inventory.IRecipeHolder;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.SoupItem;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.RecipeItemHelper;
@@ -32,10 +35,13 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.InvWrapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.container.CookingPotContainer;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.init.TileEntityInit;
+import vectorwing.farmersdelight.utils.Text;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -44,6 +50,7 @@ import java.util.Random;
 
 public class CookingPotTileEntity extends LockableTileEntity implements IRecipeHolder, IRecipeHelperPopulator, ITickableTileEntity
 {
+	private static final Logger LOGGER = LogManager.getLogger();
 	public final int INPUT_SIZE = 6;
 	public final int CONTAINER_INPUT = INPUT_SIZE + 1;
 	public final int INVENTORY_SIZE = INPUT_SIZE + 3;
@@ -139,7 +146,9 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 		ItemStack mealDisplay = this.items.get(INPUT_SIZE);
 		ItemStack containerInput = this.items.get(CONTAINER_INPUT);
 		ItemStack finalOutput = this.items.get(CONTAINER_INPUT + 1);
-		if (containerInput.isItemEqual(mealDisplay.getContainerItem()) && finalOutput.getCount() < finalOutput.getMaxStackSize()) {
+		boolean hasBowlAndSoupItem = containerInput.getItem() == Items.BOWL && mealDisplay.getItem() instanceof SoupItem;
+		boolean containerMatchesMeal = containerInput.isItemEqual(mealDisplay.getContainerItem());
+		if ((hasBowlAndSoupItem || containerMatchesMeal) && finalOutput.getCount() < finalOutput.getMaxStackSize()) {
 			int smallerStack = Math.min(mealDisplay.getCount(), containerInput.getCount());
 			int mealCount = Math.min(smallerStack, mealDisplay.getMaxStackSize() - finalOutput.getCount());
 			if (finalOutput.isEmpty()) {
@@ -200,7 +209,8 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 				entity.setMotion(direction.getXOffset() * 0.1F, 0.2F, direction.getZOffset() * 0.1F);
 				world.addEntity(entity);
 			}
-			this.items.get(i).shrink(1);
+			if (!this.items.get(i).isEmpty())
+				this.items.get(i).shrink(1);
 		}
 	}
 
@@ -243,11 +253,11 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 	public NonNullList<ItemStack> getDroppableInventory() {
 		NonNullList<ItemStack> drops = NonNullList.create();
 		for (int i = 0; i < INVENTORY_SIZE; ++i) {
-			if (i != INPUT_SIZE) drops.add(this.items.get(i));
+			drops.add(i == INPUT_SIZE ? ItemStack.EMPTY : this.items.get(i));
 		}
+		LOGGER.info("[FD] getDroppable " + drops.toString());
 		return drops;
 	}
-
 
 	@Override
 	public boolean isEmpty() {
@@ -258,6 +268,25 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 		}
 
 		return true;
+	}
+
+	public boolean isMealEmpty() {
+		return this.items.get(INPUT_SIZE).isEmpty();
+	}
+
+	public ItemStack getMeal() {
+		return this.items.get(INPUT_SIZE);
+	}
+
+	/**
+	 * Checks if the given ItemStack is a container for the stored meal. If true, takes a serving and returns it.
+	 */
+	public ItemStack useHeldItemOnMeal(ItemStack container) {
+		if (container.isItemEqual(this.getMeal().getContainerItem())) {
+			container.shrink(1);
+			return this.getMeal().split(1);
+		}
+		return ItemStack.EMPTY;
 	}
 
 	@Override
@@ -305,7 +334,7 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 	@Override
 	protected ITextComponent getDefaultName()
 	{
-		return new TranslationTextComponent("container." + FarmersDelight.MODID + ".cooking_pot");
+		return Text.getTranslation("container.cooking_pot");
 	}
 
 	@Override
@@ -329,6 +358,18 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 		compound.putInt("CookTime", this.cookTime);
 		compound.putInt("CookTimeTotal", this.cookTimeTotal);
 		ItemStackHelper.saveAllItems(compound, this.items);
+		return compound;
+	}
+
+	public CompoundNBT writeMealNbt(CompoundNBT compound) {
+		if (this.isEmpty()) return compound;
+
+		NonNullList<ItemStack> drops = NonNullList.create();
+		for (int i = 0; i < INVENTORY_SIZE; ++i) {
+			drops.add(i == INPUT_SIZE ? this.items.get(i) : ItemStack.EMPTY);
+		}
+		ItemStackHelper.saveAllItems(compound, drops);
+		LOGGER.info("[FD] writeMeal " + compound.toString());
 		return compound;
 	}
 

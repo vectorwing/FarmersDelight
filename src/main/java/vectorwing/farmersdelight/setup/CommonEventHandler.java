@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.setup;
 
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.init.ItemInit;
+import vectorwing.farmersdelight.init.ModItems;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
@@ -21,11 +21,11 @@ public class CommonEventHandler
 
 	public static void init(final FMLCommonSetupEvent event)
 	{
-		ComposterBlock.CHANCES.put(ItemInit.CABBAGE_SEEDS.get(), 0.3F);
-		ComposterBlock.CHANCES.put(ItemInit.TOMATO_SEEDS.get(), 0.3F);
-		ComposterBlock.CHANCES.put(ItemInit.CABBAGE.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ItemInit.ONION.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ItemInit.TOMATO.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.CABBAGE_SEEDS.get(), 0.3F);
+		ComposterBlock.CHANCES.put(ModItems.TOMATO_SEEDS.get(), 0.3F);
+		ComposterBlock.CHANCES.put(ModItems.CABBAGE.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.ONION.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.TOMATO.get(), 0.65F);
 	}
 
 	@SubscribeEvent

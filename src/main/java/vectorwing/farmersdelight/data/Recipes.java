@@ -1,8 +1,8 @@
 package vectorwing.farmersdelight.data;
 
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.init.BlockInit;
-import vectorwing.farmersdelight.init.ItemInit;
+import vectorwing.farmersdelight.init.ModBlocks;
+import vectorwing.farmersdelight.init.ModItems;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
@@ -49,10 +49,10 @@ public class Recipes extends RecipeProvider
 	}
 
 	private void recipesSmelting(Consumer<IFinishedRecipe> consumer) {
-		foodSmeltingRecipes("fried_egg", Items.EGG, ItemInit.FRIED_EGG.get(), 0.35F, 200, consumer);
+		foodSmeltingRecipes("fried_egg", Items.EGG, ModItems.FRIED_EGG.get(), 0.35F, 200, consumer);
 	}
 	private void recipesBlocks(Consumer<IFinishedRecipe> consumer) {
-		ShapedRecipeBuilder.shapedRecipe(BlockInit.STOVE.get())
+		ShapedRecipeBuilder.shapedRecipe(ModBlocks.STOVE.get())
 				.patternLine("iii")
 				.patternLine("B B")
 				.patternLine("BCB")
@@ -61,7 +61,7 @@ public class Recipes extends RecipeProvider
 				.key('C', Blocks.CAMPFIRE)
 				.addCriterion("campfire", InventoryChangeTrigger.Instance.forItems(Blocks.CAMPFIRE))
 				.build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(BlockInit.COOKING_POT.get())
+		ShapedRecipeBuilder.shapedRecipe(ModBlocks.COOKING_POT.get())
 				.patternLine("bSb")
 				.patternLine("i i")
 				.patternLine("iii")
@@ -72,28 +72,28 @@ public class Recipes extends RecipeProvider
 				.build(consumer);
 	}
 	private void recipesTools(Consumer<IFinishedRecipe> consumer) {
-		ShapedRecipeBuilder.shapedRecipe(ItemInit.FLINT_KNIFE.get())
+		ShapedRecipeBuilder.shapedRecipe(ModItems.FLINT_KNIFE.get())
 				.patternLine(" m")
 				.patternLine("s ")
 				.key('m', Items.FLINT)
 				.key('s', Items.STICK)
 				.addCriterion("stick", InventoryChangeTrigger.Instance.forItems(Items.STICK))
 				.build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(ItemInit.IRON_KNIFE.get())
+		ShapedRecipeBuilder.shapedRecipe(ModItems.IRON_KNIFE.get())
 				.patternLine(" m")
 				.patternLine("s ")
 				.key('m', Items.IRON_INGOT)
 				.key('s', Items.STICK)
 				.addCriterion("iron_ingot", InventoryChangeTrigger.Instance.forItems(Items.IRON_INGOT))
 				.build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(ItemInit.DIAMOND_KNIFE.get())
+		ShapedRecipeBuilder.shapedRecipe(ModItems.DIAMOND_KNIFE.get())
 				.patternLine(" m")
 				.patternLine("s ")
 				.key('m', Items.DIAMOND)
 				.key('s', Items.STICK)
 				.addCriterion("diamond", InventoryChangeTrigger.Instance.forItems(Items.DIAMOND))
 				.build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(ItemInit.GOLDEN_KNIFE.get())
+		ShapedRecipeBuilder.shapedRecipe(ModItems.GOLDEN_KNIFE.get())
 				.patternLine(" m")
 				.patternLine("s ")
 				.key('m', Items.GOLD_INGOT)
@@ -102,82 +102,82 @@ public class Recipes extends RecipeProvider
 				.build(consumer);
 	}
 	private void recipesIngredients(Consumer<IFinishedRecipe> consumer) {
-		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.CABBAGE_SEEDS.get())
-				.addIngredient(ItemInit.CABBAGE.get())
-				.addCriterion("cabbage", InventoryChangeTrigger.Instance.forItems(ItemInit.CABBAGE.get()))
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CABBAGE_SEEDS.get())
+				.addIngredient(ModItems.CABBAGE.get())
+				.addCriterion("cabbage", InventoryChangeTrigger.Instance.forItems(ModItems.CABBAGE.get()))
 				.build(consumer);
-		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.TOMATO_SEEDS.get())
-				.addIngredient(ItemInit.TOMATO.get())
-				.addCriterion("tomato", InventoryChangeTrigger.Instance.forItems(ItemInit.TOMATO.get()))
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.TOMATO_SEEDS.get())
+				.addIngredient(ModItems.TOMATO.get())
+				.addCriterion("tomato", InventoryChangeTrigger.Instance.forItems(ModItems.TOMATO.get()))
 				.build(consumer);
-		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.TOMATO_SAUCE.get())
-				.addIngredient(ItemInit.TOMATO.get())
-				.addIngredient(ItemInit.TOMATO.get())
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.TOMATO_SAUCE.get())
+				.addIngredient(ModItems.TOMATO.get())
+				.addIngredient(ModItems.TOMATO.get())
 				.addIngredient(Items.BOWL)
-				.addCriterion("tomato", InventoryChangeTrigger.Instance.forItems(ItemInit.TOMATO.get()))
+				.addCriterion("tomato", InventoryChangeTrigger.Instance.forItems(ModItems.TOMATO.get()))
 				.build(consumer);
-		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.MILK_BOTTLE.get(), 3)
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.MILK_BOTTLE.get(), 3)
 				.addIngredient(Items.MILK_BUCKET)
 				.addIngredient(Items.GLASS_BOTTLE)
 				.addIngredient(Items.GLASS_BOTTLE)
 				.addIngredient(Items.GLASS_BOTTLE)
 				.addCriterion("milk_bucket", InventoryChangeTrigger.Instance.forItems(Items.MILK_BUCKET))
 				.build(consumer);
-		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.RAW_PASTA.get())
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RAW_PASTA.get())
 				.addIngredient(Items.WHEAT)
 				.addIngredient(Items.WHEAT)
 				.addIngredient(Items.EGG)
 				.addIngredient(new ItemTags.Wrapper(new ResourceLocation("forge", "knives")))
 				.addCriterion("egg", InventoryChangeTrigger.Instance.forItems(Items.EGG))
 				.build(consumer);
-		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.CAKE_SLICE.get(), 7)
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CAKE_SLICE.get(), 7)
 				.addIngredient(Blocks.CAKE)
 				.addIngredient(new ItemTags.Wrapper(new ResourceLocation("forge", "knives")))
 				.addCriterion("cake", InventoryChangeTrigger.Instance.forItems(Blocks.CAKE))
 				.build(consumer);
 	}
 	private void recipesCraftedMeals(Consumer<IFinishedRecipe> consumer) {
-		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.MIXED_SALAD.get())
-				.addIngredient(ItemInit.CABBAGE.get())
-				.addIngredient(ItemInit.ONION.get())
-				.addIngredient(ItemInit.TOMATO.get())
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.MIXED_SALAD.get())
+				.addIngredient(ModItems.CABBAGE.get())
+				.addIngredient(ModItems.ONION.get())
+				.addIngredient(ModItems.TOMATO.get())
 				.addIngredient(Items.BEETROOT)
 				.addIngredient(Items.BOWL)
-				.addCriterion("cabbage", InventoryChangeTrigger.Instance.forItems(ItemInit.CABBAGE.get()))
+				.addCriterion("cabbage", InventoryChangeTrigger.Instance.forItems(ModItems.CABBAGE.get()))
 				.build(consumer);
-		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.BARBECUE_STICK.get(), 2)
-				.addIngredient(ItemInit.ONION.get())
-				.addIngredient(ItemInit.TOMATO.get())
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.BARBECUE_STICK.get(), 2)
+				.addIngredient(ModItems.ONION.get())
+				.addIngredient(ModItems.TOMATO.get())
 				.addIngredient(Items.COOKED_BEEF)
 				.addIngredient(Items.COOKED_CHICKEN)
 				.addIngredient(Items.STICK)
 				.addIngredient(Items.STICK)
 				.addCriterion("barbecue", InventoryChangeTrigger.Instance.forItems(Items.COOKED_BEEF))
 				.build(consumer);
-		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.CHICKEN_SANDWICH.get())
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CHICKEN_SANDWICH.get())
 				.addIngredient(Items.BREAD)
 				.addIngredient(Items.COOKED_CHICKEN)
-				.addIngredient(ItemInit.CABBAGE.get())
-				.addIngredient(ItemInit.TOMATO.get())
+				.addIngredient(ModItems.CABBAGE.get())
+				.addIngredient(ModItems.TOMATO.get())
 				.addCriterion("cooked_chicken", InventoryChangeTrigger.Instance.forItems(Items.COOKED_CHICKEN))
 				.build(consumer);
-		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.HAMBURGER.get())
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.HAMBURGER.get())
 				.addIngredient(Items.BREAD)
 				.addIngredient(Items.COOKED_BEEF)
-				.addIngredient(ItemInit.CABBAGE.get())
-				.addIngredient(ItemInit.TOMATO.get())
-				.addIngredient(ItemInit.ONION.get())
+				.addIngredient(ModItems.CABBAGE.get())
+				.addIngredient(ModItems.TOMATO.get())
+				.addIngredient(ModItems.ONION.get())
 				.addCriterion("hamburger", InventoryChangeTrigger.Instance.forItems(Items.COOKED_BEEF))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(Items.CAKE)
-				.addIngredient(ItemInit.CAKE_SLICE.get())
-				.addIngredient(ItemInit.CAKE_SLICE.get())
-				.addIngredient(ItemInit.CAKE_SLICE.get())
-				.addIngredient(ItemInit.CAKE_SLICE.get())
-				.addIngredient(ItemInit.CAKE_SLICE.get())
-				.addIngredient(ItemInit.CAKE_SLICE.get())
-				.addIngredient(ItemInit.CAKE_SLICE.get())
-				.addCriterion("cake_slice", InventoryChangeTrigger.Instance.forItems(ItemInit.CAKE_SLICE.get()))
+				.addIngredient(ModItems.CAKE_SLICE.get())
+				.addIngredient(ModItems.CAKE_SLICE.get())
+				.addIngredient(ModItems.CAKE_SLICE.get())
+				.addIngredient(ModItems.CAKE_SLICE.get())
+				.addIngredient(ModItems.CAKE_SLICE.get())
+				.addIngredient(ModItems.CAKE_SLICE.get())
+				.addIngredient(ModItems.CAKE_SLICE.get())
+				.addCriterion("cake_slice", InventoryChangeTrigger.Instance.forItems(ModItems.CAKE_SLICE.get()))
 				.build(consumer);
 	}
 	private void recipesCookedMeals(Consumer<IFinishedRecipe> consumer) {}

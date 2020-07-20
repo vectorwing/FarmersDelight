@@ -21,6 +21,11 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 public class BasketBlock extends Block
 {
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
@@ -34,10 +39,22 @@ public class BasketBlock extends Block
 		VoxelShapes.combineAndSimplify(OUT_SHAPE, Block.makeCuboidShape(2.0D, 2.0D, 2.0D, 16.0D, 14.0D, 14.0D), IBooleanFunction.ONLY_FIRST)  // east
 	};
 
+	public static final Map<Direction, VoxelShape> SHAPE_FACING = mapVoxelShapes();
+
+	private static Map<Direction, VoxelShape> mapVoxelShapes() {
+		Map<Direction, VoxelShape> result = new HashMap<>();
+		result.put(Direction.DOWN, VoxelShapes.combineAndSimplify(OUT_SHAPE, Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D), IBooleanFunction.ONLY_FIRST));
+		result.put(Direction.UP, VoxelShapes.combineAndSimplify(OUT_SHAPE, Block.makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 16.0D, 14.0D), IBooleanFunction.ONLY_FIRST));
+		result.put(Direction.NORTH, VoxelShapes.combineAndSimplify(OUT_SHAPE, Block.makeCuboidShape(2.0D, 2.0D, 0.0D, 14.0D, 14.0D, 14.0D), IBooleanFunction.ONLY_FIRST));
+		result.put(Direction.SOUTH, VoxelShapes.combineAndSimplify(OUT_SHAPE, Block.makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 14.0D, 16.0D), IBooleanFunction.ONLY_FIRST));
+		result.put(Direction.WEST, VoxelShapes.combineAndSimplify(OUT_SHAPE, Block.makeCuboidShape(0.0D, 2.0D, 2.0D, 14.0D, 14.0D, 14.0D), IBooleanFunction.ONLY_FIRST));
+		result.put(Direction.EAST, VoxelShapes.combineAndSimplify(OUT_SHAPE, Block.makeCuboidShape(2.0D, 2.0D, 2.0D, 16.0D, 14.0D, 14.0D), IBooleanFunction.ONLY_FIRST));
+		return result;
+	}
+
 	public BasketBlock()
 	{
-		super(Properties.create(Material.WOOD)
-				.hardnessAndResistance(0.6F).sound(SoundType.WOOD));
+		super(Properties.create(Material.WOOD).hardnessAndResistance(0.6F).sound(SoundType.WOOD));
 	}
 
 	public BasketBlock(Block.Properties properties) {
@@ -57,7 +74,7 @@ public class BasketBlock extends Block
 	}
 
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return SHAPES_FACING[state.get(FACING).getIndex()];
+		return SHAPE_FACING.get(state.get(FACING));
 	}
 
 	public VoxelShape getRaytraceShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
@@ -65,7 +82,7 @@ public class BasketBlock extends Block
 	}
 
 	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return SHAPES_FACING[state.get(FACING).getIndex()];
+		return SHAPE_FACING.get(state.get(FACING));
 	}
 
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {

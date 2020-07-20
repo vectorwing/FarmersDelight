@@ -8,7 +8,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class BlockInit
+public class ModBlocks
 {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FarmersDelight.MODID);
 
@@ -24,4 +24,6 @@ public class BlockInit
 			() -> new OnionsBlock(Block.Properties.from(Blocks.WHEAT)));
 	public static final RegistryObject<Block> TOMATO_CROP = BLOCKS.register("tomatoes",
 			() -> new TomatoesBlock(Block.Properties.from(Blocks.WHEAT)));
+	public static final RegistryObject<Block> RICE_CROP = BLOCKS.register("rice_crop",
+			() -> new RiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
 }

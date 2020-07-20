@@ -14,7 +14,7 @@ import net.minecraft.util.IntArray;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import vectorwing.farmersdelight.blocks.CookingPotTileEntity;
-import vectorwing.farmersdelight.init.BlockInit;
+import vectorwing.farmersdelight.init.ModBlocks;
 import vectorwing.farmersdelight.init.ModContainerTypes;
 
 import java.util.Objects;
@@ -88,7 +88,7 @@ public class CookingPotContainer extends Container
 
 	@Override
 	public boolean canInteractWith(PlayerEntity playerIn) {
-		return isWithinUsableDistance(canInteractWithCallable, playerIn, BlockInit.COOKING_POT.get());
+		return isWithinUsableDistance(canInteractWithCallable, playerIn, ModBlocks.COOKING_POT.get());
 	}
 
 	@Override

@@ -13,7 +13,7 @@ public class TileEntityInit
 	public static final DeferredRegister<TileEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, FarmersDelight.MODID);
 
 	public static final RegistryObject<TileEntityType<StoveTileEntity>> STOVE_TILE = TILES.register("stove",
-			() -> TileEntityType.Builder.create(StoveTileEntity::new, BlockInit.STOVE.get()).build(null));
+			() -> TileEntityType.Builder.create(StoveTileEntity::new, ModBlocks.STOVE.get()).build(null));
 	public static final RegistryObject<TileEntityType<CookingPotTileEntity>> COOKING_POT_TILE = TILES.register("cooking_pot",
-			() -> TileEntityType.Builder.create(CookingPotTileEntity::new, BlockInit.COOKING_POT.get()).build(null));
+			() -> TileEntityType.Builder.create(CookingPotTileEntity::new, ModBlocks.COOKING_POT.get()).build(null));
 }

@@ -6,9 +6,9 @@
   "block.farmersdelight.cabbages": "Cabbage Seeds",
   "block.farmersdelight.onions": "Onion",
   "block.farmersdelight.tomatoes": "Tomato Seeds",
+  "block.farmersdelight.rice_crop": "Rice",
 
   "item.farmersdelight.tomato": "Tomato",
-  "item.farmersdelight.rice": "Rice",
   "item.farmersdelight.cabbage": "Cabbage",
   "item.farmersdelight.rice_panicle": "Rice Panicle",
 
@@ -40,8 +40,10 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "container.farmersdelight.cooking_pot": "Cooking Pot",
+  "farmersdelight.container.cooking_pot": "Cooking Pot",
+  "farmersdelight.container.cooking_pot.served_on": "Served on: %s",
 
-  "farmersdelight.tooltip.meal_served_on": "Served on: ",
-  "farmersdelight.tooltip.cooking_pot.servings": "Holds %s servings of:"
+  "farmersdelight.tooltip.cooking_pot.empty": "Empty",
+  "farmersdelight.tooltip.cooking_pot.single_serving": "Holds 1 serving of:",
+  "farmersdelight.tooltip.cooking_pot.many_servings": "Holds %s servings of:"
 }
