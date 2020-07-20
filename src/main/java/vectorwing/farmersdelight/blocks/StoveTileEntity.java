@@ -20,6 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
+import vectorwing.farmersdelight.utils.Utils;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -36,7 +37,7 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 		super(tileEntityTypeIn);
 	}
 
-	public StoveTileEntity()	{ this(TileEntityInit.STOVE_TILE.get()); }
+	public StoveTileEntity() { this(TileEntityInit.STOVE_TILE.get()); }
 
 	@Override
 	public void tick() {
@@ -71,7 +72,7 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 					}).orElse(itemstack);
 					if (world != null && !itemstack1.isEmpty()) {
 						ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, itemstack1.copy());
-						entity.setMotion(0, 0, 0);
+						entity.setMotion(Utils.RAND.nextGaussian() * (double)0.01F, 0.1F, Utils.RAND.nextGaussian() * (double)0.01F);
 						world.addEntity(entity);
 					}
 					this.inventory.set(i, ItemStack.EMPTY);

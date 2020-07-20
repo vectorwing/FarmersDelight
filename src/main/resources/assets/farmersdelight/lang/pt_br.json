@@ -1,18 +1,19 @@
 {
   "block.farmersdelight.stove": "Fogão",
   "block.farmersdelight.cooking_pot": "Panela",
+  "block.farmersdelight.basket": "Cesto",
 
   "block.farmersdelight.cabbages": "Sementes de repolho",
   "block.farmersdelight.onions": "Cebola",
   "block.farmersdelight.tomatoes": "Sementes de tomate",
+  "block.farmersdelight.rice_crop": "Arroz",
 
   "item.farmersdelight.tomato": "Tomate",
-  "item.farmersdelight.rice": "Arroz",
   "item.farmersdelight.cabbage": "Repolho",
   "item.farmersdelight.rice_panicle": "Panícula de arroz",
 
   "item.farmersdelight.tomato_sauce": "Molho de tomate",
-  "item.farmersdelight.milk_bottle": "Garrafa de leite",
+  "item.farmersdelight.milk_bottle": "Frasco de leite",
   "item.farmersdelight.fried_egg": "Ovo frito",
   "item.farmersdelight.raw_pasta": "Macarrão cru",
   "item.farmersdelight.cake_slice": "Fatia de bolo",
@@ -23,10 +24,26 @@
   "item.farmersdelight.golden_knife": "Faca de ouro",
   "item.farmersdelight.diamond_knife": "Faca de diamante",
 
-  "item.farmersdelight.fresh_salad": "Salada mista",
+  "item.farmersdelight.mixed_salad": "Salada mista",
   "item.farmersdelight.barbecue_stick": "Churrasco no palito",
   "item.farmersdelight.chicken_sandwich": "Sanduíche de frango",
   "item.farmersdelight.hamburger": "Hambúrguer",
+  "item.farmersdelight.beef_stew": "Ensopado de carne",
+  "item.farmersdelight.chicken_soup": "Sopa de frango",
+  "item.farmersdelight.vegetable_soup": "Sopa de legumes",
+  "item.farmersdelight.fish_stew": "Ensopado de peixe",
+  "item.farmersdelight.fried_rice": "Arroz frito",
+  "item.farmersdelight.honey_glazed_ham": "Presunto caramelado",
+  "item.farmersdelight.pasta_with_meatballs": "Macarrão com almôndegas",
+  "item.farmersdelight.steak_and_potatoes": "Bife com batatas",
+  "item.farmersdelight.vegetable_noodles": "Macarrão com legumes",
 
-  "itemGroup.farmersdelight": "Farmer's Delight"
+  "itemGroup.farmersdelight": "Farmer's Delight",
+
+  "farmersdelight.container.cooking_pot": "Panela",
+  "farmersdelight.containercooking_pot.served_on": "Servido em: ",
+
+  "farmersdelight.tooltip.cooking_pot.empty": "Vazia",
+  "farmersdelight.tooltip.cooking_pot.single_serving": "Contém 1 porção de:",
+  "farmersdelight.tooltip.cooking_pot.many_servings": "Contém %s porções de:"
 }

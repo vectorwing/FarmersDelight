@@ -3,8 +3,8 @@ package vectorwing.farmersdelight;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import vectorwing.farmersdelight.init.BlockInit;
-import vectorwing.farmersdelight.init.ItemInit;
+import vectorwing.farmersdelight.init.ModBlocks;
+import vectorwing.farmersdelight.init.ModItems;
 
 public class CreativeTab extends ItemGroup
 {
@@ -15,7 +15,7 @@ public class CreativeTab extends ItemGroup
 
 	@Override
 	public ItemStack createIcon() {
-		return new ItemStack(BlockInit.COOKING_POT.get());
+		return new ItemStack(ModBlocks.COOKING_POT.get());
 	}
 
 	@Override
@@ -28,34 +28,43 @@ public class CreativeTab extends ItemGroup
 	}
 
 	private void registerWorkstations(NonNullList<ItemStack> items) {
-		items.add(new ItemStack(BlockInit.STOVE.get()));
-		items.add(new ItemStack(BlockInit.COOKING_POT.get()));
+		items.add(new ItemStack(ModBlocks.STOVE.get()));
+		items.add(new ItemStack(ModBlocks.COOKING_POT.get()));
+		items.add(new ItemStack(ModBlocks.BASKET.get()));
 	}
 	private void registerCrops(NonNullList<ItemStack> items) {
-		items.add(new ItemStack(ItemInit.CABBAGE.get()));
-		items.add(new ItemStack(ItemInit.TOMATO.get()));
-		items.add(new ItemStack(ItemInit.ONION.get()));
-		items.add(new ItemStack(ItemInit.RICE.get()));
-		items.add(new ItemStack(ItemInit.CABBAGE_SEEDS.get()));
-		items.add(new ItemStack(ItemInit.TOMATO_SEEDS.get()));
+		items.add(new ItemStack(ModItems.CABBAGE.get()));
+		items.add(new ItemStack(ModItems.TOMATO.get()));
+		items.add(new ItemStack(ModItems.ONION.get()));
+		items.add(new ItemStack(ModItems.RICE.get()));
+		items.add(new ItemStack(ModItems.CABBAGE_SEEDS.get()));
+		items.add(new ItemStack(ModItems.TOMATO_SEEDS.get()));
 	}
 	private void registerIngredients(NonNullList<ItemStack> items) {
-		items.add(new ItemStack(ItemInit.FRIED_EGG.get()));
-		items.add(new ItemStack(ItemInit.MILK_BOTTLE.get()));
-		items.add(new ItemStack(ItemInit.TOMATO_SAUCE.get()));
-		items.add(new ItemStack(ItemInit.RAW_PASTA.get()));
-		items.add(new ItemStack(ItemInit.CAKE_SLICE.get()));
+		items.add(new ItemStack(ModItems.FRIED_EGG.get()));
+		items.add(new ItemStack(ModItems.MILK_BOTTLE.get()));
+		items.add(new ItemStack(ModItems.TOMATO_SAUCE.get()));
+		items.add(new ItemStack(ModItems.RAW_PASTA.get()));
+		items.add(new ItemStack(ModItems.CAKE_SLICE.get()));
 	}
 	private void registerTools(NonNullList<ItemStack> items) {
-		items.add(new ItemStack(ItemInit.FLINT_KNIFE.get()));
-		items.add(new ItemStack(ItemInit.IRON_KNIFE.get()));
-		items.add(new ItemStack(ItemInit.DIAMOND_KNIFE.get()));
-		items.add(new ItemStack(ItemInit.GOLDEN_KNIFE.get()));
+		items.add(new ItemStack(ModItems.FLINT_KNIFE.get()));
+		items.add(new ItemStack(ModItems.IRON_KNIFE.get()));
+		items.add(new ItemStack(ModItems.DIAMOND_KNIFE.get()));
+		items.add(new ItemStack(ModItems.GOLDEN_KNIFE.get()));
 	}
 	private void registerMeals(NonNullList<ItemStack> items) {
-		items.add(new ItemStack(ItemInit.FRESH_SALAD.get()));
-		items.add(new ItemStack(ItemInit.BARBECUE_STICK.get()));
-		items.add(new ItemStack(ItemInit.CHICKEN_SANDWICH.get()));
-		items.add(new ItemStack(ItemInit.HAMBURGER.get()));
+		items.add(new ItemStack(ModItems.MIXED_SALAD.get()));
+		items.add(new ItemStack(ModItems.BARBECUE_STICK.get()));
+		items.add(new ItemStack(ModItems.CHICKEN_SANDWICH.get()));
+		items.add(new ItemStack(ModItems.HAMBURGER.get()));
+		items.add(new ItemStack(ModItems.BEEF_STEW.get()));
+		items.add(new ItemStack(ModItems.CHICKEN_SOUP.get()));
+		items.add(new ItemStack(ModItems.FISH_STEW.get()));
+		items.add(new ItemStack(ModItems.FRIED_RICE.get()));
+		items.add(new ItemStack(ModItems.HONEY_GLAZED_HAM.get()));
+		items.add(new ItemStack(ModItems.PASTA_WITH_MEATBALLS.get()));
+		items.add(new ItemStack(ModItems.STEAK_AND_POTATOES.get()));
+		items.add(new ItemStack(ModItems.VEGETABLE_NOODLES.get()));
 	}
 }

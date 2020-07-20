@@ -1,7 +1,5 @@
 package vectorwing.farmersdelight.blocks;
 
-
-import vectorwing.farmersdelight.init.ItemInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropsBlock;
@@ -10,6 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
+import vectorwing.farmersdelight.init.ModItems;
 
 public class CabbagesBlock extends CropsBlock
 {
@@ -31,7 +30,7 @@ public class CabbagesBlock extends CropsBlock
 
 	@Override
 	protected IItemProvider getSeedsItem() {
-		return ItemInit.CABBAGE_SEEDS.get();
+		return ModItems.CABBAGE_SEEDS.get();
 	}
 
 	@Override

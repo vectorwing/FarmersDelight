@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.setup.loot;
 
-import vectorwing.farmersdelight.init.ItemInit;
+import vectorwing.farmersdelight.init.ModItems;
 import com.google.gson.JsonObject;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
@@ -42,7 +42,7 @@ public class CakeSliceLoot
 			BlockState state = context.get(LootParameters.BLOCK_STATE);
 			if(state.has(BlockStateProperties.BITES_0_6)) {
 				int bites = state.get(BlockStateProperties.BITES_0_6);
-				generatedLoot.add(new ItemStack(ItemInit.CAKE_SLICE.get(), TOTAL_SLICES - bites));
+				generatedLoot.add(new ItemStack(ModItems.CAKE_SLICE.get(), TOTAL_SLICES - bites));
 			}
 			return generatedLoot;
 		}

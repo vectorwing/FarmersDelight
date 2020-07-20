@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.blocks;
 
 
-import vectorwing.farmersdelight.init.ItemInit;
+import vectorwing.farmersdelight.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropsBlock;
@@ -31,7 +31,7 @@ public class OnionsBlock extends CropsBlock
 
 	@Override
 	protected IItemProvider getSeedsItem() {
-		return ItemInit.ONION.get();
+		return ModItems.ONION.get();
 	}
 
 	@Override

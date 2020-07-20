@@ -1,13 +1,14 @@
 {
   "block.farmersdelight.stove": "Stove",
   "block.farmersdelight.cooking_pot": "Cooking Pot",
+  "block.farmersdelight.basket": "Basket",
 
   "block.farmersdelight.cabbages": "Cabbage Seeds",
   "block.farmersdelight.onions": "Onion",
   "block.farmersdelight.tomatoes": "Tomato Seeds",
+  "block.farmersdelight.rice_crop": "Rice",
 
   "item.farmersdelight.tomato": "Tomato",
-  "item.farmersdelight.rice": "Rice",
   "item.farmersdelight.cabbage": "Cabbage",
   "item.farmersdelight.rice_panicle": "Rice Panicle",
 
@@ -23,10 +24,26 @@
   "item.farmersdelight.golden_knife": "Golden Knife",
   "item.farmersdelight.diamond_knife": "Diamond Knife",
 
-  "item.farmersdelight.fresh_salad": "Mixed Salad",
+  "item.farmersdelight.mixed_salad": "Mixed Salad",
   "item.farmersdelight.barbecue_stick": "Barbecue on a Stick",
   "item.farmersdelight.chicken_sandwich": "Chicken Sandwich",
   "item.farmersdelight.hamburger": "Hamburger",
+  "item.farmersdelight.beef_stew": "Beef Stew",
+  "item.farmersdelight.chicken_soup": "Chicken Soup",
+  "item.farmersdelight.vegetable_soup": "Vegetable Soup",
+  "item.farmersdelight.fish_stew": "Fish Stew",
+  "item.farmersdelight.fried_rice": "Fried Rice",
+  "item.farmersdelight.honey_glazed_ham": "Honey Glazed Ham",
+  "item.farmersdelight.pasta_with_meatballs": "Pasta with Meatballs",
+  "item.farmersdelight.steak_and_potatoes": "Steak and Potatoes",
+  "item.farmersdelight.vegetable_noodles": "Vegetable Noodles",
 
-  "itemGroup.farmersdelight": "Farmer's Delight"
+  "itemGroup.farmersdelight": "Farmer's Delight",
+
+  "farmersdelight.container.cooking_pot": "Cooking Pot",
+  "farmersdelight.container.cooking_pot.served_on": "Served on: %s",
+
+  "farmersdelight.tooltip.cooking_pot.empty": "Empty",
+  "farmersdelight.tooltip.cooking_pot.single_serving": "Holds 1 serving of:",
+  "farmersdelight.tooltip.cooking_pot.many_servings": "Holds %s servings of:"
 }
