@@ -54,15 +54,5 @@ public class FarmersDelight
 
     @SubscribeEvent
     public static void onRegisterItems(final RegistryEvent.Register<Item> event) {
-        final IForgeRegistry<Item> registry = event.getRegistry();
-
-//        ModBlocks.BLOCKS.getEntries().stream()
-//                .filter(block -> !(block.get() instanceof CropsBlock))
-//                .map(RegistryObject::get).forEach(block -> {
-//            final Item.Properties properties = new Item.Properties().group(FarmersDelight.ITEM_GROUP);
-//            final BlockItem blockItem = new BlockItem(block, properties);
-//            blockItem.setRegistryName(block.getRegistryName());
-//            registry.register(blockItem);
-//        });
     }
 }

@@ -30,15 +30,6 @@ public class BasketBlock extends Block
 {
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
 	public static final VoxelShape OUT_SHAPE = VoxelShapes.fullCube();
-	public static final VoxelShape[] SHAPES_FACING = new VoxelShape[] {
-		VoxelShapes.combineAndSimplify(OUT_SHAPE, Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D), IBooleanFunction.ONLY_FIRST), // down
-		VoxelShapes.combineAndSimplify(OUT_SHAPE, Block.makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 16.0D, 14.0D), IBooleanFunction.ONLY_FIRST), // up
-		VoxelShapes.combineAndSimplify(OUT_SHAPE, Block.makeCuboidShape(2.0D, 2.0D, 0.0D, 14.0D, 14.0D, 14.0D), IBooleanFunction.ONLY_FIRST), // north
-		VoxelShapes.combineAndSimplify(OUT_SHAPE, Block.makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 14.0D, 16.0D), IBooleanFunction.ONLY_FIRST), // south
-		VoxelShapes.combineAndSimplify(OUT_SHAPE, Block.makeCuboidShape(0.0D, 2.0D, 0.0D, 14.0D, 14.0D, 14.0D), IBooleanFunction.ONLY_FIRST), // west
-		VoxelShapes.combineAndSimplify(OUT_SHAPE, Block.makeCuboidShape(2.0D, 2.0D, 2.0D, 16.0D, 14.0D, 14.0D), IBooleanFunction.ONLY_FIRST)  // east
-	};
-
 	public static final Map<Direction, VoxelShape> SHAPE_FACING = mapVoxelShapes();
 
 	private static Map<Direction, VoxelShape> mapVoxelShapes() {
