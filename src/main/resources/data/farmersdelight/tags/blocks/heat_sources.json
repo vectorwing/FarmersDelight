@@ -1,0 +1,8 @@
+{
+  "replace": "false",
+  "values": [
+    "minecraft:fire",
+    "minecraft:lava",
+    "minecraft:magma_block"
+  ]
+}

@@ -18,6 +18,7 @@ import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.RecipeItemHelper;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IIntArray;
@@ -38,6 +39,7 @@ import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.container.CookingPotContainer;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.init.TileEntityInit;
+import vectorwing.farmersdelight.utils.Tags;
 import vectorwing.farmersdelight.utils.Text;
 
 import javax.annotation.Nonnull;
@@ -235,8 +237,12 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 		if (world == null)
 			return false;
 		BlockState checkState = world.getBlockState(pos.down());
-		// TODO: Check for a tag of HEAT_SOURCES and a potential LIT state instead.
-		return checkState.getBlock() instanceof StoveBlock && checkState.get(StoveBlock.LIT);
+		if (Tags.HEAT_SOURCES.contains(checkState.getBlock())) {
+			return true;
+		} else if (Tags.LIT_HEAT_SOURCES.contains(checkState.getBlock())) {
+			return checkState.get(BlockStateProperties.LIT);
+		}
+		return false;
 	}
 
 	@Override

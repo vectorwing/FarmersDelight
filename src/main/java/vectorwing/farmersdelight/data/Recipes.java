@@ -12,6 +12,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
+import vectorwing.farmersdelight.utils.Tags;
 
 import java.util.function.Consumer;
 
@@ -132,7 +133,7 @@ public class Recipes extends RecipeProvider
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CAKE_SLICE.get(), 7)
 				.addIngredient(Blocks.CAKE)
-				.addIngredient(new ItemTags.Wrapper(new ResourceLocation("forge", "knives")))
+				.addIngredient(Tags.KNIVES)
 				.addCriterion("cake", InventoryChangeTrigger.Instance.forItems(Blocks.CAKE))
 				.build(consumer);
 	}
