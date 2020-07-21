@@ -32,11 +32,11 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 	public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 4);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {
+			Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D),
+			Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D),
 			Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 9.0D, 11.0D),
-			Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D),
-			Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D),
-			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D),
-			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)};
+			Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 9.0D, 11.0D),
+			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 12.0D, 16.0D, 12.0D)};
 
 	public RiceCropBlock(Properties builder) {
 		super(builder);
@@ -45,20 +45,22 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
 		super.tick(state, worldIn, pos, rand);
-		if (!worldIn.isAreaLoaded(pos, 1)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light
+		if (!worldIn.isAreaLoaded(pos, 1)) return;
 		if (worldIn.getLightSubtracted(pos, 0) >= 6) {
 			int i = this.getAge(state);
 			if (i < this.getMaxAge()) {
-				float f = getGrowthChance(this, worldIn, pos);
+				float f = 10;
 				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt((int)(25.0F / f) + 1) == 0)) {
-					if (i == 5) {
+					if (i == 4) {
 						TallRiceCropBlock tallRice = (TallRiceCropBlock) ModBlocks.TALL_RICE_CROP.get();
 						if (tallRice.getDefaultState().isValidPosition(worldIn, pos) && worldIn.isAirBlock(pos.up())) {
 							tallRice.placeAt(worldIn, pos, 2, 6);
+							net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 						}
+					} else {
+						worldIn.setBlockState(pos, this.withAge(i + 1), 2);
+						net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 					}
-					worldIn.setBlockState(pos, this.withAge(i + 1), 2);
-					net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 				}
 			}
 		}
@@ -66,14 +68,16 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 	}
 
 	public void grow(World worldIn, BlockPos pos, BlockState state) {
-		int newAge = this.getAge(state) + this.getBonemealAgeIncrease(worldIn);
-		int maxAge = 7;
-		if (newAge > maxAge) newAge = maxAge;
-		if (newAge <= 5) {
-			worldIn.setBlockState(pos, state.with(AGE, newAge));
+		int i = this.getAge(state) + this.getBonemealAgeIncrease(worldIn);
+		int j = 7;
+		if (i > j) i = j;
+		if (i <= 4) {
+			worldIn.setBlockState(pos, state.with(AGE, i));
 		} else {
-			worldIn.setBlockState(pos.up(), Blocks.DIRT.getDefaultState(), 2);
-			// TODO: Place DoubleRiceCrop above this block
+			TallRiceCropBlock tallRice = (TallRiceCropBlock)ModBlocks.TALL_RICE_CROP.get();
+			if (tallRice.getDefaultState().isValidPosition(worldIn, pos) && worldIn.isAirBlock(pos.up())) {
+				tallRice.placeAt(worldIn, pos, 2, i);
+			}
 		}
 	}
 

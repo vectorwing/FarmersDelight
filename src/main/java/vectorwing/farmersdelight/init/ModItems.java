@@ -29,7 +29,7 @@ public class ModItems
 	public static final RegistryObject<Item> ONION = ITEMS.register("onion",
 			() -> new BlockItem(ModBlocks.ONION_CROP.get(), new Item.Properties().food(Foods.ONION).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> RICE = ITEMS.register("rice",
-			() -> new BlockItem(ModBlocks.TALL_RICE_CROP.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+			() -> new BlockItem(ModBlocks.RICE_CROP.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> CABBAGE_SEEDS = ITEMS.register("cabbage_seeds", () -> new BlockItem(ModBlocks.CABBAGE_CROP.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds", () -> new BlockItem(ModBlocks.TOMATO_CROP.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
