@@ -36,7 +36,7 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 			Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D),
 			Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 9.0D, 11.0D),
 			Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 9.0D, 11.0D),
-			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 12.0D, 16.0D, 12.0D)};
+			Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D)};
 
 	public RiceCropBlock(Properties builder) {
 		super(builder);
@@ -107,7 +107,7 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 	}
 
 	public int getMaxAge() {
-		return 5;
+		return 4;
 	}
 
 	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
