@@ -26,4 +26,6 @@ public class ModBlocks
 			() -> new TomatoesBlock(Block.Properties.from(Blocks.WHEAT)));
 	public static final RegistryObject<Block> RICE_CROP = BLOCKS.register("rice_crop",
 			() -> new RiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
+	public static final RegistryObject<Block> TALL_RICE_CROP = BLOCKS.register("tall_rice_crop",
+			() -> new TallRiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
 }

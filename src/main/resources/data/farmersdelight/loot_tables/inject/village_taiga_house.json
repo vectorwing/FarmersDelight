@@ -52,6 +52,21 @@
             }
           ],
           "name": "farmersdelight:onion"
+        },
+        {
+          "type": "item",
+          "weight": 6,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2.0,
+                "max": 4.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "farmersdelight:rice"
         }
       ]
     }

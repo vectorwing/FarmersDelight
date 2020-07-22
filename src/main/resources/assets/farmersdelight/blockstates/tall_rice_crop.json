@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=upper,age=5":  { "model": "farmersdelight:block/tall_rice_stage3_upper" },
+    "half=lower,age=5":  { "model": "farmersdelight:block/tall_rice_stage3" },
+    "half=upper,age=6":  { "model": "farmersdelight:block/tall_rice_stage4_upper" },
+    "half=lower,age=6":  { "model": "farmersdelight:block/tall_rice_stage4" },
+    "half=upper,age=7":  { "model": "farmersdelight:block/tall_rice_stage5_upper" },
+    "half=lower,age=7":  { "model": "farmersdelight:block/tall_rice_stage5" }
+  }
+}

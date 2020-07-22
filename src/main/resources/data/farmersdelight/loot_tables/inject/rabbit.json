@@ -1,0 +1,50 @@
+{
+  "pools": [
+    {
+      "name": "pool1",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:rabbit"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:entity_properties",
+          "predicate": {
+            "equipment": {
+              "mainhand": {
+                "tag": "farmersdelight:knives"
+              }
+            }
+          },
+          "entity": "killer"
+        }
+      ]
+    },
+    {
+      "name": "pool1",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:rabbit_hide"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:entity_properties",
+          "predicate": {
+            "equipment": {
+              "mainhand": {
+                "tag": "farmersdelight:knives"
+              }
+            }
+          },
+          "entity": "killer"
+        }
+      ]
+    }
+  ]
+}
