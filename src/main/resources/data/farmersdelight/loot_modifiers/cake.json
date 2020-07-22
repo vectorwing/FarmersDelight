@@ -8,7 +8,7 @@
       }
     },
     {
-      "condition": "block_state_property",
+      "condition": "minecraft:block_state_property",
       "block": "minecraft:cake"
     }
   ]

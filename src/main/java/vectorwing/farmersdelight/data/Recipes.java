@@ -133,7 +133,7 @@ public class Recipes extends RecipeProvider
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CAKE_SLICE.get(), 7)
 				.addIngredient(Blocks.CAKE)
-				.addIngredient(Tags.KNIVES)
+				.addIngredient(Tags.FORGE_KNIVES)
 				.addCriterion("cake", InventoryChangeTrigger.Instance.forItems(Blocks.CAKE))
 				.build(consumer);
 	}
