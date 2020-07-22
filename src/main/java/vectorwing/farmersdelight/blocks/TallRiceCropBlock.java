@@ -168,7 +168,6 @@ public class TallRiceCropBlock extends BushBlock implements IWaterLoggable, IGro
 			worldIn.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
 			if (!worldIn.isRemote && !player.isCreative()) {
 				spawnDrops(state, worldIn, pos, (TileEntity)null, player, player.getHeldItemMainhand());
-				//spawnDrops(blockstate, worldIn, blockpos, (TileEntity)null, player, player.getHeldItemMainhand());
 			}
 		}
 
