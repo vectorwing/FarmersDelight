@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.blocks;
 
-import vectorwing.farmersdelight.init.TileEntityInit;
+import vectorwing.farmersdelight.init.ModTileEntityTypes;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
@@ -138,6 +138,6 @@ public class StoveBlock extends Block
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world)
 	{
-		return TileEntityInit.STOVE_TILE.get().create();
+		return ModTileEntityTypes.STOVE_TILE.get().create();
 	}
 }

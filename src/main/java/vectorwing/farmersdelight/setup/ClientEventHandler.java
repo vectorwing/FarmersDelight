@@ -6,7 +6,7 @@ import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.client.tileentity.renderer.StoveTileEntityRenderer;
 import vectorwing.farmersdelight.init.ModBlocks;
 import vectorwing.farmersdelight.init.ModContainerTypes;
-import vectorwing.farmersdelight.init.TileEntityInit;
+import vectorwing.farmersdelight.init.ModTileEntityTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.api.distmarker.Dist;
@@ -27,7 +27,7 @@ public class ClientEventHandler
 		RenderTypeLookup.setRenderLayer(ModBlocks.TOMATO_CROP.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.RICE_CROP.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.TALL_RICE_CROP.get(), RenderType.getCutout());
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.STOVE_TILE.get(),
+		ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.STOVE_TILE.get(),
 				StoveTileEntityRenderer::new);
 		ScreenManager.registerFactory(ModContainerTypes.COOKING_POT.get(), CookingPotScreen::new);
 	}

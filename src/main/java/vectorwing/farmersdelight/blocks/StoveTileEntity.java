@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.blocks;
 
-import vectorwing.farmersdelight.init.TileEntityInit;
+import vectorwing.farmersdelight.init.ModTileEntityTypes;
 import com.sun.javafx.geom.Vec2d;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.inventory.*;
@@ -37,7 +37,7 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 		super(tileEntityTypeIn);
 	}
 
-	public StoveTileEntity() { this(TileEntityInit.STOVE_TILE.get()); }
+	public StoveTileEntity() { this(ModTileEntityTypes.STOVE_TILE.get()); }
 
 	@Override
 	public void tick() {
