@@ -1,0 +1,31 @@
+{
+  "parent": "farmersdelight:main/craft_stove",
+  "display": {
+    "icon": {
+      "item": "farmersdelight:cooking_pot"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.place_cooking_pot"
+    },
+    "description": {
+      "translate": "farmersdelight.advancement.place_cooking_pot.desc"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "cooking_pot": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "farmersdelight:cooking_pot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "cooking_pot"
+    ]
+  ]
+}

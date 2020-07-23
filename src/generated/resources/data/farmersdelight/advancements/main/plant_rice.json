@@ -1,0 +1,31 @@
+{
+  "parent": "farmersdelight:main/craft_flint_knife",
+  "display": {
+    "icon": {
+      "item": "farmersdelight:rice_panicle"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.plant_rice"
+    },
+    "description": {
+      "translate": "farmersdelight.advancement.plant_rice.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "plant_rice": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "farmersdelight:rice_crop"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "plant_rice"
+    ]
+  ]
+}

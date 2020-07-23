@@ -1,0 +1,35 @@
+{
+  "parent": "farmersdelight:main/root",
+  "display": {
+    "icon": {
+      "item": "farmersdelight:stove"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.craft_stove"
+    },
+    "description": {
+      "translate": "farmersdelight.advancement.craft_stove.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "stove": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:stove"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "stove"
+    ]
+  ]
+}

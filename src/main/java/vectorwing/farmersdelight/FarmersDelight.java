@@ -9,10 +9,9 @@ import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.init.ModBlocks;
 import vectorwing.farmersdelight.init.ModItems;
 import vectorwing.farmersdelight.init.ModContainerTypes;
-import vectorwing.farmersdelight.init.TileEntityInit;
+import vectorwing.farmersdelight.init.ModTileEntityTypes;
 import vectorwing.farmersdelight.setup.ClientEventHandler;
 import vectorwing.farmersdelight.setup.CommonEventHandler;
-import net.minecraft.block.CropsBlock;
 import net.minecraft.item.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -45,7 +44,7 @@ public class FarmersDelight
 
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
-        TileEntityInit.TILES.register(modEventBus);
+        ModTileEntityTypes.TILES.register(modEventBus);
         ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);

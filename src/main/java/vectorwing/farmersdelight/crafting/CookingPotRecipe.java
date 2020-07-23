@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.*;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.NonNullList;
@@ -30,6 +31,7 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 	private final String group;
 	private final NonNullList<Ingredient> inputItems;
 	private final ItemStack output;
+	private final ItemStack container;
 
 	public CookingPotRecipe(ResourceLocation id, String group, NonNullList<Ingredient> inputItems, ItemStack output)
 	{
@@ -37,6 +39,7 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 		this.group = group;
 		this.inputItems = inputItems;
 		this.output = output;
+		this.container = output.getContainerItem() != ItemStack.EMPTY ? output.getContainerItem() : new ItemStack(Items.BOWL);
 	}
 
 	@Override
@@ -60,6 +63,8 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 	{
 		return this.output;
 	}
+
+	public ItemStack getOutputContainer() { return this.container; }
 
 	@Override
 	public ItemStack getCraftingResult(IInventory inv) {
@@ -118,8 +123,6 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 				throw new JsonParseException("Too many ingredients for cooking recipe! The max is " + CookingPotRecipe.INPUT_SLOTS);
 			} else {
 				final ItemStack outputIn = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
-				//LOGGER.info("[FD] Oh my goodness, we registered a recipe! Did it work?");
-				//LOGGER.info("[FD] This recipe's output is: " + outputIn.toString());
 				return new CookingPotRecipe(recipeId, groupIn, inputItemsIn, outputIn);
 			}
 		}

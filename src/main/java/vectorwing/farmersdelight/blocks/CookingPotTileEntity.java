@@ -38,7 +38,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.container.CookingPotContainer;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.init.TileEntityInit;
+import vectorwing.farmersdelight.init.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.Tags;
 import vectorwing.farmersdelight.utils.Text;
 
@@ -94,7 +94,7 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 		this.recipeType = recipeTypeIn;
 	}
 
-	public CookingPotTileEntity() {	this(TileEntityInit.COOKING_POT_TILE.get(), CookingPotRecipe.TYPE); }
+	public CookingPotTileEntity() {	this(ModTileEntityTypes.COOKING_POT_TILE.get(), CookingPotRecipe.TYPE); }
 
 	@Override
 	public void tick()
@@ -106,7 +106,7 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 			// Process ingredients
 			if (isHeated && this.hasInput()) {
 				IRecipe<?> irecipe = this.world.getRecipeManager()
-						.getRecipe((IRecipeType<CookingPotRecipe>)this.recipeType, this, this.world).orElse(null);
+						.getRecipe(this.recipeType, this, this.world).orElse(null);
 				if (this.canCook(irecipe)) {
 					++this.cookTime;
 					if (this.cookTime == this.cookTimeTotal) {

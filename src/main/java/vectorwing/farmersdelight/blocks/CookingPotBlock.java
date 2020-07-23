@@ -31,7 +31,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 import vectorwing.farmersdelight.init.ModItems;
-import vectorwing.farmersdelight.init.TileEntityInit;
+import vectorwing.farmersdelight.init.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.Text;
 
 import javax.annotation.Nullable;
@@ -163,6 +163,6 @@ public class CookingPotBlock extends Block
 
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return TileEntityInit.COOKING_POT_TILE.get().create();
+		return ModTileEntityTypes.COOKING_POT_TILE.get().create();
 	}
 }

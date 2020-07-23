@@ -39,13 +39,15 @@ public class Foods
 			.hunger(8).saturation(0.8f).build();
 	public static final Food FRIED_RICE = (new Food.Builder())
 			.hunger(8).saturation(0.8f).build();
-	public static final Food HONEY_GLAZED_HAM = (new Food.Builder())
-			.hunger(14).saturation(1.0f).build();
-	public static final Food PASTA_WITH_MEATBALLS = (new Food.Builder())
-			.hunger(12).saturation(1.0f).build();
 	public static final Food STEAK_AND_POTATOES = (new Food.Builder())
 			.hunger(10).saturation(0.8f).build();
+
+	// Hearty Meals (2 Stars)
+	public static final Food HONEY_GLAZED_HAM = (new Food.Builder())
+			.hunger(14).saturation(0.9f).build();
+	public static final Food PASTA_WITH_MEATBALLS = (new Food.Builder())
+			.hunger(12).saturation(0.9f).build();
 	public static final Food VEGETABLE_NOODLES = (new Food.Builder())
-			.hunger(12).saturation(1.0f).build();
+			.hunger(14).saturation(0.9f).build();
 
 }

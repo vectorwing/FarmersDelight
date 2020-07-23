@@ -60,6 +60,7 @@ public class CreativeTab extends ItemGroup
 		items.add(new ItemStack(ModItems.HAMBURGER.get()));
 		items.add(new ItemStack(ModItems.BEEF_STEW.get()));
 		items.add(new ItemStack(ModItems.CHICKEN_SOUP.get()));
+		items.add(new ItemStack(ModItems.VEGETABLE_SOUP.get()));
 		items.add(new ItemStack(ModItems.FISH_STEW.get()));
 		items.add(new ItemStack(ModItems.FRIED_RICE.get()));
 		items.add(new ItemStack(ModItems.HONEY_GLAZED_HAM.get()));
