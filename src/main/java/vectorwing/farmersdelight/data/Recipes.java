@@ -28,7 +28,8 @@ public class Recipes extends RecipeProvider
 		recipesSmelting(consumer);
 		recipesBlocks(consumer);
 		recipesTools(consumer);
-		recipesIngredients(consumer);
+		recipesMaterials(consumer);
+		recipesFoodstuffs(consumer);
 		recipesCraftedMeals(consumer);
 		//recipesCookedMeals(consumer);
 	}
@@ -71,6 +72,14 @@ public class Recipes extends RecipeProvider
 				.key('S', Items.WOODEN_SHOVEL)
 				.addCriterion("iron_ingot", InventoryChangeTrigger.Instance.forItems(Items.IRON_INGOT))
 				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModBlocks.BASKET.get())
+				.patternLine("b b")
+				.patternLine("# #")
+				.patternLine("b#b")
+				.key('b', Items.BAMBOO)
+				.key('#', ModItems.CANVAS.get())
+				.addCriterion("canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
+				.build(consumer);
 	}
 	private void recipesTools(Consumer<IFinishedRecipe> consumer) {
 		ShapedRecipeBuilder.shapedRecipe(ModItems.FLINT_KNIFE.get())
@@ -102,7 +111,17 @@ public class Recipes extends RecipeProvider
 				.addCriterion("gold_ingot", InventoryChangeTrigger.Instance.forItems(Items.GOLD_INGOT))
 				.build(consumer);
 	}
-	private void recipesIngredients(Consumer<IFinishedRecipe> consumer) {
+
+	private void recipesMaterials(Consumer<IFinishedRecipe> consumer) {
+		ShapedRecipeBuilder.shapedRecipe(ModItems.CANVAS.get())
+				.patternLine("##")
+				.patternLine("##")
+				.key('#', ModItems.STRAW.get())
+				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
+				.build(consumer);
+	}
+
+	private void recipesFoodstuffs(Consumer<IFinishedRecipe> consumer) {
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CABBAGE_SEEDS.get())
 				.addIngredient(ModItems.CABBAGE.get())
 				.addCriterion("cabbage", InventoryChangeTrigger.Instance.forItems(ModItems.CABBAGE.get()))
@@ -135,6 +154,18 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Blocks.CAKE)
 				.addIngredient(Tags.FORGE_KNIVES)
 				.addCriterion("cake", InventoryChangeTrigger.Instance.forItems(Blocks.CAKE))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.SWEET_BERRY_COOKIE.get(), 8)
+				.addIngredient(Items.WHEAT)
+				.addIngredient(Items.SWEET_BERRIES)
+				.addIngredient(Items.WHEAT)
+				.addCriterion("sweet_berries", InventoryChangeTrigger.Instance.forItems(Items.SWEET_BERRIES))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.HONEY_COOKIE.get(), 8)
+				.addIngredient(Items.WHEAT)
+				.addIngredient(Items.HONEY_BOTTLE)
+				.addIngredient(Items.WHEAT)
+				.addCriterion("honey_bottle", InventoryChangeTrigger.Instance.forItems(Items.HONEY_BOTTLE))
 				.build(consumer);
 	}
 	private void recipesCraftedMeals(Consumer<IFinishedRecipe> consumer) {

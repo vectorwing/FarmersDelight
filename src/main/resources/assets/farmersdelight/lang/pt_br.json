@@ -12,11 +12,16 @@
   "item.farmersdelight.cabbage": "Repolho",
   "item.farmersdelight.rice_panicle": "Panícula de arroz",
 
+  "item.farmersdelight.straw": "Palha",
+  "item.farmersdelight.canvas": "Lona",
+
   "item.farmersdelight.tomato_sauce": "Molho de tomate",
   "item.farmersdelight.milk_bottle": "Frasco de leite",
   "item.farmersdelight.fried_egg": "Ovo frito",
   "item.farmersdelight.raw_pasta": "Macarrão cru",
   "item.farmersdelight.cake_slice": "Fatia de bolo",
+  "item.farmersdelight.sweet_berry_cookie": "Biscoito de bagas doces",
+  "item.farmersdelight.honey_cookie": "Biscoito de mel",
   "item.farmersdelight.earthworm": "Minhoca",
 
   "item.farmersdelight.flint_knife": "Faca de sílex",
@@ -35,8 +40,10 @@
   "item.farmersdelight.fried_rice": "Arroz frito",
   "item.farmersdelight.honey_glazed_ham": "Presunto caramelado",
   "item.farmersdelight.pasta_with_meatballs": "Macarrão com almôndegas",
+  "item.farmersdelight.pasta_with_mutton_chop": "Macarrão com costeleta",
   "item.farmersdelight.steak_and_potatoes": "Bife com batatas",
   "item.farmersdelight.vegetable_noodles": "Macarrão com legumes",
+  "item.farmersdelight.shepherds_pie": "Escondidinho de cordeiro",
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 

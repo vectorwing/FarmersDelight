@@ -19,6 +19,8 @@ public class Foods
 			.hunger(2).saturation(0.4f).build();
 	public static final Food CAKE_SLICE = (new Food.Builder())
 			.hunger(2).saturation(0.1f).build();
+	public static final Food COOKIES = (new Food.Builder())
+			.hunger(2).saturation(0.1f).fastToEat().build();
 
 	// Simple Meals (1 Star)
 	public static final Food MIXED_SALAD = (new Food.Builder())
@@ -47,7 +49,11 @@ public class Foods
 			.hunger(14).saturation(0.9f).build();
 	public static final Food PASTA_WITH_MEATBALLS = (new Food.Builder())
 			.hunger(12).saturation(0.9f).build();
+	public static final Food PASTA_WITH_MUTTON_CHOP = (new Food.Builder())
+			.hunger(12).saturation(0.9f).build();
 	public static final Food VEGETABLE_NOODLES = (new Food.Builder())
+			.hunger(14).saturation(0.9f).build();
+	public static final Food SHEPHERDS_PIE = (new Food.Builder())
 			.hunger(14).saturation(0.9f).build();
 
 }

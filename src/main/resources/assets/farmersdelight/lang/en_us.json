@@ -12,11 +12,16 @@
   "item.farmersdelight.cabbage": "Cabbage",
   "item.farmersdelight.rice_panicle": "Rice Panicle",
 
+  "item.farmersdelight.straw": "Straw",
+  "item.farmersdelight.canvas": "Canvas",
+
   "item.farmersdelight.tomato_sauce": "Tomato Sauce",
   "item.farmersdelight.fried_egg": "Fried Egg",
   "item.farmersdelight.milk_bottle": "Milk Bottle",
   "item.farmersdelight.raw_pasta": "Raw Pasta",
   "item.farmersdelight.cake_slice": "Slice of Cake",
+  "item.farmersdelight.sweet_berry_cookie": "Sweet Berry Cookie",
+  "item.farmersdelight.honey_cookie": "Honey Cookie",
   "item.farmersdelight.earthworm": "Earthworm",
 
   "item.farmersdelight.flint_knife": "Flint Knife",
@@ -35,8 +40,10 @@
   "item.farmersdelight.fried_rice": "Fried Rice",
   "item.farmersdelight.honey_glazed_ham": "Honey Glazed Ham",
   "item.farmersdelight.pasta_with_meatballs": "Pasta with Meatballs",
+  "item.farmersdelight.pasta_with_mutton_chop": "Pasta with Mutton Chop",
   "item.farmersdelight.steak_and_potatoes": "Steak and Potatoes",
   "item.farmersdelight.vegetable_noodles": "Vegetable Noodles",
+  "item.farmersdelight.shepherds_pie": "Shepherd's Pie",
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
