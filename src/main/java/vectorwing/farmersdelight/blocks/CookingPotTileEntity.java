@@ -106,7 +106,7 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 			// Process ingredients
 			if (isHeated && this.hasInput()) {
 				IRecipe<?> irecipe = this.world.getRecipeManager()
-						.getRecipe((IRecipeType<CookingPotRecipe>)this.recipeType, this, this.world).orElse(null);
+						.getRecipe(this.recipeType, this, this.world).orElse(null);
 				if (this.canCook(irecipe)) {
 					++this.cookTime;
 					if (this.cookTime == this.cookTimeTotal) {

@@ -14,6 +14,7 @@ public class DataGenerators
 		DataGenerator generator = event.getGenerator();
 		if (event.includeServer()) {
 			generator.addProvider(new Recipes(generator));
+			generator.addProvider(new Advancements(generator));
 		}
 		if (event.includeClient()) {
 			//generator.addProvider(new Items(generator, event.getExistingFileHelper()));

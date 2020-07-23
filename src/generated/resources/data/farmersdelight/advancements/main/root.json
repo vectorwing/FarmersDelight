@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "item": "farmersdelight:cooking_pot"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.root"
+    },
+    "description": {
+      "translate": "farmersdelight.advancement.root.desc"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false,
+    "background": "minecraft:textures/block/bricks.png"
+  },
+  "criteria": {
+    "seeds": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:wheat_seeds"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "seeds"
+    ]
+  ]
+}

@@ -45,5 +45,18 @@
 
   "farmersdelight.tooltip.cooking_pot.empty": "Empty",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Holds 1 serving of:",
-  "farmersdelight.tooltip.cooking_pot.many_servings": "Holds %s servings of:"
+  "farmersdelight.tooltip.cooking_pot.many_servings": "Holds %s servings of:",
+
+  "farmersdelight.advancement.root": "Farmer's Delight",
+  "farmersdelight.advancement.root.desc": "A world of flavor awaits you!",
+  "farmersdelight.advancement.craft_flint_knife": "Hunt and Gather",
+  "farmersdelight.advancement.craft_flint_knife.desc": "Craft a Flint Knife to forage more goods from plants and animals",
+  "farmersdelight.advancement.plant_rice": "Dipping Your Roots",
+  "farmersdelight.advancement.plant_rice.desc": "Plant Rice in a shallow puddle",
+  "farmersdelight.advancement.craft_stove": "Fire Up the Grill",
+  "farmersdelight.advancement.craft_stove.desc": "Pack a Campfire in bricks and iron to make a Stove",
+  "farmersdelight.advancement.place_cooking_pot": "Dinner's Served!",
+  "farmersdelight.advancement.place_cooking_pot.desc": "Put down a Cooking Pot above a heat source and get cooking!",
+
+  "farmersdelight.jei.cooking": "Cooking"
 }

@@ -68,7 +68,7 @@ public class ModItems
 	public static final RegistryObject<Item> CHICKEN_SOUP = ITEMS.register("chicken_soup",
 			() -> new MealItem(new Item.Properties().food(Foods.CHICKEN_SOUP).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> VEGETABLE_SOUP = ITEMS.register("vegetable_soup",
-			() -> new MealItem(new Item.Properties().food(Foods.CHICKEN_SOUP).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new MealItem(new Item.Properties().food(Foods.VEGETABLE_SOUP).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> FISH_STEW = ITEMS.register("fish_stew",
 			() -> new MealItem(new Item.Properties().food(Foods.FISH_STEW).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> FRIED_RICE = ITEMS.register("fried_rice",

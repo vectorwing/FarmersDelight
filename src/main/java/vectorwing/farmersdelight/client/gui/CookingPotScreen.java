@@ -76,6 +76,6 @@ public class CookingPotScreen extends ContainerScreen<CookingPotContainer>
 
 		// Render progress arrow
 		int l = ((CookingPotContainer)this.container).getCookProgressionScaled();
-		this.blit(this.guiLeft + 89, this.guiTop + 25, 176, 15, l + 1, 16);
+		this.blit(this.guiLeft + 89, this.guiTop + 25, 176, 15, l + 1, 17);
 	}
 }

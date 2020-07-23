@@ -37,12 +37,12 @@ public class CookingPotContainer extends Container
 		int startY = 18;
 		int inputStartX = 30;
 		int inputStartY = 17;
-		int slotSizePlus2 = 18;
+		int borderSlotSize = 18;
 		for (int row = 0; row < 2; ++row) {
 			for (int column = 0; column < 3; ++column) {
 				this.addSlot(new Slot(tileEntity, (row * 3) + column,
-						inputStartX + (column * slotSizePlus2),
-						inputStartY + (row * slotSizePlus2)));
+						inputStartX + (column * borderSlotSize),
+						inputStartY + (row * borderSlotSize)));
 			}
 		}
 
@@ -59,14 +59,14 @@ public class CookingPotContainer extends Container
 		int startPlayerInvY = startY * 4 + 12;
 		for (int row = 0; row < 3; ++row) {
 			for (int column = 0; column < 9; ++column) {
-				this.addSlot(new Slot(playerInventory, 9 + (row * 9) + column, startX + (column * slotSizePlus2),
-						startPlayerInvY + (row * slotSizePlus2)));
+				this.addSlot(new Slot(playerInventory, 9 + (row * 9) + column, startX + (column * borderSlotSize),
+						startPlayerInvY + (row * borderSlotSize)));
 			}
 		}
 
 		// Hotbar
 		for (int column = 0; column < 9; ++column) {
-			this.addSlot(new Slot(playerInventory, column, startX + (column * slotSizePlus2), 142));
+			this.addSlot(new Slot(playerInventory, column, startX + (column * borderSlotSize), 142));
 		}
 
 		this.trackIntArray(cookingPotDataIn);
