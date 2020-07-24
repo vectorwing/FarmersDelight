@@ -3,7 +3,6 @@ package vectorwing.farmersdelight.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.IHopper;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -11,12 +10,12 @@ import javax.annotation.Nullable;
 public interface IBasket extends IHopper
 {
 	VoxelShape[] COLLECTION_AREA_SHAPES = {
-		VoxelShapes.or(Block.makeCuboidShape(0.0D, -16.0D, 0.0D, 16.0D, 0.0D, 16.0D), Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D)),	// down
-		VoxelShapes.or(Block.makeCuboidShape(0.0D, 16.0D, 0.0D, 16.0D, 32.0D, 16.0D), Block.makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 16.0D, 14.0D)),	// up
-		VoxelShapes.or(Block.makeCuboidShape(0.0D, 0.0D, -16.0D, 16.0D, 16.0D, 0.0D), Block.makeCuboidShape(0.0D, 2.0D, 2.0D, 14.0D, 14.0D, 14.0D)),	// north
-		VoxelShapes.or(Block.makeCuboidShape(0.0D, 0.0D, 16.0D, 16.0D, 16.0D, 32.0D), Block.makeCuboidShape(2.0D, 2.0D, 2.0D, 16.0D, 14.0D, 14.0D)),	// south
-		VoxelShapes.or(Block.makeCuboidShape(-16.0D, 0.0D, 0.0D, 0.0D, 16.0D, 16.0D), Block.makeCuboidShape(2.0D, 2.0D, 0.0D, 14.0D, 14.0D, 14.0D)),	// west
-		VoxelShapes.or(Block.makeCuboidShape(16.0D, 0.0D, 0.0D, 32.0D, 16.0D, 16.0D), Block.makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 14.0D, 16.0D))		// east
+		Block.makeCuboidShape(0.0D, -16.0D, 0.0D, 16.0D, 16.0D, 16.0D),	// down
+		Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 32.0D, 16.0D),		// up
+		Block.makeCuboidShape(0.0D, 0.0D, -16.0D, 16.0D, 16.0D, 16.0D),	// north
+		Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 32.0D),		// south
+		Block.makeCuboidShape(-16.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D),	// west
+		Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 32.0D, 16.0D, 16.0D)		// east
 	};
 
 	default VoxelShape getFacingCollectionArea(int facingIndex) {
