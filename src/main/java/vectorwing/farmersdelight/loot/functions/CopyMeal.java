@@ -15,7 +15,7 @@ import vectorwing.farmersdelight.blocks.CookingPotTileEntity;
 
 public class CopyMeal extends LootFunction
 {
-	private CopyMeal(final ILootCondition[] conditions)
+	private CopyMeal(ILootCondition[] conditions)
 	{
 		super(conditions);
 	}
@@ -26,7 +26,7 @@ public class CopyMeal extends LootFunction
 	}
 
 	@Override
-	protected ItemStack doApply(final ItemStack stack, final LootContext context)
+	protected ItemStack doApply(ItemStack stack, LootContext context)
 	{
 		TileEntity tile = context.get(LootParameters.BLOCK_ENTITY);
 		if (tile instanceof CookingPotTileEntity)
