@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.blocks;
 
 import vectorwing.farmersdelight.init.ModTileEntityTypes;
-import com.sun.javafx.geom.Vec2d;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
@@ -18,6 +17,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec2f;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import vectorwing.farmersdelight.utils.Utils;
@@ -82,16 +82,16 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 		}
 	}
 
-	public Vec2d getStoveItemOffset(int index) {
-		final double X_OFFSET = 0.3D;
-		final double Y_OFFSET = 0.2D;
-		final Vec2d[] OFFSETS = {
-			new Vec2d(X_OFFSET, Y_OFFSET),
-			new Vec2d(0.0D, Y_OFFSET),
-			new Vec2d(-X_OFFSET, Y_OFFSET),
-			new Vec2d(X_OFFSET, -Y_OFFSET),
-			new Vec2d(0.0D, -Y_OFFSET),
-			new Vec2d(-X_OFFSET, -Y_OFFSET),
+	public Vec2f getStoveItemOffset(int index) {
+		final float X_OFFSET = 0.3F;
+		final float Y_OFFSET = 0.2F;
+		final Vec2f[] OFFSETS = {
+			new Vec2f(X_OFFSET, Y_OFFSET),
+			new Vec2f(0.0F, Y_OFFSET),
+			new Vec2f(-X_OFFSET, Y_OFFSET),
+			new Vec2f(X_OFFSET, -Y_OFFSET),
+			new Vec2f(0.0F, -Y_OFFSET),
+			new Vec2f(-X_OFFSET, -Y_OFFSET),
 		};
 		return OFFSETS[index];
 	}
@@ -107,11 +107,11 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 					double d0 = (double)blockpos.getX() + 0.5D;
 					double d1 = (double)blockpos.getY() + 1.0D;
 					double d2 = (double)blockpos.getZ() + 0.5D;
-					Vec2d v1 = this.getStoveItemOffset(j);
+					Vec2f v1 = this.getStoveItemOffset(j);
 
 					Direction direction = this.getBlockState().get(StoveBlock.FACING);
 					int directionIndex = direction.getHorizontalIndex();
-					Vec2d offset = directionIndex % 2 == 0 ? v1 : new Vec2d(v1.y, v1.x);
+					Vec2f offset = directionIndex % 2 == 0 ? v1 : new Vec2f(v1.y, v1.x);
 
 					double d5 = d0 - (direction.getXOffset() * offset.x) + (direction.rotateY().getXOffset() * offset.x);
 					double d7 = d2 - (direction.getZOffset() * offset.y) + (direction.rotateY().getZOffset() * offset.y);

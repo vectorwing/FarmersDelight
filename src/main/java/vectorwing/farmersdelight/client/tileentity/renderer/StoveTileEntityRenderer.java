@@ -3,7 +3,6 @@ package vectorwing.farmersdelight.client.tileentity.renderer;
 import vectorwing.farmersdelight.blocks.StoveBlock;
 import vectorwing.farmersdelight.blocks.StoveTileEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.sun.javafx.geom.Vec2d;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.Vector3f;
@@ -13,6 +12,7 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.Vec2f;
 
 public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
 {
@@ -40,7 +40,7 @@ public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
 				matrixStackIn.rotate(Vector3f.XP.rotationDegrees(90.0F));
 
 				// Neatly align items according to their index
-				Vec2d itemOffset = tileEntityIn.getStoveItemOffset(i);
+				Vec2f itemOffset = tileEntityIn.getStoveItemOffset(i);
 				matrixStackIn.translate(itemOffset.x, itemOffset.y, 0.0D);
 
 				// Resize the items? I dunno lmao
