@@ -3,13 +3,12 @@ package vectorwing.farmersdelight.blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.*;
 import vectorwing.farmersdelight.init.ModTileEntityTypes;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CampfireCookingRecipe;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
@@ -23,9 +22,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import vectorwing.farmersdelight.utils.Utils;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -45,11 +44,12 @@ public class StoveBlock extends Block
 	}
 
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		ItemStack itemstack = player.getHeldItem(handIn);
+		Item usedItem = itemstack.getItem();
 		if (state.get(LIT)) {
 			TileEntity tileentity = worldIn.getTileEntity(pos);
 			if (tileentity instanceof StoveTileEntity) {
 				StoveTileEntity stovetileentity = (StoveTileEntity)tileentity;
-				ItemStack itemstack = player.getHeldItem(handIn);
 				Optional<CampfireCookingRecipe> optional = stovetileentity.findMatchingRecipe(itemstack);
 				if (optional.isPresent()) {
 					if (!worldIn.isRemote && stovetileentity.addItem(player.abilities.isCreativeMode ? itemstack.copy() : itemstack, optional.get().getCookTime())) {
@@ -58,17 +58,46 @@ public class StoveBlock extends Block
 					}
 
 					return ActionResultType.CONSUME;
+				} else {
+					if (usedItem instanceof ShovelItem) {
+						extinguish(state, worldIn, pos);
+						return ActionResultType.SUCCESS;
+					} else if (usedItem == Items.WATER_BUCKET) {
+						extinguish(state, worldIn, pos);
+						player.setHeldItem(handIn, new ItemStack(Items.BUCKET));
+						return ActionResultType.SUCCESS;
+					}
 				}
+			}
+		} else {
+			if (itemstack.getItem() instanceof FlintAndSteelItem) {
+				worldIn.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, Utils.RAND.nextFloat() * 0.4F + 0.8F);
+				worldIn.setBlockState(pos, state.with(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
+				if (player != null) {
+					itemstack.damageItem(1, player, (action) -> {
+						action.sendBreakAnimation(handIn);
+					});
+				}
+
+				return ActionResultType.SUCCESS;
 			}
 		}
 
 		return ActionResultType.PASS;
 	}
 
+	public void extinguish(BlockState state, World worldIn, BlockPos pos) {
+		worldIn.setBlockState(pos, state.with(LIT, false), 2);
+		double d0 = (double)pos.getX() + 0.5D;
+		double d1 = pos.getY();
+		double d2 = (double)pos.getZ() + 0.5D;
+		worldIn.playSound(d0, d1, d2, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F, false);
+	}
+
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite())
-				.with(LIT, context.getWorld().isBlockPowered(context.getPos()));
+				.with(LIT, true);
 	}
 
 	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
@@ -82,24 +111,6 @@ public class StoveBlock extends Block
 
 	public int getLightValue(BlockState state) {
 		return state.get(LIT) ? super.getLightValue(state) : 0;
-	}
-
-	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-		if (!worldIn.isRemote) {
-			boolean flag = state.get(LIT);
-			if (flag != worldIn.isBlockPowered(pos)) {
-				if (flag) {
-					worldIn.getPendingBlockTicks().scheduleTick(pos, this, 4);
-				} else {
-					worldIn.setBlockState(pos, state.cycle(LIT), 2);
-				}
-			}
-		}
-	}
-	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-		if (state.get(LIT) && !worldIn.isBlockPowered(pos)) {
-			worldIn.setBlockState(pos, state.cycle(LIT), 2);
-		}
 	}
 
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {

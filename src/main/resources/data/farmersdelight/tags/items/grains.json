@@ -2,6 +2,6 @@
   "replace": "false",
   "values": [
     "minecraft:wheat",
-    "minecraft:rice"
+    "farmersdelight:rice"
   ]
 }
