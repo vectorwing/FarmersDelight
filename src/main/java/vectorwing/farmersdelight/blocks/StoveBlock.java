@@ -1,5 +1,8 @@
 package vectorwing.farmersdelight.blocks;
 
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import vectorwing.farmersdelight.init.ModTileEntityTypes;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -66,6 +69,15 @@ public class StoveBlock extends Block
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite())
 				.with(LIT, context.getWorld().isBlockPowered(context.getPos()));
+	}
+
+	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
+		boolean isLit = worldIn.getBlockState(pos).get(StoveBlock.LIT);
+		if (isLit && !entityIn.isImmuneToFire() && entityIn instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entityIn)) {
+			entityIn.attackEntityFrom(DamageSource.HOT_FLOOR, 1.0F);
+		}
+
+		super.onEntityWalk(worldIn, pos, entityIn);
 	}
 
 	public int getLightValue(BlockState state) {

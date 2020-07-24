@@ -3,6 +3,8 @@
   "values": [
     "minecraft:fire",
     "minecraft:lava",
-    "minecraft:magma_block"
+    "minecraft:magma_block",
+    "minecraft:campfire",
+    "farmersdelight:stove"
   ]
 }

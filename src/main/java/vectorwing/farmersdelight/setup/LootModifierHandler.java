@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.setup;
 
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.setup.loot.CakeSliceLoot;
+import vectorwing.farmersdelight.loot.modifiers.CakeSliceLoot;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

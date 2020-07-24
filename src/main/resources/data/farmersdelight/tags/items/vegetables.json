@@ -1,13 +1,11 @@
 {
   "replace": "false",
   "values": [
-    "minecraft:wheat",
     "minecraft:beetroot",
     "minecraft:carrot",
     "minecraft:potato",
     "farmersdelight:cabbage",
     "farmersdelight:tomato",
-    "farmersdelight:onion",
-    "farmersdelight:rice"
+    "farmersdelight:onion"
   ]
 }
