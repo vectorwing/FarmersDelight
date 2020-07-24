@@ -37,7 +37,6 @@ public class FarmersDelight
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientEventHandler::init);
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, this::registerRecipeSerializers);
 
-
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -53,9 +52,5 @@ public class FarmersDelight
     private void registerRecipeSerializers (RegistryEvent.Register<IRecipeSerializer<?>> event) {
         Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(FarmersDelight.MODID, "cooking"), CookingPotRecipe.TYPE);
         event.getRegistry().register(CookingPotRecipe.SERIALIZER);
-    }
-
-    @SubscribeEvent
-    public static void onRegisterItems(final RegistryEvent.Register<Item> event) {
     }
 }

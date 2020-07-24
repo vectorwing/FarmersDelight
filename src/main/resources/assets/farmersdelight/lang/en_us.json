@@ -49,6 +49,7 @@
 
   "farmersdelight.container.cooking_pot": "Cooking Pot",
   "farmersdelight.container.cooking_pot.served_on": "Served on: %s",
+  "farmersdelight.container.basket": "Basket",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Empty",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Holds 1 serving of:",
