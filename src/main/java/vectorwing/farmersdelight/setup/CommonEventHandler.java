@@ -2,10 +2,12 @@ package vectorwing.farmersdelight.setup;
 
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.init.ModItems;
+import vectorwing.farmersdelight.loot.functions.CopyMeal;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.TableLootEntry;
+import net.minecraft.world.storage.loot.functions.LootFunctionManager;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -30,6 +32,8 @@ public class CommonEventHandler
 		ComposterBlock.CHANCES.put(ModItems.CABBAGE.get(), 0.65F);
 		ComposterBlock.CHANCES.put(ModItems.ONION.get(), 0.65F);
 		ComposterBlock.CHANCES.put(ModItems.TOMATO.get(), 0.65F);
+
+		LootFunctionManager.registerFunction(new CopyMeal.Serializer());
 	}
 
 	@SubscribeEvent

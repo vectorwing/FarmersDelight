@@ -6,7 +6,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
@@ -30,7 +29,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
-import vectorwing.farmersdelight.init.ModItems;
 import vectorwing.farmersdelight.init.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.Text;
 
@@ -91,29 +89,6 @@ public class CookingPotBlock extends Block
 			itemstack.setDisplayName(tile.getCustomName());
 		}
 		return itemstack;
-	}
-
-	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-		TileEntity tileentity = worldIn.getTileEntity(pos);
-		if (tileentity instanceof CookingPotTileEntity) {
-			CookingPotTileEntity tile = (CookingPotTileEntity)tileentity;
-
-			if (!worldIn.isRemote) {
-				ItemStack itemstack = new ItemStack(ModItems.COOKING_POT.get());
-				CompoundNBT compoundnbt = tile.writeMealNbt(new CompoundNBT());
-				if (!compoundnbt.isEmpty()) {
-					itemstack.setTagInfo("BlockEntityTag", compoundnbt);
-				}
-				if (tile.hasCustomName()) {
-					itemstack.setDisplayName(tile.getCustomName());
-				}
-				ItemEntity itementity = new ItemEntity(worldIn, (double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), itemstack);
-				itementity.setDefaultPickupDelay();
-				worldIn.addEntity(itementity);
-			}
-		}
-
-		super.onBlockHarvested(worldIn, pos, state, player);
 	}
 
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
