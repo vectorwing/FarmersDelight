@@ -1,55 +1,60 @@
 {
-  "parent": "block/block",
-  "textures": {
-    "particle": "farmersdelight:blocks/basket_side",
-    "top": "farmersdelight:blocks/basket_top",
-    "bottom": "farmersdelight:blocks/basket_bottom",
-    "side": "farmersdelight:blocks/basket_side",
-    "inside": "farmersdelight:blocks/basket_bottom"
-  },
-  "elements": [
-    {   "from": [ 0, 0, 0 ],
-      "to": [ 16, 2, 16 ],
-      "faces": {
-        "up":    { "texture": "#inside", "cullface": "up" },
-        "down":  { "texture": "#bottom", "cullface": "down" }
-      }
-    },
-    {   "from": [ 0, 0, 0 ],
-      "to": [ 2, 16, 16 ],
-      "faces": {
-        "up":    { "texture": "#top", "cullface": "up" },
-        "north": { "texture": "#side", "cullface": "north" },
-        "south": { "texture": "#side", "cullface": "south" },
-        "west":  { "texture": "#side", "cullface": "west" },
-        "east":  { "texture": "#side", "cullface": "up" }
-      }
-    },
-    {   "from": [ 14, 0, 0 ],
-      "to": [ 16, 16, 16 ],
-      "faces": {
-        "up":    { "texture": "#top", "cullface": "up" },
-        "north": { "texture": "#side", "cullface": "north" },
-        "south": { "texture": "#side", "cullface": "south" },
-        "west":  { "texture": "#side", "cullface": "up" },
-        "east":  { "texture": "#side", "cullface": "east" }
-      }
-    },
-    {   "from": [ 2, 0, 0 ],
-      "to": [ 14, 16, 2 ],
-      "faces": {
-        "up":    { "texture": "#top", "cullface": "up" },
-        "north": { "texture": "#side", "cullface": "north" },
-        "south": { "texture": "#side", "cullface": "up" }
-      }
-    },
-    {   "from": [ 2, 0, 14 ],
-      "to": [ 14, 16, 16 ],
-      "faces": {
-        "up":    { "texture": "#top", "cullface": "up" },
-        "north": { "texture": "#side", "cullface": "up" },
-        "south": { "texture": "#side", "cullface": "south" }
-      }
-    }
-  ]
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"top": "farmersdelight:blocks/basket_top",
+		"bottom": "farmersdelight:blocks/basket_bottom",
+		"particle": "farmersdelight:blocks/basket_side",
+		"side": "farmersdelight:blocks/basket_side"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 2, 16],
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "texture": "#bottom", "cullface": "up"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#bottom", "cullface": "down"}
+			}
+		},
+		{
+			"from": [0, 0, 0],
+			"to": [2, 16, 16],
+			"faces": {
+				"north": {"uv": [14, 0, 16, 16], "texture": "#side", "cullface": "north"},
+				"east": {"uv": [16, 0, 0, 16], "texture": "#side", "cullface": "up"},
+				"south": {"uv": [0, 0, 2, 16], "texture": "#side", "cullface": "south"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#side", "cullface": "west"},
+				"up": {"uv": [0, 0, 2, 16], "texture": "#top", "cullface": "up"}
+			}
+		},
+		{
+			"from": [14, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 2, 16], "texture": "#side", "cullface": "north"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#side", "cullface": "east"},
+				"south": {"uv": [14, 0, 16, 16], "texture": "#side", "cullface": "south"},
+				"west": {"uv": [16, 0, 0, 16], "texture": "#side", "cullface": "up"},
+				"up": {"uv": [14, 0, 16, 16], "texture": "#top", "cullface": "up"}
+			}
+		},
+		{
+			"from": [2, 0, 0],
+			"to": [14, 16, 2],
+			"faces": {
+				"north": {"uv": [2, 0, 14, 16], "texture": "#side", "cullface": "north"},
+				"south": {"uv": [14, 0, 2, 16], "texture": "#side", "cullface": "up"},
+				"up": {"uv": [2, 0, 14, 2], "texture": "#top", "cullface": "up"}
+			}
+		},
+		{
+			"from": [2, 0, 14],
+			"to": [14, 16, 16],
+			"faces": {
+				"north": {"uv": [14, 0, 2, 16], "texture": "#side", "cullface": "up"},
+				"south": {"uv": [2, 0, 14, 16], "texture": "#side", "cullface": "south"},
+				"up": {"uv": [2, 14, 14, 16], "texture": "#top", "cullface": "up"}
+			}
+		}
+	]
 }

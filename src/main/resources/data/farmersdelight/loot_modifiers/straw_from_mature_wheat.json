@@ -2,10 +2,6 @@
   "type": "farmersdelight:straw_from_knife",
   "conditions": [
     {
-      "condition": "minecraft:random_chance",
-      "chance": 0.1
-    },
-    {
       "condition": "minecraft:match_tool",
       "predicate": {
         "tag": "farmersdelight:knives"
@@ -13,7 +9,7 @@
     },
     {
       "condition": "block_state_property",
-      "block": "minecraft:grass"
+      "block": "minecraft:wheat"
     }
   ]
 }
