@@ -22,7 +22,7 @@ public class RopeBlock extends PaneBlock
 
 	public RopeBlock()
 	{
-		super(Properties.create(Material.CARPET).doesNotBlockMovement().notSolid().hardnessAndResistance(0.6F).sound(SoundType.CLOTH));
+		super(Properties.create(Material.CARPET).doesNotBlockMovement().notSolid().hardnessAndResistance(0.2F).sound(SoundType.CLOTH));
 	}
 
 	public RopeBlock(Block.Properties properties) {

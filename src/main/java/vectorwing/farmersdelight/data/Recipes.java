@@ -87,6 +87,14 @@ public class Recipes extends RecipeProvider
 				.key('s', ModItems.STRAW.get())
 				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
 				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(Items.SCAFFOLDING, 6)
+				.patternLine("b#b")
+				.patternLine("b b")
+				.patternLine("b b")
+				.key('b', Items.BAMBOO)
+				.key('#', ModItems.CANVAS.get())
+				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
+				.build(consumer);
 	}
 	private void recipesTools(Consumer<IFinishedRecipe> consumer) {
 		ShapedRecipeBuilder.shapedRecipe(ModItems.FLINT_KNIFE.get())
