@@ -80,6 +80,13 @@ public class Recipes extends RecipeProvider
 				.key('#', ModItems.CANVAS.get())
 				.addCriterion("canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
 				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.ROPE.get(), 3)
+				.patternLine("s")
+				.patternLine("s")
+				.patternLine("s")
+				.key('s', ModItems.STRAW.get())
+				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
+				.build(consumer);
 	}
 	private void recipesTools(Consumer<IFinishedRecipe> consumer) {
 		ShapedRecipeBuilder.shapedRecipe(ModItems.FLINT_KNIFE.get())
@@ -109,6 +116,13 @@ public class Recipes extends RecipeProvider
 				.key('m', Items.GOLD_INGOT)
 				.key('s', Items.STICK)
 				.addCriterion("gold_ingot", InventoryChangeTrigger.Instance.forItems(Items.GOLD_INGOT))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(Items.LEAD, 1)
+				.patternLine("rr ")
+				.patternLine("rr ")
+				.patternLine("  r")
+				.key('r', ModItems.ROPE.get())
+				.addCriterion("rope", InventoryChangeTrigger.Instance.forItems(ModItems.ROPE.get()))
 				.build(consumer);
 	}
 

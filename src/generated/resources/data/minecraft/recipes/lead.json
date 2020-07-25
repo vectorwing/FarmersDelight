@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "rr ",
+    "rr ",
+    "  r"
+  ],
+  "key": {
+    "r": {
+      "item": "farmersdelight:rope"
+    }
+  },
+  "result": {
+    "item": "minecraft:lead"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "s",
+    "s",
+    "s"
+  ],
+  "key": {
+    "s": {
+      "item": "farmersdelight:straw"
+    }
+  },
+  "result": {
+    "item": "farmersdelight:rope",
+    "count": 3
+  }
+}

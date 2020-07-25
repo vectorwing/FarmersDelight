@@ -1,0 +1,18 @@
+{
+  "credit": "Made with Blockbench",
+  "textures": {
+    "0": "farmersdelight:blocks/rope",
+    "particle": "farmersdelight:blocks/rope"
+  },
+  "elements": [
+    {
+      "from": [8, 0, 0],
+      "to": [8, 16, 7],
+      "rotation": {"angle": 0, "axis": "y", "origin": [16, 8, 8]},
+      "faces": {
+        "east": {"uv": [9, 0, 16, 16], "texture": "#0"},
+        "west": {"uv": [0, 0, 7, 16], "texture": "#0"}
+      }
+    }
+  ]
+}

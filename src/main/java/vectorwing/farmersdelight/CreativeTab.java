@@ -32,6 +32,7 @@ public class CreativeTab extends ItemGroup
 		items.add(new ItemStack(ModBlocks.STOVE.get()));
 		items.add(new ItemStack(ModBlocks.COOKING_POT.get()));
 		items.add(new ItemStack(ModBlocks.BASKET.get()));
+		items.add(new ItemStack(ModBlocks.ROPE.get()));
 	}
 	private void registerCrops(NonNullList<ItemStack> items) {
 		items.add(new ItemStack(ModItems.CABBAGE.get()));
