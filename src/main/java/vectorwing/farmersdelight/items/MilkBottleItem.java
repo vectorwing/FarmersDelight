@@ -27,11 +27,9 @@ public class MilkBottleItem extends Item
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
 		PlayerEntity playerentity = entityLiving instanceof PlayerEntity ? (PlayerEntity)entityLiving : null;
 
-		if (!worldIn.isRemote)
-		{
+		if (!worldIn.isRemote) {
 			Iterator<EffectInstance> itr = entityLiving.getActivePotionEffects().iterator();
 			ArrayList<Effect> compatibleEffects = new ArrayList<>();
-			//boolean selected = false;
 
 			// Select eligible effects
 			while (itr.hasNext()) {
@@ -46,15 +44,6 @@ public class MilkBottleItem extends Item
 			if (!net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.living.PotionEvent.PotionRemoveEvent(entityLiving, selectedEffect))) {
 				entityLiving.removePotionEffect(selectedEffect.getPotion());
 			}
-
-//			while (itr.hasNext() && !selected) {
-//				EffectInstance effect = itr.next();
-//				if (effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET)) && !net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.living.PotionEvent.PotionRemoveEvent(entityLiving, effect))) {
-//					compatibleEffects.add(effect);
-//					entityLiving.removePotionEffect(effect.getPotion());
-//					selected = true;
-//				}
-//			}
 		}
 
 		if (playerentity instanceof ServerPlayerEntity) {

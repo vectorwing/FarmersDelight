@@ -91,10 +91,6 @@ public class Advancements extends AdvancementProvider
 			Advancement dinnerIsServed = getAdvancement(fireUpTheGrill, ModItems.COOKING_POT.get(), "place_cooking_pot", FrameType.GOAL, true, true, false)
 					.withCriterion("cooking_pot", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.COOKING_POT.get()))
 					.register(consumer, getNameId("main/place_cooking_pot"));
-
-			Advancement animalCare = getAdvancement(dinnerIsServed, ModItems.COOKING_POT.get(), "feed_dog_food", FrameType.TASK, true, true, false)
-					.withCriterion("dog_food", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.COOKING_POT.get()))
-					.register(consumer, getNameId("main/feed_dog_food"));
 		}
 
 		protected static Advancement.Builder getAdvancement(Advancement parent, IItemProvider display, String name, FrameType frame, boolean showToast, boolean announceToChat, boolean hidden)

@@ -15,7 +15,7 @@ public class CreativeTab extends ItemGroup
 
 	@Override
 	public ItemStack createIcon() {
-		return new ItemStack(ModBlocks.COOKING_POT.get());
+		return new ItemStack(ModBlocks.STOVE.get());
 	}
 
 	@Override
@@ -36,6 +36,7 @@ public class CreativeTab extends ItemGroup
 		items.add(new ItemStack(ModBlocks.COOKING_POT.get()));
 		items.add(new ItemStack(ModBlocks.BASKET.get()));
 		items.add(new ItemStack(ModBlocks.ROPE.get()));
+		items.add(new ItemStack(ModBlocks.SAFETY_NET.get()));
 	}
 
 	private void registerCrops(NonNullList<ItemStack> items)
