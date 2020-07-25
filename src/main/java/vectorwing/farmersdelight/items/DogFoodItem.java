@@ -19,7 +19,6 @@ public class DogFoodItem extends MealItem
 		if (target instanceof WolfEntity) {
 			WolfEntity wolf = (WolfEntity)target;
 			if (wolf.isAlive() && wolf.isTamed()) {
-				wolf.setJumping(true);
 				target.addPotionEffect(new EffectInstance(Effects.REGENERATION, 600, 2));
 				target.addPotionEffect(new EffectInstance(Effects.STRENGTH, 6000, 1));
 				target.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 6000, 1));

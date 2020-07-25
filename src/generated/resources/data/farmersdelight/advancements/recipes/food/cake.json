@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:lead"
+      "farmersdelight:cake"
     ]
   },
   "criteria": {
-    "rope": {
+    "cake_slice": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:rope"
+            "item": "farmersdelight:cake_slice"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "minecraft:lead"
+        "recipe": "farmersdelight:cake"
       }
     }
   },
   "requirements": [
     [
-      "rope",
+      "cake_slice",
       "has_the_recipe"
     ]
   ]

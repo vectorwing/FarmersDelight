@@ -94,7 +94,7 @@ public class Recipes extends RecipeProvider
 				.key('b', Items.BAMBOO)
 				.key('#', ModItems.CANVAS.get())
 				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
-				.build(consumer);
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "scaffolding"));
 	}
 	private void recipesTools(Consumer<IFinishedRecipe> consumer) {
 		ShapedRecipeBuilder.shapedRecipe(ModItems.FLINT_KNIFE.get())
@@ -131,7 +131,7 @@ public class Recipes extends RecipeProvider
 				.patternLine("  r")
 				.key('r', ModItems.ROPE.get())
 				.addCriterion("rope", InventoryChangeTrigger.Instance.forItems(ModItems.ROPE.get()))
-				.build(consumer);
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "lead"));
 	}
 
 	private void recipesMaterials(Consumer<IFinishedRecipe> consumer) {
@@ -232,7 +232,7 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ModItems.CAKE_SLICE.get())
 				.addIngredient(ModItems.CAKE_SLICE.get())
 				.addCriterion("cake_slice", InventoryChangeTrigger.Instance.forItems(ModItems.CAKE_SLICE.get()))
-				.build(consumer);
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "cake"));
 	}
 	private void recipesCookedMeals(Consumer<IFinishedRecipe> consumer) {}
 }
