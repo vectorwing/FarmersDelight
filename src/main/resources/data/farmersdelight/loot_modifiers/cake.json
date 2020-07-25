@@ -4,7 +4,7 @@
     {
       "condition": "minecraft:match_tool",
       "predicate": {
-        "tag": "forge:knives"
+        "tag": "farmersdelight:knives"
       }
     },
     {

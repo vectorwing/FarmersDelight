@@ -13,16 +13,16 @@ import net.minecraft.world.storage.loot.conditions.ILootCondition;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.blocks.CookingPotTileEntity;
 
-public class CopyMeal extends LootFunction
+public class CopyMealFunction extends LootFunction
 {
-	private CopyMeal(ILootCondition[] conditions)
+	private CopyMealFunction(ILootCondition[] conditions)
 	{
 		super(conditions);
 	}
 
 	public static LootFunction.Builder<?> builder()
 	{
-		return builder(CopyMeal::new);
+		return builder(CopyMealFunction::new);
 	}
 
 	@Override
@@ -40,17 +40,17 @@ public class CopyMeal extends LootFunction
 		return stack;
 	}
 
-	public static class Serializer extends LootFunction.Serializer<CopyMeal>
+	public static class Serializer extends LootFunction.Serializer<CopyMealFunction>
 	{
 		public Serializer()
 		{
-			super(new ResourceLocation(FarmersDelight.MODID, "copy_meal"), CopyMeal.class);
+			super(new ResourceLocation(FarmersDelight.MODID, "copy_meal"), CopyMealFunction.class);
 		}
 
 		@Override
-		public CopyMeal deserialize(JsonObject json, JsonDeserializationContext context, ILootCondition[] conditions)
+		public CopyMealFunction deserialize(JsonObject json, JsonDeserializationContext context, ILootCondition[] conditions)
 		{
-			return new CopyMeal(conditions);
+			return new CopyMealFunction(conditions);
 		}
 	}
 }

@@ -72,7 +72,7 @@ public class StoveBlock extends Block
 		} else {
 			if (itemstack.getItem() instanceof FlintAndSteelItem) {
 				worldIn.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, Utils.RAND.nextFloat() * 0.4F + 0.8F);
-				worldIn.setBlockState(pos, state.with(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
+				worldIn.setBlockState(pos, state.with(BlockStateProperties.LIT, Boolean.TRUE), 11);
 				if (player != null) {
 					itemstack.damageItem(1, player, (action) -> {
 						action.sendBreakAnimation(handIn);

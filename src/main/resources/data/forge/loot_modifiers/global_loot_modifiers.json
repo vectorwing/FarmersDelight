@@ -1,6 +1,8 @@
 {
   "replace": false,
   "entries": [
-    "farmersdelight:cake"
+    "farmersdelight:cake",
+    "farmersdelight:straw_from_grass",
+    "farmersdelight:straw_from_tall_grass"
   ]
 }
