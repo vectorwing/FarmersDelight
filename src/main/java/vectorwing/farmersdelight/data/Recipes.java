@@ -25,6 +25,7 @@ public class Recipes extends RecipeProvider
 
 	@Override
 	protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
+		recipesVanillaAlternatives(consumer);
 		recipesSmelting(consumer);
 		recipesBlocks(consumer);
 		recipesTools(consumer);
@@ -50,9 +51,52 @@ public class Recipes extends RecipeProvider
 				.build(consumer, namePrefix + "_from_smoking");
 	}
 
+	/**
+	 * The following recipes should ALWAYS define a custom save location.
+	 * If not, they fall on the minecraft namespace, overriding any other recipe.
+	 */
+	private void recipesVanillaAlternatives(Consumer<IFinishedRecipe> consumer) {
+		ShapedRecipeBuilder.shapedRecipe(Items.SCAFFOLDING, 6)
+				.patternLine("b#b")
+				.patternLine("b b")
+				.patternLine("b b")
+				.key('b', Items.BAMBOO)
+				.key('#', ModItems.CANVAS.get())
+				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "scaffolding"));
+		ShapedRecipeBuilder.shapedRecipe(Items.LEAD)
+				.patternLine("rr ")
+				.patternLine("rr ")
+				.patternLine("  r")
+				.key('r', ModItems.ROPE.get())
+				.addCriterion("rope", InventoryChangeTrigger.Instance.forItems(ModItems.ROPE.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "lead"));
+		ShapedRecipeBuilder.shapedRecipe(Items.CAKE)
+				.patternLine("mmm")
+				.patternLine("ses")
+				.patternLine("www")
+				.key('m', ModItems.MILK_BOTTLE.get())
+				.key('s', Items.SUGAR)
+				.key('e', Items.EGG)
+				.key('w', Items.WHEAT)
+				.addCriterion("milk_bottle", InventoryChangeTrigger.Instance.forItems(ModItems.MILK_BOTTLE.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "cake_from_milk_bottle"));
+		ShapelessRecipeBuilder.shapelessRecipe(Items.CAKE)
+				.addIngredient(ModItems.CAKE_SLICE.get())
+				.addIngredient(ModItems.CAKE_SLICE.get())
+				.addIngredient(ModItems.CAKE_SLICE.get())
+				.addIngredient(ModItems.CAKE_SLICE.get())
+				.addIngredient(ModItems.CAKE_SLICE.get())
+				.addIngredient(ModItems.CAKE_SLICE.get())
+				.addIngredient(ModItems.CAKE_SLICE.get())
+				.addCriterion("cake_slice", InventoryChangeTrigger.Instance.forItems(ModItems.CAKE_SLICE.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "cake_from_slices"));
+	}
+
 	private void recipesSmelting(Consumer<IFinishedRecipe> consumer) {
 		foodSmeltingRecipes("fried_egg", Items.EGG, ModItems.FRIED_EGG.get(), 0.35F, 200, consumer);
 	}
+
 	private void recipesBlocks(Consumer<IFinishedRecipe> consumer) {
 		ShapedRecipeBuilder.shapedRecipe(ModBlocks.STOVE.get())
 				.patternLine("iii")
@@ -93,14 +137,6 @@ public class Recipes extends RecipeProvider
 				.key('r', ModItems.ROPE.get())
 				.addCriterion("rope", InventoryChangeTrigger.Instance.forItems(ModItems.ROPE.get()))
 				.build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(Items.SCAFFOLDING, 6)
-				.patternLine("b#b")
-				.patternLine("b b")
-				.patternLine("b b")
-				.key('b', Items.BAMBOO)
-				.key('#', ModItems.CANVAS.get())
-				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
-				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "scaffolding"));
 	}
 	private void recipesTools(Consumer<IFinishedRecipe> consumer) {
 		ShapedRecipeBuilder.shapedRecipe(ModItems.FLINT_KNIFE.get())
@@ -131,13 +167,6 @@ public class Recipes extends RecipeProvider
 				.key('s', Items.STICK)
 				.addCriterion("gold_ingot", InventoryChangeTrigger.Instance.forItems(Items.GOLD_INGOT))
 				.build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(Items.LEAD, 1)
-				.patternLine("rr ")
-				.patternLine("rr ")
-				.patternLine("  r")
-				.key('r', ModItems.ROPE.get())
-				.addCriterion("rope", InventoryChangeTrigger.Instance.forItems(ModItems.ROPE.get()))
-				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "lead"));
 	}
 
 	private void recipesMaterials(Consumer<IFinishedRecipe> consumer) {
@@ -229,16 +258,6 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ModItems.ONION.get())
 				.addCriterion("hamburger", InventoryChangeTrigger.Instance.forItems(Items.COOKED_BEEF))
 				.build(consumer);
-		ShapelessRecipeBuilder.shapelessRecipe(Items.CAKE)
-				.addIngredient(ModItems.CAKE_SLICE.get())
-				.addIngredient(ModItems.CAKE_SLICE.get())
-				.addIngredient(ModItems.CAKE_SLICE.get())
-				.addIngredient(ModItems.CAKE_SLICE.get())
-				.addIngredient(ModItems.CAKE_SLICE.get())
-				.addIngredient(ModItems.CAKE_SLICE.get())
-				.addIngredient(ModItems.CAKE_SLICE.get())
-				.addCriterion("cake_slice", InventoryChangeTrigger.Instance.forItems(ModItems.CAKE_SLICE.get()))
-				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "cake"));
 	}
 	private void recipesCookedMeals(Consumer<IFinishedRecipe> consumer) {}
 }

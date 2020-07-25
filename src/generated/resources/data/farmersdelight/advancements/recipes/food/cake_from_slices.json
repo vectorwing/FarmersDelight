@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:cake_from_slices"
+    ]
+  },
+  "criteria": {
+    "cake_slice": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:cake_slice"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:cake_from_slices"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "cake_slice",
+      "has_the_recipe"
+    ]
+  ]
+}

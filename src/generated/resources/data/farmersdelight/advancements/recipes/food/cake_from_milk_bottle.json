@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "farmersdelight:cake"
+      "farmersdelight:cake_from_milk_bottle"
     ]
   },
   "criteria": {
-    "cake_slice": {
+    "milk_bottle": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:cake_slice"
+            "item": "farmersdelight:milk_bottle"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "farmersdelight:cake"
+        "recipe": "farmersdelight:cake_from_milk_bottle"
       }
     }
   },
   "requirements": [
     [
-      "cake_slice",
+      "milk_bottle",
       "has_the_recipe"
     ]
   ]
