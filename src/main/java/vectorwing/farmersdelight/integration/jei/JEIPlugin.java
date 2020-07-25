@@ -26,7 +26,8 @@ public class JEIPlugin implements IModPlugin
 	private static ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "jei_plugin");
 
 	@Override
-	public void registerCategories(IRecipeCategoryRegistration registry) {
+	public void registerCategories(IRecipeCategoryRegistration registry)
+	{
 		registry.addRecipeCategories(new CookingRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
 	}
 

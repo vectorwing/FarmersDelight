@@ -19,7 +19,8 @@ public class CreativeTab extends ItemGroup
 	}
 
 	@Override
-	public void fill(NonNullList<ItemStack> items) {
+	public void fill(NonNullList<ItemStack> items)
+	{
 		registerWorkstations(items);
 		registerTools(items);
 		registerCrops(items);
@@ -28,13 +29,16 @@ public class CreativeTab extends ItemGroup
 		registerMeals(items);
 	}
 
-	private void registerWorkstations(NonNullList<ItemStack> items) {
+	private void registerWorkstations(NonNullList<ItemStack> items)
+	{
 		items.add(new ItemStack(ModBlocks.STOVE.get()));
 		items.add(new ItemStack(ModBlocks.COOKING_POT.get()));
 		items.add(new ItemStack(ModBlocks.BASKET.get()));
 		items.add(new ItemStack(ModBlocks.ROPE.get()));
 	}
-	private void registerCrops(NonNullList<ItemStack> items) {
+
+	private void registerCrops(NonNullList<ItemStack> items)
+	{
 		items.add(new ItemStack(ModItems.CABBAGE.get()));
 		items.add(new ItemStack(ModItems.TOMATO.get()));
 		items.add(new ItemStack(ModItems.ONION.get()));
@@ -42,6 +46,7 @@ public class CreativeTab extends ItemGroup
 		items.add(new ItemStack(ModItems.CABBAGE_SEEDS.get()));
 		items.add(new ItemStack(ModItems.TOMATO_SEEDS.get()));
 	}
+
 	private void registerIngredients(NonNullList<ItemStack> items) {
 		items.add(new ItemStack(ModItems.FRIED_EGG.get()));
 		items.add(new ItemStack(ModItems.MILK_BOTTLE.get()));
@@ -51,16 +56,19 @@ public class CreativeTab extends ItemGroup
 		items.add(new ItemStack(ModItems.SWEET_BERRY_COOKIE.get()));
 		items.add(new ItemStack(ModItems.HONEY_COOKIE.get()));
 	}
+
 	private void registerTools(NonNullList<ItemStack> items) {
 		items.add(new ItemStack(ModItems.FLINT_KNIFE.get()));
 		items.add(new ItemStack(ModItems.IRON_KNIFE.get()));
 		items.add(new ItemStack(ModItems.DIAMOND_KNIFE.get()));
 		items.add(new ItemStack(ModItems.GOLDEN_KNIFE.get()));
 	}
+
 	private void registerMaterials(NonNullList<ItemStack> items) {
 		items.add(new ItemStack(ModItems.STRAW.get()));
 		items.add(new ItemStack(ModItems.CANVAS.get()));
 	}
+
 	private void registerMeals(NonNullList<ItemStack> items) {
 		items.add(new ItemStack(ModItems.MIXED_SALAD.get()));
 		items.add(new ItemStack(ModItems.BARBECUE_STICK.get()));

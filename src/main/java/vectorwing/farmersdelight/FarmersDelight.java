@@ -12,11 +12,9 @@ import vectorwing.farmersdelight.init.ModContainerTypes;
 import vectorwing.farmersdelight.init.ModTileEntityTypes;
 import vectorwing.farmersdelight.setup.ClientEventHandler;
 import vectorwing.farmersdelight.setup.CommonEventHandler;
-import net.minecraft.item.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -30,9 +28,10 @@ public class FarmersDelight
     private static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "farmersdelight";
 
-    public static final CreativeTab ITEM_GROUP = new CreativeTab("farmersdelight");
+    public static final CreativeTab ITEM_GROUP = new CreativeTab(FarmersDelight.MODID);
 
-    public FarmersDelight() {
+    public FarmersDelight()
+    {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(CommonEventHandler::init);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientEventHandler::init);
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, this::registerRecipeSerializers);
@@ -49,7 +48,8 @@ public class FarmersDelight
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    private void registerRecipeSerializers (RegistryEvent.Register<IRecipeSerializer<?>> event) {
+    private void registerRecipeSerializers (RegistryEvent.Register<IRecipeSerializer<?>> event)
+    {
         Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(FarmersDelight.MODID, "cooking"), CookingPotRecipe.TYPE);
         event.getRegistry().register(CookingPotRecipe.SERIALIZER);
     }

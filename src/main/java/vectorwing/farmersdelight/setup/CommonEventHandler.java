@@ -34,7 +34,8 @@ public class CommonEventHandler
 	}
 
 	@SubscribeEvent
-	public static void onLootLoad(LootTableLoadEvent event) {
+	public static void onLootLoad(LootTableLoadEvent event)
+	{
 		String prefix = "minecraft:chests/village/";
 		String name = event.getName().toString();
 
