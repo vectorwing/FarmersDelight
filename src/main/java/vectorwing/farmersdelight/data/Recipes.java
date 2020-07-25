@@ -87,6 +87,12 @@ public class Recipes extends RecipeProvider
 				.key('s', ModItems.STRAW.get())
 				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
 				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.SAFETY_NET.get(), 1)
+				.patternLine("rr")
+				.patternLine("rr")
+				.key('r', ModItems.ROPE.get())
+				.addCriterion("rope", InventoryChangeTrigger.Instance.forItems(ModItems.ROPE.get()))
+				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(Items.SCAFFOLDING, 6)
 				.patternLine("b#b")
 				.patternLine("b b")

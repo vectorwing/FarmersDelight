@@ -21,6 +21,8 @@ public class ModItems
 			() -> new BlockItem(ModBlocks.BASKET.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> ROPE = ITEMS.register("rope",
 			() -> new BlockItem(ModBlocks.ROPE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> SAFETY_NET = ITEMS.register("safety_net",
+			() -> new BlockItem(ModBlocks.SAFETY_NET.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> CABBAGE = ITEMS.register("cabbage",
 			() -> new Item(new Item.Properties().food(Foods.CABBAGE).group(FarmersDelight.ITEM_GROUP)));

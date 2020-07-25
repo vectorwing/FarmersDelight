@@ -17,6 +17,7 @@ public class ModBlocks
 	public static final RegistryObject<Block> COOKING_POT = BLOCKS.register("cooking_pot", CookingPotBlock::new);
 	public static final RegistryObject<Block> BASKET = BLOCKS.register("basket", BasketBlock::new);
 	public static final RegistryObject<Block> ROPE = BLOCKS.register("rope", RopeBlock::new);
+	public static final RegistryObject<Block> SAFETY_NET = BLOCKS.register("safety_net", SafetyNetBlock::new);
 
 	// CROPS
 	public static final RegistryObject<Block> CABBAGE_CROP = BLOCKS.register("cabbages",
