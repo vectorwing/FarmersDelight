@@ -185,7 +185,7 @@ public class TallRiceCropBlock extends BushBlock implements IWaterLoggable, IGro
 
 	@Override
 	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return state.isSolidSide(worldIn, pos, Direction.UP) && state.getBlock() == Blocks.DIRT;
+		return state.isSolidSide(worldIn, pos, Direction.UP) && (state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS_BLOCK);
 	}
 
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {

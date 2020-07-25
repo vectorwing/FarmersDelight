@@ -97,7 +97,7 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 
 	@Override
 	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return state.isSolidSide(worldIn, pos, Direction.UP) && state.getBlock() == Blocks.DIRT;
+		return state.isSolidSide(worldIn, pos, Direction.UP) && (state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS_BLOCK);
 	}
 
 	public IntegerProperty getAgeProperty() { return AGE; }
