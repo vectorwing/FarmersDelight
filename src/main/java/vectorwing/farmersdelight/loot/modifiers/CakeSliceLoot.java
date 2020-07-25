@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.setup.loot;
+package vectorwing.farmersdelight.loot.modifiers;
 
 import vectorwing.farmersdelight.init.ModItems;
 import com.google.gson.JsonObject;

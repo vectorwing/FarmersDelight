@@ -56,4 +56,9 @@ public class Foods
 	public static final Food SHEPHERDS_PIE = (new Food.Builder())
 			.hunger(14).saturation(0.9f).build();
 
+	// Pet Foods
+	public static final Food DOG_FOOD = (new Food.Builder())
+			.hunger(2).saturation(0.2f).meat().build();
+	public static final Food HORSE_FEED = (new Food.Builder())
+			.hunger(2).saturation(0.2f).build();
 }

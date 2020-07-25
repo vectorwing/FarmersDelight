@@ -49,7 +49,7 @@ public class BasketBlock extends ContainerBlock
 
 	public BasketBlock()
 	{
-		super(Properties.create(Material.WOOD).hardnessAndResistance(0.6F).sound(SoundType.WOOD));
+		super(Properties.create(Material.WOOD).hardnessAndResistance(1.5F).sound(SoundType.WOOD));
 	}
 
 	public BasketBlock(Block.Properties properties) {

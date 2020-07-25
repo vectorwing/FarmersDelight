@@ -1,0 +1,18 @@
+{
+  "type": "farmersdelight:straw_from_knife",
+  "conditions": [
+    {
+      "condition": "minecraft:match_tool",
+      "predicate": {
+        "tag": "farmersdelight:knives"
+      }
+    },
+    {
+      "condition": "block_state_property",
+      "block": "minecraft:wheat",
+      "properties": {
+        "age": "7"
+      }
+    }
+  ]
+}

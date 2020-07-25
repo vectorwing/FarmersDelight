@@ -99,11 +99,10 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 	@Override
 	public void tick()
 	{
-		boolean isHeated = this.blockBelowIsHot();
+		boolean isHeated = this.isAboveLitHeatSource();
 		boolean dirty = false;
 
 		if (!this.world.isRemote) {
-			// Process ingredients
 			if (isHeated && this.hasInput()) {
 				IRecipe<?> irecipe = this.world.getRecipeManager()
 						.getRecipe(this.recipeType, this, this.world).orElse(null);
@@ -201,7 +200,6 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 			}
 		}
 		for (int i = 0; i < INPUT_SIZE; ++i) {
-			// Spit leftover containers out
 			if (this.items.get(i).hasContainerItem()) {
 				Direction direction = this.getBlockState().get(CookingPotBlock.FACING).rotateYCCW();
 				ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5, this.items.get(i).getContainerItem());
@@ -233,14 +231,14 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 		}
 	}
 
-	public boolean blockBelowIsHot() {
+	public boolean isAboveLitHeatSource() {
 		if (world == null)
 			return false;
 		BlockState checkState = world.getBlockState(pos.down());
 		if (Tags.HEAT_SOURCES.contains(checkState.getBlock())) {
+			if (checkState.has(BlockStateProperties.LIT))
+				return checkState.get(BlockStateProperties.LIT);
 			return true;
-		} else if (Tags.LIT_HEAT_SOURCES.contains(checkState.getBlock())) {
-			return checkState.get(BlockStateProperties.LIT);
 		}
 		return false;
 	}
