@@ -8,12 +8,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.UseAction;
+import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class MilkBottleItem extends Item
@@ -28,14 +30,31 @@ public class MilkBottleItem extends Item
 		if (!worldIn.isRemote)
 		{
 			Iterator<EffectInstance> itr = entityLiving.getActivePotionEffects().iterator();
-			boolean selected = false;
-			while (itr.hasNext() && !selected) {
+			ArrayList<Effect> compatibleEffects = new ArrayList<>();
+			//boolean selected = false;
+
+			// Select eligible effects
+			while (itr.hasNext()) {
 				EffectInstance effect = itr.next();
-				if (effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET)) && !net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.living.PotionEvent.PotionRemoveEvent(entityLiving, effect))) {
-					entityLiving.removePotionEffect(effect.getPotion());
-					selected = true;
+				if (effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET))) {
+					compatibleEffects.add(effect.getPotion());
 				}
 			}
+
+			// Randomly pick one, then remove
+			EffectInstance selectedEffect = entityLiving.getActivePotionEffect(compatibleEffects.get(worldIn.rand.nextInt(compatibleEffects.size())));
+			if (!net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.living.PotionEvent.PotionRemoveEvent(entityLiving, selectedEffect))) {
+				entityLiving.removePotionEffect(selectedEffect.getPotion());
+			}
+
+//			while (itr.hasNext() && !selected) {
+//				EffectInstance effect = itr.next();
+//				if (effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET)) && !net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.living.PotionEvent.PotionRemoveEvent(entityLiving, effect))) {
+//					compatibleEffects.add(effect);
+//					entityLiving.removePotionEffect(effect.getPotion());
+//					selected = true;
+//				}
+//			}
 		}
 
 		if (playerentity instanceof ServerPlayerEntity) {
