@@ -1,14 +1,12 @@
 package vectorwing.farmersdelight.init;
 
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.items.Foods;
-import vectorwing.farmersdelight.items.KnifeItem;
-import vectorwing.farmersdelight.items.MealItem;
-import vectorwing.farmersdelight.items.MilkBottleItem;
+import vectorwing.farmersdelight.items.*;
 import net.minecraft.item.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import vectorwing.farmersdelight.items.Foods;
 
 public class ModItems
 {
@@ -94,4 +92,7 @@ public class ModItems
 			() -> new MealItem(new Item.Properties().food(Foods.STEAK_AND_POTATOES).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> SHEPHERDS_PIE = ITEMS.register("shepherds_pie",
 			() -> new MealItem(new Item.Properties().food(Foods.SHEPHERDS_PIE).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+
+	public static final RegistryObject<Item> DOG_FOOD = ITEMS.register("dog_food",
+			() -> new DogFoodItem(new Item.Properties().food(Foods.DOG_FOOD).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 }

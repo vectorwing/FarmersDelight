@@ -27,6 +27,7 @@ public class CreativeTab extends ItemGroup
 		registerMaterials(items);
 		registerIngredients(items);
 		registerMeals(items);
+		registerPetMeals(items);
 	}
 
 	private void registerWorkstations(NonNullList<ItemStack> items)
@@ -85,5 +86,9 @@ public class CreativeTab extends ItemGroup
 		items.add(new ItemStack(ModItems.VEGETABLE_NOODLES.get()));
 		items.add(new ItemStack(ModItems.STEAK_AND_POTATOES.get()));
 		items.add(new ItemStack(ModItems.SHEPHERDS_PIE.get()));
+	}
+
+	private void registerPetMeals(NonNullList<ItemStack> items) {
+		items.add(new ItemStack(ModItems.DOG_FOOD.get()));
 	}
 }
