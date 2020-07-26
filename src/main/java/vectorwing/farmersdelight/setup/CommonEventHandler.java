@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.setup;
 
+import net.minecraftforge.fml.DeferredWorkQueue;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.init.ModItems;
 import vectorwing.farmersdelight.loot.functions.CopyMealFunction;
@@ -14,6 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import vectorwing.farmersdelight.world.CropPatchGen;
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CommonEventHandler
@@ -31,6 +33,8 @@ public class CommonEventHandler
 		ComposterBlock.CHANCES.put(ModItems.TOMATO.get(), 0.65F);
 
 		LootFunctionManager.registerFunction(new CopyMealFunction.Serializer());
+
+		DeferredWorkQueue.runLater(CropPatchGen::generateCrop);
 	}
 
 	@SubscribeEvent

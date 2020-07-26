@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.blocks;
 
 
+import net.minecraft.block.Blocks;
 import vectorwing.farmersdelight.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -48,6 +49,10 @@ public class TomatoesBlock extends CropsBlock
 		} else {
 			return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
 		}
+	}
+
+	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
+		return state.getBlock() == Blocks.FARMLAND;
 	}
 
 	@Override
