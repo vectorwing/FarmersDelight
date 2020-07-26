@@ -1,5 +1,7 @@
 package vectorwing.farmersdelight.blocks;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
@@ -26,26 +28,58 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Map;
 
 public class BasketBlock extends ContainerBlock
 {
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
 	public static final BooleanProperty ENABLED = BlockStateProperties.ENABLED;
 	public static final VoxelShape OUT_SHAPE = VoxelShapes.fullCube();
-	public static final Map<Direction, VoxelShape> SHAPE_FACING = mapVoxelShapes();
-
-	private static Map<Direction, VoxelShape> mapVoxelShapes() {
-		Map<Direction, VoxelShape> result = new HashMap<>();
-		result.put(Direction.DOWN, VoxelShapes.combineAndSimplify(OUT_SHAPE, Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D), IBooleanFunction.ONLY_FIRST));
-		result.put(Direction.UP, VoxelShapes.combineAndSimplify(OUT_SHAPE, Block.makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 16.0D, 14.0D), IBooleanFunction.ONLY_FIRST));
-		result.put(Direction.NORTH, VoxelShapes.combineAndSimplify(OUT_SHAPE, Block.makeCuboidShape(2.0D, 2.0D, 0.0D, 14.0D, 14.0D, 14.0D), IBooleanFunction.ONLY_FIRST));
-		result.put(Direction.SOUTH, VoxelShapes.combineAndSimplify(OUT_SHAPE, Block.makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 14.0D, 16.0D), IBooleanFunction.ONLY_FIRST));
-		result.put(Direction.WEST, VoxelShapes.combineAndSimplify(OUT_SHAPE, Block.makeCuboidShape(0.0D, 2.0D, 2.0D, 14.0D, 14.0D, 14.0D), IBooleanFunction.ONLY_FIRST));
-		result.put(Direction.EAST, VoxelShapes.combineAndSimplify(OUT_SHAPE, Block.makeCuboidShape(2.0D, 2.0D, 2.0D, 16.0D, 14.0D, 14.0D), IBooleanFunction.ONLY_FIRST));
-		return result;
-	}
+	@SuppressWarnings("UnstableApiUsage")
+	public static final ImmutableMap<Direction, VoxelShape> SHAPE_FACING =
+		Maps.immutableEnumMap(ImmutableMap.<Direction, VoxelShape>builder()
+			.put(Direction.DOWN, cutoutCube(
+				makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D),
+				makeCuboidShape(6.0D, 3.0D, 14.0D, 10.0D, 5.0D, 16.0D),
+				makeCuboidShape(14.0D, 3.0D, 6.0D, 16.0D, 5.0D, 10.0D),
+				makeCuboidShape(6.0D, 3.0D, 0.0D, 10.0D, 5.0D, 2.0D),
+				makeCuboidShape(0.0D, 3.0D, 6.0D, 2.0D, 5.0D, 10.0D)
+			))
+			.put(Direction.UP, cutoutCube(
+				makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 16.0D, 14.0D),
+				makeCuboidShape(6.0D, 11.0D, 0.0D, 10.0D, 13.0D, 2.0D),
+				makeCuboidShape(14.0D, 11.0D, 6.0D, 16.0D, 13.0D, 10.0D),
+				makeCuboidShape(6.0D, 11.0D, 14.0D, 10.0D, 13.0D, 16.0D),
+				makeCuboidShape(0.0D, 11.0D, 6.0D, 2.0D, 13.0D, 10.0D)
+			))
+			.put(Direction.NORTH, cutoutCube(
+				makeCuboidShape(2.0D, 2.0D, 0.0D, 14.0D, 14.0D, 14.0D),
+				makeCuboidShape(6.0D, 0.0D, 3.0D, 10.0D, 2.0D, 5.0D),
+				makeCuboidShape(14.0D, 6.0D, 3.0D, 16.0D, 10.0D, 5.0D),
+				makeCuboidShape(6.0D, 14.0D, 3.0D, 10.0D, 16.0D, 5.0D),
+				makeCuboidShape(0.0D, 6.0D, 3.0D, 2.0D, 10.0D, 5.0D)
+			))
+			.put(Direction.SOUTH, cutoutCube(
+				makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 14.0D, 16.0D),
+				makeCuboidShape(6.0D, 14.0D, 11.0D, 10.0D, 16.0D, 13.0D),
+				makeCuboidShape(14.0D, 6.0D, 11.0D, 16.0D, 10.0D, 13.0D),
+				makeCuboidShape(6.0D, 0.0D, 11.0D, 10.0D, 2.0D, 13.0D),
+				makeCuboidShape(0.0D, 6.0D, 11.0D, 2.0D, 10.0D, 13.0D)
+			))
+			.put(Direction.WEST, cutoutCube(
+				makeCuboidShape(0.0D, 2.0D, 2.0D, 14.0D, 14.0D, 14.0D),
+				makeCuboidShape(3.0D, 14.0D, 6.0D, 5.0D, 16.0D, 10.0D),
+				makeCuboidShape(3.0D, 6.0D, 14.0D, 5.0D, 10.0D, 16.0D),
+				makeCuboidShape(3.0D, 0.0D, 6.0D, 5.0D, 2.0D, 10.0D),
+				makeCuboidShape(3.0D, 6.0D, 0.0D, 5.0D, 10.0D, 2.0D)
+			))
+			.put(Direction.EAST, cutoutCube(
+				makeCuboidShape(2.0D, 2.0D, 2.0D, 16.0D, 14.0D, 14.0D),
+				makeCuboidShape(11.0D, 14.0D, 6.0D, 13.0D, 16.0D, 10.0D),
+				makeCuboidShape(11.0D, 6.0D, 0.0D, 13.0D, 10.0D, 2.0D),
+				makeCuboidShape(11.0D, 0.0D, 6.0D, 13.0D, 2.0D, 10.0D),
+				makeCuboidShape(11.0D, 6.0D, 14.0D, 13.0D, 10.0D, 16.0D)
+			))
+			.build());
 
 	public BasketBlock()
 	{
@@ -55,6 +89,14 @@ public class BasketBlock extends ContainerBlock
 	public BasketBlock(Block.Properties properties) {
 		super(properties);
 		this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.UP));
+	}
+
+	private static VoxelShape cutoutCube(VoxelShape... cutouts) {
+		VoxelShape shape = VoxelShapes.fullCube();
+		for (VoxelShape cutout : cutouts) {
+			shape = VoxelShapes.combine(shape, cutout, IBooleanFunction.ONLY_FIRST);
+		}
+		return shape.simplify();
 	}
 
 	public BlockRenderType getRenderType(BlockState state) {
