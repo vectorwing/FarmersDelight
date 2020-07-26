@@ -21,12 +21,18 @@ public class ModBlocks
 	public static final RegistryObject<Block> SAFETY_NET = BLOCKS.register("safety_net", SafetyNetBlock::new);
 
 	// WILD PATCHES
-	public static final RegistryObject<Block> CABBAGE_PATCH = BLOCKS.register("cabbage_patch",
-			() -> new WildPatchBlock(Block.Properties.from(Blocks.WHEAT).lightValue(13)));
-	public static final RegistryObject<Block> ONION_PATCH = BLOCKS.register("onion_patch",
-			() -> new WildPatchBlock(Block.Properties.from(Blocks.WHEAT).lightValue(13)));
-	public static final RegistryObject<Block> TOMATO_PATCH = BLOCKS.register("tomato_patch",
-			() -> new WildPatchBlock(Block.Properties.from(Blocks.WHEAT).lightValue(13)));
+	public static final RegistryObject<Block> WILD_CABBAGES = BLOCKS.register("wild_cabbages",
+			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+	public static final RegistryObject<Block> WILD_ONIONS = BLOCKS.register("wild_onions",
+			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+	public static final RegistryObject<Block> WILD_TOMATOES = BLOCKS.register("wild_tomatoes",
+			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+	public static final RegistryObject<Block> WILD_CARROTS = BLOCKS.register("wild_carrots",
+			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+	public static final RegistryObject<Block> WILD_POTATOES = BLOCKS.register("wild_potatoes",
+			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+	public static final RegistryObject<Block> WILD_BEETROOTS = BLOCKS.register("wild_beetroots",
+			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 
 	// CROPS
 	public static final RegistryObject<Block> CABBAGE_CROP = BLOCKS.register("cabbages",

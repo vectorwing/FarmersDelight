@@ -24,12 +24,18 @@ public class ModItems
 	public static final RegistryObject<Item> SAFETY_NET = ITEMS.register("safety_net",
 			() -> new BlockItem(ModBlocks.SAFETY_NET.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
-	public static final RegistryObject<Item> CABBAGE_PATCH = ITEMS.register("cabbage_patch",
-			() -> new BlockItem(ModBlocks.CABBAGE_PATCH.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
-	public static final RegistryObject<Item> TOMATO_PATCH = ITEMS.register("tomato_patch",
-			() -> new BlockItem(ModBlocks.TOMATO_PATCH.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
-	public static final RegistryObject<Item> ONION_PATCH = ITEMS.register("onion_patch",
-			() -> new BlockItem(ModBlocks.ONION_PATCH.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> WILD_CABBAGES = ITEMS.register("wild_cabbages",
+			() -> new BlockItem(ModBlocks.WILD_CABBAGES.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> WILD_ONIONS = ITEMS.register("wild_onions",
+			() -> new BlockItem(ModBlocks.WILD_ONIONS.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> WILD_TOMATOES = ITEMS.register("wild_tomatoes",
+			() -> new BlockItem(ModBlocks.WILD_TOMATOES.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> WILD_CARROTS = ITEMS.register("wild_carrots",
+			() -> new BlockItem(ModBlocks.WILD_CARROTS.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> WILD_POTATOES = ITEMS.register("wild_potatoes",
+			() -> new BlockItem(ModBlocks.WILD_POTATOES.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> WILD_BEETROOTS = ITEMS.register("wild_beetroots",
+			() -> new BlockItem(ModBlocks.WILD_BEETROOTS.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> CABBAGE = ITEMS.register("cabbage",
 			() -> new Item(new Item.Properties().food(Foods.CABBAGE).group(FarmersDelight.ITEM_GROUP)));

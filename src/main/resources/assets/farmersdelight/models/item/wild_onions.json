@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "farmersdelight:blocks/onions_stage3"
+    "layer0": "farmersdelight:blocks/wild_onions"
   }
 }

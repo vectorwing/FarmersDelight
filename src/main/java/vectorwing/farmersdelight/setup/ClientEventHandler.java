@@ -22,9 +22,12 @@ public class ClientEventHandler
 	private static final Logger LOGGER = LogManager.getLogger();
 
 	public static void init(final FMLClientSetupEvent event) {
-		RenderTypeLookup.setRenderLayer(ModBlocks.CABBAGE_PATCH.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(ModBlocks.TOMATO_PATCH.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(ModBlocks.ONION_PATCH.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.WILD_CABBAGES.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.WILD_ONIONS.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.WILD_TOMATOES.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.WILD_CARROTS.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.WILD_POTATOES.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.WILD_BEETROOTS.get(), RenderType.getCutout());
 
 		RenderTypeLookup.setRenderLayer(ModBlocks.ONION_CROP.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.CABBAGE_CROP.get(), RenderType.getCutout());

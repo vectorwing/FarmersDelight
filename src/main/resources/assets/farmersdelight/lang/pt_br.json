@@ -10,9 +10,12 @@
   "block.farmersdelight.tomatoes": "Sementes de tomate",
   "block.farmersdelight.rice_crop": "Arroz",
 
-  "block.farmersdelight.cabbage_patch": "Couve silvestre",
-  "block.farmersdelight.tomato_patch": "Tomates rasteiros",
-  "block.farmersdelight.onion_patch": "Cebola silvestre",
+  "block.farmersdelight.wild_cabbages": "Couve silvestre",
+  "block.farmersdelight.wild_tomatoes": "Tomates rasteiros",
+  "block.farmersdelight.wild_onions": "Cebola silvestre",
+  "block.farmersdelight.wild_carrots": "Cenoura silvestre",
+  "block.farmersdelight.wild_potatoes": "Batata silvestre",
+  "block.farmersdelight.wild_beetroots": "Beterraba marítima",
 
   "item.farmersdelight.tomato": "Tomate",
   "item.farmersdelight.cabbage": "Repolho",

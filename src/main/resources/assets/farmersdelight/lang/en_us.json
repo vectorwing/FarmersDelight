@@ -10,9 +10,12 @@
   "block.farmersdelight.tomatoes": "Tomato Seeds",
   "block.farmersdelight.rice_crop": "Rice",
 
-  "block.farmersdelight.cabbage_patch": "Wild Cabbage",
-  "block.farmersdelight.tomato_patch": "Tomato Vines",
-  "block.farmersdelight.onion_patch": "Wild Onions",
+  "block.farmersdelight.wild_cabbages": "Wild Cabbage",
+  "block.farmersdelight.wild_tomatoes": "Tomato Vines",
+  "block.farmersdelight.wild_onions": "Wild Onions",
+  "block.farmersdelight.wild_carrots": "Wild Carrots",
+  "block.farmersdelight.wild_potatoes": "Wild Potatoes",
+  "block.farmersdelight.wild_beetroots": "Sea Beet",
 
   "item.farmersdelight.tomato": "Tomato",
   "item.farmersdelight.cabbage": "Cabbage",

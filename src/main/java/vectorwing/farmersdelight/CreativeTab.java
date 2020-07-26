@@ -41,6 +41,12 @@ public class CreativeTab extends ItemGroup
 
 	private void registerCrops(NonNullList<ItemStack> items)
 	{
+		items.add(new ItemStack(ModItems.WILD_CABBAGES.get()));
+		items.add(new ItemStack(ModItems.WILD_ONIONS.get()));
+		items.add(new ItemStack(ModItems.WILD_TOMATOES.get()));
+		items.add(new ItemStack(ModItems.WILD_CARROTS.get()));
+		items.add(new ItemStack(ModItems.WILD_POTATOES.get()));
+		items.add(new ItemStack(ModItems.WILD_BEETROOTS.get()));
 		items.add(new ItemStack(ModItems.CABBAGE.get()));
 		items.add(new ItemStack(ModItems.TOMATO.get()));
 		items.add(new ItemStack(ModItems.ONION.get()));
