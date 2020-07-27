@@ -40,7 +40,7 @@ public class CropPatchGeneration
 				{
 					biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH
 							.withConfiguration(TOMATO_PATCH_CONFIG)
-							.withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(9))));
+							.withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(Configuration.CHANCE_WILD_TOMATOES.get()))));
 				}
 			}
 			if (biome == Biomes.BEACH)
@@ -49,13 +49,13 @@ public class CropPatchGeneration
 				{
 					biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH
 							.withConfiguration(CABBAGE_PATCH_CONFIG)
-							.withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(1))));
+							.withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(Configuration.FREQUENCY_WILD_CABBAGES.get()))));
 				}
 				if (Configuration.GENERATE_WILD_BEETROOTS.get())
 				{
 					biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH
 							.withConfiguration(BEETROOT_PATCH_CONFIG)
-							.withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(1))));
+							.withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(Configuration.FREQUENCY_WILD_BEETROOTS.get()))));
 				}
 			}
 			if (biome.getDefaultTemperature() > 0.3 && biome.getDefaultTemperature() < 1.0) {
@@ -63,13 +63,13 @@ public class CropPatchGeneration
 				{
 					biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH
 							.withConfiguration(CARROT_PATCH_CONFIG)
-							.withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(9))));
+							.withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(Configuration.CHANCE_WILD_CARROTS.get()))));
 				}
 				if (Configuration.GENERATE_WILD_ONIONS.get())
 				{
 					biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH
 							.withConfiguration(ONION_PATCH_CONFIG)
-							.withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(9))));
+							.withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(Configuration.CHANCE_WILD_ONIONS.get()))));
 				}
 			}
 			if (biome.getDefaultTemperature() <= 0.3) {
@@ -77,7 +77,7 @@ public class CropPatchGeneration
 				{
 					biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH
 							.withConfiguration(POTATO_PATCH_CONFIG)
-							.withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(9))));
+							.withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(Configuration.CHANCE_WILD_POTATOES.get()))));
 				}
 			}
 		}
