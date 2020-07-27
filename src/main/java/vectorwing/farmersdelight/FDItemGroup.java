@@ -6,9 +6,9 @@ import net.minecraft.util.NonNullList;
 import vectorwing.farmersdelight.init.ModBlocks;
 import vectorwing.farmersdelight.init.ModItems;
 
-public class CreativeTab extends ItemGroup
+public class FDItemGroup extends ItemGroup
 {
-	public CreativeTab(String label)
+	public FDItemGroup(String label)
 	{
 		super(label);
 	}

@@ -47,17 +47,17 @@ public class Configuration
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("Wild Potato generation").push("wild_potatoes");
-		GENERATE_WILD_POTATOES = COMMON_BUILDER.comment("Generate wild potatoes on cold biomes (temperature 0.3 or lower)").define("genWildPotatoes", true);
+		GENERATE_WILD_POTATOES = COMMON_BUILDER.comment("Generate wild potatoes on cold biomes (temperature between 0.0 and 0.3)").define("genWildPotatoes", true);
 		CHANCE_WILD_POTATOES = COMMON_BUILDER.comment("Chance of generating clusters. Smaller value = more frequent.").defineInRange("chance", 9, 0, Integer.MAX_VALUE);
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("Wild Carrot generation").push("wild_carrots");
-		GENERATE_WILD_CARROTS = COMMON_BUILDER.comment("Generate wild carrots on temperate biomes (temperature between 0.3 and 1.0)").define("genWildCarrots", true);
+		GENERATE_WILD_CARROTS = COMMON_BUILDER.comment("Generate wild carrots on temperate biomes (temperature between 0.4 and 0.9)").define("genWildCarrots", true);
 		CHANCE_WILD_CARROTS = COMMON_BUILDER.comment("Chance of generating clusters. Smaller value = more frequent.").defineInRange("chance", 9, 0, Integer.MAX_VALUE);
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("Wild Onion generation").push("wild_onions");
-		GENERATE_WILD_ONIONS = COMMON_BUILDER.comment("Generate wild onions on temperate biomes (temperature between 0.3 and 1.0)").define("genWildOnions", true);
+		GENERATE_WILD_ONIONS = COMMON_BUILDER.comment("Generate wild onions on temperate biomes (temperature between 0.4 and 0.9)").define("genWildOnions", true);
 		CHANCE_WILD_ONIONS = COMMON_BUILDER.comment("Chance of generating clusters. Smaller value = more frequent.").defineInRange("chance", 9, 0, Integer.MAX_VALUE);
 		COMMON_BUILDER.pop();
 

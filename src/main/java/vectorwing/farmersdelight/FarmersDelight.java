@@ -28,7 +28,7 @@ public class FarmersDelight
     private static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "farmersdelight";
 
-    public static final CreativeTab ITEM_GROUP = new CreativeTab(FarmersDelight.MODID);
+    public static final FDItemGroup ITEM_GROUP = new FDItemGroup(FarmersDelight.MODID);
 
     public FarmersDelight()
     {

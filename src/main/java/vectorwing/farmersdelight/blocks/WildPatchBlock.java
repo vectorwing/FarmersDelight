@@ -15,7 +15,7 @@ public class WildPatchBlock extends BushBlock
 
 	public WildPatchBlock(Properties properties)
 	{
-		super(properties);
+		super(properties.lightValue(13));
 	}
 
 	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
