@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import vectorwing.farmersdelight.world.CropPatchGen;
+import vectorwing.farmersdelight.world.CropPatchGeneration;
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CommonEventHandler
@@ -34,7 +34,7 @@ public class CommonEventHandler
 
 		LootFunctionManager.registerFunction(new CopyMealFunction.Serializer());
 
-		DeferredWorkQueue.runLater(CropPatchGen::generateCrop);
+		DeferredWorkQueue.runLater(CropPatchGeneration::generateCrop);
 	}
 
 	@SubscribeEvent
