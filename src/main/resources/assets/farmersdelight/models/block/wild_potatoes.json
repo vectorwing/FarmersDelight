@@ -1,6 +1,6 @@
 {
-  "parent": "farmersdelight:block/bush_crop",
+  "parent": "block/cross",
   "textures": {
-    "crop": "farmersdelight:blocks/wild_potatoes"
+    "cross": "farmersdelight:blocks/wild_potatoes"
   }
 }
