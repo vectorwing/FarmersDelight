@@ -1,15 +1,14 @@
 {
-  "parent": "farmersdelight:main/root",
+  "parent": "farmersdelight:main/craft_knife",
   "display": {
     "icon": {
-      "item": "farmersdelight:flint_knife",
-      "nbt": "{Damage:0}"
+      "item": "farmersdelight:straw"
     },
     "title": {
-      "translate": "farmersdelight.advancement.craft_flint_knife"
+      "translate": "farmersdelight.advancement.harvest_straw"
     },
     "description": {
-      "translate": "farmersdelight.advancement.craft_flint_knife.desc"
+      "translate": "farmersdelight.advancement.harvest_straw.desc"
     },
     "frame": "task",
     "show_toast": true,
@@ -17,12 +16,12 @@
     "hidden": false
   },
   "criteria": {
-    "flint_knife": {
+    "harvest_straw": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:flint_knife"
+            "item": "farmersdelight:straw"
           }
         ]
       }
@@ -30,7 +29,7 @@
   },
   "requirements": [
     [
-      "flint_knife"
+      "harvest_straw"
     ]
   ]
 }

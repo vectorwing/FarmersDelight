@@ -1,0 +1,69 @@
+{
+  "parent": "farmersdelight:main/root",
+  "display": {
+    "icon": {
+      "item": "farmersdelight:flint_knife",
+      "nbt": "{Damage:0}"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.craft_knife"
+    },
+    "description": {
+      "translate": "farmersdelight.advancement.craft_knife.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "flint_knife": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:flint_knife"
+          }
+        ]
+      }
+    },
+    "iron_knife": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:iron_knife"
+          }
+        ]
+      }
+    },
+    "diamond_knife": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:diamond_knife"
+          }
+        ]
+      }
+    },
+    "golden_knife": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:golden_knife"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "flint_knife",
+      "iron_knife",
+      "diamond_knife",
+      "golden_knife"
+    ]
+  ]
+}

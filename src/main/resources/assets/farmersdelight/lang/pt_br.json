@@ -69,13 +69,15 @@
 
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "Um mundo de sabor te espera!",
-  "farmersdelight.advancement.craft_flint_knife": "Caçar e colher",
-  "farmersdelight.advancement.craft_flint_knife.desc": "Crie uma Faca de sílex para pilhar mais matéria-prima de plantas e animais",
+  "farmersdelight.advancement.craft_knife": "Caçar e colher",
+  "farmersdelight.advancement.craft_knife.desc": "Crie uma Faca de sílex para pilhar mais matéria-prima de plantas e animais",
+  "farmersdelight.advancement.harvest_straw": "Agarrando palhas",
+  "farmersdelight.advancement.harvest_straw.desc": "Colha plantas gramíneas com uma Faca para obter Palha",
   "farmersdelight.advancement.plant_rice": "Molhando suas raízes",
   "farmersdelight.advancement.plant_rice.desc": "Plante Arroz em uma poça de água rasa",
   "farmersdelight.advancement.craft_stove": "Acendendo a grelha",
   "farmersdelight.advancement.craft_stove.desc": "Obtenha um Fogão",
-  "farmersdelight.advancement.place_cooking_pot": "Hora da janta!",
+  "farmersdelight.advancement.place_cooking_pot": "O jantar está servido!",
   "farmersdelight.advancement.place_cooking_pot.desc": "Coloque uma Panela e comece a preparar refeições!",
 
   "farmersdelight.jei.cooking": "Panela"

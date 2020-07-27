@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import com.google.gson.GsonBuilder;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
+import net.minecraft.advancements.IRequirementsStrategy;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.PlacedBlockTrigger;
 import net.minecraft.data.AdvancementProvider;
@@ -39,14 +40,14 @@ public class Advancements extends AdvancementProvider
 	public void act(DirectoryCache cache) throws IOException
 	{
 		Set<ResourceLocation> set = Sets.newHashSet();
-		Consumer<Advancement> consumer = (p_204017_3_) -> {
-			if (!set.add(p_204017_3_.getId())) {
-				throw new IllegalStateException("Duplicate advancement " + p_204017_3_.getId());
+		Consumer<Advancement> consumer = (advancement) -> {
+			if (!set.add(advancement.getId())) {
+				throw new IllegalStateException("Duplicate advancement " + advancement.getId());
 			} else {
-				Path path1 = getPath(PATH, p_204017_3_);
+				Path path1 = getPath(PATH, advancement);
 
 				try	{
-					IDataProvider.save((new GsonBuilder()).setPrettyPrinting().create(), cache, p_204017_3_.copy().serialize(), path1);
+					IDataProvider.save((new GsonBuilder()).setPrettyPrinting().create(), cache, advancement.copy().serialize(), path1);
 				} catch (IOException ioexception) {
 					LOGGER.error("Couldn't save advancement {}", path1, ioexception);
 				}
@@ -75,13 +76,20 @@ public class Advancements extends AdvancementProvider
 					.register(consumer, getNameId("main/root"));
 
 			// Farming Branch
-			Advancement huntAndGather = getAdvancement(farmersDelight, ModItems.FLINT_KNIFE.get(), "craft_flint_knife", FrameType.TASK, true, true, false)
+			Advancement huntAndGather = getAdvancement(farmersDelight, ModItems.FLINT_KNIFE.get(), "craft_knife", FrameType.TASK, true, true, false)
 					.withCriterion("flint_knife", InventoryChangeTrigger.Instance.forItems(ModItems.FLINT_KNIFE.get()))
-					.register(consumer, getNameId("main/craft_flint_knife"));
+					.withCriterion("iron_knife", InventoryChangeTrigger.Instance.forItems(ModItems.IRON_KNIFE.get()))
+					.withCriterion("diamond_knife", InventoryChangeTrigger.Instance.forItems(ModItems.DIAMOND_KNIFE.get()))
+					.withCriterion("golden_knife", InventoryChangeTrigger.Instance.forItems(ModItems.GOLDEN_KNIFE.get())).withRequirementsStrategy(IRequirementsStrategy.OR)
+					.register(consumer, getNameId("main/craft_knife"));
 
 			Advancement dippingYourRoots = getAdvancement(huntAndGather, ModItems.RICE_PANICLE.get(), "plant_rice", FrameType.TASK, true, true, false)
 					.withCriterion("plant_rice", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.RICE_CROP.get()))
 					.register(consumer, getNameId("main/plant_rice"));
+
+			Advancement graspingAtStraws = getAdvancement(huntAndGather, ModItems.STRAW.get(), "harvest_straw", FrameType.TASK, true, true, false)
+					.withCriterion("harvest_straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
+					.register(consumer, getNameId("main/harvest_straw"));
 
 			// Cooking Branch
 			Advancement fireUpTheGrill = getAdvancement(farmersDelight, ModItems.STOVE.get(), "craft_stove", FrameType.TASK, true, true, false)
