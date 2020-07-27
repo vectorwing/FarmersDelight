@@ -7,6 +7,7 @@ import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.IRequirementsStrategy;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.PlacedBlockTrigger;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.AdvancementProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
@@ -92,7 +93,11 @@ public class Advancements extends AdvancementProvider
 					.register(consumer, getNameId("main/harvest_straw"));
 
 			// Cooking Branch
-			Advancement fireUpTheGrill = getAdvancement(farmersDelight, ModItems.STOVE.get(), "craft_stove", FrameType.TASK, true, true, false)
+			Advancement bonfireLit = getAdvancement(farmersDelight, Blocks.CAMPFIRE, "place_campfire", FrameType.TASK, true, true, false)
+					.withCriterion("campfire", PlacedBlockTrigger.Instance.placedBlock(Blocks.CAMPFIRE))
+					.register(consumer, getNameId("main/place_campfire"));
+
+			Advancement fireUpTheGrill = getAdvancement(bonfireLit, ModItems.STOVE.get(), "craft_stove", FrameType.TASK, true, true, false)
 					.withCriterion("stove", InventoryChangeTrigger.Instance.forItems(ModItems.STOVE.get()))
 					.register(consumer, getNameId("main/craft_stove"));
 
