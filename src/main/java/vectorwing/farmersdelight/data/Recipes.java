@@ -109,11 +109,12 @@ public class Recipes extends RecipeProvider
 				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ModBlocks.COOKING_POT.get())
 				.patternLine("bSb")
-				.patternLine("i i")
+				.patternLine("iWi")
 				.patternLine("iii")
 				.key('b', Items.BRICK)
 				.key('i', Items.IRON_INGOT)
 				.key('S', Items.WOODEN_SHOVEL)
+				.key('W', Items.WATER_BUCKET)
 				.addCriterion("iron_ingot", InventoryChangeTrigger.Instance.forItems(Items.IRON_INGOT))
 				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ModBlocks.BASKET.get())

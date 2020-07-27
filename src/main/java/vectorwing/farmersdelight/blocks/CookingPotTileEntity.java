@@ -13,6 +13,7 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.SoupItem;
+import net.minecraft.item.crafting.AbstractCookingRecipe;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.RecipeItemHelper;
@@ -49,7 +50,6 @@ import java.util.Random;
 
 public class CookingPotTileEntity extends LockableTileEntity implements IRecipeHolder, IRecipeHelperPopulator, ITickableTileEntity
 {
-	private static final Logger LOGGER = LogManager.getLogger();
 	public final int INPUT_SIZE = 6;
 	public final int CONTAINER_INPUT = INPUT_SIZE + 1;
 	public final int INVENTORY_SIZE = INPUT_SIZE + 3;
@@ -110,7 +110,7 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 					++this.cookTime;
 					if (this.cookTime == this.cookTimeTotal) {
 						this.cookTime = 0;
-						this.cookTimeTotal = 200;
+						this.cookTimeTotal = this.getCookTime();
 						this.cook(irecipe);
 						dirty = true;
 					}
@@ -134,6 +134,10 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 		if (dirty) {
 			this.markDirty();
 		}
+	}
+
+	protected int getCookTime() {
+		return this.world.getRecipeManager().getRecipe(this.recipeType, this, this.world).map(CookingPotRecipe::getCookTime).orElse(200);
 	}
 
 	/**
@@ -256,7 +260,6 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 		for (int i = 0; i < INVENTORY_SIZE; ++i) {
 			drops.add(i == INPUT_SIZE ? ItemStack.EMPTY : this.items.get(i));
 		}
-		LOGGER.info("[FD] getDroppable " + drops.toString());
 		return drops;
 	}
 
@@ -317,7 +320,7 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 		}
 
 		if (index >= 0 && index < INPUT_SIZE && !flag) {
-			this.cookTimeTotal = 200;
+			this.cookTimeTotal = this.getCookTime();
 			this.markDirty();
 		}
 	}
@@ -370,7 +373,6 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 			drops.add(i == INPUT_SIZE ? this.items.get(i) : ItemStack.EMPTY);
 		}
 		ItemStackHelper.saveAllItems(compound, drops);
-		LOGGER.info("[FD] writeMeal " + compound.toString());
 		return compound;
 	}
 
