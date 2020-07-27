@@ -18,17 +18,17 @@ public class FDItemGroup extends ItemGroup
 		return new ItemStack(ModBlocks.STOVE.get());
 	}
 
-	@Override
-	public void fill(NonNullList<ItemStack> items)
-	{
-		registerWorkstations(items);
-		registerTools(items);
-		registerCrops(items);
-		registerMaterials(items);
-		registerIngredients(items);
-		registerMeals(items);
-		registerPetMeals(items);
-	}
+//	@Override
+//	public void fill(NonNullList<ItemStack> items)
+//	{
+//		registerWorkstations(items);
+//		registerTools(items);
+//		registerCrops(items);
+//		registerMaterials(items);
+//		registerIngredients(items);
+//		registerMeals(items);
+//		registerPetMeals(items);
+//	}
 
 	private void registerWorkstations(NonNullList<ItemStack> items)
 	{

@@ -63,14 +63,22 @@ public class Recipes extends RecipeProvider
 				.key('b', Items.BAMBOO)
 				.key('#', ModItems.CANVAS.get())
 				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
-				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "scaffolding"));
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "scaffolding_from_canvas"));
 		ShapedRecipeBuilder.shapedRecipe(Items.LEAD)
 				.patternLine("rr ")
 				.patternLine("rr ")
 				.patternLine("  r")
 				.key('r', ModItems.ROPE.get())
 				.addCriterion("rope", InventoryChangeTrigger.Instance.forItems(ModItems.ROPE.get()))
-				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "lead"));
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "lead_from_rope"));
+		ShapedRecipeBuilder.shapedRecipe(Items.PAINTING)
+				.patternLine("sss")
+				.patternLine("scs")
+				.patternLine("sss")
+				.key('s', Items.STICK)
+				.key('c', ModItems.CANVAS.get())
+				.addCriterion("canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "painting_from_canvas"));
 		ShapedRecipeBuilder.shapedRecipe(Items.CAKE)
 				.patternLine("mmm")
 				.patternLine("ses")
@@ -172,8 +180,9 @@ public class Recipes extends RecipeProvider
 
 	private void recipesMaterials(Consumer<IFinishedRecipe> consumer) {
 		ShapedRecipeBuilder.shapedRecipe(ModItems.CANVAS.get())
-				.patternLine("##")
-				.patternLine("##")
+				.patternLine("###")
+				.patternLine("###")
+				.patternLine("###")
 				.key('#', ModItems.STRAW.get())
 				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
 				.build(consumer);

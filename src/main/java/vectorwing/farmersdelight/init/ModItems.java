@@ -12,7 +12,7 @@ public class ModItems
 {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, FarmersDelight.MODID);
 
-	// BlockItems
+	// Blocks
 	public static final RegistryObject<Item> STOVE = ITEMS.register("stove",
 			() -> new BlockItem(ModBlocks.STOVE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> COOKING_POT = ITEMS.register("cooking_pot",
@@ -24,6 +24,7 @@ public class ModItems
 	public static final RegistryObject<Item> SAFETY_NET = ITEMS.register("safety_net",
 			() -> new BlockItem(ModBlocks.SAFETY_NET.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
+	// Wild Crops
 	public static final RegistryObject<Item> WILD_CABBAGES = ITEMS.register("wild_cabbages",
 			() -> new BlockItem(ModBlocks.WILD_CABBAGES.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> WILD_ONIONS = ITEMS.register("wild_onions",
@@ -36,6 +37,16 @@ public class ModItems
 			() -> new BlockItem(ModBlocks.WILD_POTATOES.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> WILD_BEETROOTS = ITEMS.register("wild_beetroots",
 			() -> new BlockItem(ModBlocks.WILD_BEETROOTS.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+
+	// TOOLS
+	public static final RegistryObject<Item> FLINT_KNIFE = ITEMS.register("flint_knife",
+			() -> new KnifeItem(ItemTier.STONE, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> IRON_KNIFE = ITEMS.register("iron_knife",
+			() -> new KnifeItem(ItemTier.IRON, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> DIAMOND_KNIFE = ITEMS.register("diamond_knife",
+			() -> new KnifeItem(ItemTier.DIAMOND, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> GOLDEN_KNIFE = ITEMS.register("golden_knife",
+			() -> new KnifeItem(ItemTier.GOLD, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> CABBAGE = ITEMS.register("cabbage",
 			() -> new Item(new Item.Properties().food(Foods.CABBAGE).group(FarmersDelight.ITEM_GROUP)));
@@ -67,15 +78,6 @@ public class ModItems
 			() -> new Item(new Item.Properties().food(Foods.COOKIES).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> HONEY_COOKIE = ITEMS.register("honey_cookie",
 			() -> new Item(new Item.Properties().food(Foods.COOKIES).group(FarmersDelight.ITEM_GROUP)));
-
-	public static final RegistryObject<Item> FLINT_KNIFE = ITEMS.register("flint_knife",
-			() -> new KnifeItem(ItemTier.STONE, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
-	public static final RegistryObject<Item> IRON_KNIFE = ITEMS.register("iron_knife",
-			() -> new KnifeItem(ItemTier.IRON, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
-	public static final RegistryObject<Item> DIAMOND_KNIFE = ITEMS.register("diamond_knife",
-			() -> new KnifeItem(ItemTier.DIAMOND, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
-	public static final RegistryObject<Item> GOLDEN_KNIFE = ITEMS.register("golden_knife",
-			() -> new KnifeItem(ItemTier.GOLD, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> MIXED_SALAD = ITEMS.register("mixed_salad",
 			() -> new MealItem(new Item.Properties().food(Foods.MIXED_SALAD).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
