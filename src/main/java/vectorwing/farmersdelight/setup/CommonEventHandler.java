@@ -24,7 +24,6 @@ import java.util.Set;
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CommonEventHandler
 {
-	//private static final Logger LOGGER = LogManager.getLogger();
 	private static final ResourceLocation SHIPWRECK_SUPPLY_CHEST = LootTables.CHESTS_SHIPWRECK_SUPPLY;
 	private static final Set<ResourceLocation> VILLAGE_HOUSE_CHESTS = Sets.newHashSet(
 			LootTables.CHESTS_VILLAGE_VILLAGE_PLAINS_HOUSE,
@@ -50,9 +49,6 @@ public class CommonEventHandler
 	@SubscribeEvent
 	public static void onLootLoad(LootTableLoadEvent event)
 	{
-		//String prefix = "minecraft:chests/village/";
-		//String name = event.getName().toString();
-
 		for (String entity : SCAVENGING_ENTITIES) {
 			if (event.getName().equals(new ResourceLocation("minecraft", "entities/" + entity))) {
 				event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(FarmersDelight.MODID, "inject/" + entity))).build());
@@ -67,20 +63,5 @@ public class CommonEventHandler
 			event.getTable().addPool(LootPool.builder().addEntry(
 							TableLootEntry.builder(new ResourceLocation(FarmersDelight.MODID, "inject/crops_villager_houses")).weight(1).quality(0)).name("villager_houses_fd_crops").build());
 		}
-//		if (Configuration.CROPS_ON_VILLAGE_HOUSES.get() && name.startsWith(prefix)) {
-//			String file = name.substring(name.indexOf(prefix) + prefix.length());
-//			switch (file) {
-//				case "village_plains_house":
-//				case "village_savanna_house":
-//				case "village_desert_house":
-//				case "village_snowy_house":
-//				case "village_taiga_house":
-//					event.getTable().addPool(LootPool.builder().addEntry(
-//							TableLootEntry.builder(new ResourceLocation(FarmersDelight.MODID, "inject/" + file)).weight(1).quality(0)).name(file + "_fd_crops").build());
-//					break;
-//				default:
-//					break;
-//			}
-//		}
 	}
 }
