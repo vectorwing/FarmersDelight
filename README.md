@@ -1,10 +1,9 @@
 # Farmer's Delight
+
 A lightweight farming expansion for Minecraft.
 
-This mod is currently very barebones, and has no release yet. Stay tuned for updates!
+Farmer's Delight is a mod focused on providing solid cooking mechanics and extending the different forms of farming in the game. The goal is to add only a gentle amount of new content to farm and collect, and focus on giving more purpose to existing items and blocks that would otherwise pass under the player's radar.
 
-## Features
-- 4 new crops: Cabbage, Tomato, Onion and Rice;
-- New workstations for cooking meals: Stove, Cooking Pot;
-- A modest collection of meals to prepare using the many foodstuffs available;
-- You can finally fry eggs in a Furnace!
+This mod is currently under development, and isn't yet feature-complete. Quite a few other features are planned to be added, so keep an eye on it as we post more updates!
+
+Thank you for visiting the repository! If you'd like to contribute with the mod, feel free to check the issues page - whether to open a new one or give existing ones a shot. All help is appreciated!
