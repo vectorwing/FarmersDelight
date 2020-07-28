@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.blocks;
 
 
+import net.minecraft.block.Blocks;
 import vectorwing.farmersdelight.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -43,7 +44,7 @@ public class TomatoesBlock extends CropsBlock
 			int j = 1 + worldIn.rand.nextInt(2);
 			spawnAsEntity(worldIn, pos, new ItemStack(ModItems.TOMATO.get(), j));
 			worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
-			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(TOMATO_BEARING_AGE - 1)), 2);
+			worldIn.setBlockState(pos, state.with(AGE, TOMATO_BEARING_AGE - 1), 2);
 			return ActionResultType.SUCCESS;
 		} else {
 			return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);

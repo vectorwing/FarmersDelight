@@ -1,0 +1,31 @@
+{
+  "parent": "farmersdelight:main/root",
+  "display": {
+    "icon": {
+      "item": "minecraft:campfire"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.place_campfire"
+    },
+    "description": {
+      "translate": "farmersdelight.advancement.place_campfire.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "campfire": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "minecraft:campfire"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "campfire"
+    ]
+  ]
+}

@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.init;
 
+import net.minecraft.block.BushBlock;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.blocks.*;
 import net.minecraft.block.Block;
@@ -18,6 +19,20 @@ public class ModBlocks
 	public static final RegistryObject<Block> BASKET = BLOCKS.register("basket", BasketBlock::new);
 	public static final RegistryObject<Block> ROPE = BLOCKS.register("rope", RopeBlock::new);
 	public static final RegistryObject<Block> SAFETY_NET = BLOCKS.register("safety_net", SafetyNetBlock::new);
+
+	// WILD PATCHES
+	public static final RegistryObject<Block> WILD_CABBAGES = BLOCKS.register("wild_cabbages",
+			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+	public static final RegistryObject<Block> WILD_ONIONS = BLOCKS.register("wild_onions",
+			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+	public static final RegistryObject<Block> WILD_TOMATOES = BLOCKS.register("wild_tomatoes",
+			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+	public static final RegistryObject<Block> WILD_CARROTS = BLOCKS.register("wild_carrots",
+			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+	public static final RegistryObject<Block> WILD_POTATOES = BLOCKS.register("wild_potatoes",
+			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+	public static final RegistryObject<Block> WILD_BEETROOTS = BLOCKS.register("wild_beetroots",
+			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 
 	// CROPS
 	public static final RegistryObject<Block> CABBAGE_CROP = BLOCKS.register("cabbages",

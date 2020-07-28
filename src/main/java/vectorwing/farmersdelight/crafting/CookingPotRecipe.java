@@ -32,14 +32,18 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 	private final NonNullList<Ingredient> inputItems;
 	private final ItemStack output;
 	private final ItemStack container;
+	private final float experience;
+	private final int cookTime;
 
-	public CookingPotRecipe(ResourceLocation id, String group, NonNullList<Ingredient> inputItems, ItemStack output)
+	public CookingPotRecipe(ResourceLocation id, String group, NonNullList<Ingredient> inputItems, ItemStack output, float experience, int cookTime)
 	{
 		this.id = id;
 		this.group = group;
 		this.inputItems = inputItems;
 		this.output = output;
 		this.container = output.getContainerItem() != ItemStack.EMPTY ? output.getContainerItem() : new ItemStack(Items.BOWL);
+		this.experience = experience;
+		this.cookTime = cookTime;
 	}
 
 	@Override
@@ -70,6 +74,12 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 	public ItemStack getCraftingResult(IInventory inv) {
 		return this.output.copy();
 	}
+
+	public float getExperience() {
+		return this.experience;
+	}
+
+	public int getCookTime() { return this.cookTime; }
 
 	@Override
 	public boolean matches(IInventory inv, World worldIn)
@@ -123,7 +133,9 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 				throw new JsonParseException("Too many ingredients for cooking recipe! The max is " + CookingPotRecipe.INPUT_SLOTS);
 			} else {
 				final ItemStack outputIn = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
-				return new CookingPotRecipe(recipeId, groupIn, inputItemsIn, outputIn);
+				final float experienceIn = JSONUtils.getFloat(json, "experience", 0.0F);
+				final int cookTimeIn = JSONUtils.getInt(json, "cookingtime", 200);
+				return new CookingPotRecipe(recipeId, groupIn, inputItemsIn, outputIn, experienceIn, cookTimeIn);
 			}
 		}
 
@@ -153,7 +165,9 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 			}
 
 			ItemStack outputIn = buffer.readItemStack();
-			return new CookingPotRecipe(recipeId, groupIn, inputItemsIn, outputIn);
+			float experienceIn = buffer.readFloat();
+			int cookTimeIn = buffer.readVarInt();
+			return new CookingPotRecipe(recipeId, groupIn, inputItemsIn, outputIn, experienceIn, cookTimeIn);
 		}
 
 		@Override
@@ -167,6 +181,8 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 			}
 
 			buffer.writeItemStack(recipe.output);
+			buffer.writeFloat(recipe.experience);
+			buffer.writeVarInt(recipe.cookTime);
 		}
 	}
 }

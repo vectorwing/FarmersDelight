@@ -6,9 +6,9 @@ import net.minecraft.util.NonNullList;
 import vectorwing.farmersdelight.init.ModBlocks;
 import vectorwing.farmersdelight.init.ModItems;
 
-public class CreativeTab extends ItemGroup
+public class FDItemGroup extends ItemGroup
 {
-	public CreativeTab(String label)
+	public FDItemGroup(String label)
 	{
 		super(label);
 	}
@@ -18,17 +18,17 @@ public class CreativeTab extends ItemGroup
 		return new ItemStack(ModBlocks.STOVE.get());
 	}
 
-	@Override
-	public void fill(NonNullList<ItemStack> items)
-	{
-		registerWorkstations(items);
-		registerTools(items);
-		registerCrops(items);
-		registerMaterials(items);
-		registerIngredients(items);
-		registerMeals(items);
-		registerPetMeals(items);
-	}
+//	@Override
+//	public void fill(NonNullList<ItemStack> items)
+//	{
+//		registerWorkstations(items);
+//		registerTools(items);
+//		registerCrops(items);
+//		registerMaterials(items);
+//		registerIngredients(items);
+//		registerMeals(items);
+//		registerPetMeals(items);
+//	}
 
 	private void registerWorkstations(NonNullList<ItemStack> items)
 	{
@@ -41,6 +41,12 @@ public class CreativeTab extends ItemGroup
 
 	private void registerCrops(NonNullList<ItemStack> items)
 	{
+		items.add(new ItemStack(ModItems.WILD_CABBAGES.get()));
+		items.add(new ItemStack(ModItems.WILD_ONIONS.get()));
+		items.add(new ItemStack(ModItems.WILD_TOMATOES.get()));
+		items.add(new ItemStack(ModItems.WILD_CARROTS.get()));
+		items.add(new ItemStack(ModItems.WILD_POTATOES.get()));
+		items.add(new ItemStack(ModItems.WILD_BEETROOTS.get()));
 		items.add(new ItemStack(ModItems.CABBAGE.get()));
 		items.add(new ItemStack(ModItems.TOMATO.get()));
 		items.add(new ItemStack(ModItems.ONION.get()));

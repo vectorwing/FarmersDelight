@@ -38,15 +38,15 @@ public class Recipes extends RecipeProvider
 	private void foodSmeltingRecipes(String name, IItemProvider ingredient, IItemProvider result, float experience, int cookingTime, Consumer<IFinishedRecipe> consumer) {
 		String namePrefix = new ResourceLocation(FarmersDelight.MODID, name).toString();
 		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ingredient),
-				result, experience, cookingTime)
+				result, experience, 200)
 				.addCriterion(name, InventoryChangeTrigger.Instance.forItems(ingredient))
 				.build(consumer);
 		CookingRecipeBuilder.cookingRecipe(Ingredient.fromItems(ingredient),
-				result, experience, cookingTime, IRecipeSerializer.CAMPFIRE_COOKING)
+				result, experience, 600, IRecipeSerializer.CAMPFIRE_COOKING)
 				.addCriterion(name, InventoryChangeTrigger.Instance.forItems(ingredient))
 				.build(consumer, namePrefix + "_from_campfire_cooking");
 		CookingRecipeBuilder.cookingRecipe(Ingredient.fromItems(ingredient),
-				result, experience, cookingTime, IRecipeSerializer.SMOKING)
+				result, experience, 100, IRecipeSerializer.SMOKING)
 				.addCriterion(name, InventoryChangeTrigger.Instance.forItems(ingredient))
 				.build(consumer, namePrefix + "_from_smoking");
 	}
@@ -63,14 +63,22 @@ public class Recipes extends RecipeProvider
 				.key('b', Items.BAMBOO)
 				.key('#', ModItems.CANVAS.get())
 				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
-				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "scaffolding"));
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "scaffolding_from_canvas"));
 		ShapedRecipeBuilder.shapedRecipe(Items.LEAD)
 				.patternLine("rr ")
 				.patternLine("rr ")
 				.patternLine("  r")
 				.key('r', ModItems.ROPE.get())
 				.addCriterion("rope", InventoryChangeTrigger.Instance.forItems(ModItems.ROPE.get()))
-				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "lead"));
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "lead_from_rope"));
+		ShapedRecipeBuilder.shapedRecipe(Items.PAINTING)
+				.patternLine("sss")
+				.patternLine("scs")
+				.patternLine("sss")
+				.key('s', Items.STICK)
+				.key('c', ModItems.CANVAS.get())
+				.addCriterion("canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "painting_from_canvas"));
 		ShapedRecipeBuilder.shapedRecipe(Items.CAKE)
 				.patternLine("mmm")
 				.patternLine("ses")
@@ -109,11 +117,12 @@ public class Recipes extends RecipeProvider
 				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ModBlocks.COOKING_POT.get())
 				.patternLine("bSb")
-				.patternLine("i i")
+				.patternLine("iWi")
 				.patternLine("iii")
 				.key('b', Items.BRICK)
 				.key('i', Items.IRON_INGOT)
 				.key('S', Items.WOODEN_SHOVEL)
+				.key('W', Items.WATER_BUCKET)
 				.addCriterion("iron_ingot", InventoryChangeTrigger.Instance.forItems(Items.IRON_INGOT))
 				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ModBlocks.BASKET.get())
@@ -171,8 +180,9 @@ public class Recipes extends RecipeProvider
 
 	private void recipesMaterials(Consumer<IFinishedRecipe> consumer) {
 		ShapedRecipeBuilder.shapedRecipe(ModItems.CANVAS.get())
-				.patternLine("##")
-				.patternLine("##")
+				.patternLine("###")
+				.patternLine("###")
+				.patternLine("###")
 				.key('#', ModItems.STRAW.get())
 				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
 				.build(consumer);

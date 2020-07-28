@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "farmersdelight:scaffolding"
+      "farmersdelight:painting_from_canvas"
     ]
   },
   "criteria": {
-    "straw": {
+    "canvas": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:straw"
+            "item": "farmersdelight:canvas"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "farmersdelight:scaffolding"
+        "recipe": "farmersdelight:painting_from_canvas"
       }
     }
   },
   "requirements": [
     [
-      "straw",
+      "canvas",
       "has_the_recipe"
     ]
   ]

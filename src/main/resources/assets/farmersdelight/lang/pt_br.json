@@ -10,6 +10,13 @@
   "block.farmersdelight.tomatoes": "Sementes de tomate",
   "block.farmersdelight.rice_crop": "Arroz",
 
+  "block.farmersdelight.wild_cabbages": "Couve silvestre",
+  "block.farmersdelight.wild_tomatoes": "Tomates rasteiros",
+  "block.farmersdelight.wild_onions": "Cebola silvestre",
+  "block.farmersdelight.wild_carrots": "Cenoura silvestre",
+  "block.farmersdelight.wild_potatoes": "Batata silvestre",
+  "block.farmersdelight.wild_beetroots": "Beterraba marítima",
+
   "item.farmersdelight.tomato": "Tomate",
   "item.farmersdelight.cabbage": "Repolho",
   "item.farmersdelight.rice_panicle": "Panícula de arroz",
@@ -62,13 +69,17 @@
 
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "Um mundo de sabor te espera!",
-  "farmersdelight.advancement.craft_flint_knife": "Caçar e colher",
-  "farmersdelight.advancement.craft_flint_knife.desc": "Crie uma Faca de sílex para pilhar mais matéria-prima de plantas e animais",
+  "farmersdelight.advancement.craft_knife": "Caçar e colher",
+  "farmersdelight.advancement.craft_knife.desc": "Crie uma Faca para pilhar mais matéria-prima de plantas e animais",
+  "farmersdelight.advancement.harvest_straw": "Agarrando palhas",
+  "farmersdelight.advancement.harvest_straw.desc": "Colha plantas gramíneas com uma Faca para obter Palha",
   "farmersdelight.advancement.plant_rice": "Molhando suas raízes",
   "farmersdelight.advancement.plant_rice.desc": "Plante Arroz em uma poça de água rasa",
+  "farmersdelight.advancement.place_campfire": "Bonfire Lit",
+  "farmersdelight.advancement.place_campfire.desc": "Acenda uma Fogueira para lhe aquecer à noite",
   "farmersdelight.advancement.craft_stove": "Acendendo a grelha",
   "farmersdelight.advancement.craft_stove.desc": "Obtenha um Fogão",
-  "farmersdelight.advancement.place_cooking_pot": "Hora da janta!",
+  "farmersdelight.advancement.place_cooking_pot": "O jantar está servido!",
   "farmersdelight.advancement.place_cooking_pot.desc": "Coloque uma Panela e comece a preparar refeições!",
 
   "farmersdelight.jei.cooking": "Panela"
