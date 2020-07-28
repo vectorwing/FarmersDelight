@@ -44,15 +44,11 @@ public class TomatoesBlock extends CropsBlock
 			int j = 1 + worldIn.rand.nextInt(2);
 			spawnAsEntity(worldIn, pos, new ItemStack(ModItems.TOMATO.get(), j));
 			worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
-			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(TOMATO_BEARING_AGE - 1)), 2);
+			worldIn.setBlockState(pos, state.with(AGE, TOMATO_BEARING_AGE - 1), 2);
 			return ActionResultType.SUCCESS;
 		} else {
 			return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
 		}
-	}
-
-	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return state.getBlock() == Blocks.FARMLAND;
 	}
 
 	@Override

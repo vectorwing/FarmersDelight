@@ -38,15 +38,15 @@ public class Recipes extends RecipeProvider
 	private void foodSmeltingRecipes(String name, IItemProvider ingredient, IItemProvider result, float experience, int cookingTime, Consumer<IFinishedRecipe> consumer) {
 		String namePrefix = new ResourceLocation(FarmersDelight.MODID, name).toString();
 		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ingredient),
-				result, experience, cookingTime)
+				result, experience, 200)
 				.addCriterion(name, InventoryChangeTrigger.Instance.forItems(ingredient))
 				.build(consumer);
 		CookingRecipeBuilder.cookingRecipe(Ingredient.fromItems(ingredient),
-				result, experience, cookingTime, IRecipeSerializer.CAMPFIRE_COOKING)
+				result, experience, 600, IRecipeSerializer.CAMPFIRE_COOKING)
 				.addCriterion(name, InventoryChangeTrigger.Instance.forItems(ingredient))
 				.build(consumer, namePrefix + "_from_campfire_cooking");
 		CookingRecipeBuilder.cookingRecipe(Ingredient.fromItems(ingredient),
-				result, experience, cookingTime, IRecipeSerializer.SMOKING)
+				result, experience, 100, IRecipeSerializer.SMOKING)
 				.addCriterion(name, InventoryChangeTrigger.Instance.forItems(ingredient))
 				.build(consumer, namePrefix + "_from_smoking");
 	}
