@@ -1,7 +1,6 @@
 {
   "pools": [
     {
-      "name": "main",
       "rolls": {
         "min": 1.0,
         "max": 3.0,
