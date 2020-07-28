@@ -51,7 +51,7 @@ public class CommonEventHandler
 	{
 		for (String entity : SCAVENGING_ENTITIES) {
 			if (event.getName().equals(new ResourceLocation("minecraft", "entities/" + entity))) {
-				event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(FarmersDelight.MODID, "inject/" + entity))).build());
+				event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(FarmersDelight.MODID, "inject/" + entity))).name(entity + "_fd_drops").build());
 			}
 		}
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+- Fixes conflict with other mods upon injecting chest loot tables
+- Returns Canvas to a 2x2 recipe instead of 3x3
+- Add basic tags to FD crops, seeds and milk
+
 ## 0.1.0
 - Initial release
 - Adds the Stove - Upgraded, retrievable Campfire with six cooking slots
