@@ -1,5 +1,7 @@
 package vectorwing.farmersdelight.setup;
 
+import com.google.common.collect.Sets;
+import net.minecraft.world.storage.loot.LootTables;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.init.ModItems;
@@ -17,11 +19,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.world.CropPatchGeneration;
 
+import java.util.Set;
+
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CommonEventHandler
 {
-	private static final Logger LOGGER = LogManager.getLogger();
-	private static final ResourceLocation SHIPWRECK_SUPPLY_CHEST = new ResourceLocation("minecraft", "chests/shipwreck_supply");
+	//private static final Logger LOGGER = LogManager.getLogger();
+	private static final ResourceLocation SHIPWRECK_SUPPLY_CHEST = LootTables.CHESTS_SHIPWRECK_SUPPLY;
+	private static final Set<ResourceLocation> VILLAGE_HOUSE_CHESTS = Sets.newHashSet(
+			LootTables.CHESTS_VILLAGE_VILLAGE_PLAINS_HOUSE,
+			LootTables.CHESTS_VILLAGE_VILLAGE_SAVANNA_HOUSE,
+			LootTables.CHESTS_VILLAGE_VILLAGE_SNOWY_HOUSE,
+			LootTables.CHESTS_VILLAGE_VILLAGE_TAIGA_HOUSE,
+			LootTables.CHESTS_VILLAGE_VILLAGE_DESERT_HOUSE);
 	private static final String[] SCAVENGING_ENTITIES = new String[] { "cow", "chicken", "rabbit", "horse", "donkey", "mule", "llama", "shulker" };
 
 	public static void init(final FMLCommonSetupEvent event)
@@ -40,8 +50,8 @@ public class CommonEventHandler
 	@SubscribeEvent
 	public static void onLootLoad(LootTableLoadEvent event)
 	{
-		String prefix = "minecraft:chests/village/";
-		String name = event.getName().toString();
+		//String prefix = "minecraft:chests/village/";
+		//String name = event.getName().toString();
 
 		for (String entity : SCAVENGING_ENTITIES) {
 			if (event.getName().equals(new ResourceLocation("minecraft", "entities/" + entity))) {
@@ -50,22 +60,27 @@ public class CommonEventHandler
 		}
 
 		if (Configuration.CROPS_ON_SHIPWRECKS.get() && event.getName().equals(SHIPWRECK_SUPPLY_CHEST)) {
-			event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(FarmersDelight.MODID, "inject/shipwreck_supply"))).build());
+			event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(FarmersDelight.MODID, "inject/shipwreck_supply")).weight(1).quality(0)).name("supply_fd_crops").build());
 		}
 
-		if (Configuration.CROPS_ON_VILLAGE_HOUSES.get() && name.startsWith(prefix)) {
-			String file = name.substring(name.indexOf(prefix) + prefix.length());
-			switch (file) {
-				case "village_plains_house":
-				case "village_savanna_house":
-				case "village_desert_house":
-				case "village_snowy_house":
-				case "village_taiga_house":
-					event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(FarmersDelight.MODID, "inject/" + file))).build());
-					break;
-				default:
-					break;
-			}
+		if (Configuration.CROPS_ON_VILLAGE_HOUSES.get() && VILLAGE_HOUSE_CHESTS.contains(event.getName())) {
+			event.getTable().addPool(LootPool.builder().addEntry(
+							TableLootEntry.builder(new ResourceLocation(FarmersDelight.MODID, "inject/crops_villager_houses")).weight(1).quality(0)).name("villager_houses_fd_crops").build());
 		}
+//		if (Configuration.CROPS_ON_VILLAGE_HOUSES.get() && name.startsWith(prefix)) {
+//			String file = name.substring(name.indexOf(prefix) + prefix.length());
+//			switch (file) {
+//				case "village_plains_house":
+//				case "village_savanna_house":
+//				case "village_desert_house":
+//				case "village_snowy_house":
+//				case "village_taiga_house":
+//					event.getTable().addPool(LootPool.builder().addEntry(
+//							TableLootEntry.builder(new ResourceLocation(FarmersDelight.MODID, "inject/" + file)).weight(1).quality(0)).name(file + "_fd_crops").build());
+//					break;
+//				default:
+//					break;
+//			}
+//		}
 	}
 }

@@ -180,9 +180,8 @@ public class Recipes extends RecipeProvider
 
 	private void recipesMaterials(Consumer<IFinishedRecipe> consumer) {
 		ShapedRecipeBuilder.shapedRecipe(ModItems.CANVAS.get())
-				.patternLine("###")
-				.patternLine("###")
-				.patternLine("###")
+				.patternLine("##")
+				.patternLine("##")
 				.key('#', ModItems.STRAW.get())
 				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
 				.build(consumer);
