@@ -2,19 +2,19 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "minecraft:bread"
+      "tag": "forge:bread"
     },
     {
       "item": "minecraft:cooked_beef"
     },
     {
-      "item": "farmersdelight:cabbage"
+      "tag": "forge:salad_ingredients"
     },
     {
-      "item": "farmersdelight:tomato"
+      "tag": "forge:crops/tomato"
     },
     {
-      "item": "farmersdelight:onion"
+      "tag": "forge:crops/onion"
     }
   ],
   "result": {

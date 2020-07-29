@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "farmersdelight:cabbage"
+      "tag": "forge:salad_ingredients"
     },
     {
-      "item": "farmersdelight:onion"
+      "tag": "forge:crops/tomato"
     },
     {
-      "item": "farmersdelight:tomato"
+      "tag": "forge:crops/onion"
     },
     {
       "item": "minecraft:beetroot"

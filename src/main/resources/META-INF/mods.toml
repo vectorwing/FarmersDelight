@@ -23,9 +23,7 @@ displayURL="https://github.com/vectorwing/FarmersDelight" #optional
 # logoFile="examplemod.png" #optional
 credits="Chloe Dawn, simibubi, Grimmauld, Silk and many other wonderful people!" #optional
 authors="vectorwing" #optional
-description='''
-A lightweight farming expansion. Harvest, cook and explore!
-'''
+description='''A lightweight farming expansion. Harvest, cook and explore!'''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.farmersdelight]] #optional
     # the modid of the dependency
