@@ -8,7 +8,7 @@
       "item": "minecraft:potato"
     },
     {
-      "item": "farmersdelight:rice"
+      "tag": "forge:crops/rice"
     }
   ],
   "result": {

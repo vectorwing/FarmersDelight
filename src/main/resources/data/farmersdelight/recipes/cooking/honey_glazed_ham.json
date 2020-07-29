@@ -11,7 +11,7 @@
       "item": "minecraft:sweet_berries"
     },
     {
-      "item": "farmersdelight:rice"
+      "tag": "forge:crops/rice"
     }
   ],
   "result": {

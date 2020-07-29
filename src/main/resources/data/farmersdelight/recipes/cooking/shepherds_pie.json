@@ -8,10 +8,10 @@
       "item": "minecraft:baked_potato"
     },
     {
-      "item": "farmersdelight:onion"
+      "tag": "forge:crops/onion"
     },
     {
-      "tag": "farmersdelight:milk"
+      "tag": "forge:milk"
     }
   ],
   "result": {

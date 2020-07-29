@@ -8,13 +8,13 @@
       "item": "minecraft:brown_mushroom"
     },
     {
-      "item": "farmersdelight:raw_pasta"
+      "tag": "forge:pasta"
     },
     {
-      "item": "farmersdelight:cabbage"
+      "tag": "forge:salad_ingredients"
     },
     {
-      "item": "farmersdelight:onion"
+      "tag": "forge:vegetables"
     }
   ],
   "result": {

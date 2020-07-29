@@ -8,10 +8,10 @@
       "item": "minecraft:carrot"
     },
     {
-      "item": "farmersdelight:cabbage"
+      "tag": "forge:salad_ingredients"
     },
     {
-      "item": "farmersdelight:onion"
+      "tag": "forge:vegetables"
     }
   ],
   "result": {

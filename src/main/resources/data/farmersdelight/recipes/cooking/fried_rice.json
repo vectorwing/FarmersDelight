@@ -8,10 +8,10 @@
       "item": "minecraft:carrot"
     },
     {
-      "item": "farmersdelight:onion"
+      "tag": "forge:crops/onion"
     },
     {
-      "item": "farmersdelight:rice"
+      "tag": "forge:crops/rice"
     }
   ],
   "result": {

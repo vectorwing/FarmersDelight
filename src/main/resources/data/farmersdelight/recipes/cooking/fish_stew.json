@@ -8,7 +8,7 @@
       "item": "farmersdelight:tomato_sauce"
     },
     {
-      "item": "farmersdelight:onion"
+      "tag": "forge:crops/onion"
     }
   ],
   "result": {

@@ -11,7 +11,7 @@
       "item": "minecraft:beetroot"
     },
     {
-      "item": "farmersdelight:cabbage"
+      "tag": "forge:salad_ingredients"
     }
   ],
   "result": {
