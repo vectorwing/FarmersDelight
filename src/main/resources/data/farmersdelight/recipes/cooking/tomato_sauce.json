@@ -1,20 +1,15 @@
 {
-  "type": "minecraft:crafting_shapeless",
+  "type": "farmersdelight:cooking",
   "ingredients": [
     {
       "item": "farmersdelight:tomato"
     },
     {
       "item": "farmersdelight:tomato"
-    },
-    {
-      "tag": "farmersdelight:knives"
-    },
-    {
-      "item": "minecraft:bowl"
     }
   ],
   "result": {
     "item": "farmersdelight:tomato_sauce"
-  }
+  },
+  "cookingtime": 100
 }

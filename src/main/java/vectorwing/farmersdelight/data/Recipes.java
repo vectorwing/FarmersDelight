@@ -198,13 +198,6 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ModItems.TOMATO.get())
 				.addCriterion("tomato", InventoryChangeTrigger.Instance.forItems(ModItems.TOMATO.get()))
 				.build(consumer);
-		ShapelessRecipeBuilder.shapelessRecipe(ModItems.TOMATO_SAUCE.get())
-				.addIngredient(ModItems.TOMATO.get())
-				.addIngredient(ModItems.TOMATO.get())
-				.addIngredient(Tags.KNIVES)
-				.addIngredient(Items.BOWL)
-				.addCriterion("tomato", InventoryChangeTrigger.Instance.forItems(ModItems.TOMATO.get()))
-				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.MILK_BOTTLE.get(), 3)
 				.addIngredient(Items.MILK_BUCKET)
 				.addIngredient(Items.GLASS_BOTTLE)
