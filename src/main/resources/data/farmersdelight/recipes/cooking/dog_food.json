@@ -11,7 +11,7 @@
       "tag": "farmersdelight:wolf_prey"
     },
     {
-      "item": "farmersdelight:rice"
+      "tag": "forge:crops/rice"
     }
   ],
   "result": {

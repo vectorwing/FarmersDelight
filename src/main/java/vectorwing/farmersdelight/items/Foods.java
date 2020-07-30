@@ -18,7 +18,7 @@ public class Foods
 	public static final Food TOMATO_SAUCE = (new Food.Builder())
 			.hunger(2).saturation(0.4f).build();
 	public static final Food CAKE_SLICE = (new Food.Builder())
-			.hunger(2).saturation(0.1f).build();
+			.hunger(2).saturation(0.1f).fastToEat().build();
 	public static final Food COOKIES = (new Food.Builder())
 			.hunger(2).saturation(0.1f).fastToEat().build();
 

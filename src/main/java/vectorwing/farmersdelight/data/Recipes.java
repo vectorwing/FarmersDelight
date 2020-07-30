@@ -12,6 +12,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
+import vectorwing.farmersdelight.utils.ForgeTags;
 import vectorwing.farmersdelight.utils.Tags;
 
 import java.util.function.Consumer;
@@ -147,6 +148,7 @@ public class Recipes extends RecipeProvider
 				.addCriterion("rope", InventoryChangeTrigger.Instance.forItems(ModItems.ROPE.get()))
 				.build(consumer);
 	}
+
 	private void recipesTools(Consumer<IFinishedRecipe> consumer) {
 		ShapedRecipeBuilder.shapedRecipe(ModItems.FLINT_KNIFE.get())
 				.patternLine(" m")
@@ -196,12 +198,6 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ModItems.TOMATO.get())
 				.addCriterion("tomato", InventoryChangeTrigger.Instance.forItems(ModItems.TOMATO.get()))
 				.build(consumer);
-		ShapelessRecipeBuilder.shapelessRecipe(ModItems.TOMATO_SAUCE.get())
-				.addIngredient(ModItems.TOMATO.get())
-				.addIngredient(ModItems.TOMATO.get())
-				.addIngredient(Items.BOWL)
-				.addCriterion("tomato", InventoryChangeTrigger.Instance.forItems(ModItems.TOMATO.get()))
-				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.MILK_BOTTLE.get(), 3)
 				.addIngredient(Items.MILK_BUCKET)
 				.addIngredient(Items.GLASS_BOTTLE)
@@ -236,16 +232,16 @@ public class Recipes extends RecipeProvider
 	}
 	private void recipesCraftedMeals(Consumer<IFinishedRecipe> consumer) {
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.MIXED_SALAD.get())
-				.addIngredient(ModItems.CABBAGE.get())
-				.addIngredient(ModItems.ONION.get())
-				.addIngredient(ModItems.TOMATO.get())
+				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
+				.addIngredient(ForgeTags.CROPS_TOMATO)
+				.addIngredient(ForgeTags.CROPS_ONION)
 				.addIngredient(Items.BEETROOT)
 				.addIngredient(Items.BOWL)
 				.addCriterion("cabbage", InventoryChangeTrigger.Instance.forItems(ModItems.CABBAGE.get()))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.BARBECUE_STICK.get(), 2)
-				.addIngredient(ModItems.ONION.get())
-				.addIngredient(ModItems.TOMATO.get())
+				.addIngredient(ForgeTags.CROPS_TOMATO)
+				.addIngredient(ForgeTags.CROPS_ONION)
 				.addIngredient(Items.COOKED_BEEF)
 				.addIngredient(Items.COOKED_CHICKEN)
 				.addIngredient(Items.STICK)
@@ -253,18 +249,18 @@ public class Recipes extends RecipeProvider
 				.addCriterion("barbecue", InventoryChangeTrigger.Instance.forItems(Items.COOKED_BEEF))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CHICKEN_SANDWICH.get())
-				.addIngredient(Items.BREAD)
+				.addIngredient(ForgeTags.BREAD)
 				.addIngredient(Items.COOKED_CHICKEN)
-				.addIngredient(ModItems.CABBAGE.get())
-				.addIngredient(ModItems.TOMATO.get())
+				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
+				.addIngredient(ForgeTags.CROPS_TOMATO)
 				.addCriterion("cooked_chicken", InventoryChangeTrigger.Instance.forItems(Items.COOKED_CHICKEN))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.HAMBURGER.get())
-				.addIngredient(Items.BREAD)
+				.addIngredient(ForgeTags.BREAD)
 				.addIngredient(Items.COOKED_BEEF)
-				.addIngredient(ModItems.CABBAGE.get())
-				.addIngredient(ModItems.TOMATO.get())
-				.addIngredient(ModItems.ONION.get())
+				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
+				.addIngredient(ForgeTags.CROPS_TOMATO)
+				.addIngredient(ForgeTags.CROPS_ONION)
 				.addCriterion("hamburger", InventoryChangeTrigger.Instance.forItems(Items.COOKED_BEEF))
 				.build(consumer);
 	}

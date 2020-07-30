@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2
+- Adds some Forge Tags to multiple items, so you can interchange with other food mods
+- Crafting and cooking recipes from this mod now use tags for most items as well
+- Minor fixes
+
 ## 0.1.1
 - Fixes conflict with other mods upon injecting chest loot tables
 - Returns Canvas to a 2x2 recipe instead of 3x3

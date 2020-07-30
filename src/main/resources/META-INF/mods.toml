@@ -12,7 +12,7 @@ issueTrackerURL="https://github.com/vectorwing/FarmersDelight/issues" #optional
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 modId="farmersdelight" #mandatory
-version="1.15.2-0.1.1" #mandatory
+version="1.15.2-0.1.2" #mandatory
  # A display name for the mod
 displayName="Farmer's Delight" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
@@ -23,9 +23,7 @@ displayURL="https://github.com/vectorwing/FarmersDelight" #optional
 # logoFile="examplemod.png" #optional
 credits="Chloe Dawn, simibubi, Grimmauld, Silk and many other wonderful people!" #optional
 authors="vectorwing" #optional
-description='''
-A lightweight farming expansion. Harvest, cook and explore!
-'''
+description='''A lightweight farming expansion. Harvest, cook and explore!'''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.farmersdelight]] #optional
     # the modid of the dependency
