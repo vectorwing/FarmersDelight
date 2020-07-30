@@ -23,6 +23,10 @@ public class ModItems
 			() -> new RopeItem(ModBlocks.ROPE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> SAFETY_NET = ITEMS.register("safety_net",
 			() -> new BlockItem(ModBlocks.SAFETY_NET.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> RICE_BALE = ITEMS.register("rice_bale",
+			() -> new BlockItem(ModBlocks.RICE_BALE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> MULCH = ITEMS.register("mulch",
+			() -> new BlockItem(ModBlocks.MULCH.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
 	// Wild Crops
 	public static final RegistryObject<Item> WILD_CABBAGES = ITEMS.register("wild_cabbages",
