@@ -154,6 +154,19 @@ public class Recipes extends RecipeProvider
 				.key('r', ModItems.RICE_PANICLE.get())
 				.addCriterion("rice_panicle", InventoryChangeTrigger.Instance.forItems(ModItems.RICE_PANICLE.get()))
 				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ORGANIC_COMPOST.get(), 1)
+				.addIngredient(Items.DIRT)
+				.addIngredient(Items.ROTTEN_FLESH)
+				.addIngredient(Items.ROTTEN_FLESH)
+				.addIngredient(ModItems.STRAW.get())
+				.addIngredient(ModItems.STRAW.get())
+				.addIngredient(Items.BONE_MEAL)
+				.addIngredient(Items.BONE_MEAL)
+				.addIngredient(Items.BONE_MEAL)
+				.addIngredient(Items.BONE_MEAL)
+				.addCriterion("bone_meal", InventoryChangeTrigger.Instance.forItems(Items.BONE_MEAL))
+				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
+				.build(consumer);
 	}
 
 	private void recipesTools(Consumer<IFinishedRecipe> consumer) {
