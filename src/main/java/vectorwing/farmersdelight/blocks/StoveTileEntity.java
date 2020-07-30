@@ -1,5 +1,8 @@
 package vectorwing.farmersdelight.blocks;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.util.math.shapes.VoxelShape;
 import vectorwing.farmersdelight.init.ModTileEntityTypes;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.inventory.*;
@@ -42,13 +45,19 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 	@Override
 	public void tick() {
 		boolean isStoveLit = this.getBlockState().get(StoveBlock.LIT);
+		boolean isStoveBlocked = this.isStoveBlockedAbove();
 		if (this.world.isRemote) {
 			if (isStoveLit) {
 				this.addParticles();
 			}
-
 		} else {
-			if (isStoveLit) {
+			if (isStoveBlocked)	{
+				if (!this.inventory.isEmpty()) {
+					InventoryHelper.dropItems(world, pos, this.getInventory());
+					this.inventoryChanged();
+				}
+			}
+			if (isStoveLit && !isStoveBlocked) {
 				this.cookAndDrop();
 			} else {
 				for(int i = 0; i < this.inventory.size(); ++i) {
@@ -67,11 +76,11 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 				++this.cookingTimes[i];
 				if (this.cookingTimes[i] >= this.cookingTotalTimes[i]) {
 					IInventory iinventory = new Inventory(itemstack);
-					ItemStack itemstack1 = this.world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, iinventory, this.world).map((p_213979_1_) -> {
-						return p_213979_1_.getCraftingResult(iinventory);
+					ItemStack result = this.world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, iinventory, this.world).map((recipe) -> {
+						return recipe.getCraftingResult(iinventory);
 					}).orElse(itemstack);
-					if (world != null && !itemstack1.isEmpty()) {
-						ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, itemstack1.copy());
+					if (world != null && !result.isEmpty()) {
+						ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, result.copy());
 						entity.setMotion(Utils.RAND.nextGaussian() * (double)0.01F, 0.1F, Utils.RAND.nextGaussian() * (double)0.01F);
 						world.addEntity(entity);
 					}
@@ -80,6 +89,14 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 				}
 			}
 		}
+	}
+
+	public boolean isStoveBlockedAbove() {
+		if (world != null) {
+			BlockState above = world.getBlockState(pos.up());
+			return !above.getCollisionShape(world, pos).isEmpty();
+		}
+		return false;
 	}
 
 	public Vec2f getStoveItemOffset(int index) {

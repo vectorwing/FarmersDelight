@@ -52,11 +52,10 @@ public class StoveBlock extends Block
 				StoveTileEntity stovetileentity = (StoveTileEntity)tileentity;
 				Optional<CampfireCookingRecipe> optional = stovetileentity.findMatchingRecipe(itemstack);
 				if (optional.isPresent()) {
-					if (!worldIn.isRemote && stovetileentity.addItem(player.abilities.isCreativeMode ? itemstack.copy() : itemstack, optional.get().getCookTime())) {
+					if (!worldIn.isRemote && !stovetileentity.isStoveBlockedAbove() && stovetileentity.addItem(player.abilities.isCreativeMode ? itemstack.copy() : itemstack, optional.get().getCookTime())) {
 						player.addStat(Stats.INTERACT_WITH_CAMPFIRE);
 						return ActionResultType.SUCCESS;
 					}
-
 					return ActionResultType.CONSUME;
 				} else {
 					if (usedItem instanceof ShovelItem) {
