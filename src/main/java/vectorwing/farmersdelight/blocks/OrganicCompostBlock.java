@@ -3,6 +3,8 @@ package vectorwing.farmersdelight.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.MushroomBlock;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
 import vectorwing.farmersdelight.init.ModBlocks;
@@ -28,7 +30,22 @@ public class OrganicCompostBlock extends Block
 
 	@Override
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-		if (worldIn.getRandom().nextFloat() <= 0.1F) {
+		if (worldIn.isRemote) return;
+
+		float chance = 0.08F;
+		if (state.getLightValue() <= 9) {
+			chance = chance + 0.07F;
+		}
+		boolean mushroomNearby = false;
+		for(BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-2, 1, -2), pos.add(2, 1, 2))) {
+			if (worldIn.getBlockState(blockpos).getBlock() instanceof MushroomBlock) {
+				mushroomNearby = true;
+			}
+		}
+		if (mushroomNearby)	{
+			chance = chance + 0.05F;
+		}
+		if (worldIn.getRandom().nextFloat() <= chance) {
 			worldIn.setBlockState(pos, ModBlocks.MULCH.get().getDefaultState(), 2);
 		}
 	}
