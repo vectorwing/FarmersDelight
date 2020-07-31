@@ -1,9 +1,17 @@
 package vectorwing.farmersdelight.setup;
 
 import com.google.common.collect.Sets;
+import net.minecraft.block.BlockState;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTables;
+import net.minecraftforge.event.entity.player.UseHoeEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.init.ModBlocks;
 import vectorwing.farmersdelight.init.ModItems;
 import vectorwing.farmersdelight.loot.functions.CopyMealFunction;
 import net.minecraft.block.ComposterBlock;
@@ -44,6 +52,19 @@ public class CommonEventHandler
 		LootFunctionManager.registerFunction(new CopyMealFunction.Serializer());
 
 		DeferredWorkQueue.runLater(CropPatchGeneration::generateCrop);
+	}
+
+	@SubscribeEvent
+	public static void onHoeUse(UseHoeEvent event) {
+		BlockPos pos = event.getContext().getPos();
+		World world = event.getContext().getWorld();
+		BlockState state = world.getBlockState(pos);
+
+		if (state.getBlock() == ModBlocks.MULCH.get()) {
+			world.playSound(event.getPlayer(), pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+			world.setBlockState(pos, ModBlocks.MULCH_FARMLAND.get().getDefaultState(), 11);
+			event.setResult(Event.Result.ALLOW);
+		}
 	}
 
 	@SubscribeEvent
