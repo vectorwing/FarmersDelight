@@ -21,17 +21,14 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import org.apache.logging.log4j.LogManager;
 import vectorwing.farmersdelight.init.ModBlocks;
 import vectorwing.farmersdelight.init.ModItems;
 
 import javax.annotation.Nullable;
 import java.util.Random;
-import org.apache.logging.log4j.Logger;
 
 public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowable
 {
-	public static final Logger LOGGER = LogManager.getLogger();
 	public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 4);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {
