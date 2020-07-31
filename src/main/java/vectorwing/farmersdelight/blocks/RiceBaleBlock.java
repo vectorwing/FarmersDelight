@@ -36,7 +36,7 @@ public class RiceBaleBlock extends Block
 	}
 
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.getDefaultState().with(FACING, context.getNearestLookingDirection().getOpposite());
+		return this.getDefaultState().with(FACING, context.getFace());
 	}
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FACING);

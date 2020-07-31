@@ -32,9 +32,9 @@ public class OrganicCompostBlock extends Block
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		if (worldIn.isRemote) return;
 
-		float chance = 0.08F;
+		float chance = 0.05F;
 		if (state.getLightValue() <= 9) {
-			chance = chance + 0.07F;
+			chance = chance + 0.1F;
 		}
 		boolean mushroomNearby = false;
 		for(BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-2, 1, -2), pos.add(2, 1, 2))) {
@@ -43,7 +43,7 @@ public class OrganicCompostBlock extends Block
 			}
 		}
 		if (mushroomNearby)	{
-			chance = chance + 0.05F;
+			chance = chance + 0.15F;
 		}
 		if (worldIn.getRandom().nextFloat() <= chance) {
 			worldIn.setBlockState(pos, ModBlocks.MULCH.get().getDefaultState(), 2);
