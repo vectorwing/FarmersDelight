@@ -60,7 +60,7 @@
   "itemGroup.farmersdelight": "欣悦农夫",
 
   "farmersdelight.container.cooking_pot": "厨锅",
-  "farmersdelight.container.cooking_pot.served_on": "Served on: %s",
+  "farmersdelight.container.cooking_pot.served_on": "摆放于：%s",
   "farmersdelight.container.basket": "篮子",
 
   "farmersdelight.tooltip.cooking_pot.empty": "空",
