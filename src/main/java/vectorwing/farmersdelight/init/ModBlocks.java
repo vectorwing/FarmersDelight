@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.init;
 
 import net.minecraft.block.BushBlock;
+import net.minecraft.block.HayBlock;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.blocks.*;
 import net.minecraft.block.Block;
@@ -19,6 +20,14 @@ public class ModBlocks
 	public static final RegistryObject<Block> BASKET = BLOCKS.register("basket", BasketBlock::new);
 	public static final RegistryObject<Block> ROPE = BLOCKS.register("rope", RopeBlock::new);
 	public static final RegistryObject<Block> SAFETY_NET = BLOCKS.register("safety_net", SafetyNetBlock::new);
+	public static final RegistryObject<Block> RICE_BALE = BLOCKS.register("rice_bale",
+			() -> new RiceBaleBlock(Block.Properties.from(Blocks.HAY_BLOCK)));
+	public static final RegistryObject<Block> ORGANIC_COMPOST = BLOCKS.register("organic_compost",
+			() -> new OrganicCompostBlock(Block.Properties.from(Blocks.DIRT)));
+	public static final RegistryObject<Block> MULCH = BLOCKS.register("mulch",
+			() -> new MulchBlock(Block.Properties.from(Blocks.DIRT)));
+	public static final RegistryObject<Block> MULCH_FARMLAND = BLOCKS.register("mulch_farmland",
+			() -> new MulchFarmlandBlock(Block.Properties.from(Blocks.FARMLAND)));
 
 	// WILD PATCHES
 	public static final RegistryObject<Block> WILD_CABBAGES = BLOCKS.register("wild_cabbages",

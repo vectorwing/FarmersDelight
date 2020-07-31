@@ -2,42 +2,71 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "name": "pool1",
-      "rolls": 1.0,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "farmersdelight:rice"
-        }
-      ]
-    },
-    {
       "name": "pool2",
       "rolls": 1.0,
       "entries": [
         {
-          "type": "minecraft:item",
-          "functions": [
+          "type": "minecraft:alternatives",
+          "children": [
             {
-              "function": "minecraft:apply_bonus",
-              "enchantment": "minecraft:fortune",
-              "formula": "minecraft:binomial_with_bonus_count",
-              "parameters": {
-                "extra": 3,
-                "probability": 0.5714286
-              }
+              "type": "minecraft:item",
+              "functions": [
+                {
+                  "function": "minecraft:apply_bonus",
+                  "enchantment": "minecraft:fortune",
+                  "formula": "minecraft:binomial_with_bonus_count",
+                  "parameters": {
+                    "extra": 3,
+                    "probability": 0.5714286
+                  }
+                }
+              ],
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "farmersdelight:tall_rice_crop",
+                  "properties": {
+                    "age": "7"
+                  }
+                },
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "tag": "farmersdelight:knives"
+                  }
+                }
+              ],
+              "name": "farmersdelight:rice"
+            },
+            {
+              "type": "minecraft:item",
+              "functions": [
+                {
+                  "function": "minecraft:apply_bonus",
+                  "enchantment": "minecraft:fortune",
+                  "formula": "minecraft:binomial_with_bonus_count",
+                  "parameters": {
+                    "extra": 3,
+                    "probability": 0.5714286
+                  }
+                }
+              ],
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "farmersdelight:tall_rice_crop",
+                  "properties": {
+                    "age": "7"
+                  }
+                }
+              ],
+              "name": "farmersdelight:rice_panicle"
+            },
+            {
+              "type": "minecraft:item",
+              "name": "farmersdelight:rice"
             }
-          ],
-          "name": "farmersdelight:rice"
-        }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "farmersdelight:tall_rice_crop",
-          "properties": {
-            "age": "7"
-          }
+          ]
         }
       ]
     }

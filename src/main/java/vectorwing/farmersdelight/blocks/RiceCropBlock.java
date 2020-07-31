@@ -46,9 +46,9 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
 		super.tick(state, worldIn, pos, rand);
 		if (!worldIn.isAreaLoaded(pos, 1)) return;
-		if (worldIn.getLightSubtracted(pos, 0) >= 6) {
+		if (worldIn.getLightSubtracted(pos.up(), 0) >= 6) {
 			int i = this.getAge(state);
-			if (i < this.getMaxAge()) {
+			if (i <= this.getMaxAge()) {
 				float f = 10;
 				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt((int)(25.0F / f) + 1) == 0)) {
 					if (i == 4) {
@@ -97,7 +97,7 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 
 	@Override
 	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return state.isSolidSide(worldIn, pos, Direction.UP) && (state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS_BLOCK);
+		return state.isSolidSide(worldIn, pos, Direction.UP) && (state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS_BLOCK || state.getBlock() == ModBlocks.MULCH.get());
 	}
 
 	public IntegerProperty getAgeProperty() { return AGE; }
