@@ -2,6 +2,8 @@ package vectorwing.farmersdelight.setup;
 
 import com.google.common.collect.Sets;
 import net.minecraft.block.BlockState;
+import net.minecraft.item.ItemUseContext;
+import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -56,11 +58,12 @@ public class CommonEventHandler
 
 	@SubscribeEvent
 	public static void onHoeUse(UseHoeEvent event) {
-		BlockPos pos = event.getContext().getPos();
-		World world = event.getContext().getWorld();
+		ItemUseContext context = event.getContext();
+		BlockPos pos = context.getPos();
+		World world = context.getWorld();
 		BlockState state = world.getBlockState(pos);
 
-		if (state.getBlock() == ModBlocks.MULCH.get()) {
+		if (context.getFace() != Direction.DOWN && world.isAirBlock(pos.up()) && state.getBlock() == ModBlocks.MULCH.get()) {
 			world.playSound(event.getPlayer(), pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			world.setBlockState(pos, ModBlocks.MULCH_FARMLAND.get().getDefaultState(), 11);
 			event.setResult(Event.Result.ALLOW);

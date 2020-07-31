@@ -1,8 +1,8 @@
 package vectorwing.farmersdelight.blocks;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.FarmlandBlock;
+import net.minecraft.block.IGrowable;
 import net.minecraft.entity.Entity;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.PlantType;
 import vectorwing.farmersdelight.init.ModBlocks;
+import vectorwing.farmersdelight.utils.Utils;
 
 import java.util.Random;
 
@@ -24,23 +25,31 @@ public class MulchFarmlandBlock extends FarmlandBlock
 	}
 
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-		if (!state.isValidPosition(worldIn, pos)) {
-			turnToMulch(state, worldIn, pos);
-		} else {
-			int i = state.get(MOISTURE);
-			if (!hasWater(worldIn, pos) && !worldIn.isRainingAt(pos.up())) {
-				if (i > 0) {
-					worldIn.setBlockState(pos, state.with(MOISTURE, Integer.valueOf(i - 1)), 2);
+		if (!worldIn.isRemote) {
+			if (!state.isValidPosition(worldIn, pos)) {
+				turnToMulch(state, worldIn, pos);
+			} else {
+				int i = state.get(MOISTURE);
+				if (!hasWater(worldIn, pos) && !worldIn.isRainingAt(pos.up())) {
+					if (i > 0) {
+						worldIn.setBlockState(pos, state.with(MOISTURE, i - 1), 2);
+					}
+				} else if (i < 7) {
+					worldIn.setBlockState(pos, state.with(MOISTURE, 7), 2);
+				} else if (i == 7) {
+					BlockState plant = worldIn.getBlockState(pos.up());
+					if (plant.getBlock() instanceof IGrowable && Utils.RAND.nextInt(10) <= 4) {
+						IGrowable growable = (IGrowable) plant.getBlock();
+						if (growable.canGrow(worldIn, pos.up(), plant, false)) {
+							growable.grow(worldIn, worldIn.rand, pos.up(), plant);
+						}
+					}
 				}
-			} else if (i < 7) {
-				worldIn.setBlockState(pos, state.with(MOISTURE, Integer.valueOf(7)), 2);
 			}
-
 		}
 	}
 
-	public boolean isFertile(BlockState state, IBlockReader world, BlockPos pos)
-	{
+	public boolean isFertile(BlockState state, IBlockReader world, BlockPos pos) {
 		if (this.getBlock() == this)
 			return state.get(MulchFarmlandBlock.MOISTURE) > 0;
 
