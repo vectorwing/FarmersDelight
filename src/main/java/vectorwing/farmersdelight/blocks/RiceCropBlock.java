@@ -21,14 +21,17 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import org.apache.logging.log4j.LogManager;
 import vectorwing.farmersdelight.init.ModBlocks;
 import vectorwing.farmersdelight.init.ModItems;
 
 import javax.annotation.Nullable;
 import java.util.Random;
+import org.apache.logging.log4j.Logger;
 
 public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowable
 {
+	public static final Logger LOGGER = LogManager.getLogger();
 	public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 4);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {
@@ -46,9 +49,9 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
 		super.tick(state, worldIn, pos, rand);
 		if (!worldIn.isAreaLoaded(pos, 1)) return;
-		if (worldIn.getLightSubtracted(pos, 0) >= 6) {
+		if (worldIn.getLightSubtracted(pos.up(), 0) >= 6) {
 			int i = this.getAge(state);
-			if (i < this.getMaxAge()) {
+			if (i <= this.getMaxAge()) {
 				float f = 10;
 				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt((int)(25.0F / f) + 1) == 0)) {
 					if (i == 4) {
