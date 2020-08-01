@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.client.tileentity.renderer;
 
+import net.minecraft.client.renderer.WorldRenderer;
 import vectorwing.farmersdelight.blocks.StoveBlock;
 import vectorwing.farmersdelight.blocks.StoveTileEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -46,7 +47,7 @@ public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
 				// Resize the items
 				matrixStackIn.scale(0.375F, 0.375F, 0.375F);
 
-				Minecraft.getInstance().getItemRenderer().renderItem(itemstack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
+				Minecraft.getInstance().getItemRenderer().renderItem(itemstack, ItemCameraTransforms.TransformType.FIXED, WorldRenderer.getCombinedLight(tileEntityIn.getWorld(), tileEntityIn.getPos().up()), combinedOverlayIn, matrixStackIn, bufferIn);
 				matrixStackIn.pop();
 			}
 		}
