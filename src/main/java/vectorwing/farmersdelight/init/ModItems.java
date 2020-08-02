@@ -71,7 +71,7 @@ public class ModItems
 
 	public static final RegistryObject<Item> STRAW = ITEMS.register("straw", () -> new Item(new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> CANVAS = ITEMS.register("canvas", () -> new Item(new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
-	public static final RegistryObject<Item> TREE_BARK = ITEMS.register("tree_bark", () -> new Item(new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> TREE_BARK = ITEMS.register("tree_bark", () -> new FuelItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> FRIED_EGG = ITEMS.register("fried_egg",
 			() -> new Item(new Item.Properties().food(Foods.FRIED_EGG).group(FarmersDelight.ITEM_GROUP)));
