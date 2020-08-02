@@ -164,9 +164,22 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.BONE_MEAL)
 				.addIngredient(Items.BONE_MEAL)
 				.addIngredient(Items.BONE_MEAL)
-				.addCriterion("bone_meal", InventoryChangeTrigger.Instance.forItems(Items.BONE_MEAL))
+				.addCriterion("rotten_flesh", InventoryChangeTrigger.Instance.forItems(Items.ROTTEN_FLESH))
 				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
-				.build(consumer);
+				.build(consumer, "organic_compost_from_rotten_flesh");
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ORGANIC_COMPOST.get(), 1)
+				.addIngredient(Items.DIRT)
+				.addIngredient(ModItems.STRAW.get())
+				.addIngredient(ModItems.STRAW.get())
+				.addIngredient(Items.BONE_MEAL)
+				.addIngredient(Items.BONE_MEAL)
+				.addIngredient(ModItems.TREE_BARK.get())
+				.addIngredient(ModItems.TREE_BARK.get())
+				.addIngredient(ModItems.TREE_BARK.get())
+				.addIngredient(ModItems.TREE_BARK.get())
+				.addCriterion("tree_bark", InventoryChangeTrigger.Instance.forItems(ModItems.TREE_BARK.get()))
+				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
+				.build(consumer, "organic_compost_from_tree_bark");
 	}
 
 	private void recipesTools(Consumer<IFinishedRecipe> consumer) {

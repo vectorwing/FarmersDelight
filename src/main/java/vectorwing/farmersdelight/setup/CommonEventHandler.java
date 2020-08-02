@@ -45,6 +45,7 @@ public class CommonEventHandler
 
 	public static void init(final FMLCommonSetupEvent event)
 	{
+		ComposterBlock.CHANCES.put(ModItems.TREE_BARK.get(), 0.3F);
 		ComposterBlock.CHANCES.put(ModItems.CABBAGE_SEEDS.get(), 0.3F);
 		ComposterBlock.CHANCES.put(ModItems.TOMATO_SEEDS.get(), 0.3F);
 		ComposterBlock.CHANCES.put(ModItems.CABBAGE.get(), 0.65F);
