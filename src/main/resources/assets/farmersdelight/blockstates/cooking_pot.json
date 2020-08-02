@@ -1,18 +1,33 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,down=false": {
       "model": "farmersdelight:block/cooking_pot"
     },
-    "facing=south": {
+    "facing=south,down=false": {
       "model": "farmersdelight:block/cooking_pot",
       "y": 180
     },
-    "facing=west": {
+    "facing=west,down=false": {
       "model": "farmersdelight:block/cooking_pot",
       "y": 270
     },
-    "facing=east": {
+    "facing=east,down=false": {
       "model": "farmersdelight:block/cooking_pot",
+      "y": 90
+    },
+    "facing=north,down=true": {
+      "model": "farmersdelight:block/cooking_pot_supported"
+    },
+    "facing=south,down=true": {
+      "model": "farmersdelight:block/cooking_pot_supported",
+      "y": 180
+    },
+    "facing=west,down=true": {
+      "model": "farmersdelight:block/cooking_pot_supported",
+      "y": 270
+    },
+    "facing=east,down=true": {
+      "model": "farmersdelight:block/cooking_pot_supported",
       "y": 90
     }
   }
