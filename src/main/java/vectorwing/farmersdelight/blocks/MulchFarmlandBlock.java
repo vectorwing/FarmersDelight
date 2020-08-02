@@ -62,11 +62,6 @@ public class MulchFarmlandBlock extends FarmlandBlock
 		return type == PlantType.Crop || type == PlantType.Plains;
 	}
 
-	private boolean hasCrops(IBlockReader worldIn, BlockPos pos) {
-		BlockState state = worldIn.getBlockState(pos.up());
-		return state.getBlock() instanceof net.minecraftforge.common.IPlantable && canSustainPlant(state, worldIn, pos, Direction.UP, (net.minecraftforge.common.IPlantable)state.getBlock());
-	}
-
 	private static boolean hasWater(IWorldReader worldIn, BlockPos pos) {
 		for(BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-4, 0, -4), pos.add(4, 1, 4))) {
 			if (worldIn.getFluidState(blockpos).isTagged(FluidTags.WATER)) {
