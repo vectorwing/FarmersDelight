@@ -1,17 +1,22 @@
 # Changelog
 
 ## 0.1.3
-- Adds Organic Compost, currently with just the non-peaceful recipe. It will be craftable with Tree Bark later;
-  - Organic Compost, when placed, will decompose to Mulch over time;
+- Adds Organic Compost, a nice sink for all these monster drops you have:
+  - Organic Compost, when placed, will slowly decompose to Mulch over time;
   - Does so quicker if away from light, and close to mushrooms;
 - Adds Mulch, a fertile soil. Can be tilled, cannot be trampled, and boosts crops planted on it;
+  - Mushrooms planted on Mulch will begin growing Colonies of up to 5 mushrooms in the same spot;
 - Rice now drops Rice Panicles if harvested without a knife. They can be crafted alone to get Rice;
-- Adds Rice Bales to mass-store panicles
+- Adds Rice Bales to mass-store panicles;
+- Knives can now strip logs to obtain Tree Bark, but will spend twice the durability to do so;
+- Fixed a few bugs with the Stove;
+- Fixed multiple bugs with the Cooking Pot;
+- Added some utility recipes.
 
 ## 0.1.2
 - Adds some Forge Tags to multiple items, so you can interchange with other food mods;
 - Crafting and cooking recipes from this mod now use tags for most items as well;
-- Minor fixes
+- Minor fixes.
 
 ## 0.1.1
 - Fixes conflict with other mods upon injecting chest loot tables;
