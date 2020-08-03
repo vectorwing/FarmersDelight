@@ -100,6 +100,13 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ModItems.CAKE_SLICE.get())
 				.addCriterion("cake_slice", InventoryChangeTrigger.Instance.forItems(ModItems.CAKE_SLICE.get()))
 				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "cake_from_slices"));
+		ShapelessRecipeBuilder.shapelessRecipe(Items.BOOK)
+				.addIngredient(ModItems.CANVAS.get())
+				.addIngredient(Items.PAPER)
+				.addIngredient(Items.PAPER)
+				.addIngredient(Items.PAPER)
+				.addCriterion("canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "book_from_canvas"));
 	}
 
 	private void recipesSmelting(Consumer<IFinishedRecipe> consumer) {

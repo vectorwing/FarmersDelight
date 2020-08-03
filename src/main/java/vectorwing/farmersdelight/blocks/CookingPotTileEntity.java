@@ -110,7 +110,7 @@ public class CookingPotTileEntity extends LockableTileEntity implements IInvento
 	}
 
 	public CompoundNBT writeMealNbt(CompoundNBT compound) {
-		if (this.isEmpty()) return compound;
+		if (this.isMealEmpty()) return compound;
 
 		NonNullList<ItemStack> drops = NonNullList.create();
 		for (int i = 0; i < INVENTORY_SIZE; ++i) {
@@ -146,8 +146,15 @@ public class CookingPotTileEntity extends LockableTileEntity implements IInvento
 				this.cookTime = MathHelper.clamp(this.cookTime - 2, 0, this.cookTimeTotal);
 			}
 
-			if (!this.items.get(INPUT_SIZE).isEmpty() && !this.items.get(INPUT_SIZE + 1).isEmpty()) {
-				this.useStoredContainersOnMeal();
+			ItemStack meal = this.items.get(INPUT_SIZE);
+			if (!meal.isEmpty()) {
+				if (!this.doesMealHaveContainer(meal)) {
+					this.moveMealToOutput();
+					dirty = true;
+				} else if (!this.items.get(INPUT_SIZE + 1).isEmpty()) {
+					this.useStoredContainersOnMeal();
+					dirty = true;
+				}
 			}
 
 		} else {
@@ -270,6 +277,29 @@ public class CookingPotTileEntity extends LockableTileEntity implements IInvento
 	}
 
 	/**
+	 * Because Mojang decided to hardcode bowls into their meal items, we need to do this.
+	 */
+	private boolean doesMealHaveContainer(ItemStack meal) {
+		return meal.hasContainerItem() || meal.getItem() instanceof SoupItem;
+	}
+
+	/**
+	 * Attempts to move all stored meals to the final output.
+	 * Does NOT check if the meal has a container; this is done on tick.
+	 */
+	private void moveMealToOutput() {
+		ItemStack mealDisplay = this.items.get(INPUT_SIZE);
+		ItemStack finalOutput = this.items.get(CONTAINER_INPUT + 1);
+		int mealCount = Math.min(mealDisplay.getCount(), mealDisplay.getMaxStackSize() - finalOutput.getCount());
+		if (finalOutput.isEmpty()) {
+			this.items.set(CONTAINER_INPUT + 1, mealDisplay.split(mealCount));
+		} else if (finalOutput.getItem() == mealDisplay.getItem()) {
+			mealDisplay.shrink(mealCount);
+			finalOutput.grow(mealCount);
+		}
+	}
+
+	/**
 	 * Attempts to generate an ItemStack output using the meal and the inputted container together.
 	 * If input and meal containers don't match, nothing happens.
 	 */
@@ -277,6 +307,7 @@ public class CookingPotTileEntity extends LockableTileEntity implements IInvento
 		ItemStack mealDisplay = this.items.get(INPUT_SIZE);
 		ItemStack containerInput = this.items.get(CONTAINER_INPUT);
 		ItemStack finalOutput = this.items.get(CONTAINER_INPUT + 1);
+
 		boolean hasBowlAndSoupItem = containerInput.getItem() == Items.BOWL && mealDisplay.getItem() instanceof SoupItem;
 		boolean containerMatchesMeal = containerInput.isItemEqual(mealDisplay.getContainerItem());
 		if ((hasBowlAndSoupItem || containerMatchesMeal) && finalOutput.getCount() < finalOutput.getMaxStackSize()) {
@@ -320,6 +351,10 @@ public class CookingPotTileEntity extends LockableTileEntity implements IInvento
 		}
 
 		return true;
+	}
+
+	public boolean isMealEmpty() {
+		return this.items.get(INPUT_SIZE).isEmpty();
 	}
 
 	@Override

@@ -1,9 +1,11 @@
 package vectorwing.farmersdelight.blocks;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.FarmlandBlock;
 import net.minecraft.block.IGrowable;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -70,6 +72,10 @@ public class MulchFarmlandBlock extends FarmlandBlock
 		}
 
 		return net.minecraftforge.common.FarmlandWaterManager.hasBlockWaterTicket(worldIn, pos);
+	}
+
+	public BlockState getStateForPlacement(BlockItemUseContext context) {
+		return !this.getDefaultState().isValidPosition(context.getWorld(), context.getPos()) ? ModBlocks.MULCH.get().getDefaultState() : super.getStateForPlacement(context);
 	}
 
 	@Override
