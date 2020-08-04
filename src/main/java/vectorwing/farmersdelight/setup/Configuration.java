@@ -9,12 +9,12 @@ import net.minecraftforge.fml.config.ModConfig;
 public class Configuration
 {
 	public static final String CATEGORY_WORLD = "world";
+	public static final String CATEGORY_TWEAKS = "tweaks";
 
 	public static ForgeConfigSpec COMMON_CONFIG;
 
 	public static ForgeConfigSpec.BooleanValue CROPS_ON_SHIPWRECKS;
 	public static ForgeConfigSpec.BooleanValue CROPS_ON_VILLAGE_HOUSES;
-
 	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_CABBAGES;
 	public static ForgeConfigSpec.IntValue FREQUENCY_WILD_CABBAGES;
 	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_BEETROOTS;
@@ -27,6 +27,8 @@ public class Configuration
 	public static ForgeConfigSpec.IntValue CHANCE_WILD_CARROTS;
 	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_TOMATOES;
 	public static ForgeConfigSpec.IntValue CHANCE_WILD_TOMATOES;
+
+	public static ForgeConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS;
 
 	static
 	{
@@ -67,6 +69,9 @@ public class Configuration
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.pop();
+
+		COMMON_BUILDER.comment("Game tweaks").push(CATEGORY_TWEAKS);
+		FARMERS_BUY_FD_CROPS = COMMON_BUILDER.comment("Should Novice and Apprentice Farmers buy this mod's crops? (May reduce chances of other trades appearing)").define("farmersBuyFDCrops", true);
 
 		COMMON_CONFIG = COMMON_BUILDER.build();
 	}
