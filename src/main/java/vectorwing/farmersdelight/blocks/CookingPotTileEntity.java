@@ -20,10 +20,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.*;
-import net.minecraft.util.Direction;
-import net.minecraft.util.IIntArray;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
@@ -48,7 +45,7 @@ import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class CookingPotTileEntity extends TileEntity implements IRecipeHolder, INamedContainerProvider, IRecipeHelperPopulator, ITickableTileEntity
+public class CookingPotTileEntity extends TileEntity implements INamedContainerProvider, ITickableTileEntity, INameable
 {
 	public static final int MEAL_DISPLAY = 6;
 	public static final int CONTAINER_INPUT = 7;
@@ -58,6 +55,8 @@ public class CookingPotTileEntity extends TileEntity implements IRecipeHolder, I
 	private ItemStackHandler itemHandler = createHandler();
 	private LazyOptional<IItemHandler> handlerInput = LazyOptional.of(() -> new CookingPotItemHandler(itemHandler, Direction.UP));
 	private LazyOptional<IItemHandler> handlerOutput = LazyOptional.of(() -> new CookingPotItemHandler(itemHandler, Direction.DOWN));
+
+	private ITextComponent customName;
 
 	private int cookTime;
 	private int cookTimeTotal;
@@ -105,6 +104,9 @@ public class CookingPotTileEntity extends TileEntity implements IRecipeHolder, I
 		this.itemHandler.deserializeNBT(compound.getCompound("Inventory"));
 		this.cookTime = compound.getInt("CookTime");
 		this.cookTimeTotal = compound.getInt("CookTimeTotal");
+		if (compound.contains("CustomName", 8)) {
+			this.customName = ITextComponent.Serializer.fromJson(compound.getString("CustomName"));
+		}
 	}
 
 	@Override
@@ -112,6 +114,9 @@ public class CookingPotTileEntity extends TileEntity implements IRecipeHolder, I
 		super.write(compound);
 		compound.putInt("CookTime", this.cookTime);
 		compound.putInt("CookTimeTotal", this.cookTimeTotal);
+		if (this.customName != null) {
+			compound.putString("CustomName", ITextComponent.Serializer.toJson(this.customName));
+		}
 		compound.put("Inventory", itemHandler.serializeNBT());
 		return compound;
 	}
@@ -119,11 +124,14 @@ public class CookingPotTileEntity extends TileEntity implements IRecipeHolder, I
 	public CompoundNBT writeMealNbt(CompoundNBT compound) {
 		if (this.getMeal().isEmpty()) return compound;
 
-		NonNullList<ItemStack> drops = NonNullList.create();
+		ItemStackHandler dropsTwo = new ItemStackHandler(INVENTORY_SIZE);
 		for (int i = 0; i < INVENTORY_SIZE; ++i) {
-			drops.add(i == MEAL_DISPLAY ? itemHandler.getStackInSlot(i) : ItemStack.EMPTY);
+			dropsTwo.setStackInSlot(i, i == MEAL_DISPLAY ? itemHandler.getStackInSlot(i) : ItemStack.EMPTY);
 		}
-		compound.put("Inventory", itemHandler.serializeNBT());
+		if (this.customName != null) {
+			compound.putString("CustomName", ITextComponent.Serializer.toJson(this.customName));
+		}
+		compound.put("Inventory", dropsTwo.serializeNBT());
 		return compound;
 	}
 
@@ -348,34 +356,28 @@ public class CookingPotTileEntity extends TileEntity implements IRecipeHolder, I
 
 	// ======== CONTAINER AND NAME PROVIDER ========
 
+	public void setCustomName(ITextComponent name) {
+		this.customName = name;
+	}
+
 	@Override
-	public ITextComponent getDisplayName()
-	{
-		return Text.getTranslation("container.cooking_pot");
+	public ITextComponent getName()	{
+		return this.customName != null
+				? this.customName
+				: Text.getTranslation("container.cooking_pot");
+	}
+
+	@Override
+	public ITextComponent getDisplayName() { return this.getName(); }
+
+	@Nullable
+	public ITextComponent getCustomName() {
+		return this.customName;
 	}
 
 	@Override
 	public Container createMenu(int id, PlayerInventory player, PlayerEntity entity) {
 		return new CookingPotContainer(id, player, this, this.cookingPotData);
-	}
-
-	// ======== RECIPE HOLDER ========
-
-	// TODO: This seems to be used for blocks that have Recipe Book integration. Do you want that?
-
-	@Override
-	public void setRecipeUsed(@Nullable IRecipe<?> recipe) { }
-
-	@Nullable
-	@Override
-	public IRecipe<?> getRecipeUsed() {	return null; }
-
-
-	@Override
-	public void fillStackedContents(RecipeItemHelper helper) {
-//		for(ItemStack itemstack : this.items) {
-//			helper.accountStack(itemstack);
-//		}
 	}
 
 	// ======== CAPABILITIES ========

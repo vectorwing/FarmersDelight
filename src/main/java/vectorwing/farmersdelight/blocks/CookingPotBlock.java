@@ -6,6 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
@@ -17,6 +18,7 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tileentity.BarrelTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -111,9 +113,9 @@ public class CookingPotBlock extends Block
 		if (!compoundnbt.isEmpty()) {
 			itemstack.setTagInfo("BlockEntityTag", compoundnbt);
 		}
-//		if (tile.hasCustomName()) {
-//			itemstack.setDisplayName(tile.getCustomName());
-//		}
+		if (tile.hasCustomName()) {
+			itemstack.setDisplayName(tile.getCustomName());
+		}
 		return itemstack;
 	}
 
@@ -156,6 +158,15 @@ public class CookingPotBlock extends Block
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
 		builder.add(FACING, SUPPORTED);
+	}
+
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+		if (stack.hasDisplayName()) {
+			TileEntity tileentity = worldIn.getTileEntity(pos);
+			if (tileentity instanceof CookingPotTileEntity) {
+				((CookingPotTileEntity)tileentity).setCustomName(stack.getDisplayName());
+			}
+		}
 	}
 
 	@Override
