@@ -13,6 +13,8 @@ import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.IntArray;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 import vectorwing.farmersdelight.blocks.CookingPotTileEntity;
 import vectorwing.farmersdelight.init.ModBlocks;
 import vectorwing.farmersdelight.init.ModContainerTypes;
@@ -22,6 +24,7 @@ import java.util.Objects;
 public class CookingPotContainer extends Container
 {
 	public final CookingPotTileEntity tileEntity;
+	public final IItemHandler inventoryHandler;
 	private final IIntArray cookingPotData;
 	private final IWorldPosCallable canInteractWithCallable;
 
@@ -29,6 +32,7 @@ public class CookingPotContainer extends Container
 	{
 		super(ModContainerTypes.COOKING_POT.get(), windowId);
 		this.tileEntity = tileEntity;
+		this.inventoryHandler = tileEntity.getInventory();
 		this.cookingPotData = cookingPotDataIn;
 		this.canInteractWithCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
 
@@ -40,20 +44,20 @@ public class CookingPotContainer extends Container
 		int borderSlotSize = 18;
 		for (int row = 0; row < 2; ++row) {
 			for (int column = 0; column < 3; ++column) {
-				this.addSlot(new Slot(tileEntity, (row * 3) + column,
+				this.addSlot(new SlotItemHandler(inventoryHandler, (row * 3) + column,
 						inputStartX + (column * borderSlotSize),
 						inputStartY + (row * borderSlotSize)));
 			}
 		}
 
 		// Meal Display
-		this.addSlot(new CookingPotMealSlot(tileEntity, 6, 124, 26));
+		this.addSlot(new CookingPotMealSlot(inventoryHandler, 6, 124, 26));
 
 		// Bowl Input
-		this.addSlot(new Slot(tileEntity, 7, 92, 55));
+		this.addSlot(new SlotItemHandler(inventoryHandler, 7, 92, 55));
 
 		// Bowl Output
-		this.addSlot(new CookingPotResultSlot(tileEntity, 8, 124, 55));
+		this.addSlot(new CookingPotResultSlot(inventoryHandler, 8, 124, 55));
 
 		// Main Player Inventory
 		int startPlayerInvY = startY * 4 + 12;

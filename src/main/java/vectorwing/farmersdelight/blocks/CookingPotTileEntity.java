@@ -6,10 +6,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.IRecipeHelperPopulator;
 import net.minecraft.inventory.IRecipeHolder;
-import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
@@ -32,6 +30,11 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.RecipeWrapper;
+import vectorwing.farmersdelight.blocks.inventory.CookingPotItemHandler;
 import vectorwing.farmersdelight.container.CookingPotContainer;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.init.ModTileEntityTypes;
@@ -45,12 +48,17 @@ import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class CookingPotTileEntity extends LockableTileEntity implements IInventory, IRecipeHolder, INamedContainerProvider, IRecipeHelperPopulator, ITickableTileEntity
+public class CookingPotTileEntity extends TileEntity implements IRecipeHolder, INamedContainerProvider, IRecipeHelperPopulator, ITickableTileEntity
 {
-	public final int INPUT_SIZE = 6;
-	public final int CONTAINER_INPUT = INPUT_SIZE + 1;
-	public final int INVENTORY_SIZE = INPUT_SIZE + 3;
-	protected NonNullList<ItemStack> items = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
+	public static final int MEAL_DISPLAY = 6;
+	public static final int CONTAINER_INPUT = 7;
+	public static final int FINAL_OUTPUT = 8;
+	public static final int INVENTORY_SIZE = 9;
+
+	private ItemStackHandler itemHandler = createHandler();
+	private LazyOptional<IItemHandler> handlerInput = LazyOptional.of(() -> new CookingPotItemHandler(itemHandler, Direction.UP));
+	private LazyOptional<IItemHandler> handlerOutput = LazyOptional.of(() -> new CookingPotItemHandler(itemHandler, Direction.DOWN));
+
 	private int cookTime;
 	private int cookTimeTotal;
 	protected final IIntArray cookingPotData = new IIntArray() {
@@ -94,8 +102,7 @@ public class CookingPotTileEntity extends LockableTileEntity implements IInvento
 	@Override
 	public void read(CompoundNBT compound) {
 		super.read(compound);
-		this.items = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
-		ItemStackHelper.loadAllItems(compound, this.items);
+		this.itemHandler.deserializeNBT(compound.getCompound("Inventory"));
 		this.cookTime = compound.getInt("CookTime");
 		this.cookTimeTotal = compound.getInt("CookTimeTotal");
 	}
@@ -105,18 +112,18 @@ public class CookingPotTileEntity extends LockableTileEntity implements IInvento
 		super.write(compound);
 		compound.putInt("CookTime", this.cookTime);
 		compound.putInt("CookTimeTotal", this.cookTimeTotal);
-		ItemStackHelper.saveAllItems(compound, this.items);
+		compound.put("Inventory", itemHandler.serializeNBT());
 		return compound;
 	}
 
 	public CompoundNBT writeMealNbt(CompoundNBT compound) {
-		if (this.isMealEmpty()) return compound;
+		if (this.getMeal().isEmpty()) return compound;
 
 		NonNullList<ItemStack> drops = NonNullList.create();
 		for (int i = 0; i < INVENTORY_SIZE; ++i) {
-			drops.add(i == INPUT_SIZE ? this.items.get(i) : ItemStack.EMPTY);
+			drops.add(i == MEAL_DISPLAY ? itemHandler.getStackInSlot(i) : ItemStack.EMPTY);
 		}
-		ItemStackHelper.saveAllItems(compound, drops);
+		compound.put("Inventory", itemHandler.serializeNBT());
 		return compound;
 	}
 
@@ -129,8 +136,8 @@ public class CookingPotTileEntity extends LockableTileEntity implements IInvento
 
 		if (!this.world.isRemote) {
 			if (isHeated && this.hasInput()) {
-				IRecipe<?> irecipe = this.world.getRecipeManager()
-						.getRecipe(this.recipeType, this, this.world).orElse(null);
+				CookingPotRecipe irecipe = this.world.getRecipeManager()
+						.getRecipe(this.recipeType, new RecipeWrapper(itemHandler), this.world).orElse(null);
 				if (this.canCook(irecipe)) {
 					++this.cookTime;
 					if (this.cookTime == this.cookTimeTotal) {
@@ -146,12 +153,12 @@ public class CookingPotTileEntity extends LockableTileEntity implements IInvento
 				this.cookTime = MathHelper.clamp(this.cookTime - 2, 0, this.cookTimeTotal);
 			}
 
-			ItemStack meal = this.items.get(INPUT_SIZE);
+			ItemStack meal = itemHandler.getStackInSlot(MEAL_DISPLAY);
 			if (!meal.isEmpty()) {
 				if (!this.doesMealHaveContainer(meal)) {
 					this.moveMealToOutput();
 					dirty = true;
-				} else if (!this.items.get(INPUT_SIZE + 1).isEmpty()) {
+				} else if (!itemHandler.getStackInSlot(CONTAINER_INPUT).isEmpty()) {
 					this.useStoredContainersOnMeal();
 					dirty = true;
 				}
@@ -169,12 +176,12 @@ public class CookingPotTileEntity extends LockableTileEntity implements IInvento
 	}
 
 	protected int getCookTime() {
-		return this.world.getRecipeManager().getRecipe(this.recipeType, this, this.world).map(CookingPotRecipe::getCookTime).orElse(200);
+		return this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(itemHandler), this.world).map(CookingPotRecipe::getCookTime).orElse(200);
 	}
 
 	private boolean hasInput() {
-		for (int i = 0; i < INPUT_SIZE; ++i) {
-			if (!this.items.get(i).isEmpty()) return true;
+		for (int i = 0; i < MEAL_DISPLAY; ++i) {
+			if (!itemHandler.getStackInSlot(i).isEmpty()) return true;
 		}
 		return false;
 	}
@@ -185,12 +192,12 @@ public class CookingPotTileEntity extends LockableTileEntity implements IInvento
 			if (recipeOutput.isEmpty()) {
 				return false;
 			} else {
-				ItemStack currentOutput = this.items.get(INPUT_SIZE);
+				ItemStack currentOutput = itemHandler.getStackInSlot(MEAL_DISPLAY);
 				if (currentOutput.isEmpty()) {
 					return true;
 				} else if (!currentOutput.isItemEqual(recipeOutput)) {
 					return false;
-				} else if (currentOutput.getCount() + recipeOutput.getCount() <= this.getInventoryStackLimit()) {
+				} else if (currentOutput.getCount() + recipeOutput.getCount() <= itemHandler.getSlotLimit(MEAL_DISPLAY)) {
 					return true;
 				} else {
 					return currentOutput.getCount() + recipeOutput.getCount() <= recipeOutput.getMaxStackSize();
@@ -204,22 +211,22 @@ public class CookingPotTileEntity extends LockableTileEntity implements IInvento
 	private void cook(@Nullable IRecipe<?> recipe) {
 		if (recipe != null && this.canCook(recipe)) {
 			ItemStack recipeOutput = recipe.getRecipeOutput();
-			ItemStack currentOutput = this.items.get(INPUT_SIZE);
+			ItemStack currentOutput = itemHandler.getStackInSlot(MEAL_DISPLAY);
 			if (currentOutput.isEmpty()) {
-				this.items.set(INPUT_SIZE, recipeOutput.copy());
+				itemHandler.setStackInSlot(MEAL_DISPLAY, recipeOutput.copy());
 			} else if (currentOutput.getItem() == recipeOutput.getItem()) {
 				currentOutput.grow(recipeOutput.getCount());
 			}
 		}
-		for (int i = 0; i < INPUT_SIZE; ++i) {
-			if (this.items.get(i).hasContainerItem()) {
+		for (int i = 0; i < MEAL_DISPLAY; ++i) {
+			if (itemHandler.getStackInSlot(i).hasContainerItem()) {
 				Direction direction = this.getBlockState().get(CookingPotBlock.FACING).rotateYCCW();
-				ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5, this.items.get(i).getContainerItem());
+				ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5, itemHandler.getStackInSlot(i).getContainerItem());
 				entity.setMotion(direction.getXOffset() * 0.1F, 0.2F, direction.getZOffset() * 0.1F);
 				world.addEntity(entity);
 			}
-			if (!this.items.get(i).isEmpty())
-				this.items.get(i).shrink(1);
+			if (!itemHandler.getStackInSlot(i).isEmpty())
+				itemHandler.getStackInSlot(i).shrink(1);
 		}
 	}
 
@@ -244,7 +251,7 @@ public class CookingPotTileEntity extends LockableTileEntity implements IInvento
 	}
 
 	public ItemStack getMeal() {
-		return this.items.get(INPUT_SIZE);
+		return itemHandler.getStackInSlot(MEAL_DISPLAY);
 	}
 
 	// ======== CUSTOM THINGS ========
@@ -271,7 +278,7 @@ public class CookingPotTileEntity extends LockableTileEntity implements IInvento
 	public NonNullList<ItemStack> getDroppableInventory() {
 		NonNullList<ItemStack> drops = NonNullList.create();
 		for (int i = 0; i < INVENTORY_SIZE; ++i) {
-			drops.add(i == INPUT_SIZE ? ItemStack.EMPTY : this.items.get(i));
+			drops.add(i == MEAL_DISPLAY ? ItemStack.EMPTY : itemHandler.getStackInSlot(i));
 		}
 		return drops;
 	}
@@ -288,11 +295,11 @@ public class CookingPotTileEntity extends LockableTileEntity implements IInvento
 	 * Does NOT check if the meal has a container; this is done on tick.
 	 */
 	private void moveMealToOutput() {
-		ItemStack mealDisplay = this.items.get(INPUT_SIZE);
-		ItemStack finalOutput = this.items.get(CONTAINER_INPUT + 1);
+		ItemStack mealDisplay = itemHandler.getStackInSlot(MEAL_DISPLAY);
+		ItemStack finalOutput = itemHandler.getStackInSlot(FINAL_OUTPUT);
 		int mealCount = Math.min(mealDisplay.getCount(), mealDisplay.getMaxStackSize() - finalOutput.getCount());
 		if (finalOutput.isEmpty()) {
-			this.items.set(CONTAINER_INPUT + 1, mealDisplay.split(mealCount));
+			itemHandler.setStackInSlot(FINAL_OUTPUT, mealDisplay.split(mealCount));
 		} else if (finalOutput.getItem() == mealDisplay.getItem()) {
 			mealDisplay.shrink(mealCount);
 			finalOutput.grow(mealCount);
@@ -304,9 +311,9 @@ public class CookingPotTileEntity extends LockableTileEntity implements IInvento
 	 * If input and meal containers don't match, nothing happens.
 	 */
 	private void useStoredContainersOnMeal() {
-		ItemStack mealDisplay = this.items.get(INPUT_SIZE);
-		ItemStack containerInput = this.items.get(CONTAINER_INPUT);
-		ItemStack finalOutput = this.items.get(CONTAINER_INPUT + 1);
+		ItemStack mealDisplay = itemHandler.getStackInSlot(MEAL_DISPLAY);
+		ItemStack containerInput = itemHandler.getStackInSlot(CONTAINER_INPUT);
+		ItemStack finalOutput = itemHandler.getStackInSlot(FINAL_OUTPUT);
 
 		boolean hasBowlAndSoupItem = containerInput.getItem() == Items.BOWL && mealDisplay.getItem() instanceof SoupItem;
 		boolean containerMatchesMeal = containerInput.isItemEqual(mealDisplay.getContainerItem());
@@ -315,7 +322,7 @@ public class CookingPotTileEntity extends LockableTileEntity implements IInvento
 			int mealCount = Math.min(smallerStack, mealDisplay.getMaxStackSize() - finalOutput.getCount());
 			if (finalOutput.isEmpty()) {
 				containerInput.shrink(mealCount);
-				this.items.set(CONTAINER_INPUT + 1, mealDisplay.split(mealCount));
+				itemHandler.setStackInSlot(FINAL_OUTPUT, mealDisplay.split(mealCount));
 			} else if (finalOutput.getItem() == mealDisplay.getItem()) {
 				mealDisplay.shrink(mealCount);
 				containerInput.shrink(mealCount);
@@ -335,108 +342,26 @@ public class CookingPotTileEntity extends LockableTileEntity implements IInvento
 		return ItemStack.EMPTY;
 	}
 
-	// ======== IINVENTORY ========
+	public IItemHandler getInventory() {
+		return this.itemHandler;
+	}
+
+	// ======== CONTAINER AND NAME PROVIDER ========
 
 	@Override
-	public int getSizeInventory() {
-		return this.items.size();
-	}
-
-	@Override
-	public boolean isEmpty() {
-		for(ItemStack itemstack : this.items) {
-			if (!itemstack.isEmpty()) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	public boolean isMealEmpty() {
-		return this.items.get(INPUT_SIZE).isEmpty();
-	}
-
-	@Override
-	public ItemStack getStackInSlot(int index) {
-		return this.items.get(index);
-	}
-
-	@Override
-	public ItemStack decrStackSize(int index, int count) {
-		return ItemStackHelper.getAndSplit(this.items, index, count);
-	}
-
-	@Override
-	public ItemStack removeStackFromSlot(int index)
-	{
-		return ItemStackHelper.getAndRemove(this.items, index);
-	}
-
-	@Override
-	public void setInventorySlotContents(int index, ItemStack stack) {
-		ItemStack itemstack = this.items.get(index);
-		boolean flag = !stack.isEmpty() && stack.isItemEqual(itemstack) && ItemStack.areItemStackTagsEqual(stack, itemstack);
-		this.items.set(index, stack);
-		if (stack.getCount() > this.getInventoryStackLimit()) {
-			stack.setCount(this.getInventoryStackLimit());
-		}
-
-		if (index >= 0 && index < INPUT_SIZE && !flag) {
-			this.cookTimeTotal = this.getCookTime();
-			this.markDirty();
-		}
-	}
-
-	@Override
-	public boolean isUsableByPlayer(PlayerEntity player) {
-		if (this.world.getTileEntity(this.pos) != this) {
-			return false;
-		} else {
-			return player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
-		}
-	}
-
-	// ======== ICLEARABLE ========
-
-	public void clear() {
-		this.items.clear();
-	}
-
-	// ======== LOCKABLE TILE ENTITY ========
-
-	@Override
-	protected ITextComponent getDefaultName()
+	public ITextComponent getDisplayName()
 	{
 		return Text.getTranslation("container.cooking_pot");
 	}
 
 	@Override
-	protected Container createMenu(int id, PlayerInventory player)
-	{
+	public Container createMenu(int id, PlayerInventory player, PlayerEntity entity) {
 		return new CookingPotContainer(id, player, this, this.cookingPotData);
 	}
 
-	@Override
-	public void fillStackedContents(RecipeItemHelper helper) {
-		for(ItemStack itemstack : this.items) {
-			helper.accountStack(itemstack);
-		}
-	}
+	// ======== RECIPE HOLDER ========
 
-	// ======== CAPABILITIES ========
-
-	/*
-	 * TODO: Give the Cooking Pot proper inventory handling for automation. Study Capabilities better.
-	 * As it stands now, the pot is delegating capabilities to LockableTileEntity.
-	 * This is making it allow items to be inserted across its entire inventory, outputs included.
-	 * Obviously this is bad behavior, but there is a game-affecting bug to be fixed for now.
-	 * Release this fix, then come back to properly implement this later.
-	 */
-	@Override
-	public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-		return super.getCapability(cap, side);
-	}
+	// TODO: This seems to be used for blocks that have Recipe Book integration. Do you want that?
 
 	@Override
 	public void setRecipeUsed(@Nullable IRecipe<?> recipe) { }
@@ -444,4 +369,45 @@ public class CookingPotTileEntity extends LockableTileEntity implements IInvento
 	@Nullable
 	@Override
 	public IRecipe<?> getRecipeUsed() {	return null; }
+
+
+	@Override
+	public void fillStackedContents(RecipeItemHelper helper) {
+//		for(ItemStack itemstack : this.items) {
+//			helper.accountStack(itemstack);
+//		}
+	}
+
+	// ======== CAPABILITIES ========
+
+	private ItemStackHandler createHandler() {
+		return new ItemStackHandler(INVENTORY_SIZE) {
+			@Override
+			protected void onContentsChanged(int slot) {
+				if (slot >= 0 && slot < MEAL_DISPLAY) {
+					cookTimeTotal = getCookTime();
+					markDirty();
+				}
+			}
+		};
+	}
+
+	@Override
+	public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
+		if (cap.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)) {
+			if (side == null || side.equals(Direction.UP)){
+				return handlerInput.cast();
+			} else {
+				return handlerOutput.cast();
+			}
+		}
+		return super.getCapability(cap, side);
+	}
+
+	@Override
+	public void remove() {
+		super.remove();
+		handlerInput.invalidate();
+		handlerOutput.invalidate();
+	}
 }

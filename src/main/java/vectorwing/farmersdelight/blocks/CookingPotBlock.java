@@ -33,6 +33,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.init.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.Tags;
 import vectorwing.farmersdelight.utils.Text;
@@ -110,9 +111,9 @@ public class CookingPotBlock extends Block
 		if (!compoundnbt.isEmpty()) {
 			itemstack.setTagInfo("BlockEntityTag", compoundnbt);
 		}
-		if (tile.hasCustomName()) {
-			itemstack.setDisplayName(tile.getCustomName());
-		}
+//		if (tile.hasCustomName()) {
+//			itemstack.setDisplayName(tile.getCustomName());
+//		}
 		return itemstack;
 	}
 
@@ -132,10 +133,11 @@ public class CookingPotBlock extends Block
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		CompoundNBT compoundnbt = stack.getChildTag("BlockEntityTag");
 		if (compoundnbt != null) {
-			if (compoundnbt.contains("Items", 9)) {
-				NonNullList<ItemStack> nonnulllist = NonNullList.withSize(27, ItemStack.EMPTY);
-				ItemStackHelper.loadAllItems(compoundnbt, nonnulllist);
-				ItemStack meal = nonnulllist.get(6);
+			CompoundNBT inventoryTag = compoundnbt.getCompound("Inventory");
+			if (inventoryTag.contains("Items", 9)) {
+				ItemStackHandler handler = new ItemStackHandler();
+				handler.deserializeNBT(inventoryTag);
+				ItemStack meal = handler.getStackInSlot(6);
 				if (!meal.isEmpty()) {
 					ITextComponent servingsOf = meal.getCount() == 1
 							? Text.getTranslation("tooltip.cooking_pot.single_serving")
