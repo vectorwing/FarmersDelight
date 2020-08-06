@@ -1,0 +1,16 @@
+{
+  "block.cooking_pot.boil": {
+    "category": "block",
+    "subtitle": "block.cooking_pot.boil.sub",
+    "sounds": [
+      {
+        "name": "farmersdelight:block/cooking_pot_boil1",
+        "stream": true
+      },
+      {
+        "name": "farmersdelight:block/cooking_pot_boil2",
+        "stream": true
+      }
+    ]
+  }
+}

@@ -92,5 +92,8 @@
   "farmersdelight.advancement.place_cooking_pot": "Dinner's Served!",
   "farmersdelight.advancement.place_cooking_pot.desc": "Put down a Cooking Pot and start preparing meals!",
 
+  "block.cooking_pot.boil": "Cooking Pot Boil",
+  "block.cooking_pot.boil.sub": "Cooking Pot boils",
+
   "farmersdelight.jei.cooking": "Cooking"
 }

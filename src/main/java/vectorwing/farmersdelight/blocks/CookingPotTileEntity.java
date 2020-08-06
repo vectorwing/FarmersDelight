@@ -6,8 +6,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IRecipeHelperPopulator;
-import net.minecraft.inventory.IRecipeHolder;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
@@ -15,7 +13,6 @@ import net.minecraft.item.Items;
 import net.minecraft.item.SoupItem;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.RecipeItemHelper;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -174,7 +171,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 
 		} else {
 			if (isHeated) {
-				this.addParticles();
+				this.animate();
 			}
 		}
 
@@ -238,7 +235,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		}
 	}
 
-	private void addParticles() {
+	private void animate() {
 		World world = this.getWorld();
 		if (world != null) {
 			BlockPos blockpos = this.getPos();
