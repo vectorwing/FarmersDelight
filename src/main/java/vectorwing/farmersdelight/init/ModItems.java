@@ -23,6 +23,14 @@ public class ModItems
 			() -> new RopeItem(ModBlocks.ROPE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> SAFETY_NET = ITEMS.register("safety_net",
 			() -> new BlockItem(ModBlocks.SAFETY_NET.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> RICE_BALE = ITEMS.register("rice_bale",
+			() -> new BlockItem(ModBlocks.RICE_BALE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> ORGANIC_COMPOST = ITEMS.register("organic_compost",
+			() -> new BlockItem(ModBlocks.ORGANIC_COMPOST.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> MULCH = ITEMS.register("mulch",
+			() -> new BlockItem(ModBlocks.MULCH.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> MULCH_FARMLAND = ITEMS.register("mulch_farmland",
+			() -> new BlockItem(ModBlocks.MULCH_FARMLAND.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
 	// Wild Crops
 	public static final RegistryObject<Item> WILD_CABBAGES = ITEMS.register("wild_cabbages",
@@ -63,6 +71,7 @@ public class ModItems
 
 	public static final RegistryObject<Item> STRAW = ITEMS.register("straw", () -> new Item(new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> CANVAS = ITEMS.register("canvas", () -> new Item(new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> TREE_BARK = ITEMS.register("tree_bark", () -> new FuelItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> FRIED_EGG = ITEMS.register("fried_egg",
 			() -> new Item(new Item.Properties().food(Foods.FRIED_EGG).group(FarmersDelight.ITEM_GROUP)));

@@ -1,0 +1,35 @@
+{
+  "parent": "farmersdelight:main/harvest_straw",
+  "display": {
+    "icon": {
+      "item": "farmersdelight:mulch"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.get_mulch"
+    },
+    "description": {
+      "translate": "farmersdelight.advancement.get_mulch.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "get_mulch": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:mulch"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_mulch"
+    ]
+  ]
+}

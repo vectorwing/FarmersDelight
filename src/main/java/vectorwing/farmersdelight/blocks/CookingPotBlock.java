@@ -13,6 +13,7 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -20,16 +21,20 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 import vectorwing.farmersdelight.init.ModTileEntityTypes;
+import vectorwing.farmersdelight.utils.Tags;
 import vectorwing.farmersdelight.utils.Text;
 
 import javax.annotation.Nullable;
@@ -38,24 +43,44 @@ import java.util.List;
 public class CookingPotBlock extends Block
 {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D);
+	protected static final VoxelShape SHAPE_SUPPORTED = VoxelShapes.or(
+			SHAPE,
+			Block.makeCuboidShape(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-	public static final ResourceLocation CONTENTS = new ResourceLocation("contents");
+	public static final BooleanProperty SUPPORTED = BlockStateProperties.DOWN;
 
 	public CookingPotBlock()
 	{
 		super(Properties.create(Material.IRON)
 				.hardnessAndResistance(2.0F, 6.0F)
 				.sound(SoundType.METAL));
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
+		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(SUPPORTED, false));
 	}
 
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return SHAPE;
 	}
 
+	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+		return state.get(SUPPORTED) ? SHAPE_SUPPORTED : SHAPE;
+	}
+
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+		BlockPos blockpos = context.getPos();
+		World world = context.getWorld();
+		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(SUPPORTED, needsTrayForHeatSource(world.getBlockState(blockpos.down())));
+	}
+
+	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		if (facing == Direction.DOWN) {
+			return stateIn.with(SUPPORTED, needsTrayForHeatSource(facingState));
+		}
+		return stateIn;
+	}
+
+	private boolean needsTrayForHeatSource(BlockState state) {
+		return Tags.HEAT_SOURCES.contains(state.getBlock()) && !state.isSolid();
 	}
 
 	@Override
@@ -128,7 +153,7 @@ public class CookingPotBlock extends Block
 
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
-		builder.add(FACING);
+		builder.add(FACING, SUPPORTED);
 	}
 
 	@Override

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:rice"
+    ]
+  },
+  "criteria": {
+    "rice_panicle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:rice_panicle"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:rice"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "rice_panicle",
+      "has_the_recipe"
+    ]
+  ]
+}

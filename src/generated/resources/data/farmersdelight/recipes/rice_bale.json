@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "rrr",
+    "rrr",
+    "rrr"
+  ],
+  "key": {
+    "r": {
+      "item": "farmersdelight:rice_panicle"
+    }
+  },
+  "result": {
+    "item": "farmersdelight:rice_bale"
+  }
+}

@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.client.tileentity.renderer;
 
+import net.minecraft.client.renderer.WorldRenderer;
 import vectorwing.farmersdelight.blocks.StoveBlock;
 import vectorwing.farmersdelight.blocks.StoveTileEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -30,7 +31,7 @@ public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
 				matrixStackIn.push();
 
 				// Center item above the stove
-				matrixStackIn.translate(0.5D, 1.01D, 0.5D);
+				matrixStackIn.translate(0.5D, 1.02D, 0.5D);
 
 				// Rotate item to face the stove's front side
 				float f = -direction.getHorizontalAngle();
@@ -43,10 +44,10 @@ public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
 				Vec2f itemOffset = tileEntityIn.getStoveItemOffset(i);
 				matrixStackIn.translate(itemOffset.x, itemOffset.y, 0.0D);
 
-				// Resize the items? I dunno lmao
+				// Resize the items
 				matrixStackIn.scale(0.375F, 0.375F, 0.375F);
 
-				Minecraft.getInstance().getItemRenderer().renderItem(itemstack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
+				Minecraft.getInstance().getItemRenderer().renderItem(itemstack, ItemCameraTransforms.TransformType.FIXED, WorldRenderer.getCombinedLight(tileEntityIn.getWorld(), tileEntityIn.getPos().up()), combinedOverlayIn, matrixStackIn, bufferIn);
 				matrixStackIn.pop();
 			}
 		}

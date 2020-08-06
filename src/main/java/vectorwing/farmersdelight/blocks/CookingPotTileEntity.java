@@ -1,19 +1,20 @@
 package vectorwing.farmersdelight.blocks;
 
 import com.google.common.collect.Maps;
-import net.minecraft.block.Block;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.IRecipeHelperPopulator;
 import net.minecraft.inventory.IRecipeHolder;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.SoupItem;
-import net.minecraft.item.crafting.AbstractCookingRecipe;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.RecipeItemHelper;
@@ -28,27 +29,23 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.wrapper.InvWrapper;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.container.CookingPotContainer;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.init.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.Tags;
 import vectorwing.farmersdelight.utils.Text;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Map;
 import java.util.Random;
 
-public class CookingPotTileEntity extends LockableTileEntity implements IRecipeHolder, IRecipeHelperPopulator, ITickableTileEntity
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+public class CookingPotTileEntity extends LockableTileEntity implements IInventory, IRecipeHolder, INamedContainerProvider, IRecipeHelperPopulator, ITickableTileEntity
 {
 	public final int INPUT_SIZE = 6;
 	public final int CONTAINER_INPUT = INPUT_SIZE + 1;
@@ -85,10 +82,6 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 	private final Map<ResourceLocation, Integer> recipes = Maps.newHashMap();
 	protected final IRecipeType<? extends CookingPotRecipe> recipeType;
 
-	protected int numPlayersUsing;
-	private IItemHandlerModifiable baseHandler = createHandler();
-	private LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> baseHandler);
-
 	public CookingPotTileEntity(TileEntityType<?> tileEntityTypeIn, IRecipeType<? extends CookingPotRecipe> recipeTypeIn) {
 		super(tileEntityTypeIn);
 		this.recipeType = recipeTypeIn;
@@ -96,9 +89,41 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 
 	public CookingPotTileEntity() {	this(ModTileEntityTypes.COOKING_POT_TILE.get(), CookingPotRecipe.TYPE); }
 
+	// ======== NBT HANDLING ========
+
 	@Override
-	public void tick()
-	{
+	public void read(CompoundNBT compound) {
+		super.read(compound);
+		this.items = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
+		ItemStackHelper.loadAllItems(compound, this.items);
+		this.cookTime = compound.getInt("CookTime");
+		this.cookTimeTotal = compound.getInt("CookTimeTotal");
+	}
+
+	@Override
+	public CompoundNBT write(CompoundNBT compound) {
+		super.write(compound);
+		compound.putInt("CookTime", this.cookTime);
+		compound.putInt("CookTimeTotal", this.cookTimeTotal);
+		ItemStackHelper.saveAllItems(compound, this.items);
+		return compound;
+	}
+
+	public CompoundNBT writeMealNbt(CompoundNBT compound) {
+		if (this.isMealEmpty()) return compound;
+
+		NonNullList<ItemStack> drops = NonNullList.create();
+		for (int i = 0; i < INVENTORY_SIZE; ++i) {
+			drops.add(i == INPUT_SIZE ? this.items.get(i) : ItemStack.EMPTY);
+		}
+		ItemStackHelper.saveAllItems(compound, drops);
+		return compound;
+	}
+
+	// ======== BASIC FUNCTIONALITY ========
+
+	@Override
+	public void tick() {
 		boolean isHeated = this.isAboveLitHeatSource();
 		boolean dirty = false;
 
@@ -121,8 +146,15 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 				this.cookTime = MathHelper.clamp(this.cookTime - 2, 0, this.cookTimeTotal);
 			}
 
-			if (!this.items.get(INPUT_SIZE).isEmpty() && !this.items.get(INPUT_SIZE + 1).isEmpty()) {
-				this.useStoredContainersOnMeal();
+			ItemStack meal = this.items.get(INPUT_SIZE);
+			if (!meal.isEmpty()) {
+				if (!this.doesMealHaveContainer(meal)) {
+					this.moveMealToOutput();
+					dirty = true;
+				} else if (!this.items.get(INPUT_SIZE + 1).isEmpty()) {
+					this.useStoredContainersOnMeal();
+					dirty = true;
+				}
 			}
 
 		} else {
@@ -138,30 +170,6 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 
 	protected int getCookTime() {
 		return this.world.getRecipeManager().getRecipe(this.recipeType, this, this.world).map(CookingPotRecipe::getCookTime).orElse(200);
-	}
-
-	/**
-	 * Attempts to generate an ItemStack output using the meal and the inputted container together.
-	 * If input and meal containers don't match, nothing happens.
-	 */
-	private void useStoredContainersOnMeal() {
-		ItemStack mealDisplay = this.items.get(INPUT_SIZE);
-		ItemStack containerInput = this.items.get(CONTAINER_INPUT);
-		ItemStack finalOutput = this.items.get(CONTAINER_INPUT + 1);
-		boolean hasBowlAndSoupItem = containerInput.getItem() == Items.BOWL && mealDisplay.getItem() instanceof SoupItem;
-		boolean containerMatchesMeal = containerInput.isItemEqual(mealDisplay.getContainerItem());
-		if ((hasBowlAndSoupItem || containerMatchesMeal) && finalOutput.getCount() < finalOutput.getMaxStackSize()) {
-			int smallerStack = Math.min(mealDisplay.getCount(), containerInput.getCount());
-			int mealCount = Math.min(smallerStack, mealDisplay.getMaxStackSize() - finalOutput.getCount());
-			if (finalOutput.isEmpty()) {
-				containerInput.shrink(mealCount);
-				this.items.set(CONTAINER_INPUT + 1, mealDisplay.split(mealCount));
-			} else if (finalOutput.getItem() == mealDisplay.getItem()) {
-				mealDisplay.shrink(mealCount);
-				containerInput.shrink(mealCount);
-				finalOutput.grow(mealCount);
-			}
-		}
 	}
 
 	private boolean hasInput() {
@@ -235,6 +243,16 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 		}
 	}
 
+	public ItemStack getMeal() {
+		return this.items.get(INPUT_SIZE);
+	}
+
+	// ======== CUSTOM THINGS ========
+
+	/**
+	 * Checks if the pot is on top of a heat source using the tag farmersdelight:heat_sources.
+	 * If the given block has a LIT state, it will check if that state is true.
+	 */
 	public boolean isAboveLitHeatSource() {
 		if (world == null)
 			return false;
@@ -247,11 +265,6 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 		return false;
 	}
 
-	@Override
-	public int getSizeInventory() {
-		return this.items.size();
-	}
-
 	/**
 	 * Returns every stored ItemStack in the pot, except for prepared meals.
 	 */
@@ -261,6 +274,72 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 			drops.add(i == INPUT_SIZE ? ItemStack.EMPTY : this.items.get(i));
 		}
 		return drops;
+	}
+
+	/**
+	 * Because Mojang decided to hardcode bowls into their meal items, we need to do this.
+	 */
+	private boolean doesMealHaveContainer(ItemStack meal) {
+		return meal.hasContainerItem() || meal.getItem() instanceof SoupItem;
+	}
+
+	/**
+	 * Attempts to move all stored meals to the final output.
+	 * Does NOT check if the meal has a container; this is done on tick.
+	 */
+	private void moveMealToOutput() {
+		ItemStack mealDisplay = this.items.get(INPUT_SIZE);
+		ItemStack finalOutput = this.items.get(CONTAINER_INPUT + 1);
+		int mealCount = Math.min(mealDisplay.getCount(), mealDisplay.getMaxStackSize() - finalOutput.getCount());
+		if (finalOutput.isEmpty()) {
+			this.items.set(CONTAINER_INPUT + 1, mealDisplay.split(mealCount));
+		} else if (finalOutput.getItem() == mealDisplay.getItem()) {
+			mealDisplay.shrink(mealCount);
+			finalOutput.grow(mealCount);
+		}
+	}
+
+	/**
+	 * Attempts to generate an ItemStack output using the meal and the inputted container together.
+	 * If input and meal containers don't match, nothing happens.
+	 */
+	private void useStoredContainersOnMeal() {
+		ItemStack mealDisplay = this.items.get(INPUT_SIZE);
+		ItemStack containerInput = this.items.get(CONTAINER_INPUT);
+		ItemStack finalOutput = this.items.get(CONTAINER_INPUT + 1);
+
+		boolean hasBowlAndSoupItem = containerInput.getItem() == Items.BOWL && mealDisplay.getItem() instanceof SoupItem;
+		boolean containerMatchesMeal = containerInput.isItemEqual(mealDisplay.getContainerItem());
+		if ((hasBowlAndSoupItem || containerMatchesMeal) && finalOutput.getCount() < finalOutput.getMaxStackSize()) {
+			int smallerStack = Math.min(mealDisplay.getCount(), containerInput.getCount());
+			int mealCount = Math.min(smallerStack, mealDisplay.getMaxStackSize() - finalOutput.getCount());
+			if (finalOutput.isEmpty()) {
+				containerInput.shrink(mealCount);
+				this.items.set(CONTAINER_INPUT + 1, mealDisplay.split(mealCount));
+			} else if (finalOutput.getItem() == mealDisplay.getItem()) {
+				mealDisplay.shrink(mealCount);
+				containerInput.shrink(mealCount);
+				finalOutput.grow(mealCount);
+			}
+		}
+	}
+
+	/**
+	 * Checks if the given ItemStack is a container for the stored meal. If true, takes a serving and returns it.
+	 */
+	public ItemStack useHeldItemOnMeal(ItemStack container) {
+		if (container.isItemEqual(this.getMeal().getContainerItem())) {
+			container.shrink(1);
+			return this.getMeal().split(1);
+		}
+		return ItemStack.EMPTY;
+	}
+
+	// ======== IINVENTORY ========
+
+	@Override
+	public int getSizeInventory() {
+		return this.items.size();
 	}
 
 	@Override
@@ -276,21 +355,6 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 
 	public boolean isMealEmpty() {
 		return this.items.get(INPUT_SIZE).isEmpty();
-	}
-
-	public ItemStack getMeal() {
-		return this.items.get(INPUT_SIZE);
-	}
-
-	/**
-	 * Checks if the given ItemStack is a container for the stored meal. If true, takes a serving and returns it.
-	 */
-	public ItemStack useHeldItemOnMeal(ItemStack container) {
-		if (container.isItemEqual(this.getMeal().getContainerItem())) {
-			container.shrink(1);
-			return this.getMeal().split(1);
-		}
-		return ItemStack.EMPTY;
 	}
 
 	@Override
@@ -310,8 +374,7 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 	}
 
 	@Override
-	public void setInventorySlotContents(int index, ItemStack stack)
-	{
+	public void setInventorySlotContents(int index, ItemStack stack) {
 		ItemStack itemstack = this.items.get(index);
 		boolean flag = !stack.isEmpty() && stack.isItemEqual(itemstack) && ItemStack.areItemStackTagsEqual(stack, itemstack);
 		this.items.set(index, stack);
@@ -326,14 +389,21 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 	}
 
 	@Override
-	public boolean isUsableByPlayer(PlayerEntity player)
-	{
+	public boolean isUsableByPlayer(PlayerEntity player) {
 		if (this.world.getTileEntity(this.pos) != this) {
 			return false;
 		} else {
 			return player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
 		}
 	}
+
+	// ======== ICLEARABLE ========
+
+	public void clear() {
+		this.items.clear();
+	}
+
+	// ======== LOCKABLE TILE ENTITY ========
 
 	@Override
 	protected ITextComponent getDefaultName()
@@ -348,134 +418,30 @@ public class CookingPotTileEntity extends LockableTileEntity implements IRecipeH
 	}
 
 	@Override
-	public void read(CompoundNBT compound) {
-		super.read(compound);
-		this.items = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
-		ItemStackHelper.loadAllItems(compound, this.items);
-		this.cookTime = compound.getInt("CookTime");
-		this.cookTimeTotal = compound.getInt("CookTimeTotal");
+	public void fillStackedContents(RecipeItemHelper helper) {
+		for(ItemStack itemstack : this.items) {
+			helper.accountStack(itemstack);
+		}
 	}
 
+	// ======== CAPABILITIES ========
+
+	/*
+	 * TODO: Give the Cooking Pot proper inventory handling for automation. Study Capabilities better.
+	 * As it stands now, the pot is delegating capabilities to LockableTileEntity.
+	 * This is making it allow items to be inserted across its entire inventory, outputs included.
+	 * Obviously this is bad behavior, but there is a game-affecting bug to be fixed for now.
+	 * Release this fix, then come back to properly implement this later.
+	 */
 	@Override
-	public CompoundNBT write(CompoundNBT compound) {
-		super.write(compound);
-		compound.putInt("CookTime", this.cookTime);
-		compound.putInt("CookTimeTotal", this.cookTimeTotal);
-		ItemStackHelper.saveAllItems(compound, this.items);
-		return compound;
-	}
-
-	public CompoundNBT writeMealNbt(CompoundNBT compound) {
-		if (this.isEmpty()) return compound;
-
-		NonNullList<ItemStack> drops = NonNullList.create();
-		for (int i = 0; i < INVENTORY_SIZE; ++i) {
-			drops.add(i == INPUT_SIZE ? this.items.get(i) : ItemStack.EMPTY);
-		}
-		ItemStackHelper.saveAllItems(compound, drops);
-		return compound;
-	}
-
-	@Override
-	public boolean receiveClientEvent(int id, int type) {
-		if (id == 1) {
-			this.numPlayersUsing = type;
-			return true;
-		} else {
-			return super.receiveClientEvent(id, type);
-		}
-	}
-
-	@Override
-	public void openInventory(PlayerEntity player) {
-		if (!player.isSpectator()) {
-			if (this.numPlayersUsing < 0) {
-				this.numPlayersUsing = 0;
-			}
-
-			++this.numPlayersUsing;
-			this.onOpenOrClose();
-		}
-	}
-
-	@Override
-	public void closeInventory(PlayerEntity player) {
-		if (!player.isSpectator()) {
-			--this.numPlayersUsing;
-			this.onOpenOrClose();
-		}
-	}
-
-	protected void onOpenOrClose() {
-		Block block = this.getBlockState().getBlock();
-		if (block instanceof CookingPotBlock) {
-			this.world.addBlockEvent(this.pos, block, 1, this.numPlayersUsing);
-			this.world.notifyNeighborsOfStateChange(this.pos, block);
-		}
-	}
-
-	public static int getPlayersUsing(IBlockReader reader, BlockPos pos) {
-		BlockState blockstate = reader.getBlockState(pos);
-		if (blockstate.hasTileEntity()) {
-			TileEntity tileentity = reader.getTileEntity(pos);
-			if (tileentity instanceof CookingPotTileEntity) {
-				return ((CookingPotTileEntity) tileentity).numPlayersUsing;
-			}
-		}
-		return 0;
-	}
-
-	@Override
-	public void updateContainingBlockInfo() {
-		super.updateContainingBlockInfo();
-		if (this.itemHandler != null) {
-			this.itemHandler.invalidate();
-			this.itemHandler = null;
-		}
-	}
-
-	@Override
-	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nonnull Direction side) {
-		if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return itemHandler.cast();
-		}
+	public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
 		return super.getCapability(cap, side);
 	}
 
-	private IItemHandlerModifiable createHandler() {
-		return new InvWrapper(this);
-	}
-
 	@Override
-	public void remove() {
-		super.remove();
-		if(itemHandler != null) {
-			itemHandler.invalidate();
-		}
-	}
-
-	@Override
-	public void clear()
-	{
-
-	}
-
-	@Override
-	public void fillStackedContents(RecipeItemHelper helper)
-	{
-
-	}
-
-	@Override
-	public void setRecipeUsed(@Nullable IRecipe<?> recipe)
-	{
-
-	}
+	public void setRecipeUsed(@Nullable IRecipe<?> recipe) { }
 
 	@Nullable
 	@Override
-	public IRecipe<?> getRecipeUsed()
-	{
-		return null;
-	}
+	public IRecipe<?> getRecipeUsed() {	return null; }
 }

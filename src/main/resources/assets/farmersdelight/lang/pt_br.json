@@ -4,11 +4,17 @@
   "block.farmersdelight.basket": "Cesto",
   "block.farmersdelight.rope": "Corda",
   "block.farmersdelight.safety_net": "Rede de segurança",
+  "block.farmersdelight.rice_bale": "Fardo de arroz",
+  "block.farmersdelight.organic_compost": "Composto orgânico",
+  "block.farmersdelight.mulch": "Adubo",
+  "block.farmersdelight.mulch_farmland": "Adubo arado",
 
   "block.farmersdelight.cabbages": "Sementes de repolho",
   "block.farmersdelight.onions": "Cebola",
   "block.farmersdelight.tomatoes": "Sementes de tomate",
   "block.farmersdelight.rice_crop": "Arroz",
+  "block.farmersdelight.brown_mushroom_colony": "Colônia de cogumelos marrons",
+  "block.farmersdelight.red_mushroom_colony": "Colônia de cogumelos vermelhos",
 
   "block.farmersdelight.wild_cabbages": "Couve silvestre",
   "block.farmersdelight.wild_tomatoes": "Tomates rasteiros",
@@ -23,6 +29,7 @@
 
   "item.farmersdelight.straw": "Palha",
   "item.farmersdelight.canvas": "Lona",
+  "item.farmersdelight.tree_bark": "Casca de árvore",
 
   "item.farmersdelight.tomato_sauce": "Molho de tomate",
   "item.farmersdelight.milk_bottle": "Frasco de leite",
@@ -71,10 +78,13 @@
   "farmersdelight.advancement.root.desc": "Um mundo de sabor te espera!",
   "farmersdelight.advancement.craft_knife": "Caçar e colher",
   "farmersdelight.advancement.craft_knife.desc": "Crie uma Faca para pilhar mais matéria-prima de plantas e animais",
-  "farmersdelight.advancement.harvest_straw": "Agarrando palhas",
-  "farmersdelight.advancement.harvest_straw.desc": "Colha plantas gramíneas com uma Faca para obter Palha",
   "farmersdelight.advancement.plant_rice": "Molhando suas raízes",
   "farmersdelight.advancement.plant_rice.desc": "Plante Arroz em uma poça de água rasa",
+  "farmersdelight.advancement.harvest_straw": "Agarrando palhas",
+  "farmersdelight.advancement.harvest_straw.desc": "Colha plantas gramíneas com uma Faca para obter Palha",
+  "farmersdelight.advancement.get_mulch": "Comida de plantas",
+  "farmersdelight.advancement.get_mulch.desc": "Deixe um pouco de Composto Orgânico decompor até virar Adubo",
+
   "farmersdelight.advancement.place_campfire": "Bonfire Lit",
   "farmersdelight.advancement.place_campfire.desc": "Acenda uma Fogueira para lhe aquecer à noite",
   "farmersdelight.advancement.craft_stove": "Acendendo a grelha",

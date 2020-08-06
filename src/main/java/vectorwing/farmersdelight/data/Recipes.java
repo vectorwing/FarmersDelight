@@ -100,6 +100,13 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ModItems.CAKE_SLICE.get())
 				.addCriterion("cake_slice", InventoryChangeTrigger.Instance.forItems(ModItems.CAKE_SLICE.get()))
 				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "cake_from_slices"));
+		ShapelessRecipeBuilder.shapelessRecipe(Items.BOOK)
+				.addIngredient(Items.PAPER)
+				.addIngredient(Items.PAPER)
+				.addIngredient(Items.PAPER)
+				.addIngredient(ModItems.CANVAS.get())
+				.addCriterion("canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "book_from_canvas"));
 	}
 
 	private void recipesSmelting(Consumer<IFinishedRecipe> consumer) {
@@ -147,6 +154,39 @@ public class Recipes extends RecipeProvider
 				.key('r', ModItems.ROPE.get())
 				.addCriterion("rope", InventoryChangeTrigger.Instance.forItems(ModItems.ROPE.get()))
 				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.RICE_BALE.get(), 1)
+				.patternLine("rrr")
+				.patternLine("rrr")
+				.patternLine("rrr")
+				.key('r', ModItems.RICE_PANICLE.get())
+				.addCriterion("rice_panicle", InventoryChangeTrigger.Instance.forItems(ModItems.RICE_PANICLE.get()))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ORGANIC_COMPOST.get(), 1)
+				.addIngredient(Items.DIRT)
+				.addIngredient(Items.ROTTEN_FLESH)
+				.addIngredient(Items.ROTTEN_FLESH)
+				.addIngredient(ModItems.STRAW.get())
+				.addIngredient(ModItems.STRAW.get())
+				.addIngredient(Items.BONE_MEAL)
+				.addIngredient(Items.BONE_MEAL)
+				.addIngredient(Items.BONE_MEAL)
+				.addIngredient(Items.BONE_MEAL)
+				.addCriterion("rotten_flesh", InventoryChangeTrigger.Instance.forItems(Items.ROTTEN_FLESH))
+				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
+				.build(consumer, "organic_compost_from_rotten_flesh");
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ORGANIC_COMPOST.get(), 1)
+				.addIngredient(Items.DIRT)
+				.addIngredient(ModItems.STRAW.get())
+				.addIngredient(ModItems.STRAW.get())
+				.addIngredient(Items.BONE_MEAL)
+				.addIngredient(Items.BONE_MEAL)
+				.addIngredient(ModItems.TREE_BARK.get())
+				.addIngredient(ModItems.TREE_BARK.get())
+				.addIngredient(ModItems.TREE_BARK.get())
+				.addIngredient(ModItems.TREE_BARK.get())
+				.addCriterion("tree_bark", InventoryChangeTrigger.Instance.forItems(ModItems.TREE_BARK.get()))
+				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
+				.build(consumer, "organic_compost_from_tree_bark");
 	}
 
 	private void recipesTools(Consumer<IFinishedRecipe> consumer) {
@@ -186,6 +226,14 @@ public class Recipes extends RecipeProvider
 				.patternLine("##")
 				.key('#', ModItems.STRAW.get())
 				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RICE_PANICLE.get(), 9)
+				.addIngredient(ModItems.RICE_BALE.get())
+				.addCriterion("rice_bale", InventoryChangeTrigger.Instance.forItems(ModItems.RICE_BALE.get()))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RICE.get())
+				.addIngredient(ModItems.RICE_PANICLE.get())
+				.addCriterion("rice_panicle", InventoryChangeTrigger.Instance.forItems(ModItems.RICE_PANICLE.get()))
 				.build(consumer);
 	}
 

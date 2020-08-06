@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "farmersdelight:blocks/brown_mushroom_colony_stage0"
+  }
+}

@@ -4,11 +4,17 @@
   "block.farmersdelight.basket": "Basket",
   "block.farmersdelight.rope": "Rope",
   "block.farmersdelight.safety_net": "Safety Net",
+  "block.farmersdelight.rice_bale": "Rice Bale",
+  "block.farmersdelight.organic_compost": "Organic Compost",
+  "block.farmersdelight.mulch": "Mulch",
+  "block.farmersdelight.mulch_farmland": "Mulch Farmland",
 
   "block.farmersdelight.cabbages": "Cabbage Seeds",
   "block.farmersdelight.onions": "Onion",
   "block.farmersdelight.tomatoes": "Tomato Seeds",
   "block.farmersdelight.rice_crop": "Rice",
+  "block.farmersdelight.brown_mushroom_colony": "Brown Mushroom Colony",
+  "block.farmersdelight.red_mushroom_colony": "Red Mushroom Colony",
 
   "block.farmersdelight.wild_cabbages": "Wild Cabbage",
   "block.farmersdelight.wild_tomatoes": "Tomato Vines",
@@ -23,6 +29,7 @@
 
   "item.farmersdelight.straw": "Straw",
   "item.farmersdelight.canvas": "Canvas",
+  "item.farmersdelight.tree_bark": "Tree Bark",
 
   "item.farmersdelight.tomato_sauce": "Tomato Sauce",
   "item.farmersdelight.fried_egg": "Fried Egg",
@@ -71,10 +78,13 @@
   "farmersdelight.advancement.root.desc": "A world of flavor awaits you!",
   "farmersdelight.advancement.craft_knife": "Hunt and Gather",
   "farmersdelight.advancement.craft_knife.desc": "Craft a Knife to forage more goods from plants and animals",
-  "farmersdelight.advancement.harvest_straw": "Grasping at Straws",
-  "farmersdelight.advancement.harvest_straw.desc": "Harvest grassy plants with a Knife to obtain Straw",
   "farmersdelight.advancement.plant_rice": "Dipping Your Roots",
   "farmersdelight.advancement.plant_rice.desc": "Plant Rice in a shallow puddle",
+  "farmersdelight.advancement.harvest_straw": "Grasping at Straws",
+  "farmersdelight.advancement.harvest_straw.desc": "Harvest grassy plants with a Knife to obtain Straw",
+  "farmersdelight.advancement.get_mulch": "Plant Food",
+  "farmersdelight.advancement.get_mulch.desc": "Leave some Organic Compost to decompose until it becomes Mulch",
+
   "farmersdelight.advancement.place_campfire": "Bonfire Lit",
   "farmersdelight.advancement.place_campfire.desc": "Place down a Campfire to keep you warm at night",
   "farmersdelight.advancement.craft_stove": "Fire Up the Grill",
