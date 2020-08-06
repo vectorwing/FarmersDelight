@@ -121,14 +121,14 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 	public CompoundNBT writeMealNbt(CompoundNBT compound) {
 		if (this.getMeal().isEmpty()) return compound;
 
-		ItemStackHandler dropsTwo = new ItemStackHandler(INVENTORY_SIZE);
+		ItemStackHandler drops = new ItemStackHandler(INVENTORY_SIZE);
 		for (int i = 0; i < INVENTORY_SIZE; ++i) {
-			dropsTwo.setStackInSlot(i, i == MEAL_DISPLAY ? itemHandler.getStackInSlot(i) : ItemStack.EMPTY);
+			drops.setStackInSlot(i, i == MEAL_DISPLAY ? itemHandler.getStackInSlot(i) : ItemStack.EMPTY);
 		}
 		if (this.customName != null) {
 			compound.putString("CustomName", ITextComponent.Serializer.toJson(this.customName));
 		}
-		compound.put("Inventory", dropsTwo.serializeNBT());
+		compound.put("Inventory", drops.serializeNBT());
 		return compound;
 	}
 
