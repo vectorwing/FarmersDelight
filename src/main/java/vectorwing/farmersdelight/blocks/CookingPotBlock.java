@@ -1,15 +1,13 @@
 package vectorwing.farmersdelight.blocks;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.*;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -21,7 +19,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
@@ -33,12 +30,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.items.ItemStackHandler;
+import vectorwing.farmersdelight.init.ModSounds;
 import vectorwing.farmersdelight.init.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.Tags;
 import vectorwing.farmersdelight.utils.Text;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Random;
 
 public class CookingPotBlock extends Block
 {
@@ -132,10 +132,11 @@ public class CookingPotBlock extends Block
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		CompoundNBT compoundnbt = stack.getChildTag("BlockEntityTag");
 		if (compoundnbt != null) {
-			if (compoundnbt.contains("Items", 9)) {
-				NonNullList<ItemStack> nonnulllist = NonNullList.withSize(27, ItemStack.EMPTY);
-				ItemStackHelper.loadAllItems(compoundnbt, nonnulllist);
-				ItemStack meal = nonnulllist.get(6);
+			CompoundNBT inventoryTag = compoundnbt.getCompound("Inventory");
+			if (inventoryTag.contains("Items", 9)) {
+				ItemStackHandler handler = new ItemStackHandler();
+				handler.deserializeNBT(inventoryTag);
+				ItemStack meal = handler.getStackInSlot(6);
 				if (!meal.isEmpty()) {
 					ITextComponent servingsOf = meal.getCount() == 1
 							? Text.getTranslation("tooltip.cooking_pot.single_serving")
@@ -154,6 +155,28 @@ public class CookingPotBlock extends Block
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
 		builder.add(FACING, SUPPORTED);
+	}
+
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+		if (stack.hasDisplayName()) {
+			TileEntity tileentity = worldIn.getTileEntity(pos);
+			if (tileentity instanceof CookingPotTileEntity) {
+				((CookingPotTileEntity)tileentity).setCustomName(stack.getDisplayName());
+			}
+		}
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+		TileEntity tileentity = worldIn.getTileEntity(pos);
+		if (tileentity instanceof CookingPotTileEntity && ((CookingPotTileEntity)tileentity).isAboveLitHeatSource()) {
+			double d0 = (double)pos.getX() + 0.5D;
+			double d1 = pos.getY();
+			double d2 = (double)pos.getZ() + 0.5D;
+			if (rand.nextInt(10) == 0) {
+				worldIn.playSound(d0, d1, d2, ModSounds.BLOCK_COOKING_POT_BOIL.get(), SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.2F + 0.9F, false);
+			}
+		}
 	}
 
 	@Override

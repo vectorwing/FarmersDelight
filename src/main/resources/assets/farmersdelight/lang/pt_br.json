@@ -92,5 +92,8 @@
   "farmersdelight.advancement.place_cooking_pot": "O jantar está servido!",
   "farmersdelight.advancement.place_cooking_pot.desc": "Coloque uma Panela e comece a preparar refeições!",
 
+  "block.cooking_pot.boil": "Panela Fervendo",
+  "block.cooking_pot.boil.sub": "Panela fervendo",
+
   "farmersdelight.jei.cooking": "Panela"
 }

@@ -1,13 +1,13 @@
 package vectorwing.farmersdelight.container;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
-public class CookingPotMealSlot extends Slot
+public class CookingPotMealSlot extends SlotItemHandler
 {
-	public CookingPotMealSlot(IInventory inventoryIn, int index, int xPosition, int yPosition)
+	public CookingPotMealSlot(IItemHandler inventoryIn, int index, int xPosition, int yPosition)
 	{
 		super(inventoryIn, index, xPosition, yPosition);
 	}

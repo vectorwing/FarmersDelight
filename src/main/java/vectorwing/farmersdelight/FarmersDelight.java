@@ -6,10 +6,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.init.ModBlocks;
-import vectorwing.farmersdelight.init.ModItems;
-import vectorwing.farmersdelight.init.ModContainerTypes;
-import vectorwing.farmersdelight.init.ModTileEntityTypes;
+import vectorwing.farmersdelight.init.*;
 import vectorwing.farmersdelight.setup.ClientEventHandler;
 import vectorwing.farmersdelight.setup.CommonEventHandler;
 import net.minecraftforge.common.MinecraftForge;
@@ -42,6 +39,7 @@ public class FarmersDelight
 
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
+        ModSounds.SOUNDS.register(modEventBus);
         ModTileEntityTypes.TILES.register(modEventBus);
         ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
 
