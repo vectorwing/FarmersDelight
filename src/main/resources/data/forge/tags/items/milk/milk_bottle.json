@@ -1,6 +1,6 @@
 {
   "replace": "false",
   "values": [
-    "minecraft:milk_bucket"
+    "farmersdelight:milk_bottle"
   ]
 }

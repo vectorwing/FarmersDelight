@@ -296,6 +296,12 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.STICK)
 				.addCriterion("barbecue", InventoryChangeTrigger.Instance.forItems(Items.COOKED_BEEF))
 				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.EGG_SANDWICH.get())
+				.addIngredient(ForgeTags.BREAD)
+				.addIngredient(ModItems.FRIED_EGG.get())
+				.addIngredient(ModItems.FRIED_EGG.get())
+				.addCriterion("fried_egg", InventoryChangeTrigger.Instance.forItems(ModItems.FRIED_EGG.get()))
+				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CHICKEN_SANDWICH.get())
 				.addIngredient(ForgeTags.BREAD)
 				.addIngredient(Items.COOKED_CHICKEN)
@@ -310,6 +316,13 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ForgeTags.CROPS_TOMATO)
 				.addIngredient(ForgeTags.CROPS_ONION)
 				.addCriterion("hamburger", InventoryChangeTrigger.Instance.forItems(Items.COOKED_BEEF))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.STUFFED_POTATO.get())
+				.addIngredient(Items.BAKED_POTATO)
+				.addIngredient(Items.COOKED_BEEF)
+				.addIngredient(Items.CARROT)
+				.addIngredient(ForgeTags.MILK)
+				.addCriterion("baked_potato", InventoryChangeTrigger.Instance.forItems(Items.BAKED_POTATO))
 				.build(consumer);
 	}
 	private void recipesCookedMeals(Consumer<IFinishedRecipe> consumer) {}

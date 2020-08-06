@@ -2,6 +2,6 @@
   "replace": false,
   "values": [
     "#forge:milk/milk",
-    "farmersdelight:milk_bottle"
+    "#forge:milk/milk_bottle"
   ]
 }

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:bread"
+    },
+    {
+      "item": "farmersdelight:fried_egg"
+    },
+    {
+      "item": "farmersdelight:fried_egg"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:egg_sandwich"
+  }
+}
