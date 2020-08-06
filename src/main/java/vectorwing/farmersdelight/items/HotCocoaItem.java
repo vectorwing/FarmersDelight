@@ -19,9 +19,9 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class MilkBottleItem extends Item
+public class HotCocoaItem extends Item
 {
-	public MilkBottleItem(Item.Properties builder) {
+	public HotCocoaItem(Properties builder) {
 		super(builder);
 	}
 
@@ -35,7 +35,7 @@ public class MilkBottleItem extends Item
 			// Select eligible effects
 			while (itr.hasNext()) {
 				EffectInstance effect = itr.next();
-				if (effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET))) {
+				if (effect.getPotion().getEffectType().equals(EffectType.HARMFUL) && effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET))) {
 					compatibleEffects.add(effect.getPotion());
 				}
 			}
