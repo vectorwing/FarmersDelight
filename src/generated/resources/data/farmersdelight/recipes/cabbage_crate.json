@@ -7,10 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "farmersdelight:rice_panicle"
+      "item": "farmersdelight:cabbage"
     }
   },
   "result": {
-    "item": "farmersdelight:rice_bale"
+    "item": "farmersdelight:cabbage_crate"
   }
 }

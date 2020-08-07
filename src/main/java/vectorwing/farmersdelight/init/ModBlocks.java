@@ -1,11 +1,9 @@
 package vectorwing.farmersdelight.init;
 
-import net.minecraft.block.BushBlock;
-import net.minecraft.block.HayBlock;
+import net.minecraft.block.*;
+import net.minecraft.block.material.Material;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.blocks.*;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -20,8 +18,15 @@ public class ModBlocks
 	public static final RegistryObject<Block> BASKET = BLOCKS.register("basket", BasketBlock::new);
 	public static final RegistryObject<Block> ROPE = BLOCKS.register("rope", RopeBlock::new);
 	public static final RegistryObject<Block> SAFETY_NET = BLOCKS.register("safety_net", SafetyNetBlock::new);
+	public static final RegistryObject<Block> CABBAGE_CRATE = BLOCKS.register("cabbage_crate",
+			() -> new Block(Block.Properties.create(Material.WOOD).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> TOMATO_CRATE = BLOCKS.register("tomato_crate",
+			() -> new Block(Block.Properties.create(Material.WOOD).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> ONION_CRATE = BLOCKS.register("onion_crate",
+			() -> new Block(Block.Properties.create(Material.WOOD).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> RICE_BALE = BLOCKS.register("rice_bale",
 			() -> new RiceBaleBlock(Block.Properties.from(Blocks.HAY_BLOCK)));
+
 	public static final RegistryObject<Block> ORGANIC_COMPOST = BLOCKS.register("organic_compost",
 			() -> new OrganicCompostBlock(Block.Properties.from(Blocks.DIRT)));
 	public static final RegistryObject<Block> MULCH = BLOCKS.register("mulch",
