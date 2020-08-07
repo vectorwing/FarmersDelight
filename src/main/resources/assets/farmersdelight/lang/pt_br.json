@@ -106,9 +106,13 @@
   "farmersdelight.advancement.craft_stove.desc": "Obtenha um Fogão",
   "farmersdelight.advancement.place_cooking_pot": "O jantar está servido!",
   "farmersdelight.advancement.place_cooking_pot.desc": "Coloque uma Panela e comece a preparar refeições!",
+  "farmersdelight.advancement.master_chef": "Mestre-cuca",
+  "farmersdelight.advancement.master_chef.desc": "Coma uma porção de cada refeição disponível!",
 
   "block.cooking_pot.boil": "Panela Fervendo",
-  "block.cooking_pot.boil.sub": "Panela fervendo",
+  "block.cooking_pot.boil.subtitles": "Panela fervendo",
+  "block.stove.crackle": "Fogão Crepitando",
+  "block.stove.crackle.subtitles": "Fogão crepitando",
 
   "farmersdelight.jei.cooking": "Panela"
 }

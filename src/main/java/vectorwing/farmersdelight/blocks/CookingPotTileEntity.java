@@ -32,7 +32,7 @@ import vectorwing.farmersdelight.blocks.inventory.CookingPotItemHandler;
 import vectorwing.farmersdelight.container.CookingPotContainer;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.init.ModTileEntityTypes;
-import vectorwing.farmersdelight.utils.Tags;
+import vectorwing.farmersdelight.utils.ForgeTags;
 import vectorwing.farmersdelight.utils.Text;
 
 import javax.annotation.Nullable;
@@ -269,7 +269,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		if (world == null)
 			return false;
 		BlockState checkState = world.getBlockState(pos.down());
-		if (Tags.HEAT_SOURCES.contains(checkState.getBlock())) {
+		if (ForgeTags.HEAT_SOURCES.contains(checkState.getBlock())) {
 			if (checkState.has(BlockStateProperties.LIT))
 				return checkState.get(BlockStateProperties.LIT);
 			return true;

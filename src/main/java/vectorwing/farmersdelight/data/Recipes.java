@@ -13,7 +13,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.utils.ForgeTags;
-import vectorwing.farmersdelight.utils.Tags;
 
 import java.util.function.Consumer;
 
@@ -63,7 +62,7 @@ public class Recipes extends RecipeProvider
 				.patternLine("b b")
 				.key('b', Items.BAMBOO)
 				.key('#', ModItems.CANVAS.get())
-				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
+				.addCriterion("canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
 				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "scaffolding_from_canvas"));
 		ShapedRecipeBuilder.shapedRecipe(Items.LEAD)
 				.patternLine("rr ")
@@ -290,12 +289,12 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.WHEAT)
 				.addIngredient(Items.WHEAT)
 				.addIngredient(Items.EGG)
-				.addIngredient(new ItemTags.Wrapper(new ResourceLocation("forge", "knives")))
+				.addIngredient(ForgeTags.KNIVES)
 				.addCriterion("egg", InventoryChangeTrigger.Instance.forItems(Items.EGG))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CAKE_SLICE.get(), 7)
 				.addIngredient(Blocks.CAKE)
-				.addIngredient(Tags.FORGE_KNIVES)
+				.addIngredient(ForgeTags.KNIVES)
 				.addCriterion("cake", InventoryChangeTrigger.Instance.forItems(Blocks.CAKE))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.SWEET_BERRY_COOKIE.get(), 8)
