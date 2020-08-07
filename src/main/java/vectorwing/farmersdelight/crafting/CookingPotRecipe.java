@@ -6,6 +6,7 @@ import com.google.gson.JsonParseException;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.SoupItem;
 import net.minecraft.item.crafting.*;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.NonNullList;
@@ -41,7 +42,14 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 		this.group = group;
 		this.inputItems = inputItems;
 		this.output = output;
-		this.container = output.getContainerItem() != ItemStack.EMPTY ? output.getContainerItem() : new ItemStack(Items.BOWL);
+		ItemStack containerItem = output.getContainerItem();
+		if (containerItem != ItemStack.EMPTY) {
+			this.container = containerItem;
+		} else if (output.getItem() instanceof SoupItem) {
+			this.container = new ItemStack(Items.BOWL);
+		} else {
+			this.container = ItemStack.EMPTY;
+		}
 		this.experience = experience;
 		this.cookTime = cookTime;
 	}

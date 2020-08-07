@@ -4,8 +4,6 @@ import net.minecraft.item.Food;
 import net.minecraft.potion.EffectInstance;
 import vectorwing.farmersdelight.init.ModEffects;
 
-import java.util.function.Supplier;
-
 public class Foods
 {
 	// Raw Crops
@@ -42,7 +40,7 @@ public class Foods
 	public static final Food STUFFED_POTATO = (new Food.Builder())
 			.hunger(9).saturation(0.7f).build();
 	public static final Food STUFFED_PUMPKIN = (new Food.Builder())
-			.hunger(15).saturation(0.9f).effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F).build();
+			.hunger(16).saturation(0.9f).effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 12000, 0), 1.0F).build();
 
 	// Bowl Foods
 	public static final Food BEEF_STEW = (new Food.Builder())
@@ -73,10 +71,4 @@ public class Foods
 			.hunger(12).saturation(0.8f).effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 4800, 0), 1.0F).build();
 	public static final Food SQUID_INK_PASTA = (new Food.Builder())
 			.hunger(14).saturation(0.9f).effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F).build();
-
-	// Pet Foods
-	public static final Food DOG_FOOD = (new Food.Builder())
-			.hunger(2).saturation(0.2f).meat().build();
-	public static final Food HORSE_FEED = (new Food.Builder())
-			.hunger(2).saturation(0.2f).build();
 }
