@@ -111,7 +111,7 @@ public class ModItems
 	public static final RegistryObject<Item> STUFFED_POTATO = ITEMS.register("stuffed_potato",
 			() -> new Item(new Item.Properties().food(Foods.STUFFED_POTATO).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> STUFFED_PUMPKIN = ITEMS.register("stuffed_pumpkin",
-			() -> new Item(new Item.Properties().food(Foods.STUFFED_PUMPKIN).group(FarmersDelight.ITEM_GROUP)));
+			() -> new Item(new Item.Properties().food(Foods.STUFFED_PUMPKIN).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> BEEF_STEW = ITEMS.register("beef_stew",
 			() -> new MealItem(new Item.Properties().food(Foods.BEEF_STEW).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
