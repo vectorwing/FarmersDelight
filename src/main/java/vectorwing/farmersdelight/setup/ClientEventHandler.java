@@ -23,8 +23,6 @@ import org.apache.logging.log4j.Logger;
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventHandler
 {
-	private static final Logger LOGGER = LogManager.getLogger();
-
 	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "items/empty_container_slot_bowl");
 
 	@SubscribeEvent
@@ -34,12 +32,8 @@ public class ClientEventHandler
 		if(!stitching.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE))	{
 			return;
 		}
-
 		boolean added = event.addSprite(EMPTY_CONTAINER_SLOT_BOWL);
-		LOGGER.info("Did the texture stitch work? " + added);
 	}
-
-
 
 	public static void init(final FMLClientSetupEvent event) {
 		RenderTypeLookup.setRenderLayer(ModBlocks.WILD_CABBAGES.get(), RenderType.getCutout());
@@ -66,6 +60,4 @@ public class ClientEventHandler
 				StoveTileEntityRenderer::new);
 		ScreenManager.registerFactory(ModContainerTypes.COOKING_POT.get(), CookingPotScreen::new);
 	}
-
-
 }
