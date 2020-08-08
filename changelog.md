@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.1.4a
+- Fixes Crates lacking hardness and loot tables. Woops!
+
+## 0.1.4
+- Several fixes to the Cooking Pot:
+  - It can now be automated: top side receives ingredients, sides can add containers and remove servings;
+  - General performance fixes
+  - Placeholder icon disappears if slot is filled
+  - Better management of recipes and items
+  - Now emits bubbling sounds! :D
+- Added new foods and meals to make;
+- Added Hot Cocoa, which removes 1 random negative effect when drinked;
+- Farmer Villagers now buy the mod's basic crops (configurable);
+- Bees will now seek wild crops, and can enter Love Mode with them;
+- Added Crates for the basic crops, and reworked the Rice Bale
+- Eating hearty meals now gives you the Nourished buff:
+  - Constantly removes exhaustion unless you're spending saturation to heal damage;
+- Mixed Salad now gives a short burst of Regeneration
+
 ## 0.1.3
 - Adds Organic Compost, a nice sink for all these monster drops you have:
   - Organic Compost, when placed, will slowly decompose to Mulch over time;

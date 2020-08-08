@@ -2,7 +2,7 @@
   "type": "farmersdelight:cooking",
   "ingredients": [
     {
-      "item": "minecraft:cod"
+      "tag": "forge:raw_fishes"
     },
     {
       "item": "farmersdelight:tomato_sauce"

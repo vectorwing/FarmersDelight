@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:cabbage"
+    ]
+  },
+  "criteria": {
+    "cabbage_crate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:cabbage_crate"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:cabbage"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "cabbage_crate",
+      "has_the_recipe"
+    ]
+  ]
+}

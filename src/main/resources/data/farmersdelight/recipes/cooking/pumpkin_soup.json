@@ -1,0 +1,20 @@
+{
+  "type": "farmersdelight:cooking",
+  "ingredients": [
+    {
+      "item": "minecraft:pumpkin"
+    },
+    {
+      "item": "minecraft:potato"
+    },
+    {
+      "item": "minecraft:porkchop"
+    },
+    {
+      "tag": "forge:milk"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:pumpkin_soup"
+  }
+}

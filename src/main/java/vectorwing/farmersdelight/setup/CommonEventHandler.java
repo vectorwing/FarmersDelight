@@ -1,15 +1,18 @@
 package vectorwing.farmersdelight.setup;
 
 import com.google.common.collect.Sets;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.util.Direction;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.merchant.villager.VillagerProfession;
+import net.minecraft.entity.merchant.villager.VillagerTrades;
+import net.minecraft.item.*;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTables;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
+import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -17,7 +20,6 @@ import vectorwing.farmersdelight.init.ModBlocks;
 import vectorwing.farmersdelight.init.ModItems;
 import vectorwing.farmersdelight.loot.functions.CopyMealFunction;
 import net.minecraft.block.ComposterBlock;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.TableLootEntry;
 import net.minecraft.world.storage.loot.functions.LootFunctionManager;
@@ -25,10 +27,11 @@ import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 import vectorwing.farmersdelight.world.CropPatchGeneration;
 
+import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID)
@@ -55,6 +58,42 @@ public class CommonEventHandler
 		LootFunctionManager.registerFunction(new CopyMealFunction.Serializer());
 
 		DeferredWorkQueue.runLater(CropPatchGeneration::generateCrop);
+	}
+
+	@SubscribeEvent
+	public static void onVillagerTrades(VillagerTradesEvent event)	{
+		Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
+		VillagerProfession profession = event.getType();
+
+		if (profession.getRegistryName() == null) return;
+		if (Configuration.FARMERS_BUY_FD_CROPS.get() && profession.getRegistryName().getPath().equals("farmer"))
+		{
+			trades.get(1).add(new EmeraldForItemsTrade(ModItems.ONION.get(), 26, 16, 2));
+			trades.get(1).add(new EmeraldForItemsTrade(ModItems.TOMATO.get(), 26, 16, 2));
+			trades.get(2).add(new EmeraldForItemsTrade(ModItems.CABBAGE.get(), 16, 16, 5));
+			trades.get(2).add(new EmeraldForItemsTrade(ModItems.RICE.get(), 20, 16, 5));
+		}
+	}
+
+	static class EmeraldForItemsTrade implements VillagerTrades.ITrade {
+		private final Item tradeItem;
+		private final int count;
+		private final int maxUses;
+		private final int xpValue;
+		private final float priceMultiplier;
+
+		public EmeraldForItemsTrade(IItemProvider tradeItemIn, int countIn, int maxUsesIn, int xpValueIn) {
+			this.tradeItem = tradeItemIn.asItem();
+			this.count = countIn;
+			this.maxUses = maxUsesIn;
+			this.xpValue = xpValueIn;
+			this.priceMultiplier = 0.05F;
+		}
+
+		public MerchantOffer getOffer(Entity trader, Random rand) {
+			ItemStack itemstack = new ItemStack(this.tradeItem, this.count);
+			return new MerchantOffer(itemstack, new ItemStack(Items.EMERALD), this.maxUses, this.xpValue, this.priceMultiplier);
+		}
 	}
 
 	@SubscribeEvent

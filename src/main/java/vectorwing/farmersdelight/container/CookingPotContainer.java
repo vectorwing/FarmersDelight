@@ -1,8 +1,10 @@
 package vectorwing.farmersdelight.container;
 
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -11,10 +13,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.IntArray;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.blocks.CookingPotTileEntity;
 import vectorwing.farmersdelight.init.ModBlocks;
 import vectorwing.farmersdelight.init.ModContainerTypes;
@@ -23,6 +27,8 @@ import java.util.Objects;
 
 public class CookingPotContainer extends Container
 {
+	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "items/empty_container_slot_bowl");
+
 	public final CookingPotTileEntity tileEntity;
 	public final IItemHandler inventoryHandler;
 	private final IIntArray cookingPotData;
@@ -54,7 +60,12 @@ public class CookingPotContainer extends Container
 		this.addSlot(new CookingPotMealSlot(inventoryHandler, 6, 124, 26));
 
 		// Bowl Input
-		this.addSlot(new SlotItemHandler(inventoryHandler, 7, 92, 55));
+		this.addSlot(new SlotItemHandler(inventoryHandler, 7, 92, 55) {
+			@OnlyIn(Dist.CLIENT)
+			public Pair<ResourceLocation, ResourceLocation> getBackground() {
+				return Pair.of(PlayerContainer.LOCATION_BLOCKS_TEXTURE, EMPTY_CONTAINER_SLOT_BOWL);
+			}
+		});
 
 		// Bowl Output
 		this.addSlot(new CookingPotResultSlot(inventoryHandler, 8, 124, 55));

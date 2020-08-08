@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:tomato"
+    ]
+  },
+  "criteria": {
+    "tomato_crate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:tomato_crate"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:tomato"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "tomato_crate",
+      "has_the_recipe"
+    ]
+  ]
+}

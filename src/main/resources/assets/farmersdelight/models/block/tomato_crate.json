@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "top": "farmersdelight:blocks/tomato_crate_top",
+    "side": "farmersdelight:blocks/tomato_crate_side",
+    "bottom": "farmersdelight:blocks/tomato_crate_bottom"
+  }
+}

@@ -39,6 +39,7 @@ public class FarmersDelight
 
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
+        ModEffects.EFFECTS.register(modEventBus);
         ModSounds.SOUNDS.register(modEventBus);
         ModTileEntityTypes.TILES.register(modEventBus);
         ModContainerTypes.CONTAINER_TYPES.register(modEventBus);

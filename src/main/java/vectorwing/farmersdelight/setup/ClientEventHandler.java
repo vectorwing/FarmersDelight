@@ -1,6 +1,10 @@
 package vectorwing.farmersdelight.setup;
 
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.client.tileentity.renderer.StoveTileEntityRenderer;
@@ -19,7 +23,17 @@ import org.apache.logging.log4j.Logger;
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventHandler
 {
-	private static final Logger LOGGER = LogManager.getLogger();
+	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "items/empty_container_slot_bowl");
+
+	@SubscribeEvent
+	public static void onStitchEvent(TextureStitchEvent.Pre event)
+	{
+		ResourceLocation stitching = event.getMap().getTextureLocation();
+		if(!stitching.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE))	{
+			return;
+		}
+		boolean added = event.addSprite(EMPTY_CONTAINER_SLOT_BOWL);
+	}
 
 	public static void init(final FMLClientSetupEvent event) {
 		RenderTypeLookup.setRenderLayer(ModBlocks.WILD_CABBAGES.get(), RenderType.getCutout());

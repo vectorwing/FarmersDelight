@@ -2,11 +2,17 @@ package vectorwing.farmersdelight.blocks;
 
 import net.minecraft.block.*;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.block.IWaterLoggable;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.fluid.IFluidState;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
@@ -33,14 +39,14 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.init.ModSounds;
 import vectorwing.farmersdelight.init.ModTileEntityTypes;
-import vectorwing.farmersdelight.utils.Tags;
+import vectorwing.farmersdelight.utils.ForgeTags;
 import vectorwing.farmersdelight.utils.Text;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class CookingPotBlock extends Block
+public class CookingPotBlock extends Block implements IWaterLoggable
 {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D);
 	protected static final VoxelShape SHAPE_SUPPORTED = VoxelShapes.or(
@@ -48,13 +54,14 @@ public class CookingPotBlock extends Block
 			Block.makeCuboidShape(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty SUPPORTED = BlockStateProperties.DOWN;
+	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
 	public CookingPotBlock()
 	{
 		super(Properties.create(Material.IRON)
 				.hardnessAndResistance(2.0F, 6.0F)
 				.sound(SoundType.METAL));
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(SUPPORTED, false));
+		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(SUPPORTED, false).with(WATERLOGGED, false));
 	}
 
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
@@ -69,10 +76,17 @@ public class CookingPotBlock extends Block
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		BlockPos blockpos = context.getPos();
 		World world = context.getWorld();
-		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(SUPPORTED, needsTrayForHeatSource(world.getBlockState(blockpos.down())));
+		IFluidState ifluidstate = world.getFluidState(context.getPos());
+		return this.getDefaultState()
+				.with(FACING, context.getPlacementHorizontalFacing().getOpposite())
+				.with(SUPPORTED, needsTrayForHeatSource(world.getBlockState(blockpos.down())))
+				.with(WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER);
 	}
 
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		if (stateIn.get(WATERLOGGED)) {
+			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+		}
 		if (facing == Direction.DOWN) {
 			return stateIn.with(SUPPORTED, needsTrayForHeatSource(facingState));
 		}
@@ -80,7 +94,7 @@ public class CookingPotBlock extends Block
 	}
 
 	private boolean needsTrayForHeatSource(BlockState state) {
-		return Tags.HEAT_SOURCES.contains(state.getBlock()) && !state.isSolid();
+		return ForgeTags.HEAT_SOURCES.contains(state.getBlock()) && !state.isSolid();
 	}
 
 	@Override
@@ -154,7 +168,7 @@ public class CookingPotBlock extends Block
 
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
-		builder.add(FACING, SUPPORTED);
+		builder.add(FACING, SUPPORTED, WATERLOGGED);
 	}
 
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
@@ -187,5 +201,15 @@ public class CookingPotBlock extends Block
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
 		return ModTileEntityTypes.COOKING_POT_TILE.get().create();
+	}
+
+	@Override
+	public boolean canContainFluid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn)	{ return false;	}
+
+	@Override
+	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, IFluidState fluidStateIn) {	return false; }
+
+	public IFluidState getFluidState(BlockState state) {
+		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
 	}
 }
