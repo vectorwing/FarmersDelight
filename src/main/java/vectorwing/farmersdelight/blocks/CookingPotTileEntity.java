@@ -16,7 +16,9 @@ import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.*;
+import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -42,371 +44,372 @@ import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class CookingPotTileEntity extends TileEntity implements INamedContainerProvider, ITickableTileEntity, INameable
-{
-	public static final int MEAL_DISPLAY = 6;
-	public static final int CONTAINER_INPUT = 7;
-	public static final int FINAL_OUTPUT = 8;
-	public static final int INVENTORY_SIZE = 9;
+public class CookingPotTileEntity extends TileEntity implements INamedContainerProvider, ITickableTileEntity, INameable {
+    public static final int MEAL_DISPLAY = 6;
+    public static final int CONTAINER_INPUT = 7;
+    public static final int FINAL_OUTPUT = 8;
+    public static final int INVENTORY_SIZE = 9;
+    protected final IRecipeType<? extends CookingPotRecipe> recipeType;
+    private final Map<ResourceLocation, Integer> recipes = Maps.newHashMap();
+    private ITextComponent customName;
+    private int cookTime;
+    private int cookTimeTotal;
+    protected final IIntArray cookingPotData = new IIntArray() {
+        public int get(int index) {
+            switch (index) {
+                case 0:
+                    return CookingPotTileEntity.this.cookTime;
+                case 1:
+                    return CookingPotTileEntity.this.cookTimeTotal;
+                default:
+                    return 0;
+            }
+        }
 
-	private ItemStackHandler itemHandler = createHandler();
-	private LazyOptional<IItemHandler> handlerInput = LazyOptional.of(() -> new CookingPotItemHandler(itemHandler, Direction.UP));
-	private LazyOptional<IItemHandler> handlerOutput = LazyOptional.of(() -> new CookingPotItemHandler(itemHandler, Direction.DOWN));
+        public void set(int index, int value) {
+            switch (index) {
+                case 0:
+                    CookingPotTileEntity.this.cookTime = value;
+                    break;
+                case 1:
+                    CookingPotTileEntity.this.cookTimeTotal = value;
+                    break;
+            }
+        }
 
-	private ITextComponent customName;
+        public int size() {
+            return 2;
+        }
+    };
+    private final ItemStackHandler itemHandler = createHandler();
+    private final LazyOptional<IItemHandler> handlerInput = LazyOptional.of(() -> new CookingPotItemHandler(itemHandler, Direction.UP));
+    private final LazyOptional<IItemHandler> handlerOutput = LazyOptional.of(() -> new CookingPotItemHandler(itemHandler, Direction.DOWN));
 
-	private int cookTime;
-	private int cookTimeTotal;
-	protected final IIntArray cookingPotData = new IIntArray() {
-		public int get(int index) {
-			switch(index) {
-				case 0:
-					return CookingPotTileEntity.this.cookTime;
-				case 1:
-					return CookingPotTileEntity.this.cookTimeTotal;
-				default:
-					return 0;
-			}
-		}
+    public CookingPotTileEntity(TileEntityType<?> tileEntityTypeIn, IRecipeType<? extends CookingPotRecipe> recipeTypeIn) {
+        super(tileEntityTypeIn);
+        this.recipeType = recipeTypeIn;
+    }
 
-		public void set(int index, int value) {
-			switch(index) {
-				case 0:
-					CookingPotTileEntity.this.cookTime = value;
-					break;
-				case 1:
-					CookingPotTileEntity.this.cookTimeTotal = value;
-					break;
-			}
-		}
-		public int size() {
-			return 2;
-		}
-	};
-	private final Map<ResourceLocation, Integer> recipes = Maps.newHashMap();
-	protected final IRecipeType<? extends CookingPotRecipe> recipeType;
+    public CookingPotTileEntity() {
+        this(ModTileEntityTypes.COOKING_POT_TILE.get(), CookingPotRecipe.TYPE);
+    }
 
-	public CookingPotTileEntity(TileEntityType<?> tileEntityTypeIn, IRecipeType<? extends CookingPotRecipe> recipeTypeIn) {
-		super(tileEntityTypeIn);
-		this.recipeType = recipeTypeIn;
-	}
+    // ======== NBT HANDLING ========
 
-	public CookingPotTileEntity() {	this(ModTileEntityTypes.COOKING_POT_TILE.get(), CookingPotRecipe.TYPE); }
 
-	// ======== NBT HANDLING ========
+    @Override
+    public void func_230337_a_(BlockState state, CompoundNBT compound) {
 
-	@Override
-	public void read(CompoundNBT compound) {
-		super.read(compound);
-		this.itemHandler.deserializeNBT(compound.getCompound("Inventory"));
-		this.cookTime = compound.getInt("CookTime");
-		this.cookTimeTotal = compound.getInt("CookTimeTotal");
-		if (compound.contains("CustomName", 8)) {
-			this.customName = ITextComponent.Serializer.fromJson(compound.getString("CustomName"));
-		}
-	}
+        super.func_230337_a_(state, compound);
+        this.itemHandler.deserializeNBT(compound.getCompound("Inventory"));
+        this.cookTime = compound.getInt("CookTime");
+        this.cookTimeTotal = compound.getInt("CookTimeTotal");
+        if (compound.contains("CustomName", 8)) {
+            this.customName = ITextComponent.Serializer.func_240643_a_(compound.getString("CustomName"));
+        }
+    }
 
-	@Override
-	public CompoundNBT write(CompoundNBT compound) {
-		super.write(compound);
-		compound.putInt("CookTime", this.cookTime);
-		compound.putInt("CookTimeTotal", this.cookTimeTotal);
-		if (this.customName != null) {
-			compound.putString("CustomName", ITextComponent.Serializer.toJson(this.customName));
-		}
-		compound.put("Inventory", itemHandler.serializeNBT());
-		return compound;
-	}
+    @Override
+    public CompoundNBT write(CompoundNBT compound) {
+        super.write(compound);
+        compound.putInt("CookTime", this.cookTime);
+        compound.putInt("CookTimeTotal", this.cookTimeTotal);
+        if (this.customName != null) {
+            compound.putString("CustomName", ITextComponent.Serializer.toJson(this.customName));
+        }
+        compound.put("Inventory", itemHandler.serializeNBT());
+        return compound;
+    }
 
-	public CompoundNBT writeMealNbt(CompoundNBT compound) {
-		if (this.getMeal().isEmpty()) return compound;
+    public CompoundNBT writeMealNbt(CompoundNBT compound) {
+        if (this.getMeal().isEmpty()) return compound;
 
-		ItemStackHandler drops = new ItemStackHandler(INVENTORY_SIZE);
-		for (int i = 0; i < INVENTORY_SIZE; ++i) {
-			drops.setStackInSlot(i, i == MEAL_DISPLAY ? itemHandler.getStackInSlot(i) : ItemStack.EMPTY);
-		}
-		if (this.customName != null) {
-			compound.putString("CustomName", ITextComponent.Serializer.toJson(this.customName));
-		}
-		compound.put("Inventory", drops.serializeNBT());
-		return compound;
-	}
+        ItemStackHandler drops = new ItemStackHandler(INVENTORY_SIZE);
+        for (int i = 0; i < INVENTORY_SIZE; ++i) {
+            drops.setStackInSlot(i, i == MEAL_DISPLAY ? itemHandler.getStackInSlot(i) : ItemStack.EMPTY);
+        }
+        if (this.customName != null) {
+            compound.putString("CustomName", ITextComponent.Serializer.toJson(this.customName));
+        }
+        compound.put("Inventory", drops.serializeNBT());
+        return compound;
+    }
 
-	// ======== BASIC FUNCTIONALITY ========
+    // ======== BASIC FUNCTIONALITY ========
 
-	@Override
-	public void tick() {
-		boolean isHeated = this.isAboveLitHeatSource();
-		boolean dirty = false;
+    @Override
+    public void tick() {
+        boolean isHeated = this.isAboveLitHeatSource();
+        boolean dirty = false;
 
-		if (!this.world.isRemote) {
-			if (isHeated && this.hasInput()) {
-				CookingPotRecipe irecipe = this.world.getRecipeManager()
-						.getRecipe(this.recipeType, new RecipeWrapper(itemHandler), this.world).orElse(null);
-				if (this.canCook(irecipe)) {
-					++this.cookTime;
-					if (this.cookTime == this.cookTimeTotal) {
-						this.cookTime = 0;
-						this.cookTimeTotal = this.getCookTime();
-						this.cook(irecipe);
-						dirty = true;
-					}
-				} else {
-					this.cookTime = 0;
-				}
-			} else if (this.cookTime > 0) {
-				this.cookTime = MathHelper.clamp(this.cookTime - 2, 0, this.cookTimeTotal);
-			}
+        if (!this.world.isRemote) {
+            if (isHeated && this.hasInput()) {
+                CookingPotRecipe irecipe = this.world.getRecipeManager()
+                        .getRecipe(this.recipeType, new RecipeWrapper(itemHandler), this.world).orElse(null);
+                if (this.canCook(irecipe)) {
+                    ++this.cookTime;
+                    if (this.cookTime == this.cookTimeTotal) {
+                        this.cookTime = 0;
+                        this.cookTimeTotal = this.getCookTime();
+                        this.cook(irecipe);
+                        dirty = true;
+                    }
+                } else {
+                    this.cookTime = 0;
+                }
+            } else if (this.cookTime > 0) {
+                this.cookTime = MathHelper.clamp(this.cookTime - 2, 0, this.cookTimeTotal);
+            }
 
-			ItemStack meal = itemHandler.getStackInSlot(MEAL_DISPLAY);
-			if (!meal.isEmpty()) {
-				if (!this.doesMealHaveContainer(meal)) {
-					this.moveMealToOutput();
-					dirty = true;
-				} else if (!itemHandler.getStackInSlot(CONTAINER_INPUT).isEmpty()) {
-					this.useStoredContainersOnMeal();
-					dirty = true;
-				}
-			}
+            ItemStack meal = itemHandler.getStackInSlot(MEAL_DISPLAY);
+            if (!meal.isEmpty()) {
+                if (!this.doesMealHaveContainer(meal)) {
+                    this.moveMealToOutput();
+                    dirty = true;
+                } else if (!itemHandler.getStackInSlot(CONTAINER_INPUT).isEmpty()) {
+                    this.useStoredContainersOnMeal();
+                    dirty = true;
+                }
+            }
 
-		} else {
-			if (isHeated) {
-				this.animate();
-			}
-		}
+        } else {
+            if (isHeated) {
+                this.animate();
+            }
+        }
 
-		if (dirty) {
-			this.markDirty();
-		}
-	}
+        if (dirty) {
+            this.markDirty();
+        }
+    }
 
-	protected int getCookTime() {
-		return this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(itemHandler), this.world).map(CookingPotRecipe::getCookTime).orElse(200);
-	}
+    protected int getCookTime() {
+        return this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(itemHandler), this.world).map(CookingPotRecipe::getCookTime).orElse(200);
+    }
 
-	private boolean hasInput() {
-		for (int i = 0; i < MEAL_DISPLAY; ++i) {
-			if (!itemHandler.getStackInSlot(i).isEmpty()) return true;
-		}
-		return false;
-	}
+    private boolean hasInput() {
+        for (int i = 0; i < MEAL_DISPLAY; ++i) {
+            if (!itemHandler.getStackInSlot(i).isEmpty()) return true;
+        }
+        return false;
+    }
 
-	protected boolean canCook(@Nullable IRecipe<?> recipeIn) {
-		if (this.hasInput() && recipeIn != null) {
-			ItemStack recipeOutput = recipeIn.getRecipeOutput();
-			if (recipeOutput.isEmpty()) {
-				return false;
-			} else {
-				ItemStack currentOutput = itemHandler.getStackInSlot(MEAL_DISPLAY);
-				if (currentOutput.isEmpty()) {
-					return true;
-				} else if (!currentOutput.isItemEqual(recipeOutput)) {
-					return false;
-				} else if (currentOutput.getCount() + recipeOutput.getCount() <= itemHandler.getSlotLimit(MEAL_DISPLAY)) {
-					return true;
-				} else {
-					return currentOutput.getCount() + recipeOutput.getCount() <= recipeOutput.getMaxStackSize();
-				}
-			}
-		} else {
-			return false;
-		}
-	}
+    protected boolean canCook(@Nullable IRecipe<?> recipeIn) {
+        if (this.hasInput() && recipeIn != null) {
+            ItemStack recipeOutput = recipeIn.getRecipeOutput();
+            if (recipeOutput.isEmpty()) {
+                return false;
+            } else {
+                ItemStack currentOutput = itemHandler.getStackInSlot(MEAL_DISPLAY);
+                if (currentOutput.isEmpty()) {
+                    return true;
+                } else if (!currentOutput.isItemEqual(recipeOutput)) {
+                    return false;
+                } else if (currentOutput.getCount() + recipeOutput.getCount() <= itemHandler.getSlotLimit(MEAL_DISPLAY)) {
+                    return true;
+                } else {
+                    return currentOutput.getCount() + recipeOutput.getCount() <= recipeOutput.getMaxStackSize();
+                }
+            }
+        } else {
+            return false;
+        }
+    }
 
-	private void cook(@Nullable IRecipe<?> recipe) {
-		if (recipe != null && this.canCook(recipe)) {
-			ItemStack recipeOutput = recipe.getRecipeOutput();
-			ItemStack currentOutput = itemHandler.getStackInSlot(MEAL_DISPLAY);
-			if (currentOutput.isEmpty()) {
-				itemHandler.setStackInSlot(MEAL_DISPLAY, recipeOutput.copy());
-			} else if (currentOutput.getItem() == recipeOutput.getItem()) {
-				currentOutput.grow(recipeOutput.getCount());
-			}
-		}
-		for (int i = 0; i < MEAL_DISPLAY; ++i) {
-			if (itemHandler.getStackInSlot(i).hasContainerItem()) {
-				Direction direction = this.getBlockState().get(CookingPotBlock.FACING).rotateYCCW();
-				ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5 + (direction.getXOffset() * 0.2), pos.getY() + 0.7, pos.getZ() + 0.5 + (direction.getZOffset() * 0.2), itemHandler.getStackInSlot(i).getContainerItem());
-				entity.setMotion(direction.getXOffset() * 0.1F, 0.2F, direction.getZOffset() * 0.1F);
-				world.addEntity(entity);
-			}
-			if (!itemHandler.getStackInSlot(i).isEmpty())
-				itemHandler.getStackInSlot(i).shrink(1);
-		}
-	}
+    private void cook(@Nullable IRecipe<?> recipe) {
+        if (recipe != null && this.canCook(recipe)) {
+            ItemStack recipeOutput = recipe.getRecipeOutput();
+            ItemStack currentOutput = itemHandler.getStackInSlot(MEAL_DISPLAY);
+            if (currentOutput.isEmpty()) {
+                itemHandler.setStackInSlot(MEAL_DISPLAY, recipeOutput.copy());
+            } else if (currentOutput.getItem() == recipeOutput.getItem()) {
+                currentOutput.grow(recipeOutput.getCount());
+            }
+        }
+        for (int i = 0; i < MEAL_DISPLAY; ++i) {
+            if (itemHandler.getStackInSlot(i).hasContainerItem()) {
+                Direction direction = this.getBlockState().get(CookingPotBlock.FACING).rotateYCCW();
+                ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5 + (direction.getXOffset() * 0.2), pos.getY() + 0.7, pos.getZ() + 0.5 + (direction.getZOffset() * 0.2), itemHandler.getStackInSlot(i).getContainerItem());
+                entity.setMotion(direction.getXOffset() * 0.1F, 0.2F, direction.getZOffset() * 0.1F);
+                world.addEntity(entity);
+            }
+            if (!itemHandler.getStackInSlot(i).isEmpty())
+                itemHandler.getStackInSlot(i).shrink(1);
+        }
+    }
 
-	private void animate() {
-		World world = this.getWorld();
-		if (world != null) {
-			BlockPos blockpos = this.getPos();
-			Random random = world.rand;
-			if (random.nextFloat() < 0.2F) {
-				double baseX = (double) blockpos.getX() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);
-				double baseY = (double) blockpos.getY() + 0.7D;
-				double baseZ = (double) blockpos.getZ() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);
-				world.addParticle(ParticleTypes.BUBBLE_POP, baseX, baseY, baseZ, 0.0D, 0.0D, 0.0D);
-			}
-			if (random.nextFloat() < 0.05F) {
-				double baseX = (double) blockpos.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
-				double baseY = (double) blockpos.getY() + 0.7D;
-				double baseZ = (double) blockpos.getZ() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
-				world.addParticle(ParticleTypes.EFFECT, baseX, baseY, baseZ, 0.0D, 0.0D, 0.0D);
-			}
-		}
-	}
+    private void animate() {
+        World world = this.getWorld();
+        if (world != null) {
+            BlockPos blockpos = this.getPos();
+            Random random = world.rand;
+            if (random.nextFloat() < 0.2F) {
+                double baseX = (double) blockpos.getX() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);
+                double baseY = (double) blockpos.getY() + 0.7D;
+                double baseZ = (double) blockpos.getZ() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);
+                world.addParticle(ParticleTypes.BUBBLE_POP, baseX, baseY, baseZ, 0.0D, 0.0D, 0.0D);
+            }
+            if (random.nextFloat() < 0.05F) {
+                double baseX = (double) blockpos.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
+                double baseY = (double) blockpos.getY() + 0.7D;
+                double baseZ = (double) blockpos.getZ() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
+                world.addParticle(ParticleTypes.EFFECT, baseX, baseY, baseZ, 0.0D, 0.0D, 0.0D);
+            }
+        }
+    }
 
-	public ItemStack getMeal() {
-		return itemHandler.getStackInSlot(MEAL_DISPLAY);
-	}
+    public ItemStack getMeal() {
+        return itemHandler.getStackInSlot(MEAL_DISPLAY);
+    }
 
-	// ======== CUSTOM THINGS ========
+    // ======== CUSTOM THINGS ========
 
-	/**
-	 * Checks if the pot is on top of a heat source using the tag farmersdelight:heat_sources.
-	 * If the given block has a LIT state, it will check if that state is true.
-	 */
-	public boolean isAboveLitHeatSource() {
-		if (world == null)
-			return false;
-		BlockState checkState = world.getBlockState(pos.down());
-		if (ForgeTags.HEAT_SOURCES.contains(checkState.getBlock())) {
-			if (checkState.has(BlockStateProperties.LIT))
-				return checkState.get(BlockStateProperties.LIT);
-			return true;
-		}
-		return false;
-	}
+    /**
+     * Checks if the pot is on top of a heat source using the tag farmersdelight:heat_sources.
+     * If the given block has a LIT state, it will check if that state is true.
+     */
+    public boolean isAboveLitHeatSource() {
+        if (world == null)
+            return false;
+        BlockState checkState = world.getBlockState(pos.down());
+        if (ForgeTags.HEAT_SOURCES.func_230235_a_(checkState.getBlock())) {
+            return checkState.func_235903_d_(BlockStateProperties.LIT).orElse(false);
+        }
+        return false;
+    }
 
-	/**
-	 * Returns every stored ItemStack in the pot, except for prepared meals.
-	 */
-	public NonNullList<ItemStack> getDroppableInventory() {
-		NonNullList<ItemStack> drops = NonNullList.create();
-		for (int i = 0; i < INVENTORY_SIZE; ++i) {
-			drops.add(i == MEAL_DISPLAY ? ItemStack.EMPTY : itemHandler.getStackInSlot(i));
-		}
-		return drops;
-	}
+    /**
+     * Returns every stored ItemStack in the pot, except for prepared meals.
+     */
+    public NonNullList<ItemStack> getDroppableInventory() {
+        NonNullList<ItemStack> drops = NonNullList.create();
+        for (int i = 0; i < INVENTORY_SIZE; ++i) {
+            drops.add(i == MEAL_DISPLAY ? ItemStack.EMPTY : itemHandler.getStackInSlot(i));
+        }
+        return drops;
+    }
 
-	/**
-	 * Because Mojang decided to hardcode bowls into their meal items, we need to do this.
-	 */
-	private boolean doesMealHaveContainer(ItemStack meal) {
-		return meal.hasContainerItem() || meal.getItem() instanceof SoupItem;
-	}
+    /**
+     * Because Mojang decided to hardcode bowls into their meal items, we need to do this.
+     */
+    private boolean doesMealHaveContainer(ItemStack meal) {
+        return meal.hasContainerItem() || meal.getItem() instanceof SoupItem;
+    }
 
-	/**
-	 * Attempts to move all stored meals to the final output.
-	 * Does NOT check if the meal has a container; this is done on tick.
-	 */
-	private void moveMealToOutput() {
-		ItemStack mealDisplay = itemHandler.getStackInSlot(MEAL_DISPLAY);
-		ItemStack finalOutput = itemHandler.getStackInSlot(FINAL_OUTPUT);
-		int mealCount = Math.min(mealDisplay.getCount(), mealDisplay.getMaxStackSize() - finalOutput.getCount());
-		if (finalOutput.isEmpty()) {
-			itemHandler.setStackInSlot(FINAL_OUTPUT, mealDisplay.split(mealCount));
-		} else if (finalOutput.getItem() == mealDisplay.getItem()) {
-			mealDisplay.shrink(mealCount);
-			finalOutput.grow(mealCount);
-		}
-	}
+    /**
+     * Attempts to move all stored meals to the final output.
+     * Does NOT check if the meal has a container; this is done on tick.
+     */
+    private void moveMealToOutput() {
+        ItemStack mealDisplay = itemHandler.getStackInSlot(MEAL_DISPLAY);
+        ItemStack finalOutput = itemHandler.getStackInSlot(FINAL_OUTPUT);
+        int mealCount = Math.min(mealDisplay.getCount(), mealDisplay.getMaxStackSize() - finalOutput.getCount());
+        if (finalOutput.isEmpty()) {
+            itemHandler.setStackInSlot(FINAL_OUTPUT, mealDisplay.split(mealCount));
+        } else if (finalOutput.getItem() == mealDisplay.getItem()) {
+            mealDisplay.shrink(mealCount);
+            finalOutput.grow(mealCount);
+        }
+    }
 
-	/**
-	 * Attempts to generate an ItemStack output using the meal and the inputted container together.
-	 * If input and meal containers don't match, nothing happens.
-	 */
-	private void useStoredContainersOnMeal() {
-		ItemStack mealDisplay = itemHandler.getStackInSlot(MEAL_DISPLAY);
-		ItemStack containerInput = itemHandler.getStackInSlot(CONTAINER_INPUT);
-		ItemStack finalOutput = itemHandler.getStackInSlot(FINAL_OUTPUT);
+    /**
+     * Attempts to generate an ItemStack output using the meal and the inputted container together.
+     * If input and meal containers don't match, nothing happens.
+     */
+    private void useStoredContainersOnMeal() {
+        ItemStack mealDisplay = itemHandler.getStackInSlot(MEAL_DISPLAY);
+        ItemStack containerInput = itemHandler.getStackInSlot(CONTAINER_INPUT);
+        ItemStack finalOutput = itemHandler.getStackInSlot(FINAL_OUTPUT);
 
-		boolean hasBowlAndSoupItem = containerInput.getItem() == Items.BOWL && mealDisplay.getItem() instanceof SoupItem;
-		boolean containerMatchesMeal = containerInput.isItemEqual(mealDisplay.getContainerItem());
-		if ((hasBowlAndSoupItem || containerMatchesMeal) && finalOutput.getCount() < finalOutput.getMaxStackSize()) {
-			int smallerStack = Math.min(mealDisplay.getCount(), containerInput.getCount());
-			int mealCount = Math.min(smallerStack, mealDisplay.getMaxStackSize() - finalOutput.getCount());
-			if (finalOutput.isEmpty()) {
-				containerInput.shrink(mealCount);
-				itemHandler.setStackInSlot(FINAL_OUTPUT, mealDisplay.split(mealCount));
-			} else if (finalOutput.getItem() == mealDisplay.getItem()) {
-				mealDisplay.shrink(mealCount);
-				containerInput.shrink(mealCount);
-				finalOutput.grow(mealCount);
-			}
-		}
-	}
+        boolean hasBowlAndSoupItem = containerInput.getItem() == Items.BOWL && mealDisplay.getItem() instanceof SoupItem;
+        boolean containerMatchesMeal = containerInput.isItemEqual(mealDisplay.getContainerItem());
+        if ((hasBowlAndSoupItem || containerMatchesMeal) && finalOutput.getCount() < finalOutput.getMaxStackSize()) {
+            int smallerStack = Math.min(mealDisplay.getCount(), containerInput.getCount());
+            int mealCount = Math.min(smallerStack, mealDisplay.getMaxStackSize() - finalOutput.getCount());
+            if (finalOutput.isEmpty()) {
+                containerInput.shrink(mealCount);
+                itemHandler.setStackInSlot(FINAL_OUTPUT, mealDisplay.split(mealCount));
+            } else if (finalOutput.getItem() == mealDisplay.getItem()) {
+                mealDisplay.shrink(mealCount);
+                containerInput.shrink(mealCount);
+                finalOutput.grow(mealCount);
+            }
+        }
+    }
 
-	/**
-	 * Checks if the given ItemStack is a container for the stored meal. If true, takes a serving and returns it.
-	 */
-	public ItemStack useHeldItemOnMeal(ItemStack container) {
-		if (container.isItemEqual(this.getMeal().getContainerItem())) {
-			container.shrink(1);
-			return this.getMeal().split(1);
-		}
-		return ItemStack.EMPTY;
-	}
+    /**
+     * Checks if the given ItemStack is a container for the stored meal. If true, takes a serving and returns it.
+     */
+    public ItemStack useHeldItemOnMeal(ItemStack container) {
+        if (container.isItemEqual(this.getMeal().getContainerItem())) {
+            container.shrink(1);
+            return this.getMeal().split(1);
+        }
+        return ItemStack.EMPTY;
+    }
 
-	public IItemHandler getInventory() {
-		return this.itemHandler;
-	}
+    public IItemHandler getInventory() {
+        return this.itemHandler;
+    }
 
-	// ======== CONTAINER AND NAME PROVIDER ========
+    // ======== CONTAINER AND NAME PROVIDER ========
 
-	public void setCustomName(ITextComponent name) {
-		this.customName = name;
-	}
+    @Override
+    public ITextComponent getName() {
+        return this.customName != null
+                ? this.customName
+                : Text.getTranslation("container.cooking_pot");
+    }
 
-	@Override
-	public ITextComponent getName()	{
-		return this.customName != null
-				? this.customName
-				: Text.getTranslation("container.cooking_pot");
-	}
+    @Override
+    public ITextComponent getDisplayName() {
+        return this.getName();
+    }
 
-	@Override
-	public ITextComponent getDisplayName() { return this.getName(); }
+    @Nullable
+    public ITextComponent getCustomName() {
+        return this.customName;
+    }
 
-	@Nullable
-	public ITextComponent getCustomName() {
-		return this.customName;
-	}
+    public void setCustomName(ITextComponent name) {
+        this.customName = name;
+    }
 
-	@Override
-	public Container createMenu(int id, PlayerInventory player, PlayerEntity entity) {
-		return new CookingPotContainer(id, player, this, this.cookingPotData);
-	}
+    @Override
+    public Container createMenu(int id, PlayerInventory player, PlayerEntity entity) {
+        return new CookingPotContainer(id, player, this, this.cookingPotData);
+    }
 
-	// ======== CAPABILITIES ========
+    // ======== CAPABILITIES ========
 
-	private ItemStackHandler createHandler() {
-		return new ItemStackHandler(INVENTORY_SIZE) {
-			@Override
-			protected void onContentsChanged(int slot) {
-				if (slot >= 0 && slot < MEAL_DISPLAY) {
-					cookTimeTotal = getCookTime();
-					markDirty();
-				}
-			}
-		};
-	}
+    private ItemStackHandler createHandler() {
+        return new ItemStackHandler(INVENTORY_SIZE) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                if (slot >= 0 && slot < MEAL_DISPLAY) {
+                    cookTimeTotal = getCookTime();
+                    markDirty();
+                }
+            }
+        };
+    }
 
-	@Override
-	public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-		if (cap.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)) {
-			if (side == null || side.equals(Direction.UP)){
-				return handlerInput.cast();
-			} else {
-				return handlerOutput.cast();
-			}
-		}
-		return super.getCapability(cap, side);
-	}
+    @Override
+    public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
+        if (cap.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)) {
+            if (side == null || side.equals(Direction.UP)) {
+                return handlerInput.cast();
+            } else {
+                return handlerOutput.cast();
+            }
+        }
+        return super.getCapability(cap, side);
+    }
 
-	@Override
-	public void remove() {
-		super.remove();
-		handlerInput.invalidate();
-		handlerOutput.invalidate();
-	}
+    @Override
+    public void remove() {
+        super.remove();
+        handlerInput.invalidate();
+        handlerOutput.invalidate();
+    }
 }

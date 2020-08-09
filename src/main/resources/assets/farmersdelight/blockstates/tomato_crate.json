@@ -1,5 +1,7 @@
 {
   "variants": {
-    "":  { "model": "farmersdelight:block/tomato_crate"}
+    "": {
+      "model": "farmersdelight:block/tomato_crate"
+    }
   }
 }

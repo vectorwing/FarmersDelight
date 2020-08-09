@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.integration.jei;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.MethodsReturnNonnullByDefault;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
@@ -21,47 +22,43 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @JeiPlugin
-public class JEIPlugin implements IModPlugin
-{
-	private static ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "jei_plugin");
+@MethodsReturnNonnullByDefault
+public class JEIPlugin implements IModPlugin {
+    private static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "jei_plugin");
 
-	@Override
-	public void registerCategories(IRecipeCategoryRegistration registry)
-	{
-		registry.addRecipeCategories(new CookingRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
-	}
+    private static List<IRecipe<?>> findRecipesByType(IRecipeType<?> type) {
+        return Minecraft.getInstance().world
+                .getRecipeManager()
+                .getRecipes()
+                .stream()
+                .filter(r -> r.getType() == type)
+                .collect(Collectors.toList());
+    }
 
-	@Override
-	public void registerRecipes(IRecipeRegistration registration) {
-		registration.addRecipes(findRecipesByType(CookingPotRecipe.TYPE), CookingRecipeCategory.UID);
-	}
+    @Override
+    public void registerCategories(IRecipeCategoryRegistration registry) {
+        registry.addRecipeCategories(new CookingRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
+    }
 
-	@Override
-	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration)
-	{
-		registration.addRecipeCatalyst(new ItemStack(ModItems.COOKING_POT.get()), CookingRecipeCategory.UID);
-	}
+    @Override
+    public void registerRecipes(IRecipeRegistration registration) {
+        registration.addRecipes(findRecipesByType(CookingPotRecipe.TYPE), CookingRecipeCategory.UID);
+    }
 
-	@Override
-	public void registerGuiHandlers(IGuiHandlerRegistration registration)
-	{
-		registration.addRecipeClickArea(CookingPotScreen.class, 89, 25, 24, 17, CookingRecipeCategory.UID);
-	}
+    @Override
+    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+        registration.addRecipeCatalyst(new ItemStack(ModItems.COOKING_POT.get()), CookingRecipeCategory.UID);
+    }
 
-	private static List<IRecipe<?>> findRecipesByType(IRecipeType<?> type) {
-		return Minecraft.getInstance().world
-				.getRecipeManager()
-				.getRecipes()
-				.stream()
-				.filter(r -> r.getType() == type)
-				.collect(Collectors.toList());
-	}
+    @Override
+    public void registerGuiHandlers(IGuiHandlerRegistration registration) {
+        registration.addRecipeClickArea(CookingPotScreen.class, 89, 25, 24, 17, CookingRecipeCategory.UID);
+    }
 
-	@Override
-	public ResourceLocation getPluginUid()
-	{
-		return ID;
-	}
+    @Override
+    public ResourceLocation getPluginUid() {
+        return ID;
+    }
 
 
 }

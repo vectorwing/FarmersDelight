@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "farmersdelight:block/wild_onions" }
+    "": {
+      "model": "farmersdelight:block/wild_onions"
+    }
   }
 }

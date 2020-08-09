@@ -1,10 +1,21 @@
 {
   "variants": {
     "": [
-      { "model": "farmersdelight:block/organic_compost" },
-      { "model": "farmersdelight:block/organic_compost", "y": 90 },
-      { "model": "farmersdelight:block/organic_compost", "y": 180 },
-      { "model": "farmersdelight:block/organic_compost", "y": 270 }
+      {
+        "model": "farmersdelight:block/organic_compost"
+      },
+      {
+        "model": "farmersdelight:block/organic_compost",
+        "y": 90
+      },
+      {
+        "model": "farmersdelight:block/organic_compost",
+        "y": 180
+      },
+      {
+        "model": "farmersdelight:block/organic_compost",
+        "y": 270
+      }
     ]
   }
 }

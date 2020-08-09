@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.client.gui;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
@@ -13,81 +14,81 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.container.CookingPotContainer;
 import vectorwing.farmersdelight.utils.Text;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CookingPotScreen extends ContainerScreen<CookingPotContainer>
-{
-	private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(FarmersDelight.MODID, "textures/gui/cooking_pot.png");
+@ParametersAreNonnullByDefault
+public class CookingPotScreen extends ContainerScreen<CookingPotContainer> {
+    private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(FarmersDelight.MODID, "textures/gui/cooking_pot.png");
 
-	public CookingPotScreen(CookingPotContainer screenContainer, PlayerInventory inv, ITextComponent titleIn)
-	{
-		super(screenContainer, inv, titleIn);
-		this.guiLeft = 0;
-		this.guiTop = 0;
-		this.xSize = 176;
-		this.ySize = 166;
-	}
+    public CookingPotScreen(CookingPotContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+        super(screenContainer, inv, titleIn);
+        this.guiLeft = 0;
+        this.guiTop = 0;
+        this.xSize = 176;
+        this.ySize = 166;
+    }
 
-	@Override
-	public void render(final int mouseX, final int mouseY, final float partialTicks) {
-		this.renderBackground();
-		super.render(mouseX, mouseY, partialTicks);
-		this.renderHoveredToolTip(mouseX, mouseY);
-	}
+    @Override
+    public void func_230430_a_(MatrixStack p_230450_1_, final int mouseX, final int mouseY, float partialTicks) {
+        super.func_230430_a_(p_230450_1_, mouseX, mouseY, partialTicks);
+        this.func_230446_a_(p_230450_1_);
+        this.renderHoveredToolTip(p_230450_1_, mouseX, mouseY);
+    }
 
-	protected void renderHoveredToolTip(int mouseX, int mouseY) {
-		if (this.minecraft.player.inventory.getItemStack().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.getHasStack()) {
-			if (this.hoveredSlot.slotNumber == 6) {
-				List<String> tooltip = new ArrayList<>();
+    protected void renderHoveredToolTip(MatrixStack ms, int mouseX, int mouseY) {
+        if (this.field_230706_i_ != null && this.field_230706_i_.player != null && this.field_230706_i_.player.inventory.getItemStack().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.getHasStack()) {
+            if (this.hoveredSlot.slotNumber == 6) {
+                List<ITextComponent> tooltip = new ArrayList<>();
 
-				ItemStack meal = this.hoveredSlot.getStack();
-				tooltip.add(meal.getItem().getName().applyTextStyle(meal.getRarity().color).getFormattedText());
+                ItemStack meal = this.hoveredSlot.getStack();
+                tooltip.add(meal.getItem().getName().func_230531_f_().func_240701_a_(meal.getRarity().color));
 
-				String container;
-				if (meal.hasContainerItem()) {
-					container = meal.getContainerItem().getItem().getName().getFormattedText();
-				} else if (meal.getItem() instanceof SoupItem) {
-					container = Items.BOWL.getItem().getName().getFormattedText();
-				} else {
-					container = "";
-				}
+                ITextComponent container = null;
+                if (meal.hasContainerItem()) {
+                    container = meal.getContainerItem().getItem().getName(); // FIXME
+                } else if (meal.getItem() instanceof SoupItem) {
+                    container = Items.BOWL.getItem().getName();
+                }
 
-				if (!container.equals("")) {
-					String served = Text.getTranslation("container.cooking_pot.served_on", container).applyTextStyle(TextFormatting.GRAY).getFormattedText();
-					tooltip.add(served);
-				}
+                if (container != null) {
+                    tooltip.add(Text.getTranslation("container.cooking_pot.served_on", container).func_230531_f_().func_240701_a_(TextFormatting.GRAY));
+                }
 
-				this.renderTooltip(tooltip, mouseX, mouseY);
-			} else {
-				this.renderTooltip(this.hoveredSlot.getStack(), mouseX, mouseY);
-			}
-		}
-	}
+                this.func_238654_b_(ms, tooltip, mouseX, mouseY);
+            } else {
+                this.func_230457_a_(ms, this.hoveredSlot.getStack(), mouseX, mouseY);
+            }
+        }
+    }
 
-	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
-		this.font.drawString(this.title.getFormattedText(), 28.0f, 6.0f, 4210752);
-		this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0f, (float)(this.ySize - 96 + 2), 4210752);
-	}
+    @Override
+    protected void func_230451_b_(MatrixStack ms, int mouseX, int mouseY) { // FIXME: right order?
+        super.func_230451_b_(ms, mouseX, mouseY);
+        this.field_230712_o_.func_238421_b_(ms, this.field_230704_d_.getString(), 28.0f, 6.0f, 4210752);
+        this.field_230712_o_.func_238421_b_(ms, this.playerInventory.getDisplayName().getString(), 8.0f, (float) (this.ySize - 96 + 2), 4210752);
+    }
 
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		// Render UI background
-		RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
-		this.minecraft.getTextureManager().bindTexture(BACKGROUND_TEXTURE);
-		int x = (this.width - this.xSize) / 2;
-		int y = (this.height - this.ySize) / 2;
-		this.blit(x, y, 0, 0, this.xSize, this.ySize);
+    @Override
+    protected void func_230450_a_(MatrixStack ms, float partialTicks, int mouseX, int mouseY) {
+        // Render UI background
+        RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
+        if (this.field_230706_i_ == null)
+            return;
 
-		// Render heat indicator
-		if (((CookingPotContainer)this.container).isHeated()) {
-			this.blit(x + 47, y + 55, 176, 0, 17, 15);
-		}
+        this.field_230706_i_.getTextureManager().bindTexture(BACKGROUND_TEXTURE);
+        int x = (this.field_230708_k_ - this.xSize) / 2;
+        int y = (this.field_230709_l_ - this.ySize) / 2;
+        this.func_238474_b_(ms, x, y, 0, 0, this.xSize, this.ySize);
 
-		// Render progress arrow
-		int l = ((CookingPotContainer)this.container).getCookProgressionScaled();
-		this.blit(this.guiLeft + 89, this.guiTop + 25, 176, 15, l + 1, 17);
-	}
+        // Render heat indicator
+        if (this.container.isHeated()) {
+            this.func_238474_b_(ms, x + 47, y + 55, 176, 0, 17, 15);
+        }
+
+        // Render progress arrow
+        int l = this.container.getCookProgressionScaled();
+        this.func_238474_b_(ms, this.guiLeft + 89, this.guiTop + 25, 176, 15, l + 1, 17);
+    }
 }

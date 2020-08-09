@@ -24,124 +24,118 @@ import vectorwing.farmersdelight.init.ModBlocks;
 import vectorwing.farmersdelight.init.ModItems;
 import vectorwing.farmersdelight.utils.Text;
 
+import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class Advancements extends AdvancementProvider
-{
-	private final Path PATH;
-	public static final Logger LOGGER = LogManager.getLogger();
+public class Advancements extends AdvancementProvider {
+    public static final Logger LOGGER = LogManager.getLogger();
+    private final Path PATH;
 
-	public Advancements(DataGenerator generatorIn)
-	{
-		super(generatorIn);
-		PATH = generatorIn.getOutputFolder();
-	}
+    public Advancements(DataGenerator generatorIn) {
+        super(generatorIn);
+        PATH = generatorIn.getOutputFolder();
+    }
 
-	public void act(DirectoryCache cache) throws IOException
-	{
-		Set<ResourceLocation> set = Sets.newHashSet();
-		Consumer<Advancement> consumer = (advancement) -> {
-			if (!set.add(advancement.getId())) {
-				throw new IllegalStateException("Duplicate advancement " + advancement.getId());
-			} else {
-				Path path1 = getPath(PATH, advancement);
+    private static Path getPath(Path pathIn, Advancement advancementIn) {
+        return pathIn.resolve("data/" + advancementIn.getId().getNamespace() + "/advancements/" + advancementIn.getId().getPath() + ".json");
+    }
 
-				try	{
-					IDataProvider.save((new GsonBuilder()).setPrettyPrinting().create(), cache, advancement.copy().serialize(), path1);
-				} catch (IOException ioexception) {
-					LOGGER.error("Couldn't save advancement {}", path1, ioexception);
-				}
-			}
-		};
+    public void act(@Nonnull DirectoryCache cache) {
+        Set<ResourceLocation> set = Sets.newHashSet();
+        Consumer<Advancement> consumer = (advancement) -> {
+            if (!set.add(advancement.getId())) {
+                throw new IllegalStateException("Duplicate advancement " + advancement.getId());
+            } else {
+                Path path1 = getPath(PATH, advancement);
 
-		new FarmersDelightAdvancements().accept(consumer);
-	}
+                try {
+                    IDataProvider.save((new GsonBuilder()).setPrettyPrinting().create(), cache, advancement.copy().serialize(), path1);
+                } catch (IOException ioexception) {
+                    LOGGER.error("Couldn't save advancement {}", path1, ioexception);
+                }
+            }
+        };
 
-	private static Path getPath(Path pathIn, Advancement advancementIn)
-	{
-		return pathIn.resolve("data/"+advancementIn.getId().getNamespace()+"/advancements/"+advancementIn.getId().getPath()+".json");
-	}
+        new FarmersDelightAdvancements().accept(consumer);
+    }
 
-	public static class FarmersDelightAdvancements implements Consumer<Consumer<Advancement>>
-	{
-		public void accept(Consumer<Advancement> consumer)
-		{
-			Advancement farmersDelight = Advancement.Builder.builder()
-					.withDisplay(ModItems.COOKING_POT.get(),
-							Text.getTranslation("advancement.root"),
-							Text.getTranslation("advancement.root.desc"),
-							new ResourceLocation("minecraft:textures/block/bricks.png"),
-							FrameType.TASK, false, false, false)
-					.withCriterion("seeds", InventoryChangeTrigger.Instance.forItems(Items.WHEAT_SEEDS))
-					.register(consumer, getNameId("main/root"));
+    public static class FarmersDelightAdvancements implements Consumer<Consumer<Advancement>> {
+        protected static Advancement.Builder getAdvancement(Advancement parent, IItemProvider display, String name, FrameType frame, boolean showToast, boolean announceToChat, boolean hidden) {
+            return Advancement.Builder.builder().withParent(parent).withDisplay(display,
+                    Text.getTranslation("advancement." + name),
+                    Text.getTranslation("advancement." + name + ".desc"),
+                    null, frame, showToast, announceToChat, hidden);
+        }
 
-			// Farming Branch
-			Advancement huntAndGather = getAdvancement(farmersDelight, ModItems.FLINT_KNIFE.get(), "craft_knife", FrameType.TASK, true, true, false)
-					.withCriterion("flint_knife", InventoryChangeTrigger.Instance.forItems(ModItems.FLINT_KNIFE.get()))
-					.withCriterion("iron_knife", InventoryChangeTrigger.Instance.forItems(ModItems.IRON_KNIFE.get()))
-					.withCriterion("diamond_knife", InventoryChangeTrigger.Instance.forItems(ModItems.DIAMOND_KNIFE.get()))
-					.withCriterion("golden_knife", InventoryChangeTrigger.Instance.forItems(ModItems.GOLDEN_KNIFE.get())).withRequirementsStrategy(IRequirementsStrategy.OR)
-					.register(consumer, getNameId("main/craft_knife"));
+        public void accept(Consumer<Advancement> consumer) {
+            Advancement farmersDelight = Advancement.Builder.builder()
+                    .withDisplay(ModItems.COOKING_POT.get(),
+                            Text.getTranslation("advancement.root"),
+                            Text.getTranslation("advancement.root.desc"),
+                            new ResourceLocation("minecraft:textures/block/bricks.png"),
+                            FrameType.TASK, false, false, false)
+                    .withCriterion("seeds", InventoryChangeTrigger.Instance.forItems(Items.WHEAT_SEEDS))
+                    .register(consumer, getNameId("main/root"));
 
-			Advancement dippingYourRoots = getAdvancement(huntAndGather, ModItems.RICE_PANICLE.get(), "plant_rice", FrameType.TASK, true, true, false)
-					.withCriterion("plant_rice", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.RICE_CROP.get()))
-					.register(consumer, getNameId("main/plant_rice"));
+            // Farming Branch
+            Advancement huntAndGather = getAdvancement(farmersDelight, ModItems.FLINT_KNIFE.get(), "craft_knife", FrameType.TASK, true, true, false)
+                    .withCriterion("flint_knife", InventoryChangeTrigger.Instance.forItems(ModItems.FLINT_KNIFE.get()))
+                    .withCriterion("iron_knife", InventoryChangeTrigger.Instance.forItems(ModItems.IRON_KNIFE.get()))
+                    .withCriterion("diamond_knife", InventoryChangeTrigger.Instance.forItems(ModItems.DIAMOND_KNIFE.get()))
+                    .withCriterion("golden_knife", InventoryChangeTrigger.Instance.forItems(ModItems.GOLDEN_KNIFE.get())).withRequirementsStrategy(IRequirementsStrategy.OR)
+                    .register(consumer, getNameId("main/craft_knife"));
 
-			Advancement graspingAtStraws = getAdvancement(huntAndGather, ModItems.STRAW.get(), "harvest_straw", FrameType.TASK, true, true, false)
-					.withCriterion("harvest_straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
-					.register(consumer, getNameId("main/harvest_straw"));
+            Advancement dippingYourRoots = getAdvancement(huntAndGather, ModItems.RICE_PANICLE.get(), "plant_rice", FrameType.TASK, true, true, false)
+                    .withCriterion("plant_rice", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.RICE_CROP.get()))
+                    .register(consumer, getNameId("main/plant_rice"));
 
-			Advancement plantFood = getAdvancement(graspingAtStraws, ModItems.MULCH.get(), "get_mulch", FrameType.TASK, true, true, false)
-					.withCriterion("get_mulch", InventoryChangeTrigger.Instance.forItems(ModItems.MULCH.get()))
-					.register(consumer, getNameId("main/get_mulch"));
+            Advancement graspingAtStraws = getAdvancement(huntAndGather, ModItems.STRAW.get(), "harvest_straw", FrameType.TASK, true, true, false)
+                    .withCriterion("harvest_straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
+                    .register(consumer, getNameId("main/harvest_straw"));
 
-			// Cooking Branch
-			Advancement bonfireLit = getAdvancement(farmersDelight, Blocks.CAMPFIRE, "place_campfire", FrameType.TASK, true, true, false)
-					.withCriterion("campfire", PlacedBlockTrigger.Instance.placedBlock(Blocks.CAMPFIRE))
-					.register(consumer, getNameId("main/place_campfire"));
+            Advancement plantFood = getAdvancement(graspingAtStraws, ModItems.MULCH.get(), "get_mulch", FrameType.TASK, true, true, false)
+                    .withCriterion("get_mulch", InventoryChangeTrigger.Instance.forItems(ModItems.MULCH.get()))
+                    .register(consumer, getNameId("main/get_mulch"));
 
-			Advancement fireUpTheGrill = getAdvancement(bonfireLit, ModItems.STOVE.get(), "craft_stove", FrameType.TASK, true, true, false)
-					.withCriterion("stove", InventoryChangeTrigger.Instance.forItems(ModItems.STOVE.get()))
-					.register(consumer, getNameId("main/craft_stove"));
+            // Cooking Branch
+            Advancement bonfireLit = getAdvancement(farmersDelight, Blocks.CAMPFIRE, "place_campfire", FrameType.TASK, true, true, false)
+                    .withCriterion("campfire", PlacedBlockTrigger.Instance.placedBlock(Blocks.CAMPFIRE))
+                    .register(consumer, getNameId("main/place_campfire"));
 
-			Advancement dinnerIsServed = getAdvancement(fireUpTheGrill, ModItems.COOKING_POT.get(), "place_cooking_pot", FrameType.GOAL, true, true, false)
-					.withCriterion("cooking_pot", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.COOKING_POT.get()))
-					.register(consumer, getNameId("main/place_cooking_pot"));
+            Advancement fireUpTheGrill = getAdvancement(bonfireLit, ModItems.STOVE.get(), "craft_stove", FrameType.TASK, true, true, false)
+                    .withCriterion("stove", InventoryChangeTrigger.Instance.forItems(ModItems.STOVE.get()))
+                    .register(consumer, getNameId("main/craft_stove"));
 
-			Advancement masterChef = getAdvancement(dinnerIsServed, ModItems.PASTA_WITH_MEATBALLS.get(), "master_chef", FrameType.CHALLENGE, true, true, false)
-					.withCriterion("mixed_salad", ConsumeItemTrigger.Instance.forItem(ModItems.MIXED_SALAD.get()))
-					.withCriterion("beef_stew", ConsumeItemTrigger.Instance.forItem(ModItems.BEEF_STEW.get()))
-					.withCriterion("chicken_soup", ConsumeItemTrigger.Instance.forItem(ModItems.CHICKEN_SOUP.get()))
-					.withCriterion("vegetable_soup", ConsumeItemTrigger.Instance.forItem(ModItems.VEGETABLE_SOUP.get()))
-					.withCriterion("fish_stew", ConsumeItemTrigger.Instance.forItem(ModItems.FISH_STEW.get()))
-					.withCriterion("fried_rice", ConsumeItemTrigger.Instance.forItem(ModItems.FRIED_RICE.get()))
-					.withCriterion("pumpkin_soup", ConsumeItemTrigger.Instance.forItem(ModItems.PUMPKIN_SOUP.get()))
-					.withCriterion("honey_glazed_ham", ConsumeItemTrigger.Instance.forItem(ModItems.HONEY_GLAZED_HAM.get()))
-					.withCriterion("pasta_with_meatballs", ConsumeItemTrigger.Instance.forItem(ModItems.PASTA_WITH_MEATBALLS.get()))
-					.withCriterion("pasta_with_mutton_chop", ConsumeItemTrigger.Instance.forItem(ModItems.PASTA_WITH_MUTTON_CHOP.get()))
-					.withCriterion("vegetable_noodles", ConsumeItemTrigger.Instance.forItem(ModItems.VEGETABLE_NOODLES.get()))
-					.withCriterion("steak_and_potatoes", ConsumeItemTrigger.Instance.forItem(ModItems.STEAK_AND_POTATOES.get()))
-					.withCriterion("shepherds_pie", ConsumeItemTrigger.Instance.forItem(ModItems.SHEPHERDS_PIE.get()))
-					.withCriterion("ratatouille", ConsumeItemTrigger.Instance.forItem(ModItems.RATATOUILLE.get()))
-					.withCriterion("squid_ink_pasta", ConsumeItemTrigger.Instance.forItem(ModItems.SQUID_INK_PASTA.get()))
-					.withCriterion("stuffed_pumpkin", ConsumeItemTrigger.Instance.forItem(ModItems.STUFFED_PUMPKIN.get()))
-					.withRewards(AdvancementRewards.Builder.experience(200))
-					.register(consumer, getNameId("main/master_chef"));
-		}
+            Advancement dinnerIsServed = getAdvancement(fireUpTheGrill, ModItems.COOKING_POT.get(), "place_cooking_pot", FrameType.GOAL, true, true, false)
+                    .withCriterion("cooking_pot", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.COOKING_POT.get()))
+                    .register(consumer, getNameId("main/place_cooking_pot"));
 
-		protected static Advancement.Builder getAdvancement(Advancement parent, IItemProvider display, String name, FrameType frame, boolean showToast, boolean announceToChat, boolean hidden)
-		{
-			return Advancement.Builder.builder().withParent(parent).withDisplay(display,
-					Text.getTranslation("advancement." + name),
-					Text.getTranslation("advancement." + name + ".desc"),
-					null, frame, showToast, announceToChat, hidden);
-		}
+            Advancement masterChef = getAdvancement(dinnerIsServed, ModItems.PASTA_WITH_MEATBALLS.get(), "master_chef", FrameType.CHALLENGE, true, true, false)
+                    .withCriterion("mixed_salad", ConsumeItemTrigger.Instance.forItem(ModItems.MIXED_SALAD.get()))
+                    .withCriterion("beef_stew", ConsumeItemTrigger.Instance.forItem(ModItems.BEEF_STEW.get()))
+                    .withCriterion("chicken_soup", ConsumeItemTrigger.Instance.forItem(ModItems.CHICKEN_SOUP.get()))
+                    .withCriterion("vegetable_soup", ConsumeItemTrigger.Instance.forItem(ModItems.VEGETABLE_SOUP.get()))
+                    .withCriterion("fish_stew", ConsumeItemTrigger.Instance.forItem(ModItems.FISH_STEW.get()))
+                    .withCriterion("fried_rice", ConsumeItemTrigger.Instance.forItem(ModItems.FRIED_RICE.get()))
+                    .withCriterion("pumpkin_soup", ConsumeItemTrigger.Instance.forItem(ModItems.PUMPKIN_SOUP.get()))
+                    .withCriterion("honey_glazed_ham", ConsumeItemTrigger.Instance.forItem(ModItems.HONEY_GLAZED_HAM.get()))
+                    .withCriterion("pasta_with_meatballs", ConsumeItemTrigger.Instance.forItem(ModItems.PASTA_WITH_MEATBALLS.get()))
+                    .withCriterion("pasta_with_mutton_chop", ConsumeItemTrigger.Instance.forItem(ModItems.PASTA_WITH_MUTTON_CHOP.get()))
+                    .withCriterion("vegetable_noodles", ConsumeItemTrigger.Instance.forItem(ModItems.VEGETABLE_NOODLES.get()))
+                    .withCriterion("steak_and_potatoes", ConsumeItemTrigger.Instance.forItem(ModItems.STEAK_AND_POTATOES.get()))
+                    .withCriterion("shepherds_pie", ConsumeItemTrigger.Instance.forItem(ModItems.SHEPHERDS_PIE.get()))
+                    .withCriterion("ratatouille", ConsumeItemTrigger.Instance.forItem(ModItems.RATATOUILLE.get()))
+                    .withCriterion("squid_ink_pasta", ConsumeItemTrigger.Instance.forItem(ModItems.SQUID_INK_PASTA.get()))
+                    .withCriterion("stuffed_pumpkin", ConsumeItemTrigger.Instance.forItem(ModItems.STUFFED_PUMPKIN.get()))
+                    .withRewards(AdvancementRewards.Builder.experience(200))
+                    .register(consumer, getNameId("main/master_chef"));
+        }
 
-		private String getNameId(String id) {
-			return FarmersDelight.MODID + ":" + id;
-		}
-	}
+        private String getNameId(String id) {
+            return FarmersDelight.MODID + ":" + id;
+        }
+    }
 }

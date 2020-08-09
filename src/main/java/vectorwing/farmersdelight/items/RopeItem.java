@@ -10,55 +10,53 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class RopeItem extends BlockItem
-{
-	public RopeItem(Block blockIn, Properties builder)
-	{
-		super(blockIn, builder);
-	}
+public class RopeItem extends BlockItem {
+    public RopeItem(Block blockIn, Properties builder) {
+        super(blockIn, builder);
+    }
 
-	@Nullable
-	public BlockItemUseContext getBlockItemUseContext(BlockItemUseContext context) {
-		BlockPos blockpos = context.getPos();
-		World world = context.getWorld();
-		BlockState blockstate = world.getBlockState(blockpos);
-		Block block = this.getBlock();
+    @Nullable
+    public BlockItemUseContext getBlockItemUseContext(BlockItemUseContext context) {
+        BlockPos blockpos = context.getPos();
+        World world = context.getWorld();
+        BlockState blockstate = world.getBlockState(blockpos);
+        Block block = this.getBlock();
 
-		if (blockstate.getBlock() != block) {
-			return context;
-		} else {
-			Direction direction;
-			if (context.func_225518_g_()) {
-				direction = context.getFace();
-			} else {
-				direction = Direction.DOWN;
-			}
+        if (blockstate.getBlock() != block) {
+            return context;
+        } else {
+            Direction direction;
+            if (context.func_225518_g_()) {
+                direction = context.getFace();
+            } else {
+                direction = Direction.DOWN;
+            }
 
-			int i = 0;
-			BlockPos.Mutable blockpos$mutable = (new BlockPos.Mutable(blockpos)).move(direction);
+            int i = 0;
+            BlockPos.Mutable blockpos$mutable = (new BlockPos.Mutable(blockpos.getX(), blockpos.getY(), blockpos.getZ())).move(direction);
 
-			while(i < 256) {
-				blockstate = world.getBlockState(blockpos$mutable);
-				if (blockstate.getBlock() != this.getBlock()) {
-					if (blockstate.isReplaceable(context)) {
-						return BlockItemUseContext.func_221536_a(context, blockpos$mutable, direction);
-					}
-					break;
-				}
+            while (i < 256) {
+                blockstate = world.getBlockState(blockpos$mutable);
+                if (blockstate.getBlock() != this.getBlock()) {
+                    if (blockstate.isReplaceable(context)) {
+                        return BlockItemUseContext.func_221536_a(context, blockpos$mutable, direction);
+                    }
+                    break;
+                }
 
-				if (direction != Direction.DOWN) {
-					return context;
-				}
+                if (direction != Direction.DOWN) {
+                    return context;
+                }
 
-				blockpos$mutable.move(direction);
-				++i;
-			}
+                blockpos$mutable.move(direction);
+                ++i;
+            }
 
-			return null;
-		}
-	}
+            return null;
+        }
+    }
 
-	protected boolean checkPosition() {
-		return false;
-	}
+    protected boolean checkPosition() {
+        return false;
+    }
 }

@@ -11,29 +11,24 @@
   "block.farmersdelight.tomato_crate": "Caixote de tomates",
   "block.farmersdelight.onion_crate": "Caixote de cebolas",
   "block.farmersdelight.rice_bale": "Fardo de arroz",
-
   "block.farmersdelight.cabbages": "Sementes de repolho",
   "block.farmersdelight.onions": "Cebola",
   "block.farmersdelight.tomatoes": "Sementes de tomate",
   "block.farmersdelight.rice_crop": "Arroz",
   "block.farmersdelight.brown_mushroom_colony": "Colônia de cogumelos marrons",
   "block.farmersdelight.red_mushroom_colony": "Colônia de cogumelos vermelhos",
-
   "block.farmersdelight.wild_cabbages": "Couve silvestre",
   "block.farmersdelight.wild_tomatoes": "Tomates rasteiros",
   "block.farmersdelight.wild_onions": "Cebola silvestre",
   "block.farmersdelight.wild_carrots": "Cenoura silvestre",
   "block.farmersdelight.wild_potatoes": "Batata silvestre",
   "block.farmersdelight.wild_beetroots": "Beterraba marítima",
-
   "item.farmersdelight.tomato": "Tomate",
   "item.farmersdelight.cabbage": "Repolho",
   "item.farmersdelight.rice_panicle": "Panícula de arroz",
-
   "item.farmersdelight.straw": "Palha",
   "item.farmersdelight.canvas": "Lona",
   "item.farmersdelight.tree_bark": "Casca de árvore",
-
   "item.farmersdelight.tomato_sauce": "Molho de tomate",
   "item.farmersdelight.milk_bottle": "Frasco de leite",
   "item.farmersdelight.hot_cocoa": "Chocolate quente",
@@ -43,12 +38,10 @@
   "item.farmersdelight.sweet_berry_cookie": "Biscoito de bagas doces",
   "item.farmersdelight.honey_cookie": "Biscoito de mel",
   "item.farmersdelight.earthworm": "Minhoca",
-
   "item.farmersdelight.flint_knife": "Faca de sílex",
   "item.farmersdelight.iron_knife": "Faca de ferro",
   "item.farmersdelight.golden_knife": "Faca de ouro",
   "item.farmersdelight.diamond_knife": "Faca de diamante",
-
   "item.farmersdelight.barbecue_stick": "Churrasco no palito",
   "item.farmersdelight.egg_sandwich": "Pão com ovo",
   "item.farmersdelight.chicken_sandwich": "Sanduíche de frango",
@@ -56,7 +49,6 @@
   "item.farmersdelight.dumplings": "Bolinhos no vapor",
   "item.farmersdelight.stuffed_potato": "Batata recheada",
   "item.farmersdelight.stuffed_pumpkin": "Abóbora recheada",
-
   "item.farmersdelight.mixed_salad": "Salada mista",
   "item.farmersdelight.beef_stew": "Ensopado de carne",
   "item.farmersdelight.chicken_soup": "Sopa de frango",
@@ -64,7 +56,6 @@
   "item.farmersdelight.fish_stew": "Ensopado de peixe",
   "item.farmersdelight.fried_rice": "Arroz frito",
   "item.farmersdelight.pumpkin_soup": "Sopa de abóbora",
-
   "item.farmersdelight.honey_glazed_ham": "Presunto caramelado",
   "item.farmersdelight.pasta_with_meatballs": "Macarrão com almôndegas",
   "item.farmersdelight.pasta_with_mutton_chop": "Macarrão com costeleta",
@@ -73,22 +64,16 @@
   "item.farmersdelight.shepherds_pie": "Escondidinho de cordeiro",
   "item.farmersdelight.ratatouille": "Ratatouille",
   "item.farmersdelight.squid_ink_pasta": "Macarrão de tinta de lula",
-
   "item.farmersdelight.dog_food": "Ração para cães",
   "item.farmersdelight.horse_feed": "Alimento para cavalos",
-
   "effect.farmersdelight.nourished": "Nutrição",
-
   "itemGroup.farmersdelight": "Farmer's Delight",
-
   "farmersdelight.container.cooking_pot": "Panela",
   "farmersdelight.container.cooking_pot.served_on": "Servido em: ",
   "farmersdelight.container.basket": "Cesto",
-
   "farmersdelight.tooltip.cooking_pot.empty": "Vazia",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Contém 1 porção de:",
   "farmersdelight.tooltip.cooking_pot.many_servings": "Contém %s porções de:",
-
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "Um mundo de sabor te espera!",
   "farmersdelight.advancement.craft_knife": "Caçar e colher",
@@ -99,7 +84,6 @@
   "farmersdelight.advancement.harvest_straw.desc": "Colha plantas gramíneas com uma Faca para obter Palha",
   "farmersdelight.advancement.get_mulch": "Comida de plantas",
   "farmersdelight.advancement.get_mulch.desc": "Deixe um pouco de Composto Orgânico decompor até virar Adubo",
-
   "farmersdelight.advancement.place_campfire": "Bonfire Lit",
   "farmersdelight.advancement.place_campfire.desc": "Acenda uma Fogueira para lhe aquecer à noite",
   "farmersdelight.advancement.craft_stove": "Acendendo a grelha",
@@ -108,11 +92,9 @@
   "farmersdelight.advancement.place_cooking_pot.desc": "Coloque uma Panela e comece a preparar refeições!",
   "farmersdelight.advancement.master_chef": "Mestre-cuca",
   "farmersdelight.advancement.master_chef.desc": "Coma uma porção de cada refeição disponível!",
-
   "block.cooking_pot.boil": "Panela Fervendo",
   "block.cooking_pot.boil.subtitles": "Panela fervendo",
   "block.stove.crackle": "Fogão Crepitando",
   "block.stove.crackle.subtitles": "Fogão crepitando",
-
   "farmersdelight.jei.cooking": "Panela"
 }

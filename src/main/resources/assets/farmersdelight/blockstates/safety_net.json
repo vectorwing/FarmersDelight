@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "farmersdelight:block/safety_net" }
+    "": {
+      "model": "farmersdelight:block/safety_net"
+    }
   }
 }

@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.blocks;
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BushBlock;
@@ -15,54 +16,55 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import vectorwing.farmersdelight.init.ModBlocks;
 
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-public class MushroomColonyBlock extends BushBlock implements IGrowable
-{
-	public static final IntegerProperty COLONY_AGE = BlockStateProperties.AGE_0_3;
-	public MushroomColonyBlock(Properties properties)
-	{
-		super(properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(COLONY_AGE, 0));
-	}
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+public class MushroomColonyBlock extends BushBlock implements IGrowable {
+    public static final IntegerProperty COLONY_AGE = BlockStateProperties.AGE_0_3;
 
-	@Override
-	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return state.getBlock() == ModBlocks.MULCH.get();
-	}
+    public MushroomColonyBlock(Properties properties) {
+        super(properties);
+        this.setDefaultState(this.stateContainer.getBaseState().with(COLONY_AGE, 0));
+    }
 
-	@Override
-	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient)
-	{
-		return state.get(COLONY_AGE) < 3;
-	}
+    @Override
+    protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
+        return state.getBlock() == ModBlocks.MULCH.get();
+    }
 
-	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state)
-	{
-		return false;
-	}
+    @Override
+    public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+        return state.get(COLONY_AGE) < 3;
+    }
 
-	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-		super.tick(state, worldIn, pos, rand);
-		int i = state.get(COLONY_AGE);
-		if (i < 3 && worldIn.getLightSubtracted(pos.up(), 0) <= 13 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(5) == 0)) {
-			worldIn.setBlockState(pos, state.with(COLONY_AGE, i + 1), 2);
-			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
-		}
-	}
-	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
-		return new ItemStack(Items.BROWN_MUSHROOM);
-	}
+    @Override
+    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
+        return false;
+    }
 
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(COLONY_AGE);
-	}
+    public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
+        super.tick(state, worldIn, pos, rand);
+        int i = state.get(COLONY_AGE);
+        if (i < 3 && worldIn.getLightSubtracted(pos.up(), 0) <= 13 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(5) == 0)) {
+            worldIn.setBlockState(pos, state.with(COLONY_AGE, i + 1), 2);
+            net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
+        }
+    }
 
-	@Override
-	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state)
-	{
-		int i = Math.min(3, state.get(COLONY_AGE) + 1);
-		worldIn.setBlockState(pos, state.with(COLONY_AGE, i), 2);
-	}
+    public ItemStack getItem(@Nullable IBlockReader worldIn, @Nullable BlockPos pos, @Nullable BlockState state) {
+        return new ItemStack(Items.BROWN_MUSHROOM);
+    }
+
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+        builder.add(COLONY_AGE);
+    }
+
+    @Override
+    public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
+        int i = Math.min(3, state.get(COLONY_AGE) + 1);
+        worldIn.setBlockState(pos, state.with(COLONY_AGE, i), 2);
+    }
 }

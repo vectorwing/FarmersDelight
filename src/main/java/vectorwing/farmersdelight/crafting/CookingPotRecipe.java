@@ -3,14 +3,15 @@ package vectorwing.farmersdelight.crafting;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.SoupItem;
 import net.minecraft.item.crafting.*;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.JSONUtils;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistryEntry;
@@ -19,178 +20,172 @@ import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.FarmersDelight;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
-public class CookingPotRecipe implements IRecipe<IInventory>
-{
-	private static final Logger LOGGER = LogManager.getLogger();
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+public class CookingPotRecipe implements IRecipe<IInventory> {
+    public static final Serializer SERIALIZER = new Serializer();
+    public static final int INPUT_SLOTS = 6;
+    private static final Logger LOGGER = LogManager.getLogger();
+    public static IRecipeType<CookingPotRecipe> TYPE = IRecipeType.register(FarmersDelight.MODID + ":cooking");
+    private final ResourceLocation id;
+    private final String group;
+    private final NonNullList<Ingredient> inputItems;
+    private final ItemStack output;
+    private final ItemStack container;
+    private final float experience;
+    private final int cookTime;
 
-	public static IRecipeType<CookingPotRecipe> TYPE = IRecipeType.register(FarmersDelight.MODID + ":cooking");
-	public static final Serializer SERIALIZER = new Serializer();
-	public static final int INPUT_SLOTS = 6;
+    public CookingPotRecipe(ResourceLocation id, String group, NonNullList<Ingredient> inputItems, ItemStack output, float experience, int cookTime) {
+        this.id = id;
+        this.group = group;
+        this.inputItems = inputItems;
+        this.output = output;
+        ItemStack containerItem = output.getContainerItem();
+        if (containerItem != ItemStack.EMPTY) {
+            this.container = containerItem;
+        } else if (output.getItem() instanceof SoupItem) {
+            this.container = new ItemStack(Items.BOWL);
+        } else {
+            this.container = ItemStack.EMPTY;
+        }
+        this.experience = experience;
+        this.cookTime = cookTime;
+    }
 
-	private final ResourceLocation id;
-	private final String group;
-	private final NonNullList<Ingredient> inputItems;
-	private final ItemStack output;
-	private final ItemStack container;
-	private final float experience;
-	private final int cookTime;
+    @Override
+    public ResourceLocation getId() {
+        return this.id;
+    }
 
-	public CookingPotRecipe(ResourceLocation id, String group, NonNullList<Ingredient> inputItems, ItemStack output, float experience, int cookTime)
-	{
-		this.id = id;
-		this.group = group;
-		this.inputItems = inputItems;
-		this.output = output;
-		ItemStack containerItem = output.getContainerItem();
-		if (containerItem != ItemStack.EMPTY) {
-			this.container = containerItem;
-		} else if (output.getItem() instanceof SoupItem) {
-			this.container = new ItemStack(Items.BOWL);
-		} else {
-			this.container = ItemStack.EMPTY;
-		}
-		this.experience = experience;
-		this.cookTime = cookTime;
-	}
+    @Override
+    public String getGroup() {
+        return this.group;
+    }
 
-	@Override
-	public ResourceLocation getId()
-	{
-		return this.id;
-	}
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        return this.inputItems;
+    }
 
-	@Override
-	public String getGroup() {
-		return this.group;
-	}
+    @Override
+    public ItemStack getRecipeOutput() {
+        return this.output;
+    }
 
-	@Override
-	public NonNullList<Ingredient> getIngredients() {
-		return this.inputItems;
-	}
+    public ItemStack getOutputContainer() {
+        return this.container;
+    }
 
-	@Override
-	public ItemStack getRecipeOutput()
-	{
-		return this.output;
-	}
+    @Override
+    public ItemStack getCraftingResult(IInventory inv) {
+        return this.output.copy();
+    }
 
-	public ItemStack getOutputContainer() { return this.container; }
+    public float getExperience() {
+        return this.experience;
+    }
 
-	@Override
-	public ItemStack getCraftingResult(IInventory inv) {
-		return this.output.copy();
-	}
+    public int getCookTime() {
+        return this.cookTime;
+    }
 
-	public float getExperience() {
-		return this.experience;
-	}
+    @Override
+    public boolean matches(IInventory inv, World worldIn) {
+        RecipeItemHelper recipeitemhelper = new RecipeItemHelper();
+        java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
+        int i = 0;
 
-	public int getCookTime() { return this.cookTime; }
+        for (int j = 0; j < INPUT_SLOTS; ++j) {
+            ItemStack itemstack = inv.getStackInSlot(j);
+            if (!itemstack.isEmpty()) {
+                ++i;
+                inputs.add(itemstack);
+            }
+        }
+        return i == this.inputItems.size() && net.minecraftforge.common.util.RecipeMatcher.findMatches(inputs, this.inputItems) != null;
+    }
 
-	@Override
-	public boolean matches(IInventory inv, World worldIn)
-	{
-		RecipeItemHelper recipeitemhelper = new RecipeItemHelper();
-		java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
-		int i = 0;
+    @Override
+    public boolean canFit(int width, int height) {
+        return width * height >= this.inputItems.size();
+    }
 
-		for(int j = 0; j < INPUT_SLOTS; ++j) {
-			ItemStack itemstack = inv.getStackInSlot(j);
-			if (!itemstack.isEmpty()) {
-				++i;
-				inputs.add(itemstack);
-			}
-		}
-		return i == this.inputItems.size() && net.minecraftforge.common.util.RecipeMatcher.findMatches(inputs, this.inputItems) != null;
-	}
+    @Override
+    public IRecipeSerializer<?> getSerializer() {
+        return CookingPotRecipe.SERIALIZER;
+    }
 
-	@Override
-	public boolean canFit(int width, int height)
-	{
-		return width * height >= this.inputItems.size();
-	}
+    @Override
+    public IRecipeType<?> getType() {
+        return CookingPotRecipe.TYPE;
+    }
 
-	@Override
-	public IRecipeSerializer<?> getSerializer()
-	{
-		return CookingPotRecipe.SERIALIZER;
-	}
+    private static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<CookingPotRecipe> {
 
-	@Override
-	public IRecipeType<?> getType()
-	{
-		return CookingPotRecipe.TYPE;
-	}
+        Serializer() {
+            this.setRegistryName(new ResourceLocation(FarmersDelight.MODID, "cooking"));
+        }
 
-	private static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<CookingPotRecipe> {
+        private static NonNullList<Ingredient> readIngredients(JsonArray ingredientArray) {
+            NonNullList<Ingredient> nonnulllist = NonNullList.create();
 
-		Serializer() {
-			this.setRegistryName(new ResourceLocation(FarmersDelight.MODID, "cooking"));
-		}
+            for (int i = 0; i < ingredientArray.size(); ++i) {
+                Ingredient ingredient = Ingredient.deserialize(ingredientArray.get(i));
+                if (!ingredient.hasNoMatchingItems()) {
+                    nonnulllist.add(ingredient);
+                }
+            }
 
-		@Override
-		public CookingPotRecipe read(ResourceLocation recipeId, JsonObject json)
-		{
-			final String groupIn = JSONUtils.getString(json, "group", "");
-			final NonNullList<Ingredient> inputItemsIn = readIngredients(JSONUtils.getJsonArray(json, "ingredients"));
-			if (inputItemsIn.isEmpty()) {
-				throw new JsonParseException("No ingredients for cooking recipe");
-			} else if (inputItemsIn.size() > CookingPotRecipe.INPUT_SLOTS) {
-				throw new JsonParseException("Too many ingredients for cooking recipe! The max is " + CookingPotRecipe.INPUT_SLOTS);
-			} else {
-				final ItemStack outputIn = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
-				final float experienceIn = JSONUtils.getFloat(json, "experience", 0.0F);
-				final int cookTimeIn = JSONUtils.getInt(json, "cookingtime", 200);
-				return new CookingPotRecipe(recipeId, groupIn, inputItemsIn, outputIn, experienceIn, cookTimeIn);
-			}
-		}
+            return nonnulllist;
+        }
 
-		private static NonNullList<Ingredient> readIngredients(JsonArray ingredientArray) {
-			NonNullList<Ingredient> nonnulllist = NonNullList.create();
+        @Override
+        public CookingPotRecipe read(ResourceLocation recipeId, JsonObject json) {
+            final String groupIn = JSONUtils.getString(json, "group", "");
+            final NonNullList<Ingredient> inputItemsIn = readIngredients(JSONUtils.getJsonArray(json, "ingredients"));
+            if (inputItemsIn.isEmpty()) {
+                throw new JsonParseException("No ingredients for cooking recipe");
+            } else if (inputItemsIn.size() > CookingPotRecipe.INPUT_SLOTS) {
+                throw new JsonParseException("Too many ingredients for cooking recipe! The max is " + CookingPotRecipe.INPUT_SLOTS);
+            } else {
+                final ItemStack outputIn = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
+                final float experienceIn = JSONUtils.getFloat(json, "experience", 0.0F);
+                final int cookTimeIn = JSONUtils.getInt(json, "cookingtime", 200);
+                return new CookingPotRecipe(recipeId, groupIn, inputItemsIn, outputIn, experienceIn, cookTimeIn);
+            }
+        }
 
-			for(int i = 0; i < ingredientArray.size(); ++i) {
-				Ingredient ingredient = Ingredient.deserialize(ingredientArray.get(i));
-				if (!ingredient.hasNoMatchingItems()) {
-					nonnulllist.add(ingredient);
-				}
-			}
+        @Nullable
+        @Override
+        public CookingPotRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
+            String groupIn = buffer.readString(32767);
+            int i = buffer.readVarInt();
+            NonNullList<Ingredient> inputItemsIn = NonNullList.withSize(i, Ingredient.EMPTY);
 
-			return nonnulllist;
-		}
+            for (int j = 0; j < inputItemsIn.size(); ++j) {
+                inputItemsIn.set(j, Ingredient.read(buffer));
+            }
 
-		@Nullable
-		@Override
-		public CookingPotRecipe read(ResourceLocation recipeId, PacketBuffer buffer)
-		{
-			String groupIn = buffer.readString(32767);
-			int i = buffer.readVarInt();
-			NonNullList<Ingredient> inputItemsIn = NonNullList.withSize(i, Ingredient.EMPTY);
+            ItemStack outputIn = buffer.readItemStack();
+            float experienceIn = buffer.readFloat();
+            int cookTimeIn = buffer.readVarInt();
+            return new CookingPotRecipe(recipeId, groupIn, inputItemsIn, outputIn, experienceIn, cookTimeIn);
+        }
 
-			for(int j = 0; j < inputItemsIn.size(); ++j) {
-				inputItemsIn.set(j, Ingredient.read(buffer));
-			}
+        @Override
+        public void write(PacketBuffer buffer, CookingPotRecipe recipe) {
+            buffer.writeString(recipe.group);
+            buffer.writeVarInt(recipe.inputItems.size());
 
-			ItemStack outputIn = buffer.readItemStack();
-			float experienceIn = buffer.readFloat();
-			int cookTimeIn = buffer.readVarInt();
-			return new CookingPotRecipe(recipeId, groupIn, inputItemsIn, outputIn, experienceIn, cookTimeIn);
-		}
+            for (Ingredient ingredient : recipe.inputItems) {
+                ingredient.write(buffer);
+            }
 
-		@Override
-		public void write(PacketBuffer buffer, CookingPotRecipe recipe)
-		{
-			buffer.writeString(recipe.group);
-			buffer.writeVarInt(recipe.inputItems.size());
-
-			for(Ingredient ingredient : recipe.inputItems) {
-				ingredient.write(buffer);
-			}
-
-			buffer.writeItemStack(recipe.output);
-			buffer.writeFloat(recipe.experience);
-			buffer.writeVarInt(recipe.cookTime);
-		}
-	}
+            buffer.writeItemStack(recipe.output);
+            buffer.writeFloat(recipe.experience);
+            buffer.writeVarInt(recipe.cookTime);
+        }
+    }
 }

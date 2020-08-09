@@ -8,26 +8,21 @@
   "block.farmersdelight.organic_compost": "Organischer Kompost",
   "block.farmersdelight.mulch": "Mulch",
   "block.farmersdelight.mulch_farmland": "Mulch Acker",
-
   "block.farmersdelight.cabbages": "Kopfsalatsamen",
   "block.farmersdelight.onions": "Zwiebel",
   "block.farmersdelight.tomatoes": "Tomatensamen",
   "block.farmersdelight.rice_crop": "Reis",
-
   "block.farmersdelight.wild_cabbages": "Wilder Kopfsalat",
   "block.farmersdelight.wild_tomatoes": "Tomatenrebe",
   "block.farmersdelight.wild_onions": "Wilde Zwiebeln",
   "block.farmersdelight.wild_carrots": "Wilde Karotten",
   "block.farmersdelight.wild_potatoes": "Wilde Kartoffeln",
   "block.farmersdelight.wild_beetroots": "Wilde Rübe",
-
   "item.farmersdelight.tomato": "Tomate",
   "item.farmersdelight.cabbage": "Kopfsalat",
   "item.farmersdelight.rice_panicle": "Reisrispe",
-
   "item.farmersdelight.straw": "Stroh",
   "item.farmersdelight.canvas": "Canvas",
-
   "item.farmersdelight.tomato_sauce": "Tomatensauce",
   "item.farmersdelight.fried_egg": "Spiegelei",
   "item.farmersdelight.milk_bottle": "Milchflasche",
@@ -36,12 +31,10 @@
   "item.farmersdelight.sweet_berry_cookie": "Süßbeerenkeks",
   "item.farmersdelight.honey_cookie": "Honigkeks",
   "item.farmersdelight.earthworm": "Erdwurm",
-
   "item.farmersdelight.flint_knife": "Feuersteinmesser",
   "item.farmersdelight.iron_knife": "Eisenmesser",
   "item.farmersdelight.golden_knife": "Goldmesser",
   "item.farmersdelight.diamond_knife": "Diamantmesser",
-
   "item.farmersdelight.mixed_salad": "Gemischter Salat",
   "item.farmersdelight.barbecue_stick": "Grillspiess",
   "item.farmersdelight.chicken_sandwich": "Hünchen Sandwhich",
@@ -57,20 +50,15 @@
   "item.farmersdelight.steak_and_potatoes": "Steak und Kartoffeln",
   "item.farmersdelight.vegetable_noodles": "Gemüsenudeln",
   "item.farmersdelight.shepherds_pie": "Hirtenkuchen",
-
   "item.farmersdelight.dog_food": "Hundefutter",
   "item.farmersdelight.horse_feed": "Pferdefutter",
-
   "itemGroup.farmersdelight": "Farmer's Delight",
-
   "farmersdelight.container.cooking_pot": "Topf",
   "farmersdelight.container.cooking_pot.served_on": "Serviert auf: %s",
   "farmersdelight.container.basket": "Korb",
-
   "farmersdelight.tooltip.cooking_pot.empty": "Leer",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Enthält eine Portion:",
   "farmersdelight.tooltip.cooking_pot.many_servings": "Enthält %s Portionen:",
-
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "Eine Welt von Aromen erwartet dich!",
   "farmersdelight.advancement.craft_knife": "Jagen und Sammeln",
@@ -81,13 +69,11 @@
   "farmersdelight.advancement.harvest_straw.desc": "Ernte Graspflanzen mit einem Messer um Stroh zu bekommen",
   "farmersdelight.advancement.get_mulch": "Pflanze Essen",
   "farmersdelight.advancement.get_mulch.desc": "Lass ein bisschen Organischen Kompost bis er zu Mulch zerfällt",
-
   "farmersdelight.advancement.place_campfire": "Lagerfeuer gezündet",
   "farmersdelight.advancement.place_campfire.desc": "Platzier ein Lagerfeuer um dich in der Nacht warm zu halten",
   "farmersdelight.advancement.craft_stove": "Den Grill aufheizen",
   "farmersdelight.advancement.craft_stove.desc": "Erstelle einen Herd",
   "farmersdelight.advancement.place_cooking_pot": "Abendessen!",
   "farmersdelight.advancement.place_cooking_pot.desc": "Platzier einen Herd und fang an Mahlzeiten zu kochen!",
-
   "farmersdelight.jei.cooking": "Kochen"
 }

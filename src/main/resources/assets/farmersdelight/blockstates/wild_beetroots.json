@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "farmersdelight:block/wild_beetroots" }
+    "": {
+      "model": "farmersdelight:block/wild_beetroots"
+    }
   }
 }
