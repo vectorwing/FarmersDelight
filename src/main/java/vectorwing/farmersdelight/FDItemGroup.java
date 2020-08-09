@@ -6,11 +6,15 @@ import net.minecraft.util.NonNullList;
 import vectorwing.farmersdelight.init.ModBlocks;
 import vectorwing.farmersdelight.init.ModItems;
 
+import javax.annotation.Nonnull;
+
+@SuppressWarnings("unused")
 public class FDItemGroup extends ItemGroup {
     public FDItemGroup(String label) {
         super(label);
     }
 
+    @Nonnull
     @Override
     public ItemStack createIcon() {
         return new ItemStack(ModBlocks.STOVE.get());

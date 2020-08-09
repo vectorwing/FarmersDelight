@@ -19,6 +19,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
+@SuppressWarnings("deprecation")
 public class RiceBaleBlock extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
 

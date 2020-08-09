@@ -70,6 +70,7 @@ public class Advancements extends AdvancementProvider {
                     null, frame, showToast, announceToChat, hidden);
         }
 
+        @SuppressWarnings("unused")
         public void accept(Consumer<Advancement> consumer) {
             Advancement farmersDelight = Advancement.Builder.builder()
                     .withDisplay(ModItems.COOKING_POT.get(),

@@ -46,7 +46,7 @@ public class HotCocoaItem extends Item {
             // Randomly pick one, then remove
             if (compatibleEffects.size() > 0) {
                 EffectInstance selectedEffect = entityLiving.getActivePotionEffect(compatibleEffects.get(worldIn.rand.nextInt(compatibleEffects.size())));
-                if (!net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.living.PotionEvent.PotionRemoveEvent(entityLiving, selectedEffect))) {
+                if (selectedEffect != null && !net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.living.PotionEvent.PotionRemoveEvent(entityLiving, selectedEffect))) {
                     entityLiving.removePotionEffect(selectedEffect.getPotion());
                 }
             }

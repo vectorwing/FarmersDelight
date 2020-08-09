@@ -34,7 +34,6 @@ import vectorwing.farmersdelight.blocks.inventory.CookingPotItemHandler;
 import vectorwing.farmersdelight.container.CookingPotContainer;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.init.ModTileEntityTypes;
-import vectorwing.farmersdelight.utils.ForgeTags;
 import vectorwing.farmersdelight.utils.Text;
 
 import javax.annotation.Nullable;
@@ -144,7 +143,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
         boolean isHeated = this.isAboveLitHeatSource();
         boolean dirty = false;
 
-        if (!this.world.isRemote) {
+        if (world != null && !this.world.isRemote) {
             if (isHeated && this.hasInput()) {
                 CookingPotRecipe irecipe = this.world.getRecipeManager()
                         .getRecipe(this.recipeType, new RecipeWrapper(itemHandler), this.world).orElse(null);
@@ -186,7 +185,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
     }
 
     protected int getCookTime() {
-        return this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(itemHandler), this.world).map(CookingPotRecipe::getCookTime).orElse(200);
+        return world == null ? Integer.MAX_VALUE : this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(itemHandler), this.world).map(CookingPotRecipe::getCookTime).orElse(200);
     }
 
     private boolean hasInput() {
@@ -229,7 +228,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
             }
         }
         for (int i = 0; i < MEAL_DISPLAY; ++i) {
-            if (itemHandler.getStackInSlot(i).hasContainerItem()) {
+            if (world != null && itemHandler.getStackInSlot(i).hasContainerItem()) {
                 Direction direction = this.getBlockState().get(CookingPotBlock.FACING).rotateYCCW();
                 ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5 + (direction.getXOffset() * 0.2), pos.getY() + 0.7, pos.getZ() + 0.5 + (direction.getZOffset() * 0.2), itemHandler.getStackInSlot(i).getContainerItem());
                 entity.setMotion(direction.getXOffset() * 0.1F, 0.2F, direction.getZOffset() * 0.1F);

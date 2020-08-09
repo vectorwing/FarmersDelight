@@ -31,6 +31,7 @@ import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
+@SuppressWarnings("deprecation")
 public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowable {
     public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 4);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;

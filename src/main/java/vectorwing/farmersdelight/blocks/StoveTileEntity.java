@@ -54,12 +54,12 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
     public void tick() {
         boolean isStoveLit = this.getBlockState().get(StoveBlock.LIT);
         boolean isStoveBlocked = this.isStoveBlockedAbove();
-        if (this.world.isRemote) {
+        if (world != null && this.world.isRemote) {
             if (isStoveLit) {
                 this.addParticles();
             }
         } else {
-            if (isStoveBlocked) {
+            if (world != null && isStoveBlocked) {
                 if (!this.inventory.isEmpty()) {
                     InventoryHelper.dropItems(world, pos, this.getInventory());
                     this.inventoryChanged();
@@ -83,14 +83,14 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
             if (!itemstack.isEmpty()) {
                 ++this.cookingTimes[i];
                 if (this.cookingTimes[i] >= this.cookingTotalTimes[i]) {
-                    IInventory iinventory = new Inventory(itemstack);
-                    ItemStack result = this.world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, iinventory, this.world).map((recipe) -> {
-                        return recipe.getCraftingResult(iinventory);
-                    }).orElse(itemstack);
-                    if (world != null && !result.isEmpty()) {
-                        ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, result.copy());
-                        entity.setMotion(Utils.RAND.nextGaussian() * (double) 0.01F, 0.1F, Utils.RAND.nextGaussian() * (double) 0.01F);
-                        world.addEntity(entity);
+                    if (world != null) {
+                        IInventory iinventory = new Inventory(itemstack);
+                        ItemStack result = this.world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, iinventory, this.world).map((recipe) -> recipe.getCraftingResult(iinventory)).orElse(itemstack);
+                        if (!result.isEmpty()) {
+                            ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, result.copy());
+                            entity.setMotion(Utils.RAND.nextGaussian() * (double) 0.01F, 0.1F, Utils.RAND.nextGaussian() * (double) 0.01F);
+                            world.addEntity(entity);
+                        }
                     }
                     this.inventory.set(i, ItemStack.EMPTY);
                     this.inventoryChanged();
@@ -205,7 +205,7 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
     }
 
     public Optional<CampfireCookingRecipe> findMatchingRecipe(ItemStack itemStackIn) {
-        return this.inventory.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty() : this.world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, new Inventory(itemStackIn), this.world);
+        return world == null || this.inventory.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty() : this.world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, new Inventory(itemStackIn), this.world);
     }
 
     public boolean addItem(ItemStack itemStackIn, int cookTime) {
@@ -225,7 +225,8 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 
     private void inventoryChanged() {
         super.markDirty();
-        this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
+        if (world != null)
+            this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
     }
 
     public void clear() {

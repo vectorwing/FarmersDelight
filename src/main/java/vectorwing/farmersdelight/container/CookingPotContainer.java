@@ -1,10 +1,9 @@
 package vectorwing.farmersdelight.container;
 
-import com.mojang.datafixers.util.Pair;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -13,20 +12,20 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.IntArray;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.blocks.CookingPotTileEntity;
 import vectorwing.farmersdelight.init.ModBlocks;
 import vectorwing.farmersdelight.init.ModContainerTypes;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
 
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 public class CookingPotContainer extends Container {
-    public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "items/empty_container_slot_bowl");
 
     public final CookingPotTileEntity tileEntity;
     public final IItemHandler inventoryHandler;
@@ -38,7 +37,7 @@ public class CookingPotContainer extends Container {
         this.tileEntity = tileEntity;
         this.inventoryHandler = tileEntity.getInventory();
         this.cookingPotData = cookingPotDataIn;
-        this.canInteractWithCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
+        this.canInteractWithCallable = tileEntity.getWorld() != null ? IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos()) : null;
 
         // Ingredient Slots - 2 Rows x 3 Columns
         int startX = 8;
@@ -58,12 +57,7 @@ public class CookingPotContainer extends Container {
         this.addSlot(new CookingPotMealSlot(inventoryHandler, 6, 124, 26));
 
         // Bowl Input
-        this.addSlot(new SlotItemHandler(inventoryHandler, 7, 92, 55) {
-            @OnlyIn(Dist.CLIENT)
-            public Pair<ResourceLocation, ResourceLocation> getBackground() {
-                return Pair.of(PlayerContainer.LOCATION_BLOCKS_TEXTURE, EMPTY_CONTAINER_SLOT_BOWL);
-            }
-        });
+        this.addSlot(new SlotItemHandler(inventoryHandler, 7, 92, 55));
 
         // Bowl Output
         this.addSlot(new CookingPotResultSlot(inventoryHandler, 8, 124, 55));
@@ -101,7 +95,7 @@ public class CookingPotContainer extends Container {
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(canInteractWithCallable, playerIn, ModBlocks.COOKING_POT.get());
+        return canInteractWithCallable != null && isWithinUsableDistance(canInteractWithCallable, playerIn, ModBlocks.COOKING_POT.get());
     }
 
     @Override

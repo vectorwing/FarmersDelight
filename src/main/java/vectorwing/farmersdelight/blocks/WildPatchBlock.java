@@ -14,6 +14,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
+@SuppressWarnings("deprecation")
 public class WildPatchBlock extends BushBlock {
     protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 
@@ -32,6 +33,4 @@ public class WildPatchBlock extends BushBlock {
     public Block.OffsetType getOffsetType() {
         return OffsetType.XZ;
     }
-
-
 }

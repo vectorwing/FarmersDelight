@@ -21,6 +21,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity> {
+    private static final Minecraft MC = Minecraft.getInstance();
+
     public StoveTileEntityRenderer(TileEntityRendererDispatcher rendererDispatcher) {
         super(rendererDispatcher);
     }
@@ -51,7 +53,8 @@ public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
                 // Resize the items
                 matrixStackIn.scale(0.375F, 0.375F, 0.375F);
 
-                Minecraft.getInstance().getItemRenderer().renderItem(itemstack, ItemCameraTransforms.TransformType.FIXED, WorldRenderer.getCombinedLight(tileEntityIn.getWorld(), tileEntityIn.getPos().up()), combinedOverlayIn, matrixStackIn, bufferIn);
+                if (tileEntityIn.getWorld() != null)
+                    MC.getItemRenderer().renderItem(itemstack, ItemCameraTransforms.TransformType.FIXED, WorldRenderer.getCombinedLight(tileEntityIn.getWorld(), tileEntityIn.getPos().up()), combinedOverlayIn, matrixStackIn, bufferIn);
                 matrixStackIn.pop();
             }
         }

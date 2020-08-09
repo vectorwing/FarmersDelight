@@ -38,10 +38,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.ItemStackHandler;
-import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.init.ModSounds;
 import vectorwing.farmersdelight.init.ModTileEntityTypes;
-import vectorwing.farmersdelight.utils.ForgeTags;
 import vectorwing.farmersdelight.utils.Text;
 
 import javax.annotation.Nullable;
@@ -53,6 +51,7 @@ import static vectorwing.farmersdelight.utils.ForgeTags.HEAT_SOURCES_TAG;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
+@SuppressWarnings("deprecation")
 public class CookingPotBlock extends Block implements IWaterLoggable {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty SUPPORTED = BlockStateProperties.DOWN;
@@ -109,7 +108,7 @@ public class CookingPotBlock extends Block implements IWaterLoggable {
             TileEntity tile = worldIn.getTileEntity(pos);
             if (tile instanceof CookingPotTileEntity) {
                 ItemStack serving = ((CookingPotTileEntity) tile).useHeldItemOnMeal(player.getHeldItem(handIn));
-                if (serving != ItemStack.EMPTY && player != null) {
+                if (serving != ItemStack.EMPTY) {
                     player.inventory.addItemStackToInventory(serving);
                     worldIn.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 } else {

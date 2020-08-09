@@ -35,6 +35,7 @@ import java.util.Random;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
+@SuppressWarnings("deprecation")
 public class StoveBlock extends Block {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
@@ -74,11 +75,7 @@ public class StoveBlock extends Block {
             if (itemstack.getItem() instanceof FlintAndSteelItem) {
                 worldIn.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, Utils.RAND.nextFloat() * 0.4F + 0.8F);
                 worldIn.setBlockState(pos, state.with(BlockStateProperties.LIT, Boolean.TRUE), 11);
-                if (player != null) {
-                    itemstack.damageItem(1, player, (action) -> {
-                        action.sendBreakAnimation(handIn);
-                    });
-                }
+                itemstack.damageItem(1, player, action -> action.sendBreakAnimation(handIn));
 
                 return ActionResultType.SUCCESS;
             }

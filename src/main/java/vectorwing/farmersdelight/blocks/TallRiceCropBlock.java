@@ -16,7 +16,6 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
@@ -35,6 +34,7 @@ import java.util.Random;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
+@SuppressWarnings("deprecation")
 public class TallRiceCropBlock extends BushBlock implements IWaterLoggable, IGrowable {
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -108,7 +108,7 @@ public class TallRiceCropBlock extends BushBlock implements IWaterLoggable, IGro
     }
 
     public BlockState withAge(int age) {
-        return this.getDefaultState().with(this.getAgeProperty(), Integer.valueOf(age));
+        return this.getDefaultState().with(this.getAgeProperty(), age);
     }
 
     public void grow(World worldIn, BlockPos pos, BlockState state) {

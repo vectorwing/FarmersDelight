@@ -1,8 +1,6 @@
 package vectorwing.farmersdelight.utils;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
@@ -33,5 +31,6 @@ public class ForgeTags {
         return ItemTags.makeWrapperTag(new ResourceLocation("forge", path).getPath());
     }
 
-    public static void register() {}
+    public static void register() {
+    }
 }

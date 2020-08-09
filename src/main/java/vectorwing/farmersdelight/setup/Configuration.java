@@ -10,24 +10,24 @@ public class Configuration {
     public static final String CATEGORY_WORLD = "world";
     public static final String CATEGORY_SETTINGS = "settings";
 
-    public static ForgeConfigSpec COMMON_CONFIG;
+    public static final ForgeConfigSpec COMMON_CONFIG;
 
-    public static ForgeConfigSpec.BooleanValue CROPS_ON_SHIPWRECKS;
-    public static ForgeConfigSpec.BooleanValue CROPS_ON_VILLAGE_HOUSES;
-    public static ForgeConfigSpec.BooleanValue GENERATE_WILD_CABBAGES;
-    public static ForgeConfigSpec.IntValue FREQUENCY_WILD_CABBAGES;
-    public static ForgeConfigSpec.BooleanValue GENERATE_WILD_BEETROOTS;
-    public static ForgeConfigSpec.IntValue FREQUENCY_WILD_BEETROOTS;
-    public static ForgeConfigSpec.BooleanValue GENERATE_WILD_POTATOES;
-    public static ForgeConfigSpec.IntValue CHANCE_WILD_POTATOES;
-    public static ForgeConfigSpec.BooleanValue GENERATE_WILD_ONIONS;
-    public static ForgeConfigSpec.IntValue CHANCE_WILD_ONIONS;
-    public static ForgeConfigSpec.BooleanValue GENERATE_WILD_CARROTS;
-    public static ForgeConfigSpec.IntValue CHANCE_WILD_CARROTS;
-    public static ForgeConfigSpec.BooleanValue GENERATE_WILD_TOMATOES;
-    public static ForgeConfigSpec.IntValue CHANCE_WILD_TOMATOES;
+    public static final ForgeConfigSpec.BooleanValue CROPS_ON_SHIPWRECKS;
+    public static final ForgeConfigSpec.BooleanValue CROPS_ON_VILLAGE_HOUSES;
+    public static final ForgeConfigSpec.BooleanValue GENERATE_WILD_CABBAGES;
+    public static final ForgeConfigSpec.IntValue FREQUENCY_WILD_CABBAGES;
+    public static final ForgeConfigSpec.BooleanValue GENERATE_WILD_BEETROOTS;
+    public static final ForgeConfigSpec.IntValue FREQUENCY_WILD_BEETROOTS;
+    public static final ForgeConfigSpec.BooleanValue GENERATE_WILD_POTATOES;
+    public static final ForgeConfigSpec.IntValue CHANCE_WILD_POTATOES;
+    public static final ForgeConfigSpec.BooleanValue GENERATE_WILD_ONIONS;
+    public static final ForgeConfigSpec.IntValue CHANCE_WILD_ONIONS;
+    public static final ForgeConfigSpec.BooleanValue GENERATE_WILD_CARROTS;
+    public static final ForgeConfigSpec.IntValue CHANCE_WILD_CARROTS;
+    public static final ForgeConfigSpec.BooleanValue GENERATE_WILD_TOMATOES;
+    public static final ForgeConfigSpec.IntValue CHANCE_WILD_TOMATOES;
 
-    public static ForgeConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS;
+    public static final ForgeConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS;
 
     static {
         ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();

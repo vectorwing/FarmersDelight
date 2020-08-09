@@ -39,7 +39,7 @@ public class CakeSliceLoot {
             int bites = state.func_235903_d_(BlockStateProperties.BITES_0_6).orElse(-1);
             int TOTAL_SLICES = 7;
             if (bites != -1)
-                    generatedLoot.add(new ItemStack(ModItems.CAKE_SLICE.get(), TOTAL_SLICES - bites));
+                generatedLoot.add(new ItemStack(ModItems.CAKE_SLICE.get(), TOTAL_SLICES - bites));
             return generatedLoot;
         }
     }

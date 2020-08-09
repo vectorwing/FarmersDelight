@@ -23,11 +23,13 @@ import java.util.stream.Collectors;
 
 @JeiPlugin
 @MethodsReturnNonnullByDefault
+@SuppressWarnings("unused")
 public class JEIPlugin implements IModPlugin {
     private static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "jei_plugin");
+    private static final Minecraft MC = Minecraft.getInstance();
 
     private static List<IRecipe<?>> findRecipesByType(IRecipeType<?> type) {
-        return Minecraft.getInstance().world
+        return MC.world
                 .getRecipeManager()
                 .getRecipes()
                 .stream()

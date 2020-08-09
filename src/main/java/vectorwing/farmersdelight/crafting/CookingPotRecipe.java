@@ -27,8 +27,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class CookingPotRecipe implements IRecipe<IInventory> {
     public static final Serializer SERIALIZER = new Serializer();
     public static final int INPUT_SLOTS = 6;
+    public static final IRecipeType<CookingPotRecipe> TYPE = IRecipeType.register(FarmersDelight.MODID + ":cooking");
     private static final Logger LOGGER = LogManager.getLogger();
-    public static IRecipeType<CookingPotRecipe> TYPE = IRecipeType.register(FarmersDelight.MODID + ":cooking");
     private final ResourceLocation id;
     private final String group;
     private final NonNullList<Ingredient> inputItems;

@@ -56,9 +56,7 @@ public class KnifeItem extends ToolItem {
                 world.addEntity(entity);
 
                 if (playerentity != null) {
-                    context.getItem().damageItem(2, playerentity, (p_220040_1_) -> {
-                        p_220040_1_.sendBreakAnimation(context.getHand());
-                    });
+                    context.getItem().damageItem(2, playerentity, p_220040_1_ -> p_220040_1_.sendBreakAnimation(context.getHand()));
                 }
             }
 

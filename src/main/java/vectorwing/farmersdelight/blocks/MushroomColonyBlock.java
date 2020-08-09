@@ -22,6 +22,7 @@ import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
+@SuppressWarnings("deprecation")
 public class MushroomColonyBlock extends BushBlock implements IGrowable {
     public static final IntegerProperty COLONY_AGE = BlockStateProperties.AGE_0_3;
 

@@ -1,7 +1,5 @@
 package vectorwing.farmersdelight.loot.functions;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonObject;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
@@ -11,8 +9,6 @@ import net.minecraft.loot.LootParameters;
 import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.blocks.CookingPotTileEntity;
 
 import javax.annotation.ParametersAreNonnullByDefault;

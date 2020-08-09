@@ -4,7 +4,6 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -29,12 +28,14 @@ import vectorwing.farmersdelight.utils.Text;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
+@SuppressWarnings("deprecation")
 public class BasketTileEntity extends LockableLootTileEntity implements IBasket, ITickableTileEntity {
     private NonNullList<ItemStack> basketContents = NonNullList.withSize(27, ItemStack.EMPTY);
     private int transferCooldown = -1;
@@ -140,9 +141,7 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 
     public static List<ItemEntity> getCaptureItems(IBasket basket, int facingIndex) {
 
-        return basket.getFacingCollectionArea(facingIndex).toBoundingBoxList().stream().flatMap((p_200110_1_) -> {
-            return basket.getWorld().getEntitiesWithinAABB(ItemEntity.class, p_200110_1_.offset(basket.getXPos() - 0.5D, basket.getYPos() - 0.5D, basket.getZPos() - 0.5D), EntityPredicates.IS_ALIVE).stream();
-        }).collect(Collectors.toList());
+        return basket.getWorld() == null ? new ArrayList<>() : basket.getFacingCollectionArea(facingIndex).toBoundingBoxList().stream().flatMap((p_200110_1_) -> basket.getWorld().getEntitiesWithinAABB(ItemEntity.class, p_200110_1_.offset(basket.getXPos() - 0.5D, basket.getYPos() - 0.5D, basket.getZPos() - 0.5D), EntityPredicates.IS_ALIVE).stream()).collect(Collectors.toList());
     }
 
     public CompoundNBT write(CompoundNBT compound) {
@@ -222,7 +221,7 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
             if (!this.isOnTransferCooldown() && this.getBlockState().get(BlockStateProperties.ENABLED)) {
                 boolean flag = false;
                 if (!this.isFull()) {
-                    flag |= supplier.get();
+                    flag = supplier.get();
                 }
 
                 if (flag) {
@@ -231,10 +230,8 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
                     return true;
                 }
             }
-            return false;
-        } else {
-            return false;
         }
+        return false;
     }
 
     private boolean isFull() {
@@ -252,9 +249,7 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
             BlockPos blockpos = this.getPos();
             int facing = this.getBlockState().get(BasketBlock.FACING).getIndex();
             if (VoxelShapes.compare(VoxelShapes.create(entity.getBoundingBox().offset(-blockpos.getX(), -blockpos.getY(), -blockpos.getZ())), this.getFacingCollectionArea(facing), IBooleanFunction.AND)) {
-                this.updateHopper(() -> {
-                    return captureItem(this, (ItemEntity) entity);
-                });
+                this.updateHopper(() -> captureItem(this, (ItemEntity) entity));
             }
         }
     }
@@ -282,9 +277,7 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
             if (!this.isOnTransferCooldown()) {
                 this.setTransferCooldown(0);
                 int facing = this.getBlockState().get(BasketBlock.FACING).getIndex();
-                this.updateHopper(() -> {
-                    return pullItems(this, facing);
-                });
+                this.updateHopper(() -> pullItems(this, facing));
             }
         }
     }
