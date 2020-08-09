@@ -42,6 +42,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Map;
 import java.util.Random;
 
+import static vectorwing.farmersdelight.utils.ForgeTags.HEAT_SOURCES_TAG;
+
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class CookingPotTileEntity extends TileEntity implements INamedContainerProvider, ITickableTileEntity, INameable {
@@ -272,7 +274,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
         if (world == null)
             return false;
         BlockState checkState = world.getBlockState(pos.down());
-        if (ForgeTags.HEAT_SOURCES.func_230235_a_(checkState.getBlock())) {
+        if (checkState.getBlock().getTags().contains(HEAT_SOURCES_TAG)) {
             return checkState.func_235903_d_(BlockStateProperties.LIT).orElse(false);
         }
         return false;

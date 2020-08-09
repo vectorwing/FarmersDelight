@@ -8,7 +8,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.FarmersDelight;
 
-@SuppressWarnings("unused")
 public class ForgeTags {
     // GENERAL GROUPS
     public static final ITag.INamedTag<Item> CROPS = forgeTag("crops");
@@ -26,10 +25,13 @@ public class ForgeTags {
 
     public static final ITag.INamedTag<Item> KNIVES = forgeTag("knives");
 
-    public static final ITag.INamedTag<Block> HEAT_SOURCES = BlockTags.makeWrapperTag(new ResourceLocation(FarmersDelight.MODID, "heat_sources").getPath());
+    public static final ResourceLocation HEAT_SOURCES_TAG = new ResourceLocation(FarmersDelight.MODID, "heat_sources");
+    
     public static final ITag.INamedTag<Item> WOLF_PREY = ItemTags.makeWrapperTag(new ResourceLocation(FarmersDelight.MODID, "wolf_prey").getPath());
 
     private static ITag.INamedTag<Item> forgeTag(String path) {
         return ItemTags.makeWrapperTag(new ResourceLocation("forge", path).getPath());
     }
+
+    public static void register() {}
 }

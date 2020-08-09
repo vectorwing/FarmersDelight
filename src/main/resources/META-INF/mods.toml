@@ -40,6 +40,6 @@ description='''A lightweight farming expansion. Harvest, cook and explore!'''
 [[dependencies.farmersdelight]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.1is]"
+    versionRange="[1.16.1]"
     ordering="NONE"
     side="BOTH"

@@ -38,6 +38,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.ItemStackHandler;
+import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.init.ModSounds;
 import vectorwing.farmersdelight.init.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.ForgeTags;
@@ -47,6 +48,8 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
+
+import static vectorwing.farmersdelight.utils.ForgeTags.HEAT_SOURCES_TAG;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -96,7 +99,7 @@ public class CookingPotBlock extends Block implements IWaterLoggable {
     }
 
     private boolean needsTrayForHeatSource(BlockState state) {
-        return ForgeTags.HEAT_SOURCES.func_230235_a_(state.getBlock()) && !state.isSolid();
+        return state.getBlock().getTags().contains(HEAT_SOURCES_TAG);
     }
 
     @Override
