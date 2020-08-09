@@ -33,7 +33,6 @@ public class CookingPotScreen extends ContainerScreen<CookingPotContainer> {
     @Override
     public void func_230430_a_(MatrixStack p_230450_1_, final int mouseX, final int mouseY, float partialTicks) {
         super.func_230430_a_(p_230450_1_, mouseX, mouseY, partialTicks);
-        this.func_230446_a_(p_230450_1_);
         this.renderHoveredToolTip(p_230450_1_, mouseX, mouseY);
     }
 
@@ -47,7 +46,7 @@ public class CookingPotScreen extends ContainerScreen<CookingPotContainer> {
 
                 ITextComponent container = null;
                 if (meal.hasContainerItem()) {
-                    container = meal.getContainerItem().getItem().getName(); // FIXME
+                    container = meal.getContainerItem().getItem().getName();
                 } else if (meal.getItem() instanceof SoupItem) {
                     container = Items.BOWL.getItem().getName();
                 }
@@ -64,9 +63,8 @@ public class CookingPotScreen extends ContainerScreen<CookingPotContainer> {
     }
 
     @Override
-    protected void func_230451_b_(MatrixStack ms, int mouseX, int mouseY) { // FIXME: right order?
+    protected void func_230451_b_(MatrixStack ms, int mouseX, int mouseY) {
         super.func_230451_b_(ms, mouseX, mouseY);
-        this.field_230712_o_.func_238421_b_(ms, this.field_230704_d_.getString(), 28.0f, 6.0f, 4210752);
         this.field_230712_o_.func_238421_b_(ms, this.playerInventory.getDisplayName().getString(), 8.0f, (float) (this.ySize - 96 + 2), 4210752);
     }
 
