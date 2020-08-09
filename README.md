@@ -1,7 +1,14 @@
 # Farmer's Delight
 
-A lightweight farming expansion for Minecraft. [Download it on CurseForge!](https://www.curseforge.com/minecraft/mc-mods/farmers-delight)
+A lightweight farming expansion for Minecraft.
 
+<a href="https://www.curseforge.com/minecraft/mc-mods/farmers-delight">
+  <img src="http://cf.way2muchnoise.eu/full_farmers-delight_downloads.svg" alt="Curseforge Downloads">
+</a>
+<a href="https://discord.gg/eFsz5SK">
+  <img alt="Discord" src="https://img.shields.io/discord/734511833947439156?color=brightgreen&label=Discord">
+</a>
+<br>
 <img src="https://i.imgur.com/84aTAT8.png" width="50%">
 
 ### Overview
