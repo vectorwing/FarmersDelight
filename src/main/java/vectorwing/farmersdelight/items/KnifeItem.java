@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.RotatedPillarBlock;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
@@ -23,11 +24,25 @@ import java.util.Set;
 
 public class KnifeItem extends ToolItem
 {
-	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.HAY_BLOCK, ModBlocks.RICE_BALE.get(), Blocks.COBWEB, Blocks.CAKE);
+	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.CAKE, Blocks.COBWEB);
 
 	public KnifeItem(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties builder)
 	{
 		super(attackDamageIn, attackSpeedIn, tier, EFFECTIVE_ON, builder);
+	}
+
+	public float getDestroySpeed(ItemStack stack, BlockState state) {
+		Material material = state.getMaterial();
+		return material != Material.WOOL
+			&& material != Material.CARPET
+			&& material != Material.ORGANIC
+			&& material != Material.CAKE
+			&& material != Material.WEB
+			&& material != Material.LEAVES ? super.getDestroySpeed(stack, state) : this.efficiency;
+	}
+
+	public boolean canPlayerBreakBlockWhileHolding(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
+		return !player.isCreative();
 	}
 
 	public ActionResultType onItemUse(ItemUseContext context) {
