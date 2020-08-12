@@ -43,6 +43,7 @@ public class FarmersDelight
         ModSounds.SOUNDS.register(modEventBus);
         ModTileEntityTypes.TILES.register(modEventBus);
         ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
+        ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }

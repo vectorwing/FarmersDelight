@@ -88,4 +88,15 @@ public class KnifeItem extends ToolItem
 	{
 		return true;
 	}
+
+	@Override
+	public boolean isRepairable(@Nonnull ItemStack stack)
+	{
+		return true;
+	}
+
+	public boolean isCustomRepairable(@Nonnull ItemStack stack)
+	{
+		return super.isRepairable(stack);
+	}
 }
