@@ -120,7 +120,7 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
 		ItemStack itemstack = super.getItem(worldIn, pos, state);
 		CookingPotTileEntity tile = (CookingPotTileEntity)worldIn.getTileEntity(pos);
-		CompoundNBT compoundnbt = tile.writeMealNbt(new CompoundNBT());
+		CompoundNBT compoundnbt = tile.writeMeal(new CompoundNBT());
 		if (!compoundnbt.isEmpty()) {
 			itemstack.setTagInfo("BlockEntityTag", compoundnbt);
 		}

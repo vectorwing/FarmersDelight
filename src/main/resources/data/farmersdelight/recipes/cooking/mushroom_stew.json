@@ -10,5 +10,8 @@
   ],
   "result": {
     "item": "minecraft:mushroom_stew"
+  },
+  "container": {
+    "item": "minecraft:bowl"
   }
 }

@@ -52,7 +52,7 @@ public class Recipes extends RecipeProvider
 
 	/**
 	 * The following recipes should ALWAYS define a custom save location.
-	 * If not, they fall on the minecraft namespace, overriding any other recipe.
+	 * If not, they fall on the minecraft namespace, overriding vanilla recipes instead of being alternatives.
 	 */
 	private void recipesVanillaAlternatives(Consumer<IFinishedRecipe> consumer) {
 		ShapedRecipeBuilder.shapedRecipe(Items.SCAFFOLDING, 6)
