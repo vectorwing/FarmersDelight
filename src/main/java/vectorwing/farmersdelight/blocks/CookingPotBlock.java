@@ -47,7 +47,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
 
-import static vectorwing.farmersdelight.utils.ForgeTags.HEAT_SOURCES_TAG;
+import static vectorwing.farmersdelight.utils.ForgeTags.TRAY_HEAT_SOURCES_TAG;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -98,7 +98,7 @@ public class CookingPotBlock extends Block implements IWaterLoggable {
     }
 
     private boolean needsTrayForHeatSource(BlockState state) {
-        return state.getBlock().getTags().contains(HEAT_SOURCES_TAG);
+        return state.getBlock().getTags().contains(TRAY_HEAT_SOURCES_TAG);
     }
 
     @Override

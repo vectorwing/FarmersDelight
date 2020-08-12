@@ -1,10 +1,8 @@
 {
   "replace": "false",
   "values": [
-    "minecraft:fire",
-    "minecraft:lava",
     "minecraft:magma_block",
-    "minecraft:campfire",
-    "farmersdelight:stove"
+    "farmersdelight:stove",
+    "#farmersdelight:tray_heat_sources"
   ]
 }

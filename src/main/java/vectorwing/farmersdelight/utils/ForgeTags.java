@@ -24,6 +24,7 @@ public class ForgeTags {
     public static final ITag.INamedTag<Item> KNIVES = forgeTag("knives");
 
     public static final ResourceLocation HEAT_SOURCES_TAG = new ResourceLocation(FarmersDelight.MODID, "heat_sources");
+    public static final ResourceLocation TRAY_HEAT_SOURCES_TAG = new ResourceLocation(FarmersDelight.MODID, "tray_heat_sources");
 
     public static final ITag.INamedTag<Item> WOLF_PREY = ItemTags.makeWrapperTag(new ResourceLocation(FarmersDelight.MODID, "wolf_prey").getPath());
 
