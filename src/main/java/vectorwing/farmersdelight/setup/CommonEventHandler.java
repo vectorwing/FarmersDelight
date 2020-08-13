@@ -3,14 +3,17 @@ package vectorwing.farmersdelight.setup;
 import com.google.common.collect.Sets;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.merchant.villager.VillagerTrades;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTables;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -18,6 +21,7 @@ import net.minecraftforge.fml.DeferredWorkQueue;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.init.ModBlocks;
 import vectorwing.farmersdelight.init.ModItems;
+import vectorwing.farmersdelight.items.KnifeItem;
 import vectorwing.farmersdelight.loot.functions.CopyMealFunction;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.world.storage.loot.LootPool;
@@ -59,6 +63,25 @@ public class CommonEventHandler
 		LootFunctionManager.registerFunction(new CopyMealFunction.Serializer());
 
 		DeferredWorkQueue.runLater(CropPatchGeneration::generateCrop);
+	}
+
+	@SubscribeEvent
+	public static void onKnifeBackstab(LivingHurtEvent event) {
+		World world = event.getEntityLiving().getEntityWorld();
+
+		Entity attacker = event.getSource().getTrueSource();
+		if (attacker instanceof PlayerEntity) {
+			ItemStack weapon = ((PlayerEntity) attacker).getHeldItemMainhand();
+			if (weapon.getItem() instanceof KnifeItem && KnifeItem.isLookingBehindTarget(event.getEntityLiving(), event.getSource().getDamageLocation())) {
+				if (!world.isRemote) {
+					event.setAmount(event.getAmount() * 2);
+					world.playSound(null, attacker.getPosX(), attacker.getPosY(), attacker.getPosZ(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, SoundCategory.PLAYERS, 1.0F, 1.0F);
+				}
+				if (attacker instanceof ClientPlayerEntity) {
+					((ClientPlayerEntity)attacker).onEnchantmentCritical(event.getEntityLiving());
+				}
+			}
+		}
 	}
 
 	@SubscribeEvent

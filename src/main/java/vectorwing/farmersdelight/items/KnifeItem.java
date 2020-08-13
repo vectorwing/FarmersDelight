@@ -8,14 +8,17 @@ import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import vectorwing.farmersdelight.init.ModItems;
 import vectorwing.farmersdelight.utils.Utils;
@@ -44,6 +47,23 @@ public class KnifeItem extends ToolItem
 
 	public boolean canPlayerBreakBlockWhileHolding(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
 		return !player.isCreative();
+	}
+
+	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+		stack.damageItem(1, attacker, (user) -> {
+			user.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+		});
+		return true;
+	}
+
+	public static boolean isLookingBehindTarget(LivingEntity target, Vec3d attackerLocation) {
+		if (attackerLocation != null) {
+			Vec3d vec3d = target.getLook(1.0F);
+			Vec3d vec3d1 = attackerLocation.subtract(target.getPositionVec()).normalize();
+			vec3d1 = new Vec3d(vec3d1.x, 0.0D, vec3d1.z);
+			return vec3d1.dotProduct(vec3d) < -0.5D;
+		}
+		return false;
 	}
 
 	@Override
@@ -109,12 +129,6 @@ public class KnifeItem extends ToolItem
 
 	@Override
 	public boolean hasContainerItem(@Nonnull ItemStack stack)
-	{
-		return true;
-	}
-
-	@Override
-	public boolean isDamageable()
 	{
 		return true;
 	}
