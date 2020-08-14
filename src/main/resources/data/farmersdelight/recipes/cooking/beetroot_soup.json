@@ -22,5 +22,8 @@
   ],
   "result": {
     "item": "minecraft:beetroot_soup"
+  },
+  "container": {
+    "item": "minecraft:bowl"
   }
 }

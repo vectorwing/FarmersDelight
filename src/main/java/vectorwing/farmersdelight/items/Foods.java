@@ -3,7 +3,7 @@ package vectorwing.farmersdelight.items;
 import net.minecraft.item.Food;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import vectorwing.farmersdelight.init.ModEffects;
+import vectorwing.farmersdelight.registry.ModEffects;
 
 public class Foods
 {
@@ -69,7 +69,7 @@ public class Foods
 	public static final Food SHEPHERDS_PIE = (new Food.Builder())
 			.hunger(14).saturation(0.9f).effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F).build();
 	public static final Food RATATOUILLE = (new Food.Builder())
-			.hunger(12).saturation(0.8f).effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 4800, 0), 1.0F).build();
+			.hunger(9).saturation(0.6f).effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 4800, 0), 1.0F).build();
 	public static final Food SQUID_INK_PASTA = (new Food.Builder())
 			.hunger(14).saturation(0.9f).effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F).build();
 }

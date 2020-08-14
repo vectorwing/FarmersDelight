@@ -3,21 +3,25 @@ package vectorwing.farmersdelight.setup;
 import com.google.common.collect.Sets;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.merchant.villager.VillagerTrades;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTables;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.init.ModBlocks;
-import vectorwing.farmersdelight.init.ModItems;
+import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.registry.ModItems;
+import vectorwing.farmersdelight.items.KnifeItem;
 import vectorwing.farmersdelight.loot.functions.CopyMealFunction;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.world.storage.loot.LootPool;
@@ -49,6 +53,7 @@ public class CommonEventHandler
 	public static void init(final FMLCommonSetupEvent event)
 	{
 		ComposterBlock.CHANCES.put(ModItems.TREE_BARK.get(), 0.3F);
+		ComposterBlock.CHANCES.put(ModItems.STRAW.get(), 0.3F);
 		ComposterBlock.CHANCES.put(ModItems.CABBAGE_SEEDS.get(), 0.3F);
 		ComposterBlock.CHANCES.put(ModItems.TOMATO_SEEDS.get(), 0.3F);
 		ComposterBlock.CHANCES.put(ModItems.CABBAGE.get(), 0.65F);

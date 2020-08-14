@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.init;
+package vectorwing.farmersdelight.registry;
 
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.common.extensions.IForgeContainerType;

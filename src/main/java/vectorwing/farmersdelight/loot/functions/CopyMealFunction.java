@@ -31,7 +31,7 @@ public class CopyMealFunction extends LootFunction
 		TileEntity tile = context.get(LootParameters.BLOCK_ENTITY);
 		if (tile instanceof CookingPotTileEntity)
 		{
-			CompoundNBT tag = ((CookingPotTileEntity) tile).writeMealNbt(new CompoundNBT());
+			CompoundNBT tag = ((CookingPotTileEntity) tile).writeMeal(new CompoundNBT());
 			if (!tag.isEmpty())
 			{
 				stack.setTagInfo("BlockEntityTag", tag);

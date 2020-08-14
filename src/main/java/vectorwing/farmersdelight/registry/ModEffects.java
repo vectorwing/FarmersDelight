@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.init;
+package vectorwing.farmersdelight.registry;
 
 import net.minecraft.potion.Effect;
 import net.minecraftforge.fml.RegistryObject;

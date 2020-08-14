@@ -37,9 +37,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.ItemStackHandler;
-import vectorwing.farmersdelight.init.ModSounds;
-import vectorwing.farmersdelight.init.ModTileEntityTypes;
+import vectorwing.farmersdelight.registry.ModSounds;
+import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.ForgeTags;
+import vectorwing.farmersdelight.utils.ModTags;
 import vectorwing.farmersdelight.utils.Text;
 
 import javax.annotation.Nullable;
@@ -94,7 +95,7 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 	}
 
 	private boolean needsTrayForHeatSource(BlockState state) {
-		return ForgeTags.HEAT_SOURCES.contains(state.getBlock()) && !state.isSolid();
+		return ModTags.HEAT_SOURCES.contains(state.getBlock()) && !state.isSolid();
 	}
 
 	@Override
@@ -120,7 +121,7 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
 		ItemStack itemstack = super.getItem(worldIn, pos, state);
 		CookingPotTileEntity tile = (CookingPotTileEntity)worldIn.getTileEntity(pos);
-		CompoundNBT compoundnbt = tile.writeMealNbt(new CompoundNBT());
+		CompoundNBT compoundnbt = tile.writeMeal(new CompoundNBT());
 		if (!compoundnbt.isEmpty()) {
 			itemstack.setTagInfo("BlockEntityTag", compoundnbt);
 		}

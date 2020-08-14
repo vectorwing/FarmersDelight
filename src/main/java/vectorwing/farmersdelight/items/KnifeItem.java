@@ -5,17 +5,22 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.RotatedPillarBlock;
+import net.minecraft.block.material.Material;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import vectorwing.farmersdelight.init.ModBlocks;
-import vectorwing.farmersdelight.init.ModItems;
+import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.Utils;
 
 import javax.annotation.Nonnull;
@@ -23,11 +28,46 @@ import java.util.Set;
 
 public class KnifeItem extends ToolItem
 {
-	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.HAY_BLOCK, ModBlocks.RICE_BALE.get(), Blocks.COBWEB, Blocks.CAKE);
+	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.CAKE, Blocks.COBWEB);
 
 	public KnifeItem(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties builder)
 	{
 		super(attackDamageIn, attackSpeedIn, tier, EFFECTIVE_ON, builder);
+	}
+
+	public float getDestroySpeed(ItemStack stack, BlockState state) {
+		Material material = state.getMaterial();
+		return material != Material.WOOL
+			&& material != Material.CARPET
+			&& material != Material.ORGANIC
+			&& material != Material.CAKE
+			&& material != Material.WEB
+			&& material != Material.LEAVES ? super.getDestroySpeed(stack, state) : this.efficiency;
+	}
+
+	public boolean canPlayerBreakBlockWhileHolding(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
+		return !player.isCreative();
+	}
+
+	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+		stack.damageItem(1, attacker, (user) -> {
+			user.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+		});
+		return true;
+	}
+
+	@Override
+	public boolean canApplyAtEnchantingTable(ItemStack stack, net.minecraft.enchantment.Enchantment enchantment)
+	{
+		Set<Enchantment> ALLOWED_ENCHANTMENTS = Sets.newHashSet(Enchantments.SHARPNESS, Enchantments.SMITE, Enchantments.BANE_OF_ARTHROPODS, Enchantments.KNOCKBACK, Enchantments.FIRE_ASPECT, Enchantments.LOOTING);
+		if (ALLOWED_ENCHANTMENTS.contains(enchantment)) {
+			return true;
+		}
+		Set<Enchantment> DENIED_ENCHANTMENTS = Sets.newHashSet(Enchantments.FORTUNE);
+		if (DENIED_ENCHANTMENTS.contains(enchantment)) {
+			return false;
+		}
+		return enchantment.type.canEnchantItem(stack.getItem());
 	}
 
 	public ActionResultType onItemUse(ItemUseContext context) {
@@ -84,8 +124,13 @@ public class KnifeItem extends ToolItem
 	}
 
 	@Override
-	public boolean isDamageable()
+	public boolean isRepairable(@Nonnull ItemStack stack)
 	{
 		return true;
+	}
+
+	public boolean isCustomRepairable(@Nonnull ItemStack stack)
+	{
+		return super.isRepairable(stack);
 	}
 }

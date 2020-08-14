@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.blocks;
 
-import com.google.common.collect.Maps;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
@@ -9,11 +8,11 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.SoupItem;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.*;
@@ -23,6 +22,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -31,13 +31,13 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.blocks.inventory.CookingPotItemHandler;
 import vectorwing.farmersdelight.container.CookingPotContainer;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.init.ModTileEntityTypes;
+import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.ForgeTags;
+import vectorwing.farmersdelight.utils.ModTags;
 import vectorwing.farmersdelight.utils.Text;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Map;
 import java.util.Random;
 
 @MethodsReturnNonnullByDefault
@@ -57,6 +57,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 
 	private int cookTime;
 	private int cookTimeTotal;
+	private ItemStack container;
 	protected final IIntArray cookingPotData = new IIntArray() {
 		public int get(int index) {
 			switch(index) {
@@ -83,17 +84,42 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 			return 2;
 		}
 	};
-	private final Map<ResourceLocation, Integer> recipes = Maps.newHashMap();
+	//private final Map<ResourceLocation, Integer> recipes = Maps.newHashMap();
 	protected final IRecipeType<? extends CookingPotRecipe> recipeType;
 
 	public CookingPotTileEntity(TileEntityType<?> tileEntityTypeIn, IRecipeType<? extends CookingPotRecipe> recipeTypeIn) {
 		super(tileEntityTypeIn);
 		this.recipeType = recipeTypeIn;
+		this.container = ItemStack.EMPTY;
 	}
 
 	public CookingPotTileEntity() {	this(ModTileEntityTypes.COOKING_POT_TILE.get(), CookingPotRecipe.TYPE); }
 
-	// ======== NBT HANDLING ========
+	// ======== NBT & NETWORKING ========
+
+	@Nullable
+	public SUpdateTileEntityPacket getUpdatePacket() {
+		return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
+	}
+
+	public CompoundNBT getUpdateTag() {
+		return this.writeItems(new CompoundNBT());
+	}
+
+	@Override
+	public void handleUpdateTag(CompoundNBT tag) {
+		this.read(tag);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+		this.read(pkt.getNbtCompound());
+	}
+
+	private void inventoryChanged() {
+		super.markDirty();
+		this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
+	}
 
 	@Override
 	public void read(CompoundNBT compound) {
@@ -101,6 +127,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		this.itemHandler.deserializeNBT(compound.getCompound("Inventory"));
 		this.cookTime = compound.getInt("CookTime");
 		this.cookTimeTotal = compound.getInt("CookTimeTotal");
+		this.container = ItemStack.read(compound.getCompound("Container"));
 		if (compound.contains("CustomName", 8)) {
 			this.customName = ITextComponent.Serializer.fromJson(compound.getString("CustomName"));
 		}
@@ -111,6 +138,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		super.write(compound);
 		compound.putInt("CookTime", this.cookTime);
 		compound.putInt("CookTimeTotal", this.cookTimeTotal);
+		compound.put("Container", this.container.serializeNBT());
 		if (this.customName != null) {
 			compound.putString("CustomName", ITextComponent.Serializer.toJson(this.customName));
 		}
@@ -118,7 +146,14 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		return compound;
 	}
 
-	public CompoundNBT writeMealNbt(CompoundNBT compound) {
+	private CompoundNBT writeItems(CompoundNBT compound) {
+		super.write(compound);
+		compound.put("Container", this.container.serializeNBT());
+		compound.put("Inventory", itemHandler.serializeNBT());
+		return compound;
+	}
+
+	public CompoundNBT writeMeal(CompoundNBT compound) {
 		if (this.getMeal().isEmpty()) return compound;
 
 		ItemStackHandler drops = new ItemStackHandler(INVENTORY_SIZE);
@@ -128,6 +163,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		if (this.customName != null) {
 			compound.putString("CustomName", ITextComponent.Serializer.toJson(this.customName));
 		}
+		compound.put("Container", this.container.serializeNBT());
 		compound.put("Inventory", drops.serializeNBT());
 		return compound;
 	}
@@ -158,7 +194,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 				this.cookTime = MathHelper.clamp(this.cookTime - 2, 0, this.cookTimeTotal);
 			}
 
-			ItemStack meal = itemHandler.getStackInSlot(MEAL_DISPLAY);
+			ItemStack meal = this.getMeal();
 			if (!meal.isEmpty()) {
 				if (!this.doesMealHaveContainer(meal)) {
 					this.moveMealToOutput();
@@ -176,12 +212,24 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		}
 
 		if (dirty) {
-			this.markDirty();
+			this.inventoryChanged();
 		}
 	}
 
 	protected int getCookTime() {
 		return this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(itemHandler), this.world).map(CookingPotRecipe::getCookTime).orElse(200);
+	}
+
+	protected ItemStack getRecipeContainer() {
+		return this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(itemHandler), this.world).map(CookingPotRecipe::getOutputContainer).orElse(ItemStack.EMPTY);
+	}
+
+	public ItemStack getContainer() {
+		if (!this.container.isEmpty()) {
+			return this.container;
+		} else {
+			return this.getMeal().getContainerItem();
+		}
 	}
 
 	private boolean hasInput() {
@@ -215,6 +263,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 
 	private void cook(@Nullable IRecipe<?> recipe) {
 		if (recipe != null && this.canCook(recipe)) {
+			this.container = this.getRecipeContainer();
 			ItemStack recipeOutput = recipe.getRecipeOutput();
 			ItemStack currentOutput = itemHandler.getStackInSlot(MEAL_DISPLAY);
 			if (currentOutput.isEmpty()) {
@@ -269,7 +318,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		if (world == null)
 			return false;
 		BlockState checkState = world.getBlockState(pos.down());
-		if (ForgeTags.HEAT_SOURCES.contains(checkState.getBlock())) {
+		if (ModTags.HEAT_SOURCES.contains(checkState.getBlock())) {
 			if (checkState.has(BlockStateProperties.LIT))
 				return checkState.get(BlockStateProperties.LIT);
 			return true;
@@ -286,13 +335,6 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 			drops.add(i == MEAL_DISPLAY ? ItemStack.EMPTY : itemHandler.getStackInSlot(i));
 		}
 		return drops;
-	}
-
-	/**
-	 * Because Mojang decided to hardcode bowls into their meal items, we need to do this.
-	 */
-	private boolean doesMealHaveContainer(ItemStack meal) {
-		return meal.hasContainerItem() || meal.getItem() instanceof SoupItem;
 	}
 
 	/**
@@ -320,9 +362,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		ItemStack containerInput = itemHandler.getStackInSlot(CONTAINER_INPUT);
 		ItemStack finalOutput = itemHandler.getStackInSlot(FINAL_OUTPUT);
 
-		boolean hasBowlAndSoupItem = containerInput.getItem() == Items.BOWL && mealDisplay.getItem() instanceof SoupItem;
-		boolean containerMatchesMeal = containerInput.isItemEqual(mealDisplay.getContainerItem());
-		if ((hasBowlAndSoupItem || containerMatchesMeal) && finalOutput.getCount() < finalOutput.getMaxStackSize()) {
+		if (isContainerValid(containerInput) && finalOutput.getCount() < finalOutput.getMaxStackSize()) {
 			int smallerStack = Math.min(mealDisplay.getCount(), containerInput.getCount());
 			int mealCount = Math.min(smallerStack, mealDisplay.getMaxStackSize() - finalOutput.getCount());
 			if (finalOutput.isEmpty()) {
@@ -340,11 +380,24 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 	 * Checks if the given ItemStack is a container for the stored meal. If true, takes a serving and returns it.
 	 */
 	public ItemStack useHeldItemOnMeal(ItemStack container) {
-		if (container.isItemEqual(this.getMeal().getContainerItem())) {
+		if (isContainerValid(container)) {
 			container.shrink(1);
 			return this.getMeal().split(1);
 		}
 		return ItemStack.EMPTY;
+	}
+
+	private boolean doesMealHaveContainer(ItemStack meal) {
+		return !this.container.isEmpty() || meal.hasContainerItem();
+	}
+
+	public boolean isContainerValid(ItemStack containerItem) {
+		if (containerItem.isEmpty()) return false;
+		if (!this.container.isEmpty()) {
+			return this.container.isItemEqual(containerItem);
+		} else {
+			return this.getMeal().getContainerItem().isItemEqual(containerItem);
+		}
 	}
 
 	public IItemHandler getInventory() {
@@ -385,7 +438,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 			protected void onContentsChanged(int slot) {
 				if (slot >= 0 && slot < MEAL_DISPLAY) {
 					cookTimeTotal = getCookTime();
-					markDirty();
+					inventoryChanged();
 				}
 			}
 		};

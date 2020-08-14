@@ -1,15 +1,14 @@
 package vectorwing.farmersdelight.data;
 
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.init.ModBlocks;
-import vectorwing.farmersdelight.init.ModItems;
+import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.registry.ModItems;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.utils.ForgeTags;
@@ -53,7 +52,7 @@ public class Recipes extends RecipeProvider
 
 	/**
 	 * The following recipes should ALWAYS define a custom save location.
-	 * If not, they fall on the minecraft namespace, overriding any other recipe.
+	 * If not, they fall on the minecraft namespace, overriding vanilla recipes instead of being alternatives.
 	 */
 	private void recipesVanillaAlternatives(Consumer<IFinishedRecipe> consumer) {
 		ShapedRecipeBuilder.shapedRecipe(Items.SCAFFOLDING, 6)
