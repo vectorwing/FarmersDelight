@@ -1,8 +1,8 @@
 package vectorwing.farmersdelight.data;
 
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.init.ModBlocks;
-import vectorwing.farmersdelight.init.ModItems;
+import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.registry.ModItems;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.*;

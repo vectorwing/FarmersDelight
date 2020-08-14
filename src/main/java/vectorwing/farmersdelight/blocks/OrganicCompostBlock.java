@@ -4,10 +4,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MushroomBlock;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
-import vectorwing.farmersdelight.init.ModBlocks;
+import vectorwing.farmersdelight.registry.ModBlocks;
 
 import java.util.Random;
 

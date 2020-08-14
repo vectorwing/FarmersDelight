@@ -20,7 +20,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import vectorwing.farmersdelight.init.ModItems;
+import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.Utils;
 
 import javax.annotation.Nonnull;
@@ -54,16 +54,6 @@ public class KnifeItem extends ToolItem
 			user.sendBreakAnimation(EquipmentSlotType.MAINHAND);
 		});
 		return true;
-	}
-
-	public static boolean isLookingBehindTarget(LivingEntity target, Vec3d attackerLocation) {
-		if (attackerLocation != null) {
-			Vec3d vec3d = target.getLook(1.0F);
-			Vec3d vec3d1 = attackerLocation.subtract(target.getPositionVec()).normalize();
-			vec3d1 = new Vec3d(vec3d1.x, 0.0D, vec3d1.z);
-			return vec3d1.dotProduct(vec3d) < -0.5D;
-		}
-		return false;
 	}
 
 	@Override

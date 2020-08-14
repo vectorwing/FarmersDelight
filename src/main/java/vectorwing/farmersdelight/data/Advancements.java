@@ -20,8 +20,8 @@ import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.init.ModBlocks;
-import vectorwing.farmersdelight.init.ModItems;
+import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.Text;
 
 import java.io.IOException;

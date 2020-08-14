@@ -1,8 +1,7 @@
 package vectorwing.farmersdelight.blocks;
 
 
-import net.minecraft.block.Blocks;
-import vectorwing.farmersdelight.init.ModItems;
+import vectorwing.farmersdelight.registry.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropsBlock;

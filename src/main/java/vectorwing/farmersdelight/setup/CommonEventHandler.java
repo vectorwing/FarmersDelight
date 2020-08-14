@@ -19,8 +19,8 @@ import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.init.ModBlocks;
-import vectorwing.farmersdelight.init.ModItems;
+import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.items.KnifeItem;
 import vectorwing.farmersdelight.loot.functions.CopyMealFunction;
 import net.minecraft.block.ComposterBlock;
@@ -63,25 +63,6 @@ public class CommonEventHandler
 		LootFunctionManager.registerFunction(new CopyMealFunction.Serializer());
 
 		DeferredWorkQueue.runLater(CropPatchGeneration::generateCrop);
-	}
-
-	@SubscribeEvent
-	public static void onKnifeBackstab(LivingHurtEvent event) {
-		World world = event.getEntityLiving().getEntityWorld();
-
-		Entity attacker = event.getSource().getTrueSource();
-		if (attacker instanceof PlayerEntity) {
-			ItemStack weapon = ((PlayerEntity) attacker).getHeldItemMainhand();
-			if (weapon.getItem() instanceof KnifeItem && KnifeItem.isLookingBehindTarget(event.getEntityLiving(), event.getSource().getDamageLocation())) {
-				if (!world.isRemote) {
-					event.setAmount(event.getAmount() * 2);
-					world.playSound(null, attacker.getPosX(), attacker.getPosY(), attacker.getPosZ(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, SoundCategory.PLAYERS, 1.0F, 1.0F);
-				}
-				if (attacker instanceof ClientPlayerEntity) {
-					((ClientPlayerEntity)attacker).onEnchantmentCritical(event.getEntityLiving());
-				}
-			}
-		}
 	}
 
 	@SubscribeEvent

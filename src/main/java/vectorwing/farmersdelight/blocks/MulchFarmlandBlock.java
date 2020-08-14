@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.blocks;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.FarmlandBlock;
 import net.minecraft.block.IGrowable;
 import net.minecraft.entity.Entity;
@@ -14,7 +13,7 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.PlantType;
-import vectorwing.farmersdelight.init.ModBlocks;
+import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.utils.Utils;
 
 import java.util.Random;

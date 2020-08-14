@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.init;
+package vectorwing.farmersdelight.registry;
 
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.SpecialRecipeSerializer;

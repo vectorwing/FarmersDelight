@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.init;
+package vectorwing.farmersdelight.registry;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;

@@ -6,7 +6,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.init.*;
+import vectorwing.farmersdelight.registry.*;
 import vectorwing.farmersdelight.setup.ClientEventHandler;
 import vectorwing.farmersdelight.setup.CommonEventHandler;
 import net.minecraftforge.common.MinecraftForge;
@@ -37,6 +37,7 @@ public class FarmersDelight
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        ModEnchantments.ENCHANTMENTS.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
         ModEffects.EFFECTS.register(modEventBus);

@@ -3,7 +3,7 @@ package vectorwing.farmersdelight.items;
 import net.minecraft.item.Food;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import vectorwing.farmersdelight.init.ModEffects;
+import vectorwing.farmersdelight.registry.ModEffects;
 
 public class Foods
 {

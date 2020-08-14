@@ -9,7 +9,7 @@ import net.minecraft.item.crafting.SpecialRecipe;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import vectorwing.farmersdelight.init.ModRecipeSerializers;
+import vectorwing.farmersdelight.registry.ModRecipeSerializers;
 import vectorwing.farmersdelight.items.KnifeItem;
 
 import javax.annotation.Nonnull;

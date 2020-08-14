@@ -20,7 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.text.ITextComponent;
-import vectorwing.farmersdelight.init.ModTileEntityTypes;
+import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.Text;
 
 import javax.annotation.Nullable;

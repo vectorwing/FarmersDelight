@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.init;
+package vectorwing.farmersdelight.registry;
 
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;

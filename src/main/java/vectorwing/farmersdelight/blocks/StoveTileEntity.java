@@ -5,7 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
-import vectorwing.farmersdelight.init.ModTileEntityTypes;
+import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;

@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.init;
+package vectorwing.farmersdelight.registry;
 
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.blocks.BasketTileEntity;

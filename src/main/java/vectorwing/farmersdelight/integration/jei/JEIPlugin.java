@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.init.ModItems;
+import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.integration.jei.cooking.CookingRecipeCategory;
 
 import java.util.List;

@@ -6,7 +6,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.PlantType;
-import vectorwing.farmersdelight.init.ModBlocks;
+import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.utils.Utils;
 
 import java.util.Random;
