@@ -126,7 +126,7 @@ public class KnifeItem extends ToolItem
 	@Override
 	public boolean isRepairable(@Nonnull ItemStack stack)
 	{
-		return true;
+		return false;
 	}
 
 	public boolean isCustomRepairable(@Nonnull ItemStack stack)

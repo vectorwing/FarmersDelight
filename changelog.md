@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.1.5
+- Cooking Pot now allows optional container overrides at recipe .json level:
+  - Stuffed Pumpkin now uses that to have Pumpkins as containers;
+  - All vanilla bowl foods now use it to have bowls as containers (they have no container in code);
+  - Foods without containers in code or in .json just drop to output (e.g. Dumplings);
+- Spent some time "sharpening" the Knives:
+  - Fixed duplication bug when repairing them;
+  - Knives are now able to receive a selection of weapon and tool enchantments;
+  - Knives are now effective tools for cloth, cake and some plant materials;
+  - Knives now have an exclusive enchantment: Backstabbing!
+    - Multiplies damage when striking a mob from behind: 1.4x, 1.8x and 2.2x at levels I, II and III respectively;
+  - Knives now lose only 1 durability point when striking mobs;
+- Stove now has a cozy flame animation;
+- Fixed Sea Beets dropping an unfarmable Beetroot instead of their seeds.
+
 ## 0.1.4a
 - Fixes Crates lacking hardness and loot tables. Woops!
 
