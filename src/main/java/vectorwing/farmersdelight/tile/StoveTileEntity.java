@@ -1,10 +1,11 @@
-package vectorwing.farmersdelight.blocks;
+package vectorwing.farmersdelight.tile;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import vectorwing.farmersdelight.blocks.StoveBlock;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.inventory.*;

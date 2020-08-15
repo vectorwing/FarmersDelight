@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.blocks;
+package vectorwing.farmersdelight.tile;
 
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.IHopper;

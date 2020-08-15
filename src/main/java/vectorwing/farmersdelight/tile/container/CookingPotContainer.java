@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.container;
+package vectorwing.farmersdelight.tile.container;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,7 +19,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.blocks.CookingPotTileEntity;
+import vectorwing.farmersdelight.tile.CookingPotTileEntity;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModContainerTypes;
 

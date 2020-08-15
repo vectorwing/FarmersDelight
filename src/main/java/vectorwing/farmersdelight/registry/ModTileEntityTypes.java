@@ -1,9 +1,9 @@
 package vectorwing.farmersdelight.registry;
 
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.blocks.BasketTileEntity;
-import vectorwing.farmersdelight.blocks.CookingPotTileEntity;
-import vectorwing.farmersdelight.blocks.StoveTileEntity;
+import vectorwing.farmersdelight.tile.BasketTileEntity;
+import vectorwing.farmersdelight.tile.CookingPotTileEntity;
+import vectorwing.farmersdelight.tile.StoveTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.blocks;
+package vectorwing.farmersdelight.tile;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
@@ -28,11 +28,11 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
-import vectorwing.farmersdelight.blocks.inventory.CookingPotItemHandler;
-import vectorwing.farmersdelight.container.CookingPotContainer;
+import vectorwing.farmersdelight.blocks.CookingPotBlock;
+import vectorwing.farmersdelight.tile.inventory.CookingPotItemHandler;
+import vectorwing.farmersdelight.tile.container.CookingPotContainer;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
-import vectorwing.farmersdelight.utils.ForgeTags;
 import vectorwing.farmersdelight.utils.ModTags;
 import vectorwing.farmersdelight.utils.Text;
 

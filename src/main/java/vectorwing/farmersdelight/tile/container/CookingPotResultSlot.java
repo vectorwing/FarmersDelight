@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.container;
+package vectorwing.farmersdelight.tile.container;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;

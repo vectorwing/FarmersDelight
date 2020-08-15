@@ -2,7 +2,7 @@ package vectorwing.farmersdelight.client.tileentity.renderer;
 
 import net.minecraft.client.renderer.WorldRenderer;
 import vectorwing.farmersdelight.blocks.StoveBlock;
-import vectorwing.farmersdelight.blocks.StoveTileEntity;
+import vectorwing.farmersdelight.tile.StoveTileEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;

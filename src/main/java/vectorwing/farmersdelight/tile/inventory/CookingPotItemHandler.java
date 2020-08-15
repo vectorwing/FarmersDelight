@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.blocks.inventory;
+package vectorwing.farmersdelight.tile.inventory;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;

@@ -6,7 +6,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.container.CookingPotContainer;
+import vectorwing.farmersdelight.tile.container.CookingPotContainer;
 
 public class ModContainerTypes
 {

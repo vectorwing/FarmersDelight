@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.container;
+package vectorwing.farmersdelight.tile.container;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
