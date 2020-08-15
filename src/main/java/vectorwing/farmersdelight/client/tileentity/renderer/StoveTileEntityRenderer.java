@@ -27,7 +27,7 @@ public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
 
 		for(int i = 0; i < nonnulllist.size(); ++i) {
 			ItemStack itemstack = nonnulllist.get(i);
-			if (itemstack != ItemStack.EMPTY) {
+			if (!itemstack.isEmpty()) {
 				matrixStackIn.push();
 
 				// Center item above the stove
