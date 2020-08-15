@@ -204,12 +204,6 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 		return ModTileEntityTypes.COOKING_POT_TILE.get().create();
 	}
 
-	@Override
-	public boolean canContainFluid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn)	{ return false;	}
-
-	@Override
-	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, IFluidState fluidStateIn) {	return false; }
-
 	public IFluidState getFluidState(BlockState state) {
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
 	}

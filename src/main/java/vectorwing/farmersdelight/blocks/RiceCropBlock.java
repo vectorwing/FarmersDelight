@@ -156,12 +156,6 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 		this.grow(worldIn, pos, state);
 	}
 
-	@Override
-	public boolean canContainFluid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn)	{ return false;	}
-
-	@Override
-	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, IFluidState fluidStateIn) {	return false; }
-
 	public IFluidState getFluidState(BlockState state) {
 		return Fluids.WATER.getStillFluidState(false);
 	}

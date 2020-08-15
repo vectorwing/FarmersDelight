@@ -211,7 +211,6 @@ public class TallRiceCropBlock extends BushBlock implements IWaterLoggable, IGro
 
 	@Override
 	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, IFluidState fluidStateIn) {
-		//return state.get(HALF) == DoubleBlockHalf.LOWER;
 		return true;
 	}
 

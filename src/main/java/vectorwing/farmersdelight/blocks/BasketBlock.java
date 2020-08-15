@@ -93,11 +93,6 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable
 		this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.UP).with(WATERLOGGED, false));
 	}
 
-	public BasketBlock(Block.Properties properties) {
-		super(properties);
-		this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.UP).with(WATERLOGGED, false));
-	}
-
 	private static VoxelShape cutout(VoxelShape... cutouts) {
 		VoxelShape shape = OUT_SHAPE;
 		for (VoxelShape cutout : cutouts) {
@@ -135,12 +130,6 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable
 			super.onReplaced(state, worldIn, pos, newState, isMoving);
 		}
 	}
-
-	@Override
-	public boolean canContainFluid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn)	{ return false;	}
-
-	@Override
-	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, IFluidState fluidStateIn) {	return false; }
 
 	public IFluidState getFluidState(BlockState state) {
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);

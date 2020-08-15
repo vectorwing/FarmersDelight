@@ -36,11 +36,6 @@ public class SafetyNetBlock extends Block implements IWaterLoggable
 		this.setDefaultState(this.getStateContainer().getBaseState().with(WATERLOGGED, false));
 	}
 
-	public SafetyNetBlock(Properties properties) {
-		super(properties);
-		this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false));
-	}
-
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(WATERLOGGED);
@@ -60,12 +55,6 @@ public class SafetyNetBlock extends Block implements IWaterLoggable
 
 		return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
-
-	@Override
-	public boolean canContainFluid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn)	{ return false;	}
-
-	@Override
-	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, IFluidState fluidStateIn) {	return false; }
 
 	public IFluidState getFluidState(BlockState state) {
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
