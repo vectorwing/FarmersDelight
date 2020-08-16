@@ -1,0 +1,22 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:saddle"
+    }
+  ],
+  "tool": {
+    "item": "minecraft:shears"
+  },
+  "result": [
+    {
+      "item": "minecraft:leather",
+      "count": 2
+    },
+    {
+      "item": "minecraft:tripwire_hook",
+      "count": 2
+    }
+  ],
+  "effort": 2
+}

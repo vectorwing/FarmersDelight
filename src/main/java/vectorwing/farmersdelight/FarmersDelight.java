@@ -6,6 +6,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
+import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.registry.*;
 import vectorwing.farmersdelight.setup.ClientEventHandler;
 import vectorwing.farmersdelight.setup.CommonEventHandler;
@@ -53,5 +54,7 @@ public class FarmersDelight
     {
         Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(FarmersDelight.MODID, "cooking"), CookingPotRecipe.TYPE);
         event.getRegistry().register(CookingPotRecipe.SERIALIZER);
+        Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(FarmersDelight.MODID, "cutting"), CuttingBoardRecipe.TYPE);
+        event.getRegistry().register(CuttingBoardRecipe.SERIALIZER);
     }
 }

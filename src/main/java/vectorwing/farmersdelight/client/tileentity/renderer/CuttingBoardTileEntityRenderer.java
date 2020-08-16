@@ -20,7 +20,7 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 	public void render(CuttingBoardTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn)
 	{
 		Direction direction = tileEntityIn.getBlockState().get(CuttingBoardBlock.FACING).getOpposite();
-		ItemStack itemStack = tileEntityIn.getItem();
+		ItemStack itemStack = tileEntityIn.getStoredItem();
 
 		if (!itemStack.isEmpty()) {
 			matrixStackIn.push();

@@ -1,0 +1,22 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:oak_log"
+    }
+  ],
+  "tool": {
+    "item": "minecraft:iron_axe"
+  },
+  "result": [
+    {
+      "item": "minecraft:stripped_oak_log",
+      "count": 1
+    },
+    {
+      "item": "farmersdelight:tree_bark",
+      "count": 1
+    }
+  ],
+  "effort": 1
+}

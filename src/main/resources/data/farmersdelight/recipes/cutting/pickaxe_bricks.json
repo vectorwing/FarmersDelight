@@ -1,0 +1,18 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:bricks"
+    }
+  ],
+  "tool": {
+    "item": "minecraft:iron_pickaxe"
+  },
+  "result": [
+    {
+      "item": "minecraft:brick",
+      "count": 4
+    }
+  ],
+  "effort": 1
+}
