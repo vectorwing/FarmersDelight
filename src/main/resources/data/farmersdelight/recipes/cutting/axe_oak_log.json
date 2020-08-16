@@ -6,7 +6,7 @@
     }
   ],
   "tool": {
-    "item": "minecraft:iron_axe"
+    "tag": "forge:tools/axe"
   },
   "result": [
     {

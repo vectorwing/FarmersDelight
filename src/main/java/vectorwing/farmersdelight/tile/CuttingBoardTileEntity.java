@@ -13,7 +13,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
-import vectorwing.farmersdelight.blocks.CookingPotBlock;
+import vectorwing.farmersdelight.blocks.CuttingBoardBlock;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 
@@ -56,7 +56,7 @@ public class CuttingBoardTileEntity extends TileEntity
 		if (irecipe != null && irecipe.getTool().test(tool)) {
 			NonNullList<ItemStack> results = this.getResults();
 			for (ItemStack result : results) {
-				Direction direction = this.getBlockState().get(CookingPotBlock.FACING).rotateYCCW();
+				Direction direction = this.getBlockState().get(CuttingBoardBlock.FACING).rotateYCCW();
 				ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5 + (direction.getXOffset() * 0.2), pos.getY() + 0.2, pos.getZ() + 0.5 + (direction.getZOffset() * 0.2), result.copy());
 				entity.setMotion(direction.getXOffset() * 0.2F, 0.0F, direction.getZOffset() * 0.2F);
 				world.addEntity(entity);

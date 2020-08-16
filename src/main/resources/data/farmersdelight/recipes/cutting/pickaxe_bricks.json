@@ -6,7 +6,7 @@
     }
   ],
   "tool": {
-    "item": "minecraft:iron_pickaxe"
+    "tag": "forge:tools/pickaxe"
   },
   "result": [
     {

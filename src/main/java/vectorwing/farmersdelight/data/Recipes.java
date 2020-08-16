@@ -1,5 +1,7 @@
 package vectorwing.farmersdelight.data;
 
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
@@ -12,6 +14,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.utils.ForgeTags;
+import vectorwing.farmersdelight.utils.ModTags;
 
 import java.util.function.Consumer;
 
@@ -31,7 +34,6 @@ public class Recipes extends RecipeProvider
 		recipesMaterials(consumer);
 		recipesFoodstuffs(consumer);
 		recipesCraftedMeals(consumer);
-		//recipesCookedMeals(consumer);
 	}
 
 	private void foodSmeltingRecipes(String name, IItemProvider ingredient, IItemProvider result, float experience, int cookingTime, Consumer<IFinishedRecipe> consumer) {
@@ -138,6 +140,14 @@ public class Recipes extends RecipeProvider
 				.key('b', Items.BAMBOO)
 				.key('#', ModItems.CANVAS.get())
 				.addCriterion("canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModBlocks.CUTTING_BOARD.get())
+				.patternLine(" K ")
+				.patternLine("/##")
+				.key('K', ModTags.KNIVES)
+				.key('/', Items.STICK)
+				.key('#', ItemTags.PLANKS)
+				.addCriterion("stick", InventoryChangeTrigger.Instance.forItems(Items.STICK))
 				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ModItems.ROPE.get(), 3)
 				.patternLine("s")

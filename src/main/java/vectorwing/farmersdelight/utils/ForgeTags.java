@@ -22,7 +22,7 @@ public class ForgeTags
 	public static final Tag<Item> CROPS_ONION = forgeItemTag("crops/onion");
 	public static final Tag<Item> CROPS_RICE = forgeItemTag("crops/rice");
 
-	public static final Tag<Item> KNIVES = forgeItemTag("knives");
+	public static final Tag<Item> KNIVES = forgeItemTag("tools/knife");
 
 	private static Tag<Item> forgeItemTag(String path) {
 		return new ItemTags.Wrapper(new ResourceLocation("forge", path));

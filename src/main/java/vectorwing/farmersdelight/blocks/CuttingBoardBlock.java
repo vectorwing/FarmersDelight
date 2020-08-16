@@ -57,10 +57,9 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 			ItemStack itemOffhand = player.getHeldItemOffhand();
 
 			// Placing items on the board. It should prefer off-hand placement, unless it's a BlockItem (since it never passes to off-hand...)
-			if (cuttingBoardTE.isEmpty())
-			{
+			if (cuttingBoardTE.isEmpty()) {
 				if (!itemOffhand.isEmpty() && handIn.equals(Hand.MAIN_HAND) && !(itemHeld.getItem() instanceof BlockItem)) {
-					return ActionResultType.PASS;
+					return ActionResultType.PASS; // main-hand passes to off-hand
 				}
 				if (itemHeld.isEmpty())	{
 					return ActionResultType.PASS;
@@ -73,33 +72,34 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 			} else if (!itemHeld.isEmpty()) {
 				ItemStack boardItem = cuttingBoardTE.getStoredItem().copy();
 				if (cuttingBoardTE.processItemUsingTool(itemHeld, player)) {
-					if (itemHeld.getItem() instanceof ShearsItem) {
-						worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
-					} else if (boardItem.getItem() instanceof BlockItem) {
-						Block block = ((BlockItem) boardItem.getItem()).getBlock();
-						if (block instanceof LogBlock) {
-							worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 0.9F, 0.8F);
-						} else {
-							SoundType sound = block.getSoundType(block.getDefaultState());
-							worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), sound.getBreakSound(), SoundCategory.BLOCKS, 1.0F, 0.8F);
-						}
-					}
-					return ActionResultType.SUCCESS;
+					this.playProcessingSound(worldIn, pos, itemHeld, boardItem);
 				} else {
 					if (!player.isCreative()) {
 						InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), cuttingBoardTE.removeItem());
 					} else {
 						cuttingBoardTE.removeItem();
-						worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_HIT, SoundCategory.BLOCKS, 0.25F, 0.5F);
 					}
-					return ActionResultType.SUCCESS;
+					worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_HIT, SoundCategory.BLOCKS, 0.25F, 0.5F);
 				}
-
-			// Removing the item from the board
+				return ActionResultType.SUCCESS;
 			}
 
 		}
 		return ActionResultType.PASS;
+	}
+
+	public void playProcessingSound(World worldIn, BlockPos pos, ItemStack toolStack, ItemStack boardStack) {
+		if (toolStack.getItem() instanceof ShearsItem) {
+			worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
+		} else if (boardStack.getItem() instanceof BlockItem) {
+			Block block = ((BlockItem) boardStack.getItem()).getBlock();
+			if (block instanceof LogBlock) {
+				worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 0.9F, 0.8F);
+			} else {
+				SoundType sound = block.getSoundType(block.getDefaultState());
+				worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), sound.getBreakSound(), SoundCategory.BLOCKS, 1.0F, 0.8F);
+			}
+		}
 	}
 
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {

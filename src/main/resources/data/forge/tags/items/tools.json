@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:tools/pickaxe",
+    "#forge:tools/axe",
+    "#forge:tools/shovel",
+    "#forge:tools/shears",
+    "#forge:tools/knife"
+  ]
+}
