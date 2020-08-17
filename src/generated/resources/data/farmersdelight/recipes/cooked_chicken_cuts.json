@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "farmersdelight:chicken_cuts"
+  },
+  "result": "farmersdelight:cooked_chicken_cuts",
+  "experience": 0.35,
+  "cookingtime": 200
+}

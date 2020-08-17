@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:cooked_salmon_slice_from_campfire_cooking"
+    ]
+  },
+  "criteria": {
+    "cooked_salmon_slice": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:salmon_slice"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:cooked_salmon_slice_from_campfire_cooking"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "cooked_salmon_slice",
+      "has_the_recipe"
+    ]
+  ]
+}

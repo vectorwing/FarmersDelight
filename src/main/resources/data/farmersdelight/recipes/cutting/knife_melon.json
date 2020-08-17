@@ -1,0 +1,18 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:melon"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knife"
+  },
+  "result": [
+    {
+      "item": "minecraft:melon_slice",
+      "count": 9
+    }
+  ],
+  "effort": 1
+}

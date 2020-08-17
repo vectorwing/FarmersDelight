@@ -111,6 +111,10 @@ public class Advancements extends AdvancementProvider
 					.withCriterion("cooking_pot", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.COOKING_POT.get()))
 					.register(consumer, getNameId("main/place_cooking_pot"));
 
+			Advancement watchYourFingers = getAdvancement(fireUpTheGrill, ModItems.CUTTING_BOARD.get(), "place_cutting_board", FrameType.TASK, true, true, false)
+					.withCriterion("cutting_board", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.CUTTING_BOARD.get()))
+					.register(consumer, getNameId("main/place_cutting_board"));
+
 			Advancement masterChef = getAdvancement(dinnerIsServed, ModItems.PASTA_WITH_MEATBALLS.get(), "master_chef", FrameType.CHALLENGE, true, true, false)
 					.withCriterion("mixed_salad", ConsumeItemTrigger.Instance.forItem(ModItems.MIXED_SALAD.get()))
 					.withCriterion("beef_stew", ConsumeItemTrigger.Instance.forItem(ModItems.BEEF_STEW.get()))

@@ -24,6 +24,24 @@ public class Foods
 			.hunger(2).saturation(0.1f).fastToEat().build();
 	public static final Food COOKIES = (new Food.Builder())
 			.hunger(2).saturation(0.1f).fastToEat().build();
+	public static final Food PUMPKIN_SLICE = (new Food.Builder())
+			.hunger(3).saturation(0.3f).build();
+	public static final Food MINCED_BEEF = (new Food.Builder())
+			.hunger(2).saturation(0.2f).build();
+	public static final Food BEEF_PATTY = (new Food.Builder())
+			.hunger(4).saturation(0.5f).build();
+	public static final Food CHICKEN_CUTS = (new Food.Builder())
+			.hunger(3).saturation(0.4f).build();
+	public static final Food COOKED_CHICKEN_CUTS = (new Food.Builder())
+			.hunger(2).saturation(0.1f).build();
+	public static final Food COD_SLICE = (new Food.Builder())
+			.hunger(1).saturation(0.1f).build();
+	public static final Food COOKED_COD_SLICE = (new Food.Builder())
+			.hunger(3).saturation(0.3f).build();
+	public static final Food SALMON_SLICE = (new Food.Builder())
+			.hunger(1).saturation(0.1f).build();
+	public static final Food COOKED_SALMON_SLICE = (new Food.Builder())
+			.hunger(3).saturation(0.4f).build();
 
 	// Handheld Foods
 	public static final Food MIXED_SALAD = (new Food.Builder())

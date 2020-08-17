@@ -91,6 +91,24 @@ public class ModItems
 			() -> new MealItem(new Item.Properties().food(Foods.TOMATO_SAUCE).containerItem(Items.BOWL).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> RAW_PASTA = ITEMS.register("raw_pasta",
 			() -> new Item(new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> PUMPKIN_SLICE = ITEMS.register("pumpkin_slice",
+			() -> new Item(new Item.Properties().food(Foods.PUMPKIN_SLICE).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> MINCED_BEEF = ITEMS.register("minced_beef",
+			() -> new Item(new Item.Properties().food(Foods.MINCED_BEEF).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> BEEF_PATTY = ITEMS.register("beef_patty",
+			() -> new Item(new Item.Properties().food(Foods.BEEF_PATTY).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> CHICKEN_CUTS = ITEMS.register("chicken_cuts",
+			() -> new Item(new Item.Properties().food(Foods.CHICKEN_CUTS).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> COOKED_CHICKEN_CUTS = ITEMS.register("cooked_chicken_cuts",
+			() -> new Item(new Item.Properties().food(Foods.COOKED_CHICKEN_CUTS).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> COD_SLICE = ITEMS.register("cod_slice",
+			() -> new Item(new Item.Properties().food(Foods.COD_SLICE).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> COOKED_COD_SLICE = ITEMS.register("cooked_cod_slice",
+			() -> new Item(new Item.Properties().food(Foods.COOKED_COD_SLICE).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> SALMON_SLICE = ITEMS.register("salmon_slice",
+			() -> new Item(new Item.Properties().food(Foods.SALMON_SLICE).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> COOKED_SALMON_SLICE = ITEMS.register("cooked_salmon_slice",
+			() -> new Item(new Item.Properties().food(Foods.COOKED_SALMON_SLICE).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> CAKE_SLICE = ITEMS.register("cake_slice",
 			() -> new Item(new Item.Properties().food(Foods.CAKE_SLICE).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> SWEET_BERRY_COOKIE = ITEMS.register("sweet_berry_cookie",

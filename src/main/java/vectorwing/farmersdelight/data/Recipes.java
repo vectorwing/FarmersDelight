@@ -36,7 +36,7 @@ public class Recipes extends RecipeProvider
 		recipesCraftedMeals(consumer);
 	}
 
-	private void foodSmeltingRecipes(String name, IItemProvider ingredient, IItemProvider result, float experience, int cookingTime, Consumer<IFinishedRecipe> consumer) {
+	private void foodSmeltingRecipes(String name, IItemProvider ingredient, IItemProvider result, float experience, Consumer<IFinishedRecipe> consumer) {
 		String namePrefix = new ResourceLocation(FarmersDelight.MODID, name).toString();
 		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ingredient),
 				result, experience, 200)
@@ -80,6 +80,12 @@ public class Recipes extends RecipeProvider
 				.key('c', ModItems.CANVAS.get())
 				.addCriterion("canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
 				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "painting_from_canvas"));
+		ShapedRecipeBuilder.shapedRecipe(Items.PUMPKIN)
+				.patternLine("##")
+				.patternLine("##")
+				.key('#', ModItems.PUMPKIN_SLICE.get())
+				.addCriterion("pumpkin_slice", InventoryChangeTrigger.Instance.forItems(ModItems.PUMPKIN_SLICE.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "pumpkin_from_slices"));
 		ShapedRecipeBuilder.shapedRecipe(Items.CAKE)
 				.patternLine("mmm")
 				.patternLine("ses")
@@ -110,7 +116,11 @@ public class Recipes extends RecipeProvider
 	}
 
 	private void recipesSmelting(Consumer<IFinishedRecipe> consumer) {
-		foodSmeltingRecipes("fried_egg", Items.EGG, ModItems.FRIED_EGG.get(), 0.35F, 200, consumer);
+		foodSmeltingRecipes("fried_egg", Items.EGG, ModItems.FRIED_EGG.get(), 0.35F, consumer);
+		foodSmeltingRecipes("beef_patty", ModItems.MINCED_BEEF.get(), ModItems.BEEF_PATTY.get(), 0.35F, consumer);
+		foodSmeltingRecipes("cooked_chicken_cuts", ModItems.CHICKEN_CUTS.get(), ModItems.COOKED_CHICKEN_CUTS.get(), 0.35F, consumer);
+		foodSmeltingRecipes("cooked_cod_slice", ModItems.COD_SLICE.get(), ModItems.COOKED_COD_SLICE.get(), 0.35F, consumer);
+		foodSmeltingRecipes("cooked_salmon_slice", ModItems.SALMON_SLICE.get(), ModItems.COOKED_SALMON_SLICE.get(), 0.35F, consumer);
 	}
 
 	private void recipesBlocks(Consumer<IFinishedRecipe> consumer) {
