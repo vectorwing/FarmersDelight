@@ -13,6 +13,8 @@ public class ModSounds
 
 	public static final RegistryObject<SoundEvent> BLOCK_COOKING_POT_BOIL = SOUNDS.register("block.cooking_pot.boil",
 			() -> new SoundEvent(new ResourceLocation(FarmersDelight.MODID, "block.cooking_pot.boil")));
+	public static final RegistryObject<SoundEvent> BLOCK_CUTTING_BOARD_KNIFE = SOUNDS.register("block.cutting_board.knife",
+			() -> new SoundEvent(new ResourceLocation(FarmersDelight.MODID, "block.cutting_board.knife")));
 	public static final RegistryObject<SoundEvent> BLOCK_STOVE_CRACKLE = SOUNDS.register("block.stove.crackle",
 			() -> new SoundEvent(new ResourceLocation(FarmersDelight.MODID, "block.stove.crackle")));
 }

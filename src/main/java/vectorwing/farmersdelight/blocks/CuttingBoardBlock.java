@@ -10,6 +10,8 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShearsItem;
+import net.minecraft.particles.ItemParticleData;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
@@ -18,12 +20,16 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+import vectorwing.farmersdelight.items.KnifeItem;
+import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.tile.CuttingBoardTileEntity;
 
@@ -67,15 +73,16 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 					worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F);
 					return ActionResultType.SUCCESS;
 				}
-
-			// Processing the item with a held tool
+			// Processing the item with the held tool
 			} else if (!itemHeld.isEmpty()) {
 				ItemStack boardItem = cuttingBoardTE.getStoredItem().copy();
 				if (cuttingBoardTE.processItemUsingTool(itemHeld, player)) {
+					this.spawnCuttingParticles(worldIn, pos, player, boardItem, 5);
 					this.playProcessingSound(worldIn, pos, itemHeld, boardItem);
 					return ActionResultType.SUCCESS;
 				}
 				return ActionResultType.PASS;
+			// Removing the board's item
 			} else if (handIn.equals(Hand.MAIN_HAND)) {
 				if (!player.isCreative()) {
 					InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), cuttingBoardTE.removeItem());
@@ -90,9 +97,12 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 		return ActionResultType.PASS;
 	}
 
+	// TODO: I am 100% sure there is a less cluttered way to pull off conditional sounds. If you're reading this, please, HELP ME! :(
 	public void playProcessingSound(World worldIn, BlockPos pos, ItemStack toolStack, ItemStack boardStack) {
 		if (toolStack.getItem() instanceof ShearsItem) {
 			worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
+		} else if (toolStack.getItem() instanceof KnifeItem) {
+			worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), SoundCategory.BLOCKS, 0.8F, 1.0F);
 		} else if (boardStack.getItem() instanceof BlockItem) {
 			Block block = ((BlockItem) boardStack.getItem()).getBlock();
 			if (block instanceof LogBlock) {
@@ -100,6 +110,19 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 			} else {
 				SoundType sound = block.getSoundType(block.getDefaultState());
 				worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), sound.getBreakSound(), SoundCategory.BLOCKS, 1.0F, 0.8F);
+			}
+		} else {
+			worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_BREAK, SoundCategory.BLOCKS, 1.0F, 0.8F);
+		}
+	}
+
+	private void spawnCuttingParticles(World worldIn, BlockPos pos, PlayerEntity player, ItemStack stack, int count) {
+		for(int i = 0; i < count; ++i) {
+			Vec3d vec3d = new Vec3d(((double) worldIn.rand.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, ((double) worldIn.rand.nextFloat() - 0.5D) * 0.1D);
+			if (worldIn instanceof ServerWorld) {
+				((ServerWorld) worldIn).spawnParticle(new ItemParticleData(ParticleTypes.ITEM, stack), pos.getX() + 0.5F, pos.getY() + 0.1F, pos.getZ() + 0.5F, 1, vec3d.x, vec3d.y + 0.05D, vec3d.z, 0.0D);
+			} else {
+				worldIn.addParticle(new ItemParticleData(ParticleTypes.ITEM, stack), pos.getX() + 0.5F, pos.getY() + 0.1F, pos.getZ() + 0.5F, vec3d.x, vec3d.y + 0.05D, vec3d.z);
 			}
 		}
 	}

@@ -49,7 +49,7 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 		matrixStackIn.rotate(Vector3f.XP.rotationDegrees(90.0F));
 
 		// Resize the item
-		matrixStackIn.scale(0.5F, 0.5F, 0.5F);
+		matrixStackIn.scale(0.6F, 0.6F, 0.6F);
 	}
 
 	public void renderItemCarved(MatrixStack matrixStackIn, Direction direction, ItemStack itemStack) {
