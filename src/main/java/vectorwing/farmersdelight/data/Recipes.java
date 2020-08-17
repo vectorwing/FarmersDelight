@@ -355,14 +355,14 @@ public class Recipes extends RecipeProvider
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CHICKEN_SANDWICH.get())
 				.addIngredient(ForgeTags.BREAD)
-				.addIngredient(Items.COOKED_CHICKEN)
+				.addIngredient(ForgeTags.COOKED_CHICKEN)
 				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
 				.addIngredient(ForgeTags.CROPS_TOMATO)
 				.addCriterion("cooked_chicken", InventoryChangeTrigger.Instance.forItems(Items.COOKED_CHICKEN))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.HAMBURGER.get())
 				.addIngredient(ForgeTags.BREAD)
-				.addIngredient(Items.COOKED_BEEF)
+				.addIngredient(ModItems.BEEF_PATTY.get())
 				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
 				.addIngredient(ForgeTags.CROPS_TOMATO)
 				.addIngredient(ForgeTags.CROPS_ONION)
@@ -370,7 +370,7 @@ public class Recipes extends RecipeProvider
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.STUFFED_POTATO.get())
 				.addIngredient(Items.BAKED_POTATO)
-				.addIngredient(Items.COOKED_BEEF)
+				.addIngredient(ForgeTags.COOKED_BEEF)
 				.addIngredient(Items.CARROT)
 				.addIngredient(ForgeTags.MILK)
 				.addCriterion("baked_potato", InventoryChangeTrigger.Instance.forItems(Items.BAKED_POTATO))

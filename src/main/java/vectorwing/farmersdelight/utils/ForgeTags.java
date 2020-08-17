@@ -16,6 +16,8 @@ public class ForgeTags
 	public static final Tag<Item> MILK = forgeItemTag("milk");
 	public static final Tag<Item> BREAD = forgeItemTag("bread");
 	public static final Tag<Item> VEGETABLES = forgeItemTag("vegetables");
+	public static final Tag<Item> COOKED_BEEF = forgeItemTag("cooked_beef");
+	public static final Tag<Item> COOKED_CHICKEN = forgeItemTag("cooked_chicken");
 	public static final Tag<Item> SALAD_INGREDIENTS = forgeItemTag("salad_ingredients");
 	public static final Tag<Item> CROPS_CABBAGE = forgeItemTag("crops/cabbage");
 	public static final Tag<Item> CROPS_TOMATO = forgeItemTag("crops/tomato");

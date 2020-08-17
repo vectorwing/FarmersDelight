@@ -2,7 +2,7 @@
   "type": "farmersdelight:cooking",
   "ingredients": [
     {
-      "item": "minecraft:cooked_beef"
+      "tag": "forge:raw_beef"
     },
     {
       "item": "minecraft:carrot"
@@ -13,6 +13,5 @@
   ],
   "result": {
     "item": "farmersdelight:beef_stew"
-  },
-  "cookingtime": 100
+  }
 }
