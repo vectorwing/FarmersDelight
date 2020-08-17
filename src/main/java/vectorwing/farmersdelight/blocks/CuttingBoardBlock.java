@@ -73,14 +73,16 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 				ItemStack boardItem = cuttingBoardTE.getStoredItem().copy();
 				if (cuttingBoardTE.processItemUsingTool(itemHeld, player)) {
 					this.playProcessingSound(worldIn, pos, itemHeld, boardItem);
-				} else {
-					if (!player.isCreative()) {
-						InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), cuttingBoardTE.removeItem());
-					} else {
-						cuttingBoardTE.removeItem();
-					}
-					worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_HIT, SoundCategory.BLOCKS, 0.25F, 0.5F);
+					return ActionResultType.SUCCESS;
 				}
+				return ActionResultType.PASS;
+			} else if (handIn.equals(Hand.MAIN_HAND)) {
+				if (!player.isCreative()) {
+					InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), cuttingBoardTE.removeItem());
+				} else {
+					cuttingBoardTE.removeItem();
+				}
+				worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_HIT, SoundCategory.BLOCKS, 0.25F, 0.5F);
 				return ActionResultType.SUCCESS;
 			}
 

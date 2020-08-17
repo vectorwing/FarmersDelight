@@ -19,12 +19,14 @@ import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 
 public class CuttingBoardTileEntity extends TileEntity
 {
+	private boolean isItemCarvingBoard;
 	private ItemStackHandler itemHandler = createHandler();
 	protected final IRecipeType<? extends CuttingBoardRecipe> recipeType;
 
 	public CuttingBoardTileEntity(TileEntityType<?> tileEntityTypeIn, IRecipeType<? extends CuttingBoardRecipe> recipeTypeIn) {
 		super(tileEntityTypeIn);
 		this.recipeType = recipeTypeIn;
+		this.isItemCarvingBoard = false;
 	}
 
 	public CuttingBoardTileEntity() { this(ModTileEntityTypes.CUTTING_BOARD_TILE.get(), CuttingBoardRecipe.TYPE); }
@@ -32,6 +34,7 @@ public class CuttingBoardTileEntity extends TileEntity
 	@Override
 	public void read(CompoundNBT compound) {
 		super.read(compound);
+		this.isItemCarvingBoard = compound.getBoolean("IsItemCarved");
 		this.itemHandler.deserializeNBT(compound.getCompound("Inventory"));
 	}
 
@@ -39,6 +42,7 @@ public class CuttingBoardTileEntity extends TileEntity
 	public CompoundNBT write(CompoundNBT compound) {
 		super.write(compound);
 		compound.put("Inventory", itemHandler.serializeNBT());
+		compound.putBoolean("IsItemCarved", this.isItemCarvingBoard);
 		return compound;
 	}
 
@@ -77,6 +81,23 @@ public class CuttingBoardTileEntity extends TileEntity
 
 	// ======== ITEM HANDLING ========
 
+	/**
+	 * Places the given stack on the board, but carved into it instead of laying on top.
+	 * This is purely for decoration purposes; the item can still be processed.
+	 * Ideally, the caller checks if the item is a damageable tool first.
+	 */
+	public boolean carveToolOnBoard(ItemStack tool) {
+		if (this.addItem(tool)) {
+			this.isItemCarvingBoard = true;
+			return true;
+		}
+		return false;
+	}
+
+	public boolean getIsItemCarvingBoard() {
+		return this.isItemCarvingBoard;
+	}
+
 	public IItemHandler getInventory() {
 		return this.itemHandler;
 	}
@@ -92,6 +113,7 @@ public class CuttingBoardTileEntity extends TileEntity
 	public boolean addItem(ItemStack itemStack) {
 		if (this.isEmpty() && !itemStack.isEmpty()) {
 			this.itemHandler.setStackInSlot(0, itemStack.split(1));
+			this.isItemCarvingBoard = false;
 			return true;
 		}
 		return false;
@@ -99,6 +121,7 @@ public class CuttingBoardTileEntity extends TileEntity
 
 	public ItemStack removeItem() {
 		if (!this.isEmpty()) {
+			this.isItemCarvingBoard = false;
 			return this.getStoredItem().split(1);
 		}
 		return ItemStack.EMPTY;
@@ -118,6 +141,4 @@ public class CuttingBoardTileEntity extends TileEntity
 			}
 		};
 	}
-
-
 }
