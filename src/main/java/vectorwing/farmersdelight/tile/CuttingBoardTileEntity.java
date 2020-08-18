@@ -6,16 +6,21 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.blocks.CuttingBoardBlock;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+
+import javax.annotation.Nullable;
 
 public class CuttingBoardTileEntity extends TileEntity
 {
@@ -46,6 +51,30 @@ public class CuttingBoardTileEntity extends TileEntity
 		return compound;
 	}
 
+	@Nullable
+	public SUpdateTileEntityPacket getUpdatePacket() {
+		return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
+	}
+
+	public CompoundNBT getUpdateTag() {
+		return this.write(new CompoundNBT());
+	}
+
+	@Override
+	public void handleUpdateTag(CompoundNBT tag) {
+		this.read(tag);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+		this.read(pkt.getNbtCompound());
+	}
+
+	private void inventoryChanged() {
+		super.markDirty();
+		this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
+	}
+
 	// ======== RECIPE PROCESSING ========
 
 	/**
@@ -69,6 +98,7 @@ public class CuttingBoardTileEntity extends TileEntity
 				user.sendBreakAnimation(EquipmentSlotType.MAINHAND);
 			});
 			this.removeItem();
+			this.inventoryChanged();
 			return true;
 		}
 
@@ -114,6 +144,7 @@ public class CuttingBoardTileEntity extends TileEntity
 		if (this.isEmpty() && !itemStack.isEmpty()) {
 			this.itemHandler.setStackInSlot(0, itemStack.split(1));
 			this.isItemCarvingBoard = false;
+			this.inventoryChanged();
 			return true;
 		}
 		return false;
@@ -122,6 +153,7 @@ public class CuttingBoardTileEntity extends TileEntity
 	public ItemStack removeItem() {
 		if (!this.isEmpty()) {
 			this.isItemCarvingBoard = false;
+			this.inventoryChanged();
 			return this.getStoredItem().split(1);
 		}
 		return ItemStack.EMPTY;
