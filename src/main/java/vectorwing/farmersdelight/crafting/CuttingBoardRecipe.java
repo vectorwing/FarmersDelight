@@ -54,6 +54,13 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 		return nonnulllist;
 	}
 
+	public NonNullList<Ingredient> getIngredientsAndTool() {
+		NonNullList<Ingredient> nonnulllist = NonNullList.create();
+		nonnulllist.add(this.input);
+		nonnulllist.add(this.tool);
+		return nonnulllist;
+	}
+
 	public Ingredient getTool() {
 		return this.tool;
 	}

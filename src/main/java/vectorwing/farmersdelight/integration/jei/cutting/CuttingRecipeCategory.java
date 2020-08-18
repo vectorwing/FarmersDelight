@@ -13,6 +13,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 
 import java.util.Arrays;
@@ -23,12 +24,14 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 	private final String title;
 	private final IDrawable background;
 	private final IDrawable icon;
+	private final CuttingBoardModel cuttingBoard;
 
 	public CuttingRecipeCategory(IGuiHelper helper) {
 		title = I18n.format(FarmersDelight.MODID + ".jei.cutting");
 		ResourceLocation backgroundImage = new ResourceLocation(FarmersDelight.MODID, "textures/gui/jei/cutting_board.png");
 		background = helper.createDrawable(backgroundImage, 0, 0, 117, 57);
 		icon = helper.createDrawableIngredient(new ItemStack(ModItems.CUTTING_BOARD.get()));
+		cuttingBoard = new CuttingBoardModel(() -> new ItemStack(ModBlocks.CUTTING_BOARD.get()));
 	}
 
 	@Override
@@ -64,7 +67,7 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 	@Override
 	public void setIngredients(CuttingBoardRecipe cuttingBoardRecipe, IIngredients ingredients)
 	{
-		ingredients.setInputIngredients(cuttingBoardRecipe.getIngredients());
+		ingredients.setInputIngredients(cuttingBoardRecipe.getIngredientsAndTool());
 		ingredients.setOutputs(VanillaTypes.ITEM, cuttingBoardRecipe.getResults());
 	}
 
@@ -96,5 +99,10 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 				}
 			}
 		}
+	}
+
+	@Override
+	public void draw(CuttingBoardRecipe recipe, double mouseX, double mouseY) {
+		cuttingBoard.draw(15, 19);
 	}
 }
