@@ -127,6 +127,8 @@
 
   "block.cooking_pot.boil": "Cooking Pot Boil",
   "block.cooking_pot.boil.subtitles": "Cooking Pot boils",
+  "block.cutting_board.knife": "Knife Cut",
+  "block.cutting_board.knife.subtitles": "Knife cuts",
   "block.stove.crackle": "Stove Crackle",
   "block.stove.crackle.subtitles": "Stove crackles",
 
