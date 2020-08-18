@@ -16,7 +16,7 @@ import net.minecraft.util.IntArray;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.tile.CookingPotTileEntity;
@@ -30,7 +30,7 @@ public class CookingPotContainer extends Container
 	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "items/empty_container_slot_bowl");
 
 	public final CookingPotTileEntity tileEntity;
-	public final IItemHandler inventoryHandler;
+	public final ItemStackHandler inventoryHandler;
 	private final IIntArray cookingPotData;
 	private final IWorldPosCallable canInteractWithCallable;
 

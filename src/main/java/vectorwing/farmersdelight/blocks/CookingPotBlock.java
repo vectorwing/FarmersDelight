@@ -41,6 +41,7 @@ import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.tile.CookingPotTileEntity;
 import vectorwing.farmersdelight.utils.ModTags;
 import vectorwing.farmersdelight.utils.Text;
+import vectorwing.farmersdelight.utils.Utils;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -191,6 +192,18 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 				worldIn.playSound(d0, d1, d2, ModSounds.BLOCK_COOKING_POT_BOIL.get(), SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.2F + 0.9F, false);
 			}
 		}
+	}
+
+	public boolean hasComparatorInputOverride(BlockState state) {
+		return true;
+	}
+
+	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
+		if (worldIn.getTileEntity(pos) instanceof CookingPotTileEntity) {
+			ItemStackHandler inventory = ((CookingPotTileEntity) worldIn.getTileEntity(pos)).getInventory();
+			return Utils.calcRedstoneFromItemHandler(inventory);
+		}
+		return 0;
 	}
 
 	@Override

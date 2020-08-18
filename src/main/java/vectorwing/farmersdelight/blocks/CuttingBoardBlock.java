@@ -132,6 +132,7 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 			TileEntity tileentity = worldIn.getTileEntity(pos);
 			if (tileentity instanceof CuttingBoardTileEntity) {
 				InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), ((CuttingBoardTileEntity)tileentity).getStoredItem());
+				worldIn.updateComparatorOutputLevel(pos, this);
 			}
 
 			super.onReplaced(state, worldIn, pos, newState, isMoving);
@@ -171,6 +172,18 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 
 	public IFluidState getFluidState(BlockState state) {
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+	}
+
+	public boolean hasComparatorInputOverride(BlockState state) {
+		return true;
+	}
+
+	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
+		if (worldIn.getTileEntity(pos) instanceof CuttingBoardTileEntity) {
+			ItemStack boardItem = ((CuttingBoardTileEntity) worldIn.getTileEntity(pos)).getStoredItem();
+			return !boardItem.isEmpty() ? 15 : 0;
+		}
+		return 0;
 	}
 
 	@Override

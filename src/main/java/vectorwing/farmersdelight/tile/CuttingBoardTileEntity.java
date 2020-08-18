@@ -153,8 +153,9 @@ public class CuttingBoardTileEntity extends TileEntity
 	public ItemStack removeItem() {
 		if (!this.isEmpty()) {
 			this.isItemCarvingBoard = false;
+			ItemStack item = this.getStoredItem().split(1);
 			this.inventoryChanged();
-			return this.getStoredItem().split(1);
+			return item;
 		}
 		return ItemStack.EMPTY;
 	}

@@ -400,7 +400,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		}
 	}
 
-	public IItemHandler getInventory() {
+	public ItemStackHandler getInventory() {
 		return this.itemHandler;
 	}
 
