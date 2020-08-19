@@ -6,10 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ShearsItem;
+import net.minecraft.item.*;
 import net.minecraft.particles.ItemParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
@@ -28,6 +25,10 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.items.KnifeItem;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
@@ -196,5 +197,28 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 	public TileEntity createTileEntity(BlockState state, IBlockReader world)
 	{
 		return ModTileEntityTypes.CUTTING_BOARD_TILE.get().create();
+	}
+
+	@Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+	public static class ToolCarvingEvent {
+		@SubscribeEvent
+		public static void onSneakPlaceTool(PlayerInteractEvent.RightClickBlock event) {
+			World world = event.getWorld();
+			BlockPos pos = event.getPos();
+			PlayerEntity player = event.getPlayer();
+			ItemStack heldItem = player.getHeldItemMainhand();
+			if (player.isSecondaryUseActive() && !heldItem.isEmpty() && world.getTileEntity(event.getPos()) instanceof CuttingBoardTileEntity) {
+				if (heldItem.getItem() instanceof TieredItem ||
+					heldItem.getItem() instanceof TridentItem ||
+					heldItem.getItem() instanceof ShearsItem) {
+					boolean success = ((CuttingBoardTileEntity) world.getTileEntity(event.getPos())).carveToolOnBoard(player.abilities.isCreativeMode ? heldItem.copy() : heldItem);
+					if (success) {
+						world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F);
+						event.setCanceled(true);
+						event.setCancellationResult(ActionResultType.SUCCESS);
+					}
+				}
+			}
+		}
 	}
 }

@@ -54,7 +54,7 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 
 	public void renderItemCarved(MatrixStack matrixStackIn, Direction direction, ItemStack itemStack) {
 		// Center item above the cutting board
-		matrixStackIn.translate(0.5D, 0.22D, 0.5D);
+		matrixStackIn.translate(0.5D, 0.25D, 0.5D);
 
 		// Rotate item to face the cutting board's front side
 		float f = -direction.getHorizontalAngle();
@@ -64,6 +64,6 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 		matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(itemStack.getItem() instanceof PickaxeItem ? 225.0F : 180.0F));
 
 		// Resize the item
-		matrixStackIn.scale(0.5F, 0.5F, 0.5F);
+		matrixStackIn.scale(0.6F, 0.6F, 0.6F);
 	}
 }
