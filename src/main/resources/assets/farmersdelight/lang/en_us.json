@@ -2,6 +2,7 @@
   "block.farmersdelight.stove": "Stove",
   "block.farmersdelight.cooking_pot": "Cooking Pot",
   "block.farmersdelight.basket": "Basket",
+  "block.farmersdelight.cutting_board": "Cutting Board",
   "block.farmersdelight.rope": "Rope",
   "block.farmersdelight.safety_net": "Safety Net",
   "block.farmersdelight.organic_compost": "Organic Compost",
@@ -39,6 +40,16 @@
   "item.farmersdelight.milk_bottle": "Milk Bottle",
   "item.farmersdelight.hot_cocoa": "Hot Cocoa",
   "item.farmersdelight.raw_pasta": "Raw Pasta",
+  "item.farmersdelight.pumpkin_slice": "Pumpkin Slice",
+  "item.farmersdelight.minced_beef": "Minced Beef",
+  "item.farmersdelight.beef_patty": "Beef Patty",
+  "item.farmersdelight.chicken_cuts": "Raw Chicken Cuts",
+  "item.farmersdelight.cooked_chicken_cuts": "Cooked Chicken Cuts",
+  "item.farmersdelight.cod_slice": "Raw Cod Slice",
+  "item.farmersdelight.cooked_cod_slice": "Cooked Cod Slice",
+  "item.farmersdelight.salmon_slice": "Raw Salmon Slice",
+  "item.farmersdelight.cooked_salmon_slice": "Cooked Salmon Slice",
+
   "item.farmersdelight.cake_slice": "Slice of Cake",
   "item.farmersdelight.sweet_berry_cookie": "Sweet Berry Cookie",
   "item.farmersdelight.honey_cookie": "Honey Cookie",
@@ -80,6 +91,7 @@
   "effect.farmersdelight.nourished": "Nourished",
 
   "enchantment.farmersdelight.backstabbing": "Backstabbing",
+  "enchantment.farmersdelight.backstabbing.desc": "Amplifies damage when striking a target from behind.",
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
@@ -108,13 +120,18 @@
   "farmersdelight.advancement.craft_stove.desc": "Acquire a Stove",
   "farmersdelight.advancement.place_cooking_pot": "Dinner's Served!",
   "farmersdelight.advancement.place_cooking_pot.desc": "Put down a Cooking Pot and start preparing meals!",
+  "farmersdelight.advancement.place_cutting_board": "Watch Your Fingers...",
+  "farmersdelight.advancement.place_cutting_board.desc": "With a tool in hand, use a Cutting Board to split up some items",
   "farmersdelight.advancement.master_chef": "Master Chef",
   "farmersdelight.advancement.master_chef.desc": "Eat a course of every meal available!",
 
   "block.cooking_pot.boil": "Cooking Pot Boil",
   "block.cooking_pot.boil.subtitles": "Cooking Pot boils",
+  "block.cutting_board.knife": "Knife Cut",
+  "block.cutting_board.knife.subtitles": "Knife cuts",
   "block.stove.crackle": "Stove Crackle",
   "block.stove.crackle.subtitles": "Stove crackles",
 
-  "farmersdelight.jei.cooking": "Cooking"
+  "farmersdelight.jei.cooking": "Cooking",
+  "farmersdelight.jei.cutting": "Cutting Board"
 }

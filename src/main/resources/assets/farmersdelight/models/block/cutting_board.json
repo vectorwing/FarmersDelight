@@ -1,0 +1,54 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/thin_block",
+	"textures": {
+		"particle": "farmersdelight:blocks/cutting_board",
+		"top": "farmersdelight:blocks/cutting_board"
+	},
+	"elements": [
+		{
+			"from": [13, 0, 1],
+			"to": [15, 1, 15],
+			"faces": {
+				"north": {"uv": [13, 1, 15, 2], "texture": "#top"},
+				"east": {"uv": [1, 1, 15, 2], "texture": "#top"},
+				"south": {"uv": [13, 14, 15, 15], "texture": "#top"},
+				"west": {"uv": [1, 2, 15, 3], "texture": "#top"},
+				"up": {"uv": [13, 1, 15, 15], "texture": "#top"},
+				"down": {"uv": [13, 1, 15, 15], "texture": "#top"}
+			}
+		},
+		{
+			"from": [1, 0, 1],
+			"to": [12, 1, 15],
+			"faces": {
+				"north": {"uv": [1, 1, 12, 2], "texture": "#top"},
+				"east":  {"uv": [0, 13, 14, 14], "texture": "#top"},
+				"south": {"uv": [1, 14, 12, 15], "texture": "#top"},
+				"west":  {"uv": [1, 14, 15, 15], "texture": "#top"},
+				"up":    {"uv": [1, 1, 12, 15], "texture": "#top"},
+				"down":  {"uv": [1, 1, 12, 15], "texture": "#top"}
+			}
+		},
+		{
+			"from": [12, 0, 1],
+			"to": [13, 1, 6],
+			"faces": {
+				"north": {"uv": [12, 1, 13, 2], "texture": "#top"},
+				"south": {"uv": [12, 5, 13, 6], "texture": "#top"},
+				"up": {"uv": [12, 1, 13, 6], "texture": "#top"},
+				"down": {"uv": [12, 10, 13, 15], "texture": "#top"}
+			}
+		},
+		{
+			"from": [12, 0, 10],
+			"to": [13, 1, 15],
+			"faces": {
+				"north": {"uv": [12, 10, 13, 11], "texture": "#top"},
+				"south": {"uv": [12, 14, 13, 15], "texture": "#top"},
+				"up": {"uv": [12, 10, 13, 15], "texture": "#top"},
+				"down": {"uv": [12, 1, 13, 6], "texture": "#top"}
+			}
+		}
+	]
+}

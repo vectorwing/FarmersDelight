@@ -10,7 +10,6 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.inventory.InventoryHelper;
@@ -39,9 +38,10 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
-import vectorwing.farmersdelight.utils.ForgeTags;
+import vectorwing.farmersdelight.tile.CookingPotTileEntity;
 import vectorwing.farmersdelight.utils.ModTags;
 import vectorwing.farmersdelight.utils.Text;
+import vectorwing.farmersdelight.utils.Utils;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -194,6 +194,18 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 		}
 	}
 
+	public boolean hasComparatorInputOverride(BlockState state) {
+		return true;
+	}
+
+	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
+		if (worldIn.getTileEntity(pos) instanceof CookingPotTileEntity) {
+			ItemStackHandler inventory = ((CookingPotTileEntity) worldIn.getTileEntity(pos)).getInventory();
+			return Utils.calcRedstoneFromItemHandler(inventory);
+		}
+		return 0;
+	}
+
 	@Override
 	public boolean hasTileEntity(BlockState state) {
 		return true;
@@ -203,12 +215,6 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
 		return ModTileEntityTypes.COOKING_POT_TILE.get().create();
 	}
-
-	@Override
-	public boolean canContainFluid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn)	{ return false;	}
-
-	@Override
-	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, IFluidState fluidStateIn) {	return false; }
 
 	public IFluidState getFluidState(BlockState state) {
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);

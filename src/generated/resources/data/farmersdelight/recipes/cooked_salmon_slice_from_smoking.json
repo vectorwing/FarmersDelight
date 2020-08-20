@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "farmersdelight:salmon_slice"
+  },
+  "result": "farmersdelight:cooked_salmon_slice",
+  "experience": 0.35,
+  "cookingtime": 100
+}

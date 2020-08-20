@@ -11,7 +11,7 @@ import net.minecraft.world.storage.loot.LootFunction;
 import net.minecraft.world.storage.loot.LootParameters;
 import net.minecraft.world.storage.loot.conditions.ILootCondition;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.blocks.CookingPotTileEntity;
+import vectorwing.farmersdelight.tile.CookingPotTileEntity;
 
 public class CopyMealFunction extends LootFunction
 {

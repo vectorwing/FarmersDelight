@@ -17,9 +17,11 @@ Farmer's Delight is a mod focused on providing solid cooking mechanics and exten
 
 This mod is currently **under development**, so issues and instabilities may occur. If you'd like to play, keep in mind:
 - Backup your saves often;
-- Don't add it to released modpacks yet;
+- Make sure everything is working well before adding it to a modpack;
 - Report any issues you find to our issue tracker!
 
 ### Contributing
 
-Thank you for visiting the repository! If you'd like to contribute with the mod, feel free to check the issues page - whether to open a new one or give existing ones a shot. All help is appreciated!
+Thank you for visiting the repository! If you'd like to contribute with the mod, feel free to check the issues page!
+
+Since I'm a relative beginner with Minecraft modding, I'm sure many of my implementations might be inefficient or suboptimal. That said, I am open to constructive feedback: if you spot any glaring mistakes in my code, and/or you know a better way to accomplish something, feel free to open an issue/PR about it. Thank you for your help! =)

@@ -17,7 +17,7 @@ public class ModTags
 	public static final Tag<Block> HEAT_SOURCES = modBlockTag("heat_sources");
 
 	public static final Tag<Item> WOLF_PREY = modItemTag("wolf_prey");
-	public static final Tag<Item> KNIVES = modItemTag("knives");
+	public static final Tag<Item> KNIVES = modItemTag("tools/knife");
 
 	private static Tag<Item> modItemTag(String path) {
 		return new ItemTags.Wrapper(new ResourceLocation(FarmersDelight.MODID, path));

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:cooked_chicken_cuts_from_campfire_cooking"
+    ]
+  },
+  "criteria": {
+    "cooked_chicken_cuts": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:chicken_cuts"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:cooked_chicken_cuts_from_campfire_cooking"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "cooked_chicken_cuts",
+      "has_the_recipe"
+    ]
+  ]
+}

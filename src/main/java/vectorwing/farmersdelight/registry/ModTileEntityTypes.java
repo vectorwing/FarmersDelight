@@ -1,9 +1,10 @@
 package vectorwing.farmersdelight.registry;
 
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.blocks.BasketTileEntity;
-import vectorwing.farmersdelight.blocks.CookingPotTileEntity;
-import vectorwing.farmersdelight.blocks.StoveTileEntity;
+import vectorwing.farmersdelight.tile.BasketTileEntity;
+import vectorwing.farmersdelight.tile.CookingPotTileEntity;
+import vectorwing.farmersdelight.tile.CuttingBoardTileEntity;
+import vectorwing.farmersdelight.tile.StoveTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -19,4 +20,6 @@ public class ModTileEntityTypes
 			() -> TileEntityType.Builder.create(CookingPotTileEntity::new, ModBlocks.COOKING_POT.get()).build(null));
 	public static final RegistryObject<TileEntityType<BasketTileEntity>> BASKET_TILE = TILES.register("basket",
 			() -> TileEntityType.Builder.create(BasketTileEntity::new, ModBlocks.BASKET.get()).build(null));
+	public static final RegistryObject<TileEntityType<CuttingBoardTileEntity>> CUTTING_BOARD_TILE = TILES.register("cutting_board",
+			() -> TileEntityType.Builder.create(CuttingBoardTileEntity::new, ModBlocks.CUTTING_BOARD.get()).build(null));
 }

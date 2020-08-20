@@ -2,6 +2,7 @@
   "block.farmersdelight.stove": "Fogão",
   "block.farmersdelight.cooking_pot": "Panela",
   "block.farmersdelight.basket": "Cesto",
+  "block.farmersdelight.cutting_board": "Tábua de corte",
   "block.farmersdelight.rope": "Corda",
   "block.farmersdelight.safety_net": "Rede de segurança",
   "block.farmersdelight.organic_compost": "Composto orgânico",
@@ -39,6 +40,16 @@
   "item.farmersdelight.hot_cocoa": "Chocolate quente",
   "item.farmersdelight.fried_egg": "Ovo frito",
   "item.farmersdelight.raw_pasta": "Macarrão cru",
+  "item.farmersdelight.pumpkin_slice": "Fatia de abóbora",
+  "item.farmersdelight.minced_beef": "Carne moída",
+  "item.farmersdelight.beef_patty": "Carne moída grelhada",
+  "item.farmersdelight.chicken_cuts": "Pedaços de frango cru",
+  "item.farmersdelight.cooked_chicken_cuts": "Pedaços de frango assados",
+  "item.farmersdelight.cod_slice": "Filé de bacalhau cru",
+  "item.farmersdelight.cooked_cod_slice": "Filé de bacalhau assado",
+  "item.farmersdelight.salmon_slice": "Filé de salmão cru",
+  "item.farmersdelight.cooked_salmon_slice": "Filé de salmão assado",
+
   "item.farmersdelight.cake_slice": "Fatia de bolo",
   "item.farmersdelight.sweet_berry_cookie": "Biscoito de bagas doces",
   "item.farmersdelight.honey_cookie": "Biscoito de mel",
@@ -80,6 +91,7 @@
   "effect.farmersdelight.nourished": "Nutrição",
 
   "enchantment.farmersdelight.backstabbing": "Punhalada nas costas",
+  "enchantment.farmersdelight.backstabbing.desc": "Amplifica o dano ao atingir um alvo pelas costas.",
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
@@ -108,13 +120,18 @@
   "farmersdelight.advancement.craft_stove.desc": "Obtenha um Fogão",
   "farmersdelight.advancement.place_cooking_pot": "O jantar está servido!",
   "farmersdelight.advancement.place_cooking_pot.desc": "Coloque uma Panela e comece a preparar refeições!",
+  "farmersdelight.advancement.place_cutting_board": "Cuidado com os dedos...",
+  "farmersdelight.advancement.place_cutting_board.desc": "Com uma ferramenta em mãos, use a tábua de corte para partir alguns itens",
   "farmersdelight.advancement.master_chef": "Mestre-cuca",
   "farmersdelight.advancement.master_chef.desc": "Coma uma porção de cada refeição disponível!",
 
   "block.cooking_pot.boil": "Panela Fervendo",
   "block.cooking_pot.boil.subtitles": "Panela fervendo",
+  "block.cutting_board.knife": "Faca Cortando",
+  "block.cutting_board.knife.subtitles": "Faca cortando",
   "block.stove.crackle": "Fogão Crepitando",
   "block.stove.crackle.subtitles": "Fogão crepitando",
 
-  "farmersdelight.jei.cooking": "Panela"
+  "farmersdelight.jei.cooking": "Panela",
+  "farmersdelight.jei.cutting": "Tábua de corte"
 }

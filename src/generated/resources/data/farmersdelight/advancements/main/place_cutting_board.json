@@ -1,0 +1,31 @@
+{
+  "parent": "farmersdelight:main/craft_stove",
+  "display": {
+    "icon": {
+      "item": "farmersdelight:cutting_board"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.place_cutting_board"
+    },
+    "description": {
+      "translate": "farmersdelight.advancement.place_cutting_board.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "cutting_board": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "farmersdelight:cutting_board"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "cutting_board"
+    ]
+  ]
+}

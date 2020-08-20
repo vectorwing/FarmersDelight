@@ -1,5 +1,7 @@
 package vectorwing.farmersdelight.data;
 
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
@@ -12,6 +14,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.utils.ForgeTags;
+import vectorwing.farmersdelight.utils.ModTags;
 
 import java.util.function.Consumer;
 
@@ -31,10 +34,9 @@ public class Recipes extends RecipeProvider
 		recipesMaterials(consumer);
 		recipesFoodstuffs(consumer);
 		recipesCraftedMeals(consumer);
-		//recipesCookedMeals(consumer);
 	}
 
-	private void foodSmeltingRecipes(String name, IItemProvider ingredient, IItemProvider result, float experience, int cookingTime, Consumer<IFinishedRecipe> consumer) {
+	private void foodSmeltingRecipes(String name, IItemProvider ingredient, IItemProvider result, float experience, Consumer<IFinishedRecipe> consumer) {
 		String namePrefix = new ResourceLocation(FarmersDelight.MODID, name).toString();
 		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ingredient),
 				result, experience, 200)
@@ -78,6 +80,12 @@ public class Recipes extends RecipeProvider
 				.key('c', ModItems.CANVAS.get())
 				.addCriterion("canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
 				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "painting_from_canvas"));
+		ShapedRecipeBuilder.shapedRecipe(Items.PUMPKIN)
+				.patternLine("##")
+				.patternLine("##")
+				.key('#', ModItems.PUMPKIN_SLICE.get())
+				.addCriterion("pumpkin_slice", InventoryChangeTrigger.Instance.forItems(ModItems.PUMPKIN_SLICE.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "pumpkin_from_slices"));
 		ShapedRecipeBuilder.shapedRecipe(Items.CAKE)
 				.patternLine("mmm")
 				.patternLine("ses")
@@ -108,7 +116,11 @@ public class Recipes extends RecipeProvider
 	}
 
 	private void recipesSmelting(Consumer<IFinishedRecipe> consumer) {
-		foodSmeltingRecipes("fried_egg", Items.EGG, ModItems.FRIED_EGG.get(), 0.35F, 200, consumer);
+		foodSmeltingRecipes("fried_egg", Items.EGG, ModItems.FRIED_EGG.get(), 0.35F, consumer);
+		foodSmeltingRecipes("beef_patty", ModItems.MINCED_BEEF.get(), ModItems.BEEF_PATTY.get(), 0.35F, consumer);
+		foodSmeltingRecipes("cooked_chicken_cuts", ModItems.CHICKEN_CUTS.get(), ModItems.COOKED_CHICKEN_CUTS.get(), 0.35F, consumer);
+		foodSmeltingRecipes("cooked_cod_slice", ModItems.COD_SLICE.get(), ModItems.COOKED_COD_SLICE.get(), 0.35F, consumer);
+		foodSmeltingRecipes("cooked_salmon_slice", ModItems.SALMON_SLICE.get(), ModItems.COOKED_SALMON_SLICE.get(), 0.35F, consumer);
 	}
 
 	private void recipesBlocks(Consumer<IFinishedRecipe> consumer) {
@@ -138,6 +150,14 @@ public class Recipes extends RecipeProvider
 				.key('b', Items.BAMBOO)
 				.key('#', ModItems.CANVAS.get())
 				.addCriterion("canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModBlocks.CUTTING_BOARD.get())
+				.patternLine(" K ")
+				.patternLine("/##")
+				.key('K', ModTags.KNIVES)
+				.key('/', Items.STICK)
+				.key('#', ItemTags.PLANKS)
+				.addCriterion("stick", InventoryChangeTrigger.Instance.forItems(Items.STICK))
 				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ModItems.ROPE.get(), 3)
 				.patternLine("s")
@@ -335,14 +355,14 @@ public class Recipes extends RecipeProvider
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CHICKEN_SANDWICH.get())
 				.addIngredient(ForgeTags.BREAD)
-				.addIngredient(Items.COOKED_CHICKEN)
+				.addIngredient(ForgeTags.COOKED_CHICKEN)
 				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
 				.addIngredient(ForgeTags.CROPS_TOMATO)
 				.addCriterion("cooked_chicken", InventoryChangeTrigger.Instance.forItems(Items.COOKED_CHICKEN))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.HAMBURGER.get())
 				.addIngredient(ForgeTags.BREAD)
-				.addIngredient(Items.COOKED_BEEF)
+				.addIngredient(ModItems.BEEF_PATTY.get())
 				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
 				.addIngredient(ForgeTags.CROPS_TOMATO)
 				.addIngredient(ForgeTags.CROPS_ONION)
@@ -350,7 +370,7 @@ public class Recipes extends RecipeProvider
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.STUFFED_POTATO.get())
 				.addIngredient(Items.BAKED_POTATO)
-				.addIngredient(Items.COOKED_BEEF)
+				.addIngredient(ForgeTags.COOKED_BEEF)
 				.addIngredient(Items.CARROT)
 				.addIngredient(ForgeTags.MILK)
 				.addCriterion("baked_potato", InventoryChangeTrigger.Instance.forItems(Items.BAKED_POTATO))

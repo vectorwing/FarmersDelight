@@ -5,7 +5,7 @@
       "item": "minecraft:baked_potato"
     },
     {
-      "item": "minecraft:cooked_beef"
+      "tag": "forge:cooked_beef"
     },
     {
       "item": "minecraft:carrot"

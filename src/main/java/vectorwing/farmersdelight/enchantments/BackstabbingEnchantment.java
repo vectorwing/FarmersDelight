@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.enchantments;
 
-import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentType;
@@ -9,6 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.Vec3d;
@@ -74,6 +75,7 @@ public class BackstabbingEnchantment extends Enchantment
 						event.setAmount(getBackstabbingDamagePerLevel(event.getAmount(), level));
 						world.playSound(null, attacker.getPosX(), attacker.getPosY(), attacker.getPosZ(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 					}
+					Minecraft.getInstance().particles.addParticleEmitter(event.getEntityLiving(), ParticleTypes.ENCHANTED_HIT);
 				}
 			}
 		}

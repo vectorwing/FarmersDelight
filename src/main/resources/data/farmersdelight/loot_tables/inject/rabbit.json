@@ -15,7 +15,7 @@
           "predicate": {
             "equipment": {
               "mainhand": {
-                "tag": "farmersdelight:knives"
+                "tag": "farmersdelight:tools/knife"
               }
             }
           },
@@ -38,7 +38,7 @@
           "predicate": {
             "equipment": {
               "mainhand": {
-                "tag": "farmersdelight:knives"
+                "tag": "farmersdelight:tools/knife"
               }
             }
           },
