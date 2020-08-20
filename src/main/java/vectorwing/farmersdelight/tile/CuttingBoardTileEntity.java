@@ -13,7 +13,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
@@ -27,6 +30,7 @@ public class CuttingBoardTileEntity extends TileEntity
 {
 	private boolean isItemCarvingBoard;
 	private ItemStackHandler itemHandler = createHandler();
+	private LazyOptional<IItemHandler> handlerBoard = LazyOptional.of(() -> itemHandler);
 	protected final IRecipeType<? extends CuttingBoardRecipe> recipeType;
 
 	public CuttingBoardTileEntity(TileEntityType<?> tileEntityTypeIn, IRecipeType<? extends CuttingBoardRecipe> recipeTypeIn) {
@@ -177,8 +181,22 @@ public class CuttingBoardTileEntity extends TileEntity
 
 			@Override
 			protected void onContentsChanged(int slot) {
-				// TODO: Do we do anything here?
+				inventoryChanged();
 			}
 		};
+	}
+
+	@Override
+	public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
+		if (cap.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)) {
+			return handlerBoard.cast();
+		}
+		return super.getCapability(cap, side);
+	}
+
+	@Override
+	public void remove() {
+		super.remove();
+		handlerBoard.invalidate();
 	}
 }
