@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.item.HoeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.util.Direction;
@@ -60,8 +61,8 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 		float f = -direction.getHorizontalAngle();
 		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f));
 
-		// Rotate item flat on the cutting board. Use X and Y from now on
-		matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(itemStack.getItem() instanceof PickaxeItem ? 225.0F : 180.0F));
+		// Rotate item to be carved on the surface, A little less so for hoes and pickaxes.
+		matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(itemStack.getItem() instanceof PickaxeItem || itemStack.getItem() instanceof HoeItem ? 225.0F : 180.0F));
 
 		// Resize the item
 		matrixStackIn.scale(0.6F, 0.6F, 0.6F);
