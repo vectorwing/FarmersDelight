@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.tile;
 
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.IRecipeType;
@@ -82,7 +83,7 @@ public class CuttingBoardTileEntity extends TileEntity
 	 * @param tool The item stack used to process the item.
 	 * @return Whether the process succeeded or failed.
 	 */
-	public boolean processItemUsingTool(ItemStack tool, PlayerEntity player) {
+	public boolean processItemUsingTool(ItemStack tool, @Nullable PlayerEntity player) {
 		CuttingBoardRecipe irecipe = this.world.getRecipeManager()
 				.getRecipe(this.recipeType, new RecipeWrapper(itemHandler), this.world).orElse(null);
 
@@ -94,9 +95,15 @@ public class CuttingBoardTileEntity extends TileEntity
 				entity.setMotion(direction.getXOffset() * 0.2F, 0.0F, direction.getZOffset() * 0.2F);
 				world.addEntity(entity);
 			}
-			tool.damageItem(1, player, (user) -> {
-				user.sendBreakAnimation(EquipmentSlotType.MAINHAND);
-			});
+			if (player != null) {
+				tool.damageItem(1, player, (user) -> {
+					user.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+				});
+			} else {
+				if (tool.attemptDamageItem(1, world.rand, (ServerPlayerEntity)null)) {
+					tool.setCount(0);
+				}
+			}
 			this.removeItem();
 			this.inventoryChanged();
 			return true;

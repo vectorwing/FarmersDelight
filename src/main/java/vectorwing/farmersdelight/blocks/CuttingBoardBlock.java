@@ -78,8 +78,8 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 			} else if (!itemHeld.isEmpty()) {
 				ItemStack boardItem = cuttingBoardTE.getStoredItem().copy();
 				if (cuttingBoardTE.processItemUsingTool(itemHeld, player)) {
-					this.spawnCuttingParticles(worldIn, pos, player, boardItem, 5);
-					this.playProcessingSound(worldIn, pos, itemHeld, boardItem);
+					spawnCuttingParticles(worldIn, pos, boardItem, 5);
+					playProcessingSound(worldIn, pos, itemHeld, boardItem);
 					return ActionResultType.SUCCESS;
 				}
 				return ActionResultType.PASS;
@@ -99,7 +99,7 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 	}
 
 	// TODO: I am 100% sure there is a less cluttered way to pull off conditional sounds. If you're reading this, please, HELP ME! :(
-	public void playProcessingSound(World worldIn, BlockPos pos, ItemStack toolStack, ItemStack boardStack) {
+	public static void playProcessingSound(World worldIn, BlockPos pos, ItemStack toolStack, ItemStack boardStack) {
 		if (toolStack.getItem() instanceof ShearsItem) {
 			worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
 		} else if (toolStack.getItem() instanceof KnifeItem) {
@@ -117,7 +117,7 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 		}
 	}
 
-	private void spawnCuttingParticles(World worldIn, BlockPos pos, PlayerEntity player, ItemStack stack, int count) {
+	public static void spawnCuttingParticles(World worldIn, BlockPos pos, ItemStack stack, int count) {
 		for(int i = 0; i < count; ++i) {
 			Vec3d vec3d = new Vec3d(((double) worldIn.rand.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, ((double) worldIn.rand.nextFloat() - 0.5D) * 0.1D);
 			if (worldIn instanceof ServerWorld) {
