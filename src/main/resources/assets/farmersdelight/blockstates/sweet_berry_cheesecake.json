@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "bites=0": { "model": "farmersdelight:block/sweet_berry_cheesecake" },
+    "bites=1": { "model": "farmersdelight:block/sweet_berry_cheesecake_slice1" },
+    "bites=2": { "model": "farmersdelight:block/sweet_berry_cheesecake_slice2" },
+    "bites=3": { "model": "farmersdelight:block/sweet_berry_cheesecake_slice3" }
+  }
+}

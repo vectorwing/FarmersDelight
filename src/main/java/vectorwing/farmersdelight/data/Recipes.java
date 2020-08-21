@@ -33,6 +33,7 @@ public class Recipes extends RecipeProvider
 		recipesTools(consumer);
 		recipesMaterials(consumer);
 		recipesFoodstuffs(consumer);
+		recipesFoodBlocks(consumer);
 		recipesCraftedMeals(consumer);
 	}
 
@@ -311,6 +312,13 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ForgeTags.KNIVES)
 				.addCriterion("egg", InventoryChangeTrigger.Instance.forItems(Items.EGG))
 				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.PIE_CRUST.get(), 1)
+				.patternLine("wMw")
+				.patternLine(" w ")
+				.key('w', Items.WHEAT)
+				.key('M', ForgeTags.MILK)
+				.addCriterion("wheat", InventoryChangeTrigger.Instance.forItems(Items.WHEAT))
+				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CAKE_SLICE.get(), 7)
 				.addIngredient(Blocks.CAKE)
 				.addIngredient(ForgeTags.KNIVES)
@@ -329,6 +337,29 @@ public class Recipes extends RecipeProvider
 				.addCriterion("honey_bottle", InventoryChangeTrigger.Instance.forItems(Items.HONEY_BOTTLE))
 				.build(consumer);
 	}
+
+	private void recipesFoodBlocks(Consumer<IFinishedRecipe> consumer) {
+		ShapedRecipeBuilder.shapedRecipe(ModItems.APPLE_PIE.get(), 1)
+				.patternLine("###")
+				.patternLine("aaa")
+				.patternLine("xOx")
+				.key('#', Items.WHEAT)
+				.key('a', Items.APPLE)
+				.key('x', Items.SUGAR)
+				.key('O', ModItems.PIE_CRUST.get())
+				.addCriterion("pie_crust", InventoryChangeTrigger.Instance.forItems(ModItems.PIE_CRUST.get()))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.SWEET_BERRY_CHEESECAKE.get(), 1)
+				.patternLine("sss")
+				.patternLine("sss")
+				.patternLine("mOm")
+				.key('s', Items.SWEET_BERRIES)
+				.key('m', ForgeTags.MILK)
+				.key('O', ModItems.PIE_CRUST.get())
+				.addCriterion("pie_crust", InventoryChangeTrigger.Instance.forItems(ModItems.PIE_CRUST.get()))
+				.build(consumer);
+	}
+
 	private void recipesCraftedMeals(Consumer<IFinishedRecipe> consumer) {
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.MIXED_SALAD.get())
 				.addIngredient(ForgeTags.SALAD_INGREDIENTS)

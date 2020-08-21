@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "farmersdelight:items/sweet_berry_cheesecake"
+  }
+}

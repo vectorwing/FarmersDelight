@@ -50,7 +50,11 @@
   "item.farmersdelight.salmon_slice": "Raw Salmon Slice",
   "item.farmersdelight.cooked_salmon_slice": "Cooked Salmon Slice",
 
+  "item.farmersdelight.pie_crust": "Pie Crust",
   "item.farmersdelight.cake_slice": "Slice of Cake",
+  "block.farmersdelight.apple_pie": "Apple Pie",
+  "block.farmersdelight.sweet_berry_cheesecake": "Sweet Berry Cheesecake",
+  "block.farmersdelight.chocolate_pie": "Chocolate Pie",
   "item.farmersdelight.sweet_berry_cookie": "Sweet Berry Cookie",
   "item.farmersdelight.honey_cookie": "Honey Cookie",
   "item.farmersdelight.earthworm": "Earthworm",
