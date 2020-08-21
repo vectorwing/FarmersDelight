@@ -62,7 +62,6 @@ public class PieBlock extends Block {
 		if (!playerIn.canEat(false)) {
 			return ActionResultType.PASS;
 		} else {
-			//playerIn.addStat(Stats.EAT_CAKE_SLICE);
 			playerIn.getFoodStats().addStats(3, 0.3F);
 			int i = state.get(BITES);
 			if (i < getMaxBites() - 1) {

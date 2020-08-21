@@ -3,6 +3,7 @@ package vectorwing.farmersdelight.client.tileentity.renderer;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
@@ -27,8 +28,15 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 		if (!itemStack.isEmpty()) {
 			matrixStackIn.push();
 
+			ItemRenderer itemRenderer = Minecraft.getInstance()
+					.getItemRenderer();
+			boolean blockItem = itemRenderer.getItemModelWithOverrides(itemStack, tileEntityIn.getWorld(), null)
+					.isGui3d();
+
 			if (tileEntityIn.getIsItemCarvingBoard()) {
 				renderItemCarved(matrixStackIn, direction, itemStack);
+			} else if (blockItem) {
+				renderBlock(matrixStackIn, direction);
 			} else {
 				renderItemLayingDown(matrixStackIn, direction);
 			}
@@ -51,6 +59,18 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 
 		// Resize the item
 		matrixStackIn.scale(0.6F, 0.6F, 0.6F);
+	}
+
+	public void renderBlock(MatrixStack matrixStackIn, Direction direction) {
+		// Center block above the cutting board
+		matrixStackIn.translate(0.5D, 0.27D, 0.5D);
+
+		// Rotate block to face the cutting board's front side
+		float f = -direction.getHorizontalAngle();
+		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f));
+
+		// Resize the block
+		matrixStackIn.scale(0.8F, 0.8F, 0.8F);
 	}
 
 	public void renderItemCarved(MatrixStack matrixStackIn, Direction direction, ItemStack itemStack) {
