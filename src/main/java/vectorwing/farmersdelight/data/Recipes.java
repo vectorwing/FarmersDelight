@@ -349,6 +349,12 @@ public class Recipes extends RecipeProvider
 				.key('O', ModItems.PIE_CRUST.get())
 				.addCriterion("pie_crust", InventoryChangeTrigger.Instance.forItems(ModItems.PIE_CRUST.get()))
 				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.APPLE_PIE.get(), 1)
+				.patternLine("##")
+				.patternLine("##")
+				.key('#', ModItems.APPLE_PIE_SLICE.get())
+				.addCriterion("apple_pie_slice", InventoryChangeTrigger.Instance.forItems(ModItems.APPLE_PIE_SLICE.get()))
+				.build(consumer, "apple_pie_from_slices");
 		ShapedRecipeBuilder.shapedRecipe(ModItems.SWEET_BERRY_CHEESECAKE.get(), 1)
 				.patternLine("sss")
 				.patternLine("sss")
@@ -358,6 +364,28 @@ public class Recipes extends RecipeProvider
 				.key('O', ModItems.PIE_CRUST.get())
 				.addCriterion("pie_crust", InventoryChangeTrigger.Instance.forItems(ModItems.PIE_CRUST.get()))
 				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.SWEET_BERRY_CHEESECAKE.get(), 1)
+				.patternLine("##")
+				.patternLine("##")
+				.key('#', ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get())
+				.addCriterion("sweet_berry_cheesecake_slice", InventoryChangeTrigger.Instance.forItems(ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get()))
+				.build(consumer, "sweet_berry_cheesecake_from_slices");
+		ShapedRecipeBuilder.shapedRecipe(ModItems.CHOCOLATE_PIE.get(), 1)
+				.patternLine("ccc")
+				.patternLine("mmm")
+				.patternLine("xOx")
+				.key('c', Items.COCOA_BEANS)
+				.key('m', ForgeTags.MILK)
+				.key('x', Items.SUGAR)
+				.key('O', ModItems.PIE_CRUST.get())
+				.addCriterion("pie_crust", InventoryChangeTrigger.Instance.forItems(ModItems.PIE_CRUST.get()))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.CHOCOLATE_PIE.get(), 1)
+				.patternLine("##")
+				.patternLine("##")
+				.key('#', ModItems.CHOCOLATE_PIE_SLICE.get())
+				.addCriterion("chocolate_pie_slice", InventoryChangeTrigger.Instance.forItems(ModItems.CHOCOLATE_PIE_SLICE.get()))
+				.build(consumer, "chocolate_pie_from_slices");
 	}
 
 	private void recipesCraftedMeals(Consumer<IFinishedRecipe> consumer) {

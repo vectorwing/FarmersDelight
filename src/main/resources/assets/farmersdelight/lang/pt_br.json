@@ -52,6 +52,9 @@
 
   "item.farmersdelight.pie_crust": "Crosta de torta",
   "item.farmersdelight.cake_slice": "Fatia de bolo",
+  "item.farmersdelight.apple_pie_slice": "Fatia de torta de maçã",
+  "item.farmersdelight.sweet_berry_cheesecake_slice": "Fatia de cheesecake de bagas doces",
+  "item.farmersdelight.chocolate_pie_slice": "Fatia de torta de chocolate",
   "block.farmersdelight.apple_pie": "Torta de maçã",
   "block.farmersdelight.sweet_berry_cheesecake": "Cheesecake de bagas doces",
   "block.farmersdelight.chocolate_pie": "Torta de chocolate",

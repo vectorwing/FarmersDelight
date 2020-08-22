@@ -26,6 +26,8 @@ public class Foods
 			.hunger(2).saturation(0.1f).fastToEat().build();
 	public static final Food PIE_CRUST = (new Food.Builder())
 			.hunger(2).saturation(0.2f).build();
+	public static final Food PIE_SLICE = (new Food.Builder())
+			.hunger(3).saturation(0.3f).fastToEat().build();
 	public static final Food PUMPKIN_SLICE = (new Food.Builder())
 			.hunger(3).saturation(0.3f).build();
 	public static final Food MINCED_BEEF = (new Food.Builder())

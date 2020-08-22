@@ -87,6 +87,8 @@ public class ModItems
 			() -> new BlockItem(ModBlocks.APPLE_PIE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> SWEET_BERRY_CHEESECAKE = ITEMS.register("sweet_berry_cheesecake",
 			() -> new BlockItem(ModBlocks.SWEET_BERRY_CHEESECAKE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> CHOCOLATE_PIE = ITEMS.register("chocolate_pie",
+			() -> new BlockItem(ModBlocks.CHOCOLATE_PIE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> FRIED_EGG = ITEMS.register("fried_egg",
 			() -> new Item(new Item.Properties().food(Foods.FRIED_EGG).group(FarmersDelight.ITEM_GROUP)));
@@ -119,6 +121,12 @@ public class ModItems
 
 	public static final RegistryObject<Item> CAKE_SLICE = ITEMS.register("cake_slice",
 			() -> new Item(new Item.Properties().food(Foods.CAKE_SLICE).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> APPLE_PIE_SLICE = ITEMS.register("apple_pie_slice",
+			() -> new Item(new Item.Properties().food(Foods.PIE_SLICE).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> SWEET_BERRY_CHEESECAKE_SLICE = ITEMS.register("sweet_berry_cheesecake_slice",
+			() -> new Item(new Item.Properties().food(Foods.PIE_SLICE).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> CHOCOLATE_PIE_SLICE = ITEMS.register("chocolate_pie_slice",
+			() -> new Item(new Item.Properties().food(Foods.PIE_SLICE).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> SWEET_BERRY_COOKIE = ITEMS.register("sweet_berry_cookie",
 			() -> new Item(new Item.Properties().food(Foods.COOKIES).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> HONEY_COOKIE = ITEMS.register("honey_cookie",

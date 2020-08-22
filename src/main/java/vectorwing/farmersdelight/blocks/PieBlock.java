@@ -4,7 +4,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
@@ -18,6 +21,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import vectorwing.farmersdelight.utils.ModTags;
 
 public class PieBlock extends Block {
 
@@ -37,15 +41,29 @@ public class PieBlock extends Block {
 		this.setDefaultState(this.stateContainer.getBaseState().with(BITES, 0));
 	}
 
+	public int getBiteHunger() {
+		return 3;
+	}
+
+	public float getBiteSaturation() {
+		return 0.3F;
+	}
+
+	protected ItemStack getPieSliceItem() {
+		return ItemStack.EMPTY;
+	}
+
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return SHAPES[state.get(BITES)];
 	}
 
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		// TODO: If using a farmersdelight:tools/knife on this block, drop a slice.
-		// TODO: If using anything else, and player is hungry, take a bite.
+		ItemStack itemstack = player.getHeldItem(handIn);
 		if (worldIn.isRemote) {
-			ItemStack itemstack = player.getHeldItem(handIn);
+			if (ModTags.KNIVES.contains(itemstack.getItem())) {
+				return cutSlice(worldIn, pos, state);
+			}
+
 			if (this.consumeBite(worldIn, pos, state, player) == ActionResultType.SUCCESS) {
 				return ActionResultType.SUCCESS;
 			}
@@ -55,14 +73,20 @@ public class PieBlock extends Block {
 			}
 		}
 
+		if (ModTags.KNIVES.contains(itemstack.getItem())) {
+			return cutSlice(worldIn, pos, state);
+		}
 		return this.consumeBite(worldIn, pos, state, player);
 	}
 
-	private ActionResultType consumeBite(IWorld worldIn, BlockPos pos, BlockState state, PlayerEntity playerIn) {
+	/**
+	 * Eats a slice from the pie, feeding the player.
+	 */
+	private ActionResultType consumeBite(World worldIn, BlockPos pos, BlockState state, PlayerEntity playerIn) {
 		if (!playerIn.canEat(false)) {
 			return ActionResultType.PASS;
 		} else {
-			playerIn.getFoodStats().addStats(3, 0.3F);
+			playerIn.getFoodStats().addStats(this.getBiteHunger(), this.getBiteSaturation());
 			int i = state.get(BITES);
 			if (i < getMaxBites() - 1) {
 				worldIn.setBlockState(pos, state.with(BITES, i + 1), 3);
@@ -72,6 +96,21 @@ public class PieBlock extends Block {
 			worldIn.playSound(null, pos, SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.PLAYERS, 0.8F, 0.8F);
 			return ActionResultType.SUCCESS;
 		}
+	}
+
+	/**
+	 * Cuts off a bite and drops a slice item, without feeding the player.
+	 */
+	private ActionResultType cutSlice(World worldIn, BlockPos pos, BlockState state) {
+		int i = state.get(BITES);
+		if (i < getMaxBites() - 1) {
+			worldIn.setBlockState(pos, state.with(BITES, i + 1), 3);
+		} else {
+			worldIn.removeBlock(pos, false);
+		}
+		InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), this.getPieSliceItem());
+		worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOL_BREAK, SoundCategory.PLAYERS, 0.8F, 0.8F);
+		return ActionResultType.SUCCESS;
 	}
 
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
