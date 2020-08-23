@@ -5,21 +5,25 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.merchant.villager.VillagerTrades;
 import net.minecraft.item.*;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTables;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.registry.ModEffects;
 import vectorwing.farmersdelight.registry.ModItems;
-import vectorwing.farmersdelight.items.KnifeItem;
 import vectorwing.farmersdelight.loot.functions.CopyMealFunction;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.world.storage.loot.LootPool;
@@ -87,16 +91,31 @@ public class CommonEventHandler
 
 	@SubscribeEvent
 	public static void onVillagerTrades(VillagerTradesEvent event) {
+		if (!Configuration.FARMERS_BUY_FD_CROPS.get()) return;
+
 		Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
 		VillagerProfession profession = event.getType();
-
 		if (profession.getRegistryName() == null) return;
-		if (Configuration.FARMERS_BUY_FD_CROPS.get() && profession.getRegistryName().getPath().equals("farmer"))
+		if (profession.getRegistryName().getPath().equals("farmer"))
 		{
 			trades.get(1).add(new EmeraldForItemsTrade(ModItems.ONION.get(), 26, 16, 2));
 			trades.get(1).add(new EmeraldForItemsTrade(ModItems.TOMATO.get(), 26, 16, 2));
 			trades.get(2).add(new EmeraldForItemsTrade(ModItems.CABBAGE.get(), 16, 16, 5));
 			trades.get(2).add(new EmeraldForItemsTrade(ModItems.RICE.get(), 20, 16, 5));
+		}
+	}
+
+	@SubscribeEvent
+	public static void onSoupItemConsumed(LivingEntityUseItemEvent.Finish event) {
+		if (!Configuration.VANILLA_SOUP_EFFECTS.get()) return;
+
+		Item food = event.getItem().getItem();
+		LivingEntity entity = event.getEntityLiving();
+		if (food instanceof SoupItem && !food.equals(Items.SUSPICIOUS_STEW)) {
+			if (food.equals(Items.RABBIT_STEW)) {
+				entity.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 3600, 1));
+			}
+			entity.addPotionEffect(new EffectInstance(ModEffects.COMFORT.get(), 9600, 0));
 		}
 	}
 

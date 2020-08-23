@@ -8,10 +8,15 @@ import net.minecraftforge.fml.config.ModConfig;
 @Mod.EventBusSubscriber
 public class Configuration
 {
-	public static final String CATEGORY_WORLD = "world";
 	public static final String CATEGORY_SETTINGS = "settings";
+	public static final String CATEGORY_OVERRIDES = "overrides";
+	public static final String CATEGORY_WORLD = "world";
 
 	public static ForgeConfigSpec COMMON_CONFIG;
+
+	public static ForgeConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS;
+
+	public static ForgeConfigSpec.BooleanValue VANILLA_SOUP_EFFECTS;
 
 	public static ForgeConfigSpec.BooleanValue CROPS_ON_SHIPWRECKS;
 	public static ForgeConfigSpec.BooleanValue CROPS_ON_VILLAGE_HOUSES;
@@ -28,14 +33,16 @@ public class Configuration
 	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_TOMATOES;
 	public static ForgeConfigSpec.IntValue CHANCE_WILD_TOMATOES;
 
-	public static ForgeConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS;
-
 	static
 	{
 		ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
 
 		COMMON_BUILDER.comment("Game settings").push(CATEGORY_SETTINGS);
 		FARMERS_BUY_FD_CROPS = COMMON_BUILDER.comment("Should Novice and Apprentice Farmers buy this mod's crops? (May reduce chances of other trades appearing)").define("farmersBuyFDCrops", true);
+		COMMON_BUILDER.pop();
+
+		COMMON_BUILDER.comment("Vanilla item overrides").push(CATEGORY_OVERRIDES);
+		VANILLA_SOUP_EFFECTS = COMMON_BUILDER.comment("Should Minecraft soups (e.g. Mushroom Stew) grant Comfort and other positive effects, to reflect this mod's soups?").define("vanillaSoupEffects", true);
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("World generation").push(CATEGORY_WORLD);
