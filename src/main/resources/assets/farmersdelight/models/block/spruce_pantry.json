@@ -1,0 +1,8 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "farmersdelight:blocks/spruce_pantry_top",
+    "front": "farmersdelight:blocks/spruce_pantry_front",
+    "side": "farmersdelight:blocks/spruce_pantry_side"
+  }
+}

@@ -21,6 +21,18 @@ public class ModItems
 			() -> new BlockItem(ModBlocks.BASKET.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> CUTTING_BOARD = ITEMS.register("cutting_board",
 			() -> new BlockItem(ModBlocks.CUTTING_BOARD.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> OAK_PANTRY = ITEMS.register("oak_pantry",
+			() -> new BlockItem(ModBlocks.OAK_PANTRY.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> BIRCH_PANTRY = ITEMS.register("birch_pantry",
+			() -> new BlockItem(ModBlocks.BIRCH_PANTRY.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> SPRUCE_PANTRY = ITEMS.register("spruce_pantry",
+			() -> new BlockItem(ModBlocks.SPRUCE_PANTRY.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> JUNGLE_PANTRY = ITEMS.register("jungle_pantry",
+			() -> new BlockItem(ModBlocks.JUNGLE_PANTRY.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> ACACIA_PANTRY = ITEMS.register("acacia_pantry",
+			() -> new BlockItem(ModBlocks.ACACIA_PANTRY.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> DARK_OAK_PANTRY = ITEMS.register("dark_oak_pantry",
+			() -> new BlockItem(ModBlocks.DARK_OAK_PANTRY.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> ROPE = ITEMS.register("rope",
 			() -> new RopeItem(ModBlocks.ROPE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> SAFETY_NET = ITEMS.register("safety_net",
