@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "wMw",
+    " w "
+  ],
+  "key": {
+    "w": {
+      "item": "minecraft:wheat"
+    },
+    "M": {
+      "tag": "forge:milk"
+    }
+  },
+  "result": {
+    "item": "farmersdelight:pie_crust"
+  }
+}

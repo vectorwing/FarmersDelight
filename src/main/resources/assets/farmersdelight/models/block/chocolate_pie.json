@@ -1,0 +1,37 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"particle": "farmersdelight:blocks/chocolate_pie_top",
+		"bottom": "farmersdelight:blocks/pie_bottom",
+		"inner": "farmersdelight:blocks/chocolate_pie_inner",
+		"side": "farmersdelight:blocks/pie_side",
+		"top": "farmersdelight:blocks/chocolate_pie_top"
+	},
+	"elements": [
+		{
+			"from": [2, 0, 2],
+			"to": [14, 6, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 3, 8]},
+			"faces": {
+				"north": {"uv": [2, 10, 14, 16], "texture": "#side"},
+				"east": {"uv": [2, 10, 14, 16], "texture": "#side"},
+				"south": {"uv": [2, 10, 14, 16], "texture": "#side"},
+				"west": {"uv": [2, 10, 14, 16], "texture": "#side"},
+				"up": {"uv": [2, 2, 14, 14], "texture": "#top"},
+				"down": {"uv": [2, 2, 14, 14], "texture": "#bottom", "cullface": "down"}
+			}
+		},
+		{
+			"from": [6, 6, 6],
+			"to": [10, 7, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 6.5, 8]},
+			"faces": {
+				"north": {"uv": [6, 9, 10, 10], "texture": "#inner"},
+				"east": {"uv": [6, 9, 10, 10], "texture": "#inner"},
+				"south": {"uv": [6, 9, 10, 10], "texture": "#inner"},
+				"west": {"uv": [6, 9, 10, 10], "texture": "#inner"},
+				"up": {"uv": [6, 5, 10, 9], "texture": "#inner"}
+			}
+		}
+	]
+}

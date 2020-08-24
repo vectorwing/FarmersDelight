@@ -50,7 +50,14 @@
   "item.farmersdelight.salmon_slice": "Raw Salmon Slice",
   "item.farmersdelight.cooked_salmon_slice": "Cooked Salmon Slice",
 
+  "item.farmersdelight.pie_crust": "Pie Crust",
   "item.farmersdelight.cake_slice": "Slice of Cake",
+  "item.farmersdelight.apple_pie_slice": "Slice of Apple Pie",
+  "item.farmersdelight.sweet_berry_cheesecake_slice": "Slice of Sweet Berry Cheesecake",
+  "item.farmersdelight.chocolate_pie_slice": "Slice of Chocolate Pie",
+  "block.farmersdelight.apple_pie": "Apple Pie",
+  "block.farmersdelight.sweet_berry_cheesecake": "Sweet Berry Cheesecake",
+  "block.farmersdelight.chocolate_pie": "Chocolate Pie",
   "item.farmersdelight.sweet_berry_cookie": "Sweet Berry Cookie",
   "item.farmersdelight.honey_cookie": "Honey Cookie",
   "item.farmersdelight.earthworm": "Earthworm",
@@ -89,6 +96,7 @@
   "item.farmersdelight.horse_feed": "Horse Feed",
 
   "effect.farmersdelight.nourished": "Nourished",
+  "effect.farmersdelight.comfort": "Comfort",
 
   "enchantment.farmersdelight.backstabbing": "Backstabbing",
   "enchantment.farmersdelight.backstabbing.desc": "Amplifies damage when striking a target from behind.",

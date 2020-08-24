@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "farmersdelight:items/apple_pie_slice"
+  }
+}

@@ -50,7 +50,14 @@
   "item.farmersdelight.salmon_slice": "Filé de salmão cru",
   "item.farmersdelight.cooked_salmon_slice": "Filé de salmão assado",
 
+  "item.farmersdelight.pie_crust": "Crosta de torta",
   "item.farmersdelight.cake_slice": "Fatia de bolo",
+  "item.farmersdelight.apple_pie_slice": "Fatia de torta de maçã",
+  "item.farmersdelight.sweet_berry_cheesecake_slice": "Fatia de cheesecake de bagas doces",
+  "item.farmersdelight.chocolate_pie_slice": "Fatia de torta de chocolate",
+  "block.farmersdelight.apple_pie": "Torta de maçã",
+  "block.farmersdelight.sweet_berry_cheesecake": "Cheesecake de bagas doces",
+  "block.farmersdelight.chocolate_pie": "Torta de chocolate",
   "item.farmersdelight.sweet_berry_cookie": "Biscoito de bagas doces",
   "item.farmersdelight.honey_cookie": "Biscoito de mel",
   "item.farmersdelight.earthworm": "Minhoca",
@@ -89,6 +96,7 @@
   "item.farmersdelight.horse_feed": "Alimento para cavalos",
 
   "effect.farmersdelight.nourished": "Nutrição",
+  "effect.farmersdelight.comfort": "Conforto",
 
   "enchantment.farmersdelight.backstabbing": "Punhalada nas costas",
   "enchantment.farmersdelight.backstabbing.desc": "Amplifica o dano ao atingir um alvo pelas costas.",

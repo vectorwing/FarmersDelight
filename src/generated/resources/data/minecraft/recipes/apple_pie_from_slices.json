@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "farmersdelight:apple_pie_slice"
+    }
+  },
+  "result": {
+    "item": "farmersdelight:apple_pie"
+  }
+}

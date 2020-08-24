@@ -39,6 +39,14 @@ public class ModBlocks
 	public static final RegistryObject<Block> RED_MUSHROOM_COLONY = BLOCKS.register("red_mushroom_colony",
 			() -> new RedMushroomColonyBlock(Block.Properties.from(Blocks.RED_MUSHROOM)));
 
+	// PASTRY BLOCKS
+	public static final RegistryObject<Block> APPLE_PIE = BLOCKS.register("apple_pie",
+			() -> new ApplePieBlock(Block.Properties.from(Blocks.CAKE)));
+	public static final RegistryObject<Block> SWEET_BERRY_CHEESECAKE = BLOCKS.register("sweet_berry_cheesecake",
+			() -> new SweetBerryCheesecakeBlock(Block.Properties.from(Blocks.CAKE)));
+	public static final RegistryObject<Block> CHOCOLATE_PIE = BLOCKS.register("chocolate_pie",
+			() -> new ChocolatePieBlock(Block.Properties.from(Blocks.CAKE)));
+
 	// WILD PATCHES
 	public static final RegistryObject<Block> WILD_CABBAGES = BLOCKS.register("wild_cabbages",
 			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
