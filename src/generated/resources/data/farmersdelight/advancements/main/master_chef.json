@@ -1,0 +1,201 @@
+{
+  "parent": "farmersdelight:main/place_cooking_pot",
+  "display": {
+    "icon": {
+      "item": "farmersdelight:pasta_with_meatballs"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.master_chef"
+    },
+    "description": {
+      "translate": "farmersdelight.advancement.master_chef.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 200
+  },
+  "criteria": {
+    "mixed_salad": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:mixed_salad"
+        }
+      }
+    },
+    "beef_stew": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:beef_stew"
+        }
+      }
+    },
+    "chicken_soup": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:chicken_soup"
+        }
+      }
+    },
+    "vegetable_soup": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:vegetable_soup"
+        }
+      }
+    },
+    "fish_stew": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:fish_stew"
+        }
+      }
+    },
+    "fried_rice": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:fried_rice"
+        }
+      }
+    },
+    "pumpkin_soup": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:pumpkin_soup"
+        }
+      }
+    },
+    "honey_glazed_ham": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:honey_glazed_ham"
+        }
+      }
+    },
+    "pasta_with_meatballs": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:pasta_with_meatballs"
+        }
+      }
+    },
+    "pasta_with_mutton_chop": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:pasta_with_mutton_chop"
+        }
+      }
+    },
+    "vegetable_noodles": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:vegetable_noodles"
+        }
+      }
+    },
+    "steak_and_potatoes": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:steak_and_potatoes"
+        }
+      }
+    },
+    "shepherds_pie": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:shepherds_pie"
+        }
+      }
+    },
+    "ratatouille": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:ratatouille"
+        }
+      }
+    },
+    "squid_ink_pasta": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:squid_ink_pasta"
+        }
+      }
+    },
+    "stuffed_pumpkin": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:stuffed_pumpkin"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "mixed_salad"
+    ],
+    [
+      "beef_stew"
+    ],
+    [
+      "chicken_soup"
+    ],
+    [
+      "vegetable_soup"
+    ],
+    [
+      "fish_stew"
+    ],
+    [
+      "fried_rice"
+    ],
+    [
+      "pumpkin_soup"
+    ],
+    [
+      "honey_glazed_ham"
+    ],
+    [
+      "pasta_with_meatballs"
+    ],
+    [
+      "pasta_with_mutton_chop"
+    ],
+    [
+      "vegetable_noodles"
+    ],
+    [
+      "steak_and_potatoes"
+    ],
+    [
+      "shepherds_pie"
+    ],
+    [
+      "ratatouille"
+    ],
+    [
+      "squid_ink_pasta"
+    ],
+    [
+      "stuffed_pumpkin"
+    ]
+  ]
+}

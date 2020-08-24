@@ -2,7 +2,7 @@ package vectorwing.farmersdelight.client.tileentity.renderer;
 
 import net.minecraft.client.renderer.WorldRenderer;
 import vectorwing.farmersdelight.blocks.StoveBlock;
-import vectorwing.farmersdelight.blocks.StoveTileEntity;
+import vectorwing.farmersdelight.tile.StoveTileEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -27,7 +27,7 @@ public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
 
 		for(int i = 0; i < nonnulllist.size(); ++i) {
 			ItemStack itemstack = nonnulllist.get(i);
-			if (itemstack != ItemStack.EMPTY) {
+			if (!itemstack.isEmpty()) {
 				matrixStackIn.push();
 
 				// Center item above the stove

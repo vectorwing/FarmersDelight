@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:stuffed_potato"
+    ]
+  },
+  "criteria": {
+    "baked_potato": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:baked_potato"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:stuffed_potato"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "baked_potato",
+      "has_the_recipe"
+    ]
+  ]
+}

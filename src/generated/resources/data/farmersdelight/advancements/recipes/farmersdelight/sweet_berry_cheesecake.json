@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:sweet_berry_cheesecake"
+    ]
+  },
+  "criteria": {
+    "pie_crust": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:pie_crust"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:sweet_berry_cheesecake"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "pie_crust",
+      "has_the_recipe"
+    ]
+  ]
+}

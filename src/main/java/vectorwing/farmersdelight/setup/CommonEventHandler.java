@@ -1,23 +1,31 @@
 package vectorwing.farmersdelight.setup;
 
 import com.google.common.collect.Sets;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.util.Direction;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.merchant.villager.VillagerProfession;
+import net.minecraft.entity.merchant.villager.VillagerTrades;
+import net.minecraft.item.*;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTables;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
+import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.init.ModBlocks;
-import vectorwing.farmersdelight.init.ModItems;
+import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.registry.ModEffects;
+import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.loot.functions.CopyMealFunction;
 import net.minecraft.block.ComposterBlock;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.TableLootEntry;
 import net.minecraft.world.storage.loot.functions.LootFunctionManager;
@@ -25,10 +33,12 @@ import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+import vectorwing.farmersdelight.tile.dispenser.CuttingBoardDispenseBehavior;
 import vectorwing.farmersdelight.world.CropPatchGeneration;
 
+import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID)
@@ -46,6 +56,7 @@ public class CommonEventHandler
 	public static void init(final FMLCommonSetupEvent event)
 	{
 		ComposterBlock.CHANCES.put(ModItems.TREE_BARK.get(), 0.3F);
+		ComposterBlock.CHANCES.put(ModItems.STRAW.get(), 0.3F);
 		ComposterBlock.CHANCES.put(ModItems.CABBAGE_SEEDS.get(), 0.3F);
 		ComposterBlock.CHANCES.put(ModItems.TOMATO_SEEDS.get(), 0.3F);
 		ComposterBlock.CHANCES.put(ModItems.CABBAGE.get(), 0.65F);
@@ -54,7 +65,79 @@ public class CommonEventHandler
 
 		LootFunctionManager.registerFunction(new CopyMealFunction.Serializer());
 
+		DispenserBlock.registerDispenseBehavior(Items.WOODEN_PICKAXE, new CuttingBoardDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(Items.WOODEN_AXE, new CuttingBoardDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(Items.WOODEN_SHOVEL, new CuttingBoardDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(Items.STONE_PICKAXE, new CuttingBoardDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(Items.STONE_AXE, new CuttingBoardDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(Items.STONE_SHOVEL, new CuttingBoardDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(Items.IRON_PICKAXE, new CuttingBoardDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(Items.IRON_AXE, new CuttingBoardDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(Items.IRON_SHOVEL, new CuttingBoardDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(Items.DIAMOND_PICKAXE, new CuttingBoardDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(Items.DIAMOND_AXE, new CuttingBoardDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(Items.DIAMOND_SHOVEL, new CuttingBoardDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(Items.GOLDEN_PICKAXE, new CuttingBoardDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(Items.GOLDEN_AXE, new CuttingBoardDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(Items.GOLDEN_SHOVEL, new CuttingBoardDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(Items.SHEARS, new CuttingBoardDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(ModItems.FLINT_KNIFE.get(), new CuttingBoardDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(ModItems.IRON_KNIFE.get(), new CuttingBoardDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(ModItems.DIAMOND_KNIFE.get(), new CuttingBoardDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(ModItems.GOLDEN_KNIFE.get(), new CuttingBoardDispenseBehavior());
+
 		DeferredWorkQueue.runLater(CropPatchGeneration::generateCrop);
+	}
+
+	@SubscribeEvent
+	public static void onVillagerTrades(VillagerTradesEvent event) {
+		if (!Configuration.FARMERS_BUY_FD_CROPS.get()) return;
+
+		Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
+		VillagerProfession profession = event.getType();
+		if (profession.getRegistryName() == null) return;
+		if (profession.getRegistryName().getPath().equals("farmer"))
+		{
+			trades.get(1).add(new EmeraldForItemsTrade(ModItems.ONION.get(), 26, 16, 2));
+			trades.get(1).add(new EmeraldForItemsTrade(ModItems.TOMATO.get(), 26, 16, 2));
+			trades.get(2).add(new EmeraldForItemsTrade(ModItems.CABBAGE.get(), 16, 16, 5));
+			trades.get(2).add(new EmeraldForItemsTrade(ModItems.RICE.get(), 20, 16, 5));
+		}
+	}
+
+	@SubscribeEvent
+	public static void onSoupItemConsumed(LivingEntityUseItemEvent.Finish event) {
+		if (!Configuration.VANILLA_SOUP_EFFECTS.get()) return;
+
+		Item food = event.getItem().getItem();
+		LivingEntity entity = event.getEntityLiving();
+		if (food instanceof SoupItem && !food.equals(Items.SUSPICIOUS_STEW)) {
+			if (food.equals(Items.RABBIT_STEW)) {
+				entity.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 3600, 1));
+			}
+			entity.addPotionEffect(new EffectInstance(ModEffects.COMFORT.get(), 9600, 0));
+		}
+	}
+
+	static class EmeraldForItemsTrade implements VillagerTrades.ITrade {
+		private final Item tradeItem;
+		private final int count;
+		private final int maxUses;
+		private final int xpValue;
+		private final float priceMultiplier;
+
+		public EmeraldForItemsTrade(IItemProvider tradeItemIn, int countIn, int maxUsesIn, int xpValueIn) {
+			this.tradeItem = tradeItemIn.asItem();
+			this.count = countIn;
+			this.maxUses = maxUsesIn;
+			this.xpValue = xpValueIn;
+			this.priceMultiplier = 0.05F;
+		}
+
+		public MerchantOffer getOffer(Entity trader, Random rand) {
+			ItemStack itemstack = new ItemStack(this.tradeItem, this.count);
+			return new MerchantOffer(itemstack, new ItemStack(Items.EMERALD), this.maxUses, this.xpValue, this.priceMultiplier);
+		}
 	}
 
 	@SubscribeEvent

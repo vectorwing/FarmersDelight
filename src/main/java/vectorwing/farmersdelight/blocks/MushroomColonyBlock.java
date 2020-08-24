@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import vectorwing.farmersdelight.init.ModBlocks;
+import vectorwing.farmersdelight.registry.ModBlocks;
 
 import java.util.Random;
 

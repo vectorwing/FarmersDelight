@@ -14,7 +14,9 @@ import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.init.ModItems;
+import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.integration.jei.cutting.CuttingRecipeCategory;
+import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.integration.jei.cooking.CookingRecipeCategory;
 
 import java.util.List;
@@ -29,17 +31,20 @@ public class JEIPlugin implements IModPlugin
 	public void registerCategories(IRecipeCategoryRegistration registry)
 	{
 		registry.addRecipeCategories(new CookingRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
+		registry.addRecipeCategories(new CuttingRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
 	}
 
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
 		registration.addRecipes(findRecipesByType(CookingPotRecipe.TYPE), CookingRecipeCategory.UID);
+		registration.addRecipes(findRecipesByType(CuttingBoardRecipe.TYPE), CuttingRecipeCategory.UID);
 	}
 
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration)
 	{
 		registration.addRecipeCatalyst(new ItemStack(ModItems.COOKING_POT.get()), CookingRecipeCategory.UID);
+		registration.addRecipeCatalyst(new ItemStack(ModItems.CUTTING_BOARD.get()), CuttingRecipeCategory.UID);
 	}
 
 	@Override

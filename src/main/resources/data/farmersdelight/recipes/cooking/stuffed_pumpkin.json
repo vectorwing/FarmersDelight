@@ -1,0 +1,29 @@
+{
+  "type": "farmersdelight:cooking",
+  "ingredients": [
+    {
+      "tag": "forge:salad_ingredients"
+    },
+    {
+      "tag": "forge:vegetables"
+    },
+    {
+      "tag": "forge:crops/tomato"
+    },
+    {
+      "item": "minecraft:potato"
+    },
+    {
+      "item": "minecraft:brown_mushroom"
+    },
+    {
+      "item": "minecraft:sweet_berries"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:stuffed_pumpkin"
+  },
+  "container": {
+    "item": "minecraft:pumpkin"
+  }
+}

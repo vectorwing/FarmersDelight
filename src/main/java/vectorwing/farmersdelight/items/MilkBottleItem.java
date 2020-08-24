@@ -10,6 +10,7 @@ import net.minecraft.item.Items;
 import net.minecraft.item.UseAction;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.EffectType;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -40,9 +41,11 @@ public class MilkBottleItem extends Item
 			}
 
 			// Randomly pick one, then remove
-			EffectInstance selectedEffect = entityLiving.getActivePotionEffect(compatibleEffects.get(worldIn.rand.nextInt(compatibleEffects.size())));
-			if (!net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.living.PotionEvent.PotionRemoveEvent(entityLiving, selectedEffect))) {
-				entityLiving.removePotionEffect(selectedEffect.getPotion());
+			if (compatibleEffects.size() > 0) {
+				EffectInstance selectedEffect = entityLiving.getActivePotionEffect(compatibleEffects.get(worldIn.rand.nextInt(compatibleEffects.size())));
+				if (!net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.living.PotionEvent.PotionRemoveEvent(entityLiving, selectedEffect))) {
+					entityLiving.removePotionEffect(selectedEffect.getPotion());
+				}
 			}
 		}
 

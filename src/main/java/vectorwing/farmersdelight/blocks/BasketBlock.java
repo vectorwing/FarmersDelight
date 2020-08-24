@@ -6,6 +6,8 @@ import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.fluid.IFluidState;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.container.Container;
@@ -26,13 +28,15 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import vectorwing.farmersdelight.tile.BasketTileEntity;
 
 import javax.annotation.Nullable;
 
-public class BasketBlock extends ContainerBlock
+public class BasketBlock extends ContainerBlock implements IWaterLoggable
 {
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
 	public static final BooleanProperty ENABLED = BlockStateProperties.ENABLED;
+	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	public static final VoxelShape OUT_SHAPE = VoxelShapes.fullCube();
 	@SuppressWarnings("UnstableApiUsage")
 	public static final ImmutableMap<Direction, VoxelShape> SHAPE_FACING =
@@ -84,11 +88,7 @@ public class BasketBlock extends ContainerBlock
 	public BasketBlock()
 	{
 		super(Properties.create(Material.WOOD).hardnessAndResistance(1.5F).sound(SoundType.WOOD));
-	}
-
-	public BasketBlock(Block.Properties properties) {
-		super(properties);
-		this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.UP));
+		this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.UP).with(WATERLOGGED, false));
 	}
 
 	private static VoxelShape cutout(VoxelShape... cutouts) {
@@ -104,7 +104,7 @@ public class BasketBlock extends ContainerBlock
 	}
 
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(FACING, ENABLED);
+		builder.add(FACING, ENABLED, WATERLOGGED);
 	}
 
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
@@ -127,6 +127,10 @@ public class BasketBlock extends ContainerBlock
 
 			super.onReplaced(state, worldIn, pos, newState, isMoving);
 		}
+	}
+
+	public IFluidState getFluidState(BlockState state) {
+		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
 	}
 
 	// --- HOPPER STUFF ---
@@ -169,7 +173,8 @@ public class BasketBlock extends ContainerBlock
 	}
 
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.getDefaultState().with(FACING, context.getNearestLookingDirection().getOpposite());
+		IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
+		return this.getDefaultState().with(FACING, context.getNearestLookingDirection().getOpposite()).with(WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER);
 	}
 
 	public BlockState rotate(BlockState state, Rotation rot) {

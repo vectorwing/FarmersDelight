@@ -1,5 +1,39 @@
 # Changelog
 
+## 0.1.5
+- Cooking Pot now allows optional container overrides at recipe .json level:
+  - Stuffed Pumpkin now uses that to have Pumpkins as containers;
+  - All vanilla bowl foods now use it to have bowls as containers (they have no container in code);
+  - Foods without containers in code or in .json just drop to output (e.g. Dumplings);
+- Spent some time "sharpening" the Knives:
+  - Fixed duplication bug when repairing them;
+  - Knives are now able to receive a selection of weapon and tool enchantments;
+  - Knives are now effective tools for cloth, cake and some plant materials;
+  - Knives now have an exclusive enchantment: Backstabbing!
+    - Multiplies damage when striking a mob from behind: 1.4x, 1.8x and 2.2x at levels I, II and III respectively;
+  - Knives now lose only 1 durability point when striking mobs;
+- Stove now has a cozy flame animation;
+- Fixed Sea Beets dropping an unfarmable Beetroot instead of their seeds.
+
+## 0.1.4a
+- Fixes Crates lacking hardness and loot tables. Woops!
+
+## 0.1.4
+- Several fixes to the Cooking Pot:
+  - It can now be automated: top side receives ingredients, sides can add containers and remove servings;
+  - General performance fixes
+  - Placeholder icon disappears if slot is filled
+  - Better management of recipes and items
+  - Now emits bubbling sounds! :D
+- Added new foods and meals to make;
+- Added Hot Cocoa, which removes 1 random negative effect when drinked;
+- Farmer Villagers now buy the mod's basic crops (configurable);
+- Bees will now seek wild crops, and can enter Love Mode with them;
+- Added Crates for the basic crops, and reworked the Rice Bale
+- Eating hearty meals now gives you the Nourished buff:
+  - Constantly removes exhaustion unless you're spending saturation to heal damage;
+- Mixed Salad now gives a short burst of Regeneration
+
 ## 0.1.3
 - Adds Organic Compost, a nice sink for all these monster drops you have:
   - Organic Compost, when placed, will slowly decompose to Mulch over time;

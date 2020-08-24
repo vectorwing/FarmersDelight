@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:pie_crust"
+    ]
+  },
+  "criteria": {
+    "wheat": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:wheat"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:pie_crust"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "wheat",
+      "has_the_recipe"
+    ]
+  ]
+}

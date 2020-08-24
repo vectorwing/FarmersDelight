@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "straw": {
+    "canvas": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:straw"
+            "item": "farmersdelight:canvas"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "straw",
+      "canvas",
       "has_the_recipe"
     ]
   ]

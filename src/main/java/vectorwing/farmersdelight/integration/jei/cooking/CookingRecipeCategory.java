@@ -15,7 +15,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.init.ModItems;
+import vectorwing.farmersdelight.registry.ModItems;
 
 import java.util.Arrays;
 
@@ -98,8 +98,10 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 		itemStacks.init(MEAL_DISPLAY, true, 94, 9);
 		itemStacks.set(MEAL_DISPLAY, recipe.getRecipeOutput().getStack());
 
-		itemStacks.init(CONTAINER_INPUT, true, 62, 38);
-		itemStacks.set(CONTAINER_INPUT, recipe.getOutputContainer());
+		if (!recipe.getOutputContainer().isEmpty()) {
+			itemStacks.init(CONTAINER_INPUT, true, 62, 38);
+			itemStacks.set(CONTAINER_INPUT, recipe.getOutputContainer());
+		}
 
 		itemStacks.init(OUTPUT, true, 94, 38);
 		itemStacks.set(OUTPUT, recipe.getRecipeOutput().getStack());

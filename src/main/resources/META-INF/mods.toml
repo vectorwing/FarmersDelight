@@ -1,8 +1,4 @@
-# This is an example mods.toml file. It contains the data relating to the loading mods.
-# There are several mandatory fields (#mandatory), and many more that are optional (#optional).
-# The overall format is standard TOML format, v0.5.0.
-# Note that there are a couple of TOML lists in this file.
-# Find more information on toml format here:  https://github.com/toml-lang/toml
+
 # The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
 modLoader="javafml" #mandatory
 # A version range to match for said mod loader - for regular FML @Mod it will be the forge version
@@ -12,7 +8,7 @@ issueTrackerURL="https://github.com/vectorwing/FarmersDelight/issues" #optional
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 modId="farmersdelight" #mandatory
-version="1.15.2-0.1.3" #mandatory
+version="1.15.2-0.1.6" #mandatory
  # A display name for the mod
 displayName="Farmer's Delight" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>

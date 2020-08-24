@@ -11,7 +11,7 @@ import net.minecraft.world.storage.loot.LootFunction;
 import net.minecraft.world.storage.loot.LootParameters;
 import net.minecraft.world.storage.loot.conditions.ILootCondition;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.blocks.CookingPotTileEntity;
+import vectorwing.farmersdelight.tile.CookingPotTileEntity;
 
 public class CopyMealFunction extends LootFunction
 {
@@ -31,7 +31,7 @@ public class CopyMealFunction extends LootFunction
 		TileEntity tile = context.get(LootParameters.BLOCK_ENTITY);
 		if (tile instanceof CookingPotTileEntity)
 		{
-			CompoundNBT tag = ((CookingPotTileEntity) tile).writeMealNbt(new CompoundNBT());
+			CompoundNBT tag = ((CookingPotTileEntity) tile).writeMeal(new CompoundNBT());
 			if (!tag.isEmpty())
 			{
 				stack.setTagInfo("BlockEntityTag", tag);

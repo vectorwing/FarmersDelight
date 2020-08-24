@@ -3,8 +3,10 @@ package vectorwing.farmersdelight.data;
 import com.google.common.collect.Sets;
 import com.google.gson.GsonBuilder;
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.IRequirementsStrategy;
+import net.minecraft.advancements.criterion.ConsumeItemTrigger;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.PlacedBlockTrigger;
 import net.minecraft.block.Blocks;
@@ -18,8 +20,8 @@ import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.init.ModBlocks;
-import vectorwing.farmersdelight.init.ModItems;
+import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.Text;
 
 import java.io.IOException;
@@ -108,6 +110,30 @@ public class Advancements extends AdvancementProvider
 			Advancement dinnerIsServed = getAdvancement(fireUpTheGrill, ModItems.COOKING_POT.get(), "place_cooking_pot", FrameType.GOAL, true, true, false)
 					.withCriterion("cooking_pot", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.COOKING_POT.get()))
 					.register(consumer, getNameId("main/place_cooking_pot"));
+
+			Advancement watchYourFingers = getAdvancement(fireUpTheGrill, ModItems.CUTTING_BOARD.get(), "place_cutting_board", FrameType.TASK, true, true, false)
+					.withCriterion("cutting_board", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.CUTTING_BOARD.get()))
+					.register(consumer, getNameId("main/place_cutting_board"));
+
+			Advancement masterChef = getAdvancement(dinnerIsServed, ModItems.PASTA_WITH_MEATBALLS.get(), "master_chef", FrameType.CHALLENGE, true, true, false)
+					.withCriterion("mixed_salad", ConsumeItemTrigger.Instance.forItem(ModItems.MIXED_SALAD.get()))
+					.withCriterion("beef_stew", ConsumeItemTrigger.Instance.forItem(ModItems.BEEF_STEW.get()))
+					.withCriterion("chicken_soup", ConsumeItemTrigger.Instance.forItem(ModItems.CHICKEN_SOUP.get()))
+					.withCriterion("vegetable_soup", ConsumeItemTrigger.Instance.forItem(ModItems.VEGETABLE_SOUP.get()))
+					.withCriterion("fish_stew", ConsumeItemTrigger.Instance.forItem(ModItems.FISH_STEW.get()))
+					.withCriterion("fried_rice", ConsumeItemTrigger.Instance.forItem(ModItems.FRIED_RICE.get()))
+					.withCriterion("pumpkin_soup", ConsumeItemTrigger.Instance.forItem(ModItems.PUMPKIN_SOUP.get()))
+					.withCriterion("honey_glazed_ham", ConsumeItemTrigger.Instance.forItem(ModItems.HONEY_GLAZED_HAM.get()))
+					.withCriterion("pasta_with_meatballs", ConsumeItemTrigger.Instance.forItem(ModItems.PASTA_WITH_MEATBALLS.get()))
+					.withCriterion("pasta_with_mutton_chop", ConsumeItemTrigger.Instance.forItem(ModItems.PASTA_WITH_MUTTON_CHOP.get()))
+					.withCriterion("vegetable_noodles", ConsumeItemTrigger.Instance.forItem(ModItems.VEGETABLE_NOODLES.get()))
+					.withCriterion("steak_and_potatoes", ConsumeItemTrigger.Instance.forItem(ModItems.STEAK_AND_POTATOES.get()))
+					.withCriterion("shepherds_pie", ConsumeItemTrigger.Instance.forItem(ModItems.SHEPHERDS_PIE.get()))
+					.withCriterion("ratatouille", ConsumeItemTrigger.Instance.forItem(ModItems.RATATOUILLE.get()))
+					.withCriterion("squid_ink_pasta", ConsumeItemTrigger.Instance.forItem(ModItems.SQUID_INK_PASTA.get()))
+					.withCriterion("stuffed_pumpkin", ConsumeItemTrigger.Instance.forItem(ModItems.STUFFED_PUMPKIN.get()))
+					.withRewards(AdvancementRewards.Builder.experience(200))
+					.register(consumer, getNameId("main/master_chef"));
 		}
 
 		protected static Advancement.Builder getAdvancement(Advancement parent, IItemProvider display, String name, FrameType frame, boolean showToast, boolean announceToChat, boolean hidden)

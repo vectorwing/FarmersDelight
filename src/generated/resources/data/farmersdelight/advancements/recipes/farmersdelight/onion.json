@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:onion"
+    ]
+  },
+  "criteria": {
+    "onion_crate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:onion_crate"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:onion"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "onion_crate",
+      "has_the_recipe"
+    ]
+  ]
+}

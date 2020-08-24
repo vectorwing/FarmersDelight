@@ -6,10 +6,8 @@ import net.minecraft.util.registry.Registry;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.init.ModBlocks;
-import vectorwing.farmersdelight.init.ModItems;
-import vectorwing.farmersdelight.init.ModContainerTypes;
-import vectorwing.farmersdelight.init.ModTileEntityTypes;
+import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.registry.*;
 import vectorwing.farmersdelight.setup.ClientEventHandler;
 import vectorwing.farmersdelight.setup.CommonEventHandler;
 import net.minecraftforge.common.MinecraftForge;
@@ -40,10 +38,14 @@ public class FarmersDelight
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        ModEnchantments.ENCHANTMENTS.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
+        ModEffects.EFFECTS.register(modEventBus);
+        ModSounds.SOUNDS.register(modEventBus);
         ModTileEntityTypes.TILES.register(modEventBus);
         ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
+        ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -52,5 +54,7 @@ public class FarmersDelight
     {
         Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(FarmersDelight.MODID, "cooking"), CookingPotRecipe.TYPE);
         event.getRegistry().register(CookingPotRecipe.SERIALIZER);
+        Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(FarmersDelight.MODID, "cutting"), CuttingBoardRecipe.TYPE);
+        event.getRegistry().register(CuttingBoardRecipe.SERIALIZER);
     }
 }

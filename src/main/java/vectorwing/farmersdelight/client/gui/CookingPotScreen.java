@@ -4,13 +4,11 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.SoupItem;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.container.CookingPotContainer;
+import vectorwing.farmersdelight.tile.container.CookingPotContainer;
 import vectorwing.farmersdelight.utils.Text;
 
 import java.util.ArrayList;
@@ -44,14 +42,8 @@ public class CookingPotScreen extends ContainerScreen<CookingPotContainer>
 				ItemStack meal = this.hoveredSlot.getStack();
 				tooltip.add(meal.getItem().getName().applyTextStyle(meal.getRarity().color).getFormattedText());
 
-				String container;
-				if (meal.hasContainerItem()) {
-					container = meal.getContainerItem().getItem().getName().getFormattedText();
-				} else if (meal.getItem() instanceof SoupItem) {
-					container = Items.BOWL.getItem().getName().getFormattedText();
-				} else {
-					container = "";
-				}
+				ItemStack containerItem = this.container.tileEntity.getContainer();
+				String container = !containerItem.isEmpty() ? containerItem.getItem().getName().getFormattedText() : "";
 
 				if (!container.equals("")) {
 					String served = Text.getTranslation("container.cooking_pot.served_on", container).applyTextStyle(TextFormatting.GRAY).getFormattedText();

@@ -25,8 +25,8 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import vectorwing.farmersdelight.init.ModBlocks;
-import vectorwing.farmersdelight.init.ModItems;
+import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.registry.ModItems;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -211,7 +211,6 @@ public class TallRiceCropBlock extends BushBlock implements IWaterLoggable, IGro
 
 	@Override
 	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, IFluidState fluidStateIn) {
-		//return state.get(HALF) == DoubleBlockHalf.LOWER;
 		return true;
 	}
 

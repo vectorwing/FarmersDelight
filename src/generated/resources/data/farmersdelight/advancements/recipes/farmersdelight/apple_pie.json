@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:apple_pie"
+    ]
+  },
+  "criteria": {
+    "pie_crust": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:pie_crust"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:apple_pie"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "pie_crust",
+      "has_the_recipe"
+    ]
+  ]
+}

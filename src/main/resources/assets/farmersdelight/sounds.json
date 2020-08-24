@@ -1,0 +1,60 @@
+{
+  "block.cooking_pot.boil": {
+    "category": "block",
+    "subtitle": "block.cooking_pot.boil.subtitles",
+    "sounds": [
+      {
+        "name": "farmersdelight:block/cooking_pot_boil1",
+        "stream": true
+      },
+      {
+        "name": "farmersdelight:block/cooking_pot_boil2",
+        "stream": true
+      }
+    ]
+  },
+  "block.cutting_board.knife": {
+    "category": "block",
+    "subtitle": "block.cutting_board.knife.subtitles",
+    "sounds": [
+      {
+        "name": "farmersdelight:block/cutting_board_knife1",
+        "stream": true
+      },
+      {
+        "name": "farmersdelight:block/cutting_board_knife2",
+        "stream": true
+      }
+    ]
+  },
+  "block.stove.crackle": {
+    "category": "block",
+    "subtitle": "block.stove.crackle.subtitles",
+    "sounds": [
+      {
+        "name": "block/campfire/crackle1",
+        "stream": true
+      },
+      {
+        "name": "block/campfire/crackle2",
+        "stream": true
+      },
+      {
+        "name": "block/campfire/crackle3",
+        "stream": true
+      },
+      {
+        "name": "block/campfire/crackle4",
+        "stream": true
+      },
+      {
+        "name": "block/campfire/crackle5",
+        "stream": true
+      },
+      {
+        "name": "block/campfire/crackle6",
+        "stream": true
+      }
+    ]
+  }
+}

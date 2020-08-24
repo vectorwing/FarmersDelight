@@ -21,8 +21,8 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import vectorwing.farmersdelight.init.ModBlocks;
-import vectorwing.farmersdelight.init.ModItems;
+import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.registry.ModItems;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -155,12 +155,6 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 	{
 		this.grow(worldIn, pos, state);
 	}
-
-	@Override
-	public boolean canContainFluid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn)	{ return false;	}
-
-	@Override
-	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, IFluidState fluidStateIn) {	return false; }
 
 	public IFluidState getFluidState(BlockState state) {
 		return Fluids.WATER.getStillFluidState(false);

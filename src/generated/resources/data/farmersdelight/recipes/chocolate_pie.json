@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ccc",
+    "mmm",
+    "xOx"
+  ],
+  "key": {
+    "c": {
+      "item": "minecraft:cocoa_beans"
+    },
+    "m": {
+      "tag": "forge:milk"
+    },
+    "x": {
+      "item": "minecraft:sugar"
+    },
+    "O": {
+      "item": "farmersdelight:pie_crust"
+    }
+  },
+  "result": {
+    "item": "farmersdelight:chocolate_pie"
+  }
+}

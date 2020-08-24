@@ -1,19 +1,20 @@
 package vectorwing.farmersdelight.data;
 
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.init.ModBlocks;
-import vectorwing.farmersdelight.init.ModItems;
+import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.registry.ModItems;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.utils.ForgeTags;
-import vectorwing.farmersdelight.utils.Tags;
+import vectorwing.farmersdelight.utils.ModTags;
 
 import java.util.function.Consumer;
 
@@ -32,11 +33,11 @@ public class Recipes extends RecipeProvider
 		recipesTools(consumer);
 		recipesMaterials(consumer);
 		recipesFoodstuffs(consumer);
+		recipesFoodBlocks(consumer);
 		recipesCraftedMeals(consumer);
-		//recipesCookedMeals(consumer);
 	}
 
-	private void foodSmeltingRecipes(String name, IItemProvider ingredient, IItemProvider result, float experience, int cookingTime, Consumer<IFinishedRecipe> consumer) {
+	private void foodSmeltingRecipes(String name, IItemProvider ingredient, IItemProvider result, float experience, Consumer<IFinishedRecipe> consumer) {
 		String namePrefix = new ResourceLocation(FarmersDelight.MODID, name).toString();
 		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ingredient),
 				result, experience, 200)
@@ -54,7 +55,7 @@ public class Recipes extends RecipeProvider
 
 	/**
 	 * The following recipes should ALWAYS define a custom save location.
-	 * If not, they fall on the minecraft namespace, overriding any other recipe.
+	 * If not, they fall on the minecraft namespace, overriding vanilla recipes instead of being alternatives.
 	 */
 	private void recipesVanillaAlternatives(Consumer<IFinishedRecipe> consumer) {
 		ShapedRecipeBuilder.shapedRecipe(Items.SCAFFOLDING, 6)
@@ -63,7 +64,7 @@ public class Recipes extends RecipeProvider
 				.patternLine("b b")
 				.key('b', Items.BAMBOO)
 				.key('#', ModItems.CANVAS.get())
-				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
+				.addCriterion("canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
 				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "scaffolding_from_canvas"));
 		ShapedRecipeBuilder.shapedRecipe(Items.LEAD)
 				.patternLine("rr ")
@@ -80,6 +81,12 @@ public class Recipes extends RecipeProvider
 				.key('c', ModItems.CANVAS.get())
 				.addCriterion("canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
 				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "painting_from_canvas"));
+		ShapedRecipeBuilder.shapedRecipe(Items.PUMPKIN)
+				.patternLine("##")
+				.patternLine("##")
+				.key('#', ModItems.PUMPKIN_SLICE.get())
+				.addCriterion("pumpkin_slice", InventoryChangeTrigger.Instance.forItems(ModItems.PUMPKIN_SLICE.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "pumpkin_from_slices"));
 		ShapedRecipeBuilder.shapedRecipe(Items.CAKE)
 				.patternLine("mmm")
 				.patternLine("ses")
@@ -110,7 +117,11 @@ public class Recipes extends RecipeProvider
 	}
 
 	private void recipesSmelting(Consumer<IFinishedRecipe> consumer) {
-		foodSmeltingRecipes("fried_egg", Items.EGG, ModItems.FRIED_EGG.get(), 0.35F, 200, consumer);
+		foodSmeltingRecipes("fried_egg", Items.EGG, ModItems.FRIED_EGG.get(), 0.35F, consumer);
+		foodSmeltingRecipes("beef_patty", ModItems.MINCED_BEEF.get(), ModItems.BEEF_PATTY.get(), 0.35F, consumer);
+		foodSmeltingRecipes("cooked_chicken_cuts", ModItems.CHICKEN_CUTS.get(), ModItems.COOKED_CHICKEN_CUTS.get(), 0.35F, consumer);
+		foodSmeltingRecipes("cooked_cod_slice", ModItems.COD_SLICE.get(), ModItems.COOKED_COD_SLICE.get(), 0.35F, consumer);
+		foodSmeltingRecipes("cooked_salmon_slice", ModItems.SALMON_SLICE.get(), ModItems.COOKED_SALMON_SLICE.get(), 0.35F, consumer);
 	}
 
 	private void recipesBlocks(Consumer<IFinishedRecipe> consumer) {
@@ -141,6 +152,14 @@ public class Recipes extends RecipeProvider
 				.key('#', ModItems.CANVAS.get())
 				.addCriterion("canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
 				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModBlocks.CUTTING_BOARD.get())
+				.patternLine(" K ")
+				.patternLine("/##")
+				.key('K', ModTags.KNIVES)
+				.key('/', Items.STICK)
+				.key('#', ItemTags.PLANKS)
+				.addCriterion("stick", InventoryChangeTrigger.Instance.forItems(Items.STICK))
+				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ModItems.ROPE.get(), 3)
 				.patternLine("s")
 				.patternLine("s")
@@ -154,11 +173,32 @@ public class Recipes extends RecipeProvider
 				.key('r', ModItems.ROPE.get())
 				.addCriterion("rope", InventoryChangeTrigger.Instance.forItems(ModItems.ROPE.get()))
 				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.CABBAGE_CRATE.get(), 1)
+				.patternLine("###")
+				.patternLine("###")
+				.patternLine("###")
+				.key('#', ModItems.CABBAGE.get())
+				.addCriterion("cabbage", InventoryChangeTrigger.Instance.forItems(ModItems.CABBAGE.get()))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.TOMATO_CRATE.get(), 1)
+				.patternLine("###")
+				.patternLine("###")
+				.patternLine("###")
+				.key('#', ModItems.TOMATO.get())
+				.addCriterion("tomato", InventoryChangeTrigger.Instance.forItems(ModItems.TOMATO.get()))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.ONION_CRATE.get(), 1)
+				.patternLine("###")
+				.patternLine("###")
+				.patternLine("###")
+				.key('#', ModItems.ONION.get())
+				.addCriterion("onion", InventoryChangeTrigger.Instance.forItems(ModItems.ONION.get()))
+				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ModItems.RICE_BALE.get(), 1)
-				.patternLine("rrr")
-				.patternLine("rrr")
-				.patternLine("rrr")
-				.key('r', ModItems.RICE_PANICLE.get())
+				.patternLine("###")
+				.patternLine("###")
+				.patternLine("###")
+				.key('#', ModItems.RICE_PANICLE.get())
 				.addCriterion("rice_panicle", InventoryChangeTrigger.Instance.forItems(ModItems.RICE_PANICLE.get()))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ORGANIC_COMPOST.get(), 1)
@@ -227,6 +267,18 @@ public class Recipes extends RecipeProvider
 				.key('#', ModItems.STRAW.get())
 				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
 				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CABBAGE.get(), 9)
+				.addIngredient(ModItems.CABBAGE_CRATE.get())
+				.addCriterion("cabbage_crate", InventoryChangeTrigger.Instance.forItems(ModItems.CABBAGE_CRATE.get()))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.TOMATO.get(), 9)
+				.addIngredient(ModItems.TOMATO_CRATE.get())
+				.addCriterion("tomato_crate", InventoryChangeTrigger.Instance.forItems(ModItems.TOMATO_CRATE.get()))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ONION.get(), 9)
+				.addIngredient(ModItems.ONION_CRATE.get())
+				.addCriterion("onion_crate", InventoryChangeTrigger.Instance.forItems(ModItems.ONION_CRATE.get()))
+				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RICE_PANICLE.get(), 9)
 				.addIngredient(ModItems.RICE_BALE.get())
 				.addCriterion("rice_bale", InventoryChangeTrigger.Instance.forItems(ModItems.RICE_BALE.get()))
@@ -257,12 +309,19 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.WHEAT)
 				.addIngredient(Items.WHEAT)
 				.addIngredient(Items.EGG)
-				.addIngredient(new ItemTags.Wrapper(new ResourceLocation("forge", "knives")))
+				.addIngredient(ForgeTags.KNIVES)
 				.addCriterion("egg", InventoryChangeTrigger.Instance.forItems(Items.EGG))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.PIE_CRUST.get(), 1)
+				.patternLine("wMw")
+				.patternLine(" w ")
+				.key('w', Items.WHEAT)
+				.key('M', ForgeTags.MILK)
+				.addCriterion("wheat", InventoryChangeTrigger.Instance.forItems(Items.WHEAT))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CAKE_SLICE.get(), 7)
 				.addIngredient(Blocks.CAKE)
-				.addIngredient(Tags.FORGE_KNIVES)
+				.addIngredient(ForgeTags.KNIVES)
 				.addCriterion("cake", InventoryChangeTrigger.Instance.forItems(Blocks.CAKE))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.SWEET_BERRY_COOKIE.get(), 8)
@@ -278,6 +337,57 @@ public class Recipes extends RecipeProvider
 				.addCriterion("honey_bottle", InventoryChangeTrigger.Instance.forItems(Items.HONEY_BOTTLE))
 				.build(consumer);
 	}
+
+	private void recipesFoodBlocks(Consumer<IFinishedRecipe> consumer) {
+		ShapedRecipeBuilder.shapedRecipe(ModItems.APPLE_PIE.get(), 1)
+				.patternLine("###")
+				.patternLine("aaa")
+				.patternLine("xOx")
+				.key('#', Items.WHEAT)
+				.key('a', Items.APPLE)
+				.key('x', Items.SUGAR)
+				.key('O', ModItems.PIE_CRUST.get())
+				.addCriterion("pie_crust", InventoryChangeTrigger.Instance.forItems(ModItems.PIE_CRUST.get()))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.APPLE_PIE.get(), 1)
+				.patternLine("##")
+				.patternLine("##")
+				.key('#', ModItems.APPLE_PIE_SLICE.get())
+				.addCriterion("apple_pie_slice", InventoryChangeTrigger.Instance.forItems(ModItems.APPLE_PIE_SLICE.get()))
+				.build(consumer, "apple_pie_from_slices");
+		ShapedRecipeBuilder.shapedRecipe(ModItems.SWEET_BERRY_CHEESECAKE.get(), 1)
+				.patternLine("sss")
+				.patternLine("sss")
+				.patternLine("mOm")
+				.key('s', Items.SWEET_BERRIES)
+				.key('m', ForgeTags.MILK)
+				.key('O', ModItems.PIE_CRUST.get())
+				.addCriterion("pie_crust", InventoryChangeTrigger.Instance.forItems(ModItems.PIE_CRUST.get()))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.SWEET_BERRY_CHEESECAKE.get(), 1)
+				.patternLine("##")
+				.patternLine("##")
+				.key('#', ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get())
+				.addCriterion("sweet_berry_cheesecake_slice", InventoryChangeTrigger.Instance.forItems(ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get()))
+				.build(consumer, "sweet_berry_cheesecake_from_slices");
+		ShapedRecipeBuilder.shapedRecipe(ModItems.CHOCOLATE_PIE.get(), 1)
+				.patternLine("ccc")
+				.patternLine("mmm")
+				.patternLine("xOx")
+				.key('c', Items.COCOA_BEANS)
+				.key('m', ForgeTags.MILK)
+				.key('x', Items.SUGAR)
+				.key('O', ModItems.PIE_CRUST.get())
+				.addCriterion("pie_crust", InventoryChangeTrigger.Instance.forItems(ModItems.PIE_CRUST.get()))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.CHOCOLATE_PIE.get(), 1)
+				.patternLine("##")
+				.patternLine("##")
+				.key('#', ModItems.CHOCOLATE_PIE_SLICE.get())
+				.addCriterion("chocolate_pie_slice", InventoryChangeTrigger.Instance.forItems(ModItems.CHOCOLATE_PIE_SLICE.get()))
+				.build(consumer, "chocolate_pie_from_slices");
+	}
+
 	private void recipesCraftedMeals(Consumer<IFinishedRecipe> consumer) {
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.MIXED_SALAD.get())
 				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
@@ -296,20 +406,33 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.STICK)
 				.addCriterion("barbecue", InventoryChangeTrigger.Instance.forItems(Items.COOKED_BEEF))
 				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.EGG_SANDWICH.get())
+				.addIngredient(ForgeTags.BREAD)
+				.addIngredient(ModItems.FRIED_EGG.get())
+				.addIngredient(ModItems.FRIED_EGG.get())
+				.addCriterion("fried_egg", InventoryChangeTrigger.Instance.forItems(ModItems.FRIED_EGG.get()))
+				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CHICKEN_SANDWICH.get())
 				.addIngredient(ForgeTags.BREAD)
-				.addIngredient(Items.COOKED_CHICKEN)
+				.addIngredient(ForgeTags.COOKED_CHICKEN)
 				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
 				.addIngredient(ForgeTags.CROPS_TOMATO)
 				.addCriterion("cooked_chicken", InventoryChangeTrigger.Instance.forItems(Items.COOKED_CHICKEN))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.HAMBURGER.get())
 				.addIngredient(ForgeTags.BREAD)
-				.addIngredient(Items.COOKED_BEEF)
+				.addIngredient(ModItems.BEEF_PATTY.get())
 				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
 				.addIngredient(ForgeTags.CROPS_TOMATO)
 				.addIngredient(ForgeTags.CROPS_ONION)
 				.addCriterion("hamburger", InventoryChangeTrigger.Instance.forItems(Items.COOKED_BEEF))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.STUFFED_POTATO.get())
+				.addIngredient(Items.BAKED_POTATO)
+				.addIngredient(ForgeTags.COOKED_BEEF)
+				.addIngredient(Items.CARROT)
+				.addIngredient(ForgeTags.MILK)
+				.addCriterion("baked_potato", InventoryChangeTrigger.Instance.forItems(Items.BAKED_POTATO))
 				.build(consumer);
 	}
 	private void recipesCookedMeals(Consumer<IFinishedRecipe> consumer) {}

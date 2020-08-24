@@ -4,7 +4,8 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.*;
-import vectorwing.farmersdelight.init.ModTileEntityTypes;
+import vectorwing.farmersdelight.registry.ModSounds;
+import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,6 +25,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import vectorwing.farmersdelight.tile.StoveTileEntity;
 import vectorwing.farmersdelight.utils.Utils;
 
 import javax.annotation.Nullable;
@@ -136,7 +138,7 @@ public class StoveBlock extends Block
 			double d1 = pos.getY();
 			double d2 = (double)pos.getZ() + 0.5D;
 			if (rand.nextInt(10) == 0) {
-				worldIn.playSound(d0, d1, d2, SoundEvents.BLOCK_CAMPFIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+				worldIn.playSound(d0, d1, d2, ModSounds.BLOCK_STOVE_CRACKLE.get(), SoundCategory.BLOCKS, 1.0F, 1.0F, false);
 			}
 
 			Direction direction = stateIn.get(HorizontalBlock.HORIZONTAL_FACING);
