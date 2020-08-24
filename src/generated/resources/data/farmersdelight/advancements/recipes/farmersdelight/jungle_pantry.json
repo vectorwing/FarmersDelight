@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:jungle_pantry"
+    ]
+  },
+  "criteria": {
+    "jungle_trapdoor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:jungle_trapdoor"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:jungle_pantry"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "jungle_trapdoor",
+      "has_the_recipe"
+    ]
+  ]
+}

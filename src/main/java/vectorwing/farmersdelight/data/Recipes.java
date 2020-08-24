@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.data;
 
+import net.minecraft.block.WoodType;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -159,6 +160,54 @@ public class Recipes extends RecipeProvider
 				.key('/', Items.STICK)
 				.key('#', ItemTags.PLANKS)
 				.addCriterion("stick", InventoryChangeTrigger.Instance.forItems(Items.STICK))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModBlocks.OAK_PANTRY.get())
+				.patternLine("___")
+				.patternLine("D D")
+				.patternLine("___")
+				.key('_', Items.OAK_SLAB)
+				.key('D', Items.OAK_TRAPDOOR)
+				.addCriterion("oak_trapdoor", InventoryChangeTrigger.Instance.forItems(Items.OAK_TRAPDOOR))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModBlocks.BIRCH_PANTRY.get())
+				.patternLine("___")
+				.patternLine("D D")
+				.patternLine("___")
+				.key('_', Items.BIRCH_SLAB)
+				.key('D', Items.BIRCH_TRAPDOOR)
+				.addCriterion("birch_trapdoor", InventoryChangeTrigger.Instance.forItems(Items.BIRCH_TRAPDOOR))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModBlocks.SPRUCE_PANTRY.get())
+				.patternLine("___")
+				.patternLine("D D")
+				.patternLine("___")
+				.key('_', Items.SPRUCE_SLAB)
+				.key('D', Items.SPRUCE_TRAPDOOR)
+				.addCriterion("spruce_trapdoor", InventoryChangeTrigger.Instance.forItems(Items.SPRUCE_TRAPDOOR))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModBlocks.JUNGLE_PANTRY.get())
+				.patternLine("___")
+				.patternLine("D D")
+				.patternLine("___")
+				.key('_', Items.JUNGLE_SLAB)
+				.key('D', Items.JUNGLE_TRAPDOOR)
+				.addCriterion("jungle_trapdoor", InventoryChangeTrigger.Instance.forItems(Items.JUNGLE_TRAPDOOR))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModBlocks.ACACIA_PANTRY.get())
+				.patternLine("___")
+				.patternLine("D D")
+				.patternLine("___")
+				.key('_', Items.ACACIA_SLAB)
+				.key('D', Items.ACACIA_TRAPDOOR)
+				.addCriterion("acacia_trapdoor", InventoryChangeTrigger.Instance.forItems(Items.ACACIA_TRAPDOOR))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModBlocks.DARK_OAK_PANTRY.get())
+				.patternLine("___")
+				.patternLine("D D")
+				.patternLine("___")
+				.key('_', Items.DARK_OAK_SLAB)
+				.key('D', Items.DARK_OAK_TRAPDOOR)
+				.addCriterion("dark_oak_trapdoor", InventoryChangeTrigger.Instance.forItems(Items.DARK_OAK_TRAPDOOR))
 				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ModItems.ROPE.get(), 3)
 				.patternLine("s")

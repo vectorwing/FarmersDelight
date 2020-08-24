@@ -112,6 +112,7 @@
   "farmersdelight.container.cooking_pot": "Panela",
   "farmersdelight.container.cooking_pot.served_on": "Servido em: ",
   "farmersdelight.container.basket": "Cesto",
+  "farmersdelight.container.pantry": "Despensa",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Vazia",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Contém 1 porção de:",
