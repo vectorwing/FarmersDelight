@@ -2,6 +2,7 @@
   "block.farmersdelight.stove": "炉灶",
   "block.farmersdelight.cooking_pot": "厨锅",
   "block.farmersdelight.basket": "篮子",
+  "block.farmersdelight.cutting_board": "Cutting Board",
   "block.farmersdelight.rope": "绳子",
   "block.farmersdelight.safety_net": "安全网",
   "block.farmersdelight.organic_compost": "有机肥料",
@@ -39,7 +40,24 @@
   "item.farmersdelight.milk_bottle": "牛奶瓶",
   "item.farmersdelight.hot_cocoa": "热可可",
   "item.farmersdelight.raw_pasta": "生意面",
+  "item.farmersdelight.pumpkin_slice": "Pumpkin Slice",
+  "item.farmersdelight.minced_beef": "Minced Beef",
+  "item.farmersdelight.beef_patty": "Beef Patty",
+  "item.farmersdelight.chicken_cuts": "Raw Chicken Cuts",
+  "item.farmersdelight.cooked_chicken_cuts": "Cooked Chicken Cuts",
+  "item.farmersdelight.cod_slice": "Raw Cod Slice",
+  "item.farmersdelight.cooked_cod_slice": "Cooked Cod Slice",
+  "item.farmersdelight.salmon_slice": "Raw Salmon Slice",
+  "item.farmersdelight.cooked_salmon_slice": "Cooked Salmon Slice",
+
+  "item.farmersdelight.pie_crust": "Pie Crust",
   "item.farmersdelight.cake_slice": "切片蛋糕",
+  "item.farmersdelight.apple_pie_slice": "Slice of Apple Pie",
+  "item.farmersdelight.sweet_berry_cheesecake_slice": "Slice of Sweet Berry Cheesecake",
+  "item.farmersdelight.chocolate_pie_slice": "Slice of Chocolate Pie",
+  "block.farmersdelight.apple_pie": "Apple Pie",
+  "block.farmersdelight.sweet_berry_cheesecake": "Sweet Berry Cheesecake",
+  "block.farmersdelight.chocolate_pie": "Chocolate Pie",
   "item.farmersdelight.sweet_berry_cookie": "甜莓曲奇",
   "item.farmersdelight.honey_cookie": "蜂蜜曲奇",
   "item.farmersdelight.earthworm": "蚯蚓",
@@ -78,6 +96,10 @@
   "item.farmersdelight.horse_feed": "马食",
 
   "effect.farmersdelight.nourished": "滋养",
+  "effect.farmersdelight.comfort": "Comfort",
+
+  "enchantment.farmersdelight.backstabbing": "Backstabbing",
+  "enchantment.farmersdelight.backstabbing.desc": "Amplifies damage when striking a target from behind.",
   
   "itemGroup.farmersdelight": "欣悦农夫",
 
@@ -99,19 +121,25 @@
   "farmersdelight.advancement.harvest_straw.desc": "使用刀获取一些秸秆",
   "farmersdelight.advancement.get_mulch": "食物种植",
   "farmersdelight.advancement.get_mulch.desc": "留下一些有机肥料，让它分解直到它成为覆盖戍",
+  
   "farmersdelight.advancement.place_campfire": "Bonfire Lit",
   "farmersdelight.advancement.place_campfire.desc": "放置一个篝火，让你在夜晚不再寒冷",
   "farmersdelight.advancement.craft_stove": "点起火来",
   "farmersdelight.advancement.craft_stove.desc": "得到一个炉灶",
   "farmersdelight.advancement.place_cooking_pot": "晚餐上桌喽！",
   "farmersdelight.advancement.place_cooking_pot.desc": "放置一个厨锅并准备做饭！",
+  "farmersdelight.advancement.place_cutting_board": "Watch Your Fingers...",
+  "farmersdelight.advancement.place_cutting_board.desc": "With a tool in hand, use a Cutting Board to split up some items",
   "farmersdelight.advancement.master_chef": "厨神当道",
   "farmersdelight.advancement.master_chef.desc": "将全部的菜肴品尝一遍！",
 
   "block.cooking_pot.boil": "厨锅蒸煮",
   "block.cooking_pot.boil.subtitles": "厨锅：蒸煮",
+  "block.cutting_board.knife": "Knife Cut",
+  "block.cutting_board.knife.subtitles": "Knife cuts",
   "block.stove.crackle": "炉灶噼啪",
   "block.stove.crackle.subtitles": "炉灶：噼啪",
 
   "farmersdelight.jei.cooking": "烹饪"
+  "farmersdelight.jei.cutting": "Cutting Board"
 }
