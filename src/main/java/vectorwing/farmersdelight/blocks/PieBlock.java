@@ -5,10 +5,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.pathfinding.PathType;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.*;
@@ -49,8 +49,12 @@ public class PieBlock extends Block {
 		return 0.3F;
 	}
 
-	protected ItemStack getPieSliceItem() {
+	public ItemStack getPieSliceItem() {
 		return ItemStack.EMPTY;
+	}
+
+	public EffectInstance getPieEffect() {
+		return new EffectInstance(Effects.SPEED, 1800, 0);
 	}
 
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
@@ -87,6 +91,9 @@ public class PieBlock extends Block {
 			return ActionResultType.PASS;
 		} else {
 			playerIn.getFoodStats().addStats(this.getBiteHunger(), this.getBiteSaturation());
+			if (this.getPieEffect() != null) {
+				playerIn.addPotionEffect(this.getPieEffect());
+			}
 			int i = state.get(BITES);
 			if (i < getMaxBites() - 1) {
 				worldIn.setBlockState(pos, state.with(BITES, i + 1), 3);
