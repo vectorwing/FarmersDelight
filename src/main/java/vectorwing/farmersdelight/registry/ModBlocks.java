@@ -63,11 +63,11 @@ public class ModBlocks
 	public static final RegistryObject<Block> WILD_CABBAGES = BLOCKS.register("wild_cabbages",
 			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_ONIONS = BLOCKS.register("wild_onions",
-			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+			() -> new WildCropsBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_TOMATOES = BLOCKS.register("wild_tomatoes",
 			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_CARROTS = BLOCKS.register("wild_carrots",
-			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+			() -> new WildCropsBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_POTATOES = BLOCKS.register("wild_potatoes",
 			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_BEETROOTS = BLOCKS.register("wild_beetroots",
