@@ -3,6 +3,12 @@
   "block.farmersdelight.cooking_pot": "Cooking Pot",
   "block.farmersdelight.basket": "Basket",
   "block.farmersdelight.cutting_board": "Cutting Board",
+  "block.farmersdelight.oak_pantry": "Oak Pantry",
+  "block.farmersdelight.birch_pantry": "Birch Pantry",
+  "block.farmersdelight.spruce_pantry": "Spruce Pantry",
+  "block.farmersdelight.jungle_pantry": "Jungle Pantry",
+  "block.farmersdelight.acacia_pantry": "Acacia Pantry",
+  "block.farmersdelight.dark_oak_pantry": "Dark Oak Pantry",
   "block.farmersdelight.rope": "Rope",
   "block.farmersdelight.safety_net": "Safety Net",
   "block.farmersdelight.organic_compost": "Organic Compost",
@@ -13,10 +19,6 @@
   "block.farmersdelight.onion_crate": "Onion Crate",
   "block.farmersdelight.rice_bale": "Rice Bale",
 
-  "block.farmersdelight.cabbages": "Cabbage Seeds",
-  "block.farmersdelight.onions": "Onion",
-  "block.farmersdelight.tomatoes": "Tomato Seeds",
-  "block.farmersdelight.rice_crop": "Rice",
   "block.farmersdelight.brown_mushroom_colony": "Brown Mushroom Colony",
   "block.farmersdelight.red_mushroom_colony": "Red Mushroom Colony",
 
@@ -27,8 +29,16 @@
   "block.farmersdelight.wild_potatoes": "Wild Potatoes",
   "block.farmersdelight.wild_beetroots": "Sea Beet",
 
+  "block.farmersdelight.apple_pie": "Apple Pie",
+  "block.farmersdelight.sweet_berry_cheesecake": "Sweet Berry Cheesecake",
+  "block.farmersdelight.chocolate_pie": "Chocolate Pie",
+
   "item.farmersdelight.tomato": "Tomato",
   "item.farmersdelight.cabbage": "Cabbage",
+  "item.farmersdelight.onion": "Onion",
+  "item.farmersdelight.rice": "Rice",
+  "item.farmersdelight.cabbage_seeds": "Cabbage Seeds",
+  "item.farmersdelight.tomato_seeds": "Tomato Seeds",
   "item.farmersdelight.rice_panicle": "Rice Panicle",
 
   "item.farmersdelight.straw": "Straw",
@@ -55,9 +65,6 @@
   "item.farmersdelight.apple_pie_slice": "Slice of Apple Pie",
   "item.farmersdelight.sweet_berry_cheesecake_slice": "Slice of Sweet Berry Cheesecake",
   "item.farmersdelight.chocolate_pie_slice": "Slice of Chocolate Pie",
-  "block.farmersdelight.apple_pie": "Apple Pie",
-  "block.farmersdelight.sweet_berry_cheesecake": "Sweet Berry Cheesecake",
-  "block.farmersdelight.chocolate_pie": "Chocolate Pie",
   "item.farmersdelight.sweet_berry_cookie": "Sweet Berry Cookie",
   "item.farmersdelight.honey_cookie": "Honey Cookie",
   "item.farmersdelight.earthworm": "Earthworm",
@@ -106,6 +113,7 @@
   "farmersdelight.container.cooking_pot": "Cooking Pot",
   "farmersdelight.container.cooking_pot.served_on": "Served on: %s",
   "farmersdelight.container.basket": "Basket",
+  "farmersdelight.container.pantry": "Pantry",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Empty",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Holds 1 serving of:",

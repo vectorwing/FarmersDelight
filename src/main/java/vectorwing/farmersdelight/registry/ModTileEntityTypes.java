@@ -1,10 +1,7 @@
 package vectorwing.farmersdelight.registry;
 
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.tile.BasketTileEntity;
-import vectorwing.farmersdelight.tile.CookingPotTileEntity;
-import vectorwing.farmersdelight.tile.CuttingBoardTileEntity;
-import vectorwing.farmersdelight.tile.StoveTileEntity;
+import vectorwing.farmersdelight.tile.*;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -22,4 +19,8 @@ public class ModTileEntityTypes
 			() -> TileEntityType.Builder.create(BasketTileEntity::new, ModBlocks.BASKET.get()).build(null));
 	public static final RegistryObject<TileEntityType<CuttingBoardTileEntity>> CUTTING_BOARD_TILE = TILES.register("cutting_board",
 			() -> TileEntityType.Builder.create(CuttingBoardTileEntity::new, ModBlocks.CUTTING_BOARD.get()).build(null));
+	public static final RegistryObject<TileEntityType<PantryTileEntity>> PANTRY_TILE = TILES.register("pantry",
+			() -> TileEntityType.Builder.create(PantryTileEntity::new,
+					ModBlocks.OAK_PANTRY.get(), ModBlocks.BIRCH_PANTRY.get(), ModBlocks.SPRUCE_PANTRY.get(), ModBlocks.JUNGLE_PANTRY.get(), ModBlocks.ACACIA_PANTRY.get(), ModBlocks.DARK_OAK_PANTRY.get())
+					.build(null));
 }

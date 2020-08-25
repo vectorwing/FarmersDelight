@@ -9,11 +9,6 @@
   "block.farmersdelight.mulch": "Mulch",
   "block.farmersdelight.mulch_farmland": "Mulch Acker",
 
-  "block.farmersdelight.cabbages": "Kopfsalatsamen",
-  "block.farmersdelight.onions": "Zwiebel",
-  "block.farmersdelight.tomatoes": "Tomatensamen",
-  "block.farmersdelight.rice_crop": "Reis",
-
   "block.farmersdelight.wild_cabbages": "Wilder Kopfsalat",
   "block.farmersdelight.wild_tomatoes": "Tomatenrebe",
   "block.farmersdelight.wild_onions": "Wilde Zwiebeln",
@@ -23,6 +18,10 @@
 
   "item.farmersdelight.tomato": "Tomate",
   "item.farmersdelight.cabbage": "Kopfsalat",
+  "item.farmersdelight.onion": "Zwiebel",
+  "item.farmersdelight.rice": "Reis",
+  "item.farmersdelight.cabbage_seeds": "Kopfsalatsamen",
+  "item.farmersdelight.tomato_seeds": "Tomatensamen",
   "item.farmersdelight.rice_panicle": "Reisrispe",
 
   "item.farmersdelight.straw": "Stroh",

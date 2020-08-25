@@ -12,10 +12,6 @@
   "block.farmersdelight.onion_crate": "箱装洋葱",
   "block.farmersdelight.rice_bale": "稻米块",
 
-  "block.farmersdelight.cabbages": "卷心菜种子",
-  "block.farmersdelight.onions": "洋葱",
-  "block.farmersdelight.tomatoes": "番茄种子",
-  "block.farmersdelight.rice_crop": "稻米",
   "block.farmersdelight.brown_mushroom_colony": "棕色蘑菇菌落",
   "block.farmersdelight.red_mushroom_colony": "红色蘑菇菌落",
 
@@ -28,6 +24,10 @@
 
   "item.farmersdelight.tomato": "马铃薯",
   "item.farmersdelight.cabbage": "卷心菜",
+  "item.farmersdelight.onion": "洋葱",
+  "item.farmersdelight.rice": "稻米",
+  "item.farmersdelight.cabbage_seeds": "卷心菜种子",
+  "item.farmersdelight.tomato_seeds": "番茄种子",
   "item.farmersdelight.rice_panicle": "稻米穗",
 
   "item.farmersdelight.straw": "秸秆",

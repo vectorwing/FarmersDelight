@@ -3,6 +3,12 @@
   "block.farmersdelight.cooking_pot": "Panela",
   "block.farmersdelight.basket": "Cesto",
   "block.farmersdelight.cutting_board": "Tábua de corte",
+  "block.farmersdelight.oak_pantry": "Despensa de carvalho",
+  "block.farmersdelight.birch_pantry": "Despensa de bétula",
+  "block.farmersdelight.spruce_pantry": "Despensa de pinheiro",
+  "block.farmersdelight.jungle_pantry": "Despensa da selva",
+  "block.farmersdelight.acacia_pantry": "Despensa de acácia",
+  "block.farmersdelight.dark_oak_pantry": "Despensa de carvalho escuro",
   "block.farmersdelight.rope": "Corda",
   "block.farmersdelight.safety_net": "Rede de segurança",
   "block.farmersdelight.organic_compost": "Composto orgânico",
@@ -13,10 +19,6 @@
   "block.farmersdelight.onion_crate": "Caixote de cebolas",
   "block.farmersdelight.rice_bale": "Fardo de arroz",
 
-  "block.farmersdelight.cabbages": "Sementes de repolho",
-  "block.farmersdelight.onions": "Cebola",
-  "block.farmersdelight.tomatoes": "Sementes de tomate",
-  "block.farmersdelight.rice_crop": "Arroz",
   "block.farmersdelight.brown_mushroom_colony": "Colônia de cogumelos marrons",
   "block.farmersdelight.red_mushroom_colony": "Colônia de cogumelos vermelhos",
 
@@ -27,8 +29,16 @@
   "block.farmersdelight.wild_potatoes": "Batata silvestre",
   "block.farmersdelight.wild_beetroots": "Beterraba marítima",
 
+  "block.farmersdelight.apple_pie": "Torta de maçã",
+  "block.farmersdelight.sweet_berry_cheesecake": "Cheesecake de bagas doces",
+  "block.farmersdelight.chocolate_pie": "Torta de chocolate",
+
   "item.farmersdelight.tomato": "Tomate",
   "item.farmersdelight.cabbage": "Repolho",
+  "item.farmersdelight.onion": "Cebola",
+  "item.farmersdelight.rice": "Arroz",
+  "item.farmersdelight.cabbage_seeds": "Sementes de repolho",
+  "item.farmersdelight.tomato_seeds": "Sementes de tomate",
   "item.farmersdelight.rice_panicle": "Panícula de arroz",
 
   "item.farmersdelight.straw": "Palha",
@@ -55,9 +65,6 @@
   "item.farmersdelight.apple_pie_slice": "Fatia de torta de maçã",
   "item.farmersdelight.sweet_berry_cheesecake_slice": "Fatia de cheesecake de bagas doces",
   "item.farmersdelight.chocolate_pie_slice": "Fatia de torta de chocolate",
-  "block.farmersdelight.apple_pie": "Torta de maçã",
-  "block.farmersdelight.sweet_berry_cheesecake": "Cheesecake de bagas doces",
-  "block.farmersdelight.chocolate_pie": "Torta de chocolate",
   "item.farmersdelight.sweet_berry_cookie": "Biscoito de bagas doces",
   "item.farmersdelight.honey_cookie": "Biscoito de mel",
   "item.farmersdelight.earthworm": "Minhoca",
@@ -106,6 +113,7 @@
   "farmersdelight.container.cooking_pot": "Panela",
   "farmersdelight.container.cooking_pot.served_on": "Servido em: ",
   "farmersdelight.container.basket": "Cesto",
+  "farmersdelight.container.pantry": "Despensa",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Vazia",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Contém 1 porção de:",
