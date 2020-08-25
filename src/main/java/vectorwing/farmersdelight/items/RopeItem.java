@@ -2,7 +2,6 @@ package vectorwing.farmersdelight.items;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -10,11 +9,11 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class RopeItem extends BlockItem
+public class RopeItem extends FuelBlockItem
 {
 	public RopeItem(Block blockIn, Properties builder)
 	{
-		super(blockIn, builder);
+		super(blockIn, builder, 200);
 	}
 
 	@Nullable

@@ -16,6 +16,18 @@ public class ModBlocks
 	public static final RegistryObject<Block> STOVE = BLOCKS.register("stove", StoveBlock::new);
 	public static final RegistryObject<Block> COOKING_POT = BLOCKS.register("cooking_pot", CookingPotBlock::new);
 	public static final RegistryObject<Block> BASKET = BLOCKS.register("basket", BasketBlock::new);
+	public static final RegistryObject<Block> OAK_PANTRY = BLOCKS.register("oak_pantry",
+			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
+	public static final RegistryObject<Block> BIRCH_PANTRY = BLOCKS.register("birch_pantry",
+			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
+	public static final RegistryObject<Block> SPRUCE_PANTRY = BLOCKS.register("spruce_pantry",
+			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
+	public static final RegistryObject<Block> JUNGLE_PANTRY = BLOCKS.register("jungle_pantry",
+			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
+	public static final RegistryObject<Block> ACACIA_PANTRY = BLOCKS.register("acacia_pantry",
+			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
+	public static final RegistryObject<Block> DARK_OAK_PANTRY = BLOCKS.register("dark_oak_pantry",
+			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
 	public static final RegistryObject<Block> CUTTING_BOARD = BLOCKS.register("cutting_board", CuttingBoardBlock::new);
 	public static final RegistryObject<Block> ROPE = BLOCKS.register("rope", RopeBlock::new);
 	public static final RegistryObject<Block> SAFETY_NET = BLOCKS.register("safety_net", SafetyNetBlock::new);
@@ -51,11 +63,11 @@ public class ModBlocks
 	public static final RegistryObject<Block> WILD_CABBAGES = BLOCKS.register("wild_cabbages",
 			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_ONIONS = BLOCKS.register("wild_onions",
-			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+			() -> new WildCropsBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_TOMATOES = BLOCKS.register("wild_tomatoes",
 			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_CARROTS = BLOCKS.register("wild_carrots",
-			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+			() -> new WildCropsBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_POTATOES = BLOCKS.register("wild_potatoes",
 			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_BEETROOTS = BLOCKS.register("wild_beetroots",
