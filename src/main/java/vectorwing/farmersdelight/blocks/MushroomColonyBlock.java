@@ -4,11 +4,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BushBlock;
 import net.minecraft.block.IGrowable;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
@@ -16,13 +17,17 @@ import net.minecraft.world.server.ServerWorld;
 import vectorwing.farmersdelight.registry.ModBlocks;
 
 import java.util.Random;
+import java.util.function.Supplier;
 
 public class MushroomColonyBlock extends BushBlock implements IGrowable
 {
 	public static final IntegerProperty COLONY_AGE = BlockStateProperties.AGE_0_3;
-	public MushroomColonyBlock(Properties properties)
+	public final Supplier<Item> mushroomType;
+
+	public MushroomColonyBlock(Properties properties, Supplier<Item> mushroomType)
 	{
 		super(properties);
+		this.mushroomType = mushroomType;
 		this.setDefaultState(this.stateContainer.getBaseState().with(COLONY_AGE, 0));
 	}
 
@@ -52,7 +57,7 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 		}
 	}
 	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
-		return new ItemStack(Items.BROWN_MUSHROOM);
+		return new ItemStack(this.mushroomType.get());
 	}
 
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
