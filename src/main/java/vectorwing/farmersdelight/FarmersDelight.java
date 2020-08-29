@@ -23,7 +23,7 @@ import vectorwing.farmersdelight.setup.Configuration;
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class FarmersDelight
 {
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "farmersdelight";
 
     public static final FDItemGroup ITEM_GROUP = new FDItemGroup(FarmersDelight.MODID);

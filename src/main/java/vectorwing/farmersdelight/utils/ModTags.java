@@ -15,6 +15,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 public class ModTags
 {
 	public static final Tag<Block> HEAT_SOURCES = modBlockTag("heat_sources");
+	public static final Tag<Block> COMPOST_ACTIVATORS = modBlockTag("compost_activators");
 
 	public static final Tag<Item> WOLF_PREY = modItemTag("wolf_prey");
 	public static final Tag<Item> KNIVES = modItemTag("tools/knife");

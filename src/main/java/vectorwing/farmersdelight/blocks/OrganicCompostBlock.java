@@ -3,15 +3,17 @@ package vectorwing.farmersdelight.blocks;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.MushroomBlock;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.LightType;
+import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.utils.ModTags;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
@@ -19,15 +21,11 @@ import java.util.Random;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class OrganicCompostBlock extends Block {
-	public static IntegerProperty COMPOSTATION = IntegerProperty.create("compostation", 0, 7);
-
-	public OrganicCompostBlock() {
-		this(Properties.from(Blocks.DIRT));
-	}
+	public static IntegerProperty COMPOSTING = IntegerProperty.create("composting", 0, 7);
 
 	public OrganicCompostBlock(Properties properties) {
 		super(properties);
-		this.setDefaultState(super.getDefaultState().with(COMPOSTATION, 0));
+		this.setDefaultState(super.getDefaultState().with(COMPOSTING, 0));
 	}
 
 	@Override
@@ -37,7 +35,7 @@ public class OrganicCompostBlock extends Block {
 
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(COMPOSTATION);
+		builder.add(COMPOSTING);
 		super.fillStateContainer(builder);
 	}
 
@@ -49,21 +47,30 @@ public class OrganicCompostBlock extends Block {
 		float chance = 0F;
 
 		int maxLight = 0;
-		for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-1, 0, -1), pos.add(1, 0, 1))) {
+		for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-1, 0, -1), pos.add(1, 1, 1))) {
 			BlockState adjacent = worldIn.getBlockState(blockpos);
-			if (adjacent.getBlock() instanceof MushroomBlock || adjacent.getBlock() instanceof OrganicCompostBlock || adjacent.getFluidState().isTagged(FluidTags.WATER))
-				chance += 0.04F;
-			int light = worldIn.getLightFor(LightType.BLOCK, blockpos);
+			if (adjacent.isIn(ModTags.COMPOST_ACTIVATORS) || adjacent.getFluidState().isTagged(FluidTags.WATER))
+				chance += 0.02F;
+			int light = worldIn.getLightSubtracted(pos.up(), 0);
 			if(light > maxLight)
 				maxLight = light;
 		}
-		chance += 0.015F * (15 - maxLight);
+		chance += maxLight > 12 ? 0.1F : 0.05F;
 
 		if (worldIn.getRandom().nextFloat() <= chance) {
-			if (state.get(COMPOSTATION) == 7)
+			if (state.get(COMPOSTING) == 7)
 				worldIn.setBlockState(pos, ModBlocks.MULCH.get().getDefaultState(), 2); // finished
 			else
-				worldIn.setBlockState(pos, state.with(COMPOSTATION, state.get(COMPOSTATION) + 1), 2); // next stage
+				worldIn.setBlockState(pos, state.with(COMPOSTING, state.get(COMPOSTING) + 1), 2); // next stage
 		}
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+		super.animateTick(stateIn, worldIn, pos, rand);
+		if (rand.nextInt(10) == 0) {
+			worldIn.addParticle(ParticleTypes.MYCELIUM, (double)pos.getX() + (double)rand.nextFloat(), (double)pos.getY() + 1.1D, (double)pos.getZ() + (double)rand.nextFloat(), 0.0D, 0.0D, 0.0D);
+		}
+
 	}
 }

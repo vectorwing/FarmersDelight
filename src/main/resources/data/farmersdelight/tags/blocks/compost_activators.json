@@ -1,0 +1,13 @@
+{
+  "replace": "false",
+  "values": [
+    "minecraft:brown_mushroom",
+    "minecraft:red_mushroom",
+    "minecraft:podzol",
+    "minecraft:mycelium",
+    "farmersdelight:organic_compost",
+    "farmersdelight:mulch",
+    "farmersdelight:brown_mushroom_colony",
+    "farmersdelight:red_mushroom_colony"
+  ]
+}
