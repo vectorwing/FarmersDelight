@@ -95,17 +95,18 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 	}
 
 	private boolean needsTrayForHeatSource(BlockState state) {
-		return ModTags.HEAT_SOURCES.contains(state.getBlock()) && !state.isSolid();
+		return state.getBlock().isIn(ModTags.HEAT_SOURCES) && state.getBlock().isIn(ModTags.TRAY_HEAT_SOURCES);
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 											 Hand handIn, BlockRayTraceResult result) {
 		if (!worldIn.isRemote) {
 			TileEntity tile = worldIn.getTileEntity(pos);
 			if (tile instanceof CookingPotTileEntity) {
 				ItemStack serving = ((CookingPotTileEntity) tile).useHeldItemOnMeal(player.getHeldItem(handIn));
-				if (serving != ItemStack.EMPTY && player != null) {
+				if (serving != ItemStack.EMPTY) {
 					player.inventory.addItemStackToInventory(serving);
 					worldIn.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				} else {
@@ -131,6 +132,7 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 		return itemstack;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
 			TileEntity tileentity = worldIn.getTileEntity(pos);
