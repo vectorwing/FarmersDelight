@@ -1,5 +1,7 @@
 package vectorwing.farmersdelight.tile;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -11,8 +13,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.*;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
@@ -20,8 +21,11 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
+import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.blocks.CuttingBoardBlock;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.items.KnifeItem;
+import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 
 import javax.annotation.Nullable;
@@ -108,6 +112,7 @@ public class CuttingBoardTileEntity extends TileEntity
 					tool.setCount(0);
 				}
 			}
+			this.playProcessingSound(irecipe.getSoundEventID(), tool.getItem(), this.getStoredItem().getItem());
 			this.removeItem();
 			this.inventoryChanged();
 			return true;
@@ -118,6 +123,28 @@ public class CuttingBoardTileEntity extends TileEntity
 
 	protected NonNullList<ItemStack> getResults() {
 		return this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(itemHandler), this.world).map(CuttingBoardRecipe::getResults).orElse(NonNullList.withSize(1, ItemStack.EMPTY));
+	}
+
+	public void playProcessingSound(String soundEventID, Item tool, Item boardItem) {
+		SoundEvent sound = ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation(soundEventID));
+
+		if (sound != null) {
+			this.playSound(sound, 1.0F, 1.0F);
+		} else if (tool instanceof ShearsItem) {
+			this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
+		} else if (tool instanceof KnifeItem) {
+			this.playSound(ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), 0.8F, 1.0F);
+		} else if (boardItem instanceof BlockItem) {
+			Block block = ((BlockItem) boardItem).getBlock();
+			SoundType soundType = block.getSoundType(block.getDefaultState());
+			this.playSound(soundType.getBreakSound(), 1.0F, 0.8F);
+		} else {
+			this.playSound(SoundEvents.BLOCK_WOOD_BREAK, 1.0F, 0.8F);
+		}
+	}
+
+	public void playSound(SoundEvent sound, float volume, float pitch) {
+		this.world.playSound(null, this.pos.getX() + 0.5F, this.pos.getY() + 0.5F, this.pos.getZ() + 0.5F, sound, SoundCategory.BLOCKS, volume, pitch);
 	}
 
 	// ======== ITEM HANDLING ========
