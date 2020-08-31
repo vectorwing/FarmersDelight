@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.FarmersDelight;
 
 public class CuttingBoardTrigger extends AbstractCriterionTrigger<CuttingBoardTrigger.Instance> {
-	private static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "consume_item");
+	private static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "use_cutting_board");
 
 	public ResourceLocation getId() {
 		return ID;

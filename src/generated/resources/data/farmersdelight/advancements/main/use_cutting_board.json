@@ -17,7 +17,7 @@
   },
   "criteria": {
     "cutting_board": {
-      "trigger": "farmersdelight:consume_item"
+      "trigger": "farmersdelight:use_cutting_board"
     }
   },
   "requirements": [
