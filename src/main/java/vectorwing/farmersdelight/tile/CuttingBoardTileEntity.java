@@ -25,6 +25,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.blocks.CuttingBoardBlock;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.items.KnifeItem;
+import vectorwing.farmersdelight.registry.ModAdvancements;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 
@@ -115,6 +116,9 @@ public class CuttingBoardTileEntity extends TileEntity
 			this.playProcessingSound(irecipe.getSoundEventID(), tool.getItem(), this.getStoredItem().getItem());
 			this.removeItem();
 			this.inventoryChanged();
+			if (player instanceof ServerPlayerEntity) {
+				ModAdvancements.CUTTING_BOARD.trigger((ServerPlayerEntity) player);
+			}
 			return true;
 		}
 
