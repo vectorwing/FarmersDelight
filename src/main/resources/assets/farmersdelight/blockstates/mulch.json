@@ -1,8 +1,0 @@
-{
-  "variants": {
-    "": [
-      { "model": "farmersdelight:block/mulch" },
-      { "model": "farmersdelight:block/mulch", "y": 180 }
-    ]
-  }
-}

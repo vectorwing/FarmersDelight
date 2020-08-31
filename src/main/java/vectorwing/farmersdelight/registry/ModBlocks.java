@@ -43,10 +43,10 @@ public class ModBlocks
 
 	public static final RegistryObject<Block> ORGANIC_COMPOST = BLOCKS.register("organic_compost",
 			() -> new OrganicCompostBlock(Block.Properties.from(Blocks.DIRT)));
-	public static final RegistryObject<Block> MULCH = BLOCKS.register("mulch",
-			() -> new MulchBlock(Block.Properties.from(Blocks.DIRT).tickRandomly()));
+	public static final RegistryObject<Block> RICH_SOIL = BLOCKS.register("rich_soil",
+			() -> new RichSoilBlock(Block.Properties.from(Blocks.DIRT).tickRandomly()));
 	public static final RegistryObject<Block> MULCH_FARMLAND = BLOCKS.register("mulch_farmland",
-			() -> new MulchFarmlandBlock(Block.Properties.from(Blocks.FARMLAND)));
+			() -> new RichSoilFarmlandBlock(Block.Properties.from(Blocks.FARMLAND)));
 	public static final RegistryObject<Block> BROWN_MUSHROOM_COLONY = BLOCKS.register("brown_mushroom_colony",
 			() -> new MushroomColonyBlock(Block.Properties.from(Blocks.BROWN_MUSHROOM), Items.BROWN_MUSHROOM.delegate));
 	public static final RegistryObject<Block> RED_MUSHROOM_COLONY = BLOCKS.register("red_mushroom_colony",

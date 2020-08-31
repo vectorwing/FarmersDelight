@@ -2,13 +2,13 @@
   "parent": "farmersdelight:main/harvest_straw",
   "display": {
     "icon": {
-      "item": "farmersdelight:mulch"
+      "item": "farmersdelight:rich_soil"
     },
     "title": {
-      "translate": "farmersdelight.advancement.get_mulch"
+      "translate": "farmersdelight.advancement.get_rich_soil"
     },
     "description": {
-      "translate": "farmersdelight.advancement.get_mulch.desc"
+      "translate": "farmersdelight.advancement.get_rich_soil.desc"
     },
     "frame": "task",
     "show_toast": true,
@@ -16,12 +16,12 @@
     "hidden": false
   },
   "criteria": {
-    "get_mulch": {
+    "get_rich_soil": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:mulch"
+            "item": "farmersdelight:rich_soil"
           }
         ]
       }
@@ -29,7 +29,7 @@
   },
   "requirements": [
     [
-      "get_mulch"
+      "get_rich_soil"
     ]
   ]
 }

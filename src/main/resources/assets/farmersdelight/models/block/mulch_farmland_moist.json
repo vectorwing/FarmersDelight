@@ -1,8 +1,0 @@
-{
-  "parent": "block/template_farmland",
-  "textures": {
-    "particle": "farmersdelight:blocks/mulch",
-    "dirt": "farmersdelight:blocks/mulch",
-    "top": "farmersdelight:blocks/mulch_farmland_moist"
-  }
-}

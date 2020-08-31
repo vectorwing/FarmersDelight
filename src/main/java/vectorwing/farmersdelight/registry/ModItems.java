@@ -47,8 +47,8 @@ public class ModItems
 			() -> new BlockItem(ModBlocks.RICE_BALE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> ORGANIC_COMPOST = ITEMS.register("organic_compost",
 			() -> new BlockItem(ModBlocks.ORGANIC_COMPOST.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
-	public static final RegistryObject<Item> MULCH = ITEMS.register("mulch",
-			() -> new BlockItem(ModBlocks.MULCH.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> RICH_SOIL = ITEMS.register("rich_soil",
+			() -> new BlockItem(ModBlocks.RICH_SOIL.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> MULCH_FARMLAND = ITEMS.register("mulch_farmland",
 			() -> new BlockItem(ModBlocks.MULCH_FARMLAND.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 

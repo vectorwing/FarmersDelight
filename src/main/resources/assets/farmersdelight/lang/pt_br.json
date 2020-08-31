@@ -13,7 +13,9 @@
   "block.farmersdelight.safety_net": "Rede de segurança",
   "block.farmersdelight.organic_compost": "Composto orgânico",
   "block.farmersdelight.mulch": "Adubo",
+  "block.farmersdelight.rich_soil": "Solo rico",
   "block.farmersdelight.mulch_farmland": "Adubo arado",
+  "block.farmersdelight.rich_soil_farmland": "Solo rico arado",
   "block.farmersdelight.cabbage_crate": "Caixote de repolhos",
   "block.farmersdelight.tomato_crate": "Caixote de tomates",
   "block.farmersdelight.onion_crate": "Caixote de cebolas",
@@ -128,7 +130,7 @@
   "farmersdelight.advancement.harvest_straw": "Agarrando palhas",
   "farmersdelight.advancement.harvest_straw.desc": "Colha plantas gramíneas com uma Faca para obter Palha",
   "farmersdelight.advancement.get_mulch": "Comida de plantas",
-  "farmersdelight.advancement.get_mulch.desc": "Deixe um pouco de Composto Orgânico decompor até virar Adubo",
+  "farmersdelight.advancement.get_mulch.desc": "Deixe um pouco de Composto Orgânico decompor até o solo enriquecer",
 
   "farmersdelight.advancement.place_campfire": "Bonfire Lit",
   "farmersdelight.advancement.place_campfire.desc": "Acenda uma Fogueira para lhe aquecer à noite",

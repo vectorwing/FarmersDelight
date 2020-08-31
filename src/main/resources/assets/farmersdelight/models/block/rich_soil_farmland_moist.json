@@ -1,0 +1,8 @@
+{
+  "parent": "block/template_farmland",
+  "textures": {
+    "particle": "farmersdelight:blocks/rich_soil",
+    "dirt": "farmersdelight:blocks/rich_soil",
+    "top": "farmersdelight:blocks/rich_soil_farmland_moist"
+  }
+}

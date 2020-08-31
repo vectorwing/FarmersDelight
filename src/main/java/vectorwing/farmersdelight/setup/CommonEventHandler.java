@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.setup;
 
 import com.google.common.collect.Sets;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.entity.Entity;
@@ -15,11 +16,14 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTables;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.fml.ModContainer;
+import net.minecraftforge.fml.ModList;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.registry.ModAdvancements;
 import vectorwing.farmersdelight.registry.ModBlocks;
@@ -93,6 +97,28 @@ public class CommonEventHandler
 	}
 
 	@SubscribeEvent
+	public static void onRemapBlocks(RegistryEvent.MissingMappings<Block> event) {
+		ModContainer mod = ModList.get().getModContainerById(FarmersDelight.MODID).get();
+		event.setModContainer(mod);
+
+		// Mulch -> Rich Soil
+		event.getMappings().stream()
+				.filter(mapping -> mapping.key.getPath().equals("mulch"))
+				.forEach(mapping -> mapping.remap(ModBlocks.RICH_SOIL.get()));
+	}
+
+	@SubscribeEvent
+	public static void onRemapItems(RegistryEvent.MissingMappings<Item> event) {
+		ModContainer mod = ModList.get().getModContainerById(FarmersDelight.MODID).get();
+		event.setModContainer(mod);
+
+		// Mulch -> Rich Soil
+		event.getMappings().stream()
+				.filter(mapping -> mapping.key.getPath().equals("mulch"))
+				.forEach(mapping -> mapping.remap(ModItems.RICH_SOIL.get()));
+	}
+
+	@SubscribeEvent
 	public static void onVillagerTrades(VillagerTradesEvent event) {
 		if (!Configuration.FARMERS_BUY_FD_CROPS.get()) return;
 
@@ -150,7 +176,7 @@ public class CommonEventHandler
 		World world = context.getWorld();
 		BlockState state = world.getBlockState(pos);
 
-		if (context.getFace() != Direction.DOWN && world.isAirBlock(pos.up()) && state.getBlock() == ModBlocks.MULCH.get()) {
+		if (context.getFace() != Direction.DOWN && world.isAirBlock(pos.up()) && state.getBlock() == ModBlocks.RICH_SOIL.get()) {
 			world.playSound(event.getPlayer(), pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			world.setBlockState(pos, ModBlocks.MULCH_FARMLAND.get().getDefaultState(), 11);
 			event.setResult(Event.Result.ALLOW);
