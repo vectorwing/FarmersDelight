@@ -20,6 +20,7 @@ import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.advancement.CuttingBoardTrigger;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.Text;
@@ -111,9 +112,9 @@ public class Advancements extends AdvancementProvider
 					.withCriterion("cooking_pot", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.COOKING_POT.get()))
 					.register(consumer, getNameId("main/place_cooking_pot"));
 
-			Advancement watchYourFingers = getAdvancement(fireUpTheGrill, ModItems.CUTTING_BOARD.get(), "place_cutting_board", FrameType.TASK, true, true, false)
-					.withCriterion("cutting_board", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.CUTTING_BOARD.get()))
-					.register(consumer, getNameId("main/place_cutting_board"));
+			Advancement watchYourFingers = getAdvancement(fireUpTheGrill, ModItems.CUTTING_BOARD.get(), "use_cutting_board", FrameType.TASK, true, true, false)
+					.withCriterion("cutting_board", new CuttingBoardTrigger.Instance())
+					.register(consumer, getNameId("main/use_cutting_board"));
 
 			Advancement masterChef = getAdvancement(dinnerIsServed, ModItems.PASTA_WITH_MEATBALLS.get(), "master_chef", FrameType.CHALLENGE, true, true, false)
 					.withCriterion("mixed_salad", ConsumeItemTrigger.Instance.forItem(ModItems.MIXED_SALAD.get()))

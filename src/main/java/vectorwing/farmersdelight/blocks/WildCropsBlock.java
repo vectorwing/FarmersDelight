@@ -9,21 +9,11 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
-public class WildCropsBlock extends BushBlock
+public class WildCropsBlock extends WildPatchBlock
 {
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
-
 	public WildCropsBlock(Properties properties)
 	{
 		super(properties);
-	}
-
-	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS_BLOCK || state.getBlock() == Blocks.SAND || state.getBlock() == Blocks.RED_SAND;
-	}
-
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return SHAPE;
 	}
 
 	public OffsetType getOffsetType() {

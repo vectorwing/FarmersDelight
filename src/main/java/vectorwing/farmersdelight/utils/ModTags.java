@@ -14,9 +14,19 @@ import vectorwing.farmersdelight.FarmersDelight;
  */
 public class ModTags
 {
+	// Blocks that can heat up a Cooking Pot.
 	public static final Tag<Block> HEAT_SOURCES = modBlockTag("heat_sources");
 
+	// Blocks to which a Cooking Pot will render a tray over. Use HEAT_SOURCES for heat logic.
+	public static final Tag<Block> TRAY_HEAT_SOURCES = modBlockTag("tray_heat_sources");
+
+	// Blocks that accelerate decomposition of Organic Compost if placed adjacent to it.
+	public static final Tag<Block> COMPOST_ACTIVATORS = modBlockTag("compost_activators");
+
+	// Foods that drop from mobs that wolves prey upon (currently, just sheep and chicken).
 	public static final Tag<Item> WOLF_PREY = modItemTag("wolf_prey");
+
+	// Knife items for game logic.
 	public static final Tag<Item> KNIVES = modItemTag("tools/knife");
 
 	private static Tag<Item> modItemTag(String path) {

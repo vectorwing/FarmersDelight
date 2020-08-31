@@ -18,5 +18,6 @@
       "count": 1
     }
   ],
+  "sound": "minecraft:item.axe.strip",
   "effort": 1
 }

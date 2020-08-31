@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.potion.EffectInstance;
@@ -23,6 +24,8 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import vectorwing.farmersdelight.utils.ModTags;
 
+import java.util.function.Supplier;
+
 public class PieBlock extends Block {
 
 	public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 3);
@@ -34,10 +37,11 @@ public class PieBlock extends Block {
 			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 6.0D, 8.0D),
 			Block.makeCuboidShape(8.0D, 0.0D, 2.0D, 14.0D, 6.0D, 8.0D),
 	};
+	public final Supplier<Item> pieSlice;
 
-
-	public PieBlock(Properties properties) {
+	public PieBlock(Properties properties, Supplier<Item> pieSlice) {
 		super(properties);
+		this.pieSlice = pieSlice;
 		this.setDefaultState(this.stateContainer.getBaseState().with(BITES, 0));
 	}
 
@@ -50,7 +54,7 @@ public class PieBlock extends Block {
 	}
 
 	public ItemStack getPieSliceItem() {
-		return ItemStack.EMPTY;
+		return new ItemStack(this.pieSlice.get());
 	}
 
 	public EffectInstance getPieEffect() {

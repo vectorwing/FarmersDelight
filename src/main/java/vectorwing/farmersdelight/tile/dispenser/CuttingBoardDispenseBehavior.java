@@ -26,7 +26,6 @@ public class CuttingBoardDispenseBehavior extends OptionalDispenseBehavior
 			ItemStack boardItem = tileEntity.getStoredItem().copy();
 			if (!boardItem.isEmpty() && tileEntity.processItemUsingTool(stack, null)) {
 				CuttingBoardBlock.spawnCuttingParticles(world, blockpos, boardItem, 5);
-				CuttingBoardBlock.playProcessingSound(world, blockpos, stack, boardItem);
 			}
 			return stack;
 		}

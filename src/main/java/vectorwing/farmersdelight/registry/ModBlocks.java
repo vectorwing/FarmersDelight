@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.registry;
 
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.Items;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.blocks.*;
 import net.minecraftforge.fml.RegistryObject;
@@ -47,17 +48,17 @@ public class ModBlocks
 	public static final RegistryObject<Block> MULCH_FARMLAND = BLOCKS.register("mulch_farmland",
 			() -> new MulchFarmlandBlock(Block.Properties.from(Blocks.FARMLAND)));
 	public static final RegistryObject<Block> BROWN_MUSHROOM_COLONY = BLOCKS.register("brown_mushroom_colony",
-			() -> new MushroomColonyBlock(Block.Properties.from(Blocks.BROWN_MUSHROOM)));
+			() -> new MushroomColonyBlock(Block.Properties.from(Blocks.BROWN_MUSHROOM), Items.BROWN_MUSHROOM.delegate));
 	public static final RegistryObject<Block> RED_MUSHROOM_COLONY = BLOCKS.register("red_mushroom_colony",
-			() -> new RedMushroomColonyBlock(Block.Properties.from(Blocks.RED_MUSHROOM)));
+			() -> new MushroomColonyBlock(Block.Properties.from(Blocks.RED_MUSHROOM), Items.RED_MUSHROOM.delegate));
 
 	// PASTRY BLOCKS
 	public static final RegistryObject<Block> APPLE_PIE = BLOCKS.register("apple_pie",
-			() -> new ApplePieBlock(Block.Properties.from(Blocks.CAKE)));
+			() -> new PieBlock(Block.Properties.from(Blocks.CAKE), ModItems.APPLE_PIE_SLICE));
 	public static final RegistryObject<Block> SWEET_BERRY_CHEESECAKE = BLOCKS.register("sweet_berry_cheesecake",
-			() -> new SweetBerryCheesecakeBlock(Block.Properties.from(Blocks.CAKE)));
+			() -> new PieBlock(Block.Properties.from(Blocks.CAKE), ModItems.SWEET_BERRY_CHEESECAKE_SLICE));
 	public static final RegistryObject<Block> CHOCOLATE_PIE = BLOCKS.register("chocolate_pie",
-			() -> new ChocolatePieBlock(Block.Properties.from(Blocks.CAKE)));
+			() -> new PieBlock(Block.Properties.from(Blocks.CAKE), ModItems.CHOCOLATE_PIE_SLICE));
 
 	// WILD PATCHES
 	public static final RegistryObject<Block> WILD_CABBAGES = BLOCKS.register("wild_cabbages",

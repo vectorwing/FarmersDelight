@@ -2,6 +2,8 @@ package vectorwing.farmersdelight.blocks;
 
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.audio.SoundEngine;
+import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
@@ -28,6 +30,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.items.KnifeItem;
 import vectorwing.farmersdelight.registry.ModSounds;
@@ -79,7 +82,6 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 				ItemStack boardItem = cuttingBoardTE.getStoredItem().copy();
 				if (cuttingBoardTE.processItemUsingTool(itemHeld, player)) {
 					spawnCuttingParticles(worldIn, pos, boardItem, 5);
-					playProcessingSound(worldIn, pos, itemHeld, boardItem);
 					return ActionResultType.SUCCESS;
 				}
 				return ActionResultType.PASS;
@@ -96,25 +98,6 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 
 		}
 		return ActionResultType.PASS;
-	}
-
-	// TODO: I am 100% sure there is a less cluttered way to pull off conditional sounds. If you're reading this, please, HELP ME! :(
-	public static void playProcessingSound(World worldIn, BlockPos pos, ItemStack toolStack, ItemStack boardStack) {
-		if (toolStack.getItem() instanceof ShearsItem) {
-			worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
-		} else if (toolStack.getItem() instanceof KnifeItem) {
-			worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), SoundCategory.BLOCKS, 0.8F, 1.0F);
-		} else if (boardStack.getItem() instanceof BlockItem) {
-			Block block = ((BlockItem) boardStack.getItem()).getBlock();
-			if (block instanceof LogBlock) {
-				worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 0.9F, 0.8F);
-			} else {
-				SoundType sound = block.getSoundType(block.getDefaultState());
-				worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), sound.getBreakSound(), SoundCategory.BLOCKS, 1.0F, 0.8F);
-			}
-		} else {
-			worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_BREAK, SoundCategory.BLOCKS, 1.0F, 0.8F);
-		}
 	}
 
 	public static void spawnCuttingParticles(World worldIn, BlockPos pos, ItemStack stack, int count) {

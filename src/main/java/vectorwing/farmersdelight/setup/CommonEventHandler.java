@@ -21,6 +21,7 @@ import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.registry.ModAdvancements;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModEffects;
 import vectorwing.farmersdelight.registry.ModItems;
@@ -62,6 +63,8 @@ public class CommonEventHandler
 		ComposterBlock.CHANCES.put(ModItems.CABBAGE.get(), 0.65F);
 		ComposterBlock.CHANCES.put(ModItems.ONION.get(), 0.65F);
 		ComposterBlock.CHANCES.put(ModItems.TOMATO.get(), 0.65F);
+
+		ModAdvancements.register();
 
 		LootFunctionManager.registerFunction(new CopyMealFunction.Serializer());
 
