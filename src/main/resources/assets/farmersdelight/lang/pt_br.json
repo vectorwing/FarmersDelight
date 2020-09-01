@@ -6,7 +6,7 @@
   "block.farmersdelight.oak_pantry": "Despensa de carvalho",
   "block.farmersdelight.birch_pantry": "Despensa de bétula",
   "block.farmersdelight.spruce_pantry": "Despensa de pinheiro",
-  "block.farmersdelight.jungle_pantry": "Despensa da selva",
+  "block.farmersdelight.jungle_pantry": "Despensa de madeira da selva",
   "block.farmersdelight.acacia_pantry": "Despensa de acácia",
   "block.farmersdelight.dark_oak_pantry": "Despensa de carvalho escuro",
   "block.farmersdelight.rope": "Corda",
@@ -128,7 +128,7 @@
   "farmersdelight.advancement.harvest_straw": "Agarrando palhas",
   "farmersdelight.advancement.harvest_straw.desc": "Colha plantas gramíneas com uma Faca para obter Palha",
   "farmersdelight.advancement.get_rich_soil": "Comida de plantas",
-  "farmersdelight.advancement.get_rich_soil.desc": "Deixe um pouco de Composto Orgânico decompor até o solo enriquecer",
+  "farmersdelight.advancement.get_rich_soil.desc": "Deixe um pouco de Composto Orgânico decompor até se tornar solo rico",
 
   "farmersdelight.advancement.place_campfire": "Bonfire Lit",
   "farmersdelight.advancement.place_campfire.desc": "Acenda uma Fogueira para lhe aquecer à noite",
