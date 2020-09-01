@@ -30,12 +30,12 @@ public class PieBlock extends Block {
 
 	public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 3);
 	protected static final VoxelShape[] SHAPES = new VoxelShape[] {
-			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 6.0D, 14.0D),
+			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 14.0D),
 			VoxelShapes.or(
-					Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 6.0D, 8.0D),
-					Block.makeCuboidShape(2.0D, 0.0D, 8.0D, 8.0D, 6.0D, 14.0D)),
-			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 6.0D, 8.0D),
-			Block.makeCuboidShape(8.0D, 0.0D, 2.0D, 14.0D, 6.0D, 8.0D),
+					Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 8.0D),
+					Block.makeCuboidShape(2.0D, 0.0D, 8.0D, 8.0D, 4.0D, 14.0D)),
+			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 8.0D),
+			Block.makeCuboidShape(8.0D, 0.0D, 2.0D, 14.0D, 4.0D, 8.0D),
 	};
 	public final Supplier<Item> pieSlice;
 
