@@ -45,7 +45,7 @@ public class ModBlocks
 			() -> new OrganicCompostBlock(Block.Properties.from(Blocks.DIRT)));
 	public static final RegistryObject<Block> RICH_SOIL = BLOCKS.register("rich_soil",
 			() -> new RichSoilBlock(Block.Properties.from(Blocks.DIRT).tickRandomly()));
-	public static final RegistryObject<Block> MULCH_FARMLAND = BLOCKS.register("mulch_farmland",
+	public static final RegistryObject<Block> RICH_SOIL_FARMLAND = BLOCKS.register("rich_soil_farmland",
 			() -> new RichSoilFarmlandBlock(Block.Properties.from(Blocks.FARMLAND)));
 	public static final RegistryObject<Block> BROWN_MUSHROOM_COLONY = BLOCKS.register("brown_mushroom_colony",
 			() -> new MushroomColonyBlock(Block.Properties.from(Blocks.BROWN_MUSHROOM), Items.BROWN_MUSHROOM.delegate));

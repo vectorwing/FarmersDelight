@@ -6,8 +6,8 @@
   "block.farmersdelight.safety_net": "Sicherheitsnetz",
   "block.farmersdelight.rice_bale": "Reisballen",
   "block.farmersdelight.organic_compost": "Organischer Kompost",
-  "block.farmersdelight.mulch": "Mulch",
-  "block.farmersdelight.mulch_farmland": "Mulch Acker",
+  "block.farmersdelight.rich_soil": "Reiche Erde",
+  "block.farmersdelight.rich_soil_farmland": "Reiche Erde Acker",
 
   "block.farmersdelight.wild_cabbages": "Wilder Kopfsalat",
   "block.farmersdelight.wild_tomatoes": "Tomatenrebe",
@@ -78,8 +78,8 @@
   "farmersdelight.advancement.plant_rice.desc": "Pflanze Reis in einer flachen Pfütze",
   "farmersdelight.advancement.harvest_straw": "Stroh greifen",
   "farmersdelight.advancement.harvest_straw.desc": "Ernte Graspflanzen mit einem Messer um Stroh zu bekommen",
-  "farmersdelight.advancement.get_mulch": "Pflanze Essen",
-  "farmersdelight.advancement.get_mulch.desc": "Lass ein bisschen Organischen Kompost bis er zu Mulch zerfällt",
+  "farmersdelight.advancement.get_rich_soil": "Pflanze Essen",
+  "farmersdelight.advancement.get_rich_soil.desc": "Lass ein bisschen Organischen Kompost bis er zu Reiche Erde zerfällt",
 
   "farmersdelight.advancement.place_campfire": "Lagerfeuer gezündet",
   "farmersdelight.advancement.place_campfire.desc": "Platzier ein Lagerfeuer um dich in der Nacht warm zu halten",

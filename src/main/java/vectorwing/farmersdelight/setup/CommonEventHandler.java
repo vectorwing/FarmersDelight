@@ -24,6 +24,8 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.registry.ModAdvancements;
 import vectorwing.farmersdelight.registry.ModBlocks;
@@ -49,6 +51,7 @@ import java.util.Set;
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CommonEventHandler
 {
+	private static final Logger LOGGER = LogManager.getLogger();
 	private static final ResourceLocation SHIPWRECK_SUPPLY_CHEST = LootTables.CHESTS_SHIPWRECK_SUPPLY;
 	private static final Set<ResourceLocation> VILLAGE_HOUSE_CHESTS = Sets.newHashSet(
 			LootTables.CHESTS_VILLAGE_VILLAGE_PLAINS_HOUSE,
@@ -105,6 +108,13 @@ public class CommonEventHandler
 		event.getMappings().stream()
 				.filter(mapping -> mapping.key.getPath().equals("mulch"))
 				.forEach(mapping -> mapping.remap(ModBlocks.RICH_SOIL.get()));
+		LOGGER.info("Remapping block 'farmersdelight:mulch' to 'farmersdelight:rich_soil'...");
+
+		// Mulch Farmland -> Rich Soil Farmland
+		event.getMappings().stream()
+				.filter(mapping -> mapping.key.getPath().equals("mulch_farmland"))
+				.forEach(mapping -> mapping.remap(ModBlocks.RICH_SOIL_FARMLAND.get()));
+		LOGGER.info("Remapping block 'farmersdelight:mulch_farmland' to 'farmersdelight:rich_soil_farmland'...");
 	}
 
 	@SubscribeEvent
@@ -116,6 +126,13 @@ public class CommonEventHandler
 		event.getMappings().stream()
 				.filter(mapping -> mapping.key.getPath().equals("mulch"))
 				.forEach(mapping -> mapping.remap(ModItems.RICH_SOIL.get()));
+		LOGGER.info("Remapping item 'farmersdelight:mulch' to 'farmersdelight:rich_soil'...");
+
+		// Mulch Farmland -> Rich Soil Farmland
+		event.getMappings().stream()
+				.filter(mapping -> mapping.key.getPath().equals("mulch_farmland"))
+				.forEach(mapping -> mapping.remap(ModItems.RICH_SOIL_FARMLAND.get()));
+		LOGGER.info("Remapping item 'farmersdelight:mulch_farmland' to 'farmersdelight:rich_soil_farmland'...");
 	}
 
 	@SubscribeEvent
@@ -178,7 +195,7 @@ public class CommonEventHandler
 
 		if (context.getFace() != Direction.DOWN && world.isAirBlock(pos.up()) && state.getBlock() == ModBlocks.RICH_SOIL.get()) {
 			world.playSound(event.getPlayer(), pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-			world.setBlockState(pos, ModBlocks.MULCH_FARMLAND.get().getDefaultState(), 11);
+			world.setBlockState(pos, ModBlocks.RICH_SOIL_FARMLAND.get().getDefaultState(), 11);
 			event.setResult(Event.Result.ALLOW);
 		}
 	}

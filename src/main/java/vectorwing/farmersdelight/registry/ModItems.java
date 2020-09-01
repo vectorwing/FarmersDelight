@@ -49,8 +49,8 @@ public class ModItems
 			() -> new BlockItem(ModBlocks.ORGANIC_COMPOST.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> RICH_SOIL = ITEMS.register("rich_soil",
 			() -> new BlockItem(ModBlocks.RICH_SOIL.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
-	public static final RegistryObject<Item> MULCH_FARMLAND = ITEMS.register("mulch_farmland",
-			() -> new BlockItem(ModBlocks.MULCH_FARMLAND.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> RICH_SOIL_FARMLAND = ITEMS.register("rich_soil_farmland",
+			() -> new BlockItem(ModBlocks.RICH_SOIL_FARMLAND.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
 	// Tools
 	public static final RegistryObject<Item> FLINT_KNIFE = ITEMS.register("flint_knife",
