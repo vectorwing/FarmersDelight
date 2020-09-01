@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.2.0 - Please Read!
+- Mulch has been renamed and remapped to Rich Soil - a more sensible name for its function.
+  - BACKUP YOUR WORLDS!! The mod will try to remap existing mulch, so you won't lose your progress.
+  - Some errors from other mods on world load might interrupt the remapping. If anything wrong happens, address the errors and try again with a backup.
+  - Treat this as a breaking change. While existing mulch will usually be remapped safely, it's better to start a new world if you're not sure.
+- Adds the Cutting Board - a hard surface to split items apart using certain tools
+  - Tool items can be carved into the board for display by sneak-right-clicking;
+  - Knives can portion meats and some fruits, to be more efficient when cooking meals;
+  - Pickaxes can separate brick blocks back into individual bricks;
+  - Axes can strip logs and harvest the removed tree bark, useful for composting;
+    - With this change, Knives are no longer able to strip logs for bark;
+  - Shears can salvage Saddles. Maybe more later!
+  - Current recipes are proofs of concept; we plan to add more in the future!
+- Adds Pantries - decorative storage blocks for every wood type;
+- Adds Pies - placeable desserts made from often overlooked sweet ingredients!
+  - Apple Pie, Sweet Berry Cheesecake and Chocolate Pie;
+  - They have 4 slices, can be eaten by hand, or sliced off with Knives;
+  - All pies provide a brief boost in Speed;
+  - Pumpkin Pie compatibility planned for the future.
+- Pumpkins can now be cut into 4 edible slices, to contrast with a Melon's 9 slices;
+- Several tagging changes, both mod-scope and Forge-scope, to allow more customization;
+- Many blocks in Farmer's Delight now send comparator signals;
+- Flammable blocks and items are now fuels!
+- New food effect: Comfort
+  - Makes the user immune to cold and sickness (Hunger, Slowness and Weakness), and instantly heals these effects when obtained;
+  - Provided by soups and stews, which are traditionally warm and wintry foods;
+- Small tweaks to Tomato crop harvesting;
+- Adds a few strong effects to vanilla soup items, to make them more interesting to consume;
+- Wild Crops can now be multiplied by bone-mealing, at a small chance of success;
+- General asset improvements.
+
 ## 0.1.5
 - Cooking Pot now allows optional container overrides at recipe .json level:
   - Stuffed Pumpkin now uses that to have Pumpkins as containers;
