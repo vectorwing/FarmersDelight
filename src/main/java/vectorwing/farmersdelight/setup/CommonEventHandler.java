@@ -108,13 +108,13 @@ public class CommonEventHandler
 		event.getMappings().stream()
 				.filter(mapping -> mapping.key.getPath().equals("mulch"))
 				.forEach(mapping -> mapping.remap(ModBlocks.RICH_SOIL.get()));
-		LOGGER.info("Remapping block 'farmersdelight:mulch' to 'farmersdelight:rich_soil'...");
+		LOGGER.warn("Remapping block 'farmersdelight:mulch' to 'farmersdelight:rich_soil'...");
 
 		// Mulch Farmland -> Rich Soil Farmland
 		event.getMappings().stream()
 				.filter(mapping -> mapping.key.getPath().equals("mulch_farmland"))
 				.forEach(mapping -> mapping.remap(ModBlocks.RICH_SOIL_FARMLAND.get()));
-		LOGGER.info("Remapping block 'farmersdelight:mulch_farmland' to 'farmersdelight:rich_soil_farmland'...");
+		LOGGER.warn("Remapping block 'farmersdelight:mulch_farmland' to 'farmersdelight:rich_soil_farmland'...");
 	}
 
 	@SubscribeEvent
@@ -126,13 +126,13 @@ public class CommonEventHandler
 		event.getMappings().stream()
 				.filter(mapping -> mapping.key.getPath().equals("mulch"))
 				.forEach(mapping -> mapping.remap(ModItems.RICH_SOIL.get()));
-		LOGGER.info("Remapping item 'farmersdelight:mulch' to 'farmersdelight:rich_soil'...");
+		LOGGER.warn("Remapping item 'farmersdelight:mulch' to 'farmersdelight:rich_soil'...");
 
 		// Mulch Farmland -> Rich Soil Farmland
 		event.getMappings().stream()
 				.filter(mapping -> mapping.key.getPath().equals("mulch_farmland"))
 				.forEach(mapping -> mapping.remap(ModItems.RICH_SOIL_FARMLAND.get()));
-		LOGGER.info("Remapping item 'farmersdelight:mulch_farmland' to 'farmersdelight:rich_soil_farmland'...");
+		LOGGER.warn("Remapping item 'farmersdelight:mulch_farmland' to 'farmersdelight:rich_soil_farmland'...");
 	}
 
 	@SubscribeEvent
