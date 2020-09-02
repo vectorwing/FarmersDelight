@@ -2,7 +2,6 @@ package vectorwing.farmersdelight.setup;
 
 import com.google.common.collect.Sets;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.entity.Entity;
@@ -51,7 +50,6 @@ import java.util.Set;
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CommonEventHandler
 {
-	private static final Logger LOGGER = LogManager.getLogger();
 	private static final ResourceLocation SHIPWRECK_SUPPLY_CHEST = LootTables.CHESTS_SHIPWRECK_SUPPLY;
 	private static final Set<ResourceLocation> VILLAGE_HOUSE_CHESTS = Sets.newHashSet(
 			LootTables.CHESTS_VILLAGE_VILLAGE_PLAINS_HOUSE,
@@ -97,42 +95,6 @@ public class CommonEventHandler
 		DispenserBlock.registerDispenseBehavior(ModItems.GOLDEN_KNIFE.get(), new CuttingBoardDispenseBehavior());
 
 		DeferredWorkQueue.runLater(CropPatchGeneration::generateCrop);
-	}
-
-	@SubscribeEvent
-	public static void onRemapBlocks(RegistryEvent.MissingMappings<Block> event) {
-		ModContainer mod = ModList.get().getModContainerById(FarmersDelight.MODID).get();
-		event.setModContainer(mod);
-
-		// Mulch -> Rich Soil
-		event.getMappings().stream()
-				.filter(mapping -> mapping.key.getPath().equals("mulch"))
-				.forEach(mapping -> mapping.remap(ModBlocks.RICH_SOIL.get()));
-		LOGGER.warn("Remapping block 'farmersdelight:mulch' to 'farmersdelight:rich_soil'...");
-
-		// Mulch Farmland -> Rich Soil Farmland
-		event.getMappings().stream()
-				.filter(mapping -> mapping.key.getPath().equals("mulch_farmland"))
-				.forEach(mapping -> mapping.remap(ModBlocks.RICH_SOIL_FARMLAND.get()));
-		LOGGER.warn("Remapping block 'farmersdelight:mulch_farmland' to 'farmersdelight:rich_soil_farmland'...");
-	}
-
-	@SubscribeEvent
-	public static void onRemapItems(RegistryEvent.MissingMappings<Item> event) {
-		ModContainer mod = ModList.get().getModContainerById(FarmersDelight.MODID).get();
-		event.setModContainer(mod);
-
-		// Mulch -> Rich Soil
-		event.getMappings().stream()
-				.filter(mapping -> mapping.key.getPath().equals("mulch"))
-				.forEach(mapping -> mapping.remap(ModItems.RICH_SOIL.get()));
-		LOGGER.warn("Remapping item 'farmersdelight:mulch' to 'farmersdelight:rich_soil'...");
-
-		// Mulch Farmland -> Rich Soil Farmland
-		event.getMappings().stream()
-				.filter(mapping -> mapping.key.getPath().equals("mulch_farmland"))
-				.forEach(mapping -> mapping.remap(ModItems.RICH_SOIL_FARMLAND.get()));
-		LOGGER.warn("Remapping item 'farmersdelight:mulch_farmland' to 'farmersdelight:rich_soil_farmland'...");
 	}
 
 	@SubscribeEvent
