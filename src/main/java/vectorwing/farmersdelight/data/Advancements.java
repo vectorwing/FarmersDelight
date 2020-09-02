@@ -95,9 +95,9 @@ public class Advancements extends AdvancementProvider
 					.withCriterion("harvest_straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
 					.register(consumer, getNameId("main/harvest_straw"));
 
-			Advancement plantFood = getAdvancement(graspingAtStraws, ModItems.MULCH.get(), "get_mulch", FrameType.TASK, true, true, false)
-					.withCriterion("get_mulch", InventoryChangeTrigger.Instance.forItems(ModItems.MULCH.get()))
-					.register(consumer, getNameId("main/get_mulch"));
+			Advancement plantFood = getAdvancement(graspingAtStraws, ModItems.RICH_SOIL.get(), "get_rich_soil", FrameType.TASK, true, true, false)
+					.withCriterion("get_rich_soil", InventoryChangeTrigger.Instance.forItems(ModItems.RICH_SOIL.get()))
+					.register(consumer, getNameId("main/get_rich_soil"));
 
 			// Cooking Branch
 			Advancement bonfireLit = getAdvancement(farmersDelight, Blocks.CAMPFIRE, "place_campfire", FrameType.TASK, true, true, false)

@@ -49,7 +49,7 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 
 	@Override
 	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return state.getBlock() == ModBlocks.MULCH.get();
+		return state.getBlock() == ModBlocks.RICH_SOIL.get();
 	}
 
 	@Override

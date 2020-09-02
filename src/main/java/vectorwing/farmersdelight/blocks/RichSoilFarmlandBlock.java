@@ -18,9 +18,9 @@ import vectorwing.farmersdelight.utils.Utils;
 
 import java.util.Random;
 
-public class MulchFarmlandBlock extends FarmlandBlock
+public class RichSoilFarmlandBlock extends FarmlandBlock
 {
-	public MulchFarmlandBlock(Properties builder)
+	public RichSoilFarmlandBlock(Properties builder)
 	{
 		super(builder);
 	}
@@ -52,7 +52,7 @@ public class MulchFarmlandBlock extends FarmlandBlock
 
 	public boolean isFertile(BlockState state, IBlockReader world, BlockPos pos) {
 		if (this.getBlock() == this)
-			return state.get(MulchFarmlandBlock.MOISTURE) > 0;
+			return state.get(RichSoilFarmlandBlock.MOISTURE) > 0;
 
 		return false;
 	}
@@ -74,7 +74,7 @@ public class MulchFarmlandBlock extends FarmlandBlock
 	}
 
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return !this.getDefaultState().isValidPosition(context.getWorld(), context.getPos()) ? ModBlocks.MULCH.get().getDefaultState() : super.getStateForPlacement(context);
+		return !this.getDefaultState().isValidPosition(context.getWorld(), context.getPos()) ? ModBlocks.RICH_SOIL.get().getDefaultState() : super.getStateForPlacement(context);
 	}
 
 	@Override
@@ -83,6 +83,6 @@ public class MulchFarmlandBlock extends FarmlandBlock
 	}
 
 	public static void turnToMulch(BlockState state, World worldIn, BlockPos pos) {
-		worldIn.setBlockState(pos, nudgeEntitiesWithNewState(state, ModBlocks.MULCH.get().getDefaultState(), worldIn, pos));
+		worldIn.setBlockState(pos, nudgeEntitiesWithNewState(state, ModBlocks.RICH_SOIL.get().getDefaultState(), worldIn, pos));
 	}
 }

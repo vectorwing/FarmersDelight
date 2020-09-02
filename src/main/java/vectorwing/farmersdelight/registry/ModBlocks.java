@@ -30,8 +30,6 @@ public class ModBlocks
 	public static final RegistryObject<Block> DARK_OAK_PANTRY = BLOCKS.register("dark_oak_pantry",
 			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
 	public static final RegistryObject<Block> CUTTING_BOARD = BLOCKS.register("cutting_board", CuttingBoardBlock::new);
-	public static final RegistryObject<Block> ROPE = BLOCKS.register("rope", RopeBlock::new);
-	public static final RegistryObject<Block> SAFETY_NET = BLOCKS.register("safety_net", SafetyNetBlock::new);
 	public static final RegistryObject<Block> CABBAGE_CRATE = BLOCKS.register("cabbage_crate",
 			() -> new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> TOMATO_CRATE = BLOCKS.register("tomato_crate",
@@ -40,17 +38,18 @@ public class ModBlocks
 			() -> new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> RICE_BALE = BLOCKS.register("rice_bale",
 			() -> new RiceBaleBlock(Block.Properties.from(Blocks.HAY_BLOCK)));
-
 	public static final RegistryObject<Block> ORGANIC_COMPOST = BLOCKS.register("organic_compost",
 			() -> new OrganicCompostBlock(Block.Properties.from(Blocks.DIRT)));
-	public static final RegistryObject<Block> MULCH = BLOCKS.register("mulch",
-			() -> new MulchBlock(Block.Properties.from(Blocks.DIRT).tickRandomly()));
-	public static final RegistryObject<Block> MULCH_FARMLAND = BLOCKS.register("mulch_farmland",
-			() -> new MulchFarmlandBlock(Block.Properties.from(Blocks.FARMLAND)));
+	public static final RegistryObject<Block> RICH_SOIL = BLOCKS.register("rich_soil",
+			() -> new RichSoilBlock(Block.Properties.from(Blocks.DIRT).tickRandomly()));
+	public static final RegistryObject<Block> RICH_SOIL_FARMLAND = BLOCKS.register("rich_soil_farmland",
+			() -> new RichSoilFarmlandBlock(Block.Properties.from(Blocks.FARMLAND)));
 	public static final RegistryObject<Block> BROWN_MUSHROOM_COLONY = BLOCKS.register("brown_mushroom_colony",
 			() -> new MushroomColonyBlock(Block.Properties.from(Blocks.BROWN_MUSHROOM), Items.BROWN_MUSHROOM.delegate));
 	public static final RegistryObject<Block> RED_MUSHROOM_COLONY = BLOCKS.register("red_mushroom_colony",
 			() -> new MushroomColonyBlock(Block.Properties.from(Blocks.RED_MUSHROOM), Items.RED_MUSHROOM.delegate));
+	public static final RegistryObject<Block> ROPE = BLOCKS.register("rope", RopeBlock::new);
+	public static final RegistryObject<Block> SAFETY_NET = BLOCKS.register("safety_net", SafetyNetBlock::new);
 
 	// PASTRY BLOCKS
 	public static final RegistryObject<Block> APPLE_PIE = BLOCKS.register("apple_pie",

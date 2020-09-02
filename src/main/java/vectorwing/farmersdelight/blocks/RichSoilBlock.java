@@ -11,14 +11,14 @@ import vectorwing.farmersdelight.utils.Utils;
 
 import java.util.Random;
 
-public class MulchBlock extends Block
+public class RichSoilBlock extends Block
 {
-	public MulchBlock()
+	public RichSoilBlock()
 	{
 		super(Properties.from(Blocks.DIRT));
 	}
 
-	public MulchBlock(Properties properties)
+	public RichSoilBlock(Properties properties)
 	{
 		super(properties);
 	}

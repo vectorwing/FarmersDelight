@@ -59,7 +59,7 @@ public class OrganicCompostBlock extends Block {
 
 		if (worldIn.getRandom().nextFloat() <= chance) {
 			if (state.get(COMPOSTING) == 7)
-				worldIn.setBlockState(pos, ModBlocks.MULCH.get().getDefaultState(), 2); // finished
+				worldIn.setBlockState(pos, ModBlocks.RICH_SOIL.get().getDefaultState(), 2); // finished
 			else
 				worldIn.setBlockState(pos, state.with(COMPOSTING, state.get(COMPOSTING) + 1), 2); // next stage
 		}

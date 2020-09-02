@@ -2,7 +2,7 @@
   "replace": "false",
   "values": [
     "minecraft:mutton",
-    "minecraft:chicken",
-    "minecraft:rabbit"
+    "minecraft:rabbit",
+    "#forge:raw_chicken"
   ]
 }
