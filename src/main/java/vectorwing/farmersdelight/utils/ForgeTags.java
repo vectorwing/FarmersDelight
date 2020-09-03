@@ -27,7 +27,7 @@ public class ForgeTags
 	public static final ITag.INamedTag<Item> KNIVES = forgeItemTag("tools/knife");
 
 	private static ITag.INamedTag<Item> forgeItemTag(String path) {
-		return ItemTags.makeWrapperTag(new ResourceLocation("forge", path).getPath());
+		return ItemTags.makeWrapperTag(new ResourceLocation("forge", path).toString());
 	}
 
 }
