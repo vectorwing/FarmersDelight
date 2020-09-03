@@ -59,7 +59,6 @@ public class TallRiceCropBlock extends BushBlock implements IWaterLoggable, IGro
 	public boolean isMaxAge(BlockState state) {
 		return state.get(this.getAgeProperty()) >= this.getMaxAge();
 	}
-
 	protected int getBonemealAgeIncrease(World worldIn) {
 		return MathHelper.nextInt(worldIn.rand, 2, 5);
 	}
@@ -157,22 +156,36 @@ public class TallRiceCropBlock extends BushBlock implements IWaterLoggable, IGro
 	}
 
 	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-		DoubleBlockHalf doubleblockhalf = state.get(HALF);
-		BlockPos blockpos = doubleblockhalf == DoubleBlockHalf.LOWER ? pos.up() : pos.down();
-		BlockState blockstate = worldIn.getBlockState(blockpos);
-		if (blockstate.getBlock() == this && blockstate.get(HALF) != doubleblockhalf) {
-			if (blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
-				worldIn.setBlockState(blockpos, Blocks.WATER.getDefaultState(), 35);
+		if (!worldIn.isRemote) {
+			if (player.isCreative()) {
+				breakDoublePlant(worldIn, pos, state, player);
 			} else {
-				worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
-			}
-			worldIn.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
-			if (!worldIn.isRemote && !player.isCreative()) {
 				spawnDrops(state, worldIn, pos, (TileEntity)null, player, player.getHeldItemMainhand());
 			}
 		}
 
 		super.onBlockHarvested(worldIn, pos, state, player);
+	}
+
+	public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
+		super.harvestBlock(worldIn, player, pos, Blocks.AIR.getDefaultState(), te, stack);
+	}
+
+	protected static void breakDoublePlant(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+		DoubleBlockHalf doubleblockhalf = state.get(HALF);
+		if (doubleblockhalf == DoubleBlockHalf.UPPER) {
+			BlockPos blockpos = pos.down();
+			BlockState blockstate = world.getBlockState(blockpos);
+			if (blockstate.getBlock() == state.getBlock() && blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
+				if (blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
+					world.setBlockState(blockpos, Blocks.WATER.getDefaultState(), 35);
+				} else {
+					world.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
+				}
+				world.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
+			}
+		}
+
 	}
 
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
