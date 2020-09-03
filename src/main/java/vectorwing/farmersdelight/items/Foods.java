@@ -54,6 +54,9 @@ public class Foods {
 	public static final Food MIXED_SALAD = (new Food.Builder())
 			.hunger(6).saturation(0.6f)
 			.effect(() -> new EffectInstance(Effects.REGENERATION, 300, 0), 1.0F).build();
+	public static final Food NETHER_SALAD = (new Food.Builder())
+			.hunger(5).saturation(0.4f)
+			.effect(() -> new EffectInstance(Effects.NAUSEA, 240, 0), 0.3F).build();
 	public static final Food BARBECUE_STICK = (new Food.Builder())
 			.hunger(8).saturation(0.9f).build();
 	public static final Food EGG_SANDWICH = (new Food.Builder())

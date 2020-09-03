@@ -59,6 +59,8 @@ public class ModItems {
             () -> new KnifeItem(ItemTier.IRON, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
     public static final RegistryObject<Item> DIAMOND_KNIFE = ITEMS.register("diamond_knife",
             () -> new KnifeItem(ItemTier.DIAMOND, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> NETHERITE_KNIFE = ITEMS.register("netherite_knife",
+			() -> new KnifeItem(ItemTier.NETHERITE, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP).isBurnable()));
     public static final RegistryObject<Item> GOLDEN_KNIFE = ITEMS.register("golden_knife",
             () -> new KnifeItem(ItemTier.GOLD, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
@@ -146,6 +148,8 @@ public class ModItems {
 
     public static final RegistryObject<Item> MIXED_SALAD = ITEMS.register("mixed_salad",
             () -> new MealItem(new Item.Properties().food(Foods.MIXED_SALAD).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> NETHER_SALAD = ITEMS.register("nether_salad",
+			() -> new MealItem(new Item.Properties().food(Foods.NETHER_SALAD).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
     public static final RegistryObject<Item> BARBECUE_STICK = ITEMS.register("barbecue_stick",
             () -> new Item(new Item.Properties().food(Foods.BARBECUE_STICK).group(FarmersDelight.ITEM_GROUP)));
     public static final RegistryObject<Item> EGG_SANDWICH = ITEMS.register("egg_sandwich",

@@ -307,6 +307,9 @@ public class Recipes extends RecipeProvider {
 				.key('s', Items.STICK)
 				.addCriterion("gold_ingot", InventoryChangeTrigger.Instance.forItems(Items.GOLD_INGOT))
 				.build(consumer);
+		SmithingRecipeBuilder.func_240502_a_(Ingredient.fromItems(ModItems.DIAMOND_KNIFE.get()), Ingredient.fromItems(Items.NETHERITE_INGOT), ModItems.NETHERITE_KNIFE.get())
+				.func_240503_a_("netherite_ingot", InventoryChangeTrigger.Instance.forItems(Items.NETHERITE_INGOT))
+				.func_240504_a_(consumer, FarmersDelight.MODID + ":netherite_knife_smithing");
 	}
 
 	private void recipesMaterials(Consumer<IFinishedRecipe> consumer) {
@@ -445,6 +448,12 @@ public class Recipes extends RecipeProvider {
 				.addIngredient(Items.BEETROOT)
 				.addIngredient(Items.BOWL)
 				.addCriterion("cabbage", InventoryChangeTrigger.Instance.forItems(ModItems.CABBAGE.get()))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.NETHER_SALAD.get())
+				.addIngredient(Items.CRIMSON_FUNGUS)
+				.addIngredient(Items.WARPED_FUNGUS)
+				.addIngredient(Items.BOWL)
+				.addCriterion("bowl", InventoryChangeTrigger.Instance.forItems(Items.BOWL))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.BARBECUE_STICK.get(), 2)
 				.addIngredient(ForgeTags.CROPS_TOMATO)
