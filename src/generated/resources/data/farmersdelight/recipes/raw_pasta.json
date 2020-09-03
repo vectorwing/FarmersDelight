@@ -11,7 +11,7 @@
       "item": "minecraft:egg"
     },
     {
-      "tag": "forge:knives"
+      "tag": "forge:tools/knife"
     }
   ],
   "result": {

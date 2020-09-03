@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " K ",
+    "/##"
+  ],
+  "key": {
+    "K": {
+      "tag": "farmersdelight:tools/knife"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "#": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "farmersdelight:cutting_board"
+  }
+}

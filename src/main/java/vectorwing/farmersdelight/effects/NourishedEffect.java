@@ -9,12 +9,19 @@ import net.minecraft.world.GameRules;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class NourishedEffect extends Effect {
-    private static final Logger LOGGER = LogManager.getLogger();
-
-    public NourishedEffect() {
-        super(EffectType.BENEFICIAL, 0);
-    }
+public class NourishedEffect extends Effect
+{
+	/**
+	 * This effect makes the player immune to accumulating food exhaustion. It is useless to all other entities.
+	 * Normal exhausting actions such as running, jumping and attacking will not drain hunger or saturation.
+	 * If the player can spend saturation to heal damage, the effect halts to let them do so, until they can't any more.
+	 * This means players can grow hungry by healing damage, but no further than 1.5 points, allowing them to eat more and keep healing.
+	 *
+	 * This method employs an Access Transformer exclusively to read the exhaustion value; it calls the proper functions to change it.
+	 */
+	public NourishedEffect() {
+		super(EffectType.BENEFICIAL, 0);
+	}
 
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
         if (!entityLivingBaseIn.getEntityWorld().isRemote && entityLivingBaseIn instanceof PlayerEntity) {

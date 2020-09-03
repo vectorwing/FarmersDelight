@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "farmersdelight:cod_slice"
+  },
+  "result": "farmersdelight:cooked_cod_slice",
+  "experience": 0.35,
+  "cookingtime": 200
+}

@@ -9,7 +9,7 @@ import net.minecraft.loot.LootParameters;
 import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
-import vectorwing.farmersdelight.blocks.CookingPotTileEntity;
+import vectorwing.farmersdelight.tile.CookingPotTileEntity;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -24,18 +24,18 @@ public class CopyMealFunction extends LootFunction {
         return builder(CopyMealFunction::new);
     }
 
-    @Override
-    protected ItemStack doApply(ItemStack stack, LootContext context) {
-        TileEntity tile = context.get(LootParameters.BLOCK_ENTITY);
-        if (tile instanceof CookingPotTileEntity) {
-            CompoundNBT tag = ((CookingPotTileEntity) tile).writeMealNbt(new CompoundNBT());
-            if (!tag.isEmpty()) {
-                stack.setTagInfo("BlockEntityTag", tag);
-            }
-        }
-        return stack;
-    }
-
+	@Override
+	protected ItemStack doApply(ItemStack stack, LootContext context)
+	{
+		TileEntity tile = context.get(LootParameters.BLOCK_ENTITY);
+		if (tile instanceof CookingPotTileEntity) {
+			CompoundNBT tag = ((CookingPotTileEntity) tile).writeMeal(new CompoundNBT());
+			if (!tag.isEmpty()) {
+				stack.setTagInfo("BlockEntityTag", tag);
+			}
+		}
+		return stack;
+	}
 
     @Override
     public LootFunctionType func_230425_b_() {

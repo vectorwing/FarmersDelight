@@ -17,10 +17,13 @@
       "item": "minecraft:brown_mushroom"
     },
     {
-      "item": "minecraft:pumpkin"
+      "item": "minecraft:sweet_berries"
     }
   ],
   "result": {
     "item": "farmersdelight:stuffed_pumpkin"
+  },
+  "container": {
+    "item": "minecraft:pumpkin"
   }
 }

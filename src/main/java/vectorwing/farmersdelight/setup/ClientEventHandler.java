@@ -13,10 +13,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
+import vectorwing.farmersdelight.client.tileentity.renderer.CuttingBoardTileEntityRenderer;
 import vectorwing.farmersdelight.client.tileentity.renderer.StoveTileEntityRenderer;
-import vectorwing.farmersdelight.init.ModBlocks;
-import vectorwing.farmersdelight.init.ModContainerTypes;
-import vectorwing.farmersdelight.init.ModTileEntityTypes;
+import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.registry.ModContainerTypes;
+import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventHandler {
@@ -47,13 +48,17 @@ public class ClientEventHandler {
         RenderTypeLookup.setRenderLayer(ModBlocks.BROWN_MUSHROOM_COLONY.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.RED_MUSHROOM_COLONY.get(), RenderType.getCutout());
 
-        RenderTypeLookup.setRenderLayer(ModBlocks.COOKING_POT.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.BASKET.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.ROPE.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.SAFETY_NET.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.COOKING_POT.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.CUTTING_BOARD.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.BASKET.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.ROPE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(ModBlocks.SAFETY_NET.get(), RenderType.getCutout());
 
-        ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.STOVE_TILE.get(),
-                StoveTileEntityRenderer::new);
-        ScreenManager.registerFactory(ModContainerTypes.COOKING_POT.get(), CookingPotScreen::new);
-    }
+		ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.STOVE_TILE.get(),
+				StoveTileEntityRenderer::new);
+		ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.CUTTING_BOARD_TILE.get(),
+				CuttingBoardTileEntityRenderer::new);
+
+		ScreenManager.registerFactory(ModContainerTypes.COOKING_POT.get(), CookingPotScreen::new);
+	}
 }

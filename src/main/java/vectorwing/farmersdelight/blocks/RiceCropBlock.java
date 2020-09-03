@@ -22,8 +22,8 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import vectorwing.farmersdelight.init.ModBlocks;
-import vectorwing.farmersdelight.init.ModItems;
+import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.registry.ModItems;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -33,145 +33,134 @@ import java.util.Random;
 @ParametersAreNonnullByDefault
 @SuppressWarnings("deprecation")
 public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowable {
-    public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 4);
-    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
-            Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D),
-            Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D),
-            Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 9.0D, 11.0D),
-            Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 9.0D, 11.0D),
-            Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D)};
+	public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 4);
+	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {
+			Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D),
+			Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D),
+			Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 9.0D, 11.0D),
+			Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 9.0D, 11.0D),
+			Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D)};
 
-    public RiceCropBlock(Properties builder) {
-        super(builder);
-        this.setDefaultState(this.getDefaultState().with(WATERLOGGED, true).with(AGE, 0));
-    }
+	public RiceCropBlock(Properties builder) {
+		super(builder);
+		this.setDefaultState(this.getDefaultState().with(WATERLOGGED, true).with(AGE, 0));
+	}
 
-    public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-        super.tick(state, worldIn, pos, rand);
-        if (!worldIn.isAreaLoaded(pos, 1)) return;
-        if (worldIn.getLightSubtracted(pos.up(), 0) >= 6) {
-            int i = this.getAge(state);
-            if (i <= this.getMaxAge()) {
-                float f = 10;
-                if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt((int) (25.0F / f) + 1) == 0)) {
-                    if (i == 4) {
-                        TallRiceCropBlock tallRice = (TallRiceCropBlock) ModBlocks.TALL_RICE_CROP.get();
-                        if (tallRice.getDefaultState().isValidPosition(worldIn, pos) && worldIn.isAirBlock(pos.up())) {
-                            tallRice.placeAt(worldIn, pos, 2, 6);
-                            net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
-                        }
-                    } else {
-                        worldIn.setBlockState(pos, this.withAge(i + 1), 2);
-                        net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
-                    }
-                }
-            }
-        }
+	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
+		super.tick(state, worldIn, pos, rand);
+		if (!worldIn.isAreaLoaded(pos, 1)) return;
+		if (worldIn.getLightSubtracted(pos.up(), 0) >= 6) {
+			int i = this.getAge(state);
+			if (i <= this.getMaxAge()) {
+				float f = 10;
+				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt((int)(25.0F / f) + 1) == 0)) {
+					if (i == 4) {
+						TallRiceCropBlock tallRice = (TallRiceCropBlock) ModBlocks.TALL_RICE_CROP.get();
+						if (tallRice.getDefaultState().isValidPosition(worldIn, pos) && worldIn.isAirBlock(pos.up())) {
+							tallRice.placeAt(worldIn, pos, 2, 6);
+							net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
+						}
+					} else {
+						worldIn.setBlockState(pos, this.withAge(i + 1), 2);
+						net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
+					}
+				}
+			}
+		}
 
-    }
+	}
 
-    public void grow(World worldIn, BlockPos pos, BlockState state) {
-        int i = this.getAge(state) + this.getBonemealAgeIncrease(worldIn);
-        int j = 7;
-        if (i > j) i = j;
-        if (i <= 4) {
-            worldIn.setBlockState(pos, state.with(AGE, i));
-        } else {
-            TallRiceCropBlock tallRice = (TallRiceCropBlock) ModBlocks.TALL_RICE_CROP.get();
-            if (tallRice.getDefaultState().isValidPosition(worldIn, pos) && worldIn.isAirBlock(pos.up())) {
-                tallRice.placeAt(worldIn, pos, 2, i);
-            }
-        }
-    }
+	public void grow(World worldIn, BlockPos pos, BlockState state) {
+		int i = this.getAge(state) + this.getBonemealAgeIncrease(worldIn);
+		int j = 7;
+		if (i > j) i = j;
+		if (i <= 4) {
+			worldIn.setBlockState(pos, state.with(AGE, i));
+		} else {
+			TallRiceCropBlock tallRice = (TallRiceCropBlock)ModBlocks.TALL_RICE_CROP.get();
+			if (tallRice.getDefaultState().isValidPosition(worldIn, pos) && worldIn.isAirBlock(pos.up())) {
+				tallRice.placeAt(worldIn, pos, 2, i);
+			}
+		}
+	}
 
-    protected int getBonemealAgeIncrease(World worldIn) {
-        return MathHelper.nextInt(worldIn.rand, 2, 5);
-    }
+	protected int getBonemealAgeIncrease(World worldIn) {
+		return MathHelper.nextInt(worldIn.rand, 2, 5);
+	}
 
-    @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return SHAPE_BY_AGE[state.get(this.getAgeProperty())];
-    }
+	@Override
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+		return SHAPE_BY_AGE[state.get(this.getAgeProperty())];
+	}
 
-    public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-        FluidState ifluidstate = worldIn.getFluidState(pos);
-        return super.isValidPosition(state, worldIn, pos) && ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8;
-    }
+	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		FluidState ifluidstate = worldIn.getFluidState(pos);
+		return super.isValidPosition(state, worldIn, pos) && ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8;
+	}
 
-    @Override
-    protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        return state.isSolidSide(worldIn, pos, Direction.UP) && (state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS_BLOCK || state.getBlock() == ModBlocks.MULCH.get());
-    }
+	@Override
+	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
+		return state.isSolidSide(worldIn, pos, Direction.UP) && (state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS_BLOCK || state.getBlock() == ModBlocks.RICH_SOIL.get());
+	}
 
-    public IntegerProperty getAgeProperty() {
-        return AGE;
-    }
+	public IntegerProperty getAgeProperty() { return AGE; }
 
-    protected int getAge(BlockState state) {
-        return state.get(this.getAgeProperty());
-    }
+	protected int getAge(BlockState state) {
+		return state.get(this.getAgeProperty());
+	}
 
-    public int getMaxAge() {
-        return 4;
-    }
+	public int getMaxAge() {
+		return 4;
+	}
 
-    public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
-        return new ItemStack(ModItems.RICE.get());
-    }
+	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
+		return new ItemStack(ModItems.RICE.get());
+	}
 
-    public BlockState withAge(int age) {
-        return this.getDefaultState().with(this.getAgeProperty(), age);
-    }
+	public BlockState withAge(int age) {
+		return this.getDefaultState().with(this.getAgeProperty(), Integer.valueOf(age));
+	}
 
-    public boolean isMaxAge(BlockState state) {
-        return state.get(this.getAgeProperty()) >= this.getMaxAge();
-    }
+	public boolean isMaxAge(BlockState state) {
+		return state.get(this.getAgeProperty()) >= this.getMaxAge();
+	}
 
-    @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(AGE, WATERLOGGED);
-    }
+	@Override
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+		builder.add(AGE, WATERLOGGED);
+	}
 
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-        BlockState blockstate = super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
-        if (!blockstate.isAir()) {
-            worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
-        }
+	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		BlockState blockstate = super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+		if (!blockstate.isAir()) {
+			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+		}
 
-        return blockstate;
-    }
+		return blockstate;
+	}
 
-    @Nullable
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
-        return ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8 ? super.getStateForPlacement(context) : null;
-    }
+	@Nullable
+	public BlockState getStateForPlacement(BlockItemUseContext context) {
+		FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
+		return ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8 ? super.getStateForPlacement(context) : null;
+	}
 
-    public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
-        return true;
-    }
+	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+		return true;
+	}
 
-    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
-        return true;
-    }
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
+		return true;
+	}
 
-    @Override
-    public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
-        this.grow(worldIn, pos, state);
-    }
+	@Override
+	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state)
+	{
+		this.grow(worldIn, pos, state);
+	}
 
-    @Override
-    public boolean canContainFluid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
-        return false;
-    }
-
-    @Override
-    public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
-        return false;
-    }
-
-    public FluidState getFluidState(BlockState state) {
-        return Fluids.WATER.getStillFluidState(false);
-    }
+	public FluidState getFluidState(BlockState state) {
+		return Fluids.WATER.getStillFluidState(false);
+	}
 }

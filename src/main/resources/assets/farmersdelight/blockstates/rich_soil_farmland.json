@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "moisture=0": { "model": "farmersdelight:block/rich_soil_farmland" },
+    "moisture=1": { "model": "farmersdelight:block/rich_soil_farmland" },
+    "moisture=2": { "model": "farmersdelight:block/rich_soil_farmland" },
+    "moisture=3": { "model": "farmersdelight:block/rich_soil_farmland" },
+    "moisture=4": { "model": "farmersdelight:block/rich_soil_farmland" },
+    "moisture=5": { "model": "farmersdelight:block/rich_soil_farmland" },
+    "moisture=6": { "model": "farmersdelight:block/rich_soil_farmland" },
+    "moisture=7": { "model": "farmersdelight:block/rich_soil_farmland_moist" }
+  }
+}

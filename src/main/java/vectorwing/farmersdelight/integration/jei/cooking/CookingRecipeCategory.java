@@ -17,7 +17,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.init.ModItems;
+import vectorwing.farmersdelight.registry.ModItems;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Arrays;

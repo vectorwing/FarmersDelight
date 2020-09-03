@@ -11,7 +11,7 @@
       "tag": "forge:crops/onion"
     },
     {
-      "item": "minecraft:chicken"
+      "tag": "forge:raw_chicken"
     }
   ],
   "result": {

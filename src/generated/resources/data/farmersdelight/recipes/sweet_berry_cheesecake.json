@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss",
+    "sss",
+    "mOm"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:sweet_berries"
+    },
+    "m": {
+      "tag": "forge:milk"
+    },
+    "O": {
+      "item": "farmersdelight:pie_crust"
+    }
+  },
+  "result": {
+    "item": "farmersdelight:sweet_berry_cheesecake"
+  }
+}

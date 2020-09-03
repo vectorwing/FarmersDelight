@@ -1,11 +1,11 @@
 package vectorwing.farmersdelight.data;
 
+import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.registry.ModItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.ExistingFileHelper;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
-import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.init.ModItems;
 
 public class Items extends ItemModelProvider {
 

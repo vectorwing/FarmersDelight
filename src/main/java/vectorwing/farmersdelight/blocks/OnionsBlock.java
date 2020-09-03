@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.blocks;
 
-
 import mcp.MethodsReturnNonnullByDefault;
+import vectorwing.farmersdelight.registry.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropsBlock;
@@ -10,7 +10,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
-import vectorwing.farmersdelight.init.ModItems;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

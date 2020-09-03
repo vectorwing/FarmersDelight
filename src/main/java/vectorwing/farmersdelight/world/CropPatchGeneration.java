@@ -13,7 +13,7 @@ import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.registries.ForgeRegistries;
-import vectorwing.farmersdelight.init.ModBlocks;
+import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.setup.Configuration;
 
 public class CropPatchGeneration {

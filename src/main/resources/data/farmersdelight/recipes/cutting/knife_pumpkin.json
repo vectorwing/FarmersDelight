@@ -1,0 +1,18 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:pumpkin"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knife"
+  },
+  "result": [
+    {
+      "item": "farmersdelight:pumpkin_slice",
+      "count": 4
+    }
+  ],
+  "effort": 1
+}

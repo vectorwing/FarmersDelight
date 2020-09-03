@@ -2,7 +2,7 @@
   "type": "farmersdelight:cooking",
   "ingredients": [
     {
-      "item": "minecraft:pumpkin"
+      "item": "farmersdelight:pumpkin_slice"
     },
     {
       "item": "minecraft:potato"

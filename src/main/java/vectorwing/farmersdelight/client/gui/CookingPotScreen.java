@@ -5,14 +5,12 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.SoupItem;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.container.CookingPotContainer;
+import vectorwing.farmersdelight.tile.container.CookingPotContainer;
 import vectorwing.farmersdelight.utils.Text;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -46,12 +44,8 @@ public class CookingPotScreen extends ContainerScreen<CookingPotContainer> {
                 ItemStack meal = this.hoveredSlot.getStack();
                 tooltip.add(((IFormattableTextComponent) meal.getItem().getName()).mergeStyle(meal.getRarity().color));
 
-                ITextComponent container = null;
-                if (meal.hasContainerItem()) {
-                    container = meal.getContainerItem().getItem().getName();
-                } else if (meal.getItem() instanceof SoupItem) {
-                    container = Items.BOWL.getItem().getName();
-                }
+				ItemStack containerItem = this.container.tileEntity.getContainer();
+				String container = !containerItem.isEmpty() ? containerItem.getItem().getName().getString() : "";
 
                 if (container != null) {
                     tooltip.add(Text.getTranslation("container.cooking_pot.served_on", container).mergeStyle(TextFormatting.GRAY));

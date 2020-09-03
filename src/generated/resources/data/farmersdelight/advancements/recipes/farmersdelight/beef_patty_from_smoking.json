@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:beef_patty_from_smoking"
+    ]
+  },
+  "criteria": {
+    "beef_patty": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:minced_beef"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:beef_patty_from_smoking"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "beef_patty",
+      "has_the_recipe"
+    ]
+  ]
+}

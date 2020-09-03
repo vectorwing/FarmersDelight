@@ -13,6 +13,20 @@
       }
     ]
   },
+  "block.cutting_board.knife": {
+    "category": "block",
+    "subtitle": "block.cutting_board.knife.subtitles",
+    "sounds": [
+      {
+        "name": "farmersdelight:block/cutting_board_knife1",
+        "stream": true
+      },
+      {
+        "name": "farmersdelight:block/cutting_board_knife2",
+        "stream": true
+      }
+    ]
+  },
   "block.stove.crackle": {
     "category": "block",
     "subtitle": "block.stove.crackle.subtitles",
