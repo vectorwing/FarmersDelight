@@ -27,6 +27,7 @@ public class CookingPotScreen extends ContainerScreen<CookingPotContainer> {
         this.guiTop = 0;
         this.xSize = 176;
         this.ySize = 166;
+        this.titleX = 28;
     }
 
     @Override
@@ -47,9 +48,7 @@ public class CookingPotScreen extends ContainerScreen<CookingPotContainer> {
 				ItemStack containerItem = this.container.tileEntity.getContainer();
 				String container = !containerItem.isEmpty() ? containerItem.getItem().getName().getString() : "";
 
-                if (container != null) {
-                    tooltip.add(Text.getTranslation("container.cooking_pot.served_on", container).mergeStyle(TextFormatting.GRAY));
-                }
+                tooltip.add(Text.getTranslation("container.cooking_pot.served_on", container).mergeStyle(TextFormatting.GRAY));
 
                 this.renderTooltip(ms, tooltip, mouseX, mouseY);
             } else {

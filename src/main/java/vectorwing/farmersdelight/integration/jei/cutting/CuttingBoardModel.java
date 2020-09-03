@@ -35,28 +35,31 @@ public class CuttingBoardModel implements IDrawable
 	}
 
 	@Override
-	public void draw(MatrixStack ms, int xOffset, int yOffset) {
+	public void draw(MatrixStack matrixStack, int xOffset, int yOffset) {
 		if (stack == null) {
 			stack = supplier.get();
 		}
-
-		RenderHelper.enableStandardItemLighting();
-		RenderSystem.color4f(1, 1, 1, 1);
+		RenderSystem.pushMatrix();
+		RenderSystem.multMatrix(matrixStack.getLast().getMatrix());
 		RenderSystem.enableDepthTest();
+		RenderHelper.enableStandardItemLighting();
 		RenderSystem.pushMatrix();
 		RenderSystem.translated(xOffset, yOffset, 0);
-
 		RenderSystem.pushMatrix();
 		RenderSystem.translated(1, 1, 0);
 
-		ItemRenderer renderer = Minecraft.getInstance().getItemRenderer();
+		Minecraft minecraft = Minecraft.getInstance();
+		ItemRenderer itemRenderer = minecraft.getItemRenderer();
+		itemRenderer.zLevel += 50.0F;
+		IBakedModel bakedmodel = itemRenderer.getItemModelWithOverrides(stack, (World)null, (LivingEntity)null);
 		TextureManager textureManager = Minecraft.getInstance().textureManager;
-		IBakedModel bakedmodel = renderer.getItemModelWithOverrides(stack, (World)null, (LivingEntity)null);
-		Utils.renderItemIntoGUIScalable(stack, 48, 48, bakedmodel, renderer, textureManager);
+		Utils.renderItemIntoGUIScalable(stack, 48, 48, bakedmodel, itemRenderer, textureManager);
+		itemRenderer.zLevel -= 50.0F;
 
 		RenderSystem.popMatrix();
-
 		RenderSystem.popMatrix();
-		RenderSystem.enableBlend();
+		RenderSystem.disableBlend();
+		RenderHelper.disableStandardItemLighting();
+		RenderSystem.popMatrix();
 	}
 }
