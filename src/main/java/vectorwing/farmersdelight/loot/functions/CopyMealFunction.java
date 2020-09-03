@@ -11,6 +11,8 @@ import net.minecraft.loot.LootParameters;
 import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
+import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.tile.CookingPotTileEntity;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -18,6 +20,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class CopyMealFunction extends LootFunction {
+
+	public static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "copy_meal");
+
     private CopyMealFunction(ILootCondition[] conditions) {
         super(conditions);
     }

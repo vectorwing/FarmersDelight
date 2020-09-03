@@ -70,7 +70,7 @@ public class CommonEventHandler
 
 		ModAdvancements.register();
 
-		LootFunctionManager.func_237451_a_(FarmersDelight.MODID + ":copy_meal", new CopyMealFunction.Serializer());
+		LootFunctionManager.func_237451_a_(CopyMealFunction.ID.toString(), new CopyMealFunction.Serializer());
 
 		DispenserBlock.registerDispenseBehavior(Items.WOODEN_PICKAXE, new CuttingBoardDispenseBehavior());
 		DispenserBlock.registerDispenseBehavior(Items.WOODEN_AXE, new CuttingBoardDispenseBehavior());
