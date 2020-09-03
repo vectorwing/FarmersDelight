@@ -1,5 +1,7 @@
 package vectorwing.farmersdelight.loot.functions;
 
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonObject;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
@@ -37,8 +39,17 @@ public class CopyMealFunction extends LootFunction {
 		return stack;
 	}
 
-    @Override
-    public LootFunctionType func_230425_b_() {
-        return null;
-    }
+	@Override
+	public LootFunctionType func_230425_b_() {
+		return null;
+	}
+
+	public static class Serializer extends LootFunction.Serializer<CopyMealFunction>
+	{
+		@Override
+		public CopyMealFunction deserialize(JsonObject json, JsonDeserializationContext context, ILootCondition[] conditions)
+		{
+			return new CopyMealFunction(conditions);
+		}
+	}
 }
