@@ -161,16 +161,16 @@ public class CookingPotBlock extends Block implements IWaterLoggable {
                     IFormattableTextComponent servingsOf = meal.getCount() == 1
                             ? Text.getTranslation("tooltip.cooking_pot.single_serving")
                             : Text.getTranslation("tooltip.cooking_pot.many_servings", meal.getCount());
-                    tooltip.add(servingsOf.func_240699_a_(TextFormatting.GRAY));
+                    tooltip.add(servingsOf.mergeStyle(TextFormatting.GRAY));
                     if (meal.getDisplayName() instanceof IFormattableTextComponent)
-                        tooltip.add(((IFormattableTextComponent) meal.getDisplayName()).func_240699_a_(meal.getRarity().color));
+                        tooltip.add(((IFormattableTextComponent) meal.getDisplayName()).mergeStyle(meal.getRarity().color));
                     else
                         tooltip.add(meal.getDisplayName());
                 }
             }
         } else {
             IFormattableTextComponent empty = Text.getTranslation("tooltip.cooking_pot.empty");
-            tooltip.add(empty.func_240699_a_(TextFormatting.GRAY));
+            tooltip.add(empty.mergeStyle(TextFormatting.GRAY));
         }
     }
 

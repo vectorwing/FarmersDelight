@@ -100,7 +100,7 @@ public class StoveBlock extends Block {
 
     public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
         boolean isLit = worldIn.getBlockState(pos).get(StoveBlock.LIT);
-        if (isLit && !entityIn.func_230279_az_() && entityIn instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entityIn)) {
+        if (isLit && !entityIn.isImmuneToFire() && entityIn instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entityIn)) {
             entityIn.attackEntityFrom(DamageSource.HOT_FLOOR, 1.0F);
         }
 

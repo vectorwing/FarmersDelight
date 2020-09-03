@@ -155,9 +155,9 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
     }
 
     @Override
-    public void func_230337_a_(BlockState state, CompoundNBT compound) {
+    public void read(BlockState state, CompoundNBT compound) {
 
-        super.func_230337_a_(state, compound);
+        super.read(state, compound);
         this.inventory.clear();
         ItemStackHelper.loadAllItems(compound, this.inventory);
         if (compound.contains("CookingTimes", 11)) {
@@ -196,12 +196,12 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 
     @Override
     public void handleUpdateTag(BlockState state, CompoundNBT tag) {
-        this.func_230337_a_(state, tag);
+        this.read(state, tag);
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        this.func_230337_a_(this.getBlockState(), pkt.getNbtCompound());
+        this.read(this.getBlockState(), pkt.getNbtCompound());
     }
 
     public Optional<CampfireCookingRecipe> findMatchingRecipe(ItemStack itemStackIn) {
