@@ -1,13 +1,19 @@
 # Changelog
 
 ## 0.2.1
-(1.16.1)
+(1.16.1+)
 - Netherite Knife added to knife tags
-- Fixed Wild Crop hitbox
-- Fixed weird drinking animation for milk bottle and hot cocoa on third person
 - Added Soul Fire to tray_heat_sources
+(1.15.2+)
+- Add the ability to smelt metal Knives for nuggets
+- Fix Wild Crops occasionally spawning themselves as items spontaneously
+- Fix drinking animation for Milk Bottle and Hot Cocoa on third person
 
 ## 0.2.0 - Please Read!
+(1.16.1+)
+- Added Netherite Knife
+- Added Nether Salad
+(1.15.2+)
 - Mulch has been renamed and remapped to Rich Soil - a more sensible name for its function.
   - BACKUP YOUR WORLDS!! The mod will try to remap existing mulch, so you won't lose your progress.
   - Some errors from other mods on world load might interrupt the remapping. If anything wrong happens, address the errors and try again with a backup.
