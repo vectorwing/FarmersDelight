@@ -88,17 +88,22 @@ public class Advancements extends AdvancementProvider
 					.withCriterion("golden_knife", InventoryChangeTrigger.Instance.forItems(ModItems.GOLDEN_KNIFE.get())).withRequirementsStrategy(IRequirementsStrategy.OR)
 					.register(consumer, getNameId("main/craft_knife"));
 
-			Advancement dippingYourRoots = getAdvancement(huntAndGather, ModItems.RICE_PANICLE.get(), "plant_rice", FrameType.TASK, true, true, false)
-					.withCriterion("plant_rice", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.RICE_CROP.get()))
-					.register(consumer, getNameId("main/plant_rice"));
-
 			Advancement graspingAtStraws = getAdvancement(huntAndGather, ModItems.STRAW.get(), "harvest_straw", FrameType.TASK, true, true, false)
 					.withCriterion("harvest_straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
 					.register(consumer, getNameId("main/harvest_straw"));
 
-			Advancement plantFood = getAdvancement(graspingAtStraws, ModItems.RICH_SOIL.get(), "get_rich_soil", FrameType.TASK, true, true, false)
+			Advancement dippingYourRoots = getAdvancement(graspingAtStraws, ModItems.RICE_PANICLE.get(), "plant_rice", FrameType.TASK, true, true, false)
+					.withCriterion("plant_rice", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.RICE_CROP.get()))
+					.register(consumer, getNameId("main/plant_rice"));
+
+			Advancement plantFood = getAdvancement(dippingYourRoots, ModItems.RICH_SOIL.get(), "get_rich_soil", FrameType.TASK, true, true, false)
 					.withCriterion("get_rich_soil", InventoryChangeTrigger.Instance.forItems(ModItems.RICH_SOIL.get()))
 					.register(consumer, getNameId("main/get_rich_soil"));
+
+			Advancement cantTakeTheHeat = getAdvancement(huntAndGather, ModItems.NETHERITE_KNIFE.get(), "obtain_netherite_knife", FrameType.CHALLENGE, true, true, false)
+					.withCriterion("obtain_netherite_knife", InventoryChangeTrigger.Instance.forItems(ModItems.NETHERITE_KNIFE.get()))
+					.withRewards(AdvancementRewards.Builder.experience(200))
+					.register(consumer, getNameId("main/obtain_netherite_knife"));
 
 			// Cooking Branch
 			Advancement bonfireLit = getAdvancement(farmersDelight, Blocks.CAMPFIRE, "place_campfire", FrameType.TASK, true, true, false)

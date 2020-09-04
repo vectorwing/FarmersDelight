@@ -68,7 +68,7 @@
   "item.farmersdelight.iron_knife": "Faca de ferro",
   "item.farmersdelight.golden_knife": "Faca de ouro",
   "item.farmersdelight.diamond_knife": "Faca de diamante",
-  "item.farmersdelight.netherite_knife": "Faca de netherito",
+  "item.farmersdelight.netherite_knife": "Faca de netherita",
   "item.farmersdelight.barbecue_stick": "Churrasco no palito",
   "item.farmersdelight.egg_sandwich": "Pão com ovo",
   "item.farmersdelight.chicken_sandwich": "Sanduíche de frango",
@@ -119,6 +119,8 @@
   "farmersdelight.advancement.harvest_straw.desc": "Colha plantas gramíneas com uma Faca para obter Palha",
   "farmersdelight.advancement.get_rich_soil": "Comida de plantas",
   "farmersdelight.advancement.get_rich_soil.desc": "Deixe um pouco de Composto Orgânico decompor até se tornar solo rico",
+  "farmersdelight.advancement.obtain_netherite_knife": "Se você não aguenta o calor...",
+  "farmersdelight.advancement.obtain_netherite_knife.desc": "Contra qualquer bom julgamento, gaste uma barra inteira de Netherita para aprimorar sua faca",
 
   "farmersdelight.advancement.place_campfire": "Bonfire Lit",
   "farmersdelight.advancement.place_campfire.desc": "Acenda uma Fogueira para lhe aquecer à noite",

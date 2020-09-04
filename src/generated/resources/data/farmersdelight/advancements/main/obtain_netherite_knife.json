@@ -1,0 +1,39 @@
+{
+  "parent": "farmersdelight:main/craft_knife",
+  "display": {
+    "icon": {
+      "item": "farmersdelight:netherite_knife",
+      "nbt": "{Damage:0}"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.obtain_netherite_knife"
+    },
+    "description": {
+      "translate": "farmersdelight.advancement.obtain_netherite_knife.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 200
+  },
+  "criteria": {
+    "obtain_netherite_knife": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:netherite_knife"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "obtain_netherite_knife"
+    ]
+  ]
+}
