@@ -83,6 +83,6 @@ public class MilkBottleItem extends Item
 
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		playerIn.setActiveHand(handIn);
-		return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
+		return ActionResult.resultConsume(playerIn.getHeldItem(handIn));
 	}
 }

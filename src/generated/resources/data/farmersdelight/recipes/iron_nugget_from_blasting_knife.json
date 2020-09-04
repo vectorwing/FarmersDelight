@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "farmersdelight:iron_knife"
+  },
+  "result": "minecraft:iron_nugget",
+  "experience": 0.1,
+  "cookingtime": 100
+}
