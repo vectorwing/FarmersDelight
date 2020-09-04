@@ -13,6 +13,7 @@ import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.DrinkHelper;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
@@ -84,7 +85,6 @@ public class MilkBottleItem extends Item {
     }
 
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        playerIn.setActiveHand(handIn);
-        return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
+        return DrinkHelper.func_234707_a_(worldIn, playerIn, handIn);
     }
 }
