@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:gold_nugget_from_blasting_knife"
+    ]
+  },
+  "criteria": {
+    "has_golden_knife": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:iron_knife"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:gold_nugget_from_blasting_knife"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_golden_knife",
+      "has_the_recipe"
+    ]
+  ]
+}

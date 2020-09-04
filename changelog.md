@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1
+(1.16.1)
+- Netherite Knife added to knife tags
+- Fixed Wild Crop hitbox
+- Fixed weird drinking animation for milk bottle and hot cocoa on third person
+- Added Soul Fire to tray_heat_sources
+
 ## 0.2.0 - Please Read!
 - Mulch has been renamed and remapped to Rich Soil - a more sensible name for its function.
   - BACKUP YOUR WORLDS!! The mod will try to remap existing mulch, so you won't lose your progress.
