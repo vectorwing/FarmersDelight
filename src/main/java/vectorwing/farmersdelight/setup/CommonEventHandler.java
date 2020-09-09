@@ -3,7 +3,7 @@ package vectorwing.farmersdelight.setup;
 import com.google.common.collect.Sets;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
@@ -14,40 +14,35 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.LootTables;
-import net.minecraftforge.event.RegistryEvent;
+import net.minecraft.world.storage.loot.TableLootEntry;
+import net.minecraft.world.storage.loot.functions.LootFunctionManager;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
-import net.minecraftforge.fml.ModContainer;
-import net.minecraftforge.fml.ModList;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.loot.functions.CopyMealFunction;
 import vectorwing.farmersdelight.registry.ModAdvancements;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModEffects;
 import vectorwing.farmersdelight.registry.ModItems;
-import vectorwing.farmersdelight.loot.functions.CopyMealFunction;
-import net.minecraft.block.ComposterBlock;
-import net.minecraft.world.storage.loot.LootPool;
-import net.minecraft.world.storage.loot.TableLootEntry;
-import net.minecraft.world.storage.loot.functions.LootFunctionManager;
-import net.minecraftforge.event.LootTableLoadEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-
 import vectorwing.farmersdelight.tile.dispenser.CuttingBoardDispenseBehavior;
 import vectorwing.farmersdelight.world.CropPatchGeneration;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID)
+@ParametersAreNonnullByDefault
 public class CommonEventHandler
 {
 	private static final ResourceLocation SHIPWRECK_SUPPLY_CHEST = LootTables.CHESTS_SHIPWRECK_SUPPLY;
@@ -68,25 +63,26 @@ public class CommonEventHandler
 		LootFunctionManager.registerFunction(new CopyMealFunction.Serializer());
 
 		if (Configuration.DISPENSER_TOOLS_CUTTING_BOARD.get()) {
-			DispenserBlock.registerDispenseBehavior(Items.WOODEN_PICKAXE, new CuttingBoardDispenseBehavior());
-			DispenserBlock.registerDispenseBehavior(Items.WOODEN_AXE, new CuttingBoardDispenseBehavior());
-			DispenserBlock.registerDispenseBehavior(Items.WOODEN_SHOVEL, new CuttingBoardDispenseBehavior());
-			DispenserBlock.registerDispenseBehavior(Items.STONE_PICKAXE, new CuttingBoardDispenseBehavior());
-			DispenserBlock.registerDispenseBehavior(Items.STONE_AXE, new CuttingBoardDispenseBehavior());
-			DispenserBlock.registerDispenseBehavior(Items.STONE_SHOVEL, new CuttingBoardDispenseBehavior());
-			DispenserBlock.registerDispenseBehavior(Items.IRON_PICKAXE, new CuttingBoardDispenseBehavior());
-			DispenserBlock.registerDispenseBehavior(Items.IRON_AXE, new CuttingBoardDispenseBehavior());
-			DispenserBlock.registerDispenseBehavior(Items.IRON_SHOVEL, new CuttingBoardDispenseBehavior());
-			DispenserBlock.registerDispenseBehavior(Items.DIAMOND_PICKAXE, new CuttingBoardDispenseBehavior());
-			DispenserBlock.registerDispenseBehavior(Items.DIAMOND_AXE, new CuttingBoardDispenseBehavior());
-			DispenserBlock.registerDispenseBehavior(Items.DIAMOND_SHOVEL, new CuttingBoardDispenseBehavior());
-			DispenserBlock.registerDispenseBehavior(Items.GOLDEN_PICKAXE, new CuttingBoardDispenseBehavior());
-			DispenserBlock.registerDispenseBehavior(Items.GOLDEN_AXE, new CuttingBoardDispenseBehavior());
-			DispenserBlock.registerDispenseBehavior(Items.GOLDEN_SHOVEL, new CuttingBoardDispenseBehavior());
-			DispenserBlock.registerDispenseBehavior(ModItems.FLINT_KNIFE.get(), new CuttingBoardDispenseBehavior());
-			DispenserBlock.registerDispenseBehavior(ModItems.IRON_KNIFE.get(), new CuttingBoardDispenseBehavior());
-			DispenserBlock.registerDispenseBehavior(ModItems.DIAMOND_KNIFE.get(), new CuttingBoardDispenseBehavior());
-			DispenserBlock.registerDispenseBehavior(ModItems.GOLDEN_KNIFE.get(), new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_PICKAXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_AXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_SHOVEL, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.STONE_PICKAXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.STONE_AXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.STONE_SHOVEL, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.IRON_PICKAXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.IRON_AXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.IRON_SHOVEL, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.DIAMOND_PICKAXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.DIAMOND_AXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.DIAMOND_SHOVEL, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.GOLDEN_PICKAXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.GOLDEN_AXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.GOLDEN_SHOVEL, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.SHEARS, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(ModItems.FLINT_KNIFE.get(), new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(ModItems.IRON_KNIFE.get(), new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(ModItems.DIAMOND_KNIFE.get(), new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(ModItems.GOLDEN_KNIFE.get(), new CuttingBoardDispenseBehavior());
 		}
 
 		DeferredWorkQueue.runLater(CropPatchGeneration::generateCrop);
