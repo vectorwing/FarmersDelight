@@ -2,7 +2,7 @@
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "item": "minecraft:saddle"
+      "item": "minecraft:leather_chestplate"
     }
   ],
   "tool": {
@@ -12,11 +12,6 @@
     {
       "item": "minecraft:leather",
       "count": 2
-    },
-    {
-      "item": "minecraft:tripwire_hook",
-      "count": 2
     }
-  ],
-  "effort": 2
+  ]
 }

@@ -4,7 +4,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Item;
-import net.minecraft.item.crafting.AbstractCookingRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
@@ -13,12 +12,12 @@ import net.minecraft.util.registry.Registry;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
 public class CuttingBoardRecipeBuilder {
-	private final Map<Item, Integer> results = new HashMap<Item, Integer>(4);
+	private final Map<Item, Integer> results = new LinkedHashMap<Item, Integer>(4);
 	private final Ingredient ingredient;
 	private final Ingredient tool;
 	private String soundEventID;

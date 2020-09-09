@@ -2,7 +2,7 @@
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "item": "minecraft:cod"
+      "item": "minecraft:salmon"
     }
   ],
   "tool": {
@@ -10,13 +10,11 @@
   },
   "result": [
     {
-      "item": "farmersdelight:cod_slice",
+      "item": "farmersdelight:salmon_slice",
       "count": 2
     },
     {
-      "item": "minecraft:bone_meal",
-      "count": 1
+      "item": "minecraft:bone_meal"
     }
-  ],
-  "effort": 1
+  ]
 }

@@ -2,7 +2,7 @@
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "item": "minecraft:melon"
+      "item": "minecraft:chicken"
     }
   ],
   "tool": {
@@ -10,9 +10,11 @@
   },
   "result": [
     {
-      "item": "minecraft:melon_slice",
-      "count": 9
+      "item": "farmersdelight:chicken_cuts",
+      "count": 2
+    },
+    {
+      "item": "minecraft:bone_meal"
     }
-  ],
-  "effort": 1
+  ]
 }

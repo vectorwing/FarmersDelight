@@ -10,13 +10,10 @@
   },
   "result": [
     {
-      "item": "farmersdelight:rice",
-      "count": 1
+      "item": "farmersdelight:rice"
     },
     {
-      "item": "farmersdelight:straw",
-      "count": 1
+      "item": "farmersdelight:straw"
     }
-  ],
-  "effort": 1
+  ]
 }

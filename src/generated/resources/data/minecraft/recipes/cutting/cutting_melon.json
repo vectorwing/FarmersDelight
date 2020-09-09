@@ -2,7 +2,7 @@
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "item": "minecraft:pumpkin"
+      "item": "minecraft:melon"
     }
   ],
   "tool": {
@@ -10,9 +10,8 @@
   },
   "result": [
     {
-      "item": "farmersdelight:pumpkin_slice",
-      "count": 4
+      "item": "minecraft:melon_slice",
+      "count": 9
     }
-  ],
-  "effort": 1
+  ]
 }

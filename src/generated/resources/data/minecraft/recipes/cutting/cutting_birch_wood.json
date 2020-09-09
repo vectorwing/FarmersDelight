@@ -10,14 +10,11 @@
   },
   "result": [
     {
-      "item": "minecraft:stripped_birch_wood",
-      "count": 1
+      "item": "minecraft:stripped_birch_wood"
     },
     {
-      "item": "farmersdelight:tree_bark",
-      "count": 1
+      "item": "farmersdelight:tree_bark"
     }
   ],
-  "sound": "minecraft:item.axe.strip",
-  "effort": 1
+  "sound": "minecraft:item.axe.strip"
 }

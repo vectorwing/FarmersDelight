@@ -2,17 +2,16 @@
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "item": "minecraft:beef"
+      "item": "minecraft:leather_leggings"
     }
   ],
   "tool": {
-    "tag": "forge:tools/knife"
+    "tag": "forge:tools/shears"
   },
   "result": [
     {
-      "item": "farmersdelight:minced_beef",
+      "item": "minecraft:leather",
       "count": 2
     }
-  ],
-  "effort": 1
+  ]
 }

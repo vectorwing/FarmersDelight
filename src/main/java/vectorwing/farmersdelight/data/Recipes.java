@@ -2,7 +2,6 @@ package vectorwing.farmersdelight.data;
 
 import net.minecraft.tags.ItemTags;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
@@ -35,36 +34,8 @@ public class Recipes extends RecipeProvider
 		recipesFoodstuffs(consumer);
 		recipesFoodBlocks(consumer);
 		recipesCraftedMeals(consumer);
-		recipesCuttingBoard(consumer);
-	}
 
-	private void recipesCuttingBoard(Consumer<IFinishedRecipe> consumer) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(ModItems.CABBAGE.get()), Ingredient.fromTag(ForgeTags.KNIVES), ModItems.CABBAGE_LEAF.get(), 2)
-				.build(consumer);
-
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.OAK_DOOR), Ingredient.fromTag(ForgeTags.AXES), Items.OAK_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.OAK_TRAPDOOR), Ingredient.fromTag(ForgeTags.AXES), Items.OAK_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.OAK_SIGN), Ingredient.fromTag(ForgeTags.AXES), Items.OAK_PLANKS, 1).build(consumer);
-
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BIRCH_DOOR), Ingredient.fromTag(ForgeTags.AXES), Items.BIRCH_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BIRCH_TRAPDOOR), Ingredient.fromTag(ForgeTags.AXES), Items.BIRCH_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BIRCH_SIGN), Ingredient.fromTag(ForgeTags.AXES), Items.BIRCH_PLANKS, 1).build(consumer);
-
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SPRUCE_DOOR), Ingredient.fromTag(ForgeTags.AXES), Items.SPRUCE_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SPRUCE_TRAPDOOR), Ingredient.fromTag(ForgeTags.AXES), Items.SPRUCE_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SPRUCE_SIGN), Ingredient.fromTag(ForgeTags.AXES), Items.SPRUCE_PLANKS, 1).build(consumer);
-
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.JUNGLE_DOOR), Ingredient.fromTag(ForgeTags.AXES), Items.JUNGLE_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.JUNGLE_TRAPDOOR), Ingredient.fromTag(ForgeTags.AXES), Items.JUNGLE_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.JUNGLE_SIGN), Ingredient.fromTag(ForgeTags.AXES), Items.JUNGLE_PLANKS, 1).build(consumer);
-
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ACACIA_DOOR), Ingredient.fromTag(ForgeTags.AXES), Items.ACACIA_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ACACIA_TRAPDOOR), Ingredient.fromTag(ForgeTags.AXES), Items.ACACIA_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ACACIA_SIGN), Ingredient.fromTag(ForgeTags.AXES), Items.ACACIA_PLANKS, 1).build(consumer);
-
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_DOOR), Ingredient.fromTag(ForgeTags.AXES), Items.DARK_OAK_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_TRAPDOOR), Ingredient.fromTag(ForgeTags.AXES), Items.DARK_OAK_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_SIGN), Ingredient.fromTag(ForgeTags.AXES), Items.DARK_OAK_PLANKS, 1).build(consumer);
+		CuttingRecipes.register(consumer);
 	}
 
 	private void foodSmeltingRecipes(String name, IItemProvider ingredient, IItemProvider result, float experience, Consumer<IFinishedRecipe> consumer) {
@@ -489,7 +460,7 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ForgeTags.CROPS_ONION)
 				.addIngredient(Items.BEETROOT)
 				.addIngredient(Items.BOWL)
-				.addCriterion("cabbage", InventoryChangeTrigger.Instance.forItems(ModItems.CABBAGE.get()))
+				.addCriterion("has_bowl", InventoryChangeTrigger.Instance.forItems(Items.BOWL))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.BARBECUE_STICK.get(), 2)
 				.addIngredient(ForgeTags.CROPS_TOMATO)
@@ -502,8 +473,8 @@ public class Recipes extends RecipeProvider
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.EGG_SANDWICH.get())
 				.addIngredient(ForgeTags.BREAD)
-				.addIngredient(ModItems.FRIED_EGG.get())
-				.addIngredient(ModItems.FRIED_EGG.get())
+				.addIngredient(ForgeTags.COOKED_EGGS)
+				.addIngredient(ForgeTags.COOKED_EGGS)
 				.addCriterion("fried_egg", InventoryChangeTrigger.Instance.forItems(ModItems.FRIED_EGG.get()))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CHICKEN_SANDWICH.get())
@@ -529,5 +500,6 @@ public class Recipes extends RecipeProvider
 				.addCriterion("baked_potato", InventoryChangeTrigger.Instance.forItems(Items.BAKED_POTATO))
 				.build(consumer);
 	}
+
 	private void recipesCookedMeals(Consumer<IFinishedRecipe> consumer) {}
 }
