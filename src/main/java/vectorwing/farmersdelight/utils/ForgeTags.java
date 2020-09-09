@@ -24,6 +24,8 @@ public class ForgeTags
 	public static final Tag<Item> CROPS_ONION = forgeItemTag("crops/onion");
 	public static final Tag<Item> CROPS_RICE = forgeItemTag("crops/rice");
 
+	public static final Tag<Item> PICKAXES = forgeItemTag("tools/pickaxe");
+	public static final Tag<Item> AXES = forgeItemTag("tools/axe");
 	public static final Tag<Item> KNIVES = forgeItemTag("tools/knife");
 
 	private static Tag<Item> forgeItemTag(String path) {

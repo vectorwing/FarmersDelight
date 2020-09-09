@@ -1,0 +1,17 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:spruce_trapdoor"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/axe"
+  },
+  "result": [
+    {
+      "item": "minecraft:spruce_planks",
+      "count": 2
+    }
+  ]
+}

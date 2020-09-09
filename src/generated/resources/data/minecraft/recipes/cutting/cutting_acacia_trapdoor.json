@@ -1,0 +1,17 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:acacia_trapdoor"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/axe"
+  },
+  "result": [
+    {
+      "item": "minecraft:acacia_planks",
+      "count": 2
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:dark_oak_trapdoor"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/axe"
+  },
+  "result": [
+    {
+      "item": "minecraft:dark_oak_planks",
+      "count": 2
+    }
+  ]
+}

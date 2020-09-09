@@ -1,0 +1,17 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:oak_door"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/axe"
+  },
+  "result": [
+    {
+      "item": "minecraft:oak_planks",
+      "count": 2
+    }
+  ]
+}

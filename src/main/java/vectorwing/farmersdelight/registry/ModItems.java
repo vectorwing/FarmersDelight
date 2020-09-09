@@ -114,6 +114,8 @@ public class ModItems
 			() -> new Item(new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> PUMPKIN_SLICE = ITEMS.register("pumpkin_slice",
 			() -> new Item(new Item.Properties().food(Foods.PUMPKIN_SLICE).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> CABBAGE_LEAF = ITEMS.register("cabbage_leaf",
+			() -> new Item(new Item.Properties().food(Foods.CABBAGE_LEAF).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> MINCED_BEEF = ITEMS.register("minced_beef",
 			() -> new Item(new Item.Properties().food(Foods.MINCED_BEEF).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> BEEF_PATTY = ITEMS.register("beef_patty",

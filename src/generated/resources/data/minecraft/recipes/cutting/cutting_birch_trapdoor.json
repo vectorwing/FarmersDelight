@@ -1,0 +1,17 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:birch_trapdoor"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/axe"
+  },
+  "result": [
+    {
+      "item": "minecraft:birch_planks",
+      "count": 2
+    }
+  ]
+}
