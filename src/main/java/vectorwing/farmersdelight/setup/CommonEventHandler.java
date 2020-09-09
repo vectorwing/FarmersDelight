@@ -73,26 +73,27 @@ public class CommonEventHandler
 
 		LootFunctionManager.registerFunction(new CopyMealFunction.Serializer());
 
-		DispenserBlock.registerDispenseBehavior(Items.WOODEN_PICKAXE, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.WOODEN_AXE, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.WOODEN_SHOVEL, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.STONE_PICKAXE, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.STONE_AXE, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.STONE_SHOVEL, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.IRON_PICKAXE, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.IRON_AXE, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.IRON_SHOVEL, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.DIAMOND_PICKAXE, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.DIAMOND_AXE, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.DIAMOND_SHOVEL, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.GOLDEN_PICKAXE, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.GOLDEN_AXE, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.GOLDEN_SHOVEL, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.SHEARS, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(ModItems.FLINT_KNIFE.get(), new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(ModItems.IRON_KNIFE.get(), new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(ModItems.DIAMOND_KNIFE.get(), new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(ModItems.GOLDEN_KNIFE.get(), new CuttingBoardDispenseBehavior());
+		if (Configuration.DISPENSER_TOOLS_CUTTING_BOARD.get()) {
+			DispenserBlock.registerDispenseBehavior(Items.WOODEN_PICKAXE, new CuttingBoardDispenseBehavior());
+			DispenserBlock.registerDispenseBehavior(Items.WOODEN_AXE, new CuttingBoardDispenseBehavior());
+			DispenserBlock.registerDispenseBehavior(Items.WOODEN_SHOVEL, new CuttingBoardDispenseBehavior());
+			DispenserBlock.registerDispenseBehavior(Items.STONE_PICKAXE, new CuttingBoardDispenseBehavior());
+			DispenserBlock.registerDispenseBehavior(Items.STONE_AXE, new CuttingBoardDispenseBehavior());
+			DispenserBlock.registerDispenseBehavior(Items.STONE_SHOVEL, new CuttingBoardDispenseBehavior());
+			DispenserBlock.registerDispenseBehavior(Items.IRON_PICKAXE, new CuttingBoardDispenseBehavior());
+			DispenserBlock.registerDispenseBehavior(Items.IRON_AXE, new CuttingBoardDispenseBehavior());
+			DispenserBlock.registerDispenseBehavior(Items.IRON_SHOVEL, new CuttingBoardDispenseBehavior());
+			DispenserBlock.registerDispenseBehavior(Items.DIAMOND_PICKAXE, new CuttingBoardDispenseBehavior());
+			DispenserBlock.registerDispenseBehavior(Items.DIAMOND_AXE, new CuttingBoardDispenseBehavior());
+			DispenserBlock.registerDispenseBehavior(Items.DIAMOND_SHOVEL, new CuttingBoardDispenseBehavior());
+			DispenserBlock.registerDispenseBehavior(Items.GOLDEN_PICKAXE, new CuttingBoardDispenseBehavior());
+			DispenserBlock.registerDispenseBehavior(Items.GOLDEN_AXE, new CuttingBoardDispenseBehavior());
+			DispenserBlock.registerDispenseBehavior(Items.GOLDEN_SHOVEL, new CuttingBoardDispenseBehavior());
+			DispenserBlock.registerDispenseBehavior(ModItems.FLINT_KNIFE.get(), new CuttingBoardDispenseBehavior());
+			DispenserBlock.registerDispenseBehavior(ModItems.IRON_KNIFE.get(), new CuttingBoardDispenseBehavior());
+			DispenserBlock.registerDispenseBehavior(ModItems.DIAMOND_KNIFE.get(), new CuttingBoardDispenseBehavior());
+			DispenserBlock.registerDispenseBehavior(ModItems.GOLDEN_KNIFE.get(), new CuttingBoardDispenseBehavior());
+		}
 
 		DeferredWorkQueue.runLater(CropPatchGeneration::generateCrop);
 	}

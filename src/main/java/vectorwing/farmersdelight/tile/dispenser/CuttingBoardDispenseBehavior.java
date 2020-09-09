@@ -17,6 +17,7 @@ import vectorwing.farmersdelight.tile.CuttingBoardTileEntity;
 public class CuttingBoardDispenseBehavior extends OptionalDispenseBehavior
 {
 	public ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
+		successful = false;
 		World world = source.getWorld();
 		BlockPos blockpos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
 		BlockState blockstate = world.getBlockState(blockpos);
@@ -26,6 +27,7 @@ public class CuttingBoardDispenseBehavior extends OptionalDispenseBehavior
 			ItemStack boardItem = tileEntity.getStoredItem().copy();
 			if (!boardItem.isEmpty() && tileEntity.processItemUsingTool(stack, null)) {
 				CuttingBoardBlock.spawnCuttingParticles(world, blockpos, boardItem, 5);
+				this.successful = true;
 			}
 			return stack;
 		}
