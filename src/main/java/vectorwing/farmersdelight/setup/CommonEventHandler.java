@@ -61,13 +61,7 @@ public class CommonEventHandler
 
 	public static void init(final FMLCommonSetupEvent event)
 	{
-		ComposterBlock.CHANCES.put(ModItems.TREE_BARK.get(), 0.3F);
-		ComposterBlock.CHANCES.put(ModItems.STRAW.get(), 0.3F);
-		ComposterBlock.CHANCES.put(ModItems.CABBAGE_SEEDS.get(), 0.3F);
-		ComposterBlock.CHANCES.put(ModItems.TOMATO_SEEDS.get(), 0.3F);
-		ComposterBlock.CHANCES.put(ModItems.CABBAGE.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.ONION.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.TOMATO.get(), 0.65F);
+		registerCompostables();
 
 		ModAdvancements.register();
 
@@ -96,6 +90,49 @@ public class CommonEventHandler
 		}
 
 		DeferredWorkQueue.runLater(CropPatchGeneration::generateCrop);
+	}
+
+	public static void registerCompostables() {
+		// 30% chance
+		ComposterBlock.CHANCES.put(ModItems.TREE_BARK.get(), 0.3F);
+		ComposterBlock.CHANCES.put(ModItems.STRAW.get(), 0.3F);
+		ComposterBlock.CHANCES.put(ModItems.CABBAGE_SEEDS.get(), 0.3F);
+		ComposterBlock.CHANCES.put(ModItems.TOMATO_SEEDS.get(), 0.3F);
+		ComposterBlock.CHANCES.put(ModItems.RICE.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.RICE_PANICLE.get(), 0.65F);
+
+		// 50% chance
+		ComposterBlock.CHANCES.put(ModItems.PUMPKIN_SLICE.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.CABBAGE_LEAF.get(), 0.65F);
+
+		// 65% chance
+		ComposterBlock.CHANCES.put(ModItems.CABBAGE.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.ONION.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.TOMATO.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_CABBAGES.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_ONIONS.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_TOMATOES.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_CARROTS.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_POTATOES.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_BEETROOTS.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.PIE_CRUST.get(), 0.65F);
+
+		// 85% chance
+		ComposterBlock.CHANCES.put(ModItems.RICE_BALE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_COOKIE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.HONEY_COOKIE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.CAKE_SLICE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.APPLE_PIE_SLICE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.CHOCOLATE_PIE_SLICE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.RAW_PASTA.get(), 0.85F);
+
+		// 100% chance
+		ComposterBlock.CHANCES.put(ModItems.APPLE_PIE.get(), 1.0F);
+		ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_CHEESECAKE.get(), 1.0F);
+		ComposterBlock.CHANCES.put(ModItems.CHOCOLATE_PIE.get(), 1.0F);
+		ComposterBlock.CHANCES.put(ModItems.DUMPLINGS.get(), 1.0F);
+		ComposterBlock.CHANCES.put(ModItems.STUFFED_PUMPKIN.get(), 1.0F);
 	}
 
 	@SubscribeEvent
