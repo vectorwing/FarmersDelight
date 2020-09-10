@@ -1,0 +1,31 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "farmersdelight:wild_onions"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:magenta_dye",
+      "count": 2
+    },
+    {
+      "item": "minecraft:magenta_dye",
+      "count": 4,
+      "chance": 0.2
+    },
+    {
+      "item": "minecraft:lime_dye",
+      "count": 2,
+      "chance": 0.1
+    }
+  ],
+  "processingTime": 50
+}

@@ -1,0 +1,25 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "farmersdelight:wild_cabbages"
+    }
+  ],
+  "results": [
+    {
+      "item": "farmersdelight:cabbage_seeds",
+      "count": 1
+    },
+    {
+      "item": "minecraft:yellow_dye",
+      "count": 2
+    }
+  ],
+  "processingTime": 50
+}
