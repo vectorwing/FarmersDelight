@@ -2,8 +2,5 @@
   "replace": "false",
   "values": [
     "farmersdelight:rice"
-  ],
-  "optional": [
-    "swampexpansion:rice"
   ]
 }

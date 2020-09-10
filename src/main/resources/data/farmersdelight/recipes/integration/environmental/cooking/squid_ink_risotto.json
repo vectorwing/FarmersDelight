@@ -2,7 +2,7 @@
   "conditions": [
     {
       "type": "forge:mod_loaded",
-      "modid": "swampexpansion"
+      "modid": "environmental"
     }
   ],
   "type": "farmersdelight:cooking",
@@ -27,7 +27,7 @@
     }
   ],
   "result": {
-    "item": "swampexpansion:squid_ink_risotto"
+    "item": "environmental:squid_ink_risotto"
   },
   "container": {
     "item": "minecraft:bowl"
