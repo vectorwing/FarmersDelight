@@ -6,6 +6,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.AtlasTexture;
@@ -43,14 +44,14 @@ public class ClientRenderUtils {
 		IRenderTypeBuffer.Impl irendertypebuffer$impl = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
 		boolean flag = !bakedmodel.func_230044_c_();
 		if (flag) {
-			net.minecraft.client.renderer.RenderHelper.setupGuiFlatDiffuseLighting();
+			RenderHelper.setupGuiFlatDiffuseLighting();
 		}
 
 		renderer.renderItem(stack, ItemCameraTransforms.TransformType.GUI, false, matrixstack, irendertypebuffer$impl, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
 		irendertypebuffer$impl.finish();
 		RenderSystem.enableDepthTest();
 		if (flag) {
-			net.minecraft.client.renderer.RenderHelper.setupGui3DDiffuseLighting();
+			RenderHelper.setupGui3DDiffuseLighting();
 		}
 
 		RenderSystem.disableAlphaTest();

@@ -11,7 +11,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.tile.container.CookingPotContainer;
-import vectorwing.farmersdelight.utils.Text;
+import vectorwing.farmersdelight.utils.TextUtils;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ public class CookingPotScreen extends ContainerScreen<CookingPotContainer> {
 				ItemStack containerItem = this.container.tileEntity.getContainer();
 				String container = !containerItem.isEmpty() ? containerItem.getItem().getName().getString() : "";
 
-                tooltip.add(Text.getTranslation("container.cooking_pot.served_on", container).mergeStyle(TextFormatting.GRAY));
+                tooltip.add(TextUtils.getTranslation("container.cooking_pot.served_on", container).mergeStyle(TextFormatting.GRAY));
 
                 this.renderTooltip(ms, tooltip, mouseX, mouseY);
             } else {

@@ -40,9 +40,9 @@ import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.tile.CookingPotTileEntity;
-import vectorwing.farmersdelight.utils.ModTags;
-import vectorwing.farmersdelight.utils.Text;
-import vectorwing.farmersdelight.utils.Utils;
+import vectorwing.farmersdelight.utils.MathUtils;
+import vectorwing.farmersdelight.utils.TextUtils;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -99,7 +99,7 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 	}
 
 	private boolean needsTrayForHeatSource(BlockState state) {
-		return state.getBlock().isIn(ModTags.HEAT_SOURCES) && state.getBlock().isIn(ModTags.TRAY_HEAT_SOURCES);
+		return state.getBlock().isIn(ModTags.TRAY_HEAT_SOURCES);
 	}
 
 	@Override
@@ -160,15 +160,15 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 				ItemStack meal = handler.getStackInSlot(6);
 				if (!meal.isEmpty()) {
 					IFormattableTextComponent servingsOf = meal.getCount() == 1
-							? Text.getTranslation("tooltip.cooking_pot.single_serving")
-							: Text.getTranslation("tooltip.cooking_pot.many_servings", meal.getCount());
+							? TextUtils.getTranslation("tooltip.cooking_pot.single_serving")
+							: TextUtils.getTranslation("tooltip.cooking_pot.many_servings", meal.getCount());
 					tooltip.add(servingsOf.mergeStyle(TextFormatting.GRAY));
 					IFormattableTextComponent mealName = meal.getDisplayName().deepCopy();
 					tooltip.add(mealName.mergeStyle(meal.getRarity().color));
 				}
 			}
 		} else {
-			IFormattableTextComponent empty = Text.getTranslation("tooltip.cooking_pot.empty");
+			IFormattableTextComponent empty = TextUtils.getTranslation("tooltip.cooking_pot.empty");
 			tooltip.add(empty.mergeStyle(TextFormatting.GRAY));
 		}
 	}
@@ -207,7 +207,7 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
 		if (worldIn.getTileEntity(pos) instanceof CookingPotTileEntity) {
 			ItemStackHandler inventory = ((CookingPotTileEntity) worldIn.getTileEntity(pos)).getInventory();
-			return Utils.calcRedstoneFromItemHandler(inventory);
+			return MathUtils.calcRedstoneFromItemHandler(inventory);
 		}
 		return 0;
 	}

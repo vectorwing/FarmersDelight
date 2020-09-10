@@ -15,7 +15,7 @@ import net.minecraft.item.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import vectorwing.farmersdelight.registry.ModBlocks;
-import vectorwing.farmersdelight.utils.Utils;
+import vectorwing.farmersdelight.utils.MathUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -70,7 +70,7 @@ public class KnifeItem extends ToolItem
     @Override
     public ItemStack getContainerItem(@Nonnull ItemStack stack) {
         ItemStack container = stack.copy();
-        if (container.attemptDamageItem(1, Utils.RAND, null))
+        if (container.attemptDamageItem(1, MathUtils.RAND, null))
             return ItemStack.EMPTY;
         else
             return container;

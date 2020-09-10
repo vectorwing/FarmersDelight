@@ -27,7 +27,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector2f;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
-import vectorwing.farmersdelight.utils.Utils;
+import vectorwing.farmersdelight.utils.MathUtils;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -89,7 +89,7 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
                         ItemStack result = this.world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, iinventory, this.world).map((recipe) -> recipe.getCraftingResult(iinventory)).orElse(itemstack);
                         if (!result.isEmpty()) {
                             ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, result.copy());
-                            entity.setMotion(Utils.RAND.nextGaussian() * (double) 0.01F, 0.1F, Utils.RAND.nextGaussian() * (double) 0.01F);
+                            entity.setMotion(MathUtils.RAND.nextGaussian() * (double) 0.01F, 0.1F, MathUtils.RAND.nextGaussian() * (double) 0.01F);
                             world.addEntity(entity);
                         }
                     }

@@ -2,9 +2,8 @@ package vectorwing.farmersdelight.setup;
 
 import com.google.common.collect.Sets;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
@@ -19,23 +18,21 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.loot.functions.CopyMealFunction;
 import vectorwing.farmersdelight.registry.ModAdvancements;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModEffects;
 import vectorwing.farmersdelight.registry.ModItems;
-import vectorwing.farmersdelight.loot.functions.CopyMealFunction;
-import net.minecraft.block.ComposterBlock;
-import net.minecraftforge.event.LootTableLoadEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-
 import vectorwing.farmersdelight.tile.dispenser.CuttingBoardDispenseBehavior;
 import vectorwing.farmersdelight.world.CropPatchGeneration;
 
@@ -46,7 +43,6 @@ import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID)
 @ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class CommonEventHandler
 {
 	private static final ResourceLocation SHIPWRECK_SUPPLY_CHEST = LootTables.CHESTS_SHIPWRECK_SUPPLY;
@@ -60,40 +56,79 @@ public class CommonEventHandler
 
 	public static void init(final FMLCommonSetupEvent event)
 	{
-		ComposterBlock.CHANCES.put(ModItems.TREE_BARK.get(), 0.3F);
-		ComposterBlock.CHANCES.put(ModItems.STRAW.get(), 0.3F);
-		ComposterBlock.CHANCES.put(ModItems.CABBAGE_SEEDS.get(), 0.3F);
-		ComposterBlock.CHANCES.put(ModItems.TOMATO_SEEDS.get(), 0.3F);
-		ComposterBlock.CHANCES.put(ModItems.CABBAGE.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.ONION.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.TOMATO.get(), 0.65F);
+		registerCompostables();
 
 		ModAdvancements.register();
 
 		LootFunctionManager.func_237451_a_(CopyMealFunction.ID.toString(), new CopyMealFunction.Serializer());
 
-		DispenserBlock.registerDispenseBehavior(Items.WOODEN_PICKAXE, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.WOODEN_AXE, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.WOODEN_SHOVEL, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.STONE_PICKAXE, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.STONE_AXE, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.STONE_SHOVEL, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.IRON_PICKAXE, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.IRON_AXE, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.IRON_SHOVEL, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.DIAMOND_PICKAXE, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.DIAMOND_AXE, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.DIAMOND_SHOVEL, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.GOLDEN_PICKAXE, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.GOLDEN_AXE, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.GOLDEN_SHOVEL, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.SHEARS, new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(ModItems.FLINT_KNIFE.get(), new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(ModItems.IRON_KNIFE.get(), new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(ModItems.DIAMOND_KNIFE.get(), new CuttingBoardDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(ModItems.GOLDEN_KNIFE.get(), new CuttingBoardDispenseBehavior());
+		if (Configuration.DISPENSER_TOOLS_CUTTING_BOARD.get()) {
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_PICKAXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_AXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_SHOVEL, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.STONE_PICKAXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.STONE_AXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.STONE_SHOVEL, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.IRON_PICKAXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.IRON_AXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.IRON_SHOVEL, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.DIAMOND_PICKAXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.DIAMOND_AXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.DIAMOND_SHOVEL, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.GOLDEN_PICKAXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.GOLDEN_AXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.GOLDEN_SHOVEL, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.SHEARS, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(ModItems.FLINT_KNIFE.get(), new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(ModItems.IRON_KNIFE.get(), new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(ModItems.DIAMOND_KNIFE.get(), new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(ModItems.GOLDEN_KNIFE.get(), new CuttingBoardDispenseBehavior());
+		}
 
 		DeferredWorkQueue.runLater(CropPatchGeneration::generateCrop);
+	}
+
+	public static void registerCompostables() {
+		// 30% chance
+		ComposterBlock.CHANCES.put(ModItems.TREE_BARK.get(), 0.3F);
+		ComposterBlock.CHANCES.put(ModItems.STRAW.get(), 0.3F);
+		ComposterBlock.CHANCES.put(ModItems.CABBAGE_SEEDS.get(), 0.3F);
+		ComposterBlock.CHANCES.put(ModItems.TOMATO_SEEDS.get(), 0.3F);
+		ComposterBlock.CHANCES.put(ModItems.RICE.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.RICE_PANICLE.get(), 0.65F);
+
+		// 50% chance
+		ComposterBlock.CHANCES.put(ModItems.PUMPKIN_SLICE.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.CABBAGE_LEAF.get(), 0.65F);
+
+		// 65% chance
+		ComposterBlock.CHANCES.put(ModItems.CABBAGE.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.ONION.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.TOMATO.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_CABBAGES.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_ONIONS.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_TOMATOES.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_CARROTS.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_POTATOES.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_BEETROOTS.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.PIE_CRUST.get(), 0.65F);
+
+		// 85% chance
+		ComposterBlock.CHANCES.put(ModItems.RICE_BALE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_COOKIE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.HONEY_COOKIE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.CAKE_SLICE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.APPLE_PIE_SLICE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.CHOCOLATE_PIE_SLICE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.RAW_PASTA.get(), 0.85F);
+
+		// 100% chance
+		ComposterBlock.CHANCES.put(ModItems.APPLE_PIE.get(), 1.0F);
+		ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_CHEESECAKE.get(), 1.0F);
+		ComposterBlock.CHANCES.put(ModItems.CHOCOLATE_PIE.get(), 1.0F);
+		ComposterBlock.CHANCES.put(ModItems.DUMPLINGS.get(), 1.0F);
+		ComposterBlock.CHANCES.put(ModItems.STUFFED_PUMPKIN.get(), 1.0F);
 	}
 
 	@SubscribeEvent
@@ -176,7 +211,7 @@ public class CommonEventHandler
 
 		if (Configuration.CROPS_ON_VILLAGE_HOUSES.get() && VILLAGE_HOUSE_CHESTS.contains(event.getName())) {
 			event.getTable().addPool(LootPool.builder().addEntry(
-							TableLootEntry.builder(new ResourceLocation(FarmersDelight.MODID, "inject/crops_villager_houses")).weight(1).quality(0)).name("villager_houses_fd_crops").build());
+					TableLootEntry.builder(new ResourceLocation(FarmersDelight.MODID, "inject/crops_villager_houses")).weight(1).quality(0)).name("villager_houses_fd_crops").build());
 		}
 	}
 }

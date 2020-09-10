@@ -13,8 +13,8 @@ import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
-import vectorwing.farmersdelight.utils.ForgeTags;
-import vectorwing.farmersdelight.utils.ModTags;
+import vectorwing.farmersdelight.utils.tags.ForgeTags;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Consumer;
@@ -36,6 +36,8 @@ public class Recipes extends RecipeProvider {
 		recipesFoodstuffs(consumer);
 		recipesFoodBlocks(consumer);
 		recipesCraftedMeals(consumer);
+
+		CuttingRecipes.register(consumer);
 	}
 
 	private void foodSmeltingRecipes(String name, IItemProvider ingredient, IItemProvider result, float experience, Consumer<IFinishedRecipe> consumer) {
@@ -377,7 +379,7 @@ public class Recipes extends RecipeProvider {
 				.addIngredient(Items.WHEAT)
 				.addIngredient(Items.WHEAT)
 				.addIngredient(Items.EGG)
-				.addIngredient(ForgeTags.KNIVES)
+				.addIngredient(ModTags.KNIVES)
 				.addCriterion("egg", InventoryChangeTrigger.Instance.forItems(Items.EGG))
 				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ModItems.PIE_CRUST.get(), 1)
@@ -389,7 +391,7 @@ public class Recipes extends RecipeProvider {
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CAKE_SLICE.get(), 7)
 				.addIngredient(Blocks.CAKE)
-				.addIngredient(ForgeTags.KNIVES)
+				.addIngredient(ModTags.KNIVES)
 				.addCriterion("cake", InventoryChangeTrigger.Instance.forItems(Blocks.CAKE))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.SWEET_BERRY_COOKIE.get(), 8)
@@ -463,7 +465,7 @@ public class Recipes extends RecipeProvider {
 				.addIngredient(ForgeTags.CROPS_ONION)
 				.addIngredient(Items.BEETROOT)
 				.addIngredient(Items.BOWL)
-				.addCriterion("cabbage", InventoryChangeTrigger.Instance.forItems(ModItems.CABBAGE.get()))
+				.addCriterion("has_bowl", InventoryChangeTrigger.Instance.forItems(Items.BOWL))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.NETHER_SALAD.get())
 				.addIngredient(Items.CRIMSON_FUNGUS)
@@ -482,8 +484,8 @@ public class Recipes extends RecipeProvider {
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.EGG_SANDWICH.get())
 				.addIngredient(ForgeTags.BREAD)
-				.addIngredient(ModItems.FRIED_EGG.get())
-				.addIngredient(ModItems.FRIED_EGG.get())
+				.addIngredient(ForgeTags.COOKED_EGGS)
+				.addIngredient(ForgeTags.COOKED_EGGS)
 				.addCriterion("fried_egg", InventoryChangeTrigger.Instance.forItems(ModItems.FRIED_EGG.get()))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CHICKEN_SANDWICH.get())

@@ -11,7 +11,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.PlantType;
 import vectorwing.farmersdelight.registry.ModBlocks;
-import vectorwing.farmersdelight.utils.Utils;
+import vectorwing.farmersdelight.utils.MathUtils;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
@@ -37,7 +37,7 @@ public class RichSoilBlock extends Block {
             if (plant.getBlock() == Blocks.RED_MUSHROOM) {
                 worldIn.setBlockState(pos.up(), ModBlocks.RED_MUSHROOM_COLONY.get().getDefaultState().with(MushroomColonyBlock.COLONY_AGE, 0));
             }
-            if (plant.getBlock() instanceof IGrowable && Utils.RAND.nextInt(10) <= 2) {
+            if (plant.getBlock() instanceof IGrowable && MathUtils.RAND.nextInt(10) <= 2) {
                 IGrowable growable = (IGrowable) plant.getBlock();
                 if (growable.canGrow(worldIn, pos.up(), plant, false)) {
                     growable.grow(worldIn, worldIn.rand, pos.up(), plant);
