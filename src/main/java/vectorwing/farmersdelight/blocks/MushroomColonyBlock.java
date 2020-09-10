@@ -25,9 +25,8 @@ import java.util.function.Supplier;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 @SuppressWarnings("deprecation")
-public class MushroomColonyBlock extends BushBlock implements IGrowable
-{
-	protected static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {
+public class MushroomColonyBlock extends BushBlock implements IGrowable {
+	protected static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
 			Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D),
 			Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 10.0D, 13.0D),
 			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D),
@@ -36,8 +35,7 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 	public static final IntegerProperty COLONY_AGE = BlockStateProperties.AGE_0_3;
 	public final Supplier<Item> mushroomType;
 
-	public MushroomColonyBlock(Properties properties, Supplier<Item> mushroomType)
-	{
+	public MushroomColonyBlock(Properties properties, Supplier<Item> mushroomType) {
 		super(properties);
 		this.mushroomType = mushroomType;
 		this.setDefaultState(this.stateContainer.getBaseState().with(COLONY_AGE, 0));
@@ -57,10 +55,10 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 		return state.getBlock() == ModBlocks.RICH_SOIL.get();
 	}
 
-    @Override
-    public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
-        return state.get(COLONY_AGE) < 3;
-    }
+	@Override
+	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+		return state.get(COLONY_AGE) < 3;
+	}
 
 	@Override
 	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
@@ -75,17 +73,18 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 		}
 	}
+
 	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
 		return new ItemStack(this.mushroomType.get());
 	}
 
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(COLONY_AGE);
-    }
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+		builder.add(COLONY_AGE);
+	}
 
-    @Override
-    public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
-        int i = Math.min(3, state.get(COLONY_AGE) + 1);
-        worldIn.setBlockState(pos, state.with(COLONY_AGE, i), 2);
-    }
+	@Override
+	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
+		int i = Math.min(3, state.get(COLONY_AGE) + 1);
+		worldIn.setBlockState(pos, state.with(COLONY_AGE, i), 2);
+	}
 }

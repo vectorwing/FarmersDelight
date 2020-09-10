@@ -36,13 +36,12 @@ import java.util.Random;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @SuppressWarnings("deprecation")
-public class TallRiceCropBlock extends BushBlock implements IWaterLoggable, IGrowable
-{
+public class TallRiceCropBlock extends BushBlock implements IWaterLoggable, IGrowable {
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	public static final IntegerProperty AGE = IntegerProperty.create("age", 5, 7);
 
-	public TallRiceCropBlock(Properties properties)	{
+	public TallRiceCropBlock(Properties properties) {
 		super(properties);
 		this.setDefaultState(this.getDefaultState().with(WATERLOGGED, true).with(HALF, DoubleBlockHalf.LOWER).with(AGE, 5));
 	}
@@ -50,15 +49,19 @@ public class TallRiceCropBlock extends BushBlock implements IWaterLoggable, IGro
 	public IntegerProperty getAgeProperty() {
 		return AGE;
 	}
+
 	public int getMaxAge() {
 		return 7;
 	}
+
 	protected int getAge(BlockState state) {
 		return state.get(this.getAgeProperty());
 	}
+
 	public boolean isMaxAge(BlockState state) {
 		return state.get(this.getAgeProperty()) >= this.getMaxAge();
 	}
+
 	protected int getBonemealAgeIncrease(World worldIn) {
 		return MathHelper.nextInt(worldIn.rand, 2, 5);
 	}
@@ -70,10 +73,10 @@ public class TallRiceCropBlock extends BushBlock implements IWaterLoggable, IGro
 			int i = this.getAge(state);
 			if (i < this.getMaxAge()) {
 				float f = 10;
-				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt((int)(25.0F / f) + 1) == 0)) {
+				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt((int) (25.0F / f) + 1) == 0)) {
 					worldIn.setBlockState(pos, state.with(AGE, i + 1), 2);
 					if (worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.down()).get(AGE) < this.getMaxAge()) {
-						worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE,i + 1), 2);
+						worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, i + 1), 2);
 					}
 					net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 				}
@@ -117,7 +120,8 @@ public class TallRiceCropBlock extends BushBlock implements IWaterLoggable, IGro
 		worldIn.setBlockState(pos, state.with(AGE, i));
 		if (state.get(HALF) == DoubleBlockHalf.UPPER) {
 			worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, i));
-		} else {
+		}
+		else {
 			worldIn.setBlockState(pos.up(), worldIn.getBlockState(pos.up()).with(AGE, i));
 		}
 	}
@@ -130,7 +134,8 @@ public class TallRiceCropBlock extends BushBlock implements IWaterLoggable, IGro
 		}
 		if (facing.getAxis() != Direction.Axis.Y || half == DoubleBlockHalf.LOWER != (facing == Direction.UP) || facingState.getBlock() == this && facingState.get(HALF) != half) {
 			return half == DoubleBlockHalf.LOWER && facing == Direction.DOWN && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : stateIn;
-		} else {
+		}
+		else {
 			return Blocks.AIR.getDefaultState();
 		}
 	}
@@ -159,8 +164,9 @@ public class TallRiceCropBlock extends BushBlock implements IWaterLoggable, IGro
 		if (!worldIn.isRemote) {
 			if (player.isCreative()) {
 				breakDoublePlant(worldIn, pos, state, player);
-			} else {
-				spawnDrops(state, worldIn, pos, (TileEntity)null, player, player.getHeldItemMainhand());
+			}
+			else {
+				spawnDrops(state, worldIn, pos, (TileEntity) null, player, player.getHeldItemMainhand());
 			}
 		}
 
@@ -179,7 +185,8 @@ public class TallRiceCropBlock extends BushBlock implements IWaterLoggable, IGro
 			if (blockstate.getBlock() == state.getBlock() && blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
 				if (blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
 					world.setBlockState(blockpos, Blocks.WATER.getDefaultState(), 35);
-				} else {
+				}
+				else {
 					world.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
 				}
 				world.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
@@ -206,9 +213,11 @@ public class TallRiceCropBlock extends BushBlock implements IWaterLoggable, IGro
 		if (state.get(HALF) != DoubleBlockHalf.UPPER) {
 			FluidState ifluidstate = worldIn.getFluidState(pos);
 			return this.isValidGround(worldIn.getBlockState(pos.down()), worldIn, pos) && ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8;
-		} else {
+		}
+		else {
 			BlockState blockstate = worldIn.getBlockState(pos.down());
-			if (state.getBlock() != this) return super.isValidPosition(state, worldIn, pos); //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
+			if (state.getBlock() != this)
+				return super.isValidPosition(state, worldIn, pos); //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
 			return blockstate.getBlock() == this && blockstate.get(HALF) == DoubleBlockHalf.LOWER;
 		}
 	}
@@ -219,7 +228,7 @@ public class TallRiceCropBlock extends BushBlock implements IWaterLoggable, IGro
 	}
 
 	@Override
-	public boolean canContainFluid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn)	{
+	public boolean canContainFluid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
 		return state.get(HALF) == DoubleBlockHalf.LOWER;
 	}
 

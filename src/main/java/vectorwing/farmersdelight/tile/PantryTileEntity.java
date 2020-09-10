@@ -19,7 +19,7 @@ import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.util.text.ITextComponent;
 import vectorwing.farmersdelight.blocks.PantryBlock;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
-import vectorwing.farmersdelight.utils.Text;
+import vectorwing.farmersdelight.utils.TextUtils;
 
 public class PantryTileEntity extends LockableLootTileEntity {
 	private NonNullList<ItemStack> pantryContents = NonNullList.withSize(27, ItemStack.EMPTY);
@@ -67,7 +67,7 @@ public class PantryTileEntity extends LockableLootTileEntity {
 	}
 
 	protected ITextComponent getDefaultName() {
-		return Text.getTranslation("container.pantry");
+		return TextUtils.getTranslation("container.pantry");
 	}
 
 	protected Container createMenu(int id, PlayerInventory player) {
@@ -104,7 +104,8 @@ public class PantryTileEntity extends LockableLootTileEntity {
 		this.numPlayersUsing = ChestTileEntity.calculatePlayersUsing(this.world, this, i, j, k);
 		if (this.numPlayersUsing > 0) {
 			this.scheduleTick();
-		} else {
+		}
+		else {
 			BlockState blockstate = this.getBlockState();
 			if (!(blockstate.getBlock() instanceof PantryBlock)) {
 				this.remove();
@@ -133,9 +134,9 @@ public class PantryTileEntity extends LockableLootTileEntity {
 
 	private void playSound(BlockState state, SoundEvent sound) {
 		Vector3i vec3i = state.get(PantryBlock.FACING).getDirectionVec();
-		double d0 = (double)this.pos.getX() + 0.5D + (double)vec3i.getX() / 2.0D;
-		double d1 = (double)this.pos.getY() + 0.5D + (double)vec3i.getY() / 2.0D;
-		double d2 = (double)this.pos.getZ() + 0.5D + (double)vec3i.getZ() / 2.0D;
-		this.world.playSound((PlayerEntity)null, d0, d1, d2, sound, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
+		double d0 = (double) this.pos.getX() + 0.5D + (double) vec3i.getX() / 2.0D;
+		double d1 = (double) this.pos.getY() + 0.5D + (double) vec3i.getY() / 2.0D;
+		double d2 = (double) this.pos.getZ() + 0.5D + (double) vec3i.getZ() / 2.0D;
+		this.world.playSound((PlayerEntity) null, d0, d1, d2, sound, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
 	}
 }

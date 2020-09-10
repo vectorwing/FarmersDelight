@@ -9,37 +9,32 @@ import net.minecraft.item.crafting.SpecialRecipe;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import vectorwing.farmersdelight.registry.ModRecipeSerializers;
 import vectorwing.farmersdelight.items.KnifeItem;
+import vectorwing.farmersdelight.registry.ModRecipeSerializers;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class KnifeRepairRecipe extends SpecialRecipe
-{
-	public KnifeRepairRecipe(ResourceLocation idIn)
-	{
+public class KnifeRepairRecipe extends SpecialRecipe {
+	public KnifeRepairRecipe(ResourceLocation idIn) {
 		super(idIn);
 	}
 
 	@Nonnull
 	@Override
-	public NonNullList<ItemStack> getRemainingItems(CraftingInventory inv)
-	{
-		return NonNullList.withSize(inv.getHeight()*inv.getWidth(), ItemStack.EMPTY);
+	public NonNullList<ItemStack> getRemainingItems(CraftingInventory inv) {
+		return NonNullList.withSize(inv.getHeight() * inv.getWidth(), ItemStack.EMPTY);
 	}
 
-	private boolean isValidInput(ItemStack stack)
-	{
-		return stack.getItem() instanceof KnifeItem &&((KnifeItem)stack.getItem()).isCustomRepairable(stack);
+	private boolean isValidInput(ItemStack stack) {
+		return stack.getItem() instanceof KnifeItem && ((KnifeItem) stack.getItem()).isCustomRepairable(stack);
 	}
 
 	@Override
-	public boolean matches(CraftingInventory inv, World worldIn)
-	{
+	public boolean matches(CraftingInventory inv, World worldIn) {
 		List<ItemStack> list = Lists.newArrayList();
 
-		for(int i = 0; i < inv.getSizeInventory(); ++i) {
+		for (int i = 0; i < inv.getSizeInventory(); ++i) {
 			ItemStack itemstack = inv.getStackInSlot(i);
 			if (!itemstack.isEmpty() && isValidInput(itemstack)) {
 				list.add(itemstack);
@@ -56,11 +51,10 @@ public class KnifeRepairRecipe extends SpecialRecipe
 	}
 
 	@Override
-	public ItemStack getCraftingResult(CraftingInventory inv)
-	{
+	public ItemStack getCraftingResult(CraftingInventory inv) {
 		List<ItemStack> list = Lists.newArrayList();
 
-		for(int i = 0; i < inv.getSizeInventory(); ++i) {
+		for (int i = 0; i < inv.getSizeInventory(); ++i) {
 			ItemStack itemstack = inv.getStackInSlot(i);
 			if (!itemstack.isEmpty() && isValidInput(itemstack)) {
 				list.add(itemstack);
@@ -96,14 +90,12 @@ public class KnifeRepairRecipe extends SpecialRecipe
 	}
 
 	@Override
-	public boolean canFit(int width, int height)
-	{
-		return width*height >= 2;
+	public boolean canFit(int width, int height) {
+		return width * height >= 2;
 	}
 
 	@Override
-	public IRecipeSerializer<?> getSerializer()
-	{
+	public IRecipeSerializer<?> getSerializer() {
 		return ModRecipeSerializers.KNIFE_REPAIR.get();
 	}
 }

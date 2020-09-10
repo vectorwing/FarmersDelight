@@ -18,7 +18,7 @@ import vectorwing.farmersdelight.registry.ModItems;
 /**
  * Some items and blocks may suffer renames or changes during the Beta development period.
  * This handler is responsible for remapping them accordingly, so that old saves can be compatible with modern versions (most of the time).
- *
+ * <p>
  * For all intents and purposes, this is not a guaranteed solution. Many errors from other mods can get in the way.
  * New minor versions should be treated as breaking, and new worlds should be preferred over converting old ones.
  * Hopefully they work fine form the majority of cases. Always make backups!

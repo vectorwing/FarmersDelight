@@ -10,9 +10,11 @@
     {
       "tag": "forge:crops/onion"
     },
-    {
-      "item": "minecraft:porkchop"
-    }
+    [
+      {"item": "minecraft:brown_mushroom"},
+      {"tag": "forge:raw_chicken"},
+      {"item": "minecraft:porkchop"}
+    ]
   ],
   "result": {
     "item": "farmersdelight:dumplings",

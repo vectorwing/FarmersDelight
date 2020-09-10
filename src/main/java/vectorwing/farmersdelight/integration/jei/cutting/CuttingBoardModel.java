@@ -11,13 +11,14 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import vectorwing.farmersdelight.utils.Utils;
+import vectorwing.farmersdelight.utils.ClientRenderUtils;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Supplier;
 
-public class CuttingBoardModel implements IDrawable
-{
-	private Supplier<ItemStack> supplier;
+@ParametersAreNonnullByDefault
+public class CuttingBoardModel implements IDrawable {
+	private final Supplier<ItemStack> supplier;
 	private ItemStack stack;
 
 	public CuttingBoardModel(Supplier<ItemStack> supplier) {
@@ -51,9 +52,9 @@ public class CuttingBoardModel implements IDrawable
 		Minecraft minecraft = Minecraft.getInstance();
 		ItemRenderer itemRenderer = minecraft.getItemRenderer();
 		itemRenderer.zLevel += 50.0F;
-		IBakedModel bakedmodel = itemRenderer.getItemModelWithOverrides(stack, (World)null, (LivingEntity)null);
+		IBakedModel bakedmodel = itemRenderer.getItemModelWithOverrides(stack, (World) null, (LivingEntity) null);
 		TextureManager textureManager = Minecraft.getInstance().textureManager;
-		Utils.renderItemIntoGUIScalable(stack, 48, 48, bakedmodel, itemRenderer, textureManager);
+		ClientRenderUtils.renderItemIntoGUIScalable(stack, 48, 48, bakedmodel, itemRenderer, textureManager);
 		itemRenderer.zLevel -= 50.0F;
 
 		RenderSystem.popMatrix();

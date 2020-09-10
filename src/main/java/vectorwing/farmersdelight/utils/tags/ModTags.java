@@ -1,20 +1,17 @@
-package vectorwing.farmersdelight.utils;
+package vectorwing.farmersdelight.utils.tags;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
-import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.FarmersDelight;
 
 /**
  * References to tags under the Farmer's Delight namespace.
  * These tags are used for mod mechanics, which aren't always useful outside of it.
  */
-public class ModTags
-{
+public class ModTags {
 	// Blocks that can heat up a Cooking Pot.
 	public static final ITag.INamedTag<Block> HEAT_SOURCES = modBlockTag("heat_sources");
 
@@ -33,6 +30,7 @@ public class ModTags
 	private static ITag.INamedTag<Item> modItemTag(String path) {
 		return ItemTags.makeWrapperTag(FarmersDelight.MODID + ":" + path);
 	}
+
 	private static ITag.INamedTag<Block> modBlockTag(String path) {
 		return BlockTags.makeWrapperTag(FarmersDelight.MODID + ":" + path);
 	}

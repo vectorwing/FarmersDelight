@@ -6,13 +6,13 @@ import net.minecraft.potion.Effects;
 import vectorwing.farmersdelight.registry.ModEffects;
 
 public class Foods {
-    // Raw Crops
-    public static final Food CABBAGE = (new Food.Builder())
-            .hunger(2).saturation(0.4f).build();
-    public static final Food TOMATO = (new Food.Builder())
-            .hunger(1).saturation(0.3f).build();
-    public static final Food ONION = (new Food.Builder())
-            .hunger(2).saturation(0.4f).build();
+	// Raw Crops
+	public static final Food CABBAGE = (new Food.Builder())
+			.hunger(2).saturation(0.4f).build();
+	public static final Food TOMATO = (new Food.Builder())
+			.hunger(1).saturation(0.3f).build();
+	public static final Food ONION = (new Food.Builder())
+			.hunger(2).saturation(0.4f).build();
 
 	// Basic Foods
 	public static final Food FRIED_EGG = (new Food.Builder())
@@ -23,6 +23,8 @@ public class Foods {
 			.hunger(2).saturation(0.2f).build();
 	public static final Food PUMPKIN_SLICE = (new Food.Builder())
 			.hunger(3).saturation(0.3f).build();
+	public static final Food CABBAGE_LEAF = (new Food.Builder())
+			.hunger(1).saturation(0.4f).build();
 	public static final Food MINCED_BEEF = (new Food.Builder())
 			.hunger(2).saturation(0.3f).meat().build();
 	public static final Food BEEF_PATTY = (new Food.Builder())

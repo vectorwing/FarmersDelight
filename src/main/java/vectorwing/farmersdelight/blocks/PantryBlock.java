@@ -43,10 +43,11 @@ public class PantryBlock extends ContainerBlock {
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		if (worldIn.isRemote) {
 			return ActionResultType.SUCCESS;
-		} else {
+		}
+		else {
 			TileEntity tileentity = worldIn.getTileEntity(pos);
 			if (tileentity instanceof PantryTileEntity) {
-				player.openContainer((PantryTileEntity)tileentity);
+				player.openContainer((PantryTileEntity) tileentity);
 				player.addStat(Stats.OPEN_BARREL);
 			}
 
@@ -58,7 +59,7 @@ public class PantryBlock extends ContainerBlock {
 		if (state.getBlock() != newState.getBlock()) {
 			TileEntity tileentity = worldIn.getTileEntity(pos);
 			if (tileentity instanceof IInventory) {
-				InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory)tileentity);
+				InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory) tileentity);
 				worldIn.updateComparatorOutputLevel(pos, this);
 			}
 
@@ -69,7 +70,7 @@ public class PantryBlock extends ContainerBlock {
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
 		TileEntity tileentity = worldIn.getTileEntity(pos);
 		if (tileentity instanceof PantryTileEntity) {
-			((PantryTileEntity)tileentity).pantryTick();
+			((PantryTileEntity) tileentity).pantryTick();
 		}
 
 	}
@@ -83,7 +84,7 @@ public class PantryBlock extends ContainerBlock {
 		if (stack.hasDisplayName()) {
 			TileEntity tileentity = worldIn.getTileEntity(pos);
 			if (tileentity instanceof PantryTileEntity) {
-				((PantryTileEntity)tileentity).setCustomName(stack.getDisplayName());
+				((PantryTileEntity) tileentity).setCustomName(stack.getDisplayName());
 			}
 		}
 

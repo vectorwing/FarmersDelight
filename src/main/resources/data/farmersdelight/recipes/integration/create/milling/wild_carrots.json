@@ -1,0 +1,26 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "farmersdelight:wild_carrots"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:light_gray_dye",
+      "count": 2
+    },
+    {
+      "item": "minecraft:lime_dye",
+      "count": 1,
+      "chance": 0.1
+    }
+  ],
+  "processingTime": 50
+}

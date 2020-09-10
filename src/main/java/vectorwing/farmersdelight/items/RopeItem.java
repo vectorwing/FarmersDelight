@@ -9,8 +9,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class RopeItem extends FuelBlockItem
-{
+public class RopeItem extends FuelBlockItem {
 	public RopeItem(Block blockIn, Properties builder) {
 		super(blockIn, builder, 200);
 	}
@@ -24,18 +23,20 @@ public class RopeItem extends FuelBlockItem
 
 		if (blockstate.getBlock() != block) {
 			return context;
-		} else {
+		}
+		else {
 			Direction direction;
 			if (context.func_225518_g_()) {
 				direction = context.getFace();
-			} else {
+			}
+			else {
 				direction = Direction.DOWN;
 			}
 
 			int i = 0;
 			BlockPos.Mutable blockpos$mutable = (new BlockPos.Mutable(blockpos.getX(), blockpos.getY(), blockpos.getZ())).move(direction);
 
-			while(i < 256) {
+			while (i < 256) {
 				blockstate = world.getBlockState(blockpos$mutable);
 				if (blockstate.getBlock() != this.getBlock()) {
 					if (blockstate.isReplaceable(context)) {

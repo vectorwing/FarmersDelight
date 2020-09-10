@@ -15,13 +15,13 @@ import net.minecraft.util.math.vector.Vector3f;
 import vectorwing.farmersdelight.blocks.CuttingBoardBlock;
 import vectorwing.farmersdelight.tile.CuttingBoardTileEntity;
 
-public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBoardTileEntity>
-{
-	public CuttingBoardTileEntityRenderer(TileEntityRendererDispatcher rendererDispatcherIn) { super(rendererDispatcherIn); }
+public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBoardTileEntity> {
+	public CuttingBoardTileEntityRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
+		super(rendererDispatcherIn);
+	}
 
 	@Override
-	public void render(CuttingBoardTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn)
-	{
+	public void render(CuttingBoardTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		Direction direction = tileEntityIn.getBlockState().get(CuttingBoardBlock.FACING).getOpposite();
 		ItemStack itemStack = tileEntityIn.getStoredItem();
 
@@ -35,9 +35,11 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 
 			if (tileEntityIn.getIsItemCarvingBoard()) {
 				renderItemCarved(matrixStackIn, direction, itemStack);
-			} else if (blockItem) {
+			}
+			else if (blockItem) {
 				renderBlock(matrixStackIn, direction);
-			} else {
+			}
+			else {
 				renderItemLayingDown(matrixStackIn, direction);
 			}
 

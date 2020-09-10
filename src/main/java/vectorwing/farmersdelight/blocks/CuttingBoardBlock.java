@@ -2,11 +2,9 @@ package vectorwing.farmersdelight.blocks;
 
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.audio.SoundEngine;
-import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.*;
 import net.minecraft.particles.ItemParticleData;
@@ -19,9 +17,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
@@ -30,23 +28,18 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.items.KnifeItem;
-import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.tile.CuttingBoardTileEntity;
 
 import javax.annotation.Nullable;
 
-public class CuttingBoardBlock extends Block implements IWaterLoggable
-{
+public class CuttingBoardBlock extends Block implements IWaterLoggable {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 1.0D, 15.0D);
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-	public CuttingBoardBlock()
-	{
+	public CuttingBoardBlock() {
 		super(Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD));
 		this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.NORTH).with(WATERLOGGED, false));
 	}
@@ -71,25 +64,29 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 				if (!itemOffhand.isEmpty() && handIn.equals(Hand.MAIN_HAND) && !(itemHeld.getItem() instanceof BlockItem)) {
 					return ActionResultType.PASS; // main-hand passes to off-hand
 				}
-				if (itemHeld.isEmpty())	{
+				if (itemHeld.isEmpty()) {
 					return ActionResultType.PASS;
-				} else if (cuttingBoardTE.addItem(player.abilities.isCreativeMode ? itemHeld.copy() : itemHeld)) {
+				}
+				else if (cuttingBoardTE.addItem(player.abilities.isCreativeMode ? itemHeld.copy() : itemHeld)) {
 					worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F);
 					return ActionResultType.SUCCESS;
 				}
-			// Processing the item with the held tool
-			} else if (!itemHeld.isEmpty()) {
+				// Processing the item with the held tool
+			}
+			else if (!itemHeld.isEmpty()) {
 				ItemStack boardItem = cuttingBoardTE.getStoredItem().copy();
 				if (cuttingBoardTE.processItemUsingTool(itemHeld, player)) {
 					spawnCuttingParticles(worldIn, pos, boardItem, 5);
 					return ActionResultType.SUCCESS;
 				}
 				return ActionResultType.PASS;
-			// Removing the board's item
-			} else if (handIn.equals(Hand.MAIN_HAND)) {
+				// Removing the board's item
+			}
+			else if (handIn.equals(Hand.MAIN_HAND)) {
 				if (!player.isCreative()) {
 					InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), cuttingBoardTE.removeItem());
-				} else {
+				}
+				else {
 					cuttingBoardTE.removeItem();
 				}
 				worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_HIT, SoundCategory.BLOCKS, 0.25F, 0.5F);
@@ -101,11 +98,12 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 	}
 
 	public static void spawnCuttingParticles(World worldIn, BlockPos pos, ItemStack stack, int count) {
-		for(int i = 0; i < count; ++i) {
+		for (int i = 0; i < count; ++i) {
 			Vector3d vec3d = new Vector3d(((double) worldIn.rand.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, ((double) worldIn.rand.nextFloat() - 0.5D) * 0.1D);
 			if (worldIn instanceof ServerWorld) {
 				((ServerWorld) worldIn).spawnParticle(new ItemParticleData(ParticleTypes.ITEM, stack), pos.getX() + 0.5F, pos.getY() + 0.1F, pos.getZ() + 0.5F, 1, vec3d.x, vec3d.y + 0.05D, vec3d.z, 0.0D);
-			} else {
+			}
+			else {
 				worldIn.addParticle(new ItemParticleData(ParticleTypes.ITEM, stack), pos.getX() + 0.5F, pos.getY() + 0.1F, pos.getZ() + 0.5F, vec3d.x, vec3d.y + 0.05D, vec3d.z);
 			}
 		}
@@ -115,7 +113,7 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 		if (state.getBlock() != newState.getBlock()) {
 			TileEntity tileentity = worldIn.getTileEntity(pos);
 			if (tileentity instanceof CuttingBoardTileEntity) {
-				InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), ((CuttingBoardTileEntity)tileentity).getStoredItem());
+				InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), ((CuttingBoardTileEntity) tileentity).getStoredItem());
 				worldIn.updateComparatorOutputLevel(pos, this);
 			}
 
@@ -177,8 +175,7 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 
 	@Nullable
 	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world)
-	{
+	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
 		return ModTileEntityTypes.CUTTING_BOARD_TILE.get().create();
 	}
 
@@ -192,8 +189,8 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 			ItemStack heldItem = player.getHeldItemMainhand();
 			if (player.isSecondaryUseActive() && !heldItem.isEmpty() && world.getTileEntity(event.getPos()) instanceof CuttingBoardTileEntity) {
 				if (heldItem.getItem() instanceof TieredItem ||
-					heldItem.getItem() instanceof TridentItem ||
-					heldItem.getItem() instanceof ShearsItem) {
+						heldItem.getItem() instanceof TridentItem ||
+						heldItem.getItem() instanceof ShearsItem) {
 					boolean success = ((CuttingBoardTileEntity) world.getTileEntity(event.getPos())).carveToolOnBoard(player.abilities.isCreativeMode ? heldItem.copy() : heldItem);
 					if (success) {
 						world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F);

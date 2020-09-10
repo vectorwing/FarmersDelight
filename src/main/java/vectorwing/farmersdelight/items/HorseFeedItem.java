@@ -15,26 +15,26 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class HorseFeedItem extends MealItem {
-    public HorseFeedItem(Properties builder) {
-        super(builder);
-    }
+	public HorseFeedItem(Properties builder) {
+		super(builder);
+	}
 
-    public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
-        if (target instanceof HorseEntity) {
-            HorseEntity horse = (HorseEntity) target;
-            if (horse.isAlive() && horse.isTame()) {
-                horse.setJumping(true);
-                target.addPotionEffect(new EffectInstance(Effects.REGENERATION, 600, 2));
-                target.addPotionEffect(new EffectInstance(Effects.SPEED, 6000, 2));
-                target.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 6000, 1));
-                if (stack.getContainerItem() != ItemStack.EMPTY) {
-                    playerIn.addItemStackToInventory(stack.getContainerItem());
-                }
-                stack.shrink(1);
-                return ActionResultType.SUCCESS;
-            }
-            return ActionResultType.PASS;
-        }
-        return ActionResultType.PASS;
-    }
+	public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
+		if (target instanceof HorseEntity) {
+			HorseEntity horse = (HorseEntity) target;
+			if (horse.isAlive() && horse.isTame()) {
+				horse.setJumping(true);
+				target.addPotionEffect(new EffectInstance(Effects.REGENERATION, 600, 2));
+				target.addPotionEffect(new EffectInstance(Effects.SPEED, 6000, 2));
+				target.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 6000, 1));
+				if (stack.getContainerItem() != ItemStack.EMPTY) {
+					playerIn.addItemStackToInventory(stack.getContainerItem());
+				}
+				stack.shrink(1);
+				return ActionResultType.SUCCESS;
+			}
+			return ActionResultType.PASS;
+		}
+		return ActionResultType.PASS;
+	}
 }

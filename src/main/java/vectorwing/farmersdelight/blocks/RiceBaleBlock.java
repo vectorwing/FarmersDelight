@@ -21,34 +21,34 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @SuppressWarnings("deprecation")
 public class RiceBaleBlock extends Block {
-    public static final DirectionProperty FACING = BlockStateProperties.FACING;
+	public static final DirectionProperty FACING = BlockStateProperties.FACING;
 
-    public RiceBaleBlock() {
-        super(Properties.from(Blocks.HAY_BLOCK));
-    }
+	public RiceBaleBlock() {
+		super(Properties.from(Blocks.HAY_BLOCK));
+	}
 
-    public RiceBaleBlock(Properties properties) {
-        super(properties);
-        this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.UP));
-    }
+	public RiceBaleBlock(Properties properties) {
+		super(properties);
+		this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.UP));
+	}
 
-    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-        entityIn.onLivingFall(fallDistance, 0.2F);
-    }
+	public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+		entityIn.onLivingFall(fallDistance, 0.2F);
+	}
 
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(FACING, context.getFace());
-    }
+	public BlockState getStateForPlacement(BlockItemUseContext context) {
+		return this.getDefaultState().with(FACING, context.getFace());
+	}
 
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
-    }
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+		builder.add(FACING);
+	}
 
-    public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(FACING, rot.rotate(state.get(FACING)));
-    }
+	public BlockState rotate(BlockState state, Rotation rot) {
+		return state.with(FACING, rot.rotate(state.get(FACING)));
+	}
 
-    public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(FACING)));
-    }
+	public BlockState mirror(BlockState state, Mirror mirrorIn) {
+		return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+	}
 }

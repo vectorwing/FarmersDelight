@@ -13,7 +13,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import vectorwing.farmersdelight.registry.ModBlocks;
-import vectorwing.farmersdelight.utils.ModTags;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
@@ -28,10 +28,10 @@ public class OrganicCompostBlock extends Block {
 		this.setDefaultState(super.getDefaultState().with(COMPOSTING, 0));
 	}
 
-    @Override
-    public boolean ticksRandomly(BlockState state) {
-        return true;
-    }
+	@Override
+	public boolean ticksRandomly(BlockState state) {
+		return true;
+	}
 
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
@@ -52,7 +52,7 @@ public class OrganicCompostBlock extends Block {
 			if (adjacent.isIn(ModTags.COMPOST_ACTIVATORS) || adjacent.getFluidState().isTagged(FluidTags.WATER))
 				chance += 0.02F;
 			int light = worldIn.getLightSubtracted(pos.up(), 0);
-			if(light > maxLight)
+			if (light > maxLight)
 				maxLight = light;
 		}
 		chance += maxLight > 12 ? 0.1F : 0.05F;
@@ -69,7 +69,7 @@ public class OrganicCompostBlock extends Block {
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		super.animateTick(stateIn, worldIn, pos, rand);
 		if (rand.nextInt(10) == 0) {
-			worldIn.addParticle(ParticleTypes.MYCELIUM, (double)pos.getX() + (double)rand.nextFloat(), (double)pos.getY() + 1.1D, (double)pos.getZ() + (double)rand.nextFloat(), 0.0D, 0.0D, 0.0D);
+			worldIn.addParticle(ParticleTypes.MYCELIUM, (double) pos.getX() + (double) rand.nextFloat(), (double) pos.getY() + 1.1D, (double) pos.getZ() + (double) rand.nextFloat(), 0.0D, 0.0D, 0.0D);
 		}
 
 	}

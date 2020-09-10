@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.data;
 
 import com.google.common.collect.Sets;
 import com.google.gson.GsonBuilder;
+import mezz.jei.api.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.FrameType;
@@ -23,37 +24,38 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.advancement.CuttingBoardTrigger;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
-import vectorwing.farmersdelight.utils.Text;
+import vectorwing.farmersdelight.utils.TextUtils;
 
-import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class Advancements extends AdvancementProvider
-{
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+public class Advancements extends AdvancementProvider {
 	private final Path PATH;
 	public static final Logger LOGGER = LogManager.getLogger();
 
-	public Advancements(DataGenerator generatorIn)
-	{
+	public Advancements(DataGenerator generatorIn) {
 		super(generatorIn);
 		PATH = generatorIn.getOutputFolder();
 	}
 
-	public void act(DirectoryCache cache) throws IOException
-	{
+	public void act(DirectoryCache cache) {
 		Set<ResourceLocation> set = Sets.newHashSet();
 		Consumer<Advancement> consumer = (advancement) -> {
 			if (!set.add(advancement.getId())) {
 				throw new IllegalStateException("Duplicate advancement " + advancement.getId());
-			} else {
+			}
+			else {
 				Path path1 = getPath(PATH, advancement);
 
-				try	{
+				try {
 					IDataProvider.save((new GsonBuilder()).setPrettyPrinting().create(), cache, advancement.copy().serialize(), path1);
-				} catch (IOException ioexception) {
+				}
+				catch (IOException ioexception) {
 					LOGGER.error("Couldn't save advancement {}", path1, ioexception);
 				}
 			}
@@ -62,19 +64,16 @@ public class Advancements extends AdvancementProvider
 		new FarmersDelightAdvancements().accept(consumer);
 	}
 
-	private static Path getPath(Path pathIn, Advancement advancementIn)
-	{
-		return pathIn.resolve("data/"+advancementIn.getId().getNamespace()+"/advancements/"+advancementIn.getId().getPath()+".json");
+	private static Path getPath(Path pathIn, Advancement advancementIn) {
+		return pathIn.resolve("data/" + advancementIn.getId().getNamespace() + "/advancements/" + advancementIn.getId().getPath() + ".json");
 	}
 
-	public static class FarmersDelightAdvancements implements Consumer<Consumer<Advancement>>
-	{
-		public void accept(Consumer<Advancement> consumer)
-		{
+	public static class FarmersDelightAdvancements implements Consumer<Consumer<Advancement>> {
+		public void accept(Consumer<Advancement> consumer) {
 			Advancement farmersDelight = Advancement.Builder.builder()
 					.withDisplay(ModItems.COOKING_POT.get(),
-							Text.getTranslation("advancement.root"),
-							Text.getTranslation("advancement.root.desc"),
+							TextUtils.getTranslation("advancement.root"),
+							TextUtils.getTranslation("advancement.root.desc"),
 							new ResourceLocation("minecraft:textures/block/bricks.png"),
 							FrameType.TASK, false, false, false)
 					.withCriterion("seeds", InventoryChangeTrigger.Instance.forItems(Items.WHEAT_SEEDS))
@@ -143,11 +142,10 @@ public class Advancements extends AdvancementProvider
 					.register(consumer, getNameId("main/master_chef"));
 		}
 
-		protected static Advancement.Builder getAdvancement(Advancement parent, IItemProvider display, String name, FrameType frame, boolean showToast, boolean announceToChat, boolean hidden)
-		{
+		protected static Advancement.Builder getAdvancement(Advancement parent, IItemProvider display, String name, FrameType frame, boolean showToast, boolean announceToChat, boolean hidden) {
 			return Advancement.Builder.builder().withParent(parent).withDisplay(display,
-					Text.getTranslation("advancement." + name),
-					Text.getTranslation("advancement." + name + ".desc"),
+					TextUtils.getTranslation("advancement." + name),
+					TextUtils.getTranslation("advancement." + name + ".desc"),
 					null, frame, showToast, announceToChat, hidden);
 		}
 

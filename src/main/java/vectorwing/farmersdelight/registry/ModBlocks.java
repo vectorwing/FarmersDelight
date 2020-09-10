@@ -5,8 +5,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Items;
-import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.blocks.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -14,7 +12,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.blocks.*;
 
 public class ModBlocks {
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FarmersDelight.MODID);
+	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FarmersDelight.MODID);
 
 	// FUNCTIONAL
 	public static final RegistryObject<Block> STOVE = BLOCKS.register("stove", StoveBlock::new);
@@ -76,15 +74,15 @@ public class ModBlocks {
 	public static final RegistryObject<Block> WILD_BEETROOTS = BLOCKS.register("wild_beetroots",
 			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 
-    // CROPS
-    public static final RegistryObject<Block> CABBAGE_CROP = BLOCKS.register("cabbages",
-            () -> new CabbagesBlock(Block.Properties.from(Blocks.WHEAT)));
-    public static final RegistryObject<Block> ONION_CROP = BLOCKS.register("onions",
-            () -> new OnionsBlock(Block.Properties.from(Blocks.WHEAT)));
-    public static final RegistryObject<Block> TOMATO_CROP = BLOCKS.register("tomatoes",
-            () -> new TomatoesBlock(Block.Properties.from(Blocks.WHEAT)));
-    public static final RegistryObject<Block> RICE_CROP = BLOCKS.register("rice_crop",
-            () -> new RiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
-    public static final RegistryObject<Block> TALL_RICE_CROP = BLOCKS.register("tall_rice_crop",
-            () -> new TallRiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
+	// CROPS
+	public static final RegistryObject<Block> CABBAGE_CROP = BLOCKS.register("cabbages",
+			() -> new CabbagesBlock(Block.Properties.from(Blocks.WHEAT)));
+	public static final RegistryObject<Block> ONION_CROP = BLOCKS.register("onions",
+			() -> new OnionsBlock(Block.Properties.from(Blocks.WHEAT)));
+	public static final RegistryObject<Block> TOMATO_CROP = BLOCKS.register("tomatoes",
+			() -> new TomatoesBlock(Block.Properties.from(Blocks.WHEAT)));
+	public static final RegistryObject<Block> RICE_CROP = BLOCKS.register("rice_crop",
+			() -> new RiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
+	public static final RegistryObject<Block> TALL_RICE_CROP = BLOCKS.register("tall_rice_crop",
+			() -> new TallRiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
 }

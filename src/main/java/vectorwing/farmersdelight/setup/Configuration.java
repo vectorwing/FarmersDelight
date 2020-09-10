@@ -6,8 +6,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 
 @Mod.EventBusSubscriber
-public class Configuration
-{
+public class Configuration {
 	public static final String CATEGORY_SETTINGS = "settings";
 	public static final String CATEGORY_OVERRIDES = "overrides";
 	public static final String CATEGORY_WORLD = "world";
@@ -17,6 +16,7 @@ public class Configuration
 	public static ForgeConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS;
 
 	public static ForgeConfigSpec.BooleanValue VANILLA_SOUP_EFFECTS;
+	public static ForgeConfigSpec.BooleanValue DISPENSER_TOOLS_CUTTING_BOARD;
 
 	public static ForgeConfigSpec.BooleanValue CROPS_ON_SHIPWRECKS;
 	public static ForgeConfigSpec.BooleanValue CROPS_ON_VILLAGE_HOUSES;
@@ -33,8 +33,7 @@ public class Configuration
 	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_TOMATOES;
 	public static ForgeConfigSpec.IntValue CHANCE_WILD_TOMATOES;
 
-	static
-	{
+	static {
 		ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
 
 		COMMON_BUILDER.comment("Game settings").push(CATEGORY_SETTINGS);
@@ -43,6 +42,7 @@ public class Configuration
 
 		COMMON_BUILDER.comment("Vanilla item overrides").push(CATEGORY_OVERRIDES);
 		VANILLA_SOUP_EFFECTS = COMMON_BUILDER.comment("Should Minecraft soups (e.g. Mushroom Stew) grant Comfort and other positive effects, to reflect this mod's soups?").define("vanillaSoupEffects", true);
+		DISPENSER_TOOLS_CUTTING_BOARD = COMMON_BUILDER.comment("Should most vanilla tools register a dispenser behavior when facing a Cutting Board?").define("dispenserUsesToolsOnCuttingBoard", true);
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("World generation").push(CATEGORY_WORLD);
@@ -85,9 +85,11 @@ public class Configuration
 	}
 
 	@SubscribeEvent
-	public static void onLoad(final ModConfig.Loading configEvent) { }
+	public static void onLoad(final ModConfig.Loading configEvent) {
+	}
 
 	@SubscribeEvent
-	public static void onReload(final ModConfig.Reloading configEvent) { }
+	public static void onReload(final ModConfig.Reloading configEvent) {
+	}
 
 }

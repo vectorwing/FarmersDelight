@@ -8,7 +8,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
@@ -34,7 +33,7 @@ public class SafetyNetBlock extends Block implements IWaterLoggable {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 8.0D, 0.0D, 16.0D, 9.0D, 16.0D);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-	public SafetyNetBlock()	{
+	public SafetyNetBlock() {
 		super(Block.Properties.create(Material.CARPET).hardnessAndResistance(0.2F).sound(SoundType.CLOTH));
 		this.setDefaultState(this.getStateContainer().getBaseState().with(WATERLOGGED, false));
 	}
@@ -70,7 +69,8 @@ public class SafetyNetBlock extends Block implements IWaterLoggable {
 	public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
 		if (entityIn.isSuppressingBounce()) {
 			super.onFallenUpon(worldIn, pos, entityIn, fallDistance);
-		} else {
+		}
+		else {
 			entityIn.onLivingFall(fallDistance, 0.0F);
 		}
 
@@ -79,7 +79,8 @@ public class SafetyNetBlock extends Block implements IWaterLoggable {
 	public void onLanded(IBlockReader worldIn, Entity entityIn) {
 		if (entityIn.isSuppressingBounce()) {
 			super.onLanded(worldIn, entityIn);
-		} else {
+		}
+		else {
 			this.bounceEntity(entityIn);
 		}
 	}

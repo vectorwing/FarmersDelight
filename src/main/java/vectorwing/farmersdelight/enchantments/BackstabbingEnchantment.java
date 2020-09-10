@@ -20,10 +20,8 @@ import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.registry.ModEnchantments;
 
-public class BackstabbingEnchantment extends Enchantment
-{
-	public BackstabbingEnchantment(Rarity rarityIn, EnchantmentType typeIn, EquipmentSlotType... slots)
-	{
+public class BackstabbingEnchantment extends Enchantment {
+	public BackstabbingEnchantment(Rarity rarityIn, EnchantmentType typeIn, EquipmentSlotType... slots) {
 		super(rarityIn, typeIn, slots);
 	}
 

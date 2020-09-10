@@ -5,10 +5,10 @@
       "tag": "forge:bread"
     },
     {
-      "item": "farmersdelight:fried_egg"
+      "tag": "forge:cooked_eggs"
     },
     {
-      "item": "farmersdelight:fried_egg"
+      "tag": "forge:cooked_eggs"
     }
   ],
   "result": {

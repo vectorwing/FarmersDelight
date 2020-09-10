@@ -10,13 +10,13 @@ import vectorwing.farmersdelight.loot.modifiers.KnifeStrawDrops;
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class LootModifierHandler {
-    @SubscribeEvent
-    public static void registerModifiers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> ev) {
-        ev.getRegistry().register(
-                new CakeSliceLoot.CakeSliceSerializer().setRegistryName(FarmersDelight.MODID, "cake")
-        );
-        ev.getRegistry().register(
-                new KnifeStrawDrops.KnifeStrawSerializer().setRegistryName(FarmersDelight.MODID, "straw_from_knife")
-        );
-    }
+	@SubscribeEvent
+	public static void registerModifiers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> ev) {
+		ev.getRegistry().register(
+				new CakeSliceLoot.CakeSliceSerializer().setRegistryName(FarmersDelight.MODID, "cake")
+		);
+		ev.getRegistry().register(
+				new KnifeStrawDrops.KnifeStrawSerializer().setRegistryName(FarmersDelight.MODID, "straw_from_knife")
+		);
+	}
 }

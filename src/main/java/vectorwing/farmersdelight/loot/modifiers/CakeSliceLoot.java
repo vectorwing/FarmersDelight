@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.loot.modifiers;
 
-import vectorwing.farmersdelight.registry.ModItems;
 import com.google.gson.JsonObject;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
@@ -11,22 +10,22 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
+import vectorwing.farmersdelight.registry.ModItems;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
 public class CakeSliceLoot {
-    public static class CakeSliceSerializer extends GlobalLootModifierSerializer<CakeSliceModifier> {
+	public static class CakeSliceSerializer extends GlobalLootModifierSerializer<CakeSliceModifier> {
 
-        @Override
-        public CakeSliceModifier read(ResourceLocation location, JsonObject object, ILootCondition[] ailootcondition) {
-            return new CakeSliceModifier(ailootcondition);
-        }
-    }
+		@Override
+		public CakeSliceModifier read(ResourceLocation location, JsonObject object, ILootCondition[] ailootcondition) {
+			return new CakeSliceModifier(ailootcondition);
+		}
+	}
 
-	private static class CakeSliceModifier extends LootModifier	{
-		protected CakeSliceModifier(ILootCondition[] conditionsIn)
-		{
+	private static class CakeSliceModifier extends LootModifier {
+		protected CakeSliceModifier(ILootCondition[] conditionsIn) {
 			super(conditionsIn);
 		}
 
@@ -34,7 +33,7 @@ public class CakeSliceLoot {
 		@Override
 		protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
 			BlockState state = context.get(LootParameters.BLOCK_STATE);
-			if(state.hasProperty(BlockStateProperties.BITES_0_6)) {
+			if (state.hasProperty(BlockStateProperties.BITES_0_6)) {
 				int bites = state.get(BlockStateProperties.BITES_0_6);
 				int TOTAL_SLICES = 7;
 				generatedLoot.add(new ItemStack(ModItems.CAKE_SLICE.get(), TOTAL_SLICES - bites));

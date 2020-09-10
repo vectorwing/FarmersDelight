@@ -23,17 +23,16 @@ public class CopyMealFunction extends LootFunction {
 
 	public static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "copy_meal");
 
-    private CopyMealFunction(ILootCondition[] conditions) {
-        super(conditions);
-    }
+	private CopyMealFunction(ILootCondition[] conditions) {
+		super(conditions);
+	}
 
-    public static LootFunction.Builder<?> builder() {
-        return builder(CopyMealFunction::new);
-    }
+	public static LootFunction.Builder<?> builder() {
+		return builder(CopyMealFunction::new);
+	}
 
 	@Override
-	protected ItemStack doApply(ItemStack stack, LootContext context)
-	{
+	protected ItemStack doApply(ItemStack stack, LootContext context) {
 		TileEntity tile = context.get(LootParameters.BLOCK_ENTITY);
 		if (tile instanceof CookingPotTileEntity) {
 			CompoundNBT tag = ((CookingPotTileEntity) tile).writeMeal(new CompoundNBT());
@@ -49,11 +48,9 @@ public class CopyMealFunction extends LootFunction {
 		return null;
 	}
 
-	public static class Serializer extends LootFunction.Serializer<CopyMealFunction>
-	{
+	public static class Serializer extends LootFunction.Serializer<CopyMealFunction> {
 		@Override
-		public CopyMealFunction deserialize(JsonObject json, JsonDeserializationContext context, ILootCondition[] conditions)
-		{
+		public CopyMealFunction deserialize(JsonObject json, JsonDeserializationContext context, ILootCondition[] conditions) {
 			return new CopyMealFunction(conditions);
 		}
 	}

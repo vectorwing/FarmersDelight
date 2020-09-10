@@ -44,50 +44,50 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable {
 	public static final VoxelShape OUT_SHAPE = VoxelShapes.fullCube();
 	@SuppressWarnings("UnstableApiUsage")
 	public static final ImmutableMap<Direction, VoxelShape> SHAPE_FACING =
-		Maps.immutableEnumMap(ImmutableMap.<Direction, VoxelShape>builder()
-			.put(Direction.DOWN, cutout(
-				makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D),
-				makeCuboidShape(6.0D, 3.0D, 14.0D, 10.0D, 5.0D, 16.0D),
-				makeCuboidShape(14.0D, 3.0D, 6.0D, 16.0D, 5.0D, 10.0D),
-				makeCuboidShape(6.0D, 3.0D, 0.0D, 10.0D, 5.0D, 2.0D),
-				makeCuboidShape(0.0D, 3.0D, 6.0D, 2.0D, 5.0D, 10.0D)
-			))
-			.put(Direction.UP, cutout(
-				makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 16.0D, 14.0D),
-				makeCuboidShape(6.0D, 11.0D, 0.0D, 10.0D, 13.0D, 2.0D),
-				makeCuboidShape(14.0D, 11.0D, 6.0D, 16.0D, 13.0D, 10.0D),
-				makeCuboidShape(6.0D, 11.0D, 14.0D, 10.0D, 13.0D, 16.0D),
-				makeCuboidShape(0.0D, 11.0D, 6.0D, 2.0D, 13.0D, 10.0D)
-			))
-			.put(Direction.NORTH, cutout(
-				makeCuboidShape(2.0D, 2.0D, 0.0D, 14.0D, 14.0D, 14.0D),
-				makeCuboidShape(6.0D, 0.0D, 3.0D, 10.0D, 2.0D, 5.0D),
-				makeCuboidShape(14.0D, 6.0D, 3.0D, 16.0D, 10.0D, 5.0D),
-				makeCuboidShape(6.0D, 14.0D, 3.0D, 10.0D, 16.0D, 5.0D),
-				makeCuboidShape(0.0D, 6.0D, 3.0D, 2.0D, 10.0D, 5.0D)
-			))
-			.put(Direction.SOUTH, cutout(
-				makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 14.0D, 16.0D),
-				makeCuboidShape(6.0D, 14.0D, 11.0D, 10.0D, 16.0D, 13.0D),
-				makeCuboidShape(14.0D, 6.0D, 11.0D, 16.0D, 10.0D, 13.0D),
-				makeCuboidShape(6.0D, 0.0D, 11.0D, 10.0D, 2.0D, 13.0D),
-				makeCuboidShape(0.0D, 6.0D, 11.0D, 2.0D, 10.0D, 13.0D)
-			))
-			.put(Direction.WEST, cutout(
-				makeCuboidShape(0.0D, 2.0D, 2.0D, 14.0D, 14.0D, 14.0D),
-				makeCuboidShape(3.0D, 14.0D, 6.0D, 5.0D, 16.0D, 10.0D),
-				makeCuboidShape(3.0D, 6.0D, 14.0D, 5.0D, 10.0D, 16.0D),
-				makeCuboidShape(3.0D, 0.0D, 6.0D, 5.0D, 2.0D, 10.0D),
-				makeCuboidShape(3.0D, 6.0D, 0.0D, 5.0D, 10.0D, 2.0D)
-			))
-			.put(Direction.EAST, cutout(
-				makeCuboidShape(2.0D, 2.0D, 2.0D, 16.0D, 14.0D, 14.0D),
-				makeCuboidShape(11.0D, 14.0D, 6.0D, 13.0D, 16.0D, 10.0D),
-				makeCuboidShape(11.0D, 6.0D, 0.0D, 13.0D, 10.0D, 2.0D),
-				makeCuboidShape(11.0D, 0.0D, 6.0D, 13.0D, 2.0D, 10.0D),
-				makeCuboidShape(11.0D, 6.0D, 14.0D, 13.0D, 10.0D, 16.0D)
-			))
-			.build());
+			Maps.immutableEnumMap(ImmutableMap.<Direction, VoxelShape>builder()
+					.put(Direction.DOWN, cutout(
+							makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D),
+							makeCuboidShape(6.0D, 3.0D, 14.0D, 10.0D, 5.0D, 16.0D),
+							makeCuboidShape(14.0D, 3.0D, 6.0D, 16.0D, 5.0D, 10.0D),
+							makeCuboidShape(6.0D, 3.0D, 0.0D, 10.0D, 5.0D, 2.0D),
+							makeCuboidShape(0.0D, 3.0D, 6.0D, 2.0D, 5.0D, 10.0D)
+					))
+					.put(Direction.UP, cutout(
+							makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 16.0D, 14.0D),
+							makeCuboidShape(6.0D, 11.0D, 0.0D, 10.0D, 13.0D, 2.0D),
+							makeCuboidShape(14.0D, 11.0D, 6.0D, 16.0D, 13.0D, 10.0D),
+							makeCuboidShape(6.0D, 11.0D, 14.0D, 10.0D, 13.0D, 16.0D),
+							makeCuboidShape(0.0D, 11.0D, 6.0D, 2.0D, 13.0D, 10.0D)
+					))
+					.put(Direction.NORTH, cutout(
+							makeCuboidShape(2.0D, 2.0D, 0.0D, 14.0D, 14.0D, 14.0D),
+							makeCuboidShape(6.0D, 0.0D, 3.0D, 10.0D, 2.0D, 5.0D),
+							makeCuboidShape(14.0D, 6.0D, 3.0D, 16.0D, 10.0D, 5.0D),
+							makeCuboidShape(6.0D, 14.0D, 3.0D, 10.0D, 16.0D, 5.0D),
+							makeCuboidShape(0.0D, 6.0D, 3.0D, 2.0D, 10.0D, 5.0D)
+					))
+					.put(Direction.SOUTH, cutout(
+							makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 14.0D, 16.0D),
+							makeCuboidShape(6.0D, 14.0D, 11.0D, 10.0D, 16.0D, 13.0D),
+							makeCuboidShape(14.0D, 6.0D, 11.0D, 16.0D, 10.0D, 13.0D),
+							makeCuboidShape(6.0D, 0.0D, 11.0D, 10.0D, 2.0D, 13.0D),
+							makeCuboidShape(0.0D, 6.0D, 11.0D, 2.0D, 10.0D, 13.0D)
+					))
+					.put(Direction.WEST, cutout(
+							makeCuboidShape(0.0D, 2.0D, 2.0D, 14.0D, 14.0D, 14.0D),
+							makeCuboidShape(3.0D, 14.0D, 6.0D, 5.0D, 16.0D, 10.0D),
+							makeCuboidShape(3.0D, 6.0D, 14.0D, 5.0D, 10.0D, 16.0D),
+							makeCuboidShape(3.0D, 0.0D, 6.0D, 5.0D, 2.0D, 10.0D),
+							makeCuboidShape(3.0D, 6.0D, 0.0D, 5.0D, 10.0D, 2.0D)
+					))
+					.put(Direction.EAST, cutout(
+							makeCuboidShape(2.0D, 2.0D, 2.0D, 16.0D, 14.0D, 14.0D),
+							makeCuboidShape(11.0D, 14.0D, 6.0D, 13.0D, 16.0D, 10.0D),
+							makeCuboidShape(11.0D, 6.0D, 0.0D, 13.0D, 10.0D, 2.0D),
+							makeCuboidShape(11.0D, 0.0D, 6.0D, 13.0D, 2.0D, 10.0D),
+							makeCuboidShape(11.0D, 6.0D, 14.0D, 13.0D, 10.0D, 16.0D)
+					))
+					.build());
 
 	public BasketBlock() {
 		super(Properties.create(Material.WOOD).hardnessAndResistance(1.5F).sound(SoundType.WOOD));
@@ -113,7 +113,7 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable {
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		if (!worldIn.isRemote) {
 			TileEntity tileentity = worldIn.getTileEntity(pos);
-			if (tileentity instanceof BasketTileEntity)	{
+			if (tileentity instanceof BasketTileEntity) {
 				player.openContainer((BasketTileEntity) tileentity);
 			}
 		}
@@ -124,7 +124,7 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable {
 		if (state.getBlock() != newState.getBlock()) {
 			TileEntity tileentity = worldIn.getTileEntity(pos);
 			if (tileentity instanceof IInventory) {
-				InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory)tileentity);
+				InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory) tileentity);
 				worldIn.updateComparatorOutputLevel(pos, this);
 			}
 
@@ -169,7 +169,7 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable {
 		if (stack.hasDisplayName()) {
 			TileEntity tileentity = worldIn.getTileEntity(pos);
 			if (tileentity instanceof BasketTileEntity) {
-				((BasketTileEntity)tileentity).setCustomName(stack.getDisplayName());
+				((BasketTileEntity) tileentity).setCustomName(stack.getDisplayName());
 			}
 		}
 

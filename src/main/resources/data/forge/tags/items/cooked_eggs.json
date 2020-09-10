@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "farmersdelight:fried_egg"
+  ],
+  "optional": [
+    "incubation:fried_egg"
+  ]
+}
