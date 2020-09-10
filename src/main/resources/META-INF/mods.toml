@@ -17,8 +17,8 @@ displayName="Farmer's Delight" #mandatory
 displayURL="https://github.com/vectorwing/FarmersDelight" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 # logoFile="examplemod.png" #optional
-credits="Chloe Dawn, simibubi, Grimmauld, Silk and many other wonderful people!" #optional
-authors="vectorwing" #optional
+credits="Chloe Dawn, simibubi, Silk, SkySom and many other wonderful people!" #optional
+authors="vectorwing, Grimmauld" #optional
 description='''A lightweight farming expansion. Harvest, cook and explore!'''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.farmersdelight]] #optional
