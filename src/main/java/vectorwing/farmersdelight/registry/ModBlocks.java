@@ -30,6 +30,10 @@ public class ModBlocks {
 			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
 	public static final RegistryObject<Block> DARK_OAK_PANTRY = BLOCKS.register("dark_oak_pantry",
 			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
+	public static final RegistryObject<Block> CRIMSON_PANTRY = BLOCKS.register("crimson_pantry",
+			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
+	public static final RegistryObject<Block> WARPED_PANTRY = BLOCKS.register("warped_pantry",
+			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
 	public static final RegistryObject<Block> CUTTING_BOARD = BLOCKS.register("cutting_board", CuttingBoardBlock::new);
 	public static final RegistryObject<Block> CABBAGE_CRATE = BLOCKS.register("cabbage_crate",
 			() -> new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));

@@ -227,6 +227,22 @@ public class Recipes extends RecipeProvider {
 				.key('D', Items.DARK_OAK_TRAPDOOR)
 				.addCriterion("dark_oak_trapdoor", InventoryChangeTrigger.Instance.forItems(Items.DARK_OAK_TRAPDOOR))
 				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModBlocks.CRIMSON_PANTRY.get())
+				.patternLine("___")
+				.patternLine("D D")
+				.patternLine("___")
+				.key('_', Items.CRIMSON_SLAB)
+				.key('D', Items.CRIMSON_TRAPDOOR)
+				.addCriterion("crimson_trapdoor", InventoryChangeTrigger.Instance.forItems(Items.CRIMSON_TRAPDOOR))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModBlocks.WARPED_PANTRY.get())
+				.patternLine("___")
+				.patternLine("D D")
+				.patternLine("___")
+				.key('_', Items.WARPED_SLAB)
+				.key('D', Items.WARPED_TRAPDOOR)
+				.addCriterion("warped_trapdoor", InventoryChangeTrigger.Instance.forItems(Items.WARPED_TRAPDOOR))
+				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ModItems.ROPE.get(), 3)
 				.patternLine("s")
 				.patternLine("s")

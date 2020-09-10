@@ -31,6 +31,10 @@ public class ModItems {
 			() -> new FuelBlockItem(ModBlocks.ACACIA_PANTRY.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP), 300));
 	public static final RegistryObject<Item> DARK_OAK_PANTRY = ITEMS.register("dark_oak_pantry",
 			() -> new FuelBlockItem(ModBlocks.DARK_OAK_PANTRY.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP), 300));
+	public static final RegistryObject<Item> CRIMSON_PANTRY = ITEMS.register("crimson_pantry",
+			() -> new BlockItem(ModBlocks.CRIMSON_PANTRY.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> WARPED_PANTRY = ITEMS.register("warped_pantry",
+			() -> new BlockItem(ModBlocks.WARPED_PANTRY.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> CUTTING_BOARD = ITEMS.register("cutting_board",
 			() -> new FuelBlockItem(ModBlocks.CUTTING_BOARD.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP), 200));
 	public static final RegistryObject<Item> CABBAGE_CRATE = ITEMS.register("cabbage_crate",
