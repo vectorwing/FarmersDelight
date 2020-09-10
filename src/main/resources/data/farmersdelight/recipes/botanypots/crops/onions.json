@@ -1,0 +1,38 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "botanypots"
+    }
+  ],
+  "type": "botanypots:crop",
+  "seed": {
+    "item": "farmersdelight:onion"
+  },
+  "categories":["dirt"],
+  "growthTicks": 1000,
+  "display": {
+    "block": "farmersdelight:onions",
+    "properties": {
+      "age": 7
+    }
+  },
+  "results": [
+    {
+      "chance": 0.75,
+      "output": {
+        "item": "farmersdelight:onion"
+      },
+      "minRolls": 1,
+      "maxRolls": 1
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "item": "farmersdelight:onion"
+      },
+      "minRolls": 1,
+      "maxRolls": 2
+    }
+  ]
+}

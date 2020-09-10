@@ -1,0 +1,17 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "botanypots"
+    }
+  ],
+  "type": "botanypots:soil",
+  "input": {
+    "item": "farmersdelight:rich_soil"
+  },
+  "display": {
+    "block": "farmersdelight:rich_soil"
+  },
+  "categories": ["dirt", "grass", "podzol", "mushroom"],
+  "growthModifier": 0.10
+}
