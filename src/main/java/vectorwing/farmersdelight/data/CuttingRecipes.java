@@ -112,24 +112,24 @@ public class CuttingRecipes {
 	}
 
 	private static void salvageWoodenFurniture(Consumer<IFinishedRecipe> consumer) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.OAK_DOOR), Ingredient.fromTag(ForgeTags.AXES), Items.OAK_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.OAK_TRAPDOOR), Ingredient.fromTag(ForgeTags.AXES), Items.OAK_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.OAK_SIGN), Ingredient.fromTag(ForgeTags.AXES), Items.OAK_PLANKS, 1).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BIRCH_DOOR), Ingredient.fromTag(ForgeTags.AXES), Items.BIRCH_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BIRCH_TRAPDOOR), Ingredient.fromTag(ForgeTags.AXES), Items.BIRCH_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BIRCH_SIGN), Ingredient.fromTag(ForgeTags.AXES), Items.BIRCH_PLANKS, 1).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SPRUCE_DOOR), Ingredient.fromTag(ForgeTags.AXES), Items.SPRUCE_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SPRUCE_TRAPDOOR), Ingredient.fromTag(ForgeTags.AXES), Items.SPRUCE_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SPRUCE_SIGN), Ingredient.fromTag(ForgeTags.AXES), Items.SPRUCE_PLANKS, 1).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.JUNGLE_DOOR), Ingredient.fromTag(ForgeTags.AXES), Items.JUNGLE_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.JUNGLE_TRAPDOOR), Ingredient.fromTag(ForgeTags.AXES), Items.JUNGLE_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.JUNGLE_SIGN), Ingredient.fromTag(ForgeTags.AXES), Items.JUNGLE_PLANKS, 1).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ACACIA_DOOR), Ingredient.fromTag(ForgeTags.AXES), Items.ACACIA_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ACACIA_TRAPDOOR), Ingredient.fromTag(ForgeTags.AXES), Items.ACACIA_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ACACIA_SIGN), Ingredient.fromTag(ForgeTags.AXES), Items.ACACIA_PLANKS, 1).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_DOOR), Ingredient.fromTag(ForgeTags.AXES), Items.DARK_OAK_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_TRAPDOOR), Ingredient.fromTag(ForgeTags.AXES), Items.DARK_OAK_PLANKS, 2).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_SIGN), Ingredient.fromTag(ForgeTags.AXES), Items.DARK_OAK_PLANKS, 1).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.OAK_DOOR), Ingredient.fromTag(ForgeTags.AXES), Items.OAK_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.OAK_TRAPDOOR), Ingredient.fromTag(ForgeTags.AXES), Items.OAK_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.OAK_SIGN), Ingredient.fromTag(ForgeTags.AXES), Items.OAK_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BIRCH_DOOR), Ingredient.fromTag(ForgeTags.AXES), Items.BIRCH_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BIRCH_TRAPDOOR), Ingredient.fromTag(ForgeTags.AXES), Items.BIRCH_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BIRCH_SIGN), Ingredient.fromTag(ForgeTags.AXES), Items.BIRCH_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SPRUCE_DOOR), Ingredient.fromTag(ForgeTags.AXES), Items.SPRUCE_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SPRUCE_TRAPDOOR), Ingredient.fromTag(ForgeTags.AXES), Items.SPRUCE_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SPRUCE_SIGN), Ingredient.fromTag(ForgeTags.AXES), Items.SPRUCE_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.JUNGLE_DOOR), Ingredient.fromTag(ForgeTags.AXES), Items.JUNGLE_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.JUNGLE_TRAPDOOR), Ingredient.fromTag(ForgeTags.AXES), Items.JUNGLE_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.JUNGLE_SIGN), Ingredient.fromTag(ForgeTags.AXES), Items.JUNGLE_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ACACIA_DOOR), Ingredient.fromTag(ForgeTags.AXES), Items.ACACIA_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ACACIA_TRAPDOOR), Ingredient.fromTag(ForgeTags.AXES), Items.ACACIA_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ACACIA_SIGN), Ingredient.fromTag(ForgeTags.AXES), Items.ACACIA_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_DOOR), Ingredient.fromTag(ForgeTags.AXES), Items.DARK_OAK_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_TRAPDOOR), Ingredient.fromTag(ForgeTags.AXES), Items.DARK_OAK_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_SIGN), Ingredient.fromTag(ForgeTags.AXES), Items.DARK_OAK_PLANKS).build(consumer);
 	}
 
 	private static void salvageUsingShears(Consumer<IFinishedRecipe> consumer) {
