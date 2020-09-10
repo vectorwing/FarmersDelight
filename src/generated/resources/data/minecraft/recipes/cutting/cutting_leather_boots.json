@@ -1,0 +1,16 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:leather_boots"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/shears"
+  },
+  "result": [
+    {
+      "item": "minecraft:leather"
+    }
+  ]
+}

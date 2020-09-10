@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.PlantType;
 import vectorwing.farmersdelight.registry.ModBlocks;
-import vectorwing.farmersdelight.utils.Utils;
+import vectorwing.farmersdelight.utils.MathUtils;
 
 import java.util.Random;
 
@@ -39,7 +39,7 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
 					worldIn.setBlockState(pos, state.with(MOISTURE, 7), 2);
 				} else if (i == 7) {
 					BlockState plant = worldIn.getBlockState(pos.up());
-					if (plant.getBlock() instanceof IGrowable && Utils.RAND.nextInt(10) <= 3) {
+					if (plant.getBlock() instanceof IGrowable && MathUtils.RAND.nextInt(10) <= 3) {
 						IGrowable growable = (IGrowable) plant.getBlock();
 						if (growable.canGrow(worldIn, pos.up(), plant, false)) {
 							growable.grow(worldIn, worldIn.rand, pos.up(), plant);

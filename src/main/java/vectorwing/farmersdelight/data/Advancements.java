@@ -23,7 +23,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.advancement.CuttingBoardTrigger;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
-import vectorwing.farmersdelight.utils.Text;
+import vectorwing.farmersdelight.utils.TextUtils;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -72,8 +72,8 @@ public class Advancements extends AdvancementProvider
 		{
 			Advancement farmersDelight = Advancement.Builder.builder()
 					.withDisplay(ModItems.COOKING_POT.get(),
-							Text.getTranslation("advancement.root"),
-							Text.getTranslation("advancement.root.desc"),
+							TextUtils.getTranslation("advancement.root"),
+							TextUtils.getTranslation("advancement.root.desc"),
 							new ResourceLocation("minecraft:textures/block/bricks.png"),
 							FrameType.TASK, false, false, false)
 					.withCriterion("seeds", InventoryChangeTrigger.Instance.forItems(Items.WHEAT_SEEDS))
@@ -140,8 +140,8 @@ public class Advancements extends AdvancementProvider
 		protected static Advancement.Builder getAdvancement(Advancement parent, IItemProvider display, String name, FrameType frame, boolean showToast, boolean announceToChat, boolean hidden)
 		{
 			return Advancement.Builder.builder().withParent(parent).withDisplay(display,
-					Text.getTranslation("advancement." + name),
-					Text.getTranslation("advancement." + name + ".desc"),
+					TextUtils.getTranslation("advancement." + name),
+					TextUtils.getTranslation("advancement." + name + ".desc"),
 					null, frame, showToast, announceToChat, hidden);
 		}
 

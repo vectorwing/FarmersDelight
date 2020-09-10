@@ -1,7 +1,5 @@
 package vectorwing.farmersdelight.data;
 
-import net.minecraft.block.WoodType;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.registry.ModBlocks;
@@ -14,8 +12,8 @@ import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
-import vectorwing.farmersdelight.utils.ForgeTags;
-import vectorwing.farmersdelight.utils.ModTags;
+import vectorwing.farmersdelight.utils.tags.ForgeTags;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import java.util.function.Consumer;
 
@@ -36,6 +34,8 @@ public class Recipes extends RecipeProvider
 		recipesFoodstuffs(consumer);
 		recipesFoodBlocks(consumer);
 		recipesCraftedMeals(consumer);
+
+		CuttingRecipes.register(consumer);
 	}
 
 	private void foodSmeltingRecipes(String name, IItemProvider ingredient, IItemProvider result, float experience, Consumer<IFinishedRecipe> consumer) {
@@ -460,7 +460,7 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ForgeTags.CROPS_ONION)
 				.addIngredient(Items.BEETROOT)
 				.addIngredient(Items.BOWL)
-				.addCriterion("cabbage", InventoryChangeTrigger.Instance.forItems(ModItems.CABBAGE.get()))
+				.addCriterion("has_bowl", InventoryChangeTrigger.Instance.forItems(Items.BOWL))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.BARBECUE_STICK.get(), 2)
 				.addIngredient(ForgeTags.CROPS_TOMATO)
@@ -473,8 +473,8 @@ public class Recipes extends RecipeProvider
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.EGG_SANDWICH.get())
 				.addIngredient(ForgeTags.BREAD)
-				.addIngredient(ModItems.FRIED_EGG.get())
-				.addIngredient(ModItems.FRIED_EGG.get())
+				.addIngredient(ForgeTags.COOKED_EGGS)
+				.addIngredient(ForgeTags.COOKED_EGGS)
 				.addCriterion("fried_egg", InventoryChangeTrigger.Instance.forItems(ModItems.FRIED_EGG.get()))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CHICKEN_SANDWICH.get())
@@ -500,5 +500,6 @@ public class Recipes extends RecipeProvider
 				.addCriterion("baked_potato", InventoryChangeTrigger.Instance.forItems(Items.BAKED_POTATO))
 				.build(consumer);
 	}
+
 	private void recipesCookedMeals(Consumer<IFinishedRecipe> consumer) {}
 }

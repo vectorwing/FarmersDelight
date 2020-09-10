@@ -1,0 +1,23 @@
+{
+  "type": "farmersdelight:cooking",
+  "ingredients": [
+    {
+      "tag": "forge:pasta"
+    },
+    {
+      "tag": "forge:crops/cabbage"
+    },
+    {
+      "tag": "forge:crops/onion"
+    },
+    [
+      {"item": "minecraft:brown_mushroom"},
+      {"tag": "forge:raw_chicken"},
+      {"item": "minecraft:porkchop"}
+    ]
+  ],
+  "result": {
+    "item": "farmersdelight:dumplings",
+    "count": 2
+  }
+}

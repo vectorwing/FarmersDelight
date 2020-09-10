@@ -13,7 +13,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import vectorwing.farmersdelight.registry.ModBlocks;
-import vectorwing.farmersdelight.utils.ModTags;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;

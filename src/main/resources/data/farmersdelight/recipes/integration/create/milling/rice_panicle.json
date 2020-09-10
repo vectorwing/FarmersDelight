@@ -1,0 +1,30 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "farmersdelight:rice_panicle"
+    }
+  ],
+  "results": [
+    {
+      "item": "farmersdelight:rice",
+      "count": 1
+    },
+    {
+      "item": "farmersdelight:straw",
+      "count": 1
+    },
+    {
+      "item": "farmersdelight:straw",
+      "count": 1,
+      "chance": 0.5
+    }
+  ],
+  "processingTime": 50
+}

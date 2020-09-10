@@ -22,7 +22,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
-import vectorwing.farmersdelight.utils.ModTags;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import java.util.function.Supplier;
 

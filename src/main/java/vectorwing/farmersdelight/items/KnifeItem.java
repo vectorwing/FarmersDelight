@@ -4,7 +4,6 @@ import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
@@ -15,7 +14,7 @@ import net.minecraft.item.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import vectorwing.farmersdelight.registry.ModBlocks;
-import vectorwing.farmersdelight.utils.Utils;
+import vectorwing.farmersdelight.utils.MathUtils;
 
 import javax.annotation.Nonnull;
 import java.util.Set;
@@ -69,7 +68,7 @@ public class KnifeItem extends ToolItem
 	public ItemStack getContainerItem(@Nonnull ItemStack stack)
 	{
 		ItemStack container = stack.copy();
-		if(container.attemptDamageItem(1, Utils.RAND, null))
+		if(container.attemptDamageItem(1, MathUtils.RAND, null))
 			return ItemStack.EMPTY;
 		else
 			return container;

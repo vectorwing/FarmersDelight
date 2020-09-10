@@ -1,0 +1,20 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "botanypots"
+    }
+  ],
+  "type": "botanypots:soil",
+  "input": {
+    "item": "farmersdelight:rich_soil_farmland"
+  },
+  "display": {
+    "block": "farmersdelight:rich_soil_farmland",
+    "properties": {
+      "moisture": 7
+    }
+  },
+  "categories": ["dirt", "farmland"],
+  "growthModifier": 0.25
+}

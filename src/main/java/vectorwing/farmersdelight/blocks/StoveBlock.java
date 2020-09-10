@@ -26,7 +26,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import vectorwing.farmersdelight.tile.StoveTileEntity;
-import vectorwing.farmersdelight.utils.Utils;
+import vectorwing.farmersdelight.utils.MathUtils;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -72,7 +72,7 @@ public class StoveBlock extends Block
 			}
 		} else {
 			if (itemstack.getItem() instanceof FlintAndSteelItem) {
-				worldIn.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, Utils.RAND.nextFloat() * 0.4F + 0.8F);
+				worldIn.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, MathUtils.RAND.nextFloat() * 0.4F + 0.8F);
 				worldIn.setBlockState(pos, state.with(BlockStateProperties.LIT, Boolean.TRUE), 11);
 				if (player != null) {
 					itemstack.damageItem(1, player, (action) -> {

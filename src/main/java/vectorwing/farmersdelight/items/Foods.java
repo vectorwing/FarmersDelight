@@ -24,6 +24,8 @@ public class Foods
 			.hunger(2).saturation(0.2f).build();
 	public static final Food PUMPKIN_SLICE = (new Food.Builder())
 			.hunger(3).saturation(0.3f).build();
+	public static final Food CABBAGE_LEAF = (new Food.Builder())
+			.hunger(1).saturation(0.4f).build();
 	public static final Food MINCED_BEEF = (new Food.Builder())
 			.hunger(2).saturation(0.3f).meat().build();
 	public static final Food BEEF_PATTY = (new Food.Builder())

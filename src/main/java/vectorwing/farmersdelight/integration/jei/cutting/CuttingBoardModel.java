@@ -4,13 +4,12 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import mezz.jei.api.gui.drawable.IDrawable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import vectorwing.farmersdelight.utils.Utils;
+import vectorwing.farmersdelight.utils.ClientRenderUtils;
 
 import java.util.function.Supplier;
 
@@ -39,7 +38,7 @@ public class CuttingBoardModel implements IDrawable
 			stack = supplier.get();
 		}
 
-		RenderHelper.enableStandardItemLighting();
+		net.minecraft.client.renderer.RenderHelper.enableStandardItemLighting();
 		RenderSystem.color4f(1, 1, 1, 1);
 		RenderSystem.enableDepthTest();
 		RenderSystem.pushMatrix();
@@ -51,7 +50,7 @@ public class CuttingBoardModel implements IDrawable
 		ItemRenderer renderer = Minecraft.getInstance().getItemRenderer();
 		TextureManager textureManager = Minecraft.getInstance().textureManager;
 		IBakedModel bakedmodel = renderer.getItemModelWithOverrides(stack, (World)null, (LivingEntity)null);
-		Utils.renderItemIntoGUIScalable(stack, 48, 48, bakedmodel, renderer, textureManager);
+		ClientRenderUtils.renderItemIntoGUIScalable(stack, 48, 48, bakedmodel, renderer, textureManager);
 
 		RenderSystem.popMatrix();
 

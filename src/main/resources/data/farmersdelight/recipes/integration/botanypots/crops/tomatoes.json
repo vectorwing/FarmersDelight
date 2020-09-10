@@ -1,0 +1,46 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "botanypots"
+    }
+  ],
+  "type": "botanypots:crop",
+  "seed": {
+    "item": "farmersdelight:tomato_seeds"
+  },
+  "categories":["dirt"],
+  "growthTicks": 1000,
+  "display": {
+    "block": "farmersdelight:tomatoes",
+    "properties": {
+      "age": 7
+    }
+  },
+  "results": [
+    {
+      "chance": 0.75,
+      "output": {
+        "item": "farmersdelight:tomato"
+      },
+      "minRolls": 1,
+      "maxRolls": 1
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "item": "farmersdelight:tomato"
+      },
+      "minRolls": 1,
+      "maxRolls": 2
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "item": "farmersdelight:tomato_seeds"
+      },
+      "minRolls": 1,
+      "maxRolls": 2
+    }
+  ]
+}
