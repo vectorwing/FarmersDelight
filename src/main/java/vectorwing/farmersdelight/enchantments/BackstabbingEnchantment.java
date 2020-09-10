@@ -73,7 +73,6 @@ public class BackstabbingEnchantment extends Enchantment {
 						event.setAmount(getBackstabbingDamagePerLevel(event.getAmount(), level));
 						world.playSound(null, attacker.getPosX(), attacker.getPosY(), attacker.getPosZ(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 					}
-					Minecraft.getInstance().particles.addParticleEmitter(event.getEntityLiving(), ParticleTypes.ENCHANTED_HIT);
 				}
 			}
 		}
