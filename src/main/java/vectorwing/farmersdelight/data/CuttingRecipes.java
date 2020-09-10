@@ -6,7 +6,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvents;
 import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 import vectorwing.farmersdelight.registry.ModItems;
-import vectorwing.farmersdelight.utils.ForgeTags;
+import vectorwing.farmersdelight.utils.tags.ForgeTags;
 
 import java.util.function.Consumer;
 

@@ -33,8 +33,8 @@ import vectorwing.farmersdelight.tile.inventory.CookingPotItemHandler;
 import vectorwing.farmersdelight.tile.container.CookingPotContainer;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
-import vectorwing.farmersdelight.utils.ModTags;
-import vectorwing.farmersdelight.utils.Text;
+import vectorwing.farmersdelight.utils.TextUtils;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -417,7 +417,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 	public ITextComponent getName()	{
 		return this.customName != null
 				? this.customName
-				: Text.getTranslation("container.cooking_pot");
+				: TextUtils.getTranslation("container.cooking_pot");
 	}
 
 	@Override

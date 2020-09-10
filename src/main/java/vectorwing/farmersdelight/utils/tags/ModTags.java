@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.utils;
+package vectorwing.farmersdelight.utils.tags;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

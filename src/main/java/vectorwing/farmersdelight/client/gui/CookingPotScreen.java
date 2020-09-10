@@ -9,7 +9,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.tile.container.CookingPotContainer;
-import vectorwing.farmersdelight.utils.Text;
+import vectorwing.farmersdelight.utils.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +46,7 @@ public class CookingPotScreen extends ContainerScreen<CookingPotContainer>
 				String container = !containerItem.isEmpty() ? containerItem.getItem().getName().getFormattedText() : "";
 
 				if (!container.equals("")) {
-					String served = Text.getTranslation("container.cooking_pot.served_on", container).applyTextStyle(TextFormatting.GRAY).getFormattedText();
+					String served = TextUtils.getTranslation("container.cooking_pot.served_on", container).applyTextStyle(TextFormatting.GRAY).getFormattedText();
 					tooltip.add(served);
 				}
 

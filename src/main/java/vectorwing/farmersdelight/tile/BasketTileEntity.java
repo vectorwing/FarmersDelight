@@ -22,7 +22,7 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.text.ITextComponent;
 import vectorwing.farmersdelight.blocks.BasketBlock;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
-import vectorwing.farmersdelight.utils.Text;
+import vectorwing.farmersdelight.utils.TextUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -66,7 +66,7 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 	@Override
 	public int getSizeInventory() { return this.basketContents.size(); }
 	@Override
-	protected ITextComponent getDefaultName() {	return Text.getTranslation("container.basket"); }
+	protected ITextComponent getDefaultName() {	return TextUtils.getTranslation("container.basket"); }
 	@Override
 	protected Container createMenu(int id, PlayerInventory player)
 	{

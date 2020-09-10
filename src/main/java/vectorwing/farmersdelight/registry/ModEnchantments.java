@@ -8,7 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.enchantments.BackstabbingEnchantment;
-import vectorwing.farmersdelight.utils.ModTags;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 public class ModEnchantments
 {

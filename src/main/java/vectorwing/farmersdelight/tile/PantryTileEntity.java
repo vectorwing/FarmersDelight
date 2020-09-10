@@ -19,7 +19,7 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.ITextComponent;
 import vectorwing.farmersdelight.blocks.PantryBlock;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
-import vectorwing.farmersdelight.utils.Text;
+import vectorwing.farmersdelight.utils.TextUtils;
 
 public class PantryTileEntity extends LockableLootTileEntity {
 	private NonNullList<ItemStack> pantryContents = NonNullList.withSize(27, ItemStack.EMPTY);
@@ -67,7 +67,7 @@ public class PantryTileEntity extends LockableLootTileEntity {
 	}
 
 	protected ITextComponent getDefaultName() {
-		return Text.getTranslation("container.pantry");
+		return TextUtils.getTranslation("container.pantry");
 	}
 
 	protected Container createMenu(int id, PlayerInventory player) {

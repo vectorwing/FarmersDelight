@@ -12,8 +12,8 @@ import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
-import vectorwing.farmersdelight.utils.ForgeTags;
-import vectorwing.farmersdelight.utils.ModTags;
+import vectorwing.farmersdelight.utils.tags.ForgeTags;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import java.util.function.Consumer;
 
