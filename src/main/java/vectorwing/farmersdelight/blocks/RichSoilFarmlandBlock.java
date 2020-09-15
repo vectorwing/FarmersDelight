@@ -36,25 +36,25 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
     }
 
     public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-        if (!worldIn.isRemote) {
-            if (!state.isValidPosition(worldIn, pos)) {
-                turnToRichSoil(state, worldIn, pos);
-            } else {
-                int i = state.get(MOISTURE);
-                if (!hasWater(worldIn, pos) && !worldIn.isRainingAt(pos.up())) {
-                    if (i > 0) {
-                        worldIn.setBlockState(pos, state.with(MOISTURE, i - 1), 2);
-                    }
-                } else if (i < 7) {
-                    worldIn.setBlockState(pos, state.with(MOISTURE, 7), 2);
-                } else if (i == 7) {
-                    BlockState plant = worldIn.getBlockState(pos.up());
-                    if (plant.getBlock() instanceof IGrowable && MathUtils.RAND.nextInt(10) <= 3) {
-                        IGrowable growable = (IGrowable) plant.getBlock();
-                        if (growable.canGrow(worldIn, pos.up(), plant, false)) {
-                            growable.grow(worldIn, worldIn.rand, pos.up(), plant);
-                        }
-                    }
+	    if (!state.isValidPosition(worldIn, pos)) {
+            turnToRichSoil(state, worldIn, pos);
+        }
+    }
+
+    public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+        int i = state.get(MOISTURE);
+        if (!hasWater(worldIn, pos) && !worldIn.isRainingAt(pos.up())) {
+            if (i > 0) {
+                worldIn.setBlockState(pos, state.with(MOISTURE, i - 1), 2);
+            }
+        } else if (i < 7) {
+            worldIn.setBlockState(pos, state.with(MOISTURE, 7), 2);
+        } else if (i == 7) {
+            BlockState plant = worldIn.getBlockState(pos.up());
+            if (plant.getBlock() instanceof IGrowable && MathUtils.RAND.nextInt(10) <= 3) {
+                IGrowable growable = (IGrowable) plant.getBlock();
+                if (growable.canGrow(worldIn, pos.up(), plant, false)) {
+                    growable.grow(worldIn, worldIn.rand, pos.up(), plant);
                 }
             }
         }
@@ -81,7 +81,7 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
 
     @Override
     public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-        // Mulch is immune to trampling
+        // Rich Soil is immune to trampling
     }
 
     public static void turnToRichSoil(BlockState state, World worldIn, BlockPos pos) {
