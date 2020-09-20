@@ -1,38 +1,25 @@
 
-# The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
-modLoader="javafml" #mandatory
-# A version range to match for said mod loader - for regular FML @Mod it will be the forge version
-loaderVersion="[31,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
-# A URL to refer people to when problems occur with this mod
-issueTrackerURL="https://github.com/vectorwing/FarmersDelight/issues" #optional
-# A list of mods - how many allowed here is determined by the individual mod loader
-[[mods]] #mandatory
-modId="farmersdelight" #mandatory
-version="1.15.2-0.2.2" #mandatory
- # A display name for the mod
-displayName="Farmer's Delight" #mandatory
-# A URL to query for updates for this mod. See the JSON update specification <here>
-# updateJSONURL="" #optional
-# A URL for the "homepage" for this mod, displayed in the mod UI
-displayURL="https://github.com/vectorwing/FarmersDelight" #optional
-# A file name (in the root of the mod JAR) containing a logo for display
-# logoFile="examplemod.png" #optional
-credits="Chloe Dawn, simibubi, Silk, SkySom and many other wonderful people!" #optional
-authors="vectorwing, Grimmauld" #optional
-description='''A lightweight farming expansion. Harvest, cook and explore!'''
-# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.farmersdelight]] #optional
-    # the modid of the dependency
-    modId="forge" #mandatory
-    # Does this dependency have to exist - if not, ordering below must be specified
-    mandatory=true #mandatory
-    # The version range of the dependency
-    versionRange="[31.2.12,)" #mandatory
-    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+modLoader="javafml"
+loaderVersion="[31,)"
+issueTrackerURL="https://github.com/vectorwing/FarmersDelight/issues"
+license="MIT License"
+
+[[mods]]
+modId="farmersdelight"
+version="1.15.2-0.2.3"
+displayName="Farmer's Delight"
+# updateJSONURL=""
+displayURL="https://github.com/vectorwing/FarmersDelight"
+logoFile="logo.png"
+credits="Chloe Dawn, simibubi, Silk, SkySom and many other wonderful people!"
+authors="vectorwing, Grimmauld"
+description="A lightweight farming expansion. Harvest, cook and explore!"
+[[dependencies.farmersdelight]]
+    modId="forge"
+    mandatory=true
+    versionRange="[31.2.12,)"
     ordering="NONE"
-    # Side this dependency is applied on - BOTH, CLIENT or SERVER
     side="BOTH"
-# Here's another dependency
 [[dependencies.farmersdelight]]
     modId="minecraft"
     mandatory=true
