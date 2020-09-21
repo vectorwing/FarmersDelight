@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.blocks;
 
 
+import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -24,9 +25,13 @@ public class OnionsBlock extends CropsBlock
 			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 9.0D, 16.0D)};
 
 
-	public OnionsBlock(Properties properties)
-	{
+	public OnionsBlock(Properties properties) {
 		super(properties);
+	}
+
+	@Override
+	public BlockState getPlant(IBlockReader world, BlockPos pos) {
+		return ModBlocks.ONION_CROP.get().getDefaultState();
 	}
 
 	@Override
