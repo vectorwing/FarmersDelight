@@ -2,6 +2,8 @@ package vectorwing.farmersdelight.data;
 
 import net.minecraft.tags.ItemTags;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.data.recipes.CuttingRecipes;
+import vectorwing.farmersdelight.data.recipes.SmeltingRecipes;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
@@ -13,7 +15,6 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.utils.tags.ForgeTags;
-import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import java.util.function.Consumer;
 
@@ -27,7 +28,7 @@ public class Recipes extends RecipeProvider
 	@Override
 	protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
 		recipesVanillaAlternatives(consumer);
-		recipesSmelting(consumer);
+		//recipesSmelting(consumer);
 		recipesBlocks(consumer);
 		recipesTools(consumer);
 		recipesMaterials(consumer);
@@ -35,23 +36,8 @@ public class Recipes extends RecipeProvider
 		recipesFoodBlocks(consumer);
 		recipesCraftedMeals(consumer);
 
+		SmeltingRecipes.register(consumer);
 		CuttingRecipes.register(consumer);
-	}
-
-	private void foodSmeltingRecipes(String name, IItemProvider ingredient, IItemProvider result, float experience, Consumer<IFinishedRecipe> consumer) {
-		String namePrefix = new ResourceLocation(FarmersDelight.MODID, name).toString();
-		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ingredient),
-				result, experience, 200)
-				.addCriterion(name, InventoryChangeTrigger.Instance.forItems(ingredient))
-				.build(consumer);
-		CookingRecipeBuilder.cookingRecipe(Ingredient.fromItems(ingredient),
-				result, experience, 600, IRecipeSerializer.CAMPFIRE_COOKING)
-				.addCriterion(name, InventoryChangeTrigger.Instance.forItems(ingredient))
-				.build(consumer, namePrefix + "_from_campfire_cooking");
-		CookingRecipeBuilder.cookingRecipe(Ingredient.fromItems(ingredient),
-				result, experience, 100, IRecipeSerializer.SMOKING)
-				.addCriterion(name, InventoryChangeTrigger.Instance.forItems(ingredient))
-				.build(consumer, namePrefix + "_from_smoking");
 	}
 
 	/**
@@ -118,27 +104,7 @@ public class Recipes extends RecipeProvider
 	}
 
 	private void recipesSmelting(Consumer<IFinishedRecipe> consumer) {
-		foodSmeltingRecipes("fried_egg", Items.EGG, ModItems.FRIED_EGG.get(), 0.35F, consumer);
-		foodSmeltingRecipes("beef_patty", ModItems.MINCED_BEEF.get(), ModItems.BEEF_PATTY.get(), 0.35F, consumer);
-		foodSmeltingRecipes("cooked_chicken_cuts", ModItems.CHICKEN_CUTS.get(), ModItems.COOKED_CHICKEN_CUTS.get(), 0.35F, consumer);
-		foodSmeltingRecipes("cooked_cod_slice", ModItems.COD_SLICE.get(), ModItems.COOKED_COD_SLICE.get(), 0.35F, consumer);
-		foodSmeltingRecipes("cooked_salmon_slice", ModItems.SALMON_SLICE.get(), ModItems.COOKED_SALMON_SLICE.get(), 0.35F, consumer);
-		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ModItems.IRON_KNIFE.get()),
-				Items.IRON_NUGGET, 0.1F, 200)
-				.addCriterion("has_iron_knife", InventoryChangeTrigger.Instance.forItems(ModItems.IRON_KNIFE.get()))
-				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "iron_nugget_from_smelting_knife"));
-		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ModItems.GOLDEN_KNIFE.get()),
-				Items.GOLD_NUGGET, 0.1F, 200)
-				.addCriterion("has_golden_knife", InventoryChangeTrigger.Instance.forItems(ModItems.IRON_KNIFE.get()))
-				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "gold_nugget_from_smelting_knife"));
-		CookingRecipeBuilder.blastingRecipe(Ingredient.fromItems(ModItems.IRON_KNIFE.get()),
-				Items.IRON_NUGGET, 0.1F, 100)
-				.addCriterion("has_iron_knife", InventoryChangeTrigger.Instance.forItems(ModItems.IRON_KNIFE.get()))
-				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "iron_nugget_from_blasting_knife"));
-		CookingRecipeBuilder.blastingRecipe(Ingredient.fromItems(ModItems.GOLDEN_KNIFE.get()),
-				Items.GOLD_NUGGET, 0.1F, 100)
-				.addCriterion("has_golden_knife", InventoryChangeTrigger.Instance.forItems(ModItems.IRON_KNIFE.get()))
-				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "gold_nugget_from_blasting_knife"));
+
 	}
 
 	private void recipesBlocks(Consumer<IFinishedRecipe> consumer) {
@@ -170,9 +136,8 @@ public class Recipes extends RecipeProvider
 				.addCriterion("canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
 				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ModBlocks.CUTTING_BOARD.get())
-				.patternLine(" K ")
 				.patternLine("/##")
-				.key('K', ModTags.KNIVES)
+				.patternLine("/##")
 				.key('/', Items.STICK)
 				.key('#', ItemTags.PLANKS)
 				.addCriterion("stick", InventoryChangeTrigger.Instance.forItems(Items.STICK))
@@ -370,11 +335,12 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.GLASS_BOTTLE)
 				.addCriterion("milk_bucket", InventoryChangeTrigger.Instance.forItems(Items.MILK_BUCKET))
 				.build(consumer);
-		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RAW_PASTA.get())
-				.addIngredient(Items.WHEAT)
-				.addIngredient(Items.WHEAT)
-				.addIngredient(Items.EGG)
-				.addIngredient(ForgeTags.KNIVES)
+		ShapedRecipeBuilder.shapedRecipe(ModItems.RAW_PASTA.get())
+				.patternLine("w")
+				.patternLine("e")
+				.patternLine("w")
+				.key('w', Items.WHEAT)
+				.key('e', Items.EGG)
 				.addCriterion("egg", InventoryChangeTrigger.Instance.forItems(Items.EGG))
 				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ModItems.PIE_CRUST.get(), 1)
@@ -383,11 +349,6 @@ public class Recipes extends RecipeProvider
 				.key('w', Items.WHEAT)
 				.key('M', ForgeTags.MILK)
 				.addCriterion("wheat", InventoryChangeTrigger.Instance.forItems(Items.WHEAT))
-				.build(consumer);
-		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CAKE_SLICE.get(), 7)
-				.addIngredient(Blocks.CAKE)
-				.addIngredient(ForgeTags.KNIVES)
-				.addCriterion("cake", InventoryChangeTrigger.Instance.forItems(Blocks.CAKE))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.SWEET_BERRY_COOKIE.get(), 8)
 				.addIngredient(Items.WHEAT)

@@ -1,19 +1,18 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "item": "minecraft:wheat"
-    },
-    {
-      "item": "minecraft:wheat"
-    },
-    {
-      "item": "minecraft:egg"
-    },
-    {
-      "tag": "forge:tools/knife"
-    }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "w",
+    "e",
+    "w"
   ],
+  "key": {
+    "w": {
+      "item": "minecraft:wheat"
+    },
+    "e": {
+      "item": "minecraft:egg"
+    }
+  },
   "result": {
     "item": "farmersdelight:raw_pasta"
   }

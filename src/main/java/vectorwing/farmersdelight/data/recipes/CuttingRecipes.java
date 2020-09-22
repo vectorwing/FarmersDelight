@@ -1,6 +1,9 @@
-package vectorwing.farmersdelight.data;
+package vectorwing.farmersdelight.data.recipes;
 
+import net.minecraft.advancements.criterion.InventoryChangeTrigger;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.IFinishedRecipe;
+import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvents;
@@ -16,6 +19,7 @@ public class CuttingRecipes {
 		// Knife
 		chopMeats(consumer);
 		chopPlants(consumer);
+		chopPastries(consumer);
 
 		// Pickaxe
 		salvageBricks(consumer);
@@ -51,6 +55,17 @@ public class CuttingRecipes {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.MELON), Ingredient.fromTag(ForgeTags.KNIVES), Items.MELON_SLICE, 9)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.PUMPKIN), Ingredient.fromTag(ForgeTags.KNIVES), ModItems.PUMPKIN_SLICE.get(), 4)
+				.build(consumer);
+	}
+
+	private static void chopPastries(Consumer<IFinishedRecipe> consumer) {
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CAKE), Ingredient.fromTag(ForgeTags.KNIVES), ModItems.CAKE_SLICE.get(), 7)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(ModItems.APPLE_PIE.get()), Ingredient.fromTag(ForgeTags.KNIVES), ModItems.APPLE_PIE_SLICE.get(), 4)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(ModItems.SWEET_BERRY_CHEESECAKE.get()), Ingredient.fromTag(ForgeTags.KNIVES), ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get(), 4)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(ModItems.CHOCOLATE_PIE.get()), Ingredient.fromTag(ForgeTags.KNIVES), ModItems.CHOCOLATE_PIE_SLICE.get(), 4)
 				.build(consumer);
 	}
 

@@ -9,6 +9,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
+import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 
 import javax.annotation.Nullable;
@@ -58,7 +59,7 @@ public class CuttingBoardRecipeBuilder {
 
 	public void build(Consumer<IFinishedRecipe> consumerIn) {
 		ResourceLocation location = Registry.ITEM.getKey(this.ingredient.getMatchingStacks()[0].getItem());
-		this.build(consumerIn, location.getNamespace() + ":cutting/cutting_" + location.getPath());
+		this.build(consumerIn, FarmersDelight.MODID + ":cutting/cutting_" + location.getPath());
 	}
 
 	public void build(Consumer<IFinishedRecipe> consumerIn, String save) {
