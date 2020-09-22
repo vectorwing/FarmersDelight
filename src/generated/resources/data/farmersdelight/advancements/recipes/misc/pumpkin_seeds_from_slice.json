@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "farmersdelight:cabbage_seeds"
+      "farmersdelight:pumpkin_seeds_from_slice"
     ]
   },
   "criteria": {
-    "cabbage": {
+    "has_pumpkin_slice": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:cabbage"
+            "item": "farmersdelight:pumpkin_slice"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "farmersdelight:cabbage_seeds"
+        "recipe": "farmersdelight:pumpkin_seeds_from_slice"
       }
     }
   },
   "requirements": [
     [
-      "cabbage",
+      "has_pumpkin_slice",
       "has_the_recipe"
     ]
   ]

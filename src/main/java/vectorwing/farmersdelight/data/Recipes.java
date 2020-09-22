@@ -45,6 +45,10 @@ public class Recipes extends RecipeProvider
 	 * If not, they fall on the minecraft namespace, overriding vanilla recipes instead of being alternatives.
 	 */
 	private void recipesVanillaAlternatives(Consumer<IFinishedRecipe> consumer) {
+		ShapelessRecipeBuilder.shapelessRecipe(Items.PUMPKIN_SEEDS)
+				.addIngredient(ModItems.PUMPKIN_SLICE.get())
+				.addCriterion("has_pumpkin_slice", InventoryChangeTrigger.Instance.forItems(ModItems.PUMPKIN_SLICE.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "pumpkin_seeds_from_slice"));
 		ShapedRecipeBuilder.shapedRecipe(Items.SCAFFOLDING, 6)
 				.patternLine("b#b")
 				.patternLine("b b")
@@ -320,20 +324,16 @@ public class Recipes extends RecipeProvider
 	}
 
 	private void recipesFoodstuffs(Consumer<IFinishedRecipe> consumer) {
-		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CABBAGE_SEEDS.get())
-				.addIngredient(ModItems.CABBAGE.get())
-				.addCriterion("cabbage", InventoryChangeTrigger.Instance.forItems(ModItems.CABBAGE.get()))
-				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.TOMATO_SEEDS.get())
 				.addIngredient(ModItems.TOMATO.get())
-				.addCriterion("tomato", InventoryChangeTrigger.Instance.forItems(ModItems.TOMATO.get()))
+				.addCriterion("has_tomato", InventoryChangeTrigger.Instance.forItems(ModItems.TOMATO.get()))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.MILK_BOTTLE.get(), 3)
 				.addIngredient(Items.MILK_BUCKET)
 				.addIngredient(Items.GLASS_BOTTLE)
 				.addIngredient(Items.GLASS_BOTTLE)
 				.addIngredient(Items.GLASS_BOTTLE)
-				.addCriterion("milk_bucket", InventoryChangeTrigger.Instance.forItems(Items.MILK_BUCKET))
+				.addCriterion("has_milk_bucket", InventoryChangeTrigger.Instance.forItems(Items.MILK_BUCKET))
 				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ModItems.RAW_PASTA.get())
 				.patternLine("w")
@@ -341,7 +341,7 @@ public class Recipes extends RecipeProvider
 				.patternLine("w")
 				.key('w', Items.WHEAT)
 				.key('e', Items.EGG)
-				.addCriterion("egg", InventoryChangeTrigger.Instance.forItems(Items.EGG))
+				.addCriterion("has_egg", InventoryChangeTrigger.Instance.forItems(Items.EGG))
 				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ModItems.PIE_CRUST.get(), 1)
 				.patternLine("wMw")
