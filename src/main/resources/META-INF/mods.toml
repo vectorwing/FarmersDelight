@@ -11,6 +11,7 @@ displayName="Farmer's Delight"
 # updateJSONURL=""
 displayURL="https://github.com/vectorwing/FarmersDelight"
 logoFile="logo.png"
+logoBlur=false
 credits="Chloe Dawn, simibubi, Silk, SkySom and many other wonderful people!"
 authors="vectorwing, Grimmauld"
 description="A lightweight farming expansion. Harvest, cook and explore!"
