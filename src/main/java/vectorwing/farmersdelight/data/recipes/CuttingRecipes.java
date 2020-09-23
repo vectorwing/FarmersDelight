@@ -155,9 +155,9 @@ public class CuttingRecipes {
 		// Book
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.LEATHER_HELMET), Ingredient.fromTag(ForgeTags.SHEARS), Items.LEATHER, 1)
 				.build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.LEATHER_CHESTPLATE), Ingredient.fromTag(ForgeTags.SHEARS), Items.LEATHER, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.LEATHER_CHESTPLATE), Ingredient.fromTag(ForgeTags.SHEARS), Items.LEATHER, 1)
 				.build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.LEATHER_LEGGINGS), Ingredient.fromTag(ForgeTags.SHEARS), Items.LEATHER, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.LEATHER_LEGGINGS), Ingredient.fromTag(ForgeTags.SHEARS), Items.LEATHER, 1)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.LEATHER_BOOTS), Ingredient.fromTag(ForgeTags.SHEARS), Items.LEATHER, 1)
 				.build(consumer);

@@ -59,7 +59,7 @@ public class CuttingBoardRecipeBuilder {
 
 	public void build(Consumer<IFinishedRecipe> consumerIn) {
 		ResourceLocation location = Registry.ITEM.getKey(this.ingredient.getMatchingStacks()[0].getItem());
-		this.build(consumerIn, FarmersDelight.MODID + ":cutting/cutting_" + location.getPath());
+		this.build(consumerIn, FarmersDelight.MODID + ":cutting/" + location.getPath());
 	}
 
 	public void build(Consumer<IFinishedRecipe> consumerIn, String save) {

@@ -2,7 +2,7 @@
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "item": "minecraft:leather_leggings"
+      "item": "minecraft:leather_chestplate"
     }
   ],
   "tool": {
@@ -10,8 +10,7 @@
   },
   "result": [
     {
-      "item": "minecraft:leather",
-      "count": 2
+      "item": "minecraft:leather"
     }
   ]
 }
