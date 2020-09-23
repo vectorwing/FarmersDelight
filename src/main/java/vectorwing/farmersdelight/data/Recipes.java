@@ -28,7 +28,6 @@ public class Recipes extends RecipeProvider
 	@Override
 	protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
 		recipesVanillaAlternatives(consumer);
-		//recipesSmelting(consumer);
 		recipesBlocks(consumer);
 		recipesTools(consumer);
 		recipesMaterials(consumer);
@@ -335,12 +334,10 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.GLASS_BOTTLE)
 				.addCriterion("has_milk_bucket", InventoryChangeTrigger.Instance.forItems(Items.MILK_BUCKET))
 				.build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(ModItems.RAW_PASTA.get())
-				.patternLine("w")
-				.patternLine("e")
-				.patternLine("w")
-				.key('w', Items.WHEAT)
-				.key('e', Items.EGG)
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RAW_PASTA.get())
+				.addIngredient(Items.EGG)
+				.addIngredient(Items.WHEAT)
+				.addIngredient(Items.WHEAT)
 				.addCriterion("has_egg", InventoryChangeTrigger.Instance.forItems(Items.EGG))
 				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ModItems.PIE_CRUST.get(), 1)
@@ -348,19 +345,19 @@ public class Recipes extends RecipeProvider
 				.patternLine(" w ")
 				.key('w', Items.WHEAT)
 				.key('M', ForgeTags.MILK)
-				.addCriterion("wheat", InventoryChangeTrigger.Instance.forItems(Items.WHEAT))
+				.addCriterion("has_wheat", InventoryChangeTrigger.Instance.forItems(Items.WHEAT))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.SWEET_BERRY_COOKIE.get(), 8)
-				.addIngredient(Items.WHEAT)
 				.addIngredient(Items.SWEET_BERRIES)
 				.addIngredient(Items.WHEAT)
-				.addCriterion("sweet_berries", InventoryChangeTrigger.Instance.forItems(Items.SWEET_BERRIES))
+				.addIngredient(Items.WHEAT)
+				.addCriterion("has_sweet_berries", InventoryChangeTrigger.Instance.forItems(Items.SWEET_BERRIES))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.HONEY_COOKIE.get(), 8)
-				.addIngredient(Items.WHEAT)
 				.addIngredient(Items.HONEY_BOTTLE)
 				.addIngredient(Items.WHEAT)
-				.addCriterion("honey_bottle", InventoryChangeTrigger.Instance.forItems(Items.HONEY_BOTTLE))
+				.addIngredient(Items.WHEAT)
+				.addCriterion("has_honey_bottle", InventoryChangeTrigger.Instance.forItems(Items.HONEY_BOTTLE))
 				.build(consumer);
 	}
 

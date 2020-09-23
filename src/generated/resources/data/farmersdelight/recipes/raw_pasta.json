@@ -1,18 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "w",
-    "e",
-    "w"
-  ],
-  "key": {
-    "w": {
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:egg"
+    },
+    {
       "item": "minecraft:wheat"
     },
-    "e": {
-      "item": "minecraft:egg"
+    {
+      "item": "minecraft:wheat"
     }
-  },
+  ],
   "result": {
     "item": "farmersdelight:raw_pasta"
   }

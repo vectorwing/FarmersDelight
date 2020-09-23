@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "wheat": {
+    "has_wheat": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "wheat",
+      "has_wheat",
       "has_the_recipe"
     ]
   ]
