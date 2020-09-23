@@ -1,10 +1,10 @@
 {
-  "type": "farmersdelight:straw_from_knife",
+  "type": "farmersdelight:straw_harvesting",
   "conditions": [
     {
       "condition": "minecraft:match_tool",
       "predicate": {
-        "tag": "farmersdelight:tools/knife"
+        "tag": "farmersdelight:straw_harvesters"
       }
     },
     {

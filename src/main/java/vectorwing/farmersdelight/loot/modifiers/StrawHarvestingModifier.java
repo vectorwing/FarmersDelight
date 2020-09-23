@@ -12,15 +12,15 @@ import vectorwing.farmersdelight.registry.ModItems;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class KnifeStrawDrops
+public class StrawHarvestingModifier
 {
-	public static class KnifeStrawSerializer extends GlobalLootModifierSerializer<KnifeStrawDrops.KnifeStrawModifier>
+	public static class KnifeStrawSerializer extends GlobalLootModifierSerializer<StrawHarvestingModifier.KnifeStrawModifier>
 	{
 
 		@Override
-		public KnifeStrawDrops.KnifeStrawModifier read(ResourceLocation location, JsonObject object, ILootCondition[] ailootcondition)
+		public StrawHarvestingModifier.KnifeStrawModifier read(ResourceLocation location, JsonObject object, ILootCondition[] ailootcondition)
 		{
-			return new KnifeStrawDrops.KnifeStrawModifier(ailootcondition);
+			return new StrawHarvestingModifier.KnifeStrawModifier(ailootcondition);
 		}
 	}
 
