@@ -10,7 +10,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 
 /**
  * References to tags under the Farmer's Delight namespace.
- * These tags are used for mod mechanics, which aren't always useful outside of it.
+ * These tags are used for mod mechanics.
  */
 public class ModTags
 {
