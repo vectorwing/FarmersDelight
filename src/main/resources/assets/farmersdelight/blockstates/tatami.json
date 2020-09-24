@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=down":  { "model": "farmersdelight:block/tatami_even" },
+    "facing=up":    { "model": "farmersdelight:block/tatami_odd", "x": 180},
+    "facing=north": { "model": "farmersdelight:block/tatami_even", "x": 90, "y": 180 },
+    "facing=south": { "model": "farmersdelight:block/tatami_odd", "x": 90 },
+    "facing=west":  { "model": "farmersdelight:block/tatami_even", "x": 90, "y": 90 },
+    "facing=east":  { "model": "farmersdelight:block/tatami_odd", "x": 90, "y": 270 }
+  }
+}
