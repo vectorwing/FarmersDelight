@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:tatami_block_from_full"
+    ]
+  },
+  "criteria": {
+    "has_canvas": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:canvas"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:tatami_block_from_full"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_canvas",
+      "has_the_recipe"
+    ]
+  ]
+}
