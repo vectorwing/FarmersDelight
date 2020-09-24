@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "honey_bottle": {
+    "has_honey_bottle": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "honey_bottle",
+      "has_honey_bottle",
       "has_the_recipe"
     ]
   ]

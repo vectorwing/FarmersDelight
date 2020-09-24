@@ -8,6 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
+import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 
 public class CabbagesBlock extends CropsBlock
@@ -23,9 +24,13 @@ public class CabbagesBlock extends CropsBlock
 			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D)};
 
 
-	public CabbagesBlock(Properties properties)
-	{
+	public CabbagesBlock(Properties properties) {
 		super(properties);
+	}
+
+	@Override
+	public BlockState getPlant(IBlockReader world, BlockPos pos) {
+		return ModBlocks.CABBAGE_CROP.get().getDefaultState();
 	}
 
 	@Override

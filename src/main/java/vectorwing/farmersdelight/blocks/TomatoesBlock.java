@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.blocks;
 
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BushBlock;
 import net.minecraft.block.IGrowable;
 import net.minecraft.entity.Entity;
@@ -25,8 +26,12 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+@SuppressWarnings("deprecation")
 public class TomatoesBlock extends BushBlock implements IGrowable
 {
 	private static final int TOMATO_BEARING_AGE = 7;
@@ -44,23 +49,32 @@ public class TomatoesBlock extends BushBlock implements IGrowable
 	public TomatoesBlock(Properties properties)
 	{
 		super(properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(this.getAgeProperty(), 0));
+		this.setDefaultState(this.stateContainer.getBaseState().with(AGE, 0));
 	}
 
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		int i = state.get(AGE);
-		boolean flag = i == TOMATO_BEARING_AGE;
-		if (!flag && player.getHeldItem(handIn).getItem() == Items.BONE_MEAL) {
-			return ActionResultType.PASS;
-		} else if (flag) {
-			int j = 1 + worldIn.rand.nextInt(2);
-			spawnAsEntity(worldIn, pos, new ItemStack(ModItems.TOMATO.get(), j));
-			worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
-			worldIn.setBlockState(pos, state.with(AGE, TOMATO_BEARING_AGE - 2), 2);
-			return ActionResultType.SUCCESS;
-		} else {
-			return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
-		}
+	public int getMaxAge() { return 7; }
+
+	protected int getAge(BlockState state) { return state.get(AGE); }
+
+	public BlockState withAge(int age) {
+		return this.getDefaultState().with(AGE, age);
+	}
+
+	public boolean isMaxAge(BlockState state) {
+		return state.get(AGE) >= this.getMaxAge();
+	}
+
+	protected int getBonemealAgeIncrease(World worldIn) {
+		return MathHelper.nextInt(worldIn.rand, 2, 5);
+	}
+
+	@Override
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+		return SHAPE_BY_AGE[state.get(AGE)];
+	}
+
+	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
+		return new ItemStack(ModItems.TOMATO_SEEDS.get());
 	}
 
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
@@ -76,52 +90,6 @@ public class TomatoesBlock extends BushBlock implements IGrowable
 				}
 			}
 		}
-
-	}
-
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		return (worldIn.getLightSubtracted(pos, 0) >= 8 || worldIn.canSeeSky(pos)) && super.isValidPosition(state, worldIn, pos);
-	}
-
-	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
-		if (entityIn instanceof RavagerEntity && net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(worldIn, entityIn)) {
-			worldIn.destroyBlock(pos, true, entityIn);
-		}
-
-		super.onEntityCollision(state, worldIn, pos, entityIn);
-	}
-
-	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
-		return new ItemStack(ModItems.TOMATO_SEEDS.get());
-	}
-
-	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return SHAPE_BY_AGE[state.get(this.getAgeProperty())];
-	}
-
-	public IntegerProperty getAgeProperty() {
-		return AGE;
-	}
-
-	public int getMaxAge() {
-		return 7;
-	}
-
-	protected int getAge(BlockState state) {
-		return state.get(this.getAgeProperty());
-	}
-
-	public BlockState withAge(int age) {
-		return this.getDefaultState().with(this.getAgeProperty(), Integer.valueOf(age));
-	}
-
-	public boolean isMaxAge(BlockState state) {
-		return state.get(this.getAgeProperty()) >= this.getMaxAge();
-	}
-
-	protected int getBonemealAgeIncrease(World worldIn) {
-		return MathHelper.nextInt(worldIn.rand, 2, 5);
 	}
 
 	@Override
@@ -143,6 +111,34 @@ public class TomatoesBlock extends BushBlock implements IGrowable
 		}
 
 		worldIn.setBlockState(pos, this.withAge(i), 2);
+	}
+
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		int i = state.get(AGE);
+		boolean flag = i == TOMATO_BEARING_AGE;
+		if (!flag && player.getHeldItem(handIn).getItem() == Items.BONE_MEAL) {
+			return ActionResultType.PASS;
+		} else if (flag) {
+			int j = 1 + worldIn.rand.nextInt(2);
+			spawnAsEntity(worldIn, pos, new ItemStack(ModItems.TOMATO.get(), j));
+			worldIn.playSound(null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
+			worldIn.setBlockState(pos, state.with(AGE, TOMATO_BEARING_AGE - 2), 2);
+			return ActionResultType.SUCCESS;
+		} else {
+			return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+		}
+	}
+
+	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		return (worldIn.getLightSubtracted(pos, 0) >= 8 || worldIn.canSeeSky(pos)) && super.isValidPosition(state, worldIn, pos);
+	}
+
+	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
+		if (entityIn instanceof RavagerEntity && net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(worldIn, entityIn)) {
+			worldIn.destroyBlock(pos, true, entityIn);
+		}
+
+		super.onEntityCollision(state, worldIn, pos, entityIn);
 	}
 
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {

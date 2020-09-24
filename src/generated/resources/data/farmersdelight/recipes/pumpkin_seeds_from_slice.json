@@ -2,10 +2,10 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "farmersdelight:cabbage"
+      "item": "farmersdelight:pumpkin_slice"
     }
   ],
   "result": {
-    "item": "farmersdelight:cabbage_seeds"
+    "item": "minecraft:pumpkin_seeds"
   }
 }

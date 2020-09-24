@@ -47,18 +47,14 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class CookingPotBlock extends Block implements IWaterLoggable
-{
+public class CookingPotBlock extends Block implements IWaterLoggable {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D);
-	protected static final VoxelShape SHAPE_SUPPORTED = VoxelShapes.or(
-			SHAPE,
-			Block.makeCuboidShape(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
+	protected static final VoxelShape SHAPE_SUPPORTED = VoxelShapes.or(SHAPE, Block.makeCuboidShape(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty SUPPORTED = BlockStateProperties.DOWN;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-	public CookingPotBlock()
-	{
+	public CookingPotBlock() {
 		super(Properties.create(Material.IRON)
 				.hardnessAndResistance(2.0F, 6.0F)
 				.sound(SoundType.METAL));

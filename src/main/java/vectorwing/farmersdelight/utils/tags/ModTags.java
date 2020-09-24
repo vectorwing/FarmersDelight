@@ -10,7 +10,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 
 /**
  * References to tags under the Farmer's Delight namespace.
- * These tags are used for mod mechanics, which aren't always useful outside of it.
+ * These tags are used for mod mechanics.
  */
 public class ModTags
 {
@@ -23,7 +23,10 @@ public class ModTags
 	// Blocks that accelerate decomposition of Organic Compost if placed adjacent to it.
 	public static final Tag<Block> COMPOST_ACTIVATORS = modBlockTag("compost_activators");
 
-	// Foods that drop from mobs that wolves prey upon (currently, just sheep and chicken).
+	// Items (ideally tools) that can obtain straw when harvesting grassy plants. Populated by all knives by default.
+	public static final Tag<Item> STRAW_HARVESTERS = modItemTag("straw_harvesters");
+
+	// Foods that drop from mobs that wolves prey upon (sheep, rabbit and chicken).
 	public static final Tag<Item> WOLF_PREY = modItemTag("wolf_prey");
 
 	// Knife items for game logic.

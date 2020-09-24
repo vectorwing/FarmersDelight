@@ -19,12 +19,10 @@ import vectorwing.farmersdelight.utils.MathUtils;
 import javax.annotation.Nonnull;
 import java.util.Set;
 
-public class KnifeItem extends ToolItem
-{
+public class KnifeItem extends ToolItem {
 	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.HAY_BLOCK, ModBlocks.RICE_BALE.get());
 
-	public KnifeItem(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties builder)
-	{
+	public KnifeItem(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties builder)	{
 		super(attackDamageIn, attackSpeedIn, tier, EFFECTIVE_ON, builder);
 	}
 
@@ -61,33 +59,5 @@ public class KnifeItem extends ToolItem
 			return false;
 		}
 		return enchantment.type.canEnchantItem(stack.getItem());
-	}
-
-	@Nonnull
-	@Override
-	public ItemStack getContainerItem(@Nonnull ItemStack stack)
-	{
-		ItemStack container = stack.copy();
-		if(container.attemptDamageItem(1, MathUtils.RAND, null))
-			return ItemStack.EMPTY;
-		else
-			return container;
-	}
-
-	@Override
-	public boolean hasContainerItem(@Nonnull ItemStack stack)
-	{
-		return true;
-	}
-
-	@Override
-	public boolean isRepairable(@Nonnull ItemStack stack)
-	{
-		return false;
-	}
-
-	public boolean isCustomRepairable(@Nonnull ItemStack stack)
-	{
-		return super.isRepairable(stack);
 	}
 }
