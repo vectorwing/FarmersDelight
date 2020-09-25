@@ -35,6 +35,7 @@ import vectorwing.farmersdelight.registry.ModEffects;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.tile.dispenser.CuttingBoardDispenseBehavior;
 import vectorwing.farmersdelight.world.CropPatchGeneration;
+import vectorwing.farmersdelight.world.VillageStructures;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
@@ -59,6 +60,7 @@ public class CommonEventHandler
 		registerCompostables();
 
 		ModAdvancements.register();
+		VillageStructures.init();
 
 		LootFunctionManager.registerFunction(new CopyMealFunction.Serializer());
 
