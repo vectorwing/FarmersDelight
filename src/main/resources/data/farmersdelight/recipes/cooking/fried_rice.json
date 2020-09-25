@@ -2,6 +2,9 @@
   "type": "farmersdelight:cooking",
   "ingredients": [
     {
+      "tag": "forge:crops/rice"
+    },
+    {
       "item": "minecraft:egg"
     },
     {
@@ -9,9 +12,6 @@
     },
     {
       "tag": "forge:crops/onion"
-    },
-    {
-      "tag": "forge:crops/rice"
     }
   ],
   "result": {

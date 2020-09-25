@@ -16,7 +16,8 @@ public class Configuration
 
 	public static ForgeConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS;
 
-	public static ForgeConfigSpec.BooleanValue VANILLA_SOUP_EFFECTS;
+	public static ForgeConfigSpec.BooleanValue COMFORT_FOOD_TAG_EFFECT;
+	public static ForgeConfigSpec.BooleanValue RABBIT_STEW_JUMP_BOOST;
 	public static ForgeConfigSpec.BooleanValue DISPENSER_TOOLS_CUTTING_BOARD;
 
 	public static ForgeConfigSpec.BooleanValue CROPS_ON_SHIPWRECKS;
@@ -44,7 +45,8 @@ public class Configuration
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("Vanilla item overrides").push(CATEGORY_OVERRIDES);
-		VANILLA_SOUP_EFFECTS = COMMON_BUILDER.comment("Should Minecraft soups (e.g. Mushroom Stew) grant Comfort and other positive effects, to reflect this mod's soups?").define("vanillaSoupEffects", true);
+		COMFORT_FOOD_TAG_EFFECT = COMMON_BUILDER.comment("Should items inside the tag 'farmersdelight:comfort_foods' grant 5 minutes of Comfort when eaten? (defaults to vanilla SoupItems)").define("comfortFoodTagEffect", true);
+		RABBIT_STEW_JUMP_BOOST = COMMON_BUILDER.comment("Should Rabbit Stew grant users the jumping prowess of a rabbit when eaten?").define("rabbitStewJumpBoost", true);
 		DISPENSER_TOOLS_CUTTING_BOARD = COMMON_BUILDER.comment("Should most vanilla tools register a dispenser behavior when facing a Cutting Board?").define("dispenserUsesToolsOnCuttingBoard", true);
 		COMMON_BUILDER.pop();
 
