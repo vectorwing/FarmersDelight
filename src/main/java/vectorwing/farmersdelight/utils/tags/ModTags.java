@@ -30,7 +30,7 @@ public class ModTags
 	public static final Tag<Item> WOLF_PREY = modItemTag("wolf_prey");
 
 	// Knife items for game logic.
-	public static final Tag<Item> KNIVES = modItemTag("tools/knife");
+	public static final Tag<Item> KNIVES = modItemTag("tools/knives");
 
 	private static Tag<Item> modItemTag(String path) {
 		return new ItemTags.Wrapper(new ResourceLocation(FarmersDelight.MODID, path));
