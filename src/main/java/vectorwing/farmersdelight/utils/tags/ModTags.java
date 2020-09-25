@@ -17,7 +17,7 @@ public class ModTags
 	// Blocks that can heat up a Cooking Pot.
 	public static final Tag<Block> HEAT_SOURCES = modBlockTag("heat_sources");
 
-	// Blocks to which a Cooking Pot will render a tray over. Use HEAT_SOURCES for heat logic.
+	// Blocks to which a Cooking Pot will render a tray over. Included in HEAT_SOURCES.
 	public static final Tag<Block> TRAY_HEAT_SOURCES = modBlockTag("tray_heat_sources");
 
 	// Blocks that accelerate decomposition of Organic Compost if placed adjacent to it.
