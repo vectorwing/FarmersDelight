@@ -51,6 +51,12 @@ public class ModItems
 			() -> new RopeItem(ModBlocks.ROPE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> SAFETY_NET = ITEMS.register("safety_net",
 			() -> new FuelBlockItem(ModBlocks.SAFETY_NET.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP), 200));
+	public static final RegistryObject<Item> TATAMI = ITEMS.register("tatami",
+			() -> new FuelBlockItem(ModBlocks.TATAMI.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP), 300));
+	public static final RegistryObject<Item> FULL_TATAMI_MAT = ITEMS.register("full_tatami_mat",
+			() -> new FuelBlockItem(ModBlocks.FULL_TATAMI_MAT.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP), 200));
+	public static final RegistryObject<Item> HALF_TATAMI_MAT = ITEMS.register("half_tatami_mat",
+			() -> new FuelBlockItem(ModBlocks.HALF_TATAMI_MAT.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP), 100));
 
 	// Tools
 	public static final RegistryObject<Item> FLINT_KNIFE = ITEMS.register("flint_knife",

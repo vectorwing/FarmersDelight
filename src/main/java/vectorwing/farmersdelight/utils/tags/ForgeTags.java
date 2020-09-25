@@ -25,10 +25,10 @@ public class ForgeTags
 	public static final Tag<Item> CROPS_ONION = forgeItemTag("crops/onion");
 	public static final Tag<Item> CROPS_RICE = forgeItemTag("crops/rice");
 
-	public static final Tag<Item> PICKAXES = forgeItemTag("tools/pickaxe");
-	public static final Tag<Item> AXES = forgeItemTag("tools/axe");
+	public static final Tag<Item> PICKAXES = forgeItemTag("tools/pickaxes");
+	public static final Tag<Item> AXES = forgeItemTag("tools/axes");
 	public static final Tag<Item> SHEARS = forgeItemTag("tools/shears");
-	public static final Tag<Item> KNIVES = forgeItemTag("tools/knife");
+	public static final Tag<Item> KNIVES = forgeItemTag("tools/knives");
 
 	private static Tag<Item> forgeItemTag(String path) {
 		return new ItemTags.Wrapper(new ResourceLocation("forge", path));

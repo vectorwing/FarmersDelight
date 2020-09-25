@@ -260,6 +260,35 @@ public class Recipes extends RecipeProvider
 				.addCriterion("tree_bark", InventoryChangeTrigger.Instance.forItems(ModItems.TREE_BARK.get()))
 				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
 				.build(consumer, "organic_compost_from_tree_bark");
+		ShapedRecipeBuilder.shapedRecipe(ModItems.TATAMI.get(), 2)
+				.patternLine("cs")
+				.patternLine("sc")
+				.key('c', ModItems.CANVAS.get())
+				.key('s', ModItems.STRAW.get())
+				.addCriterion("has_canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
+				.build(consumer);
+
+		// BREAKING DOWN
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.FULL_TATAMI_MAT.get(), 2)
+				.addIngredient(ModItems.TATAMI.get())
+				.addCriterion("has_canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.HALF_TATAMI_MAT.get(), 2)
+				.addIngredient(ModItems.FULL_TATAMI_MAT.get())
+				.addCriterion("has_canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
+				.build(consumer);
+
+		// COMBINING BACK
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.FULL_TATAMI_MAT.get(), 1)
+				.addIngredient(ModItems.HALF_TATAMI_MAT.get())
+				.addIngredient(ModItems.HALF_TATAMI_MAT.get())
+				.addCriterion("has_canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "full_tatami_mat_from_halves"));
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.TATAMI.get(), 1)
+				.addIngredient(ModItems.FULL_TATAMI_MAT.get())
+				.addIngredient(ModItems.FULL_TATAMI_MAT.get())
+				.addCriterion("has_canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "tatami_block_from_full"));
 	}
 
 	private void recipesTools(Consumer<IFinishedRecipe> consumer) {

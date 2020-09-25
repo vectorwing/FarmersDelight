@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "farmersdelight:half_tatami_mat"
+    },
+    {
+      "item": "farmersdelight:half_tatami_mat"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:full_tatami_mat"
+  }
+}

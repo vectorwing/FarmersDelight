@@ -1,0 +1,26 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"particle": "farmersdelight:blocks/tatami_mat_even",
+		"even": "farmersdelight:blocks/tatami_mat_even",
+		"odd": "farmersdelight:blocks/tatami_mat_odd",
+		"half": "farmersdelight:blocks/tatami_mat_half",
+		"side": "farmersdelight:blocks/tatami_mat_side"
+	},
+	"elements": [
+		{
+			"name": "tatami_mat_foot",
+			"from": [0, 0, 0],
+			"to": [16, 2, 16],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8, 1, 8]},
+			"faces": {
+				"north": {"uv": [0, 14, 16, 16], "rotation": 180, "texture": "#side"},
+				"east": {"uv": [0, 14, 16, 16], "rotation": 180, "texture": "#side"},
+				"south": {"uv": [0, 12, 16, 14], "rotation": 180, "texture": "#half"},
+				"west": {"uv": [0, 14, 16, 16], "rotation": 180, "texture": "#side"},
+				"up": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#odd"},
+				"down": {"uv": [0, 0, 16, 16], "rotation": 270, "texture": "#even"}
+			}
+		}
+	]
+}
