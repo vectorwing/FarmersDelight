@@ -21,6 +21,7 @@ public class Configuration
 
 	public static ForgeConfigSpec.BooleanValue CROPS_ON_SHIPWRECKS;
 	public static ForgeConfigSpec.BooleanValue CROPS_ON_VILLAGE_HOUSES;
+	public static ForgeConfigSpec.BooleanValue GENERATE_VILLAGE_COMPOST_HEAPS;
 	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_CABBAGES;
 	public static ForgeConfigSpec.IntValue FREQUENCY_WILD_CABBAGES;
 	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_BEETROOTS;
@@ -50,6 +51,7 @@ public class Configuration
 		COMMON_BUILDER.comment("World generation").push(CATEGORY_WORLD);
 		CROPS_ON_SHIPWRECKS = COMMON_BUILDER.comment("Generate crop items on a Shipwreck's supply chests").define("cropsOnShipwreckSupplyLoot", true);
 		CROPS_ON_VILLAGE_HOUSES = COMMON_BUILDER.comment("Generate crop items on Village houses (all biomes)").define("cropsOnVillageHouseLoot", true);
+		GENERATE_VILLAGE_COMPOST_HEAPS = COMMON_BUILDER.comment("Generate Compost Heaps across all village biomes").define("genVillageCompostHeaps", true);
 
 		COMMON_BUILDER.comment("Wild Cabbage generation").push("wild_cabbages");
 		GENERATE_WILD_CABBAGES = COMMON_BUILDER.comment("Generate wild cabbages on beaches").define("genWildCabbages", true);

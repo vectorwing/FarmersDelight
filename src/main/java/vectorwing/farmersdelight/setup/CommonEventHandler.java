@@ -60,7 +60,10 @@ public class CommonEventHandler
 		registerCompostables();
 
 		ModAdvancements.register();
-		VillageStructures.init();
+
+		if (Configuration.GENERATE_VILLAGE_COMPOST_HEAPS.get()) {
+			VillageStructures.init();
+		}
 
 		LootFunctionManager.registerFunction(new CopyMealFunction.Serializer());
 
