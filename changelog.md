@@ -1,19 +1,60 @@
 # Changelog
 
+## 0.2.3
+1.15.2+
+- Adds Compost Heaps to village generation
+  - These structures house heaps of Organic Compost, which farmers lay down to decompose into Rich Soil. Each biome has a composting strategy!
+  - Some of them have small farms mixed in, or examples of other mechanics;
+  - They often have a few blocks of Rich Soil ready for taking!
+- Adds 3 new meals: Cooked Rice, Grilled Salmon and Baked Cod Pot;
+- Adds Tatami, a traditional flooring based on straw and canvas:
+  - Tatami Blocks place as a "half-mat" by default. Placing another tatami against them will complete a "full-mat" pair! You can sneak-place to suppress pairing;
+  - Tatami Mats are carpet-thin, come in Full and Half, and can be interchanged to and fro via crafting. They have a simpler placement and behave like carpets.
+  - Thanks to Vazkii for sharing some placement code with me! A similar block to Tatami should soon be in Quark as well!
+- Rename my "unofficial" Forge tool tags to be fully plural;
+- Improves configs and integration options for modpack makers
+- Prettifies the mod's meta files, and the info on the Mods page of Minecraft
+- Makes Wild Patches non-replaceable like Tall Grass, closes issue #70
+- Fixes containers vanishing if used to right-click an empty pot, closes issue #71
+- Removes knives from being a crafting ingredient, delegating it to the Cutting Board if needed
+  - Fixes Grindstone repairing for knives, and some duplication cases with other mods
+- More extensions to IE and MCAbnormals integration;
+- Straw harvesting now checks "farmersdelight:straw_harvesters" for items that can harvest straw from grassy plants.
+
+## 0.2.2
+1.16.1+
+- Added Crimson and Warped Pantries;
+- Added Netherite tools to tags, so they can be used on cutting boards.
+1.15.2+
+- Fix server crash when crafting any recipes using knives;
+- Fix server crash when trying to load knife enchantments;
+- (Grimmauld) Fix shears' default dispenser behaviour being overriden, and enhances behaviour compatibilities overall;
+- Cooking Pot can now throw containers high enough to enter a hopper to its side;
+- Add more compostables;
+- Add several new salvaging recipes using the Cutting Board;
+- Cabbage can now be portioned into 2 Cabbage Leaves for efficiency;
+- Fixes Rich Soil Farmland decaying into normal Dirt if not hydrated;
+- Adds up license definition in mods.toml;
+- Mod Integrations, Volume 1:
+    - Botany Pots: crops and soils;
+    - Immersive Engineering: Garden Cloche integration;
+    - MCAbnormals: meals for the Cooking Pot;
+    - Create: milling and mixing for some items.
+
 ## 0.2.1
-(1.16.1+)
-- Netherite Knife added to knife tags
-- Added Soul Fire to tray_heat_sources
-(1.15.2+)
-- Add the ability to smelt metal Knives for nuggets
-- Fix Wild Crops occasionally spawning themselves as items spontaneously
-- Fix drinking animation for Milk Bottle and Hot Cocoa on third person
+1.16.1+
+- Netherite Knife added to knife tags;
+- Added Soul Fire to tray_heat_sources.
+1.15.2+
+- Add the ability to smelt metal Knives for nuggets;
+- Fix Wild Crops occasionally spawning themselves as items spontaneously;
+- Fix drinking animation for Milk Bottle and Hot Cocoa on third person.
 
 ## 0.2.0 - Please Read!
-(1.16.1+)
-- Added Netherite Knife
-- Added Nether Salad
-(1.15.2+)
+1.16.1+
+- Added Netherite Knife;
+- Added Nether Salad;
+1.15.2+
 - Mulch has been renamed and remapped to Rich Soil - a more sensible name for its function.
   - BACKUP YOUR WORLDS!! The mod will try to remap existing mulch, so you won't lose your progress.
   - Some errors from other mods on world load might interrupt the remapping. If anything wrong happens, address the errors and try again with a backup.
