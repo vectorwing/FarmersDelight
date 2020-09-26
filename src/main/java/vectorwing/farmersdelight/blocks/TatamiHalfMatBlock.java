@@ -13,7 +13,7 @@ public class TatamiHalfMatBlock extends Block {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
 
 	public TatamiHalfMatBlock() {
-		super(Properties.from(Blocks.WHITE_WOOL));
+		super(Properties.from(Blocks.WHITE_WOOL).hardnessAndResistance(0.3F));
 	}
 
 	@Override
