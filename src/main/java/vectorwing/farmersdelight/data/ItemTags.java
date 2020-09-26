@@ -65,7 +65,7 @@ public class ItemTags extends ItemTagsProvider {
 		getBuilder(ForgeTags.RAW_BEEF).add(Items.BEEF, ModItems.MINCED_BEEF.get());
 		getBuilder(ForgeTags.RAW_CHICKEN).add(Items.CHICKEN, ModItems.CHICKEN_CUTS.get());
 
-		getBuilder(ForgeTags.RAW_FISHES).add(ForgeTags.RAW_FISHES_COD, ForgeTags.RAW_FISHES_SALMON);
+		getBuilder(ForgeTags.RAW_FISHES).add(ForgeTags.RAW_FISHES_COD, ForgeTags.RAW_FISHES_SALMON, ForgeTags.RAW_FISHES_TROPICAL);
 		getBuilder(ForgeTags.RAW_FISHES_COD).add(Items.COD, ModItems.COD_SLICE.get());
 		getBuilder(ForgeTags.RAW_FISHES_SALMON).add(Items.SALMON, ModItems.SALMON_SLICE.get());
 		getBuilder(ForgeTags.RAW_FISHES_TROPICAL).add(Items.TROPICAL_FISH);
