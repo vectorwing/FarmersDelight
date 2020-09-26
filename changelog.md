@@ -3,7 +3,7 @@
 ## 0.2.3
 1.15.2+
 - Adds Compost Heaps to village generation
-  - These structures house heaps of Organic Compost, which farmers lay down to decompose into Rich Soil. Each biome has a composting strategy!
+  - These structures house heaps of Organic Compost, which farmers lay down to decompose into Rich Soil. Each biome has a different composting strategy based on their biome and climate!
   - Some of them have small farms mixed in, or examples of other mechanics;
   - They often have a few blocks of Rich Soil ready for taking!
 - Adds 3 new meals: Cooked Rice, Grilled Salmon and Baked Cod Pot;
