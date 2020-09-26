@@ -1,8 +1,6 @@
 package vectorwing.farmersdelight.blocks;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FarmlandBlock;
-import net.minecraft.block.IGrowable;
+import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.tags.FluidTags;
@@ -28,7 +26,7 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
 		if (!worldIn.isRemote) {
 			if (!state.isValidPosition(worldIn, pos)) {
-				turnToMulch(state, worldIn, pos);
+				turnToRichSoil(state, worldIn, pos);
 			} else {
 				int i = state.get(MOISTURE);
 				if (!hasWater(worldIn, pos) && !worldIn.isRainingAt(pos.up())) {
@@ -48,6 +46,12 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
 				}
 			}
 		}
+	}
+
+	@Override
+	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		BlockState blockstate = worldIn.getBlockState(pos.up());
+		return !blockstate.getMaterial().isSolid() || blockstate.getBlock() instanceof FenceGateBlock || blockstate.getBlock() instanceof MovingPistonBlock || blockstate.getBlock() instanceof StemGrownBlock;
 	}
 
 	public boolean isFertile(BlockState state, IBlockReader world, BlockPos pos) {
@@ -82,7 +86,7 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
 		// Mulch is immune to trampling
 	}
 
-	public static void turnToMulch(BlockState state, World worldIn, BlockPos pos) {
+	public static void turnToRichSoil(BlockState state, World worldIn, BlockPos pos) {
 		worldIn.setBlockState(pos, nudgeEntitiesWithNewState(state, ModBlocks.RICH_SOIL.get().getDefaultState(), worldIn, pos));
 	}
 }
