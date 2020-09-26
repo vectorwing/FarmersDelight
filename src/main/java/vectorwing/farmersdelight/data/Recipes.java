@@ -246,7 +246,7 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.BONE_MEAL)
 				.addCriterion("rotten_flesh", InventoryChangeTrigger.Instance.forItems(Items.ROTTEN_FLESH))
 				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
-				.build(consumer, "organic_compost_from_rotten_flesh");
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "organic_compost_from_rotten_flesh"));
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ORGANIC_COMPOST.get(), 1)
 				.addIngredient(Items.DIRT)
 				.addIngredient(ModItems.STRAW.get())
@@ -259,7 +259,7 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ModItems.TREE_BARK.get())
 				.addCriterion("tree_bark", InventoryChangeTrigger.Instance.forItems(ModItems.TREE_BARK.get()))
 				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
-				.build(consumer, "organic_compost_from_tree_bark");
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "organic_compost_from_tree_bark"));
 		ShapedRecipeBuilder.shapedRecipe(ModItems.TATAMI.get(), 2)
 				.patternLine("cs")
 				.patternLine("sc")
@@ -406,7 +406,7 @@ public class Recipes extends RecipeProvider
 				.patternLine("##")
 				.key('#', ModItems.APPLE_PIE_SLICE.get())
 				.addCriterion("apple_pie_slice", InventoryChangeTrigger.Instance.forItems(ModItems.APPLE_PIE_SLICE.get()))
-				.build(consumer, "apple_pie_from_slices");
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "apple_pie_from_slices"));
 		ShapedRecipeBuilder.shapedRecipe(ModItems.SWEET_BERRY_CHEESECAKE.get(), 1)
 				.patternLine("sss")
 				.patternLine("sss")
@@ -421,7 +421,7 @@ public class Recipes extends RecipeProvider
 				.patternLine("##")
 				.key('#', ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get())
 				.addCriterion("sweet_berry_cheesecake_slice", InventoryChangeTrigger.Instance.forItems(ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get()))
-				.build(consumer, "sweet_berry_cheesecake_from_slices");
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "sweet_berry_cheesecake_from_slices"));
 		ShapedRecipeBuilder.shapedRecipe(ModItems.CHOCOLATE_PIE.get(), 1)
 				.patternLine("ccc")
 				.patternLine("mmm")
@@ -437,7 +437,7 @@ public class Recipes extends RecipeProvider
 				.patternLine("##")
 				.key('#', ModItems.CHOCOLATE_PIE_SLICE.get())
 				.addCriterion("chocolate_pie_slice", InventoryChangeTrigger.Instance.forItems(ModItems.CHOCOLATE_PIE_SLICE.get()))
-				.build(consumer, "chocolate_pie_from_slices");
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "chocolate_pie_from_slices"));
 	}
 
 	private void recipesCraftedMeals(Consumer<IFinishedRecipe> consumer) {

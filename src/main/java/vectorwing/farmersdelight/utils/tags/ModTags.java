@@ -17,7 +17,7 @@ public class ModTags
 	// Blocks that can heat up a Cooking Pot.
 	public static final Tag<Block> HEAT_SOURCES = modBlockTag("heat_sources");
 
-	// Blocks to which a Cooking Pot will render a tray over. Use HEAT_SOURCES for heat logic.
+	// Blocks to which a Cooking Pot will render a tray over. Included in HEAT_SOURCES.
 	public static final Tag<Block> TRAY_HEAT_SOURCES = modBlockTag("tray_heat_sources");
 
 	// Blocks that accelerate decomposition of Organic Compost if placed adjacent to it.
@@ -25,6 +25,9 @@ public class ModTags
 
 	// Items (ideally tools) that can obtain straw when harvesting grassy plants. Populated by all knives by default.
 	public static final Tag<Item> STRAW_HARVESTERS = modItemTag("straw_harvesters");
+
+	// Foods that should grant 5 minutes of Comfort when eaten. Does not include the main soups/stews of Farmer's Delight.
+	public static final Tag<Item> COMFORT_FOODS = modItemTag("comfort_foods");
 
 	// Foods that drop from mobs that wolves prey upon (sheep, rabbit and chicken).
 	public static final Tag<Item> WOLF_PREY = modItemTag("wolf_prey");

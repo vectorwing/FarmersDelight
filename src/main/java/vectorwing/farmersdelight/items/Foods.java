@@ -76,6 +76,9 @@ public class Foods
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 12000, 0), 1.0F).build();
 
 	// Bowl Foods
+	public static final Food COOKED_RICE = (new Food.Builder())
+			.hunger(7).saturation(0.7f)
+			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), 1200, 0), 1.0F).build();
 	public static final Food BEEF_STEW = (new Food.Builder())
 			.hunger(10).saturation(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), 4800, 0), 1.0F).build();
@@ -94,6 +97,10 @@ public class Foods
 	public static final Food PUMPKIN_SOUP = (new Food.Builder())
 			.hunger(10).saturation(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), 4800, 0), 1.0F).build();
+	public static final Food BAKED_COD_STEW = (new Food.Builder())
+			.hunger(10).saturation(0.9f)
+			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), 4800, 0), 1.0F).build();
+
 	public static final Food STEAK_AND_POTATOES = (new Food.Builder())
 			.hunger(10).saturation(0.8f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 4800, 0), 1.0F).build();
@@ -118,5 +125,8 @@ public class Foods
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 4800, 0), 1.0F).build();
 	public static final Food SQUID_INK_PASTA = (new Food.Builder())
 			.hunger(14).saturation(0.9f)
+			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F).build();
+	public static final Food GRILLED_SALMON = (new Food.Builder())
+			.hunger(12).saturation(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F).build();
 }

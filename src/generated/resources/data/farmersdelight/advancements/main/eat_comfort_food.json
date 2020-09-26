@@ -1,0 +1,33 @@
+{
+  "parent": "farmersdelight:main/place_cooking_pot",
+  "display": {
+    "icon": {
+      "item": "farmersdelight:chicken_soup"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.eat_comfort_food"
+    },
+    "description": {
+      "translate": "farmersdelight.advancement.eat_comfort_food.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "comfort": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "farmersdelight:comfort": {}
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "comfort"
+    ]
+  ]
+}

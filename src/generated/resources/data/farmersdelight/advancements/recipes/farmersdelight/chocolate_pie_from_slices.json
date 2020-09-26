@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:chocolate_pie_from_slices"
+    ]
+  },
+  "criteria": {
+    "chocolate_pie_slice": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:chocolate_pie_slice"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:chocolate_pie_from_slices"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "chocolate_pie_slice",
+      "has_the_recipe"
+    ]
+  ]
+}

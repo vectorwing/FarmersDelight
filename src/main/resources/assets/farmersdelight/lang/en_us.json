@@ -86,6 +86,7 @@
   "item.farmersdelight.stuffed_potato": "Stuffed Potato",
   "item.farmersdelight.stuffed_pumpkin": "Stuffed Pumpkin",
 
+  "item.farmersdelight.cooked_rice": "Cooked Rice",
   "item.farmersdelight.mixed_salad": "Mixed Salad",
   "item.farmersdelight.beef_stew": "Beef Stew",
   "item.farmersdelight.chicken_soup": "Chicken Soup",
@@ -93,6 +94,7 @@
   "item.farmersdelight.fish_stew": "Fish Stew",
   "item.farmersdelight.fried_rice": "Fried Rice",
   "item.farmersdelight.pumpkin_soup": "Pumpkin Soup",
+  "item.farmersdelight.baked_cod_stew": "Baked Cod Stew",
 
   "item.farmersdelight.honey_glazed_ham": "Honey Glazed Ham",
   "item.farmersdelight.pasta_with_meatballs": "Pasta with Meatballs",
@@ -102,6 +104,7 @@
   "item.farmersdelight.shepherds_pie": "Shepherd's Pie",
   "item.farmersdelight.ratatouille": "Ratatouille",
   "item.farmersdelight.squid_ink_pasta": "Squid Ink Pasta",
+  "item.farmersdelight.grilled_salmon": "Grilled Salmon",
 
   "item.farmersdelight.dog_food": "Dog Food",
   "item.farmersdelight.horse_feed": "Horse Feed",
@@ -140,6 +143,10 @@
   "farmersdelight.advancement.craft_stove.desc": "Acquire a Stove",
   "farmersdelight.advancement.place_cooking_pot": "Dinner's Served!",
   "farmersdelight.advancement.place_cooking_pot.desc": "Put down a Cooking Pot and start preparing meals!",
+  "farmersdelight.advancement.eat_comfort_food": "Warm and Cozy",
+  "farmersdelight.advancement.eat_comfort_food.desc": "Soups and stews are great for warding off cold and sickness!",
+  "farmersdelight.advancement.eat_nourishing_food": "Well Served",
+  "farmersdelight.advancement.eat_nourishing_food.desc": "A hearty plate of food will keep you nourished for a long time!",
   "farmersdelight.advancement.use_cutting_board": "Watch Your Fingers",
   "farmersdelight.advancement.use_cutting_board.desc": "With a tool in hand, use a Cutting Board to split up some items",
   "farmersdelight.advancement.master_chef": "Master Chef",
