@@ -18,6 +18,10 @@ public class BlockTags extends BlockTagsProvider {
 
 	@Override
 	protected void registerTags() {
+		getBuilder(net.minecraft.tags.BlockTags.CARPETS).add(
+				ModBlocks.FULL_TATAMI_MAT.get(),
+				ModBlocks.HALF_TATAMI_MAT.get()
+		);
 		getBuilder(net.minecraft.tags.BlockTags.CROPS).add(
 				ModBlocks.CABBAGE_CROP.get(),
 				ModBlocks.ONION_CROP.get(),
