@@ -1,5 +1,5 @@
 {
-  "replace": "false",
+  "replace": false,
   "values": [
     "minecraft:brown_mushroom",
     "minecraft:red_mushroom",

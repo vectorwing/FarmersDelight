@@ -28,7 +28,7 @@ public class TatamiMatBlock extends HorizontalBlock {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
 
 	public TatamiMatBlock() {
-		super(Block.Properties.from(Blocks.WHITE_WOOL));
+		super(Block.Properties.from(Blocks.WHITE_WOOL).variableOpacity());
 		this.setDefaultState(this.getStateContainer().getBaseState().with(PART, BedPart.FOOT));
 	}
 

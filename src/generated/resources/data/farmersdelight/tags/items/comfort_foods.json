@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "minecraft:mushroom_stew",
+    "minecraft:mushroom_stem",
     "minecraft:beetroot_soup",
     "minecraft:rabbit_stew"
   ]
