@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.data;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.tags.ForgeTags;
@@ -15,6 +16,8 @@ public class ItemTags extends ItemTagsProvider {
 
 	@Override
 	protected void registerTags() {
+		copy(BlockTags.SMALL_FLOWERS, net.minecraft.tags.ItemTags.SMALL_FLOWERS);
+
 		this.registerModTags();
 		this.registerForgeTags();
 	}

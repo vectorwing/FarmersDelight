@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:sweet_berry_cheesecake_from_slices"
+      "farmersdelight:apple_pie_from_slices"
     ]
   },
   "criteria": {
-    "sweet_berry_cheesecake_slice": {
+    "apple_pie_slice": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:sweet_berry_cheesecake_slice"
+            "item": "farmersdelight:apple_pie_slice"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "minecraft:sweet_berry_cheesecake_from_slices"
+        "recipe": "farmersdelight:apple_pie_from_slices"
       }
     }
   },
   "requirements": [
     [
-      "sweet_berry_cheesecake_slice",
+      "apple_pie_slice",
       "has_the_recipe"
     ]
   ]

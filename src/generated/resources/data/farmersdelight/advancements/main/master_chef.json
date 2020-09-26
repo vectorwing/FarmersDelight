@@ -2,7 +2,7 @@
   "parent": "farmersdelight:main/place_cooking_pot",
   "display": {
     "icon": {
-      "item": "farmersdelight:pasta_with_meatballs"
+      "item": "farmersdelight:pasta_with_mutton_chop"
     },
     "title": {
       "translate": "farmersdelight.advancement.master_chef"
@@ -75,6 +75,14 @@
         }
       }
     },
+    "baked_cod_stew": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:baked_cod_stew"
+        }
+      }
+    },
     "honey_glazed_ham": {
       "trigger": "minecraft:consume_item",
       "conditions": {
@@ -139,6 +147,14 @@
         }
       }
     },
+    "grilled_salmon": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:grilled_salmon"
+        }
+      }
+    },
     "stuffed_pumpkin": {
       "trigger": "minecraft:consume_item",
       "conditions": {
@@ -171,6 +187,9 @@
       "pumpkin_soup"
     ],
     [
+      "baked_cod_stew"
+    ],
+    [
       "honey_glazed_ham"
     ],
     [
@@ -193,6 +212,9 @@
     ],
     [
       "squid_ink_pasta"
+    ],
+    [
+      "grilled_salmon"
     ],
     [
       "stuffed_pumpkin"

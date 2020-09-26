@@ -18,6 +18,20 @@ public class BlockTags extends BlockTagsProvider {
 
 	@Override
 	protected void registerTags() {
+		getBuilder(net.minecraft.tags.BlockTags.CROPS).add(
+				ModBlocks.CABBAGE_CROP.get(),
+				ModBlocks.ONION_CROP.get(),
+				ModBlocks.RICE_CROP.get(),
+				ModBlocks.TALL_RICE_CROP.get(),
+				ModBlocks.TOMATO_CROP.get());
+		getBuilder(net.minecraft.tags.BlockTags.SMALL_FLOWERS).add(
+				ModBlocks.WILD_BEETROOTS.get(),
+				ModBlocks.WILD_CABBAGES.get(),
+				ModBlocks.WILD_CARROTS.get(),
+				ModBlocks.WILD_ONIONS.get(),
+				ModBlocks.WILD_POTATOES.get(),
+				ModBlocks.WILD_TOMATOES.get());
+
 		getBuilder(ModTags.TRAY_HEAT_SOURCES).add(Blocks.CAMPFIRE, Blocks.FIRE, Blocks.LAVA);
 		getBuilder(ModTags.HEAT_SOURCES).add(Blocks.MAGMA_BLOCK, ModBlocks.STOVE.get()).add(ModTags.TRAY_HEAT_SOURCES);
 		getBuilder(ModTags.COMPOST_ACTIVATORS).add(

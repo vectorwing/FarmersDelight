@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:apple_pie_from_slices"
+      "farmersdelight:chocolate_pie_from_slices"
     ]
   },
   "criteria": {
-    "apple_pie_slice": {
+    "chocolate_pie_slice": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:apple_pie_slice"
+            "item": "farmersdelight:chocolate_pie_slice"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "minecraft:apple_pie_from_slices"
+        "recipe": "farmersdelight:chocolate_pie_from_slices"
       }
     }
   },
   "requirements": [
     [
-      "apple_pie_slice",
+      "chocolate_pie_slice",
       "has_the_recipe"
     ]
   ]

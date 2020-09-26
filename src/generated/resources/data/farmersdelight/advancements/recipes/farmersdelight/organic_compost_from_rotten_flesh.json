@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:organic_compost_from_tree_bark"
+      "farmersdelight:organic_compost_from_rotten_flesh"
     ]
   },
   "criteria": {
-    "tree_bark": {
+    "rotten_flesh": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:tree_bark"
+            "item": "minecraft:rotten_flesh"
           }
         ]
       }
@@ -29,13 +29,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "minecraft:organic_compost_from_tree_bark"
+        "recipe": "farmersdelight:organic_compost_from_rotten_flesh"
       }
     }
   },
   "requirements": [
     [
-      "tree_bark",
+      "rotten_flesh",
       "straw",
       "has_the_recipe"
     ]

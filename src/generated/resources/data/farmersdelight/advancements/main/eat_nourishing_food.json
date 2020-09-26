@@ -1,0 +1,33 @@
+{
+  "parent": "farmersdelight:main/eat_comfort_food",
+  "display": {
+    "icon": {
+      "item": "farmersdelight:steak_and_potatoes"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.eat_nourishing_food"
+    },
+    "description": {
+      "translate": "farmersdelight.advancement.eat_nourishing_food.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "nourished": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "farmersdelight:nourished": {}
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "nourished"
+    ]
+  ]
+}

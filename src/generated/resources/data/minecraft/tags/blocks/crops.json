@@ -2,9 +2,9 @@
   "replace": false,
   "values": [
     "farmersdelight:cabbages",
-    "farmersdelight:tomatoes",
     "farmersdelight:onions",
     "farmersdelight:rice_crop",
-    "farmersdelight:tall_rice_crop"
+    "farmersdelight:tall_rice_crop",
+    "farmersdelight:tomatoes"
   ]
 }
