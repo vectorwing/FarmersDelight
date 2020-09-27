@@ -50,8 +50,8 @@ public class TatamiBlock extends Block {
 			BlockState blockstate = worldIn.getBlockState(blockpos);
 			if (blockstate.getBlock() == this && !blockstate.get(PAIRED)) {
 				worldIn.setBlockState(blockpos, state.with(FACING, state.get(FACING).getOpposite()).with(PAIRED, true), 3);
-				worldIn.notifyNeighbors(pos, Blocks.AIR);
-				state.updateNeighbors(worldIn, pos, 3);
+				worldIn.func_230547_a_(pos, Blocks.AIR);
+				state.updateNeighbours(worldIn, pos, 3);
 			}
 		}
 

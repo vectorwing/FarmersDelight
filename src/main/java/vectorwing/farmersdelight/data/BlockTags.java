@@ -18,17 +18,17 @@ public class BlockTags extends BlockTagsProvider {
 
 	@Override
 	protected void registerTags() {
-		getBuilder(net.minecraft.tags.BlockTags.CARPETS).add(
+		getOrCreateBuilder(net.minecraft.tags.BlockTags.CARPETS).add(
 				ModBlocks.FULL_TATAMI_MAT.get(),
 				ModBlocks.HALF_TATAMI_MAT.get()
 		);
-		getBuilder(net.minecraft.tags.BlockTags.CROPS).add(
+		getOrCreateBuilder(net.minecraft.tags.BlockTags.CROPS).add(
 				ModBlocks.CABBAGE_CROP.get(),
 				ModBlocks.ONION_CROP.get(),
 				ModBlocks.RICE_CROP.get(),
 				ModBlocks.TALL_RICE_CROP.get(),
 				ModBlocks.TOMATO_CROP.get());
-		getBuilder(net.minecraft.tags.BlockTags.SMALL_FLOWERS).add(
+		getOrCreateBuilder(net.minecraft.tags.BlockTags.SMALL_FLOWERS).add(
 				ModBlocks.WILD_BEETROOTS.get(),
 				ModBlocks.WILD_CABBAGES.get(),
 				ModBlocks.WILD_CARROTS.get(),
@@ -36,9 +36,9 @@ public class BlockTags extends BlockTagsProvider {
 				ModBlocks.WILD_POTATOES.get(),
 				ModBlocks.WILD_TOMATOES.get());
 
-		getBuilder(ModTags.TRAY_HEAT_SOURCES).add(Blocks.CAMPFIRE, Blocks.FIRE, Blocks.LAVA);
-		getBuilder(ModTags.HEAT_SOURCES).add(Blocks.MAGMA_BLOCK, ModBlocks.STOVE.get()).add(ModTags.TRAY_HEAT_SOURCES);
-		getBuilder(ModTags.COMPOST_ACTIVATORS).add(
+		getOrCreateBuilder(ModTags.TRAY_HEAT_SOURCES).add(Blocks.CAMPFIRE, Blocks.FIRE, Blocks.LAVA);
+		getOrCreateBuilder(ModTags.HEAT_SOURCES).add(Blocks.MAGMA_BLOCK, ModBlocks.STOVE.get()).addTag(ModTags.TRAY_HEAT_SOURCES);
+		getOrCreateBuilder(ModTags.COMPOST_ACTIVATORS).add(
 				Blocks.BROWN_MUSHROOM,
 				Blocks.RED_MUSHROOM,
 				Blocks.PODZOL,
