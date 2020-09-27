@@ -6,7 +6,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.loot.modifiers.CakeSliceLoot;
-import vectorwing.farmersdelight.loot.modifiers.KnifeStrawDrops;
+import vectorwing.farmersdelight.loot.modifiers.StrawHarvestingModifier;
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class LootModifierHandler {
@@ -16,7 +16,7 @@ public class LootModifierHandler {
 				new CakeSliceLoot.CakeSliceSerializer().setRegistryName(FarmersDelight.MODID, "cake")
 		);
 		ev.getRegistry().register(
-				new KnifeStrawDrops.KnifeStrawSerializer().setRegistryName(FarmersDelight.MODID, "straw_from_knife")
+				new StrawHarvestingModifier.KnifeStrawSerializer().setRegistryName(FarmersDelight.MODID, "straw_harvesting")
 		);
 	}
 }

@@ -1,6 +1,8 @@
 package vectorwing.farmersdelight.blocks;
 
 import mcp.MethodsReturnNonnullByDefault;
+import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.registry.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropsBlock;
@@ -29,6 +31,11 @@ public class OnionsBlock extends CropsBlock {
 
 	public OnionsBlock(Properties properties) {
 		super(properties);
+	}
+
+	@Override
+	public BlockState getPlant(IBlockReader world, BlockPos pos) {
+		return ModBlocks.ONION_CROP.get().getDefaultState();
 	}
 
 	@Override

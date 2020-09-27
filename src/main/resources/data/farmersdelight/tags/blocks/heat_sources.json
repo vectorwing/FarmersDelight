@@ -1,8 +1,0 @@
-{
-  "replace": "false",
-  "values": [
-    "minecraft:magma_block",
-    "farmersdelight:stove",
-    "#farmersdelight:tray_heat_sources"
-  ]
-}

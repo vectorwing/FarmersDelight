@@ -9,23 +9,29 @@ import vectorwing.farmersdelight.FarmersDelight;
 
 /**
  * References to tags under the Farmer's Delight namespace.
- * These tags are used for mod mechanics, which aren't always useful outside of it.
+ * These tags are used for mod mechanics.
  */
 public class ModTags {
 	// Blocks that can heat up a Cooking Pot.
 	public static final ITag.INamedTag<Block> HEAT_SOURCES = modBlockTag("heat_sources");
 
-	// Blocks to which a Cooking Pot will render a tray over. Use HEAT_SOURCES for heat logic.
+	// Blocks to which a Cooking Pot will render a tray over. Included in HEAT_SOURCES.
 	public static final ITag.INamedTag<Block> TRAY_HEAT_SOURCES = modBlockTag("tray_heat_sources");
 
 	// Blocks that accelerate decomposition of Organic Compost if placed adjacent to it.
 	public static final ITag.INamedTag<Block> COMPOST_ACTIVATORS = modBlockTag("compost_activators");
 
-	// Foods that drop from mobs that wolves prey upon (currently, just sheep and chicken).
+	// Items (ideally tools) that can obtain straw when harvesting grassy plants. Populated by all knives by default.
+	public static final ITag.INamedTag<Item> STRAW_HARVESTERS = modItemTag("straw_harvesters");
+
+	// Foods that should grant 5 minutes of Comfort when eaten. Does not include the main soups/stews of Farmer's Delight.
+	public static final ITag.INamedTag<Item> COMFORT_FOODS = modItemTag("comfort_foods");
+
+	// Foods that drop from mobs that wolves prey upon (sheep, rabbit and chicken).
 	public static final ITag.INamedTag<Item> WOLF_PREY = modItemTag("wolf_prey");
 
 	// Knife items for game logic.
-	public static final ITag.INamedTag<Item> KNIVES = modItemTag("tools/knife");
+	public static final ITag.INamedTag<Item> KNIVES = modItemTag("tools/knives");
 
 	private static ITag.INamedTag<Item> modItemTag(String path) {
 		return ItemTags.makeWrapperTag(FarmersDelight.MODID + ":" + path);

@@ -34,7 +34,9 @@ import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModEffects;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.tile.dispenser.CuttingBoardDispenseBehavior;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 import vectorwing.farmersdelight.world.CropPatchGeneration;
+import vectorwing.farmersdelight.world.VillageStructures;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
@@ -61,6 +63,10 @@ public class CommonEventHandler
 		ModAdvancements.register();
 
 		LootFunctionManager.func_237451_a_(CopyMealFunction.ID.toString(), new CopyMealFunction.Serializer());
+
+		if (Configuration.GENERATE_VILLAGE_COMPOST_HEAPS.get()) {
+			VillageStructures.init();
+		}
 
 		if (Configuration.DISPENSER_TOOLS_CUTTING_BOARD.get()) {
 			CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_PICKAXE, new CuttingBoardDispenseBehavior());
@@ -148,16 +154,18 @@ public class CommonEventHandler
 	}
 
 	@SubscribeEvent
-	public static void onSoupItemConsumed(LivingEntityUseItemEvent.Finish event) {
-		if (!Configuration.VANILLA_SOUP_EFFECTS.get()) return;
-
+	public static void handleAdditionalFoodEffects(LivingEntityUseItemEvent.Finish event) {
 		Item food = event.getItem().getItem();
 		LivingEntity entity = event.getEntityLiving();
-		if (food instanceof SoupItem && !food.equals(Items.SUSPICIOUS_STEW)) {
-			if (food.equals(Items.RABBIT_STEW)) {
-				entity.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 3600, 1));
-			}
-			entity.addPotionEffect(new EffectInstance(ModEffects.COMFORT.get(), 9600, 0));
+
+		// Adds 3:00 of Jump Boost II when eating Rabbit Stew
+		if (Configuration.RABBIT_STEW_JUMP_BOOST.get() && food.equals(Items.RABBIT_STEW)) {
+			entity.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 3600, 1));
+		}
+
+		// Adds 5:00 of Comfort when eating foods inside the tag farmersdelight:comfort_foods
+		if (Configuration.COMFORT_FOOD_TAG_EFFECT.get() && food.isIn(ModTags.COMFORT_FOODS)) {
+			entity.addPotionEffect(new EffectInstance(ModEffects.COMFORT.get(), 6000, 0));
 		}
 	}
 

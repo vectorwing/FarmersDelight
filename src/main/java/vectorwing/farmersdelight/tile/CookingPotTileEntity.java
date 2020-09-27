@@ -403,7 +403,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 	 * Checks if the given ItemStack is a container for the stored meal. If true, takes a serving and returns it.
 	 */
 	public ItemStack useHeldItemOnMeal(ItemStack container) {
-		if (isContainerValid(container)) {
+		if (isContainerValid(container) && !this.getMeal().isEmpty()) {
 			container.shrink(1);
 			return this.getMeal().split(1);
 		}

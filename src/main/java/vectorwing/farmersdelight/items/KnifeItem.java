@@ -65,30 +65,4 @@ public class KnifeItem extends ToolItem
 		}
 		return enchantment.type.canEnchantItem(stack.getItem());
 	}
-
-    @Nonnull
-    @Override
-    public ItemStack getContainerItem(@Nonnull ItemStack stack) {
-        ItemStack container = stack.copy();
-        if (container.attemptDamageItem(1, MathUtils.RAND, null))
-            return ItemStack.EMPTY;
-        else
-            return container;
-    }
-
-    @Override
-    public boolean hasContainerItem(@Nonnull ItemStack stack) {
-        return true;
-    }
-
-	@Override
-	public boolean isRepairable(@Nonnull ItemStack stack)
-	{
-		return false;
-	}
-
-	public boolean isCustomRepairable(@Nonnull ItemStack stack)
-	{
-		return super.isRepairable(stack);
-	}
 }

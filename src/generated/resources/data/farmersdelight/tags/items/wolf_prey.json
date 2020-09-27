@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:raw_chicken",
+    "minecraft:mutton",
+    "minecraft:rabbit"
+  ]
+}

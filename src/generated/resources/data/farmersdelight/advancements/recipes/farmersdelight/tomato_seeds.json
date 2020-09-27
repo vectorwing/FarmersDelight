@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "tomato": {
+    "has_tomato": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "tomato",
+      "has_tomato",
       "has_the_recipe"
     ]
   ]

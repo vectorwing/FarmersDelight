@@ -19,11 +19,6 @@
     {
       "item": "farmersdelight:straw",
       "count": 1
-    },
-    {
-      "item": "farmersdelight:straw",
-      "count": 1,
-      "chance": 0.5
     }
   ],
   "processingTime": 50

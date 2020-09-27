@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.blocks;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.*;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -35,6 +36,10 @@ public class WildPatchBlock extends BushBlock implements IGrowable
 
 	public Block.OffsetType getOffsetType() {
 		return OffsetType.XZ;
+	}
+
+	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
+		return false;
 	}
 
 	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {

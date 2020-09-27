@@ -1,0 +1,12 @@
+{
+  "type": "farmersdelight:cooking",
+  "ingredients": [
+    {
+      "tag": "forge:crops/rice"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:cooked_rice"
+  },
+  "cookingtime": 100
+}

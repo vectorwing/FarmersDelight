@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
+import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -29,6 +30,11 @@ public class CabbagesBlock extends CropsBlock {
 
 	public CabbagesBlock(Properties properties) {
 		super(properties);
+	}
+
+	@Override
+	public BlockState getPlant(IBlockReader world, BlockPos pos) {
+		return ModBlocks.CABBAGE_CROP.get().getDefaultState();
 	}
 
 	@Override
