@@ -2,15 +2,15 @@
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "item": "minecraft:crimson_door"
+      "item": "minecraft:warped_door"
     }
   ],
   "tool": {
-    "tag": "forge:tools/axe"
+    "tag": "forge:tools/axes"
   },
   "result": [
     {
-      "item": "minecraft:crimson_planks"
+      "item": "minecraft:warped_planks"
     }
   ]
 }

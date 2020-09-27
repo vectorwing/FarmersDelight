@@ -2,15 +2,15 @@
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "item": "minecraft:crimson_stem"
+      "item": "minecraft:warped_hyphae"
     }
   ],
   "tool": {
-    "tag": "forge:tools/axe"
+    "tag": "forge:tools/axes"
   },
   "result": [
     {
-      "item": "minecraft:stripped_crimson_stem"
+      "item": "minecraft:stripped_warped_hyphae"
     },
     {
       "item": "farmersdelight:tree_bark"
