@@ -37,8 +37,13 @@ public class TallRiceCropBlock extends BushBlock implements IWaterLoggable, IGro
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	public static final IntegerProperty AGE = IntegerProperty.create("age", 5, 7);
 
-	public TallRiceCropBlock(Properties properties)
-	{
+	/**
+	 * This is the old version of the rice crop, where it behaves like a double tall grass.
+	 * The new class is RiceTopCropBlock, working independently from the bottom side.
+	 * This class and the item ID remain in the mod, to allow a seamless transition to the new rice as players harvest the old one and plant the new one.
+	 */
+	@Deprecated
+	public TallRiceCropBlock(Properties properties)	{
 		super(properties);
 		this.setDefaultState(this.getDefaultState().with(WATERLOGGED, true).with(HALF, DoubleBlockHalf.LOWER).with(AGE, 5));
 	}
@@ -106,7 +111,7 @@ public class TallRiceCropBlock extends BushBlock implements IWaterLoggable, IGro
 	}
 
 	public BlockState withAge(int age) {
-		return this.getDefaultState().with(this.getAgeProperty(), Integer.valueOf(age));
+		return this.getDefaultState().with(this.getAgeProperty(), age);
 	}
 
 	public void grow(World worldIn, BlockPos pos, BlockState state) {

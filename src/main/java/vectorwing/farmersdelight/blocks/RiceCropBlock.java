@@ -28,10 +28,10 @@ import java.util.Random;
 
 public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowable
 {
-	public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 4);
+	public static final IntegerProperty AGE = BlockStateProperties.AGE_0_3;
+	public static final BooleanProperty SUPPORTING = BooleanProperty.create("supporting");
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {
-			Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D),
 			Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D),
 			Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 9.0D, 11.0D),
 			Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 9.0D, 11.0D),
@@ -39,7 +39,7 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 
 	public RiceCropBlock(Properties builder) {
 		super(builder);
-		this.setDefaultState(this.getDefaultState().with(WATERLOGGED, true).with(AGE, 0));
+		this.setDefaultState(this.getDefaultState().with(WATERLOGGED, true).with(AGE, 0).with(SUPPORTING, false));
 	}
 
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
@@ -50,10 +50,10 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 			if (i <= this.getMaxAge()) {
 				float f = 10;
 				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt((int)(25.0F / f) + 1) == 0)) {
-					if (i == 4) {
-						TallRiceCropBlock tallRice = (TallRiceCropBlock) ModBlocks.TALL_RICE_CROP.get();
-						if (tallRice.getDefaultState().isValidPosition(worldIn, pos) && worldIn.isAirBlock(pos.up())) {
-							tallRice.placeAt(worldIn, pos, 2, 6);
+					if (i == this.getMaxAge()) {
+						RiceTopCropBlock tallRice = (RiceTopCropBlock)ModBlocks.RICE_TOP_CROP.get();
+						if (tallRice.getDefaultState().isValidPosition(worldIn, pos.up()) && worldIn.isAirBlock(pos.up())) {
+							worldIn.setBlockState(pos.up(), tallRice.getDefaultState());
 							net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 						}
 					} else {
@@ -64,20 +64,6 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 			}
 		}
 
-	}
-
-	public void grow(World worldIn, BlockPos pos, BlockState state) {
-		int i = this.getAge(state) + this.getBonemealAgeIncrease(worldIn);
-		int j = 7;
-		if (i > j) i = j;
-		if (i <= 4) {
-			worldIn.setBlockState(pos, state.with(AGE, i));
-		} else {
-			TallRiceCropBlock tallRice = (TallRiceCropBlock)ModBlocks.TALL_RICE_CROP.get();
-			if (tallRice.getDefaultState().isValidPosition(worldIn, pos) && worldIn.isAirBlock(pos.up())) {
-				tallRice.placeAt(worldIn, pos, 2, i);
-			}
-		}
 	}
 
 	protected int getBonemealAgeIncrease(World worldIn) {
@@ -106,7 +92,7 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 	}
 
 	public int getMaxAge() {
-		return 4;
+		return 3;
 	}
 
 	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
@@ -114,7 +100,7 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 	}
 
 	public BlockState withAge(int age) {
-		return this.getDefaultState().with(this.getAgeProperty(), Integer.valueOf(age));
+		return this.getDefaultState().with(this.getAgeProperty(), age);
 	}
 
 	public boolean isMaxAge(BlockState state) {
@@ -123,7 +109,7 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(AGE, WATERLOGGED);
+		builder.add(AGE, SUPPORTING, WATERLOGGED);
 	}
 
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
@@ -131,8 +117,15 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 		if (!blockstate.isAir()) {
 			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
 		}
+		if (facing == Direction.UP) {
+			return blockstate.with(SUPPORTING, isSupportingTop(facingState));
+		}
 
 		return blockstate;
+	}
+
+	public boolean isSupportingTop(BlockState topState) {
+		return topState.getBlock() == ModBlocks.RICE_TOP_CROP.get();
 	}
 
 	@Nullable
@@ -150,9 +143,26 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 	}
 
 	@Override
-	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state)
-	{
-		this.grow(worldIn, pos, state);
+	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state){
+		int i = this.getAge(state) + this.getBonemealAgeIncrease(worldIn);
+		int j = 7;
+		if (i > j) i = j;
+		if (i <= this.getMaxAge()) {
+			worldIn.setBlockState(pos, state.with(AGE, i));
+		} else {
+			RiceTopCropBlock tallRice = (RiceTopCropBlock)ModBlocks.RICE_TOP_CROP.get();
+			if (tallRice.getDefaultState().isValidPosition(worldIn, pos.up()) && worldIn.isAirBlock(pos.up())) {
+				worldIn.setBlockState(pos, state.with(AGE, this.getMaxAge()));
+				worldIn.setBlockState(pos.up(), tallRice.getDefaultState(), 2);
+			}
+			BlockState top = worldIn.getBlockState(pos.up());
+			if (top.getBlock() == ModBlocks.RICE_TOP_CROP.get()) {
+				IGrowable growable = (IGrowable) worldIn.getBlockState(pos.up()).getBlock();
+				if (growable.canGrow(worldIn, pos.up(), top, false)) {
+					growable.grow(worldIn, worldIn.rand, pos.up(), top);
+				}
+			}
+		}
 	}
 
 	public IFluidState getFluidState(BlockState state) {
