@@ -70,7 +70,7 @@ public class ModItems {
 	public static final RegistryObject<Item> DIAMOND_KNIFE = ITEMS.register("diamond_knife",
 			() -> new KnifeItem(ItemTier.DIAMOND, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> NETHERITE_KNIFE = ITEMS.register("netherite_knife",
-			() -> new KnifeItem(ItemTier.NETHERITE, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP).isBurnable()));
+			() -> new KnifeItem(ItemTier.NETHERITE, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP).isImmuneToFire()));
 	public static final RegistryObject<Item> GOLDEN_KNIFE = ITEMS.register("golden_knife",
 			() -> new KnifeItem(ItemTier.GOLD, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 

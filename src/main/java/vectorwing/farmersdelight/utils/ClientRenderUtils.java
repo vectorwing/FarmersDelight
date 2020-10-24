@@ -42,7 +42,7 @@ public class ClientRenderUtils {
 		RenderSystem.scalef(48.0F, 48.0F, 48.0F);
 		MatrixStack matrixstack = new MatrixStack();
 		IRenderTypeBuffer.Impl irendertypebuffer$impl = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
-		boolean flag = !bakedmodel.func_230044_c_();
+		boolean flag = !bakedmodel.isSideLit();
 		if (flag) {
 			RenderHelper.setupGuiFlatDiffuseLighting();
 		}

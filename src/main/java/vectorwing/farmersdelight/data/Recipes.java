@@ -338,9 +338,9 @@ public class Recipes extends RecipeProvider {
 				.key('s', Items.STICK)
 				.addCriterion("gold_ingot", InventoryChangeTrigger.Instance.forItems(Items.GOLD_INGOT))
 				.build(consumer);
-		SmithingRecipeBuilder.func_240502_a_(Ingredient.fromItems(ModItems.DIAMOND_KNIFE.get()), Ingredient.fromItems(Items.NETHERITE_INGOT), ModItems.NETHERITE_KNIFE.get())
-				.func_240503_a_("netherite_ingot", InventoryChangeTrigger.Instance.forItems(Items.NETHERITE_INGOT))
-				.func_240504_a_(consumer, FarmersDelight.MODID + ":netherite_knife_smithing");
+		SmithingRecipeBuilder.smithingRecipe(Ingredient.fromItems(ModItems.DIAMOND_KNIFE.get()), Ingredient.fromItems(Items.NETHERITE_INGOT), ModItems.NETHERITE_KNIFE.get())
+				.addCriterion("netherite_ingot", InventoryChangeTrigger.Instance.forItems(Items.NETHERITE_INGOT))
+				.build(consumer, FarmersDelight.MODID + ":netherite_knife_smithing");
 	}
 
 	private void recipesMaterials(Consumer<IFinishedRecipe> consumer) {

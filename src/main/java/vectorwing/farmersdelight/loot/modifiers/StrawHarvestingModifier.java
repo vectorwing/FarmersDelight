@@ -18,6 +18,11 @@ public class StrawHarvestingModifier {
 		public StrawHarvestingModifier.KnifeStrawModifier read(ResourceLocation location, JsonObject object, ILootCondition[] ailootcondition) {
 			return new StrawHarvestingModifier.KnifeStrawModifier(ailootcondition);
 		}
+
+		@Override
+		public JsonObject write(KnifeStrawModifier instance) {
+			return new JsonObject();
+		}
 	}
 
 	public static class KnifeStrawModifier extends LootModifier {

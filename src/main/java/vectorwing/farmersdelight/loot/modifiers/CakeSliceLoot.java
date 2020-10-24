@@ -22,6 +22,11 @@ public class CakeSliceLoot {
 		public CakeSliceModifier read(ResourceLocation location, JsonObject object, ILootCondition[] ailootcondition) {
 			return new CakeSliceModifier(ailootcondition);
 		}
+
+		@Override
+		public JsonObject write(CakeSliceModifier instance) {
+			return new JsonObject();
+		}
 	}
 
 	private static class CakeSliceModifier extends LootModifier {
