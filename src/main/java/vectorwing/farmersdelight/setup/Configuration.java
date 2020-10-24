@@ -55,12 +55,12 @@ public class Configuration {
 
 		COMMON_BUILDER.comment("Wild Cabbage generation").push("wild_cabbages");
 		GENERATE_WILD_CABBAGES = COMMON_BUILDER.comment("Generate wild cabbages on beaches").define("genWildCabbages", true);
-		FREQUENCY_WILD_CABBAGES = COMMON_BUILDER.comment("Frequency of clusters. Larger value = more frequent.").defineInRange("frequency", 1, 0, 10);
+		FREQUENCY_WILD_CABBAGES = COMMON_BUILDER.comment("Frequency of clusters. Larger value = more frequent.").defineInRange("frequency", 9, 0, 10);
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("Sea Beet generation").push("wild_beetroots");
 		GENERATE_WILD_BEETROOTS = COMMON_BUILDER.comment("Generate sea beets on beaches").define("genWildBeetroots", true);
-		FREQUENCY_WILD_BEETROOTS = COMMON_BUILDER.comment("Frequency of clusters. Larger value = more frequent.").defineInRange("frequency", 1, 0, 10);
+		FREQUENCY_WILD_BEETROOTS = COMMON_BUILDER.comment("Frequency of clusters. Larger value = more frequent.").defineInRange("frequency", 9, 0, 10);
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("Wild Potato generation").push("wild_potatoes");

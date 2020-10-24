@@ -90,8 +90,6 @@ public class CommonEventHandler
 			CuttingBoardDispenseBehavior.registerBehaviour(ModItems.DIAMOND_KNIFE.get(), new CuttingBoardDispenseBehavior());
 			CuttingBoardDispenseBehavior.registerBehaviour(ModItems.GOLDEN_KNIFE.get(), new CuttingBoardDispenseBehavior());
 		}
-
-		DeferredWorkQueue.runLater(CropPatchGeneration::generateCrop);
 	}
 
 	public static void registerCompostables() {

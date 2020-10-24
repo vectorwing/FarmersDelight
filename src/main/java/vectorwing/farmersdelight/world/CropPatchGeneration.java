@@ -2,17 +2,16 @@ package vectorwing.farmersdelight.world;
 
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.blockplacer.SimpleBlockPlacer;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
-import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.placement.ChanceConfig;
-import net.minecraft.world.gen.placement.FrequencyConfig;
-import net.minecraft.world.gen.placement.Placement;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.world.gen.feature.*;
+import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.setup.Configuration;
 
@@ -30,46 +29,44 @@ public class CropPatchGeneration {
 	public static final BlockClusterFeatureConfig BEETROOT_PATCH_CONFIG = (new BlockClusterFeatureConfig.Builder(
 			new SimpleBlockStateProvider(ModBlocks.WILD_BEETROOTS.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(2).zSpread(2).whitelist(ImmutableSet.of(Blocks.SAND.getBlock())).func_227317_b_().build();
 
-	public static void generateCrop() {
-		for (Biome biome : ForgeRegistries.BIOMES) {
-			if (biome.getDefaultTemperature() >= 1.0F) {
-				if (Configuration.GENERATE_WILD_TOMATOES.get()) {
-					biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH
-							.withConfiguration(TOMATO_PATCH_CONFIG)
-							.withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(Configuration.CHANCE_WILD_TOMATOES.get()))));
-				}
-			}
-			if (biome == Biomes.BEACH) {
-				if (Configuration.GENERATE_WILD_CABBAGES.get()) {
-					biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH
-							.withConfiguration(CABBAGE_PATCH_CONFIG)
-							.withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(Configuration.FREQUENCY_WILD_CABBAGES.get()))));
-				}
-				if (Configuration.GENERATE_WILD_BEETROOTS.get()) {
-					biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH
-							.withConfiguration(BEETROOT_PATCH_CONFIG)
-							.withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(Configuration.FREQUENCY_WILD_BEETROOTS.get()))));
-				}
-			}
-			if (biome.getDefaultTemperature() > 0.3 && biome.getDefaultTemperature() < 1.0) {
-				if (Configuration.GENERATE_WILD_CARROTS.get()) {
-					biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH
-							.withConfiguration(CARROT_PATCH_CONFIG)
-							.withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(Configuration.CHANCE_WILD_CARROTS.get()))));
-				}
-				if (Configuration.GENERATE_WILD_ONIONS.get()) {
-					biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH
-							.withConfiguration(ONION_PATCH_CONFIG)
-							.withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(Configuration.CHANCE_WILD_ONIONS.get()))));
-				}
-			}
-			if (biome.getDefaultTemperature() > 0.0 && biome.getDefaultTemperature() <= 0.3) {
-				if (Configuration.GENERATE_WILD_POTATOES.get()) {
-					biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH
-							.withConfiguration(POTATO_PATCH_CONFIG)
-							.withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(Configuration.CHANCE_WILD_POTATOES.get()))));
-				}
-			}
+	public static final ConfiguredFeature<?, ?> PATCH_WILD_CABBAGES = register("patch_wild_cabbages", Feature.RANDOM_PATCH.withConfiguration(CABBAGE_PATCH_CONFIG)
+			.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT.func_242729_a(Configuration.FREQUENCY_WILD_CABBAGES.get())));
+	public static final ConfiguredFeature<?, ?> PATCH_WILD_ONIONS = register("patch_wild_onions", Feature.RANDOM_PATCH.withConfiguration(ONION_PATCH_CONFIG)
+			.withPlacement(Features.Placements.PATCH_PLACEMENT.func_242729_a(Configuration.CHANCE_WILD_ONIONS.get())));
+	public static final ConfiguredFeature<?, ?> PATCH_WILD_TOMATOES = register("patch_wild_tomatoes", Feature.RANDOM_PATCH.withConfiguration(TOMATO_PATCH_CONFIG)
+			.withPlacement(Features.Placements.PATCH_PLACEMENT.func_242729_a(Configuration.CHANCE_WILD_TOMATOES.get())));
+	public static final ConfiguredFeature<?, ?> PATCH_WILD_CARROTS = register("patch_wild_carrots", Feature.RANDOM_PATCH.withConfiguration(CARROT_PATCH_CONFIG)
+			.withPlacement(Features.Placements.PATCH_PLACEMENT.func_242729_a(Configuration.CHANCE_WILD_CARROTS.get())));
+	public static final ConfiguredFeature<?, ?> PATCH_WILD_POTATOES = register("patch_wild_potatoes", Feature.RANDOM_PATCH.withConfiguration(POTATO_PATCH_CONFIG)
+			.withPlacement(Features.Placements.PATCH_PLACEMENT.func_242729_a(Configuration.CHANCE_WILD_POTATOES.get())));
+	public static final ConfiguredFeature<?, ?> PATCH_WILD_BEETROOTS = register("patch_wild_beetroots", Feature.RANDOM_PATCH.withConfiguration(BEETROOT_PATCH_CONFIG)
+			.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242729_a(Configuration.FREQUENCY_WILD_BEETROOTS.get()));
+
+	private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key, ConfiguredFeature<FC, ?> configuredFeature) {
+		return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, key, configuredFeature);
+	}
+
+	@SubscribeEvent
+	public static void onBiomeLoad(BiomeLoadingEvent event) {
+		BiomeGenerationSettingsBuilder builder = event.getGeneration();
+		Biome.Climate climate = event.getClimate();
+
+		if (event.getName().getPath().equals("beach")) {
+			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_CABBAGES);
+			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_BEETROOTS);
+		}
+
+		if (climate.temperature >= 1.0F) {
+			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_TOMATOES);
+		}
+
+		if (climate.temperature > 0.3F && climate.temperature < 1.0F) {
+			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_CARROTS);
+			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_ONIONS);
+		}
+
+		if (climate.temperature > 0.0F && climate.temperature <= 0.3F) {
+			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_POTATOES);
 		}
 	}
 }

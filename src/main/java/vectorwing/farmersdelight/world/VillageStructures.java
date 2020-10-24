@@ -28,9 +28,9 @@ public class VillageStructures {
 		Map<String, Integer> biomeChances = (new ImmutableMap.Builder<String, Integer>())
 				.put("plains", 5)
 				.put("snowy", 3)
-				.put("savanna", 3)
-				.put("desert", 2)
-				.put("taiga", 3)
+				.put("savanna", 4)
+				.put("desert", 3)
+				.put("taiga", 4)
 				.build();
 
 		for (Map.Entry<String, Integer> biome : biomeChances.entrySet()) {
