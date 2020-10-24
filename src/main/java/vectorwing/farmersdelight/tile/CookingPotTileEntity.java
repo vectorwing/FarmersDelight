@@ -136,7 +136,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		this.cookTimeTotal = compound.getInt("CookTimeTotal");
 		this.container = ItemStack.read(compound.getCompound("Container"));
 		if (compound.contains("CustomName", 8)) {
-			this.customName = ITextComponent.Serializer.func_240643_a_(compound.getString("CustomName"));
+			this.customName = ITextComponent.Serializer.getComponentFromJson(compound.getString("CustomName"));
 		}
 	}
 

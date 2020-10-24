@@ -44,7 +44,7 @@ public class CopyMealFunction extends LootFunction {
 	}
 
 	@Override
-	public LootFunctionType func_230425_b_() {
+	public LootFunctionType getFunctionType() {
 		return null;
 	}
 

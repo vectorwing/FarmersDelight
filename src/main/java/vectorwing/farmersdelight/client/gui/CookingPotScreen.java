@@ -50,7 +50,7 @@ public class CookingPotScreen extends ContainerScreen<CookingPotContainer> {
 
                 tooltip.add(TextUtils.getTranslation("container.cooking_pot.served_on", container).mergeStyle(TextFormatting.GRAY));
 
-                this.renderTooltip(ms, tooltip, mouseX, mouseY);
+                this.func_243308_b(ms, tooltip, mouseX, mouseY);
             } else {
                 this.renderTooltip(ms, this.hoveredSlot.getStack(), mouseX, mouseY);
             }
