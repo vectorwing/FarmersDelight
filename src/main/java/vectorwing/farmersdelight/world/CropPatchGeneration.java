@@ -30,7 +30,7 @@ public class CropPatchGeneration {
 			new SimpleBlockStateProvider(ModBlocks.WILD_BEETROOTS.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(2).zSpread(2).whitelist(ImmutableSet.of(Blocks.SAND.getBlock())).func_227317_b_().build();
 
 	public static final ConfiguredFeature<?, ?> PATCH_WILD_CABBAGES = register("patch_wild_cabbages", Feature.RANDOM_PATCH.withConfiguration(CABBAGE_PATCH_CONFIG)
-			.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT.func_242729_a(Configuration.FREQUENCY_WILD_CABBAGES.get())));
+			.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT.func_242729_a(Configuration.CHANCE_WILD_CABBAGES.get())));
 	public static final ConfiguredFeature<?, ?> PATCH_WILD_ONIONS = register("patch_wild_onions", Feature.RANDOM_PATCH.withConfiguration(ONION_PATCH_CONFIG)
 			.withPlacement(Features.Placements.PATCH_PLACEMENT.func_242729_a(Configuration.CHANCE_WILD_ONIONS.get())));
 	public static final ConfiguredFeature<?, ?> PATCH_WILD_TOMATOES = register("patch_wild_tomatoes", Feature.RANDOM_PATCH.withConfiguration(TOMATO_PATCH_CONFIG)
@@ -40,7 +40,7 @@ public class CropPatchGeneration {
 	public static final ConfiguredFeature<?, ?> PATCH_WILD_POTATOES = register("patch_wild_potatoes", Feature.RANDOM_PATCH.withConfiguration(POTATO_PATCH_CONFIG)
 			.withPlacement(Features.Placements.PATCH_PLACEMENT.func_242729_a(Configuration.CHANCE_WILD_POTATOES.get())));
 	public static final ConfiguredFeature<?, ?> PATCH_WILD_BEETROOTS = register("patch_wild_beetroots", Feature.RANDOM_PATCH.withConfiguration(BEETROOT_PATCH_CONFIG)
-			.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242729_a(Configuration.FREQUENCY_WILD_BEETROOTS.get()));
+			.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242729_a(Configuration.CHANCE_WILD_BEETROOTS.get()));
 
 	private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key, ConfiguredFeature<FC, ?> configuredFeature) {
 		return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, key, configuredFeature);
