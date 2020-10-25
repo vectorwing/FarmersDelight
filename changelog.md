@@ -1,6 +1,12 @@
 # Changelog
 
 ## 0.2.3
+1.16.3+
+- Re-implemented world generation to the new .json system:
+  - Configs for wild patches have been changed, and are using new defaults;
+  - Beach wild patches (Wild Cabbage and Sea Beet) now use a different weight pattern, so values are similar to other crops;
+  - These two should change themselves on all instances, but we advise all players and modpack makers to reset their configs once, if migrating.
+  
 1.15.2+
 - Adds Compost Heaps to village generation
   - These structures house heaps of Organic Compost, which farmers lay down to decompose into Rich Soil. Each biome has a different composting strategy based on their biome and climate!
