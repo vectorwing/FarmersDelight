@@ -1,22 +1,28 @@
 package vectorwing.farmersdelight.client.tileentity.renderer;
 
-import net.minecraft.client.renderer.WorldRenderer;
-import vectorwing.farmersdelight.blocks.StoveBlock;
-import vectorwing.farmersdelight.tile.StoveTileEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.Vector3f;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.Vec2f;
+import net.minecraft.util.math.vector.Vector2f;
+import net.minecraft.util.math.vector.Vector3f;
+import vectorwing.farmersdelight.blocks.StoveBlock;
+import vectorwing.farmersdelight.tile.StoveTileEntity;
 
-public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
-{
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity> {
+	private static final Minecraft MC = Minecraft.getInstance();
+
 	public StoveTileEntityRenderer(TileEntityRendererDispatcher rendererDispatcher) {
 		super(rendererDispatcher);
 	}
@@ -25,7 +31,7 @@ public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
 		Direction direction = tileEntityIn.getBlockState().get(StoveBlock.FACING).getOpposite();
 		NonNullList<ItemStack> nonnulllist = tileEntityIn.getInventory();
 
-		for(int i = 0; i < nonnulllist.size(); ++i) {
+		for (int i = 0; i < nonnulllist.size(); ++i) {
 			ItemStack itemstack = nonnulllist.get(i);
 			if (!itemstack.isEmpty()) {
 				matrixStackIn.push();
@@ -41,13 +47,14 @@ public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
 				matrixStackIn.rotate(Vector3f.XP.rotationDegrees(90.0F));
 
 				// Neatly align items according to their index
-				Vec2f itemOffset = tileEntityIn.getStoveItemOffset(i);
+				Vector2f itemOffset = tileEntityIn.getStoveItemOffset(i);
 				matrixStackIn.translate(itemOffset.x, itemOffset.y, 0.0D);
 
 				// Resize the items
 				matrixStackIn.scale(0.375F, 0.375F, 0.375F);
 
-				Minecraft.getInstance().getItemRenderer().renderItem(itemstack, ItemCameraTransforms.TransformType.FIXED, WorldRenderer.getCombinedLight(tileEntityIn.getWorld(), tileEntityIn.getPos().up()), combinedOverlayIn, matrixStackIn, bufferIn);
+				if (tileEntityIn.getWorld() != null)
+					MC.getItemRenderer().renderItem(itemstack, ItemCameraTransforms.TransformType.FIXED, WorldRenderer.getCombinedLight(tileEntityIn.getWorld(), tileEntityIn.getPos().up()), combinedOverlayIn, matrixStackIn, bufferIn);
 				matrixStackIn.pop();
 			}
 		}

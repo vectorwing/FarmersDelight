@@ -50,7 +50,7 @@ public class TatamiMatBlock extends HorizontalBlock {
 	@Override
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		if (facing == getDirectionToOther(stateIn.get(PART), stateIn.get(HORIZONTAL_FACING))) {
-			return stateIn.isValidPosition(worldIn, currentPos) && facingState.getBlock() == this && facingState.get(PART) != stateIn.get(PART) ? stateIn : Blocks.AIR.getDefaultState();
+			return stateIn.isValidPosition(worldIn, currentPos) && facingState.isIn(this) && facingState.get(PART) != stateIn.get(PART) ? stateIn : Blocks.AIR.getDefaultState();
 		} else {
 			return !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 		}
@@ -65,26 +65,23 @@ public class TatamiMatBlock extends HorizontalBlock {
 		return part == BedPart.FOOT ? direction : direction.getOpposite();
 	}
 
-	@Override
-	public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
-		super.harvestBlock(worldIn, player, pos, Blocks.AIR.getDefaultState(), te, stack);
-	}
+//	@Override
+//	public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
+//		super.harvestBlock(worldIn, player, pos, Blocks.AIR.getDefaultState(), te, stack);
+//	}
 
 	@Override
 	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-		BedPart bedpart = state.get(PART);
-		BlockPos blockpos = pos.offset(getDirectionToOther(bedpart, state.get(HORIZONTAL_FACING)));
-		BlockState blockstate = worldIn.getBlockState(blockpos);
-		if (blockstate.getBlock() == this && blockstate.get(PART) != bedpart) {
-			worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
-			worldIn.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
-			if (!worldIn.isRemote && !player.isCreative()) {
-				ItemStack itemstack = player.getHeldItemMainhand();
-				spawnDrops(state, worldIn, pos, null, player, itemstack);
-				spawnDrops(blockstate, worldIn, blockpos, null, player, itemstack);
+		if (!worldIn.isRemote && player.isCreative()) {
+			BedPart bedpart = state.get(PART);
+			if (bedpart == BedPart.FOOT) {
+				BlockPos blockpos = pos.offset(getDirectionToOther(bedpart, state.get(HORIZONTAL_FACING)));
+				BlockState blockstate = worldIn.getBlockState(blockpos);
+				if (blockstate.getBlock() == this && blockstate.get(PART) == BedPart.HEAD) {
+					worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
+					worldIn.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
+				}
 			}
-
-			player.addStat(Stats.BLOCK_MINED.get(this));
 		}
 
 		super.onBlockHarvested(worldIn, pos, state, player);
@@ -101,8 +98,8 @@ public class TatamiMatBlock extends HorizontalBlock {
 		if (!worldIn.isRemote) {
 			BlockPos blockpos = pos.offset(state.get(HORIZONTAL_FACING));
 			worldIn.setBlockState(blockpos, state.with(PART, BedPart.HEAD), 3);
-			worldIn.notifyNeighbors(pos, Blocks.AIR);
-			state.updateNeighbors(worldIn, pos, 3);
+			worldIn.func_230547_a_(pos, Blocks.AIR);
+			state.updateNeighbours(worldIn, pos, 3);
 		}
 	}
 

@@ -1,5 +1,7 @@
 {
   "variants": {
-    "":  { "model": "farmersdelight:block/onion_crate"}
+    "": {
+      "model": "farmersdelight:block/onion_crate"
+    }
   }
 }

@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.blocks;
 
-import net.minecraft.block.*;
-
+import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.block.SoundType;
@@ -10,8 +10,8 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
@@ -27,6 +27,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockReader;
@@ -44,10 +45,14 @@ import vectorwing.farmersdelight.utils.TextUtils;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
 
-public class CookingPotBlock extends Block implements IWaterLoggable {
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+public class CookingPotBlock extends Block implements IWaterLoggable
+{
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D);
 	protected static final VoxelShape SHAPE_SUPPORTED = VoxelShapes.or(SHAPE, Block.makeCuboidShape(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
@@ -73,7 +78,7 @@ public class CookingPotBlock extends Block implements IWaterLoggable {
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		BlockPos blockpos = context.getPos();
 		World world = context.getWorld();
-		IFluidState ifluidstate = world.getFluidState(context.getPos());
+		FluidState ifluidstate = world.getFluidState(context.getPos());
 		return this.getDefaultState()
 				.with(FACING, context.getPlacementHorizontalFacing().getOpposite())
 				.with(SUPPORTED, needsTrayForHeatSource(world.getBlockState(blockpos.down())))
@@ -151,17 +156,17 @@ public class CookingPotBlock extends Block implements IWaterLoggable {
 				handler.deserializeNBT(inventoryTag);
 				ItemStack meal = handler.getStackInSlot(6);
 				if (!meal.isEmpty()) {
-					ITextComponent servingsOf = meal.getCount() == 1
+					IFormattableTextComponent servingsOf = meal.getCount() == 1
 							? TextUtils.getTranslation("tooltip.cooking_pot.single_serving")
 							: TextUtils.getTranslation("tooltip.cooking_pot.many_servings", meal.getCount());
-					tooltip.add(servingsOf.applyTextStyle(TextFormatting.GRAY));
-					ITextComponent mealName = meal.getDisplayName().deepCopy();
-					tooltip.add(mealName.applyTextStyle(meal.getRarity().color));
+					tooltip.add(servingsOf.mergeStyle(TextFormatting.GRAY));
+					IFormattableTextComponent mealName = meal.getDisplayName().deepCopy();
+					tooltip.add(mealName.mergeStyle(meal.getRarity().color));
 				}
 			}
 		} else {
-			ITextComponent empty = TextUtils.getTranslation("tooltip.cooking_pot.empty");
-			tooltip.add(empty.applyTextStyle(TextFormatting.GRAY));
+			IFormattableTextComponent empty = TextUtils.getTranslation("tooltip.cooking_pot.empty");
+			tooltip.add(empty.mergeStyle(TextFormatting.GRAY));
 		}
 	}
 
@@ -214,7 +219,7 @@ public class CookingPotBlock extends Block implements IWaterLoggable {
 		return ModTileEntityTypes.COOKING_POT_TILE.get().create();
 	}
 
-	public IFluidState getFluidState(BlockState state) {
+	public FluidState getFluidState(BlockState state) {
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
 	}
 }

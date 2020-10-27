@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.data.builder;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import mezz.jei.api.MethodsReturnNonnullByDefault;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -13,10 +14,13 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 public class CuttingBoardRecipeBuilder {
 	private final Map<Item, Integer> results = new LinkedHashMap<Item, Integer>(4);
 	private final Ingredient ingredient;
@@ -66,7 +70,8 @@ public class CuttingBoardRecipeBuilder {
 		ResourceLocation resourcelocation = Registry.ITEM.getKey(this.ingredient.getMatchingStacks()[0].getItem());
 		if ((new ResourceLocation(save)).equals(resourcelocation)) {
 			throw new IllegalStateException("Shapeless Recipe " + save + " should remove its 'save' argument");
-		} else {
+		}
+		else {
 			this.build(consumerIn, new ResourceLocation(save));
 		}
 	}
@@ -80,7 +85,7 @@ public class CuttingBoardRecipeBuilder {
 		private final Ingredient ingredient;
 		private final Ingredient tool;
 		private final Map<Item, Integer> results;
-		private String soundEventID;
+		private final String soundEventID;
 
 		public Result(ResourceLocation idIn, Ingredient ingredientIn, Ingredient toolIn, Map<Item, Integer> resultsIn, String soundEventIDIn) {
 			this.id = idIn;
@@ -100,7 +105,7 @@ public class CuttingBoardRecipeBuilder {
 			json.add("tool", this.tool.serialize());
 
 			JsonArray arrayResults = new JsonArray();
-			for(Map.Entry<Item, Integer> result : this.results.entrySet()) {
+			for (Map.Entry<Item, Integer> result : this.results.entrySet()) {
 				JsonObject jsonobject = new JsonObject();
 				jsonobject.addProperty("item", Registry.ITEM.getKey(result.getKey()).toString());
 				if (result.getValue() > 1) {

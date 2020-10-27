@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.blocks;
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BushBlock;
@@ -17,12 +18,15 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import vectorwing.farmersdelight.registry.ModBlocks;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class MushroomColonyBlock extends BushBlock implements IGrowable
-{
-	protected static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+@SuppressWarnings("deprecation")
+public class MushroomColonyBlock extends BushBlock implements IGrowable {
+	protected static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
 			Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D),
 			Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 10.0D, 13.0D),
 			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D),
@@ -31,8 +35,7 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 	public static final IntegerProperty COLONY_AGE = BlockStateProperties.AGE_0_3;
 	public final Supplier<Item> mushroomType;
 
-	public MushroomColonyBlock(Properties properties, Supplier<Item> mushroomType)
-	{
+	public MushroomColonyBlock(Properties properties, Supplier<Item> mushroomType) {
 		super(properties);
 		this.mushroomType = mushroomType;
 		this.setDefaultState(this.stateContainer.getBaseState().with(COLONY_AGE, 0));
@@ -53,14 +56,12 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 	}
 
 	@Override
-	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient)
-	{
+	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return state.get(COLONY_AGE) < 3;
 	}
 
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state)
-	{
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
 		return false;
 	}
 
@@ -72,6 +73,7 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 		}
 	}
+
 	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
 		return new ItemStack(this.mushroomType.get());
 	}
@@ -81,8 +83,7 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 	}
 
 	@Override
-	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state)
-	{
+	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
 		int i = Math.min(3, state.get(COLONY_AGE) + 1);
 		worldIn.setBlockState(pos, state.with(COLONY_AGE, i), 2);
 	}

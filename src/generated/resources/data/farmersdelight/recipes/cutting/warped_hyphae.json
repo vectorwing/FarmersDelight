@@ -1,0 +1,20 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:warped_hyphae"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/axes"
+  },
+  "result": [
+    {
+      "item": "minecraft:stripped_warped_hyphae"
+    },
+    {
+      "item": "farmersdelight:tree_bark"
+    }
+  ],
+  "sound": "minecraft:item.axe.strip"
+}

@@ -3,7 +3,7 @@
   "pools": [
     {
       "name": "pool2",
-      "rolls": 1.0,
+      "rolls": 1,
       "entries": [
         {
           "type": "minecraft:alternatives",
@@ -26,7 +26,8 @@
                   "condition": "minecraft:block_state_property",
                   "block": "farmersdelight:tall_rice_crop",
                   "properties": {
-                    "age": "7"
+                    "age": "7",
+                    "half": "upper"
                   }
                 },
                 {
@@ -56,7 +57,8 @@
                   "condition": "minecraft:block_state_property",
                   "block": "farmersdelight:tall_rice_crop",
                   "properties": {
-                    "age": "7"
+                    "age": "7",
+                    "half": "upper"
                   }
                 }
               ],
@@ -64,16 +66,20 @@
             },
             {
               "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "farmersdelight:tall_rice_crop",
+                  "properties": {
+                    "half": "upper"
+                  }
+                }
+              ],
               "name": "farmersdelight:rice"
             }
           ]
         }
       ]
-    }
-  ],
-  "functions": [
-    {
-      "function": "minecraft:explosion_decay"
     }
   ]
 }

@@ -9,6 +9,8 @@
   "block.farmersdelight.jungle_pantry": "Despensa de madeira da selva",
   "block.farmersdelight.acacia_pantry": "Despensa de acácia",
   "block.farmersdelight.dark_oak_pantry": "Despensa de carvalho escuro",
+  "block.farmersdelight.crimson_pantry": "Despensa carmesim",
+  "block.farmersdelight.warped_pantry": "Despensa distorcida",
   "block.farmersdelight.rope": "Corda",
   "block.farmersdelight.safety_net": "Rede de segurança",
   "block.farmersdelight.tatami": "Bloco de tatame",
@@ -21,10 +23,8 @@
   "block.farmersdelight.tomato_crate": "Caixote de tomates",
   "block.farmersdelight.onion_crate": "Caixote de cebolas",
   "block.farmersdelight.rice_bale": "Fardo de arroz",
-
   "block.farmersdelight.brown_mushroom_colony": "Colônia de cogumelos marrons",
   "block.farmersdelight.red_mushroom_colony": "Colônia de cogumelos vermelhos",
-
   "block.farmersdelight.wild_cabbages": "Couve silvestre",
   "block.farmersdelight.wild_tomatoes": "Tomates rasteiros",
   "block.farmersdelight.wild_onions": "Cebola silvestre",
@@ -43,11 +43,9 @@
   "item.farmersdelight.cabbage_seeds": "Sementes de repolho",
   "item.farmersdelight.tomato_seeds": "Sementes de tomate",
   "item.farmersdelight.rice_panicle": "Panícula de arroz",
-
   "item.farmersdelight.straw": "Palha",
   "item.farmersdelight.canvas": "Lona",
   "item.farmersdelight.tree_bark": "Casca de árvore",
-
   "item.farmersdelight.tomato_sauce": "Molho de tomate",
   "item.farmersdelight.milk_bottle": "Frasco de leite",
   "item.farmersdelight.hot_cocoa": "Chocolate quente",
@@ -72,12 +70,11 @@
   "item.farmersdelight.sweet_berry_cookie": "Biscoito de bagas doces",
   "item.farmersdelight.honey_cookie": "Biscoito de mel",
   "item.farmersdelight.earthworm": "Minhoca",
-
   "item.farmersdelight.flint_knife": "Faca de sílex",
   "item.farmersdelight.iron_knife": "Faca de ferro",
   "item.farmersdelight.golden_knife": "Faca de ouro",
   "item.farmersdelight.diamond_knife": "Faca de diamante",
-
+  "item.farmersdelight.netherite_knife": "Faca de netherita",
   "item.farmersdelight.barbecue_stick": "Churrasco no palito",
   "item.farmersdelight.egg_sandwich": "Pão com ovo",
   "item.farmersdelight.chicken_sandwich": "Sanduíche de frango",
@@ -88,6 +85,7 @@
 
   "item.farmersdelight.cooked_rice": "Arroz cozido",
   "item.farmersdelight.mixed_salad": "Salada mista",
+  "item.farmersdelight.nether_salad": "Salada do Nether",
   "item.farmersdelight.beef_stew": "Ensopado de carne",
   "item.farmersdelight.chicken_soup": "Sopa de frango",
   "item.farmersdelight.vegetable_soup": "Sopa de legumes",
@@ -108,7 +106,6 @@
 
   "item.farmersdelight.dog_food": "Ração para cães",
   "item.farmersdelight.horse_feed": "Alimento para cavalos",
-
   "effect.farmersdelight.nourished": "Nutrição",
   "effect.farmersdelight.comfort": "Conforto",
 
@@ -116,7 +113,6 @@
   "enchantment.farmersdelight.backstabbing.desc": "Amplifica o dano ao atingir um alvo pelas costas.",
 
   "itemGroup.farmersdelight": "Farmer's Delight",
-
   "farmersdelight.container.cooking_pot": "Panela",
   "farmersdelight.container.cooking_pot.served_on": "Servido em: ",
   "farmersdelight.container.basket": "Cesto",
@@ -125,7 +121,6 @@
   "farmersdelight.tooltip.cooking_pot.empty": "Vazia",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Contém 1 porção de:",
   "farmersdelight.tooltip.cooking_pot.many_servings": "Contém %s porções de:",
-
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "Um mundo de sabor te espera!",
   "farmersdelight.advancement.craft_knife": "Caçar e colher",
@@ -136,6 +131,8 @@
   "farmersdelight.advancement.harvest_straw.desc": "Colha plantas gramíneas com uma Faca para obter Palha",
   "farmersdelight.advancement.get_rich_soil": "Comida de plantas",
   "farmersdelight.advancement.get_rich_soil.desc": "Deixe um pouco de Composto Orgânico decompor até se tornar solo rico",
+  "farmersdelight.advancement.obtain_netherite_knife": "Se você não aguenta o calor...",
+  "farmersdelight.advancement.obtain_netherite_knife.desc": "Contra qualquer bom julgamento, gaste uma barra inteira de Netherita para aprimorar sua faca",
 
   "farmersdelight.advancement.place_campfire": "Bonfire Lit",
   "farmersdelight.advancement.place_campfire.desc": "Acenda uma Fogueira para lhe aquecer à noite",
@@ -151,7 +148,6 @@
   "farmersdelight.advancement.use_cutting_board.desc": "Com uma ferramenta em mãos, use a tábua de corte para partir alguns itens",
   "farmersdelight.advancement.master_chef": "Mestre-cuca",
   "farmersdelight.advancement.master_chef.desc": "Coma uma porção de cada refeição disponível!",
-
   "block.cooking_pot.boil": "Panela Fervendo",
   "block.cooking_pot.boil.subtitles": "Panela fervendo",
   "block.cutting_board.knife": "Faca Cortando",

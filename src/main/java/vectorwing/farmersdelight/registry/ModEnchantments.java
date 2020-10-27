@@ -10,8 +10,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.enchantments.BackstabbingEnchantment;
 import vectorwing.farmersdelight.items.KnifeItem;
 
-public class ModEnchantments
-{
+public class ModEnchantments {
 	public static final EnchantmentType KNIFE = EnchantmentType.create("knife", item -> item instanceof KnifeItem);
 
 	public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, FarmersDelight.MODID);

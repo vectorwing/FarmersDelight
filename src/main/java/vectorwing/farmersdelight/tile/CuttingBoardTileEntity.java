@@ -1,12 +1,16 @@
 package vectorwing.farmersdelight.tile;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ShearsItem;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -31,8 +35,7 @@ import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 
 import javax.annotation.Nullable;
 
-public class CuttingBoardTileEntity extends TileEntity
-{
+public class CuttingBoardTileEntity extends TileEntity {
 	private boolean isItemCarvingBoard;
 	private ItemStackHandler itemHandler = createHandler();
 	private LazyOptional<IItemHandler> handlerBoard = LazyOptional.of(() -> itemHandler);
@@ -44,11 +47,13 @@ public class CuttingBoardTileEntity extends TileEntity
 		this.isItemCarvingBoard = false;
 	}
 
-	public CuttingBoardTileEntity() { this(ModTileEntityTypes.CUTTING_BOARD_TILE.get(), CuttingBoardRecipe.TYPE); }
+	public CuttingBoardTileEntity() {
+		this(ModTileEntityTypes.CUTTING_BOARD_TILE.get(), CuttingBoardRecipe.TYPE);
+	}
 
 	@Override
-	public void read(CompoundNBT compound) {
-		super.read(compound);
+	public void read(BlockState state, CompoundNBT compound) {
+		super.read(state, compound);
 		this.isItemCarvingBoard = compound.getBoolean("IsItemCarved");
 		this.itemHandler.deserializeNBT(compound.getCompound("Inventory"));
 	}
@@ -70,14 +75,14 @@ public class CuttingBoardTileEntity extends TileEntity
 		return this.write(new CompoundNBT());
 	}
 
-	@Override
-	public void handleUpdateTag(CompoundNBT tag) {
-		this.read(tag);
-	}
+//	@Override
+//	public void handleUpdateTag(CompoundNBT tag) {
+//		this.read(tag);
+//	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-		this.read(pkt.getNbtCompound());
+		this.read(this.getBlockState(), pkt.getNbtCompound());
 	}
 
 	private void inventoryChanged() {
@@ -89,6 +94,7 @@ public class CuttingBoardTileEntity extends TileEntity
 
 	/**
 	 * Attempts to apply a recipe to the Cutting Board's stored item, using the given tool.
+	 *
 	 * @param tool The item stack used to process the item.
 	 * @return Whether the process succeeded or failed.
 	 */
@@ -108,8 +114,9 @@ public class CuttingBoardTileEntity extends TileEntity
 				tool.damageItem(1, player, (user) -> {
 					user.sendBreakAnimation(EquipmentSlotType.MAINHAND);
 				});
-			} else {
-				if (tool.attemptDamageItem(1, world.rand, (ServerPlayerEntity)null)) {
+			}
+			else {
+				if (tool.attemptDamageItem(1, world.rand, (ServerPlayerEntity) null)) {
 					tool.setCount(0);
 				}
 			}
@@ -134,15 +141,19 @@ public class CuttingBoardTileEntity extends TileEntity
 
 		if (sound != null) {
 			this.playSound(sound, 1.0F, 1.0F);
-		} else if (tool instanceof ShearsItem) {
+		}
+		else if (tool instanceof ShearsItem) {
 			this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
-		} else if (tool instanceof KnifeItem) {
+		}
+		else if (tool instanceof KnifeItem) {
 			this.playSound(ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), 0.8F, 1.0F);
-		} else if (boardItem instanceof BlockItem) {
+		}
+		else if (boardItem instanceof BlockItem) {
 			Block block = ((BlockItem) boardItem).getBlock();
 			SoundType soundType = block.getSoundType(block.getDefaultState());
 			this.playSound(soundType.getBreakSound(), 1.0F, 0.8F);
-		} else {
+		}
+		else {
 			this.playSound(SoundEvents.BLOCK_WOOD_BREAK, 1.0F, 0.8F);
 		}
 	}
@@ -205,8 +216,7 @@ public class CuttingBoardTileEntity extends TileEntity
 	private ItemStackHandler createHandler() {
 		return new ItemStackHandler() {
 			@Override
-			public int getSlotLimit(int slot)
-			{
+			public int getSlotLimit(int slot) {
 				return 1;
 			}
 

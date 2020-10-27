@@ -121,6 +121,22 @@ public class CuttingRecipes {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_WOOD), Ingredient.fromTag(ForgeTags.TOOLS_AXES), Items.STRIPPED_DARK_OAK_WOOD)
 				.addResult(ModItems.TREE_BARK.get())
 				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
+
+		// Dark Oak
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CRIMSON_STEM), Ingredient.fromTag(ForgeTags.TOOLS_AXES), Items.STRIPPED_CRIMSON_STEM)
+				.addResult(ModItems.TREE_BARK.get())
+				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CRIMSON_HYPHAE), Ingredient.fromTag(ForgeTags.TOOLS_AXES), Items.STRIPPED_CRIMSON_HYPHAE)
+				.addResult(ModItems.TREE_BARK.get())
+				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
+
+		// Dark Oak
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_STEM), Ingredient.fromTag(ForgeTags.TOOLS_AXES), Items.STRIPPED_WARPED_STEM)
+				.addResult(ModItems.TREE_BARK.get())
+				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_HYPHAE), Ingredient.fromTag(ForgeTags.TOOLS_AXES), Items.STRIPPED_WARPED_HYPHAE)
+				.addResult(ModItems.TREE_BARK.get())
+				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
 	}
 
 	private static void salvageWoodenFurniture(Consumer<IFinishedRecipe> consumer) {
@@ -142,6 +158,12 @@ public class CuttingRecipes {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_DOOR), Ingredient.fromTag(ForgeTags.TOOLS_AXES), Items.DARK_OAK_PLANKS).build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_TRAPDOOR), Ingredient.fromTag(ForgeTags.TOOLS_AXES), Items.DARK_OAK_PLANKS).build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_SIGN), Ingredient.fromTag(ForgeTags.TOOLS_AXES), Items.DARK_OAK_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CRIMSON_DOOR), Ingredient.fromTag(ForgeTags.TOOLS_AXES), Items.CRIMSON_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CRIMSON_TRAPDOOR), Ingredient.fromTag(ForgeTags.TOOLS_AXES), Items.CRIMSON_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CRIMSON_SIGN), Ingredient.fromTag(ForgeTags.TOOLS_AXES), Items.CRIMSON_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_DOOR), Ingredient.fromTag(ForgeTags.TOOLS_AXES), Items.WARPED_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_TRAPDOOR), Ingredient.fromTag(ForgeTags.TOOLS_AXES), Items.WARPED_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_SIGN), Ingredient.fromTag(ForgeTags.TOOLS_AXES), Items.WARPED_PLANKS).build(consumer);
 	}
 
 	private static void salvageUsingShears(Consumer<IFinishedRecipe> consumer) {

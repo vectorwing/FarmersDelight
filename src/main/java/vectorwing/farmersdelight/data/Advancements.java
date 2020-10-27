@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.data;
 
 import com.google.common.collect.Sets;
 import com.google.gson.GsonBuilder;
+import mezz.jei.api.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.FrameType;
@@ -24,34 +25,36 @@ import vectorwing.farmersdelight.registry.ModEffects;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.TextUtils;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class Advancements extends AdvancementProvider
-{
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+public class Advancements extends AdvancementProvider {
 	private final Path PATH;
 	public static final Logger LOGGER = LogManager.getLogger();
 
-	public Advancements(DataGenerator generatorIn)
-	{
+	public Advancements(DataGenerator generatorIn) {
 		super(generatorIn);
 		PATH = generatorIn.getOutputFolder();
 	}
 
-	public void act(DirectoryCache cache) throws IOException
-	{
+	public void act(DirectoryCache cache) {
 		Set<ResourceLocation> set = Sets.newHashSet();
 		Consumer<Advancement> consumer = (advancement) -> {
 			if (!set.add(advancement.getId())) {
 				throw new IllegalStateException("Duplicate advancement " + advancement.getId());
-			} else {
+			}
+			else {
 				Path path1 = getPath(PATH, advancement);
 
-				try	{
+				try {
 					IDataProvider.save((new GsonBuilder()).setPrettyPrinting().create(), cache, advancement.copy().serialize(), path1);
-				} catch (IOException ioexception) {
+				}
+				catch (IOException ioexception) {
 					LOGGER.error("Couldn't save advancement {}", path1, ioexception);
 				}
 			}
@@ -60,15 +63,12 @@ public class Advancements extends AdvancementProvider
 		new FarmersDelightAdvancements().accept(consumer);
 	}
 
-	private static Path getPath(Path pathIn, Advancement advancementIn)
-	{
-		return pathIn.resolve("data/"+advancementIn.getId().getNamespace()+"/advancements/"+advancementIn.getId().getPath()+".json");
+	private static Path getPath(Path pathIn, Advancement advancementIn) {
+		return pathIn.resolve("data/" + advancementIn.getId().getNamespace() + "/advancements/" + advancementIn.getId().getPath() + ".json");
 	}
 
-	public static class FarmersDelightAdvancements implements Consumer<Consumer<Advancement>>
-	{
-		public void accept(Consumer<Advancement> consumer)
-		{
+	public static class FarmersDelightAdvancements implements Consumer<Consumer<Advancement>> {
+		public void accept(Consumer<Advancement> consumer) {
 			Advancement farmersDelight = Advancement.Builder.builder()
 					.withDisplay(ModItems.COOKING_POT.get(),
 							TextUtils.getTranslation("advancement.root"),
@@ -86,17 +86,22 @@ public class Advancements extends AdvancementProvider
 					.withCriterion("golden_knife", InventoryChangeTrigger.Instance.forItems(ModItems.GOLDEN_KNIFE.get())).withRequirementsStrategy(IRequirementsStrategy.OR)
 					.register(consumer, getNameId("main/craft_knife"));
 
-			Advancement dippingYourRoots = getAdvancement(huntAndGather, ModItems.RICE_PANICLE.get(), "plant_rice", FrameType.TASK, true, true, false)
-					.withCriterion("plant_rice", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.RICE_CROP.get()))
-					.register(consumer, getNameId("main/plant_rice"));
-
 			Advancement graspingAtStraws = getAdvancement(huntAndGather, ModItems.STRAW.get(), "harvest_straw", FrameType.TASK, true, true, false)
 					.withCriterion("harvest_straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
 					.register(consumer, getNameId("main/harvest_straw"));
 
-			Advancement plantFood = getAdvancement(graspingAtStraws, ModItems.RICH_SOIL.get(), "get_rich_soil", FrameType.TASK, true, true, false)
+			Advancement dippingYourRoots = getAdvancement(graspingAtStraws, ModItems.RICE_PANICLE.get(), "plant_rice", FrameType.TASK, true, true, false)
+					.withCriterion("plant_rice", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.RICE_CROP.get()))
+					.register(consumer, getNameId("main/plant_rice"));
+
+			Advancement plantFood = getAdvancement(dippingYourRoots, ModItems.RICH_SOIL.get(), "get_rich_soil", FrameType.TASK, true, true, false)
 					.withCriterion("get_rich_soil", InventoryChangeTrigger.Instance.forItems(ModItems.RICH_SOIL.get()))
 					.register(consumer, getNameId("main/get_rich_soil"));
+
+			Advancement cantTakeTheHeat = getAdvancement(huntAndGather, ModItems.NETHERITE_KNIFE.get(), "obtain_netherite_knife", FrameType.CHALLENGE, true, true, false)
+					.withCriterion("obtain_netherite_knife", InventoryChangeTrigger.Instance.forItems(ModItems.NETHERITE_KNIFE.get()))
+					.withRewards(AdvancementRewards.Builder.experience(200))
+					.register(consumer, getNameId("main/obtain_netherite_knife"));
 
 			// Cooking Branch
 			Advancement bonfireLit = getAdvancement(farmersDelight, Blocks.CAMPFIRE, "place_campfire", FrameType.TASK, true, true, false)
@@ -120,7 +125,7 @@ public class Advancements extends AdvancementProvider
 					.register(consumer, getNameId("main/eat_nourishing_food"));
 
 			Advancement watchYourFingers = getAdvancement(fireUpTheGrill, ModItems.CUTTING_BOARD.get(), "use_cutting_board", FrameType.TASK, true, true, false)
-					.withCriterion("cutting_board", new CuttingBoardTrigger.Instance())
+					.withCriterion("cutting_board", CuttingBoardTrigger.Instance.simple())
 					.register(consumer, getNameId("main/use_cutting_board"));
 
 			Advancement masterChef = getAdvancement(dinnerIsServed, ModItems.PASTA_WITH_MUTTON_CHOP.get(), "master_chef", FrameType.CHALLENGE, true, true, false)
@@ -146,8 +151,7 @@ public class Advancements extends AdvancementProvider
 					.register(consumer, getNameId("main/master_chef"));
 		}
 
-		protected static Advancement.Builder getAdvancement(Advancement parent, IItemProvider display, String name, FrameType frame, boolean showToast, boolean announceToChat, boolean hidden)
-		{
+		protected static Advancement.Builder getAdvancement(Advancement parent, IItemProvider display, String name, FrameType frame, boolean showToast, boolean announceToChat, boolean hidden) {
 			return Advancement.Builder.builder().withParent(parent).withDisplay(display,
 					TextUtils.getTranslation("advancement." + name),
 					TextUtils.getTranslation("advancement." + name + ".desc"),

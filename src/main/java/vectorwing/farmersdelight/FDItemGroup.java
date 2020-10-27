@@ -6,13 +6,15 @@ import net.minecraft.util.NonNullList;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 
-public class FDItemGroup extends ItemGroup
-{
-	public FDItemGroup(String label)
-	{
+import javax.annotation.Nonnull;
+
+@SuppressWarnings("unused")
+public class FDItemGroup extends ItemGroup {
+	public FDItemGroup(String label) {
 		super(label);
 	}
 
+	@Nonnull
 	@Override
 	public ItemStack createIcon() {
 		return new ItemStack(ModBlocks.STOVE.get());
@@ -30,8 +32,7 @@ public class FDItemGroup extends ItemGroup
 //		registerPetMeals(items);
 //	}
 
-	private void registerWorkstations(NonNullList<ItemStack> items)
-	{
+	private void registerWorkstations(NonNullList<ItemStack> items) {
 		items.add(new ItemStack(ModBlocks.STOVE.get()));
 		items.add(new ItemStack(ModBlocks.COOKING_POT.get()));
 		items.add(new ItemStack(ModBlocks.BASKET.get()));
@@ -39,8 +40,7 @@ public class FDItemGroup extends ItemGroup
 		items.add(new ItemStack(ModBlocks.SAFETY_NET.get()));
 	}
 
-	private void registerCrops(NonNullList<ItemStack> items)
-	{
+	private void registerCrops(NonNullList<ItemStack> items) {
 		items.add(new ItemStack(ModItems.WILD_CABBAGES.get()));
 		items.add(new ItemStack(ModItems.WILD_ONIONS.get()));
 		items.add(new ItemStack(ModItems.WILD_TOMATOES.get()));

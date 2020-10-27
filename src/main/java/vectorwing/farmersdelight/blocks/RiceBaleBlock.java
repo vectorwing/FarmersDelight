@@ -1,10 +1,9 @@
 package vectorwing.farmersdelight.blocks;
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
@@ -16,17 +15,19 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class RiceBaleBlock extends Block
-{
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+@SuppressWarnings("deprecation")
+public class RiceBaleBlock extends Block {
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
 
-	public RiceBaleBlock()
-	{
+	public RiceBaleBlock() {
 		super(Properties.from(Blocks.HAY_BLOCK));
 	}
 
-	public RiceBaleBlock(Properties properties)
-	{
+	public RiceBaleBlock(Properties properties) {
 		super(properties);
 		this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.UP));
 	}

@@ -15,7 +15,6 @@
   
   "block.farmersdelight.brown_mushroom_colony": "棕色蘑菇菌落",
   "block.farmersdelight.red_mushroom_colony": "红色蘑菇菌落",
-
   "block.farmersdelight.wild_cabbages": "野生卷心菜",
   "block.farmersdelight.wild_tomatoes": "番茄藤蔓",
   "block.farmersdelight.wild_onions": "野生洋葱",
@@ -30,11 +29,9 @@
   "item.farmersdelight.cabbage_seeds": "卷心菜种子",
   "item.farmersdelight.tomato_seeds": "番茄种子",
   "item.farmersdelight.rice_panicle": "稻米穗",
-
   "item.farmersdelight.straw": "秸秆",
   "item.farmersdelight.canvas": "粗布",
   "item.farmersdelight.tree_bark": "树皮",
-
   "item.farmersdelight.tomato_sauce": "番茄酱",
   "item.farmersdelight.fried_egg": "煎鸡蛋",
   "item.farmersdelight.milk_bottle": "牛奶瓶",
@@ -61,12 +58,10 @@
   "item.farmersdelight.sweet_berry_cookie": "甜莓曲奇",
   "item.farmersdelight.honey_cookie": "蜂蜜曲奇",
   "item.farmersdelight.earthworm": "蚯蚓",
-
   "item.farmersdelight.flint_knife": "燧石刀",
   "item.farmersdelight.iron_knife": "铁刀",
   "item.farmersdelight.golden_knife": "金刀",
   "item.farmersdelight.diamond_knife": "钻石刀",
-
   "item.farmersdelight.barbecue_stick": "烧烤串",
   "item.farmersdelight.egg_sandwich": "鸡蛋三明治",
   "item.farmersdelight.chicken_sandwich": "鸡肉三明治",
@@ -102,15 +97,12 @@
   "enchantment.farmersdelight.backstabbing.desc": "增加从后攻击目标时的伤害。",
   
   "itemGroup.farmersdelight": "欣悦农夫",
-
   "farmersdelight.container.cooking_pot": "厨锅",
   "farmersdelight.container.cooking_pot.served_on": "摆放于：%s",
   "farmersdelight.container.basket": "篮子",
-
   "farmersdelight.tooltip.cooking_pot.empty": "空",
   "farmersdelight.tooltip.cooking_pot.single_serving": "目前的 1 份食物：",
   "farmersdelight.tooltip.cooking_pot.many_servings": "目前的 %s 份食物：",
-
   "farmersdelight.advancement.root": "欣悦农夫",
   "farmersdelight.advancement.root.desc": "美味的世界在等着你！",
   "farmersdelight.advancement.craft_knife": "刀耕火种",

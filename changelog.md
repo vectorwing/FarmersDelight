@@ -1,12 +1,18 @@
 # Changelog
 
 ## 0.2.3
+1.16.3+
+- Re-implemented world generation to the new .json system:
+  - Configs for wild patches have been changed, and are using new defaults;
+  - Beach wild patches (Wild Cabbage and Sea Beet) now use a different weight pattern, so values are similar to other crops;
+  - These two should change themselves on all instances, but we advise all players and modpack makers to reset their configs once, if migrating.
+  
 1.15.2+
 - Adds Compost Heaps to village generation
   - These structures house heaps of Organic Compost, which farmers lay down to decompose into Rich Soil. Each biome has a different composting strategy based on their biome and climate!
   - Some of them have small farms mixed in, or examples of other mechanics;
   - They often have a few blocks of Rich Soil ready for taking!
-- Adds 3 new meals: Cooked Rice, Grilled Salmon and Baked Cod Pot;
+- Adds 3 new meals: Cooked Rice, Grilled Salmon and Baked Cod Stew;
 - Adds Tatami, a traditional flooring based on straw and canvas:
   - Tatami Blocks place as a "half-mat" by default. Placing another tatami against them will complete a "full-mat" pair! You can sneak-place to suppress pairing;
   - Tatami Mats are carpet-thin, come in Full and Half, and can be interchanged to and fro via crafting. They have a simpler placement and behave like carpets.

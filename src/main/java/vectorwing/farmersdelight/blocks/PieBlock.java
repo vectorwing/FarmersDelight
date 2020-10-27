@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.blocks;
 
+import mezz.jei.api.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -24,12 +25,15 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Supplier;
 
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 public class PieBlock extends Block {
 
 	public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 3);
-	protected static final VoxelShape[] SHAPES = new VoxelShape[] {
+	protected static final VoxelShape[] SHAPES = new VoxelShape[]{
 			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 14.0D),
 			VoxelShapes.or(
 					Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 8.0D),
@@ -93,7 +97,8 @@ public class PieBlock extends Block {
 	private ActionResultType consumeBite(World worldIn, BlockPos pos, BlockState state, PlayerEntity playerIn) {
 		if (!playerIn.canEat(false)) {
 			return ActionResultType.PASS;
-		} else {
+		}
+		else {
 			playerIn.getFoodStats().addStats(this.getBiteHunger(), this.getBiteSaturation());
 			if (this.getPieEffect() != null) {
 				playerIn.addPotionEffect(this.getPieEffect());
@@ -101,7 +106,8 @@ public class PieBlock extends Block {
 			int i = state.get(BITES);
 			if (i < getMaxBites() - 1) {
 				worldIn.setBlockState(pos, state.with(BITES, i + 1), 3);
-			} else {
+			}
+			else {
 				worldIn.removeBlock(pos, false);
 			}
 			worldIn.playSound(null, pos, SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.PLAYERS, 0.8F, 0.8F);
@@ -116,7 +122,8 @@ public class PieBlock extends Block {
 		int i = state.get(BITES);
 		if (i < getMaxBites() - 1) {
 			worldIn.setBlockState(pos, state.with(BITES, i + 1), 3);
-		} else {
+		}
+		else {
 			worldIn.removeBlock(pos, false);
 		}
 		InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), this.getPieSliceItem());

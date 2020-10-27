@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "farmersdelight:block/wild_potatoes" }
+    "": {
+      "model": "farmersdelight:block/wild_potatoes"
+    }
   }
 }

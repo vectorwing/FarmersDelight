@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.items;
 
 import com.google.common.collect.Sets;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -17,14 +18,18 @@ import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.utils.MathUtils;
 
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Set;
 
-public class KnifeItem extends ToolItem {
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+public class KnifeItem extends ToolItem
+{
 	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.HAY_BLOCK, ModBlocks.RICE_BALE.get());
 
-	public KnifeItem(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties builder)	{
-		super(attackDamageIn, attackSpeedIn, tier, EFFECTIVE_ON, builder);
-	}
+    public KnifeItem(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties builder) {
+        super(attackDamageIn, attackSpeedIn, tier, EFFECTIVE_ON, builder);
+    }
 
 	public float getDestroySpeed(ItemStack stack, BlockState state) {
 		Material material = state.getMaterial();

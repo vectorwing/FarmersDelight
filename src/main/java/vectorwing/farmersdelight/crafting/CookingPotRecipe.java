@@ -3,14 +3,13 @@ package vectorwing.farmersdelight.crafting;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.SoupItem;
 import net.minecraft.item.crafting.*;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.JSONUtils;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistryEntry;
@@ -19,9 +18,11 @@ import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.FarmersDelight;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
-public class CookingPotRecipe implements IRecipe<IInventory>
-{
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+public class CookingPotRecipe implements IRecipe<IInventory> {
 	private static final Logger LOGGER = LogManager.getLogger();
 
 	public static IRecipeType<CookingPotRecipe> TYPE = IRecipeType.register(FarmersDelight.MODID + ":cooking");
@@ -36,8 +37,7 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 	private final float experience;
 	private final int cookTime;
 
-	public CookingPotRecipe(ResourceLocation id, String group, NonNullList<Ingredient> inputItems, ItemStack output, ItemStack container, float experience, int cookTime)
-	{
+	public CookingPotRecipe(ResourceLocation id, String group, NonNullList<Ingredient> inputItems, ItemStack output, ItemStack container, float experience, int cookTime) {
 		this.id = id;
 		this.group = group;
 		this.inputItems = inputItems;
@@ -45,9 +45,11 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 
 		if (!container.isEmpty()) {
 			this.container = container;
-		} else if (!output.getContainerItem().isEmpty()) {
+		}
+		else if (!output.getContainerItem().isEmpty()) {
 			this.container = output.getContainerItem();
-		} else {
+		}
+		else {
 			this.container = ItemStack.EMPTY;
 		}
 
@@ -56,8 +58,7 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 	}
 
 	@Override
-	public ResourceLocation getId()
-	{
+	public ResourceLocation getId() {
 		return this.id;
 	}
 
@@ -72,12 +73,13 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 	}
 
 	@Override
-	public ItemStack getRecipeOutput()
-	{
+	public ItemStack getRecipeOutput() {
 		return this.output;
 	}
 
-	public ItemStack getOutputContainer() { return this.container; }
+	public ItemStack getOutputContainer() {
+		return this.container;
+	}
 
 	@Override
 	public ItemStack getCraftingResult(IInventory inv) {
@@ -88,16 +90,17 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 		return this.experience;
 	}
 
-	public int getCookTime() { return this.cookTime; }
+	public int getCookTime() {
+		return this.cookTime;
+	}
 
 	@Override
-	public boolean matches(IInventory inv, World worldIn)
-	{
+	public boolean matches(IInventory inv, World worldIn) {
 		RecipeItemHelper recipeitemhelper = new RecipeItemHelper();
 		java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
 		int i = 0;
 
-		for(int j = 0; j < INPUT_SLOTS; ++j) {
+		for (int j = 0; j < INPUT_SLOTS; ++j) {
 			ItemStack itemstack = inv.getStackInSlot(j);
 			if (!itemstack.isEmpty()) {
 				++i;
@@ -108,20 +111,17 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 	}
 
 	@Override
-	public boolean canFit(int width, int height)
-	{
+	public boolean canFit(int width, int height) {
 		return width * height >= this.inputItems.size();
 	}
 
 	@Override
-	public IRecipeSerializer<?> getSerializer()
-	{
+	public IRecipeSerializer<?> getSerializer() {
 		return CookingPotRecipe.SERIALIZER;
 	}
 
 	@Override
-	public IRecipeType<?> getType()
-	{
+	public IRecipeType<?> getType() {
 		return CookingPotRecipe.TYPE;
 	}
 
@@ -132,15 +132,16 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 		}
 
 		@Override
-		public CookingPotRecipe read(ResourceLocation recipeId, JsonObject json)
-		{
+		public CookingPotRecipe read(ResourceLocation recipeId, JsonObject json) {
 			final String groupIn = JSONUtils.getString(json, "group", "");
 			final NonNullList<Ingredient> inputItemsIn = readIngredients(JSONUtils.getJsonArray(json, "ingredients"));
 			if (inputItemsIn.isEmpty()) {
 				throw new JsonParseException("No ingredients for cooking recipe");
-			} else if (inputItemsIn.size() > CookingPotRecipe.INPUT_SLOTS) {
+			}
+			else if (inputItemsIn.size() > CookingPotRecipe.INPUT_SLOTS) {
 				throw new JsonParseException("Too many ingredients for cooking recipe! The max is " + CookingPotRecipe.INPUT_SLOTS);
-			} else {
+			}
+			else {
 				final ItemStack outputIn = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
 				ItemStack container = JSONUtils.hasField(json, "container") ? ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "container")) : ItemStack.EMPTY;
 				final float experienceIn = JSONUtils.getFloat(json, "experience", 0.0F);
@@ -152,7 +153,7 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 		private static NonNullList<Ingredient> readIngredients(JsonArray ingredientArray) {
 			NonNullList<Ingredient> nonnulllist = NonNullList.create();
 
-			for(int i = 0; i < ingredientArray.size(); ++i) {
+			for (int i = 0; i < ingredientArray.size(); ++i) {
 				Ingredient ingredient = Ingredient.deserialize(ingredientArray.get(i));
 				if (!ingredient.hasNoMatchingItems()) {
 					nonnulllist.add(ingredient);
@@ -164,13 +165,12 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 
 		@Nullable
 		@Override
-		public CookingPotRecipe read(ResourceLocation recipeId, PacketBuffer buffer)
-		{
+		public CookingPotRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
 			String groupIn = buffer.readString(32767);
 			int i = buffer.readVarInt();
 			NonNullList<Ingredient> inputItemsIn = NonNullList.withSize(i, Ingredient.EMPTY);
 
-			for(int j = 0; j < inputItemsIn.size(); ++j) {
+			for (int j = 0; j < inputItemsIn.size(); ++j) {
 				inputItemsIn.set(j, Ingredient.read(buffer));
 			}
 
@@ -182,12 +182,11 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 		}
 
 		@Override
-		public void write(PacketBuffer buffer, CookingPotRecipe recipe)
-		{
+		public void write(PacketBuffer buffer, CookingPotRecipe recipe) {
 			buffer.writeString(recipe.group);
 			buffer.writeVarInt(recipe.inputItems.size());
 
-			for(Ingredient ingredient : recipe.inputItems) {
+			for (Ingredient ingredient : recipe.inputItems) {
 				ingredient.write(buffer);
 			}
 

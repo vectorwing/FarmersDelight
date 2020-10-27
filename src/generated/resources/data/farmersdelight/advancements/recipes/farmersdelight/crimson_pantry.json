@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:crimson_pantry"
+    ]
+  },
+  "criteria": {
+    "crimson_trapdoor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:crimson_trapdoor"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:crimson_pantry"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "crimson_trapdoor",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,5 +1,7 @@
 package vectorwing.farmersdelight.integration.jei.cooking;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
+import mcp.MethodsReturnNonnullByDefault;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -17,16 +19,18 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.registry.ModItems;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Arrays;
 
-public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
-{
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe> {
 	public static final ResourceLocation UID = new ResourceLocation(FarmersDelight.MODID, "cooking");
+	protected final IDrawable heatIndicator;
+	protected final IDrawableAnimated arrow;
 	private final String title;
 	private final IDrawable background;
 	private final IDrawable icon;
-	protected final IDrawable heatIndicator;
-	protected final IDrawableAnimated arrow;
 
 	public CookingRecipeCategory(IGuiHelper helper) {
 		title = I18n.format(FarmersDelight.MODID + ".jei.cooking");
@@ -39,45 +43,38 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 	}
 
 	@Override
-	public ResourceLocation getUid()
-	{
+	public ResourceLocation getUid() {
 		return UID;
 	}
 
 	@Override
-	public Class<? extends CookingPotRecipe> getRecipeClass()
-	{
+	public Class<? extends CookingPotRecipe> getRecipeClass() {
 		return CookingPotRecipe.class;
 	}
 
 	@Override
-	public String getTitle()
-	{
+	public String getTitle() {
 		return this.title;
 	}
 
 	@Override
-	public IDrawable getBackground()
-	{
+	public IDrawable getBackground() {
 		return this.background;
 	}
 
 	@Override
-	public IDrawable getIcon()
-	{
+	public IDrawable getIcon() {
 		return this.icon;
 	}
 
 	@Override
-	public void setIngredients(CookingPotRecipe cookingPotRecipe, IIngredients ingredients)
-	{
+	public void setIngredients(CookingPotRecipe cookingPotRecipe, IIngredients ingredients) {
 		ingredients.setInputIngredients(cookingPotRecipe.getIngredients());
 		ingredients.setOutput(VanillaTypes.ITEM, cookingPotRecipe.getRecipeOutput());
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, CookingPotRecipe recipe, IIngredients ingredients)
-	{
+	public void setRecipe(IRecipeLayout recipeLayout, CookingPotRecipe recipe, IIngredients ingredients) {
 		final int MEAL_DISPLAY = 6;
 		final int CONTAINER_INPUT = 7;
 		final int OUTPUT = 8;
@@ -108,8 +105,8 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 	}
 
 	@Override
-	public void draw(CookingPotRecipe recipe, double mouseX, double mouseY) {
-		arrow.draw(60, 9);
-		heatIndicator.draw(18, 39);
+	public void draw(CookingPotRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
+		arrow.draw(matrixStack, 60, 9);
+		heatIndicator.draw(matrixStack, 18, 39);
 	}
 }

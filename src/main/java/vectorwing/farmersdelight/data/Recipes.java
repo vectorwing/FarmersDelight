@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.data;
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.tags.ItemTags;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.data.recipes.CuttingRecipes;
@@ -16,12 +17,13 @@ import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.utils.tags.ForgeTags;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Consumer;
 
-public class Recipes extends RecipeProvider
-{
-	public Recipes(DataGenerator generator)
-	{
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+public class Recipes extends RecipeProvider {
+	public Recipes(DataGenerator generator) {
 		super(generator);
 	}
 
@@ -193,6 +195,22 @@ public class Recipes extends RecipeProvider
 				.key('D', Items.DARK_OAK_TRAPDOOR)
 				.addCriterion("dark_oak_trapdoor", InventoryChangeTrigger.Instance.forItems(Items.DARK_OAK_TRAPDOOR))
 				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModBlocks.CRIMSON_PANTRY.get())
+				.patternLine("___")
+				.patternLine("D D")
+				.patternLine("___")
+				.key('_', Items.CRIMSON_SLAB)
+				.key('D', Items.CRIMSON_TRAPDOOR)
+				.addCriterion("crimson_trapdoor", InventoryChangeTrigger.Instance.forItems(Items.CRIMSON_TRAPDOOR))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModBlocks.WARPED_PANTRY.get())
+				.patternLine("___")
+				.patternLine("D D")
+				.patternLine("___")
+				.key('_', Items.WARPED_SLAB)
+				.key('D', Items.WARPED_TRAPDOOR)
+				.addCriterion("warped_trapdoor", InventoryChangeTrigger.Instance.forItems(Items.WARPED_TRAPDOOR))
+				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ModItems.ROPE.get(), 3)
 				.patternLine("s")
 				.patternLine("s")
@@ -320,6 +338,9 @@ public class Recipes extends RecipeProvider
 				.key('s', Items.STICK)
 				.addCriterion("gold_ingot", InventoryChangeTrigger.Instance.forItems(Items.GOLD_INGOT))
 				.build(consumer);
+		SmithingRecipeBuilder.smithingRecipe(Ingredient.fromItems(ModItems.DIAMOND_KNIFE.get()), Ingredient.fromItems(Items.NETHERITE_INGOT), ModItems.NETHERITE_KNIFE.get())
+				.addCriterion("netherite_ingot", InventoryChangeTrigger.Instance.forItems(Items.NETHERITE_INGOT))
+				.build(consumer, FarmersDelight.MODID + ":netherite_knife_smithing");
 	}
 
 	private void recipesMaterials(Consumer<IFinishedRecipe> consumer) {
@@ -449,6 +470,12 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.BOWL)
 				.addCriterion("has_bowl", InventoryChangeTrigger.Instance.forItems(Items.BOWL))
 				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.NETHER_SALAD.get())
+				.addIngredient(Items.CRIMSON_FUNGUS)
+				.addIngredient(Items.WARPED_FUNGUS)
+				.addIngredient(Items.BOWL)
+				.addCriterion("bowl", InventoryChangeTrigger.Instance.forItems(Items.BOWL))
+				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.BARBECUE_STICK.get(), 2)
 				.addIngredient(ForgeTags.CROPS_TOMATO)
 				.addIngredient(ForgeTags.CROPS_ONION)
@@ -487,6 +514,5 @@ public class Recipes extends RecipeProvider
 				.addCriterion("baked_potato", InventoryChangeTrigger.Instance.forItems(Items.BAKED_POTATO))
 				.build(consumer);
 	}
-
 	private void recipesCookedMeals(Consumer<IFinishedRecipe> consumer) {}
 }

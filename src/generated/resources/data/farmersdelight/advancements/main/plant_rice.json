@@ -1,5 +1,5 @@
 {
-  "parent": "farmersdelight:main/craft_knife",
+  "parent": "farmersdelight:main/harvest_straw",
   "display": {
     "icon": {
       "item": "farmersdelight:rice_panicle"

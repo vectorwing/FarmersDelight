@@ -17,8 +17,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 
 import javax.annotation.Nullable;
 
-public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
-{
+public class CuttingBoardRecipe implements IRecipe<RecipeWrapper> {
 	public static IRecipeType<CuttingBoardRecipe> TYPE = IRecipeType.register(FarmersDelight.MODID + ":cutting");
 	public static final CuttingBoardRecipe.Serializer SERIALIZER = new CuttingBoardRecipe.Serializer();
 
@@ -30,8 +29,7 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 	private final String soundEvent;
 	private final int effort;
 
-	public CuttingBoardRecipe(ResourceLocation id, String group, Ingredient input, Ingredient tool, NonNullList<ItemStack> results, String soundEvent, int effort)
-	{
+	public CuttingBoardRecipe(ResourceLocation id, String group, Ingredient input, Ingredient tool, NonNullList<ItemStack> results, String soundEvent, int effort) {
 		this.id = id;
 		this.group = group;
 		this.input = input;
@@ -42,7 +40,9 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 	}
 
 	@Override
-	public ResourceLocation getId()	{ return this.id; }
+	public ResourceLocation getId() {
+		return this.id;
+	}
 
 	@Override
 	public String getGroup() {
@@ -68,14 +68,12 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 	}
 
 	@Override
-	public ItemStack getCraftingResult(RecipeWrapper inv)
-	{
+	public ItemStack getCraftingResult(RecipeWrapper inv) {
 		return this.results.get(0).copy();
 	}
 
 	@Override
-	public ItemStack getRecipeOutput()
-	{
+	public ItemStack getRecipeOutput() {
 		return this.results.get(0);
 	}
 
@@ -83,7 +81,9 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 		return this.results;
 	}
 
-	public String getSoundEventID() { return this.soundEvent; }
+	public String getSoundEventID() {
+		return this.soundEvent;
+	}
 
 	public int getEffort() {
 		return this.effort;
@@ -101,20 +101,17 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 	}
 
 	@Override
-	public boolean canFit(int width, int height)
-	{
+	public boolean canFit(int width, int height) {
 		return width * height >= this.getMaxInputCount();
 	}
 
 	@Override
-	public IRecipeSerializer<?> getSerializer()
-	{
+	public IRecipeSerializer<?> getSerializer() {
 		return CuttingBoardRecipe.SERIALIZER;
 	}
 
 	@Override
-	public IRecipeType<?> getType()
-	{
+	public IRecipeType<?> getType() {
 		return CuttingBoardRecipe.TYPE;
 	}
 
@@ -125,18 +122,20 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 		}
 
 		@Override
-		public CuttingBoardRecipe read(ResourceLocation recipeId, JsonObject json)
-		{
+		public CuttingBoardRecipe read(ResourceLocation recipeId, JsonObject json) {
 			final String groupIn = JSONUtils.getString(json, "group", "");
 			final NonNullList<Ingredient> inputItemsIn = readIngredients(JSONUtils.getJsonArray(json, "ingredients"));
 			final Ingredient toolIn = Ingredient.deserialize(JSONUtils.getJsonObject(json, "tool"));
 			if (inputItemsIn.isEmpty()) {
 				throw new JsonParseException("No ingredients for cutting recipe");
-			} else if (toolIn.hasNoMatchingItems()) {
+			}
+			else if (toolIn.hasNoMatchingItems()) {
 				throw new JsonParseException("No tool for cutting recipe");
-			} else if (inputItemsIn.size() > 1) {
+			}
+			else if (inputItemsIn.size() > 1) {
 				throw new JsonParseException("Too many ingredients for cutting recipe! Please define only one ingredient.");
-			} else {
+			}
+			else {
 				final NonNullList<ItemStack> results = readResults(JSONUtils.getJsonArray(json, "result"));
 				final String soundID = JSONUtils.getString(json, "sound", "");
 				final int effortIn = JSONUtils.getInt(json, "effort", 1);
@@ -146,7 +145,7 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 
 		private static NonNullList<Ingredient> readIngredients(JsonArray ingredientArray) {
 			NonNullList<Ingredient> nonnulllist = NonNullList.create();
-			for(int i = 0; i < ingredientArray.size(); ++i) {
+			for (int i = 0; i < ingredientArray.size(); ++i) {
 				Ingredient ingredient = Ingredient.deserialize(ingredientArray.get(i));
 				if (!ingredient.hasNoMatchingItems()) {
 					nonnulllist.add(ingredient);
@@ -165,14 +164,13 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 
 		@Nullable
 		@Override
-		public CuttingBoardRecipe read(ResourceLocation recipeId, PacketBuffer buffer)
-		{
+		public CuttingBoardRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
 			String groupIn = buffer.readString(32767);
 			Ingredient inputItemIn = Ingredient.read(buffer);
 			Ingredient toolIn = Ingredient.read(buffer);
 			int i = buffer.readVarInt();
 			NonNullList<ItemStack> resultsIn = NonNullList.withSize(i, ItemStack.EMPTY);
-			for(int j = 0; j < resultsIn.size(); ++j) {
+			for (int j = 0; j < resultsIn.size(); ++j) {
 				resultsIn.set(j, buffer.readItemStack());
 			}
 			String soundEventIn = buffer.readString();
@@ -182,13 +180,12 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 		}
 
 		@Override
-		public void write(PacketBuffer buffer, CuttingBoardRecipe recipe)
-		{
+		public void write(PacketBuffer buffer, CuttingBoardRecipe recipe) {
 			buffer.writeString(recipe.group);
 			recipe.input.write(buffer);
 			recipe.tool.write(buffer);
 			buffer.writeVarInt(recipe.results.size());
-			for(ItemStack result : recipe.results) {
+			for (ItemStack result : recipe.results) {
 				buffer.writeItemStack(result);
 			}
 			buffer.writeString(recipe.soundEvent);

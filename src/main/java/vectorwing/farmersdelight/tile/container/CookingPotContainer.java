@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.tile.container;
 
+
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -19,14 +20,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.tile.CookingPotTileEntity;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModContainerTypes;
+import vectorwing.farmersdelight.tile.CookingPotTileEntity;
 
 import java.util.Objects;
 
-public class CookingPotContainer extends Container
-{
+public class CookingPotContainer extends Container {
 	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "items/empty_container_slot_bowl");
 
 	public final CookingPotTileEntity tileEntity;
@@ -34,8 +34,7 @@ public class CookingPotContainer extends Container
 	private final IIntArray cookingPotData;
 	private final IWorldPosCallable canInteractWithCallable;
 
-	public CookingPotContainer(final int windowId, final PlayerInventory playerInventory, final CookingPotTileEntity tileEntity, IIntArray cookingPotDataIn)
-	{
+	public CookingPotContainer(final int windowId, final PlayerInventory playerInventory, final CookingPotTileEntity tileEntity, IIntArray cookingPotDataIn) {
 		super(ModContainerTypes.COOKING_POT.get(), windowId);
 		this.tileEntity = tileEntity;
 		this.inventoryHandler = tileEntity.getInventory();
@@ -121,19 +120,23 @@ public class CookingPotContainer extends Container
 				if (!this.mergeItemStack(itemstack1, startPlayerInv, endPlayerInv, true)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (index > indexOutput) {
-				if (itemstack1.getItem() == Items.BOWL && !this.mergeItemStack(itemstack1, indexContainerInput, indexContainerInput+1, false)) {
-					return ItemStack.EMPTY;
-				} else if (!this.mergeItemStack(itemstack1, 0, indexOutput, false)) {
+			}
+			else if (index > indexOutput) {
+				if (itemstack1.getItem() == Items.BOWL && !this.mergeItemStack(itemstack1, indexContainerInput, indexContainerInput + 1, false)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (!this.mergeItemStack(itemstack1, startPlayerInv, endPlayerInv, false)) {
+				else if (!this.mergeItemStack(itemstack1, 0, indexOutput, false)) {
+					return ItemStack.EMPTY;
+				}
+			}
+			else if (!this.mergeItemStack(itemstack1, startPlayerInv, endPlayerInv, false)) {
 				return ItemStack.EMPTY;
 			}
 
 			if (itemstack1.isEmpty()) {
 				slot.putStack(ItemStack.EMPTY);
-			} else {
+			}
+			else {
 				slot.onSlotChanged();
 			}
 

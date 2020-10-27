@@ -1,14 +1,13 @@
 package vectorwing.farmersdelight.registry;
 
-import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.tile.*;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.tile.*;
 
-public class ModTileEntityTypes
-{
+public class ModTileEntityTypes {
 	public static final DeferredRegister<TileEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, FarmersDelight.MODID);
 
 	public static final RegistryObject<TileEntityType<StoveTileEntity>> STOVE_TILE = TILES.register("stove",
