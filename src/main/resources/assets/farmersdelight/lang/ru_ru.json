@@ -9,6 +9,8 @@
   "block.farmersdelight.jungle_pantry": "Кладовая из торопического дерева",
   "block.farmersdelight.acacia_pantry": "Акациевая кладовая",
   "block.farmersdelight.dark_oak_pantry": "Кладовая из темного дуба",
+  "block.farmersdelight.crimson_pantry": "Багровая кладовая",
+  "block.farmersdelight.warped_pantry": "Искаженная кладовая",
   "block.farmersdelight.rope": "Веревка",
   "block.farmersdelight.safety_net": "Страховочная сеть",
   "block.farmersdelight.tatami": "Блок татами",
@@ -77,6 +79,7 @@
   "item.farmersdelight.iron_knife": "Железный нож",
   "item.farmersdelight.golden_knife": "Золотой нож",
   "item.farmersdelight.diamond_knife": "Алмазный нож",
+  "item.farmersdelight.netherite_knife": "Незеритовый нож",
 
   "item.farmersdelight.barbecue_stick": "Барбекю на палочке",
   "item.farmersdelight.egg_sandwich": "Сэндвич с яйцом",
@@ -88,6 +91,7 @@
 
   "item.farmersdelight.cooked_rice": "Приготовленный рис",
   "item.farmersdelight.mixed_salad": "Смешанный салат",
+  "item.farmersdelight.nether_salad": "Незерский салат",
   "item.farmersdelight.beef_stew": "Тушеная говядина",
   "item.farmersdelight.chicken_soup": "Куриный суп",
   "item.farmersdelight.vegetable_soup": "Овощной суп",
@@ -136,6 +140,8 @@
   "farmersdelight.advancement.harvest_straw.desc": "Срежьте траву ножом, чтобы получить солому",
   "farmersdelight.advancement.get_rich_soil": "Выращивание пищи",
   "farmersdelight.advancement.get_rich_soil.desc": "Оставьте немного органического компоста разлагаться до тех пор, пока он не превратится в богатую почву",
+  "farmersdelight.advancement.obtain_netherite_knife": "Если ты не можешь вынести жара...",
+  "farmersdelight.advancement.obtain_netherite_knife.desc": "Вопреки здравому смыслу, потратье целый незеритовый слиток чтобы улучшить нож",
 
   "farmersdelight.advancement.place_campfire": "Костер зажжен",
   "farmersdelight.advancement.place_campfire.desc": "Разместите костер, чтобы согреться ночью",
