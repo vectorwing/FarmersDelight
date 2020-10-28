@@ -10,13 +10,14 @@ import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
+import net.minecraft.world.World;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 
-public class RiceTopCropBlock extends CropsBlock {
+public class RiceUpperCropBlock extends CropsBlock {
 	public static final IntegerProperty RICE_AGE = BlockStateProperties.AGE_0_3;
 
-	public RiceTopCropBlock(Properties builder) {
+	public RiceUpperCropBlock(Properties builder) {
 		super(builder);
 	}
 
@@ -41,10 +42,10 @@ public class RiceTopCropBlock extends CropsBlock {
 //		}
 //	}
 //
-//	@Override
-//	protected int getBonemealAgeIncrease(World worldIn) {
-//		return super.getBonemealAgeIncrease(worldIn) / 3;
-//	}
+	@Override
+	protected int getBonemealAgeIncrease(World worldIn) {
+		return super.getBonemealAgeIncrease(worldIn);
+	}
 
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {

@@ -24,7 +24,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "farmersdelight:rice_top_crop",
+                  "block": "farmersdelight:rice_upper_crop",
                   "properties": {
                     "age": "3"
                   }
@@ -54,7 +54,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "farmersdelight:rice_top_crop",
+                  "block": "farmersdelight:rice_upper_crop",
                   "properties": {
                     "age": "3"
                   }
