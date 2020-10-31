@@ -9,9 +9,9 @@
     },
     {
       "condition": "block_state_property",
-      "block": "farmersdelight:rice_upper_crop",
+      "block": "farmersdelight:tall_rice_crop",
       "properties": {
-        "age": "3"
+        "age": "7"
       }
     }
   ]
