@@ -90,5 +90,5 @@ public class ModBlocks
 
 	@Deprecated
 	public static final RegistryObject<Block> TALL_RICE_CROP = BLOCKS.register("tall_rice_crop",
-			() -> new TallRiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
+			() -> new LegacyTallRiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
 }
