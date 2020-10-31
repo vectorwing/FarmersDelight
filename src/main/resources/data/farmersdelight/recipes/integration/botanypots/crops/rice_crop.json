@@ -1,0 +1,38 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "botanypots"
+    }
+  ],
+  "type": "botanypots:crop",
+  "seed": {
+    "item": "farmersdelight:rice"
+  },
+  "categories":["dirt"],
+  "growthTicks": 1000,
+  "display": {
+    "block": "farmersdelight:rice_upper_crop",
+    "properties": {
+      "age": 3
+    }
+  },
+  "results": [
+    {
+      "chance": 0.75,
+      "output": {
+        "item": "farmersdelight:rice_panicle"
+      },
+      "minRolls": 1,
+      "maxRolls": 1
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "item": "farmersdelight:rice_panicle"
+      },
+      "minRolls": 1,
+      "maxRolls": 2
+    }
+  ]
+}
