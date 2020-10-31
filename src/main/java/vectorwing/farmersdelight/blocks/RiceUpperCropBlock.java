@@ -8,6 +8,9 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
@@ -16,6 +19,11 @@ import vectorwing.farmersdelight.registry.ModItems;
 
 public class RiceUpperCropBlock extends CropsBlock {
 	public static final IntegerProperty RICE_AGE = BlockStateProperties.AGE_0_3;
+	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {
+			Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D),
+			Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 10.0D, 13.0D),
+			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D),
+			Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D)};
 
 	public RiceUpperCropBlock(Properties builder) {
 		super(builder);
@@ -23,6 +31,11 @@ public class RiceUpperCropBlock extends CropsBlock {
 
 	public IntegerProperty getAgeProperty() {
 		return RICE_AGE;
+	}
+
+	@Override
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+		return SHAPE_BY_AGE[state.get(this.getAgeProperty())];
 	}
 
 	@Override
@@ -35,18 +48,6 @@ public class RiceUpperCropBlock extends CropsBlock {
 		return ModItems.RICE.get();
 	}
 
-//	@Override
-//	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-//		if (rand.nextInt(3) != 0) {
-//			super.tick(state, worldIn, pos, rand);
-//		}
-//	}
-//
-	@Override
-	protected int getBonemealAgeIncrease(World worldIn) {
-		return super.getBonemealAgeIncrease(worldIn);
-	}
-
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(RICE_AGE);
@@ -55,6 +56,10 @@ public class RiceUpperCropBlock extends CropsBlock {
 	@Override
 	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		return state.getBlock() == ModBlocks.RICE_CROP.get();
+	}
+
+	protected int getBonemealAgeIncrease(World worldIn) {
+		return MathHelper.nextInt(worldIn.rand, 1, 4);
 	}
 
 	@Override
