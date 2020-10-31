@@ -20,6 +20,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.Tags;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 
@@ -77,7 +78,7 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 
 	@Override
 	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return state.isSolidSide(worldIn, pos, Direction.UP) && (state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS_BLOCK || state.getBlock() == ModBlocks.RICH_SOIL.get());
+		return super.isValidGround(state, worldIn, pos) || Tags.Blocks.DIRT.contains(state.getBlock());
 	}
 
 	public IntegerProperty getAgeProperty() { return AGE; }
