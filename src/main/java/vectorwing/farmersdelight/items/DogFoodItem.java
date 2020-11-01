@@ -37,7 +37,8 @@ public class DogFoodItem extends MealItem
 			if (target instanceof WolfEntity) {
 				WolfEntity wolf = (WolfEntity)target;
 				if (wolf.isAlive() && wolf.isTamed() && itemStack.getItem().equals(ModItems.DOG_FOOD.get())) {
-					wolf.addPotionEffect(new EffectInstance(Effects.REGENERATION, 600, 2));
+					wolf.setHealth(wolf.getMaxHealth());
+					wolf.addPotionEffect(new EffectInstance(Effects.SPEED, 6000, 1));
 					wolf.addPotionEffect(new EffectInstance(Effects.STRENGTH, 6000, 1));
 					wolf.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 6000, 1));
 					wolf.world.playSound(null, target.getPosition(), SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.PLAYERS, 0.8F, 0.8F);

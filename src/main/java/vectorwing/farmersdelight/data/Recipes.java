@@ -388,6 +388,13 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.WHEAT)
 				.addCriterion("has_honey_bottle", InventoryChangeTrigger.Instance.forItems(Items.HONEY_BOTTLE))
 				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.HORSE_FEED.get(), 1)
+				.addIngredient(Items.HAY_BLOCK)
+				.addIngredient(Items.APPLE)
+				.addIngredient(Items.APPLE)
+				.addIngredient(Items.GOLDEN_CARROT)
+				.addCriterion("has_golden_carrot", InventoryChangeTrigger.Instance.forItems(Items.GOLDEN_CARROT))
+				.build(consumer);
 	}
 
 	private void recipesFoodBlocks(Consumer<IFinishedRecipe> consumer) {
