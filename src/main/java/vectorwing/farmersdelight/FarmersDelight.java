@@ -38,6 +38,7 @@ public class FarmersDelight
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
         ModEnchantments.ENCHANTMENTS.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);

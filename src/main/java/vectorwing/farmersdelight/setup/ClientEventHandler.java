@@ -1,16 +1,21 @@
 package vectorwing.farmersdelight.setup;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
+import vectorwing.farmersdelight.client.particles.StarParticle;
 import vectorwing.farmersdelight.client.tileentity.renderer.CuttingBoardTileEntityRenderer;
 import vectorwing.farmersdelight.client.tileentity.renderer.StoveTileEntityRenderer;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModContainerTypes;
+import vectorwing.farmersdelight.registry.ModParticleTypes;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -64,5 +69,10 @@ public class ClientEventHandler
 				CuttingBoardTileEntityRenderer::new);
 
 		ScreenManager.registerFactory(ModContainerTypes.COOKING_POT.get(), CookingPotScreen::new);
+	}
+
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public static void registerParticles(ParticleFactoryRegisterEvent event) {
+		Minecraft.getInstance().particles.registerFactory(ModParticleTypes.STAR_PARTICLE.get(), StarParticle.Factory::new);
 	}
 }
