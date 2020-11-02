@@ -74,7 +74,7 @@
   "item.farmersdelight.chocolate_pie_slice": "Part de tarte au chocolat",
   "item.farmersdelight.sweet_berry_cookie": "Cookie aux baies sucrées",
   "item.farmersdelight.honey_cookie": "Cookie au miel",
-  "item.farmersdelight.earthworm": "ver de terre",
+  "item.farmersdelight.earthworm": "Ver de terre",
 
   "item.farmersdelight.flint_knife": "Couteau en silex",
   "item.farmersdelight.iron_knife": "Couteau en fer",
@@ -109,7 +109,7 @@
   "item.farmersdelight.shepherds_pie": "Hachis parmentier",
   "item.farmersdelight.ratatouille": "Ratatouille",
   "item.farmersdelight.squid_ink_pasta": "Pâtes à l'encre de seiche",
-  "item.farmersdelight.grilled_salmon": "Saummon grillé",
+  "item.farmersdelight.grilled_salmon": "Saumon grillé",
 
   "item.farmersdelight.dog_food": "Nourriture pour chien",
   "item.farmersdelight.horse_feed": "Nourriture pour chevaux",
@@ -138,11 +138,11 @@
   "farmersdelight.advancement.plant_rice": "Les pieds dans l'eau",
   "farmersdelight.advancement.plant_rice.desc": "Plantez du riz dans de l'eau peu profonde",
   "farmersdelight.advancement.harvest_straw": "Courte paille",
-  "farmersdelight.advancement.harvest_straw.desc": "Récoltez de l'herbe pour en tirer de la paille",
+  "farmersdelight.advancement.harvest_straw.desc": "Récoltez de l'herbe pour avoir de la paille",
   "farmersdelight.advancement.get_rich_soil": "Engrais",
   "farmersdelight.advancement.get_rich_soil.desc": "Laisser un peu de compost organique se décomposer jusqu’à ce qu’il devienne de la terre fertile",
   "farmersdelight.advancement.obtain_netherite_knife": "Qui craint le danger...",
-  "farmersdelight.advancement.obtain_netherite_knife.desc": "Utilisez un précieu lingot de nétherite pour améliorer votre couteau favori",
+  "farmersdelight.advancement.obtain_netherite_knife.desc": "Utilisez un précieux lingot de nétherite pour améliorer votre couteau favori",
 
   "farmersdelight.advancement.place_campfire": "Feu allumé",
   "farmersdelight.advancement.place_campfire.desc": "Placez un feu de camp pour rester au chaud la nuit",
