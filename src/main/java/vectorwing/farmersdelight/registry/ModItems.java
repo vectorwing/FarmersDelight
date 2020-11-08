@@ -208,5 +208,5 @@ public class ModItems
 	public static final RegistryObject<Item> DOG_FOOD = ITEMS.register("dog_food",
 			() -> new DogFoodItem(new Item.Properties().food(Foods.DOG_FOOD).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> HORSE_FEED = ITEMS.register("horse_feed",
-			() -> new HorseFeedItem(new Item.Properties().containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new HorseFeedItem(new Item.Properties().maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 }

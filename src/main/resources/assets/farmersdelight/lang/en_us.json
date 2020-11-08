@@ -126,6 +126,9 @@
   "farmersdelight.tooltip.cooking_pot.single_serving": "Holds 1 serving of:",
   "farmersdelight.tooltip.cooking_pot.many_servings": "Holds %s servings of:",
 
+  "farmersdelight.tooltip.dog_food.when_feeding": "When fed to a Wolf:",
+  "farmersdelight.tooltip.horse_feed.when_feeding": "When fed to a Horse:",
+
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "A world of flavor awaits you!",
   "farmersdelight.advancement.craft_knife": "Hunt and Gather",

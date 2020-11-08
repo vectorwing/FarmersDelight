@@ -101,6 +101,7 @@ public class Foods
 			.hunger(10).saturation(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), 4800, 0), 1.0F).build();
 
+	// Plated Foods
 	public static final Food STEAK_AND_POTATOES = (new Food.Builder())
 			.hunger(10).saturation(0.8f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 4800, 0), 1.0F).build();
