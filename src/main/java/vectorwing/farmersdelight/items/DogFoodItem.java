@@ -69,8 +69,8 @@ public class DogFoodItem extends MealItem
 
 					if (itemStack.getContainerItem() != ItemStack.EMPTY && !player.isCreative()) {
 						player.addItemStackToInventory(itemStack.getContainerItem());
+						itemStack.shrink(1);
 					}
-					itemStack.shrink(1);
 
 					event.setCancellationResult(ActionResultType.SUCCESS);
 					event.setCanceled(true);
