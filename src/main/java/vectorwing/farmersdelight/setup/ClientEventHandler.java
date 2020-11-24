@@ -10,6 +10,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
+import vectorwing.farmersdelight.client.gui.NourishedHungerOverlay;
 import vectorwing.farmersdelight.client.particles.StarParticle;
 import vectorwing.farmersdelight.client.tileentity.renderer.CuttingBoardTileEntityRenderer;
 import vectorwing.farmersdelight.client.tileentity.renderer.StoveTileEntityRenderer;
@@ -69,6 +70,8 @@ public class ClientEventHandler
 				CuttingBoardTileEntityRenderer::new);
 
 		ScreenManager.registerFactory(ModContainerTypes.COOKING_POT.get(), CookingPotScreen::new);
+
+		NourishedHungerOverlay.init();
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
