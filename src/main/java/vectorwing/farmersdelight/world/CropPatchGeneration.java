@@ -61,7 +61,7 @@ public class CropPatchGeneration
 							.withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(Configuration.FREQUENCY_WILD_BEETROOTS.get()))));
 				}
 			}
-			if (biome == Biomes.SWAMP)
+			if (biome == Biomes.SWAMP || biome == Biomes.SWAMP_HILLS || biome == Biomes.JUNGLE || biome == Biomes.BAMBOO_JUNGLE)
 			{
 				if (Configuration.GENERATE_WILD_RICE.get())
 				{
