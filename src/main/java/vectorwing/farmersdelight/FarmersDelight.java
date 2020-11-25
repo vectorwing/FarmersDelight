@@ -35,6 +35,7 @@ public class FarmersDelight
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, this::registerRecipeSerializers);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Configuration.CLIENT_CONFIG);
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 

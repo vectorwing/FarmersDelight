@@ -8,18 +8,19 @@ import net.minecraftforge.fml.config.ModConfig;
 @Mod.EventBusSubscriber
 public class Configuration
 {
+	public static ForgeConfigSpec COMMON_CONFIG;
+	public static ForgeConfigSpec CLIENT_CONFIG;
+
+	// COMMON
+	public static final String CATEGORY_CLIENT = "client";
 	public static final String CATEGORY_SETTINGS = "settings";
 	public static final String CATEGORY_OVERRIDES = "overrides";
 	public static final String CATEGORY_WORLD = "world";
 
-	public static ForgeConfigSpec COMMON_CONFIG;
-
 	public static ForgeConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS;
-
 	public static ForgeConfigSpec.BooleanValue COMFORT_FOOD_TAG_EFFECT;
 	public static ForgeConfigSpec.BooleanValue RABBIT_STEW_JUMP_BOOST;
 	public static ForgeConfigSpec.BooleanValue DISPENSER_TOOLS_CUTTING_BOARD;
-
 	public static ForgeConfigSpec.BooleanValue CROPS_ON_SHIPWRECKS;
 	public static ForgeConfigSpec.BooleanValue CROPS_ON_VILLAGE_HOUSES;
 	public static ForgeConfigSpec.BooleanValue GENERATE_VILLAGE_COMPOST_HEAPS;
@@ -35,6 +36,9 @@ public class Configuration
 	public static ForgeConfigSpec.IntValue CHANCE_WILD_CARROTS;
 	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_TOMATOES;
 	public static ForgeConfigSpec.IntValue CHANCE_WILD_TOMATOES;
+
+	// CLIENT
+	public static ForgeConfigSpec.BooleanValue NOURISHED_HUNGER_OVERLAY;
 
 	static
 	{
@@ -88,6 +92,14 @@ public class Configuration
 		COMMON_BUILDER.pop();
 
 		COMMON_CONFIG = COMMON_BUILDER.build();
+
+		ForgeConfigSpec.Builder CLIENT_BUILDER = new ForgeConfigSpec.Builder();
+
+		CLIENT_BUILDER.comment("Client settings").push(CATEGORY_CLIENT);
+		NOURISHED_HUNGER_OVERLAY = CLIENT_BUILDER.comment("Should the hunger bar have a gilded overlay when the player is Nourished?").define("nourishedHungerOverlay", true);
+		CLIENT_BUILDER.pop();
+
+		CLIENT_CONFIG = CLIENT_BUILDER.build();
 	}
 
 	@SubscribeEvent
