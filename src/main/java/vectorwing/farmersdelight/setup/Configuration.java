@@ -36,6 +36,8 @@ public class Configuration
 	public static ForgeConfigSpec.IntValue CHANCE_WILD_CARROTS;
 	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_TOMATOES;
 	public static ForgeConfigSpec.IntValue CHANCE_WILD_TOMATOES;
+	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_RICE;
+	public static ForgeConfigSpec.IntValue CHANCE_WILD_RICE;
 
 	// CLIENT
 	public static ForgeConfigSpec.BooleanValue NOURISHED_HUNGER_OVERLAY;
@@ -89,6 +91,11 @@ public class Configuration
 		CHANCE_WILD_TOMATOES = COMMON_BUILDER.comment("Chance of generating clusters. Smaller value = more frequent.").defineInRange("chance", 9, 0, Integer.MAX_VALUE);
 		COMMON_BUILDER.pop();
 
+		COMMON_BUILDER.comment("Wild Rice generation").push("wild_rice");
+		GENERATE_WILD_RICE = COMMON_BUILDER.comment("Generate wild rice on swamps").define("genWildRice", true);
+		CHANCE_WILD_RICE = COMMON_BUILDER.comment("Chance of generating clusters. Smaller value = more frequent.").defineInRange("chance", 2, 0, Integer.MAX_VALUE);
+		COMMON_BUILDER.pop();
+
 		COMMON_BUILDER.pop();
 
 		COMMON_CONFIG = COMMON_BUILDER.build();
@@ -106,6 +113,7 @@ public class Configuration
 	public static void onLoad(final ModConfig.Loading configEvent) { }
 
 	@SubscribeEvent
-	public static void onReload(final ModConfig.Reloading configEvent) { }
+	public static void onReload(final ModConfig.Reloading configEvent) {
+	}
 
 }

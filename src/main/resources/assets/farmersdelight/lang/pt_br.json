@@ -31,6 +31,7 @@
   "block.farmersdelight.wild_carrots": "Cenoura silvestre",
   "block.farmersdelight.wild_potatoes": "Batata silvestre",
   "block.farmersdelight.wild_beetroots": "Beterraba marítima",
+  "block.farmersdelight.wild_rice": "Arroz silvestre",
 
   "block.farmersdelight.apple_pie": "Torta de maçã",
   "block.farmersdelight.sweet_berry_cheesecake": "Cheesecake de bagas doces",
@@ -134,7 +135,7 @@
   "farmersdelight.advancement.craft_knife": "Caçar e colher",
   "farmersdelight.advancement.craft_knife.desc": "Crie uma Faca para pilhar mais matéria-prima de plantas e animais",
   "farmersdelight.advancement.plant_rice": "Molhando suas raízes",
-  "farmersdelight.advancement.plant_rice.desc": "Plante Arroz em uma poça de água rasa",
+  "farmersdelight.advancement.plant_rice.desc": "Plante grãos de Arroz em uma poça de água rasa",
   "farmersdelight.advancement.harvest_straw": "Agarrando palhas",
   "farmersdelight.advancement.harvest_straw.desc": "Colha plantas gramíneas com uma Faca para obter Palha",
   "farmersdelight.advancement.get_rich_soil": "Comida de plantas",

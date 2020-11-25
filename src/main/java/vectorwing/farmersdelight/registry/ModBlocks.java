@@ -75,6 +75,8 @@ public class ModBlocks
 			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_BEETROOTS = BLOCKS.register("wild_beetroots",
 			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+	public static final RegistryObject<Block> WILD_RICE = BLOCKS.register("wild_rice",
+			() -> new WildRiceBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 
 	// CROPS
 	public static final RegistryObject<Block> CABBAGE_CROP = BLOCKS.register("cabbages",
