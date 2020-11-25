@@ -8,6 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import vectorwing.farmersdelight.blocks.WildRiceBlock;
@@ -23,7 +24,7 @@ public class RiceCropFeature extends Feature<BlockClusterFeatureConfig> {
 
 	@Override
 	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, BlockClusterFeatureConfig config) {
-		BlockPos blockpos = pos;
+		BlockPos blockpos = worldIn.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, pos);;
 
 		int i = 0;
 		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();

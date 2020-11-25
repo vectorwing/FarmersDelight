@@ -93,7 +93,7 @@ public class Configuration
 
 		COMMON_BUILDER.comment("Wild Rice generation").push("wild_rice");
 		GENERATE_WILD_RICE = COMMON_BUILDER.comment("Generate wild rice on swamps").define("genWildRice", true);
-		CHANCE_WILD_RICE = COMMON_BUILDER.comment("Chance of generating clusters. Smaller value = more frequent.").defineInRange("chance", 2, 0, Integer.MAX_VALUE);
+		CHANCE_WILD_RICE = COMMON_BUILDER.comment("Chance of generating clusters. Smaller value = more frequent.").defineInRange("chance", 10, 0, Integer.MAX_VALUE);
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.pop();
