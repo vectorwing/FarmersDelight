@@ -104,10 +104,13 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ModItems.CANVAS.get())
 				.addCriterion("canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
 				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "book_from_canvas"));
-	}
-
-	private void recipesSmelting(Consumer<IFinishedRecipe> consumer) {
-
+		ShapelessRecipeBuilder.shapelessRecipe(Items.MILK_BUCKET)
+				.addIngredient(Items.BUCKET)
+				.addIngredient(ModItems.MILK_BOTTLE.get())
+				.addIngredient(ModItems.MILK_BOTTLE.get())
+				.addIngredient(ModItems.MILK_BOTTLE.get())
+				.addCriterion("has_milk_bottle", InventoryChangeTrigger.Instance.forItems(ModItems.MILK_BOTTLE.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "milk_bucket_from_bottles"));
 	}
 
 	private void recipesBlocks(Consumer<IFinishedRecipe> consumer) {
@@ -388,6 +391,11 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.WHEAT)
 				.addCriterion("has_honey_bottle", InventoryChangeTrigger.Instance.forItems(Items.HONEY_BOTTLE))
 				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CABBAGE.get())
+				.addIngredient(ModItems.CABBAGE_LEAF.get())
+				.addIngredient(ModItems.CABBAGE_LEAF.get())
+				.addCriterion("has_cabbage_leaf", InventoryChangeTrigger.Instance.forItems(ModItems.CABBAGE_LEAF.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "cabbage_from_leaves"));
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.HORSE_FEED.get(), 1)
 				.addIngredient(Items.HAY_BLOCK)
 				.addIngredient(Items.APPLE)
@@ -494,6 +502,4 @@ public class Recipes extends RecipeProvider
 				.addCriterion("baked_potato", InventoryChangeTrigger.Instance.forItems(Items.BAKED_POTATO))
 				.build(consumer);
 	}
-
-	private void recipesCookedMeals(Consumer<IFinishedRecipe> consumer) {}
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:cabbage_from_leaves"
+    ]
+  },
+  "criteria": {
+    "has_cabbage_leaf": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:cabbage_leaf"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:cabbage_from_leaves"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cabbage_leaf",
+      "has_the_recipe"
+    ]
+  ]
+}
