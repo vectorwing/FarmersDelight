@@ -13,7 +13,7 @@
   "block.farmersdelight.warped_pantry": "诡异木厨柜",
   "block.farmersdelight.rope": "绳子",
   "block.farmersdelight.safety_net": "安全网",
-  "block.farmersdelight.tatami": "榻榻米块",
+  "block.farmersdelight.tatami": "榻榻米方块",
   "block.farmersdelight.full_tatami_mat": "长榻榻米垫",
   "block.farmersdelight.half_tatami_mat": "短榻榻米垫",
   "block.farmersdelight.organic_compost": "有机肥料",
@@ -35,7 +35,7 @@
   "block.farmersdelight.wild_beetroots": "海甜菜",
 
   "block.farmersdelight.apple_pie": "苹果派",
-  "block.farmersdelight.sweet_berry_cheesecake": "甜浆果芝士蛋糕",
+  "block.farmersdelight.sweet_berry_cheesecake": "甜莓芝士蛋糕",
   "block.farmersdelight.chocolate_pie": "巧克力派",
 
   "item.farmersdelight.tomato": "番茄",
@@ -56,7 +56,7 @@
   "item.farmersdelight.hot_cocoa": "热可可",
   "item.farmersdelight.raw_pasta": "生意面",
   "item.farmersdelight.pumpkin_slice": "南瓜片",
-  "item.farmersdelight.cabbage_leaf": "Cabbage Leaf",
+  "item.farmersdelight.cabbage_leaf": "卷心菜叶",
   "item.farmersdelight.minced_beef": "牛肉末",
   "item.farmersdelight.beef_patty": "牛肉饼",
   "item.farmersdelight.chicken_cuts": "生鸡肉丁",
@@ -79,7 +79,7 @@
   "item.farmersdelight.iron_knife": "铁刀",
   "item.farmersdelight.golden_knife": "金刀",
   "item.farmersdelight.diamond_knife": "钻石刀",
-  "item.farmersdelight.netherite_knife": "下届合金刀",
+  "item.farmersdelight.netherite_knife": "下界合金刀",
 
   "item.farmersdelight.barbecue_stick": "烧烤串",
   "item.farmersdelight.egg_sandwich": "鸡蛋三明治",
@@ -141,7 +141,7 @@
   "farmersdelight.advancement.get_rich_soil": "食物种植",
   "farmersdelight.advancement.get_rich_soil.desc": "留下一些有机肥料，让它分解直到它成为覆盖戍",
   "farmersdelight.advancement.obtain_netherite_knife": "高温难耐...",
-  "farmersdelight.advancement.obtain_netherite_knife.desc": "如果没有更好的意见, 使用一块下届合金锭升级你的刀",
+  "farmersdelight.advancement.obtain_netherite_knife.desc": "如果没的干了，那就拿一整块下界合金锭来升级你的刀吧",
   
   "farmersdelight.advancement.place_campfire": "Bonfire Lit",
   "farmersdelight.advancement.place_campfire.desc": "放置一个篝火，让你在夜晚不再寒冷",
@@ -152,7 +152,7 @@
   "farmersdelight.advancement.eat_comfort_food": "温暖又舒适",
   "farmersdelight.advancement.eat_comfort_food.desc": "汤和炖菜对抵御寒冷和疾病很有好处！",
   "farmersdelight.advancement.eat_nourishing_food": "服务周到",
-  "farmersdelight.advancement.eat_nourishing_food.desc": "一盘丰盛的食物将会让你长时间保持营养！",
+  "farmersdelight.advancement.eat_nourishing_food.desc": "一盘丰盛的食物会让你获得滋养很长一段时间！",
   "farmersdelight.advancement.use_cutting_board": "当心伤手...",
   "farmersdelight.advancement.use_cutting_board.desc": "工具在手时，使用砧板来切开一些东西",
   "farmersdelight.advancement.master_chef": "厨神当道",
