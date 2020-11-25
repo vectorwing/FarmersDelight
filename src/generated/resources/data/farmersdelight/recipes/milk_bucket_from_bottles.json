@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "item": "farmersdelight:milk_bottle"
+    },
+    {
+      "item": "farmersdelight:milk_bottle"
+    },
+    {
+      "item": "farmersdelight:milk_bottle"
+    }
+  ],
+  "result": {
+    "item": "minecraft:milk_bucket"
+  }
+}

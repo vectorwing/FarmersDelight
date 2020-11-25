@@ -101,6 +101,7 @@ public class Foods
 			.hunger(10).saturation(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), 4800, 0), 1.0F).build();
 
+	// Plated Foods
 	public static final Food STEAK_AND_POTATOES = (new Food.Builder())
 			.hunger(10).saturation(0.8f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 4800, 0), 1.0F).build();
@@ -129,4 +130,7 @@ public class Foods
 	public static final Food GRILLED_SALMON = (new Food.Builder())
 			.hunger(12).saturation(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F).build();
+
+	public static final Food DOG_FOOD = (new Food.Builder())
+			.hunger(4).saturation(0.2f).meat().build();
 }
