@@ -17,7 +17,9 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.registry.ModItems;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 {
@@ -71,7 +73,10 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 	@Override
 	public void setIngredients(CookingPotRecipe cookingPotRecipe, IIngredients ingredients)
 	{
-		ingredients.setInputIngredients(cookingPotRecipe.getIngredients());
+		List<Ingredient> inputAndContainer = new ArrayList<>(cookingPotRecipe.getIngredients());
+		inputAndContainer.add(Ingredient.fromStacks(cookingPotRecipe.getOutputContainer()));
+
+		ingredients.setInputIngredients(inputAndContainer);
 		ingredients.setOutput(VanillaTypes.ITEM, cookingPotRecipe.getRecipeOutput());
 	}
 
@@ -95,15 +100,15 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 			}
 		}
 
-		itemStacks.init(MEAL_DISPLAY, true, 94, 9);
+		itemStacks.init(MEAL_DISPLAY, false, 94, 9);
 		itemStacks.set(MEAL_DISPLAY, recipe.getRecipeOutput().getStack());
 
 		if (!recipe.getOutputContainer().isEmpty()) {
-			itemStacks.init(CONTAINER_INPUT, true, 62, 38);
+			itemStacks.init(CONTAINER_INPUT, false, 62, 38);
 			itemStacks.set(CONTAINER_INPUT, recipe.getOutputContainer());
 		}
 
-		itemStacks.init(OUTPUT, true, 94, 38);
+		itemStacks.init(OUTPUT, false, 94, 38);
 		itemStacks.set(OUTPUT, recipe.getRecipeOutput().getStack());
 	}
 

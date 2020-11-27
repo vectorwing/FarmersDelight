@@ -3,10 +3,7 @@ package vectorwing.farmersdelight.integration.jei;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaRecipeCategoryUid;
-import mezz.jei.api.registration.IGuiHandlerRegistration;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -19,6 +16,7 @@ import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.integration.jei.cutting.CuttingRecipeCategory;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.integration.jei.cooking.CookingRecipeCategory;
+import vectorwing.farmersdelight.tile.container.CookingPotContainer;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,8 +27,7 @@ public class JEIPlugin implements IModPlugin
 	private static ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "jei_plugin");
 
 	@Override
-	public void registerCategories(IRecipeCategoryRegistration registry)
-	{
+	public void registerCategories(IRecipeCategoryRegistration registry) {
 		registry.addRecipeCategories(new CookingRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
 		registry.addRecipeCategories(new CuttingRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
 	}
@@ -42,17 +39,20 @@ public class JEIPlugin implements IModPlugin
 	}
 
 	@Override
-	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration)
-	{
+	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
 		registration.addRecipeCatalyst(new ItemStack(ModItems.COOKING_POT.get()), CookingRecipeCategory.UID);
 		registration.addRecipeCatalyst(new ItemStack(ModItems.CUTTING_BOARD.get()), CuttingRecipeCategory.UID);
 		registration.addRecipeCatalyst(new ItemStack(ModItems.STOVE.get()), VanillaRecipeCategoryUid.CAMPFIRE);
 	}
 
 	@Override
-	public void registerGuiHandlers(IGuiHandlerRegistration registration)
-	{
+	public void registerGuiHandlers(IGuiHandlerRegistration registration) {
 		registration.addRecipeClickArea(CookingPotScreen.class, 89, 25, 24, 17, CookingRecipeCategory.UID);
+	}
+
+	@Override
+	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
+		registration.addRecipeTransferHandler(CookingPotContainer.class, CookingRecipeCategory.UID, 0, 6, 9, 36);
 	}
 
 	private static List<IRecipe<?>> findRecipesByType(IRecipeType<?> type) {
@@ -65,10 +65,5 @@ public class JEIPlugin implements IModPlugin
 	}
 
 	@Override
-	public ResourceLocation getPluginUid()
-	{
-		return ID;
-	}
-
-
+	public ResourceLocation getPluginUid() { return ID;	}
 }
