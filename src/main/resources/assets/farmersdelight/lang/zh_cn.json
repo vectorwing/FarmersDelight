@@ -31,6 +31,7 @@
   "block.farmersdelight.wild_carrots": "野生胡萝卜",
   "block.farmersdelight.wild_potatoes": "野生马铃薯",
   "block.farmersdelight.wild_beetroots": "海甜菜",
+  "block.farmersdelight.wild_rice": "野生稻米",
 
   "block.farmersdelight.apple_pie": "苹果派",
   "block.farmersdelight.sweet_berry_cheesecake": "甜莓芝士蛋糕",
@@ -115,7 +116,7 @@
   "enchantment.farmersdelight.backstabbing": "背刺",
   "enchantment.farmersdelight.backstabbing.desc": "增加从后攻击目标时的伤害。",
   
-  "itemGroup.farmersdelight": "欣悦农夫",
+  "itemGroup.farmersdelight": "农夫乐事",
 
   "farmersdelight.container.cooking_pot": "厨锅",
   "farmersdelight.container.cooking_pot.served_on": "摆放于：%s",
@@ -126,7 +127,10 @@
   "farmersdelight.tooltip.cooking_pot.single_serving": "目前的 1 份食物：",
   "farmersdelight.tooltip.cooking_pot.many_servings": "目前的 %s 份食物：",
 
-  "farmersdelight.advancement.root": "欣悦农夫",
+  "farmersdelight.tooltip.dog_food.when_feeding": "当被喂予狗时：",
+  "farmersdelight.tooltip.horse_feed.when_feeding": "当被喂予马时：",
+  
+  "farmersdelight.advancement.root": "农夫乐事",
   "farmersdelight.advancement.root.desc": "美味的世界在等着你！",
   "farmersdelight.advancement.craft_knife": "刀耕火种",
   "farmersdelight.advancement.craft_knife.desc": "合成一把刀来从植物和动物上获取更多资源！",
