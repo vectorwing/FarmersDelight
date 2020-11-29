@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "farmersdelight:items/cooked_chicken_cuts"
+    "layer0": "farmersdelight:item/cooked_chicken_cuts"
   }
 }

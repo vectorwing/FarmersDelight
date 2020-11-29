@@ -1,8 +1,8 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "farmersdelight:blocks/rope",
-    "particle": "farmersdelight:blocks/rope"
+    "0": "farmersdelight:block/rope",
+    "particle": "farmersdelight:block/rope"
   },
   "elements": [
     {

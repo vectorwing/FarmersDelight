@@ -1,6 +1,6 @@
 {
   "parent": "block/cross",
   "textures": {
-    "cross": "farmersdelight:blocks/rice_supporting"
+    "cross": "farmersdelight:block/rice_supporting"
   }
 }

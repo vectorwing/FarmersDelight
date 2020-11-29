@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "farmersdelight:items/steak_and_potatoes"
+    "layer0": "farmersdelight:item/steak_and_potatoes"
   }
 }

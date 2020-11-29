@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "farmersdelight:items/minced_beef"
+    "layer0": "farmersdelight:item/minced_beef"
   }
 }

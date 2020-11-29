@@ -1,6 +1,6 @@
 {
   "parent": "block/cross",
   "textures": {
-    "cross": "farmersdelight:blocks/wild_rice_top"
+    "cross": "farmersdelight:block/wild_rice_top"
   }
 }

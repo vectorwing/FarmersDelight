@@ -1,9 +1,9 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "farmersdelight:blocks/rope",
-    "1": "farmersdelight:blocks/rope_top",
-    "particle": "farmersdelight:blocks/rope"
+    "0": "farmersdelight:block/rope",
+    "1": "farmersdelight:block/rope_top",
+    "particle": "farmersdelight:block/rope"
   },
   "elements": [
     {

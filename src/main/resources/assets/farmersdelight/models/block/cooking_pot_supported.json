@@ -1,10 +1,10 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "farmersdelight:blocks/cooking_pot",
-		"1": "farmersdelight:blocks/cooking_pot_tray_top",
-		"2": "farmersdelight:blocks/cooking_pot_tray_side",
-		"particle": "farmersdelight:blocks/cooking_pot"
+		"0": "farmersdelight:block/cooking_pot",
+		"1": "farmersdelight:block/cooking_pot_tray_top",
+		"2": "farmersdelight:block/cooking_pot_tray_side",
+		"particle": "farmersdelight:block/cooking_pot"
 	},
 	"elements": [
 		{

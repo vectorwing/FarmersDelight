@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "farmersdelight:items/full_tatami_mat"
+    "layer0": "farmersdelight:item/full_tatami_mat"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "farmersdelight:items/dog_food"
+    "layer0": "farmersdelight:item/dog_food"
   }
 }

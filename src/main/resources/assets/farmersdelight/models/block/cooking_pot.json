@@ -3,8 +3,8 @@
 	"parent": "block/block",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "farmersdelight:blocks/cooking_pot",
-		"particle": "farmersdelight:blocks/cooking_pot"
+		"0": "farmersdelight:block/cooking_pot",
+		"particle": "farmersdelight:block/cooking_pot"
 	},
 	"elements": [
 		{

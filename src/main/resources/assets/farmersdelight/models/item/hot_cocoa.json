@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "farmersdelight:items/hot_cocoa"
+    "layer0": "farmersdelight:item/hot_cocoa"
   }
 }
