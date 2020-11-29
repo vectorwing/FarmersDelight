@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.blocks;
 
 import net.minecraft.block.*;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
@@ -78,7 +79,7 @@ public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable {
 		return blockpos.getY() < context.getWorld().getDimension().getHeight() - 1
 				&& ifluidstate.isTagged(FluidTags.WATER)
 				&& ifluidstate.getLevel() == 8
-				&& context.getWorld().getBlockState(blockpos.up()).getBlock() == Blocks.AIR
+				&& context.getWorld().getBlockState(blockpos.up()).isAir(context.getWorld(), blockpos.up())
 				? super.getStateForPlacement(context) : null;
 	}
 

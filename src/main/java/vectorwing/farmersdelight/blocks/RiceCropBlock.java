@@ -31,7 +31,6 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 {
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_0_3;
 	public static final BooleanProperty SUPPORTING = BooleanProperty.create("supporting");
-	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {
 			Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D),
 			Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 10.0D, 13.0D),
@@ -40,7 +39,7 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 
 	public RiceCropBlock(Properties builder) {
 		super(builder);
-		this.setDefaultState(this.getDefaultState().with(WATERLOGGED, true).with(AGE, 0).with(SUPPORTING, false));
+		this.setDefaultState(this.getDefaultState().with(AGE, 0).with(SUPPORTING, false));
 	}
 
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
@@ -105,7 +104,7 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(AGE, SUPPORTING, WATERLOGGED);
+		builder.add(AGE, SUPPORTING);
 	}
 
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
