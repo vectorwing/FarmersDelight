@@ -20,6 +20,7 @@
 - When players have the Nourished effect, the hunger bar will look gilded and shiny:
   - The gilded coating will visually "peel in half" when the player is spending saturation to heal damage;
   - This overlay can be disabled in the new "farmnersdelight-client.toml" config;
+- If a bell has ropes hanging from under it, players can ring the bell by right-clicking the rope column (24 blocks max.);
 - Some JEI quality-of-life features:
   - Press "uses" (U) on a Stove to see the Campfire Cooking recipe tab;
   - Press "uses" (U) on a container item (e.g. Bowl) to see which Cooking Pot recipes it can be served on;
