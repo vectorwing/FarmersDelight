@@ -26,8 +26,9 @@ import vectorwing.farmersdelight.tile.CookingPotTileEntity;
 
 import java.util.Objects;
 
-public class CookingPotContainer extends Container {
-	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "items/empty_container_slot_bowl");
+public class CookingPotContainer extends Container
+{
+	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "item/empty_container_slot_bowl");
 
 	public final CookingPotTileEntity tileEntity;
 	public final ItemStackHandler inventoryHandler;

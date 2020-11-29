@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "farmersdelight:items/tomato_sauce"
+    "layer0": "farmersdelight:item/tomato_sauce"
   }
 }

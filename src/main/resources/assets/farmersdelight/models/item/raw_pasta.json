@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "farmersdelight:items/raw_pasta"
+    "layer0": "farmersdelight:item/raw_pasta"
   }
 }

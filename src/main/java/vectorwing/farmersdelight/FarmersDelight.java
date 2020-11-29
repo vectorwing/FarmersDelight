@@ -21,36 +21,43 @@ import vectorwing.farmersdelight.setup.Configuration;
 
 @Mod(FarmersDelight.MODID)
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class FarmersDelight {
-	public static final Logger LOGGER = LogManager.getLogger();
-	public static final String MODID = "farmersdelight";
-	public static final FDItemGroup ITEM_GROUP = new FDItemGroup(FarmersDelight.MODID);
+public class FarmersDelight
+{
+    public static final Logger LOGGER = LogManager.getLogger();
+    public static final String MODID = "farmersdelight";
 
-	public FarmersDelight() {
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(CommonEventHandler::init);
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientEventHandler::init);
-		FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, this::registerRecipeSerializers);
+    public static final FDItemGroup ITEM_GROUP = new FDItemGroup(FarmersDelight.MODID);
 
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
+    public FarmersDelight()
+    {
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(CommonEventHandler::init);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientEventHandler::init);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, this::registerRecipeSerializers);
 
-		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Configuration.CLIENT_CONFIG);
 
-		ModEnchantments.ENCHANTMENTS.register(modEventBus);
-		ModItems.ITEMS.register(modEventBus);
-		ModBlocks.BLOCKS.register(modEventBus);
-		ModEffects.EFFECTS.register(modEventBus);
-		ModSounds.SOUNDS.register(modEventBus);
-		ModTileEntityTypes.TILES.register(modEventBus);
-		ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
-		ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+        final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-		MinecraftForge.EVENT_BUS.register(this);
-	}
+        ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
+        ModEnchantments.ENCHANTMENTS.register(modEventBus);
+        ModItems.ITEMS.register(modEventBus);
+        ModBlocks.BLOCKS.register(modEventBus);
+        ModEffects.EFFECTS.register(modEventBus);
+        ModBiomeFeatures.FEATURES.register(modEventBus);
+        ModSounds.SOUNDS.register(modEventBus);
+        ModTileEntityTypes.TILES.register(modEventBus);
+        ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
+        ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
 
-	private void registerRecipeSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event) {
-		Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(FarmersDelight.MODID, "cooking"), CookingPotRecipe.TYPE);
-		event.getRegistry().register(CookingPotRecipe.SERIALIZER);
-		Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(FarmersDelight.MODID, "cutting"), CuttingBoardRecipe.TYPE);
-		event.getRegistry().register(CuttingBoardRecipe.SERIALIZER);
-	}
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    private void registerRecipeSerializers (RegistryEvent.Register<IRecipeSerializer<?>> event)
+    {
+        Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(FarmersDelight.MODID, "cooking"), CookingPotRecipe.TYPE);
+        event.getRegistry().register(CookingPotRecipe.SERIALIZER);
+        Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(FarmersDelight.MODID, "cutting"), CuttingBoardRecipe.TYPE);
+        event.getRegistry().register(CuttingBoardRecipe.SERIALIZER);
+    }
 }

@@ -1,5 +1,39 @@
 # Changelog
 
+## 0.2.4
+- The Rice crop has been redesigned!
+  - The top half of the crop can now be harvested individually. The bottom half will stay planted, and eventually regrow a top half;
+  - Bottom half yields a single pile of Rice when broken;
+  - Top half is a standard crop, which yields Rice Panicles when fully grown, or Rice/Straw when harvested with a Knife;
+  - Fully compatible with vanilla pistons, mechanical automation methods, Quark's simple harvesting, Immersive Engineering's Garden Cloche, and Botany Pots;
+  - Existing Rice crops planted in the world will remain as the old form for compatibility. Simply harvest them and replant rice to get the new form!
+- Wild Rice now generates in Swamps, Jungles and Bamboo Jungles:
+  - Somewhat more common than other wild crops, due to the rarity of these biomes;
+  - Yields a single pile of Rice, and can be sheared.
+- Seed-bearing Wild Crops (cabbage, beet and tomato) have a small chance of dropping an edible produce when harvested;
+- Wild Crop bone meal action temporarily removed due to an exploit;
+- Fixed Dog Food:
+  - When fed to your pet wolf, it fully heals them and grants them Speed, Strength and Resistance;
+- Added Horse Feed:
+  - When fed to any tamed ridable mob (horse, donkey, llama etc.), it fully heals them and grants them Speed II and Jump Boost;
+  - Does not work for Pigs and Striders, as they cannot be tamed;
+- When players have the Nourished effect, the hunger bar will look gilded and shiny:
+  - The gilded coating will visually "peel in half" when the player is spending saturation to heal damage;
+  - This overlay can be disabled in the new "farmnersdelight-client.toml" config;
+- If a bell has ropes hanging from under it, players can ring the bell by right-clicking the rope column (24 blocks max.);
+- Some JEI quality-of-life features:
+  - Press "uses" (U) on a Stove to see the Campfire Cooking recipe tab;
+  - Press "uses" (U) on a container item (e.g. Bowl) to see which Cooking Pot recipes it can be served on;
+  - Cooking Pot recipes now have a "Move Items" transfer button when checking recipes on it;
+- Graphics updates for some blocks and items;
+- Translation updates:
+  - Updated Chinese (thanks to WuzgXY-GitHub, TUsama and ChillirCR!);
+  - Updated German (thanks to SebastianD334 and Moralle!);
+  - Added Korean (thanks to qkrehf2!);
+  - Added Russian (thanks to GrayPix and Kanspirians!);
+  - Added French (thanks to Derrias!);
+  - Added Japanese (thanks to FEMT1915!).
+
 ## 0.2.3
 1.15.2+
 - Adds Compost Heaps to village generation

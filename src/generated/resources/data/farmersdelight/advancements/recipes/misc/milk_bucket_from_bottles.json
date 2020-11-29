@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:milk_bucket_from_bottles"
+    ]
+  },
+  "criteria": {
+    "has_milk_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:milk_bottle"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:milk_bucket_from_bottles"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_milk_bottle",
+      "has_the_recipe"
+    ]
+  ]
+}

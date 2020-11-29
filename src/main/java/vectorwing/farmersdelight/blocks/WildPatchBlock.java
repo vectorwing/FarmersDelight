@@ -17,7 +17,7 @@ import java.util.Random;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @SuppressWarnings("deprecation")
-public class WildPatchBlock extends BushBlock implements IGrowable
+public class WildPatchBlock extends BushBlock
 {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 
@@ -40,19 +40,5 @@ public class WildPatchBlock extends BushBlock implements IGrowable
 
 	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
 		return false;
-	}
-
-	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
-		return false;
-	}
-
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
-		return true;
-	}
-
-	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
-		if (worldIn.getRandom().nextFloat() <= 0.3F) {
-			spawnAsEntity(worldIn, pos, new ItemStack(this));
-		}
 	}
 }

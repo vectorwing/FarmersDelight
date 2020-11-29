@@ -1,11 +1,11 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"particle": "farmersdelight:blocks/tatami_mat_even",
-		"even": "farmersdelight:blocks/tatami_mat_even",
-		"odd": "farmersdelight:blocks/tatami_mat_odd",
-		"half": "farmersdelight:blocks/tatami_mat_half",
-		"side": "farmersdelight:blocks/tatami_mat_side"
+		"particle": "farmersdelight:block/tatami_mat_even",
+		"even": "farmersdelight:block/tatami_mat_even",
+		"odd": "farmersdelight:block/tatami_mat_odd",
+		"half": "farmersdelight:block/tatami_mat_half",
+		"side": "farmersdelight:block/tatami_mat_side"
 	},
 	"elements": [
 		{

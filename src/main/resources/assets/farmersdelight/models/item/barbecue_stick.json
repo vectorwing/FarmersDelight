@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "farmersdelight:items/barbecue_stick"
+    "layer0": "farmersdelight:item/barbecue_stick"
   }
 }

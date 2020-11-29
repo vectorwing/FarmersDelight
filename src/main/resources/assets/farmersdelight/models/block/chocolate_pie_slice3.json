@@ -1,11 +1,11 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"particle": "farmersdelight:blocks/chocolate_pie_top",
-		"bottom": "farmersdelight:blocks/pie_bottom",
-		"inner": "farmersdelight:blocks/chocolate_pie_inner",
-		"side": "farmersdelight:blocks/pie_side",
-		"top": "farmersdelight:blocks/chocolate_pie_top"
+		"particle": "farmersdelight:block/chocolate_pie_top",
+		"bottom": "farmersdelight:block/pie_bottom",
+		"inner": "farmersdelight:block/chocolate_pie_inner",
+		"side": "farmersdelight:block/pie_side",
+		"top": "farmersdelight:block/chocolate_pie_top"
 	},
 	"elements": [
 		{

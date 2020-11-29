@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"particle": "farmersdelight:blocks/tatami_mat_half",
-		"half": "farmersdelight:blocks/tatami_mat_half"
+		"particle": "farmersdelight:block/tatami_mat_half",
+		"half": "farmersdelight:block/tatami_mat_half"
 	},
 	"elements": [
 		{

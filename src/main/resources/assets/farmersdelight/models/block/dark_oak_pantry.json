@@ -1,8 +1,8 @@
 {
   "parent": "block/orientable",
   "textures": {
-    "top": "farmersdelight:blocks/dark_oak_pantry_top",
-    "front": "farmersdelight:blocks/dark_oak_pantry_front",
-    "side": "farmersdelight:blocks/dark_oak_pantry_side"
+    "top": "farmersdelight:block/dark_oak_pantry_top",
+    "front": "farmersdelight:block/dark_oak_pantry_front",
+    "side": "farmersdelight:block/dark_oak_pantry_side"
   }
 }

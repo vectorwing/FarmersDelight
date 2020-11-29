@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/thin_block",
 	"textures": {
-		"particle": "farmersdelight:blocks/cutting_board",
-		"top": "farmersdelight:blocks/cutting_board"
+		"particle": "farmersdelight:block/cutting_board",
+		"top": "farmersdelight:block/cutting_board"
 	},
 	"elements": [
 		{

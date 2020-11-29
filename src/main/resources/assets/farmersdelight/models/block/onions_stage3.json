@@ -1,6 +1,6 @@
 {
   "parent": "block/crop",
   "textures": {
-    "crop": "farmersdelight:blocks/onions_stage3"
+    "crop": "farmersdelight:block/onions_stage3"
   }
 }

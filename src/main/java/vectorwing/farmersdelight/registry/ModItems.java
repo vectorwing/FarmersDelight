@@ -91,6 +91,8 @@ public class ModItems {
 			() -> new BlockItem(ModBlocks.WILD_POTATOES.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> WILD_BEETROOTS = ITEMS.register("wild_beetroots",
 			() -> new BlockItem(ModBlocks.WILD_BEETROOTS.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> WILD_RICE = ITEMS.register("wild_rice",
+			() -> new TallBlockItem(ModBlocks.WILD_RICE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
 	// Basic Crops
 	public static final RegistryObject<Item> CABBAGE = ITEMS.register("cabbage",
@@ -214,5 +216,7 @@ public class ModItems {
 
 
 	public static final RegistryObject<Item> DOG_FOOD = ITEMS.register("dog_food",
-			() -> new DogFoodItem(new Item.Properties().containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new DogFoodItem(new Item.Properties().food(Foods.DOG_FOOD).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> HORSE_FEED = ITEMS.register("horse_feed",
+			() -> new HorseFeedItem(new Item.Properties().maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 }
