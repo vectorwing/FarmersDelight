@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.client.particles;
 
 import net.minecraft.client.particle.*;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particles.BasicParticleType;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -9,7 +10,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class StarParticle extends SpriteTexturedParticle {
-	protected StarParticle(World world, double posX, double posY, double posZ) {
+	protected StarParticle(ClientWorld world, double posX, double posY, double posZ) {
 		super(world, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
 		this.motionX *= (double)0.01F;
 		this.motionY *= (double)0.01F;
@@ -61,7 +62,7 @@ public class StarParticle extends SpriteTexturedParticle {
 			this.spriteSet = sprite;
 		}
 
-		public Particle makeParticle(BasicParticleType typeIn, World worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		public Particle makeParticle(BasicParticleType typeIn, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
 			StarParticle particle = new StarParticle(worldIn, x, y + 0.3D, z);
 			particle.selectSpriteRandomly(this.spriteSet);
 			particle.setColor(1.0F, 1.0F, 1.0F);

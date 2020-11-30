@@ -1,12 +1,13 @@
 package vectorwing.farmersdelight.items;
 
+import com.mojang.datafixers.util.Pair;
 import mcp.MethodsReturnNonnullByDefault;
 import com.google.common.collect.Lists;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.passive.horse.AbstractHorseEntity;
 import net.minecraft.entity.passive.horse.HorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,10 +17,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectUtils;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.*;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.util.text.*;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -85,41 +83,43 @@ public class HorseFeedItem extends MealItem
 	}
 
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		ITextComponent whenFeeding = TextUtils.getTranslation("tooltip.horse_feed.when_feeding");
-		tooltip.add(whenFeeding.applyTextStyle(TextFormatting.GRAY));
+		IFormattableTextComponent whenFeeding = TextUtils.getTranslation("tooltip.horse_feed.when_feeding");
+		tooltip.add(whenFeeding.mergeStyle(TextFormatting.GRAY));
 
-		List<Tuple<String, AttributeModifier>> list1 = Lists.newArrayList();
+		List<Pair<Attribute, AttributeModifier>> list1 = Lists.newArrayList();
 
 		for(EffectInstance effectinstance : EFFECTS) {
-			ITextComponent effectDescription = new StringTextComponent(" ");
-			ITextComponent effectName = new TranslationTextComponent(effectinstance.getEffectName());
-			effectDescription.appendSibling(effectName);
+			IFormattableTextComponent effectDescription = new StringTextComponent(" ");
+			IFormattableTextComponent effectName = new TranslationTextComponent(effectinstance.getEffectName());
+			effectDescription.append(effectName);
 			Effect effect = effectinstance.getPotion();
-			Map<IAttribute, AttributeModifier> map = effect.getAttributeModifierMap();
+			Map<Attribute, AttributeModifier> map = effect.getAttributeModifierMap();
 			if (!map.isEmpty()) {
-				for(Map.Entry<IAttribute, AttributeModifier> entry : map.entrySet()) {
+				for(Map.Entry<Attribute, AttributeModifier> entry : map.entrySet()) {
 					AttributeModifier attributemodifier = entry.getValue();
 					AttributeModifier attributemodifier1 = new AttributeModifier(attributemodifier.getName(), effect.getAttributeModifierAmount(effectinstance.getAmplifier(), attributemodifier), attributemodifier.getOperation());
-					list1.add(new Tuple<>(entry.getKey().getName(), attributemodifier1));
+					list1.add(new Pair<>(entry.getKey(), attributemodifier1));
 				}
 			}
 
 			if (effectinstance.getAmplifier() > 0) {
-				effectDescription.appendText(" ").appendSibling(new TranslationTextComponent("potion.potency." + effectinstance.getAmplifier()));
+				effectDescription.appendString(" ").append(new TranslationTextComponent("potion.potency." + effectinstance.getAmplifier()));
 			}
 
 			if (effectinstance.getDuration() > 20) {
-				effectDescription.appendText(" (").appendText(EffectUtils.getPotionDurationString(effectinstance, 1.0F)).appendText(")");
+				effectDescription.appendString(" (").appendString(EffectUtils.getPotionDurationString(effectinstance, 1.0F)).appendString(")");
 			}
 
-			tooltip.add(effectDescription.applyTextStyle(effect.getEffectType().getColor()));
+			tooltip.add(effectDescription.mergeStyle(effect.getEffectType().getColor()));
 		}
 	}
 
-	public boolean itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
+	public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
 		if (target instanceof HorseEntity) {
 			HorseEntity horse = (HorseEntity)target;
-			return horse.isAlive() && horse.isTame();
+			if (horse.isAlive() && horse.isTame()) {
+				return ActionResultType.SUCCESS;
+			}
 		}
 		return ActionResultType.PASS;
 	}

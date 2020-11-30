@@ -1,11 +1,10 @@
 package vectorwing.farmersdelight.blocks;
 
 import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
@@ -37,7 +36,7 @@ public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable {
 	}
 
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		IFluidState ifluidstate = worldIn.getFluidState(pos);
+		FluidState ifluidstate = worldIn.getFluidState(pos);
 		BlockPos floorPos = pos.down();
 		if (state.get(DoublePlantBlock.HALF) == DoubleBlockHalf.LOWER) {
 			return super.isValidPosition(state, worldIn, pos) && this.isValidGround(worldIn.getBlockState(floorPos), worldIn, floorPos) && ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8;
@@ -75,8 +74,8 @@ public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable {
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		BlockPos blockpos = context.getPos();
-		IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
-		return blockpos.getY() < context.getWorld().getDimension().getHeight() - 1
+		FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
+		return blockpos.getY() < context.getWorld().getHeight() - 1
 				&& ifluidstate.isTagged(FluidTags.WATER)
 				&& ifluidstate.getLevel() == 8
 				&& context.getWorld().getBlockState(blockpos.up()).isAir(context.getWorld(), blockpos.up())
@@ -88,7 +87,7 @@ public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable {
 		return state.get(HALF) == DoubleBlockHalf.LOWER;
 	}
 
-	public IFluidState getFluidState(BlockState state) {
+	public FluidState getFluidState(BlockState state) {
 		return state.get(HALF) == DoubleBlockHalf.LOWER
 				? Fluids.WATER.getStillFluidState(false)
 				: Fluids.EMPTY.getDefaultState();

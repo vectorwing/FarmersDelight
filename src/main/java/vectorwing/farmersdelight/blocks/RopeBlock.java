@@ -1,10 +1,7 @@
 package vectorwing.farmersdelight.blocks;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.PaneBlock;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
@@ -52,13 +49,13 @@ public class RopeBlock extends PaneBlock
 
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		if (player.getHeldItem(handIn).isEmpty()) {
-			BlockPos.Mutable blockpos$mutable = (new BlockPos.Mutable(pos)).move(Direction.UP);
+			BlockPos.Mutable blockpos$mutable = pos.toMutable().move(Direction.UP);
 
 			for (int i = 0; i < 24; i++) {
 				BlockState blockStateAbove = worldIn.getBlockState(blockpos$mutable);
 				Block blockAbove = blockStateAbove.getBlock();
 				if (blockAbove == Blocks.BELL) {
-					((BellBlock)blockAbove).func_226885_a_(worldIn, blockpos$mutable, blockStateAbove.get(BellBlock.HORIZONTAL_FACING).rotateY());
+					((BellBlock)blockAbove).ring(worldIn, blockpos$mutable, blockStateAbove.get(BellBlock.HORIZONTAL_FACING).rotateY());
 					return ActionResultType.SUCCESS;
 				} else if (blockAbove == ModBlocks.ROPE.get()) {
 					blockpos$mutable.move(Direction.UP);

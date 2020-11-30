@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.client.gui;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
@@ -69,11 +70,11 @@ public class NourishedHungerOverlay {
 						&& stats.getFoodLevel() >= 20;
 
 		if (player.getActivePotionEffect(ModEffects.NOURISHED.get()) != null && player.getActivePotionEffect(Effects.HUNGER) == null) {
-			drawNourishedOverlay(stats.getFoodLevel(), mc, left, top, isPlayerHealingWithSaturation);
+			drawNourishedOverlay(stats.getFoodLevel(), mc, event.getMatrixStack(), left, top, isPlayerHealingWithSaturation);
 		}
 	}
 
-	public static void drawNourishedOverlay(int foodLevel, Minecraft mc, int left, int top, boolean naturalHealing)
+	public static void drawNourishedOverlay(int foodLevel, Minecraft mc, MatrixStack matrixStack, int left, int top, boolean naturalHealing)
 	{
 		mc.getTextureManager().bindTexture(modIcons);
 
@@ -83,16 +84,16 @@ public class NourishedHungerOverlay {
 			int y = top;
 
 			// Background texture
-			mc.ingameGUI.blit(x, y, 0, 0, 11, 11);
+			mc.ingameGUI.blit(matrixStack, x, y, 0, 0, 11, 11);
 
 			float effectiveHungerOfBar = (foodLevel) / 2.0F - j;
 			int naturalHealingOffset = naturalHealing ? 18 : 0;
 
 			// Gilded hunger icons
 			if (effectiveHungerOfBar >= 1)
-				mc.ingameGUI.blit(x, y, 18 + naturalHealingOffset, 0, 9, 9);
+				mc.ingameGUI.blit(matrixStack, x, y, 18 + naturalHealingOffset, 0, 9, 9);
 			else if (effectiveHungerOfBar >= .5)
-				mc.ingameGUI.blit(x, y, 9 + naturalHealingOffset, 0, 9, 9);
+				mc.ingameGUI.blit(matrixStack, x, y, 9 + naturalHealingOffset, 0, 9, 9);
 		}
 
 		mc.getTextureManager().bindTexture(AbstractGui.GUI_ICONS_LOCATION);

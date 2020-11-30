@@ -68,15 +68,6 @@ public class JEIPlugin implements IModPlugin {
 		registration.addRecipeTransferHandler(CookingPotContainer.class, CookingRecipeCategory.UID, 0, 6, 9, 36);
 	}
 
-	private static List<IRecipe<?>> findRecipesByType(IRecipeType<?> type) {
-		return Minecraft.getInstance().world
-				.getRecipeManager()
-				.getRecipes()
-				.stream()
-				.filter(r -> r.getType() == type)
-				.collect(Collectors.toList());
-	}
-
 	@Override
 	public ResourceLocation getPluginUid() { return ID;	}
 }
