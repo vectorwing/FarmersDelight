@@ -9,6 +9,8 @@
   "block.farmersdelight.jungle_pantry": "Placard en acajou",
   "block.farmersdelight.acacia_pantry": "Placard en acacia",
   "block.farmersdelight.dark_oak_pantry": "Placard en chêne noir",
+  "block.farmersdelight.crimson_pantry": "Placard carmin",
+  "block.farmersdelight.warped_pantry": "Placard biscornu",
   "block.farmersdelight.rope": "Corde",
   "block.farmersdelight.safety_net": "Filet",
   "block.farmersdelight.tatami": "Block de tatami",
@@ -77,6 +79,7 @@
   "item.farmersdelight.iron_knife": "Couteau en fer",
   "item.farmersdelight.golden_knife": "Couteau en or",
   "item.farmersdelight.diamond_knife": "Couteau en diamant",
+  "item.farmersdelight.netherite_knife": "Couteau en netherite",
 
   "item.farmersdelight.barbecue_stick": "Brochette",
   "item.farmersdelight.egg_sandwich": "Sandwich aux oeufs",
@@ -88,6 +91,7 @@
 
   "item.farmersdelight.cooked_rice": "Riz cuit",
   "item.farmersdelight.mixed_salad": "Salade composée",
+  "item.farmersdelight.nether_salad": "Salade du nether",
   "item.farmersdelight.beef_stew": "Ragoût de boeuf",
   "item.farmersdelight.chicken_soup": "Soupe de poulet",
   "item.farmersdelight.vegetable_soup": "Soupe de légumes",
@@ -136,6 +140,8 @@
   "farmersdelight.advancement.harvest_straw.desc": "Récoltez de l'herbe pour avoir de la paille",
   "farmersdelight.advancement.get_rich_soil": "Engrais",
   "farmersdelight.advancement.get_rich_soil.desc": "Laisser un peu de compost organique se décomposer jusqu’à ce qu’il devienne de la terre fertile",
+  "farmersdelight.advancement.obtain_netherite_knife": "Qui craint le danger...",
+  "farmersdelight.advancement.obtain_netherite_knife.desc": "Utilisez un précieux lingot de nétherite pour améliorer votre couteau favori",
 
   "farmersdelight.advancement.place_campfire": "Feu allumé",
   "farmersdelight.advancement.place_campfire.desc": "Placez un feu de camp pour rester au chaud la nuit",

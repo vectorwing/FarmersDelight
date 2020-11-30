@@ -9,6 +9,8 @@
   "block.farmersdelight.jungle_pantry": "ジャングルの食品庫",
   "block.farmersdelight.acacia_pantry": "アカシアの食品庫",
   "block.farmersdelight.dark_oak_pantry": "ダークオークの食品庫",
+  "block.farmersdelight.crimson_pantry": "深紅の食品庫",
+  "block.farmersdelight.warped_pantry": "歪んだ食品庫",
   "block.farmersdelight.rope": "ロープ",
   "block.farmersdelight.safety_net": "安全ネット",
   "block.farmersdelight.tatami": "畳",
@@ -77,6 +79,7 @@
   "item.farmersdelight.iron_knife": "鉄のナイフ",
   "item.farmersdelight.golden_knife": "金のナイフ",
   "item.farmersdelight.diamond_knife": "ダイヤモンドのナイフ",
+  "item.farmersdelight.netherite_knife": "ネザライトのナイフ",
 
   "item.farmersdelight.barbecue_stick": "バーベキュー",
   "item.farmersdelight.egg_sandwich": "たまごサンド",
@@ -88,6 +91,7 @@
 
   "item.farmersdelight.cooked_rice": "ご飯",
   "item.farmersdelight.mixed_salad": "ミックスサラダ",
+  "item.farmersdelight.nether_salad": "ネザーサラダ",
   "item.farmersdelight.beef_stew": "ビーフシチュー",
   "item.farmersdelight.chicken_soup": "チキンスープ",
   "item.farmersdelight.vegetable_soup": "野菜スープ",
@@ -136,6 +140,8 @@
   "farmersdelight.advancement.harvest_straw.desc": "ナイフで草を刈ってわらを手に入れる",
   "farmersdelight.advancement.get_rich_soil": "肥料",
   "farmersdelight.advancement.get_rich_soil.desc": "有機コンポストを肥沃な土に変える",
+  "farmersdelight.advancement.obtain_netherite_knife": "熱さに耐えられないなら...",
+  "farmersdelight.advancement.obtain_netherite_knife.desc": "ナイフをネザライト製にする",
 
   "farmersdelight.advancement.place_campfire": "火をつけろ",
   "farmersdelight.advancement.place_campfire.desc": "焚き火で暖をとる",

@@ -23,8 +23,10 @@
   "block.farmersdelight.tomato_crate": "Caixote de tomates",
   "block.farmersdelight.onion_crate": "Caixote de cebolas",
   "block.farmersdelight.rice_bale": "Fardo de arroz",
+
   "block.farmersdelight.brown_mushroom_colony": "Colônia de cogumelos marrons",
   "block.farmersdelight.red_mushroom_colony": "Colônia de cogumelos vermelhos",
+
   "block.farmersdelight.wild_cabbages": "Couve silvestre",
   "block.farmersdelight.wild_tomatoes": "Tomates rasteiros",
   "block.farmersdelight.wild_onions": "Cebola silvestre",
@@ -44,9 +46,11 @@
   "item.farmersdelight.cabbage_seeds": "Sementes de repolho",
   "item.farmersdelight.tomato_seeds": "Sementes de tomate",
   "item.farmersdelight.rice_panicle": "Panícula de arroz",
+
   "item.farmersdelight.straw": "Palha",
   "item.farmersdelight.canvas": "Lona",
   "item.farmersdelight.tree_bark": "Casca de árvore",
+
   "item.farmersdelight.tomato_sauce": "Molho de tomate",
   "item.farmersdelight.milk_bottle": "Frasco de leite",
   "item.farmersdelight.hot_cocoa": "Chocolate quente",
@@ -71,11 +75,13 @@
   "item.farmersdelight.sweet_berry_cookie": "Biscoito de bagas doces",
   "item.farmersdelight.honey_cookie": "Biscoito de mel",
   "item.farmersdelight.earthworm": "Minhoca",
+
   "item.farmersdelight.flint_knife": "Faca de sílex",
   "item.farmersdelight.iron_knife": "Faca de ferro",
   "item.farmersdelight.golden_knife": "Faca de ouro",
   "item.farmersdelight.diamond_knife": "Faca de diamante",
   "item.farmersdelight.netherite_knife": "Faca de netherita",
+
   "item.farmersdelight.barbecue_stick": "Churrasco no palito",
   "item.farmersdelight.egg_sandwich": "Pão com ovo",
   "item.farmersdelight.chicken_sandwich": "Sanduíche de frango",
@@ -107,6 +113,7 @@
 
   "item.farmersdelight.dog_food": "Ração para cães",
   "item.farmersdelight.horse_feed": "Alimento para cavalos",
+
   "effect.farmersdelight.nourished": "Nutrição",
   "effect.farmersdelight.comfort": "Conforto",
 
@@ -114,6 +121,7 @@
   "enchantment.farmersdelight.backstabbing.desc": "Amplifica o dano ao atingir um alvo pelas costas.",
 
   "itemGroup.farmersdelight": "Farmer's Delight",
+
   "farmersdelight.container.cooking_pot": "Panela",
   "farmersdelight.container.cooking_pot.served_on": "Servido em: ",
   "farmersdelight.container.basket": "Cesto",
@@ -153,6 +161,7 @@
   "farmersdelight.advancement.use_cutting_board.desc": "Com uma ferramenta em mãos, use a tábua de corte para partir alguns itens",
   "farmersdelight.advancement.master_chef": "Mestre-cuca",
   "farmersdelight.advancement.master_chef.desc": "Coma uma porção de cada refeição disponível!",
+
   "block.cooking_pot.boil": "Panela Fervendo",
   "block.cooking_pot.boil.subtitles": "Panela fervendo",
   "block.cutting_board.knife": "Faca Cortando",
