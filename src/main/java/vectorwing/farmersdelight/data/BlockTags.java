@@ -36,7 +36,7 @@ public class BlockTags extends BlockTagsProvider {
 				ModBlocks.WILD_POTATOES.get(),
 				ModBlocks.WILD_TOMATOES.get());
 
-		getOrCreateBuilder(ModTags.TRAY_HEAT_SOURCES).add(Blocks.CAMPFIRE, Blocks.FIRE, Blocks.LAVA);
+		getOrCreateBuilder(ModTags.TRAY_HEAT_SOURCES).add(Blocks.CAMPFIRE, Blocks.SOUL_CAMPFIRE, Blocks.FIRE, Blocks.SOUL_FIRE, Blocks.LAVA);
 		getOrCreateBuilder(ModTags.HEAT_SOURCES).add(Blocks.MAGMA_BLOCK, ModBlocks.STOVE.get()).addTag(ModTags.TRAY_HEAT_SOURCES);
 		getOrCreateBuilder(ModTags.COMPOST_ACTIVATORS).add(
 				Blocks.BROWN_MUSHROOM,

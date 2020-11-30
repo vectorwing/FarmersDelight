@@ -39,8 +39,7 @@ public class ItemTags extends ItemTagsProvider {
 
 		getOrCreateBuilder(ForgeTags.COOKED_BEEF).add(Items.COOKED_BEEF, ModItems.BEEF_PATTY.get());
 		getOrCreateBuilder(ForgeTags.COOKED_CHICKEN).add(Items.COOKED_CHICKEN, ModItems.COOKED_CHICKEN_CUTS.get());
-		getOrCreateBuilder(ForgeTags.COOKED_EGGS).add(ModItems.FRIED_EGG.get())
-				.addOptional(new ResourceLocation("incubation", "fried_egg"));
+		getOrCreateBuilder(ForgeTags.COOKED_EGGS).add(ModItems.FRIED_EGG.get());
 
 		getOrCreateBuilder(ForgeTags.COOKED_FISHES).addTags(ForgeTags.COOKED_FISHES_COD, ForgeTags.COOKED_FISHES_SALMON);
 		getOrCreateBuilder(ForgeTags.COOKED_FISHES_COD).add(Items.COOKED_COD, ModItems.COOKED_COD_SLICE.get());
@@ -49,8 +48,7 @@ public class ItemTags extends ItemTagsProvider {
 		getOrCreateBuilder(ForgeTags.CROPS).addTags(ForgeTags.CROPS_CABBAGE, ForgeTags.CROPS_ONION, ForgeTags.CROPS_RICE, ForgeTags.CROPS_TOMATO);
 		getOrCreateBuilder(ForgeTags.CROPS_CABBAGE).add(ModItems.CABBAGE.get(), ModItems.CABBAGE_LEAF.get());
 		getOrCreateBuilder(ForgeTags.CROPS_ONION).add(ModItems.ONION.get());
-		getOrCreateBuilder(ForgeTags.CROPS_RICE).add(ModItems.RICE.get())
-				.addOptional(new ResourceLocation("swampexpansion", "rice"));
+		getOrCreateBuilder(ForgeTags.CROPS_RICE).add(ModItems.RICE.get());
 		getOrCreateBuilder(ForgeTags.CROPS_TOMATO).add(ModItems.TOMATO.get());
 
 		getOrCreateBuilder(ForgeTags.GRAIN).addTags(ForgeTags.GRAIN_WHEAT, ForgeTags.GRAIN_RICE);

@@ -242,7 +242,7 @@ ec158c1f7c8161e2cb449a3e6fd5c6f31303ddec data/farmersdelight/recipes/tomato_crat
 aa612d457ab0d0ab4314c973201e2e9ccc655703 data/farmersdelight/recipes/warped_pantry.json
 20b7a17a911f75d4f535dee5e144d479ed285c9c data/farmersdelight/tags/blocks/compost_activators.json
 8264af71ecaa7985e89e7c8c84dae526a092c843 data/farmersdelight/tags/blocks/heat_sources.json
-69fcf51ec5c22b9891609fa9438cff8942f94306 data/farmersdelight/tags/blocks/tray_heat_sources.json
+aee3f97d70a95d8709166aaa00f771e74f07dbc4 data/farmersdelight/tags/blocks/tray_heat_sources.json
 7ea039688793f7f36ac4488e5d3c60cbe91bcad6 data/farmersdelight/tags/items/comfort_foods.json
 d69c7f77c9f395881dc13e7fde263d59394c516b data/farmersdelight/tags/items/straw_harvesters.json
 4329b636bcfb42626e8d9e78bd807473ac202e54 data/farmersdelight/tags/items/tools/knives.json
@@ -251,14 +251,14 @@ d69c7f77c9f395881dc13e7fde263d59394c516b data/farmersdelight/tags/items/straw_ha
 a9c6ca6829cd484bbfa78c09806e381a4761eac8 data/forge/tags/items/bread/wheat.json
 6da61a14452de0434593a4583e58d99d038a0a30 data/forge/tags/items/cooked_beef.json
 490fba63789b495547cd4969f4b82462d243681d data/forge/tags/items/cooked_chicken.json
-94b71bfe00943dd35736189d62f2c81054f85454 data/forge/tags/items/cooked_eggs.json
+72489acb553d0d47842fbf0ef1ef65a6a45ffe68 data/forge/tags/items/cooked_eggs.json
 66aa19a06bc1f951be0a7370fb0edb69ec36d5b8 data/forge/tags/items/cooked_fishes.json
 0e8df29059e9be396f01f058a3d874174345a41a data/forge/tags/items/cooked_fishes/cod.json
 89d92a61cb58a258b90b60df77b24fe3a38813ab data/forge/tags/items/cooked_fishes/salmon.json
 cf9dea472a662c889f583b763aeb4a662fc5c465 data/forge/tags/items/crops.json
 cb360831d0cc362730ac23dab8e1b4bff97ac44c data/forge/tags/items/crops/cabbage.json
 40627c72fae961ee773ede39523ed65f68568e4c data/forge/tags/items/crops/onion.json
-3293386e24fdd6b1aa58c7a0c2f32756668dbede data/forge/tags/items/crops/rice.json
+94223ce4c11ce41d385a6cc8eb2d8efa1f48a6ad data/forge/tags/items/crops/rice.json
 96372565b5bba2039f97768cc9a924c4197e0947 data/forge/tags/items/crops/tomato.json
 b9d90fe2e27bab571e8b978f5625adab25c6577d data/forge/tags/items/grain.json
 94223ce4c11ce41d385a6cc8eb2d8efa1f48a6ad data/forge/tags/items/grain/rice.json
