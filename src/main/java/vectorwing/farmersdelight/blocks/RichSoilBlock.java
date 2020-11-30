@@ -27,24 +27,27 @@ public class RichSoilBlock extends Block {
 		super(properties);
 	}
 
-    @Override
-    public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-        if (!worldIn.isRemote) {
-            BlockState plant = worldIn.getBlockState(pos.up());
-            if (plant.getBlock() == Blocks.BROWN_MUSHROOM) {
-                worldIn.setBlockState(pos.up(), ModBlocks.BROWN_MUSHROOM_COLONY.get().getDefaultState().with(MushroomColonyBlock.COLONY_AGE, 0));
-            }
-            if (plant.getBlock() == Blocks.RED_MUSHROOM) {
-                worldIn.setBlockState(pos.up(), ModBlocks.RED_MUSHROOM_COLONY.get().getDefaultState().with(MushroomColonyBlock.COLONY_AGE, 0));
-            }
-            if (plant.getBlock() instanceof IGrowable && MathUtils.RAND.nextInt(10) <= 2) {
-                IGrowable growable = (IGrowable) plant.getBlock();
-                if (growable.canGrow(worldIn, pos.up(), plant, false)) {
-                    growable.grow(worldIn, worldIn.rand, pos.up(), plant);
-                }
-            }
-        }
-    }
+	@Override
+	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
+		if (!worldIn.isRemote) {
+			BlockState plant = worldIn.getBlockState(pos.up());
+			if (plant.getBlock() instanceof TallFlowerBlock) {
+				return;
+			}
+			if (plant.getBlock() == Blocks.BROWN_MUSHROOM) {
+				worldIn.setBlockState(pos.up(), ModBlocks.BROWN_MUSHROOM_COLONY.get().getDefaultState().with(MushroomColonyBlock.COLONY_AGE, 0));
+			}
+			if (plant.getBlock() == Blocks.RED_MUSHROOM) {
+				worldIn.setBlockState(pos.up(), ModBlocks.RED_MUSHROOM_COLONY.get().getDefaultState().with(MushroomColonyBlock.COLONY_AGE, 0));
+			}
+			if (plant.getBlock() instanceof IGrowable && MathUtils.RAND.nextInt(10) <= 2) {
+				IGrowable growable = (IGrowable) plant.getBlock();
+				if (growable.canGrow(worldIn, pos.up(), plant, false)) {
+					growable.grow(worldIn, worldIn.rand, pos.up(), plant);
+				}
+			}
+		}
+	}
 
     @Override
     public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable) {
