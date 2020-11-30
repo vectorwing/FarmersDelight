@@ -1,0 +1,18 @@
+{
+  "type": "farmersdelight:straw_harvesting",
+  "conditions": [
+    {
+      "condition": "minecraft:match_tool",
+      "predicate": {
+        "tag": "farmersdelight:straw_harvesters"
+      }
+    },
+    {
+      "condition": "block_state_property",
+      "block": "farmersdelight:tall_rice_crop",
+      "properties": {
+        "age": "7"
+      }
+    }
+  ]
+}

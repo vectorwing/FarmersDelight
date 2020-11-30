@@ -1,6 +1,6 @@
 {
   "parent": "block/cross",
   "textures": {
-    "cross": "farmersdelight:blocks/tall_rice_stage4_upper"
+    "cross": "farmersdelight:block/tall_rice_stage4_upper"
   }
 }

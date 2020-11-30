@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "farmersdelight:blocks/wild_tomatoes"
+    "layer0": "farmersdelight:block/wild_tomatoes"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "farmersdelight:items/sweet_berry_cookie"
+    "layer0": "farmersdelight:item/sweet_berry_cookie"
   }
 }

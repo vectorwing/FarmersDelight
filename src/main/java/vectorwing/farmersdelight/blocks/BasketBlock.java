@@ -172,7 +172,6 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable {
 				((BasketTileEntity) tileentity).setCustomName(stack.getDisplayName());
 			}
 		}
-
 	}
 
 	public BlockState getStateForPlacement(BlockItemUseContext context) {

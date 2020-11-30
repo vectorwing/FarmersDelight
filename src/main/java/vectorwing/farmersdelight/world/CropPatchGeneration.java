@@ -12,6 +12,7 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import vectorwing.farmersdelight.registry.ModBiomeFeatures;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.setup.Configuration;
 
@@ -21,13 +22,15 @@ public class CropPatchGeneration {
 	public static final BlockClusterFeatureConfig ONION_PATCH_CONFIG = (new BlockClusterFeatureConfig.Builder(
 			new SimpleBlockStateProvider(ModBlocks.WILD_ONIONS.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(2).zSpread(2).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK.getBlock())).func_227317_b_().build();
 	public static final BlockClusterFeatureConfig TOMATO_PATCH_CONFIG = (new BlockClusterFeatureConfig.Builder(
-			new SimpleBlockStateProvider(ModBlocks.WILD_TOMATOES.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(2).zSpread(2).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK.getBlock(), Blocks.RED_SAND.getBlock())).func_227317_b_().build();
+			new SimpleBlockStateProvider(ModBlocks.WILD_TOMATOES.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(2).zSpread(2).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK.getBlock(), Blocks.RED_SAND.getBlock(), Blocks.SAND.getBlock())).func_227317_b_().build();
 	public static final BlockClusterFeatureConfig CARROT_PATCH_CONFIG = (new BlockClusterFeatureConfig.Builder(
 			new SimpleBlockStateProvider(ModBlocks.WILD_CARROTS.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(2).zSpread(2).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK.getBlock())).func_227317_b_().build();
 	public static final BlockClusterFeatureConfig POTATO_PATCH_CONFIG = (new BlockClusterFeatureConfig.Builder(
 			new SimpleBlockStateProvider(ModBlocks.WILD_POTATOES.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(2).zSpread(2).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK.getBlock())).func_227317_b_().build();
 	public static final BlockClusterFeatureConfig BEETROOT_PATCH_CONFIG = (new BlockClusterFeatureConfig.Builder(
 			new SimpleBlockStateProvider(ModBlocks.WILD_BEETROOTS.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(2).zSpread(2).whitelist(ImmutableSet.of(Blocks.SAND.getBlock())).func_227317_b_().build();
+	public static final BlockClusterFeatureConfig RICE_PATCH_CONFIG = (new BlockClusterFeatureConfig.Builder(
+			new SimpleBlockStateProvider(ModBlocks.WILD_RICE.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(4).zSpread(4).whitelist(ImmutableSet.of(Blocks.DIRT.getBlock())).func_227317_b_().build();
 
 	public static final ConfiguredFeature<?, ?> PATCH_WILD_CABBAGES = register("patch_wild_cabbages", Feature.RANDOM_PATCH.withConfiguration(CABBAGE_PATCH_CONFIG)
 			.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT.func_242729_a(Configuration.CHANCE_WILD_CABBAGES.get())));
@@ -41,6 +44,8 @@ public class CropPatchGeneration {
 			.withPlacement(Features.Placements.PATCH_PLACEMENT.func_242729_a(Configuration.CHANCE_WILD_POTATOES.get())));
 	public static final ConfiguredFeature<?, ?> PATCH_WILD_BEETROOTS = register("patch_wild_beetroots", Feature.RANDOM_PATCH.withConfiguration(BEETROOT_PATCH_CONFIG)
 			.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242729_a(Configuration.CHANCE_WILD_BEETROOTS.get()));
+	public static final ConfiguredFeature<?, ?> PATCH_WILD_RICE = register("patch_wild_rice", ModBiomeFeatures.RICE.get().withConfiguration(RICE_PATCH_CONFIG)
+			.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242729_a(Configuration.CHANCE_WILD_RICE.get()));
 
 	private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key, ConfiguredFeature<FC, ?> configuredFeature) {
 		return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, key, configuredFeature);
@@ -54,6 +59,10 @@ public class CropPatchGeneration {
 		if (event.getName().getPath().equals("beach")) {
 			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_CABBAGES);
 			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_BEETROOTS);
+		}
+
+		if (event.getCategory().equals(Biome.Category.SWAMP) || event.getCategory().equals(Biome.Category.JUNGLE)) {
+			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_RICE);
 		}
 
 		if (climate.temperature >= 1.0F) {

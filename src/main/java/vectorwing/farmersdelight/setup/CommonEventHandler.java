@@ -119,6 +119,7 @@ public class CommonEventHandler
 		ComposterBlock.CHANCES.put(ModItems.WILD_CARROTS.get(), 0.65F);
 		ComposterBlock.CHANCES.put(ModItems.WILD_POTATOES.get(), 0.65F);
 		ComposterBlock.CHANCES.put(ModItems.WILD_BEETROOTS.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_RICE.get(), 0.65F);
 		ComposterBlock.CHANCES.put(ModItems.PIE_CRUST.get(), 0.65F);
 
 		// 85% chance

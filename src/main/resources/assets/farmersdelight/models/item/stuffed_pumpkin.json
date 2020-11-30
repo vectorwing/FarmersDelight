@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "farmersdelight:items/stuffed_pumpkin"
+    "layer0": "farmersdelight:item/stuffed_pumpkin"
   }
 }

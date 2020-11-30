@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "farmersdelight:items/straw"
+    "layer0": "farmersdelight:item/straw"
   }
 }

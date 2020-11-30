@@ -1,6 +1,6 @@
 {
   "parent": "farmersdelight:block/crop_cross",
   "textures": {
-    "cross": "farmersdelight:blocks/cabbages_stage4"
+    "cross": "farmersdelight:block/cabbages_stage4"
   }
 }

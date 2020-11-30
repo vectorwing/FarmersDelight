@@ -33,6 +33,7 @@
   "block.farmersdelight.wild_carrots": "Wild Carrots",
   "block.farmersdelight.wild_potatoes": "Wild Potatoes",
   "block.farmersdelight.wild_beetroots": "Sea Beet",
+  "block.farmersdelight.wild_rice": "Wild Rice",
 
   "block.farmersdelight.apple_pie": "Apple Pie",
   "block.farmersdelight.sweet_berry_cheesecake": "Sweet Berry Cheesecake",
@@ -130,12 +131,15 @@
   "farmersdelight.tooltip.cooking_pot.single_serving": "Holds 1 serving of:",
   "farmersdelight.tooltip.cooking_pot.many_servings": "Holds %s servings of:",
 
+  "farmersdelight.tooltip.dog_food.when_feeding": "When fed to a Wolf:",
+  "farmersdelight.tooltip.horse_feed.when_feeding": "When fed to a Horse:",
+
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "A world of flavor awaits you!",
   "farmersdelight.advancement.craft_knife": "Hunt and Gather",
   "farmersdelight.advancement.craft_knife.desc": "Craft a Knife to forage more goods from plants and animals",
   "farmersdelight.advancement.plant_rice": "Dipping Your Roots",
-  "farmersdelight.advancement.plant_rice.desc": "Plant Rice in a shallow puddle",
+  "farmersdelight.advancement.plant_rice.desc": "Plant Rice grains in a shallow puddle",
   "farmersdelight.advancement.harvest_straw": "Grasping at Straws",
   "farmersdelight.advancement.harvest_straw.desc": "Harvest grassy plants with a Knife to obtain Straw",
   "farmersdelight.advancement.get_rich_soil": "Plant Food",

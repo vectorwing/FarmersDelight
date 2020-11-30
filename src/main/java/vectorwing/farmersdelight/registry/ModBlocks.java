@@ -70,17 +70,19 @@ public class ModBlocks {
 
 	// WILD PATCHES
 	public static final RegistryObject<Block> WILD_CABBAGES = BLOCKS.register("wild_cabbages",
-			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS).setLightLevel((state) -> 15)));
 	public static final RegistryObject<Block> WILD_ONIONS = BLOCKS.register("wild_onions",
-			() -> new WildCropsBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+			() -> new WildCropsBlock(Block.Properties.from(Blocks.TALL_GRASS).setLightLevel((state) -> 15)));
 	public static final RegistryObject<Block> WILD_TOMATOES = BLOCKS.register("wild_tomatoes",
-			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS).setLightLevel((state) -> 15)));
 	public static final RegistryObject<Block> WILD_CARROTS = BLOCKS.register("wild_carrots",
-			() -> new WildCropsBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+			() -> new WildCropsBlock(Block.Properties.from(Blocks.TALL_GRASS).setLightLevel((state) -> 15)));
 	public static final RegistryObject<Block> WILD_POTATOES = BLOCKS.register("wild_potatoes",
-			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS).setLightLevel((state) -> 15)));
 	public static final RegistryObject<Block> WILD_BEETROOTS = BLOCKS.register("wild_beetroots",
-			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
+			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS).setLightLevel((state) -> 15)));
+	public static final RegistryObject<Block> WILD_RICE = BLOCKS.register("wild_rice",
+			() -> new WildRiceBlock(Block.Properties.from(Blocks.TALL_GRASS).setLightLevel((state) -> 15)));
 
 	// CROPS
 	public static final RegistryObject<Block> CABBAGE_CROP = BLOCKS.register("cabbages",
@@ -91,6 +93,10 @@ public class ModBlocks {
 			() -> new TomatoesBlock(Block.Properties.from(Blocks.WHEAT)));
 	public static final RegistryObject<Block> RICE_CROP = BLOCKS.register("rice_crop",
 			() -> new RiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
+	public static final RegistryObject<Block> RICE_UPPER_CROP = BLOCKS.register("rice_upper_crop",
+			() -> new RiceUpperCropBlock(Block.Properties.from(Blocks.WHEAT)));
+
+	@Deprecated
 	public static final RegistryObject<Block> TALL_RICE_CROP = BLOCKS.register("tall_rice_crop",
-			() -> new TallRiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
+			() -> new LegacyTallRiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
 }
