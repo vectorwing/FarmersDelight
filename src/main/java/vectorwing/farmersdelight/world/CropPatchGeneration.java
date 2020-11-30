@@ -33,19 +33,19 @@ public class CropPatchGeneration {
 			new SimpleBlockStateProvider(ModBlocks.WILD_RICE.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(4).zSpread(4).whitelist(ImmutableSet.of(Blocks.DIRT.getBlock())).func_227317_b_().build();
 
 	public static final ConfiguredFeature<?, ?> PATCH_WILD_CABBAGES = register("patch_wild_cabbages", Feature.RANDOM_PATCH.withConfiguration(CABBAGE_PATCH_CONFIG)
-			.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT.func_242729_a(Configuration.CHANCE_WILD_CABBAGES.get())));
+			.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).chance(Configuration.CHANCE_WILD_CABBAGES.get()));
 	public static final ConfiguredFeature<?, ?> PATCH_WILD_ONIONS = register("patch_wild_onions", Feature.RANDOM_PATCH.withConfiguration(ONION_PATCH_CONFIG)
-			.withPlacement(Features.Placements.PATCH_PLACEMENT.func_242729_a(Configuration.CHANCE_WILD_ONIONS.get())));
+			.withPlacement(Features.Placements.PATCH_PLACEMENT).chance(Configuration.CHANCE_WILD_ONIONS.get()));
 	public static final ConfiguredFeature<?, ?> PATCH_WILD_TOMATOES = register("patch_wild_tomatoes", Feature.RANDOM_PATCH.withConfiguration(TOMATO_PATCH_CONFIG)
-			.withPlacement(Features.Placements.PATCH_PLACEMENT.func_242729_a(Configuration.CHANCE_WILD_TOMATOES.get())));
+			.withPlacement(Features.Placements.PATCH_PLACEMENT).chance(Configuration.CHANCE_WILD_TOMATOES.get()));
 	public static final ConfiguredFeature<?, ?> PATCH_WILD_CARROTS = register("patch_wild_carrots", Feature.RANDOM_PATCH.withConfiguration(CARROT_PATCH_CONFIG)
-			.withPlacement(Features.Placements.PATCH_PLACEMENT.func_242729_a(Configuration.CHANCE_WILD_CARROTS.get())));
+			.withPlacement(Features.Placements.PATCH_PLACEMENT).chance(Configuration.CHANCE_WILD_CARROTS.get()));
 	public static final ConfiguredFeature<?, ?> PATCH_WILD_POTATOES = register("patch_wild_potatoes", Feature.RANDOM_PATCH.withConfiguration(POTATO_PATCH_CONFIG)
-			.withPlacement(Features.Placements.PATCH_PLACEMENT.func_242729_a(Configuration.CHANCE_WILD_POTATOES.get())));
+			.withPlacement(Features.Placements.PATCH_PLACEMENT).chance(Configuration.CHANCE_WILD_POTATOES.get()));
 	public static final ConfiguredFeature<?, ?> PATCH_WILD_BEETROOTS = register("patch_wild_beetroots", Feature.RANDOM_PATCH.withConfiguration(BEETROOT_PATCH_CONFIG)
-			.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242729_a(Configuration.CHANCE_WILD_BEETROOTS.get()));
+			.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).chance(Configuration.CHANCE_WILD_BEETROOTS.get()));
 	public static final ConfiguredFeature<?, ?> PATCH_WILD_RICE = register("patch_wild_rice", ModBiomeFeatures.RICE.get().withConfiguration(RICE_PATCH_CONFIG)
-			.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242729_a(Configuration.CHANCE_WILD_RICE.get()));
+			.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).chance(Configuration.CHANCE_WILD_RICE.get()));
 
 	private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key, ConfiguredFeature<FC, ?> configuredFeature) {
 		return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, key, configuredFeature);

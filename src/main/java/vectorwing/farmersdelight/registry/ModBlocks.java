@@ -70,19 +70,19 @@ public class ModBlocks {
 
 	// WILD PATCHES
 	public static final RegistryObject<Block> WILD_CABBAGES = BLOCKS.register("wild_cabbages",
-			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS).setLightLevel((state) -> 15)));
+			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_ONIONS = BLOCKS.register("wild_onions",
-			() -> new WildCropsBlock(Block.Properties.from(Blocks.TALL_GRASS).setLightLevel((state) -> 15)));
+			() -> new WildCropsBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_TOMATOES = BLOCKS.register("wild_tomatoes",
-			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS).setLightLevel((state) -> 15)));
+			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_CARROTS = BLOCKS.register("wild_carrots",
-			() -> new WildCropsBlock(Block.Properties.from(Blocks.TALL_GRASS).setLightLevel((state) -> 15)));
+			() -> new WildCropsBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_POTATOES = BLOCKS.register("wild_potatoes",
-			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS).setLightLevel((state) -> 15)));
+			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_BEETROOTS = BLOCKS.register("wild_beetroots",
-			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS).setLightLevel((state) -> 15)));
+			() -> new WildPatchBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_RICE = BLOCKS.register("wild_rice",
-			() -> new WildRiceBlock(Block.Properties.from(Blocks.TALL_GRASS).setLightLevel((state) -> 15)));
+			() -> new WildRiceBlock(Block.Properties.from(Blocks.TALL_GRASS)));
 
 	// CROPS
 	public static final RegistryObject<Block> CABBAGE_CROP = BLOCKS.register("cabbages",

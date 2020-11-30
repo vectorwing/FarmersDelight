@@ -24,8 +24,8 @@ public class RiceCropFeature extends Feature<BlockClusterFeatureConfig> {
 
 
 	@Override
-	public boolean func_241855_a(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, BlockClusterFeatureConfig config) {
-		BlockPos blockpos = worldIn.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, pos);;
+	public boolean generate(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, BlockClusterFeatureConfig config) {
+		BlockPos blockpos = worldIn.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, pos);
 
 		int i = 0;
 		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
