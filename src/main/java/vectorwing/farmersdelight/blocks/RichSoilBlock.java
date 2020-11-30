@@ -27,6 +27,9 @@ public class RichSoilBlock extends Block
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
 		if (!worldIn.isRemote) {
 			BlockState plant = worldIn.getBlockState(pos.up());
+			if (plant.getBlock() instanceof TallFlowerBlock) {
+				return;
+			}
 			if (plant.getBlock() == Blocks.BROWN_MUSHROOM) {
 				worldIn.setBlockState(pos.up(), ModBlocks.BROWN_MUSHROOM_COLONY.get().getDefaultState().with(MushroomColonyBlock.COLONY_AGE, 0));
 			}
