@@ -26,6 +26,7 @@
   - Press "uses" (U) on a container item (e.g. Bowl) to see which Cooking Pot recipes it can be served on;
   - Cooking Pot recipes now have a "Move Items" transfer button when checking recipes on it;
 - Graphics updates for some blocks and items;
+- Resource pack makers: I was previously using 'textures/blocks' instead of 'textures/block'. This version fixes it, so you may have to change it too.
 - Translation updates:
   - Updated Chinese (thanks to WuzgXY-GitHub, TUsama and ChillirCR!);
   - Updated German (thanks to SebastianD334 and Moralle!);
