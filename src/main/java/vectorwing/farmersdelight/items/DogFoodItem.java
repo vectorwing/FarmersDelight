@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.items;
 
 import com.google.common.collect.Lists;
-import javafx.util.Pair;
+import com.mojang.datafixers.util.Pair;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
