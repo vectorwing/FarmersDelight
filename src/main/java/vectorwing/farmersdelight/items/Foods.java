@@ -19,6 +19,8 @@ public class Foods {
 			.hunger(4).saturation(0.4f).build();
 	public static final Food TOMATO_SAUCE = (new Food.Builder())
 			.hunger(2).saturation(0.4f).build();
+	public static final Food RAW_PASTA = (new Food.Builder())
+			.hunger(3).saturation(0.4F).effect(() -> new EffectInstance(Effects.HUNGER, 600, 0), 0.3F).build();
 	public static final Food PIE_CRUST = (new Food.Builder())
 			.hunger(2).saturation(0.2f).build();
 	public static final Food PUMPKIN_SLICE = (new Food.Builder())

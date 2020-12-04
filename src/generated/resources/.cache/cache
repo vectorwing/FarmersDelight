@@ -201,7 +201,7 @@ b937424b14dc90e49a9201e544fa4e16b25afd34 data/farmersdelight/recipes/gold_nugget
 744b0d3380a0df39573ae92e7ff0ae577089ab3a data/farmersdelight/recipes/half_tatami_mat.json
 ba18d6d8cf246ca4e3018dfab1decfd3ba69cec4 data/farmersdelight/recipes/hamburger.json
 af7be9c15b9620581d303a3303cb68e198841c05 data/farmersdelight/recipes/honey_cookie.json
-02eca15fb6f7e6e97414f937b61fba8becf32f4a data/farmersdelight/recipes/horse_feed.json
+b35201da0a633db29cb6c72ad3ebe2912507e224 data/farmersdelight/recipes/horse_feed.json
 e18ea6e79673896010abfa1292e1e31d8ddf60b1 data/farmersdelight/recipes/iron_knife.json
 bc2d15ac8ca0b46e536ef5e3b9c25c0b0b412f86 data/farmersdelight/recipes/iron_nugget_from_blasting_knife.json
 471df015868a6c715221decbda943440f709962d data/farmersdelight/recipes/iron_nugget_from_smelting_knife.json
@@ -278,8 +278,8 @@ b8ca827e2254dfc13e42181d1d71dfc29898c28e data/forge/tags/items/raw_fishes/tropic
 cb360831d0cc362730ac23dab8e1b4bff97ac44c data/forge/tags/items/salad_ingredients/cabbage.json
 9756bf9e4b4d7614886cf0bcaf189c422b43300c data/forge/tags/items/seeds.json
 51f4cdcacf6c838dcef61da1641346513e61a2f5 data/forge/tags/items/seeds/cabbage.json
-357e6a28383b4c9a08045b414da6d1ecd67a751f data/forge/tags/items/seeds/rice.json
-94223ce4c11ce41d385a6cc8eb2d8efa1f48a6ad data/forge/tags/items/seeds/tomato.json
+94223ce4c11ce41d385a6cc8eb2d8efa1f48a6ad data/forge/tags/items/seeds/rice.json
+357e6a28383b4c9a08045b414da6d1ecd67a751f data/forge/tags/items/seeds/tomato.json
 064f756dfefcd05c93143bc4603d3bca6f111058 data/forge/tags/items/tools.json
 65dfa813faf1ed0999b1a62805b0223169905afe data/forge/tags/items/tools/axes.json
 4329b636bcfb42626e8d9e78bd807473ac202e54 data/forge/tags/items/tools/knives.json
