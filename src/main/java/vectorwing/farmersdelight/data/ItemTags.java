@@ -75,8 +75,8 @@ public class ItemTags extends ItemTagsProvider {
 
 		getBuilder(ForgeTags.SEEDS).add(ForgeTags.SEEDS_CABBAGE, ForgeTags.SEEDS_RICE, ForgeTags.SEEDS_TOMATO);
 		getBuilder(ForgeTags.SEEDS_CABBAGE).add(ModItems.CABBAGE_SEEDS.get());
-		getBuilder(ForgeTags.SEEDS_RICE).add(ModItems.TOMATO_SEEDS.get());
-		getBuilder(ForgeTags.SEEDS_TOMATO).add(ModItems.RICE.get());
+		getBuilder(ForgeTags.SEEDS_RICE).add(ModItems.RICE.get());
+		getBuilder(ForgeTags.SEEDS_TOMATO).add(ModItems.TOMATO_SEEDS.get());
 
 		getBuilder(ForgeTags.VEGETABLES).add(ForgeTags.VEGETABLES_BEETROOT, ForgeTags.VEGETABLES_CARROT, ForgeTags.VEGETABLES_ONION, ForgeTags.VEGETABLES_POTATO, ForgeTags.VEGETABLES_TOMATO);
 		getBuilder(ForgeTags.VEGETABLES_BEETROOT).add(Items.BEETROOT);

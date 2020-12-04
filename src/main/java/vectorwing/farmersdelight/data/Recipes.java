@@ -397,7 +397,7 @@ public class Recipes extends RecipeProvider
 				.addCriterion("has_cabbage_leaf", InventoryChangeTrigger.Instance.forItems(ModItems.CABBAGE_LEAF.get()))
 				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "cabbage_from_leaves"));
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.HORSE_FEED.get(), 1)
-				.addIngredient(Items.HAY_BLOCK)
+				.addIngredient(Ingredient.fromItems(Items.HAY_BLOCK, ModItems.RICE_BALE.get()))
 				.addIngredient(Items.APPLE)
 				.addIngredient(Items.APPLE)
 				.addIngredient(Items.GOLDEN_CARROT)
