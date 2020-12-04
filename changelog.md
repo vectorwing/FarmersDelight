@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.4b
+- Fix: Rice and Tomato Seeds had inverted tags;
+- Change the amount of rice dropped from the crop, to match the redesign ratios;
+- Add Rice Bale as an ingredient for Horse Feed;
+- Make Raw Pasta edible... at a risk;
+- Add: Spanish translation (thanks to tild09!)
+- Update the looks on the mod's logo.
+
+## 0.2.4a
+- Fix: Wrong Pair import when getting Dog Food tooltip.
+
 ## 0.2.4
 - The Rice crop has been redesigned!
   - The top half of the crop can now be harvested individually. The bottom half will stay planted, and eventually regrow a top half;
