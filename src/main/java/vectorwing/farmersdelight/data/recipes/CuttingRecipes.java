@@ -4,6 +4,7 @@ import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvents;
+import net.minecraftforge.common.Tags;
 import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.tags.ForgeTags;
@@ -146,17 +147,17 @@ public class CuttingRecipes {
 
 	private static void salvageUsingShears(Consumer<IFinishedRecipe> consumer) {
 		// Saddle
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SADDLE), Ingredient.fromTag(ForgeTags.TOOLS_SHEARS), Items.LEATHER, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SADDLE), Ingredient.fromTag(Tags.Items.SHEARS), Items.LEATHER, 2)
 				.addResult(Items.IRON_NUGGET, 2)
 				.build(consumer);
 		// Book
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.LEATHER_HELMET), Ingredient.fromTag(ForgeTags.TOOLS_SHEARS), Items.LEATHER, 1)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.LEATHER_HELMET), Ingredient.fromTag(Tags.Items.SHEARS), Items.LEATHER, 1)
 				.build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.LEATHER_CHESTPLATE), Ingredient.fromTag(ForgeTags.TOOLS_SHEARS), Items.LEATHER, 1)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.LEATHER_CHESTPLATE), Ingredient.fromTag(Tags.Items.SHEARS), Items.LEATHER, 1)
 				.build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.LEATHER_LEGGINGS), Ingredient.fromTag(ForgeTags.TOOLS_SHEARS), Items.LEATHER, 1)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.LEATHER_LEGGINGS), Ingredient.fromTag(Tags.Items.SHEARS), Items.LEATHER, 1)
 				.build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.LEATHER_BOOTS), Ingredient.fromTag(ForgeTags.TOOLS_SHEARS), Items.LEATHER, 1)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.LEATHER_BOOTS), Ingredient.fromTag(Tags.Items.SHEARS), Items.LEATHER, 1)
 				.build(consumer);
 	}
 }

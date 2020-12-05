@@ -4,7 +4,6 @@
     "#forge:tools/axes",
     "#forge:tools/knives",
     "#forge:tools/pickaxes",
-    "#forge:tools/shears",
     "#forge:tools/shovels"
   ]
 }

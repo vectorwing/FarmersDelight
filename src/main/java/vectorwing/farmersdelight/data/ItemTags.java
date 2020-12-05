@@ -85,11 +85,10 @@ public class ItemTags extends ItemTagsProvider {
 		getBuilder(ForgeTags.VEGETABLES_POTATO).add(Items.POTATO);
 		getBuilder(ForgeTags.VEGETABLES_TOMATO).add(ModItems.TOMATO.get());
 
-		getBuilder(ForgeTags.TOOLS).add(ForgeTags.TOOLS_AXES, ForgeTags.TOOLS_KNIVES, ForgeTags.TOOLS_PICKAXES, ForgeTags.TOOLS_SHEARS, ForgeTags.TOOLS_SHOVELS);
+		getBuilder(ForgeTags.TOOLS).add(ForgeTags.TOOLS_AXES, ForgeTags.TOOLS_KNIVES, ForgeTags.TOOLS_PICKAXES, ForgeTags.TOOLS_SHOVELS);
 		getBuilder(ForgeTags.TOOLS_AXES).add(Items.WOODEN_AXE, Items.STONE_AXE, Items.IRON_AXE, Items.DIAMOND_AXE, Items.GOLDEN_AXE);
 		getBuilder(ForgeTags.TOOLS_KNIVES).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get());
 		getBuilder(ForgeTags.TOOLS_PICKAXES).add(Items.WOODEN_PICKAXE, Items.STONE_PICKAXE, Items.IRON_PICKAXE, Items.DIAMOND_PICKAXE, Items.GOLDEN_PICKAXE);
-		getBuilder(ForgeTags.TOOLS_SHEARS).add(Items.SHEARS);
 		getBuilder(ForgeTags.TOOLS_SHOVELS).add(Items.WOODEN_SHOVEL, Items.STONE_SHOVEL, Items.IRON_SHOVEL, Items.DIAMOND_SHOVEL, Items.GOLDEN_SHOVEL);
 	}
 }
