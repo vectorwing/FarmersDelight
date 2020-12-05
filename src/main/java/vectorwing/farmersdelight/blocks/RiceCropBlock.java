@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.blocks;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.*;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
@@ -32,7 +33,7 @@ import java.util.Random;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 @SuppressWarnings("deprecation")
-public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowable {
+public class RiceCropBlock extends BushBlock implements IGrowable, ILiquidContainer {
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_0_3;
 	public static final BooleanProperty SUPPORTING = BooleanProperty.create("supporting");
 	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {
@@ -176,5 +177,13 @@ public class RiceCropBlock extends BushBlock implements IWaterLoggable, IGrowabl
 
 	public FluidState getFluidState(BlockState state) {
 		return Fluids.WATER.getStillFluidState(false);
+	}
+
+	public boolean canContainFluid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
+		return false;
+	}
+
+	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
+		return false;
 	}
 }
