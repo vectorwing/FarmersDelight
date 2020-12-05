@@ -2,6 +2,7 @@
 
 ## 0.2.4b
 - Fix: Rice and Tomato Seeds had inverted tags;
+- Fix: Game crash when using a Bucket on the bottom half of a rice crop;
 - Change the amount of rice dropped from the crop, to match the redesign ratios;
 - Add Rice Bale as an ingredient for Horse Feed;
 - Make Raw Pasta edible... at a risk;
