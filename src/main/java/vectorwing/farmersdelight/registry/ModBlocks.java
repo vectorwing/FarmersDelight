@@ -1,10 +1,9 @@
 package vectorwing.farmersdelight.registry;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Items;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -12,11 +11,19 @@ import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.blocks.*;
 
+import java.util.function.ToIntFunction;
+
 public class ModBlocks {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FarmersDelight.MODID);
 
+	private static ToIntFunction<BlockState> getLightValueLit(int lightValue) {
+		return (state) -> {
+			return state.get(BlockStateProperties.LIT) ? lightValue : 0;
+		};
+	}
+
 	// FUNCTIONAL
-	public static final RegistryObject<Block> STOVE = BLOCKS.register("stove", StoveBlock::new);
+	public static final RegistryObject<Block> STOVE = BLOCKS.register("stove", () -> new StoveBlock(AbstractBlock.Properties.from(Blocks.BRICKS).setLightLevel(getLightValueLit(13))));
 	public static final RegistryObject<Block> COOKING_POT = BLOCKS.register("cooking_pot", CookingPotBlock::new);
 	public static final RegistryObject<Block> BASKET = BLOCKS.register("basket", BasketBlock::new);
 	public static final RegistryObject<Block> CUTTING_BOARD = BLOCKS.register("cutting_board", CuttingBoardBlock::new);

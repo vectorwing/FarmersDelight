@@ -47,6 +47,10 @@ public class StoveBlock extends Block {
 				.sound(SoundType.STONE));
 	}
 
+	public StoveBlock(AbstractBlock.Properties builder) {
+		super(builder);
+	}
+
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		ItemStack itemstack = player.getHeldItem(handIn);
 		Item usedItem = itemstack.getItem();
@@ -109,12 +113,6 @@ public class StoveBlock extends Block {
 		}
 
 		super.onEntityWalk(worldIn, pos, entityIn);
-	}
-
-
-	@Override
-	public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
-		return state.get(LIT) ? 13 : 0;
 	}
 
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
