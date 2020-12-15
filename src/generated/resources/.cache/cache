@@ -144,6 +144,9 @@ f802279130ec734bba166e72d2d7b33d8abf856d data/farmersdelight/recipes/cutting/cab
 b5965097b9a28f359a895e0ddf03f7a01fb458eb data/farmersdelight/recipes/cutting/chicken.json
 022f1c4bc74573df14fe57572e2165ef88d4d484 data/farmersdelight/recipes/cutting/chocolate_pie.json
 f901e1d070911fb63745525caa8e129b5b299638 data/farmersdelight/recipes/cutting/cod.json
+d383fa94f446506d0e5509a180d6276f89133ee4 data/farmersdelight/recipes/cutting/cooked_chicken.json
+b7923e1caed77cc9e661ee26994b2278f750d892 data/farmersdelight/recipes/cutting/cooked_cod.json
+44f738a020ae3fd7fb0d3418b7da5cf3d88bac5d data/farmersdelight/recipes/cutting/cooked_salmon.json
 9a9dc0cdce71538263d321d21f95ad646bb9301e data/farmersdelight/recipes/cutting/crimson_door.json
 e48e2301cc95456ac7bcbfd83b6d1193fe2b09d6 data/farmersdelight/recipes/cutting/crimson_hyphae.json
 599662a1eff5540ec7cab16d463029026289cf08 data/farmersdelight/recipes/cutting/crimson_sign.json
@@ -247,6 +250,7 @@ aee3f97d70a95d8709166aaa00f771e74f07dbc4 data/farmersdelight/tags/blocks/tray_he
 d69c7f77c9f395881dc13e7fde263d59394c516b data/farmersdelight/tags/items/straw_harvesters.json
 4329b636bcfb42626e8d9e78bd807473ac202e54 data/farmersdelight/tags/items/tools/knives.json
 5e2e18af2f6d548146085c45b8cf48d228461fe6 data/farmersdelight/tags/items/wolf_prey.json
+721feacb3244b5607c0a12563963ca72b0be0ca9 data/forge/tags/blocks/dirt.json
 2e5d85fc9cc73626c09f8087814d63499e2481cb data/forge/tags/items/bread.json
 a9c6ca6829cd484bbfa78c09806e381a4761eac8 data/forge/tags/items/bread/wheat.json
 6da61a14452de0434593a4583e58d99d038a0a30 data/forge/tags/items/cooked_beef.json
@@ -291,8 +295,10 @@ be34126249ed7317b23ed824a011cda28cea13f5 data/forge/tags/items/vegetables/beetro
 40627c72fae961ee773ede39523ed65f68568e4c data/forge/tags/items/vegetables/onion.json
 1c951c2bae0947388025fc943118e4bf04fe0393 data/forge/tags/items/vegetables/potato.json
 96372565b5bba2039f97768cc9a924c4197e0947 data/forge/tags/items/vegetables/tomato.json
+721feacb3244b5607c0a12563963ca72b0be0ca9 data/minecraft/tags/blocks/bamboo_plantable_on.json
 3d08a1b63877a3cd2a803269fca075c549c3efa1 data/minecraft/tags/blocks/carpets.json
 5b9b12137a029ceb3678519d884cfba0fc14b044 data/minecraft/tags/blocks/crops.json
+b884a9927c355a8aaa8c19b1a1703698a5a8873d data/minecraft/tags/blocks/mushroom_grow_block.json
 b68049f19599600c691f17c9a0acaa204c4edbdf data/minecraft/tags/blocks/small_flowers.json
 3d08a1b63877a3cd2a803269fca075c549c3efa1 data/minecraft/tags/items/carpets.json
 b68049f19599600c691f17c9a0acaa204c4edbdf data/minecraft/tags/items/small_flowers.json

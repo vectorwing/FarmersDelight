@@ -36,10 +36,19 @@ public class CuttingRecipes {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CHICKEN), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), ModItems.CHICKEN_CUTS.get(), 2)
 				.addResult(Items.BONE_MEAL)
 				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.COOKED_CHICKEN), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), ModItems.COOKED_CHICKEN_CUTS.get(), 2)
+				.addResult(Items.BONE_MEAL)
+				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.COD), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), ModItems.COD_SLICE.get(), 2)
 				.addResult(Items.BONE_MEAL)
 				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.COOKED_COD), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), ModItems.COOKED_COD_SLICE.get(), 2)
+				.addResult(Items.BONE_MEAL)
+				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SALMON), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), ModItems.SALMON_SLICE.get(), 2)
+				.addResult(Items.BONE_MEAL)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.COOKED_SALMON), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), ModItems.COOKED_SALMON_SLICE.get(), 2)
 				.addResult(Items.BONE_MEAL)
 				.build(consumer);
 	}

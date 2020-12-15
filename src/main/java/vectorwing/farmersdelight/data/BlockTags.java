@@ -6,6 +6,7 @@ import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
 import net.minecraft.item.Items;
+import net.minecraftforge.common.Tags;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.tags.ForgeTags;
@@ -18,10 +19,15 @@ public class BlockTags extends BlockTagsProvider {
 
 	@Override
 	protected void registerTags() {
+		// Minecraft Tags
+		getOrCreateBuilder(net.minecraft.tags.BlockTags.BAMBOO_PLANTABLE_ON).add(
+				ModBlocks.RICH_SOIL.get());
+		getOrCreateBuilder(net.minecraft.tags.BlockTags.MUSHROOM_GROW_BLOCK).add(
+				ModBlocks.ORGANIC_COMPOST.get(),
+				ModBlocks.RICH_SOIL.get());
 		getOrCreateBuilder(net.minecraft.tags.BlockTags.CARPETS).add(
 				ModBlocks.FULL_TATAMI_MAT.get(),
-				ModBlocks.HALF_TATAMI_MAT.get()
-		);
+				ModBlocks.HALF_TATAMI_MAT.get());
 		getOrCreateBuilder(net.minecraft.tags.BlockTags.CROPS).add(
 				ModBlocks.CABBAGE_CROP.get(),
 				ModBlocks.ONION_CROP.get(),
@@ -36,8 +42,21 @@ public class BlockTags extends BlockTagsProvider {
 				ModBlocks.WILD_POTATOES.get(),
 				ModBlocks.WILD_TOMATOES.get());
 
-		getOrCreateBuilder(ModTags.TRAY_HEAT_SOURCES).add(Blocks.CAMPFIRE, Blocks.SOUL_CAMPFIRE, Blocks.FIRE, Blocks.SOUL_FIRE, Blocks.LAVA);
-		getOrCreateBuilder(ModTags.HEAT_SOURCES).add(Blocks.MAGMA_BLOCK, ModBlocks.STOVE.get()).addTag(ModTags.TRAY_HEAT_SOURCES);
+		// Forge Tags
+		getOrCreateBuilder(Tags.Blocks.DIRT).add(
+				ModBlocks.RICH_SOIL.get());
+
+		// Mod Tags
+		getOrCreateBuilder(ModTags.TRAY_HEAT_SOURCES).add(
+				Blocks.CAMPFIRE,
+				Blocks.SOUL_CAMPFIRE,
+				Blocks.FIRE,
+				Blocks.SOUL_FIRE,
+				Blocks.LAVA);
+		getOrCreateBuilder(ModTags.HEAT_SOURCES).add(
+				Blocks.MAGMA_BLOCK,
+				ModBlocks.STOVE.get())
+				.addTag(ModTags.TRAY_HEAT_SOURCES);
 		getOrCreateBuilder(ModTags.COMPOST_ACTIVATORS).add(
 				Blocks.BROWN_MUSHROOM,
 				Blocks.RED_MUSHROOM,
