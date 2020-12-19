@@ -1,13 +1,9 @@
 package vectorwing.farmersdelight.items;
 
-import com.mojang.datafixers.util.Pair;
-import mcp.MethodsReturnNonnullByDefault;
 import com.google.common.collect.Lists;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.passive.horse.AbstractHorseEntity;
 import net.minecraft.entity.passive.horse.HorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,7 +12,10 @@ import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectUtils;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.*;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -30,20 +29,15 @@ import vectorwing.farmersdelight.utils.TextUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Map;
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class HorseFeedItem extends MealItem
 {
 	public static final List<EffectInstance> EFFECTS = Lists.newArrayList(
 			new EffectInstance(Effects.SPEED, 6000, 1),
 			new EffectInstance(Effects.JUMP_BOOST, 6000, 0));
 
-	public HorseFeedItem(Properties builder)
-	{
-		super(builder);
+	public HorseFeedItem(Properties properties) {
+		super(properties);
 	}
 
 	@Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -82,25 +76,16 @@ public class HorseFeedItem extends MealItem
 		}
 	}
 
+	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		IFormattableTextComponent whenFeeding = TextUtils.getTranslation("tooltip.horse_feed.when_feeding");
 		tooltip.add(whenFeeding.mergeStyle(TextFormatting.GRAY));
-
-		List<Pair<Attribute, AttributeModifier>> list1 = Lists.newArrayList();
 
 		for(EffectInstance effectinstance : EFFECTS) {
 			IFormattableTextComponent effectDescription = new StringTextComponent(" ");
 			IFormattableTextComponent effectName = new TranslationTextComponent(effectinstance.getEffectName());
 			effectDescription.append(effectName);
 			Effect effect = effectinstance.getPotion();
-			Map<Attribute, AttributeModifier> map = effect.getAttributeModifierMap();
-			if (!map.isEmpty()) {
-				for(Map.Entry<Attribute, AttributeModifier> entry : map.entrySet()) {
-					AttributeModifier attributemodifier = entry.getValue();
-					AttributeModifier attributemodifier1 = new AttributeModifier(attributemodifier.getName(), effect.getAttributeModifierAmount(effectinstance.getAmplifier(), attributemodifier), attributemodifier.getOperation());
-					list1.add(new Pair<>(entry.getKey(), attributemodifier1));
-				}
-			}
 
 			if (effectinstance.getAmplifier() > 0) {
 				effectDescription.appendString(" ").append(new TranslationTextComponent("potion.potency." + effectinstance.getAmplifier()));
@@ -114,6 +99,7 @@ public class HorseFeedItem extends MealItem
 		}
 	}
 
+	@Override
 	public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
 		if (target instanceof HorseEntity) {
 			HorseEntity horse = (HorseEntity)target;

@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.items;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,17 +17,16 @@ import net.minecraft.util.DrinkHelper;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
-public class HotCocoaItem extends Item {
+public class HotCocoaItem extends Item
+{
     public HotCocoaItem(Properties builder) {
         super(builder);
     }
 
+    @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         PlayerEntity playerentity = entityLiving instanceof PlayerEntity ? (PlayerEntity) entityLiving : null;
 
@@ -77,14 +75,17 @@ public class HotCocoaItem extends Item {
         return stack;
     }
 
+    @Override
     public int getUseDuration(ItemStack stack) {
         return 32;
     }
 
+    @Override
     public UseAction getUseAction(ItemStack stack) {
         return UseAction.DRINK;
     }
 
+    @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         return DrinkHelper.startDrinking(worldIn, playerIn, handIn);
     }

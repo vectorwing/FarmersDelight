@@ -23,13 +23,15 @@ import java.util.Iterator;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class MilkBottleItem extends Item {
-    public MilkBottleItem(Item.Properties builder) {
-        super(builder);
+public class MilkBottleItem extends Item
+{
+    public MilkBottleItem(Item.Properties properties) {
+        super(properties);
     }
 
+    @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        PlayerEntity playerentity = entityLiving instanceof PlayerEntity ? (PlayerEntity) entityLiving : null;
+        PlayerEntity player = entityLiving instanceof PlayerEntity ? (PlayerEntity) entityLiving : null;
 
         if (!worldIn.isRemote) {
             Iterator<EffectInstance> itr = entityLiving.getActivePotionEffects().iterator();
@@ -52,38 +54,41 @@ public class MilkBottleItem extends Item {
             }
         }
 
-        if (playerentity instanceof ServerPlayerEntity) {
-            CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayerEntity) playerentity, stack);
+        if (player instanceof ServerPlayerEntity) {
+            CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayerEntity) player, stack);
         }
 
-        if (playerentity != null) {
-            playerentity.addStat(Stats.ITEM_USED.get(this));
-            if (!playerentity.abilities.isCreativeMode) {
+        if (player != null) {
+            player.addStat(Stats.ITEM_USED.get(this));
+            if (!player.abilities.isCreativeMode) {
                 stack.shrink(1);
             }
         }
 
-        if (playerentity == null || !playerentity.abilities.isCreativeMode) {
+        if (player == null || !player.abilities.isCreativeMode) {
             if (stack.isEmpty()) {
                 return new ItemStack(Items.GLASS_BOTTLE);
             }
 
-            if (playerentity != null) {
-                playerentity.inventory.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
+            if (player != null) {
+                player.inventory.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
             }
         }
 
         return stack;
     }
 
+    @Override
     public int getUseDuration(ItemStack stack) {
         return 32;
     }
 
+    @Override
     public UseAction getUseAction(ItemStack stack) {
         return UseAction.DRINK;
     }
 
+    @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         return DrinkHelper.startDrinking(worldIn, playerIn, handIn);
     }

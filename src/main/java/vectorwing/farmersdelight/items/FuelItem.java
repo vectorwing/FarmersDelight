@@ -3,7 +3,8 @@ package vectorwing.farmersdelight.items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class FuelItem extends Item {
+public class FuelItem extends Item
+{
 	public final int burnTime;
 
 	public FuelItem(Properties properties) {

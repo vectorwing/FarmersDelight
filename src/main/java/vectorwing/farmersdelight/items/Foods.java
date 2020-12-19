@@ -5,7 +5,8 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import vectorwing.farmersdelight.registry.ModEffects;
 
-public class Foods {
+public class Foods
+{
 	// Raw Crops
 	public static final Food CABBAGE = (new Food.Builder())
 			.hunger(2).saturation(0.4f).build();
