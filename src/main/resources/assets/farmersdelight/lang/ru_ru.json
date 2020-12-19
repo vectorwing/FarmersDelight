@@ -33,6 +33,7 @@
   "block.farmersdelight.wild_carrots": "Дикая морковь",
   "block.farmersdelight.wild_potatoes": "Дикий картофель",
   "block.farmersdelight.wild_beetroots": "Морская свекла",
+  "block.farmersdelight.wild_rice": "Дикий рис",
 
   "block.farmersdelight.apple_pie": "Яблочный пирог",
   "block.farmersdelight.sweet_berry_cheesecake": "Чизкейк со сладкими ягодами",
@@ -129,6 +130,9 @@
   "farmersdelight.tooltip.cooking_pot.empty": "Пусто",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Содержит одну порцию",
   "farmersdelight.tooltip.cooking_pot.many_servings": "Содержит %s порций",
+
+  "farmersdelight.tooltip.dog_food.when_feeding": "Когда кормят волка:",
+  "farmersdelight.tooltip.horse_feed.when_feeding": "Когда кормят лошадь:",
 
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "Вас ждем мир вкусов!",
