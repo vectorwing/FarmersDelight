@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.blocks;
 
-import mezz.jei.api.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -25,13 +24,11 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Supplier;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
-public class PieBlock extends Block {
-
+@SuppressWarnings("deprecation")
+public class PieBlock extends Block
+{
 	public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 3);
 	protected static final VoxelShape[] SHAPES = new VoxelShape[]{
 			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 14.0D),
@@ -65,10 +62,12 @@ public class PieBlock extends Block {
 		return new EffectInstance(Effects.SPEED, 1800, 0);
 	}
 
+	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return SHAPES[state.get(BITES)];
 	}
 
+	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		ItemStack itemstack = player.getHeldItem(handIn);
 		if (worldIn.isRemote) {
@@ -94,7 +93,7 @@ public class PieBlock extends Block {
 	/**
 	 * Eats a slice from the pie, feeding the player.
 	 */
-	private ActionResultType consumeBite(World worldIn, BlockPos pos, BlockState state, PlayerEntity playerIn) {
+	protected ActionResultType consumeBite(World worldIn, BlockPos pos, BlockState state, PlayerEntity playerIn) {
 		if (!playerIn.canEat(false)) {
 			return ActionResultType.PASS;
 		}
@@ -103,11 +102,10 @@ public class PieBlock extends Block {
 			if (this.getPieEffect() != null) {
 				playerIn.addPotionEffect(this.getPieEffect());
 			}
-			int i = state.get(BITES);
-			if (i < getMaxBites() - 1) {
-				worldIn.setBlockState(pos, state.with(BITES, i + 1), 3);
-			}
-			else {
+			int bites = state.get(BITES);
+			if (bites < getMaxBites() - 1) {
+				worldIn.setBlockState(pos, state.with(BITES, bites + 1), 3);
+			} else {
 				worldIn.removeBlock(pos, false);
 			}
 			worldIn.playSound(null, pos, SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.PLAYERS, 0.8F, 0.8F);
@@ -118,12 +116,11 @@ public class PieBlock extends Block {
 	/**
 	 * Cuts off a bite and drops a slice item, without feeding the player.
 	 */
-	private ActionResultType cutSlice(World worldIn, BlockPos pos, BlockState state) {
-		int i = state.get(BITES);
-		if (i < getMaxBites() - 1) {
-			worldIn.setBlockState(pos, state.with(BITES, i + 1), 3);
-		}
-		else {
+	protected ActionResultType cutSlice(World worldIn, BlockPos pos, BlockState state) {
+		int bites = state.get(BITES);
+		if (bites < getMaxBites() - 1) {
+			worldIn.setBlockState(pos, state.with(BITES, bites + 1), 3);
+		} else {
 			worldIn.removeBlock(pos, false);
 		}
 		InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), this.getPieSliceItem());
@@ -131,26 +128,32 @@ public class PieBlock extends Block {
 		return ActionResultType.SUCCESS;
 	}
 
+	@Override
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		return facing == Direction.DOWN && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
 
+	@Override
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		return worldIn.getBlockState(pos.down()).getMaterial().isSolid();
 	}
 
+	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(BITES);
 	}
 
+	@Override
 	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
 		return getMaxBites() - blockState.get(BITES);
 	}
 
+	@Override
 	public boolean hasComparatorInputOverride(BlockState state) {
 		return true;
 	}
 
+	@Override
 	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
 		return false;
 	}
@@ -158,5 +161,4 @@ public class PieBlock extends Block {
 	public int getMaxBites() {
 		return 4;
 	}
-
 }

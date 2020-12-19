@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.blocks;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IWaterLoggable;
@@ -24,12 +23,10 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 @SuppressWarnings("deprecation")
-public class SafetyNetBlock extends Block implements IWaterLoggable {
+public class SafetyNetBlock extends Block implements IWaterLoggable
+{
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 8.0D, 0.0D, 16.0D, 9.0D, 16.0D);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -45,8 +42,8 @@ public class SafetyNetBlock extends Block implements IWaterLoggable {
 
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
-		return this.getDefaultState().with(WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER);
+		FluidState fluid = context.getWorld().getFluidState(context.getPos());
+		return this.getDefaultState().with(WATERLOGGED, fluid.getFluid() == Fluids.WATER);
 	}
 
 	@Override
@@ -58,29 +55,30 @@ public class SafetyNetBlock extends Block implements IWaterLoggable {
 		return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
 
+	@Override
 	public FluidState getFluidState(BlockState state) {
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
 	}
 
+	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return SHAPE;
 	}
 
+	@Override
 	public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
 		if (entityIn.isSuppressingBounce()) {
 			super.onFallenUpon(worldIn, pos, entityIn, fallDistance);
-		}
-		else {
+		} else {
 			entityIn.onLivingFall(fallDistance, 0.0F);
 		}
-
 	}
 
+	@Override
 	public void onLanded(IBlockReader worldIn, Entity entityIn) {
 		if (entityIn.isSuppressingBounce()) {
 			super.onLanded(worldIn, entityIn);
-		}
-		else {
+		} else {
 			this.bounceEntity(entityIn);
 		}
 	}

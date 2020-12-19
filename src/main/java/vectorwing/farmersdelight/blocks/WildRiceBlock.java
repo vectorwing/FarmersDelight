@@ -2,8 +2,6 @@ package vectorwing.farmersdelight.blocks;
 
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.monster.piglin.PiglinTasks;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -13,9 +11,7 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
@@ -26,6 +22,7 @@ import vectorwing.farmersdelight.registry.ModBlocks;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings("deprecation")
 public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable {
 
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -40,10 +37,10 @@ public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable {
 	}
 
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		FluidState ifluidstate = worldIn.getFluidState(pos);
+		FluidState fluid = worldIn.getFluidState(pos);
 		BlockPos floorPos = pos.down();
 		if (state.get(DoublePlantBlock.HALF) == DoubleBlockHalf.LOWER) {
-			return super.isValidPosition(state, worldIn, pos) && this.isValidGround(worldIn.getBlockState(floorPos), worldIn, floorPos) && ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8;
+			return super.isValidPosition(state, worldIn, pos) && this.isValidGround(worldIn.getBlockState(floorPos), worldIn, floorPos) && fluid.isTagged(FluidTags.WATER) && fluid.getLevel() == 8;
 		}
 		return super.isValidPosition(state, worldIn, pos) && worldIn.getBlockState(pos.down()).getBlock() == ModBlocks.WILD_RICE.get();
 	}
@@ -77,12 +74,12 @@ public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable {
 
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		BlockPos blockpos = context.getPos();
-		FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
-		return blockpos.getY() < context.getWorld().getHeight() - 1
-				&& ifluidstate.isTagged(FluidTags.WATER)
-				&& ifluidstate.getLevel() == 8
-				&& context.getWorld().getBlockState(blockpos.up()).isAir(context.getWorld(), blockpos.up())
+		BlockPos pos = context.getPos();
+		FluidState fluid = context.getWorld().getFluidState(context.getPos());
+		return pos.getY() < context.getWorld().getHeight() - 1
+				&& fluid.isTagged(FluidTags.WATER)
+				&& fluid.getLevel() == 8
+				&& context.getWorld().getBlockState(pos.up()).isAir(context.getWorld(), pos.up())
 				? super.getStateForPlacement(context) : null;
 	}
 

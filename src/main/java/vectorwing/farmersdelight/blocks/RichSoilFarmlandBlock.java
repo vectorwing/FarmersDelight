@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.blocks;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.BlockItemUseContext;
@@ -15,23 +14,21 @@ import net.minecraftforge.common.PlantType;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.utils.MathUtils;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class RichSoilFarmlandBlock extends FarmlandBlock
 {
-	public RichSoilFarmlandBlock(Properties builder) {
-		super(builder);
+	public RichSoilFarmlandBlock(Properties properties) {
+		super(properties);
 	}
 
     @Override
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		BlockState blockstate = worldIn.getBlockState(pos.up());
-		return !blockstate.getMaterial().isSolid() || blockstate.getBlock() instanceof FenceGateBlock || blockstate.getBlock() instanceof MovingPistonBlock || blockstate.getBlock() instanceof StemGrownBlock;
+		BlockState aboveState = worldIn.getBlockState(pos.up());
+		return !aboveState.getMaterial().isSolid() || aboveState.getBlock() instanceof FenceGateBlock || aboveState.getBlock() instanceof MovingPistonBlock || aboveState.getBlock() instanceof StemGrownBlock;
 	}
 
+	@Override
 	public boolean isFertile(BlockState state, IBlockReader world, BlockPos pos) {
 		if (this.getBlock() == this)
             return state.get(RichSoilFarmlandBlock.MOISTURE) > 0;
@@ -39,21 +36,23 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
 		return false;
     }
 
+	@Override
     public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
 	    if (!state.isValidPosition(worldIn, pos)) {
             turnToRichSoil(state, worldIn, pos);
         }
     }
 
+	@Override
     public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-        int i = state.get(MOISTURE);
+        int moisture = state.get(MOISTURE);
         if (!hasWater(worldIn, pos) && !worldIn.isRainingAt(pos.up())) {
-            if (i > 0) {
-                worldIn.setBlockState(pos, state.with(MOISTURE, i - 1), 2);
+            if (moisture > 0) {
+                worldIn.setBlockState(pos, state.with(MOISTURE, moisture - 1), 2);
             }
-        } else if (i < 7) {
+        } else if (moisture < 7) {
             worldIn.setBlockState(pos, state.with(MOISTURE, 7), 2);
-        } else if (i == 7) {
+        } else if (moisture == 7) {
             BlockState plant = worldIn.getBlockState(pos.up());
             if (plant.getBlock() instanceof TallFlowerBlock) {
 				return;

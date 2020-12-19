@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.blocks;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.*;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -10,16 +9,11 @@ import net.minecraftforge.common.PlantType;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.utils.MathUtils;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
-public class RichSoilBlock extends Block {
-	public RichSoilBlock() {
-		super(Properties.from(Blocks.DIRT));
-	}
-
+@SuppressWarnings("deprecation")
+public class RichSoilBlock extends Block
+{
 	public RichSoilBlock(Properties properties)	{
 		super(properties);
 	}

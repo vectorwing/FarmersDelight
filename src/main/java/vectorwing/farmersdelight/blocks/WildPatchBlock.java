@@ -1,17 +1,15 @@
 package vectorwing.farmersdelight.blocks;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.BushBlock;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 @SuppressWarnings("deprecation")
 public class WildPatchBlock extends BushBlock
 {
@@ -26,14 +24,17 @@ public class WildPatchBlock extends BushBlock
 		return SHAPE;
 	}
 
+	@Override
     protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
         return state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS_BLOCK || state.getBlock() == Blocks.SAND || state.getBlock() == Blocks.RED_SAND;
     }
 
+	@Override
 	public Block.OffsetType getOffsetType() {
 		return OffsetType.XZ;
 	}
 
+	@Override
 	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
 		return false;
 	}

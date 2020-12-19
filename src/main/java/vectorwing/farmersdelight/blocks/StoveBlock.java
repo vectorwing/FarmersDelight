@@ -1,8 +1,6 @@
 package vectorwing.farmersdelight.blocks;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -30,34 +28,27 @@ import vectorwing.farmersdelight.tile.StoveTileEntity;
 import vectorwing.farmersdelight.utils.MathUtils;
 
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Optional;
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 @SuppressWarnings("deprecation")
-public class StoveBlock extends Block {
+public class StoveBlock extends Block
+{
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-
-	public StoveBlock() {
-		super(Properties.create(Material.ROCK)
-				.hardnessAndResistance(2.0F, 6.0F)
-				.sound(SoundType.STONE));
-	}
 
 	public StoveBlock(AbstractBlock.Properties builder) {
 		super(builder);
 	}
 
+	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		ItemStack itemstack = player.getHeldItem(handIn);
 		Item usedItem = itemstack.getItem();
 		if (state.get(LIT)) {
-			TileEntity tileentity = worldIn.getTileEntity(pos);
-			if (tileentity instanceof StoveTileEntity) {
-				StoveTileEntity stovetileentity = (StoveTileEntity) tileentity;
+			TileEntity tile = worldIn.getTileEntity(pos);
+			if (tile instanceof StoveTileEntity) {
+				StoveTileEntity stovetileentity = (StoveTileEntity) tile;
 				Optional<CampfireCookingRecipe> optional = stovetileentity.findMatchingRecipe(itemstack);
 				if (optional.isPresent()) {
 					if (!worldIn.isRemote && !stovetileentity.isStoveBlockedAbove() && stovetileentity.addItem(player.abilities.isCreativeMode ? itemstack.copy() : itemstack, optional.get().getCookTime())) {
@@ -65,8 +56,7 @@ public class StoveBlock extends Block {
 						return ActionResultType.SUCCESS;
 					}
 					return ActionResultType.CONSUME;
-				}
-				else {
+				} else {
 					if (usedItem instanceof ShovelItem) {
 						extinguish(state, worldIn, pos);
 						return ActionResultType.SUCCESS;
@@ -78,8 +68,7 @@ public class StoveBlock extends Block {
 					}
 				}
 			}
-		}
-		else {
+		} else {
 			if (itemstack.getItem() instanceof FlintAndSteelItem) {
 				worldIn.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, MathUtils.RAND.nextFloat() * 0.4F + 0.8F);
 				worldIn.setBlockState(pos, state.with(BlockStateProperties.LIT, Boolean.TRUE), 11);
@@ -102,10 +91,10 @@ public class StoveBlock extends Block {
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite())
-				.with(LIT, true);
+		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(LIT, true);
 	}
 
+	@Override
 	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
 		boolean isLit = worldIn.getBlockState(pos).get(StoveBlock.LIT);
 		if (isLit && !entityIn.isImmuneToFire() && entityIn instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entityIn)) {
@@ -115,11 +104,12 @@ public class StoveBlock extends Block {
 		super.onEntityWalk(worldIn, pos, entityIn);
 	}
 
+	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
-			TileEntity tileentity = worldIn.getTileEntity(pos);
-			if (tileentity instanceof StoveTileEntity) {
-				InventoryHelper.dropItems(worldIn, pos, ((StoveTileEntity) tileentity).getInventory());
+			TileEntity tile = worldIn.getTileEntity(pos);
+			if (tile instanceof StoveTileEntity) {
+				InventoryHelper.dropItems(worldIn, pos, ((StoveTileEntity) tile).getInventory());
 			}
 
 			super.onReplaced(state, worldIn, pos, newState, isMoving);

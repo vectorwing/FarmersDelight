@@ -9,7 +9,9 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 
-public class TatamiHalfMatBlock extends Block {
+@SuppressWarnings("deprecation")
+public class TatamiHalfMatBlock extends Block
+{
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
 
 	public TatamiHalfMatBlock() {

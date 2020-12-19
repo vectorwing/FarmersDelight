@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.blocks;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
@@ -9,7 +8,9 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -21,17 +22,13 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import vectorwing.farmersdelight.registry.ModBlocks;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 @SuppressWarnings("deprecation")
 public class RopeBlock extends PaneBlock
 {
 	public static final BooleanProperty TIED_TO_BELL = BooleanProperty.create("tied_to_bell");
 
 	public RopeBlock() {
-		super(Properties.create(Material.CARPET).doesNotBlockMovement().notSolid().hardnessAndResistance(0.1F).sound(SoundType.CLOTH));
+		super(Properties.create(Material.CARPET).doesNotBlockMovement().notSolid().hardnessAndResistance(0.2F).sound(SoundType.CLOTH));
 		this.setDefaultState(this.stateContainer.getBaseState().with(TIED_TO_BELL, false));
 	}
 
@@ -41,10 +38,10 @@ public class RopeBlock extends PaneBlock
 	}
 
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		IBlockReader iblockreader = context.getWorld();
+		IBlockReader world = context.getWorld();
 		BlockPos posAbove = context.getPos().up();
 		BlockState state = super.getStateForPlacement(context);
-		return state != null ? state.with(TIED_TO_BELL, iblockreader.getBlockState(posAbove).getBlock() == Blocks.BELL) : null;
+		return state != null ? state.with(TIED_TO_BELL, world.getBlockState(posAbove).getBlock() == Blocks.BELL) : null;
 	}
 
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
@@ -68,14 +65,17 @@ public class RopeBlock extends PaneBlock
 		return ActionResultType.PASS;
 	}
 
+	@Override
 	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return VoxelShapes.empty();
 	}
 
+	@Override
 	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
 		return useContext.getItem().getItem() == this.asItem();
 	}
 
+	@Override
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		if (stateIn.get(WATERLOGGED)) {
 			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
@@ -91,6 +91,7 @@ public class RopeBlock extends PaneBlock
 				: super.updatePostPlacement(stateIn.with(TIED_TO_BELL, tiedToBell), facing, facingState, worldIn, currentPos, facingPos);
 	}
 
+	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(NORTH, EAST, WEST, SOUTH, WATERLOGGED, TIED_TO_BELL);
 	}
@@ -99,5 +100,4 @@ public class RopeBlock extends PaneBlock
 	public boolean isLadder(BlockState state, IWorldReader world, BlockPos pos, net.minecraft.entity.LivingEntity entity) {
 		return true;
 	}
-
 }
