@@ -21,7 +21,8 @@ import vectorwing.farmersdelight.blocks.PantryBlock;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.TextUtils;
 
-public class PantryTileEntity extends LockableLootTileEntity {
+public class PantryTileEntity extends LockableLootTileEntity
+{
 	private NonNullList<ItemStack> pantryContents = NonNullList.withSize(27, ItemStack.EMPTY);
 	private int numPlayersUsing;
 
@@ -104,8 +105,7 @@ public class PantryTileEntity extends LockableLootTileEntity {
 		this.numPlayersUsing = ChestTileEntity.calculatePlayersUsing(this.world, this, i, j, k);
 		if (this.numPlayersUsing > 0) {
 			this.scheduleTick();
-		}
-		else {
+		} else {
 			BlockState blockstate = this.getBlockState();
 			if (!(blockstate.getBlock() instanceof PantryBlock)) {
 				this.remove();

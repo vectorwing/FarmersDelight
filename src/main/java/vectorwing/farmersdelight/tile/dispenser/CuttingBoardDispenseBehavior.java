@@ -24,7 +24,8 @@ import java.util.HashMap;
  */
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class CuttingBoardDispenseBehavior extends OptionalDispenseBehavior {
+public class CuttingBoardDispenseBehavior extends OptionalDispenseBehavior
+{
 	private static final DispenserLookup BEHAVIOUR_LOOKUP = new DispenserLookup();
 	private static final HashMap<Item, IDispenseItemBehavior> DISPENSE_ITEM_BEHAVIOR_HASH_MAP = new HashMap<>();
 
@@ -64,7 +65,8 @@ public class CuttingBoardDispenseBehavior extends OptionalDispenseBehavior {
 
 	@ParametersAreNonnullByDefault
 	@MethodsReturnNonnullByDefault
-	private static class DispenserLookup extends DispenserBlock {
+	private static class DispenserLookup extends DispenserBlock
+	{
 		protected DispenserLookup() {
 			super(Block.Properties.from(Blocks.DISPENSER));
 		}

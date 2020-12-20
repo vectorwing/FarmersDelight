@@ -51,9 +51,6 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 	}
 
 	public static boolean pullItems(IBasket basket, int facingIndex) {
-		//Boolean ret = net.minecraftforge.items.VanillaInventoryCodeHooks.extractHook(basket);
-		//if (ret != null) return ret;
-
 		for (ItemEntity itementity : getCaptureItems(basket, facingIndex)) {
 			if (captureItem(basket, itementity)) {
 				return true;

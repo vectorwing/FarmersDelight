@@ -60,7 +60,8 @@ public class CookingPotContainer extends Container
 		this.addSlot(new CookingPotMealSlot(inventoryHandler, 6, 124, 26));
 
 		// Bowl Input
-		this.addSlot(new SlotItemHandler(inventoryHandler, 7, 92, 55) {
+		this.addSlot(new SlotItemHandler(inventoryHandler, 7, 92, 55)
+		{
 			@OnlyIn(Dist.CLIENT)
 			public Pair<ResourceLocation, ResourceLocation> getBackground() {
 				return Pair.of(PlayerContainer.LOCATION_BLOCKS_TEXTURE, EMPTY_CONTAINER_SLOT_BOWL);
@@ -121,23 +122,19 @@ public class CookingPotContainer extends Container
 				if (!this.mergeItemStack(itemstack1, startPlayerInv, endPlayerInv, true)) {
 					return ItemStack.EMPTY;
 				}
-			}
-			else if (index > indexOutput) {
+			} else if (index > indexOutput) {
 				if (itemstack1.getItem() == Items.BOWL && !this.mergeItemStack(itemstack1, indexContainerInput, indexContainerInput + 1, false)) {
 					return ItemStack.EMPTY;
-				}
-				else if (!this.mergeItemStack(itemstack1, 0, indexOutput, false)) {
+				} else if (!this.mergeItemStack(itemstack1, 0, indexOutput, false)) {
 					return ItemStack.EMPTY;
 				}
-			}
-			else if (!this.mergeItemStack(itemstack1, startPlayerInv, endPlayerInv, false)) {
+			} else if (!this.mergeItemStack(itemstack1, startPlayerInv, endPlayerInv, false)) {
 				return ItemStack.EMPTY;
 			}
 
 			if (itemstack1.isEmpty()) {
 				slot.putStack(ItemStack.EMPTY);
-			}
-			else {
+			} else {
 				slot.onSlotChanged();
 			}
 
