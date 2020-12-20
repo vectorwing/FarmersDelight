@@ -37,13 +37,24 @@ import javax.annotation.Nullable;
 @SuppressWarnings("deprecation")
 public class CuttingBoardBlock extends Block implements IWaterLoggable
 {
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 1.0D, 15.0D);
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+	protected static final VoxelShape SHAPE = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 1.0D, 15.0D);
 
 	public CuttingBoardBlock() {
 		super(Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD));
 		this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.NORTH).with(WATERLOGGED, false));
+	}
+
+	public static void spawnCuttingParticles(World worldIn, BlockPos pos, ItemStack stack, int count) {
+		for (int i = 0; i < count; ++i) {
+			Vector3d vec3d = new Vector3d(((double) worldIn.rand.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, ((double) worldIn.rand.nextFloat() - 0.5D) * 0.1D);
+			if (worldIn instanceof ServerWorld) {
+				((ServerWorld) worldIn).spawnParticle(new ItemParticleData(ParticleTypes.ITEM, stack), pos.getX() + 0.5F, pos.getY() + 0.1F, pos.getZ() + 0.5F, 1, vec3d.x, vec3d.y + 0.05D, vec3d.z, 0.0D);
+			} else {
+				worldIn.addParticle(new ItemParticleData(ParticleTypes.ITEM, stack), pos.getX() + 0.5F, pos.getY() + 0.1F, pos.getZ() + 0.5F, vec3d.x, vec3d.y + 0.05D, vec3d.z);
+			}
+		}
 	}
 
 	@Override
@@ -71,13 +82,12 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 				}
 				if (itemHeld.isEmpty()) {
 					return ActionResultType.PASS;
-				}
-				else if (cuttingBoardTile.addItem(player.abilities.isCreativeMode ? itemHeld.copy() : itemHeld)) {
+				} else if (cuttingBoardTile.addItem(player.abilities.isCreativeMode ? itemHeld.copy() : itemHeld)) {
 					worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F);
 					return ActionResultType.SUCCESS;
 				}
 
-			// Processing the item with the held tool
+				// Processing the item with the held tool
 			} else if (!itemHeld.isEmpty()) {
 				ItemStack boardItem = cuttingBoardTile.getStoredItem().copy();
 				if (cuttingBoardTile.processItemUsingTool(itemHeld, player)) {
@@ -86,12 +96,11 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 				}
 				return ActionResultType.PASS;
 
-			// Removing the board's item
+				// Removing the board's item
 			} else if (handIn.equals(Hand.MAIN_HAND)) {
 				if (!player.isCreative()) {
 					InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), cuttingBoardTile.removeItem());
-				}
-				else {
+				} else {
 					cuttingBoardTile.removeItem();
 				}
 				worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_HIT, SoundCategory.BLOCKS, 0.25F, 0.5F);
@@ -99,17 +108,6 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 			}
 		}
 		return ActionResultType.PASS;
-	}
-
-	public static void spawnCuttingParticles(World worldIn, BlockPos pos, ItemStack stack, int count) {
-		for (int i = 0; i < count; ++i) {
-			Vector3d vec3d = new Vector3d(((double) worldIn.rand.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, ((double) worldIn.rand.nextFloat() - 0.5D) * 0.1D);
-			if (worldIn instanceof ServerWorld) {
-				((ServerWorld) worldIn).spawnParticle(new ItemParticleData(ParticleTypes.ITEM, stack), pos.getX() + 0.5F, pos.getY() + 0.1F, pos.getZ() + 0.5F, 1, vec3d.x, vec3d.y + 0.05D, vec3d.z, 0.0D);
-			} else {
-				worldIn.addParticle(new ItemParticleData(ParticleTypes.ITEM, stack), pos.getX() + 0.5F, pos.getY() + 0.1F, pos.getZ() + 0.5F, vec3d.x, vec3d.y + 0.05D, vec3d.z);
-			}
-		}
 	}
 
 	@Override

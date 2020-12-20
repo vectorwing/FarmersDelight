@@ -17,7 +17,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
-public class CuttingBoardModel implements IDrawable {
+public class CuttingBoardModel implements IDrawable
+{
 	private final Supplier<ItemStack> supplier;
 	private ItemStack stack;
 

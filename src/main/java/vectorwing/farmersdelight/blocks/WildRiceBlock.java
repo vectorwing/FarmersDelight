@@ -23,8 +23,8 @@ import vectorwing.farmersdelight.registry.ModBlocks;
 import javax.annotation.Nullable;
 
 @SuppressWarnings("deprecation")
-public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable {
-
+public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable
+{
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
 	public WildRiceBlock(Properties properties) {
@@ -84,7 +84,7 @@ public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable {
 	}
 
 	@Override
-	public boolean canContainFluid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn)	{
+	public boolean canContainFluid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
 		return state.get(HALF) == DoubleBlockHalf.LOWER;
 	}
 

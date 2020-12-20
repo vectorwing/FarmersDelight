@@ -9,7 +9,8 @@ import vectorwing.farmersdelight.items.Foods;
 import vectorwing.farmersdelight.items.*;
 
 @SuppressWarnings("unused")
-public class ModItems {
+public class ModItems
+{
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, FarmersDelight.MODID);
 
 	// Blocks

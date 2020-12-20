@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.blocks;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,7 +29,6 @@ import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 public class LegacyTallRiceCropBlock extends BushBlock implements IWaterLoggable, IGrowable
@@ -46,9 +44,26 @@ public class LegacyTallRiceCropBlock extends BushBlock implements IWaterLoggable
 	 * Everything here will be permanently removed once Farmer's Delight is ported to 1.17 in the future.
 	 */
 	@Deprecated
-	public LegacyTallRiceCropBlock(Properties properties)	{
+	public LegacyTallRiceCropBlock(Properties properties) {
 		super(properties);
 		this.setDefaultState(this.getDefaultState().with(WATERLOGGED, true).with(HALF, DoubleBlockHalf.LOWER).with(AGE, 5));
+	}
+
+	protected static void breakDoublePlant(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+		DoubleBlockHalf doubleblockhalf = state.get(HALF);
+		if (doubleblockhalf == DoubleBlockHalf.UPPER) {
+			BlockPos blockpos = pos.down();
+			BlockState blockstate = world.getBlockState(blockpos);
+			if (blockstate.getBlock() == state.getBlock() && blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
+				if (blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
+					world.setBlockState(blockpos, Blocks.WATER.getDefaultState(), 35);
+				} else {
+					world.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
+				}
+				world.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
+			}
+		}
+
 	}
 
 	public IntegerProperty getAgeProperty() {
@@ -125,8 +140,7 @@ public class LegacyTallRiceCropBlock extends BushBlock implements IWaterLoggable
 		worldIn.setBlockState(pos, state.with(AGE, i));
 		if (state.get(HALF) == DoubleBlockHalf.UPPER) {
 			worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, i));
-		}
-		else {
+		} else {
 			worldIn.setBlockState(pos.up(), worldIn.getBlockState(pos.up()).with(AGE, i));
 		}
 	}
@@ -139,8 +153,7 @@ public class LegacyTallRiceCropBlock extends BushBlock implements IWaterLoggable
 		}
 		if (facing.getAxis() != Direction.Axis.Y || half == DoubleBlockHalf.LOWER != (facing == Direction.UP) || facingState.getBlock() == this && facingState.get(HALF) != half) {
 			return half == DoubleBlockHalf.LOWER && facing == Direction.DOWN && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : stateIn;
-		}
-		else {
+		} else {
 			return Blocks.AIR.getDefaultState();
 		}
 	}
@@ -169,8 +182,7 @@ public class LegacyTallRiceCropBlock extends BushBlock implements IWaterLoggable
 		if (!worldIn.isRemote) {
 			if (player.isCreative()) {
 				breakDoublePlant(worldIn, pos, state, player);
-			}
-			else {
+			} else {
 				spawnDrops(state, worldIn, pos, (TileEntity) null, player, player.getHeldItemMainhand());
 			}
 		}
@@ -180,24 +192,6 @@ public class LegacyTallRiceCropBlock extends BushBlock implements IWaterLoggable
 
 	public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
 		super.harvestBlock(worldIn, player, pos, Blocks.AIR.getDefaultState(), te, stack);
-	}
-
-	protected static void breakDoublePlant(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-		DoubleBlockHalf doubleblockhalf = state.get(HALF);
-		if (doubleblockhalf == DoubleBlockHalf.UPPER) {
-			BlockPos blockpos = pos.down();
-			BlockState blockstate = world.getBlockState(blockpos);
-			if (blockstate.getBlock() == state.getBlock() && blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
-				if (blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
-					world.setBlockState(blockpos, Blocks.WATER.getDefaultState(), 35);
-				}
-				else {
-					world.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
-				}
-				world.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
-			}
-		}
-
 	}
 
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
@@ -218,8 +212,7 @@ public class LegacyTallRiceCropBlock extends BushBlock implements IWaterLoggable
 		if (state.get(HALF) != DoubleBlockHalf.UPPER) {
 			FluidState ifluidstate = worldIn.getFluidState(pos);
 			return this.isValidGround(worldIn.getBlockState(pos.down()), worldIn, pos) && ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8;
-		}
-		else {
+		} else {
 			BlockState blockstate = worldIn.getBlockState(pos.down());
 			if (state.getBlock() != this)
 				return super.isValidPosition(state, worldIn, pos); //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.

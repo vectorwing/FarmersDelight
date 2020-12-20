@@ -17,7 +17,6 @@ import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.integration.jei.cooking.CookingRecipeCategory;
 import vectorwing.farmersdelight.integration.jei.cutting.CuttingRecipeCategory;
 import vectorwing.farmersdelight.registry.ModItems;
-import vectorwing.farmersdelight.integration.jei.cooking.CookingRecipeCategory;
 import vectorwing.farmersdelight.tile.container.CookingPotContainer;
 
 import java.util.List;
@@ -26,7 +25,8 @@ import java.util.stream.Collectors;
 @JeiPlugin
 @MethodsReturnNonnullByDefault
 @SuppressWarnings("unused")
-public class JEIPlugin implements IModPlugin {
+public class JEIPlugin implements IModPlugin
+{
 	private static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "jei_plugin");
 	private static final Minecraft MC = Minecraft.getInstance();
 
@@ -69,5 +69,7 @@ public class JEIPlugin implements IModPlugin {
 	}
 
 	@Override
-	public ResourceLocation getPluginUid() { return ID;	}
+	public ResourceLocation getPluginUid() {
+		return ID;
+	}
 }

@@ -22,7 +22,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class CookingPotRecipe implements IRecipe<IInventory> {
+public class CookingPotRecipe implements IRecipe<IInventory>
+{
 	private static final Logger LOGGER = LogManager.getLogger();
 
 	public static IRecipeType<CookingPotRecipe> TYPE = IRecipeType.register(FarmersDelight.MODID + ":cooking");
@@ -45,11 +46,9 @@ public class CookingPotRecipe implements IRecipe<IInventory> {
 
 		if (!container.isEmpty()) {
 			this.container = container;
-		}
-		else if (!output.getContainerItem().isEmpty()) {
+		} else if (!output.getContainerItem().isEmpty()) {
 			this.container = output.getContainerItem();
-		}
-		else {
+		} else {
 			this.container = ItemStack.EMPTY;
 		}
 
@@ -125,8 +124,8 @@ public class CookingPotRecipe implements IRecipe<IInventory> {
 		return CookingPotRecipe.TYPE;
 	}
 
-	private static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<CookingPotRecipe> {
-
+	private static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<CookingPotRecipe>
+	{
 		Serializer() {
 			this.setRegistryName(new ResourceLocation(FarmersDelight.MODID, "cooking"));
 		}
@@ -137,11 +136,9 @@ public class CookingPotRecipe implements IRecipe<IInventory> {
 			final NonNullList<Ingredient> inputItemsIn = readIngredients(JSONUtils.getJsonArray(json, "ingredients"));
 			if (inputItemsIn.isEmpty()) {
 				throw new JsonParseException("No ingredients for cooking recipe");
-			}
-			else if (inputItemsIn.size() > CookingPotRecipe.INPUT_SLOTS) {
+			} else if (inputItemsIn.size() > CookingPotRecipe.INPUT_SLOTS) {
 				throw new JsonParseException("Too many ingredients for cooking recipe! The max is " + CookingPotRecipe.INPUT_SLOTS);
-			}
-			else {
+			} else {
 				final ItemStack outputIn = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
 				ItemStack container = JSONUtils.hasField(json, "container") ? ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "container")) : ItemStack.EMPTY;
 				final float experienceIn = JSONUtils.getFloat(json, "experience", 0.0F);

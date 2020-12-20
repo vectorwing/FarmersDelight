@@ -20,7 +20,7 @@ import vectorwing.farmersdelight.registry.ModItems;
 public class RiceUpperCropBlock extends CropsBlock
 {
 	public static final IntegerProperty RICE_AGE = BlockStateProperties.AGE_0_3;
-	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {
+	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
 			Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D),
 			Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 10.0D, 13.0D),
 			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D),

@@ -41,7 +41,8 @@ public class HorseFeedItem extends MealItem
 	}
 
 	@Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-	public static class HorseFeedEvent {
+	public static class HorseFeedEvent
+	{
 		@SubscribeEvent
 		public static void onHorseFeedApplied(PlayerInteractEvent.EntityInteract event) {
 			PlayerEntity player = event.getPlayer();
@@ -49,15 +50,15 @@ public class HorseFeedItem extends MealItem
 			ItemStack itemStack = event.getItemStack();
 
 			if (target instanceof AbstractHorseEntity) {
-				AbstractHorseEntity horse = (AbstractHorseEntity)target;
+				AbstractHorseEntity horse = (AbstractHorseEntity) target;
 				if (horse.isAlive() && horse.isTame() && itemStack.getItem().equals(ModItems.HORSE_FEED.get())) {
 					horse.setHealth(horse.getMaxHealth());
-					for(EffectInstance effect : EFFECTS) {
+					for (EffectInstance effect : EFFECTS) {
 						horse.addPotionEffect(new EffectInstance(effect));
 					}
 					horse.world.playSound(null, target.getPosition(), SoundEvents.ENTITY_HORSE_EAT, SoundCategory.PLAYERS, 0.8F, 0.8F);
 
-					for(int i = 0; i < 5; ++i) {
+					for (int i = 0; i < 5; ++i) {
 						double d0 = MathUtils.RAND.nextGaussian() * 0.02D;
 						double d1 = MathUtils.RAND.nextGaussian() * 0.02D;
 						double d2 = MathUtils.RAND.nextGaussian() * 0.02D;
@@ -81,7 +82,7 @@ public class HorseFeedItem extends MealItem
 		IFormattableTextComponent whenFeeding = TextUtils.getTranslation("tooltip.horse_feed.when_feeding");
 		tooltip.add(whenFeeding.mergeStyle(TextFormatting.GRAY));
 
-		for(EffectInstance effectinstance : EFFECTS) {
+		for (EffectInstance effectinstance : EFFECTS) {
 			IFormattableTextComponent effectDescription = new StringTextComponent(" ");
 			IFormattableTextComponent effectName = new TranslationTextComponent(effectinstance.getEffectName());
 			effectDescription.append(effectName);
@@ -102,7 +103,7 @@ public class HorseFeedItem extends MealItem
 	@Override
 	public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
 		if (target instanceof HorseEntity) {
-			HorseEntity horse = (HorseEntity)target;
+			HorseEntity horse = (HorseEntity) target;
 			if (horse.isAlive() && horse.isTame()) {
 				return ActionResultType.SUCCESS;
 			}

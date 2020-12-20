@@ -32,6 +32,10 @@ public class TatamiMatBlock extends HorizontalBlock
 		this.setDefaultState(this.getStateContainer().getBaseState().with(PART, BedPart.FOOT));
 	}
 
+	private static Direction getDirectionToOther(BedPart part, Direction direction) {
+		return part == BedPart.FOOT ? direction : direction.getOpposite();
+	}
+
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(HORIZONTAL_FACING, PART);
@@ -59,10 +63,6 @@ public class TatamiMatBlock extends HorizontalBlock
 	@Override
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		return !worldIn.isAirBlock(pos.down());
-	}
-
-	private static Direction getDirectionToOther(BedPart part, Direction direction) {
-		return part == BedPart.FOOT ? direction : direction.getOpposite();
 	}
 
 	@Override

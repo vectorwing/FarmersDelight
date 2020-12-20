@@ -11,7 +11,8 @@ import vectorwing.farmersdelight.utils.tags.ForgeTags;
 
 import java.util.function.Consumer;
 
-public class CuttingRecipes {
+public class CuttingRecipes
+{
 
 	public static void register(Consumer<IFinishedRecipe> consumer) {
 		// Knife

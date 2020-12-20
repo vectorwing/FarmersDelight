@@ -8,7 +8,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.tile.container.CookingPotContainer;
 
-public class ModContainerTypes {
+public class ModContainerTypes
+{
 	public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, FarmersDelight.MODID);
 
 	public static final RegistryObject<ContainerType<CookingPotContainer>> COOKING_POT = CONTAINER_TYPES

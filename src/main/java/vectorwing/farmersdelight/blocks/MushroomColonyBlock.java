@@ -23,13 +23,13 @@ import java.util.function.Supplier;
 @SuppressWarnings("deprecation")
 public class MushroomColonyBlock extends BushBlock implements IGrowable
 {
+	public static final IntegerProperty COLONY_AGE = BlockStateProperties.AGE_0_3;
 	protected static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
 			Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D),
 			Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 10.0D, 13.0D),
 			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D),
 			Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 14.0D, 15.0D),
 	};
-	public static final IntegerProperty COLONY_AGE = BlockStateProperties.AGE_0_3;
 	public final Supplier<Item> mushroomType;
 
 	public MushroomColonyBlock(Properties properties, Supplier<Item> mushroomType) {

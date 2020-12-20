@@ -32,8 +32,8 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public class TomatoesBlock extends BushBlock implements IGrowable
 {
-	private static final int TOMATO_BEARING_AGE = 7;
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_0_7;
+	private static final int TOMATO_BEARING_AGE = 7;
 	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
 			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D),
 			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D),
@@ -49,9 +49,54 @@ public class TomatoesBlock extends BushBlock implements IGrowable
 		this.setDefaultState(this.stateContainer.getBaseState().with(AGE, 0));
 	}
 
-	public int getMaxAge() { return 7; }
+	protected static float getGrowthChance(Block blockIn, IBlockReader worldIn, BlockPos pos) {
+		float f = 1.0F;
+		BlockPos floorPos = pos.down();
 
-	protected int getAge(BlockState state) { return state.get(AGE); }
+		for (int i = -1; i <= 1; ++i) {
+			for (int j = -1; j <= 1; ++j) {
+				float f1 = 0.0F;
+				BlockState blockstate = worldIn.getBlockState(floorPos.add(i, 0, j));
+				if (blockstate.canSustainPlant(worldIn, floorPos.add(i, 0, j), net.minecraft.util.Direction.UP, (net.minecraftforge.common.IPlantable) blockIn)) {
+					f1 = 1.0F;
+					if (blockstate.isFertile(worldIn, floorPos.add(i, 0, j))) {
+						f1 = 3.0F;
+					}
+				}
+
+				if (i != 0 || j != 0) {
+					f1 /= 4.0F;
+				}
+
+				f += f1;
+			}
+		}
+
+		BlockPos northPos = pos.north();
+		BlockPos southPos = pos.south();
+		BlockPos westPos = pos.west();
+		BlockPos eastPos = pos.east();
+		boolean isMatchedWestEast = blockIn == worldIn.getBlockState(westPos).getBlock() || blockIn == worldIn.getBlockState(eastPos).getBlock();
+		boolean isMatchedNorthSouth = blockIn == worldIn.getBlockState(northPos).getBlock() || blockIn == worldIn.getBlockState(southPos).getBlock();
+		if (isMatchedWestEast && isMatchedNorthSouth) {
+			f /= 2.0F;
+		} else {
+			boolean flag2 = blockIn == worldIn.getBlockState(westPos.north()).getBlock() || blockIn == worldIn.getBlockState(eastPos.north()).getBlock() || blockIn == worldIn.getBlockState(eastPos.south()).getBlock() || blockIn == worldIn.getBlockState(westPos.south()).getBlock();
+			if (flag2) {
+				f /= 2.0F;
+			}
+		}
+
+		return f;
+	}
+
+	public int getMaxAge() {
+		return 7;
+	}
+
+	protected int getAge(BlockState state) {
+		return state.get(AGE);
+	}
 
 	public BlockState withAge(int age) {
 		return this.getDefaultState().with(AGE, age);
@@ -147,47 +192,5 @@ public class TomatoesBlock extends BushBlock implements IGrowable
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(AGE);
-	}
-
-	protected static float getGrowthChance(Block blockIn, IBlockReader worldIn, BlockPos pos) {
-		float f = 1.0F;
-		BlockPos floorPos = pos.down();
-
-		for (int i = -1; i <= 1; ++i) {
-			for (int j = -1; j <= 1; ++j) {
-				float f1 = 0.0F;
-				BlockState blockstate = worldIn.getBlockState(floorPos.add(i, 0, j));
-				if (blockstate.canSustainPlant(worldIn, floorPos.add(i, 0, j), net.minecraft.util.Direction.UP, (net.minecraftforge.common.IPlantable) blockIn)) {
-					f1 = 1.0F;
-					if (blockstate.isFertile(worldIn, floorPos.add(i, 0, j))) {
-						f1 = 3.0F;
-					}
-				}
-
-				if (i != 0 || j != 0) {
-					f1 /= 4.0F;
-				}
-
-				f += f1;
-			}
-		}
-
-		BlockPos northPos = pos.north();
-		BlockPos southPos = pos.south();
-		BlockPos westPos = pos.west();
-		BlockPos eastPos = pos.east();
-		boolean isMatchedWestEast = blockIn == worldIn.getBlockState(westPos).getBlock() || blockIn == worldIn.getBlockState(eastPos).getBlock();
-		boolean isMatchedNorthSouth = blockIn == worldIn.getBlockState(northPos).getBlock() || blockIn == worldIn.getBlockState(southPos).getBlock();
-		if (isMatchedWestEast && isMatchedNorthSouth) {
-			f /= 2.0F;
-		}
-		else {
-			boolean flag2 = blockIn == worldIn.getBlockState(westPos.north()).getBlock() || blockIn == worldIn.getBlockState(eastPos.north()).getBlock() || blockIn == worldIn.getBlockState(eastPos.south()).getBlock() || blockIn == worldIn.getBlockState(westPos.south()).getBlock();
-			if (flag2) {
-				f /= 2.0F;
-			}
-		}
-
-		return f;
 	}
 }

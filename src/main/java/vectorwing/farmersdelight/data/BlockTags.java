@@ -1,18 +1,14 @@
 package vectorwing.farmersdelight.data;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.ItemTagsProvider;
-import net.minecraft.item.Items;
 import net.minecraftforge.common.Tags;
 import vectorwing.farmersdelight.registry.ModBlocks;
-import vectorwing.farmersdelight.registry.ModItems;
-import vectorwing.farmersdelight.utils.tags.ForgeTags;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
-public class BlockTags extends BlockTagsProvider {
+public class BlockTags extends BlockTagsProvider
+{
 	public BlockTags(DataGenerator generatorIn) {
 		super(generatorIn);
 	}

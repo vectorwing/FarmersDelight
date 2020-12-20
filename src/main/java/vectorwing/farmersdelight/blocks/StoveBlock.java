@@ -60,8 +60,7 @@ public class StoveBlock extends Block
 					if (usedItem instanceof ShovelItem) {
 						extinguish(state, worldIn, pos);
 						return ActionResultType.SUCCESS;
-					}
-					else if (usedItem == Items.WATER_BUCKET) {
+					} else if (usedItem == Items.WATER_BUCKET) {
 						extinguish(state, worldIn, pos);
 						player.setHeldItem(handIn, new ItemStack(Items.BUCKET));
 						return ActionResultType.SUCCESS;

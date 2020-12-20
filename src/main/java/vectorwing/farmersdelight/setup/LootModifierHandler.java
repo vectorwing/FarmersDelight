@@ -9,7 +9,8 @@ import vectorwing.farmersdelight.loot.modifiers.CakeSliceLoot;
 import vectorwing.farmersdelight.loot.modifiers.StrawHarvestingModifier;
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class LootModifierHandler {
+public class LootModifierHandler
+{
 	@SubscribeEvent
 	public static void registerModifiers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> ev) {
 		ev.getRegistry().register(

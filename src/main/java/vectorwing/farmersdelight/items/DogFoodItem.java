@@ -43,7 +43,8 @@ public class DogFoodItem extends MealItem
 	}
 
 	@Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-	public static class DogFoodEvent {
+	public static class DogFoodEvent
+	{
 		@SubscribeEvent
 		public static void onDogFoodApplied(PlayerInteractEvent.EntityInteract event) {
 			PlayerEntity player = event.getPlayer();
@@ -51,15 +52,15 @@ public class DogFoodItem extends MealItem
 			ItemStack itemStack = event.getItemStack();
 
 			if (target instanceof WolfEntity) {
-				WolfEntity wolf = (WolfEntity)target;
+				WolfEntity wolf = (WolfEntity) target;
 				if (wolf.isAlive() && wolf.isTamed() && itemStack.getItem().equals(ModItems.DOG_FOOD.get())) {
 					wolf.setHealth(wolf.getMaxHealth());
-					for(EffectInstance effect : EFFECTS) {
+					for (EffectInstance effect : EFFECTS) {
 						wolf.addPotionEffect(new EffectInstance(effect));
 					}
 					wolf.world.playSound(null, target.getPosition(), SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.PLAYERS, 0.8F, 0.8F);
 
-					for(int i = 0; i < 5; ++i) {
+					for (int i = 0; i < 5; ++i) {
 						double d0 = MathUtils.RAND.nextGaussian() * 0.02D;
 						double d1 = MathUtils.RAND.nextGaussian() * 0.02D;
 						double d2 = MathUtils.RAND.nextGaussian() * 0.02D;
@@ -105,7 +106,7 @@ public class DogFoodItem extends MealItem
 	@Override
 	public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
 		if (target instanceof WolfEntity) {
-			WolfEntity wolf = (WolfEntity)target;
+			WolfEntity wolf = (WolfEntity) target;
 			if (wolf.isAlive() && wolf.isTamed()) {
 				return ActionResultType.SUCCESS;
 			}

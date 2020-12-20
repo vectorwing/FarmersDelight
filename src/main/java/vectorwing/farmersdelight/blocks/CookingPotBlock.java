@@ -50,11 +50,11 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public class CookingPotBlock extends Block implements IWaterLoggable
 {
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D);
-	protected static final VoxelShape SHAPE_SUPPORTED = VoxelShapes.or(SHAPE, Block.makeCuboidShape(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty SUPPORTED = BlockStateProperties.DOWN;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D);
+	protected static final VoxelShape SHAPE_SUPPORTED = VoxelShapes.or(SHAPE, Block.makeCuboidShape(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
 
 	public CookingPotBlock() {
 		super(Properties.create(Material.IRON)
@@ -121,7 +121,7 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 	@Override
 	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
 		ItemStack itemstack = super.getItem(worldIn, pos, state);
-		CookingPotTileEntity tile = (CookingPotTileEntity)worldIn.getTileEntity(pos);
+		CookingPotTileEntity tile = (CookingPotTileEntity) worldIn.getTileEntity(pos);
 		CompoundNBT compoundnbt = tile.writeMeal(new CompoundNBT());
 		if (!compoundnbt.isEmpty()) {
 			itemstack.setTagInfo("BlockEntityTag", compoundnbt);
@@ -137,7 +137,7 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 		if (state.getBlock() != newState.getBlock()) {
 			TileEntity tileentity = worldIn.getTileEntity(pos);
 			if (tileentity instanceof CookingPotTileEntity) {
-				InventoryHelper.dropItems(worldIn, pos, ((CookingPotTileEntity)tileentity).getDroppableInventory());
+				InventoryHelper.dropItems(worldIn, pos, ((CookingPotTileEntity) tileentity).getDroppableInventory());
 			}
 
 			super.onReplaced(state, worldIn, pos, newState, isMoving);
@@ -181,7 +181,7 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 		if (stack.hasDisplayName()) {
 			TileEntity tileentity = worldIn.getTileEntity(pos);
 			if (tileentity instanceof CookingPotTileEntity) {
-				((CookingPotTileEntity)tileentity).setCustomName(stack.getDisplayName());
+				((CookingPotTileEntity) tileentity).setCustomName(stack.getDisplayName());
 			}
 		}
 	}
@@ -190,10 +190,10 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		TileEntity tileentity = worldIn.getTileEntity(pos);
-		if (tileentity instanceof CookingPotTileEntity && ((CookingPotTileEntity)tileentity).isAboveLitHeatSource()) {
-			double d0 = (double)pos.getX() + 0.5D;
+		if (tileentity instanceof CookingPotTileEntity && ((CookingPotTileEntity) tileentity).isAboveLitHeatSource()) {
+			double d0 = (double) pos.getX() + 0.5D;
 			double d1 = pos.getY();
-			double d2 = (double)pos.getZ() + 0.5D;
+			double d2 = (double) pos.getZ() + 0.5D;
 			if (rand.nextInt(10) == 0) {
 				worldIn.playSound(d0, d1, d2, ModSounds.BLOCK_COOKING_POT_BOIL.get(), SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.2F + 0.9F, false);
 			}

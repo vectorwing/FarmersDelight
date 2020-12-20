@@ -96,8 +96,7 @@ public class PieBlock extends Block
 	protected ActionResultType consumeBite(World worldIn, BlockPos pos, BlockState state, PlayerEntity playerIn) {
 		if (!playerIn.canEat(false)) {
 			return ActionResultType.PASS;
-		}
-		else {
+		} else {
 			playerIn.getFoodStats().addStats(this.getBiteHunger(), this.getBiteSaturation());
 			if (this.getPieEffect() != null) {
 				playerIn.addPotionEffect(this.getPieEffect());

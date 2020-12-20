@@ -11,7 +11,8 @@ import vectorwing.farmersdelight.FarmersDelight;
  * References to tags under the Farmer's Delight namespace.
  * These tags are used for mod mechanics.
  */
-public class ModTags {
+public class ModTags
+{
 	// Blocks that can heat up a Cooking Pot.
 	public static final ITag.INamedTag<Block> HEAT_SOURCES = modBlockTag("heat_sources");
 

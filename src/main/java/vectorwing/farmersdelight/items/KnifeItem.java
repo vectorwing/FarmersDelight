@@ -23,19 +23,19 @@ public class KnifeItem extends ToolItem
 {
 	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.HAY_BLOCK, ModBlocks.RICE_BALE.get());
 
-    public KnifeItem(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties properties) {
-        super(attackDamageIn, attackSpeedIn, tier, EFFECTIVE_ON, properties);
-    }
+	public KnifeItem(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties properties) {
+		super(attackDamageIn, attackSpeedIn, tier, EFFECTIVE_ON, properties);
+	}
 
 	@Override
 	public float getDestroySpeed(ItemStack stack, BlockState state) {
 		Material material = state.getMaterial();
 		if (EFFECTIVE_ON.contains(state.getBlock())) return this.efficiency;
 		return material != Material.WOOL
-			&& material != Material.CARPET
-			&& material != Material.CAKE
-			&& material != Material.WEB
-			&& material != Material.LEAVES ? super.getDestroySpeed(stack, state) : this.efficiency;
+				&& material != Material.CARPET
+				&& material != Material.CAKE
+				&& material != Material.WEB
+				&& material != Material.LEAVES ? super.getDestroySpeed(stack, state) : this.efficiency;
 	}
 
 	@Override

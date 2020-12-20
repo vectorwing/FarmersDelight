@@ -20,7 +20,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity> {
+public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
+{
 	private static final Minecraft MC = Minecraft.getInstance();
 
 	public StoveTileEntityRenderer(TileEntityRendererDispatcher rendererDispatcher) {

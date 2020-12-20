@@ -21,7 +21,8 @@ import java.util.function.Consumer;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class CuttingBoardRecipeBuilder {
+public class CuttingBoardRecipeBuilder
+{
 	private final Map<Item, Integer> results = new LinkedHashMap<Item, Integer>(4);
 	private final Ingredient ingredient;
 	private final Ingredient tool;
@@ -70,8 +71,7 @@ public class CuttingBoardRecipeBuilder {
 		ResourceLocation resourcelocation = Registry.ITEM.getKey(this.ingredient.getMatchingStacks()[0].getItem());
 		if ((new ResourceLocation(save)).equals(resourcelocation)) {
 			throw new IllegalStateException("Shapeless Recipe " + save + " should remove its 'save' argument");
-		}
-		else {
+		} else {
 			this.build(consumerIn, new ResourceLocation(save));
 		}
 	}
@@ -80,7 +80,8 @@ public class CuttingBoardRecipeBuilder {
 		consumerIn.accept(new CuttingBoardRecipeBuilder.Result(id, this.ingredient, this.tool, this.results, this.soundEventID == null ? "" : this.soundEventID));
 	}
 
-	public static class Result implements IFinishedRecipe {
+	public static class Result implements IFinishedRecipe
+	{
 		private final ResourceLocation id;
 		private final Ingredient ingredient;
 		private final Ingredient tool;

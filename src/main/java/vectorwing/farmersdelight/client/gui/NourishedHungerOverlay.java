@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.client.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.entity.player.PlayerEntity;
@@ -26,8 +25,8 @@ import vectorwing.farmersdelight.setup.Configuration;
  */
 
 @OnlyIn(Dist.CLIENT)
-public class NourishedHungerOverlay {
-
+public class NourishedHungerOverlay
+{
 	protected int foodIconsOffset;
 	private static final ResourceLocation modIcons = new ResourceLocation(FarmersDelight.MODID, "textures/gui/nourished.png");
 
@@ -48,7 +47,7 @@ public class NourishedHungerOverlay {
 	}
 
 	@SubscribeEvent(priority = EventPriority.NORMAL)
-	public void onRender(RenderGameOverlayEvent.Post event)	{
+	public void onRender(RenderGameOverlayEvent.Post event) {
 		if (!Configuration.NOURISHED_HUNGER_OVERLAY.get())
 			return;
 		if (event.getType() != RenderGameOverlayEvent.ElementType.FOOD)
@@ -74,12 +73,10 @@ public class NourishedHungerOverlay {
 		}
 	}
 
-	public static void drawNourishedOverlay(int foodLevel, Minecraft mc, MatrixStack matrixStack, int left, int top, boolean naturalHealing)
-	{
+	public static void drawNourishedOverlay(int foodLevel, Minecraft mc, MatrixStack matrixStack, int left, int top, boolean naturalHealing) {
 		mc.getTextureManager().bindTexture(modIcons);
 
-		for (int j = 0; j < 10; ++j)
-		{
+		for (int j = 0; j < 10; ++j) {
 			int x = left - j * 8 - 9;
 			int y = top;
 

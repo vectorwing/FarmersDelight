@@ -19,7 +19,8 @@ import vectorwing.farmersdelight.registry.ModItems;
 
 import java.util.Arrays;
 
-public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe> {
+public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe>
+{
 	public static final ResourceLocation UID = new ResourceLocation(FarmersDelight.MODID, "cutting");
 	private final String title;
 	private final IDrawable background;

@@ -13,7 +13,8 @@ import vectorwing.farmersdelight.registry.ModItems;
 
 import java.util.function.Consumer;
 
-public class SmeltingRecipes {
+public class SmeltingRecipes
+{
 	public static void register(Consumer<IFinishedRecipe> consumer) {
 		foodSmeltingRecipes("fried_egg", Items.EGG, ModItems.FRIED_EGG.get(), 0.35F, consumer);
 		foodSmeltingRecipes("beef_patty", ModItems.MINCED_BEEF.get(), ModItems.BEEF_PATTY.get(), 0.35F, consumer);
