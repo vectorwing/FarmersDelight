@@ -71,6 +71,7 @@ public class CuttingBoardDispenseBehavior extends OptionalDispenseBehavior
 			super(Block.Properties.from(Blocks.DISPENSER));
 		}
 
+		@Override
 		public IDispenseItemBehavior getBehavior(ItemStack itemStack) {
 			return super.getBehavior(itemStack);
 		}

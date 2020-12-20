@@ -85,6 +85,7 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
 		return type == PlantType.CROP || type == PlantType.PLAINS;
 	}
 
+	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		return !this.getDefaultState().isValidPosition(context.getWorld(), context.getPos()) ? ModBlocks.RICH_SOIL.get().getDefaultState() : super.getStateForPlacement(context);
 	}

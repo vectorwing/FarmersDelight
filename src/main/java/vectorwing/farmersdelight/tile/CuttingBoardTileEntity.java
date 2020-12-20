@@ -67,19 +67,16 @@ public class CuttingBoardTileEntity extends TileEntity
 		return compound;
 	}
 
+	@Override
 	@Nullable
 	public SUpdateTileEntityPacket getUpdatePacket() {
 		return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
 	}
 
+	@Override
 	public CompoundNBT getUpdateTag() {
 		return this.write(new CompoundNBT());
 	}
-
-//	@Override
-//	public void handleUpdateTag(CompoundNBT tag) {
-//		this.read(tag);
-//	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {

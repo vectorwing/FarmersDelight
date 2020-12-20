@@ -32,10 +32,12 @@ public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable
 		this.setDefaultState(this.getDefaultState().with(WATERLOGGED, true).with(HALF, DoubleBlockHalf.LOWER));
 	}
 
+	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(HALF, WATERLOGGED);
 	}
 
+	@Override
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		FluidState fluid = worldIn.getFluidState(pos);
 		BlockPos floorPos = pos.down();
@@ -45,10 +47,12 @@ public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable
 		return super.isValidPosition(state, worldIn, pos) && worldIn.getBlockState(pos.down()).getBlock() == ModBlocks.WILD_RICE.get();
 	}
 
+	@Override
 	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
 		return false;
 	}
 
+	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
 		worldIn.setBlockState(pos.up(), this.getDefaultState().with(WATERLOGGED, false).with(HALF, DoubleBlockHalf.UPPER), 3);
 	}
@@ -59,6 +63,7 @@ public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable
 		worldIn.setBlockState(pos.up(), this.getDefaultState().with(WATERLOGGED, false).with(HALF, DoubleBlockHalf.UPPER), flags);
 	}
 
+	@Override
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		BlockState blockstate = super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 		DoubleBlockHalf half = stateIn.get(HALF);
@@ -72,6 +77,7 @@ public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable
 		}
 	}
 
+	@Override
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		BlockPos pos = context.getPos();
@@ -88,6 +94,7 @@ public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable
 		return state.get(HALF) == DoubleBlockHalf.LOWER;
 	}
 
+	@Override
 	public FluidState getFluidState(BlockState state) {
 		return state.get(HALF) == DoubleBlockHalf.LOWER
 				? Fluids.WATER.getStillFluidState(false)

@@ -65,6 +65,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 	private ItemStack container;
 	protected final IIntArray cookingPotData = new IIntArray()
 	{
+		@Override
 		public int get(int index) {
 			switch (index) {
 				case 0:
@@ -76,6 +77,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 			}
 		}
 
+		@Override
 		public void set(int index, int value) {
 			switch (index) {
 				case 0:
@@ -87,6 +89,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 			}
 		}
 
+		@Override
 		public int size() {
 			return 2;
 		}
@@ -106,11 +109,13 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 
 	// ======== NBT & NETWORKING ========
 
+	@Override
 	@Nullable
 	public SUpdateTileEntityPacket getUpdatePacket() {
 		return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
 	}
 
+	@Override
 	public CompoundNBT getUpdateTag() {
 		return this.writeItems(new CompoundNBT());
 	}
@@ -434,6 +439,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		return this.getName();
 	}
 
+	@Override
 	@Nullable
 	public ITextComponent getCustomName() {
 		return this.customName;

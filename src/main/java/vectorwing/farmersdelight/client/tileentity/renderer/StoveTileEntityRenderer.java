@@ -28,6 +28,7 @@ public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
 		super(rendererDispatcher);
 	}
 
+	@Override
 	public void render(StoveTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		Direction direction = tileEntityIn.getBlockState().get(StoveBlock.FACING).getOpposite();
 		NonNullList<ItemStack> nonnulllist = tileEntityIn.getInventory();

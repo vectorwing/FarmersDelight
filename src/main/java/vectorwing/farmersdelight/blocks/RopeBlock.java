@@ -37,6 +37,7 @@ public class RopeBlock extends PaneBlock
 		return true;
 	}
 
+	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		IBlockReader world = context.getWorld();
 		BlockPos posAbove = context.getPos().up();
@@ -44,6 +45,7 @@ public class RopeBlock extends PaneBlock
 		return state != null ? state.with(TIED_TO_BELL, world.getBlockState(posAbove).getBlock() == Blocks.BELL) : null;
 	}
 
+	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		if (player.getHeldItem(handIn).isEmpty()) {
 			BlockPos.Mutable blockpos$mutable = pos.toMutable().move(Direction.UP);

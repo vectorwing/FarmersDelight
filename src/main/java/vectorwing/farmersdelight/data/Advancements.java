@@ -43,6 +43,7 @@ public class Advancements extends AdvancementProvider
 		PATH = generatorIn.getOutputFolder();
 	}
 
+	@Override
 	public void act(DirectoryCache cache) {
 		Set<ResourceLocation> set = Sets.newHashSet();
 		Consumer<Advancement> consumer = (advancement) -> {
@@ -69,6 +70,7 @@ public class Advancements extends AdvancementProvider
 
 	public static class FarmersDelightAdvancements implements Consumer<Consumer<Advancement>>
 	{
+		@Override
 		public void accept(Consumer<Advancement> consumer) {
 			Advancement farmersDelight = Advancement.Builder.builder()
 					.withDisplay(ModItems.COOKING_POT.get(),

@@ -26,10 +26,12 @@ public class StarParticle extends SpriteTexturedParticle
 		return IParticleRenderType.PARTICLE_SHEET_OPAQUE;
 	}
 
+	@Override
 	public float getScale(float scaleFactor) {
 		return this.particleScale * MathHelper.clamp(((float) this.age + scaleFactor) / (float) this.maxAge * 32.0F, 0.0F, 1.0F);
 	}
 
+	@Override
 	public void tick() {
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
@@ -63,6 +65,7 @@ public class StarParticle extends SpriteTexturedParticle
 			this.spriteSet = sprite;
 		}
 
+		@Override
 		public Particle makeParticle(BasicParticleType typeIn, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
 			StarParticle particle = new StarParticle(worldIn, x, y + 0.3D, z);
 			particle.selectSpriteRandomly(this.spriteSet);

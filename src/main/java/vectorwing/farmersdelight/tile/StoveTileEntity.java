@@ -174,6 +174,7 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 
 	}
 
+	@Override
 	public CompoundNBT write(CompoundNBT compound) {
 		this.writeItems(compound);
 		compound.putIntArray("CookingTimes", this.cookingTimes);
@@ -187,11 +188,13 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 		return compound;
 	}
 
+	@Override
 	@Nullable
 	public SUpdateTileEntityPacket getUpdatePacket() {
 		return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
 	}
 
+	@Override
 	public CompoundNBT getUpdateTag() {
 		return this.writeItems(new CompoundNBT());
 	}
@@ -231,6 +234,7 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 			this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
 	}
 
+	@Override
 	public void clear() {
 		this.inventory.clear();
 	}

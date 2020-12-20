@@ -24,18 +24,22 @@ public class BackstabbingEnchantment extends Enchantment
 		super(rarityIn, typeIn, slots);
 	}
 
+	@Override
 	public int getMinLevel() {
 		return 1;
 	}
 
+	@Override
 	public int getMaxLevel() {
 		return 3;
 	}
 
+	@Override
 	public int getMinEnchantability(int enchantmentLevel) {
 		return 15 + (enchantmentLevel - 1) * 9;
 	}
 
+	@Override
 	public int getMaxEnchantability(int enchantmentLevel) {
 		return super.getMinEnchantability(enchantmentLevel) + 50;
 	}

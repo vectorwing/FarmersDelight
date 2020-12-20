@@ -13,6 +13,7 @@ public class CookingPotResultSlot extends SlotItemHandler
 		super(inventoryIn, index, xPosition, yPosition);
 	}
 
+	@Override
 	public boolean isItemValid(ItemStack stack) {
 		return false;
 	}

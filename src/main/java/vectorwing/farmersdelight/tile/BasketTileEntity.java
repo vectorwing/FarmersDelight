@@ -143,6 +143,7 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 		return basket.getWorld() == null ? new ArrayList<>() : basket.getFacingCollectionArea(facingIndex).toBoundingBoxList().stream().flatMap((p_200110_1_) -> basket.getWorld().getEntitiesWithinAABB(ItemEntity.class, p_200110_1_.offset(basket.getXPos() - 0.5D, basket.getYPos() - 0.5D, basket.getZPos() - 0.5D), EntityPredicates.IS_ALIVE).stream()).collect(Collectors.toList());
 	}
 
+	@Override
 	public CompoundNBT write(CompoundNBT compound) {
 		super.write(compound);
 		if (!this.checkLootAndWrite(compound)) {
@@ -189,11 +190,13 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 		return ChestContainer.createGeneric9X3(id, player, this);
 	}
 
+	@Override
 	public ItemStack decrStackSize(int index, int count) {
 		this.fillWithLoot(null);
 		return ItemStackHelper.getAndSplit(this.getItems(), index, count);
 	}
 
+	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) {
 		this.fillWithLoot(null);
 		this.getItems().set(index, stack);
