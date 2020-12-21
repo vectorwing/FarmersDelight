@@ -4,18 +4,23 @@ import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.CarvedPumpkinBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ToolItem;
+import net.minecraft.item.*;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import java.util.Set;
 
@@ -47,6 +52,32 @@ public class KnifeItem extends ToolItem
 	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 		stack.damageItem(1, attacker, (user) -> user.sendBreakAnimation(EquipmentSlotType.MAINHAND));
 		return true;
+	}
+
+	public ActionResultType onItemUse(ItemUseContext context) {
+		World world = context.getWorld();
+		ItemStack tool = context.getItem();
+		BlockPos pos = context.getPos();
+		BlockState state = world.getBlockState(pos);
+		Direction facing = context.getFace();
+
+		if (state.getBlock() == Blocks.PUMPKIN && ModTags.KNIVES.contains(tool.getItem())) {
+			PlayerEntity player = context.getPlayer();
+			if (player != null && !world.isRemote) {
+				Direction direction = facing.getAxis() == Direction.Axis.Y ? player.getHorizontalFacing().getOpposite() : facing;
+				world.playSound(null, pos, SoundEvents.BLOCK_PUMPKIN_CARVE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				world.setBlockState(pos, Blocks.CARVED_PUMPKIN.getDefaultState().with(CarvedPumpkinBlock.FACING, direction), 11);
+				ItemEntity itemEntity = new ItemEntity(world, (double) pos.getX() + 0.5D + (double) direction.getXOffset() * 0.65D, (double) pos.getY() + 0.1D, (double) pos.getZ() + 0.5D + (double) direction.getZOffset() * 0.65D, new ItemStack(Items.PUMPKIN_SEEDS, 4));
+				itemEntity.setMotion(0.05D * (double) direction.getXOffset() + world.rand.nextDouble() * 0.02D, 0.05D, 0.05D * (double) direction.getZOffset() + world.rand.nextDouble() * 0.02D);
+				world.addEntity(itemEntity);
+				tool.damageItem(1, player, (playerIn) -> {
+					playerIn.sendBreakAnimation(context.getHand());
+				});
+			}
+			return ActionResultType.func_233537_a_(world.isRemote);
+		} else {
+			return ActionResultType.PASS;
+		}
 	}
 
 	@Override
