@@ -10,8 +10,6 @@ import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BedPart;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.stats.Stats;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -23,13 +21,19 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class TatamiMatBlock extends HorizontalBlock {
+@SuppressWarnings("deprecation")
+public class TatamiMatBlock extends HorizontalBlock
+{
 	public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
 
 	public TatamiMatBlock() {
 		super(Block.Properties.from(Blocks.WHITE_WOOL).hardnessAndResistance(0.3F));
 		this.setDefaultState(this.getStateContainer().getBaseState().with(PART, BedPart.FOOT));
+	}
+
+	private static Direction getDirectionToOther(BedPart part, Direction direction) {
+		return part == BedPart.FOOT ? direction : direction.getOpposite();
 	}
 
 	@Override
@@ -61,25 +65,16 @@ public class TatamiMatBlock extends HorizontalBlock {
 		return !worldIn.isAirBlock(pos.down());
 	}
 
-	private static Direction getDirectionToOther(BedPart part, Direction direction) {
-		return part == BedPart.FOOT ? direction : direction.getOpposite();
-	}
-
-//	@Override
-//	public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
-//		super.harvestBlock(worldIn, player, pos, Blocks.AIR.getDefaultState(), te, stack);
-//	}
-
 	@Override
 	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
 		if (!worldIn.isRemote && player.isCreative()) {
-			BedPart bedpart = state.get(PART);
-			if (bedpart == BedPart.FOOT) {
-				BlockPos blockpos = pos.offset(getDirectionToOther(bedpart, state.get(HORIZONTAL_FACING)));
-				BlockState blockstate = worldIn.getBlockState(blockpos);
-				if (blockstate.getBlock() == this && blockstate.get(PART) == BedPart.HEAD) {
-					worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
-					worldIn.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
+			BedPart part = state.get(PART);
+			if (part == BedPart.FOOT) {
+				BlockPos pairPos = pos.offset(getDirectionToOther(part, state.get(HORIZONTAL_FACING)));
+				BlockState pairState = worldIn.getBlockState(pairPos);
+				if (pairState.getBlock() == this && pairState.get(PART) == BedPart.HEAD) {
+					worldIn.setBlockState(pairPos, Blocks.AIR.getDefaultState(), 35);
+					worldIn.playEvent(player, 2001, pairPos, Block.getStateId(pairState));
 				}
 			}
 		}
@@ -96,8 +91,8 @@ public class TatamiMatBlock extends HorizontalBlock {
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
 		if (!worldIn.isRemote) {
-			BlockPos blockpos = pos.offset(state.get(HORIZONTAL_FACING));
-			worldIn.setBlockState(blockpos, state.with(PART, BedPart.HEAD), 3);
+			BlockPos facingPos = pos.offset(state.get(HORIZONTAL_FACING));
+			worldIn.setBlockState(facingPos, state.with(PART, BedPart.HEAD), 3);
 			worldIn.func_230547_a_(pos, Blocks.AIR);
 			state.updateNeighbours(worldIn, pos, 3);
 		}
@@ -106,9 +101,9 @@ public class TatamiMatBlock extends HorizontalBlock {
 	@Override
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		Direction direction = context.getPlacementHorizontalFacing();
-		BlockPos blockpos = context.getPos();
-		BlockPos blockpos1 = blockpos.offset(direction);
-		return context.getWorld().getBlockState(blockpos1).isReplaceable(context) ? this.getDefaultState().with(HORIZONTAL_FACING, direction) : null;
+		Direction facing = context.getPlacementHorizontalFacing();
+		BlockPos pos = context.getPos();
+		BlockPos pairPos = pos.offset(facing);
+		return context.getWorld().getBlockState(pairPos).isReplaceable(context) ? this.getDefaultState().with(HORIZONTAL_FACING, facing) : null;
 	}
 }

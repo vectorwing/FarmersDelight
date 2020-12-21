@@ -18,7 +18,8 @@ import net.minecraft.item.ItemStack;
 /**
  * Util for helping with rendering elements across the mod, when vanilla methods don't expose enough to use.
  */
-public class ClientRenderUtils {
+public class ClientRenderUtils
+{
 	/**
 	 * Renders an Item into the GUI, allowing the size to be defined instead of hardcoded.
 	 * This function is ripped right from the game's rendering code. I am probably doing something stupid.

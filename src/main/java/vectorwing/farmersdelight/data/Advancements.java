@@ -33,7 +33,8 @@ import java.util.function.Consumer;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class Advancements extends AdvancementProvider {
+public class Advancements extends AdvancementProvider
+{
 	private final Path PATH;
 	public static final Logger LOGGER = LogManager.getLogger();
 
@@ -42,13 +43,13 @@ public class Advancements extends AdvancementProvider {
 		PATH = generatorIn.getOutputFolder();
 	}
 
+	@Override
 	public void act(DirectoryCache cache) {
 		Set<ResourceLocation> set = Sets.newHashSet();
 		Consumer<Advancement> consumer = (advancement) -> {
 			if (!set.add(advancement.getId())) {
 				throw new IllegalStateException("Duplicate advancement " + advancement.getId());
-			}
-			else {
+			} else {
 				Path path1 = getPath(PATH, advancement);
 
 				try {
@@ -67,7 +68,10 @@ public class Advancements extends AdvancementProvider {
 		return pathIn.resolve("data/" + advancementIn.getId().getNamespace() + "/advancements/" + advancementIn.getId().getPath() + ".json");
 	}
 
-	public static class FarmersDelightAdvancements implements Consumer<Consumer<Advancement>> {
+	public static class FarmersDelightAdvancements implements Consumer<Consumer<Advancement>>
+	{
+		@Override
+		@SuppressWarnings("unused")
 		public void accept(Consumer<Advancement> consumer) {
 			Advancement farmersDelight = Advancement.Builder.builder()
 					.withDisplay(ModItems.COOKING_POT.get(),

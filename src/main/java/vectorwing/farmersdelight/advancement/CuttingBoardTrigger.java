@@ -9,7 +9,8 @@ import net.minecraft.loot.ConditionArrayParser;
 import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.FarmersDelight;
 
-public class CuttingBoardTrigger extends AbstractCriterionTrigger<CuttingBoardTrigger.Instance> {
+public class CuttingBoardTrigger extends AbstractCriterionTrigger<CuttingBoardTrigger.Instance>
+{
 	private static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "use_cutting_board");
 
 	public ResourceLocation getId() {
@@ -25,7 +26,8 @@ public class CuttingBoardTrigger extends AbstractCriterionTrigger<CuttingBoardTr
 		return new CuttingBoardTrigger.Instance(player);
 	}
 
-	public static class Instance extends CriterionInstance {
+	public static class Instance extends CriterionInstance
+	{
 		public Instance(EntityPredicate.AndPredicate player) {
 			super(CuttingBoardTrigger.ID, player);
 		}

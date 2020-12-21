@@ -17,7 +17,8 @@ import vectorwing.farmersdelight.FarmersDelight;
 
 import javax.annotation.Nullable;
 
-public class CuttingBoardRecipe implements IRecipe<RecipeWrapper> {
+public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
+{
 	public static IRecipeType<CuttingBoardRecipe> TYPE = IRecipeType.register(FarmersDelight.MODID + ":cutting");
 	public static final CuttingBoardRecipe.Serializer SERIALIZER = new CuttingBoardRecipe.Serializer();
 
@@ -115,8 +116,8 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper> {
 		return CuttingBoardRecipe.TYPE;
 	}
 
-	private static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<CuttingBoardRecipe> {
-
+	private static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<CuttingBoardRecipe>
+	{
 		Serializer() {
 			this.setRegistryName(new ResourceLocation(FarmersDelight.MODID, "cutting"));
 		}
@@ -128,14 +129,11 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper> {
 			final Ingredient toolIn = Ingredient.deserialize(JSONUtils.getJsonObject(json, "tool"));
 			if (inputItemsIn.isEmpty()) {
 				throw new JsonParseException("No ingredients for cutting recipe");
-			}
-			else if (toolIn.hasNoMatchingItems()) {
+			} else if (toolIn.hasNoMatchingItems()) {
 				throw new JsonParseException("No tool for cutting recipe");
-			}
-			else if (inputItemsIn.size() > 1) {
+			} else if (inputItemsIn.size() > 1) {
 				throw new JsonParseException("Too many ingredients for cutting recipe! Please define only one ingredient.");
-			}
-			else {
+			} else {
 				final NonNullList<ItemStack> results = readResults(JSONUtils.getJsonArray(json, "result"));
 				final String soundID = JSONUtils.getString(json, "sound", "");
 				final int effortIn = JSONUtils.getInt(json, "effort", 1);

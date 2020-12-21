@@ -4,17 +4,17 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particles.BasicParticleType;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class StarParticle extends SpriteTexturedParticle {
+public class StarParticle extends SpriteTexturedParticle
+{
 	protected StarParticle(ClientWorld world, double posX, double posY, double posZ) {
 		super(world, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
-		this.motionX *= (double)0.01F;
-		this.motionY *= (double)0.01F;
-		this.motionZ *= (double)0.01F;
+		this.motionX *= (double) 0.01F;
+		this.motionY *= (double) 0.01F;
+		this.motionZ *= (double) 0.01F;
 		this.motionY += 0.1D;
 		this.particleScale *= 1.5F;
 		this.maxAge = 16;
@@ -26,10 +26,12 @@ public class StarParticle extends SpriteTexturedParticle {
 		return IParticleRenderType.PARTICLE_SHEET_OPAQUE;
 	}
 
+	@Override
 	public float getScale(float scaleFactor) {
-		return this.particleScale * MathHelper.clamp(((float)this.age + scaleFactor) / (float)this.maxAge * 32.0F, 0.0F, 1.0F);
+		return this.particleScale * MathHelper.clamp(((float) this.age + scaleFactor) / (float) this.maxAge * 32.0F, 0.0F, 1.0F);
 	}
 
+	@Override
 	public void tick() {
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
@@ -43,25 +45,27 @@ public class StarParticle extends SpriteTexturedParticle {
 				this.motionZ *= 1.1D;
 			}
 
-			this.motionX *= (double)0.86F;
-			this.motionY *= (double)0.86F;
-			this.motionZ *= (double)0.86F;
+			this.motionX *= (double) 0.86F;
+			this.motionY *= (double) 0.86F;
+			this.motionZ *= (double) 0.86F;
 			if (this.onGround) {
-				this.motionX *= (double)0.7F;
-				this.motionZ *= (double)0.7F;
+				this.motionX *= (double) 0.7F;
+				this.motionZ *= (double) 0.7F;
 			}
 
 		}
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public static class Factory implements IParticleFactory<BasicParticleType> {
+	public static class Factory implements IParticleFactory<BasicParticleType>
+	{
 		private final IAnimatedSprite spriteSet;
 
 		public Factory(IAnimatedSprite sprite) {
 			this.spriteSet = sprite;
 		}
 
+		@Override
 		public Particle makeParticle(BasicParticleType typeIn, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
 			StarParticle particle = new StarParticle(worldIn, x, y + 0.3D, z);
 			particle.selectSpriteRandomly(this.spriteSet);

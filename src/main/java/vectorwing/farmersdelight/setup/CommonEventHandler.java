@@ -24,7 +24,6 @@ import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -35,7 +34,6 @@ import vectorwing.farmersdelight.registry.ModEffects;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.tile.dispenser.CuttingBoardDispenseBehavior;
 import vectorwing.farmersdelight.utils.tags.ModTags;
-import vectorwing.farmersdelight.world.CropPatchGeneration;
 import vectorwing.farmersdelight.world.VillageStructures;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -54,10 +52,9 @@ public class CommonEventHandler
 			LootTables.CHESTS_VILLAGE_VILLAGE_SNOWY_HOUSE,
 			LootTables.CHESTS_VILLAGE_VILLAGE_TAIGA_HOUSE,
 			LootTables.CHESTS_VILLAGE_VILLAGE_DESERT_HOUSE);
-	private static final String[] SCAVENGING_ENTITIES = new String[] { "cow", "chicken", "rabbit", "horse", "donkey", "mule", "llama", "shulker" };
+	private static final String[] SCAVENGING_ENTITIES = new String[]{"cow", "chicken", "rabbit", "horse", "donkey", "mule", "llama", "shulker"};
 
-	public static void init(final FMLCommonSetupEvent event)
-	{
+	public static void init(final FMLCommonSetupEvent event) {
 		registerCompostables();
 
 		ModAdvancements.register();
@@ -147,8 +144,7 @@ public class CommonEventHandler
 		Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
 		VillagerProfession profession = event.getType();
 		if (profession.getRegistryName() == null) return;
-		if (profession.getRegistryName().getPath().equals("farmer"))
-		{
+		if (profession.getRegistryName().getPath().equals("farmer")) {
 			trades.get(1).add(new EmeraldForItemsTrade(ModItems.ONION.get(), 26, 16, 2));
 			trades.get(1).add(new EmeraldForItemsTrade(ModItems.TOMATO.get(), 26, 16, 2));
 			trades.get(2).add(new EmeraldForItemsTrade(ModItems.CABBAGE.get(), 16, 16, 5));
@@ -172,7 +168,8 @@ public class CommonEventHandler
 		}
 	}
 
-	static class EmeraldForItemsTrade implements VillagerTrades.ITrade {
+	static class EmeraldForItemsTrade implements VillagerTrades.ITrade
+	{
 		private final Item tradeItem;
 		private final int count;
 		private final int maxUses;
@@ -208,8 +205,7 @@ public class CommonEventHandler
 	}
 
 	@SubscribeEvent
-	public static void onLootLoad(LootTableLoadEvent event)
-	{
+	public static void onLootLoad(LootTableLoadEvent event) {
 		for (String entity : SCAVENGING_ENTITIES) {
 			if (event.getName().equals(new ResourceLocation("minecraft", "entities/" + entity))) {
 				event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(FarmersDelight.MODID, "inject/" + entity))).name(entity + "_fd_drops").build());

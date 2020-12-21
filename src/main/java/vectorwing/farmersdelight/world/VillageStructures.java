@@ -6,7 +6,9 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
-import net.minecraft.world.gen.feature.jigsaw.*;
+import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
+import net.minecraft.world.gen.feature.jigsaw.JigsawPiece;
+import net.minecraft.world.gen.feature.jigsaw.LegacySingleJigsawPiece;
 import net.minecraft.world.gen.feature.structure.*;
 import net.minecraft.world.gen.feature.template.ProcessorLists;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -16,8 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class VillageStructures {
-
+public class VillageStructures
+{
 	public static void init() {
 		PlainsVillagePools.init();
 		SnowyVillagePools.init();
@@ -34,7 +36,7 @@ public class VillageStructures {
 				.build();
 
 		for (Map.Entry<String, Integer> biome : biomeChances.entrySet()) {
-			addToPool(new ResourceLocation("village/"+biome.getKey()+"/houses"),	new ResourceLocation(FarmersDelight.MODID, "village/houses/"+biome.getKey()+"_compost_pile"), biome.getValue());
+			addToPool(new ResourceLocation("village/" + biome.getKey() + "/houses"), new ResourceLocation(FarmersDelight.MODID, "village/houses/" + biome.getKey() + "_compost_pile"), biome.getValue());
 		}
 	}
 
@@ -42,8 +44,7 @@ public class VillageStructures {
 		JigsawPattern old = WorldGenRegistries.JIGSAW_POOL.getOrDefault(pool);
 		List<JigsawPiece> shuffled = old.getShuffledPieces(MathUtils.RAND);
 		List<Pair<JigsawPiece, Integer>> newPieces = new ArrayList<>();
-		for(JigsawPiece p : shuffled)
-		{
+		for (JigsawPiece p : shuffled) {
 			newPieces.add(new Pair<>(p, 1));
 		}
 		newPieces.add(new Pair<>(new LegacySingleJigsawPiece(Either.left(toAdd), () -> ProcessorLists.field_244101_a, JigsawPattern.PlacementBehaviour.RIGID), weight));

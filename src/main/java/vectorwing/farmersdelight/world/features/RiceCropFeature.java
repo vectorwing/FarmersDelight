@@ -6,18 +6,17 @@ import net.minecraft.block.Blocks;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.structure.StructureManager;
 import vectorwing.farmersdelight.blocks.WildRiceBlock;
 import vectorwing.farmersdelight.registry.ModBlocks;
 
 import java.util.Random;
 
-public class RiceCropFeature extends Feature<BlockClusterFeatureConfig> {
+public class RiceCropFeature extends Feature<BlockClusterFeatureConfig>
+{
 	public RiceCropFeature(Codec<BlockClusterFeatureConfig> configFactoryIn) {
 		super(configFactoryIn);
 	}
@@ -30,7 +29,7 @@ public class RiceCropFeature extends Feature<BlockClusterFeatureConfig> {
 		int i = 0;
 		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
-		for(int j = 0; j < config.tryCount; ++j) {
+		for (int j = 0; j < config.tryCount; ++j) {
 			blockpos$mutable.setPos(blockpos).move(
 					rand.nextInt(config.xSpread + 1) - rand.nextInt(config.xSpread + 1),
 					rand.nextInt(config.ySpread + 1) - rand.nextInt(config.ySpread + 1),
@@ -39,7 +38,7 @@ public class RiceCropFeature extends Feature<BlockClusterFeatureConfig> {
 			if (worldIn.getBlockState(blockpos$mutable).getBlock() == Blocks.WATER && worldIn.getBlockState(blockpos$mutable.up()).getBlock() == Blocks.AIR) {
 				BlockState bottomRiceState = ModBlocks.WILD_RICE.get().getDefaultState().with(WildRiceBlock.HALF, DoubleBlockHalf.LOWER);
 				if (bottomRiceState.isValidPosition(worldIn, blockpos$mutable)) {
-					((WildRiceBlock)bottomRiceState.getBlock()).placeAt(worldIn, blockpos$mutable, 2);
+					((WildRiceBlock) bottomRiceState.getBlock()).placeAt(worldIn, blockpos$mutable, 2);
 					++i;
 				}
 			}

@@ -1,8 +1,8 @@
 package vectorwing.farmersdelight.integration.jei;
 
+import mcp.MethodsReturnNonnullByDefault;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.MethodsReturnNonnullByDefault;
 import mezz.jei.api.constants.VanillaRecipeCategoryUid;
 import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
@@ -17,16 +17,18 @@ import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.integration.jei.cooking.CookingRecipeCategory;
 import vectorwing.farmersdelight.integration.jei.cutting.CuttingRecipeCategory;
 import vectorwing.farmersdelight.registry.ModItems;
-import vectorwing.farmersdelight.integration.jei.cooking.CookingRecipeCategory;
 import vectorwing.farmersdelight.tile.container.CookingPotContainer;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @JeiPlugin
+@ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @SuppressWarnings("unused")
-public class JEIPlugin implements IModPlugin {
+public class JEIPlugin implements IModPlugin
+{
 	private static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "jei_plugin");
 	private static final Minecraft MC = Minecraft.getInstance();
 
@@ -69,5 +71,7 @@ public class JEIPlugin implements IModPlugin {
 	}
 
 	@Override
-	public ResourceLocation getPluginUid() { return ID;	}
+	public ResourceLocation getPluginUid() {
+		return ID;
+	}
 }

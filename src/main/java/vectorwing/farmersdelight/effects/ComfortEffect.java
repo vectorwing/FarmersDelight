@@ -15,7 +15,9 @@ import vectorwing.farmersdelight.registry.ModEffects;
 
 import java.util.Set;
 
-public class ComfortEffect extends Effect {
+@SuppressWarnings("unused")
+public class ComfortEffect extends Effect
+{
 	public static final Set<Effect> COMFORT_IMMUNITIES = Sets.newHashSet(Effects.SLOWNESS, Effects.WEAKNESS, Effects.HUNGER);
 
 	/**
@@ -29,7 +31,8 @@ public class ComfortEffect extends Effect {
 	}
 
 	@Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-	public static class ComfortEvent {
+	public static class ComfortEvent
+	{
 		@SubscribeEvent
 		public static void onComfortDuration(PotionEvent.PotionApplicableEvent event) {
 			EffectInstance effect = event.getPotionEffect();
@@ -51,8 +54,8 @@ public class ComfortEffect extends Effect {
 		}
 	}
 
+	@Override
 	public boolean isReady(int duration, int amplifier) {
 		return true;
 	}
-
 }

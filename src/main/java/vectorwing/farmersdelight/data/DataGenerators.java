@@ -6,8 +6,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 
+@SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class DataGenerators {
+public class DataGenerators
+{
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();
@@ -18,8 +20,5 @@ public class DataGenerators {
 			generator.addProvider(new Recipes(generator));
 			generator.addProvider(new Advancements(generator));
 		}
-		//if (event.includeClient()) {
-			//generator.addProvider(new Items(generator, event.getExistingFileHelper()));
-		//}
 	}
 }

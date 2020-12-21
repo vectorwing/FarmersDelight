@@ -15,9 +15,10 @@ import vectorwing.farmersdelight.registry.ModItems;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class CakeSliceLoot {
-	public static class CakeSliceSerializer extends GlobalLootModifierSerializer<CakeSliceModifier> {
-
+public class CakeSliceLoot
+{
+	public static class CakeSliceSerializer extends GlobalLootModifierSerializer<CakeSliceModifier>
+	{
 		@Override
 		public CakeSliceModifier read(ResourceLocation location, JsonObject object, ILootCondition[] ailootcondition) {
 			return new CakeSliceModifier(ailootcondition);
@@ -29,7 +30,8 @@ public class CakeSliceLoot {
 		}
 	}
 
-	private static class CakeSliceModifier extends LootModifier {
+	private static class CakeSliceModifier extends LootModifier
+	{
 		protected CakeSliceModifier(ILootCondition[] conditionsIn) {
 			super(conditionsIn);
 		}
@@ -38,7 +40,7 @@ public class CakeSliceLoot {
 		@Override
 		protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
 			BlockState state = context.get(LootParameters.BLOCK_STATE);
-			if (state.hasProperty(BlockStateProperties.BITES_0_6)) {
+			if (state != null && state.hasProperty(BlockStateProperties.BITES_0_6)) {
 				int bites = state.get(BlockStateProperties.BITES_0_6);
 				int TOTAL_SLICES = 7;
 				generatedLoot.add(new ItemStack(ModItems.CAKE_SLICE.get(), TOTAL_SLICES - bites));

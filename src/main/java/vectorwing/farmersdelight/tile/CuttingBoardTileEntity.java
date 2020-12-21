@@ -35,7 +35,8 @@ import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 
 import javax.annotation.Nullable;
 
-public class CuttingBoardTileEntity extends TileEntity {
+public class CuttingBoardTileEntity extends TileEntity
+{
 	private boolean isItemCarvingBoard;
 	private ItemStackHandler itemHandler = createHandler();
 	private LazyOptional<IItemHandler> handlerBoard = LazyOptional.of(() -> itemHandler);
@@ -66,19 +67,16 @@ public class CuttingBoardTileEntity extends TileEntity {
 		return compound;
 	}
 
+	@Override
 	@Nullable
 	public SUpdateTileEntityPacket getUpdatePacket() {
 		return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
 	}
 
+	@Override
 	public CompoundNBT getUpdateTag() {
 		return this.write(new CompoundNBT());
 	}
-
-//	@Override
-//	public void handleUpdateTag(CompoundNBT tag) {
-//		this.read(tag);
-//	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
@@ -114,8 +112,7 @@ public class CuttingBoardTileEntity extends TileEntity {
 				tool.damageItem(1, player, (user) -> {
 					user.sendBreakAnimation(EquipmentSlotType.MAINHAND);
 				});
-			}
-			else {
+			} else {
 				if (tool.attemptDamageItem(1, world.rand, (ServerPlayerEntity) null)) {
 					tool.setCount(0);
 				}
@@ -141,19 +138,15 @@ public class CuttingBoardTileEntity extends TileEntity {
 
 		if (sound != null) {
 			this.playSound(sound, 1.0F, 1.0F);
-		}
-		else if (tool instanceof ShearsItem) {
+		} else if (tool instanceof ShearsItem) {
 			this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
-		}
-		else if (tool instanceof KnifeItem) {
+		} else if (tool instanceof KnifeItem) {
 			this.playSound(ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), 0.8F, 1.0F);
-		}
-		else if (boardItem instanceof BlockItem) {
+		} else if (boardItem instanceof BlockItem) {
 			Block block = ((BlockItem) boardItem).getBlock();
 			SoundType soundType = block.getSoundType(block.getDefaultState());
 			this.playSound(soundType.getBreakSound(), 1.0F, 0.8F);
-		}
-		else {
+		} else {
 			this.playSound(SoundEvents.BLOCK_WOOD_BREAK, 1.0F, 0.8F);
 		}
 	}
@@ -214,7 +207,8 @@ public class CuttingBoardTileEntity extends TileEntity {
 	}
 
 	private ItemStackHandler createHandler() {
-		return new ItemStackHandler() {
+		return new ItemStackHandler()
+		{
 			@Override
 			public int getSlotLimit(int slot) {
 				return 1;

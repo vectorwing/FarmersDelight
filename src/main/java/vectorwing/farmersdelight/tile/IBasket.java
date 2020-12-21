@@ -7,7 +7,8 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public interface IBasket extends IHopper {
+public interface IBasket extends IHopper
+{
 	VoxelShape[] COLLECTION_AREA_SHAPES = {
 			Block.makeCuboidShape(0.0D, -16.0D, 0.0D, 16.0D, 16.0D, 16.0D),    // down
 			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 32.0D, 16.0D),        // up

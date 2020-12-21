@@ -15,7 +15,7 @@ public class Configuration
 	public static final String CATEGORY_SETTINGS = "settings";
 	public static final String CATEGORY_OVERRIDES = "overrides";
 	public static final String CATEGORY_WORLD = "world";
-	
+
 	public static ForgeConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS;
 	public static ForgeConfigSpec.BooleanValue COMFORT_FOOD_TAG_EFFECT;
 	public static ForgeConfigSpec.BooleanValue RABBIT_STEW_JUMP_BOOST;
@@ -37,12 +37,12 @@ public class Configuration
 	public static ForgeConfigSpec.IntValue CHANCE_WILD_TOMATOES;
 	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_RICE;
 	public static ForgeConfigSpec.IntValue CHANCE_WILD_RICE;
-	
+
 	// CLIENT
 	public static final String CATEGORY_CLIENT = "client";
-	
+
 	public static ForgeConfigSpec.BooleanValue NOURISHED_HUNGER_OVERLAY;
-	
+
 	static {
 		ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
 

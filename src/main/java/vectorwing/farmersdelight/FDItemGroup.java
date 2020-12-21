@@ -9,7 +9,8 @@ import vectorwing.farmersdelight.registry.ModItems;
 import javax.annotation.Nonnull;
 
 @SuppressWarnings("unused")
-public class FDItemGroup extends ItemGroup {
+public class FDItemGroup extends ItemGroup
+{
 	public FDItemGroup(String label) {
 		super(label);
 	}

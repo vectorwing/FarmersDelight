@@ -15,12 +15,13 @@ import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.tile.CookingPotTileEntity;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class CopyMealFunction extends LootFunction {
-
+public class CopyMealFunction extends LootFunction
+{
 	public static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "copy_meal");
 
 	private CopyMealFunction(ILootCondition[] conditions) {
@@ -44,11 +45,13 @@ public class CopyMealFunction extends LootFunction {
 	}
 
 	@Override
+	@Nullable
 	public LootFunctionType getFunctionType() {
 		return null;
 	}
 
-	public static class Serializer extends LootFunction.Serializer<CopyMealFunction> {
+	public static class Serializer extends LootFunction.Serializer<CopyMealFunction>
+	{
 		@Override
 		public CopyMealFunction deserialize(JsonObject json, JsonDeserializationContext context, ILootCondition[] conditions) {
 			return new CopyMealFunction(conditions);

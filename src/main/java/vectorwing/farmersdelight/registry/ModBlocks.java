@@ -13,13 +13,12 @@ import vectorwing.farmersdelight.blocks.*;
 
 import java.util.function.ToIntFunction;
 
-public class ModBlocks {
+public class ModBlocks
+{
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FarmersDelight.MODID);
 
 	private static ToIntFunction<BlockState> getLightValueLit(int lightValue) {
-		return (state) -> {
-			return state.get(BlockStateProperties.LIT) ? lightValue : 0;
-		};
+		return (state) -> state.get(BlockStateProperties.LIT) ? lightValue : 0;
 	}
 
 	// FUNCTIONAL

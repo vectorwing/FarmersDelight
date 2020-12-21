@@ -17,18 +17,21 @@ import net.minecraft.world.World;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 
-public class RiceUpperCropBlock extends CropsBlock {
+public class RiceUpperCropBlock extends CropsBlock
+{
 	public static final IntegerProperty RICE_AGE = BlockStateProperties.AGE_0_3;
-	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {
+	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
 			Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D),
 			Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 10.0D, 13.0D),
 			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D),
-			Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D)};
+			Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D)
+	};
 
-	public RiceUpperCropBlock(Properties builder) {
-		super(builder);
+	public RiceUpperCropBlock(Properties properties) {
+		super(properties);
 	}
 
+	@Override
 	public IntegerProperty getAgeProperty() {
 		return RICE_AGE;
 	}
@@ -58,6 +61,7 @@ public class RiceUpperCropBlock extends CropsBlock {
 		return state.getBlock() == ModBlocks.RICE_CROP.get();
 	}
 
+	@Override
 	protected int getBonemealAgeIncrease(World worldIn) {
 		return MathHelper.nextInt(worldIn.rand, 1, 4);
 	}

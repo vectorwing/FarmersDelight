@@ -9,7 +9,8 @@ import java.util.Random;
 /**
  * Util for providing and calculating math-related objects across the mod.
  */
-public class MathUtils {
+public class MathUtils
+{
 	public static final Random RAND = new Random();
 
 	/**
@@ -22,8 +23,7 @@ public class MathUtils {
 	public static int calcRedstoneFromItemHandler(@Nullable IItemHandlerModifiable handler) {
 		if (handler == null) {
 			return 0;
-		}
-		else {
+		} else {
 			int i = 0;
 			float f = 0.0F;
 

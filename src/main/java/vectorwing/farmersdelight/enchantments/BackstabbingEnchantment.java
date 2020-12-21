@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.enchantments;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentType;
@@ -9,7 +8,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.vector.Vector3d;
@@ -20,23 +18,28 @@ import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.registry.ModEnchantments;
 
-public class BackstabbingEnchantment extends Enchantment {
+public class BackstabbingEnchantment extends Enchantment
+{
 	public BackstabbingEnchantment(Rarity rarityIn, EnchantmentType typeIn, EquipmentSlotType... slots) {
 		super(rarityIn, typeIn, slots);
 	}
 
+	@Override
 	public int getMinLevel() {
 		return 1;
 	}
 
+	@Override
 	public int getMaxLevel() {
 		return 3;
 	}
 
+	@Override
 	public int getMinEnchantability(int enchantmentLevel) {
 		return 15 + (enchantmentLevel - 1) * 9;
 	}
 
+	@Override
 	public int getMaxEnchantability(int enchantmentLevel) {
 		return super.getMinEnchantability(enchantmentLevel) + 50;
 	}
@@ -60,8 +63,10 @@ public class BackstabbingEnchantment extends Enchantment {
 	}
 
 	@Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-	public static class BackstabbingEvent {
+	public static class BackstabbingEvent
+	{
 		@SubscribeEvent
+		@SuppressWarnings("unused")
 		public static void onKnifeBackstab(LivingHurtEvent event) {
 			Entity attacker = event.getSource().getTrueSource();
 			if (attacker instanceof PlayerEntity) {

@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.blocks;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.*;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -10,17 +9,12 @@ import net.minecraftforge.common.PlantType;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.utils.MathUtils;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
-public class RichSoilBlock extends Block {
-	public RichSoilBlock() {
-		super(Properties.from(Blocks.DIRT));
-	}
-
-	public RichSoilBlock(Properties properties)	{
+@SuppressWarnings("deprecation")
+public class RichSoilBlock extends Block
+{
+	public RichSoilBlock(Properties properties) {
 		super(properties);
 	}
 
@@ -33,11 +27,9 @@ public class RichSoilBlock extends Block {
 			}
 			if (plant.getBlock() == Blocks.BROWN_MUSHROOM) {
 				worldIn.setBlockState(pos.up(), ModBlocks.BROWN_MUSHROOM_COLONY.get().getDefaultState().with(MushroomColonyBlock.COLONY_AGE, 0));
-			}
-			if (plant.getBlock() == Blocks.RED_MUSHROOM) {
+			} else if (plant.getBlock() == Blocks.RED_MUSHROOM) {
 				worldIn.setBlockState(pos.up(), ModBlocks.RED_MUSHROOM_COLONY.get().getDefaultState().with(MushroomColonyBlock.COLONY_AGE, 0));
-			}
-			if (plant.getBlock() instanceof IGrowable && MathUtils.RAND.nextInt(10) <= 2) {
+			} else if (plant.getBlock() instanceof IGrowable && MathUtils.RAND.nextInt(10) <= 2) {
 				IGrowable growable = (IGrowable) plant.getBlock();
 				if (growable.canGrow(worldIn, pos.up(), plant, false)) {
 					growable.grow(worldIn, worldIn.rand, pos.up(), plant);
@@ -46,9 +38,9 @@ public class RichSoilBlock extends Block {
 		}
 	}
 
-    @Override
-    public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable) {
-        net.minecraftforge.common.PlantType type = plantable.getPlantType(world, pos.offset(facing));
-        return type != PlantType.CROP && type != PlantType.NETHER;
-    }
+	@Override
+	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable) {
+		net.minecraftforge.common.PlantType type = plantable.getPlantType(world, pos.offset(facing));
+		return type != PlantType.CROP && type != PlantType.NETHER;
+	}
 }

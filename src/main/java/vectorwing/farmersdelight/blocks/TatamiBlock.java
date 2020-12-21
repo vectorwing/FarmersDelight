@@ -17,7 +17,9 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class TatamiBlock extends Block {
+@SuppressWarnings("deprecation")
+public class TatamiBlock extends Block
+{
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
 	public static final BooleanProperty PAIRED = BooleanProperty.create("paired");
 
@@ -40,21 +42,21 @@ public class TatamiBlock extends Block {
 		return this.getDefaultState().with(FACING, context.getFace().getOpposite()).with(PAIRED, pairing);
 	}
 
+	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
 		if (!worldIn.isRemote) {
 			if (placer != null && placer.isSneaking()) {
 				return;
 			}
-			BlockPos blockpos = pos.offset(state.get(FACING));
-			BlockState blockstate = worldIn.getBlockState(blockpos);
-			if (blockstate.getBlock() == this && !blockstate.get(PAIRED)) {
-				worldIn.setBlockState(blockpos, state.with(FACING, state.get(FACING).getOpposite()).with(PAIRED, true), 3);
+			BlockPos facingPos = pos.offset(state.get(FACING));
+			BlockState facingState = worldIn.getBlockState(facingPos);
+			if (facingState.getBlock() == this && !facingState.get(PAIRED)) {
+				worldIn.setBlockState(facingPos, state.with(FACING, state.get(FACING).getOpposite()).with(PAIRED, true), 3);
 				worldIn.func_230547_a_(pos, Blocks.AIR);
 				state.updateNeighbours(worldIn, pos, 3);
 			}
 		}
-
 	}
 
 	@Override

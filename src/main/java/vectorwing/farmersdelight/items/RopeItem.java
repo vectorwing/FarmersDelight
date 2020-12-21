@@ -9,11 +9,13 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class RopeItem extends FuelBlockItem {
-	public RopeItem(Block blockIn, Properties builder) {
-		super(blockIn, builder, 200);
+public class RopeItem extends FuelBlockItem
+{
+	public RopeItem(Block blockIn, Properties properties) {
+		super(blockIn, properties, 200);
 	}
 
+	@Override
 	@Nullable
 	public BlockItemUseContext getBlockItemUseContext(BlockItemUseContext context) {
 		BlockPos blockpos = context.getPos();
@@ -23,13 +25,11 @@ public class RopeItem extends FuelBlockItem {
 
 		if (blockstate.getBlock() != block) {
 			return context;
-		}
-		else {
+		} else {
 			Direction direction;
 			if (context.hasSecondaryUseForPlayer()) {
 				direction = context.getFace();
-			}
-			else {
+			} else {
 				direction = Direction.DOWN;
 			}
 
@@ -57,6 +57,7 @@ public class RopeItem extends FuelBlockItem {
 		}
 	}
 
+	@Override
 	protected boolean checkPosition() {
 		return false;
 	}

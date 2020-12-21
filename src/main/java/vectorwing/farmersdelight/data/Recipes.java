@@ -1,20 +1,18 @@
 package vectorwing.farmersdelight.data;
 
 import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.advancements.criterion.InventoryChangeTrigger;
+import net.minecraft.block.Blocks;
+import net.minecraft.data.*;
+import net.minecraft.item.Items;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.data.recipes.CuttingRecipes;
 import vectorwing.farmersdelight.data.recipes.SmeltingRecipes;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
-import net.minecraft.advancements.criterion.InventoryChangeTrigger;
-import net.minecraft.block.Blocks;
-import net.minecraft.data.*;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.utils.tags.ForgeTags;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -22,7 +20,8 @@ import java.util.function.Consumer;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class Recipes extends RecipeProvider {
+public class Recipes extends RecipeProvider
+{
 	public Recipes(DataGenerator generator) {
 		super(generator);
 	}

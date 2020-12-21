@@ -1,25 +1,26 @@
 package vectorwing.farmersdelight.data;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.ItemTagsProvider;
-import net.minecraft.item.Items;
 import net.minecraftforge.common.Tags;
 import vectorwing.farmersdelight.registry.ModBlocks;
-import vectorwing.farmersdelight.registry.ModItems;
-import vectorwing.farmersdelight.utils.tags.ForgeTags;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
-public class BlockTags extends BlockTagsProvider {
+public class BlockTags extends BlockTagsProvider
+{
 	public BlockTags(DataGenerator generatorIn) {
 		super(generatorIn);
 	}
 
 	@Override
 	protected void registerTags() {
-		// Minecraft Tags
+		this.registerMinecraftTags();
+		this.registerForgeTags();
+		this.registerModTags();
+	}
+
+	protected void registerMinecraftTags() {
 		getOrCreateBuilder(net.minecraft.tags.BlockTags.BAMBOO_PLANTABLE_ON).add(
 				ModBlocks.RICH_SOIL.get());
 		getOrCreateBuilder(net.minecraft.tags.BlockTags.MUSHROOM_GROW_BLOCK).add(
@@ -41,12 +42,14 @@ public class BlockTags extends BlockTagsProvider {
 				ModBlocks.WILD_ONIONS.get(),
 				ModBlocks.WILD_POTATOES.get(),
 				ModBlocks.WILD_TOMATOES.get());
+	}
 
-		// Forge Tags
+	protected void registerForgeTags() {
 		getOrCreateBuilder(Tags.Blocks.DIRT).add(
 				ModBlocks.RICH_SOIL.get());
+	}
 
-		// Mod Tags
+	protected void registerModTags() {
 		getOrCreateBuilder(ModTags.TRAY_HEAT_SOURCES).add(
 				Blocks.CAMPFIRE,
 				Blocks.SOUL_CAMPFIRE,

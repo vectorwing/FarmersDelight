@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.integration.jei.cutting;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import mcp.MethodsReturnNonnullByDefault;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -17,9 +18,13 @@ import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Arrays;
 
-public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe> {
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe>
+{
 	public static final ResourceLocation UID = new ResourceLocation(FarmersDelight.MODID, "cutting");
 	private final String title;
 	private final IDrawable background;

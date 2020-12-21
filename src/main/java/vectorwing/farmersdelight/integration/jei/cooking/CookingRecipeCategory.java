@@ -26,7 +26,8 @@ import java.util.List;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe> {
+public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
+{
 	public static final ResourceLocation UID = new ResourceLocation(FarmersDelight.MODID, "cooking");
 	protected final IDrawable heatIndicator;
 	protected final IDrawableAnimated arrow;
@@ -70,8 +71,7 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe> 
 	}
 
 	@Override
-	public void setIngredients(CookingPotRecipe cookingPotRecipe, IIngredients ingredients)
-	{
+	public void setIngredients(CookingPotRecipe cookingPotRecipe, IIngredients ingredients) {
 		List<Ingredient> inputAndContainer = new ArrayList<>(cookingPotRecipe.getIngredients());
 		inputAndContainer.add(Ingredient.fromStacks(cookingPotRecipe.getOutputContainer()));
 

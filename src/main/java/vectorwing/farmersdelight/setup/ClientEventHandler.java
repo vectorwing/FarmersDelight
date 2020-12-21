@@ -36,7 +36,7 @@ public class ClientEventHandler
 		if (!stitching.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)) {
 			return;
 		}
-		boolean added = event.addSprite(EMPTY_CONTAINER_SLOT_BOWL);
+		event.addSprite(EMPTY_CONTAINER_SLOT_BOWL);
 	}
 
 	public static void init(final FMLClientSetupEvent event) {

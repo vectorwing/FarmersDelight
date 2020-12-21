@@ -15,7 +15,8 @@ import net.minecraft.util.math.vector.Vector3f;
 import vectorwing.farmersdelight.blocks.CuttingBoardBlock;
 import vectorwing.farmersdelight.tile.CuttingBoardTileEntity;
 
-public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBoardTileEntity> {
+public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBoardTileEntity>
+{
 	public CuttingBoardTileEntityRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
 		super(rendererDispatcherIn);
 	}
@@ -35,11 +36,9 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 
 			if (tileEntityIn.getIsItemCarvingBoard()) {
 				renderItemCarved(matrixStackIn, direction, itemStack);
-			}
-			else if (blockItem) {
+			} else if (blockItem) {
 				renderBlock(matrixStackIn, direction);
-			}
-			else {
+			} else {
 				renderItemLayingDown(matrixStackIn, direction);
 			}
 

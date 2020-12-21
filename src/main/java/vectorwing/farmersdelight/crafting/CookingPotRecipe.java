@@ -13,8 +13,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistryEntry;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.FarmersDelight;
 
 import javax.annotation.Nullable;
@@ -22,9 +20,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class CookingPotRecipe implements IRecipe<IInventory> {
-	private static final Logger LOGGER = LogManager.getLogger();
-
+public class CookingPotRecipe implements IRecipe<IInventory>
+{
 	public static IRecipeType<CookingPotRecipe> TYPE = IRecipeType.register(FarmersDelight.MODID + ":cooking");
 	public static final Serializer SERIALIZER = new Serializer();
 	public static final int INPUT_SLOTS = 6;
@@ -45,11 +42,9 @@ public class CookingPotRecipe implements IRecipe<IInventory> {
 
 		if (!container.isEmpty()) {
 			this.container = container;
-		}
-		else if (!output.getContainerItem().isEmpty()) {
+		} else if (!output.getContainerItem().isEmpty()) {
 			this.container = output.getContainerItem();
-		}
-		else {
+		} else {
 			this.container = ItemStack.EMPTY;
 		}
 
@@ -96,7 +91,6 @@ public class CookingPotRecipe implements IRecipe<IInventory> {
 
 	@Override
 	public boolean matches(IInventory inv, World worldIn) {
-		RecipeItemHelper recipeitemhelper = new RecipeItemHelper();
 		java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
 		int i = 0;
 
@@ -125,8 +119,8 @@ public class CookingPotRecipe implements IRecipe<IInventory> {
 		return CookingPotRecipe.TYPE;
 	}
 
-	private static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<CookingPotRecipe> {
-
+	private static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<CookingPotRecipe>
+	{
 		Serializer() {
 			this.setRegistryName(new ResourceLocation(FarmersDelight.MODID, "cooking"));
 		}
@@ -137,11 +131,9 @@ public class CookingPotRecipe implements IRecipe<IInventory> {
 			final NonNullList<Ingredient> inputItemsIn = readIngredients(JSONUtils.getJsonArray(json, "ingredients"));
 			if (inputItemsIn.isEmpty()) {
 				throw new JsonParseException("No ingredients for cooking recipe");
-			}
-			else if (inputItemsIn.size() > CookingPotRecipe.INPUT_SLOTS) {
+			} else if (inputItemsIn.size() > CookingPotRecipe.INPUT_SLOTS) {
 				throw new JsonParseException("Too many ingredients for cooking recipe! The max is " + CookingPotRecipe.INPUT_SLOTS);
-			}
-			else {
+			} else {
 				final ItemStack outputIn = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
 				ItemStack container = JSONUtils.hasField(json, "container") ? ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "container")) : ItemStack.EMPTY;
 				final float experienceIn = JSONUtils.getFloat(json, "experience", 0.0F);

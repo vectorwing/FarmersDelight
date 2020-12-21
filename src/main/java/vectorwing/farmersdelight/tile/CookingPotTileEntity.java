@@ -47,7 +47,8 @@ import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class CookingPotTileEntity extends TileEntity implements INamedContainerProvider, ITickableTileEntity, INameable {
+public class CookingPotTileEntity extends TileEntity implements INamedContainerProvider, ITickableTileEntity, INameable
+{
 	public static final int MEAL_DISPLAY = 6;
 	public static final int CONTAINER_INPUT = 7;
 	public static final int FINAL_OUTPUT = 8;
@@ -62,7 +63,9 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 	private int cookTime;
 	private int cookTimeTotal;
 	private ItemStack container;
-	protected final IIntArray cookingPotData = new IIntArray() {
+	protected final IIntArray cookingPotData = new IIntArray()
+	{
+		@Override
 		public int get(int index) {
 			switch (index) {
 				case 0:
@@ -74,6 +77,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 			}
 		}
 
+		@Override
 		public void set(int index, int value) {
 			switch (index) {
 				case 0:
@@ -85,6 +89,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 			}
 		}
 
+		@Override
 		public int size() {
 			return 2;
 		}
@@ -104,11 +109,13 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 
 	// ======== NBT & NETWORKING ========
 
+	@Override
 	@Nullable
 	public SUpdateTileEntityPacket getUpdatePacket() {
 		return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
 	}
 
+	@Override
 	public CompoundNBT getUpdateTag() {
 		return this.writeItems(new CompoundNBT());
 	}
@@ -194,12 +201,10 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 						this.cook(irecipe);
 						dirty = true;
 					}
-				}
-				else {
+				} else {
 					this.cookTime = 0;
 				}
-			}
-			else if (this.cookTime > 0) {
+			} else if (this.cookTime > 0) {
 				this.cookTime = MathHelper.clamp(this.cookTime - 2, 0, this.cookTimeTotal);
 			}
 
@@ -208,15 +213,13 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 				if (!this.doesMealHaveContainer(meal)) {
 					this.moveMealToOutput();
 					dirty = true;
-				}
-				else if (!itemHandler.getStackInSlot(CONTAINER_INPUT).isEmpty()) {
+				} else if (!itemHandler.getStackInSlot(CONTAINER_INPUT).isEmpty()) {
 					this.useStoredContainersOnMeal();
 					dirty = true;
 				}
 			}
 
-		}
-		else {
+		} else {
 			if (isHeated) {
 				this.animate();
 			}
@@ -238,8 +241,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 	public ItemStack getContainer() {
 		if (!this.container.isEmpty()) {
 			return this.container;
-		}
-		else {
+		} else {
 			return this.getMeal().getContainerItem();
 		}
 	}
@@ -256,24 +258,19 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 			ItemStack recipeOutput = recipeIn.getRecipeOutput();
 			if (recipeOutput.isEmpty()) {
 				return false;
-			}
-			else {
+			} else {
 				ItemStack currentOutput = itemHandler.getStackInSlot(MEAL_DISPLAY);
 				if (currentOutput.isEmpty()) {
 					return true;
-				}
-				else if (!currentOutput.isItemEqual(recipeOutput)) {
+				} else if (!currentOutput.isItemEqual(recipeOutput)) {
 					return false;
-				}
-				else if (currentOutput.getCount() + recipeOutput.getCount() <= itemHandler.getSlotLimit(MEAL_DISPLAY)) {
+				} else if (currentOutput.getCount() + recipeOutput.getCount() <= itemHandler.getSlotLimit(MEAL_DISPLAY)) {
 					return true;
-				}
-				else {
+				} else {
 					return currentOutput.getCount() + recipeOutput.getCount() <= recipeOutput.getMaxStackSize();
 				}
 			}
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -285,8 +282,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 			ItemStack currentOutput = itemHandler.getStackInSlot(MEAL_DISPLAY);
 			if (currentOutput.isEmpty()) {
 				itemHandler.setStackInSlot(MEAL_DISPLAY, recipeOutput.copy());
-			}
-			else if (currentOutput.getItem() == recipeOutput.getItem()) {
+			} else if (currentOutput.getItem() == recipeOutput.getItem()) {
 				currentOutput.grow(recipeOutput.getCount());
 			}
 		}
@@ -368,8 +364,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		int mealCount = Math.min(mealDisplay.getCount(), mealDisplay.getMaxStackSize() - finalOutput.getCount());
 		if (finalOutput.isEmpty()) {
 			itemHandler.setStackInSlot(FINAL_OUTPUT, mealDisplay.split(mealCount));
-		}
-		else if (finalOutput.getItem() == mealDisplay.getItem()) {
+		} else if (finalOutput.getItem() == mealDisplay.getItem()) {
 			mealDisplay.shrink(mealCount);
 			finalOutput.grow(mealCount);
 		}
@@ -390,8 +385,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 			if (finalOutput.isEmpty()) {
 				containerInput.shrink(mealCount);
 				itemHandler.setStackInSlot(FINAL_OUTPUT, mealDisplay.split(mealCount));
-			}
-			else if (finalOutput.getItem() == mealDisplay.getItem()) {
+			} else if (finalOutput.getItem() == mealDisplay.getItem()) {
 				mealDisplay.shrink(mealCount);
 				containerInput.shrink(mealCount);
 				finalOutput.grow(mealCount);
@@ -418,8 +412,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		if (containerItem.isEmpty()) return false;
 		if (!this.container.isEmpty()) {
 			return this.container.isItemEqual(containerItem);
-		}
-		else {
+		} else {
 			return this.getMeal().getContainerItem().isItemEqual(containerItem);
 		}
 	}
@@ -446,6 +439,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		return this.getName();
 	}
 
+	@Override
 	@Nullable
 	public ITextComponent getCustomName() {
 		return this.customName;
@@ -459,7 +453,8 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 	// ======== CAPABILITIES ========
 
 	private ItemStackHandler createHandler() {
-		return new ItemStackHandler(INVENTORY_SIZE) {
+		return new ItemStackHandler(INVENTORY_SIZE)
+		{
 			@Override
 			protected void onContentsChanged(int slot) {
 				if (slot >= 0 && slot < MEAL_DISPLAY) {
@@ -475,8 +470,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		if (cap.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)) {
 			if (side == null || side.equals(Direction.UP)) {
 				return handlerInput.cast();
-			}
-			else {
+			} else {
 				return handlerOutput.cast();
 			}
 		}

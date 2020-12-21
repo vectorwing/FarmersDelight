@@ -20,13 +20,15 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity> {
+public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
+{
 	private static final Minecraft MC = Minecraft.getInstance();
 
 	public StoveTileEntityRenderer(TileEntityRendererDispatcher rendererDispatcher) {
 		super(rendererDispatcher);
 	}
 
+	@Override
 	public void render(StoveTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		Direction direction = tileEntityIn.getBlockState().get(StoveBlock.FACING).getOpposite();
 		NonNullList<ItemStack> nonnulllist = tileEntityIn.getInventory();
