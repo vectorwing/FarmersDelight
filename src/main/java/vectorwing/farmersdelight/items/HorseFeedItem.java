@@ -44,6 +44,7 @@ public class HorseFeedItem extends MealItem
 	public static class HorseFeedEvent
 	{
 		@SubscribeEvent
+		@SuppressWarnings("unused")
 		public static void onHorseFeedApplied(PlayerInteractEvent.EntityInteract event) {
 			PlayerEntity player = event.getPlayer();
 			Entity target = event.getTarget();

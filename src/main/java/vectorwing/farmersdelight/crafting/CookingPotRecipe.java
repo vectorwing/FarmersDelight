@@ -13,8 +13,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistryEntry;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.FarmersDelight;
 
 import javax.annotation.Nullable;
@@ -24,8 +22,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class CookingPotRecipe implements IRecipe<IInventory>
 {
-	private static final Logger LOGGER = LogManager.getLogger();
-
 	public static IRecipeType<CookingPotRecipe> TYPE = IRecipeType.register(FarmersDelight.MODID + ":cooking");
 	public static final Serializer SERIALIZER = new Serializer();
 	public static final int INPUT_SLOTS = 6;
@@ -95,7 +91,6 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 
 	@Override
 	public boolean matches(IInventory inv, World worldIn) {
-		RecipeItemHelper recipeitemhelper = new RecipeItemHelper();
 		java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
 		int i = 0;
 

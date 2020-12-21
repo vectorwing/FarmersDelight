@@ -9,7 +9,6 @@ import vectorwing.farmersdelight.registry.ModItems;
 
 public class Items extends ItemModelProvider
 {
-
 	public Items(DataGenerator generator, ExistingFileHelper existingFileHelper) {
 		super(generator, FarmersDelight.MODID, existingFileHelper);
 	}

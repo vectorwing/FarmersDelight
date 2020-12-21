@@ -13,7 +13,6 @@ import java.util.function.Consumer;
 
 public class CuttingRecipes
 {
-
 	public static void register(Consumer<IFinishedRecipe> consumer) {
 		// Knife
 		chopMeats(consumer);

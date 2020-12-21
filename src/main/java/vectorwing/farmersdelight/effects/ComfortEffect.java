@@ -15,6 +15,7 @@ import vectorwing.farmersdelight.registry.ModEffects;
 
 import java.util.Set;
 
+@SuppressWarnings("unused")
 public class ComfortEffect extends Effect
 {
 	public static final Set<Effect> COMFORT_IMMUNITIES = Sets.newHashSet(Effects.SLOWNESS, Effects.WEAKNESS, Effects.HUNGER);

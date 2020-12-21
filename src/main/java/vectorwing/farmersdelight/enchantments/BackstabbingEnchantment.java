@@ -66,6 +66,7 @@ public class BackstabbingEnchantment extends Enchantment
 	public static class BackstabbingEvent
 	{
 		@SubscribeEvent
+		@SuppressWarnings("unused")
 		public static void onKnifeBackstab(LivingHurtEvent event) {
 			Entity attacker = event.getSource().getTrueSource();
 			if (attacker instanceof PlayerEntity) {

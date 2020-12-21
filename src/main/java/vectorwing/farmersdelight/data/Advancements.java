@@ -71,6 +71,7 @@ public class Advancements extends AdvancementProvider
 	public static class FarmersDelightAdvancements implements Consumer<Consumer<Advancement>>
 	{
 		@Override
+		@SuppressWarnings("unused")
 		public void accept(Consumer<Advancement> consumer) {
 			Advancement farmersDelight = Advancement.Builder.builder()
 					.withDisplay(ModItems.COOKING_POT.get(),

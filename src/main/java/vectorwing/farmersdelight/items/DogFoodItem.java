@@ -46,6 +46,7 @@ public class DogFoodItem extends MealItem
 	public static class DogFoodEvent
 	{
 		@SubscribeEvent
+		@SuppressWarnings("unused")
 		public static void onDogFoodApplied(PlayerInteractEvent.EntityInteract event) {
 			PlayerEntity player = event.getPlayer();
 			Entity target = event.getTarget();
