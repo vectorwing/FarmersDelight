@@ -9,7 +9,7 @@ import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
+import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 
@@ -23,7 +23,7 @@ import java.util.function.Consumer;
 @ParametersAreNonnullByDefault
 public class CuttingBoardRecipeBuilder
 {
-	private final Map<Item, Integer> results = new LinkedHashMap<Item, Integer>(4);
+	private final Map<Item, Integer> results = new LinkedHashMap<>(4);
 	private final Ingredient ingredient;
 	private final Ingredient tool;
 	private String soundEventID;
@@ -63,12 +63,12 @@ public class CuttingBoardRecipeBuilder
 	}
 
 	public void build(Consumer<IFinishedRecipe> consumerIn) {
-		ResourceLocation location = Registry.ITEM.getKey(this.ingredient.getMatchingStacks()[0].getItem());
+		ResourceLocation location = ForgeRegistries.ITEMS.getKey(this.ingredient.getMatchingStacks()[0].getItem());
 		this.build(consumerIn, FarmersDelight.MODID + ":cutting/" + location.getPath());
 	}
 
 	public void build(Consumer<IFinishedRecipe> consumerIn, String save) {
-		ResourceLocation resourcelocation = Registry.ITEM.getKey(this.ingredient.getMatchingStacks()[0].getItem());
+		ResourceLocation resourcelocation = ForgeRegistries.ITEMS.getKey(this.ingredient.getMatchingStacks()[0].getItem());
 		if ((new ResourceLocation(save)).equals(resourcelocation)) {
 			throw new IllegalStateException("Shapeless Recipe " + save + " should remove its 'save' argument");
 		} else {
@@ -108,7 +108,7 @@ public class CuttingBoardRecipeBuilder
 			JsonArray arrayResults = new JsonArray();
 			for (Map.Entry<Item, Integer> result : this.results.entrySet()) {
 				JsonObject jsonobject = new JsonObject();
-				jsonobject.addProperty("item", Registry.ITEM.getKey(result.getKey()).toString());
+				jsonobject.addProperty("item", ForgeRegistries.ITEMS.getKey(result.getKey()).toString());
 				if (result.getValue() > 1) {
 					jsonobject.addProperty("count", result.getValue());
 				}
