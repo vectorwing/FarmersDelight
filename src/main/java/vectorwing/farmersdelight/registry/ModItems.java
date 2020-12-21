@@ -115,7 +115,7 @@ public class ModItems
 	public static final RegistryObject<Item> HOT_COCOA = ITEMS.register("hot_cocoa",
 			() -> new HotCocoaItem(new Item.Properties().containerItem(Items.GLASS_BOTTLE).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> TOMATO_SAUCE = ITEMS.register("tomato_sauce",
-			() -> new ContainedItem(new Item.Properties().food(Foods.TOMATO_SAUCE).containerItem(Items.BOWL).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.TOMATO_SAUCE).containerItem(Items.BOWL).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> RAW_PASTA = ITEMS.register("raw_pasta",
 			() -> new Item(new Item.Properties().food(Foods.RAW_PASTA).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> PUMPKIN_SLICE = ITEMS.register("pumpkin_slice",
@@ -161,9 +161,9 @@ public class ModItems
 			() -> new Item(new Item.Properties().food(Foods.COOKIES).group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> MIXED_SALAD = ITEMS.register("mixed_salad",
-			() -> new ContainedItem(new Item.Properties().food(Foods.MIXED_SALAD).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.MIXED_SALAD).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> NETHER_SALAD = ITEMS.register("nether_salad",
-			() -> new ContainedItem(new Item.Properties().food(Foods.NETHER_SALAD).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.NETHER_SALAD).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> BARBECUE_STICK = ITEMS.register("barbecue_stick",
 			() -> new Item(new Item.Properties().food(Foods.BARBECUE_STICK).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> EGG_SANDWICH = ITEMS.register("egg_sandwich",
@@ -180,40 +180,40 @@ public class ModItems
 			() -> new Item(new Item.Properties().food(Foods.STUFFED_PUMPKIN).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> COOKED_RICE = ITEMS.register("cooked_rice",
-			() -> new ContainedItem(new Item.Properties().food(Foods.COOKED_RICE).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.COOKED_RICE).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> BEEF_STEW = ITEMS.register("beef_stew",
-			() -> new ContainedItem(new Item.Properties().food(Foods.BEEF_STEW).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.BEEF_STEW).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> CHICKEN_SOUP = ITEMS.register("chicken_soup",
-			() -> new ContainedItem(new Item.Properties().food(Foods.CHICKEN_SOUP).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.CHICKEN_SOUP).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> VEGETABLE_SOUP = ITEMS.register("vegetable_soup",
-			() -> new ContainedItem(new Item.Properties().food(Foods.VEGETABLE_SOUP).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.VEGETABLE_SOUP).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> FISH_STEW = ITEMS.register("fish_stew",
-			() -> new ContainedItem(new Item.Properties().food(Foods.FISH_STEW).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.FISH_STEW).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> FRIED_RICE = ITEMS.register("fried_rice",
-			() -> new ContainedItem(new Item.Properties().food(Foods.FRIED_RICE).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.FRIED_RICE).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> PUMPKIN_SOUP = ITEMS.register("pumpkin_soup",
-			() -> new ContainedItem(new Item.Properties().food(Foods.PUMPKIN_SOUP).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.PUMPKIN_SOUP).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> BAKED_COD_STEW = ITEMS.register("baked_cod_stew",
-			() -> new ContainedItem(new Item.Properties().food(Foods.BAKED_COD_STEW).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.BAKED_COD_STEW).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> HONEY_GLAZED_HAM = ITEMS.register("honey_glazed_ham",
-			() -> new ContainedItem(new Item.Properties().food(Foods.HONEY_GLAZED_HAM).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.HONEY_GLAZED_HAM).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> PASTA_WITH_MEATBALLS = ITEMS.register("pasta_with_meatballs",
-			() -> new ContainedItem(new Item.Properties().food(Foods.PASTA_WITH_MEATBALLS).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.PASTA_WITH_MEATBALLS).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> PASTA_WITH_MUTTON_CHOP = ITEMS.register("pasta_with_mutton_chop",
-			() -> new ContainedItem(new Item.Properties().food(Foods.PASTA_WITH_MUTTON_CHOP).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.PASTA_WITH_MUTTON_CHOP).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> VEGETABLE_NOODLES = ITEMS.register("vegetable_noodles",
-			() -> new ContainedItem(new Item.Properties().food(Foods.VEGETABLE_NOODLES).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.VEGETABLE_NOODLES).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> STEAK_AND_POTATOES = ITEMS.register("steak_and_potatoes",
-			() -> new ContainedItem(new Item.Properties().food(Foods.STEAK_AND_POTATOES).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.STEAK_AND_POTATOES).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> SHEPHERDS_PIE = ITEMS.register("shepherds_pie",
-			() -> new ContainedItem(new Item.Properties().food(Foods.SHEPHERDS_PIE).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.SHEPHERDS_PIE).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> RATATOUILLE = ITEMS.register("ratatouille",
-			() -> new ContainedItem(new Item.Properties().food(Foods.RATATOUILLE).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.RATATOUILLE).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> SQUID_INK_PASTA = ITEMS.register("squid_ink_pasta",
-			() -> new ContainedItem(new Item.Properties().food(Foods.SQUID_INK_PASTA).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.SQUID_INK_PASTA).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> GRILLED_SALMON = ITEMS.register("grilled_salmon",
-			() -> new ContainedItem(new Item.Properties().food(Foods.GRILLED_SALMON).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.GRILLED_SALMON).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 
 
 	public static final RegistryObject<Item> DOG_FOOD = ITEMS.register("dog_food",

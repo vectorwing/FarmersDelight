@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.items;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,22 +9,22 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.World;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
-public class ContainedItem extends Item
+public class ConsumableItem extends Item
 {
 	/**
-	 * Items that are contained by another item.
-	 * When consumed, they deposit containers into the player's inventory, allowing them to set maximum stack sizes above 1.
+	 * Items that can be consumed by an entity.
+	 * When consumed, they may affect the consumer somehow, and will give back containers if applicable, regardless of their stack size.
 	 */
-	public ContainedItem(Item.Properties properties) {
+	public ConsumableItem(Properties properties) {
 		super(properties);
 	}
 
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity subject) {
+		if (!worldIn.isRemote) {
+			this.affectConsumer(stack, worldIn, subject);
+		}
+
 		ItemStack container = stack.getContainerItem();
 
 		if (stack.isFood()) {
@@ -43,21 +42,6 @@ public class ContainedItem extends Item
 			}
 		}
 
-		this.affectConsumer();
-		return this.useItemAndGiveContainer(stack, container, subject);
-	}
-
-	/**
-	 * Override this to apply changes to the consumer (e.g. curing effects).
-	 */
-	public void affectConsumer() {
-	}
-
-	/**
-	 * If the player isn't in Creative Mode, uses the item and spawns a container,
-	 * either in their inventory or as an ItemEntity if full.
-	 */
-	public ItemStack useItemAndGiveContainer(ItemStack stack, ItemStack container, LivingEntity subject) {
 		if (stack.isEmpty()) {
 			return container;
 		} else {
@@ -67,8 +51,13 @@ public class ContainedItem extends Item
 					player.dropItem(container, false);
 				}
 			}
-
 			return stack;
 		}
+	}
+
+	/**
+	 * Override this to apply changes to the consumer (e.g. curing effects).
+	 */
+	public void affectConsumer(ItemStack stack, World worldIn, LivingEntity subject) {
 	}
 }
