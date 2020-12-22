@@ -31,7 +31,7 @@ import vectorwing.farmersdelight.utils.TextUtils;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class DogFoodItem extends MealItem
+public class DogFoodItem extends ConsumableItem
 {
 	public static final List<EffectInstance> EFFECTS = Lists.newArrayList(
 			new EffectInstance(Effects.SPEED, 6000, 0),

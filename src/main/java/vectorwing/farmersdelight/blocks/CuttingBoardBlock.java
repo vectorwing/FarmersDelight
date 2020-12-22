@@ -169,8 +169,9 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 
 	@Override
 	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-		if (worldIn.getTileEntity(pos) instanceof CuttingBoardTileEntity) {
-			ItemStack boardItem = ((CuttingBoardTileEntity) worldIn.getTileEntity(pos)).getStoredItem();
+		TileEntity tile = worldIn.getTileEntity(pos);
+		if (tile instanceof CuttingBoardTileEntity) {
+			ItemStack boardItem = ((CuttingBoardTileEntity) tile).getStoredItem();
 			return !boardItem.isEmpty() ? 15 : 0;
 		}
 		return 0;
@@ -191,16 +192,19 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 	public static class ToolCarvingEvent
 	{
 		@SubscribeEvent
+		@SuppressWarnings("unused")
 		public static void onSneakPlaceTool(PlayerInteractEvent.RightClickBlock event) {
 			World world = event.getWorld();
 			BlockPos pos = event.getPos();
 			PlayerEntity player = event.getPlayer();
 			ItemStack heldItem = player.getHeldItemMainhand();
-			if (player.isSecondaryUseActive() && !heldItem.isEmpty() && world.getTileEntity(event.getPos()) instanceof CuttingBoardTileEntity) {
+			TileEntity tile = world.getTileEntity(event.getPos());
+
+			if (player.isSecondaryUseActive() && !heldItem.isEmpty() && tile instanceof CuttingBoardTileEntity) {
 				if (heldItem.getItem() instanceof TieredItem ||
 						heldItem.getItem() instanceof TridentItem ||
 						heldItem.getItem() instanceof ShearsItem) {
-					boolean success = ((CuttingBoardTileEntity) world.getTileEntity(event.getPos())).carveToolOnBoard(player.abilities.isCreativeMode ? heldItem.copy() : heldItem);
+					boolean success = ((CuttingBoardTileEntity) tile).carveToolOnBoard(player.abilities.isCreativeMode ? heldItem.copy() : heldItem);
 					if (success) {
 						world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F);
 						event.setCanceled(true);

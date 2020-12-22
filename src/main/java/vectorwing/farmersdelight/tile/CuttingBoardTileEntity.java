@@ -109,11 +109,9 @@ public class CuttingBoardTileEntity extends TileEntity
 				world.addEntity(entity);
 			}
 			if (player != null) {
-				tool.damageItem(1, player, (user) -> {
-					user.sendBreakAnimation(EquipmentSlotType.MAINHAND);
-				});
+				tool.damageItem(1, player, (user) -> user.sendBreakAnimation(EquipmentSlotType.MAINHAND));
 			} else {
-				if (tool.attemptDamageItem(1, world.rand, (ServerPlayerEntity) null)) {
+				if (tool.attemptDamageItem(1, world.rand, null)) {
 					tool.setCount(0);
 				}
 			}

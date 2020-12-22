@@ -7,6 +7,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.horse.AbstractHorseEntity;
 import net.minecraft.entity.passive.horse.HorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
@@ -30,7 +31,7 @@ import vectorwing.farmersdelight.utils.TextUtils;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class HorseFeedItem extends MealItem
+public class HorseFeedItem extends Item
 {
 	public static final List<EffectInstance> EFFECTS = Lists.newArrayList(
 			new EffectInstance(Effects.SPEED, 6000, 1),
@@ -68,8 +69,8 @@ public class HorseFeedItem extends MealItem
 
 					if (itemStack.getContainerItem() != ItemStack.EMPTY && !player.isCreative()) {
 						player.addItemStackToInventory(itemStack.getContainerItem());
-						itemStack.shrink(1);
 					}
+					itemStack.shrink(1);
 
 					event.setCancellationResult(ActionResultType.SUCCESS);
 					event.setCanceled(true);

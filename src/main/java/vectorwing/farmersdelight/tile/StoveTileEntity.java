@@ -40,9 +40,9 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 {
 	private static final VoxelShape GRILLING_AREA = Block.makeCuboidShape(3.0F, 0.0F, 3.0F, 13.0F, 1.0F, 13.0F);
 	private final int MAX_STACK_SIZE = 6;
-	protected final NonNullList<ItemStack> inventory = NonNullList.withSize(MAX_STACK_SIZE, ItemStack.EMPTY);
 	private final int[] cookingTimes = new int[MAX_STACK_SIZE];
 	private final int[] cookingTotalTimes = new int[MAX_STACK_SIZE];
+	protected final NonNullList<ItemStack> inventory = NonNullList.withSize(MAX_STACK_SIZE, ItemStack.EMPTY);
 
 	public StoveTileEntity(TileEntityType<?> tileEntityTypeIn) {
 		super(tileEntityTypeIn);
@@ -86,8 +86,8 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 				++this.cookingTimes[i];
 				if (this.cookingTimes[i] >= this.cookingTotalTimes[i]) {
 					if (world != null) {
-						IInventory iinventory = new Inventory(itemstack);
-						ItemStack result = this.world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, iinventory, this.world).map((recipe) -> recipe.getCraftingResult(iinventory)).orElse(itemstack);
+						IInventory inventory = new Inventory(itemstack);
+						ItemStack result = this.world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, inventory, this.world).map((recipe) -> recipe.getCraftingResult(inventory)).orElse(itemstack);
 						if (!result.isEmpty()) {
 							ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, result.copy());
 							entity.setMotion(MathUtils.RAND.nextGaussian() * (double) 0.01F, 0.1F, MathUtils.RAND.nextGaussian() * (double) 0.01F);
@@ -158,7 +158,6 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 
 	@Override
 	public void read(BlockState state, CompoundNBT compound) {
-
 		super.read(state, compound);
 		this.inventory.clear();
 		ItemStackHelper.loadAllItems(compound, this.inventory);

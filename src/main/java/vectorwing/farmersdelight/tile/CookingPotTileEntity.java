@@ -120,11 +120,6 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		return this.writeItems(new CompoundNBT());
 	}
 
-//	@Override
-//	public void handleUpdateTag(CompoundNBT tag) {
-//		this.read(tag);
-//	}
-
 	@Override
 	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
 		this.read(this.getBlockState(), pkt.getNbtCompound());
