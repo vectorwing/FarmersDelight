@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.tile;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
@@ -28,15 +27,11 @@ import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.TextUtils;
 
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
-@SuppressWarnings("deprecation")
 public class BasketTileEntity extends LockableLootTileEntity implements IBasket, ITickableTileEntity
 {
 	private NonNullList<ItemStack> basketContents = NonNullList.withSize(27, ItemStack.EMPTY);
@@ -217,7 +212,7 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 		return this.transferCooldown > 8;
 	}
 
-	private boolean updateHopper(Supplier<Boolean> supplier) {
+	private void updateHopper(Supplier<Boolean> supplier) {
 		if (this.world != null && !this.world.isRemote) {
 			if (!this.isOnTransferCooldown() && this.getBlockState().get(BlockStateProperties.ENABLED)) {
 				boolean flag = false;
@@ -228,11 +223,9 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 				if (flag) {
 					this.setTransferCooldown(8);
 					this.markDirty();
-					return true;
 				}
 			}
 		}
-		return false;
 	}
 
 	private boolean isFull() {
@@ -274,7 +267,7 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 	public void tick() {
 		if (this.world != null && !this.world.isRemote) {
 			--this.transferCooldown;
-			long tickedGameTime = this.world.getGameTime();
+			//long tickedGameTime = this.world.getGameTime();
 			if (!this.isOnTransferCooldown()) {
 				this.setTransferCooldown(0);
 				int facing = this.getBlockState().get(BasketBlock.FACING).getIndex();
