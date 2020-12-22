@@ -267,7 +267,6 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 	public void tick() {
 		if (this.world != null && !this.world.isRemote) {
 			--this.transferCooldown;
-			//long tickedGameTime = this.world.getGameTime();
 			if (!this.isOnTransferCooldown()) {
 				this.setTransferCooldown(0);
 				int facing = this.getBlockState().get(BasketBlock.FACING).getIndex();
