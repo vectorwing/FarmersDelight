@@ -11,8 +11,8 @@ import vectorwing.farmersdelight.utils.tags.ModTags;
 
 public class ItemTags extends ItemTagsProvider
 {
-	public ItemTags(DataGenerator generatorIn, BlockTagsProvider blockTagProvider) {
-		super(generatorIn, blockTagProvider);
+	public ItemTags(DataGenerator generatorIn, BlockTagsProvider blockTagProvider,String modId, @javax.annotation.Nullable net.minecraftforge.common.data.ExistingFileHelper existingFileHelper) {
+		super(generatorIn, blockTagProvider, modId, existingFileHelper);
 	}
 
 	@Override

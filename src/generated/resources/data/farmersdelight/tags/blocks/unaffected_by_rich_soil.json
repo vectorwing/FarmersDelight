@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:grass",
+    "minecraft:tall_grass",
+    "minecraft:fern",
+    "minecraft:large_fern",
+    "farmersdelight:brown_mushroom_colony",
+    "farmersdelight:red_mushroom_colony"
+  ]
+}

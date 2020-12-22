@@ -22,6 +22,9 @@ public class ModTags
 	// Blocks that accelerate decomposition of Organic Compost if placed adjacent to it.
 	public static final ITag.INamedTag<Block> COMPOST_ACTIVATORS = modBlockTag("compost_activators");
 
+	// Blocks that should not have their growth boosted by Rich Soil, if planted on it.
+	public static final ITag.INamedTag<Block> UNAFFECTED_BY_RICH_SOIL = modBlockTag("unaffected_by_rich_soil");
+
 	// Items (ideally tools) that can obtain straw when harvesting grassy plants. Populated by all knives by default.
 	public static final ITag.INamedTag<Item> STRAW_HARVESTERS = modItemTag("straw_harvesters");
 

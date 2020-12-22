@@ -9,8 +9,8 @@ import vectorwing.farmersdelight.utils.tags.ModTags;
 
 public class BlockTags extends BlockTagsProvider
 {
-	public BlockTags(DataGenerator generatorIn) {
-		super(generatorIn);
+	public BlockTags(DataGenerator generatorIn, String modId, @javax.annotation.Nullable net.minecraftforge.common.data.ExistingFileHelper existingFileHelper) {
+		super(generatorIn, modId, existingFileHelper);
 	}
 
 	@Override
@@ -68,6 +68,13 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.ORGANIC_COMPOST.get(),
 				ModBlocks.RICH_SOIL.get(),
 				ModBlocks.RICH_SOIL_FARMLAND.get(),
+				ModBlocks.BROWN_MUSHROOM_COLONY.get(),
+				ModBlocks.RED_MUSHROOM_COLONY.get());
+		getOrCreateBuilder(ModTags.UNAFFECTED_BY_RICH_SOIL).add(
+				Blocks.GRASS,
+				Blocks.TALL_GRASS,
+				Blocks.FERN,
+				Blocks.LARGE_FERN,
 				ModBlocks.BROWN_MUSHROOM_COLONY.get(),
 				ModBlocks.RED_MUSHROOM_COLONY.get());
 	}
