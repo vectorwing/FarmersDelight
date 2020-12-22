@@ -55,7 +55,7 @@ public class ModBlocks
 	public static final RegistryObject<Block> FULL_TATAMI_MAT = BLOCKS.register("full_tatami_mat", TatamiMatBlock::new);
 	public static final RegistryObject<Block> HALF_TATAMI_MAT = BLOCKS.register("half_tatami_mat", TatamiHalfMatBlock::new);
 	public static final RegistryObject<Block> ORGANIC_COMPOST = BLOCKS.register("organic_compost",
-			() -> new OrganicCompostBlock(Block.Properties.from(Blocks.DIRT).harvestTool(ToolType.SHOVEL)));
+			() -> new OrganicCompostBlock(Block.Properties.from(Blocks.DIRT).hardnessAndResistance(1.0F).sound(SoundType.WET_GRASS).harvestTool(ToolType.SHOVEL)));
 	public static final RegistryObject<Block> RICH_SOIL = BLOCKS.register("rich_soil",
 			() -> new RichSoilBlock(Block.Properties.from(Blocks.DIRT).harvestTool(ToolType.SHOVEL).tickRandomly()));
 	public static final RegistryObject<Block> RICH_SOIL_FARMLAND = BLOCKS.register("rich_soil_farmland",
