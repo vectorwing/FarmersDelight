@@ -60,7 +60,7 @@ public class ModBlocks
 	public static final RegistryObject<Block> RED_MUSHROOM_COLONY = BLOCKS.register("red_mushroom_colony",
 			() -> new MushroomColonyBlock(Block.Properties.from(Blocks.RED_MUSHROOM), Items.RED_MUSHROOM.delegate));
 	public static final RegistryObject<Block> ORGANIC_COMPOST = BLOCKS.register("organic_compost",
-			() -> new OrganicCompostBlock(Block.Properties.from(Blocks.DIRT).hardnessAndResistance(1.0F).sound(SoundType.WET_GRASS).harvestTool(ToolType.SHOVEL)));
+			() -> new OrganicCompostBlock(Block.Properties.from(Blocks.DIRT).hardnessAndResistance(1.2F).sound(SoundType.CROP).harvestTool(ToolType.SHOVEL)));
 	public static final RegistryObject<Block> RICH_SOIL = BLOCKS.register("rich_soil",
 			() -> new RichSoilBlock(Block.Properties.from(Blocks.DIRT).harvestTool(ToolType.SHOVEL).tickRandomly()));
 	public static final RegistryObject<Block> RICH_SOIL_FARMLAND = BLOCKS.register("rich_soil_farmland",
