@@ -13,6 +13,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.PlantType;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.utils.MathUtils;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import java.util.Random;
 
@@ -66,14 +67,19 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
 		} else if (moisture < 7) {
 			worldIn.setBlockState(pos, state.with(MOISTURE, 7), 2);
 		} else if (moisture == 7) {
-			BlockState plant = worldIn.getBlockState(pos.up());
-			if (plant.getBlock() instanceof TallFlowerBlock) {
+			BlockState aboveState = worldIn.getBlockState(pos.up());
+			Block aboveBlock = aboveState.getBlock();
+
+			// Do nothing if the plant is unaffected by rich soil farmland
+			if (ModTags.UNAFFECTED_BY_RICH_SOIL.contains(aboveBlock) || aboveBlock instanceof TallFlowerBlock) {
 				return;
 			}
-			if (plant.getBlock() instanceof IGrowable && MathUtils.RAND.nextInt(10) <= 3) {
-				IGrowable growable = (IGrowable) plant.getBlock();
-				if (growable.canGrow(worldIn, pos.up(), plant, false)) {
-					growable.grow(worldIn, worldIn.rand, pos.up(), plant);
+
+			// If all else fails, and it's a plant, give it a growth boost now and then!
+			if (aboveBlock instanceof IGrowable && MathUtils.RAND.nextFloat() <= 0.2F) {
+				IGrowable growable = (IGrowable) aboveBlock;
+				if (growable.canGrow(worldIn, pos.up(), aboveState, false)) {
+					growable.grow(worldIn, worldIn.rand, pos.up(), aboveState);
 				}
 			}
 		}

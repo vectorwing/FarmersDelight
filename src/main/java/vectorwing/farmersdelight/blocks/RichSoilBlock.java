@@ -15,6 +15,8 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public class RichSoilBlock extends Block
 {
+	public static final int MUSHROOM_COLONY_LIGHT_LEVEL = 12;
+
 	public RichSoilBlock(Properties properties) {
 		super(properties);
 	}
@@ -33,20 +35,20 @@ public class RichSoilBlock extends Block
 
 			// Convert mushrooms to colonies if it's dark enough
 			if (aboveBlock == Blocks.BROWN_MUSHROOM) {
-				if (worldIn.getLightSubtracted(pos.up(), 0) <= 10) {
+				if (worldIn.getLightSubtracted(pos.up(), 0) <= MUSHROOM_COLONY_LIGHT_LEVEL) {
 					worldIn.setBlockState(pos.up(), ModBlocks.BROWN_MUSHROOM_COLONY.get().getDefaultState());
 				}
 				return;
 			}
 			if (aboveBlock == Blocks.RED_MUSHROOM) {
-				if (worldIn.getLightSubtracted(pos.up(), 0) <= 10) {
+				if (worldIn.getLightSubtracted(pos.up(), 0) <= MUSHROOM_COLONY_LIGHT_LEVEL) {
 					worldIn.setBlockState(pos.up(), ModBlocks.RED_MUSHROOM_COLONY.get().getDefaultState());
 				}
 				return;
 			}
 
 			// If all else fails, and it's a plant, give it a growth boost now and then!
-			if (aboveBlock instanceof IGrowable && MathUtils.RAND.nextInt(6) == 0) {
+			if (aboveBlock instanceof IGrowable && MathUtils.RAND.nextFloat() <= 0.2F) {
 				IGrowable growable = (IGrowable) aboveBlock;
 				if (growable.canGrow(worldIn, pos.up(), aboveState, false)) {
 					growable.grow(worldIn, worldIn.rand, pos.up(), aboveState);
