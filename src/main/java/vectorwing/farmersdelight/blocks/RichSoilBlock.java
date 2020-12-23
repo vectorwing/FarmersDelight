@@ -15,7 +15,7 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public class RichSoilBlock extends Block
 {
-	public static final int MUSHROOM_COLONY_LIGHT_LEVEL = 12;
+	public static final int COLONY_FORMING_LIGHT_LEVEL = 12;
 
 	public RichSoilBlock(Properties properties) {
 		super(properties);
@@ -35,13 +35,13 @@ public class RichSoilBlock extends Block
 
 			// Convert mushrooms to colonies if it's dark enough
 			if (aboveBlock == Blocks.BROWN_MUSHROOM) {
-				if (worldIn.getLightSubtracted(pos.up(), 0) <= MUSHROOM_COLONY_LIGHT_LEVEL) {
+				if (worldIn.getLightSubtracted(pos.up(), 0) <= COLONY_FORMING_LIGHT_LEVEL) {
 					worldIn.setBlockState(pos.up(), ModBlocks.BROWN_MUSHROOM_COLONY.get().getDefaultState());
 				}
 				return;
 			}
 			if (aboveBlock == Blocks.RED_MUSHROOM) {
-				if (worldIn.getLightSubtracted(pos.up(), 0) <= MUSHROOM_COLONY_LIGHT_LEVEL) {
+				if (worldIn.getLightSubtracted(pos.up(), 0) <= COLONY_FORMING_LIGHT_LEVEL) {
 					worldIn.setBlockState(pos.up(), ModBlocks.RED_MUSHROOM_COLONY.get().getDefaultState());
 				}
 				return;

@@ -23,6 +23,9 @@ import java.util.function.Supplier;
 @SuppressWarnings("deprecation")
 public class MushroomColonyBlock extends BushBlock implements IGrowable
 {
+	public static final int GROWING_LIGHT_LEVEL = 12;
+	public final Supplier<Item> mushroomType;
+
 	public static final IntegerProperty COLONY_AGE = BlockStateProperties.AGE_0_3;
 	protected static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
 			Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D),
@@ -30,7 +33,6 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D),
 			Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 14.0D, 15.0D),
 	};
-	public final Supplier<Item> mushroomType;
 
 	public MushroomColonyBlock(Properties properties, Supplier<Item> mushroomType) {
 		super(properties);
@@ -57,6 +59,10 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 		return state.get(COLONY_AGE) < 3;
 	}
 
+	public int getMaxAge() {
+		return 3;
+	}
+
 	@Override
 	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
 		return false;
@@ -66,7 +72,7 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
 		super.tick(state, worldIn, pos, rand);
 		int age = state.get(COLONY_AGE);
-		if (age < 3 && worldIn.getLightSubtracted(pos.up(), 0) <= 13 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(5) == 0)) {
+		if (age < this.getMaxAge() && worldIn.getLightSubtracted(pos.up(), 0) <= GROWING_LIGHT_LEVEL && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(5) == 0)) {
 			worldIn.setBlockState(pos, state.with(COLONY_AGE, age + 1), 2);
 			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 		}
