@@ -4,13 +4,16 @@ import net.minecraft.block.Blocks;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
+import javax.annotation.Nullable;
+
 public class BlockTags extends BlockTagsProvider
 {
-	public BlockTags(DataGenerator generatorIn) {
-		super(generatorIn);
+	public BlockTags(DataGenerator generatorIn, String modId, @Nullable ExistingFileHelper existingFileHelper) {
+		super(generatorIn, modId, existingFileHelper);
 	}
 
 	@Override
@@ -35,13 +38,7 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.RICE_CROP.get(),
 				ModBlocks.TALL_RICE_CROP.get(),
 				ModBlocks.TOMATO_CROP.get());
-		getOrCreateBuilder(net.minecraft.tags.BlockTags.SMALL_FLOWERS).add(
-				ModBlocks.WILD_BEETROOTS.get(),
-				ModBlocks.WILD_CABBAGES.get(),
-				ModBlocks.WILD_CARROTS.get(),
-				ModBlocks.WILD_ONIONS.get(),
-				ModBlocks.WILD_POTATOES.get(),
-				ModBlocks.WILD_TOMATOES.get());
+		getOrCreateBuilder(net.minecraft.tags.BlockTags.SMALL_FLOWERS).addTag(ModTags.WILD_CROPS);
 	}
 
 	protected void registerForgeTags() {
@@ -50,6 +47,14 @@ public class BlockTags extends BlockTagsProvider
 	}
 
 	protected void registerModTags() {
+		getOrCreateBuilder(ModTags.WILD_CROPS).add(
+				ModBlocks.WILD_CARROTS.get(),
+				ModBlocks.WILD_POTATOES.get(),
+				ModBlocks.WILD_BEETROOTS.get(),
+				ModBlocks.WILD_CABBAGES.get(),
+				ModBlocks.WILD_TOMATOES.get(),
+				ModBlocks.WILD_ONIONS.get(),
+				ModBlocks.WILD_RICE.get());
 		getOrCreateBuilder(ModTags.TRAY_HEAT_SOURCES).add(
 				Blocks.CAMPFIRE,
 				Blocks.SOUL_CAMPFIRE,
@@ -70,5 +75,15 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.RICH_SOIL_FARMLAND.get(),
 				ModBlocks.BROWN_MUSHROOM_COLONY.get(),
 				ModBlocks.RED_MUSHROOM_COLONY.get());
+		getOrCreateBuilder(ModTags.UNAFFECTED_BY_RICH_SOIL).add(
+				Blocks.GRASS,
+				Blocks.TALL_GRASS,
+				Blocks.FERN,
+				Blocks.LARGE_FERN,
+				Blocks.TWISTING_VINES,
+				Blocks.TWISTING_VINES_PLANT,
+				ModBlocks.BROWN_MUSHROOM_COLONY.get(),
+				ModBlocks.RED_MUSHROOM_COLONY.get())
+				.addTag(ModTags.WILD_CROPS);
 	}
 }

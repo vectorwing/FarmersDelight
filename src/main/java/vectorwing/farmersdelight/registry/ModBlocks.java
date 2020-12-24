@@ -34,6 +34,7 @@ public class ModBlocks
 			() -> new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> RICE_BALE = BLOCKS.register("rice_bale",
 			() -> new RiceBaleBlock(Block.Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.HOE)));
+	public static final RegistryObject<Block> ROPE = BLOCKS.register("rope", RopeBlock::new);
 	public static final RegistryObject<Block> SAFETY_NET = BLOCKS.register("safety_net", SafetyNetBlock::new);
 	public static final RegistryObject<Block> OAK_PANTRY = BLOCKS.register("oak_pantry",
 			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
@@ -54,17 +55,16 @@ public class ModBlocks
 	public static final RegistryObject<Block> TATAMI = BLOCKS.register("tatami", TatamiBlock::new);
 	public static final RegistryObject<Block> FULL_TATAMI_MAT = BLOCKS.register("full_tatami_mat", TatamiMatBlock::new);
 	public static final RegistryObject<Block> HALF_TATAMI_MAT = BLOCKS.register("half_tatami_mat", TatamiHalfMatBlock::new);
-	public static final RegistryObject<Block> ORGANIC_COMPOST = BLOCKS.register("organic_compost",
-			() -> new OrganicCompostBlock(Block.Properties.from(Blocks.DIRT).harvestTool(ToolType.SHOVEL)));
-	public static final RegistryObject<Block> RICH_SOIL = BLOCKS.register("rich_soil",
-			() -> new RichSoilBlock(Block.Properties.from(Blocks.DIRT).harvestTool(ToolType.SHOVEL).tickRandomly()));
-	public static final RegistryObject<Block> RICH_SOIL_FARMLAND = BLOCKS.register("rich_soil_farmland",
-			() -> new RichSoilFarmlandBlock(Block.Properties.from(Blocks.FARMLAND).harvestTool(ToolType.SHOVEL)));
 	public static final RegistryObject<Block> BROWN_MUSHROOM_COLONY = BLOCKS.register("brown_mushroom_colony",
 			() -> new MushroomColonyBlock(Block.Properties.from(Blocks.BROWN_MUSHROOM), Items.BROWN_MUSHROOM.delegate));
 	public static final RegistryObject<Block> RED_MUSHROOM_COLONY = BLOCKS.register("red_mushroom_colony",
 			() -> new MushroomColonyBlock(Block.Properties.from(Blocks.RED_MUSHROOM), Items.RED_MUSHROOM.delegate));
-	public static final RegistryObject<Block> ROPE = BLOCKS.register("rope", RopeBlock::new);
+	public static final RegistryObject<Block> ORGANIC_COMPOST = BLOCKS.register("organic_compost",
+			() -> new OrganicCompostBlock(Block.Properties.from(Blocks.DIRT).hardnessAndResistance(1.2F).sound(SoundType.CROP).harvestTool(ToolType.SHOVEL)));
+	public static final RegistryObject<Block> RICH_SOIL = BLOCKS.register("rich_soil",
+			() -> new RichSoilBlock(Block.Properties.from(Blocks.DIRT).harvestTool(ToolType.SHOVEL).tickRandomly()));
+	public static final RegistryObject<Block> RICH_SOIL_FARMLAND = BLOCKS.register("rich_soil_farmland",
+			() -> new RichSoilFarmlandBlock(Block.Properties.from(Blocks.FARMLAND).harvestTool(ToolType.SHOVEL)));
 
 	// PASTRY BLOCKS
 	public static final RegistryObject<Block> APPLE_PIE = BLOCKS.register("apple_pie",

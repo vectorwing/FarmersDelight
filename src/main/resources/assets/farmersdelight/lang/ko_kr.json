@@ -145,8 +145,8 @@
 
   "farmersdelight.advancement.place_campfire": "BONFIRE LIT",
   "farmersdelight.advancement.place_campfire.desc": "밤에 당신을 따뜻하게 해줄 모닥불을 설치하세요",
-  "farmersdelight.advancement.craft_stove": "장작 하나 더",
-  "farmersdelight.advancement.craft_stove.desc": "난로를 제작하세요",
+  "farmersdelight.advancement.place_stove": "장작 하나 더",
+  "farmersdelight.advancement.place_stove.desc": "난로를 제작하세요",
   "farmersdelight.advancement.place_cooking_pot": "요리 시작!",
   "farmersdelight.advancement.place_cooking_pot.desc": "조리용 냄비를 설치하고 식사를 준비하세요!",
   "farmersdelight.advancement.eat_comfort_food": "등 따스하고 배부르면",

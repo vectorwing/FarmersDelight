@@ -3,6 +3,6 @@
   "textures": {
     "top": "farmersdelight:block/onion_crate_top",
     "side": "farmersdelight:block/onion_crate_side",
-    "bottom": "farmersdelight:block/onion_crate_bottom"
+    "bottom": "farmersdelight:block/crate_bottom"
   }
 }

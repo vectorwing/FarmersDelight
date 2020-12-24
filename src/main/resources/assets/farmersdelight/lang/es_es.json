@@ -149,8 +149,8 @@
 
   "farmersdelight.advancement.place_campfire": "Hoguera encendida",
   "farmersdelight.advancement.place_campfire.desc": "Colcoca una hoguera para manterte tibio en la noche!",
-  "farmersdelight.advancement.craft_stove": "Enciende la parrilla!",
-  "farmersdelight.advancement.craft_stove.desc": "Craftear una parrila",
+  "farmersdelight.advancement.place_stove": "Enciende la parrilla!",
+  "farmersdelight.advancement.place_stove.desc": "Craftear una parrila",
   "farmersdelight.advancement.place_cooking_pot": "La cena esta lista!",
   "farmersdelight.advancement.place_cooking_pot.desc": "Coloca una olla y empieza a preparar platos!",
   "farmersdelight.advancement.eat_comfort_food": "Cálido y acogedor",

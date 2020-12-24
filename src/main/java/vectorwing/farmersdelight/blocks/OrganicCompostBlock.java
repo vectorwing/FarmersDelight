@@ -36,26 +36,38 @@ public class OrganicCompostBlock extends Block
 		super.fillStateContainer(builder);
 	}
 
+	public int getMaxCompostingStage() {
+		return 7;
+	}
+
 	@Override
 	@SuppressWarnings("deprecation")
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		if (worldIn.isRemote) return;
 
 		float chance = 0F;
-
+		boolean hasWater = false;
 		int maxLight = 0;
-		for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-1, 0, -1), pos.add(1, 1, 1))) {
-			BlockState adjacent = worldIn.getBlockState(blockpos);
-			if (adjacent.isIn(ModTags.COMPOST_ACTIVATORS) || adjacent.getFluidState().isTagged(FluidTags.WATER))
+
+		for (BlockPos neighborPos : BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, 1, 1))) {
+			BlockState neighborState = worldIn.getBlockState(neighborPos);
+			if (neighborState.isIn(ModTags.COMPOST_ACTIVATORS)) {
 				chance += 0.02F;
+			}
+			if (neighborState.getFluidState().isTagged(FluidTags.WATER)) {
+				hasWater = true;
+			}
 			int light = worldIn.getLightSubtracted(pos.up(), 0);
-			if (light > maxLight)
+			if (light > maxLight) {
 				maxLight = light;
+			}
 		}
+
 		chance += maxLight > 12 ? 0.1F : 0.05F;
+		chance += hasWater ? 0.1F : 0.0F;
 
 		if (worldIn.getRandom().nextFloat() <= chance) {
-			if (state.get(COMPOSTING) == 7)
+			if (state.get(COMPOSTING) == this.getMaxCompostingStage())
 				worldIn.setBlockState(pos, ModBlocks.RICH_SOIL.get().getDefaultState(), 2); // finished
 			else
 				worldIn.setBlockState(pos, state.with(COMPOSTING, state.get(COMPOSTING) + 1), 2); // next stage

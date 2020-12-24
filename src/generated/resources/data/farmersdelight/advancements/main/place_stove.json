@@ -5,10 +5,10 @@
       "item": "farmersdelight:stove"
     },
     "title": {
-      "translate": "farmersdelight.advancement.craft_stove"
+      "translate": "farmersdelight.advancement.place_stove"
     },
     "description": {
-      "translate": "farmersdelight.advancement.craft_stove.desc"
+      "translate": "farmersdelight.advancement.place_stove.desc"
     },
     "frame": "task",
     "show_toast": true,
@@ -17,13 +17,9 @@
   },
   "criteria": {
     "stove": {
-      "trigger": "minecraft:inventory_changed",
+      "trigger": "minecraft:placed_block",
       "conditions": {
-        "items": [
-          {
-            "item": "farmersdelight:stove"
-          }
-        ]
+        "block": "farmersdelight:stove"
       }
     }
   },

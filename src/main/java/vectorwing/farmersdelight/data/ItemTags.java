@@ -5,14 +5,17 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
 import net.minecraft.item.Items;
 import net.minecraft.tags.BlockTags;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.tags.ForgeTags;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
+import javax.annotation.Nullable;
+
 public class ItemTags extends ItemTagsProvider
 {
-	public ItemTags(DataGenerator generatorIn, BlockTagsProvider blockTagProvider) {
-		super(generatorIn, blockTagProvider);
+	public ItemTags(DataGenerator generatorIn, BlockTagsProvider blockTagProvider, String modId, @Nullable ExistingFileHelper existingFileHelper) {
+		super(generatorIn, blockTagProvider, modId, existingFileHelper);
 	}
 
 	@Override

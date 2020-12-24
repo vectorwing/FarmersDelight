@@ -79,7 +79,7 @@ public class Advancements extends AdvancementProvider
 							TextUtils.getTranslation("advancement.root.desc"),
 							new ResourceLocation("minecraft:textures/block/bricks.png"),
 							FrameType.TASK, false, false, false)
-					.withCriterion("seeds", InventoryChangeTrigger.Instance.forItems(Items.WHEAT_SEEDS))
+					.withCriterion("seeds", InventoryChangeTrigger.Instance.forItems(new IItemProvider[] {}))
 					.register(consumer, getNameId("main/root"));
 
 			// Farming Branch
@@ -112,9 +112,9 @@ public class Advancements extends AdvancementProvider
 					.withCriterion("campfire", PlacedBlockTrigger.Instance.placedBlock(Blocks.CAMPFIRE))
 					.register(consumer, getNameId("main/place_campfire"));
 
-			Advancement fireUpTheGrill = getAdvancement(bonfireLit, ModItems.STOVE.get(), "craft_stove", FrameType.TASK, true, true, false)
-					.withCriterion("stove", InventoryChangeTrigger.Instance.forItems(ModItems.STOVE.get()))
-					.register(consumer, getNameId("main/craft_stove"));
+			Advancement fireUpTheGrill = getAdvancement(bonfireLit, ModItems.STOVE.get(), "place_stove", FrameType.TASK, true, true, false)
+					.withCriterion("stove", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.STOVE.get()))
+					.register(consumer, getNameId("main/place_stove"));
 
 			Advancement dinnerIsServed = getAdvancement(fireUpTheGrill, ModItems.COOKING_POT.get(), "place_cooking_pot", FrameType.GOAL, true, true, false)
 					.withCriterion("cooking_pot", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.COOKING_POT.get()))
