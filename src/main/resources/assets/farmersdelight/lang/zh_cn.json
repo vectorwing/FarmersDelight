@@ -149,8 +149,8 @@
   
   "farmersdelight.advancement.place_campfire": "Bonfire Lit",
   "farmersdelight.advancement.place_campfire.desc": "放置一个篝火，让你在夜晚不再寒冷",
-  "farmersdelight.advancement.craft_stove": "点起火来",
-  "farmersdelight.advancement.craft_stove.desc": "得到一个炉灶",
+  "farmersdelight.advancement.place_stove": "点起火来",
+  "farmersdelight.advancement.place_stove.desc": "得到一个炉灶",
   "farmersdelight.advancement.place_cooking_pot": "晚餐上桌喽！",
   "farmersdelight.advancement.place_cooking_pot.desc": "放置一个厨锅并准备做饭！",
   "farmersdelight.advancement.eat_comfort_food": "温暖又舒适",

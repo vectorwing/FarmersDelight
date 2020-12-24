@@ -149,8 +149,8 @@
 
   "farmersdelight.advancement.place_campfire": "Bonfire Lit",
   "farmersdelight.advancement.place_campfire.desc": "Place down a Campfire to keep you warm at night",
-  "farmersdelight.advancement.craft_stove": "Fire Up the Grill",
-  "farmersdelight.advancement.craft_stove.desc": "Acquire a Stove",
+  "farmersdelight.advancement.place_stove": "Fire Up the Grill",
+  "farmersdelight.advancement.place_stove.desc": "Place down a Stove",
   "farmersdelight.advancement.place_cooking_pot": "Dinner's Served!",
   "farmersdelight.advancement.place_cooking_pot.desc": "Put down a Cooking Pot and start preparing meals!",
   "farmersdelight.advancement.eat_comfort_food": "Warm and Cozy",

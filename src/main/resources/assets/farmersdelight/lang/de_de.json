@@ -139,8 +139,8 @@
 
   "farmersdelight.advancement.place_campfire": "Leuchtfeuer entzündet",
   "farmersdelight.advancement.place_campfire.desc": "Platziere ein Lagerfeuer um dich für die Nacht warmzuhalten",
-  "farmersdelight.advancement.craft_stove": "Schmeiß den Grill an",
-  "farmersdelight.advancement.craft_stove.desc": "Erlange einen Herd",
+  "farmersdelight.advancement.place_stove": "Schmeiß den Grill an",
+  "farmersdelight.advancement.place_stove.desc": "Erlange einen Herd",
   "farmersdelight.advancement.place_cooking_pot": "Essen fertig!",
   "farmersdelight.advancement.place_cooking_pot.desc": "Platziere einen Kochtopf und fang an zu kochen!",
   "farmersdelight.advancement.eat_comfort_food": "Warm und gemütlich",

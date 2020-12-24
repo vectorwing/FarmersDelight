@@ -145,8 +145,8 @@
 
   "farmersdelight.advancement.place_campfire": "Feu allumé",
   "farmersdelight.advancement.place_campfire.desc": "Placez un feu de camp pour rester au chaud la nuit",
-  "farmersdelight.advancement.craft_stove": "On fait chauffer le four",
-  "farmersdelight.advancement.craft_stove.desc": "Fabriquez un four",
+  "farmersdelight.advancement.place_stove": "On fait chauffer le four",
+  "farmersdelight.advancement.place_stove.desc": "Fabriquez un four",
   "farmersdelight.advancement.place_cooking_pot": "Le dîner est servi!",
   "farmersdelight.advancement.place_cooking_pot.desc": "Placez une marmite et commencez à cuisiner",
   "farmersdelight.advancement.eat_comfort_food": "Chaud et agréable",

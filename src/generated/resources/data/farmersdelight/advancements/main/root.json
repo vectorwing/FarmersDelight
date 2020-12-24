@@ -18,13 +18,7 @@
   "criteria": {
     "seeds": {
       "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "minecraft:wheat_seeds"
-          }
-        ]
-      }
+      "conditions": {}
     }
   },
   "requirements": [

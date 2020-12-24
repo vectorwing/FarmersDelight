@@ -145,8 +145,8 @@
 
   "farmersdelight.advancement.place_campfire": "火をつけろ",
   "farmersdelight.advancement.place_campfire.desc": "焚き火で暖をとる",
-  "farmersdelight.advancement.craft_stove": "グリルの用意",
-  "farmersdelight.advancement.craft_stove.desc": "コンロを入手する",
+  "farmersdelight.advancement.place_stove": "グリルの用意",
+  "farmersdelight.advancement.place_stove.desc": "コンロを入手する",
   "farmersdelight.advancement.place_cooking_pot": "ごはんですよ!",
   "farmersdelight.advancement.place_cooking_pot.desc": "鍋を置いて料理を始めよう!",
   "farmersdelight.advancement.eat_comfort_food": "温かい食事",

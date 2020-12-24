@@ -149,8 +149,8 @@
 
   "farmersdelight.advancement.place_campfire": "Bonfire Lit",
   "farmersdelight.advancement.place_campfire.desc": "Acenda uma Fogueira para lhe aquecer à noite",
-  "farmersdelight.advancement.craft_stove": "Acendendo a grelha",
-  "farmersdelight.advancement.craft_stove.desc": "Obtenha um Fogão",
+  "farmersdelight.advancement.place_stove": "Acendendo a grelha",
+  "farmersdelight.advancement.place_stove.desc": "Obtenha um Fogão",
   "farmersdelight.advancement.place_cooking_pot": "O jantar está servido!",
   "farmersdelight.advancement.place_cooking_pot.desc": "Coloque uma Panela e comece a preparar refeições!",
   "farmersdelight.advancement.eat_comfort_food": "Caloroso e aconchegante",
