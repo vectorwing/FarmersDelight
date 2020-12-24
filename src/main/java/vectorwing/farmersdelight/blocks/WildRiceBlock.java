@@ -18,12 +18,14 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import vectorwing.farmersdelight.registry.ModBlocks;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable
+public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable, IGrowable
 {
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -99,5 +101,20 @@ public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable
 		return state.get(HALF) == DoubleBlockHalf.LOWER
 				? Fluids.WATER.getStillFluidState(false)
 				: Fluids.EMPTY.getDefaultState();
+	}
+
+	@Override
+	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+		return true;
+	}
+
+	@Override
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
+		return (double) rand.nextFloat() < 0.3F;
+	}
+
+	@Override
+	public void grow(ServerWorld worldIn, Random random, BlockPos pos, BlockState state) {
+		spawnAsEntity(worldIn, pos, new ItemStack(this));
 	}
 }
