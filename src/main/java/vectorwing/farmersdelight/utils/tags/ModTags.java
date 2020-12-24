@@ -13,6 +13,9 @@ import vectorwing.farmersdelight.FarmersDelight;
  */
 public class ModTags
 {
+	// Blocks that represent the wild form of a farmable crop.
+	public static final ITag.INamedTag<Block> WILD_CROPS = modBlockTag("wild_crops");
+
 	// Blocks that can heat up a Cooking Pot.
 	public static final ITag.INamedTag<Block> HEAT_SOURCES = modBlockTag("heat_sources");
 

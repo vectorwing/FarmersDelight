@@ -53,6 +53,14 @@ public class BlockTags extends BlockTagsProvider
 	}
 
 	protected void registerModTags() {
+		getOrCreateBuilder(ModTags.WILD_CROPS).add(
+				ModBlocks.WILD_CARROTS.get(),
+				ModBlocks.WILD_POTATOES.get(),
+				ModBlocks.WILD_BEETROOTS.get(),
+				ModBlocks.WILD_CABBAGES.get(),
+				ModBlocks.WILD_TOMATOES.get(),
+				ModBlocks.WILD_ONIONS.get(),
+				ModBlocks.WILD_RICE.get());
 		getOrCreateBuilder(ModTags.TRAY_HEAT_SOURCES).add(
 				Blocks.CAMPFIRE,
 				Blocks.SOUL_CAMPFIRE,
@@ -81,6 +89,7 @@ public class BlockTags extends BlockTagsProvider
 				Blocks.TWISTING_VINES,
 				Blocks.TWISTING_VINES_PLANT,
 				ModBlocks.BROWN_MUSHROOM_COLONY.get(),
-				ModBlocks.RED_MUSHROOM_COLONY.get());
+				ModBlocks.RED_MUSHROOM_COLONY.get())
+				.addTag(ModTags.WILD_CROPS);
 	}
 }
