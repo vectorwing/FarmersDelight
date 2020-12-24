@@ -2,7 +2,6 @@
   "credit": "Made with Blockbench",
   "textures": {
     "0": "farmersdelight:block/rope",
-    "1": "farmersdelight:block/rope_top",
     "particle": "farmersdelight:block/rope"
   },
   "elements": [
@@ -15,8 +14,8 @@
         "east": {"uv": [7, 10, 9, 16], "texture": "#0"},
         "south": {"uv": [9, 10, 7, 16], "texture": "#0"},
         "west": {"uv": [7, 10, 9, 16], "texture": "#0"},
-        "up": {"uv": [7, 7, 9, 9], "texture": "#1"},
-        "down": {"uv": [7, 7, 9, 9], "texture": "#1"}
+        "up": {"uv": [7, 7, 9, 9], "texture": "#0"},
+        "down": {"uv": [7, 7, 9, 9], "texture": "#0"}
       }
     }
   ]
