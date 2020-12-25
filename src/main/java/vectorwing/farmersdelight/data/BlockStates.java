@@ -26,8 +26,8 @@ public class BlockStates extends BlockStateProvider
 {
 	private static final int DEFAULT_ANGLE_OFFSET = 180;
 
-	public BlockStates(DataGenerator gen, String modid, ExistingFileHelper exFileHelper) {
-		super(gen, modid, exFileHelper);
+	public BlockStates(DataGenerator gen, ExistingFileHelper exFileHelper) {
+		super(gen, FarmersDelight.MODID, exFileHelper);
 	}
 
 	private String blockName(Block block) {
