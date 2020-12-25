@@ -1,9 +1,12 @@
 package vectorwing.farmersdelight.data;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.DoublePlantBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.Property;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
@@ -13,7 +16,11 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.blocks.BasketBlock;
 import vectorwing.farmersdelight.blocks.PantryBlock;
+import vectorwing.farmersdelight.blocks.PieBlock;
+import vectorwing.farmersdelight.blocks.StoveBlock;
 import vectorwing.farmersdelight.registry.ModBlocks;
+
+import java.util.function.Function;
 
 public class BlockStates extends BlockStateProvider
 {
@@ -31,16 +38,37 @@ public class BlockStates extends BlockStateProvider
 		return new ResourceLocation(FarmersDelight.MODID, "block/" + path);
 	}
 
+	public ModelFile existingModel(Block block) {
+		return new ModelFile.ExistingModelFile(resourceBlock(blockName(block)), models().existingFileHelper);
+	}
+
+	public ModelFile existingModel(String path) {
+		return new ModelFile.ExistingModelFile(resourceBlock(path), models().existingFileHelper);
+	}
+
 	@Override
 	protected void registerStatesAndModels() {
 		this.simpleBlock(ModBlocks.RICH_SOIL.get(), cubeRandomRotation(ModBlocks.RICH_SOIL.get(), ""));
+		this.simpleBlock(ModBlocks.SAFETY_NET.get(), existingModel(ModBlocks.SAFETY_NET.get()));
+		this.simpleBlock(ModBlocks.HALF_TATAMI_MAT.get(), existingModel("tatami_mat_half"));
 
 		customDirectionalBlock(ModBlocks.BASKET.get(),
-				new ModelFile.ExistingModelFile(resourceBlock(blockName(ModBlocks.BASKET.get())), models().existingFileHelper), BasketBlock.ENABLED, BasketBlock.WATERLOGGED);
+				$ -> existingModel(ModBlocks.BASKET.get()), BasketBlock.ENABLED, BasketBlock.WATERLOGGED);
 		customDirectionalBlock(ModBlocks.RICE_BALE.get(),
-				new ModelFile.ExistingModelFile(resourceBlock(blockName(ModBlocks.RICE_BALE.get())), models().existingFileHelper));
+				$ -> existingModel(ModBlocks.RICE_BALE.get()));
 		customHorizontalBlock(ModBlocks.CUTTING_BOARD.get(),
-				new ModelFile.ExistingModelFile(resourceBlock(blockName(ModBlocks.CUTTING_BOARD.get())), models().existingFileHelper), BasketBlock.WATERLOGGED);
+				$ -> existingModel(ModBlocks.CUTTING_BOARD.get()), BasketBlock.WATERLOGGED);
+
+		this.horizontalBlock(ModBlocks.STOVE.get(), state -> {
+			String name = blockName(ModBlocks.STOVE.get());
+			String suffix = state.get(StoveBlock.LIT) ? "_on" : "";
+
+			return models().orientableWithBottom(name + suffix,
+					resourceBlock(name + "_side"),
+					resourceBlock(name + "_front" + suffix),
+					resourceBlock(name + "_bottom"),
+					resourceBlock(name + "_top" + suffix));
+		});
 
 		this.crateBlock(ModBlocks.CABBAGE_CRATE.get(), "cabbage");
 		this.crateBlock(ModBlocks.TOMATO_CRATE.get(), "tomato");
@@ -55,12 +83,17 @@ public class BlockStates extends BlockStateProvider
 		this.pantryBlock(ModBlocks.CRIMSON_PANTRY.get(), "crimson");
 		this.pantryBlock(ModBlocks.WARPED_PANTRY.get(), "warped");
 
+		this.pieBlock(ModBlocks.APPLE_PIE.get());
+		this.pieBlock(ModBlocks.CHOCOLATE_PIE.get());
+		this.pieBlock(ModBlocks.SWEET_BERRY_CHEESECAKE.get());
+
 		this.wildCropBlock(ModBlocks.WILD_BEETROOTS.get(), false);
 		this.wildCropBlock(ModBlocks.WILD_CABBAGES.get(), false);
 		this.wildCropBlock(ModBlocks.WILD_POTATOES.get(), false);
 		this.wildCropBlock(ModBlocks.WILD_TOMATOES.get(), false);
 		this.wildCropBlock(ModBlocks.WILD_CARROTS.get(), true);
 		this.wildCropBlock(ModBlocks.WILD_ONIONS.get(), true);
+		this.doublePlantBlock(ModBlocks.WILD_RICE.get());
 	}
 
 	public ConfiguredModel[] cubeRandomRotation(Block block, String suffix) {
@@ -68,12 +101,12 @@ public class BlockStates extends BlockStateProvider
 		return ConfiguredModel.allYRotations(models().cubeAll(formattedName, resourceBlock(formattedName)), 0, false);
 	}
 
-	public void customDirectionalBlock(Block block, ModelFile model, Property<?>... ignored) {
+	public void customDirectionalBlock(Block block, Function<BlockState, ModelFile> modelFunc, Property<?>... ignored) {
 		getVariantBuilder(block)
 				.forAllStatesExcept(state -> {
 							Direction dir = state.get(BlockStateProperties.FACING);
 							return ConfiguredModel.builder()
-									.modelFile(model)
+									.modelFile(modelFunc.apply(state))
 									.rotationX(dir == Direction.DOWN ? 180 : dir.getAxis().isHorizontal() ? 90 : 0)
 									.rotationY(dir.getAxis().isVertical() ? 0 : ((int) dir.getHorizontalAngle() + DEFAULT_ANGLE_OFFSET) % 360)
 									.build();
@@ -81,10 +114,10 @@ public class BlockStates extends BlockStateProvider
 						ignored);
 	}
 
-	public void customHorizontalBlock(Block block, ModelFile model, Property<?>... ignored) {
+	public void customHorizontalBlock(Block block, Function<BlockState, ModelFile> modelFunc, Property<?>... ignored) {
 		getVariantBuilder(block)
 				.forAllStatesExcept(state -> ConfiguredModel.builder()
-						.modelFile(model)
+						.modelFile(modelFunc.apply(state))
 						.rotationY(((int) state.get(BlockStateProperties.HORIZONTAL_FACING).getHorizontalAngle() + DEFAULT_ANGLE_OFFSET) % 360)
 						.build(), ignored);
 	}
@@ -110,5 +143,25 @@ public class BlockStates extends BlockStateProvider
 					resourceBlock(woodType + "_pantry_front" + suffix),
 					resourceBlock(woodType + "_pantry_top"));
 		});
+	}
+
+	public void doublePlantBlock(Block block) {
+		getVariantBuilder(block)
+				.partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)
+				.modelForState().modelFile(models().cross(blockName(block) + "_bottom", resourceBlock(blockName(block) + "_bottom"))).addModel()
+				.partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER)
+				.modelForState().modelFile(models().cross(blockName(block) + "_top", resourceBlock(blockName(block) + "_top"))).addModel();
+	}
+
+	public void pieBlock(Block block) {
+		getVariantBuilder(block)
+				.forAllStates(state -> {
+							int bites = state.get(PieBlock.BITES);
+							String suffix = bites > 0 ? "_slice" + bites : "";
+							return ConfiguredModel.builder()
+									.modelFile(existingModel(blockName(block) + suffix))
+									.build();
+						}
+				);
 	}
 }
