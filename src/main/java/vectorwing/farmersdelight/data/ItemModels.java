@@ -34,6 +34,12 @@ public class ItemModels extends ItemModelProvider
 		withExistingParent(itemName(ModItems.WILD_RICE.get()), GENERATED).texture("layer0", resourceBlock(itemName(ModItems.WILD_RICE.get()) + "_top"));
 		items.remove(ModItems.WILD_RICE.get());
 
+		withExistingParent(itemName(ModItems.TATAMI.get()), resourceBlock(itemName(ModItems.TATAMI.get()) + "_half"));
+		items.remove(ModItems.TATAMI.get());
+
+		withExistingParent(itemName(ModItems.ORGANIC_COMPOST.get()), resourceBlock(itemName(ModItems.ORGANIC_COMPOST.get()) + "_0"));
+		items.remove(ModItems.ORGANIC_COMPOST.get());
+
 		// Blocks with special item sprites
 		Set<Item> spriteBlockItems = Sets.newHashSet(
 				ModItems.FULL_TATAMI_MAT.get(),
@@ -62,8 +68,8 @@ public class ItemModels extends ItemModelProvider
 		takeAll(items, flatBlockItems.toArray(new Item[0])).forEach(item -> withExistingParent(itemName(item), GENERATED).texture("layer0", resourceBlock(itemName(item))));
 
 		// Blocks whose items look alike
-		//takeAll(items, i -> i instanceof BlockItem).forEach(item -> withExistingParent(itemName(item), resourceBlock(itemName(item))));
-		takeAll(items, i -> i instanceof BlockItem);
+		takeAll(items, i -> i instanceof BlockItem).forEach(item -> withExistingParent(itemName(item), resourceBlock(itemName(item))));
+		//takeAll(items, i -> i instanceof BlockItem);
 
 		// Handheld items
 		Set<Item> handheldItems = Sets.newHashSet(
