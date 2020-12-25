@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,waterlogged=false": {
+      "model": "farmersdelight:block/cutting_board"
+    },
+    "facing=south,waterlogged=false": {
+      "model": "farmersdelight:block/cutting_board",
+      "y": 180
+    },
+    "facing=west,waterlogged=false": {
+      "model": "farmersdelight:block/cutting_board",
+      "y": 270
+    },
+    "facing=east,waterlogged=false": {
+      "model": "farmersdelight:block/cutting_board",
+      "y": 90
+    },
+    "facing=north,waterlogged=true": {
+      "model": "farmersdelight:block/cutting_board"
+    },
+    "facing=south,waterlogged=true": {
+      "model": "farmersdelight:block/cutting_board",
+      "y": 180
+    },
+    "facing=west,waterlogged=true": {
+      "model": "farmersdelight:block/cutting_board",
+      "y": 270
+    },
+    "facing=east,waterlogged=true": {
+      "model": "farmersdelight:block/cutting_board",
+      "y": 90
+    }
+  }
+}
