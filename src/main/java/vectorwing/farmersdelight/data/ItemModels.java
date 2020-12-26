@@ -7,7 +7,6 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.registry.ModItems;
@@ -31,13 +30,13 @@ public class ItemModels extends ItemModelProvider
 				.collect(Collectors.toSet());
 
 		// Specific cases
-		withExistingParent(itemName(ModItems.WILD_RICE.get()), GENERATED).texture("layer0", resourceBlock(itemName(ModItems.WILD_RICE.get()) + "_top"));
+		itemGeneratedModel(ModItems.WILD_RICE.get(), resourceBlock(itemName(ModItems.WILD_RICE.get()) + "_top"));
 		items.remove(ModItems.WILD_RICE.get());
 
-		withExistingParent(itemName(ModItems.TATAMI.get()), resourceBlock(itemName(ModItems.TATAMI.get()) + "_half"));
+		blockBasedModel(ModItems.TATAMI.get(), "_half");
 		items.remove(ModItems.TATAMI.get());
 
-		withExistingParent(itemName(ModItems.ORGANIC_COMPOST.get()), resourceBlock(itemName(ModItems.ORGANIC_COMPOST.get()) + "_0"));
+		blockBasedModel(ModItems.ORGANIC_COMPOST.get(), "_0");
 		items.remove(ModItems.ORGANIC_COMPOST.get());
 
 		// Blocks with special item sprites
@@ -65,11 +64,10 @@ public class ItemModels extends ItemModelProvider
 				ModItems.WILD_POTATOES.get(),
 				ModItems.WILD_TOMATOES.get()
 		);
-		takeAll(items, flatBlockItems.toArray(new Item[0])).forEach(item -> withExistingParent(itemName(item), GENERATED).texture("layer0", resourceBlock(itemName(item))));
+		takeAll(items, flatBlockItems.toArray(new Item[0])).forEach(item -> itemGeneratedModel(item, resourceBlock(itemName(item))));
 
 		// Blocks whose items look alike
-		takeAll(items, i -> i instanceof BlockItem).forEach(item -> withExistingParent(itemName(item), resourceBlock(itemName(item))));
-		//takeAll(items, i -> i instanceof BlockItem);
+		takeAll(items, i -> i instanceof BlockItem).forEach(item -> blockBasedModel(item, ""));
 
 		// Handheld items
 		Set<Item> handheldItems = Sets.newHashSet(
@@ -80,10 +78,22 @@ public class ItemModels extends ItemModelProvider
 				ModItems.GOLDEN_KNIFE.get(),
 				ModItems.NETHERITE_KNIFE.get()
 		);
-		takeAll(items, handheldItems.toArray(new Item[0])).forEach(item -> withExistingParent(itemName(item), HANDHELD).texture("layer0", resourceItem(itemName(item))));
+		takeAll(items, handheldItems.toArray(new Item[0])).forEach(item -> itemHandheldModel(item, resourceItem(itemName(item))));
 
 		// Generated items
-		items.forEach(item -> withExistingParent(itemName(item), GENERATED).texture("layer0", resourceItem(itemName(item))));
+		items.forEach(item -> itemGeneratedModel(item, resourceItem(itemName(item))));
+	}
+
+	public void blockBasedModel(Item item, String suffix) {
+		withExistingParent(itemName(item), resourceBlock(itemName(item) + suffix));
+	}
+
+	public void itemHandheldModel(Item item, ResourceLocation texture) {
+		withExistingParent(itemName(item), HANDHELD).texture("layer0", texture);
+	}
+
+	public void itemGeneratedModel(Item item, ResourceLocation texture) {
+		withExistingParent(itemName(item), GENERATED).texture("layer0", texture);
 	}
 
 	private String itemName(Item item) {
