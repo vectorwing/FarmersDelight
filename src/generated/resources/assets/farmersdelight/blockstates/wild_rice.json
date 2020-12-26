@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=upper": {
+      "model": "farmersdelight:block/wild_rice_top"
+    },
+    "half=lower": {
+      "model": "farmersdelight:block/wild_rice_bottom"
+    }
+  }
+}

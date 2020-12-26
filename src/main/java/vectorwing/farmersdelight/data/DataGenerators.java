@@ -22,5 +22,10 @@ public class DataGenerators
 			generator.addProvider(new Recipes(generator));
 			generator.addProvider(new Advancements(generator));
 		}
+		if (event.includeClient()) {
+			BlockStates blockStates = new BlockStates(generator, helper);
+			generator.addProvider(blockStates);
+			generator.addProvider(new ItemModels(generator, blockStates.models().existingFileHelper));
+		}
 	}
 }

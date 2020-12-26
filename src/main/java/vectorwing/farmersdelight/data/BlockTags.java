@@ -18,9 +18,9 @@ public class BlockTags extends BlockTagsProvider
 
 	@Override
 	protected void registerTags() {
+		this.registerModTags();
 		this.registerMinecraftTags();
 		this.registerForgeTags();
-		this.registerModTags();
 	}
 
 	protected void registerMinecraftTags() {

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "farmersdelight:block/brown_mushroom_colony_stage2"
+  }
+}

@@ -20,6 +20,7 @@ public class ItemTags extends ItemTagsProvider
 
 	@Override
 	protected void registerTags() {
+		copy(ModTags.WILD_CROPS, ModTags.WILD_CROPS_ITEM);
 		copy(BlockTags.CARPETS, net.minecraft.tags.ItemTags.CARPETS);
 		copy(BlockTags.SMALL_FLOWERS, net.minecraft.tags.ItemTags.SMALL_FLOWERS);
 
