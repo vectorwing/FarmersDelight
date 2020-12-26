@@ -18,7 +18,6 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.blocks.*;
 import vectorwing.farmersdelight.registry.ModBlocks;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
@@ -74,9 +73,9 @@ public class BlockStates extends BlockStateProvider
 		this.stageBlock(ModBlocks.BROWN_MUSHROOM_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
 		this.stageBlock(ModBlocks.RED_MUSHROOM_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
 		this.stageBlock(ModBlocks.RICE_UPPER_CROP.get(), RiceUpperCropBlock.RICE_AGE);
-		this.customStageBlock(ModBlocks.CABBAGE_CROP.get(), CabbagesBlock.AGE, Arrays.asList(0, 1, 2, 3, 4, 5, 5, 6));
-		this.customStageBlock(ModBlocks.TOMATO_CROP.get(), TomatoesBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 3, 4));
-		this.customStageBlock(ModBlocks.ONION_CROP.get(), OnionsBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 2, 3));
+		this.customStageBlock(ModBlocks.CABBAGE_CROP.get(), "crop_cross", "cross", CabbagesBlock.AGE, Arrays.asList(0, 1, 2, 3, 4, 5, 5, 6));
+		this.customStageBlock(ModBlocks.TOMATO_CROP.get(), "crop_cross", "cross", TomatoesBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 3, 4));
+		this.customStageBlock(ModBlocks.ONION_CROP.get(), "", "", OnionsBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 2, 3));
 
 		this.crateBlock(ModBlocks.CABBAGE_CRATE.get(), "cabbage");
 		this.crateBlock(ModBlocks.TOMATO_CRATE.get(), "tomato");
@@ -140,14 +139,18 @@ public class BlockStates extends BlockStateProvider
 	}
 
 	// I am not proud of this method... But hey, it's runData. Only I shall have to deal with it.
-	public void customStageBlock(Block block, IntegerProperty ageProperty, List<Integer> suffixes, Property<?>... ignored) {
+	public void customStageBlock(Block block, String parent, String textureKey, IntegerProperty ageProperty, List<Integer> suffixes, Property<?>... ignored) {
 		getVariantBuilder(block)
 				.forAllStatesExcept(state -> {
 					int ageSuffix = state.get(ageProperty);
 					String stageName = blockName(block) + "_stage";
 					stageName += suffixes.isEmpty() ? ageSuffix : suffixes.get(Math.min(suffixes.size(), ageSuffix));
+					if (parent.isEmpty()) {
+						return ConfiguredModel.builder()
+								.modelFile(models().cross(stageName, resourceBlock(stageName))).build();
+					}
 					return ConfiguredModel.builder()
-							.modelFile(models().cross(stageName, resourceBlock(stageName))).build();
+							.modelFile(models().singleTexture(stageName, resourceBlock(parent), textureKey, resourceBlock(stageName))).build();
 				}, ignored);
 	}
 
