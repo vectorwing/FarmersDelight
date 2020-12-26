@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DoublePlantBlock;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.Property;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
@@ -14,12 +15,12 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.blocks.BasketBlock;
-import vectorwing.farmersdelight.blocks.PantryBlock;
-import vectorwing.farmersdelight.blocks.PieBlock;
-import vectorwing.farmersdelight.blocks.StoveBlock;
+import vectorwing.farmersdelight.blocks.*;
 import vectorwing.farmersdelight.registry.ModBlocks;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 
 public class BlockStates extends BlockStateProvider
@@ -70,6 +71,13 @@ public class BlockStates extends BlockStateProvider
 					resourceBlock(name + "_top" + suffix));
 		});
 
+		this.stageBlock(ModBlocks.BROWN_MUSHROOM_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
+		this.stageBlock(ModBlocks.RED_MUSHROOM_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
+		this.stageBlock(ModBlocks.RICE_UPPER_CROP.get(), RiceUpperCropBlock.RICE_AGE);
+		this.customStageBlock(ModBlocks.CABBAGE_CROP.get(), CabbagesBlock.AGE, Arrays.asList(0, 1, 2, 3, 4, 5, 5, 6));
+		this.customStageBlock(ModBlocks.TOMATO_CROP.get(), TomatoesBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 3, 4));
+		this.customStageBlock(ModBlocks.ONION_CROP.get(), OnionsBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 2, 3));
+
 		this.crateBlock(ModBlocks.CABBAGE_CRATE.get(), "cabbage");
 		this.crateBlock(ModBlocks.TOMATO_CRATE.get(), "tomato");
 		this.crateBlock(ModBlocks.ONION_CRATE.get(), "onion");
@@ -104,14 +112,13 @@ public class BlockStates extends BlockStateProvider
 	public void customDirectionalBlock(Block block, Function<BlockState, ModelFile> modelFunc, Property<?>... ignored) {
 		getVariantBuilder(block)
 				.forAllStatesExcept(state -> {
-							Direction dir = state.get(BlockStateProperties.FACING);
-							return ConfiguredModel.builder()
-									.modelFile(modelFunc.apply(state))
-									.rotationX(dir == Direction.DOWN ? 180 : dir.getAxis().isHorizontal() ? 90 : 0)
-									.rotationY(dir.getAxis().isVertical() ? 0 : ((int) dir.getHorizontalAngle() + DEFAULT_ANGLE_OFFSET) % 360)
-									.build();
-						},
-						ignored);
+					Direction dir = state.get(BlockStateProperties.FACING);
+					return ConfiguredModel.builder()
+							.modelFile(modelFunc.apply(state))
+							.rotationX(dir == Direction.DOWN ? 180 : dir.getAxis().isHorizontal() ? 90 : 0)
+							.rotationY(dir.getAxis().isVertical() ? 0 : ((int) dir.getHorizontalAngle() + DEFAULT_ANGLE_OFFSET) % 360)
+							.build();
+				}, ignored);
 	}
 
 	public void customHorizontalBlock(Block block, Function<BlockState, ModelFile> modelFunc, Property<?>... ignored) {
@@ -120,6 +127,28 @@ public class BlockStates extends BlockStateProvider
 						.modelFile(modelFunc.apply(state))
 						.rotationY(((int) state.get(BlockStateProperties.HORIZONTAL_FACING).getHorizontalAngle() + DEFAULT_ANGLE_OFFSET) % 360)
 						.build(), ignored);
+	}
+
+	public void stageBlock(Block block, IntegerProperty ageProperty, Property<?>... ignored) {
+		getVariantBuilder(block)
+				.forAllStatesExcept(state -> {
+					int ageSuffix = state.get(ageProperty);
+					String stageName = blockName(block) + "_stage" + ageSuffix;
+					return ConfiguredModel.builder()
+							.modelFile(models().cross(stageName, resourceBlock(stageName))).build();
+				}, ignored);
+	}
+
+	// I am not proud of this method... But hey, it's runData. Only I shall have to deal with it.
+	public void customStageBlock(Block block, IntegerProperty ageProperty, List<Integer> suffixes, Property<?>... ignored) {
+		getVariantBuilder(block)
+				.forAllStatesExcept(state -> {
+					int ageSuffix = state.get(ageProperty);
+					String stageName = blockName(block) + "_stage";
+					stageName += suffixes.isEmpty() ? ageSuffix : suffixes.get(Math.min(suffixes.size(), ageSuffix));
+					return ConfiguredModel.builder()
+							.modelFile(models().cross(stageName, resourceBlock(stageName))).build();
+				}, ignored);
 	}
 
 	public void wildCropBlock(Block block, boolean isBushCrop) {

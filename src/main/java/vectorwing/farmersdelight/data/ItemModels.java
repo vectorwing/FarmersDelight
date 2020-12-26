@@ -15,6 +15,9 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+/**
+ * Credits to Vazkii and team for some references on mass-reading blocks to datagen!
+ */
 public class ItemModels extends ItemModelProvider
 {
 	public static final String GENERATED = "item/generated";
