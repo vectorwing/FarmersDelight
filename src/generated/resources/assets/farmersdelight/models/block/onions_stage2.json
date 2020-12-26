@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "minecraft:block/crop",
   "textures": {
-    "cross": "farmersdelight:block/onions_stage2"
+    "crop": "farmersdelight:block/onions_stage2"
   }
 }
