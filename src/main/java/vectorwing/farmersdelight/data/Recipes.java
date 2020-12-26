@@ -445,6 +445,25 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.GOLDEN_CARROT)
 				.addCriterion("has_golden_carrot", InventoryChangeTrigger.Instance.forItems(Items.GOLDEN_CARROT))
 				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.MELON_POPSICLE.get(), 1)
+				.patternLine(" mm")
+				.patternLine("imm")
+				.patternLine("-i ")
+				.key('m', Items.MELON_SLICE)
+				.key('i', Items.ICE)
+				.key('-', Items.STICK)
+				.addCriterion("has_melon", InventoryChangeTrigger.Instance.forItems(Items.MELON_SLICE))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.FRUIT_SALAD.get(), 1)
+				.addIngredient(Items.APPLE)
+				.addIngredient(Items.MELON_SLICE)
+				.addIngredient(Items.MELON_SLICE)
+				.addIngredient(Items.SWEET_BERRIES)
+				.addIngredient(Items.SWEET_BERRIES)
+				.addIngredient(ModItems.PUMPKIN_SLICE.get())
+				.addIngredient(Items.BOWL)
+				.addCriterion("has_fruits", InventoryChangeTrigger.Instance.forItems(Items.MELON_SLICE, Items.SWEET_BERRIES, Items.APPLE, ModItems.PUMPKIN_SLICE.get()))
+				.build(consumer);
 	}
 
 	private void recipesFoodBlocks(Consumer<IFinishedRecipe> consumer) {
