@@ -34,6 +34,10 @@ public class ModBlocks
 			() -> new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> RICE_BALE = BLOCKS.register("rice_bale",
 			() -> new RiceBaleBlock(Block.Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.HOE)));
+	public static final RegistryObject<Block> RICE_BAG = BLOCKS.register("rice_bag",
+			() -> new Block(Block.Properties.from(Blocks.WHITE_WOOL).harvestTool(ToolType.HOE)));
+	public static final RegistryObject<Block> STRAW_BALE = BLOCKS.register("straw_bale",
+			() -> new HayBlock(Block.Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.HOE)));
 	public static final RegistryObject<Block> ROPE = BLOCKS.register("rope", RopeBlock::new);
 	public static final RegistryObject<Block> SAFETY_NET = BLOCKS.register("safety_net", SafetyNetBlock::new);
 	public static final RegistryObject<Block> OAK_PANTRY = BLOCKS.register("oak_pantry",

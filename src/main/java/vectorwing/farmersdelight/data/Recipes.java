@@ -254,6 +254,20 @@ public class Recipes extends RecipeProvider
 				.key('#', ModItems.RICE_PANICLE.get())
 				.addCriterion("rice_panicle", InventoryChangeTrigger.Instance.forItems(ModItems.RICE_PANICLE.get()))
 				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.RICE_BAG.get(), 1)
+				.patternLine("###")
+				.patternLine("###")
+				.patternLine("###")
+				.key('#', ModItems.RICE.get())
+				.addCriterion("rice", InventoryChangeTrigger.Instance.forItems(ModItems.RICE.get()))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.STRAW_BALE.get(), 1)
+				.patternLine("###")
+				.patternLine("###")
+				.patternLine("###")
+				.key('#', ModItems.STRAW.get())
+				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
+				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ORGANIC_COMPOST.get(), 1)
 				.addIngredient(Items.DIRT)
 				.addIngredient(Items.ROTTEN_FLESH)
@@ -367,6 +381,14 @@ public class Recipes extends RecipeProvider
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RICE_PANICLE.get(), 9)
 				.addIngredient(ModItems.RICE_BALE.get())
 				.addCriterion("rice_bale", InventoryChangeTrigger.Instance.forItems(ModItems.RICE_BALE.get()))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RICE.get(), 9)
+				.addIngredient(ModItems.RICE_BAG.get())
+				.addCriterion("rice_bag", InventoryChangeTrigger.Instance.forItems(ModItems.RICE_BAG.get()))
+				.build(consumer, FarmersDelight.MODID + ":rice_from_bag");
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.STRAW.get(), 9)
+				.addIngredient(ModItems.STRAW_BALE.get())
+				.addCriterion("straw_bale", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW_BALE.get()))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RICE.get())
 				.addIngredient(ModItems.RICE_PANICLE.get())
