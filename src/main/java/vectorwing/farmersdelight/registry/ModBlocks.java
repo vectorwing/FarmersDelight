@@ -108,6 +108,8 @@ public class ModBlocks
 			() -> new RiceUpperCropBlock(Block.Properties.from(Blocks.WHEAT)));
 
 	// FEASTS
+	public static final RegistryObject<Block> ROAST_CHICKEN_BLOCK = BLOCKS.register("roast_chicken",
+			() -> new FeastBlock(Block.Properties.from(Blocks.WHITE_WOOL), ModItems.ROAST_CHICKEN, Items.BOWL.delegate));
 	public static final RegistryObject<Block> STUFFED_PUMPKIN_BLOCK = BLOCKS.register("stuffed_pumpkin",
 			() -> new FeastBlock(Block.Properties.from(Blocks.PUMPKIN), ModItems.STUFFED_PUMPKIN, null));
 
