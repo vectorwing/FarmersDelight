@@ -57,7 +57,7 @@ public class OrganicCompostBlock extends Block
 			if (neighborState.getFluidState().isTagged(FluidTags.WATER)) {
 				hasWater = true;
 			}
-			int light = worldIn.getLightSubtracted(pos.up(), 0);
+			int light = worldIn.getLightSubtracted(neighborPos.up(), 0);
 			if (light > maxLight) {
 				maxLight = light;
 			}
