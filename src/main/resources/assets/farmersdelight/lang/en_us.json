@@ -93,7 +93,6 @@
   "item.farmersdelight.hamburger": "Hamburger",
   "item.farmersdelight.dumplings": "Dumplings",
   "item.farmersdelight.stuffed_potato": "Stuffed Potato",
-  "item.farmersdelight.stuffed_pumpkin": "Stuffed Pumpkin",
 
   "item.farmersdelight.cooked_rice": "Cooked Rice",
   "item.farmersdelight.mixed_salad": "Mixed Salad",
@@ -115,6 +114,9 @@
   "item.farmersdelight.ratatouille": "Ratatouille",
   "item.farmersdelight.squid_ink_pasta": "Squid Ink Pasta",
   "item.farmersdelight.grilled_salmon": "Grilled Salmon",
+
+  "item.farmersdelight.stuffed_pumpkin_block": "Stuffed Pumpkin",
+  "item.farmersdelight.stuffed_pumpkin": "Bowl of Stuffed Pumpkin",
 
   "item.farmersdelight.dog_food": "Dog Food",
   "item.farmersdelight.horse_feed": "Horse Feed",

@@ -62,6 +62,10 @@ public class PieBlock extends Block
 		return new EffectInstance(Effects.SPEED, 1800, 0);
 	}
 
+	public int getMaxBites() {
+		return 4;
+	}
+
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return SHAPES[state.get(BITES)];
@@ -155,9 +159,5 @@ public class PieBlock extends Block
 	@Override
 	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
 		return false;
-	}
-
-	public int getMaxBites() {
-		return 4;
 	}
 }

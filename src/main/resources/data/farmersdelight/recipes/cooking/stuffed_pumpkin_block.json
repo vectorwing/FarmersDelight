@@ -2,16 +2,16 @@
   "type": "farmersdelight:cooking",
   "ingredients": [
     {
-      "tag": "forge:salad_ingredients"
+      "item": "farmersdelight:cabbage"
     },
     {
       "tag": "forge:vegetables"
     },
     {
-      "tag": "forge:crops/tomato"
+      "item": "farmersdelight:tomato_sauce"
     },
     {
-      "item": "minecraft:potato"
+      "item": "minecraft:baked_potato"
     },
     {
       "item": "minecraft:brown_mushroom"
@@ -21,7 +21,7 @@
     }
   ],
   "result": {
-    "item": "farmersdelight:stuffed_pumpkin"
+    "item": "farmersdelight:stuffed_pumpkin_block"
   },
   "container": {
     "item": "minecraft:pumpkin"

@@ -110,6 +110,8 @@ public class BlockStates extends BlockStateProvider
 		this.pieBlock(ModBlocks.CHOCOLATE_PIE.get());
 		this.pieBlock(ModBlocks.SWEET_BERRY_CHEESECAKE.get());
 
+		this.feastBlock((FeastBlock) ModBlocks.STUFFED_PUMPKIN_BLOCK.get());
+
 		this.wildCropBlock(ModBlocks.WILD_BEETROOTS.get(), false);
 		this.wildCropBlock(ModBlocks.WILD_CABBAGES.get(), false);
 		this.wildCropBlock(ModBlocks.WILD_POTATOES.get(), false);
@@ -191,6 +193,25 @@ public class BlockStates extends BlockStateProvider
 					resourceBlock(woodType + "_pantry_front" + suffix),
 					resourceBlock(woodType + "_pantry_top"));
 		});
+	}
+
+	public void feastBlock(FeastBlock block) {
+		getVariantBuilder(block)
+				.forAllStates(state -> {
+					int servings = state.get(FeastBlock.SERVINGS);
+					boolean hasLeftover = !block.getLeftoverItem().isEmpty();
+
+					String suffix = "_stage" + (block.getMaxServings() - servings);
+
+					if (servings == 0) {
+						suffix = hasLeftover ? "_leftover" : "_stage3";
+					}
+
+					return ConfiguredModel.builder()
+							.modelFile(existingModel(blockName(block) + suffix))
+							.rotationY(((int) state.get(FeastBlock.FACING).getHorizontalAngle() + DEFAULT_ANGLE_OFFSET) % 360)
+							.build();
+				});
 	}
 
 	public void doublePlantBlock(Block block) {
