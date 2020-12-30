@@ -23,6 +23,8 @@
   "block.farmersdelight.tomato_crate": "Caixote de tomates",
   "block.farmersdelight.onion_crate": "Caixote de cebolas",
   "block.farmersdelight.rice_bale": "Fardo de arroz",
+  "block.farmersdelight.rice_bag": "Saco de arroz",
+  "block.farmersdelight.straw_bale": "Fardo de palha",
 
   "block.farmersdelight.brown_mushroom_colony": "Colônia de cogumelos marrons",
   "block.farmersdelight.red_mushroom_colony": "Colônia de cogumelos vermelhos",
@@ -113,9 +115,9 @@
   "item.farmersdelight.squid_ink_pasta": "Macarrão de tinta de lula",
   "item.farmersdelight.grilled_salmon": "Salmão grelhado",
 
-  "item.farmersdelight.roast_chicken_block": "Frango ao forno",
+  "block.farmersdelight.roast_chicken": "Frango ao forno",
   "item.farmersdelight.roast_chicken": "Porção de frango ao forno",
-  "item.farmersdelight.stuffed_pumpkin_block": "Abóbora recheada",
+  "block.farmersdelight.stuffed_pumpkin": "Abóbora recheada",
   "item.farmersdelight.stuffed_pumpkin": "Tigela de abóbora recheada",
 
   "item.farmersdelight.dog_food": "Ração para cães",
