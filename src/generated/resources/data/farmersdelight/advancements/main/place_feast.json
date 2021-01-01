@@ -1,0 +1,38 @@
+{
+  "parent": "farmersdelight:main/eat_nourishing_food",
+  "display": {
+    "icon": {
+      "item": "farmersdelight:roast_chicken_block"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.place_feast"
+    },
+    "description": {
+      "translate": "farmersdelight.advancement.place_feast.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "roast_chicken": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "farmersdelight:roast_chicken"
+      }
+    },
+    "stuffed_pumpkin": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "farmersdelight:stuffed_pumpkin"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "roast_chicken",
+      "stuffed_pumpkin"
+    ]
+  ]
+}
