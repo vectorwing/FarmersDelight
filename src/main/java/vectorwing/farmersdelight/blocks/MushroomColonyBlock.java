@@ -4,17 +4,24 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BushBlock;
 import net.minecraft.block.IGrowable;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.Tags;
 import vectorwing.farmersdelight.registry.ModBlocks;
 
 import java.util.Random;
@@ -50,8 +57,18 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 	}
 
 	@Override
-	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return state.getBlock() == ModBlocks.RICH_SOIL.get();
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		int age = state.get(COLONY_AGE);
+		ItemStack heldItem = player.getHeldItem(handIn);
+
+		if (age > 0 && heldItem.getItem().isIn(Tags.Items.SHEARS)) {
+			spawnAsEntity(worldIn, pos, this.getItem(worldIn, pos, state));
+			worldIn.playSound(null, pos, SoundEvents.ENTITY_MOOSHROOM_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
+			worldIn.setBlockState(pos, state.with(COLONY_AGE, age - 1), 2);
+			return ActionResultType.SUCCESS;
+		}
+
+		return ActionResultType.PASS;
 	}
 
 	@Override
@@ -72,7 +89,8 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
 		super.tick(state, worldIn, pos, rand);
 		int age = state.get(COLONY_AGE);
-		if (age < this.getMaxAge() && worldIn.getLightSubtracted(pos.up(), 0) <= GROWING_LIGHT_LEVEL && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(5) == 0)) {
+		BlockState groundState = worldIn.getBlockState(pos.down());
+		if (age < this.getMaxAge() && groundState.getBlock() == ModBlocks.RICH_SOIL.get() && worldIn.getLightSubtracted(pos.up(), 0) <= GROWING_LIGHT_LEVEL && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(5) == 0)) {
 			worldIn.setBlockState(pos, state.with(COLONY_AGE, age + 1), 2);
 			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 		}
