@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "name": "pool1",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "farmersdelight:stuffed_pumpkin_block"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "farmersdelight:stuffed_pumpkin_block",
+          "properties": {
+            "servings": "4"
+          }
+        }
+      ]
+    }
+  ]
+}

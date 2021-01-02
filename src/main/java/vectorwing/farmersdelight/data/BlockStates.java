@@ -200,12 +200,11 @@ public class BlockStates extends BlockStateProvider
 		getVariantBuilder(block)
 				.forAllStates(state -> {
 					int servings = state.get(FeastBlock.SERVINGS);
-					boolean hasLeftover = !block.getLeftoverItem().isEmpty();
 
 					String suffix = "_stage" + (block.getMaxServings() - servings);
 
 					if (servings == 0) {
-						suffix = hasLeftover ? "_leftover" : "_stage3";
+						suffix = block.hasLeftovers ? "_leftover" : "_stage3";
 					}
 
 					return ConfiguredModel.builder()

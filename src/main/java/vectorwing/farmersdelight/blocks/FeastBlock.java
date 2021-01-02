@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,7 +22,6 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")
@@ -32,7 +30,7 @@ public class FeastBlock extends Block
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final IntegerProperty SERVINGS = IntegerProperty.create("servings", 0, 4);
 	public final Supplier<Item> servingItem;
-	public final Supplier<Item> leftoverItem;
+	public final boolean hasLeftovers;
 
 	protected static final VoxelShape[] SHAPES = new VoxelShape[]{
 			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 1.0D, 14.0D),
@@ -45,23 +43,20 @@ public class FeastBlock extends Block
 	/**
 	 * This block provides up to 4 servings of food to players who interact with it.
 	 * If a leftover item is specified, the block lingers at 0 servings, and is destroyed on right-click.
-	 * @param properties Block properties.
-	 * @param servingItem The meal to be served.
-	 * @param leftoverItem An item to be given back when out of servings, such as a dirty dish.
+	 *
+	 * @param properties   Block properties.
+	 * @param servingItem  The meal to be served.
+	 * @param hasLeftovers Whether the block remains when out of servings. If false, the block vanishes once it runs out.
 	 */
-	public FeastBlock(Properties properties, Supplier<Item> servingItem, @Nullable Supplier<Item> leftoverItem) {
+	public FeastBlock(Properties properties, Supplier<Item> servingItem, boolean hasLeftovers) {
 		super(properties);
 		this.servingItem = servingItem;
-		this.leftoverItem = leftoverItem;
+		this.hasLeftovers = hasLeftovers;
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(SERVINGS, 4));
 	}
 
 	public ItemStack getServingItem() {
 		return new ItemStack(this.servingItem.get());
-	}
-
-	public ItemStack getLeftoverItem() {
-		return leftoverItem == null ? ItemStack.EMPTY : new ItemStack(this.leftoverItem.get());
 	}
 
 	@Override
@@ -84,9 +79,8 @@ public class FeastBlock extends Block
 		int servings = state.get(SERVINGS);
 
 		if (servings == 0) {
-			InventoryHelper.spawnItemStack((World) worldIn, pos.getX(), pos.getY(), pos.getZ(), this.getLeftoverItem());
 			worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_BREAK, SoundCategory.PLAYERS, 0.8F, 0.8F);
-			worldIn.removeBlock(pos, false);
+			worldIn.destroyBlock(pos, true);
 			return ActionResultType.SUCCESS;
 		}
 
@@ -101,7 +95,7 @@ public class FeastBlock extends Block
 			if (!player.inventory.addItemStackToInventory(serving)) {
 				player.dropItem(serving, false);
 			}
-			if (worldIn.getBlockState(pos).get(SERVINGS) == 0 && getLeftoverItem().isEmpty()) {
+			if (worldIn.getBlockState(pos).get(SERVINGS) == 0 && !this.hasLeftovers) {
 				worldIn.removeBlock(pos, false);
 			}
 			worldIn.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.BLOCKS, 1.0F, 1.0F);

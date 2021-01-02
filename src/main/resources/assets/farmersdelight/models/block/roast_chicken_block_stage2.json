@@ -2,38 +2,24 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
+		"particle": "farmersdelight:block/roast_chicken_eaten",
 		"body": "farmersdelight:block/roast_chicken_eaten",
+		"gibs": "farmersdelight:block/roast_chicken_gibs",
 		"tray_bottom": "farmersdelight:block/tray_bottom",
-		"tray_top": "farmersdelight:block/tray_top_veggies",
-		"gibs": "farmersdelight:block/roast_chicken_gibs"
+		"tray_top": "farmersdelight:block/tray_top_veggies"
 	},
 	"elements": [
 		{
 			"name": "body",
-			"from": [4, 2, 6],
+			"from": [4, 2, 8],
 			"to": [12, 9, 12],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 5, 8]},
 			"faces": {
 				"north": {"uv": [8, 1, 16, 8], "texture": "#body"},
-				"east": {"uv": [0, 9, 6, 16], "texture": "#body"},
+				"east": {"uv": [0, 9, 4, 16], "texture": "#body"},
 				"south": {"uv": [8, 9, 16, 16], "texture": "#body"},
-				"west": {"uv": [6, 9, 0, 16], "texture": "#body"},
-				"up": {"uv": [0, 2, 8, 8], "texture": "#body"},
-				"down": {"uv": [0, 0, 0, 0], "texture": "#body", "cullface": "down"}
-			}
-		},
-		{
-			"name": "right_wing",
-			"from": [12, 2, 3],
-			"to": [14, 5, 7],
-			"rotation": {"angle": 0, "axis": "y", "origin": [13, 3, 5]},
-			"faces": {
-				"north": {"uv": [12, 13, 14, 16], "texture": "#gibs"},
-				"east": {"uv": [8, 13, 12, 16], "texture": "#gibs"},
-				"south": {"uv": [12, 13, 14, 16], "texture": "#gibs"},
-				"west": {"uv": [12, 13, 8, 16], "texture": "#gibs"},
-				"up": {"uv": [12, 9, 14, 13], "texture": "#gibs"},
-				"down": {"uv": [14, 9, 16, 13], "texture": "#gibs"}
+				"west": {"uv": [4, 9, 0, 16], "texture": "#body"},
+				"up": {"uv": [0, 4, 8, 8], "texture": "#body"}
 			}
 		},
 		{
@@ -65,59 +51,43 @@
 			}
 		},
 		{
-			"name": "rib spine",
+			"name": "ribcage_end",
 			"from": [5, 8, 5],
 			"to": [11, 8, 11],
 			"rotation": {"angle": 0, "axis": "y", "origin": [16, 15, 16]},
 			"faces": {
-				"north": {"uv": [5, 1, 11, 6], "texture": "#gibs"},
-				"east": {"uv": [10, 6, 15, 12], "rotation": 90, "texture": "#gibs"},
-				"south": {"uv": [5, 1, 11, 6], "texture": "#gibs"},
-				"west": {"uv": [1, 6, 6, 12], "rotation": 270, "texture": "#gibs"},
-				"up": {"uv": [1, 1, 7, 7], "texture": "#gibs"},
-				"down": {"uv": [1, 1, 7, 7], "texture": "#gibs"}
+				"up": {"uv": [1, 9, 7, 15], "texture": "#gibs"},
+				"down": {"uv": [1, 9, 7, 15], "rotation": 180, "texture": "#gibs"}
 			}
 		},
 		{
-			"name": "rib spine",
+			"name": "spine",
 			"from": [5, 3, 5],
 			"to": [11, 3, 11],
 			"rotation": {"angle": 0, "axis": "y", "origin": [16, 10, 16]},
 			"faces": {
-				"north": {"uv": [5, 1, 11, 6], "texture": "#gibs"},
-				"east": {"uv": [10, 6, 15, 12], "rotation": 90, "texture": "#gibs"},
-				"south": {"uv": [5, 1, 11, 6], "texture": "#gibs"},
-				"west": {"uv": [1, 6, 6, 12], "rotation": 270, "texture": "#gibs"},
-				"up": {"uv": [1, 9, 7, 15], "texture": "#gibs"},
-				"down": {"uv": [1, 9, 7, 15], "texture": "#gibs"}
+				"up": {"uv": [1, 1, 7, 7], "texture": "#gibs"},
+				"down": {"uv": [1, 1, 7, 7], "rotation": 180, "texture": "#gibs"}
 			}
 		},
 		{
-			"name": "ribcage",
+			"name": "ribcage_left",
 			"from": [5, 3, 5],
 			"to": [5, 8, 11],
 			"rotation": {"angle": 0, "axis": "y", "origin": [16, 15, 16]},
 			"faces": {
-				"north": {"uv": [5, 1, 11, 6], "texture": "#gibs"},
 				"east": {"uv": [15, 2, 9, 7], "texture": "#gibs"},
-				"south": {"uv": [5, 1, 11, 6], "texture": "#gibs"},
-				"west": {"uv": [9, 2, 15, 7], "texture": "#gibs"},
-				"up": {"uv": [5, 6, 11, 12], "texture": "#gibs"},
-				"down": {"uv": [0, 0, 6, 6], "texture": "#gibs"}
+				"west": {"uv": [9, 2, 15, 7], "texture": "#gibs"}
 			}
 		},
 		{
-			"name": "ribcage",
+			"name": "ribcage_right",
 			"from": [11, 3, 5],
 			"to": [11, 8, 11],
 			"rotation": {"angle": 0, "axis": "y", "origin": [22, 15, 16]},
 			"faces": {
-				"north": {"uv": [5, 1, 11, 6], "texture": "#gibs"},
 				"east": {"uv": [15, 2, 9, 7], "texture": "#gibs"},
-				"south": {"uv": [5, 1, 11, 6], "texture": "#gibs"},
-				"west": {"uv": [9, 2, 15, 7], "texture": "#gibs"},
-				"up": {"uv": [5, 6, 11, 12], "texture": "#gibs"},
-				"down": {"uv": [0, 0, 6, 6], "texture": "#gibs"}
+				"west": {"uv": [9, 2, 15, 7], "texture": "#gibs"}
 			}
 		},
 		{
@@ -131,30 +101,30 @@
 				"south": {"uv": [1, 11, 15, 13], "texture": "#tray_bottom"},
 				"west": {"uv": [1, 11, 15, 13], "texture": "#tray_bottom"},
 				"up": {"uv": [1, 1, 15, 15], "texture": "#tray_top"},
-				"down": {"uv": [1, 1, 15, 15], "texture": "#tray_bottom"}
+				"down": {"uv": [1, 1, 15, 15], "texture": "#tray_bottom", "cullface": "down"}
 			}
 		}
 	],
 	"groups": [
 		{
-			"name": "roast_thicken",
+			"name": "roast_chicken",
 			"origin": [8, 8, 8],
 			"children": [
 				{
 					"name": "chicken",
 					"origin": [8, 8, 8],
-					"children": [0, 1, 2, 3,
+					"children": [0, 1, 2,
 						{
 							"name": "bones",
 							"origin": [16, 28, 16],
-							"children": [4, 5, 6, 7]
+							"children": [3, 4, 5, 6]
 						}
 					]
 				},
 				{
 					"name": "plate",
 					"origin": [8, 8, 8],
-					"children": [8]
+					"children": [7]
 				}
 			]
 		}

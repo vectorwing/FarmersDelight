@@ -568,5 +568,17 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ForgeTags.MILK)
 				.addCriterion("baked_potato", InventoryChangeTrigger.Instance.forItems(Items.BAKED_POTATO))
 				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ROAST_CHICKEN_BLOCK.get())
+				.addIngredient(ForgeTags.CROPS_ONION)
+				.addIngredient(Items.EGG)
+				.addIngredient(Items.BREAD)
+				.addIngredient(Items.CARROT)
+				.addIngredient(Items.COOKED_CHICKEN)
+				.addIngredient(Items.BAKED_POTATO)
+				.addIngredient(Items.CARROT)
+				.addIngredient(Items.BOWL)
+				.addIngredient(Items.BAKED_POTATO)
+				.addCriterion("has_cooked_chicken", InventoryChangeTrigger.Instance.forItems(Items.COOKED_CHICKEN))
+				.build(consumer);
 	}
 }
