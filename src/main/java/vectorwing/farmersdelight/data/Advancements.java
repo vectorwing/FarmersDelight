@@ -123,6 +123,12 @@ public class Advancements extends AdvancementProvider
 					.withCriterion("get_rich_soil", InventoryChangeTrigger.Instance.forItems(ModItems.RICH_SOIL.get()))
 					.register(consumer, getNameId("main/get_rich_soil"));
 
+			Advancement fungusAmongUs = getAdvancement(plantFood, ModItems.RED_MUSHROOM_COLONY.get(), "get_mushroom_colony", FrameType.TASK, true, true, false)
+					.withCriterion("brown_mushroom_colony", InventoryChangeTrigger.Instance.forItems(ModItems.BROWN_MUSHROOM_COLONY.get()))
+					.withCriterion("red_mushroom_colony", InventoryChangeTrigger.Instance.forItems(ModItems.RED_MUSHROOM_COLONY.get()))
+					.withRequirementsStrategy(IRequirementsStrategy.OR)
+					.register(consumer, getNameId("main/get_mushroom_colony"));
+
 			Advancement cantTakeTheHeat = getAdvancement(huntAndGather, ModItems.NETHERITE_KNIFE.get(), "obtain_netherite_knife", FrameType.CHALLENGE, true, true, false)
 					.withCriterion("obtain_netherite_knife", InventoryChangeTrigger.Instance.forItems(ModItems.NETHERITE_KNIFE.get()))
 					.withRewards(AdvancementRewards.Builder.experience(200))

@@ -65,6 +65,9 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 			spawnAsEntity(worldIn, pos, this.getItem(worldIn, pos, state));
 			worldIn.playSound(null, pos, SoundEvents.ENTITY_MOOSHROOM_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			worldIn.setBlockState(pos, state.with(COLONY_AGE, age - 1), 2);
+			if (!worldIn.isRemote) {
+				heldItem.damageItem(1, player, (playerIn) -> playerIn.sendBreakAnimation(handIn));
+			}
 			return ActionResultType.SUCCESS;
 		}
 

@@ -63,6 +63,10 @@ public class CuttingRecipes
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.PUMPKIN), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), ModItems.PUMPKIN_SLICE.get(), 4)
 				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(ModItems.BROWN_MUSHROOM_COLONY.get()), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.BROWN_MUSHROOM, 5)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(ModItems.RED_MUSHROOM_COLONY.get()), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.RED_MUSHROOM, 5)
+				.build(consumer);
 	}
 
 	private static void chopPastries(Consumer<IFinishedRecipe> consumer) {
