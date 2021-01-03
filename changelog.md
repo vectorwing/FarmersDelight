@@ -1,5 +1,41 @@
 # Changelog
 
+## 0.???
+- Added Feasts!
+  - Feasts are very large meals, made to be placed down as a block and shared with friends, or just to decorate a dinner table!
+  - Once placed, use a Bowl against it to take a serving. Feasts contain 4 servings by default. It can be mined back if no servings were taken;
+  - New Feasts:
+    - Roast Chicken
+  - Existing meals turned into Feasts:
+    - Stuffed Pumpkin
+- Added blocks:
+  - Straw Bale 
+  - Bag of Rice
+- Added sweets:
+  - Fruit Salad: gently fulfilling, but grants Regeneration for a few seconds;
+  - Melon Popsicle: when eaten, grants a very short burst of Fire Resistance in a pinch;
+- Updated Knives:
+  - Knives can now slice a Cake on right-click;
+  - Knives can now carve pumpkins like Shears;
+- Updated Mushroom Colonies:
+  - They can now be sheared whole at their highest age (5 caps), and planted back in any surface a Mushroom can be planted in;
+  - They only grow more caps if planted in Rich Soil under sufficient darkness;
+  - Shears can now clip colonies one cap at a time, allowing for decorative uses of middle stages;
+- Updated Organic Compost and Rich Soil:
+  - Brand new improved textures for both blocks!
+    - Compost should now be more distinguishable from Rich Soil at later stages;
+    - Rich Soil has a new look, more earthy and less slimy.
+  - Rich Soil now checks the tag `farmersdelight:unaffected_by_rich_soil` for blocks that shouldn't receive growth boosts;
+  - Fix Rich Soil being incompatible with bamboo and saplings;
+  - Both blocks can now sustain Mushrooms at any light level;
+  - Organic Compost now checks every adjacent block for activation, encouraging clumping;
+- Update Wild Crops:
+  - They can once again be bone-mealed to obtain more wild crops;
+  - When bone meal is used, they proliferate in a small area, up to 10 units, similar to Mushrooms;
+  - Wild Rice duplicates as an item drop, similar to Tall Flowers;
+- Minor asset improvements;
+- Minor data improvements.
+
 ## 0.2.4b
 - Fix: Rice and Tomato Seeds had inverted tags;
 - Fix: Game crash when using a Bucket on the bottom half of a rice crop;
