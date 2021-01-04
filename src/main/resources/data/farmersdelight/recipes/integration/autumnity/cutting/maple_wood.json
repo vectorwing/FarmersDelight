@@ -2,13 +2,13 @@
   "conditions": [
     {
       "type": "forge:mod_loaded",
-      "modid": "upgrade_aquatic"
+      "modid": "autumnity"
     }
   ],
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "item": "upgrade_aquatic:driftwood"
+      "item": "autumnity:maple_wood"
     }
   ],
   "tool": {
@@ -16,7 +16,7 @@
   },
   "result": [
     {
-      "item": "upgrade_aquatic:stripped_driftwood"
+      "item": "autumnity:stripped_maple_wood"
     },
     {
       "item": "farmersdelight:tree_bark"

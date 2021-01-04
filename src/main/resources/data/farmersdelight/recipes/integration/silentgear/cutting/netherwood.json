@@ -2,13 +2,13 @@
   "conditions": [
     {
       "type": "forge:mod_loaded",
-      "modid": "upgrade_aquatic"
+      "modid": "silentgear"
     }
   ],
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "item": "upgrade_aquatic:driftwood"
+      "item": "silentgear:netherwood_log"
     }
   ],
   "tool": {
@@ -16,7 +16,7 @@
   },
   "result": [
     {
-      "item": "upgrade_aquatic:stripped_driftwood"
+      "item": "silentgear:stripped_netherwood_log"
     },
     {
       "item": "farmersdelight:tree_bark"
