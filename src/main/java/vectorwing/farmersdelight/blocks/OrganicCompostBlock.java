@@ -7,6 +7,7 @@ import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
@@ -57,7 +58,7 @@ public class OrganicCompostBlock extends Block
 			if (neighborState.getFluidState().isTagged(FluidTags.WATER)) {
 				hasWater = true;
 			}
-			int light = worldIn.getLightSubtracted(pos.up(), 0);
+			int light = worldIn.getLightFor(LightType.SKY, neighborPos.up());
 			if (light > maxLight) {
 				maxLight = light;
 			}
