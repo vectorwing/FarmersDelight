@@ -5,6 +5,7 @@ import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.ToolType;
 import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.tags.ForgeTags;
@@ -77,9 +78,9 @@ public class CuttingRecipes
 	}
 
 	private static void salvageBricks(Consumer<IFinishedRecipe> consumer) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BRICKS), Ingredient.fromTag(ForgeTags.TOOLS_PICKAXES), Items.BRICK, 4)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BRICKS), ToolType.PICKAXE, Items.BRICK, 4)
 				.build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.NETHER_BRICKS), Ingredient.fromTag(ForgeTags.TOOLS_PICKAXES), Items.NETHER_BRICK, 4)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.NETHER_BRICKS), ToolType.PICKAXE, Items.NETHER_BRICK, 4)
 				.build(consumer);
 	}
 
