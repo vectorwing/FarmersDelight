@@ -24,6 +24,8 @@ public class ItemTags extends ItemTagsProvider
 		copy(BlockTags.CARPETS, net.minecraft.tags.ItemTags.CARPETS);
 		copy(BlockTags.SMALL_FLOWERS, net.minecraft.tags.ItemTags.SMALL_FLOWERS);
 
+		getOrCreateBuilder(net.minecraft.tags.ItemTags.PIGLIN_LOVED).add(ModItems.GOLDEN_KNIFE.get());
+
 		this.registerModTags();
 		this.registerForgeTags();
 	}
