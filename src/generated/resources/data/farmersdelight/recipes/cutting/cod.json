@@ -6,7 +6,7 @@
     }
   ],
   "tool": {
-    "tag": "forge:tools/knives"
+    "type": "farmersdelight_knife"
   },
   "result": [
     {
