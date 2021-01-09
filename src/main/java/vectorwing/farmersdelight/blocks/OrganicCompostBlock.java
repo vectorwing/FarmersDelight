@@ -17,6 +17,7 @@ import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import java.util.Random;
 
+@SuppressWarnings("deprecation")
 public class OrganicCompostBlock extends Block
 {
 	public static IntegerProperty COMPOSTING = IntegerProperty.create("composting", 0, 7);
@@ -73,6 +74,16 @@ public class OrganicCompostBlock extends Block
 			else
 				worldIn.setBlockState(pos, state.with(COMPOSTING, state.get(COMPOSTING) + 1), 2); // next stage
 		}
+	}
+
+	@Override
+	public boolean hasComparatorInputOverride(BlockState state) {
+		return true;
+	}
+
+	@Override
+	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
+		return (getMaxCompostingStage() + 1 - blockState.get(COMPOSTING));
 	}
 
 	@Override
