@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
@@ -19,6 +20,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.Tags;
@@ -31,6 +33,7 @@ import java.util.function.Supplier;
 public class MushroomColonyBlock extends BushBlock implements IGrowable
 {
 	public static final int GROWING_LIGHT_LEVEL = 12;
+	public static final int PLACING_LIGHT_LEVEL = 13;
 	public final Supplier<Item> mushroomType;
 
 	public static final IntegerProperty COLONY_AGE = BlockStateProperties.AGE_0_3;
@@ -54,6 +57,22 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 
 	public IntegerProperty getAgeProperty() {
 		return COLONY_AGE;
+	}
+
+	@Override
+	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
+		return state.isOpaqueCube(worldIn, pos);
+	}
+
+	@Override
+	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		BlockPos blockpos = pos.down();
+		BlockState blockstate = worldIn.getBlockState(blockpos);
+		if (blockstate.isIn(BlockTags.MUSHROOM_GROW_BLOCK)) {
+			return true;
+		} else {
+			return worldIn.getLightSubtracted(pos, 0) < PLACING_LIGHT_LEVEL && blockstate.canSustainPlant(worldIn, blockpos, net.minecraft.util.Direction.UP, this);
+		}
 	}
 
 	@Override
