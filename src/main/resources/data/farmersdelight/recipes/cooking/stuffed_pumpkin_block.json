@@ -2,7 +2,7 @@
   "type": "farmersdelight:cooking",
   "ingredients": [
     {
-      "item": "farmersdelight:cabbage"
+      "tag": "forge:crops/rice"
     },
     {
       "tag": "forge:vegetables"
@@ -14,7 +14,7 @@
       "item": "minecraft:baked_potato"
     },
     {
-      "item": "minecraft:brown_mushroom"
+      "item": "farmersdelight:brown_mushroom_colony"
     },
     {
       "item": "minecraft:sweet_berries"

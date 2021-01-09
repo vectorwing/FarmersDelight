@@ -3,8 +3,8 @@
 	"parent": "block/block",
 	"textures": {
 		"gibs": "farmersdelight:block/roast_chicken_gibs",
-		"particle": "farmersdelight:block/tray_top",
-		"tray_top": "farmersdelight:block/tray_top",
+		"particle": "farmersdelight:block/tray_top_leftover",
+		"tray_top": "farmersdelight:block/tray_top_leftover",
 		"tray_bottom": "farmersdelight:block/tray_bottom"
 	},
 	"elements": [
