@@ -1,16 +1,22 @@
 {
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "atmospheric"
+    }
+  ],
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "item": "minecraft:birch_log"
+      "item": "atmospheric:morado_log"
     }
   ],
   "tool": {
-    "type": "axe"
+    "tag": "forge:tools/axes"
   },
   "result": [
     {
-      "item": "minecraft:stripped_birch_log"
+      "item": "atmospheric:stripped_morado_log"
     },
     {
       "item": "farmersdelight:tree_bark"

@@ -11,7 +11,9 @@ import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import vectorwing.farmersdelight.FarmersDelight;
 
@@ -126,7 +128,17 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 		public CuttingBoardRecipe read(ResourceLocation recipeId, JsonObject json) {
 			final String groupIn = JSONUtils.getString(json, "group", "");
 			final NonNullList<Ingredient> inputItemsIn = readIngredients(JSONUtils.getJsonArray(json, "ingredients"));
-			final Ingredient toolIn = Ingredient.deserialize(JSONUtils.getJsonObject(json, "tool"));
+			final JsonObject toolObject= JSONUtils.getJsonObject(json, "tool");
+			final Ingredient toolIn;
+			if (JSONUtils.hasField(toolObject, "type")) {
+				// Create an Ingredient from all items that have the specified ToolType
+				final ToolType toolType = ToolType.get(JSONUtils.getString(toolObject, "type"));
+				toolIn = Ingredient.fromStacks(ForgeRegistries.ITEMS.getValues().stream()
+						.filter((item) -> item.getToolTypes(new ItemStack(item)).contains(toolType))
+						.map(ItemStack::new));
+			} else {
+				toolIn = Ingredient.deserialize(toolObject);
+			}
 			if (inputItemsIn.isEmpty()) {
 				throw new JsonParseException("No ingredients for cutting recipe");
 			} else if (toolIn.hasNoMatchingItems()) {

@@ -1,16 +1,22 @@
 {
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "autumnity"
+    }
+  ],
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "item": "minecraft:birch_log"
+      "item": "autumnity:maple_wood"
     }
   ],
   "tool": {
-    "type": "axe"
+    "tag": "forge:tools/axes"
   },
   "result": [
     {
-      "item": "minecraft:stripped_birch_log"
+      "item": "autumnity:stripped_maple_wood"
     },
     {
       "item": "farmersdelight:tree_bark"

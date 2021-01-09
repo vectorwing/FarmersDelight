@@ -2,13 +2,13 @@
   "conditions": [
     {
       "type": "forge:mod_loaded",
-      "modid": "upgrade_aquatic"
+      "modid": "atmospheric"
     }
   ],
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "item": "upgrade_aquatic:driftwood"
+      "item": "atmospheric:morado_wood"
     }
   ],
   "tool": {
@@ -16,7 +16,7 @@
   },
   "result": [
     {
-      "item": "upgrade_aquatic:stripped_driftwood"
+      "item": "atmospheric:stripped_morado_wood"
     },
     {
       "item": "farmersdelight:tree_bark"

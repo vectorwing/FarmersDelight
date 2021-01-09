@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.items;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -20,19 +21,29 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.common.ToolType;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
+import javax.annotation.Nonnull;
 import java.util.Set;
 
 public class KnifeItem extends ToolItem
 {
+	public static final ToolType KNIFE_TOOL = ToolType.get(FarmersDelight.MODID + "_knife");
+
 	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.HAY_BLOCK, ModBlocks.RICE_BALE.get());
 
 	public KnifeItem(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties properties) {
 		super(attackDamageIn, attackSpeedIn, tier, EFFECTIVE_ON, properties);
+	}
+
+	@Nonnull
+	@Override
+	public Set<ToolType> getToolTypes(ItemStack stack) {
+		return ImmutableSet.of(KNIFE_TOOL);
 	}
 
 	@Override
