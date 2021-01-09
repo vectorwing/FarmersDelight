@@ -30,16 +30,14 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 	private final Ingredient tool;
 	private final NonNullList<ItemStack> results;
 	private final String soundEvent;
-	private final int effort;
 
-	public CuttingBoardRecipe(ResourceLocation id, String group, Ingredient input, Ingredient tool, NonNullList<ItemStack> results, String soundEvent, int effort) {
+	public CuttingBoardRecipe(ResourceLocation id, String group, Ingredient input, Ingredient tool, NonNullList<ItemStack> results, String soundEvent) {
 		this.id = id;
 		this.group = group;
 		this.input = input;
 		this.tool = tool;
 		this.results = results;
 		this.soundEvent = soundEvent;
-		this.effort = effort;
 	}
 
 	@Override
@@ -86,10 +84,6 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 
 	public String getSoundEventID() {
 		return this.soundEvent;
-	}
-
-	public int getEffort() {
-		return this.effort;
 	}
 
 	@Override
@@ -148,8 +142,7 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 			} else {
 				final NonNullList<ItemStack> results = readResults(JSONUtils.getJsonArray(json, "result"));
 				final String soundID = JSONUtils.getString(json, "sound", "");
-				final int effortIn = JSONUtils.getInt(json, "effort", 1);
-				return new CuttingBoardRecipe(recipeId, groupIn, inputItemsIn.get(0), toolIn, results, soundID, effortIn);
+				return new CuttingBoardRecipe(recipeId, groupIn, inputItemsIn.get(0), toolIn, results, soundID);
 			}
 		}
 
@@ -184,9 +177,8 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 				resultsIn.set(j, buffer.readItemStack());
 			}
 			String soundEventIn = buffer.readString();
-			int effortIn = buffer.readVarInt();
 
-			return new CuttingBoardRecipe(recipeId, groupIn, inputItemIn, toolIn, resultsIn, soundEventIn, effortIn);
+			return new CuttingBoardRecipe(recipeId, groupIn, inputItemIn, toolIn, resultsIn, soundEventIn);
 		}
 
 		@Override
@@ -199,7 +191,6 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 				buffer.writeItemStack(result);
 			}
 			buffer.writeString(recipe.soundEvent);
-			buffer.writeVarInt(recipe.effort);
 		}
 	}
 }
