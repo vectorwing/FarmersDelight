@@ -185,5 +185,15 @@
   "block.stove.crackle.subtitles": "Stove crackles",
 
   "farmersdelight.jei.cooking": "Cooking",
-  "farmersdelight.jei.cutting": "Cutting Board"
+  "farmersdelight.jei.cutting": "Cutting Board",
+
+  "tetra/schematic/sword/knife.name": "Knife",
+  "tetra/schematic/sword/knife.description": "Craft a knife blade from the given materials, the knife is good for crafting.\n \nProvides §fcutting§r tool capabilities based on the material.\nMaterial §fhardness§r increases §fdamage§r.",
+  "tetra/schematic/sword/knife.slot1": "Blade material",
+
+  "tetra.module.sword/knife.item_name": "Knife",
+  "tetra.module.sword/knife.name": "Knife",
+  "tetra.module.sword/knife.description": "A knife blade, it's good for crafting.",
+  "tetra.module.sword/knife.material_name": "%s knife",
+  "tetra.module.sword/knife.prefix": "%s"
 }

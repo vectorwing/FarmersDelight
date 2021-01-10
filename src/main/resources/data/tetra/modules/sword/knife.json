@@ -1,0 +1,74 @@
+{
+  "slots": [
+    "sword/blade"
+  ],
+  "type": "tetra:basic_major_module",
+  "improvements": [
+    "tetra:enchantment/sharpness",
+    "tetra:enchantment/smite",
+    "tetra:enchantment/bane_of_arthropods",
+    "tetra:enchantment/fire_aspect",
+    "tetra:enchantment/looting",
+    "tetra:enchantment/sweeping",
+    "tetra:enchantment/apotheosis_capturing",
+    "tetra:enchantment/apotheosis_hell_infusion",
+    "tetra:enchantment/apotheosis_mounted_strike",
+    "tetra:enchantment/apotheosis_scavenger",
+    "tetra:enchantment/apotheosis_knowledge",
+    "tetra:enchantment/cyclic_life_leech",
+    "tetra:enchantment/cyclic_venom",
+    "tetra:enchantment/ensorcellation_damage_ender",
+    "tetra:enchantment/ensorcellation_damage_illager",
+    "tetra:enchantment/ensorcellation_damage_villager",
+    "tetra:enchantment/ensorcellation_cavalier",
+    "tetra:enchantment/ensorcellation_frost_aspect",
+    "tetra:enchantment/ensorcellation_leech",
+    "tetra:enchantment/ensorcellation_magic_edge",
+    "tetra:enchantment/ensorcellation_vorpal",
+    "tetra:enchantment/ensorcellation_curse_mercy",
+    "tetra:enchantment/bluepower_vorpal",
+    "tetra:enchantment/bluepower_disjunction",
+    "tetra:enchantment/ma-enchants_lifesteal",
+    "tetra:enchantment/ma-enchants_ice_aspect",
+    "tetra:enchantment/vanishing_curse",
+    "tetra:enchantment/ensorcellation_soulbound",
+    "tetra:enchantment/ma-enchants_curse_death",
+    "tetra:enchantment/cursed_misfortune",
+    "tetra:enchantment/cursed_fragility",
+    "tetra:enchantment/cursed_fading",
+    "tetra:enchantment/cursed_obedience",
+    "tetra:enchantment/cursed_encumbrance",
+    "tetra:sword/blade/short_blade",
+    "tetra:sword/blade/serrated",
+    "tetra:sword/blade/hooked",
+    "tetra:sword/blade/tempered",
+    "tetra:sword/blade/shared",
+    "tetra:sword/blade/shared_compat",
+    "tetra:sword/blade/shared_hone",
+    "tetra:shared/"
+  ],
+  "variants": [
+    {
+      "materials": ["tetra:stone/flint", "tetra:metal/", "tetra:gem/", "tetra:bone/"],
+      "key": "knife/",
+      "attributes": {
+        "generic.attack_speed": -1.9
+      },
+      "durability": -20,
+      "extract": {
+        "primaryAttributes": {
+          "generic.attack_damage": 1
+        },
+        "tools": {
+          "cut": [1, 1]
+        },
+        "durability": 0.8,
+        "integrity": -2,
+        "magicCapacity": 1,
+        "glyph": { "textureLocation": "farmersdelight:textures/gui/tetra_glyphs.png" },
+        "availableTextures": ["metal", "shiny", "crude"],
+        "models": [{ "location": "tetra:items/module/sword/blade/knife/" }]
+      }
+    }
+  ]
+}
