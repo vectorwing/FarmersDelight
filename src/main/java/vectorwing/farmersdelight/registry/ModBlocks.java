@@ -109,7 +109,7 @@ public class ModBlocks
 
 	// FEASTS
 	public static final RegistryObject<Block> ROAST_CHICKEN_BLOCK = BLOCKS.register("roast_chicken_block",
-			() -> new FeastBlock(Block.Properties.from(Blocks.WHITE_WOOL), ModItems.ROAST_CHICKEN, true));
+			() -> new RoastChickenBlock(Block.Properties.from(Blocks.WHITE_WOOL), ModItems.ROAST_CHICKEN, true));
 	public static final RegistryObject<Block> STUFFED_PUMPKIN_BLOCK = BLOCKS.register("stuffed_pumpkin_block",
 			() -> new FeastBlock(Block.Properties.from(Blocks.PUMPKIN), ModItems.STUFFED_PUMPKIN, false));
 
