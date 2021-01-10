@@ -19,10 +19,10 @@
       "model": "farmersdelight:block/cabbages_stage5"
     },
     "age=6": {
-      "model": "farmersdelight:block/cabbages_stage5"
+      "model": "farmersdelight:block/cabbages_stage6"
     },
     "age=7": {
-      "model": "farmersdelight:block/cabbages_stage6"
+      "model": "farmersdelight:block/cabbages_stage7"
     }
   }
 }

@@ -23,6 +23,8 @@
   "block.farmersdelight.tomato_crate": "Tomato Crate",
   "block.farmersdelight.onion_crate": "Onion Crate",
   "block.farmersdelight.rice_bale": "Rice Bale",
+  "block.farmersdelight.rice_bag": "Bag of Rice",
+  "block.farmersdelight.straw_bale": "Straw Bale",
 
   "block.farmersdelight.brown_mushroom_colony": "Brown Mushroom Colony",
   "block.farmersdelight.red_mushroom_colony": "Red Mushroom Colony",
@@ -72,8 +74,11 @@
   "item.farmersdelight.apple_pie_slice": "Slice of Apple Pie",
   "item.farmersdelight.sweet_berry_cheesecake_slice": "Slice of Sweet Berry Cheesecake",
   "item.farmersdelight.chocolate_pie_slice": "Slice of Chocolate Pie",
+  "item.farmersdelight.fruit_salad": "Fruit Salad",
   "item.farmersdelight.sweet_berry_cookie": "Sweet Berry Cookie",
   "item.farmersdelight.honey_cookie": "Honey Cookie",
+  "item.farmersdelight.melon_popsicle": "Melon Popsicle",
+
   "item.farmersdelight.earthworm": "Earthworm",
 
   "item.farmersdelight.flint_knife": "Flint Knife",
@@ -88,7 +93,6 @@
   "item.farmersdelight.hamburger": "Hamburger",
   "item.farmersdelight.dumplings": "Dumplings",
   "item.farmersdelight.stuffed_potato": "Stuffed Potato",
-  "item.farmersdelight.stuffed_pumpkin": "Stuffed Pumpkin",
 
   "item.farmersdelight.cooked_rice": "Cooked Rice",
   "item.farmersdelight.mixed_salad": "Mixed Salad",
@@ -110,6 +114,11 @@
   "item.farmersdelight.ratatouille": "Ratatouille",
   "item.farmersdelight.squid_ink_pasta": "Squid Ink Pasta",
   "item.farmersdelight.grilled_salmon": "Grilled Salmon",
+
+  "block.farmersdelight.roast_chicken_block": "Roast Chicken",
+  "item.farmersdelight.roast_chicken": "Plate of Roast Chicken",
+  "block.farmersdelight.stuffed_pumpkin_block": "Stuffed Pumpkin",
+  "item.farmersdelight.stuffed_pumpkin": "Bowl of Stuffed Pumpkin",
 
   "item.farmersdelight.dog_food": "Dog Food",
   "item.farmersdelight.horse_feed": "Horse Feed",
@@ -140,12 +149,16 @@
   "farmersdelight.advancement.craft_knife.desc": "Craft a Knife to forage more goods from plants and animals",
   "farmersdelight.advancement.plant_rice": "Dipping Your Roots",
   "farmersdelight.advancement.plant_rice.desc": "Plant Rice grains in a shallow puddle",
+  "farmersdelight.advancement.plant_all_crops": "Crop Rotation",
+  "farmersdelight.advancement.plant_all_crops.desc": "Cultivate every fruit, vegetable, fungus or root you can find!",
   "farmersdelight.advancement.harvest_straw": "Grasping at Straws",
-  "farmersdelight.advancement.harvest_straw.desc": "Harvest grassy plants with a Knife to obtain Straw",
+  "farmersdelight.advancement.harvest_straw.desc": "Harvest grassy plants and crops with a Knife to obtain Straw",
   "farmersdelight.advancement.get_rich_soil": "Plant Food",
-  "farmersdelight.advancement.get_rich_soil.desc": "Leave some Organic Compost to decompose until it becomes Rich Soil",
+  "farmersdelight.advancement.get_rich_soil.desc": "Leave some Organic Compost to decompose until it becomes Rich Soil. Mushrooms might help!",
+  "farmersdelight.advancement.get_mushroom_colony": "Fungus Among Us",
+  "farmersdelight.advancement.get_mushroom_colony.desc": "Plant Mushrooms on Rich Soil under dark, watch a colony form, then shear it!",
   "farmersdelight.advancement.obtain_netherite_knife": "If You Can't Take the Heat...",
-  "farmersdelight.advancement.obtain_netherite_knife.desc": "Against better judgement, spend a whole Netherite Ingot to upgrade your knife",
+  "farmersdelight.advancement.obtain_netherite_knife.desc": "Spend a whole Netherite Ingot to upgrade your knife! Or get out of the kitchen.",
 
   "farmersdelight.advancement.place_campfire": "Bonfire Lit",
   "farmersdelight.advancement.place_campfire.desc": "Place down a Campfire to keep you warm at night",
@@ -157,8 +170,10 @@
   "farmersdelight.advancement.eat_comfort_food.desc": "Soups and stews are great for warding off cold and sickness!",
   "farmersdelight.advancement.eat_nourishing_food": "Well Served",
   "farmersdelight.advancement.eat_nourishing_food.desc": "A hearty plate of food will keep you nourished for a long time!",
+  "farmersdelight.advancement.place_feast": "A Glorious Feast",
+  "farmersdelight.advancement.place_feast.desc": "Some meals are best served on a table, to share with friends",
   "farmersdelight.advancement.use_cutting_board": "Watch Your Fingers",
-  "farmersdelight.advancement.use_cutting_board.desc": "With a tool in hand, use a Cutting Board to split up some items",
+  "farmersdelight.advancement.use_cutting_board.desc": "With a tool in hand, use it on a Cutting Board to split up some items",
   "farmersdelight.advancement.master_chef": "Master Chef",
   "farmersdelight.advancement.master_chef.desc": "Eat a course of every meal available!",
 

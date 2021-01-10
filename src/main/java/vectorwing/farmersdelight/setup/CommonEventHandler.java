@@ -135,6 +135,8 @@ public class CommonEventHandler
 		ComposterBlock.CHANCES.put(ModItems.CHOCOLATE_PIE.get(), 1.0F);
 		ComposterBlock.CHANCES.put(ModItems.DUMPLINGS.get(), 1.0F);
 		ComposterBlock.CHANCES.put(ModItems.STUFFED_PUMPKIN.get(), 1.0F);
+		ComposterBlock.CHANCES.put(ModItems.BROWN_MUSHROOM_COLONY.get(), 1.0F);
+		ComposterBlock.CHANCES.put(ModItems.RED_MUSHROOM_COLONY.get(), 1.0F);
 	}
 
 	@SubscribeEvent

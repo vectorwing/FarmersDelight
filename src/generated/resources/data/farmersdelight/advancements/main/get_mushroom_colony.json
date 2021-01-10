@@ -1,0 +1,46 @@
+{
+  "parent": "farmersdelight:main/get_rich_soil",
+  "display": {
+    "icon": {
+      "item": "farmersdelight:red_mushroom_colony"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.get_mushroom_colony"
+    },
+    "description": {
+      "translate": "farmersdelight.advancement.get_mushroom_colony.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "brown_mushroom_colony": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:brown_mushroom_colony"
+          }
+        ]
+      }
+    },
+    "red_mushroom_colony": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:red_mushroom_colony"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "brown_mushroom_colony",
+      "red_mushroom_colony"
+    ]
+  ]
+}

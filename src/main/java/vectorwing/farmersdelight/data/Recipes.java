@@ -254,6 +254,20 @@ public class Recipes extends RecipeProvider
 				.key('#', ModItems.RICE_PANICLE.get())
 				.addCriterion("rice_panicle", InventoryChangeTrigger.Instance.forItems(ModItems.RICE_PANICLE.get()))
 				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.RICE_BAG.get(), 1)
+				.patternLine("###")
+				.patternLine("###")
+				.patternLine("###")
+				.key('#', ModItems.RICE.get())
+				.addCriterion("rice", InventoryChangeTrigger.Instance.forItems(ModItems.RICE.get()))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.STRAW_BALE.get(), 1)
+				.patternLine("###")
+				.patternLine("###")
+				.patternLine("###")
+				.key('#', ModItems.STRAW.get())
+				.addCriterion("straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
+				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ORGANIC_COMPOST.get(), 1)
 				.addIngredient(Items.DIRT)
 				.addIngredient(Items.ROTTEN_FLESH)
@@ -368,6 +382,14 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ModItems.RICE_BALE.get())
 				.addCriterion("rice_bale", InventoryChangeTrigger.Instance.forItems(ModItems.RICE_BALE.get()))
 				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RICE.get(), 9)
+				.addIngredient(ModItems.RICE_BAG.get())
+				.addCriterion("rice_bag", InventoryChangeTrigger.Instance.forItems(ModItems.RICE_BAG.get()))
+				.build(consumer, FarmersDelight.MODID + ":rice_from_bag");
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.STRAW.get(), 9)
+				.addIngredient(ModItems.STRAW_BALE.get())
+				.addCriterion("straw_bale", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW_BALE.get()))
+				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RICE.get())
 				.addIngredient(ModItems.RICE_PANICLE.get())
 				.addCriterion("rice_panicle", InventoryChangeTrigger.Instance.forItems(ModItems.RICE_PANICLE.get()))
@@ -422,6 +444,25 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.APPLE)
 				.addIngredient(Items.GOLDEN_CARROT)
 				.addCriterion("has_golden_carrot", InventoryChangeTrigger.Instance.forItems(Items.GOLDEN_CARROT))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.MELON_POPSICLE.get(), 1)
+				.patternLine(" mm")
+				.patternLine("imm")
+				.patternLine("-i ")
+				.key('m', Items.MELON_SLICE)
+				.key('i', Items.ICE)
+				.key('-', Items.STICK)
+				.addCriterion("has_melon", InventoryChangeTrigger.Instance.forItems(Items.MELON_SLICE))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.FRUIT_SALAD.get(), 1)
+				.addIngredient(Items.APPLE)
+				.addIngredient(Items.MELON_SLICE)
+				.addIngredient(Items.MELON_SLICE)
+				.addIngredient(Items.SWEET_BERRIES)
+				.addIngredient(Items.SWEET_BERRIES)
+				.addIngredient(ModItems.PUMPKIN_SLICE.get())
+				.addIngredient(Items.BOWL)
+				.addCriterion("has_fruits", InventoryChangeTrigger.Instance.forItems(Items.MELON_SLICE, Items.SWEET_BERRIES, Items.APPLE, ModItems.PUMPKIN_SLICE.get()))
 				.build(consumer);
 	}
 
@@ -526,6 +567,18 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.CARROT)
 				.addIngredient(ForgeTags.MILK)
 				.addCriterion("baked_potato", InventoryChangeTrigger.Instance.forItems(Items.BAKED_POTATO))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ROAST_CHICKEN_BLOCK.get())
+				.addIngredient(ForgeTags.CROPS_ONION)
+				.addIngredient(Items.EGG)
+				.addIngredient(Items.BREAD)
+				.addIngredient(Items.CARROT)
+				.addIngredient(Items.COOKED_CHICKEN)
+				.addIngredient(Items.BAKED_POTATO)
+				.addIngredient(Items.CARROT)
+				.addIngredient(Items.BOWL)
+				.addIngredient(Items.BAKED_POTATO)
+				.addCriterion("has_cooked_chicken", InventoryChangeTrigger.Instance.forItems(Items.COOKED_CHICKEN))
 				.build(consumer);
 	}
 }

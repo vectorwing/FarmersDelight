@@ -100,7 +100,7 @@ public class CuttingBoardTileEntity extends TileEntity
 		CuttingBoardRecipe irecipe = this.world.getRecipeManager()
 				.getRecipe(this.recipeType, new RecipeWrapper(itemHandler), this.world).orElse(null);
 
-		if (irecipe != null && irecipe.getTool().test(tool)) {
+		if (irecipe != null && this.isToolValid(tool, irecipe)) {
 			NonNullList<ItemStack> results = this.getResults();
 			for (ItemStack result : results) {
 				Direction direction = this.getBlockState().get(CuttingBoardBlock.FACING).rotateYCCW();
@@ -125,6 +125,14 @@ public class CuttingBoardTileEntity extends TileEntity
 		}
 
 		return false;
+	}
+
+	public boolean isToolValid(ItemStack tool, CuttingBoardRecipe recipe) {
+		if (recipe.getToolType() != null) {
+			return tool.getToolTypes().contains(recipe.getToolType());
+		} else {
+			return recipe.getTool().test(tool);
+		}
 	}
 
 	protected NonNullList<ItemStack> getResults() {

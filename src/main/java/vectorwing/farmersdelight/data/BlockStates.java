@@ -3,6 +3,7 @@ package vectorwing.farmersdelight.data;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DoublePlantBlock;
+import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.Property;
@@ -19,6 +20,7 @@ import vectorwing.farmersdelight.blocks.*;
 import vectorwing.farmersdelight.registry.ModBlocks;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
@@ -53,6 +55,17 @@ public class BlockStates extends BlockStateProvider
 		this.simpleBlock(ModBlocks.SAFETY_NET.get(), existingModel(ModBlocks.SAFETY_NET.get()));
 		this.simpleBlock(ModBlocks.HALF_TATAMI_MAT.get(), existingModel("tatami_mat_half"));
 
+		String riceBag = blockName(ModBlocks.RICE_BAG.get());
+		this.simpleBlock(ModBlocks.RICE_BAG.get(), models().withExistingParent(riceBag, "cube")
+				.texture("particle", resourceBlock(riceBag + "_top"))
+				.texture("down", resourceBlock(riceBag + "_bottom"))
+				.texture("up", resourceBlock(riceBag + "_top"))
+				.texture("north", resourceBlock(riceBag + "_side_tied"))
+				.texture("south", resourceBlock(riceBag + "_side_tied"))
+				.texture("east", resourceBlock(riceBag + "_side"))
+				.texture("west", resourceBlock(riceBag + "_side"))
+		);
+
 		customDirectionalBlock(ModBlocks.BASKET.get(),
 				$ -> existingModel(ModBlocks.BASKET.get()), BasketBlock.ENABLED, BasketBlock.WATERLOGGED);
 		customDirectionalBlock(ModBlocks.RICE_BALE.get(),
@@ -74,13 +87,15 @@ public class BlockStates extends BlockStateProvider
 		this.stageBlock(ModBlocks.BROWN_MUSHROOM_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
 		this.stageBlock(ModBlocks.RED_MUSHROOM_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
 		this.stageBlock(ModBlocks.RICE_UPPER_CROP.get(), RiceUpperCropBlock.RICE_AGE);
-		this.customStageBlock(ModBlocks.CABBAGE_CROP.get(), resourceBlock("crop_cross"), "cross", CabbagesBlock.AGE, Arrays.asList(0, 1, 2, 3, 4, 5, 5, 6));
+		this.customStageBlock(ModBlocks.CABBAGE_CROP.get(), resourceBlock("crop_cross"), "cross", CabbagesBlock.AGE, new ArrayList<>());
 		this.customStageBlock(ModBlocks.TOMATO_CROP.get(), resourceBlock("crop_cross"), "cross", TomatoesBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 3, 4));
 		this.customStageBlock(ModBlocks.ONION_CROP.get(), mcLoc("crop"), "crop", OnionsBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 2, 3));
 
 		this.crateBlock(ModBlocks.CABBAGE_CRATE.get(), "cabbage");
 		this.crateBlock(ModBlocks.TOMATO_CRATE.get(), "tomato");
 		this.crateBlock(ModBlocks.ONION_CRATE.get(), "onion");
+
+		this.axisBlock((RotatedPillarBlock) ModBlocks.STRAW_BALE.get());
 
 		this.pantryBlock(ModBlocks.OAK_PANTRY.get(), "oak");
 		this.pantryBlock(ModBlocks.BIRCH_PANTRY.get(), "birch");
@@ -94,6 +109,9 @@ public class BlockStates extends BlockStateProvider
 		this.pieBlock(ModBlocks.APPLE_PIE.get());
 		this.pieBlock(ModBlocks.CHOCOLATE_PIE.get());
 		this.pieBlock(ModBlocks.SWEET_BERRY_CHEESECAKE.get());
+
+		this.feastBlock((FeastBlock) ModBlocks.STUFFED_PUMPKIN_BLOCK.get());
+		this.feastBlock((FeastBlock) ModBlocks.ROAST_CHICKEN_BLOCK.get());
 
 		this.wildCropBlock(ModBlocks.WILD_BEETROOTS.get(), false);
 		this.wildCropBlock(ModBlocks.WILD_CABBAGES.get(), false);
@@ -176,6 +194,24 @@ public class BlockStates extends BlockStateProvider
 					resourceBlock(woodType + "_pantry_front" + suffix),
 					resourceBlock(woodType + "_pantry_top"));
 		});
+	}
+
+	public void feastBlock(FeastBlock block) {
+		getVariantBuilder(block)
+				.forAllStates(state -> {
+					int servings = state.get(FeastBlock.SERVINGS);
+
+					String suffix = "_stage" + (block.getMaxServings() - servings);
+
+					if (servings == 0) {
+						suffix = block.hasLeftovers ? "_leftover" : "_stage3";
+					}
+
+					return ConfiguredModel.builder()
+							.modelFile(existingModel(blockName(block) + suffix))
+							.rotationY(((int) state.get(FeastBlock.FACING).getHorizontalAngle() + DEFAULT_ANGLE_OFFSET) % 360)
+							.build();
+				});
 	}
 
 	public void doublePlantBlock(Block block) {

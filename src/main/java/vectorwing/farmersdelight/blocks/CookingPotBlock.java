@@ -59,7 +59,7 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 	public CookingPotBlock() {
 		super(Properties.create(Material.IRON)
 				.hardnessAndResistance(2.0F, 6.0F)
-				.sound(SoundType.METAL));
+				.sound(SoundType.LANTERN));
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(SUPPORTED, false).with(WATERLOGGED, false));
 	}
 
