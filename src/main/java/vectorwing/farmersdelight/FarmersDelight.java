@@ -56,9 +56,9 @@ public class FarmersDelight
 	}
 
 	private void registerRecipeSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event) {
-		Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(FarmersDelight.MODID, "cooking"), CookingPotRecipe.TYPE);
+		//Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(FarmersDelight.MODID, "cooking"), CookingPotRecipe.TYPE);
 		event.getRegistry().register(CookingPotRecipe.SERIALIZER);
-		Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(FarmersDelight.MODID, "cutting"), CuttingBoardRecipe.TYPE);
+		//Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(FarmersDelight.MODID, "cutting"), CuttingBoardRecipe.TYPE);
 		event.getRegistry().register(CuttingBoardRecipe.SERIALIZER);
 	}
 }
