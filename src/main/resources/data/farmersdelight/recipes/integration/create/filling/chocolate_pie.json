@@ -1,0 +1,23 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "farmersdelight:pie_crust"
+    },
+    {
+      "fluidTag": "forge:chocolate",
+      "amount": 500
+    }
+  ],
+  "results": [
+    {
+      "item": "farmersdelight:chocolate_pie"
+    }
+  ]
+}
