@@ -30,6 +30,8 @@ public class ForgeTags
 	public static final ITag.INamedTag<Item> CROPS_RICE = forgeItemTag("crops/rice");
 	public static final ITag.INamedTag<Item> CROPS_TOMATO = forgeItemTag("crops/tomato");
 
+	public static final ITag.INamedTag<Item> EGGS = forgeItemTag("eggs");
+
 	public static final ITag.INamedTag<Item> GRAIN = forgeItemTag("grain");
 	public static final ITag.INamedTag<Item> GRAIN_WHEAT = forgeItemTag("grain/wheat");
 	public static final ITag.INamedTag<Item> GRAIN_RICE = forgeItemTag("grain/rice");
@@ -68,7 +70,6 @@ public class ForgeTags
 	public static final ITag.INamedTag<Item> TOOLS_AXES = forgeItemTag("tools/axes");
 	public static final ITag.INamedTag<Item> TOOLS_KNIVES = forgeItemTag("tools/knives");
 	public static final ITag.INamedTag<Item> TOOLS_PICKAXES = forgeItemTag("tools/pickaxes");
-	public static final ITag.INamedTag<Item> TOOLS_SHEARS = forgeItemTag("tools/shears");
 	public static final ITag.INamedTag<Item> TOOLS_SHOVELS = forgeItemTag("tools/shovels");
 
 	private static ITag.INamedTag<Item> forgeItemTag(String path) {

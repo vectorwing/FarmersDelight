@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.???
+## 0.3.0
 - Added Feasts!
   - Feasts are very large meals, made to be placed down as a block and shared with friends, or just to decorate a dinner table!
   - Once placed, use a Bowl against it to take a serving. Feasts contain 4 servings by default. It can be mined back if no servings were taken;

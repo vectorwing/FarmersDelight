@@ -82,9 +82,9 @@ public class Recipes extends RecipeProvider
 				.patternLine("mmm")
 				.patternLine("ses")
 				.patternLine("www")
-				.key('m', ModItems.MILK_BOTTLE.get())
+				.key('m', ForgeTags.MILK)
 				.key('s', Items.SUGAR)
-				.key('e', Items.EGG)
+				.key('e', ForgeTags.EGGS)
 				.key('w', Items.WHEAT)
 				.addCriterion("milk_bottle", InventoryChangeTrigger.Instance.forItems(ModItems.MILK_BOTTLE.get()))
 				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "cake_from_milk_bottle"));
@@ -409,7 +409,7 @@ public class Recipes extends RecipeProvider
 				.addCriterion("has_milk_bucket", InventoryChangeTrigger.Instance.forItems(Items.MILK_BUCKET))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RAW_PASTA.get())
-				.addIngredient(Items.EGG)
+				.addIngredient(ForgeTags.EGGS)
 				.addIngredient(Items.WHEAT)
 				.addIngredient(Items.WHEAT)
 				.addCriterion("has_egg", InventoryChangeTrigger.Instance.forItems(Items.EGG))
@@ -570,7 +570,7 @@ public class Recipes extends RecipeProvider
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ROAST_CHICKEN_BLOCK.get())
 				.addIngredient(ForgeTags.CROPS_ONION)
-				.addIngredient(Items.EGG)
+				.addIngredient(ForgeTags.EGGS)
 				.addIngredient(Items.BREAD)
 				.addIngredient(Items.CARROT)
 				.addIngredient(Items.COOKED_CHICKEN)

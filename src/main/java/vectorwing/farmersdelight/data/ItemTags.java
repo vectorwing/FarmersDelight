@@ -57,6 +57,8 @@ public class ItemTags extends ItemTagsProvider
 		getOrCreateBuilder(ForgeTags.CROPS_RICE).add(ModItems.RICE.get());
 		getOrCreateBuilder(ForgeTags.CROPS_TOMATO).add(ModItems.TOMATO.get());
 
+		getOrCreateBuilder(ForgeTags.EGGS).add(Items.EGG);
+
 		getOrCreateBuilder(ForgeTags.GRAIN).addTags(ForgeTags.GRAIN_WHEAT, ForgeTags.GRAIN_RICE);
 		getOrCreateBuilder(ForgeTags.GRAIN_WHEAT).add(Items.WHEAT);
 		getOrCreateBuilder(ForgeTags.GRAIN_RICE).add(ModItems.RICE.get());
