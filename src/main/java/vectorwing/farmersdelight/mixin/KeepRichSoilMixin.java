@@ -17,7 +17,7 @@ import java.util.Random;
 @Mixin(Feature.class)
 public class KeepRichSoilMixin {
 
-    @Inject(cancellable = true, at = @At(value = "HEAD"), method = "isDirtAt")
+    @Inject(cancellable = true, at = @At(value = "HEAD"), method = "isDirtAt(Lnet/minecraft/world/gen/IWorldGenerationBaseReader;Lnet/minecraft/util/math/BlockPos;)Z")
     private static void keepRichSoil(IWorldGenerationBaseReader world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         if (world.hasBlockState(pos, state -> state.isIn(ModBlocks.RICH_SOIL.get()))) {
             cir.setReturnValue(false);
