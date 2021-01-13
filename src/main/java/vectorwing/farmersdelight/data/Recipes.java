@@ -9,6 +9,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.data.recipes.CookingRecipes;
 import vectorwing.farmersdelight.data.recipes.CuttingRecipes;
 import vectorwing.farmersdelight.data.recipes.SmeltingRecipes;
 import vectorwing.farmersdelight.registry.ModBlocks;
@@ -37,6 +38,7 @@ public class Recipes extends RecipeProvider
 		recipesCraftedMeals(consumer);
 
 		SmeltingRecipes.register(consumer);
+		CookingRecipes.register(consumer);
 		CuttingRecipes.register(consumer);
 	}
 

@@ -16,5 +16,6 @@
   },
   "container": {
     "item": "minecraft:bowl"
-  }
+  },
+  "cookingtime": 200
 }

@@ -2,7 +2,7 @@
   "type": "farmersdelight:cooking",
   "ingredients": [
     {
-      "item": "minecraft:mutton"
+      "item": "farmersdelight:minced_beef"
     },
     {
       "tag": "forge:pasta"
@@ -12,6 +12,7 @@
     }
   ],
   "result": {
-    "item": "farmersdelight:pasta_with_mutton_chop"
-  }
+    "item": "farmersdelight:pasta_with_meatballs"
+  },
+  "cookingtime": 200
 }

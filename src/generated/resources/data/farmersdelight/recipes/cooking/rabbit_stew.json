@@ -1,19 +1,27 @@
 {
   "type": "farmersdelight:cooking",
-  "group": "rabbit_stew",
   "ingredients": [
     {
       "item": "minecraft:baked_potato"
     },
-    {
-      "item": "minecraft:rabbit"
-    },
+    [
+      {
+        "item": "minecraft:rabbit"
+      },
+      {
+        "item": "minecraft:cooked_rabbit"
+      }
+    ],
     {
       "item": "minecraft:carrot"
     },
     [
-      {"item": "minecraft:brown_mushroom"},
-      {"item": "minecraft:red_mushroom"}
+      {
+        "item": "minecraft:brown_mushroom"
+      },
+      {
+        "item": "minecraft:red_mushroom"
+      }
     ]
   ],
   "result": {
@@ -21,5 +29,6 @@
   },
   "container": {
     "item": "minecraft:bowl"
-  }
+  },
+  "cookingtime": 200
 }

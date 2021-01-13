@@ -5,19 +5,17 @@
       "item": "minecraft:carrot"
     },
     {
-      "item": "minecraft:brown_mushroom"
+      "item": "minecraft:potato"
     },
     {
-      "tag": "forge:pasta"
+      "item": "minecraft:beetroot"
     },
     {
       "tag": "forge:salad_ingredients"
-    },
-    {
-      "tag": "forge:vegetables"
     }
   ],
   "result": {
-    "item": "farmersdelight:vegetable_noodles"
-  }
+    "item": "farmersdelight:vegetable_soup"
+  },
+  "cookingtime": 200
 }

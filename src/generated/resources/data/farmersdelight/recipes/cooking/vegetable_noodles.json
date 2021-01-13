@@ -2,10 +2,13 @@
   "type": "farmersdelight:cooking",
   "ingredients": [
     {
-      "tag": "forge:raw_chicken"
+      "item": "minecraft:carrot"
     },
     {
-      "item": "minecraft:carrot"
+      "item": "minecraft:brown_mushroom"
+    },
+    {
+      "tag": "forge:pasta"
     },
     {
       "tag": "forge:salad_ingredients"
@@ -15,6 +18,7 @@
     }
   ],
   "result": {
-    "item": "farmersdelight:chicken_soup"
-  }
+    "item": "farmersdelight:vegetable_noodles"
+  },
+  "cookingtime": 200
 }

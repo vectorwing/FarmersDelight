@@ -5,7 +5,7 @@
       "item": "farmersdelight:pumpkin_slice"
     },
     {
-      "item": "minecraft:potato"
+      "tag": "forge:salad_ingredients"
     },
     {
       "item": "minecraft:porkchop"
@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "farmersdelight:pumpkin_soup"
-  }
+  },
+  "cookingtime": 200
 }

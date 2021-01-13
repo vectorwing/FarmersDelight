@@ -8,7 +8,7 @@
       "item": "minecraft:sweet_berries"
     },
     {
-      "item": "minecraft:potato"
+      "tag": "forge:crops/cabbage"
     },
     {
       "tag": "forge:crops/onion"
@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "farmersdelight:grilled_salmon"
-  }
+  },
+  "cookingtime": 200
 }
