@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.data;
 
+import com.google.common.collect.Sets;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.block.Blocks;
@@ -411,10 +412,20 @@ public class Recipes extends RecipeProvider
 				.addCriterion("has_milk_bucket", InventoryChangeTrigger.Instance.forItems(Items.MILK_BUCKET))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RAW_PASTA.get())
-				.addIngredient(ForgeTags.EGGS)
+				.addIngredient(Ingredient.merge(Sets.newHashSet(
+						Ingredient.fromTag(ForgeTags.EGGS),
+						Ingredient.fromItems(Items.WATER_BUCKET)
+				)))
 				.addIngredient(Items.WHEAT)
 				.addIngredient(Items.WHEAT)
-				.addCriterion("has_egg", InventoryChangeTrigger.Instance.forItems(Items.EGG))
+				.addCriterion("has_wheat", InventoryChangeTrigger.Instance.forItems(Items.WHEAT))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.WHEAT_DOUGH.get(), 3)
+				.patternLine("www")
+				.patternLine(" b ")
+				.key('w', Items.WHEAT)
+				.key('b', Items.WATER_BUCKET)
+				.addCriterion("has_wheat", InventoryChangeTrigger.Instance.forItems(Items.WHEAT))
 				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ModItems.PIE_CRUST.get(), 1)
 				.patternLine("wMw")
@@ -568,6 +579,22 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ForgeTags.COOKED_BEEF)
 				.addIngredient(Items.CARROT)
 				.addIngredient(ForgeTags.MILK)
+				.addCriterion("baked_potato", InventoryChangeTrigger.Instance.forItems(Items.BAKED_POTATO))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.GRILLED_SALMON.get())
+				.addIngredient(ForgeTags.COOKED_FISHES_SALMON)
+				.addIngredient(Items.SWEET_BERRIES)
+				.addIngredient(Items.BOWL)
+				.addIngredient(ForgeTags.CROPS_CABBAGE)
+				.addIngredient(ForgeTags.CROPS_ONION)
+				.addCriterion("has_salmon", InventoryChangeTrigger.Instance.forItems(Items.SALMON))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.STEAK_AND_POTATOES.get())
+				.addIngredient(Items.BAKED_POTATO)
+				.addIngredient(Items.COOKED_BEEF)
+				.addIngredient(Items.BOWL)
+				.addIngredient(ForgeTags.CROPS_ONION)
+				.addIngredient(ModItems.COOKED_RICE.get())
 				.addCriterion("baked_potato", InventoryChangeTrigger.Instance.forItems(Items.BAKED_POTATO))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ROAST_CHICKEN_BLOCK.get())

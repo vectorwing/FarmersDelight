@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.data.recipes;
 
+import com.google.common.collect.Sets;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
@@ -78,16 +79,16 @@ public class CookingRecipes
 				.addIngredient(ForgeTags.CROPS_RICE)
 				.build(consumer);
 		// TODO: Figure out how to make an Ingredient out of both items and tags.
-//		CookingPotRecipeBuilder.cookingRecipe(ModItems.DUMPLINGS.get(), 2)
-//				.addIngredient(ForgeTags.PASTA)
-//				.addIngredient(ForgeTags.CROPS_CABBAGE)
-//				.addIngredient(ForgeTags.CROPS_ONION)
-//				.addIngredient(Ingredient.fromItems(
-//						Items.BROWN_MUSHROOM,
-//						ForgeTags.RAW_CHICKEN.getAllElements().,
-//						Items.PORKCHOP
-//				))
-//				.build(consumer);
+		CookingPotRecipeBuilder.cookingRecipe(ModItems.DUMPLINGS.get(), 2)
+				.addIngredient(ForgeTags.PASTA)
+				.addIngredient(ForgeTags.CROPS_CABBAGE)
+				.addIngredient(ForgeTags.CROPS_ONION)
+				.addIngredient(Ingredient.merge(Sets.newHashSet(
+						Ingredient.fromTag(ForgeTags.RAW_CHICKEN),
+						Ingredient.fromItems(Items.PORKCHOP),
+						Ingredient.fromItems(Items.BROWN_MUSHROOM)
+				)))
+				.build(consumer);
 		CookingPotRecipeBuilder.cookingRecipe(ModItems.FISH_STEW.get(), 1)
 				.addIngredient(ForgeTags.RAW_FISHES)
 				.addIngredient(ModItems.TOMATO_SAUCE.get())
@@ -99,12 +100,12 @@ public class CookingRecipes
 				.addIngredient(Items.CARROT)
 				.addIngredient(ForgeTags.CROPS_ONION)
 				.build(consumer);
-		CookingPotRecipeBuilder.cookingRecipe(ModItems.GRILLED_SALMON.get(), 1)
-				.addIngredient(ForgeTags.COOKED_FISHES_SALMON)
-				.addIngredient(Items.SWEET_BERRIES)
-				.addIngredient(ForgeTags.CROPS_CABBAGE)
-				.addIngredient(ForgeTags.CROPS_ONION)
-				.build(consumer);
+//		CookingPotRecipeBuilder.cookingRecipe(ModItems.GRILLED_SALMON.get(), 1)
+//				.addIngredient(ForgeTags.COOKED_FISHES_SALMON)
+//				.addIngredient(Items.SWEET_BERRIES)
+//				.addIngredient(ForgeTags.CROPS_CABBAGE)
+//				.addIngredient(ForgeTags.CROPS_ONION)
+//				.build(consumer);
 		CookingPotRecipeBuilder.cookingRecipe(ModItems.HONEY_GLAZED_HAM.get(), 1)
 				.addIngredient(Items.PORKCHOP)
 				.addIngredient(Items.HONEY_BOTTLE)

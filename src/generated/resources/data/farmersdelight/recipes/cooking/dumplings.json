@@ -11,13 +11,20 @@
       "tag": "forge:crops/onion"
     },
     [
-      {"item": "minecraft:brown_mushroom"},
-      {"tag": "forge:raw_chicken"},
-      {"item": "minecraft:porkchop"}
+      {
+        "item": "minecraft:porkchop"
+      },
+      {
+        "tag": "forge:raw_chicken"
+      },
+      {
+        "item": "minecraft:brown_mushroom"
+      }
     ]
   ],
   "result": {
     "item": "farmersdelight:dumplings",
     "count": 2
-  }
+  },
+  "cookingtime": 200
 }

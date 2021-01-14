@@ -1,11 +1,14 @@
 {
-  "type": "farmersdelight:cooking",
+  "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
       "tag": "forge:cooked_fishes/salmon"
     },
     {
       "item": "minecraft:sweet_berries"
+    },
+    {
+      "item": "minecraft:bowl"
     },
     {
       "tag": "forge:crops/cabbage"
@@ -16,6 +19,5 @@
   ],
   "result": {
     "item": "farmersdelight:grilled_salmon"
-  },
-  "cookingtime": 200
+  }
 }

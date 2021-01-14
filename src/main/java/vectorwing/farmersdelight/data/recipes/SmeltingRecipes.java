@@ -22,6 +22,15 @@ public class SmeltingRecipes
 		foodSmeltingRecipes("cooked_cod_slice", ModItems.COD_SLICE.get(), ModItems.COOKED_COD_SLICE.get(), 0.35F, consumer);
 		foodSmeltingRecipes("cooked_salmon_slice", ModItems.SALMON_SLICE.get(), ModItems.COOKED_SALMON_SLICE.get(), 0.35F, consumer);
 
+		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ModItems.WHEAT_DOUGH.get()),
+				Items.BREAD, 0.35F, 200)
+				.addCriterion("has_dough", InventoryChangeTrigger.Instance.forItems(ModItems.WHEAT_DOUGH.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "bread").toString() + "_from_smelting");
+		CookingRecipeBuilder.cookingRecipe(Ingredient.fromItems(ModItems.WHEAT_DOUGH.get()),
+				Items.BREAD, 0.35F, 100, IRecipeSerializer.SMOKING)
+				.addCriterion("has_dough", InventoryChangeTrigger.Instance.forItems(ModItems.WHEAT_DOUGH.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "bread").toString() + "_from_smoking");
+
 		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ModItems.IRON_KNIFE.get()),
 				Items.IRON_NUGGET, 0.1F, 200)
 				.addCriterion("has_iron_knife", InventoryChangeTrigger.Instance.forItems(ModItems.IRON_KNIFE.get()))
