@@ -141,6 +141,10 @@ public class ModItems
 			() -> new Item(new Item.Properties().food(Foods.CHICKEN_CUTS).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> COOKED_CHICKEN_CUTS = ITEMS.register("cooked_chicken_cuts",
 			() -> new Item(new Item.Properties().food(Foods.COOKED_CHICKEN_CUTS).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> BACON = ITEMS.register("bacon",
+			() -> new Item(new Item.Properties().food(Foods.BACON).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> COOKED_BACON = ITEMS.register("cooked_bacon",
+			() -> new Item(new Item.Properties().food(Foods.COOKED_BACON).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> COD_SLICE = ITEMS.register("cod_slice",
 			() -> new Item(new Item.Properties().food(Foods.COD_SLICE).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> COOKED_COD_SLICE = ITEMS.register("cooked_cod_slice",
@@ -187,6 +191,8 @@ public class ModItems
 			() -> new Item(new Item.Properties().food(Foods.CHICKEN_SANDWICH).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> HAMBURGER = ITEMS.register("hamburger",
 			() -> new Item(new Item.Properties().food(Foods.HAMBURGER).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> BACON_SANDWICH = ITEMS.register("bacon_sandwich",
+			() -> new Item(new Item.Properties().food(Foods.BACON_SANDWICH).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> DUMPLINGS = ITEMS.register("dumplings",
 			() -> new Item(new Item.Properties().food(Foods.DUMPLINGS).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> STUFFED_POTATO = ITEMS.register("stuffed_potato",

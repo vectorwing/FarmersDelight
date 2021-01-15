@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "farmersdelight:hamburger"
+      "farmersdelight:bacon_sandwich"
     ]
   },
   "criteria": {
-    "has_beef_patty": {
+    "has_bacon": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:beef_patty"
+            "item": "farmersdelight:cooked_bacon"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "farmersdelight:hamburger"
+        "recipe": "farmersdelight:bacon_sandwich"
       }
     }
   },
   "requirements": [
     [
-      "has_beef_patty",
+      "has_bacon",
       "has_the_recipe"
     ]
   ]

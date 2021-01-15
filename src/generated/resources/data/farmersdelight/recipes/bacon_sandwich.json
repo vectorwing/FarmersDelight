@@ -5,16 +5,16 @@
       "tag": "forge:bread"
     },
     {
-      "tag": "forge:cooked_chicken"
+      "item": "farmersdelight:cooked_bacon"
     },
     {
       "tag": "forge:salad_ingredients"
     },
     {
-      "tag": "forge:crops/onion"
+      "tag": "forge:crops/tomato"
     }
   ],
   "result": {
-    "item": "farmersdelight:chicken_sandwich"
+    "item": "farmersdelight:bacon_sandwich"
   }
 }

@@ -85,7 +85,7 @@ public class CookingRecipes
 				.addIngredient(ForgeTags.CROPS_ONION)
 				.addIngredient(Ingredient.merge(Sets.newHashSet(
 						Ingredient.fromTag(ForgeTags.RAW_CHICKEN),
-						Ingredient.fromItems(Items.PORKCHOP),
+						Ingredient.fromTag(ForgeTags.RAW_PORK),
 						Ingredient.fromItems(Items.BROWN_MUSHROOM)
 				)))
 				.build(consumer);
@@ -100,12 +100,6 @@ public class CookingRecipes
 				.addIngredient(Items.CARROT)
 				.addIngredient(ForgeTags.CROPS_ONION)
 				.build(consumer);
-//		CookingPotRecipeBuilder.cookingRecipe(ModItems.GRILLED_SALMON.get(), 1)
-//				.addIngredient(ForgeTags.COOKED_FISHES_SALMON)
-//				.addIngredient(Items.SWEET_BERRIES)
-//				.addIngredient(ForgeTags.CROPS_CABBAGE)
-//				.addIngredient(ForgeTags.CROPS_ONION)
-//				.build(consumer);
 		CookingPotRecipeBuilder.cookingRecipe(ModItems.HONEY_GLAZED_HAM.get(), 1)
 				.addIngredient(Items.PORKCHOP)
 				.addIngredient(Items.HONEY_BOTTLE)
@@ -125,7 +119,7 @@ public class CookingRecipes
 		CookingPotRecipeBuilder.cookingRecipe(ModItems.PUMPKIN_SOUP.get(), 1)
 				.addIngredient(ModItems.PUMPKIN_SLICE.get())
 				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
-				.addIngredient(Items.PORKCHOP)
+				.addIngredient(ForgeTags.RAW_PORK)
 				.addIngredient(ForgeTags.MILK)
 				.build(consumer);
 		CookingPotRecipeBuilder.cookingRecipe(ModItems.RATATOUILLE.get(), 1)

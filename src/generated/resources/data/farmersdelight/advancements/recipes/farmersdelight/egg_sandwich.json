@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "fried_egg": {
+    "has_fried_egg": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "fried_egg",
+      "has_fried_egg",
       "has_the_recipe"
     ]
   ]
