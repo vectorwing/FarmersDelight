@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "gold_ingot": {
+    "has_gold_ingot": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "gold_ingot",
+      "has_gold_ingot",
       "has_the_recipe"
     ]
   ]

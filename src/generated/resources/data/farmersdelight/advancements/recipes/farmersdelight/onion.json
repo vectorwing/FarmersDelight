@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "onion_crate": {
+    "has_onion_crate": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "onion_crate",
+      "has_onion_crate",
       "has_the_recipe"
     ]
   ]

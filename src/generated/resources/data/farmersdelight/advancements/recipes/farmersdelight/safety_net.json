@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "rope": {
+    "has_rope": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "rope",
+      "has_rope",
       "has_the_recipe"
     ]
   ]

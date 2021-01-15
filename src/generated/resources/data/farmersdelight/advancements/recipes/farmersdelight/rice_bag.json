@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "rice": {
+    "has_rice": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "rice",
+      "has_rice",
       "has_the_recipe"
     ]
   ]

@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "tree_bark": {
+    "has_tree_bark": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -16,7 +16,7 @@
         ]
       }
     },
-    "straw": {
+    "has_straw": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -35,8 +35,8 @@
   },
   "requirements": [
     [
-      "tree_bark",
-      "straw",
+      "has_tree_bark",
+      "has_straw",
       "has_the_recipe"
     ]
   ]

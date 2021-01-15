@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "chocolate_pie_slice": {
+    "has_chocolate_pie_slice": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "chocolate_pie_slice",
+      "has_chocolate_pie_slice",
       "has_the_recipe"
     ]
   ]

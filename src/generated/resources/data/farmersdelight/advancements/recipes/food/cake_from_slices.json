@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "cake_slice": {
+    "has_cake_slice": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "cake_slice",
+      "has_cake_slice",
       "has_the_recipe"
     ]
   ]

@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "baked_potato": {
+    "has_baked_potato": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "baked_potato",
+      "has_baked_potato",
       "has_the_recipe"
     ]
   ]
