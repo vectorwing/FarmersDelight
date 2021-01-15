@@ -1,0 +1,13 @@
+{
+    "required": true,
+    "package": "vectorwing.farmersdelight.mixin",
+    "compatibilityLevel": "JAVA_8",
+    "refmap": "farmersdelight.refmap.json",
+    "mixins": [
+        "KeepRichSoilMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    },
+    "minVersion": "0.8"
+}
