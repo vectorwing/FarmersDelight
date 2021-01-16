@@ -44,7 +44,7 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
     public DecompositionRecipeCategory(IGuiHelper helper) {
         title = I18n.format(FarmersDelight.MODID + ".jei.decomposition");
         ResourceLocation backgroundImage = new ResourceLocation(FarmersDelight.MODID, "textures/gui/jei/decomposition.png");
-        background = helper.createDrawable(backgroundImage, 0, 0, 118, 150);
+        background = helper.createDrawable(backgroundImage, 0, 0, 118, 80);
         organicCompost = new ItemStack(ModBlocks.ORGANIC_COMPOST.get());
         richSoil = new ItemStack(ModItems.RICH_SOIL.get());
         accelerators = ModTags.COMPOST_ACTIVATORS.getAllElements().stream()
