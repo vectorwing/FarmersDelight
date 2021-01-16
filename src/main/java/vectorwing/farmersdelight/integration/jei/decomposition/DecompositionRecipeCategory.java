@@ -80,7 +80,7 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 
     @Override
     public void setIngredients(DecompositionDummy decompositionRecipe, IIngredients ingredients) {
-        ingredients.setInputIngredients(ImmutableList.of(Ingredient.fromItems(organicCompost.getItem())));
+        ingredients.setInputIngredients(ImmutableList.of(Ingredient.fromStacks(organicCompost), Ingredient.fromStacks(accelerators.stream())));
         ingredients.setOutput(VanillaTypes.ITEM, richSoil);
     }
 
