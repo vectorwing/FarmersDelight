@@ -192,5 +192,9 @@
   "block.stove.crackle.subtitles": "Stove crackles",
 
   "farmersdelight.jei.cooking": "Cooking",
-  "farmersdelight.jei.cutting": "Cutting Board"
+  "farmersdelight.jei.cutting": "Cutting Board",
+  "farmersdelight.jei.decomposition": "Decomposition",
+  "farmersdelight.jei.decomposition.light": "Sped up by sunlight",
+  "farmersdelight.jei.decomposition.fluid": "Sped up by adjacent water",
+  "farmersdelight.jei.decomposition.accelerators": "Sped up by adjacent activators (see below)"
 }

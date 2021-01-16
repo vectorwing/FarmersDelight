@@ -160,5 +160,9 @@
   "block.stove.crackle.subtitles": "Herd knistert",
 
   "farmersdelight.jei.cooking": "Kochen",
-  "farmersdelight.jei.cutting": "Schneidebrett"
+  "farmersdelight.jei.cutting": "Schneidebrett",
+  "farmersdelight.jei.decomposition": "Kompostierung",
+  "farmersdelight.jei.decomposition.light": "Beschleunigt durch Sonnenlicht",
+  "farmersdelight.jei.decomposition.fluid": "Beschleunigt durch benachbartes Wasser",
+  "farmersdelight.jei.decomposition.accelerators": "Beschleunigt durch benachbarte Aktivatoren (siehe unten)"
 }
