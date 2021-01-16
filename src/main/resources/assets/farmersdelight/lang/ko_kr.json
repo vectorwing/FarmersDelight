@@ -9,6 +9,8 @@
   "block.farmersdelight.jungle_pantry": "정글나무 식료품 선반",
   "block.farmersdelight.acacia_pantry": "아카시아 식료품 선반",
   "block.farmersdelight.dark_oak_pantry": "짙은 참나무 식료품 선반",
+  "block.farmersdelight.crimson_pantry": "진홍빛 식료품 선반",
+  "block.farmersdelight.warped_pantry": "뒤틀린 식료품 선반",
   "block.farmersdelight.rope": "밧줄",
   "block.farmersdelight.safety_net": "안전 망",
   "block.farmersdelight.tatami": "다다미 블록",
@@ -31,6 +33,7 @@
   "block.farmersdelight.wild_carrots": "야생 당근",
   "block.farmersdelight.wild_potatoes": "야생 감자",
   "block.farmersdelight.wild_beetroots": "야생 사탕무",
+  "block.farmersdelight.wild_rice": "야생 벼",
 
   "block.farmersdelight.apple_pie": "사과 파이",
   "block.farmersdelight.sweet_berry_cheesecake": "달콤한 열매 치즈케이크",
@@ -77,6 +80,7 @@
   "item.farmersdelight.iron_knife": "철 식칼",
   "item.farmersdelight.golden_knife": "금 식칼",
   "item.farmersdelight.diamond_knife": "다이아몬드 식칼",
+  "item.farmersdelight.netherite_knife": "네더라이트 식칼",
 
   "item.farmersdelight.barbecue_stick": "바비큐 꼬치",
   "item.farmersdelight.egg_sandwich": "달걀 샌드위치",
@@ -88,6 +92,7 @@
 
   "item.farmersdelight.cooked_rice": "밥",
   "item.farmersdelight.mixed_salad": "샐러드",
+  "item.farmersdelight.nether_salad": "지옥 샐러드",
   "item.farmersdelight.beef_stew": "소고기 스튜",
   "item.farmersdelight.chicken_soup": "닭고기 수프",
   "item.farmersdelight.vegetable_soup": "야채 수프",
@@ -99,7 +104,7 @@
   "item.farmersdelight.honey_glazed_ham": "꿀 바른 돼지고기 구이",
   "item.farmersdelight.pasta_with_meatballs": "미트볼 파스타",
   "item.farmersdelight.pasta_with_mutton_chop": "양고기 파스타",
-  "item.farmersdelight.steak_and_potatoes": "스테이크와 찐 감자",
+  "item.farmersdelight.steak_and_potatoes": "스테이크와 감자",
   "item.farmersdelight.vegetable_noodles": "잡채",
   "item.farmersdelight.shepherds_pie": "셰퍼드 파이",
   "item.farmersdelight.ratatouille": "라따뚜이",
@@ -126,6 +131,9 @@
   "farmersdelight.tooltip.cooking_pot.single_serving": "1인분의:",
   "farmersdelight.tooltip.cooking_pot.many_servings": "%s인분의:",
 
+  "farmersdelight.tooltip.dog_food.when_feeding": "개에게 먹였을 때:",
+  "farmersdelight.tooltip.horse_feed.when_feeding": "말에게 먹였을 때:",
+  
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "맛의 세계가 당신을 기다립니다!",
   "farmersdelight.advancement.craft_knife": "수렵과 채집",
@@ -136,11 +144,13 @@
   "farmersdelight.advancement.harvest_straw.desc": "식칼을 이용해 풀이 무성한 곳에서 지푸라기를 얻으세요",
   "farmersdelight.advancement.get_rich_soil": "식물의 먹을거리",
   "farmersdelight.advancement.get_rich_soil.desc": "유기농 퇴비를 기름진 흙이 될 때까지 내버려두세요",
+  "farmersdelight.advancement.obtain_netherite_knife": "열을 견딜 수 없다면...",
+  "farmersdelight.advancement.obtain_netherite_knife.desc": "네더라이트 주괴로 식칼을 강화하세요. 이게 좋은 선택일까요..?",
 
   "farmersdelight.advancement.place_campfire": "BONFIRE LIT",
   "farmersdelight.advancement.place_campfire.desc": "밤에 당신을 따뜻하게 해줄 모닥불을 설치하세요",
-  "farmersdelight.advancement.craft_stove": "장작 하나 더",
-  "farmersdelight.advancement.craft_stove.desc": "난로를 제작하세요",
+  "farmersdelight.advancement.place_stove": "장작 하나 더",
+  "farmersdelight.advancement.place_stove.desc": "난로를 제작하세요",
   "farmersdelight.advancement.place_cooking_pot": "요리 시작!",
   "farmersdelight.advancement.place_cooking_pot.desc": "조리용 냄비를 설치하고 식사를 준비하세요!",
   "farmersdelight.advancement.eat_comfort_food": "등 따스하고 배부르면",

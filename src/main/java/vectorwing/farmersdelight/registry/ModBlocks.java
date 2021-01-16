@@ -3,18 +3,27 @@ package vectorwing.farmersdelight.registry;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Items;
-import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.blocks.*;
+import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.blocks.*;
+
+import java.util.function.ToIntFunction;
 
 public class ModBlocks
 {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FarmersDelight.MODID);
 
+	private static ToIntFunction<BlockState> getLightValueLit(int lightValue) {
+		return (state) -> state.get(BlockStateProperties.LIT) ? lightValue : 0;
+	}
+
 	// FUNCTIONAL
-	public static final RegistryObject<Block> STOVE = BLOCKS.register("stove", StoveBlock::new);
+
+	public static final RegistryObject<Block> STOVE = BLOCKS.register("stove", () -> new StoveBlock(AbstractBlock.Properties.from(Blocks.BRICKS).setLightLevel(getLightValueLit(13))));
 	public static final RegistryObject<Block> COOKING_POT = BLOCKS.register("cooking_pot", CookingPotBlock::new);
 	public static final RegistryObject<Block> BASKET = BLOCKS.register("basket", BasketBlock::new);
 	public static final RegistryObject<Block> CUTTING_BOARD = BLOCKS.register("cutting_board", CuttingBoardBlock::new);
@@ -25,7 +34,12 @@ public class ModBlocks
 	public static final RegistryObject<Block> ONION_CRATE = BLOCKS.register("onion_crate",
 			() -> new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> RICE_BALE = BLOCKS.register("rice_bale",
-			() -> new RiceBaleBlock(Block.Properties.from(Blocks.HAY_BLOCK)));
+			() -> new RiceBaleBlock(Block.Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.HOE)));
+	public static final RegistryObject<Block> RICE_BAG = BLOCKS.register("rice_bag",
+			() -> new Block(Block.Properties.from(Blocks.WHITE_WOOL).harvestTool(ToolType.HOE)));
+	public static final RegistryObject<Block> STRAW_BALE = BLOCKS.register("straw_bale",
+			() -> new HayBlock(Block.Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.HOE)));
+	public static final RegistryObject<Block> ROPE = BLOCKS.register("rope", RopeBlock::new);
 	public static final RegistryObject<Block> SAFETY_NET = BLOCKS.register("safety_net", SafetyNetBlock::new);
 	public static final RegistryObject<Block> OAK_PANTRY = BLOCKS.register("oak_pantry",
 			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
@@ -39,20 +53,23 @@ public class ModBlocks
 			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
 	public static final RegistryObject<Block> DARK_OAK_PANTRY = BLOCKS.register("dark_oak_pantry",
 			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
+	public static final RegistryObject<Block> CRIMSON_PANTRY = BLOCKS.register("crimson_pantry",
+			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
+	public static final RegistryObject<Block> WARPED_PANTRY = BLOCKS.register("warped_pantry",
+			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
 	public static final RegistryObject<Block> TATAMI = BLOCKS.register("tatami", TatamiBlock::new);
 	public static final RegistryObject<Block> FULL_TATAMI_MAT = BLOCKS.register("full_tatami_mat", TatamiMatBlock::new);
 	public static final RegistryObject<Block> HALF_TATAMI_MAT = BLOCKS.register("half_tatami_mat", TatamiHalfMatBlock::new);
-	public static final RegistryObject<Block> ORGANIC_COMPOST = BLOCKS.register("organic_compost",
-			() -> new OrganicCompostBlock(Block.Properties.from(Blocks.DIRT)));
-	public static final RegistryObject<Block> RICH_SOIL = BLOCKS.register("rich_soil",
-			() -> new RichSoilBlock(Block.Properties.from(Blocks.DIRT).tickRandomly()));
-	public static final RegistryObject<Block> RICH_SOIL_FARMLAND = BLOCKS.register("rich_soil_farmland",
-			() -> new RichSoilFarmlandBlock(Block.Properties.from(Blocks.FARMLAND)));
 	public static final RegistryObject<Block> BROWN_MUSHROOM_COLONY = BLOCKS.register("brown_mushroom_colony",
 			() -> new MushroomColonyBlock(Block.Properties.from(Blocks.BROWN_MUSHROOM), Items.BROWN_MUSHROOM.delegate));
 	public static final RegistryObject<Block> RED_MUSHROOM_COLONY = BLOCKS.register("red_mushroom_colony",
 			() -> new MushroomColonyBlock(Block.Properties.from(Blocks.RED_MUSHROOM), Items.RED_MUSHROOM.delegate));
-	public static final RegistryObject<Block> ROPE = BLOCKS.register("rope", RopeBlock::new);
+	public static final RegistryObject<Block> ORGANIC_COMPOST = BLOCKS.register("organic_compost",
+			() -> new OrganicCompostBlock(Block.Properties.from(Blocks.DIRT).hardnessAndResistance(1.2F).sound(SoundType.CROP).harvestTool(ToolType.SHOVEL)));
+	public static final RegistryObject<Block> RICH_SOIL = BLOCKS.register("rich_soil",
+			() -> new RichSoilBlock(Block.Properties.from(Blocks.DIRT).harvestTool(ToolType.SHOVEL).tickRandomly()));
+	public static final RegistryObject<Block> RICH_SOIL_FARMLAND = BLOCKS.register("rich_soil_farmland",
+			() -> new RichSoilFarmlandBlock(Block.Properties.from(Blocks.FARMLAND).harvestTool(ToolType.SHOVEL)));
 
 	// PASTRY BLOCKS
 	public static final RegistryObject<Block> APPLE_PIE = BLOCKS.register("apple_pie",
@@ -89,6 +106,12 @@ public class ModBlocks
 			() -> new RiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
 	public static final RegistryObject<Block> RICE_UPPER_CROP = BLOCKS.register("rice_upper_crop",
 			() -> new RiceUpperCropBlock(Block.Properties.from(Blocks.WHEAT)));
+
+	// FEASTS
+	public static final RegistryObject<Block> ROAST_CHICKEN_BLOCK = BLOCKS.register("roast_chicken_block",
+			() -> new RoastChickenBlock(Block.Properties.from(Blocks.WHITE_WOOL), ModItems.ROAST_CHICKEN, true));
+	public static final RegistryObject<Block> STUFFED_PUMPKIN_BLOCK = BLOCKS.register("stuffed_pumpkin_block",
+			() -> new FeastBlock(Block.Properties.from(Blocks.PUMPKIN), ModItems.STUFFED_PUMPKIN, false));
 
 	@Deprecated
 	public static final RegistryObject<Block> TALL_RICE_CROP = BLOCKS.register("tall_rice_crop",

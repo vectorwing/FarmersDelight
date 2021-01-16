@@ -48,8 +48,7 @@ public class CookingPotItemHandler implements IItemHandler
 
 	@Override
 	@Nonnull
-	public ItemStack extractItem(int slot, int amount, boolean simulate)
-	{
+	public ItemStack extractItem(int slot, int amount, boolean simulate) {
 		if (side == null || side.equals(Direction.UP)) {
 			return slot < SLOTS_INPUT ? itemHandler.extractItem(slot, amount, simulate) : ItemStack.EMPTY;
 		} else {
@@ -58,8 +57,7 @@ public class CookingPotItemHandler implements IItemHandler
 	}
 
 	@Override
-	public int getSlotLimit(int slot)
-	{
+	public int getSlotLimit(int slot) {
 		return itemHandler.getSlotLimit(slot);
 	}
 }

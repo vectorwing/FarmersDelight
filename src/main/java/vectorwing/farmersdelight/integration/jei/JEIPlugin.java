@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.integration.jei;
 
+import mcp.MethodsReturnNonnullByDefault;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaRecipeCategoryUid;
@@ -13,18 +14,32 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.integration.jei.cooking.CookingRecipeCategory;
 import vectorwing.farmersdelight.integration.jei.cutting.CuttingRecipeCategory;
 import vectorwing.farmersdelight.registry.ModItems;
-import vectorwing.farmersdelight.integration.jei.cooking.CookingRecipeCategory;
 import vectorwing.farmersdelight.tile.container.CookingPotContainer;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @JeiPlugin
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+@SuppressWarnings("unused")
 public class JEIPlugin implements IModPlugin
 {
-	private static ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "jei_plugin");
+	private static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "jei_plugin");
+	private static final Minecraft MC = Minecraft.getInstance();
+
+	private static List<IRecipe<?>> findRecipesByType(IRecipeType<?> type) {
+		return MC.world
+				.getRecipeManager()
+				.getRecipes()
+				.stream()
+				.filter(r -> r.getType() == type)
+				.collect(Collectors.toList());
+	}
 
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registry) {
@@ -55,15 +70,8 @@ public class JEIPlugin implements IModPlugin
 		registration.addRecipeTransferHandler(CookingPotContainer.class, CookingRecipeCategory.UID, 0, 6, 9, 36);
 	}
 
-	private static List<IRecipe<?>> findRecipesByType(IRecipeType<?> type) {
-		return Minecraft.getInstance().world
-				.getRecipeManager()
-				.getRecipes()
-				.stream()
-				.filter(r -> r.getType() == type)
-				.collect(Collectors.toList());
-	}
-
 	@Override
-	public ResourceLocation getPluginUid() { return ID;	}
+	public ResourceLocation getPluginUid() {
+		return ID;
+	}
 }

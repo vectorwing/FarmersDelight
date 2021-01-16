@@ -4,17 +4,18 @@ import com.google.common.collect.Lists;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.*;
-import net.minecraft.util.*;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.EffectUtils;
+import net.minecraft.potion.Effects;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.text.*;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -29,38 +30,38 @@ import vectorwing.farmersdelight.utils.TextUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Map;
 
-public class DogFoodItem extends MealItem
+public class DogFoodItem extends ConsumableItem
 {
 	public static final List<EffectInstance> EFFECTS = Lists.newArrayList(
 			new EffectInstance(Effects.SPEED, 6000, 0),
 			new EffectInstance(Effects.STRENGTH, 6000, 0),
 			new EffectInstance(Effects.RESISTANCE, 6000, 0));
 
-	public DogFoodItem(Properties builder)
-	{
-		super(builder);
+	public DogFoodItem(Properties properties) {
+		super(properties);
 	}
 
 	@Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-	public static class DogFoodEvent {
+	public static class DogFoodEvent
+	{
 		@SubscribeEvent
+		@SuppressWarnings("unused")
 		public static void onDogFoodApplied(PlayerInteractEvent.EntityInteract event) {
 			PlayerEntity player = event.getPlayer();
 			Entity target = event.getTarget();
 			ItemStack itemStack = event.getItemStack();
 
 			if (target instanceof WolfEntity) {
-				WolfEntity wolf = (WolfEntity)target;
+				WolfEntity wolf = (WolfEntity) target;
 				if (wolf.isAlive() && wolf.isTamed() && itemStack.getItem().equals(ModItems.DOG_FOOD.get())) {
 					wolf.setHealth(wolf.getMaxHealth());
-					for(EffectInstance effect : EFFECTS) {
+					for (EffectInstance effect : EFFECTS) {
 						wolf.addPotionEffect(new EffectInstance(effect));
 					}
 					wolf.world.playSound(null, target.getPosition(), SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.PLAYERS, 0.8F, 0.8F);
 
-					for(int i = 0; i < 5; ++i) {
+					for (int i = 0; i < 5; ++i) {
 						double d0 = MathUtils.RAND.nextGaussian() * 0.02D;
 						double d1 = MathUtils.RAND.nextGaussian() * 0.02D;
 						double d2 = MathUtils.RAND.nextGaussian() * 0.02D;
@@ -79,44 +80,38 @@ public class DogFoodItem extends MealItem
 		}
 	}
 
+	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		ITextComponent whenFeeding = TextUtils.getTranslation("tooltip.dog_food.when_feeding");
-		tooltip.add(whenFeeding.applyTextStyle(TextFormatting.GRAY));
+		IFormattableTextComponent whenFeeding = TextUtils.getTranslation("tooltip.dog_food.when_feeding");
+		tooltip.add(whenFeeding.mergeStyle(TextFormatting.GRAY));
 
-		List<Tuple<String, AttributeModifier>> list1 = Lists.newArrayList();
-
-		for(EffectInstance effectinstance : EFFECTS) {
-			ITextComponent effectDescription = new StringTextComponent(" ");
-			ITextComponent effectName = new TranslationTextComponent(effectinstance.getEffectName());
-			effectDescription.appendSibling(effectName);
+		for (EffectInstance effectinstance : EFFECTS) {
+			IFormattableTextComponent effectDescription = new StringTextComponent(" ");
+			IFormattableTextComponent effectName = new TranslationTextComponent(effectinstance.getEffectName());
+			effectDescription.append(effectName);
 			Effect effect = effectinstance.getPotion();
-			Map<IAttribute, AttributeModifier> map = effect.getAttributeModifierMap();
-			if (!map.isEmpty()) {
-				for(Map.Entry<IAttribute, AttributeModifier> entry : map.entrySet()) {
-					AttributeModifier attributemodifier = entry.getValue();
-					AttributeModifier attributemodifier1 = new AttributeModifier(attributemodifier.getName(), effect.getAttributeModifierAmount(effectinstance.getAmplifier(), attributemodifier), attributemodifier.getOperation());
-					list1.add(new Tuple<>(entry.getKey().getName(), attributemodifier1));
-				}
-			}
 
 			if (effectinstance.getAmplifier() > 0) {
-				effectDescription.appendText(" ").appendSibling(new TranslationTextComponent("potion.potency." + effectinstance.getAmplifier()));
+				effectDescription.appendString(" ").append(new TranslationTextComponent("potion.potency." + effectinstance.getAmplifier()));
 			}
 
 			if (effectinstance.getDuration() > 20) {
-				effectDescription.appendText(" (").appendText(EffectUtils.getPotionDurationString(effectinstance, 1.0F)).appendText(")");
+				effectDescription.appendString(" (").appendString(EffectUtils.getPotionDurationString(effectinstance, 1.0F)).appendString(")");
 			}
 
-			tooltip.add(effectDescription.applyTextStyle(effect.getEffectType().getColor()));
+			tooltip.add(effectDescription.mergeStyle(effect.getEffectType().getColor()));
 		}
 	}
 
-	public boolean itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
+	@Override
+	public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
 		if (target instanceof WolfEntity) {
-			WolfEntity wolf = (WolfEntity)target;
-			return wolf.isAlive() && wolf.isTamed();
+			WolfEntity wolf = (WolfEntity) target;
+			if (wolf.isAlive() && wolf.isTamed()) {
+				return ActionResultType.SUCCESS;
+			}
 		}
-		return false;
+		return ActionResultType.PASS;
 	}
 }

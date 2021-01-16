@@ -1,0 +1,6 @@
+{
+  "parent": "farmersdelight:block/bush_crop",
+  "textures": {
+    "crop": "farmersdelight:block/wild_onions"
+  }
+}

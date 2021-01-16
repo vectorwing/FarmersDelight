@@ -1,11 +1,11 @@
 package vectorwing.farmersdelight.registry;
 
-import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.tile.*;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.tile.*;
 
 public class ModTileEntityTypes
 {

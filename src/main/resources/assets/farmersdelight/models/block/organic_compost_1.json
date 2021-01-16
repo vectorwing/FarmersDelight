@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "farmersdelight:blocks/organic_compost_1"
+    "all": "farmersdelight:block/organic_compost_stage0"
   }
 }

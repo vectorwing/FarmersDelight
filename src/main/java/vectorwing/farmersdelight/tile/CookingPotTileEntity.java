@@ -15,8 +15,13 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
+import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.Direction;
+import net.minecraft.util.IIntArray;
+import net.minecraft.util.INameable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
@@ -29,10 +34,10 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.blocks.CookingPotBlock;
-import vectorwing.farmersdelight.tile.inventory.CookingPotItemHandler;
-import vectorwing.farmersdelight.tile.container.CookingPotContainer;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+import vectorwing.farmersdelight.tile.container.CookingPotContainer;
+import vectorwing.farmersdelight.tile.inventory.CookingPotItemHandler;
 import vectorwing.farmersdelight.utils.TextUtils;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
@@ -58,9 +63,11 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 	private int cookTime;
 	private int cookTimeTotal;
 	private ItemStack container;
-	protected final IIntArray cookingPotData = new IIntArray() {
+	protected final IIntArray cookingPotData = new IIntArray()
+	{
+		@Override
 		public int get(int index) {
-			switch(index) {
+			switch (index) {
 				case 0:
 					return CookingPotTileEntity.this.cookTime;
 				case 1:
@@ -70,8 +77,9 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 			}
 		}
 
+		@Override
 		public void set(int index, int value) {
-			switch(index) {
+			switch (index) {
 				case 0:
 					CookingPotTileEntity.this.cookTime = value;
 					break;
@@ -80,6 +88,8 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 					break;
 			}
 		}
+
+		@Override
 		public int size() {
 			return 2;
 		}
@@ -93,27 +103,26 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		this.container = ItemStack.EMPTY;
 	}
 
-	public CookingPotTileEntity() {	this(ModTileEntityTypes.COOKING_POT_TILE.get(), CookingPotRecipe.TYPE); }
+	public CookingPotTileEntity() {
+		this(ModTileEntityTypes.COOKING_POT_TILE.get(), CookingPotRecipe.TYPE);
+	}
 
 	// ======== NBT & NETWORKING ========
 
+	@Override
 	@Nullable
 	public SUpdateTileEntityPacket getUpdatePacket() {
 		return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
 	}
 
+	@Override
 	public CompoundNBT getUpdateTag() {
 		return this.writeItems(new CompoundNBT());
 	}
 
 	@Override
-	public void handleUpdateTag(CompoundNBT tag) {
-		this.read(tag);
-	}
-
-	@Override
 	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-		this.read(pkt.getNbtCompound());
+		this.read(this.getBlockState(), pkt.getNbtCompound());
 	}
 
 	private void inventoryChanged() {
@@ -122,14 +131,14 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 	}
 
 	@Override
-	public void read(CompoundNBT compound) {
-		super.read(compound);
+	public void read(BlockState state, CompoundNBT compound) {
+		super.read(state, compound);
 		this.itemHandler.deserializeNBT(compound.getCompound("Inventory"));
 		this.cookTime = compound.getInt("CookTime");
 		this.cookTimeTotal = compound.getInt("CookTimeTotal");
 		this.container = ItemStack.read(compound.getCompound("Container"));
 		if (compound.contains("CustomName", 8)) {
-			this.customName = ITextComponent.Serializer.fromJson(compound.getString("CustomName"));
+			this.customName = ITextComponent.Serializer.getComponentFromJson(compound.getString("CustomName"));
 		}
 	}
 
@@ -322,7 +331,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 			return false;
 		BlockState checkState = world.getBlockState(pos.down());
 		if (ModTags.HEAT_SOURCES.contains(checkState.getBlock())) {
-			if (checkState.has(BlockStateProperties.LIT))
+			if (checkState.hasProperty(BlockStateProperties.LIT))
 				return checkState.get(BlockStateProperties.LIT);
 			return true;
 		}
@@ -414,15 +423,18 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 	}
 
 	@Override
-	public ITextComponent getName()	{
+	public ITextComponent getName() {
 		return this.customName != null
 				? this.customName
 				: TextUtils.getTranslation("container.cooking_pot");
 	}
 
 	@Override
-	public ITextComponent getDisplayName() { return this.getName(); }
+	public ITextComponent getDisplayName() {
+		return this.getName();
+	}
 
+	@Override
 	@Nullable
 	public ITextComponent getCustomName() {
 		return this.customName;
@@ -436,7 +448,8 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 	// ======== CAPABILITIES ========
 
 	private ItemStackHandler createHandler() {
-		return new ItemStackHandler(INVENTORY_SIZE) {
+		return new ItemStackHandler(INVENTORY_SIZE)
+		{
 			@Override
 			protected void onContentsChanged(int slot) {
 				if (slot >= 0 && slot < MEAL_DISPLAY) {
@@ -450,7 +463,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
 		if (cap.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)) {
-			if (side == null || side.equals(Direction.UP)){
+			if (side == null || side.equals(Direction.UP)) {
 				return handlerInput.cast();
 			} else {
 				return handlerOutput.cast();

@@ -1,5 +1,7 @@
 package vectorwing.farmersdelight.integration.jei.cutting;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
+import mcp.MethodsReturnNonnullByDefault;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -16,8 +18,11 @@ import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Arrays;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe>
 {
 	public static final ResourceLocation UID = new ResourceLocation(FarmersDelight.MODID, "cutting");
@@ -35,45 +40,38 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 	}
 
 	@Override
-	public ResourceLocation getUid()
-	{
+	public ResourceLocation getUid() {
 		return UID;
 	}
 
 	@Override
-	public Class<? extends CuttingBoardRecipe> getRecipeClass()
-	{
+	public Class<? extends CuttingBoardRecipe> getRecipeClass() {
 		return CuttingBoardRecipe.class;
 	}
 
 	@Override
-	public String getTitle()
-	{
+	public String getTitle() {
 		return this.title;
 	}
 
 	@Override
-	public IDrawable getBackground()
-	{
+	public IDrawable getBackground() {
 		return this.background;
 	}
 
 	@Override
-	public IDrawable getIcon()
-	{
+	public IDrawable getIcon() {
 		return this.icon;
 	}
 
 	@Override
-	public void setIngredients(CuttingBoardRecipe cuttingBoardRecipe, IIngredients ingredients)
-	{
+	public void setIngredients(CuttingBoardRecipe cuttingBoardRecipe, IIngredients ingredients) {
 		ingredients.setInputIngredients(cuttingBoardRecipe.getIngredientsAndTool());
 		ingredients.setOutputs(VanillaTypes.ITEM, cuttingBoardRecipe.getResults());
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, CuttingBoardRecipe recipe, IIngredients ingredients)
-	{
+	public void setRecipe(IRecipeLayout recipeLayout, CuttingBoardRecipe recipe, IIngredients ingredients) {
 		IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
 		NonNullList<ItemStack> recipeOutputs = recipe.getResults();
 
@@ -102,7 +100,7 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 	}
 
 	@Override
-	public void draw(CuttingBoardRecipe recipe, double mouseX, double mouseY) {
-		cuttingBoard.draw(15, 19);
+	public void draw(CuttingBoardRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
+		cuttingBoard.draw(matrixStack, 15, 19);
 	}
 }

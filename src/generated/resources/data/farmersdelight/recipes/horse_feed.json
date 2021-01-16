@@ -1,9 +1,14 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "minecraft:hay_block"
-    },
+    [
+      {
+        "item": "minecraft:hay_block"
+      },
+      {
+        "item": "farmersdelight:rice_bale"
+      }
+    ],
     {
       "item": "minecraft:apple"
     },

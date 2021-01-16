@@ -2,10 +2,10 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"top": "farmersdelight:blocks/basket_top",
-		"bottom": "farmersdelight:blocks/basket_bottom",
-		"particle": "farmersdelight:blocks/basket_side",
-		"side": "farmersdelight:blocks/basket_side"
+		"top": "farmersdelight:block/basket_top",
+		"bottom": "farmersdelight:block/basket_bottom",
+		"particle": "farmersdelight:block/basket_side",
+		"side": "farmersdelight:block/basket_side"
 	},
 	"elements": [
 		{

@@ -11,11 +11,11 @@ import javax.annotation.Nullable;
 
 public class RopeItem extends FuelBlockItem
 {
-	public RopeItem(Block blockIn, Properties builder)
-	{
-		super(blockIn, builder, 200);
+	public RopeItem(Block blockIn, Properties properties) {
+		super(blockIn, properties, 200);
 	}
 
+	@Override
 	@Nullable
 	public BlockItemUseContext getBlockItemUseContext(BlockItemUseContext context) {
 		BlockPos blockpos = context.getPos();
@@ -27,16 +27,16 @@ public class RopeItem extends FuelBlockItem
 			return context;
 		} else {
 			Direction direction;
-			if (context.func_225518_g_()) {
+			if (context.hasSecondaryUseForPlayer()) {
 				direction = context.getFace();
 			} else {
 				direction = Direction.DOWN;
 			}
 
 			int i = 0;
-			BlockPos.Mutable blockpos$mutable = (new BlockPos.Mutable(blockpos)).move(direction);
+			BlockPos.Mutable blockpos$mutable = (new BlockPos.Mutable(blockpos.getX(), blockpos.getY(), blockpos.getZ())).move(direction);
 
-			while(i < 256) {
+			while (i < 256) {
 				blockstate = world.getBlockState(blockpos$mutable);
 				if (blockstate.getBlock() != this.getBlock()) {
 					if (blockstate.isReplaceable(context)) {
@@ -57,6 +57,7 @@ public class RopeItem extends FuelBlockItem
 		}
 	}
 
+	@Override
 	protected boolean checkPosition() {
 		return false;
 	}

@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "farmersdelight:block/rice_bale",
+      "x": 180
+    },
+    "facing=up": {
+      "model": "farmersdelight:block/rice_bale"
+    },
+    "facing=north": {
+      "model": "farmersdelight:block/rice_bale",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "farmersdelight:block/rice_bale",
+      "x": 90,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "farmersdelight:block/rice_bale",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east": {
+      "model": "farmersdelight:block/rice_bale",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

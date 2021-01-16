@@ -2,9 +2,9 @@ package vectorwing.farmersdelight.loot.modifiers;
 
 import com.google.gson.JsonObject;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.LootContext;
+import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.LootContext;
-import net.minecraft.world.storage.loot.conditions.ILootCondition;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
 import vectorwing.farmersdelight.registry.ModItems;
@@ -16,26 +16,26 @@ public class StrawHarvestingModifier
 {
 	public static class KnifeStrawSerializer extends GlobalLootModifierSerializer<StrawHarvestingModifier.KnifeStrawModifier>
 	{
+		@Override
+		public StrawHarvestingModifier.KnifeStrawModifier read(ResourceLocation location, JsonObject object, ILootCondition[] ailootcondition) {
+			return new StrawHarvestingModifier.KnifeStrawModifier(ailootcondition);
+		}
 
 		@Override
-		public StrawHarvestingModifier.KnifeStrawModifier read(ResourceLocation location, JsonObject object, ILootCondition[] ailootcondition)
-		{
-			return new StrawHarvestingModifier.KnifeStrawModifier(ailootcondition);
+		public JsonObject write(KnifeStrawModifier instance) {
+			return new JsonObject();
 		}
 	}
 
 	public static class KnifeStrawModifier extends LootModifier
 	{
-
-		protected KnifeStrawModifier(ILootCondition[] conditionsIn)
-		{
+		protected KnifeStrawModifier(ILootCondition[] conditionsIn) {
 			super(conditionsIn);
 		}
 
 		@Nonnull
 		@Override
-		protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context)
-		{
+		protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
 			generatedLoot.add(new ItemStack(ModItems.STRAW.get()));
 			return generatedLoot;
 		}

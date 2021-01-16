@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.tile.container;
 
+
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -19,23 +20,22 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.tile.CookingPotTileEntity;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModContainerTypes;
+import vectorwing.farmersdelight.tile.CookingPotTileEntity;
 
 import java.util.Objects;
 
 public class CookingPotContainer extends Container
 {
-	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "items/empty_container_slot_bowl");
+	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "item/empty_container_slot_bowl");
 
 	public final CookingPotTileEntity tileEntity;
 	public final ItemStackHandler inventoryHandler;
 	private final IIntArray cookingPotData;
 	private final IWorldPosCallable canInteractWithCallable;
 
-	public CookingPotContainer(final int windowId, final PlayerInventory playerInventory, final CookingPotTileEntity tileEntity, IIntArray cookingPotDataIn)
-	{
+	public CookingPotContainer(final int windowId, final PlayerInventory playerInventory, final CookingPotTileEntity tileEntity, IIntArray cookingPotDataIn) {
 		super(ModContainerTypes.COOKING_POT.get(), windowId);
 		this.tileEntity = tileEntity;
 		this.inventoryHandler = tileEntity.getInventory();
@@ -60,7 +60,8 @@ public class CookingPotContainer extends Container
 		this.addSlot(new CookingPotMealSlot(inventoryHandler, 6, 124, 26));
 
 		// Bowl Input
-		this.addSlot(new SlotItemHandler(inventoryHandler, 7, 92, 55) {
+		this.addSlot(new SlotItemHandler(inventoryHandler, 7, 92, 55)
+		{
 			@OnlyIn(Dist.CLIENT)
 			public Pair<ResourceLocation, ResourceLocation> getBackground() {
 				return Pair.of(PlayerContainer.LOCATION_BLOCKS_TEXTURE, EMPTY_CONTAINER_SLOT_BOWL);
@@ -122,7 +123,7 @@ public class CookingPotContainer extends Container
 					return ItemStack.EMPTY;
 				}
 			} else if (index > indexOutput) {
-				if (itemstack1.getItem() == Items.BOWL && !this.mergeItemStack(itemstack1, indexContainerInput, indexContainerInput+1, false)) {
+				if (itemstack1.getItem() == Items.BOWL && !this.mergeItemStack(itemstack1, indexContainerInput, indexContainerInput + 1, false)) {
 					return ItemStack.EMPTY;
 				} else if (!this.mergeItemStack(itemstack1, 0, indexOutput, false)) {
 					return ItemStack.EMPTY;

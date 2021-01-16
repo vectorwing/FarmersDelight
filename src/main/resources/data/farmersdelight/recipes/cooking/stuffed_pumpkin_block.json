@@ -1,0 +1,29 @@
+{
+  "type": "farmersdelight:cooking",
+  "ingredients": [
+    {
+      "tag": "forge:crops/rice"
+    },
+    {
+      "tag": "forge:vegetables"
+    },
+    {
+      "item": "farmersdelight:tomato_sauce"
+    },
+    {
+      "item": "minecraft:baked_potato"
+    },
+    {
+      "item": "farmersdelight:brown_mushroom_colony"
+    },
+    {
+      "item": "minecraft:sweet_berries"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:stuffed_pumpkin_block"
+  },
+  "container": {
+    "item": "minecraft:pumpkin"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "autumnity"
+    }
+  ],
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "autumnity:maple_log"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/axes"
+  },
+  "result": [
+    {
+      "item": "autumnity:stripped_maple_log"
+    },
+    {
+      "item": "farmersdelight:tree_bark"
+    }
+  ],
+  "sound": "minecraft:item.axe.strip"
+}

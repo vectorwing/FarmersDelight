@@ -1,22 +1,43 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "farmersdelight:blocks/rope",
-    "1": "farmersdelight:blocks/rope_top",
-    "particle": "farmersdelight:blocks/rope"
+    "0": "farmersdelight:block/rope",
+    "particle": "farmersdelight:block/rope"
   },
   "elements": [
     {
       "from": [7, 0, 7],
       "to": [9, 16, 9],
-      "rotation": {"angle": 0, "axis": "y", "origin": [16, 8, 15]},
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [16, 8, 15]
+      },
       "faces": {
-        "north": {"uv": [9, 0, 7, 16], "texture": "#0"},
-        "east": {"uv": [7, 0, 9, 16], "texture": "#0"},
-        "south": {"uv": [9, 0, 7, 16], "texture": "#0"},
-        "west": {"uv": [7, 0, 9, 16], "texture": "#0"},
-        "up": {"uv": [7, 7, 9, 9], "texture": "#1"},
-        "down": {"uv": [7, 7, 9, 9], "texture": "#1"}
+        "north": {
+          "uv": [9, 0, 7, 16],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [7, 0, 9, 16],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [9, 0, 7, 16],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [7, 0, 9, 16],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [7, 7, 9, 9],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [7, 7, 9, 9],
+          "texture": "#0"
+        }
       }
     }
   ]

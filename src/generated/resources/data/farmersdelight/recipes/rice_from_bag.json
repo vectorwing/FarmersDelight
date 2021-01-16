@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "farmersdelight:rice_bag"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:rice",
+    "count": 9
+  }
+}

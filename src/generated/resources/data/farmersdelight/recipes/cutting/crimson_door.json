@@ -1,0 +1,16 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:crimson_door"
+    }
+  ],
+  "tool": {
+    "type": "axe"
+  },
+  "result": [
+    {
+      "item": "minecraft:crimson_planks"
+    }
+  ]
+}

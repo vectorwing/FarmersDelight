@@ -1,0 +1,31 @@
+{
+  "parent": "farmersdelight:main/place_campfire",
+  "display": {
+    "icon": {
+      "item": "farmersdelight:stove"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.place_stove"
+    },
+    "description": {
+      "translate": "farmersdelight.advancement.place_stove.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "stove": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "farmersdelight:stove"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "stove"
+    ]
+  ]
+}

@@ -1,12 +1,16 @@
 package vectorwing.farmersdelight.tile;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ShearsItem;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -44,11 +48,13 @@ public class CuttingBoardTileEntity extends TileEntity
 		this.isItemCarvingBoard = false;
 	}
 
-	public CuttingBoardTileEntity() { this(ModTileEntityTypes.CUTTING_BOARD_TILE.get(), CuttingBoardRecipe.TYPE); }
+	public CuttingBoardTileEntity() {
+		this(ModTileEntityTypes.CUTTING_BOARD_TILE.get(), CuttingBoardRecipe.TYPE);
+	}
 
 	@Override
-	public void read(CompoundNBT compound) {
-		super.read(compound);
+	public void read(BlockState state, CompoundNBT compound) {
+		super.read(state, compound);
 		this.isItemCarvingBoard = compound.getBoolean("IsItemCarved");
 		this.itemHandler.deserializeNBT(compound.getCompound("Inventory"));
 	}
@@ -61,23 +67,20 @@ public class CuttingBoardTileEntity extends TileEntity
 		return compound;
 	}
 
+	@Override
 	@Nullable
 	public SUpdateTileEntityPacket getUpdatePacket() {
 		return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
 	}
 
+	@Override
 	public CompoundNBT getUpdateTag() {
 		return this.write(new CompoundNBT());
 	}
 
 	@Override
-	public void handleUpdateTag(CompoundNBT tag) {
-		this.read(tag);
-	}
-
-	@Override
 	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-		this.read(pkt.getNbtCompound());
+		this.read(this.getBlockState(), pkt.getNbtCompound());
 	}
 
 	private void inventoryChanged() {
@@ -89,6 +92,7 @@ public class CuttingBoardTileEntity extends TileEntity
 
 	/**
 	 * Attempts to apply a recipe to the Cutting Board's stored item, using the given tool.
+	 *
 	 * @param tool The item stack used to process the item.
 	 * @return Whether the process succeeded or failed.
 	 */
@@ -96,7 +100,7 @@ public class CuttingBoardTileEntity extends TileEntity
 		CuttingBoardRecipe irecipe = this.world.getRecipeManager()
 				.getRecipe(this.recipeType, new RecipeWrapper(itemHandler), this.world).orElse(null);
 
-		if (irecipe != null && irecipe.getTool().test(tool)) {
+		if (irecipe != null && this.isToolValid(tool, irecipe)) {
 			NonNullList<ItemStack> results = this.getResults();
 			for (ItemStack result : results) {
 				Direction direction = this.getBlockState().get(CuttingBoardBlock.FACING).rotateYCCW();
@@ -105,11 +109,9 @@ public class CuttingBoardTileEntity extends TileEntity
 				world.addEntity(entity);
 			}
 			if (player != null) {
-				tool.damageItem(1, player, (user) -> {
-					user.sendBreakAnimation(EquipmentSlotType.MAINHAND);
-				});
+				tool.damageItem(1, player, (user) -> user.sendBreakAnimation(EquipmentSlotType.MAINHAND));
 			} else {
-				if (tool.attemptDamageItem(1, world.rand, (ServerPlayerEntity)null)) {
+				if (tool.attemptDamageItem(1, world.rand, null)) {
 					tool.setCount(0);
 				}
 			}
@@ -123,6 +125,14 @@ public class CuttingBoardTileEntity extends TileEntity
 		}
 
 		return false;
+	}
+
+	public boolean isToolValid(ItemStack tool, CuttingBoardRecipe recipe) {
+		if (recipe.getToolType() != null) {
+			return tool.getToolTypes().contains(recipe.getToolType());
+		} else {
+			return recipe.getTool().test(tool);
+		}
 	}
 
 	protected NonNullList<ItemStack> getResults() {
@@ -203,10 +213,10 @@ public class CuttingBoardTileEntity extends TileEntity
 	}
 
 	private ItemStackHandler createHandler() {
-		return new ItemStackHandler() {
+		return new ItemStackHandler()
+		{
 			@Override
-			public int getSlotLimit(int slot)
-			{
+			public int getSlotLimit(int slot) {
 				return 1;
 			}
 

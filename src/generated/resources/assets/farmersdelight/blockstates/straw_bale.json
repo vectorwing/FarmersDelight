@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "farmersdelight:block/straw_bale_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "farmersdelight:block/straw_bale"
+    },
+    "axis=z": {
+      "model": "farmersdelight:block/straw_bale_horizontal",
+      "x": 90
+    }
+  }
+}

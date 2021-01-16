@@ -15,8 +15,11 @@ import vectorwing.farmersdelight.registry.ModEffects;
 
 import java.util.Set;
 
-public class ComfortEffect extends Effect {
+@SuppressWarnings("unused")
+public class ComfortEffect extends Effect
+{
 	public static final Set<Effect> COMFORT_IMMUNITIES = Sets.newHashSet(Effects.SLOWNESS, Effects.WEAKNESS, Effects.HUNGER);
+
 	/**
 	 * This effect makes the player immune to negative effects related to cold and sickness.
 	 * It also instantly heals the equivalent effects when first applied.
@@ -28,7 +31,8 @@ public class ComfortEffect extends Effect {
 	}
 
 	@Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-	public static class ComfortEvent {
+	public static class ComfortEvent
+	{
 		@SubscribeEvent
 		public static void onComfortDuration(PotionEvent.PotionApplicableEvent event) {
 			EffectInstance effect = event.getPotionEffect();
@@ -50,8 +54,8 @@ public class ComfortEffect extends Effect {
 		}
 	}
 
+	@Override
 	public boolean isReady(int duration, int amplifier) {
 		return true;
 	}
-
 }

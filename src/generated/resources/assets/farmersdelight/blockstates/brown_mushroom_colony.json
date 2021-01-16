@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "farmersdelight:block/brown_mushroom_colony_stage0"
+    },
+    "age=1": {
+      "model": "farmersdelight:block/brown_mushroom_colony_stage1"
+    },
+    "age=2": {
+      "model": "farmersdelight:block/brown_mushroom_colony_stage2"
+    },
+    "age=3": {
+      "model": "farmersdelight:block/brown_mushroom_colony_stage3"
+    }
+  }
+}

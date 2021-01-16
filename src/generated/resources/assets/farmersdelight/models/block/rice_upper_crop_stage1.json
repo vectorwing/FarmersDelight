@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "farmersdelight:block/rice_upper_crop_stage1"
+  }
+}

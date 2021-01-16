@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.blocks;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.particles.ParticleTypes;
@@ -8,6 +7,7 @@ import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
@@ -15,12 +15,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
-public class OrganicCompostBlock extends Block {
+@SuppressWarnings("deprecation")
+public class OrganicCompostBlock extends Block
+{
 	public static IntegerProperty COMPOSTING = IntegerProperty.create("composting", 0, 7);
 
 	public OrganicCompostBlock(Properties properties) {
@@ -39,38 +38,60 @@ public class OrganicCompostBlock extends Block {
 		super.fillStateContainer(builder);
 	}
 
+	public int getMaxCompostingStage() {
+		return 7;
+	}
+
 	@Override
 	@SuppressWarnings("deprecation")
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		if (worldIn.isRemote) return;
 
 		float chance = 0F;
-
+		boolean hasWater = false;
 		int maxLight = 0;
-		for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-1, 0, -1), pos.add(1, 1, 1))) {
-			BlockState adjacent = worldIn.getBlockState(blockpos);
-			if (adjacent.isIn(ModTags.COMPOST_ACTIVATORS) || adjacent.getFluidState().isTagged(FluidTags.WATER))
+
+		for (BlockPos neighborPos : BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, 1, 1))) {
+			BlockState neighborState = worldIn.getBlockState(neighborPos);
+			if (neighborState.isIn(ModTags.COMPOST_ACTIVATORS)) {
 				chance += 0.02F;
-			int light = worldIn.getLightSubtracted(pos.up(), 0);
-			if(light > maxLight)
+			}
+			if (neighborState.getFluidState().isTagged(FluidTags.WATER)) {
+				hasWater = true;
+			}
+			int light = worldIn.getLightFor(LightType.SKY, neighborPos.up());
+			if (light > maxLight) {
 				maxLight = light;
+			}
 		}
+
 		chance += maxLight > 12 ? 0.1F : 0.05F;
+		chance += hasWater ? 0.1F : 0.0F;
 
 		if (worldIn.getRandom().nextFloat() <= chance) {
-			if (state.get(COMPOSTING) == 7)
+			if (state.get(COMPOSTING) == this.getMaxCompostingStage())
 				worldIn.setBlockState(pos, ModBlocks.RICH_SOIL.get().getDefaultState(), 2); // finished
 			else
 				worldIn.setBlockState(pos, state.with(COMPOSTING, state.get(COMPOSTING) + 1), 2); // next stage
 		}
 	}
 
+	@Override
+	public boolean hasComparatorInputOverride(BlockState state) {
+		return true;
+	}
+
+	@Override
+	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
+		return (getMaxCompostingStage() + 1 - blockState.get(COMPOSTING));
+	}
+
+	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		super.animateTick(stateIn, worldIn, pos, rand);
 		if (rand.nextInt(10) == 0) {
-			worldIn.addParticle(ParticleTypes.MYCELIUM, (double)pos.getX() + (double)rand.nextFloat(), (double)pos.getY() + 1.1D, (double)pos.getZ() + (double)rand.nextFloat(), 0.0D, 0.0D, 0.0D);
+			worldIn.addParticle(ParticleTypes.MYCELIUM, (double) pos.getX() + (double) rand.nextFloat(), (double) pos.getY() + 1.1D, (double) pos.getZ() + (double) rand.nextFloat(), 0.0D, 0.0D, 0.0D);
 		}
-
 	}
 }

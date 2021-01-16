@@ -1,12 +1,103 @@
 # Changelog
 
+## 0.???
+- Added Feasts!
+  - Feasts are very large meals, made to be placed down as a block and shared with friends, or just to decorate a dinner table!
+  - Once placed, use a Bowl against it to take a serving. Feasts contain 4 servings by default. It can be mined back if no servings were taken;
+  - New Feasts:
+    - Roast Chicken
+  - Existing meals turned into Feasts:
+    - Stuffed Pumpkin
+- Added blocks:
+  - Straw Bale 
+  - Bag of Rice
+- Added sweets:
+  - Fruit Salad: gently fulfilling, but grants Regeneration for a few seconds;
+  - Melon Popsicle: when eaten, grants a very short burst of Fire Resistance in a pinch;
+- Updated Knives:
+  - Knives can now slice a Cake on right-click;
+  - Knives can now carve pumpkins like Shears;
+- Updated Mushroom Colonies:
+  - They can now be sheared whole at their highest age (5 caps), and planted back in any surface a Mushroom can be planted in;
+  - They only grow more caps if planted in Rich Soil under sufficient darkness;
+  - Shears can now clip colonies one cap at a time, allowing for decorative uses of middle stages;
+- Updated Organic Compost and Rich Soil:
+  - Brand new improved textures for both blocks!
+    - Compost should now be more distinguishable from Rich Soil at later stages;
+    - Rich Soil has a new look, more earthy and less slimy.
+  - Rich Soil now checks the tag `farmersdelight:unaffected_by_rich_soil` for blocks that shouldn't receive growth boosts;
+  - Fix Rich Soil being incompatible with bamboo and saplings;
+  - Both blocks can now sustain Mushrooms at any light level;
+  - Organic Compost now checks every adjacent block for activation, encouraging clumping;
+- Update Wild Crops:
+  - They can once again be bone-mealed to obtain more wild crops;
+  - When bone meal is used, they proliferate in a small area, up to 10 units, similar to Mushrooms;
+  - Wild Rice duplicates as an item drop, similar to Tall Flowers;
+- Minor asset improvements;
+- Minor data improvements.
+
+## 0.2.4b
+- Fix: Rice and Tomato Seeds had inverted tags;
+- Fix: Game crash when using a Bucket on the bottom half of a rice crop;
+- Fix: Cutting Board now uses the proper Forge Tag for shears;
+- Fix: Wild Crops couldn't be sheared by modded shears;
+- Change the amount of rice dropped from the crop, to match the redesign ratios;
+- Add Rice Bale as an ingredient for Horse Feed;
+- Make Raw Pasta edible... at a risk;
+- Add: Spanish translation (thanks to tild09!)
+- Update the looks on the mod's logo.
+
+## 0.2.4a
+- Fix: Wrong Pair import when getting Dog Food tooltip.
+
+## 0.2.4
+- The Rice crop has been redesigned!
+  - The top half of the crop can now be harvested individually. The bottom half will stay planted, and eventually regrow a top half;
+  - Bottom half yields a single pile of Rice when broken;
+  - Top half is a standard crop, which yields Rice Panicles when fully grown, or Rice/Straw when harvested with a Knife;
+  - Fully compatible with vanilla pistons, mechanical automation methods, Quark's simple harvesting, Immersive Engineering's Garden Cloche, and Botany Pots;
+  - Existing Rice crops planted in the world will remain as the old form for compatibility. Simply harvest them and replant rice to get the new form!
+- Wild Rice now generates in Swamps, Jungles and Bamboo Jungles:
+  - Somewhat more common than other wild crops, due to the rarity of these biomes;
+  - Yields a single pile of Rice, and can be sheared.
+- Seed-bearing Wild Crops (cabbage, beet and tomato) have a small chance of dropping an edible produce when harvested;
+- Wild Crop bone meal action temporarily removed due to an exploit;
+- Fixed Dog Food:
+  - When fed to your pet wolf, it fully heals them and grants them Speed, Strength and Resistance;
+- Added Horse Feed:
+  - When fed to any tamed ridable mob (horse, donkey, llama etc.), it fully heals them and grants them Speed II and Jump Boost;
+  - Does not work for Pigs and Striders, as they cannot be tamed;
+- When players have the Nourished effect, the hunger bar will look gilded and shiny:
+  - The gilded coating will visually "peel in half" when the player is spending saturation to heal damage;
+  - This overlay can be disabled in the new "farmnersdelight-client.toml" config;
+- If a bell has ropes hanging from under it, players can ring the bell by right-clicking the rope column (24 blocks max.);
+- Some JEI quality-of-life features:
+  - Press "uses" (U) on a Stove to see the Campfire Cooking recipe tab;
+  - Press "uses" (U) on a container item (e.g. Bowl) to see which Cooking Pot recipes it can be served on;
+  - Cooking Pot recipes now have a "Move Items" transfer button when checking recipes on it;
+- Graphics updates for some blocks and items;
+- Resource pack makers: I was previously using 'textures/blocks' instead of 'textures/block'. This version fixes it, so you may have to change it too.
+- Translation updates:
+  - Updated Chinese (thanks to WuzgXY-GitHub, TUsama and ChillirCR!);
+  - Updated German (thanks to SebastianD334 and Moralle!);
+  - Added Korean (thanks to qkrehf2!);
+  - Added Russian (thanks to GrayPix and Kanspirians!);
+  - Added French (thanks to Derrias!);
+  - Added Japanese (thanks to FEMT1915!).
+
 ## 0.2.3
+1.16.3+
+- Re-implemented world generation to the new .json system:
+  - Configs for wild patches have been changed, and are using new defaults;
+  - Beach wild patches (Wild Cabbage and Sea Beet) now use a different weight pattern, so values are similar to other crops;
+  - These two should change themselves on all instances, but we advise all players and modpack makers to reset their configs once, if migrating.
+  
 1.15.2+
 - Adds Compost Heaps to village generation
   - These structures house heaps of Organic Compost, which farmers lay down to decompose into Rich Soil. Each biome has a different composting strategy based on their biome and climate!
   - Some of them have small farms mixed in, or examples of other mechanics;
   - They often have a few blocks of Rich Soil ready for taking!
-- Adds 3 new meals: Cooked Rice, Grilled Salmon and Baked Cod Pot;
+- Adds 3 new meals: Cooked Rice, Grilled Salmon and Baked Cod Stew;
 - Adds Tatami, a traditional flooring based on straw and canvas:
   - Tatami Blocks place as a "half-mat" by default. Placing another tatami against them will complete a "full-mat" pair! You can sneak-place to suppress pairing;
   - Tatami Mats are carpet-thin, come in Full and Half, and can be interchanged to and fro via crafting. They have a simpler placement and behave like carpets.
