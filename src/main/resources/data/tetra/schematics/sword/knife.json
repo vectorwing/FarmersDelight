@@ -1,0 +1,16 @@
+{
+  "replace": true,
+  "slots": [
+    "sword/blade"
+  ],
+  "materialSlotCount": 1,
+  "displayType": "major",
+  "glyph": { "textureLocation": "farmersdelight:textures/gui/tetra_glyphs.png" },
+  "outcomes": [
+    {
+      "materials": ["tetra:stone/flint", "tetra:metal/", "tetra:gem/", "tetra:bone/"],
+      "moduleKey": "sword/knife",
+      "moduleVariant": "knife/"
+    }
+  ]
+}

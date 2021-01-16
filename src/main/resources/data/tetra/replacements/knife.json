@@ -1,0 +1,55 @@
+[
+  {
+    "predicate": {
+      "item": "farmersdelight:flint_knife"
+    },
+    "item": "tetra:modular_sword",
+    "modules": {
+      "sword/blade": ["sword/knife", "knife/flint"],
+      "sword/hilt": ["sword/basic_hilt", "basic_hilt/stick"]
+    }
+  },
+  {
+    "predicate": {
+      "item": "farmersdelight:iron_knife"
+    },
+    "item": "tetra:modular_sword",
+    "modules": {
+      "sword/blade": ["sword/knife", "knife/iron"],
+      "sword/hilt": ["sword/basic_hilt", "basic_hilt/stick"]
+    }
+  },
+  {
+    "predicate": {
+      "item": "farmersdelight:golden_knife"
+    },
+    "item": "tetra:modular_sword",
+    "modules": {
+      "sword/blade": ["sword/knife", "knife/gold"],
+      "sword/hilt": ["sword/basic_hilt", "basic_hilt/stick"]
+    }
+  },
+  {
+    "predicate": {
+      "item": "farmersdelight:diamond_knife"
+    },
+    "item": "tetra:modular_sword",
+    "modules": {
+      "sword/blade": ["sword/knife", "knife/diamond"],
+      "sword/hilt": ["sword/basic_hilt", "basic_hilt/stick"]
+    },
+    "improvements": {
+      "sword/blade:arrested": 0
+    }
+  },
+  {
+    "predicate": {
+      "item": "farmersdelight:netherite_knife"
+    },
+    "item": "tetra:modular_sword",
+    "modules": {
+      "sword/blade": ["sword/knife", "knife/netherite"],
+      "sword/hilt": ["sword/basic_hilt", "basic_hilt/stick"]
+    }
+  }
+]
