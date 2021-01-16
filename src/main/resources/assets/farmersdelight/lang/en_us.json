@@ -187,7 +187,7 @@
   "farmersdelight.jei.cooking": "Cooking",
   "farmersdelight.jei.cutting": "Cutting Board",
   "farmersdelight.jei.decomposition": "Decomposition",
-  "farmersdelight.jei.decomposition.light": "Sunlight nearby will accelerate decomposition",
-  "farmersdelight.jei.decomposition.fluid": "Water nearby will accelerate decomposition",
-  "farmersdelight.jei.decomposition.accelerators": "Certain blocks (see below) nearby will accelerate decomposition"
+  "farmersdelight.jei.decomposition.light": "Sped up by sunlight",
+  "farmersdelight.jei.decomposition.fluid": "Sped up by adjacent water",
+  "farmersdelight.jei.decomposition.accelerators": "Sped up by adjacent activators (see below)"
 }
