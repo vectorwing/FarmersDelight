@@ -54,6 +54,12 @@ public class CuttingRecipes
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.COOKED_SALMON), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), ModItems.COOKED_SALMON_SLICE.get(), 2)
 				.addResult(Items.BONE_MEAL)
 				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(ModItems.HAM.get()), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.PORKCHOP, 2)
+				.addResult(Items.BONE)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(ModItems.SMOKED_HAM.get()), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.COOKED_PORKCHOP, 2)
+				.addResult(Items.BONE)
+				.build(consumer);
 	}
 
 	private static void chopPlants(Consumer<IFinishedRecipe> consumer) {

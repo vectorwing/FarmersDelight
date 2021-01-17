@@ -161,6 +161,10 @@ public class ModItems
 			() -> new Item(new Item.Properties().food(Foods.SALMON_SLICE).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> COOKED_SALMON_SLICE = ITEMS.register("cooked_salmon_slice",
 			() -> new Item(new Item.Properties().food(Foods.COOKED_SALMON_SLICE).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> HAM = ITEMS.register("ham",
+			() -> new Item(new Item.Properties().food(Foods.HAM).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> SMOKED_HAM = ITEMS.register("smoked_ham",
+			() -> new Item(new Item.Properties().food(Foods.SMOKED_HAM).group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> PIE_CRUST = ITEMS.register("pie_crust",
 			() -> new Item(new Item.Properties().food(Foods.PIE_CRUST).group(FarmersDelight.ITEM_GROUP)));

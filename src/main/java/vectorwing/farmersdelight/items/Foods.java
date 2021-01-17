@@ -50,6 +50,10 @@ public class Foods
 			.hunger(1).saturation(0.1f).build();
 	public static final Food COOKED_SALMON_SLICE = (new Food.Builder())
 			.hunger(3).saturation(0.8f).build();
+	public static final Food HAM = (new Food.Builder())
+			.hunger(5).saturation(0.3f).build();
+	public static final Food SMOKED_HAM = (new Food.Builder())
+			.hunger(10).saturation(0.8f).build();
 
 	// Sweets
 	public static final Food POPSICLE = (new Food.Builder())
