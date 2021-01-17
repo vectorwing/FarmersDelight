@@ -630,5 +630,17 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.BAKED_POTATO)
 				.addCriterion("has_cooked_chicken", InventoryChangeTrigger.Instance.forItems(Items.COOKED_CHICKEN))
 				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.HONEY_GLAZED_HAM_BLOCK.get())
+				.addIngredient(Items.SWEET_BERRIES)
+				.addIngredient(Items.HONEY_BOTTLE)
+				.addIngredient(Items.SWEET_BERRIES)
+				.addIngredient(Items.SWEET_BERRIES)
+				.addIngredient(ModItems.SMOKED_HAM.get())
+				.addIngredient(Items.SWEET_BERRIES)
+				.addIngredient(ModItems.COOKED_RICE.get())
+				.addIngredient(Items.BOWL)
+				.addIngredient(ModItems.COOKED_RICE.get())
+				.addCriterion("has_smoked_ham", InventoryChangeTrigger.Instance.forItems(ModItems.SMOKED_HAM.get()))
+				.build(consumer);
 	}
 }
