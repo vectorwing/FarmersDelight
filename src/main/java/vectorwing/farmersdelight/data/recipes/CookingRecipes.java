@@ -78,7 +78,6 @@ public class CookingRecipes
 		CookingPotRecipeBuilder.cookingRecipe(ModItems.COOKED_RICE.get(), 1, FAST_COOKING_TIME)
 				.addIngredient(ForgeTags.CROPS_RICE)
 				.build(consumer);
-		// TODO: Figure out how to make an Ingredient out of both items and tags.
 		CookingPotRecipeBuilder.cookingRecipe(ModItems.DUMPLINGS.get(), 2)
 				.addIngredient(ForgeTags.PASTA)
 				.addIngredient(ForgeTags.CROPS_CABBAGE)

@@ -81,10 +81,6 @@ public class CookingPotRecipeBuilder
 		return this;
 	}
 
-	public CookingPotRecipeBuilder setCookingTime(Ingredient ingredientIn) {
-		return this.addIngredient(ingredientIn, 1);
-	}
-
 	public void build(Consumer<IFinishedRecipe> consumerIn) {
 		ResourceLocation location = ForgeRegistries.ITEMS.getKey(this.result);
 		this.build(consumerIn, FarmersDelight.MODID + ":cooking/" + location.getPath());
