@@ -230,27 +230,6 @@ public class Recipes extends RecipeProvider
 				.key('r', ModItems.ROPE.get())
 				.addCriterion("has_rope", InventoryChangeTrigger.Instance.forItems(ModItems.ROPE.get()))
 				.build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(ModItems.CARROT_CRATE.get(), 1)
-				.patternLine("###")
-				.patternLine("###")
-				.patternLine("###")
-				.key('#', Items.CARROT)
-				.addCriterion("has_carrot", InventoryChangeTrigger.Instance.forItems(Items.CARROT))
-				.build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(ModItems.POTATO_CRATE.get(), 1)
-				.patternLine("###")
-				.patternLine("###")
-				.patternLine("###")
-				.key('#', Items.POTATO)
-				.addCriterion("has_carrot", InventoryChangeTrigger.Instance.forItems(Items.POTATO))
-				.build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(ModItems.BEETROOT_CRATE.get(), 1)
-				.patternLine("###")
-				.patternLine("###")
-				.patternLine("###")
-				.key('#', Items.BEETROOT)
-				.addCriterion("has_carrot", InventoryChangeTrigger.Instance.forItems(Items.BEETROOT))
-				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ModItems.CABBAGE_CRATE.get(), 1)
 				.patternLine("###")
 				.patternLine("###")
