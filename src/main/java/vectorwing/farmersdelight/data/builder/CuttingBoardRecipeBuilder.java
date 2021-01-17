@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.data.builder;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import mezz.jei.api.MethodsReturnNonnullByDefault;
 import net.minecraft.data.IFinishedRecipe;
@@ -88,7 +87,7 @@ public class CuttingBoardRecipeBuilder
 	public void build(Consumer<IFinishedRecipe> consumerIn, String save) {
 		ResourceLocation resourcelocation = ForgeRegistries.ITEMS.getKey(this.ingredient.getMatchingStacks()[0].getItem());
 		if ((new ResourceLocation(save)).equals(resourcelocation)) {
-			throw new IllegalStateException("Shapeless Recipe " + save + " should remove its 'save' argument");
+			throw new IllegalStateException("Cutting Recipe " + save + " should remove its 'save' argument");
 		} else {
 			this.build(consumerIn, new ResourceLocation(save));
 		}
@@ -118,7 +117,6 @@ public class CuttingBoardRecipeBuilder
 
 		@Override
 		public void serialize(JsonObject json) {
-			// TODO: Consider adapting whether it's an array or object on your CuttingBoardRecipe later.
 			JsonArray arrayIngredients = new JsonArray();
 			arrayIngredients.add(this.ingredient.serialize());
 			json.add("ingredients", arrayIngredients);

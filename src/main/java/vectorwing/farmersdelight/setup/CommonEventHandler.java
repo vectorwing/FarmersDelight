@@ -18,6 +18,7 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
@@ -27,6 +28,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.crafting.conditions.VanillaCrateEnabledCondition;
 import vectorwing.farmersdelight.loot.functions.CopyMealFunction;
 import vectorwing.farmersdelight.registry.ModAdvancements;
 import vectorwing.farmersdelight.registry.ModBlocks;
@@ -55,88 +57,97 @@ public class CommonEventHandler
 	private static final String[] SCAVENGING_ENTITIES = new String[]{"cow", "chicken", "rabbit", "horse", "donkey", "mule", "llama", "shulker"};
 
 	public static void init(final FMLCommonSetupEvent event) {
-		registerCompostables();
+		registerCompostables(event);
+		registerDispenserBehaviors(event);
 
 		ModAdvancements.register();
 
 		LootFunctionManager.func_237451_a_(CopyMealFunction.ID.toString(), new CopyMealFunction.Serializer());
 
+		CraftingHelper.register(new VanillaCrateEnabledCondition.Serializer());
+
 		if (Configuration.GENERATE_VILLAGE_COMPOST_HEAPS.get()) {
 			VillageStructures.init();
 		}
-
-		if (Configuration.DISPENSER_TOOLS_CUTTING_BOARD.get()) {
-			CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_PICKAXE, new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_AXE, new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_SHOVEL, new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(Items.STONE_PICKAXE, new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(Items.STONE_AXE, new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(Items.STONE_SHOVEL, new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(Items.IRON_PICKAXE, new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(Items.IRON_AXE, new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(Items.IRON_SHOVEL, new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(Items.DIAMOND_PICKAXE, new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(Items.DIAMOND_AXE, new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(Items.DIAMOND_SHOVEL, new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(Items.GOLDEN_PICKAXE, new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(Items.GOLDEN_AXE, new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(Items.GOLDEN_SHOVEL, new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(Items.NETHERITE_PICKAXE, new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(Items.NETHERITE_AXE, new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(Items.NETHERITE_SHOVEL, new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(Items.SHEARS, new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(ModItems.FLINT_KNIFE.get(), new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(ModItems.IRON_KNIFE.get(), new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(ModItems.DIAMOND_KNIFE.get(), new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(ModItems.GOLDEN_KNIFE.get(), new CuttingBoardDispenseBehavior());
-			CuttingBoardDispenseBehavior.registerBehaviour(ModItems.NETHERITE_KNIFE.get(), new CuttingBoardDispenseBehavior());
-		}
 	}
 
-	public static void registerCompostables() {
-		// 30% chance
-		ComposterBlock.CHANCES.put(ModItems.TREE_BARK.get(), 0.3F);
-		ComposterBlock.CHANCES.put(ModItems.STRAW.get(), 0.3F);
-		ComposterBlock.CHANCES.put(ModItems.CABBAGE_SEEDS.get(), 0.3F);
-		ComposterBlock.CHANCES.put(ModItems.TOMATO_SEEDS.get(), 0.3F);
-		ComposterBlock.CHANCES.put(ModItems.RICE.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.RICE_PANICLE.get(), 0.65F);
+	public static void registerDispenserBehaviors(final FMLCommonSetupEvent event) {
+		event.enqueueWork(() -> {
+			if (Configuration.DISPENSER_TOOLS_CUTTING_BOARD.get()) {
+				CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_PICKAXE, new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_AXE, new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_SHOVEL, new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(Items.STONE_PICKAXE, new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(Items.STONE_AXE, new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(Items.STONE_SHOVEL, new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(Items.IRON_PICKAXE, new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(Items.IRON_AXE, new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(Items.IRON_SHOVEL, new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(Items.DIAMOND_PICKAXE, new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(Items.DIAMOND_AXE, new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(Items.DIAMOND_SHOVEL, new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(Items.GOLDEN_PICKAXE, new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(Items.GOLDEN_AXE, new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(Items.GOLDEN_SHOVEL, new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(Items.NETHERITE_PICKAXE, new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(Items.NETHERITE_AXE, new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(Items.NETHERITE_SHOVEL, new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(Items.SHEARS, new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(ModItems.FLINT_KNIFE.get(), new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(ModItems.IRON_KNIFE.get(), new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(ModItems.DIAMOND_KNIFE.get(), new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(ModItems.GOLDEN_KNIFE.get(), new CuttingBoardDispenseBehavior());
+				CuttingBoardDispenseBehavior.registerBehaviour(ModItems.NETHERITE_KNIFE.get(), new CuttingBoardDispenseBehavior());
+			}
+		});
+	}
 
-		// 50% chance
-		ComposterBlock.CHANCES.put(ModItems.PUMPKIN_SLICE.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.CABBAGE_LEAF.get(), 0.65F);
+	public static void registerCompostables(final FMLCommonSetupEvent event) {
+		event.enqueueWork(() -> {
+			// 30% chance
+			ComposterBlock.CHANCES.put(ModItems.TREE_BARK.get(), 0.3F);
+			ComposterBlock.CHANCES.put(ModItems.STRAW.get(), 0.3F);
+			ComposterBlock.CHANCES.put(ModItems.CABBAGE_SEEDS.get(), 0.3F);
+			ComposterBlock.CHANCES.put(ModItems.TOMATO_SEEDS.get(), 0.3F);
+			ComposterBlock.CHANCES.put(ModItems.RICE.get(), 0.65F);
+			ComposterBlock.CHANCES.put(ModItems.RICE_PANICLE.get(), 0.65F);
 
-		// 65% chance
-		ComposterBlock.CHANCES.put(ModItems.CABBAGE.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.ONION.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.TOMATO.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.WILD_CABBAGES.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.WILD_ONIONS.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.WILD_TOMATOES.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.WILD_CARROTS.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.WILD_POTATOES.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.WILD_BEETROOTS.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.WILD_RICE.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.PIE_CRUST.get(), 0.65F);
+			// 50% chance
+			ComposterBlock.CHANCES.put(ModItems.PUMPKIN_SLICE.get(), 0.65F);
+			ComposterBlock.CHANCES.put(ModItems.CABBAGE_LEAF.get(), 0.65F);
 
-		// 85% chance
-		ComposterBlock.CHANCES.put(ModItems.RICE_BALE.get(), 0.85F);
-		ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_COOKIE.get(), 0.85F);
-		ComposterBlock.CHANCES.put(ModItems.HONEY_COOKIE.get(), 0.85F);
-		ComposterBlock.CHANCES.put(ModItems.CAKE_SLICE.get(), 0.85F);
-		ComposterBlock.CHANCES.put(ModItems.APPLE_PIE_SLICE.get(), 0.85F);
-		ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get(), 0.85F);
-		ComposterBlock.CHANCES.put(ModItems.CHOCOLATE_PIE_SLICE.get(), 0.85F);
-		ComposterBlock.CHANCES.put(ModItems.RAW_PASTA.get(), 0.85F);
+			// 65% chance
+			ComposterBlock.CHANCES.put(ModItems.CABBAGE.get(), 0.65F);
+			ComposterBlock.CHANCES.put(ModItems.ONION.get(), 0.65F);
+			ComposterBlock.CHANCES.put(ModItems.TOMATO.get(), 0.65F);
+			ComposterBlock.CHANCES.put(ModItems.WILD_CABBAGES.get(), 0.65F);
+			ComposterBlock.CHANCES.put(ModItems.WILD_ONIONS.get(), 0.65F);
+			ComposterBlock.CHANCES.put(ModItems.WILD_TOMATOES.get(), 0.65F);
+			ComposterBlock.CHANCES.put(ModItems.WILD_CARROTS.get(), 0.65F);
+			ComposterBlock.CHANCES.put(ModItems.WILD_POTATOES.get(), 0.65F);
+			ComposterBlock.CHANCES.put(ModItems.WILD_BEETROOTS.get(), 0.65F);
+			ComposterBlock.CHANCES.put(ModItems.WILD_RICE.get(), 0.65F);
+			ComposterBlock.CHANCES.put(ModItems.PIE_CRUST.get(), 0.65F);
 
-		// 100% chance
-		ComposterBlock.CHANCES.put(ModItems.APPLE_PIE.get(), 1.0F);
-		ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_CHEESECAKE.get(), 1.0F);
-		ComposterBlock.CHANCES.put(ModItems.CHOCOLATE_PIE.get(), 1.0F);
-		ComposterBlock.CHANCES.put(ModItems.DUMPLINGS.get(), 1.0F);
-		ComposterBlock.CHANCES.put(ModItems.STUFFED_PUMPKIN.get(), 1.0F);
-		ComposterBlock.CHANCES.put(ModItems.BROWN_MUSHROOM_COLONY.get(), 1.0F);
-		ComposterBlock.CHANCES.put(ModItems.RED_MUSHROOM_COLONY.get(), 1.0F);
+			// 85% chance
+			ComposterBlock.CHANCES.put(ModItems.RICE_BALE.get(), 0.85F);
+			ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_COOKIE.get(), 0.85F);
+			ComposterBlock.CHANCES.put(ModItems.HONEY_COOKIE.get(), 0.85F);
+			ComposterBlock.CHANCES.put(ModItems.CAKE_SLICE.get(), 0.85F);
+			ComposterBlock.CHANCES.put(ModItems.APPLE_PIE_SLICE.get(), 0.85F);
+			ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get(), 0.85F);
+			ComposterBlock.CHANCES.put(ModItems.CHOCOLATE_PIE_SLICE.get(), 0.85F);
+			ComposterBlock.CHANCES.put(ModItems.RAW_PASTA.get(), 0.85F);
+
+			// 100% chance
+			ComposterBlock.CHANCES.put(ModItems.APPLE_PIE.get(), 1.0F);
+			ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_CHEESECAKE.get(), 1.0F);
+			ComposterBlock.CHANCES.put(ModItems.CHOCOLATE_PIE.get(), 1.0F);
+			ComposterBlock.CHANCES.put(ModItems.DUMPLINGS.get(), 1.0F);
+			ComposterBlock.CHANCES.put(ModItems.STUFFED_PUMPKIN.get(), 1.0F);
+			ComposterBlock.CHANCES.put(ModItems.BROWN_MUSHROOM_COLONY.get(), 1.0F);
+			ComposterBlock.CHANCES.put(ModItems.RED_MUSHROOM_COLONY.get(), 1.0F);
+		});
 	}
 
 	@SubscribeEvent

@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "cabbage_crate": {
+    "has_cabbage_crate": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "cabbage_crate",
+      "has_cabbage_crate",
       "has_the_recipe"
     ]
   ]

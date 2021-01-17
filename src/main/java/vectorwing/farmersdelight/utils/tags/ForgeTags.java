@@ -15,11 +15,9 @@ public class ForgeTags
 	public static final ITag.INamedTag<Item> BREAD_WHEAT = forgeItemTag("bread/wheat");
 
 	public static final ITag.INamedTag<Item> COOKED_BEEF = forgeItemTag("cooked_beef");
-
 	public static final ITag.INamedTag<Item> COOKED_CHICKEN = forgeItemTag("cooked_chicken");
-
+	public static final ITag.INamedTag<Item> COOKED_PORK = forgeItemTag("cooked_pork");
 	public static final ITag.INamedTag<Item> COOKED_EGGS = forgeItemTag("cooked_eggs");
-
 	public static final ITag.INamedTag<Item> COOKED_FISHES = forgeItemTag("cooked_fishes");
 	public static final ITag.INamedTag<Item> COOKED_FISHES_COD = forgeItemTag("cooked_fishes/cod");
 	public static final ITag.INamedTag<Item> COOKED_FISHES_SALMON = forgeItemTag("cooked_fishes/salmon");
@@ -29,6 +27,8 @@ public class ForgeTags
 	public static final ITag.INamedTag<Item> CROPS_ONION = forgeItemTag("crops/onion");
 	public static final ITag.INamedTag<Item> CROPS_RICE = forgeItemTag("crops/rice");
 	public static final ITag.INamedTag<Item> CROPS_TOMATO = forgeItemTag("crops/tomato");
+
+	public static final ITag.INamedTag<Item> EGGS = forgeItemTag("eggs");
 
 	public static final ITag.INamedTag<Item> GRAIN = forgeItemTag("grain");
 	public static final ITag.INamedTag<Item> GRAIN_WHEAT = forgeItemTag("grain/wheat");
@@ -43,7 +43,7 @@ public class ForgeTags
 
 	public static final ITag.INamedTag<Item> RAW_BEEF = forgeItemTag("raw_beef");
 	public static final ITag.INamedTag<Item> RAW_CHICKEN = forgeItemTag("raw_chicken");
-
+	public static final ITag.INamedTag<Item> RAW_PORK = forgeItemTag("raw_pork");
 	public static final ITag.INamedTag<Item> RAW_FISHES = forgeItemTag("raw_fishes");
 	public static final ITag.INamedTag<Item> RAW_FISHES_COD = forgeItemTag("raw_fishes/cod");
 	public static final ITag.INamedTag<Item> RAW_FISHES_SALMON = forgeItemTag("raw_fishes/salmon");
@@ -68,7 +68,6 @@ public class ForgeTags
 	public static final ITag.INamedTag<Item> TOOLS_AXES = forgeItemTag("tools/axes");
 	public static final ITag.INamedTag<Item> TOOLS_KNIVES = forgeItemTag("tools/knives");
 	public static final ITag.INamedTag<Item> TOOLS_PICKAXES = forgeItemTag("tools/pickaxes");
-	public static final ITag.INamedTag<Item> TOOLS_SHEARS = forgeItemTag("tools/shears");
 	public static final ITag.INamedTag<Item> TOOLS_SHOVELS = forgeItemTag("tools/shovels");
 
 	private static ITag.INamedTag<Item> forgeItemTag(String path) {

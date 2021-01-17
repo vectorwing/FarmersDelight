@@ -1,0 +1,21 @@
+{
+  "conditions": [
+    {
+      "type": "farmersdelight:vanilla_crates_enabled"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:potato"
+    }
+  },
+  "result": {
+    "item": "farmersdelight:potato_crate"
+  }
+}
