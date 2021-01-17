@@ -74,6 +74,8 @@
   "item.farmersdelight.cooked_cod_slice": "Cooked Cod Slice",
   "item.farmersdelight.salmon_slice": "Raw Salmon Slice",
   "item.farmersdelight.cooked_salmon_slice": "Cooked Salmon Slice",
+  "item.farmersdelight.ham": "Ham",
+  "item.farmersdelight.smoked_ham": "Smoked Ham",
 
   "item.farmersdelight.pie_crust": "Pie Crust",
   "item.farmersdelight.cake_slice": "Slice of Cake",
@@ -112,7 +114,6 @@
   "item.farmersdelight.pumpkin_soup": "Pumpkin Soup",
   "item.farmersdelight.baked_cod_stew": "Baked Cod Stew",
 
-  "item.farmersdelight.honey_glazed_ham": "Honey Glazed Ham",
   "item.farmersdelight.pasta_with_meatballs": "Pasta with Meatballs",
   "item.farmersdelight.pasta_with_mutton_chop": "Pasta with Mutton Chop",
   "item.farmersdelight.steak_and_potatoes": "Steak and Potatoes",
@@ -126,6 +127,8 @@
   "item.farmersdelight.roast_chicken": "Plate of Roast Chicken",
   "block.farmersdelight.stuffed_pumpkin_block": "Stuffed Pumpkin",
   "item.farmersdelight.stuffed_pumpkin": "Bowl of Stuffed Pumpkin",
+  "block.farmersdelight.honey_glazed_ham_block": "Honey Glazed Ham",
+  "item.farmersdelight.honey_glazed_ham": "Plate of Honey Glazed Ham",
 
   "item.farmersdelight.dog_food": "Dog Food",
   "item.farmersdelight.horse_feed": "Horse Feed",

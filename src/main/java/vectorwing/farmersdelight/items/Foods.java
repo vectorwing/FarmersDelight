@@ -50,10 +50,14 @@ public class Foods
 			.hunger(1).saturation(0.1f).build();
 	public static final Food COOKED_SALMON_SLICE = (new Food.Builder())
 			.hunger(3).saturation(0.8f).build();
+	public static final Food HAM = (new Food.Builder())
+			.hunger(5).saturation(0.3f).build();
+	public static final Food SMOKED_HAM = (new Food.Builder())
+			.hunger(10).saturation(0.8f).build();
 
 	// Sweets
 	public static final Food POPSICLE = (new Food.Builder())
-			.hunger(3).saturation(0.2f).fastToEat()
+			.hunger(3).saturation(0.2f).fastToEat().setAlwaysEdible()
 			.effect(() -> new EffectInstance(Effects.FIRE_RESISTANCE, 160, 0), 1.0F).build();
 	public static final Food COOKIES = (new Food.Builder())
 			.hunger(2).saturation(0.1f).fastToEat().build();

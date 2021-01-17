@@ -61,7 +61,8 @@ public class ItemModels extends ItemModelProvider
 				ModItems.ONION.get(),
 				ModItems.RICE.get(),
 				ModItems.ROAST_CHICKEN_BLOCK.get(),
-				ModItems.STUFFED_PUMPKIN_BLOCK.get()
+				ModItems.STUFFED_PUMPKIN_BLOCK.get(),
+				ModItems.HONEY_GLAZED_HAM_BLOCK.get()
 		);
 		takeAll(items, spriteBlockItems.toArray(new Item[0])).forEach(item -> withExistingParent(itemName(item), GENERATED).texture("layer0", resourceItem(itemName(item))));
 
@@ -83,6 +84,8 @@ public class ItemModels extends ItemModelProvider
 		// Handheld items
 		Set<Item> handheldItems = Sets.newHashSet(
 				ModItems.BARBECUE_STICK.get(),
+				ModItems.HAM.get(),
+				ModItems.SMOKED_HAM.get(),
 				ModItems.FLINT_KNIFE.get(),
 				ModItems.IRON_KNIFE.get(),
 				ModItems.DIAMOND_KNIFE.get(),

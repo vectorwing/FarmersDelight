@@ -1,0 +1,27 @@
+{
+  "pools": [
+    {
+      "name": "pool1",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:string"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:entity_properties",
+          "predicate": {
+            "equipment": {
+              "mainhand": {
+                "tag": "farmersdelight:tools/knives"
+              }
+            }
+          },
+          "entity": "killer"
+        }
+      ]
+    }
+  ]
+}

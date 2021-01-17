@@ -32,6 +32,11 @@ public class SmeltingRecipes
 				.addCriterion("has_dough", InventoryChangeTrigger.Instance.forItems(ModItems.WHEAT_DOUGH.get()))
 				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "bread").toString() + "_from_smoking");
 
+		CookingRecipeBuilder.cookingRecipe(Ingredient.fromItems(ModItems.HAM.get()),
+				ModItems.SMOKED_HAM.get(), 0.35F, 200, IRecipeSerializer.SMOKING)
+				.addCriterion("has_ham", InventoryChangeTrigger.Instance.forItems(ModItems.HAM.get()))
+				.build(consumer);
+
 		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ModItems.IRON_KNIFE.get()),
 				Items.IRON_NUGGET, 0.1F, 200)
 				.addCriterion("has_iron_knife", InventoryChangeTrigger.Instance.forItems(ModItems.IRON_KNIFE.get()))

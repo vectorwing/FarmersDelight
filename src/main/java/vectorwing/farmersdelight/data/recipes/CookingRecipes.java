@@ -99,12 +99,6 @@ public class CookingRecipes
 				.addIngredient(Items.CARROT)
 				.addIngredient(ForgeTags.CROPS_ONION)
 				.build(consumer);
-		CookingPotRecipeBuilder.cookingRecipe(ModItems.HONEY_GLAZED_HAM.get(), 1)
-				.addIngredient(Items.PORKCHOP)
-				.addIngredient(Items.HONEY_BOTTLE)
-				.addIngredient(Items.SWEET_BERRIES)
-				.addIngredient(ForgeTags.CROPS_RICE)
-				.build(consumer);
 		CookingPotRecipeBuilder.cookingRecipe(ModItems.PASTA_WITH_MEATBALLS.get(), 1)
 				.addIngredient(ModItems.MINCED_BEEF.get())
 				.addIngredient(ForgeTags.PASTA)

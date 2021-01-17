@@ -74,6 +74,8 @@
   "item.farmersdelight.cooked_cod_slice": "Filé de bacalhau assado",
   "item.farmersdelight.salmon_slice": "Filé de salmão cru",
   "item.farmersdelight.cooked_salmon_slice": "Filé de salmão assado",
+  "item.farmersdelight.ham": "Presunto",
+  "item.farmersdelight.smoked_ham": "Presunto defumado",
 
   "item.farmersdelight.pie_crust": "Crosta de torta",
   "item.farmersdelight.cake_slice": "Fatia de bolo",
@@ -112,7 +114,6 @@
   "item.farmersdelight.pumpkin_soup": "Sopa de abóbora",
   "item.farmersdelight.baked_cod_stew": "Bacalhoada",
 
-  "item.farmersdelight.honey_glazed_ham": "Presunto caramelado",
   "item.farmersdelight.pasta_with_meatballs": "Macarrão com almôndegas",
   "item.farmersdelight.pasta_with_mutton_chop": "Macarrão com costeleta",
   "item.farmersdelight.steak_and_potatoes": "Bife com batatas",
@@ -126,6 +127,8 @@
   "item.farmersdelight.roast_chicken": "Porção de frango recheado",
   "block.farmersdelight.stuffed_pumpkin_block": "Abóbora recheada",
   "item.farmersdelight.stuffed_pumpkin": "Tigela de abóbora recheada",
+  "block.farmersdelight.honey_glazed_ham_block": "Presunto caramelado",
+  "item.farmersdelight.honey_glazed_ham": "Porção de presunto caramelado",
 
   "item.farmersdelight.dog_food": "Ração para cães",
   "item.farmersdelight.horse_feed": "Alimento para cavalos",

@@ -54,7 +54,7 @@ public class CommonEventHandler
 			LootTables.CHESTS_VILLAGE_VILLAGE_SNOWY_HOUSE,
 			LootTables.CHESTS_VILLAGE_VILLAGE_TAIGA_HOUSE,
 			LootTables.CHESTS_VILLAGE_VILLAGE_DESERT_HOUSE);
-	private static final String[] SCAVENGING_ENTITIES = new String[]{"cow", "chicken", "rabbit", "horse", "donkey", "mule", "llama", "shulker"};
+	private static final String[] SCAVENGING_ENTITIES = new String[]{"cow", "pig", "chicken", "rabbit", "horse", "donkey", "mule", "llama", "spider", "hoglin", "shulker"};
 
 	public static void init(final FMLCommonSetupEvent event) {
 		registerCompostables(event);
