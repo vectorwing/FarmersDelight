@@ -19,6 +19,9 @@
     - Usable in all Porkchop-related recipes;
   - Fruit Salad: Gently fulfilling, but grants Regeneration for a few seconds;
   - Melon Popsicle: When eaten, grants a very short burst of Fire Resistance in a pinch;
+- Updated Cutting Board:
+  - Recipes can now specify a ToolType for axes, pickaxes and shovels instead of imaginary forge tags!
+  - This should broaden cutting compatibility with every single modded tool under the sun, as far as we tested.
 - Updated Knives:
   - Knives can now slice a Cake on right-click;
   - Knives can now carve pumpkins like Shears;
@@ -42,7 +45,6 @@
   - Recipe types no longer registered twice on load;
   - Common setup for dispenser behaviors and compostables is properly enqueued to avoid race conditions;
   - Wild Crops will now respect world-gen configs again;
-  - 
 - Minor asset improvements;
 - Minor data improvements.
 
