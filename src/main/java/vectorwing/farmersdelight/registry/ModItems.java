@@ -251,11 +251,11 @@ public class ModItems
 	public static final RegistryObject<Item> STUFFED_PUMPKIN_BLOCK = ITEMS.register("stuffed_pumpkin_block",
 			() -> new BlockItem(ModBlocks.STUFFED_PUMPKIN_BLOCK.get(), new Item.Properties().maxStackSize(1).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> STUFFED_PUMPKIN = ITEMS.register("stuffed_pumpkin",
-			() -> new Item(new Item.Properties().food(Foods.STUFFED_PUMPKIN).maxStackSize(16).containerItem(Items.BOWL).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.STUFFED_PUMPKIN).maxStackSize(16).containerItem(Items.BOWL).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> HONEY_GLAZED_HAM_BLOCK = ITEMS.register("honey_glazed_ham_block",
 			() -> new BlockItem(ModBlocks.HONEY_GLAZED_HAM_BLOCK.get(), new Item.Properties().maxStackSize(1).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> HONEY_GLAZED_HAM = ITEMS.register("honey_glazed_ham",
-			() -> new ConsumableItem(new Item.Properties().food(Foods.HONEY_GLAZED_HAM).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.HONEY_GLAZED_HAM).maxStackSize(16).containerItem(Items.BOWL).group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> DOG_FOOD = ITEMS.register("dog_food",
 			() -> new DogFoodItem(new Item.Properties().food(Foods.DOG_FOOD).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
