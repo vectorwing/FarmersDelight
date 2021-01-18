@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.1
+- Fix vanilla crop crates not having loot tables;
+- Fix Rice Bale, Straw Bale and Wild Crops not being flammable (more to come later);
+- Fix a visual glitch on Honey Glazed Ham's fourth serving model;
+- Fix Bowls of Stuffed Pumpkin not giving a bowl back;
+
 ## 0.3.0
 - Added Feasts!
   - Feasts are very large meals, made to be placed down as a block and shared with friends, or just to decorate a dinner table!
@@ -15,6 +21,7 @@
   - Storage Crates for vanilla crops: Carrot, Potato and Beetroot
     - These specific blocks can be disabled in the configs, in order to prevent recipe overlaps with Quark and Thermal Cultivation;
 - Added foods:
+  - Wheat Dough: A clumsy, but efficient way to get more bread from your wheat;
   - Bacon: The half-portion of a Porkchop!
     - Bacon Sandwich;
     - Usable in all Porkchop-related recipes;
@@ -27,12 +34,13 @@
 - Updated the Cutting Board:
   - Recipes can now specify a ToolType for axes, pickaxes and shovels instead of imaginary forge tags!
   - This should broaden cutting compatibility with every single modded tool under the sun, as far as we tested. (thank you, ConductiveFoam!)
-- Updates meals and foods:
+- Updated some meals and foods:
   - Steak and Potatoes and Grilled Salmon are now crafted, instead of cooked, since their ingredients are already cooked;
   - General hunger/saturation/effect tweaks here and there.
 - Updated Knives:
   - Knives can now slice a Cake on right-click;
   - Knives can now carve pumpkins like Shears;
+  - Spiders can now be scavenged to guarantee at least 1 String;
 - Updated Mushroom Colonies:
   - They can now be sheared whole at their highest age (5 caps), and planted back in any surface a Mushroom can be planted in;
   - They only grow more caps if planted in Rich Soil under sufficient darkness;
