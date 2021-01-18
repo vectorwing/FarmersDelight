@@ -195,5 +195,9 @@
   "block.stove.crackle.subtitles": "Fogão crepitando",
 
   "farmersdelight.jei.cooking": "Panela",
-  "farmersdelight.jei.cutting": "Tábua de corte"
+  "farmersdelight.jei.cutting": "Tábua de corte",
+  "farmersdelight.jei.decomposition": "Decomposição",
+  "farmersdelight.jei.decomposition.light": "Acelerado pela luz do sol",
+  "farmersdelight.jei.decomposition.fluid": "Acelerado por água ao redor",
+  "farmersdelight.jei.decomposition.accelerators": "Acelerado por ativadores ao redor (veja abaixo)"
 }
