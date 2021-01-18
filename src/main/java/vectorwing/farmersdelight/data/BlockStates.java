@@ -91,6 +91,9 @@ public class BlockStates extends BlockStateProvider
 		this.customStageBlock(ModBlocks.TOMATO_CROP.get(), resourceBlock("crop_cross"), "cross", TomatoesBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 3, 4));
 		this.customStageBlock(ModBlocks.ONION_CROP.get(), mcLoc("crop"), "crop", OnionsBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 2, 3));
 
+		this.crateBlock(ModBlocks.CARROT_CRATE.get(), "carrot");
+		this.crateBlock(ModBlocks.POTATO_CRATE.get(), "potato");
+		this.crateBlock(ModBlocks.BEETROOT_CRATE.get(), "beetroot");
 		this.crateBlock(ModBlocks.CABBAGE_CRATE.get(), "cabbage");
 		this.crateBlock(ModBlocks.TOMATO_CRATE.get(), "tomato");
 		this.crateBlock(ModBlocks.ONION_CRATE.get(), "onion");
@@ -112,6 +115,7 @@ public class BlockStates extends BlockStateProvider
 
 		this.feastBlock((FeastBlock) ModBlocks.STUFFED_PUMPKIN_BLOCK.get());
 		this.feastBlock((FeastBlock) ModBlocks.ROAST_CHICKEN_BLOCK.get());
+		this.feastBlock((FeastBlock) ModBlocks.HONEY_GLAZED_HAM_BLOCK.get());
 
 		this.wildCropBlock(ModBlocks.WILD_BEETROOTS.get(), false);
 		this.wildCropBlock(ModBlocks.WILD_CABBAGES.get(), false);

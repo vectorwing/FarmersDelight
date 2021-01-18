@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "pumpkin_slice": {
+    "has_pumpkin_slice": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "pumpkin_slice",
+      "has_pumpkin_slice",
       "has_the_recipe"
     ]
   ]

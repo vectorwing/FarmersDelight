@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "milk_bottle": {
+    "has_milk_bottle": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "milk_bottle",
+      "has_milk_bottle",
       "has_the_recipe"
     ]
   ]

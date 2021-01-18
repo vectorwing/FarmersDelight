@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "straw_bale": {
+    "has_straw_bale": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "straw_bale",
+      "has_straw_bale",
       "has_the_recipe"
     ]
   ]

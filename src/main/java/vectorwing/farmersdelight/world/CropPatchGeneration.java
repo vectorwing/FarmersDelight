@@ -58,25 +58,39 @@ public class CropPatchGeneration
 		Biome.Climate climate = event.getClimate();
 
 		if (event.getName().getPath().equals("beach")) {
-			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_CABBAGES);
-			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_BEETROOTS);
+			if (Configuration.GENERATE_WILD_BEETROOTS.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_BEETROOTS);
+			}
+			if (Configuration.GENERATE_WILD_CABBAGES.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_CABBAGES);
+			}
 		}
 
 		if (event.getCategory().equals(Biome.Category.SWAMP) || event.getCategory().equals(Biome.Category.JUNGLE)) {
-			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_RICE);
+			if (Configuration.GENERATE_WILD_RICE.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_RICE);
+			}
 		}
 
 		if (climate.temperature >= 1.0F) {
-			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_TOMATOES);
+			if (Configuration.GENERATE_WILD_TOMATOES.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_TOMATOES);
+			}
 		}
 
 		if (climate.temperature > 0.3F && climate.temperature < 1.0F) {
-			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_CARROTS);
-			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_ONIONS);
+			if (Configuration.GENERATE_WILD_CARROTS.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_CARROTS);
+			}
+			if (Configuration.GENERATE_WILD_ONIONS.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_ONIONS);
+			}
 		}
 
 		if (climate.temperature > 0.0F && climate.temperature <= 0.3F) {
-			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_POTATOES);
+			if (Configuration.GENERATE_WILD_POTATOES.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_WILD_POTATOES);
+			}
 		}
 	}
 }

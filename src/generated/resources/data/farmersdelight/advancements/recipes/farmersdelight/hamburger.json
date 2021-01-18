@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "hamburger": {
+    "has_beef_patty": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "minecraft:cooked_beef"
+            "item": "farmersdelight:beef_patty"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "hamburger",
+      "has_beef_patty",
       "has_the_recipe"
     ]
   ]

@@ -16,6 +16,7 @@ public class Configuration
 	public static final String CATEGORY_OVERRIDES = "overrides";
 	public static final String CATEGORY_WORLD = "world";
 
+	public static ForgeConfigSpec.BooleanValue ENABLE_VANILLA_CROP_CRATES;
 	public static ForgeConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS;
 	public static ForgeConfigSpec.BooleanValue COMFORT_FOOD_TAG_EFFECT;
 	public static ForgeConfigSpec.BooleanValue RABBIT_STEW_JUMP_BOOST;
@@ -47,6 +48,7 @@ public class Configuration
 		ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
 
 		COMMON_BUILDER.comment("Game settings").push(CATEGORY_SETTINGS);
+		ENABLE_VANILLA_CROP_CRATES = COMMON_BUILDER.comment("Farmer's Delight adds crates (3x3) for vanilla crops, similar to Quark and Thermal Cultivation. Should they be craftable?").define("enableVanillaCropCrates", true);
 		FARMERS_BUY_FD_CROPS = COMMON_BUILDER.comment("Should Novice and Apprentice Farmers buy this mod's crops? (May reduce chances of other trades appearing)").define("farmersBuyFDCrops", true);
 		COMMON_BUILDER.pop();
 

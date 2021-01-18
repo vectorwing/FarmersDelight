@@ -1,0 +1,27 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "immersiveengineering"
+    }
+  ],
+  "type": "immersiveengineering:crusher",
+  "secondaries": [
+    {
+      "chance": 1.0,
+      "output": {
+        "item": "minecraft:green_dye",
+        "count": 2
+      }
+    }
+  ],
+  "result": {
+    "base_ingredient": {
+      "item": "farmersdelight:rice"
+    }
+  },
+  "input": {
+    "item": "farmersdelight:wild_rice"
+  },
+  "energy": 3200
+}

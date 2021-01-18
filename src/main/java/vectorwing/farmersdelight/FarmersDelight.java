@@ -1,8 +1,6 @@
 package vectorwing.farmersdelight;
 
 import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -56,9 +54,7 @@ public class FarmersDelight
 	}
 
 	private void registerRecipeSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event) {
-		Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(FarmersDelight.MODID, "cooking"), CookingPotRecipe.TYPE);
 		event.getRegistry().register(CookingPotRecipe.SERIALIZER);
-		Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(FarmersDelight.MODID, "cutting"), CuttingBoardRecipe.TYPE);
 		event.getRegistry().register(CuttingBoardRecipe.SERIALIZER);
 	}
 }

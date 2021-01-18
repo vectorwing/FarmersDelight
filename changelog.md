@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.???
+## 0.3.0
 - Added Feasts!
   - Feasts are very large meals, made to be placed down as a block and shared with friends, or just to decorate a dinner table!
   - Once placed, use a Bowl against it to take a serving. Feasts contain 4 servings by default. It can be mined back if no servings were taken;
@@ -8,12 +8,28 @@
     - Roast Chicken
   - Existing meals turned into Feasts:
     - Stuffed Pumpkin
+    - Honey Glazed Ham
 - Added blocks:
   - Straw Bale 
   - Bag of Rice
-- Added sweets:
-  - Fruit Salad: gently fulfilling, but grants Regeneration for a few seconds;
-  - Melon Popsicle: when eaten, grants a very short burst of Fire Resistance in a pinch;
+  - Storage Crates for vanilla crops: Carrot, Potato and Beetroot
+    - These specific blocks can be disabled in the configs, in order to prevent recipe overlaps with Quark and Thermal Cultivation;
+- Added foods:
+  - Bacon: The half-portion of a Porkchop!
+    - Bacon Sandwich;
+    - Usable in all Porkchop-related recipes;
+  - Ham: Porkchop's older sibling!
+    - Slay Pigs or Hoglins with a Knife for a chance of scavenging a Ham piece or two;
+    - Ham can only be smoked, and it takes a little longer than usual;
+    - Gives 1 Bone and 2 Porkchops when cut, allowing for a Peaceful source of bones.
+  - Fruit Salad: Gently fulfilling, but grants Regeneration for a few seconds;
+  - Melon Popsicle: When eaten, grants a very short burst of Fire Resistance in a pinch;
+- Updated the Cutting Board:
+  - Recipes can now specify a ToolType for axes, pickaxes and shovels instead of imaginary forge tags!
+  - This should broaden cutting compatibility with every single modded tool under the sun, as far as we tested. (thank you, ConductiveFoam!)
+- Updates meals and foods:
+  - Steak and Potatoes and Grilled Salmon are now crafted, instead of cooked, since their ingredients are already cooked;
+  - General hunger/saturation/effect tweaks here and there.
 - Updated Knives:
   - Knives can now slice a Cake on right-click;
   - Knives can now carve pumpkins like Shears;
@@ -26,14 +42,19 @@
     - Compost should now be more distinguishable from Rich Soil at later stages;
     - Rich Soil has a new look, more earthy and less slimy.
   - Rich Soil now checks the tag `farmersdelight:unaffected_by_rich_soil` for blocks that shouldn't receive growth boosts;
-  - Fix Rich Soil being incompatible with bamboo and saplings;
   - Both blocks can now sustain Mushrooms at any light level;
   - Organic Compost now checks every adjacent block for activation, encouraging clumping;
+  - JEI integration explaining how Decomposition works (thank you, ConductiveFoam!)
 - Update Wild Crops:
   - They can once again be bone-mealed to obtain more wild crops;
   - When bone meal is used, they proliferate in a small area, up to 10 units, similar to Mushrooms;
   - Wild Rice duplicates as an item drop, similar to Tall Flowers;
-- Minor asset improvements;
+- Fixes:
+  - Recipe types no longer registered twice on load;
+  - Common setup for dispenser behaviors and compostables is properly enqueued to avoid race conditions;
+  - Wild Crops will now respect world-gen configs again;
+  - Rich Soil can now receive bamboo and grow saplings again (thank you, Jozufozu!)
+- Minor graphics improvements;
 - Minor data improvements.
 
 ## 0.2.4b

@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "tomato_crate": {
+    "has_tomato_crate": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "tomato_crate",
+      "has_tomato_crate",
       "has_the_recipe"
     ]
   ]

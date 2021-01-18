@@ -34,6 +34,8 @@ public class CuttingRecipes
 	private static void chopMeats(Consumer<IFinishedRecipe> consumer) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BEEF), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), ModItems.MINCED_BEEF.get(), 2)
 				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.PORKCHOP), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), ModItems.BACON.get(), 2)
+				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CHICKEN), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), ModItems.CHICKEN_CUTS.get(), 2)
 				.addResult(Items.BONE_MEAL)
 				.build(consumer);
@@ -51,6 +53,12 @@ public class CuttingRecipes
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.COOKED_SALMON), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), ModItems.COOKED_SALMON_SLICE.get(), 2)
 				.addResult(Items.BONE_MEAL)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(ModItems.HAM.get()), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.PORKCHOP, 2)
+				.addResult(Items.BONE)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(ModItems.SMOKED_HAM.get()), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.COOKED_PORKCHOP, 2)
+				.addResult(Items.BONE)
 				.build(consumer);
 	}
 

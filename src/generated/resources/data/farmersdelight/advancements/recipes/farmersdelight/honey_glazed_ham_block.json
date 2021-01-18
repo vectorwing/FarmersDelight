@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:honey_glazed_ham_block"
+    ]
+  },
+  "criteria": {
+    "has_smoked_ham": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:smoked_ham"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:honey_glazed_ham_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_smoked_ham",
+      "has_the_recipe"
+    ]
+  ]
+}
