@@ -45,7 +45,7 @@ public class ModBlocks
 	public static final RegistryObject<Block> RICE_BAG = BLOCKS.register("rice_bag",
 			() -> new Block(Block.Properties.from(Blocks.WHITE_WOOL).harvestTool(ToolType.HOE)));
 	public static final RegistryObject<Block> STRAW_BALE = BLOCKS.register("straw_bale",
-			() -> new HayBlock(Block.Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.HOE)));
+			() -> new StrawBaleBlock(Block.Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.HOE)));
 
 	// Building
 	public static final RegistryObject<Block> ROPE = BLOCKS.register("rope", RopeBlock::new);
