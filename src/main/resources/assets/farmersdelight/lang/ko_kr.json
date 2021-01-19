@@ -197,7 +197,7 @@
   "farmersdelight.jei.cooking": "조리",
   "farmersdelight.jei.cutting": "도마"
   "farmersdelight.jei.decomposition": "분해",
-  "farmersdelight.jei.decomposition.light": "햇빛에 의해 촉진됨",
-  "farmersdelight.jei.decomposition.fluid": "근처 물에서 촉진됨",
-  "farmersdelight.jei.decomposition.accelerators": "근처 활성제에 의해 촉진됨 (아래 )"
+  "farmersdelight.jei.decomposition.light":"햇빛에 의해 촉진됨",
+  "farmersdelight.jei.decomposition.fluid":"근처 물에서 촉진됨",
+  "farmersdelight.jei.decomposition.accelerators": "근처 활성제에 의해 촉진됨(아래 참조)"
 }
