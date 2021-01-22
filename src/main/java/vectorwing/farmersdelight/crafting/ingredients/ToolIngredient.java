@@ -39,7 +39,7 @@ public class ToolIngredient extends Ingredient
 
     @Override
     public IIngredientSerializer<? extends Ingredient> getSerializer() {
-        return super.getSerializer();
+        return SERIALIZER;
     }
 
     public static class Serializer implements IIngredientSerializer<ToolIngredient>
