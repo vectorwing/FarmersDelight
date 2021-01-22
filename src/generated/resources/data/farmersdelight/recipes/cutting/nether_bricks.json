@@ -6,7 +6,8 @@
     }
   ],
   "tool": {
-    "type": "pickaxe"
+    "type": "farmersdelight:tool",
+    "tool": "pickaxe"
   },
   "result": [
     {

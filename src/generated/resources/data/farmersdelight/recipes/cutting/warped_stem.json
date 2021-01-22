@@ -6,7 +6,8 @@
     }
   ],
   "tool": {
-    "type": "axe"
+    "type": "farmersdelight:tool",
+    "tool": "axe"
   },
   "result": [
     {

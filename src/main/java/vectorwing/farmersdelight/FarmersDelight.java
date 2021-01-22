@@ -1,7 +1,9 @@
 package vectorwing.farmersdelight;
 
 import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -13,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.crafting.ingredients.ToolIngredient;
 import vectorwing.farmersdelight.registry.*;
 import vectorwing.farmersdelight.setup.ClientEventHandler;
 import vectorwing.farmersdelight.setup.CommonEventHandler;
@@ -54,6 +57,8 @@ public class FarmersDelight
 	}
 
 	private void registerRecipeSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event) {
+		CraftingHelper.register(new ResourceLocation(MODID, "tool"), ToolIngredient.SERIALIZER);
+
 		event.getRegistry().register(CookingPotRecipe.SERIALIZER);
 		event.getRegistry().register(CuttingBoardRecipe.SERIALIZER);
 	}

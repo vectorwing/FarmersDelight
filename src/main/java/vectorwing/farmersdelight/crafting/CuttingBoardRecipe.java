@@ -11,9 +11,7 @@ import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ToolType;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import vectorwing.farmersdelight.FarmersDelight;
 
@@ -28,16 +26,14 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 	private final String group;
 	private final Ingredient input;
 	private final Ingredient tool;
-	private final ToolType toolType;
 	private final NonNullList<ItemStack> results;
 	private final String soundEvent;
 
-	public CuttingBoardRecipe(ResourceLocation id, String group, Ingredient input, Ingredient tool, @Nullable ToolType toolType, NonNullList<ItemStack> results, String soundEvent) {
+	public CuttingBoardRecipe(ResourceLocation id, String group, Ingredient input, Ingredient tool, NonNullList<ItemStack> results, String soundEvent) {
 		this.id = id;
 		this.group = group;
 		this.input = input;
 		this.tool = tool;
-		this.toolType = toolType;
 		this.results = results;
 		this.soundEvent = soundEvent;
 	}
@@ -68,11 +64,6 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 
 	public Ingredient getTool() {
 		return this.tool;
-	}
-
-	@Nullable
-	public ToolType getToolType() {
-		return this.toolType;
 	}
 
 	@Override
@@ -130,18 +121,7 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 			final String groupIn = JSONUtils.getString(json, "group", "");
 			final NonNullList<Ingredient> inputItemsIn = readIngredients(JSONUtils.getJsonArray(json, "ingredients"));
 			final JsonObject toolObject= JSONUtils.getJsonObject(json, "tool");
-			final Ingredient toolIn;
-			final ToolType toolTypeIn;
-			if (JSONUtils.hasField(toolObject, "type")) {
-				// Create an Ingredient from all items that have the specified ToolType
-				toolTypeIn = ToolType.get(JSONUtils.getString(toolObject, "type"));
-				toolIn = Ingredient.fromStacks(ForgeRegistries.ITEMS.getValues().stream()
-						.filter((item) -> item.getToolTypes(new ItemStack(item)).contains(toolTypeIn))
-						.map(ItemStack::new));
-			} else {
-				toolTypeIn = null;
-				toolIn = Ingredient.deserialize(toolObject);
-			}
+			final Ingredient toolIn = Ingredient.deserialize(toolObject);
 			if (inputItemsIn.isEmpty()) {
 				throw new JsonParseException("No ingredients for cutting recipe");
 			} else if (toolIn.hasNoMatchingItems()) {
@@ -151,7 +131,7 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 			} else {
 				final NonNullList<ItemStack> results = readResults(JSONUtils.getJsonArray(json, "result"));
 				final String soundID = JSONUtils.getString(json, "sound", "");
-				return new CuttingBoardRecipe(recipeId, groupIn, inputItemsIn.get(0), toolIn, toolTypeIn, results, soundID);
+				return new CuttingBoardRecipe(recipeId, groupIn, inputItemsIn.get(0), toolIn, results, soundID);
 			}
 		}
 
@@ -180,8 +160,6 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 			String groupIn = buffer.readString(32767);
 			Ingredient inputItemIn = Ingredient.read(buffer);
 			Ingredient toolIn = Ingredient.read(buffer);
-			String toolTypeName = buffer.readString();
-			ToolType toolTypeIn = toolTypeName.isEmpty() ? null : ToolType.get(toolTypeName);
 
 			int i = buffer.readVarInt();
 			NonNullList<ItemStack> resultsIn = NonNullList.withSize(i, ItemStack.EMPTY);
@@ -190,7 +168,7 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 			}
 			String soundEventIn = buffer.readString();
 
-			return new CuttingBoardRecipe(recipeId, groupIn, inputItemIn, toolIn, toolTypeIn, resultsIn, soundEventIn);
+			return new CuttingBoardRecipe(recipeId, groupIn, inputItemIn, toolIn, resultsIn, soundEventIn);
 		}
 
 		@Override
@@ -198,8 +176,6 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 			buffer.writeString(recipe.group);
 			recipe.input.write(buffer);
 			recipe.tool.write(buffer);
-			ToolType toolTypeName = recipe.getToolType();
-			buffer.writeString(toolTypeName == null ? "" : toolTypeName.getName());
 			buffer.writeVarInt(recipe.results.size());
 			for (ItemStack result : recipe.results) {
 				buffer.writeItemStack(result);
