@@ -142,13 +142,13 @@
   "itemGroup.farmersdelight": "Farmer's Delight",
 
   "farmersdelight.container.cooking_pot": "鍋",
-  "farmersdelight.container.cooking_pot.served_on": "%s を保存中",
+  "farmersdelight.container.cooking_pot.served_on": "%sで保存",
   "farmersdelight.container.basket": "かご",
   "farmersdelight.container.pantry": "食品庫",
 
   "farmersdelight.tooltip.cooking_pot.empty": "空",
   "farmersdelight.tooltip.cooking_pot.single_serving": "1皿分を保存中",
-  "farmersdelight.tooltip.cooking_pot.many_servings": "%s 皿分を保存中",
+  "farmersdelight.tooltip.cooking_pot.many_servings": "%s皿分で保存中",
 
   "farmersdelight.tooltip.dog_food.when_feeding": "オオカミに与えた時",
   "farmersdelight.tooltip.horse_feed.when_feeding": "馬に与えた時",
