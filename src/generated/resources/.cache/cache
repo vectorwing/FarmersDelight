@@ -350,7 +350,7 @@ ebdfb6fe33c84f41f3e40347255020f445e0e205 data/farmersdelight/advancements/recipe
 9bbf4c21b7b9c1cd25fcbc218689febb5ec693a6 data/farmersdelight/recipes/acacia_pantry.json
 34ae0a0305a800248c39b82aee163866558abfed data/farmersdelight/recipes/apple_pie.json
 3f7a39f8f8790c961170773494a246a0b1c979c8 data/farmersdelight/recipes/apple_pie_from_slices.json
-bb02277d65ddba2bd709651872af02ae18d2f827 data/farmersdelight/recipes/bacon_sandwich.json
+00a09275b9d57cff6d57735cf2b6780e7e6004f3 data/farmersdelight/recipes/bacon_sandwich.json
 ee0ce8da384302d2c3db78151707d0f2c453c27c data/farmersdelight/recipes/barbecue_stick.json
 0aff58eb408be936ef0da03b2d50d90b4fa988c6 data/farmersdelight/recipes/basket.json
 a49d5f9e4d829869837df8c2fd92c4a95576f8d6 data/farmersdelight/recipes/beef_patty.json
@@ -555,6 +555,7 @@ d69c7f77c9f395881dc13e7fde263d59394c516b data/farmersdelight/tags/items/straw_ha
 721feacb3244b5607c0a12563963ca72b0be0ca9 data/forge/tags/blocks/dirt.json
 2e5d85fc9cc73626c09f8087814d63499e2481cb data/forge/tags/items/bread.json
 a9c6ca6829cd484bbfa78c09806e381a4761eac8 data/forge/tags/items/bread/wheat.json
+aab9612020bd0d4aacf0082d767fc21334138dad data/forge/tags/items/cooked_bacon.json
 6da61a14452de0434593a4583e58d99d038a0a30 data/forge/tags/items/cooked_beef.json
 490fba63789b495547cd4969f4b82462d243681d data/forge/tags/items/cooked_chicken.json
 72489acb553d0d47842fbf0ef1ef65a6a45ffe68 data/forge/tags/items/cooked_eggs.json
@@ -576,6 +577,7 @@ cf6b2c1f26e7f70858f5e3d8ebd2e13534bb2142 data/forge/tags/items/milk/milk.json
 faacd61af8b9512622f559f3773debca9dbc28c4 data/forge/tags/items/milk/milk_bottle.json
 dac239fe767410c418abd3c678f156dc98acb391 data/forge/tags/items/pasta.json
 e0ce6bc9884a799621f0e2bcbfa6781e7c1d682e data/forge/tags/items/pasta/raw_pasta.json
+effebdc9d9cb274bf4344f5acdc06830a257a584 data/forge/tags/items/raw_bacon.json
 4bb287240ed229ee78a8a5c09e409eb23ef6e763 data/forge/tags/items/raw_beef.json
 e8f663919a7b487552e3e052a3e6c0f7c12b40c5 data/forge/tags/items/raw_chicken.json
 fd46bbebd3a1d904c70806067d6bc36ddfd8c405 data/forge/tags/items/raw_fishes.json
