@@ -21,6 +21,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import vectorwing.farmersdelight.utils.TextUtils;
 
 import java.util.function.Supplier;
 
@@ -87,19 +88,23 @@ public class FeastBlock extends Block
 		ItemStack serving = this.getServingItem();
 		ItemStack heldItem = player.getHeldItem(handIn);
 
-		if (servings > 0 && heldItem.isItemEqual(serving.getContainerItem())) {
-			worldIn.setBlockState(pos, state.with(SERVINGS, servings - 1), 3);
-			if (!player.abilities.isCreativeMode) {
-				heldItem.shrink(1);
+		if (servings > 0) {
+			if (heldItem.isItemEqual(serving.getContainerItem())) {
+				worldIn.setBlockState(pos, state.with(SERVINGS, servings - 1), 3);
+				if (!player.abilities.isCreativeMode) {
+					heldItem.shrink(1);
+				}
+				if (!player.inventory.addItemStackToInventory(serving)) {
+					player.dropItem(serving, false);
+				}
+				if (worldIn.getBlockState(pos).get(SERVINGS) == 0 && !this.hasLeftovers) {
+					worldIn.removeBlock(pos, false);
+				}
+				worldIn.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				return ActionResultType.SUCCESS;
+			} else {
+				player.sendStatusMessage(TextUtils.getTranslation("block.feast.use_container", serving.getContainerItem().getDisplayName()), true);
 			}
-			if (!player.inventory.addItemStackToInventory(serving)) {
-				player.dropItem(serving, false);
-			}
-			if (worldIn.getBlockState(pos).get(SERVINGS) == 0 && !this.hasLeftovers) {
-				worldIn.removeBlock(pos, false);
-			}
-			worldIn.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.BLOCKS, 1.0F, 1.0F);
-			return ActionResultType.SUCCESS;
 		}
 		return ActionResultType.PASS;
 	}
