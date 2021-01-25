@@ -590,7 +590,7 @@ public class Recipes extends RecipeProvider
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.BACON_SANDWICH.get())
 				.addIngredient(ForgeTags.BREAD)
-				.addIngredient(ModItems.COOKED_BACON.get())
+				.addIngredient(ForgeTags.COOKED_BACON)
 				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
 				.addIngredient(ForgeTags.CROPS_TOMATO)
 				.addCriterion("has_bacon", InventoryChangeTrigger.Instance.forItems(ModItems.COOKED_BACON.get()))

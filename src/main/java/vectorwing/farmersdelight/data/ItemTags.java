@@ -43,6 +43,8 @@ public class ItemTags extends ItemTagsProvider
 		getOrCreateBuilder(ForgeTags.BREAD).addTag(ForgeTags.BREAD_WHEAT);
 		getOrCreateBuilder(ForgeTags.BREAD_WHEAT).add(Items.BREAD);
 
+		getOrCreateBuilder(ForgeTags.COOKED_BACON).add(ModItems.COOKED_BACON.get());
+
 		getOrCreateBuilder(ForgeTags.COOKED_BEEF).add(Items.COOKED_BEEF, ModItems.BEEF_PATTY.get());
 		getOrCreateBuilder(ForgeTags.COOKED_CHICKEN).add(Items.COOKED_CHICKEN, ModItems.COOKED_CHICKEN_CUTS.get());
 		getOrCreateBuilder(ForgeTags.COOKED_PORK).add(Items.COOKED_PORKCHOP, ModItems.COOKED_BACON.get());
@@ -71,6 +73,7 @@ public class ItemTags extends ItemTagsProvider
 		getOrCreateBuilder(ForgeTags.PASTA).addTags(ForgeTags.PASTA_RAW_PASTA);
 		getOrCreateBuilder(ForgeTags.PASTA_RAW_PASTA).add(ModItems.RAW_PASTA.get());
 
+		getOrCreateBuilder(ForgeTags.RAW_BACON).add(ModItems.BACON.get());
 		getOrCreateBuilder(ForgeTags.RAW_BEEF).add(Items.BEEF, ModItems.MINCED_BEEF.get());
 		getOrCreateBuilder(ForgeTags.RAW_CHICKEN).add(Items.CHICKEN, ModItems.CHICKEN_CUTS.get());
 		getOrCreateBuilder(ForgeTags.RAW_PORK).add(Items.PORKCHOP, ModItems.BACON.get());
