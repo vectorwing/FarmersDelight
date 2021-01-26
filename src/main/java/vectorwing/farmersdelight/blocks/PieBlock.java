@@ -1,10 +1,12 @@
 package vectorwing.farmersdelight.blocks;
 
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathType;
@@ -46,20 +48,8 @@ public class PieBlock extends Block
 		this.setDefaultState(this.stateContainer.getBaseState().with(BITES, 0));
 	}
 
-	public int getBiteHunger() {
-		return 3;
-	}
-
-	public float getBiteSaturation() {
-		return 0.3F;
-	}
-
 	public ItemStack getPieSliceItem() {
 		return new ItemStack(this.pieSlice.get());
-	}
-
-	public EffectInstance getPieEffect() {
-		return new EffectInstance(Effects.SPEED, 1800, 0);
 	}
 
 	public int getMaxBites() {
@@ -101,10 +91,18 @@ public class PieBlock extends Block
 		if (!playerIn.canEat(false)) {
 			return ActionResultType.PASS;
 		} else {
-			playerIn.getFoodStats().addStats(this.getBiteHunger(), this.getBiteSaturation());
-			if (this.getPieEffect() != null) {
-				playerIn.addPotionEffect(this.getPieEffect());
+			ItemStack slice = this.getPieSliceItem();
+			Food sliceFood = slice.getItem().getFood();
+
+			playerIn.getFoodStats().consume(slice.getItem(), slice);
+			if (this.getPieSliceItem().getItem().isFood() && sliceFood != null) {
+				for (Pair<EffectInstance, Float> pair : sliceFood.getEffects()) {
+					if (!worldIn.isRemote && pair.getFirst() != null && worldIn.rand.nextFloat() < pair.getSecond()) {
+						playerIn.addPotionEffect(new EffectInstance(pair.getFirst()));
+					}
+				}
 			}
+
 			int bites = state.get(BITES);
 			if (bites < getMaxBites() - 1) {
 				worldIn.setBlockState(pos, state.with(BITES, bites + 1), 3);
