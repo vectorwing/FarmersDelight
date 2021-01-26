@@ -18,6 +18,7 @@ import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.*;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
@@ -32,6 +33,7 @@ import vectorwing.farmersdelight.items.KnifeItem;
 import vectorwing.farmersdelight.registry.ModAdvancements;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+import vectorwing.farmersdelight.utils.tags.ForgeTags;
 
 import javax.annotation.Nullable;
 
@@ -144,13 +146,13 @@ public class CuttingBoardTileEntity extends TileEntity
 
 		if (sound != null) {
 			this.playSound(sound, 1.0F, 1.0F);
-		} else if (tool instanceof ShearsItem) {
+		} else if (tool.isIn(Tags.Items.SHEARS)) {
 			this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
-		} else if (tool instanceof KnifeItem) {
+		} else if (tool.isIn(ForgeTags.TOOLS_KNIVES)) {
 			this.playSound(ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), 0.8F, 1.0F);
 		} else if (boardItem instanceof BlockItem) {
 			Block block = ((BlockItem) boardItem).getBlock();
-			SoundType soundType = block.getSoundType(block.getDefaultState());
+			SoundType soundType = block.getDefaultState().getSoundType();
 			this.playSound(soundType.getBreakSound(), 1.0F, 0.8F);
 		} else {
 			this.playSound(SoundEvents.BLOCK_WOOD_BREAK, 1.0F, 0.8F);
