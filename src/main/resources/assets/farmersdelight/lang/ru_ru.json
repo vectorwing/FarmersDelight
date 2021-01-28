@@ -26,7 +26,7 @@
   "block.farmersdelight.tomato_crate": "Ящик с томатоми",
   "block.farmersdelight.onion_crate": "Ящик с луком",
   "block.farmersdelight.rice_bale": "Рисовый тюк",
-  "block.farmersdelight.rice_bag": "Мешочек риса",
+  "block.farmersdelight.rice_bag": "Мешок риса",
   "block.farmersdelight.straw_bale": "Тюк соломы",
 
   "block.farmersdelight.brown_mushroom_colony": "Колония коричневых грибов",
@@ -151,7 +151,7 @@
   "farmersdelight.tooltip.cooking_pot.many_servings": "Содержит %s порций",
 
   "farmersdelight.tooltip.dog_food.when_feeding": "Если скормить волку:",
-  "farmersdelight.tooltip.horse_feed.when_feeding": "Если скормить лошади:",
+  "farmersdelight.tooltip.horse_feed.when_feeding": "Если скормить прирученной лошади:",
 
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "Вас ожидает целый мир разнообразных вкусов!",
@@ -203,7 +203,7 @@
   "farmersdelight.jei.cooking": "Готовка",
   "farmersdelight.jei.cutting": "Разделывание на доске",
   "farmersdelight.jei.decomposition": "Разложение",
-  "farmersdelight.jei.decomposition.light": "Ускорение под воздействием солнечного света",
-  "farmersdelight.jei.decomposition.fluid": "Ускорение посредством добавления воды",
-  "farmersdelight.jei.decomposition.accelerators": "Ускорение посредством добавления активаторов (см. выше)"
+  "farmersdelight.jei.decomposition.light": "Процесс ускоряется под воздействием солнечного света",
+  "farmersdelight.jei.decomposition.fluid": "Процесс ускоряется посредством добавления воды",
+  "farmersdelight.jei.decomposition.accelerators": "Процесс ускоряется посредством добавления активаторов (см. выше)"
 }
