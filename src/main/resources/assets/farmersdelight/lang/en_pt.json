@@ -53,7 +53,7 @@
   "item.farmersdelight.rice_panicle": "Ear o' Rice",
 
   "item.farmersdelight.straw": "Fiber",
-  "item.farmersdelight.canvas": "Wicker",
+  "item.farmersdelight.canvas": "Sail Cloth",
   "item.farmersdelight.tree_bark": "Bark o' Timber",
 
   "item.farmersdelight.tomato_sauce": "Squash'd Tomato's",
@@ -101,7 +101,7 @@
   "item.farmersdelight.hamburger": "Sloppy Joe",
   "item.farmersdelight.bacon_sandwich": "Pig's Belly'n a Bun",
   "item.farmersdelight.dumplings": "Hot Buns",
-  "item.farmersdelight.stuffed_potato": "Loaded Taters",
+  "item.farmersdelight.stuffed_potato": "Stuff'd Taters",
 
   "item.farmersdelight.cooked_rice": "Bowl o' Boiled Rice",
   "item.farmersdelight.mixed_salad": "Bowl o' Greens n' Veggies",
@@ -146,12 +146,12 @@
   "farmersdelight.container.basket": "Basket",
   "farmersdelight.container.pantry": "Cabinet",
 
-  "farmersdelight.tooltip.cooking_pot.empty": "Tis' empty!",
+  "farmersdelight.tooltip.cooking_pot.empty": "'Tis empty!",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Haulin' one bunch o':",
   "farmersdelight.tooltip.cooking_pot.many_servings": "Haulin' %s bunches o':",
 
-  "farmersdelight.tooltip.dog_food.when_feeding": "When fed ta yer tame Hound:",
-  "farmersdelight.tooltip.horse_feed.when_feeding": "When fed ta yer tame land beast:",
+  "farmersdelight.tooltip.dog_food.when_feeding": "When feedin' yer tame Hound:",
+  "farmersdelight.tooltip.horse_feed.when_feeding": "When feedin' yer tame land beast:",
 
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "A sea's worth o' flavor awaits ye!",
@@ -164,10 +164,10 @@
   "farmersdelight.advancement.get_ham": "Ye Old Chop Chop",
   "farmersdelight.advancement.get_ham.desc": "Daggers be good at choppin' up a beast. Maybe ye can even slash up a big ol' meat cut!",
   "farmersdelight.advancement.harvest_straw": "Weavin' Rigging",
-  "farmersdelight.advancement.harvest_straw.desc": "Stab them grasses, crop an' wild, to gather fiber fer yer sail rig",
+  "farmersdelight.advancement.harvest_straw.desc": "Stab them grasses, both crop an' wild, an' gather fiber fer yer sail rig",
   "farmersdelight.advancement.get_rich_soil": "Plant Grub",
   "farmersdelight.advancement.get_rich_soil.desc": "Them Piles o' Garbage stink bad, but leave 'em by some shrooms fer a while an' they become Rich Filth!",
-  "farmersdelight.advancement.get_mushroom_colony": "Not Mushroom ta Grow",
+  "farmersdelight.advancement.get_mushroom_colony": "Not Mushroom Left!",
   "farmersdelight.advancement.get_mushroom_colony.desc": "Put them 'shrooms in rich filth by a dark room, wait fer them ta grow... an' CUT 'EM!",
   "farmersdelight.advancement.obtain_netherite_knife": "If Ye Dive Too Deep...",
   "farmersdelight.advancement.obtain_netherite_knife.desc": "Ye might just get yer dagger decked in Davy Jones' Alloy! But beware, ye might incur his wrath...",
