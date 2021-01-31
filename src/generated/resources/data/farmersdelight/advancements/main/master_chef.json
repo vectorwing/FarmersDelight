@@ -1,8 +1,8 @@
 {
-  "parent": "farmersdelight:main/place_cooking_pot",
+  "parent": "farmersdelight:main/place_feast",
   "display": {
     "icon": {
-      "item": "farmersdelight:pasta_with_mutton_chop"
+      "item": "farmersdelight:honey_glazed_ham"
     },
     "title": {
       "translate": "farmersdelight.advancement.master_chef"

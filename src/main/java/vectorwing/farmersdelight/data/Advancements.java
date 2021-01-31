@@ -174,7 +174,7 @@ public class Advancements extends AdvancementProvider
 					.withCriterion("cutting_board", CuttingBoardTrigger.Instance.simple())
 					.register(consumer, getNameId("main/use_cutting_board"));
 
-			Advancement masterChef = getAdvancement(dinnerIsServed, ModItems.PASTA_WITH_MUTTON_CHOP.get(), "master_chef", FrameType.CHALLENGE, true, true, false)
+			Advancement masterChef = getAdvancement(gloriousFeast, ModItems.HONEY_GLAZED_HAM.get(), "master_chef", FrameType.CHALLENGE, true, true, false)
 					.withCriterion("mixed_salad", ConsumeItemTrigger.Instance.forItem(ModItems.MIXED_SALAD.get()))
 					.withCriterion("beef_stew", ConsumeItemTrigger.Instance.forItem(ModItems.BEEF_STEW.get()))
 					.withCriterion("chicken_soup", ConsumeItemTrigger.Instance.forItem(ModItems.CHICKEN_SOUP.get()))
