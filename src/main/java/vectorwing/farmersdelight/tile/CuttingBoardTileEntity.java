@@ -10,7 +10,6 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ShearsItem;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -29,7 +28,6 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.blocks.CuttingBoardBlock;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
-import vectorwing.farmersdelight.items.KnifeItem;
 import vectorwing.farmersdelight.registry.ModAdvancements;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
@@ -99,11 +97,13 @@ public class CuttingBoardTileEntity extends TileEntity
 	 * @return Whether the process succeeded or failed.
 	 */
 	public boolean processItemUsingTool(ItemStack tool, @Nullable PlayerEntity player) {
-		CuttingBoardRecipe irecipe = this.world.getRecipeManager()
-				.getRecipe(this.recipeType, new RecipeWrapper(itemHandler), this.world).orElse(null);
+		CuttingBoardRecipe irecipe = world.getRecipeManager()
+				.getRecipes(recipeType, new RecipeWrapper(itemHandler), world)
+				.stream().filter(cuttingRecipe -> isToolValid(tool, cuttingRecipe))
+				.findAny().orElse(null);
 
-		if (irecipe != null && this.isToolValid(tool, irecipe)) {
-			NonNullList<ItemStack> results = this.getResults();
+		if (irecipe != null) {
+			NonNullList<ItemStack> results = irecipe.getResults();
 			for (ItemStack result : results) {
 				Direction direction = this.getBlockState().get(CuttingBoardBlock.FACING).rotateYCCW();
 				ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5 + (direction.getXOffset() * 0.2), pos.getY() + 0.2, pos.getZ() + 0.5 + (direction.getZOffset() * 0.2), result.copy());
@@ -135,10 +135,6 @@ public class CuttingBoardTileEntity extends TileEntity
 		} else {
 			return recipe.getTool().test(tool);
 		}
-	}
-
-	protected NonNullList<ItemStack> getResults() {
-		return this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(itemHandler), this.world).map(CuttingBoardRecipe::getResults).orElse(NonNullList.withSize(1, ItemStack.EMPTY));
 	}
 
 	public void playProcessingSound(String soundEventID, Item tool, Item boardItem) {
