@@ -1,6 +1,0 @@
-{
-  "parent": "farmersdelight:item/mug",
-  "textures": {
-    "layer0": "farmersdelight:item/hot_cocoa"
-  }
-}

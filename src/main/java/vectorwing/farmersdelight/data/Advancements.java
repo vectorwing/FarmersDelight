@@ -142,6 +142,8 @@ public class Advancements extends AdvancementProvider
 			// Cooking Branch
 			Advancement bonfireLit = getAdvancement(farmersDelight, Blocks.CAMPFIRE, "place_campfire", FrameType.TASK, true, true, false)
 					.withCriterion("campfire", PlacedBlockTrigger.Instance.placedBlock(Blocks.CAMPFIRE))
+					.withCriterion("soul_campfire", PlacedBlockTrigger.Instance.placedBlock(Blocks.SOUL_CAMPFIRE))
+					.withRequirementsStrategy(IRequirementsStrategy.OR)
 					.register(consumer, getNameId("main/place_campfire"));
 
 			Advancement fireUpTheGrill = getAdvancement(bonfireLit, ModItems.STOVE.get(), "place_stove", FrameType.TASK, true, true, false)
