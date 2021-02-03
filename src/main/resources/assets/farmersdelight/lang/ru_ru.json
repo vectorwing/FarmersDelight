@@ -150,7 +150,7 @@
   "farmersdelight.tooltip.cooking_pot.single_serving": "Содержит одну порцию",
   "farmersdelight.tooltip.cooking_pot.many_servings": "Содержит %s порций",
 
-  "farmersdelight.tooltip.dog_food.when_feeding": "Если скормить волку:",
+  "farmersdelight.tooltip.dog_food.when_feeding": "Если скормить прирученному волку:",
   "farmersdelight.tooltip.horse_feed.when_feeding": "Если скормить прирученной лошади:",
 
   "farmersdelight.advancement.root": "Farmer's Delight",
