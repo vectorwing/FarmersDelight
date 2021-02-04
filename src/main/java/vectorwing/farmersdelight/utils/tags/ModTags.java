@@ -40,6 +40,9 @@ public class ModTags
 	// Foods that drop from mobs that wolves prey upon (sheep, rabbit and chicken).
 	public static final ITag.INamedTag<Item> WOLF_PREY = modItemTag("wolf_prey");
 
+	// Soups/stews that can stack to 16 when stackableSoupItems is enabled in the config. Does not include the main soups/stews of Farmer's Delight.
+	public static final ITag.INamedTag<Item> STACKABLE_SOUP_ITEMS = modItemTag("stackable_soup_items");
+
 	// Knife items for game logic.
 	public static final ITag.INamedTag<Item> KNIVES = modItemTag("tools/knives");
 
