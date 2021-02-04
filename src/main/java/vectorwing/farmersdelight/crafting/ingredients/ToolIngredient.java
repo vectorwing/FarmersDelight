@@ -11,6 +11,7 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IIngredientSerializer;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
@@ -27,6 +28,11 @@ public class ToolIngredient extends Ingredient
                 .filter(stack -> stack.getToolTypes().contains(toolType))
                 .map(Ingredient.SingleItemList::new));
         this.toolType = toolType;
+    }
+
+    @Override
+    public boolean test(@Nullable ItemStack stack) {
+        return stack != null && stack.getToolTypes().contains(toolType) || super.test(stack);
     }
 
     @Override
