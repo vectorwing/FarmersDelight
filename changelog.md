@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.3.2
+- Using a feast without a bowl will notify the player, bed-style;
+- Hot Cocoa has a new look! The steam isn't animated for now, still need some feedback on it;
+- Fixes:
+  - JEI Plugin no longer crashes on servers. It was calling an unbound tag in the Decomposition recipe;
+    - This is a temporary fix that also disables checking the recipe through the compost activators. Might be revisited on the next release;
+  - Pantries now keep their given name when mined (thank you, bagel!);
+  - Cutting Board directly gives items on right-click instead of popping them off;
+  - Cutting Board now checks tags for defaut knife and shear sounds;
+  - Wild Rice will leave behind its water when either half is broken;
+  - Horse Feed tooltip now describes tamed mounts as a whole;
+- Updated Advancements:
+  - Added advancements for getting ham from pigs and drinking hot cocoa;
+  - Made the feast advancement suggest bowls;
+  - Added Netherite Knife to 'Hunt and Gather' advancement triggers;
+  - Added Soul Campfire to 'Bonfire Lit' advancement triggers;
+- Added translations:
+  - fi_FI (thank you, Markus1002!);
+  - en_PT - Pirate Speak! Them landlubbers better be sharp ta our ol' lingo now, lest ye have yer greens plunder'd!
+- Updated translations:
+  - ko_KR (thank you, qkrehf2!);
+  - ja_JP (thank you, CKenJa!);
+  - ru_RU (thank you, GrayPix!)
+
 ## 0.3.1
 - Fix vanilla crop crates not having loot tables;
 - Fix Rice Bale, Straw Bale and Wild Crops not being flammable (more to come later);

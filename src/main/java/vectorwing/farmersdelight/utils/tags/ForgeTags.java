@@ -14,6 +14,7 @@ public class ForgeTags
 	public static final ITag.INamedTag<Item> BREAD = forgeItemTag("bread");
 	public static final ITag.INamedTag<Item> BREAD_WHEAT = forgeItemTag("bread/wheat");
 
+	public static final ITag.INamedTag<Item> COOKED_BACON = forgeItemTag("cooked_bacon");
 	public static final ITag.INamedTag<Item> COOKED_BEEF = forgeItemTag("cooked_beef");
 	public static final ITag.INamedTag<Item> COOKED_CHICKEN = forgeItemTag("cooked_chicken");
 	public static final ITag.INamedTag<Item> COOKED_PORK = forgeItemTag("cooked_pork");
@@ -41,6 +42,7 @@ public class ForgeTags
 	public static final ITag.INamedTag<Item> PASTA = forgeItemTag("pasta");
 	public static final ITag.INamedTag<Item> PASTA_RAW_PASTA = forgeItemTag("pasta/raw_pasta");
 
+	public static final ITag.INamedTag<Item> RAW_BACON = forgeItemTag("raw_bacon");
 	public static final ITag.INamedTag<Item> RAW_BEEF = forgeItemTag("raw_beef");
 	public static final ITag.INamedTag<Item> RAW_CHICKEN = forgeItemTag("raw_chicken");
 	public static final ITag.INamedTag<Item> RAW_PORK = forgeItemTag("raw_pork");

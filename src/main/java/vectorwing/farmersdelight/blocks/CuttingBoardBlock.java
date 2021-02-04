@@ -99,7 +99,9 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 				// Removing the board's item
 			} else if (handIn.equals(Hand.MAIN_HAND)) {
 				if (!player.isCreative()) {
-					InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), cuttingBoardTile.removeItem());
+					if (!player.inventory.addItemStackToInventory(cuttingBoardTile.removeItem())) {
+						InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), cuttingBoardTile.removeItem());
+					}
 				} else {
 					cuttingBoardTile.removeItem();
 				}

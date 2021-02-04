@@ -22,6 +22,7 @@ public class ItemModels extends ItemModelProvider
 {
 	public static final String GENERATED = "item/generated";
 	public static final String HANDHELD = "item/handheld";
+	public static final ResourceLocation MUG = new ResourceLocation(FarmersDelight.MODID, "item/mug");
 
 	public ItemModels(DataGenerator generator, ExistingFileHelper existingFileHelper) {
 		super(generator, FarmersDelight.MODID, existingFileHelper);
@@ -41,6 +42,9 @@ public class ItemModels extends ItemModelProvider
 
 		itemGeneratedModel(ModItems.RED_MUSHROOM_COLONY.get(), resourceBlock(itemName(ModItems.RED_MUSHROOM_COLONY.get()) + "_stage3"));
 		items.remove(ModItems.RED_MUSHROOM_COLONY.get());
+
+		itemMugModel(ModItems.HOT_COCOA.get(), resourceItem(itemName(ModItems.HOT_COCOA.get())));
+		items.remove(ModItems.HOT_COCOA.get());
 
 		blockBasedModel(ModItems.TATAMI.get(), "_half");
 		items.remove(ModItems.TATAMI.get());
@@ -108,6 +112,10 @@ public class ItemModels extends ItemModelProvider
 
 	public void itemGeneratedModel(Item item, ResourceLocation texture) {
 		withExistingParent(itemName(item), GENERATED).texture("layer0", texture);
+	}
+
+	public void itemMugModel(Item item, ResourceLocation texture) {
+		withExistingParent(itemName(item), MUG).texture("layer0", texture);
 	}
 
 	private String itemName(Item item) {

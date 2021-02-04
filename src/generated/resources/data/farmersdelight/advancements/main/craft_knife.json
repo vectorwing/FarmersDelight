@@ -56,6 +56,16 @@
           }
         ]
       }
+    },
+    "netherite_knife": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:netherite_knife"
+          }
+        ]
+      }
     }
   },
   "requirements": [
@@ -63,7 +73,8 @@
       "flint_knife",
       "iron_knife",
       "diamond_knife",
-      "golden_knife"
+      "golden_knife",
+      "netherite_knife"
     ]
   ]
 }

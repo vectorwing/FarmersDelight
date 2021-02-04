@@ -39,7 +39,6 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
     private final IDrawable icon;
     private final ItemStack organicCompost;
     private final ItemStack richSoil;
-    private final List<ItemStack> accelerators;
 
     public DecompositionRecipeCategory(IGuiHelper helper) {
         title = I18n.format(FarmersDelight.MODID + ".jei.decomposition");
@@ -47,8 +46,6 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
         background = helper.createDrawable(backgroundImage, 0, 0, 118, 80);
         organicCompost = new ItemStack(ModBlocks.ORGANIC_COMPOST.get());
         richSoil = new ItemStack(ModItems.RICH_SOIL.get());
-        accelerators = ModTags.COMPOST_ACTIVATORS.getAllElements().stream()
-                .map(ItemStack::new).collect(Collectors.toList());
         icon = helper.createDrawableIngredient(richSoil);
         slotIcon = helper.createDrawable(backgroundImage, 119, 0, slotSize, slotSize);
     }
@@ -80,12 +77,13 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 
     @Override
     public void setIngredients(DecompositionDummy decompositionRecipe, IIngredients ingredients) {
-        ingredients.setInputIngredients(ImmutableList.of(Ingredient.fromStacks(organicCompost), Ingredient.fromStacks(accelerators.stream())));
+        ingredients.setInputIngredients(ImmutableList.of(Ingredient.fromStacks(organicCompost)));
         ingredients.setOutput(VanillaTypes.ITEM, richSoil);
     }
 
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, DecompositionDummy decompositionRecipe, IIngredients iIngredients) {
+        List<ItemStack> accelerators = ModTags.COMPOST_ACTIVATORS.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
         IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
 
         // Draw decomposing block

@@ -87,12 +87,17 @@ public class Advancements extends AdvancementProvider
 					.withCriterion("iron_knife", InventoryChangeTrigger.Instance.forItems(ModItems.IRON_KNIFE.get()))
 					.withCriterion("diamond_knife", InventoryChangeTrigger.Instance.forItems(ModItems.DIAMOND_KNIFE.get()))
 					.withCriterion("golden_knife", InventoryChangeTrigger.Instance.forItems(ModItems.GOLDEN_KNIFE.get()))
+					.withCriterion("netherite_knife", InventoryChangeTrigger.Instance.forItems(ModItems.NETHERITE_KNIFE.get()))
 					.withRequirementsStrategy(IRequirementsStrategy.OR)
 					.register(consumer, getNameId("main/craft_knife"));
 
 			Advancement graspingAtStraws = getAdvancement(huntAndGather, ModItems.STRAW.get(), "harvest_straw", FrameType.TASK, true, true, false)
 					.withCriterion("harvest_straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
 					.register(consumer, getNameId("main/harvest_straw"));
+
+			Advancement wildButcher = getAdvancement(huntAndGather, ModItems.HAM.get(), "get_ham", FrameType.TASK, true, true, false)
+					.withCriterion("ham", InventoryChangeTrigger.Instance.forItems(ModItems.HAM.get()))
+					.register(consumer, getNameId("main/get_ham"));
 
 			Advancement dippingYourRoots = getAdvancement(graspingAtStraws, ModItems.RICE_PANICLE.get(), "plant_rice", FrameType.TASK, true, true, false)
 					.withCriterion("plant_rice", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.RICE_CROP.get()))
@@ -137,6 +142,8 @@ public class Advancements extends AdvancementProvider
 			// Cooking Branch
 			Advancement bonfireLit = getAdvancement(farmersDelight, Blocks.CAMPFIRE, "place_campfire", FrameType.TASK, true, true, false)
 					.withCriterion("campfire", PlacedBlockTrigger.Instance.placedBlock(Blocks.CAMPFIRE))
+					.withCriterion("soul_campfire", PlacedBlockTrigger.Instance.placedBlock(Blocks.SOUL_CAMPFIRE))
+					.withRequirementsStrategy(IRequirementsStrategy.OR)
 					.register(consumer, getNameId("main/place_campfire"));
 
 			Advancement fireUpTheGrill = getAdvancement(bonfireLit, ModItems.STOVE.get(), "place_stove", FrameType.TASK, true, true, false)
@@ -146,6 +153,10 @@ public class Advancements extends AdvancementProvider
 			Advancement dinnerIsServed = getAdvancement(fireUpTheGrill, ModItems.COOKING_POT.get(), "place_cooking_pot", FrameType.GOAL, true, true, false)
 					.withCriterion("cooking_pot", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.COOKING_POT.get()))
 					.register(consumer, getNameId("main/place_cooking_pot"));
+
+			Advancement cupOfHappiness = getAdvancement(dinnerIsServed, ModItems.HOT_COCOA.get(), "drink_hot_cocoa", FrameType.TASK, true, true, false)
+					.withCriterion("hot_cocoa", ConsumeItemTrigger.Instance.forItem(ModItems.HOT_COCOA.get()))
+					.register(consumer, getNameId("main/drink_hot_cocoa"));
 
 			Advancement warmAndCozy = getAdvancement(dinnerIsServed, ModItems.CHICKEN_SOUP.get(), "eat_comfort_food", FrameType.TASK, true, true, false)
 					.withCriterion("comfort", EffectsChangedTrigger.Instance.forEffect(MobEffectsPredicate.any().addEffect(ModEffects.COMFORT.get())))
@@ -165,7 +176,7 @@ public class Advancements extends AdvancementProvider
 					.withCriterion("cutting_board", CuttingBoardTrigger.Instance.simple())
 					.register(consumer, getNameId("main/use_cutting_board"));
 
-			Advancement masterChef = getAdvancement(dinnerIsServed, ModItems.PASTA_WITH_MUTTON_CHOP.get(), "master_chef", FrameType.CHALLENGE, true, true, false)
+			Advancement masterChef = getAdvancement(gloriousFeast, ModItems.HONEY_GLAZED_HAM.get(), "master_chef", FrameType.CHALLENGE, true, true, false)
 					.withCriterion("mixed_salad", ConsumeItemTrigger.Instance.forItem(ModItems.MIXED_SALAD.get()))
 					.withCriterion("beef_stew", ConsumeItemTrigger.Instance.forItem(ModItems.BEEF_STEW.get()))
 					.withCriterion("chicken_soup", ConsumeItemTrigger.Instance.forItem(ModItems.CHICKEN_SOUP.get()))
