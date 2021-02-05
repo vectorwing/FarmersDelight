@@ -6,6 +6,7 @@ labels: ''
 assignees: ''
 
 ---
+Please fill out the template below to describe your issue. Doing so **greatly** helps us understand what happened!
 
 **Description**
 A clear and concise description of what the bug is.
@@ -15,6 +16,9 @@ What did you do to cause the issue? Can it be replicated?
 
 **Expected behavior:**
 A clear and concise description of what you expected to happen.
+
+**Logs**
+Even if the game didn't crash, please submit your client/server logs as well. They contain vital information to troubleshoot the issue.
 
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
