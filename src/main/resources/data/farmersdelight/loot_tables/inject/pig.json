@@ -25,6 +25,55 @@
           "condition": "minecraft:random_chance_with_looting",
           "chance": 0.5,
           "looting_multiplier": 0.1
+        },
+        {
+          "condition": "inverted",
+          "term": {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "flags": {
+                "is_on_fire": true
+              }
+            },
+            "entity": "this"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pool1",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "farmersdelight:smoked_ham"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:entity_properties",
+          "predicate": {
+            "equipment": {
+              "mainhand": {
+                "tag": "farmersdelight:tools/knives"
+              }
+            }
+          },
+          "entity": "killer"
+        },
+        {
+          "condition": "minecraft:random_chance_with_looting",
+          "chance": 0.5,
+          "looting_multiplier": 0.1
+        },
+        {
+          "condition": "minecraft:entity_properties",
+          "predicate": {
+            "flags": {
+              "is_on_fire": true
+            }
+          },
+          "entity": "this"
         }
       ]
     }
