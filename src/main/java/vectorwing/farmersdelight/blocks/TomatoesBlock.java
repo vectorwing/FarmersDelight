@@ -25,6 +25,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.PlantType;
 import vectorwing.farmersdelight.registry.ModItems;
 
 import java.util.Random;
@@ -135,6 +136,11 @@ public class TomatoesBlock extends BushBlock implements IGrowable
 				}
 			}
 		}
+	}
+
+	@Override
+	public PlantType getPlantType(IBlockReader world, BlockPos pos) {
+		return PlantType.CROP;
 	}
 
 	@Override
