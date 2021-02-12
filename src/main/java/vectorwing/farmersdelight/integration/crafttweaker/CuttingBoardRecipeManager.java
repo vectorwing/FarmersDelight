@@ -15,6 +15,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ToolType;
 import org.openzen.zencode.java.ZenCodeType;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.integration.crafttweaker.actions.ActionRemoveCuttingBoardRecipe;
 import vectorwing.farmersdelight.utils.IngredientUtils;
 import vectorwing.farmersdelight.utils.ListUtils;
 
@@ -71,6 +72,16 @@ public class CuttingBoardRecipeManager implements IRecipeManager
                                 NonNullList.withSize(results.length, ItemStack.EMPTY)),
                         sound),
                 ""));
+    }
+
+    @Override
+    public void removeRecipe(IItemStack output) {
+        removeRecipe(new IItemStack[]{output});
+    }
+
+    @ZenCodeType.Method
+    public void removeRecipe(IItemStack[] outputs) {
+        CraftTweakerAPI.apply(new ActionRemoveCuttingBoardRecipe(this, outputs));
     }
 
     @Override
