@@ -27,7 +27,7 @@ public class CuttingBoardRecipeManager implements IRecipeManager
                           IIngredient input,
                           IItemStack[] results,
                           String toolTypeName,
-                          @ZenCodeType.OptionalString() String soundEvent) {
+                          @ZenCodeType.OptionalString String soundEvent) {
         ToolType toolType;
         try {
             toolType = ToolType.get(toolTypeName);
@@ -59,7 +59,7 @@ public class CuttingBoardRecipeManager implements IRecipeManager
                           IIngredient input,
                           IItemStack[] results,
                           IIngredient tool,
-                          @ZenCodeType.Optional String soundEvent) {
+                          @ZenCodeType.OptionalString String soundEvent) {
         CraftTweakerAPI.apply(new ActionAddRecipe(this,
                 new CuttingBoardRecipe(new ResourceLocation(CraftTweaker.MODID, name),
                         "",
