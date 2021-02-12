@@ -26,18 +26,18 @@ public class CuttingBoardRecipeManager implements IRecipeManager
     public void addRecipe(String name,
                           IIngredient input,
                           IItemStack[] results,
-                          String toolTypeName,
-                          @ZenCodeType.OptionalString String soundEvent) {
-        ToolType toolType;
+                          String toolType,
+                          @ZenCodeType.OptionalString String sound) {
+        ToolType toolTypeObj;
         try {
-            toolType = ToolType.get(toolTypeName);
+            toolTypeObj = ToolType.get(toolType);
         } catch (IllegalArgumentException e) {
-            CraftTweakerAPI.logThrowing("Invalid tool type \"%s\"", e, toolTypeName);
+            CraftTweakerAPI.logThrowing("Invalid tool type \"%s\"", e, toolType);
             return;
         }
-        Ingredient toolIngredient = IngredientUtils.getToolTypeIngredient(toolType);
+        Ingredient toolIngredient = IngredientUtils.getToolTypeIngredient(toolTypeObj);
         if (toolIngredient.hasNoMatchingItems()) {
-            CraftTweakerAPI.logError("No tools of type \"%s\" for cutting recipe", toolTypeName);
+            CraftTweakerAPI.logError("No tools of type \"%s\" for cutting recipe", toolType);
             return;
         }
 
@@ -46,11 +46,11 @@ public class CuttingBoardRecipeManager implements IRecipeManager
                         "",
                         input.asVanillaIngredient(),
                         toolIngredient,
-                        toolType,
+                        toolTypeObj,
                         ListUtils.mapArrayIndexSet(results,
                                 IItemStack::getInternal,
                                 NonNullList.withSize(results.length, ItemStack.EMPTY)),
-                        soundEvent),
+                        sound),
                 ""));
     }
 
@@ -59,7 +59,7 @@ public class CuttingBoardRecipeManager implements IRecipeManager
                           IIngredient input,
                           IItemStack[] results,
                           IIngredient tool,
-                          @ZenCodeType.OptionalString String soundEvent) {
+                          @ZenCodeType.OptionalString String sound) {
         CraftTweakerAPI.apply(new ActionAddRecipe(this,
                 new CuttingBoardRecipe(new ResourceLocation(CraftTweaker.MODID, name),
                         "",
@@ -69,7 +69,7 @@ public class CuttingBoardRecipeManager implements IRecipeManager
                         ListUtils.mapArrayIndexSet(results,
                                 IItemStack::getInternal,
                                 NonNullList.withSize(results.length, ItemStack.EMPTY)),
-                        soundEvent),
+                        sound),
                 ""));
     }
 
