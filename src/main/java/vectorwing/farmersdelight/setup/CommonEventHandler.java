@@ -30,6 +30,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.conditions.VanillaCrateEnabledCondition;
 import vectorwing.farmersdelight.loot.functions.CopyMealFunction;
+import vectorwing.farmersdelight.loot.functions.SmokerCookFunction;
 import vectorwing.farmersdelight.registry.ModAdvancements;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModEffects;
@@ -63,6 +64,7 @@ public class CommonEventHandler
 		ModAdvancements.register();
 
 		LootFunctionManager.func_237451_a_(CopyMealFunction.ID.toString(), new CopyMealFunction.Serializer());
+		LootFunctionManager.func_237451_a_(SmokerCookFunction.ID.toString(), new SmokerCookFunction.Serializer());
 
 		CraftingHelper.register(new VanillaCrateEnabledCondition.Serializer());
 
