@@ -151,7 +151,7 @@
   "farmersdelight.tooltip.cooking_pot.single_serving": "Hält 1 Portion:",
   "farmersdelight.tooltip.cooking_pot.many_servings": "Hält %s Portionen:",
 
-  "farmersdelight.tooltip.dog_food.when_feeding": "Verleiht, wenn es an gezähmte Wolf verfüttert wird:",
+  "farmersdelight.tooltip.dog_food.when_feeding": "Verleiht, wenn es an gezähmte Wölfe verfüttert wird:",
   "farmersdelight.tooltip.horse_feed.when_feeding": "Verleiht, wenn es an gezähmtes Pferd verfüttert wird:",
 
   "farmersdelight.advancement.root": "Farmer's Delight",
@@ -161,7 +161,7 @@
   "farmersdelight.advancement.plant_rice": "Wurzeln eintauchen",
   "farmersdelight.advancement.plant_rice.desc": "Pflanze Reis in seichtes Wasser",
   "farmersdelight.advancement.plant_all_crops": "Fruchtfolge",
-  "farmersdelight.advancement.plant_all_crops.desc": "Baue alles Obst, Gemüse, Gemüse, Pilz und Wurzel an, dass du finden kannst!",
+  "farmersdelight.advancement.plant_all_crops.desc": "Baue alles Obst, Gemüse, Pilz und Wurzel an, dass du finden kannst!",
   "farmersdelight.advancement.get_ham": "Schwein-y Todd",
   "farmersdelight.advancement.get_ham.desc": "Benutze ein Küchenmesser, um Schinken von Schweinen zu bekommen.",
   "farmersdelight.advancement.harvest_straw": "Nach Strohhalmen greifen",
