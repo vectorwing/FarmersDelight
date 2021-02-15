@@ -25,11 +25,13 @@ public abstract class SoupItemMixin extends Item {
 
 	@Override
 	public int getItemStackLimit(ItemStack stack) {
-		if (Configuration.STACKABLE_SOUP_ITEMS.get() && stack.getItem().isIn(ModTags.STACKABLE_SOUP_ITEMS)) {
-			return 16;
-		} else {
-			return super.getItemStackLimit(stack);
+		Item item = stack.getItem();
+		if (Configuration.STACKABLE_SOUP_ITEMS.get()) {
+			if (Configuration.OVERRIDE_ALL_SOUP_ITEMS.get() && !item.isIn(ModTags.NON_STACKABLE_SOUP_ITEMS) || !Configuration.OVERRIDE_ALL_SOUP_ITEMS.get() && item.isIn(ModTags.STACKABLE_SOUP_ITEMS)) {
+				return 16;
+			}
 		}
+		return super.getItemStackLimit(stack);
 	}
 
 	/**

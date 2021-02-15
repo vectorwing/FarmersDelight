@@ -14,6 +14,7 @@ public class Configuration
 	// COMMON
 	public static final String CATEGORY_SETTINGS = "settings";
 	public static final String CATEGORY_OVERRIDES = "overrides";
+	public static final String CATEGORY_OVERRIDES_STACK_SIZE = "stack_size";
 	public static final String CATEGORY_WORLD = "world";
 
 	public static ForgeConfigSpec.BooleanValue ENABLE_VANILLA_CROP_CRATES;
@@ -22,6 +23,7 @@ public class Configuration
 	public static ForgeConfigSpec.BooleanValue RABBIT_STEW_JUMP_BOOST;
 	public static ForgeConfigSpec.BooleanValue DISPENSER_TOOLS_CUTTING_BOARD;
 	public static ForgeConfigSpec.BooleanValue STACKABLE_SOUP_ITEMS;
+	public static ForgeConfigSpec.BooleanValue OVERRIDE_ALL_SOUP_ITEMS;
 	public static ForgeConfigSpec.BooleanValue CROPS_ON_SHIPWRECKS;
 	public static ForgeConfigSpec.BooleanValue CROPS_ON_VILLAGE_HOUSES;
 	public static ForgeConfigSpec.BooleanValue GENERATE_VILLAGE_COMPOST_HEAPS;
@@ -57,7 +59,12 @@ public class Configuration
 		COMFORT_FOOD_TAG_EFFECT = COMMON_BUILDER.comment("Should items inside the tag 'farmersdelight:comfort_foods' grant 5 minutes of Comfort when eaten? (defaults to vanilla SoupItems)").define("comfortFoodTagEffect", true);
 		RABBIT_STEW_JUMP_BOOST = COMMON_BUILDER.comment("Should Rabbit Stew grant users the jumping prowess of a rabbit when eaten?").define("rabbitStewJumpBoost", true);
 		DISPENSER_TOOLS_CUTTING_BOARD = COMMON_BUILDER.comment("Should most vanilla tools register a dispenser behavior when facing a Cutting Board?").define("dispenserUsesToolsOnCuttingBoard", true);
-		STACKABLE_SOUP_ITEMS = COMMON_BUILDER.comment("Should soup items become stackable to 16 like Farmer's Delight's soups & stews?").define("stackableSoupItems", true);
+
+		COMMON_BUILDER.comment("Stack size overrides").push(CATEGORY_OVERRIDES_STACK_SIZE);
+		STACKABLE_SOUP_ITEMS = COMMON_BUILDER.comment("Should soup items become stackable to 16 like Farmer's Delight's soups & stews?", "By default, this override only affects items inside the `stackable_soup_items` tag, which starts with vanilla bowl foods.", "The setting below this reverses the behavior, overriding all registered SoupItem's instead. This includes SoupItems from other mods, so be careful!").define("stackableSoupItems", true);
+		OVERRIDE_ALL_SOUP_ITEMS = COMMON_BUILDER.comment("If this is enabled, items can be excluded by adding them to the `non_stackable_soup_items` tag.").define("overrideAllSoupItems", false);
+		COMMON_BUILDER.pop();
+
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("World generation").push(CATEGORY_WORLD);
