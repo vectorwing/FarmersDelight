@@ -61,8 +61,8 @@ public class Configuration
 		DISPENSER_TOOLS_CUTTING_BOARD = COMMON_BUILDER.comment("Should most vanilla tools register a dispenser behavior when facing a Cutting Board?").define("dispenserUsesToolsOnCuttingBoard", true);
 
 		COMMON_BUILDER.comment("Stack size overrides").push(CATEGORY_OVERRIDES_STACK_SIZE);
-		STACKABLE_SOUP_ITEMS = COMMON_BUILDER.comment("Should soup items become stackable to 16 like Farmer's Delight's soups & stews?", "By default, this override only affects items inside the `stackable_soup_items` tag, which starts with vanilla bowl foods.", "The setting below this reverses the behavior, overriding all registered SoupItem's instead. This includes SoupItems from other mods, so be careful!").define("stackableSoupItems", true);
-		OVERRIDE_ALL_SOUP_ITEMS = COMMON_BUILDER.comment("If this is enabled, items can be excluded by adding them to the `non_stackable_soup_items` tag.").define("overrideAllSoupItems", false);
+		STACKABLE_SOUP_ITEMS = COMMON_BUILDER.comment("Should soup items become stackable to 16 like Farmer's Delight's soups & stews?", "By default, this override only affects items inside the `stackable_soup_items` tag, which starts with vanilla bowl foods.").define("stackableSoupItems", true);
+		OVERRIDE_ALL_SOUP_ITEMS = COMMON_BUILDER.comment("The setting below reverses the behavior above, overriding all registered SoupItem's instead. This includes SoupItems from other mods, so be careful!", "If this is enabled, items can be excluded by adding them to the `non_stackable_soup_items` tag.").define("overrideAllSoupItems", false);
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.pop();
