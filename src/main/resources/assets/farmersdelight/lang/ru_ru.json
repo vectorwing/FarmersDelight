@@ -4,7 +4,7 @@
   "block.farmersdelight.basket": "Корзина",
   "block.farmersdelight.cutting_board": "Разделочная доска",
   "block.farmersdelight.oak_pantry": "Дубовая кладовая",
-  "block.farmersdelight.birch_pantry": "Березовая кладовая",
+  "block.farmersdelight.birch_pantry": "Берёзовая кладовая",
   "block.farmersdelight.spruce_pantry": "Еловая кладовая",
   "block.farmersdelight.jungle_pantry": "Кладовая из торопического дерева",
   "block.farmersdelight.acacia_pantry": "Акациевая кладовая",
@@ -117,7 +117,7 @@
   "item.farmersdelight.fish_stew": "Тушёная рыба",
   "item.farmersdelight.fried_rice": "Жареный рис",
   "item.farmersdelight.pumpkin_soup": "Тыквенный суп",
-  "item.farmersdelight.baked_cod_stew": "Запеченная тушеная треска",
+  "item.farmersdelight.baked_cod_stew": "Запечённая тушеная треска",
 
   "item.farmersdelight.pasta_with_meatballs": "Паста с фрикадельками",
   "item.farmersdelight.pasta_with_mutton_chop": "Паста с рубленной бараниной",
@@ -173,7 +173,7 @@
   "farmersdelight.advancement.get_rich_soil": "Выращивание пищи",
   "farmersdelight.advancement.get_rich_soil.desc": "Оставьте немного органического компоста разлагаться до тех пор, пока он не превратится в богатую почву",
   "farmersdelight.advancement.get_mushroom_colony": "Грибы - одни из нас",
-  "farmersdelight.advancement.get_mushroom_colony.desc": "Посадите грибы в тёмное место, дождитесь образования колонии, а затем срежьте ее!",
+  "farmersdelight.advancement.get_mushroom_colony.desc": "Посадите грибы в тёмное место, дождитесь образования колонии, а затем срежьте её!",
   "farmersdelight.advancement.obtain_netherite_knife": "Если ты не можешь вынести жара...",
   "farmersdelight.advancement.obtain_netherite_knife.desc": "Вопреки здравому смыслу, потратье целый незеритовый слиток чтобы улучшить нож",
 
