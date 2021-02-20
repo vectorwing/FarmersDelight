@@ -149,7 +149,7 @@
   "farmersdelight.container.cooking_pot": "Kattila",
   "farmersdelight.container.cooking_pot.served_on": "Astia: %s",
   "farmersdelight.container.basket": "Kori",
-  "farmersdelight.container.pantry": "Komero",
+  "farmersdelight.container.pantry": "Kaappi",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Tyhjä",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Sisältää 1 annoksen ruokaa:",
