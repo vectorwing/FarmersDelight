@@ -12,6 +12,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
@@ -129,7 +130,7 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 		public CuttingBoardRecipe read(ResourceLocation recipeId, JsonObject json) {
 			final String groupIn = JSONUtils.getString(json, "group", "");
 			final NonNullList<Ingredient> inputItemsIn = readIngredients(JSONUtils.getJsonArray(json, "ingredients"));
-			final JsonObject toolObject= JSONUtils.getJsonObject(json, "tool");
+			final JsonObject toolObject = JSONUtils.getJsonObject(json, "tool");
 			final Ingredient toolIn;
 			final ToolType toolTypeIn;
 			if (JSONUtils.hasField(toolObject, "type")) {
@@ -169,7 +170,7 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 		private static NonNullList<ItemStack> readResults(JsonArray resultArray) {
 			NonNullList<ItemStack> results = NonNullList.create();
 			for (JsonElement result : resultArray) {
-				results.add(ShapedRecipe.deserializeItem(result.getAsJsonObject()));
+				results.add(CraftingHelper.getItemStack(result.getAsJsonObject(), true));
 			}
 			return results;
 		}
