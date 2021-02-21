@@ -6,7 +6,23 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "farmersdelight:ham"
+          "name": "farmersdelight:ham",
+          "functions": [
+            {
+              "function": "farmersdelight:smoker_cook",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "predicate": {
+                    "flags": {
+                      "is_on_fire": true
+                    }
+                  },
+                  "entity": "this"
+                }
+              ]
+            }
+          ]
         }
       ],
       "conditions": [

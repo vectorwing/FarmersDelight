@@ -6,6 +6,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolType;
+import vectorwing.farmersdelight.crafting.ingredients.ToolIngredient;
 import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.tags.ForgeTags;
@@ -90,103 +91,103 @@ public class CuttingRecipes
 	}
 
 	private static void salvageBricks(Consumer<IFinishedRecipe> consumer) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BRICKS), ToolType.PICKAXE, Items.BRICK, 4)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BRICKS), new ToolIngredient(ToolType.PICKAXE), Items.BRICK, 4)
 				.build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.NETHER_BRICKS), ToolType.PICKAXE, Items.NETHER_BRICK, 4)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.NETHER_BRICKS), new ToolIngredient(ToolType.PICKAXE), Items.NETHER_BRICK, 4)
 				.build(consumer);
 	}
 
 	private static void stripWood(Consumer<IFinishedRecipe> consumer) {
 		// Oak
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.OAK_LOG), ToolType.AXE, Items.STRIPPED_OAK_LOG)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.OAK_LOG), new ToolIngredient(ToolType.AXE), Items.STRIPPED_OAK_LOG)
 				.addResult(ModItems.TREE_BARK.get())
 				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.OAK_WOOD), ToolType.AXE, Items.STRIPPED_OAK_WOOD)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.OAK_WOOD), new ToolIngredient(ToolType.AXE), Items.STRIPPED_OAK_WOOD)
 				.addResult(ModItems.TREE_BARK.get())
 				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
 
 		// Birch
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BIRCH_LOG), ToolType.AXE, Items.STRIPPED_BIRCH_LOG)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BIRCH_LOG), new ToolIngredient(ToolType.AXE), Items.STRIPPED_BIRCH_LOG)
 				.addResult(ModItems.TREE_BARK.get())
 				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BIRCH_WOOD), ToolType.AXE, Items.STRIPPED_BIRCH_WOOD)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BIRCH_WOOD), new ToolIngredient(ToolType.AXE), Items.STRIPPED_BIRCH_WOOD)
 				.addResult(ModItems.TREE_BARK.get())
 				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
 
 		// Spruce
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SPRUCE_LOG), ToolType.AXE, Items.STRIPPED_SPRUCE_LOG)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SPRUCE_LOG), new ToolIngredient(ToolType.AXE), Items.STRIPPED_SPRUCE_LOG)
 				.addResult(ModItems.TREE_BARK.get())
 				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SPRUCE_WOOD), ToolType.AXE, Items.STRIPPED_SPRUCE_WOOD)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SPRUCE_WOOD), new ToolIngredient(ToolType.AXE), Items.STRIPPED_SPRUCE_WOOD)
 				.addResult(ModItems.TREE_BARK.get())
 				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
 
 		// Jungle
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.JUNGLE_LOG), ToolType.AXE, Items.STRIPPED_JUNGLE_LOG)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.JUNGLE_LOG), new ToolIngredient(ToolType.AXE), Items.STRIPPED_JUNGLE_LOG)
 				.addResult(ModItems.TREE_BARK.get())
 				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.JUNGLE_WOOD), ToolType.AXE, Items.STRIPPED_JUNGLE_WOOD)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.JUNGLE_WOOD), new ToolIngredient(ToolType.AXE), Items.STRIPPED_JUNGLE_WOOD)
 				.addResult(ModItems.TREE_BARK.get())
 				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
 
 		// Acacia
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ACACIA_LOG), ToolType.AXE, Items.STRIPPED_ACACIA_LOG)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ACACIA_LOG), new ToolIngredient(ToolType.AXE), Items.STRIPPED_ACACIA_LOG)
 				.addResult(ModItems.TREE_BARK.get())
 				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ACACIA_WOOD), ToolType.AXE, Items.STRIPPED_ACACIA_WOOD)
-				.addResult(ModItems.TREE_BARK.get())
-				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
-
-		// Dark Oak
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_LOG), ToolType.AXE, Items.STRIPPED_DARK_OAK_LOG)
-				.addResult(ModItems.TREE_BARK.get())
-				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_WOOD), ToolType.AXE, Items.STRIPPED_DARK_OAK_WOOD)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ACACIA_WOOD), new ToolIngredient(ToolType.AXE), Items.STRIPPED_ACACIA_WOOD)
 				.addResult(ModItems.TREE_BARK.get())
 				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
 
 		// Dark Oak
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CRIMSON_STEM), ToolType.AXE, Items.STRIPPED_CRIMSON_STEM)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_LOG), new ToolIngredient(ToolType.AXE), Items.STRIPPED_DARK_OAK_LOG)
 				.addResult(ModItems.TREE_BARK.get())
 				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CRIMSON_HYPHAE), ToolType.AXE, Items.STRIPPED_CRIMSON_HYPHAE)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_WOOD), new ToolIngredient(ToolType.AXE), Items.STRIPPED_DARK_OAK_WOOD)
 				.addResult(ModItems.TREE_BARK.get())
 				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
 
 		// Dark Oak
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_STEM), ToolType.AXE, Items.STRIPPED_WARPED_STEM)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CRIMSON_STEM), new ToolIngredient(ToolType.AXE), Items.STRIPPED_CRIMSON_STEM)
 				.addResult(ModItems.TREE_BARK.get())
 				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_HYPHAE), ToolType.AXE, Items.STRIPPED_WARPED_HYPHAE)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CRIMSON_HYPHAE), new ToolIngredient(ToolType.AXE), Items.STRIPPED_CRIMSON_HYPHAE)
+				.addResult(ModItems.TREE_BARK.get())
+				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
+
+		// Dark Oak
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_STEM), new ToolIngredient(ToolType.AXE), Items.STRIPPED_WARPED_STEM)
+				.addResult(ModItems.TREE_BARK.get())
+				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_HYPHAE), new ToolIngredient(ToolType.AXE), Items.STRIPPED_WARPED_HYPHAE)
 				.addResult(ModItems.TREE_BARK.get())
 				.addSound(SoundEvents.ITEM_AXE_STRIP.getRegistryName().toString()).build(consumer);
 	}
 
 	private static void salvageWoodenFurniture(Consumer<IFinishedRecipe> consumer) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.OAK_DOOR), ToolType.AXE, Items.OAK_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.OAK_TRAPDOOR), ToolType.AXE, Items.OAK_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.OAK_SIGN), ToolType.AXE, Items.OAK_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BIRCH_DOOR), ToolType.AXE, Items.BIRCH_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BIRCH_TRAPDOOR), ToolType.AXE, Items.BIRCH_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BIRCH_SIGN), ToolType.AXE, Items.BIRCH_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SPRUCE_DOOR), ToolType.AXE, Items.SPRUCE_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SPRUCE_TRAPDOOR), ToolType.AXE, Items.SPRUCE_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SPRUCE_SIGN), ToolType.AXE, Items.SPRUCE_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.JUNGLE_DOOR), ToolType.AXE, Items.JUNGLE_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.JUNGLE_TRAPDOOR), ToolType.AXE, Items.JUNGLE_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.JUNGLE_SIGN), ToolType.AXE, Items.JUNGLE_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ACACIA_DOOR), ToolType.AXE, Items.ACACIA_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ACACIA_TRAPDOOR), ToolType.AXE, Items.ACACIA_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ACACIA_SIGN), ToolType.AXE, Items.ACACIA_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_DOOR), ToolType.AXE, Items.DARK_OAK_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_TRAPDOOR), ToolType.AXE, Items.DARK_OAK_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_SIGN), ToolType.AXE, Items.DARK_OAK_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CRIMSON_DOOR), ToolType.AXE, Items.CRIMSON_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CRIMSON_TRAPDOOR), ToolType.AXE, Items.CRIMSON_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CRIMSON_SIGN), ToolType.AXE, Items.CRIMSON_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_DOOR), ToolType.AXE, Items.WARPED_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_TRAPDOOR), ToolType.AXE, Items.WARPED_PLANKS).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_SIGN), ToolType.AXE, Items.WARPED_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.OAK_DOOR), new ToolIngredient(ToolType.AXE), Items.OAK_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.OAK_TRAPDOOR), new ToolIngredient(ToolType.AXE), Items.OAK_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.OAK_SIGN), new ToolIngredient(ToolType.AXE), Items.OAK_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BIRCH_DOOR), new ToolIngredient(ToolType.AXE), Items.BIRCH_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BIRCH_TRAPDOOR), new ToolIngredient(ToolType.AXE), Items.BIRCH_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BIRCH_SIGN), new ToolIngredient(ToolType.AXE), Items.BIRCH_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SPRUCE_DOOR), new ToolIngredient(ToolType.AXE), Items.SPRUCE_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SPRUCE_TRAPDOOR), new ToolIngredient(ToolType.AXE), Items.SPRUCE_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SPRUCE_SIGN), new ToolIngredient(ToolType.AXE), Items.SPRUCE_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.JUNGLE_DOOR), new ToolIngredient(ToolType.AXE), Items.JUNGLE_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.JUNGLE_TRAPDOOR), new ToolIngredient(ToolType.AXE), Items.JUNGLE_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.JUNGLE_SIGN), new ToolIngredient(ToolType.AXE), Items.JUNGLE_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ACACIA_DOOR), new ToolIngredient(ToolType.AXE), Items.ACACIA_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ACACIA_TRAPDOOR), new ToolIngredient(ToolType.AXE), Items.ACACIA_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ACACIA_SIGN), new ToolIngredient(ToolType.AXE), Items.ACACIA_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_DOOR), new ToolIngredient(ToolType.AXE), Items.DARK_OAK_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_TRAPDOOR), new ToolIngredient(ToolType.AXE), Items.DARK_OAK_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DARK_OAK_SIGN), new ToolIngredient(ToolType.AXE), Items.DARK_OAK_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CRIMSON_DOOR), new ToolIngredient(ToolType.AXE), Items.CRIMSON_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CRIMSON_TRAPDOOR), new ToolIngredient(ToolType.AXE), Items.CRIMSON_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CRIMSON_SIGN), new ToolIngredient(ToolType.AXE), Items.CRIMSON_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_DOOR), new ToolIngredient(ToolType.AXE), Items.WARPED_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_TRAPDOOR), new ToolIngredient(ToolType.AXE), Items.WARPED_PLANKS).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_SIGN), new ToolIngredient(ToolType.AXE), Items.WARPED_PLANKS).build(consumer);
 	}
 
 	private static void salvageUsingShears(Consumer<IFinishedRecipe> consumer) {
