@@ -28,7 +28,12 @@
   "block.farmersdelight.rice_bale": "稻米块",
   "block.farmersdelight.rice_bag": "稻米袋",
   "block.farmersdelight.straw_bale": "稻草",
-  
+
+  "block.farmersdelight.tomatoes": "番茄",
+  "block.farmersdelight.cabbages": "卷心菜",
+  "block.farmersdelight.onions": "洋葱",
+  "block.farmersdelight.rice_crop": "稻米",
+  "block.farmersdelight.rice_upper_crop": "稻米",
   "block.farmersdelight.brown_mushroom_colony": "棕色蘑菇菌落",
   "block.farmersdelight.red_mushroom_colony": "红色蘑菇菌落",
 
