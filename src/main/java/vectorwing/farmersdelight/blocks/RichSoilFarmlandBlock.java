@@ -78,8 +78,10 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
 			// If all else fails, and it's a plant, give it a growth boost now and then!
 			if (aboveBlock instanceof IGrowable && MathUtils.RAND.nextFloat() <= 0.2F) {
 				IGrowable growable = (IGrowable) aboveBlock;
-				if (growable.canGrow(worldIn, pos.up(), aboveState, false)) {
+				if (growable.canGrow(worldIn, pos.up(), aboveState, false) &&
+						net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos.up(), aboveState, true)) {
 					growable.grow(worldIn, worldIn.rand, pos.up(), aboveState);
+					net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos.up(), aboveState);
 				}
 			}
 		}
