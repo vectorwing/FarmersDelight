@@ -4,7 +4,8 @@
     "compatibilityLevel": "JAVA_8",
     "refmap": "farmersdelight.refmap.json",
     "mixins": [
-        "KeepRichSoilMixin"
+        "KeepRichSoilMixin",
+        "SoupItemMixin"
     ],
     "injectors": {
         "defaultRequire": 1
