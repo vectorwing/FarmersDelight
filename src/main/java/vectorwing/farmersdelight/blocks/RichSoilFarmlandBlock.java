@@ -84,6 +84,7 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
 					if (!worldIn.isRemote) {
 						worldIn.playEvent(2005, pos.up(), 0);
 					}
+					ForgeHooks.onCropsGrowPost(worldIn, pos.up(), aboveState);
 				}
 			}
 		}

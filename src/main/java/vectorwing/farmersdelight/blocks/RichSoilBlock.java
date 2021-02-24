@@ -54,6 +54,7 @@ public class RichSoilBlock extends Block
 				if (growable.canGrow(worldIn, pos.up(), aboveState, false) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), aboveState, true)) {
 					growable.grow(worldIn, worldIn.rand, pos.up(), aboveState);
 					worldIn.playEvent(2005, pos.up(), 0);
+					ForgeHooks.onCropsGrowPost(worldIn, pos.up(), aboveState);
 				}
 			}
 		}
