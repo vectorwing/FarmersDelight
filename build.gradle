@@ -14,6 +14,11 @@ apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+apply plugin: "org.spongepowered.mixin"
+
+mixin {
+    add sourceSets.main, "farmersdelight.refmap.json"
+}
 
 version = '1.16.3-0.3.2'
 group = 'vectorwing.farmersdelight' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -134,7 +139,6 @@ dependencies {
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-    annotationProcessor 'org.spongepowered:mixin:0.8:processor'
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -170,9 +174,4 @@ publishing {
             url "file:///${project.projectDir}/mcmodsrepo"
         }
     }
-}
-
-apply plugin: 'org.spongepowered.mixin'
-mixin {
-    add sourceSets.main, "farmersdelight.refmap.json"
 }

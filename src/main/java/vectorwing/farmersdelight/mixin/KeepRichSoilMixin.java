@@ -16,8 +16,7 @@ public class KeepRichSoilMixin
 	/**
 	 * Due to how Trees generate, this mixin is needed to prevent Rich Soil from becoming Podzol under a Giant Spruce Tree growth.
 	 */
-	@Shadow
-	@Inject(cancellable = true, at = @At(value = "HEAD"), method = "isDirtAt(Lnet/minecraft/world/gen/IWorldGenerationBaseReader;Lnet/minecraft/util/math/BlockPos;)Z")
+	@Inject(at = @At(value = "HEAD"), method = "isDirtAt", cancellable = true)
 	private static void keepRichSoil(IWorldGenerationBaseReader world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
 		if (world.hasBlockState(pos, state -> state.isIn(ModBlocks.RICH_SOIL.get()))) {
 			cir.setReturnValue(false);

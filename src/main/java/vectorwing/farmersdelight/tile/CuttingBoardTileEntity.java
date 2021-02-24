@@ -99,7 +99,7 @@ public class CuttingBoardTileEntity extends TileEntity
 	public boolean processItemUsingTool(ItemStack tool, @Nullable PlayerEntity player) {
 		CuttingBoardRecipe irecipe = world.getRecipeManager()
 				.getRecipes(recipeType, new RecipeWrapper(itemHandler), world)
-				.stream().filter(cuttingRecipe -> isToolValid(tool, cuttingRecipe))
+				.stream().filter(cuttingRecipe -> cuttingRecipe.getTool().test(tool))
 				.findAny().orElse(null);
 
 		if (irecipe != null) {
@@ -127,14 +127,6 @@ public class CuttingBoardTileEntity extends TileEntity
 		}
 
 		return false;
-	}
-
-	public boolean isToolValid(ItemStack tool, CuttingBoardRecipe recipe) {
-		if (recipe.getToolType() != null) {
-			return tool.getToolTypes().contains(recipe.getToolType());
-		} else {
-			return recipe.getTool().test(tool);
-		}
 	}
 
 	public void playProcessingSound(String soundEventID, Item tool, Item boardItem) {
