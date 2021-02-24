@@ -5,6 +5,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.PlantType;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.utils.MathUtils;
@@ -50,8 +51,9 @@ public class RichSoilBlock extends Block
 			// If all else fails, and it's a plant, give it a growth boost now and then!
 			if (aboveBlock instanceof IGrowable && MathUtils.RAND.nextFloat() <= 0.2F) {
 				IGrowable growable = (IGrowable) aboveBlock;
-				if (growable.canGrow(worldIn, pos.up(), aboveState, false)) {
+				if (growable.canGrow(worldIn, pos.up(), aboveState, false) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), aboveState, true)) {
 					growable.grow(worldIn, worldIn.rand, pos.up(), aboveState);
+					worldIn.playEvent(2005, pos.up(), 0);
 				}
 			}
 		}
