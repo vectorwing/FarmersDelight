@@ -107,7 +107,9 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 			if (tile instanceof CookingPotTileEntity) {
 				ItemStack serving = ((CookingPotTileEntity) tile).useHeldItemOnMeal(player.getHeldItem(handIn));
 				if (serving != ItemStack.EMPTY) {
-					player.inventory.addItemStackToInventory(serving);
+					if (!player.inventory.addItemStackToInventory(serving)) {
+						player.dropItem(serving, false);
+					}
 					worldIn.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				} else {
 					NetworkHooks.openGui((ServerPlayerEntity) player, (CookingPotTileEntity) tile, pos);
