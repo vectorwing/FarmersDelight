@@ -1,7 +1,8 @@
 {
   "replace": false,
   "values": [
-    "#forge:mushrooms",
+    "minecraft:brown_mushroom",
+    "minecraft:red_mushroom",
     "minecraft:podzol",
     "minecraft:mycelium",
     "farmersdelight:organic_compost",
