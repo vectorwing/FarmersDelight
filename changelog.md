@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.4.0 (WIP)
+- Cutting Board recipes now make use of a ToolIngredient, freeing the `type` parameter and allowing custom ingredients (thank you, ochotonida!)
+  - **BREAKING CHANGE! Custom cutting board recipes will have to be changed to be compatible; the old syntax will no longer work!**
+  - Please refer to the source code and wiki for information on the new syntax.
+- Vanilla soups and stews now stack up to 16, much like meals from this mod! (thank you, bagel!)
+  - By default, this affects exclusively the contents of `stackable_soup_items`, which includes vanilla soups at first. It behaves like an allow-list.
+  - You can configure whether to use the allow-list, or rather a deny-list, making every `SoupItem` stack to 16 unless it's tagged with `non_stackable_soup_items`. This affects other mods, so be careful!
+  - This feature can be disabled entirely in configs.
+- Integration with MC Abnormals mods has been moved to their official add-on, Abnormals Delight!
+- Several fixes:
+  - Rich Soil now respects CropsGrow Forge events. This fixes compatibility with Serene Seasons, but there could be more mods using it;
+  - Tomatoes are now recognized as a CROP PlantType, to better integrate with modded farmlands (thank you, Foam!);
+  - Piglins and Hoglins will drop Smoked Ham if they're on fire when killed with a knife (thank you, Foam!);
+  - Crop blocks should now have proper langs, for WAILA compatibility and similar;
+- Added translations:
+  - zh_TW (thank you, Pancakes0228!);
+- Updated translations:
+  - ru_RU (thank you, GrayPix and Alepod!);
+  - zh_CN (thank you, WuzgXY!);
+  - es_ES (thank you, FrannDzs!);
+  - de_DE (thank you, elloellie and Foam!);
+
 ## 0.3.2
 - Using a feast without a bowl will notify the player, bed-style;
 - Hot Cocoa has a new look! The steam isn't animated for now, still need some feedback on it;
