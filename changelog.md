@@ -14,6 +14,9 @@
   - Tomatoes are now recognized as a CROP PlantType, to better integrate with modded farmlands (thank you, Foam!);
   - Piglins and Hoglins will drop Smoked Ham if they're on fire when killed with a knife (thank you, Foam!);
   - Crop blocks should now have proper langs, for WAILA compatibility and similar;
+  - Fix meals vanishing when using bowls with a full inventory;
+  - Meals can no longer be shift-clicked inside the meal display;
+  - Rice Crop should no longer crash upon certain state updates (example: world edit, chunk removal etc);
 - Added translations:
   - zh_TW (thank you, Pancakes0228!);
 - Updated translations:
