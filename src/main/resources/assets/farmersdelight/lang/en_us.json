@@ -140,6 +140,9 @@
 
   "effect.farmersdelight.nourished": "Nourished",
   "effect.farmersdelight.comfort": "Comfort",
+  
+  "effect.farmersdelight.nourished.0.desc": "sprinting or jumping wont consume any saturation",
+  "effect.farmersdelight.comfort.0.desc": "makes you immune to hunger, slowness and weakness",
 
   "enchantment.farmersdelight.backstabbing": "Backstabbing",
   "enchantment.farmersdelight.backstabbing.desc": "Amplifies damage when striking a target from behind.",
