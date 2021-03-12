@@ -1,7 +1,10 @@
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
-        maven { url='https://dist.creeper.host/Sponge/maven' }
+        maven {
+            url "https://repo.spongepowered.org/repository/maven-public/"
+            // content { includeGroup "org.spongepowered" }
+        }
         jcenter()
         mavenCentral()
     }
@@ -20,7 +23,7 @@ mixin {
     add sourceSets.main, "farmersdelight.refmap.json"
 }
 
-version = '1.16.3-0.3.2'
+version = '1.16.3-0.4.0-pre1'
 group = 'vectorwing.farmersdelight' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'FarmersDelight'
 
