@@ -141,6 +141,9 @@
   "effect.farmersdelight.nourished": "Belly's Full",
   "effect.farmersdelight.comfort": "Free o' Scurvy",
 
+  "effect.farmersdelight.nourished.0.desc": "Ye can't get hungry, lest yer belly be digestin' food ta heal ye.",
+  "effect.farmersdelight.comfort.0.desc": "Wards off Scurvy, Sloth and Laziness.",
+
   "enchantment.farmersdelight.backstabbing": "Mutiny",
   "enchantment.farmersdelight.backstabbing.desc": "Strikes true at the heart o' yer victim, be their backs turned on ye.",
 

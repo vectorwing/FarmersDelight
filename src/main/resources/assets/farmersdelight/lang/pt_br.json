@@ -141,6 +141,9 @@
   "effect.farmersdelight.nourished": "Nutrição",
   "effect.farmersdelight.comfort": "Conforto",
 
+  "effect.farmersdelight.nourished.0.desc": "Previne perda de fome, exceto quando puder curar-se com saturação.",
+  "effect.farmersdelight.comfort.0.desc": "Garante imunidade a Fome, Lentidão e Fraqueza.",
+
   "enchantment.farmersdelight.backstabbing": "Punhalada nas costas",
   "enchantment.farmersdelight.backstabbing.desc": "Amplifica o dano ao atingir um alvo pelas costas.",
 
