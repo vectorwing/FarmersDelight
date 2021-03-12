@@ -56,11 +56,9 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.WILD_ONIONS.get(),
 				ModBlocks.WILD_RICE.get());
 		getOrCreateBuilder(ModTags.TRAY_HEAT_SOURCES).add(
-				Blocks.CAMPFIRE,
-				Blocks.SOUL_CAMPFIRE,
-				Blocks.FIRE,
-				Blocks.SOUL_FIRE,
-				Blocks.LAVA);
+				Blocks.LAVA)
+				.addTag(net.minecraft.tags.BlockTags.CAMPFIRES)
+				.addTag(net.minecraft.tags.BlockTags.FIRE);
 		getOrCreateBuilder(ModTags.HEAT_SOURCES).add(
 				Blocks.MAGMA_BLOCK,
 				ModBlocks.STOVE.get())
