@@ -49,9 +49,9 @@ import java.util.Random;
 @ParametersAreNonnullByDefault
 public class CookingPotTileEntity extends TileEntity implements INamedContainerProvider, ITickableTileEntity, INameable
 {
-	public static final int MEAL_DISPLAY = 6;
-	public static final int CONTAINER_INPUT = 7;
-	public static final int FINAL_OUTPUT = 8;
+	public static final int MEAL_DISPLAY_SLOT = 6;
+	public static final int CONTAINER_SLOT = 7;
+	public static final int OUTPUT_SLOT = 8;
 	public static final int INVENTORY_SIZE = 9;
 
 	private ItemStackHandler itemHandler = createHandler();
@@ -167,7 +167,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 
 		ItemStackHandler drops = new ItemStackHandler(INVENTORY_SIZE);
 		for (int i = 0; i < INVENTORY_SIZE; ++i) {
-			drops.setStackInSlot(i, i == MEAL_DISPLAY ? itemHandler.getStackInSlot(i) : ItemStack.EMPTY);
+			drops.setStackInSlot(i, i == MEAL_DISPLAY_SLOT ? itemHandler.getStackInSlot(i) : ItemStack.EMPTY);
 		}
 		if (this.customName != null) {
 			compound.putString("CustomName", ITextComponent.Serializer.toJson(this.customName));
@@ -208,7 +208,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 				if (!this.doesMealHaveContainer(meal)) {
 					this.moveMealToOutput();
 					dirty = true;
-				} else if (!itemHandler.getStackInSlot(CONTAINER_INPUT).isEmpty()) {
+				} else if (!itemHandler.getStackInSlot(CONTAINER_SLOT).isEmpty()) {
 					this.useStoredContainersOnMeal();
 					dirty = true;
 				}
@@ -242,7 +242,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 	}
 
 	private boolean hasInput() {
-		for (int i = 0; i < MEAL_DISPLAY; ++i) {
+		for (int i = 0; i < MEAL_DISPLAY_SLOT; ++i) {
 			if (!itemHandler.getStackInSlot(i).isEmpty()) return true;
 		}
 		return false;
@@ -254,12 +254,12 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 			if (recipeOutput.isEmpty()) {
 				return false;
 			} else {
-				ItemStack currentOutput = itemHandler.getStackInSlot(MEAL_DISPLAY);
+				ItemStack currentOutput = itemHandler.getStackInSlot(MEAL_DISPLAY_SLOT);
 				if (currentOutput.isEmpty()) {
 					return true;
 				} else if (!currentOutput.isItemEqual(recipeOutput)) {
 					return false;
-				} else if (currentOutput.getCount() + recipeOutput.getCount() <= itemHandler.getSlotLimit(MEAL_DISPLAY)) {
+				} else if (currentOutput.getCount() + recipeOutput.getCount() <= itemHandler.getSlotLimit(MEAL_DISPLAY_SLOT)) {
 					return true;
 				} else {
 					return currentOutput.getCount() + recipeOutput.getCount() <= recipeOutput.getMaxStackSize();
@@ -274,14 +274,14 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		if (recipe != null && this.canCook(recipe)) {
 			this.container = this.getRecipeContainer();
 			ItemStack recipeOutput = recipe.getRecipeOutput();
-			ItemStack currentOutput = itemHandler.getStackInSlot(MEAL_DISPLAY);
+			ItemStack currentOutput = itemHandler.getStackInSlot(MEAL_DISPLAY_SLOT);
 			if (currentOutput.isEmpty()) {
-				itemHandler.setStackInSlot(MEAL_DISPLAY, recipeOutput.copy());
+				itemHandler.setStackInSlot(MEAL_DISPLAY_SLOT, recipeOutput.copy());
 			} else if (currentOutput.getItem() == recipeOutput.getItem()) {
 				currentOutput.grow(recipeOutput.getCount());
 			}
 		}
-		for (int i = 0; i < MEAL_DISPLAY; ++i) {
+		for (int i = 0; i < MEAL_DISPLAY_SLOT; ++i) {
 			if (itemHandler.getStackInSlot(i).hasContainerItem()) {
 				Direction direction = this.getBlockState().get(CookingPotBlock.FACING).rotateYCCW();
 				double dropX = pos.getX() + 0.5 + (direction.getXOffset() * 0.25);
@@ -317,7 +317,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 	}
 
 	public ItemStack getMeal() {
-		return itemHandler.getStackInSlot(MEAL_DISPLAY);
+		return itemHandler.getStackInSlot(MEAL_DISPLAY_SLOT);
 	}
 
 	// ======== CUSTOM THINGS ========
@@ -344,7 +344,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 	public NonNullList<ItemStack> getDroppableInventory() {
 		NonNullList<ItemStack> drops = NonNullList.create();
 		for (int i = 0; i < INVENTORY_SIZE; ++i) {
-			drops.add(i == MEAL_DISPLAY ? ItemStack.EMPTY : itemHandler.getStackInSlot(i));
+			drops.add(i == MEAL_DISPLAY_SLOT ? ItemStack.EMPTY : itemHandler.getStackInSlot(i));
 		}
 		return drops;
 	}
@@ -354,11 +354,11 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 	 * Does NOT check if the meal has a container; this is done on tick.
 	 */
 	private void moveMealToOutput() {
-		ItemStack mealDisplay = itemHandler.getStackInSlot(MEAL_DISPLAY);
-		ItemStack finalOutput = itemHandler.getStackInSlot(FINAL_OUTPUT);
+		ItemStack mealDisplay = itemHandler.getStackInSlot(MEAL_DISPLAY_SLOT);
+		ItemStack finalOutput = itemHandler.getStackInSlot(OUTPUT_SLOT);
 		int mealCount = Math.min(mealDisplay.getCount(), mealDisplay.getMaxStackSize() - finalOutput.getCount());
 		if (finalOutput.isEmpty()) {
-			itemHandler.setStackInSlot(FINAL_OUTPUT, mealDisplay.split(mealCount));
+			itemHandler.setStackInSlot(OUTPUT_SLOT, mealDisplay.split(mealCount));
 		} else if (finalOutput.getItem() == mealDisplay.getItem()) {
 			mealDisplay.shrink(mealCount);
 			finalOutput.grow(mealCount);
@@ -370,16 +370,16 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 	 * If input and meal containers don't match, nothing happens.
 	 */
 	private void useStoredContainersOnMeal() {
-		ItemStack mealDisplay = itemHandler.getStackInSlot(MEAL_DISPLAY);
-		ItemStack containerInput = itemHandler.getStackInSlot(CONTAINER_INPUT);
-		ItemStack finalOutput = itemHandler.getStackInSlot(FINAL_OUTPUT);
+		ItemStack mealDisplay = itemHandler.getStackInSlot(MEAL_DISPLAY_SLOT);
+		ItemStack containerInput = itemHandler.getStackInSlot(CONTAINER_SLOT);
+		ItemStack finalOutput = itemHandler.getStackInSlot(OUTPUT_SLOT);
 
 		if (isContainerValid(containerInput) && finalOutput.getCount() < finalOutput.getMaxStackSize()) {
 			int smallerStack = Math.min(mealDisplay.getCount(), containerInput.getCount());
 			int mealCount = Math.min(smallerStack, mealDisplay.getMaxStackSize() - finalOutput.getCount());
 			if (finalOutput.isEmpty()) {
 				containerInput.shrink(mealCount);
-				itemHandler.setStackInSlot(FINAL_OUTPUT, mealDisplay.split(mealCount));
+				itemHandler.setStackInSlot(OUTPUT_SLOT, mealDisplay.split(mealCount));
 			} else if (finalOutput.getItem() == mealDisplay.getItem()) {
 				mealDisplay.shrink(mealCount);
 				containerInput.shrink(mealCount);
@@ -452,7 +452,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		{
 			@Override
 			protected void onContentsChanged(int slot) {
-				if (slot >= 0 && slot < MEAL_DISPLAY) {
+				if (slot >= 0 && slot < MEAL_DISPLAY_SLOT) {
 					cookTimeTotal = getCookTime();
 					inventoryChanged();
 				}

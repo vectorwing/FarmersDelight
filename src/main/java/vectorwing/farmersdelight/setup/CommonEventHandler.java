@@ -18,11 +18,15 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStage;
 import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -37,6 +41,7 @@ import vectorwing.farmersdelight.registry.ModEffects;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.tile.dispenser.CuttingBoardDispenseBehavior;
 import vectorwing.farmersdelight.utils.tags.ModTags;
+import vectorwing.farmersdelight.world.CropPatchGeneration;
 import vectorwing.farmersdelight.world.VillageStructures;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -58,8 +63,11 @@ public class CommonEventHandler
 	private static final String[] SCAVENGING_ENTITIES = new String[]{"cow", "pig", "chicken", "rabbit", "horse", "donkey", "mule", "llama", "spider", "hoglin", "shulker"};
 
 	public static void init(final FMLCommonSetupEvent event) {
-		registerCompostables(event);
-		registerDispenserBehaviors(event);
+		event.enqueueWork(() -> {
+			registerCompostables();
+			registerDispenserBehaviors();
+			CropPatchGeneration.registerConfiguredFeatures();
+		});
 
 		ModAdvancements.register();
 
@@ -73,83 +81,121 @@ public class CommonEventHandler
 		}
 	}
 
-	public static void registerDispenserBehaviors(final FMLCommonSetupEvent event) {
-		event.enqueueWork(() -> {
-			if (Configuration.DISPENSER_TOOLS_CUTTING_BOARD.get()) {
-				CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_PICKAXE, new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_AXE, new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_SHOVEL, new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(Items.STONE_PICKAXE, new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(Items.STONE_AXE, new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(Items.STONE_SHOVEL, new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(Items.IRON_PICKAXE, new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(Items.IRON_AXE, new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(Items.IRON_SHOVEL, new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(Items.DIAMOND_PICKAXE, new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(Items.DIAMOND_AXE, new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(Items.DIAMOND_SHOVEL, new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(Items.GOLDEN_PICKAXE, new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(Items.GOLDEN_AXE, new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(Items.GOLDEN_SHOVEL, new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(Items.NETHERITE_PICKAXE, new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(Items.NETHERITE_AXE, new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(Items.NETHERITE_SHOVEL, new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(Items.SHEARS, new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(ModItems.FLINT_KNIFE.get(), new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(ModItems.IRON_KNIFE.get(), new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(ModItems.DIAMOND_KNIFE.get(), new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(ModItems.GOLDEN_KNIFE.get(), new CuttingBoardDispenseBehavior());
-				CuttingBoardDispenseBehavior.registerBehaviour(ModItems.NETHERITE_KNIFE.get(), new CuttingBoardDispenseBehavior());
-			}
-		});
+	public static void registerDispenserBehaviors() {
+		if (Configuration.DISPENSER_TOOLS_CUTTING_BOARD.get()) {
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_PICKAXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_AXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_SHOVEL, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.STONE_PICKAXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.STONE_AXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.STONE_SHOVEL, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.IRON_PICKAXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.IRON_AXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.IRON_SHOVEL, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.DIAMOND_PICKAXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.DIAMOND_AXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.DIAMOND_SHOVEL, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.GOLDEN_PICKAXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.GOLDEN_AXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.GOLDEN_SHOVEL, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.NETHERITE_PICKAXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.NETHERITE_AXE, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.NETHERITE_SHOVEL, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(Items.SHEARS, new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(ModItems.FLINT_KNIFE.get(), new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(ModItems.IRON_KNIFE.get(), new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(ModItems.DIAMOND_KNIFE.get(), new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(ModItems.GOLDEN_KNIFE.get(), new CuttingBoardDispenseBehavior());
+			CuttingBoardDispenseBehavior.registerBehaviour(ModItems.NETHERITE_KNIFE.get(), new CuttingBoardDispenseBehavior());
+		}
 	}
 
-	public static void registerCompostables(final FMLCommonSetupEvent event) {
-		event.enqueueWork(() -> {
-			// 30% chance
-			ComposterBlock.CHANCES.put(ModItems.TREE_BARK.get(), 0.3F);
-			ComposterBlock.CHANCES.put(ModItems.STRAW.get(), 0.3F);
-			ComposterBlock.CHANCES.put(ModItems.CABBAGE_SEEDS.get(), 0.3F);
-			ComposterBlock.CHANCES.put(ModItems.TOMATO_SEEDS.get(), 0.3F);
-			ComposterBlock.CHANCES.put(ModItems.RICE.get(), 0.65F);
-			ComposterBlock.CHANCES.put(ModItems.RICE_PANICLE.get(), 0.65F);
+	public static void registerCompostables() {
+		// 30% chance
+		ComposterBlock.CHANCES.put(ModItems.TREE_BARK.get(), 0.3F);
+		ComposterBlock.CHANCES.put(ModItems.STRAW.get(), 0.3F);
+		ComposterBlock.CHANCES.put(ModItems.CABBAGE_SEEDS.get(), 0.3F);
+		ComposterBlock.CHANCES.put(ModItems.TOMATO_SEEDS.get(), 0.3F);
+		ComposterBlock.CHANCES.put(ModItems.RICE.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.RICE_PANICLE.get(), 0.65F);
 
-			// 50% chance
-			ComposterBlock.CHANCES.put(ModItems.PUMPKIN_SLICE.get(), 0.65F);
-			ComposterBlock.CHANCES.put(ModItems.CABBAGE_LEAF.get(), 0.65F);
+		// 50% chance
+		ComposterBlock.CHANCES.put(ModItems.PUMPKIN_SLICE.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.CABBAGE_LEAF.get(), 0.65F);
 
-			// 65% chance
-			ComposterBlock.CHANCES.put(ModItems.CABBAGE.get(), 0.65F);
-			ComposterBlock.CHANCES.put(ModItems.ONION.get(), 0.65F);
-			ComposterBlock.CHANCES.put(ModItems.TOMATO.get(), 0.65F);
-			ComposterBlock.CHANCES.put(ModItems.WILD_CABBAGES.get(), 0.65F);
-			ComposterBlock.CHANCES.put(ModItems.WILD_ONIONS.get(), 0.65F);
-			ComposterBlock.CHANCES.put(ModItems.WILD_TOMATOES.get(), 0.65F);
-			ComposterBlock.CHANCES.put(ModItems.WILD_CARROTS.get(), 0.65F);
-			ComposterBlock.CHANCES.put(ModItems.WILD_POTATOES.get(), 0.65F);
-			ComposterBlock.CHANCES.put(ModItems.WILD_BEETROOTS.get(), 0.65F);
-			ComposterBlock.CHANCES.put(ModItems.WILD_RICE.get(), 0.65F);
-			ComposterBlock.CHANCES.put(ModItems.PIE_CRUST.get(), 0.65F);
+		// 65% chance
+		ComposterBlock.CHANCES.put(ModItems.CABBAGE.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.ONION.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.TOMATO.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_CABBAGES.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_ONIONS.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_TOMATOES.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_CARROTS.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_POTATOES.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_BEETROOTS.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_RICE.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.PIE_CRUST.get(), 0.65F);
 
-			// 85% chance
-			ComposterBlock.CHANCES.put(ModItems.RICE_BALE.get(), 0.85F);
-			ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_COOKIE.get(), 0.85F);
-			ComposterBlock.CHANCES.put(ModItems.HONEY_COOKIE.get(), 0.85F);
-			ComposterBlock.CHANCES.put(ModItems.CAKE_SLICE.get(), 0.85F);
-			ComposterBlock.CHANCES.put(ModItems.APPLE_PIE_SLICE.get(), 0.85F);
-			ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get(), 0.85F);
-			ComposterBlock.CHANCES.put(ModItems.CHOCOLATE_PIE_SLICE.get(), 0.85F);
-			ComposterBlock.CHANCES.put(ModItems.RAW_PASTA.get(), 0.85F);
+		// 85% chance
+		ComposterBlock.CHANCES.put(ModItems.RICE_BALE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_COOKIE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.HONEY_COOKIE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.CAKE_SLICE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.APPLE_PIE_SLICE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.CHOCOLATE_PIE_SLICE.get(), 0.85F);
+		ComposterBlock.CHANCES.put(ModItems.RAW_PASTA.get(), 0.85F);
 
-			// 100% chance
-			ComposterBlock.CHANCES.put(ModItems.APPLE_PIE.get(), 1.0F);
-			ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_CHEESECAKE.get(), 1.0F);
-			ComposterBlock.CHANCES.put(ModItems.CHOCOLATE_PIE.get(), 1.0F);
-			ComposterBlock.CHANCES.put(ModItems.DUMPLINGS.get(), 1.0F);
-			ComposterBlock.CHANCES.put(ModItems.STUFFED_PUMPKIN.get(), 1.0F);
-			ComposterBlock.CHANCES.put(ModItems.BROWN_MUSHROOM_COLONY.get(), 1.0F);
-			ComposterBlock.CHANCES.put(ModItems.RED_MUSHROOM_COLONY.get(), 1.0F);
-		});
+		// 100% chance
+		ComposterBlock.CHANCES.put(ModItems.APPLE_PIE.get(), 1.0F);
+		ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_CHEESECAKE.get(), 1.0F);
+		ComposterBlock.CHANCES.put(ModItems.CHOCOLATE_PIE.get(), 1.0F);
+		ComposterBlock.CHANCES.put(ModItems.DUMPLINGS.get(), 1.0F);
+		ComposterBlock.CHANCES.put(ModItems.STUFFED_PUMPKIN.get(), 1.0F);
+		ComposterBlock.CHANCES.put(ModItems.BROWN_MUSHROOM_COLONY.get(), 1.0F);
+		ComposterBlock.CHANCES.put(ModItems.RED_MUSHROOM_COLONY.get(), 1.0F);
+	}
+
+	@SubscribeEvent
+	public static void onBiomeLoad(BiomeLoadingEvent event) {
+		BiomeGenerationSettingsBuilder builder = event.getGeneration();
+		Biome.Climate climate = event.getClimate();
+
+		if (event.getName().getPath().equals("beach")) {
+			if (Configuration.GENERATE_WILD_BEETROOTS.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_BEETROOTS);
+			}
+			if (Configuration.GENERATE_WILD_CABBAGES.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_CABBAGES);
+			}
+		}
+
+		if (event.getCategory().equals(Biome.Category.SWAMP) || event.getCategory().equals(Biome.Category.JUNGLE)) {
+			if (Configuration.GENERATE_WILD_RICE.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_RICE);
+			}
+		}
+
+		if (climate.temperature >= 1.0F) {
+			if (Configuration.GENERATE_WILD_TOMATOES.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_TOMATOES);
+			}
+		}
+
+		if (climate.temperature > 0.3F && climate.temperature < 1.0F) {
+			if (Configuration.GENERATE_WILD_CARROTS.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_CARROTS);
+			}
+			if (Configuration.GENERATE_WILD_ONIONS.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_ONIONS);
+			}
+		}
+
+		if (climate.temperature > 0.0F && climate.temperature <= 0.3F) {
+			if (Configuration.GENERATE_WILD_POTATOES.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_POTATOES);
+			}
+		}
 	}
 
 	@SubscribeEvent
