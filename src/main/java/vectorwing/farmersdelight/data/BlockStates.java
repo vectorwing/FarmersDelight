@@ -53,7 +53,6 @@ public class BlockStates extends BlockStateProvider
 	protected void registerStatesAndModels() {
 		this.simpleBlock(ModBlocks.RICH_SOIL.get(), cubeRandomRotation(ModBlocks.RICH_SOIL.get(), ""));
 		this.simpleBlock(ModBlocks.SAFETY_NET.get(), existingModel(ModBlocks.SAFETY_NET.get()));
-		this.simpleBlock(ModBlocks.HALF_TATAMI_MAT.get(), existingModel("tatami_mat_half"));
 
 		String riceBag = blockName(ModBlocks.RICE_BAG.get());
 		this.simpleBlock(ModBlocks.RICE_BAG.get(), models().withExistingParent(riceBag, "cube")
@@ -73,6 +72,7 @@ public class BlockStates extends BlockStateProvider
 		customHorizontalBlock(ModBlocks.CUTTING_BOARD.get(),
 				$ -> existingModel(ModBlocks.CUTTING_BOARD.get()), BasketBlock.WATERLOGGED);
 
+		this.horizontalBlock(ModBlocks.HALF_TATAMI_MAT.get(), existingModel("tatami_mat_half"));
 		this.horizontalBlock(ModBlocks.STOVE.get(), state -> {
 			String name = blockName(ModBlocks.STOVE.get());
 			String suffix = state.get(StoveBlock.LIT) ? "_on" : "";
