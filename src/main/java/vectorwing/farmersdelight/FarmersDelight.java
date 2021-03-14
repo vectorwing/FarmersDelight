@@ -5,7 +5,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -20,7 +19,6 @@ import vectorwing.farmersdelight.registry.*;
 import vectorwing.farmersdelight.setup.ClientEventHandler;
 import vectorwing.farmersdelight.setup.CommonEventHandler;
 import vectorwing.farmersdelight.setup.Configuration;
-import vectorwing.farmersdelight.world.CropPatchGeneration;
 
 @Mod(FarmersDelight.MODID)
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -32,15 +30,14 @@ public class FarmersDelight
 	public static final FDItemGroup ITEM_GROUP = new FDItemGroup(FarmersDelight.MODID);
 
 	public FarmersDelight() {
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(CommonEventHandler::init);
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientEventHandler::init);
-		FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, this::registerRecipeSerializers);
-		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, CropPatchGeneration::onBiomeLoad);
+		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+		modEventBus.addListener(CommonEventHandler::init);
+		modEventBus.addListener(ClientEventHandler::init);
+		modEventBus.addGenericListener(IRecipeSerializer.class, this::registerRecipeSerializers);
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Configuration.CLIENT_CONFIG);
-
-		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
 		ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
 		ModEnchantments.ENCHANTMENTS.register(modEventBus);
