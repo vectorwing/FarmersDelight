@@ -213,5 +213,6 @@
   "farmersdelight.jei.decomposition": "Decomposição",
   "farmersdelight.jei.decomposition.light": "Acelerado pela luz do sol",
   "farmersdelight.jei.decomposition.fluid": "Acelerado por água ao redor",
-  "farmersdelight.jei.decomposition.accelerators": "Acelerado por ativadores ao redor (veja abaixo)"
+  "farmersdelight.jei.decomposition.accelerators": "Acelerado por ativadores ao redor (veja abaixo)",
+  "farmersdelight.jei.info.straw": "Uma fibra vegetal usada em criação. Obtida ao cortar plantas e hortas gramíneas com uma Faca."
 }
