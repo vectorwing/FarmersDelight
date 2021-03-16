@@ -19,6 +19,7 @@ public class DataGenerators
 			BlockTags blockTags = new BlockTags(generator, FarmersDelight.MODID, helper);
 			generator.addProvider(blockTags);
 			generator.addProvider(new ItemTags(generator, blockTags, FarmersDelight.MODID, helper));
+			generator.addProvider(new EntityTags(generator, FarmersDelight.MODID, helper));
 			generator.addProvider(new Recipes(generator));
 			generator.addProvider(new Advancements(generator));
 		}

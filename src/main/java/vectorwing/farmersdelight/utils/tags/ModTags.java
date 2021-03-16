@@ -1,8 +1,10 @@
 package vectorwing.farmersdelight.utils.tags;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -49,11 +51,21 @@ public class ModTags
 	// Knife items for game logic.
 	public static final ITag.INamedTag<Item> KNIVES = modItemTag("tools/knives");
 
+	// Entities that should be able to eat Dog Food when tame. Defaults to tamed Wolves.
+	public static final ITag.INamedTag<EntityType<?>> DOG_FOOD_USERS = modEntityTag("dog_food_users");
+
+	// Entities that should be able to eat Horse Feed when tame. Defaults to most vanilla mounts, except Pigs and Striders.
+	public static final ITag.INamedTag<EntityType<?>> HORSE_FEED_USERS = modEntityTag("horse_feed_users");
+
 	private static ITag.INamedTag<Item> modItemTag(String path) {
 		return ItemTags.makeWrapperTag(FarmersDelight.MODID + ":" + path);
 	}
 
 	private static ITag.INamedTag<Block> modBlockTag(String path) {
 		return BlockTags.makeWrapperTag(FarmersDelight.MODID + ":" + path);
+	}
+
+	private static ITag.INamedTag<EntityType<?>> modEntityTag(String path) {
+		return EntityTypeTags.getTagById(FarmersDelight.MODID + ":" + path);
 	}
 }
