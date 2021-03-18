@@ -233,6 +233,7 @@ public class BlockStates extends BlockStateProvider
 							String suffix = bites > 0 ? "_slice" + bites : "";
 							return ConfiguredModel.builder()
 									.modelFile(existingModel(blockName(block) + suffix))
+									.rotationY(((int) state.get(PieBlock.FACING).getHorizontalAngle() + DEFAULT_ANGLE_OFFSET) % 360)
 									.build();
 						}
 				);
