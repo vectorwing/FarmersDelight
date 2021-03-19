@@ -91,10 +91,15 @@ public class Foods
 	public static final Food BACON_SANDWICH = (new Food.Builder())
 			.hunger(10).saturation(0.8f)
 			.effect(() -> new EffectInstance(Effects.RESISTANCE, 300, 0), 1.0F).build();
+	public static final Food MUTTON_WRAP = (new Food.Builder())
+			.hunger(11).saturation(0.8f)
+			.effect(() -> new EffectInstance(Effects.RESISTANCE, 300, 0), 1.0F).build();
 	public static final Food DUMPLINGS = (new Food.Builder())
 			.hunger(8).saturation(0.8f).build();
 	public static final Food STUFFED_POTATO = (new Food.Builder())
 			.hunger(10).saturation(0.7f).build();
+	public static final Food CABBAGE_ROLLS = (new Food.Builder())
+			.hunger(7).saturation(0.6f).build();
 
 	// Bowl Foods
 	public static final Food COOKED_RICE = (new Food.Builder())
@@ -121,6 +126,9 @@ public class Foods
 	public static final Food BAKED_COD_STEW = (new Food.Builder())
 			.hunger(10).saturation(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), 4800, 0), 1.0F).build();
+	public static final Food NOODLE_SOUP = (new Food.Builder())
+			.hunger(10).saturation(0.9f)
+			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), 4800, 0), 1.0F).build();
 
 	// Plated Foods
 	public static final Food STEAK_AND_POTATOES = (new Food.Builder())
@@ -134,6 +142,9 @@ public class Foods
 			.hunger(12).saturation(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F).build();
 	public static final Food PASTA_WITH_MUTTON_CHOP = (new Food.Builder())
+			.hunger(12).saturation(0.9f)
+			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F).build();
+	public static final Food ROASTED_LAMB_CHOPS = (new Food.Builder())
 			.hunger(12).saturation(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F).build();
 	public static final Food VEGETABLE_NOODLES = (new Food.Builder())

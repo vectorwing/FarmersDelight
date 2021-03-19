@@ -1,6 +1,11 @@
 # Changelog
 
 ## 0.4.0 (WIP)
+- New foods!
+  - Roasted Lamb Chops;
+  - Mutton Wrap;
+  - Cabbage Rolls - Wrap any leftover in cabbage for a healthy snack!;
+  - Noodle Soup;
 - Cutting Board recipes now make use of a ToolIngredient, freeing the `type` parameter and allowing custom ingredients (thank you, ochotonida!)
   - **BREAKING CHANGE! Custom cutting board recipes will have to be changed to be compatible; the old syntax will no longer work!**
   - Please refer to the source code and wiki for information on the new syntax.

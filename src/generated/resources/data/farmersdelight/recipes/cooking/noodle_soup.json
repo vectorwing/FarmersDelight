@@ -1,0 +1,21 @@
+{
+  "type": "farmersdelight:cooking",
+  "ingredients": [
+    {
+      "tag": "forge:pasta"
+    },
+    {
+      "tag": "forge:cooked_eggs"
+    },
+    {
+      "item": "minecraft:dried_kelp"
+    },
+    {
+      "tag": "forge:raw_pork"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:noodle_soup"
+  },
+  "cookingtime": 200
+}

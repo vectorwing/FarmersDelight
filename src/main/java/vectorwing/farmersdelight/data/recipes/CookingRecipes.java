@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraftforge.common.Tags;
 import vectorwing.farmersdelight.data.builder.CookingPotRecipeBuilder;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.tags.ForgeTags;
@@ -14,6 +15,7 @@ import java.util.function.Consumer;
 public class CookingRecipes
 {
 	public static final int FAST_COOKING_TIME = 100;
+	public static final int SLOW_COOKING_TIME = 400;
 
 	public static void register(Consumer<IFinishedRecipe> consumer) {
 		cookMiscellaneous(consumer);
@@ -69,6 +71,18 @@ public class CookingRecipes
 				.addIngredient(Items.CARROT)
 				.addIngredient(Items.POTATO)
 				.build(consumer);
+		CookingPotRecipeBuilder.cookingRecipe(ModItems.CABBAGE_ROLLS.get(), 1, FAST_COOKING_TIME)
+				.addIngredient(ForgeTags.CROPS_CABBAGE)
+				.addIngredient(Ingredient.merge(Sets.newHashSet(
+						Ingredient.fromTag(ForgeTags.RAW_PORK),
+						Ingredient.fromTag(ForgeTags.RAW_FISHES),
+						Ingredient.fromTag(ForgeTags.RAW_CHICKEN),
+						Ingredient.fromTag(ForgeTags.RAW_BEEF),
+						Ingredient.fromTag(ForgeTags.EGGS),
+						Ingredient.fromTag(Tags.Items.MUSHROOMS),
+						Ingredient.fromItems(Items.CARROT, Items.POTATO)
+				)))
+				.build(consumer);
 		CookingPotRecipeBuilder.cookingRecipe(ModItems.CHICKEN_SOUP.get(), 1)
 				.addIngredient(ForgeTags.RAW_CHICKEN)
 				.addIngredient(Items.CARROT)
@@ -98,6 +112,12 @@ public class CookingRecipes
 				.addIngredient(ForgeTags.EGGS)
 				.addIngredient(Items.CARROT)
 				.addIngredient(ForgeTags.CROPS_ONION)
+				.build(consumer);
+		CookingPotRecipeBuilder.cookingRecipe(ModItems.NOODLE_SOUP.get(), 1)
+				.addIngredient(ForgeTags.PASTA)
+				.addIngredient(ForgeTags.COOKED_EGGS)
+				.addIngredient(Items.DRIED_KELP)
+				.addIngredient(ForgeTags.RAW_PORK)
 				.build(consumer);
 		CookingPotRecipeBuilder.cookingRecipe(ModItems.PASTA_WITH_MEATBALLS.get(), 1)
 				.addIngredient(ModItems.MINCED_BEEF.get())
@@ -133,7 +153,7 @@ public class CookingRecipes
 				.addIngredient(ForgeTags.CROPS_TOMATO)
 				.addIngredient(Items.INK_SAC)
 				.build(consumer);
-		CookingPotRecipeBuilder.cookingRecipe(ModItems.STUFFED_PUMPKIN_BLOCK.get(), 1, Items.PUMPKIN)
+		CookingPotRecipeBuilder.cookingRecipe(ModItems.STUFFED_PUMPKIN_BLOCK.get(), 1, Items.PUMPKIN, SLOW_COOKING_TIME)
 				.addIngredient(ForgeTags.CROPS_RICE)
 				.addIngredient(ForgeTags.VEGETABLES)
 				.addIngredient(ModItems.TOMATO_SAUCE.get())

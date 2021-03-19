@@ -9,7 +9,6 @@ import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.data.recipes.CookingRecipes;
 import vectorwing.farmersdelight.data.recipes.CuttingRecipes;
@@ -577,7 +576,7 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ForgeTags.BREAD)
 				.addIngredient(ForgeTags.COOKED_CHICKEN)
 				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
-				.addIngredient(ForgeTags.CROPS_ONION)
+				.addIngredient(Items.CARROT)
 				.addCriterion("has_cooked_chicken", InventoryChangeTrigger.Instance.forItems(Items.COOKED_CHICKEN))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.HAMBURGER.get())
@@ -594,6 +593,14 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
 				.addIngredient(ForgeTags.CROPS_TOMATO)
 				.addCriterion("has_bacon", InventoryChangeTrigger.Instance.forItems(ModItems.COOKED_BACON.get()))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.MUTTON_WRAP.get())
+				.addIngredient(ForgeTags.BREAD)
+				.addIngredient(Items.COOKED_MUTTON)
+				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
+				.addIngredient(ForgeTags.CROPS_TOMATO)
+				.addIngredient(ForgeTags.MILK)
+				.addCriterion("has_mutton", InventoryChangeTrigger.Instance.forItems(Items.COOKED_MUTTON))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.STUFFED_POTATO.get())
 				.addIngredient(Items.BAKED_POTATO)
@@ -617,6 +624,14 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ForgeTags.CROPS_ONION)
 				.addIngredient(ModItems.COOKED_RICE.get())
 				.addCriterion("has_baked_potato", InventoryChangeTrigger.Instance.forItems(Items.BAKED_POTATO))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ROASTED_LAMB_CHOPS.get())
+				.addIngredient(Items.MUTTON)
+				.addIngredient(Items.BEETROOT)
+				.addIngredient(Items.BOWL)
+				.addIngredient(ModItems.COOKED_RICE.get())
+				.addIngredient(ForgeTags.CROPS_TOMATO)
+				.addCriterion("has_mutton", InventoryChangeTrigger.Instance.forItems(Items.COOKED_MUTTON))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ROAST_CHICKEN_BLOCK.get())
 				.addIngredient(ForgeTags.CROPS_ONION)

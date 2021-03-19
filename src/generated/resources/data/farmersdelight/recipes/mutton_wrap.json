@@ -5,16 +5,19 @@
       "tag": "forge:bread"
     },
     {
-      "tag": "forge:cooked_chicken"
+      "item": "minecraft:cooked_mutton"
     },
     {
       "tag": "forge:salad_ingredients"
     },
     {
-      "item": "minecraft:carrot"
+      "tag": "forge:crops/tomato"
+    },
+    {
+      "tag": "forge:milk"
     }
   ],
   "result": {
-    "item": "farmersdelight:chicken_sandwich"
+    "item": "farmersdelight:mutton_wrap"
   }
 }

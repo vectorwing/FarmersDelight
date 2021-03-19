@@ -105,8 +105,10 @@
   "item.farmersdelight.chicken_sandwich": "Chicken Sandwich",
   "item.farmersdelight.hamburger": "Hamburger",
   "item.farmersdelight.bacon_sandwich": "Bacon Sandwich",
+  "item.farmersdelight.mutton_wrap": "Mutton Wrap",
   "item.farmersdelight.dumplings": "Dumplings",
   "item.farmersdelight.stuffed_potato": "Stuffed Potato",
+  "item.farmersdelight.cabbage_rolls": "Cabbage Rolls",
 
   "item.farmersdelight.cooked_rice": "Cooked Rice",
   "item.farmersdelight.mixed_salad": "Mixed Salad",
@@ -118,9 +120,11 @@
   "item.farmersdelight.fried_rice": "Fried Rice",
   "item.farmersdelight.pumpkin_soup": "Pumpkin Soup",
   "item.farmersdelight.baked_cod_stew": "Baked Cod Stew",
+  "item.farmersdelight.noodle_soup": "Noodle Soup",
 
   "item.farmersdelight.pasta_with_meatballs": "Pasta with Meatballs",
   "item.farmersdelight.pasta_with_mutton_chop": "Pasta with Mutton Chop",
+  "item.farmersdelight.roasted_lamb_chops": "Roasted Lamb Chops",
   "item.farmersdelight.steak_and_potatoes": "Steak and Potatoes",
   "item.farmersdelight.vegetable_noodles": "Vegetable Noodles",
   "item.farmersdelight.shepherds_pie": "Shepherd's Pie",

@@ -105,8 +105,10 @@
   "item.farmersdelight.chicken_sandwich": "Sanduíche de frango",
   "item.farmersdelight.hamburger": "Hambúrguer",
   "item.farmersdelight.bacon_sandwich": "Sanduíche de bacon",
+  "item.farmersdelight.mutton_wrap": "Enrolado de cordeiro",
   "item.farmersdelight.dumplings": "Bolinhos no vapor",
   "item.farmersdelight.stuffed_potato": "Batata recheada",
+  "item.farmersdelight.cabbage_rolls": "Rolinhos de repolho",
 
   "item.farmersdelight.cooked_rice": "Arroz cozido",
   "item.farmersdelight.mixed_salad": "Salada mista",
@@ -118,9 +120,11 @@
   "item.farmersdelight.fried_rice": "Arroz frito",
   "item.farmersdelight.pumpkin_soup": "Sopa de abóbora",
   "item.farmersdelight.baked_cod_stew": "Bacalhoada",
+  "item.farmersdelight.noodle_soup": "Sopa de macarrão",
 
   "item.farmersdelight.pasta_with_meatballs": "Macarrão com almôndegas",
   "item.farmersdelight.pasta_with_mutton_chop": "Macarrão com costeleta",
+  "item.farmersdelight.roasted_lamb_chops": "Costeletas grelhadas",
   "item.farmersdelight.steak_and_potatoes": "Bife com batatas",
   "item.farmersdelight.vegetable_noodles": "Macarrão com legumes",
   "item.farmersdelight.shepherds_pie": "Escondidinho de cordeiro",
