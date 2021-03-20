@@ -1,0 +1,79 @@
+{
+  "variants": {
+    "facing=north,servings=0": {
+      "model": "farmersdelight:block/shepherds_pie_block_leftover"
+    },
+    "facing=south,servings=0": {
+      "model": "farmersdelight:block/shepherds_pie_block_leftover",
+      "y": 180
+    },
+    "facing=west,servings=0": {
+      "model": "farmersdelight:block/shepherds_pie_block_leftover",
+      "y": 270
+    },
+    "facing=east,servings=0": {
+      "model": "farmersdelight:block/shepherds_pie_block_leftover",
+      "y": 90
+    },
+    "facing=north,servings=1": {
+      "model": "farmersdelight:block/shepherds_pie_block_stage3"
+    },
+    "facing=south,servings=1": {
+      "model": "farmersdelight:block/shepherds_pie_block_stage3",
+      "y": 180
+    },
+    "facing=west,servings=1": {
+      "model": "farmersdelight:block/shepherds_pie_block_stage3",
+      "y": 270
+    },
+    "facing=east,servings=1": {
+      "model": "farmersdelight:block/shepherds_pie_block_stage3",
+      "y": 90
+    },
+    "facing=north,servings=2": {
+      "model": "farmersdelight:block/shepherds_pie_block_stage2"
+    },
+    "facing=south,servings=2": {
+      "model": "farmersdelight:block/shepherds_pie_block_stage2",
+      "y": 180
+    },
+    "facing=west,servings=2": {
+      "model": "farmersdelight:block/shepherds_pie_block_stage2",
+      "y": 270
+    },
+    "facing=east,servings=2": {
+      "model": "farmersdelight:block/shepherds_pie_block_stage2",
+      "y": 90
+    },
+    "facing=north,servings=3": {
+      "model": "farmersdelight:block/shepherds_pie_block_stage1"
+    },
+    "facing=south,servings=3": {
+      "model": "farmersdelight:block/shepherds_pie_block_stage1",
+      "y": 180
+    },
+    "facing=west,servings=3": {
+      "model": "farmersdelight:block/shepherds_pie_block_stage1",
+      "y": 270
+    },
+    "facing=east,servings=3": {
+      "model": "farmersdelight:block/shepherds_pie_block_stage1",
+      "y": 90
+    },
+    "facing=north,servings=4": {
+      "model": "farmersdelight:block/shepherds_pie_block_stage0"
+    },
+    "facing=south,servings=4": {
+      "model": "farmersdelight:block/shepherds_pie_block_stage0",
+      "y": 180
+    },
+    "facing=west,servings=4": {
+      "model": "farmersdelight:block/shepherds_pie_block_stage0",
+      "y": 270
+    },
+    "facing=east,servings=4": {
+      "model": "farmersdelight:block/shepherds_pie_block_stage0",
+      "y": 90
+    }
+  }
+}

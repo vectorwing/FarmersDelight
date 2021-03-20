@@ -1,22 +1,31 @@
 # Changelog
 
 ## 0.4.0 (WIP)
+- Shepherd's Pie is now a Feast!
+- New foods!
+  - Roasted Lamb Chops;
+  - Mutton Wrap;
+  - Cabbage Rolls - Wrap many kinds of leftovers in cabbage for a healthy snack!;
+  - Noodle Soup;
 - Cutting Board recipes now make use of a ToolIngredient, freeing the `type` parameter and allowing custom ingredients (thank you, ochotonida!)
-  - **BREAKING CHANGE! Custom cutting board recipes will have to be changed to be compatible; the old syntax will no longer work!**
+  - **BREAKING CHANGE! Custom cutting board recipes will have to be changed to the new format; the old syntax will no longer work!**
   - Please refer to the source code and wiki for information on the new syntax.
 - Vanilla soups and stews now stack up to 16, much like meals from this mod! (thank you, bagel!)
   - By default, this affects exclusively the contents of `stackable_soup_items`, which includes vanilla soups at first. It behaves like an allow-list.
-  - You can configure whether to use the allow-list, or rather a deny-list, making every `SoupItem` stack to 16 unless it's tagged with `non_stackable_soup_items`. This affects other mods, so be careful!
-  - This feature can be disabled entirely in configs.
-- Integration with MC Abnormals mods has been moved to their official add-on, Abnormals Delight!
+  - You can configure it to instead use a deny-list, making every `SoupItem` stack to 16 unless it's tagged with `non_stackable_soup_items`. This affects other mods, so be careful!
+  - This feature can be disabled entirely in the configs.
+- Integration with MC Abnormals mods has been moved to their official add-on, Abnormals Delight! Go check it out!
+- Pies can now rotate horizontally, much like Feasts;
+- Tatami blocks and half-mats can now be rotated horizontally, to match the seams of their paired and full-mat counterparts;
 - Several fixes:
-  - Rich Soil now respects CropsGrow Forge events. This fixes compatibility with Serene Seasons, but there could be more mods using it;
+  - Rich Soil now respects OnCropsGrow Forge events. This fixes compatibility with Serene Seasons, but there could be more mods benefitting from it;
   - Tomatoes are now recognized as a CROP PlantType, to better integrate with modded farmlands (thank you, Foam!);
-  - Piglins and Hoglins will drop Smoked Ham if they're on fire when killed with a knife (thank you, Foam!);
+  - Pigs and Hoglins will drop Smoked Ham if they're on fire when killed with a knife (thank you, Foam!);
   - Crop blocks should now have proper langs, for WAILA compatibility and similar;
   - Fix meals vanishing when using bowls with a full inventory;
   - Meals can no longer be shift-clicked inside the meal display;
-  - Rice Crop should no longer crash upon certain state updates (example: world edit, chunk removal etc);
+  - Rice Crop should no longer crash upon certain state updates (example: world editing, chunk removal etc);
+  - Flint Knife is now repaired with Flint instead of Stone, using a custom item tier rather than the Stone tier;
 - Added translations:
   - zh_TW (thank you, Pancakes0228!);
 - Updated translations:

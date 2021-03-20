@@ -116,6 +116,7 @@ public class BlockStates extends BlockStateProvider
 		this.feastBlock((FeastBlock) ModBlocks.STUFFED_PUMPKIN_BLOCK.get());
 		this.feastBlock((FeastBlock) ModBlocks.ROAST_CHICKEN_BLOCK.get());
 		this.feastBlock((FeastBlock) ModBlocks.HONEY_GLAZED_HAM_BLOCK.get());
+		this.feastBlock((FeastBlock) ModBlocks.SHEPHERDS_PIE_BLOCK.get());
 
 		this.wildCropBlock(ModBlocks.WILD_BEETROOTS.get(), false);
 		this.wildCropBlock(ModBlocks.WILD_CABBAGES.get(), false);
@@ -233,6 +234,7 @@ public class BlockStates extends BlockStateProvider
 							String suffix = bites > 0 ? "_slice" + bites : "";
 							return ConfiguredModel.builder()
 									.modelFile(existingModel(blockName(block) + suffix))
+									.rotationY(((int) state.get(PieBlock.FACING).getHorizontalAngle() + DEFAULT_ANGLE_OFFSET) % 360)
 									.build();
 						}
 				);

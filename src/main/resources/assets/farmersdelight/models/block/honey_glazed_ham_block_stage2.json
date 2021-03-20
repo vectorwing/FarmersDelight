@@ -13,7 +13,6 @@
 			"name": "plate",
 			"from": [1, 0, 1],
 			"to": [15, 2, 15],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0.5, 8]},
 			"faces": {
 				"north": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
 				"east": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
@@ -27,7 +26,6 @@
 			"name": "ham",
 			"from": [4, 2, 8],
 			"to": [12, 10, 12],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 2, 10]},
 			"faces": {
 				"north": {"uv": [0, 0, 8, 8], "texture": "#ham"},
 				"east": {"uv": [8, 8, 4, 16], "texture": "#ham"},
@@ -40,7 +38,6 @@
 			"name": "bone",
 			"from": [7, 5, 12],
 			"to": [9, 7, 16],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 2, 10]},
 			"faces": {
 				"north": {"uv": [0, 0, 2, 2], "texture": "#bone"},
 				"east": {"uv": [6, 0, 2, 2], "texture": "#bone"},
