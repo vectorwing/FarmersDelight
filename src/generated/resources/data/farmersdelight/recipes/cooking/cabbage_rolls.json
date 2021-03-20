@@ -9,25 +9,25 @@
         "tag": "forge:raw_chicken"
       },
       {
+        "tag": "forge:eggs"
+      },
+      {
+        "tag": "forge:raw_beef"
+      },
+      {
         "tag": "forge:mushrooms"
+      },
+      {
+        "tag": "forge:raw_fishes"
+      },
+      {
+        "tag": "forge:raw_pork"
       },
       {
         "item": "minecraft:carrot"
       },
       {
         "item": "minecraft:potato"
-      },
-      {
-        "tag": "forge:raw_fishes"
-      },
-      {
-        "tag": "forge:eggs"
-      },
-      {
-        "tag": "forge:raw_pork"
-      },
-      {
-        "tag": "forge:raw_beef"
       }
     ]
   ],

@@ -134,10 +134,6 @@ public class Foods
 	public static final Food STEAK_AND_POTATOES = (new Food.Builder())
 			.hunger(12).saturation(0.8f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 4800, 0), 1.0F).build();
-	public static final Food HONEY_GLAZED_HAM = (new Food.Builder())
-			.hunger(14).saturation(0.9f)
-			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F)
-			.effect(() -> new EffectInstance(Effects.ABSORPTION, 1800, 0), 1.0F).build();
 	public static final Food PASTA_WITH_MEATBALLS = (new Food.Builder())
 			.hunger(12).saturation(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F).build();
@@ -148,9 +144,6 @@ public class Foods
 			.hunger(12).saturation(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F).build();
 	public static final Food VEGETABLE_NOODLES = (new Food.Builder())
-			.hunger(14).saturation(0.9f)
-			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F).build();
-	public static final Food SHEPHERDS_PIE = (new Food.Builder())
 			.hunger(14).saturation(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F).build();
 	public static final Food RATATOUILLE = (new Food.Builder())
@@ -167,7 +160,13 @@ public class Foods
 			.hunger(14).saturation(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F).build();
 	public static final Food STUFFED_PUMPKIN = (new Food.Builder())
-			.hunger(12).saturation(0.8f)
+			.hunger(14).saturation(0.9f)
+			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F).build();
+	public static final Food HONEY_GLAZED_HAM = (new Food.Builder())
+			.hunger(14).saturation(0.9f)
+			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F).build();
+	public static final Food SHEPHERDS_PIE = (new Food.Builder())
+			.hunger(14).saturation(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F).build();
 
 	public static final Food DOG_FOOD = (new Food.Builder())

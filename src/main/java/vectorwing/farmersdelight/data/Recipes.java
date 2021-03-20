@@ -645,6 +645,18 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.BAKED_POTATO)
 				.addCriterion("has_cooked_chicken", InventoryChangeTrigger.Instance.forItems(Items.COOKED_CHICKEN))
 				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.SHEPHERDS_PIE_BLOCK.get())
+				.addIngredient(Items.BAKED_POTATO)
+				.addIngredient(ForgeTags.MILK)
+				.addIngredient(Items.BAKED_POTATO)
+				.addIngredient(Items.COOKED_MUTTON)
+				.addIngredient(Items.COOKED_MUTTON)
+				.addIngredient(Items.COOKED_MUTTON)
+				.addIngredient(ForgeTags.CROPS_ONION)
+				.addIngredient(Items.BOWL)
+				.addIngredient(ForgeTags.CROPS_ONION)
+				.addCriterion("has_cooked_mutton", InventoryChangeTrigger.Instance.forItems(Items.COOKED_MUTTON))
+				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.HONEY_GLAZED_HAM_BLOCK.get())
 				.addIngredient(Items.SWEET_BERRIES)
 				.addIngredient(Items.HONEY_BOTTLE)

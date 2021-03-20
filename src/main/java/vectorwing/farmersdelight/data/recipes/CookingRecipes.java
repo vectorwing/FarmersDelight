@@ -141,12 +141,12 @@ public class CookingRecipes
 				.addIngredient(Items.BEETROOT)
 				.addIngredient(ForgeTags.VEGETABLES)
 				.build(consumer);
-		CookingPotRecipeBuilder.cookingRecipe(ModItems.SHEPHERDS_PIE.get(), 1)
-				.addIngredient(Items.MUTTON)
-				.addIngredient(Items.BAKED_POTATO)
-				.addIngredient(ForgeTags.CROPS_ONION)
-				.addIngredient(ForgeTags.MILK)
-				.build(consumer);
+//		CookingPotRecipeBuilder.cookingRecipe(ModItems.SHEPHERDS_PIE.get(), 1)
+//				.addIngredient(Items.MUTTON)
+//				.addIngredient(Items.BAKED_POTATO)
+//				.addIngredient(ForgeTags.CROPS_ONION)
+//				.addIngredient(ForgeTags.MILK)
+//				.build(consumer);
 		CookingPotRecipeBuilder.cookingRecipe(ModItems.SQUID_INK_PASTA.get(), 1)
 				.addIngredient(ForgeTags.RAW_FISHES)
 				.addIngredient(ForgeTags.PASTA)

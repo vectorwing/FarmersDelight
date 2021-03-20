@@ -127,7 +127,6 @@
   "item.farmersdelight.roasted_lamb_chops": "Lamb wit' Bloody Potatoes",
   "item.farmersdelight.steak_and_potatoes": "Steak wit' Taters",
   "item.farmersdelight.vegetable_noodles": "Veggies n' Noodles",
-  "item.farmersdelight.shepherds_pie": "Sheep Herder's Specialty",
   "item.farmersdelight.ratatouille": "Chopp'd Veggie Platter",
   "item.farmersdelight.squid_ink_pasta": "Kraken's Briny Noodles",
   "item.farmersdelight.grilled_salmon": "Captain's Salmon Platter",
@@ -138,6 +137,8 @@
   "item.farmersdelight.stuffed_pumpkin": "Stuff'd Gourd Platter",
   "block.farmersdelight.honey_glazed_ham_block": "Hog's Leg Roast",
   "item.farmersdelight.honey_glazed_ham": "Hog's Leg Roast Platter",
+  "block.farmersdelight.shepherds_pie_block": "Sheep Herder's Specialty",
+  "item.farmersdelight.shepherds_pie": "Sheep Herder's Specialty Platter",
 
   "item.farmersdelight.dog_food": "Hound's Chow",
   "item.farmersdelight.horse_feed": "Land Beast's Hay",

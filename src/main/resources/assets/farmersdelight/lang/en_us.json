@@ -127,7 +127,6 @@
   "item.farmersdelight.roasted_lamb_chops": "Roasted Lamb Chops",
   "item.farmersdelight.steak_and_potatoes": "Steak and Potatoes",
   "item.farmersdelight.vegetable_noodles": "Vegetable Noodles",
-  "item.farmersdelight.shepherds_pie": "Shepherd's Pie",
   "item.farmersdelight.ratatouille": "Ratatouille",
   "item.farmersdelight.squid_ink_pasta": "Squid Ink Pasta",
   "item.farmersdelight.grilled_salmon": "Grilled Salmon",
@@ -138,6 +137,8 @@
   "item.farmersdelight.stuffed_pumpkin": "Bowl of Stuffed Pumpkin",
   "block.farmersdelight.honey_glazed_ham_block": "Honey Glazed Ham",
   "item.farmersdelight.honey_glazed_ham": "Plate of Honey Glazed Ham",
+  "block.farmersdelight.shepherds_pie_block": "Shepherd's Pie",
+  "item.farmersdelight.shepherds_pie": "Plate of Shepherd's Pie",
 
   "item.farmersdelight.dog_food": "Dog Food",
   "item.farmersdelight.horse_feed": "Horse Feed",
