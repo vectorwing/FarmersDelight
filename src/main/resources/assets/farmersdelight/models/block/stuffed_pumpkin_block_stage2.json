@@ -27,7 +27,6 @@
 			"name": "stuffing",
 			"from": [4, 5, 4],
 			"to": [12, 7, 12],
-			"rotation": {"angle": 0, "axis": "y", "origin": [11, 13, 11]},
 			"faces": {
 				"north": {"uv": [6, 4, 14, 6], "rotation": 180, "texture": "#details"},
 				"east": {"uv": [12, 4, 14, 12], "rotation": 90, "texture": "#details"},
@@ -41,7 +40,6 @@
 			"name": "pumpkin",
 			"from": [2, 0, 2],
 			"to": [14, 6, 14],
-			"rotation": {"angle": 0, "axis": "y", "origin": [9, 8, 9]},
 			"faces": {
 				"north": {"uv": [2, 10, 14, 16], "texture": "#side"},
 				"east": {"uv": [2, 10, 14, 16], "texture": "#side"},
