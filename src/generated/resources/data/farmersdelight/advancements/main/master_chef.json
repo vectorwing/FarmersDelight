@@ -83,11 +83,11 @@
         }
       }
     },
-    "honey_glazed_ham": {
+    "noodle_soup": {
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:honey_glazed_ham"
+          "item": "farmersdelight:noodle_soup"
         }
       }
     },
@@ -107,6 +107,14 @@
         }
       }
     },
+    "roasted_mutton_chops": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:roasted_mutton_chops"
+        }
+      }
+    },
     "vegetable_noodles": {
       "trigger": "minecraft:consume_item",
       "conditions": {
@@ -120,14 +128,6 @@
       "conditions": {
         "item": {
           "item": "farmersdelight:steak_and_potatoes"
-        }
-      }
-    },
-    "shepherds_pie": {
-      "trigger": "minecraft:consume_item",
-      "conditions": {
-        "item": {
-          "item": "farmersdelight:shepherds_pie"
         }
       }
     },
@@ -170,6 +170,22 @@
           "item": "farmersdelight:stuffed_pumpkin"
         }
       }
+    },
+    "honey_glazed_ham": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:honey_glazed_ham"
+        }
+      }
+    },
+    "shepherds_pie": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:shepherds_pie"
+        }
+      }
     }
   },
   "requirements": [
@@ -198,7 +214,7 @@
       "baked_cod_stew"
     ],
     [
-      "honey_glazed_ham"
+      "noodle_soup"
     ],
     [
       "pasta_with_meatballs"
@@ -207,13 +223,13 @@
       "pasta_with_mutton_chop"
     ],
     [
+      "roasted_mutton_chops"
+    ],
+    [
       "vegetable_noodles"
     ],
     [
       "steak_and_potatoes"
-    ],
-    [
-      "shepherds_pie"
     ],
     [
       "ratatouille"
@@ -229,6 +245,12 @@
     ],
     [
       "stuffed_pumpkin"
+    ],
+    [
+      "honey_glazed_ham"
+    ],
+    [
+      "shepherds_pie"
     ]
   ]
 }

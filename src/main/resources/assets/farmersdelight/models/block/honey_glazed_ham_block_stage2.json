@@ -6,7 +6,7 @@
 		"ham": "farmersdelight:block/honey_glazed_ham_body",
 		"bone": "farmersdelight:block/honey_glazed_ham_bone",
 		"tray_top": "farmersdelight:block/tray_rice_berry_garnish",
-		"tray_side": "farmersdelight:block/tray_top"
+		"tray_side": "farmersdelight:block/tray_bottom"
 	},
 	"elements": [
 		{

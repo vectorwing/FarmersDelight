@@ -27,12 +27,26 @@
       "conditions": {
         "block": "farmersdelight:stuffed_pumpkin_block"
       }
+    },
+    "honey_glazed_ham": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "farmersdelight:honey_glazed_ham_block"
+      }
+    },
+    "shepherds_pie": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "farmersdelight:shepherds_pie_block"
+      }
     }
   },
   "requirements": [
     [
       "roast_chicken",
-      "stuffed_pumpkin"
+      "stuffed_pumpkin",
+      "honey_glazed_ham",
+      "shepherds_pie"
     ]
   ]
 }

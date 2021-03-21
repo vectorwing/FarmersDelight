@@ -169,6 +169,8 @@ public class Advancements extends AdvancementProvider
 			Advancement gloriousFeast = getAdvancement(wellServed, ModItems.ROAST_CHICKEN_BLOCK.get(), "place_feast", FrameType.TASK, true, true, false)
 					.withCriterion("roast_chicken", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.ROAST_CHICKEN_BLOCK.get()))
 					.withCriterion("stuffed_pumpkin", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.STUFFED_PUMPKIN_BLOCK.get()))
+					.withCriterion("honey_glazed_ham", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.HONEY_GLAZED_HAM_BLOCK.get()))
+					.withCriterion("shepherds_pie", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.SHEPHERDS_PIE_BLOCK.get()))
 					.withRequirementsStrategy(IRequirementsStrategy.OR)
 					.register(consumer, getNameId("main/place_feast"));
 
@@ -185,17 +187,19 @@ public class Advancements extends AdvancementProvider
 					.withCriterion("fried_rice", ConsumeItemTrigger.Instance.forItem(ModItems.FRIED_RICE.get()))
 					.withCriterion("pumpkin_soup", ConsumeItemTrigger.Instance.forItem(ModItems.PUMPKIN_SOUP.get()))
 					.withCriterion("baked_cod_stew", ConsumeItemTrigger.Instance.forItem(ModItems.BAKED_COD_STEW.get()))
-					.withCriterion("honey_glazed_ham", ConsumeItemTrigger.Instance.forItem(ModItems.HONEY_GLAZED_HAM.get()))
+					.withCriterion("noodle_soup", ConsumeItemTrigger.Instance.forItem(ModItems.NOODLE_SOUP.get()))
 					.withCriterion("pasta_with_meatballs", ConsumeItemTrigger.Instance.forItem(ModItems.PASTA_WITH_MEATBALLS.get()))
 					.withCriterion("pasta_with_mutton_chop", ConsumeItemTrigger.Instance.forItem(ModItems.PASTA_WITH_MUTTON_CHOP.get()))
+					.withCriterion("roasted_mutton_chops", ConsumeItemTrigger.Instance.forItem(ModItems.ROASTED_MUTTON_CHOPS.get()))
 					.withCriterion("vegetable_noodles", ConsumeItemTrigger.Instance.forItem(ModItems.VEGETABLE_NOODLES.get()))
 					.withCriterion("steak_and_potatoes", ConsumeItemTrigger.Instance.forItem(ModItems.STEAK_AND_POTATOES.get()))
-					.withCriterion("shepherds_pie", ConsumeItemTrigger.Instance.forItem(ModItems.SHEPHERDS_PIE.get()))
 					.withCriterion("ratatouille", ConsumeItemTrigger.Instance.forItem(ModItems.RATATOUILLE.get()))
 					.withCriterion("squid_ink_pasta", ConsumeItemTrigger.Instance.forItem(ModItems.SQUID_INK_PASTA.get()))
 					.withCriterion("grilled_salmon", ConsumeItemTrigger.Instance.forItem(ModItems.GRILLED_SALMON.get()))
 					.withCriterion("roast_chicken", ConsumeItemTrigger.Instance.forItem(ModItems.ROAST_CHICKEN.get()))
 					.withCriterion("stuffed_pumpkin", ConsumeItemTrigger.Instance.forItem(ModItems.STUFFED_PUMPKIN.get()))
+					.withCriterion("honey_glazed_ham", ConsumeItemTrigger.Instance.forItem(ModItems.HONEY_GLAZED_HAM.get()))
+					.withCriterion("shepherds_pie", ConsumeItemTrigger.Instance.forItem(ModItems.SHEPHERDS_PIE.get()))
 					.withRewards(AdvancementRewards.Builder.experience(200))
 					.register(consumer, getNameId("main/master_chef"));
 		}

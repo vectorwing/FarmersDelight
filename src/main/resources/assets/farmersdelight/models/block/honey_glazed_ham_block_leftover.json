@@ -2,10 +2,10 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
+		"particle": "farmersdelight:block/tray_rice_berry_leftover",
 		"bone": "farmersdelight:block/honey_glazed_ham_bone",
-		"particle": "farmersdelight:block/tray_top",
-		"tray_side": "farmersdelight:block/tray_top",
-		"tray_top": "farmersdelight:block/tray_rice_berry_leftover"
+		"tray_top": "farmersdelight:block/tray_rice_berry_leftover",
+		"tray_side": "farmersdelight:block/tray_bottom"
 	},
 	"elements": [
 		{

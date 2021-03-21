@@ -5,7 +5,8 @@
 		"particle": "farmersdelight:block/shepherds_pie_top",
 		"top": "farmersdelight:block/shepherds_pie_top",
 		"side": "farmersdelight:block/shepherds_pie_side",
-		"tray_top": "farmersdelight:block/tray_top"
+		"tray_top": "farmersdelight:block/tray_top",
+		"tray_side": "farmersdelight:block/tray_bottom"
 	},
 	"elements": [
 		{
@@ -13,12 +14,12 @@
 			"from": [1, 0, 1],
 			"to": [15, 2, 15],
 			"faces": {
-				"north": {"uv": [1, 11, 15, 13], "texture": "#tray_top"},
-				"east": {"uv": [1, 11, 15, 13], "texture": "#tray_top"},
-				"south": {"uv": [1, 11, 15, 13], "texture": "#tray_top"},
-				"west": {"uv": [1, 11, 15, 13], "texture": "#tray_top"},
+				"north": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"east": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"south": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"west": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
 				"up": {"uv": [1, 1, 15, 15], "texture": "#tray_top"},
-				"down": {"uv": [1, 1, 15, 15], "texture": "#tray_top", "cullface": "down"}
+				"down": {"uv": [1, 1, 15, 15], "texture": "#tray_side", "cullface": "down"}
 			}
 		},
 		{

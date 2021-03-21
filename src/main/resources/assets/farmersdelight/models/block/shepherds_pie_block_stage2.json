@@ -5,7 +5,7 @@
 		"particle": "farmersdelight:block/shepherds_pie_top",
 		"top": "farmersdelight:block/shepherds_pie_top",
 		"side": "farmersdelight:block/shepherds_pie_side",
-		"tray_side": "farmersdelight:block/tray_top",
+		"tray_side": "farmersdelight:block/tray_bottom",
 		"inner": "farmersdelight:block/shepherds_pie_inner",
 		"tray_top": "farmersdelight:block/tray_pie_leftover"
 	},
