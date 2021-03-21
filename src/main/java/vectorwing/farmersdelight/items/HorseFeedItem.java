@@ -27,6 +27,7 @@ import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.registry.ModParticleTypes;
 import vectorwing.farmersdelight.utils.MathUtils;
 import vectorwing.farmersdelight.utils.TextUtils;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -51,26 +52,27 @@ public class HorseFeedItem extends Item
 			Entity target = event.getTarget();
 			ItemStack itemStack = event.getItemStack();
 
-			if (target instanceof AbstractHorseEntity) {
-				AbstractHorseEntity horse = (AbstractHorseEntity) target;
-				if (horse.isAlive() && horse.isTame() && itemStack.getItem().equals(ModItems.HORSE_FEED.get())) {
-					horse.setHealth(horse.getMaxHealth());
+			if (target instanceof LivingEntity && ModTags.HORSE_FEED_USERS.contains(target.getType())) {
+				LivingEntity entity = (LivingEntity) target;
+				boolean isTameable = entity instanceof AbstractHorseEntity;
+
+				if (entity.isAlive() && (!isTameable || ((AbstractHorseEntity) entity).isTame()) && itemStack.getItem().equals(ModItems.HORSE_FEED.get())) {
+					entity.setHealth(entity.getMaxHealth());
 					for (EffectInstance effect : EFFECTS) {
-						horse.addPotionEffect(new EffectInstance(effect));
+						entity.addPotionEffect(new EffectInstance(effect));
 					}
-					horse.world.playSound(null, target.getPosition(), SoundEvents.ENTITY_HORSE_EAT, SoundCategory.PLAYERS, 0.8F, 0.8F);
+					entity.world.playSound(null, target.getPosition(), SoundEvents.ENTITY_HORSE_EAT, SoundCategory.PLAYERS, 0.8F, 0.8F);
 
 					for (int i = 0; i < 5; ++i) {
 						double d0 = MathUtils.RAND.nextGaussian() * 0.02D;
 						double d1 = MathUtils.RAND.nextGaussian() * 0.02D;
 						double d2 = MathUtils.RAND.nextGaussian() * 0.02D;
-						horse.world.addParticle(ModParticleTypes.STAR_PARTICLE.get(), horse.getPosXRandom(1.0D), horse.getPosYRandom() + 0.5D, horse.getPosZRandom(1.0D), d0, d1, d2);
+						entity.world.addParticle(ModParticleTypes.STAR_PARTICLE.get(), entity.getPosXRandom(1.0D), entity.getPosYRandom() + 0.5D, entity.getPosZRandom(1.0D), d0, d1, d2);
 					}
 
-					if (itemStack.getContainerItem() != ItemStack.EMPTY && !player.isCreative()) {
-						player.addItemStackToInventory(itemStack.getContainerItem());
+					if (!player.isCreative()) {
+						itemStack.shrink(1);
 					}
-					itemStack.shrink(1);
 
 					event.setCancellationResult(ActionResultType.SUCCESS);
 					event.setCanceled(true);
