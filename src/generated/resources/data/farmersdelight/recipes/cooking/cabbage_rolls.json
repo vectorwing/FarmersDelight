@@ -6,13 +6,19 @@
     },
     [
       {
+        "item": "minecraft:carrot"
+      },
+      {
+        "item": "minecraft:potato"
+      },
+      {
+        "item": "minecraft:beetroot"
+      },
+      {
         "tag": "forge:raw_pork"
       },
       {
-        "tag": "forge:raw_chicken"
-      },
-      {
-        "tag": "forge:mushrooms"
+        "tag": "forge:raw_mutton"
       },
       {
         "tag": "forge:raw_fishes"
@@ -21,13 +27,13 @@
         "tag": "forge:raw_beef"
       },
       {
-        "item": "minecraft:carrot"
-      },
-      {
-        "item": "minecraft:potato"
-      },
-      {
         "tag": "forge:eggs"
+      },
+      {
+        "tag": "forge:mushrooms"
+      },
+      {
+        "tag": "forge:raw_chicken"
       }
     ]
   ],

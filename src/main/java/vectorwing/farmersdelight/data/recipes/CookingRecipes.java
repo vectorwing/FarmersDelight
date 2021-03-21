@@ -78,9 +78,10 @@ public class CookingRecipes
 						Ingredient.fromTag(ForgeTags.RAW_FISHES),
 						Ingredient.fromTag(ForgeTags.RAW_CHICKEN),
 						Ingredient.fromTag(ForgeTags.RAW_BEEF),
+						Ingredient.fromTag(ForgeTags.RAW_MUTTON),
 						Ingredient.fromTag(ForgeTags.EGGS),
 						Ingredient.fromTag(Tags.Items.MUSHROOMS),
-						Ingredient.fromItems(Items.CARROT, Items.POTATO)
+						Ingredient.fromItems(Items.CARROT, Items.POTATO, Items.BEETROOT)
 				)))
 				.build(consumer);
 		CookingPotRecipeBuilder.cookingRecipe(ModItems.CHICKEN_SOUP.get(), 1)
@@ -99,6 +100,7 @@ public class CookingRecipes
 				.addIngredient(Ingredient.merge(Sets.newHashSet(
 						Ingredient.fromTag(ForgeTags.RAW_CHICKEN),
 						Ingredient.fromTag(ForgeTags.RAW_PORK),
+						Ingredient.fromTag(ForgeTags.RAW_BEEF),
 						Ingredient.fromItems(Items.BROWN_MUSHROOM)
 				)))
 				.build(consumer);
@@ -125,7 +127,7 @@ public class CookingRecipes
 				.addIngredient(ModItems.TOMATO_SAUCE.get())
 				.build(consumer);
 		CookingPotRecipeBuilder.cookingRecipe(ModItems.PASTA_WITH_MUTTON_CHOP.get(), 1)
-				.addIngredient(Items.MUTTON)
+				.addIngredient(ForgeTags.RAW_MUTTON)
 				.addIngredient(ForgeTags.PASTA)
 				.addIngredient(ModItems.TOMATO_SAUCE.get())
 				.build(consumer);

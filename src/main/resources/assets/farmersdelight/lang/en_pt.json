@@ -79,6 +79,8 @@
   "item.farmersdelight.cooked_cod_slice": "Smoked Slash'd Cod",
   "item.farmersdelight.salmon_slice": "Raw Slash'd Salmon",
   "item.farmersdelight.cooked_salmon_slice": "Smoked Slash'd Salmon",
+  "item.farmersdelight.mutton_chops": "Raw Lamb Chops",
+  "item.farmersdelight.cooked_mutton_chops": "Cooked Lamb Chops",
   "item.farmersdelight.ham": "Hog's Leg",
   "item.farmersdelight.smoked_ham": "Charred Hog's Leg",
 
@@ -124,7 +126,7 @@
 
   "item.farmersdelight.pasta_with_meatballs": "Meatwads n' Noodles",
   "item.farmersdelight.pasta_with_mutton_chop": "Mutton n' Noodles",
-  "item.farmersdelight.roasted_lamb_chops": "Lamb wit' Bloody Potatoes",
+  "item.farmersdelight.roasted_mutton_chops": "Lamb wit' Bloody Potatoes",
   "item.farmersdelight.steak_and_potatoes": "Steak wit' Taters",
   "item.farmersdelight.vegetable_noodles": "Veggies n' Noodles",
   "item.farmersdelight.ratatouille": "Chopp'd Veggie Platter",

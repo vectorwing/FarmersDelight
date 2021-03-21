@@ -50,6 +50,10 @@ public class Foods
 			.hunger(1).saturation(0.1f).build();
 	public static final Food COOKED_SALMON_SLICE = (new Food.Builder())
 			.hunger(3).saturation(0.8f).build();
+	public static final Food MUTTON_CHOP = (new Food.Builder())
+			.hunger(1).saturation(0.3f).meat().build();
+	public static final Food COOKED_MUTTON_CHOP = (new Food.Builder())
+			.hunger(3).saturation(0.8f).meat().build();
 	public static final Food HAM = (new Food.Builder())
 			.hunger(5).saturation(0.3f).build();
 	public static final Food SMOKED_HAM = (new Food.Builder())
@@ -140,7 +144,7 @@ public class Foods
 	public static final Food PASTA_WITH_MUTTON_CHOP = (new Food.Builder())
 			.hunger(12).saturation(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F).build();
-	public static final Food ROASTED_LAMB_CHOPS = (new Food.Builder())
+	public static final Food ROASTED_MUTTON_CHOPS = (new Food.Builder())
 			.hunger(12).saturation(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 9600, 0), 1.0F).build();
 	public static final Food VEGETABLE_NOODLES = (new Food.Builder())

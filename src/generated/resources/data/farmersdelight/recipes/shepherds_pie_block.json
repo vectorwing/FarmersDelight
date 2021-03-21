@@ -11,13 +11,13 @@
       "item": "minecraft:baked_potato"
     },
     {
-      "item": "minecraft:cooked_mutton"
+      "tag": "forge:cooked_mutton"
     },
     {
-      "item": "minecraft:cooked_mutton"
+      "tag": "forge:cooked_mutton"
     },
     {
-      "item": "minecraft:cooked_mutton"
+      "tag": "forge:cooked_mutton"
     },
     {
       "tag": "forge:crops/onion"

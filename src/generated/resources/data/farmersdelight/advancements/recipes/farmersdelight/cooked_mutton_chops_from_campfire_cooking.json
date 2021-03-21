@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "farmersdelight:roasted_lamb_chops"
+      "farmersdelight:cooked_mutton_chops_from_campfire_cooking"
     ]
   },
   "criteria": {
-    "has_mutton": {
+    "cooked_mutton_chops": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "minecraft:cooked_mutton"
+            "item": "farmersdelight:mutton_chops"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "farmersdelight:roasted_lamb_chops"
+        "recipe": "farmersdelight:cooked_mutton_chops_from_campfire_cooking"
       }
     }
   },
   "requirements": [
     [
-      "has_mutton",
+      "cooked_mutton_chops",
       "has_the_recipe"
     ]
   ]
