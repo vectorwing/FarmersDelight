@@ -77,15 +77,15 @@ public class ModItems
 
 	// Tools
 	public static final RegistryObject<Item> FLINT_KNIFE = ITEMS.register("flint_knife",
-			() -> new KnifeItem(ModMaterials.FLINT, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+			() -> new KnifeItem(ModMaterials.FLINT, 0.5F, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> IRON_KNIFE = ITEMS.register("iron_knife",
-			() -> new KnifeItem(ItemTier.IRON, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+			() -> new KnifeItem(ItemTier.IRON, 0.5F, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> DIAMOND_KNIFE = ITEMS.register("diamond_knife",
-			() -> new KnifeItem(ItemTier.DIAMOND, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+			() -> new KnifeItem(ItemTier.DIAMOND, 0.5F, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> NETHERITE_KNIFE = ITEMS.register("netherite_knife",
-			() -> new KnifeItem(ItemTier.NETHERITE, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP).isImmuneToFire()));
+			() -> new KnifeItem(ItemTier.NETHERITE, 0.5F, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP).isImmuneToFire()));
 	public static final RegistryObject<Item> GOLDEN_KNIFE = ITEMS.register("golden_knife",
-			() -> new KnifeItem(ItemTier.GOLD, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+			() -> new KnifeItem(ItemTier.GOLD, 0.5F, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> STRAW = ITEMS.register("straw", () -> new FuelItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> CANVAS = ITEMS.register("canvas", () -> new FuelItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), 400));

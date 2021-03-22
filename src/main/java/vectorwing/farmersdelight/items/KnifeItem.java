@@ -12,12 +12,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.*;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -69,8 +67,18 @@ public class KnifeItem extends ToolItem
 	}
 
 	@Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-	public static class CakeInteractionEvent
+	public static class KnifeEvents
 	{
+		@SubscribeEvent
+		public static void onKnifeKnockback(LivingKnockBackEvent event) {
+			LivingEntity attacker = event.getEntityLiving().getAttackingEntity();
+			ItemStack tool = attacker != null ? attacker.getHeldItem(Hand.MAIN_HAND) : ItemStack.EMPTY;
+			if (tool.getItem() instanceof KnifeItem) {
+				float f = event.getOriginalStrength();
+				event.setStrength(event.getOriginalStrength() - 0.1F);
+			}
+		}
+
 		@SubscribeEvent
 		@SuppressWarnings("unused")
 		public static void onCakeInteraction(PlayerInteractEvent.RightClickBlock event) {
