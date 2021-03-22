@@ -20,17 +20,17 @@ public class ConsumableItem extends Item
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity subject) {
+	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity consumer) {
 		if (!worldIn.isRemote) {
-			this.affectConsumer(stack, worldIn, subject);
+			this.affectConsumer(stack, worldIn, consumer);
 		}
 
 		ItemStack container = stack.getContainerItem();
 
 		if (stack.isFood()) {
-			super.onItemUseFinish(stack, worldIn, subject);
+			super.onItemUseFinish(stack, worldIn, consumer);
 		} else {
-			PlayerEntity player = subject instanceof PlayerEntity ? (PlayerEntity) subject : null;
+			PlayerEntity player = consumer instanceof PlayerEntity ? (PlayerEntity) consumer : null;
 			if (player instanceof ServerPlayerEntity) {
 				CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayerEntity) player, stack);
 			}
@@ -45,8 +45,8 @@ public class ConsumableItem extends Item
 		if (stack.isEmpty()) {
 			return container;
 		} else {
-			if (subject instanceof PlayerEntity && !((PlayerEntity) subject).abilities.isCreativeMode) {
-				PlayerEntity player = (PlayerEntity) subject;
+			if (consumer instanceof PlayerEntity && !((PlayerEntity) consumer).abilities.isCreativeMode) {
+				PlayerEntity player = (PlayerEntity) consumer;
 				if (!player.inventory.addItemStackToInventory(container)) {
 					player.dropItem(container, false);
 				}
@@ -58,6 +58,6 @@ public class ConsumableItem extends Item
 	/**
 	 * Override this to apply changes to the consumer (e.g. curing effects).
 	 */
-	public void affectConsumer(ItemStack stack, World worldIn, LivingEntity subject) {
+	public void affectConsumer(ItemStack stack, World worldIn, LivingEntity consumer) {
 	}
 }

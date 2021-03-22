@@ -19,6 +19,9 @@
   - `dog_food_users` determines which living entities can be fed Dog Food;
   - `horse_feed_users` determines which living entities can be fed Horse Feed;
   - If a specified entity can be tamed, it must be tamed to accept the food. Otherwise, it can be fed right away;
+- Balancing experiments:
+  - The Nourished effect has been partially shortened across all meals, as it worked too well;
+  - Knives deal 0.5 less damage, but have a bit less knockback to help users deal more strikes;
 - Integration with MC Abnormals mods has been moved to their official add-on, Abnormals Delight! Go check it out!
 - Pies can now rotate horizontally, much like Feasts;
 - Tatami blocks and half-mats can now rotate horizontally, to match the seams of their paired and full-mat counterparts;
