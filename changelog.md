@@ -26,8 +26,10 @@
 - Integration with MC Abnormals mods has been moved to their official add-on, Abnormals Delight! Go check it out!
 - Pies can now rotate horizontally, much like Feasts;
 - Tatami blocks and half-mats can now rotate horizontally, to match the seams of their paired and full-mat counterparts;
+- Rich Soil now emits green stars when boosting a plant. Should hopefully not be exaggerated;
 - Fixes:
   - Rich Soil now respects OnCropsGrow Forge events. This fixes compatibility with Serene Seasons, but there could be more mods benefitting from it;
+  - World gen code reordered a bit, should hopefully prevent crashes with OpenJ9 (but update yours anyway, if you use it);
   - Tomatoes are now recognized as a CROP PlantType, to better integrate with modded farmlands (thank you, Foam!);
   - Pigs and Hoglins will drop Smoked Ham if they're on fire when killed with a knife (thank you, Foam!);
   - Crop blocks should now have proper langs, for WAILA compatibility and similar;
@@ -35,6 +37,7 @@
   - Meals can no longer be shift-clicked inside the meal display;
   - Rice Crop should no longer crash upon certain state updates (example: world editing, chunk removal etc);
   - Flint Knife is now repaired with Flint instead of Stone, using a custom item tier rather than the Stone tier;
+  - Horse Feed is no longer consumed on Creative Mode
 - Added translations:
   - zh_TW (thank you, Pancakes0228!);
 - Updated translations:
