@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.4.0 (WIP)
+## 0.4.0
 - Shepherd's Pie is now a Feast!
 - Mutton can now be cut into Mutton Chops, using a Cutting Board;
 - New foods!
@@ -22,6 +22,7 @@
 - Balancing experiments:
   - The Nourished effect has been partially shortened across all meals;
   - Knives deal 0.5 less damage, but have a bit less knockback to help users deal more strikes;
+  - Knives are no longer efficient at mining Knives and Bales, since that is now the Hoe's job in 1.16;
 - Integration with MC Abnormals mods has been moved to their official add-on, Abnormals Delight! Go check it out!
 - Pies can now rotate horizontally, much like Feasts;
 - Tatami blocks and half-mats can now rotate horizontally, to match the seams of their paired and full-mat counterparts;
