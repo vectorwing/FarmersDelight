@@ -1,6 +1,6 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "block",
+	"parent": "block/block",
 	"textures": {
 		"particle": "farmersdelight:block/shepherds_pie_top",
 		"top": "farmersdelight:block/shepherds_pie_top",
