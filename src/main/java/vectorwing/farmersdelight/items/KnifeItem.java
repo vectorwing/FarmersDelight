@@ -32,7 +32,7 @@ public class KnifeItem extends ToolItem
 {
 	public static final ToolType KNIFE_TOOL = ToolType.get(FarmersDelight.MODID + "_knife");
 
-	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.HAY_BLOCK, ModBlocks.RICE_BALE.get());
+	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet();
 
 	public KnifeItem(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties properties) {
 		super(attackDamageIn, attackSpeedIn, tier, EFFECTIVE_ON, properties);
@@ -51,8 +51,7 @@ public class KnifeItem extends ToolItem
 		return material != Material.WOOL
 				&& material != Material.CARPET
 				&& material != Material.CAKE
-				&& material != Material.WEB
-				&& material != Material.LEAVES ? super.getDestroySpeed(stack, state) : this.efficiency;
+				&& material != Material.WEB ? super.getDestroySpeed(stack, state) : this.efficiency;
 	}
 
 	@Override
