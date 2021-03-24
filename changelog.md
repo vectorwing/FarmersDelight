@@ -12,15 +12,15 @@
   - **BREAKING CHANGE! Custom cutting board recipes will have to be changed to the new format; the old syntax will no longer work!**
   - Please refer to the source code and wiki for information on the new syntax.
 - Vanilla soups and stews now stack up to 16, much like meals from this mod! (thank you, bagel!)
-  - By default, this affects exclusively the contents of `stackable_soup_items`, which includes vanilla soups at first. It behaves like an allow-list.
-  - You can configure it to instead use a deny-list, making every `SoupItem` stack to 16 unless it's tagged with `non_stackable_soup_items`. This affects other mods, so be careful!
+  - By default, this affects exclusively `SoupItem`s from vanilla, using a list inside the configs.
+  - You can configure it to instead use a deny-list, making every `SoupItem` stack to 16, except the ones listed in the config. This affects other mods, so be careful!
   - This feature can be disabled entirely in the configs.
 - Dog Food and Horse Feed now consult tags for eligible entities to feed:
   - `dog_food_users` determines which living entities can be fed Dog Food;
   - `horse_feed_users` determines which living entities can be fed Horse Feed;
   - If a specified entity can be tamed, it must be tamed to accept the food. Otherwise, it can be fed right away;
 - Balancing experiments:
-  - The Nourished effect has been partially shortened across all meals, as it worked too well;
+  - The Nourished effect has been partially shortened across all meals;
   - Knives deal 0.5 less damage, but have a bit less knockback to help users deal more strikes;
 - Integration with MC Abnormals mods has been moved to their official add-on, Abnormals Delight! Go check it out!
 - Pies can now rotate horizontally, much like Feasts;

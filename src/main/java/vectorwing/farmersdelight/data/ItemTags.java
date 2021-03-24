@@ -35,8 +35,6 @@ public class ItemTags extends ItemTagsProvider
 		getOrCreateBuilder(ModTags.KNIVES).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get());
 		getOrCreateBuilder(ModTags.STRAW_HARVESTERS).addTag(ModTags.KNIVES);
 		getOrCreateBuilder(ModTags.COMFORT_FOODS).add(Items.MUSHROOM_STEW, Items.BEETROOT_SOUP, Items.RABBIT_STEW);
-		getOrCreateBuilder(ModTags.STACKABLE_SOUP_ITEMS).add(Items.MUSHROOM_STEW, Items.BEETROOT_SOUP, Items.RABBIT_STEW);
-		getOrCreateBuilder(ModTags.NON_STACKABLE_SOUP_ITEMS);
 		getOrCreateBuilder(ModTags.WOLF_PREY).addTag(ForgeTags.RAW_CHICKEN).addTag(ForgeTags.RAW_MUTTON).add(Items.RABBIT);
 	}
 
