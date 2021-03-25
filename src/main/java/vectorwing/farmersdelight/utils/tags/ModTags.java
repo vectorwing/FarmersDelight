@@ -7,6 +7,8 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.Tags;
 import vectorwing.farmersdelight.FarmersDelight;
 
 /**
@@ -39,6 +41,12 @@ public class ModTags
 	// Foods that should grant 5 minutes of Comfort when eaten. Does not include the main soups/stews of Farmer's Delight.
 	public static final ITag.INamedTag<Item> COMFORT_FOODS = modItemTag("comfort_foods");
 
+	// Soups/stews that can stack to 16 when stackableSoupItems is enabled in the config and overrideAllSoupItems is false. Does not include the main soups/stews of Farmer's Delight.
+	public static final Tags.IOptionalNamedTag<Item> STACKABLE_SOUP_ITEMS = modOptionalItemTag("stackable_soup_items");
+
+	// Soups/stews that can't stack to 16 when stackableSoupItems is enabled in the config and overrideAllSoupItems is true.
+	public static final Tags.IOptionalNamedTag<Item> UNSTACKABLE_SOUP_ITEMS = modOptionalItemTag("unstackable_soup_items");
+
 	// Foods that drop from mobs that wolves prey upon (sheep, rabbit and chicken).
 	public static final ITag.INamedTag<Item> WOLF_PREY = modItemTag("wolf_prey");
 
@@ -53,6 +61,10 @@ public class ModTags
 
 	private static ITag.INamedTag<Item> modItemTag(String path) {
 		return ItemTags.makeWrapperTag(FarmersDelight.MODID + ":" + path);
+	}
+
+	private static Tags.IOptionalNamedTag<Item> modOptionalItemTag(String path) {
+		return ItemTags.createOptional(new ResourceLocation(FarmersDelight.MODID, path));
 	}
 
 	private static ITag.INamedTag<Block> modBlockTag(String path) {

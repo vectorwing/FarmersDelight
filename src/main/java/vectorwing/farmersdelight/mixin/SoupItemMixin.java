@@ -9,9 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.SoupItem;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -27,14 +25,10 @@ public abstract class SoupItemMixin extends Item {
 
 	@Override
 	public int getItemStackLimit(ItemStack stack) {
-		if (Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) {
-			ResourceLocation stackable = stack.getItem().getRegistryName();
-			String stackableKey = "";
-			if (stackable != null) {
-				stackableKey = stackable.toString();
-			}
-			if (Configuration.OVERRIDE_ALL_SOUP_ITEMS.get() && !Configuration.SOUP_ITEM_LIST.get().contains(stackableKey)
-				|| !Configuration.OVERRIDE_ALL_SOUP_ITEMS.get() && Configuration.SOUP_ITEM_LIST.get().contains(stackableKey)) {
+		Item item = stack.getItem();
+		if (Configuration.STACKABLE_SOUP_ITEMS.get() && !ModTags.STACKABLE_SOUP_ITEMS.isDefaulted() && !ModTags.UNSTACKABLE_SOUP_ITEMS.isDefaulted()) {
+			if (Configuration.OVERRIDE_ALL_SOUP_ITEMS.get() && !item.isIn(ModTags.UNSTACKABLE_SOUP_ITEMS)
+					|| !Configuration.OVERRIDE_ALL_SOUP_ITEMS.get() && item.isIn(ModTags.STACKABLE_SOUP_ITEMS)) {
 				return 16;
 			}
 		}
@@ -46,7 +40,7 @@ public abstract class SoupItemMixin extends Item {
 	 */
 	@Inject(at = @At(value = "HEAD"), method = "onItemUseFinish", cancellable = true)
 	private void onItemUseFinish(ItemStack stack, World worldIn, LivingEntity subject, CallbackInfoReturnable<ItemStack> cir) {
-		if (Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) {
+		if (Configuration.STACKABLE_SOUP_ITEMS.get()) {
 			ItemStack container = stack.getContainerItem();
 			if (container.isEmpty())
 				container = new ItemStack(Items.BOWL);

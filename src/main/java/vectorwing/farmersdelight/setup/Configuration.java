@@ -27,8 +27,7 @@ public class Configuration
 	public static ForgeConfigSpec.BooleanValue COMFORT_FOOD_TAG_EFFECT;
 	public static ForgeConfigSpec.BooleanValue RABBIT_STEW_JUMP_BOOST;
 	public static ForgeConfigSpec.BooleanValue DISPENSER_TOOLS_CUTTING_BOARD;
-	public static ForgeConfigSpec.BooleanValue ENABLE_STACKABLE_SOUP_ITEMS;
-	public static ForgeConfigSpec.ConfigValue<List<? extends String>> SOUP_ITEM_LIST;
+	public static ForgeConfigSpec.BooleanValue STACKABLE_SOUP_ITEMS;
 	public static ForgeConfigSpec.BooleanValue OVERRIDE_ALL_SOUP_ITEMS;
 
 	public static ForgeConfigSpec.BooleanValue CROPS_ON_SHIPWRECKS;
@@ -68,10 +67,8 @@ public class Configuration
 		DISPENSER_TOOLS_CUTTING_BOARD = COMMON_BUILDER.comment("Should most vanilla tools register a dispenser behavior when facing a Cutting Board?").define("dispenserUsesToolsOnCuttingBoard", true);
 
 		COMMON_BUILDER.comment("Stack size overrides").push(CATEGORY_OVERRIDES_STACK_SIZE);
-		ENABLE_STACKABLE_SOUP_ITEMS = COMMON_BUILDER.comment("Should SoupItems in the following list become stackable to 16, much like Farmer's Delight's meals?").define("enableStackableSoupItems", true);
-		SOUP_ITEM_LIST = COMMON_BUILDER.comment("List of SoupItems. Default: vanilla soups and stews.")
-				.defineList("soupItemList", ImmutableList.of("minecraft:mushroom_stew", "minecraft:beetroot_soup", "minecraft:rabbit_stew"), obj -> true);
-		OVERRIDE_ALL_SOUP_ITEMS = COMMON_BUILDER.comment("Toggle this setting to instead make ALL SoupItems stackable, except the ones on the list (deny-list). This affects items from other mods, so be careful!").define("overrideAllSoupItems", false);
+		STACKABLE_SOUP_ITEMS = COMMON_BUILDER.comment("Should soup items become stackable to 16 like Farmer's Delight's soups & stews?", "By default, this override only affects items inside the `stackable_soup_items` tag, which starts with vanilla bowl foods.").define("stackableSoupItems", true);
+		OVERRIDE_ALL_SOUP_ITEMS = COMMON_BUILDER.comment("The setting below reverses the behavior above, overriding all registered SoupItem's instead. This includes SoupItems from other mods, so be careful!", "If this is enabled, items can be excluded by adding them to the `unstackable_soup_items` tag.").define("overrideAllSoupItems", false);
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.pop();
