@@ -403,7 +403,7 @@ d1d80e0d9ef9182d7bd0658e1c580d5a53fbe4cd data/farmersdelight/recipes/cooked_salm
 4219e6b66daebff54e9655a84014cde15a4002ff data/farmersdelight/recipes/cooking/baked_cod_stew.json
 5487ef144c29c0baecef58aa6906c11166881b89 data/farmersdelight/recipes/cooking/beef_stew.json
 55da08a060663aab4167a25eaa3bd699b19bc75f data/farmersdelight/recipes/cooking/beetroot_soup.json
-b7a3ff73c3edde4fee5615da1edadd3e5aa38e82 data/farmersdelight/recipes/cooking/cabbage_rolls.json
+eb4927ae829860636ba75f2c7daa3e2317e3b03b data/farmersdelight/recipes/cooking/cabbage_rolls.json
 5a968aba48fa9f135ea09a44f175e81d14de1916 data/farmersdelight/recipes/cooking/chicken_soup.json
 3b5ae717fb0d15b9bb848815ea916c43c8f7c755 data/farmersdelight/recipes/cooking/cooked_rice.json
 d38baec4cd3b159dc8cfeebcd9bf7c0177b4e6ae data/farmersdelight/recipes/cooking/dog_food.json
@@ -572,6 +572,7 @@ cde3ff065a827e1fa816c734a18ff3541043301a data/farmersdelight/tags/blocks/unaffec
 8e09f6479e2e3da057594373b46e19b31457cf6e data/farmersdelight/tags/blocks/wild_crops.json
 bbb8f1c1e73a419715b0ecd914fcf9ed5a351795 data/farmersdelight/tags/entity_types/dog_food_users.json
 9a622399d1ef4eaaad8611502cf0dac6fe16fe76 data/farmersdelight/tags/entity_types/horse_feed_users.json
+3f42459ade1f20f53a8057f661dce8bdb8c7c957 data/farmersdelight/tags/items/cabbage_roll_ingredients.json
 7ea039688793f7f36ac4488e5d3c60cbe91bcad6 data/farmersdelight/tags/items/comfort_foods.json
 d69c7f77c9f395881dc13e7fde263d59394c516b data/farmersdelight/tags/items/straw_harvesters.json
 4329b636bcfb42626e8d9e78bd807473ac202e54 data/farmersdelight/tags/items/tools/knives.json
@@ -601,6 +602,7 @@ b9d90fe2e27bab571e8b978f5625adab25c6577d data/forge/tags/items/grain.json
 84658242e246b656c17a83f8ae61757cd86ec28d data/forge/tags/items/milk.json
 cf6b2c1f26e7f70858f5e3d8ebd2e13534bb2142 data/forge/tags/items/milk/milk.json
 faacd61af8b9512622f559f3773debca9dbc28c4 data/forge/tags/items/milk/milk_bottle.json
+1e7f9ff7c197a8dbaf804f3ef04b4dad00ae08aa data/forge/tags/items/mushrooms.json
 dac239fe767410c418abd3c678f156dc98acb391 data/forge/tags/items/pasta.json
 e0ce6bc9884a799621f0e2bcbfa6781e7c1d682e data/forge/tags/items/pasta/raw_pasta.json
 effebdc9d9cb274bf4344f5acdc06830a257a584 data/forge/tags/items/raw_bacon.json

@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:raw_pork",
+    "#forge:raw_fishes",
+    "#forge:raw_chicken",
+    "#forge:raw_beef",
+    "#forge:raw_mutton",
+    "#forge:eggs",
+    "#forge:mushrooms",
+    "minecraft:carrot",
+    "minecraft:potato",
+    "minecraft:beetroot"
+  ]
+}

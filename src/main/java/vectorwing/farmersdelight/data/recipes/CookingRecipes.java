@@ -73,16 +73,7 @@ public class CookingRecipes
 				.build(consumer);
 		CookingPotRecipeBuilder.cookingRecipe(ModItems.CABBAGE_ROLLS.get(), 1, FAST_COOKING_TIME)
 				.addIngredient(ForgeTags.CROPS_CABBAGE)
-				.addIngredient(Ingredient.merge(Sets.newHashSet(
-						Ingredient.fromTag(ForgeTags.RAW_PORK),
-						Ingredient.fromTag(ForgeTags.RAW_FISHES),
-						Ingredient.fromTag(ForgeTags.RAW_CHICKEN),
-						Ingredient.fromTag(ForgeTags.RAW_BEEF),
-						Ingredient.fromTag(ForgeTags.RAW_MUTTON),
-						Ingredient.fromTag(ForgeTags.EGGS),
-						Ingredient.fromTag(Tags.Items.MUSHROOMS),
-						Ingredient.fromItems(Items.CARROT, Items.POTATO, Items.BEETROOT)
-				)))
+				.addIngredient(ModTags.CABBAGE_ROLL_INGREDIENTS)
 				.build(consumer);
 		CookingPotRecipeBuilder.cookingRecipe(ModItems.CHICKEN_SOUP.get(), 1)
 				.addIngredient(ForgeTags.RAW_CHICKEN)
