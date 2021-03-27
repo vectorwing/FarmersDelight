@@ -49,6 +49,7 @@
 			"name": "spoon",
 			"from": [9, 4, 7],
 			"to": [11, 16, 9],
+			"rotation": {"angle": -22.5, "axis": "z", "origin": [10, 8, 8]},
 			"faces": {
 				"north": {"uv": [13, 1, 12, 7], "texture": "#0"},
 				"east": {"uv": [12, 1, 13, 7], "texture": "#0"},
