@@ -423,15 +423,20 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.GLASS_BOTTLE)
 				.addCriterion("has_milk_bucket", InventoryChangeTrigger.Instance.forItems(Items.MILK_BUCKET))
 				.build(consumer);
-		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RAW_PASTA.get())
-				.addIngredient(Ingredient.merge(Sets.newHashSet(
-						Ingredient.fromTag(ForgeTags.EGGS),
-						Ingredient.fromItems(Items.WATER_BUCKET)
-				)))
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RAW_PASTA.get(), 2)
+				.addIngredient(Items.WATER_BUCKET)
+				.addIngredient(Items.WHEAT)
+				.addIngredient(Items.WHEAT)
 				.addIngredient(Items.WHEAT)
 				.addIngredient(Items.WHEAT)
 				.addCriterion("has_wheat", InventoryChangeTrigger.Instance.forItems(Items.WHEAT))
-				.build(consumer);
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "raw_pasta_from_water"));
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RAW_PASTA.get())
+				.addIngredient(ForgeTags.EGGS)
+				.addIngredient(Items.WHEAT)
+				.addIngredient(Items.WHEAT)
+				.addCriterion("has_wheat", InventoryChangeTrigger.Instance.forItems(Items.WHEAT))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "raw_pasta_from_eggs"));
 		ShapedRecipeBuilder.shapedRecipe(ModItems.WHEAT_DOUGH.get(), 3)
 				.patternLine("www")
 				.patternLine(" b ")
