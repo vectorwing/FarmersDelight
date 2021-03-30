@@ -105,7 +105,7 @@ public class CuttingBoardTileEntity extends TileEntity
 		if (irecipe != null) {
 			NonNullList<ItemStack> results = irecipe.getResults();
 			for (ItemStack result : results) {
-				Direction direction = this.getBlockState().get(CuttingBoardBlock.FACING).rotateYCCW();
+				Direction direction = this.getBlockState().get(CuttingBoardBlock.HORIZONTAL_FACING).rotateYCCW();
 				ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5 + (direction.getXOffset() * 0.2), pos.getY() + 0.2, pos.getZ() + 0.5 + (direction.getZOffset() * 0.2), result.copy());
 				entity.setMotion(direction.getXOffset() * 0.2F, 0.0F, direction.getZOffset() * 0.2F);
 				world.addEntity(entity);
