@@ -10,7 +10,6 @@ import net.minecraft.item.*;
 import net.minecraft.item.crafting.CampfireCookingRecipe;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.stats.Stats;
@@ -32,10 +31,9 @@ import java.util.Optional;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class StoveBlock extends Block
+public class StoveBlock extends HorizontalBlock
 {
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
-	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
 	public StoveBlock(AbstractBlock.Properties builder) {
 		super(builder);
@@ -90,7 +88,7 @@ public class StoveBlock extends Block
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(LIT, true);
+		return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite()).with(LIT, true);
 	}
 
 	@Override
@@ -118,7 +116,7 @@ public class StoveBlock extends Block
 	@Override
 	protected void fillStateContainer(final StateContainer.Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
-		builder.add(LIT, FACING);
+		builder.add(LIT, HORIZONTAL_FACING);
 	}
 
 	@OnlyIn(Dist.CLIENT)

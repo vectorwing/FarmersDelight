@@ -283,7 +283,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		}
 		for (int i = 0; i < MEAL_DISPLAY_SLOT; ++i) {
 			if (itemHandler.getStackInSlot(i).hasContainerItem()) {
-				Direction direction = this.getBlockState().get(CookingPotBlock.FACING).rotateYCCW();
+				Direction direction = this.getBlockState().get(CookingPotBlock.HORIZONTAL_FACING).rotateYCCW();
 				double dropX = pos.getX() + 0.5 + (direction.getXOffset() * 0.25);
 				double dropY = pos.getY() + 0.7;
 				double dropZ = pos.getZ() + 0.5 + (direction.getZOffset() * 0.25);
