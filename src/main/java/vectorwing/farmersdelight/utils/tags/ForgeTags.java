@@ -40,8 +40,6 @@ public class ForgeTags
 	public static final ITag.INamedTag<Item> MILK_BUCKET = forgeItemTag("milk/milk");
 	public static final ITag.INamedTag<Item> MILK_BOTTLE = forgeItemTag("milk/milk_bottle");
 
-	public static final ITag.INamedTag<Item> MUSHROOMS = forgeItemTag("mushrooms");
-
 	public static final ITag.INamedTag<Item> PASTA = forgeItemTag("pasta");
 	public static final ITag.INamedTag<Item> PASTA_RAW_PASTA = forgeItemTag("pasta/raw_pasta");
 
