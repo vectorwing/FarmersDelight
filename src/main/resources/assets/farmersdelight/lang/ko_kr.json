@@ -95,7 +95,7 @@
   "item.farmersdelight.melon_popsicle": "수박바",
 
   "item.farmersdelight.earthworm": "지렁이",
-  
+
   "item.farmersdelight.flint_knife": "부싯돌 식칼",
   "item.farmersdelight.iron_knife": "철 식칼",
   "item.farmersdelight.golden_knife": "금 식칼",
@@ -142,7 +142,7 @@
   "item.farmersdelight.honey_glazed_ham": "꿀 바른 햄 요리",
   "block.farmersdelight.shepherds_pie_block": "셰퍼드 파이",
   "item.farmersdelight.shepherds_pie": "셰퍼드 파이를 담은 그릇",
-  
+
   "item.farmersdelight.dog_food": "개밥",
   "item.farmersdelight.horse_feed":  "말먹이",
 
@@ -168,7 +168,7 @@
 
   "farmersdelight.tooltip.dog_food.when_feeding": "개에게 먹였을 때:",
   "farmersdelight.tooltip.horse_feed.when_feeding": "말에게 먹였을 때:",
-  
+
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "맛의 세계가 당신을 기다립니다!",
   "farmersdelight.advancement.craft_knife": "수렵과 채집",
@@ -206,7 +206,7 @@
   "farmersdelight.advancement.use_cutting_board.desc": "도구를 손에 들고, 도마를 사용해 아이템을 잘라 보세요",
   "farmersdelight.advancement.master_chef": "마스터 쉐프",
   "farmersdelight.advancement.master_chef.desc": "가능한 모든 요리를 먹어보세요!",
-  
+
   "block.cooking_pot.boil": "냄비가 끓는 소리",
   "block.cooking_pot.boil.subtitles": "냄비가 끓음",
   "block.cutting_board.knife": "칼 손질",
@@ -218,7 +218,7 @@
 
   "farmersdelight.jei.cooking": "조리",
   "farmersdelight.jei.cutting": "도마",
-   "farmersdelight.jei.decomposition": "분해",
+  "farmersdelight.jei.decomposition": "분해",
   "farmersdelight.jei.decomposition.light": "햇빛에 의해 촉진됨",
   "farmersdelight.jei.decomposition.fluid": "근처 수분에 의해 촉진됨",
   "farmersdelight.jei.decomposition.accelerators": "근처 활성화제에 의해 촉진됨 (아래 참조)",

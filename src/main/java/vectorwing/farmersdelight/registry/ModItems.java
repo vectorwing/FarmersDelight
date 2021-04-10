@@ -22,6 +22,13 @@ public class ModItems
 			() -> new FuelBlockItem(ModBlocks.CUTTING_BOARD.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP), 200));
 	public static final RegistryObject<Item> BASKET = ITEMS.register("basket",
 			() -> new FuelBlockItem(ModBlocks.BASKET.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP), 300));
+
+	public static final RegistryObject<Item> CARROT_CRATE = ITEMS.register("carrot_crate",
+			() -> new BlockItem(ModBlocks.CARROT_CRATE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> POTATO_CRATE = ITEMS.register("potato_crate",
+			() -> new BlockItem(ModBlocks.POTATO_CRATE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> BEETROOT_CRATE = ITEMS.register("beetroot_crate",
+			() -> new BlockItem(ModBlocks.BEETROOT_CRATE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> CABBAGE_CRATE = ITEMS.register("cabbage_crate",
 			() -> new BlockItem(ModBlocks.CABBAGE_CRATE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> TOMATO_CRATE = ITEMS.register("tomato_crate",
@@ -30,6 +37,11 @@ public class ModItems
 			() -> new BlockItem(ModBlocks.ONION_CRATE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> RICE_BALE = ITEMS.register("rice_bale",
 			() -> new BlockItem(ModBlocks.RICE_BALE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> RICE_BAG = ITEMS.register("rice_bag",
+			() -> new BlockItem(ModBlocks.RICE_BAG.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> STRAW_BALE = ITEMS.register("straw_bale",
+			() -> new BlockItem(ModBlocks.STRAW_BALE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+
 	public static final RegistryObject<Item> SAFETY_NET = ITEMS.register("safety_net",
 			() -> new FuelBlockItem(ModBlocks.SAFETY_NET.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP), 200));
 	public static final RegistryObject<Item> OAK_PANTRY = ITEMS.register("oak_pantry",
@@ -65,15 +77,15 @@ public class ModItems
 
 	// Tools
 	public static final RegistryObject<Item> FLINT_KNIFE = ITEMS.register("flint_knife",
-			() -> new KnifeItem(ItemTier.STONE, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+			() -> new KnifeItem(ModMaterials.FLINT, 0.5F, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> IRON_KNIFE = ITEMS.register("iron_knife",
-			() -> new KnifeItem(ItemTier.IRON, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+			() -> new KnifeItem(ItemTier.IRON, 0.5F, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> DIAMOND_KNIFE = ITEMS.register("diamond_knife",
-			() -> new KnifeItem(ItemTier.DIAMOND, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+			() -> new KnifeItem(ItemTier.DIAMOND, 0.5F, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> NETHERITE_KNIFE = ITEMS.register("netherite_knife",
-			() -> new KnifeItem(ItemTier.NETHERITE, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP).isImmuneToFire()));
+			() -> new KnifeItem(ItemTier.NETHERITE, 0.5F, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP).isImmuneToFire()));
 	public static final RegistryObject<Item> GOLDEN_KNIFE = ITEMS.register("golden_knife",
-			() -> new KnifeItem(ItemTier.GOLD, 1, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+			() -> new KnifeItem(ItemTier.GOLD, 0.5F, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> STRAW = ITEMS.register("straw", () -> new FuelItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> CANVAS = ITEMS.register("canvas", () -> new FuelItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), 400));
@@ -94,6 +106,11 @@ public class ModItems
 			() -> new BlockItem(ModBlocks.WILD_BEETROOTS.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> WILD_RICE = ITEMS.register("wild_rice",
 			() -> new TallBlockItem(ModBlocks.WILD_RICE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+
+	public static final RegistryObject<Item> BROWN_MUSHROOM_COLONY = ITEMS.register("brown_mushroom_colony",
+			() -> new MushroomColonyItem(ModBlocks.BROWN_MUSHROOM_COLONY.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> RED_MUSHROOM_COLONY = ITEMS.register("red_mushroom_colony",
+			() -> new MushroomColonyItem(ModBlocks.RED_MUSHROOM_COLONY.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
 	// Basic Crops
 	public static final RegistryObject<Item> CABBAGE = ITEMS.register("cabbage",
@@ -116,6 +133,8 @@ public class ModItems
 			() -> new HotCocoaItem(new Item.Properties().containerItem(Items.GLASS_BOTTLE).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> TOMATO_SAUCE = ITEMS.register("tomato_sauce",
 			() -> new ConsumableItem(new Item.Properties().food(Foods.TOMATO_SAUCE).containerItem(Items.BOWL).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> WHEAT_DOUGH = ITEMS.register("wheat_dough",
+			() -> new Item(new Item.Properties().food(Foods.WHEAT_DOUGH).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> RAW_PASTA = ITEMS.register("raw_pasta",
 			() -> new Item(new Item.Properties().food(Foods.RAW_PASTA).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> PUMPKIN_SLICE = ITEMS.register("pumpkin_slice",
@@ -130,6 +149,10 @@ public class ModItems
 			() -> new Item(new Item.Properties().food(Foods.CHICKEN_CUTS).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> COOKED_CHICKEN_CUTS = ITEMS.register("cooked_chicken_cuts",
 			() -> new Item(new Item.Properties().food(Foods.COOKED_CHICKEN_CUTS).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> BACON = ITEMS.register("bacon",
+			() -> new Item(new Item.Properties().food(Foods.BACON).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> COOKED_BACON = ITEMS.register("cooked_bacon",
+			() -> new Item(new Item.Properties().food(Foods.COOKED_BACON).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> COD_SLICE = ITEMS.register("cod_slice",
 			() -> new Item(new Item.Properties().food(Foods.COD_SLICE).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> COOKED_COD_SLICE = ITEMS.register("cooked_cod_slice",
@@ -138,6 +161,14 @@ public class ModItems
 			() -> new Item(new Item.Properties().food(Foods.SALMON_SLICE).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> COOKED_SALMON_SLICE = ITEMS.register("cooked_salmon_slice",
 			() -> new Item(new Item.Properties().food(Foods.COOKED_SALMON_SLICE).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> MUTTON_CHOPS = ITEMS.register("mutton_chops",
+			() -> new Item(new Item.Properties().food(Foods.MUTTON_CHOP).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> COOKED_MUTTON_CHOPS = ITEMS.register("cooked_mutton_chops",
+			() -> new Item(new Item.Properties().food(Foods.COOKED_MUTTON_CHOP).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> HAM = ITEMS.register("ham",
+			() -> new Item(new Item.Properties().food(Foods.HAM).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> SMOKED_HAM = ITEMS.register("smoked_ham",
+			() -> new Item(new Item.Properties().food(Foods.SMOKED_HAM).group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> PIE_CRUST = ITEMS.register("pie_crust",
 			() -> new Item(new Item.Properties().food(Foods.PIE_CRUST).group(FarmersDelight.ITEM_GROUP)));
@@ -159,6 +190,10 @@ public class ModItems
 			() -> new Item(new Item.Properties().food(Foods.COOKIES).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> HONEY_COOKIE = ITEMS.register("honey_cookie",
 			() -> new Item(new Item.Properties().food(Foods.COOKIES).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> MELON_POPSICLE = ITEMS.register("melon_popsicle",
+			() -> new Item(new Item.Properties().food(Foods.POPSICLE).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> FRUIT_SALAD = ITEMS.register("fruit_salad",
+			() -> new ConsumableItem(new Item.Properties().food(Foods.FRUIT_SALAD).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> MIXED_SALAD = ITEMS.register("mixed_salad",
 			() -> new ConsumableItem(new Item.Properties().food(Foods.MIXED_SALAD).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
@@ -172,12 +207,16 @@ public class ModItems
 			() -> new Item(new Item.Properties().food(Foods.CHICKEN_SANDWICH).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> HAMBURGER = ITEMS.register("hamburger",
 			() -> new Item(new Item.Properties().food(Foods.HAMBURGER).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> BACON_SANDWICH = ITEMS.register("bacon_sandwich",
+			() -> new Item(new Item.Properties().food(Foods.BACON_SANDWICH).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> MUTTON_WRAP = ITEMS.register("mutton_wrap",
+			() -> new Item(new Item.Properties().food(Foods.MUTTON_WRAP).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> DUMPLINGS = ITEMS.register("dumplings",
 			() -> new Item(new Item.Properties().food(Foods.DUMPLINGS).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> STUFFED_POTATO = ITEMS.register("stuffed_potato",
 			() -> new Item(new Item.Properties().food(Foods.STUFFED_POTATO).group(FarmersDelight.ITEM_GROUP)));
-	public static final RegistryObject<Item> STUFFED_PUMPKIN = ITEMS.register("stuffed_pumpkin",
-			() -> new Item(new Item.Properties().food(Foods.STUFFED_PUMPKIN).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> CABBAGE_ROLLS = ITEMS.register("cabbage_rolls",
+			() -> new Item(new Item.Properties().food(Foods.CABBAGE_ROLLS).group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> COOKED_RICE = ITEMS.register("cooked_rice",
 			() -> new ConsumableItem(new Item.Properties().food(Foods.COOKED_RICE).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
@@ -195,19 +234,19 @@ public class ModItems
 			() -> new ConsumableItem(new Item.Properties().food(Foods.PUMPKIN_SOUP).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> BAKED_COD_STEW = ITEMS.register("baked_cod_stew",
 			() -> new ConsumableItem(new Item.Properties().food(Foods.BAKED_COD_STEW).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> NOODLE_SOUP = ITEMS.register("noodle_soup",
+			() -> new ConsumableItem(new Item.Properties().food(Foods.NOODLE_SOUP).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 
-	public static final RegistryObject<Item> HONEY_GLAZED_HAM = ITEMS.register("honey_glazed_ham",
-			() -> new ConsumableItem(new Item.Properties().food(Foods.HONEY_GLAZED_HAM).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> PASTA_WITH_MEATBALLS = ITEMS.register("pasta_with_meatballs",
 			() -> new ConsumableItem(new Item.Properties().food(Foods.PASTA_WITH_MEATBALLS).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> PASTA_WITH_MUTTON_CHOP = ITEMS.register("pasta_with_mutton_chop",
 			() -> new ConsumableItem(new Item.Properties().food(Foods.PASTA_WITH_MUTTON_CHOP).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> ROASTED_MUTTON_CHOPS = ITEMS.register("roasted_mutton_chops",
+			() -> new ConsumableItem(new Item.Properties().food(Foods.ROASTED_MUTTON_CHOPS).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> VEGETABLE_NOODLES = ITEMS.register("vegetable_noodles",
 			() -> new ConsumableItem(new Item.Properties().food(Foods.VEGETABLE_NOODLES).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> STEAK_AND_POTATOES = ITEMS.register("steak_and_potatoes",
 			() -> new ConsumableItem(new Item.Properties().food(Foods.STEAK_AND_POTATOES).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
-	public static final RegistryObject<Item> SHEPHERDS_PIE = ITEMS.register("shepherds_pie",
-			() -> new ConsumableItem(new Item.Properties().food(Foods.SHEPHERDS_PIE).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> RATATOUILLE = ITEMS.register("ratatouille",
 			() -> new ConsumableItem(new Item.Properties().food(Foods.RATATOUILLE).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> SQUID_INK_PASTA = ITEMS.register("squid_ink_pasta",
@@ -215,6 +254,22 @@ public class ModItems
 	public static final RegistryObject<Item> GRILLED_SALMON = ITEMS.register("grilled_salmon",
 			() -> new ConsumableItem(new Item.Properties().food(Foods.GRILLED_SALMON).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 
+	public static final RegistryObject<Item> ROAST_CHICKEN_BLOCK = ITEMS.register("roast_chicken_block",
+			() -> new BlockItem(ModBlocks.ROAST_CHICKEN_BLOCK.get(), new Item.Properties().maxStackSize(1).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> ROAST_CHICKEN = ITEMS.register("roast_chicken",
+			() -> new ConsumableItem(new Item.Properties().food(Foods.ROAST_CHICKEN).maxStackSize(16).containerItem(Items.BOWL).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> STUFFED_PUMPKIN_BLOCK = ITEMS.register("stuffed_pumpkin_block",
+			() -> new BlockItem(ModBlocks.STUFFED_PUMPKIN_BLOCK.get(), new Item.Properties().maxStackSize(1).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> STUFFED_PUMPKIN = ITEMS.register("stuffed_pumpkin",
+			() -> new ConsumableItem(new Item.Properties().food(Foods.STUFFED_PUMPKIN).maxStackSize(16).containerItem(Items.BOWL).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> HONEY_GLAZED_HAM_BLOCK = ITEMS.register("honey_glazed_ham_block",
+			() -> new BlockItem(ModBlocks.HONEY_GLAZED_HAM_BLOCK.get(), new Item.Properties().maxStackSize(1).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> HONEY_GLAZED_HAM = ITEMS.register("honey_glazed_ham",
+			() -> new ConsumableItem(new Item.Properties().food(Foods.HONEY_GLAZED_HAM).maxStackSize(16).containerItem(Items.BOWL).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> SHEPHERDS_PIE_BLOCK = ITEMS.register("shepherds_pie_block",
+			() -> new BlockItem(ModBlocks.SHEPHERDS_PIE_BLOCK.get(), new Item.Properties().maxStackSize(1).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> SHEPHERDS_PIE = ITEMS.register("shepherds_pie",
+			() -> new ConsumableItem(new Item.Properties().food(Foods.SHEPHERDS_PIE).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> DOG_FOOD = ITEMS.register("dog_food",
 			() -> new DogFoodItem(new Item.Properties().food(Foods.DOG_FOOD).containerItem(Items.BOWL).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));

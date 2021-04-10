@@ -1,9 +1,13 @@
 package vectorwing.farmersdelight.setup;
 
+import com.google.common.collect.ImmutableList;
+import net.minecraft.item.Items;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+
+import java.util.List;
 
 @Mod.EventBusSubscriber
 public class Configuration
@@ -14,12 +18,19 @@ public class Configuration
 	// COMMON
 	public static final String CATEGORY_SETTINGS = "settings";
 	public static final String CATEGORY_OVERRIDES = "overrides";
+	public static final String CATEGORY_OVERRIDES_STACK_SIZE = "stack_size";
 	public static final String CATEGORY_WORLD = "world";
 
+	public static ForgeConfigSpec.BooleanValue ENABLE_VANILLA_CROP_CRATES;
 	public static ForgeConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS;
+
 	public static ForgeConfigSpec.BooleanValue COMFORT_FOOD_TAG_EFFECT;
 	public static ForgeConfigSpec.BooleanValue RABBIT_STEW_JUMP_BOOST;
 	public static ForgeConfigSpec.BooleanValue DISPENSER_TOOLS_CUTTING_BOARD;
+	public static ForgeConfigSpec.BooleanValue ENABLE_STACKABLE_SOUP_ITEMS;
+	public static ForgeConfigSpec.ConfigValue<List<? extends String>> SOUP_ITEM_LIST;
+	public static ForgeConfigSpec.BooleanValue OVERRIDE_ALL_SOUP_ITEMS;
+
 	public static ForgeConfigSpec.BooleanValue CROPS_ON_SHIPWRECKS;
 	public static ForgeConfigSpec.BooleanValue CROPS_ON_VILLAGE_HOUSES;
 	public static ForgeConfigSpec.BooleanValue GENERATE_VILLAGE_COMPOST_HEAPS;
@@ -47,6 +58,7 @@ public class Configuration
 		ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
 
 		COMMON_BUILDER.comment("Game settings").push(CATEGORY_SETTINGS);
+		ENABLE_VANILLA_CROP_CRATES = COMMON_BUILDER.comment("Farmer's Delight adds crates (3x3) for vanilla crops, similar to Quark and Thermal Cultivation. Should they be craftable?").define("enableVanillaCropCrates", true);
 		FARMERS_BUY_FD_CROPS = COMMON_BUILDER.comment("Should Novice and Apprentice Farmers buy this mod's crops? (May reduce chances of other trades appearing)").define("farmersBuyFDCrops", true);
 		COMMON_BUILDER.pop();
 
@@ -54,6 +66,14 @@ public class Configuration
 		COMFORT_FOOD_TAG_EFFECT = COMMON_BUILDER.comment("Should items inside the tag 'farmersdelight:comfort_foods' grant 5 minutes of Comfort when eaten? (defaults to vanilla SoupItems)").define("comfortFoodTagEffect", true);
 		RABBIT_STEW_JUMP_BOOST = COMMON_BUILDER.comment("Should Rabbit Stew grant users the jumping prowess of a rabbit when eaten?").define("rabbitStewJumpBoost", true);
 		DISPENSER_TOOLS_CUTTING_BOARD = COMMON_BUILDER.comment("Should most vanilla tools register a dispenser behavior when facing a Cutting Board?").define("dispenserUsesToolsOnCuttingBoard", true);
+
+		COMMON_BUILDER.comment("Stack size overrides").push(CATEGORY_OVERRIDES_STACK_SIZE);
+		ENABLE_STACKABLE_SOUP_ITEMS = COMMON_BUILDER.comment("Should SoupItems in the following list become stackable to 16, much like Farmer's Delight's meals?").define("enableStackableSoupItems", true);
+		SOUP_ITEM_LIST = COMMON_BUILDER.comment("List of SoupItems. Default: vanilla soups and stews.")
+				.defineList("soupItemList", ImmutableList.of("minecraft:mushroom_stew", "minecraft:beetroot_soup", "minecraft:rabbit_stew"), obj -> true);
+		OVERRIDE_ALL_SOUP_ITEMS = COMMON_BUILDER.comment("Toggle this setting to instead make ALL SoupItems stackable, except the ones on the list (deny-list). This affects items from other mods, so be careful!").define("overrideAllSoupItems", false);
+		COMMON_BUILDER.pop();
+
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("World generation").push(CATEGORY_WORLD);

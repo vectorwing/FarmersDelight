@@ -10,7 +10,7 @@
     "description": {
       "translate": "farmersdelight.advancement.get_rich_soil.desc"
     },
-    "frame": "task",
+    "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false

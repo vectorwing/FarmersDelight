@@ -24,6 +24,8 @@ public class ItemTags extends ItemTagsProvider
 		copy(BlockTags.CARPETS, net.minecraft.tags.ItemTags.CARPETS);
 		copy(BlockTags.SMALL_FLOWERS, net.minecraft.tags.ItemTags.SMALL_FLOWERS);
 
+		getOrCreateBuilder(net.minecraft.tags.ItemTags.PIGLIN_LOVED).add(ModItems.GOLDEN_KNIFE.get());
+
 		this.registerModTags();
 		this.registerForgeTags();
 	}
@@ -33,7 +35,7 @@ public class ItemTags extends ItemTagsProvider
 		getOrCreateBuilder(ModTags.KNIVES).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get());
 		getOrCreateBuilder(ModTags.STRAW_HARVESTERS).addTag(ModTags.KNIVES);
 		getOrCreateBuilder(ModTags.COMFORT_FOODS).add(Items.MUSHROOM_STEW, Items.BEETROOT_SOUP, Items.RABBIT_STEW);
-		getOrCreateBuilder(ModTags.WOLF_PREY).addTag(ForgeTags.RAW_CHICKEN).add(Items.MUTTON, Items.RABBIT);
+		getOrCreateBuilder(ModTags.WOLF_PREY).addTag(ForgeTags.RAW_CHICKEN).addTag(ForgeTags.RAW_MUTTON).add(Items.RABBIT);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -41,8 +43,12 @@ public class ItemTags extends ItemTagsProvider
 		getOrCreateBuilder(ForgeTags.BREAD).addTag(ForgeTags.BREAD_WHEAT);
 		getOrCreateBuilder(ForgeTags.BREAD_WHEAT).add(Items.BREAD);
 
+		getOrCreateBuilder(ForgeTags.COOKED_BACON).add(ModItems.COOKED_BACON.get());
+
 		getOrCreateBuilder(ForgeTags.COOKED_BEEF).add(Items.COOKED_BEEF, ModItems.BEEF_PATTY.get());
 		getOrCreateBuilder(ForgeTags.COOKED_CHICKEN).add(Items.COOKED_CHICKEN, ModItems.COOKED_CHICKEN_CUTS.get());
+		getOrCreateBuilder(ForgeTags.COOKED_PORK).add(Items.COOKED_PORKCHOP, ModItems.COOKED_BACON.get());
+		getOrCreateBuilder(ForgeTags.COOKED_MUTTON).add(Items.COOKED_MUTTON, ModItems.COOKED_MUTTON_CHOPS.get());
 		getOrCreateBuilder(ForgeTags.COOKED_EGGS).add(ModItems.FRIED_EGG.get());
 
 		getOrCreateBuilder(ForgeTags.COOKED_FISHES).addTags(ForgeTags.COOKED_FISHES_COD, ForgeTags.COOKED_FISHES_SALMON);
@@ -55,6 +61,8 @@ public class ItemTags extends ItemTagsProvider
 		getOrCreateBuilder(ForgeTags.CROPS_RICE).add(ModItems.RICE.get());
 		getOrCreateBuilder(ForgeTags.CROPS_TOMATO).add(ModItems.TOMATO.get());
 
+		getOrCreateBuilder(ForgeTags.EGGS).add(Items.EGG);
+
 		getOrCreateBuilder(ForgeTags.GRAIN).addTags(ForgeTags.GRAIN_WHEAT, ForgeTags.GRAIN_RICE);
 		getOrCreateBuilder(ForgeTags.GRAIN_WHEAT).add(Items.WHEAT);
 		getOrCreateBuilder(ForgeTags.GRAIN_RICE).add(ModItems.RICE.get());
@@ -66,8 +74,11 @@ public class ItemTags extends ItemTagsProvider
 		getOrCreateBuilder(ForgeTags.PASTA).addTags(ForgeTags.PASTA_RAW_PASTA);
 		getOrCreateBuilder(ForgeTags.PASTA_RAW_PASTA).add(ModItems.RAW_PASTA.get());
 
+		getOrCreateBuilder(ForgeTags.RAW_BACON).add(ModItems.BACON.get());
 		getOrCreateBuilder(ForgeTags.RAW_BEEF).add(Items.BEEF, ModItems.MINCED_BEEF.get());
 		getOrCreateBuilder(ForgeTags.RAW_CHICKEN).add(Items.CHICKEN, ModItems.CHICKEN_CUTS.get());
+		getOrCreateBuilder(ForgeTags.RAW_PORK).add(Items.PORKCHOP, ModItems.BACON.get());
+		getOrCreateBuilder(ForgeTags.RAW_MUTTON).add(Items.MUTTON, ModItems.MUTTON_CHOPS.get());
 
 		getOrCreateBuilder(ForgeTags.RAW_FISHES).addTags(ForgeTags.RAW_FISHES_COD, ForgeTags.RAW_FISHES_SALMON, ForgeTags.RAW_FISHES_TROPICAL);
 		getOrCreateBuilder(ForgeTags.RAW_FISHES_COD).add(Items.COD, ModItems.COD_SLICE.get());

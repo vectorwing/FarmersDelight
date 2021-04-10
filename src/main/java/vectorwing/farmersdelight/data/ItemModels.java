@@ -22,6 +22,7 @@ public class ItemModels extends ItemModelProvider
 {
 	public static final String GENERATED = "item/generated";
 	public static final String HANDHELD = "item/handheld";
+	public static final ResourceLocation MUG = new ResourceLocation(FarmersDelight.MODID, "item/mug");
 
 	public ItemModels(DataGenerator generator, ExistingFileHelper existingFileHelper) {
 		super(generator, FarmersDelight.MODID, existingFileHelper);
@@ -35,6 +36,15 @@ public class ItemModels extends ItemModelProvider
 		// Specific cases
 		itemGeneratedModel(ModItems.WILD_RICE.get(), resourceBlock(itemName(ModItems.WILD_RICE.get()) + "_top"));
 		items.remove(ModItems.WILD_RICE.get());
+
+		itemGeneratedModel(ModItems.BROWN_MUSHROOM_COLONY.get(), resourceBlock(itemName(ModItems.BROWN_MUSHROOM_COLONY.get()) + "_stage3"));
+		items.remove(ModItems.BROWN_MUSHROOM_COLONY.get());
+
+		itemGeneratedModel(ModItems.RED_MUSHROOM_COLONY.get(), resourceBlock(itemName(ModItems.RED_MUSHROOM_COLONY.get()) + "_stage3"));
+		items.remove(ModItems.RED_MUSHROOM_COLONY.get());
+
+		itemMugModel(ModItems.HOT_COCOA.get(), resourceItem(itemName(ModItems.HOT_COCOA.get())));
+		items.remove(ModItems.HOT_COCOA.get());
 
 		blockBasedModel(ModItems.TATAMI.get(), "_half");
 		items.remove(ModItems.TATAMI.get());
@@ -53,7 +63,11 @@ public class ItemModels extends ItemModelProvider
 				ModItems.CABBAGE_SEEDS.get(),
 				ModItems.TOMATO_SEEDS.get(),
 				ModItems.ONION.get(),
-				ModItems.RICE.get()
+				ModItems.RICE.get(),
+				ModItems.ROAST_CHICKEN_BLOCK.get(),
+				ModItems.STUFFED_PUMPKIN_BLOCK.get(),
+				ModItems.HONEY_GLAZED_HAM_BLOCK.get(),
+				ModItems.SHEPHERDS_PIE_BLOCK.get()
 		);
 		takeAll(items, spriteBlockItems.toArray(new Item[0])).forEach(item -> withExistingParent(itemName(item), GENERATED).texture("layer0", resourceItem(itemName(item))));
 
@@ -75,6 +89,8 @@ public class ItemModels extends ItemModelProvider
 		// Handheld items
 		Set<Item> handheldItems = Sets.newHashSet(
 				ModItems.BARBECUE_STICK.get(),
+				ModItems.HAM.get(),
+				ModItems.SMOKED_HAM.get(),
 				ModItems.FLINT_KNIFE.get(),
 				ModItems.IRON_KNIFE.get(),
 				ModItems.DIAMOND_KNIFE.get(),
@@ -97,6 +113,10 @@ public class ItemModels extends ItemModelProvider
 
 	public void itemGeneratedModel(Item item, ResourceLocation texture) {
 		withExistingParent(itemName(item), GENERATED).texture("layer0", texture);
+	}
+
+	public void itemMugModel(Item item, ResourceLocation texture) {
+		withExistingParent(itemName(item), MUG).texture("layer0", texture);
 	}
 
 	private String itemName(Item item) {

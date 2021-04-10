@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:roast_chicken_block"
+    ]
+  },
+  "criteria": {
+    "has_cooked_chicken": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:cooked_chicken"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:roast_chicken_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cooked_chicken",
+      "has_the_recipe"
+    ]
+  ]
+}

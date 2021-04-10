@@ -2,6 +2,8 @@ package vectorwing.farmersdelight.blocks;
 
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.monster.piglin.PiglinTasks;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -11,6 +13,7 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -57,6 +60,33 @@ public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable, I
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
 		worldIn.setBlockState(pos.up(), this.getDefaultState().with(WATERLOGGED, false).with(HALF, DoubleBlockHalf.UPPER), 3);
+	}
+
+	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+		if (!worldIn.isRemote) {
+			if (player.isCreative()) {
+				removeBottomHalf(worldIn, pos, state, player);
+			} else {
+				spawnDrops(state, worldIn, pos, null, player, player.getHeldItemMainhand());
+			}
+		}
+
+		worldIn.playEvent(player, 2001, pos, getStateId(state));
+		if (this.isIn(BlockTags.GUARDED_BY_PIGLINS)) {
+			PiglinTasks.func_234478_a_(player, false);
+		}
+	}
+
+	protected static void removeBottomHalf(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+		DoubleBlockHalf half = state.get(HALF);
+		if (half == DoubleBlockHalf.UPPER) {
+			BlockPos floorPos = pos.down();
+			BlockState floorState = world.getBlockState(floorPos);
+			if (floorState.getBlock() == state.getBlock() && floorState.get(HALF) == DoubleBlockHalf.LOWER) {
+				world.setBlockState(floorPos, Blocks.WATER.getDefaultState(), 35);
+				world.playEvent(player, 2001, floorPos, Block.getStateId(floorState));
+			}
+		}
 	}
 
 	@Override

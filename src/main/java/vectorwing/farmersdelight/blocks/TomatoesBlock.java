@@ -25,6 +25,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.PlantType;
 import vectorwing.farmersdelight.registry.ModItems;
 
 import java.util.Random;
@@ -138,6 +139,11 @@ public class TomatoesBlock extends BushBlock implements IGrowable
 	}
 
 	@Override
+	public PlantType getPlantType(IBlockReader world, BlockPos pos) {
+		return PlantType.CROP;
+	}
+
+	@Override
 	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return !this.isMaxAge(state);
 	}
@@ -160,11 +166,11 @@ public class TomatoesBlock extends BushBlock implements IGrowable
 
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		int i = state.get(AGE);
-		boolean flag = i == TOMATO_BEARING_AGE;
-		if (!flag && player.getHeldItem(handIn).getItem() == Items.BONE_MEAL) {
+		int age = state.get(AGE);
+		boolean isMature = age == TOMATO_BEARING_AGE;
+		if (!isMature && player.getHeldItem(handIn).getItem() == Items.BONE_MEAL) {
 			return ActionResultType.PASS;
-		} else if (flag) {
+		} else if (isMature) {
 			int j = 1 + worldIn.rand.nextInt(2);
 			spawnAsEntity(worldIn, pos, new ItemStack(ModItems.TOMATO.get(), j));
 			worldIn.playSound(null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);

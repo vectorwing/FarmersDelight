@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -27,6 +28,7 @@ import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.registry.ModParticleTypes;
 import vectorwing.farmersdelight.utils.MathUtils;
 import vectorwing.farmersdelight.utils.TextUtils;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -52,20 +54,22 @@ public class DogFoodItem extends ConsumableItem
 			Entity target = event.getTarget();
 			ItemStack itemStack = event.getItemStack();
 
-			if (target instanceof WolfEntity) {
-				WolfEntity wolf = (WolfEntity) target;
-				if (wolf.isAlive() && wolf.isTamed() && itemStack.getItem().equals(ModItems.DOG_FOOD.get())) {
-					wolf.setHealth(wolf.getMaxHealth());
+			if (target instanceof LivingEntity && ModTags.DOG_FOOD_USERS.contains(target.getType())) {
+				LivingEntity entity = (LivingEntity) target;
+				boolean isTameable = entity instanceof TameableEntity;
+
+				if (entity.isAlive() && (!isTameable || ((TameableEntity) entity).isTamed()) && itemStack.getItem().equals(ModItems.DOG_FOOD.get())) {
+					entity.setHealth(entity.getMaxHealth());
 					for (EffectInstance effect : EFFECTS) {
-						wolf.addPotionEffect(new EffectInstance(effect));
+						entity.addPotionEffect(new EffectInstance(effect));
 					}
-					wolf.world.playSound(null, target.getPosition(), SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.PLAYERS, 0.8F, 0.8F);
+					entity.world.playSound(null, target.getPosition(), SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.PLAYERS, 0.8F, 0.8F);
 
 					for (int i = 0; i < 5; ++i) {
 						double d0 = MathUtils.RAND.nextGaussian() * 0.02D;
 						double d1 = MathUtils.RAND.nextGaussian() * 0.02D;
 						double d2 = MathUtils.RAND.nextGaussian() * 0.02D;
-						wolf.world.addParticle(ModParticleTypes.STAR_PARTICLE.get(), wolf.getPosXRandom(1.0D), wolf.getPosYRandom() + 0.5D, wolf.getPosZRandom(1.0D), d0, d1, d2);
+						entity.world.addParticle(ModParticleTypes.STAR_PARTICLE.get(), entity.getPosXRandom(1.0D), entity.getPosYRandom() + 0.5D, entity.getPosZRandom(1.0D), d0, d1, d2);
 					}
 
 					if (itemStack.getContainerItem() != ItemStack.EMPTY && !player.isCreative()) {

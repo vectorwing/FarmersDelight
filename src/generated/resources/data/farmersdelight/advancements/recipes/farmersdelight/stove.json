@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "campfire": {
+    "has_campfire": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "campfire",
+      "has_campfire",
       "has_the_recipe"
     ]
   ]

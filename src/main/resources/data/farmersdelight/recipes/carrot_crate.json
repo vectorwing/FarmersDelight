@@ -1,0 +1,21 @@
+{
+  "conditions": [
+    {
+      "type": "farmersdelight:vanilla_crates_enabled"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:carrot"
+    }
+  },
+  "result": {
+    "item": "farmersdelight:carrot_crate"
+  }
+}

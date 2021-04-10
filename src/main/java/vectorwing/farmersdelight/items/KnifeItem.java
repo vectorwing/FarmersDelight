@@ -1,10 +1,8 @@
 package vectorwing.farmersdelight.items;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.CarvedPumpkinBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
@@ -12,24 +10,38 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.*;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.common.ToolType;
+import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
+import javax.annotation.Nonnull;
 import java.util.Set;
 
 public class KnifeItem extends ToolItem
 {
-	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.HAY_BLOCK, ModBlocks.RICE_BALE.get());
+	public static final ToolType KNIFE_TOOL = ToolType.get(FarmersDelight.MODID + "_knife");
+
+	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet();
 
 	public KnifeItem(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties properties) {
 		super(attackDamageIn, attackSpeedIn, tier, EFFECTIVE_ON, properties);
+	}
+
+	@Nonnull
+	@Override
+	public Set<ToolType> getToolTypes(ItemStack stack) {
+		return ImmutableSet.of(KNIFE_TOOL);
 	}
 
 	@Override
@@ -39,8 +51,7 @@ public class KnifeItem extends ToolItem
 		return material != Material.WOOL
 				&& material != Material.CARPET
 				&& material != Material.CAKE
-				&& material != Material.WEB
-				&& material != Material.LEAVES ? super.getDestroySpeed(stack, state) : this.efficiency;
+				&& material != Material.WEB ? super.getDestroySpeed(stack, state) : this.efficiency;
 	}
 
 	@Override
@@ -52,6 +63,43 @@ public class KnifeItem extends ToolItem
 	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 		stack.damageItem(1, attacker, (user) -> user.sendBreakAnimation(EquipmentSlotType.MAINHAND));
 		return true;
+	}
+
+	@Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+	public static class KnifeEvents
+	{
+		@SubscribeEvent
+		public static void onKnifeKnockback(LivingKnockBackEvent event) {
+			LivingEntity attacker = event.getEntityLiving().getAttackingEntity();
+			ItemStack tool = attacker != null ? attacker.getHeldItem(Hand.MAIN_HAND) : ItemStack.EMPTY;
+			if (tool.getItem() instanceof KnifeItem) {
+				float f = event.getOriginalStrength();
+				event.setStrength(event.getOriginalStrength() - 0.1F);
+			}
+		}
+
+		@SubscribeEvent
+		@SuppressWarnings("unused")
+		public static void onCakeInteraction(PlayerInteractEvent.RightClickBlock event) {
+			World world = event.getWorld();
+			BlockPos pos = event.getPos();
+			BlockState state = event.getWorld().getBlockState(pos);
+			ItemStack tool = event.getPlayer().getHeldItem(event.getHand());
+
+			if (state.getBlock() == Blocks.CAKE && ModTags.KNIVES.contains(tool.getItem())) {
+				int bites = state.get(CakeBlock.BITES);
+				if (bites < 6) {
+					world.setBlockState(pos, state.with(CakeBlock.BITES, bites + 1), 3);
+				} else {
+					world.removeBlock(pos, false);
+				}
+				InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ModItems.CAKE_SLICE.get()));
+				world.playSound(null, pos, SoundEvents.BLOCK_WOOL_BREAK, SoundCategory.PLAYERS, 0.8F, 0.8F);
+
+				event.setCancellationResult(ActionResultType.SUCCESS);
+				event.setCanceled(true);
+			}
+		}
 	}
 
 	public ActionResultType onItemUse(ItemUseContext context) {
@@ -70,9 +118,7 @@ public class KnifeItem extends ToolItem
 				ItemEntity itemEntity = new ItemEntity(world, (double) pos.getX() + 0.5D + (double) direction.getXOffset() * 0.65D, (double) pos.getY() + 0.1D, (double) pos.getZ() + 0.5D + (double) direction.getZOffset() * 0.65D, new ItemStack(Items.PUMPKIN_SEEDS, 4));
 				itemEntity.setMotion(0.05D * (double) direction.getXOffset() + world.rand.nextDouble() * 0.02D, 0.05D, 0.05D * (double) direction.getZOffset() + world.rand.nextDouble() * 0.02D);
 				world.addEntity(itemEntity);
-				tool.damageItem(1, player, (playerIn) -> {
-					playerIn.sendBreakAnimation(context.getHand());
-				});
+				tool.damageItem(1, player, (playerIn) -> playerIn.sendBreakAnimation(context.getHand()));
 			}
 			return ActionResultType.func_233537_a_(world.isRemote);
 		} else {

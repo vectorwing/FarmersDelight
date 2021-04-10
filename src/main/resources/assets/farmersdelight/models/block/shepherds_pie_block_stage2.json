@@ -1,0 +1,39 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"particle": "farmersdelight:block/shepherds_pie_top",
+		"top": "farmersdelight:block/shepherds_pie_top",
+		"side": "farmersdelight:block/shepherds_pie_side",
+		"tray_side": "farmersdelight:block/tray_bottom",
+		"inner": "farmersdelight:block/shepherds_pie_inner",
+		"tray_top": "farmersdelight:block/tray_pie_leftover"
+	},
+	"elements": [
+		{
+			"name": "plate",
+			"from": [1, 0, 1],
+			"to": [15, 2, 15],
+			"faces": {
+				"north": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"east": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"south": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"west": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#tray_top"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#tray_side", "cullface": "down"}
+			}
+		},
+		{
+			"name": "pie",
+			"from": [2, 2, 8],
+			"to": [14, 8, 14],
+			"faces": {
+				"north": {"uv": [2, 10, 14, 16], "texture": "#inner"},
+				"east": {"uv": [2, 10, 8, 16], "texture": "#side"},
+				"south": {"uv": [2, 10, 14, 16], "texture": "#side"},
+				"west": {"uv": [8, 10, 14, 16], "texture": "#side"},
+				"up": {"uv": [2, 8, 14, 14], "texture": "#top"}
+			}
+		}
+	]
+}

@@ -1,9 +1,6 @@
 package vectorwing.farmersdelight.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.IWaterLoggable;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
@@ -16,7 +13,6 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
@@ -48,9 +44,8 @@ import java.util.List;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class CookingPotBlock extends Block implements IWaterLoggable
+public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 {
-	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty SUPPORTED = BlockStateProperties.DOWN;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D);
@@ -59,8 +54,8 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 	public CookingPotBlock() {
 		super(Properties.create(Material.IRON)
 				.hardnessAndResistance(2.0F, 6.0F)
-				.sound(SoundType.METAL));
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(SUPPORTED, false).with(WATERLOGGED, false));
+				.sound(SoundType.LANTERN));
+		this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH).with(SUPPORTED, false).with(WATERLOGGED, false));
 	}
 
 	@Override
@@ -79,7 +74,7 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 		World world = context.getWorld();
 		FluidState ifluidstate = world.getFluidState(context.getPos());
 		return this.getDefaultState()
-				.with(FACING, context.getPlacementHorizontalFacing().getOpposite())
+				.with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite())
 				.with(SUPPORTED, needsTrayForHeatSource(world.getBlockState(blockpos.down())))
 				.with(WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER);
 	}
@@ -107,7 +102,9 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 			if (tile instanceof CookingPotTileEntity) {
 				ItemStack serving = ((CookingPotTileEntity) tile).useHeldItemOnMeal(player.getHeldItem(handIn));
 				if (serving != ItemStack.EMPTY) {
-					player.inventory.addItemStackToInventory(serving);
+					if (!player.inventory.addItemStackToInventory(serving)) {
+						player.dropItem(serving, false);
+					}
 					worldIn.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				} else {
 					NetworkHooks.openGui((ServerPlayerEntity) player, (CookingPotTileEntity) tile, pos);
@@ -173,7 +170,7 @@ public class CookingPotBlock extends Block implements IWaterLoggable
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
-		builder.add(FACING, SUPPORTED, WATERLOGGED);
+		builder.add(HORIZONTAL_FACING, SUPPORTED, WATERLOGGED);
 	}
 
 	@Override

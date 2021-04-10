@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:straw"
+    ]
+  },
+  "criteria": {
+    "has_straw_bale": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:straw_bale"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:straw"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_straw_bale",
+      "has_the_recipe"
+    ]
+  ]
+}

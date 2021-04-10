@@ -1,5 +1,155 @@
 # Changelog
 
+## 0.4.1
+- Feasts have been slightly nerfed on Nourished length, to match other comparable meals;
+- Recipe changes:
+  - Raw Pasta is now made 2 at a time with 4 Wheat when using Water Buckets, to ease on water refilling;
+  - Egg-based Raw Pasta remains the same ratio;
+- Fixes:
+  - Corrected wrong rotation on the Cooking Pot's spoon;
+  - Horizontal facing blocks will now rotate properly when placed from a structure or command;
+  - Improved Rich Soil tilling to increase compatibility with modded hoes;
+- Updated translations:
+  - zh_CN (thank you, WuzgXY!);
+  - de_DE (thank you, DaLumma!);
+  - ja_JP (thank you, haru!);
+
+## 0.4.0
+- Shepherd's Pie is now a Feast!
+- Mutton can now be cut into Mutton Chops, using a Cutting Board;
+- New foods!
+  - Roasted Mutton Chops - Another use for Beetroot! (and Mutton, I guess);
+  - Mutton Wrap;
+  - Cabbage Rolls - Wrap many kinds of leftovers in cabbage for a healthy snack;
+  - Noodle Soup;
+- Cutting Board recipes now make use of a ToolIngredient, freeing the `type` parameter and allowing custom ingredients (thank you, ochotonida!)
+  - **BREAKING CHANGE! Custom axe/pickaxe cutting board recipes will have to be changed to the new format; the old syntax will no longer work!**
+  - Please refer to the source code and wiki for information on the new syntax.
+  - https://github.com/vectorwing/FarmersDelight/wiki/Cutting-Board-Recipes
+- Vanilla soups and stews now stack up to 16, much like meals from this mod! (thank you, bagel!)
+  - By default, this affects exclusively `SoupItem`'s from vanilla, using a list inside the configs. You can add more items to it, but it only affects `SoupItem` items;
+  - You can configure to treat the list of items as a deny-list instead, making EVERY `SoupItem` stack to 16, except the ones listed in the config. This affects other mods, so be careful!
+  - This feature can be disabled entirely in the configs.
+- Dog Food and Horse Feed now consult tags for eligible entities to feed:
+  - `dog_food_users` determines which living entities can be fed Dog Food;
+  - `horse_feed_users` determines which living entities can be fed Horse Feed;
+  - If a specified entity can be tamed, it must be tamed to accept the food. Otherwise, it can be fed right away;
+- Balancing experiments (ongoing; please give feedback!):
+  - The Nourished effect has been partially shortened across all meals;
+  - Knives deal 0.5 less damage, but have a bit less knockback to help users deal more strikes;
+  - Knives are no longer efficient at mining Leaves and Bales, since that is now the Hoe's job in 1.16;
+- Integration with MC Abnormals mods has been moved to their official add-on, Abnormals Delight! Go check it out!
+- Pies can now rotate horizontally, much like Feasts;
+- Tatami blocks and half-mats can now rotate horizontally, to match the seams of their paired and full-mat counterparts;
+- Rich Soil now emits green stars when boosting a plant. Should hopefully not be exaggerated;
+- Fixes:
+  - Rich Soil now respects OnCropsGrow Forge events. This fixes compatibility with Serene Seasons, but there could be more mods benefitting from it;
+  - World gen code reordered a bit, should hopefully prevent crashes with OpenJ9 (but update OpenJ9 anyway, if you use it);
+  - Tomatoes are now recognized as a CROP PlantType, to better integrate with modded farmlands (thank you, Foam!);
+  - Pigs and Hoglins will drop Smoked Ham if they're on fire when killed with a knife (thank you, Foam!);
+  - Crop blocks should now have proper langs, for WAILA compatibility and similar;
+  - Fix meals vanishing when using bowls with a full inventory;
+  - Meals can no longer be shift-clicked inside the meal display;
+  - Rice Crop should no longer crash upon certain state updates (example: world editing, chunk removal etc);
+  - Flint Knife is now repaired with Flint instead of Stone, using a custom item tier rather than the Stone tier;
+  - Horse Feed is no longer consumed on Creative Mode;
+- Added translations:
+  - zh_TW (thank you, Pancakes0228!);
+- Updated translations:
+  - ru_RU (thank you, GrayPix and Alepod!);
+  - zh_CN (thank you, WuzgXY!);
+  - es_ES (thank you, FrannDzs!);
+  - de_DE (thank you, elloellie and Foam!);
+
+## 0.3.2
+- Using a feast without a bowl will notify the player, bed-style;
+- Hot Cocoa has a new look! The steam isn't animated for now, still need some feedback on it;
+- Fixes:
+  - JEI Plugin no longer crashes on servers. It was calling an unbound tag in the Decomposition recipe;
+    - This is a temporary fix that also disables checking the recipe through the compost activators. Might be revisited on the next release;
+  - Pantries now keep their given name when mined (thank you, bagel!);
+  - Cutting Board directly gives items on right-click instead of popping them off;
+  - Cutting Board now checks tags for defaut knife and shear sounds;
+  - Wild Rice will leave behind its water when either half is broken;
+  - Horse Feed tooltip now describes tamed mounts as a whole;
+- Updated Advancements:
+  - Added advancements for getting ham from pigs and drinking hot cocoa;
+  - Made the feast advancement suggest bowls;
+  - Added Netherite Knife to 'Hunt and Gather' advancement triggers;
+  - Added Soul Campfire to 'Bonfire Lit' advancement triggers;
+- Added translations:
+  - fi_FI (thank you, Markus1002!);
+  - en_PT - Pirate Speak! Them landlubbers better be sharp ta our ol' lingo now, lest ye have yer greens plunder'd!
+- Updated translations:
+  - ko_KR (thank you, qkrehf2!);
+  - ja_JP (thank you, CKenJa!);
+  - ru_RU (thank you, GrayPix!)
+
+## 0.3.1
+- Fix vanilla crop crates not having loot tables;
+- Fix Rice Bale, Straw Bale and Wild Crops not being flammable (more to come later);
+- Fix a visual glitch on Honey Glazed Ham's fourth serving model;
+- Fix Bowls of Stuffed Pumpkin not giving a bowl back;
+
+## 0.3.0
+- Added Feasts!
+  - Feasts are very large meals, made to be placed down as a block and shared with friends, or just to decorate a dinner table!
+  - Once placed, use a Bowl against it to take a serving. Feasts contain 4 servings by default. It can be mined back if no servings were taken;
+  - New Feasts:
+    - Roast Chicken
+  - Existing meals turned into Feasts:
+    - Stuffed Pumpkin
+    - Honey Glazed Ham
+- Added blocks:
+  - Straw Bale 
+  - Bag of Rice
+  - Storage Crates for vanilla crops: Carrot, Potato and Beetroot
+    - These specific blocks can be disabled in the configs, in order to prevent recipe overlaps with Quark and Thermal Cultivation;
+- Added foods:
+  - Wheat Dough: A clumsy, but efficient way to get more bread from your wheat;
+  - Bacon: The half-portion of a Porkchop!
+    - Bacon Sandwich;
+    - Usable in all Porkchop-related recipes;
+  - Ham: Porkchop's older sibling!
+    - Slay Pigs or Hoglins with a Knife for a chance of scavenging a Ham piece or two;
+    - Ham can only be smoked, and it takes a little longer than usual;
+    - Gives 1 Bone and 2 Porkchops when cut, allowing for a Peaceful source of bones.
+  - Fruit Salad: Gently fulfilling, but grants Regeneration for a few seconds;
+  - Melon Popsicle: When eaten, grants a very short burst of Fire Resistance in a pinch;
+- Updated the Cutting Board:
+  - Recipes can now specify a ToolType for axes, pickaxes and shovels instead of imaginary forge tags!
+  - This should broaden cutting compatibility with every single modded tool under the sun, as far as we tested. (thank you, ConductiveFoam!)
+- Updated some meals and foods:
+  - Steak and Potatoes and Grilled Salmon are now crafted, instead of cooked, since their ingredients are already cooked;
+  - General hunger/saturation/effect tweaks here and there.
+- Updated Knives:
+  - Knives can now slice a Cake on right-click;
+  - Knives can now carve pumpkins like Shears;
+  - Spiders can now be scavenged to guarantee at least 1 String;
+- Updated Mushroom Colonies:
+  - They can now be sheared whole at their highest age (5 caps), and planted back in any surface a Mushroom can be planted in;
+  - They only grow more caps if planted in Rich Soil under sufficient darkness;
+  - Shears can now clip colonies one cap at a time, allowing for decorative uses of middle stages;
+- Updated Organic Compost and Rich Soil:
+  - Brand new improved textures for both blocks!
+    - Compost should now be more distinguishable from Rich Soil at later stages;
+    - Rich Soil has a new look, more earthy and less slimy.
+  - Rich Soil now checks the tag `farmersdelight:unaffected_by_rich_soil` for blocks that shouldn't receive growth boosts;
+  - Both blocks can now sustain Mushrooms at any light level;
+  - Organic Compost now checks every adjacent block for activation, encouraging clumping;
+  - JEI integration explaining how Decomposition works (thank you, ConductiveFoam!)
+- Update Wild Crops:
+  - They can once again be bone-mealed to obtain more wild crops;
+  - When bone meal is used, they proliferate in a small area, up to 10 units, similar to Mushrooms;
+  - Wild Rice duplicates as an item drop, similar to Tall Flowers;
+- Fixes:
+  - Recipe types no longer registered twice on load;
+  - Common setup for dispenser behaviors and compostables is properly enqueued to avoid race conditions;
+  - Wild Crops will now respect world-gen configs again;
+  - Rich Soil can now receive bamboo and grow saplings again (thank you, Jozufozu!)
+- Minor graphics improvements;
+- Minor data improvements.
+
 ## 0.2.4b
 - Fix: Rice and Tomato Seeds had inverted tags;
 - Fix: Game crash when using a Bucket on the bottom half of a rice crop;

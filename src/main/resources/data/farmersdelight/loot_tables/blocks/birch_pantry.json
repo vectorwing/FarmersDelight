@@ -2,11 +2,16 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "name": "pool1",
       "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_name",
+              "source": "block_entity"
+            }
+          ],
           "name": "farmersdelight:birch_pantry"
         }
       ],

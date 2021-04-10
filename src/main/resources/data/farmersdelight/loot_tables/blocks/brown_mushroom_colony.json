@@ -74,6 +74,15 @@
                   "properties": {
                     "age": "3"
                   }
+                },
+                {
+                  "condition": "minecraft:inverted",
+                  "term": {
+                    "condition": "minecraft:match_tool",
+                    "predicate": {
+                      "tag": "forge:shears"
+                    }
+                  }
                 }
               ],
               "functions": [
@@ -83,6 +92,25 @@
                 }
               ],
               "name": "minecraft:brown_mushroom"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "farmersdelight:brown_mushroom_colony",
+                  "properties": {
+                    "age": "3"
+                  }
+                },
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "tag": "forge:shears"
+                  }
+                }
+              ],
+              "name": "farmersdelight:brown_mushroom_colony"
             }
           ]
         }

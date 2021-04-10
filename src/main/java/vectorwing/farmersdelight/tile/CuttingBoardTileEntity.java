@@ -10,7 +10,6 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ShearsItem;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -18,6 +17,7 @@ import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.*;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
@@ -28,10 +28,10 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.blocks.CuttingBoardBlock;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
-import vectorwing.farmersdelight.items.KnifeItem;
 import vectorwing.farmersdelight.registry.ModAdvancements;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+import vectorwing.farmersdelight.utils.tags.ForgeTags;
 
 import javax.annotation.Nullable;
 
@@ -97,13 +97,15 @@ public class CuttingBoardTileEntity extends TileEntity
 	 * @return Whether the process succeeded or failed.
 	 */
 	public boolean processItemUsingTool(ItemStack tool, @Nullable PlayerEntity player) {
-		CuttingBoardRecipe irecipe = this.world.getRecipeManager()
-				.getRecipe(this.recipeType, new RecipeWrapper(itemHandler), this.world).orElse(null);
+		CuttingBoardRecipe irecipe = world.getRecipeManager()
+				.getRecipes(recipeType, new RecipeWrapper(itemHandler), world)
+				.stream().filter(cuttingRecipe -> cuttingRecipe.getTool().test(tool))
+				.findAny().orElse(null);
 
-		if (irecipe != null && irecipe.getTool().test(tool)) {
-			NonNullList<ItemStack> results = this.getResults();
+		if (irecipe != null) {
+			NonNullList<ItemStack> results = irecipe.getResults();
 			for (ItemStack result : results) {
-				Direction direction = this.getBlockState().get(CuttingBoardBlock.FACING).rotateYCCW();
+				Direction direction = this.getBlockState().get(CuttingBoardBlock.HORIZONTAL_FACING).rotateYCCW();
 				ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5 + (direction.getXOffset() * 0.2), pos.getY() + 0.2, pos.getZ() + 0.5 + (direction.getZOffset() * 0.2), result.copy());
 				entity.setMotion(direction.getXOffset() * 0.2F, 0.0F, direction.getZOffset() * 0.2F);
 				world.addEntity(entity);
@@ -127,22 +129,18 @@ public class CuttingBoardTileEntity extends TileEntity
 		return false;
 	}
 
-	protected NonNullList<ItemStack> getResults() {
-		return this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(itemHandler), this.world).map(CuttingBoardRecipe::getResults).orElse(NonNullList.withSize(1, ItemStack.EMPTY));
-	}
-
 	public void playProcessingSound(String soundEventID, Item tool, Item boardItem) {
 		SoundEvent sound = ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation(soundEventID));
 
 		if (sound != null) {
 			this.playSound(sound, 1.0F, 1.0F);
-		} else if (tool instanceof ShearsItem) {
+		} else if (tool.isIn(Tags.Items.SHEARS)) {
 			this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
-		} else if (tool instanceof KnifeItem) {
+		} else if (tool.isIn(ForgeTags.TOOLS_KNIVES)) {
 			this.playSound(ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), 0.8F, 1.0F);
 		} else if (boardItem instanceof BlockItem) {
 			Block block = ((BlockItem) boardItem).getBlock();
-			SoundType soundType = block.getSoundType(block.getDefaultState());
+			SoundType soundType = block.getDefaultState().getSoundType();
 			this.playSound(soundType.getBreakSound(), 1.0F, 0.8F);
 		} else {
 			this.playSound(SoundEvents.BLOCK_WOOD_BREAK, 1.0F, 0.8F);

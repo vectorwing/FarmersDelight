@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "farmersdelight:milk_bottle",
+    "farmersdelight:hot_cocoa",
+    "farmersdelight:pie_crust",
+    "farmersdelight:apple_pie",
+    "farmersdelight:sweet_berry_cheesecake",
+    "farmersdelight:chocolate_pie"
+  ]
+}

@@ -1,23 +1,6 @@
 {
-	"credit": "Made with Blockbench",
-	"parent": "block/block",
+	"parent": "minecraft:block/cube_all",
 	"textures": {
-		"particle": "farmersdelight:block/tatami_mat_half",
-		"half": "farmersdelight:block/tatami_mat_half"
-	},
-	"elements": [
-		{
-			"name": "tatami",
-			"from": [0, 0, 0],
-			"to": [16, 16, 16],
-			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "#half"},
-				"east": {"uv": [0, 0, 16, 16], "texture": "#half"},
-				"south": {"uv": [0, 0, 16, 16], "texture": "#half"},
-				"west": {"uv": [0, 0, 16, 16], "texture": "#half"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "#half"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#half"}
-			}
-		}
-	]
+		"all": "farmersdelight:block/tatami_mat_half"
+	}
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:cooked_mutton_chops"
+    ]
+  },
+  "criteria": {
+    "cooked_mutton_chops": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:mutton_chops"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:cooked_mutton_chops"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "cooked_mutton_chops",
+      "has_the_recipe"
+    ]
+  ]
+}

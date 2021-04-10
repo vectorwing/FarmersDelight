@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "sweet_berry_cheesecake_slice": {
+    "has_sweet_berry_cheesecake_slice": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "sweet_berry_cheesecake_slice",
+      "has_sweet_berry_cheesecake_slice",
       "has_the_recipe"
     ]
   ]

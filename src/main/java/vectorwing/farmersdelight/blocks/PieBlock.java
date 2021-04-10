@@ -1,17 +1,21 @@
 package vectorwing.farmersdelight.blocks;
 
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
+import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -29,42 +33,35 @@ import java.util.function.Supplier;
 @SuppressWarnings("deprecation")
 public class PieBlock extends Block
 {
+	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 3);
-	protected static final VoxelShape[] SHAPES = new VoxelShape[]{
-			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 14.0D),
-			VoxelShapes.or(
-					Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 8.0D),
-					Block.makeCuboidShape(2.0D, 0.0D, 8.0D, 8.0D, 4.0D, 14.0D)),
-			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 8.0D),
-			Block.makeCuboidShape(8.0D, 0.0D, 2.0D, 14.0D, 4.0D, 8.0D),
-	};
+
+	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 14.0D);
+
 	public final Supplier<Item> pieSlice;
 
 	public PieBlock(Properties properties, Supplier<Item> pieSlice) {
 		super(properties);
 		this.pieSlice = pieSlice;
-		this.setDefaultState(this.stateContainer.getBaseState().with(BITES, 0));
-	}
-
-	public int getBiteHunger() {
-		return 3;
-	}
-
-	public float getBiteSaturation() {
-		return 0.3F;
+		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(BITES, 0));
 	}
 
 	public ItemStack getPieSliceItem() {
 		return new ItemStack(this.pieSlice.get());
 	}
 
-	public EffectInstance getPieEffect() {
-		return new EffectInstance(Effects.SPEED, 1800, 0);
+	public int getMaxBites() {
+		return 4;
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return SHAPES[state.get(BITES)];
+		return SHAPE;
+	}
+
+	@Override
+	public BlockState getStateForPlacement(BlockItemUseContext context) {
+		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing());
 	}
 
 	@Override
@@ -97,10 +94,18 @@ public class PieBlock extends Block
 		if (!playerIn.canEat(false)) {
 			return ActionResultType.PASS;
 		} else {
-			playerIn.getFoodStats().addStats(this.getBiteHunger(), this.getBiteSaturation());
-			if (this.getPieEffect() != null) {
-				playerIn.addPotionEffect(this.getPieEffect());
+			ItemStack slice = this.getPieSliceItem();
+			Food sliceFood = slice.getItem().getFood();
+
+			playerIn.getFoodStats().consume(slice.getItem(), slice);
+			if (this.getPieSliceItem().getItem().isFood() && sliceFood != null) {
+				for (Pair<EffectInstance, Float> pair : sliceFood.getEffects()) {
+					if (!worldIn.isRemote && pair.getFirst() != null && worldIn.rand.nextFloat() < pair.getSecond()) {
+						playerIn.addPotionEffect(new EffectInstance(pair.getFirst()));
+					}
+				}
 			}
+
 			int bites = state.get(BITES);
 			if (bites < getMaxBites() - 1) {
 				worldIn.setBlockState(pos, state.with(BITES, bites + 1), 3);
@@ -139,7 +144,7 @@ public class PieBlock extends Block
 
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(BITES);
+		builder.add(FACING, BITES);
 	}
 
 	@Override
@@ -155,9 +160,5 @@ public class PieBlock extends Block
 	@Override
 	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
 		return false;
-	}
-
-	public int getMaxBites() {
-		return 4;
 	}
 }

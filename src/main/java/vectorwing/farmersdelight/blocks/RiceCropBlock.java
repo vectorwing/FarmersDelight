@@ -119,9 +119,9 @@ public class RiceCropBlock extends BushBlock implements IGrowable, ILiquidContai
 		BlockState state = super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 		if (!state.isAir()) {
 			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
-		}
-		if (facing == Direction.UP) {
-			return state.with(SUPPORTING, isSupportingRiceUpper(facingState));
+			if (facing == Direction.UP) {
+				return state.with(SUPPORTING, isSupportingRiceUpper(facingState));
+			}
 		}
 
 		return state;

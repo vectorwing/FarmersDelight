@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:rice_from_bag"
+    ]
+  },
+  "criteria": {
+    "has_rice_bag": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:rice_bag"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:rice_from_bag"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_rice_bag",
+      "has_the_recipe"
+    ]
+  ]
+}

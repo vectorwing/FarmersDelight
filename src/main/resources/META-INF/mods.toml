@@ -6,15 +6,15 @@ license="MIT License"
 
 [[mods]]
 modId="farmersdelight"
-version="1.16.3-0.2.5"
+version="1.16.3-0.4.1-pre"
 displayName="Farmer's Delight"
 # updateJSONURL=""
 displayURL="https://github.com/vectorwing/FarmersDelight"
 logoFile="logo.png"
 logoBlur=false
-credits="Chloe Dawn, simibubi, Silk, SkySom and many other wonderful people!"
+credits="Chloe Dawn, ConductiveFoam, simibubi, Jozufozu, bagel, Silk, SkySom and many others!"
 authors="vectorwing, Grimmauld"
-description="A lightweight farming expansion for Minecraft. Harvest, cook and explore!"
+description="A lightweight farming and cooking expansion for Minecraft!"
 
 [[dependencies.farmersdelight]]
     modId="forge"

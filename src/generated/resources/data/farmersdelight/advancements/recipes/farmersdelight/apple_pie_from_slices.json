@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "apple_pie_slice": {
+    "has_apple_pie_slice": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "apple_pie_slice",
+      "has_apple_pie_slice",
       "has_the_recipe"
     ]
   ]

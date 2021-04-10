@@ -10,7 +10,6 @@ import net.minecraft.item.*;
 import net.minecraft.particles.ItemParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
@@ -35,15 +34,14 @@ import vectorwing.farmersdelight.tile.CuttingBoardTileEntity;
 import javax.annotation.Nullable;
 
 @SuppressWarnings("deprecation")
-public class CuttingBoardBlock extends Block implements IWaterLoggable
+public class CuttingBoardBlock extends HorizontalBlock implements IWaterLoggable
 {
-	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 1.0D, 15.0D);
 
 	public CuttingBoardBlock() {
 		super(Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD));
-		this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.NORTH).with(WATERLOGGED, false));
+		this.setDefaultState(this.getStateContainer().getBaseState().with(HORIZONTAL_FACING, Direction.NORTH).with(WATERLOGGED, false));
 	}
 
 	public static void spawnCuttingParticles(World worldIn, BlockPos pos, ItemStack stack, int count) {
@@ -99,7 +97,9 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 				// Removing the board's item
 			} else if (handIn.equals(Hand.MAIN_HAND)) {
 				if (!player.isCreative()) {
-					InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), cuttingBoardTile.removeItem());
+					if (!player.inventory.addItemStackToInventory(cuttingBoardTile.removeItem())) {
+						InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), cuttingBoardTile.removeItem());
+					}
 				} else {
 					cuttingBoardTile.removeItem();
 				}
@@ -131,7 +131,7 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		FluidState fluid = context.getWorld().getFluidState(context.getPos());
-		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite())
+		return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite())
 				.with(WATERLOGGED, fluid.getFluid() == Fluids.WATER);
 	}
 
@@ -154,7 +154,7 @@ public class CuttingBoardBlock extends Block implements IWaterLoggable
 	@Override
 	protected void fillStateContainer(final StateContainer.Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
-		builder.add(FACING, WATERLOGGED);
+		builder.add(HORIZONTAL_FACING, WATERLOGGED);
 	}
 
 	@Override

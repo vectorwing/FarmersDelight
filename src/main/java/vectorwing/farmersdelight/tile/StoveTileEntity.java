@@ -136,7 +136,7 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 					double d2 = (double) blockpos.getZ() + 0.5D;
 					Vector2f v1 = this.getStoveItemOffset(j);
 
-					Direction direction = this.getBlockState().get(StoveBlock.FACING);
+					Direction direction = this.getBlockState().get(StoveBlock.HORIZONTAL_FACING);
 					int directionIndex = direction.getHorizontalIndex();
 					Vector2f offset = directionIndex % 2 == 0 ? v1 : new Vector2f(v1.y, v1.x);
 

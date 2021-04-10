@@ -6,12 +6,22 @@
     ]
   },
   "criteria": {
-    "barbecue": {
+    "has_cooked_beef": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "item": "minecraft:cooked_beef"
+          }
+        ]
+      }
+    },
+    "has_cooked_chicken": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:cooked_chicken"
           }
         ]
       }
@@ -25,7 +35,8 @@
   },
   "requirements": [
     [
-      "barbecue",
+      "has_cooked_beef",
+      "has_cooked_chicken",
       "has_the_recipe"
     ]
   ]

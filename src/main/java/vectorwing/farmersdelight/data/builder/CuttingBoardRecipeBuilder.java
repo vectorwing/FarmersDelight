@@ -28,7 +28,7 @@ public class CuttingBoardRecipeBuilder
 	private final Ingredient tool;
 	private String soundEventID;
 
-	public CuttingBoardRecipeBuilder(Ingredient ingredient, Ingredient tool, IItemProvider mainResult, int count) {
+	private CuttingBoardRecipeBuilder(Ingredient ingredient, Ingredient tool, IItemProvider mainResult, int count) {
 		this.results.put(mainResult.asItem(), count);
 		this.ingredient = ingredient;
 		this.tool = tool;
@@ -70,7 +70,7 @@ public class CuttingBoardRecipeBuilder
 	public void build(Consumer<IFinishedRecipe> consumerIn, String save) {
 		ResourceLocation resourcelocation = ForgeRegistries.ITEMS.getKey(this.ingredient.getMatchingStacks()[0].getItem());
 		if ((new ResourceLocation(save)).equals(resourcelocation)) {
-			throw new IllegalStateException("Shapeless Recipe " + save + " should remove its 'save' argument");
+			throw new IllegalStateException("Cutting Recipe " + save + " should remove its 'save' argument");
 		} else {
 			this.build(consumerIn, new ResourceLocation(save));
 		}
@@ -88,7 +88,7 @@ public class CuttingBoardRecipeBuilder
 		private final Map<Item, Integer> results;
 		private final String soundEventID;
 
-		public Result(ResourceLocation idIn, Ingredient ingredientIn, Ingredient toolIn, Map<Item, Integer> resultsIn, String soundEventIDIn) {
+		public Result(ResourceLocation idIn, Ingredient ingredientIn,  Ingredient toolIn, Map<Item, Integer> resultsIn, String soundEventIDIn) {
 			this.id = idIn;
 			this.ingredient = ingredientIn;
 			this.tool = toolIn;
@@ -98,7 +98,6 @@ public class CuttingBoardRecipeBuilder
 
 		@Override
 		public void serialize(JsonObject json) {
-			// TODO: Consider adapting whether it's an array or object on your CuttingBoardRecipe later.
 			JsonArray arrayIngredients = new JsonArray();
 			arrayIngredients.add(this.ingredient.serialize());
 			json.add("ingredients", arrayIngredients);
