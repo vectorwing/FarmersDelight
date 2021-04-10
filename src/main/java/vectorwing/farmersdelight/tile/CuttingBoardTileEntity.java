@@ -31,9 +31,11 @@ import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.registry.ModAdvancements;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+import vectorwing.farmersdelight.utils.TextUtils;
 import vectorwing.farmersdelight.utils.tags.ForgeTags;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class CuttingBoardTileEntity extends TileEntity
 {
@@ -97,13 +99,21 @@ public class CuttingBoardTileEntity extends TileEntity
 	 * @return Whether the process succeeded or failed.
 	 */
 	public boolean processItemUsingTool(ItemStack tool, @Nullable PlayerEntity player) {
-		CuttingBoardRecipe irecipe = world.getRecipeManager()
-				.getRecipes(recipeType, new RecipeWrapper(itemHandler), world)
-				.stream().filter(cuttingRecipe -> cuttingRecipe.getTool().test(tool))
+		List<? extends CuttingBoardRecipe> recipeList = world.getRecipeManager()
+				.getRecipes(recipeType, new RecipeWrapper(itemHandler), world);
+		CuttingBoardRecipe recipe = recipeList.stream().filter(cuttingRecipe -> cuttingRecipe.getTool().test(tool))
 				.findAny().orElse(null);
 
-		if (irecipe != null) {
-			NonNullList<ItemStack> results = irecipe.getResults();
+		if (player != null) {
+			if (recipeList.isEmpty()) {
+				player.sendStatusMessage(TextUtils.getTranslation("block.cutting_board.invalid_item"), true);
+			} else if (recipe == null) {
+				player.sendStatusMessage(TextUtils.getTranslation("block.cutting_board.invalid_tool"), true);
+			}
+		}
+
+		if (recipe != null) {
+			NonNullList<ItemStack> results = recipe.getResults();
 			for (ItemStack result : results) {
 				Direction direction = this.getBlockState().get(CuttingBoardBlock.HORIZONTAL_FACING).rotateYCCW();
 				ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5 + (direction.getXOffset() * 0.2), pos.getY() + 0.2, pos.getZ() + 0.5 + (direction.getZOffset() * 0.2), result.copy());
@@ -117,7 +127,7 @@ public class CuttingBoardTileEntity extends TileEntity
 					tool.setCount(0);
 				}
 			}
-			this.playProcessingSound(irecipe.getSoundEventID(), tool.getItem(), this.getStoredItem().getItem());
+			this.playProcessingSound(recipe.getSoundEventID(), tool.getItem(), this.getStoredItem().getItem());
 			this.removeItem();
 			this.inventoryChanged();
 			if (player instanceof ServerPlayerEntity) {
