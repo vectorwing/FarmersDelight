@@ -30,7 +30,7 @@ public class ModTags
 	// Blocks that should not have their growth boosted by Rich Soil, if planted on it.
 	public static final ITag.INamedTag<Block> UNAFFECTED_BY_RICH_SOIL = modBlockTag("unaffected_by_rich_soil");
 
-	// Blocks that represent the wild form of a farmable crop.
+	// Items that represent the wild form of a farmable crop.
 	public static final ITag.INamedTag<Item> WILD_CROPS_ITEM = modItemTag("wild_crops");
 
 	// Items (ideally tools) that can obtain straw when harvesting grassy plants. Populated by all knives by default.

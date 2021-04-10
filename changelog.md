@@ -2,6 +2,7 @@
 
 ## 0.4.1
 - Feasts have been slightly nerfed on Nourished length, to match other comparable meals;
+- Cabbage Rolls have been nerfed just a little bit;
 - Recipe changes:
   - Raw Pasta is now made 2 at a time with 4 Wheat when using Water Buckets, to ease on water refilling;
   - Egg-based Raw Pasta remains the same ratio;
@@ -11,6 +12,7 @@
   - Improved Rich Soil tilling to increase compatibility with modded hoes;
 - Updated translations:
   - zh_CN (thank you, WuzgXY!);
+  - ko_KR (thank you, qkrehf2!)
   - de_DE (thank you, DaLumma!);
   - ja_JP (thank you, haru!);
 

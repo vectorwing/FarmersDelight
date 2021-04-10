@@ -103,7 +103,7 @@ public class Foods
 	public static final Food STUFFED_POTATO = (new Food.Builder())
 			.hunger(10).saturation(0.7f).build();
 	public static final Food CABBAGE_ROLLS = (new Food.Builder())
-			.hunger(7).saturation(0.6f).build();
+			.hunger(6).saturation(0.5f).build();
 
 	// Bowl Foods
 	public static final Food COOKED_RICE = (new Food.Builder())
