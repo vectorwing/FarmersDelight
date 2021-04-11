@@ -1,0 +1,18 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:clay"
+    }
+  ],
+  "tool": {
+    "type": "farmersdelight:tool",
+    "tool": "shovel"
+  },
+  "result": [
+    {
+      "item": "minecraft:clay_ball",
+      "count": 4
+    }
+  ]
+}
