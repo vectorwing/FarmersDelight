@@ -1,7 +1,12 @@
 # Changelog
 
 ## 0.4.1
-- Feasts have been slightly nerfed on Nourished length, to match other comparable meals;
+- Certain actions will now display a status message on your HUD (similar to beds), to assist players regarding successful and failed attempts:
+  - Trying to plant Rice outside of a shallow puddle;
+  - Trying to cut an improper item in the Cutting Board;
+  - Trying to use the wrong tool against a cuttable item in the Cutting Board;
+- Shovels can now split Clay into 4 Clay Balls on the Cutting Board (come on, Mojang, make this a thing already...);
+- Feasts have been slightly nerfed on Nourished length, to match other equivalent meals;
 - Cabbage Rolls have been nerfed just a little bit;
 - Recipe changes:
   - Raw Pasta is now made 2 at a time with 4 Wheat when using Water Buckets, to ease on water refilling;
