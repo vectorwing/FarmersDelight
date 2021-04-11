@@ -92,7 +92,7 @@ public class CuttingBoardBlock extends HorizontalBlock implements IWaterLoggable
 					spawnCuttingParticles(worldIn, pos, boardItem, 5);
 					return ActionResultType.SUCCESS;
 				}
-				return ActionResultType.PASS;
+				return ActionResultType.CONSUME;
 
 				// Removing the board's item
 			} else if (handIn.equals(Hand.MAIN_HAND)) {

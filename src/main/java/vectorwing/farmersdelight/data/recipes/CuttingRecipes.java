@@ -28,6 +28,9 @@ public class CuttingRecipes
 		stripWood(consumer);
 		salvageWoodenFurniture(consumer);
 
+		// Shovel
+		digSediments(consumer);
+
 		// Shears
 		salvageUsingShears(consumer);
 	}
@@ -192,6 +195,11 @@ public class CuttingRecipes
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_DOOR), new ToolIngredient(ToolType.AXE), Items.WARPED_PLANKS).build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_TRAPDOOR), new ToolIngredient(ToolType.AXE), Items.WARPED_PLANKS).build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_SIGN), new ToolIngredient(ToolType.AXE), Items.WARPED_PLANKS).build(consumer);
+	}
+
+	private static void digSediments(Consumer<IFinishedRecipe> consumer) {
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CLAY), new ToolIngredient(ToolType.SHOVEL), Items.CLAY_BALL, 4)
+				.build(consumer);
 	}
 
 	private static void salvageUsingShears(Consumer<IFinishedRecipe> consumer) {

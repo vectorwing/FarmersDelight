@@ -12,16 +12,16 @@
     },
     [
       {
-        "tag": "forge:raw_pork"
-      },
-      {
-        "tag": "forge:raw_beef"
-      },
-      {
         "tag": "forge:raw_chicken"
       },
       {
         "item": "minecraft:brown_mushroom"
+      },
+      {
+        "tag": "forge:raw_pork"
+      },
+      {
+        "tag": "forge:raw_beef"
       }
     ]
   ],
