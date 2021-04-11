@@ -214,6 +214,9 @@
   "block.stove.crackle.subtitles": "Stove crackles",
 
   "farmersdelight.block.feast.use_container": "You need a %s to eat this.",
+  "farmersdelight.block.rice.invalid_placement": "This crop won't survive well outside shallow water.",
+  "farmersdelight.block.cutting_board.invalid_item": "This doesn't seem cuttable...",
+  "farmersdelight.block.cutting_board.invalid_tool": "Maybe with a different tool...",
 
   "farmersdelight.jei.cooking": "Cooking",
   "farmersdelight.jei.cutting": "Cutting Board",
