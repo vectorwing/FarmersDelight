@@ -13,7 +13,6 @@
 			"name": "body",
 			"from": [4, 2, 6],
 			"to": [12, 9, 12],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 5, 8]},
 			"faces": {
 				"north": {"uv": [8, 1, 16, 8], "texture": "#body"},
 				"east": {"uv": [0, 9, 6, 16], "texture": "#body"},
@@ -26,7 +25,6 @@
 			"name": "right_wing",
 			"from": [12, 2, 3],
 			"to": [14, 5, 7],
-			"rotation": {"angle": 0, "axis": "y", "origin": [13, 3, 5]},
 			"faces": {
 				"north": {"uv": [12, 13, 14, 16], "texture": "#gibs"},
 				"east": {"uv": [8, 13, 12, 16], "texture": "#gibs"},
@@ -39,7 +37,6 @@
 			"name": "left_leg",
 			"from": [2, 5, 9],
 			"to": [4, 8, 13],
-			"rotation": {"angle": 0, "axis": "y", "origin": [3, 6, 11]},
 			"faces": {
 				"north": {"uv": [12, 13, 14, 16], "texture": "#gibs"},
 				"east": {"uv": [8, 13, 12, 16], "texture": "#gibs"},
@@ -53,7 +50,6 @@
 			"name": "right_leg",
 			"from": [12, 5, 9],
 			"to": [14, 8, 13],
-			"rotation": {"angle": 0, "axis": "y", "origin": [13, 6, 11]},
 			"faces": {
 				"north": {"uv": [12, 13, 14, 16], "texture": "#gibs"},
 				"east": {"uv": [8, 13, 12, 16], "texture": "#gibs"},
@@ -67,7 +63,6 @@
 			"name": "ribcage_end",
 			"from": [5, 8, 5],
 			"to": [11, 8, 11],
-			"rotation": {"angle": 0, "axis": "y", "origin": [16, 15, 16]},
 			"faces": {
 				"up": {"uv": [1, 9, 7, 15], "texture": "#gibs"},
 				"down": {"uv": [1, 9, 7, 15], "rotation": 180, "texture": "#gibs"}
@@ -77,7 +72,6 @@
 			"name": "spine",
 			"from": [5, 3, 5],
 			"to": [11, 3, 11],
-			"rotation": {"angle": 0, "axis": "y", "origin": [16, 10, 16]},
 			"faces": {
 				"up": {"uv": [1, 1, 7, 7], "texture": "#gibs"},
 				"down": {"uv": [1, 1, 7, 7], "rotation": 180, "texture": "#gibs"}
@@ -87,7 +81,6 @@
 			"name": "ribcage_left",
 			"from": [5, 3, 5],
 			"to": [5, 8, 11],
-			"rotation": {"angle": 0, "axis": "y", "origin": [16, 15, 16]},
 			"faces": {
 				"east": {"uv": [15, 2, 9, 7], "texture": "#gibs"},
 				"west": {"uv": [9, 2, 15, 7], "texture": "#gibs"}
@@ -97,7 +90,6 @@
 			"name": "ribcage_right",
 			"from": [11, 3, 5],
 			"to": [11, 8, 11],
-			"rotation": {"angle": 0, "axis": "y", "origin": [22, 15, 16]},
 			"faces": {
 				"east": {"uv": [15, 2, 9, 7], "texture": "#gibs"},
 				"west": {"uv": [9, 2, 15, 7], "texture": "#gibs"}
@@ -107,7 +99,6 @@
 			"name": "plate",
 			"from": [1, 0, 1],
 			"to": [15, 2, 15],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0.5, 8]},
 			"faces": {
 				"north": {"uv": [1, 11, 15, 13], "texture": "#tray_bottom"},
 				"east": {"uv": [1, 11, 15, 13], "texture": "#tray_bottom"},

@@ -12,6 +12,7 @@ import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import vectorwing.farmersdelight.FarmersDelight;
 
@@ -134,8 +135,8 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 			} else if (inputItemsIn.size() > CookingPotRecipe.INPUT_SLOTS) {
 				throw new JsonParseException("Too many ingredients for cooking recipe! The max is " + CookingPotRecipe.INPUT_SLOTS);
 			} else {
-				final ItemStack outputIn = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
-				ItemStack container = JSONUtils.hasField(json, "container") ? ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "container")) : ItemStack.EMPTY;
+				final ItemStack outputIn = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "result"), true);
+				ItemStack container = JSONUtils.hasField(json, "container") ? CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "container"), true) : ItemStack.EMPTY;
 				final float experienceIn = JSONUtils.getFloat(json, "experience", 0.0F);
 				final int cookTimeIn = JSONUtils.getInt(json, "cookingtime", 200);
 				return new CookingPotRecipe(recipeId, groupIn, inputItemsIn, outputIn, container, experienceIn, cookTimeIn);

@@ -109,6 +109,7 @@ public class CookingPotContainer extends Container
 
 	@Override
 	public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+		int indexMealDisplay = 6;
 		int indexContainerInput = 7;
 		int indexOutput = 8;
 		int startPlayerInv = indexOutput + 1;
@@ -125,7 +126,9 @@ public class CookingPotContainer extends Container
 			} else if (index > indexOutput) {
 				if (itemstack1.getItem() == Items.BOWL && !this.mergeItemStack(itemstack1, indexContainerInput, indexContainerInput + 1, false)) {
 					return ItemStack.EMPTY;
-				} else if (!this.mergeItemStack(itemstack1, 0, indexOutput, false)) {
+				} else if (!this.mergeItemStack(itemstack1, 0, indexMealDisplay, false)) {
+					return ItemStack.EMPTY;
+				} else if (!this.mergeItemStack(itemstack1, indexContainerInput, indexOutput, false)) {
 					return ItemStack.EMPTY;
 				}
 			} else if (!this.mergeItemStack(itemstack1, startPlayerInv, endPlayerInv, false)) {

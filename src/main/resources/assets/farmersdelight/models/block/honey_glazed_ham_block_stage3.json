@@ -6,14 +6,13 @@
 		"ham": "farmersdelight:block/honey_glazed_ham_body",
 		"bone": "farmersdelight:block/honey_glazed_ham_bone",
 		"tray_top": "farmersdelight:block/tray_rice_berry_garnish",
-		"tray_side": "farmersdelight:block/tray_top"
+		"tray_side": "farmersdelight:block/tray_bottom"
 	},
 	"elements": [
 		{
 			"name": "plate",
 			"from": [1, 0, 1],
 			"to": [15, 2, 15],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0.5, 8]},
 			"faces": {
 				"north": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
 				"east": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
@@ -27,7 +26,6 @@
 			"name": "ham",
 			"from": [4, 2, 4],
 			"to": [12, 4, 12],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 2, 12]},
 			"faces": {
 				"north": {"uv": [8, 6, 16, 8], "rotation": 180, "texture": "#ham"},
 				"east": {"uv": [8, 8, 6, 16], "rotation": 90, "texture": "#ham"},
@@ -40,7 +38,6 @@
 			"name": "bone",
 			"from": [7, 4, 7],
 			"to": [9, 8, 9],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 2, 12]},
 			"faces": {
 				"north": {"uv": [0, 2, 2, 6], "rotation": 180, "texture": "#bone"},
 				"east": {"uv": [6, 0, 2, 2], "rotation": 90, "texture": "#bone"},

@@ -21,7 +21,6 @@ public class RiceCropFeature extends Feature<BlockClusterFeatureConfig>
 		super(configFactoryIn);
 	}
 
-
 	@Override
 	public boolean generate(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, BlockClusterFeatureConfig config) {
 		BlockPos blockpos = worldIn.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, pos);

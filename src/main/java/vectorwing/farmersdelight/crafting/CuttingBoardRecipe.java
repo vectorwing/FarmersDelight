@@ -11,6 +11,7 @@ import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -149,7 +150,7 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 		private static NonNullList<ItemStack> readResults(JsonArray resultArray) {
 			NonNullList<ItemStack> results = NonNullList.create();
 			for (JsonElement result : resultArray) {
-				results.add(ShapedRecipe.deserializeItem(result.getAsJsonObject()));
+				results.add(CraftingHelper.getItemStack(result.getAsJsonObject(), true));
 			}
 			return results;
 		}

@@ -35,9 +35,7 @@ public class ItemTags extends ItemTagsProvider
 		getOrCreateBuilder(ModTags.KNIVES).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get());
 		getOrCreateBuilder(ModTags.STRAW_HARVESTERS).addTag(ModTags.KNIVES);
 		getOrCreateBuilder(ModTags.COMFORT_FOODS).add(Items.MUSHROOM_STEW, Items.BEETROOT_SOUP, Items.RABBIT_STEW);
-		getOrCreateBuilder(ModTags.STACKABLE_SOUP_ITEMS).add(Items.MUSHROOM_STEW, Items.BEETROOT_SOUP, Items.RABBIT_STEW);
-		getOrCreateBuilder(ModTags.NON_STACKABLE_SOUP_ITEMS);
-		getOrCreateBuilder(ModTags.WOLF_PREY).addTag(ForgeTags.RAW_CHICKEN).add(Items.MUTTON, Items.RABBIT);
+		getOrCreateBuilder(ModTags.WOLF_PREY).addTag(ForgeTags.RAW_CHICKEN).addTag(ForgeTags.RAW_MUTTON).add(Items.RABBIT);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -50,6 +48,7 @@ public class ItemTags extends ItemTagsProvider
 		getOrCreateBuilder(ForgeTags.COOKED_BEEF).add(Items.COOKED_BEEF, ModItems.BEEF_PATTY.get());
 		getOrCreateBuilder(ForgeTags.COOKED_CHICKEN).add(Items.COOKED_CHICKEN, ModItems.COOKED_CHICKEN_CUTS.get());
 		getOrCreateBuilder(ForgeTags.COOKED_PORK).add(Items.COOKED_PORKCHOP, ModItems.COOKED_BACON.get());
+		getOrCreateBuilder(ForgeTags.COOKED_MUTTON).add(Items.COOKED_MUTTON, ModItems.COOKED_MUTTON_CHOPS.get());
 		getOrCreateBuilder(ForgeTags.COOKED_EGGS).add(ModItems.FRIED_EGG.get());
 
 		getOrCreateBuilder(ForgeTags.COOKED_FISHES).addTags(ForgeTags.COOKED_FISHES_COD, ForgeTags.COOKED_FISHES_SALMON);
@@ -79,6 +78,7 @@ public class ItemTags extends ItemTagsProvider
 		getOrCreateBuilder(ForgeTags.RAW_BEEF).add(Items.BEEF, ModItems.MINCED_BEEF.get());
 		getOrCreateBuilder(ForgeTags.RAW_CHICKEN).add(Items.CHICKEN, ModItems.CHICKEN_CUTS.get());
 		getOrCreateBuilder(ForgeTags.RAW_PORK).add(Items.PORKCHOP, ModItems.BACON.get());
+		getOrCreateBuilder(ForgeTags.RAW_MUTTON).add(Items.MUTTON, ModItems.MUTTON_CHOPS.get());
 
 		getOrCreateBuilder(ForgeTags.RAW_FISHES).addTags(ForgeTags.RAW_FISHES_COD, ForgeTags.RAW_FISHES_SALMON, ForgeTags.RAW_FISHES_TROPICAL);
 		getOrCreateBuilder(ForgeTags.RAW_FISHES_COD).add(Items.COD, ModItems.COD_SLICE.get());

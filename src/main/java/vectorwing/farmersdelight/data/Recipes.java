@@ -9,7 +9,6 @@ import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.data.recipes.CookingRecipes;
 import vectorwing.farmersdelight.data.recipes.CuttingRecipes;
@@ -424,15 +423,20 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.GLASS_BOTTLE)
 				.addCriterion("has_milk_bucket", InventoryChangeTrigger.Instance.forItems(Items.MILK_BUCKET))
 				.build(consumer);
-		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RAW_PASTA.get())
-				.addIngredient(Ingredient.merge(Sets.newHashSet(
-						Ingredient.fromTag(ForgeTags.EGGS),
-						Ingredient.fromItems(Items.WATER_BUCKET)
-				)))
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RAW_PASTA.get(), 2)
+				.addIngredient(Items.WATER_BUCKET)
+				.addIngredient(Items.WHEAT)
+				.addIngredient(Items.WHEAT)
 				.addIngredient(Items.WHEAT)
 				.addIngredient(Items.WHEAT)
 				.addCriterion("has_wheat", InventoryChangeTrigger.Instance.forItems(Items.WHEAT))
-				.build(consumer);
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "raw_pasta_from_water"));
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RAW_PASTA.get())
+				.addIngredient(ForgeTags.EGGS)
+				.addIngredient(Items.WHEAT)
+				.addIngredient(Items.WHEAT)
+				.addCriterion("has_wheat", InventoryChangeTrigger.Instance.forItems(Items.WHEAT))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "raw_pasta_from_eggs"));
 		ShapedRecipeBuilder.shapedRecipe(ModItems.WHEAT_DOUGH.get(), 3)
 				.patternLine("www")
 				.patternLine(" b ")
@@ -577,7 +581,7 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ForgeTags.BREAD)
 				.addIngredient(ForgeTags.COOKED_CHICKEN)
 				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
-				.addIngredient(ForgeTags.CROPS_ONION)
+				.addIngredient(Items.CARROT)
 				.addCriterion("has_cooked_chicken", InventoryChangeTrigger.Instance.forItems(Items.COOKED_CHICKEN))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.HAMBURGER.get())
@@ -594,6 +598,14 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
 				.addIngredient(ForgeTags.CROPS_TOMATO)
 				.addCriterion("has_bacon", InventoryChangeTrigger.Instance.forItems(ModItems.COOKED_BACON.get()))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.MUTTON_WRAP.get())
+				.addIngredient(ForgeTags.BREAD)
+				.addIngredient(ForgeTags.COOKED_MUTTON)
+				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
+				.addIngredient(ForgeTags.CROPS_TOMATO)
+				.addIngredient(ForgeTags.MILK)
+				.addCriterion("has_mutton", InventoryChangeTrigger.Instance.forItems(Items.COOKED_MUTTON))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.STUFFED_POTATO.get())
 				.addIngredient(Items.BAKED_POTATO)
@@ -618,6 +630,14 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ModItems.COOKED_RICE.get())
 				.addCriterion("has_baked_potato", InventoryChangeTrigger.Instance.forItems(Items.BAKED_POTATO))
 				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ROASTED_MUTTON_CHOPS.get())
+				.addIngredient(ModItems.COOKED_MUTTON_CHOPS.get())
+				.addIngredient(Items.BEETROOT)
+				.addIngredient(Items.BOWL)
+				.addIngredient(ModItems.COOKED_RICE.get())
+				.addIngredient(ForgeTags.CROPS_TOMATO)
+				.addCriterion("has_mutton", InventoryChangeTrigger.Instance.forItems(Items.COOKED_MUTTON))
+				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ROAST_CHICKEN_BLOCK.get())
 				.addIngredient(ForgeTags.CROPS_ONION)
 				.addIngredient(ForgeTags.EGGS)
@@ -629,6 +649,18 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.BOWL)
 				.addIngredient(Items.BAKED_POTATO)
 				.addCriterion("has_cooked_chicken", InventoryChangeTrigger.Instance.forItems(Items.COOKED_CHICKEN))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.SHEPHERDS_PIE_BLOCK.get())
+				.addIngredient(Items.BAKED_POTATO)
+				.addIngredient(ForgeTags.MILK)
+				.addIngredient(Items.BAKED_POTATO)
+				.addIngredient(ForgeTags.COOKED_MUTTON)
+				.addIngredient(ForgeTags.COOKED_MUTTON)
+				.addIngredient(ForgeTags.COOKED_MUTTON)
+				.addIngredient(ForgeTags.CROPS_ONION)
+				.addIngredient(Items.BOWL)
+				.addIngredient(ForgeTags.CROPS_ONION)
+				.addCriterion("has_cooked_mutton", InventoryChangeTrigger.Instance.forItems(Items.COOKED_MUTTON))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.HONEY_GLAZED_HAM_BLOCK.get())
 				.addIngredient(Items.SWEET_BERRIES)

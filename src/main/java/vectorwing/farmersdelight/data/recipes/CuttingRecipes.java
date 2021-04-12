@@ -28,6 +28,9 @@ public class CuttingRecipes
 		stripWood(consumer);
 		salvageWoodenFurniture(consumer);
 
+		// Shovel
+		digSediments(consumer);
+
 		// Shears
 		salvageUsingShears(consumer);
 	}
@@ -57,6 +60,10 @@ public class CuttingRecipes
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(ModItems.HAM.get()), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.PORKCHOP, 2)
 				.addResult(Items.BONE)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.MUTTON), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), ModItems.MUTTON_CHOPS.get(), 2)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.COOKED_MUTTON), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), ModItems.COOKED_MUTTON_CHOPS.get(), 2)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(ModItems.SMOKED_HAM.get()), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.COOKED_PORKCHOP, 2)
 				.addResult(Items.BONE)
@@ -188,6 +195,11 @@ public class CuttingRecipes
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_DOOR), new ToolIngredient(ToolType.AXE), Items.WARPED_PLANKS).build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_TRAPDOOR), new ToolIngredient(ToolType.AXE), Items.WARPED_PLANKS).build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WARPED_SIGN), new ToolIngredient(ToolType.AXE), Items.WARPED_PLANKS).build(consumer);
+	}
+
+	private static void digSediments(Consumer<IFinishedRecipe> consumer) {
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CLAY), new ToolIngredient(ToolType.SHOVEL), Items.CLAY_BALL, 4)
+				.build(consumer);
 	}
 
 	private static void salvageUsingShears(Consumer<IFinishedRecipe> consumer) {

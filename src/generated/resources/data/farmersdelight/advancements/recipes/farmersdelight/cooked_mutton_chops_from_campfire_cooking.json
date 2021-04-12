@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "farmersdelight:raw_pasta"
+      "farmersdelight:cooked_mutton_chops_from_campfire_cooking"
     ]
   },
   "criteria": {
-    "has_wheat": {
+    "cooked_mutton_chops": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "minecraft:wheat"
+            "item": "farmersdelight:mutton_chops"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "farmersdelight:raw_pasta"
+        "recipe": "farmersdelight:cooked_mutton_chops_from_campfire_cooking"
       }
     }
   },
   "requirements": [
     [
-      "has_wheat",
+      "cooked_mutton_chops",
       "has_the_recipe"
     ]
   ]

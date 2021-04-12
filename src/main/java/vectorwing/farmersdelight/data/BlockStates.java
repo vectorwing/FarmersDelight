@@ -53,7 +53,6 @@ public class BlockStates extends BlockStateProvider
 	protected void registerStatesAndModels() {
 		this.simpleBlock(ModBlocks.RICH_SOIL.get(), cubeRandomRotation(ModBlocks.RICH_SOIL.get(), ""));
 		this.simpleBlock(ModBlocks.SAFETY_NET.get(), existingModel(ModBlocks.SAFETY_NET.get()));
-		this.simpleBlock(ModBlocks.HALF_TATAMI_MAT.get(), existingModel("tatami_mat_half"));
 
 		String riceBag = blockName(ModBlocks.RICE_BAG.get());
 		this.simpleBlock(ModBlocks.RICE_BAG.get(), models().withExistingParent(riceBag, "cube")
@@ -73,6 +72,7 @@ public class BlockStates extends BlockStateProvider
 		customHorizontalBlock(ModBlocks.CUTTING_BOARD.get(),
 				$ -> existingModel(ModBlocks.CUTTING_BOARD.get()), BasketBlock.WATERLOGGED);
 
+		this.horizontalBlock(ModBlocks.HALF_TATAMI_MAT.get(), existingModel("tatami_mat_half"));
 		this.horizontalBlock(ModBlocks.STOVE.get(), state -> {
 			String name = blockName(ModBlocks.STOVE.get());
 			String suffix = state.get(StoveBlock.LIT) ? "_on" : "";
@@ -116,6 +116,7 @@ public class BlockStates extends BlockStateProvider
 		this.feastBlock((FeastBlock) ModBlocks.STUFFED_PUMPKIN_BLOCK.get());
 		this.feastBlock((FeastBlock) ModBlocks.ROAST_CHICKEN_BLOCK.get());
 		this.feastBlock((FeastBlock) ModBlocks.HONEY_GLAZED_HAM_BLOCK.get());
+		this.feastBlock((FeastBlock) ModBlocks.SHEPHERDS_PIE_BLOCK.get());
 
 		this.wildCropBlock(ModBlocks.WILD_BEETROOTS.get(), false);
 		this.wildCropBlock(ModBlocks.WILD_CABBAGES.get(), false);
@@ -233,6 +234,7 @@ public class BlockStates extends BlockStateProvider
 							String suffix = bites > 0 ? "_slice" + bites : "";
 							return ConfiguredModel.builder()
 									.modelFile(existingModel(blockName(block) + suffix))
+									.rotationY(((int) state.get(PieBlock.FACING).getHorizontalAngle() + DEFAULT_ANGLE_OFFSET) % 360)
 									.build();
 						}
 				);

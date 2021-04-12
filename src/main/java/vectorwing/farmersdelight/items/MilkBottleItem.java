@@ -22,8 +22,8 @@ public class MilkBottleItem extends ConsumableItem
 	}
 
 	@Override
-	public void affectConsumer(ItemStack stack, World worldIn, LivingEntity subject) {
-		Iterator<EffectInstance> itr = subject.getActivePotionEffects().iterator();
+	public void affectConsumer(ItemStack stack, World worldIn, LivingEntity consumer) {
+		Iterator<EffectInstance> itr = consumer.getActivePotionEffects().iterator();
 		ArrayList<Effect> compatibleEffects = new ArrayList<>();
 
 		while (itr.hasNext()) {
@@ -34,9 +34,9 @@ public class MilkBottleItem extends ConsumableItem
 		}
 
 		if (compatibleEffects.size() > 0) {
-			EffectInstance selectedEffect = subject.getActivePotionEffect(compatibleEffects.get(worldIn.rand.nextInt(compatibleEffects.size())));
-			if (selectedEffect != null && !net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.living.PotionEvent.PotionRemoveEvent(subject, selectedEffect))) {
-				subject.removePotionEffect(selectedEffect.getPotion());
+			EffectInstance selectedEffect = consumer.getActivePotionEffect(compatibleEffects.get(worldIn.rand.nextInt(compatibleEffects.size())));
+			if (selectedEffect != null && !net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.living.PotionEvent.PotionRemoveEvent(consumer, selectedEffect))) {
+				consumer.removePotionEffect(selectedEffect.getPotion());
 			}
 		}
 	}

@@ -29,6 +29,11 @@
   "block.farmersdelight.rice_bag": "Reissack",
   "block.farmersdelight.straw_bale": "Strohbündel",
 
+  "block.farmersdelight.tomatoes": "Tomatenpflanze",
+  "block.farmersdelight.cabbages": "Weißkohlpflanze",
+  "block.farmersdelight.onions": "Zwiebelpflanze",
+  "block.farmersdelight.rice_crop": "Reispflanze",
+  "block.farmersdelight.rice_upper_crop": "Reispflanze",
   "block.farmersdelight.brown_mushroom_colony": "Braune Pilzkolonie",
   "block.farmersdelight.red_mushroom_colony": "Rote Pilzkolonie",
 
@@ -74,6 +79,8 @@
   "item.farmersdelight.cooked_cod_slice": "Gebratene Kabeljauscheibe",
   "item.farmersdelight.salmon_slice": "Rohe Lachsscheibe",
   "item.farmersdelight.cooked_salmon_slice": "Gebratene Lachsscheibe",
+  "item.farmersdelight.mutton_chops": "Rohe Hammelkoteletts",
+  "item.farmersdelight.cooked_mutton_chops": "Gebratene Hammelkoteletts",
   "item.farmersdelight.ham": "Schinken",
   "item.farmersdelight.smoked_ham": "Räucherschinken",
 
@@ -100,13 +107,14 @@
   "item.farmersdelight.chicken_sandwich": "Hühnchensandwich",
   "item.farmersdelight.hamburger": "Hamburger",
   "item.farmersdelight.bacon_sandwich": "Specksandwich",
+  "item.farmersdelight.mutton_wrap": "Hammelfleisch Wrap",
   "item.farmersdelight.dumplings": "Teigtaschen",
   "item.farmersdelight.stuffed_potato": "Gefüllte Kartoffel",
+  "item.farmersdelight.cabbage_rolls": "Salat Rollen",
 
   "item.farmersdelight.cooked_rice": "Gekochter Reis",
   "item.farmersdelight.mixed_salad": "Gemischter Salat",
   "item.farmersdelight.nether_salad": "Nether Salat",
-  "item.farmersdelight.beef_stew": "Beef Stew",
   "item.farmersdelight.beef_stew": "Rindfleischeintopf",
   "item.farmersdelight.chicken_soup": "Hühnersuppe",
   "item.farmersdelight.vegetable_soup": "Gemüsesuppe",
@@ -114,12 +122,13 @@
   "item.farmersdelight.fried_rice": "Gebratener Reis",
   "item.farmersdelight.pumpkin_soup": "Kürbissuppe",
   "item.farmersdelight.baked_cod_stew": "Gebackener Kabeljaueintopf",
+  "item.farmersdelight.noodle_soup": "Nudel Suppe",
 
   "item.farmersdelight.pasta_with_meatballs": "Nudeln mit Fleischbällchen",
   "item.farmersdelight.pasta_with_mutton_chop": "Nudeln mit Hammelkotelett",
+  "item.farmersdelight.roasted_mutton_chops": "Gebratene Hammelkoteletts",
   "item.farmersdelight.steak_and_potatoes": "Steak und Kartoffeln",
   "item.farmersdelight.vegetable_noodles": "Gemüsenudeln",
-  "item.farmersdelight.shepherds_pie": "Shepherd's Pie",
   "item.farmersdelight.ratatouille": "Ratatouille",
   "item.farmersdelight.squid_ink_pasta": "Pasta mit Tintenfischtinte",
   "item.farmersdelight.grilled_salmon": "Gegrillter Lachs",
@@ -130,12 +139,17 @@
   "item.farmersdelight.stuffed_pumpkin": "Eine Portion gefüllter Kürbis",
   "block.farmersdelight.honey_glazed_ham_block": "Honigglasierter Schinken",
   "item.farmersdelight.honey_glazed_ham": "Ein Teller von Honigglasierter Schinken",
+  "block.farmersdelight.shepherds_pie_block": "Hirtenkuchen",
+  "item.farmersdelight.shepherds_pie": "Telller mit Hirtenkuchen",
 
   "item.farmersdelight.dog_food": "Hundefutter",
   "item.farmersdelight.horse_feed": "Pferdefutter",
 
   "effect.farmersdelight.nourished": "Genährt",
   "effect.farmersdelight.comfort": "Komfort",
+
+  "effect.farmersdelight.nourished.0.desc": "Verhindert hungerverlust, es sei denn es wird Leben regeneriert.",
+  "effect.farmersdelight.comfort.0.desc": "Gibt immuinität gegenüber Hunger, Langsamkeit und Schwäche",
 
   "enchantment.farmersdelight.backstabbing": "Hinterhalt",
   "enchantment.farmersdelight.backstabbing.desc": "Mehr Schaden durch Angriffe von hinten.",
@@ -206,5 +220,6 @@
   "farmersdelight.jei.decomposition": "Kompostierung",
   "farmersdelight.jei.decomposition.light": "Beschleunigt durch Sonnenlicht",
   "farmersdelight.jei.decomposition.fluid": "Beschleunigt durch benachbartes Wasser",
-  "farmersdelight.jei.decomposition.accelerators": "Beschleunigt durch benachbarte Aktivatoren (siehe unten)"
+  "farmersdelight.jei.decomposition.accelerators": "Beschleunigt durch benachbarte Aktivatoren (siehe unten)",
+  "farmersdelight.jei.info.straw": "Eine trockene Pflanzenfaser, die bei der Herstellung verwendet wird. Wird erhalten durch Schneiden von grasähnlichen Pflanzen und Pflanzen mit einem Messer."
 }

@@ -29,6 +29,11 @@
   "block.farmersdelight.rice_bag": "米袋",
   "block.farmersdelight.straw_bale": "藁束",
 
+  "block.farmersdelight.tomatoes": "トマト",
+  "block.farmersdelight.cabbages": "キャベツ",
+  "block.farmersdelight.onions": "玉ねぎ",
+  "block.farmersdelight.rice_crop": "稲",
+  "block.farmersdelight.rice_upper_crop": "稲",
   "block.farmersdelight.brown_mushroom_colony": "群生した茶色のキノコ",
   "block.farmersdelight.red_mushroom_colony": "群生した赤いキノコ",
 
@@ -74,6 +79,8 @@
   "item.farmersdelight.cooked_cod_slice": "焼き鱈の切り身",
   "item.farmersdelight.salmon_slice": "鮭の切り身",
   "item.farmersdelight.cooked_salmon_slice": "焼き鮭の切り身",
+  "item.farmersdelight.mutton_chops": "生のマトンチョップ",
+  "item.farmersdelight.cooked_mutton_chops": "マトンチョップ",
   "item.farmersdelight.ham": "ハム",
   "item.farmersdelight.smoked_ham": "ハムの燻製",
 
@@ -100,8 +107,10 @@
   "item.farmersdelight.chicken_sandwich": "チキンサンド",
   "item.farmersdelight.hamburger": "ハンバーガー",
   "item.farmersdelight.bacon_sandwich": "ベーコンサンド",
+  "item.farmersdelight.mutton_wrap": "マトンラップ",
   "item.farmersdelight.dumplings": "ダンプリング",
   "item.farmersdelight.stuffed_potato": "スタッフドポテト",
+  "item.farmersdelight.cabbage_rolls": "ロールキャベツ",
 
   "item.farmersdelight.cooked_rice": "ご飯",
   "item.farmersdelight.mixed_salad": "ミックスサラダ",
@@ -113,12 +122,13 @@
   "item.farmersdelight.fried_rice": "チャーハン",
   "item.farmersdelight.pumpkin_soup": "カボチャスープ",
   "item.farmersdelight.baked_cod_stew": "焼き鱈のシチュー",
+  "item.farmersdelight.noodle_soup": "ラーメン",
 
   "item.farmersdelight.pasta_with_meatballs": "ミートボールパスタ",
   "item.farmersdelight.pasta_with_mutton_chop": "マトンパスタ",
+  "item.farmersdelight.roasted_mutton_chops": "ローストマトンチョップ",
   "item.farmersdelight.steak_and_potatoes": "ステーキとポテト",
   "item.farmersdelight.vegetable_noodles": "ベジタブルヌードル",
-  "item.farmersdelight.shepherds_pie": "シェパーズパイ",
   "item.farmersdelight.ratatouille": "ラタトゥイユ",
   "item.farmersdelight.squid_ink_pasta": "イカスミパスタ",
   "item.farmersdelight.grilled_salmon": "鮭のムニエル",
@@ -129,12 +139,17 @@
   "item.farmersdelight.stuffed_pumpkin": "一切れのスタッフドパンプキン",
   "block.farmersdelight.honey_glazed_ham_block": "ハニーグレイズドハム",
   "item.farmersdelight.honey_glazed_ham": "一切れのハニーグレイズドハム",
+  "block.farmersdelight.shepherds_pie_block": "シェパーズパイ",
+  "item.farmersdelight.shepherds_pie": "一切れのシェパーズパイ",
 
   "item.farmersdelight.dog_food": "ドッグフード",
   "item.farmersdelight.horse_feed": "馬の餌",
 
   "effect.farmersdelight.nourished": "栄養",
   "effect.farmersdelight.comfort": "健康",
+
+  "effect.farmersdelight.nourished.0.desc": "体力を回復する場合を除き、空腹ゲージの減少を防ぎます。",
+  "effect.farmersdelight.comfort.0.desc": "空腹、移動速度低下、弱体化に対しての免疫を持ちます。",
 
   "enchantment.farmersdelight.backstabbing": "不意打ち",
   "enchantment.farmersdelight.backstabbing.desc": "背後から攻撃した際の攻撃力が上昇する。",
@@ -205,5 +220,6 @@
   "farmersdelight.jei.decomposition": "分解",
   "farmersdelight.jei.decomposition.light": "日光で加速",
   "farmersdelight.jei.decomposition.fluid": "隣接する水で加速",
-  "farmersdelight.jei.decomposition.accelerators": "隣接する活性化剤（下記参照）で加速"
+  "farmersdelight.jei.decomposition.accelerators": "隣接する活性化剤（下記参照）で加速",
+  "farmersdelight.jei.info.straw": "クラフトに使用する乾燥した植物繊維。ナイフで草や作物を切ると手に入る。"
 }

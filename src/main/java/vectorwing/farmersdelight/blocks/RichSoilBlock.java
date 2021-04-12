@@ -1,15 +1,21 @@
 package vectorwing.farmersdelight.blocks;
 
 import net.minecraft.block.*;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.PlantType;
+import net.minecraftforge.common.ToolType;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.utils.MathUtils;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
@@ -50,12 +56,21 @@ public class RichSoilBlock extends Block
 			// If all else fails, and it's a plant, give it a growth boost now and then!
 			if (aboveBlock instanceof IGrowable && MathUtils.RAND.nextFloat() <= 0.2F) {
 				IGrowable growable = (IGrowable) aboveBlock;
-				if (growable.canGrow(worldIn, pos.up(), aboveState, false)) {
+				if (growable.canGrow(worldIn, pos.up(), aboveState, false) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), aboveState, true)) {
 					growable.grow(worldIn, worldIn.rand, pos.up(), aboveState);
+					worldIn.playEvent(2005, pos.up(), 0);
+					ForgeHooks.onCropsGrowPost(worldIn, pos.up(), aboveState);
 				}
 			}
 		}
 	}
+
+	@Override
+	@Nullable
+	public BlockState getToolModifiedState(BlockState state, World world, BlockPos pos, PlayerEntity player, ItemStack stack, ToolType toolType) {
+		return toolType == ToolType.HOE ? ModBlocks.RICH_SOIL_FARMLAND.get().getDefaultState() : null;
+	}
+
 
 	@Override
 	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable) {
