@@ -29,7 +29,12 @@ public class MCToolIngredient implements IIngredient
     @ZenCodeType.Method
     @BracketResolver(PREFIX)
     public static MCToolIngredient get(String type) {
-        return new MCToolIngredient(ToolType.get(type));
+        return get(ToolType.get(type));
+    }
+
+    @ZenCodeType.Method
+    public static MCToolIngredient get(ToolType type) {
+        return new MCToolIngredient(type);
     }
 
     @Override
