@@ -27,38 +27,6 @@ public class CuttingBoardRecipeManager implements IRecipeManager
     public void addRecipe(String name,
                           IIngredient input,
                           IItemStack[] results,
-                          String toolType,
-                          @ZenCodeType.OptionalString String sound) {
-        ToolType toolTypeObj;
-        try {
-            toolTypeObj = ToolType.get(toolType);
-        } catch (IllegalArgumentException e) {
-            CraftTweakerAPI.logThrowing("Invalid tool type \"%s\"", e, toolType);
-            return;
-        }
-        Ingredient toolIngredient = IngredientUtils.getToolTypeIngredient(toolTypeObj);
-        if (toolIngredient.hasNoMatchingItems()) {
-            CraftTweakerAPI.logError("No tools of type \"%s\" for cutting recipe", toolType);
-            return;
-        }
-
-        CraftTweakerAPI.apply(new ActionAddRecipe(this,
-                new CuttingBoardRecipe(new ResourceLocation(CraftTweaker.MODID, name),
-                        "",
-                        input.asVanillaIngredient(),
-                        toolIngredient,
-                        toolTypeObj,
-                        ListUtils.mapArrayIndexSet(results,
-                                IItemStack::getInternal,
-                                NonNullList.withSize(results.length, ItemStack.EMPTY)),
-                        sound),
-                ""));
-    }
-
-    @ZenCodeType.Method
-    public void addRecipe(String name,
-                          IIngredient input,
-                          IItemStack[] results,
                           IIngredient tool,
                           @ZenCodeType.OptionalString String sound) {
         CraftTweakerAPI.apply(new ActionAddRecipe(this,
@@ -66,7 +34,6 @@ public class CuttingBoardRecipeManager implements IRecipeManager
                         "",
                         input.asVanillaIngredient(),
                         tool.asVanillaIngredient(),
-                        null,
                         ListUtils.mapArrayIndexSet(results,
                                 IItemStack::getInternal,
                                 NonNullList.withSize(results.length, ItemStack.EMPTY)),
