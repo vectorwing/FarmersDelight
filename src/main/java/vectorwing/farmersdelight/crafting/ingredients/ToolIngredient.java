@@ -20,7 +20,7 @@ public class ToolIngredient extends Ingredient
 {
     public static final Serializer SERIALIZER = new Serializer();
 
-    private final ToolType toolType;
+    public final ToolType toolType;
 
     public ToolIngredient(ToolType toolType) {
         super(ForgeRegistries.ITEMS.getValues().stream()
