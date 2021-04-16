@@ -205,12 +205,9 @@
   "farmersdelight.advancement.master_chef": "老饕",
   "farmersdelight.advancement.master_chef.desc": "吃過所有菜餚!",
 
-  "block.cooking_pot.boil": "烹飪鍋沸騰",
-  "block.cooking_pot.boil.subtitles": "烹飪鍋沸騰",
-  "block.cutting_board.knife": "刀子落下",
-  "block.cutting_board.knife.subtitles": "刀子落下",
-  "block.stove.crackle": "爐灶龜裂",
-  "block.stove.crackle.subtitles": "爐灶龜裂",
+  "farmersdelight.subtitles.cooking_pot.boil": "烹飪鍋沸騰",
+  "farmersdelight.subtitles.cutting_board.knife_cut": "刀子落下",
+  "farmersdelight.subtitles.stove.crackle": "爐灶龜裂",
 
   "farmersdelight.block.feast.use_container": "你需要一個 %s 來吃",
 

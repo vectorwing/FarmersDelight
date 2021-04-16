@@ -178,12 +178,9 @@
   "farmersdelight.advancement.master_chef": "Mistrz kuchni",
   "farmersdelight.advancement.master_chef.desc": "Zjedz porcję każdego dostępnego dania!",
 
-  "block.cooking_pot.boil": "Gotowanie w garnku",
-  "block.cooking_pot.boil.subtitles": "Gotowanie w garnku",
-  "block.cutting_board.knife": "Cięcie nożem",
-  "block.cutting_board.knife.subtitles": "Cięcie nożem",
-  "block.stove.crackle": "Trzaskanie w kuchence",
-  "block.stove.crackle.subtitles": "Trzaska w kuchence",
+  "farmersdelight.subtitles.cooking_pot.boil": "Gotowanie w garnku",
+  "farmersdelight.subtitles.cutting_board.knife_cut": "Cięcie nożem",
+  "farmersdelight.subtitles.stove.crackle": "Trzaska w kuchence",
 
   "farmersdelight.jei.cooking": "Gotowanie",
   "farmersdelight.jei.cutting": "Deska do krojenia",

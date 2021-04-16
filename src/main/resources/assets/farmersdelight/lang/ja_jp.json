@@ -206,12 +206,9 @@
   "farmersdelight.advancement.master_chef": "マスターシェフ",
   "farmersdelight.advancement.master_chef.desc": "全ての料理のフルコースを食べる",
 
-  "block.cooking_pot.boil": "鍋が沸騰する",
-  "block.cooking_pot.boil.subtitles": "鍋が沸騰する",
-  "block.cutting_board.knife": "ナイフで切る",
-  "block.cutting_board.knife.subtitles": "ナイフで切る",
-  "block.stove.crackle": "コンロが燃える",
-  "block.stove.crackle.subtitles": "コンロが燃える",
+  "farmersdelight.subtitles.cooking_pot.boil": "鍋が沸騰する",
+  "farmersdelight.subtitles.cutting_board.knife_cut": "ナイフで切る",
+  "farmersdelight.subtitles.stove.crackle": "コンロが燃える",
 
   "farmersdelight.block.feast.use_container": "これを食べるためには %s が必要です",
 

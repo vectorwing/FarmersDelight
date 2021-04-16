@@ -206,12 +206,10 @@
   "farmersdelight.advancement.master_chef": "Grand Frigate's Cook",
   "farmersdelight.advancement.master_chef.desc": "Have a taste o' every grub ye can get yer hook on!",
 
-  "block.cooking_pot.boil": "Pot o' Grub Boil",
-  "block.cooking_pot.boil.subtitles": "Pot o' Grub boils",
-  "block.cutting_board.knife": "Dagger Slash",
-  "block.cutting_board.knife.subtitles": "Dagger slashes",
-  "block.stove.crackle": "Grille Crackle",
-  "block.stove.crackle.subtitles": "Grille crackles",
+  "farmersdelight.subtitles.cooking_pot.boil": "Pot o' Grub boils",
+  "farmersdelight.subtitles.cutting_board.knife_cut": "Dagger slashes",
+  "farmersdelight.subtitles.stove.crackle": "Grille crackles",
+  "farmersdelight.subtitles.tomato.pick": "Tomatoes pop",
 
   "farmersdelight.block.feast.use_container": "Oi! Ye need a %s ta eat this grub!",
   "farmersdelight.block.rice.invalid_placement": "This here seed will need a nice puddle o' water ta thrive.",

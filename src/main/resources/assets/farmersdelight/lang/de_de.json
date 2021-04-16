@@ -206,12 +206,9 @@
   "farmersdelight.advancement.master_chef": "Chefkoch",
   "farmersdelight.advancement.master_chef.desc": "Esse eine Portion von jedem verfügbaren Mahl!",
 
-  "block.cooking_pot.boil": "Kopftopfkochen",
-  "block.cooking_pot.boil.subtitles": "Kochtopf kocht",
-  "block.cutting_board.knife": "Messerschnitt",
-  "block.cutting_board.knife.subtitles": "Messer schneidet",
-  "block.stove.crackle": "Herdknistern",
-  "block.stove.crackle.subtitles": "Herd knistert",
+  "farmersdelight.subtitles.cooking_pot.boil": "Kochtopf kocht",
+  "farmersdelight.subtitles.cutting_board.knife_cut": "Messer schneidet",
+  "farmersdelight.subtitles.stove.crackle": "Herd knistert",
 
   "farmersdelight.block.feast.use_container": "Du brauchst ein(e)(n) %s ,um dies zu essen.",
 

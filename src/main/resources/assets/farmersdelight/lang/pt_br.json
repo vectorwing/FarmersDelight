@@ -205,13 +205,11 @@
   "farmersdelight.advancement.use_cutting_board.desc": "Com uma ferramenta em mãos, use-a em uma tábua de corte para partir alguns itens",
   "farmersdelight.advancement.master_chef": "Mestre-cuca",
   "farmersdelight.advancement.master_chef.desc": "Coma uma porção de cada refeição disponível!",
-  
-  "block.cooking_pot.boil": "Panela Fervendo",
-  "block.cooking_pot.boil.subtitles": "Panela fervendo",
-  "block.cutting_board.knife": "Faca Cortando",
-  "block.cutting_board.knife.subtitles": "Faca cortando",
-  "block.stove.crackle": "Fogão Crepitando",
-  "block.stove.crackle.subtitles": "Fogão crepitando",
+
+  "farmersdelight.subtitles.cooking_pot.boil": "Panela fervendo",
+  "farmersdelight.subtitles.cutting_board.knife_cut": "Faca cortando",
+  "farmersdelight.subtitles.stove.crackle": "Fogão crepitando",
+  "farmersdelight.subtitles.tomato.pick": "Tomates colhidos",
 
   "farmersdelight.block.feast.use_container": "Você precisa de uma %s para comer isto.",
   "farmersdelight.block.rice.invalid_placement": "Esta planta não crescerá bem fora de água rasa.",

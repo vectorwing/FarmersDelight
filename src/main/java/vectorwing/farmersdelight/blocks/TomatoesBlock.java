@@ -27,6 +27,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.PlantType;
 import vectorwing.farmersdelight.registry.ModItems;
+import vectorwing.farmersdelight.registry.ModSounds;
 
 import java.util.Random;
 
@@ -173,7 +174,7 @@ public class TomatoesBlock extends BushBlock implements IGrowable
 		} else if (isMature) {
 			int j = 1 + worldIn.rand.nextInt(2);
 			spawnAsEntity(worldIn, pos, new ItemStack(ModItems.TOMATO.get(), j));
-			worldIn.playSound(null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
+			worldIn.playSound(null, pos, ModSounds.ITEM_TOMATO_PICK_FROM_BUSH.get(), SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
 			worldIn.setBlockState(pos, state.with(AGE, TOMATO_BEARING_AGE - 2), 2);
 			return ActionResultType.SUCCESS;
 		} else {

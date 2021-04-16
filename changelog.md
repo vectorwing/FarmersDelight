@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.2
+- Added custom CraftTweaker support, courtesy of Eutro!
+  - Custom methods for adding Cooking Pot recipes, with optional container fields;
+  - Custom methods for adding (and removing) Cutting Board recipes, with ToolIngredient compatibility;
+- Updated translations:
+  - zh_tw (thank you, Pancakes0228!)
+
 ## 0.4.1
 - Certain actions will now display a status message on your HUD (similar to beds), to assist players regarding successful and failed attempts:
   - Trying to plant Rice outside of a shallow puddle;

@@ -191,12 +191,9 @@
   "farmersdelight.advancement.master_chef": "Master Chef",
   "farmersdelight.advancement.master_chef.desc": "¡Come un plato de cada comida disponible!",
 
-  "block.cooking_pot.boil": "Olla hirviendo",
-  "block.cooking_pot.boil.subtitles": "Olla hirviendo",
-  "block.cutting_board.knife": "Cortando en la tabla",
-  "block.cutting_board.knife.subtitles": "Cortando en la tabla",
-  "block.stove.crackle": "Parrilla chispeando",
-  "block.stove.crackle.subtitles": "Parrilla chispeando",
+  "farmersdelight.subtitles.cooking_pot.boil": "Olla hirviendo",
+  "farmersdelight.subtitles.cutting_board.knife_cut": "Cortando en la tabla",
+  "farmersdelight.subtitles.stove.crackle": "Parrilla chispeando",
 
   "farmersdelight.block.feast.use_container": "Tu necesitas un %s para comer esto.",
 

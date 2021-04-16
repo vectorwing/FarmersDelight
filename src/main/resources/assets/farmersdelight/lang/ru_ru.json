@@ -196,12 +196,9 @@
   "farmersdelight.advancement.master_chef": "Шеф-повар",
   "farmersdelight.advancement.master_chef.desc": "Попробуйте каждое доступное блюдо!",
 
-  "block.cooking_pot.boil": "Варка в кухонном котле",
-  "block.cooking_pot.boil.subtitles": "Варка в кухонном котле",
-  "block.cutting_board.knife": "Рубка ножом",
-  "block.cutting_board.knife.subtitles": "Рубка ножом",
-  "block.stove.crackle": "Потрескивание кухонной плиты",
-  "block.stove.crackle.subtitles": "Потрескивание кухонной плиты",
+  "farmersdelight.subtitles.cooking_pot.boil": "Варка в кухонном котле",
+  "farmersdelight.subtitles.cutting_board.knife_cut": "Рубка ножом",
+  "farmersdelight.subtitles.stove.crackle": "Потрескивание кухонной плиты",
   
   "farmersdelight.block.feast.use_container": "Вам нужно %s чтобы съесть это.",
 

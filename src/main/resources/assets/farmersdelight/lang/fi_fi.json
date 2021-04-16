@@ -196,12 +196,9 @@
   "farmersdelight.advancement.master_chef": "Mestarikokki",
   "farmersdelight.advancement.master_chef.desc": "Syö jokaista saatavilla olevaa ateriaa!",
 
-  "block.cooking_pot.boil": "Kattilan kiehuminen",
-  "block.cooking_pot.boil.subtitles": "Kattila kiehuu",
-  "block.cutting_board.knife": "Veitsellä leikkaaminen",
-  "block.cutting_board.knife.subtitles": "Veitsi leikkaa",
-  "block.stove.crackle": "Lieden rätinä",
-  "block.stove.crackle.subtitles": "Liesi rätisee",
+  "farmersdelight.subtitles.cooking_pot.boil": "Kattila kiehuu",
+  "farmersdelight.subtitles.cutting_board.knife_cut": "Veitsi leikkaa",
+  "farmersdelight.subtitles.stove.crackle": "Liesi rätisee",
   
   "farmersdelight.block.feast.use_container": "Tarvitset esineen %s syödäksesti tätä.",
 

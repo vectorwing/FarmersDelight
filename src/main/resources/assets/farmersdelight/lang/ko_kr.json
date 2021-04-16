@@ -207,12 +207,9 @@
   "farmersdelight.advancement.master_chef": "마스터 쉐프",
   "farmersdelight.advancement.master_chef.desc": "가능한 모든 요리를 먹어보세요!",
 
-  "block.cooking_pot.boil": "냄비가 끓는 소리",
-  "block.cooking_pot.boil.subtitles": "냄비가 끓음",
-  "block.cutting_board.knife": "칼 손질",
-  "block.cutting_board.knife.subtitles": "식칼을 사용함",
-  "block.stove.crackle": "난로 타닥거리는 소리",
-  "block.stove.crackle.subtitles": "난로가 타오름",
+  "farmersdelight.subtitles.cooking_pot.boil": "냄비가 끓음",
+  "farmersdelight.subtitles.cutting_board.knife_cut": "식칼을 사용함",
+  "farmersdelight.subtitles.stove.crackle": "난로가 타오름",
   
   "farmersdelight.block.feast.use_container": "이 음식은 %s이(가) 필요합니다.",
 
