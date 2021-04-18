@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.4.2
+## 0.4.2 (upcoming)
 - Added custom CraftTweaker support, courtesy of Eutro!
   - Custom methods for adding Cooking Pot recipes, with optional container fields;
   - Custom methods for adding (and removing) Cutting Board recipes, with ToolIngredient compatibility;
