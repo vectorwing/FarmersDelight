@@ -12,32 +12,29 @@ import vectorwing.farmersdelight.registry.ModItems;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class StrawHarvestingModifier
+public class StrawHarvestingModifier extends LootModifier
 {
-	public static class KnifeStrawSerializer extends GlobalLootModifierSerializer<StrawHarvestingModifier.KnifeStrawModifier>
-	{
-		@Override
-		public StrawHarvestingModifier.KnifeStrawModifier read(ResourceLocation location, JsonObject object, ILootCondition[] ailootcondition) {
-			return new StrawHarvestingModifier.KnifeStrawModifier(ailootcondition);
-		}
-
-		@Override
-		public JsonObject write(KnifeStrawModifier instance) {
-			return new JsonObject();
-		}
+	protected StrawHarvestingModifier(ILootCondition[] conditionsIn) {
+		super(conditionsIn);
 	}
 
-	public static class KnifeStrawModifier extends LootModifier
+	@Nonnull
+	@Override
+	protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
+		generatedLoot.add(new ItemStack(ModItems.STRAW.get()));
+		return generatedLoot;
+	}
+
+	public static class Serializer extends GlobalLootModifierSerializer<StrawHarvestingModifier>
 	{
-		protected KnifeStrawModifier(ILootCondition[] conditionsIn) {
-			super(conditionsIn);
+		@Override
+		public StrawHarvestingModifier read(ResourceLocation location, JsonObject object, ILootCondition[] ailootcondition) {
+			return new StrawHarvestingModifier(ailootcondition);
 		}
 
-		@Nonnull
 		@Override
-		protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
-			generatedLoot.add(new ItemStack(ModItems.STRAW.get()));
-			return generatedLoot;
+		public JsonObject write(StrawHarvestingModifier instance) {
+			return new JsonObject();
 		}
 	}
 }
