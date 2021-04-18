@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "farmersdelight:block/skillet"
+    },
+    "facing=south": {
+      "model": "farmersdelight:block/skillet",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "farmersdelight:block/skillet",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "farmersdelight:block/skillet",
+      "y": 90
+    }
+  }
+}

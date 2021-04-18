@@ -22,6 +22,8 @@ public class ModItems
 			() -> new FuelBlockItem(ModBlocks.CUTTING_BOARD.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP), 200));
 	public static final RegistryObject<Item> BASKET = ITEMS.register("basket",
 			() -> new FuelBlockItem(ModBlocks.BASKET.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP), 300));
+	public static final RegistryObject<Item> SKILLET = ITEMS.register("skillet",
+			() -> new SkilletItem(ModBlocks.SKILLET.get(), new Item.Properties().maxStackSize(1).group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> CARROT_CRATE = ITEMS.register("carrot_crate",
 			() -> new BlockItem(ModBlocks.CARROT_CRATE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));

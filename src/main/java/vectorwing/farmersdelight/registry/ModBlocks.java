@@ -26,6 +26,7 @@ public class ModBlocks
 	public static final RegistryObject<Block> COOKING_POT = BLOCKS.register("cooking_pot", CookingPotBlock::new);
 	public static final RegistryObject<Block> BASKET = BLOCKS.register("basket", BasketBlock::new);
 	public static final RegistryObject<Block> CUTTING_BOARD = BLOCKS.register("cutting_board", CuttingBoardBlock::new);
+	public static final RegistryObject<Block> SKILLET = BLOCKS.register("skillet", SkilletBlock::new);
 
 	// Crop Storage
 	public static final RegistryObject<Block> CARROT_CRATE = BLOCKS.register("carrot_crate",
