@@ -1,6 +1,11 @@
 {
   "replace": false,
   "entries": [
+    "farmersdelight:scavenging_feather",
+    "farmersdelight:scavenging_leather",
+    "farmersdelight:scavenging_rabbit_hide",
+    "farmersdelight:scavenging_shulker_shell",
+    "farmersdelight:scavenging_string",
     "farmersdelight:slicing_cake",
     "farmersdelight:slicing_apple_pie",
     "farmersdelight:slicing_sweet_berry_cheesecake",
