@@ -1,5 +1,5 @@
 {
-  "type": "farmersdelight:straw_harvesting",
+  "type": "farmersdelight:add_item",
   "conditions": [
     {
       "condition": "minecraft:random_chance",
@@ -15,5 +15,6 @@
       "condition": "block_state_property",
       "block": "minecraft:grass"
     }
-  ]
+  ],
+  "item": "farmersdelight:straw"
 }

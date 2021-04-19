@@ -1,5 +1,5 @@
 {
-  "type": "farmersdelight:straw_harvesting",
+  "type": "farmersdelight:add_item",
   "conditions": [
     {
       "condition": "minecraft:match_tool",
@@ -14,5 +14,6 @@
         "age": "7"
       }
     }
-  ]
+  ],
+  "item": "farmersdelight:straw"
 }

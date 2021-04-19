@@ -1,5 +1,5 @@
 {
-  "type": "farmersdelight:cake",
+  "type": "farmersdelight:pastry_slicing",
   "conditions": [
     {
       "condition": "minecraft:match_tool",
@@ -11,5 +11,6 @@
       "condition": "minecraft:block_state_property",
       "block": "minecraft:cake"
     }
-  ]
+  ],
+  "slice": "farmersdelight:cake_slice"
 }
