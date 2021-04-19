@@ -14,7 +14,7 @@ public class LootModifierHandler
 	@SubscribeEvent
 	public static void registerModifiers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> ev) {
 		ev.getRegistry().register(
-				new PastrySlicingModifier.CakeSliceSerializer().setRegistryName(FarmersDelight.MODID, "pastry_slicing")
+				new PastrySlicingModifier.Serializer().setRegistryName(FarmersDelight.MODID, "pastry_slicing")
 		);
 		ev.getRegistry().register(
 				new AddItemModifier.Serializer().setRegistryName(FarmersDelight.MODID, "add_item")

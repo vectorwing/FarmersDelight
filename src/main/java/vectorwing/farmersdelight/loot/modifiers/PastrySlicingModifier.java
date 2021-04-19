@@ -56,7 +56,7 @@ public class PastrySlicingModifier extends LootModifier
 		return generatedLoot;
 	}
 
-	public static class CakeSliceSerializer extends GlobalLootModifierSerializer<PastrySlicingModifier>
+	public static class Serializer extends GlobalLootModifierSerializer<PastrySlicingModifier>
 	{
 		@Override
 		public PastrySlicingModifier read(ResourceLocation location, JsonObject object, ILootCondition[] conditions) {
