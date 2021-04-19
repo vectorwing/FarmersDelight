@@ -6,7 +6,7 @@ license="MIT License"
 
 [[mods]]
 modId="farmersdelight"
-version="1.16.3-0.4.2"
+version="1.16.5-0.4.2"
 displayName="Farmer's Delight"
 # updateJSONURL=""
 displayURL="https://github.com/vectorwing/FarmersDelight"
@@ -26,6 +26,6 @@ description="A lightweight farming and cooking expansion for Minecraft!"
 [[dependencies.farmersdelight]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.3]"
+    versionRange="[1.16.5]"
     ordering="NONE"
     side="BOTH"

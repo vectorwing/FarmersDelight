@@ -54,7 +54,7 @@ public class TatamiMatBlock extends HorizontalBlock
 	@Override
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		if (facing == getDirectionToOther(stateIn.get(PART), stateIn.get(HORIZONTAL_FACING))) {
-			return stateIn.isValidPosition(worldIn, currentPos) && facingState.isIn(this) && facingState.get(PART) != stateIn.get(PART) ? stateIn : Blocks.AIR.getDefaultState();
+			return stateIn.isValidPosition(worldIn, currentPos) && facingState.matchesBlock(this) && facingState.get(PART) != stateIn.get(PART) ? stateIn : Blocks.AIR.getDefaultState();
 		} else {
 			return !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 		}
@@ -93,7 +93,7 @@ public class TatamiMatBlock extends HorizontalBlock
 		if (!worldIn.isRemote) {
 			BlockPos facingPos = pos.offset(state.get(HORIZONTAL_FACING));
 			worldIn.setBlockState(facingPos, state.with(PART, BedPart.HEAD), 3);
-			worldIn.func_230547_a_(pos, Blocks.AIR);
+			worldIn.updateBlock(pos, Blocks.AIR);
 			state.updateNeighbours(worldIn, pos, 3);
 		}
 	}

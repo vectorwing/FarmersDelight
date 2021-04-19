@@ -12,5 +12,5 @@ public class ModBiomeFeatures
 {
 	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, FarmersDelight.MODID);
 
-	public static final RegistryObject<Feature<BlockClusterFeatureConfig>> RICE = FEATURES.register("rice", () -> new RiceCropFeature(BlockClusterFeatureConfig.field_236587_a_));
+	public static final RegistryObject<Feature<BlockClusterFeatureConfig>> RICE = FEATURES.register("rice", () -> new RiceCropFeature(BlockClusterFeatureConfig.CODEC));
 }

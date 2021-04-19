@@ -66,7 +66,7 @@ public class WildPatchBlock extends BushBlock implements IGrowable
 		int wildCropLimit = 10;
 
 		for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-4, -1, -4), pos.add(4, 1, 4))) {
-			if (worldIn.getBlockState(blockpos).isIn(this)) {
+			if (worldIn.getBlockState(blockpos).matchesBlock(this)) {
 				--wildCropLimit;
 				if (wildCropLimit <= 0) {
 					return;

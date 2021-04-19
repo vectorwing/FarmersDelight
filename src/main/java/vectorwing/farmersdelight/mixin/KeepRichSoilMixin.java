@@ -4,7 +4,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.IWorldGenerationBaseReader;
 import net.minecraft.world.gen.feature.Feature;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -18,7 +17,7 @@ public class KeepRichSoilMixin
 	 */
 	@Inject(at = @At(value = "HEAD"), method = "isDirtAt", cancellable = true)
 	private static void keepRichSoil(IWorldGenerationBaseReader world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-		if (world.hasBlockState(pos, state -> state.isIn(ModBlocks.RICH_SOIL.get()))) {
+		if (world.hasBlockState(pos, state -> state.matchesBlock(ModBlocks.RICH_SOIL.get()))) {
 			cir.setReturnValue(false);
 			cir.cancel();
 		}

@@ -47,7 +47,7 @@ public class VillageStructures
 		for (JigsawPiece p : shuffled) {
 			newPieces.add(new Pair<>(p, 1));
 		}
-		newPieces.add(new Pair<>(new LegacySingleJigsawPiece(Either.left(toAdd), () -> ProcessorLists.field_244101_a, JigsawPattern.PlacementBehaviour.RIGID), weight));
+		newPieces.add(new Pair<>(new LegacySingleJigsawPiece(Either.left(toAdd), () -> ProcessorLists.EMPTY, JigsawPattern.PlacementBehaviour.RIGID), weight));
 		ResourceLocation name = old.getName();
 		Registry.register(WorldGenRegistries.JIGSAW_POOL, pool, new JigsawPattern(pool, name, newPieces));
 	}

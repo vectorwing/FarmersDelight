@@ -93,11 +93,11 @@ public class DogFoodItem extends ConsumableItem
 		for (EffectInstance effectinstance : EFFECTS) {
 			IFormattableTextComponent effectDescription = new StringTextComponent(" ");
 			IFormattableTextComponent effectName = new TranslationTextComponent(effectinstance.getEffectName());
-			effectDescription.append(effectName);
+			effectDescription.appendSibling(effectName);
 			Effect effect = effectinstance.getPotion();
 
 			if (effectinstance.getAmplifier() > 0) {
-				effectDescription.appendString(" ").append(new TranslationTextComponent("potion.potency." + effectinstance.getAmplifier()));
+				effectDescription.appendString(" ").appendSibling(new TranslationTextComponent("potion.potency." + effectinstance.getAmplifier()));
 			}
 
 			if (effectinstance.getDuration() > 20) {

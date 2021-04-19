@@ -14,19 +14,19 @@ import vectorwing.farmersdelight.setup.Configuration;
 public class CropPatchGeneration
 {
 	public static final BlockClusterFeatureConfig CABBAGE_PATCH_CONFIG = (new BlockClusterFeatureConfig.Builder(
-			new SimpleBlockStateProvider(ModBlocks.WILD_CABBAGES.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(2).zSpread(2).whitelist(ImmutableSet.of(Blocks.SAND.getBlock())).func_227317_b_().build();
+			new SimpleBlockStateProvider(ModBlocks.WILD_CABBAGES.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(2).zSpread(2).whitelist(ImmutableSet.of(Blocks.SAND.getBlock())).preventProjection().build();
 	public static final BlockClusterFeatureConfig ONION_PATCH_CONFIG = (new BlockClusterFeatureConfig.Builder(
-			new SimpleBlockStateProvider(ModBlocks.WILD_ONIONS.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(2).zSpread(2).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK.getBlock())).func_227317_b_().build();
+			new SimpleBlockStateProvider(ModBlocks.WILD_ONIONS.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(2).zSpread(2).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK.getBlock())).preventProjection().build();
 	public static final BlockClusterFeatureConfig TOMATO_PATCH_CONFIG = (new BlockClusterFeatureConfig.Builder(
-			new SimpleBlockStateProvider(ModBlocks.WILD_TOMATOES.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(2).zSpread(2).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK.getBlock(), Blocks.RED_SAND.getBlock(), Blocks.SAND.getBlock())).func_227317_b_().build();
+			new SimpleBlockStateProvider(ModBlocks.WILD_TOMATOES.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(2).zSpread(2).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK.getBlock(), Blocks.RED_SAND.getBlock(), Blocks.SAND.getBlock())).preventProjection().build();
 	public static final BlockClusterFeatureConfig CARROT_PATCH_CONFIG = (new BlockClusterFeatureConfig.Builder(
-			new SimpleBlockStateProvider(ModBlocks.WILD_CARROTS.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(2).zSpread(2).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK.getBlock())).func_227317_b_().build();
+			new SimpleBlockStateProvider(ModBlocks.WILD_CARROTS.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(2).zSpread(2).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK.getBlock())).preventProjection().build();
 	public static final BlockClusterFeatureConfig POTATO_PATCH_CONFIG = (new BlockClusterFeatureConfig.Builder(
-			new SimpleBlockStateProvider(ModBlocks.WILD_POTATOES.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(2).zSpread(2).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK.getBlock())).func_227317_b_().build();
+			new SimpleBlockStateProvider(ModBlocks.WILD_POTATOES.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(2).zSpread(2).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK.getBlock())).preventProjection().build();
 	public static final BlockClusterFeatureConfig BEETROOT_PATCH_CONFIG = (new BlockClusterFeatureConfig.Builder(
-			new SimpleBlockStateProvider(ModBlocks.WILD_BEETROOTS.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(2).zSpread(2).whitelist(ImmutableSet.of(Blocks.SAND.getBlock())).func_227317_b_().build();
+			new SimpleBlockStateProvider(ModBlocks.WILD_BEETROOTS.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(2).zSpread(2).whitelist(ImmutableSet.of(Blocks.SAND.getBlock())).preventProjection().build();
 	public static final BlockClusterFeatureConfig RICE_PATCH_CONFIG = (new BlockClusterFeatureConfig.Builder(
-			new SimpleBlockStateProvider(ModBlocks.WILD_RICE.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(4).zSpread(4).whitelist(ImmutableSet.of(Blocks.DIRT.getBlock())).func_227317_b_().build();
+			new SimpleBlockStateProvider(ModBlocks.WILD_RICE.get().getDefaultState()), new SimpleBlockPlacer())).tries(64).xSpread(4).zSpread(4).whitelist(ImmutableSet.of(Blocks.DIRT.getBlock())).preventProjection().build();
 
 	public static final ConfiguredFeature<?, ?> PATCH_WILD_CABBAGES = Feature.RANDOM_PATCH.withConfiguration(CABBAGE_PATCH_CONFIG)
 			.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).chance(Configuration.CHANCE_WILD_CABBAGES.get());
