@@ -19,7 +19,7 @@ description="A lightweight farming and cooking expansion for Minecraft!"
 [[dependencies.farmersdelight]]
     modId="forge"
     mandatory=true
-    versionRange="[34,)"
+    versionRange="[36,)"
     ordering="NONE"
     side="BOTH"
 
