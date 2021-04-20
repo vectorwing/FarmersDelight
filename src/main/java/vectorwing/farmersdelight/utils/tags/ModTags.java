@@ -42,6 +42,9 @@ public class ModTags
 	// Foods that drop from mobs that wolves prey upon (sheep, rabbit and chicken).
 	public static final ITag.INamedTag<Item> WOLF_PREY = modItemTag("wolf_prey");
 
+	// Foods and items that can be used to craft Cabbage Rolls
+	public static final ITag.INamedTag<Item> CABBAGE_ROLL_INGREDIENTS = modItemTag("cabbage_roll_ingredients");
+
 	// Knife items for game logic.
 	public static final ITag.INamedTag<Item> KNIVES = modItemTag("tools/knives");
 

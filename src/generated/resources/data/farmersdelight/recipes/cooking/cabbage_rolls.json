@@ -4,38 +4,9 @@
     {
       "tag": "forge:crops/cabbage"
     },
-    [
-      {
-        "item": "minecraft:carrot"
-      },
-      {
-        "item": "minecraft:potato"
-      },
-      {
-        "item": "minecraft:beetroot"
-      },
-      {
-        "tag": "forge:mushrooms"
-      },
-      {
-        "tag": "forge:raw_beef"
-      },
-      {
-        "tag": "forge:raw_chicken"
-      },
-      {
-        "tag": "forge:raw_fishes"
-      },
-      {
-        "tag": "forge:eggs"
-      },
-      {
-        "tag": "forge:raw_pork"
-      },
-      {
-        "tag": "forge:raw_mutton"
-      }
-    ]
+    {
+      "tag": "farmersdelight:cabbage_roll_ingredients"
+    }
   ],
   "result": {
     "item": "farmersdelight:cabbage_rolls"
