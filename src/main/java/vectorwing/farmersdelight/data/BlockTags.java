@@ -35,7 +35,7 @@ public class BlockTags extends BlockTagsProvider
 		getOrCreateBuilder(net.minecraft.tags.BlockTags.CROPS).add(
 				ModBlocks.CABBAGE_CROP.get(),
 				ModBlocks.ONION_CROP.get(),
-				ModBlocks.RICE_CROP.get(),
+				ModBlocks.RICE_UPPER_CROP.get(),
 				ModBlocks.TALL_RICE_CROP.get(),
 				ModBlocks.TOMATO_CROP.get());
 		getOrCreateBuilder(net.minecraft.tags.BlockTags.SMALL_FLOWERS).addTag(ModTags.WILD_CROPS);
