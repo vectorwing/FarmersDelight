@@ -13,6 +13,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.PlantType;
 import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.setup.Configuration;
 import vectorwing.farmersdelight.utils.MathUtils;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
@@ -68,6 +69,10 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
 		} else if (moisture < 7) {
 			worldIn.setBlockState(pos, state.with(MOISTURE, 7), 2);
 		} else if (moisture == 7) {
+			if (Configuration.RICH_SOIL_BOOST_CHANCE.get() == 0.0) {
+				return;
+			}
+
 			BlockState aboveState = worldIn.getBlockState(pos.up());
 			Block aboveBlock = aboveState.getBlock();
 
@@ -77,7 +82,7 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
 			}
 
 			// If all else fails, and it's a plant, give it a growth boost now and then!
-			if (aboveBlock instanceof IGrowable && MathUtils.RAND.nextFloat() <= 0.2F) {
+			if (aboveBlock instanceof IGrowable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
 				IGrowable growable = (IGrowable) aboveBlock;
 				if (growable.canGrow(worldIn, pos.up(), aboveState, false) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), aboveState, true)) {
 					growable.grow(worldIn, worldIn.rand, pos.up(), aboveState);
