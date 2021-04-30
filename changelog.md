@@ -1,15 +1,15 @@
 # Changelog
 
-## 0.4.2 (upcoming)
+## 0.4.2
 - Full migration to 1.16.5, due to crucial Forge updates;
 - Added custom CraftTweaker support, courtesy of Eutro!
   - Custom methods for adding Cooking Pot recipes, with optional container fields;
   - Custom methods for adding (and removing) Cutting Board recipes, with ToolIngredient compatibility;
+- Cabbage Rolls now consult the tag `farmersdelight:cabbage_roll_ingredients` for valid fillings (thank you, bagel!);
 - Improved loot modification for knife actions:
   - Pies now drop all remaining slices when mined with a knife, similar to a Cake;
     - Loot modifier for this mechanic is now open to pack makers;
   - Knife Scavenging (e.g. leather from cows etc) has been moved away from loot injections, improving datapack compatibility;
-  - See the Wiki (GitHub) for more details on how to use these modifiers!
 - Updated translations:
   - zh_tw (thank you, Pancakes0228!)
 
