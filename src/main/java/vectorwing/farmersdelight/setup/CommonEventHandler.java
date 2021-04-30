@@ -51,6 +51,7 @@ import java.util.Set;
 @ParametersAreNonnullByDefault
 public class CommonEventHandler
 {
+	// TODO: Learn more about Loot Modifiers, and migrate remainder loot injections to it
 	private static final ResourceLocation SHIPWRECK_SUPPLY_CHEST = LootTables.CHESTS_SHIPWRECK_SUPPLY;
 	private static final Set<ResourceLocation> VILLAGE_HOUSE_CHESTS = Sets.newHashSet(
 			LootTables.CHESTS_VILLAGE_VILLAGE_PLAINS_HOUSE,
@@ -58,7 +59,6 @@ public class CommonEventHandler
 			LootTables.CHESTS_VILLAGE_VILLAGE_SNOWY_HOUSE,
 			LootTables.CHESTS_VILLAGE_VILLAGE_TAIGA_HOUSE,
 			LootTables.CHESTS_VILLAGE_VILLAGE_DESERT_HOUSE);
-	private static final String[] SCAVENGING_ENTITIES = new String[]{"pig", "hoglin"};
 
 	public static void init(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
@@ -251,12 +251,6 @@ public class CommonEventHandler
 
 	@SubscribeEvent
 	public static void onLootLoad(LootTableLoadEvent event) {
-		for (String entity : SCAVENGING_ENTITIES) {
-			if (event.getName().equals(new ResourceLocation("minecraft", "entities/" + entity))) {
-				event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(FarmersDelight.MODID, "inject/" + entity))).name(entity + "_fd_drops").build());
-			}
-		}
-
 		if (Configuration.CROPS_ON_SHIPWRECKS.get() && event.getName().equals(SHIPWRECK_SUPPLY_CHEST)) {
 			event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(FarmersDelight.MODID, "inject/shipwreck_supply")).weight(1).quality(0)).name("supply_fd_crops").build());
 		}
