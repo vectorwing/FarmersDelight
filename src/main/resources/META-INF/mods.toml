@@ -15,6 +15,8 @@ logoBlur=false
 credits="Chloe Dawn, Grimmauld, ConductiveFoam, simibubi, Jozufozu, bagel, Silk, SkySom, Eutro and many others!"
 authors="vectorwing"
 description="A lightweight farming and cooking expansion for Minecraft!"
+itemIcon="farmersdelight:cooking_pot"
+configBackground="minecraft:textures/block/bricks.png"
 
 [[dependencies.farmersdelight]]
     modId="forge"
