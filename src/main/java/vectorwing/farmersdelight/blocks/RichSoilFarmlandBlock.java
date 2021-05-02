@@ -41,7 +41,7 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
 	@Override
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		BlockState aboveState = worldIn.getBlockState(pos.up());
-		return !aboveState.getMaterial().isSolid() || aboveState.getBlock() instanceof FenceGateBlock || aboveState.getBlock() instanceof MovingPistonBlock || aboveState.getBlock() instanceof StemGrownBlock;
+		return super.isValidPosition(state, worldIn, pos) || aboveState.getBlock() instanceof StemGrownBlock;
 	}
 
 	@Override

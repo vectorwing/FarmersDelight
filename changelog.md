@@ -5,11 +5,14 @@
 - Added custom CraftTweaker support, courtesy of Eutro!
   - Custom methods for adding Cooking Pot recipes, with optional container fields;
   - Custom methods for adding (and removing) Cutting Board recipes, with ToolIngredient compatibility;
+- Small update to Rich Soil Farmland, allowing Botania Floating Flowers to not trample it;
 - Cabbage Rolls now consult the tag `farmersdelight:cabbage_roll_ingredients` for valid fillings (thank you, bagel!);
+- Added config option for changing Rich Soil's chance of boosting crops every random tick (0.0 disables boosting entirely);
 - Improved loot modification for knife actions:
   - Pies now drop all remaining slices when mined with a knife, similar to a Cake;
     - Loot modifier for this mechanic is now open to pack makers;
   - Knife Scavenging (e.g. leather from cows etc) has been moved away from loot injections, improving datapack compatibility;
+    - For the time being, due to a technical hurdle, Hoglins will only drop 1 Ham, regardless of Looting;
 - Updated translations:
   - zh_tw (thank you, Pancakes0228!)
 
