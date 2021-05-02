@@ -115,6 +115,12 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ModItems.MILK_BOTTLE.get())
 				.addCriterion("has_milk_bottle", InventoryChangeTrigger.Instance.forItems(ModItems.MILK_BOTTLE.get()))
 				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "milk_bucket_from_bottles"));
+		ShapelessRecipeBuilder.shapelessRecipe(Items.PAPER)
+				.addIngredient(ModItems.TREE_BARK.get())
+				.addIngredient(ModItems.TREE_BARK.get())
+				.addIngredient(ModItems.TREE_BARK.get())
+				.addCriterion("has_tree_bark", InventoryChangeTrigger.Instance.forItems(ModItems.TREE_BARK.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "paper_from_tree_bark"));
 	}
 
 	private void recipesBlocks(Consumer<IFinishedRecipe> consumer) {
