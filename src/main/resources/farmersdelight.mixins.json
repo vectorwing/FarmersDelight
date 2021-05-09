@@ -4,8 +4,10 @@
     "compatibilityLevel": "JAVA_8",
     "refmap": "farmersdelight.refmap.json",
     "mixins": [
+        "CampfireBaleMixin",
         "KeepRichSoilMixin",
-        "SoupItemMixin"
+        "SoupItemMixin",
+        "accessors.ChickenEntityAccessor"
     ],
     "injectors": {
         "defaultRequire": 1

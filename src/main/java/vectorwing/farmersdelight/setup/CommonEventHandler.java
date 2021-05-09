@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.MerchantOffer;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.TableLootEntry;
@@ -34,6 +35,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.conditions.VanillaCrateEnabledCondition;
 import vectorwing.farmersdelight.loot.functions.CopyMealFunction;
 import vectorwing.farmersdelight.loot.functions.SmokerCookFunction;
+import vectorwing.farmersdelight.mixin.accessors.ChickenEntityAccessor;
 import vectorwing.farmersdelight.registry.ModAdvancements;
 import vectorwing.farmersdelight.registry.ModEffects;
 import vectorwing.farmersdelight.registry.ModItems;
@@ -43,9 +45,7 @@ import vectorwing.farmersdelight.world.CropPatchGeneration;
 import vectorwing.farmersdelight.world.VillageStructures;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID)
 @ParametersAreNonnullByDefault
@@ -65,6 +65,13 @@ public class CommonEventHandler
 			registerCompostables();
 			registerDispenserBehaviors();
 			CropPatchGeneration.registerConfiguredFeatures();
+
+			List<ItemStack> chickenFood = new ArrayList<>();
+			Collections.addAll(chickenFood, ChickenEntityAccessor.getFoodItems().getMatchingStacks());
+			chickenFood.add(new ItemStack(ModItems.CABBAGE_SEEDS.get()));
+			chickenFood.add(new ItemStack(ModItems.TOMATO_SEEDS.get()));
+			chickenFood.add(new ItemStack(ModItems.RICE.get()));
+			ChickenEntityAccessor.setFoodItems(Ingredient.fromStacks(chickenFood.stream()));
 		});
 
 		ModAdvancements.register();

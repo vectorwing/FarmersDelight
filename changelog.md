@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.3 (upcoming)
+- Chickens can now be tempted/bred with the seeds of Cabbage, Tomato and Rice;
+- Straw Bale and Rice Bale now create signal smoke when under campfires.
+
 ## 0.4.2
 - Full migration to 1.16.5, due to crucial Forge updates;
 - Added custom CraftTweaker support, courtesy of Eutro!

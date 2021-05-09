@@ -23,7 +23,7 @@ mixin {
     add sourceSets.main, "farmersdelight.refmap.json"
 }
 
-version = "${mc_version}-${mod_version}-pre"
+version = "${mc_version}-${mod_version}"
 group = 'vectorwing.farmersdelight' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'FarmersDelight'
 

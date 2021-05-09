@@ -35,10 +35,10 @@ public class CookingPotScreen extends ContainerScreen<CookingPotContainer>
 	public void render(MatrixStack ms, final int mouseX, final int mouseY, float partialTicks) {
 		this.renderBackground(ms);
 		super.render(ms, mouseX, mouseY, partialTicks);
-		this.renderHoveredToolTip(ms, mouseX, mouseY);
+		this.renderMealDisplayTooltip(ms, mouseX, mouseY);
 	}
 
-	protected void renderHoveredToolTip(MatrixStack ms, int mouseX, int mouseY) {
+	protected void renderMealDisplayTooltip(MatrixStack ms, int mouseX, int mouseY) {
 		if (this.minecraft != null && this.minecraft.player != null && this.minecraft.player.inventory.getItemStack().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.getHasStack()) {
 			if (this.hoveredSlot.slotNumber == 6) {
 				List<ITextComponent> tooltip = new ArrayList<>();
