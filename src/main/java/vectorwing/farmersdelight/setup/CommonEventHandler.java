@@ -36,6 +36,7 @@ import vectorwing.farmersdelight.crafting.conditions.VanillaCrateEnabledConditio
 import vectorwing.farmersdelight.loot.functions.CopyMealFunction;
 import vectorwing.farmersdelight.loot.functions.SmokerCookFunction;
 import vectorwing.farmersdelight.mixin.accessors.ChickenEntityAccessor;
+import vectorwing.farmersdelight.mixin.accessors.PigEntityAccessor;
 import vectorwing.farmersdelight.registry.ModAdvancements;
 import vectorwing.farmersdelight.registry.ModEffects;
 import vectorwing.farmersdelight.registry.ModItems;
@@ -72,6 +73,12 @@ public class CommonEventHandler
 			chickenFood.add(new ItemStack(ModItems.TOMATO_SEEDS.get()));
 			chickenFood.add(new ItemStack(ModItems.RICE.get()));
 			ChickenEntityAccessor.setFoodItems(Ingredient.fromStacks(chickenFood.stream()));
+
+			List<ItemStack> pigFood = new ArrayList<>();
+			Collections.addAll(pigFood, PigEntityAccessor.getFoodItems().getMatchingStacks());
+			pigFood.add(new ItemStack(ModItems.CABBAGE.get()));
+			pigFood.add(new ItemStack(ModItems.TOMATO.get()));
+			PigEntityAccessor.setFoodItems(Ingredient.fromStacks(pigFood.stream()));
 		});
 
 		ModAdvancements.register();

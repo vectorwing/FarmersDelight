@@ -7,7 +7,8 @@
         "CampfireBaleMixin",
         "KeepRichSoilMixin",
         "SoupItemMixin",
-        "accessors.ChickenEntityAccessor"
+        "accessors.ChickenEntityAccessor",
+        "accessors.PigEntityAccessor"
     ],
     "injectors": {
         "defaultRequire": 1

@@ -2,6 +2,7 @@
 
 ## 0.4.3 (upcoming)
 - Chickens can now be tempted/bred with the seeds of Cabbage, Tomato and Rice;
+- Pigs can now be tempted/bred with Cabbage and Tomato (but not Onion, it's not very good for them!);
 - Straw Bale and Rice Bale now create signal smoke when under campfires.
 
 ## 0.4.2
