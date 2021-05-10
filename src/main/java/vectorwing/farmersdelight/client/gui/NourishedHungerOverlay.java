@@ -4,7 +4,6 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.FoodStats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.GameRules;
@@ -19,6 +18,8 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.registry.ModEffects;
 import vectorwing.farmersdelight.setup.Configuration;
 
+import java.util.Random;
+
 /**
  * Credits to squeek502 (AppleSkin) for the implementation reference!
  * https://www.curseforge.com/minecraft/mc-mods/appleskin
@@ -28,7 +29,7 @@ import vectorwing.farmersdelight.setup.Configuration;
 public class NourishedHungerOverlay
 {
 	protected int foodIconsOffset;
-	private static final ResourceLocation modIcons = new ResourceLocation(FarmersDelight.MODID, "textures/gui/nourished.png");
+	private static final ResourceLocation MOD_ICONS_TEXTURE = new ResourceLocation(FarmersDelight.MODID, "textures/gui/nourished.png");
 
 	public static void init() {
 		MinecraftForge.EVENT_BUS.register(new NourishedHungerOverlay());
@@ -68,22 +69,30 @@ public class NourishedHungerOverlay
 						&& stats.getSaturationLevel() > 0.0F
 						&& stats.getFoodLevel() >= 20;
 
-		if (player.getActivePotionEffect(ModEffects.NOURISHED.get()) != null && player.getActivePotionEffect(Effects.HUNGER) == null) {
-			drawNourishedOverlay(stats.getFoodLevel(), mc, event.getMatrixStack(), left, top, isPlayerHealingWithSaturation);
+		if (player.getActivePotionEffect(ModEffects.NOURISHED.get()) != null) {
+			drawNourishedOverlay(stats, mc, event.getMatrixStack(), left, top, isPlayerHealingWithSaturation);
 		}
 	}
 
-	public static void drawNourishedOverlay(int foodLevel, Minecraft mc, MatrixStack matrixStack, int left, int top, boolean naturalHealing) {
-		mc.getTextureManager().bindTexture(modIcons);
+	public static void drawNourishedOverlay(FoodStats stats, Minecraft mc, MatrixStack matrixStack, int left, int top, boolean naturalHealing) {
+		mc.getTextureManager().bindTexture(MOD_ICONS_TEXTURE);
+
+		int ticks = mc.ingameGUI.getTicks();
+		Random rand = new Random();
+		rand.setSeed(ticks * 312871L);
 
 		for (int j = 0; j < 10; ++j) {
 			int x = left - j * 8 - 9;
 			int y = top;
 
+			if (stats.getSaturationLevel() <= 0.0F && ticks % (stats.getFoodLevel() * 3 + 1) == 0) {
+				y = top + (rand.nextInt(3) - 1);
+			}
+
 			// Background texture
 			mc.ingameGUI.blit(matrixStack, x, y, 0, 0, 11, 11);
 
-			float effectiveHungerOfBar = (foodLevel) / 2.0F - j;
+			float effectiveHungerOfBar = (stats.getFoodLevel()) / 2.0F - j;
 			int naturalHealingOffset = naturalHealing ? 18 : 0;
 
 			// Gilded hunger icons

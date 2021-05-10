@@ -4,6 +4,9 @@
 - Chickens can now be tempted/bred with the seeds of Cabbage, Tomato and Rice;
 - Pigs can now be tempted/bred with Cabbage and Tomato (but not Onion, it's not very good for them!);
 - Straw Bale and Rice Bale now create signal smoke when under campfires.
+- Fixes:
+  - Nourished Overlay now shakes with the hunger bar when some hunger is depleted;
+  - It now displays even when player has the Hunger debuff, since Nourished nullifies its effects.
 
 ## 0.4.2
 - Full migration to 1.16.5, due to crucial Forge updates;
