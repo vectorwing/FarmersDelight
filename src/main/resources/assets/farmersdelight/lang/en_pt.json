@@ -164,9 +164,10 @@
   "farmersdelight.tooltip.cooking_pot.empty": "'Tis empty!",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Haulin' one bunch o':",
   "farmersdelight.tooltip.cooking_pot.many_servings": "Haulin' %s bunches o':",
-
   "farmersdelight.tooltip.dog_food.when_feeding": "When feedin' yer tame Hound:",
   "farmersdelight.tooltip.horse_feed.when_feeding": "When feedin' yer tame land beast:",
+  "farmersdelight.tooltip.milk_bottle": "Scrub Off 1 Effect",
+  "farmersdelight.tooltip.hot_cocoa": "Scrub Off 1 Cursed Ache",
 
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "A great sea o' flavor awaits ye!",

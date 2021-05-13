@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.items;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -10,10 +11,18 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DrinkHelper;
 import net.minecraft.util.Hand;
+import net.minecraft.util.text.IFormattableTextComponent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import vectorwing.farmersdelight.utils.TextUtils;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class MilkBottleItem extends ConsumableItem
 {
@@ -54,5 +63,12 @@ public class MilkBottleItem extends ConsumableItem
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		return DrinkHelper.startDrinking(worldIn, playerIn, handIn);
+	}
+
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+		IFormattableTextComponent empty = TextUtils.getTranslation("tooltip.milk_bottle");
+		tooltip.add(empty.mergeStyle(TextFormatting.BLUE));
 	}
 }

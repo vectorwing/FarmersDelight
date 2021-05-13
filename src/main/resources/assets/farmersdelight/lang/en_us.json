@@ -164,9 +164,10 @@
   "farmersdelight.tooltip.cooking_pot.empty": "Empty",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Holds 1 serving of:",
   "farmersdelight.tooltip.cooking_pot.many_servings": "Holds %s servings of:",
-
   "farmersdelight.tooltip.dog_food.when_feeding": "When fed to a tamed Wolf:",
   "farmersdelight.tooltip.horse_feed.when_feeding": "When fed to a tamed mount:",
+  "farmersdelight.tooltip.milk_bottle": "Clears 1 Effect",
+  "farmersdelight.tooltip.hot_cocoa": "Clears 1 Harmful Effect",
 
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "A world of flavor awaits you!",
@@ -177,7 +178,7 @@
   "farmersdelight.advancement.plant_all_crops": "Crop Rotation",
   "farmersdelight.advancement.plant_all_crops.desc": "Cultivate every fruit, vegetable, fungus or root you can find!",
   "farmersdelight.advancement.get_ham": "Wild Butcher",
-  "farmersdelight.advancement.get_ham.desc": "Knives can scavenge animal spoils more carefully. Some of them may even yield bigger meat cuts!",
+  "farmersdelight.advancement.get_ham.desc": "Use a Knife to extract bigger cuts of meat from Pigs",
   "farmersdelight.advancement.harvest_straw": "Grasping at Straws",
   "farmersdelight.advancement.harvest_straw.desc": "Harvest grassy plants and crops with a Knife to obtain Straw",
   "farmersdelight.advancement.get_rich_soil": "Plant Food",
