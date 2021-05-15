@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.client.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.entity.player.PlayerEntity;
@@ -75,17 +76,23 @@ public class NourishedHungerOverlay
 	}
 
 	public static void drawNourishedOverlay(FoodStats stats, Minecraft mc, MatrixStack matrixStack, int left, int top, boolean naturalHealing) {
-		mc.getTextureManager().bindTexture(MOD_ICONS_TEXTURE);
+		matrixStack.push();
+		matrixStack.translate(0, 0, 0.01);
 
+		float saturation = stats.getSaturationLevel();
+		int foodLevel = stats.getFoodLevel();
 		int ticks = mc.ingameGUI.getTicks();
 		Random rand = new Random();
-		rand.setSeed(ticks * 312871L);
+		rand.setSeed((long)(ticks * 312871));
+
+		mc.getTextureManager().bindTexture(MOD_ICONS_TEXTURE);
+		RenderSystem.enableBlend();
 
 		for (int j = 0; j < 10; ++j) {
 			int x = left - j * 8 - 9;
 			int y = top;
 
-			if (stats.getSaturationLevel() <= 0.0F && ticks % (stats.getFoodLevel() * 3 + 1) == 0) {
+			if (saturation <= 0.0F && ticks % (foodLevel * 3 + 1) == 0) {
 				y = top + (rand.nextInt(3) - 1);
 			}
 
@@ -102,6 +109,8 @@ public class NourishedHungerOverlay
 				mc.ingameGUI.blit(matrixStack, x, y, 9 + naturalHealingOffset, 0, 9, 9);
 		}
 
+		RenderSystem.disableBlend();
+		matrixStack.pop();
 		mc.getTextureManager().bindTexture(AbstractGui.GUI_ICONS_LOCATION);
 	}
 }
