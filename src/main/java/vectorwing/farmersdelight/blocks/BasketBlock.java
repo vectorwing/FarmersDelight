@@ -27,6 +27,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import vectorwing.farmersdelight.tile.BasketTileEntity;
 
@@ -38,65 +39,36 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
 	public static final BooleanProperty ENABLED = BlockStateProperties.ENABLED;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
 	public static final VoxelShape OUT_SHAPE = VoxelShapes.fullCube();
 	@SuppressWarnings("UnstableApiUsage")
-	public static final ImmutableMap<Direction, VoxelShape> SHAPE_FACING =
+	public static final ImmutableMap<Direction, VoxelShape> RENDER_SHAPE_FACING =
 			Maps.immutableEnumMap(ImmutableMap.<Direction, VoxelShape>builder()
-					.put(Direction.DOWN, cutout(
-							makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D),
-							makeCuboidShape(6.0D, 3.0D, 14.0D, 10.0D, 5.0D, 16.0D),
-							makeCuboidShape(14.0D, 3.0D, 6.0D, 16.0D, 5.0D, 10.0D),
-							makeCuboidShape(6.0D, 3.0D, 0.0D, 10.0D, 5.0D, 2.0D),
-							makeCuboidShape(0.0D, 3.0D, 6.0D, 2.0D, 5.0D, 10.0D)
-					))
-					.put(Direction.UP, cutout(
-							makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 16.0D, 14.0D),
-							makeCuboidShape(6.0D, 11.0D, 0.0D, 10.0D, 13.0D, 2.0D),
-							makeCuboidShape(14.0D, 11.0D, 6.0D, 16.0D, 13.0D, 10.0D),
-							makeCuboidShape(6.0D, 11.0D, 14.0D, 10.0D, 13.0D, 16.0D),
-							makeCuboidShape(0.0D, 11.0D, 6.0D, 2.0D, 13.0D, 10.0D)
-					))
-					.put(Direction.NORTH, cutout(
-							makeCuboidShape(2.0D, 2.0D, 0.0D, 14.0D, 14.0D, 14.0D),
-							makeCuboidShape(6.0D, 0.0D, 3.0D, 10.0D, 2.0D, 5.0D),
-							makeCuboidShape(14.0D, 6.0D, 3.0D, 16.0D, 10.0D, 5.0D),
-							makeCuboidShape(6.0D, 14.0D, 3.0D, 10.0D, 16.0D, 5.0D),
-							makeCuboidShape(0.0D, 6.0D, 3.0D, 2.0D, 10.0D, 5.0D)
-					))
-					.put(Direction.SOUTH, cutout(
-							makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 14.0D, 16.0D),
-							makeCuboidShape(6.0D, 14.0D, 11.0D, 10.0D, 16.0D, 13.0D),
-							makeCuboidShape(14.0D, 6.0D, 11.0D, 16.0D, 10.0D, 13.0D),
-							makeCuboidShape(6.0D, 0.0D, 11.0D, 10.0D, 2.0D, 13.0D),
-							makeCuboidShape(0.0D, 6.0D, 11.0D, 2.0D, 10.0D, 13.0D)
-					))
-					.put(Direction.WEST, cutout(
-							makeCuboidShape(0.0D, 2.0D, 2.0D, 14.0D, 14.0D, 14.0D),
-							makeCuboidShape(3.0D, 14.0D, 6.0D, 5.0D, 16.0D, 10.0D),
-							makeCuboidShape(3.0D, 6.0D, 14.0D, 5.0D, 10.0D, 16.0D),
-							makeCuboidShape(3.0D, 0.0D, 6.0D, 5.0D, 2.0D, 10.0D),
-							makeCuboidShape(3.0D, 6.0D, 0.0D, 5.0D, 10.0D, 2.0D)
-					))
-					.put(Direction.EAST, cutout(
-							makeCuboidShape(2.0D, 2.0D, 2.0D, 16.0D, 14.0D, 14.0D),
-							makeCuboidShape(11.0D, 14.0D, 6.0D, 13.0D, 16.0D, 10.0D),
-							makeCuboidShape(11.0D, 6.0D, 0.0D, 13.0D, 10.0D, 2.0D),
-							makeCuboidShape(11.0D, 0.0D, 6.0D, 13.0D, 2.0D, 10.0D),
-							makeCuboidShape(11.0D, 6.0D, 14.0D, 13.0D, 10.0D, 16.0D)
-					))
+					.put(Direction.DOWN, makeCuboidShape(0.0D, 15.0D, 0.0D, 16.0D, 16.0D, 16.0D))
+					.put(Direction.UP, makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D))
+					.put(Direction.NORTH, makeCuboidShape(0.0D, 0.0D, 15.0D, 16.0D, 16.0D, 16.0D))
+					.put(Direction.SOUTH, makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 1.0D))
+					.put(Direction.WEST, makeCuboidShape(15.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D))
+					.put(Direction.EAST, makeCuboidShape(0.0D, 0.0D, 0.0D, 1.0D, 16.0D, 16.0D))
 					.build());
+	@SuppressWarnings("UnstableApiUsage")
+	public static final ImmutableMap<Direction, VoxelShape> COLLISION_SHAPE_FACING =
+			Maps.immutableEnumMap(ImmutableMap.<Direction, VoxelShape>builder()
+					.put(Direction.DOWN, makeHollowCubeShape(makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D)))
+					.put(Direction.UP, makeHollowCubeShape(makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 16.0D, 14.0D)))
+					.put(Direction.NORTH, makeHollowCubeShape(makeCuboidShape(2.0D, 2.0D, 0.0D, 14.0D, 14.0D, 14.0D)))
+					.put(Direction.SOUTH, makeHollowCubeShape(makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 14.0D, 16.0D)))
+					.put(Direction.WEST, makeHollowCubeShape(makeCuboidShape(0.0D, 2.0D, 2.0D, 14.0D, 14.0D, 14.0D)))
+					.put(Direction.EAST, makeHollowCubeShape(makeCuboidShape(2.0D, 2.0D, 2.0D, 16.0D, 14.0D, 14.0D)))
+					.build());
+
+	private static VoxelShape makeHollowCubeShape(VoxelShape cutout) {
+		return VoxelShapes.combine(OUT_SHAPE, cutout, IBooleanFunction.ONLY_FIRST).simplify();
+	}
 
 	public BasketBlock() {
 		super(Properties.create(Material.WOOD).hardnessAndResistance(1.5F).sound(SoundType.WOOD));
 		this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.UP).with(WATERLOGGED, false));
-	}
-
-	private static VoxelShape cutout(VoxelShape... cutouts) {
-		VoxelShape shape = OUT_SHAPE;
-		for (VoxelShape cutout : cutouts) {
-			shape = VoxelShapes.combine(shape, cutout, IBooleanFunction.ONLY_FIRST);
-		}
-		return shape.simplify();
 	}
 
 	@Override
@@ -131,6 +103,14 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable
 
 			super.onReplaced(state, worldIn, pos, newState, isMoving);
 		}
+	}
+
+	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		if (stateIn.get(WATERLOGGED)) {
+			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+		}
+
+		return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
 
 	@Override
@@ -197,17 +177,21 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return SHAPE_FACING.get(state.get(FACING));
+		return COLLISION_SHAPE_FACING.get(state.get(FACING));
+	}
+
+	@Override
+	public VoxelShape getRenderShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
+		return RENDER_SHAPE_FACING.get(state.get(FACING));
+	}
+
+	public boolean isTransparent(BlockState state) {
+		return true;
 	}
 
 	@Override
 	public VoxelShape getRaytraceShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		return OUT_SHAPE;
-	}
-
-	@Override
-	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return SHAPE_FACING.get(state.get(FACING));
 	}
 
 	@Override
