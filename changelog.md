@@ -8,9 +8,10 @@
 - Pigs can now be tempted/bred with Cabbage and Tomato (but not Onion, it's not very good for them!);
 - Added custom icon and background for MrCrayfish's Catalogue and Configured mods (thank you, Dradon7!)
 - Fixes:
+  - Baskets now reliably hold their water when waterlogged, spilling it only through the open face;
   - Straw Bale and Rice Bale now create signal smoke when under campfires;
   - Nourishment Overlay now shakes with the hunger bar when some hunger is depleted;
-    - It now displays even when player has the Hunger debuff, since Nourishment nullifies its effects.
+    - It also displays even when the player has the Hunger debuff, since Nourishment nullifies its effects.
 - Added translations:
   - id_id (thank you, ArikHn!)
 - Updated translations:
