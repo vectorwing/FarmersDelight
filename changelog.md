@@ -1,12 +1,20 @@
 # Changelog
 
-## 0.4.3 (upcoming)
+## 0.4.3
+- Nourished has been renamed to Nourishment, to stay consistent with vanilla effect naming;
+  - The ID remains the same for now, and might change on the next major release;
+- Milk Bottle and Hot Cocoa now have a "blue potion tooltip" describing what they do when consumed;
 - Chickens can now be tempted/bred with the seeds of Cabbage, Tomato and Rice;
 - Pigs can now be tempted/bred with Cabbage and Tomato (but not Onion, it's not very good for them!);
-- Straw Bale and Rice Bale now create signal smoke when under campfires.
+- Added custom icon and background for MrCrayfish's Catalogue and Configured mods (thank you, Dradon7!)
 - Fixes:
-  - Nourished Overlay now shakes with the hunger bar when some hunger is depleted;
-  - It now displays even when player has the Hunger debuff, since Nourished nullifies its effects.
+  - Straw Bale and Rice Bale now create signal smoke when under campfires;
+  - Nourishment Overlay now shakes with the hunger bar when some hunger is depleted;
+    - It now displays even when player has the Hunger debuff, since Nourishment nullifies its effects.
+- Added translations:
+  - id_id (thank you, ArikHn!)
+- Updated translations:
+  - ru_ru (thank you, GrayPix!)
 
 ## 0.4.2
 - Full migration to 1.16.5, due to crucial Forge updates;

@@ -145,7 +145,7 @@
   "item.farmersdelight.dog_food": "Dog Food",
   "item.farmersdelight.horse_feed": "Horse Feed",
 
-  "effect.farmersdelight.nourished": "Nourished",
+  "effect.farmersdelight.nourished": "Nourishment",
   "effect.farmersdelight.comfort": "Comfort",
 
   "effect.farmersdelight.nourished.0.desc": "Prevents hunger loss, except when using saturation to heal damage.",

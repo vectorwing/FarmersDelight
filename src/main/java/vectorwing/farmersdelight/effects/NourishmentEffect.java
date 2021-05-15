@@ -7,7 +7,7 @@ import net.minecraft.potion.EffectType;
 import net.minecraft.util.FoodStats;
 import net.minecraft.world.GameRules;
 
-public class NourishedEffect extends Effect
+public class NourishmentEffect extends Effect
 {
 	/**
 	 * This effect makes the player immune to accumulating food exhaustion. It is useless to all other entities.
@@ -17,7 +17,7 @@ public class NourishedEffect extends Effect
 	 * <p>
 	 * This method employs an Access Transformer exclusively to read the exhaustion value; it calls the proper functions to change it.
 	 */
-	public NourishedEffect() {
+	public NourishmentEffect() {
 		super(EffectType.BENEFICIAL, 0);
 	}
 
