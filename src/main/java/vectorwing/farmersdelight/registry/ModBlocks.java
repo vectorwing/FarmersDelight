@@ -70,6 +70,11 @@ public class ModBlocks
 	public static final RegistryObject<Block> FULL_TATAMI_MAT = BLOCKS.register("full_tatami_mat", TatamiMatBlock::new);
 	public static final RegistryObject<Block> HALF_TATAMI_MAT = BLOCKS.register("half_tatami_mat", TatamiHalfMatBlock::new);
 
+	public static final RegistryObject<Block> CANVAS_SIGN = BLOCKS.register("canvas_sign",
+			() -> new StandingCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN)));
+	public static final RegistryObject<Block> CANVAS_WALL_SIGN = BLOCKS.register("canvas_wall_sign",
+			() -> new WallCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN)));
+
 	// Composting
 	public static final RegistryObject<Block> BROWN_MUSHROOM_COLONY = BLOCKS.register("brown_mushroom_colony",
 			() -> new MushroomColonyBlock(Block.Properties.from(Blocks.BROWN_MUSHROOM), Items.BROWN_MUSHROOM.delegate));

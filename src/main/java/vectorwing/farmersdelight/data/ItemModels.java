@@ -57,6 +57,7 @@ public class ItemModels extends ItemModelProvider
 				ModItems.FULL_TATAMI_MAT.get(),
 				ModItems.HALF_TATAMI_MAT.get(),
 				ModItems.ROPE.get(),
+				ModItems.CANVAS_SIGN.get(),
 				ModItems.APPLE_PIE.get(),
 				ModItems.SWEET_BERRY_CHEESECAKE.get(),
 				ModItems.CHOCOLATE_PIE.get(),

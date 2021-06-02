@@ -23,4 +23,6 @@ public class ModTileEntityTypes
 			() -> TileEntityType.Builder.create(PantryTileEntity::new,
 					ModBlocks.OAK_PANTRY.get(), ModBlocks.BIRCH_PANTRY.get(), ModBlocks.SPRUCE_PANTRY.get(), ModBlocks.JUNGLE_PANTRY.get(), ModBlocks.ACACIA_PANTRY.get(), ModBlocks.DARK_OAK_PANTRY.get())
 					.build(null));
+	public static final RegistryObject<TileEntityType<CanvasSignTileEntity>> CANVAS_SIGN_TILE = TILES.register("canvas_sign",
+			() -> TileEntityType.Builder.create(CanvasSignTileEntity::new, ModBlocks.CANVAS_SIGN.get(), ModBlocks.CANVAS_WALL_SIGN.get()).build(null));
 }

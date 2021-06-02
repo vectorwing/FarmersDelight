@@ -74,6 +74,8 @@ public class ModItems
 			() -> new BlockItem(ModBlocks.RICH_SOIL_FARMLAND.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> ROPE = ITEMS.register("rope",
 			() -> new RopeItem(ModBlocks.ROPE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> CANVAS_SIGN = ITEMS.register("canvas_sign",
+			() -> new SignItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), ModBlocks.CANVAS_SIGN.get(), ModBlocks.CANVAS_WALL_SIGN.get()));
 
 	// Tools
 	public static final RegistryObject<Item> FLINT_KNIFE = ITEMS.register("flint_knife",
