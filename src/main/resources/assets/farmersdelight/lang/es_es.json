@@ -38,11 +38,11 @@
   "block.farmersdelight.red_mushroom_colony": "Colonia de hongos rojos",
 
   "block.farmersdelight.wild_cabbages": "Col silvestre",
-  "block.farmersdelight.wild_tomatoes": "Vides de tomate",
+  "block.farmersdelight.wild_tomatoes": "Vides de tomate silvestre",
   "block.farmersdelight.wild_onions": "Cebolla silvestre",
   "block.farmersdelight.wild_carrots": "Zanahoria silvestre",
   "block.farmersdelight.wild_potatoes": "Patata silvestre",
-  "block.farmersdelight.wild_beetroots": "Remolacha de mar",
+  "block.farmersdelight.wild_beetroots": "Remolacha de mar silvestre",
   "block.farmersdelight.wild_rice": "Arroz silvestre",
 
   "block.farmersdelight.apple_pie": "Tarta de manzana",
@@ -70,7 +70,7 @@
   "item.farmersdelight.pumpkin_slice": "Rodaja de calabaza",
   "item.farmersdelight.cabbage_leaf": "Hoja de col",
   "item.farmersdelight.minced_beef": "Carne picada",
-  "item.farmersdelight.beef_patty": "Hamburguesa de ternera",
+  "item.farmersdelight.beef_patty": "Hamburguesa cruda",
   "item.farmersdelight.chicken_cuts": "Cortes de pollo crudos",
   "item.farmersdelight.cooked_chicken_cuts": "Cortes de pollo cocidos",
   "item.farmersdelight.bacon": "Tocino crudo",
@@ -100,7 +100,7 @@
   "item.farmersdelight.iron_knife": "Cuchillo de hierro",
   "item.farmersdelight.golden_knife": "Cuchillo de oro",
   "item.farmersdelight.diamond_knife": "Cuchillo de diamante",
-  "item.farmersdelight.netherite_knife": "Cuchillo de Netherita",
+  "item.farmersdelight.netherite_knife": "Cuchillo de netherita",
 
   "item.farmersdelight.barbecue_stick": "Brocheta de carne asada",
   "item.farmersdelight.egg_sandwich": "Sándwich de huevo",
@@ -115,7 +115,7 @@
   "item.farmersdelight.cooked_rice": "Arroz cocido",
   "item.farmersdelight.mixed_salad": "Ensalada mixta",
   "item.farmersdelight.nether_salad": "Ensalada del Nether",
-  "item.farmersdelight.beef_stew": "Estofado de ternera",
+  "item.farmersdelight.beef_stew": "Estofado de carne",
   "item.farmersdelight.chicken_soup": "Sopa de pollo",
   "item.farmersdelight.vegetable_soup": "Sopa de verduras",
   "item.farmersdelight.fish_stew": "Estofado de pescado",
@@ -166,7 +166,7 @@
   "farmersdelight.tooltip.cooking_pot.many_servings": "Contiene %s porciones de:",
 
   "farmersdelight.tooltip.dog_food.when_feeding": "Cuando se alimenta a un lobo domesticado:",
-  "farmersdelight.tooltip.horse_feed.when_feeding": "Cuando se alimenta a una montura domesticada:",
+  "farmersdelight.tooltip.horse_feed.when_feeding": "Cuando se alimenta a un caballo domesticado:",
 
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "Un mundo de sabor le espera!",
