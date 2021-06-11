@@ -1,6 +1,7 @@
-package vectorwing.farmersdelight.blocks;
+package vectorwing.farmersdelight.blocks.signs;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.WallSignBlock;
 import net.minecraft.block.WoodType;
 import net.minecraft.entity.LivingEntity;
@@ -15,18 +16,26 @@ import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 
 import javax.annotation.Nullable;
 
-public class WallCanvasSignBlock extends WallSignBlock
+public class WallCanvasSignBlock extends WallSignBlock implements ICanvasSign
 {
+	private final DyeColor backgroundColor;
 	private final DyeColor defaultTextColor;
 
-	public WallCanvasSignBlock(Properties properties) {
-		super(properties, WoodType.SPRUCE);
+	public WallCanvasSignBlock(@Nullable DyeColor backgroundColor) {
+		super(Properties.from(Blocks.OAK_SIGN), WoodType.SPRUCE);
+		this.backgroundColor = backgroundColor;
 		this.defaultTextColor = DyeColor.BLACK;
 	}
 
-	public WallCanvasSignBlock(Properties properties, DyeColor defaultTextColorIn) {
-		super(properties, WoodType.SPRUCE);
+	public WallCanvasSignBlock(@Nullable DyeColor backgroundColor, DyeColor defaultTextColorIn) {
+		super(Properties.from(Blocks.OAK_SIGN), WoodType.SPRUCE);
+		this.backgroundColor = backgroundColor;
 		this.defaultTextColor = defaultTextColorIn;
+	}
+
+	@Nullable
+	public DyeColor getBackgroundColor() {
+		return this.backgroundColor;
 	}
 
 	@Override

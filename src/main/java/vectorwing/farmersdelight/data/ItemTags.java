@@ -38,6 +38,11 @@ public class ItemTags extends ItemTagsProvider
 		getOrCreateBuilder(ModTags.COMFORT_FOODS).add(Items.MUSHROOM_STEW, Items.BEETROOT_SOUP, Items.RABBIT_STEW);
 		getOrCreateBuilder(ModTags.WOLF_PREY).addTag(ForgeTags.RAW_CHICKEN).addTag(ForgeTags.RAW_MUTTON).add(Items.RABBIT);
 		getOrCreateBuilder(ModTags.CABBAGE_ROLL_INGREDIENTS).addTag(ForgeTags.RAW_PORK).addTag(ForgeTags.RAW_FISHES).addTag(ForgeTags.RAW_CHICKEN).addTag(ForgeTags.RAW_BEEF).addTag(ForgeTags.RAW_MUTTON).addTag(ForgeTags.EGGS).addTag(Tags.Items.MUSHROOMS).add(Items.CARROT, Items.POTATO, Items.BEETROOT);
+		getOrCreateBuilder(ModTags.CANVAS_SIGNS)
+				.add(ModItems.CANVAS_SIGN.get())
+				.add(ModItems.WHITE_CANVAS_SIGN.get())
+				.add(ModItems.ORANGE_CANVAS_SIGN.get())
+				.add(ModItems.MAGENTA_CANVAS_SIGN.get());
 	}
 
 	@SuppressWarnings("unchecked")

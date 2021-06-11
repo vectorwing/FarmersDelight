@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.registry;
 
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.Items;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraftforge.common.ToolType;
@@ -10,6 +11,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.blocks.*;
+import vectorwing.farmersdelight.blocks.signs.StandingCanvasSignBlock;
+import vectorwing.farmersdelight.blocks.signs.WallCanvasSignBlock;
 
 import java.util.function.ToIntFunction;
 
@@ -71,9 +74,22 @@ public class ModBlocks
 	public static final RegistryObject<Block> HALF_TATAMI_MAT = BLOCKS.register("half_tatami_mat", TatamiHalfMatBlock::new);
 
 	public static final RegistryObject<Block> CANVAS_SIGN = BLOCKS.register("canvas_sign",
-			() -> new StandingCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN)));
+			() -> new StandingCanvasSignBlock(null));
+	public static final RegistryObject<Block> WHITE_CANVAS_SIGN = BLOCKS.register("white_canvas_sign",
+			() -> new StandingCanvasSignBlock(DyeColor.WHITE));
+	public static final RegistryObject<Block> ORANGE_CANVAS_SIGN = BLOCKS.register("orange_canvas_sign",
+			() -> new StandingCanvasSignBlock(DyeColor.ORANGE));
+	public static final RegistryObject<Block> MAGENTA_CANVAS_SIGN = BLOCKS.register("magenta_canvas_sign",
+			() -> new StandingCanvasSignBlock(DyeColor.MAGENTA));
+
 	public static final RegistryObject<Block> CANVAS_WALL_SIGN = BLOCKS.register("canvas_wall_sign",
-			() -> new WallCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN)));
+			() -> new WallCanvasSignBlock(null));
+	public static final RegistryObject<Block> WHITE_CANVAS_WALL_SIGN = BLOCKS.register("white_canvas_wall_sign",
+			() -> new WallCanvasSignBlock(DyeColor.WHITE));
+	public static final RegistryObject<Block> ORANGE_CANVAS_WALL_SIGN = BLOCKS.register("orange_canvas_wall_sign",
+			() -> new WallCanvasSignBlock(DyeColor.ORANGE));
+	public static final RegistryObject<Block> MAGENTA_CANVAS_WALL_SIGN = BLOCKS.register("magenta_canvas_wall_sign",
+			() -> new WallCanvasSignBlock(DyeColor.MAGENTA));
 
 	// Composting
 	public static final RegistryObject<Block> BROWN_MUSHROOM_COLONY = BLOCKS.register("brown_mushroom_colony",

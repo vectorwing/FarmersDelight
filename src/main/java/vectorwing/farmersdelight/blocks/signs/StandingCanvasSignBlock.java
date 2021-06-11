@@ -1,8 +1,6 @@
-package vectorwing.farmersdelight.blocks;
+package vectorwing.farmersdelight.blocks.signs;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.StandingSignBlock;
-import net.minecraft.block.WoodType;
+import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
@@ -15,18 +13,26 @@ import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 
 import javax.annotation.Nullable;
 
-public class StandingCanvasSignBlock extends StandingSignBlock
+public class StandingCanvasSignBlock extends StandingSignBlock implements ICanvasSign
 {
+	private final DyeColor backgroundColor;
 	private final DyeColor defaultTextColor;
 
-	public StandingCanvasSignBlock(Properties properties) {
-		super(properties, WoodType.SPRUCE);
+	public StandingCanvasSignBlock(@Nullable DyeColor backgroundColor) {
+		super(Properties.from(Blocks.OAK_SIGN), WoodType.SPRUCE);
+		this.backgroundColor = backgroundColor;
 		this.defaultTextColor = DyeColor.BLACK;
 	}
 
-	public StandingCanvasSignBlock(Properties properties, DyeColor defaultTextColorIn) {
-		super(properties, WoodType.SPRUCE);
+	public StandingCanvasSignBlock(@Nullable DyeColor backgroundColor, DyeColor defaultTextColorIn) {
+		super(Properties.from(Blocks.OAK_SIGN), WoodType.SPRUCE);
+		this.backgroundColor = backgroundColor;
 		this.defaultTextColor = defaultTextColorIn;
+	}
+
+	@Nullable
+	public DyeColor getBackgroundColor() {
+		return this.backgroundColor;
 	}
 
 	@Override

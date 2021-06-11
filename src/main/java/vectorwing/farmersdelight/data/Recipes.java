@@ -1,15 +1,14 @@
 package vectorwing.farmersdelight.data;
 
-import com.google.common.collect.Sets;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.Tags;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.data.recipes.CookingRecipes;
 import vectorwing.farmersdelight.data.recipes.CuttingRecipes;
@@ -17,6 +16,7 @@ import vectorwing.farmersdelight.data.recipes.SmeltingRecipes;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.tags.ForgeTags;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Consumer;
@@ -319,6 +319,21 @@ public class Recipes extends RecipeProvider
 				.key('#', ModItems.CANVAS.get())
 				.key('/', Items.STICK)
 				.addCriterion("has_canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.WHITE_CANVAS_SIGN.get(), 1)
+				.addIngredient(ModTags.CANVAS_SIGNS)
+				.addIngredient(Tags.Items.DYES_WHITE)
+				.addCriterion("has_canvas_sign", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_SIGN.get()))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ORANGE_CANVAS_SIGN.get(), 1)
+				.addIngredient(ModTags.CANVAS_SIGNS)
+				.addIngredient(Tags.Items.DYES_ORANGE)
+				.addCriterion("has_canvas_sign", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_SIGN.get()))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.MAGENTA_CANVAS_SIGN.get(), 1)
+				.addIngredient(ModTags.CANVAS_SIGNS)
+				.addIngredient(Tags.Items.DYES_MAGENTA)
+				.addCriterion("has_canvas_sign", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_SIGN.get()))
 				.build(consumer);
 
 		// BREAKING DOWN

@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.client.renderer.model.RenderMaterial;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -36,7 +37,10 @@ public class ClientEventHandler
 	public static void onStitchEvent(TextureStitchEvent.Pre event) {
 		ResourceLocation stitching = event.getMap().getTextureLocation();
 		if (stitching.equals(new ResourceLocation("textures/atlas/signs.png"))) {
-			event.addSprite(ModAtlases.CANVAS_SIGN_BLANK_MATERIAL.getTextureLocation());
+			event.addSprite(ModAtlases.BLANK_CANVAS_SIGN_MATERIAL.getTextureLocation());
+			for (RenderMaterial material : ModAtlases.DYED_CANVAS_SIGN_MATERIALS.values()) {
+				event.addSprite(material.getTextureLocation());
+			}
 		}
 		if (!stitching.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)) {
 			return;
