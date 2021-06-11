@@ -38,6 +38,10 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.RICE_UPPER_CROP.get(),
 				ModBlocks.TALL_RICE_CROP.get(),
 				ModBlocks.TOMATO_CROP.get());
+		getOrCreateBuilder(net.minecraft.tags.BlockTags.STANDING_SIGNS).add(
+				ModBlocks.CANVAS_SIGN.get());
+		getOrCreateBuilder(net.minecraft.tags.BlockTags.WALL_SIGNS).add(
+				ModBlocks.CANVAS_WALL_SIGN.get());
 		getOrCreateBuilder(net.minecraft.tags.BlockTags.SMALL_FLOWERS).addTag(ModTags.WILD_CROPS);
 	}
 

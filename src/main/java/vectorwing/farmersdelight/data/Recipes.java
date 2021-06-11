@@ -7,6 +7,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -308,6 +309,15 @@ public class Recipes extends RecipeProvider
 				.patternLine("sc")
 				.key('c', ModItems.CANVAS.get())
 				.key('s', ModItems.STRAW.get())
+				.addCriterion("has_canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.CANVAS_SIGN.get(), 3)
+				.patternLine("w#w")
+				.patternLine("w#w")
+				.patternLine(" / ")
+				.key('w', ItemTags.PLANKS)
+				.key('#', ModItems.CANVAS.get())
+				.key('/', Items.STICK)
 				.addCriterion("has_canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
 				.build(consumer);
 
