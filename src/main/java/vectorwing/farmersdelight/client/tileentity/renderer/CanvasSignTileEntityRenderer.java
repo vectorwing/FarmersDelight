@@ -14,7 +14,7 @@ import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import vectorwing.farmersdelight.utils.ClientRenderUtils;
+import vectorwing.farmersdelight.utils.ModAtlases;
 
 import java.util.List;
 
@@ -27,12 +27,14 @@ import java.util.List;
  * Render tweaks:
  * - Hijacking getMaterial to return FD's dye-based RenderMaterials;
  * - Brighter text tones to fit the backgrounds more nicely;
- * - TODO: Decide whether to mess with line height or not.
  */
 
 @OnlyIn(Dist.CLIENT)
 public class CanvasSignTileEntityRenderer extends SignTileEntityRenderer
 {
+	public static final float TEXT_LINE_HEIGHT = 10;
+	public static final float TEXT_VERTICAL_OFFSET = 19;
+
 	private final SignTileEntityRenderer.SignModel model = new SignTileEntityRenderer.SignModel();
 
 	public CanvasSignTileEntityRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
@@ -41,49 +43,56 @@ public class CanvasSignTileEntityRenderer extends SignTileEntityRenderer
 
 	@Override
 	public void render(SignTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
-		BlockState blockstate = tileEntityIn.getBlockState();
+		BlockState state = tileEntityIn.getBlockState();
+
 		matrixStackIn.push();
-		float f = 0.6666667F;
-		if (blockstate.getBlock() instanceof StandingSignBlock) {
+
+		// Determine which kind of sign to render, and its rotation angle
+		if (state.getBlock() instanceof StandingSignBlock) {
 			matrixStackIn.translate(0.5D, 0.5D, 0.5D);
-			float f1 = -((float)(blockstate.get(StandingSignBlock.ROTATION) * 360) / 16.0F);
-			matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f1));
+			float angle = -((float)(state.get(StandingSignBlock.ROTATION) * 360) / 16.0F);
+			matrixStackIn.rotate(Vector3f.YP.rotationDegrees(angle));
 			this.model.signStick.showModel = true;
 		} else {
 			matrixStackIn.translate(0.5D, 0.5D, 0.5D);
-			float f4 = -blockstate.get(WallSignBlock.FACING).getHorizontalAngle();
-			matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f4));
+			float angle = -state.get(WallSignBlock.FACING).getHorizontalAngle();
+			matrixStackIn.rotate(Vector3f.YP.rotationDegrees(angle));
 			matrixStackIn.translate(0.0D, -0.3125D, -0.4375D);
 			this.model.signStick.showModel = false;
 		}
 
+		// Render the sign
 		matrixStackIn.push();
-		matrixStackIn.scale(0.6666667F, -0.6666667F, -0.6666667F);
-		RenderMaterial rendermaterial = getMaterial(blockstate.getBlock());
-		IVertexBuilder ivertexbuilder = rendermaterial.getBuffer(bufferIn, this.model::getRenderType);
-		this.model.signBoard.render(matrixStackIn, ivertexbuilder, combinedLightIn, combinedOverlayIn);
-		this.model.signStick.render(matrixStackIn, ivertexbuilder, combinedLightIn, combinedOverlayIn);
+		float signScale = 0.6666667F;
+		matrixStackIn.scale(signScale, -signScale, -signScale);
+		RenderMaterial material = getMaterial(state.getBlock());
+		IVertexBuilder vertexBuilder = material.getBuffer(bufferIn, this.model::getRenderType);
+		this.model.signBoard.render(matrixStackIn, vertexBuilder, combinedLightIn, combinedOverlayIn);
+		this.model.signStick.render(matrixStackIn, vertexBuilder, combinedLightIn, combinedOverlayIn);
 		matrixStackIn.pop();
-		FontRenderer fontrenderer = this.renderDispatcher.getFontRenderer();
-		float f2 = 0.010416667F;
-		matrixStackIn.translate(0.0D, (double)0.33333334F, (double)0.046666667F);
-		matrixStackIn.scale(0.010416667F, -0.010416667F, 0.010416667F);
-		int i = tileEntityIn.getTextColor().getTextColor();
-		double d0 = 0.4D;
-		int j = (int)((double) NativeImage.getRed(i) * 0.7D);
-		int k = (int)((double)NativeImage.getGreen(i) * 0.7D);
-		int l = (int)((double)NativeImage.getBlue(i) * 0.7D);
-		int i1 = NativeImage.getCombined(0, l, k, j);
-		int j1 = 20;
 
-		for(int k1 = 0; k1 < 4; ++k1) {
-			IReorderingProcessor ireorderingprocessor = tileEntityIn.reorderText(k1, (p_243502_1_) -> {
-				List<IReorderingProcessor> list = fontrenderer.trimStringToWidth(p_243502_1_, 90);
-				return list.isEmpty() ? IReorderingProcessor.field_242232_a : list.get(0);
+		// Decorate the sign's text
+		FontRenderer fontRenderer = this.renderDispatcher.getFontRenderer();
+		float textScale = 0.010416667F;
+		matrixStackIn.translate(0.0D, 0.33333334F, 0.046666667F);
+		matrixStackIn.scale(textScale, -textScale, textScale);
+		int colorCode = tileEntityIn.getTextColor().getTextColor();
+		double textBrightness = 0.5D;
+		int red = (int)((double)NativeImage.getRed(colorCode) * textBrightness);
+		int green = (int)((double)NativeImage.getGreen(colorCode) * textBrightness);
+		int blue = (int)((double)NativeImage.getBlue(colorCode) * textBrightness);
+		int textColor = NativeImage.getCombined(0, blue, green, red);
+
+		// Render the sign's text
+		for(int i = 0; i < 4; ++i) {
+			IReorderingProcessor reorderingProcessor = tileEntityIn.reorderText(i, (textProps) -> {
+				List<IReorderingProcessor> textLines = fontRenderer.trimStringToWidth(textProps, 90);
+				return textLines.isEmpty() ? IReorderingProcessor.field_242232_a : textLines.get(0);
 			});
-			if (ireorderingprocessor != null) {
-				float f3 = (float)(-fontrenderer.func_243245_a(ireorderingprocessor) / 2);
-				fontrenderer.drawEntityText(ireorderingprocessor, f3, (float)(k1 * 10 - 20), i1, false, matrixStackIn.getLast().getMatrix(), bufferIn, false, 0, combinedLightIn);
+			if (reorderingProcessor != null) {
+				float x = (float)(-fontRenderer.func_243245_a(reorderingProcessor) / 2);
+				float y = i * TEXT_LINE_HEIGHT - TEXT_VERTICAL_OFFSET;
+				fontRenderer.drawEntityText(reorderingProcessor, x, y, textColor, false, matrixStackIn.getLast().getMatrix(), bufferIn, false, 0, combinedLightIn);
 			}
 		}
 
@@ -91,6 +100,6 @@ public class CanvasSignTileEntityRenderer extends SignTileEntityRenderer
 	}
 
 	public static RenderMaterial getMaterial(Block blockIn) {
-		return ClientRenderUtils.CANVAS_SIGN_MATERIAL;
+		return ModAtlases.CANVAS_SIGN_BLANK_MATERIAL;
 	}
 }

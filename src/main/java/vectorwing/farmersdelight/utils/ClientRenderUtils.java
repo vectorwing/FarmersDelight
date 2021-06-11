@@ -28,13 +28,6 @@ import javax.annotation.Nullable;
 public class ClientRenderUtils
 {
 	// TODO: Decide whether these RenderMaterials and similar methods belong here, or on their own class.
-	
-	public static final RenderMaterial CANVAS_SIGN_MATERIAL = new RenderMaterial(Atlases.SIGN_ATLAS, new ResourceLocation(FarmersDelight.MODID, "entity/signs/canvas_blank"));
-
-	public static RenderMaterial getSignMaterial(@Nullable DyeColor dyeType) {
-		ResourceLocation location = new ResourceLocation(dyeType != null ? dyeType.name() : "blank");
-		return new RenderMaterial(Atlases.SIGN_ATLAS, new ResourceLocation(location.getNamespace(), "entity/signs/canvas_" + location.getPath()));
-	}
 
 	/**
 	 * Renders an Item into the GUI, allowing the size to be defined instead of hardcoded.

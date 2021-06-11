@@ -25,7 +25,7 @@ import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModContainerTypes;
 import vectorwing.farmersdelight.registry.ModParticleTypes;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
-import vectorwing.farmersdelight.utils.ClientRenderUtils;
+import vectorwing.farmersdelight.utils.ModAtlases;
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventHandler
@@ -36,7 +36,7 @@ public class ClientEventHandler
 	public static void onStitchEvent(TextureStitchEvent.Pre event) {
 		ResourceLocation stitching = event.getMap().getTextureLocation();
 		if (stitching.equals(new ResourceLocation("textures/atlas/signs.png"))) {
-			event.addSprite(ClientRenderUtils.CANVAS_SIGN_MATERIAL.getTextureLocation());
+			event.addSprite(ModAtlases.CANVAS_SIGN_BLANK_MATERIAL.getTextureLocation());
 		}
 		if (!stitching.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)) {
 			return;
