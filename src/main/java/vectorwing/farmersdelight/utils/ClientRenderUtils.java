@@ -4,31 +4,22 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.model.RenderMaterial;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.Texture;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import vectorwing.farmersdelight.FarmersDelight;
-
-import javax.annotation.Nullable;
 
 /**
  * Util for helping with rendering elements across the mod, when vanilla methods don't expose enough to use.
  */
 public class ClientRenderUtils
 {
-	// TODO: Decide whether these RenderMaterials and similar methods belong here, or on their own class.
-
 	/**
 	 * Renders an Item into the GUI, allowing the size to be defined instead of hardcoded.
 	 * This function is ripped right from the game's rendering code. I am probably doing something stupid.
