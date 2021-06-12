@@ -34,7 +34,7 @@
   "block.farmersdelight.onions": "Cebollas",
   "block.farmersdelight.rice_crop": "Cultivos de arroz",
   "block.farmersdelight.rice_upper_crop": "Cultivos de arroz superiores",
-  "block.farmersdelight.brown_mushroom_colony": "Colonia de hongos marrones ",
+  "block.farmersdelight.brown_mushroom_colony": "Colonia de hongos marrones",
   "block.farmersdelight.red_mushroom_colony": "Colonia de hongos rojos",
 
   "block.farmersdelight.wild_cabbages": "Col silvestre",
@@ -85,10 +85,10 @@
   "item.farmersdelight.smoked_ham": "Jamón cocido",
 
   "item.farmersdelight.pie_crust": "Corteza de tarta",
-  "item.farmersdelight.cake_slice": "Rebanada de pastel",
-  "item.farmersdelight.apple_pie_slice": "Rebanada de pastel de manzana",
-  "item.farmersdelight.sweet_berry_cheesecake_slice": "Rebanada de Cheesecake de bayas dulces",
-  "item.farmersdelight.chocolate_pie_slice": "Rebanada de pastel de chocolate",
+  "item.farmersdelight.cake_slice": "Porción de pastel",
+  "item.farmersdelight.apple_pie_slice": "Porción de pastel de manzana",
+  "item.farmersdelight.sweet_berry_cheesecake_slice": "Porción de Cheesecake de bayas dulces",
+  "item.farmersdelight.chocolate_pie_slice": "Porción de pastel de chocolate",
   "item.farmersdelight.fruit_salad": "Ensalada de frutas",
   "item.farmersdelight.sweet_berry_cookie": "Galleta de bayas dulces",
   "item.farmersdelight.honey_cookie": "Galleta de miel",
