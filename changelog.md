@@ -2,7 +2,8 @@
 
 ## 0.4.4 (WIP)
 - Added translations:
-  - pt_pt (thank you, axelrodii!)
+  - pt_PT (thank you, axelrodii!)
+  - tr_TR (thank you, Ali!)
 
 ## 0.4.3
 - Nourished has been renamed to Nourishment, to stay consistent with vanilla effect naming;
