@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.4 (WIP)
+- Added translations:
+  - pt_pt (thank you, axelrodii!)
+
 ## 0.4.3
 - Nourished has been renamed to Nourishment, to stay consistent with vanilla effect naming;
   - The ID remains the same for now, and might change on the next major release;
