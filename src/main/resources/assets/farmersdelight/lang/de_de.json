@@ -158,6 +158,8 @@
 
   "farmersdelight.container.cooking_pot": "Kochtopf",
   "farmersdelight.container.cooking_pot.served_on": "Serviert auf: %s",
+  "farmersdelight.container.cooking_pot.not_heated": "Benötigt Hitze von unten.",
+  "farmersdelight.container.cooking_pot.heated": "Erhitzt",
   "farmersdelight.container.basket": "Korb",
   "farmersdelight.container.pantry": "Holzküchenschrank",
 
