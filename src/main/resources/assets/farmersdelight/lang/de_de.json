@@ -158,15 +158,18 @@
 
   "farmersdelight.container.cooking_pot": "Kochtopf",
   "farmersdelight.container.cooking_pot.served_on": "Serviert auf: %s",
+  "farmersdelight.container.cooking_pot.not_heated": "Benötigt Hitze von unten.",
+  "farmersdelight.container.cooking_pot.heated": "Erhitzt",
   "farmersdelight.container.basket": "Korb",
   "farmersdelight.container.pantry": "Holzküchenschrank",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Leer",
-  "farmersdelight.tooltip.cooking_pot.single_serving": "Hält 1 Portion:",
-  "farmersdelight.tooltip.cooking_pot.many_servings": "Hält %s Portionen:",
-
+  "farmersdelight.tooltip.cooking_pot.single_serving": "Enthält 1 Portion:",
+  "farmersdelight.tooltip.cooking_pot.many_servings": "Enthält %s Portionen:",
   "farmersdelight.tooltip.dog_food.when_feeding": "Verleiht, wenn es an gezähmte Wölfe verfüttert wird:",
   "farmersdelight.tooltip.horse_feed.when_feeding": "Verleiht, wenn es an gezähmtes Pferde verfüttert wird:",
+  "farmersdelight.tooltip.milk_bottle": "Löscht einen Statuseffekt",
+  "farmersdelight.tooltip.hot_cocoa": "Löscht einen negativen Statuseffekt",
 
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "Eine neue Welt des Geschmacks erwartet dich!",
@@ -209,8 +212,12 @@
   "farmersdelight.subtitles.cooking_pot.boil": "Kochtopf kocht",
   "farmersdelight.subtitles.cutting_board.knife_cut": "Messer schneidet",
   "farmersdelight.subtitles.stove.crackle": "Herd knistert",
+  "farmersdelight.subtitles.tomato.pick": "Tomate gepflückt",
 
   "farmersdelight.block.feast.use_container": "Du brauchst ein(e)(n) %s ,um dies zu essen.",
+  "farmersdelight.block.rice.invalid_placement": "Außerhalb von flachem Wasser wird diese Pflanze nicht überleben.",
+  "farmersdelight.block.cutting_board.invalid_item": "Dies scheint nicht zerschneidbar zu sein...",
+  "farmersdelight.block.cutting_board.invalid_tool": "Vielleicht mit einem anderen Werkzeug...",
 
   "farmersdelight.jei.cooking": "Kochen",
   "farmersdelight.jei.cutting": "Schneidebrett",
