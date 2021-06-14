@@ -45,6 +45,9 @@ public class ModTags
 	// Foods and items that can be used to craft Cabbage Rolls
 	public static final ITag.INamedTag<Item> CABBAGE_ROLL_INGREDIENTS = modItemTag("cabbage_roll_ingredients");
 
+	// Items commonly held in the off-hand. Cutting Boards won't let them be placed from the off-hand, for convenience.
+	public static final ITag.INamedTag<Item> OFFHAND_EQUIPMENT = modItemTag("offhand_equipment");
+
 	// Knife items for game logic.
 	public static final ITag.INamedTag<Item> KNIVES = modItemTag("tools/knives");
 

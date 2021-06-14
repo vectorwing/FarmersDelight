@@ -30,6 +30,7 @@ import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.tile.CuttingBoardTileEntity;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.Nullable;
 
@@ -75,8 +76,13 @@ public class CuttingBoardBlock extends HorizontalBlock implements IWaterLoggable
 
 			// Placing items on the board. It should prefer off-hand placement, unless it's a BlockItem (since it never passes to off-hand...)
 			if (cuttingBoardTile.isEmpty()) {
-				if (!itemOffhand.isEmpty() && handIn.equals(Hand.MAIN_HAND) && !(itemHeld.getItem() instanceof BlockItem)) {
-					return ActionResultType.PASS; // main-hand passes to off-hand
+				if (!itemOffhand.isEmpty()) {
+					if (handIn.equals(Hand.MAIN_HAND) && !ModTags.OFFHAND_EQUIPMENT.contains(itemOffhand.getItem()) && !(itemHeld.getItem() instanceof BlockItem)) {
+						return ActionResultType.PASS; // Pass to off-hand if that item is placeable
+					}
+					if (handIn.equals(Hand.OFF_HAND) && ModTags.OFFHAND_EQUIPMENT.contains(itemOffhand.getItem())) {
+						return ActionResultType.PASS; // Items in this tag should not be placed from the off-hand
+					}
 				}
 				if (itemHeld.isEmpty()) {
 					return ActionResultType.PASS;
@@ -85,7 +91,7 @@ public class CuttingBoardBlock extends HorizontalBlock implements IWaterLoggable
 					return ActionResultType.SUCCESS;
 				}
 
-				// Processing the item with the held tool
+			// Processing the item with the held tool
 			} else if (!itemHeld.isEmpty()) {
 				ItemStack boardItem = cuttingBoardTile.getStoredItem().copy();
 				if (cuttingBoardTile.processItemUsingTool(itemHeld, player)) {
@@ -94,7 +100,7 @@ public class CuttingBoardBlock extends HorizontalBlock implements IWaterLoggable
 				}
 				return ActionResultType.CONSUME;
 
-				// Removing the board's item
+			// Removing the board's item
 			} else if (handIn.equals(Hand.MAIN_HAND)) {
 				if (!player.isCreative()) {
 					if (!player.inventory.addItemStackToInventory(cuttingBoardTile.removeItem())) {
