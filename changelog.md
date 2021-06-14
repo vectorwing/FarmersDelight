@@ -1,9 +1,17 @@
 # Changelog
 
 ## 0.4.4 (WIP)
+- Added a tooltip over the Cooking Pot's heat indicator, describing that it needs heat to function;
+- Added the `offhand_equipment` tag:
+  - Items in this tag cannot be placed in a Cutting Board from the off-hand;
+  - Defaults to Shields and Create's Extendo Grip;
 - Added translations:
   - pt_PT (thank you, axelrodii!)
   - tr_TR (thank you, Ali!)
+  - Basic Spanish lang for remaining 'es_' countries, subject to updates (thank you, FrannDzs!)
+- Updated translations:
+  - es_ES (thank you, FrannDzs!)
+  - de_DE (thank you, DaLumma!)
 
 ## 0.4.3
 - Nourished has been renamed to Nourishment, to stay consistent with vanilla effect naming;
