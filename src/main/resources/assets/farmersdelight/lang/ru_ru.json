@@ -158,15 +158,18 @@
 
   "farmersdelight.container.cooking_pot": "Кухонный котел",
   "farmersdelight.container.cooking_pot.served_on": "Подаётся: %s",
+  "farmersdelight.container.cooking_pot.not_heated": "Нужен нагрев снизу",
+  "farmersdelight.container.cooking_pot.heated": "Нагрето",
   "farmersdelight.container.basket": "Корзина",
   "farmersdelight.container.pantry": "Кладовая",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Пусто",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Содержит одну порцию",
   "farmersdelight.tooltip.cooking_pot.many_servings": "Содержит порций: %s ",
-
   "farmersdelight.tooltip.dog_food.when_feeding": "Если скормить приручённому волку:",
   "farmersdelight.tooltip.horse_feed.when_feeding": "Если скормить приручённой лошади:",
+  "farmersdelight.tooltip.milk_bottle": "Очищает от 1 эффекта",
+  "farmersdelight.tooltip.hot_cocoa": "Очищает от 1 вредного эффекта",
 
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "Вас ожидает целый мир разнообразных вкусов!",
