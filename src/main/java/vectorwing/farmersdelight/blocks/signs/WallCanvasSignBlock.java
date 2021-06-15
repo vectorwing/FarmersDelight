@@ -1,9 +1,6 @@
 package vectorwing.farmersdelight.blocks.signs;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.WallSignBlock;
-import net.minecraft.block.WoodType;
+import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
@@ -19,18 +16,10 @@ import javax.annotation.Nullable;
 public class WallCanvasSignBlock extends WallSignBlock implements ICanvasSign
 {
 	private final DyeColor backgroundColor;
-	private final DyeColor defaultTextColor;
 
 	public WallCanvasSignBlock(@Nullable DyeColor backgroundColor) {
 		super(Properties.from(Blocks.OAK_SIGN), WoodType.SPRUCE);
 		this.backgroundColor = backgroundColor;
-		this.defaultTextColor = DyeColor.BLACK;
-	}
-
-	public WallCanvasSignBlock(@Nullable DyeColor backgroundColor, DyeColor defaultTextColorIn) {
-		super(Properties.from(Blocks.OAK_SIGN), WoodType.SPRUCE);
-		this.backgroundColor = backgroundColor;
-		this.defaultTextColor = defaultTextColorIn;
 	}
 
 	@Nullable
@@ -51,8 +40,11 @@ public class WallCanvasSignBlock extends WallSignBlock implements ICanvasSign
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		TileEntity tile = worldIn.getTileEntity(pos);
-		if (tile instanceof SignTileEntity) {
-			((SignTileEntity) tile).setTextColor(defaultTextColor);
+		Block block = state.getBlock();
+		if (tile instanceof SignTileEntity && block instanceof ICanvasSign) {
+			if (((ICanvasSign) block).isDarkBackground()) {
+				((SignTileEntity) tile).setTextColor(DyeColor.WHITE);
+			}
 		}
 	}
 }

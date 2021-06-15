@@ -90,23 +90,23 @@ public class ModBlocks
 	public static final RegistryObject<Block> PINK_CANVAS_SIGN = BLOCKS.register("pink_canvas_sign",
 			() -> new StandingCanvasSignBlock(DyeColor.PINK));
 	public static final RegistryObject<Block> GRAY_CANVAS_SIGN = BLOCKS.register("gray_canvas_sign",
-			() -> new StandingCanvasSignBlock(DyeColor.GRAY, DyeColor.WHITE));
+			() -> new StandingCanvasSignBlock(DyeColor.GRAY));
 	public static final RegistryObject<Block> LIGHT_GRAY_CANVAS_SIGN = BLOCKS.register("light_gray_canvas_sign",
 			() -> new StandingCanvasSignBlock(DyeColor.LIGHT_GRAY));
 	public static final RegistryObject<Block> CYAN_CANVAS_SIGN = BLOCKS.register("cyan_canvas_sign",
 			() -> new StandingCanvasSignBlock(DyeColor.CYAN));
 	public static final RegistryObject<Block> PURPLE_CANVAS_SIGN = BLOCKS.register("purple_canvas_sign",
-			() -> new StandingCanvasSignBlock(DyeColor.PURPLE, DyeColor.WHITE));
+			() -> new StandingCanvasSignBlock(DyeColor.PURPLE));
 	public static final RegistryObject<Block> BLUE_CANVAS_SIGN = BLOCKS.register("blue_canvas_sign",
-			() -> new StandingCanvasSignBlock(DyeColor.BLUE, DyeColor.WHITE));
+			() -> new StandingCanvasSignBlock(DyeColor.BLUE));
 	public static final RegistryObject<Block> BROWN_CANVAS_SIGN = BLOCKS.register("brown_canvas_sign",
-			() -> new StandingCanvasSignBlock(DyeColor.BROWN, DyeColor.WHITE));
+			() -> new StandingCanvasSignBlock(DyeColor.BROWN));
 	public static final RegistryObject<Block> GREEN_CANVAS_SIGN = BLOCKS.register("green_canvas_sign",
-			() -> new StandingCanvasSignBlock(DyeColor.GREEN, DyeColor.WHITE));
+			() -> new StandingCanvasSignBlock(DyeColor.GREEN));
 	public static final RegistryObject<Block> RED_CANVAS_SIGN = BLOCKS.register("red_canvas_sign",
-			() -> new StandingCanvasSignBlock(DyeColor.RED, DyeColor.WHITE));
+			() -> new StandingCanvasSignBlock(DyeColor.RED));
 	public static final RegistryObject<Block> BLACK_CANVAS_SIGN = BLOCKS.register("black_canvas_sign",
-			() -> new StandingCanvasSignBlock(DyeColor.BLACK, DyeColor.WHITE));
+			() -> new StandingCanvasSignBlock(DyeColor.BLACK));
 
 	public static final RegistryObject<Block> CANVAS_WALL_SIGN = BLOCKS.register("canvas_wall_sign",
 			() -> new WallCanvasSignBlock(null));
@@ -125,23 +125,23 @@ public class ModBlocks
 	public static final RegistryObject<Block> PINK_CANVAS_WALL_SIGN = BLOCKS.register("pink_canvas_wall_sign",
 			() -> new WallCanvasSignBlock(DyeColor.PINK));
 	public static final RegistryObject<Block> GRAY_CANVAS_WALL_SIGN = BLOCKS.register("gray_canvas_wall_sign",
-			() -> new WallCanvasSignBlock(DyeColor.GRAY, DyeColor.WHITE));
+			() -> new WallCanvasSignBlock(DyeColor.GRAY));
 	public static final RegistryObject<Block> LIGHT_GRAY_CANVAS_WALL_SIGN = BLOCKS.register("light_gray_canvas_wall_sign",
 			() -> new WallCanvasSignBlock(DyeColor.LIGHT_GRAY));
 	public static final RegistryObject<Block> CYAN_CANVAS_WALL_SIGN = BLOCKS.register("cyan_canvas_wall_sign",
 			() -> new WallCanvasSignBlock(DyeColor.CYAN));
 	public static final RegistryObject<Block> PURPLE_CANVAS_WALL_SIGN = BLOCKS.register("purple_canvas_wall_sign",
-			() -> new WallCanvasSignBlock(DyeColor.PURPLE, DyeColor.WHITE));
+			() -> new WallCanvasSignBlock(DyeColor.PURPLE));
 	public static final RegistryObject<Block> BLUE_CANVAS_WALL_SIGN = BLOCKS.register("blue_canvas_wall_sign",
-			() -> new WallCanvasSignBlock(DyeColor.BLUE, DyeColor.WHITE));
+			() -> new WallCanvasSignBlock(DyeColor.BLUE));
 	public static final RegistryObject<Block> BROWN_CANVAS_WALL_SIGN = BLOCKS.register("brown_canvas_wall_sign",
-			() -> new WallCanvasSignBlock(DyeColor.BROWN, DyeColor.WHITE));
+			() -> new WallCanvasSignBlock(DyeColor.BROWN));
 	public static final RegistryObject<Block> GREEN_CANVAS_WALL_SIGN = BLOCKS.register("green_canvas_wall_sign",
-			() -> new WallCanvasSignBlock(DyeColor.GREEN, DyeColor.WHITE));
+			() -> new WallCanvasSignBlock(DyeColor.GREEN));
 	public static final RegistryObject<Block> RED_CANVAS_WALL_SIGN = BLOCKS.register("red_canvas_wall_sign",
-			() -> new WallCanvasSignBlock(DyeColor.RED, DyeColor.WHITE));
+			() -> new WallCanvasSignBlock(DyeColor.RED));
 	public static final RegistryObject<Block> BLACK_CANVAS_WALL_SIGN = BLOCKS.register("black_canvas_wall_sign",
-			() -> new WallCanvasSignBlock(DyeColor.BLACK, DyeColor.WHITE));
+			() -> new WallCanvasSignBlock(DyeColor.BLACK));
 
 	// Composting
 	public static final RegistryObject<Block> BROWN_MUSHROOM_COLONY = BLOCKS.register("brown_mushroom_colony",

@@ -16,18 +16,10 @@ import javax.annotation.Nullable;
 public class StandingCanvasSignBlock extends StandingSignBlock implements ICanvasSign
 {
 	private final DyeColor backgroundColor;
-	private final DyeColor defaultTextColor;
 
 	public StandingCanvasSignBlock(@Nullable DyeColor backgroundColor) {
 		super(Properties.from(Blocks.OAK_SIGN), WoodType.SPRUCE);
 		this.backgroundColor = backgroundColor;
-		this.defaultTextColor = DyeColor.BLACK;
-	}
-
-	public StandingCanvasSignBlock(@Nullable DyeColor backgroundColor, DyeColor defaultTextColorIn) {
-		super(Properties.from(Blocks.OAK_SIGN), WoodType.SPRUCE);
-		this.backgroundColor = backgroundColor;
-		this.defaultTextColor = defaultTextColorIn;
 	}
 
 	@Nullable
@@ -48,8 +40,11 @@ public class StandingCanvasSignBlock extends StandingSignBlock implements ICanva
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		TileEntity tile = worldIn.getTileEntity(pos);
-		if (tile instanceof SignTileEntity) {
-			((SignTileEntity) tile).setTextColor(defaultTextColor);
+		Block block = state.getBlock();
+		if (tile instanceof SignTileEntity && block instanceof ICanvasSign) {
+			if (((ICanvasSign) block).isDarkBackground()) {
+				((SignTileEntity) tile).setTextColor(DyeColor.WHITE);
+			}
 		}
 	}
 }

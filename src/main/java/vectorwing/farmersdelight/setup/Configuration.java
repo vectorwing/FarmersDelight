@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.setup;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.item.Items;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -20,6 +19,7 @@ public class Configuration
 	public static ForgeConfigSpec.BooleanValue ENABLE_VANILLA_CROP_CRATES;
 	public static ForgeConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS;
 	public static ForgeConfigSpec.DoubleValue RICH_SOIL_BOOST_CHANCE;
+	public static ForgeConfigSpec.ConfigValue<List<? extends String>> CANVAS_SIGN_DARK_BACKGROUND_LIST;
 
 	public static final String CATEGORY_OVERRIDES = "overrides";
 	public static ForgeConfigSpec.BooleanValue COMFORT_FOOD_TAG_EFFECT;
@@ -65,6 +65,8 @@ public class Configuration
 				.define("farmersBuyFDCrops", true);
 		RICH_SOIL_BOOST_CHANCE = COMMON_BUILDER.comment("How often (in percentage) should Rich Soil succeed in boosting a plant's growth at each random tick? Setting it to 0.0 disables boosting.")
 				.defineInRange("richSoilBoostChance", 0.2, 0.0, 1.0);
+		CANVAS_SIGN_DARK_BACKGROUND_LIST = COMMON_BUILDER.comment("A list of dye colors that, when used as the background of a Canvas Sign, should default to white text when placed.")
+				.defineList("canvasSignDarkBackgroundList", ImmutableList.of("gray", "purple", "blue", "brown", "green", "red", "black"), obj -> true);
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("Vanilla item overrides").push(CATEGORY_OVERRIDES);
