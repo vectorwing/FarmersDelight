@@ -158,6 +158,8 @@
 
   "farmersdelight.container.cooking_pot": "Pentola",
   "farmersdelight.container.cooking_pot.served_on": "Servito su: %s",
+  "farmersdelight.container.cooking_pot.not_heated": "Ha bisogno di calore sotto",
+  "farmersdelight.container.cooking_pot.heated": "Riscaldato",
   "farmersdelight.container.basket": "Cesto",
   "farmersdelight.container.pantry": "Dispensa",
 
