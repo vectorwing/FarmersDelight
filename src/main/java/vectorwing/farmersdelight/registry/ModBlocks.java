@@ -10,6 +10,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.blocks.*;
+import vectorwing.farmersdelight.blocks.crops.*;
+import vectorwing.farmersdelight.blocks.foods.*;
 
 import java.util.function.ToIntFunction;
 

@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.blocks;
+package vectorwing.farmersdelight.blocks.crops;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
