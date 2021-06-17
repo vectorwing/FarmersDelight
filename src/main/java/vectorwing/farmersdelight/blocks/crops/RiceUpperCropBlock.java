@@ -63,7 +63,7 @@ public class RiceUpperCropBlock extends CropsBlock
 
 	@Override
 	protected int getBonemealAgeIncrease(World worldIn) {
-		return MathHelper.nextInt(worldIn.rand, 1, 4);
+		return super.getBonemealAgeIncrease(worldIn) / 3;
 	}
 
 	@Override
