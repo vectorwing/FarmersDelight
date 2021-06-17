@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.4.4 (WIP)
+## 0.4.4
 - Added a tooltip over the Cooking Pot's heat indicator, describing that it needs heat to function;
 - Added the `offhand_equipment` tag:
   - Items in this tag cannot be placed in a Cutting Board from the off-hand;
@@ -8,6 +8,7 @@
 - Added translations:
   - pt_PT (thank you, axelrodii!)
   - tr_TR (thank you, Ali!)
+  - it_IT (thank you, simcosmico!)
   - Basic Spanish lang for remaining 'es_' countries, subject to updates (thank you, FrannDzs!)
 - Updated translations:
   - es_ES (thank you, FrannDzs!)
