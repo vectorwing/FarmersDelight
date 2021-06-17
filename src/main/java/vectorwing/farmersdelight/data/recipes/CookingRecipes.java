@@ -1,16 +1,16 @@
 package vectorwing.farmersdelight.data.recipes;
 
-import com.google.common.collect.Sets;
 import net.minecraft.data.IFinishedRecipe;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraftforge.common.Tags;
 import vectorwing.farmersdelight.data.builder.CookingPotRecipeBuilder;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.tags.ForgeTags;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 public class CookingRecipes
 {
@@ -22,6 +22,7 @@ public class CookingRecipes
 		cookMinecraftSoups(consumer);
 		cookMeals(consumer);
 	}
+
 	private static void cookMiscellaneous(Consumer<IFinishedRecipe> consumer) {
 		CookingPotRecipeBuilder.cookingRecipe(ModItems.HOT_COCOA.get(), 1)
 				.addIngredient(ForgeTags.MILK)
@@ -88,11 +89,11 @@ public class CookingRecipes
 				.addIngredient(ForgeTags.PASTA)
 				.addIngredient(ForgeTags.CROPS_CABBAGE)
 				.addIngredient(ForgeTags.CROPS_ONION)
-				.addIngredient(Ingredient.merge(Sets.newHashSet(
-						Ingredient.fromTag(ForgeTags.RAW_CHICKEN),
-						Ingredient.fromTag(ForgeTags.RAW_PORK),
-						Ingredient.fromTag(ForgeTags.RAW_BEEF),
-						Ingredient.fromItems(Items.BROWN_MUSHROOM)
+				.addIngredient(Ingredient.fromItemListStream(Stream.of(
+						new Ingredient.TagList(ForgeTags.RAW_CHICKEN),
+						new Ingredient.TagList(ForgeTags.RAW_PORK),
+						new Ingredient.TagList(ForgeTags.RAW_BEEF),
+						new Ingredient.SingleItemList(new ItemStack(Items.BROWN_MUSHROOM))
 				)))
 				.build(consumer);
 		CookingPotRecipeBuilder.cookingRecipe(ModItems.FISH_STEW.get(), 1)
