@@ -13,12 +13,15 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
@@ -27,11 +30,13 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.ItemStackHandler;
+import vectorwing.farmersdelight.blocks.state.CookingPotSupport;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.tile.CookingPotTileEntity;
@@ -46,16 +51,17 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 {
-	public static final BooleanProperty SUPPORTED = BlockStateProperties.DOWN;
+	public static final EnumProperty<CookingPotSupport> SUPPORT = EnumProperty.create("support", CookingPotSupport.class);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D);
-	protected static final VoxelShape SHAPE_SUPPORTED = VoxelShapes.or(SHAPE, Block.makeCuboidShape(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
+	protected static final VoxelShape SHAPE_WITH_TRAY = VoxelShapes.or(SHAPE, Block.makeCuboidShape(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
+	protected static final VoxelShape HANGING_AREA = Block.makeCuboidShape(7.0D, 0.0D, 7.0D, 9.0D, 10.0D, 9.0D);
 
 	public CookingPotBlock() {
 		super(Properties.create(Material.IRON)
 				.hardnessAndResistance(2.0F, 6.0F)
 				.sound(SoundType.LANTERN));
-		this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH).with(SUPPORTED, false).with(WATERLOGGED, false));
+		this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH).with(SUPPORT, CookingPotSupport.NONE).with(WATERLOGGED, false));
 	}
 
 	@Override
@@ -65,18 +71,23 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 
 	@Override
 	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return state.get(SUPPORTED) ? SHAPE_SUPPORTED : SHAPE;
+		return state.get(SUPPORT).equals(CookingPotSupport.TRAY) ? SHAPE_WITH_TRAY : SHAPE;
 	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		BlockPos blockpos = context.getPos();
+		BlockPos pos = context.getPos();
 		World world = context.getWorld();
 		FluidState ifluidstate = world.getFluidState(context.getPos());
-		return this.getDefaultState()
+
+		BlockState state = this.getDefaultState()
 				.with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite())
-				.with(SUPPORTED, needsTrayForHeatSource(world.getBlockState(blockpos.down())))
 				.with(WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER);
+
+		if (context.getFace().equals(Direction.DOWN) && canHangFrom(world, pos.up())) {
+			return state.with(SUPPORT, CookingPotSupport.HANDLE);
+		}
+		return state.with(SUPPORT, getTrayState(world, pos));
 	}
 
 	@Override
@@ -84,14 +95,23 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 		if (stateIn.get(WATERLOGGED)) {
 			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
 		}
-		if (facing == Direction.DOWN) {
-			return stateIn.with(SUPPORTED, needsTrayForHeatSource(facingState));
+		if (facing.getAxis().equals(Direction.Axis.Y) && !canHangFrom(worldIn, currentPos.up())) {
+			return stateIn.with(SUPPORT, getTrayState(worldIn, currentPos));
 		}
 		return stateIn;
 	}
 
-	private boolean needsTrayForHeatSource(BlockState state) {
-		return state.getBlock().isIn(ModTags.TRAY_HEAT_SOURCES);
+	private CookingPotSupport getTrayState(IWorld world, BlockPos pos) {
+		if (world.getBlockState(pos.down()).getBlock().isIn(ModTags.TRAY_HEAT_SOURCES)) {
+			return CookingPotSupport.TRAY;
+		}
+		return CookingPotSupport.NONE;
+	}
+
+	public static boolean canHangFrom(IWorldReader worldIn, BlockPos pos) {
+		BlockState state = worldIn.getBlockState(pos);
+		boolean canSupport = !VoxelShapes.compare(state.getShape(worldIn, pos).project(Direction.DOWN), HANGING_AREA, IBooleanFunction.ONLY_SECOND);
+		return !state.isIn(BlockTags.UNSTABLE_BOTTOM_CENTER) && canSupport;
 	}
 
 	@Override
@@ -170,7 +190,7 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
-		builder.add(HORIZONTAL_FACING, SUPPORTED, WATERLOGGED);
+		builder.add(HORIZONTAL_FACING, SUPPORT, WATERLOGGED);
 	}
 
 	@Override
