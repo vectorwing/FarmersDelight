@@ -51,6 +51,9 @@ public class ModTags
 	// Knife items for game logic.
 	public static final ITag.INamedTag<Item> KNIVES = modItemTag("tools/knives");
 
+	// Canvas Signs items for crafting.
+	public static final ITag.INamedTag<Item> CANVAS_SIGNS = modItemTag("canvas_signs");
+
 	// Entities that should be able to eat Dog Food when tame. Defaults to tamed Wolves.
 	public static final ITag.INamedTag<EntityType<?>> DOG_FOOD_USERS = modEntityTag("dog_food_users");
 
