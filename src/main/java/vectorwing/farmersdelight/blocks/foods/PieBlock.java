@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.blocks;
+package vectorwing.farmersdelight.blocks.foods;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.block.Block;

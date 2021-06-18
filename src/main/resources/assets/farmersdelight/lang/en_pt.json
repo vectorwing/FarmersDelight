@@ -176,6 +176,8 @@
 
   "farmersdelight.container.cooking_pot": "Pot o' Grub",
   "farmersdelight.container.cooking_pot.served_on": "Grab yerself a: %s",
+  "farmersdelight.container.cooking_pot.not_heated": "Ye hafta fire it up first",
+  "farmersdelight.container.cooking_pot.heated": "All fired up",
   "farmersdelight.container.basket": "Basket",
   "farmersdelight.container.pantry": "Cabinet",
 

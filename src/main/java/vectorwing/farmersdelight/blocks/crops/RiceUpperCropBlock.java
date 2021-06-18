@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.blocks;
+package vectorwing.farmersdelight.blocks.crops;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -63,7 +63,7 @@ public class RiceUpperCropBlock extends CropsBlock
 
 	@Override
 	protected int getBonemealAgeIncrease(World worldIn) {
-		return MathHelper.nextInt(worldIn.rand, 1, 4);
+		return super.getBonemealAgeIncrease(worldIn) / 3;
 	}
 
 	@Override

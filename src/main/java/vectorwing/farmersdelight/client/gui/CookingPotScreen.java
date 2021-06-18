@@ -14,6 +14,7 @@ import vectorwing.farmersdelight.tile.container.CookingPotContainer;
 import vectorwing.farmersdelight.utils.TextUtils;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,8 @@ import java.util.List;
 public class CookingPotScreen extends ContainerScreen<CookingPotContainer>
 {
 	private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(FarmersDelight.MODID, "textures/gui/cooking_pot.png");
+	private static final Rectangle HEAT_ICON = new Rectangle(47, 55, 17, 15);
+	private static final Rectangle PROGRESS_ARROW = new Rectangle(89, 25, 0, 17);
 
 	public CookingPotScreen(CookingPotContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
 		super(screenContainer, inv, titleIn);
@@ -36,6 +39,16 @@ public class CookingPotScreen extends ContainerScreen<CookingPotContainer>
 		this.renderBackground(ms);
 		super.render(ms, mouseX, mouseY, partialTicks);
 		this.renderMealDisplayTooltip(ms, mouseX, mouseY);
+		this.renderHeatIndicatorTooltip(ms, mouseX, mouseY);
+	}
+
+	private void renderHeatIndicatorTooltip(MatrixStack ms, int mouseX, int mouseY) {
+		if (this.isPointInRegion(HEAT_ICON.x, HEAT_ICON.y, HEAT_ICON.width, HEAT_ICON.height, mouseX, mouseY)) {
+			List<ITextComponent> tooltip = new ArrayList<>();
+			String key = "container.cooking_pot." + (this.container.isHeated() ? "heated" : "not_heated");
+			tooltip.add(TextUtils.getTranslation(key, container));
+			this.func_243308_b(ms, tooltip, mouseX, mouseY);
+		}
 	}
 
 	protected void renderMealDisplayTooltip(MatrixStack ms, int mouseX, int mouseY) {
@@ -72,17 +85,15 @@ public class CookingPotScreen extends ContainerScreen<CookingPotContainer>
 			return;
 
 		this.minecraft.getTextureManager().bindTexture(BACKGROUND_TEXTURE);
-		int x = (this.width - this.xSize) / 2;
-		int y = (this.height - this.ySize) / 2;
-		this.blit(ms, x, y, 0, 0, this.xSize, this.ySize);
+		this.blit(ms, this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 
-		// Render heat indicator
+		// Render heat icon
 		if (this.container.isHeated()) {
-			this.blit(ms, x + 47, y + 55, 176, 0, 17, 15);
+			this.blit(ms, this.guiLeft + HEAT_ICON.x, this.guiTop + HEAT_ICON.y, 176, 0, HEAT_ICON.width, HEAT_ICON.height);
 		}
 
 		// Render progress arrow
 		int l = this.container.getCookProgressionScaled();
-		this.blit(ms, this.guiLeft + 89, this.guiTop + 25, 176, 15, l + 1, 17);
+		this.blit(ms, this.guiLeft + PROGRESS_ARROW.x, this.guiTop + PROGRESS_ARROW.y, 176, 15, l + 1, PROGRESS_ARROW.height);
 	}
 }

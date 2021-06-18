@@ -5,6 +5,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
 import net.minecraft.item.Items;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.registry.ModItems;
@@ -56,6 +57,7 @@ public class ItemTags extends ItemTagsProvider
 				.add(ModItems.GREEN_CANVAS_SIGN.get())
 				.add(ModItems.RED_CANVAS_SIGN.get())
 				.add(ModItems.BLACK_CANVAS_SIGN.get());
+		getOrCreateBuilder(ModTags.OFFHAND_EQUIPMENT).add(Items.SHIELD).addOptional(new ResourceLocation("create:extendo_grip"));
 	}
 
 	@SuppressWarnings("unchecked")
