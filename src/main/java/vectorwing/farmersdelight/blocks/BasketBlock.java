@@ -41,16 +41,8 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
 	public static final VoxelShape OUT_SHAPE = VoxelShapes.fullCube();
-	@SuppressWarnings("UnstableApiUsage")
-	public static final ImmutableMap<Direction, VoxelShape> RENDER_SHAPE_FACING =
-			Maps.immutableEnumMap(ImmutableMap.<Direction, VoxelShape>builder()
-					.put(Direction.DOWN, makeCuboidShape(0.0D, 15.0D, 0.0D, 16.0D, 16.0D, 16.0D))
-					.put(Direction.UP, makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D))
-					.put(Direction.NORTH, makeCuboidShape(0.0D, 0.0D, 15.0D, 16.0D, 16.0D, 16.0D))
-					.put(Direction.SOUTH, makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 1.0D))
-					.put(Direction.WEST, makeCuboidShape(15.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D))
-					.put(Direction.EAST, makeCuboidShape(0.0D, 0.0D, 0.0D, 1.0D, 16.0D, 16.0D))
-					.build());
+	public static final VoxelShape RENDER_SHAPE = makeCuboidShape(1.0D, 1.0D, 1.0D, 15.0D, 15.0D, 15.0D);
+
 	@SuppressWarnings("UnstableApiUsage")
 	public static final ImmutableMap<Direction, VoxelShape> COLLISION_SHAPE_FACING =
 			Maps.immutableEnumMap(ImmutableMap.<Direction, VoxelShape>builder()
@@ -69,6 +61,16 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable
 	public BasketBlock() {
 		super(Properties.create(Material.WOOD).hardnessAndResistance(1.5F).sound(SoundType.WOOD));
 		this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.UP).with(WATERLOGGED, false));
+	}
+
+	@Override
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+		return COLLISION_SHAPE_FACING.get(state.get(FACING));
+	}
+
+	@Override
+	public VoxelShape getRenderShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
+		return RENDER_SHAPE;
 	}
 
 	@Override
@@ -173,16 +175,6 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable
 	@Override
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
 		return state.rotate(mirrorIn.toRotation(state.get(FACING)));
-	}
-
-	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return COLLISION_SHAPE_FACING.get(state.get(FACING));
-	}
-
-	@Override
-	public VoxelShape getRenderShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return RENDER_SHAPE_FACING.get(state.get(FACING));
 	}
 
 	public boolean isTransparent(BlockState state) {
