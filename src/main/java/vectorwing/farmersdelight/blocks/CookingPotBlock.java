@@ -22,6 +22,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -56,6 +57,27 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 				.hardnessAndResistance(2.0F, 6.0F)
 				.sound(SoundType.LANTERN));
 		this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH).with(SUPPORTED, false).with(WATERLOGGED, false));
+	}
+
+	@Override
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
+											 Hand handIn, BlockRayTraceResult result) {
+		if (!worldIn.isRemote) {
+			TileEntity tile = worldIn.getTileEntity(pos);
+			if (tile instanceof CookingPotTileEntity) {
+				ItemStack serving = ((CookingPotTileEntity) tile).useHeldItemOnMeal(player.getHeldItem(handIn));
+				if (serving != ItemStack.EMPTY) {
+					if (!player.inventory.addItemStackToInventory(serving)) {
+						player.dropItem(serving, false);
+					}
+					worldIn.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				} else {
+					NetworkHooks.openGui((ServerPlayerEntity) player, (CookingPotTileEntity) tile, pos);
+				}
+			}
+			return ActionResultType.SUCCESS;
+		}
+		return ActionResultType.SUCCESS;
 	}
 
 	@Override
@@ -95,27 +117,6 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
-											 Hand handIn, BlockRayTraceResult result) {
-		if (!worldIn.isRemote) {
-			TileEntity tile = worldIn.getTileEntity(pos);
-			if (tile instanceof CookingPotTileEntity) {
-				ItemStack serving = ((CookingPotTileEntity) tile).useHeldItemOnMeal(player.getHeldItem(handIn));
-				if (serving != ItemStack.EMPTY) {
-					if (!player.inventory.addItemStackToInventory(serving)) {
-						player.dropItem(serving, false);
-					}
-					worldIn.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.BLOCKS, 1.0F, 1.0F);
-				} else {
-					NetworkHooks.openGui((ServerPlayerEntity) player, (CookingPotTileEntity) tile, pos);
-				}
-			}
-			return ActionResultType.SUCCESS;
-		}
-		return ActionResultType.SUCCESS;
-	}
-
-	@Override
 	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
 		ItemStack itemstack = super.getItem(worldIn, pos, state);
 		CookingPotTileEntity tile = (CookingPotTileEntity) worldIn.getTileEntity(pos);
@@ -135,6 +136,8 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 			TileEntity tileentity = worldIn.getTileEntity(pos);
 			if (tileentity instanceof CookingPotTileEntity) {
 				InventoryHelper.dropItems(worldIn, pos, ((CookingPotTileEntity) tileentity).getDroppableInventory());
+				((CookingPotTileEntity) tileentity).grantStoredRecipeExperience(worldIn, Vector3d.copyCentered(pos));
+				worldIn.updateComparatorOutputLevel(pos, this);
 			}
 
 			super.onReplaced(state, worldIn, pos, newState, isMoving);

@@ -1,7 +1,10 @@
 package vectorwing.farmersdelight.tile;
 
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -18,12 +21,10 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.IIntArray;
-import net.minecraft.util.INameable;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
@@ -52,7 +53,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 	public static final int MEAL_DISPLAY_SLOT = 6;
 	public static final int CONTAINER_SLOT = 7;
 	public static final int OUTPUT_SLOT = 8;
-	public static final int INVENTORY_SIZE = 9;
+	public static final int INVENTORY_SIZE = OUTPUT_SLOT + 1;
 
 	private ItemStackHandler itemHandler = createHandler();
 	private LazyOptional<IItemHandler> handlerInput = LazyOptional.of(() -> new CookingPotItemHandler(itemHandler, Direction.UP));
@@ -94,7 +95,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 			return 2;
 		}
 	};
-	//private final Map<ResourceLocation, Integer> recipes = Maps.newHashMap();
+	private final Object2IntOpenHashMap<ResourceLocation> recipes = new Object2IntOpenHashMap<>();
 	protected final IRecipeType<? extends CookingPotRecipe> recipeType;
 
 	public CookingPotTileEntity(TileEntityType<?> tileEntityTypeIn, IRecipeType<? extends CookingPotRecipe> recipeTypeIn) {
@@ -140,6 +141,11 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 		if (compound.contains("CustomName", 8)) {
 			this.customName = ITextComponent.Serializer.getComponentFromJson(compound.getString("CustomName"));
 		}
+
+		CompoundNBT compoundRecipes = compound.getCompound("RecipesUsed");
+		for (String s : compoundRecipes.keySet()) {
+			this.recipes.put(new ResourceLocation(s), compoundRecipes.getInt(s));
+		}
 	}
 
 	@Override
@@ -152,6 +158,11 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 			compound.putString("CustomName", ITextComponent.Serializer.toJson(this.customName));
 		}
 		compound.put("Inventory", itemHandler.serializeNBT());
+		CompoundNBT compoundRecipes = new CompoundNBT();
+		this.recipes.forEach((recipeId, craftedAmount) -> {
+			compoundRecipes.putInt(recipeId.toString(), craftedAmount);
+		});
+		compound.put("RecipesUsed", compoundRecipes);
 		return compound;
 	}
 
@@ -280,6 +291,9 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 			} else if (currentOutput.getItem() == recipeOutput.getItem()) {
 				currentOutput.grow(recipeOutput.getCount());
 			}
+			if (this.world != null && !this.world.isRemote) {
+				this.setRecipeUsed(recipe);
+			}
 		}
 		for (int i = 0; i < MEAL_DISPLAY_SLOT; ++i) {
 			if (itemHandler.getStackInSlot(i).hasContainerItem()) {
@@ -318,6 +332,42 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 
 	public ItemStack getMeal() {
 		return itemHandler.getStackInSlot(MEAL_DISPLAY_SLOT);
+	}
+
+	public void setRecipeUsed(@Nullable IRecipe<?> recipe) {
+		if (recipe != null) {
+			ResourceLocation resourcelocation = recipe.getId();
+			this.recipes.addTo(resourcelocation, 1);
+		}
+	}
+
+	public void clearUsedRecipes(PlayerEntity player) {
+		this.grantStoredRecipeExperience(player.world, player.getPositionVec());
+		this.recipes.clear();
+	}
+
+	public void grantStoredRecipeExperience(World world, Vector3d pos) {
+
+		for (Object2IntMap.Entry<ResourceLocation> entry : this.recipes.object2IntEntrySet()) {
+			world.getRecipeManager().getRecipe(entry.getKey()).ifPresent((recipe) -> {
+				splitAndSpawnExperience(world, pos, entry.getIntValue(), ((CookingPotRecipe) recipe).getExperience());
+			});
+		}
+	}
+
+	private static void splitAndSpawnExperience(World world, Vector3d pos, int craftedAmount, float experience) {
+		int i = MathHelper.floor((float) craftedAmount * experience);
+		float f = MathHelper.frac((float) craftedAmount * experience);
+		if (f != 0.0F && Math.random() < (double) f) {
+			++i;
+		}
+
+		while (i > 0) {
+			int j = ExperienceOrbEntity.getXPSplit(i);
+			i -= j;
+			world.addEntity(new ExperienceOrbEntity(world, pos.x, pos.y, pos.z, j));
+		}
+
 	}
 
 	// ======== CUSTOM THINGS ========
