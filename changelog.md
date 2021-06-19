@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.5
+- Fixes Baskets having their sides vanish when next to a short block;
+- Fixes water render in waterlogged Baskets.
+
 ## 0.4.4
 - Added a tooltip over the Cooking Pot's heat indicator, describing that it needs heat to function;
 - Added the `offhand_equipment` tag:
