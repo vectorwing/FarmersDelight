@@ -15,11 +15,8 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
@@ -30,49 +27,46 @@ import vectorwing.farmersdelight.tile.PantryTileEntity;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class PantryBlock extends ContainerBlock {
-
+@SuppressWarnings("deprecation")
+public class PantryBlock extends ContainerBlock
+{
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
 
-	public PantryBlock(Properties builder) {
-		super(builder);
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(OPEN, Boolean.FALSE));
+	public PantryBlock(Properties properties) {
+		super(properties);
+		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(OPEN, false));
 	}
 
+	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (worldIn.isRemote) {
-			return ActionResultType.SUCCESS;
-		}
-		else {
-			TileEntity tileentity = worldIn.getTileEntity(pos);
-			if (tileentity instanceof PantryTileEntity) {
-				player.openContainer((PantryTileEntity) tileentity);
-				player.addStat(Stats.OPEN_BARREL);
+		if (!worldIn.isRemote) {
+			TileEntity tile = worldIn.getTileEntity(pos);
+			if (tile instanceof PantryTileEntity) {
+				player.openContainer((PantryTileEntity) tile);
 			}
-
-			return ActionResultType.SUCCESS;
 		}
+		return ActionResultType.SUCCESS;
 	}
 
+	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
-			TileEntity tileentity = worldIn.getTileEntity(pos);
-			if (tileentity instanceof IInventory) {
-				InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory) tileentity);
+			TileEntity tile = worldIn.getTileEntity(pos);
+			if (tile instanceof IInventory) {
+				InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory) tile);
 				worldIn.updateComparatorOutputLevel(pos, this);
 			}
-
 			super.onReplaced(state, worldIn, pos, newState, isMoving);
 		}
 	}
 
+	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-		TileEntity tileentity = worldIn.getTileEntity(pos);
-		if (tileentity instanceof PantryTileEntity) {
-			((PantryTileEntity) tileentity).pantryTick();
+		TileEntity tile = worldIn.getTileEntity(pos);
+		if (tile instanceof PantryTileEntity) {
+			((PantryTileEntity) tile).pantryTick();
 		}
-
 	}
 
 	@Override
@@ -80,14 +74,14 @@ public class PantryBlock extends ContainerBlock {
 		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
 	}
 
+	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		if (stack.hasDisplayName()) {
-			TileEntity tileentity = worldIn.getTileEntity(pos);
-			if (tileentity instanceof PantryTileEntity) {
-				((PantryTileEntity) tileentity).setCustomName(stack.getDisplayName());
+			TileEntity tile = worldIn.getTileEntity(pos);
+			if (tile instanceof PantryTileEntity) {
+				((PantryTileEntity) tile).setCustomName(stack.getDisplayName());
 			}
 		}
-
 	}
 
 	@Override
@@ -96,10 +90,12 @@ public class PantryBlock extends ContainerBlock {
 		builder.add(FACING, OPEN);
 	}
 
+	@Override
 	public boolean hasComparatorInputOverride(BlockState state) {
 		return true;
 	}
 
+	@Override
 	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
 		return Container.calcRedstone(worldIn.getTileEntity(pos));
 	}
@@ -110,7 +106,18 @@ public class PantryBlock extends ContainerBlock {
 		return new PantryTileEntity();
 	}
 
+	@Override
 	public BlockRenderType getRenderType(BlockState state) {
 		return BlockRenderType.MODEL;
+	}
+
+	@Override
+	public BlockState rotate(BlockState state, Rotation rot) {
+		return state.with(FACING, rot.rotate(state.get(FACING)));
+	}
+
+	@Override
+	public BlockState mirror(BlockState state, Mirror mirrorIn) {
+		return state.rotate(mirrorIn.toRotation(state.get(FACING)));
 	}
 }

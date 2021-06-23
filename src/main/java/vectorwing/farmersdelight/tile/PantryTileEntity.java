@@ -21,7 +21,8 @@ import vectorwing.farmersdelight.blocks.PantryBlock;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.TextUtils;
 
-public class PantryTileEntity extends LockableLootTileEntity {
+public class PantryTileEntity extends LockableLootTileEntity
+{
 	private NonNullList<ItemStack> pantryContents = NonNullList.withSize(27, ItemStack.EMPTY);
 	private int numPlayersUsing;
 
@@ -33,6 +34,7 @@ public class PantryTileEntity extends LockableLootTileEntity {
 		this(ModTileEntityTypes.PANTRY_TILE.get());
 	}
 
+	@Override
 	public CompoundNBT write(CompoundNBT compound) {
 		super.write(compound);
 		if (!this.checkLootAndWrite(compound)) {
@@ -42,6 +44,7 @@ public class PantryTileEntity extends LockableLootTileEntity {
 		return compound;
 	}
 
+	@Override
 	public void read(BlockState state, CompoundNBT compound) {
 		super.read(state, compound);
 		this.pantryContents = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
@@ -54,26 +57,32 @@ public class PantryTileEntity extends LockableLootTileEntity {
 	/**
 	 * Returns the number of slots in the inventory.
 	 */
+	@Override
 	public int getSizeInventory() {
 		return 27;
 	}
 
+	@Override
 	protected NonNullList<ItemStack> getItems() {
 		return this.pantryContents;
 	}
 
+	@Override
 	protected void setItems(NonNullList<ItemStack> itemsIn) {
 		this.pantryContents = itemsIn;
 	}
 
+	@Override
 	protected ITextComponent getDefaultName() {
 		return TextUtils.getTranslation("container.pantry");
 	}
 
+	@Override
 	protected Container createMenu(int id, PlayerInventory player) {
 		return ChestContainer.createGeneric9X3(id, player, this);
 	}
 
+	@Override
 	public void openInventory(PlayerEntity player) {
 		if (!player.isSpectator()) {
 			if (this.numPlayersUsing < 0) {
@@ -104,8 +113,7 @@ public class PantryTileEntity extends LockableLootTileEntity {
 		this.numPlayersUsing = ChestTileEntity.calculatePlayersUsing(this.world, this, i, j, k);
 		if (this.numPlayersUsing > 0) {
 			this.scheduleTick();
-		}
-		else {
+		} else {
 			BlockState blockstate = this.getBlockState();
 			if (!(blockstate.getBlock() instanceof PantryBlock)) {
 				this.remove();
@@ -121,6 +129,7 @@ public class PantryTileEntity extends LockableLootTileEntity {
 
 	}
 
+	@Override
 	public void closeInventory(PlayerEntity player) {
 		if (!player.isSpectator()) {
 			--this.numPlayersUsing;
@@ -137,6 +146,6 @@ public class PantryTileEntity extends LockableLootTileEntity {
 		double d0 = (double) this.pos.getX() + 0.5D + (double) vec3i.getX() / 2.0D;
 		double d1 = (double) this.pos.getY() + 0.5D + (double) vec3i.getY() / 2.0D;
 		double d2 = (double) this.pos.getZ() + 0.5D + (double) vec3i.getZ() / 2.0D;
-		this.world.playSound((PlayerEntity) null, d0, d1, d2, sound, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
+		this.world.playSound(null, d0, d1, d2, sound, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
 	}
 }

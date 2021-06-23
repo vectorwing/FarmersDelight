@@ -1,0 +1,51 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"particle": "farmersdelight:block/honey_glazed_ham_body",
+		"ham": "farmersdelight:block/honey_glazed_ham_body",
+		"bone": "farmersdelight:block/honey_glazed_ham_bone",
+		"tray_top": "farmersdelight:block/tray_rice_berry_garnish",
+		"tray_side": "farmersdelight:block/tray_bottom"
+	},
+	"elements": [
+		{
+			"name": "plate",
+			"from": [1, 0, 1],
+			"to": [15, 2, 15],
+			"faces": {
+				"north": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"east": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"south": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"west": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#tray_top"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#tray_side", "cullface": "down"}
+			}
+		},
+		{
+			"name": "ham",
+			"from": [4, 2, 8],
+			"to": [12, 10, 12],
+			"faces": {
+				"north": {"uv": [0, 0, 8, 8], "texture": "#ham"},
+				"east": {"uv": [8, 8, 4, 16], "texture": "#ham"},
+				"south": {"uv": [8, 8, 16, 16], "texture": "#ham"},
+				"west": {"uv": [4, 8, 8, 16], "texture": "#ham"},
+				"up": {"uv": [8, 4, 16, 8], "texture": "#ham"}
+			}
+		},
+		{
+			"name": "bone",
+			"from": [7, 5, 12],
+			"to": [9, 7, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 2, 2], "texture": "#bone"},
+				"east": {"uv": [6, 0, 2, 2], "texture": "#bone"},
+				"south": {"uv": [0, 0, 2, 2], "texture": "#bone"},
+				"west": {"uv": [2, 0, 6, 2], "texture": "#bone"},
+				"up": {"uv": [0, 2, 2, 6], "texture": "#bone"},
+				"down": {"uv": [0, 6, 2, 2], "texture": "#bone"}
+			}
+		}
+	]
+}

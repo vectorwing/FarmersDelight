@@ -1,16 +1,15 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"particle": "farmersdelight:blocks/tatami_mat_even",
-		"half": "farmersdelight:blocks/tatami_mat_half",
-		"side": "farmersdelight:blocks/tatami_mat_side"
+		"particle": "farmersdelight:block/tatami_mat_even",
+		"half": "farmersdelight:block/tatami_mat_half",
+		"side": "farmersdelight:block/tatami_mat_side"
 	},
 	"elements": [
 		{
 			"name": "tatami_mat_half",
 			"from": [0, 0, 0],
 			"to": [16, 2, 16],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 1, 8]},
 			"faces": {
 				"north": {"uv": [0, 14, 16, 16], "texture": "#side"},
 				"east": {"uv": [0, 14, 16, 16], "texture": "#side"},

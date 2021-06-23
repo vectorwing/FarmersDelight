@@ -7,7 +7,8 @@ import net.minecraft.potion.EffectType;
 import net.minecraft.util.FoodStats;
 import net.minecraft.world.GameRules;
 
-public class NourishedEffect extends Effect {
+public class NourishedEffect extends Effect
+{
 	/**
 	 * This effect makes the player immune to accumulating food exhaustion. It is useless to all other entities.
 	 * Normal exhausting actions such as running, jumping and attacking will not drain hunger or saturation.
@@ -38,8 +39,8 @@ public class NourishedEffect extends Effect {
 		}
 	}
 
+	@Override
 	public boolean isReady(int duration, int amplifier) {
 		return true;
 	}
-
 }

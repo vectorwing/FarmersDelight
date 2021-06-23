@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:fruit_salad"
+    ]
+  },
+  "criteria": {
+    "has_fruits": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:melon_slice"
+          },
+          {
+            "item": "minecraft:sweet_berries"
+          },
+          {
+            "item": "minecraft:apple"
+          },
+          {
+            "item": "farmersdelight:pumpkin_slice"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:fruit_salad"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_fruits",
+      "has_the_recipe"
+    ]
+  ]
+}

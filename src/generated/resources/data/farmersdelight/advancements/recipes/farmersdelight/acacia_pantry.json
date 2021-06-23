@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "acacia_trapdoor": {
+    "has_acacia_trapdoor": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "acacia_trapdoor",
+      "has_acacia_trapdoor",
       "has_the_recipe"
     ]
   ]

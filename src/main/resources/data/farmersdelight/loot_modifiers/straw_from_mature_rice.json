@@ -1,5 +1,5 @@
 {
-  "type": "farmersdelight:straw_harvesting",
+  "type": "farmersdelight:add_item",
   "conditions": [
     {
       "condition": "minecraft:match_tool",
@@ -9,10 +9,11 @@
     },
     {
       "condition": "block_state_property",
-      "block": "farmersdelight:tall_rice_crop",
+      "block": "farmersdelight:rice_upper_crop",
       "properties": {
-        "age": "7"
+        "age": "3"
       }
     }
-  ]
+  ],
+  "item": "farmersdelight:straw"
 }

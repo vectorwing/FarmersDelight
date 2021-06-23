@@ -1,47 +1,25 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "farmersdelight:blocks/rope",
-    "particle": "farmersdelight:blocks/rope"
+    "0": "farmersdelight:block/rope",
+    "particle": "farmersdelight:block/rope"
   },
   "elements": [
     {
-      "from": [
-        8,
-        0,
-        9
-      ],
-      "to": [
-        8,
-        16,
-        16
-      ],
+      "from": [8, 0, 9],
+      "to": [8, 16, 16],
       "rotation": {
         "angle": 0,
         "axis": "y",
-        "origin": [
-          16,
-          8,
-          17
-        ]
+        "origin": [16, 8, 17]
       },
       "faces": {
         "east": {
-          "uv": [
-            0,
-            0,
-            7,
-            16
-          ],
+          "uv": [0, 0, 7, 16],
           "texture": "#0"
         },
         "west": {
-          "uv": [
-            9,
-            0,
-            16,
-            16
-          ],
+          "uv": [9, 0, 16, 16],
           "texture": "#0"
         }
       }

@@ -16,7 +16,6 @@
   "block.farmersdelight.tatami": "Block de tatami",
   "block.farmersdelight.full_tatami_mat": "Tatami",
   "block.farmersdelight.half_tatami_mat": "Demi Tatami",
-
   "block.farmersdelight.organic_compost": "Composte organique",
   "block.farmersdelight.rich_soil": "Terre fertile",
   "block.farmersdelight.rich_soil_farmland": "Terre fertile labourée",
@@ -146,8 +145,8 @@
 
   "farmersdelight.advancement.place_campfire": "Feu allumé",
   "farmersdelight.advancement.place_campfire.desc": "Placez un feu de camp pour rester au chaud la nuit",
-  "farmersdelight.advancement.craft_stove": "On fait chauffer le four",
-  "farmersdelight.advancement.craft_stove.desc": "Fabriquez un four",
+  "farmersdelight.advancement.place_stove": "On fait chauffer le four",
+  "farmersdelight.advancement.place_stove.desc": "Fabriquez un four",
   "farmersdelight.advancement.place_cooking_pot": "Le dîner est servi!",
   "farmersdelight.advancement.place_cooking_pot.desc": "Placez une marmite et commencez à cuisiner",
   "farmersdelight.advancement.eat_comfort_food": "Chaud et agréable",
@@ -159,12 +158,9 @@
   "farmersdelight.advancement.master_chef": "Master Chef",
   "farmersdelight.advancement.master_chef.desc": "Mangez tous les plats différents possibles!",
 
-  "block.cooking_pot.boil": "Marmite bouillante",
-  "block.cooking_pot.boil.subtitles": "Marmites bouillantes",
-  "block.cutting_board.knife": "Découpe au couteau",
-  "block.cutting_board.knife.subtitles": "Découpes au couteau",
-  "block.stove.crackle": "Crépitement de four",
-  "block.stove.crackle.subtitles": "Crépitements de four",
+  "farmersdelight.subtitles.cooking_pot.boil": "Marmites bouillantes",
+  "farmersdelight.subtitles.cutting_board.knife_cut": "Découpes au couteau",
+  "farmersdelight.subtitles.stove.crackle": "Crépitements de four",
 
   "farmersdelight.jei.cooking": "Cuisine",
   "farmersdelight.jei.cutting": "Planche à découper"

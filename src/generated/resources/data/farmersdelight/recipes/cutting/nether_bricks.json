@@ -6,7 +6,8 @@
     }
   ],
   "tool": {
-    "tag": "forge:tools/pickaxes"
+    "type": "farmersdelight:tool",
+    "tool": "pickaxe"
   },
   "result": [
     {

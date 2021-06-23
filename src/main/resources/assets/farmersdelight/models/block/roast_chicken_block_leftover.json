@@ -1,0 +1,85 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"gibs": "farmersdelight:block/roast_chicken_gibs",
+		"particle": "farmersdelight:block/tray_top_leftover",
+		"tray_top": "farmersdelight:block/tray_top_leftover",
+		"tray_bottom": "farmersdelight:block/tray_bottom"
+	},
+	"elements": [
+		{
+			"name": "ribcage_end",
+			"from": [5, 7.1, 5],
+			"to": [11, 7.1, 11],
+			"faces": {
+				"up": {"uv": [1, 9, 7, 15], "texture": "#gibs"},
+				"down": {"uv": [1, 9, 7, 15], "rotation": 180, "texture": "#gibs"}
+			}
+		},
+		{
+			"name": "spine",
+			"from": [5, 2.1, 5],
+			"to": [11, 2.1, 11],
+			"faces": {
+				"up": {"uv": [1, 1, 7, 7], "texture": "#gibs"},
+				"down": {"uv": [1, 1, 7, 7], "rotation": 180, "texture": "#gibs"}
+			}
+		},
+		{
+			"name": "ribcage_left",
+			"from": [5, 2.1, 5],
+			"to": [5, 7.1, 11],
+			"faces": {
+				"east": {"uv": [15, 2, 9, 7], "texture": "#gibs"},
+				"west": {"uv": [9, 2, 15, 7], "texture": "#gibs"}
+			}
+		},
+		{
+			"name": "ribcage_right",
+			"from": [11, 2.1, 5],
+			"to": [11, 7.1, 11],
+			"faces": {
+				"east": {"uv": [15, 2, 9, 7], "texture": "#gibs"},
+				"west": {"uv": [9, 2, 15, 7], "texture": "#gibs"}
+			}
+		},
+		{
+			"name": "plate",
+			"from": [1, 0, 1],
+			"to": [15, 2, 15],
+			"faces": {
+				"north": {"uv": [1, 11, 15, 13], "texture": "#tray_bottom"},
+				"east": {"uv": [1, 11, 15, 13], "texture": "#tray_bottom"},
+				"south": {"uv": [1, 11, 15, 13], "texture": "#tray_bottom"},
+				"west": {"uv": [1, 11, 15, 13], "texture": "#tray_bottom"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#tray_top"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#tray_bottom", "cullface": "down"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "roast_chicken",
+			"origin": [8, 8, 8],
+			"children": [
+				{
+					"name": "chicken",
+					"origin": [8, 8, 8],
+					"children": [
+						{
+							"name": "bones",
+							"origin": [16, 28, 16],
+							"children": [0, 1, 2, 3]
+						}
+					]
+				},
+				{
+					"name": "plate",
+					"origin": [8, 8, 8],
+					"children": [4]
+				}
+			]
+		}
+	]
+}

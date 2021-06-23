@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "farmersdelight:block/tatami_mat_half"
+    },
+    "facing=south": {
+      "model": "farmersdelight:block/tatami_mat_half",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "farmersdelight:block/tatami_mat_half",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "farmersdelight:block/tatami_mat_half",
+      "y": 90
+    }
+  }
+}

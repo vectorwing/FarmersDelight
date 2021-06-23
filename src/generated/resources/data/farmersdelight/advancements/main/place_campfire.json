@@ -21,11 +21,18 @@
       "conditions": {
         "block": "minecraft:campfire"
       }
+    },
+    "soul_campfire": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "minecraft:soul_campfire"
+      }
     }
   },
   "requirements": [
     [
-      "campfire"
+      "campfire",
+      "soul_campfire"
     ]
   ]
 }

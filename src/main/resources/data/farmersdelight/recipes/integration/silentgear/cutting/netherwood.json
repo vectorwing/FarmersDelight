@@ -1,0 +1,26 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "silentgear"
+    }
+  ],
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "silentgear:netherwood_log"
+    }
+  ],
+  "tool": {
+    "type": "axe"
+  },
+  "result": [
+    {
+      "item": "silentgear:stripped_netherwood_log"
+    },
+    {
+      "item": "farmersdelight:tree_bark"
+    }
+  ],
+  "sound": "minecraft:item.axe.strip"
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "farmersdelight:item/netherite_knife"
+  }
+}

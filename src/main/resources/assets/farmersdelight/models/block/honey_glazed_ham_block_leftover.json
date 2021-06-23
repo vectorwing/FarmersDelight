@@ -1,0 +1,38 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"particle": "farmersdelight:block/tray_rice_berry_leftover",
+		"bone": "farmersdelight:block/honey_glazed_ham_bone",
+		"tray_top": "farmersdelight:block/tray_rice_berry_leftover",
+		"tray_side": "farmersdelight:block/tray_bottom"
+	},
+	"elements": [
+		{
+			"name": "plate",
+			"from": [1, 0, 1],
+			"to": [15, 2, 15],
+			"faces": {
+				"north": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"east": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"south": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"west": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#tray_top"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#tray_side", "cullface": "down"}
+			}
+		},
+		{
+			"name": "bone",
+			"from": [7, 2, 6],
+			"to": [9, 4, 12],
+			"faces": {
+				"north": {"uv": [0, 0, 2, 2], "texture": "#bone"},
+				"east": {"uv": [15, 0, 9, 2], "texture": "#bone"},
+				"south": {"uv": [0, 0, 2, 2], "texture": "#bone"},
+				"west": {"uv": [9, 0, 15, 2], "texture": "#bone"},
+				"up": {"uv": [7, 2, 9, 8], "texture": "#bone"},
+				"down": {"uv": [7, 8, 9, 2], "texture": "#bone"}
+			}
+		}
+	]
+}

@@ -1,0 +1,28 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "immersiveengineering"
+    }
+  ],
+  "type": "immersiveengineering:crusher",
+  "secondaries": [
+    {
+      "chance": 0.1,
+      "output": {
+        "item": "minecraft:lime_dye",
+        "count": 1
+      }
+    }
+  ],
+  "result": {
+    "count": 2,
+    "base_ingredient": {
+      "item": "minecraft:light_gray_dye"
+    }
+  },
+  "input": {
+    "item": "farmersdelight:wild_carrots"
+  },
+  "energy": 3200
+}

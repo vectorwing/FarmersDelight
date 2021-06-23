@@ -24,8 +24,8 @@ import vectorwing.farmersdelight.registry.ModItems;
  * Hopefully they work fine form the majority of cases. Always make backups!
  */
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID)
-public class RemappingHandler {
-
+public class RemappingHandler
+{
 	private static final Logger LOGGER = LogManager.getLogger();
 
 	// OLD NAMES
@@ -69,5 +69,4 @@ public class RemappingHandler {
 			}
 		}
 	}
-
 }

@@ -2,35 +2,39 @@ package vectorwing.farmersdelight.setup;
 
 import com.google.common.collect.Sets;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.merchant.villager.VillagerTrades;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.MerchantOffer;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.TableLootEntry;
 import net.minecraft.loot.functions.LootFunctionManager;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.util.IItemProvider;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStage;
+import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
-import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.crafting.conditions.VanillaCrateEnabledCondition;
 import vectorwing.farmersdelight.loot.functions.CopyMealFunction;
+import vectorwing.farmersdelight.loot.functions.SmokerCookFunction;
 import vectorwing.farmersdelight.registry.ModAdvancements;
-import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModEffects;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.tile.dispenser.CuttingBoardDispenseBehavior;
@@ -54,20 +58,28 @@ public class CommonEventHandler
 			LootTables.CHESTS_VILLAGE_VILLAGE_SNOWY_HOUSE,
 			LootTables.CHESTS_VILLAGE_VILLAGE_TAIGA_HOUSE,
 			LootTables.CHESTS_VILLAGE_VILLAGE_DESERT_HOUSE);
-	private static final String[] SCAVENGING_ENTITIES = new String[] { "cow", "chicken", "rabbit", "horse", "donkey", "mule", "llama", "shulker" };
+	private static final String[] SCAVENGING_ENTITIES = new String[]{"cow", "pig", "chicken", "rabbit", "horse", "donkey", "mule", "llama", "spider", "hoglin", "shulker"};
 
-	public static void init(final FMLCommonSetupEvent event)
-	{
-		registerCompostables();
+	public static void init(final FMLCommonSetupEvent event) {
+		event.enqueueWork(() -> {
+			registerCompostables();
+			registerDispenserBehaviors();
+			CropPatchGeneration.registerConfiguredFeatures();
+		});
 
 		ModAdvancements.register();
 
 		LootFunctionManager.func_237451_a_(CopyMealFunction.ID.toString(), new CopyMealFunction.Serializer());
+		LootFunctionManager.func_237451_a_(SmokerCookFunction.ID.toString(), new SmokerCookFunction.Serializer());
+
+		CraftingHelper.register(new VanillaCrateEnabledCondition.Serializer());
 
 		if (Configuration.GENERATE_VILLAGE_COMPOST_HEAPS.get()) {
 			VillageStructures.init();
 		}
+	}
 
+	public static void registerDispenserBehaviors() {
 		if (Configuration.DISPENSER_TOOLS_CUTTING_BOARD.get()) {
 			CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_PICKAXE, new CuttingBoardDispenseBehavior());
 			CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_AXE, new CuttingBoardDispenseBehavior());
@@ -119,6 +131,7 @@ public class CommonEventHandler
 		ComposterBlock.CHANCES.put(ModItems.WILD_CARROTS.get(), 0.65F);
 		ComposterBlock.CHANCES.put(ModItems.WILD_POTATOES.get(), 0.65F);
 		ComposterBlock.CHANCES.put(ModItems.WILD_BEETROOTS.get(), 0.65F);
+		ComposterBlock.CHANCES.put(ModItems.WILD_RICE.get(), 0.65F);
 		ComposterBlock.CHANCES.put(ModItems.PIE_CRUST.get(), 0.65F);
 
 		// 85% chance
@@ -137,6 +150,50 @@ public class CommonEventHandler
 		ComposterBlock.CHANCES.put(ModItems.CHOCOLATE_PIE.get(), 1.0F);
 		ComposterBlock.CHANCES.put(ModItems.DUMPLINGS.get(), 1.0F);
 		ComposterBlock.CHANCES.put(ModItems.STUFFED_PUMPKIN.get(), 1.0F);
+		ComposterBlock.CHANCES.put(ModItems.BROWN_MUSHROOM_COLONY.get(), 1.0F);
+		ComposterBlock.CHANCES.put(ModItems.RED_MUSHROOM_COLONY.get(), 1.0F);
+	}
+
+	@SubscribeEvent
+	public static void onBiomeLoad(BiomeLoadingEvent event) {
+		BiomeGenerationSettingsBuilder builder = event.getGeneration();
+		Biome.Climate climate = event.getClimate();
+
+		if (event.getName().getPath().equals("beach")) {
+			if (Configuration.GENERATE_WILD_BEETROOTS.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_BEETROOTS);
+			}
+			if (Configuration.GENERATE_WILD_CABBAGES.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_CABBAGES);
+			}
+		}
+
+		if (event.getCategory().equals(Biome.Category.SWAMP) || event.getCategory().equals(Biome.Category.JUNGLE)) {
+			if (Configuration.GENERATE_WILD_RICE.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_RICE);
+			}
+		}
+
+		if (climate.temperature >= 1.0F) {
+			if (Configuration.GENERATE_WILD_TOMATOES.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_TOMATOES);
+			}
+		}
+
+		if (climate.temperature > 0.3F && climate.temperature < 1.0F) {
+			if (Configuration.GENERATE_WILD_CARROTS.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_CARROTS);
+			}
+			if (Configuration.GENERATE_WILD_ONIONS.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_ONIONS);
+			}
+		}
+
+		if (climate.temperature > 0.0F && climate.temperature <= 0.3F) {
+			if (Configuration.GENERATE_WILD_POTATOES.get()) {
+				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_POTATOES);
+			}
+		}
 	}
 
 	@SubscribeEvent
@@ -146,8 +203,7 @@ public class CommonEventHandler
 		Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
 		VillagerProfession profession = event.getType();
 		if (profession.getRegistryName() == null) return;
-		if (profession.getRegistryName().getPath().equals("farmer"))
-		{
+		if (profession.getRegistryName().getPath().equals("farmer")) {
 			trades.get(1).add(new EmeraldForItemsTrade(ModItems.ONION.get(), 26, 16, 2));
 			trades.get(1).add(new EmeraldForItemsTrade(ModItems.TOMATO.get(), 26, 16, 2));
 			trades.get(2).add(new EmeraldForItemsTrade(ModItems.CABBAGE.get(), 16, 16, 5));
@@ -171,7 +227,8 @@ public class CommonEventHandler
 		}
 	}
 
-	static class EmeraldForItemsTrade implements VillagerTrades.ITrade {
+	static class EmeraldForItemsTrade implements VillagerTrades.ITrade
+	{
 		private final Item tradeItem;
 		private final int count;
 		private final int maxUses;
@@ -193,22 +250,7 @@ public class CommonEventHandler
 	}
 
 	@SubscribeEvent
-	public static void onHoeUse(UseHoeEvent event) {
-		ItemUseContext context = event.getContext();
-		BlockPos pos = context.getPos();
-		World world = context.getWorld();
-		BlockState state = world.getBlockState(pos);
-
-		if (context.getFace() != Direction.DOWN && world.isAirBlock(pos.up()) && state.getBlock() == ModBlocks.RICH_SOIL.get()) {
-			world.playSound(event.getPlayer(), pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-			world.setBlockState(pos, ModBlocks.RICH_SOIL_FARMLAND.get().getDefaultState(), 11);
-			event.setResult(Event.Result.ALLOW);
-		}
-	}
-
-	@SubscribeEvent
-	public static void onLootLoad(LootTableLoadEvent event)
-	{
+	public static void onLootLoad(LootTableLoadEvent event) {
 		for (String entity : SCAVENGING_ENTITIES) {
 			if (event.getName().equals(new ResourceLocation("minecraft", "entities/" + entity))) {
 				event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(FarmersDelight.MODID, "inject/" + entity))).name(entity + "_fd_drops").build());

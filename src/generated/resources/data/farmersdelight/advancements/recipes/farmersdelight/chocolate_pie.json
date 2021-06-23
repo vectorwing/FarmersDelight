@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "pie_crust": {
+    "has_pie_crust": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "pie_crust",
+      "has_pie_crust",
       "has_the_recipe"
     ]
   ]

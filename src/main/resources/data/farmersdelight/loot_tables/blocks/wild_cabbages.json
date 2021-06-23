@@ -11,6 +11,15 @@
             {
               "condition": "minecraft:random_chance",
               "chance": 0.2
+            },
+            {
+              "condition": "minecraft:inverted",
+              "term": {
+                "condition": "minecraft:match_tool",
+                "predicate": {
+                  "tag": "forge:shears"
+                }
+              }
             }
           ],
           "name": "farmersdelight:cabbage"
@@ -30,7 +39,7 @@
                 {
                   "condition": "minecraft:match_tool",
                   "predicate": {
-                    "item": "minecraft:shears"
+                    "tag": "forge:shears"
                   }
                 }
               ],

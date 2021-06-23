@@ -5,18 +5,19 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.loot.modifiers.CakeSliceLoot;
-import vectorwing.farmersdelight.loot.modifiers.StrawHarvestingModifier;
+import vectorwing.farmersdelight.loot.modifiers.AddItemModifier;
+import vectorwing.farmersdelight.loot.modifiers.PastrySlicingModifier;
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class LootModifierHandler {
+public class LootModifierHandler
+{
 	@SubscribeEvent
 	public static void registerModifiers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> ev) {
 		ev.getRegistry().register(
-				new CakeSliceLoot.CakeSliceSerializer().setRegistryName(FarmersDelight.MODID, "cake")
+				new PastrySlicingModifier.Serializer().setRegistryName(FarmersDelight.MODID, "pastry_slicing")
 		);
 		ev.getRegistry().register(
-				new StrawHarvestingModifier.KnifeStrawSerializer().setRegistryName(FarmersDelight.MODID, "straw_harvesting")
+				new AddItemModifier.Serializer().setRegistryName(FarmersDelight.MODID, "add_item")
 		);
 	}
 }

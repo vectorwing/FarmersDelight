@@ -11,13 +11,15 @@ import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import vectorwing.farmersdelight.FarmersDelight;
 
 import javax.annotation.Nullable;
 
-public class CuttingBoardRecipe implements IRecipe<RecipeWrapper> {
+public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
+{
 	public static IRecipeType<CuttingBoardRecipe> TYPE = IRecipeType.register(FarmersDelight.MODID + ":cutting");
 	public static final CuttingBoardRecipe.Serializer SERIALIZER = new CuttingBoardRecipe.Serializer();
 
@@ -27,16 +29,14 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper> {
 	private final Ingredient tool;
 	private final NonNullList<ItemStack> results;
 	private final String soundEvent;
-	private final int effort;
 
-	public CuttingBoardRecipe(ResourceLocation id, String group, Ingredient input, Ingredient tool, NonNullList<ItemStack> results, String soundEvent, int effort) {
+	public CuttingBoardRecipe(ResourceLocation id, String group, Ingredient input, Ingredient tool, NonNullList<ItemStack> results, String soundEvent) {
 		this.id = id;
 		this.group = group;
 		this.input = input;
 		this.tool = tool;
 		this.results = results;
 		this.soundEvent = soundEvent;
-		this.effort = effort;
 	}
 
 	@Override
@@ -85,10 +85,6 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper> {
 		return this.soundEvent;
 	}
 
-	public int getEffort() {
-		return this.effort;
-	}
-
 	@Override
 	public boolean matches(RecipeWrapper inv, World worldIn) {
 		if (inv.isEmpty())
@@ -115,8 +111,8 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper> {
 		return CuttingBoardRecipe.TYPE;
 	}
 
-	private static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<CuttingBoardRecipe> {
-
+	private static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<CuttingBoardRecipe>
+	{
 		Serializer() {
 			this.setRegistryName(new ResourceLocation(FarmersDelight.MODID, "cutting"));
 		}
@@ -125,21 +121,18 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper> {
 		public CuttingBoardRecipe read(ResourceLocation recipeId, JsonObject json) {
 			final String groupIn = JSONUtils.getString(json, "group", "");
 			final NonNullList<Ingredient> inputItemsIn = readIngredients(JSONUtils.getJsonArray(json, "ingredients"));
-			final Ingredient toolIn = Ingredient.deserialize(JSONUtils.getJsonObject(json, "tool"));
+			final JsonObject toolObject= JSONUtils.getJsonObject(json, "tool");
+			final Ingredient toolIn = Ingredient.deserialize(toolObject);
 			if (inputItemsIn.isEmpty()) {
 				throw new JsonParseException("No ingredients for cutting recipe");
-			}
-			else if (toolIn.hasNoMatchingItems()) {
+			} else if (toolIn.hasNoMatchingItems()) {
 				throw new JsonParseException("No tool for cutting recipe");
-			}
-			else if (inputItemsIn.size() > 1) {
+			} else if (inputItemsIn.size() > 1) {
 				throw new JsonParseException("Too many ingredients for cutting recipe! Please define only one ingredient.");
-			}
-			else {
+			} else {
 				final NonNullList<ItemStack> results = readResults(JSONUtils.getJsonArray(json, "result"));
 				final String soundID = JSONUtils.getString(json, "sound", "");
-				final int effortIn = JSONUtils.getInt(json, "effort", 1);
-				return new CuttingBoardRecipe(recipeId, groupIn, inputItemsIn.get(0), toolIn, results, soundID, effortIn);
+				return new CuttingBoardRecipe(recipeId, groupIn, inputItemsIn.get(0), toolIn, results, soundID);
 			}
 		}
 
@@ -157,7 +150,7 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper> {
 		private static NonNullList<ItemStack> readResults(JsonArray resultArray) {
 			NonNullList<ItemStack> results = NonNullList.create();
 			for (JsonElement result : resultArray) {
-				results.add(ShapedRecipe.deserializeItem(result.getAsJsonObject()));
+				results.add(CraftingHelper.getItemStack(result.getAsJsonObject(), true));
 			}
 			return results;
 		}
@@ -168,15 +161,15 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper> {
 			String groupIn = buffer.readString(32767);
 			Ingredient inputItemIn = Ingredient.read(buffer);
 			Ingredient toolIn = Ingredient.read(buffer);
+
 			int i = buffer.readVarInt();
 			NonNullList<ItemStack> resultsIn = NonNullList.withSize(i, ItemStack.EMPTY);
 			for (int j = 0; j < resultsIn.size(); ++j) {
 				resultsIn.set(j, buffer.readItemStack());
 			}
 			String soundEventIn = buffer.readString();
-			int effortIn = buffer.readVarInt();
 
-			return new CuttingBoardRecipe(recipeId, groupIn, inputItemIn, toolIn, resultsIn, soundEventIn, effortIn);
+			return new CuttingBoardRecipe(recipeId, groupIn, inputItemIn, toolIn, resultsIn, soundEventIn);
 		}
 
 		@Override
@@ -189,7 +182,6 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper> {
 				buffer.writeItemStack(result);
 			}
 			buffer.writeString(recipe.soundEvent);
-			buffer.writeVarInt(recipe.effort);
 		}
 	}
 }

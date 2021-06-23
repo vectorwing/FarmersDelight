@@ -1,8 +1,0 @@
-{
-  "parent": "block/orientable",
-  "textures": {
-    "top": "farmersdelight:blocks/birch_pantry_top",
-    "front": "farmersdelight:blocks/birch_pantry_front",
-    "side": "farmersdelight:blocks/birch_pantry_side"
-  }
-}

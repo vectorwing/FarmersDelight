@@ -1,17 +1,16 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"particle": "farmersdelight:blocks/pie_bottom",
-		"bottom": "farmersdelight:blocks/pie_bottom",
-		"inner": "farmersdelight:blocks/chocolate_pie_inner",
-		"side": "farmersdelight:blocks/pie_side",
-		"top": "farmersdelight:blocks/chocolate_pie_top"
+		"particle": "farmersdelight:block/pie_bottom",
+		"bottom": "farmersdelight:block/pie_bottom",
+		"inner": "farmersdelight:block/chocolate_pie_inner",
+		"side": "farmersdelight:block/pie_side",
+		"top": "farmersdelight:block/chocolate_pie_top"
 	},
 	"elements": [
 		{
 			"from": [2, 0, 2],
 			"to": [14, 4, 8],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 3, 8]},
 			"faces": {
 				"north": {"uv": [2, 12, 14, 16], "texture": "#side"},
 				"east": {"uv": [8, 12, 14, 16], "texture": "#side"},
@@ -24,7 +23,6 @@
 		{
 			"from": [6, 4, 6],
 			"to": [10, 5, 8],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 4.5, 8]},
 			"faces": {
 				"north": {"uv": [6, 11, 10, 12], "texture": "#inner"},
 				"east": {"uv": [8, 11, 10, 12], "texture": "#inner"},
@@ -36,7 +34,6 @@
 		{
 			"from": [2, 0, 8],
 			"to": [8, 4, 14],
-			"rotation": {"angle": 0, "axis": "y", "origin": [10, 8, 16]},
 			"faces": {
 				"east": {"uv": [2, 12, 8, 16], "texture": "#inner"},
 				"south": {"uv": [2, 12, 8, 16], "texture": "#side"},
@@ -48,7 +45,6 @@
 		{
 			"from": [6, 4, 8],
 			"to": [8, 5, 10],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 4.5, 10]},
 			"faces": {
 				"east": {"uv": [6, 11, 8, 12], "texture": "#inner"},
 				"south": {"uv": [6, 11, 8, 12], "texture": "#inner"},

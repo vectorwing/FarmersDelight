@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "farmersdelight:wheat_dough"
+  },
+  "result": "minecraft:bread",
+  "experience": 0.35,
+  "cookingtime": 100
+}

@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "farmersdelight:block/rich_soil"
+      },
+      {
+        "model": "farmersdelight:block/rich_soil",
+        "y": 90
+      },
+      {
+        "model": "farmersdelight:block/rich_soil",
+        "y": 180
+      },
+      {
+        "model": "farmersdelight:block/rich_soil",
+        "y": 270
+      }
+    ]
+  }
+}

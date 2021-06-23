@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:smoked_ham"
+    ]
+  },
+  "criteria": {
+    "has_ham": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:ham"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:smoked_ham"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ham",
+      "has_the_recipe"
+    ]
+  ]
+}

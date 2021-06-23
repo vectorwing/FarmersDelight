@@ -1,0 +1,35 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "immersiveengineering"
+    }
+  ],
+  "type": "immersiveengineering:crusher",
+  "secondaries": [
+    {
+      "chance": 0.2,
+      "output": {
+        "item": "minecraft:magenta_dye",
+        "count": 3
+      }
+    },
+    {
+      "chance": 0.1,
+      "output": {
+        "item": "minecraft:lime_dye",
+        "count": 1
+      }
+    }
+  ],
+  "result": {
+    "count": 1,
+    "base_ingredient": {
+      "item": "minecraft:magenta_dye"
+    }
+  },
+  "input": {
+    "item": "farmersdelight:wild_onions"
+  },
+  "energy": 3200
+}

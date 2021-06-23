@@ -1,7 +1,5 @@
 package vectorwing.farmersdelight.blocks;
 
-
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BushBlock;
@@ -27,17 +25,17 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.PlantType;
 import vectorwing.farmersdelight.registry.ModItems;
+import vectorwing.farmersdelight.registry.ModSounds;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 @SuppressWarnings("deprecation")
-public class TomatoesBlock extends BushBlock implements IGrowable {
-	private static final int TOMATO_BEARING_AGE = 7;
+public class TomatoesBlock extends BushBlock implements IGrowable
+{
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_0_7;
+	private static final int TOMATO_BEARING_AGE = 7;
 	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
 			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D),
 			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D),
@@ -53,9 +51,54 @@ public class TomatoesBlock extends BushBlock implements IGrowable {
 		this.setDefaultState(this.stateContainer.getBaseState().with(AGE, 0));
 	}
 
-	public int getMaxAge() { return 7; }
+	protected static float getGrowthChance(Block blockIn, IBlockReader worldIn, BlockPos pos) {
+		float f = 1.0F;
+		BlockPos floorPos = pos.down();
 
-	protected int getAge(BlockState state) { return state.get(AGE); }
+		for (int i = -1; i <= 1; ++i) {
+			for (int j = -1; j <= 1; ++j) {
+				float f1 = 0.0F;
+				BlockState blockstate = worldIn.getBlockState(floorPos.add(i, 0, j));
+				if (blockstate.canSustainPlant(worldIn, floorPos.add(i, 0, j), net.minecraft.util.Direction.UP, (net.minecraftforge.common.IPlantable) blockIn)) {
+					f1 = 1.0F;
+					if (blockstate.isFertile(worldIn, floorPos.add(i, 0, j))) {
+						f1 = 3.0F;
+					}
+				}
+
+				if (i != 0 || j != 0) {
+					f1 /= 4.0F;
+				}
+
+				f += f1;
+			}
+		}
+
+		BlockPos northPos = pos.north();
+		BlockPos southPos = pos.south();
+		BlockPos westPos = pos.west();
+		BlockPos eastPos = pos.east();
+		boolean isMatchedWestEast = blockIn == worldIn.getBlockState(westPos).getBlock() || blockIn == worldIn.getBlockState(eastPos).getBlock();
+		boolean isMatchedNorthSouth = blockIn == worldIn.getBlockState(northPos).getBlock() || blockIn == worldIn.getBlockState(southPos).getBlock();
+		if (isMatchedWestEast && isMatchedNorthSouth) {
+			f /= 2.0F;
+		} else {
+			boolean flag2 = blockIn == worldIn.getBlockState(westPos.north()).getBlock() || blockIn == worldIn.getBlockState(eastPos.north()).getBlock() || blockIn == worldIn.getBlockState(eastPos.south()).getBlock() || blockIn == worldIn.getBlockState(westPos.south()).getBlock();
+			if (flag2) {
+				f /= 2.0F;
+			}
+		}
+
+		return f;
+	}
+
+	public int getMaxAge() {
+		return 7;
+	}
+
+	protected int getAge(BlockState state) {
+		return state.get(AGE);
+	}
 
 	public BlockState withAge(int age) {
 		return this.getDefaultState().with(AGE, age);
@@ -74,14 +117,16 @@ public class TomatoesBlock extends BushBlock implements IGrowable {
 		return SHAPE_BY_AGE[state.get(AGE)];
 	}
 
+	@Override
 	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
 		return new ItemStack(ModItems.TOMATO_SEEDS.get());
 	}
 
+	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
 		super.tick(state, worldIn, pos, rand);
 		if (!worldIn.isAreaLoaded(pos, 1))
-			return; // Forge: prevent loading unloaded chunks when checking neighbor's light
+			return;
 		if (worldIn.getLightSubtracted(pos, 0) >= 9) {
 			int i = this.getAge(state);
 			if (i < this.getMaxAge()) {
@@ -92,6 +137,11 @@ public class TomatoesBlock extends BushBlock implements IGrowable {
 				}
 			}
 		}
+	}
+
+	@Override
+	public PlantType getPlantType(IBlockReader world, BlockPos pos) {
+		return PlantType.CROP;
 	}
 
 	@Override
@@ -106,24 +156,25 @@ public class TomatoesBlock extends BushBlock implements IGrowable {
 
 	@Override
 	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
-		int i = this.getAge(state) + this.getBonemealAgeIncrease(worldIn);
-		int j = this.getMaxAge();
-		if (i > j) {
-			i = j;
+		int newAge = this.getAge(state) + this.getBonemealAgeIncrease(worldIn);
+		int maxAge = this.getMaxAge();
+		if (newAge > maxAge) {
+			newAge = maxAge;
 		}
 
-		worldIn.setBlockState(pos, this.withAge(i), 2);
+		worldIn.setBlockState(pos, this.withAge(newAge), 2);
 	}
 
+	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		int i = state.get(AGE);
-		boolean flag = i == TOMATO_BEARING_AGE;
-		if (!flag && player.getHeldItem(handIn).getItem() == Items.BONE_MEAL) {
+		int age = state.get(AGE);
+		boolean isMature = age == TOMATO_BEARING_AGE;
+		if (!isMature && player.getHeldItem(handIn).getItem() == Items.BONE_MEAL) {
 			return ActionResultType.PASS;
-		} else if (flag) {
+		} else if (isMature) {
 			int j = 1 + worldIn.rand.nextInt(2);
 			spawnAsEntity(worldIn, pos, new ItemStack(ModItems.TOMATO.get(), j));
-			worldIn.playSound(null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
+			worldIn.playSound(null, pos, ModSounds.ITEM_TOMATO_PICK_FROM_BUSH.get(), SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
 			worldIn.setBlockState(pos, state.with(AGE, TOMATO_BEARING_AGE - 2), 2);
 			return ActionResultType.SUCCESS;
 		} else {
@@ -131,10 +182,12 @@ public class TomatoesBlock extends BushBlock implements IGrowable {
 		}
 	}
 
+	@Override
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		return (worldIn.getLightSubtracted(pos, 0) >= 8 || worldIn.canSeeSky(pos)) && super.isValidPosition(state, worldIn, pos);
 	}
 
+	@Override
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		if (entityIn instanceof RavagerEntity && net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(worldIn, entityIn)) {
 			worldIn.destroyBlock(pos, true, entityIn);
@@ -143,49 +196,8 @@ public class TomatoesBlock extends BushBlock implements IGrowable {
 		super.onEntityCollision(state, worldIn, pos, entityIn);
 	}
 
+	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(AGE);
-	}
-
-	protected static float getGrowthChance(Block blockIn, IBlockReader worldIn, BlockPos pos) {
-		float f = 1.0F;
-		BlockPos blockpos = pos.down();
-
-		for (int i = -1; i <= 1; ++i) {
-			for (int j = -1; j <= 1; ++j) {
-				float f1 = 0.0F;
-				BlockState blockstate = worldIn.getBlockState(blockpos.add(i, 0, j));
-				if (blockstate.canSustainPlant(worldIn, blockpos.add(i, 0, j), net.minecraft.util.Direction.UP, (net.minecraftforge.common.IPlantable) blockIn)) {
-					f1 = 1.0F;
-					if (blockstate.isFertile(worldIn, blockpos.add(i, 0, j))) {
-						f1 = 3.0F;
-					}
-				}
-
-				if (i != 0 || j != 0) {
-					f1 /= 4.0F;
-				}
-
-				f += f1;
-			}
-		}
-
-		BlockPos blockpos1 = pos.north();
-		BlockPos blockpos2 = pos.south();
-		BlockPos blockpos3 = pos.west();
-		BlockPos blockpos4 = pos.east();
-		boolean flag = blockIn == worldIn.getBlockState(blockpos3).getBlock() || blockIn == worldIn.getBlockState(blockpos4).getBlock();
-		boolean flag1 = blockIn == worldIn.getBlockState(blockpos1).getBlock() || blockIn == worldIn.getBlockState(blockpos2).getBlock();
-		if (flag && flag1) {
-			f /= 2.0F;
-		}
-		else {
-			boolean flag2 = blockIn == worldIn.getBlockState(blockpos3.north()).getBlock() || blockIn == worldIn.getBlockState(blockpos4.north()).getBlock() || blockIn == worldIn.getBlockState(blockpos4.south()).getBlock() || blockIn == worldIn.getBlockState(blockpos3.south()).getBlock();
-			if (flag2) {
-				f /= 2.0F;
-			}
-		}
-
-		return f;
 	}
 }

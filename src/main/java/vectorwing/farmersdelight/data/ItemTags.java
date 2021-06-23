@@ -3,22 +3,29 @@ package vectorwing.farmersdelight.data;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
+import net.minecraft.item.Items;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.tags.ForgeTags;
 import vectorwing.farmersdelight.utils.tags.ModTags;
-import net.minecraft.item.Items;
 
-public class ItemTags extends ItemTagsProvider {
-	public ItemTags(DataGenerator generatorIn, BlockTagsProvider blockTagProvider) {
-		super(generatorIn, blockTagProvider);
+import javax.annotation.Nullable;
+
+public class ItemTags extends ItemTagsProvider
+{
+	public ItemTags(DataGenerator generatorIn, BlockTagsProvider blockTagProvider, String modId, @Nullable ExistingFileHelper existingFileHelper) {
+		super(generatorIn, blockTagProvider, modId, existingFileHelper);
 	}
 
 	@Override
 	protected void registerTags() {
+		copy(ModTags.WILD_CROPS, ModTags.WILD_CROPS_ITEM);
 		copy(BlockTags.CARPETS, net.minecraft.tags.ItemTags.CARPETS);
 		copy(BlockTags.SMALL_FLOWERS, net.minecraft.tags.ItemTags.SMALL_FLOWERS);
+
+		getOrCreateBuilder(net.minecraft.tags.ItemTags.PIGLIN_LOVED).add(ModItems.GOLDEN_KNIFE.get());
 
 		this.registerModTags();
 		this.registerForgeTags();
@@ -29,7 +36,8 @@ public class ItemTags extends ItemTagsProvider {
 		getOrCreateBuilder(ModTags.KNIVES).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get());
 		getOrCreateBuilder(ModTags.STRAW_HARVESTERS).addTag(ModTags.KNIVES);
 		getOrCreateBuilder(ModTags.COMFORT_FOODS).add(Items.MUSHROOM_STEW, Items.BEETROOT_SOUP, Items.RABBIT_STEW);
-		getOrCreateBuilder(ModTags.WOLF_PREY).addTag(ForgeTags.RAW_CHICKEN).add(Items.MUTTON, Items.RABBIT);
+		getOrCreateBuilder(ModTags.WOLF_PREY).addTag(ForgeTags.RAW_CHICKEN).addTag(ForgeTags.RAW_MUTTON).add(Items.RABBIT);
+		getOrCreateBuilder(ModTags.CABBAGE_ROLL_INGREDIENTS).addTag(ForgeTags.RAW_PORK).addTag(ForgeTags.RAW_FISHES).addTag(ForgeTags.RAW_CHICKEN).addTag(ForgeTags.RAW_BEEF).addTag(ForgeTags.RAW_MUTTON).addTag(ForgeTags.EGGS).addTag(Tags.Items.MUSHROOMS).add(Items.CARROT, Items.POTATO, Items.BEETROOT);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -37,8 +45,12 @@ public class ItemTags extends ItemTagsProvider {
 		getOrCreateBuilder(ForgeTags.BREAD).addTag(ForgeTags.BREAD_WHEAT);
 		getOrCreateBuilder(ForgeTags.BREAD_WHEAT).add(Items.BREAD);
 
+		getOrCreateBuilder(ForgeTags.COOKED_BACON).add(ModItems.COOKED_BACON.get());
+
 		getOrCreateBuilder(ForgeTags.COOKED_BEEF).add(Items.COOKED_BEEF, ModItems.BEEF_PATTY.get());
 		getOrCreateBuilder(ForgeTags.COOKED_CHICKEN).add(Items.COOKED_CHICKEN, ModItems.COOKED_CHICKEN_CUTS.get());
+		getOrCreateBuilder(ForgeTags.COOKED_PORK).add(Items.COOKED_PORKCHOP, ModItems.COOKED_BACON.get());
+		getOrCreateBuilder(ForgeTags.COOKED_MUTTON).add(Items.COOKED_MUTTON, ModItems.COOKED_MUTTON_CHOPS.get());
 		getOrCreateBuilder(ForgeTags.COOKED_EGGS).add(ModItems.FRIED_EGG.get());
 
 		getOrCreateBuilder(ForgeTags.COOKED_FISHES).addTags(ForgeTags.COOKED_FISHES_COD, ForgeTags.COOKED_FISHES_SALMON);
@@ -51,6 +63,8 @@ public class ItemTags extends ItemTagsProvider {
 		getOrCreateBuilder(ForgeTags.CROPS_RICE).add(ModItems.RICE.get());
 		getOrCreateBuilder(ForgeTags.CROPS_TOMATO).add(ModItems.TOMATO.get());
 
+		getOrCreateBuilder(ForgeTags.EGGS).add(Items.EGG);
+
 		getOrCreateBuilder(ForgeTags.GRAIN).addTags(ForgeTags.GRAIN_WHEAT, ForgeTags.GRAIN_RICE);
 		getOrCreateBuilder(ForgeTags.GRAIN_WHEAT).add(Items.WHEAT);
 		getOrCreateBuilder(ForgeTags.GRAIN_RICE).add(ModItems.RICE.get());
@@ -62,8 +76,11 @@ public class ItemTags extends ItemTagsProvider {
 		getOrCreateBuilder(ForgeTags.PASTA).addTags(ForgeTags.PASTA_RAW_PASTA);
 		getOrCreateBuilder(ForgeTags.PASTA_RAW_PASTA).add(ModItems.RAW_PASTA.get());
 
+		getOrCreateBuilder(ForgeTags.RAW_BACON).add(ModItems.BACON.get());
 		getOrCreateBuilder(ForgeTags.RAW_BEEF).add(Items.BEEF, ModItems.MINCED_BEEF.get());
 		getOrCreateBuilder(ForgeTags.RAW_CHICKEN).add(Items.CHICKEN, ModItems.CHICKEN_CUTS.get());
+		getOrCreateBuilder(ForgeTags.RAW_PORK).add(Items.PORKCHOP, ModItems.BACON.get());
+		getOrCreateBuilder(ForgeTags.RAW_MUTTON).add(Items.MUTTON, ModItems.MUTTON_CHOPS.get());
 
 		getOrCreateBuilder(ForgeTags.RAW_FISHES).addTags(ForgeTags.RAW_FISHES_COD, ForgeTags.RAW_FISHES_SALMON, ForgeTags.RAW_FISHES_TROPICAL);
 		getOrCreateBuilder(ForgeTags.RAW_FISHES_COD).add(Items.COD, ModItems.COD_SLICE.get());
@@ -75,8 +92,8 @@ public class ItemTags extends ItemTagsProvider {
 
 		getOrCreateBuilder(ForgeTags.SEEDS).addTags(ForgeTags.SEEDS_CABBAGE, ForgeTags.SEEDS_RICE, ForgeTags.SEEDS_TOMATO);
 		getOrCreateBuilder(ForgeTags.SEEDS_CABBAGE).add(ModItems.CABBAGE_SEEDS.get());
-		getOrCreateBuilder(ForgeTags.SEEDS_RICE).add(ModItems.TOMATO_SEEDS.get());
-		getOrCreateBuilder(ForgeTags.SEEDS_TOMATO).add(ModItems.RICE.get());
+		getOrCreateBuilder(ForgeTags.SEEDS_RICE).add(ModItems.RICE.get());
+		getOrCreateBuilder(ForgeTags.SEEDS_TOMATO).add(ModItems.TOMATO_SEEDS.get());
 
 		getOrCreateBuilder(ForgeTags.VEGETABLES).addTags(ForgeTags.VEGETABLES_BEETROOT, ForgeTags.VEGETABLES_CARROT, ForgeTags.VEGETABLES_ONION, ForgeTags.VEGETABLES_POTATO, ForgeTags.VEGETABLES_TOMATO);
 		getOrCreateBuilder(ForgeTags.VEGETABLES_BEETROOT).add(Items.BEETROOT);
@@ -85,11 +102,10 @@ public class ItemTags extends ItemTagsProvider {
 		getOrCreateBuilder(ForgeTags.VEGETABLES_POTATO).add(Items.POTATO);
 		getOrCreateBuilder(ForgeTags.VEGETABLES_TOMATO).add(ModItems.TOMATO.get());
 
-		getOrCreateBuilder(ForgeTags.TOOLS).addTags(ForgeTags.TOOLS_AXES, ForgeTags.TOOLS_KNIVES, ForgeTags.TOOLS_PICKAXES, ForgeTags.TOOLS_SHEARS, ForgeTags.TOOLS_SHOVELS);
+		getOrCreateBuilder(ForgeTags.TOOLS).addTags(ForgeTags.TOOLS_AXES, ForgeTags.TOOLS_KNIVES, ForgeTags.TOOLS_PICKAXES, ForgeTags.TOOLS_SHOVELS);
 		getOrCreateBuilder(ForgeTags.TOOLS_AXES).add(Items.WOODEN_AXE, Items.STONE_AXE, Items.IRON_AXE, Items.DIAMOND_AXE, Items.GOLDEN_AXE);
 		getOrCreateBuilder(ForgeTags.TOOLS_KNIVES).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get());
 		getOrCreateBuilder(ForgeTags.TOOLS_PICKAXES).add(Items.WOODEN_PICKAXE, Items.STONE_PICKAXE, Items.IRON_PICKAXE, Items.DIAMOND_PICKAXE, Items.GOLDEN_PICKAXE);
-		getOrCreateBuilder(ForgeTags.TOOLS_SHEARS).add(Items.SHEARS);
 		getOrCreateBuilder(ForgeTags.TOOLS_SHOVELS).add(Items.WOODEN_SHOVEL, Items.STONE_SHOVEL, Items.IRON_SHOVEL, Items.DIAMOND_SHOVEL, Items.GOLDEN_SHOVEL);
 	}
 }

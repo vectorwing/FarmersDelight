@@ -8,7 +8,8 @@ import vectorwing.farmersdelight.FarmersDelight;
  * Util for obtaining and formatting ITextComponents for use across the mod.
  */
 
-public class TextUtils {
+public class TextUtils
+{
 	/**
 	 * Syntactic sugar for custom translation keys. Always prefixed with the mod's ID in lang files (e.g. farmersdelight.your.key.here).
 	 */

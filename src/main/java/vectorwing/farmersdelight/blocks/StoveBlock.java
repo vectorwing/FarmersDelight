@@ -1,8 +1,6 @@
 package vectorwing.farmersdelight.blocks;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -12,7 +10,6 @@ import net.minecraft.item.*;
 import net.minecraft.item.crafting.CampfireCookingRecipe;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.stats.Stats;
@@ -30,30 +27,26 @@ import vectorwing.farmersdelight.tile.StoveTileEntity;
 import vectorwing.farmersdelight.utils.MathUtils;
 
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Optional;
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 @SuppressWarnings("deprecation")
-public class StoveBlock extends Block {
+public class StoveBlock extends HorizontalBlock
+{
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
-	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-	public StoveBlock() {
-		super(Properties.create(Material.ROCK)
-				.hardnessAndResistance(2.0F, 6.0F)
-				.sound(SoundType.STONE));
+	public StoveBlock(AbstractBlock.Properties builder) {
+		super(builder);
 	}
 
+	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		ItemStack itemstack = player.getHeldItem(handIn);
 		Item usedItem = itemstack.getItem();
 		if (state.get(LIT)) {
-			TileEntity tileentity = worldIn.getTileEntity(pos);
-			if (tileentity instanceof StoveTileEntity) {
-				StoveTileEntity stovetileentity = (StoveTileEntity) tileentity;
+			TileEntity tile = worldIn.getTileEntity(pos);
+			if (tile instanceof StoveTileEntity) {
+				StoveTileEntity stovetileentity = (StoveTileEntity) tile;
 				Optional<CampfireCookingRecipe> optional = stovetileentity.findMatchingRecipe(itemstack);
 				if (optional.isPresent()) {
 					if (!worldIn.isRemote && !stovetileentity.isStoveBlockedAbove() && stovetileentity.addItem(player.abilities.isCreativeMode ? itemstack.copy() : itemstack, optional.get().getCookTime())) {
@@ -61,21 +54,18 @@ public class StoveBlock extends Block {
 						return ActionResultType.SUCCESS;
 					}
 					return ActionResultType.CONSUME;
-				}
-				else {
+				} else {
 					if (usedItem instanceof ShovelItem) {
 						extinguish(state, worldIn, pos);
 						return ActionResultType.SUCCESS;
-					}
-					else if (usedItem == Items.WATER_BUCKET) {
+					} else if (usedItem == Items.WATER_BUCKET) {
 						extinguish(state, worldIn, pos);
 						player.setHeldItem(handIn, new ItemStack(Items.BUCKET));
 						return ActionResultType.SUCCESS;
 					}
 				}
 			}
-		}
-		else {
+		} else {
 			if (itemstack.getItem() instanceof FlintAndSteelItem) {
 				worldIn.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, MathUtils.RAND.nextFloat() * 0.4F + 0.8F);
 				worldIn.setBlockState(pos, state.with(BlockStateProperties.LIT, Boolean.TRUE), 11);
@@ -98,10 +88,10 @@ public class StoveBlock extends Block {
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite())
-				.with(LIT, true);
+		return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite()).with(LIT, true);
 	}
 
+	@Override
 	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
 		boolean isLit = worldIn.getBlockState(pos).get(StoveBlock.LIT);
 		if (isLit && !entityIn.isImmuneToFire() && entityIn instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entityIn)) {
@@ -111,17 +101,12 @@ public class StoveBlock extends Block {
 		super.onEntityWalk(worldIn, pos, entityIn);
 	}
 
-
 	@Override
-	public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
-		return state.get(LIT) ? 13 : 0;
-	}
-
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
-			TileEntity tileentity = worldIn.getTileEntity(pos);
-			if (tileentity instanceof StoveTileEntity) {
-				InventoryHelper.dropItems(worldIn, pos, ((StoveTileEntity) tileentity).getInventory());
+			TileEntity tile = worldIn.getTileEntity(pos);
+			if (tile instanceof StoveTileEntity) {
+				InventoryHelper.dropItems(worldIn, pos, ((StoveTileEntity) tile).getInventory());
 			}
 
 			super.onReplaced(state, worldIn, pos, newState, isMoving);
@@ -131,7 +116,7 @@ public class StoveBlock extends Block {
 	@Override
 	protected void fillStateContainer(final StateContainer.Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
-		builder.add(LIT, FACING);
+		builder.add(LIT, HORIZONTAL_FACING);
 	}
 
 	@OnlyIn(Dist.CLIENT)

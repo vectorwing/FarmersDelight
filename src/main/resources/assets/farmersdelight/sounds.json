@@ -1,7 +1,7 @@
 {
   "block.cooking_pot.boil": {
     "category": "block",
-    "subtitle": "block.cooking_pot.boil.subtitles",
+    "subtitle": "farmersdelight.subtitles.cooking_pot.boil",
     "sounds": [
       {
         "name": "farmersdelight:block/cooking_pot_boil1",
@@ -15,7 +15,7 @@
   },
   "block.cutting_board.knife": {
     "category": "block",
-    "subtitle": "block.cutting_board.knife.subtitles",
+    "subtitle": "farmersdelight.subtitles.cutting_board.knife_cut",
     "sounds": [
       {
         "name": "farmersdelight:block/cutting_board_knife1",
@@ -29,7 +29,7 @@
   },
   "block.stove.crackle": {
     "category": "block",
-    "subtitle": "block.stove.crackle.subtitles",
+    "subtitle": "farmersdelight.subtitles.stove.crackle",
     "sounds": [
       {
         "name": "block/campfire/crackle1",
@@ -53,6 +53,20 @@
       },
       {
         "name": "block/campfire/crackle6",
+        "stream": true
+      }
+    ]
+  },
+  "item.tomato.pick_from_bush": {
+    "category": "block",
+    "subtitle": "farmersdelight.subtitles.tomato.pick",
+    "sounds": [
+      {
+        "name": "item/sweet_berries/pick_from_bush1",
+        "stream": true
+      },
+      {
+        "name": "item/sweet_berries/pick_from_bush2",
         "stream": true
       }
     ]

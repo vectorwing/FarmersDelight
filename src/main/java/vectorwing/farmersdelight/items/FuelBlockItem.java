@@ -4,7 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 
-public class FuelBlockItem extends BlockItem {
+public class FuelBlockItem extends BlockItem
+{
 	public final int burnTime;
 
 	public FuelBlockItem(Block blockIn, Properties properties) {

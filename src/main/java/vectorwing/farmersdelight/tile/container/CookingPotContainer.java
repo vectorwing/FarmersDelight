@@ -26,8 +26,9 @@ import vectorwing.farmersdelight.tile.CookingPotTileEntity;
 
 import java.util.Objects;
 
-public class CookingPotContainer extends Container {
-	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "items/empty_container_slot_bowl");
+public class CookingPotContainer extends Container
+{
+	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "item/empty_container_slot_bowl");
 
 	public final CookingPotTileEntity tileEntity;
 	public final ItemStackHandler inventoryHandler;
@@ -59,7 +60,8 @@ public class CookingPotContainer extends Container {
 		this.addSlot(new CookingPotMealSlot(inventoryHandler, 6, 124, 26));
 
 		// Bowl Input
-		this.addSlot(new SlotItemHandler(inventoryHandler, 7, 92, 55) {
+		this.addSlot(new SlotItemHandler(inventoryHandler, 7, 92, 55)
+		{
 			@OnlyIn(Dist.CLIENT)
 			public Pair<ResourceLocation, ResourceLocation> getBackground() {
 				return Pair.of(PlayerContainer.LOCATION_BLOCKS_TEXTURE, EMPTY_CONTAINER_SLOT_BOWL);
@@ -107,6 +109,7 @@ public class CookingPotContainer extends Container {
 
 	@Override
 	public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+		int indexMealDisplay = 6;
 		int indexContainerInput = 7;
 		int indexOutput = 8;
 		int startPlayerInv = indexOutput + 1;
@@ -120,23 +123,21 @@ public class CookingPotContainer extends Container {
 				if (!this.mergeItemStack(itemstack1, startPlayerInv, endPlayerInv, true)) {
 					return ItemStack.EMPTY;
 				}
-			}
-			else if (index > indexOutput) {
+			} else if (index > indexOutput) {
 				if (itemstack1.getItem() == Items.BOWL && !this.mergeItemStack(itemstack1, indexContainerInput, indexContainerInput + 1, false)) {
 					return ItemStack.EMPTY;
-				}
-				else if (!this.mergeItemStack(itemstack1, 0, indexOutput, false)) {
+				} else if (!this.mergeItemStack(itemstack1, 0, indexMealDisplay, false)) {
+					return ItemStack.EMPTY;
+				} else if (!this.mergeItemStack(itemstack1, indexContainerInput, indexOutput, false)) {
 					return ItemStack.EMPTY;
 				}
-			}
-			else if (!this.mergeItemStack(itemstack1, startPlayerInv, endPlayerInv, false)) {
+			} else if (!this.mergeItemStack(itemstack1, startPlayerInv, endPlayerInv, false)) {
 				return ItemStack.EMPTY;
 			}
 
 			if (itemstack1.isEmpty()) {
 				slot.putStack(ItemStack.EMPTY);
-			}
-			else {
+			} else {
 				slot.onSlotChanged();
 			}
 
