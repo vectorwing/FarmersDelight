@@ -143,16 +143,16 @@
   "item.farmersdelight.shepherds_pie": "一切れのシェパーズパイ",
 
   "item.farmersdelight.dog_food": "ドッグフード",
-  "item.farmersdelight.horse_feed": "馬の餌",
+  "item.farmersdelight.horse_feed": "ウマの餌",
 
   "effect.farmersdelight.nourished": "栄養",
   "effect.farmersdelight.comfort": "健康",
 
-  "effect.farmersdelight.nourished.0.desc": "体力を回復する場合を除き、空腹ゲージの減少を防ぎます。",
-  "effect.farmersdelight.comfort.0.desc": "空腹、移動速度低下、弱体化に対しての免疫を持ちます。",
+  "effect.farmersdelight.nourished.0.desc": "体力を回復する場合を除き、空腹ゲージの減少を防ぐ",
+  "effect.farmersdelight.comfort.0.desc": "空腹、移動速度低下、弱体化に対しての耐性を与える",
 
   "enchantment.farmersdelight.backstabbing": "不意打ち",
-  "enchantment.farmersdelight.backstabbing.desc": "背後から攻撃した際の攻撃力が上昇する。",
+  "enchantment.farmersdelight.backstabbing.desc": "背後から攻撃した際の攻撃力が上昇する",
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
@@ -167,7 +167,7 @@
   "farmersdelight.tooltip.cooking_pot.single_serving": "1皿分を保存中",
   "farmersdelight.tooltip.cooking_pot.many_servings": "%s皿分で保存中",
   "farmersdelight.tooltip.dog_food.when_feeding": "飼い慣らされたオオカミに与えたとき:",
-  "farmersdelight.tooltip.horse_feed.when_feeding": "飼い慣らされたウマに与えたとき::",
+  "farmersdelight.tooltip.horse_feed.when_feeding": "飼い慣らされたウマに与えたとき:",
   "farmersdelight.tooltip.milk_bottle": "1つのエフェクトを消去する",
   "farmersdelight.tooltip.hot_cocoa": "1つの有害なエフェクトを消去する",
 
@@ -186,18 +186,18 @@
   "farmersdelight.advancement.get_rich_soil": "肥料",
   "farmersdelight.advancement.get_rich_soil.desc": "有機コンポストにキノコを生やして肥沃な土に変える",
   "farmersdelight.advancement.get_mushroom_colony": "菌類の中に",
-  "farmersdelight.advancement.get_mushroom_colony.desc": "暗い場所で肥沃な土にキノコを植え、群生するのを見て、それをせん断する",
+  "farmersdelight.advancement.get_mushroom_colony.desc": "暗い場所で肥沃な土にキノコを植え、収穫する",
   "farmersdelight.advancement.obtain_netherite_knife": "暑さに耐えられないなら...",
   "farmersdelight.advancement.obtain_netherite_knife.desc": "包丁をアップグレードするためにネザライトインゴットを丸ごと使いましょう！それかキッチンから出て行け！",
 
   "farmersdelight.advancement.place_campfire": "火を灯せ",
-  "farmersdelight.advancement.place_campfire.desc": "焚き火を設置して、夜を暖かく過ごそう。",
+  "farmersdelight.advancement.place_campfire.desc": "焚き火を設置して、夜を暖かく過ごす",
   "farmersdelight.advancement.place_stove": "コンロに火を",
-  "farmersdelight.advancement.place_stove.desc": "コンロを設置しよう",
+  "farmersdelight.advancement.place_stove.desc": "コンロを設置する",
   "farmersdelight.advancement.place_cooking_pot": "夕食だ！",
   "farmersdelight.advancement.place_cooking_pot.desc": "鍋を設置して、料理を始めよう！",
   "farmersdelight.advancement.drink_hot_cocoa": "幸せの一杯",
-  "farmersdelight.advancement.drink_hot_cocoa.desc": "ココアを飲んで状態異常を回復しよう",
+  "farmersdelight.advancement.drink_hot_cocoa.desc": "ココアを飲んで状態異常を回復する",
   "farmersdelight.advancement.eat_comfort_food": "暖かくて快適",
   "farmersdelight.advancement.eat_comfort_food.desc": "煮込み料理は風邪や病気の予防に最適！",
   "farmersdelight.advancement.eat_nourishing_food": "素晴らしい特典",
@@ -222,8 +222,8 @@
   "farmersdelight.jei.cooking": "調理",
   "farmersdelight.jei.cutting": "まな板",
   "farmersdelight.jei.decomposition": "分解",
-  "farmersdelight.jei.decomposition.light": "日光で加速",
-  "farmersdelight.jei.decomposition.fluid": "隣接する水で加速",
-  "farmersdelight.jei.decomposition.accelerators": "隣接する活性化剤(下記参照)で加速",
+  "farmersdelight.jei.decomposition.light": "日光が当たっていると加速する",
+  "farmersdelight.jei.decomposition.fluid": "水が隣接していると加速する",
+  "farmersdelight.jei.decomposition.accelerators": "隣接する活性化剤(下記参照)で加速する",
   "farmersdelight.jei.info.straw": "クラフトに使用する乾燥した植物繊維。ナイフで草や作物を切ると手に入る"
 }
