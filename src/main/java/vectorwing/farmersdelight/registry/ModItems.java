@@ -7,6 +7,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.items.Foods;
 import vectorwing.farmersdelight.items.*;
+import vectorwing.farmersdelight.items.drinks.DrinkItem;
+import vectorwing.farmersdelight.items.drinks.HotCocoaItem;
+import vectorwing.farmersdelight.items.drinks.MelonJuiceItem;
+import vectorwing.farmersdelight.items.drinks.MilkBottleItem;
 
 @SuppressWarnings("unused")
 public class ModItems
@@ -166,6 +170,10 @@ public class ModItems
 			() -> new MilkBottleItem(new Item.Properties().containerItem(Items.GLASS_BOTTLE).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> HOT_COCOA = ITEMS.register("hot_cocoa",
 			() -> new HotCocoaItem(new Item.Properties().containerItem(Items.GLASS_BOTTLE).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> APPLE_CIDER = ITEMS.register("apple_cider",
+			() -> new DrinkItem(new Item.Properties().food(Foods.APPLE_CIDER).containerItem(Items.GLASS_BOTTLE).maxStackSize(16).group(FarmersDelight.ITEM_GROUP), true, false));
+	public static final RegistryObject<Item> MELON_JUICE = ITEMS.register("melon_juice",
+			() -> new MelonJuiceItem(new Item.Properties().containerItem(Items.GLASS_BOTTLE).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> TOMATO_SAUCE = ITEMS.register("tomato_sauce",
 			() -> new ConsumableItem(new Item.Properties().food(Foods.TOMATO_SAUCE).containerItem(Items.BOWL).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> WHEAT_DOUGH = ITEMS.register("wheat_dough",

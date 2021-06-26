@@ -83,6 +83,8 @@
   "item.farmersdelight.fried_egg": "Fried Egg",
   "item.farmersdelight.milk_bottle": "Milk Bottle",
   "item.farmersdelight.hot_cocoa": "Hot Cocoa",
+  "item.farmersdelight.apple_cider": "Apple Cider",
+  "item.farmersdelight.melon_juice": "Melon Juice",
   "item.farmersdelight.wheat_dough": "Wheat Dough",
   "item.farmersdelight.raw_pasta": "Raw Pasta",
   "item.farmersdelight.pumpkin_slice": "Pumpkin Slice",
@@ -188,6 +190,7 @@
   "farmersdelight.tooltip.horse_feed.when_feeding": "When fed to a tamed mount:",
   "farmersdelight.tooltip.milk_bottle": "Clears 1 Effect",
   "farmersdelight.tooltip.hot_cocoa": "Clears 1 Harmful Effect",
+  "farmersdelight.tooltip.melon_juice": "Minor Instant Health",
 
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "A world of flavor awaits you!",

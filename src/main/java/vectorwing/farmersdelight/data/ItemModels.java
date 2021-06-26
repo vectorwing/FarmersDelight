@@ -43,14 +43,18 @@ public class ItemModels extends ItemModelProvider
 		itemGeneratedModel(ModItems.RED_MUSHROOM_COLONY.get(), resourceBlock(itemName(ModItems.RED_MUSHROOM_COLONY.get()) + "_stage3"));
 		items.remove(ModItems.RED_MUSHROOM_COLONY.get());
 
-		itemMugModel(ModItems.HOT_COCOA.get(), resourceItem(itemName(ModItems.HOT_COCOA.get())));
-		items.remove(ModItems.HOT_COCOA.get());
-
 		blockBasedModel(ModItems.TATAMI.get(), "_half");
 		items.remove(ModItems.TATAMI.get());
 
 		blockBasedModel(ModItems.ORGANIC_COMPOST.get(), "_0");
 		items.remove(ModItems.ORGANIC_COMPOST.get());
+
+		// Items that should be held like a mug
+		Set<Item> mugItems = Sets.newHashSet(
+				ModItems.HOT_COCOA.get(),
+				ModItems.APPLE_CIDER.get(),
+				ModItems.MELON_JUICE.get());
+		takeAll(items, mugItems.toArray(new Item[0])).forEach(item -> itemMugModel(item, resourceItem(itemName(item))));
 
 		// Blocks with special item sprites
 		Set<Item> spriteBlockItems = Sets.newHashSet(

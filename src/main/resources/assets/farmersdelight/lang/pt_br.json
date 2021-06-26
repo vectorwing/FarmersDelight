@@ -82,6 +82,8 @@
   "item.farmersdelight.tomato_sauce": "Molho de tomate",
   "item.farmersdelight.milk_bottle": "Frasco de leite",
   "item.farmersdelight.hot_cocoa": "Chocolate quente",
+  "item.farmersdelight.apple_cider": "Cidra de maçã",
+  "item.farmersdelight.melon_juice": "Suco de melancia",
   "item.farmersdelight.wheat_dough": "Massa de trigo",
   "item.farmersdelight.fried_egg": "Ovo frito",
   "item.farmersdelight.raw_pasta": "Macarrão cru",
@@ -186,6 +188,7 @@
   "farmersdelight.tooltip.horse_feed.when_feeding": "Ao alimentar uma montaria domada:",
   "farmersdelight.tooltip.milk_bottle": "Remove 1 efeito",
   "farmersdelight.tooltip.hot_cocoa": "Remove 1 efeito nocivo",
+  "farmersdelight.tooltip.melon_juice": "Cura instantânea leve",
 
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "Um mundo de sabor te espera!",

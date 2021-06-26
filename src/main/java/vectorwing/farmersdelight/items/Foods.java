@@ -15,6 +15,10 @@ public class Foods
 	public static final Food ONION = (new Food.Builder())
 			.hunger(2).saturation(0.4f).build();
 
+	// Drinks (mostly for effects)
+	public static final Food APPLE_CIDER = (new Food.Builder())
+			.hunger(0).saturation(0.0f).effect(() -> new EffectInstance(Effects.ABSORPTION, 1200, 0), 1.0F).build();
+
 	// Basic Foods
 	public static final Food FRIED_EGG = (new Food.Builder())
 			.hunger(4).saturation(0.4f).build();

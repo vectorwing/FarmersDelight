@@ -539,6 +539,15 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.GLASS_BOTTLE)
 				.addCriterion("has_milk_bucket", InventoryChangeTrigger.Instance.forItems(Items.MILK_BUCKET))
 				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.MELON_JUICE.get(), 1)
+				.addIngredient(Items.MELON_SLICE)
+				.addIngredient(Items.MELON_SLICE)
+				.addIngredient(Items.SUGAR)
+				.addIngredient(Items.MELON_SLICE)
+				.addIngredient(Items.MELON_SLICE)
+				.addIngredient(Items.GLASS_BOTTLE)
+				.addCriterion("has_melon_slice", InventoryChangeTrigger.Instance.forItems(Items.MELON_SLICE))
+				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RAW_PASTA.get(), 2)
 				.addIngredient(Items.WATER_BUCKET)
 				.addIngredient(Items.WHEAT)

@@ -31,6 +31,11 @@ public class CookingRecipes
 				.addIngredient(Items.COCOA_BEANS)
 				.addIngredient(Items.COCOA_BEANS)
 				.build(consumer);
+		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.APPLE_CIDER.get(), 1, NORMAL_COOKING, 0.35F)
+				.addIngredient(Items.APPLE)
+				.addIngredient(Items.APPLE)
+				.addIngredient(Items.SUGAR)
+				.build(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.TOMATO_SAUCE.get(), 1, FAST_COOKING, 0.1f)
 				.addIngredient(ForgeTags.CROPS_TOMATO)
 				.addIngredient(ForgeTags.CROPS_TOMATO)
