@@ -190,7 +190,7 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		TileEntity tileentity = worldIn.getTileEntity(pos);
-		if (tileentity instanceof CookingPotTileEntity && ((CookingPotTileEntity) tileentity).isAboveLitHeatSource()) {
+		if (tileentity instanceof CookingPotTileEntity && ((CookingPotTileEntity) tileentity).isHeated()) {
 			double d0 = (double) pos.getX() + 0.5D;
 			double d1 = pos.getY();
 			double d2 = (double) pos.getZ() + 0.5D;

@@ -3,6 +3,7 @@ package vectorwing.farmersdelight.data;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.registry.ModBlocks;
@@ -99,6 +100,9 @@ public class BlockTags extends BlockTagsProvider
 				Blocks.MAGMA_BLOCK,
 				ModBlocks.STOVE.get())
 				.addTag(ModTags.TRAY_HEAT_SOURCES);
+		getOrCreateBuilder(ModTags.HEAT_CONDUCTORS).add(
+				Blocks.HOPPER)
+				.addOptional(new ResourceLocation("create:chute"));
 		getOrCreateBuilder(ModTags.COMPOST_ACTIVATORS).add(
 				Blocks.BROWN_MUSHROOM,
 				Blocks.RED_MUSHROOM,

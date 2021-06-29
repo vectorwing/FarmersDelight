@@ -159,6 +159,6 @@ public class CookingPotContainer extends Container
 
 	@OnlyIn(Dist.CLIENT)
 	public boolean isHeated() {
-		return this.tileEntity.isAboveLitHeatSource();
+		return this.tileEntity.isHeated();
 	}
 }

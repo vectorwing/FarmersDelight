@@ -192,7 +192,7 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 
 	@Override
 	public void tick() {
-		boolean isHeated = this.isAboveLitHeatSource();
+		boolean isHeated = this.isHeated();
 		boolean dirty = false;
 
 		if (!this.world.isRemote) {
@@ -373,18 +373,31 @@ public class CookingPotTileEntity extends TileEntity implements INamedContainerP
 	// ======== CUSTOM THINGS ========
 
 	/**
-	 * Checks if the pot is on top of a heat source using the tag farmersdelight:heat_sources.
-	 * If the given block has a LIT state, it will check if that state is true.
+	 * Checks if the pot is receiving heat from below. This can happen in two ways:
+	 * - The block directly below is in the "heat_sources" tag;
+	 * - There is a block from "heat_conductors" directly between the Cooking Pot and a "heat_sources" block.
 	 */
-	public boolean isAboveLitHeatSource() {
+	public boolean isHeated() {
 		if (world == null)
 			return false;
-		BlockState checkState = world.getBlockState(pos.down());
-		if (ModTags.HEAT_SOURCES.contains(checkState.getBlock())) {
-			if (checkState.hasProperty(BlockStateProperties.LIT))
-				return checkState.get(BlockStateProperties.LIT);
+
+		BlockState stateBelow = world.getBlockState(pos.down());
+
+		if (ModTags.HEAT_SOURCES.contains(stateBelow.getBlock())) {
+			if (stateBelow.hasProperty(BlockStateProperties.LIT))
+				return stateBelow.get(BlockStateProperties.LIT);
 			return true;
 		}
+
+		if (ModTags.HEAT_CONDUCTORS.contains(stateBelow.getBlock())) {
+			BlockState stateFurtherBelow = world.getBlockState(pos.down(2));
+			if (ModTags.HEAT_SOURCES.contains(stateFurtherBelow.getBlock())) {
+				if (stateFurtherBelow.hasProperty(BlockStateProperties.LIT))
+					return stateFurtherBelow.get(BlockStateProperties.LIT);
+				return true;
+			}
+		}
+
 		return false;
 	}
 
