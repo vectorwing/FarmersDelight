@@ -3,6 +3,7 @@ package vectorwing.farmersdelight.data;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.registry.ModBlocks;
@@ -38,6 +39,42 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.RICE_UPPER_CROP.get(),
 				ModBlocks.TALL_RICE_CROP.get(),
 				ModBlocks.TOMATO_CROP.get());
+		getOrCreateBuilder(net.minecraft.tags.BlockTags.STANDING_SIGNS).add(
+				ModBlocks.CANVAS_SIGN.get(),
+				ModBlocks.WHITE_CANVAS_SIGN.get(),
+				ModBlocks.ORANGE_CANVAS_SIGN.get(),
+				ModBlocks.MAGENTA_CANVAS_SIGN.get(),
+				ModBlocks.LIGHT_BLUE_CANVAS_SIGN.get(),
+				ModBlocks.YELLOW_CANVAS_SIGN.get(),
+				ModBlocks.LIME_CANVAS_SIGN.get(),
+				ModBlocks.PINK_CANVAS_SIGN.get(),
+				ModBlocks.GRAY_CANVAS_SIGN.get(),
+				ModBlocks.LIGHT_GRAY_CANVAS_SIGN.get(),
+				ModBlocks.CYAN_CANVAS_SIGN.get(),
+				ModBlocks.PURPLE_CANVAS_SIGN.get(),
+				ModBlocks.BLUE_CANVAS_SIGN.get(),
+				ModBlocks.BROWN_CANVAS_SIGN.get(),
+				ModBlocks.GREEN_CANVAS_SIGN.get(),
+				ModBlocks.RED_CANVAS_SIGN.get(),
+				ModBlocks.BLACK_CANVAS_SIGN.get());
+		getOrCreateBuilder(net.minecraft.tags.BlockTags.WALL_SIGNS).add(
+				ModBlocks.CANVAS_WALL_SIGN.get(),
+				ModBlocks.WHITE_CANVAS_WALL_SIGN.get(),
+				ModBlocks.ORANGE_CANVAS_WALL_SIGN.get(),
+				ModBlocks.MAGENTA_CANVAS_WALL_SIGN.get(),
+				ModBlocks.LIGHT_BLUE_CANVAS_WALL_SIGN.get(),
+				ModBlocks.YELLOW_CANVAS_WALL_SIGN.get(),
+				ModBlocks.LIME_CANVAS_WALL_SIGN.get(),
+				ModBlocks.PINK_CANVAS_WALL_SIGN.get(),
+				ModBlocks.GRAY_CANVAS_WALL_SIGN.get(),
+				ModBlocks.LIGHT_GRAY_CANVAS_WALL_SIGN.get(),
+				ModBlocks.CYAN_CANVAS_WALL_SIGN.get(),
+				ModBlocks.PURPLE_CANVAS_WALL_SIGN.get(),
+				ModBlocks.BLUE_CANVAS_WALL_SIGN.get(),
+				ModBlocks.BROWN_CANVAS_WALL_SIGN.get(),
+				ModBlocks.GREEN_CANVAS_WALL_SIGN.get(),
+				ModBlocks.RED_CANVAS_WALL_SIGN.get(),
+				ModBlocks.BLACK_CANVAS_WALL_SIGN.get());
 		getOrCreateBuilder(net.minecraft.tags.BlockTags.SMALL_FLOWERS).addTag(ModTags.WILD_CROPS);
 	}
 
@@ -63,6 +100,9 @@ public class BlockTags extends BlockTagsProvider
 				Blocks.MAGMA_BLOCK,
 				ModBlocks.STOVE.get())
 				.addTag(ModTags.TRAY_HEAT_SOURCES);
+		getOrCreateBuilder(ModTags.HEAT_CONDUCTORS).add(
+				Blocks.HOPPER)
+				.addOptional(new ResourceLocation("create:chute"));
 		getOrCreateBuilder(ModTags.COMPOST_ACTIVATORS).add(
 				Blocks.BROWN_MUSHROOM,
 				Blocks.RED_MUSHROOM,

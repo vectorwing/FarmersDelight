@@ -69,7 +69,7 @@ public class CookingPotContainer extends Container
 		});
 
 		// Bowl Output
-		this.addSlot(new CookingPotResultSlot(inventoryHandler, 8, 124, 55));
+		this.addSlot(new CookingPotResultSlot(playerInventory.player, tileEntity, inventoryHandler, 8, 124, 55));
 
 		// Main Player Inventory
 		int startPlayerInvY = startY * 4 + 12;
@@ -159,6 +159,6 @@ public class CookingPotContainer extends Container
 
 	@OnlyIn(Dist.CLIENT)
 	public boolean isHeated() {
-		return this.tileEntity.isAboveLitHeatSource();
+		return this.tileEntity.isHeated();
 	}
 }

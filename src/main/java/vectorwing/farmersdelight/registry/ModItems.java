@@ -7,6 +7,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.items.Foods;
 import vectorwing.farmersdelight.items.*;
+import vectorwing.farmersdelight.items.drinks.DrinkItem;
+import vectorwing.farmersdelight.items.drinks.HotCocoaItem;
+import vectorwing.farmersdelight.items.drinks.MelonJuiceItem;
+import vectorwing.farmersdelight.items.drinks.MilkBottleItem;
 
 @SuppressWarnings("unused")
 public class ModItems
@@ -77,6 +81,41 @@ public class ModItems
 	public static final RegistryObject<Item> ROPE = ITEMS.register("rope",
 			() -> new RopeItem(ModBlocks.ROPE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
+	public static final RegistryObject<Item> CANVAS_SIGN = ITEMS.register("canvas_sign",
+			() -> new SignItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), ModBlocks.CANVAS_SIGN.get(), ModBlocks.CANVAS_WALL_SIGN.get()));
+	public static final RegistryObject<Item> WHITE_CANVAS_SIGN = ITEMS.register("white_canvas_sign",
+			() -> new SignItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), ModBlocks.WHITE_CANVAS_SIGN.get(), ModBlocks.WHITE_CANVAS_WALL_SIGN.get()));
+	public static final RegistryObject<Item> ORANGE_CANVAS_SIGN = ITEMS.register("orange_canvas_sign",
+			() -> new SignItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), ModBlocks.ORANGE_CANVAS_SIGN.get(), ModBlocks.ORANGE_CANVAS_WALL_SIGN.get()));
+	public static final RegistryObject<Item> MAGENTA_CANVAS_SIGN = ITEMS.register("magenta_canvas_sign",
+			() -> new SignItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), ModBlocks.MAGENTA_CANVAS_SIGN.get(), ModBlocks.MAGENTA_CANVAS_WALL_SIGN.get()));
+	public static final RegistryObject<Item> LIGHT_BLUE_CANVAS_SIGN = ITEMS.register("light_blue_canvas_sign",
+			() -> new SignItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), ModBlocks.LIGHT_BLUE_CANVAS_SIGN.get(), ModBlocks.LIGHT_BLUE_CANVAS_WALL_SIGN.get()));
+	public static final RegistryObject<Item> YELLOW_CANVAS_SIGN = ITEMS.register("yellow_canvas_sign",
+			() -> new SignItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), ModBlocks.YELLOW_CANVAS_SIGN.get(), ModBlocks.YELLOW_CANVAS_WALL_SIGN.get()));
+	public static final RegistryObject<Item> LIME_CANVAS_SIGN = ITEMS.register("lime_canvas_sign",
+			() -> new SignItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), ModBlocks.LIME_CANVAS_SIGN.get(), ModBlocks.LIME_CANVAS_WALL_SIGN.get()));
+	public static final RegistryObject<Item> PINK_CANVAS_SIGN = ITEMS.register("pink_canvas_sign",
+			() -> new SignItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), ModBlocks.PINK_CANVAS_SIGN.get(), ModBlocks.PINK_CANVAS_WALL_SIGN.get()));
+	public static final RegistryObject<Item> GRAY_CANVAS_SIGN = ITEMS.register("gray_canvas_sign",
+			() -> new SignItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), ModBlocks.GRAY_CANVAS_SIGN.get(), ModBlocks.GRAY_CANVAS_WALL_SIGN.get()));
+	public static final RegistryObject<Item> LIGHT_GRAY_CANVAS_SIGN = ITEMS.register("light_gray_canvas_sign",
+			() -> new SignItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), ModBlocks.LIGHT_GRAY_CANVAS_SIGN.get(), ModBlocks.LIGHT_GRAY_CANVAS_WALL_SIGN.get()));
+	public static final RegistryObject<Item> CYAN_CANVAS_SIGN = ITEMS.register("cyan_canvas_sign",
+			() -> new SignItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), ModBlocks.CYAN_CANVAS_SIGN.get(), ModBlocks.CYAN_CANVAS_WALL_SIGN.get()));
+	public static final RegistryObject<Item> PURPLE_CANVAS_SIGN = ITEMS.register("purple_canvas_sign",
+			() -> new SignItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), ModBlocks.PURPLE_CANVAS_SIGN.get(), ModBlocks.PURPLE_CANVAS_WALL_SIGN.get()));
+	public static final RegistryObject<Item> BLUE_CANVAS_SIGN = ITEMS.register("blue_canvas_sign",
+			() -> new SignItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), ModBlocks.BLUE_CANVAS_SIGN.get(), ModBlocks.BLUE_CANVAS_WALL_SIGN.get()));
+	public static final RegistryObject<Item> BROWN_CANVAS_SIGN = ITEMS.register("brown_canvas_sign",
+			() -> new SignItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), ModBlocks.BROWN_CANVAS_SIGN.get(), ModBlocks.BROWN_CANVAS_WALL_SIGN.get()));
+	public static final RegistryObject<Item> GREEN_CANVAS_SIGN = ITEMS.register("green_canvas_sign",
+			() -> new SignItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), ModBlocks.GREEN_CANVAS_SIGN.get(), ModBlocks.GREEN_CANVAS_WALL_SIGN.get()));
+	public static final RegistryObject<Item> RED_CANVAS_SIGN = ITEMS.register("red_canvas_sign",
+			() -> new SignItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), ModBlocks.RED_CANVAS_SIGN.get(), ModBlocks.RED_CANVAS_WALL_SIGN.get()));
+	public static final RegistryObject<Item> BLACK_CANVAS_SIGN = ITEMS.register("black_canvas_sign",
+			() -> new SignItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), ModBlocks.BLACK_CANVAS_SIGN.get(), ModBlocks.BLACK_CANVAS_WALL_SIGN.get()));
+
 	// Tools
 	public static final RegistryObject<Item> FLINT_KNIFE = ITEMS.register("flint_knife",
 			() -> new KnifeItem(ModMaterials.FLINT, 0.5F, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
@@ -133,6 +172,10 @@ public class ModItems
 			() -> new MilkBottleItem(new Item.Properties().containerItem(Items.GLASS_BOTTLE).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> HOT_COCOA = ITEMS.register("hot_cocoa",
 			() -> new HotCocoaItem(new Item.Properties().containerItem(Items.GLASS_BOTTLE).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> APPLE_CIDER = ITEMS.register("apple_cider",
+			() -> new DrinkItem(new Item.Properties().food(Foods.APPLE_CIDER).containerItem(Items.GLASS_BOTTLE).maxStackSize(16).group(FarmersDelight.ITEM_GROUP), true, false));
+	public static final RegistryObject<Item> MELON_JUICE = ITEMS.register("melon_juice",
+			() -> new MelonJuiceItem(new Item.Properties().containerItem(Items.GLASS_BOTTLE).maxStackSize(16).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> TOMATO_SAUCE = ITEMS.register("tomato_sauce",
 			() -> new ConsumableItem(new Item.Properties().food(Foods.TOMATO_SAUCE).containerItem(Items.BOWL).group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> WHEAT_DOUGH = ITEMS.register("wheat_dough",
