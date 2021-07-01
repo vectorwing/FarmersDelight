@@ -15,7 +15,7 @@ import net.minecraft.world.IBlockReader;
 
 public class SkilletBlock extends HorizontalBlock
 {
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D);
+	protected static final VoxelShape SHAPE = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 4.0D, 15.0D);
 
 	public SkilletBlock() {
 		super(Properties.create(Material.IRON)
