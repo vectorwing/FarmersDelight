@@ -2,15 +2,16 @@ package vectorwing.farmersdelight.items;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -30,7 +31,7 @@ public class SkilletItem extends BlockItem
 		float attackDamage = 1.5F + SKILLET_TIER.getAttackDamage();
 		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", (double) attackDamage, AttributeModifier.Operation.ADDITION));
-		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", (double)-3.0F, AttributeModifier.Operation.ADDITION));
+		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", (double) -3.0F, AttributeModifier.Operation.ADDITION));
 		this.toolAttributes = builder.build();
 	}
 
@@ -61,6 +62,15 @@ public class SkilletItem extends BlockItem
 		}
 
 		return true;
+	}
+
+	@Override
+	public ActionResultType tryPlace(BlockItemUseContext context) {
+		PlayerEntity player = context.getPlayer();
+		if (player != null && player.isSneaking()) {
+			return super.tryPlace(context);
+		}
+		return ActionResultType.FAIL;
 	}
 
 	@Override
