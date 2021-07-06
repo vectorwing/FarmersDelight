@@ -239,6 +239,7 @@
   "farmersdelight.block.rice.invalid_placement": "This here seed will need a nice puddle o' water ta thrive.",
   "farmersdelight.block.cutting_board.invalid_item": "No good reason ta chop this thingy...",
   "farmersdelight.block.cutting_board.invalid_tool": "Ack, this here tool won't cut it...",
+  "farmersdelight.block.skillet.invalid_item": "A wee foolish to try an' cook this...",
 
   "farmersdelight.jei.cooking": "Cookin'",
   "farmersdelight.jei.cutting": "Choppin' Block",

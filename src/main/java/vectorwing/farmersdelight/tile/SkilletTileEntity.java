@@ -33,7 +33,7 @@ public class SkilletTileEntity extends TileEntity implements ITickableTileEntity
 	private int cookingTimeTotal;
 
 	private ItemStackHandler inventory = createHandler();
-	private LazyOptional<IItemHandler> handlerPan = LazyOptional.of(() -> inventory);
+	private LazyOptional<IItemHandler> handlerInput = LazyOptional.of(() -> inventory);
 
 	public SkilletTileEntity(TileEntityType<?> tileEntityTypeIn) {
 		super(tileEntityTypeIn);
@@ -63,7 +63,7 @@ public class SkilletTileEntity extends TileEntity implements ITickableTileEntity
 	}
 
 	public Optional<CampfireCookingRecipe> findMatchingRecipe(ItemStack itemStackIn) {
-		return world == null || this.inventory.getStackInSlot(0).isEmpty()
+		return world == null || !this.inventory.getStackInSlot(0).isEmpty()
 				? Optional.empty()
 				: this.world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, new Inventory(itemStackIn), this.world);
 	}
@@ -122,14 +122,13 @@ public class SkilletTileEntity extends TileEntity implements ITickableTileEntity
 
 	// Inventory Handling
 
-	public ItemStack addItem(ItemStack itemStackIn) {
-		ItemStack remainderStack = inventory.insertItem(0, itemStackIn, false);
-		if (remainderStack != ItemStack.EMPTY) {
+	public ItemStack addItem(ItemStack addedStack) {
+		ItemStack remainderStack = inventory.insertItem(0, addedStack, false);
+		if (remainderStack != addedStack) {
 			this.inventoryChanged();
 			return remainderStack;
 		}
-
-		return ItemStack.EMPTY;
+		return addedStack;
 	}
 
 	public ItemStack removeItem() {
@@ -163,7 +162,7 @@ public class SkilletTileEntity extends TileEntity implements ITickableTileEntity
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
 		if (cap.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)) {
-			return handlerPan.cast();
+			return handlerInput.cast();
 		}
 		return super.getCapability(cap, side);
 	}
@@ -178,6 +177,6 @@ public class SkilletTileEntity extends TileEntity implements ITickableTileEntity
 	@Override
 	public void remove() {
 		super.remove();
-		handlerPan.invalidate();
+		handlerInput.invalidate();
 	}
 }

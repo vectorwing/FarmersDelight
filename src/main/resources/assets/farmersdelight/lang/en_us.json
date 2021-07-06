@@ -240,6 +240,7 @@
   "farmersdelight.block.rice.invalid_placement": "This crop won't survive well outside shallow water.",
   "farmersdelight.block.cutting_board.invalid_item": "This doesn't seem cuttable...",
   "farmersdelight.block.cutting_board.invalid_tool": "Maybe with a different tool...",
+  "farmersdelight.block.skillet.invalid_item": "This can't be cooked...",
 
   "farmersdelight.jei.cooking": "Cooking",
   "farmersdelight.jei.cutting": "Cutting Board",

@@ -10,11 +10,10 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CampfireCookingRecipe;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -23,8 +22,10 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.tile.SkilletTileEntity;
+import vectorwing.farmersdelight.utils.TextUtils;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class SkilletBlock extends HorizontalBlock
 {
@@ -50,14 +51,19 @@ public class SkilletBlock extends HorizontalBlock
 					player.setItemStackToSlot(slotIn, extractedStack);
 					return ActionResultType.SUCCESS;
 				} else {
-					ItemStack remainderStack = skilletEntity.addItem(heldStack);
-					player.setItemStackToSlot(slotIn, remainderStack);
-					return ActionResultType.SUCCESS;
+					Optional<CampfireCookingRecipe> recipe = skilletEntity.findMatchingRecipe(heldStack);
+					if (recipe.isPresent()) {
+						ItemStack remainderStack = skilletEntity.addItem(heldStack);
+						player.setItemStackToSlot(slotIn, remainderStack);
+						worldIn.playSound(null, pos, SoundEvents.BLOCK_LANTERN_PLACE, SoundCategory.BLOCKS, 0.5F, 1.0F);
+						return ActionResultType.SUCCESS;
+					}
+					player.sendStatusMessage(TextUtils.getTranslation("block.skillet.invalid_item"), true);
+					return ActionResultType.PASS;
 				}
 			}
 			return ActionResultType.CONSUME;
 		}
-
 		return ActionResultType.PASS;
 	}
 
