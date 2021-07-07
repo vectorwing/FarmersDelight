@@ -104,7 +104,7 @@ public class SkilletTileEntity extends TileEntity implements ITickableTileEntity
 	}
 
 	public Optional<CampfireCookingRecipe> findMatchingRecipe(ItemStack itemStackIn) {
-		return world == null || !this.inventory.getStackInSlot(0).isEmpty()
+		return world == null
 				? Optional.empty()
 				: this.world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, new Inventory(itemStackIn), this.world);
 	}
