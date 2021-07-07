@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.tile;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CampfireCookingRecipe;
@@ -22,6 +23,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+import vectorwing.farmersdelight.utils.TextUtils;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -31,6 +33,8 @@ public class SkilletTileEntity extends TileEntity implements ITickableTileEntity
 {
 	private int cookingTime;
 	private int cookingTimeTotal;
+
+	private CampfireCookingRecipe currentRecipe;
 
 	private ItemStackHandler inventory = createHandler();
 	private LazyOptional<IItemHandler> handlerInput = LazyOptional.of(() -> inventory);
@@ -122,11 +126,21 @@ public class SkilletTileEntity extends TileEntity implements ITickableTileEntity
 
 	// Inventory Handling
 
-	public ItemStack addItem(ItemStack addedStack) {
-		ItemStack remainderStack = inventory.insertItem(0, addedStack, false);
-		if (remainderStack != addedStack) {
-			this.inventoryChanged();
-			return remainderStack;
+	/**
+	 * Adds the given stack to the Skillet, returning the remainder.
+	 * The item must have a valid recipe for Campfire cooking, or else it fails to be added.
+	 * A PlayerEntity can be passed optionally, to notify them that the item can't be cooked with a status message.
+	 */
+	public ItemStack addItemToCook(ItemStack addedStack, @Nullable PlayerEntity player) {
+		Optional<CampfireCookingRecipe> recipe = this.findMatchingRecipe(addedStack);
+		if (!recipe.isPresent() && player != null) {
+			player.sendStatusMessage(TextUtils.getTranslation("block.skillet.invalid_item"), true);
+		} else {
+			ItemStack remainderStack = inventory.insertItem(0, addedStack, false);
+			if (remainderStack != addedStack) {
+				this.inventoryChanged();
+				return remainderStack;
+			}
 		}
 		return addedStack;
 	}
@@ -137,7 +151,6 @@ public class SkilletTileEntity extends TileEntity implements ITickableTileEntity
 			this.inventoryChanged();
 			return remainderStack;
 		}
-
 		return ItemStack.EMPTY;
 	}
 

@@ -45,21 +45,18 @@ public class SkilletBlock extends HorizontalBlock
 			SkilletTileEntity skilletEntity = (SkilletTileEntity) tileEntity;
 			if (!worldIn.isRemote) {
 				ItemStack heldStack = player.getHeldItem(handIn);
-				EquipmentSlotType slotIn = handIn.equals(Hand.MAIN_HAND) ? EquipmentSlotType.MAINHAND : EquipmentSlotType.OFFHAND;
+				EquipmentSlotType heldSlot = handIn.equals(Hand.MAIN_HAND) ? EquipmentSlotType.MAINHAND : EquipmentSlotType.OFFHAND;
 				if (heldStack.isEmpty()) {
 					ItemStack extractedStack = skilletEntity.removeItem();
-					player.setItemStackToSlot(slotIn, extractedStack);
+					player.setItemStackToSlot(heldSlot, extractedStack);
 					return ActionResultType.SUCCESS;
 				} else {
-					Optional<CampfireCookingRecipe> recipe = skilletEntity.findMatchingRecipe(heldStack);
-					if (recipe.isPresent()) {
-						ItemStack remainderStack = skilletEntity.addItem(heldStack);
-						player.setItemStackToSlot(slotIn, remainderStack);
+					ItemStack remainderStack = skilletEntity.addItemToCook(heldStack, player);
+					if (!remainderStack.equals(heldStack)) {
+						player.setItemStackToSlot(heldSlot, remainderStack);
 						worldIn.playSound(null, pos, SoundEvents.BLOCK_LANTERN_PLACE, SoundCategory.BLOCKS, 0.5F, 1.0F);
 						return ActionResultType.SUCCESS;
 					}
-					player.sendStatusMessage(TextUtils.getTranslation("block.skillet.invalid_item"), true);
-					return ActionResultType.PASS;
 				}
 			}
 			return ActionResultType.CONSUME;
