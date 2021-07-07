@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.tile;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
@@ -15,6 +16,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
@@ -22,6 +24,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import vectorwing.farmersdelight.blocks.SkilletBlock;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.TextUtils;
 
@@ -32,7 +35,6 @@ import java.util.Random;
 public class SkilletTileEntity extends TileEntity implements ITickableTileEntity, IHeatable
 {
 	private int cookingTime;
-	private int cookingTimeTotal;
 
 	private CampfireCookingRecipe currentRecipe;
 
@@ -52,18 +54,53 @@ public class SkilletTileEntity extends TileEntity implements ITickableTileEntity
 		if (this.world == null) {
 			return;
 		}
-
 		boolean isHeated = this.isHeated(this.world, this.pos);
 		if (!this.world.isRemote) {
-			ItemStack stack = inventory.getStackInSlot(0);
-			if (isHeated && !stack.isEmpty()) {
-				// TODO
+			if (isHeated) {
+				ItemStack cookingStack = this.getStoredStack();
+				if (cookingStack.isEmpty()) {
+					this.cookingTime = 0;
+				} else if (this.canCook(cookingStack, this.world)) {
+					++this.cookingTime;
+					if (this.cookingTime >= this.getCookingTime()) {
+						ItemStack resultStack = currentRecipe.getCraftingResult(new Inventory(cookingStack));
+
+						ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.3, pos.getZ() + 0.5, resultStack.copy());
+						Direction direction = this.getBlockState().get(SkilletBlock.HORIZONTAL_FACING).getOpposite().rotateYCCW(); // TODO: Reorient Skilet, maybe?
+						entity.setMotion(direction.getXOffset() * 0.08F, 0.25F, direction.getZOffset() * 0.08F);
+						world.addEntity(entity);
+
+						this.cookingTime = 0;
+						cookingStack.shrink(1);
+						this.inventoryChanged();
+					}
+				}
+			} else if (this.cookingTime > 0) {
+				this.cookingTime = MathHelper.clamp(this.cookingTime - 2, 0, this.getCookingTime());
 			}
 		} else {
 			if (isHeated) {
 				this.addParticles();
 			}
 		}
+	}
+
+	/**
+	 * Checks if the given stack can be cooked.
+	 * First, it looks into the cached recipe for a match. If not found, it searches for a recipe that matches the item.
+	 * If a match is found, this new recipe is cached, and it returns true. If none are, the cache is cleared, and returns false.
+	 */
+	public boolean canCook(ItemStack stack, World world) {
+		if (currentRecipe != null && currentRecipe.matches(new Inventory(stack), world)) {
+			return true;
+		} else {
+			Optional<CampfireCookingRecipe> recipe = this.findMatchingRecipe(stack);
+			if (recipe.isPresent()) {
+				this.currentRecipe = recipe.get();
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public Optional<CampfireCookingRecipe> findMatchingRecipe(ItemStack itemStackIn) {
@@ -133,14 +170,16 @@ public class SkilletTileEntity extends TileEntity implements ITickableTileEntity
 	 */
 	public ItemStack addItemToCook(ItemStack addedStack, @Nullable PlayerEntity player) {
 		Optional<CampfireCookingRecipe> recipe = this.findMatchingRecipe(addedStack);
-		if (!recipe.isPresent() && player != null) {
-			player.sendStatusMessage(TextUtils.getTranslation("block.skillet.invalid_item"), true);
-		} else {
+		if (recipe.isPresent()) {
 			ItemStack remainderStack = inventory.insertItem(0, addedStack, false);
 			if (remainderStack != addedStack) {
+				this.currentRecipe = recipe.get();
+				this.cookingTime = 0;
 				this.inventoryChanged();
 				return remainderStack;
 			}
+		} else if (player != null) {
+			player.sendStatusMessage(TextUtils.getTranslation("block.skillet.invalid_item"), true);
 		}
 		return addedStack;
 	}
@@ -172,6 +211,7 @@ public class SkilletTileEntity extends TileEntity implements ITickableTileEntity
 		};
 	}
 
+	// TODO: Hopper insertions are still able to add non-cookable items! Make sure to check for that!
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
 		if (cap.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)) {
