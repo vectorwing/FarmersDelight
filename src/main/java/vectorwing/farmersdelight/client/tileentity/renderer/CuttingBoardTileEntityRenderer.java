@@ -79,7 +79,7 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 		matrixStackIn.translate(0.5D, 0.25D, 0.5D);
 
 		// Rotate item to face the cutting board's front side
-		float f = -direction.getHorizontalAngle();
+		float f = direction.getHorizontalAngle();
 		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f));
 
 		// Rotate item to be carved on the surface, A little less so for hoes and pickaxes.
