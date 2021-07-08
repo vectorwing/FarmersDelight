@@ -21,6 +21,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.ToolType;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.tile.StoveTileEntity;
@@ -41,37 +42,43 @@ public class StoveBlock extends HorizontalBlock
 
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		ItemStack itemstack = player.getHeldItem(handIn);
-		Item usedItem = itemstack.getItem();
+		ItemStack heldStack = player.getHeldItem(handIn);
+		Item heldItem = heldStack.getItem();
+
 		if (state.get(LIT)) {
-			TileEntity tile = worldIn.getTileEntity(pos);
-			if (tile instanceof StoveTileEntity) {
-				StoveTileEntity stovetileentity = (StoveTileEntity) tile;
-				Optional<CampfireCookingRecipe> optional = stovetileentity.findMatchingRecipe(itemstack);
-				if (optional.isPresent()) {
-					if (!worldIn.isRemote && !stovetileentity.isStoveBlockedAbove() && stovetileentity.addItem(player.abilities.isCreativeMode ? itemstack.copy() : itemstack, optional.get().getCookTime())) {
-						player.addStat(Stats.INTERACT_WITH_CAMPFIRE);
-						return ActionResultType.SUCCESS;
-					}
-					return ActionResultType.CONSUME;
-				} else {
-					if (usedItem instanceof ShovelItem) {
-						extinguish(state, worldIn, pos);
-						return ActionResultType.SUCCESS;
-					} else if (usedItem == Items.WATER_BUCKET) {
-						extinguish(state, worldIn, pos);
-						player.setHeldItem(handIn, new ItemStack(Items.BUCKET));
-						return ActionResultType.SUCCESS;
-					}
-				}
+			if (heldStack.getToolTypes().contains(ToolType.SHOVEL)) {
+				extinguish(state, worldIn, pos);
+				return ActionResultType.SUCCESS;
+			} else if (heldItem == Items.WATER_BUCKET) {
+				extinguish(state, worldIn, pos);
+				player.setHeldItem(handIn, new ItemStack(Items.BUCKET));
+				return ActionResultType.SUCCESS;
 			}
 		} else {
-			if (itemstack.getItem() instanceof FlintAndSteelItem) {
+			if (heldItem instanceof FlintAndSteelItem) {
 				worldIn.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, MathUtils.RAND.nextFloat() * 0.4F + 0.8F);
 				worldIn.setBlockState(pos, state.with(BlockStateProperties.LIT, Boolean.TRUE), 11);
-				itemstack.damageItem(1, player, action -> action.sendBreakAnimation(handIn));
-
+				heldStack.damageItem(1, player, action -> action.sendBreakAnimation(handIn));
 				return ActionResultType.SUCCESS;
+			} else if (heldItem instanceof FireChargeItem) {
+				worldIn.playSound(null, pos, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.BLOCKS, 1.0F, (MathUtils.RAND.nextFloat() - MathUtils.RAND.nextFloat()) * 0.2F + 1.0F);
+				worldIn.setBlockState(pos, state.with(BlockStateProperties.LIT, Boolean.TRUE), 11);
+				if (!player.isCreative()) {
+					heldStack.shrink(1);
+				}
+				return ActionResultType.SUCCESS;
+			}
+		}
+
+		TileEntity tileEntity = worldIn.getTileEntity(pos);
+		if (tileEntity instanceof StoveTileEntity) {
+			StoveTileEntity stoveEntity = (StoveTileEntity) tileEntity;
+			Optional<CampfireCookingRecipe> recipe = stoveEntity.findMatchingRecipe(heldStack);
+			if (recipe.isPresent()) {
+				if (!worldIn.isRemote && !stoveEntity.isStoveBlockedAbove() && stoveEntity.addItem(player.abilities.isCreativeMode ? heldStack.copy() : heldStack, recipe.get().getCookTime())) {
+					return ActionResultType.SUCCESS;
+				}
+				return ActionResultType.CONSUME;
 			}
 		}
 
