@@ -127,7 +127,7 @@ public class ModItems
 			() -> new KnifeItem(ItemTier.GOLD, 0.5F, -1.8F, new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> STRAW = ITEMS.register("straw", () -> new FuelItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
-	public static final RegistryObject<Item> CANVAS = ITEMS.register("canvas", () -> new FuelItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), 400));
+	public static final RegistryObject<Item> CANVAS = ITEMS.register("canvas", () -> new FuelBlockItem(ModBlocks.CANVAS.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP), 400));
 	public static final RegistryObject<Item> TREE_BARK = ITEMS.register("tree_bark", () -> new FuelItem(new Item.Properties().group(FarmersDelight.ITEM_GROUP), 200));
 
 	// Wild Crops
