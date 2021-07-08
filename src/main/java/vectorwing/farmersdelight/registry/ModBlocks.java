@@ -190,7 +190,7 @@ public class ModBlocks
 	public static final RegistryObject<Block> TOMATO_CROP = BLOCKS.register("tomatoes",
 			() -> new TomatoesBlock(Block.Properties.from(Blocks.WHEAT)));
 	public static final RegistryObject<Block> RICE_CROP = BLOCKS.register("rice_crop",
-			() -> new RiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
+			() -> new RiceCropBlock(Block.Properties.from(Blocks.WHEAT).hardnessAndResistance(0.2F)));
 	public static final RegistryObject<Block> RICE_UPPER_CROP = BLOCKS.register("rice_upper_crop",
 			() -> new RiceUpperCropBlock(Block.Properties.from(Blocks.WHEAT)));
 
