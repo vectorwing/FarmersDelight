@@ -387,6 +387,15 @@ public class Recipes extends RecipeProvider
 				.key('#', ModItems.STRAW.get())
 				.addCriterion("has_straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
 				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CANVAS_RUG.get(), 2)
+				.addIngredient(ModItems.CANVAS.get())
+				.addCriterion("has_canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CANVAS.get(), 1)
+				.addIngredient(ModItems.CANVAS_RUG.get())
+				.addIngredient(ModItems.CANVAS_RUG.get())
+				.addCriterion("has_canvas_rug", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_RUG.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "canvas_from_canvas_rug"));
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ORGANIC_COMPOST.get(), 1)
 				.addIngredient(Items.DIRT)
 				.addIngredient(Items.ROTTEN_FLESH)

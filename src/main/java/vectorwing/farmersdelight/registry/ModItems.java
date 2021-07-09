@@ -64,6 +64,8 @@ public class ModItems
 			() -> new BlockItem(ModBlocks.CRIMSON_PANTRY.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> WARPED_PANTRY = ITEMS.register("warped_pantry",
 			() -> new BlockItem(ModBlocks.WARPED_PANTRY.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> CANVAS_RUG = ITEMS.register("canvas_rug",
+			() -> new FuelBlockItem(ModBlocks.CANVAS_RUG.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP), 200));
 	public static final RegistryObject<Item> TATAMI = ITEMS.register("tatami",
 			() -> new FuelBlockItem(ModBlocks.TATAMI.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP), 400));
 	public static final RegistryObject<Item> FULL_TATAMI_MAT = ITEMS.register("full_tatami_mat",
