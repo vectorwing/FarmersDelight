@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "farmersdelight:canvas"
+          "name": "farmersdelight:canvas_rug"
         }
       ],
       "conditions": [

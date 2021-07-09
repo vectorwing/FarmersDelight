@@ -72,10 +72,10 @@ public class ModBlocks
 			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
 	public static final RegistryObject<Block> WARPED_PANTRY = BLOCKS.register("warped_pantry",
 			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
+	public static final RegistryObject<Block> CANVAS_RUG = BLOCKS.register("canvas_rug", CanvasRugBlock::new);
 	public static final RegistryObject<Block> TATAMI = BLOCKS.register("tatami", TatamiBlock::new);
 	public static final RegistryObject<Block> FULL_TATAMI_MAT = BLOCKS.register("full_tatami_mat", TatamiMatBlock::new);
 	public static final RegistryObject<Block> HALF_TATAMI_MAT = BLOCKS.register("half_tatami_mat", TatamiHalfMatBlock::new);
-	public static final RegistryObject<Block> CANVAS = BLOCKS.register("canvas", CanvasBlock::new);
 
 	public static final RegistryObject<Block> CANVAS_SIGN = BLOCKS.register("canvas_sign",
 			() -> new StandingCanvasSignBlock(null));

@@ -8,12 +8,12 @@ import net.minecraft.world.IBlockReader;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class CanvasBlock extends CarpetBlock
+public class CanvasRugBlock extends Block
 {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
 
-	public CanvasBlock() {
-		super(null, Properties.from(Blocks.WHITE_WOOL).sound(SoundType.PLANT).hardnessAndResistance(0.3F));
+	public CanvasRugBlock() {
+		super(Properties.from(Blocks.WHITE_WOOL).sound(SoundType.PLANT).hardnessAndResistance(0.3F));
 	}
 
 	@Override

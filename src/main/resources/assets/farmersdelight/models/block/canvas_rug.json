@@ -1,7 +1,6 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "block/block",
-	"ambientocclusion": false,
+	"parent": "block/thin_block",
 	"textures": {
 		"particle": "farmersdelight:block/canvas",
 		"body": "farmersdelight:block/canvas",
