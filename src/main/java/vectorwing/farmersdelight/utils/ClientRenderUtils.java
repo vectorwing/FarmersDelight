@@ -41,14 +41,14 @@ public class ClientRenderUtils
 		RenderSystem.translatef(8.0F, 8.0F, 0.0F);
 		RenderSystem.scalef(1.0F, -1.0F, 1.0F);
 		RenderSystem.scalef(48.0F, 48.0F, 48.0F);
-		MatrixStack matrixstack = new MatrixStack();
+		MatrixStack matrixStack = new MatrixStack();
 		IRenderTypeBuffer.Impl irendertypebuffer$impl = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
 		boolean flag = !bakedmodel.isSideLit();
 		if (flag) {
 			RenderHelper.setupGuiFlatDiffuseLighting();
 		}
 
-		renderer.renderItem(stack, ItemCameraTransforms.TransformType.GUI, false, matrixstack, irendertypebuffer$impl, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
+		renderer.renderItem(stack, ItemCameraTransforms.TransformType.GUI, false, matrixStack, irendertypebuffer$impl, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
 		irendertypebuffer$impl.finish();
 		RenderSystem.enableDepthTest();
 		if (flag) {

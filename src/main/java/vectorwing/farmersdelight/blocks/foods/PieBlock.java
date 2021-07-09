@@ -65,9 +65,9 @@ public class PieBlock extends Block
 
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		ItemStack itemstack = player.getHeldItem(handIn);
+		ItemStack heldStack = player.getHeldItem(handIn);
 		if (worldIn.isRemote) {
-			if (ModTags.KNIVES.contains(itemstack.getItem())) {
+			if (ModTags.KNIVES.contains(heldStack.getItem())) {
 				return cutSlice(worldIn, pos, state);
 			}
 
@@ -75,12 +75,12 @@ public class PieBlock extends Block
 				return ActionResultType.SUCCESS;
 			}
 
-			if (itemstack.isEmpty()) {
+			if (heldStack.isEmpty()) {
 				return ActionResultType.CONSUME;
 			}
 		}
 
-		if (ModTags.KNIVES.contains(itemstack.getItem())) {
+		if (ModTags.KNIVES.contains(heldStack.getItem())) {
 			return cutSlice(worldIn, pos, state);
 		}
 		return this.consumeBite(worldIn, pos, state, player);
@@ -93,10 +93,10 @@ public class PieBlock extends Block
 		if (!playerIn.canEat(false)) {
 			return ActionResultType.PASS;
 		} else {
-			ItemStack slice = this.getPieSliceItem();
-			Food sliceFood = slice.getItem().getFood();
+			ItemStack sliceStack = this.getPieSliceItem();
+			Food sliceFood = sliceStack.getItem().getFood();
 
-			playerIn.getFoodStats().consume(slice.getItem(), slice);
+			playerIn.getFoodStats().consume(sliceStack.getItem(), sliceStack);
 			if (this.getPieSliceItem().getItem().isFood() && sliceFood != null) {
 				for (Pair<EffectInstance, Float> pair : sliceFood.getEffects()) {
 					if (!worldIn.isRemote && pair.getFirst() != null && worldIn.rand.nextFloat() < pair.getSecond()) {

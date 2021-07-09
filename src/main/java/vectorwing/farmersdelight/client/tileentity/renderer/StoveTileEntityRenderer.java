@@ -31,11 +31,11 @@ public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
 	@Override
 	public void render(StoveTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		Direction direction = tileEntityIn.getBlockState().get(StoveBlock.HORIZONTAL_FACING).getOpposite();
-		NonNullList<ItemStack> nonnulllist = tileEntityIn.getInventory();
+		NonNullList<ItemStack> inventory = tileEntityIn.getInventory();
 
-		for (int i = 0; i < nonnulllist.size(); ++i) {
-			ItemStack itemstack = nonnulllist.get(i);
-			if (!itemstack.isEmpty()) {
+		for (int i = 0; i < inventory.size(); ++i) {
+			ItemStack stoveStack = inventory.get(i);
+			if (!stoveStack.isEmpty()) {
 				matrixStackIn.push();
 
 				// Center item above the stove
@@ -56,7 +56,7 @@ public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
 				matrixStackIn.scale(0.375F, 0.375F, 0.375F);
 
 				if (tileEntityIn.getWorld() != null)
-					MC.getItemRenderer().renderItem(itemstack, ItemCameraTransforms.TransformType.FIXED, WorldRenderer.getCombinedLight(tileEntityIn.getWorld(), tileEntityIn.getPos().up()), combinedOverlayIn, matrixStackIn, bufferIn);
+					MC.getItemRenderer().renderItem(stoveStack, ItemCameraTransforms.TransformType.FIXED, WorldRenderer.getCombinedLight(tileEntityIn.getWorld(), tileEntityIn.getPos().up()), combinedOverlayIn, matrixStackIn, bufferIn);
 				matrixStackIn.pop();
 			}
 		}

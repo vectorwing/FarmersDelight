@@ -46,7 +46,7 @@ public class ConsumableItem extends Item
 			this.affectConsumer(stack, worldIn, consumer);
 		}
 
-		ItemStack container = stack.getContainerItem();
+		ItemStack containerStack = stack.getContainerItem();
 
 		if (stack.isFood()) {
 			super.onItemUseFinish(stack, worldIn, consumer);
@@ -64,12 +64,12 @@ public class ConsumableItem extends Item
 		}
 
 		if (stack.isEmpty()) {
-			return container;
+			return containerStack;
 		} else {
 			if (consumer instanceof PlayerEntity && !((PlayerEntity) consumer).abilities.isCreativeMode) {
 				PlayerEntity player = (PlayerEntity) consumer;
-				if (!player.inventory.addItemStackToInventory(container)) {
-					player.dropItem(container, false);
+				if (!player.inventory.addItemStackToInventory(containerStack)) {
+					player.dropItem(containerStack, false);
 				}
 			}
 			return stack;
@@ -86,8 +86,8 @@ public class ConsumableItem extends Item
 	@OnlyIn(Dist.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		if (this.hasCustomTooltip) {
-			IFormattableTextComponent empty = TextUtils.getTranslation("tooltip." + this);
-			tooltip.add(empty.mergeStyle(TextFormatting.BLUE));
+			IFormattableTextComponent textEmpty = TextUtils.getTranslation("tooltip." + this);
+			tooltip.add(textEmpty.mergeStyle(TextFormatting.BLUE));
 		}
 		if (this.hasFoodEffectTooltip) {
 			TextUtils.addFoodEffectTooltip(stack, tooltip, 1.0F);

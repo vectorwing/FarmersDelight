@@ -26,8 +26,8 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
 	}
 
 	private static boolean hasWater(IWorldReader worldIn, BlockPos pos) {
-		for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-4, 0, -4), pos.add(4, 1, 4))) {
-			if (worldIn.getFluidState(blockpos).isTagged(FluidTags.WATER)) {
+		for (BlockPos nearbyPos : BlockPos.getAllInBoxMutable(pos.add(-4, 0, -4), pos.add(4, 1, 4))) {
+			if (worldIn.getFluidState(nearbyPos).isTagged(FluidTags.WATER)) {
 				return true;
 			}
 		}
@@ -97,8 +97,8 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
 
 	@Override
 	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable) {
-		net.minecraftforge.common.PlantType type = plantable.getPlantType(world, pos.offset(facing));
-		return type == PlantType.CROP || type == PlantType.PLAINS;
+		net.minecraftforge.common.PlantType plantType = plantable.getPlantType(world, pos.offset(facing));
+		return plantType == PlantType.CROP || plantType == PlantType.PLAINS;
 	}
 
 	@Override

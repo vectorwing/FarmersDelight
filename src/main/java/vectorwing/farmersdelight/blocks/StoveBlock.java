@@ -87,10 +87,10 @@ public class StoveBlock extends HorizontalBlock
 
 	public void extinguish(BlockState state, World worldIn, BlockPos pos) {
 		worldIn.setBlockState(pos, state.with(LIT, false), 2);
-		double d0 = (double) pos.getX() + 0.5D;
-		double d1 = pos.getY();
-		double d2 = (double) pos.getZ() + 0.5D;
-		worldIn.playSound(d0, d1, d2, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F, false);
+		double x = (double) pos.getX() + 0.5D;
+		double y = pos.getY();
+		double z = (double) pos.getZ() + 0.5D;
+		worldIn.playSound(x, y, z, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F, false);
 	}
 
 	@Override
@@ -111,9 +111,9 @@ public class StoveBlock extends HorizontalBlock
 	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
-			TileEntity tile = worldIn.getTileEntity(pos);
-			if (tile instanceof StoveTileEntity) {
-				InventoryHelper.dropItems(worldIn, pos, ((StoveTileEntity) tile).getInventory());
+			TileEntity tileEntity = worldIn.getTileEntity(pos);
+			if (tileEntity instanceof StoveTileEntity) {
+				InventoryHelper.dropItems(worldIn, pos, ((StoveTileEntity) tileEntity).getInventory());
 			}
 
 			super.onReplaced(state, worldIn, pos, newState, isMoving);
@@ -129,21 +129,21 @@ public class StoveBlock extends HorizontalBlock
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		if (stateIn.get(CampfireBlock.LIT)) {
-			double d0 = (double) pos.getX() + 0.5D;
-			double d1 = pos.getY();
-			double d2 = (double) pos.getZ() + 0.5D;
+			double x = (double) pos.getX() + 0.5D;
+			double y = pos.getY();
+			double z = (double) pos.getZ() + 0.5D;
 			if (rand.nextInt(10) == 0) {
-				worldIn.playSound(d0, d1, d2, ModSounds.BLOCK_STOVE_CRACKLE.get(), SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+				worldIn.playSound(x, y, z, ModSounds.BLOCK_STOVE_CRACKLE.get(), SoundCategory.BLOCKS, 1.0F, 1.0F, false);
 			}
 
 			Direction direction = stateIn.get(HorizontalBlock.HORIZONTAL_FACING);
 			Direction.Axis direction$axis = direction.getAxis();
-			double d4 = rand.nextDouble() * 0.6D - 0.3D;
-			double d5 = direction$axis == Direction.Axis.X ? (double) direction.getXOffset() * 0.52D : d4;
-			double d6 = rand.nextDouble() * 6.0D / 16.0D;
-			double d7 = direction$axis == Direction.Axis.Z ? (double) direction.getZOffset() * 0.52D : d4;
-			worldIn.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
-			worldIn.addParticle(ParticleTypes.FLAME, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
+			double horizontalOffset = rand.nextDouble() * 0.6D - 0.3D;
+			double xOffset = direction$axis == Direction.Axis.X ? (double) direction.getXOffset() * 0.52D : horizontalOffset;
+			double yOffset = rand.nextDouble() * 6.0D / 16.0D;
+			double zOffset = direction$axis == Direction.Axis.Z ? (double) direction.getZOffset() * 0.52D : horizontalOffset;
+			worldIn.addParticle(ParticleTypes.SMOKE, x + xOffset, y + yOffset, z + zOffset, 0.0D, 0.0D, 0.0D);
+			worldIn.addParticle(ParticleTypes.FLAME, x + xOffset, y + yOffset, z + zOffset, 0.0D, 0.0D, 0.0D);
 		}
 	}
 

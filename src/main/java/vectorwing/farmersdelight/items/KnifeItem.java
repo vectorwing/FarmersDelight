@@ -71,8 +71,8 @@ public class KnifeItem extends ToolItem
 		@SubscribeEvent
 		public static void onKnifeKnockback(LivingKnockBackEvent event) {
 			LivingEntity attacker = event.getEntityLiving().getAttackingEntity();
-			ItemStack tool = attacker != null ? attacker.getHeldItem(Hand.MAIN_HAND) : ItemStack.EMPTY;
-			if (tool.getItem() instanceof KnifeItem) {
+			ItemStack toolStack = attacker != null ? attacker.getHeldItem(Hand.MAIN_HAND) : ItemStack.EMPTY;
+			if (toolStack.getItem() instanceof KnifeItem) {
 				float f = event.getOriginalStrength();
 				event.setStrength(event.getOriginalStrength() - 0.1F);
 			}
@@ -84,9 +84,9 @@ public class KnifeItem extends ToolItem
 			World world = event.getWorld();
 			BlockPos pos = event.getPos();
 			BlockState state = event.getWorld().getBlockState(pos);
-			ItemStack tool = event.getPlayer().getHeldItem(event.getHand());
+			ItemStack toolStack = event.getPlayer().getHeldItem(event.getHand());
 
-			if (state.getBlock() == Blocks.CAKE && ModTags.KNIVES.contains(tool.getItem())) {
+			if (state.getBlock() == Blocks.CAKE && ModTags.KNIVES.contains(toolStack.getItem())) {
 				int bites = state.get(CakeBlock.BITES);
 				if (bites < 6) {
 					world.setBlockState(pos, state.with(CakeBlock.BITES, bites + 1), 3);
@@ -104,12 +104,12 @@ public class KnifeItem extends ToolItem
 
 	public ActionResultType onItemUse(ItemUseContext context) {
 		World world = context.getWorld();
-		ItemStack tool = context.getItem();
+		ItemStack toolStack = context.getItem();
 		BlockPos pos = context.getPos();
 		BlockState state = world.getBlockState(pos);
 		Direction facing = context.getFace();
 
-		if (state.getBlock() == Blocks.PUMPKIN && ModTags.KNIVES.contains(tool.getItem())) {
+		if (state.getBlock() == Blocks.PUMPKIN && ModTags.KNIVES.contains(toolStack.getItem())) {
 			PlayerEntity player = context.getPlayer();
 			if (player != null && !world.isRemote) {
 				Direction direction = facing.getAxis() == Direction.Axis.Y ? player.getHorizontalFacing().getOpposite() : facing;
@@ -118,7 +118,7 @@ public class KnifeItem extends ToolItem
 				ItemEntity itemEntity = new ItemEntity(world, (double) pos.getX() + 0.5D + (double) direction.getXOffset() * 0.65D, (double) pos.getY() + 0.1D, (double) pos.getZ() + 0.5D + (double) direction.getZOffset() * 0.65D, new ItemStack(Items.PUMPKIN_SEEDS, 4));
 				itemEntity.setMotion(0.05D * (double) direction.getXOffset() + world.rand.nextDouble() * 0.02D, 0.05D, 0.05D * (double) direction.getZOffset() + world.rand.nextDouble() * 0.02D);
 				world.addEntity(itemEntity);
-				tool.damageItem(1, player, (playerIn) -> playerIn.sendBreakAnimation(context.getHand()));
+				toolStack.damageItem(1, player, (playerIn) -> playerIn.sendBreakAnimation(context.getHand()));
 			}
 			return ActionResultType.func_233537_a_(world.isRemote);
 		} else {

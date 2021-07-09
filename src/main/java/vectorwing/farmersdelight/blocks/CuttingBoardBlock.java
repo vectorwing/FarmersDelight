@@ -68,33 +68,33 @@ public class CuttingBoardBlock extends HorizontalBlock implements IWaterLoggable
 
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		TileEntity tile = worldIn.getTileEntity(pos);
-		if (tile instanceof CuttingBoardTileEntity) {
-			CuttingBoardTileEntity cuttingBoardTile = (CuttingBoardTileEntity) tile;
-			ItemStack itemHeld = player.getHeldItem(handIn);
-			ItemStack itemOffhand = player.getHeldItemOffhand();
+		TileEntity tileEntity = worldIn.getTileEntity(pos);
+		if (tileEntity instanceof CuttingBoardTileEntity) {
+			CuttingBoardTileEntity cuttingBoardEntity = (CuttingBoardTileEntity) tileEntity;
+			ItemStack heldStack = player.getHeldItem(handIn);
+			ItemStack offhandStack = player.getHeldItemOffhand();
 
 			// Placing items on the board. It should prefer off-hand placement, unless it's a BlockItem (since it never passes to off-hand...)
-			if (cuttingBoardTile.isEmpty()) {
-				if (!itemOffhand.isEmpty()) {
-					if (handIn.equals(Hand.MAIN_HAND) && !ModTags.OFFHAND_EQUIPMENT.contains(itemOffhand.getItem()) && !(itemHeld.getItem() instanceof BlockItem)) {
+			if (cuttingBoardEntity.isEmpty()) {
+				if (!offhandStack.isEmpty()) {
+					if (handIn.equals(Hand.MAIN_HAND) && !ModTags.OFFHAND_EQUIPMENT.contains(offhandStack.getItem()) && !(heldStack.getItem() instanceof BlockItem)) {
 						return ActionResultType.PASS; // Pass to off-hand if that item is placeable
 					}
-					if (handIn.equals(Hand.OFF_HAND) && ModTags.OFFHAND_EQUIPMENT.contains(itemOffhand.getItem())) {
+					if (handIn.equals(Hand.OFF_HAND) && ModTags.OFFHAND_EQUIPMENT.contains(offhandStack.getItem())) {
 						return ActionResultType.PASS; // Items in this tag should not be placed from the off-hand
 					}
 				}
-				if (itemHeld.isEmpty()) {
+				if (heldStack.isEmpty()) {
 					return ActionResultType.PASS;
-				} else if (cuttingBoardTile.addItem(player.abilities.isCreativeMode ? itemHeld.copy() : itemHeld)) {
+				} else if (cuttingBoardEntity.addItem(player.abilities.isCreativeMode ? heldStack.copy() : heldStack)) {
 					worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F);
 					return ActionResultType.SUCCESS;
 				}
 
 			// Processing the item with the held tool
-			} else if (!itemHeld.isEmpty()) {
-				ItemStack boardItem = cuttingBoardTile.getStoredItem().copy();
-				if (cuttingBoardTile.processItemUsingTool(itemHeld, player)) {
+			} else if (!heldStack.isEmpty()) {
+				ItemStack boardItem = cuttingBoardEntity.getStoredItem().copy();
+				if (cuttingBoardEntity.processItemUsingTool(heldStack, player)) {
 					spawnCuttingParticles(worldIn, pos, boardItem, 5);
 					return ActionResultType.SUCCESS;
 				}
@@ -103,11 +103,11 @@ public class CuttingBoardBlock extends HorizontalBlock implements IWaterLoggable
 			// Removing the board's item
 			} else if (handIn.equals(Hand.MAIN_HAND)) {
 				if (!player.isCreative()) {
-					if (!player.inventory.addItemStackToInventory(cuttingBoardTile.removeItem())) {
-						InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), cuttingBoardTile.removeItem());
+					if (!player.inventory.addItemStackToInventory(cuttingBoardEntity.removeItem())) {
+						InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), cuttingBoardEntity.removeItem());
 					}
 				} else {
-					cuttingBoardTile.removeItem();
+					cuttingBoardEntity.removeItem();
 				}
 				worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_HIT, SoundCategory.BLOCKS, 0.25F, 0.5F);
 				return ActionResultType.SUCCESS;
@@ -119,9 +119,9 @@ public class CuttingBoardBlock extends HorizontalBlock implements IWaterLoggable
 	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
-			TileEntity tile = worldIn.getTileEntity(pos);
-			if (tile instanceof CuttingBoardTileEntity) {
-				InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), ((CuttingBoardTileEntity) tile).getStoredItem());
+			TileEntity tileEntity = worldIn.getTileEntity(pos);
+			if (tileEntity instanceof CuttingBoardTileEntity) {
+				InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), ((CuttingBoardTileEntity) tileEntity).getStoredItem());
 				worldIn.updateComparatorOutputLevel(pos, this);
 			}
 
@@ -175,10 +175,10 @@ public class CuttingBoardBlock extends HorizontalBlock implements IWaterLoggable
 
 	@Override
 	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-		TileEntity tile = worldIn.getTileEntity(pos);
-		if (tile instanceof CuttingBoardTileEntity) {
-			ItemStack boardItem = ((CuttingBoardTileEntity) tile).getStoredItem();
-			return !boardItem.isEmpty() ? 15 : 0;
+		TileEntity tileEntity = worldIn.getTileEntity(pos);
+		if (tileEntity instanceof CuttingBoardTileEntity) {
+			ItemStack boardStack = ((CuttingBoardTileEntity) tileEntity).getStoredItem();
+			return !boardStack.isEmpty() ? 15 : 0;
 		}
 		return 0;
 	}
@@ -203,14 +203,14 @@ public class CuttingBoardBlock extends HorizontalBlock implements IWaterLoggable
 			World world = event.getWorld();
 			BlockPos pos = event.getPos();
 			PlayerEntity player = event.getPlayer();
-			ItemStack heldItem = player.getHeldItemMainhand();
+			ItemStack heldStack = player.getHeldItemMainhand();
 			TileEntity tile = world.getTileEntity(event.getPos());
 
-			if (player.isSecondaryUseActive() && !heldItem.isEmpty() && tile instanceof CuttingBoardTileEntity) {
-				if (heldItem.getItem() instanceof TieredItem ||
-						heldItem.getItem() instanceof TridentItem ||
-						heldItem.getItem() instanceof ShearsItem) {
-					boolean success = ((CuttingBoardTileEntity) tile).carveToolOnBoard(player.abilities.isCreativeMode ? heldItem.copy() : heldItem);
+			if (player.isSecondaryUseActive() && !heldStack.isEmpty() && tile instanceof CuttingBoardTileEntity) {
+				if (heldStack.getItem() instanceof TieredItem ||
+						heldStack.getItem() instanceof TridentItem ||
+						heldStack.getItem() instanceof ShearsItem) {
+					boolean success = ((CuttingBoardTileEntity) tile).carveToolOnBoard(player.abilities.isCreativeMode ? heldStack.copy() : heldStack);
 					if (success) {
 						world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F);
 						event.setCanceled(true);
