@@ -2,9 +2,9 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/thin_block",
 	"textures": {
-		"particle": "farmersdelight:block/canvas",
-		"body": "farmersdelight:block/canvas",
-		"extrudes": "farmersdelight:block/canvas_extrudes"
+		"particle": "farmersdelight:block/canvas_rug",
+		"body": "farmersdelight:block/canvas_rug",
+		"extrudes": "farmersdelight:block/canvas_rug_extrudes"
 	},
 	"elements": [
 		{
