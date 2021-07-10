@@ -12,7 +12,6 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -25,6 +24,7 @@ import net.minecraftforge.common.ToolType;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.tile.StoveTileEntity;
+import vectorwing.farmersdelight.utils.ItemUtils;
 import vectorwing.farmersdelight.utils.MathUtils;
 
 import javax.annotation.Nullable;
@@ -113,7 +113,8 @@ public class StoveBlock extends HorizontalBlock
 		if (state.getBlock() != newState.getBlock()) {
 			TileEntity tileEntity = worldIn.getTileEntity(pos);
 			if (tileEntity instanceof StoveTileEntity) {
-				InventoryHelper.dropItems(worldIn, pos, ((StoveTileEntity) tileEntity).getInventory());
+//				InventoryHelper.dropItems(worldIn, pos, ((StoveTileEntity) tileEntity).getOldInventory());
+				ItemUtils.dropItems(worldIn, pos, ((StoveTileEntity) tileEntity).getInventory());
 			}
 
 			super.onReplaced(state, worldIn, pos, newState, isMoving);

@@ -25,8 +25,10 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.math.vector.Vector2f;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.blocks.StoveBlock;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+import vectorwing.farmersdelight.utils.ItemUtils;
 import vectorwing.farmersdelight.utils.MathUtils;
 
 import javax.annotation.Nullable;
@@ -36,41 +38,62 @@ import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class StoveTileEntity extends TileEntity implements IClearable, ITickableTileEntity
+public class StoveTileEntity extends TileEntity implements ITickableTileEntity
 {
 	private static final VoxelShape GRILLING_AREA = Block.makeCuboidShape(3.0F, 0.0F, 3.0F, 13.0F, 1.0F, 13.0F);
-	private final int MAX_STACK_SIZE = 6;
-	private final int[] cookingTimes = new int[MAX_STACK_SIZE];
-	private final int[] cookingTotalTimes = new int[MAX_STACK_SIZE];
-	protected final NonNullList<ItemStack> inventory = NonNullList.withSize(MAX_STACK_SIZE, ItemStack.EMPTY);
+	private static final int INVENTORY_SLOT_COUNT = 6;
+	private final int[] cookingTimes = new int[INVENTORY_SLOT_COUNT];
+	private final int[] cookingTotalTimes = new int[INVENTORY_SLOT_COUNT];
 
-	public StoveTileEntity(TileEntityType<?> tileEntityTypeIn) {
-		super(tileEntityTypeIn);
+	// TODO: Get rid of this!
+	//protected final NonNullList<ItemStack> inventory = NonNullList.withSize(INVENTORY_SLOT_COUNT, ItemStack.EMPTY);
+
+	// TODO: Integrate this instead! And cache your recipes!
+	private ItemStackHandler inventoryNew;
+//	private CampfireCookingRecipe lastRecipe;
+
+	public StoveTileEntity(TileEntityType<?> tileEntityType) {
+		super(tileEntityType);
+		inventoryNew = createHandler();
 	}
 
 	public StoveTileEntity() {
 		this(ModTileEntityTypes.STOVE_TILE.get());
 	}
 
+	private ItemStackHandler createHandler() {
+		return new ItemStackHandler(INVENTORY_SLOT_COUNT)
+		{
+			@Override
+			public int getSlotLimit(int slot) {
+				return 1;
+			}
+		};
+	}
+
 	@Override
 	public void tick() {
+		if (world == null) {
+			return;
+		}
+
 		boolean isStoveLit = this.getBlockState().get(StoveBlock.LIT);
-		boolean isStoveBlocked = this.isStoveBlockedAbove();
-		if (world != null && this.world.isRemote) {
+
+		if (this.world.isRemote) {
 			if (isStoveLit) {
 				this.addParticles();
 			}
 		} else {
-			if (world != null && isStoveBlocked) {
-				if (!this.inventory.isEmpty()) {
-					InventoryHelper.dropItems(world, pos, this.getInventory());
+			boolean isStoveBlocked = this.isStoveBlockedAbove();
+			if (isStoveBlocked) {
+				if (ItemUtils.isInventoryEmpty(this.inventoryNew)) {
+					ItemUtils.dropItems(world, pos, this.inventoryNew);
 					this.inventoryChanged();
 				}
-			}
-			if (isStoveLit && !isStoveBlocked) {
-				this.cookAndDrop();
+			} else if (isStoveLit) {
+				this.cookAndOutputItems();
 			} else {
-				for (int i = 0; i < this.inventory.size(); ++i) {
+				for (int i = 0; i < this.inventoryNew.getSlots(); ++i) {
 					if (this.cookingTimes[i] > 0) {
 						this.cookingTimes[i] = MathHelper.clamp(this.cookingTimes[i] - 2, 0, this.cookingTotalTimes[i]);
 					}
@@ -79,25 +102,32 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 		}
 	}
 
-	private void cookAndDrop() {
-		for (int i = 0; i < this.inventory.size(); ++i) {
-			ItemStack itemstack = this.inventory.get(i);
-			if (!itemstack.isEmpty()) {
+	private void cookAndOutputItems() {
+		if (world == null) {
+			return;
+		}
+
+		boolean didInventoryChange = false;
+		for (int i = 0; i < this.inventoryNew.getSlots(); ++i) {
+			ItemStack stoveStack = this.inventoryNew.getStackInSlot(i);
+			if (!stoveStack.isEmpty()) {
 				++this.cookingTimes[i];
 				if (this.cookingTimes[i] >= this.cookingTotalTimes[i]) {
-					if (world != null) {
-						IInventory inventory = new Inventory(itemstack);
-						ItemStack result = this.world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, inventory, this.world).map((recipe) -> recipe.getCraftingResult(inventory)).orElse(itemstack);
-						if (!result.isEmpty()) {
-							ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, result.copy());
-							entity.setMotion(MathUtils.RAND.nextGaussian() * (double) 0.01F, 0.1F, MathUtils.RAND.nextGaussian() * (double) 0.01F);
-							world.addEntity(entity);
-						}
+					IInventory inventory = new Inventory(stoveStack);
+					ItemStack result = this.world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, inventory, this.world).map((recipe) -> recipe.getCraftingResult(inventory)).orElse(stoveStack);
+					if (!result.isEmpty()) {
+						ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, result.copy());
+						entity.setMotion(MathUtils.RAND.nextGaussian() * (double) 0.01F, 0.1F, MathUtils.RAND.nextGaussian() * (double) 0.01F);
+						world.addEntity(entity);
 					}
-					this.inventory.set(i, ItemStack.EMPTY);
-					this.inventoryChanged();
+					this.inventoryNew.setStackInSlot(i, ItemStack.EMPTY);
+					didInventoryChange = true;
 				}
 			}
+		}
+
+		if (didInventoryChange) {
+			this.inventoryChanged();
 		}
 	}
 
@@ -124,43 +154,44 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 	}
 
 	private void addParticles() {
-		World world = this.getWorld();
-		if (world != null) {
-			BlockPos blockpos = this.getPos();
-			Random random = world.rand;
+		if (this.world == null) {
+			return;
+		}
 
-			for (int j = 0; j < this.inventory.size(); ++j) {
-				if (!this.inventory.get(j).isEmpty() && random.nextFloat() < 0.2F) {
-					double d0 = (double) blockpos.getX() + 0.5D;
-					double d1 = (double) blockpos.getY() + 1.0D;
-					double d2 = (double) blockpos.getZ() + 0.5D;
-					Vector2f v1 = this.getStoveItemOffset(j);
+		BlockPos pos = this.getPos();
+		for (int i = 0; i < this.inventoryNew.getSlots(); ++i) {
+			if (!this.inventoryNew.getStackInSlot(i).isEmpty() && this.world.rand.nextFloat() < 0.2F) {
+				Vector2f stoveItemVector = this.getStoveItemOffset(i);
+				Direction direction = this.getBlockState().get(StoveBlock.HORIZONTAL_FACING);
+				int directionIndex = direction.getHorizontalIndex();
+				Vector2f offset = directionIndex % 2 == 0 ? stoveItemVector : new Vector2f(stoveItemVector.y, stoveItemVector.x);
 
-					Direction direction = this.getBlockState().get(StoveBlock.HORIZONTAL_FACING);
-					int directionIndex = direction.getHorizontalIndex();
-					Vector2f offset = directionIndex % 2 == 0 ? v1 : new Vector2f(v1.y, v1.x);
+				double x = ((double) pos.getX() + 0.5D) - (direction.getXOffset() * offset.x) + (direction.rotateY().getXOffset() * offset.x);
+				double y = (double) pos.getY() + 1.0D;
+				double z = ((double) pos.getZ() + 0.5D) - (direction.getZOffset() * offset.y) + (direction.rotateY().getZOffset() * offset.y);
 
-					double d5 = d0 - (direction.getXOffset() * offset.x) + (direction.rotateY().getXOffset() * offset.x);
-					double d7 = d2 - (direction.getZOffset() * offset.y) + (direction.rotateY().getZOffset() * offset.y);
-
-					for (int k = 0; k < 3; ++k) {
-						world.addParticle(ParticleTypes.SMOKE, d5, d1, d7, 0.0D, 5.0E-4D, 0.0D);
-					}
+				for (int k = 0; k < 3; ++k) {
+					world.addParticle(ParticleTypes.SMOKE, x, y, z, 0.0D, 5.0E-4D, 0.0D);
 				}
 			}
-
 		}
 	}
 
-	public NonNullList<ItemStack> getInventory() {
-		return this.inventory;
+//	@Deprecated
+//	public NonNullList<ItemStack> getOldInventory() {
+//		return this.inventory;
+//	}
+
+	public ItemStackHandler getInventory() {
+		return this.inventoryNew;
 	}
 
 	@Override
 	public void read(BlockState state, CompoundNBT compound) {
 		super.read(state, compound);
-		this.inventory.clear();
-		ItemStackHelper.loadAllItems(compound, this.inventory);
+//		this.inventory.clear();
+//		ItemStackHelper.loadAllItems(compound, this.inventory);
+		this.inventoryNew.deserializeNBT(compound.getCompound("Inventory"));
 		if (compound.contains("CookingTimes", 11)) {
 			int[] aint = compound.getIntArray("CookingTimes");
 			System.arraycopy(aint, 0, this.cookingTimes, 0, Math.min(this.cookingTotalTimes.length, aint.length));
@@ -176,6 +207,7 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 	@Override
 	public CompoundNBT write(CompoundNBT compound) {
 		this.writeItems(compound);
+		compound.put("Inventory", inventoryNew.serializeNBT());
 		compound.putIntArray("CookingTimes", this.cookingTimes);
 		compound.putIntArray("CookingTotalTimes", this.cookingTotalTimes);
 		return compound;
@@ -183,7 +215,7 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 
 	private CompoundNBT writeItems(CompoundNBT compound) {
 		super.write(compound);
-		ItemStackHelper.saveAllItems(compound, this.inventory, true);
+//		ItemStackHelper.saveAllItems(compound, this.inventory, true);
 		return compound;
 	}
 
@@ -209,16 +241,16 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 	}
 
 	public Optional<CampfireCookingRecipe> findMatchingRecipe(ItemStack itemStackIn) {
-		return world == null || this.inventory.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty() : this.world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, new Inventory(itemStackIn), this.world);
+		return world == null /*|| this.inventory.stream().noneMatch(ItemStack::isEmpty)*/ ? Optional.empty() : this.world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, new Inventory(itemStackIn), this.world);
 	}
 
 	public boolean addItem(ItemStack itemStackIn, int cookTime) {
-		for (int i = 0; i < this.inventory.size(); ++i) {
-			ItemStack itemstack = this.inventory.get(i);
+		for (int i = 0; i < this.inventoryNew.getSlots(); ++i) {
+			ItemStack itemstack = this.inventoryNew.getStackInSlot(i);
 			if (itemstack.isEmpty()) {
 				this.cookingTotalTimes[i] = cookTime;
 				this.cookingTimes[i] = 0;
-				this.inventory.set(i, itemStackIn.split(1));
+				this.inventoryNew.setStackInSlot(i, itemStackIn.split(1));
 				this.inventoryChanged();
 				return true;
 			}
@@ -232,9 +264,9 @@ public class StoveTileEntity extends TileEntity implements IClearable, ITickable
 		if (world != null)
 			this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
 	}
-
-	@Override
-	public void clear() {
-		this.inventory.clear();
-	}
+//
+//	@Override
+//	public void clear() {
+//		this.inventory.clear();
+//	}
 }

@@ -13,6 +13,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.vector.Vector2f;
 import net.minecraft.util.math.vector.Vector3f;
+import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.blocks.StoveBlock;
 import vectorwing.farmersdelight.tile.StoveTileEntity;
 
@@ -31,10 +32,12 @@ public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
 	@Override
 	public void render(StoveTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		Direction direction = tileEntityIn.getBlockState().get(StoveBlock.HORIZONTAL_FACING).getOpposite();
-		NonNullList<ItemStack> inventory = tileEntityIn.getInventory();
+//		NonNullList<ItemStack> inventory = tileEntityIn.getOldInventory();
 
-		for (int i = 0; i < inventory.size(); ++i) {
-			ItemStack stoveStack = inventory.get(i);
+		ItemStackHandler inventory = tileEntityIn.getInventory();
+
+		for (int i = 0; i < inventory.getSlots(); ++i) {
+			ItemStack stoveStack = inventory.getStackInSlot(i);
 			if (!stoveStack.isEmpty()) {
 				matrixStackIn.push();
 
