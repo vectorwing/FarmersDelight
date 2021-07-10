@@ -45,10 +45,6 @@ public class StoveTileEntity extends TileEntity implements ITickableTileEntity
 	private final int[] cookingTimes = new int[INVENTORY_SLOT_COUNT];
 	private final int[] cookingTotalTimes = new int[INVENTORY_SLOT_COUNT];
 
-	// TODO: Get rid of this!
-	//protected final NonNullList<ItemStack> inventory = NonNullList.withSize(INVENTORY_SLOT_COUNT, ItemStack.EMPTY);
-
-	// TODO: Integrate this instead! And cache your recipes!
 	private ItemStackHandler inventoryNew;
 //	private CampfireCookingRecipe lastRecipe;
 
@@ -86,7 +82,7 @@ public class StoveTileEntity extends TileEntity implements ITickableTileEntity
 		} else {
 			boolean isStoveBlocked = this.isStoveBlockedAbove();
 			if (isStoveBlocked) {
-				if (ItemUtils.isInventoryEmpty(this.inventoryNew)) {
+				if (!ItemUtils.isInventoryEmpty(this.inventoryNew)) {
 					ItemUtils.dropItems(world, pos, this.inventoryNew);
 					this.inventoryChanged();
 				}
@@ -177,11 +173,6 @@ public class StoveTileEntity extends TileEntity implements ITickableTileEntity
 		}
 	}
 
-//	@Deprecated
-//	public NonNullList<ItemStack> getOldInventory() {
-//		return this.inventory;
-//	}
-
 	public ItemStackHandler getInventory() {
 		return this.inventoryNew;
 	}
@@ -189,9 +180,11 @@ public class StoveTileEntity extends TileEntity implements ITickableTileEntity
 	@Override
 	public void read(BlockState state, CompoundNBT compound) {
 		super.read(state, compound);
-//		this.inventory.clear();
-//		ItemStackHelper.loadAllItems(compound, this.inventory);
-		this.inventoryNew.deserializeNBT(compound.getCompound("Inventory"));
+		if (compound.contains("Inventory")) {
+			this.inventoryNew.deserializeNBT(compound.getCompound("Inventory"));
+		} else {
+			this.inventoryNew.deserializeNBT(compound);
+		}
 		if (compound.contains("CookingTimes", 11)) {
 			int[] aint = compound.getIntArray("CookingTimes");
 			System.arraycopy(aint, 0, this.cookingTimes, 0, Math.min(this.cookingTotalTimes.length, aint.length));
@@ -201,13 +194,11 @@ public class StoveTileEntity extends TileEntity implements ITickableTileEntity
 			int[] aint1 = compound.getIntArray("CookingTotalTimes");
 			System.arraycopy(aint1, 0, this.cookingTotalTimes, 0, Math.min(this.cookingTotalTimes.length, aint1.length));
 		}
-
 	}
 
 	@Override
 	public CompoundNBT write(CompoundNBT compound) {
 		this.writeItems(compound);
-		compound.put("Inventory", inventoryNew.serializeNBT());
 		compound.putIntArray("CookingTimes", this.cookingTimes);
 		compound.putIntArray("CookingTotalTimes", this.cookingTotalTimes);
 		return compound;
@@ -215,7 +206,7 @@ public class StoveTileEntity extends TileEntity implements ITickableTileEntity
 
 	private CompoundNBT writeItems(CompoundNBT compound) {
 		super.write(compound);
-//		ItemStackHelper.saveAllItems(compound, this.inventory, true);
+		compound.put("Inventory", inventoryNew.serializeNBT());
 		return compound;
 	}
 
@@ -264,9 +255,4 @@ public class StoveTileEntity extends TileEntity implements ITickableTileEntity
 		if (world != null)
 			this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
 	}
-//
-//	@Override
-//	public void clear() {
-//		this.inventory.clear();
-//	}
 }
