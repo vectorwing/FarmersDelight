@@ -94,7 +94,7 @@ public class CuttingBoardBlock extends HorizontalBlock implements IWaterLoggable
 			// Processing the item with the held tool
 			} else if (!heldStack.isEmpty()) {
 				ItemStack boardItem = cuttingBoardEntity.getStoredItem().copy();
-				if (cuttingBoardEntity.processItemUsingTool(heldStack, player)) {
+				if (cuttingBoardEntity.processStoredItemUsingTool(heldStack, player)) {
 					spawnCuttingParticles(worldIn, pos, boardItem, 5);
 					return ActionResultType.SUCCESS;
 				}

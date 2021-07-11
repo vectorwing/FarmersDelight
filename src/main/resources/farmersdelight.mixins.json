@@ -9,7 +9,8 @@
     "KeepRichSoilMixin",
     "SoupItemMixin",
     "accessors.ChickenEntityAccessor",
-    "accessors.PigEntityAccessor"
+    "accessors.PigEntityAccessor",
+    "accessors.RecipeManagerAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

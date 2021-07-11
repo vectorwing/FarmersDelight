@@ -1,6 +1,8 @@
 package vectorwing.farmersdelight.utils;
 
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
@@ -22,5 +24,11 @@ public class ItemUtils
 			}
 		}
 		return true;
+	}
+
+	public static void spawnItemEntity(World world, ItemStack stack, double x, double y, double z, double xMotion, double yMotion, double zMotion) {
+		ItemEntity entity = new ItemEntity(world, x, y, z, stack);
+		entity.setMotion(xMotion, yMotion, zMotion);
+		world.addEntity(entity);
 	}
 }
