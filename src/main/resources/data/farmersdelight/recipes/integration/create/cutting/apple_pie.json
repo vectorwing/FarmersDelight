@@ -1,17 +1,15 @@
 {
-  "type": "farmersdelight:cutting",
+  "type": "create:cutting",
   "ingredients": [
     {
       "item": "farmersdelight:apple_pie"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
-  "result": [
+  "results": [
     {
       "item": "farmersdelight:apple_pie_slice",
       "count": 4
     }
-  ]
+  ],
+  "processingTime": 50
 }

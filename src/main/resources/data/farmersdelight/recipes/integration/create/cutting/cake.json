@@ -1,17 +1,15 @@
 {
-  "type": "farmersdelight:cutting",
+  "type": "create:cutting",
   "ingredients": [
     {
       "item": "minecraft:cake"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
-  "result": [
+  "results": [
     {
       "item": "farmersdelight:cake_slice",
       "count": 7
     }
-  ]
+  ],
+  "processingTime": 50
 }
