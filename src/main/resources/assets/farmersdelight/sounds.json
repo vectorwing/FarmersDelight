@@ -27,6 +27,30 @@
       }
     ]
   },
+  "block.skillet.sizzle": {
+    "category": "block",
+    "subtitle": "farmersdelight.subtitles.skillet.sizzle",
+    "sounds": [
+      {
+        "name": "farmersdelight:block/skillet_sizzle",
+        "stream": true
+      }
+    ]
+  },
+  "block.skillet.add_food": {
+    "category": "block",
+    "subtitle": "farmersdelight.subtitles.skillet.add_food",
+    "sounds": [
+      {
+        "name": "farmersdelight:block/skillet_add_food1",
+        "stream": true
+      },
+      {
+        "name": "farmersdelight:block/skillet_add_food2",
+        "stream": true
+      }
+    ]
+  },
   "block.stove.crackle": {
     "category": "block",
     "subtitle": "farmersdelight.subtitles.stove.crackle",

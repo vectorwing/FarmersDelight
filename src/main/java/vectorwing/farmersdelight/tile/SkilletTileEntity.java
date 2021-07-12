@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.tile;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -15,6 +16,7 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -25,6 +27,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.blocks.SkilletBlock;
+import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.TextUtils;
 
@@ -83,6 +86,13 @@ public class SkilletTileEntity extends TileEntity implements ITickableTileEntity
 				this.addParticles();
 			}
 		}
+	}
+
+	public boolean isHeated() {
+		if (world != null) {
+			return this.isHeated(this.world, this.pos);
+		}
+		return false;
 	}
 
 	/**
@@ -171,10 +181,14 @@ public class SkilletTileEntity extends TileEntity implements ITickableTileEntity
 	public ItemStack addItemToCook(ItemStack addedStack, @Nullable PlayerEntity player) {
 		Optional<CampfireCookingRecipe> recipe = this.findMatchingRecipe(addedStack);
 		if (recipe.isPresent()) {
+			boolean wasEmpty = this.getStoredStack().isEmpty();
 			ItemStack remainderStack = inventory.insertItem(0, addedStack, false);
 			if (remainderStack != addedStack) {
 				this.currentRecipe = recipe.get();
 				this.cookingTime = 0;
+				if (wasEmpty && this.world != null && isHeated(this.world, this.pos)) {
+					this.world.playSound(null, this.pos.getX() + 0.5F, this.pos.getY() + 0.5F, this.pos.getZ() + 0.5F, ModSounds.BLOCK_SKILLET_ADD_FOOD.get(), SoundCategory.BLOCKS, 0.8F, 1.0F);
+				}
 				this.inventoryChanged();
 				return remainderStack;
 			}
@@ -199,6 +213,10 @@ public class SkilletTileEntity extends TileEntity implements ITickableTileEntity
 
 	public ItemStack getStoredStack() {
 		return this.inventory.getStackInSlot(0);
+	}
+
+	public boolean hasStoredStack() {
+		return !this.getStoredStack().isEmpty();
 	}
 
 	private ItemStackHandler createHandler() {

@@ -54,7 +54,7 @@ public class SkilletBlock extends HorizontalBlock
 					ItemStack remainderStack = skilletEntity.addItemToCook(heldStack, player);
 					if (!remainderStack.equals(heldStack)) {
 						player.setItemStackToSlot(heldSlot, remainderStack);
-						worldIn.playSound(null, pos, SoundEvents.BLOCK_LANTERN_PLACE, SoundCategory.BLOCKS, 0.5F, 1.0F);
+						worldIn.playSound(null, pos, SoundEvents.BLOCK_LANTERN_PLACE, SoundCategory.BLOCKS, 0.7F, 1.0F);
 						return ActionResultType.SUCCESS;
 					}
 				}
