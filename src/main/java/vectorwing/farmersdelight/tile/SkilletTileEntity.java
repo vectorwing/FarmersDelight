@@ -27,6 +27,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.blocks.SkilletBlock;
+import vectorwing.farmersdelight.client.sound.SkilletSizzleTickableSound;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.TextUtils;
@@ -38,6 +39,7 @@ import java.util.Random;
 public class SkilletTileEntity extends TileEntity implements ITickableTileEntity, IHeatable
 {
 	private int cookingTime;
+	private boolean isSizzling;
 
 	private CampfireCookingRecipe currentRecipe;
 
@@ -84,6 +86,15 @@ public class SkilletTileEntity extends TileEntity implements ITickableTileEntity
 		} else {
 			if (isHeated) {
 				this.addParticles();
+				if (!isSizzling && this.hasStoredStack()) {
+					Minecraft.getInstance().getSoundHandler().play(new SkilletSizzleTickableSound(this));
+					isSizzling = true;
+				}
+				if (!this.hasStoredStack() && isSizzling) {
+					isSizzling = false;
+				}
+			} else {
+				isSizzling = false;
 			}
 		}
 	}
