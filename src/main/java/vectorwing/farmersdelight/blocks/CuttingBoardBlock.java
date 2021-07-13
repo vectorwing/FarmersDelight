@@ -74,7 +74,6 @@ public class CuttingBoardBlock extends HorizontalBlock implements IWaterLoggable
 			ItemStack heldStack = player.getHeldItem(handIn);
 			ItemStack offhandStack = player.getHeldItemOffhand();
 
-			// Placing items on the board. It should prefer off-hand placement, unless it's a BlockItem (since it never passes to off-hand...)
 			if (cuttingBoardEntity.isEmpty()) {
 				if (!offhandStack.isEmpty()) {
 					if (handIn.equals(Hand.MAIN_HAND) && !ModTags.OFFHAND_EQUIPMENT.contains(offhandStack.getItem()) && !(heldStack.getItem() instanceof BlockItem)) {
@@ -91,16 +90,14 @@ public class CuttingBoardBlock extends HorizontalBlock implements IWaterLoggable
 					return ActionResultType.SUCCESS;
 				}
 
-			// Processing the item with the held tool
 			} else if (!heldStack.isEmpty()) {
-				ItemStack boardItem = cuttingBoardEntity.getStoredItem().copy();
+				ItemStack boardStack = cuttingBoardEntity.getStoredItem().copy();
 				if (cuttingBoardEntity.processStoredItemUsingTool(heldStack, player)) {
-					spawnCuttingParticles(worldIn, pos, boardItem, 5);
+					spawnCuttingParticles(worldIn, pos, boardStack, 5);
 					return ActionResultType.SUCCESS;
 				}
 				return ActionResultType.CONSUME;
 
-			// Removing the board's item
 			} else if (handIn.equals(Hand.MAIN_HAND)) {
 				if (!player.isCreative()) {
 					if (!player.inventory.addItemStackToInventory(cuttingBoardEntity.removeItem())) {
@@ -177,8 +174,7 @@ public class CuttingBoardBlock extends HorizontalBlock implements IWaterLoggable
 	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
 		if (tileEntity instanceof CuttingBoardTileEntity) {
-			ItemStack boardStack = ((CuttingBoardTileEntity) tileEntity).getStoredItem();
-			return !boardStack.isEmpty() ? 15 : 0;
+			return !((CuttingBoardTileEntity) tileEntity).isEmpty() ? 15 : 0;
 		}
 		return 0;
 	}
@@ -204,13 +200,13 @@ public class CuttingBoardBlock extends HorizontalBlock implements IWaterLoggable
 			BlockPos pos = event.getPos();
 			PlayerEntity player = event.getPlayer();
 			ItemStack heldStack = player.getHeldItemMainhand();
-			TileEntity tile = world.getTileEntity(event.getPos());
+			TileEntity tileEntity = world.getTileEntity(event.getPos());
 
-			if (player.isSecondaryUseActive() && !heldStack.isEmpty() && tile instanceof CuttingBoardTileEntity) {
+			if (player.isSecondaryUseActive() && !heldStack.isEmpty() && tileEntity instanceof CuttingBoardTileEntity) {
 				if (heldStack.getItem() instanceof TieredItem ||
 						heldStack.getItem() instanceof TridentItem ||
 						heldStack.getItem() instanceof ShearsItem) {
-					boolean success = ((CuttingBoardTileEntity) tile).carveToolOnBoard(player.abilities.isCreativeMode ? heldStack.copy() : heldStack);
+					boolean success = ((CuttingBoardTileEntity) tileEntity).carveToolOnBoard(player.abilities.isCreativeMode ? heldStack.copy() : heldStack);
 					if (success) {
 						world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F);
 						event.setCanceled(true);
