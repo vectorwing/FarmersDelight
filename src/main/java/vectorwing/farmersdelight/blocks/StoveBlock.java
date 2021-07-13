@@ -5,7 +5,6 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.CampfireCookingRecipe;
 import net.minecraft.particles.ParticleTypes;
@@ -48,10 +47,16 @@ public class StoveBlock extends HorizontalBlock
 		if (state.get(LIT)) {
 			if (heldStack.getToolTypes().contains(ToolType.SHOVEL)) {
 				extinguish(state, worldIn, pos);
+				heldStack.damageItem(1, player, action -> action.sendBreakAnimation(handIn));
 				return ActionResultType.SUCCESS;
 			} else if (heldItem == Items.WATER_BUCKET) {
+				if (!worldIn.isRemote()) {
+					worldIn.playSound(null, pos, SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				}
 				extinguish(state, worldIn, pos);
-				player.setHeldItem(handIn, new ItemStack(Items.BUCKET));
+				if (!player.isCreative()) {
+					player.setHeldItem(handIn, new ItemStack(Items.BUCKET));
+				}
 				return ActionResultType.SUCCESS;
 			}
 		} else {
