@@ -97,6 +97,7 @@ public class CuttingBoardTileEntity extends FDSyncedTileEntity
 
 	private Optional<CuttingBoardRecipe> getMatchingRecipe(RecipeWrapper recipeWrapper, ItemStack toolStack, @Nullable PlayerEntity player) {
 		if (world == null) return Optional.empty();
+
 		if (lastRecipeID != null) {
 			IRecipe<RecipeWrapper> recipe = ((RecipeManagerAccessor) world.getRecipeManager())
 					.getRecipeMap(CuttingBoardRecipe.TYPE)
@@ -105,6 +106,7 @@ public class CuttingBoardTileEntity extends FDSyncedTileEntity
 				return Optional.of((CuttingBoardRecipe) recipe);
 			}
 		}
+
 		List<CuttingBoardRecipe> recipeList = world.getRecipeManager().getRecipes(CuttingBoardRecipe.TYPE, recipeWrapper, world);
 		if (recipeList.isEmpty()) {
 			if (player != null)

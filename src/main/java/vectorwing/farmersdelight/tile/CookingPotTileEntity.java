@@ -28,6 +28,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.blocks.CookingPotBlock;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
+import vectorwing.farmersdelight.mixin.accessors.RecipeManagerAccessor;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.tile.container.CookingPotContainer;
 import vectorwing.farmersdelight.tile.inventory.CookingPotItemHandler;
@@ -56,22 +57,20 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 
 	private int cookTime;
 	private int cookTimeTotal;
-	private ItemStack containerStack;
+	private ItemStack mealContainerStack;
 	private ITextComponent customName;
 
 	protected final IIntArray cookingPotData;
 	private final Object2IntOpenHashMap<ResourceLocation> experienceTracker;
 
-
-	// TODO: Cache the recipe! Optimize your checks! The Cooking Pot is extremely inefficient!
-	// private ResourceLocation lastRecipeID;
+	 private ResourceLocation lastRecipeID;
 
 	public CookingPotTileEntity() {
 		super(ModTileEntityTypes.COOKING_POT_TILE.get());
 		this.inventory = createHandler();
 		this.inputHandler = LazyOptional.of(() -> new CookingPotItemHandler(inventory, Direction.UP));
 		this.outputHandler = LazyOptional.of(() -> new CookingPotItemHandler(inventory, Direction.DOWN));
-		this.containerStack = ItemStack.EMPTY;
+		this.mealContainerStack = ItemStack.EMPTY;
 		this.cookingPotData = createIntArray();
 		this.experienceTracker = new Object2IntOpenHashMap<>();
 	}
@@ -82,7 +81,7 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 		inventory.deserializeNBT(compound.getCompound("Inventory"));
 		cookTime = compound.getInt("CookTime");
 		cookTimeTotal = compound.getInt("CookTimeTotal");
-		containerStack = ItemStack.read(compound.getCompound("Container"));
+		mealContainerStack = ItemStack.read(compound.getCompound("Container"));
 		if (compound.contains("CustomName", 8)) {
 			customName = ITextComponent.Serializer.getComponentFromJson(compound.getString("CustomName"));
 		}
@@ -97,7 +96,7 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 		super.write(compound);
 		compound.putInt("CookTime", cookTime);
 		compound.putInt("CookTimeTotal", cookTimeTotal);
-		compound.put("Container", containerStack.serializeNBT());
+		compound.put("Container", mealContainerStack.serializeNBT());
 		if (customName != null) {
 			compound.putString("CustomName", ITextComponent.Serializer.toJson(customName));
 		}
@@ -110,7 +109,7 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 
 	private CompoundNBT writeItems(CompoundNBT compound) {
 		super.write(compound);
-		compound.put("Container", containerStack.serializeNBT());
+		compound.put("Container", mealContainerStack.serializeNBT());
 		compound.put("Inventory", inventory.serializeNBT());
 		return compound;
 	}
@@ -125,7 +124,7 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 		if (customName != null) {
 			compound.putString("CustomName", ITextComponent.Serializer.toJson(customName));
 		}
-		compound.put("Container", containerStack.serializeNBT());
+		compound.put("Container", mealContainerStack.serializeNBT());
 		compound.put("Inventory", drops.serializeNBT());
 		return compound;
 	}
@@ -141,11 +140,10 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 
 		if (!world.isRemote) {
 			if (isHeated && hasInput()) {
-				// TODO: Cache the recipe!
-				Optional<CookingPotRecipe> recipe = world.getRecipeManager()
-						.getRecipe(CookingPotRecipe.TYPE, new RecipeWrapper(inventory), world);
+				Optional<CookingPotRecipe> recipe = getMatchingRecipe(new RecipeWrapper(inventory));
 				if (recipe.isPresent() && canCook(recipe.get())) {
 					++cookTime;
+					cookTimeTotal = recipe.get().getCookTime();
 					if (cookTime == cookTimeTotal) {
 						cookTime = 0;
 						cookTimeTotal = recipe.get().getCookTime();
@@ -181,19 +179,38 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 		}
 	}
 
-	// TODO: Cache the recipe and get rid of this!
-	protected int getCookTime() {
-		return world == null ? 0 : world.getRecipeManager().getRecipe(CookingPotRecipe.TYPE, new RecipeWrapper(inventory), world).map(CookingPotRecipe::getCookTime).orElse(200);
+	private Optional<CookingPotRecipe> getMatchingRecipe(RecipeWrapper inventoryWrapper) {
+		if (world == null) return Optional.empty();
+
+		if (lastRecipeID != null) {
+			IRecipe<RecipeWrapper> recipe = ((RecipeManagerAccessor) world.getRecipeManager())
+					.getRecipeMap(CookingPotRecipe.TYPE)
+					.get(lastRecipeID);
+			if (recipe instanceof CookingPotRecipe) {
+				if (recipe.matches(inventoryWrapper, world)) {
+					return Optional.of((CookingPotRecipe) recipe);
+				}
+				if (recipe.getRecipeOutput().isItemEqual(getMeal())) {
+					return Optional.empty();
+				}
+			}
+		}
+
+		// TODO: Check whether the inventory has changed, or set a failed recipe.
+		// As it stands now, this calls the recipe manager every tick, if the inputs don't make a recipe.
+		// If nothing has changed since the last failed check, the pot should idle!
+		Optional<CookingPotRecipe> recipe = world.getRecipeManager().getRecipe(CookingPotRecipe.TYPE, inventoryWrapper, world);
+		if (recipe.isPresent()) {
+			lastRecipeID = recipe.get().getId();
+			return recipe;
+		}
+
+		return Optional.empty();
 	}
 
-//	// TODO: Cache the recipe and get rid of this!
-//	protected ItemStack getRecipeContainer() {
-//		return world == null ? ItemStack.EMPTY : world.getRecipeManager().getRecipe(CookingPotRecipe.TYPE, new RecipeWrapper(inventory), world).map(CookingPotRecipe::getOutputContainer).orElse(ItemStack.EMPTY);
-//	}
-
 	public ItemStack getContainer() {
-		if (!containerStack.isEmpty()) {
-			return containerStack;
+		if (!mealContainerStack.isEmpty()) {
+			return mealContainerStack;
 		} else {
 			return getMeal().getContainerItem();
 		}
@@ -231,7 +248,7 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 	private void cook(CookingPotRecipe recipe) {
 		if (world == null) return;
 
-		containerStack = recipe.getOutputContainer();
+		mealContainerStack = recipe.getOutputContainer();
 		ItemStack resultStack = recipe.getRecipeOutput();
 		ItemStack storedMealStack = inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
 		if (storedMealStack.isEmpty()) {
@@ -239,7 +256,7 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 		} else if (storedMealStack.isItemEqual(resultStack)) {
 			storedMealStack.grow(resultStack.getCount());
 		}
-		setRecipeUsed(recipe);
+		trackRecipeExperience(recipe);
 
 		for (int i = 0; i < MEAL_DISPLAY_SLOT; ++i) {
 			ItemStack slotStack = inventory.getStackInSlot(i);
@@ -278,7 +295,7 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 		return inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
 	}
 
-	public void setRecipeUsed(@Nullable IRecipe<?> recipe) {
+	public void trackRecipeExperience(@Nullable IRecipe<?> recipe) {
 		if (recipe != null) {
 			ResourceLocation recipeID = recipe.getId();
 			experienceTracker.addTo(recipeID, 1);
@@ -383,13 +400,13 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 	}
 
 	private boolean doesMealHaveContainer(ItemStack meal) {
-		return !containerStack.isEmpty() || meal.hasContainerItem();
+		return !mealContainerStack.isEmpty() || meal.hasContainerItem();
 	}
 
 	public boolean isContainerValid(ItemStack containerItem) {
 		if (containerItem.isEmpty()) return false;
-		if (!containerStack.isEmpty()) {
-			return containerStack.isItemEqual(containerItem);
+		if (!mealContainerStack.isEmpty()) {
+			return mealContainerStack.isItemEqual(containerItem);
 		} else {
 			return getMeal().getContainerItem().isItemEqual(containerItem);
 		}
@@ -452,11 +469,9 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 	private ItemStackHandler createHandler() {
 		return new ItemStackHandler(INVENTORY_SIZE)
 		{
-			// TODO: Study whether this is necessary. Why would it set every time the recipe is checked?
 			@Override
 			protected void onContentsChanged(int slot) {
 				if (slot >= 0 && slot < MEAL_DISPLAY_SLOT) {
-					cookTimeTotal = getCookTime();
 					inventoryChanged();
 				}
 			}
