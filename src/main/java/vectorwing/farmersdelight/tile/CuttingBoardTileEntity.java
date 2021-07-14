@@ -50,16 +50,6 @@ public class CuttingBoardTileEntity extends FDSyncedTileEntity
 		isItemCarvingBoard = false;
 	}
 
-	private ItemStackHandler createHandler() {
-		return new ItemStackHandler()
-		{
-			@Override
-			public int getSlotLimit(int slot) {
-				return 1;
-			}
-		};
-	}
-
 	@Override
 	public void read(BlockState state, CompoundNBT compound) {
 		super.read(state, compound);
@@ -211,5 +201,15 @@ public class CuttingBoardTileEntity extends FDSyncedTileEntity
 	public void remove() {
 		super.remove();
 		inputHandler.invalidate();
+	}
+
+	private ItemStackHandler createHandler() {
+		return new ItemStackHandler()
+		{
+			@Override
+			public int getSlotLimit(int slot) {
+				return 1;
+			}
+		};
 	}
 }

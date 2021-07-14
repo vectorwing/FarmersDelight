@@ -41,16 +41,6 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 		cookingTimesTotal = new int[INVENTORY_SLOT_COUNT];
 	}
 
-	private ItemStackHandler createHandler() {
-		return new ItemStackHandler(INVENTORY_SLOT_COUNT)
-		{
-			@Override
-			public int getSlotLimit(int slot) {
-				return 1;
-			}
-		};
-	}
-
 	@Override
 	public void read(BlockState state, CompoundNBT compound) {
 		super.read(state, compound);
@@ -216,5 +206,15 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 	@Override
 	public CompoundNBT getUpdateTag() {
 		return writeItems(new CompoundNBT());
+	}
+
+	private ItemStackHandler createHandler() {
+		return new ItemStackHandler(INVENTORY_SLOT_COUNT)
+		{
+			@Override
+			public int getSlotLimit(int slot) {
+				return 1;
+			}
+		};
 	}
 }
