@@ -63,7 +63,8 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 	protected final IIntArray cookingPotData;
 	private final Object2IntOpenHashMap<ResourceLocation> experienceTracker;
 
-	 private ResourceLocation lastRecipeID;
+	private ResourceLocation lastRecipeID;
+	private boolean checkNewRecipe;
 
 	public CookingPotTileEntity() {
 		super(ModTileEntityTypes.COOKING_POT_TILE.get());
@@ -142,14 +143,7 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 			if (isHeated && hasInput()) {
 				Optional<CookingPotRecipe> recipe = getMatchingRecipe(new RecipeWrapper(inventory));
 				if (recipe.isPresent() && canCook(recipe.get())) {
-					++cookTime;
-					cookTimeTotal = recipe.get().getCookTime();
-					if (cookTime == cookTimeTotal) {
-						cookTime = 0;
-						cookTimeTotal = recipe.get().getCookTime();
-						cook(recipe.get());
-						didInventoryChange = true;
-					}
+					didInventoryChange = processCooking(recipe.get());
 				} else {
 					cookTime = 0;
 				}
@@ -196,15 +190,15 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 			}
 		}
 
-		// TODO: Check whether the inventory has changed, or set a failed recipe.
-		// As it stands now, this calls the recipe manager every tick, if the inputs don't make a recipe.
-		// If nothing has changed since the last failed check, the pot should idle!
-		Optional<CookingPotRecipe> recipe = world.getRecipeManager().getRecipe(CookingPotRecipe.TYPE, inventoryWrapper, world);
-		if (recipe.isPresent()) {
-			lastRecipeID = recipe.get().getId();
-			return recipe;
+		if (checkNewRecipe) {
+			Optional<CookingPotRecipe> recipe = world.getRecipeManager().getRecipe(CookingPotRecipe.TYPE, inventoryWrapper, world);
+			if (recipe.isPresent()) {
+				lastRecipeID = recipe.get().getId();
+				return recipe;
+			}
 		}
 
+		checkNewRecipe = false;
 		return Optional.empty();
 	}
 
@@ -245,9 +239,16 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 		}
 	}
 
-	private void cook(CookingPotRecipe recipe) {
-		if (world == null) return;
+	private boolean processCooking(CookingPotRecipe recipe) {
+		if (world == null) return false;
 
+		++cookTime;
+		cookTimeTotal = recipe.getCookTime();
+		if (cookTime < cookTimeTotal) {
+			return false;
+		}
+
+		cookTime = 0;
 		mealContainerStack = recipe.getOutputContainer();
 		ItemStack resultStack = recipe.getRecipeOutput();
 		ItemStack storedMealStack = inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
@@ -271,6 +272,7 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 			if (!slotStack.isEmpty())
 				slotStack.shrink(1);
 		}
+		return true;
 	}
 
 	private void animate() {
@@ -289,10 +291,6 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 			double z = (double) pos.getZ() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
 			world.addParticle(ParticleTypes.EFFECT, x, y, z, 0.0D, 0.0D, 0.0D);
 		}
-	}
-
-	public ItemStack getMeal() {
-		return inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
 	}
 
 	public void trackRecipeExperience(@Nullable IRecipe<?> recipe) {
@@ -348,6 +346,14 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 		}
 
 		return false;
+	}
+
+	public ItemStackHandler getInventory() {
+		return inventory;
+	}
+
+	public ItemStack getMeal() {
+		return inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
 	}
 
 	public NonNullList<ItemStack> getDroppableInventory() {
@@ -412,10 +418,6 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 		}
 	}
 
-	public ItemStackHandler getInventory() {
-		return inventory;
-	}
-
 	@Override
 	public ITextComponent getName() {
 		return customName != null ? customName : TextUtils.getTranslation("container.cooking_pot");
@@ -472,6 +474,7 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 			@Override
 			protected void onContentsChanged(int slot) {
 				if (slot >= 0 && slot < MEAL_DISPLAY_SLOT) {
+					checkNewRecipe = true;
 					inventoryChanged();
 				}
 			}
