@@ -13,6 +13,24 @@
       }
     ]
   },
+  "block.cooking_pot.boil_soup": {
+    "category": "block",
+    "subtitle": "farmersdelight.subtitles.cooking_pot.boil",
+    "sounds": [
+      {
+        "name": "farmersdelight:block/cooking_pot_boil_soup1",
+        "stream": true
+      },
+      {
+        "name": "farmersdelight:block/cooking_pot_boil_soup2",
+        "stream": true
+      },
+      {
+        "name": "farmersdelight:block/cooking_pot_boil_soup3",
+        "stream": true
+      }
+    ]
+  },
   "block.cutting_board.knife": {
     "category": "block",
     "subtitle": "farmersdelight.subtitles.cutting_board.knife_cut",

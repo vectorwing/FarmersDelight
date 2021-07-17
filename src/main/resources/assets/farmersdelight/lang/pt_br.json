@@ -179,6 +179,8 @@
 
   "farmersdelight.container.cooking_pot": "Panela",
   "farmersdelight.container.cooking_pot.served_on": "Servido em: ",
+  "farmersdelight.container.cooking_pot.not_heated": "Precisa ser aquecida por baixo",
+  "farmersdelight.container.cooking_pot.heated": "Aquecida",
   "farmersdelight.container.basket": "Cesto",
   "farmersdelight.container.pantry": "Despensa",
 

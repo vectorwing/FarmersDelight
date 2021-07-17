@@ -193,11 +193,15 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
 		if (tileEntity instanceof CookingPotTileEntity && ((CookingPotTileEntity) tileEntity).isHeated()) {
+			CookingPotTileEntity cookingPotEntity = (CookingPotTileEntity) tileEntity;
+			SoundEvent boilSound = !cookingPotEntity.getMeal().isEmpty()
+					? ModSounds.BLOCK_COOKING_POT_BOIL_SOUP.get()
+					: ModSounds.BLOCK_COOKING_POT_BOIL.get();
 			double x = (double) pos.getX() + 0.5D;
 			double y = pos.getY();
 			double z = (double) pos.getZ() + 0.5D;
 			if (rand.nextInt(10) == 0) {
-				worldIn.playSound(x, y, z, ModSounds.BLOCK_COOKING_POT_BOIL.get(), SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.2F + 0.9F, false);
+				worldIn.playSound(x, y, z, boilSound, SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.2F + 0.9F, false);
 			}
 		}
 	}
