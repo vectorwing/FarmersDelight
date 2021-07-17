@@ -67,7 +67,7 @@ public class HorseFeedItem extends Item
 						double d0 = MathUtils.RAND.nextGaussian() * 0.02D;
 						double d1 = MathUtils.RAND.nextGaussian() * 0.02D;
 						double d2 = MathUtils.RAND.nextGaussian() * 0.02D;
-						entity.world.addParticle(ModParticleTypes.STAR_PARTICLE.get(), entity.getPosXRandom(1.0D), entity.getPosYRandom() + 0.5D, entity.getPosZRandom(1.0D), d0, d1, d2);
+						entity.world.addParticle(ModParticleTypes.STAR.get(), entity.getPosXRandom(1.0D), entity.getPosYRandom() + 0.5D, entity.getPosZRandom(1.0D), d0, d1, d2);
 					}
 
 					if (!player.isCreative()) {
