@@ -65,7 +65,7 @@ public class PantryBlock extends ContainerBlock
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
 		if (tileEntity instanceof PantryTileEntity) {
-			((PantryTileEntity) tileEntity).pantryTick();
+			((PantryTileEntity) tileEntity).tick();
 		}
 	}
 
