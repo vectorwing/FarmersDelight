@@ -78,13 +78,10 @@ public class StoveBlock extends HorizontalBlock
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
 		if (tileEntity instanceof StoveTileEntity) {
 			StoveTileEntity stoveEntity = (StoveTileEntity) tileEntity;
-			Optional<CampfireCookingRecipe> recipe = stoveEntity.findMatchingRecipe(heldStack);
-			if (recipe.isPresent()) {
-				if (!worldIn.isRemote && !stoveEntity.isStoveBlockedAbove() && stoveEntity.addItem(player.abilities.isCreativeMode ? heldStack.copy() : heldStack, recipe.get().getCookTime())) {
-					return ActionResultType.SUCCESS;
-				}
-				return ActionResultType.CONSUME;
+			if (!worldIn.isRemote && !stoveEntity.isStoveBlockedAbove() && stoveEntity.addItem(player.abilities.isCreativeMode ? heldStack.copy() : heldStack)) {
+				return ActionResultType.SUCCESS;
 			}
+			return ActionResultType.CONSUME;
 		}
 
 		return ActionResultType.PASS;
@@ -118,7 +115,6 @@ public class StoveBlock extends HorizontalBlock
 		if (state.getBlock() != newState.getBlock()) {
 			TileEntity tileEntity = worldIn.getTileEntity(pos);
 			if (tileEntity instanceof StoveTileEntity) {
-//				InventoryHelper.dropItems(worldIn, pos, ((StoveTileEntity) tileEntity).getOldInventory());
 				ItemUtils.dropItems(worldIn, pos, ((StoveTileEntity) tileEntity).getInventory());
 			}
 

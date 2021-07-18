@@ -6,11 +6,13 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CampfireCookingRecipe;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -18,9 +20,9 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.math.vector.Vector2f;
 import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.blocks.StoveBlock;
+import vectorwing.farmersdelight.mixin.accessors.RecipeManagerAccessor;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.ItemUtils;
-import vectorwing.farmersdelight.utils.MathUtils;
 
 import java.util.Optional;
 
@@ -32,13 +34,14 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 	private final ItemStackHandler inventory;
 	private final int[] cookingTimes;
 	private final int[] cookingTimesTotal;
-//	TODO: private CampfireCookingRecipe lastRecipe;
+	private ResourceLocation[] lastRecipeIDs;
 
 	public StoveTileEntity() {
 		super(ModTileEntityTypes.STOVE_TILE.get());
 		inventory = createHandler();
 		cookingTimes = new int[INVENTORY_SLOT_COUNT];
 		cookingTimesTotal = new int[INVENTORY_SLOT_COUNT];
+		lastRecipeIDs = new ResourceLocation[INVENTORY_SLOT_COUNT];
 	}
 
 	@Override
@@ -111,11 +114,14 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 				++cookingTimes[i];
 				if (cookingTimes[i] >= cookingTimesTotal[i]) {
 					IInventory inventoryWrapper = new Inventory(stoveStack);
-					ItemStack resultStack = world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, inventoryWrapper, world).map((recipe) -> recipe.getCraftingResult(inventoryWrapper)).orElse(stoveStack);
-					if (!resultStack.isEmpty()) {
-						ItemUtils.spawnItemEntity(world, resultStack.copy(),
-								pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5,
-								MathUtils.RAND.nextGaussian() * (double) 0.01F, 0.1F, MathUtils.RAND.nextGaussian() * (double) 0.01F);
+					Optional<CampfireCookingRecipe> recipe = getMatchingRecipe(inventoryWrapper, i);
+					if (recipe.isPresent()) {
+						ItemStack resultStack = recipe.get().getRecipeOutput();
+						if (!resultStack.isEmpty()) {
+							ItemUtils.spawnItemEntity(world, resultStack.copy(),
+									pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5,
+									world.rand.nextGaussian() * (double) 0.01F, 0.1F, world.rand.nextGaussian() * (double) 0.01F);
+						}
 					}
 					inventory.setStackInSlot(i, ItemStack.EMPTY);
 					didInventoryChange = true;
@@ -128,19 +134,43 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 		}
 	}
 
-	public boolean addItem(ItemStack itemStackIn, int cookTime) {
-		// TODO: Pass the recipe, then cache its ID
+	public boolean addItem(ItemStack itemStackIn) {
 		for (int i = 0; i < inventory.getSlots(); ++i) {
 			ItemStack slotStack = inventory.getStackInSlot(i);
 			if (slotStack.isEmpty()) {
-				cookingTimesTotal[i] = cookTime;
-				cookingTimes[i] = 0;
-				inventory.setStackInSlot(i, itemStackIn.split(1));
-				inventoryChanged();
-				return true;
+				Optional<CampfireCookingRecipe> recipe = getMatchingRecipe(new Inventory(itemStackIn), i);
+				if (recipe.isPresent()) {
+					cookingTimesTotal[i] = recipe.get().getCookTime();
+					cookingTimes[i] = 0;
+					inventory.setStackInSlot(i, itemStackIn.split(1));
+					lastRecipeIDs[i] = recipe.get().getId();
+					inventoryChanged();
+					return true;
+				}
 			}
 		}
 		return false;
+	}
+
+	private Optional<CampfireCookingRecipe> getMatchingRecipe(IInventory recipeWrapper, int slot) {
+		if (world == null) return Optional.empty();
+
+		if (lastRecipeIDs[slot] != null) {
+			IRecipe<IInventory> recipe = ((RecipeManagerAccessor) world.getRecipeManager())
+					.getRecipeMap(IRecipeType.CAMPFIRE_COOKING)
+					.get(lastRecipeIDs[slot]);
+			if (recipe instanceof CampfireCookingRecipe && recipe.matches(recipeWrapper, world)) {
+				return Optional.of((CampfireCookingRecipe) recipe);
+			}
+		}
+
+		Optional<CampfireCookingRecipe> recipe = world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, recipeWrapper, world);
+		if (recipe.isPresent()) {
+			lastRecipeIDs[slot] = recipe.get().getId();
+			return recipe;
+		}
+
+		return Optional.empty();
 	}
 
 	public Optional<CampfireCookingRecipe> findMatchingRecipe(ItemStack itemStackIn) {
