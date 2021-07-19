@@ -23,15 +23,6 @@ import vectorwing.farmersdelight.utils.ModAtlases;
 
 import java.util.List;
 
-/**
- * Canvas Sign rendering involves a few tweaks for it to look proper in-game.
- * Make sure to decide later whether these changes are better mixed-in or copy-pasted like this.
- *
- * Render tweaks:
- * - Hijacking getMaterial to return FD's dye-based RenderMaterials;
- * - Brighter text tones to fit the backgrounds more nicely;
- */
-
 @OnlyIn(Dist.CLIENT)
 public class CanvasSignTileEntityRenderer extends SignTileEntityRenderer
 {

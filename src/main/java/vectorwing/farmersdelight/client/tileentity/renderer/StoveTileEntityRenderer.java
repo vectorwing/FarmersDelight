@@ -10,7 +10,6 @@ import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.vector.Vector2f;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.items.ItemStackHandler;
@@ -32,7 +31,6 @@ public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
 	@Override
 	public void render(StoveTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		Direction direction = tileEntityIn.getBlockState().get(StoveBlock.HORIZONTAL_FACING).getOpposite();
-//		NonNullList<ItemStack> inventory = tileEntityIn.getOldInventory();
 
 		ItemStackHandler inventory = tileEntityIn.getInventory();
 
