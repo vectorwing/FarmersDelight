@@ -7,6 +7,7 @@ import com.blamejared.crafttweaker.api.item.IIngredient;
 import com.blamejared.crafttweaker.api.item.IItemStack;
 import com.blamejared.crafttweaker.api.managers.IRecipeManager;
 import com.blamejared.crafttweaker.impl.actions.recipes.ActionAddRecipe;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.NonNullList;
@@ -16,10 +17,31 @@ import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.integration.crafttweaker.actions.ActionRemoveCuttingBoardRecipe;
 import vectorwing.farmersdelight.utils.ListUtils;
 
+/**
+ * Farmer's Delight Cutting Board recipes.
+ *
+ * @docParam this <recipetype:farmersdelight:cutting>
+ */
+@Document("mods/farmersdelight/CuttingBoard")
 @ZenRegister
 @ZenCodeType.Name("mods.farmersdelight.CuttingBoard")
 public class CuttingBoardRecipeManager implements IRecipeManager
 {
+    /**
+     * Add a cutting board recipe.
+     *
+     * @param name    Name of the recipe to add
+     * @param input   Input ingredient
+     * @param results Output items
+     * @param tool    Tool ingredient
+     * @param sound   Sound event name
+     *
+     * @docParam name "cutting_board_test"
+     * @docParam input <item:minecraft:gravel>
+     * @docParam results [<item:minecraft:flint>]
+     * @docParam tool <item:minecraft:string>
+     * @docParam sound "minecraft:block.gravel.break"
+     */
     @ZenCodeType.Method
     public void addRecipe(String name,
                           IIngredient input,
@@ -43,6 +65,13 @@ public class CuttingBoardRecipeManager implements IRecipeManager
         removeRecipe(new IItemStack[]{output});
     }
 
+    /**
+     * Remove a cutting board recipe with multiple outputs.
+     *
+     * @param outputs Output items
+     *
+     * @docParam outputs [<item:farmersdelight:cooked_salmon_slice> * 2, <item:minecraft:bone_meal>]
+     */
     @ZenCodeType.Method
     public void removeRecipe(IItemStack[] outputs) {
         CraftTweakerAPI.apply(new ActionRemoveCuttingBoardRecipe(this, outputs));
