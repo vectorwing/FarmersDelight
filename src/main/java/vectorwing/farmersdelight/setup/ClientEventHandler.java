@@ -19,6 +19,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.client.gui.NourishedHungerOverlay;
 import vectorwing.farmersdelight.client.particles.StarParticle;
+import vectorwing.farmersdelight.client.particles.SteamParticle;
 import vectorwing.farmersdelight.client.tileentity.renderer.CanvasSignTileEntityRenderer;
 import vectorwing.farmersdelight.client.tileentity.renderer.CuttingBoardTileEntityRenderer;
 import vectorwing.farmersdelight.client.tileentity.renderer.StoveTileEntityRenderer;
@@ -89,6 +90,7 @@ public class ClientEventHandler
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void registerParticles(ParticleFactoryRegisterEvent event) {
-		Minecraft.getInstance().particles.registerFactory(ModParticleTypes.STAR_PARTICLE.get(), StarParticle.Factory::new);
+		Minecraft.getInstance().particles.registerFactory(ModParticleTypes.STAR.get(), StarParticle.Factory::new);
+		Minecraft.getInstance().particles.registerFactory(ModParticleTypes.STEAM.get(), SteamParticle.Factory::new);
 	}
 }

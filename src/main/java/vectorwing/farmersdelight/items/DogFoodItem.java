@@ -69,7 +69,7 @@ public class DogFoodItem extends ConsumableItem
 						double xSpeed = MathUtils.RAND.nextGaussian() * 0.02D;
 						double ySpeed = MathUtils.RAND.nextGaussian() * 0.02D;
 						double zSpeed = MathUtils.RAND.nextGaussian() * 0.02D;
-						entity.world.addParticle(ModParticleTypes.STAR_PARTICLE.get(), entity.getPosXRandom(1.0D), entity.getPosYRandom() + 0.5D, entity.getPosZRandom(1.0D), xSpeed, ySpeed, zSpeed);
+						entity.world.addParticle(ModParticleTypes.STAR.get(), entity.getPosXRandom(1.0D), entity.getPosYRandom() + 0.5D, entity.getPosZRandom(1.0D), xSpeed, ySpeed, zSpeed);
 					}
 
 					if (itemStack.getContainerItem() != ItemStack.EMPTY && !player.isCreative()) {

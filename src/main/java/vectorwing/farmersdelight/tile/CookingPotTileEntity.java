@@ -29,6 +29,7 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.blocks.CookingPotBlock;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.mixin.accessors.RecipeManagerAccessor;
+import vectorwing.farmersdelight.registry.ModParticleTypes;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.tile.container.CookingPotContainer;
 import vectorwing.farmersdelight.tile.inventory.CookingPotItemHandler;
@@ -287,9 +288,9 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 		}
 		if (random.nextFloat() < 0.05F) {
 			double x = (double) pos.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
-			double y = (double) pos.getY() + 0.7D;
+			double y = (double) pos.getY() + 0.5D;
 			double z = (double) pos.getZ() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
-			world.addParticle(ParticleTypes.EFFECT, x, y, z, 0.0D, 0.0D, 0.0D);
+			world.addParticle(ModParticleTypes.STEAM.get(), x, y, z, 0.0D, 0.0D, 0.0D);
 		}
 	}
 

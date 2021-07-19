@@ -5,12 +5,17 @@ import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import com.blamejared.crafttweaker.api.item.IIngredient;
 import com.blamejared.crafttweaker.api.item.IItemStack;
 import com.blamejared.crafttweaker.impl.item.MCItemStackMutable;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.common.ToolType;
 import org.openzen.zencode.java.ZenCodeType;
 import vectorwing.farmersdelight.crafting.ingredients.ToolIngredient;
 
+/**
+ * An ingredient that matches any item with the given tool type.
+ */
+@Document("mods/farmersdelight/ToolIngredient")
 @ZenRegister
 @ZenCodeType.Name("mods.farmersdelight.ToolIngredient")
 public class MCToolIngredient implements IIngredient
@@ -26,14 +31,30 @@ public class MCToolIngredient implements IIngredient
         this(new ToolIngredient(type));
     }
 
+    /**
+     * Get a tool ingredient from a tool type name.
+     *
+     * @param type The name of the type
+     * @return The ingredient
+     *
+     * @docParam type "axe"
+     */
     @ZenCodeType.Method
     @BracketResolver(PREFIX)
-    public static MCToolIngredient get(String type) {
-        return get(ToolType.get(type));
+    public static MCToolIngredient getToolIngredient(String type) {
+        return getToolIngredient(ToolType.get(type));
     }
 
+    /**
+     * Get a tool ingredient from a tool type.
+     *
+     * @param type The tool type
+     * @return The ingredient
+     *
+     * @docParam type <tooltype:axe>
+     */
     @ZenCodeType.Method
-    public static MCToolIngredient get(ToolType type) {
+    public static MCToolIngredient getToolIngredient(ToolType type) {
         return new MCToolIngredient(type);
     }
 
