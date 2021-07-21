@@ -290,7 +290,8 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 			double x = (double) pos.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
 			double y = (double) pos.getY() + 0.5D;
 			double z = (double) pos.getZ() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
-			world.addParticle(ModParticleTypes.STEAM.get(), x, y, z, 0.0D, 0.0D, 0.0D);
+			double motionY = random.nextBoolean() ? 0.015D : 0.005D;
+			world.addParticle(ModParticleTypes.STEAM.get(), x, y, z, 0.0D, motionY, 0.0D);
 		}
 	}
 

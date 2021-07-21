@@ -81,7 +81,6 @@ public class StoveBlock extends HorizontalBlock
 			if (!worldIn.isRemote && !stoveEntity.isStoveBlockedAbove() && stoveEntity.addItem(player.abilities.isCreativeMode ? heldStack.copy() : heldStack)) {
 				return ActionResultType.SUCCESS;
 			}
-			return ActionResultType.CONSUME;
 		}
 
 		return ActionResultType.PASS;

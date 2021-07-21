@@ -92,7 +92,6 @@ public class PantryTileEntity extends LockableLootTileEntity
 
 			scheduleTick();
 		}
-
 	}
 
 	private void scheduleTick() {
@@ -100,7 +99,7 @@ public class PantryTileEntity extends LockableLootTileEntity
 	}
 
 	public void tick() {
-		if (world != null) return;
+		if (world == null) return;
 
 		int x = pos.getX();
 		int y = pos.getY();
@@ -137,7 +136,7 @@ public class PantryTileEntity extends LockableLootTileEntity
 	}
 
 	private void playSound(BlockState state, SoundEvent sound) {
-		if (world != null) return;
+		if (world == null) return;
 
 		Vector3i pantryFacingVector = state.get(PantryBlock.FACING).getDirectionVec();
 		double x = (double) pos.getX() + 0.5D + (double) pantryFacingVector.getX() / 2.0D;

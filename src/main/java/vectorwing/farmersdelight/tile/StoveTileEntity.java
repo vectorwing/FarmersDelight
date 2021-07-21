@@ -173,10 +173,6 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 		return Optional.empty();
 	}
 
-	public Optional<CampfireCookingRecipe> findMatchingRecipe(ItemStack itemStackIn) {
-		return world == null || isStoveFull() ? Optional.empty() : world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, new Inventory(itemStackIn), world);
-	}
-
 	public ItemStackHandler getInventory() {
 		return this.inventory;
 	}
@@ -187,15 +183,6 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 			return VoxelShapes.compare(GRILLING_AREA, above.getShape(world, pos.up()), IBooleanFunction.AND);
 		}
 		return false;
-	}
-
-	public boolean isStoveFull() {
-		for (int i = 0; i < inventory.getSlots(); i++) {
-			if (inventory.getStackInSlot(i).isEmpty()) {
-				return false;
-			}
-		}
-		return true;
 	}
 
 	public Vector2f getStoveItemOffset(int index) {
