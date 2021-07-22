@@ -31,14 +31,14 @@ public class CookingPotContainer extends Container
 	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "item/empty_container_slot_bowl");
 
 	public final CookingPotTileEntity tileEntity;
-	public final ItemStackHandler inventoryHandler;
+	public final ItemStackHandler inventory;
 	private final IIntArray cookingPotData;
 	private final IWorldPosCallable canInteractWithCallable;
 
 	public CookingPotContainer(final int windowId, final PlayerInventory playerInventory, final CookingPotTileEntity tileEntity, IIntArray cookingPotDataIn) {
 		super(ModContainerTypes.COOKING_POT.get(), windowId);
 		this.tileEntity = tileEntity;
-		this.inventoryHandler = tileEntity.getInventory();
+		this.inventory = tileEntity.getInventory();
 		this.cookingPotData = cookingPotDataIn;
 		this.canInteractWithCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
 
@@ -50,17 +50,17 @@ public class CookingPotContainer extends Container
 		int borderSlotSize = 18;
 		for (int row = 0; row < 2; ++row) {
 			for (int column = 0; column < 3; ++column) {
-				this.addSlot(new SlotItemHandler(inventoryHandler, (row * 3) + column,
+				this.addSlot(new SlotItemHandler(inventory, (row * 3) + column,
 						inputStartX + (column * borderSlotSize),
 						inputStartY + (row * borderSlotSize)));
 			}
 		}
 
 		// Meal Display
-		this.addSlot(new CookingPotMealSlot(inventoryHandler, 6, 124, 26));
+		this.addSlot(new CookingPotMealSlot(inventory, 6, 124, 26));
 
 		// Bowl Input
-		this.addSlot(new SlotItemHandler(inventoryHandler, 7, 92, 55)
+		this.addSlot(new SlotItemHandler(inventory, 7, 92, 55)
 		{
 			@OnlyIn(Dist.CLIENT)
 			public Pair<ResourceLocation, ResourceLocation> getBackground() {
@@ -69,7 +69,7 @@ public class CookingPotContainer extends Container
 		});
 
 		// Bowl Output
-		this.addSlot(new CookingPotResultSlot(playerInventory.player, tileEntity, inventoryHandler, 8, 124, 55));
+		this.addSlot(new CookingPotResultSlot(playerInventory.player, tileEntity, inventory, 8, 124, 55));
 
 		// Main Player Inventory
 		int startPlayerInvY = startY * 4 + 12;

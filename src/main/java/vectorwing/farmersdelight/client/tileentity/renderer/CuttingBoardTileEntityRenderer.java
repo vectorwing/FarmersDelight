@@ -34,7 +34,7 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 			boolean isBlockItem = itemRenderer.getItemModelWithOverrides(boardStack, tileEntityIn.getWorld(), null)
 					.isGui3d();
 
-			if (tileEntityIn.getIsItemCarvingBoard()) {
+			if (tileEntityIn.isItemCarvingBoard()) {
 				renderItemCarved(matrixStackIn, direction, boardStack);
 			} else if (isBlockItem) {
 				renderBlock(matrixStackIn, direction);
