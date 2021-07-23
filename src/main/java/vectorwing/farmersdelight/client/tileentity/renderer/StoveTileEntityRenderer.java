@@ -10,9 +10,9 @@ import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.vector.Vector2f;
 import net.minecraft.util.math.vector.Vector3f;
+import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.blocks.StoveBlock;
 import vectorwing.farmersdelight.tile.StoveTileEntity;
 
@@ -31,11 +31,12 @@ public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
 	@Override
 	public void render(StoveTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		Direction direction = tileEntityIn.getBlockState().get(StoveBlock.HORIZONTAL_FACING).getOpposite();
-		NonNullList<ItemStack> nonnulllist = tileEntityIn.getInventory();
 
-		for (int i = 0; i < nonnulllist.size(); ++i) {
-			ItemStack itemstack = nonnulllist.get(i);
-			if (!itemstack.isEmpty()) {
+		ItemStackHandler inventory = tileEntityIn.getInventory();
+
+		for (int i = 0; i < inventory.getSlots(); ++i) {
+			ItemStack stoveStack = inventory.getStackInSlot(i);
+			if (!stoveStack.isEmpty()) {
 				matrixStackIn.push();
 
 				// Center item above the stove
@@ -56,7 +57,7 @@ public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
 				matrixStackIn.scale(0.375F, 0.375F, 0.375F);
 
 				if (tileEntityIn.getWorld() != null)
-					MC.getItemRenderer().renderItem(itemstack, ItemCameraTransforms.TransformType.FIXED, WorldRenderer.getCombinedLight(tileEntityIn.getWorld(), tileEntityIn.getPos().up()), combinedOverlayIn, matrixStackIn, bufferIn);
+					MC.getItemRenderer().renderItem(stoveStack, ItemCameraTransforms.TransformType.FIXED, WorldRenderer.getCombinedLight(tileEntityIn.getWorld(), tileEntityIn.getPos().up()), combinedOverlayIn, matrixStackIn, bufferIn);
 				matrixStackIn.pop();
 			}
 		}

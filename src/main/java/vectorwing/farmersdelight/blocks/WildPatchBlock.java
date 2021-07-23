@@ -65,8 +65,8 @@ public class WildPatchBlock extends BushBlock implements IGrowable
 	public void grow(ServerWorld worldIn, Random random, BlockPos pos, BlockState state) {
 		int wildCropLimit = 10;
 
-		for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-4, -1, -4), pos.add(4, 1, 4))) {
-			if (worldIn.getBlockState(blockpos).matchesBlock(this)) {
+		for (BlockPos nearbyPos : BlockPos.getAllInBoxMutable(pos.add(-4, -1, -4), pos.add(4, 1, 4))) {
+			if (worldIn.getBlockState(nearbyPos).matchesBlock(this)) {
 				--wildCropLimit;
 				if (wildCropLimit <= 0) {
 					return;
@@ -74,18 +74,18 @@ public class WildPatchBlock extends BushBlock implements IGrowable
 			}
 		}
 
-		BlockPos blockpos1 = pos.add(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);
+		BlockPos randomPos = pos.add(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);
 
 		for (int k = 0; k < 4; ++k) {
-			if (worldIn.isAirBlock(blockpos1) && state.isValidPosition(worldIn, blockpos1)) {
-				pos = blockpos1;
+			if (worldIn.isAirBlock(randomPos) && state.isValidPosition(worldIn, randomPos)) {
+				pos = randomPos;
 			}
 
-			blockpos1 = pos.add(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);
+			randomPos = pos.add(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);
 		}
 
-		if (worldIn.isAirBlock(blockpos1) && state.isValidPosition(worldIn, blockpos1)) {
-			worldIn.setBlockState(blockpos1, state, 2);
+		if (worldIn.isAirBlock(randomPos) && state.isValidPosition(worldIn, randomPos)) {
+			worldIn.setBlockState(randomPos, state, 2);
 		}
 	}
 }

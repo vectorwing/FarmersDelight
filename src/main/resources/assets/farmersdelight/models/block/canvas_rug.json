@@ -1,0 +1,60 @@
+{
+  "credit": "Made with Blockbench",
+  "parent": "block/thin_block",
+  "textures": {
+    "particle": "farmersdelight:block/canvas_rug",
+    "body": "farmersdelight:block/canvas_rug",
+    "extrudes": "farmersdelight:block/canvas_rug_extrudes"
+  },
+  "elements": [
+    {
+      "name": "canvas",
+      "from": [0, 0, 0],
+      "to": [16, 1, 16],
+      "faces": {
+        "north": {"uv": [0, 1, 16, 2], "texture": "#body"},
+        "east": {"uv": [0, 1, 16, 2], "texture": "#body"},
+        "south": {"uv": [0, 1, 16, 2], "texture": "#body"},
+        "west": {"uv": [0, 1, 16, 2], "texture": "#body"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#body"},
+        "down": {"uv": [0, 16, 16, 0], "texture": "#body"}
+      }
+    },
+    {
+      "name": "extrude north",
+      "from": [0, 1, -8],
+      "to": [16, 1, 0],
+      "faces": {
+        "up": {"uv": [0, 0, 16, 8], "rotation": 180, "texture": "#extrudes", "cullface": "north"},
+        "down": {"uv": [0, 8, 16, 0], "rotation": 180, "texture": "#extrudes", "cullface": "north"}
+      }
+    },
+    {
+      "name": "extrude east",
+      "from": [16, 1, 0],
+      "to": [24, 1, 16],
+      "faces": {
+        "up": {"uv": [0, 8, 16, 16], "rotation": 270, "texture": "#extrudes", "cullface": "east"},
+        "down": {"uv": [0, 0, 16, 8], "rotation": 270, "texture": "#extrudes", "cullface": "east"}
+      }
+    },
+    {
+      "name": "extrude south",
+      "from": [0, 1, 16],
+      "to": [16, 1, 24],
+      "faces": {
+        "up": {"uv": [0, 8, 16, 16], "texture": "#extrudes", "cullface": "south"},
+        "down": {"uv": [0, 16, 16, 8], "texture": "#extrudes", "cullface": "south"}
+      }
+    },
+    {
+      "name": "extrude west",
+      "from": [-8, 1, 0],
+      "to": [0, 1, 16],
+      "faces": {
+        "up": {"uv": [0, 0, 16, 8], "rotation": 90, "texture": "#extrudes", "cullface": "west"},
+        "down": {"uv": [0, 8, 16, 16], "rotation": 90, "texture": "#extrudes", "cullface": "west"}
+      }
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 {
-	"parent": "farmersdelight:block/pie_slice1",
-	"textures": {
-		"bottom": "farmersdelight:block/pie_bottom",
-		"inner": "farmersdelight:block/apple_pie_inner",
-		"side": "farmersdelight:block/pie_side",
-		"top": "farmersdelight:block/apple_pie_top"
-	}
+  "parent": "farmersdelight:block/pie_slice1",
+  "textures": {
+    "bottom": "farmersdelight:block/pie_bottom",
+    "inner": "farmersdelight:block/apple_pie_inner",
+    "side": "farmersdelight:block/pie_side",
+    "top": "farmersdelight:block/apple_pie_top"
+  }
 }

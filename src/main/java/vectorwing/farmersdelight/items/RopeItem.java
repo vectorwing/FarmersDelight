@@ -20,10 +20,10 @@ public class RopeItem extends FuelBlockItem
 	public BlockItemUseContext getBlockItemUseContext(BlockItemUseContext context) {
 		BlockPos blockpos = context.getPos();
 		World world = context.getWorld();
-		BlockState blockstate = world.getBlockState(blockpos);
+		BlockState state = world.getBlockState(blockpos);
 		Block block = this.getBlock();
 
-		if (blockstate.getBlock() != block) {
+		if (state.getBlock() != block) {
 			return context;
 		} else {
 			Direction direction;
@@ -37,9 +37,9 @@ public class RopeItem extends FuelBlockItem
 			BlockPos.Mutable blockpos$mutable = (new BlockPos.Mutable(blockpos.getX(), blockpos.getY(), blockpos.getZ())).move(direction);
 
 			while (i < 256) {
-				blockstate = world.getBlockState(blockpos$mutable);
-				if (blockstate.getBlock() != this.getBlock()) {
-					if (blockstate.isReplaceable(context)) {
+				state = world.getBlockState(blockpos$mutable);
+				if (state.getBlock() != this.getBlock()) {
+					if (state.isReplaceable(context)) {
 						return BlockItemUseContext.func_221536_a(context, blockpos$mutable, direction);
 					}
 					break;

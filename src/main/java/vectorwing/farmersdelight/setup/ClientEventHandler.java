@@ -19,6 +19,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.client.gui.NourishedHungerOverlay;
 import vectorwing.farmersdelight.client.particles.StarParticle;
+import vectorwing.farmersdelight.client.particles.SteamParticle;
 import vectorwing.farmersdelight.client.tileentity.renderer.CanvasSignTileEntityRenderer;
 import vectorwing.farmersdelight.client.tileentity.renderer.CuttingBoardTileEntityRenderer;
 import vectorwing.farmersdelight.client.tileentity.renderer.SkilletTileEntityRenderer;
@@ -72,6 +73,7 @@ public class ClientEventHandler
 		RenderTypeLookup.setRenderLayer(ModBlocks.BASKET.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.ROPE.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.SAFETY_NET.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.CANVAS_RUG.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.FULL_TATAMI_MAT.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.ROAST_CHICKEN_BLOCK.get(), RenderType.getCutout());
 
@@ -91,6 +93,7 @@ public class ClientEventHandler
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void registerParticles(ParticleFactoryRegisterEvent event) {
-		Minecraft.getInstance().particles.registerFactory(ModParticleTypes.STAR_PARTICLE.get(), StarParticle.Factory::new);
+		Minecraft.getInstance().particles.registerFactory(ModParticleTypes.STAR.get(), StarParticle.Factory::new);
+		Minecraft.getInstance().particles.registerFactory(ModParticleTypes.STEAM.get(), SteamParticle.Factory::new);
 	}
 }

@@ -86,13 +86,13 @@ public class FeastBlock extends Block
 		}
 
 		ItemStack serving = this.getServingItem();
-		ItemStack heldItem = player.getHeldItem(handIn);
+		ItemStack heldStack = player.getHeldItem(handIn);
 
 		if (servings > 0) {
-			if (heldItem.isItemEqual(serving.getContainerItem())) {
+			if (heldStack.isItemEqual(serving.getContainerItem())) {
 				worldIn.setBlockState(pos, state.with(SERVINGS, servings - 1), 3);
 				if (!player.abilities.isCreativeMode) {
-					heldItem.shrink(1);
+					heldStack.shrink(1);
 				}
 				if (!player.inventory.addItemStackToInventory(serving)) {
 					player.dropItem(serving, false);

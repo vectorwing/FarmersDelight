@@ -86,8 +86,8 @@ public class SafetyNetBlock extends Block implements IWaterLoggable
 	private void bounceEntity(Entity entityIn) {
 		Vector3d vec3d = entityIn.getMotion();
 		if (vec3d.y < 0.0D) {
-			double d0 = entityIn instanceof LivingEntity ? 0.6D : 0.8D;
-			entityIn.setMotion(vec3d.x, -vec3d.y * d0, vec3d.z);
+			double entityWeightOffset = entityIn instanceof LivingEntity ? 0.6D : 0.8D;
+			entityIn.setMotion(vec3d.x, -vec3d.y * entityWeightOffset, vec3d.z);
 		}
 	}
 }

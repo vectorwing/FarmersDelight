@@ -232,7 +232,7 @@ public class CommonEventHandler
 
 		// Adds 3:00 of Jump Boost II when eating Rabbit Stew
 		if (Configuration.RABBIT_STEW_JUMP_BOOST.get() && food.equals(Items.RABBIT_STEW)) {
-			entity.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 3600, 1));
+			entity.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 100, 1));
 		}
 
 		// Adds 5:00 of Comfort when eating foods inside the tag farmersdelight:comfort_foods

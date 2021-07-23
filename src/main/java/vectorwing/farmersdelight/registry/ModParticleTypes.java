@@ -11,6 +11,8 @@ public class ModParticleTypes
 {
 	public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, FarmersDelight.MODID);
 
-	public static final RegistryObject<BasicParticleType> STAR_PARTICLE = PARTICLE_TYPES.register("star",
+	public static final RegistryObject<BasicParticleType> STAR = PARTICLE_TYPES.register("star",
+			() -> new BasicParticleType(true));
+	public static final RegistryObject<BasicParticleType> STEAM = PARTICLE_TYPES.register("steam",
 			() -> new BasicParticleType(true));
 }

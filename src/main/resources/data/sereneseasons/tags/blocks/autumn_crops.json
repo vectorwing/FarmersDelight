@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "farmersdelight:cabbages",
+    "farmersdelight:onions",
+    "farmersdelight:rice_crop",
+    "farmersdelight:rice_upper_crop"
+  ]
+}

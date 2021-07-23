@@ -52,9 +52,9 @@ public class PantryBlock extends ContainerBlock
 	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
-			TileEntity tile = worldIn.getTileEntity(pos);
-			if (tile instanceof IInventory) {
-				InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory) tile);
+			TileEntity tileEntity = worldIn.getTileEntity(pos);
+			if (tileEntity instanceof IInventory) {
+				InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory) tileEntity);
 				worldIn.updateComparatorOutputLevel(pos, this);
 			}
 			super.onReplaced(state, worldIn, pos, newState, isMoving);
@@ -63,9 +63,9 @@ public class PantryBlock extends ContainerBlock
 
 	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-		TileEntity tile = worldIn.getTileEntity(pos);
-		if (tile instanceof PantryTileEntity) {
-			((PantryTileEntity) tile).pantryTick();
+		TileEntity tileEntity = worldIn.getTileEntity(pos);
+		if (tileEntity instanceof PantryTileEntity) {
+			((PantryTileEntity) tileEntity).tick();
 		}
 	}
 
@@ -77,9 +77,9 @@ public class PantryBlock extends ContainerBlock
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		if (stack.hasDisplayName()) {
-			TileEntity tile = worldIn.getTileEntity(pos);
-			if (tile instanceof PantryTileEntity) {
-				((PantryTileEntity) tile).setCustomName(stack.getDisplayName());
+			TileEntity tileEntity = worldIn.getTileEntity(pos);
+			if (tileEntity instanceof PantryTileEntity) {
+				((PantryTileEntity) tileEntity).setCustomName(stack.getDisplayName());
 			}
 		}
 	}

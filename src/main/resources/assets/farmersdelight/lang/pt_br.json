@@ -13,6 +13,7 @@
   "block.farmersdelight.warped_pantry": "Despensa distorcida",
   "block.farmersdelight.rope": "Corda",
   "block.farmersdelight.safety_net": "Rede de segurança",
+  "block.farmersdelight.canvas_rug": "Tapete de lona",
   "block.farmersdelight.tatami": "Bloco de tatame",
   "block.farmersdelight.full_tatami_mat": "Esteira de tatame",
   "block.farmersdelight.half_tatami_mat": "Meia esteira de tatame",
@@ -177,7 +178,9 @@
   "itemGroup.farmersdelight": "Farmer's Delight",
 
   "farmersdelight.container.cooking_pot": "Panela",
-  "farmersdelight.container.cooking_pot.served_on": "Servido em: ",
+  "farmersdelight.container.cooking_pot.served_on": "Servido em: %s",
+  "farmersdelight.container.cooking_pot.not_heated": "Precisa de calor por baixo",
+  "farmersdelight.container.cooking_pot.heated": "Aquecida",
   "farmersdelight.container.basket": "Cesto",
   "farmersdelight.container.pantry": "Despensa",
 

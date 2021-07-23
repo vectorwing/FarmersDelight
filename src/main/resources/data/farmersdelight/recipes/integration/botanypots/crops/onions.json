@@ -9,7 +9,7 @@
   "seed": {
     "item": "farmersdelight:onion"
   },
-  "categories":["dirt"],
+  "categories": ["dirt"],
   "growthTicks": 1000,
   "display": {
     "block": "farmersdelight:onions",

@@ -7,6 +7,7 @@ import com.blamejared.crafttweaker.api.item.IIngredient;
 import com.blamejared.crafttweaker.api.item.IItemStack;
 import com.blamejared.crafttweaker.api.managers.IRecipeManager;
 import com.blamejared.crafttweaker.impl.actions.recipes.ActionAddRecipe;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
@@ -16,10 +17,33 @@ import org.openzen.zencode.java.ZenCodeType;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.utils.ListUtils;
 
+/**
+ * Farmer's Delight Cooking Pot recipes.
+ *
+ * @docParam this <recipetype:farmersdelight:cooking>
+ */
+@Document("mods/farmersdelight/CookingPot")
 @ZenRegister
 @ZenCodeType.Name("mods.farmersdelight.CookingPot")
 public class CookingPotRecipeManager implements IRecipeManager
 {
+    /**
+     * Add a cooking pot recipe.
+     *
+     * @param name       Name of the recipe to add
+     * @param output     Output item
+     * @param inputs     Input ingredients
+     * @param container  Container item
+     * @param experience Experience granted
+     * @param cookTime   Cooking time
+     *
+     * @docParam name "cooking_pot_test"
+     * @docParam output <item:minecraft:enchanted_golden_apple>
+     * @docParam inputs [<item:minecraft:gold_block>]
+     * @docParam container <item:minecraft:apple>
+     * @docParam experience 100
+     * @docParam cookTime 400
+     */
     @ZenCodeType.Method
     public void addRecipe(String name,
                           IItemStack output,

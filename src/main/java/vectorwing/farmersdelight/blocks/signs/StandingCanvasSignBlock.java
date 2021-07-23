@@ -39,11 +39,11 @@ public class StandingCanvasSignBlock extends StandingSignBlock implements ICanva
 
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-		TileEntity tile = worldIn.getTileEntity(pos);
+		TileEntity tileEntity = worldIn.getTileEntity(pos);
 		Block block = state.getBlock();
-		if (tile instanceof SignTileEntity && block instanceof ICanvasSign) {
+		if (tileEntity instanceof SignTileEntity && block instanceof ICanvasSign) {
 			if (((ICanvasSign) block).isDarkBackground()) {
-				((SignTileEntity) tile).setTextColor(DyeColor.WHITE);
+				((SignTileEntity) tileEntity).setTextColor(DyeColor.WHITE);
 			}
 		}
 	}
