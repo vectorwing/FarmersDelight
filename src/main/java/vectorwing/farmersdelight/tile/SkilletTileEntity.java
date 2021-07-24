@@ -36,7 +36,7 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.Random;
 
-public class SkilletTileEntity extends TileEntity implements ITickableTileEntity, IHeatable
+public class SkilletTileEntity extends TileEntity implements ITickableTileEntity, IHeatableTileEntity
 {
 	private int cookingTime;
 	private boolean isSizzling;
@@ -144,8 +144,6 @@ public class SkilletTileEntity extends TileEntity implements ITickableTileEntity
 			}
 		}
 	}
-
-	// NBT Handling
 
 	@Override
 	public void read(BlockState state, CompoundNBT compound) {

@@ -11,7 +11,7 @@ import vectorwing.farmersdelight.utils.tags.ModTags;
  * This checks for the HEAT_SOURCES and HEAT_CONDUCTORS tag to determine heat state.
  * If the heat source has a LIT state, it must be "true" in order to give heat.
  */
-public interface IHeatable
+public interface IHeatableTileEntity
 {
 	/**
 	 * Checks for heat sources below the block. If it can, it also checks for conducted heat.
