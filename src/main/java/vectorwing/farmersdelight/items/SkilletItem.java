@@ -28,7 +28,7 @@ public class SkilletItem extends BlockItem
 
 	public SkilletItem(Block blockIn, Item.Properties builderIn) {
 		super(blockIn, builderIn.defaultMaxDamage(SKILLET_TIER.getMaxUses()));
-		float attackDamage = 1.5F + SKILLET_TIER.getAttackDamage();
+		float attackDamage = 4.5F + SKILLET_TIER.getAttackDamage();
 		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", (double) attackDamage, AttributeModifier.Operation.ADDITION));
 		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", (double) -3.0F, AttributeModifier.Operation.ADDITION));
@@ -43,8 +43,7 @@ public class SkilletItem extends BlockItem
 			LivingEntity attacker = event.getEntityLiving().getAttackingEntity();
 			ItemStack tool = attacker != null ? attacker.getHeldItem(Hand.MAIN_HAND) : ItemStack.EMPTY;
 			if (tool.getItem() instanceof SkilletItem) {
-				float f = event.getOriginalStrength();
-				event.setStrength(event.getOriginalStrength() * 1.5F);
+				event.setStrength(event.getOriginalStrength() * 2.0F);
 			}
 		}
 	}
