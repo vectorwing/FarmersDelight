@@ -11,13 +11,11 @@ import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
@@ -28,6 +26,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.blocks.SkilletBlock;
 import vectorwing.farmersdelight.client.sound.SkilletSizzleTickableSound;
+import vectorwing.farmersdelight.registry.ModParticleTypes;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.TextUtils;
@@ -85,7 +84,9 @@ public class SkilletTileEntity extends TileEntity implements ITickableTileEntity
 			}
 		} else {
 			if (isHeated) {
-				this.addParticles();
+				if (hasStoredStack()) {
+					this.addSteamCookingParticles();
+				}
 				if (!isSizzling && this.hasStoredStack()) {
 					Minecraft.getInstance().getSoundHandler().play(new SkilletSizzleTickableSound(this));
 					isSizzling = true;
@@ -131,17 +132,31 @@ public class SkilletTileEntity extends TileEntity implements ITickableTileEntity
 	}
 
 	// TODO: Make proper sizzling particles for the Skillet
-	private void addParticles() {
-		World world = this.getWorld();
+	private void addSteamCookingParticles() {
 		if (world != null) {
-			BlockPos blockpos = this.getPos();
 			Random random = world.rand;
-			if (random.nextFloat() < 0.05F) {
-				double baseX = (double) blockpos.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
-				double baseY = (double) blockpos.getY() + 0.3D;
-				double baseZ = (double) blockpos.getZ() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
-				world.addParticle(ParticleTypes.EFFECT, baseX, baseY, baseZ, 0.0D, 0.0D, 0.0D);
+			if (random.nextFloat() < 0.2F) {
+				double x = (double) pos.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
+				double y = (double) pos.getY() + 0.1D;
+				double z = (double) pos.getZ() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
+				double motionY = random.nextBoolean() ? 0.015D : 0.005D;
+				world.addParticle(ModParticleTypes.STEAM.get(), x, y, z, 0.0D, motionY, 0.0D);
 			}
+		}
+	}
+
+	// TODO: Figure out how to call this when the server register an item has been added.
+	public void addSteamCloudParticles() {
+		if (world == null) return;
+		int steamParticleCount = 4 + world.rand.nextInt(8);
+		for (int i = 0; i < steamParticleCount; i++) {
+			double x = (double) pos.getX() + 0.5D + (world.rand.nextDouble() * 0.4D - 0.2D);
+			double y = (double) pos.getY() + 0.0D;
+			double z = (double) pos.getZ() + 0.5D + (world.rand.nextDouble() * 0.4D - 0.2D);
+			double motionX = world.rand.nextDouble() * 0.03D - 0.015D;
+			double motionY = world.rand.nextDouble() * 0.01D;
+			double motionZ = world.rand.nextDouble() * 0.03D - 0.015D;
+			world.addParticle(ModParticleTypes.STEAM.get(), x, y, z, motionX, motionY, motionZ);
 		}
 	}
 
