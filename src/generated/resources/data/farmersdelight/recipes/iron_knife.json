@@ -6,7 +6,7 @@
   ],
   "key": {
     "m": {
-      "item": "minecraft:iron_ingot"
+      "tag": "forge:ingots/iron"
     },
     "s": {
       "item": "minecraft:stick"
