@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CampfireCookingRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
@@ -74,7 +75,7 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 		} else {
 			if (isHeated) {
 				if (hasStoredStack()) {
-					addSteamCookingParticles();
+					addCookingParticles();
 				}
 				if (!isSizzling && hasStoredStack()) {
 					Minecraft.getInstance().getSoundHandler().play(new SkilletSizzleTickableSound(this));
@@ -116,7 +117,7 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 	}
 
 	// TODO: Make proper sizzling particles for the Skillet
-	private void addSteamCookingParticles() {
+	private void addCookingParticles() {
 		if (world != null) {
 			Random random = world.rand;
 			if (random.nextFloat() < 0.2F) {
@@ -125,6 +126,15 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 				double z = (double) pos.getZ() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
 				double motionY = random.nextBoolean() ? 0.015D : 0.005D;
 				world.addParticle(ModParticleTypes.STEAM.get(), x, y, z, 0.0D, motionY, 0.0D);
+			}
+			if (fireAspectLevel > 0 && random.nextFloat() < fireAspectLevel * 0.05F) {
+				double x = (double) pos.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
+				double y = (double) pos.getY() + 0.1D;
+				double z = (double) pos.getZ() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
+				double motionX = world.rand.nextFloat() - 0.5F;
+				double motionY = world.rand.nextFloat() * 0.5F + 0.2f;
+				double motionZ = world.rand.nextFloat() - 0.5F;
+				world.addParticle(ParticleTypes.ENCHANTED_HIT, x, y, z, motionX, motionY, motionZ);
 			}
 		}
 	}
