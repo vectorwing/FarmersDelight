@@ -11,6 +11,7 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -19,6 +20,9 @@ import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.tile.SkilletTileEntity;
+
+import javax.annotation.Nullable;
 
 public class SkilletItem extends BlockItem
 {
@@ -46,6 +50,17 @@ public class SkilletItem extends BlockItem
 				event.setStrength(event.getOriginalStrength() * 2.0F);
 			}
 		}
+	}
+
+	@Override
+	protected boolean onBlockPlaced(BlockPos pos, World worldIn, @Nullable PlayerEntity player, ItemStack stack, BlockState state) {
+		super.onBlockPlaced(pos, worldIn, player, stack, state);
+		TileEntity tileEntity = worldIn.getTileEntity(pos);
+		if (tileEntity instanceof SkilletTileEntity) {
+			((SkilletTileEntity) tileEntity).setSkilletItem(stack);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
