@@ -10,7 +10,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CampfireCookingRecipe;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -22,10 +22,8 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.tile.SkilletTileEntity;
-import vectorwing.farmersdelight.utils.TextUtils;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
 
 public class SkilletBlock extends HorizontalBlock
 {
@@ -84,6 +82,17 @@ public class SkilletBlock extends HorizontalBlock
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing());
+	}
+
+	@Override
+	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
+		ItemStack stack = super.getItem(worldIn, pos, state);
+		SkilletTileEntity skilletEntity = (SkilletTileEntity) worldIn.getTileEntity(pos);
+		CompoundNBT nbt = skilletEntity.writeSkilletItem(new CompoundNBT());
+		if (!nbt.isEmpty()) {
+			stack = ItemStack.read(nbt.getCompound("Skillet"));
+		}
+		return stack;
 	}
 
 	@Override

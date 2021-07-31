@@ -116,7 +116,6 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 				: world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, new Inventory(itemStackIn), world);
 	}
 
-	// TODO: Make proper sizzling particles for the Skillet
 	private void addCookingParticles() {
 		if (world != null) {
 			Random random = world.rand;
@@ -165,6 +164,11 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 	public CompoundNBT write(CompoundNBT compound) {
 		super.write(compound);
 		compound.put("Inventory", inventory.serializeNBT());
+		compound.put("Skillet", skilletStack.write(new CompoundNBT()));
+		return compound;
+	}
+
+	public CompoundNBT writeSkilletItem(CompoundNBT compound) {
 		compound.put("Skillet", skilletStack.write(new CompoundNBT()));
 		return compound;
 	}
