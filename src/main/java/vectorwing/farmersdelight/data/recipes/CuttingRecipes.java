@@ -125,18 +125,6 @@ public class CuttingRecipes
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DANDELION), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.YELLOW_DYE, 2)
 				.build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.PEONY), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.PINK_DYE, 2)
-				.addResult(Items.GREEN_DYE)
-				.build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.LILAC), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.MAGENTA_DYE, 2)
-				.addResult(Items.LIME_DYE)
-				.build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ROSE_BUSH), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.RED_DYE, 2)
-				.addResult(Items.GREEN_DYE)
-				.build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SUNFLOWER), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.YELLOW_DYE, 2)
-				.addResult(Items.LIME_DYE)
-				.build(consumer);
 	}
 
 	private static void salvageBricks(Consumer<IFinishedRecipe> consumer) {
