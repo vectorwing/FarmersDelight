@@ -174,7 +174,7 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 	}
 
 	public void setSkilletItem(ItemStack stack) {
-		skilletStack = stack;
+		skilletStack = stack.copy();
 		fireAspectLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.FIRE_ASPECT, stack);
 		inventoryChanged();
 	}

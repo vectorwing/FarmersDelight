@@ -65,9 +65,9 @@ public class SkilletBlock extends HorizontalBlock
 	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
-			TileEntity tile = worldIn.getTileEntity(pos);
-			if (tile instanceof SkilletTileEntity) {
-				InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), ((SkilletTileEntity) tile).getInventory().getStackInSlot(0));
+			TileEntity tileEntity = worldIn.getTileEntity(pos);
+			if (tileEntity instanceof SkilletTileEntity) {
+				InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), ((SkilletTileEntity) tileEntity).getInventory().getStackInSlot(0));
 			}
 
 			super.onReplaced(state, worldIn, pos, newState, isMoving);
