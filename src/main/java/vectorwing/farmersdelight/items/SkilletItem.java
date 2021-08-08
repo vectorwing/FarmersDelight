@@ -13,16 +13,20 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.data.BlockTags;
 import vectorwing.farmersdelight.tile.SkilletTileEntity;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.Nullable;
 
@@ -54,6 +58,16 @@ public class SkilletItem extends BlockItem
 		}
 	}
 
+	private static boolean isNearHeatSource(PlayerEntity player, IWorldReader worldIn) {
+		BlockPos pos = player.getPosition();
+		for (BlockPos nearbyPos : BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, 1, 1))) {
+			if (worldIn.getBlockState(nearbyPos).isIn(ModTags.HEAT_SOURCES)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public UseAction getUseAction(ItemStack stack) {
 		return UseAction.NONE;
@@ -72,8 +86,11 @@ public class SkilletItem extends BlockItem
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
-		playerIn.setActiveHand(handIn);
-		return ActionResult.resultConsume(itemstack);
+		if (isNearHeatSource(playerIn, worldIn)) {
+			playerIn.setActiveHand(handIn);
+			return ActionResult.resultConsume(itemstack);
+		}
+		return ActionResult.resultPass(itemstack);
 	}
 
 	@Override
