@@ -241,6 +241,7 @@
   "farmersdelight.block.cutting_board.invalid_item": "Isto não parece cortável...",
   "farmersdelight.block.cutting_board.invalid_tool": "Talvez com outra ferramenta...",
   "farmersdelight.block.skillet.invalid_item": "Isto não pode ser cozido...",
+  "farmersdelight.item.skillet.how_to_cook": "Use sua mão secundária para segurar ingredientes!",
 
   "farmersdelight.jei.cooking": "Panela",
   "farmersdelight.jei.cutting": "Tábua de corte",

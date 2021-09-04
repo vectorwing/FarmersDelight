@@ -12,7 +12,10 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.*;
+import net.minecraft.item.crafting.CampfireCookingRecipe;
+import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -24,15 +27,16 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.tile.SkilletTileEntity;
+import vectorwing.farmersdelight.utils.TextUtils;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class SkilletItem extends BlockItem
 {
 	public static final ItemTier SKILLET_TIER = ItemTier.IRON;
 	private final Multimap<Attribute, AttributeModifier> toolAttributes;
-
 
 	public SkilletItem(Block blockIn, Item.Properties builderIn) {
 		super(blockIn, builderIn.defaultMaxDamage(SKILLET_TIER.getMaxUses()));
@@ -86,21 +90,44 @@ public class SkilletItem extends BlockItem
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		ItemStack itemstack = playerIn.getHeldItem(handIn);
+		ItemStack heldStack = playerIn.getHeldItem(handIn);
 		if (isPlayerNearHeatSource(playerIn, worldIn)) {
-			playerIn.setActiveHand(handIn);
-			return ActionResult.resultConsume(itemstack);
+			if (getCookingRecipeForOffhandItem(playerIn).isPresent()) {
+				playerIn.setActiveHand(handIn);
+				return ActionResult.resultConsume(heldStack);
+			} else {
+				playerIn.sendStatusMessage(TextUtils.getTranslation("item.skillet.how_to_cook"), true);
+			}
 		}
-		return ActionResult.resultPass(itemstack);
+		return ActionResult.resultPass(heldStack);
 	}
 
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
 		if (entityLiving instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) entityLiving;
+			Optional<CampfireCookingRecipe> cookingRecipe = getCookingRecipeForOffhandItem(player);
+
+			cookingRecipe.ifPresent((recipe) -> {
+				ItemStack resultStack = recipe.getCraftingResult(new Inventory());
+				if (!player.inventory.addItemStackToInventory(resultStack)) {
+					player.dropItem(resultStack, false);
+				}
+				player.getHeldItem(Hand.OFF_HAND).shrink(1);
+			});
 			worldIn.playSound(null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.BLOCK_NOTE_BLOCK_BELL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 		}
 		return stack;
+	}
+
+	public static Optional<CampfireCookingRecipe> getCookingRecipeForOffhandItem(LivingEntity living) {
+		ItemStack heldStack = living.getHeldItem(Hand.OFF_HAND);
+		if (heldStack.isEmpty()) {
+			return Optional.empty();
+		}
+
+		World world = living.getEntityWorld();
+		return world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, new Inventory(heldStack), world);
 	}
 
 	@Override
