@@ -46,12 +46,16 @@ public class SkilletBlock extends HorizontalBlock
 				EquipmentSlotType heldSlot = handIn.equals(Hand.MAIN_HAND) ? EquipmentSlotType.MAINHAND : EquipmentSlotType.OFFHAND;
 				if (heldStack.isEmpty()) {
 					ItemStack extractedStack = skilletEntity.removeItem();
-					player.setItemStackToSlot(heldSlot, extractedStack);
+					if (!player.isCreative()) {
+						player.setItemStackToSlot(heldSlot, extractedStack);
+					}
 					return ActionResultType.SUCCESS;
 				} else {
 					ItemStack remainderStack = skilletEntity.addItemToCook(heldStack, player);
-					if (!remainderStack.equals(heldStack)) {
-						player.setItemStackToSlot(heldSlot, remainderStack);
+					if (remainderStack.getCount() != heldStack.getCount()) {
+						if (!player.isCreative()) {
+							player.setItemStackToSlot(heldSlot, remainderStack);
+						}
 						worldIn.playSound(null, pos, SoundEvents.BLOCK_LANTERN_PLACE, SoundCategory.BLOCKS, 0.7F, 1.0F);
 						return ActionResultType.SUCCESS;
 					}

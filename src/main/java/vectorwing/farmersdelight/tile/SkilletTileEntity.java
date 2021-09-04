@@ -191,7 +191,7 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 		Optional<CampfireCookingRecipe> recipe = findMatchingRecipe(addedStack);
 		if (recipe.isPresent()) {
 			boolean wasEmpty = getStoredStack().isEmpty();
-			ItemStack remainderStack = inventory.insertItem(0, addedStack, false);
+			ItemStack remainderStack = inventory.insertItem(0, addedStack.copy(), false);
 			if (remainderStack != addedStack) {
 				currentRecipe = recipe.get();
 				cookingTime = 0;
