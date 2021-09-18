@@ -4,12 +4,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.client.renderer.model.IBakedModel;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.client.renderer.model.RenderMaterial;
 import net.minecraft.client.renderer.texture.AtlasTexture;
-import net.minecraft.item.ItemModelsProperties;
-import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -20,14 +21,20 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.client.gui.NourishedHungerOverlay;
+import vectorwing.farmersdelight.client.item.WrappedItemModel;
 import vectorwing.farmersdelight.client.particles.StarParticle;
 import vectorwing.farmersdelight.client.particles.SteamParticle;
 import vectorwing.farmersdelight.client.tileentity.renderer.CanvasSignTileEntityRenderer;
 import vectorwing.farmersdelight.client.tileentity.renderer.CuttingBoardTileEntityRenderer;
 import vectorwing.farmersdelight.client.tileentity.renderer.SkilletTileEntityRenderer;
 import vectorwing.farmersdelight.client.tileentity.renderer.StoveTileEntityRenderer;
-import vectorwing.farmersdelight.registry.*;
+import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.registry.ModContainerTypes;
+import vectorwing.farmersdelight.registry.ModParticleTypes;
+import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.ModAtlases;
+
+import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventHandler
@@ -47,6 +54,15 @@ public class ClientEventHandler
 			return;
 		}
 		event.addSprite(EMPTY_CONTAINER_SLOT_BOWL);
+	}
+
+	@SubscribeEvent
+	public static void onModelBake(ModelBakeEvent event) {
+		Map<ResourceLocation, IBakedModel> modelRegistry = event.getModelRegistry();
+		ModelResourceLocation modelLocation = new ModelResourceLocation(new ResourceLocation(FarmersDelight.MODID, "skillet"), "inventory");
+		IBakedModel originalModel = modelRegistry.get(modelLocation);
+		WrappedItemModel<IBakedModel> newModel = new WrappedItemModel<>(originalModel);
+		modelRegistry.put(modelLocation, newModel);
 	}
 
 	public static void init(final FMLClientSetupEvent event) {
@@ -88,8 +104,6 @@ public class ClientEventHandler
 		ScreenManager.registerFactory(ModContainerTypes.COOKING_POT.get(), CookingPotScreen::new);
 
 		NourishedHungerOverlay.init();
-
-		ItemModelsProperties.registerProperty(ModItems.SKILLET.get(), new ResourceLocation("cooking"), (heldStack, world, livingEntity) -> livingEntity != null && livingEntity.isHandActive() && livingEntity.getActiveItemStack() == heldStack ? 1.0F : 0.0F);
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
