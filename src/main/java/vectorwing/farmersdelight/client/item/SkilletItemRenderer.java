@@ -10,9 +10,8 @@ import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.ItemStackTileEntityRenderer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.vector.Vector3f;
-import vectorwing.farmersdelight.registry.ModItems;
 
 public class SkilletItemRenderer extends ItemStackTileEntityRenderer
 {
@@ -23,14 +22,26 @@ public class SkilletItemRenderer extends ItemStackTileEntityRenderer
 				.getItemRenderer()
 				.getItemModelWithOverrides(stack, null, null);
 
-		Minecraft.getInstance().getItemRenderer().renderModel(mainModel, stack, combinedLight, combinedOverlay, matrixStack, ivertexbuilder);
+		CompoundNBT tag = stack.getOrCreateTag();
 
-		matrixStack.push();
-		matrixStack.translate(0.5D, 0.1D, 0.5D);
-		matrixStack.rotate(Vector3f.XP.rotationDegrees(90));
-		matrixStack.rotate(Vector3f.ZP.rotationDegrees(180));
-		matrixStack.scale(0.5F, 0.5F, 0.5F);
-		Minecraft.getInstance().getItemRenderer().renderItem(new ItemStack(Items.CHICKEN), ItemCameraTransforms.TransformType.FIXED, combinedLight, combinedOverlay, matrixStack, buffer);
-		matrixStack.pop();
+		if (tag.contains("Cooking")) {
+			matrixStack.push();
+
+			// Render skillet
+			Minecraft.getInstance().getItemRenderer().renderModel(mainModel, stack, combinedLight, combinedOverlay, matrixStack, ivertexbuilder);
+
+			// Render food item
+			matrixStack.translate(0.5D, 0.1D, 0.5D);
+			matrixStack.rotate(Vector3f.XP.rotationDegrees(90));
+			matrixStack.rotate(Vector3f.ZP.rotationDegrees(180));
+			matrixStack.scale(0.6F, 0.6F, 0.6F);
+
+			ItemStack cookingStack = ItemStack.read(tag.getCompound("Cooking"));
+			Minecraft.getInstance().getItemRenderer().renderItem(cookingStack, ItemCameraTransforms.TransformType.FIXED, combinedLight, combinedOverlay, matrixStack, buffer);
+
+			matrixStack.pop();
+		} else {
+			Minecraft.getInstance().getItemRenderer().renderModel(mainModel, stack, combinedLight, combinedOverlay, matrixStack, ivertexbuilder);
+		}
 	}
 }

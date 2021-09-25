@@ -16,6 +16,7 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.CampfireCookingRecipe;
 import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -89,45 +90,79 @@ public class SkilletItem extends BlockItem
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		ItemStack heldStack = playerIn.getHeldItem(handIn);
-		if (isPlayerNearHeatSource(playerIn, worldIn)) {
-			if (getCookingRecipeForOffhandItem(playerIn).isPresent()) {
-				playerIn.setActiveHand(handIn);
-				return ActionResult.resultConsume(heldStack);
+	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
+		ItemStack skilletStack = player.getHeldItem(hand);
+		if (isPlayerNearHeatSource(player, world)) {
+			Hand otherHand = hand == Hand.MAIN_HAND ? Hand.OFF_HAND : Hand.MAIN_HAND;
+			ItemStack cookingStack = player.getHeldItem(otherHand);
+
+			if (skilletStack.getOrCreateTag().contains("Cooking")) {
+				player.setActiveHand(hand);
+				return ActionResult.resultPass(skilletStack);
+			}
+
+			if (getCookingRecipe(cookingStack, world).isPresent()) {
+				ItemStack cookingStackCopy = cookingStack.copy();
+				ItemStack cookingStackUnit = cookingStackCopy.split(1);
+				skilletStack.getOrCreateTag().put("Cooking", cookingStackUnit.serializeNBT());
+				player.setActiveHand(hand);
+				player.setHeldItem(Hand.OFF_HAND, cookingStackCopy);
+				return ActionResult.resultConsume(skilletStack);
 			} else {
-				playerIn.sendStatusMessage(TextUtils.getTranslation("item.skillet.how_to_cook"), true);
+				player.sendStatusMessage(TextUtils.getTranslation("item.skillet.how_to_cook"), true);
 			}
 		}
-		return ActionResult.resultPass(heldStack);
+		return ActionResult.resultPass(skilletStack);
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-		if (entityLiving instanceof PlayerEntity) {
-			PlayerEntity player = (PlayerEntity) entityLiving;
-			Optional<CampfireCookingRecipe> cookingRecipe = getCookingRecipeForOffhandItem(player);
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
+		if (!(entityLiving instanceof PlayerEntity)) {
+			return;
+		}
+
+		PlayerEntity player = (PlayerEntity) entityLiving;
+		CompoundNBT tag = stack.getOrCreateTag();
+
+		if (tag.contains("Cooking")) {
+			ItemStack cookingStack = ItemStack.read(tag.getCompound("Cooking"));
+			player.inventory.placeItemBackInInventory(worldIn, cookingStack);
+			tag.remove("Cooking");
+		}
+	}
+
+	@Override
+	public ItemStack onItemUseFinish(ItemStack stack, World world, LivingEntity entityLiving) {
+		if (!(entityLiving instanceof PlayerEntity)) {
+			return stack;
+		}
+
+		PlayerEntity player = (PlayerEntity) entityLiving;
+		CompoundNBT tag = stack.getOrCreateTag();
+
+		if (tag.contains("Cooking")) {
+			ItemStack cookingStack = ItemStack.read(tag.getCompound("Cooking"));
+			Optional<CampfireCookingRecipe> cookingRecipe = getCookingRecipe(cookingStack, world);
 
 			cookingRecipe.ifPresent((recipe) -> {
 				ItemStack resultStack = recipe.getCraftingResult(new Inventory());
 				if (!player.inventory.addItemStackToInventory(resultStack)) {
 					player.dropItem(resultStack, false);
 				}
-				player.getHeldItem(Hand.OFF_HAND).shrink(1);
 			});
-			worldIn.playSound(null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.BLOCK_NOTE_BLOCK_BELL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+			tag.remove("Cooking");
+			world.playSound(null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.BLOCK_NOTE_BLOCK_BELL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 		}
+
 		return stack;
+
 	}
 
-	public static Optional<CampfireCookingRecipe> getCookingRecipeForOffhandItem(LivingEntity living) {
-		ItemStack heldStack = living.getHeldItem(Hand.OFF_HAND);
-		if (heldStack.isEmpty()) {
+	public static Optional<CampfireCookingRecipe> getCookingRecipe(ItemStack stack, World world) {
+		if (stack.isEmpty()) {
 			return Optional.empty();
 		}
-
-		World world = living.getEntityWorld();
-		return world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, new Inventory(heldStack), world);
+		return world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, new Inventory(stack), world);
 	}
 
 	@Override
