@@ -106,7 +106,7 @@ public class SkilletItem extends BlockItem
 				ItemStack cookingStackUnit = cookingStackCopy.split(1);
 				skilletStack.getOrCreateTag().put("Cooking", cookingStackUnit.serializeNBT());
 				player.setActiveHand(hand);
-				player.setHeldItem(Hand.OFF_HAND, cookingStackCopy);
+				player.setHeldItem(otherHand, cookingStackCopy);
 				return ActionResult.resultConsume(skilletStack);
 			} else {
 				player.sendStatusMessage(TextUtils.getTranslation("item.skillet.how_to_cook"), true);
