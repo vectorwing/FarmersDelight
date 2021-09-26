@@ -95,7 +95,7 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 
 	@Override
 	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
-		return state.get(COLONY_AGE) < 3;
+		return false;
 	}
 
 	public int getMaxAge() {
