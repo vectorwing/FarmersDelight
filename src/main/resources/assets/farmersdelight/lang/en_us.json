@@ -235,6 +235,8 @@
   "farmersdelight.subtitles.cooking_pot.boil": "Cooking Pot boils",
   "farmersdelight.subtitles.cutting_board.knife_cut": "Knife cuts",
   "farmersdelight.subtitles.stove.crackle": "Stove crackles",
+  "farmersdelight.subtitles.skillet.sizzle": "Skillet sizzles",
+  "farmersdelight.subtitles.skillet.add_food": "Skillet hisses",
   "farmersdelight.subtitles.tomato.pick": "Tomatoes pop",
 
   "farmersdelight.block.feast.use_container": "You need a %s to eat this.",

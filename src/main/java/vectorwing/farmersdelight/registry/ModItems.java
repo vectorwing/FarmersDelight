@@ -5,7 +5,6 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.client.item.SkilletItemRenderer;
 import vectorwing.farmersdelight.items.Foods;
 import vectorwing.farmersdelight.items.*;
 import vectorwing.farmersdelight.items.drinks.DrinkItem;
@@ -28,7 +27,7 @@ public class ModItems
 	public static final RegistryObject<Item> BASKET = ITEMS.register("basket",
 			() -> new FuelBlockItem(ModBlocks.BASKET.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP), 300));
 	public static final RegistryObject<Item> SKILLET = ITEMS.register("skillet",
-			() -> new SkilletItem(ModBlocks.SKILLET.get(), new Item.Properties().maxStackSize(1).setISTER(() -> SkilletItemRenderer::new).group(FarmersDelight.ITEM_GROUP)));
+			() -> new SkilletItem(ModBlocks.SKILLET.get(), new Item.Properties().maxStackSize(1).group(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> CARROT_CRATE = ITEMS.register("carrot_crate",
 			() -> new BlockItem(ModBlocks.CARROT_CRATE.get(), new Item.Properties().group(FarmersDelight.ITEM_GROUP)));

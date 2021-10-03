@@ -3,6 +3,7 @@
   "block.farmersdelight.cooking_pot": "Pot o' Grub",
   "block.farmersdelight.basket": "Basket",
   "block.farmersdelight.cutting_board": "Choppin' Block",
+  "block.farmersdelight.skillet": "Skillet",
   "block.farmersdelight.oak_pantry": "Cabinet o' Oak",
   "block.farmersdelight.birch_pantry": "Cabinet o' Birch",
   "block.farmersdelight.spruce_pantry": "Cabinet o' Spruce",
@@ -234,6 +235,8 @@
   "farmersdelight.subtitles.cooking_pot.boil": "Pot o' Grub boils",
   "farmersdelight.subtitles.cutting_board.knife_cut": "Dagger slashes",
   "farmersdelight.subtitles.stove.crackle": "Grille crackles",
+  "farmersdelight.subtitles.skillet.sizzle": "Skillet sizzles",
+  "farmersdelight.subtitles.skillet.add_food": "Skillet hisses",
   "farmersdelight.subtitles.tomato.pick": "Tomatoes pop",
 
   "farmersdelight.block.feast.use_container": "Oi! Ye need a %s ta eat this grub!",

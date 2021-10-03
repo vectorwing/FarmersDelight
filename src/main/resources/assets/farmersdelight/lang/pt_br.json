@@ -3,6 +3,7 @@
   "block.farmersdelight.cooking_pot": "Panela",
   "block.farmersdelight.basket": "Cesto",
   "block.farmersdelight.cutting_board": "Tábua de corte",
+  "block.farmersdelight.skillet": "Frigideira",
   "block.farmersdelight.oak_pantry": "Despensa de carvalho",
   "block.farmersdelight.birch_pantry": "Despensa de bétula",
   "block.farmersdelight.spruce_pantry": "Despensa de pinheiro",
@@ -234,6 +235,8 @@
   "farmersdelight.subtitles.cooking_pot.boil": "Panela fervendo",
   "farmersdelight.subtitles.cutting_board.knife_cut": "Faca cortando",
   "farmersdelight.subtitles.stove.crackle": "Fogão crepitando",
+  "farmersdelight.subtitles.skillet.sizzle": "Frigideira fritando",
+  "farmersdelight.subtitles.skillet.add_food": "Frigideira chiando",
   "farmersdelight.subtitles.tomato.pick": "Tomates colhidos",
 
   "farmersdelight.block.feast.use_container": "Você precisa de uma %s para comer isto.",
