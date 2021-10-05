@@ -772,6 +772,14 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ForgeTags.CROPS_TOMATO)
 				.addCriterion("has_mutton", InventoryChangeTrigger.Instance.forItems(Items.COOKED_MUTTON))
 				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.BACON_AND_EGGS.get())
+				.addIngredient(ModItems.COOKED_BACON.get())
+				.addIngredient(ModItems.COOKED_BACON.get())
+				.addIngredient(Items.BOWL)
+				.addIngredient(ForgeTags.COOKED_EGGS)
+				.addIngredient(ForgeTags.COOKED_EGGS)
+				.addCriterion("has_bacon", InventoryChangeTrigger.Instance.forItems(ModItems.COOKED_BACON.get()))
+				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ROAST_CHICKEN_BLOCK.get())
 				.addIngredient(ForgeTags.CROPS_ONION)
 				.addIngredient(ForgeTags.EGGS)

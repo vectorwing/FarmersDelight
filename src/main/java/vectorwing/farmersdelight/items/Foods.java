@@ -139,6 +139,9 @@ public class Foods
 			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), 2400, 0), 1.0F).build();
 
 	// Plated Foods
+	public static final Food BACON_AND_EGGS = (new Food.Builder())
+			.hunger(9).saturation(0.6f)
+			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 1200, 0), 1.0F).build();
 	public static final Food STEAK_AND_POTATOES = (new Food.Builder())
 			.hunger(12).saturation(0.8f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 2400, 0), 1.0F).build();
@@ -164,6 +167,7 @@ public class Foods
 			.hunger(12).saturation(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 4800, 0), 1.0F).build();
 
+	// Feast Portions
 	public static final Food ROAST_CHICKEN = (new Food.Builder())
 			.hunger(14).saturation(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), 4800, 0), 1.0F).build();
