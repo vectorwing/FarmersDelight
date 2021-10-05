@@ -1,12 +1,5 @@
 {
   "credit": "Made with Blockbench",
-  "textures": {
-    "particle": "#top",
-    "bottom": "#bottom",
-    "inner": "#inner",
-    "side": "#side",
-    "top": "#top"
-  },
   "elements": [
     {
       "from": [2, 0, 8],
