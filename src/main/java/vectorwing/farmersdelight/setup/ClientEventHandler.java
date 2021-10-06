@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.client.renderer.model.RenderMaterial;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -18,12 +19,15 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.client.gui.NourishedHungerOverlay;
 import vectorwing.farmersdelight.client.particles.StarParticle;
+import vectorwing.farmersdelight.client.particles.SteamParticle;
+import vectorwing.farmersdelight.client.tileentity.renderer.CanvasSignTileEntityRenderer;
 import vectorwing.farmersdelight.client.tileentity.renderer.CuttingBoardTileEntityRenderer;
 import vectorwing.farmersdelight.client.tileentity.renderer.StoveTileEntityRenderer;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModContainerTypes;
 import vectorwing.farmersdelight.registry.ModParticleTypes;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+import vectorwing.farmersdelight.utils.ModAtlases;
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventHandler
@@ -33,6 +37,12 @@ public class ClientEventHandler
 	@SubscribeEvent
 	public static void onStitchEvent(TextureStitchEvent.Pre event) {
 		ResourceLocation stitching = event.getMap().getTextureLocation();
+		if (stitching.equals(new ResourceLocation("textures/atlas/signs.png"))) {
+			event.addSprite(ModAtlases.BLANK_CANVAS_SIGN_MATERIAL.getTextureLocation());
+			for (RenderMaterial material : ModAtlases.DYED_CANVAS_SIGN_MATERIALS.values()) {
+				event.addSprite(material.getTextureLocation());
+			}
+		}
 		if (!stitching.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)) {
 			return;
 		}
@@ -62,6 +72,7 @@ public class ClientEventHandler
 		RenderTypeLookup.setRenderLayer(ModBlocks.BASKET.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.ROPE.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.SAFETY_NET.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.CANVAS_RUG.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.FULL_TATAMI_MAT.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.ROAST_CHICKEN_BLOCK.get(), RenderType.getCutout());
 
@@ -69,6 +80,8 @@ public class ClientEventHandler
 				StoveTileEntityRenderer::new);
 		ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.CUTTING_BOARD_TILE.get(),
 				CuttingBoardTileEntityRenderer::new);
+		ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.CANVAS_SIGN_TILE.get(),
+				CanvasSignTileEntityRenderer::new);
 
 		ScreenManager.registerFactory(ModContainerTypes.COOKING_POT.get(), CookingPotScreen::new);
 
@@ -77,6 +90,7 @@ public class ClientEventHandler
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void registerParticles(ParticleFactoryRegisterEvent event) {
-		Minecraft.getInstance().particles.registerFactory(ModParticleTypes.STAR_PARTICLE.get(), StarParticle.Factory::new);
+		Minecraft.getInstance().particles.registerFactory(ModParticleTypes.STAR.get(), StarParticle.Factory::new);
+		Minecraft.getInstance().particles.registerFactory(ModParticleTypes.STEAM.get(), SteamParticle.Factory::new);
 	}
 }

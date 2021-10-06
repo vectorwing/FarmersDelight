@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "canvas_sign",
+  "ingredients": [
+    {
+      "tag": "farmersdelight:canvas_signs"
+    },
+    {
+      "tag": "forge:dyes/lime"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:lime_canvas_sign"
+  }
+}

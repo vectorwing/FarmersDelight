@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.data;
 
-import com.google.common.collect.Sets;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.block.Blocks;
@@ -9,6 +8,7 @@ import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.Tags;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.data.recipes.CookingRecipes;
 import vectorwing.farmersdelight.data.recipes.CuttingRecipes;
@@ -16,6 +16,7 @@ import vectorwing.farmersdelight.data.recipes.SmeltingRecipes;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.tags.ForgeTags;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Consumer;
@@ -32,6 +33,7 @@ public class Recipes extends RecipeProvider
 	protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
 		recipesVanillaAlternatives(consumer);
 		recipesBlocks(consumer);
+		recipesCanvasSigns(consumer);
 		recipesTools(consumer);
 		recipesMaterials(consumer);
 		recipesFoodstuffs(consumer);
@@ -121,6 +123,114 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ModItems.TREE_BARK.get())
 				.addCriterion("has_tree_bark", InventoryChangeTrigger.Instance.forItems(ModItems.TREE_BARK.get()))
 				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "paper_from_tree_bark"));
+	}
+
+	private void recipesCanvasSigns(Consumer<IFinishedRecipe> consumer) {
+		ShapedRecipeBuilder.shapedRecipe(ModItems.CANVAS_SIGN.get(), 3)
+				.patternLine("w#w")
+				.patternLine("w#w")
+				.patternLine(" / ")
+				.key('w', ItemTags.PLANKS)
+				.key('#', ModItems.CANVAS.get())
+				.key('/', Items.STICK)
+				.addCriterion("has_canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.WHITE_CANVAS_SIGN.get(), 1)
+				.addIngredient(ModTags.CANVAS_SIGNS)
+				.addIngredient(Tags.Items.DYES_WHITE)
+				.addCriterion("has_canvas_sign", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_SIGN.get()))
+				.setGroup("canvas_sign")
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ORANGE_CANVAS_SIGN.get(), 1)
+				.addIngredient(ModTags.CANVAS_SIGNS)
+				.addIngredient(Tags.Items.DYES_ORANGE)
+				.addCriterion("has_canvas_sign", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_SIGN.get()))
+				.setGroup("canvas_sign")
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.MAGENTA_CANVAS_SIGN.get(), 1)
+				.addIngredient(ModTags.CANVAS_SIGNS)
+				.addIngredient(Tags.Items.DYES_MAGENTA)
+				.addCriterion("has_canvas_sign", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_SIGN.get()))
+				.setGroup("canvas_sign")
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.LIGHT_BLUE_CANVAS_SIGN.get(), 1)
+				.addIngredient(ModTags.CANVAS_SIGNS)
+				.addIngredient(Tags.Items.DYES_LIGHT_BLUE)
+				.addCriterion("has_canvas_sign", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_SIGN.get()))
+				.setGroup("canvas_sign")
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.YELLOW_CANVAS_SIGN.get(), 1)
+				.addIngredient(ModTags.CANVAS_SIGNS)
+				.addIngredient(Tags.Items.DYES_YELLOW)
+				.addCriterion("has_canvas_sign", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_SIGN.get()))
+				.setGroup("canvas_sign")
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.LIME_CANVAS_SIGN.get(), 1)
+				.addIngredient(ModTags.CANVAS_SIGNS)
+				.addIngredient(Tags.Items.DYES_LIME)
+				.addCriterion("has_canvas_sign", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_SIGN.get()))
+				.setGroup("canvas_sign")
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.PINK_CANVAS_SIGN.get(), 1)
+				.addIngredient(ModTags.CANVAS_SIGNS)
+				.addIngredient(Tags.Items.DYES_PINK)
+				.addCriterion("has_canvas_sign", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_SIGN.get()))
+				.setGroup("canvas_sign")
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.GRAY_CANVAS_SIGN.get(), 1)
+				.addIngredient(ModTags.CANVAS_SIGNS)
+				.addIngredient(Tags.Items.DYES_GRAY)
+				.addCriterion("has_canvas_sign", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_SIGN.get()))
+				.setGroup("canvas_sign")
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.LIGHT_GRAY_CANVAS_SIGN.get(), 1)
+				.addIngredient(ModTags.CANVAS_SIGNS)
+				.addIngredient(Tags.Items.DYES_LIGHT_GRAY)
+				.addCriterion("has_canvas_sign", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_SIGN.get()))
+				.setGroup("canvas_sign")
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CYAN_CANVAS_SIGN.get(), 1)
+				.addIngredient(ModTags.CANVAS_SIGNS)
+				.addIngredient(Tags.Items.DYES_CYAN)
+				.addCriterion("has_canvas_sign", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_SIGN.get()))
+				.setGroup("canvas_sign")
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.PURPLE_CANVAS_SIGN.get(), 1)
+				.addIngredient(ModTags.CANVAS_SIGNS)
+				.addIngredient(Tags.Items.DYES_PURPLE)
+				.addCriterion("has_canvas_sign", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_SIGN.get()))
+				.setGroup("canvas_sign")
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.BLUE_CANVAS_SIGN.get(), 1)
+				.addIngredient(ModTags.CANVAS_SIGNS)
+				.addIngredient(Tags.Items.DYES_BLUE)
+				.addCriterion("has_canvas_sign", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_SIGN.get()))
+				.setGroup("canvas_sign")
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.BROWN_CANVAS_SIGN.get(), 1)
+				.addIngredient(ModTags.CANVAS_SIGNS)
+				.addIngredient(Tags.Items.DYES_BROWN)
+				.addCriterion("has_canvas_sign", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_SIGN.get()))
+				.setGroup("canvas_sign")
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.GREEN_CANVAS_SIGN.get(), 1)
+				.addIngredient(ModTags.CANVAS_SIGNS)
+				.addIngredient(Tags.Items.DYES_GREEN)
+				.addCriterion("has_canvas_sign", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_SIGN.get()))
+				.setGroup("canvas_sign")
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RED_CANVAS_SIGN.get(), 1)
+				.addIngredient(ModTags.CANVAS_SIGNS)
+				.addIngredient(Tags.Items.DYES_RED)
+				.addCriterion("has_canvas_sign", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_SIGN.get()))
+				.setGroup("canvas_sign")
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.BLACK_CANVAS_SIGN.get(), 1)
+				.addIngredient(ModTags.CANVAS_SIGNS)
+				.addIngredient(Tags.Items.DYES_BLACK)
+				.addCriterion("has_canvas_sign", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_SIGN.get()))
+				.setGroup("canvas_sign")
+				.build(consumer);
 	}
 
 	private void recipesBlocks(Consumer<IFinishedRecipe> consumer) {
@@ -277,6 +387,15 @@ public class Recipes extends RecipeProvider
 				.key('#', ModItems.STRAW.get())
 				.addCriterion("has_straw", InventoryChangeTrigger.Instance.forItems(ModItems.STRAW.get()))
 				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CANVAS_RUG.get(), 2)
+				.addIngredient(ModItems.CANVAS.get())
+				.addCriterion("has_canvas", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS.get()))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.CANVAS.get(), 1)
+				.addIngredient(ModItems.CANVAS_RUG.get())
+				.addIngredient(ModItems.CANVAS_RUG.get())
+				.addCriterion("has_canvas_rug", InventoryChangeTrigger.Instance.forItems(ModItems.CANVAS_RUG.get()))
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "canvas_from_canvas_rug"));
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ORGANIC_COMPOST.get(), 1)
 				.addIngredient(Items.DIRT)
 				.addIngredient(Items.ROTTEN_FLESH)
@@ -428,6 +547,15 @@ public class Recipes extends RecipeProvider
 				.addIngredient(Items.GLASS_BOTTLE)
 				.addIngredient(Items.GLASS_BOTTLE)
 				.addCriterion("has_milk_bucket", InventoryChangeTrigger.Instance.forItems(Items.MILK_BUCKET))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.MELON_JUICE.get(), 1)
+				.addIngredient(Items.MELON_SLICE)
+				.addIngredient(Items.MELON_SLICE)
+				.addIngredient(Items.SUGAR)
+				.addIngredient(Items.MELON_SLICE)
+				.addIngredient(Items.MELON_SLICE)
+				.addIngredient(Items.GLASS_BOTTLE)
+				.addCriterion("has_melon_slice", InventoryChangeTrigger.Instance.forItems(Items.MELON_SLICE))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.RAW_PASTA.get(), 2)
 				.addIngredient(Items.WATER_BUCKET)
@@ -643,6 +771,14 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ModItems.COOKED_RICE.get())
 				.addIngredient(ForgeTags.CROPS_TOMATO)
 				.addCriterion("has_mutton", InventoryChangeTrigger.Instance.forItems(Items.COOKED_MUTTON))
+				.build(consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(ModItems.BACON_AND_EGGS.get())
+				.addIngredient(ModItems.COOKED_BACON.get())
+				.addIngredient(ModItems.COOKED_BACON.get())
+				.addIngredient(Items.BOWL)
+				.addIngredient(ForgeTags.COOKED_EGGS)
+				.addIngredient(ForgeTags.COOKED_EGGS)
+				.addCriterion("has_bacon", InventoryChangeTrigger.Instance.forItems(ModItems.COOKED_BACON.get()))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.ROAST_CHICKEN_BLOCK.get())
 				.addIngredient(ForgeTags.CROPS_ONION)

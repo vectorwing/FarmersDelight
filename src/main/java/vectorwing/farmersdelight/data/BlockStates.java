@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.data;
 
+import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DoublePlantBlock;
@@ -26,6 +27,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Function;
 
 public class BlockStates extends BlockStateProvider
@@ -56,6 +58,46 @@ public class BlockStates extends BlockStateProvider
 	protected void registerStatesAndModels() {
 		this.simpleBlock(ModBlocks.RICH_SOIL.get(), cubeRandomRotation(ModBlocks.RICH_SOIL.get(), ""));
 		this.simpleBlock(ModBlocks.SAFETY_NET.get(), existingModel(ModBlocks.SAFETY_NET.get()));
+
+		Set<Block> canvasSigns = Sets.newHashSet(
+				ModBlocks.CANVAS_SIGN.get(),
+				ModBlocks.WHITE_CANVAS_SIGN.get(),
+				ModBlocks.ORANGE_CANVAS_SIGN.get(),
+				ModBlocks.MAGENTA_CANVAS_SIGN.get(),
+				ModBlocks.LIGHT_BLUE_CANVAS_SIGN.get(),
+				ModBlocks.YELLOW_CANVAS_SIGN.get(),
+				ModBlocks.LIME_CANVAS_SIGN.get(),
+				ModBlocks.PINK_CANVAS_SIGN.get(),
+				ModBlocks.GRAY_CANVAS_SIGN.get(),
+				ModBlocks.LIGHT_GRAY_CANVAS_SIGN.get(),
+				ModBlocks.CYAN_CANVAS_SIGN.get(),
+				ModBlocks.PURPLE_CANVAS_SIGN.get(),
+				ModBlocks.BLUE_CANVAS_SIGN.get(),
+				ModBlocks.BROWN_CANVAS_SIGN.get(),
+				ModBlocks.GREEN_CANVAS_SIGN.get(),
+				ModBlocks.RED_CANVAS_SIGN.get(),
+				ModBlocks.BLACK_CANVAS_SIGN.get(),
+				ModBlocks.CANVAS_WALL_SIGN.get(),
+				ModBlocks.WHITE_CANVAS_WALL_SIGN.get(),
+				ModBlocks.ORANGE_CANVAS_WALL_SIGN.get(),
+				ModBlocks.MAGENTA_CANVAS_WALL_SIGN.get(),
+				ModBlocks.LIGHT_BLUE_CANVAS_WALL_SIGN.get(),
+				ModBlocks.YELLOW_CANVAS_WALL_SIGN.get(),
+				ModBlocks.LIME_CANVAS_WALL_SIGN.get(),
+				ModBlocks.PINK_CANVAS_WALL_SIGN.get(),
+				ModBlocks.GRAY_CANVAS_WALL_SIGN.get(),
+				ModBlocks.LIGHT_GRAY_CANVAS_WALL_SIGN.get(),
+				ModBlocks.CYAN_CANVAS_WALL_SIGN.get(),
+				ModBlocks.PURPLE_CANVAS_WALL_SIGN.get(),
+				ModBlocks.BLUE_CANVAS_WALL_SIGN.get(),
+				ModBlocks.BROWN_CANVAS_WALL_SIGN.get(),
+				ModBlocks.GREEN_CANVAS_WALL_SIGN.get(),
+				ModBlocks.RED_CANVAS_WALL_SIGN.get(),
+				ModBlocks.BLACK_CANVAS_WALL_SIGN.get());
+
+		for (Block sign : canvasSigns) {
+			this.simpleBlock(sign, existingModel(ModBlocks.CANVAS_SIGN.get()));
+		}
 
 		String riceBag = blockName(ModBlocks.RICE_BAG.get());
 		this.simpleBlock(ModBlocks.RICE_BAG.get(), models().withExistingParent(riceBag, "cube")

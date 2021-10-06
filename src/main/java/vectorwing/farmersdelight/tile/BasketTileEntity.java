@@ -37,12 +37,8 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 	private NonNullList<ItemStack> basketContents = NonNullList.withSize(27, ItemStack.EMPTY);
 	private int transferCooldown = -1;
 
-	protected BasketTileEntity(TileEntityType<?> typeIn) {
-		super(typeIn);
-	}
-
 	public BasketTileEntity() {
-		this(ModTileEntityTypes.BASKET_TILE.get());
+		super(ModTileEntityTypes.BASKET_TILE.get());
 	}
 
 	public static boolean pullItems(IBasket basket, int facingIndex) {
@@ -51,7 +47,6 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 				return true;
 			}
 		}
-
 		return false;
 	}
 
@@ -121,13 +116,13 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 
 	public static boolean captureItem(IInventory inventory, ItemEntity itemEntity) {
 		boolean flag = false;
-		ItemStack itemstack = itemEntity.getItem().copy();
-		ItemStack itemstack1 = putStackInInventoryAllSlots(inventory, itemstack);
-		if (itemstack1.isEmpty()) {
+		ItemStack entityItemStack = itemEntity.getItem().copy();
+		ItemStack remainderStack = putStackInInventoryAllSlots(inventory, entityItemStack);
+		if (remainderStack.isEmpty()) {
 			flag = true;
 			itemEntity.remove();
 		} else {
-			itemEntity.setItem(itemstack1);
+			itemEntity.setItem(remainderStack);
 		}
 
 		return flag;

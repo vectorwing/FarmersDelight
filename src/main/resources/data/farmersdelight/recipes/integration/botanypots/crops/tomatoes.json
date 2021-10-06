@@ -9,7 +9,7 @@
   "seed": {
     "item": "farmersdelight:tomato_seeds"
   },
-  "categories":["dirt"],
+  "categories": ["dirt"],
   "growthTicks": 1000,
   "display": {
     "block": "farmersdelight:tomatoes",

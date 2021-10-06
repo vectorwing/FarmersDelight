@@ -9,7 +9,7 @@
   "seed": {
     "item": "farmersdelight:rice"
   },
-  "categories":["dirt"],
+  "categories": ["dirt"],
   "growthTicks": 1000,
   "display": {
     "block": "farmersdelight:rice_upper_crop",

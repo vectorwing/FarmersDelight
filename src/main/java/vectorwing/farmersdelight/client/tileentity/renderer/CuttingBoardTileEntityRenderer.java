@@ -24,25 +24,25 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 	@Override
 	public void render(CuttingBoardTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		Direction direction = tileEntityIn.getBlockState().get(CuttingBoardBlock.HORIZONTAL_FACING).getOpposite();
-		ItemStack itemStack = tileEntityIn.getStoredItem();
+		ItemStack boardStack = tileEntityIn.getStoredItem();
 
-		if (!itemStack.isEmpty()) {
+		if (!boardStack.isEmpty()) {
 			matrixStackIn.push();
 
 			ItemRenderer itemRenderer = Minecraft.getInstance()
 					.getItemRenderer();
-			boolean blockItem = itemRenderer.getItemModelWithOverrides(itemStack, tileEntityIn.getWorld(), null)
+			boolean isBlockItem = itemRenderer.getItemModelWithOverrides(boardStack, tileEntityIn.getWorld(), null)
 					.isGui3d();
 
-			if (tileEntityIn.getIsItemCarvingBoard()) {
-				renderItemCarved(matrixStackIn, direction, itemStack);
-			} else if (blockItem) {
+			if (tileEntityIn.isItemCarvingBoard()) {
+				renderItemCarved(matrixStackIn, direction, boardStack);
+			} else if (isBlockItem) {
 				renderBlock(matrixStackIn, direction);
 			} else {
 				renderItemLayingDown(matrixStackIn, direction);
 			}
 
-			Minecraft.getInstance().getItemRenderer().renderItem(itemStack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
+			Minecraft.getInstance().getItemRenderer().renderItem(boardStack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
 			matrixStackIn.pop();
 		}
 	}
@@ -79,7 +79,7 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 		matrixStackIn.translate(0.5D, 0.25D, 0.5D);
 
 		// Rotate item to face the cutting board's front side
-		float f = -direction.getHorizontalAngle();
+		float f = direction.getHorizontalAngle();
 		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f));
 
 		// Rotate item to be carved on the surface, A little less so for hoes and pickaxes.

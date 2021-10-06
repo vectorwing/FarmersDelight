@@ -67,7 +67,7 @@ public class HorseFeedItem extends Item
 						double d0 = MathUtils.RAND.nextGaussian() * 0.02D;
 						double d1 = MathUtils.RAND.nextGaussian() * 0.02D;
 						double d2 = MathUtils.RAND.nextGaussian() * 0.02D;
-						entity.world.addParticle(ModParticleTypes.STAR_PARTICLE.get(), entity.getPosXRandom(1.0D), entity.getPosYRandom() + 0.5D, entity.getPosZRandom(1.0D), d0, d1, d2);
+						entity.world.addParticle(ModParticleTypes.STAR.get(), entity.getPosXRandom(1.0D), entity.getPosYRandom() + 0.5D, entity.getPosZRandom(1.0D), d0, d1, d2);
 					}
 
 					if (!player.isCreative()) {
@@ -83,21 +83,21 @@ public class HorseFeedItem extends Item
 
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		IFormattableTextComponent whenFeeding = TextUtils.getTranslation("tooltip.horse_feed.when_feeding");
-		tooltip.add(whenFeeding.mergeStyle(TextFormatting.GRAY));
+		IFormattableTextComponent textWhenFeeding = TextUtils.getTranslation("tooltip.horse_feed.when_feeding");
+		tooltip.add(textWhenFeeding.mergeStyle(TextFormatting.GRAY));
 
-		for (EffectInstance effectinstance : EFFECTS) {
+		for (EffectInstance effectInstance : EFFECTS) {
 			IFormattableTextComponent effectDescription = new StringTextComponent(" ");
-			IFormattableTextComponent effectName = new TranslationTextComponent(effectinstance.getEffectName());
+			IFormattableTextComponent effectName = new TranslationTextComponent(effectInstance.getEffectName());
 			effectDescription.appendSibling(effectName);
-			Effect effect = effectinstance.getPotion();
+			Effect effect = effectInstance.getPotion();
 
-			if (effectinstance.getAmplifier() > 0) {
-				effectDescription.appendString(" ").appendSibling(new TranslationTextComponent("potion.potency." + effectinstance.getAmplifier()));
+			if (effectInstance.getAmplifier() > 0) {
+				effectDescription.appendString(" ").appendSibling(new TranslationTextComponent("potion.potency." + effectInstance.getAmplifier()));
 			}
 
-			if (effectinstance.getDuration() > 20) {
-				effectDescription.appendString(" (").appendString(EffectUtils.getPotionDurationString(effectinstance, 1.0F)).appendString(")");
+			if (effectInstance.getDuration() > 20) {
+				effectDescription.appendString(" (").appendString(EffectUtils.getPotionDurationString(effectInstance, 1.0F)).appendString(")");
 			}
 
 			tooltip.add(effectDescription.mergeStyle(effect.getEffectType().getColor()));

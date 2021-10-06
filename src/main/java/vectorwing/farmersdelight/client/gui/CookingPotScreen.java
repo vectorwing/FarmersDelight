@@ -56,11 +56,11 @@ public class CookingPotScreen extends ContainerScreen<CookingPotContainer>
 			if (this.hoveredSlot.slotNumber == 6) {
 				List<ITextComponent> tooltip = new ArrayList<>();
 
-				ItemStack meal = this.hoveredSlot.getStack();
-				tooltip.add(((IFormattableTextComponent) meal.getItem().getName()).mergeStyle(meal.getRarity().color));
+				ItemStack mealStack = this.hoveredSlot.getStack();
+				tooltip.add(((IFormattableTextComponent) mealStack.getItem().getName()).mergeStyle(mealStack.getRarity().color));
 
-				ItemStack containerItem = this.container.tileEntity.getContainer();
-				String container = !containerItem.isEmpty() ? containerItem.getItem().getName().getString() : "";
+				ItemStack containerStack = this.container.tileEntity.getContainer();
+				String container = !containerStack.isEmpty() ? containerStack.getItem().getName().getString() : "";
 
 				tooltip.add(TextUtils.getTranslation("container.cooking_pot.served_on", container).mergeStyle(TextFormatting.GRAY));
 

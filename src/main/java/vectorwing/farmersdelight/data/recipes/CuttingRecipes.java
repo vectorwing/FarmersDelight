@@ -20,6 +20,7 @@ public class CuttingRecipes
 		chopMeats(consumer);
 		chopPlants(consumer);
 		chopPastries(consumer);
+		chopFlowers(consumer);
 
 		// Pickaxe
 		salvageBricks(consumer);
@@ -94,6 +95,35 @@ public class CuttingRecipes
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(ModItems.SWEET_BERRY_CHEESECAKE.get()), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get(), 4)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(ModItems.CHOCOLATE_PIE.get()), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), ModItems.CHOCOLATE_PIE_SLICE.get(), 4)
+				.build(consumer);
+	}
+
+	private static void chopFlowers(Consumer<IFinishedRecipe> consumer) {
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WITHER_ROSE), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.BLACK_DYE, 2)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.CORNFLOWER), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.BLUE_DYE, 2)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.BLUE_ORCHID), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.LIGHT_BLUE_DYE, 2)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.AZURE_BLUET), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.LIGHT_GRAY_DYE, 2)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.OXEYE_DAISY), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.LIGHT_GRAY_DYE, 2)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.WHITE_TULIP), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.LIGHT_GRAY_DYE, 2)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ALLIUM), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.MAGENTA_DYE, 2)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.ORANGE_TULIP), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.ORANGE_DYE, 2)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.PINK_TULIP), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.PINK_DYE, 2)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.RED_TULIP), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.RED_DYE, 2)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.POPPY), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.RED_DYE, 2)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.LILY_OF_THE_VALLEY), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.WHITE_DYE, 2)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.DANDELION), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.YELLOW_DYE, 2)
 				.build(consumer);
 	}
 

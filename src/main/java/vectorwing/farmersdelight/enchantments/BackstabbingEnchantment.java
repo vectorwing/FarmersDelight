@@ -49,10 +49,10 @@ public class BackstabbingEnchantment extends Enchantment
 	 */
 	public static boolean isLookingBehindTarget(LivingEntity target, Vector3d attackerLocation) {
 		if (attackerLocation != null) {
-			Vector3d vec3d = target.getLook(1.0F);
-			Vector3d vec3d1 = attackerLocation.subtract(target.getPositionVec()).normalize();
-			vec3d1 = new Vector3d(vec3d1.x, 0.0D, vec3d1.z);
-			return vec3d1.dotProduct(vec3d) < -0.5D;
+			Vector3d lookingVector = target.getLook(1.0F);
+			Vector3d attackAngleVector = attackerLocation.subtract(target.getPositionVec()).normalize();
+			attackAngleVector = new Vector3d(attackAngleVector.x, 0.0D, attackAngleVector.z);
+			return attackAngleVector.dotProduct(lookingVector) < -0.5D;
 		}
 		return false;
 	}
