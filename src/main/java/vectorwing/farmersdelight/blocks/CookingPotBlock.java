@@ -56,7 +56,6 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D);
 	protected static final VoxelShape SHAPE_WITH_TRAY = VoxelShapes.or(SHAPE, Block.makeCuboidShape(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
-	protected static final VoxelShape HANGING_AREA = Block.makeCuboidShape(7.0D, 0.0D, 7.0D, 9.0D, 10.0D, 9.0D);
 
 	public CookingPotBlock() {
 		super(Properties.create(Material.IRON)
@@ -66,18 +65,23 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
+	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player,
 											 Hand handIn, BlockRayTraceResult result) {
-		if (!worldIn.isRemote) {
-			TileEntity tileEntity = worldIn.getTileEntity(pos);
+		ItemStack heldStack = player.getHeldItem(handIn);
+		if (heldStack.isEmpty() && player.isSneaking()) {
+			world.setBlockState(pos, state.with(SUPPORT, state.get(SUPPORT).equals(CookingPotSupport.HANDLE)
+					? getTrayState(world, pos) : CookingPotSupport.HANDLE));
+			world.playSound(null, pos, SoundEvents.BLOCK_LANTERN_PLACE, SoundCategory.BLOCKS, 0.7F, 1.0F);
+		} else if (!world.isRemote) {
+			TileEntity tileEntity = world.getTileEntity(pos);
 			if (tileEntity instanceof CookingPotTileEntity) {
 				CookingPotTileEntity cookingPotEntity = (CookingPotTileEntity) tileEntity;
-				ItemStack servingStack = cookingPotEntity.useHeldItemOnMeal(player.getHeldItem(handIn));
+				ItemStack servingStack = cookingPotEntity.useHeldItemOnMeal(heldStack);
 				if (servingStack != ItemStack.EMPTY) {
 					if (!player.inventory.addItemStackToInventory(servingStack)) {
 						player.dropItem(servingStack, false);
 					}
-					worldIn.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.BLOCKS, 1.0F, 1.0F);
+					world.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				} else {
 					NetworkHooks.openGui((ServerPlayerEntity) player, cookingPotEntity, pos);
 				}
@@ -107,7 +111,7 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 				.with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite())
 				.with(WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER);
 
-		if (context.getFace().equals(Direction.DOWN) && canHangFrom(world, pos.up())) {
+		if (context.getFace().equals(Direction.DOWN)) {
 			return state.with(SUPPORT, CookingPotSupport.HANDLE);
 		}
 		return state.with(SUPPORT, getTrayState(world, pos));
@@ -118,7 +122,7 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 		if (stateIn.get(WATERLOGGED)) {
 			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
 		}
-		if (facing.getAxis().equals(Direction.Axis.Y) && !canHangFrom(worldIn, currentPos.up())) {
+		if (facing.getAxis().equals(Direction.Axis.Y) && !stateIn.get(SUPPORT).equals(CookingPotSupport.HANDLE)) {
 			return stateIn.with(SUPPORT, getTrayState(worldIn, currentPos));
 		}
 		return stateIn;
@@ -129,12 +133,6 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 			return CookingPotSupport.TRAY;
 		}
 		return CookingPotSupport.NONE;
-	}
-
-	public static boolean canHangFrom(IWorldReader worldIn, BlockPos pos) {
-		BlockState state = worldIn.getBlockState(pos);
-		boolean canSupport = !VoxelShapes.compare(state.getShape(worldIn, pos).project(Direction.DOWN), HANGING_AREA, IBooleanFunction.ONLY_SECOND);
-		return !state.isIn(BlockTags.UNSTABLE_BOTTOM_CENTER) && canSupport;
 	}
 
 	@Override
