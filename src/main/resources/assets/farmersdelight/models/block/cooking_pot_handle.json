@@ -90,8 +90,8 @@
 		},
 		{
 			"name": "handle up",
-			"from": [1, 16, 7],
-			"to": [15, 16, 9],
+			"from": [1, 15.999, 7],
+			"to": [15, 15.999, 9],
 			"faces": {
 				"up": {"uv": [2, 0, 16, 2], "texture": "#handle"},
 				"down": {"uv": [2, 0, 16, 2], "texture": "#handle"}
