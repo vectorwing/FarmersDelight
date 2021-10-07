@@ -16,12 +16,10 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
@@ -31,7 +29,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -105,11 +102,11 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		BlockPos pos = context.getPos();
 		World world = context.getWorld();
-		FluidState ifluidstate = world.getFluidState(context.getPos());
+		FluidState fluid = world.getFluidState(context.getPos());
 
 		BlockState state = this.getDefaultState()
 				.with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite())
-				.with(WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER);
+				.with(WATERLOGGED, fluid.getFluid() == Fluids.WATER);
 
 		if (context.getFace().equals(Direction.DOWN)) {
 			return state.with(SUPPORT, CookingPotSupport.HANDLE);
@@ -118,14 +115,14 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 	}
 
 	@Override
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		if (stateIn.get(WATERLOGGED)) {
-			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+	public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+		if (state.get(WATERLOGGED)) {
+			world.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(world));
 		}
-		if (facing.getAxis().equals(Direction.Axis.Y) && !stateIn.get(SUPPORT).equals(CookingPotSupport.HANDLE)) {
-			return stateIn.with(SUPPORT, getTrayState(worldIn, currentPos));
+		if (facing.getAxis().equals(Direction.Axis.Y) && !state.get(SUPPORT).equals(CookingPotSupport.HANDLE)) {
+			return state.with(SUPPORT, getTrayState(world, currentPos));
 		}
-		return stateIn;
+		return state;
 	}
 
 	private CookingPotSupport getTrayState(IWorld world, BlockPos pos) {
@@ -139,12 +136,14 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
 		ItemStack stack = super.getItem(worldIn, pos, state);
 		CookingPotTileEntity cookingPotEntity = (CookingPotTileEntity) worldIn.getTileEntity(pos);
-		CompoundNBT nbt = cookingPotEntity.writeMeal(new CompoundNBT());
-		if (!nbt.isEmpty()) {
-			stack.setTagInfo("BlockEntityTag", nbt);
-		}
-		if (cookingPotEntity.hasCustomName()) {
-			stack.setDisplayName(cookingPotEntity.getCustomName());
+		if (cookingPotEntity != null) {
+			CompoundNBT nbt = cookingPotEntity.writeMeal(new CompoundNBT());
+			if (!nbt.isEmpty()) {
+				stack.setTagInfo("BlockEntityTag", nbt);
+			}
+			if (cookingPotEntity.hasCustomName()) {
+				stack.setDisplayName(cookingPotEntity.getCustomName());
+			}
 		}
 		return stack;
 	}
