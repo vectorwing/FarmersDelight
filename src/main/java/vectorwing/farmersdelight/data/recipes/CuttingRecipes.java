@@ -235,7 +235,7 @@ public class CuttingRecipes
 	private static void salvageUsingShears(Consumer<IFinishedRecipe> consumer) {
 		// Saddle
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SADDLE), Ingredient.fromTag(Tags.Items.SHEARS), Items.LEATHER, 2)
-				.addResult(Items.IRON_NUGGET, 2)
+				.addResultWithChance(Items.IRON_NUGGET, 0.5F, 2)
 				.build(consumer);
 		// Book
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.LEATHER_HELMET), Ingredient.fromTag(Tags.Items.SHEARS), Items.LEATHER, 1)

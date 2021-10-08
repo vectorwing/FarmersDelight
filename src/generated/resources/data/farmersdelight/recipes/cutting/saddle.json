@@ -15,7 +15,8 @@
     },
     {
       "item": "minecraft:iron_nugget",
-      "count": 2
+      "count": 2,
+      "chance": 0.5
     }
   ]
 }
