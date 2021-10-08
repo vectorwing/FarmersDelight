@@ -13,15 +13,16 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.crafting.ingredients.ChanceResult;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
+import vectorwing.farmersdelight.utils.TextUtils;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Arrays;
-import java.util.List;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -101,9 +102,20 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 			int xOffset = centerX + (i % 2 == 0 ? 0 : 19);
 			int yOffset = centerY + ((i / 2) * 19);
 
-			itemStacks.init(i + 2, true, OUTPUT_GRID_X + xOffset, OUTPUT_GRID_Y + yOffset);
+			itemStacks.init(i + 2, false, OUTPUT_GRID_X + xOffset, OUTPUT_GRID_Y + yOffset);
 			itemStacks.set(i + 2, recipeOutputs.get(i).getStack());
 		}
+
+		itemStacks.addTooltipCallback((slotIndex, input, ingredient, tooltip) -> {
+			if (input || slotIndex < 2) {
+				return;
+			}
+			ChanceResult output = recipeOutputs.get(slotIndex - 2);
+			float chance = output.getChance();
+			if (chance != 1)
+				tooltip.add(1, TextUtils.getTranslation("jei.chance", chance < 0.01 ? "<1" : (int) (chance * 100))
+						.mergeStyle(TextFormatting.GOLD));
+		});
 	}
 
 	@Override
