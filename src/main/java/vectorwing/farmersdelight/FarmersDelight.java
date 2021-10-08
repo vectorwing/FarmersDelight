@@ -1,5 +1,7 @@
 package vectorwing.farmersdelight;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -24,10 +26,13 @@ import vectorwing.farmersdelight.setup.Configuration;
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class FarmersDelight
 {
-	public static final Logger LOGGER = LogManager.getLogger();
 	public static final String MODID = "farmersdelight";
-
 	public static final FDItemGroup ITEM_GROUP = new FDItemGroup(FarmersDelight.MODID);
+
+	public static final Logger LOGGER = LogManager.getLogger();
+	public static final Gson GSON = new GsonBuilder().setPrettyPrinting()
+			.disableHtmlEscaping()
+			.create();
 
 	public FarmersDelight() {
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

@@ -15,11 +15,13 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.crafting.ingredients.ChanceResult;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Arrays;
+import java.util.List;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -80,7 +82,7 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 	@Override
 	public void setRecipe(IRecipeLayout recipeLayout, CuttingBoardRecipe recipe, IIngredients ingredients) {
 		IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
-		NonNullList<ItemStack> recipeOutputs = recipe.getResults();
+		NonNullList<ChanceResult> recipeOutputs = recipe.getRollableResults();
 
 		// Draw required tool
 		itemStacks.init(0, true, 15, 7);
@@ -100,13 +102,14 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 			int yOffset = centerY + ((i / 2) * 19);
 
 			itemStacks.init(i + 2, true, OUTPUT_GRID_X + xOffset, OUTPUT_GRID_Y + yOffset);
-			itemStacks.set(i + 2, recipeOutputs.get(i));
+			itemStacks.set(i + 2, recipeOutputs.get(i).getStack());
 		}
 	}
 
 	@Override
 	public void draw(CuttingBoardRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
 		cuttingBoard.draw(matrixStack, 15, 19);
+		NonNullList<ChanceResult> recipeOutputs = recipe.getRollableResults();
 
 		int size = recipe.getResults().size();
 		int centerX = size > 1 ? 0 : 9;
@@ -116,7 +119,11 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 			int xOffset = centerX + (i % 2 == 0 ? 0 : 19);
 			int yOffset = centerY + ((i / 2) * 19);
 
-			slot.draw(matrixStack, OUTPUT_GRID_X + xOffset, OUTPUT_GRID_Y + yOffset);
+			if (recipeOutputs.get(i).getChance() != 1) {
+				slotChance.draw(matrixStack, OUTPUT_GRID_X + xOffset, OUTPUT_GRID_Y + yOffset);
+			} else {
+				slot.draw(matrixStack, OUTPUT_GRID_X + xOffset, OUTPUT_GRID_Y + yOffset);
+			}
 		}
 	}
 }

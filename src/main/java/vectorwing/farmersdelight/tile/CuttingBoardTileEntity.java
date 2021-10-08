@@ -71,7 +71,7 @@ public class CuttingBoardTileEntity extends FDSyncedTileEntity
 		Optional<CuttingBoardRecipe> matchingRecipe = getMatchingRecipe(new RecipeWrapper(inventory), toolStack, player);
 
 		matchingRecipe.ifPresent(recipe -> {
-			NonNullList<ItemStack> results = recipe.getResults();
+			List<ItemStack> results = recipe.rollResults(world.rand);
 			for (ItemStack resultStack : results) {
 				Direction direction = getBlockState().get(CuttingBoardBlock.HORIZONTAL_FACING).rotateYCCW();
 				ItemUtils.spawnItemEntity(world, resultStack.copy(),
