@@ -2,19 +2,18 @@
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "item": "minecraft:saddle"
+      "item": "farmersdelight:wild_potatoes"
     }
   ],
   "tool": {
-    "tag": "forge:shears"
+    "tag": "forge:tools/knives"
   },
   "result": [
     {
-      "item": "minecraft:leather",
-      "count": 2
+      "item": "minecraft:potato"
     },
     {
-      "item": "minecraft:iron_nugget",
+      "item": "minecraft:purple_dye",
       "count": 2,
       "chance": 0.5
     }

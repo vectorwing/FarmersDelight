@@ -5,32 +5,40 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.*;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.crafting.ingredients.ChanceResult;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 {
 	public static IRecipeType<CuttingBoardRecipe> TYPE = IRecipeType.register(FarmersDelight.MODID + ":cutting");
 	public static final CuttingBoardRecipe.Serializer SERIALIZER = new CuttingBoardRecipe.Serializer();
+	public static final int MAX_RESULTS = 4;
 
 	private final ResourceLocation id;
 	private final String group;
 	private final Ingredient input;
 	private final Ingredient tool;
-	private final NonNullList<ItemStack> results;
+	private final NonNullList<ChanceResult> results;
 	private final String soundEvent;
 
-	public CuttingBoardRecipe(ResourceLocation id, String group, Ingredient input, Ingredient tool, NonNullList<ItemStack> results, String soundEvent) {
+	public CuttingBoardRecipe(ResourceLocation id, String group, Ingredient input, Ingredient tool, NonNullList<ChanceResult> results, String soundEvent) {
 		this.id = id;
 		this.group = group;
 		this.input = input;
@@ -69,16 +77,33 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 
 	@Override
 	public ItemStack getCraftingResult(RecipeWrapper inv) {
-		return this.results.get(0).copy();
+		return this.results.get(0).getStack().copy();
 	}
 
 	@Override
 	public ItemStack getRecipeOutput() {
-		return this.results.get(0);
+		return this.results.get(0).getStack();
 	}
 
-	public NonNullList<ItemStack> getResults() {
+	public List<ItemStack> getResults() {
+		return getRollableResults().stream()
+				.map(ChanceResult::getStack)
+				.collect(Collectors.toList());
+	}
+
+	public NonNullList<ChanceResult> getRollableResults() {
 		return this.results;
+	}
+
+	public List<ItemStack> rollResults(Random rand, int fortuneLevel) {
+		List<ItemStack> results = new ArrayList<>();
+		NonNullList<ChanceResult> rollableResults = getRollableResults();
+		for (ChanceResult output : rollableResults) {
+			ItemStack stack = output.rollOutput(rand, fortuneLevel);
+			if (!stack.isEmpty())
+				results.add(stack);
+		}
+		return results;
 	}
 
 	public String getSoundEventID() {
@@ -121,18 +146,22 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 		public CuttingBoardRecipe read(ResourceLocation recipeId, JsonObject json) {
 			final String groupIn = JSONUtils.getString(json, "group", "");
 			final NonNullList<Ingredient> inputItemsIn = readIngredients(JSONUtils.getJsonArray(json, "ingredients"));
-			final JsonObject toolObject= JSONUtils.getJsonObject(json, "tool");
+			final JsonObject toolObject = JSONUtils.getJsonObject(json, "tool");
 			final Ingredient toolIn = Ingredient.deserialize(toolObject);
 			if (inputItemsIn.isEmpty()) {
 				throw new JsonParseException("No ingredients for cutting recipe");
 			} else if (toolIn.hasNoMatchingItems()) {
 				throw new JsonParseException("No tool for cutting recipe");
 			} else if (inputItemsIn.size() > 1) {
-				throw new JsonParseException("Too many ingredients for cutting recipe! Please define only one ingredient.");
+				throw new JsonParseException("Too many ingredients for cutting recipe! Please define only one ingredient");
 			} else {
-				final NonNullList<ItemStack> results = readResults(JSONUtils.getJsonArray(json, "result"));
-				final String soundID = JSONUtils.getString(json, "sound", "");
-				return new CuttingBoardRecipe(recipeId, groupIn, inputItemsIn.get(0), toolIn, results, soundID);
+				final NonNullList<ChanceResult> results = readResults(JSONUtils.getJsonArray(json, "result"));
+				if (results.size() > 4) {
+					throw new JsonParseException("Too many results for cutting recipe! The maximum quantity of unique results is " + MAX_RESULTS);
+				} else {
+					final String soundID = JSONUtils.getString(json, "sound", "");
+					return new CuttingBoardRecipe(recipeId, groupIn, inputItemsIn.get(0), toolIn, results, soundID);
+				}
 			}
 		}
 
@@ -147,10 +176,10 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 			return nonnulllist;
 		}
 
-		private static NonNullList<ItemStack> readResults(JsonArray resultArray) {
-			NonNullList<ItemStack> results = NonNullList.create();
+		private static NonNullList<ChanceResult> readResults(JsonArray resultArray) {
+			NonNullList<ChanceResult> results = NonNullList.create();
 			for (JsonElement result : resultArray) {
-				results.add(CraftingHelper.getItemStack(result.getAsJsonObject(), true));
+				results.add(ChanceResult.deserialize(result));
 			}
 			return results;
 		}
@@ -163,9 +192,9 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 			Ingredient toolIn = Ingredient.read(buffer);
 
 			int i = buffer.readVarInt();
-			NonNullList<ItemStack> resultsIn = NonNullList.withSize(i, ItemStack.EMPTY);
+			NonNullList<ChanceResult> resultsIn = NonNullList.withSize(i, ChanceResult.EMPTY);
 			for (int j = 0; j < resultsIn.size(); ++j) {
-				resultsIn.set(j, buffer.readItemStack());
+				resultsIn.set(j, ChanceResult.read(buffer));
 			}
 			String soundEventIn = buffer.readString();
 
@@ -178,8 +207,8 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 			recipe.input.write(buffer);
 			recipe.tool.write(buffer);
 			buffer.writeVarInt(recipe.results.size());
-			for (ItemStack result : recipe.results) {
-				buffer.writeItemStack(result);
+			for (ChanceResult result : recipe.results) {
+				result.write(buffer);
 			}
 			buffer.writeString(recipe.soundEvent);
 		}

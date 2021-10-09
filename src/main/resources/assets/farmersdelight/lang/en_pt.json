@@ -244,6 +244,7 @@
 
   "farmersdelight.jei.cooking": "Cookin'",
   "farmersdelight.jei.cutting": "Choppin' Block",
+  "farmersdelight.jei.chance": "Yer odds be %1$s%%",
   "farmersdelight.jei.decomposition": "Garbage Rottin'",
   "farmersdelight.jei.decomposition.light": "Leave it by the mornin' sun",
   "farmersdelight.jei.decomposition.fluid": "Leave it by the ship's bilge",

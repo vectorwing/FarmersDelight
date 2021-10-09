@@ -244,6 +244,7 @@
 
   "farmersdelight.jei.cooking": "Cooking",
   "farmersdelight.jei.cutting": "Cutting Board",
+  "farmersdelight.jei.chance": "%1$s%% chance",
   "farmersdelight.jei.decomposition": "Decomposition",
   "farmersdelight.jei.decomposition.light": "Sped up by sunlight",
   "farmersdelight.jei.decomposition.fluid": "Sped up by adjacent water",

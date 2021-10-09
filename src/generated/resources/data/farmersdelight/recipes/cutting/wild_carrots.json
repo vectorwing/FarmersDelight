@@ -2,19 +2,18 @@
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "item": "minecraft:saddle"
+      "item": "farmersdelight:wild_carrots"
     }
   ],
   "tool": {
-    "tag": "forge:shears"
+    "tag": "forge:tools/knives"
   },
   "result": [
     {
-      "item": "minecraft:leather",
-      "count": 2
+      "item": "minecraft:carrot"
     },
     {
-      "item": "minecraft:iron_nugget",
+      "item": "minecraft:light_gray_dye",
       "count": 2,
       "chance": 0.5
     }

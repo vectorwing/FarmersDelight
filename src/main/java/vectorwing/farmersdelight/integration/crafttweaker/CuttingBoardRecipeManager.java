@@ -14,6 +14,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import org.openzen.zencode.java.ZenCodeType;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.crafting.ingredients.ChanceResult;
 import vectorwing.farmersdelight.integration.crafttweaker.actions.ActionRemoveCuttingBoardRecipe;
 import vectorwing.farmersdelight.utils.ListUtils;
 
@@ -54,8 +55,8 @@ public class CuttingBoardRecipeManager implements IRecipeManager
                         input.asVanillaIngredient(),
                         tool.asVanillaIngredient(),
                         ListUtils.mapArrayIndexSet(results,
-                                IItemStack::getInternal,
-                                NonNullList.withSize(results.length, ItemStack.EMPTY)),
+                                (stack) -> new ChanceResult(stack.getInternal(), 1),
+                                NonNullList.withSize(results.length, ChanceResult.EMPTY)),
                         sound),
                 ""));
     }
