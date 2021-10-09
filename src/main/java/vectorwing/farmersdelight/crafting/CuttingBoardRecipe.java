@@ -29,6 +29,7 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 {
 	public static IRecipeType<CuttingBoardRecipe> TYPE = IRecipeType.register(FarmersDelight.MODID + ":cutting");
 	public static final CuttingBoardRecipe.Serializer SERIALIZER = new CuttingBoardRecipe.Serializer();
+	public static final int MAX_RESULTS = 4;
 
 	private final ResourceLocation id;
 	private final String group;
@@ -152,11 +153,15 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 			} else if (toolIn.hasNoMatchingItems()) {
 				throw new JsonParseException("No tool for cutting recipe");
 			} else if (inputItemsIn.size() > 1) {
-				throw new JsonParseException("Too many ingredients for cutting recipe! Please define only one ingredient.");
+				throw new JsonParseException("Too many ingredients for cutting recipe! Please define only one ingredient");
 			} else {
 				final NonNullList<ChanceResult> results = readResults(JSONUtils.getJsonArray(json, "result"));
-				final String soundID = JSONUtils.getString(json, "sound", "");
-				return new CuttingBoardRecipe(recipeId, groupIn, inputItemsIn.get(0), toolIn, results, soundID);
+				if (results.size() > 4) {
+					throw new JsonParseException("Too many results for cutting recipe! The maximum quantity of unique results is " + MAX_RESULTS);
+				} else {
+					final String soundID = JSONUtils.getString(json, "sound", "");
+					return new CuttingBoardRecipe(recipeId, groupIn, inputItemsIn.get(0), toolIn, results, soundID);
+				}
 			}
 		}
 

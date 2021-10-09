@@ -139,6 +139,9 @@ public class CuttingRecipes
 				.addResult(Items.MAGENTA_DYE, 2)
 				.addResultWithChance(Items.LIME_DYE, 0.1F)
 				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(ModItems.WILD_POTATOES.get()), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), Items.POTATO, 1)
+				.addResultWithChance(Items.PURPLE_DYE, 0.5F, 2)
+				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(ModItems.WILD_RICE.get()), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), ModItems.RICE.get(), 1)
 				.addResultWithChance(ModItems.STRAW.get(), 0.5F)
 				.build(consumer);
