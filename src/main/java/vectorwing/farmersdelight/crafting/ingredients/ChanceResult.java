@@ -12,6 +12,7 @@ import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.setup.Configuration;
 
 import java.util.Random;
 
@@ -38,10 +39,11 @@ public class ChanceResult
 		return chance;
 	}
 
-	public ItemStack rollOutput(Random rand) {
+	public ItemStack rollOutput(Random rand, int fortuneLevel) {
 		int outputAmount = stack.getCount();
+		double fortuneBonus = Configuration.CUTTING_BOARD_FORTUNE_BONUS.get() * fortuneLevel;
 		for (int roll = 0; roll < stack.getCount(); roll++)
-			if (rand.nextFloat() > chance)
+			if (rand.nextFloat() > chance + fortuneBonus)
 				outputAmount--;
 		if (outputAmount == 0)
 			return ItemStack.EMPTY;
@@ -81,7 +83,8 @@ public class ChanceResult
 				JsonElement element = json.get("nbt");
 				itemstack.setTag(JsonToNBT.getTagFromJson(
 						element.isJsonObject() ? FarmersDelight.GSON.toJson(element) : JSONUtils.getString(element, "nbt")));
-			} catch (CommandSyntaxException e) {
+			}
+			catch (CommandSyntaxException e) {
 				e.printStackTrace();
 			}
 		}

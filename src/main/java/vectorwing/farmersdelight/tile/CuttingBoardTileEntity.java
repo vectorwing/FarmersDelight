@@ -3,6 +3,8 @@ package vectorwing.farmersdelight.tile;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -71,7 +73,7 @@ public class CuttingBoardTileEntity extends FDSyncedTileEntity
 		Optional<CuttingBoardRecipe> matchingRecipe = getMatchingRecipe(new RecipeWrapper(inventory), toolStack, player);
 
 		matchingRecipe.ifPresent(recipe -> {
-			List<ItemStack> results = recipe.rollResults(world.rand);
+			List<ItemStack> results = recipe.rollResults(world.rand, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, toolStack));
 			for (ItemStack resultStack : results) {
 				Direction direction = getBlockState().get(CuttingBoardBlock.HORIZONTAL_FACING).rotateYCCW();
 				ItemUtils.spawnItemEntity(world, resultStack.copy(),

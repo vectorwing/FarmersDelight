@@ -18,7 +18,7 @@ public class CuttingRecipes
 	public static void register(Consumer<IFinishedRecipe> consumer) {
 		// Knife
 		chopMeats(consumer);
-		chopPlants(consumer);
+		chopVegetables(consumer);
 		chopPastries(consumer);
 		chopFlowers(consumer);
 
@@ -71,7 +71,7 @@ public class CuttingRecipes
 				.build(consumer);
 	}
 
-	private static void chopPlants(Consumer<IFinishedRecipe> consumer) {
+	private static void chopVegetables(Consumer<IFinishedRecipe> consumer) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(ModItems.CABBAGE.get()), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), ModItems.CABBAGE_LEAF.get(), 2)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(ModItems.RICE_PANICLE.get()), Ingredient.fromTag(ForgeTags.TOOLS_KNIVES), ModItems.RICE.get(), 1)

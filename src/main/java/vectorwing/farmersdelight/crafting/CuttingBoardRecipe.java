@@ -5,13 +5,15 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.*;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -92,11 +94,11 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 		return this.results;
 	}
 
-	public List<ItemStack> rollResults(Random rand) {
+	public List<ItemStack> rollResults(Random rand, int fortuneLevel) {
 		List<ItemStack> results = new ArrayList<>();
 		NonNullList<ChanceResult> rollableResults = getRollableResults();
 		for (ChanceResult output : rollableResults) {
-			ItemStack stack = output.rollOutput(rand);
+			ItemStack stack = output.rollOutput(rand, fortuneLevel);
 			if (!stack.isEmpty())
 				results.add(stack);
 		}
@@ -143,7 +145,7 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 		public CuttingBoardRecipe read(ResourceLocation recipeId, JsonObject json) {
 			final String groupIn = JSONUtils.getString(json, "group", "");
 			final NonNullList<Ingredient> inputItemsIn = readIngredients(JSONUtils.getJsonArray(json, "ingredients"));
-			final JsonObject toolObject= JSONUtils.getJsonObject(json, "tool");
+			final JsonObject toolObject = JSONUtils.getJsonObject(json, "tool");
 			final Ingredient toolIn = Ingredient.deserialize(toolObject);
 			if (inputItemsIn.isEmpty()) {
 				throw new JsonParseException("No ingredients for cutting recipe");
