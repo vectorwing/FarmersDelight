@@ -17,7 +17,6 @@
     "farmersdelight:straw_from_grass",
     "farmersdelight:straw_from_tall_grass",
     "farmersdelight:straw_from_mature_wheat",
-    "farmersdelight:straw_from_mature_rice",
-    "farmersdelight:straw_from_legacy_tall_rice"
+    "farmersdelight:straw_from_mature_rice"
   ]
 }

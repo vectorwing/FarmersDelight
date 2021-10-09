@@ -37,7 +37,6 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.CABBAGE_CROP.get(),
 				ModBlocks.ONION_CROP.get(),
 				ModBlocks.RICE_UPPER_CROP.get(),
-				ModBlocks.TALL_RICE_CROP.get(),
 				ModBlocks.TOMATO_CROP.get());
 		getOrCreateBuilder(net.minecraft.tags.BlockTags.STANDING_SIGNS).add(
 				ModBlocks.CANVAS_SIGN.get(),
