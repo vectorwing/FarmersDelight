@@ -18,15 +18,20 @@ import net.minecraft.item.crafting.CampfireCookingRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.tile.SkilletTileEntity;
 import vectorwing.farmersdelight.utils.TextUtils;
 import vectorwing.farmersdelight.utils.tags.ModTags;
@@ -43,8 +48,8 @@ public class SkilletItem extends BlockItem
 		super(blockIn, builderIn.defaultMaxDamage(SKILLET_TIER.getMaxUses()));
 		float attackDamage = 4.5F + SKILLET_TIER.getAttackDamage();
 		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", (double) attackDamage, AttributeModifier.Operation.ADDITION));
-		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", (double) -3.0F, AttributeModifier.Operation.ADDITION));
+		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", attackDamage, AttributeModifier.Operation.ADDITION));
+		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", -3.0F, AttributeModifier.Operation.ADDITION));
 		this.toolAttributes = builder.build();
 	}
 
@@ -113,6 +118,20 @@ public class SkilletItem extends BlockItem
 			}
 		}
 		return ActionResult.resultPass(skilletStack);
+	}
+
+	@Override
+	public void onUse(World worldIn, LivingEntity livingEntityIn, ItemStack stack, int count) {
+		if (livingEntityIn instanceof PlayerEntity) {
+			PlayerEntity player = (PlayerEntity) livingEntityIn;
+			Vector3d pos = player.getPositionVec();
+			double x = pos.getX() + 0.5D;
+			double y = pos.getY();
+			double z = pos.getZ() + 0.5D;
+			if (worldIn.rand.nextInt(50) == 0) {
+				worldIn.playSound(x, y, z, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundCategory.BLOCKS, 0.4F, worldIn.rand.nextFloat() * 0.2F + 0.9F, false);
+			}
+		}
 	}
 
 	@Override
