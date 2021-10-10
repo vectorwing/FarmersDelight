@@ -205,8 +205,4 @@ public class ModBlocks
 			() -> new HoneyGlazedHamBlock(Block.Properties.from(Blocks.WHITE_WOOL), ModItems.HONEY_GLAZED_HAM, true));
 	public static final RegistryObject<Block> SHEPHERDS_PIE_BLOCK = BLOCKS.register("shepherds_pie_block",
 			() -> new ShepherdsPieBlock(Block.Properties.from(Blocks.CAKE), ModItems.SHEPHERDS_PIE, true));
-
-	@Deprecated
-	public static final RegistryObject<Block> TALL_RICE_CROP = BLOCKS.register("tall_rice_crop",
-			() -> new LegacyTallRiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
 }

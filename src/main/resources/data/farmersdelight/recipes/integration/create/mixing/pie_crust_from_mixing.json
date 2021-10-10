@@ -17,7 +17,8 @@
       "item": "create:wheat_flour"
     },
     {
-      "tag": "forge:milk"
+      "fluidTag": "forge:milk",
+      "amount": 250
     }
   ],
   "results": [

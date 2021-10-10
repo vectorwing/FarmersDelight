@@ -1,0 +1,21 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "farmersdelight:wild_carrots"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  },
+  "result": [
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "item": "minecraft:light_gray_dye",
+      "count": 2,
+      "chance": 0.5
+    }
+  ]
+}

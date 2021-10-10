@@ -17,8 +17,9 @@
       "count": 1
     },
     {
-      "item": "minecraft:green_dye",
-      "count": 2
+      "item": "farmersdelight:straw",
+      "count": 1,
+      "chance": 0.5
     }
   ],
   "processingTime": 50

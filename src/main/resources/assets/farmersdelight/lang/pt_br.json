@@ -51,7 +51,7 @@
 
   "block.farmersdelight.tomatoes": "Tomates",
   "block.farmersdelight.cabbages": "Repolho",
-  "block.farmersdelight.onions": "Cenouras",
+  "block.farmersdelight.onions": "Cebolas",
   "block.farmersdelight.rice_crop": "Plantio de arroz",
   "block.farmersdelight.rice_upper_crop": "Plantio de arroz",
   "block.farmersdelight.brown_mushroom_colony": "Colônia de cogumelos marrons",
@@ -146,6 +146,7 @@
   "item.farmersdelight.baked_cod_stew": "Bacalhoada",
   "item.farmersdelight.noodle_soup": "Sopa de macarrão",
 
+  "item.farmersdelight.bacon_and_eggs": "Bacon e ovos",
   "item.farmersdelight.pasta_with_meatballs": "Macarrão com almôndegas",
   "item.farmersdelight.pasta_with_mutton_chop": "Macarrão com costeleta",
   "item.farmersdelight.roasted_mutton_chops": "Costeletas de carneiro grelhadas",
@@ -248,6 +249,7 @@
 
   "farmersdelight.jei.cooking": "Panela",
   "farmersdelight.jei.cutting": "Tábua de corte",
+  "farmersdelight.jei.chance": "%1$s%% de chance",
   "farmersdelight.jei.decomposition": "Decomposição",
   "farmersdelight.jei.decomposition.light": "Acelerado pela luz do sol",
   "farmersdelight.jei.decomposition.fluid": "Acelerado por água ao redor",
