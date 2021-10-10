@@ -58,22 +58,6 @@ public class ClientEventHandler
 		event.addSprite(EMPTY_CONTAINER_SLOT_BOWL);
 	}
 
-	@SubscribeEvent
-	public static void onModelRegister(ModelRegistryEvent event) {
-		ModelLoader.addSpecialModel(new ModelResourceLocation(new ResourceLocation(FarmersDelight.MODID, "skillet_cooking"), "inventory"));
-	}
-
-	@SubscribeEvent
-	public static void onModelBake(ModelBakeEvent event) {
-		Map<ResourceLocation, IBakedModel> modelRegistry = event.getModelRegistry();
-
-		ModelResourceLocation skilletLocation = new ModelResourceLocation(new ResourceLocation(FarmersDelight.MODID, "skillet"), "inventory");
-		IBakedModel skilletModel = modelRegistry.get(skilletLocation);
-		ModelResourceLocation skilletCookingLocation = new ModelResourceLocation(new ResourceLocation(FarmersDelight.MODID, "skillet_cooking"), "inventory");
-		IBakedModel skilletCookingModel = modelRegistry.get(skilletCookingLocation);
-		modelRegistry.put(skilletLocation, new SkilletModel(event.getModelLoader(), skilletModel, skilletCookingModel));
-	}
-
 	public static void init(final FMLClientSetupEvent event) {
 		RenderTypeLookup.setRenderLayer(ModBlocks.WILD_CABBAGES.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.WILD_ONIONS.get(), RenderType.getCutout());
