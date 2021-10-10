@@ -51,7 +51,7 @@ public class SkilletTileEntityRenderer extends TileEntityRenderer<SkilletTileEnt
 				matrixStackIn.rotate(Vector3f.XP.rotationDegrees(90.0F));
 
 				// Resize the items
-				matrixStackIn.scale(0.4F, 0.4F, 0.4F);
+				matrixStackIn.scale(0.5F, 0.5F, 0.5F);
 
 				if (tileEntityIn.getWorld() != null)
 					Minecraft.getInstance().getItemRenderer().renderItem(stack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);

@@ -2,9 +2,12 @@ package vectorwing.farmersdelight.items;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
@@ -38,6 +41,7 @@ import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
+import java.util.Set;
 
 public class SkilletItem extends BlockItem
 {
@@ -216,6 +220,15 @@ public class SkilletItem extends BlockItem
 			return super.tryPlace(context);
 		}
 		return ActionResultType.PASS;
+	}
+
+	@Override
+	public boolean canApplyAtEnchantingTable(ItemStack stack, net.minecraft.enchantment.Enchantment enchantment) {
+		if (enchantment.type.equals(EnchantmentType.WEAPON)) {
+			Set<Enchantment> DENIED_ENCHANTMENTS = Sets.newHashSet(Enchantments.SWEEPING);
+			return !DENIED_ENCHANTMENTS.contains(enchantment);
+		}
+		return enchantment.type.canEnchantItem(stack.getItem());
 	}
 
 	@Override

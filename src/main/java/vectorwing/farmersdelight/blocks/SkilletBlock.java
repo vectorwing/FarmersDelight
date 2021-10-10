@@ -11,6 +11,7 @@ import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -19,13 +20,14 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
-import vectorwing.farmersdelight.tile.CookingPotTileEntity;
 import vectorwing.farmersdelight.tile.SkilletTileEntity;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -33,12 +35,17 @@ import java.util.Random;
 public class SkilletBlock extends HorizontalBlock
 {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 4.0D, 15.0D);
+	public static final BooleanProperty SUPPORT = BooleanProperty.create("support");
 
 	public SkilletBlock() {
 		super(Properties.create(Material.IRON)
 				.hardnessAndResistance(0.5F, 6.0F)
 				.sound(SoundType.LANTERN));
-		this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH));
+		this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH).with(SUPPORT, false));
+	}
+
+	private boolean getTrayState(IWorld world, BlockPos pos) {
+		return world.getBlockState(pos.down()).getBlock().isIn(ModTags.TRAY_HEAT_SOURCES);
 	}
 
 	@Override
@@ -90,7 +97,17 @@ public class SkilletBlock extends HorizontalBlock
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing());
+		return this.getDefaultState()
+				.with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing())
+				.with(SUPPORT, getTrayState(context.getWorld(), context.getPos()));
+	}
+
+	@Override
+	public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+		if (facing.getAxis().equals(Direction.Axis.Y)) {
+			return state.with(SUPPORT, getTrayState(world, currentPos));
+		}
+		return state;
 	}
 
 	@Override
@@ -106,7 +123,7 @@ public class SkilletBlock extends HorizontalBlock
 
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(HORIZONTAL_FACING);
+		builder.add(HORIZONTAL_FACING, SUPPORT);
 	}
 
 	@Override
