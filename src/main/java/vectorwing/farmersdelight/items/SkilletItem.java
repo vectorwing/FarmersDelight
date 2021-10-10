@@ -151,7 +151,6 @@ public class SkilletItem extends BlockItem
 				}
 			});
 			tag.remove("Cooking");
-			world.playSound(null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.BLOCK_NOTE_BLOCK_BELL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 		}
 
 		return stack;

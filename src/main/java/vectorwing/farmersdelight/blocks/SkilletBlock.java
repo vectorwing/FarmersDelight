@@ -20,10 +20,15 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+import vectorwing.farmersdelight.tile.CookingPotTileEntity;
 import vectorwing.farmersdelight.tile.SkilletTileEntity;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class SkilletBlock extends HorizontalBlock
 {
@@ -102,6 +107,23 @@ public class SkilletBlock extends HorizontalBlock
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(HORIZONTAL_FACING);
+	}
+
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+		TileEntity tileEntity = worldIn.getTileEntity(pos);
+		if (tileEntity instanceof SkilletTileEntity) {
+			SkilletTileEntity skilletEntity = (SkilletTileEntity) tileEntity;
+			if (skilletEntity.isCooking()) {
+				double x = (double) pos.getX() + 0.5D;
+				double y = pos.getY();
+				double z = (double) pos.getZ() + 0.5D;
+				if (rand.nextInt(10) == 0) {
+					worldIn.playSound(x, y, z, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundCategory.BLOCKS, 0.4F, rand.nextFloat() * 0.2F + 0.9F, false);
+				}
+			}
+		}
 	}
 
 	@Override

@@ -25,24 +25,17 @@
     "category": "block",
     "subtitle": "farmersdelight.subtitles.skillet.sizzle",
     "sounds": [
-      {
-        "name": "farmersdelight:block/skillet_sizzle",
-        "stream": true
-      }
+      "farmersdelight:block/skillet/sizzle1",
+      "farmersdelight:block/skillet/sizzle2",
+      "farmersdelight:block/skillet/sizzle3"
     ]
   },
   "block.skillet.add_food": {
     "category": "block",
     "subtitle": "farmersdelight.subtitles.skillet.add_food",
     "sounds": [
-      {
-        "name": "farmersdelight:block/skillet_add_food1",
-        "stream": true
-      },
-      {
-        "name": "farmersdelight:block/skillet_add_food2",
-        "stream": true
-      }
+      "farmersdelight:block/skillet/add_food1",
+      "farmersdelight:block/skillet/add_food2"
     ]
   },
   "block.stove.crackle": {

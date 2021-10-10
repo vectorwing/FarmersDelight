@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.tile;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,7 +18,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.blocks.SkilletBlock;
-import vectorwing.farmersdelight.client.sound.SkilletSizzleTickableSound;
 import vectorwing.farmersdelight.registry.ModParticleTypes;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
@@ -34,7 +32,6 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 {
 	private final ItemStackHandler inventory = createHandler();
 	private int cookingTime;
-	private boolean isSizzling;
 	private CampfireCookingRecipe currentRecipe;
 
 	private ItemStack skilletStack;
@@ -73,21 +70,14 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 				cookingTime = MathHelper.clamp(cookingTime - 2, 0, getCookingTime());
 			}
 		} else {
-			if (isHeated) {
-				if (hasStoredStack()) {
-					addCookingParticles();
-				}
-				if (!isSizzling && hasStoredStack()) {
-					Minecraft.getInstance().getSoundHandler().play(new SkilletSizzleTickableSound(this));
-					isSizzling = true;
-				}
-				if (!hasStoredStack() && isSizzling) {
-					isSizzling = false;
-				}
-			} else {
-				isSizzling = false;
+			if (isHeated && hasStoredStack()) {
+				addCookingParticles();
 			}
 		}
+	}
+
+	public boolean isCooking() {
+		return isHeated() && hasStoredStack();
 	}
 
 	public boolean isHeated() {
@@ -157,6 +147,7 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 	public void read(BlockState state, CompoundNBT compound) {
 		super.read(state, compound);
 		inventory.deserializeNBT(compound.getCompound("Inventory"));
+		cookingTime = compound.getInt("CookTime");
 		skilletStack = ItemStack.read(compound.getCompound("Skillet"));
 	}
 
@@ -164,6 +155,7 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 	public CompoundNBT write(CompoundNBT compound) {
 		super.write(compound);
 		compound.put("Inventory", inventory.serializeNBT());
+		compound.putInt("CookTime", cookingTime);
 		compound.put("Skillet", skilletStack.write(new CompoundNBT()));
 		return compound;
 	}
