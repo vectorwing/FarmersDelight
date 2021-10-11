@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.registry;
 
 import net.minecraft.block.*;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Items;
@@ -12,10 +11,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.blocks.*;
-import vectorwing.farmersdelight.blocks.signs.StandingCanvasSignBlock;
-import vectorwing.farmersdelight.blocks.signs.WallCanvasSignBlock;
 import vectorwing.farmersdelight.blocks.crops.*;
 import vectorwing.farmersdelight.blocks.foods.*;
+import vectorwing.farmersdelight.blocks.signs.StandingCanvasSignBlock;
+import vectorwing.farmersdelight.blocks.signs.WallCanvasSignBlock;
 
 import java.util.function.ToIntFunction;
 
@@ -30,6 +29,7 @@ public class ModBlocks
 	// Workstations
 	public static final RegistryObject<Block> STOVE = BLOCKS.register("stove", () -> new StoveBlock(AbstractBlock.Properties.from(Blocks.BRICKS).setLightLevel(getLightValueLit(13))));
 	public static final RegistryObject<Block> COOKING_POT = BLOCKS.register("cooking_pot", CookingPotBlock::new);
+	public static final RegistryObject<Block> SKILLET = BLOCKS.register("skillet", SkilletBlock::new);
 	public static final RegistryObject<Block> BASKET = BLOCKS.register("basket", BasketBlock::new);
 	public static final RegistryObject<Block> CUTTING_BOARD = BLOCKS.register("cutting_board", CuttingBoardBlock::new);
 

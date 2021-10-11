@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.MathHelper;
@@ -35,7 +34,6 @@ import vectorwing.farmersdelight.tile.container.CookingPotContainer;
 import vectorwing.farmersdelight.tile.inventory.CookingPotItemHandler;
 import vectorwing.farmersdelight.utils.ItemUtils;
 import vectorwing.farmersdelight.utils.TextUtils;
-import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -45,7 +43,7 @@ import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedContainerProvider, ITickableTileEntity, INameable
+public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedContainerProvider, ITickableTileEntity, IHeatableTileEntity, INameable
 {
 	public static final int MEAL_DISPLAY_SLOT = 6;
 	public static final int CONTAINER_SLOT = 7;
@@ -137,7 +135,7 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 	public void tick() {
 		if (world == null) return;
 
-		boolean isHeated = isHeated();
+		boolean isHeated = isHeated(world, pos);
 		boolean didInventoryChange = false;
 
 		if (!world.isRemote) {
@@ -329,25 +327,7 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 
 	public boolean isHeated() {
 		if (world == null) return false;
-
-		BlockState stateBelow = world.getBlockState(pos.down());
-
-		if (ModTags.HEAT_SOURCES.contains(stateBelow.getBlock())) {
-			if (stateBelow.hasProperty(BlockStateProperties.LIT))
-				return stateBelow.get(BlockStateProperties.LIT);
-			return true;
-		}
-
-		if (ModTags.HEAT_CONDUCTORS.contains(stateBelow.getBlock())) {
-			BlockState stateFurtherBelow = world.getBlockState(pos.down(2));
-			if (ModTags.HEAT_SOURCES.contains(stateFurtherBelow.getBlock())) {
-				if (stateFurtherBelow.hasProperty(BlockStateProperties.LIT))
-					return stateFurtherBelow.get(BlockStateProperties.LIT);
-				return true;
-			}
-		}
-
-		return false;
+		return this.isHeated(world, pos);
 	}
 
 	public ItemStackHandler getInventory() {

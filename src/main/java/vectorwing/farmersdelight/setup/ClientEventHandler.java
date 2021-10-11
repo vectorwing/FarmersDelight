@@ -4,12 +4,17 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.client.renderer.model.IBakedModel;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.client.renderer.model.RenderMaterial;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ModelBakeEvent;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -18,16 +23,20 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.client.gui.NourishedHungerOverlay;
+import vectorwing.farmersdelight.client.item.SkilletModel;
 import vectorwing.farmersdelight.client.particles.StarParticle;
 import vectorwing.farmersdelight.client.particles.SteamParticle;
 import vectorwing.farmersdelight.client.tileentity.renderer.CanvasSignTileEntityRenderer;
 import vectorwing.farmersdelight.client.tileentity.renderer.CuttingBoardTileEntityRenderer;
+import vectorwing.farmersdelight.client.tileentity.renderer.SkilletTileEntityRenderer;
 import vectorwing.farmersdelight.client.tileentity.renderer.StoveTileEntityRenderer;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModContainerTypes;
 import vectorwing.farmersdelight.registry.ModParticleTypes;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.ModAtlases;
+
+import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventHandler
@@ -81,6 +90,8 @@ public class ClientEventHandler
 				CuttingBoardTileEntityRenderer::new);
 		ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.CANVAS_SIGN_TILE.get(),
 				CanvasSignTileEntityRenderer::new);
+		ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.SKILLET_TILE.get(),
+				SkilletTileEntityRenderer::new);
 
 		ScreenManager.registerFactory(ModContainerTypes.COOKING_POT.get(), CookingPotScreen::new);
 
