@@ -22,7 +22,6 @@
     ]
   },
   "block.skillet.sizzle": {
-    "category": "block",
     "subtitle": "farmersdelight.subtitles.skillet.sizzle",
     "sounds": [
       "farmersdelight:block/skillet/sizzle1",
@@ -31,11 +30,20 @@
     ]
   },
   "block.skillet.add_food": {
-    "category": "block",
     "subtitle": "farmersdelight.subtitles.skillet.add_food",
     "sounds": [
       "farmersdelight:block/skillet/add_food1",
       "farmersdelight:block/skillet/add_food2"
+    ]
+  },
+  "item.skillet.attack.strong": {
+    "sounds": [
+      "farmersdelight:block/skillet/attack_strong"
+    ]
+  },
+  "item.skillet.attack.weak": {
+    "sounds": [
+      "farmersdelight:block/skillet/attack_weak"
     ]
   },
   "block.stove.crackle": {

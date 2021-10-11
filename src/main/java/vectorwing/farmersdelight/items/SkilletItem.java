@@ -33,6 +33,7 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -68,6 +69,20 @@ public class SkilletItem extends BlockItem
 			ItemStack tool = attacker != null ? attacker.getHeldItem(Hand.MAIN_HAND) : ItemStack.EMPTY;
 			if (tool.getItem() instanceof SkilletItem) {
 				event.setStrength(event.getOriginalStrength() * 2.0F);
+			}
+		}
+
+		@SubscribeEvent
+		public static void onSkilletAttack(AttackEntityEvent event) {
+			PlayerEntity player = event.getPlayer();
+			float attackPower = player.getCooledAttackStrength(0.0F);
+			ItemStack tool = player.getHeldItem(Hand.MAIN_HAND);
+			if (tool.getItem() instanceof SkilletItem) {
+				if (attackPower > 0.8F) {
+					player.getEntityWorld().playSound(player, player.getPosX(), player.getPosY(), player.getPosZ(), ModSounds.ITEM_SKILLET_ATTACK_STRONG.get(), SoundCategory.PLAYERS, 1.0F, 1.0F);
+				} else {
+					player.getEntityWorld().playSound(player, player.getPosX(), player.getPosY(), player.getPosZ(), ModSounds.ITEM_SKILLET_ATTACK_WEAK.get(), SoundCategory.PLAYERS, 0.8F, 0.9F);
+				}
 			}
 		}
 	}
