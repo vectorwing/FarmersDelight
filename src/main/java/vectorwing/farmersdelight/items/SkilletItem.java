@@ -237,6 +237,11 @@ public class SkilletItem extends BlockItem
 	}
 
 	@Override
+	public int getItemEnchantability() {
+		return SKILLET_TIER.getEnchantability();
+	}
+
+	@Override
 	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 		stack.damageItem(1, attacker, (user) -> user.sendBreakAnimation(EquipmentSlotType.MAINHAND));
 		return true;
