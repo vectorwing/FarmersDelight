@@ -107,11 +107,6 @@ public class SkilletItem extends BlockItem
 	}
 
 	@Override
-	public UseAction getUseAction(ItemStack stack) {
-		return UseAction.NONE;
-	}
-
-	@Override
 	public int getUseDuration(ItemStack stack) {
 		int fireAspectLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.FIRE_ASPECT, stack);
 		int cookingTimeReduction = 0;
@@ -203,7 +198,6 @@ public class SkilletItem extends BlockItem
 		}
 
 		return stack;
-
 	}
 
 	public static Optional<CampfireCookingRecipe> getCookingRecipe(ItemStack stack, World world) {
