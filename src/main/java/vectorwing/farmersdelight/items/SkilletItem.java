@@ -3,6 +3,7 @@ package vectorwing.farmersdelight.items;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.Enchantment;
@@ -14,6 +15,7 @@ import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.*;
@@ -171,6 +173,9 @@ public class SkilletItem extends BlockItem
 				ItemStack resultStack = recipe.getCraftingResult(new Inventory());
 				if (!player.inventory.addItemStackToInventory(resultStack)) {
 					player.dropItem(resultStack, false);
+				}
+				if (player instanceof ServerPlayerEntity) {
+					CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayerEntity) player, stack);
 				}
 			});
 			tag.remove("Cooking");

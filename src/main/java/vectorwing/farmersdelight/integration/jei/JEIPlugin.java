@@ -66,6 +66,7 @@ public class JEIPlugin implements IModPlugin
 		registration.addRecipeCatalyst(new ItemStack(ModItems.COOKING_POT.get()), CookingRecipeCategory.UID);
 		registration.addRecipeCatalyst(new ItemStack(ModItems.CUTTING_BOARD.get()), CuttingRecipeCategory.UID);
 		registration.addRecipeCatalyst(new ItemStack(ModItems.STOVE.get()), VanillaRecipeCategoryUid.CAMPFIRE);
+		registration.addRecipeCatalyst(new ItemStack(ModItems.SKILLET.get()), VanillaRecipeCategoryUid.CAMPFIRE);
 		registration.addRecipeCatalyst(new ItemStack(ModBlocks.ORGANIC_COMPOST.get()), DecompositionRecipeCategory.UID);
 	}
 
