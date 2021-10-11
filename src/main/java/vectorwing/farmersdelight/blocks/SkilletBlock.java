@@ -19,6 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -32,20 +33,19 @@ import vectorwing.farmersdelight.utils.tags.ModTags;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+@SuppressWarnings("deprecation")
 public class SkilletBlock extends HorizontalBlock
 {
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 4.0D, 15.0D);
 	public static final BooleanProperty SUPPORT = BooleanProperty.create("support");
+
+	protected static final VoxelShape SHAPE = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 4.0D, 15.0D);
+	protected static final VoxelShape SHAPE_WITH_TRAY = VoxelShapes.or(SHAPE, Block.makeCuboidShape(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
 
 	public SkilletBlock() {
 		super(Properties.create(Material.IRON)
 				.hardnessAndResistance(0.5F, 6.0F)
 				.sound(SoundType.LANTERN));
 		this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH).with(SUPPORT, false));
-	}
-
-	private boolean getTrayState(IWorld world, BlockPos pos) {
-		return world.getBlockState(pos.down()).getBlock().isIn(ModTags.TRAY_HEAT_SOURCES);
 	}
 
 	@Override
@@ -93,6 +93,11 @@ public class SkilletBlock extends HorizontalBlock
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return SHAPE;
+	}
+
+	@Override
+	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+		return state.get(SUPPORT).equals(true) ? SHAPE_WITH_TRAY : SHAPE;
 	}
 
 	@Override
@@ -152,5 +157,9 @@ public class SkilletBlock extends HorizontalBlock
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
 		return ModTileEntityTypes.SKILLET_TILE.get().create();
+	}
+
+	private boolean getTrayState(IWorld world, BlockPos pos) {
+		return world.getBlockState(pos.down()).getBlock().isIn(ModTags.TRAY_HEAT_SOURCES);
 	}
 }

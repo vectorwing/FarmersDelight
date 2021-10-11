@@ -51,6 +51,7 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 {
 	public static final EnumProperty<CookingPotSupport> SUPPORT = EnumProperty.create("support", CookingPotSupport.class);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D);
 	protected static final VoxelShape SHAPE_WITH_TRAY = VoxelShapes.or(SHAPE, Block.makeCuboidShape(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
 
