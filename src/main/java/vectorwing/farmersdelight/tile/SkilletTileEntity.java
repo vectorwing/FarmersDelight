@@ -4,20 +4,23 @@ import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CampfireCookingRecipe;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.blocks.SkilletBlock;
+import vectorwing.farmersdelight.mixin.accessors.RecipeManagerAccessor;
 import vectorwing.farmersdelight.registry.ModParticleTypes;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
@@ -32,7 +35,7 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 {
 	private final ItemStackHandler inventory = createHandler();
 	private int cookingTime;
-	private CampfireCookingRecipe currentRecipe;
+	private ResourceLocation lastRecipeID;
 
 	private ItemStack skilletStack;
 	private int fireAspectLevel;
@@ -52,19 +55,8 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 				ItemStack cookingStack = getStoredStack();
 				if (cookingStack.isEmpty()) {
 					cookingTime = 0;
-				} else if (canCook(cookingStack, world)) {
-					++cookingTime;
-					if (cookingTime >= getCookingTime()) {
-						ItemStack resultStack = currentRecipe.getCraftingResult(new Inventory(cookingStack));
-
-						Direction direction = getBlockState().get(SkilletBlock.HORIZONTAL_FACING).getOpposite().rotateYCCW(); // TODO: Reorient Skilet, maybe?
-						ItemUtils.spawnItemEntity(world, resultStack.copy(),
-								pos.getX() + 0.5, pos.getY() + 0.3, pos.getZ() + 0.5,
-								direction.getXOffset() * 0.08F, 0.25F, direction.getZOffset() * 0.08F);
-
-						cookingTime = 0;
-						inventory.extractItem(0, 1, false);
-					}
+				} else {
+					cookAndOutputItems(cookingStack);
 				}
 			} else if (cookingTime > 0) {
 				cookingTime = MathHelper.clamp(cookingTime - 2, 0, getCookingTime());
@@ -72,6 +64,26 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 		} else {
 			if (isHeated && hasStoredStack()) {
 				addCookingParticles();
+			}
+		}
+	}
+
+	private void cookAndOutputItems(ItemStack cookingStack) {
+		if (world == null) return;
+
+		++cookingTime;
+		if (cookingTime >= getCookingTime()) {
+			Inventory wrapper = new Inventory(cookingStack);
+			Optional<CampfireCookingRecipe> recipe = getMatchingRecipe(wrapper);
+			if (recipe.isPresent()) {
+				ItemStack resultStack = recipe.get().getCraftingResult(wrapper);
+				Direction direction = getBlockState().get(SkilletBlock.HORIZONTAL_FACING).rotateY();
+				ItemUtils.spawnItemEntity(world, resultStack.copy(),
+						pos.getX() + 0.5, pos.getY() + 0.3, pos.getZ() + 0.5,
+						direction.getXOffset() * 0.08F, 0.25F, direction.getZOffset() * 0.08F);
+
+				cookingTime = 0;
+				inventory.extractItem(0, 1, false);
 			}
 		}
 	}
@@ -87,23 +99,25 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 		return false;
 	}
 
-	public boolean canCook(ItemStack stack, World world) {
-		if (currentRecipe != null && currentRecipe.matches(new Inventory(stack), world)) {
-			return true;
-		} else {
-			Optional<CampfireCookingRecipe> recipe = findMatchingRecipe(stack);
-			if (recipe.isPresent()) {
-				currentRecipe = recipe.get();
-				return true;
+	private Optional<CampfireCookingRecipe> getMatchingRecipe(IInventory recipeWrapper) {
+		if (world == null) return Optional.empty();
+
+		if (lastRecipeID != null) {
+			IRecipe<IInventory> recipe = ((RecipeManagerAccessor) world.getRecipeManager())
+					.getRecipeMap(IRecipeType.CAMPFIRE_COOKING)
+					.get(lastRecipeID);
+			if (recipe instanceof CampfireCookingRecipe && recipe.matches(recipeWrapper, world)) {
+				return Optional.of((CampfireCookingRecipe) recipe);
 			}
 		}
-		return false;
-	}
 
-	public Optional<CampfireCookingRecipe> findMatchingRecipe(ItemStack itemStackIn) {
-		return world == null
-				? Optional.empty()
-				: world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, new Inventory(itemStackIn), world);
+		Optional<CampfireCookingRecipe> recipe = world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, recipeWrapper, world);
+		if (recipe.isPresent()) {
+			lastRecipeID = recipe.get().getId();
+			return recipe;
+		}
+
+		return Optional.empty();
 	}
 
 	private void addCookingParticles() {
@@ -165,12 +179,12 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 	}
 
 	public ItemStack addItemToCook(ItemStack addedStack, @Nullable PlayerEntity player) {
-		Optional<CampfireCookingRecipe> recipe = findMatchingRecipe(addedStack);
+		Optional<CampfireCookingRecipe> recipe = getMatchingRecipe(new Inventory(addedStack));
 		if (recipe.isPresent()) {
 			boolean wasEmpty = getStoredStack().isEmpty();
 			ItemStack remainderStack = inventory.insertItem(0, addedStack.copy(), false);
 			if (remainderStack != addedStack) {
-				currentRecipe = recipe.get();
+				lastRecipeID = recipe.get().getId();
 				cookingTime = 0;
 				if (wasEmpty && world != null && isHeated(world, pos)) {
 					world.playSound(null, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, ModSounds.BLOCK_SKILLET_ADD_FOOD.get(), SoundCategory.BLOCKS, 0.8F, 1.0F);
