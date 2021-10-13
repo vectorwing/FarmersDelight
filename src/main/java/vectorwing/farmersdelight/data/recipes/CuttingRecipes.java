@@ -194,11 +194,11 @@ public class CuttingRecipes
 	}
 
 	private static void salvagingUsingShears(Consumer<IFinishedRecipe> consumer) {
-		// Saddle
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.SADDLE), Ingredient.fromTag(Tags.Items.SHEARS), Items.LEATHER, 2)
 				.addResultWithChance(Items.IRON_NUGGET, 0.5F, 2)
 				.build(consumer);
-		// Book
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.LEATHER_HORSE_ARMOR), Ingredient.fromTag(Tags.Items.SHEARS), Items.LEATHER, 2)
+				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.LEATHER_HELMET), Ingredient.fromTag(Tags.Items.SHEARS), Items.LEATHER, 1)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.fromItems(Items.LEATHER_CHESTPLATE), Ingredient.fromTag(Tags.Items.SHEARS), Items.LEATHER, 1)
