@@ -1,5 +1,77 @@
 # Changelog
 
+## 0.5.0
+
+### Breaking changes (BACKUP YOUR SAVES!)
+- This update causes a few breaking changes. Follow this link for more info:
+- https://github.com/vectorwing/FarmersDelight/wiki/0.5-Breaking-Changes
+
+### Additions
+- **Skillet** - A portable food-cooking utensil with a powerful swing!
+    - Can be placed as a block (shift-use) or operated from your hand, if near a heat source;
+        - Being on fire counts as a heat source when handheld!
+    - Acts as a heavyweight melee weapon, packing extra knockback, but with very slow swings;
+    - 1 second slower than a Smoker by default, but cooks progressively faster when enchanted with **Fire Aspect**;
+    - Cannot interact with Hoppers as of now. This is pending a thinking-over later.
+- New foods:
+    - **Bacon and Eggs** - Plenty of cholesterol for a fresh morning!
+- New drinks:
+    - **Apple Cider** - A warm and simple drink to toughen you up with **Absorption** for a minute;
+    - **Melon Juice** - Refreshing and healthy! **Heals 1 heart** instantly;
+- **Canvas Rug** - A fuzzy, rudimentary floor cover made of Canvas;
+- **Canvas Signs** - Painterly signs with a **dyeable background** and a smooth writing surface!
+    - The sign is "uncolored" when first crafted, using the natural beige tone of Canvas;
+    - Can be crafted with any normal dye to color its background;
+    - Text can be dyed as usual by right-clicking the sign with a dye item;
+    - Signs with a "dark" background color start off with white text. This can be customized in the config.
+
+### Updates
+- All workstations have been **optimized** for better performance, and now cache the previous recipes when processing;
+- Cooking Pot:
+    - You now get **experience points** from cooking!
+        - Just like a Furnace, retrieving meals from the output slot will reward you the experience stored so far;
+        - Mining the pot will also release all stored experience;
+    - The pot can now be heated **through** `heat_conductors`, up to 1 block of space:
+        - By default, this applies to the metallic Hopper, letting you heat your food AND extract it at the same time!
+        - Built-in support for Create's Chutes, and 1.17 Copper Blocks are planned to be tagged as such in the future;
+    - You can now hang the pot from a **handle**!
+        - Place the pot from under a block, and it will display a handle;
+        - If a handle is shown, the pot won't display a tray at all;
+        - You can toggle between tray and handle by sneak-right-clicking the pot.
+    - The pot emits a new, custom steam particle when boiling;
+    - The boiling sound becomes more "soupy" when the pot is storing a meal;
+- Stove:
+    - You can now use **Fire Charges** to light them;
+    - You can now use any item with a "shovel" ToolType to extinguish them;
+    - Cookable food can be placed on a Stove that isn't lit;
+- Cutting Board:
+    - Cutting recipes can now define a **drop chance** for each output item!
+        - Chance is optional, and outputs are 100% guaranteed by default;
+        - **Fortune** increases chances, if the given tool is enchanted with it. This bonus can be tweaked in the configs;
+        - In FD, chances have been given to some flower-cutting and salvaging recipes;
+        - Check the GitHub wiki to see how the new syntax works.
+    - Updated JEI recipe displays to have dynamic outputs, and to also show drop chances;
+    - Carved tools have been mirrored, so as to avoid cutting across the handle gap;
+- Knives:
+    - Reduced swing speeds slightly;
+- Rice:
+    - The old, legacy form of the Rice Crop (`tall_rice_crop`) has been **permanently removed** in favor of the new one (`rice_upper_crop`). See the **Breaking Changes** for more info;
+    - The Rice crop now only gives 1 panicle at a time, and bone meal is a bit less effective. This was done to control its excessive supply a bit more;
+
+### Fixes
+- Fix circular texture reference in some model templates, which caused lots of log spam with CTM;
+- Fix most sounds being set to `stream` when they shouldn't be;
+- Fix mugs rendering incorrectly when in the off-hand;
+- Fix Mushroom Colonies allowing the usage of Bone Meal on some growth stages;
+
+### Translation Updates
+- (NEW!) ca_ES (thanks, VerdaPegasus!)
+- fr_FR (thanks, BlackJamesYT!)
+- ko_KR (thanks, qkrehf2!)
+- pl_pl (thanks, jogurciQ!)
+- ru_ru (thanks, Dimagreg!)
+- zh_cn (thanks, WuzgXY-GitHub!)
+
 ## 0.4.6
 - Added Serene Seasons **fertility** tags to all crops on the mod's end;
 - Added new Cutting Board recipes: cutting flowers for dyes!
