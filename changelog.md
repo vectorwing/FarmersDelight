@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.4.6
+- Added Serene Seasons **fertility** tags to all crops on the mod's end;
+- Added new Cutting Board recipes: cutting flowers for dyes!
+  - Small flowers can be cut to yield twice as much dye per usual;
+  - Large flowers not included, though they may be in a future update;
+- The lower half of Rice crops is now a bit sturdier, and cannot be instamined, making upper-half harvesting more convenient;
+- Updated CraftTweaker integration (courtesy of eutro!):
+  - Recipe Handlers have been added for Cooking Pot and Cutting Board recipes, so ingredient replacements are supported;
+- Updated some item textures:
+  - Rice Panicle has a new look! A bit less like corn, a lot more like real life;
+  - Minor shading tweaks to a few other items;
+
 ## 0.4.5
 - Fixes Baskets having their sides vanish when next to a short block;
 - Fixes water render in waterlogged Baskets.
