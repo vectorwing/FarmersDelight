@@ -12,6 +12,9 @@
     "accessors.PigEntityAccessor",
     "accessors.RecipeManagerAccessor"
   ],
+  "client": [
+    "HideBlockBreakProgressMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },
