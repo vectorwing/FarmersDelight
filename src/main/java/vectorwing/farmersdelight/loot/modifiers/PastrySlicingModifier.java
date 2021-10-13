@@ -9,14 +9,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
 import net.minecraft.loot.LootParameters;
 import net.minecraft.loot.conditions.ILootCondition;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
 import net.minecraftforge.registries.ForgeRegistries;
-import vectorwing.farmersdelight.blocks.PieBlock;
-import vectorwing.farmersdelight.registry.ModItems;
+import vectorwing.farmersdelight.blocks.foods.PieBlock;
 
 import javax.annotation.Nonnull;
 import java.util.List;

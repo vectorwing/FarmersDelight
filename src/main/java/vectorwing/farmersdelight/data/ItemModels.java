@@ -34,6 +34,8 @@ public class ItemModels extends ItemModelProvider
 				.collect(Collectors.toSet());
 
 		// Specific cases
+		items.remove(ModItems.SKILLET.get());
+
 		itemGeneratedModel(ModItems.WILD_RICE.get(), resourceBlock(itemName(ModItems.WILD_RICE.get()) + "_top"));
 		items.remove(ModItems.WILD_RICE.get());
 
@@ -43,20 +45,41 @@ public class ItemModels extends ItemModelProvider
 		itemGeneratedModel(ModItems.RED_MUSHROOM_COLONY.get(), resourceBlock(itemName(ModItems.RED_MUSHROOM_COLONY.get()) + "_stage3"));
 		items.remove(ModItems.RED_MUSHROOM_COLONY.get());
 
-		itemMugModel(ModItems.HOT_COCOA.get(), resourceItem(itemName(ModItems.HOT_COCOA.get())));
-		items.remove(ModItems.HOT_COCOA.get());
-
 		blockBasedModel(ModItems.TATAMI.get(), "_half");
 		items.remove(ModItems.TATAMI.get());
 
 		blockBasedModel(ModItems.ORGANIC_COMPOST.get(), "_0");
 		items.remove(ModItems.ORGANIC_COMPOST.get());
 
+		// Items that should be held like a mug
+		Set<Item> mugItems = Sets.newHashSet(
+				ModItems.HOT_COCOA.get(),
+				ModItems.APPLE_CIDER.get(),
+				ModItems.MELON_JUICE.get());
+		takeAll(items, mugItems.toArray(new Item[0])).forEach(item -> itemMugModel(item, resourceItem(itemName(item))));
+
 		// Blocks with special item sprites
 		Set<Item> spriteBlockItems = Sets.newHashSet(
 				ModItems.FULL_TATAMI_MAT.get(),
 				ModItems.HALF_TATAMI_MAT.get(),
 				ModItems.ROPE.get(),
+				ModItems.CANVAS_SIGN.get(),
+				ModItems.WHITE_CANVAS_SIGN.get(),
+				ModItems.ORANGE_CANVAS_SIGN.get(),
+				ModItems.MAGENTA_CANVAS_SIGN.get(),
+				ModItems.LIGHT_BLUE_CANVAS_SIGN.get(),
+				ModItems.YELLOW_CANVAS_SIGN.get(),
+				ModItems.LIME_CANVAS_SIGN.get(),
+				ModItems.PINK_CANVAS_SIGN.get(),
+				ModItems.GRAY_CANVAS_SIGN.get(),
+				ModItems.LIGHT_GRAY_CANVAS_SIGN.get(),
+				ModItems.CYAN_CANVAS_SIGN.get(),
+				ModItems.PURPLE_CANVAS_SIGN.get(),
+				ModItems.BLUE_CANVAS_SIGN.get(),
+				ModItems.BROWN_CANVAS_SIGN.get(),
+				ModItems.GREEN_CANVAS_SIGN.get(),
+				ModItems.RED_CANVAS_SIGN.get(),
+				ModItems.BLACK_CANVAS_SIGN.get(),
 				ModItems.APPLE_PIE.get(),
 				ModItems.SWEET_BERRY_CHEESECAKE.get(),
 				ModItems.CHOCOLATE_PIE.get(),

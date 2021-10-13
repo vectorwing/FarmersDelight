@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:canvas_rug"
+    ]
+  },
+  "criteria": {
+    "has_canvas": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:canvas"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:canvas_rug"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_canvas",
+      "has_the_recipe"
+    ]
+  ]
+}

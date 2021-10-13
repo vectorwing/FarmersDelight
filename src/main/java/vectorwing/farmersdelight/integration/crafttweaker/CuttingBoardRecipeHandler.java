@@ -47,7 +47,7 @@ public class CuttingBoardRecipeHandler implements IRecipeHandler<CuttingBoardRec
                                 recipe.getGroup(),
                                 newIngredients.get(0),
                                 newIngredients.get(1),
-                                recipe.getResults(),
+                                recipe.getRollableResults(),
                                 recipe.getSoundEventID())
         );
     }

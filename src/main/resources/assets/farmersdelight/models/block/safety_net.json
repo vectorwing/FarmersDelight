@@ -1,17 +1,18 @@
 {
-	"credit": "Made with Blockbench",
-	"textures": {
-		"0": "farmersdelight:block/safety_net",
-		"particle": "farmersdelight:block/safety_net"
-	},
-	"elements": [
-		{
-			"from": [0, 8, 0],
-			"to": [16, 8, 16],
-			"faces": {
-				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
-			}
-		}
-	]
+  "credit": "Made with Blockbench",
+  "textures": {
+    "net": "farmersdelight:block/safety_net",
+    "particle": "farmersdelight:block/safety_net"
+  },
+  "elements": [
+    {
+      "name": "net",
+      "from": [0, 8, 0],
+      "to": [16, 8, 16],
+      "faces": {
+        "up": {"uv": [0, 0, 16, 16], "texture": "#net"},
+        "down": {"uv": [0, 0, 16, 16], "texture": "#net"}
+      }
+    }
+  ]
 }

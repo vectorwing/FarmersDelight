@@ -1,0 +1,43 @@
+{
+  "parent": "farmersdelight:block/skillet",
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [90, 0, 80],
+      "translation": [-5, 12.5, 1.75],
+      "scale": [0.85, 0.85, 0.85]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [90, 0, 80],
+      "translation": [-5, 12.5, 1.75],
+      "scale": [0.85, 0.85, 0.85]
+    },
+    "firstperson_righthand": {
+      "rotation": [81, -16, 90],
+      "translation": [0, 5, -8.5],
+      "scale": [0.9, 0.9, 0.9]
+    },
+    "firstperson_lefthand": {
+      "rotation": [81, -16, 90],
+      "translation": [0, 5, -8.5],
+      "scale": [0.9, 0.9, 0.9]
+    },
+    "ground": {
+      "translation": [0, 2, 0],
+      "scale": [0.25, 0.25, 0.25]
+    },
+    "gui": {
+      "rotation": [31, -38, 0],
+      "translation": [1, 3.75, 0],
+      "scale": [0.6, 0.6, 0.6]
+    },
+    "head": {
+      "rotation": [-180, 90, 0],
+      "scale": [1.1, 1.1, 1.1]
+    },
+    "fixed": {
+      "rotation": [-90, 0, 0],
+      "translation": [0, 0, -6.25],
+      "scale": [0.75, 0.75, 0.75]
+    }
+  }
+}

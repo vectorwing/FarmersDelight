@@ -9,7 +9,7 @@
   "seed": {
     "item": "farmersdelight:cabbage_seeds"
   },
-  "categories":["dirt"],
+  "categories": ["dirt"],
   "growthTicks": 1000,
   "display": {
     "block": "farmersdelight:cabbages",

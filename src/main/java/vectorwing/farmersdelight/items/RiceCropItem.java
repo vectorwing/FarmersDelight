@@ -20,14 +20,14 @@ public class RiceCropItem extends BlockNamedItem
 
 	@Override
 	public ActionResultType onItemUse(ItemUseContext context) {
-		ActionResultType actionresulttype = this.tryPlace(new BlockItemUseContext(context));
-		if (actionresulttype.equals(ActionResultType.FAIL)) {
+		ActionResultType result = this.tryPlace(new BlockItemUseContext(context));
+		if (result.equals(ActionResultType.FAIL)) {
 			PlayerEntity player = context.getPlayer();
-			BlockState targetBlock = context.getWorld().getBlockState(context.getPos());
-			if (player != null && context.getFace().equals(Direction.UP) && (targetBlock.isIn(Tags.Blocks.DIRT) || targetBlock.getBlock() instanceof FarmlandBlock)) {
+			BlockState targetState = context.getWorld().getBlockState(context.getPos());
+			if (player != null && context.getFace().equals(Direction.UP) && (targetState.isIn(Tags.Blocks.DIRT) || targetState.getBlock() instanceof FarmlandBlock)) {
 				player.sendStatusMessage(TextUtils.getTranslation("block.rice.invalid_placement"), true);
 			}
 		}
-		return !actionresulttype.isSuccessOrConsume() && this.isFood() ? this.onItemRightClick(context.getWorld(), context.getPlayer(), context.getHand()).getType() : actionresulttype;
+		return !result.isSuccessOrConsume() && this.isFood() ? this.onItemRightClick(context.getWorld(), context.getPlayer(), context.getHand()).getType() : result;
 	}
 }

@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
@@ -26,32 +25,26 @@ public class PantryTileEntity extends LockableLootTileEntity
 	private NonNullList<ItemStack> pantryContents = NonNullList.withSize(27, ItemStack.EMPTY);
 	private int numPlayersUsing;
 
-	private PantryTileEntity(TileEntityType<?> type) {
-		super(type);
-	}
-
 	public PantryTileEntity() {
-		this(ModTileEntityTypes.PANTRY_TILE.get());
+		super(ModTileEntityTypes.PANTRY_TILE.get());
 	}
 
 	@Override
 	public CompoundNBT write(CompoundNBT compound) {
 		super.write(compound);
-		if (!this.checkLootAndWrite(compound)) {
-			ItemStackHelper.saveAllItems(compound, this.pantryContents);
+		if (!checkLootAndWrite(compound)) {
+			ItemStackHelper.saveAllItems(compound, pantryContents);
 		}
-
 		return compound;
 	}
 
 	@Override
 	public void read(BlockState state, CompoundNBT compound) {
 		super.read(state, compound);
-		this.pantryContents = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
-		if (!this.checkLootAndRead(compound)) {
-			ItemStackHelper.loadAllItems(compound, this.pantryContents);
+		pantryContents = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
+		if (!checkLootAndRead(compound)) {
+			ItemStackHelper.loadAllItems(compound, pantryContents);
 		}
-
 	}
 
 	/**
@@ -64,12 +57,12 @@ public class PantryTileEntity extends LockableLootTileEntity
 
 	@Override
 	protected NonNullList<ItemStack> getItems() {
-		return this.pantryContents;
+		return pantryContents;
 	}
 
 	@Override
 	protected void setItems(NonNullList<ItemStack> itemsIn) {
-		this.pantryContents = itemsIn;
+		pantryContents = itemsIn;
 	}
 
 	@Override
@@ -85,45 +78,46 @@ public class PantryTileEntity extends LockableLootTileEntity
 	@Override
 	public void openInventory(PlayerEntity player) {
 		if (!player.isSpectator()) {
-			if (this.numPlayersUsing < 0) {
-				this.numPlayersUsing = 0;
+			if (numPlayersUsing < 0) {
+				numPlayersUsing = 0;
 			}
 
-			++this.numPlayersUsing;
-			BlockState blockstate = this.getBlockState();
-			boolean flag = blockstate.get(PantryBlock.OPEN);
-			if (!flag) {
-				this.playSound(blockstate, SoundEvents.BLOCK_BARREL_OPEN);
-				this.setOpenProperty(blockstate, true);
+			++numPlayersUsing;
+			BlockState state = getBlockState();
+			boolean isOpen = state.get(PantryBlock.OPEN);
+			if (!isOpen) {
+				playSound(state, SoundEvents.BLOCK_BARREL_OPEN);
+				setOpenProperty(state, true);
 			}
 
-			this.scheduleTick();
+			scheduleTick();
 		}
-
 	}
 
 	private void scheduleTick() {
-		this.world.getPendingBlockTicks().scheduleTick(this.getPos(), this.getBlockState().getBlock(), 5);
+		if (world != null) world.getPendingBlockTicks().scheduleTick(getPos(), getBlockState().getBlock(), 5);
 	}
 
-	public void pantryTick() {
-		int i = this.pos.getX();
-		int j = this.pos.getY();
-		int k = this.pos.getZ();
-		this.numPlayersUsing = ChestTileEntity.calculatePlayersUsing(this.world, this, i, j, k);
-		if (this.numPlayersUsing > 0) {
-			this.scheduleTick();
+	public void tick() {
+		if (world == null) return;
+
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
+		numPlayersUsing = ChestTileEntity.calculatePlayersUsing(world, this, x, y, z);
+		if (numPlayersUsing > 0) {
+			scheduleTick();
 		} else {
-			BlockState blockstate = this.getBlockState();
-			if (!(blockstate.getBlock() instanceof PantryBlock)) {
-				this.remove();
+			BlockState state = getBlockState();
+			if (!(state.getBlock() instanceof PantryBlock)) {
+				remove();
 				return;
 			}
 
-			boolean flag = blockstate.get(PantryBlock.OPEN);
-			if (flag) {
-				this.playSound(blockstate, SoundEvents.BLOCK_BARREL_CLOSE);
-				this.setOpenProperty(blockstate, false);
+			boolean isOpen = state.get(PantryBlock.OPEN);
+			if (isOpen) {
+				playSound(state, SoundEvents.BLOCK_BARREL_CLOSE);
+				setOpenProperty(state, false);
 			}
 		}
 
@@ -132,20 +126,22 @@ public class PantryTileEntity extends LockableLootTileEntity
 	@Override
 	public void closeInventory(PlayerEntity player) {
 		if (!player.isSpectator()) {
-			--this.numPlayersUsing;
+			--numPlayersUsing;
 		}
 
 	}
 
 	private void setOpenProperty(BlockState state, boolean open) {
-		this.world.setBlockState(this.getPos(), state.with(PantryBlock.OPEN, open), 3);
+		if (world != null) world.setBlockState(getPos(), state.with(PantryBlock.OPEN, open), 3);
 	}
 
 	private void playSound(BlockState state, SoundEvent sound) {
-		Vector3i vec3i = state.get(PantryBlock.FACING).getDirectionVec();
-		double d0 = (double) this.pos.getX() + 0.5D + (double) vec3i.getX() / 2.0D;
-		double d1 = (double) this.pos.getY() + 0.5D + (double) vec3i.getY() / 2.0D;
-		double d2 = (double) this.pos.getZ() + 0.5D + (double) vec3i.getZ() / 2.0D;
-		this.world.playSound(null, d0, d1, d2, sound, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
+		if (world == null) return;
+
+		Vector3i pantryFacingVector = state.get(PantryBlock.FACING).getDirectionVec();
+		double x = (double) pos.getX() + 0.5D + (double) pantryFacingVector.getX() / 2.0D;
+		double y = (double) pos.getY() + 0.5D + (double) pantryFacingVector.getY() / 2.0D;
+		double z = (double) pos.getZ() + 0.5D + (double) pantryFacingVector.getZ() / 2.0D;
+		world.playSound(null, x, y, z, sound, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 	}
 }

@@ -57,12 +57,12 @@ public class NourishedHungerOverlay
 		if (event.isCanceled())
 			return;
 
-		Minecraft mc = Minecraft.getInstance();
-		PlayerEntity player = mc.player;
+		Minecraft minecraft = Minecraft.getInstance();
+		PlayerEntity player = minecraft.player;
 		FoodStats stats = player.getFoodStats();
 
-		int left = mc.getMainWindow().getScaledWidth() / 2 + 91;
-		int top = mc.getMainWindow().getScaledHeight() - foodIconsOffset;
+		int left = minecraft.getMainWindow().getScaledWidth() / 2 + 91;
+		int top = minecraft.getMainWindow().getScaledHeight() - foodIconsOffset;
 
 		boolean isPlayerHealingWithSaturation =
 				player.world.getGameRules().getBoolean(GameRules.NATURAL_REGENERATION)
@@ -71,7 +71,7 @@ public class NourishedHungerOverlay
 						&& stats.getFoodLevel() >= 20;
 
 		if (player.getActivePotionEffect(ModEffects.NOURISHED.get()) != null) {
-			drawNourishedOverlay(stats, mc, event.getMatrixStack(), left, top, isPlayerHealingWithSaturation);
+			drawNourishedOverlay(stats, minecraft, event.getMatrixStack(), left, top, isPlayerHealingWithSaturation);
 		}
 	}
 
@@ -83,7 +83,7 @@ public class NourishedHungerOverlay
 		int foodLevel = stats.getFoodLevel();
 		int ticks = mc.ingameGUI.getTicks();
 		Random rand = new Random();
-		rand.setSeed((long)(ticks * 312871));
+		rand.setSeed((long) (ticks * 312871));
 
 		mc.getTextureManager().bindTexture(MOD_ICONS_TEXTURE);
 		RenderSystem.enableBlend();

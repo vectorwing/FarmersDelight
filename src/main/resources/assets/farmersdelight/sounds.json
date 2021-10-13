@@ -1,73 +1,66 @@
 {
   "block.cooking_pot.boil": {
-    "category": "block",
     "subtitle": "farmersdelight.subtitles.cooking_pot.boil",
     "sounds": [
-      {
-        "name": "farmersdelight:block/cooking_pot_boil1",
-        "stream": true
-      },
-      {
-        "name": "farmersdelight:block/cooking_pot_boil2",
-        "stream": true
-      }
+      "farmersdelight:block/cooking_pot/boil_water1",
+      "farmersdelight:block/cooking_pot/boil_water2"
+    ]
+  },
+  "block.cooking_pot.boil_soup": {
+    "subtitle": "farmersdelight.subtitles.cooking_pot.boil",
+    "sounds": [
+      "farmersdelight:block/cooking_pot/boil_soup1",
+      "farmersdelight:block/cooking_pot/boil_soup2",
+      "farmersdelight:block/cooking_pot/boil_soup3"
     ]
   },
   "block.cutting_board.knife": {
-    "category": "block",
     "subtitle": "farmersdelight.subtitles.cutting_board.knife_cut",
     "sounds": [
-      {
-        "name": "farmersdelight:block/cutting_board_knife1",
-        "stream": true
-      },
-      {
-        "name": "farmersdelight:block/cutting_board_knife2",
-        "stream": true
-      }
+      "farmersdelight:block/cutting_board/knife1",
+      "farmersdelight:block/cutting_board/knife2"
+    ]
+  },
+  "block.skillet.sizzle": {
+    "subtitle": "farmersdelight.subtitles.skillet.sizzle",
+    "sounds": [
+      "farmersdelight:block/skillet/sizzle1",
+      "farmersdelight:block/skillet/sizzle2",
+      "farmersdelight:block/skillet/sizzle3"
+    ]
+  },
+  "block.skillet.add_food": {
+    "subtitle": "farmersdelight.subtitles.skillet.add_food",
+    "sounds": [
+      "farmersdelight:block/skillet/add_food1",
+      "farmersdelight:block/skillet/add_food2"
+    ]
+  },
+  "item.skillet.attack.strong": {
+    "sounds": [
+      "farmersdelight:block/skillet/attack_strong"
+    ]
+  },
+  "item.skillet.attack.weak": {
+    "sounds": [
+      "farmersdelight:block/skillet/attack_weak"
     ]
   },
   "block.stove.crackle": {
-    "category": "block",
     "subtitle": "farmersdelight.subtitles.stove.crackle",
     "sounds": [
       {
-        "name": "block/campfire/crackle1",
-        "stream": true
-      },
-      {
-        "name": "block/campfire/crackle2",
-        "stream": true
-      },
-      {
-        "name": "block/campfire/crackle3",
-        "stream": true
-      },
-      {
-        "name": "block/campfire/crackle4",
-        "stream": true
-      },
-      {
-        "name": "block/campfire/crackle5",
-        "stream": true
-      },
-      {
-        "name": "block/campfire/crackle6",
-        "stream": true
+        "name": "block.campfire.crackle",
+        "type": "event"
       }
     ]
   },
   "item.tomato.pick_from_bush": {
-    "category": "block",
     "subtitle": "farmersdelight.subtitles.tomato.pick",
     "sounds": [
       {
-        "name": "item/sweet_berries/pick_from_bush1",
-        "stream": true
-      },
-      {
-        "name": "item/sweet_berries/pick_from_bush2",
-        "stream": true
+        "name": "item.sweet_berries.pick_from_bush",
+        "type": "event"
       }
     ]
   }

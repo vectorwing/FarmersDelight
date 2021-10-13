@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "farmersdelight:canvas_sign",
+    "farmersdelight:white_canvas_sign",
+    "farmersdelight:orange_canvas_sign",
+    "farmersdelight:magenta_canvas_sign",
+    "farmersdelight:light_blue_canvas_sign",
+    "farmersdelight:yellow_canvas_sign",
+    "farmersdelight:lime_canvas_sign",
+    "farmersdelight:pink_canvas_sign",
+    "farmersdelight:gray_canvas_sign",
+    "farmersdelight:light_gray_canvas_sign",
+    "farmersdelight:cyan_canvas_sign",
+    "farmersdelight:purple_canvas_sign",
+    "farmersdelight:blue_canvas_sign",
+    "farmersdelight:brown_canvas_sign",
+    "farmersdelight:green_canvas_sign",
+    "farmersdelight:red_canvas_sign",
+    "farmersdelight:black_canvas_sign"
+  ]
+}

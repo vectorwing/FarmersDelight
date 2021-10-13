@@ -1,6 +1,6 @@
 {
-	"parent": "minecraft:block/cube_all",
-	"textures": {
-		"all": "farmersdelight:block/tatami_mat_half"
-	}
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "farmersdelight:block/tatami_mat_half"
+  }
 }

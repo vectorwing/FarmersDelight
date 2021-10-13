@@ -7,9 +7,7 @@ import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.item.HoeItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.PickaxeItem;
+import net.minecraft.item.*;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.vector.Vector3f;
 import vectorwing.farmersdelight.blocks.CuttingBoardBlock;
@@ -24,25 +22,25 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 	@Override
 	public void render(CuttingBoardTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		Direction direction = tileEntityIn.getBlockState().get(CuttingBoardBlock.HORIZONTAL_FACING).getOpposite();
-		ItemStack itemStack = tileEntityIn.getStoredItem();
+		ItemStack boardStack = tileEntityIn.getStoredItem();
 
-		if (!itemStack.isEmpty()) {
+		if (!boardStack.isEmpty()) {
 			matrixStackIn.push();
 
 			ItemRenderer itemRenderer = Minecraft.getInstance()
 					.getItemRenderer();
-			boolean blockItem = itemRenderer.getItemModelWithOverrides(itemStack, tileEntityIn.getWorld(), null)
+			boolean isBlockItem = itemRenderer.getItemModelWithOverrides(boardStack, tileEntityIn.getWorld(), null)
 					.isGui3d();
 
-			if (tileEntityIn.getIsItemCarvingBoard()) {
-				renderItemCarved(matrixStackIn, direction, itemStack);
-			} else if (blockItem) {
+			if (tileEntityIn.isItemCarvingBoard()) {
+				renderItemCarved(matrixStackIn, direction, boardStack);
+			} else if (isBlockItem) {
 				renderBlock(matrixStackIn, direction);
 			} else {
 				renderItemLayingDown(matrixStackIn, direction);
 			}
 
-			Minecraft.getInstance().getItemRenderer().renderItem(itemStack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
+			Minecraft.getInstance().getItemRenderer().renderItem(boardStack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
 			matrixStackIn.pop();
 		}
 	}
@@ -76,14 +74,23 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 
 	public void renderItemCarved(MatrixStack matrixStackIn, Direction direction, ItemStack itemStack) {
 		// Center item above the cutting board
-		matrixStackIn.translate(0.5D, 0.25D, 0.5D);
+		matrixStackIn.translate(0.5D, 0.23D, 0.5D);
 
 		// Rotate item to face the cutting board's front side
-		float f = -direction.getHorizontalAngle();
+		float f = -direction.getHorizontalAngle() + 180;
 		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f));
 
 		// Rotate item to be carved on the surface, A little less so for hoes and pickaxes.
-		matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(itemStack.getItem() instanceof PickaxeItem || itemStack.getItem() instanceof HoeItem ? 225.0F : 180.0F));
+		Item toolItem = itemStack.getItem();
+		float poseAngle;
+		if (toolItem instanceof PickaxeItem || toolItem instanceof HoeItem) {
+			poseAngle = 225.0F;
+		} else if (toolItem instanceof TridentItem) {
+			poseAngle = 135.0F;
+		} else {
+			poseAngle = 180.0F;
+		}
+		matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(poseAngle));
 
 		// Resize the item
 		matrixStackIn.scale(0.6F, 0.6F, 0.6F);

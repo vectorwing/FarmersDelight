@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "name": "pool1",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "farmersdelight:copy_skillet",
+              "source": "block_entity"
+            }
+          ],
+          "name": "farmersdelight:skillet"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}

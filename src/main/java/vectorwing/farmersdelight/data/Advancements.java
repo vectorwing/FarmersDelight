@@ -154,6 +154,14 @@ public class Advancements extends AdvancementProvider
 					.withCriterion("cooking_pot", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.COOKING_POT.get()))
 					.register(consumer, getNameId("main/place_cooking_pot"));
 
+			Advancement portableCooking = getAdvancement(fireUpTheGrill, ModItems.SKILLET.get(), "use_skillet", FrameType.TASK, true, true, false)
+					.withCriterion("skillet", ConsumeItemTrigger.Instance.forItem(ModItems.SKILLET.get()))
+					.register(consumer, getNameId("main/use_skillet"));
+
+			Advancement sizzlingHot = getAdvancement(portableCooking, ModItems.SKILLET.get(), "place_skillet", FrameType.TASK, true, true, false)
+					.withCriterion("skillet", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.SKILLET.get()))
+					.register(consumer, getNameId("main/place_skillet"));
+
 			Advancement cupOfHappiness = getAdvancement(dinnerIsServed, ModItems.HOT_COCOA.get(), "drink_hot_cocoa", FrameType.TASK, true, true, false)
 					.withCriterion("hot_cocoa", ConsumeItemTrigger.Instance.forItem(ModItems.HOT_COCOA.get()))
 					.register(consumer, getNameId("main/drink_hot_cocoa"));

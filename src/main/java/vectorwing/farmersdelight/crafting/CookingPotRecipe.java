@@ -13,6 +13,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import vectorwing.farmersdelight.FarmersDelight;
 
@@ -21,7 +22,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class CookingPotRecipe implements IRecipe<IInventory>
+public class CookingPotRecipe implements IRecipe<RecipeWrapper>
 {
 	public static IRecipeType<CookingPotRecipe> TYPE = IRecipeType.register(FarmersDelight.MODID + ":cooking");
 	public static final Serializer SERIALIZER = new Serializer();
@@ -78,7 +79,7 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 	}
 
 	@Override
-	public ItemStack getCraftingResult(IInventory inv) {
+	public ItemStack getCraftingResult(RecipeWrapper inv) {
 		return this.output.copy();
 	}
 
@@ -91,7 +92,7 @@ public class CookingPotRecipe implements IRecipe<IInventory>
 	}
 
 	@Override
-	public boolean matches(IInventory inv, World worldIn) {
+	public boolean matches(RecipeWrapper inv, World worldIn) {
 		java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
 		int i = 0;
 

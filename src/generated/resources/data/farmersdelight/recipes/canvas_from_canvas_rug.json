@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "farmersdelight:canvas_rug"
+    },
+    {
+      "item": "farmersdelight:canvas_rug"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:canvas"
+  }
+}

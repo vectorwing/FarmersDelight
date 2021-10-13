@@ -21,6 +21,9 @@ public class ModTags
 	// Blocks that can heat up a Cooking Pot.
 	public static final ITag.INamedTag<Block> HEAT_SOURCES = modBlockTag("heat_sources");
 
+	// Blocks that can transfer heat to a Cooking Pot, if directly above a heat source.
+	public static final ITag.INamedTag<Block> HEAT_CONDUCTORS = modBlockTag("heat_conductors");
+
 	// Blocks to which a Cooking Pot will render a tray over. Included in HEAT_SOURCES.
 	public static final ITag.INamedTag<Block> TRAY_HEAT_SOURCES = modBlockTag("tray_heat_sources");
 
@@ -50,6 +53,9 @@ public class ModTags
 
 	// Knife items for game logic.
 	public static final ITag.INamedTag<Item> KNIVES = modItemTag("tools/knives");
+
+	// Canvas Signs items for crafting.
+	public static final ITag.INamedTag<Item> CANVAS_SIGNS = modItemTag("canvas_signs");
 
 	// Entities that should be able to eat Dog Food when tame. Defaults to tamed Wolves.
 	public static final ITag.INamedTag<EntityType<?>> DOG_FOOD_USERS = modEntityTag("dog_food_users");

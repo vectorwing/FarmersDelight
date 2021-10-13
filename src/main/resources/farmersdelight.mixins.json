@@ -1,17 +1,19 @@
 {
-    "required": true,
-    "package": "vectorwing.farmersdelight.mixin",
-    "compatibilityLevel": "JAVA_8",
-    "refmap": "farmersdelight.refmap.json",
-    "mixins": [
-        "CampfireBaleMixin",
-        "KeepRichSoilMixin",
-        "SoupItemMixin",
-        "accessors.ChickenEntityAccessor",
-        "accessors.PigEntityAccessor"
-    ],
-    "injectors": {
-        "defaultRequire": 1
-    },
-    "minVersion": "0.8"
+  "required": true,
+  "package": "vectorwing.farmersdelight.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "farmersdelight.refmap.json",
+  "mixins": [
+    "CampfireBaleMixin",
+    "CanvasSignMaterialMixin",
+    "KeepRichSoilMixin",
+    "SoupItemMixin",
+    "accessors.ChickenEntityAccessor",
+    "accessors.PigEntityAccessor",
+    "accessors.RecipeManagerAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
 }

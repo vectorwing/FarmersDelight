@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.registry;
 
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.Items;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraftforge.common.ToolType;
@@ -10,6 +11,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.blocks.*;
+import vectorwing.farmersdelight.blocks.crops.*;
+import vectorwing.farmersdelight.blocks.foods.*;
+import vectorwing.farmersdelight.blocks.signs.StandingCanvasSignBlock;
+import vectorwing.farmersdelight.blocks.signs.WallCanvasSignBlock;
 
 import java.util.function.ToIntFunction;
 
@@ -24,6 +29,7 @@ public class ModBlocks
 	// Workstations
 	public static final RegistryObject<Block> STOVE = BLOCKS.register("stove", () -> new StoveBlock(AbstractBlock.Properties.from(Blocks.BRICKS).setLightLevel(getLightValueLit(13))));
 	public static final RegistryObject<Block> COOKING_POT = BLOCKS.register("cooking_pot", CookingPotBlock::new);
+	public static final RegistryObject<Block> SKILLET = BLOCKS.register("skillet", SkilletBlock::new);
 	public static final RegistryObject<Block> BASKET = BLOCKS.register("basket", BasketBlock::new);
 	public static final RegistryObject<Block> CUTTING_BOARD = BLOCKS.register("cutting_board", CuttingBoardBlock::new);
 
@@ -66,9 +72,80 @@ public class ModBlocks
 			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
 	public static final RegistryObject<Block> WARPED_PANTRY = BLOCKS.register("warped_pantry",
 			() -> new PantryBlock(Block.Properties.from(Blocks.BARREL)));
+	public static final RegistryObject<Block> CANVAS_RUG = BLOCKS.register("canvas_rug", CanvasRugBlock::new);
 	public static final RegistryObject<Block> TATAMI = BLOCKS.register("tatami", TatamiBlock::new);
 	public static final RegistryObject<Block> FULL_TATAMI_MAT = BLOCKS.register("full_tatami_mat", TatamiMatBlock::new);
 	public static final RegistryObject<Block> HALF_TATAMI_MAT = BLOCKS.register("half_tatami_mat", TatamiHalfMatBlock::new);
+
+	public static final RegistryObject<Block> CANVAS_SIGN = BLOCKS.register("canvas_sign",
+			() -> new StandingCanvasSignBlock(null));
+	public static final RegistryObject<Block> WHITE_CANVAS_SIGN = BLOCKS.register("white_canvas_sign",
+			() -> new StandingCanvasSignBlock(DyeColor.WHITE));
+	public static final RegistryObject<Block> ORANGE_CANVAS_SIGN = BLOCKS.register("orange_canvas_sign",
+			() -> new StandingCanvasSignBlock(DyeColor.ORANGE));
+	public static final RegistryObject<Block> MAGENTA_CANVAS_SIGN = BLOCKS.register("magenta_canvas_sign",
+			() -> new StandingCanvasSignBlock(DyeColor.MAGENTA));
+	public static final RegistryObject<Block> LIGHT_BLUE_CANVAS_SIGN = BLOCKS.register("light_blue_canvas_sign",
+			() -> new StandingCanvasSignBlock(DyeColor.LIGHT_BLUE));
+	public static final RegistryObject<Block> YELLOW_CANVAS_SIGN = BLOCKS.register("yellow_canvas_sign",
+			() -> new StandingCanvasSignBlock(DyeColor.YELLOW));
+	public static final RegistryObject<Block> LIME_CANVAS_SIGN = BLOCKS.register("lime_canvas_sign",
+			() -> new StandingCanvasSignBlock(DyeColor.LIME));
+	public static final RegistryObject<Block> PINK_CANVAS_SIGN = BLOCKS.register("pink_canvas_sign",
+			() -> new StandingCanvasSignBlock(DyeColor.PINK));
+	public static final RegistryObject<Block> GRAY_CANVAS_SIGN = BLOCKS.register("gray_canvas_sign",
+			() -> new StandingCanvasSignBlock(DyeColor.GRAY));
+	public static final RegistryObject<Block> LIGHT_GRAY_CANVAS_SIGN = BLOCKS.register("light_gray_canvas_sign",
+			() -> new StandingCanvasSignBlock(DyeColor.LIGHT_GRAY));
+	public static final RegistryObject<Block> CYAN_CANVAS_SIGN = BLOCKS.register("cyan_canvas_sign",
+			() -> new StandingCanvasSignBlock(DyeColor.CYAN));
+	public static final RegistryObject<Block> PURPLE_CANVAS_SIGN = BLOCKS.register("purple_canvas_sign",
+			() -> new StandingCanvasSignBlock(DyeColor.PURPLE));
+	public static final RegistryObject<Block> BLUE_CANVAS_SIGN = BLOCKS.register("blue_canvas_sign",
+			() -> new StandingCanvasSignBlock(DyeColor.BLUE));
+	public static final RegistryObject<Block> BROWN_CANVAS_SIGN = BLOCKS.register("brown_canvas_sign",
+			() -> new StandingCanvasSignBlock(DyeColor.BROWN));
+	public static final RegistryObject<Block> GREEN_CANVAS_SIGN = BLOCKS.register("green_canvas_sign",
+			() -> new StandingCanvasSignBlock(DyeColor.GREEN));
+	public static final RegistryObject<Block> RED_CANVAS_SIGN = BLOCKS.register("red_canvas_sign",
+			() -> new StandingCanvasSignBlock(DyeColor.RED));
+	public static final RegistryObject<Block> BLACK_CANVAS_SIGN = BLOCKS.register("black_canvas_sign",
+			() -> new StandingCanvasSignBlock(DyeColor.BLACK));
+
+	public static final RegistryObject<Block> CANVAS_WALL_SIGN = BLOCKS.register("canvas_wall_sign",
+			() -> new WallCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN).lootFrom(CANVAS_SIGN), null));
+	public static final RegistryObject<Block> WHITE_CANVAS_WALL_SIGN = BLOCKS.register("white_canvas_wall_sign",
+			() -> new WallCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN).lootFrom(WHITE_CANVAS_SIGN), DyeColor.WHITE));
+	public static final RegistryObject<Block> ORANGE_CANVAS_WALL_SIGN = BLOCKS.register("orange_canvas_wall_sign",
+			() -> new WallCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN).lootFrom(ORANGE_CANVAS_SIGN), DyeColor.ORANGE));
+	public static final RegistryObject<Block> MAGENTA_CANVAS_WALL_SIGN = BLOCKS.register("magenta_canvas_wall_sign",
+			() -> new WallCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN).lootFrom(MAGENTA_CANVAS_SIGN), DyeColor.MAGENTA));
+	public static final RegistryObject<Block> LIGHT_BLUE_CANVAS_WALL_SIGN = BLOCKS.register("light_blue_canvas_wall_sign",
+			() -> new WallCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN).lootFrom(LIGHT_BLUE_CANVAS_SIGN), DyeColor.LIGHT_BLUE));
+	public static final RegistryObject<Block> YELLOW_CANVAS_WALL_SIGN = BLOCKS.register("yellow_canvas_wall_sign",
+			() -> new WallCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN).lootFrom(YELLOW_CANVAS_SIGN), DyeColor.YELLOW));
+	public static final RegistryObject<Block> LIME_CANVAS_WALL_SIGN = BLOCKS.register("lime_canvas_wall_sign",
+			() -> new WallCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN).lootFrom(LIME_CANVAS_SIGN), DyeColor.LIME));
+	public static final RegistryObject<Block> PINK_CANVAS_WALL_SIGN = BLOCKS.register("pink_canvas_wall_sign",
+			() -> new WallCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN).lootFrom(PINK_CANVAS_SIGN), DyeColor.PINK));
+	public static final RegistryObject<Block> GRAY_CANVAS_WALL_SIGN = BLOCKS.register("gray_canvas_wall_sign",
+			() -> new WallCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN).lootFrom(GRAY_CANVAS_SIGN), DyeColor.GRAY));
+	public static final RegistryObject<Block> LIGHT_GRAY_CANVAS_WALL_SIGN = BLOCKS.register("light_gray_canvas_wall_sign",
+			() -> new WallCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN).lootFrom(LIGHT_GRAY_CANVAS_SIGN), DyeColor.LIGHT_GRAY));
+	public static final RegistryObject<Block> CYAN_CANVAS_WALL_SIGN = BLOCKS.register("cyan_canvas_wall_sign",
+			() -> new WallCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN).lootFrom(CYAN_CANVAS_SIGN), DyeColor.CYAN));
+	public static final RegistryObject<Block> PURPLE_CANVAS_WALL_SIGN = BLOCKS.register("purple_canvas_wall_sign",
+			() -> new WallCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN).lootFrom(PURPLE_CANVAS_SIGN), DyeColor.PURPLE));
+	public static final RegistryObject<Block> BLUE_CANVAS_WALL_SIGN = BLOCKS.register("blue_canvas_wall_sign",
+			() -> new WallCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN).lootFrom(BLUE_CANVAS_SIGN), DyeColor.BLUE));
+	public static final RegistryObject<Block> BROWN_CANVAS_WALL_SIGN = BLOCKS.register("brown_canvas_wall_sign",
+			() -> new WallCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN).lootFrom(BROWN_CANVAS_SIGN), DyeColor.BROWN));
+	public static final RegistryObject<Block> GREEN_CANVAS_WALL_SIGN = BLOCKS.register("green_canvas_wall_sign",
+			() -> new WallCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN).lootFrom(GREEN_CANVAS_SIGN), DyeColor.GREEN));
+	public static final RegistryObject<Block> RED_CANVAS_WALL_SIGN = BLOCKS.register("red_canvas_wall_sign",
+			() -> new WallCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN).lootFrom(RED_CANVAS_SIGN), DyeColor.RED));
+	public static final RegistryObject<Block> BLACK_CANVAS_WALL_SIGN = BLOCKS.register("black_canvas_wall_sign",
+			() -> new WallCanvasSignBlock(Block.Properties.from(Blocks.OAK_SIGN).lootFrom(BLACK_CANVAS_SIGN), DyeColor.BLACK));
 
 	// Composting
 	public static final RegistryObject<Block> BROWN_MUSHROOM_COLONY = BLOCKS.register("brown_mushroom_colony",
@@ -127,8 +204,4 @@ public class ModBlocks
 			() -> new HoneyGlazedHamBlock(Block.Properties.from(Blocks.WHITE_WOOL), ModItems.HONEY_GLAZED_HAM, true));
 	public static final RegistryObject<Block> SHEPHERDS_PIE_BLOCK = BLOCKS.register("shepherds_pie_block",
 			() -> new ShepherdsPieBlock(Block.Properties.from(Blocks.CAKE), ModItems.SHEPHERDS_PIE, true));
-
-	@Deprecated
-	public static final RegistryObject<Block> TALL_RICE_CROP = BLOCKS.register("tall_rice_crop",
-			() -> new LegacyTallRiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
 }

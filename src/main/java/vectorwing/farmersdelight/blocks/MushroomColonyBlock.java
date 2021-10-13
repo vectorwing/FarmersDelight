@@ -66,26 +66,26 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 
 	@Override
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		BlockPos blockpos = pos.down();
-		BlockState blockstate = worldIn.getBlockState(blockpos);
-		if (blockstate.isIn(BlockTags.MUSHROOM_GROW_BLOCK)) {
+		BlockPos floorPos = pos.down();
+		BlockState floorState = worldIn.getBlockState(floorPos);
+		if (floorState.isIn(BlockTags.MUSHROOM_GROW_BLOCK)) {
 			return true;
 		} else {
-			return worldIn.getLightSubtracted(pos, 0) < PLACING_LIGHT_LEVEL && blockstate.canSustainPlant(worldIn, blockpos, net.minecraft.util.Direction.UP, this);
+			return worldIn.getLightSubtracted(pos, 0) < PLACING_LIGHT_LEVEL && floorState.canSustainPlant(worldIn, floorPos, net.minecraft.util.Direction.UP, this);
 		}
 	}
 
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		int age = state.get(COLONY_AGE);
-		ItemStack heldItem = player.getHeldItem(handIn);
+		ItemStack heldStack = player.getHeldItem(handIn);
 
-		if (age > 0 && heldItem.getItem().isIn(Tags.Items.SHEARS)) {
+		if (age > 0 && heldStack.getItem().isIn(Tags.Items.SHEARS)) {
 			spawnAsEntity(worldIn, pos, this.getItem(worldIn, pos, state));
 			worldIn.playSound(null, pos, SoundEvents.ENTITY_MOOSHROOM_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			worldIn.setBlockState(pos, state.with(COLONY_AGE, age - 1), 2);
 			if (!worldIn.isRemote) {
-				heldItem.damageItem(1, player, (playerIn) -> playerIn.sendBreakAnimation(handIn));
+				heldStack.damageItem(1, player, (playerIn) -> playerIn.sendBreakAnimation(handIn));
 			}
 			return ActionResultType.SUCCESS;
 		}
@@ -95,7 +95,7 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 
 	@Override
 	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
-		return state.get(COLONY_AGE) < 3;
+		return false;
 	}
 
 	public int getMaxAge() {

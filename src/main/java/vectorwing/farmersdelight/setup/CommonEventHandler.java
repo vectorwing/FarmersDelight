@@ -34,6 +34,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.conditions.VanillaCrateEnabledCondition;
 import vectorwing.farmersdelight.loot.functions.CopyMealFunction;
+import vectorwing.farmersdelight.loot.functions.CopySkilletFunction;
 import vectorwing.farmersdelight.loot.functions.SmokerCookFunction;
 import vectorwing.farmersdelight.mixin.accessors.ChickenEntityAccessor;
 import vectorwing.farmersdelight.mixin.accessors.PigEntityAccessor;
@@ -84,6 +85,7 @@ public class CommonEventHandler
 		ModAdvancements.register();
 
 		LootFunctionManager.func_237451_a_(CopyMealFunction.ID.toString(), new CopyMealFunction.Serializer());
+		LootFunctionManager.func_237451_a_(CopySkilletFunction.ID.toString(), new CopySkilletFunction.Serializer());
 		LootFunctionManager.func_237451_a_(SmokerCookFunction.ID.toString(), new SmokerCookFunction.Serializer());
 
 		CraftingHelper.register(new VanillaCrateEnabledCondition.Serializer());
@@ -232,7 +234,7 @@ public class CommonEventHandler
 
 		// Adds 3:00 of Jump Boost II when eating Rabbit Stew
 		if (Configuration.RABBIT_STEW_JUMP_BOOST.get() && food.equals(Items.RABBIT_STEW)) {
-			entity.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 3600, 1));
+			entity.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 100, 1));
 		}
 
 		// Adds 5:00 of Comfort when eating foods inside the tag farmersdelight:comfort_foods
