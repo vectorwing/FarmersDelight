@@ -53,10 +53,10 @@ public class SkilletItem extends BlockItem
 
 	public SkilletItem(Block blockIn, Item.Properties builderIn) {
 		super(blockIn, builderIn.defaultMaxDamage(SKILLET_TIER.getMaxUses()));
-		float attackDamage = 4.5F + SKILLET_TIER.getAttackDamage();
+		float attackDamage = 4.0F + SKILLET_TIER.getAttackDamage();
 		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", attackDamage, AttributeModifier.Operation.ADDITION));
-		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", -3.0F, AttributeModifier.Operation.ADDITION));
+		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", -3.1F, AttributeModifier.Operation.ADDITION));
 		this.toolAttributes = builder.build();
 	}
 
