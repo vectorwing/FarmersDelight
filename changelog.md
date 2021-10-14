@@ -52,6 +52,7 @@
         - Check the GitHub wiki to see how the new syntax works.
     - Updated JEI recipe displays to have dynamic outputs, and to also show drop chances;
     - Carved tools have been mirrored, so as to avoid cutting across the handle gap;
+    - New cutting recipes: Wild Crops, Leather Horse Armor
 - Knives:
     - Reduced swing speeds slightly;
 - Rice:

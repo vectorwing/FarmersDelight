@@ -20,7 +20,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.blocks.*;
 import vectorwing.farmersdelight.blocks.crops.*;
 import vectorwing.farmersdelight.blocks.foods.FeastBlock;
-import vectorwing.farmersdelight.blocks.foods.PieBlock;
+import vectorwing.farmersdelight.blocks.PieBlock;
 import vectorwing.farmersdelight.registry.ModBlocks;
 
 import javax.annotation.Nullable;

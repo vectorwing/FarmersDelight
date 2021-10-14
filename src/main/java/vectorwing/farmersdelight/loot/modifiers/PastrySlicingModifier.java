@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
 import net.minecraftforge.registries.ForgeRegistries;
-import vectorwing.farmersdelight.blocks.foods.PieBlock;
+import vectorwing.farmersdelight.blocks.PieBlock;
 
 import javax.annotation.Nonnull;
 import java.util.List;
