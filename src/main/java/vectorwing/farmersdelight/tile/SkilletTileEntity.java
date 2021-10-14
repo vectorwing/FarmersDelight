@@ -35,6 +35,7 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 {
 	private final ItemStackHandler inventory = createHandler();
 	private int cookingTime;
+	private int cookingTimeTotal;
 	private ResourceLocation lastRecipeID;
 
 	private ItemStack skilletStack;
@@ -59,7 +60,7 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 					cookAndOutputItems(cookingStack);
 				}
 			} else if (cookingTime > 0) {
-				cookingTime = MathHelper.clamp(cookingTime - 2, 0, getCookingTime());
+				cookingTime = MathHelper.clamp(cookingTime - 2, 0, cookingTimeTotal);
 			}
 		} else {
 			if (isHeated && hasStoredStack()) {
@@ -72,7 +73,7 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 		if (world == null) return;
 
 		++cookingTime;
-		if (cookingTime >= getCookingTime()) {
+		if (cookingTime >= cookingTimeTotal) {
 			Inventory wrapper = new Inventory(cookingStack);
 			Optional<CampfireCookingRecipe> recipe = getMatchingRecipe(wrapper);
 			if (recipe.isPresent()) {
@@ -148,6 +149,7 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 		inventory.deserializeNBT(compound.getCompound("Inventory"));
 		cookingTime = compound.getInt("CookTime");
 		skilletStack = ItemStack.read(compound.getCompound("Skillet"));
+		fireAspectLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.FIRE_ASPECT, skilletStack);
 	}
 
 	@Override
@@ -170,17 +172,10 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 		inventoryChanged();
 	}
 
-	public int getCookingTime() {
-		int cookingTimeReduction = 0;
-		if (fireAspectLevel > 0) {
-			cookingTimeReduction = ((MathHelper.clamp(fireAspectLevel, 0, 2) * 20) + 20);
-		}
-		return 120 - cookingTimeReduction;
-	}
-
 	public ItemStack addItemToCook(ItemStack addedStack, @Nullable PlayerEntity player) {
 		Optional<CampfireCookingRecipe> recipe = getMatchingRecipe(new Inventory(addedStack));
 		if (recipe.isPresent()) {
+			cookingTimeTotal = SkilletBlock.getSkilletCookingTime(recipe.get().getCookTime(), fireAspectLevel);
 			boolean wasEmpty = getStoredStack().isEmpty();
 			ItemStack remainderStack = inventory.insertItem(0, addedStack.copy(), false);
 			if (remainderStack != addedStack) {

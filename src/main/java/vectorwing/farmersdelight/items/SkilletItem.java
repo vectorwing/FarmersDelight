@@ -37,6 +37,7 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.blocks.SkilletBlock;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.tile.SkilletTileEntity;
 import vectorwing.farmersdelight.utils.TextUtils;
@@ -79,7 +80,8 @@ public class SkilletItem extends BlockItem
 			ItemStack tool = player.getHeldItem(Hand.MAIN_HAND);
 			if (tool.getItem() instanceof SkilletItem) {
 				if (attackPower > 0.8F) {
-					player.getEntityWorld().playSound(player, player.getPosX(), player.getPosY(), player.getPosZ(), ModSounds.ITEM_SKILLET_ATTACK_STRONG.get(), SoundCategory.PLAYERS, 1.0F, 1.0F);
+					float pitch = 0.9F + (random.nextFloat() * 0.2F);
+					player.getEntityWorld().playSound(player, player.getPosX(), player.getPosY(), player.getPosZ(), ModSounds.ITEM_SKILLET_ATTACK_STRONG.get(), SoundCategory.PLAYERS, 1.0F, pitch);
 				} else {
 					player.getEntityWorld().playSound(player, player.getPosX(), player.getPosY(), player.getPosZ(), ModSounds.ITEM_SKILLET_ATTACK_WEAK.get(), SoundCategory.PLAYERS, 0.8F, 0.9F);
 				}
@@ -109,11 +111,8 @@ public class SkilletItem extends BlockItem
 	@Override
 	public int getUseDuration(ItemStack stack) {
 		int fireAspectLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.FIRE_ASPECT, stack);
-		int cookingTimeReduction = 0;
-		if (fireAspectLevel > 0) {
-			cookingTimeReduction = ((MathHelper.clamp(fireAspectLevel, 0, 2) * 20) + 20);
-		}
-		return 120 - cookingTimeReduction;
+		int cookingTime = stack.getOrCreateTag().getInt("CookTimeHandheld");
+		return SkilletBlock.getSkilletCookingTime(cookingTime, fireAspectLevel);
 	}
 
 	@Override
@@ -128,10 +127,12 @@ public class SkilletItem extends BlockItem
 				return ActionResult.resultPass(skilletStack);
 			}
 
-			if (getCookingRecipe(cookingStack, world).isPresent()) {
+			Optional<CampfireCookingRecipe> recipe = getCookingRecipe(cookingStack, world);
+			if (recipe.isPresent()) {
 				ItemStack cookingStackCopy = cookingStack.copy();
 				ItemStack cookingStackUnit = cookingStackCopy.split(1);
 				skilletStack.getOrCreateTag().put("Cooking", cookingStackUnit.serializeNBT());
+				skilletStack.getOrCreateTag().putInt("CookTimeHandheld", recipe.get().getCookTime());
 				player.setActiveHand(hand);
 				player.setHeldItem(otherHand, cookingStackCopy);
 				return ActionResult.resultConsume(skilletStack);
@@ -169,6 +170,7 @@ public class SkilletItem extends BlockItem
 			ItemStack cookingStack = ItemStack.read(tag.getCompound("Cooking"));
 			player.inventory.placeItemBackInInventory(worldIn, cookingStack);
 			tag.remove("Cooking");
+			tag.remove("CookTimeHandheld");
 		}
 	}
 
@@ -195,6 +197,7 @@ public class SkilletItem extends BlockItem
 				}
 			});
 			tag.remove("Cooking");
+			tag.remove("CookTimeHandheld");
 		}
 
 		return stack;

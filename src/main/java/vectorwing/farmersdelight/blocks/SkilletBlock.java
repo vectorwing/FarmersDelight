@@ -10,6 +10,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CampfireCookingRecipe;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
@@ -17,6 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
@@ -36,6 +38,8 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public class SkilletBlock extends HorizontalBlock
 {
+	public static final int MINIMUM_COOKING_TIME = 60;
+
 	public static final BooleanProperty SUPPORT = BooleanProperty.create("support");
 
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 4.0D, 15.0D);
@@ -161,5 +165,24 @@ public class SkilletBlock extends HorizontalBlock
 
 	private boolean getTrayState(IWorld world, BlockPos pos) {
 		return world.getBlockState(pos.down()).getBlock().isIn(ModTags.TRAY_HEAT_SOURCES);
+	}
+
+	/**
+	 * Calculates the total cooking time for the Skillet, affected by Fire Aspect.
+	 * Assuming a default of 30 seconds (600 ticks), the time is divided by 5, then reduced further per level of Fire Aspect, to a minimum of 3 seconds.
+	 * Times are always rounded to a multiple of 20, to ensure exact seconds.
+	 */
+	public static int getSkilletCookingTime(int originalCookingTime, int fireAspectLevel) {
+		int cookingTime = originalCookingTime > 0 ? originalCookingTime : 600;
+		int cookingSeconds = cookingTime / 20;
+		float cookingTimeReduction = 0.2F;
+
+		if (fireAspectLevel > 0) {
+			cookingTimeReduction -= fireAspectLevel * 0.05;
+		}
+
+		int result = (int) (cookingSeconds * cookingTimeReduction) * 20;
+
+		return MathHelper.clamp(result, MINIMUM_COOKING_TIME, originalCookingTime);
 	}
 }
