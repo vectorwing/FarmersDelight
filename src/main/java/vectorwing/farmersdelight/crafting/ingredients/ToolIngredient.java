@@ -18,51 +18,51 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class ToolIngredient extends Ingredient
 {
-    public static final Serializer SERIALIZER = new Serializer();
+	public static final Serializer SERIALIZER = new Serializer();
 
-    public final ToolType toolType;
+	public final ToolType toolType;
 
-    public ToolIngredient(ToolType toolType) {
-        super(ForgeRegistries.ITEMS.getValues().stream()
-                .map(ItemStack::new)
-                .filter(stack -> stack.getToolTypes().contains(toolType))
-                .map(Ingredient.SingleItemList::new));
-        this.toolType = toolType;
-    }
+	public ToolIngredient(ToolType toolType) {
+		super(ForgeRegistries.ITEMS.getValues().stream()
+				.map(ItemStack::new)
+				.filter(stack -> stack.getToolTypes().contains(toolType))
+				.map(Ingredient.SingleItemList::new));
+		this.toolType = toolType;
+	}
 
-    @Override
-    public boolean test(@Nullable ItemStack stack) {
-        return stack != null && stack.getToolTypes().contains(toolType) || super.test(stack);
-    }
+	@Override
+	public boolean test(@Nullable ItemStack stack) {
+		return stack != null && stack.getToolTypes().contains(toolType);
+	}
 
-    @Override
-    public JsonElement serialize() {
-        JsonObject json = new JsonObject();
-        json.addProperty("type", CraftingHelper.getID(SERIALIZER).toString());
-        json.addProperty("tool", toolType.getName());
-        return json;
-    }
+	@Override
+	public JsonElement serialize() {
+		JsonObject json = new JsonObject();
+		json.addProperty("type", CraftingHelper.getID(SERIALIZER).toString());
+		json.addProperty("tool", toolType.getName());
+		return json;
+	}
 
-    @Override
-    public IIngredientSerializer<? extends Ingredient> getSerializer() {
-        return SERIALIZER;
-    }
+	@Override
+	public IIngredientSerializer<? extends Ingredient> getSerializer() {
+		return SERIALIZER;
+	}
 
-    public static class Serializer implements IIngredientSerializer<ToolIngredient>
-    {
-        @Override
-        public ToolIngredient parse(JsonObject json) {
-            return new ToolIngredient(ToolType.get(json.get("tool").getAsString()));
-        }
+	public static class Serializer implements IIngredientSerializer<ToolIngredient>
+	{
+		@Override
+		public ToolIngredient parse(JsonObject json) {
+			return new ToolIngredient(ToolType.get(json.get("tool").getAsString()));
+		}
 
-        @Override
-        public ToolIngredient parse(PacketBuffer buffer) {
-            return new ToolIngredient(ToolType.get(buffer.readString()));
-        }
+		@Override
+		public ToolIngredient parse(PacketBuffer buffer) {
+			return new ToolIngredient(ToolType.get(buffer.readString()));
+		}
 
-        @Override
-        public void write(PacketBuffer buffer, ToolIngredient ingredient) {
-            buffer.writeString(ingredient.toolType.getName());
-        }
-    }
+		@Override
+		public void write(PacketBuffer buffer, ToolIngredient ingredient) {
+			buffer.writeString(ingredient.toolType.getName());
+		}
+	}
 }

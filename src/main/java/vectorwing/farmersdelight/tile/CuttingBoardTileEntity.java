@@ -214,6 +214,11 @@ public class CuttingBoardTileEntity extends FDSyncedTileEntity
 			public int getSlotLimit(int slot) {
 				return 1;
 			}
+
+			@Override
+			protected void onContentsChanged(int slot) {
+				inventoryChanged();
+			}
 		};
 	}
 }
