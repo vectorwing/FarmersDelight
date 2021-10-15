@@ -186,6 +186,14 @@
           "item": "farmersdelight:shepherds_pie"
         }
       }
+    },
+    "bacon_and_eggs": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "farmersdelight:bacon_and_eggs"
+        }
+      }
     }
   },
   "requirements": [
@@ -251,6 +259,9 @@
     ],
     [
       "shepherds_pie"
+    ],
+    [
+      "bacon_and_eggs"
     ]
   ]
 }
