@@ -64,6 +64,7 @@
 - Fix most sounds being set to `stream` when they shouldn't be;
 - Fix mugs rendering incorrectly when in the off-hand;
 - Fix Mushroom Colonies allowing the usage of Bone Meal on some growth stages;
+- Fix ToolIngredient checking a stale list of ingredients, making Tinker's Construct tools always match;
 
 ### Translation Updates
 - (NEW!) ca_ES (thanks, VerdaPegasus!)
