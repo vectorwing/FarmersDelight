@@ -71,10 +71,10 @@ public class Foods
 			.hunger(2).saturation(0.1f).fastToEat().build();
 	public static final Food CAKE_SLICE = (new Food.Builder())
 			.hunger(2).saturation(0.1f).fastToEat()
-			.effect(() -> new EffectInstance(Effects.SPEED, 1200, 0), 1.0F).build();
+			.effect(() -> new EffectInstance(Effects.SPEED, 400, 0), 1.0F).build();
 	public static final Food PIE_SLICE = (new Food.Builder())
 			.hunger(3).saturation(0.3f).fastToEat()
-			.effect(() -> new EffectInstance(Effects.SPEED, 1800, 0), 1.0F).build();
+			.effect(() -> new EffectInstance(Effects.SPEED, 600, 0), 1.0F).build();
 	public static final Food FRUIT_SALAD = (new Food.Builder())
 			.hunger(6).saturation(0.6f)
 			.effect(() -> new EffectInstance(Effects.REGENERATION, 100, 0), 1.0F).build();

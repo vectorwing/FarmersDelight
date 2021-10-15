@@ -27,6 +27,7 @@
 
 ### Updates
 - All workstations have been **optimized** for better performance, and now cache the previous recipes when processing;
+- Pie and cake slices had their Speed buff shortened to 30 seconds; 
 - Cooking Pot:
     - You now get **experience points** from cooking!
         - Just like a Furnace, retrieving meals from the output slot will reward you the experience stored so far;
