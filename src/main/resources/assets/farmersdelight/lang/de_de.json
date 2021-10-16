@@ -168,10 +168,10 @@
   "item.farmersdelight.dog_food": "Hundefutter",
   "item.farmersdelight.horse_feed": "Pferdefutter",
 
-  "effect.farmersdelight.nourished": "Genährt",
+  "effect.farmersdelight.nourishment": "Genährt",
   "effect.farmersdelight.comfort": "Komfort",
 
-  "effect.farmersdelight.nourished.0.desc": "Verhindert hungerverlust, es sei denn es wird Leben regeneriert.",
+  "effect.farmersdelight.nourishment.0.desc": "Verhindert hungerverlust, es sei denn es wird Leben regeneriert.",
   "effect.farmersdelight.comfort.0.desc": "Gibt immuinität gegenüber Hunger, Langsamkeit und Schwäche",
 
   "enchantment.farmersdelight.backstabbing": "Hinterhalt",

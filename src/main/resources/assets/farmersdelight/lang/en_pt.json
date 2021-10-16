@@ -168,10 +168,10 @@
   "item.farmersdelight.dog_food": "Hound's Chow",
   "item.farmersdelight.horse_feed": "Land Beast's Hay",
 
-  "effect.farmersdelight.nourished": "Belly's Full",
+  "effect.farmersdelight.nourishment": "Belly's Full",
   "effect.farmersdelight.comfort": "Free o' Scurvy",
 
-  "effect.farmersdelight.nourished.0.desc": "Ye can't get hungry, lest yer belly be digestin' food ta heal ye.",
+  "effect.farmersdelight.nourishment.0.desc": "Ye can't get hungry, lest yer belly be digestin' food ta heal ye.",
   "effect.farmersdelight.comfort.0.desc": "Wards off Scurvy, Sloth and Laziness.",
 
   "enchantment.farmersdelight.backstabbing": "Mutiny",

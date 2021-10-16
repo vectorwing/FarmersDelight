@@ -145,10 +145,10 @@
   "item.farmersdelight.dog_food": "Comida de cão",
   "item.farmersdelight.horse_feed": "Ração de cavalo",
 
-  "effect.farmersdelight.nourished": "Nutrição",
+  "effect.farmersdelight.nourishment": "Nutrição",
   "effect.farmersdelight.comfort": "Conforto",
 
-  "effect.farmersdelight.nourished.0.desc": "Previne o apetite, exceto ao usar saturação para curar dano.",
+  "effect.farmersdelight.nourishment.0.desc": "Previne o apetite, exceto ao usar saturação para curar dano.",
   "effect.farmersdelight.comfort.0.desc": "Torna-te imune à Fome, Lentidão e Fraqueza.",
 
   "enchantment.farmersdelight.backstabbing": "Facada nas costas",

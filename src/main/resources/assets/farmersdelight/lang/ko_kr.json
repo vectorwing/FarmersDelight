@@ -145,10 +145,10 @@
   "item.farmersdelight.dog_food": "개밥",
   "item.farmersdelight.horse_feed":  "말먹이",
 
-  "effect.farmersdelight.nourished": "배부름",
+  "effect.farmersdelight.nourishment": "배부름",
   "effect.farmersdelight.comfort": "편안함",
   
-  "effect.farmersdelight.nourished.0.desc": "체력을 회복할 때를 제외하고 배고픔 수치가 줄어들지 않습니다.",
+  "effect.farmersdelight.nourishment.0.desc": "체력을 회복할 때를 제외하고 배고픔 수치가 줄어들지 않습니다.",
   "effect.farmersdelight.comfort.0.desc": "허기, 속도 감소, 나약함에 면역이 됩니다.",
 
   "enchantment.farmersdelight.backstabbing": "암습",

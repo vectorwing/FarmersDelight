@@ -145,10 +145,10 @@
   "item.farmersdelight.dog_food": "Psia karma",
   "item.farmersdelight.horse_feed": "Pasza dla koni",
 
-  "effect.farmersdelight.nourished": "Najedzenie",
+  "effect.farmersdelight.nourishment": "Najedzenie",
   "effect.farmersdelight.comfort": "Komfort",
   
-  "effect.farmersdelight.nourished.0.desc": "Zapobiega spadaniu poziomu głodu kiedy nasycenie nie jest używane do leczenia obrażeń",
+  "effect.farmersdelight.nourishment.0.desc": "Zapobiega spadaniu poziomu głodu kiedy nasycenie nie jest używane do leczenia obrażeń",
   "effect.farmersdelight.comfort.0.desc": "Nadaje graczowi odporność na głód, spowolnienie i słabość",
 
   "enchantment.farmersdelight.backstabbing": "Dźganie w plecy",

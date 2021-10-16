@@ -145,10 +145,10 @@
   "item.farmersdelight.dog_food": "Cibo per cani",
   "item.farmersdelight.horse_feed": "Alimento per cavalli",
 
-  "effect.farmersdelight.nourished": "Nutrimento",
+  "effect.farmersdelight.nourishment": "Nutrimento",
   "effect.farmersdelight.comfort": "Conforto",
 
-  "effect.farmersdelight.nourished.0.desc": "Impedisce la perdita della fame, tranne quando si utilizza saturazione per guarire i danni.",
+  "effect.farmersdelight.nourishment.0.desc": "Impedisce la perdita della fame, tranne quando si utilizza saturazione per guarire i danni.",
   "effect.farmersdelight.comfort.0.desc": "Ti rende immuno alla fame, lentezza e debolezza.",
 
   "enchantment.farmersdelight.backstabbing": "Pugnalata alla schiena",

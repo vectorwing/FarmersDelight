@@ -145,10 +145,10 @@
   "item.farmersdelight.dog_food": "Menjar per gossos",
   "item.farmersdelight.horse_feed": "Menjar per caballs",
 
-  "effect.farmersdelight.nourished": "Nodrit",
+  "effect.farmersdelight.nourishment": "Nodrit",
   "effect.farmersdelight.comfort": "Benesetar",
 
-  "effect.farmersdelight.nourished.0.desc": "Evita l'increment de la gana, excepte quan s'utilitza la saturació per curar el mal",
+  "effect.farmersdelight.nourishment.0.desc": "Evita l'increment de la gana, excepte quan s'utilitza la saturació per curar el mal",
   "effect.farmersdelight.comfort.0.desc": "Et dona immunitat  a la gana, la lentitud i la debilitat.",
 
   "enchantment.farmersdelight.backstabbing": "Punyalada per l'esquena",

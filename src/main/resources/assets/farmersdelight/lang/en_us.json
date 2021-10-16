@@ -168,10 +168,10 @@
   "item.farmersdelight.dog_food": "Dog Food",
   "item.farmersdelight.horse_feed": "Horse Feed",
 
-  "effect.farmersdelight.nourished": "Nourishment",
+  "effect.farmersdelight.nourishment": "Nourishment",
   "effect.farmersdelight.comfort": "Comfort",
 
-  "effect.farmersdelight.nourished.0.desc": "Prevents hunger loss, except when using saturation to heal damage.",
+  "effect.farmersdelight.nourishment.0.desc": "Prevents hunger loss, except when using saturation to heal damage.",
   "effect.farmersdelight.comfort.0.desc": "Makes you immune to Hunger, Slowness and Weakness.",
 
   "enchantment.farmersdelight.backstabbing": "Backstabbing",

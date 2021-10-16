@@ -31,6 +31,6 @@ public class ModSounds
 	public static final RegistryObject<SoundEvent> BLOCK_STOVE_CRACKLE = SOUNDS.register("block.stove.crackle",
 			() -> new SoundEvent(new ResourceLocation(FarmersDelight.MODID, "block.stove.crackle")));
 
-	public static final RegistryObject<SoundEvent> ITEM_TOMATO_PICK_FROM_BUSH = SOUNDS.register("item.tomato.pick_from_bush",
-			() -> new SoundEvent(new ResourceLocation(FarmersDelight.MODID, "item.tomato.pick_from_bush")));
+	public static final RegistryObject<SoundEvent> ITEM_TOMATO_PICK_FROM_BUSH = SOUNDS.register("block.tomato_bush.pick_tomatoes",
+			() -> new SoundEvent(new ResourceLocation(FarmersDelight.MODID, "block.tomato_bush.pick_tomatoes")));
 }

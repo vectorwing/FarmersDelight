@@ -145,10 +145,10 @@
   "item.farmersdelight.dog_food": "Köpek Maması",
   "item.farmersdelight.horse_feed": "At Yemi",
 
-  "effect.farmersdelight.nourished": "Beslenme",
+  "effect.farmersdelight.nourishment": "Beslenme",
   "effect.farmersdelight.comfort": "Konfor",
 
-  "effect.farmersdelight.nourished.0.desc": "Hasarı iyileştirmek için doygunluk kullanılması haricinde açlık kaybını önler.",
+  "effect.farmersdelight.nourishment.0.desc": "Hasarı iyileştirmek için doygunluk kullanılması haricinde açlık kaybını önler.",
   "effect.farmersdelight.comfort.0.desc": "Açlığa, Yavaşlığa ve Zayıflığa karşı bağışıklık kazandırır.",
 
   "enchantment.farmersdelight.backstabbing": "Arkadan bıçaklama",

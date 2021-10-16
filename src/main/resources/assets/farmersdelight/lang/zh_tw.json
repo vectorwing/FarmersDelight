@@ -144,13 +144,13 @@
   "item.farmersdelight.dog_food": "狗飼料",
   "item.farmersdelight.horse_feed": "馬飼料",
 
-  "effect.farmersdelight.nourished": "滋補",
+  "effect.farmersdelight.nourishment": "滋補",
   "effect.farmersdelight.comfort": "放鬆",
 
   "enchantment.farmersdelight.backstabbing": "背刺",
   "enchantment.farmersdelight.backstabbing.desc": "增加從背後攻擊的傷害",
 
-  "effect.farmersdelight.nourished.0.desc": "讓飽足感停止自然流失,除非回血.",
+  "effect.farmersdelight.nourishment.0.desc": "讓飽足感停止自然流失,除非回血.",
   "effect.farmersdelight.comfort.0.desc": "使您免受飢餓,緩慢和虛弱的困擾.",
 
   "itemGroup.farmersdelight": "Farmer's Delight",

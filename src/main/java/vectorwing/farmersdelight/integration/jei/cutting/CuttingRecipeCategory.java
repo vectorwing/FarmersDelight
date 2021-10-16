@@ -40,7 +40,7 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 	private final CuttingBoardModel cuttingBoard;
 
 	public CuttingRecipeCategory(IGuiHelper helper) {
-		title = TextUtils.getTranslation(FarmersDelight.MODID + ".jei.cutting");
+		title = TextUtils.getTranslation("jei.cutting");
 		ResourceLocation backgroundImage = new ResourceLocation(FarmersDelight.MODID, "textures/gui/jei/cutting_board.png");
 		slot = helper.createDrawable(backgroundImage, 0, 58, 18, 18);
 		slotChance = helper.createDrawable(backgroundImage, 18, 58, 18, 18);
@@ -120,7 +120,7 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 
 	@Override
 	public void draw(CuttingBoardRecipe recipe, PoseStack matrixStack, double mouseX, double mouseY) {
-		cuttingBoard.draw(matrixStack, 15, 19);
+		//cuttingBoard.draw(matrixStack, 15, 19);
 		NonNullList<ChanceResult> recipeOutputs = recipe.getRollableResults();
 
 		int size = recipe.getResults().size();

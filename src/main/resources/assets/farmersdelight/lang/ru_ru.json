@@ -144,10 +144,10 @@
   "item.farmersdelight.dog_food": "Собачий корм",
   "item.farmersdelight.horse_feed": "Лошадиный корм",
 
-  "effect.farmersdelight.nourished": "Сытость",
+  "effect.farmersdelight.nourishment": "Сытость",
   "effect.farmersdelight.comfort": "Комфорт",
 
-  "effect.farmersdelight.nourished.0.desc": "Предотвращает потерю голода, за исключением случаев использования насыщения для лечения.",
+  "effect.farmersdelight.nourishment.0.desc": "Предотвращает потерю голода, за исключением случаев использования насыщения для лечения.",
   "effect.farmersdelight.comfort.0.desc": "Делает вас невосприимчивым к Голоду, Медлительности и Слабости.",
 
   "enchantment.farmersdelight.backstabbing": "Предательство",

@@ -55,11 +55,11 @@
       }
     ]
   },
-  "item.tomato.pick_from_bush": {
+  "block.tomato_bush.pick_tomatoes": {
     "subtitle": "farmersdelight.subtitles.tomato.pick",
     "sounds": [
       {
-        "name": "item.sweet_berries.pick_from_bush",
+        "name": "block.sweet_berry_bush.pick_berries",
         "type": "event"
       }
     ]

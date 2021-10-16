@@ -145,10 +145,10 @@
   "item.farmersdelight.dog_food": "Makanan Anjing",
   "item.farmersdelight.horse_feed": "Pakan Kuda",
 
-  "effect.farmersdelight.nourished": "Bergizi",
+  "effect.farmersdelight.nourishment": "Bergizi",
   "effect.farmersdelight.comfort": "Kenyamanan",
 
-  "effect.farmersdelight.nourished.0.desc": "Mencegah kehilangan rasa lapar, kecuali saat menggunakan saturasi untuk menyembuhkan luka.",
+  "effect.farmersdelight.nourishment.0.desc": "Mencegah kehilangan rasa lapar, kecuali saat menggunakan saturasi untuk menyembuhkan luka.",
   "effect.farmersdelight.comfort.0.desc": "Membuat Anda kebal terhadap Kelaparan, Kelambatan dan Kelemahan.",
 
   "enchantment.farmersdelight.backstabbing": "Menusuk dari Belakang",
