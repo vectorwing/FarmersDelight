@@ -258,5 +258,7 @@
   "farmersdelight.jei.decomposition.light": "Acelerado pela luz do sol",
   "farmersdelight.jei.decomposition.fluid": "Acelerado por água ao redor",
   "farmersdelight.jei.decomposition.accelerators": "Acelerado por ativadores ao redor (veja abaixo)",
-  "farmersdelight.jei.info.straw": "Uma fibra vegetal usada em criação. Obtida ao cortar plantas e hortas gramíneas com uma Faca."
+  "farmersdelight.jei.info.straw": "Uma fibra vegetal usada em criação. Obtida ao cortar plantas e hortas gramíneas com uma Faca.",
+  "farmersdelight.jei.info.knife": "Facas são armas leves e rápidas. Elas podem colher Palha de plantas gramíneas, ou garantir itens secundários de animais.",
+  "farmersdelight.jei.info.ham": "Um corte grande de carne, vindo da perna de Porcos ou Hoglins. Você precisará de uma arma mais leve para obter isto..."
 }
