@@ -35,7 +35,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+import vectorwing.farmersdelight.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.tile.CuttingBoardBlockEntity;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
@@ -196,7 +196,7 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return ModTileEntityTypes.CUTTING_BOARD_TILE.get().create(pos, state);
+		return ModBlockEntityTypes.CUTTING_BOARD_TILE.get().create(pos, state);
 	}
 
 	@Override

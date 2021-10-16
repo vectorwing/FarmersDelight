@@ -25,7 +25,7 @@ import vectorwing.farmersdelight.blocks.SkilletBlock;
 import vectorwing.farmersdelight.mixin.accessors.RecipeManagerAccessor;
 import vectorwing.farmersdelight.registry.ModParticleTypes;
 import vectorwing.farmersdelight.registry.ModSounds;
-import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+import vectorwing.farmersdelight.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.utils.ItemUtils;
 import vectorwing.farmersdelight.utils.TextUtils;
 
@@ -44,7 +44,7 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements IHeatableTi
 	private int fireAspectLevel;
 
 	public SkilletBlockEntity(BlockPos pos, BlockState state) {
-		super(ModTileEntityTypes.SKILLET_TILE.get(), pos, state);
+		super(ModBlockEntityTypes.SKILLET_TILE.get(), pos, state);
 		skilletStack = ItemStack.EMPTY;
 	}
 

@@ -2,10 +2,8 @@ package vectorwing.farmersdelight;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -50,7 +48,7 @@ public class FarmersDelight
 		ModEffects.EFFECTS.register(modEventBus);
 		ModBiomeFeatures.FEATURES.register(modEventBus);
 		ModSounds.SOUNDS.register(modEventBus);
-		ModTileEntityTypes.TILES.register(modEventBus);
+		ModBlockEntityTypes.TILES.register(modEventBus);
 		ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
 		ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
 

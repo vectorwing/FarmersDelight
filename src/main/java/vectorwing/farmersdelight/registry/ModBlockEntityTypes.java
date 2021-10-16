@@ -7,7 +7,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.tile.*;
 
-public class ModTileEntityTypes
+public class ModBlockEntityTypes
 {
 	public static final DeferredRegister<BlockEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, FarmersDelight.MODID);
 
@@ -25,8 +25,8 @@ public class ModTileEntityTypes
 			() -> BlockEntityType.Builder.of(PantryBlockEntity::new,
 							ModBlocks.OAK_PANTRY.get(), ModBlocks.BIRCH_PANTRY.get(), ModBlocks.SPRUCE_PANTRY.get(), ModBlocks.JUNGLE_PANTRY.get(), ModBlocks.ACACIA_PANTRY.get(), ModBlocks.DARK_OAK_PANTRY.get())
 					.build(null));
-	public static final RegistryObject<BlockEntityType<CanvasSignTileEntity>> CANVAS_SIGN_TILE = TILES.register("canvas_sign",
-			() -> BlockEntityType.Builder.of(CanvasSignTileEntity::new,
+	public static final RegistryObject<BlockEntityType<CanvasSignBlockEntity>> CANVAS_SIGN_TILE = TILES.register("canvas_sign",
+			() -> BlockEntityType.Builder.of(CanvasSignBlockEntity::new,
 							ModBlocks.CANVAS_SIGN.get(),
 							ModBlocks.WHITE_CANVAS_SIGN.get(),
 							ModBlocks.ORANGE_CANVAS_SIGN.get(),

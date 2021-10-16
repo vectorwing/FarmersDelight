@@ -15,13 +15,14 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import vectorwing.farmersdelight.blocks.BasketBlock;
-import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+import vectorwing.farmersdelight.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.utils.TextUtils;
 
 import javax.annotation.Nullable;
@@ -36,7 +37,7 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 	private int transferCooldown = -1;
 
 	public BasketBlockEntity(BlockPos pos, BlockState state) {
-		super(ModTileEntityTypes.BASKET_TILE.get(), pos, state);
+		super(ModBlockEntityTypes.BASKET_TILE.get(), pos, state);
 	}
 
 	public static boolean pullItems(IBasket basket, int facingIndex) {
@@ -127,8 +128,7 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 	}
 
 	public static List<ItemEntity> getCaptureItems(IBasket basket, int facingIndex) {
-
-		return basket.getLevel() == null ? new ArrayList<>() : basket.getFacingCollectionArea(facingIndex).toAabbs().stream().flatMap((p_200110_1_) -> basket.getLevel().getEntitiesOfClass(ItemEntity.class, p_200110_1_.move(basket.getLevelX() - 0.5D, basket.getLevelY() - 0.5D, basket.getLevelZ() - 0.5D), EntitySelector.ENTITY_STILL_ALIVE).stream()).collect(Collectors.toList());
+		return basket.getLevel() == null ? new ArrayList<>() : basket.getFacingCollectionArea(facingIndex).toAabbs().stream().flatMap((aabb) -> basket.getLevel().getEntitiesOfClass(ItemEntity.class, aabb.move(basket.getLevelX() - 0.5D, basket.getLevelY() - 0.5D, basket.getLevelZ() - 0.5D), EntitySelector.ENTITY_STILL_ALIVE).stream()).collect(Collectors.toList());
 	}
 
 	@Override
@@ -256,14 +256,12 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 		return (double) this.worldPosition.getZ() + 0.5D;
 	}
 
-	public void tick() {
-		if (this.level != null && !this.level.isClientSide) {
-			--this.transferCooldown;
-			if (!this.isOnTransferCooldown()) {
-				this.setTransferCooldown(0);
-				int facing = this.getBlockState().getValue(BasketBlock.FACING).get3DDataValue();
-				this.updateHopper(() -> pullItems(this, facing));
-			}
+	public static void pushItemsTick(Level level, BlockPos pos, BlockState state, BasketBlockEntity blockEntity) {
+		--blockEntity.transferCooldown;
+		if (!blockEntity.isOnTransferCooldown()) {
+			blockEntity.setTransferCooldown(0);
+			int facing = state.getValue(BasketBlock.FACING).get3DDataValue();
+			blockEntity.updateHopper(() -> pullItems(blockEntity, facing));
 		}
 	}
 }

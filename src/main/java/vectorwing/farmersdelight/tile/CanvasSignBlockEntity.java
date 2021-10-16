@@ -4,16 +4,16 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+import vectorwing.farmersdelight.registry.ModBlockEntityTypes;
 
-public class CanvasSignTileEntity extends SignBlockEntity
+public class CanvasSignBlockEntity extends SignBlockEntity
 {
-	public CanvasSignTileEntity(BlockPos pWorldPosition, BlockState pBlockState) {
+	public CanvasSignBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
 		super(pWorldPosition, pBlockState);
 	}
 
 	@Override
 	public BlockEntityType<?> getType() {
-		return ModTileEntityTypes.CANVAS_SIGN_TILE.get();
+		return ModBlockEntityTypes.CANVAS_SIGN_TILE.get();
 	}
 }

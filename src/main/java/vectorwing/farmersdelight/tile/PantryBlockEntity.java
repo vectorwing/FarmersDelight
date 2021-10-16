@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import vectorwing.farmersdelight.blocks.PantryBlock;
-import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+import vectorwing.farmersdelight.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.utils.TextUtils;
 
 public class PantryBlockEntity extends RandomizableContainerBlockEntity
@@ -27,7 +27,7 @@ public class PantryBlockEntity extends RandomizableContainerBlockEntity
 	private int numPlayersUsing;
 
 	public PantryBlockEntity(BlockPos pos, BlockState state) {
-		super(ModTileEntityTypes.PANTRY_TILE.get(), pos, state);
+		super(ModBlockEntityTypes.PANTRY_TILE.get(), pos, state);
 	}
 
 	@Override

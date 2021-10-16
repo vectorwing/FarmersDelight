@@ -21,7 +21,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.blocks.StoveBlock;
 import vectorwing.farmersdelight.mixin.accessors.RecipeManagerAccessor;
-import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+import vectorwing.farmersdelight.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.utils.ItemUtils;
 
 import java.util.Optional;
@@ -37,7 +37,7 @@ public class StoveBlockEntity extends SyncedBlockEntity
 	private ResourceLocation[] lastRecipeIDs;
 
 	public StoveBlockEntity(BlockPos pos, BlockState state) {
-		super(ModTileEntityTypes.STOVE_TILE.get(), pos, state);
+		super(ModBlockEntityTypes.STOVE_TILE.get(), pos, state);
 		inventory = createHandler();
 		cookingTimes = new int[INVENTORY_SLOT_COUNT];
 		cookingTimesTotal = new int[INVENTORY_SLOT_COUNT];

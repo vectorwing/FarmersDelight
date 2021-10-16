@@ -32,7 +32,7 @@ import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.mixin.accessors.RecipeManagerAccessor;
 import vectorwing.farmersdelight.registry.ModAdvancements;
 import vectorwing.farmersdelight.registry.ModSounds;
-import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+import vectorwing.farmersdelight.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.utils.ItemUtils;
 import vectorwing.farmersdelight.utils.TextUtils;
 import vectorwing.farmersdelight.utils.tags.ForgeTags;
@@ -51,7 +51,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 	private boolean isItemCarvingBoard;
 
 	public CuttingBoardBlockEntity(BlockPos pos, BlockState state) {
-		super(ModTileEntityTypes.CUTTING_BOARD_TILE.get(), pos, state);
+		super(ModBlockEntityTypes.CUTTING_BOARD_TILE.get(), pos, state);
 		inventory = createHandler();
 		inputHandler = LazyOptional.of(() -> inventory);
 		isItemCarvingBoard = false;

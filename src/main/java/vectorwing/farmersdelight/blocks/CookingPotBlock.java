@@ -43,7 +43,7 @@ import net.minecraftforge.fmllegacy.network.NetworkHooks;
 import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.blocks.state.CookingPotSupport;
 import vectorwing.farmersdelight.registry.ModSounds;
-import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+import vectorwing.farmersdelight.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.tile.CookingPotBlockEntity;
 import vectorwing.farmersdelight.utils.MathUtils;
 import vectorwing.farmersdelight.utils.TextUtils;
@@ -260,6 +260,6 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return ModTileEntityTypes.COOKING_POT_TILE.get().create(pos, state);
+		return ModBlockEntityTypes.COOKING_POT_TILE.get().create(pos, state);
 	}
 }

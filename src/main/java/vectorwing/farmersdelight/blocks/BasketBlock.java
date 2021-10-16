@@ -18,6 +18,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -32,6 +34,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import vectorwing.farmersdelight.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.tile.BasketBlockEntity;
 
 import javax.annotation.Nullable;
@@ -188,5 +191,10 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return new BasketBlockEntity(pos, state);
+	}
+
+	@Nullable
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+		return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, ModBlockEntityTypes.BASKET_TILE.get(), BasketBlockEntity::pushItemsTick);
 	}
 }

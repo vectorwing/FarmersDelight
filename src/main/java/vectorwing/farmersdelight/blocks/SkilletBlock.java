@@ -34,7 +34,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import vectorwing.farmersdelight.registry.ModSounds;
-import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+import vectorwing.farmersdelight.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.tile.SkilletBlockEntity;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
@@ -168,7 +168,7 @@ public class SkilletBlock extends BaseEntityBlock
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return ModTileEntityTypes.SKILLET_TILE.get().create(pos, state);
+		return ModBlockEntityTypes.SKILLET_TILE.get().create(pos, state);
 	}
 
 	private boolean getTrayState(LevelAccessor world, BlockPos pos) {

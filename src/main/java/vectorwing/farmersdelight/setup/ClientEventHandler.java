@@ -26,7 +26,7 @@ import vectorwing.farmersdelight.client.tileentity.renderer.StoveRenderer;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModContainerTypes;
 import vectorwing.farmersdelight.registry.ModParticleTypes;
-import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+import vectorwing.farmersdelight.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.utils.ModAtlases;
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -51,10 +51,10 @@ public class ClientEventHandler
 
 	@SubscribeEvent
 	public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
-		event.registerBlockEntityRenderer(ModTileEntityTypes.STOVE_TILE.get(), StoveRenderer::new);
-		event.registerBlockEntityRenderer(ModTileEntityTypes.CUTTING_BOARD_TILE.get(), CuttingBoardRenderer::new);
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.STOVE_TILE.get(), StoveRenderer::new);
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.CUTTING_BOARD_TILE.get(), CuttingBoardRenderer::new);
 //		event.registerBlockEntityRenderer(ModTileEntityTypes.CANVAS_SIGN_TILE.get(), CanvasSignTileEntityRenderer::new);
-		event.registerBlockEntityRenderer(ModTileEntityTypes.SKILLET_TILE.get(), SkilletRenderer::new);
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.SKILLET_TILE.get(), SkilletRenderer::new);
 	}
 
 	public static void init(final FMLClientSetupEvent event) {

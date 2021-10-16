@@ -32,7 +32,7 @@ import vectorwing.farmersdelight.blocks.CookingPotBlock;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.mixin.accessors.RecipeManagerAccessor;
 import vectorwing.farmersdelight.registry.ModParticleTypes;
-import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+import vectorwing.farmersdelight.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.tile.container.CookingPotContainer;
 import vectorwing.farmersdelight.tile.inventory.CookingPotItemHandler;
 import vectorwing.farmersdelight.utils.ItemUtils;
@@ -66,7 +66,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	private boolean checkNewRecipe;
 
 	public CookingPotBlockEntity(BlockPos pos, BlockState state) {
-		super(ModTileEntityTypes.COOKING_POT_TILE.get(), pos, state);
+		super(ModBlockEntityTypes.COOKING_POT_TILE.get(), pos, state);
 		this.inventory = createHandler();
 		this.inputHandler = LazyOptional.of(() -> new CookingPotItemHandler(inventory, Direction.UP));
 		this.outputHandler = LazyOptional.of(() -> new CookingPotItemHandler(inventory, Direction.DOWN));
