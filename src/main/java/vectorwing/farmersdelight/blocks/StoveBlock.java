@@ -178,11 +178,6 @@ public class StoveBlock extends BaseEntityBlock
 					: StoveBlockEntity::cookingTick);
 		}
 		return null;
-//		if (level.isClientSide) {
-//			return state.getValue(LIT) ? createTickerHelper(blockEntityType, ModBlockEntityTypes.STOVE_TILE.get(), StoveBlockEntity::cookingTick) : null;
-//		} else {
-//			return state.getValue(LIT) ? createTickerHelper(blockEntityType, ModBlockEntityTypes.STOVE_TILE.get(), StoveBlockEntity::animationTick) : null;
-//		}
 	}
 
 	@Override

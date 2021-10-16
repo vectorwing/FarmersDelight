@@ -8,13 +8,18 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BarrelBlock;
+import net.minecraft.world.level.block.entity.BarrelBlockEntity;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import vectorwing.farmersdelight.blocks.PantryBlock;
@@ -24,7 +29,29 @@ import vectorwing.farmersdelight.utils.TextUtils;
 public class PantryBlockEntity extends RandomizableContainerBlockEntity
 {
 	private NonNullList<ItemStack> pantryContents = NonNullList.withSize(27, ItemStack.EMPTY);
-	private int numPlayersUsing;
+	private ContainerOpenersCounter openersCounter = new ContainerOpenersCounter() {
+		protected void onOpen(Level level, BlockPos pos, BlockState state) {
+			PantryBlockEntity.this.playSound(state, SoundEvents.BARREL_OPEN);
+			PantryBlockEntity.this.updateBlockState(state, true);
+		}
+
+		protected void onClose(Level level, BlockPos pos, BlockState state) {
+			PantryBlockEntity.this.playSound(state, SoundEvents.BARREL_CLOSE);
+			PantryBlockEntity.this.updateBlockState(state, false);
+		}
+
+		protected void openerCountChanged(Level level, BlockPos pos, BlockState sta, int arg1, int arg2) {
+		}
+
+		protected boolean isOwnContainer(Player p_155060_) {
+			if (p_155060_.containerMenu instanceof ChestMenu) {
+				Container container = ((ChestMenu)p_155060_.containerMenu).getContainer();
+				return container == PantryBlockEntity.this;
+			} else {
+				return false;
+			}
+		}
+	};
 
 	public PantryBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntityTypes.PANTRY_TILE.get(), pos, state);
@@ -48,9 +75,6 @@ public class PantryBlockEntity extends RandomizableContainerBlockEntity
 		}
 	}
 
-	/**
-	 * Returns the number of slots in the inventory.
-	 */
 	@Override
 	public int getContainerSize() {
 		return 27;
@@ -76,64 +100,28 @@ public class PantryBlockEntity extends RandomizableContainerBlockEntity
 		return ChestMenu.threeRows(id, player, this);
 	}
 
-	@Override
-	public void startOpen(Player player) {
-		if (!player.isSpectator()) {
-			if (numPlayersUsing < 0) {
-				numPlayersUsing = 0;
-			}
-
-			++numPlayersUsing;
-			BlockState state = getBlockState();
-			boolean isOpen = state.getValue(PantryBlock.OPEN);
-			if (!isOpen) {
-				playSound(state, SoundEvents.BARREL_OPEN);
-				setOpenProperty(state, true);
-			}
-
-			scheduleTick();
+	public void startOpen(Player pPlayer) {
+		if (level != null && !this.remove && !pPlayer.isSpectator()) {
+			this.openersCounter.incrementOpeners(pPlayer, level, this.getBlockPos(), this.getBlockState());
 		}
 	}
 
-	private void scheduleTick() {
-		if (level != null) level.getBlockTicks().scheduleTick(getBlockPos(), getBlockState().getBlock(), 5);
-	}
-
-	public void tick() {
-		if (level == null) return;
-
-		int x = worldPosition.getX();
-		int y = worldPosition.getY();
-		int z = worldPosition.getZ();
-		numPlayersUsing = ChestBlockEntity.getOpenCount(level, worldPosition);
-		if (numPlayersUsing > 0) {
-			scheduleTick();
-		} else {
-			BlockState state = getBlockState();
-			if (!(state.getBlock() instanceof PantryBlock)) {
-				setRemoved();
-				return;
-			}
-
-			boolean isOpen = state.getValue(PantryBlock.OPEN);
-			if (isOpen) {
-				playSound(state, SoundEvents.BARREL_CLOSE);
-				setOpenProperty(state, false);
-			}
+	public void stopOpen(Player pPlayer) {
+		if (level != null && !this.remove && !pPlayer.isSpectator()) {
+			this.openersCounter.decrementOpeners(pPlayer, level, this.getBlockPos(), this.getBlockState());
 		}
-
 	}
 
-	@Override
-	public void stopOpen(Player player) {
-		if (!player.isSpectator()) {
-			--numPlayersUsing;
+	public void recheckOpen() {
+		if (level != null && !this.remove) {
+			this.openersCounter.recheckOpeners(level, this.getBlockPos(), this.getBlockState());
 		}
-
 	}
 
-	private void setOpenProperty(BlockState state, boolean open) {
-		if (level != null) level.setBlock(getBlockPos(), state.setValue(PantryBlock.OPEN, open), 3);
+	void updateBlockState(BlockState state, boolean open) {
+		if (level != null) {
+			this.level.setBlock(this.getBlockPos(), state.setValue(PantryBlock.OPEN, open), 3);
+		}
 	}
 
 	private void playSound(BlockState state, SoundEvent sound) {

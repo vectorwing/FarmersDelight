@@ -31,8 +31,8 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.blocks.CookingPotBlock;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.mixin.accessors.RecipeManagerAccessor;
-import vectorwing.farmersdelight.registry.ModParticleTypes;
 import vectorwing.farmersdelight.registry.ModBlockEntityTypes;
+import vectorwing.farmersdelight.registry.ModParticleTypes;
 import vectorwing.farmersdelight.tile.container.CookingPotContainer;
 import vectorwing.farmersdelight.tile.inventory.CookingPotItemHandler;
 import vectorwing.farmersdelight.utils.ItemUtils;
@@ -131,44 +131,56 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 	// ======== BASIC FUNCTIONALITY ========
 
-	public void tick() {
-		if (level == null) return;
-
-		boolean isHeated = isHeated(level, worldPosition);
+	public static void cookingTick(Level level, BlockPos pos, BlockState state, CookingPotBlockEntity cookingPot) {
+		boolean isHeated = cookingPot.isHeated(level, pos);
 		boolean didInventoryChange = false;
 
-		if (!level.isClientSide) {
-			if (isHeated && hasInput()) {
-				Optional<CookingPotRecipe> recipe = getMatchingRecipe(new RecipeWrapper(inventory));
-				if (recipe.isPresent() && canCook(recipe.get())) {
-					didInventoryChange = processCooking(recipe.get());
-				} else {
-					cookTime = 0;
-				}
-			} else if (cookTime > 0) {
-				cookTime = Mth.clamp(cookTime - 2, 0, cookTimeTotal);
+		if (isHeated && cookingPot.hasInput()) {
+			Optional<CookingPotRecipe> recipe = cookingPot.getMatchingRecipe(new RecipeWrapper(cookingPot.inventory));
+			if (recipe.isPresent() && cookingPot.canCook(recipe.get())) {
+				didInventoryChange = cookingPot.processCooking(recipe.get());
+			} else {
+				cookingPot.cookTime = 0;
 			}
+		} else if (cookingPot.cookTime > 0) {
+			cookingPot.cookTime = Mth.clamp(cookingPot.cookTime - 2, 0, cookingPot.cookTimeTotal);
+		}
 
-			ItemStack mealStack = getMeal();
-			if (!mealStack.isEmpty()) {
-				if (!doesMealHaveContainer(mealStack)) {
-					moveMealToOutput();
-					didInventoryChange = true;
-				} else if (!inventory.getStackInSlot(CONTAINER_SLOT).isEmpty()) {
-					useStoredContainersOnMeal();
-					didInventoryChange = true;
-				}
-			}
-
-		} else {
-			if (isHeated) {
-				animate();
+		ItemStack mealStack = cookingPot.getMeal();
+		if (!mealStack.isEmpty()) {
+			if (!cookingPot.doesMealHaveContainer(mealStack)) {
+				cookingPot.moveMealToOutput();
+				didInventoryChange = true;
+			} else if (!cookingPot.inventory.getStackInSlot(CONTAINER_SLOT).isEmpty()) {
+				cookingPot.useStoredContainersOnMeal();
+				didInventoryChange = true;
 			}
 		}
 
 		if (didInventoryChange) {
-			inventoryChanged();
+			cookingPot.inventoryChanged();
 		}
+	}
+
+
+	public static void animationTick(Level level, BlockPos pos, BlockState state, CookingPotBlockEntity cookingPot) {
+		if (cookingPot.isHeated(level, pos)) {
+			Random random = level.random;
+			if (random.nextFloat() < 0.2F) {
+				double x = (double) pos.getX() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);
+				double y = (double) pos.getY() + 0.7D;
+				double z = (double) pos.getZ() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);
+				level.addParticle(ParticleTypes.BUBBLE_POP, x, y, z, 0.0D, 0.0D, 0.0D);
+			}
+			if (random.nextFloat() < 0.05F) {
+				double x = (double) pos.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
+				double y = (double) pos.getY() + 0.5D;
+				double z = (double) pos.getZ() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
+				double motionY = random.nextBoolean() ? 0.015D : 0.005D;
+				level.addParticle(ModParticleTypes.STEAM.get(), x, y, z, 0.0D, motionY, 0.0D);
+			}
+		}
+
 	}
 
 	private Optional<CookingPotRecipe> getMatchingRecipe(RecipeWrapper inventoryWrapper) {
@@ -271,25 +283,6 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 				slotStack.shrink(1);
 		}
 		return true;
-	}
-
-	private void animate() {
-		if (level == null) return;
-
-		Random random = level.random;
-		if (random.nextFloat() < 0.2F) {
-			double x = (double) worldPosition.getX() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);
-			double y = (double) worldPosition.getY() + 0.7D;
-			double z = (double) worldPosition.getZ() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);
-			level.addParticle(ParticleTypes.BUBBLE_POP, x, y, z, 0.0D, 0.0D, 0.0D);
-		}
-		if (random.nextFloat() < 0.05F) {
-			double x = (double) worldPosition.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
-			double y = (double) worldPosition.getY() + 0.5D;
-			double z = (double) worldPosition.getZ() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
-			double motionY = random.nextBoolean() ? 0.015D : 0.005D;
-			level.addParticle(ModParticleTypes.STEAM.get(), x, y, z, 0.0D, motionY, 0.0D);
-		}
 	}
 
 	public void trackRecipeExperience(@Nullable Recipe<?> recipe) {

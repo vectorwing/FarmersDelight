@@ -20,6 +20,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
+import vectorwing.farmersdelight.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.tile.PantryBlockEntity;
 
 import javax.annotation.Nullable;
@@ -69,7 +70,7 @@ public class PantryBlock extends BaseEntityBlock
 	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random rand) {
 		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
 		if (tileEntity instanceof PantryBlockEntity) {
-			((PantryBlockEntity) tileEntity).tick();
+			((PantryBlockEntity) tileEntity).recheckOpen();
 		}
 	}
 
@@ -107,7 +108,7 @@ public class PantryBlock extends BaseEntityBlock
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new PantryBlockEntity(pos, state);
+		return ModBlockEntityTypes.PANTRY_TILE.get().create(pos, state);
 	}
 
 	@Override

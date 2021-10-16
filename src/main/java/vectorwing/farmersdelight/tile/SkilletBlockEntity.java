@@ -47,22 +47,22 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements IHeatableTi
 		skilletStack = ItemStack.EMPTY;
 	}
 
-	public static void cookingTick(Level level, BlockPos pos, BlockState state, SkilletBlockEntity blockEntity) {
-		boolean isHeated = blockEntity.isHeated(level, pos);
+	public static void cookingTick(Level level, BlockPos pos, BlockState state, SkilletBlockEntity skillet) {
+		boolean isHeated = skillet.isHeated(level, pos);
 		if (isHeated) {
-			ItemStack cookingStack = blockEntity.getStoredStack();
+			ItemStack cookingStack = skillet.getStoredStack();
 			if (cookingStack.isEmpty()) {
-				blockEntity.cookingTime = 0;
+				skillet.cookingTime = 0;
 			} else {
-				blockEntity.cookAndOutputItems(cookingStack);
+				skillet.cookAndOutputItems(cookingStack);
 			}
-		} else if (blockEntity.cookingTime > 0) {
-			blockEntity.cookingTime = Mth.clamp(blockEntity.cookingTime - 2, 0, blockEntity.cookingTimeTotal);
+		} else if (skillet.cookingTime > 0) {
+			skillet.cookingTime = Mth.clamp(skillet.cookingTime - 2, 0, skillet.cookingTimeTotal);
 		}
 	}
 
-	public static void animationTick(Level level, BlockPos pos, BlockState state, SkilletBlockEntity blockEntity) {
-		if (blockEntity.isHeated(level, pos) && blockEntity.hasStoredStack()) {
+	public static void animationTick(Level level, BlockPos pos, BlockState state, SkilletBlockEntity skillet) {
+		if (skillet.isHeated(level, pos) && skillet.hasStoredStack()) {
 			Random random = level.random;
 			if (random.nextFloat() < 0.2F) {
 				double x = (double) pos.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
@@ -71,7 +71,7 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements IHeatableTi
 				double motionY = random.nextBoolean() ? 0.015D : 0.005D;
 				level.addParticle(ModParticleTypes.STEAM.get(), x, y, z, 0.0D, motionY, 0.0D);
 			}
-			if (blockEntity.fireAspectLevel > 0 && random.nextFloat() < blockEntity.fireAspectLevel * 0.05F) {
+			if (skillet.fireAspectLevel > 0 && random.nextFloat() < skillet.fireAspectLevel * 0.05F) {
 				double x = (double) pos.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
 				double y = (double) pos.getY() + 0.1D;
 				double z = (double) pos.getZ() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);

@@ -23,6 +23,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -42,8 +44,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fmllegacy.network.NetworkHooks;
 import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.blocks.state.CookingPotSupport;
-import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModBlockEntityTypes;
+import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.tile.CookingPotBlockEntity;
 import vectorwing.farmersdelight.utils.MathUtils;
 import vectorwing.farmersdelight.utils.TextUtils;
@@ -261,5 +263,14 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return ModBlockEntityTypes.COOKING_POT_TILE.get().create(pos, state);
+	}
+
+	@Nullable
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntity) {
+		if (level.isClientSide) {
+			return createTickerHelper(blockEntity, ModBlockEntityTypes.COOKING_POT_TILE.get(), CookingPotBlockEntity::animationTick);
+		} else {
+			return createTickerHelper(blockEntity, ModBlockEntityTypes.COOKING_POT_TILE.get(), CookingPotBlockEntity::cookingTick);
+		}
 	}
 }
