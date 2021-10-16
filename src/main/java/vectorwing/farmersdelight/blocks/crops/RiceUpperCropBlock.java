@@ -1,25 +1,25 @@
 package vectorwing.farmersdelight.blocks.crops;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CropsBlock;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.core.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.Level;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 
-import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
-public class RiceUpperCropBlock extends CropsBlock
+public class RiceUpperCropBlock extends CropBlock
 {
 	public static final IntegerProperty RICE_AGE = BlockStateProperties.AGE_3;
 	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
@@ -39,7 +39,7 @@ public class RiceUpperCropBlock extends CropsBlock
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 		return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
 	}
 
@@ -49,27 +49,27 @@ public class RiceUpperCropBlock extends CropsBlock
 	}
 
 	@Override
-	protected IItemProvider getBaseSeedId() {
+	protected ItemLike getBaseSeedId() {
 		return ModItems.RICE.get();
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(RICE_AGE);
 	}
 
 	@Override
-	protected boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos) {
+	protected boolean mayPlaceOn(BlockState state, BlockGetter worldIn, BlockPos pos) {
 		return state.getBlock() == ModBlocks.RICE_CROP.get();
 	}
 
 	@Override
-	protected int getBonemealAgeIncrease(World worldIn) {
+	protected int getBonemealAgeIncrease(Level worldIn) {
 		return super.getBonemealAgeIncrease(worldIn) / 3;
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
 		return (worldIn.getRawBrightness(pos, 0) >= 8 || worldIn.canSeeSky(pos)) && worldIn.getBlockState(pos.below()).getBlock() == ModBlocks.RICE_CROP.get();
 	}
 }

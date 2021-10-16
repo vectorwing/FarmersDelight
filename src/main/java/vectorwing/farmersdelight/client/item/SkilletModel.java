@@ -1,19 +1,21 @@
 package vectorwing.farmersdelight.client.item;
 
 import com.google.common.base.Preconditions;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.block.BlockState;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Transformation;
+import com.mojang.math.Vector3f;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.TransformationMatrix;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.client.resources.model.*;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.SimpleModelTransform;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -28,24 +30,24 @@ import java.util.*;
  */
 
 @SuppressWarnings("deprecation")
-public class SkilletModel implements IBakedModel
+public class SkilletModel implements BakedModel
 {
 	private final ModelBakery bakery;
-	private final IBakedModel originalModel;
-	private final IBakedModel cookingModel;
+	private final BakedModel originalModel;
+	private final BakedModel cookingModel;
 
-	public SkilletModel(ModelBakery bakery, IBakedModel originalModel, IBakedModel cookingModel) {
+	public SkilletModel(ModelBakery bakery, BakedModel originalModel, BakedModel cookingModel) {
 		this.bakery = bakery;
 		this.originalModel = Preconditions.checkNotNull(originalModel);
 		this.cookingModel = Preconditions.checkNotNull(cookingModel);
 	}
 
-	private final ItemOverrideList itemOverrides = new ItemOverrideList()
+	private final ItemOverrides itemOverrides = new ItemOverrides()
 	{
 		@Nonnull
 		@Override
-		public IBakedModel resolve(@Nonnull IBakedModel model, ItemStack stack, @Nullable ClientWorld worldIn, @Nullable LivingEntity entityIn) {
-			CompoundNBT tag = stack.getOrCreateTag();
+		public BakedModel resolve(@Nonnull BakedModel model, ItemStack stack, @Nullable ClientLevel worldIn, @Nullable LivingEntity entityIn) {
+			CompoundTag tag = stack.getOrCreateTag();
 
 			if (tag.contains("Cooking")) {
 				ItemStack ingredientStack = ItemStack.of(tag.getCompound("Cooking"));
@@ -58,7 +60,7 @@ public class SkilletModel implements IBakedModel
 
 	@Nonnull
 	@Override
-	public ItemOverrideList getOverrides() {
+	public ItemOverrides getOverrides() {
 		return itemOverrides;
 	}
 
@@ -70,7 +72,7 @@ public class SkilletModel implements IBakedModel
 
 	@Nonnull
 	@Override
-	public ItemCameraTransforms getTransforms() {
+	public ItemTransforms getTransforms() {
 		return originalModel.getTransforms();
 	}
 
@@ -106,24 +108,24 @@ public class SkilletModel implements IBakedModel
 		return cache.computeIfAbsent(ingredientStack.getItem(), p -> new CompositeBakedModel(bakery, ingredientStack, cookingModel));
 	}
 
-	private static class CompositeBakedModel extends WrappedItemModel<IBakedModel>
+	private static class CompositeBakedModel extends WrappedItemModel<BakedModel>
 	{
 		private final List<BakedQuad> genQuads = new ArrayList<>();
 		private final Map<Direction, List<BakedQuad>> faceQuads = new EnumMap<>(Direction.class);
 
-		public CompositeBakedModel(ModelBakery bakery, ItemStack ingredientStack, IBakedModel skillet) {
+		public CompositeBakedModel(ModelBakery bakery, ItemStack ingredientStack, BakedModel skillet) {
 			super(skillet);
 
 			ResourceLocation ingredientLocation = ForgeRegistries.ITEMS.getKey(ingredientStack.getItem());
-			IUnbakedModel ingredientUnbaked = bakery.getModel(new ModelResourceLocation(ingredientLocation, "inventory"));
-			IModelTransform transform = new SimpleModelTransform(
-					new TransformationMatrix(
+			UnbakedModel ingredientUnbaked = bakery.getModel(new ModelResourceLocation(ingredientLocation, "inventory"));
+			ModelState transform = new SimpleModelTransform(
+					new Transformation(
 							new Vector3f(0.0F, -0.4F, 0.0F),
 							Vector3f.XP.rotationDegrees(270),
 							new Vector3f(0.625F, 0.625F, 0.625F), null));
 			ResourceLocation name = new ResourceLocation(FarmersDelight.MODID, "skillet_with_" + ingredientLocation.toString().replace(':', '_'));
 
-			IBakedModel ingredientBaked;
+			BakedModel ingredientBaked;
 			if (ingredientUnbaked instanceof BlockModel && ((BlockModel) ingredientUnbaked).getRootModel() == ModelBakery.GENERATION_MARKER) {
 				BlockModel bm = (BlockModel) ingredientUnbaked;
 				ingredientBaked = new ItemModelGenerator()
@@ -165,7 +167,7 @@ public class SkilletModel implements IBakedModel
 		}
 
 		@Override
-		public IBakedModel handlePerspective(@Nonnull ItemCameraTransforms.TransformType cameraTransformType, MatrixStack stack) {
+		public BakedModel handlePerspective(@Nonnull ItemTransforms.TransformType cameraTransformType, PoseStack stack) {
 			super.handlePerspective(cameraTransformType, stack);
 			return this;
 		}

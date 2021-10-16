@@ -1,35 +1,41 @@
 package vectorwing.farmersdelight.blocks;
 
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.Food;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.pathfinding.PathType;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.Containers;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.Level;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import java.util.function.Supplier;
 
-import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 
 @SuppressWarnings("deprecation")
 public class PieBlock extends Block
@@ -56,29 +62,29 @@ public class PieBlock extends Block
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 		return SHAPE;
 	}
 
 	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
 	}
 
 	@Override
-	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
 		ItemStack heldStack = player.getItemInHand(handIn);
 		if (worldIn.isClientSide) {
 			if (ModTags.KNIVES.contains(heldStack.getItem())) {
 				return cutSlice(worldIn, pos, state);
 			}
 
-			if (this.consumeBite(worldIn, pos, state, player) == ActionResultType.SUCCESS) {
-				return ActionResultType.SUCCESS;
+			if (this.consumeBite(worldIn, pos, state, player) == InteractionResult.SUCCESS) {
+				return InteractionResult.SUCCESS;
 			}
 
 			if (heldStack.isEmpty()) {
-				return ActionResultType.CONSUME;
+				return InteractionResult.CONSUME;
 			}
 		}
 
@@ -91,18 +97,18 @@ public class PieBlock extends Block
 	/**
 	 * Eats a slice from the pie, feeding the player.
 	 */
-	protected ActionResultType consumeBite(World worldIn, BlockPos pos, BlockState state, PlayerEntity playerIn) {
+	protected InteractionResult consumeBite(Level worldIn, BlockPos pos, BlockState state, Player playerIn) {
 		if (!playerIn.canEat(false)) {
-			return ActionResultType.PASS;
+			return InteractionResult.PASS;
 		} else {
 			ItemStack sliceStack = this.getPieSliceItem();
-			Food sliceFood = sliceStack.getItem().getFoodProperties();
+			FoodProperties sliceFood = sliceStack.getItem().getFoodProperties();
 
 			playerIn.getFoodData().eat(sliceStack.getItem(), sliceStack);
 			if (this.getPieSliceItem().getItem().isEdible() && sliceFood != null) {
-				for (Pair<EffectInstance, Float> pair : sliceFood.getEffects()) {
+				for (Pair<MobEffectInstance, Float> pair : sliceFood.getEffects()) {
 					if (!worldIn.isClientSide && pair.getFirst() != null && worldIn.random.nextFloat() < pair.getSecond()) {
-						playerIn.addEffect(new EffectInstance(pair.getFirst()));
+						playerIn.addEffect(new MobEffectInstance(pair.getFirst()));
 					}
 				}
 			}
@@ -113,43 +119,43 @@ public class PieBlock extends Block
 			} else {
 				worldIn.removeBlock(pos, false);
 			}
-			worldIn.playSound(null, pos, SoundEvents.GENERIC_EAT, SoundCategory.PLAYERS, 0.8F, 0.8F);
-			return ActionResultType.SUCCESS;
+			worldIn.playSound(null, pos, SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 0.8F, 0.8F);
+			return InteractionResult.SUCCESS;
 		}
 	}
 
 	/**
 	 * Cuts off a bite and drops a slice item, without feeding the player.
 	 */
-	protected ActionResultType cutSlice(World worldIn, BlockPos pos, BlockState state) {
+	protected InteractionResult cutSlice(Level worldIn, BlockPos pos, BlockState state) {
 		int bites = state.getValue(BITES);
 		if (bites < getMaxBites() - 1) {
 			worldIn.setBlock(pos, state.setValue(BITES, bites + 1), 3);
 		} else {
 			worldIn.removeBlock(pos, false);
 		}
-		InventoryHelper.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), this.getPieSliceItem());
-		worldIn.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundCategory.PLAYERS, 0.8F, 0.8F);
-		return ActionResultType.SUCCESS;
+		Containers.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), this.getPieSliceItem());
+		worldIn.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
+		return InteractionResult.SUCCESS;
 	}
 
 	@Override
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
 		return facing == Direction.DOWN && !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
 		return worldIn.getBlockState(pos.below()).getMaterial().isSolid();
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(FACING, BITES);
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState blockState, World worldIn, BlockPos pos) {
+	public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
 		return getMaxBites() - blockState.getValue(BITES);
 	}
 
@@ -159,7 +165,7 @@ public class PieBlock extends Block
 	}
 
 	@Override
-	public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+	public boolean isPathfindable(BlockState state, BlockGetter worldIn, BlockPos pos, PathComputationType type) {
 		return false;
 	}
 }

@@ -9,9 +9,9 @@ import com.blamejared.crafttweaker.api.managers.IRecipeManager;
 import com.blamejared.crafttweaker.impl.actions.recipes.ActionAddRecipe;
 import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
 import org.openzen.zencode.java.ZenCodeType;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.crafting.ingredients.ChanceResult;
@@ -79,7 +79,7 @@ public class CuttingBoardRecipeManager implements IRecipeManager
     }
 
     @Override
-    public IRecipeType<CuttingBoardRecipe> getRecipeType() {
+    public RecipeType<CuttingBoardRecipe> getRecipeType() {
         return CuttingBoardRecipe.TYPE;
     }
 }

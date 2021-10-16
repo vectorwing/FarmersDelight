@@ -1,13 +1,13 @@
 package vectorwing.farmersdelight.blocks;
 
 import net.minecraft.block.*;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.PlantType;
 import net.minecraftforge.common.ToolType;
@@ -19,7 +19,13 @@ import vectorwing.farmersdelight.utils.tags.ModTags;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.TallFlowerBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
 @SuppressWarnings("deprecation")
 public class RichSoilBlock extends Block
@@ -31,7 +37,7 @@ public class RichSoilBlock extends Block
 	}
 
 	@Override
-	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
+	public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random rand) {
 		if (!worldIn.isClientSide) {
 			BlockPos abovePos = pos.above();
 			BlockState aboveState = worldIn.getBlockState(abovePos);
@@ -61,8 +67,8 @@ public class RichSoilBlock extends Block
 			}
 
 			// If all else fails, and it's a plant, give it a growth boost now and then!
-			if (aboveBlock instanceof IGrowable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
-				IGrowable growable = (IGrowable) aboveBlock;
+			if (aboveBlock instanceof BonemealableBlock && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
+				BonemealableBlock growable = (BonemealableBlock) aboveBlock;
 				if (growable.isValidBonemealTarget(worldIn, pos.above(), aboveState, false) && ForgeHooks.onCropsGrowPre(worldIn, pos.above(), aboveState, true)) {
 					growable.performBonemeal(worldIn, worldIn.random, pos.above(), aboveState);
 					worldIn.levelEvent(2005, pos.above(), 0);
@@ -74,13 +80,13 @@ public class RichSoilBlock extends Block
 
 	@Override
 	@Nullable
-	public BlockState getToolModifiedState(BlockState state, World world, BlockPos pos, PlayerEntity player, ItemStack stack, ToolType toolType) {
+	public BlockState getToolModifiedState(BlockState state, Level world, BlockPos pos, Player player, ItemStack stack, ToolType toolType) {
 		return toolType == ToolType.HOE ? ModBlocks.RICH_SOIL_FARMLAND.get().defaultBlockState() : null;
 	}
 
 
 	@Override
-	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable) {
+	public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable) {
 		net.minecraftforge.common.PlantType plantType = plantable.getPlantType(world, pos.relative(facing));
 		return plantType != PlantType.CROP && plantType != PlantType.NETHER;
 	}

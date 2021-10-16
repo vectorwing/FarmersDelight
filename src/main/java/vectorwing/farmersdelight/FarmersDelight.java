@@ -2,8 +2,8 @@ package vectorwing.farmersdelight;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.RegistryEvent;
@@ -39,7 +39,7 @@ public class FarmersDelight
 
 		modEventBus.addListener(CommonEventHandler::init);
 		modEventBus.addListener(ClientEventHandler::init);
-		modEventBus.addGenericListener(IRecipeSerializer.class, this::registerRecipeSerializers);
+		modEventBus.addGenericListener(RecipeSerializer.class, this::registerRecipeSerializers);
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Configuration.CLIENT_CONFIG);
@@ -58,7 +58,7 @@ public class FarmersDelight
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
-	private void registerRecipeSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event) {
+	private void registerRecipeSerializers(RegistryEvent.Register<RecipeSerializer<?>> event) {
 		CraftingHelper.register(new ResourceLocation(MODID, "tool"), ToolIngredient.SERIALIZER);
 
 		event.getRegistry().register(CookingPotRecipe.SERIALIZER);

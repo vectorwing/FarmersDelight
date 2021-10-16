@@ -1,18 +1,18 @@
 package vectorwing.farmersdelight.tile;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.*;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.capabilities.Capability;
@@ -37,6 +37,12 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+
 public class CuttingBoardTileEntity extends FDSyncedTileEntity
 {
 	private final ItemStackHandler inventory;
@@ -53,21 +59,21 @@ public class CuttingBoardTileEntity extends FDSyncedTileEntity
 	}
 
 	@Override
-	public void load(BlockState state, CompoundNBT compound) {
+	public void load(BlockState state, CompoundTag compound) {
 		super.load(state, compound);
 		isItemCarvingBoard = compound.getBoolean("IsItemCarved");
 		inventory.deserializeNBT(compound.getCompound("Inventory"));
 	}
 
 	@Override
-	public CompoundNBT save(CompoundNBT compound) {
+	public CompoundTag save(CompoundTag compound) {
 		super.save(compound);
 		compound.put("Inventory", inventory.serializeNBT());
 		compound.putBoolean("IsItemCarved", isItemCarvingBoard);
 		return compound;
 	}
 
-	public boolean processStoredItemUsingTool(ItemStack toolStack, @Nullable PlayerEntity player) {
+	public boolean processStoredItemUsingTool(ItemStack toolStack, @Nullable Player player) {
 		if (level == null) return false;
 
 		Optional<CuttingBoardRecipe> matchingRecipe = getMatchingRecipe(new RecipeWrapper(inventory), toolStack, player);
@@ -81,7 +87,7 @@ public class CuttingBoardTileEntity extends FDSyncedTileEntity
 						direction.getStepX() * 0.2F, 0.0F, direction.getStepZ() * 0.2F);
 			}
 			if (player != null) {
-				toolStack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
+				toolStack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(EquipmentSlot.MAINHAND));
 			} else {
 				if (toolStack.hurt(1, level.random, null)) {
 					toolStack.setCount(0);
@@ -89,19 +95,19 @@ public class CuttingBoardTileEntity extends FDSyncedTileEntity
 			}
 			playProcessingSound(recipe.getSoundEventID(), toolStack.getItem(), getStoredItem().getItem());
 			removeItem();
-			if (player instanceof ServerPlayerEntity) {
-				ModAdvancements.CUTTING_BOARD.trigger((ServerPlayerEntity) player);
+			if (player instanceof ServerPlayer) {
+				ModAdvancements.CUTTING_BOARD.trigger((ServerPlayer) player);
 			}
 		});
 
 		return matchingRecipe.isPresent();
 	}
 
-	private Optional<CuttingBoardRecipe> getMatchingRecipe(RecipeWrapper recipeWrapper, ItemStack toolStack, @Nullable PlayerEntity player) {
+	private Optional<CuttingBoardRecipe> getMatchingRecipe(RecipeWrapper recipeWrapper, ItemStack toolStack, @Nullable Player player) {
 		if (level == null) return Optional.empty();
 
 		if (lastRecipeID != null) {
-			IRecipe<RecipeWrapper> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
+			Recipe<RecipeWrapper> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
 					.getRecipeMap(CuttingBoardRecipe.TYPE)
 					.get(lastRecipeID);
 			if (recipe instanceof CuttingBoardRecipe && recipe.matches(recipeWrapper, level) && ((CuttingBoardRecipe) recipe).getTool().test(toolStack)) {
@@ -145,7 +151,7 @@ public class CuttingBoardTileEntity extends FDSyncedTileEntity
 
 	public void playSound(SoundEvent sound, float volume, float pitch) {
 		if (level != null)
-			level.playSound(null, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F, sound, SoundCategory.BLOCKS, volume, pitch);
+			level.playSound(null, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F, sound, SoundSource.BLOCKS, volume, pitch);
 	}
 
 	public boolean addItem(ItemStack itemStack) {

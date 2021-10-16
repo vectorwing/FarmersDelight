@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.integration.jei.cooking;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mcp.MethodsReturnNonnullByDefault;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -10,11 +10,11 @@ import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.registry.ModItems;
@@ -111,7 +111,7 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 	}
 
 	@Override
-	public void draw(CookingPotRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
+	public void draw(CookingPotRecipe recipe, PoseStack matrixStack, double mouseX, double mouseY) {
 		arrow.draw(matrixStack, 60, 9);
 		heatIndicator.draw(matrixStack, 18, 39);
 	}

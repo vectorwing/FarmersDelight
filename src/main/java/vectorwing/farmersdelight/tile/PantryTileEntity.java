@@ -1,49 +1,49 @@
 package vectorwing.farmersdelight.tile;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.inventory.container.ChestContainer;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.ChestTileEntity;
-import net.minecraft.tileentity.LockableLootTileEntity;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.vector.Vector3i;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.core.NonNullList;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.core.Vec3i;
+import net.minecraft.network.chat.Component;
 import vectorwing.farmersdelight.blocks.PantryBlock;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.TextUtils;
 
-public class PantryTileEntity extends LockableLootTileEntity
+public class PantryTileEntity extends RandomizableContainerBlockEntity
 {
 	private NonNullList<ItemStack> pantryContents = NonNullList.withSize(27, ItemStack.EMPTY);
 	private int numPlayersUsing;
 
 	public PantryTileEntity() {
-		super(ModTileEntityTypes.PANTRY_TILE.get());
+		super(ModTileEntityTypes.PANTRY_TILE);
 	}
 
 	@Override
-	public CompoundNBT save(CompoundNBT compound) {
+	public CompoundTag save(CompoundTag compound) {
 		super.save(compound);
 		if (!trySaveLootTable(compound)) {
-			ItemStackHelper.saveAllItems(compound, pantryContents);
+			ContainerHelper.saveAllItems(compound, pantryContents);
 		}
 		return compound;
 	}
 
 	@Override
-	public void load(BlockState state, CompoundNBT compound) {
+	public void load(BlockState state, CompoundTag compound) {
 		super.load(state, compound);
 		pantryContents = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
 		if (!tryLoadLootTable(compound)) {
-			ItemStackHelper.loadAllItems(compound, pantryContents);
+			ContainerHelper.loadAllItems(compound, pantryContents);
 		}
 	}
 
@@ -66,17 +66,17 @@ public class PantryTileEntity extends LockableLootTileEntity
 	}
 
 	@Override
-	protected ITextComponent getDefaultName() {
+	protected Component getDefaultName() {
 		return TextUtils.getTranslation("container.pantry");
 	}
 
 	@Override
-	protected Container createMenu(int id, PlayerInventory player) {
-		return ChestContainer.threeRows(id, player, this);
+	protected AbstractContainerMenu createMenu(int id, Inventory player) {
+		return ChestMenu.threeRows(id, player, this);
 	}
 
 	@Override
-	public void startOpen(PlayerEntity player) {
+	public void startOpen(Player player) {
 		if (!player.isSpectator()) {
 			if (numPlayersUsing < 0) {
 				numPlayersUsing = 0;
@@ -104,7 +104,7 @@ public class PantryTileEntity extends LockableLootTileEntity
 		int x = worldPosition.getX();
 		int y = worldPosition.getY();
 		int z = worldPosition.getZ();
-		numPlayersUsing = ChestTileEntity.getOpenCount(level, this, x, y, z);
+		numPlayersUsing = ChestBlockEntity.getOpenCount(level, this, x, y, z);
 		if (numPlayersUsing > 0) {
 			scheduleTick();
 		} else {
@@ -124,7 +124,7 @@ public class PantryTileEntity extends LockableLootTileEntity
 	}
 
 	@Override
-	public void stopOpen(PlayerEntity player) {
+	public void stopOpen(Player player) {
 		if (!player.isSpectator()) {
 			--numPlayersUsing;
 		}
@@ -138,10 +138,10 @@ public class PantryTileEntity extends LockableLootTileEntity
 	private void playSound(BlockState state, SoundEvent sound) {
 		if (level == null) return;
 
-		Vector3i pantryFacingVector = state.getValue(PantryBlock.FACING).getNormal();
+		Vec3i pantryFacingVector = state.getValue(PantryBlock.FACING).getNormal();
 		double x = (double) worldPosition.getX() + 0.5D + (double) pantryFacingVector.getX() / 2.0D;
 		double y = (double) worldPosition.getY() + 0.5D + (double) pantryFacingVector.getY() / 2.0D;
 		double z = (double) worldPosition.getZ() + 0.5D + (double) pantryFacingVector.getZ() / 2.0D;
-		level.playSound(null, x, y, z, sound, SoundCategory.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
+		level.playSound(null, x, y, z, sound, SoundSource.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
 	}
 }

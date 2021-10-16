@@ -1,30 +1,30 @@
 package vectorwing.farmersdelight.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.Containers;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.item.crafting.CampfireCookingRecipe;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import vectorwing.farmersdelight.registry.ModSounds;
@@ -35,17 +35,23 @@ import vectorwing.farmersdelight.utils.tags.ModTags;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 
 @SuppressWarnings("deprecation")
-public class SkilletBlock extends HorizontalBlock
+public class SkilletBlock extends HorizontalDirectionalBlock
 {
 	public static final int MINIMUM_COOKING_TIME = 60;
 
 	public static final BooleanProperty SUPPORT = BooleanProperty.create("support");
 
 	protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 4.0D, 15.0D);
-	protected static final VoxelShape SHAPE_WITH_TRAY = VoxelShapes.or(SHAPE, Block.box(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
+	protected static final VoxelShape SHAPE_WITH_TRAY = Shapes.or(SHAPE, Block.box(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
 
 	public SkilletBlock() {
 		super(Properties.of(Material.METAL)
@@ -55,41 +61,41 @@ public class SkilletBlock extends HorizontalBlock
 	}
 
 	@Override
-	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		TileEntity tileEntity = worldIn.getBlockEntity(pos);
+	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
 		if (tileEntity instanceof SkilletTileEntity) {
 			SkilletTileEntity skilletEntity = (SkilletTileEntity) tileEntity;
 			if (!worldIn.isClientSide) {
 				ItemStack heldStack = player.getItemInHand(handIn);
-				EquipmentSlotType heldSlot = handIn.equals(Hand.MAIN_HAND) ? EquipmentSlotType.MAINHAND : EquipmentSlotType.OFFHAND;
+				EquipmentSlot heldSlot = handIn.equals(InteractionHand.MAIN_HAND) ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
 				if (heldStack.isEmpty()) {
 					ItemStack extractedStack = skilletEntity.removeItem();
 					if (!player.isCreative()) {
 						player.setItemSlot(heldSlot, extractedStack);
 					}
-					return ActionResultType.SUCCESS;
+					return InteractionResult.SUCCESS;
 				} else {
 					ItemStack remainderStack = skilletEntity.addItemToCook(heldStack, player);
 					if (remainderStack.getCount() != heldStack.getCount()) {
 						if (!player.isCreative()) {
 							player.setItemSlot(heldSlot, remainderStack);
 						}
-						worldIn.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundCategory.BLOCKS, 0.7F, 1.0F);
-						return ActionResultType.SUCCESS;
+						worldIn.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundSource.BLOCKS, 0.7F, 1.0F);
+						return InteractionResult.SUCCESS;
 					}
 				}
 			}
-			return ActionResultType.CONSUME;
+			return InteractionResult.CONSUME;
 		}
-		return ActionResultType.PASS;
+		return InteractionResult.PASS;
 	}
 
 	@Override
-	public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+	public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
-			TileEntity tileEntity = worldIn.getBlockEntity(pos);
+			BlockEntity tileEntity = worldIn.getBlockEntity(pos);
 			if (tileEntity instanceof SkilletTileEntity) {
-				InventoryHelper.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), ((SkilletTileEntity) tileEntity).getInventory().getStackInSlot(0));
+				Containers.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), ((SkilletTileEntity) tileEntity).getInventory().getStackInSlot(0));
 			}
 
 			super.onRemove(state, worldIn, pos, newState, isMoving);
@@ -97,24 +103,24 @@ public class SkilletBlock extends HorizontalBlock
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 		return SHAPE;
 	}
 
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+	public VoxelShape getCollisionShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 		return state.getValue(SUPPORT).equals(true) ? SHAPE_WITH_TRAY : SHAPE;
 	}
 
 	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return this.defaultBlockState()
 				.setValue(FACING, context.getHorizontalDirection())
 				.setValue(SUPPORT, getTrayState(context.getLevel(), context.getClickedPos()));
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos) {
 		if (facing.getAxis().equals(Direction.Axis.Y)) {
 			return state.setValue(SUPPORT, getTrayState(world, currentPos));
 		}
@@ -122,10 +128,10 @@ public class SkilletBlock extends HorizontalBlock
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(IBlockReader worldIn, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(BlockGetter worldIn, BlockPos pos, BlockState state) {
 		ItemStack stack = super.getCloneItemStack(worldIn, pos, state);
 		SkilletTileEntity skilletEntity = (SkilletTileEntity) worldIn.getBlockEntity(pos);
-		CompoundNBT nbt = skilletEntity.writeSkilletItem(new CompoundNBT());
+		CompoundTag nbt = skilletEntity.writeSkilletItem(new CompoundTag());
 		if (!nbt.isEmpty()) {
 			stack = ItemStack.of(nbt.getCompound("Skillet"));
 		}
@@ -133,14 +139,14 @@ public class SkilletBlock extends HorizontalBlock
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(FACING, SUPPORT);
 	}
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		TileEntity tileEntity = worldIn.getBlockEntity(pos);
+	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
+		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
 		if (tileEntity instanceof SkilletTileEntity) {
 			SkilletTileEntity skilletEntity = (SkilletTileEntity) tileEntity;
 			if (skilletEntity.isCooking()) {
@@ -148,7 +154,7 @@ public class SkilletBlock extends HorizontalBlock
 				double y = pos.getY();
 				double z = (double) pos.getZ() + 0.5D;
 				if (rand.nextInt(10) == 0) {
-					worldIn.playLocalSound(x, y, z, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundCategory.BLOCKS, 0.4F, rand.nextFloat() * 0.2F + 0.9F, false);
+					worldIn.playLocalSound(x, y, z, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.BLOCKS, 0.4F, rand.nextFloat() * 0.2F + 0.9F, false);
 				}
 			}
 		}
@@ -161,11 +167,11 @@ public class SkilletBlock extends HorizontalBlock
 
 	@Nullable
 	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+	public BlockEntity createTileEntity(BlockState state, BlockGetter world) {
 		return ModTileEntityTypes.SKILLET_TILE.get().create();
 	}
 
-	private boolean getTrayState(IWorld world, BlockPos pos) {
+	private boolean getTrayState(LevelAccessor world, BlockPos pos) {
 		return world.getBlockState(pos.below()).getBlock().is(ModTags.TRAY_HEAT_SOURCES);
 	}
 
@@ -185,6 +191,6 @@ public class SkilletBlock extends HorizontalBlock
 
 		int result = (int) (cookingSeconds * cookingTimeReduction) * 20;
 
-		return MathHelper.clamp(result, MINIMUM_COOKING_TIME, originalCookingTime);
+		return Mth.clamp(result, MINIMUM_COOKING_TIME, originalCookingTime);
 	}
 }

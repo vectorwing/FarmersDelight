@@ -4,16 +4,16 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -25,9 +25,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
+public class CuttingBoardRecipe implements Recipe<RecipeWrapper>
 {
-	public static IRecipeType<CuttingBoardRecipe> TYPE = IRecipeType.register(FarmersDelight.MODID + ":cutting");
+	public static RecipeType<CuttingBoardRecipe> TYPE = RecipeType.register(FarmersDelight.MODID + ":cutting");
 	public static final CuttingBoardRecipe.Serializer SERIALIZER = new CuttingBoardRecipe.Serializer();
 	public static final int MAX_RESULTS = 4;
 
@@ -111,7 +111,7 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 	}
 
 	@Override
-	public boolean matches(RecipeWrapper inv, World worldIn) {
+	public boolean matches(RecipeWrapper inv, Level worldIn) {
 		if (inv.isEmpty())
 			return false;
 		return input.test(inv.getItem(0));
@@ -127,16 +127,16 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 	}
 
 	@Override
-	public IRecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<?> getSerializer() {
 		return CuttingBoardRecipe.SERIALIZER;
 	}
 
 	@Override
-	public IRecipeType<?> getType() {
+	public RecipeType<?> getType() {
 		return CuttingBoardRecipe.TYPE;
 	}
 
-	private static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<CuttingBoardRecipe>
+	private static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<CuttingBoardRecipe>
 	{
 		Serializer() {
 			this.setRegistryName(new ResourceLocation(FarmersDelight.MODID, "cutting"));
@@ -144,9 +144,9 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 
 		@Override
 		public CuttingBoardRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
-			final String groupIn = JSONUtils.getAsString(json, "group", "");
-			final NonNullList<Ingredient> inputItemsIn = readIngredients(JSONUtils.getAsJsonArray(json, "ingredients"));
-			final JsonObject toolObject = JSONUtils.getAsJsonObject(json, "tool");
+			final String groupIn = GsonHelper.getAsString(json, "group", "");
+			final NonNullList<Ingredient> inputItemsIn = readIngredients(GsonHelper.getAsJsonArray(json, "ingredients"));
+			final JsonObject toolObject = GsonHelper.getAsJsonObject(json, "tool");
 			final Ingredient toolIn = Ingredient.fromJson(toolObject);
 			if (inputItemsIn.isEmpty()) {
 				throw new JsonParseException("No ingredients for cutting recipe");
@@ -155,11 +155,11 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 			} else if (inputItemsIn.size() > 1) {
 				throw new JsonParseException("Too many ingredients for cutting recipe! Please define only one ingredient");
 			} else {
-				final NonNullList<ChanceResult> results = readResults(JSONUtils.getAsJsonArray(json, "result"));
+				final NonNullList<ChanceResult> results = readResults(GsonHelper.getAsJsonArray(json, "result"));
 				if (results.size() > 4) {
 					throw new JsonParseException("Too many results for cutting recipe! The maximum quantity of unique results is " + MAX_RESULTS);
 				} else {
-					final String soundID = JSONUtils.getAsString(json, "sound", "");
+					final String soundID = GsonHelper.getAsString(json, "sound", "");
 					return new CuttingBoardRecipe(recipeId, groupIn, inputItemsIn.get(0), toolIn, results, soundID);
 				}
 			}
@@ -186,7 +186,7 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 
 		@Nullable
 		@Override
-		public CuttingBoardRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+		public CuttingBoardRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
 			String groupIn = buffer.readUtf(32767);
 			Ingredient inputItemIn = Ingredient.fromNetwork(buffer);
 			Ingredient toolIn = Ingredient.fromNetwork(buffer);
@@ -202,7 +202,7 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 		}
 
 		@Override
-		public void toNetwork(PacketBuffer buffer, CuttingBoardRecipe recipe) {
+		public void toNetwork(FriendlyByteBuf buffer, CuttingBoardRecipe recipe) {
 			buffer.writeUtf(recipe.group);
 			recipe.input.toNetwork(buffer);
 			recipe.tool.toNetwork(buffer);

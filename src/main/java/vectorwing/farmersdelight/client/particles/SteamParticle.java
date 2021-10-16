@@ -1,16 +1,16 @@
 package vectorwing.farmersdelight.client.particles;
 
 import net.minecraft.client.particle.*;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particles.BasicParticleType;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 
-public class SteamParticle extends SpriteTexturedParticle
+public class SteamParticle extends TextureSheetParticle
 {
-	protected SteamParticle(ClientWorld world, double x, double y, double z, double motionX, double motionY, double motionZ) {
+	protected SteamParticle(ClientLevel world, double x, double y, double z, double motionX, double motionY, double motionZ) {
 		super(world, x, y, z);
 		this.scale(2.0F);
 		this.setSize(0.25F, 0.25F);
@@ -25,8 +25,8 @@ public class SteamParticle extends SpriteTexturedParticle
 
 	@Override
 	@Nonnull
-	public IParticleRenderType getRenderType() {
-		return IParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+	public ParticleRenderType getRenderType() {
+		return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
 	}
 
 	public void tick() {
@@ -47,16 +47,16 @@ public class SteamParticle extends SpriteTexturedParticle
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public static class Factory implements IParticleFactory<BasicParticleType>
+	public static class Factory implements ParticleProvider<SimpleParticleType>
 	{
-		private final IAnimatedSprite spriteSet;
+		private final SpriteSet spriteSet;
 
-		public Factory(IAnimatedSprite sprite) {
+		public Factory(SpriteSet sprite) {
 			this.spriteSet = sprite;
 		}
 
 		@Override
-		public Particle createParticle(BasicParticleType typeIn, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		public Particle createParticle(SimpleParticleType typeIn, ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
 			SteamParticle particle = new SteamParticle(worldIn, x, y + 0.3D, z, xSpeed, ySpeed, zSpeed);
 			particle.setAlpha(0.6F);
 			particle.pickSprite(this.spriteSet);

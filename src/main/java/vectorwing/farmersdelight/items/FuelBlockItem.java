@@ -1,10 +1,13 @@
 package vectorwing.farmersdelight.items;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
 
-import net.minecraft.item.Item.Properties;
+import net.minecraft.world.item.Item.Properties;
+
+import javax.annotation.Nullable;
 
 public class FuelBlockItem extends BlockItem
 {
@@ -21,7 +24,7 @@ public class FuelBlockItem extends BlockItem
 	}
 
 	@Override
-	public int getBurnTime(ItemStack itemStack) {
+	public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
 		return this.burnTime;
 	}
 }

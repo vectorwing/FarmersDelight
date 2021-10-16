@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.integration.jei.decomposition;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.MethodsReturnNonnullByDefault;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -10,12 +10,12 @@ import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
@@ -100,12 +100,12 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
     }
 
     @Override
-    public void draw(DecompositionDummy recipe, MatrixStack ms, double mouseX, double mouseY) {
+    public void draw(DecompositionDummy recipe, PoseStack ms, double mouseX, double mouseY) {
         this.slotIcon.draw(ms, 63, 53);
     }
 
     @Override
-    public List<ITextComponent> getTooltipStrings(DecompositionDummy recipe, double mouseX, double mouseY) {
+    public List<Component> getTooltipStrings(DecompositionDummy recipe, double mouseX, double mouseY) {
         if (inIconAt(40, 38, mouseX, mouseY)) {
             return ImmutableList.of(translateKey(".light"));
         }
@@ -121,8 +121,8 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
         final int icon_size = 11;
         return iconX <= mouseX && mouseX < iconX + icon_size && iconY <= mouseY && mouseY < iconY + icon_size;
     }
-    private static TranslationTextComponent translateKey(@Nonnull String suffix) {
-        return new TranslationTextComponent(FarmersDelight.MODID + ".jei.decomposition" + suffix);
+    private static TranslatableComponent translateKey(@Nonnull String suffix) {
+        return new TranslatableComponent(FarmersDelight.MODID + ".jei.decomposition" + suffix);
     }
 
 }

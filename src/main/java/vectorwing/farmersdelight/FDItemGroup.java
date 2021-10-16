@@ -1,15 +1,15 @@
 package vectorwing.farmersdelight;
 
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.NonNullList;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 
 import javax.annotation.Nonnull;
 
 @SuppressWarnings("unused")
-public class FDItemGroup extends ItemGroup
+public class FDItemGroup extends CreativeModeTab
 {
 	public FDItemGroup(String label) {
 		super(label);

@@ -1,16 +1,16 @@
 package vectorwing.farmersdelight.mixin;
 
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.SoupItem;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.BowlFoodItem;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,9 +19,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import vectorwing.farmersdelight.setup.Configuration;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
-import net.minecraft.item.Item.Properties;
+import net.minecraft.world.item.Item.Properties;
 
-@Mixin(SoupItem.class)
+@Mixin(BowlFoodItem.class)
 public abstract class SoupItemMixin extends Item {
 	public SoupItemMixin(Properties properties) {
 		super(properties);
@@ -47,7 +47,7 @@ public abstract class SoupItemMixin extends Item {
 	 * Replication of ConsumableItem but in Mixin form, to allow SoupItems to stack
 	 */
 	@Inject(at = @At(value = "HEAD"), method = "finishUsingItem", cancellable = true)
-	private void onItemUseFinish(ItemStack stack, World worldIn, LivingEntity subject, CallbackInfoReturnable<ItemStack> cir) {
+	private void onItemUseFinish(ItemStack stack, Level worldIn, LivingEntity subject, CallbackInfoReturnable<ItemStack> cir) {
 		if (Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) {
 			ItemStack container = stack.getContainerItem();
 			if (container.isEmpty())
@@ -56,9 +56,9 @@ public abstract class SoupItemMixin extends Item {
 			if (stack.isEdible()) {
 				super.finishUsingItem(stack, worldIn, subject);
 			} else {
-				PlayerEntity player = subject instanceof PlayerEntity ? (PlayerEntity) subject : null;
-				if (player instanceof ServerPlayerEntity) {
-					CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayerEntity) player, stack);
+				Player player = subject instanceof Player ? (Player) subject : null;
+				if (player instanceof ServerPlayer) {
+					CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, stack);
 				}
 				if (player != null) {
 					player.awardStat(Stats.ITEM_USED.get(this));
@@ -71,8 +71,8 @@ public abstract class SoupItemMixin extends Item {
 			if (stack.isEmpty()) {
 				cir.setReturnValue(container);
 			} else {
-				if (subject instanceof PlayerEntity && !((PlayerEntity) subject).abilities.instabuild) {
-					PlayerEntity player = (PlayerEntity) subject;
+				if (subject instanceof Player && !((Player) subject).abilities.instabuild) {
+					Player player = (Player) subject;
 					if (!player.inventory.add(container)) {
 						player.drop(container, false);
 					}

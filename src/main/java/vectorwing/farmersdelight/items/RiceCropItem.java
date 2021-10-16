@@ -1,32 +1,32 @@
 package vectorwing.farmersdelight.items;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FarmlandBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.BlockNamedItem;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.core.Direction;
 import net.minecraftforge.common.Tags;
 import vectorwing.farmersdelight.utils.TextUtils;
 
-import net.minecraft.item.Item.Properties;
+import net.minecraft.world.item.Item.Properties;
 
-public class RiceCropItem extends BlockNamedItem
+public class RiceCropItem extends ItemNameBlockItem
 {
 	public RiceCropItem(Block blockIn, Properties properties) {
 		super(blockIn, properties);
 	}
 
 	@Override
-	public ActionResultType useOn(ItemUseContext context) {
-		ActionResultType result = this.place(new BlockItemUseContext(context));
-		if (result.equals(ActionResultType.FAIL)) {
-			PlayerEntity player = context.getPlayer();
+	public InteractionResult useOn(UseOnContext context) {
+		InteractionResult result = this.place(new BlockPlaceContext(context));
+		if (result.equals(InteractionResult.FAIL)) {
+			Player player = context.getPlayer();
 			BlockState targetState = context.getLevel().getBlockState(context.getClickedPos());
-			if (player != null && context.getClickedFace().equals(Direction.UP) && (targetState.is(Tags.Blocks.DIRT) || targetState.getBlock() instanceof FarmlandBlock)) {
+			if (player != null && context.getClickedFace().equals(Direction.UP) && (targetState.is(Tags.Blocks.DIRT) || targetState.getBlock() instanceof FarmBlock)) {
 				player.displayClientMessage(TextUtils.getTranslation("block.rice.invalid_placement"), true);
 			}
 		}

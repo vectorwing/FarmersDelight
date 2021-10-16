@@ -1,8 +1,8 @@
 package vectorwing.farmersdelight.blocks.state;
 
-import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.StringRepresentable;
 
-public enum CookingPotSupport implements IStringSerializable
+public enum CookingPotSupport implements StringRepresentable
 {
 	NONE("none"),
 	TRAY("tray"),

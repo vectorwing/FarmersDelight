@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.blocks.signs;
 
-import net.minecraft.item.DyeColor;
+import net.minecraft.world.item.DyeColor;
 import vectorwing.farmersdelight.setup.Configuration;
 
 import javax.annotation.Nullable;

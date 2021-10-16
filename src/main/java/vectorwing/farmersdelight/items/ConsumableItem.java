@@ -1,25 +1,23 @@
 package vectorwing.farmersdelight.items;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import vectorwing.farmersdelight.utils.TextUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;
-
-import net.minecraft.item.Item.Properties;
 
 public class ConsumableItem extends Item
 {
@@ -43,7 +41,7 @@ public class ConsumableItem extends Item
 	}
 
 	@Override
-	public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity consumer) {
+	public ItemStack finishUsingItem(ItemStack stack, Level worldIn, LivingEntity consumer) {
 		if (!worldIn.isClientSide) {
 			this.affectConsumer(stack, worldIn, consumer);
 		}
@@ -53,13 +51,13 @@ public class ConsumableItem extends Item
 		if (stack.isEdible()) {
 			super.finishUsingItem(stack, worldIn, consumer);
 		} else {
-			PlayerEntity player = consumer instanceof PlayerEntity ? (PlayerEntity) consumer : null;
-			if (player instanceof ServerPlayerEntity) {
-				CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayerEntity) player, stack);
+			Player player = consumer instanceof Player ? (Player) consumer : null;
+			if (player instanceof ServerPlayer) {
+				CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, stack);
 			}
 			if (player != null) {
 				player.awardStat(Stats.ITEM_USED.get(this));
-				if (!player.abilities.instabuild) {
+				if (!player.getAbilities().instabuild) {
 					stack.shrink(1);
 				}
 			}
@@ -68,9 +66,8 @@ public class ConsumableItem extends Item
 		if (stack.isEmpty()) {
 			return containerStack;
 		} else {
-			if (consumer instanceof PlayerEntity && !((PlayerEntity) consumer).abilities.instabuild) {
-				PlayerEntity player = (PlayerEntity) consumer;
-				if (!player.inventory.add(containerStack)) {
+			if (consumer instanceof Player player && !((Player) consumer).getAbilities().instabuild) {
+				if (!player.getInventory().add(containerStack)) {
 					player.drop(containerStack, false);
 				}
 			}
@@ -81,15 +78,15 @@ public class ConsumableItem extends Item
 	/**
 	 * Override this to apply changes to the consumer (e.g. curing effects).
 	 */
-	public void affectConsumer(ItemStack stack, World worldIn, LivingEntity consumer) {
+	public void affectConsumer(ItemStack stack, Level worldIn, LivingEntity consumer) {
 	}
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+	public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
 		if (this.hasCustomTooltip) {
-			IFormattableTextComponent textEmpty = TextUtils.getTranslation("tooltip." + this);
-			tooltip.add(textEmpty.withStyle(TextFormatting.BLUE));
+			MutableComponent textEmpty = TextUtils.getTranslation("tooltip." + this);
+			tooltip.add(textEmpty.withStyle(ChatFormatting.BLUE));
 		}
 		if (this.hasFoodEffectTooltip) {
 			TextUtils.addFoodEffectTooltip(stack, tooltip, 1.0F);

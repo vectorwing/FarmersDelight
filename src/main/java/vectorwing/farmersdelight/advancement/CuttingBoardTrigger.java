@@ -1,15 +1,15 @@
 package vectorwing.farmersdelight.advancement;
 
 import com.google.gson.JsonObject;
-import net.minecraft.advancements.criterion.AbstractCriterionTrigger;
-import net.minecraft.advancements.criterion.CriterionInstance;
-import net.minecraft.advancements.criterion.EntityPredicate;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.loot.ConditionArrayParser;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
+import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.advancements.critereon.DeserializationContext;
+import net.minecraft.resources.ResourceLocation;
 import vectorwing.farmersdelight.FarmersDelight;
 
-public class CuttingBoardTrigger extends AbstractCriterionTrigger<CuttingBoardTrigger.Instance>
+public class CuttingBoardTrigger extends SimpleCriterionTrigger<CuttingBoardTrigger.Instance>
 {
 	private static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "use_cutting_board");
 
@@ -17,23 +17,23 @@ public class CuttingBoardTrigger extends AbstractCriterionTrigger<CuttingBoardTr
 		return ID;
 	}
 
-	public void trigger(ServerPlayerEntity player) {
+	public void trigger(ServerPlayer player) {
 		this.trigger(player, Instance::test);
 	}
 
 	@Override
-	protected Instance createInstance(JsonObject json, EntityPredicate.AndPredicate player, ConditionArrayParser conditionsParser) {
+	protected Instance createInstance(JsonObject json, EntityPredicate.Composite player, DeserializationContext conditionsParser) {
 		return new CuttingBoardTrigger.Instance(player);
 	}
 
-	public static class Instance extends CriterionInstance
+	public static class Instance extends AbstractCriterionTriggerInstance
 	{
-		public Instance(EntityPredicate.AndPredicate player) {
+		public Instance(EntityPredicate.Composite player) {
 			super(CuttingBoardTrigger.ID, player);
 		}
 
 		public static CuttingBoardTrigger.Instance simple() {
-			return new CuttingBoardTrigger.Instance(EntityPredicate.AndPredicate.ANY);
+			return new CuttingBoardTrigger.Instance(EntityPredicate.Composite.ANY);
 		}
 
 		public boolean test() {

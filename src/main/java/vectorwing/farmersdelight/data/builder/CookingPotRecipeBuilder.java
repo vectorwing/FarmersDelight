@@ -4,13 +4,13 @@ import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import mezz.jei.api.MethodsReturnNonnullByDefault;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.item.Item;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
@@ -31,7 +31,7 @@ public class CookingPotRecipeBuilder
 	private final float experience;
 	private final Item container;
 
-	private CookingPotRecipeBuilder(IItemProvider resultIn, int count, int cookingTime, float experience, @Nullable IItemProvider container) {
+	private CookingPotRecipeBuilder(ItemLike resultIn, int count, int cookingTime, float experience, @Nullable ItemLike container) {
 		this.result = resultIn.asItem();
 		this.count = count;
 		this.cookingTime = cookingTime;
@@ -39,23 +39,23 @@ public class CookingPotRecipeBuilder
 		this.container = container != null ? container.asItem() : null;
 	}
 
-	public static CookingPotRecipeBuilder cookingPotRecipe(IItemProvider mainResult, int count, int cookingTime, float experience) {
+	public static CookingPotRecipeBuilder cookingPotRecipe(ItemLike mainResult, int count, int cookingTime, float experience) {
 		return new CookingPotRecipeBuilder(mainResult, count, cookingTime, experience, null);
 	}
 
-	public static CookingPotRecipeBuilder cookingPotRecipe(IItemProvider mainResult, int count, int cookingTime, float experience, IItemProvider container) {
+	public static CookingPotRecipeBuilder cookingPotRecipe(ItemLike mainResult, int count, int cookingTime, float experience, ItemLike container) {
 		return new CookingPotRecipeBuilder(mainResult, count, cookingTime, experience, container);
 	}
 
-	public CookingPotRecipeBuilder addIngredient(ITag<Item> tagIn) {
+	public CookingPotRecipeBuilder addIngredient(Tag<Item> tagIn) {
 		return this.addIngredient(Ingredient.of(tagIn));
 	}
 
-	public CookingPotRecipeBuilder addIngredient(IItemProvider itemIn) {
+	public CookingPotRecipeBuilder addIngredient(ItemLike itemIn) {
 		return this.addIngredient(itemIn, 1);
 	}
 
-	public CookingPotRecipeBuilder addIngredient(IItemProvider itemIn, int quantity) {
+	public CookingPotRecipeBuilder addIngredient(ItemLike itemIn, int quantity) {
 		for (int i = 0; i < quantity; ++i) {
 			this.addIngredient(Ingredient.of(itemIn));
 		}
@@ -73,12 +73,12 @@ public class CookingPotRecipeBuilder
 		return this;
 	}
 
-	public void build(Consumer<IFinishedRecipe> consumerIn) {
+	public void build(Consumer<FinishedRecipe> consumerIn) {
 		ResourceLocation location = ForgeRegistries.ITEMS.getKey(this.result);
 		this.build(consumerIn, FarmersDelight.MODID + ":cooking/" + location.getPath());
 	}
 
-	public void build(Consumer<IFinishedRecipe> consumerIn, String save) {
+	public void build(Consumer<FinishedRecipe> consumerIn, String save) {
 		ResourceLocation resourcelocation = ForgeRegistries.ITEMS.getKey(this.result);
 		if ((new ResourceLocation(save)).equals(resourcelocation)) {
 			throw new IllegalStateException("Cooking Recipe " + save + " should remove its 'save' argument");
@@ -87,11 +87,11 @@ public class CookingPotRecipeBuilder
 		}
 	}
 
-	public void build(Consumer<IFinishedRecipe> consumerIn, ResourceLocation id) {
+	public void build(Consumer<FinishedRecipe> consumerIn, ResourceLocation id) {
 		consumerIn.accept(new CookingPotRecipeBuilder.Result(id, this.result, this.count, this.ingredients, this.cookingTime, this.experience, this.container));
 	}
 
-	public static class Result implements IFinishedRecipe
+	public static class Result implements FinishedRecipe
 	{
 		private final ResourceLocation id;
 		private final List<Ingredient> ingredients;
@@ -144,7 +144,7 @@ public class CookingPotRecipeBuilder
 		}
 
 		@Override
-		public IRecipeSerializer<?> getType() {
+		public RecipeSerializer<?> getType() {
 			return CookingPotRecipe.SERIALIZER;
 		}
 

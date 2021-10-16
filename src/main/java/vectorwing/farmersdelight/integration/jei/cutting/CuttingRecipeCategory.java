@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.integration.jei.cutting;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mcp.MethodsReturnNonnullByDefault;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -9,11 +9,11 @@ import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.ChatFormatting;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.crafting.ingredients.ChanceResult;
@@ -114,12 +114,12 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 			float chance = output.getChance();
 			if (chance != 1)
 				tooltip.add(1, TextUtils.getTranslation("jei.chance", chance < 0.01 ? "<1" : (int) (chance * 100))
-						.withStyle(TextFormatting.GOLD));
+						.withStyle(ChatFormatting.GOLD));
 		});
 	}
 
 	@Override
-	public void draw(CuttingBoardRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
+	public void draw(CuttingBoardRecipe recipe, PoseStack matrixStack, double mouseX, double mouseY) {
 		cuttingBoard.draw(matrixStack, 15, 19);
 		NonNullList<ChanceResult> recipeOutputs = recipe.getRollableResults();
 

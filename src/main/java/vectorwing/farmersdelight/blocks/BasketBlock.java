@@ -2,47 +2,48 @@ package vectorwing.farmersdelight.blocks;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.pathfinding.PathType;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.IBooleanFunction;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.Container;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.tile.BasketTileEntity;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 @SuppressWarnings("deprecation")
-public class BasketBlock extends ContainerBlock implements IWaterLoggable
+public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 {
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
 	public static final BooleanProperty ENABLED = BlockStateProperties.ENABLED;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-	public static final VoxelShape OUT_SHAPE = VoxelShapes.block();
+	public static final VoxelShape OUT_SHAPE = Shapes.block();
 	public static final VoxelShape RENDER_SHAPE = box(1.0D, 1.0D, 1.0D, 15.0D, 15.0D, 15.0D);
 	@SuppressWarnings("UnstableApiUsage")
 	public static final ImmutableMap<Direction, VoxelShape> COLLISION_SHAPE_FACING =
@@ -56,7 +57,7 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable
 					.build());
 
 	private static VoxelShape makeHollowCubeShape(VoxelShape cutout) {
-		return VoxelShapes.joinUnoptimized(OUT_SHAPE, cutout, IBooleanFunction.ONLY_FIRST).optimize();
+		return Shapes.joinUnoptimized(OUT_SHAPE, cutout, BooleanOp.ONLY_FIRST).optimize();
 	}
 
 	public BasketBlock() {
@@ -65,42 +66,42 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 		return COLLISION_SHAPE_FACING.get(state.getValue(FACING));
 	}
 
 	@Override
-	public VoxelShape getOcclusionShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
+	public VoxelShape getOcclusionShape(BlockState state, BlockGetter worldIn, BlockPos pos) {
 		return RENDER_SHAPE;
 	}
 
 	@Override
-	public BlockRenderType getRenderShape(BlockState state) {
-		return BlockRenderType.MODEL;
+	public RenderShape getRenderShape(BlockState state) {
+		return RenderShape.MODEL;
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(FACING, ENABLED, WATERLOGGED);
 	}
 
 	@Override
-	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
 		if (!worldIn.isClientSide) {
-			TileEntity tileEntity = worldIn.getBlockEntity(pos);
+			BlockEntity tileEntity = worldIn.getBlockEntity(pos);
 			if (tileEntity instanceof BasketTileEntity) {
 				player.openMenu((BasketTileEntity) tileEntity);
 			}
 		}
-		return ActionResultType.SUCCESS;
+		return InteractionResult.SUCCESS;
 	}
 
 	@Override
-	public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+	public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
-			TileEntity tileEntity = worldIn.getBlockEntity(pos);
-			if (tileEntity instanceof IInventory) {
-				InventoryHelper.dropContents(worldIn, pos, (IInventory) tileEntity);
+			BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+			if (tileEntity instanceof Container) {
+				Containers.dropContents(worldIn, pos, (Container) tileEntity);
 				worldIn.updateNeighbourForOutputSignal(pos, this);
 			}
 
@@ -108,7 +109,7 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable
 		}
 	}
 
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
 		if (stateIn.getValue(WATERLOGGED)) {
 			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 		}
@@ -124,7 +125,7 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable
 	// --- HOPPER STUFF ---
 
 	@Override
-	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+	public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
 		boolean isPowered = !worldIn.hasNeighborSignal(pos);
 		if (isPowered != state.getValue(ENABLED)) {
 			worldIn.setBlock(pos, state.setValue(ENABLED, isPowered), 4);
@@ -139,19 +140,19 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState blockState, World worldIn, BlockPos pos) {
-		return Container.getRedstoneSignalFromBlockEntity(worldIn.getBlockEntity(pos));
+	public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
+		return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(worldIn.getBlockEntity(pos));
 	}
 
 	@Nullable
-	public TileEntity newBlockEntity(IBlockReader worldIn) {
+	public BlockEntity newBlockEntity(BlockGetter worldIn) {
 		return new BasketTileEntity();
 	}
 
 	@Override
-	public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+	public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		if (stack.hasCustomHoverName()) {
-			TileEntity tileEntity = worldIn.getBlockEntity(pos);
+			BlockEntity tileEntity = worldIn.getBlockEntity(pos);
 			if (tileEntity instanceof BasketTileEntity) {
 				((BasketTileEntity) tileEntity).setCustomName(stack.getHoverName());
 			}
@@ -159,7 +160,7 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable
 	}
 
 	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		FluidState fluid = context.getLevel().getFluidState(context.getClickedPos());
 		return this.defaultBlockState().setValue(FACING, context.getNearestLookingDirection().getOpposite()).setValue(WATERLOGGED, fluid.getType() == Fluids.WATER);
 	}
@@ -179,12 +180,18 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable
 	}
 
 	@Override
-	public VoxelShape getInteractionShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
+	public VoxelShape getInteractionShape(BlockState state, BlockGetter worldIn, BlockPos pos) {
 		return OUT_SHAPE;
 	}
 
 	@Override
-	public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+	public boolean isPathfindable(BlockState state, BlockGetter worldIn, BlockPos pos, PathComputationType type) {
 		return false;
+	}
+
+	@Nullable
+	@Override
+	public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+		return null;
 	}
 }

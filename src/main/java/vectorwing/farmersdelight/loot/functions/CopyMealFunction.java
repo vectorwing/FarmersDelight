@@ -2,16 +2,16 @@ package vectorwing.farmersdelight.loot.functions;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
-import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.LootFunction;
-import net.minecraft.loot.LootFunctionType;
-import net.minecraft.loot.LootParameters;
-import net.minecraft.loot.conditions.ILootCondition;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.tile.CookingPotTileEntity;
 
@@ -20,23 +20,23 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class CopyMealFunction extends LootFunction
+public class CopyMealFunction extends LootItemConditionalFunction
 {
 	public static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "copy_meal");
 
-	private CopyMealFunction(ILootCondition[] conditions) {
+	private CopyMealFunction(LootItemCondition[] conditions) {
 		super(conditions);
 	}
 
-	public static LootFunction.Builder<?> builder() {
+	public static LootItemConditionalFunction.Builder<?> builder() {
 		return simpleBuilder(CopyMealFunction::new);
 	}
 
 	@Override
 	protected ItemStack run(ItemStack stack, LootContext context) {
-		TileEntity tile = context.getParamOrNull(LootParameters.BLOCK_ENTITY);
+		BlockEntity tile = context.getParamOrNull(LootContextParams.BLOCK_ENTITY);
 		if (tile instanceof CookingPotTileEntity) {
-			CompoundNBT tag = ((CookingPotTileEntity) tile).writeMeal(new CompoundNBT());
+			CompoundTag tag = ((CookingPotTileEntity) tile).writeMeal(new CompoundTag());
 			if (!tag.isEmpty()) {
 				stack.addTagElement("BlockEntityTag", tag);
 			}
@@ -46,14 +46,14 @@ public class CopyMealFunction extends LootFunction
 
 	@Override
 	@Nullable
-	public LootFunctionType getType() {
+	public LootItemFunctionType getType() {
 		return null;
 	}
 
-	public static class Serializer extends LootFunction.Serializer<CopyMealFunction>
+	public static class Serializer extends LootItemConditionalFunction.Serializer<CopyMealFunction>
 	{
 		@Override
-		public CopyMealFunction deserialize(JsonObject json, JsonDeserializationContext context, ILootCondition[] conditions) {
+		public CopyMealFunction deserialize(JsonObject json, JsonDeserializationContext context, LootItemCondition[] conditions) {
 			return new CopyMealFunction(conditions);
 		}
 	}

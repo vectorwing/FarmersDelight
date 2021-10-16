@@ -1,14 +1,14 @@
 package vectorwing.farmersdelight.items;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import vectorwing.farmersdelight.blocks.MushroomColonyBlock;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.item.Item.Properties;
+import net.minecraft.world.item.Item.Properties;
 
 public class MushroomColonyItem extends BlockItem
 {
@@ -18,7 +18,7 @@ public class MushroomColonyItem extends BlockItem
 
 	@Override
 	@Nullable
-	protected BlockState getPlacementState(BlockItemUseContext context) {
+	protected BlockState getPlacementState(BlockPlaceContext context) {
 		BlockState originalState = this.getBlock().getStateForPlacement(context);
 		if (originalState != null) {
 			BlockState matureState = originalState.setValue(MushroomColonyBlock.COLONY_AGE, 3);

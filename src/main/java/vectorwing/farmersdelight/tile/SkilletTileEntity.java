@@ -1,22 +1,22 @@
 package vectorwing.farmersdelight.tile;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CampfireCookingRecipe;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CampfireCookingRecipe;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.blocks.SkilletBlock;
@@ -31,7 +31,7 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.Random;
 
-public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTileEntity, IHeatableTileEntity
+public class SkilletTileEntity extends FDSyncedTileEntity implements TickableBlockEntity, IHeatableTileEntity
 {
 	private final ItemStackHandler inventory = createHandler();
 	private int cookingTime;
@@ -60,7 +60,7 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 					cookAndOutputItems(cookingStack);
 				}
 			} else if (cookingTime > 0) {
-				cookingTime = MathHelper.clamp(cookingTime - 2, 0, cookingTimeTotal);
+				cookingTime = Mth.clamp(cookingTime - 2, 0, cookingTimeTotal);
 			}
 		} else {
 			if (isHeated && hasStoredStack()) {
@@ -74,7 +74,7 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 
 		++cookingTime;
 		if (cookingTime >= cookingTimeTotal) {
-			Inventory wrapper = new Inventory(cookingStack);
+			SimpleContainer wrapper = new SimpleContainer(cookingStack);
 			Optional<CampfireCookingRecipe> recipe = getMatchingRecipe(wrapper);
 			if (recipe.isPresent()) {
 				ItemStack resultStack = recipe.get().assemble(wrapper);
@@ -100,19 +100,19 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 		return false;
 	}
 
-	private Optional<CampfireCookingRecipe> getMatchingRecipe(IInventory recipeWrapper) {
+	private Optional<CampfireCookingRecipe> getMatchingRecipe(Container recipeWrapper) {
 		if (level == null) return Optional.empty();
 
 		if (lastRecipeID != null) {
-			IRecipe<IInventory> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
-					.getRecipeMap(IRecipeType.CAMPFIRE_COOKING)
+			Recipe<Container> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
+					.getRecipeMap(RecipeType.CAMPFIRE_COOKING)
 					.get(lastRecipeID);
 			if (recipe instanceof CampfireCookingRecipe && recipe.matches(recipeWrapper, level)) {
 				return Optional.of((CampfireCookingRecipe) recipe);
 			}
 		}
 
-		Optional<CampfireCookingRecipe> recipe = level.getRecipeManager().getRecipeFor(IRecipeType.CAMPFIRE_COOKING, recipeWrapper, level);
+		Optional<CampfireCookingRecipe> recipe = level.getRecipeManager().getRecipeFor(RecipeType.CAMPFIRE_COOKING, recipeWrapper, level);
 		if (recipe.isPresent()) {
 			lastRecipeID = recipe.get().getId();
 			return recipe;
@@ -144,7 +144,7 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 	}
 
 	@Override
-	public void load(BlockState state, CompoundNBT compound) {
+	public void load(BlockState state, CompoundTag compound) {
 		super.load(state, compound);
 		inventory.deserializeNBT(compound.getCompound("Inventory"));
 		cookingTime = compound.getInt("CookTime");
@@ -153,16 +153,16 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 	}
 
 	@Override
-	public CompoundNBT save(CompoundNBT compound) {
+	public CompoundTag save(CompoundTag compound) {
 		super.save(compound);
 		compound.put("Inventory", inventory.serializeNBT());
 		compound.putInt("CookTime", cookingTime);
-		compound.put("Skillet", skilletStack.save(new CompoundNBT()));
+		compound.put("Skillet", skilletStack.save(new CompoundTag()));
 		return compound;
 	}
 
-	public CompoundNBT writeSkilletItem(CompoundNBT compound) {
-		compound.put("Skillet", skilletStack.save(new CompoundNBT()));
+	public CompoundTag writeSkilletItem(CompoundTag compound) {
+		compound.put("Skillet", skilletStack.save(new CompoundTag()));
 		return compound;
 	}
 
@@ -172,8 +172,8 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 		inventoryChanged();
 	}
 
-	public ItemStack addItemToCook(ItemStack addedStack, @Nullable PlayerEntity player) {
-		Optional<CampfireCookingRecipe> recipe = getMatchingRecipe(new Inventory(addedStack));
+	public ItemStack addItemToCook(ItemStack addedStack, @Nullable Player player) {
+		Optional<CampfireCookingRecipe> recipe = getMatchingRecipe(new SimpleContainer(addedStack));
 		if (recipe.isPresent()) {
 			cookingTimeTotal = SkilletBlock.getSkilletCookingTime(recipe.get().getCookingTime(), fireAspectLevel);
 			boolean wasEmpty = getStoredStack().isEmpty();
@@ -182,7 +182,7 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 				lastRecipeID = recipe.get().getId();
 				cookingTime = 0;
 				if (wasEmpty && level != null && isHeated(level, worldPosition)) {
-					level.playSound(null, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F, ModSounds.BLOCK_SKILLET_ADD_FOOD.get(), SoundCategory.BLOCKS, 0.8F, 1.0F);
+					level.playSound(null, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F, ModSounds.BLOCK_SKILLET_ADD_FOOD.get(), SoundSource.BLOCKS, 0.8F, 1.0F);
 				}
 				return remainderStack;
 			}

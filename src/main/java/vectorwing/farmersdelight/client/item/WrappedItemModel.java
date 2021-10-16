@@ -1,11 +1,11 @@
 package vectorwing.farmersdelight.client.item;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraftforge.client.model.BakedModelWrapper;
 
-public class WrappedItemModel<T extends IBakedModel> extends BakedModelWrapper<T>
+public class WrappedItemModel<T extends BakedModel> extends BakedModelWrapper<T>
 {
 	public WrappedItemModel(T originalModel) {
 		super(originalModel);
@@ -17,8 +17,8 @@ public class WrappedItemModel<T extends IBakedModel> extends BakedModelWrapper<T
 	}
 
 	@Override
-	public IBakedModel handlePerspective(ItemCameraTransforms.TransformType cameraTransformType, MatrixStack mat) {
-		IBakedModel model = super.handlePerspective(cameraTransformType, mat);
+	public BakedModel handlePerspective(ItemTransforms.TransformType cameraTransformType, PoseStack mat) {
+		BakedModel model = super.handlePerspective(cameraTransformType, mat);
 		return model.equals(this) || model instanceof WrappedItemModel ? this : new WrappedItemModel<>(model);
 	}
 }

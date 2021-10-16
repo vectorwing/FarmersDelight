@@ -1,36 +1,35 @@
 package vectorwing.farmersdelight.blocks;
 
-import net.minecraft.block.*;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.monster.piglin.PiglinTasks;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.state.properties.DoubleBlockHalf;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.piglin.PiglinAi;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import vectorwing.farmersdelight.registry.ModBlocks;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 @SuppressWarnings("deprecation")
-public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable, IGrowable
+public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterloggedBlock, BonemealableBlock
 {
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -40,12 +39,12 @@ public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable, I
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(HALF, WATERLOGGED);
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
 		FluidState fluid = worldIn.getFluidState(pos);
 		BlockPos floorPos = pos.below();
 		if (state.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.LOWER) {
@@ -55,16 +54,16 @@ public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable, I
 	}
 
 	@Override
-	public boolean canBeReplaced(BlockState state, BlockItemUseContext useContext) {
+	public boolean canBeReplaced(BlockState state, BlockPlaceContext useContext) {
 		return false;
 	}
 
 	@Override
-	public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+	public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
 		worldIn.setBlock(pos.above(), this.defaultBlockState().setValue(WATERLOGGED, false).setValue(HALF, DoubleBlockHalf.UPPER), 3);
 	}
 
-	public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+	public void playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
 		if (!worldIn.isClientSide) {
 			if (player.isCreative()) {
 				removeBottomHalf(worldIn, pos, state, player);
@@ -74,12 +73,12 @@ public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable, I
 		}
 
 		worldIn.levelEvent(player, 2001, pos, getId(state));
-		if (this.is(BlockTags.GUARDED_BY_PIGLINS)) {
-			PiglinTasks.angerNearbyPiglins(player, false);
+		if (BlockTags.GUARDED_BY_PIGLINS.contains(this)) {
+			PiglinAi.angerNearbyPiglins(player, false);
 		}
 	}
 
-	protected static void removeBottomHalf(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+	protected static void removeBottomHalf(Level world, BlockPos pos, BlockState state, Player player) {
 		DoubleBlockHalf half = state.getValue(HALF);
 		if (half == DoubleBlockHalf.UPPER) {
 			BlockPos floorPos = pos.below();
@@ -91,14 +90,13 @@ public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable, I
 		}
 	}
 
-	@Override
-	public void placeAt(IWorld worldIn, BlockPos pos, int flags) {
-		worldIn.setBlock(pos, this.defaultBlockState().setValue(WATERLOGGED, true).setValue(HALF, DoubleBlockHalf.LOWER), flags);
-		worldIn.setBlock(pos.above(), this.defaultBlockState().setValue(WATERLOGGED, false).setValue(HALF, DoubleBlockHalf.UPPER), flags);
-	}
+//	public void placeAt(LevelAccessor worldIn, BlockState pState, BlockPos pos, int flags) {
+//		worldIn.setBlock(pos, this.defaultBlockState().setValue(WATERLOGGED, true).setValue(HALF, DoubleBlockHalf.LOWER), flags);
+//		worldIn.setBlock(pos.above(), this.defaultBlockState().setValue(WATERLOGGED, false).setValue(HALF, DoubleBlockHalf.UPPER), flags);
+//	}
 
 	@Override
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
 		BlockState currentState = super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 		DoubleBlockHalf half = stateIn.getValue(HALF);
 		if (!currentState.isAir()) {
@@ -113,18 +111,18 @@ public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable, I
 
 	@Override
 	@Nullable
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		BlockPos pos = context.getClickedPos();
 		FluidState fluid = context.getLevel().getFluidState(context.getClickedPos());
 		return pos.getY() < context.getLevel().getMaxBuildHeight() - 1
 				&& fluid.is(FluidTags.WATER)
 				&& fluid.getAmount() == 8
-				&& context.getLevel().getBlockState(pos.above()).isAir(context.getLevel(), pos.above())
+				&& context.getLevel().getBlockState(pos.above()).isAir()
 				? super.getStateForPlacement(context) : null;
 	}
 
 	@Override
-	public boolean canPlaceLiquid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
+	public boolean canPlaceLiquid(BlockGetter worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
 		return state.getValue(HALF) == DoubleBlockHalf.LOWER;
 	}
 
@@ -136,17 +134,17 @@ public class WildRiceBlock extends DoublePlantBlock implements IWaterLoggable, I
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
 	@Override
-	public boolean isBonemealSuccess(World worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
 		return (double) rand.nextFloat() < 0.3F;
 	}
 
 	@Override
-	public void performBonemeal(ServerWorld worldIn, Random random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel worldIn, Random random, BlockPos pos, BlockState state) {
 		popResource(worldIn, pos, new ItemStack(this));
 	}
 }

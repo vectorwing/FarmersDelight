@@ -1,10 +1,10 @@
 package vectorwing.farmersdelight.tile;
 
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
@@ -12,25 +12,25 @@ import javax.annotation.Nullable;
 /**
  * Simple TileEntity with networking boilerplate.
  */
-public class FDSyncedTileEntity extends TileEntity
+public class FDSyncedTileEntity extends BlockEntity
 {
-	public FDSyncedTileEntity(TileEntityType<?> tileEntityTypeIn) {
+	public FDSyncedTileEntity(BlockEntityType<?> tileEntityTypeIn) {
 		super(tileEntityTypeIn);
 	}
 
 	@Override
 	@Nullable
-	public SUpdateTileEntityPacket getUpdatePacket() {
-		return new SUpdateTileEntityPacket(worldPosition, 1, getUpdateTag());
+	public ClientboundBlockEntityDataPacket getUpdatePacket() {
+		return new ClientboundBlockEntityDataPacket(worldPosition, 1, getUpdateTag());
 	}
 
 	@Override
-	public CompoundNBT getUpdateTag() {
-		return save(new CompoundNBT());
+	public CompoundTag getUpdateTag() {
+		return save(new CompoundTag());
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
 		load(getBlockState(), pkt.getTag());
 	}
 

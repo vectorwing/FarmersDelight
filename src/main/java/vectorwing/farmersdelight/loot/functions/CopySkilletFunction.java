@@ -2,32 +2,29 @@ package vectorwing.farmersdelight.loot.functions;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
-import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.LootFunction;
-import net.minecraft.loot.LootFunctionType;
-import net.minecraft.loot.LootParameters;
-import net.minecraft.loot.conditions.ILootCondition;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.tile.CookingPotTileEntity;
 import vectorwing.farmersdelight.tile.SkilletTileEntity;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.loot.LootFunction.Builder;
-
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class CopySkilletFunction extends LootFunction
+public class CopySkilletFunction extends LootItemConditionalFunction
 {
 	public static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "copy_skillet");
 
-	private CopySkilletFunction(ILootCondition[] conditions) {
+	private CopySkilletFunction(LootItemCondition[] conditions) {
 		super(conditions);
 	}
 
@@ -37,9 +34,9 @@ public class CopySkilletFunction extends LootFunction
 
 	@Override
 	protected ItemStack run(ItemStack stack, LootContext context) {
-		TileEntity tile = context.getParamOrNull(LootParameters.BLOCK_ENTITY);
+		BlockEntity tile = context.getParamOrNull(LootContextParams.BLOCK_ENTITY);
 		if (tile instanceof SkilletTileEntity) {
-			CompoundNBT tag = ((SkilletTileEntity) tile).writeSkilletItem(new CompoundNBT());
+			CompoundTag tag = ((SkilletTileEntity) tile).writeSkilletItem(new CompoundTag());
 			if (!tag.isEmpty()) {
 				stack = ItemStack.of(tag.getCompound("Skillet"));
 			}
@@ -49,14 +46,14 @@ public class CopySkilletFunction extends LootFunction
 
 	@Override
 	@Nullable
-	public LootFunctionType getType() {
+	public LootItemFunctionType getType() {
 		return null;
 	}
 
-	public static class Serializer extends LootFunction.Serializer<CopySkilletFunction>
+	public static class Serializer extends LootItemConditionalFunction.Serializer<CopySkilletFunction>
 	{
 		@Override
-		public CopySkilletFunction deserialize(JsonObject json, JsonDeserializationContext context, ILootCondition[] conditions) {
+		public CopySkilletFunction deserialize(JsonObject json, JsonDeserializationContext context, LootItemCondition[] conditions) {
 			return new CopySkilletFunction(conditions);
 		}
 	}

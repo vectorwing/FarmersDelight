@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.blocks;
 
-import net.minecraft.block.AbstractBlock.OffsetType;
-import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.world.level.block.state.BlockBehaviour.OffsetType;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class WildCropsBlock extends WildPatchBlock
 {

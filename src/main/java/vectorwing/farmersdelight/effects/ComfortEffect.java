@@ -1,11 +1,11 @@
 package vectorwing.farmersdelight.effects;
 
 import com.google.common.collect.Sets;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.EffectType;
-import net.minecraft.potion.Effects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -16,9 +16,9 @@ import vectorwing.farmersdelight.registry.ModEffects;
 import java.util.Set;
 
 @SuppressWarnings("unused")
-public class ComfortEffect extends Effect
+public class ComfortEffect extends MobEffect
 {
-	public static final Set<Effect> COMFORT_IMMUNITIES = Sets.newHashSet(Effects.MOVEMENT_SLOWDOWN, Effects.WEAKNESS, Effects.HUNGER);
+	public static final Set<MobEffect> COMFORT_IMMUNITIES = Sets.newHashSet(MobEffects.MOVEMENT_SLOWDOWN, MobEffects.WEAKNESS, MobEffects.HUNGER);
 
 	/**
 	 * This effect makes the player immune to negative effects related to cold and sickness.
@@ -27,7 +27,7 @@ public class ComfortEffect extends Effect
 	 * Current targets: Slowness, Weakness and Hunger.
 	 */
 	public ComfortEffect() {
-		super(EffectType.BENEFICIAL, 0);
+		super(MobEffectCategory.BENEFICIAL, 0);
 	}
 
 	@Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -35,7 +35,7 @@ public class ComfortEffect extends Effect
 	{
 		@SubscribeEvent
 		public static void onComfortDuration(PotionEvent.PotionApplicableEvent event) {
-			EffectInstance effect = event.getPotionEffect();
+			MobEffectInstance effect = event.getPotionEffect();
 			LivingEntity entity = event.getEntityLiving();
 			if (entity.getEffect(ModEffects.COMFORT.get()) != null && COMFORT_IMMUNITIES.contains(effect.getEffect())) {
 				event.setResult(Event.Result.DENY);
@@ -44,10 +44,10 @@ public class ComfortEffect extends Effect
 
 		@SubscribeEvent
 		public static void onComfortApplied(PotionEvent.PotionAddedEvent event) {
-			EffectInstance addedEffect = event.getPotionEffect();
+			MobEffectInstance addedEffect = event.getPotionEffect();
 			LivingEntity entity = event.getEntityLiving();
 			if (addedEffect.getEffect().equals(ModEffects.COMFORT.get())) {
-				for (Effect effect : COMFORT_IMMUNITIES) {
+				for (MobEffect effect : COMFORT_IMMUNITIES) {
 					entity.removeEffect(effect);
 				}
 			}

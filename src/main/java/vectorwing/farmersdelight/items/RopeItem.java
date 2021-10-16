@@ -1,15 +1,13 @@
 package vectorwing.farmersdelight.items;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
-
-import net.minecraft.item.Item.Properties;
 
 public class RopeItem extends FuelBlockItem
 {
@@ -19,9 +17,9 @@ public class RopeItem extends FuelBlockItem
 
 	@Override
 	@Nullable
-	public BlockItemUseContext updatePlacementContext(BlockItemUseContext context) {
+	public BlockPlaceContext updatePlacementContext(BlockPlaceContext context) {
 		BlockPos blockpos = context.getClickedPos();
-		World world = context.getLevel();
+		Level world = context.getLevel();
 		BlockState state = world.getBlockState(blockpos);
 		Block block = this.getBlock();
 
@@ -36,13 +34,13 @@ public class RopeItem extends FuelBlockItem
 			}
 
 			int i = 0;
-			BlockPos.Mutable blockpos$mutable = (new BlockPos.Mutable(blockpos.getX(), blockpos.getY(), blockpos.getZ())).move(direction);
+			BlockPos.MutableBlockPos blockpos$mutable = (new BlockPos.MutableBlockPos(blockpos.getX(), blockpos.getY(), blockpos.getZ())).move(direction);
 
 			while (i < 256) {
 				state = world.getBlockState(blockpos$mutable);
 				if (state.getBlock() != this.getBlock()) {
 					if (state.canBeReplaced(context)) {
-						return BlockItemUseContext.at(context, blockpos$mutable, direction);
+						return BlockPlaceContext.at(context, blockpos$mutable, direction);
 					}
 					break;
 				}

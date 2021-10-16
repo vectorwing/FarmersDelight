@@ -1,27 +1,27 @@
 package vectorwing.farmersdelight.tile;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.inventory.container.ChestContainer;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.LockableLootTileEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.Container;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.EntityPredicates;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.IBooleanFunction;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.core.Direction;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.network.chat.Component;
 import vectorwing.farmersdelight.blocks.BasketBlock;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.TextUtils;
@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class BasketTileEntity extends LockableLootTileEntity implements IBasket, ITickableTileEntity
+public class BasketTileEntity extends RandomizableContainerBlockEntity implements IBasket, TickableBlockEntity
 {
 	private NonNullList<ItemStack> basketContents = NonNullList.withSize(27, ItemStack.EMPTY);
 	private int transferCooldown = -1;
@@ -50,7 +50,7 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 		return false;
 	}
 
-	public static ItemStack putStackInInventoryAllSlots(IInventory destination, ItemStack stack) {
+	public static ItemStack putStackInInventoryAllSlots(Container destination, ItemStack stack) {
 		int i = destination.getContainerSize();
 
 		for (int j = 0; j < i && !stack.isEmpty(); ++j) {
@@ -60,11 +60,11 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 		return stack;
 	}
 
-	private static boolean canInsertItemInSlot(IInventory inventoryIn, ItemStack stack, int index, @Nullable Direction side) {
+	private static boolean canInsertItemInSlot(Container inventoryIn, ItemStack stack, int index, @Nullable Direction side) {
 		if (!inventoryIn.canPlaceItem(index, stack)) {
 			return false;
 		} else {
-			return !(inventoryIn instanceof ISidedInventory) || ((ISidedInventory) inventoryIn).canPlaceItemThroughFace(index, stack, side);
+			return !(inventoryIn instanceof WorldlyContainer) || ((WorldlyContainer) inventoryIn).canPlaceItemThroughFace(index, stack, side);
 		}
 	}
 
@@ -80,7 +80,7 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 		}
 	}
 
-	private static ItemStack insertStack(IInventory destination, ItemStack stack, int index) {
+	private static ItemStack insertStack(Container destination, ItemStack stack, int index) {
 		ItemStack itemstack = destination.getItem(index);
 		if (canInsertItemInSlot(destination, stack, index, null)) {
 			boolean flag = false;
@@ -114,7 +114,7 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 		return stack;
 	}
 
-	public static boolean captureItem(IInventory inventory, ItemEntity itemEntity) {
+	public static boolean captureItem(Container inventory, ItemEntity itemEntity) {
 		boolean flag = false;
 		ItemStack entityItemStack = itemEntity.getItem().copy();
 		ItemStack remainderStack = putStackInInventoryAllSlots(inventory, entityItemStack);
@@ -130,14 +130,14 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 
 	public static List<ItemEntity> getCaptureItems(IBasket basket, int facingIndex) {
 
-		return basket.getLevel() == null ? new ArrayList<>() : basket.getFacingCollectionArea(facingIndex).toAabbs().stream().flatMap((p_200110_1_) -> basket.getLevel().getEntitiesOfClass(ItemEntity.class, p_200110_1_.move(basket.getLevelX() - 0.5D, basket.getLevelY() - 0.5D, basket.getLevelZ() - 0.5D), EntityPredicates.ENTITY_STILL_ALIVE).stream()).collect(Collectors.toList());
+		return basket.getLevel() == null ? new ArrayList<>() : basket.getFacingCollectionArea(facingIndex).toAabbs().stream().flatMap((p_200110_1_) -> basket.getLevel().getEntitiesOfClass(ItemEntity.class, p_200110_1_.move(basket.getLevelX() - 0.5D, basket.getLevelY() - 0.5D, basket.getLevelZ() - 0.5D), EntitySelector.ENTITY_STILL_ALIVE).stream()).collect(Collectors.toList());
 	}
 
 	@Override
-	public CompoundNBT save(CompoundNBT compound) {
+	public CompoundTag save(CompoundTag compound) {
 		super.save(compound);
 		if (!this.trySaveLootTable(compound)) {
-			ItemStackHelper.saveAllItems(compound, this.basketContents);
+			ContainerHelper.saveAllItems(compound, this.basketContents);
 		}
 
 		compound.putInt("TransferCooldown", this.transferCooldown);
@@ -145,11 +145,11 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 	}
 
 	@Override
-	public void load(BlockState state, CompoundNBT compound) {
+	public void load(BlockState state, CompoundTag compound) {
 		super.load(state, compound);
 		this.basketContents = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
 		if (!this.tryLoadLootTable(compound)) {
-			ItemStackHelper.loadAllItems(compound, this.basketContents);
+			ContainerHelper.loadAllItems(compound, this.basketContents);
 		}
 		this.transferCooldown = compound.getInt("TransferCooldown");
 	}
@@ -171,19 +171,19 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 	}
 
 	@Override
-	protected ITextComponent getDefaultName() {
+	protected Component getDefaultName() {
 		return TextUtils.getTranslation("container.basket");
 	}
 
 	@Override
-	protected Container createMenu(int id, PlayerInventory player) {
-		return ChestContainer.threeRows(id, player, this);
+	protected AbstractContainerMenu createMenu(int id, Inventory player) {
+		return ChestMenu.threeRows(id, player, this);
 	}
 
 	@Override
 	public ItemStack removeItem(int index, int count) {
 		this.unpackLootTable(null);
-		return ItemStackHelper.removeItem(this.getItems(), index, count);
+		return ContainerHelper.removeItem(this.getItems(), index, count);
 	}
 
 	@Override
@@ -237,7 +237,7 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 		if (entity instanceof ItemEntity) {
 			BlockPos blockpos = this.getBlockPos();
 			int facing = this.getBlockState().getValue(BasketBlock.FACING).get3DDataValue();
-			if (VoxelShapes.joinIsNotEmpty(VoxelShapes.create(entity.getBoundingBox().move(-blockpos.getX(), -blockpos.getY(), -blockpos.getZ())), this.getFacingCollectionArea(facing), IBooleanFunction.AND)) {
+			if (Shapes.joinIsNotEmpty(Shapes.create(entity.getBoundingBox().move(-blockpos.getX(), -blockpos.getY(), -blockpos.getZ())), this.getFacingCollectionArea(facing), BooleanOp.AND)) {
 				this.updateHopper(() -> captureItem(this, (ItemEntity) entity));
 			}
 		}

@@ -1,9 +1,9 @@
 package vectorwing.farmersdelight.tile;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
 /**
@@ -16,7 +16,7 @@ public interface IHeatableTileEntity
 	/**
 	 * Checks for heat sources below the block. If it can, it also checks for conducted heat.
 	 */
-	default boolean isHeated(World world, BlockPos pos) {
+	default boolean isHeated(Level world, BlockPos pos) {
 		BlockState stateBelow = world.getBlockState(pos.below());
 
 		if (ModTags.HEAT_SOURCES.contains(stateBelow.getBlock())) {

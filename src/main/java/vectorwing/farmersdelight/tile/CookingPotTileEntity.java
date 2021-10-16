@@ -3,22 +3,22 @@ package vectorwing.farmersdelight.tile;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.item.ExperienceOrbEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -41,9 +41,15 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Optional;
 import java.util.Random;
 
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Nameable;
+import net.minecraft.world.inventory.ContainerData;
+
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedContainerProvider, ITickableTileEntity, IHeatableTileEntity, INameable
+public class CookingPotTileEntity extends FDSyncedTileEntity implements MenuProvider, TickableBlockEntity, IHeatableTileEntity, Nameable
 {
 	public static final int MEAL_DISPLAY_SLOT = 6;
 	public static final int CONTAINER_SLOT = 7;
@@ -57,9 +63,9 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 	private int cookTime;
 	private int cookTimeTotal;
 	private ItemStack mealContainerStack;
-	private ITextComponent customName;
+	private Component customName;
 
-	protected final IIntArray cookingPotData;
+	protected final ContainerData cookingPotData;
 	private final Object2IntOpenHashMap<ResourceLocation> experienceTracker;
 
 	private ResourceLocation lastRecipeID;
@@ -76,45 +82,45 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 	}
 
 	@Override
-	public void load(BlockState state, CompoundNBT compound) {
+	public void load(BlockState state, CompoundTag compound) {
 		super.load(state, compound);
 		inventory.deserializeNBT(compound.getCompound("Inventory"));
 		cookTime = compound.getInt("CookTime");
 		cookTimeTotal = compound.getInt("CookTimeTotal");
 		mealContainerStack = ItemStack.of(compound.getCompound("Container"));
 		if (compound.contains("CustomName", 8)) {
-			customName = ITextComponent.Serializer.fromJson(compound.getString("CustomName"));
+			customName = Component.Serializer.fromJson(compound.getString("CustomName"));
 		}
-		CompoundNBT compoundRecipes = compound.getCompound("RecipesUsed");
+		CompoundTag compoundRecipes = compound.getCompound("RecipesUsed");
 		for (String key : compoundRecipes.getAllKeys()) {
 			experienceTracker.put(new ResourceLocation(key), compoundRecipes.getInt(key));
 		}
 	}
 
 	@Override
-	public CompoundNBT save(CompoundNBT compound) {
+	public CompoundTag save(CompoundTag compound) {
 		super.save(compound);
 		compound.putInt("CookTime", cookTime);
 		compound.putInt("CookTimeTotal", cookTimeTotal);
 		compound.put("Container", mealContainerStack.serializeNBT());
 		if (customName != null) {
-			compound.putString("CustomName", ITextComponent.Serializer.toJson(customName));
+			compound.putString("CustomName", Component.Serializer.toJson(customName));
 		}
 		compound.put("Inventory", inventory.serializeNBT());
-		CompoundNBT compoundRecipes = new CompoundNBT();
+		CompoundTag compoundRecipes = new CompoundTag();
 		experienceTracker.forEach((recipeId, craftedAmount) -> compoundRecipes.putInt(recipeId.toString(), craftedAmount));
 		compound.put("RecipesUsed", compoundRecipes);
 		return compound;
 	}
 
-	private CompoundNBT writeItems(CompoundNBT compound) {
+	private CompoundTag writeItems(CompoundTag compound) {
 		super.save(compound);
 		compound.put("Container", mealContainerStack.serializeNBT());
 		compound.put("Inventory", inventory.serializeNBT());
 		return compound;
 	}
 
-	public CompoundNBT writeMeal(CompoundNBT compound) {
+	public CompoundTag writeMeal(CompoundTag compound) {
 		if (getMeal().isEmpty()) return compound;
 
 		ItemStackHandler drops = new ItemStackHandler(INVENTORY_SIZE);
@@ -122,7 +128,7 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 			drops.setStackInSlot(i, i == MEAL_DISPLAY_SLOT ? inventory.getStackInSlot(i) : ItemStack.EMPTY);
 		}
 		if (customName != null) {
-			compound.putString("CustomName", ITextComponent.Serializer.toJson(customName));
+			compound.putString("CustomName", Component.Serializer.toJson(customName));
 		}
 		compound.put("Container", mealContainerStack.serializeNBT());
 		compound.put("Inventory", drops.serializeNBT());
@@ -147,7 +153,7 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 					cookTime = 0;
 				}
 			} else if (cookTime > 0) {
-				cookTime = MathHelper.clamp(cookTime - 2, 0, cookTimeTotal);
+				cookTime = Mth.clamp(cookTime - 2, 0, cookTimeTotal);
 			}
 
 			ItemStack mealStack = getMeal();
@@ -176,7 +182,7 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 		if (level == null) return Optional.empty();
 
 		if (lastRecipeID != null) {
-			IRecipe<RecipeWrapper> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
+			Recipe<RecipeWrapper> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
 					.getRecipeMap(CookingPotRecipe.TYPE)
 					.get(lastRecipeID);
 			if (recipe instanceof CookingPotRecipe) {
@@ -293,35 +299,35 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 		}
 	}
 
-	public void trackRecipeExperience(@Nullable IRecipe<?> recipe) {
+	public void trackRecipeExperience(@Nullable Recipe<?> recipe) {
 		if (recipe != null) {
 			ResourceLocation recipeID = recipe.getId();
 			experienceTracker.addTo(recipeID, 1);
 		}
 	}
 
-	public void clearUsedRecipes(PlayerEntity player) {
+	public void clearUsedRecipes(Player player) {
 		grantStoredRecipeExperience(player.level, player.position());
 		experienceTracker.clear();
 	}
 
-	public void grantStoredRecipeExperience(World world, Vector3d pos) {
+	public void grantStoredRecipeExperience(Level world, Vec3 pos) {
 		for (Object2IntMap.Entry<ResourceLocation> entry : experienceTracker.object2IntEntrySet()) {
 			world.getRecipeManager().byKey(entry.getKey()).ifPresent((recipe) -> splitAndSpawnExperience(world, pos, entry.getIntValue(), ((CookingPotRecipe) recipe).getExperience()));
 		}
 	}
 
-	private static void splitAndSpawnExperience(World world, Vector3d pos, int craftedAmount, float experience) {
-		int expTotal = MathHelper.floor((float) craftedAmount * experience);
-		float expFraction = MathHelper.frac((float) craftedAmount * experience);
+	private static void splitAndSpawnExperience(Level world, Vec3 pos, int craftedAmount, float experience) {
+		int expTotal = Mth.floor((float) craftedAmount * experience);
+		float expFraction = Mth.frac((float) craftedAmount * experience);
 		if (expFraction != 0.0F && Math.random() < (double) expFraction) {
 			++expTotal;
 		}
 
 		while (expTotal > 0) {
-			int expValue = ExperienceOrbEntity.getExperienceValue(expTotal);
+			int expValue = ExperienceOrb.getExperienceValue(expTotal);
 			expTotal -= expValue;
-			world.addFreshEntity(new ExperienceOrbEntity(world, pos.x, pos.y, pos.z, expValue));
+			world.addFreshEntity(new ExperienceOrb(world, pos.x, pos.y, pos.z, expValue));
 		}
 	}
 
@@ -401,27 +407,27 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 	}
 
 	@Override
-	public ITextComponent getName() {
+	public Component getName() {
 		return customName != null ? customName : TextUtils.getTranslation("container.cooking_pot");
 	}
 
 	@Override
-	public ITextComponent getDisplayName() {
+	public Component getDisplayName() {
 		return getName();
 	}
 
 	@Override
 	@Nullable
-	public ITextComponent getCustomName() {
+	public Component getCustomName() {
 		return customName;
 	}
 
-	public void setCustomName(ITextComponent name) {
+	public void setCustomName(Component name) {
 		customName = name;
 	}
 
 	@Override
-	public Container createMenu(int id, PlayerInventory player, PlayerEntity entity) {
+	public AbstractContainerMenu createMenu(int id, Inventory player, Player entity) {
 		return new CookingPotContainer(id, player, this, cookingPotData);
 	}
 
@@ -446,8 +452,8 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 	}
 
 	@Override
-	public CompoundNBT getUpdateTag() {
-		return writeItems(new CompoundNBT());
+	public CompoundTag getUpdateTag() {
+		return writeItems(new CompoundTag());
 	}
 
 	private ItemStackHandler createHandler() {
@@ -463,8 +469,8 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 		};
 	}
 
-	private IIntArray createIntArray() {
-		return new IIntArray()
+	private ContainerData createIntArray() {
+		return new ContainerData()
 		{
 			@Override
 			public int get(int index) {

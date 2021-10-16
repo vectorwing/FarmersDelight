@@ -2,19 +2,19 @@ package vectorwing.farmersdelight.tile.container;
 
 
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIntArray;
-import net.minecraft.util.IWorldPosCallable;
-import net.minecraft.util.IntArray;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.ItemStackHandler;
@@ -26,21 +26,21 @@ import vectorwing.farmersdelight.tile.CookingPotTileEntity;
 
 import java.util.Objects;
 
-public class CookingPotContainer extends Container
+public class CookingPotContainer extends AbstractContainerMenu
 {
 	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "item/empty_container_slot_bowl");
 
 	public final CookingPotTileEntity tileEntity;
 	public final ItemStackHandler inventory;
-	private final IIntArray cookingPotData;
-	private final IWorldPosCallable canInteractWithCallable;
+	private final ContainerData cookingPotData;
+	private final ContainerLevelAccess canInteractWithCallable;
 
-	public CookingPotContainer(final int windowId, final PlayerInventory playerInventory, final CookingPotTileEntity tileEntity, IIntArray cookingPotDataIn) {
+	public CookingPotContainer(final int windowId, final Inventory playerInventory, final CookingPotTileEntity tileEntity, ContainerData cookingPotDataIn) {
 		super(ModContainerTypes.COOKING_POT.get(), windowId);
 		this.tileEntity = tileEntity;
 		this.inventory = tileEntity.getInventory();
 		this.cookingPotData = cookingPotDataIn;
-		this.canInteractWithCallable = IWorldPosCallable.create(tileEntity.getLevel(), tileEntity.getBlockPos());
+		this.canInteractWithCallable = ContainerLevelAccess.create(tileEntity.getLevel(), tileEntity.getBlockPos());
 
 		// Ingredient Slots - 2 Rows x 3 Columns
 		int startX = 8;
@@ -64,7 +64,7 @@ public class CookingPotContainer extends Container
 		{
 			@OnlyIn(Dist.CLIENT)
 			public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
-				return Pair.of(PlayerContainer.BLOCK_ATLAS, EMPTY_CONTAINER_SLOT_BOWL);
+				return Pair.of(InventoryMenu.BLOCK_ATLAS, EMPTY_CONTAINER_SLOT_BOWL);
 			}
 		});
 
@@ -88,27 +88,27 @@ public class CookingPotContainer extends Container
 		this.addDataSlots(cookingPotDataIn);
 	}
 
-	private static CookingPotTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
+	private static CookingPotTileEntity getTileEntity(final Inventory playerInventory, final FriendlyByteBuf data) {
 		Objects.requireNonNull(playerInventory, "playerInventory cannot be null");
 		Objects.requireNonNull(data, "data cannot be null");
-		final TileEntity tileAtPos = playerInventory.player.level.getBlockEntity(data.readBlockPos());
+		final BlockEntity tileAtPos = playerInventory.player.level.getBlockEntity(data.readBlockPos());
 		if (tileAtPos instanceof CookingPotTileEntity) {
 			return (CookingPotTileEntity) tileAtPos;
 		}
 		throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);
 	}
 
-	public CookingPotContainer(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
-		this(windowId, playerInventory, getTileEntity(playerInventory, data), new IntArray(4));
+	public CookingPotContainer(final int windowId, final Inventory playerInventory, final FriendlyByteBuf data) {
+		this(windowId, playerInventory, getTileEntity(playerInventory, data), new SimpleContainerData(4));
 	}
 
 	@Override
-	public boolean stillValid(PlayerEntity playerIn) {
+	public boolean stillValid(Player playerIn) {
 		return stillValid(canInteractWithCallable, playerIn, ModBlocks.COOKING_POT.get());
 	}
 
 	@Override
-	public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
+	public ItemStack quickMoveStack(Player playerIn, int index) {
 		int indexMealDisplay = 6;
 		int indexContainerInput = 7;
 		int indexOutput = 8;

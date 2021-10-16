@@ -1,23 +1,23 @@
 package vectorwing.farmersdelight.tile;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CampfireCookingRecipe;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.shapes.IBooleanFunction;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.math.vector.Vector2f;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CampfireCookingRecipe;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.Vec2;
 import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.blocks.StoveBlock;
 import vectorwing.farmersdelight.mixin.accessors.RecipeManagerAccessor;
@@ -26,7 +26,7 @@ import vectorwing.farmersdelight.utils.ItemUtils;
 
 import java.util.Optional;
 
-public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTileEntity
+public class StoveTileEntity extends FDSyncedTileEntity implements TickableBlockEntity
 {
 	private static final VoxelShape GRILLING_AREA = Block.box(3.0F, 0.0F, 3.0F, 13.0F, 1.0F, 13.0F);
 	private static final int INVENTORY_SLOT_COUNT = 6;
@@ -45,7 +45,7 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 	}
 
 	@Override
-	public void load(BlockState state, CompoundNBT compound) {
+	public void load(BlockState state, CompoundTag compound) {
 		super.load(state, compound);
 		if (compound.contains("Inventory")) {
 			inventory.deserializeNBT(compound.getCompound("Inventory"));
@@ -64,14 +64,14 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 	}
 
 	@Override
-	public CompoundNBT save(CompoundNBT compound) {
+	public CompoundTag save(CompoundTag compound) {
 		writeItems(compound);
 		compound.putIntArray("CookingTimes", cookingTimes);
 		compound.putIntArray("CookingTotalTimes", cookingTimesTotal);
 		return compound;
 	}
 
-	private CompoundNBT writeItems(CompoundNBT compound) {
+	private CompoundTag writeItems(CompoundTag compound) {
 		super.save(compound);
 		compound.put("Inventory", inventory.serializeNBT());
 		return compound;
@@ -97,7 +97,7 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 			} else {
 				for (int i = 0; i < inventory.getSlots(); ++i) {
 					if (cookingTimes[i] > 0) {
-						cookingTimes[i] = MathHelper.clamp(cookingTimes[i] - 2, 0, cookingTimesTotal[i]);
+						cookingTimes[i] = Mth.clamp(cookingTimes[i] - 2, 0, cookingTimesTotal[i]);
 					}
 				}
 			}
@@ -113,7 +113,7 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 			if (!stoveStack.isEmpty()) {
 				++cookingTimes[i];
 				if (cookingTimes[i] >= cookingTimesTotal[i]) {
-					IInventory inventoryWrapper = new Inventory(stoveStack);
+					Container inventoryWrapper = new SimpleContainer(stoveStack);
 					Optional<CampfireCookingRecipe> recipe = getMatchingRecipe(inventoryWrapper, i);
 					if (recipe.isPresent()) {
 						ItemStack resultStack = recipe.get().getResultItem();
@@ -138,7 +138,7 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 		for (int i = 0; i < inventory.getSlots(); ++i) {
 			ItemStack slotStack = inventory.getStackInSlot(i);
 			if (slotStack.isEmpty()) {
-				Optional<CampfireCookingRecipe> recipe = getMatchingRecipe(new Inventory(itemStackIn), i);
+				Optional<CampfireCookingRecipe> recipe = getMatchingRecipe(new SimpleContainer(itemStackIn), i);
 				if (recipe.isPresent()) {
 					cookingTimesTotal[i] = recipe.get().getCookingTime();
 					cookingTimes[i] = 0;
@@ -152,19 +152,19 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 		return false;
 	}
 
-	private Optional<CampfireCookingRecipe> getMatchingRecipe(IInventory recipeWrapper, int slot) {
+	private Optional<CampfireCookingRecipe> getMatchingRecipe(Container recipeWrapper, int slot) {
 		if (level == null) return Optional.empty();
 
 		if (lastRecipeIDs[slot] != null) {
-			IRecipe<IInventory> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
-					.getRecipeMap(IRecipeType.CAMPFIRE_COOKING)
+			Recipe<Container> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
+					.getRecipeMap(RecipeType.CAMPFIRE_COOKING)
 					.get(lastRecipeIDs[slot]);
 			if (recipe instanceof CampfireCookingRecipe && recipe.matches(recipeWrapper, level)) {
 				return Optional.of((CampfireCookingRecipe) recipe);
 			}
 		}
 
-		Optional<CampfireCookingRecipe> recipe = level.getRecipeManager().getRecipeFor(IRecipeType.CAMPFIRE_COOKING, recipeWrapper, level);
+		Optional<CampfireCookingRecipe> recipe = level.getRecipeManager().getRecipeFor(RecipeType.CAMPFIRE_COOKING, recipeWrapper, level);
 		if (recipe.isPresent()) {
 			lastRecipeIDs[slot] = recipe.get().getId();
 			return recipe;
@@ -180,21 +180,21 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 	public boolean isStoveBlockedAbove() {
 		if (level != null) {
 			BlockState above = level.getBlockState(worldPosition.above());
-			return VoxelShapes.joinIsNotEmpty(GRILLING_AREA, above.getShape(level, worldPosition.above()), IBooleanFunction.AND);
+			return Shapes.joinIsNotEmpty(GRILLING_AREA, above.getShape(level, worldPosition.above()), BooleanOp.AND);
 		}
 		return false;
 	}
 
-	public Vector2f getStoveItemOffset(int index) {
+	public Vec2 getStoveItemOffset(int index) {
 		final float X_OFFSET = 0.3F;
 		final float Y_OFFSET = 0.2F;
-		final Vector2f[] OFFSETS = {
-				new Vector2f(X_OFFSET, Y_OFFSET),
-				new Vector2f(0.0F, Y_OFFSET),
-				new Vector2f(-X_OFFSET, Y_OFFSET),
-				new Vector2f(X_OFFSET, -Y_OFFSET),
-				new Vector2f(0.0F, -Y_OFFSET),
-				new Vector2f(-X_OFFSET, -Y_OFFSET),
+		final Vec2[] OFFSETS = {
+				new Vec2(X_OFFSET, Y_OFFSET),
+				new Vec2(0.0F, Y_OFFSET),
+				new Vec2(-X_OFFSET, Y_OFFSET),
+				new Vec2(X_OFFSET, -Y_OFFSET),
+				new Vec2(0.0F, -Y_OFFSET),
+				new Vec2(-X_OFFSET, -Y_OFFSET),
 		};
 		return OFFSETS[index];
 	}
@@ -204,10 +204,10 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 
 		for (int i = 0; i < inventory.getSlots(); ++i) {
 			if (!inventory.getStackInSlot(i).isEmpty() && level.random.nextFloat() < 0.2F) {
-				Vector2f stoveItemVector = getStoveItemOffset(i);
+				Vec2 stoveItemVector = getStoveItemOffset(i);
 				Direction direction = getBlockState().getValue(StoveBlock.FACING);
 				int directionIndex = direction.get2DDataValue();
-				Vector2f offset = directionIndex % 2 == 0 ? stoveItemVector : new Vector2f(stoveItemVector.y, stoveItemVector.x);
+				Vec2 offset = directionIndex % 2 == 0 ? stoveItemVector : new Vec2(stoveItemVector.y, stoveItemVector.x);
 
 				double x = ((double) worldPosition.getX() + 0.5D) - (direction.getStepX() * offset.x) + (direction.getClockWise().getStepX() * offset.x);
 				double y = (double) worldPosition.getY() + 1.0D;
@@ -221,8 +221,8 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 	}
 
 	@Override
-	public CompoundNBT getUpdateTag() {
-		return writeItems(new CompoundNBT());
+	public CompoundTag getUpdateTag() {
+		return writeItems(new CompoundTag());
 	}
 
 	private ItemStackHandler createHandler() {

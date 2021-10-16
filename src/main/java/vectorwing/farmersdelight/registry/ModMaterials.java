@@ -1,12 +1,12 @@
 package vectorwing.farmersdelight.registry;
 
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 
 public class ModMaterials
 {
-	public static final IItemTier FLINT = new IItemTier() {
+	public static final Tier FLINT = new Tier() {
 		@Override
 		public int getUses() { return 131; }
 

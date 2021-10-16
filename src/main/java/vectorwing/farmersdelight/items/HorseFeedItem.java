@@ -1,24 +1,28 @@
 package vectorwing.farmersdelight.items;
 
 import com.google.common.collect.Lists;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.passive.horse.AbstractHorseEntity;
-import net.minecraft.entity.passive.horse.HorseEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.EffectUtils;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.text.*;
-import net.minecraft.world.World;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffectUtil;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import net.minecraft.world.entity.animal.horse.Horse;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -32,13 +36,11 @@ import vectorwing.farmersdelight.utils.tags.ModTags;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import net.minecraft.item.Item.Properties;
-
 public class HorseFeedItem extends Item
 {
-	public static final List<EffectInstance> EFFECTS = Lists.newArrayList(
-			new EffectInstance(Effects.MOVEMENT_SPEED, 6000, 1),
-			new EffectInstance(Effects.JUMP, 6000, 0));
+	public static final List<MobEffectInstance> EFFECTS = Lists.newArrayList(
+			new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 6000, 1),
+			new MobEffectInstance(MobEffects.JUMP, 6000, 0));
 
 	public HorseFeedItem(Properties properties) {
 		super(properties);
@@ -50,20 +52,19 @@ public class HorseFeedItem extends Item
 		@SubscribeEvent
 		@SuppressWarnings("unused")
 		public static void onHorseFeedApplied(PlayerInteractEvent.EntityInteract event) {
-			PlayerEntity player = event.getPlayer();
+			Player player = event.getPlayer();
 			Entity target = event.getTarget();
 			ItemStack itemStack = event.getItemStack();
 
-			if (target instanceof LivingEntity && ModTags.HORSE_FEED_USERS.contains(target.getType())) {
-				LivingEntity entity = (LivingEntity) target;
-				boolean isTameable = entity instanceof AbstractHorseEntity;
+			if (target instanceof LivingEntity entity && ModTags.HORSE_FEED_USERS.contains(target.getType())) {
+				boolean isTameable = entity instanceof AbstractHorse;
 
-				if (entity.isAlive() && (!isTameable || ((AbstractHorseEntity) entity).isTamed()) && itemStack.getItem().equals(ModItems.HORSE_FEED.get())) {
+				if (entity.isAlive() && (!isTameable || ((AbstractHorse) entity).isTamed()) && itemStack.getItem().equals(ModItems.HORSE_FEED.get())) {
 					entity.setHealth(entity.getMaxHealth());
-					for (EffectInstance effect : EFFECTS) {
-						entity.addEffect(new EffectInstance(effect));
+					for (MobEffectInstance effect : EFFECTS) {
+						entity.addEffect(new MobEffectInstance(effect));
 					}
-					entity.level.playSound(null, target.blockPosition(), SoundEvents.HORSE_EAT, SoundCategory.PLAYERS, 0.8F, 0.8F);
+					entity.level.playSound(null, target.blockPosition(), SoundEvents.HORSE_EAT, SoundSource.PLAYERS, 0.8F, 0.8F);
 
 					for (int i = 0; i < 5; ++i) {
 						double d0 = MathUtils.RAND.nextGaussian() * 0.02D;
@@ -76,7 +77,7 @@ public class HorseFeedItem extends Item
 						itemStack.shrink(1);
 					}
 
-					event.setCancellationResult(ActionResultType.SUCCESS);
+					event.setCancellationResult(InteractionResult.SUCCESS);
 					event.setCanceled(true);
 				}
 			}
@@ -84,22 +85,22 @@ public class HorseFeedItem extends Item
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		IFormattableTextComponent textWhenFeeding = TextUtils.getTranslation("tooltip.horse_feed.when_feeding");
-		tooltip.add(textWhenFeeding.withStyle(TextFormatting.GRAY));
+	public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+		MutableComponent textWhenFeeding = TextUtils.getTranslation("tooltip.horse_feed.when_feeding");
+		tooltip.add(textWhenFeeding.withStyle(ChatFormatting.GRAY));
 
-		for (EffectInstance effectInstance : EFFECTS) {
-			IFormattableTextComponent effectDescription = new StringTextComponent(" ");
-			IFormattableTextComponent effectName = new TranslationTextComponent(effectInstance.getDescriptionId());
+		for (MobEffectInstance effectInstance : EFFECTS) {
+			MutableComponent effectDescription = new TextComponent(" ");
+			MutableComponent effectName = new TranslatableComponent(effectInstance.getDescriptionId());
 			effectDescription.append(effectName);
-			Effect effect = effectInstance.getEffect();
+			MobEffect effect = effectInstance.getEffect();
 
 			if (effectInstance.getAmplifier() > 0) {
-				effectDescription.append(" ").append(new TranslationTextComponent("potion.potency." + effectInstance.getAmplifier()));
+				effectDescription.append(" ").append(new TranslatableComponent("potion.potency." + effectInstance.getAmplifier()));
 			}
 
 			if (effectInstance.getDuration() > 20) {
-				effectDescription.append(" (").append(EffectUtils.formatDuration(effectInstance, 1.0F)).append(")");
+				effectDescription.append(" (").append(MobEffectUtil.formatDuration(effectInstance, 1.0F)).append(")");
 			}
 
 			tooltip.add(effectDescription.withStyle(effect.getCategory().getTooltipFormatting()));
@@ -107,13 +108,12 @@ public class HorseFeedItem extends Item
 	}
 
 	@Override
-	public ActionResultType interactLivingEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
-		if (target instanceof HorseEntity) {
-			HorseEntity horse = (HorseEntity) target;
+	public InteractionResult interactLivingEntity(ItemStack stack, Player playerIn, LivingEntity target, InteractionHand hand) {
+		if (target instanceof Horse horse) {
 			if (horse.isAlive() && horse.isTamed()) {
-				return ActionResultType.SUCCESS;
+				return InteractionResult.SUCCESS;
 			}
 		}
-		return ActionResultType.PASS;
+		return InteractionResult.PASS;
 	}
 }

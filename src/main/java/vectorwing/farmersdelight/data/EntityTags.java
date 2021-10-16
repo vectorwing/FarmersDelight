@@ -1,8 +1,8 @@
 package vectorwing.farmersdelight.data;
 
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.EntityTypeTagsProvider;
-import net.minecraft.entity.EntityType;
+import net.minecraft.data.tags.EntityTypeTagsProvider;
+import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 

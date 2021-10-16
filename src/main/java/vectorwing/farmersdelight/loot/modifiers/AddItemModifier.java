@@ -1,12 +1,12 @@
 package vectorwing.farmersdelight.loot.modifiers;
 
 import com.google.gson.JsonObject;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.conditions.ILootCondition;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,7 +21,7 @@ public class AddItemModifier extends LootModifier
 	/**
 	 * This loot modifier adds an item to the loot table, given the conditions specified.
 	 */
-	protected AddItemModifier(ILootCondition[] conditionsIn, Item addedItemIn) {
+	protected AddItemModifier(LootItemCondition[] conditionsIn, Item addedItemIn) {
 		super(conditionsIn);
 		this.addedItem = addedItemIn;
 	}
@@ -36,8 +36,8 @@ public class AddItemModifier extends LootModifier
 	public static class Serializer extends GlobalLootModifierSerializer<AddItemModifier>
 	{
 		@Override
-		public AddItemModifier read(ResourceLocation location, JsonObject object, ILootCondition[] ailootcondition) {
-			Item addedItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation((JSONUtils.getAsString(object, "item"))));
+		public AddItemModifier read(ResourceLocation location, JsonObject object, LootItemCondition[] ailootcondition) {
+			Item addedItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation((GsonHelper.getAsString(object, "item"))));
 			return new AddItemModifier(ailootcondition, addedItem);
 		}
 

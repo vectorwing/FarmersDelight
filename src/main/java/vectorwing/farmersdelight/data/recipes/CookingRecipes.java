@@ -1,9 +1,9 @@
 package vectorwing.farmersdelight.data.recipes;
 
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import vectorwing.farmersdelight.data.builder.CookingPotRecipeBuilder;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.tags.ForgeTags;
@@ -18,13 +18,13 @@ public class CookingRecipes
 	public static final int NORMAL_COOKING = 200;
 	public static final int SLOW_COOKING = 400;
 
-	public static void register(Consumer<IFinishedRecipe> consumer) {
+	public static void register(Consumer<FinishedRecipe> consumer) {
 		cookMiscellaneous(consumer);
 		cookMinecraftSoups(consumer);
 		cookMeals(consumer);
 	}
 
-	private static void cookMiscellaneous(Consumer<IFinishedRecipe> consumer) {
+	private static void cookMiscellaneous(Consumer<FinishedRecipe> consumer) {
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.HOT_COCOA.get(), 1, NORMAL_COOKING, 0.35F)
 				.addIngredient(ForgeTags.MILK)
 				.addIngredient(Items.SUGAR)
@@ -48,7 +48,7 @@ public class CookingRecipes
 				.build(consumer);
 	}
 
-	private static void cookMinecraftSoups(Consumer<IFinishedRecipe> consumer) {
+	private static void cookMinecraftSoups(Consumer<FinishedRecipe> consumer) {
 		CookingPotRecipeBuilder.cookingPotRecipe(Items.MUSHROOM_STEW, 1, NORMAL_COOKING, 0.2F, Items.BOWL)
 				.addIngredient(Items.BROWN_MUSHROOM)
 				.addIngredient(Items.RED_MUSHROOM)
@@ -66,7 +66,7 @@ public class CookingRecipes
 				.build(consumer);
 	}
 
-	private static void cookMeals(Consumer<IFinishedRecipe> consumer) {
+	private static void cookMeals(Consumer<FinishedRecipe> consumer) {
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.BAKED_COD_STEW.get(), 1, NORMAL_COOKING, 0.35F)
 				.addIngredient(ForgeTags.RAW_FISHES_COD)
 				.addIngredient(Items.POTATO)
@@ -96,10 +96,10 @@ public class CookingRecipes
 				.addIngredient(ForgeTags.CROPS_CABBAGE)
 				.addIngredient(ForgeTags.CROPS_ONION)
 				.addIngredient(Ingredient.fromValues(Stream.of(
-						new Ingredient.TagList(ForgeTags.RAW_CHICKEN),
-						new Ingredient.TagList(ForgeTags.RAW_PORK),
-						new Ingredient.TagList(ForgeTags.RAW_BEEF),
-						new Ingredient.SingleItemList(new ItemStack(Items.BROWN_MUSHROOM))
+						new Ingredient.TagValue(ForgeTags.RAW_CHICKEN),
+						new Ingredient.TagValue(ForgeTags.RAW_PORK),
+						new Ingredient.TagValue(ForgeTags.RAW_BEEF),
+						new Ingredient.ItemValue(new ItemStack(Items.BROWN_MUSHROOM))
 				)))
 				.build(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.FISH_STEW.get(), 1, NORMAL_COOKING, 0.35F)

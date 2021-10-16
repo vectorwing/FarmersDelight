@@ -5,11 +5,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.JsonToNBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.nbt.TagParser;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.setup.Configuration;
@@ -73,16 +73,16 @@ public class ChanceResult
 			throw new JsonSyntaxException("Must be a json object");
 
 		JsonObject json = je.getAsJsonObject();
-		String itemId = JSONUtils.getAsString(json, "item");
-		int count = JSONUtils.getAsInt(json, "count", 1);
-		float chance = JSONUtils.getAsFloat(json, "chance", 1);
+		String itemId = GsonHelper.getAsString(json, "item");
+		int count = GsonHelper.getAsInt(json, "count", 1);
+		float chance = GsonHelper.getAsFloat(json, "chance", 1);
 		ItemStack itemstack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemId)), count);
 
-		if (JSONUtils.isValidPrimitive(json, "nbt")) {
+		if (GsonHelper.isValidPrimitive(json, "nbt")) {
 			try {
 				JsonElement element = json.get("nbt");
-				itemstack.setTag(JsonToNBT.parseTag(
-						element.isJsonObject() ? FarmersDelight.GSON.toJson(element) : JSONUtils.convertToString(element, "nbt")));
+				itemstack.setTag(TagParser.parseTag(
+						element.isJsonObject() ? FarmersDelight.GSON.toJson(element) : GsonHelper.convertToString(element, "nbt")));
 			}
 			catch (CommandSyntaxException e) {
 				e.printStackTrace();
@@ -92,12 +92,12 @@ public class ChanceResult
 		return new ChanceResult(itemstack, chance);
 	}
 
-	public void write(PacketBuffer buf) {
+	public void write(FriendlyByteBuf buf) {
 		buf.writeItem(getStack());
 		buf.writeFloat(getChance());
 	}
 
-	public static ChanceResult read(PacketBuffer buf) {
+	public static ChanceResult read(FriendlyByteBuf buf) {
 		return new ChanceResult(buf.readItem(), buf.readFloat());
 	}
 }

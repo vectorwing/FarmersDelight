@@ -1,10 +1,10 @@
 package vectorwing.farmersdelight.data.recipes;
 
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolType;
 import vectorwing.farmersdelight.crafting.ingredients.ToolIngredient;
@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 
 public class CuttingRecipes
 {
-	public static void register(Consumer<IFinishedRecipe> consumer) {
+	public static void register(Consumer<FinishedRecipe> consumer) {
 		// Knife
 		cuttingMeats(consumer);
 		cuttingVegetables(consumer);
@@ -37,7 +37,7 @@ public class CuttingRecipes
 		salvagingUsingShears(consumer);
 	}
 
-	private static void cuttingMeats(Consumer<IFinishedRecipe> consumer) {
+	private static void cuttingMeats(Consumer<FinishedRecipe> consumer) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BEEF), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.MINCED_BEEF.get(), 2)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.PORKCHOP), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.BACON.get(), 2)
@@ -72,7 +72,7 @@ public class CuttingRecipes
 				.build(consumer);
 	}
 
-	private static void cuttingVegetables(Consumer<IFinishedRecipe> consumer) {
+	private static void cuttingVegetables(Consumer<FinishedRecipe> consumer) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.CABBAGE.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.CABBAGE_LEAF.get(), 2)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.RICE_PANICLE.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.RICE.get(), 1)
@@ -88,7 +88,7 @@ public class CuttingRecipes
 				.build(consumer);
 	}
 
-	private static void cuttingPastries(Consumer<IFinishedRecipe> consumer) {
+	private static void cuttingPastries(Consumer<FinishedRecipe> consumer) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CAKE), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.CAKE_SLICE.get(), 7)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.APPLE_PIE.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.APPLE_PIE_SLICE.get(), 4)
@@ -99,7 +99,7 @@ public class CuttingRecipes
 				.build(consumer);
 	}
 
-	private static void cuttingFlowers(Consumer<IFinishedRecipe> consumer) {
+	private static void cuttingFlowers(Consumer<FinishedRecipe> consumer) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.WITHER_ROSE), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.BLACK_DYE, 2)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CORNFLOWER), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.BLUE_DYE, 2)
@@ -151,14 +151,14 @@ public class CuttingRecipes
 				.build(consumer);
 	}
 
-	private static void salvagingBricks(Consumer<IFinishedRecipe> consumer) {
+	private static void salvagingBricks(Consumer<FinishedRecipe> consumer) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BRICKS), new ToolIngredient(ToolType.PICKAXE), Items.BRICK, 4)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.NETHER_BRICKS), new ToolIngredient(ToolType.PICKAXE), Items.NETHER_BRICK, 4)
 				.build(consumer);
 	}
 
-	private static void strippingWood(Consumer<IFinishedRecipe> consumer) {
+	private static void strippingWood(Consumer<FinishedRecipe> consumer) {
 		stripLogForBark(consumer, Items.OAK_LOG, Items.STRIPPED_OAK_LOG);
 		stripLogForBark(consumer, Items.OAK_WOOD, Items.STRIPPED_OAK_WOOD);
 		stripLogForBark(consumer, Items.BIRCH_LOG, Items.STRIPPED_BIRCH_LOG);
@@ -177,7 +177,7 @@ public class CuttingRecipes
 		stripLogForBark(consumer, Items.WARPED_HYPHAE, Items.STRIPPED_WARPED_HYPHAE);
 	}
 
-	private static void salvagingWoodenFurniture(Consumer<IFinishedRecipe> consumer) {
+	private static void salvagingWoodenFurniture(Consumer<FinishedRecipe> consumer) {
 		salvagePlankFromFurniture(consumer, Items.OAK_PLANKS, Items.OAK_DOOR, Items.OAK_TRAPDOOR, Items.OAK_SIGN);
 		salvagePlankFromFurniture(consumer, Items.BIRCH_PLANKS, Items.BIRCH_DOOR, Items.BIRCH_TRAPDOOR, Items.BIRCH_SIGN);
 		salvagePlankFromFurniture(consumer, Items.SPRUCE_PLANKS, Items.SPRUCE_DOOR, Items.SPRUCE_TRAPDOOR, Items.SPRUCE_SIGN);
@@ -188,12 +188,12 @@ public class CuttingRecipes
 		salvagePlankFromFurniture(consumer, Items.WARPED_PLANKS, Items.WARPED_DOOR, Items.WARPED_TRAPDOOR, Items.WARPED_SIGN);
 	}
 
-	private static void diggingSediments(Consumer<IFinishedRecipe> consumer) {
+	private static void diggingSediments(Consumer<FinishedRecipe> consumer) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CLAY), new ToolIngredient(ToolType.SHOVEL), Items.CLAY_BALL, 4)
 				.build(consumer);
 	}
 
-	private static void salvagingUsingShears(Consumer<IFinishedRecipe> consumer) {
+	private static void salvagingUsingShears(Consumer<FinishedRecipe> consumer) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.SADDLE), Ingredient.of(Tags.Items.SHEARS), Items.LEATHER, 2)
 				.addResultWithChance(Items.IRON_NUGGET, 0.5F, 2)
 				.build(consumer);
@@ -213,7 +213,7 @@ public class CuttingRecipes
 	/**
 	 * Generates an axe-cutting recipe for each furniture, resulting in one plank of the given type.
 	 */
-	private static void salvagePlankFromFurniture(Consumer<IFinishedRecipe> consumer, IItemProvider plank, IItemProvider door, IItemProvider trapdoor, IItemProvider sign) {
+	private static void salvagePlankFromFurniture(Consumer<FinishedRecipe> consumer, ItemLike plank, ItemLike door, ItemLike trapdoor, ItemLike sign) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(door), new ToolIngredient(ToolType.AXE), plank).build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(trapdoor), new ToolIngredient(ToolType.AXE), plank).build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(sign), new ToolIngredient(ToolType.AXE), plank).build(consumer);
@@ -222,7 +222,7 @@ public class CuttingRecipes
 	/**
 	 * Generates an axe-stripping recipe for the pair of given logs, with custom sound and a Tree Bark result attached.
 	 */
-	private static void stripLogForBark(Consumer<IFinishedRecipe> consumer, IItemProvider log, IItemProvider strippedLog) {
+	private static void stripLogForBark(Consumer<FinishedRecipe> consumer, ItemLike log, ItemLike strippedLog) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(log), new ToolIngredient(ToolType.AXE), strippedLog)
 				.addResult(ModItems.TREE_BARK.get())
 				.addSound(SoundEvents.AXE_STRIP.getRegistryName().toString()).build(consumer);

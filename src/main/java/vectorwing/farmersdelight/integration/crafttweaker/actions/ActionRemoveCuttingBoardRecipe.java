@@ -6,10 +6,10 @@ import com.blamejared.crafttweaker.api.logger.ILogger;
 import com.blamejared.crafttweaker.api.managers.IRecipeManager;
 import com.blamejared.crafttweaker.impl.actions.recipes.ActionRecipeBase;
 import com.blamejared.crafttweaker.impl.item.MCItemStackMutable;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Registry;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 
 import java.util.Arrays;
@@ -27,7 +27,7 @@ public class ActionRemoveCuttingBoardRecipe extends ActionRecipeBase
 
     @Override
     public void apply() {
-        Iterator<Map.Entry<ResourceLocation, IRecipe<?>>> it = getManager().getRecipes().entrySet().iterator();
+        Iterator<Map.Entry<ResourceLocation, Recipe<?>>> it = getManager().getRecipes().entrySet().iterator();
         while (it.hasNext()) {
             CuttingBoardRecipe recipe = (CuttingBoardRecipe) it.next().getValue();
             if (recipe.getResults().size() != outputs.length) {

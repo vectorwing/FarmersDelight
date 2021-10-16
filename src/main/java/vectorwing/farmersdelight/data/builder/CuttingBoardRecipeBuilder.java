@@ -3,13 +3,12 @@ package vectorwing.farmersdelight.data.builder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import mezz.jei.api.MethodsReturnNonnullByDefault;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
@@ -18,9 +17,7 @@ import vectorwing.farmersdelight.crafting.ingredients.ChanceResult;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 
 @MethodsReturnNonnullByDefault
@@ -32,7 +29,7 @@ public class CuttingBoardRecipeBuilder
 	private final Ingredient tool;
 	private String soundEventID;
 
-	private CuttingBoardRecipeBuilder(Ingredient ingredient, Ingredient tool, IItemProvider mainResult, int count, float chance) {
+	private CuttingBoardRecipeBuilder(Ingredient ingredient, Ingredient tool, ItemLike mainResult, int count, float chance) {
 		this.results.add(new ChanceResult(new ItemStack(mainResult.asItem(), count), chance));
 		this.ingredient = ingredient;
 		this.tool = tool;
@@ -41,38 +38,38 @@ public class CuttingBoardRecipeBuilder
 	/**
 	 * Creates a new builder for a cutting recipe.
 	 */
-	public static CuttingBoardRecipeBuilder cuttingRecipe(Ingredient ingredient, Ingredient tool, IItemProvider mainResult, int count) {
+	public static CuttingBoardRecipeBuilder cuttingRecipe(Ingredient ingredient, Ingredient tool, ItemLike mainResult, int count) {
 		return new CuttingBoardRecipeBuilder(ingredient, tool, mainResult, count, 1);
 	}
 
 	/**
 	 * Creates a new builder for a cutting recipe, providing a chance for the main output to drop.
 	 */
-	public static CuttingBoardRecipeBuilder cuttingRecipe(Ingredient ingredient, Ingredient tool, IItemProvider mainResult, int count, int chance) {
+	public static CuttingBoardRecipeBuilder cuttingRecipe(Ingredient ingredient, Ingredient tool, ItemLike mainResult, int count, int chance) {
 		return new CuttingBoardRecipeBuilder(ingredient, tool, mainResult, count, chance);
 	}
 
 	/**
 	 * Creates a new builder for a cutting recipe, returning 1 unit of the result.
 	 */
-	public static CuttingBoardRecipeBuilder cuttingRecipe(Ingredient ingredient, Ingredient tool, IItemProvider mainResult) {
+	public static CuttingBoardRecipeBuilder cuttingRecipe(Ingredient ingredient, Ingredient tool, ItemLike mainResult) {
 		return new CuttingBoardRecipeBuilder(ingredient, tool, mainResult, 1, 1);
 	}
 
-	public CuttingBoardRecipeBuilder addResult(IItemProvider result) {
+	public CuttingBoardRecipeBuilder addResult(ItemLike result) {
 		return this.addResult(result, 1);
 	}
 
-	public CuttingBoardRecipeBuilder addResult(IItemProvider result, int count) {
+	public CuttingBoardRecipeBuilder addResult(ItemLike result, int count) {
 		this.results.add(new ChanceResult(new ItemStack(result.asItem(), count), 1));
 		return this;
 	}
 
-	public CuttingBoardRecipeBuilder addResultWithChance(IItemProvider result, float chance) {
+	public CuttingBoardRecipeBuilder addResultWithChance(ItemLike result, float chance) {
 		return this.addResultWithChance(result, chance, 1);
 	}
 
-	public CuttingBoardRecipeBuilder addResultWithChance(IItemProvider result, float chance, int count) {
+	public CuttingBoardRecipeBuilder addResultWithChance(ItemLike result, float chance, int count) {
 		this.results.add(new ChanceResult(new ItemStack(result.asItem(), count), chance));
 		return this;
 	}
@@ -82,12 +79,12 @@ public class CuttingBoardRecipeBuilder
 		return this;
 	}
 
-	public void build(Consumer<IFinishedRecipe> consumerIn) {
+	public void build(Consumer<FinishedRecipe> consumerIn) {
 		ResourceLocation location = ForgeRegistries.ITEMS.getKey(this.ingredient.getItems()[0].getItem());
 		this.build(consumerIn, FarmersDelight.MODID + ":cutting/" + location.getPath());
 	}
 
-	public void build(Consumer<IFinishedRecipe> consumerIn, String save) {
+	public void build(Consumer<FinishedRecipe> consumerIn, String save) {
 		ResourceLocation resourcelocation = ForgeRegistries.ITEMS.getKey(this.ingredient.getItems()[0].getItem());
 		if ((new ResourceLocation(save)).equals(resourcelocation)) {
 			throw new IllegalStateException("Cutting Recipe " + save + " should remove its 'save' argument");
@@ -96,11 +93,11 @@ public class CuttingBoardRecipeBuilder
 		}
 	}
 
-	public void build(Consumer<IFinishedRecipe> consumerIn, ResourceLocation id) {
+	public void build(Consumer<FinishedRecipe> consumerIn, ResourceLocation id) {
 		consumerIn.accept(new CuttingBoardRecipeBuilder.Result(id, this.ingredient, this.tool, this.results, this.soundEventID == null ? "" : this.soundEventID));
 	}
 
-	public static class Result implements IFinishedRecipe
+	public static class Result implements FinishedRecipe
 	{
 		private final ResourceLocation id;
 		private final Ingredient ingredient;
@@ -108,7 +105,7 @@ public class CuttingBoardRecipeBuilder
 		private final List<ChanceResult> results;
 		private final String soundEventID;
 
-		public Result(ResourceLocation idIn, Ingredient ingredientIn,  Ingredient toolIn, List<ChanceResult> resultsIn, String soundEventIDIn) {
+		public Result(ResourceLocation idIn, Ingredient ingredientIn, Ingredient toolIn, List<ChanceResult> resultsIn, String soundEventIDIn) {
 			this.id = idIn;
 			this.ingredient = ingredientIn;
 			this.tool = toolIn;
@@ -148,7 +145,7 @@ public class CuttingBoardRecipeBuilder
 		}
 
 		@Override
-		public IRecipeSerializer<?> getType() {
+		public RecipeSerializer<?> getType() {
 			return CuttingBoardRecipe.SERIALIZER;
 		}
 

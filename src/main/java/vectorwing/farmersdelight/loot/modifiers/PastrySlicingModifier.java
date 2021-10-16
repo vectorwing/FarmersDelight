@@ -1,16 +1,16 @@
 package vectorwing.farmersdelight.loot.modifiers;
 
 import com.google.gson.JsonObject;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CakeBlock;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.LootParameters;
-import net.minecraft.loot.conditions.ILootCondition;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.CakeBlock;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -31,7 +31,7 @@ public class PastrySlicingModifier extends LootModifier
 	 * If the block is a PieBlock, it drops up to 4 slices.
 	 * Otherwise, this does nothing.
 	 */
-	protected PastrySlicingModifier(ILootCondition[] conditionsIn, Item pastrySliceIn) {
+	protected PastrySlicingModifier(LootItemCondition[] conditionsIn, Item pastrySliceIn) {
 		super(conditionsIn);
 		this.pastrySlice = pastrySliceIn;
 	}
@@ -39,7 +39,7 @@ public class PastrySlicingModifier extends LootModifier
 	@Nonnull
 	@Override
 	protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
-		BlockState state = context.getParamOrNull(LootParameters.BLOCK_STATE);
+		BlockState state = context.getParamOrNull(LootContextParams.BLOCK_STATE);
 		if (state != null) {
 			Block targetBlock = state.getBlock();
 			if (targetBlock instanceof CakeBlock) {
@@ -57,8 +57,8 @@ public class PastrySlicingModifier extends LootModifier
 	public static class Serializer extends GlobalLootModifierSerializer<PastrySlicingModifier>
 	{
 		@Override
-		public PastrySlicingModifier read(ResourceLocation location, JsonObject object, ILootCondition[] conditions) {
-			Item pastrySlice = ForgeRegistries.ITEMS.getValue(new ResourceLocation((JSONUtils.getAsString(object, "slice"))));
+		public PastrySlicingModifier read(ResourceLocation location, JsonObject object, LootItemCondition[] conditions) {
+			Item pastrySlice = ForgeRegistries.ITEMS.getValue(new ResourceLocation((GsonHelper.getAsString(object, "slice"))));
 			return new PastrySlicingModifier(conditions, pastrySlice);
 		}
 

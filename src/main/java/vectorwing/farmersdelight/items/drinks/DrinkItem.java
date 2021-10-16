@@ -1,15 +1,13 @@
 package vectorwing.farmersdelight.items.drinks;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.UseAction;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.DrinkHelper;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.Level;
 import vectorwing.farmersdelight.items.ConsumableItem;
-
-import net.minecraft.item.Item.Properties;
 
 public class DrinkItem extends ConsumableItem
 {
@@ -27,12 +25,12 @@ public class DrinkItem extends ConsumableItem
 	}
 
 	@Override
-	public UseAction getUseAnimation(ItemStack stack) {
-		return UseAction.DRINK;
+	public UseAnim getUseAnimation(ItemStack stack) {
+		return UseAnim.DRINK;
 	}
 
 	@Override
-	public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		return DrinkHelper.useDrink(worldIn, playerIn, handIn);
+	public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
+		return ItemUtils.startUsingInstantly(worldIn, playerIn, handIn);
 	}
 }

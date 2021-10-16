@@ -1,13 +1,13 @@
 package vectorwing.farmersdelight.tile;
 
-import net.minecraft.tileentity.SignTileEntity;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 
-public class CanvasSignTileEntity extends SignTileEntity
+public class CanvasSignTileEntity extends SignBlockEntity
 {
 	@Override
-	public TileEntityType<?> getType() {
+	public BlockEntityType<?> getType() {
 		return ModTileEntityTypes.CANVAS_SIGN_TILE.get();
 	}
 }

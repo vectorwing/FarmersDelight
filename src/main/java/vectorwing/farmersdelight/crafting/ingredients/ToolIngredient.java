@@ -2,11 +2,10 @@ package vectorwing.farmersdelight.crafting.ingredients;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.common.ToolType;
+import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IIngredientSerializer;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -26,7 +25,7 @@ public class ToolIngredient extends Ingredient
 		super(ForgeRegistries.ITEMS.getValues().stream()
 				.map(ItemStack::new)
 				.filter(stack -> stack.getToolTypes().contains(toolType))
-				.map(Ingredient.SingleItemList::new));
+				.map(Ingredient.ItemValue::new));
 		this.toolType = toolType;
 	}
 
@@ -56,12 +55,12 @@ public class ToolIngredient extends Ingredient
 		}
 
 		@Override
-		public ToolIngredient parse(PacketBuffer buffer) {
+		public ToolIngredient parse(FriendlyByteBuf buffer) {
 			return new ToolIngredient(ToolType.get(buffer.readUtf()));
 		}
 
 		@Override
-		public void write(PacketBuffer buffer, ToolIngredient ingredient) {
+		public void write(FriendlyByteBuf buffer, ToolIngredient ingredient) {
 			buffer.writeUtf(ingredient.toolType.getName());
 		}
 	}

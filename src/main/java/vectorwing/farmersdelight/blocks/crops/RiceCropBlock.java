@@ -1,26 +1,26 @@
 package vectorwing.farmersdelight.blocks.crops;
 
 import net.minecraft.block.*;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.Level;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.common.Tags;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
@@ -28,10 +28,16 @@ import vectorwing.farmersdelight.registry.ModItems;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.LiquidBlockContainer;
+import net.minecraft.world.level.block.state.BlockState;
 
 @SuppressWarnings("deprecation")
-public class RiceCropBlock extends BushBlock implements IGrowable, ILiquidContainer
+public class RiceCropBlock extends BushBlock implements BonemealableBlock, LiquidBlockContainer
 {
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
 	public static final BooleanProperty SUPPORTING = BooleanProperty.create("supporting");
@@ -47,7 +53,7 @@ public class RiceCropBlock extends BushBlock implements IGrowable, ILiquidContai
 	}
 
 	@Override
-	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
+	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random rand) {
 		super.tick(state, worldIn, pos, rand);
 		if (!worldIn.isAreaLoaded(pos, 1)) return;
 		if (worldIn.getRawBrightness(pos.above(), 0) >= 6) {
@@ -71,18 +77,18 @@ public class RiceCropBlock extends BushBlock implements IGrowable, ILiquidContai
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 		return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
 		FluidState fluid = worldIn.getFluidState(pos);
 		return super.canSurvive(state, worldIn, pos) && fluid.is(FluidTags.WATER) && fluid.getAmount() == 8;
 	}
 
 	@Override
-	protected boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos) {
+	protected boolean mayPlaceOn(BlockState state, BlockGetter worldIn, BlockPos pos) {
 		return super.mayPlaceOn(state, worldIn, pos) || Tags.Blocks.DIRT.contains(state.getBlock());
 	}
 
@@ -99,7 +105,7 @@ public class RiceCropBlock extends BushBlock implements IGrowable, ILiquidContai
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(IBlockReader worldIn, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(BlockGetter worldIn, BlockPos pos, BlockState state) {
 		return new ItemStack(ModItems.RICE.get());
 	}
 
@@ -112,12 +118,12 @@ public class RiceCropBlock extends BushBlock implements IGrowable, ILiquidContai
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(AGE, SUPPORTING);
 	}
 
 	@Override
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
 		BlockState state = super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 		if (!state.isAir()) {
 			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
@@ -135,13 +141,13 @@ public class RiceCropBlock extends BushBlock implements IGrowable, ILiquidContai
 
 	@Override
 	@Nullable
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		FluidState fluid = context.getLevel().getFluidState(context.getClickedPos());
 		return fluid.is(FluidTags.WATER) && fluid.getAmount() == 8 ? super.getStateForPlacement(context) : null;
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		BlockState upperState = worldIn.getBlockState(pos.above());
 		if (upperState.getBlock() instanceof RiceUpperCropBlock) {
 			return !((RiceUpperCropBlock) upperState.getBlock()).isMaxAge(upperState);
@@ -150,23 +156,23 @@ public class RiceCropBlock extends BushBlock implements IGrowable, ILiquidContai
 	}
 
 	@Override
-	public boolean isBonemealSuccess(World worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
 		return true;
 	}
 
-	protected int getBonemealAgeIncrease(World worldIn) {
-		return MathHelper.nextInt(worldIn.random, 1, 4);
+	protected int getBonemealAgeIncrease(Level worldIn) {
+		return Mth.nextInt(worldIn.random, 1, 4);
 	}
 
 	@Override
-	public void performBonemeal(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel worldIn, Random rand, BlockPos pos, BlockState state) {
 		int ageGrowth = Math.min(this.getAge(state) + this.getBonemealAgeIncrease(worldIn), 7);
 		if (ageGrowth <= this.getMaxAge()) {
 			worldIn.setBlockAndUpdate(pos, state.setValue(AGE, ageGrowth));
 		} else {
 			BlockState top = worldIn.getBlockState(pos.above());
 			if (top.getBlock() == ModBlocks.RICE_UPPER_CROP.get()) {
-				IGrowable growable = (IGrowable) worldIn.getBlockState(pos.above()).getBlock();
+				BonemealableBlock growable = (BonemealableBlock) worldIn.getBlockState(pos.above()).getBlock();
 				if (growable.isValidBonemealTarget(worldIn, pos.above(), top, false)) {
 					growable.performBonemeal(worldIn, worldIn.random, pos.above(), top);
 				}
@@ -187,12 +193,12 @@ public class RiceCropBlock extends BushBlock implements IGrowable, ILiquidContai
 	}
 
 	@Override
-	public boolean canPlaceLiquid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
+	public boolean canPlaceLiquid(BlockGetter worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
 		return false;
 	}
 
 	@Override
-	public boolean placeLiquid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
+	public boolean placeLiquid(LevelAccessor worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
 		return false;
 	}
 }

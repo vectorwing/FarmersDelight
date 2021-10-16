@@ -1,13 +1,13 @@
 package vectorwing.farmersdelight.client.gui;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.FoodStats;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.GameRules;
+import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodData;
+import net.minecraft.world.level.GameRules;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -40,7 +40,7 @@ public class NourishedHungerOverlay
 	public void onPreRender(RenderGameOverlayEvent.Pre event) {
 		if (!Configuration.NOURISHED_HUNGER_OVERLAY.get())
 			return;
-		if (event.getType() != RenderGameOverlayEvent.ElementType.FOOD)
+		if (event.getType() != RenderGameOverlayEvent.ElementType.)
 			return;
 		if (event.isCanceled())
 			return;
@@ -58,8 +58,8 @@ public class NourishedHungerOverlay
 			return;
 
 		Minecraft minecraft = Minecraft.getInstance();
-		PlayerEntity player = minecraft.player;
-		FoodStats stats = player.getFoodData();
+		Player player = minecraft.player;
+		FoodData stats = player.getFoodData();
 
 		int left = minecraft.getWindow().getGuiScaledWidth() / 2 + 91;
 		int top = minecraft.getWindow().getGuiScaledHeight() - foodIconsOffset;
@@ -70,12 +70,12 @@ public class NourishedHungerOverlay
 						&& stats.getSaturationLevel() > 0.0F
 						&& stats.getFoodLevel() >= 20;
 
-		if (player.getEffect(ModEffects.NOURISHED.get()) != null) {
+		if (player.getEffect(ModEffects.NOURISHMENT.get()) != null) {
 			drawNourishedOverlay(stats, minecraft, event.getMatrixStack(), left, top, isPlayerHealingWithSaturation);
 		}
 	}
 
-	public static void drawNourishedOverlay(FoodStats stats, Minecraft mc, MatrixStack matrixStack, int left, int top, boolean naturalHealing) {
+	public static void drawNourishedOverlay(FoodData stats, Minecraft mc, PoseStack matrixStack, int left, int top, boolean naturalHealing) {
 		matrixStack.pushPose();
 		matrixStack.translate(0, 0, 0.01);
 
@@ -111,6 +111,6 @@ public class NourishedHungerOverlay
 
 		RenderSystem.disableBlend();
 		matrixStack.popPose();
-		mc.getTextureManager().bind(AbstractGui.GUI_ICONS_LOCATION);
+		mc.getTextureManager().bind(GuiComponent.GUI_ICONS_LOCATION);
 	}
 }

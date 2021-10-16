@@ -1,16 +1,16 @@
 package vectorwing.farmersdelight.client.particles;
 
 import net.minecraft.client.particle.*;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particles.BasicParticleType;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class StarParticle extends SpriteTexturedParticle
+public class StarParticle extends TextureSheetParticle
 {
-	protected StarParticle(ClientWorld world, double posX, double posY, double posZ) {
+	protected StarParticle(ClientLevel world, double posX, double posY, double posZ) {
 		super(world, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
 		this.xd *= (double) 0.01F;
 		this.yd *= (double) 0.01F;
@@ -22,13 +22,13 @@ public class StarParticle extends SpriteTexturedParticle
 	}
 
 	@Override
-	public IParticleRenderType getRenderType() {
-		return IParticleRenderType.PARTICLE_SHEET_OPAQUE;
+	public ParticleRenderType getRenderType() {
+		return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
 	}
 
 	@Override
 	public float getQuadSize(float scaleFactor) {
-		return this.quadSize * MathHelper.clamp(((float) this.age + scaleFactor) / (float) this.lifetime * 32.0F, 0.0F, 1.0F);
+		return this.quadSize * Mth.clamp(((float) this.age + scaleFactor) / (float) this.lifetime * 32.0F, 0.0F, 1.0F);
 	}
 
 	@Override
@@ -57,16 +57,16 @@ public class StarParticle extends SpriteTexturedParticle
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public static class Factory implements IParticleFactory<BasicParticleType>
+	public static class Factory implements ParticleProvider<SimpleParticleType>
 	{
-		private final IAnimatedSprite spriteSet;
+		private final SpriteSet spriteSet;
 
-		public Factory(IAnimatedSprite sprite) {
+		public Factory(SpriteSet sprite) {
 			this.spriteSet = sprite;
 		}
 
 		@Override
-		public Particle createParticle(BasicParticleType typeIn, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		public Particle createParticle(SimpleParticleType typeIn, ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
 			StarParticle particle = new StarParticle(worldIn, x, y + 0.3D, z);
 			particle.pickSprite(this.spriteSet);
 			particle.setColor(1.0F, 1.0F, 1.0F);

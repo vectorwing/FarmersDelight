@@ -1,11 +1,10 @@
 package vectorwing.farmersdelight.registry;
 
-import net.minecraft.item.*;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.item.*;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.items.Foods;
 import vectorwing.farmersdelight.items.*;
 import vectorwing.farmersdelight.items.drinks.DrinkItem;
 import vectorwing.farmersdelight.items.drinks.HotCocoaItem;
@@ -122,13 +121,13 @@ public class ModItems
 	public static final RegistryObject<Item> FLINT_KNIFE = ITEMS.register("flint_knife",
 			() -> new KnifeItem(ModMaterials.FLINT, 0.5F, -2.0F, new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> IRON_KNIFE = ITEMS.register("iron_knife",
-			() -> new KnifeItem(ItemTier.IRON, 0.5F, -2.0F, new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
+			() -> new KnifeItem(Tiers.IRON, 0.5F, -2.0F, new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> DIAMOND_KNIFE = ITEMS.register("diamond_knife",
-			() -> new KnifeItem(ItemTier.DIAMOND, 0.5F, -2.0F, new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
+			() -> new KnifeItem(Tiers.DIAMOND, 0.5F, -2.0F, new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> NETHERITE_KNIFE = ITEMS.register("netherite_knife",
-			() -> new KnifeItem(ItemTier.NETHERITE, 0.5F, -2.0F, new Item.Properties().tab(FarmersDelight.ITEM_GROUP).fireResistant()));
+			() -> new KnifeItem(Tiers.NETHERITE, 0.5F, -2.0F, new Item.Properties().tab(FarmersDelight.ITEM_GROUP).fireResistant()));
 	public static final RegistryObject<Item> GOLDEN_KNIFE = ITEMS.register("golden_knife",
-			() -> new KnifeItem(ItemTier.GOLD, 0.5F, -2.0F, new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
+			() -> new KnifeItem(Tiers.GOLD, 0.5F, -2.0F, new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> STRAW = ITEMS.register("straw", () -> new FuelItem(new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> CANVAS = ITEMS.register("canvas", () -> new FuelItem(new Item.Properties().tab(FarmersDelight.ITEM_GROUP), 400));
@@ -148,7 +147,7 @@ public class ModItems
 	public static final RegistryObject<Item> WILD_BEETROOTS = ITEMS.register("wild_beetroots",
 			() -> new BlockItem(ModBlocks.WILD_BEETROOTS.get(), new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> WILD_RICE = ITEMS.register("wild_rice",
-			() -> new TallBlockItem(ModBlocks.WILD_RICE.get(), new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
+			() -> new DoubleHighBlockItem(ModBlocks.WILD_RICE.get(), new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
 
 	public static final RegistryObject<Item> BROWN_MUSHROOM_COLONY = ITEMS.register("brown_mushroom_colony",
 			() -> new MushroomColonyItem(ModBlocks.BROWN_MUSHROOM_COLONY.get(), new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
@@ -161,12 +160,12 @@ public class ModItems
 	public static final RegistryObject<Item> TOMATO = ITEMS.register("tomato",
 			() -> new Item(new Item.Properties().food(Foods.TOMATO).tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> ONION = ITEMS.register("onion",
-			() -> new BlockNamedItem(ModBlocks.ONION_CROP.get(), new Item.Properties().food(Foods.ONION).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ItemNameBlockItem(ModBlocks.ONION_CROP.get(), new Item.Properties().food(Foods.ONION).tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> RICE_PANICLE = ITEMS.register("rice_panicle", () -> new Item(new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> RICE = ITEMS.register("rice",
 			() -> new RiceCropItem(ModBlocks.RICE_CROP.get(), new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
-	public static final RegistryObject<Item> CABBAGE_SEEDS = ITEMS.register("cabbage_seeds", () -> new BlockNamedItem(ModBlocks.CABBAGE_CROP.get(), new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
-	public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds", () -> new BlockNamedItem(ModBlocks.TOMATO_CROP.get(), new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> CABBAGE_SEEDS = ITEMS.register("cabbage_seeds", () -> new ItemNameBlockItem(ModBlocks.CABBAGE_CROP.get(), new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds", () -> new ItemNameBlockItem(ModBlocks.TOMATO_CROP.get(), new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
 
 	// Foodstuffs
 	public static final RegistryObject<Item> FRIED_EGG = ITEMS.register("fried_egg",

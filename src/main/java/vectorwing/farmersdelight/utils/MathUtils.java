@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.utils;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nullable;
@@ -36,7 +36,7 @@ public class MathUtils
 			}
 
 			f = f / (float) handler.getSlots();
-			return net.minecraft.util.math.MathHelper.floor(f * 14.0F) + (i > 0 ? 1 : 0);
+			return net.minecraft.util.Mth.floor(f * 14.0F) + (i > 0 ? 1 : 0);
 		}
 	}
 }

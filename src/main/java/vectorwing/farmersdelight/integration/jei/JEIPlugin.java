@@ -8,10 +8,10 @@ import mezz.jei.api.constants.VanillaRecipeCategoryUid;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.resources.ResourceLocation;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
@@ -37,7 +37,7 @@ public class JEIPlugin implements IModPlugin
 	private static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "jei_plugin");
 	private static final Minecraft MC = Minecraft.getInstance();
 
-	private static List<IRecipe<?>> findRecipesByType(IRecipeType<?> type) {
+	private static List<Recipe<?>> findRecipesByType(RecipeType<?> type) {
 		return MC.level
 				.getRecipeManager()
 				.getRecipes()

@@ -1,18 +1,23 @@
 package vectorwing.farmersdelight.registry;
 
-import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.DyeColor;
-import net.minecraft.item.Items;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraftforge.common.ToolType;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.Material;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.blocks.*;
 import vectorwing.farmersdelight.blocks.crops.*;
-import vectorwing.farmersdelight.blocks.foods.*;
+import vectorwing.farmersdelight.blocks.foods.HoneyGlazedHamBlock;
+import vectorwing.farmersdelight.blocks.foods.RoastChickenBlock;
+import vectorwing.farmersdelight.blocks.foods.ShepherdsPieBlock;
 import vectorwing.farmersdelight.blocks.signs.StandingCanvasSignBlock;
 import vectorwing.farmersdelight.blocks.signs.WallCanvasSignBlock;
 
@@ -27,7 +32,7 @@ public class ModBlocks
 	}
 
 	// Workstations
-	public static final RegistryObject<Block> STOVE = BLOCKS.register("stove", () -> new StoveBlock(AbstractBlock.Properties.copy(Blocks.BRICKS).lightLevel(getLightValueLit(13))));
+	public static final RegistryObject<Block> STOVE = BLOCKS.register("stove", () -> new StoveBlock(BlockBehaviour.Properties.copy(Blocks.BRICKS).lightLevel(getLightValueLit(13))));
 	public static final RegistryObject<Block> COOKING_POT = BLOCKS.register("cooking_pot", CookingPotBlock::new);
 	public static final RegistryObject<Block> SKILLET = BLOCKS.register("skillet", SkilletBlock::new);
 	public static final RegistryObject<Block> BASKET = BLOCKS.register("basket", BasketBlock::new);
@@ -47,11 +52,11 @@ public class ModBlocks
 	public static final RegistryObject<Block> ONION_CRATE = BLOCKS.register("onion_crate",
 			() -> new Block(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> RICE_BALE = BLOCKS.register("rice_bale",
-			() -> new RiceBaleBlock(Block.Properties.copy(Blocks.HAY_BLOCK).harvestTool(ToolType.HOE)));
+			() -> new RiceBaleBlock(Block.Properties.copy(Blocks.HAY_BLOCK)));
 	public static final RegistryObject<Block> RICE_BAG = BLOCKS.register("rice_bag",
-			() -> new Block(Block.Properties.copy(Blocks.WHITE_WOOL).harvestTool(ToolType.HOE)));
+			() -> new Block(Block.Properties.copy(Blocks.WHITE_WOOL)));
 	public static final RegistryObject<Block> STRAW_BALE = BLOCKS.register("straw_bale",
-			() -> new StrawBaleBlock(Block.Properties.copy(Blocks.HAY_BLOCK).harvestTool(ToolType.HOE)));
+			() -> new StrawBaleBlock(Block.Properties.copy(Blocks.HAY_BLOCK)));
 
 	// Building
 	public static final RegistryObject<Block> ROPE = BLOCKS.register("rope", RopeBlock::new);
@@ -153,11 +158,11 @@ public class ModBlocks
 	public static final RegistryObject<Block> RED_MUSHROOM_COLONY = BLOCKS.register("red_mushroom_colony",
 			() -> new MushroomColonyBlock(Block.Properties.copy(Blocks.RED_MUSHROOM), Items.RED_MUSHROOM.delegate));
 	public static final RegistryObject<Block> ORGANIC_COMPOST = BLOCKS.register("organic_compost",
-			() -> new OrganicCompostBlock(Block.Properties.copy(Blocks.DIRT).strength(1.2F).sound(SoundType.CROP).harvestTool(ToolType.SHOVEL)));
+			() -> new OrganicCompostBlock(Block.Properties.copy(Blocks.DIRT).strength(1.2F).sound(SoundType.CROP)));
 	public static final RegistryObject<Block> RICH_SOIL = BLOCKS.register("rich_soil",
-			() -> new RichSoilBlock(Block.Properties.copy(Blocks.DIRT).harvestTool(ToolType.SHOVEL).randomTicks()));
+			() -> new RichSoilBlock(Block.Properties.copy(Blocks.DIRT).randomTicks()));
 	public static final RegistryObject<Block> RICH_SOIL_FARMLAND = BLOCKS.register("rich_soil_farmland",
-			() -> new RichSoilFarmlandBlock(Block.Properties.copy(Blocks.FARMLAND).harvestTool(ToolType.SHOVEL)));
+			() -> new RichSoilFarmlandBlock(Block.Properties.copy(Blocks.FARMLAND)));
 
 	// Pastries
 	public static final RegistryObject<Block> APPLE_PIE = BLOCKS.register("apple_pie",

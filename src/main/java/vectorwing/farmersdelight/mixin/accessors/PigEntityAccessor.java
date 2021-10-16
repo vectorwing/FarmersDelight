@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.mixin.accessors;
 
-import net.minecraft.entity.passive.PigEntity;
-import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.world.entity.animal.Pig;
+import net.minecraft.world.item.crafting.Ingredient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
  * Credits to MehVahdJukaar, creator of Supplementaries, for the implementation!
  */
 
-@Mixin(PigEntity.class)
+@Mixin(Pig.class)
 public interface PigEntityAccessor
 {
 	@Accessor("FOOD_ITEMS")

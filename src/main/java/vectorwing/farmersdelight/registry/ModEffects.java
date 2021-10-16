@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.registry;
 
-import net.minecraft.potion.Effect;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -10,8 +10,8 @@ import vectorwing.farmersdelight.effects.NourishmentEffect;
 
 public class ModEffects
 {
-	public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, FarmersDelight.MODID);
+	public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, FarmersDelight.MODID);
 
-	public static final RegistryObject<Effect> NOURISHED = EFFECTS.register("nourished", NourishmentEffect::new);
-	public static final RegistryObject<Effect> COMFORT = EFFECTS.register("comfort", ComfortEffect::new);
+	public static final RegistryObject<MobEffect> NOURISHMENT = EFFECTS.register("nourishment", NourishmentEffect::new);
+	public static final RegistryObject<MobEffect> COMFORT = EFFECTS.register("comfort", ComfortEffect::new);
 }

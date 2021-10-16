@@ -1,15 +1,13 @@
 package vectorwing.farmersdelight.integration.jei.cutting;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.systems.RenderSystem;
-import mcp.MethodsReturnNonnullByDefault;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.gui.drawable.IDrawable;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.model.IBakedModel;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.item.ItemStack;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.world.item.ItemStack;
 import vectorwing.farmersdelight.utils.ClientRenderUtils;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -17,7 +15,6 @@ import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-@SuppressWarnings("deprecation")
 public class CuttingBoardModel implements IDrawable
 {
 	private final Supplier<ItemStack> supplier;
@@ -38,31 +35,31 @@ public class CuttingBoardModel implements IDrawable
 	}
 
 	@Override
-	public void draw(MatrixStack matrixStack, int xOffset, int yOffset) {
+	public void draw(PoseStack matrixStack, int xOffset, int yOffset) {
 		if (stack == null) {
 			stack = supplier.get();
 		}
-		RenderSystem.pushMatrix();
-		RenderSystem.multMatrix(matrixStack.last().pose());
-		RenderSystem.enableDepthTest();
-		RenderHelper.turnBackOn();
-		RenderSystem.pushMatrix();
-		RenderSystem.translated(xOffset, yOffset, 0);
-		RenderSystem.pushMatrix();
-		RenderSystem.translated(1, 1, 0);
+//		RenderSystem.pushMatrix();
+//		RenderSystem.multMatrix(matrixStack.last().pose());
+//		RenderSystem.enableDepthTest();
+//		Lighting.turnBackOn();
+//		RenderSystem.pushMatrix();
+//		RenderSystem.translated(xOffset, yOffset, 0);
+//		RenderSystem.pushMatrix();
+//		RenderSystem.translated(1, 1, 0);
 
 		Minecraft minecraft = Minecraft.getInstance();
 		ItemRenderer itemRenderer = minecraft.getItemRenderer();
 		itemRenderer.blitOffset += 50.0F;
-		IBakedModel bakedmodel = itemRenderer.getModel(stack, null, null);
+		BakedModel bakedmodel = itemRenderer.getModel(stack, null, null, 0);
 		TextureManager textureManager = Minecraft.getInstance().textureManager;
-		ClientRenderUtils.renderItemIntoGUIScalable(stack, 48, 48, bakedmodel, itemRenderer, textureManager);
+		ClientRenderUtils.renderItemIntoGUIScalable(stack, 48.0F, 48.0F, bakedmodel, itemRenderer, textureManager);
 		itemRenderer.blitOffset -= 50.0F;
 
-		RenderSystem.popMatrix();
-		RenderSystem.popMatrix();
-		RenderSystem.disableBlend();
-		RenderHelper.turnOff();
-		RenderSystem.popMatrix();
+//		RenderSystem.popMatrix();
+//		RenderSystem.popMatrix();
+//		RenderSystem.disableBlend();
+//		Lighting.turnOff();
+//		RenderSystem.popMatrix();
 	}
 }

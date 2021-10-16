@@ -1,32 +1,38 @@
 package vectorwing.farmersdelight.world.features;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.state.properties.DoubleBlockHalf;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import vectorwing.farmersdelight.blocks.WildRiceBlock;
 import vectorwing.farmersdelight.registry.ModBlocks;
 
 import java.util.Random;
 
-public class RiceCropFeature extends Feature<BlockClusterFeatureConfig>
+public class RiceCropFeature extends Feature<RandomPatchConfiguration>
 {
-	public RiceCropFeature(Codec<BlockClusterFeatureConfig> configFactoryIn) {
+	public RiceCropFeature(Codec<RandomPatchConfiguration> configFactoryIn) {
 		super(configFactoryIn);
 	}
 
 	@Override
-	public boolean place(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, BlockClusterFeatureConfig config) {
-		BlockPos blockpos = worldIn.getHeightmapPos(Heightmap.Type.OCEAN_FLOOR_WG, pos);
+	public boolean place(FeaturePlaceContext<RandomPatchConfiguration> context) {
+		WorldGenLevel level = context.level();
+		BlockPos origin = context.origin();
+		RandomPatchConfiguration config = context.config();
+		Random rand = context.random();
+
+		BlockPos blockpos = level.getHeightmapPos(Heightmap.Types.OCEAN_FLOOR_WG, origin);
 
 		int i = 0;
-		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
+		BlockPos.MutableBlockPos blockpos$mutable = new BlockPos.MutableBlockPos();
 
 		for (int j = 0; j < config.tries; ++j) {
 			blockpos$mutable.set(blockpos).move(
@@ -34,10 +40,10 @@ public class RiceCropFeature extends Feature<BlockClusterFeatureConfig>
 					rand.nextInt(config.yspread + 1) - rand.nextInt(config.yspread + 1),
 					rand.nextInt(config.zspread + 1) - rand.nextInt(config.zspread + 1));
 
-			if (worldIn.getBlockState(blockpos$mutable).getBlock() == Blocks.WATER && worldIn.getBlockState(blockpos$mutable.above()).getBlock() == Blocks.AIR) {
+			if (level.getBlockState(blockpos$mutable).getBlock() == Blocks.WATER && level.getBlockState(blockpos$mutable.above()).getBlock() == Blocks.AIR) {
 				BlockState bottomRiceState = ModBlocks.WILD_RICE.get().defaultBlockState().setValue(WildRiceBlock.HALF, DoubleBlockHalf.LOWER);
-				if (bottomRiceState.canSurvive(worldIn, blockpos$mutable)) {
-					((WildRiceBlock) bottomRiceState.getBlock()).placeAt(worldIn, blockpos$mutable, 2);
+				if (bottomRiceState.canSurvive(level, blockpos$mutable)) {
+					DoublePlantBlock.placeAt(level, bottomRiceState, blockpos$mutable, 2);
 					++i;
 				}
 			}

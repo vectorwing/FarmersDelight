@@ -3,28 +3,26 @@ package vectorwing.farmersdelight.crafting;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.*;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import vectorwing.farmersdelight.FarmersDelight;
 
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
-public class CookingPotRecipe implements IRecipe<RecipeWrapper>
+public class CookingPotRecipe implements Recipe<RecipeWrapper>
 {
-	public static IRecipeType<CookingPotRecipe> TYPE = IRecipeType.register(FarmersDelight.MODID + ":cooking");
+	public static RecipeType<CookingPotRecipe> TYPE = RecipeType.register(FarmersDelight.MODID + ":cooking");
 	public static final Serializer SERIALIZER = new Serializer();
 	public static final int INPUT_SLOTS = 6;
 
@@ -92,7 +90,7 @@ public class CookingPotRecipe implements IRecipe<RecipeWrapper>
 	}
 
 	@Override
-	public boolean matches(RecipeWrapper inv, World worldIn) {
+	public boolean matches(RecipeWrapper inv, Level worldIn) {
 		java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
 		int i = 0;
 
@@ -112,16 +110,16 @@ public class CookingPotRecipe implements IRecipe<RecipeWrapper>
 	}
 
 	@Override
-	public IRecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<?> getSerializer() {
 		return CookingPotRecipe.SERIALIZER;
 	}
 
 	@Override
-	public IRecipeType<?> getType() {
+	public RecipeType<?> getType() {
 		return CookingPotRecipe.TYPE;
 	}
 
-	private static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<CookingPotRecipe>
+	private static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<CookingPotRecipe>
 	{
 		Serializer() {
 			this.setRegistryName(new ResourceLocation(FarmersDelight.MODID, "cooking"));
@@ -129,17 +127,17 @@ public class CookingPotRecipe implements IRecipe<RecipeWrapper>
 
 		@Override
 		public CookingPotRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
-			final String groupIn = JSONUtils.getAsString(json, "group", "");
-			final NonNullList<Ingredient> inputItemsIn = readIngredients(JSONUtils.getAsJsonArray(json, "ingredients"));
+			final String groupIn = GsonHelper.getAsString(json, "group", "");
+			final NonNullList<Ingredient> inputItemsIn = readIngredients(GsonHelper.getAsJsonArray(json, "ingredients"));
 			if (inputItemsIn.isEmpty()) {
 				throw new JsonParseException("No ingredients for cooking recipe");
 			} else if (inputItemsIn.size() > CookingPotRecipe.INPUT_SLOTS) {
 				throw new JsonParseException("Too many ingredients for cooking recipe! The max is " + CookingPotRecipe.INPUT_SLOTS);
 			} else {
-				final ItemStack outputIn = CraftingHelper.getItemStack(JSONUtils.getAsJsonObject(json, "result"), true);
-				ItemStack container = JSONUtils.isValidNode(json, "container") ? CraftingHelper.getItemStack(JSONUtils.getAsJsonObject(json, "container"), true) : ItemStack.EMPTY;
-				final float experienceIn = JSONUtils.getAsFloat(json, "experience", 0.0F);
-				final int cookTimeIn = JSONUtils.getAsInt(json, "cookingtime", 200);
+				final ItemStack outputIn = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "result"), true);
+				ItemStack container = GsonHelper.isValidNode(json, "container") ? CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "container"), true) : ItemStack.EMPTY;
+				final float experienceIn = GsonHelper.getAsFloat(json, "experience", 0.0F);
+				final int cookTimeIn = GsonHelper.getAsInt(json, "cookingtime", 200);
 				return new CookingPotRecipe(recipeId, groupIn, inputItemsIn, outputIn, container, experienceIn, cookTimeIn);
 			}
 		}
@@ -159,7 +157,7 @@ public class CookingPotRecipe implements IRecipe<RecipeWrapper>
 
 		@Nullable
 		@Override
-		public CookingPotRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+		public CookingPotRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
 			String groupIn = buffer.readUtf(32767);
 			int i = buffer.readVarInt();
 			NonNullList<Ingredient> inputItemsIn = NonNullList.withSize(i, Ingredient.EMPTY);
@@ -176,7 +174,7 @@ public class CookingPotRecipe implements IRecipe<RecipeWrapper>
 		}
 
 		@Override
-		public void toNetwork(PacketBuffer buffer, CookingPotRecipe recipe) {
+		public void toNetwork(FriendlyByteBuf buffer, CookingPotRecipe recipe) {
 			buffer.writeUtf(recipe.group);
 			buffer.writeVarInt(recipe.inputItems.size());
 

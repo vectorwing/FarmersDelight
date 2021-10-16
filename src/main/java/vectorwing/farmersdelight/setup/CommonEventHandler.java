@@ -2,26 +2,26 @@ package vectorwing.farmersdelight.setup;
 
 import com.google.common.collect.Sets;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import net.minecraft.block.ComposterBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.merchant.villager.VillagerProfession;
-import net.minecraft.entity.merchant.villager.VillagerTrades;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.MerchantOffer;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTables;
-import net.minecraft.loot.TableLootEntry;
-import net.minecraft.loot.functions.LootFunctionManager;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerTrades;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.entries.LootTableReference;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctions;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.LootTableLoadEvent;
@@ -54,13 +54,13 @@ import java.util.*;
 public class CommonEventHandler
 {
 	// TODO: Learn more about Loot Modifiers, and migrate remainder loot injections to it
-	private static final ResourceLocation SHIPWRECK_SUPPLY_CHEST = LootTables.SHIPWRECK_SUPPLY;
+	private static final ResourceLocation SHIPWRECK_SUPPLY_CHEST = BuiltInLootTables.SHIPWRECK_SUPPLY;
 	private static final Set<ResourceLocation> VILLAGE_HOUSE_CHESTS = Sets.newHashSet(
-			LootTables.VILLAGE_PLAINS_HOUSE,
-			LootTables.VILLAGE_SAVANNA_HOUSE,
-			LootTables.VILLAGE_SNOWY_HOUSE,
-			LootTables.VILLAGE_TAIGA_HOUSE,
-			LootTables.VILLAGE_DESERT_HOUSE);
+			BuiltInLootTables.VILLAGE_PLAINS_HOUSE,
+			BuiltInLootTables.VILLAGE_SAVANNA_HOUSE,
+			BuiltInLootTables.VILLAGE_SNOWY_HOUSE,
+			BuiltInLootTables.VILLAGE_TAIGA_HOUSE,
+			BuiltInLootTables.VILLAGE_DESERT_HOUSE);
 
 	public static void init(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
@@ -84,9 +84,9 @@ public class CommonEventHandler
 
 		ModAdvancements.register();
 
-		LootFunctionManager.register(CopyMealFunction.ID.toString(), new CopyMealFunction.Serializer());
-		LootFunctionManager.register(CopySkilletFunction.ID.toString(), new CopySkilletFunction.Serializer());
-		LootFunctionManager.register(SmokerCookFunction.ID.toString(), new SmokerCookFunction.Serializer());
+		LootItemFunctions.register(CopyMealFunction.ID.toString(), new CopyMealFunction.Serializer());
+		LootItemFunctions.register(CopySkilletFunction.ID.toString(), new CopySkilletFunction.Serializer());
+		LootItemFunctions.register(SmokerCookFunction.ID.toString(), new SmokerCookFunction.Serializer());
 
 		CraftingHelper.register(new VanillaCrateEnabledCondition.Serializer());
 
@@ -173,41 +173,41 @@ public class CommonEventHandler
 	@SubscribeEvent
 	public static void onBiomeLoad(BiomeLoadingEvent event) {
 		BiomeGenerationSettingsBuilder builder = event.getGeneration();
-		Biome.Climate climate = event.getClimate();
+		Biome.ClimateSettings climate = event.getClimate();
 
 		if (event.getName().getPath().equals("beach")) {
 			if (Configuration.GENERATE_WILD_BEETROOTS.get()) {
-				builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_BEETROOTS);
+				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_BEETROOTS);
 			}
 			if (Configuration.GENERATE_WILD_CABBAGES.get()) {
-				builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_CABBAGES);
+				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_CABBAGES);
 			}
 		}
 
-		if (event.getCategory().equals(Biome.Category.SWAMP) || event.getCategory().equals(Biome.Category.JUNGLE)) {
+		if (event.getCategory().equals(Biome.BiomeCategory.SWAMP) || event.getCategory().equals(Biome.BiomeCategory.JUNGLE)) {
 			if (Configuration.GENERATE_WILD_RICE.get()) {
-				builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_RICE);
+				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_RICE);
 			}
 		}
 
 		if (climate.temperature >= 1.0F) {
 			if (Configuration.GENERATE_WILD_TOMATOES.get()) {
-				builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_TOMATOES);
+				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_TOMATOES);
 			}
 		}
 
 		if (climate.temperature > 0.3F && climate.temperature < 1.0F) {
 			if (Configuration.GENERATE_WILD_CARROTS.get()) {
-				builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_CARROTS);
+				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_CARROTS);
 			}
 			if (Configuration.GENERATE_WILD_ONIONS.get()) {
-				builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_ONIONS);
+				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_ONIONS);
 			}
 		}
 
 		if (climate.temperature > 0.0F && climate.temperature <= 0.3F) {
 			if (Configuration.GENERATE_WILD_POTATOES.get()) {
-				builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_POTATOES);
+				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_POTATOES);
 			}
 		}
 	}
@@ -216,7 +216,7 @@ public class CommonEventHandler
 	public static void onVillagerTrades(VillagerTradesEvent event) {
 		if (!Configuration.FARMERS_BUY_FD_CROPS.get()) return;
 
-		Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
+		Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
 		VillagerProfession profession = event.getType();
 		if (profession.getRegistryName() == null) return;
 		if (profession.getRegistryName().getPath().equals("farmer")) {
@@ -234,16 +234,16 @@ public class CommonEventHandler
 
 		// Adds 3:00 of Jump Boost II when eating Rabbit Stew
 		if (Configuration.RABBIT_STEW_JUMP_BOOST.get() && food.equals(Items.RABBIT_STEW)) {
-			entity.addEffect(new EffectInstance(Effects.JUMP, 100, 1));
+			entity.addEffect(new MobEffectInstance(MobEffects.JUMP, 100, 1));
 		}
 
 		// Adds 5:00 of Comfort when eating foods inside the tag farmersdelight:comfort_foods
-		if (Configuration.COMFORT_FOOD_TAG_EFFECT.get() && food.is(ModTags.COMFORT_FOODS)) {
-			entity.addEffect(new EffectInstance(ModEffects.COMFORT.get(), 6000, 0));
+		if (Configuration.COMFORT_FOOD_TAG_EFFECT.get() && ModTags.COMFORT_FOODS.contains(food)) {
+			entity.addEffect(new MobEffectInstance(ModEffects.COMFORT.get(), 6000, 0));
 		}
 	}
 
-	static class EmeraldForItemsTrade implements VillagerTrades.ITrade
+	static class EmeraldForItemsTrade implements VillagerTrades.ItemListing
 	{
 		private final Item tradeItem;
 		private final int count;
@@ -251,7 +251,7 @@ public class CommonEventHandler
 		private final int xpValue;
 		private final float priceMultiplier;
 
-		public EmeraldForItemsTrade(IItemProvider tradeItemIn, int countIn, int maxUsesIn, int xpValueIn) {
+		public EmeraldForItemsTrade(ItemLike tradeItemIn, int countIn, int maxUsesIn, int xpValueIn) {
 			this.tradeItem = tradeItemIn.asItem();
 			this.count = countIn;
 			this.maxUses = maxUsesIn;
@@ -268,12 +268,12 @@ public class CommonEventHandler
 	@SubscribeEvent
 	public static void onLootLoad(LootTableLoadEvent event) {
 		if (Configuration.CROPS_ON_SHIPWRECKS.get() && event.getName().equals(SHIPWRECK_SUPPLY_CHEST)) {
-			event.getTable().addPool(LootPool.lootPool().add(TableLootEntry.lootTableReference(new ResourceLocation(FarmersDelight.MODID, "inject/shipwreck_supply")).setWeight(1).setQuality(0)).name("supply_fd_crops").build());
+			event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(FarmersDelight.MODID, "inject/shipwreck_supply")).setWeight(1).setQuality(0)).name("supply_fd_crops").build());
 		}
 
 		if (Configuration.CROPS_ON_VILLAGE_HOUSES.get() && VILLAGE_HOUSE_CHESTS.contains(event.getName())) {
 			event.getTable().addPool(LootPool.lootPool().add(
-					TableLootEntry.lootTableReference(new ResourceLocation(FarmersDelight.MODID, "inject/crops_villager_houses")).setWeight(1).setQuality(0)).name("villager_houses_fd_crops").build());
+					LootTableReference.lootTableReference(new ResourceLocation(FarmersDelight.MODID, "inject/crops_villager_houses")).setWeight(1).setQuality(0)).name("villager_houses_fd_crops").build());
 		}
 	}
 }
