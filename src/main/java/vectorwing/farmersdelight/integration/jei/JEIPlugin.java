@@ -1,17 +1,17 @@
 package vectorwing.farmersdelight.integration.jei;
 
 import com.google.common.collect.ImmutableList;
-import mcp.MethodsReturnNonnullByDefault;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaRecipeCategoryUid;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.*;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.resources.ResourceLocation;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
@@ -23,6 +23,7 @@ import vectorwing.farmersdelight.integration.jei.decomposition.DecompositionReci
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.tile.container.CookingPotContainer;
+import vectorwing.farmersdelight.utils.TextUtils;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
@@ -58,7 +59,7 @@ public class JEIPlugin implements IModPlugin
 		registration.addRecipes(findRecipesByType(CookingPotRecipe.TYPE), CookingRecipeCategory.UID);
 		registration.addRecipes(findRecipesByType(CuttingBoardRecipe.TYPE), CuttingRecipeCategory.UID);
 		registration.addRecipes(ImmutableList.of(new DecompositionDummy()), DecompositionRecipeCategory.UID);
-		registration.addIngredientInfo(new ItemStack(ModItems.STRAW.get()), VanillaTypes.ITEM, "farmersdelight.jei.info.straw");
+		registration.addIngredientInfo(new ItemStack(ModItems.STRAW.get()), VanillaTypes.ITEM, TextUtils.getTranslation("farmersdelight.jei.info.straw"));
 	}
 
 	@Override

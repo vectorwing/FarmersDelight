@@ -1,24 +1,20 @@
 package vectorwing.farmersdelight.blocks.signs;
 
-import net.minecraft.block.*;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.SignBlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.WallSignBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 
 import javax.annotation.Nullable;
-
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.WallSignBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.WoodType;
 
 public class WallCanvasSignBlock extends WallSignBlock implements ICanvasSign
 {
@@ -35,13 +31,8 @@ public class WallCanvasSignBlock extends WallSignBlock implements ICanvasSign
 	}
 
 	@Override
-	public boolean hasTileEntity(BlockState state) {
-		return true;
-	}
-
-	@Override
-	public BlockEntity createTileEntity(BlockState state, BlockGetter world) {
-		return ModTileEntityTypes.CANVAS_SIGN_TILE.get().create();
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return ModTileEntityTypes.CANVAS_SIGN_TILE.get().create(pos, state);
 	}
 
 	@Override

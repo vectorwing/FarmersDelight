@@ -1,43 +1,53 @@
 package vectorwing.farmersdelight.blocks;
 
-import net.minecraft.block.*;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.Containers;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.util.*;
-import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Component;
-import net.minecraft.ChatFormatting;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.fmllegacy.network.NetworkHooks;
 import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.blocks.state.CookingPotSupport;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
-import vectorwing.farmersdelight.tile.CookingPotTileEntity;
+import vectorwing.farmersdelight.tile.CookingPotBlockEntity;
 import vectorwing.farmersdelight.utils.MathUtils;
 import vectorwing.farmersdelight.utils.TextUtils;
 import vectorwing.farmersdelight.utils.tags.ModTags;
@@ -46,23 +56,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
-import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockState;
-
 @SuppressWarnings("deprecation")
-public class CookingPotBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock
+public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 {
+	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final EnumProperty<CookingPotSupport> SUPPORT = EnumProperty.create("support", CookingPotSupport.class);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -78,7 +75,7 @@ public class CookingPotBlock extends HorizontalDirectionalBlock implements Simpl
 
 	@Override
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player,
-											 InteractionHand handIn, BlockHitResult result) {
+								 InteractionHand handIn, BlockHitResult result) {
 		ItemStack heldStack = player.getItemInHand(handIn);
 		if (heldStack.isEmpty() && player.isShiftKeyDown()) {
 			world.setBlockAndUpdate(pos, state.setValue(SUPPORT, state.getValue(SUPPORT).equals(CookingPotSupport.HANDLE)
@@ -86,11 +83,11 @@ public class CookingPotBlock extends HorizontalDirectionalBlock implements Simpl
 			world.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundSource.BLOCKS, 0.7F, 1.0F);
 		} else if (!world.isClientSide) {
 			BlockEntity tileEntity = world.getBlockEntity(pos);
-			if (tileEntity instanceof CookingPotTileEntity) {
-				CookingPotTileEntity cookingPotEntity = (CookingPotTileEntity) tileEntity;
+			if (tileEntity instanceof CookingPotBlockEntity) {
+				CookingPotBlockEntity cookingPotEntity = (CookingPotBlockEntity) tileEntity;
 				ItemStack servingStack = cookingPotEntity.useHeldItemOnMeal(heldStack);
 				if (servingStack != ItemStack.EMPTY) {
-					if (!player.inventory.add(servingStack)) {
+					if (!player.getInventory().add(servingStack)) {
 						player.drop(servingStack, false);
 					}
 					world.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -141,7 +138,7 @@ public class CookingPotBlock extends HorizontalDirectionalBlock implements Simpl
 	}
 
 	private CookingPotSupport getTrayState(LevelAccessor world, BlockPos pos) {
-		if (world.getBlockState(pos.below()).getBlock().is(ModTags.TRAY_HEAT_SOURCES)) {
+		if (ModTags.TRAY_HEAT_SOURCES.contains(world.getBlockState(pos.below()).getBlock())) {
 			return CookingPotSupport.TRAY;
 		}
 		return CookingPotSupport.NONE;
@@ -150,7 +147,7 @@ public class CookingPotBlock extends HorizontalDirectionalBlock implements Simpl
 	@Override
 	public ItemStack getCloneItemStack(BlockGetter worldIn, BlockPos pos, BlockState state) {
 		ItemStack stack = super.getCloneItemStack(worldIn, pos, state);
-		CookingPotTileEntity cookingPotEntity = (CookingPotTileEntity) worldIn.getBlockEntity(pos);
+		CookingPotBlockEntity cookingPotEntity = (CookingPotBlockEntity) worldIn.getBlockEntity(pos);
 		if (cookingPotEntity != null) {
 			CompoundTag nbt = cookingPotEntity.writeMeal(new CompoundTag());
 			if (!nbt.isEmpty()) {
@@ -167,8 +164,8 @@ public class CookingPotBlock extends HorizontalDirectionalBlock implements Simpl
 	public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
 			BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-			if (tileEntity instanceof CookingPotTileEntity) {
-				CookingPotTileEntity cookingPotEntity = (CookingPotTileEntity) tileEntity;
+			if (tileEntity instanceof CookingPotBlockEntity) {
+				CookingPotBlockEntity cookingPotEntity = (CookingPotBlockEntity) tileEntity;
 				Containers.dropContents(worldIn, pos, cookingPotEntity.getDroppableInventory());
 				cookingPotEntity.grantStoredRecipeExperience(worldIn, Vec3.atCenterOf(pos));
 				worldIn.updateNeighbourForOutputSignal(pos, this);
@@ -214,8 +211,8 @@ public class CookingPotBlock extends HorizontalDirectionalBlock implements Simpl
 	public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		if (stack.hasCustomHoverName()) {
 			BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-			if (tileEntity instanceof CookingPotTileEntity) {
-				((CookingPotTileEntity) tileEntity).setCustomName(stack.getHoverName());
+			if (tileEntity instanceof CookingPotBlockEntity) {
+				((CookingPotBlockEntity) tileEntity).setCustomName(stack.getHoverName());
 			}
 		}
 	}
@@ -224,8 +221,8 @@ public class CookingPotBlock extends HorizontalDirectionalBlock implements Simpl
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
 		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-		if (tileEntity instanceof CookingPotTileEntity && ((CookingPotTileEntity) tileEntity).isHeated()) {
-			CookingPotTileEntity cookingPotEntity = (CookingPotTileEntity) tileEntity;
+		if (tileEntity instanceof CookingPotBlockEntity && ((CookingPotBlockEntity) tileEntity).isHeated()) {
+			CookingPotBlockEntity cookingPotEntity = (CookingPotBlockEntity) tileEntity;
 			SoundEvent boilSound = !cookingPotEntity.getMeal().isEmpty()
 					? ModSounds.BLOCK_COOKING_POT_BOIL_SOUP.get()
 					: ModSounds.BLOCK_COOKING_POT_BOIL.get();
@@ -246,25 +243,21 @@ public class CookingPotBlock extends HorizontalDirectionalBlock implements Simpl
 	@Override
 	public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
 		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-		if (tileEntity instanceof CookingPotTileEntity) {
-			ItemStackHandler inventory = ((CookingPotTileEntity) tileEntity).getInventory();
+		if (tileEntity instanceof CookingPotBlockEntity) {
+			ItemStackHandler inventory = ((CookingPotBlockEntity) tileEntity).getInventory();
 			return MathUtils.calcRedstoneFromItemHandler(inventory);
 		}
 		return 0;
 	}
 
 	@Override
-	public boolean hasTileEntity(BlockState state) {
-		return true;
-	}
-
-	@Override
-	public BlockEntity createTileEntity(BlockState state, BlockGetter world) {
-		return ModTileEntityTypes.COOKING_POT_TILE.get().create();
-	}
-
-	@Override
 	public FluidState getFluidState(BlockState state) {
 		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+	}
+
+	@Nullable
+	@Override
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return ModTileEntityTypes.COOKING_POT_TILE.get().create(pos, state);
 	}
 }

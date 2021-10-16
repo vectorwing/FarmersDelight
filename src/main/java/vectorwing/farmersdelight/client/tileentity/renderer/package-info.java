@@ -2,6 +2,6 @@
 @MethodsReturnNonnullByDefault
 package vectorwing.farmersdelight.client.tileentity.renderer;
 
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;

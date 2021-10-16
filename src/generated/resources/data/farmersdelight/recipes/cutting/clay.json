@@ -6,8 +6,7 @@
     }
   ],
   "tool": {
-    "type": "farmersdelight:tool",
-    "tool": "shovel"
+    "tag": "forge:tools/shovels"
   },
   "result": [
     {

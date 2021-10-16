@@ -1,23 +1,23 @@
 package vectorwing.farmersdelight.tile;
 
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.level.block.entity.TickableBlockEntity;
-import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.minecraft.world.phys.shapes.BooleanOp;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.blocks.StoveBlock;
 import vectorwing.farmersdelight.mixin.accessors.RecipeManagerAccessor;
@@ -26,7 +26,7 @@ import vectorwing.farmersdelight.utils.ItemUtils;
 
 import java.util.Optional;
 
-public class StoveTileEntity extends FDSyncedTileEntity implements TickableBlockEntity
+public class StoveBlockEntity extends SyncedBlockEntity
 {
 	private static final VoxelShape GRILLING_AREA = Block.box(3.0F, 0.0F, 3.0F, 13.0F, 1.0F, 13.0F);
 	private static final int INVENTORY_SLOT_COUNT = 6;
@@ -36,8 +36,8 @@ public class StoveTileEntity extends FDSyncedTileEntity implements TickableBlock
 	private final int[] cookingTimesTotal;
 	private ResourceLocation[] lastRecipeIDs;
 
-	public StoveTileEntity() {
-		super(ModTileEntityTypes.STOVE_TILE.get());
+	public StoveBlockEntity(BlockPos pos, BlockState state) {
+		super(ModTileEntityTypes.STOVE_TILE.get(), pos, state);
 		inventory = createHandler();
 		cookingTimes = new int[INVENTORY_SLOT_COUNT];
 		cookingTimesTotal = new int[INVENTORY_SLOT_COUNT];
@@ -45,8 +45,8 @@ public class StoveTileEntity extends FDSyncedTileEntity implements TickableBlock
 	}
 
 	@Override
-	public void load(BlockState state, CompoundTag compound) {
-		super.load(state, compound);
+	public void load(CompoundTag compound) {
+		super.load(compound);
 		if (compound.contains("Inventory")) {
 			inventory.deserializeNBT(compound.getCompound("Inventory"));
 		} else {
@@ -77,7 +77,6 @@ public class StoveTileEntity extends FDSyncedTileEntity implements TickableBlock
 		return compound;
 	}
 
-	@Override
 	public void tick() {
 		if (level == null) return;
 

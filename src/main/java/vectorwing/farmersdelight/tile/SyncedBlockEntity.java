@@ -1,10 +1,12 @@
 package vectorwing.farmersdelight.tile;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
@@ -12,10 +14,10 @@ import javax.annotation.Nullable;
 /**
  * Simple TileEntity with networking boilerplate.
  */
-public class FDSyncedTileEntity extends BlockEntity
+public class SyncedBlockEntity extends BlockEntity
 {
-	public FDSyncedTileEntity(BlockEntityType<?> tileEntityTypeIn) {
-		super(tileEntityTypeIn);
+	public SyncedBlockEntity(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
+		super(tileEntityTypeIn, pos, state);
 	}
 
 	@Override
@@ -31,7 +33,7 @@ public class FDSyncedTileEntity extends BlockEntity
 
 	@Override
 	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-		load(getBlockState(), pkt.getTag());
+		load(pkt.getTag());
 	}
 
 	protected void inventoryChanged() {

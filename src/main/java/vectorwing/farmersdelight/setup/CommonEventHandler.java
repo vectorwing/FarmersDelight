@@ -44,7 +44,7 @@ import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.tile.dispenser.CuttingBoardDispenseBehavior;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 import vectorwing.farmersdelight.world.CropPatchGeneration;
-import vectorwing.farmersdelight.world.VillageStructures;
+//import vectorwing.farmersdelight.world.VillageStructures;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
@@ -90,9 +90,9 @@ public class CommonEventHandler
 
 		CraftingHelper.register(new VanillaCrateEnabledCondition.Serializer());
 
-		if (Configuration.GENERATE_VILLAGE_COMPOST_HEAPS.get()) {
-			VillageStructures.init();
-		}
+//		if (Configuration.GENERATE_VILLAGE_COMPOST_HEAPS.get()) {
+//			VillageStructures.init();
+//		}
 	}
 
 	public static void registerDispenserBehaviors() {

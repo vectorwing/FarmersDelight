@@ -1,22 +1,24 @@
 package vectorwing.farmersdelight.tile;
 
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.level.block.entity.TickableBlockEntity;
-import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.CampfireBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.blocks.SkilletBlock;
@@ -31,7 +33,7 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.Random;
 
-public class SkilletTileEntity extends FDSyncedTileEntity implements TickableBlockEntity, IHeatableTileEntity
+public class SkilletBlockEntity extends SyncedBlockEntity implements IHeatableTileEntity
 {
 	private final ItemStackHandler inventory = createHandler();
 	private int cookingTime;
@@ -41,15 +43,12 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements TickableBlo
 	private ItemStack skilletStack;
 	private int fireAspectLevel;
 
-	public SkilletTileEntity() {
-		super(ModTileEntityTypes.SKILLET_TILE.get());
+	public SkilletBlockEntity(BlockPos pos, BlockState state) {
+		super(ModTileEntityTypes.SKILLET_TILE.get(), pos, state);
 		skilletStack = ItemStack.EMPTY;
 	}
 
-	@Override
-	public void tick() {
-		if (level == null) return;
-
+	public void cookTick(Level level, BlockPos pos, BlockState state, CampfireBlockEntity blockEntity) {
 		boolean isHeated = isHeated(level, worldPosition);
 		if (!level.isClientSide) {
 			if (isHeated) {
@@ -144,8 +143,8 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements TickableBlo
 	}
 
 	@Override
-	public void load(BlockState state, CompoundTag compound) {
-		super.load(state, compound);
+	public void load(CompoundTag compound) {
+		super.load(compound);
 		inventory.deserializeNBT(compound.getCompound("Inventory"));
 		cookingTime = compound.getInt("CookTime");
 		skilletStack = ItemStack.of(compound.getCompound("Skillet"));

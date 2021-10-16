@@ -1,32 +1,33 @@
 package vectorwing.farmersdelight.tile;
 
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.inventory.ChestMenu;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.entity.ChestBlockEntity;
-import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
-import net.minecraft.sounds.SoundSource;
+import net.minecraft.core.Vec3i;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.core.Vec3i;
-import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import vectorwing.farmersdelight.blocks.PantryBlock;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.TextUtils;
 
-public class PantryTileEntity extends RandomizableContainerBlockEntity
+public class PantryBlockEntity extends RandomizableContainerBlockEntity
 {
 	private NonNullList<ItemStack> pantryContents = NonNullList.withSize(27, ItemStack.EMPTY);
 	private int numPlayersUsing;
 
-	public PantryTileEntity() {
-		super(ModTileEntityTypes.PANTRY_TILE);
+	public PantryBlockEntity(BlockPos pos, BlockState state) {
+		super(ModTileEntityTypes.PANTRY_TILE.get(), pos, state);
 	}
 
 	@Override
@@ -39,8 +40,8 @@ public class PantryTileEntity extends RandomizableContainerBlockEntity
 	}
 
 	@Override
-	public void load(BlockState state, CompoundTag compound) {
-		super.load(state, compound);
+	public void load(CompoundTag compound) {
+		super.load(compound);
 		pantryContents = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
 		if (!tryLoadLootTable(compound)) {
 			ContainerHelper.loadAllItems(compound, pantryContents);
@@ -104,7 +105,7 @@ public class PantryTileEntity extends RandomizableContainerBlockEntity
 		int x = worldPosition.getX();
 		int y = worldPosition.getY();
 		int z = worldPosition.getZ();
-		numPlayersUsing = ChestBlockEntity.getOpenCount(level, this, x, y, z);
+		numPlayersUsing = ChestBlockEntity.getOpenCount(level, worldPosition);
 		if (numPlayersUsing > 0) {
 			scheduleTick();
 		} else {

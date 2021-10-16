@@ -20,7 +20,7 @@
       "trigger": "minecraft:effects_changed",
       "conditions": {
         "effects": {
-          "farmersdelight:nourished": {}
+          "farmersdelight:nourishment": {}
         }
       }
     }

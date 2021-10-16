@@ -13,16 +13,13 @@ import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fmlclient.registry.ClientRegistry;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.client.gui.NourishedHungerOverlay;
 import vectorwing.farmersdelight.client.particles.StarParticle;
 import vectorwing.farmersdelight.client.particles.SteamParticle;
-import vectorwing.farmersdelight.client.tileentity.renderer.CanvasSignTileEntityRenderer;
 import vectorwing.farmersdelight.client.tileentity.renderer.CuttingBoardRenderer;
 import vectorwing.farmersdelight.client.tileentity.renderer.SkilletRenderer;
 import vectorwing.farmersdelight.client.tileentity.renderer.StoveRenderer;
@@ -56,6 +53,7 @@ public class ClientEventHandler
 	public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerBlockEntityRenderer(ModTileEntityTypes.STOVE_TILE.get(), StoveRenderer::new);
 		event.registerBlockEntityRenderer(ModTileEntityTypes.CUTTING_BOARD_TILE.get(), CuttingBoardRenderer::new);
+//		event.registerBlockEntityRenderer(ModTileEntityTypes.CANVAS_SIGN_TILE.get(), CanvasSignTileEntityRenderer::new);
 		event.registerBlockEntityRenderer(ModTileEntityTypes.SKILLET_TILE.get(), SkilletRenderer::new);
 	}
 
@@ -84,15 +82,6 @@ public class ClientEventHandler
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.CANVAS_RUG.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.FULL_TATAMI_MAT.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.ROAST_CHICKEN_BLOCK.get(), RenderType.cutout());
-
-//		ClientRegistry.registerEntityShader(ModTileEntityTypes.STOVE_TILE.get(),
-//				StoveRenderer::new);
-//		ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.CUTTING_BOARD_TILE.get(),
-//				CuttingBoardRenderer::new);
-		ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.CANVAS_SIGN_TILE.get(),
-				CanvasSignTileEntityRenderer::new);
-		ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.SKILLET_TILE.get(),
-				SkilletRenderer::new);
 
 		MenuScreens.register(ModContainerTypes.COOKING_POT.get(), CookingPotScreen::new);
 

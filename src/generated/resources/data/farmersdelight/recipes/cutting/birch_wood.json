@@ -6,8 +6,7 @@
     }
   ],
   "tool": {
-    "type": "farmersdelight:tool",
-    "tool": "axe"
+    "tag": "forge:tools/axes"
   },
   "result": [
     {

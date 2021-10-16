@@ -14,13 +14,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec2;
 import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.blocks.StoveBlock;
-import vectorwing.farmersdelight.tile.StoveTileEntity;
+import vectorwing.farmersdelight.tile.StoveBlockEntity;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class StoveRenderer implements BlockEntityRenderer<StoveTileEntity>
+public class StoveRenderer implements BlockEntityRenderer<StoveBlockEntity>
 {
 	private static final Minecraft MC = Minecraft.getInstance();
 
@@ -28,7 +28,7 @@ public class StoveRenderer implements BlockEntityRenderer<StoveTileEntity>
 	}
 
 	@Override
-	public void render(StoveTileEntity stoveEntity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int combinedLightIn, int combinedOverlayIn) {
+	public void render(StoveBlockEntity stoveEntity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int combinedLightIn, int combinedOverlayIn) {
 		Direction direction = stoveEntity.getBlockState().getValue(StoveBlock.FACING).getOpposite();
 
 		ItemStackHandler inventory = stoveEntity.getInventory();

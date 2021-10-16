@@ -22,7 +22,7 @@ import net.minecraftforge.items.SlotItemHandler;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModContainerTypes;
-import vectorwing.farmersdelight.tile.CookingPotTileEntity;
+import vectorwing.farmersdelight.tile.CookingPotBlockEntity;
 
 import java.util.Objects;
 
@@ -30,12 +30,12 @@ public class CookingPotContainer extends AbstractContainerMenu
 {
 	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "item/empty_container_slot_bowl");
 
-	public final CookingPotTileEntity tileEntity;
+	public final CookingPotBlockEntity tileEntity;
 	public final ItemStackHandler inventory;
 	private final ContainerData cookingPotData;
 	private final ContainerLevelAccess canInteractWithCallable;
 
-	public CookingPotContainer(final int windowId, final Inventory playerInventory, final CookingPotTileEntity tileEntity, ContainerData cookingPotDataIn) {
+	public CookingPotContainer(final int windowId, final Inventory playerInventory, final CookingPotBlockEntity tileEntity, ContainerData cookingPotDataIn) {
 		super(ModContainerTypes.COOKING_POT.get(), windowId);
 		this.tileEntity = tileEntity;
 		this.inventory = tileEntity.getInventory();
@@ -88,12 +88,12 @@ public class CookingPotContainer extends AbstractContainerMenu
 		this.addDataSlots(cookingPotDataIn);
 	}
 
-	private static CookingPotTileEntity getTileEntity(final Inventory playerInventory, final FriendlyByteBuf data) {
+	private static CookingPotBlockEntity getTileEntity(final Inventory playerInventory, final FriendlyByteBuf data) {
 		Objects.requireNonNull(playerInventory, "playerInventory cannot be null");
 		Objects.requireNonNull(data, "data cannot be null");
 		final BlockEntity tileAtPos = playerInventory.player.level.getBlockEntity(data.readBlockPos());
-		if (tileAtPos instanceof CookingPotTileEntity) {
-			return (CookingPotTileEntity) tileAtPos;
+		if (tileAtPos instanceof CookingPotBlockEntity) {
+			return (CookingPotBlockEntity) tileAtPos;
 		}
 		throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);
 	}

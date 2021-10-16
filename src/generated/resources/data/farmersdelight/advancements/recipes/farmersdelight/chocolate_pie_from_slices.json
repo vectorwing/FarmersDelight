@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:chocolate_pie_slice"
+            "items": [
+              "farmersdelight:chocolate_pie_slice"
+            ]
           }
         ]
       }

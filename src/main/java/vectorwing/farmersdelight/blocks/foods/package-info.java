@@ -2,6 +2,6 @@
 @MethodsReturnNonnullByDefault
 package vectorwing.farmersdelight.blocks.foods;
 
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;

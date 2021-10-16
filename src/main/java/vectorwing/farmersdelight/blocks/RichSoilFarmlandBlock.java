@@ -1,15 +1,16 @@
 package vectorwing.farmersdelight.blocks;
 
-import net.minecraft.block.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.core.Direction;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.Level;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.PlantType;
 import vectorwing.farmersdelight.registry.ModBlocks;
@@ -18,15 +19,6 @@ import vectorwing.farmersdelight.utils.MathUtils;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import java.util.Random;
-
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.FarmBlock;
-import net.minecraft.world.level.block.StemGrownBlock;
-import net.minecraft.world.level.block.TallFlowerBlock;
-import net.minecraft.world.level.block.state.BlockState;
 
 public class RichSoilFarmlandBlock extends FarmBlock
 {
@@ -55,7 +47,7 @@ public class RichSoilFarmlandBlock extends FarmBlock
 
 	@Override
 	public boolean isFertile(BlockState state, BlockGetter world, BlockPos pos) {
-		if (this.getBlock() == this)
+		if (state.is(ModBlocks.RICH_SOIL_FARMLAND.get()))
 			return state.getValue(RichSoilFarmlandBlock.MOISTURE) > 0;
 
 		return false;
@@ -85,14 +77,11 @@ public class RichSoilFarmlandBlock extends FarmBlock
 			BlockState aboveState = worldIn.getBlockState(pos.above());
 			Block aboveBlock = aboveState.getBlock();
 
-			// Do nothing if the plant is unaffected by rich soil farmland
 			if (ModTags.UNAFFECTED_BY_RICH_SOIL.contains(aboveBlock) || aboveBlock instanceof TallFlowerBlock) {
 				return;
 			}
 
-			// If all else fails, and it's a plant, give it a growth boost now and then!
-			if (aboveBlock instanceof BonemealableBlock && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
-				BonemealableBlock growable = (BonemealableBlock) aboveBlock;
+			if (aboveBlock instanceof BonemealableBlock growable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
 				if (growable.isValidBonemealTarget(worldIn, pos.above(), aboveState, false) && ForgeHooks.onCropsGrowPre(worldIn, pos.above(), aboveState, true)) {
 					growable.performBonemeal(worldIn, worldIn.random, pos.above(), aboveState);
 					if (!worldIn.isClientSide) {
@@ -116,7 +105,7 @@ public class RichSoilFarmlandBlock extends FarmBlock
 	}
 
 	@Override
-	public void fallOn(Level worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+	public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
 		// Rich Soil is immune to trampling
 	}
 }

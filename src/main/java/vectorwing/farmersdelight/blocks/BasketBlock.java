@@ -32,7 +32,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import vectorwing.farmersdelight.tile.BasketTileEntity;
+import vectorwing.farmersdelight.tile.BasketBlockEntity;
 
 import javax.annotation.Nullable;
 
@@ -89,8 +89,8 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
 		if (!worldIn.isClientSide) {
 			BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-			if (tileEntity instanceof BasketTileEntity) {
-				player.openMenu((BasketTileEntity) tileEntity);
+			if (tileEntity instanceof BasketBlockEntity) {
+				player.openMenu((BasketBlockEntity) tileEntity);
 			}
 		}
 		return InteractionResult.SUCCESS;
@@ -144,17 +144,12 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 		return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(worldIn.getBlockEntity(pos));
 	}
 
-	@Nullable
-	public BlockEntity newBlockEntity(BlockGetter worldIn) {
-		return new BasketTileEntity();
-	}
-
 	@Override
 	public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		if (stack.hasCustomHoverName()) {
 			BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-			if (tileEntity instanceof BasketTileEntity) {
-				((BasketTileEntity) tileEntity).setCustomName(stack.getHoverName());
+			if (tileEntity instanceof BasketBlockEntity) {
+				((BasketBlockEntity) tileEntity).setCustomName(stack.getHoverName());
 			}
 		}
 	}
@@ -191,7 +186,7 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 
 	@Nullable
 	@Override
-	public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-		return null;
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return new BasketBlockEntity(pos, state);
 	}
 }

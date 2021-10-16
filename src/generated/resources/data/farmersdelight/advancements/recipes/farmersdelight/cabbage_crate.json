@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:cabbage"
+            "items": [
+              "farmersdelight:cabbage"
+            ]
           }
         ]
       }

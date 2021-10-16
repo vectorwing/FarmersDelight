@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.blocks;
 
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.Entity;
@@ -27,8 +28,8 @@ public class RiceBaleBlock extends Block
 	}
 
 	@Override
-	public void fallOn(Level worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-		entityIn.causeFallDamage(fallDistance, 0.2F);
+	public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
+		entityIn.causeFallDamage(fallDistance, 0.2F, DamageSource.FALL);
 	}
 
 	@Override

@@ -6,7 +6,6 @@ import com.mojang.math.Transformation;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.model.*;
-import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.*;
 import net.minecraft.core.Direction;
@@ -17,7 +16,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.client.model.SimpleModelTransform;
+import net.minecraftforge.client.model.SimpleModelState;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 
@@ -46,7 +45,7 @@ public class SkilletModel implements BakedModel
 	{
 		@Nonnull
 		@Override
-		public BakedModel resolve(@Nonnull BakedModel model, ItemStack stack, @Nullable ClientLevel worldIn, @Nullable LivingEntity entityIn) {
+		public BakedModel resolve(BakedModel model, ItemStack stack, @Nullable ClientLevel worldIn, @Nullable LivingEntity entityIn, int seed) {
 			CompoundTag tag = stack.getOrCreateTag();
 
 			if (tag.contains("Cooking")) {
@@ -118,7 +117,7 @@ public class SkilletModel implements BakedModel
 
 			ResourceLocation ingredientLocation = ForgeRegistries.ITEMS.getKey(ingredientStack.getItem());
 			UnbakedModel ingredientUnbaked = bakery.getModel(new ModelResourceLocation(ingredientLocation, "inventory"));
-			ModelState transform = new SimpleModelTransform(
+			ModelState transform = new SimpleModelState(
 					new Transformation(
 							new Vector3f(0.0F, -0.4F, 0.0F),
 							Vector3f.XP.rotationDegrees(270),

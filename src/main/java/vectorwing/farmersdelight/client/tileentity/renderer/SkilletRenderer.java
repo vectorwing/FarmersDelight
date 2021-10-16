@@ -12,11 +12,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import vectorwing.farmersdelight.blocks.StoveBlock;
-import vectorwing.farmersdelight.tile.SkilletTileEntity;
+import vectorwing.farmersdelight.tile.SkilletBlockEntity;
 
 import java.util.Random;
 
-public class SkilletRenderer implements BlockEntityRenderer<SkilletTileEntity>
+public class SkilletRenderer implements BlockEntityRenderer<SkilletBlockEntity>
 {
 	private final Random random = new Random();
 
@@ -24,7 +24,7 @@ public class SkilletRenderer implements BlockEntityRenderer<SkilletTileEntity>
 	}
 
 	@Override
-	public void render(SkilletTileEntity skilletEntity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+	public void render(SkilletBlockEntity skilletEntity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
 		Direction direction = skilletEntity.getBlockState().getValue(StoveBlock.FACING);
 		IItemHandler inventory = skilletEntity.getInventory();
 		int posLong = (int) skilletEntity.getBlockPos().asLong();

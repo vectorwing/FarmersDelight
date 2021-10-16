@@ -26,6 +26,8 @@ import java.util.Random;
  * https://www.curseforge.com/minecraft/mc-mods/appleskin
  */
 
+// TODO: Fix this lmao
+
 @OnlyIn(Dist.CLIENT)
 public class NourishedHungerOverlay
 {
@@ -36,44 +38,44 @@ public class NourishedHungerOverlay
 		MinecraftForge.EVENT_BUS.register(new NourishedHungerOverlay());
 	}
 
-	@SubscribeEvent(priority = EventPriority.NORMAL)
-	public void onPreRender(RenderGameOverlayEvent.Pre event) {
-		if (!Configuration.NOURISHED_HUNGER_OVERLAY.get())
-			return;
-		if (event.getType() != RenderGameOverlayEvent.ElementType.)
-			return;
-		if (event.isCanceled())
-			return;
+//	@SubscribeEvent(priority = EventPriority.NORMAL)
+//	public void onPreRender(RenderGameOverlayEvent.Pre event) {
+//		if (!Configuration.NOURISHED_HUNGER_OVERLAY.get())
+//			return;
+//		if (event.getType() != RenderGameOverlayEvent.ElementType.)
+//			return;
+//		if (event.isCanceled())
+//			return;
+//
+//		foodIconsOffset = ForgeIngameGui.right_height;
+//	}
 
-		foodIconsOffset = ForgeIngameGui.right_height;
-	}
-
-	@SubscribeEvent(priority = EventPriority.NORMAL)
-	public void onRender(RenderGameOverlayEvent.Post event) {
-		if (!Configuration.NOURISHED_HUNGER_OVERLAY.get())
-			return;
-		if (event.getType() != RenderGameOverlayEvent.ElementType.FOOD)
-			return;
-		if (event.isCanceled())
-			return;
-
-		Minecraft minecraft = Minecraft.getInstance();
-		Player player = minecraft.player;
-		FoodData stats = player.getFoodData();
-
-		int left = minecraft.getWindow().getGuiScaledWidth() / 2 + 91;
-		int top = minecraft.getWindow().getGuiScaledHeight() - foodIconsOffset;
-
-		boolean isPlayerHealingWithSaturation =
-				player.level.getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION)
-						&& player.isHurt()
-						&& stats.getSaturationLevel() > 0.0F
-						&& stats.getFoodLevel() >= 20;
-
-		if (player.getEffect(ModEffects.NOURISHMENT.get()) != null) {
-			drawNourishedOverlay(stats, minecraft, event.getMatrixStack(), left, top, isPlayerHealingWithSaturation);
-		}
-	}
+//	@SubscribeEvent(priority = EventPriority.NORMAL)
+//	public void onRender(RenderGameOverlayEvent.Post event) {
+//		if (!Configuration.NOURISHED_HUNGER_OVERLAY.get())
+//			return;
+//		if (event.getType() != RenderGameOverlayEvent.ElementType.FOOD)
+//			return;
+//		if (event.isCanceled())
+//			return;
+//
+//		Minecraft minecraft = Minecraft.getInstance();
+//		Player player = minecraft.player;
+//		FoodData stats = player.getFoodData();
+//
+//		int left = minecraft.getWindow().getGuiScaledWidth() / 2 + 91;
+//		int top = minecraft.getWindow().getGuiScaledHeight() - foodIconsOffset;
+//
+//		boolean isPlayerHealingWithSaturation =
+//				player.level.getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION)
+//						&& player.isHurt()
+//						&& stats.getSaturationLevel() > 0.0F
+//						&& stats.getFoodLevel() >= 20;
+//
+//		if (player.getEffect(ModEffects.NOURISHMENT.get()) != null) {
+//			drawNourishedOverlay(stats, minecraft, event.getMatrixStack(), left, top, isPlayerHealingWithSaturation);
+//		}
+//	}
 
 	public static void drawNourishedOverlay(FoodData stats, Minecraft mc, PoseStack matrixStack, int left, int top, boolean naturalHealing) {
 		matrixStack.pushPose();
@@ -85,7 +87,7 @@ public class NourishedHungerOverlay
 		Random rand = new Random();
 		rand.setSeed((long) (ticks * 312871));
 
-		mc.getTextureManager().bind(MOD_ICONS_TEXTURE);
+//		mc.getTextureManager().bind(MOD_ICONS_TEXTURE);
 		RenderSystem.enableBlend();
 
 		for (int j = 0; j < 10; ++j) {
@@ -111,6 +113,6 @@ public class NourishedHungerOverlay
 
 		RenderSystem.disableBlend();
 		matrixStack.popPose();
-		mc.getTextureManager().bind(GuiComponent.GUI_ICONS_LOCATION);
+//		mc.getTextureManager().bind(GuiComponent.GUI_ICONS_LOCATION);
 	}
 }

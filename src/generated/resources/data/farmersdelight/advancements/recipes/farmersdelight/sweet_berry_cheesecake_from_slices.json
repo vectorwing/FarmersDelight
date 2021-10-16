@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:sweet_berry_cheesecake_slice"
+            "items": [
+              "farmersdelight:sweet_berry_cheesecake_slice"
+            ]
           }
         ]
       }

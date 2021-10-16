@@ -13,7 +13,7 @@ import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.tile.CookingPotTileEntity;
+import vectorwing.farmersdelight.tile.CookingPotBlockEntity;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -35,8 +35,8 @@ public class CopyMealFunction extends LootItemConditionalFunction
 	@Override
 	protected ItemStack run(ItemStack stack, LootContext context) {
 		BlockEntity tile = context.getParamOrNull(LootContextParams.BLOCK_ENTITY);
-		if (tile instanceof CookingPotTileEntity) {
-			CompoundTag tag = ((CookingPotTileEntity) tile).writeMeal(new CompoundTag());
+		if (tile instanceof CookingPotBlockEntity) {
+			CompoundTag tag = ((CookingPotBlockEntity) tile).writeMeal(new CompoundTag());
 			if (!tag.isEmpty()) {
 				stack.addTagElement("BlockEntityTag", tag);
 			}

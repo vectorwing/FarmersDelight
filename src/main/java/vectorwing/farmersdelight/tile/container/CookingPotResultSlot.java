@@ -4,7 +4,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import vectorwing.farmersdelight.tile.CookingPotTileEntity;
+import vectorwing.farmersdelight.tile.CookingPotBlockEntity;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -12,11 +12,11 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class CookingPotResultSlot extends SlotItemHandler
 {
-	public final CookingPotTileEntity tileEntity;
+	public final CookingPotBlockEntity tileEntity;
 	private final Player player;
 	private int removeCount;
 
-	public CookingPotResultSlot(Player player, CookingPotTileEntity tile, IItemHandler inventoryIn, int index, int xPosition, int yPosition) {
+	public CookingPotResultSlot(Player player, CookingPotBlockEntity tile, IItemHandler inventoryIn, int index, int xPosition, int yPosition) {
 		super(inventoryIn, index, xPosition, yPosition);
 		this.tileEntity = tile;
 		this.player = player;
@@ -38,10 +38,9 @@ public class CookingPotResultSlot extends SlotItemHandler
 	}
 
 	@Override
-	public ItemStack onTake(Player thePlayer, ItemStack stack) {
+	public void onTake(Player thePlayer, ItemStack stack) {
 		this.checkTakeAchievements(stack);
 		super.onTake(thePlayer, stack);
-		return stack;
 	}
 
 	@Override

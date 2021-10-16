@@ -1,27 +1,25 @@
 package vectorwing.farmersdelight.tile;
 
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.Container;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.Container;
-import net.minecraft.world.WorldlyContainer;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.entity.TickableBlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.core.Direction;
-import net.minecraft.world.entity.EntitySelector;
-import net.minecraft.core.NonNullList;
-import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.network.chat.Component;
 import vectorwing.farmersdelight.blocks.BasketBlock;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.utils.TextUtils;
@@ -32,13 +30,13 @@ import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class BasketTileEntity extends RandomizableContainerBlockEntity implements IBasket, TickableBlockEntity
+public class BasketBlockEntity extends RandomizableContainerBlockEntity implements IBasket
 {
 	private NonNullList<ItemStack> basketContents = NonNullList.withSize(27, ItemStack.EMPTY);
 	private int transferCooldown = -1;
 
-	public BasketTileEntity() {
-		super(ModTileEntityTypes.BASKET_TILE.get());
+	public BasketBlockEntity(BlockPos pos, BlockState state) {
+		super(ModTileEntityTypes.BASKET_TILE.get(), pos, state);
 	}
 
 	public static boolean pullItems(IBasket basket, int facingIndex) {
@@ -98,8 +96,8 @@ public class BasketTileEntity extends RandomizableContainerBlockEntity implement
 			}
 
 			if (flag) {
-				if (isDestinationEmpty && destination instanceof BasketTileEntity) {
-					BasketTileEntity firstBasket = (BasketTileEntity) destination;
+				if (isDestinationEmpty && destination instanceof BasketBlockEntity) {
+					BasketBlockEntity firstBasket = (BasketBlockEntity) destination;
 					if (!firstBasket.mayTransfer()) {
 						int k = 0;
 
@@ -120,7 +118,7 @@ public class BasketTileEntity extends RandomizableContainerBlockEntity implement
 		ItemStack remainderStack = putStackInInventoryAllSlots(inventory, entityItemStack);
 		if (remainderStack.isEmpty()) {
 			flag = true;
-			itemEntity.remove();
+			itemEntity.discard();
 		} else {
 			itemEntity.setItem(remainderStack);
 		}
@@ -145,8 +143,8 @@ public class BasketTileEntity extends RandomizableContainerBlockEntity implement
 	}
 
 	@Override
-	public void load(BlockState state, CompoundTag compound) {
-		super.load(state, compound);
+	public void load(CompoundTag compound) {
+		super.load(compound);
 		this.basketContents = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
 		if (!this.tryLoadLootTable(compound)) {
 			ContainerHelper.loadAllItems(compound, this.basketContents);
@@ -258,7 +256,6 @@ public class BasketTileEntity extends RandomizableContainerBlockEntity implement
 		return (double) this.worldPosition.getZ() + 0.5D;
 	}
 
-	@Override
 	public void tick() {
 		if (this.level != null && !this.level.isClientSide) {
 			--this.transferCooldown;

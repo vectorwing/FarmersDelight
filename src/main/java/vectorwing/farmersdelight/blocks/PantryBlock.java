@@ -16,18 +16,14 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.util.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
-import vectorwing.farmersdelight.tile.PantryTileEntity;
+import vectorwing.farmersdelight.tile.PantryBlockEntity;
 
 import javax.annotation.Nullable;
 import java.util.Random;
-
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -50,8 +46,8 @@ public class PantryBlock extends BaseEntityBlock
 	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
 		if (!worldIn.isClientSide) {
 			BlockEntity tile = worldIn.getBlockEntity(pos);
-			if (tile instanceof PantryTileEntity) {
-				player.openMenu((PantryTileEntity) tile);
+			if (tile instanceof PantryBlockEntity) {
+				player.openMenu((PantryBlockEntity) tile);
 			}
 		}
 		return InteractionResult.SUCCESS;
@@ -72,8 +68,8 @@ public class PantryBlock extends BaseEntityBlock
 	@Override
 	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random rand) {
 		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-		if (tileEntity instanceof PantryTileEntity) {
-			((PantryTileEntity) tileEntity).tick();
+		if (tileEntity instanceof PantryBlockEntity) {
+			((PantryBlockEntity) tileEntity).tick();
 		}
 	}
 
@@ -86,8 +82,8 @@ public class PantryBlock extends BaseEntityBlock
 	public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		if (stack.hasCustomHoverName()) {
 			BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-			if (tileEntity instanceof PantryTileEntity) {
-				((PantryTileEntity) tileEntity).setCustomName(stack.getHoverName());
+			if (tileEntity instanceof PantryBlockEntity) {
+				((PantryBlockEntity) tileEntity).setCustomName(stack.getHoverName());
 			}
 		}
 	}
@@ -110,8 +106,8 @@ public class PantryBlock extends BaseEntityBlock
 
 	@Nullable
 	@Override
-	public BlockEntity newBlockEntity(BlockGetter worldIn) {
-		return new PantryTileEntity();
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return new PantryBlockEntity(pos, state);
 	}
 
 	@Override

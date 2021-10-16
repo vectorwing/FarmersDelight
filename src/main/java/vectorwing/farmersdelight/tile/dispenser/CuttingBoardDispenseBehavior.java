@@ -1,20 +1,20 @@
 package vectorwing.farmersdelight.tile.dispenser;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import vectorwing.farmersdelight.blocks.CuttingBoardBlock;
-import vectorwing.farmersdelight.tile.CuttingBoardTileEntity;
+import vectorwing.farmersdelight.tile.CuttingBoardBlockEntity;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
@@ -51,8 +51,8 @@ public class CuttingBoardDispenseBehavior extends OptionalDispenseItemBehavior
 		BlockState blockstate = world.getBlockState(blockpos);
 		Block block = blockstate.getBlock();
 		BlockEntity te = world.getBlockEntity(blockpos);
-		if (block instanceof CuttingBoardBlock && te instanceof CuttingBoardTileEntity) {
-			CuttingBoardTileEntity tileEntity = (CuttingBoardTileEntity) te;
+		if (block instanceof CuttingBoardBlock && te instanceof CuttingBoardBlockEntity) {
+			CuttingBoardBlockEntity tileEntity = (CuttingBoardBlockEntity) te;
 			ItemStack boardItem = tileEntity.getStoredItem().copy();
 			if (!boardItem.isEmpty() && tileEntity.processStoredItemUsingTool(stack, null)) {
 				CuttingBoardBlock.spawnCuttingParticles(world, blockpos, boardItem, 5);

@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.integration.jei.cooking;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import mcp.MethodsReturnNonnullByDefault;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -10,14 +9,16 @@ import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.client.resources.language.I18n;
+import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.registry.ModItems;
+import vectorwing.farmersdelight.utils.TextUtils;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
@@ -31,12 +32,12 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 	public static final ResourceLocation UID = new ResourceLocation(FarmersDelight.MODID, "cooking");
 	protected final IDrawable heatIndicator;
 	protected final IDrawableAnimated arrow;
-	private final String title;
+	private final Component title;
 	private final IDrawable background;
 	private final IDrawable icon;
 
 	public CookingRecipeCategory(IGuiHelper helper) {
-		title = I18n.get(FarmersDelight.MODID + ".jei.cooking");
+		title = TextUtils.getTranslation(FarmersDelight.MODID + ".jei.cooking");
 		ResourceLocation backgroundImage = new ResourceLocation(FarmersDelight.MODID, "textures/gui/cooking_pot.png");
 		background = helper.createDrawable(backgroundImage, 29, 16, 117, 57);
 		icon = helper.createDrawableIngredient(new ItemStack(ModItems.COOKING_POT.get()));
@@ -56,7 +57,7 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 	}
 
 	@Override
-	public String getTitle() {
+	public Component getTitle() {
 		return this.title;
 	}
 
@@ -99,7 +100,7 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 		}
 
 		itemStacks.init(MEAL_DISPLAY, false, 94, 9);
-		itemStacks.set(MEAL_DISPLAY, recipe.getResultItem().getStack());
+		itemStacks.set(MEAL_DISPLAY, recipe.getResultItem());
 
 		if (!recipe.getOutputContainer().isEmpty()) {
 			itemStacks.init(CONTAINER_INPUT, false, 62, 38);
@@ -107,7 +108,7 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 		}
 
 		itemStacks.init(OUTPUT, false, 94, 38);
-		itemStacks.set(OUTPUT, recipe.getResultItem().getStack());
+		itemStacks.set(OUTPUT, recipe.getResultItem());
 	}
 
 	@Override

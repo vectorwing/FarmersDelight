@@ -22,7 +22,9 @@
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:flint_knife"
+            "items": [
+              "farmersdelight:flint_knife"
+            ]
           }
         ]
       }
@@ -32,7 +34,9 @@
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:iron_knife"
+            "items": [
+              "farmersdelight:iron_knife"
+            ]
           }
         ]
       }
@@ -42,7 +46,9 @@
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:diamond_knife"
+            "items": [
+              "farmersdelight:diamond_knife"
+            ]
           }
         ]
       }
@@ -52,7 +58,9 @@
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:golden_knife"
+            "items": [
+              "farmersdelight:golden_knife"
+            ]
           }
         ]
       }
@@ -62,7 +70,9 @@
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:netherite_knife"
+            "items": [
+              "farmersdelight:netherite_knife"
+            ]
           }
         ]
       }

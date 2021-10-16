@@ -21,7 +21,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:skillet"
+          "items": [
+            "farmersdelight:skillet"
+          ]
         }
       }
     }

@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.integration.jei.cutting;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import mcp.MethodsReturnNonnullByDefault;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -9,11 +8,12 @@ import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.client.resources.language.I18n;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.ChatFormatting;
+import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.crafting.ingredients.ChanceResult;
@@ -34,13 +34,13 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 	public static final int SLOT_SPRITE_SIZE = 18;
 	private final IDrawable slot;
 	private final IDrawable slotChance;
-	private final String title;
+	private final Component title;
 	private final IDrawable background;
 	private final IDrawable icon;
 	private final CuttingBoardModel cuttingBoard;
 
 	public CuttingRecipeCategory(IGuiHelper helper) {
-		title = I18n.get(FarmersDelight.MODID + ".jei.cutting");
+		title = TextUtils.getTranslation(FarmersDelight.MODID + ".jei.cutting");
 		ResourceLocation backgroundImage = new ResourceLocation(FarmersDelight.MODID, "textures/gui/jei/cutting_board.png");
 		slot = helper.createDrawable(backgroundImage, 0, 58, 18, 18);
 		slotChance = helper.createDrawable(backgroundImage, 18, 58, 18, 18);
@@ -60,7 +60,7 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 	}
 
 	@Override
-	public String getTitle() {
+	public Component getTitle() {
 		return this.title;
 	}
 

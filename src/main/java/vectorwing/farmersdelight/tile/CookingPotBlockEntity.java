@@ -2,23 +2,26 @@ package vectorwing.farmersdelight.tile;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.entity.ExperienceOrb;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.Nameable;
+import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.level.block.entity.TickableBlockEntity;
-import net.minecraft.util.*;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.phys.Vec3;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -37,19 +40,10 @@ import vectorwing.farmersdelight.utils.TextUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Optional;
 import java.util.Random;
 
-import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.Nameable;
-import net.minecraft.world.inventory.ContainerData;
-
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
-public class CookingPotTileEntity extends FDSyncedTileEntity implements MenuProvider, TickableBlockEntity, IHeatableTileEntity, Nameable
+public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProvider, IHeatableTileEntity, Nameable
 {
 	public static final int MEAL_DISPLAY_SLOT = 6;
 	public static final int CONTAINER_SLOT = 7;
@@ -71,8 +65,8 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements MenuProv
 	private ResourceLocation lastRecipeID;
 	private boolean checkNewRecipe;
 
-	public CookingPotTileEntity() {
-		super(ModTileEntityTypes.COOKING_POT_TILE.get());
+	public CookingPotBlockEntity(BlockPos pos, BlockState state) {
+		super(ModTileEntityTypes.COOKING_POT_TILE.get(), pos, state);
 		this.inventory = createHandler();
 		this.inputHandler = LazyOptional.of(() -> new CookingPotItemHandler(inventory, Direction.UP));
 		this.outputHandler = LazyOptional.of(() -> new CookingPotItemHandler(inventory, Direction.DOWN));
@@ -82,8 +76,8 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements MenuProv
 	}
 
 	@Override
-	public void load(BlockState state, CompoundTag compound) {
-		super.load(state, compound);
+	public void load(CompoundTag compound) {
+		super.load(compound);
 		inventory.deserializeNBT(compound.getCompound("Inventory"));
 		cookTime = compound.getInt("CookTime");
 		cookTimeTotal = compound.getInt("CookTimeTotal");
@@ -137,7 +131,6 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements MenuProv
 
 	// ======== BASIC FUNCTIONALITY ========
 
-	@Override
 	public void tick() {
 		if (level == null) return;
 
@@ -476,9 +469,9 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements MenuProv
 			public int get(int index) {
 				switch (index) {
 					case 0:
-						return CookingPotTileEntity.this.cookTime;
+						return CookingPotBlockEntity.this.cookTime;
 					case 1:
-						return CookingPotTileEntity.this.cookTimeTotal;
+						return CookingPotBlockEntity.this.cookTimeTotal;
 					default:
 						return 0;
 				}
@@ -488,10 +481,10 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements MenuProv
 			public void set(int index, int value) {
 				switch (index) {
 					case 0:
-						CookingPotTileEntity.this.cookTime = value;
+						CookingPotBlockEntity.this.cookTime = value;
 						break;
 					case 1:
-						CookingPotTileEntity.this.cookTimeTotal = value;
+						CookingPotBlockEntity.this.cookTimeTotal = value;
 						break;
 				}
 			}

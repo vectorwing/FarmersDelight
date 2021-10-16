@@ -1,61 +1,50 @@
 package vectorwing.farmersdelight.blocks;
 
-import net.minecraft.block.*;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.item.*;
-import net.minecraft.item.crafting.CampfireCookingRecipe;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.util.*;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.ToolType;
-import vectorwing.farmersdelight.registry.ModSounds;
-import vectorwing.farmersdelight.registry.ModTileEntityTypes;
-import vectorwing.farmersdelight.tile.StoveTileEntity;
-import vectorwing.farmersdelight.utils.ItemUtils;
-import vectorwing.farmersdelight.utils.MathUtils;
-
-import javax.annotation.Nullable;
-import java.util.Optional;
-import java.util.Random;
-
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.item.FireChargeItem;
-import net.minecraft.world.item.FlintAndSteelItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.CampfireBlock;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.ToolActions;
+import vectorwing.farmersdelight.registry.ModSounds;
+import vectorwing.farmersdelight.registry.ModTileEntityTypes;
+import vectorwing.farmersdelight.tile.StoveBlockEntity;
+import vectorwing.farmersdelight.utils.ItemUtils;
+import vectorwing.farmersdelight.utils.MathUtils;
+
+import javax.annotation.Nullable;
+import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class StoveBlock extends HorizontalDirectionalBlock
+public class StoveBlock extends BaseEntityBlock
 {
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
+	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
 	public StoveBlock(BlockBehaviour.Properties builder) {
 		super(builder);
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, false));
 	}
 
 	@Override
@@ -64,7 +53,7 @@ public class StoveBlock extends HorizontalDirectionalBlock
 		Item heldItem = heldStack.getItem();
 
 		if (state.getValue(LIT)) {
-			if (ItemTags. heldStack.getToolTypes().contains(ToolType.SHOVEL)) {
+			if (heldStack.canPerformAction(ToolActions.SHOVEL_DIG)) {
 				extinguish(state, worldIn, pos);
 				heldStack.hurtAndBreak(1, player, action -> action.broadcastBreakEvent(handIn));
 				return InteractionResult.SUCCESS;
@@ -95,9 +84,8 @@ public class StoveBlock extends HorizontalDirectionalBlock
 		}
 
 		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-		if (tileEntity instanceof StoveTileEntity) {
-			StoveTileEntity stoveEntity = (StoveTileEntity) tileEntity;
-			if (!worldIn.isClientSide && !stoveEntity.isStoveBlockedAbove() && stoveEntity.addItem(player.abilities.instabuild ? heldStack.copy() : heldStack)) {
+		if (tileEntity instanceof StoveBlockEntity stoveEntity) {
+			if (!worldIn.isClientSide && !stoveEntity.isStoveBlockedAbove() && stoveEntity.addItem(player.getAbilities().instabuild ? heldStack.copy() : heldStack)) {
 				return InteractionResult.SUCCESS;
 			}
 		}
@@ -119,21 +107,21 @@ public class StoveBlock extends HorizontalDirectionalBlock
 	}
 
 	@Override
-	public void stepOn(Level worldIn, BlockPos pos, Entity entityIn) {
-		boolean isLit = worldIn.getBlockState(pos).getValue(StoveBlock.LIT);
+	public void stepOn(Level world, BlockPos pos, BlockState state, Entity entityIn) {
+		boolean isLit = world.getBlockState(pos).getValue(StoveBlock.LIT);
 		if (isLit && !entityIn.fireImmune() && entityIn instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entityIn)) {
 			entityIn.hurt(DamageSource.HOT_FLOOR, 1.0F);
 		}
 
-		super.stepOn(worldIn, pos, entityIn);
+		super.stepOn(world, pos, state, entityIn);
 	}
 
 	@Override
 	public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
 			BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-			if (tileEntity instanceof StoveTileEntity) {
-				ItemUtils.dropItems(worldIn, pos, ((StoveTileEntity) tileEntity).getInventory());
+			if (tileEntity instanceof StoveBlockEntity) {
+				ItemUtils.dropItems(worldIn, pos, ((StoveBlockEntity) tileEntity).getInventory());
 			}
 
 			super.onRemove(state, worldIn, pos, newState, isMoving);
@@ -167,14 +155,19 @@ public class StoveBlock extends HorizontalDirectionalBlock
 		}
 	}
 
-	@Override
-	public boolean hasTileEntity(BlockState state) {
-		return true;
-	}
-
 	@Nullable
 	@Override
-	public BlockEntity createTileEntity(BlockState state, BlockGetter world) {
-		return ModTileEntityTypes.STOVE_TILE.get().create();
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return ModTileEntityTypes.STOVE_TILE.get().create(pos, state);
+	}
+
+	@Override
+	public BlockState rotate(BlockState pState, Rotation pRot) {
+		return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
+	}
+
+	@Override
+	public BlockState mirror(BlockState pState, Mirror pMirror) {
+		return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
 	}
 }

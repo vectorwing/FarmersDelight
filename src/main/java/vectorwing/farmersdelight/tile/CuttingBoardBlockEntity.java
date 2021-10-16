@@ -1,19 +1,24 @@
 package vectorwing.farmersdelight.tile;
 
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.*;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -37,13 +42,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-
-public class CuttingBoardTileEntity extends FDSyncedTileEntity
+public class CuttingBoardBlockEntity extends SyncedBlockEntity
 {
 	private final ItemStackHandler inventory;
 	private final LazyOptional<IItemHandler> inputHandler;
@@ -51,16 +50,16 @@ public class CuttingBoardTileEntity extends FDSyncedTileEntity
 
 	private boolean isItemCarvingBoard;
 
-	public CuttingBoardTileEntity() {
-		super(ModTileEntityTypes.CUTTING_BOARD_TILE.get());
+	public CuttingBoardBlockEntity(BlockPos pos, BlockState state) {
+		super(ModTileEntityTypes.CUTTING_BOARD_TILE.get(), pos, state);
 		inventory = createHandler();
 		inputHandler = LazyOptional.of(() -> inventory);
 		isItemCarvingBoard = false;
 	}
 
 	@Override
-	public void load(BlockState state, CompoundTag compound) {
-		super.load(state, compound);
+	public void load(CompoundTag compound) {
+		super.load(compound);
 		isItemCarvingBoard = compound.getBoolean("IsItemCarved");
 		inventory.deserializeNBT(compound.getCompound("Inventory"));
 	}
@@ -136,9 +135,9 @@ public class CuttingBoardTileEntity extends FDSyncedTileEntity
 
 		if (sound != null) {
 			playSound(sound, 1.0F, 1.0F);
-		} else if (tool.is(Tags.Items.SHEARS)) {
+		} else if (Tags.Items.SHEARS.contains(tool)) {
 			playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);
-		} else if (tool.is(ForgeTags.TOOLS_KNIVES)) {
+		} else if (ForgeTags.TOOLS_KNIVES.contains(tool)) {
 			playSound(ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), 0.8F, 1.0F);
 		} else if (boardItem instanceof BlockItem) {
 			Block block = ((BlockItem) boardItem).getBlock();

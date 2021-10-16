@@ -8,8 +8,6 @@ import vectorwing.farmersdelight.blocks.MushroomColonyBlock;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.world.item.Item.Properties;
-
 public class MushroomColonyItem extends BlockItem
 {
 	public MushroomColonyItem(Block blockIn, Properties properties) {

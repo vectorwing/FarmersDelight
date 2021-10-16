@@ -25,7 +25,9 @@
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:netherite_knife"
+            "items": [
+              "farmersdelight:netherite_knife"
+            ]
           }
         ]
       }

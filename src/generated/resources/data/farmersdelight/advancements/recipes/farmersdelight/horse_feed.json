@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:golden_carrot"
+            "items": [
+              "minecraft:golden_carrot"
+            ]
           }
         ]
       }

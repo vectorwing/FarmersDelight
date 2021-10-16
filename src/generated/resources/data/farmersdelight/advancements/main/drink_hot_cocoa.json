@@ -20,7 +20,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:hot_cocoa"
+          "items": [
+            "farmersdelight:hot_cocoa"
+          ]
         }
       }
     }

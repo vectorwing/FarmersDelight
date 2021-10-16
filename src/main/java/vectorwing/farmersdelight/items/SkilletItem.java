@@ -42,7 +42,7 @@ import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.blocks.SkilletBlock;
 import vectorwing.farmersdelight.registry.ModSounds;
-import vectorwing.farmersdelight.tile.SkilletTileEntity;
+import vectorwing.farmersdelight.tile.SkilletBlockEntity;
 import vectorwing.farmersdelight.utils.TextUtils;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
@@ -217,8 +217,8 @@ public class SkilletItem extends BlockItem
 	protected boolean updateCustomBlockEntityTag(BlockPos pos, Level worldIn, @Nullable Player player, ItemStack stack, BlockState state) {
 		super.updateCustomBlockEntityTag(pos, worldIn, player, stack, state);
 		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-		if (tileEntity instanceof SkilletTileEntity) {
-			((SkilletTileEntity) tileEntity).setSkilletItem(stack);
+		if (tileEntity instanceof SkilletBlockEntity) {
+			((SkilletBlockEntity) tileEntity).setSkilletItem(stack);
 			return true;
 		}
 		return false;

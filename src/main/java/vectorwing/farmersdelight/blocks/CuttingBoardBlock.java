@@ -1,63 +1,52 @@
 package vectorwing.farmersdelight.blocks;
 
-import net.minecraft.block.*;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.Containers;
-import net.minecraft.item.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.util.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.Level;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
-import vectorwing.farmersdelight.tile.CuttingBoardTileEntity;
+import vectorwing.farmersdelight.tile.CuttingBoardBlockEntity;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
-import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShearsItem;
-import net.minecraft.world.item.TieredItem;
-import net.minecraft.world.item.TridentItem;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockState;
-
 @SuppressWarnings("deprecation")
-public class CuttingBoardBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock
+public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 {
+	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
 	protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 1.0D, 15.0D);
 
 	public CuttingBoardBlock() {
@@ -89,8 +78,8 @@ public class CuttingBoardBlock extends HorizontalDirectionalBlock implements Sim
 	@Override
 	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
 		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-		if (tileEntity instanceof CuttingBoardTileEntity) {
-			CuttingBoardTileEntity cuttingBoardEntity = (CuttingBoardTileEntity) tileEntity;
+		if (tileEntity instanceof CuttingBoardBlockEntity) {
+			CuttingBoardBlockEntity cuttingBoardEntity = (CuttingBoardBlockEntity) tileEntity;
 			ItemStack heldStack = player.getItemInHand(handIn);
 			ItemStack offhandStack = player.getOffhandItem();
 
@@ -105,7 +94,7 @@ public class CuttingBoardBlock extends HorizontalDirectionalBlock implements Sim
 				}
 				if (heldStack.isEmpty()) {
 					return InteractionResult.PASS;
-				} else if (cuttingBoardEntity.addItem(player.abilities.instabuild ? heldStack.copy() : heldStack)) {
+				} else if (cuttingBoardEntity.addItem(player.getAbilities().instabuild ? heldStack.copy() : heldStack)) {
 					worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 0.8F);
 					return InteractionResult.SUCCESS;
 				}
@@ -120,7 +109,7 @@ public class CuttingBoardBlock extends HorizontalDirectionalBlock implements Sim
 
 			} else if (handIn.equals(InteractionHand.MAIN_HAND)) {
 				if (!player.isCreative()) {
-					if (!player.inventory.add(cuttingBoardEntity.removeItem())) {
+					if (!player.getInventory().add(cuttingBoardEntity.removeItem())) {
 						Containers.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), cuttingBoardEntity.removeItem());
 					}
 				} else {
@@ -137,8 +126,8 @@ public class CuttingBoardBlock extends HorizontalDirectionalBlock implements Sim
 	public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
 			BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-			if (tileEntity instanceof CuttingBoardTileEntity) {
-				Containers.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), ((CuttingBoardTileEntity) tileEntity).getStoredItem());
+			if (tileEntity instanceof CuttingBoardBlockEntity) {
+				Containers.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), ((CuttingBoardBlockEntity) tileEntity).getStoredItem());
 				worldIn.updateNeighbourForOutputSignal(pos, this);
 			}
 
@@ -193,21 +182,26 @@ public class CuttingBoardBlock extends HorizontalDirectionalBlock implements Sim
 	@Override
 	public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
 		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-		if (tileEntity instanceof CuttingBoardTileEntity) {
-			return !((CuttingBoardTileEntity) tileEntity).isEmpty() ? 15 : 0;
+		if (tileEntity instanceof CuttingBoardBlockEntity) {
+			return !((CuttingBoardBlockEntity) tileEntity).isEmpty() ? 15 : 0;
 		}
 		return 0;
 	}
 
-	@Override
-	public boolean hasTileEntity(BlockState state) {
-		return true;
-	}
-
 	@Nullable
 	@Override
-	public BlockEntity createTileEntity(BlockState state, BlockGetter world) {
-		return ModTileEntityTypes.CUTTING_BOARD_TILE.get().create();
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return ModTileEntityTypes.CUTTING_BOARD_TILE.get().create(pos, state);
+	}
+
+	@Override
+	public BlockState rotate(BlockState pState, Rotation pRot) {
+		return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
+	}
+
+	@Override
+	public BlockState mirror(BlockState pState, Mirror pMirror) {
+		return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
 	}
 
 	@Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -222,11 +216,11 @@ public class CuttingBoardBlock extends HorizontalDirectionalBlock implements Sim
 			ItemStack heldStack = player.getMainHandItem();
 			BlockEntity tileEntity = world.getBlockEntity(event.getPos());
 
-			if (player.isSecondaryUseActive() && !heldStack.isEmpty() && tileEntity instanceof CuttingBoardTileEntity) {
+			if (player.isSecondaryUseActive() && !heldStack.isEmpty() && tileEntity instanceof CuttingBoardBlockEntity) {
 				if (heldStack.getItem() instanceof TieredItem ||
 						heldStack.getItem() instanceof TridentItem ||
 						heldStack.getItem() instanceof ShearsItem) {
-					boolean success = ((CuttingBoardTileEntity) tileEntity).carveToolOnBoard(player.abilities.instabuild ? heldStack.copy() : heldStack);
+					boolean success = ((CuttingBoardBlockEntity) tileEntity).carveToolOnBoard(player.getAbilities().instabuild ? heldStack.copy() : heldStack);
 					if (success) {
 						world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 0.8F);
 						event.setCanceled(true);

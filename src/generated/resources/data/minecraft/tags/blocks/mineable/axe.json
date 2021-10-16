@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "farmersdelight:basket",
+    "farmersdelight:cutting_board",
+    "farmersdelight:carrot_crate",
+    "farmersdelight:potato_crate",
+    "farmersdelight:beetroot_crate",
+    "farmersdelight:cabbage_crate",
+    "farmersdelight:tomato_crate",
+    "farmersdelight:onion_crate",
+    "farmersdelight:oak_pantry",
+    "farmersdelight:birch_pantry",
+    "farmersdelight:spruce_pantry",
+    "farmersdelight:jungle_pantry",
+    "farmersdelight:acacia_pantry",
+    "farmersdelight:dark_oak_pantry",
+    "farmersdelight:crimson_pantry",
+    "farmersdelight:warped_pantry",
+    "farmersdelight:stuffed_pumpkin_block"
+  ]
+}

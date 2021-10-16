@@ -5,22 +5,21 @@ import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.*;
 import vectorwing.farmersdelight.blocks.CuttingBoardBlock;
-import vectorwing.farmersdelight.tile.CuttingBoardTileEntity;
+import vectorwing.farmersdelight.tile.CuttingBoardBlockEntity;
 
-public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardTileEntity>
+public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlockEntity>
 {
 	public CuttingBoardRenderer(BlockEntityRendererProvider.Context pContext) {
 	}
 
 	@Override
-	public void render(CuttingBoardTileEntity cuttingBoardEntity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+	public void render(CuttingBoardBlockEntity cuttingBoardEntity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
 		Direction direction = cuttingBoardEntity.getBlockState().getValue(CuttingBoardBlock.FACING).getOpposite();
 		ItemStack boardStack = cuttingBoardEntity.getStoredItem();
 		int posLong = (int) cuttingBoardEntity.getBlockPos().asLong();

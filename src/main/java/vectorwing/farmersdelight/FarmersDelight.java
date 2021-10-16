@@ -2,8 +2,8 @@ package vectorwing.farmersdelight;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.RegistryEvent;
@@ -16,7 +16,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
-import vectorwing.farmersdelight.crafting.ingredients.ToolIngredient;
 import vectorwing.farmersdelight.registry.*;
 import vectorwing.farmersdelight.setup.ClientEventHandler;
 import vectorwing.farmersdelight.setup.CommonEventHandler;
@@ -59,7 +58,7 @@ public class FarmersDelight
 	}
 
 	private void registerRecipeSerializers(RegistryEvent.Register<RecipeSerializer<?>> event) {
-		CraftingHelper.register(new ResourceLocation(MODID, "tool"), ToolIngredient.SERIALIZER);
+//		CraftingHelper.register(new ResourceLocation(MODID, "tool"), ToolIngredient.SERIALIZER);
 
 		event.getRegistry().register(CookingPotRecipe.SERIALIZER);
 		event.getRegistry().register(CuttingBoardRecipe.SERIALIZER);

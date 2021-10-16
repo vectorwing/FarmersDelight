@@ -1,53 +1,51 @@
 package vectorwing.farmersdelight.blocks;
 
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.Containers;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.item.crafting.CampfireCookingRecipe;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.util.*;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
-import vectorwing.farmersdelight.tile.SkilletTileEntity;
+import vectorwing.farmersdelight.tile.SkilletBlockEntity;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
-import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-
 @SuppressWarnings("deprecation")
-public class SkilletBlock extends HorizontalDirectionalBlock
+public class SkilletBlock extends BaseEntityBlock
 {
 	public static final int MINIMUM_COOKING_TIME = 60;
 
+	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty SUPPORT = BooleanProperty.create("support");
 
 	protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 4.0D, 15.0D);
@@ -63,8 +61,7 @@ public class SkilletBlock extends HorizontalDirectionalBlock
 	@Override
 	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
 		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-		if (tileEntity instanceof SkilletTileEntity) {
-			SkilletTileEntity skilletEntity = (SkilletTileEntity) tileEntity;
+		if (tileEntity instanceof SkilletBlockEntity skilletEntity) {
 			if (!worldIn.isClientSide) {
 				ItemStack heldStack = player.getItemInHand(handIn);
 				EquipmentSlot heldSlot = handIn.equals(InteractionHand.MAIN_HAND) ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
@@ -94,8 +91,8 @@ public class SkilletBlock extends HorizontalDirectionalBlock
 	public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
 			BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-			if (tileEntity instanceof SkilletTileEntity) {
-				Containers.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), ((SkilletTileEntity) tileEntity).getInventory().getStackInSlot(0));
+			if (tileEntity instanceof SkilletBlockEntity) {
+				Containers.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), ((SkilletBlockEntity) tileEntity).getInventory().getStackInSlot(0));
 			}
 
 			super.onRemove(state, worldIn, pos, newState, isMoving);
@@ -130,8 +127,11 @@ public class SkilletBlock extends HorizontalDirectionalBlock
 	@Override
 	public ItemStack getCloneItemStack(BlockGetter worldIn, BlockPos pos, BlockState state) {
 		ItemStack stack = super.getCloneItemStack(worldIn, pos, state);
-		SkilletTileEntity skilletEntity = (SkilletTileEntity) worldIn.getBlockEntity(pos);
-		CompoundTag nbt = skilletEntity.writeSkilletItem(new CompoundTag());
+		SkilletBlockEntity skilletEntity = (SkilletBlockEntity) worldIn.getBlockEntity(pos);
+		CompoundTag nbt = new CompoundTag();
+		if (skilletEntity != null) {
+			skilletEntity.writeSkilletItem(nbt);
+		}
 		if (!nbt.isEmpty()) {
 			stack = ItemStack.of(nbt.getCompound("Skillet"));
 		}
@@ -147,8 +147,7 @@ public class SkilletBlock extends HorizontalDirectionalBlock
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
 		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-		if (tileEntity instanceof SkilletTileEntity) {
-			SkilletTileEntity skilletEntity = (SkilletTileEntity) tileEntity;
+		if (tileEntity instanceof SkilletBlockEntity skilletEntity) {
 			if (skilletEntity.isCooking()) {
 				double x = (double) pos.getX() + 0.5D;
 				double y = pos.getY();
@@ -160,19 +159,14 @@ public class SkilletBlock extends HorizontalDirectionalBlock
 		}
 	}
 
-	@Override
-	public boolean hasTileEntity(BlockState state) {
-		return true;
-	}
-
 	@Nullable
 	@Override
-	public BlockEntity createTileEntity(BlockState state, BlockGetter world) {
-		return ModTileEntityTypes.SKILLET_TILE.get().create();
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return ModTileEntityTypes.SKILLET_TILE.get().create(pos, state);
 	}
 
 	private boolean getTrayState(LevelAccessor world, BlockPos pos) {
-		return world.getBlockState(pos.below()).getBlock().is(ModTags.TRAY_HEAT_SOURCES);
+		return ModTags.TRAY_HEAT_SOURCES.contains(world.getBlockState(pos.below()).getBlock());
 	}
 
 	/**

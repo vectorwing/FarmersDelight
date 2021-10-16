@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "farmersdelight:rice_bag",
+    "farmersdelight:rope",
+    "farmersdelight:safety_net",
+    "farmersdelight:canvas_rug",
+    "farmersdelight:tatami",
+    "farmersdelight:full_tatami_mat",
+    "farmersdelight:half_tatami_mat",
+    "farmersdelight:apple_pie",
+    "farmersdelight:sweet_berry_cheesecake",
+    "farmersdelight:chocolate_pie",
+    "farmersdelight:roast_chicken_block",
+    "farmersdelight:honey_glazed_ham_block",
+    "farmersdelight:shepherds_pie_block"
+  ]
+}

@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:straw_bale"
+            "items": [
+              "farmersdelight:straw_bale"
+            ]
           }
         ]
       }

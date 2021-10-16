@@ -1,16 +1,21 @@
 package vectorwing.farmersdelight.blocks;
 
-import net.minecraft.block.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.core.Direction;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.TallFlowerBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.PlantType;
-import net.minecraftforge.common.ToolType;
+import net.minecraftforge.common.ToolAction;
+import net.minecraftforge.common.ToolActions;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.setup.Configuration;
 import vectorwing.farmersdelight.utils.MathUtils;
@@ -18,14 +23,6 @@ import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.Nullable;
 import java.util.Random;
-
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.TallFlowerBlock;
-import net.minecraft.world.level.block.state.BlockState;
 
 @SuppressWarnings("deprecation")
 public class RichSoilBlock extends Block
@@ -78,10 +75,14 @@ public class RichSoilBlock extends Block
 		}
 	}
 
+	// TODO: The HOE_DIG action might not work! Revisit this later!
 	@Override
 	@Nullable
-	public BlockState getToolModifiedState(BlockState state, Level world, BlockPos pos, Player player, ItemStack stack, ToolType toolType) {
-		return toolType == ToolType.HOE ? ModBlocks.RICH_SOIL_FARMLAND.get().defaultBlockState() : null;
+	public BlockState getToolModifiedState(BlockState state, Level world, BlockPos pos, Player player, ItemStack stack, ToolAction toolAction) {
+		if (!stack.canPerformAction(toolAction)) return null;
+		if (ToolActions.HOE_DIG.equals(toolAction)) return ModBlocks.RICH_SOIL_FARMLAND.get().defaultBlockState();
+
+		return null;
 	}
 
 

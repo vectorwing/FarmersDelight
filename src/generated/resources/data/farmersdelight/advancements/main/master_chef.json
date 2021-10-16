@@ -23,7 +23,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:mixed_salad"
+          "items": [
+            "farmersdelight:mixed_salad"
+          ]
         }
       }
     },
@@ -31,7 +33,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:beef_stew"
+          "items": [
+            "farmersdelight:beef_stew"
+          ]
         }
       }
     },
@@ -39,7 +43,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:chicken_soup"
+          "items": [
+            "farmersdelight:chicken_soup"
+          ]
         }
       }
     },
@@ -47,7 +53,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:vegetable_soup"
+          "items": [
+            "farmersdelight:vegetable_soup"
+          ]
         }
       }
     },
@@ -55,7 +63,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:fish_stew"
+          "items": [
+            "farmersdelight:fish_stew"
+          ]
         }
       }
     },
@@ -63,7 +73,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:fried_rice"
+          "items": [
+            "farmersdelight:fried_rice"
+          ]
         }
       }
     },
@@ -71,7 +83,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:pumpkin_soup"
+          "items": [
+            "farmersdelight:pumpkin_soup"
+          ]
         }
       }
     },
@@ -79,7 +93,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:baked_cod_stew"
+          "items": [
+            "farmersdelight:baked_cod_stew"
+          ]
         }
       }
     },
@@ -87,7 +103,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:noodle_soup"
+          "items": [
+            "farmersdelight:noodle_soup"
+          ]
         }
       }
     },
@@ -95,7 +113,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:pasta_with_meatballs"
+          "items": [
+            "farmersdelight:pasta_with_meatballs"
+          ]
         }
       }
     },
@@ -103,7 +123,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:pasta_with_mutton_chop"
+          "items": [
+            "farmersdelight:pasta_with_mutton_chop"
+          ]
         }
       }
     },
@@ -111,7 +133,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:roasted_mutton_chops"
+          "items": [
+            "farmersdelight:roasted_mutton_chops"
+          ]
         }
       }
     },
@@ -119,7 +143,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:vegetable_noodles"
+          "items": [
+            "farmersdelight:vegetable_noodles"
+          ]
         }
       }
     },
@@ -127,7 +153,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:steak_and_potatoes"
+          "items": [
+            "farmersdelight:steak_and_potatoes"
+          ]
         }
       }
     },
@@ -135,7 +163,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:ratatouille"
+          "items": [
+            "farmersdelight:ratatouille"
+          ]
         }
       }
     },
@@ -143,7 +173,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:squid_ink_pasta"
+          "items": [
+            "farmersdelight:squid_ink_pasta"
+          ]
         }
       }
     },
@@ -151,7 +183,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:grilled_salmon"
+          "items": [
+            "farmersdelight:grilled_salmon"
+          ]
         }
       }
     },
@@ -159,7 +193,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:roast_chicken"
+          "items": [
+            "farmersdelight:roast_chicken"
+          ]
         }
       }
     },
@@ -167,7 +203,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:stuffed_pumpkin"
+          "items": [
+            "farmersdelight:stuffed_pumpkin"
+          ]
         }
       }
     },
@@ -175,7 +213,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:honey_glazed_ham"
+          "items": [
+            "farmersdelight:honey_glazed_ham"
+          ]
         }
       }
     },
@@ -183,7 +223,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:shepherds_pie"
+          "items": [
+            "farmersdelight:shepherds_pie"
+          ]
         }
       }
     },
@@ -191,7 +233,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "farmersdelight:bacon_and_eggs"
+          "items": [
+            "farmersdelight:bacon_and_eggs"
+          ]
         }
       }
     }

@@ -33,11 +33,13 @@ public class CanvasSignTileEntityRenderer extends SignRenderer
 	public static final float TEXT_VERTICAL_OFFSET = 19;
 
 	private final SignRenderer.SignModel model;
+	private final Font font;
 
 	public CanvasSignTileEntityRenderer(BlockEntityRendererProvider.Context context) {
 		// TODO: Study whether you gotta map each dye color here, like Signs do to WoodType
 		super(context);
 		this.model = new SignModel(context.bakeLayer(ModelLayers.createSignModelName(WoodType.SPRUCE)));
+		this.font = context.getFont();
 	}
 
 	@Override
@@ -71,7 +73,7 @@ public class CanvasSignTileEntityRenderer extends SignRenderer
 		poseStack.popPose();
 
 		// Decorate the sign's text
-		Font fontRenderer = this.renderer.getFont();
+		//Font fontRenderer = this.renderer.getFont();
 		float textScale = 0.010416667F;
 		poseStack.translate(0.0D, 0.33333334F, 0.046666667F);
 		poseStack.scale(textScale, -textScale, textScale);
@@ -83,17 +85,17 @@ public class CanvasSignTileEntityRenderer extends SignRenderer
 		int textColor = NativeImage.combine(0, blue, green, red);
 
 		// Render the sign's text
-		for (int i = 0; i < 4; ++i) {
-			FormattedCharSequence reorderingProcessor = tileEntityIn.getRenderMessage(i, (textProps) -> {
-				List<FormattedCharSequence> textLines = fontRenderer.split(textProps, 90);
-				return textLines.isEmpty() ? FormattedCharSequence.EMPTY : textLines.get(0);
-			});
-			if (reorderingProcessor != null) {
-				float x = (float) (-fontRenderer.width(reorderingProcessor) / 2);
-				float y = i * TEXT_LINE_HEIGHT - TEXT_VERTICAL_OFFSET;
-				fontRenderer.drawInBatch(reorderingProcessor, x, y, textColor, false, poseStack.last().pose(), bufferIn, false, 0, combinedLightIn);
-			}
-		}
+//		for (int i = 0; i < 4; ++i) {
+//			FormattedCharSequence reorderingProcessor = tileEntityIn.getRenderMessage(i, (textProps) -> {
+//				List<FormattedCharSequence> textLines = fontRenderer.split(textProps, 90);
+//				return textLines.isEmpty() ? FormattedCharSequence.EMPTY : textLines.get(0);
+//			});
+//			if (reorderingProcessor != null) {
+//				float x = (float) (-fontRenderer.width(reorderingProcessor) / 2);
+//				float y = i * TEXT_LINE_HEIGHT - TEXT_VERTICAL_OFFSET;
+//				this.font.drawInBatch(reorderingProcessor, x, y, textColor, false, poseStack.last().pose(), bufferIn, false, 0, combinedLightIn);
+//			}
+//		}
 
 		poseStack.popPose();
 	}

@@ -4,14 +4,14 @@ import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import vectorwing.farmersdelight.registry.ModSounds;
-import vectorwing.farmersdelight.tile.SkilletTileEntity;
+import vectorwing.farmersdelight.tile.SkilletBlockEntity;
 
 public class SkilletSizzleTickableSound extends AbstractTickableSoundInstance
 {
-	private final SkilletTileEntity skillet;
+	private final SkilletBlockEntity skillet;
 	private final BlockPos pos;
 
-	public SkilletSizzleTickableSound(SkilletTileEntity skillet) {
+	public SkilletSizzleTickableSound(SkilletBlockEntity skillet) {
 		super(ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.BLOCKS);
 		this.volume = 0.5F;
 		this.looping = true;
