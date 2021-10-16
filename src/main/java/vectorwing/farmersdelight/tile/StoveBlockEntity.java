@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec2;
@@ -77,27 +78,39 @@ public class StoveBlockEntity extends SyncedBlockEntity
 		return compound;
 	}
 
-	public void tick() {
-		if (level == null) return;
+	public static void cookingTick(Level level, BlockPos pos, BlockState state, StoveBlockEntity stove) {
+		boolean isStoveLit = state.getValue(StoveBlock.LIT);
 
-		boolean isStoveLit = getBlockState().getValue(StoveBlock.LIT);
-		if (level.isClientSide) {
-			if (isStoveLit) {
-				addParticles();
+		if (stove.isStoveBlockedAbove()) {
+			if (!ItemUtils.isInventoryEmpty(stove.inventory)) {
+				ItemUtils.dropItems(level, pos, stove.inventory);
+				stove.inventoryChanged();
 			}
+		} else if (isStoveLit) {
+			stove.cookAndOutputItems();
 		} else {
-			if (isStoveBlockedAbove()) {
-				if (!ItemUtils.isInventoryEmpty(inventory)) {
-					ItemUtils.dropItems(level, worldPosition, inventory);
-					inventoryChanged();
+			for (int i = 0; i < stove.inventory.getSlots(); ++i) {
+				if (stove.cookingTimes[i] > 0) {
+					stove.cookingTimes[i] = Mth.clamp(stove.cookingTimes[i] - 2, 0, stove.cookingTimesTotal[i]);
 				}
-			} else if (isStoveLit) {
-				cookAndOutputItems();
-			} else {
-				for (int i = 0; i < inventory.getSlots(); ++i) {
-					if (cookingTimes[i] > 0) {
-						cookingTimes[i] = Mth.clamp(cookingTimes[i] - 2, 0, cookingTimesTotal[i]);
-					}
+			}
+		}
+	}
+
+	public static void animationTick(Level level, BlockPos pos, BlockState state, StoveBlockEntity stove) {
+		for (int i = 0; i < stove.inventory.getSlots(); ++i) {
+			if (!stove.inventory.getStackInSlot(i).isEmpty() && level.random.nextFloat() < 0.2F) {
+				Vec2 stoveItemVector = stove.getStoveItemOffset(i);
+				Direction direction = state.getValue(StoveBlock.FACING);
+				int directionIndex = direction.get2DDataValue();
+				Vec2 offset = directionIndex % 2 == 0 ? stoveItemVector : new Vec2(stoveItemVector.y, stoveItemVector.x);
+
+				double x = ((double) pos.getX() + 0.5D) - (direction.getStepX() * offset.x) + (direction.getClockWise().getStepX() * offset.x);
+				double y = (double) pos.getY() + 1.0D;
+				double z = ((double) pos.getZ() + 0.5D) - (direction.getStepZ() * offset.y) + (direction.getClockWise().getStepZ() * offset.y);
+
+				for (int k = 0; k < 3; ++k) {
+					level.addParticle(ParticleTypes.SMOKE, x, y, z, 0.0D, 5.0E-4D, 0.0D);
 				}
 			}
 		}

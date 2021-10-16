@@ -17,6 +17,8 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -29,6 +31,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolActions;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModBlockEntityTypes;
+import vectorwing.farmersdelight.tile.BasketBlockEntity;
 import vectorwing.farmersdelight.tile.StoveBlockEntity;
 import vectorwing.farmersdelight.utils.ItemUtils;
 import vectorwing.farmersdelight.utils.MathUtils;
@@ -164,6 +167,22 @@ public class StoveBlock extends BaseEntityBlock
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return ModBlockEntityTypes.STOVE_TILE.get().create(pos, state);
+	}
+
+	@Nullable
+	@Override
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+		if (state.getValue(LIT)) {
+			return createTickerHelper(blockEntityType, ModBlockEntityTypes.STOVE_TILE.get(), level.isClientSide
+					? StoveBlockEntity::animationTick
+					: StoveBlockEntity::cookingTick);
+		}
+		return null;
+//		if (level.isClientSide) {
+//			return state.getValue(LIT) ? createTickerHelper(blockEntityType, ModBlockEntityTypes.STOVE_TILE.get(), StoveBlockEntity::cookingTick) : null;
+//		} else {
+//			return state.getValue(LIT) ? createTickerHelper(blockEntityType, ModBlockEntityTypes.STOVE_TILE.get(), StoveBlockEntity::animationTick) : null;
+//		}
 	}
 
 	@Override

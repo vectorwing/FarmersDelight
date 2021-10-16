@@ -21,6 +21,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.CampfireBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -169,6 +172,15 @@ public class SkilletBlock extends BaseEntityBlock
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return ModBlockEntityTypes.SKILLET_TILE.get().create(pos, state);
+	}
+
+	@Nullable
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntity) {
+		if (level.isClientSide) {
+			return createTickerHelper(blockEntity, ModBlockEntityTypes.SKILLET_TILE.get(), SkilletBlockEntity::animationTick);
+		} else {
+			return createTickerHelper(blockEntity, ModBlockEntityTypes.SKILLET_TILE.get(), SkilletBlockEntity::cookingTick);
+		}
 	}
 
 	private boolean getTrayState(LevelAccessor world, BlockPos pos) {
