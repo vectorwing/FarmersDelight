@@ -15,7 +15,7 @@ import vectorwing.farmersdelight.registry.ModBlocks;
 @Mixin(BlockRendererDispatcher.class)
 public abstract class HideBlockBreakProgressMixin
 {
-	@Inject(method = "renderBlockDamage", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "renderBreakingTexture", at = @At("HEAD"), cancellable = true)
 	private void hideBlockDamage(BlockState blockStateIn, BlockPos posIn, IBlockDisplayReader lightReaderIn, MatrixStack matrixStackIn, IVertexBuilder vertexBuilderIn, CallbackInfo ci) {
 		if (blockStateIn.getBlock() == ModBlocks.CANVAS_RUG.get()) {
 			ci.cancel();

@@ -18,27 +18,27 @@ public class BlockTags extends BlockTagsProvider
 	}
 
 	@Override
-	protected void registerTags() {
+	protected void addTags() {
 		this.registerModTags();
 		this.registerMinecraftTags();
 		this.registerForgeTags();
 	}
 
 	protected void registerMinecraftTags() {
-		getOrCreateBuilder(net.minecraft.tags.BlockTags.BAMBOO_PLANTABLE_ON).add(
+		tag(net.minecraft.tags.BlockTags.BAMBOO_PLANTABLE_ON).add(
 				ModBlocks.RICH_SOIL.get());
-		getOrCreateBuilder(net.minecraft.tags.BlockTags.MUSHROOM_GROW_BLOCK).add(
+		tag(net.minecraft.tags.BlockTags.MUSHROOM_GROW_BLOCK).add(
 				ModBlocks.ORGANIC_COMPOST.get(),
 				ModBlocks.RICH_SOIL.get());
-		getOrCreateBuilder(net.minecraft.tags.BlockTags.CARPETS).add(
+		tag(net.minecraft.tags.BlockTags.CARPETS).add(
 				ModBlocks.FULL_TATAMI_MAT.get(),
 				ModBlocks.HALF_TATAMI_MAT.get());
-		getOrCreateBuilder(net.minecraft.tags.BlockTags.CROPS).add(
+		tag(net.minecraft.tags.BlockTags.CROPS).add(
 				ModBlocks.CABBAGE_CROP.get(),
 				ModBlocks.ONION_CROP.get(),
 				ModBlocks.RICE_UPPER_CROP.get(),
 				ModBlocks.TOMATO_CROP.get());
-		getOrCreateBuilder(net.minecraft.tags.BlockTags.STANDING_SIGNS).add(
+		tag(net.minecraft.tags.BlockTags.STANDING_SIGNS).add(
 				ModBlocks.CANVAS_SIGN.get(),
 				ModBlocks.WHITE_CANVAS_SIGN.get(),
 				ModBlocks.ORANGE_CANVAS_SIGN.get(),
@@ -56,7 +56,7 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.GREEN_CANVAS_SIGN.get(),
 				ModBlocks.RED_CANVAS_SIGN.get(),
 				ModBlocks.BLACK_CANVAS_SIGN.get());
-		getOrCreateBuilder(net.minecraft.tags.BlockTags.WALL_SIGNS).add(
+		tag(net.minecraft.tags.BlockTags.WALL_SIGNS).add(
 				ModBlocks.CANVAS_WALL_SIGN.get(),
 				ModBlocks.WHITE_CANVAS_WALL_SIGN.get(),
 				ModBlocks.ORANGE_CANVAS_WALL_SIGN.get(),
@@ -74,16 +74,16 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.GREEN_CANVAS_WALL_SIGN.get(),
 				ModBlocks.RED_CANVAS_WALL_SIGN.get(),
 				ModBlocks.BLACK_CANVAS_WALL_SIGN.get());
-		getOrCreateBuilder(net.minecraft.tags.BlockTags.SMALL_FLOWERS).addTag(ModTags.WILD_CROPS);
+		tag(net.minecraft.tags.BlockTags.SMALL_FLOWERS).addTag(ModTags.WILD_CROPS);
 	}
 
 	protected void registerForgeTags() {
-		getOrCreateBuilder(Tags.Blocks.DIRT).add(
+		tag(Tags.Blocks.DIRT).add(
 				ModBlocks.RICH_SOIL.get());
 	}
 
 	protected void registerModTags() {
-		getOrCreateBuilder(ModTags.WILD_CROPS).add(
+		tag(ModTags.WILD_CROPS).add(
 				ModBlocks.WILD_CARROTS.get(),
 				ModBlocks.WILD_POTATOES.get(),
 				ModBlocks.WILD_BEETROOTS.get(),
@@ -91,18 +91,18 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.WILD_TOMATOES.get(),
 				ModBlocks.WILD_ONIONS.get(),
 				ModBlocks.WILD_RICE.get());
-		getOrCreateBuilder(ModTags.TRAY_HEAT_SOURCES).add(
+		tag(ModTags.TRAY_HEAT_SOURCES).add(
 				Blocks.LAVA)
 				.addTag(net.minecraft.tags.BlockTags.CAMPFIRES)
 				.addTag(net.minecraft.tags.BlockTags.FIRE);
-		getOrCreateBuilder(ModTags.HEAT_SOURCES).add(
+		tag(ModTags.HEAT_SOURCES).add(
 				Blocks.MAGMA_BLOCK,
 				ModBlocks.STOVE.get())
 				.addTag(ModTags.TRAY_HEAT_SOURCES);
-		getOrCreateBuilder(ModTags.HEAT_CONDUCTORS).add(
+		tag(ModTags.HEAT_CONDUCTORS).add(
 				Blocks.HOPPER)
 				.addOptional(new ResourceLocation("create:chute"));
-		getOrCreateBuilder(ModTags.COMPOST_ACTIVATORS).add(
+		tag(ModTags.COMPOST_ACTIVATORS).add(
 				Blocks.BROWN_MUSHROOM,
 				Blocks.RED_MUSHROOM,
 				Blocks.PODZOL,
@@ -112,7 +112,7 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.RICH_SOIL_FARMLAND.get(),
 				ModBlocks.BROWN_MUSHROOM_COLONY.get(),
 				ModBlocks.RED_MUSHROOM_COLONY.get());
-		getOrCreateBuilder(ModTags.UNAFFECTED_BY_RICH_SOIL).add(
+		tag(ModTags.UNAFFECTED_BY_RICH_SOIL).add(
 				Blocks.GRASS,
 				Blocks.TALL_GRASS,
 				Blocks.FERN,

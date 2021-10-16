@@ -12,13 +12,13 @@ public class StarParticle extends SpriteTexturedParticle
 {
 	protected StarParticle(ClientWorld world, double posX, double posY, double posZ) {
 		super(world, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
-		this.motionX *= (double) 0.01F;
-		this.motionY *= (double) 0.01F;
-		this.motionZ *= (double) 0.01F;
-		this.motionY += 0.1D;
-		this.particleScale *= 1.5F;
-		this.maxAge = 16;
-		this.canCollide = false;
+		this.xd *= (double) 0.01F;
+		this.yd *= (double) 0.01F;
+		this.zd *= (double) 0.01F;
+		this.yd += 0.1D;
+		this.quadSize *= 1.5F;
+		this.lifetime = 16;
+		this.hasPhysics = false;
 	}
 
 	@Override
@@ -27,30 +27,30 @@ public class StarParticle extends SpriteTexturedParticle
 	}
 
 	@Override
-	public float getScale(float scaleFactor) {
-		return this.particleScale * MathHelper.clamp(((float) this.age + scaleFactor) / (float) this.maxAge * 32.0F, 0.0F, 1.0F);
+	public float getQuadSize(float scaleFactor) {
+		return this.quadSize * MathHelper.clamp(((float) this.age + scaleFactor) / (float) this.lifetime * 32.0F, 0.0F, 1.0F);
 	}
 
 	@Override
 	public void tick() {
-		this.prevPosX = this.posX;
-		this.prevPosY = this.posY;
-		this.prevPosZ = this.posZ;
-		if (this.age++ >= this.maxAge) {
-			this.setExpired();
+		this.xo = this.x;
+		this.yo = this.y;
+		this.zo = this.z;
+		if (this.age++ >= this.lifetime) {
+			this.remove();
 		} else {
-			this.move(this.motionX, this.motionY, this.motionZ);
-			if (this.posY == this.prevPosY) {
-				this.motionX *= 1.1D;
-				this.motionZ *= 1.1D;
+			this.move(this.xd, this.yd, this.zd);
+			if (this.y == this.yo) {
+				this.xd *= 1.1D;
+				this.zd *= 1.1D;
 			}
 
-			this.motionX *= (double) 0.86F;
-			this.motionY *= (double) 0.86F;
-			this.motionZ *= (double) 0.86F;
+			this.xd *= (double) 0.86F;
+			this.yd *= (double) 0.86F;
+			this.zd *= (double) 0.86F;
 			if (this.onGround) {
-				this.motionX *= (double) 0.7F;
-				this.motionZ *= (double) 0.7F;
+				this.xd *= (double) 0.7F;
+				this.zd *= (double) 0.7F;
 			}
 
 		}
@@ -66,9 +66,9 @@ public class StarParticle extends SpriteTexturedParticle
 		}
 
 		@Override
-		public Particle makeParticle(BasicParticleType typeIn, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		public Particle createParticle(BasicParticleType typeIn, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
 			StarParticle particle = new StarParticle(worldIn, x, y + 0.3D, z);
-			particle.selectSpriteRandomly(this.spriteSet);
+			particle.pickSprite(this.spriteSet);
 			particle.setColor(1.0F, 1.0F, 1.0F);
 			return particle;
 		}

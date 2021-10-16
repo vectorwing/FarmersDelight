@@ -21,11 +21,11 @@ import java.util.Map;
 public class VillageStructures
 {
 	public static void init() {
-		PlainsVillagePools.init();
-		SnowyVillagePools.init();
-		SavannaVillagePools.init();
-		DesertVillagePools.init();
-		TaigaVillagePools.init();
+		PlainsVillagePools.bootstrap();
+		SnowyVillagePools.bootstrap();
+		SavannaVillagePools.bootstrap();
+		DesertVillagePools.bootstrap();
+		TaigaVillagePools.bootstrap();
 
 		Map<String, Integer> biomeChances = (new ImmutableMap.Builder<String, Integer>())
 				.put("plains", 5)
@@ -41,14 +41,14 @@ public class VillageStructures
 	}
 
 	private static void addToPool(ResourceLocation pool, ResourceLocation toAdd, int weight) {
-		JigsawPattern old = WorldGenRegistries.JIGSAW_POOL.getOrDefault(pool);
-		List<JigsawPiece> shuffled = old.getShuffledPieces(MathUtils.RAND);
+		JigsawPattern old = WorldGenRegistries.TEMPLATE_POOL.get(pool);
+		List<JigsawPiece> shuffled = old.getShuffledTemplates(MathUtils.RAND);
 		List<Pair<JigsawPiece, Integer>> newPieces = new ArrayList<>();
 		for (JigsawPiece p : shuffled) {
 			newPieces.add(new Pair<>(p, 1));
 		}
 		newPieces.add(new Pair<>(new LegacySingleJigsawPiece(Either.left(toAdd), () -> ProcessorLists.EMPTY, JigsawPattern.PlacementBehaviour.RIGID), weight));
 		ResourceLocation name = old.getName();
-		Registry.register(WorldGenRegistries.JIGSAW_POOL, pool, new JigsawPattern(pool, name, newPieces));
+		Registry.register(WorldGenRegistries.TEMPLATE_POOL, pool, new JigsawPattern(pool, name, newPieces));
 	}
 }

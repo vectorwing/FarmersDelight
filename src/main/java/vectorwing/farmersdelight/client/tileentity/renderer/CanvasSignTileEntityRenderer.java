@@ -39,58 +39,58 @@ public class CanvasSignTileEntityRenderer extends SignTileEntityRenderer
 	public void render(SignTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		BlockState state = tileEntityIn.getBlockState();
 
-		matrixStackIn.push();
+		matrixStackIn.pushPose();
 
 		// Determine which kind of sign to render, and its rotation angle
 		if (state.getBlock() instanceof StandingSignBlock) {
 			matrixStackIn.translate(0.5D, 0.5D, 0.5D);
-			float angle = -((float) (state.get(StandingSignBlock.ROTATION) * 360) / 16.0F);
-			matrixStackIn.rotate(Vector3f.YP.rotationDegrees(angle));
-			this.model.signStick.showModel = true;
+			float angle = -((float) (state.getValue(StandingSignBlock.ROTATION) * 360) / 16.0F);
+			matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(angle));
+			this.model.stick.visible = true;
 		} else {
 			matrixStackIn.translate(0.5D, 0.5D, 0.5D);
-			float angle = -state.get(WallSignBlock.FACING).getHorizontalAngle();
-			matrixStackIn.rotate(Vector3f.YP.rotationDegrees(angle));
+			float angle = -state.getValue(WallSignBlock.FACING).toYRot();
+			matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(angle));
 			matrixStackIn.translate(0.0D, -0.3125D, -0.4375D);
-			this.model.signStick.showModel = false;
+			this.model.stick.visible = false;
 		}
 
 		// Render the sign
-		matrixStackIn.push();
+		matrixStackIn.pushPose();
 		float signScale = 0.6666667F;
 		matrixStackIn.scale(signScale, -signScale, -signScale);
 		RenderMaterial material = getMaterial(state.getBlock());
-		IVertexBuilder vertexBuilder = material.getBuffer(bufferIn, this.model::getRenderType);
-		this.model.signBoard.render(matrixStackIn, vertexBuilder, combinedLightIn, combinedOverlayIn);
-		this.model.signStick.render(matrixStackIn, vertexBuilder, combinedLightIn, combinedOverlayIn);
-		matrixStackIn.pop();
+		IVertexBuilder vertexBuilder = material.buffer(bufferIn, this.model::renderType);
+		this.model.sign.render(matrixStackIn, vertexBuilder, combinedLightIn, combinedOverlayIn);
+		this.model.stick.render(matrixStackIn, vertexBuilder, combinedLightIn, combinedOverlayIn);
+		matrixStackIn.popPose();
 
 		// Decorate the sign's text
-		FontRenderer fontRenderer = this.renderDispatcher.getFontRenderer();
+		FontRenderer fontRenderer = this.renderer.getFont();
 		float textScale = 0.010416667F;
 		matrixStackIn.translate(0.0D, 0.33333334F, 0.046666667F);
 		matrixStackIn.scale(textScale, -textScale, textScale);
-		int colorCode = tileEntityIn.getTextColor().getTextColor();
+		int colorCode = tileEntityIn.getColor().getTextColor();
 		double textBrightness = 0.6D;
-		int red = (int) ((double) NativeImage.getRed(colorCode) * textBrightness);
-		int green = (int) ((double) NativeImage.getGreen(colorCode) * textBrightness);
-		int blue = (int) ((double) NativeImage.getBlue(colorCode) * textBrightness);
-		int textColor = NativeImage.getCombined(0, blue, green, red);
+		int red = (int) ((double) NativeImage.getR(colorCode) * textBrightness);
+		int green = (int) ((double) NativeImage.getG(colorCode) * textBrightness);
+		int blue = (int) ((double) NativeImage.getB(colorCode) * textBrightness);
+		int textColor = NativeImage.combine(0, blue, green, red);
 
 		// Render the sign's text
 		for (int i = 0; i < 4; ++i) {
-			IReorderingProcessor reorderingProcessor = tileEntityIn.reorderText(i, (textProps) -> {
-				List<IReorderingProcessor> textLines = fontRenderer.trimStringToWidth(textProps, 90);
-				return textLines.isEmpty() ? IReorderingProcessor.field_242232_a : textLines.get(0);
+			IReorderingProcessor reorderingProcessor = tileEntityIn.getRenderMessage(i, (textProps) -> {
+				List<IReorderingProcessor> textLines = fontRenderer.split(textProps, 90);
+				return textLines.isEmpty() ? IReorderingProcessor.EMPTY : textLines.get(0);
 			});
 			if (reorderingProcessor != null) {
-				float x = (float) (-fontRenderer.func_243245_a(reorderingProcessor) / 2);
+				float x = (float) (-fontRenderer.width(reorderingProcessor) / 2);
 				float y = i * TEXT_LINE_HEIGHT - TEXT_VERTICAL_OFFSET;
-				fontRenderer.drawEntityText(reorderingProcessor, x, y, textColor, false, matrixStackIn.getLast().getMatrix(), bufferIn, false, 0, combinedLightIn);
+				fontRenderer.drawInBatch(reorderingProcessor, x, y, textColor, false, matrixStackIn.last().pose(), bufferIn, false, 0, combinedLightIn);
 			}
 		}
 
-		matrixStackIn.pop();
+		matrixStackIn.popPose();
 	}
 
 	public static RenderMaterial getMaterial(Block blockIn) {

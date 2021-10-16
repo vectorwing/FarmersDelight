@@ -29,16 +29,16 @@ public class CopyMealFunction extends LootFunction
 	}
 
 	public static LootFunction.Builder<?> builder() {
-		return builder(CopyMealFunction::new);
+		return simpleBuilder(CopyMealFunction::new);
 	}
 
 	@Override
-	protected ItemStack doApply(ItemStack stack, LootContext context) {
-		TileEntity tile = context.get(LootParameters.BLOCK_ENTITY);
+	protected ItemStack run(ItemStack stack, LootContext context) {
+		TileEntity tile = context.getParamOrNull(LootParameters.BLOCK_ENTITY);
 		if (tile instanceof CookingPotTileEntity) {
 			CompoundNBT tag = ((CookingPotTileEntity) tile).writeMeal(new CompoundNBT());
 			if (!tag.isEmpty()) {
-				stack.setTagInfo("BlockEntityTag", tag);
+				stack.addTagElement("BlockEntityTag", tag);
 			}
 		}
 		return stack;
@@ -46,7 +46,7 @@ public class CopyMealFunction extends LootFunction
 
 	@Override
 	@Nullable
-	public LootFunctionType getFunctionType() {
+	public LootFunctionType getType() {
 		return null;
 	}
 

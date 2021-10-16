@@ -17,7 +17,7 @@ public class FDItemGroup extends ItemGroup
 
 	@Nonnull
 	@Override
-	public ItemStack createIcon() {
+	public ItemStack makeIcon() {
 		return new ItemStack(ModBlocks.STOVE.get());
 	}
 

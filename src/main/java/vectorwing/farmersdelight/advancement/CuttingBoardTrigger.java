@@ -18,11 +18,11 @@ public class CuttingBoardTrigger extends AbstractCriterionTrigger<CuttingBoardTr
 	}
 
 	public void trigger(ServerPlayerEntity player) {
-		this.triggerListeners(player, Instance::test);
+		this.trigger(player, Instance::test);
 	}
 
 	@Override
-	protected Instance deserializeTrigger(JsonObject json, EntityPredicate.AndPredicate player, ConditionArrayParser conditionsParser) {
+	protected Instance createInstance(JsonObject json, EntityPredicate.AndPredicate player, ConditionArrayParser conditionsParser) {
 		return new CuttingBoardTrigger.Instance(player);
 	}
 
@@ -33,7 +33,7 @@ public class CuttingBoardTrigger extends AbstractCriterionTrigger<CuttingBoardTr
 		}
 
 		public static CuttingBoardTrigger.Instance simple() {
-			return new CuttingBoardTrigger.Instance(EntityPredicate.AndPredicate.ANY_AND);
+			return new CuttingBoardTrigger.Instance(EntityPredicate.AndPredicate.ANY);
 		}
 
 		public boolean test() {

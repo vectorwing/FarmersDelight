@@ -76,24 +76,24 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 	}
 
 	@Override
-	public void read(BlockState state, CompoundNBT compound) {
-		super.read(state, compound);
+	public void load(BlockState state, CompoundNBT compound) {
+		super.load(state, compound);
 		inventory.deserializeNBT(compound.getCompound("Inventory"));
 		cookTime = compound.getInt("CookTime");
 		cookTimeTotal = compound.getInt("CookTimeTotal");
-		mealContainerStack = ItemStack.read(compound.getCompound("Container"));
+		mealContainerStack = ItemStack.of(compound.getCompound("Container"));
 		if (compound.contains("CustomName", 8)) {
-			customName = ITextComponent.Serializer.getComponentFromJson(compound.getString("CustomName"));
+			customName = ITextComponent.Serializer.fromJson(compound.getString("CustomName"));
 		}
 		CompoundNBT compoundRecipes = compound.getCompound("RecipesUsed");
-		for (String key : compoundRecipes.keySet()) {
+		for (String key : compoundRecipes.getAllKeys()) {
 			experienceTracker.put(new ResourceLocation(key), compoundRecipes.getInt(key));
 		}
 	}
 
 	@Override
-	public CompoundNBT write(CompoundNBT compound) {
-		super.write(compound);
+	public CompoundNBT save(CompoundNBT compound) {
+		super.save(compound);
 		compound.putInt("CookTime", cookTime);
 		compound.putInt("CookTimeTotal", cookTimeTotal);
 		compound.put("Container", mealContainerStack.serializeNBT());
@@ -108,7 +108,7 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 	}
 
 	private CompoundNBT writeItems(CompoundNBT compound) {
-		super.write(compound);
+		super.save(compound);
 		compound.put("Container", mealContainerStack.serializeNBT());
 		compound.put("Inventory", inventory.serializeNBT());
 		return compound;
@@ -133,12 +133,12 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 
 	@Override
 	public void tick() {
-		if (world == null) return;
+		if (level == null) return;
 
-		boolean isHeated = isHeated(world, pos);
+		boolean isHeated = isHeated(level, worldPosition);
 		boolean didInventoryChange = false;
 
-		if (!world.isRemote) {
+		if (!level.isClientSide) {
 			if (isHeated && hasInput()) {
 				Optional<CookingPotRecipe> recipe = getMatchingRecipe(new RecipeWrapper(inventory));
 				if (recipe.isPresent() && canCook(recipe.get())) {
@@ -173,24 +173,24 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 	}
 
 	private Optional<CookingPotRecipe> getMatchingRecipe(RecipeWrapper inventoryWrapper) {
-		if (world == null) return Optional.empty();
+		if (level == null) return Optional.empty();
 
 		if (lastRecipeID != null) {
-			IRecipe<RecipeWrapper> recipe = ((RecipeManagerAccessor) world.getRecipeManager())
+			IRecipe<RecipeWrapper> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
 					.getRecipeMap(CookingPotRecipe.TYPE)
 					.get(lastRecipeID);
 			if (recipe instanceof CookingPotRecipe) {
-				if (recipe.matches(inventoryWrapper, world)) {
+				if (recipe.matches(inventoryWrapper, level)) {
 					return Optional.of((CookingPotRecipe) recipe);
 				}
-				if (recipe.getRecipeOutput().isItemEqual(getMeal())) {
+				if (recipe.getResultItem().sameItem(getMeal())) {
 					return Optional.empty();
 				}
 			}
 		}
 
 		if (checkNewRecipe) {
-			Optional<CookingPotRecipe> recipe = world.getRecipeManager().getRecipe(CookingPotRecipe.TYPE, inventoryWrapper, world);
+			Optional<CookingPotRecipe> recipe = level.getRecipeManager().getRecipeFor(CookingPotRecipe.TYPE, inventoryWrapper, level);
 			if (recipe.isPresent()) {
 				lastRecipeID = recipe.get().getId();
 				return recipe;
@@ -218,14 +218,14 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 
 	protected boolean canCook(CookingPotRecipe recipe) {
 		if (hasInput()) {
-			ItemStack resultStack = recipe.getRecipeOutput();
+			ItemStack resultStack = recipe.getResultItem();
 			if (resultStack.isEmpty()) {
 				return false;
 			} else {
 				ItemStack storedMealStack = inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
 				if (storedMealStack.isEmpty()) {
 					return true;
-				} else if (!storedMealStack.isItemEqual(resultStack)) {
+				} else if (!storedMealStack.sameItem(resultStack)) {
 					return false;
 				} else if (storedMealStack.getCount() + resultStack.getCount() <= inventory.getSlotLimit(MEAL_DISPLAY_SLOT)) {
 					return true;
@@ -239,7 +239,7 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 	}
 
 	private boolean processCooking(CookingPotRecipe recipe) {
-		if (world == null) return false;
+		if (level == null) return false;
 
 		++cookTime;
 		cookTimeTotal = recipe.getCookTime();
@@ -249,11 +249,11 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 
 		cookTime = 0;
 		mealContainerStack = recipe.getOutputContainer();
-		ItemStack resultStack = recipe.getRecipeOutput();
+		ItemStack resultStack = recipe.getResultItem();
 		ItemStack storedMealStack = inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
 		if (storedMealStack.isEmpty()) {
 			inventory.setStackInSlot(MEAL_DISPLAY_SLOT, resultStack.copy());
-		} else if (storedMealStack.isItemEqual(resultStack)) {
+		} else if (storedMealStack.sameItem(resultStack)) {
 			storedMealStack.grow(resultStack.getCount());
 		}
 		trackRecipeExperience(recipe);
@@ -261,12 +261,12 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 		for (int i = 0; i < MEAL_DISPLAY_SLOT; ++i) {
 			ItemStack slotStack = inventory.getStackInSlot(i);
 			if (slotStack.hasContainerItem()) {
-				Direction direction = getBlockState().get(CookingPotBlock.HORIZONTAL_FACING).rotateYCCW();
-				double x = pos.getX() + 0.5 + (direction.getXOffset() * 0.25);
-				double y = pos.getY() + 0.7;
-				double z = pos.getZ() + 0.5 + (direction.getZOffset() * 0.25);
-				ItemUtils.spawnItemEntity(world, inventory.getStackInSlot(i).getContainerItem(), x, y, z,
-						direction.getXOffset() * 0.08F, 0.25F, direction.getZOffset() * 0.08F);
+				Direction direction = getBlockState().getValue(CookingPotBlock.FACING).getCounterClockWise();
+				double x = worldPosition.getX() + 0.5 + (direction.getStepX() * 0.25);
+				double y = worldPosition.getY() + 0.7;
+				double z = worldPosition.getZ() + 0.5 + (direction.getStepZ() * 0.25);
+				ItemUtils.spawnItemEntity(level, inventory.getStackInSlot(i).getContainerItem(), x, y, z,
+						direction.getStepX() * 0.08F, 0.25F, direction.getStepZ() * 0.08F);
 			}
 			if (!slotStack.isEmpty())
 				slotStack.shrink(1);
@@ -275,21 +275,21 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 	}
 
 	private void animate() {
-		if (world == null) return;
+		if (level == null) return;
 
-		Random random = world.rand;
+		Random random = level.random;
 		if (random.nextFloat() < 0.2F) {
-			double x = (double) pos.getX() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);
-			double y = (double) pos.getY() + 0.7D;
-			double z = (double) pos.getZ() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);
-			world.addParticle(ParticleTypes.BUBBLE_POP, x, y, z, 0.0D, 0.0D, 0.0D);
+			double x = (double) worldPosition.getX() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);
+			double y = (double) worldPosition.getY() + 0.7D;
+			double z = (double) worldPosition.getZ() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);
+			level.addParticle(ParticleTypes.BUBBLE_POP, x, y, z, 0.0D, 0.0D, 0.0D);
 		}
 		if (random.nextFloat() < 0.05F) {
-			double x = (double) pos.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
-			double y = (double) pos.getY() + 0.5D;
-			double z = (double) pos.getZ() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
+			double x = (double) worldPosition.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
+			double y = (double) worldPosition.getY() + 0.5D;
+			double z = (double) worldPosition.getZ() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
 			double motionY = random.nextBoolean() ? 0.015D : 0.005D;
-			world.addParticle(ModParticleTypes.STEAM.get(), x, y, z, 0.0D, motionY, 0.0D);
+			level.addParticle(ModParticleTypes.STEAM.get(), x, y, z, 0.0D, motionY, 0.0D);
 		}
 	}
 
@@ -301,13 +301,13 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 	}
 
 	public void clearUsedRecipes(PlayerEntity player) {
-		grantStoredRecipeExperience(player.world, player.getPositionVec());
+		grantStoredRecipeExperience(player.level, player.position());
 		experienceTracker.clear();
 	}
 
 	public void grantStoredRecipeExperience(World world, Vector3d pos) {
 		for (Object2IntMap.Entry<ResourceLocation> entry : experienceTracker.object2IntEntrySet()) {
-			world.getRecipeManager().getRecipe(entry.getKey()).ifPresent((recipe) -> splitAndSpawnExperience(world, pos, entry.getIntValue(), ((CookingPotRecipe) recipe).getExperience()));
+			world.getRecipeManager().byKey(entry.getKey()).ifPresent((recipe) -> splitAndSpawnExperience(world, pos, entry.getIntValue(), ((CookingPotRecipe) recipe).getExperience()));
 		}
 	}
 
@@ -319,15 +319,15 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 		}
 
 		while (expTotal > 0) {
-			int expValue = ExperienceOrbEntity.getXPSplit(expTotal);
+			int expValue = ExperienceOrbEntity.getExperienceValue(expTotal);
 			expTotal -= expValue;
-			world.addEntity(new ExperienceOrbEntity(world, pos.x, pos.y, pos.z, expValue));
+			world.addFreshEntity(new ExperienceOrbEntity(world, pos.x, pos.y, pos.z, expValue));
 		}
 	}
 
 	public boolean isHeated() {
-		if (world == null) return false;
-		return this.isHeated(world, pos);
+		if (level == null) return false;
+		return this.isHeated(level, worldPosition);
 	}
 
 	public ItemStackHandler getInventory() {
@@ -394,9 +394,9 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 	public boolean isContainerValid(ItemStack containerItem) {
 		if (containerItem.isEmpty()) return false;
 		if (!mealContainerStack.isEmpty()) {
-			return mealContainerStack.isItemEqual(containerItem);
+			return mealContainerStack.sameItem(containerItem);
 		} else {
-			return getMeal().getContainerItem().isItemEqual(containerItem);
+			return getMeal().getContainerItem().sameItem(containerItem);
 		}
 	}
 
@@ -439,8 +439,8 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 	}
 
 	@Override
-	public void remove() {
-		super.remove();
+	public void setRemoved() {
+		super.setRemoved();
 		inputHandler.invalidate();
 		outputHandler.invalidate();
 	}
@@ -491,7 +491,7 @@ public class CookingPotTileEntity extends FDSyncedTileEntity implements INamedCo
 			}
 
 			@Override
-			public int size() {
+			public int getCount() {
 				return 2;
 			}
 		};

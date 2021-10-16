@@ -59,33 +59,33 @@ public class NourishedHungerOverlay
 
 		Minecraft minecraft = Minecraft.getInstance();
 		PlayerEntity player = minecraft.player;
-		FoodStats stats = player.getFoodStats();
+		FoodStats stats = player.getFoodData();
 
-		int left = minecraft.getMainWindow().getScaledWidth() / 2 + 91;
-		int top = minecraft.getMainWindow().getScaledHeight() - foodIconsOffset;
+		int left = minecraft.getWindow().getGuiScaledWidth() / 2 + 91;
+		int top = minecraft.getWindow().getGuiScaledHeight() - foodIconsOffset;
 
 		boolean isPlayerHealingWithSaturation =
-				player.world.getGameRules().getBoolean(GameRules.NATURAL_REGENERATION)
-						&& player.shouldHeal()
+				player.level.getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION)
+						&& player.isHurt()
 						&& stats.getSaturationLevel() > 0.0F
 						&& stats.getFoodLevel() >= 20;
 
-		if (player.getActivePotionEffect(ModEffects.NOURISHED.get()) != null) {
+		if (player.getEffect(ModEffects.NOURISHED.get()) != null) {
 			drawNourishedOverlay(stats, minecraft, event.getMatrixStack(), left, top, isPlayerHealingWithSaturation);
 		}
 	}
 
 	public static void drawNourishedOverlay(FoodStats stats, Minecraft mc, MatrixStack matrixStack, int left, int top, boolean naturalHealing) {
-		matrixStack.push();
+		matrixStack.pushPose();
 		matrixStack.translate(0, 0, 0.01);
 
 		float saturation = stats.getSaturationLevel();
 		int foodLevel = stats.getFoodLevel();
-		int ticks = mc.ingameGUI.getTicks();
+		int ticks = mc.gui.getGuiTicks();
 		Random rand = new Random();
 		rand.setSeed((long) (ticks * 312871));
 
-		mc.getTextureManager().bindTexture(MOD_ICONS_TEXTURE);
+		mc.getTextureManager().bind(MOD_ICONS_TEXTURE);
 		RenderSystem.enableBlend();
 
 		for (int j = 0; j < 10; ++j) {
@@ -97,20 +97,20 @@ public class NourishedHungerOverlay
 			}
 
 			// Background texture
-			mc.ingameGUI.blit(matrixStack, x, y, 0, 0, 11, 11);
+			mc.gui.blit(matrixStack, x, y, 0, 0, 11, 11);
 
 			float effectiveHungerOfBar = (stats.getFoodLevel()) / 2.0F - j;
 			int naturalHealingOffset = naturalHealing ? 18 : 0;
 
 			// Gilded hunger icons
 			if (effectiveHungerOfBar >= 1)
-				mc.ingameGUI.blit(matrixStack, x, y, 18 + naturalHealingOffset, 0, 9, 9);
+				mc.gui.blit(matrixStack, x, y, 18 + naturalHealingOffset, 0, 9, 9);
 			else if (effectiveHungerOfBar >= .5)
-				mc.ingameGUI.blit(matrixStack, x, y, 9 + naturalHealingOffset, 0, 9, 9);
+				mc.gui.blit(matrixStack, x, y, 9 + naturalHealingOffset, 0, 9, 9);
 		}
 
 		RenderSystem.disableBlend();
-		matrixStack.pop();
-		mc.getTextureManager().bindTexture(AbstractGui.GUI_ICONS_LOCATION);
+		matrixStack.popPose();
+		mc.getTextureManager().bind(AbstractGui.GUI_ICONS_LOCATION);
 	}
 }

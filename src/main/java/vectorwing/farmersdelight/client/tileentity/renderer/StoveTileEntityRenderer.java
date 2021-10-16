@@ -30,24 +30,24 @@ public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
 
 	@Override
 	public void render(StoveTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
-		Direction direction = tileEntityIn.getBlockState().get(StoveBlock.HORIZONTAL_FACING).getOpposite();
+		Direction direction = tileEntityIn.getBlockState().getValue(StoveBlock.FACING).getOpposite();
 
 		ItemStackHandler inventory = tileEntityIn.getInventory();
 
 		for (int i = 0; i < inventory.getSlots(); ++i) {
 			ItemStack stoveStack = inventory.getStackInSlot(i);
 			if (!stoveStack.isEmpty()) {
-				matrixStackIn.push();
+				matrixStackIn.pushPose();
 
 				// Center item above the stove
 				matrixStackIn.translate(0.5D, 1.02D, 0.5D);
 
 				// Rotate item to face the stove's front side
-				float f = -direction.getHorizontalAngle();
-				matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f));
+				float f = -direction.toYRot();
+				matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f));
 
 				// Rotate item flat on the stove. Use X and Y from now on
-				matrixStackIn.rotate(Vector3f.XP.rotationDegrees(90.0F));
+				matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(90.0F));
 
 				// Neatly align items according to their index
 				Vector2f itemOffset = tileEntityIn.getStoveItemOffset(i);
@@ -56,9 +56,9 @@ public class StoveTileEntityRenderer extends TileEntityRenderer<StoveTileEntity>
 				// Resize the items
 				matrixStackIn.scale(0.375F, 0.375F, 0.375F);
 
-				if (tileEntityIn.getWorld() != null)
-					MC.getItemRenderer().renderItem(stoveStack, ItemCameraTransforms.TransformType.FIXED, WorldRenderer.getCombinedLight(tileEntityIn.getWorld(), tileEntityIn.getPos().up()), combinedOverlayIn, matrixStackIn, bufferIn);
-				matrixStackIn.pop();
+				if (tileEntityIn.getLevel() != null)
+					MC.getItemRenderer().renderStatic(stoveStack, ItemCameraTransforms.TransformType.FIXED, WorldRenderer.getLightColor(tileEntityIn.getLevel(), tileEntityIn.getBlockPos().above()), combinedOverlayIn, matrixStackIn, bufferIn);
+				matrixStackIn.popPose();
 			}
 		}
 	}

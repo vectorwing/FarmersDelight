@@ -83,12 +83,12 @@ public class CuttingBoardRecipeBuilder
 	}
 
 	public void build(Consumer<IFinishedRecipe> consumerIn) {
-		ResourceLocation location = ForgeRegistries.ITEMS.getKey(this.ingredient.getMatchingStacks()[0].getItem());
+		ResourceLocation location = ForgeRegistries.ITEMS.getKey(this.ingredient.getItems()[0].getItem());
 		this.build(consumerIn, FarmersDelight.MODID + ":cutting/" + location.getPath());
 	}
 
 	public void build(Consumer<IFinishedRecipe> consumerIn, String save) {
-		ResourceLocation resourcelocation = ForgeRegistries.ITEMS.getKey(this.ingredient.getMatchingStacks()[0].getItem());
+		ResourceLocation resourcelocation = ForgeRegistries.ITEMS.getKey(this.ingredient.getItems()[0].getItem());
 		if ((new ResourceLocation(save)).equals(resourcelocation)) {
 			throw new IllegalStateException("Cutting Recipe " + save + " should remove its 'save' argument");
 		} else {
@@ -117,12 +117,12 @@ public class CuttingBoardRecipeBuilder
 		}
 
 		@Override
-		public void serialize(JsonObject json) {
+		public void serializeRecipeData(JsonObject json) {
 			JsonArray arrayIngredients = new JsonArray();
-			arrayIngredients.add(this.ingredient.serialize());
+			arrayIngredients.add(this.ingredient.toJson());
 			json.add("ingredients", arrayIngredients);
 
-			json.add("tool", this.tool.serialize());
+			json.add("tool", this.tool.toJson());
 
 			JsonArray arrayResults = new JsonArray();
 			for (ChanceResult result : this.results) {
@@ -143,24 +143,24 @@ public class CuttingBoardRecipeBuilder
 		}
 
 		@Override
-		public ResourceLocation getID() {
+		public ResourceLocation getId() {
 			return this.id;
 		}
 
 		@Override
-		public IRecipeSerializer<?> getSerializer() {
+		public IRecipeSerializer<?> getType() {
 			return CuttingBoardRecipe.SERIALIZER;
 		}
 
 		@Nullable
 		@Override
-		public JsonObject getAdvancementJson() {
+		public JsonObject serializeAdvancement() {
 			return null;
 		}
 
 		@Nullable
 		@Override
-		public ResourceLocation getAdvancementID() {
+		public ResourceLocation getAdvancementId() {
 			return null;
 		}
 	}

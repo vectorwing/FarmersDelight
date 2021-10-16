@@ -46,40 +46,42 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 @SuppressWarnings("deprecation")
 public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 {
 	public static final EnumProperty<CookingPotSupport> SUPPORT = EnumProperty.create("support", CookingPotSupport.class);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D);
-	protected static final VoxelShape SHAPE_WITH_TRAY = VoxelShapes.or(SHAPE, Block.makeCuboidShape(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
+	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D);
+	protected static final VoxelShape SHAPE_WITH_TRAY = VoxelShapes.or(SHAPE, Block.box(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
 
 	public CookingPotBlock() {
-		super(Properties.create(Material.IRON)
-				.hardnessAndResistance(2.0F, 6.0F)
+		super(Properties.of(Material.METAL)
+				.strength(2.0F, 6.0F)
 				.sound(SoundType.LANTERN));
-		this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH).with(SUPPORT, CookingPotSupport.NONE).with(WATERLOGGED, false));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(SUPPORT, CookingPotSupport.NONE).setValue(WATERLOGGED, false));
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player,
+	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player,
 											 Hand handIn, BlockRayTraceResult result) {
-		ItemStack heldStack = player.getHeldItem(handIn);
-		if (heldStack.isEmpty() && player.isSneaking()) {
-			world.setBlockState(pos, state.with(SUPPORT, state.get(SUPPORT).equals(CookingPotSupport.HANDLE)
+		ItemStack heldStack = player.getItemInHand(handIn);
+		if (heldStack.isEmpty() && player.isShiftKeyDown()) {
+			world.setBlockAndUpdate(pos, state.setValue(SUPPORT, state.getValue(SUPPORT).equals(CookingPotSupport.HANDLE)
 					? getTrayState(world, pos) : CookingPotSupport.HANDLE));
-			world.playSound(null, pos, SoundEvents.BLOCK_LANTERN_PLACE, SoundCategory.BLOCKS, 0.7F, 1.0F);
-		} else if (!world.isRemote) {
-			TileEntity tileEntity = world.getTileEntity(pos);
+			world.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundCategory.BLOCKS, 0.7F, 1.0F);
+		} else if (!world.isClientSide) {
+			TileEntity tileEntity = world.getBlockEntity(pos);
 			if (tileEntity instanceof CookingPotTileEntity) {
 				CookingPotTileEntity cookingPotEntity = (CookingPotTileEntity) tileEntity;
 				ItemStack servingStack = cookingPotEntity.useHeldItemOnMeal(heldStack);
 				if (servingStack != ItemStack.EMPTY) {
-					if (!player.inventory.addItemStackToInventory(servingStack)) {
-						player.dropItem(servingStack, false);
+					if (!player.inventory.add(servingStack)) {
+						player.drop(servingStack, false);
 					}
-					world.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.BLOCKS, 1.0F, 1.0F);
+					world.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				} else {
 					NetworkHooks.openGui((ServerPlayerEntity) player, cookingPotEntity, pos);
 				}
@@ -96,79 +98,79 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 
 	@Override
 	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return state.get(SUPPORT).equals(CookingPotSupport.TRAY) ? SHAPE_WITH_TRAY : SHAPE;
+		return state.getValue(SUPPORT).equals(CookingPotSupport.TRAY) ? SHAPE_WITH_TRAY : SHAPE;
 	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		BlockPos pos = context.getPos();
-		World world = context.getWorld();
-		FluidState fluid = world.getFluidState(context.getPos());
+		BlockPos pos = context.getClickedPos();
+		World world = context.getLevel();
+		FluidState fluid = world.getFluidState(context.getClickedPos());
 
-		BlockState state = this.getDefaultState()
-				.with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite())
-				.with(WATERLOGGED, fluid.getFluid() == Fluids.WATER);
+		BlockState state = this.defaultBlockState()
+				.setValue(FACING, context.getHorizontalDirection().getOpposite())
+				.setValue(WATERLOGGED, fluid.getType() == Fluids.WATER);
 
-		if (context.getFace().equals(Direction.DOWN)) {
-			return state.with(SUPPORT, CookingPotSupport.HANDLE);
+		if (context.getClickedFace().equals(Direction.DOWN)) {
+			return state.setValue(SUPPORT, CookingPotSupport.HANDLE);
 		}
-		return state.with(SUPPORT, getTrayState(world, pos));
+		return state.setValue(SUPPORT, getTrayState(world, pos));
 	}
 
 	@Override
-	public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
-		if (state.get(WATERLOGGED)) {
-			world.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+		if (state.getValue(WATERLOGGED)) {
+			world.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
 		}
-		if (facing.getAxis().equals(Direction.Axis.Y) && !state.get(SUPPORT).equals(CookingPotSupport.HANDLE)) {
-			return state.with(SUPPORT, getTrayState(world, currentPos));
+		if (facing.getAxis().equals(Direction.Axis.Y) && !state.getValue(SUPPORT).equals(CookingPotSupport.HANDLE)) {
+			return state.setValue(SUPPORT, getTrayState(world, currentPos));
 		}
 		return state;
 	}
 
 	private CookingPotSupport getTrayState(IWorld world, BlockPos pos) {
-		if (world.getBlockState(pos.down()).getBlock().isIn(ModTags.TRAY_HEAT_SOURCES)) {
+		if (world.getBlockState(pos.below()).getBlock().is(ModTags.TRAY_HEAT_SOURCES)) {
 			return CookingPotSupport.TRAY;
 		}
 		return CookingPotSupport.NONE;
 	}
 
 	@Override
-	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
-		ItemStack stack = super.getItem(worldIn, pos, state);
-		CookingPotTileEntity cookingPotEntity = (CookingPotTileEntity) worldIn.getTileEntity(pos);
+	public ItemStack getCloneItemStack(IBlockReader worldIn, BlockPos pos, BlockState state) {
+		ItemStack stack = super.getCloneItemStack(worldIn, pos, state);
+		CookingPotTileEntity cookingPotEntity = (CookingPotTileEntity) worldIn.getBlockEntity(pos);
 		if (cookingPotEntity != null) {
 			CompoundNBT nbt = cookingPotEntity.writeMeal(new CompoundNBT());
 			if (!nbt.isEmpty()) {
-				stack.setTagInfo("BlockEntityTag", nbt);
+				stack.addTagElement("BlockEntityTag", nbt);
 			}
 			if (cookingPotEntity.hasCustomName()) {
-				stack.setDisplayName(cookingPotEntity.getCustomName());
+				stack.setHoverName(cookingPotEntity.getCustomName());
 			}
 		}
 		return stack;
 	}
 
 	@Override
-	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+	public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
-			TileEntity tileEntity = worldIn.getTileEntity(pos);
+			TileEntity tileEntity = worldIn.getBlockEntity(pos);
 			if (tileEntity instanceof CookingPotTileEntity) {
 				CookingPotTileEntity cookingPotEntity = (CookingPotTileEntity) tileEntity;
-				InventoryHelper.dropItems(worldIn, pos, cookingPotEntity.getDroppableInventory());
-				cookingPotEntity.grantStoredRecipeExperience(worldIn, Vector3d.copyCentered(pos));
-				worldIn.updateComparatorOutputLevel(pos, this);
+				InventoryHelper.dropContents(worldIn, pos, cookingPotEntity.getDroppableInventory());
+				cookingPotEntity.grantStoredRecipeExperience(worldIn, Vector3d.atCenterOf(pos));
+				worldIn.updateNeighbourForOutputSignal(pos, this);
 			}
 
-			super.onReplaced(state, worldIn, pos, newState, isMoving);
+			super.onRemove(state, worldIn, pos, newState, isMoving);
 		}
 	}
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void addInformation(ItemStack stack, @Nullable IBlockReader worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		super.addInformation(stack, worldIn, tooltip, flagIn);
-		CompoundNBT nbt = stack.getChildTag("BlockEntityTag");
+	public void appendHoverText(ItemStack stack, @Nullable IBlockReader worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+		super.appendHoverText(stack, worldIn, tooltip, flagIn);
+		CompoundNBT nbt = stack.getTagElement("BlockEntityTag");
 		if (nbt != null) {
 			CompoundNBT inventoryTag = nbt.getCompound("Inventory");
 			if (inventoryTag.contains("Items", 9)) {
@@ -179,29 +181,29 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 					IFormattableTextComponent textServingsOf = mealStack.getCount() == 1
 							? TextUtils.getTranslation("tooltip.cooking_pot.single_serving")
 							: TextUtils.getTranslation("tooltip.cooking_pot.many_servings", mealStack.getCount());
-					tooltip.add(textServingsOf.mergeStyle(TextFormatting.GRAY));
-					IFormattableTextComponent textMealName = mealStack.getDisplayName().deepCopy();
-					tooltip.add(textMealName.mergeStyle(mealStack.getRarity().color));
+					tooltip.add(textServingsOf.withStyle(TextFormatting.GRAY));
+					IFormattableTextComponent textMealName = mealStack.getHoverName().copy();
+					tooltip.add(textMealName.withStyle(mealStack.getRarity().color));
 				}
 			}
 		} else {
 			IFormattableTextComponent textEmpty = TextUtils.getTranslation("tooltip.cooking_pot.empty");
-			tooltip.add(textEmpty.mergeStyle(TextFormatting.GRAY));
+			tooltip.add(textEmpty.withStyle(TextFormatting.GRAY));
 		}
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		super.fillStateContainer(builder);
-		builder.add(HORIZONTAL_FACING, SUPPORT, WATERLOGGED);
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+		super.createBlockStateDefinition(builder);
+		builder.add(FACING, SUPPORT, WATERLOGGED);
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-		if (stack.hasDisplayName()) {
-			TileEntity tileEntity = worldIn.getTileEntity(pos);
+	public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+		if (stack.hasCustomHoverName()) {
+			TileEntity tileEntity = worldIn.getBlockEntity(pos);
 			if (tileEntity instanceof CookingPotTileEntity) {
-				((CookingPotTileEntity) tileEntity).setCustomName(stack.getDisplayName());
+				((CookingPotTileEntity) tileEntity).setCustomName(stack.getHoverName());
 			}
 		}
 	}
@@ -209,7 +211,7 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		TileEntity tileEntity = worldIn.getTileEntity(pos);
+		TileEntity tileEntity = worldIn.getBlockEntity(pos);
 		if (tileEntity instanceof CookingPotTileEntity && ((CookingPotTileEntity) tileEntity).isHeated()) {
 			CookingPotTileEntity cookingPotEntity = (CookingPotTileEntity) tileEntity;
 			SoundEvent boilSound = !cookingPotEntity.getMeal().isEmpty()
@@ -219,19 +221,19 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 			double y = pos.getY();
 			double z = (double) pos.getZ() + 0.5D;
 			if (rand.nextInt(10) == 0) {
-				worldIn.playSound(x, y, z, boilSound, SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.2F + 0.9F, false);
+				worldIn.playLocalSound(x, y, z, boilSound, SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.2F + 0.9F, false);
 			}
 		}
 	}
 
 	@Override
-	public boolean hasComparatorInputOverride(BlockState state) {
+	public boolean hasAnalogOutputSignal(BlockState state) {
 		return true;
 	}
 
 	@Override
-	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-		TileEntity tileEntity = worldIn.getTileEntity(pos);
+	public int getAnalogOutputSignal(BlockState blockState, World worldIn, BlockPos pos) {
+		TileEntity tileEntity = worldIn.getBlockEntity(pos);
 		if (tileEntity instanceof CookingPotTileEntity) {
 			ItemStackHandler inventory = ((CookingPotTileEntity) tileEntity).getInventory();
 			return MathUtils.calcRedstoneFromItemHandler(inventory);
@@ -251,6 +253,6 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 
 	@Override
 	public FluidState getFluidState(BlockState state) {
-		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 }

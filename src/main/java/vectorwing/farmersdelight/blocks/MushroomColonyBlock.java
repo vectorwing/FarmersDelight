@@ -29,6 +29,8 @@ import vectorwing.farmersdelight.registry.ModBlocks;
 import java.util.Random;
 import java.util.function.Supplier;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 @SuppressWarnings("deprecation")
 public class MushroomColonyBlock extends BushBlock implements IGrowable
 {
@@ -36,23 +38,23 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 	public static final int PLACING_LIGHT_LEVEL = 13;
 	public final Supplier<Item> mushroomType;
 
-	public static final IntegerProperty COLONY_AGE = BlockStateProperties.AGE_0_3;
+	public static final IntegerProperty COLONY_AGE = BlockStateProperties.AGE_3;
 	protected static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
-			Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D),
-			Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 10.0D, 13.0D),
-			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D),
-			Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 14.0D, 15.0D),
+			Block.box(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D),
+			Block.box(3.0D, 0.0D, 3.0D, 13.0D, 10.0D, 13.0D),
+			Block.box(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D),
+			Block.box(1.0D, 0.0D, 1.0D, 15.0D, 14.0D, 15.0D),
 	};
 
 	public MushroomColonyBlock(Properties properties, Supplier<Item> mushroomType) {
 		super(properties);
 		this.mushroomType = mushroomType;
-		this.setDefaultState(this.stateContainer.getBaseState().with(COLONY_AGE, 0));
+		this.registerDefaultState(this.stateDefinition.any().setValue(COLONY_AGE, 0));
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return SHAPE_BY_AGE[state.get(this.getAgeProperty())];
+		return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
 	}
 
 	public IntegerProperty getAgeProperty() {
@@ -60,32 +62,32 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 	}
 
 	@Override
-	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return state.isOpaqueCube(worldIn, pos);
+	protected boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos) {
+		return state.isSolidRender(worldIn, pos);
 	}
 
 	@Override
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		BlockPos floorPos = pos.down();
+	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		BlockPos floorPos = pos.below();
 		BlockState floorState = worldIn.getBlockState(floorPos);
-		if (floorState.isIn(BlockTags.MUSHROOM_GROW_BLOCK)) {
+		if (floorState.is(BlockTags.MUSHROOM_GROW_BLOCK)) {
 			return true;
 		} else {
-			return worldIn.getLightSubtracted(pos, 0) < PLACING_LIGHT_LEVEL && floorState.canSustainPlant(worldIn, floorPos, net.minecraft.util.Direction.UP, this);
+			return worldIn.getRawBrightness(pos, 0) < PLACING_LIGHT_LEVEL && floorState.canSustainPlant(worldIn, floorPos, net.minecraft.util.Direction.UP, this);
 		}
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		int age = state.get(COLONY_AGE);
-		ItemStack heldStack = player.getHeldItem(handIn);
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		int age = state.getValue(COLONY_AGE);
+		ItemStack heldStack = player.getItemInHand(handIn);
 
-		if (age > 0 && heldStack.getItem().isIn(Tags.Items.SHEARS)) {
-			spawnAsEntity(worldIn, pos, this.getItem(worldIn, pos, state));
-			worldIn.playSound(null, pos, SoundEvents.ENTITY_MOOSHROOM_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
-			worldIn.setBlockState(pos, state.with(COLONY_AGE, age - 1), 2);
-			if (!worldIn.isRemote) {
-				heldStack.damageItem(1, player, (playerIn) -> playerIn.sendBreakAnimation(handIn));
+		if (age > 0 && heldStack.getItem().is(Tags.Items.SHEARS)) {
+			popResource(worldIn, pos, this.getCloneItemStack(worldIn, pos, state));
+			worldIn.playSound(null, pos, SoundEvents.MOOSHROOM_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
+			worldIn.setBlock(pos, state.setValue(COLONY_AGE, age - 1), 2);
+			if (!worldIn.isClientSide) {
+				heldStack.hurtAndBreak(1, player, (playerIn) -> playerIn.broadcastBreakEvent(handIn));
 			}
 			return ActionResultType.SUCCESS;
 		}
@@ -94,7 +96,7 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 	}
 
 	@Override
-	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return false;
 	}
 
@@ -103,34 +105,34 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 	}
 
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(World worldIn, Random rand, BlockPos pos, BlockState state) {
 		return false;
 	}
 
 	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
 		super.tick(state, worldIn, pos, rand);
-		int age = state.get(COLONY_AGE);
-		BlockState groundState = worldIn.getBlockState(pos.down());
-		if (age < this.getMaxAge() && groundState.getBlock() == ModBlocks.RICH_SOIL.get() && worldIn.getLightSubtracted(pos.up(), 0) <= GROWING_LIGHT_LEVEL && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(5) == 0)) {
-			worldIn.setBlockState(pos, state.with(COLONY_AGE, age + 1), 2);
+		int age = state.getValue(COLONY_AGE);
+		BlockState groundState = worldIn.getBlockState(pos.below());
+		if (age < this.getMaxAge() && groundState.getBlock() == ModBlocks.RICH_SOIL.get() && worldIn.getRawBrightness(pos.above(), 0) <= GROWING_LIGHT_LEVEL && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(5) == 0)) {
+			worldIn.setBlock(pos, state.setValue(COLONY_AGE, age + 1), 2);
 			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 		}
 	}
 
 	@Override
-	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(IBlockReader worldIn, BlockPos pos, BlockState state) {
 		return new ItemStack(this.mushroomType.get());
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(COLONY_AGE);
 	}
 
 	@Override
-	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
-		int age = Math.min(3, state.get(COLONY_AGE) + 1);
-		worldIn.setBlockState(pos, state.with(COLONY_AGE, age), 2);
+	public void performBonemeal(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
+		int age = Math.min(3, state.getValue(COLONY_AGE) + 1);
+		worldIn.setBlock(pos, state.setValue(COLONY_AGE, age), 2);
 	}
 }

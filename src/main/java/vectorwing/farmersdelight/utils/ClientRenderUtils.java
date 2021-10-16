@@ -26,10 +26,10 @@ public class ClientRenderUtils
 	 */
 	public static void renderItemIntoGUIScalable(ItemStack stack, int width, int height, IBakedModel bakedmodel, ItemRenderer renderer, TextureManager textureManager) {
 		RenderSystem.pushMatrix();
-		textureManager.bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
-		Texture texture = textureManager.getTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
+		textureManager.bind(AtlasTexture.LOCATION_BLOCKS);
+		Texture texture = textureManager.getTexture(AtlasTexture.LOCATION_BLOCKS);
 		if (texture != null) {
-			texture.setBlurMipmapDirect(false, false);
+			texture.setFilter(false, false);
 		}
 		RenderSystem.enableRescaleNormal();
 		RenderSystem.enableAlphaTest();
@@ -37,22 +37,22 @@ public class ClientRenderUtils
 		RenderSystem.enableBlend();
 		RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-		RenderSystem.translatef((float) 0, (float) 0, 100.0F + renderer.zLevel);
+		RenderSystem.translatef((float) 0, (float) 0, 100.0F + renderer.blitOffset);
 		RenderSystem.translatef(8.0F, 8.0F, 0.0F);
 		RenderSystem.scalef(1.0F, -1.0F, 1.0F);
 		RenderSystem.scalef(48.0F, 48.0F, 48.0F);
 		MatrixStack matrixStack = new MatrixStack();
-		IRenderTypeBuffer.Impl irendertypebuffer$impl = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
-		boolean flag = !bakedmodel.isSideLit();
+		IRenderTypeBuffer.Impl irendertypebuffer$impl = Minecraft.getInstance().renderBuffers().bufferSource();
+		boolean flag = !bakedmodel.usesBlockLight();
 		if (flag) {
-			RenderHelper.setupGuiFlatDiffuseLighting();
+			RenderHelper.setupForFlatItems();
 		}
 
-		renderer.renderItem(stack, ItemCameraTransforms.TransformType.GUI, false, matrixStack, irendertypebuffer$impl, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
-		irendertypebuffer$impl.finish();
+		renderer.render(stack, ItemCameraTransforms.TransformType.GUI, false, matrixStack, irendertypebuffer$impl, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
+		irendertypebuffer$impl.endBatch();
 		RenderSystem.enableDepthTest();
 		if (flag) {
-			RenderHelper.setupGui3DDiffuseLighting();
+			RenderHelper.setupFor3DItems();
 		}
 
 		RenderSystem.disableAlphaTest();

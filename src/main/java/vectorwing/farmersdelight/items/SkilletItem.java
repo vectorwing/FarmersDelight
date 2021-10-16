@@ -53,11 +53,11 @@ public class SkilletItem extends BlockItem
 	private final Multimap<Attribute, AttributeModifier> toolAttributes;
 
 	public SkilletItem(Block blockIn, Item.Properties builderIn) {
-		super(blockIn, builderIn.defaultMaxDamage(SKILLET_TIER.getMaxUses()));
-		float attackDamage = 4.0F + SKILLET_TIER.getAttackDamage();
+		super(blockIn, builderIn.defaultDurability(SKILLET_TIER.getUses()));
+		float attackDamage = 4.0F + SKILLET_TIER.getAttackDamageBonus();
 		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", attackDamage, AttributeModifier.Operation.ADDITION));
-		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", -3.1F, AttributeModifier.Operation.ADDITION));
+		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", attackDamage, AttributeModifier.Operation.ADDITION));
+		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Tool modifier", -3.1F, AttributeModifier.Operation.ADDITION));
 		this.toolAttributes = builder.build();
 	}
 
@@ -66,8 +66,8 @@ public class SkilletItem extends BlockItem
 	{
 		@SubscribeEvent
 		public static void onSkilletKnockback(LivingKnockBackEvent event) {
-			LivingEntity attacker = event.getEntityLiving().getAttackingEntity();
-			ItemStack tool = attacker != null ? attacker.getHeldItem(Hand.MAIN_HAND) : ItemStack.EMPTY;
+			LivingEntity attacker = event.getEntityLiving().getKillCredit();
+			ItemStack tool = attacker != null ? attacker.getItemInHand(Hand.MAIN_HAND) : ItemStack.EMPTY;
 			if (tool.getItem() instanceof SkilletItem) {
 				event.setStrength(event.getOriginalStrength() * 2.0F);
 			}
@@ -76,32 +76,32 @@ public class SkilletItem extends BlockItem
 		@SubscribeEvent
 		public static void onSkilletAttack(AttackEntityEvent event) {
 			PlayerEntity player = event.getPlayer();
-			float attackPower = player.getCooledAttackStrength(0.0F);
-			ItemStack tool = player.getHeldItem(Hand.MAIN_HAND);
+			float attackPower = player.getAttackStrengthScale(0.0F);
+			ItemStack tool = player.getItemInHand(Hand.MAIN_HAND);
 			if (tool.getItem() instanceof SkilletItem) {
 				if (attackPower > 0.8F) {
 					float pitch = 0.9F + (random.nextFloat() * 0.2F);
-					player.getEntityWorld().playSound(player, player.getPosX(), player.getPosY(), player.getPosZ(), ModSounds.ITEM_SKILLET_ATTACK_STRONG.get(), SoundCategory.PLAYERS, 1.0F, pitch);
+					player.getCommandSenderWorld().playSound(player, player.getX(), player.getY(), player.getZ(), ModSounds.ITEM_SKILLET_ATTACK_STRONG.get(), SoundCategory.PLAYERS, 1.0F, pitch);
 				} else {
-					player.getEntityWorld().playSound(player, player.getPosX(), player.getPosY(), player.getPosZ(), ModSounds.ITEM_SKILLET_ATTACK_WEAK.get(), SoundCategory.PLAYERS, 0.8F, 0.9F);
+					player.getCommandSenderWorld().playSound(player, player.getX(), player.getY(), player.getZ(), ModSounds.ITEM_SKILLET_ATTACK_WEAK.get(), SoundCategory.PLAYERS, 0.8F, 0.9F);
 				}
 			}
 		}
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		stack.damageItem(1, attacker, (user) -> user.sendBreakAnimation(EquipmentSlotType.MAINHAND));
+	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+		stack.hurtAndBreak(1, attacker, (user) -> user.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 		return true;
 	}
 
 	private static boolean isPlayerNearHeatSource(PlayerEntity player, IWorldReader worldIn) {
-		if (player.isBurning()) {
+		if (player.isOnFire()) {
 			return true;
 		}
-		BlockPos pos = player.getPosition();
-		for (BlockPos nearbyPos : BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, 1, 1))) {
-			if (worldIn.getBlockState(nearbyPos).isIn(ModTags.HEAT_SOURCES)) {
+		BlockPos pos = player.blockPosition();
+		for (BlockPos nearbyPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
+			if (worldIn.getBlockState(nearbyPos).is(ModTags.HEAT_SOURCES)) {
 				return true;
 			}
 		}
@@ -110,21 +110,21 @@ public class SkilletItem extends BlockItem
 
 	@Override
 	public int getUseDuration(ItemStack stack) {
-		int fireAspectLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.FIRE_ASPECT, stack);
+		int fireAspectLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FIRE_ASPECT, stack);
 		int cookingTime = stack.getOrCreateTag().getInt("CookTimeHandheld");
 		return SkilletBlock.getSkilletCookingTime(cookingTime, fireAspectLevel);
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-		ItemStack skilletStack = player.getHeldItem(hand);
+	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+		ItemStack skilletStack = player.getItemInHand(hand);
 		if (isPlayerNearHeatSource(player, world)) {
 			Hand otherHand = hand == Hand.MAIN_HAND ? Hand.OFF_HAND : Hand.MAIN_HAND;
-			ItemStack cookingStack = player.getHeldItem(otherHand);
+			ItemStack cookingStack = player.getItemInHand(otherHand);
 
 			if (skilletStack.getOrCreateTag().contains("Cooking")) {
-				player.setActiveHand(hand);
-				return ActionResult.resultPass(skilletStack);
+				player.startUsingItem(hand);
+				return ActionResult.pass(skilletStack);
 			}
 
 			Optional<CampfireCookingRecipe> recipe = getCookingRecipe(cookingStack, world);
@@ -132,33 +132,33 @@ public class SkilletItem extends BlockItem
 				ItemStack cookingStackCopy = cookingStack.copy();
 				ItemStack cookingStackUnit = cookingStackCopy.split(1);
 				skilletStack.getOrCreateTag().put("Cooking", cookingStackUnit.serializeNBT());
-				skilletStack.getOrCreateTag().putInt("CookTimeHandheld", recipe.get().getCookTime());
-				player.setActiveHand(hand);
-				player.setHeldItem(otherHand, cookingStackCopy);
-				return ActionResult.resultConsume(skilletStack);
+				skilletStack.getOrCreateTag().putInt("CookTimeHandheld", recipe.get().getCookingTime());
+				player.startUsingItem(hand);
+				player.setItemInHand(otherHand, cookingStackCopy);
+				return ActionResult.consume(skilletStack);
 			} else {
-				player.sendStatusMessage(TextUtils.getTranslation("item.skillet.how_to_cook"), true);
+				player.displayClientMessage(TextUtils.getTranslation("item.skillet.how_to_cook"), true);
 			}
 		}
-		return ActionResult.resultPass(skilletStack);
+		return ActionResult.pass(skilletStack);
 	}
 
 	@Override
-	public void onUse(World worldIn, LivingEntity livingEntityIn, ItemStack stack, int count) {
+	public void onUseTick(World worldIn, LivingEntity livingEntityIn, ItemStack stack, int count) {
 		if (livingEntityIn instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) livingEntityIn;
-			Vector3d pos = player.getPositionVec();
-			double x = pos.getX() + 0.5D;
-			double y = pos.getY();
-			double z = pos.getZ() + 0.5D;
-			if (worldIn.rand.nextInt(50) == 0) {
-				worldIn.playSound(x, y, z, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundCategory.BLOCKS, 0.4F, worldIn.rand.nextFloat() * 0.2F + 0.9F, false);
+			Vector3d pos = player.position();
+			double x = pos.x() + 0.5D;
+			double y = pos.y();
+			double z = pos.z() + 0.5D;
+			if (worldIn.random.nextInt(50) == 0) {
+				worldIn.playLocalSound(x, y, z, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundCategory.BLOCKS, 0.4F, worldIn.random.nextFloat() * 0.2F + 0.9F, false);
 			}
 		}
 	}
 
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
+	public void releaseUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
 		if (!(entityLiving instanceof PlayerEntity)) {
 			return;
 		}
@@ -167,7 +167,7 @@ public class SkilletItem extends BlockItem
 		CompoundNBT tag = stack.getOrCreateTag();
 
 		if (tag.contains("Cooking")) {
-			ItemStack cookingStack = ItemStack.read(tag.getCompound("Cooking"));
+			ItemStack cookingStack = ItemStack.of(tag.getCompound("Cooking"));
 			player.inventory.placeItemBackInInventory(worldIn, cookingStack);
 			tag.remove("Cooking");
 			tag.remove("CookTimeHandheld");
@@ -175,7 +175,7 @@ public class SkilletItem extends BlockItem
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World world, LivingEntity entityLiving) {
+	public ItemStack finishUsingItem(ItemStack stack, World world, LivingEntity entityLiving) {
 		if (!(entityLiving instanceof PlayerEntity)) {
 			return stack;
 		}
@@ -184,13 +184,13 @@ public class SkilletItem extends BlockItem
 		CompoundNBT tag = stack.getOrCreateTag();
 
 		if (tag.contains("Cooking")) {
-			ItemStack cookingStack = ItemStack.read(tag.getCompound("Cooking"));
+			ItemStack cookingStack = ItemStack.of(tag.getCompound("Cooking"));
 			Optional<CampfireCookingRecipe> cookingRecipe = getCookingRecipe(cookingStack, world);
 
 			cookingRecipe.ifPresent((recipe) -> {
-				ItemStack resultStack = recipe.getCraftingResult(new Inventory());
-				if (!player.inventory.addItemStackToInventory(resultStack)) {
-					player.dropItem(resultStack, false);
+				ItemStack resultStack = recipe.assemble(new Inventory());
+				if (!player.inventory.add(resultStack)) {
+					player.drop(resultStack, false);
 				}
 				if (player instanceof ServerPlayerEntity) {
 					CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayerEntity) player, stack);
@@ -207,13 +207,13 @@ public class SkilletItem extends BlockItem
 		if (stack.isEmpty()) {
 			return Optional.empty();
 		}
-		return world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, new Inventory(stack), world);
+		return world.getRecipeManager().getRecipeFor(IRecipeType.CAMPFIRE_COOKING, new Inventory(stack), world);
 	}
 
 	@Override
-	protected boolean onBlockPlaced(BlockPos pos, World worldIn, @Nullable PlayerEntity player, ItemStack stack, BlockState state) {
-		super.onBlockPlaced(pos, worldIn, player, stack, state);
-		TileEntity tileEntity = worldIn.getTileEntity(pos);
+	protected boolean updateCustomBlockEntityTag(BlockPos pos, World worldIn, @Nullable PlayerEntity player, ItemStack stack, BlockState state) {
+		super.updateCustomBlockEntityTag(pos, worldIn, player, stack, state);
+		TileEntity tileEntity = worldIn.getBlockEntity(pos);
 		if (tileEntity instanceof SkilletTileEntity) {
 			((SkilletTileEntity) tileEntity).setSkilletItem(stack);
 			return true;
@@ -222,14 +222,14 @@ public class SkilletItem extends BlockItem
 	}
 
 	@Override
-	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-		return SKILLET_TIER.getRepairMaterial().test(repair) || super.getIsRepairable(toRepair, repair);
+	public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
+		return SKILLET_TIER.getRepairIngredient().test(repair) || super.isValidRepairItem(toRepair, repair);
 	}
 
-	public boolean onBlockDestroyed(ItemStack stack, World worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
-		if (!worldIn.isRemote && state.getBlockHardness(worldIn, pos) != 0.0F) {
-			stack.damageItem(1, entityLiving, (entity) -> {
-				entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+	public boolean mineBlock(ItemStack stack, World worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
+		if (!worldIn.isClientSide && state.getDestroySpeed(worldIn, pos) != 0.0F) {
+			stack.hurtAndBreak(1, entityLiving, (entity) -> {
+				entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND);
 			});
 		}
 
@@ -237,29 +237,29 @@ public class SkilletItem extends BlockItem
 	}
 
 	@Override
-	public ActionResultType tryPlace(BlockItemUseContext context) {
+	public ActionResultType place(BlockItemUseContext context) {
 		PlayerEntity player = context.getPlayer();
-		if (player != null && player.isSneaking()) {
-			return super.tryPlace(context);
+		if (player != null && player.isShiftKeyDown()) {
+			return super.place(context);
 		}
 		return ActionResultType.PASS;
 	}
 
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack, net.minecraft.enchantment.Enchantment enchantment) {
-		if (enchantment.type.equals(EnchantmentType.WEAPON)) {
-			Set<Enchantment> DENIED_ENCHANTMENTS = Sets.newHashSet(Enchantments.SWEEPING);
+		if (enchantment.category.equals(EnchantmentType.WEAPON)) {
+			Set<Enchantment> DENIED_ENCHANTMENTS = Sets.newHashSet(Enchantments.SWEEPING_EDGE);
 			return !DENIED_ENCHANTMENTS.contains(enchantment);
 		}
-		return enchantment.type.canEnchantItem(stack.getItem());
+		return enchantment.category.canEnchant(stack.getItem());
 	}
 
 	@Override
-	public int getItemEnchantability() {
-		return SKILLET_TIER.getEnchantability();
+	public int getEnchantmentValue() {
+		return SKILLET_TIER.getEnchantmentValue();
 	}
 
-	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot) {
-		return equipmentSlot == EquipmentSlotType.MAINHAND ? this.toolAttributes : super.getAttributeModifiers(equipmentSlot);
+	public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlotType equipmentSlot) {
+		return equipmentSlot == EquipmentSlotType.MAINHAND ? this.toolAttributes : super.getDefaultAttributeModifiers(equipmentSlot);
 	}
 }

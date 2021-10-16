@@ -36,7 +36,7 @@ public class ToolIngredient extends Ingredient
 	}
 
 	@Override
-	public JsonElement serialize() {
+	public JsonElement toJson() {
 		JsonObject json = new JsonObject();
 		json.addProperty("type", CraftingHelper.getID(SERIALIZER).toString());
 		json.addProperty("tool", toolType.getName());
@@ -57,12 +57,12 @@ public class ToolIngredient extends Ingredient
 
 		@Override
 		public ToolIngredient parse(PacketBuffer buffer) {
-			return new ToolIngredient(ToolType.get(buffer.readString()));
+			return new ToolIngredient(ToolType.get(buffer.readUtf()));
 		}
 
 		@Override
 		public void write(PacketBuffer buffer, ToolIngredient ingredient) {
-			buffer.writeString(ingredient.toolType.getName());
+			buffer.writeUtf(ingredient.toolType.getName());
 		}
 	}
 }

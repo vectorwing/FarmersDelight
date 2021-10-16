@@ -64,14 +64,14 @@ public class ModTags
 	public static final ITag.INamedTag<EntityType<?>> HORSE_FEED_USERS = modEntityTag("horse_feed_users");
 
 	private static ITag.INamedTag<Item> modItemTag(String path) {
-		return ItemTags.makeWrapperTag(FarmersDelight.MODID + ":" + path);
+		return ItemTags.bind(FarmersDelight.MODID + ":" + path);
 	}
 
 	private static ITag.INamedTag<Block> modBlockTag(String path) {
-		return BlockTags.makeWrapperTag(FarmersDelight.MODID + ":" + path);
+		return BlockTags.bind(FarmersDelight.MODID + ":" + path);
 	}
 
 	private static ITag.INamedTag<EntityType<?>> modEntityTag(String path) {
-		return EntityTypeTags.getTagById(FarmersDelight.MODID + ":" + path);
+		return EntityTypeTags.bind(FarmersDelight.MODID + ":" + path);
 	}
 }

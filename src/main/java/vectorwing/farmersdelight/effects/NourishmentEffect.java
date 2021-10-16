@@ -21,26 +21,26 @@ public class NourishmentEffect extends Effect
 		super(EffectType.BENEFICIAL, 0);
 	}
 
-	public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
-		if (!entityLivingBaseIn.getEntityWorld().isRemote && entityLivingBaseIn instanceof PlayerEntity) {
+	public void applyEffectTick(LivingEntity entityLivingBaseIn, int amplifier) {
+		if (!entityLivingBaseIn.getCommandSenderWorld().isClientSide && entityLivingBaseIn instanceof PlayerEntity) {
 			PlayerEntity player = ((PlayerEntity) entityLivingBaseIn);
-			FoodStats foodStats = player.getFoodStats();
+			FoodStats foodStats = player.getFoodData();
 			boolean isPlayerHealingWithSaturation =
-					player.world.getGameRules().getBoolean(GameRules.NATURAL_REGENERATION)
-							&& player.shouldHeal()
+					player.level.getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION)
+							&& player.isHurt()
 							&& foodStats.getSaturationLevel() > 0.0F
 							&& foodStats.getFoodLevel() >= 20;
 			if (!isPlayerHealingWithSaturation) {
-				float exhaustion = player.getFoodStats().foodExhaustionLevel;
+				float exhaustion = player.getFoodData().exhaustionLevel;
 				if (exhaustion > 0.1F) {
-					player.addExhaustion(-0.1F);
+					player.causeFoodExhaustion(-0.1F);
 				}
 			}
 		}
 	}
 
 	@Override
-	public boolean isReady(int duration, int amplifier) {
+	public boolean isDurationEffectTick(int duration, int amplifier) {
 		return true;
 	}
 }

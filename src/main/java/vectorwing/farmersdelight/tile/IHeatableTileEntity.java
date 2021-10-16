@@ -17,19 +17,19 @@ public interface IHeatableTileEntity
 	 * Checks for heat sources below the block. If it can, it also checks for conducted heat.
 	 */
 	default boolean isHeated(World world, BlockPos pos) {
-		BlockState stateBelow = world.getBlockState(pos.down());
+		BlockState stateBelow = world.getBlockState(pos.below());
 
 		if (ModTags.HEAT_SOURCES.contains(stateBelow.getBlock())) {
 			if (stateBelow.hasProperty(BlockStateProperties.LIT))
-				return stateBelow.get(BlockStateProperties.LIT);
+				return stateBelow.getValue(BlockStateProperties.LIT);
 			return true;
 		}
 
 		if (!this.requiresDirectHeat() && ModTags.HEAT_CONDUCTORS.contains(stateBelow.getBlock())) {
-			BlockState stateFurtherBelow = world.getBlockState(pos.down(2));
+			BlockState stateFurtherBelow = world.getBlockState(pos.below(2));
 			if (ModTags.HEAT_SOURCES.contains(stateFurtherBelow.getBlock())) {
 				if (stateFurtherBelow.hasProperty(BlockStateProperties.LIT))
-					return stateFurtherBelow.get(BlockStateProperties.LIT);
+					return stateFurtherBelow.getValue(BlockStateProperties.LIT);
 				return true;
 			}
 		}

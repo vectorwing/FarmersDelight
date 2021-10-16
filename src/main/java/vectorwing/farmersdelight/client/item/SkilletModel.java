@@ -44,11 +44,11 @@ public class SkilletModel implements IBakedModel
 	{
 		@Nonnull
 		@Override
-		public IBakedModel getOverrideModel(@Nonnull IBakedModel model, ItemStack stack, @Nullable ClientWorld worldIn, @Nullable LivingEntity entityIn) {
+		public IBakedModel resolve(@Nonnull IBakedModel model, ItemStack stack, @Nullable ClientWorld worldIn, @Nullable LivingEntity entityIn) {
 			CompoundNBT tag = stack.getOrCreateTag();
 
 			if (tag.contains("Cooking")) {
-				ItemStack ingredientStack = ItemStack.read(tag.getCompound("Cooking"));
+				ItemStack ingredientStack = ItemStack.of(tag.getCompound("Cooking"));
 				return SkilletModel.this.getCookingModel(ingredientStack);
 			}
 
@@ -70,13 +70,13 @@ public class SkilletModel implements IBakedModel
 
 	@Nonnull
 	@Override
-	public ItemCameraTransforms getItemCameraTransforms() {
-		return originalModel.getItemCameraTransforms();
+	public ItemCameraTransforms getTransforms() {
+		return originalModel.getTransforms();
 	}
 
 	@Override
-	public boolean isAmbientOcclusion() {
-		return originalModel.isAmbientOcclusion();
+	public boolean useAmbientOcclusion() {
+		return originalModel.useAmbientOcclusion();
 	}
 
 	@Override
@@ -85,19 +85,19 @@ public class SkilletModel implements IBakedModel
 	}
 
 	@Override
-	public boolean isSideLit() {
-		return originalModel.isSideLit();
+	public boolean usesBlockLight() {
+		return originalModel.usesBlockLight();
 	}
 
 	@Override
-	public boolean isBuiltInRenderer() {
-		return originalModel.isBuiltInRenderer();
+	public boolean isCustomRenderer() {
+		return originalModel.isCustomRenderer();
 	}
 
 	@Nonnull
 	@Override
-	public TextureAtlasSprite getParticleTexture() {
-		return originalModel.getParticleTexture();
+	public TextureAtlasSprite getParticleIcon() {
+		return originalModel.getParticleIcon();
 	}
 
 	private final HashMap<Item, CompositeBakedModel> cache = new HashMap<>();
@@ -115,7 +115,7 @@ public class SkilletModel implements IBakedModel
 			super(skillet);
 
 			ResourceLocation ingredientLocation = ForgeRegistries.ITEMS.getKey(ingredientStack.getItem());
-			IUnbakedModel ingredientUnbaked = bakery.getUnbakedModel(new ModelResourceLocation(ingredientLocation, "inventory"));
+			IUnbakedModel ingredientUnbaked = bakery.getModel(new ModelResourceLocation(ingredientLocation, "inventory"));
 			IModelTransform transform = new SimpleModelTransform(
 					new TransformationMatrix(
 							new Vector3f(0.0F, -0.4F, 0.0F),
@@ -124,13 +124,13 @@ public class SkilletModel implements IBakedModel
 			ResourceLocation name = new ResourceLocation(FarmersDelight.MODID, "skillet_with_" + ingredientLocation.toString().replace(':', '_'));
 
 			IBakedModel ingredientBaked;
-			if (ingredientUnbaked instanceof BlockModel && ((BlockModel) ingredientUnbaked).getRootModel() == ModelBakery.MODEL_GENERATED) {
+			if (ingredientUnbaked instanceof BlockModel && ((BlockModel) ingredientUnbaked).getRootModel() == ModelBakery.GENERATION_MARKER) {
 				BlockModel bm = (BlockModel) ingredientUnbaked;
 				ingredientBaked = new ItemModelGenerator()
-						.makeItemModel(ModelLoader.defaultTextureGetter(), bm)
-						.bakeModel(bakery, bm, ModelLoader.defaultTextureGetter(), transform, name, false);
+						.generateBlockModel(ModelLoader.defaultTextureGetter(), bm)
+						.bake(bakery, bm, ModelLoader.defaultTextureGetter(), transform, name, false);
 			} else {
-				ingredientBaked = ingredientUnbaked.bakeModel(bakery, ModelLoader.defaultTextureGetter(), transform, name);
+				ingredientBaked = ingredientUnbaked.bake(bakery, ModelLoader.defaultTextureGetter(), transform, name);
 			}
 
 			for (Direction e : Direction.values()) {
@@ -154,8 +154,8 @@ public class SkilletModel implements IBakedModel
 		}
 
 		@Override
-		public boolean isBuiltInRenderer() {
-			return originalModel.isBuiltInRenderer();
+		public boolean isCustomRenderer() {
+			return originalModel.isCustomRenderer();
 		}
 
 		@Nonnull

@@ -38,7 +38,7 @@ public class JEIPlugin implements IModPlugin
 	private static final Minecraft MC = Minecraft.getInstance();
 
 	private static List<IRecipe<?>> findRecipesByType(IRecipeType<?> type) {
-		return MC.world
+		return MC.level
 				.getRecipeManager()
 				.getRecipes()
 				.stream()

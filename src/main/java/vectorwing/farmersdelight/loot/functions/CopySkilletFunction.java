@@ -19,6 +19,8 @@ import vectorwing.farmersdelight.tile.SkilletTileEntity;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import net.minecraft.loot.LootFunction.Builder;
+
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class CopySkilletFunction extends LootFunction
@@ -30,16 +32,16 @@ public class CopySkilletFunction extends LootFunction
 	}
 
 	public static Builder<?> builder() {
-		return builder(CopySkilletFunction::new);
+		return simpleBuilder(CopySkilletFunction::new);
 	}
 
 	@Override
-	protected ItemStack doApply(ItemStack stack, LootContext context) {
-		TileEntity tile = context.get(LootParameters.BLOCK_ENTITY);
+	protected ItemStack run(ItemStack stack, LootContext context) {
+		TileEntity tile = context.getParamOrNull(LootParameters.BLOCK_ENTITY);
 		if (tile instanceof SkilletTileEntity) {
 			CompoundNBT tag = ((SkilletTileEntity) tile).writeSkilletItem(new CompoundNBT());
 			if (!tag.isEmpty()) {
-				stack = ItemStack.read(tag.getCompound("Skillet"));
+				stack = ItemStack.of(tag.getCompound("Skillet"));
 			}
 		}
 		return stack;
@@ -47,7 +49,7 @@ public class CopySkilletFunction extends LootFunction
 
 	@Override
 	@Nullable
-	public LootFunctionType getFunctionType() {
+	public LootFunctionType getType() {
 		return null;
 	}
 

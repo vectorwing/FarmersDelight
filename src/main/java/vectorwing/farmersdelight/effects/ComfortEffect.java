@@ -18,7 +18,7 @@ import java.util.Set;
 @SuppressWarnings("unused")
 public class ComfortEffect extends Effect
 {
-	public static final Set<Effect> COMFORT_IMMUNITIES = Sets.newHashSet(Effects.SLOWNESS, Effects.WEAKNESS, Effects.HUNGER);
+	public static final Set<Effect> COMFORT_IMMUNITIES = Sets.newHashSet(Effects.MOVEMENT_SLOWDOWN, Effects.WEAKNESS, Effects.HUNGER);
 
 	/**
 	 * This effect makes the player immune to negative effects related to cold and sickness.
@@ -37,7 +37,7 @@ public class ComfortEffect extends Effect
 		public static void onComfortDuration(PotionEvent.PotionApplicableEvent event) {
 			EffectInstance effect = event.getPotionEffect();
 			LivingEntity entity = event.getEntityLiving();
-			if (entity.getActivePotionEffect(ModEffects.COMFORT.get()) != null && COMFORT_IMMUNITIES.contains(effect.getPotion())) {
+			if (entity.getEffect(ModEffects.COMFORT.get()) != null && COMFORT_IMMUNITIES.contains(effect.getEffect())) {
 				event.setResult(Event.Result.DENY);
 			}
 		}
@@ -46,16 +46,16 @@ public class ComfortEffect extends Effect
 		public static void onComfortApplied(PotionEvent.PotionAddedEvent event) {
 			EffectInstance addedEffect = event.getPotionEffect();
 			LivingEntity entity = event.getEntityLiving();
-			if (addedEffect.getPotion().equals(ModEffects.COMFORT.get())) {
+			if (addedEffect.getEffect().equals(ModEffects.COMFORT.get())) {
 				for (Effect effect : COMFORT_IMMUNITIES) {
-					entity.removePotionEffect(effect);
+					entity.removeEffect(effect);
 				}
 			}
 		}
 	}
 
 	@Override
-	public boolean isReady(int duration, int amplifier) {
+	public boolean isDurationEffectTick(int duration, int amplifier) {
 		return true;
 	}
 }

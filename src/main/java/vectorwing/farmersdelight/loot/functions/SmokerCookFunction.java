@@ -27,14 +27,14 @@ public class SmokerCookFunction extends LootFunction {
     }
 
     @Override
-    protected ItemStack doApply(ItemStack stack, LootContext context) {
+    protected ItemStack run(ItemStack stack, LootContext context) {
         if (stack.isEmpty()) {
             return stack;
         } else {
-            Optional<SmokingRecipe> recipe = context.getWorld().getRecipeManager().getRecipesForType(IRecipeType.SMOKING).stream()
+            Optional<SmokingRecipe> recipe = context.getLevel().getRecipeManager().getAllRecipesFor(IRecipeType.SMOKING).stream()
                     .filter(r -> r.getIngredients().get(0).test(stack)).findFirst();
             if (recipe.isPresent()) {
-                ItemStack result = recipe.get().getRecipeOutput().copy();
+                ItemStack result = recipe.get().getResultItem().copy();
                 result.setCount(result.getCount() * stack.getCount());
                 return result;
             } else {
@@ -45,7 +45,7 @@ public class SmokerCookFunction extends LootFunction {
 
     @Override
     @Nullable
-    public LootFunctionType getFunctionType() {
+    public LootFunctionType getType() {
         return null;
     }
 

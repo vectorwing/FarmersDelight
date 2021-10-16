@@ -30,33 +30,33 @@ public class CuttingBoardDispenseBehavior extends OptionalDispenseBehavior
 	private static final HashMap<Item, IDispenseItemBehavior> DISPENSE_ITEM_BEHAVIOR_HASH_MAP = new HashMap<>();
 
 	public static void registerBehaviour(Item item, CuttingBoardDispenseBehavior behavior) {
-		DISPENSE_ITEM_BEHAVIOR_HASH_MAP.put(item, BEHAVIOUR_LOOKUP.getBehavior(new ItemStack(item))); // Save the old behaviours so they can be used later
-		DispenserBlock.registerDispenseBehavior(item, behavior);
+		DISPENSE_ITEM_BEHAVIOR_HASH_MAP.put(item, BEHAVIOUR_LOOKUP.getDispenseMethod(new ItemStack(item))); // Save the old behaviours so they can be used later
+		DispenserBlock.registerBehavior(item, behavior);
 	}
 
 	@Override
 	public final ItemStack dispense(IBlockSource source, ItemStack stack) {
 		if (tryDispenseStackOnCuttingBoard(source, stack)) {
-			this.playDispenseSound(source); // I added this because i completely overrode the super implementation which had the sounds.
-			this.spawnDispenseParticles(source, source.getBlockState().get(DispenserBlock.FACING)); // see above, same reasoning
+			this.playSound(source); // I added this because i completely overrode the super implementation which had the sounds.
+			this.playAnimation(source, source.getBlockState().getValue(DispenserBlock.FACING)); // see above, same reasoning
 			return stack;
 		}
 		return DISPENSE_ITEM_BEHAVIOR_HASH_MAP.get(stack.getItem()).dispense(source, stack); // Not targetted on cutting board, use vanilla/other mods behaviour
 	}
 
 	public boolean tryDispenseStackOnCuttingBoard(IBlockSource source, ItemStack stack) {
-		setSuccessful(false);
-		World world = source.getWorld();
-		BlockPos blockpos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
+		setSuccess(false);
+		World world = source.getLevel();
+		BlockPos blockpos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
 		BlockState blockstate = world.getBlockState(blockpos);
 		Block block = blockstate.getBlock();
-		TileEntity te = world.getTileEntity(blockpos);
+		TileEntity te = world.getBlockEntity(blockpos);
 		if (block instanceof CuttingBoardBlock && te instanceof CuttingBoardTileEntity) {
 			CuttingBoardTileEntity tileEntity = (CuttingBoardTileEntity) te;
 			ItemStack boardItem = tileEntity.getStoredItem().copy();
 			if (!boardItem.isEmpty() && tileEntity.processStoredItemUsingTool(stack, null)) {
 				CuttingBoardBlock.spawnCuttingParticles(world, blockpos, boardItem, 5);
-				setSuccessful(true);
+				setSuccess(true);
 			}
 			return true;
 		}
@@ -68,12 +68,12 @@ public class CuttingBoardDispenseBehavior extends OptionalDispenseBehavior
 	private static class DispenserLookup extends DispenserBlock
 	{
 		protected DispenserLookup() {
-			super(Block.Properties.from(Blocks.DISPENSER));
+			super(Block.Properties.copy(Blocks.DISPENSER));
 		}
 
 		@Override
-		public IDispenseItemBehavior getBehavior(ItemStack itemStack) {
-			return super.getBehavior(itemStack);
+		public IDispenseItemBehavior getDispenseMethod(ItemStack itemStack) {
+			return super.getDispenseMethod(itemStack);
 		}
 	}
 }

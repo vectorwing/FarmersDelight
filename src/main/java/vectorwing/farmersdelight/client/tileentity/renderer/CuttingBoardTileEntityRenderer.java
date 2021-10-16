@@ -21,15 +21,15 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 
 	@Override
 	public void render(CuttingBoardTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
-		Direction direction = tileEntityIn.getBlockState().get(CuttingBoardBlock.HORIZONTAL_FACING).getOpposite();
+		Direction direction = tileEntityIn.getBlockState().getValue(CuttingBoardBlock.FACING).getOpposite();
 		ItemStack boardStack = tileEntityIn.getStoredItem();
 
 		if (!boardStack.isEmpty()) {
-			matrixStackIn.push();
+			matrixStackIn.pushPose();
 
 			ItemRenderer itemRenderer = Minecraft.getInstance()
 					.getItemRenderer();
-			boolean isBlockItem = itemRenderer.getItemModelWithOverrides(boardStack, tileEntityIn.getWorld(), null)
+			boolean isBlockItem = itemRenderer.getModel(boardStack, tileEntityIn.getLevel(), null)
 					.isGui3d();
 
 			if (tileEntityIn.isItemCarvingBoard()) {
@@ -40,8 +40,8 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 				renderItemLayingDown(matrixStackIn, direction);
 			}
 
-			Minecraft.getInstance().getItemRenderer().renderItem(boardStack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
-			matrixStackIn.pop();
+			Minecraft.getInstance().getItemRenderer().renderStatic(boardStack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
+			matrixStackIn.popPose();
 		}
 	}
 
@@ -50,11 +50,11 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 		matrixStackIn.translate(0.5D, 0.08D, 0.5D);
 
 		// Rotate item to face the cutting board's front side
-		float f = -direction.getHorizontalAngle();
-		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f));
+		float f = -direction.toYRot();
+		matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f));
 
 		// Rotate item flat on the cutting board. Use X and Y from now on
-		matrixStackIn.rotate(Vector3f.XP.rotationDegrees(90.0F));
+		matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(90.0F));
 
 		// Resize the item
 		matrixStackIn.scale(0.6F, 0.6F, 0.6F);
@@ -65,8 +65,8 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 		matrixStackIn.translate(0.5D, 0.27D, 0.5D);
 
 		// Rotate block to face the cutting board's front side
-		float f = -direction.getHorizontalAngle();
-		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f));
+		float f = -direction.toYRot();
+		matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f));
 
 		// Resize the block
 		matrixStackIn.scale(0.8F, 0.8F, 0.8F);
@@ -77,8 +77,8 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 		matrixStackIn.translate(0.5D, 0.23D, 0.5D);
 
 		// Rotate item to face the cutting board's front side
-		float f = -direction.getHorizontalAngle() + 180;
-		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f));
+		float f = -direction.toYRot() + 180;
+		matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f));
 
 		// Rotate item to be carved on the surface, A little less so for hoes and pickaxes.
 		Item toolItem = itemStack.getItem();
@@ -90,7 +90,7 @@ public class CuttingBoardTileEntityRenderer extends TileEntityRenderer<CuttingBo
 		} else {
 			poseAngle = 180.0F;
 		}
-		matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(poseAngle));
+		matrixStackIn.mulPose(Vector3f.ZP.rotationDegrees(poseAngle));
 
 		// Resize the item
 		matrixStackIn.scale(0.6F, 0.6F, 0.6F);

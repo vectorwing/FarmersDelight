@@ -19,6 +19,8 @@ import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class RichSoilFarmlandBlock extends FarmlandBlock
 {
 	public RichSoilFarmlandBlock(Properties properties) {
@@ -26,8 +28,8 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
 	}
 
 	private static boolean hasWater(IWorldReader worldIn, BlockPos pos) {
-		for (BlockPos nearbyPos : BlockPos.getAllInBoxMutable(pos.add(-4, 0, -4), pos.add(4, 1, 4))) {
-			if (worldIn.getFluidState(nearbyPos).isTagged(FluidTags.WATER)) {
+		for (BlockPos nearbyPos : BlockPos.betweenClosed(pos.offset(-4, 0, -4), pos.offset(4, 1, 4))) {
+			if (worldIn.getFluidState(nearbyPos).is(FluidTags.WATER)) {
 				return true;
 			}
 		}
@@ -35,45 +37,45 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
 	}
 
 	public static void turnToRichSoil(BlockState state, World worldIn, BlockPos pos) {
-		worldIn.setBlockState(pos, nudgeEntitiesWithNewState(state, ModBlocks.RICH_SOIL.get().getDefaultState(), worldIn, pos));
+		worldIn.setBlockAndUpdate(pos, pushEntitiesUp(state, ModBlocks.RICH_SOIL.get().defaultBlockState(), worldIn, pos));
 	}
 
 	@Override
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		BlockState aboveState = worldIn.getBlockState(pos.up());
-		return super.isValidPosition(state, worldIn, pos) || aboveState.getBlock() instanceof StemGrownBlock;
+	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		BlockState aboveState = worldIn.getBlockState(pos.above());
+		return super.canSurvive(state, worldIn, pos) || aboveState.getBlock() instanceof StemGrownBlock;
 	}
 
 	@Override
 	public boolean isFertile(BlockState state, IBlockReader world, BlockPos pos) {
 		if (this.getBlock() == this)
-			return state.get(RichSoilFarmlandBlock.MOISTURE) > 0;
+			return state.getValue(RichSoilFarmlandBlock.MOISTURE) > 0;
 
 		return false;
 	}
 
 	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-		if (!state.isValidPosition(worldIn, pos)) {
+		if (!state.canSurvive(worldIn, pos)) {
 			turnToRichSoil(state, worldIn, pos);
 		}
 	}
 
 	@Override
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-		int moisture = state.get(MOISTURE);
-		if (!hasWater(worldIn, pos) && !worldIn.isRainingAt(pos.up())) {
+		int moisture = state.getValue(MOISTURE);
+		if (!hasWater(worldIn, pos) && !worldIn.isRainingAt(pos.above())) {
 			if (moisture > 0) {
-				worldIn.setBlockState(pos, state.with(MOISTURE, moisture - 1), 2);
+				worldIn.setBlock(pos, state.setValue(MOISTURE, moisture - 1), 2);
 			}
 		} else if (moisture < 7) {
-			worldIn.setBlockState(pos, state.with(MOISTURE, 7), 2);
+			worldIn.setBlock(pos, state.setValue(MOISTURE, 7), 2);
 		} else if (moisture == 7) {
 			if (Configuration.RICH_SOIL_BOOST_CHANCE.get() == 0.0) {
 				return;
 			}
 
-			BlockState aboveState = worldIn.getBlockState(pos.up());
+			BlockState aboveState = worldIn.getBlockState(pos.above());
 			Block aboveBlock = aboveState.getBlock();
 
 			// Do nothing if the plant is unaffected by rich soil farmland
@@ -84,12 +86,12 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
 			// If all else fails, and it's a plant, give it a growth boost now and then!
 			if (aboveBlock instanceof IGrowable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
 				IGrowable growable = (IGrowable) aboveBlock;
-				if (growable.canGrow(worldIn, pos.up(), aboveState, false) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), aboveState, true)) {
-					growable.grow(worldIn, worldIn.rand, pos.up(), aboveState);
-					if (!worldIn.isRemote) {
-						worldIn.playEvent(2005, pos.up(), 0);
+				if (growable.isValidBonemealTarget(worldIn, pos.above(), aboveState, false) && ForgeHooks.onCropsGrowPre(worldIn, pos.above(), aboveState, true)) {
+					growable.performBonemeal(worldIn, worldIn.random, pos.above(), aboveState);
+					if (!worldIn.isClientSide) {
+						worldIn.levelEvent(2005, pos.above(), 0);
 					}
-					ForgeHooks.onCropsGrowPost(worldIn, pos.up(), aboveState);
+					ForgeHooks.onCropsGrowPost(worldIn, pos.above(), aboveState);
 				}
 			}
 		}
@@ -97,17 +99,17 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
 
 	@Override
 	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable) {
-		net.minecraftforge.common.PlantType plantType = plantable.getPlantType(world, pos.offset(facing));
+		net.minecraftforge.common.PlantType plantType = plantable.getPlantType(world, pos.relative(facing));
 		return plantType == PlantType.CROP || plantType == PlantType.PLAINS;
 	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return !this.getDefaultState().isValidPosition(context.getWorld(), context.getPos()) ? ModBlocks.RICH_SOIL.get().getDefaultState() : super.getStateForPlacement(context);
+		return !this.defaultBlockState().canSurvive(context.getLevel(), context.getClickedPos()) ? ModBlocks.RICH_SOIL.get().defaultBlockState() : super.getStateForPlacement(context);
 	}
 
 	@Override
-	public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+	public void fallOn(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
 		// Rich Soil is immune to trampling
 	}
 }

@@ -12,15 +12,15 @@ public class SteamParticle extends SpriteTexturedParticle
 {
 	protected SteamParticle(ClientWorld world, double x, double y, double z, double motionX, double motionY, double motionZ) {
 		super(world, x, y, z);
-		this.multiplyParticleScaleBy(2.0F);
+		this.scale(2.0F);
 		this.setSize(0.25F, 0.25F);
 
-		this.maxAge = this.rand.nextInt(50) + 80;
+		this.lifetime = this.random.nextInt(50) + 80;
 
-		this.particleGravity = 3.0E-6F;
-		this.motionX = motionX;
-		this.motionY = motionY + (double)(this.rand.nextFloat() / 500.0F);
-		this.motionZ = motionZ;
+		this.gravity = 3.0E-6F;
+		this.xd = motionX;
+		this.yd = motionY + (double)(this.random.nextFloat() / 500.0F);
+		this.zd = motionZ;
 	}
 
 	@Override
@@ -30,19 +30,19 @@ public class SteamParticle extends SpriteTexturedParticle
 	}
 
 	public void tick() {
-		this.prevPosX = this.posX;
-		this.prevPosY = this.posY;
-		this.prevPosZ = this.posZ;
-		if (this.age++ < this.maxAge && !(this.particleAlpha <= 0.0F)) {
-			this.motionX += this.rand.nextFloat() / 5000.0F * (float)(this.rand.nextBoolean() ? 1 : -1);
-			this.motionZ += this.rand.nextFloat() / 5000.0F * (float)(this.rand.nextBoolean() ? 1 : -1);
-			this.motionY -= this.particleGravity;
-			this.move(this.motionX, this.motionY, this.motionZ);
-			if (this.age >= this.maxAge - 60 && this.particleAlpha > 0.01F) {
-				this.particleAlpha -= 0.02F;
+		this.xo = this.x;
+		this.yo = this.y;
+		this.zo = this.z;
+		if (this.age++ < this.lifetime && !(this.alpha <= 0.0F)) {
+			this.xd += this.random.nextFloat() / 5000.0F * (float)(this.random.nextBoolean() ? 1 : -1);
+			this.zd += this.random.nextFloat() / 5000.0F * (float)(this.random.nextBoolean() ? 1 : -1);
+			this.yd -= this.gravity;
+			this.move(this.xd, this.yd, this.zd);
+			if (this.age >= this.lifetime - 60 && this.alpha > 0.01F) {
+				this.alpha -= 0.02F;
 			}
 		} else {
-			this.setExpired();
+			this.remove();
 		}
 	}
 
@@ -56,10 +56,10 @@ public class SteamParticle extends SpriteTexturedParticle
 		}
 
 		@Override
-		public Particle makeParticle(BasicParticleType typeIn, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		public Particle createParticle(BasicParticleType typeIn, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
 			SteamParticle particle = new SteamParticle(worldIn, x, y + 0.3D, z, xSpeed, ySpeed, zSpeed);
-			particle.setAlphaF(0.6F);
-			particle.selectSpriteRandomly(this.spriteSet);
+			particle.setAlpha(0.6F);
+			particle.pickSprite(this.spriteSet);
 			return particle;
 		}
 	}

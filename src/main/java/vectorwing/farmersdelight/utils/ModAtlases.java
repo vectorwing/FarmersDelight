@@ -15,13 +15,13 @@ import java.util.stream.Collectors;
 
 public class ModAtlases
 {
-	public static final RenderMaterial BLANK_CANVAS_SIGN_MATERIAL = new RenderMaterial(Atlases.SIGN_ATLAS, new ResourceLocation(FarmersDelight.MODID, "entity/signs/canvas"));
+	public static final RenderMaterial BLANK_CANVAS_SIGN_MATERIAL = new RenderMaterial(Atlases.SIGN_SHEET, new ResourceLocation(FarmersDelight.MODID, "entity/signs/canvas"));
 
 	public static final Map<DyeColor, RenderMaterial> DYED_CANVAS_SIGN_MATERIALS =
 			Arrays.stream(DyeColor.values()).collect(Collectors.toMap(Function.identity(), ModAtlases::getSignMaterial));
 
 
 	public static RenderMaterial getSignMaterial(DyeColor dyeType) {
-		return new RenderMaterial(Atlases.SIGN_ATLAS, new ResourceLocation(FarmersDelight.MODID, "entity/signs/canvas_" + dyeType.getTranslationKey()));
+		return new RenderMaterial(Atlases.SIGN_SHEET, new ResourceLocation(FarmersDelight.MODID, "entity/signs/canvas_" + dyeType.getName()));
 	}
 }

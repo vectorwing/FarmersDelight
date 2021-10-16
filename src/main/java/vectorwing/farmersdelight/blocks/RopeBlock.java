@@ -22,39 +22,41 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import vectorwing.farmersdelight.registry.ModBlocks;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 @SuppressWarnings("deprecation")
 public class RopeBlock extends PaneBlock
 {
 	public static final BooleanProperty TIED_TO_BELL = BooleanProperty.create("tied_to_bell");
 
 	public RopeBlock() {
-		super(Properties.create(Material.CARPET).doesNotBlockMovement().notSolid().hardnessAndResistance(0.2F).sound(SoundType.CLOTH));
-		this.setDefaultState(this.stateContainer.getBaseState().with(TIED_TO_BELL, false));
+		super(Properties.of(Material.CLOTH_DECORATION).noCollission().noOcclusion().strength(0.2F).sound(SoundType.WOOL));
+		this.registerDefaultState(this.stateDefinition.any().setValue(TIED_TO_BELL, false));
 	}
 
 	@Override
-	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+	public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
 		return true;
 	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		IBlockReader world = context.getWorld();
-		BlockPos posAbove = context.getPos().up();
+		IBlockReader world = context.getLevel();
+		BlockPos posAbove = context.getClickedPos().above();
 		BlockState state = super.getStateForPlacement(context);
-		return state != null ? state.with(TIED_TO_BELL, world.getBlockState(posAbove).getBlock() == Blocks.BELL) : null;
+		return state != null ? state.setValue(TIED_TO_BELL, world.getBlockState(posAbove).getBlock() == Blocks.BELL) : null;
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (player.getHeldItem(handIn).isEmpty()) {
-			BlockPos.Mutable blockpos$mutable = pos.toMutable().move(Direction.UP);
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		if (player.getItemInHand(handIn).isEmpty()) {
+			BlockPos.Mutable blockpos$mutable = pos.mutable().move(Direction.UP);
 
 			for (int i = 0; i < 24; i++) {
 				BlockState blockStateAbove = worldIn.getBlockState(blockpos$mutable);
 				Block blockAbove = blockStateAbove.getBlock();
 				if (blockAbove == Blocks.BELL) {
-					((BellBlock) blockAbove).ring(worldIn, blockpos$mutable, blockStateAbove.get(BellBlock.HORIZONTAL_FACING).rotateY());
+					((BellBlock) blockAbove).attemptToRing(worldIn, blockpos$mutable, blockStateAbove.getValue(BellBlock.FACING).getClockWise());
 					return ActionResultType.SUCCESS;
 				} else if (blockAbove == ModBlocks.ROPE.get()) {
 					blockpos$mutable.move(Direction.UP);
@@ -73,28 +75,28 @@ public class RopeBlock extends PaneBlock
 	}
 
 	@Override
-	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
-		return useContext.getItem().getItem() == this.asItem();
+	public boolean canBeReplaced(BlockState state, BlockItemUseContext useContext) {
+		return useContext.getItemInHand().getItem() == this.asItem();
 	}
 
 	@Override
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		if (stateIn.get(WATERLOGGED)) {
-			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		if (stateIn.getValue(WATERLOGGED)) {
+			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 		}
 
-		boolean tiedToBell = stateIn.get(TIED_TO_BELL);
+		boolean tiedToBell = stateIn.getValue(TIED_TO_BELL);
 		if (facing == Direction.UP) {
 			tiedToBell = worldIn.getBlockState(facingPos).getBlock() == Blocks.BELL;
 		}
 
 		return facing.getAxis().isHorizontal()
-				? stateIn.with(TIED_TO_BELL, tiedToBell).with(FACING_TO_PROPERTY_MAP.get(facing), this.canAttachTo(facingState, facingState.isSolidSide(worldIn, facingPos, facing.getOpposite())))
-				: super.updatePostPlacement(stateIn.with(TIED_TO_BELL, tiedToBell), facing, facingState, worldIn, currentPos, facingPos);
+				? stateIn.setValue(TIED_TO_BELL, tiedToBell).setValue(PROPERTY_BY_DIRECTION.get(facing), this.attachsTo(facingState, facingState.isFaceSturdy(worldIn, facingPos, facing.getOpposite())))
+				: super.updateShape(stateIn.setValue(TIED_TO_BELL, tiedToBell), facing, facingState, worldIn, currentPos, facingPos);
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(NORTH, EAST, WEST, SOUTH, WATERLOGGED, TIED_TO_BELL);
 	}
 

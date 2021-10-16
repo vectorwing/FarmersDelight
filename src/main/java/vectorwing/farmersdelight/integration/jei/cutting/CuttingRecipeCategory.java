@@ -40,7 +40,7 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 	private final CuttingBoardModel cuttingBoard;
 
 	public CuttingRecipeCategory(IGuiHelper helper) {
-		title = I18n.format(FarmersDelight.MODID + ".jei.cutting");
+		title = I18n.get(FarmersDelight.MODID + ".jei.cutting");
 		ResourceLocation backgroundImage = new ResourceLocation(FarmersDelight.MODID, "textures/gui/jei/cutting_board.png");
 		slot = helper.createDrawable(backgroundImage, 0, 58, 18, 18);
 		slotChance = helper.createDrawable(backgroundImage, 18, 58, 18, 18);
@@ -87,11 +87,11 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 
 		// Draw required tool
 		itemStacks.init(0, true, 15, 7);
-		itemStacks.set(0, Arrays.asList(recipe.getTool().getMatchingStacks()));
+		itemStacks.set(0, Arrays.asList(recipe.getTool().getItems()));
 
 		// Draw input
 		itemStacks.init(1, true, 15, 26);
-		itemStacks.set(1, Arrays.asList(recipe.getIngredients().get(0).getMatchingStacks()));
+		itemStacks.set(1, Arrays.asList(recipe.getIngredients().get(0).getItems()));
 
 		// Draw outputs
 		int size = recipeOutputs.size();
@@ -114,7 +114,7 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 			float chance = output.getChance();
 			if (chance != 1)
 				tooltip.add(1, TextUtils.getTranslation("jei.chance", chance < 0.01 ? "<1" : (int) (chance * 100))
-						.mergeStyle(TextFormatting.GOLD));
+						.withStyle(TextFormatting.GOLD));
 		});
 	}
 
