@@ -93,6 +93,11 @@ public class StoveBlock extends BaseEntityBlock
 		return InteractionResult.PASS;
 	}
 
+	@Override
+	public RenderShape getRenderShape(BlockState pState) {
+		return RenderShape.MODEL;
+	}
+
 	public void extinguish(BlockState state, Level worldIn, BlockPos pos) {
 		worldIn.setBlock(pos, state.setValue(LIT, false), 2);
 		double x = (double) pos.getX() + 0.5D;

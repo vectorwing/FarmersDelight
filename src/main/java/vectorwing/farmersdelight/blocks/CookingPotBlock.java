@@ -21,10 +21,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -68,7 +65,7 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 
 	public CookingPotBlock() {
 		super(Properties.of(Material.METAL)
-				.strength(2.0F, 6.0F)
+				.strength(0.5F, 6.0F)
 				.sound(SoundType.LANTERN));
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(SUPPORT, CookingPotSupport.NONE).setValue(WATERLOGGED, false));
 	}
@@ -98,6 +95,11 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 			return InteractionResult.SUCCESS;
 		}
 		return InteractionResult.SUCCESS;
+	}
+
+	@Override
+	public RenderShape getRenderShape(BlockState pState) {
+		return RenderShape.MODEL;
 	}
 
 	@Override

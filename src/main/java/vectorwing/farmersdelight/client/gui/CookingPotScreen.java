@@ -84,7 +84,7 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotContaine
 		if (this.minecraft == null)
 			return;
 
-		this.minecraft.getTextureManager().bindForSetup(BACKGROUND_TEXTURE);
+		RenderSystem.setShaderTexture(0, BACKGROUND_TEXTURE);
 		this.blit(ms, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
 
 		// Render heat icon
