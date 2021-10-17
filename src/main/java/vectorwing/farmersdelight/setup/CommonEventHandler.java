@@ -2,6 +2,12 @@ package vectorwing.farmersdelight.setup;
 
 import com.google.common.collect.Sets;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,6 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
@@ -26,8 +33,10 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -39,6 +48,7 @@ import vectorwing.farmersdelight.loot.functions.SmokerCookFunction;
 import vectorwing.farmersdelight.mixin.accessors.ChickenEntityAccessor;
 import vectorwing.farmersdelight.mixin.accessors.PigEntityAccessor;
 import vectorwing.farmersdelight.registry.ModAdvancements;
+import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModEffects;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.tile.dispenser.CuttingBoardDispenseBehavior;
@@ -93,6 +103,20 @@ public class CommonEventHandler
 //		if (Configuration.GENERATE_VILLAGE_COMPOST_HEAPS.get()) {
 //			VillageStructures.init();
 //		}
+	}
+
+	@SubscribeEvent
+	public static void onHoeUse(UseHoeEvent event) {
+		UseOnContext context = event.getContext();
+		BlockPos pos = context.getClickedPos();
+		Level world = context.getLevel();
+		BlockState state = world.getBlockState(pos);
+
+		if (context.getClickedFace() != Direction.DOWN && world.getBlockState(pos.above()).isAir() && state.getBlock() == ModBlocks.RICH_SOIL.get()) {
+			world.playSound(event.getPlayer(), pos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+			world.setBlock(pos, ModBlocks.RICH_SOIL_FARMLAND.get().defaultBlockState(), 11);
+			event.setResult(Event.Result.ALLOW);
+		}
 	}
 
 	public static void registerDispenserBehaviors() {
