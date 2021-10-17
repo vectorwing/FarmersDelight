@@ -20,6 +20,7 @@ import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.client.gui.NourishedHungerOverlay;
 import vectorwing.farmersdelight.client.particles.StarParticle;
 import vectorwing.farmersdelight.client.particles.SteamParticle;
+import vectorwing.farmersdelight.client.tileentity.renderer.CanvasSignRenderer;
 import vectorwing.farmersdelight.client.tileentity.renderer.CuttingBoardRenderer;
 import vectorwing.farmersdelight.client.tileentity.renderer.SkilletRenderer;
 import vectorwing.farmersdelight.client.tileentity.renderer.StoveRenderer;
@@ -53,7 +54,7 @@ public class ClientEventHandler
 	public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.STOVE_TILE.get(), StoveRenderer::new);
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.CUTTING_BOARD_TILE.get(), CuttingBoardRenderer::new);
-//		event.registerBlockEntityRenderer(ModTileEntityTypes.CANVAS_SIGN_TILE.get(), CanvasSignTileEntityRenderer::new);
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.CANVAS_SIGN_TILE.get(), CanvasSignRenderer::new);
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.SKILLET_TILE.get(), SkilletRenderer::new);
 	}
 
