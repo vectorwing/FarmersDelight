@@ -21,10 +21,8 @@ public class ComfortEffect extends MobEffect
 	public static final Set<MobEffect> COMFORT_IMMUNITIES = Sets.newHashSet(MobEffects.MOVEMENT_SLOWDOWN, MobEffects.WEAKNESS, MobEffects.HUNGER);
 
 	/**
-	 * This effect makes the player immune to negative effects related to cold and sickness.
-	 * It also instantly heals the equivalent effects when first applied.
-	 * The effect runs entirely on events, which I assumed to be more efficient than constantly ticking over the entity's effect list.
-	 * Current targets: Slowness, Weakness and Hunger.
+	 * This effect makes the entity immune to negative effects related to cold and sickness.
+	 * The entity cannot freeze inside powder snow, and cannot receive Slowness or Weakness.
 	 */
 	public ComfortEffect() {
 		super(MobEffectCategory.BENEFICIAL, 0);
@@ -34,7 +32,7 @@ public class ComfortEffect extends MobEffect
 	public static class ComfortEvent
 	{
 		@SubscribeEvent
-		public static void onComfortDuration(PotionEvent.PotionApplicableEvent event) {
+		public static void onBadEffectApplicable(PotionEvent.PotionApplicableEvent event) {
 			MobEffectInstance effect = event.getPotionEffect();
 			LivingEntity entity = event.getEntityLiving();
 			if (entity.getEffect(ModEffects.COMFORT.get()) != null && COMFORT_IMMUNITIES.contains(effect.getEffect())) {
@@ -43,7 +41,7 @@ public class ComfortEffect extends MobEffect
 		}
 
 		@SubscribeEvent
-		public static void onComfortApplied(PotionEvent.PotionAddedEvent event) {
+		public static void onBadEffectApplied(PotionEvent.PotionAddedEvent event) {
 			MobEffectInstance addedEffect = event.getPotionEffect();
 			LivingEntity entity = event.getEntityLiving();
 			if (addedEffect.getEffect().equals(ModEffects.COMFORT.get())) {
@@ -52,6 +50,11 @@ public class ComfortEffect extends MobEffect
 				}
 			}
 		}
+	}
+
+	@Override
+	public void applyEffectTick(LivingEntity entity, int amplifier) {
+		entity.setTicksFrozen(0);
 	}
 
 	@Override
