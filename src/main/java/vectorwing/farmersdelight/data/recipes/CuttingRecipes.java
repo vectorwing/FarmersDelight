@@ -6,6 +6,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.ToolActions;
+import vectorwing.farmersdelight.crafting.ingredients.ToolActionIngredient;
 import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.tags.ForgeTags;
@@ -150,13 +152,9 @@ public class CuttingRecipes
 	}
 
 	private static void salvagingBricks(Consumer<FinishedRecipe> consumer) {
-//		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BRICKS), new ToolIngredient(ToolType.PICKAXE), Items.BRICK, 4)
-//				.build(consumer);
-//		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.NETHER_BRICKS), new ToolIngredient(ToolType.PICKAXE), Items.NETHER_BRICK, 4)
-//				.build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BRICKS), Ingredient.of(ForgeTags.TOOLS_PICKAXES), Items.BRICK, 4)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BRICKS), new ToolActionIngredient(ToolActions.PICKAXE_DIG), Items.BRICK, 4)
 				.build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.NETHER_BRICKS), Ingredient.of(ForgeTags.TOOLS_PICKAXES), Items.NETHER_BRICK, 4)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.NETHER_BRICKS), new ToolActionIngredient(ToolActions.PICKAXE_DIG), Items.NETHER_BRICK, 4)
 				.build(consumer);
 	}
 
@@ -191,7 +189,7 @@ public class CuttingRecipes
 	}
 
 	private static void diggingSediments(Consumer<FinishedRecipe> consumer) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CLAY), Ingredient.of(ForgeTags.TOOLS_SHOVELS), Items.CLAY_BALL, 4)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CLAY), new ToolActionIngredient(ToolActions.SHOVEL_DIG), Items.CLAY_BALL, 4)
 				.build(consumer);
 	}
 
@@ -216,16 +214,16 @@ public class CuttingRecipes
 	 * Generates an axe-cutting recipe for each furniture, resulting in one plank of the given type.
 	 */
 	private static void salvagePlankFromFurniture(Consumer<FinishedRecipe> consumer, ItemLike plank, ItemLike door, ItemLike trapdoor, ItemLike sign) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(door), Ingredient.of(ForgeTags.TOOLS_AXES), plank).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(trapdoor), Ingredient.of(ForgeTags.TOOLS_AXES), plank).build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(sign), Ingredient.of(ForgeTags.TOOLS_AXES), plank).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(door), new ToolActionIngredient(ToolActions.AXE_DIG), plank).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(trapdoor), new ToolActionIngredient(ToolActions.AXE_DIG), plank).build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(sign), new ToolActionIngredient(ToolActions.AXE_DIG), plank).build(consumer);
 	}
 
 	/**
 	 * Generates an axe-stripping recipe for the pair of given logs, with custom sound and a Tree Bark result attached.
 	 */
 	private static void stripLogForBark(Consumer<FinishedRecipe> consumer, ItemLike log, ItemLike strippedLog) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(log), Ingredient.of(ForgeTags.TOOLS_AXES), strippedLog)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(log), new ToolActionIngredient(ToolActions.AXE_STRIP), strippedLog)
 				.addResult(ModItems.TREE_BARK.get())
 				.addSound(SoundEvents.AXE_STRIP.getRegistryName().toString()).build(consumer);
 	}
