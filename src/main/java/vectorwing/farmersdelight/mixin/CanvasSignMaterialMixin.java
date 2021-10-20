@@ -1,23 +1,30 @@
 package vectorwing.farmersdelight.mixin;
 
-import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.client.gui.screens.inventory.SignEditScreen;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import vectorwing.farmersdelight.blocks.signs.ICanvasSign;
 import vectorwing.farmersdelight.client.tileentity.renderer.CanvasSignRenderer;
+import vectorwing.farmersdelight.tile.CanvasSignBlockEntity;
 
-@Mixin(SignRenderer.class)
+@Mixin(SignEditScreen.class)
 public class CanvasSignMaterialMixin
 {
-	@Inject(at = @At(value = "HEAD"), method = "getMaterial", cancellable = true)
-	private static void useCanvasSignMaterials(Block blockIn, CallbackInfoReturnable<Material> cir) {
-//		if (blockIn instanceof ICanvasSign) {
-//			cir.setReturnValue(CanvasSignRenderer.getMaterial(blockIn));
-//			cir.cancel();
-//		}
+	@Shadow @Final
+	private SignBlockEntity sign;
+
+	@ModifyVariable(at = @At(value = "STORE", ordinal = 0), method = "render")
+	public Material useCanvasSignMaterials(Material material) {
+		Block block = sign.getBlockState().getBlock();
+		if (block instanceof ICanvasSign canvasSign) {
+			return CanvasSignRenderer.getMaterial(canvasSign.getBackgroundColor());
+		}
+		return material;
 	}
 }

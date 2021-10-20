@@ -5,6 +5,7 @@
   "refmap": "farmersdelight.refmap.json",
   "mixins": [
     "CampfireBaleMixin",
+    "CanvasSignMaterialMixin",
     "KeepRichSoilMixin",
     "SoupItemMixin",
     "accessors.ChickenEntityAccessor",
