@@ -57,7 +57,7 @@ public class CookingPotBlock extends HorizontalBlock implements IWaterLoggable
 
 	public CookingPotBlock() {
 		super(Properties.create(Material.IRON)
-				.hardnessAndResistance(2.0F, 6.0F)
+				.hardnessAndResistance(0.8F, 6.0F)
 				.sound(SoundType.LANTERN));
 		this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH).with(SUPPORT, CookingPotSupport.NONE).with(WATERLOGGED, false));
 	}

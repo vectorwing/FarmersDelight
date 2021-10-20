@@ -148,6 +148,7 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 		super.read(state, compound);
 		inventory.deserializeNBT(compound.getCompound("Inventory"));
 		cookingTime = compound.getInt("CookTime");
+		cookingTimeTotal = compound.getInt("CookTimeTotal");
 		skilletStack = ItemStack.read(compound.getCompound("Skillet"));
 		fireAspectLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.FIRE_ASPECT, skilletStack);
 	}
@@ -157,6 +158,7 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 		super.write(compound);
 		compound.put("Inventory", inventory.serializeNBT());
 		compound.putInt("CookTime", cookingTime);
+		compound.putInt("CookTimeTotal", cookingTimeTotal);
 		compound.put("Skillet", skilletStack.write(new CompoundNBT()));
 		return compound;
 	}
