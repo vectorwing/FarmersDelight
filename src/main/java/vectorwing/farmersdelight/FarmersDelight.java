@@ -21,6 +21,7 @@ import vectorwing.farmersdelight.registry.*;
 import vectorwing.farmersdelight.setup.ClientEventHandler;
 import vectorwing.farmersdelight.setup.CommonEventHandler;
 import vectorwing.farmersdelight.setup.Configuration;
+import vectorwing.farmersdelight.world.VillageStructures;
 
 @Mod(FarmersDelight.MODID)
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -54,6 +55,8 @@ public class FarmersDelight
 		ModBlockEntityTypes.TILES.register(modEventBus);
 		ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
 		ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+
+		MinecraftForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
 
 		MinecraftForge.EVENT_BUS.register(this);
 	}
