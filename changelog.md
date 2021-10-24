@@ -69,6 +69,7 @@
 
 ### Translation Updates
 - (NEW!) ca_ES (thanks, VerdaPegasus!)
+- de_DE (thanks, DaLumma!)
 - fr_FR (thanks, BlackJamesYT!)
 - ko_KR (thanks, qkrehf2!)
 - pl_pl (thanks, jogurciQ!)
