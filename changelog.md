@@ -7,7 +7,7 @@
   - Added `mushroom_colony_growable_on` tag: blocks that allow Mushroom Colonies to continue growing until mature, but CANNOT form colonies themselves;
   - Added compatibility with Create's Potato Cannon!
     - Cabbage packs a punch, but is cumbersome to reload;
-    - Tomatoes are light, rapid and embarassing to get hit by;
+    - Tomatoes are light, rapid-fire and embarassing to get hit by;
     - Onions are mostly the same as potatoes;
     - Whole pies work like the Pumpkin Pie. Their slices (and Pumpkin Slices) can be fired rapidly instead.
 ### Updates
@@ -15,6 +15,7 @@
   - Melon Popsicles now douse flames when consumed, instead of giving Fire Resistance;
 ### Fixes
   - Fix Skillet not saving total cooking times, making it cook items rapidly on world reload;
+  - Fix a class mismatch that broke Industrial Foregoing's Hydroponic Bed integration.
 
 ## 0.5.0
 
