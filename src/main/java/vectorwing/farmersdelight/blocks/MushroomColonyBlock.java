@@ -24,7 +24,7 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.Tags;
-import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import java.util.Random;
 import java.util.function.Supplier;
@@ -109,10 +109,9 @@ public class MushroomColonyBlock extends BushBlock implements IGrowable
 
 	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-		super.tick(state, worldIn, pos, rand);
 		int age = state.get(COLONY_AGE);
-		BlockState groundState = worldIn.getBlockState(pos.down());
-		if (age < this.getMaxAge() && groundState.getBlock() == ModBlocks.RICH_SOIL.get() && worldIn.getLightSubtracted(pos.up(), 0) <= GROWING_LIGHT_LEVEL && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(5) == 0)) {
+		Block groundState = worldIn.getBlockState(pos.down()).getBlock();
+		if (age < this.getMaxAge() && ModTags.MUSHROOM_COLONY_GROWABLE_ON.contains(groundState) && worldIn.getLightSubtracted(pos.up(), 0) <= GROWING_LIGHT_LEVEL && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(5) == 0)) {
 			worldIn.setBlockState(pos, state.with(COLONY_AGE, age + 1), 2);
 			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 		}
