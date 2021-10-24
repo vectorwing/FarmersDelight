@@ -1,0 +1,8 @@
+{
+  "items": [
+    "farmersdelight:onion"
+  ],
+  "damage": 5,
+  "reload_ticks": 15,
+  "velocity_multiplier": 1.2
+}
