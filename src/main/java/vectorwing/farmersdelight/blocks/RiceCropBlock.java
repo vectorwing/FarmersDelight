@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.blocks.crops;
+package vectorwing.farmersdelight.blocks;
 
 import net.minecraft.block.*;
 import net.minecraft.fluid.Fluid;

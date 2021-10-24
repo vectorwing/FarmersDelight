@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.blocks.crops;
+package vectorwing.farmersdelight.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -11,31 +11,31 @@ import net.minecraft.world.IBlockReader;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 
-public class OnionsBlock extends CropsBlock
+public class CabbagesBlock extends CropsBlock
 {
 	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
 			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
 			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D),
-			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D),
 			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 5.0D, 16.0D),
-			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D),
 			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 7.0D, 16.0D),
 			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
-			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 9.0D, 16.0D)
+			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 9.0D, 16.0D),
+			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 9.0D, 16.0D),
+			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D)
 	};
 
-	public OnionsBlock(Properties properties) {
+	public CabbagesBlock(Properties properties) {
 		super(properties);
 	}
 
 	@Override
 	public BlockState getPlant(IBlockReader world, BlockPos pos) {
-		return ModBlocks.ONION_CROP.get().getDefaultState();
+		return ModBlocks.CABBAGE_CROP.get().getDefaultState();
 	}
 
 	@Override
 	protected IItemProvider getSeedsItem() {
-		return ModItems.ONION.get();
+		return ModItems.CABBAGE_SEEDS.get();
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.blocks.foods;
+package vectorwing.farmersdelight.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -13,12 +13,12 @@ import vectorwing.farmersdelight.blocks.FeastBlock;
 
 import java.util.function.Supplier;
 
-public class HoneyGlazedHamBlock extends FeastBlock
+public class RoastChickenBlock extends FeastBlock
 {
 	protected static final VoxelShape PLATE_SHAPE = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 2.0D, 15.0D);
-	protected static final VoxelShape ROAST_SHAPE = VoxelShapes.combine(PLATE_SHAPE, Block.makeCuboidShape(4.0D, 2.0D, 4.0D, 12.0D, 10.0D, 12.0D), IBooleanFunction.OR);
-
-	public HoneyGlazedHamBlock(Properties properties, Supplier<Item> servingItem, boolean hasLeftovers) {
+	protected static final VoxelShape ROAST_SHAPE = VoxelShapes.combine(PLATE_SHAPE, Block.makeCuboidShape(4.0D, 2.0D, 4.0D, 12.0D, 9.0D, 12.0D), IBooleanFunction.OR);
+	
+	public RoastChickenBlock(Properties properties, Supplier<Item> servingItem, boolean hasLeftovers) {
 		super(properties, servingItem, hasLeftovers);
 	}
 
