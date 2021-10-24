@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.5.1
+
+### Additions
+  - Add JEI information tabs to Knives and Ham;
+  - Add `mushroom_colony_growable_on` tag: blocks that allow Mushroom Colonies to continue growing until mature, but CANNOT form colonies themselves;
+### Updates
+  - Cooking Pot and Skillet are a bit easier to break by hand;
+  - Melon Popsicles now douse flames when consumed, instead of giving Fire Resistance;
+### Fixes
+  - Fix Skillet not saving total cooking times, making it cook items rapidly on world reload;
+
 ## 0.5.0
 
 ### Breaking changes (BACKUP YOUR SAVES!)
