@@ -31,17 +31,63 @@ import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class BasketBlockEntity extends RandomizableContainerBlockEntity implements IBasket
+public class BasketBlockEntity extends RandomizableContainerBlockEntity implements Basket
 {
-	private NonNullList<ItemStack> basketContents = NonNullList.withSize(27, ItemStack.EMPTY);
+	private NonNullList<ItemStack> items = NonNullList.withSize(27, ItemStack.EMPTY);
 	private int transferCooldown = -1;
 
 	public BasketBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntityTypes.BASKET_TILE.get(), pos, state);
 	}
 
-	public static boolean pullItems(IBasket basket, int facingIndex) {
-		for (ItemEntity itementity : getCaptureItems(basket, facingIndex)) {
+	@Override
+	public void load(CompoundTag compound) {
+		super.load(compound);
+		this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+		if (!this.tryLoadLootTable(compound)) {
+			ContainerHelper.loadAllItems(compound, this.items);
+		}
+		this.transferCooldown = compound.getInt("TransferCooldown");
+	}
+
+	@Override
+	public CompoundTag save(CompoundTag compound) {
+		super.save(compound);
+		if (!this.trySaveLootTable(compound)) {
+			ContainerHelper.saveAllItems(compound, this.items);
+		}
+
+		compound.putInt("TransferCooldown", this.transferCooldown);
+		return compound;
+	}
+
+	@Override
+	public int getContainerSize() {
+		return this.items.size();
+	}
+
+	@Override
+	public ItemStack removeItem(int index, int count) {
+		this.unpackLootTable(null);
+		return ContainerHelper.removeItem(this.getItems(), index, count);
+	}
+
+	@Override
+	public void setItem(int index, ItemStack stack) {
+		this.unpackLootTable(null);
+		this.getItems().set(index, stack);
+		if (stack.getCount() > this.getMaxStackSize()) {
+			stack.setCount(this.getMaxStackSize());
+		}
+	}
+
+	@Override
+	protected Component getDefaultName() {
+		return TextUtils.getTranslation("container.basket");
+	}
+
+	public static boolean pullItems(Level level, Basket basket, int facingIndex) {
+		for (ItemEntity itementity : getCaptureItems(level, basket, facingIndex)) {
 			if (captureItem(basket, itementity)) {
 				return true;
 			}
@@ -127,70 +173,24 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 		return flag;
 	}
 
-	public static List<ItemEntity> getCaptureItems(IBasket basket, int facingIndex) {
-		return basket.getLevel() == null ? new ArrayList<>() : basket.getFacingCollectionArea(facingIndex).toAabbs().stream().flatMap((aabb) -> basket.getLevel().getEntitiesOfClass(ItemEntity.class, aabb.move(basket.getLevelX() - 0.5D, basket.getLevelY() - 0.5D, basket.getLevelZ() - 0.5D), EntitySelector.ENTITY_STILL_ALIVE).stream()).collect(Collectors.toList());
-	}
-
-	@Override
-	public CompoundTag save(CompoundTag compound) {
-		super.save(compound);
-		if (!this.trySaveLootTable(compound)) {
-			ContainerHelper.saveAllItems(compound, this.basketContents);
-		}
-
-		compound.putInt("TransferCooldown", this.transferCooldown);
-		return compound;
-	}
-
-	@Override
-	public void load(CompoundTag compound) {
-		super.load(compound);
-		this.basketContents = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-		if (!this.tryLoadLootTable(compound)) {
-			ContainerHelper.loadAllItems(compound, this.basketContents);
-		}
-		this.transferCooldown = compound.getInt("TransferCooldown");
+	public static List<ItemEntity> getCaptureItems(Level level, Basket basket, int facingIndex) {
+		return basket.getFacingCollectionArea(facingIndex).toAabbs().stream().flatMap((aabb) -> level.getEntitiesOfClass(ItemEntity.class, aabb.move(basket.getLevelX() - 0.5D, basket.getLevelY() - 0.5D, basket.getLevelZ() - 0.5D), EntitySelector.ENTITY_STILL_ALIVE).stream()).collect(Collectors.toList());
 	}
 
 	// -- STANDARD INVENTORY STUFF --
 	@Override
 	protected NonNullList<ItemStack> getItems() {
-		return this.basketContents;
+		return this.items;
 	}
 
 	@Override
 	protected void setItems(NonNullList<ItemStack> itemsIn) {
-		this.basketContents = itemsIn;
-	}
-
-	@Override
-	public int getContainerSize() {
-		return this.basketContents.size();
-	}
-
-	@Override
-	protected Component getDefaultName() {
-		return TextUtils.getTranslation("container.basket");
+		this.items = itemsIn;
 	}
 
 	@Override
 	protected AbstractContainerMenu createMenu(int id, Inventory player) {
 		return ChestMenu.threeRows(id, player, this);
-	}
-
-	@Override
-	public ItemStack removeItem(int index, int count) {
-		this.unpackLootTable(null);
-		return ContainerHelper.removeItem(this.getItems(), index, count);
-	}
-
-	@Override
-	public void setItem(int index, ItemStack stack) {
-		this.unpackLootTable(null);
-		this.getItems().set(index, stack);
-		if (stack.getCount() > this.getMaxStackSize()) {
-			stack.setCount(this.getMaxStackSize());
-		}
 	}
 
 	public void setTransferCooldown(int ticks) {
@@ -222,7 +222,7 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 	}
 
 	private boolean isFull() {
-		for (ItemStack itemstack : this.basketContents) {
+		for (ItemStack itemstack : this.items) {
 			if (itemstack.isEmpty() || itemstack.getCount() != itemstack.getMaxStackSize()) {
 				return false;
 			}
@@ -261,7 +261,7 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 		if (!blockEntity.isOnTransferCooldown()) {
 			blockEntity.setTransferCooldown(0);
 			int facing = state.getValue(BasketBlock.FACING).get3DDataValue();
-			blockEntity.updateHopper(() -> pullItems(blockEntity, facing));
+			blockEntity.updateHopper(() -> pullItems(level, blockEntity, facing));
 		}
 	}
 }

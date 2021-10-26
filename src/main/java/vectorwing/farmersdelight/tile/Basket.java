@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.tile;
 
+import net.minecraft.world.Container;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.Hopper;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -7,7 +8,7 @@ import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 
-public interface IBasket extends Hopper
+public interface Basket extends Container
 {
 	VoxelShape[] COLLECTION_AREA_SHAPES = {
 			Block.box(0.0D, -16.0D, 0.0D, 16.0D, 16.0D, 16.0D),    // down
@@ -21,12 +22,6 @@ public interface IBasket extends Hopper
 	default VoxelShape getFacingCollectionArea(int facingIndex) {
 		return COLLECTION_AREA_SHAPES[facingIndex];
 	}
-
-	/**
-	 * Returns the worldObj for this tileEntity.
-	 */
-	@Nullable
-	Level getLevel();
 
 	/**
 	 * Gets the world X position for this hopper entity.
