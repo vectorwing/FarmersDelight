@@ -745,8 +745,7 @@ public class Recipes extends RecipeProvider
 				.addIngredient(ForgeTags.BREAD)
 				.addIngredient(ForgeTags.COOKED_MUTTON)
 				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
-				.addIngredient(ForgeTags.CROPS_TOMATO)
-				.addIngredient(ForgeTags.MILK)
+				.addIngredient(ForgeTags.CROPS_ONION)
 				.addCriterion("has_mutton", InventoryChangeTrigger.Instance.forItems(Items.COOKED_MUTTON))
 				.build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(ModItems.STUFFED_POTATO.get())
