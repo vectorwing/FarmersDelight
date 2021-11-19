@@ -221,7 +221,7 @@
   "farmersdelight.advancement.place_cooking_pot": "Dinner's Served!",
   "farmersdelight.advancement.place_cooking_pot.desc": "Put down a Cooking Pot and start preparing meals!",
   "farmersdelight.advancement.use_skillet": "Portable Cooking",
-  "farmersdelight.advancement.use_skillet.desc": "Skillets let you cook on the go. Stand near heat, then hold food in your off-hand!",
+  "farmersdelight.advancement.use_skillet.desc": "Skillets let you cook on the go. Stand near heat, then hold food in your other hand!",
   "farmersdelight.advancement.place_skillet": "Sizzling Hot!",
   "farmersdelight.advancement.place_skillet.desc": "Place down your Skillet as a block while sneaking",
   "farmersdelight.advancement.drink_hot_cocoa": "A Cup of Happiness",
@@ -249,7 +249,7 @@
   "farmersdelight.block.cutting_board.invalid_item": "This doesn't seem cuttable...",
   "farmersdelight.block.cutting_board.invalid_tool": "Maybe with a different tool...",
   "farmersdelight.block.skillet.invalid_item": "This can't be cooked...",
-  "farmersdelight.item.skillet.how_to_cook": "Use your off-hand to hold ingredients!",
+  "farmersdelight.item.skillet.how_to_cook": "Use your other hand to hold ingredients!",
 
   "farmersdelight.jei.cooking": "Cooking",
   "farmersdelight.jei.cutting": "Cutting Board",
