@@ -134,25 +134,32 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 		}
 	}
 
-	public boolean addItem(ItemStack itemStackIn) {
+	public int getNextEmptySlot() {
 		for (int i = 0; i < inventory.getSlots(); ++i) {
 			ItemStack slotStack = inventory.getStackInSlot(i);
 			if (slotStack.isEmpty()) {
-				Optional<CampfireCookingRecipe> recipe = getMatchingRecipe(new Inventory(itemStackIn), i);
-				if (recipe.isPresent()) {
-					cookingTimesTotal[i] = recipe.get().getCookTime();
-					cookingTimes[i] = 0;
-					inventory.setStackInSlot(i, itemStackIn.split(1));
-					lastRecipeIDs[i] = recipe.get().getId();
-					inventoryChanged();
-					return true;
-				}
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	public boolean addItem(ItemStack itemStackIn, CampfireCookingRecipe recipe, int slot) {
+		if (0 <= slot && slot < inventory.getSlots()) {
+			ItemStack slotStack = inventory.getStackInSlot(slot);
+			if (slotStack.isEmpty()) {
+				cookingTimesTotal[slot] = recipe.getCookTime();
+				cookingTimes[slot] = 0;
+				inventory.setStackInSlot(slot, itemStackIn.split(1));
+				lastRecipeIDs[slot] = recipe.getId();
+				inventoryChanged();
+				return true;
 			}
 		}
 		return false;
 	}
 
-	private Optional<CampfireCookingRecipe> getMatchingRecipe(IInventory recipeWrapper, int slot) {
+	public Optional<CampfireCookingRecipe> getMatchingRecipe(IInventory recipeWrapper, int slot) {
 		if (world == null) return Optional.empty();
 
 		if (lastRecipeIDs[slot] != null) {
@@ -164,13 +171,7 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 			}
 		}
 
-		Optional<CampfireCookingRecipe> recipe = world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, recipeWrapper, world);
-		if (recipe.isPresent()) {
-			lastRecipeIDs[slot] = recipe.get().getId();
-			return recipe;
-		}
-
-		return Optional.empty();
+		return world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, recipeWrapper, world);
 	}
 
 	public ItemStackHandler getInventory() {

@@ -1,7 +1,17 @@
 # Changelog
 
-## 0.5.1
+## 0.5.2
 
+### Updates
+- Updated ja_JP translation;
+- Updated ko_KR translation;
+- Updated zh_CN translation;
+
+### Fixes
+- Fix items being used twice when adding them to a Stove;
+- Fix Stoves cancelling the normal usage of invalid items when aimed at them;
+
+## 0.5.1
 - This update rolls back recent package changes which caused add-ons and integrations to break.
 
 ### Additions
