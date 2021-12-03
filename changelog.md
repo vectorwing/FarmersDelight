@@ -10,6 +10,7 @@
 ### Fixes
 - Fix items being used twice when adding them to a Stove;
 - Fix Stoves cancelling the normal usage of invalid items when aimed at them;
+- Fix inconsistencies with lit/unlit Stove textures;
 
 ## 0.5.1
 - This update rolls back recent package changes which caused add-ons and integrations to break.
