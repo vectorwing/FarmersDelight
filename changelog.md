@@ -11,6 +11,7 @@
 - Fix items being used twice when adding them to a Stove;
 - Fix Stoves cancelling the normal usage of invalid items when aimed at them;
 - Fix inconsistencies with lit/unlit Stove textures;
+- Fix Skillets resetting their cooking time when trying to add a cookable item and failing;
 
 ## 0.5.1
 - This update rolls back recent package changes which caused add-ons and integrations to break.
