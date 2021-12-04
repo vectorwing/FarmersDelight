@@ -33,31 +33,31 @@ public class Foods
 	public static final Food PUMPKIN_SLICE = (new Food.Builder())
 			.nutrition(3).saturationMod(0.3f).build();
 	public static final Food CABBAGE_LEAF = (new Food.Builder())
-			.nutrition(1).saturationMod(0.4f).build();
+			.nutrition(1).saturationMod(0.4f).fast().build();
 	public static final Food MINCED_BEEF = (new Food.Builder())
-			.nutrition(2).saturationMod(0.3f).meat().build();
+			.nutrition(2).saturationMod(0.3f).meat().fast().build();
 	public static final Food BEEF_PATTY = (new Food.Builder())
-			.nutrition(4).saturationMod(0.8f).meat().build();
+			.nutrition(4).saturationMod(0.8f).meat().fast().build();
 	public static final Food CHICKEN_CUTS = (new Food.Builder())
-			.nutrition(1).saturationMod(0.3f).effect(() -> new EffectInstance(Effects.HUNGER, 600, 0), 0.3F).meat().build();
+			.nutrition(1).saturationMod(0.3f).effect(() -> new EffectInstance(Effects.HUNGER, 600, 0), 0.3F).meat().fast().build();
 	public static final Food COOKED_CHICKEN_CUTS = (new Food.Builder())
-			.nutrition(3).saturationMod(0.6f).meat().build();
+			.nutrition(3).saturationMod(0.6f).meat().fast().build();
 	public static final Food BACON = (new Food.Builder())
-			.nutrition(2).saturationMod(0.3f).meat().build();
+			.nutrition(2).saturationMod(0.3f).meat().fast().build();
 	public static final Food COOKED_BACON = (new Food.Builder())
-			.nutrition(4).saturationMod(0.8f).meat().build();
+			.nutrition(4).saturationMod(0.8f).meat().fast().build();
 	public static final Food COD_SLICE = (new Food.Builder())
-			.nutrition(1).saturationMod(0.1f).build();
+			.nutrition(1).saturationMod(0.1f).fast().build();
 	public static final Food COOKED_COD_SLICE = (new Food.Builder())
-			.nutrition(3).saturationMod(0.5f).build();
+			.nutrition(3).saturationMod(0.5f).fast().build();
 	public static final Food SALMON_SLICE = (new Food.Builder())
-			.nutrition(1).saturationMod(0.1f).build();
+			.nutrition(1).saturationMod(0.1f).fast().build();
 	public static final Food COOKED_SALMON_SLICE = (new Food.Builder())
-			.nutrition(3).saturationMod(0.8f).build();
+			.nutrition(3).saturationMod(0.8f).fast().build();
 	public static final Food MUTTON_CHOP = (new Food.Builder())
-			.nutrition(1).saturationMod(0.3f).meat().build();
+			.nutrition(1).saturationMod(0.3f).meat().fast().build();
 	public static final Food COOKED_MUTTON_CHOP = (new Food.Builder())
-			.nutrition(3).saturationMod(0.8f).meat().build();
+			.nutrition(3).saturationMod(0.8f).meat().fast().build();
 	public static final Food HAM = (new Food.Builder())
 			.nutrition(5).saturationMod(0.3f).build();
 	public static final Food SMOKED_HAM = (new Food.Builder())
@@ -106,7 +106,7 @@ public class Foods
 	public static final Food STUFFED_POTATO = (new Food.Builder())
 			.nutrition(10).saturationMod(0.7f).build();
 	public static final Food CABBAGE_ROLLS = (new Food.Builder())
-			.nutrition(6).saturationMod(0.5f).build();
+			.nutrition(5).saturationMod(0.5f).build();
 
 	// Bowl Foods
 	public static final Food COOKED_RICE = (new Food.Builder())

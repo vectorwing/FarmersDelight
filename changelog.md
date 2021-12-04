@@ -3,6 +3,7 @@
 ## 0.5.2
 
 ### Updates
+- Food portions, such as cabbage leaves and meat cuts, are now fast to eat;
 - Updated ja_JP translation;
 - Updated ko_KR translation;
 - Updated zh_CN translation;
