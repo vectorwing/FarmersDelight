@@ -26,61 +26,61 @@ public class TatamiBlock extends Block
 	public static final BooleanProperty PAIRED = BooleanProperty.create("paired");
 
 	public TatamiBlock() {
-		super(Block.Properties.from(Blocks.WHITE_WOOL));
-		this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.DOWN).with(PAIRED, false));
+		super(Block.Properties.copy(Blocks.WHITE_WOOL));
+		this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.DOWN).setValue(PAIRED, false));
 	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		Direction face = context.getFace();
-		BlockPos targetPos = context.getPos().offset(face.getOpposite());
-		BlockState targetState = context.getWorld().getBlockState(targetPos);
+		Direction face = context.getClickedFace();
+		BlockPos targetPos = context.getClickedPos().relative(face.getOpposite());
+		BlockState targetState = context.getLevel().getBlockState(targetPos);
 		boolean pairing = false;
 
-		if (context.getPlayer() != null && !context.getPlayer().isSneaking() && targetState.getBlock() == this && !targetState.get(PAIRED)) {
+		if (context.getPlayer() != null && !context.getPlayer().isShiftKeyDown() && targetState.getBlock() == this && !targetState.getValue(PAIRED)) {
 			pairing = true;
 		}
 
-		return this.getDefaultState().with(FACING, context.getFace().getOpposite()).with(PAIRED, pairing);
+		return this.defaultBlockState().setValue(FACING, context.getClickedFace().getOpposite()).setValue(PAIRED, pairing);
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-		if (!worldIn.isRemote) {
-			if (placer != null && placer.isSneaking()) {
+	public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+		super.setPlacedBy(worldIn, pos, state, placer, stack);
+		if (!worldIn.isClientSide) {
+			if (placer != null && placer.isShiftKeyDown()) {
 				return;
 			}
-			BlockPos facingPos = pos.offset(state.get(FACING));
+			BlockPos facingPos = pos.relative(state.getValue(FACING));
 			BlockState facingState = worldIn.getBlockState(facingPos);
-			if (facingState.getBlock() == this && !facingState.get(PAIRED)) {
-				worldIn.setBlockState(facingPos, state.with(FACING, state.get(FACING).getOpposite()).with(PAIRED, true), 3);
-				worldIn.updateBlock(pos, Blocks.AIR);
-				state.updateNeighbours(worldIn, pos, 3);
+			if (facingState.getBlock() == this && !facingState.getValue(PAIRED)) {
+				worldIn.setBlock(facingPos, state.setValue(FACING, state.getValue(FACING).getOpposite()).setValue(PAIRED, true), 3);
+				worldIn.blockUpdated(pos, Blocks.AIR);
+				state.updateNeighbourShapes(worldIn, pos, 3);
 			}
 		}
 	}
 
 	@Override
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		if (facing.equals(stateIn.get(FACING)) && stateIn.get(PAIRED) && worldIn.getBlockState(facingPos).getBlock() != this) {
-			return stateIn.with(PAIRED, false);
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		if (facing.equals(stateIn.getValue(FACING)) && stateIn.getValue(PAIRED) && worldIn.getBlockState(facingPos).getBlock() != this) {
+			return stateIn.setValue(PAIRED, false);
 		}
-		return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+		return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FACING, PAIRED);
 	}
 
 	@Override
 	public BlockState rotate(BlockState state, Rotation rot) {
-		return state.with(FACING, rot.rotate(state.get(FACING)));
+		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
 	}
 
 	@Override
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
-		return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+		return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
 	}
 }

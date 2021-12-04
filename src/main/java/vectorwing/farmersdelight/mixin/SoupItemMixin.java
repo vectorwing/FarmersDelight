@@ -19,6 +19,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import vectorwing.farmersdelight.setup.Configuration;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
+import net.minecraft.item.Item.Properties;
+
 @Mixin(SoupItem.class)
 public abstract class SoupItemMixin extends Item {
 	public SoupItemMixin(Properties properties) {
@@ -44,23 +46,23 @@ public abstract class SoupItemMixin extends Item {
 	/**
 	 * Replication of ConsumableItem but in Mixin form, to allow SoupItems to stack
 	 */
-	@Inject(at = @At(value = "HEAD"), method = "onItemUseFinish", cancellable = true)
+	@Inject(at = @At(value = "HEAD"), method = "finishUsingItem", cancellable = true)
 	private void onItemUseFinish(ItemStack stack, World worldIn, LivingEntity subject, CallbackInfoReturnable<ItemStack> cir) {
 		if (Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) {
 			ItemStack container = stack.getContainerItem();
 			if (container.isEmpty())
 				container = new ItemStack(Items.BOWL);
 
-			if (stack.isFood()) {
-				super.onItemUseFinish(stack, worldIn, subject);
+			if (stack.isEdible()) {
+				super.finishUsingItem(stack, worldIn, subject);
 			} else {
 				PlayerEntity player = subject instanceof PlayerEntity ? (PlayerEntity) subject : null;
 				if (player instanceof ServerPlayerEntity) {
 					CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayerEntity) player, stack);
 				}
 				if (player != null) {
-					player.addStat(Stats.ITEM_USED.get(this));
-					if (!player.abilities.isCreativeMode) {
+					player.awardStat(Stats.ITEM_USED.get(this));
+					if (!player.abilities.instabuild) {
 						stack.shrink(1);
 					}
 				}
@@ -69,10 +71,10 @@ public abstract class SoupItemMixin extends Item {
 			if (stack.isEmpty()) {
 				cir.setReturnValue(container);
 			} else {
-				if (subject instanceof PlayerEntity && !((PlayerEntity) subject).abilities.isCreativeMode) {
+				if (subject instanceof PlayerEntity && !((PlayerEntity) subject).abilities.instabuild) {
 					PlayerEntity player = (PlayerEntity) subject;
-					if (!player.inventory.addItemStackToInventory(container)) {
-						player.dropItem(container, false);
+					if (!player.inventory.add(container)) {
+						player.drop(container, false);
 					}
 				}
 				cir.setReturnValue(stack);

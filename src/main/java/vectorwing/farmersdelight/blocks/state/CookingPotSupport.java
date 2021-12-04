@@ -16,11 +16,11 @@ public enum CookingPotSupport implements IStringSerializable
 
 	@Override
 	public String toString() {
-		return this.getString();
+		return this.getSerializedName();
 	}
 
 	@Override
-	public String getString() {
+	public String getSerializedName() {
 		return this.supportName;
 	}
 }

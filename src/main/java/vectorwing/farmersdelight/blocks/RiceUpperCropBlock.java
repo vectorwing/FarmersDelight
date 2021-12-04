@@ -17,14 +17,16 @@ import net.minecraft.world.World;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class RiceUpperCropBlock extends CropsBlock
 {
-	public static final IntegerProperty RICE_AGE = BlockStateProperties.AGE_0_3;
+	public static final IntegerProperty RICE_AGE = BlockStateProperties.AGE_3;
 	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
-			Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D),
-			Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 10.0D, 13.0D),
-			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D),
-			Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D)
+			Block.box(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D),
+			Block.box(3.0D, 0.0D, 3.0D, 13.0D, 10.0D, 13.0D),
+			Block.box(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D),
+			Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D)
 	};
 
 	public RiceUpperCropBlock(Properties properties) {
@@ -38,7 +40,7 @@ public class RiceUpperCropBlock extends CropsBlock
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return SHAPE_BY_AGE[state.get(this.getAgeProperty())];
+		return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
 	}
 
 	@Override
@@ -47,17 +49,17 @@ public class RiceUpperCropBlock extends CropsBlock
 	}
 
 	@Override
-	protected IItemProvider getSeedsItem() {
+	protected IItemProvider getBaseSeedId() {
 		return ModItems.RICE.get();
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(RICE_AGE);
 	}
 
 	@Override
-	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
+	protected boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		return state.getBlock() == ModBlocks.RICE_CROP.get();
 	}
 
@@ -67,7 +69,7 @@ public class RiceUpperCropBlock extends CropsBlock
 	}
 
 	@Override
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		return (worldIn.getLightSubtracted(pos, 0) >= 8 || worldIn.canSeeSky(pos)) && worldIn.getBlockState(pos.down()).getBlock() == ModBlocks.RICE_CROP.get();
+	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		return (worldIn.getRawBrightness(pos, 0) >= 8 || worldIn.canSeeSky(pos)) && worldIn.getBlockState(pos.below()).getBlock() == ModBlocks.RICE_CROP.get();
 	}
 }

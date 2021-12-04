@@ -28,6 +28,8 @@ import vectorwing.farmersdelight.utils.tags.ModTags;
 import javax.annotation.Nonnull;
 import java.util.Set;
 
+import net.minecraft.item.Item.Properties;
+
 public class KnifeItem extends ToolItem
 {
 	public static final ToolType KNIFE_TOOL = ToolType.get(FarmersDelight.MODID + "_knife");
@@ -47,21 +49,21 @@ public class KnifeItem extends ToolItem
 	@Override
 	public float getDestroySpeed(ItemStack stack, BlockState state) {
 		Material material = state.getMaterial();
-		if (EFFECTIVE_ON.contains(state.getBlock())) return this.efficiency;
+		if (EFFECTIVE_ON.contains(state.getBlock())) return this.speed;
 		return material != Material.WOOL
-				&& material != Material.CARPET
+				&& material != Material.CLOTH_DECORATION
 				&& material != Material.CAKE
-				&& material != Material.WEB ? super.getDestroySpeed(stack, state) : this.efficiency;
+				&& material != Material.WEB ? super.getDestroySpeed(stack, state) : this.speed;
 	}
 
 	@Override
-	public boolean canPlayerBreakBlockWhileHolding(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
+	public boolean canAttackBlock(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
 		return !player.isCreative();
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		stack.damageItem(1, attacker, (user) -> user.sendBreakAnimation(EquipmentSlotType.MAINHAND));
+	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+		stack.hurtAndBreak(1, attacker, (user) -> user.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 		return true;
 	}
 
@@ -70,8 +72,8 @@ public class KnifeItem extends ToolItem
 	{
 		@SubscribeEvent
 		public static void onKnifeKnockback(LivingKnockBackEvent event) {
-			LivingEntity attacker = event.getEntityLiving().getAttackingEntity();
-			ItemStack toolStack = attacker != null ? attacker.getHeldItem(Hand.MAIN_HAND) : ItemStack.EMPTY;
+			LivingEntity attacker = event.getEntityLiving().getKillCredit();
+			ItemStack toolStack = attacker != null ? attacker.getItemInHand(Hand.MAIN_HAND) : ItemStack.EMPTY;
 			if (toolStack.getItem() instanceof KnifeItem) {
 				float f = event.getOriginalStrength();
 				event.setStrength(event.getOriginalStrength() - 0.1F);
@@ -84,17 +86,17 @@ public class KnifeItem extends ToolItem
 			World world = event.getWorld();
 			BlockPos pos = event.getPos();
 			BlockState state = event.getWorld().getBlockState(pos);
-			ItemStack toolStack = event.getPlayer().getHeldItem(event.getHand());
+			ItemStack toolStack = event.getPlayer().getItemInHand(event.getHand());
 
 			if (state.getBlock() == Blocks.CAKE && ModTags.KNIVES.contains(toolStack.getItem())) {
-				int bites = state.get(CakeBlock.BITES);
+				int bites = state.getValue(CakeBlock.BITES);
 				if (bites < 6) {
-					world.setBlockState(pos, state.with(CakeBlock.BITES, bites + 1), 3);
+					world.setBlock(pos, state.setValue(CakeBlock.BITES, bites + 1), 3);
 				} else {
 					world.removeBlock(pos, false);
 				}
-				InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ModItems.CAKE_SLICE.get()));
-				world.playSound(null, pos, SoundEvents.BLOCK_WOOL_BREAK, SoundCategory.PLAYERS, 0.8F, 0.8F);
+				InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ModItems.CAKE_SLICE.get()));
+				world.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundCategory.PLAYERS, 0.8F, 0.8F);
 
 				event.setCancellationResult(ActionResultType.SUCCESS);
 				event.setCanceled(true);
@@ -102,25 +104,25 @@ public class KnifeItem extends ToolItem
 		}
 	}
 
-	public ActionResultType onItemUse(ItemUseContext context) {
-		World world = context.getWorld();
-		ItemStack toolStack = context.getItem();
-		BlockPos pos = context.getPos();
+	public ActionResultType useOn(ItemUseContext context) {
+		World world = context.getLevel();
+		ItemStack toolStack = context.getItemInHand();
+		BlockPos pos = context.getClickedPos();
 		BlockState state = world.getBlockState(pos);
-		Direction facing = context.getFace();
+		Direction facing = context.getClickedFace();
 
 		if (state.getBlock() == Blocks.PUMPKIN && ModTags.KNIVES.contains(toolStack.getItem())) {
 			PlayerEntity player = context.getPlayer();
-			if (player != null && !world.isRemote) {
-				Direction direction = facing.getAxis() == Direction.Axis.Y ? player.getHorizontalFacing().getOpposite() : facing;
-				world.playSound(null, pos, SoundEvents.BLOCK_PUMPKIN_CARVE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-				world.setBlockState(pos, Blocks.CARVED_PUMPKIN.getDefaultState().with(CarvedPumpkinBlock.FACING, direction), 11);
-				ItemEntity itemEntity = new ItemEntity(world, (double) pos.getX() + 0.5D + (double) direction.getXOffset() * 0.65D, (double) pos.getY() + 0.1D, (double) pos.getZ() + 0.5D + (double) direction.getZOffset() * 0.65D, new ItemStack(Items.PUMPKIN_SEEDS, 4));
-				itemEntity.setMotion(0.05D * (double) direction.getXOffset() + world.rand.nextDouble() * 0.02D, 0.05D, 0.05D * (double) direction.getZOffset() + world.rand.nextDouble() * 0.02D);
-				world.addEntity(itemEntity);
-				toolStack.damageItem(1, player, (playerIn) -> playerIn.sendBreakAnimation(context.getHand()));
+			if (player != null && !world.isClientSide) {
+				Direction direction = facing.getAxis() == Direction.Axis.Y ? player.getDirection().getOpposite() : facing;
+				world.playSound(null, pos, SoundEvents.PUMPKIN_CARVE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				world.setBlock(pos, Blocks.CARVED_PUMPKIN.defaultBlockState().setValue(CarvedPumpkinBlock.FACING, direction), 11);
+				ItemEntity itemEntity = new ItemEntity(world, (double) pos.getX() + 0.5D + (double) direction.getStepX() * 0.65D, (double) pos.getY() + 0.1D, (double) pos.getZ() + 0.5D + (double) direction.getStepZ() * 0.65D, new ItemStack(Items.PUMPKIN_SEEDS, 4));
+				itemEntity.setDeltaMovement(0.05D * (double) direction.getStepX() + world.random.nextDouble() * 0.02D, 0.05D, 0.05D * (double) direction.getStepZ() + world.random.nextDouble() * 0.02D);
+				world.addFreshEntity(itemEntity);
+				toolStack.hurtAndBreak(1, player, (playerIn) -> playerIn.broadcastBreakEvent(context.getHand()));
 			}
-			return ActionResultType.func_233537_a_(world.isRemote);
+			return ActionResultType.sidedSuccess(world.isClientSide);
 		} else {
 			return ActionResultType.PASS;
 		}
@@ -128,14 +130,14 @@ public class KnifeItem extends ToolItem
 
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack, net.minecraft.enchantment.Enchantment enchantment) {
-		Set<Enchantment> ALLOWED_ENCHANTMENTS = Sets.newHashSet(Enchantments.SHARPNESS, Enchantments.SMITE, Enchantments.BANE_OF_ARTHROPODS, Enchantments.KNOCKBACK, Enchantments.FIRE_ASPECT, Enchantments.LOOTING);
+		Set<Enchantment> ALLOWED_ENCHANTMENTS = Sets.newHashSet(Enchantments.SHARPNESS, Enchantments.SMITE, Enchantments.BANE_OF_ARTHROPODS, Enchantments.KNOCKBACK, Enchantments.FIRE_ASPECT, Enchantments.MOB_LOOTING);
 		if (ALLOWED_ENCHANTMENTS.contains(enchantment)) {
 			return true;
 		}
-		Set<Enchantment> DENIED_ENCHANTMENTS = Sets.newHashSet(Enchantments.FORTUNE);
+		Set<Enchantment> DENIED_ENCHANTMENTS = Sets.newHashSet(Enchantments.BLOCK_FORTUNE);
 		if (DENIED_ENCHANTMENTS.contains(enchantment)) {
 			return false;
 		}
-		return enchantment.type.canEnchantItem(stack.getItem());
+		return enchantment.category.canEnchant(stack.getItem());
 	}
 }

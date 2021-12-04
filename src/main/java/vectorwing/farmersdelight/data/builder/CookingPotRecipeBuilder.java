@@ -48,7 +48,7 @@ public class CookingPotRecipeBuilder
 	}
 
 	public CookingPotRecipeBuilder addIngredient(ITag<Item> tagIn) {
-		return this.addIngredient(Ingredient.fromTag(tagIn));
+		return this.addIngredient(Ingredient.of(tagIn));
 	}
 
 	public CookingPotRecipeBuilder addIngredient(IItemProvider itemIn) {
@@ -57,7 +57,7 @@ public class CookingPotRecipeBuilder
 
 	public CookingPotRecipeBuilder addIngredient(IItemProvider itemIn, int quantity) {
 		for (int i = 0; i < quantity; ++i) {
-			this.addIngredient(Ingredient.fromItems(itemIn));
+			this.addIngredient(Ingredient.of(itemIn));
 		}
 		return this;
 	}
@@ -112,11 +112,11 @@ public class CookingPotRecipeBuilder
 		}
 
 		@Override
-		public void serialize(JsonObject json) {
+		public void serializeRecipeData(JsonObject json) {
 			JsonArray arrayIngredients = new JsonArray();
 
 			for (Ingredient ingredient : this.ingredients) {
-				arrayIngredients.add(ingredient.serialize());
+				arrayIngredients.add(ingredient.toJson());
 			}
 			json.add("ingredients", arrayIngredients);
 
@@ -139,24 +139,24 @@ public class CookingPotRecipeBuilder
 		}
 
 		@Override
-		public ResourceLocation getID() {
+		public ResourceLocation getId() {
 			return this.id;
 		}
 
 		@Override
-		public IRecipeSerializer<?> getSerializer() {
+		public IRecipeSerializer<?> getType() {
 			return CookingPotRecipe.SERIALIZER;
 		}
 
 		@Nullable
 		@Override
-		public JsonObject getAdvancementJson() {
+		public JsonObject serializeAdvancement() {
 			return null;
 		}
 
 		@Nullable
 		@Override
-		public ResourceLocation getAdvancementID() {
+		public ResourceLocation getAdvancementId() {
 			return null;
 		}
 	}

@@ -25,11 +25,11 @@ import javax.annotation.Nullable;
 public class TatamiMatBlock extends HorizontalBlock
 {
 	public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
+	protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
 
 	public TatamiMatBlock() {
-		super(Block.Properties.from(Blocks.WHITE_WOOL).hardnessAndResistance(0.3F));
-		this.setDefaultState(this.getStateContainer().getBaseState().with(PART, BedPart.FOOT));
+		super(Block.Properties.copy(Blocks.WHITE_WOOL).strength(0.3F));
+		this.registerDefaultState(this.getStateDefinition().any().setValue(PART, BedPart.FOOT));
 	}
 
 	private static Direction getDirectionToOther(BedPart part, Direction direction) {
@@ -37,8 +37,8 @@ public class TatamiMatBlock extends HorizontalBlock
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(HORIZONTAL_FACING, PART);
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+		builder.add(FACING, PART);
 	}
 
 	@Override
@@ -47,63 +47,63 @@ public class TatamiMatBlock extends HorizontalBlock
 	}
 
 	@Override
-	public BlockRenderType getRenderType(BlockState state) {
+	public BlockRenderType getRenderShape(BlockState state) {
 		return BlockRenderType.MODEL;
 	}
 
 	@Override
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		if (facing == getDirectionToOther(stateIn.get(PART), stateIn.get(HORIZONTAL_FACING))) {
-			return stateIn.isValidPosition(worldIn, currentPos) && facingState.matchesBlock(this) && facingState.get(PART) != stateIn.get(PART) ? stateIn : Blocks.AIR.getDefaultState();
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		if (facing == getDirectionToOther(stateIn.getValue(PART), stateIn.getValue(FACING))) {
+			return stateIn.canSurvive(worldIn, currentPos) && facingState.is(this) && facingState.getValue(PART) != stateIn.getValue(PART) ? stateIn : Blocks.AIR.defaultBlockState();
 		} else {
-			return !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+			return !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 		}
 	}
 
 	@Override
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		return !worldIn.isAirBlock(pos.down());
+	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		return !worldIn.isEmptyBlock(pos.below());
 	}
 
 	@Override
-	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-		if (!worldIn.isRemote && player.isCreative()) {
-			BedPart part = state.get(PART);
+	public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+		if (!worldIn.isClientSide && player.isCreative()) {
+			BedPart part = state.getValue(PART);
 			if (part == BedPart.FOOT) {
-				BlockPos pairPos = pos.offset(getDirectionToOther(part, state.get(HORIZONTAL_FACING)));
+				BlockPos pairPos = pos.relative(getDirectionToOther(part, state.getValue(FACING)));
 				BlockState pairState = worldIn.getBlockState(pairPos);
-				if (pairState.getBlock() == this && pairState.get(PART) == BedPart.HEAD) {
-					worldIn.setBlockState(pairPos, Blocks.AIR.getDefaultState(), 35);
-					worldIn.playEvent(player, 2001, pairPos, Block.getStateId(pairState));
+				if (pairState.getBlock() == this && pairState.getValue(PART) == BedPart.HEAD) {
+					worldIn.setBlock(pairPos, Blocks.AIR.defaultBlockState(), 35);
+					worldIn.levelEvent(player, 2001, pairPos, Block.getId(pairState));
 				}
 			}
 		}
 
-		super.onBlockHarvested(worldIn, pos, state, player);
+		super.playerWillDestroy(worldIn, pos, state, player);
 	}
 
 	@Override
-	public PushReaction getPushReaction(BlockState state) {
+	public PushReaction getPistonPushReaction(BlockState state) {
 		return PushReaction.DESTROY;
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-		if (!worldIn.isRemote) {
-			BlockPos facingPos = pos.offset(state.get(HORIZONTAL_FACING));
-			worldIn.setBlockState(facingPos, state.with(PART, BedPart.HEAD), 3);
-			worldIn.updateBlock(pos, Blocks.AIR);
-			state.updateNeighbours(worldIn, pos, 3);
+	public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+		super.setPlacedBy(worldIn, pos, state, placer, stack);
+		if (!worldIn.isClientSide) {
+			BlockPos facingPos = pos.relative(state.getValue(FACING));
+			worldIn.setBlock(facingPos, state.setValue(PART, BedPart.HEAD), 3);
+			worldIn.blockUpdated(pos, Blocks.AIR);
+			state.updateNeighbourShapes(worldIn, pos, 3);
 		}
 	}
 
 	@Override
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		Direction facing = context.getPlacementHorizontalFacing();
-		BlockPos pos = context.getPos();
-		BlockPos pairPos = pos.offset(facing);
-		return context.getWorld().getBlockState(pairPos).isReplaceable(context) ? this.getDefaultState().with(HORIZONTAL_FACING, facing) : null;
+		Direction facing = context.getHorizontalDirection();
+		BlockPos pos = context.getClickedPos();
+		BlockPos pairPos = pos.relative(facing);
+		return context.getLevel().getBlockState(pairPos).canBeReplaced(context) ? this.defaultBlockState().setValue(FACING, facing) : null;
 	}
 }

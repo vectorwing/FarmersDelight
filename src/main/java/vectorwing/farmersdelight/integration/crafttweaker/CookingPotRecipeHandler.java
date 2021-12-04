@@ -25,7 +25,7 @@ public final class CookingPotRecipeHandler implements IRecipeHandler<CookingPotR
                 "%s.addRecipe(%s, %s, %s, %s, %s, %s);",
                 manager.getCommandString(),
                 StringUtils.quoteAndEscape(recipe.getId()),
-                new MCItemStackMutable(recipe.getRecipeOutput()).getCommandString(),
+                new MCItemStackMutable(recipe.getResultItem()).getCommandString(),
                 recipe.getIngredients().stream()
                         .map(IIngredient::fromIngredient)
                         .map(IIngredient::getCommandString)
@@ -47,7 +47,7 @@ public final class CookingPotRecipeHandler implements IRecipeHandler<CookingPotR
                         new CookingPotRecipe(id,
                                 recipe.getGroup(),
                                 newIngredients,
-                                recipe.getRecipeOutput(),
+                                recipe.getResultItem(),
                                 recipe.getOutputContainer(),
                                 recipe.getExperience(),
                                 recipe.getCookTime())

@@ -29,20 +29,22 @@ import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import java.util.function.Supplier;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 @SuppressWarnings("deprecation")
 public class PieBlock extends Block
 {
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 3);
 
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 14.0D);
+	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 14.0D);
 
 	public final Supplier<Item> pieSlice;
 
 	public PieBlock(Properties properties, Supplier<Item> pieSlice) {
 		super(properties);
 		this.pieSlice = pieSlice;
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(BITES, 0));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(BITES, 0));
 	}
 
 	public ItemStack getPieSliceItem() {
@@ -60,13 +62,13 @@ public class PieBlock extends Block
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing());
+		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		ItemStack heldStack = player.getHeldItem(handIn);
-		if (worldIn.isRemote) {
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		ItemStack heldStack = player.getItemInHand(handIn);
+		if (worldIn.isClientSide) {
 			if (ModTags.KNIVES.contains(heldStack.getItem())) {
 				return cutSlice(worldIn, pos, state);
 			}
@@ -94,24 +96,24 @@ public class PieBlock extends Block
 			return ActionResultType.PASS;
 		} else {
 			ItemStack sliceStack = this.getPieSliceItem();
-			Food sliceFood = sliceStack.getItem().getFood();
+			Food sliceFood = sliceStack.getItem().getFoodProperties();
 
-			playerIn.getFoodStats().consume(sliceStack.getItem(), sliceStack);
-			if (this.getPieSliceItem().getItem().isFood() && sliceFood != null) {
+			playerIn.getFoodData().eat(sliceStack.getItem(), sliceStack);
+			if (this.getPieSliceItem().getItem().isEdible() && sliceFood != null) {
 				for (Pair<EffectInstance, Float> pair : sliceFood.getEffects()) {
-					if (!worldIn.isRemote && pair.getFirst() != null && worldIn.rand.nextFloat() < pair.getSecond()) {
-						playerIn.addPotionEffect(new EffectInstance(pair.getFirst()));
+					if (!worldIn.isClientSide && pair.getFirst() != null && worldIn.random.nextFloat() < pair.getSecond()) {
+						playerIn.addEffect(new EffectInstance(pair.getFirst()));
 					}
 				}
 			}
 
-			int bites = state.get(BITES);
+			int bites = state.getValue(BITES);
 			if (bites < getMaxBites() - 1) {
-				worldIn.setBlockState(pos, state.with(BITES, bites + 1), 3);
+				worldIn.setBlock(pos, state.setValue(BITES, bites + 1), 3);
 			} else {
 				worldIn.removeBlock(pos, false);
 			}
-			worldIn.playSound(null, pos, SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.PLAYERS, 0.8F, 0.8F);
+			worldIn.playSound(null, pos, SoundEvents.GENERIC_EAT, SoundCategory.PLAYERS, 0.8F, 0.8F);
 			return ActionResultType.SUCCESS;
 		}
 	}
@@ -120,44 +122,44 @@ public class PieBlock extends Block
 	 * Cuts off a bite and drops a slice item, without feeding the player.
 	 */
 	protected ActionResultType cutSlice(World worldIn, BlockPos pos, BlockState state) {
-		int bites = state.get(BITES);
+		int bites = state.getValue(BITES);
 		if (bites < getMaxBites() - 1) {
-			worldIn.setBlockState(pos, state.with(BITES, bites + 1), 3);
+			worldIn.setBlock(pos, state.setValue(BITES, bites + 1), 3);
 		} else {
 			worldIn.removeBlock(pos, false);
 		}
-		InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), this.getPieSliceItem());
-		worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOL_BREAK, SoundCategory.PLAYERS, 0.8F, 0.8F);
+		InventoryHelper.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), this.getPieSliceItem());
+		worldIn.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundCategory.PLAYERS, 0.8F, 0.8F);
 		return ActionResultType.SUCCESS;
 	}
 
 	@Override
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		return facing == Direction.DOWN && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		return facing == Direction.DOWN && !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
 
 	@Override
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		return worldIn.getBlockState(pos.down()).getMaterial().isSolid();
+	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		return worldIn.getBlockState(pos.below()).getMaterial().isSolid();
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FACING, BITES);
 	}
 
 	@Override
-	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-		return getMaxBites() - blockState.get(BITES);
+	public int getAnalogOutputSignal(BlockState blockState, World worldIn, BlockPos pos) {
+		return getMaxBites() - blockState.getValue(BITES);
 	}
 
 	@Override
-	public boolean hasComparatorInputOverride(BlockState state) {
+	public boolean hasAnalogOutputSignal(BlockState state) {
 		return true;
 	}
 
 	@Override
-	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+	public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
 		return false;
 	}
 }

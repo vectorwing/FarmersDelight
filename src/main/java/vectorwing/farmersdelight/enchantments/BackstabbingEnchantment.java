@@ -18,6 +18,8 @@ import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.registry.ModEnchantments;
 
+import net.minecraft.enchantment.Enchantment.Rarity;
+
 public class BackstabbingEnchantment extends Enchantment
 {
 	public BackstabbingEnchantment(Rarity rarityIn, EnchantmentType typeIn, EquipmentSlotType... slots) {
@@ -35,13 +37,13 @@ public class BackstabbingEnchantment extends Enchantment
 	}
 
 	@Override
-	public int getMinEnchantability(int enchantmentLevel) {
+	public int getMinCost(int enchantmentLevel) {
 		return 15 + (enchantmentLevel - 1) * 9;
 	}
 
 	@Override
-	public int getMaxEnchantability(int enchantmentLevel) {
-		return super.getMinEnchantability(enchantmentLevel) + 50;
+	public int getMaxCost(int enchantmentLevel) {
+		return super.getMinCost(enchantmentLevel) + 50;
 	}
 
 	/**
@@ -49,10 +51,10 @@ public class BackstabbingEnchantment extends Enchantment
 	 */
 	public static boolean isLookingBehindTarget(LivingEntity target, Vector3d attackerLocation) {
 		if (attackerLocation != null) {
-			Vector3d lookingVector = target.getLook(1.0F);
-			Vector3d attackAngleVector = attackerLocation.subtract(target.getPositionVec()).normalize();
+			Vector3d lookingVector = target.getViewVector(1.0F);
+			Vector3d attackAngleVector = attackerLocation.subtract(target.position()).normalize();
 			attackAngleVector = new Vector3d(attackAngleVector.x, 0.0D, attackAngleVector.z);
-			return attackAngleVector.dotProduct(lookingVector) < -0.5D;
+			return attackAngleVector.dot(lookingVector) < -0.5D;
 		}
 		return false;
 	}
@@ -68,15 +70,15 @@ public class BackstabbingEnchantment extends Enchantment
 		@SubscribeEvent
 		@SuppressWarnings("unused")
 		public static void onKnifeBackstab(LivingHurtEvent event) {
-			Entity attacker = event.getSource().getTrueSource();
+			Entity attacker = event.getSource().getEntity();
 			if (attacker instanceof PlayerEntity) {
-				ItemStack weapon = ((PlayerEntity) attacker).getHeldItemMainhand();
-				int level = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.BACKSTABBING.get(), weapon);
-				if (level > 0 && isLookingBehindTarget(event.getEntityLiving(), event.getSource().getDamageLocation())) {
-					World world = event.getEntityLiving().getEntityWorld();
-					if (!world.isRemote) {
+				ItemStack weapon = ((PlayerEntity) attacker).getMainHandItem();
+				int level = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.BACKSTABBING.get(), weapon);
+				if (level > 0 && isLookingBehindTarget(event.getEntityLiving(), event.getSource().getSourcePosition())) {
+					World world = event.getEntityLiving().getCommandSenderWorld();
+					if (!world.isClientSide) {
 						event.setAmount(getBackstabbingDamagePerLevel(event.getAmount(), level));
-						world.playSound(null, attacker.getPosX(), attacker.getPosY(), attacker.getPosZ(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+						world.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 					}
 				}
 			}

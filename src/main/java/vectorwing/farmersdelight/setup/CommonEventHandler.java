@@ -54,13 +54,13 @@ import java.util.*;
 public class CommonEventHandler
 {
 	// TODO: Learn more about Loot Modifiers, and migrate remainder loot injections to it
-	private static final ResourceLocation SHIPWRECK_SUPPLY_CHEST = LootTables.CHESTS_SHIPWRECK_SUPPLY;
+	private static final ResourceLocation SHIPWRECK_SUPPLY_CHEST = LootTables.SHIPWRECK_SUPPLY;
 	private static final Set<ResourceLocation> VILLAGE_HOUSE_CHESTS = Sets.newHashSet(
-			LootTables.CHESTS_VILLAGE_VILLAGE_PLAINS_HOUSE,
-			LootTables.CHESTS_VILLAGE_VILLAGE_SAVANNA_HOUSE,
-			LootTables.CHESTS_VILLAGE_VILLAGE_SNOWY_HOUSE,
-			LootTables.CHESTS_VILLAGE_VILLAGE_TAIGA_HOUSE,
-			LootTables.CHESTS_VILLAGE_VILLAGE_DESERT_HOUSE);
+			LootTables.VILLAGE_PLAINS_HOUSE,
+			LootTables.VILLAGE_SAVANNA_HOUSE,
+			LootTables.VILLAGE_SNOWY_HOUSE,
+			LootTables.VILLAGE_TAIGA_HOUSE,
+			LootTables.VILLAGE_DESERT_HOUSE);
 
 	public static void init(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
@@ -69,24 +69,24 @@ public class CommonEventHandler
 			CropPatchGeneration.registerConfiguredFeatures();
 
 			List<ItemStack> chickenFood = new ArrayList<>();
-			Collections.addAll(chickenFood, ChickenEntityAccessor.getFoodItems().getMatchingStacks());
+			Collections.addAll(chickenFood, ChickenEntityAccessor.getFoodItems().getItems());
 			chickenFood.add(new ItemStack(ModItems.CABBAGE_SEEDS.get()));
 			chickenFood.add(new ItemStack(ModItems.TOMATO_SEEDS.get()));
 			chickenFood.add(new ItemStack(ModItems.RICE.get()));
-			ChickenEntityAccessor.setFoodItems(Ingredient.fromStacks(chickenFood.stream()));
+			ChickenEntityAccessor.setFoodItems(Ingredient.of(chickenFood.stream()));
 
 			List<ItemStack> pigFood = new ArrayList<>();
-			Collections.addAll(pigFood, PigEntityAccessor.getFoodItems().getMatchingStacks());
+			Collections.addAll(pigFood, PigEntityAccessor.getFoodItems().getItems());
 			pigFood.add(new ItemStack(ModItems.CABBAGE.get()));
 			pigFood.add(new ItemStack(ModItems.TOMATO.get()));
-			PigEntityAccessor.setFoodItems(Ingredient.fromStacks(pigFood.stream()));
+			PigEntityAccessor.setFoodItems(Ingredient.of(pigFood.stream()));
 		});
 
 		ModAdvancements.register();
 
-		LootFunctionManager.func_237451_a_(CopyMealFunction.ID.toString(), new CopyMealFunction.Serializer());
-		LootFunctionManager.func_237451_a_(CopySkilletFunction.ID.toString(), new CopySkilletFunction.Serializer());
-		LootFunctionManager.func_237451_a_(SmokerCookFunction.ID.toString(), new SmokerCookFunction.Serializer());
+		LootFunctionManager.register(CopyMealFunction.ID.toString(), new CopyMealFunction.Serializer());
+		LootFunctionManager.register(CopySkilletFunction.ID.toString(), new CopySkilletFunction.Serializer());
+		LootFunctionManager.register(SmokerCookFunction.ID.toString(), new SmokerCookFunction.Serializer());
 
 		CraftingHelper.register(new VanillaCrateEnabledCondition.Serializer());
 
@@ -126,48 +126,48 @@ public class CommonEventHandler
 
 	public static void registerCompostables() {
 		// 30% chance
-		ComposterBlock.CHANCES.put(ModItems.TREE_BARK.get(), 0.3F);
-		ComposterBlock.CHANCES.put(ModItems.STRAW.get(), 0.3F);
-		ComposterBlock.CHANCES.put(ModItems.CABBAGE_SEEDS.get(), 0.3F);
-		ComposterBlock.CHANCES.put(ModItems.TOMATO_SEEDS.get(), 0.3F);
-		ComposterBlock.CHANCES.put(ModItems.RICE.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.RICE_PANICLE.get(), 0.65F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.TREE_BARK.get(), 0.3F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.STRAW.get(), 0.3F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.CABBAGE_SEEDS.get(), 0.3F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.TOMATO_SEEDS.get(), 0.3F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.RICE.get(), 0.65F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.RICE_PANICLE.get(), 0.65F);
 
 		// 50% chance
-		ComposterBlock.CHANCES.put(ModItems.PUMPKIN_SLICE.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.CABBAGE_LEAF.get(), 0.65F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.PUMPKIN_SLICE.get(), 0.65F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.CABBAGE_LEAF.get(), 0.65F);
 
 		// 65% chance
-		ComposterBlock.CHANCES.put(ModItems.CABBAGE.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.ONION.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.TOMATO.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.WILD_CABBAGES.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.WILD_ONIONS.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.WILD_TOMATOES.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.WILD_CARROTS.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.WILD_POTATOES.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.WILD_BEETROOTS.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.WILD_RICE.get(), 0.65F);
-		ComposterBlock.CHANCES.put(ModItems.PIE_CRUST.get(), 0.65F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.CABBAGE.get(), 0.65F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.ONION.get(), 0.65F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.TOMATO.get(), 0.65F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.WILD_CABBAGES.get(), 0.65F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.WILD_ONIONS.get(), 0.65F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.WILD_TOMATOES.get(), 0.65F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.WILD_CARROTS.get(), 0.65F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.WILD_POTATOES.get(), 0.65F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.WILD_BEETROOTS.get(), 0.65F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.WILD_RICE.get(), 0.65F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.PIE_CRUST.get(), 0.65F);
 
 		// 85% chance
-		ComposterBlock.CHANCES.put(ModItems.RICE_BALE.get(), 0.85F);
-		ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_COOKIE.get(), 0.85F);
-		ComposterBlock.CHANCES.put(ModItems.HONEY_COOKIE.get(), 0.85F);
-		ComposterBlock.CHANCES.put(ModItems.CAKE_SLICE.get(), 0.85F);
-		ComposterBlock.CHANCES.put(ModItems.APPLE_PIE_SLICE.get(), 0.85F);
-		ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get(), 0.85F);
-		ComposterBlock.CHANCES.put(ModItems.CHOCOLATE_PIE_SLICE.get(), 0.85F);
-		ComposterBlock.CHANCES.put(ModItems.RAW_PASTA.get(), 0.85F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.RICE_BALE.get(), 0.85F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.SWEET_BERRY_COOKIE.get(), 0.85F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.HONEY_COOKIE.get(), 0.85F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.CAKE_SLICE.get(), 0.85F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.APPLE_PIE_SLICE.get(), 0.85F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get(), 0.85F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.CHOCOLATE_PIE_SLICE.get(), 0.85F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.RAW_PASTA.get(), 0.85F);
 
 		// 100% chance
-		ComposterBlock.CHANCES.put(ModItems.APPLE_PIE.get(), 1.0F);
-		ComposterBlock.CHANCES.put(ModItems.SWEET_BERRY_CHEESECAKE.get(), 1.0F);
-		ComposterBlock.CHANCES.put(ModItems.CHOCOLATE_PIE.get(), 1.0F);
-		ComposterBlock.CHANCES.put(ModItems.DUMPLINGS.get(), 1.0F);
-		ComposterBlock.CHANCES.put(ModItems.STUFFED_PUMPKIN.get(), 1.0F);
-		ComposterBlock.CHANCES.put(ModItems.BROWN_MUSHROOM_COLONY.get(), 1.0F);
-		ComposterBlock.CHANCES.put(ModItems.RED_MUSHROOM_COLONY.get(), 1.0F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.APPLE_PIE.get(), 1.0F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.SWEET_BERRY_CHEESECAKE.get(), 1.0F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.CHOCOLATE_PIE.get(), 1.0F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.DUMPLINGS.get(), 1.0F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.STUFFED_PUMPKIN.get(), 1.0F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.BROWN_MUSHROOM_COLONY.get(), 1.0F);
+		ComposterBlock.COMPOSTABLES.put(ModItems.RED_MUSHROOM_COLONY.get(), 1.0F);
 	}
 
 	@SubscribeEvent
@@ -177,37 +177,37 @@ public class CommonEventHandler
 
 		if (event.getName().getPath().equals("beach")) {
 			if (Configuration.GENERATE_WILD_BEETROOTS.get()) {
-				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_BEETROOTS);
+				builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_BEETROOTS);
 			}
 			if (Configuration.GENERATE_WILD_CABBAGES.get()) {
-				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_CABBAGES);
+				builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_CABBAGES);
 			}
 		}
 
 		if (event.getCategory().equals(Biome.Category.SWAMP) || event.getCategory().equals(Biome.Category.JUNGLE)) {
 			if (Configuration.GENERATE_WILD_RICE.get()) {
-				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_RICE);
+				builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_RICE);
 			}
 		}
 
 		if (climate.temperature >= 1.0F) {
 			if (Configuration.GENERATE_WILD_TOMATOES.get()) {
-				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_TOMATOES);
+				builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_TOMATOES);
 			}
 		}
 
 		if (climate.temperature > 0.3F && climate.temperature < 1.0F) {
 			if (Configuration.GENERATE_WILD_CARROTS.get()) {
-				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_CARROTS);
+				builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_CARROTS);
 			}
 			if (Configuration.GENERATE_WILD_ONIONS.get()) {
-				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_ONIONS);
+				builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_ONIONS);
 			}
 		}
 
 		if (climate.temperature > 0.0F && climate.temperature <= 0.3F) {
 			if (Configuration.GENERATE_WILD_POTATOES.get()) {
-				builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_POTATOES);
+				builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CropPatchGeneration.PATCH_WILD_POTATOES);
 			}
 		}
 	}
@@ -234,12 +234,12 @@ public class CommonEventHandler
 
 		// Adds 3:00 of Jump Boost II when eating Rabbit Stew
 		if (Configuration.RABBIT_STEW_JUMP_BOOST.get() && food.equals(Items.RABBIT_STEW)) {
-			entity.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 100, 1));
+			entity.addEffect(new EffectInstance(Effects.JUMP, 100, 1));
 		}
 
 		// Adds 5:00 of Comfort when eating foods inside the tag farmersdelight:comfort_foods
-		if (Configuration.COMFORT_FOOD_TAG_EFFECT.get() && food.isIn(ModTags.COMFORT_FOODS)) {
-			entity.addPotionEffect(new EffectInstance(ModEffects.COMFORT.get(), 6000, 0));
+		if (Configuration.COMFORT_FOOD_TAG_EFFECT.get() && food.is(ModTags.COMFORT_FOODS)) {
+			entity.addEffect(new EffectInstance(ModEffects.COMFORT.get(), 6000, 0));
 		}
 	}
 
@@ -268,12 +268,12 @@ public class CommonEventHandler
 	@SubscribeEvent
 	public static void onLootLoad(LootTableLoadEvent event) {
 		if (Configuration.CROPS_ON_SHIPWRECKS.get() && event.getName().equals(SHIPWRECK_SUPPLY_CHEST)) {
-			event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(FarmersDelight.MODID, "inject/shipwreck_supply")).weight(1).quality(0)).name("supply_fd_crops").build());
+			event.getTable().addPool(LootPool.lootPool().add(TableLootEntry.lootTableReference(new ResourceLocation(FarmersDelight.MODID, "inject/shipwreck_supply")).setWeight(1).setQuality(0)).name("supply_fd_crops").build());
 		}
 
 		if (Configuration.CROPS_ON_VILLAGE_HOUSES.get() && VILLAGE_HOUSE_CHESTS.contains(event.getName())) {
-			event.getTable().addPool(LootPool.builder().addEntry(
-					TableLootEntry.builder(new ResourceLocation(FarmersDelight.MODID, "inject/crops_villager_houses")).weight(1).quality(0)).name("villager_houses_fd_crops").build());
+			event.getTable().addPool(LootPool.lootPool().add(
+					TableLootEntry.lootTableReference(new ResourceLocation(FarmersDelight.MODID, "inject/crops_villager_houses")).setWeight(1).setQuality(0)).name("villager_houses_fd_crops").build());
 		}
 	}
 }

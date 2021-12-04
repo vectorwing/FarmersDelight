@@ -43,9 +43,9 @@ public class CuttingBoardModel implements IDrawable
 			stack = supplier.get();
 		}
 		RenderSystem.pushMatrix();
-		RenderSystem.multMatrix(matrixStack.getLast().getMatrix());
+		RenderSystem.multMatrix(matrixStack.last().pose());
 		RenderSystem.enableDepthTest();
-		RenderHelper.enableStandardItemLighting();
+		RenderHelper.turnBackOn();
 		RenderSystem.pushMatrix();
 		RenderSystem.translated(xOffset, yOffset, 0);
 		RenderSystem.pushMatrix();
@@ -53,16 +53,16 @@ public class CuttingBoardModel implements IDrawable
 
 		Minecraft minecraft = Minecraft.getInstance();
 		ItemRenderer itemRenderer = minecraft.getItemRenderer();
-		itemRenderer.zLevel += 50.0F;
-		IBakedModel bakedmodel = itemRenderer.getItemModelWithOverrides(stack, null, null);
+		itemRenderer.blitOffset += 50.0F;
+		IBakedModel bakedmodel = itemRenderer.getModel(stack, null, null);
 		TextureManager textureManager = Minecraft.getInstance().textureManager;
 		ClientRenderUtils.renderItemIntoGUIScalable(stack, 48, 48, bakedmodel, itemRenderer, textureManager);
-		itemRenderer.zLevel -= 50.0F;
+		itemRenderer.blitOffset -= 50.0F;
 
 		RenderSystem.popMatrix();
 		RenderSystem.popMatrix();
 		RenderSystem.disableBlend();
-		RenderHelper.disableStandardItemLighting();
+		RenderHelper.turnOff();
 		RenderSystem.popMatrix();
 	}
 }

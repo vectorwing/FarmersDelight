@@ -36,7 +36,7 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 	private final IDrawable icon;
 
 	public CookingRecipeCategory(IGuiHelper helper) {
-		title = I18n.format(FarmersDelight.MODID + ".jei.cooking");
+		title = I18n.get(FarmersDelight.MODID + ".jei.cooking");
 		ResourceLocation backgroundImage = new ResourceLocation(FarmersDelight.MODID, "textures/gui/cooking_pot.png");
 		background = helper.createDrawable(backgroundImage, 29, 16, 117, 57);
 		icon = helper.createDrawableIngredient(new ItemStack(ModItems.COOKING_POT.get()));
@@ -73,10 +73,10 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 	@Override
 	public void setIngredients(CookingPotRecipe cookingPotRecipe, IIngredients ingredients) {
 		List<Ingredient> inputAndContainer = new ArrayList<>(cookingPotRecipe.getIngredients());
-		inputAndContainer.add(Ingredient.fromStacks(cookingPotRecipe.getOutputContainer()));
+		inputAndContainer.add(Ingredient.of(cookingPotRecipe.getOutputContainer()));
 
 		ingredients.setInputIngredients(inputAndContainer);
-		ingredients.setOutput(VanillaTypes.ITEM, cookingPotRecipe.getRecipeOutput());
+		ingredients.setOutput(VanillaTypes.ITEM, cookingPotRecipe.getResultItem());
 	}
 
 	@Override
@@ -93,13 +93,13 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 				int inputIndex = row * 3 + column;
 				if (inputIndex < recipeIngredients.size()) {
 					itemStacks.init(inputIndex, true, column * borderSlotSize, row * borderSlotSize);
-					itemStacks.set(inputIndex, Arrays.asList(recipeIngredients.get(inputIndex).getMatchingStacks()));
+					itemStacks.set(inputIndex, Arrays.asList(recipeIngredients.get(inputIndex).getItems()));
 				}
 			}
 		}
 
 		itemStacks.init(MEAL_DISPLAY, false, 94, 9);
-		itemStacks.set(MEAL_DISPLAY, recipe.getRecipeOutput().getStack());
+		itemStacks.set(MEAL_DISPLAY, recipe.getResultItem().getStack());
 
 		if (!recipe.getOutputContainer().isEmpty()) {
 			itemStacks.init(CONTAINER_INPUT, false, 62, 38);
@@ -107,7 +107,7 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 		}
 
 		itemStacks.init(OUTPUT, false, 94, 38);
-		itemStacks.set(OUTPUT, recipe.getRecipeOutput().getStack());
+		itemStacks.set(OUTPUT, recipe.getResultItem().getStack());
 	}
 
 	@Override

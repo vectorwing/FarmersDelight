@@ -73,16 +73,16 @@ public class ChanceResult
 			throw new JsonSyntaxException("Must be a json object");
 
 		JsonObject json = je.getAsJsonObject();
-		String itemId = JSONUtils.getString(json, "item");
-		int count = JSONUtils.getInt(json, "count", 1);
-		float chance = JSONUtils.getFloat(json, "chance", 1);
+		String itemId = JSONUtils.getAsString(json, "item");
+		int count = JSONUtils.getAsInt(json, "count", 1);
+		float chance = JSONUtils.getAsFloat(json, "chance", 1);
 		ItemStack itemstack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemId)), count);
 
-		if (JSONUtils.isJsonPrimitive(json, "nbt")) {
+		if (JSONUtils.isValidPrimitive(json, "nbt")) {
 			try {
 				JsonElement element = json.get("nbt");
-				itemstack.setTag(JsonToNBT.getTagFromJson(
-						element.isJsonObject() ? FarmersDelight.GSON.toJson(element) : JSONUtils.getString(element, "nbt")));
+				itemstack.setTag(JsonToNBT.parseTag(
+						element.isJsonObject() ? FarmersDelight.GSON.toJson(element) : JSONUtils.convertToString(element, "nbt")));
 			}
 			catch (CommandSyntaxException e) {
 				e.printStackTrace();
@@ -93,11 +93,11 @@ public class ChanceResult
 	}
 
 	public void write(PacketBuffer buf) {
-		buf.writeItemStack(getStack());
+		buf.writeItem(getStack());
 		buf.writeFloat(getChance());
 	}
 
 	public static ChanceResult read(PacketBuffer buf) {
-		return new ChanceResult(buf.readItemStack(), buf.readFloat());
+		return new ChanceResult(buf.readItem(), buf.readFloat());
 	}
 }

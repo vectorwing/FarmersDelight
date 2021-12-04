@@ -25,6 +25,8 @@ import vectorwing.farmersdelight.utils.TextUtils;
 
 import java.util.function.Supplier;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 @SuppressWarnings("deprecation")
 public class FeastBlock extends Block
 {
@@ -34,11 +36,11 @@ public class FeastBlock extends Block
 	public final boolean hasLeftovers;
 
 	protected static final VoxelShape[] SHAPES = new VoxelShape[]{
-			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 1.0D, 14.0D),
-			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 3.0D, 14.0D),
-			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 6.0D, 14.0D),
-			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 8.0D, 14.0D),
-			Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D),
+			Block.box(2.0D, 0.0D, 2.0D, 14.0D, 1.0D, 14.0D),
+			Block.box(2.0D, 0.0D, 2.0D, 14.0D, 3.0D, 14.0D),
+			Block.box(2.0D, 0.0D, 2.0D, 14.0D, 6.0D, 14.0D),
+			Block.box(2.0D, 0.0D, 2.0D, 14.0D, 8.0D, 14.0D),
+			Block.box(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D),
 	};
 
 	/**
@@ -53,7 +55,7 @@ public class FeastBlock extends Block
 		super(properties);
 		this.servingItem = servingItem;
 		this.hasLeftovers = hasLeftovers;
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(SERVINGS, 4));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(SERVINGS, 4));
 	}
 
 	public ItemStack getServingItem() {
@@ -62,13 +64,13 @@ public class FeastBlock extends Block
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return SHAPES[state.get(SERVINGS)];
+		return SHAPES[state.getValue(SERVINGS)];
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (worldIn.isRemote) {
-			if (this.takeServing(worldIn, pos, state, player, handIn).isSuccessOrConsume()) {
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		if (worldIn.isClientSide) {
+			if (this.takeServing(worldIn, pos, state, player, handIn).consumesAction()) {
 				return ActionResultType.SUCCESS;
 			}
 		}
@@ -77,33 +79,33 @@ public class FeastBlock extends Block
 	}
 
 	private ActionResultType takeServing(IWorld worldIn, BlockPos pos, BlockState state, PlayerEntity player, Hand handIn) {
-		int servings = state.get(SERVINGS);
+		int servings = state.getValue(SERVINGS);
 
 		if (servings == 0) {
-			worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_BREAK, SoundCategory.PLAYERS, 0.8F, 0.8F);
+			worldIn.playSound(null, pos, SoundEvents.WOOD_BREAK, SoundCategory.PLAYERS, 0.8F, 0.8F);
 			worldIn.destroyBlock(pos, true);
 			return ActionResultType.SUCCESS;
 		}
 
 		ItemStack serving = this.getServingItem();
-		ItemStack heldStack = player.getHeldItem(handIn);
+		ItemStack heldStack = player.getItemInHand(handIn);
 
 		if (servings > 0) {
-			if (heldStack.isItemEqual(serving.getContainerItem())) {
-				worldIn.setBlockState(pos, state.with(SERVINGS, servings - 1), 3);
-				if (!player.abilities.isCreativeMode) {
+			if (heldStack.sameItem(serving.getContainerItem())) {
+				worldIn.setBlock(pos, state.setValue(SERVINGS, servings - 1), 3);
+				if (!player.abilities.instabuild) {
 					heldStack.shrink(1);
 				}
-				if (!player.inventory.addItemStackToInventory(serving)) {
-					player.dropItem(serving, false);
+				if (!player.inventory.add(serving)) {
+					player.drop(serving, false);
 				}
-				if (worldIn.getBlockState(pos).get(SERVINGS) == 0 && !this.hasLeftovers) {
+				if (worldIn.getBlockState(pos).getValue(SERVINGS) == 0 && !this.hasLeftovers) {
 					worldIn.removeBlock(pos, false);
 				}
-				worldIn.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				worldIn.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				return ActionResultType.SUCCESS;
 			} else {
-				player.sendStatusMessage(TextUtils.getTranslation("block.feast.use_container", serving.getContainerItem().getDisplayName()), true);
+				player.displayClientMessage(TextUtils.getTranslation("block.feast.use_container", serving.getContainerItem().getHoverName()), true);
 			}
 		}
 		return ActionResultType.PASS;
@@ -111,27 +113,27 @@ public class FeastBlock extends Block
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
 	}
 
 	@Override
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		return facing == Direction.DOWN && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		return facing == Direction.DOWN && !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
 
 	@Override
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		return worldIn.getBlockState(pos.down()).getMaterial().isSolid();
+	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		return worldIn.getBlockState(pos.below()).getMaterial().isSolid();
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FACING, SERVINGS);
 	}
 
 	@Override
-	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-		return blockState.get(SERVINGS);
+	public int getAnalogOutputSignal(BlockState blockState, World worldIn, BlockPos pos) {
+		return blockState.getValue(SERVINGS);
 	}
 
 	public int getMaxServings() {
@@ -139,12 +141,12 @@ public class FeastBlock extends Block
 	}
 
 	@Override
-	public boolean hasComparatorInputOverride(BlockState state) {
+	public boolean hasAnalogOutputSignal(BlockState state) {
 		return true;
 	}
 
 	@Override
-	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+	public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
 		return false;
 	}
 }

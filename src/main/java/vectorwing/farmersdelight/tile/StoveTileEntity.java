@@ -28,7 +28,7 @@ import java.util.Optional;
 
 public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTileEntity
 {
-	private static final VoxelShape GRILLING_AREA = Block.makeCuboidShape(3.0F, 0.0F, 3.0F, 13.0F, 1.0F, 13.0F);
+	private static final VoxelShape GRILLING_AREA = Block.box(3.0F, 0.0F, 3.0F, 13.0F, 1.0F, 13.0F);
 	private static final int INVENTORY_SLOT_COUNT = 6;
 
 	private final ItemStackHandler inventory;
@@ -45,8 +45,8 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 	}
 
 	@Override
-	public void read(BlockState state, CompoundNBT compound) {
-		super.read(state, compound);
+	public void load(BlockState state, CompoundNBT compound) {
+		super.load(state, compound);
 		if (compound.contains("Inventory")) {
 			inventory.deserializeNBT(compound.getCompound("Inventory"));
 		} else {
@@ -64,7 +64,7 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 	}
 
 	@Override
-	public CompoundNBT write(CompoundNBT compound) {
+	public CompoundNBT save(CompoundNBT compound) {
 		writeItems(compound);
 		compound.putIntArray("CookingTimes", cookingTimes);
 		compound.putIntArray("CookingTotalTimes", cookingTimesTotal);
@@ -72,24 +72,24 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 	}
 
 	private CompoundNBT writeItems(CompoundNBT compound) {
-		super.write(compound);
+		super.save(compound);
 		compound.put("Inventory", inventory.serializeNBT());
 		return compound;
 	}
 
 	@Override
 	public void tick() {
-		if (world == null) return;
+		if (level == null) return;
 
-		boolean isStoveLit = getBlockState().get(StoveBlock.LIT);
-		if (world.isRemote) {
+		boolean isStoveLit = getBlockState().getValue(StoveBlock.LIT);
+		if (level.isClientSide) {
 			if (isStoveLit) {
 				addParticles();
 			}
 		} else {
 			if (isStoveBlockedAbove()) {
 				if (!ItemUtils.isInventoryEmpty(inventory)) {
-					ItemUtils.dropItems(world, pos, inventory);
+					ItemUtils.dropItems(level, worldPosition, inventory);
 					inventoryChanged();
 				}
 			} else if (isStoveLit) {
@@ -105,7 +105,7 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 	}
 
 	private void cookAndOutputItems() {
-		if (world == null) return;
+		if (level == null) return;
 
 		boolean didInventoryChange = false;
 		for (int i = 0; i < inventory.getSlots(); ++i) {
@@ -116,11 +116,11 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 					IInventory inventoryWrapper = new Inventory(stoveStack);
 					Optional<CampfireCookingRecipe> recipe = getMatchingRecipe(inventoryWrapper, i);
 					if (recipe.isPresent()) {
-						ItemStack resultStack = recipe.get().getRecipeOutput();
+						ItemStack resultStack = recipe.get().getResultItem();
 						if (!resultStack.isEmpty()) {
-							ItemUtils.spawnItemEntity(world, resultStack.copy(),
-									pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5,
-									world.rand.nextGaussian() * (double) 0.01F, 0.1F, world.rand.nextGaussian() * (double) 0.01F);
+							ItemUtils.spawnItemEntity(level, resultStack.copy(),
+									worldPosition.getX() + 0.5, worldPosition.getY() + 1.0, worldPosition.getZ() + 0.5,
+									level.random.nextGaussian() * (double) 0.01F, 0.1F, level.random.nextGaussian() * (double) 0.01F);
 						}
 					}
 					inventory.setStackInSlot(i, ItemStack.EMPTY);
@@ -148,7 +148,7 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 		if (0 <= slot && slot < inventory.getSlots()) {
 			ItemStack slotStack = inventory.getStackInSlot(slot);
 			if (slotStack.isEmpty()) {
-				cookingTimesTotal[slot] = recipe.getCookTime();
+				cookingTimesTotal[slot] = recipe.getCookingTime();
 				cookingTimes[slot] = 0;
 				inventory.setStackInSlot(slot, itemStackIn.split(1));
 				lastRecipeIDs[slot] = recipe.getId();
@@ -160,18 +160,18 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 	}
 
 	public Optional<CampfireCookingRecipe> getMatchingRecipe(IInventory recipeWrapper, int slot) {
-		if (world == null) return Optional.empty();
+		if (level == null) return Optional.empty();
 
 		if (lastRecipeIDs[slot] != null) {
-			IRecipe<IInventory> recipe = ((RecipeManagerAccessor) world.getRecipeManager())
+			IRecipe<IInventory> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
 					.getRecipeMap(IRecipeType.CAMPFIRE_COOKING)
 					.get(lastRecipeIDs[slot]);
-			if (recipe instanceof CampfireCookingRecipe && recipe.matches(recipeWrapper, world)) {
+			if (recipe instanceof CampfireCookingRecipe && recipe.matches(recipeWrapper, level)) {
 				return Optional.of((CampfireCookingRecipe) recipe);
 			}
 		}
 
-		return world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, recipeWrapper, world);
+		return level.getRecipeManager().getRecipeFor(IRecipeType.CAMPFIRE_COOKING, recipeWrapper, level);
 	}
 
 	public ItemStackHandler getInventory() {
@@ -179,9 +179,9 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 	}
 
 	public boolean isStoveBlockedAbove() {
-		if (world != null) {
-			BlockState above = world.getBlockState(pos.up());
-			return VoxelShapes.compare(GRILLING_AREA, above.getShape(world, pos.up()), IBooleanFunction.AND);
+		if (level != null) {
+			BlockState above = level.getBlockState(worldPosition.above());
+			return VoxelShapes.joinIsNotEmpty(GRILLING_AREA, above.getShape(level, worldPosition.above()), IBooleanFunction.AND);
 		}
 		return false;
 	}
@@ -201,21 +201,21 @@ public class StoveTileEntity extends FDSyncedTileEntity implements ITickableTile
 	}
 
 	private void addParticles() {
-		if (world == null) return;
+		if (level == null) return;
 
 		for (int i = 0; i < inventory.getSlots(); ++i) {
-			if (!inventory.getStackInSlot(i).isEmpty() && world.rand.nextFloat() < 0.2F) {
+			if (!inventory.getStackInSlot(i).isEmpty() && level.random.nextFloat() < 0.2F) {
 				Vector2f stoveItemVector = getStoveItemOffset(i);
-				Direction direction = getBlockState().get(StoveBlock.HORIZONTAL_FACING);
-				int directionIndex = direction.getHorizontalIndex();
+				Direction direction = getBlockState().getValue(StoveBlock.FACING);
+				int directionIndex = direction.get2DDataValue();
 				Vector2f offset = directionIndex % 2 == 0 ? stoveItemVector : new Vector2f(stoveItemVector.y, stoveItemVector.x);
 
-				double x = ((double) pos.getX() + 0.5D) - (direction.getXOffset() * offset.x) + (direction.rotateY().getXOffset() * offset.x);
-				double y = (double) pos.getY() + 1.0D;
-				double z = ((double) pos.getZ() + 0.5D) - (direction.getZOffset() * offset.y) + (direction.rotateY().getZOffset() * offset.y);
+				double x = ((double) worldPosition.getX() + 0.5D) - (direction.getStepX() * offset.x) + (direction.getClockWise().getStepX() * offset.x);
+				double y = (double) worldPosition.getY() + 1.0D;
+				double z = ((double) worldPosition.getZ() + 0.5D) - (direction.getStepZ() * offset.y) + (direction.getClockWise().getStepZ() * offset.y);
 
 				for (int k = 0; k < 3; ++k) {
-					world.addParticle(ParticleTypes.SMOKE, x, y, z, 0.0D, 5.0E-4D, 0.0D);
+					level.addParticle(ParticleTypes.SMOKE, x, y, z, 0.0D, 5.0E-4D, 0.0D);
 				}
 			}
 		}

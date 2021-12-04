@@ -33,6 +33,8 @@ import vectorwing.farmersdelight.tile.BasketTileEntity;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 @SuppressWarnings("deprecation")
 public class BasketBlock extends ContainerBlock implements IWaterLoggable
 {
@@ -40,149 +42,149 @@ public class BasketBlock extends ContainerBlock implements IWaterLoggable
 	public static final BooleanProperty ENABLED = BlockStateProperties.ENABLED;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-	public static final VoxelShape OUT_SHAPE = VoxelShapes.fullCube();
-	public static final VoxelShape RENDER_SHAPE = makeCuboidShape(1.0D, 1.0D, 1.0D, 15.0D, 15.0D, 15.0D);
+	public static final VoxelShape OUT_SHAPE = VoxelShapes.block();
+	public static final VoxelShape RENDER_SHAPE = box(1.0D, 1.0D, 1.0D, 15.0D, 15.0D, 15.0D);
 	@SuppressWarnings("UnstableApiUsage")
 	public static final ImmutableMap<Direction, VoxelShape> COLLISION_SHAPE_FACING =
 			Maps.immutableEnumMap(ImmutableMap.<Direction, VoxelShape>builder()
-					.put(Direction.DOWN, makeHollowCubeShape(makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D)))
-					.put(Direction.UP, makeHollowCubeShape(makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 16.0D, 14.0D)))
-					.put(Direction.NORTH, makeHollowCubeShape(makeCuboidShape(2.0D, 2.0D, 0.0D, 14.0D, 14.0D, 14.0D)))
-					.put(Direction.SOUTH, makeHollowCubeShape(makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 14.0D, 16.0D)))
-					.put(Direction.WEST, makeHollowCubeShape(makeCuboidShape(0.0D, 2.0D, 2.0D, 14.0D, 14.0D, 14.0D)))
-					.put(Direction.EAST, makeHollowCubeShape(makeCuboidShape(2.0D, 2.0D, 2.0D, 16.0D, 14.0D, 14.0D)))
+					.put(Direction.DOWN, makeHollowCubeShape(box(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D)))
+					.put(Direction.UP, makeHollowCubeShape(box(2.0D, 2.0D, 2.0D, 14.0D, 16.0D, 14.0D)))
+					.put(Direction.NORTH, makeHollowCubeShape(box(2.0D, 2.0D, 0.0D, 14.0D, 14.0D, 14.0D)))
+					.put(Direction.SOUTH, makeHollowCubeShape(box(2.0D, 2.0D, 2.0D, 14.0D, 14.0D, 16.0D)))
+					.put(Direction.WEST, makeHollowCubeShape(box(0.0D, 2.0D, 2.0D, 14.0D, 14.0D, 14.0D)))
+					.put(Direction.EAST, makeHollowCubeShape(box(2.0D, 2.0D, 2.0D, 16.0D, 14.0D, 14.0D)))
 					.build());
 
 	private static VoxelShape makeHollowCubeShape(VoxelShape cutout) {
-		return VoxelShapes.combine(OUT_SHAPE, cutout, IBooleanFunction.ONLY_FIRST).simplify();
+		return VoxelShapes.joinUnoptimized(OUT_SHAPE, cutout, IBooleanFunction.ONLY_FIRST).optimize();
 	}
 
 	public BasketBlock() {
-		super(Properties.create(Material.WOOD).hardnessAndResistance(1.5F).sound(SoundType.WOOD));
-		this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.UP).with(WATERLOGGED, false));
+		super(Properties.of(Material.WOOD).strength(1.5F).sound(SoundType.WOOD));
+		this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.UP).setValue(WATERLOGGED, false));
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return COLLISION_SHAPE_FACING.get(state.get(FACING));
+		return COLLISION_SHAPE_FACING.get(state.getValue(FACING));
 	}
 
 	@Override
-	public VoxelShape getRenderShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
+	public VoxelShape getOcclusionShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		return RENDER_SHAPE;
 	}
 
 	@Override
-	public BlockRenderType getRenderType(BlockState state) {
+	public BlockRenderType getRenderShape(BlockState state) {
 		return BlockRenderType.MODEL;
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FACING, ENABLED, WATERLOGGED);
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (!worldIn.isRemote) {
-			TileEntity tileEntity = worldIn.getTileEntity(pos);
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		if (!worldIn.isClientSide) {
+			TileEntity tileEntity = worldIn.getBlockEntity(pos);
 			if (tileEntity instanceof BasketTileEntity) {
-				player.openContainer((BasketTileEntity) tileEntity);
+				player.openMenu((BasketTileEntity) tileEntity);
 			}
 		}
 		return ActionResultType.SUCCESS;
 	}
 
 	@Override
-	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+	public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
-			TileEntity tileEntity = worldIn.getTileEntity(pos);
+			TileEntity tileEntity = worldIn.getBlockEntity(pos);
 			if (tileEntity instanceof IInventory) {
-				InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory) tileEntity);
-				worldIn.updateComparatorOutputLevel(pos, this);
+				InventoryHelper.dropContents(worldIn, pos, (IInventory) tileEntity);
+				worldIn.updateNeighbourForOutputSignal(pos, this);
 			}
 
-			super.onReplaced(state, worldIn, pos, newState, isMoving);
+			super.onRemove(state, worldIn, pos, newState, isMoving);
 		}
 	}
 
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		if (stateIn.get(WATERLOGGED)) {
-			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		if (stateIn.getValue(WATERLOGGED)) {
+			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 		}
 
-		return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+		return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
 
 	@Override
 	public FluidState getFluidState(BlockState state) {
-		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 
 	// --- HOPPER STUFF ---
 
 	@Override
 	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-		boolean isPowered = !worldIn.isBlockPowered(pos);
-		if (isPowered != state.get(ENABLED)) {
-			worldIn.setBlockState(pos, state.with(ENABLED, isPowered), 4);
+		boolean isPowered = !worldIn.hasNeighborSignal(pos);
+		if (isPowered != state.getValue(ENABLED)) {
+			worldIn.setBlock(pos, state.setValue(ENABLED, isPowered), 4);
 		}
 	}
 
 	// --- BARREL STUFF ---
 
 	@Override
-	public boolean hasComparatorInputOverride(BlockState state) {
+	public boolean hasAnalogOutputSignal(BlockState state) {
 		return true;
 	}
 
 	@Override
-	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-		return Container.calcRedstone(worldIn.getTileEntity(pos));
+	public int getAnalogOutputSignal(BlockState blockState, World worldIn, BlockPos pos) {
+		return Container.getRedstoneSignalFromBlockEntity(worldIn.getBlockEntity(pos));
 	}
 
 	@Nullable
-	public TileEntity createNewTileEntity(IBlockReader worldIn) {
+	public TileEntity newBlockEntity(IBlockReader worldIn) {
 		return new BasketTileEntity();
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-		if (stack.hasDisplayName()) {
-			TileEntity tileEntity = worldIn.getTileEntity(pos);
+	public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+		if (stack.hasCustomHoverName()) {
+			TileEntity tileEntity = worldIn.getBlockEntity(pos);
 			if (tileEntity instanceof BasketTileEntity) {
-				((BasketTileEntity) tileEntity).setCustomName(stack.getDisplayName());
+				((BasketTileEntity) tileEntity).setCustomName(stack.getHoverName());
 			}
 		}
 	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		FluidState fluid = context.getWorld().getFluidState(context.getPos());
-		return this.getDefaultState().with(FACING, context.getNearestLookingDirection().getOpposite()).with(WATERLOGGED, fluid.getFluid() == Fluids.WATER);
+		FluidState fluid = context.getLevel().getFluidState(context.getClickedPos());
+		return this.defaultBlockState().setValue(FACING, context.getNearestLookingDirection().getOpposite()).setValue(WATERLOGGED, fluid.getType() == Fluids.WATER);
 	}
 
 	@Override
 	public BlockState rotate(BlockState state, Rotation rot) {
-		return state.with(FACING, rot.rotate(state.get(FACING)));
+		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
 	}
 
 	@Override
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
-		return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+		return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
 	}
 
-	public boolean isTransparent(BlockState state) {
+	public boolean useShapeForLightOcclusion(BlockState state) {
 		return true;
 	}
 
 	@Override
-	public VoxelShape getRaytraceShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
+	public VoxelShape getInteractionShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		return OUT_SHAPE;
 	}
 
 	@Override
-	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+	public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
 		return false;
 	}
 }

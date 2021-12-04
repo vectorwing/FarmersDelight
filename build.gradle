@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
+        maven { url = 'https://maven.parchmentmc.org' }
         maven {
             url "https://repo.spongepowered.org/repository/maven-public/"
             // content { includeGroup "org.spongepowered" }
@@ -9,12 +10,14 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
+        classpath 'org.parchmentmc:librarian:1.+'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: "org.spongepowered.mixin"
@@ -35,7 +38,7 @@ minecraft {
     // stable_#            Stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not always work.
     // Simply re-run your setup task after changing the mappings to update your workspace.
-    mappings channel: 'snapshot', version: '20210309-1.16.5'
+    mappings channel: 'parchment', version: '2021.10.10-1.16.5'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -137,6 +140,8 @@ dependencies {
     annotationProcessor "org.reflections:reflections:0.9.10" // CT dep
     annotationProcessor "com.google.code.gson:gson:2.8.7" // CT dep
      */
+
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     // Real examples
     // compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env

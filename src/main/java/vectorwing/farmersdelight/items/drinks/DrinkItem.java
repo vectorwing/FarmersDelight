@@ -9,6 +9,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import vectorwing.farmersdelight.items.ConsumableItem;
 
+import net.minecraft.item.Item.Properties;
+
 public class DrinkItem extends ConsumableItem
 {
 	public DrinkItem(Properties properties) {
@@ -25,12 +27,12 @@ public class DrinkItem extends ConsumableItem
 	}
 
 	@Override
-	public UseAction getUseAction(ItemStack stack) {
+	public UseAction getUseAnimation(ItemStack stack) {
 		return UseAction.DRINK;
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		return DrinkHelper.startDrinking(worldIn, playerIn, handIn);
+	public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+		return DrinkHelper.useDrink(worldIn, playerIn, handIn);
 	}
 }

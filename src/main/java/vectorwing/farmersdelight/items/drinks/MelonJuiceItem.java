@@ -4,6 +4,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import net.minecraft.item.Item.Properties;
+
 public class MelonJuiceItem extends DrinkItem
 {
 	public MelonJuiceItem(Properties properties) {

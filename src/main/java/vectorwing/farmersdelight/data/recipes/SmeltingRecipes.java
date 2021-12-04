@@ -24,51 +24,51 @@ public class SmeltingRecipes
 		foodSmeltingRecipes("cooked_bacon", ModItems.BACON.get(), ModItems.COOKED_BACON.get(), 0.35F, consumer);
 		foodSmeltingRecipes("cooked_mutton_chops", ModItems.MUTTON_CHOPS.get(), ModItems.COOKED_MUTTON_CHOPS.get(), 0.35F, consumer);
 
-		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ModItems.WHEAT_DOUGH.get()),
+		CookingRecipeBuilder.smelting(Ingredient.of(ModItems.WHEAT_DOUGH.get()),
 				Items.BREAD, 0.35F, 200)
-				.addCriterion("has_dough", InventoryChangeTrigger.Instance.forItems(ModItems.WHEAT_DOUGH.get()))
-				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "bread").toString() + "_from_smelting");
-		CookingRecipeBuilder.cookingRecipe(Ingredient.fromItems(ModItems.WHEAT_DOUGH.get()),
-				Items.BREAD, 0.35F, 100, IRecipeSerializer.SMOKING)
-				.addCriterion("has_dough", InventoryChangeTrigger.Instance.forItems(ModItems.WHEAT_DOUGH.get()))
-				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "bread").toString() + "_from_smoking");
+				.unlockedBy("has_dough", InventoryChangeTrigger.Instance.hasItems(ModItems.WHEAT_DOUGH.get()))
+				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "bread").toString() + "_from_smelting");
+		CookingRecipeBuilder.cooking(Ingredient.of(ModItems.WHEAT_DOUGH.get()),
+				Items.BREAD, 0.35F, 100, IRecipeSerializer.SMOKING_RECIPE)
+				.unlockedBy("has_dough", InventoryChangeTrigger.Instance.hasItems(ModItems.WHEAT_DOUGH.get()))
+				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "bread").toString() + "_from_smoking");
 
-		CookingRecipeBuilder.cookingRecipe(Ingredient.fromItems(ModItems.HAM.get()),
-				ModItems.SMOKED_HAM.get(), 0.35F, 200, IRecipeSerializer.SMOKING)
-				.addCriterion("has_ham", InventoryChangeTrigger.Instance.forItems(ModItems.HAM.get()))
-				.build(consumer);
+		CookingRecipeBuilder.cooking(Ingredient.of(ModItems.HAM.get()),
+				ModItems.SMOKED_HAM.get(), 0.35F, 200, IRecipeSerializer.SMOKING_RECIPE)
+				.unlockedBy("has_ham", InventoryChangeTrigger.Instance.hasItems(ModItems.HAM.get()))
+				.save(consumer);
 
-		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ModItems.IRON_KNIFE.get()),
+		CookingRecipeBuilder.smelting(Ingredient.of(ModItems.IRON_KNIFE.get()),
 				Items.IRON_NUGGET, 0.1F, 200)
-				.addCriterion("has_iron_knife", InventoryChangeTrigger.Instance.forItems(ModItems.IRON_KNIFE.get()))
-				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "iron_nugget_from_smelting_knife"));
-		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ModItems.GOLDEN_KNIFE.get()),
+				.unlockedBy("has_iron_knife", InventoryChangeTrigger.Instance.hasItems(ModItems.IRON_KNIFE.get()))
+				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "iron_nugget_from_smelting_knife"));
+		CookingRecipeBuilder.smelting(Ingredient.of(ModItems.GOLDEN_KNIFE.get()),
 				Items.GOLD_NUGGET, 0.1F, 200)
-				.addCriterion("has_golden_knife", InventoryChangeTrigger.Instance.forItems(ModItems.IRON_KNIFE.get()))
-				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "gold_nugget_from_smelting_knife"));
-		CookingRecipeBuilder.blastingRecipe(Ingredient.fromItems(ModItems.IRON_KNIFE.get()),
+				.unlockedBy("has_golden_knife", InventoryChangeTrigger.Instance.hasItems(ModItems.IRON_KNIFE.get()))
+				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "gold_nugget_from_smelting_knife"));
+		CookingRecipeBuilder.blasting(Ingredient.of(ModItems.IRON_KNIFE.get()),
 				Items.IRON_NUGGET, 0.1F, 100)
-				.addCriterion("has_iron_knife", InventoryChangeTrigger.Instance.forItems(ModItems.IRON_KNIFE.get()))
-				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "iron_nugget_from_blasting_knife"));
-		CookingRecipeBuilder.blastingRecipe(Ingredient.fromItems(ModItems.GOLDEN_KNIFE.get()),
+				.unlockedBy("has_iron_knife", InventoryChangeTrigger.Instance.hasItems(ModItems.IRON_KNIFE.get()))
+				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "iron_nugget_from_blasting_knife"));
+		CookingRecipeBuilder.blasting(Ingredient.of(ModItems.GOLDEN_KNIFE.get()),
 				Items.GOLD_NUGGET, 0.1F, 100)
-				.addCriterion("has_golden_knife", InventoryChangeTrigger.Instance.forItems(ModItems.IRON_KNIFE.get()))
-				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "gold_nugget_from_blasting_knife"));
+				.unlockedBy("has_golden_knife", InventoryChangeTrigger.Instance.hasItems(ModItems.IRON_KNIFE.get()))
+				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "gold_nugget_from_blasting_knife"));
 	}
 
 	private static void foodSmeltingRecipes(String name, IItemProvider ingredient, IItemProvider result, float experience, Consumer<IFinishedRecipe> consumer) {
 		String namePrefix = new ResourceLocation(FarmersDelight.MODID, name).toString();
-		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ingredient),
+		CookingRecipeBuilder.smelting(Ingredient.of(ingredient),
 				result, experience, 200)
-				.addCriterion(name, InventoryChangeTrigger.Instance.forItems(ingredient))
-				.build(consumer);
-		CookingRecipeBuilder.cookingRecipe(Ingredient.fromItems(ingredient),
-				result, experience, 600, IRecipeSerializer.CAMPFIRE_COOKING)
-				.addCriterion(name, InventoryChangeTrigger.Instance.forItems(ingredient))
-				.build(consumer, namePrefix + "_from_campfire_cooking");
-		CookingRecipeBuilder.cookingRecipe(Ingredient.fromItems(ingredient),
-				result, experience, 100, IRecipeSerializer.SMOKING)
-				.addCriterion(name, InventoryChangeTrigger.Instance.forItems(ingredient))
-				.build(consumer, namePrefix + "_from_smoking");
+				.unlockedBy(name, InventoryChangeTrigger.Instance.hasItems(ingredient))
+				.save(consumer);
+		CookingRecipeBuilder.cooking(Ingredient.of(ingredient),
+				result, experience, 600, IRecipeSerializer.CAMPFIRE_COOKING_RECIPE)
+				.unlockedBy(name, InventoryChangeTrigger.Instance.hasItems(ingredient))
+				.save(consumer, namePrefix + "_from_campfire_cooking");
+		CookingRecipeBuilder.cooking(Ingredient.of(ingredient),
+				result, experience, 100, IRecipeSerializer.SMOKING_RECIPE)
+				.unlockedBy(name, InventoryChangeTrigger.Instance.hasItems(ingredient))
+				.save(consumer, namePrefix + "_from_smoking");
 	}
 }

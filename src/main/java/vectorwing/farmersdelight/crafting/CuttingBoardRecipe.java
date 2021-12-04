@@ -76,12 +76,12 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 	}
 
 	@Override
-	public ItemStack getCraftingResult(RecipeWrapper inv) {
+	public ItemStack assemble(RecipeWrapper inv) {
 		return this.results.get(0).getStack().copy();
 	}
 
 	@Override
-	public ItemStack getRecipeOutput() {
+	public ItemStack getResultItem() {
 		return this.results.get(0).getStack();
 	}
 
@@ -114,7 +114,7 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 	public boolean matches(RecipeWrapper inv, World worldIn) {
 		if (inv.isEmpty())
 			return false;
-		return input.test(inv.getStackInSlot(0));
+		return input.test(inv.getItem(0));
 	}
 
 	protected int getMaxInputCount() {
@@ -122,7 +122,7 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 	}
 
 	@Override
-	public boolean canFit(int width, int height) {
+	public boolean canCraftInDimensions(int width, int height) {
 		return width * height >= this.getMaxInputCount();
 	}
 
@@ -143,23 +143,23 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 		}
 
 		@Override
-		public CuttingBoardRecipe read(ResourceLocation recipeId, JsonObject json) {
-			final String groupIn = JSONUtils.getString(json, "group", "");
-			final NonNullList<Ingredient> inputItemsIn = readIngredients(JSONUtils.getJsonArray(json, "ingredients"));
-			final JsonObject toolObject = JSONUtils.getJsonObject(json, "tool");
-			final Ingredient toolIn = Ingredient.deserialize(toolObject);
+		public CuttingBoardRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
+			final String groupIn = JSONUtils.getAsString(json, "group", "");
+			final NonNullList<Ingredient> inputItemsIn = readIngredients(JSONUtils.getAsJsonArray(json, "ingredients"));
+			final JsonObject toolObject = JSONUtils.getAsJsonObject(json, "tool");
+			final Ingredient toolIn = Ingredient.fromJson(toolObject);
 			if (inputItemsIn.isEmpty()) {
 				throw new JsonParseException("No ingredients for cutting recipe");
-			} else if (toolIn.hasNoMatchingItems()) {
+			} else if (toolIn.isEmpty()) {
 				throw new JsonParseException("No tool for cutting recipe");
 			} else if (inputItemsIn.size() > 1) {
 				throw new JsonParseException("Too many ingredients for cutting recipe! Please define only one ingredient");
 			} else {
-				final NonNullList<ChanceResult> results = readResults(JSONUtils.getJsonArray(json, "result"));
+				final NonNullList<ChanceResult> results = readResults(JSONUtils.getAsJsonArray(json, "result"));
 				if (results.size() > 4) {
 					throw new JsonParseException("Too many results for cutting recipe! The maximum quantity of unique results is " + MAX_RESULTS);
 				} else {
-					final String soundID = JSONUtils.getString(json, "sound", "");
+					final String soundID = JSONUtils.getAsString(json, "sound", "");
 					return new CuttingBoardRecipe(recipeId, groupIn, inputItemsIn.get(0), toolIn, results, soundID);
 				}
 			}
@@ -168,8 +168,8 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 		private static NonNullList<Ingredient> readIngredients(JsonArray ingredientArray) {
 			NonNullList<Ingredient> nonnulllist = NonNullList.create();
 			for (int i = 0; i < ingredientArray.size(); ++i) {
-				Ingredient ingredient = Ingredient.deserialize(ingredientArray.get(i));
-				if (!ingredient.hasNoMatchingItems()) {
+				Ingredient ingredient = Ingredient.fromJson(ingredientArray.get(i));
+				if (!ingredient.isEmpty()) {
 					nonnulllist.add(ingredient);
 				}
 			}
@@ -186,31 +186,31 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 
 		@Nullable
 		@Override
-		public CuttingBoardRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-			String groupIn = buffer.readString(32767);
-			Ingredient inputItemIn = Ingredient.read(buffer);
-			Ingredient toolIn = Ingredient.read(buffer);
+		public CuttingBoardRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+			String groupIn = buffer.readUtf(32767);
+			Ingredient inputItemIn = Ingredient.fromNetwork(buffer);
+			Ingredient toolIn = Ingredient.fromNetwork(buffer);
 
 			int i = buffer.readVarInt();
 			NonNullList<ChanceResult> resultsIn = NonNullList.withSize(i, ChanceResult.EMPTY);
 			for (int j = 0; j < resultsIn.size(); ++j) {
 				resultsIn.set(j, ChanceResult.read(buffer));
 			}
-			String soundEventIn = buffer.readString();
+			String soundEventIn = buffer.readUtf();
 
 			return new CuttingBoardRecipe(recipeId, groupIn, inputItemIn, toolIn, resultsIn, soundEventIn);
 		}
 
 		@Override
-		public void write(PacketBuffer buffer, CuttingBoardRecipe recipe) {
-			buffer.writeString(recipe.group);
-			recipe.input.write(buffer);
-			recipe.tool.write(buffer);
+		public void toNetwork(PacketBuffer buffer, CuttingBoardRecipe recipe) {
+			buffer.writeUtf(recipe.group);
+			recipe.input.toNetwork(buffer);
+			recipe.tool.toNetwork(buffer);
 			buffer.writeVarInt(recipe.results.size());
 			for (ChanceResult result : recipe.results) {
 				result.write(buffer);
 			}
-			buffer.writeString(recipe.soundEvent);
+			buffer.writeUtf(recipe.soundEvent);
 		}
 	}
 }

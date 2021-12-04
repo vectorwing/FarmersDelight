@@ -15,8 +15,8 @@ import java.util.Set;
 @Mixin(CampfireBlock.class)
 public abstract class CampfireBaleMixin
 {
-	@Inject(at = @At("HEAD"), method = "isHayBlock", cancellable = true)
-	public void isHayBlock(BlockState state, CallbackInfoReturnable<Boolean> cir) {
+	@Inject(at = @At("HEAD"), method = "isSmokeSource", cancellable = true)
+	public void isFDSmokeSource(BlockState state, CallbackInfoReturnable<Boolean> cir) {
 		Set<Block> hayBales = Sets.newHashSet(ModBlocks.STRAW_BALE.get(), ModBlocks.RICE_BALE.get());
 		if (hayBales.contains(state.getBlock())) {
 			cir.setReturnValue(true);

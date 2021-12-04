@@ -15,8 +15,8 @@ public class EntityTags extends EntityTypeTagsProvider
 	}
 
 	@Override
-	protected void registerTags() {
-		this.getOrCreateBuilder(ModTags.DOG_FOOD_USERS).add(EntityType.WOLF);
-		this.getOrCreateBuilder(ModTags.HORSE_FEED_USERS).add(EntityType.HORSE, EntityType.SKELETON_HORSE, EntityType.ZOMBIE_HORSE, EntityType.DONKEY, EntityType.MULE, EntityType.LLAMA);
+	protected void addTags() {
+		this.tag(ModTags.DOG_FOOD_USERS).add(EntityType.WOLF);
+		this.tag(ModTags.HORSE_FEED_USERS).add(EntityType.HORSE, EntityType.SKELETON_HORSE, EntityType.ZOMBIE_HORSE, EntityType.DONKEY, EntityType.MULE, EntityType.LLAMA);
 	}
 }

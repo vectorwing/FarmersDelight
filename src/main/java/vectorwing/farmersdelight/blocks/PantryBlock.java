@@ -27,6 +27,8 @@ import vectorwing.farmersdelight.tile.PantryTileEntity;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 @SuppressWarnings("deprecation")
 public class PantryBlock extends ContainerBlock
 {
@@ -35,35 +37,35 @@ public class PantryBlock extends ContainerBlock
 
 	public PantryBlock(Properties properties) {
 		super(properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(OPEN, false));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(OPEN, false));
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (!worldIn.isRemote) {
-			TileEntity tile = worldIn.getTileEntity(pos);
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		if (!worldIn.isClientSide) {
+			TileEntity tile = worldIn.getBlockEntity(pos);
 			if (tile instanceof PantryTileEntity) {
-				player.openContainer((PantryTileEntity) tile);
+				player.openMenu((PantryTileEntity) tile);
 			}
 		}
 		return ActionResultType.SUCCESS;
 	}
 
 	@Override
-	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+	public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
-			TileEntity tileEntity = worldIn.getTileEntity(pos);
+			TileEntity tileEntity = worldIn.getBlockEntity(pos);
 			if (tileEntity instanceof IInventory) {
-				InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory) tileEntity);
-				worldIn.updateComparatorOutputLevel(pos, this);
+				InventoryHelper.dropContents(worldIn, pos, (IInventory) tileEntity);
+				worldIn.updateNeighbourForOutputSignal(pos, this);
 			}
-			super.onReplaced(state, worldIn, pos, newState, isMoving);
+			super.onRemove(state, worldIn, pos, newState, isMoving);
 		}
 	}
 
 	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-		TileEntity tileEntity = worldIn.getTileEntity(pos);
+		TileEntity tileEntity = worldIn.getBlockEntity(pos);
 		if (tileEntity instanceof PantryTileEntity) {
 			((PantryTileEntity) tileEntity).tick();
 		}
@@ -71,53 +73,53 @@ public class PantryBlock extends ContainerBlock
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-		if (stack.hasDisplayName()) {
-			TileEntity tileEntity = worldIn.getTileEntity(pos);
+	public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+		if (stack.hasCustomHoverName()) {
+			TileEntity tileEntity = worldIn.getBlockEntity(pos);
 			if (tileEntity instanceof PantryTileEntity) {
-				((PantryTileEntity) tileEntity).setCustomName(stack.getDisplayName());
+				((PantryTileEntity) tileEntity).setCustomName(stack.getHoverName());
 			}
 		}
 	}
 
 	@Override
-	protected void fillStateContainer(final StateContainer.Builder<Block, BlockState> builder) {
-		super.fillStateContainer(builder);
+	protected void createBlockStateDefinition(final StateContainer.Builder<Block, BlockState> builder) {
+		super.createBlockStateDefinition(builder);
 		builder.add(FACING, OPEN);
 	}
 
 	@Override
-	public boolean hasComparatorInputOverride(BlockState state) {
+	public boolean hasAnalogOutputSignal(BlockState state) {
 		return true;
 	}
 
 	@Override
-	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-		return Container.calcRedstone(worldIn.getTileEntity(pos));
+	public int getAnalogOutputSignal(BlockState blockState, World worldIn, BlockPos pos) {
+		return Container.getRedstoneSignalFromBlockEntity(worldIn.getBlockEntity(pos));
 	}
 
 	@Nullable
 	@Override
-	public TileEntity createNewTileEntity(IBlockReader worldIn) {
+	public TileEntity newBlockEntity(IBlockReader worldIn) {
 		return new PantryTileEntity();
 	}
 
 	@Override
-	public BlockRenderType getRenderType(BlockState state) {
+	public BlockRenderType getRenderShape(BlockState state) {
 		return BlockRenderType.MODEL;
 	}
 
 	@Override
 	public BlockState rotate(BlockState state, Rotation rot) {
-		return state.with(FACING, rot.rotate(state.get(FACING)));
+		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
 	}
 
 	@Override
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
-		return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+		return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
 	}
 }

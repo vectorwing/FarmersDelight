@@ -19,6 +19,8 @@ import vectorwing.farmersdelight.utils.tags.ModTags;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 @SuppressWarnings("deprecation")
 public class RichSoilBlock extends Block
 {
@@ -30,8 +32,8 @@ public class RichSoilBlock extends Block
 
 	@Override
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-		if (!worldIn.isRemote) {
-			BlockPos abovePos = pos.up();
+		if (!worldIn.isClientSide) {
+			BlockPos abovePos = pos.above();
 			BlockState aboveState = worldIn.getBlockState(abovePos);
 			Block aboveBlock = aboveState.getBlock();
 
@@ -42,14 +44,14 @@ public class RichSoilBlock extends Block
 
 			// Convert mushrooms to colonies if it's dark enough
 			if (aboveBlock == Blocks.BROWN_MUSHROOM) {
-				if (worldIn.getLightSubtracted(pos.up(), 0) <= COLONY_FORMING_LIGHT_LEVEL) {
-					worldIn.setBlockState(pos.up(), ModBlocks.BROWN_MUSHROOM_COLONY.get().getDefaultState());
+				if (worldIn.getRawBrightness(pos.above(), 0) <= COLONY_FORMING_LIGHT_LEVEL) {
+					worldIn.setBlockAndUpdate(pos.above(), ModBlocks.BROWN_MUSHROOM_COLONY.get().defaultBlockState());
 				}
 				return;
 			}
 			if (aboveBlock == Blocks.RED_MUSHROOM) {
-				if (worldIn.getLightSubtracted(pos.up(), 0) <= COLONY_FORMING_LIGHT_LEVEL) {
-					worldIn.setBlockState(pos.up(), ModBlocks.RED_MUSHROOM_COLONY.get().getDefaultState());
+				if (worldIn.getRawBrightness(pos.above(), 0) <= COLONY_FORMING_LIGHT_LEVEL) {
+					worldIn.setBlockAndUpdate(pos.above(), ModBlocks.RED_MUSHROOM_COLONY.get().defaultBlockState());
 				}
 				return;
 			}
@@ -61,10 +63,10 @@ public class RichSoilBlock extends Block
 			// If all else fails, and it's a plant, give it a growth boost now and then!
 			if (aboveBlock instanceof IGrowable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
 				IGrowable growable = (IGrowable) aboveBlock;
-				if (growable.canGrow(worldIn, pos.up(), aboveState, false) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), aboveState, true)) {
-					growable.grow(worldIn, worldIn.rand, pos.up(), aboveState);
-					worldIn.playEvent(2005, pos.up(), 0);
-					ForgeHooks.onCropsGrowPost(worldIn, pos.up(), aboveState);
+				if (growable.isValidBonemealTarget(worldIn, pos.above(), aboveState, false) && ForgeHooks.onCropsGrowPre(worldIn, pos.above(), aboveState, true)) {
+					growable.performBonemeal(worldIn, worldIn.random, pos.above(), aboveState);
+					worldIn.levelEvent(2005, pos.above(), 0);
+					ForgeHooks.onCropsGrowPost(worldIn, pos.above(), aboveState);
 				}
 			}
 		}
@@ -73,13 +75,13 @@ public class RichSoilBlock extends Block
 	@Override
 	@Nullable
 	public BlockState getToolModifiedState(BlockState state, World world, BlockPos pos, PlayerEntity player, ItemStack stack, ToolType toolType) {
-		return toolType == ToolType.HOE ? ModBlocks.RICH_SOIL_FARMLAND.get().getDefaultState() : null;
+		return toolType == ToolType.HOE ? ModBlocks.RICH_SOIL_FARMLAND.get().defaultBlockState() : null;
 	}
 
 
 	@Override
 	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable) {
-		net.minecraftforge.common.PlantType plantType = plantable.getPlantType(world, pos.offset(facing));
+		net.minecraftforge.common.PlantType plantType = plantable.getPlantType(world, pos.relative(facing));
 		return plantType != PlantType.CROP && plantType != PlantType.NETHER;
 	}
 }

@@ -23,7 +23,7 @@ import java.util.Map;
 
 public class TextUtils
 {
-	private static final IFormattableTextComponent NO_EFFECTS = (new TranslationTextComponent("effect.none")).mergeStyle(TextFormatting.GRAY);
+	private static final IFormattableTextComponent NO_EFFECTS = (new TranslationTextComponent("effect.none")).withStyle(TextFormatting.GRAY);
 
 	/**
 	 * Syntactic sugar for custom translation keys. Always prefixed with the mod's ID in lang files (e.g. farmersdelight.your.key.here).
@@ -37,7 +37,7 @@ public class TextUtils
 	 */
 	@OnlyIn(Dist.CLIENT)
 	public static void addFoodEffectTooltip(ItemStack itemIn, List<ITextComponent> lores, float durationFactor) {
-		Food stackFood = itemIn.getItem().getFood();
+		Food stackFood = itemIn.getItem().getFoodProperties();
 		if (stackFood == null) {
 			return;
 		}
@@ -48,13 +48,13 @@ public class TextUtils
 		} else {
 			for (Pair<EffectInstance, Float> effectPair : list) {
 				EffectInstance instance = effectPair.getFirst();
-				IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent(instance.getEffectName());
-				Effect effect = instance.getPotion();
-				Map<Attribute, AttributeModifier> map = effect.getAttributeModifierMap();
+				IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent(instance.getDescriptionId());
+				Effect effect = instance.getEffect();
+				Map<Attribute, AttributeModifier> map = effect.getAttributeModifiers();
 				if (!map.isEmpty()) {
 					for(Map.Entry<Attribute, AttributeModifier> entry : map.entrySet()) {
 						AttributeModifier attributemodifier = entry.getValue();
-						AttributeModifier attributemodifier1 = new AttributeModifier(attributemodifier.getName(), effect.getAttributeModifierAmount(instance.getAmplifier(), attributemodifier), attributemodifier.getOperation());
+						AttributeModifier attributemodifier1 = new AttributeModifier(attributemodifier.getName(), effect.getAttributeModifierValue(instance.getAmplifier(), attributemodifier), attributemodifier.getOperation());
 						list1.add(new Pair<>(entry.getKey(), attributemodifier1));
 					}
 				}
@@ -64,16 +64,16 @@ public class TextUtils
 				}
 
 				if (instance.getDuration() > 20) {
-					iformattabletextcomponent = new TranslationTextComponent("potion.withDuration", iformattabletextcomponent, EffectUtils.getPotionDurationString(instance, durationFactor));
+					iformattabletextcomponent = new TranslationTextComponent("potion.withDuration", iformattabletextcomponent, EffectUtils.formatDuration(instance, durationFactor));
 				}
 
-				lores.add(iformattabletextcomponent.mergeStyle(effect.getEffectType().getColor()));
+				lores.add(iformattabletextcomponent.withStyle(effect.getCategory().getTooltipFormatting()));
 			}
 		}
 
 		if (!list1.isEmpty()) {
 			lores.add(StringTextComponent.EMPTY);
-			lores.add((new TranslationTextComponent("potion.whenDrank")).mergeStyle(TextFormatting.DARK_PURPLE));
+			lores.add((new TranslationTextComponent("potion.whenDrank")).withStyle(TextFormatting.DARK_PURPLE));
 
 			for(Pair<Attribute, AttributeModifier> pair : list1) {
 				AttributeModifier attributemodifier2 = pair.getSecond();
@@ -86,10 +86,10 @@ public class TextUtils
 				}
 
 				if (d0 > 0.0D) {
-					lores.add((new TranslationTextComponent("attribute.modifier.plus." + attributemodifier2.getOperation().getId(), ItemStack.DECIMALFORMAT.format(d1), new TranslationTextComponent(pair.getFirst().getAttributeName()))).mergeStyle(TextFormatting.BLUE));
+					lores.add((new TranslationTextComponent("attribute.modifier.plus." + attributemodifier2.getOperation().toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(d1), new TranslationTextComponent(pair.getFirst().getDescriptionId()))).withStyle(TextFormatting.BLUE));
 				} else if (d0 < 0.0D) {
 					d1 = d1 * -1.0D;
-					lores.add((new TranslationTextComponent("attribute.modifier.take." + attributemodifier2.getOperation().getId(), ItemStack.DECIMALFORMAT.format(d1), new TranslationTextComponent(pair.getFirst().getAttributeName()))).mergeStyle(TextFormatting.RED));
+					lores.add((new TranslationTextComponent("attribute.modifier.take." + attributemodifier2.getOperation().toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(d1), new TranslationTextComponent(pair.getFirst().getDescriptionId()))).withStyle(TextFormatting.RED));
 				}
 			}
 		}

@@ -60,9 +60,9 @@ public class CookingRecipes
 				.build(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(Items.RABBIT_STEW, 1, NORMAL_COOKING, 0.35F, Items.BOWL)
 				.addIngredient(Items.BAKED_POTATO)
-				.addIngredient(Ingredient.fromItems(Items.RABBIT, Items.COOKED_RABBIT))
+				.addIngredient(Ingredient.of(Items.RABBIT, Items.COOKED_RABBIT))
 				.addIngredient(Items.CARROT)
-				.addIngredient(Ingredient.fromItems(Items.BROWN_MUSHROOM, Items.RED_MUSHROOM))
+				.addIngredient(Ingredient.of(Items.BROWN_MUSHROOM, Items.RED_MUSHROOM))
 				.build(consumer);
 	}
 
@@ -95,7 +95,7 @@ public class CookingRecipes
 				.addIngredient(ForgeTags.PASTA)
 				.addIngredient(ForgeTags.CROPS_CABBAGE)
 				.addIngredient(ForgeTags.CROPS_ONION)
-				.addIngredient(Ingredient.fromItemListStream(Stream.of(
+				.addIngredient(Ingredient.fromValues(Stream.of(
 						new Ingredient.TagList(ForgeTags.RAW_CHICKEN),
 						new Ingredient.TagList(ForgeTags.RAW_PORK),
 						new Ingredient.TagList(ForgeTags.RAW_BEEF),

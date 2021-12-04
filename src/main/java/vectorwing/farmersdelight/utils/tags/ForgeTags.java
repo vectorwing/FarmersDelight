@@ -75,7 +75,7 @@ public class ForgeTags
 	public static final ITag.INamedTag<Item> TOOLS_SHOVELS = forgeItemTag("tools/shovels");
 
 	private static ITag.INamedTag<Item> forgeItemTag(String path) {
-		return ItemTags.makeWrapperTag(new ResourceLocation("forge", path).toString());
+		return ItemTags.bind(new ResourceLocation("forge", path).toString());
 	}
 
 }

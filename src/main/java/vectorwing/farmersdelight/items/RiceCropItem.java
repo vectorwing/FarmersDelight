@@ -12,6 +12,8 @@ import net.minecraft.util.Direction;
 import net.minecraftforge.common.Tags;
 import vectorwing.farmersdelight.utils.TextUtils;
 
+import net.minecraft.item.Item.Properties;
+
 public class RiceCropItem extends BlockNamedItem
 {
 	public RiceCropItem(Block blockIn, Properties properties) {
@@ -19,15 +21,15 @@ public class RiceCropItem extends BlockNamedItem
 	}
 
 	@Override
-	public ActionResultType onItemUse(ItemUseContext context) {
-		ActionResultType result = this.tryPlace(new BlockItemUseContext(context));
+	public ActionResultType useOn(ItemUseContext context) {
+		ActionResultType result = this.place(new BlockItemUseContext(context));
 		if (result.equals(ActionResultType.FAIL)) {
 			PlayerEntity player = context.getPlayer();
-			BlockState targetState = context.getWorld().getBlockState(context.getPos());
-			if (player != null && context.getFace().equals(Direction.UP) && (targetState.isIn(Tags.Blocks.DIRT) || targetState.getBlock() instanceof FarmlandBlock)) {
-				player.sendStatusMessage(TextUtils.getTranslation("block.rice.invalid_placement"), true);
+			BlockState targetState = context.getLevel().getBlockState(context.getClickedPos());
+			if (player != null && context.getClickedFace().equals(Direction.UP) && (targetState.is(Tags.Blocks.DIRT) || targetState.getBlock() instanceof FarmlandBlock)) {
+				player.displayClientMessage(TextUtils.getTranslation("block.rice.invalid_placement"), true);
 			}
 		}
-		return !result.isSuccessOrConsume() && this.isFood() ? this.onItemRightClick(context.getWorld(), context.getPlayer(), context.getHand()).getType() : result;
+		return !result.consumesAction() && this.isEdible() ? this.use(context.getLevel(), context.getPlayer(), context.getHand()).getResult() : result;
 	}
 }

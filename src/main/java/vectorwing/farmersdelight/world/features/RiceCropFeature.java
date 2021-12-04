@@ -22,21 +22,21 @@ public class RiceCropFeature extends Feature<BlockClusterFeatureConfig>
 	}
 
 	@Override
-	public boolean generate(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, BlockClusterFeatureConfig config) {
-		BlockPos blockpos = worldIn.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, pos);
+	public boolean place(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, BlockClusterFeatureConfig config) {
+		BlockPos blockpos = worldIn.getHeightmapPos(Heightmap.Type.OCEAN_FLOOR_WG, pos);
 
 		int i = 0;
 		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
-		for (int j = 0; j < config.tryCount; ++j) {
-			blockpos$mutable.setPos(blockpos).move(
-					rand.nextInt(config.xSpread + 1) - rand.nextInt(config.xSpread + 1),
-					rand.nextInt(config.ySpread + 1) - rand.nextInt(config.ySpread + 1),
-					rand.nextInt(config.zSpread + 1) - rand.nextInt(config.zSpread + 1));
+		for (int j = 0; j < config.tries; ++j) {
+			blockpos$mutable.set(blockpos).move(
+					rand.nextInt(config.xspread + 1) - rand.nextInt(config.xspread + 1),
+					rand.nextInt(config.yspread + 1) - rand.nextInt(config.yspread + 1),
+					rand.nextInt(config.zspread + 1) - rand.nextInt(config.zspread + 1));
 
-			if (worldIn.getBlockState(blockpos$mutable).getBlock() == Blocks.WATER && worldIn.getBlockState(blockpos$mutable.up()).getBlock() == Blocks.AIR) {
-				BlockState bottomRiceState = ModBlocks.WILD_RICE.get().getDefaultState().with(WildRiceBlock.HALF, DoubleBlockHalf.LOWER);
-				if (bottomRiceState.isValidPosition(worldIn, blockpos$mutable)) {
+			if (worldIn.getBlockState(blockpos$mutable).getBlock() == Blocks.WATER && worldIn.getBlockState(blockpos$mutable.above()).getBlock() == Blocks.AIR) {
+				BlockState bottomRiceState = ModBlocks.WILD_RICE.get().defaultBlockState().setValue(WildRiceBlock.HALF, DoubleBlockHalf.LOWER);
+				if (bottomRiceState.canSurvive(worldIn, blockpos$mutable)) {
 					((WildRiceBlock) bottomRiceState.getBlock()).placeAt(worldIn, blockpos$mutable, 2);
 					++i;
 				}

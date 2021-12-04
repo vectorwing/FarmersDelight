@@ -51,7 +51,7 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 	}
 
 	public static ItemStack putStackInInventoryAllSlots(IInventory destination, ItemStack stack) {
-		int i = destination.getSizeInventory();
+		int i = destination.getContainerSize();
 
 		for (int j = 0; j < i && !stack.isEmpty(); ++j) {
 			stack = insertStack(destination, stack, j);
@@ -61,32 +61,32 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 	}
 
 	private static boolean canInsertItemInSlot(IInventory inventoryIn, ItemStack stack, int index, @Nullable Direction side) {
-		if (!inventoryIn.isItemValidForSlot(index, stack)) {
+		if (!inventoryIn.canPlaceItem(index, stack)) {
 			return false;
 		} else {
-			return !(inventoryIn instanceof ISidedInventory) || ((ISidedInventory) inventoryIn).canInsertItem(index, stack, side);
+			return !(inventoryIn instanceof ISidedInventory) || ((ISidedInventory) inventoryIn).canPlaceItemThroughFace(index, stack, side);
 		}
 	}
 
 	private static boolean canCombine(ItemStack stack1, ItemStack stack2) {
 		if (stack1.getItem() != stack2.getItem()) {
 			return false;
-		} else if (stack1.getDamage() != stack2.getDamage()) {
+		} else if (stack1.getDamageValue() != stack2.getDamageValue()) {
 			return false;
 		} else if (stack1.getCount() > stack1.getMaxStackSize()) {
 			return false;
 		} else {
-			return ItemStack.areItemStackTagsEqual(stack1, stack2);
+			return ItemStack.tagMatches(stack1, stack2);
 		}
 	}
 
 	private static ItemStack insertStack(IInventory destination, ItemStack stack, int index) {
-		ItemStack itemstack = destination.getStackInSlot(index);
+		ItemStack itemstack = destination.getItem(index);
 		if (canInsertItemInSlot(destination, stack, index, null)) {
 			boolean flag = false;
 			boolean isDestinationEmpty = destination.isEmpty();
 			if (itemstack.isEmpty()) {
-				destination.setInventorySlotContents(index, stack);
+				destination.setItem(index, stack);
 				stack = ItemStack.EMPTY;
 				flag = true;
 			} else if (canCombine(itemstack, stack)) {
@@ -107,7 +107,7 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 					}
 				}
 
-				destination.markDirty();
+				destination.setChanged();
 			}
 		}
 
@@ -130,13 +130,13 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 
 	public static List<ItemEntity> getCaptureItems(IBasket basket, int facingIndex) {
 
-		return basket.getWorld() == null ? new ArrayList<>() : basket.getFacingCollectionArea(facingIndex).toBoundingBoxList().stream().flatMap((p_200110_1_) -> basket.getWorld().getEntitiesWithinAABB(ItemEntity.class, p_200110_1_.offset(basket.getXPos() - 0.5D, basket.getYPos() - 0.5D, basket.getZPos() - 0.5D), EntityPredicates.IS_ALIVE).stream()).collect(Collectors.toList());
+		return basket.getLevel() == null ? new ArrayList<>() : basket.getFacingCollectionArea(facingIndex).toAabbs().stream().flatMap((p_200110_1_) -> basket.getLevel().getEntitiesOfClass(ItemEntity.class, p_200110_1_.move(basket.getLevelX() - 0.5D, basket.getLevelY() - 0.5D, basket.getLevelZ() - 0.5D), EntityPredicates.ENTITY_STILL_ALIVE).stream()).collect(Collectors.toList());
 	}
 
 	@Override
-	public CompoundNBT write(CompoundNBT compound) {
-		super.write(compound);
-		if (!this.checkLootAndWrite(compound)) {
+	public CompoundNBT save(CompoundNBT compound) {
+		super.save(compound);
+		if (!this.trySaveLootTable(compound)) {
 			ItemStackHelper.saveAllItems(compound, this.basketContents);
 		}
 
@@ -145,10 +145,10 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 	}
 
 	@Override
-	public void read(BlockState state, CompoundNBT compound) {
-		super.read(state, compound);
-		this.basketContents = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
-		if (!this.checkLootAndRead(compound)) {
+	public void load(BlockState state, CompoundNBT compound) {
+		super.load(state, compound);
+		this.basketContents = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+		if (!this.tryLoadLootTable(compound)) {
 			ItemStackHelper.loadAllItems(compound, this.basketContents);
 		}
 		this.transferCooldown = compound.getInt("TransferCooldown");
@@ -166,7 +166,7 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 	}
 
 	@Override
-	public int getSizeInventory() {
+	public int getContainerSize() {
 		return this.basketContents.size();
 	}
 
@@ -177,21 +177,21 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 
 	@Override
 	protected Container createMenu(int id, PlayerInventory player) {
-		return ChestContainer.createGeneric9X3(id, player, this);
+		return ChestContainer.threeRows(id, player, this);
 	}
 
 	@Override
-	public ItemStack decrStackSize(int index, int count) {
-		this.fillWithLoot(null);
-		return ItemStackHelper.getAndSplit(this.getItems(), index, count);
+	public ItemStack removeItem(int index, int count) {
+		this.unpackLootTable(null);
+		return ItemStackHelper.removeItem(this.getItems(), index, count);
 	}
 
 	@Override
-	public void setInventorySlotContents(int index, ItemStack stack) {
-		this.fillWithLoot(null);
+	public void setItem(int index, ItemStack stack) {
+		this.unpackLootTable(null);
 		this.getItems().set(index, stack);
-		if (stack.getCount() > this.getInventoryStackLimit()) {
-			stack.setCount(this.getInventoryStackLimit());
+		if (stack.getCount() > this.getMaxStackSize()) {
+			stack.setCount(this.getMaxStackSize());
 		}
 	}
 
@@ -208,8 +208,8 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 	}
 
 	private void updateHopper(Supplier<Boolean> supplier) {
-		if (this.world != null && !this.world.isRemote) {
-			if (!this.isOnTransferCooldown() && this.getBlockState().get(BlockStateProperties.ENABLED)) {
+		if (this.level != null && !this.level.isClientSide) {
+			if (!this.isOnTransferCooldown() && this.getBlockState().getValue(BlockStateProperties.ENABLED)) {
 				boolean flag = false;
 				if (!this.isFull()) {
 					flag = supplier.get();
@@ -217,7 +217,7 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 
 				if (flag) {
 					this.setTransferCooldown(8);
-					this.markDirty();
+					this.setChanged();
 				}
 			}
 		}
@@ -235,36 +235,36 @@ public class BasketTileEntity extends LockableLootTileEntity implements IBasket,
 
 	public void onEntityCollision(Entity entity) {
 		if (entity instanceof ItemEntity) {
-			BlockPos blockpos = this.getPos();
-			int facing = this.getBlockState().get(BasketBlock.FACING).getIndex();
-			if (VoxelShapes.compare(VoxelShapes.create(entity.getBoundingBox().offset(-blockpos.getX(), -blockpos.getY(), -blockpos.getZ())), this.getFacingCollectionArea(facing), IBooleanFunction.AND)) {
+			BlockPos blockpos = this.getBlockPos();
+			int facing = this.getBlockState().getValue(BasketBlock.FACING).get3DDataValue();
+			if (VoxelShapes.joinIsNotEmpty(VoxelShapes.create(entity.getBoundingBox().move(-blockpos.getX(), -blockpos.getY(), -blockpos.getZ())), this.getFacingCollectionArea(facing), IBooleanFunction.AND)) {
 				this.updateHopper(() -> captureItem(this, (ItemEntity) entity));
 			}
 		}
 	}
 
 	@Override
-	public double getXPos() {
-		return (double) this.pos.getX() + 0.5D;
+	public double getLevelX() {
+		return (double) this.worldPosition.getX() + 0.5D;
 	}
 
 	@Override
-	public double getYPos() {
-		return (double) this.pos.getY() + 0.5D;
+	public double getLevelY() {
+		return (double) this.worldPosition.getY() + 0.5D;
 	}
 
 	@Override
-	public double getZPos() {
-		return (double) this.pos.getZ() + 0.5D;
+	public double getLevelZ() {
+		return (double) this.worldPosition.getZ() + 0.5D;
 	}
 
 	@Override
 	public void tick() {
-		if (this.world != null && !this.world.isRemote) {
+		if (this.level != null && !this.level.isClientSide) {
 			--this.transferCooldown;
 			if (!this.isOnTransferCooldown()) {
 				this.setTransferCooldown(0);
-				int facing = this.getBlockState().get(BasketBlock.FACING).getIndex();
+				int facing = this.getBlockState().getValue(BasketBlock.FACING).get3DDataValue();
 				this.updateHopper(() -> pullItems(this, facing));
 			}
 		}

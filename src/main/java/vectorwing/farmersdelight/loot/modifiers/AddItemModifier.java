@@ -37,7 +37,7 @@ public class AddItemModifier extends LootModifier
 	{
 		@Override
 		public AddItemModifier read(ResourceLocation location, JsonObject object, ILootCondition[] ailootcondition) {
-			Item addedItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation((JSONUtils.getString(object, "item"))));
+			Item addedItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation((JSONUtils.getAsString(object, "item"))));
 			return new AddItemModifier(ailootcondition, addedItem);
 		}
 

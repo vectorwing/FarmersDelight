@@ -39,14 +39,14 @@ public class PastrySlicingModifier extends LootModifier
 	@Nonnull
 	@Override
 	protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
-		BlockState state = context.get(LootParameters.BLOCK_STATE);
+		BlockState state = context.getParamOrNull(LootParameters.BLOCK_STATE);
 		if (state != null) {
 			Block targetBlock = state.getBlock();
 			if (targetBlock instanceof CakeBlock) {
-				int bites = state.get(CakeBlock.BITES);
+				int bites = state.getValue(CakeBlock.BITES);
 				generatedLoot.add(new ItemStack(pastrySlice, MAX_CAKE_BITES - bites));
 			} else if (targetBlock instanceof PieBlock) {
-				int bites = state.get(PieBlock.BITES);
+				int bites = state.getValue(PieBlock.BITES);
 				generatedLoot.add(new ItemStack(pastrySlice, MAX_PIE_BITES - bites));
 			}
 		}
@@ -58,7 +58,7 @@ public class PastrySlicingModifier extends LootModifier
 	{
 		@Override
 		public PastrySlicingModifier read(ResourceLocation location, JsonObject object, ILootCondition[] conditions) {
-			Item pastrySlice = ForgeRegistries.ITEMS.getValue(new ResourceLocation((JSONUtils.getString(object, "slice"))));
+			Item pastrySlice = ForgeRegistries.ITEMS.getValue(new ResourceLocation((JSONUtils.getAsString(object, "slice"))));
 			return new PastrySlicingModifier(conditions, pastrySlice);
 		}
 

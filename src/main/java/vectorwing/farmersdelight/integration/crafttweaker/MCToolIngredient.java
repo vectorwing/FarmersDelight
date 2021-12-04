@@ -75,7 +75,7 @@ public class MCToolIngredient implements IIngredient
 
     @Override
     public IItemStack[] getItems() {
-        ItemStack[] stacks = ingredient.getMatchingStacks();
+        ItemStack[] stacks = ingredient.getItems();
         IItemStack[] out = new IItemStack[stacks.length];
         for (int i = 0; i < stacks.length; i++) {
             out[i] = new MCItemStackMutable(stacks[i]);

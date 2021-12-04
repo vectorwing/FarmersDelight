@@ -21,22 +21,22 @@ public class FDSyncedTileEntity extends TileEntity
 	@Override
 	@Nullable
 	public SUpdateTileEntityPacket getUpdatePacket() {
-		return new SUpdateTileEntityPacket(pos, 1, getUpdateTag());
+		return new SUpdateTileEntityPacket(worldPosition, 1, getUpdateTag());
 	}
 
 	@Override
 	public CompoundNBT getUpdateTag() {
-		return write(new CompoundNBT());
+		return save(new CompoundNBT());
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-		read(getBlockState(), pkt.getNbtCompound());
+		load(getBlockState(), pkt.getTag());
 	}
 
 	protected void inventoryChanged() {
-		super.markDirty();
-		if (world != null)
-			world.notifyBlockUpdate(getPos(), getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
+		super.setChanged();
+		if (level != null)
+			level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
 	}
 }

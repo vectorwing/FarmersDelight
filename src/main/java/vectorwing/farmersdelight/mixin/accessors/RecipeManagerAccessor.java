@@ -16,6 +16,6 @@ import java.util.Map;
 @Mixin(RecipeManager.class)
 public interface RecipeManagerAccessor
 {
-	@Invoker("getRecipes")
+	@Invoker("byType")
 	<C extends IInventory, T extends IRecipe<C>> Map<ResourceLocation, IRecipe<C>> getRecipeMap(IRecipeType<T> type);
 }

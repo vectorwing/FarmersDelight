@@ -14,7 +14,7 @@ public class ItemUtils
 {
 	public static void dropItems(World world, BlockPos pos, IItemHandler inventory) {
 		for (int slot = 0; slot < inventory.getSlots(); slot++)
-			InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), inventory.getStackInSlot(slot));
+			InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), inventory.getStackInSlot(slot));
 	}
 
 	public static boolean isInventoryEmpty(IItemHandler inventory) {
@@ -28,7 +28,7 @@ public class ItemUtils
 
 	public static void spawnItemEntity(World world, ItemStack stack, double x, double y, double z, double xMotion, double yMotion, double zMotion) {
 		ItemEntity entity = new ItemEntity(world, x, y, z, stack);
-		entity.setMotion(xMotion, yMotion, zMotion);
-		world.addEntity(entity);
+		entity.setDeltaMovement(xMotion, yMotion, zMotion);
+		world.addFreshEntity(entity);
 	}
 }

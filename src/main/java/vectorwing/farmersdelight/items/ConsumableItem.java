@@ -19,6 +19,8 @@ import vectorwing.farmersdelight.utils.TextUtils;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import net.minecraft.item.Item.Properties;
+
 public class ConsumableItem extends Item
 {
 	private final boolean hasFoodEffectTooltip;
@@ -41,23 +43,23 @@ public class ConsumableItem extends Item
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity consumer) {
-		if (!worldIn.isRemote) {
+	public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity consumer) {
+		if (!worldIn.isClientSide) {
 			this.affectConsumer(stack, worldIn, consumer);
 		}
 
 		ItemStack containerStack = stack.getContainerItem();
 
-		if (stack.isFood()) {
-			super.onItemUseFinish(stack, worldIn, consumer);
+		if (stack.isEdible()) {
+			super.finishUsingItem(stack, worldIn, consumer);
 		} else {
 			PlayerEntity player = consumer instanceof PlayerEntity ? (PlayerEntity) consumer : null;
 			if (player instanceof ServerPlayerEntity) {
 				CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayerEntity) player, stack);
 			}
 			if (player != null) {
-				player.addStat(Stats.ITEM_USED.get(this));
-				if (!player.abilities.isCreativeMode) {
+				player.awardStat(Stats.ITEM_USED.get(this));
+				if (!player.abilities.instabuild) {
 					stack.shrink(1);
 				}
 			}
@@ -66,10 +68,10 @@ public class ConsumableItem extends Item
 		if (stack.isEmpty()) {
 			return containerStack;
 		} else {
-			if (consumer instanceof PlayerEntity && !((PlayerEntity) consumer).abilities.isCreativeMode) {
+			if (consumer instanceof PlayerEntity && !((PlayerEntity) consumer).abilities.instabuild) {
 				PlayerEntity player = (PlayerEntity) consumer;
-				if (!player.inventory.addItemStackToInventory(containerStack)) {
-					player.dropItem(containerStack, false);
+				if (!player.inventory.add(containerStack)) {
+					player.drop(containerStack, false);
 				}
 			}
 			return stack;
@@ -84,10 +86,10 @@ public class ConsumableItem extends Item
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+	public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		if (this.hasCustomTooltip) {
 			IFormattableTextComponent textEmpty = TextUtils.getTranslation("tooltip." + this);
-			tooltip.add(textEmpty.mergeStyle(TextFormatting.BLUE));
+			tooltip.add(textEmpty.withStyle(TextFormatting.BLUE));
 		}
 		if (this.hasFoodEffectTooltip) {
 			TextUtils.addFoodEffectTooltip(stack, tooltip, 1.0F);

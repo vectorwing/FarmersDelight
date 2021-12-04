@@ -12,10 +12,13 @@ import net.minecraft.world.server.ServerWorld;
 
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.OffsetType;
+import net.minecraft.block.AbstractBlock.Properties;
+
 @SuppressWarnings("deprecation")
 public class WildPatchBlock extends BushBlock implements IGrowable
 {
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
+	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 
 	public WildPatchBlock(Properties properties) {
 		super(properties);
@@ -27,7 +30,7 @@ public class WildPatchBlock extends BushBlock implements IGrowable
 	}
 
 	@Override
-	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
+	protected boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		return state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS_BLOCK || state.getBlock() == Blocks.SAND || state.getBlock() == Blocks.RED_SAND;
 	}
 
@@ -37,7 +40,7 @@ public class WildPatchBlock extends BushBlock implements IGrowable
 	}
 
 	@Override
-	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
+	public boolean canBeReplaced(BlockState state, BlockItemUseContext useContext) {
 		return false;
 	}
 
@@ -52,21 +55,21 @@ public class WildPatchBlock extends BushBlock implements IGrowable
 	}
 
 	@Override
-	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(World worldIn, Random rand, BlockPos pos, BlockState state) {
 		return (double) rand.nextFloat() < 0.8F;
 	}
 
 	@Override
-	public void grow(ServerWorld worldIn, Random random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerWorld worldIn, Random random, BlockPos pos, BlockState state) {
 		int wildCropLimit = 10;
 
-		for (BlockPos nearbyPos : BlockPos.getAllInBoxMutable(pos.add(-4, -1, -4), pos.add(4, 1, 4))) {
-			if (worldIn.getBlockState(nearbyPos).matchesBlock(this)) {
+		for (BlockPos nearbyPos : BlockPos.betweenClosed(pos.offset(-4, -1, -4), pos.offset(4, 1, 4))) {
+			if (worldIn.getBlockState(nearbyPos).is(this)) {
 				--wildCropLimit;
 				if (wildCropLimit <= 0) {
 					return;
@@ -74,18 +77,18 @@ public class WildPatchBlock extends BushBlock implements IGrowable
 			}
 		}
 
-		BlockPos randomPos = pos.add(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);
+		BlockPos randomPos = pos.offset(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);
 
 		for (int k = 0; k < 4; ++k) {
-			if (worldIn.isAirBlock(randomPos) && state.isValidPosition(worldIn, randomPos)) {
+			if (worldIn.isEmptyBlock(randomPos) && state.canSurvive(worldIn, randomPos)) {
 				pos = randomPos;
 			}
 
-			randomPos = pos.add(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);
+			randomPos = pos.offset(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);
 		}
 
-		if (worldIn.isAirBlock(randomPos) && state.isValidPosition(worldIn, randomPos)) {
-			worldIn.setBlockState(randomPos, state, 2);
+		if (worldIn.isEmptyBlock(randomPos) && state.canSurvive(worldIn, randomPos)) {
+			worldIn.setBlock(randomPos, state, 2);
 		}
 	}
 }

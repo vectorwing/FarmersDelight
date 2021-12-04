@@ -13,6 +13,8 @@ import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class WallCanvasSignBlock extends WallSignBlock implements ICanvasSign
 {
 	private final DyeColor backgroundColor;
@@ -38,12 +40,12 @@ public class WallCanvasSignBlock extends WallSignBlock implements ICanvasSign
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-		TileEntity tileEntity = worldIn.getTileEntity(pos);
+	public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+		TileEntity tileEntity = worldIn.getBlockEntity(pos);
 		Block block = state.getBlock();
 		if (tileEntity instanceof SignTileEntity && block instanceof ICanvasSign) {
 			if (((ICanvasSign) block).isDarkBackground()) {
-				((SignTileEntity) tileEntity).setTextColor(DyeColor.WHITE);
+				((SignTileEntity) tileEntity).setColor(DyeColor.WHITE);
 			}
 		}
 	}

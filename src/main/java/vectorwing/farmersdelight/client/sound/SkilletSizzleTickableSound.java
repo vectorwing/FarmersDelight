@@ -16,10 +16,10 @@ public class SkilletSizzleTickableSound extends TickableSound
 	public SkilletSizzleTickableSound(SkilletTileEntity skillet) {
 		super(ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundCategory.BLOCKS);
 		this.volume = 0.5F;
-		this.repeat = true;
-		this.repeatDelay = 0;
+		this.looping = true;
+		this.delay = 0;
 		this.skillet = skillet;
-		this.pos = this.skillet.getPos();
+		this.pos = this.skillet.getBlockPos();
 		this.x = this.pos.getX();
 		this.y = this.pos.getY();
 		this.z = this.pos.getZ();
@@ -28,7 +28,7 @@ public class SkilletSizzleTickableSound extends TickableSound
 	@Override
 	public void tick() {
 		if (this.skillet.isRemoved() || !this.skillet.isHeated() || !this.skillet.hasStoredStack()) {
-			this.finishPlaying();
+			this.stop();
 		} else {
 			this.x = this.pos.getX();
 			this.y = this.pos.getY();

@@ -12,6 +12,6 @@ public class PopsicleItem extends ConsumableItem
 
 	@Override
 	public void affectConsumer(ItemStack stack, World worldIn, LivingEntity consumer) {
-		consumer.extinguish();
+		consumer.clearFire();
 	}
 }

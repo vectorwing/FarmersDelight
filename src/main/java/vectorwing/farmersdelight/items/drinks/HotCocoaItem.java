@@ -20,20 +20,20 @@ public class HotCocoaItem extends DrinkItem
 
 	@Override
 	public void affectConsumer(ItemStack stack, World worldIn, LivingEntity consumer) {
-		Iterator<EffectInstance> itr = consumer.getActivePotionEffects().iterator();
+		Iterator<EffectInstance> itr = consumer.getActiveEffects().iterator();
 		ArrayList<Effect> compatibleEffects = new ArrayList<>();
 
 		while (itr.hasNext()) {
 			EffectInstance effect = itr.next();
-			if (effect.getPotion().getEffectType().equals(EffectType.HARMFUL) && effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET))) {
-				compatibleEffects.add(effect.getPotion());
+			if (effect.getEffect().getCategory().equals(EffectType.HARMFUL) && effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET))) {
+				compatibleEffects.add(effect.getEffect());
 			}
 		}
 
 		if (compatibleEffects.size() > 0) {
-			EffectInstance selectedEffect = consumer.getActivePotionEffect(compatibleEffects.get(worldIn.rand.nextInt(compatibleEffects.size())));
+			EffectInstance selectedEffect = consumer.getEffect(compatibleEffects.get(worldIn.random.nextInt(compatibleEffects.size())));
 			if (selectedEffect != null && !net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.living.PotionEvent.PotionRemoveEvent(consumer, selectedEffect))) {
-				consumer.removePotionEffect(selectedEffect.getPotion());
+				consumer.removeEffect(selectedEffect.getEffect());
 			}
 		}
 	}

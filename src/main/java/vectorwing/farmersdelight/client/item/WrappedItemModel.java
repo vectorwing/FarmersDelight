@@ -12,7 +12,7 @@ public class WrappedItemModel<T extends IBakedModel> extends BakedModelWrapper<T
 	}
 
 	@Override
-	public boolean isBuiltInRenderer() {
+	public boolean isCustomRenderer() {
 		return true;
 	}
 

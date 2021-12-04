@@ -17,6 +17,8 @@ import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 @SuppressWarnings("deprecation")
 public class OrganicCompostBlock extends Block
 {
@@ -24,18 +26,18 @@ public class OrganicCompostBlock extends Block
 
 	public OrganicCompostBlock(Properties properties) {
 		super(properties);
-		this.setDefaultState(super.getDefaultState().with(COMPOSTING, 0));
+		this.registerDefaultState(super.defaultBlockState().setValue(COMPOSTING, 0));
 	}
 
 	@Override
-	public boolean ticksRandomly(BlockState state) {
+	public boolean isRandomlyTicking(BlockState state) {
 		return true;
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(COMPOSTING);
-		super.fillStateContainer(builder);
+		super.createBlockStateDefinition(builder);
 	}
 
 	public int getMaxCompostingStage() {
@@ -45,21 +47,21 @@ public class OrganicCompostBlock extends Block
 	@Override
 	@SuppressWarnings("deprecation")
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-		if (worldIn.isRemote) return;
+		if (worldIn.isClientSide) return;
 
 		float chance = 0F;
 		boolean hasWater = false;
 		int maxLight = 0;
 
-		for (BlockPos neighborPos : BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, 1, 1))) {
+		for (BlockPos neighborPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
 			BlockState neighborState = worldIn.getBlockState(neighborPos);
-			if (neighborState.isIn(ModTags.COMPOST_ACTIVATORS)) {
+			if (neighborState.is(ModTags.COMPOST_ACTIVATORS)) {
 				chance += 0.02F;
 			}
-			if (neighborState.getFluidState().isTagged(FluidTags.WATER)) {
+			if (neighborState.getFluidState().is(FluidTags.WATER)) {
 				hasWater = true;
 			}
-			int light = worldIn.getLightFor(LightType.SKY, neighborPos.up());
+			int light = worldIn.getBrightness(LightType.SKY, neighborPos.above());
 			if (light > maxLight) {
 				maxLight = light;
 			}
@@ -69,21 +71,21 @@ public class OrganicCompostBlock extends Block
 		chance += hasWater ? 0.1F : 0.0F;
 
 		if (worldIn.getRandom().nextFloat() <= chance) {
-			if (state.get(COMPOSTING) == this.getMaxCompostingStage())
-				worldIn.setBlockState(pos, ModBlocks.RICH_SOIL.get().getDefaultState(), 2); // finished
+			if (state.getValue(COMPOSTING) == this.getMaxCompostingStage())
+				worldIn.setBlock(pos, ModBlocks.RICH_SOIL.get().defaultBlockState(), 2); // finished
 			else
-				worldIn.setBlockState(pos, state.with(COMPOSTING, state.get(COMPOSTING) + 1), 2); // next stage
+				worldIn.setBlock(pos, state.setValue(COMPOSTING, state.getValue(COMPOSTING) + 1), 2); // next stage
 		}
 	}
 
 	@Override
-	public boolean hasComparatorInputOverride(BlockState state) {
+	public boolean hasAnalogOutputSignal(BlockState state) {
 		return true;
 	}
 
 	@Override
-	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-		return (getMaxCompostingStage() + 1 - blockState.get(COMPOSTING));
+	public int getAnalogOutputSignal(BlockState blockState, World worldIn, BlockPos pos) {
+		return (getMaxCompostingStage() + 1 - blockState.getValue(COMPOSTING));
 	}
 
 	@Override

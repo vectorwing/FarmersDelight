@@ -28,36 +28,36 @@ import javax.annotation.Nullable;
 public class SafetyNetBlock extends Block implements IWaterLoggable
 {
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 8.0D, 0.0D, 16.0D, 9.0D, 16.0D);
+	protected static final VoxelShape SHAPE = Block.box(0.0D, 8.0D, 0.0D, 16.0D, 9.0D, 16.0D);
 
 	public SafetyNetBlock() {
-		super(Block.Properties.create(Material.CARPET).hardnessAndResistance(0.2F).sound(SoundType.CLOTH));
-		this.setDefaultState(this.getStateContainer().getBaseState().with(WATERLOGGED, false));
+		super(Block.Properties.of(Material.CLOTH_DECORATION).strength(0.2F).sound(SoundType.WOOL));
+		this.registerDefaultState(this.getStateDefinition().any().setValue(WATERLOGGED, false));
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(WATERLOGGED);
 	}
 
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		FluidState fluid = context.getWorld().getFluidState(context.getPos());
-		return this.getDefaultState().with(WATERLOGGED, fluid.getFluid() == Fluids.WATER);
+		FluidState fluid = context.getLevel().getFluidState(context.getClickedPos());
+		return this.defaultBlockState().setValue(WATERLOGGED, fluid.getType() == Fluids.WATER);
 	}
 
 	@Override
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		if (stateIn.get(WATERLOGGED)) {
-			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		if (stateIn.getValue(WATERLOGGED)) {
+			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 		}
 
-		return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+		return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
 
 	@Override
 	public FluidState getFluidState(BlockState state) {
-		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 
 	@Override
@@ -66,28 +66,28 @@ public class SafetyNetBlock extends Block implements IWaterLoggable
 	}
 
 	@Override
-	public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+	public void fallOn(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
 		if (entityIn.isSuppressingBounce()) {
-			super.onFallenUpon(worldIn, pos, entityIn, fallDistance);
+			super.fallOn(worldIn, pos, entityIn, fallDistance);
 		} else {
-			entityIn.onLivingFall(fallDistance, 0.0F);
+			entityIn.causeFallDamage(fallDistance, 0.0F);
 		}
 	}
 
 	@Override
-	public void onLanded(IBlockReader worldIn, Entity entityIn) {
+	public void updateEntityAfterFallOn(IBlockReader worldIn, Entity entityIn) {
 		if (entityIn.isSuppressingBounce()) {
-			super.onLanded(worldIn, entityIn);
+			super.updateEntityAfterFallOn(worldIn, entityIn);
 		} else {
 			this.bounceEntity(entityIn);
 		}
 	}
 
 	private void bounceEntity(Entity entityIn) {
-		Vector3d vec3d = entityIn.getMotion();
+		Vector3d vec3d = entityIn.getDeltaMovement();
 		if (vec3d.y < 0.0D) {
 			double entityWeightOffset = entityIn instanceof LivingEntity ? 0.6D : 0.8D;
-			entityIn.setMotion(vec3d.x, -vec3d.y * entityWeightOffset, vec3d.z);
+			entityIn.setDeltaMovement(vec3d.x, -vec3d.y * entityWeightOffset, vec3d.z);
 		}
 	}
 }
