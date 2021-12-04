@@ -30,6 +30,9 @@ public class ModTags
 	// Blocks that accelerate decomposition of Organic Compost if placed adjacent to it.
 	public static final ITag.INamedTag<Block> COMPOST_ACTIVATORS = modBlockTag("compost_activators");
 
+	// Blocks in which Mushroom Colonies can keep growing on, if it's dark enough. These blocks cannot form new colonies.
+	public static final ITag.INamedTag<Block> MUSHROOM_COLONY_GROWABLE_ON = modBlockTag("mushroom_colony_growable_on");
+
 	// Blocks that should not have their growth boosted by Rich Soil, if planted on it.
 	public static final ITag.INamedTag<Block> UNAFFECTED_BY_RICH_SOIL = modBlockTag("unaffected_by_rich_soil");
 

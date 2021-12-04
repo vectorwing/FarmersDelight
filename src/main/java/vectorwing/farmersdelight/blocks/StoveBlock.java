@@ -5,6 +5,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.CampfireCookingRecipe;
 import net.minecraft.particles.ParticleTypes;
@@ -78,8 +79,16 @@ public class StoveBlock extends HorizontalBlock
 		TileEntity tileEntity = worldIn.getBlockEntity(pos);
 		if (tileEntity instanceof StoveTileEntity) {
 			StoveTileEntity stoveEntity = (StoveTileEntity) tileEntity;
-			if (!worldIn.isClientSide && !stoveEntity.isStoveBlockedAbove() && stoveEntity.addItem(player.abilities.instabuild ? heldStack.copy() : heldStack)) {
-				return ActionResultType.SUCCESS;
+			int stoveSlot = stoveEntity.getNextEmptySlot();
+			if (stoveSlot < 0 || stoveEntity.isStoveBlockedAbove()) {
+				return ActionResultType.PASS;
+			}
+			Optional<CampfireCookingRecipe> recipe = stoveEntity.getMatchingRecipe(new Inventory(heldStack), stoveSlot);
+			if (recipe.isPresent()) {
+				if (!worldIn.isClientSide && stoveEntity.addItem(player.abilities.instabuild ? heldStack.copy() : heldStack, recipe.get(), stoveSlot)) {
+					return ActionResultType.SUCCESS;
+				}
+				return ActionResultType.CONSUME;
 			}
 		}
 

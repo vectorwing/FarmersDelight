@@ -141,7 +141,7 @@ dependencies {
     annotationProcessor "com.google.code.gson:gson:2.8.7" // CT dep
      */
 
-    annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     // Real examples
     // compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env

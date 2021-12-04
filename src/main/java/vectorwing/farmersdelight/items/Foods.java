@@ -65,8 +65,7 @@ public class Foods
 
 	// Sweets
 	public static final Food POPSICLE = (new Food.Builder())
-			.nutrition(3).saturationMod(0.2f).fast().alwaysEat()
-			.effect(() -> new EffectInstance(Effects.FIRE_RESISTANCE, 160, 0), 1.0F).build();
+			.nutrition(3).saturationMod(0.2f).fast().alwaysEat().build();
 	public static final Food COOKIES = (new Food.Builder())
 			.nutrition(2).saturationMod(0.1f).fast().build();
 	public static final Food CAKE_SLICE = (new Food.Builder())

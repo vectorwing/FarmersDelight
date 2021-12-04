@@ -180,7 +180,7 @@ public class SkilletTileEntity extends FDSyncedTileEntity implements ITickableTi
 			cookingTimeTotal = SkilletBlock.getSkilletCookingTime(recipe.get().getCookingTime(), fireAspectLevel);
 			boolean wasEmpty = getStoredStack().isEmpty();
 			ItemStack remainderStack = inventory.insertItem(0, addedStack.copy(), false);
-			if (remainderStack != addedStack) {
+			if (!ItemStack.isSame(remainderStack, addedStack)) {
 				lastRecipeID = recipe.get().getId();
 				cookingTime = 0;
 				if (wasEmpty && level != null && isHeated(level, worldPosition)) {

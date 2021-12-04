@@ -122,5 +122,6 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.BROWN_MUSHROOM_COLONY.get(),
 				ModBlocks.RED_MUSHROOM_COLONY.get())
 				.addTag(ModTags.WILD_CROPS);
+		tag(ModTags.MUSHROOM_COLONY_GROWABLE_ON).add(ModBlocks.RICH_SOIL.get());
 	}
 }

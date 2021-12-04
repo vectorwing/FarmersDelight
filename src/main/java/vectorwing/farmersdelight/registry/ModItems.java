@@ -240,7 +240,7 @@ public class ModItems
 	public static final RegistryObject<Item> HONEY_COOKIE = ITEMS.register("honey_cookie",
 			() -> new Item(new Item.Properties().food(Foods.COOKIES).tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> MELON_POPSICLE = ITEMS.register("melon_popsicle",
-			() -> new Item(new Item.Properties().food(Foods.POPSICLE).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new PopsicleItem(new Item.Properties().food(Foods.POPSICLE).tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> FRUIT_SALAD = ITEMS.register("fruit_salad",
 			() -> new ConsumableItem(new Item.Properties().food(Foods.FRUIT_SALAD).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
 
