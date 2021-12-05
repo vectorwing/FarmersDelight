@@ -2,8 +2,11 @@
 
 ## 0.5.2
 
+### Additions
+- Added client config for toggling extra tooltips on Farmer's Delight foods and drinks (true by default);
+
 ### Updates
-- Meals now display their provided effect in their tooltip. This can be disabled in the client config;
+- Foods now display their provided effect in their tooltip;
   - This also applies to any foods in the `comfort_foods` tag, for now;
 - Food portions, such as cabbage leaves and meat cuts, are now fast to eat;
 - Reduced the length of Comfort from `comfort_foods` from 5 to 2 minutes;

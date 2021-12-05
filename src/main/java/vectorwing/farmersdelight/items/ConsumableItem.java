@@ -14,12 +14,11 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import vectorwing.farmersdelight.setup.Configuration;
 import vectorwing.farmersdelight.utils.TextUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;
-
-import net.minecraft.item.Item.Properties;
 
 public class ConsumableItem extends Item
 {
@@ -33,6 +32,12 @@ public class ConsumableItem extends Item
 	public ConsumableItem(Properties properties) {
 		super(properties);
 		this.hasFoodEffectTooltip = false;
+		this.hasCustomTooltip = false;
+	}
+
+	public ConsumableItem(Properties properties, boolean hasFoodEffectTooltip) {
+		super(properties);
+		this.hasFoodEffectTooltip = hasFoodEffectTooltip;
 		this.hasCustomTooltip = false;
 	}
 
@@ -87,12 +92,14 @@ public class ConsumableItem extends Item
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		if (this.hasCustomTooltip) {
-			IFormattableTextComponent textEmpty = TextUtils.getTranslation("tooltip." + this);
-			tooltip.add(textEmpty.withStyle(TextFormatting.BLUE));
-		}
-		if (this.hasFoodEffectTooltip) {
-			TextUtils.addFoodEffectTooltip(stack, tooltip, 1.0F);
+		if (Configuration.FOOD_EFFECT_TOOLTIP.get()) {
+			if (this.hasCustomTooltip) {
+				IFormattableTextComponent textEmpty = TextUtils.getTranslation("tooltip." + this);
+				tooltip.add(textEmpty.withStyle(TextFormatting.BLUE));
+			}
+			if (this.hasFoodEffectTooltip) {
+				TextUtils.addFoodEffectTooltip(stack, tooltip, 1.0F);
+			}
 		}
 	}
 }

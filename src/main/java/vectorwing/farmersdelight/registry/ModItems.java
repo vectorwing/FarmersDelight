@@ -242,11 +242,11 @@ public class ModItems
 	public static final RegistryObject<Item> MELON_POPSICLE = ITEMS.register("melon_popsicle",
 			() -> new PopsicleItem(new Item.Properties().food(Foods.POPSICLE).tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> FRUIT_SALAD = ITEMS.register("fruit_salad",
-			() -> new ConsumableItem(new Item.Properties().food(Foods.FRUIT_SALAD).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.FRUIT_SALAD).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 
 	// Basic Meals
 	public static final RegistryObject<Item> MIXED_SALAD = ITEMS.register("mixed_salad",
-			() -> new ConsumableItem(new Item.Properties().food(Foods.MIXED_SALAD).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.MIXED_SALAD).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 	public static final RegistryObject<Item> NETHER_SALAD = ITEMS.register("nether_salad",
 			() -> new ConsumableItem(new Item.Properties().food(Foods.NETHER_SALAD).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> BARBECUE_STICK = ITEMS.register("barbecue_stick",
@@ -270,61 +270,61 @@ public class ModItems
 
 	// Soups and Stews
 	public static final RegistryObject<Item> COOKED_RICE = ITEMS.register("cooked_rice",
-			() -> new MealItem(new Item.Properties().food(Foods.COOKED_RICE).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.COOKED_RICE).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 	public static final RegistryObject<Item> BEEF_STEW = ITEMS.register("beef_stew",
-			() -> new MealItem(new Item.Properties().food(Foods.BEEF_STEW).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.BEEF_STEW).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 	public static final RegistryObject<Item> CHICKEN_SOUP = ITEMS.register("chicken_soup",
-			() -> new MealItem(new Item.Properties().food(Foods.CHICKEN_SOUP).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.CHICKEN_SOUP).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 	public static final RegistryObject<Item> VEGETABLE_SOUP = ITEMS.register("vegetable_soup",
-			() -> new MealItem(new Item.Properties().food(Foods.VEGETABLE_SOUP).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.VEGETABLE_SOUP).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 	public static final RegistryObject<Item> FISH_STEW = ITEMS.register("fish_stew",
-			() -> new MealItem(new Item.Properties().food(Foods.FISH_STEW).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.FISH_STEW).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 	public static final RegistryObject<Item> FRIED_RICE = ITEMS.register("fried_rice",
-			() -> new MealItem(new Item.Properties().food(Foods.FRIED_RICE).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.FRIED_RICE).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 	public static final RegistryObject<Item> PUMPKIN_SOUP = ITEMS.register("pumpkin_soup",
-			() -> new MealItem(new Item.Properties().food(Foods.PUMPKIN_SOUP).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.PUMPKIN_SOUP).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 	public static final RegistryObject<Item> BAKED_COD_STEW = ITEMS.register("baked_cod_stew",
-			() -> new MealItem(new Item.Properties().food(Foods.BAKED_COD_STEW).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.BAKED_COD_STEW).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 	public static final RegistryObject<Item> NOODLE_SOUP = ITEMS.register("noodle_soup",
-			() -> new MealItem(new Item.Properties().food(Foods.NOODLE_SOUP).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.NOODLE_SOUP).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 
 	// Plated Meals
 	public static final RegistryObject<Item> BACON_AND_EGGS = ITEMS.register("bacon_and_eggs",
-			() -> new MealItem(new Item.Properties().food(Foods.BACON_AND_EGGS).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.BACON_AND_EGGS).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 	public static final RegistryObject<Item> PASTA_WITH_MEATBALLS = ITEMS.register("pasta_with_meatballs",
-			() -> new MealItem(new Item.Properties().food(Foods.PASTA_WITH_MEATBALLS).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.PASTA_WITH_MEATBALLS).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 	public static final RegistryObject<Item> PASTA_WITH_MUTTON_CHOP = ITEMS.register("pasta_with_mutton_chop",
-			() -> new MealItem(new Item.Properties().food(Foods.PASTA_WITH_MUTTON_CHOP).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.PASTA_WITH_MUTTON_CHOP).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 	public static final RegistryObject<Item> ROASTED_MUTTON_CHOPS = ITEMS.register("roasted_mutton_chops",
-			() -> new MealItem(new Item.Properties().food(Foods.ROASTED_MUTTON_CHOPS).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.ROASTED_MUTTON_CHOPS).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 	public static final RegistryObject<Item> VEGETABLE_NOODLES = ITEMS.register("vegetable_noodles",
-			() -> new MealItem(new Item.Properties().food(Foods.VEGETABLE_NOODLES).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.VEGETABLE_NOODLES).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 	public static final RegistryObject<Item> STEAK_AND_POTATOES = ITEMS.register("steak_and_potatoes",
-			() -> new MealItem(new Item.Properties().food(Foods.STEAK_AND_POTATOES).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.STEAK_AND_POTATOES).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 	public static final RegistryObject<Item> RATATOUILLE = ITEMS.register("ratatouille",
-			() -> new MealItem(new Item.Properties().food(Foods.RATATOUILLE).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.RATATOUILLE).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 	public static final RegistryObject<Item> SQUID_INK_PASTA = ITEMS.register("squid_ink_pasta",
-			() -> new MealItem(new Item.Properties().food(Foods.SQUID_INK_PASTA).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.SQUID_INK_PASTA).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 	public static final RegistryObject<Item> GRILLED_SALMON = ITEMS.register("grilled_salmon",
-			() -> new MealItem(new Item.Properties().food(Foods.GRILLED_SALMON).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.GRILLED_SALMON).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 
 	// Feasts
 	public static final RegistryObject<Item> ROAST_CHICKEN_BLOCK = ITEMS.register("roast_chicken_block",
 			() -> new BlockItem(ModBlocks.ROAST_CHICKEN_BLOCK.get(), new Item.Properties().stacksTo(1).tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> ROAST_CHICKEN = ITEMS.register("roast_chicken",
-			() -> new MealItem(new Item.Properties().food(Foods.ROAST_CHICKEN).stacksTo(16).craftRemainder(Items.BOWL).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.ROAST_CHICKEN).stacksTo(16).craftRemainder(Items.BOWL).tab(FarmersDelight.ITEM_GROUP), true));
 	public static final RegistryObject<Item> STUFFED_PUMPKIN_BLOCK = ITEMS.register("stuffed_pumpkin_block",
 			() -> new BlockItem(ModBlocks.STUFFED_PUMPKIN_BLOCK.get(), new Item.Properties().stacksTo(1).tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> STUFFED_PUMPKIN = ITEMS.register("stuffed_pumpkin",
-			() -> new MealItem(new Item.Properties().food(Foods.STUFFED_PUMPKIN).stacksTo(16).craftRemainder(Items.BOWL).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.STUFFED_PUMPKIN).stacksTo(16).craftRemainder(Items.BOWL).tab(FarmersDelight.ITEM_GROUP), true));
 	public static final RegistryObject<Item> HONEY_GLAZED_HAM_BLOCK = ITEMS.register("honey_glazed_ham_block",
 			() -> new BlockItem(ModBlocks.HONEY_GLAZED_HAM_BLOCK.get(), new Item.Properties().stacksTo(1).tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> HONEY_GLAZED_HAM = ITEMS.register("honey_glazed_ham",
-			() -> new MealItem(new Item.Properties().food(Foods.HONEY_GLAZED_HAM).stacksTo(16).craftRemainder(Items.BOWL).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.HONEY_GLAZED_HAM).stacksTo(16).craftRemainder(Items.BOWL).tab(FarmersDelight.ITEM_GROUP), true));
 	public static final RegistryObject<Item> SHEPHERDS_PIE_BLOCK = ITEMS.register("shepherds_pie_block",
 			() -> new BlockItem(ModBlocks.SHEPHERDS_PIE_BLOCK.get(), new Item.Properties().stacksTo(1).tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> SHEPHERDS_PIE = ITEMS.register("shepherds_pie",
-			() -> new MealItem(new Item.Properties().food(Foods.SHEPHERDS_PIE).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+			() -> new ConsumableItem(new Item.Properties().food(Foods.SHEPHERDS_PIE).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP), true));
 
 	// Pet Foods
 	public static final RegistryObject<Item> DOG_FOOD = ITEMS.register("dog_food",

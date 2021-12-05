@@ -22,7 +22,7 @@ public class TooltipEventHandler
 	@SubscribeEvent
 	public static void onItemTooltip(ItemTooltipEvent event) {
 		ItemStack soupStack = event.getItemStack();
-		if (Configuration.MEAL_EFFECT_TOOLTIP.get() && Configuration.COMFORT_FOOD_TAG_EFFECT.get() && soupStack.getItem().is(ModTags.COMFORT_FOODS)) {
+		if (Configuration.FOOD_EFFECT_TOOLTIP.get() && Configuration.COMFORT_FOOD_TAG_EFFECT.get() && soupStack.getItem().is(ModTags.COMFORT_FOODS)) {
 			List<ITextComponent> tooltip = event.getToolTip();
 			EffectInstance comfort = new EffectInstance(ModEffects.COMFORT.get(), 2400);
 			IFormattableTextComponent effectText = new TranslationTextComponent(comfort.getDescriptionId());

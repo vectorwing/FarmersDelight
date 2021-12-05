@@ -26,14 +26,13 @@ import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.registry.ModParticleTypes;
+import vectorwing.farmersdelight.setup.Configuration;
 import vectorwing.farmersdelight.utils.MathUtils;
 import vectorwing.farmersdelight.utils.TextUtils;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.Nullable;
 import java.util.List;
-
-import net.minecraft.item.Item.Properties;
 
 public class DogFoodItem extends ConsumableItem
 {
@@ -89,6 +88,10 @@ public class DogFoodItem extends ConsumableItem
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+		if (!Configuration.FOOD_EFFECT_TOOLTIP.get()) {
+			return;
+		}
+
 		IFormattableTextComponent textWhenFeeding = TextUtils.getTranslation("tooltip.dog_food.when_feeding");
 		tooltip.add(textWhenFeeding.withStyle(TextFormatting.GRAY));
 
