@@ -171,7 +171,7 @@ public class Advancements extends AdvancementProvider
 					.save(consumer, getNameId("main/eat_comfort_food"));
 
 			Advancement wellServed = getAdvancement(warmAndCozy, ModItems.STEAK_AND_POTATOES.get(), "eat_nourishing_food", FrameType.TASK, true, true, false)
-					.addCriterion("nourished", EffectsChangedTrigger.Instance.hasEffects(MobEffectsPredicate.effects().and(ModEffects.NOURISHED.get())))
+					.addCriterion("nourished", EffectsChangedTrigger.Instance.hasEffects(MobEffectsPredicate.effects().and(ModEffects.NOURISHMENT.get())))
 					.save(consumer, getNameId("main/eat_nourishing_food"));
 
 			Advancement gloriousFeast = getAdvancement(wellServed, ModItems.ROAST_CHICKEN_BLOCK.get(), "place_feast", FrameType.TASK, true, true, false)

@@ -237,9 +237,9 @@ public class CommonEventHandler
 			entity.addEffect(new EffectInstance(Effects.JUMP, 100, 1));
 		}
 
-		// Adds 5:00 of Comfort when eating foods inside the tag farmersdelight:comfort_foods
+		// Adds 2:00 of Comfort when eating foods inside the tag farmersdelight:comfort_foods
 		if (Configuration.COMFORT_FOOD_TAG_EFFECT.get() && food.is(ModTags.COMFORT_FOODS)) {
-			entity.addEffect(new EffectInstance(ModEffects.COMFORT.get(), 6000, 0));
+			entity.addEffect(new EffectInstance(ModEffects.COMFORT.get(), 2400, 0));
 		}
 	}
 

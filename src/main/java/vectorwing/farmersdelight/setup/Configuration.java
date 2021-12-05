@@ -54,7 +54,8 @@ public class Configuration
 	// CLIENT
 	public static final String CATEGORY_CLIENT = "client";
 
-	public static ForgeConfigSpec.BooleanValue NOURISHED_HUNGER_OVERLAY;
+	public static ForgeConfigSpec.BooleanValue NOURISHMENT_HUNGER_OVERLAY;
+	public static ForgeConfigSpec.BooleanValue MEAL_EFFECT_TOOLTIP;
 
 	static {
 		ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
@@ -74,7 +75,7 @@ public class Configuration
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("Vanilla item overrides").push(CATEGORY_OVERRIDES);
-		COMFORT_FOOD_TAG_EFFECT = COMMON_BUILDER.comment("Should items inside the tag 'farmersdelight:comfort_foods' grant 5 minutes of Comfort when eaten? (defaults to vanilla SoupItems)")
+		COMFORT_FOOD_TAG_EFFECT = COMMON_BUILDER.comment("Should items inside the tag 'farmersdelight:comfort_foods' grant 2 minutes of Comfort when eaten? (defaults to vanilla SoupItems)")
 				.define("comfortFoodTagEffect", true);
 		RABBIT_STEW_JUMP_BOOST = COMMON_BUILDER.comment("Should Rabbit Stew grant users the jumping prowess of a rabbit when eaten?")
 				.define("rabbitStewJumpBoost", true);
@@ -156,8 +157,10 @@ public class Configuration
 		ForgeConfigSpec.Builder CLIENT_BUILDER = new ForgeConfigSpec.Builder();
 
 		CLIENT_BUILDER.comment("Client settings").push(CATEGORY_CLIENT);
-		NOURISHED_HUNGER_OVERLAY = CLIENT_BUILDER.comment("Should the hunger bar have a gilded overlay when the player is Nourished?")
-				.define("nourishedHungerOverlay", true);
+		NOURISHMENT_HUNGER_OVERLAY = CLIENT_BUILDER.comment("Should the hunger bar have a gilded overlay when the player has the Nourishment effect?")
+				.define("nourishmentHungerOverlay", true);
+		MEAL_EFFECT_TOOLTIP = CLIENT_BUILDER.comment("Should a meal's tooltip display which effect it provides?")
+				.define("mealEffectTooltip", true);
 		CLIENT_BUILDER.pop();
 
 		CLIENT_CONFIG = CLIENT_BUILDER.build();

@@ -3,6 +3,7 @@
 ## 0.5.2
 
 ### Updates
+- Meals now display their provided effect in their tooltip. This can be disabled in the client config;
 - Food portions, such as cabbage leaves and meat cuts, are now fast to eat;
 - Updated ja_JP translation;
 - Updated ko_KR translation;

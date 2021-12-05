@@ -38,7 +38,7 @@ public class NourishedHungerOverlay
 
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onPreRender(RenderGameOverlayEvent.Pre event) {
-		if (!Configuration.NOURISHED_HUNGER_OVERLAY.get())
+		if (!Configuration.NOURISHMENT_HUNGER_OVERLAY.get())
 			return;
 		if (event.getType() != RenderGameOverlayEvent.ElementType.FOOD)
 			return;
@@ -50,7 +50,7 @@ public class NourishedHungerOverlay
 
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRender(RenderGameOverlayEvent.Post event) {
-		if (!Configuration.NOURISHED_HUNGER_OVERLAY.get())
+		if (!Configuration.NOURISHMENT_HUNGER_OVERLAY.get())
 			return;
 		if (event.getType() != RenderGameOverlayEvent.ElementType.FOOD)
 			return;
@@ -70,7 +70,7 @@ public class NourishedHungerOverlay
 						&& stats.getSaturationLevel() > 0.0F
 						&& stats.getFoodLevel() >= 20;
 
-		if (player.getEffect(ModEffects.NOURISHED.get()) != null) {
+		if (player.getEffect(ModEffects.NOURISHMENT.get()) != null) {
 			drawNourishedOverlay(stats, minecraft, event.getMatrixStack(), left, top, isPlayerHealingWithSaturation);
 		}
 	}
