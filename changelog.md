@@ -4,12 +4,15 @@
 
 ### Updates
 - Meals now display their provided effect in their tooltip. This can be disabled in the client config;
+  - This also applies to any foods in the `comfort_foods` tag, for now;
 - Food portions, such as cabbage leaves and meat cuts, are now fast to eat;
+- Reduced the length of Comfort from `comfort_foods` from 5 to 2 minutes;
 - Updated ja_JP translation;
 - Updated ko_KR translation;
 - Updated zh_CN translation;
 
 ### Fixes
+- Fix Nourishment's hunger overlay blocking AppleSkin's saturation overlay;
 - Fix items being used twice when adding them to a Stove;
 - Fix Stoves cancelling the normal usage of invalid items when aimed at them;
 - Fix inconsistencies with lit/unlit Stove textures;
