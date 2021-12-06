@@ -79,33 +79,36 @@ public class CanvasSignRenderer extends SignRenderer
 		float f2 = 0.010416667F;
 		poseStack.translate(0.0D, (double) 0.33333334F, (double) 0.046666667F);
 		poseStack.scale(0.010416667F, -0.010416667F, 0.010416667F);
-		int i = getDarkColor(blockEntity);
 		int j = 20;
 		FormattedCharSequence[] aformattedcharsequence = blockEntity.getRenderMessages(Minecraft.getInstance().isTextFilteringEnabled(), (p_173653_) -> {
 			List<FormattedCharSequence> list = this.font.split(p_173653_, 90);
 			return list.isEmpty() ? FormattedCharSequence.EMPTY : list.get(0);
 		});
-		int k;
-		boolean flag;
-		int l;
+
+		int darkColor;
+		int baseColor;
+		boolean hasOutline;
+		int light;
 		if (blockEntity.hasGlowingText()) {
-			k = blockEntity.getColor().getTextColor();
-			flag = isOutlineVisible(blockEntity, k);
-			l = 15728880;
+			darkColor = getDarkColor(blockEntity, true);
+			baseColor = blockEntity.getColor().getTextColor();
+			hasOutline = isOutlineVisible(blockEntity, baseColor);
+			light = 15728880;
 		} else {
-			k = i;
-			flag = false;
-			l = pPackedLight;
+			darkColor = getDarkColor(blockEntity, false);
+			baseColor = darkColor;
+			hasOutline = false;
+			light = pPackedLight;
 		}
 
 		for (int i1 = 0; i1 < 4; ++i1) {
 			FormattedCharSequence formattedcharsequence = aformattedcharsequence[i1];
 			float x = (float) (-this.font.width(formattedcharsequence) / 2);
 			float y = i1 * TEXT_LINE_HEIGHT - TEXT_VERTICAL_OFFSET;
-			if (flag) {
-				this.font.drawInBatch8xOutline(formattedcharsequence, x, y, k, i, poseStack.last().pose(), pBufferSource, l);
+			if (hasOutline) {
+				this.font.drawInBatch8xOutline(formattedcharsequence, x, y, baseColor, darkColor, poseStack.last().pose(), pBufferSource, light);
 			} else {
-				this.font.drawInBatch(formattedcharsequence, x, y, k, false, poseStack.last().pose(), pBufferSource, false, 0, l);
+				this.font.drawInBatch(formattedcharsequence, x, y, baseColor, false, poseStack.last().pose(), pBufferSource, false, 0, light);
 			}
 		}
 
@@ -127,9 +130,9 @@ public class CanvasSignRenderer extends SignRenderer
 		}
 	}
 
-	private static int getDarkColor(SignBlockEntity blockEntity) {
+	private static int getDarkColor(SignBlockEntity blockEntity, boolean isOutlineVisible) {
 		int textColor = blockEntity.getColor().getTextColor();
-		double brightness = 0.4D;
+		double brightness = isOutlineVisible ? 0.4D : 0.6D;
 		int red = (int) ((double) NativeImage.getR(textColor) * brightness);
 		int green = (int) ((double) NativeImage.getG(textColor) * brightness);
 		int blue = (int) ((double) NativeImage.getB(textColor) * brightness);

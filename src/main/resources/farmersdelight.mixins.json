@@ -5,7 +5,6 @@
   "refmap": "farmersdelight.refmap.json",
   "mixins": [
     "CampfireBaleMixin",
-    "CanvasSignMaterialMixin",
     "KeepRichSoilMixin",
     "SoupItemMixin",
     "accessors.ChickenEntityAccessor",
@@ -13,7 +12,8 @@
     "accessors.RecipeManagerAccessor"
   ],
   "client": [
-    "HideBlockBreakProgressMixin"
+    "HideBlockBreakProgressMixin",
+    "CanvasSignMaterialMixin"
   ],
   "injectors": {
     "defaultRequire": 1
