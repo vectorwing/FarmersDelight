@@ -67,7 +67,7 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 
 	public CookingPotBlock() {
 		super(Properties.of(Material.METAL)
-				.strength(0.5F, 6.0F)
+				.strength(0.8F, 6.0F)
 				.sound(SoundType.LANTERN));
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(SUPPORT, CookingPotSupport.NONE).setValue(WATERLOGGED, false));
 	}

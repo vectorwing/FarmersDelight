@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.items;
 
+import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
@@ -33,31 +34,32 @@ public class Foods
 	public static final FoodProperties PUMPKIN_SLICE = (new FoodProperties.Builder())
 			.nutrition(3).saturationMod(0.3f).build();
 	public static final FoodProperties CABBAGE_LEAF = (new FoodProperties.Builder())
-			.nutrition(1).saturationMod(0.4f).build();
+			.nutrition(1).saturationMod(0.4f).fast().build();
 	public static final FoodProperties MINCED_BEEF = (new FoodProperties.Builder())
-			.nutrition(2).saturationMod(0.3f).meat().build();
+			.nutrition(2).saturationMod(0.3f).meat().fast().build();
 	public static final FoodProperties BEEF_PATTY = (new FoodProperties.Builder())
-			.nutrition(4).saturationMod(0.8f).meat().build();
+			.nutrition(4).saturationMod(0.8f).meat().fast().build();
+	private static Object Effects;
 	public static final FoodProperties CHICKEN_CUTS = (new FoodProperties.Builder())
-			.nutrition(1).saturationMod(0.3f).effect(() -> new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F).meat().build();
+			.nutrition(1).saturationMod(0.3f).effect(() -> new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F).meat().fast().build();
 	public static final FoodProperties COOKED_CHICKEN_CUTS = (new FoodProperties.Builder())
-			.nutrition(3).saturationMod(0.6f).meat().build();
+			.nutrition(3).saturationMod(0.6f).meat().fast().build();
 	public static final FoodProperties BACON = (new FoodProperties.Builder())
-			.nutrition(2).saturationMod(0.3f).meat().build();
+			.nutrition(2).saturationMod(0.3f).meat().fast().build();
 	public static final FoodProperties COOKED_BACON = (new FoodProperties.Builder())
-			.nutrition(4).saturationMod(0.8f).meat().build();
+			.nutrition(4).saturationMod(0.8f).meat().fast().build();
 	public static final FoodProperties COD_SLICE = (new FoodProperties.Builder())
-			.nutrition(1).saturationMod(0.1f).build();
+			.nutrition(1).saturationMod(0.1f).fast().build();
 	public static final FoodProperties COOKED_COD_SLICE = (new FoodProperties.Builder())
-			.nutrition(3).saturationMod(0.5f).build();
+			.nutrition(3).saturationMod(0.5f).fast().build();
 	public static final FoodProperties SALMON_SLICE = (new FoodProperties.Builder())
-			.nutrition(1).saturationMod(0.1f).build();
+			.nutrition(1).saturationMod(0.1f).fast().build();
 	public static final FoodProperties COOKED_SALMON_SLICE = (new FoodProperties.Builder())
-			.nutrition(3).saturationMod(0.8f).build();
+			.nutrition(3).saturationMod(0.8f).fast().build();
 	public static final FoodProperties MUTTON_CHOP = (new FoodProperties.Builder())
-			.nutrition(1).saturationMod(0.3f).meat().build();
+			.nutrition(1).saturationMod(0.3f).meat().fast().build();
 	public static final FoodProperties COOKED_MUTTON_CHOP = (new FoodProperties.Builder())
-			.nutrition(3).saturationMod(0.8f).meat().build();
+			.nutrition(3).saturationMod(0.8f).meat().fast().build();
 	public static final FoodProperties HAM = (new FoodProperties.Builder())
 			.nutrition(5).saturationMod(0.3f).build();
 	public static final FoodProperties SMOKED_HAM = (new FoodProperties.Builder())
@@ -65,8 +67,7 @@ public class Foods
 
 	// Sweets
 	public static final FoodProperties POPSICLE = (new FoodProperties.Builder())
-			.nutrition(3).saturationMod(0.2f).fast().alwaysEat()
-			.effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 160, 0), 1.0F).build();
+			.nutrition(3).saturationMod(0.2f).fast().alwaysEat().build();
 	public static final FoodProperties COOKIES = (new FoodProperties.Builder())
 			.nutrition(2).saturationMod(0.1f).fast().build();
 	public static final FoodProperties CAKE_SLICE = (new FoodProperties.Builder())
@@ -107,7 +108,7 @@ public class Foods
 	public static final FoodProperties STUFFED_POTATO = (new FoodProperties.Builder())
 			.nutrition(10).saturationMod(0.7f).build();
 	public static final FoodProperties CABBAGE_ROLLS = (new FoodProperties.Builder())
-			.nutrition(6).saturationMod(0.5f).build();
+			.nutrition(5).saturationMod(0.5f).build();
 
 	// Bowl Foods
 	public static final FoodProperties COOKED_RICE = (new FoodProperties.Builder())

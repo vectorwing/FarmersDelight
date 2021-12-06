@@ -7,12 +7,14 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -29,14 +31,14 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolActions;
-import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModBlockEntityTypes;
-import vectorwing.farmersdelight.tile.BasketBlockEntity;
+import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.tile.StoveBlockEntity;
 import vectorwing.farmersdelight.utils.ItemUtils;
 import vectorwing.farmersdelight.utils.MathUtils;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
@@ -88,8 +90,16 @@ public class StoveBlock extends BaseEntityBlock
 
 		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
 		if (tileEntity instanceof StoveBlockEntity stoveEntity) {
-			if (!worldIn.isClientSide && !stoveEntity.isStoveBlockedAbove() && stoveEntity.addItem(player.getAbilities().instabuild ? heldStack.copy() : heldStack)) {
-				return InteractionResult.SUCCESS;
+			int stoveSlot = stoveEntity.getNextEmptySlot();
+			if (stoveSlot < 0 || stoveEntity.isStoveBlockedAbove()) {
+				return InteractionResult.PASS;
+			}
+			Optional<CampfireCookingRecipe> recipe = stoveEntity.getMatchingRecipe(new SimpleContainer(heldStack), stoveSlot);
+			if (recipe.isPresent()) {
+				if (!worldIn.isClientSide && stoveEntity.addItem(player.getAbilities().instabuild ? heldStack.copy() : heldStack, recipe.get(), stoveSlot)) {
+					return InteractionResult.SUCCESS;
+				}
+				return InteractionResult.CONSUME;
 			}
 		}
 

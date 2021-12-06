@@ -24,7 +24,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.Tags;
-import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import java.util.Random;
 import java.util.function.Supplier;
@@ -108,13 +108,12 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random rand) {
-		super.tick(state, worldIn, pos, rand);
+	public void tick(BlockState state, ServerLevel level, BlockPos pos, Random rand) {
 		int age = state.getValue(COLONY_AGE);
-		BlockState groundState = worldIn.getBlockState(pos.below());
-		if (age < this.getMaxAge() && groundState.getBlock() == ModBlocks.RICH_SOIL.get() && worldIn.getRawBrightness(pos.above(), 0) <= GROWING_LIGHT_LEVEL && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(5) == 0)) {
-			worldIn.setBlock(pos, state.setValue(COLONY_AGE, age + 1), 2);
-			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
+		Block groundState = level.getBlockState(pos.below()).getBlock();
+		if (age < this.getMaxAge() && ModTags.MUSHROOM_COLONY_GROWABLE_ON.contains(groundState) && level.getRawBrightness(pos.above(), 0) <= GROWING_LIGHT_LEVEL && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, rand.nextInt(5) == 0)) {
+			level.setBlock(pos, state.setValue(COLONY_AGE, age + 1), 2);
+			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(level, pos, state);
 		}
 	}
 

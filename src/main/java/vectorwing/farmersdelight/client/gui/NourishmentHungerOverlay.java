@@ -111,9 +111,6 @@ public class NourishmentHungerOverlay
 	}
 
 	public static void drawNourishedOverlay(FoodData stats, Minecraft mc, PoseStack matrixStack, int left, int top, boolean naturalHealing) {
-		matrixStack.pushPose();
-		matrixStack.translate(0, 0, 0.01);
-
 		float saturation = stats.getSaturationLevel();
 		int foodLevel = stats.getFoodLevel();
 		int ticks = mc.gui.getGuiTicks();
@@ -145,8 +142,6 @@ public class NourishmentHungerOverlay
 		}
 
 		RenderSystem.disableBlend();
-		matrixStack.popPose();
-
 		RenderSystem.setShaderTexture(0, GuiComponent.GUI_ICONS_LOCATION);
 	}
 }

@@ -1,5 +1,46 @@
 # Changelog
 
+## 0.5.2
+
+### Additions
+- Added client config for toggling extra tooltips on Farmer's Delight foods and drinks (true by default);
+
+### Updates
+- Foods now display their provided effect in their tooltip;
+  - This also applies to any foods in the `comfort_foods` tag, for now;
+- Food portions, such as cabbage leaves and meat cuts, are now fast to eat;
+- Reduced the length of Comfort from `comfort_foods` from 5 to 2 minutes;
+- Updated ja_JP translation;
+- Updated ko_KR translation;
+- Updated zh_CN translation;
+
+### Fixes
+- Fix Nourishment's hunger overlay blocking AppleSkin's saturation overlay;
+- Fix items being used twice when adding them to a Stove;
+- Fix Stoves cancelling the normal usage of invalid items when aimed at them;
+- Fix inconsistencies with lit/unlit Stove textures;
+- Fix Skillets resetting their cooking time when trying to add a cookable item and failing;
+
+## 0.5.1
+- This update rolls back recent package changes which caused add-ons and integrations to break.
+
+### Additions
+  - Added JEI information tabs to Knives and Ham;
+  - Added `mushroom_colony_growable_on` tag: blocks that allow Mushroom Colonies to continue growing until mature;
+    - This tag DOES NOT make the block form colonies! Only Rich Soil can do so for now;
+  - Added compatibility with Create's Potato Cannon!
+    - Cabbage packs a punch, but is cumbersome to reload;
+    - Tomatoes are light, rapid-fire and embarassing to get hit by;
+    - Onions are mostly the same as potatoes;
+    - Whole pies work like the Pumpkin Pie. Their slices (and Pumpkin Slices) can be fired rapidly instead.
+### Updates
+  - Cooking Pot and Skillet are a bit easier to break by hand;
+  - Melon Popsicles now douse flames when consumed, instead of giving Fire Resistance;
+  - Updated ja_JP translation (thanks, CKenJa!)
+### Fixes
+  - Fix Skillet not saving total cooking times, making it cook items rapidly on world reload;
+  - Fix a class mismatch that broke Industrial Foregoing's Hydroponic Bed integration.
+
 ## 0.5.0
 
 ### Breaking changes (BACKUP YOUR SAVES!)
@@ -69,6 +110,7 @@
 
 ### Translation Updates
 - (NEW!) ca_ES (thanks, VerdaPegasus!)
+- de_DE (thanks, DaLumma!)
 - fr_FR (thanks, BlackJamesYT!)
 - ko_KR (thanks, qkrehf2!)
 - pl_pl (thanks, jogurciQ!)
