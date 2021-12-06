@@ -13,10 +13,10 @@
 //import net.minecraft.core.NonNullList;
 //import net.minecraft.resources.ResourceLocation;
 //import org.openzen.zencode.java.ZenCodeType;
-//import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
-//import vectorwing.farmersdelight.crafting.ingredients.ChanceResult;
+//import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
+//import vectorwing.farmersdelight.common.crafting.ingredients.ChanceResult;
 //import vectorwing.farmersdelight.integration.crafttweaker.actions.ActionRemoveCuttingBoardRecipe;
-//import vectorwing.farmersdelight.utils.ListUtils;
+//import vectorwing.farmersdelight.core.utils.ListUtils;
 //
 ///**
 // * Farmer's Delight Cutting Board recipes.

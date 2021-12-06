@@ -3,8 +3,8 @@ package vectorwing.farmersdelight.client.sound;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
-import vectorwing.farmersdelight.registry.ModSounds;
-import vectorwing.farmersdelight.tile.SkilletBlockEntity;
+import vectorwing.farmersdelight.core.registry.ModSounds;
+import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 
 public class SkilletSizzleTickableSound extends AbstractTickableSoundInstance
 {

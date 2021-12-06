@@ -14,32 +14,31 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import vectorwing.farmersdelight.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
-import vectorwing.farmersdelight.crafting.ingredients.ToolActionIngredient;
-import vectorwing.farmersdelight.registry.*;
-import vectorwing.farmersdelight.setup.ClientEventHandler;
-import vectorwing.farmersdelight.setup.CommonEventHandler;
-import vectorwing.farmersdelight.setup.Configuration;
-import vectorwing.farmersdelight.world.VillageStructures;
+import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
+import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.common.crafting.ingredient.ToolActionIngredient;
+import vectorwing.farmersdelight.common.world.VillageStructures;
+import vectorwing.farmersdelight.core.Configuration;
+import vectorwing.farmersdelight.core.FDCreativeModeTab;
+import vectorwing.farmersdelight.core.event.ClientSetupEvents;
+import vectorwing.farmersdelight.core.event.CommonEvents;
+import vectorwing.farmersdelight.core.registry.*;
 
 @Mod(FarmersDelight.MODID)
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class FarmersDelight
 {
 	public static final String MODID = "farmersdelight";
-	public static final FDItemGroup ITEM_GROUP = new FDItemGroup(FarmersDelight.MODID);
+	public static final FDCreativeModeTab ITEM_GROUP = new FDCreativeModeTab(FarmersDelight.MODID);
 
 	public static final Logger LOGGER = LogManager.getLogger();
-	public static final Gson GSON = new GsonBuilder().setPrettyPrinting()
-			.disableHtmlEscaping()
-			.create();
+	public static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
 	public FarmersDelight() {
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-		modEventBus.addListener(CommonEventHandler::init);
-		modEventBus.addListener(ClientEventHandler::init);
+		modEventBus.addListener(CommonEvents::init);
+		modEventBus.addListener(ClientSetupEvents::init);
 		modEventBus.addGenericListener(RecipeSerializer.class, this::registerRecipeSerializers);
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
@@ -57,7 +56,6 @@ public class FarmersDelight
 		ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
 
 		MinecraftForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
-
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 

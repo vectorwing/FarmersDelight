@@ -9,7 +9,7 @@
 //import com.blamejared.crafttweaker.impl.item.MCItemStackMutable;
 //import net.minecraft.world.item.crafting.Ingredient;
 //import net.minecraft.resources.ResourceLocation;
-//import vectorwing.farmersdelight.crafting.CookingPotRecipe;
+//import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 //
 //import java.util.List;
 //import java.util.Optional;

@@ -1,15 +1,15 @@
 {
   "required": true,
-  "package": "vectorwing.farmersdelight.mixin",
+  "package": "vectorwing.farmersdelight.core.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "farmersdelight.refmap.json",
   "mixins": [
     "CampfireBaleMixin",
     "KeepRichSoilMixin",
     "SoupItemMixin",
-    "accessors.ChickenEntityAccessor",
-    "accessors.PigEntityAccessor",
-    "accessors.RecipeManagerAccessor"
+    "accessor.ChickenEntityAccessor",
+    "accessor.PigEntityAccessor",
+    "accessor.RecipeManagerAccessor"
   ],
   "client": [
     "HideBlockBreakProgressMixin",
