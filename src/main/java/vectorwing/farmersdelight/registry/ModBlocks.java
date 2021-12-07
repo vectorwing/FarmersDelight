@@ -14,7 +14,10 @@ import vectorwing.farmersdelight.blocks.*;
 import vectorwing.farmersdelight.blocks.signs.StandingCanvasSignBlock;
 import vectorwing.farmersdelight.blocks.signs.WallCanvasSignBlock;
 
+import java.util.Set;
 import java.util.function.ToIntFunction;
+
+import com.google.common.collect.Sets;
 
 public class ModBlocks
 {
@@ -52,6 +55,7 @@ public class ModBlocks
 			() -> new StrawBaleBlock(Block.Properties.copy(Blocks.HAY_BLOCK).harvestTool(ToolType.HOE)));
 
 	// Building
+	public static final Set<Block> PANTRIES = Sets.newHashSet();
 	public static final RegistryObject<Block> ROPE = BLOCKS.register("rope", RopeBlock::new);
 	public static final RegistryObject<Block> SAFETY_NET = BLOCKS.register("safety_net", SafetyNetBlock::new);
 	public static final RegistryObject<Block> OAK_PANTRY = BLOCKS.register("oak_pantry",

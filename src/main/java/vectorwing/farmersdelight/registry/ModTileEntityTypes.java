@@ -22,9 +22,7 @@ public class ModTileEntityTypes
 	public static final RegistryObject<TileEntityType<SkilletTileEntity>> SKILLET_TILE = TILES.register("skillet",
 			() -> TileEntityType.Builder.of(SkilletTileEntity::new, ModBlocks.SKILLET.get()).build(null));
 	public static final RegistryObject<TileEntityType<PantryTileEntity>> PANTRY_TILE = TILES.register("pantry",
-			() -> TileEntityType.Builder.of(PantryTileEntity::new,
-					ModBlocks.OAK_PANTRY.get(), ModBlocks.BIRCH_PANTRY.get(), ModBlocks.SPRUCE_PANTRY.get(), ModBlocks.JUNGLE_PANTRY.get(), ModBlocks.ACACIA_PANTRY.get(), ModBlocks.DARK_OAK_PANTRY.get())
-					.build(null));
+			() -> new TileEntityType<>(PantryTileEntity::new, ModBlocks.PANTRIES, null));
 	public static final RegistryObject<TileEntityType<CanvasSignTileEntity>> CANVAS_SIGN_TILE = TILES.register("canvas_sign",
 			() -> TileEntityType.Builder.of(CanvasSignTileEntity::new,
 					ModBlocks.CANVAS_SIGN.get(),

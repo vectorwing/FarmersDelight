@@ -22,12 +22,11 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.tile.PantryTileEntity;
 
 import javax.annotation.Nullable;
 import java.util.Random;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 @SuppressWarnings("deprecation")
 public class PantryBlock extends ContainerBlock
@@ -38,6 +37,7 @@ public class PantryBlock extends ContainerBlock
 	public PantryBlock(Properties properties) {
 		super(properties);
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(OPEN, false));
+		ModBlocks.PANTRIES.add(this);
 	}
 
 	@Override

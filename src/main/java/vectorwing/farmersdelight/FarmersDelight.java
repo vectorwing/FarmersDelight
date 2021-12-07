@@ -2,6 +2,10 @@ package vectorwing.farmersdelight;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -14,13 +18,17 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import vectorwing.farmersdelight.blocks.PantryBlock;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.crafting.ingredients.ToolIngredient;
+import vectorwing.farmersdelight.items.FuelBlockItem;
 import vectorwing.farmersdelight.registry.*;
 import vectorwing.farmersdelight.setup.ClientEventHandler;
 import vectorwing.farmersdelight.setup.CommonEventHandler;
 import vectorwing.farmersdelight.setup.Configuration;
+import vectorwing.farmersdelight.utils.DataDrivenRegistrar;
 
 @Mod(FarmersDelight.MODID)
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -54,6 +62,9 @@ public class FarmersDelight
 		ModTileEntityTypes.TILES.register(modEventBus);
 		ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
 		ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+		new DataDrivenRegistrar<String>(modEventBus, "farmersdelightPantryCompat")
+				.blockFactory(id -> new PantryBlock(Block.Properties.copy(Blocks.BARREL)).setRegistryName(id))
+				.itemFactory(block -> new FuelBlockItem(block, new Item.Properties().tab(FarmersDelight.ITEM_GROUP), 300).setRegistryName(block.getRegistryName()));
 
 		MinecraftForge.EVENT_BUS.register(this);
 	}
