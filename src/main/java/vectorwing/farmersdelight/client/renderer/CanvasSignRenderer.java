@@ -24,7 +24,7 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import vectorwing.farmersdelight.common.block.sign.CanvasSign;
+import vectorwing.farmersdelight.common.block.state.CanvasSign;
 import vectorwing.farmersdelight.core.registry.ModAtlases;
 
 import javax.annotation.Nullable;
@@ -51,7 +51,6 @@ public class CanvasSignRenderer extends SignRenderer
 	public void render(SignBlockEntity blockEntity, float pPartialTick, PoseStack poseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
 		BlockState state = blockEntity.getBlockState();
 		poseStack.pushPose();
-		float f = 0.6666667F;
 		SignRenderer.SignModel signrenderer$signmodel = signModel;
 		if (state.getBlock() instanceof StandingSignBlock) {
 			poseStack.translate(0.5D, 0.5D, 0.5D);
@@ -67,7 +66,8 @@ public class CanvasSignRenderer extends SignRenderer
 		}
 
 		poseStack.pushPose();
-		poseStack.scale(0.6666667F, -0.6666667F, -0.6666667F);
+		float rootScale = 0.6666667F;
+		poseStack.scale(rootScale, -rootScale, -rootScale);
 		DyeColor dye = null;
 		if (state.getBlock() instanceof CanvasSign canvasSign) {
 			dye = canvasSign.getBackgroundColor();
@@ -76,12 +76,11 @@ public class CanvasSignRenderer extends SignRenderer
 		VertexConsumer vertexconsumer = material.buffer(pBufferSource, signrenderer$signmodel::renderType);
 		signrenderer$signmodel.root.render(poseStack, vertexconsumer, pPackedLight, pPackedOverlay);
 		poseStack.popPose();
-		float f2 = 0.010416667F;
-		poseStack.translate(0.0D, (double) 0.33333334F, (double) 0.046666667F);
-		poseStack.scale(0.010416667F, -0.010416667F, 0.010416667F);
-		int j = 20;
-		FormattedCharSequence[] aformattedcharsequence = blockEntity.getRenderMessages(Minecraft.getInstance().isTextFilteringEnabled(), (p_173653_) -> {
-			List<FormattedCharSequence> list = this.font.split(p_173653_, 90);
+		float textScale = 0.010416667F;
+		poseStack.translate(0.0D, 0.33333334F, 0.046666667F);
+		poseStack.scale(textScale, -textScale, textScale);
+		FormattedCharSequence[] aformattedcharsequence = blockEntity.getRenderMessages(Minecraft.getInstance().isTextFilteringEnabled(), (component) -> {
+			List<FormattedCharSequence> list = this.font.split(component, 90);
 			return list.isEmpty() ? FormattedCharSequence.EMPTY : list.get(0);
 		});
 
@@ -120,8 +119,8 @@ public class CanvasSignRenderer extends SignRenderer
 			return true;
 		} else {
 			Minecraft minecraft = Minecraft.getInstance();
-			LocalPlayer localplayer = minecraft.player;
-			if (localplayer != null && minecraft.options.getCameraType().isFirstPerson() && localplayer.isScoping()) {
+			LocalPlayer localPlayer = minecraft.player;
+			if (localPlayer != null && minecraft.options.getCameraType().isFirstPerson() && localPlayer.isScoping()) {
 				return true;
 			} else {
 				Entity entity = minecraft.getCameraEntity();

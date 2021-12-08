@@ -12,5 +12,5 @@ public class ModBiomeFeatures
 {
 	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, FarmersDelight.MODID);
 
-	public static final RegistryObject<Feature<RandomPatchConfiguration>> RICE = FEATURES.register("rice", () -> new WildRiceFeature(RandomPatchConfiguration.CODEC));
+	public static final RegistryObject<Feature<RandomPatchConfiguration>> WILD_RICE = FEATURES.register("wild_rice", () -> new WildRiceFeature(RandomPatchConfiguration.CODEC));
 }

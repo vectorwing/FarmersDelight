@@ -79,10 +79,10 @@ public class ClientSetupEvents
 
 	@SubscribeEvent
 	public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
-		event.registerBlockEntityRenderer(ModBlockEntityTypes.STOVE_TILE.get(), StoveRenderer::new);
-		event.registerBlockEntityRenderer(ModBlockEntityTypes.CUTTING_BOARD_TILE.get(), CuttingBoardRenderer::new);
-		event.registerBlockEntityRenderer(ModBlockEntityTypes.CANVAS_SIGN_TILE.get(), CanvasSignRenderer::new);
-		event.registerBlockEntityRenderer(ModBlockEntityTypes.SKILLET_TILE.get(), SkilletRenderer::new);
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.STOVE.get(), StoveRenderer::new);
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.CUTTING_BOARD.get(), CuttingBoardRenderer::new);
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.CANVAS_SIGN.get(), CanvasSignRenderer::new);
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.SKILLET.get(), SkilletRenderer::new);
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)

@@ -43,45 +43,6 @@ public class NourishmentHungerOverlay
 		});
 	}
 
-//	@SubscribeEvent(priority = EventPriority.NORMAL)
-//	public void onPreRender(RenderGameOverlayEvent.Pre event) {
-//		if (!Configuration.NOURISHED_HUNGER_OVERLAY.get())
-//			return;
-//		if (event.getType() != RenderGameOverlayEvent.ElementType.)
-//			return;
-//		if (event.isCanceled())
-//			return;
-//
-//		foodIconsOffset = ForgeIngameGui.right_height;
-//	}
-
-//	@SubscribeEvent(priority = EventPriority.NORMAL)
-//	public void onRender(RenderGameOverlayEvent.Post event) {
-//		if (!Configuration.NOURISHED_HUNGER_OVERLAY.get())
-//			return;
-//		if (event.getType() != RenderGameOverlayEvent.ElementType.FOOD)
-//			return;
-//		if (event.isCanceled())
-//			return;
-//
-//		Minecraft minecraft = Minecraft.getInstance();
-//		Player player = minecraft.player;
-//		FoodData stats = player.getFoodData();
-//
-//		int left = minecraft.getWindow().getGuiScaledWidth() / 2 + 91;
-//		int top = minecraft.getWindow().getGuiScaledHeight() - foodIconsOffset;
-//
-//		boolean isPlayerHealingWithSaturation =
-//				player.level.getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION)
-//						&& player.isHurt()
-//						&& stats.getSaturationLevel() > 0.0F
-//						&& stats.getFoodLevel() >= 20;
-//
-//		if (player.getEffect(ModEffects.NOURISHMENT.get()) != null) {
-//			drawNourishedOverlay(stats, minecraft, event.getMatrixStack(), left, top, isPlayerHealingWithSaturation);
-//		}
-//	}
-
 	public static void renderNourishmentOverlay(ForgeIngameGui gui, PoseStack poseStack, float partialTicks, int screenWidth, int screenHeight) {
 		if (!Configuration.NOURISHED_HUNGER_OVERLAY.get()) {
 			return;
@@ -106,11 +67,11 @@ public class NourishmentHungerOverlay
 						&& stats.getFoodLevel() >= 20;
 
 		if (player.getEffect(ModEffects.NOURISHMENT.get()) != null) {
-			drawNourishedOverlay(stats, minecraft, poseStack, left, top, isPlayerHealingWithSaturation);
+			drawNourishmentOverlay(stats, minecraft, poseStack, left, top, isPlayerHealingWithSaturation);
 		}
 	}
 
-	public static void drawNourishedOverlay(FoodData stats, Minecraft mc, PoseStack matrixStack, int left, int top, boolean naturalHealing) {
+	public static void drawNourishmentOverlay(FoodData stats, Minecraft mc, PoseStack matrixStack, int left, int top, boolean naturalHealing) {
 		float saturation = stats.getSaturationLevel();
 		int foodLevel = stats.getFoodLevel();
 		int ticks = mc.gui.getGuiTicks();

@@ -44,7 +44,7 @@ public class WildCropGeneration
 			.decorated(Features.Decorators.HEIGHTMAP_DOUBLE_SQUARE).rarity(Configuration.CHANCE_WILD_POTATOES.get());
 	public static final ConfiguredFeature<?, ?> PATCH_WILD_BEETROOTS = Feature.RANDOM_PATCH.configured(BEETROOT_PATCH_CONFIG)
 			.decorated(Features.Decorators.HEIGHTMAP_SQUARE).rarity(Configuration.CHANCE_WILD_BEETROOTS.get());
-	public static final ConfiguredFeature<?, ?> PATCH_WILD_RICE = ModBiomeFeatures.RICE.get().configured(RICE_PATCH_CONFIG)
+	public static final ConfiguredFeature<?, ?> PATCH_WILD_RICE = ModBiomeFeatures.WILD_RICE.get().configured(RICE_PATCH_CONFIG)
 			.decorated(Features.Decorators.HEIGHTMAP_SQUARE).rarity(Configuration.CHANCE_WILD_RICE.get());
 
 	private static <FC extends FeatureConfiguration> ConfiguredFeature<FC, ?> register(String key, ConfiguredFeature<FC, ?> configuredFeature) {

@@ -29,7 +29,7 @@ import vectorwing.farmersdelight.core.registry.*;
 public class FarmersDelight
 {
 	public static final String MODID = "farmersdelight";
-	public static final FDCreativeModeTab ITEM_GROUP = new FDCreativeModeTab(FarmersDelight.MODID);
+	public static final FDCreativeModeTab CREATIVE_TAB = new FDCreativeModeTab(FarmersDelight.MODID);
 
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();

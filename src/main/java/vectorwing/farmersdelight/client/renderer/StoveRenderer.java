@@ -22,8 +22,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class StoveRenderer implements BlockEntityRenderer<StoveBlockEntity>
 {
-	private static final Minecraft MC = Minecraft.getInstance();
-
 	public StoveRenderer(BlockEntityRendererProvider.Context context) {
 	}
 
@@ -57,7 +55,7 @@ public class StoveRenderer implements BlockEntityRenderer<StoveBlockEntity>
 				poseStack.scale(0.375F, 0.375F, 0.375F);
 
 				if (stoveEntity.getLevel() != null)
-					MC.getItemRenderer().renderStatic(stoveStack, ItemTransforms.TransformType.FIXED, LevelRenderer.getLightColor(stoveEntity.getLevel(), stoveEntity.getBlockPos().above()), combinedOverlayIn, poseStack, buffer, posLong + i);
+					Minecraft.getInstance().getItemRenderer().renderStatic(stoveStack, ItemTransforms.TransformType.FIXED, LevelRenderer.getLightColor(stoveEntity.getLevel(), stoveEntity.getBlockPos().above()), combinedOverlayIn, poseStack, buffer, posLong + i);
 				poseStack.popPose();
 			}
 		}

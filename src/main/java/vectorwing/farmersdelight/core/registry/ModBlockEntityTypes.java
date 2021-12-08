@@ -11,21 +11,21 @@ public class ModBlockEntityTypes
 {
 	public static final DeferredRegister<BlockEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, FarmersDelight.MODID);
 
-	public static final RegistryObject<BlockEntityType<StoveBlockEntity>> STOVE_TILE = TILES.register("stove",
+	public static final RegistryObject<BlockEntityType<StoveBlockEntity>> STOVE = TILES.register("stove",
 			() -> BlockEntityType.Builder.of(StoveBlockEntity::new, ModBlocks.STOVE.get()).build(null));
-	public static final RegistryObject<BlockEntityType<CookingPotBlockEntity>> COOKING_POT_TILE = TILES.register("cooking_pot",
+	public static final RegistryObject<BlockEntityType<CookingPotBlockEntity>> COOKING_POT = TILES.register("cooking_pot",
 			() -> BlockEntityType.Builder.of(CookingPotBlockEntity::new, ModBlocks.COOKING_POT.get()).build(null));
-	public static final RegistryObject<BlockEntityType<BasketBlockEntity>> BASKET_TILE = TILES.register("basket",
+	public static final RegistryObject<BlockEntityType<BasketBlockEntity>> BASKET = TILES.register("basket",
 			() -> BlockEntityType.Builder.of(BasketBlockEntity::new, ModBlocks.BASKET.get()).build(null));
-	public static final RegistryObject<BlockEntityType<CuttingBoardBlockEntity>> CUTTING_BOARD_TILE = TILES.register("cutting_board",
+	public static final RegistryObject<BlockEntityType<CuttingBoardBlockEntity>> CUTTING_BOARD = TILES.register("cutting_board",
 			() -> BlockEntityType.Builder.of(CuttingBoardBlockEntity::new, ModBlocks.CUTTING_BOARD.get()).build(null));
-	public static final RegistryObject<BlockEntityType<SkilletBlockEntity>> SKILLET_TILE = TILES.register("skillet",
+	public static final RegistryObject<BlockEntityType<SkilletBlockEntity>> SKILLET = TILES.register("skillet",
 			() -> BlockEntityType.Builder.of(SkilletBlockEntity::new, ModBlocks.SKILLET.get()).build(null));
-	public static final RegistryObject<BlockEntityType<PantryBlockEntity>> PANTRY_TILE = TILES.register("pantry",
+	public static final RegistryObject<BlockEntityType<PantryBlockEntity>> PANTRY = TILES.register("pantry",
 			() -> BlockEntityType.Builder.of(PantryBlockEntity::new,
 							ModBlocks.OAK_PANTRY.get(), ModBlocks.BIRCH_PANTRY.get(), ModBlocks.SPRUCE_PANTRY.get(), ModBlocks.JUNGLE_PANTRY.get(), ModBlocks.ACACIA_PANTRY.get(), ModBlocks.DARK_OAK_PANTRY.get())
 					.build(null));
-	public static final RegistryObject<BlockEntityType<CanvasSignBlockEntity>> CANVAS_SIGN_TILE = TILES.register("canvas_sign",
+	public static final RegistryObject<BlockEntityType<CanvasSignBlockEntity>> CANVAS_SIGN = TILES.register("canvas_sign",
 			() -> BlockEntityType.Builder.of(CanvasSignBlockEntity::new,
 							ModBlocks.CANVAS_SIGN.get(),
 							ModBlocks.WHITE_CANVAS_SIGN.get(),

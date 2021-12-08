@@ -41,25 +41,25 @@ public class TextUtils
 	 */
 	@OnlyIn(Dist.CLIENT)
 	public static void addFoodEffectTooltip(ItemStack itemIn, List<Component> lores, float durationFactor) {
-		FoodProperties stackFood = itemIn.getItem().getFoodProperties();
-		if (stackFood == null) {
+		FoodProperties foodStats = itemIn.getItem().getFoodProperties();
+		if (foodStats == null) {
 			return;
 		}
-		List<Pair<MobEffectInstance, Float>> list = stackFood.getEffects();
-		List<Pair<Attribute, AttributeModifier>> list1 = Lists.newArrayList();
-		if (list.isEmpty()) {
+		List<Pair<MobEffectInstance, Float>> effectList = foodStats.getEffects();
+		List<Pair<Attribute, AttributeModifier>> attributeList = Lists.newArrayList();
+		if (effectList.isEmpty()) {
 			lores.add(NO_EFFECTS);
 		} else {
-			for (Pair<MobEffectInstance, Float> effectPair : list) {
+			for (Pair<MobEffectInstance, Float> effectPair : effectList) {
 				MobEffectInstance instance = effectPair.getFirst();
 				MutableComponent iformattabletextcomponent = new TranslatableComponent(instance.getDescriptionId());
 				MobEffect effect = instance.getEffect();
-				Map<Attribute, AttributeModifier> map = effect.getAttributeModifiers();
-				if (!map.isEmpty()) {
-					for (Map.Entry<Attribute, AttributeModifier> entry : map.entrySet()) {
-						AttributeModifier attributemodifier = entry.getValue();
-						AttributeModifier attributemodifier1 = new AttributeModifier(attributemodifier.getName(), effect.getAttributeModifierValue(instance.getAmplifier(), attributemodifier), attributemodifier.getOperation());
-						list1.add(new Pair<>(entry.getKey(), attributemodifier1));
+				Map<Attribute, AttributeModifier> attributeMap = effect.getAttributeModifiers();
+				if (!attributeMap.isEmpty()) {
+					for (Map.Entry<Attribute, AttributeModifier> entry : attributeMap.entrySet()) {
+						AttributeModifier rawModifier = entry.getValue();
+						AttributeModifier modifier = new AttributeModifier(rawModifier.getName(), effect.getAttributeModifierValue(instance.getAmplifier(), rawModifier), rawModifier.getOperation());
+						attributeList.add(new Pair<>(entry.getKey(), modifier));
 					}
 				}
 
@@ -75,25 +75,25 @@ public class TextUtils
 			}
 		}
 
-		if (!list1.isEmpty()) {
+		if (!attributeList.isEmpty()) {
 			lores.add(TextComponent.EMPTY);
 			lores.add((new TranslatableComponent("potion.whenDrank")).withStyle(ChatFormatting.DARK_PURPLE));
 
-			for (Pair<Attribute, AttributeModifier> pair : list1) {
-				AttributeModifier attributemodifier2 = pair.getSecond();
-				double d0 = attributemodifier2.getAmount();
-				double d1;
-				if (attributemodifier2.getOperation() != AttributeModifier.Operation.MULTIPLY_BASE && attributemodifier2.getOperation() != AttributeModifier.Operation.MULTIPLY_TOTAL) {
-					d1 = attributemodifier2.getAmount();
+			for (Pair<Attribute, AttributeModifier> pair : attributeList) {
+				AttributeModifier modifier = pair.getSecond();
+				double amount = modifier.getAmount();
+				double formattedAmount;
+				if (modifier.getOperation() != AttributeModifier.Operation.MULTIPLY_BASE && modifier.getOperation() != AttributeModifier.Operation.MULTIPLY_TOTAL) {
+					formattedAmount = modifier.getAmount();
 				} else {
-					d1 = attributemodifier2.getAmount() * 100.0D;
+					formattedAmount = modifier.getAmount() * 100.0D;
 				}
 
-				if (d0 > 0.0D) {
-					lores.add((new TranslatableComponent("attribute.modifier.plus." + attributemodifier2.getOperation().toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(d1), new TranslatableComponent(pair.getFirst().getDescriptionId()))).withStyle(ChatFormatting.BLUE));
-				} else if (d0 < 0.0D) {
-					d1 = d1 * -1.0D;
-					lores.add((new TranslatableComponent("attribute.modifier.take." + attributemodifier2.getOperation().toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(d1), new TranslatableComponent(pair.getFirst().getDescriptionId()))).withStyle(ChatFormatting.RED));
+				if (amount > 0.0D) {
+					lores.add((new TranslatableComponent("attribute.modifier.plus." + modifier.getOperation().toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(formattedAmount), new TranslatableComponent(pair.getFirst().getDescriptionId()))).withStyle(ChatFormatting.BLUE));
+				} else if (amount < 0.0D) {
+					formattedAmount = formattedAmount * -1.0D;
+					lores.add((new TranslatableComponent("attribute.modifier.take." + modifier.getOperation().toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(formattedAmount), new TranslatableComponent(pair.getFirst().getDescriptionId()))).withStyle(ChatFormatting.RED));
 				}
 			}
 		}

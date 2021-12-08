@@ -12,9 +12,9 @@ public class StarParticle extends TextureSheetParticle
 {
 	protected StarParticle(ClientLevel world, double posX, double posY, double posZ) {
 		super(world, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
-		this.xd *= (double) 0.01F;
-		this.yd *= (double) 0.01F;
-		this.zd *= (double) 0.01F;
+		this.xd *= 0.01F;
+		this.yd *= 0.01F;
+		this.zd *= 0.01F;
 		this.yd += 0.1D;
 		this.quadSize *= 1.5F;
 		this.lifetime = 16;
@@ -45,12 +45,12 @@ public class StarParticle extends TextureSheetParticle
 				this.zd *= 1.1D;
 			}
 
-			this.xd *= (double) 0.86F;
-			this.yd *= (double) 0.86F;
-			this.zd *= (double) 0.86F;
+			this.xd *= 0.86F;
+			this.yd *= 0.86F;
+			this.zd *= 0.86F;
 			if (this.onGround) {
-				this.xd *= (double) 0.7F;
-				this.zd *= (double) 0.7F;
+				this.xd *= 0.7F;
+				this.zd *= 0.7F;
 			}
 
 		}

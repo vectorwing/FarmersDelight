@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import vectorwing.farmersdelight.client.renderer.CanvasSignRenderer;
-import vectorwing.farmersdelight.common.block.sign.CanvasSign;
+import vectorwing.farmersdelight.common.block.state.CanvasSign;
 
 @Mixin(SignEditScreen.class)
 public class CanvasSignMaterialMixin
