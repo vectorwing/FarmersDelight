@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.common.block.sign;
+package vectorwing.farmersdelight.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
@@ -6,21 +6,23 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.WallSignBlock;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.StandingSignBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
+import vectorwing.farmersdelight.common.block.state.CanvasSign;
 import vectorwing.farmersdelight.core.registry.ModBlockEntityTypes;
 
 import javax.annotation.Nullable;
 
-public class WallCanvasSignBlock extends WallSignBlock implements CanvasSign
+public class StandingCanvasSignBlock extends StandingSignBlock implements CanvasSign
 {
 	private final DyeColor backgroundColor;
 
-	public WallCanvasSignBlock(Properties properties, @Nullable DyeColor backgroundColor) {
-		super(properties, WoodType.SPRUCE);
+	public StandingCanvasSignBlock(@Nullable DyeColor backgroundColor) {
+		super(Properties.copy(Blocks.OAK_SIGN), WoodType.SPRUCE);
 		this.backgroundColor = backgroundColor;
 	}
 
@@ -31,7 +33,7 @@ public class WallCanvasSignBlock extends WallSignBlock implements CanvasSign
 
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return ModBlockEntityTypes.CANVAS_SIGN_TILE.get().create(pos, state);
+		return ModBlockEntityTypes.CANVAS_SIGN.get().create(pos, state);
 	}
 
 	@Override

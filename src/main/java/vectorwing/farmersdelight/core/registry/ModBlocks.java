@@ -14,13 +14,12 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.*;
-import vectorwing.farmersdelight.common.block.crop.*;
-import vectorwing.farmersdelight.common.block.food.FeastBlock;
-import vectorwing.farmersdelight.common.block.food.HoneyGlazedHamBlock;
-import vectorwing.farmersdelight.common.block.food.RoastChickenBlock;
-import vectorwing.farmersdelight.common.block.food.ShepherdsPieBlock;
-import vectorwing.farmersdelight.common.block.sign.StandingCanvasSignBlock;
-import vectorwing.farmersdelight.common.block.sign.WallCanvasSignBlock;
+import vectorwing.farmersdelight.common.block.FeastBlock;
+import vectorwing.farmersdelight.common.block.HoneyGlazedHamBlock;
+import vectorwing.farmersdelight.common.block.RoastChickenBlock;
+import vectorwing.farmersdelight.common.block.ShepherdsPieBlock;
+import vectorwing.farmersdelight.common.block.StandingCanvasSignBlock;
+import vectorwing.farmersdelight.common.block.WallCanvasSignBlock;
 
 import java.util.function.ToIntFunction;
 

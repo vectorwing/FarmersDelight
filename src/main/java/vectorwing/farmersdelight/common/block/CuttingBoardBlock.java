@@ -196,7 +196,7 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return ModBlockEntityTypes.CUTTING_BOARD_TILE.get().create(pos, state);
+		return ModBlockEntityTypes.CUTTING_BOARD.get().create(pos, state);
 	}
 
 	@Override

@@ -103,7 +103,7 @@ public class PantryBlock extends BaseEntityBlock
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return ModBlockEntityTypes.PANTRY_TILE.get().create(pos, state);
+		return ModBlockEntityTypes.PANTRY.get().create(pos, state);
 	}
 
 	@Override

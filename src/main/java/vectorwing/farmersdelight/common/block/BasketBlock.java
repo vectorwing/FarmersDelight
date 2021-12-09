@@ -195,6 +195,6 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-		return level.isClientSide ? null : createTickerHelper(blockEntityType, ModBlockEntityTypes.BASKET_TILE.get(), BasketBlockEntity::pushItemsTick);
+		return level.isClientSide ? null : createTickerHelper(blockEntityType, ModBlockEntityTypes.BASKET.get(), BasketBlockEntity::pushItemsTick);
 	}
 }

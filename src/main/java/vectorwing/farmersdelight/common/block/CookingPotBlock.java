@@ -262,15 +262,15 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return ModBlockEntityTypes.COOKING_POT_TILE.get().create(pos, state);
+		return ModBlockEntityTypes.COOKING_POT.get().create(pos, state);
 	}
 
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntity) {
 		if (level.isClientSide) {
-			return createTickerHelper(blockEntity, ModBlockEntityTypes.COOKING_POT_TILE.get(), CookingPotBlockEntity::animationTick);
+			return createTickerHelper(blockEntity, ModBlockEntityTypes.COOKING_POT.get(), CookingPotBlockEntity::animationTick);
 		} else {
-			return createTickerHelper(blockEntity, ModBlockEntityTypes.COOKING_POT_TILE.get(), CookingPotBlockEntity::cookingTick);
+			return createTickerHelper(blockEntity, ModBlockEntityTypes.COOKING_POT.get(), CookingPotBlockEntity::cookingTick);
 		}
 	}
 }

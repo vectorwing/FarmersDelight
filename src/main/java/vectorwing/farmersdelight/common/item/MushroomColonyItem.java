@@ -4,7 +4,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import vectorwing.farmersdelight.common.block.crop.MushroomColonyBlock;
+import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 
 import javax.annotation.Nullable;
 

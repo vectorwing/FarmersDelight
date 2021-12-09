@@ -170,15 +170,15 @@ public class SkilletBlock extends BaseEntityBlock
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return ModBlockEntityTypes.SKILLET_TILE.get().create(pos, state);
+		return ModBlockEntityTypes.SKILLET.get().create(pos, state);
 	}
 
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntity) {
 		if (level.isClientSide) {
-			return createTickerHelper(blockEntity, ModBlockEntityTypes.SKILLET_TILE.get(), SkilletBlockEntity::animationTick);
+			return createTickerHelper(blockEntity, ModBlockEntityTypes.SKILLET.get(), SkilletBlockEntity::animationTick);
 		} else {
-			return createTickerHelper(blockEntity, ModBlockEntityTypes.SKILLET_TILE.get(), SkilletBlockEntity::cookingTick);
+			return createTickerHelper(blockEntity, ModBlockEntityTypes.SKILLET.get(), SkilletBlockEntity::cookingTick);
 		}
 	}
 

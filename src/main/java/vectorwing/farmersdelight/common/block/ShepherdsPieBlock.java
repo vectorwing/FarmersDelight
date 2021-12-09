@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.common.block.food;
+package vectorwing.farmersdelight.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;

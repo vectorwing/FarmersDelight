@@ -17,12 +17,8 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.common.block.BasketBlock;
-import vectorwing.farmersdelight.common.block.PantryBlock;
-import vectorwing.farmersdelight.common.block.PieBlock;
-import vectorwing.farmersdelight.common.block.StoveBlock;
-import vectorwing.farmersdelight.common.block.crop.*;
-import vectorwing.farmersdelight.common.block.food.FeastBlock;
+import vectorwing.farmersdelight.common.block.*;
+import vectorwing.farmersdelight.common.block.FeastBlock;
 import vectorwing.farmersdelight.core.registry.ModBlocks;
 
 import javax.annotation.Nullable;
