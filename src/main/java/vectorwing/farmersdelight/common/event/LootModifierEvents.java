@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.core.event;
+package vectorwing.farmersdelight.common.event;
 
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
@@ -12,7 +12,7 @@ import vectorwing.farmersdelight.common.loot.modifier.PastrySlicingModifier;
 public class LootModifierEvents
 {
 	@SubscribeEvent
-	public static void registerModifiers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> ev) {
+	public static void registerLootModifiers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> ev) {
 		ev.getRegistry().register(
 				new PastrySlicingModifier.Serializer().setRegistryName(FarmersDelight.MODID, "pastry_slicing")
 		);

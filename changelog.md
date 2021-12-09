@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.0
+- 1.17 and 1.18 port! Codebase has been cleaned up and refactored;
+
+### Removals
+- Removed `comfort_foods` tag. The mod now only adds the Comfort effect to vanilla SoupItems, which can be disabled in the config;
+
 ## 0.5.2
 
 ### Additions
