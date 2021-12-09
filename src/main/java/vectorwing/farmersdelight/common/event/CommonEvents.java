@@ -28,6 +28,7 @@ import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.world.WildCropGeneration;
 import vectorwing.farmersdelight.core.Configuration;
@@ -36,6 +37,7 @@ import vectorwing.farmersdelight.core.registry.ModBlocks;
 
 import java.util.Set;
 
+@Mod.EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CommonEvents
 {
 	// TODO: Learn more about Loot Modifiers, and migrate remaining loot injections to it
@@ -108,7 +110,7 @@ public class CommonEvents
 		LivingEntity entity = event.getEntityLiving();
 
 		if (Configuration.RABBIT_STEW_JUMP_BOOST.get() && food.equals(Items.RABBIT_STEW)) {
-			entity.addEffect(new MobEffectInstance(MobEffects.JUMP, 100, 1));
+			entity.addEffect(new MobEffectInstance(MobEffects.JUMP, 200, 1));
 		}
 
 		if (Configuration.VANILLA_SOUP_EXTRA_EFFECTS.get()) {
@@ -116,7 +118,7 @@ public class CommonEvents
 
 			if (soupEffects != null) {
 				for (Pair<MobEffectInstance, Float> pair : soupEffects.getEffects()) {
-					entity.addEffect(new MobEffectInstance(pair.getFirst()));
+					entity.addEffect(pair.getFirst());
 				}
 			}
 		}

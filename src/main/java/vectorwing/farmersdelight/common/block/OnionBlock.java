@@ -11,7 +11,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.core.registry.ModBlocks;
 import vectorwing.farmersdelight.core.registry.ModItems;
 
-public class OnionsBlock extends CropBlock
+public class OnionBlock extends CropBlock
 {
 	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
 			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
@@ -24,7 +24,7 @@ public class OnionsBlock extends CropBlock
 			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 9.0D, 16.0D)
 	};
 
-	public OnionsBlock(Properties properties) {
+	public OnionBlock(Properties properties) {
 		super(properties);
 	}
 

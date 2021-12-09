@@ -11,7 +11,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.core.registry.ModBlocks;
 import vectorwing.farmersdelight.core.registry.ModItems;
 
-public class CabbagesBlock extends CropBlock
+public class CabbageBlock extends CropBlock
 {
 	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
 			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
@@ -24,7 +24,7 @@ public class CabbagesBlock extends CropBlock
 			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D)
 	};
 
-	public CabbagesBlock(Properties properties) {
+	public CabbageBlock(Properties properties) {
 		super(properties);
 	}
 

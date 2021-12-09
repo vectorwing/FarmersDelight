@@ -33,7 +33,7 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class RiceCropBlock extends BushBlock implements BonemealableBlock, LiquidBlockContainer
+public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlockContainer
 {
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
 	public static final BooleanProperty SUPPORTING = BooleanProperty.create("supporting");
@@ -43,7 +43,7 @@ public class RiceCropBlock extends BushBlock implements BonemealableBlock, Liqui
 			Block.box(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D),
 			Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D)};
 
-	public RiceCropBlock(Properties properties) {
+	public RiceBlock(Properties properties) {
 		super(properties);
 		this.registerDefaultState(this.defaultBlockState().setValue(AGE, 0).setValue(SUPPORTING, false));
 	}
@@ -58,7 +58,7 @@ public class RiceCropBlock extends BushBlock implements BonemealableBlock, Liqui
 				float chance = 10;
 				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt((int) (25.0F / chance) + 1) == 0)) {
 					if (age == this.getMaxAge()) {
-						RiceUpperCropBlock riceUpper = (RiceUpperCropBlock) ModBlocks.RICE_CROP_PANICLES.get();
+						RicePaniclesBlock riceUpper = (RicePaniclesBlock) ModBlocks.RICE_CROP_PANICLES.get();
 						if (riceUpper.defaultBlockState().canSurvive(worldIn, pos.above()) && worldIn.isEmptyBlock(pos.above())) {
 							worldIn.setBlockAndUpdate(pos.above(), riceUpper.defaultBlockState());
 							net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
@@ -145,8 +145,8 @@ public class RiceCropBlock extends BushBlock implements BonemealableBlock, Liqui
 	@Override
 	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		BlockState upperState = worldIn.getBlockState(pos.above());
-		if (upperState.getBlock() instanceof RiceUpperCropBlock) {
-			return !((RiceUpperCropBlock) upperState.getBlock()).isMaxAge(upperState);
+		if (upperState.getBlock() instanceof RicePaniclesBlock) {
+			return !((RicePaniclesBlock) upperState.getBlock()).isMaxAge(upperState);
 		}
 		return true;
 	}
@@ -173,11 +173,11 @@ public class RiceCropBlock extends BushBlock implements BonemealableBlock, Liqui
 					growable.performBonemeal(worldIn, worldIn.random, pos.above(), top);
 				}
 			} else {
-				RiceUpperCropBlock riceUpper = (RiceUpperCropBlock) ModBlocks.RICE_CROP_PANICLES.get();
+				RicePaniclesBlock riceUpper = (RicePaniclesBlock) ModBlocks.RICE_CROP_PANICLES.get();
 				int remainingGrowth = ageGrowth - this.getMaxAge() - 1;
 				if (riceUpper.defaultBlockState().canSurvive(worldIn, pos.above()) && worldIn.isEmptyBlock(pos.above())) {
 					worldIn.setBlockAndUpdate(pos, state.setValue(AGE, this.getMaxAge()));
-					worldIn.setBlock(pos.above(), riceUpper.defaultBlockState().setValue(RiceUpperCropBlock.RICE_AGE, remainingGrowth), 2);
+					worldIn.setBlock(pos.above(), riceUpper.defaultBlockState().setValue(RicePaniclesBlock.RICE_AGE, remainingGrowth), 2);
 				}
 			}
 		}

@@ -190,15 +190,15 @@ public class ModBlocks
 
 	// Crops
 	public static final RegistryObject<Block> CABBAGE_CROP = BLOCKS.register("cabbages",
-			() -> new CabbagesBlock(Block.Properties.copy(Blocks.WHEAT)));
+			() -> new CabbageBlock(Block.Properties.copy(Blocks.WHEAT)));
 	public static final RegistryObject<Block> ONION_CROP = BLOCKS.register("onions",
-			() -> new OnionsBlock(Block.Properties.copy(Blocks.WHEAT)));
+			() -> new OnionBlock(Block.Properties.copy(Blocks.WHEAT)));
 	public static final RegistryObject<Block> TOMATO_CROP = BLOCKS.register("tomatoes",
-			() -> new TomatoesBlock(Block.Properties.copy(Blocks.WHEAT)));
+			() -> new TomatoBlock(Block.Properties.copy(Blocks.WHEAT)));
 	public static final RegistryObject<Block> RICE_CROP = BLOCKS.register("rice",
-			() -> new RiceCropBlock(Block.Properties.copy(Blocks.WHEAT).strength(0.2F)));
+			() -> new RiceBlock(Block.Properties.copy(Blocks.WHEAT).strength(0.2F)));
 	public static final RegistryObject<Block> RICE_CROP_PANICLES = BLOCKS.register("rice_panicles",
-			() -> new RiceUpperCropBlock(Block.Properties.copy(Blocks.WHEAT)));
+			() -> new RicePaniclesBlock(Block.Properties.copy(Blocks.WHEAT)));
 
 	// Feasts
 	public static final RegistryObject<Block> ROAST_CHICKEN_BLOCK = BLOCKS.register("roast_chicken_block",

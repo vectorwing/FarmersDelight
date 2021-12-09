@@ -6,6 +6,12 @@
 ### Removals
 - Removed `comfort_foods` tag. The mod now only adds the Comfort effect to vanilla SoupItems, which can be disabled in the config;
 
+### Updates
+- Meal effect durations have been tweaked:
+  - Both Comfort and Nourishment can now be obtained in ranges of 1, 3 and 5 minutes across meals;
+  - Mushroom Stew and Beetroot Soup both grant 3 minutes of Comfort;
+  - Rabbit Stew grants 5 minutes of Comfort, as well as a short burst of Jump Boost II;
+
 ## 0.5.2
 
 ### Additions

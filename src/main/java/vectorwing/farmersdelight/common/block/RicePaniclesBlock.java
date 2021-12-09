@@ -16,7 +16,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.core.registry.ModBlocks;
 import vectorwing.farmersdelight.core.registry.ModItems;
 
-public class RiceUpperCropBlock extends CropBlock
+public class RicePaniclesBlock extends CropBlock
 {
 	public static final IntegerProperty RICE_AGE = BlockStateProperties.AGE_3;
 	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
@@ -26,7 +26,7 @@ public class RiceUpperCropBlock extends CropBlock
 			Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D)
 	};
 
-	public RiceUpperCropBlock(Properties properties) {
+	public RicePaniclesBlock(Properties properties) {
 		super(properties);
 	}
 

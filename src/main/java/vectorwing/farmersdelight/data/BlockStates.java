@@ -129,10 +129,10 @@ public class BlockStates extends BlockStateProvider
 
 		this.stageBlock(ModBlocks.BROWN_MUSHROOM_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
 		this.stageBlock(ModBlocks.RED_MUSHROOM_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
-		this.stageBlock(ModBlocks.RICE_CROP_PANICLES.get(), RiceUpperCropBlock.RICE_AGE);
-		this.customStageBlock(ModBlocks.CABBAGE_CROP.get(), resourceBlock("crop_cross"), "cross", CabbagesBlock.AGE, new ArrayList<>());
-		this.customStageBlock(ModBlocks.TOMATO_CROP.get(), resourceBlock("crop_cross"), "cross", TomatoesBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 3, 4));
-		this.customStageBlock(ModBlocks.ONION_CROP.get(), mcLoc("crop"), "crop", OnionsBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 2, 3));
+		this.stageBlock(ModBlocks.RICE_CROP_PANICLES.get(), RicePaniclesBlock.RICE_AGE);
+		this.customStageBlock(ModBlocks.CABBAGE_CROP.get(), resourceBlock("crop_cross"), "cross", CabbageBlock.AGE, new ArrayList<>());
+		this.customStageBlock(ModBlocks.TOMATO_CROP.get(), resourceBlock("crop_cross"), "cross", TomatoBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 3, 4));
+		this.customStageBlock(ModBlocks.ONION_CROP.get(), mcLoc("crop"), "crop", OnionBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 2, 3));
 
 		this.crateBlock(ModBlocks.CARROT_CRATE.get(), "carrot");
 		this.crateBlock(ModBlocks.POTATO_CRATE.get(), "potato");

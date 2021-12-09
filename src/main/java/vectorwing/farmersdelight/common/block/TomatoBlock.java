@@ -31,7 +31,7 @@ import vectorwing.farmersdelight.core.registry.ModSounds;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class TomatoesBlock extends BushBlock implements BonemealableBlock
+public class TomatoBlock extends BushBlock implements BonemealableBlock
 {
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_7;
 	private static final int TOMATO_BEARING_AGE = 7;
@@ -45,7 +45,7 @@ public class TomatoesBlock extends BushBlock implements BonemealableBlock
 			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D),
 			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)};
 
-	public TomatoesBlock(Properties properties) {
+	public TomatoBlock(Properties properties) {
 		super(properties);
 		this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0));
 	}
