@@ -27,12 +27,12 @@ public class ModBlocks
 {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FarmersDelight.MODID);
 
-	private static ToIntFunction<BlockState> getLightValueLit(int lightValue) {
+	private static ToIntFunction<BlockState> litBlockEmission(int lightValue) {
 		return (state) -> state.getValue(BlockStateProperties.LIT) ? lightValue : 0;
 	}
 
 	// Workstations
-	public static final RegistryObject<Block> STOVE = BLOCKS.register("stove", () -> new StoveBlock(BlockBehaviour.Properties.copy(Blocks.BRICKS).lightLevel(getLightValueLit(13))));
+	public static final RegistryObject<Block> STOVE = BLOCKS.register("stove", () -> new StoveBlock(BlockBehaviour.Properties.copy(Blocks.BRICKS).lightLevel(litBlockEmission(13))));
 	public static final RegistryObject<Block> COOKING_POT = BLOCKS.register("cooking_pot", CookingPotBlock::new);
 	public static final RegistryObject<Block> SKILLET = BLOCKS.register("skillet", SkilletBlock::new);
 	public static final RegistryObject<Block> BASKET = BLOCKS.register("basket", BasketBlock::new);
@@ -195,9 +195,9 @@ public class ModBlocks
 			() -> new OnionsBlock(Block.Properties.copy(Blocks.WHEAT)));
 	public static final RegistryObject<Block> TOMATO_CROP = BLOCKS.register("tomatoes",
 			() -> new TomatoesBlock(Block.Properties.copy(Blocks.WHEAT)));
-	public static final RegistryObject<Block> RICE_CROP = BLOCKS.register("rice_crop",
+	public static final RegistryObject<Block> RICE_CROP = BLOCKS.register("rice",
 			() -> new RiceCropBlock(Block.Properties.copy(Blocks.WHEAT).strength(0.2F)));
-	public static final RegistryObject<Block> RICE_UPPER_CROP = BLOCKS.register("rice_upper_crop",
+	public static final RegistryObject<Block> RICE_CROP_PANICLES = BLOCKS.register("rice_panicles",
 			() -> new RiceUpperCropBlock(Block.Properties.copy(Blocks.WHEAT)));
 
 	// Feasts

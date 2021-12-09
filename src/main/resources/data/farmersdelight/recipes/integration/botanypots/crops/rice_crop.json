@@ -12,7 +12,7 @@
   "categories": ["dirt"],
   "growthTicks": 1000,
   "display": {
-    "block": "farmersdelight:rice_upper_crop",
+    "block": "farmersdelight:rice_panicles",
     "properties": {
       "age": 3
     }

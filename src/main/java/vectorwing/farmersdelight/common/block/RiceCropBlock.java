@@ -58,7 +58,7 @@ public class RiceCropBlock extends BushBlock implements BonemealableBlock, Liqui
 				float chance = 10;
 				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt((int) (25.0F / chance) + 1) == 0)) {
 					if (age == this.getMaxAge()) {
-						RiceUpperCropBlock riceUpper = (RiceUpperCropBlock) ModBlocks.RICE_UPPER_CROP.get();
+						RiceUpperCropBlock riceUpper = (RiceUpperCropBlock) ModBlocks.RICE_CROP_PANICLES.get();
 						if (riceUpper.defaultBlockState().canSurvive(worldIn, pos.above()) && worldIn.isEmptyBlock(pos.above())) {
 							worldIn.setBlockAndUpdate(pos.above(), riceUpper.defaultBlockState());
 							net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
@@ -132,7 +132,7 @@ public class RiceCropBlock extends BushBlock implements BonemealableBlock, Liqui
 	}
 
 	public boolean isSupportingRiceUpper(BlockState topState) {
-		return topState.getBlock() == ModBlocks.RICE_UPPER_CROP.get();
+		return topState.getBlock() == ModBlocks.RICE_CROP_PANICLES.get();
 	}
 
 	@Override
@@ -167,13 +167,13 @@ public class RiceCropBlock extends BushBlock implements BonemealableBlock, Liqui
 			worldIn.setBlockAndUpdate(pos, state.setValue(AGE, ageGrowth));
 		} else {
 			BlockState top = worldIn.getBlockState(pos.above());
-			if (top.getBlock() == ModBlocks.RICE_UPPER_CROP.get()) {
+			if (top.getBlock() == ModBlocks.RICE_CROP_PANICLES.get()) {
 				BonemealableBlock growable = (BonemealableBlock) worldIn.getBlockState(pos.above()).getBlock();
 				if (growable.isValidBonemealTarget(worldIn, pos.above(), top, false)) {
 					growable.performBonemeal(worldIn, worldIn.random, pos.above(), top);
 				}
 			} else {
-				RiceUpperCropBlock riceUpper = (RiceUpperCropBlock) ModBlocks.RICE_UPPER_CROP.get();
+				RiceUpperCropBlock riceUpper = (RiceUpperCropBlock) ModBlocks.RICE_CROP_PANICLES.get();
 				int remainingGrowth = ageGrowth - this.getMaxAge() - 1;
 				if (riceUpper.defaultBlockState().canSurvive(worldIn, pos.above()) && worldIn.isEmptyBlock(pos.above())) {
 					worldIn.setBlockAndUpdate(pos, state.setValue(AGE, this.getMaxAge()));

@@ -52,8 +52,8 @@
   "block.farmersdelight.tomatoes": "토마토",
   "block.farmersdelight.cabbages": "양배추",
   "block.farmersdelight.onions": "양파",
-  "block.farmersdelight.rice_crop": "벼",
-  "block.farmersdelight.rice_upper_crop": "벼",
+  "block.farmersdelight.rice": "벼",
+  "block.farmersdelight.rice_panicles": "벼",
   "block.farmersdelight.brown_mushroom_colony": "갈색 버섯 군집",
   "block.farmersdelight.red_mushroom_colony": "빨간색 버섯 군집",
 

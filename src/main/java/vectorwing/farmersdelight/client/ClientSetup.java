@@ -24,7 +24,7 @@ public class ClientSetup
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.CABBAGE_CROP.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.TOMATO_CROP.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.RICE_CROP.get(), RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(ModBlocks.RICE_UPPER_CROP.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.RICE_CROP_PANICLES.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.BROWN_MUSHROOM_COLONY.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.RED_MUSHROOM_COLONY.get(), RenderType.cutout());
 
