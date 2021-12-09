@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.core.data;
+package vectorwing.farmersdelight.data;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;

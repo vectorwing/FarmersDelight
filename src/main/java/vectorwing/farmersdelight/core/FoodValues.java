@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class FoodValues
 {
-	// Raw Crops
+	// Raw Vegetables
 	public static final FoodProperties CABBAGE = (new FoodProperties.Builder())
 			.nutrition(2).saturationMod(0.4f).build();
 	public static final FoodProperties TOMATO = (new FoodProperties.Builder())

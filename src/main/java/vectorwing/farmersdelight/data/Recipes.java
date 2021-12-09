@@ -1,13 +1,13 @@
-package vectorwing.farmersdelight.core.data;
+package vectorwing.farmersdelight.data;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
-import vectorwing.farmersdelight.core.data.recipe.CookingRecipes;
-import vectorwing.farmersdelight.core.data.recipe.CraftingRecipes;
-import vectorwing.farmersdelight.core.data.recipe.CuttingRecipes;
-import vectorwing.farmersdelight.core.data.recipe.SmeltingRecipes;
+import vectorwing.farmersdelight.data.recipe.CookingRecipes;
+import vectorwing.farmersdelight.data.recipe.CraftingRecipes;
+import vectorwing.farmersdelight.data.recipe.CuttingRecipes;
+import vectorwing.farmersdelight.data.recipe.SmeltingRecipes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Consumer;

@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.core.data;
+package vectorwing.farmersdelight.data;
 
 import com.google.common.collect.Sets;
 import net.minecraft.data.DataGenerator;

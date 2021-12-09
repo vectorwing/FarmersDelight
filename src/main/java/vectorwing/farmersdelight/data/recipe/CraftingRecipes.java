@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.core.data.recipe;
+package vectorwing.farmersdelight.data.recipe;
 
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;

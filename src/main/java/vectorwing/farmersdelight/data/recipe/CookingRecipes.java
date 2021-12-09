@@ -1,10 +1,10 @@
-package vectorwing.farmersdelight.core.data.recipe;
+package vectorwing.farmersdelight.data.recipe;
 
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import vectorwing.farmersdelight.core.data.builder.CookingPotRecipeBuilder;
+import vectorwing.farmersdelight.data.builder.CookingPotRecipeBuilder;
 import vectorwing.farmersdelight.core.registry.ModItems;
 import vectorwing.farmersdelight.core.tag.ForgeTags;
 import vectorwing.farmersdelight.core.tag.ModTags;

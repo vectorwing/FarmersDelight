@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.core.data.builder;
+package vectorwing.farmersdelight.data.builder;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.core.data.recipe;
+package vectorwing.farmersdelight.data.recipe;
 
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.sounds.SoundEvents;
@@ -8,7 +8,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolActions;
 import vectorwing.farmersdelight.common.crafting.ingredient.ToolActionIngredient;
-import vectorwing.farmersdelight.core.data.builder.CuttingBoardRecipeBuilder;
+import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 import vectorwing.farmersdelight.core.registry.ModItems;
 import vectorwing.farmersdelight.core.tag.ForgeTags;
 
