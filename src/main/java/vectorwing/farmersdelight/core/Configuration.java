@@ -21,7 +21,7 @@ public class Configuration
 	public static ForgeConfigSpec.ConfigValue<List<? extends String>> CANVAS_SIGN_DARK_BACKGROUND_LIST;
 
 	public static final String CATEGORY_OVERRIDES = "overrides";
-	public static ForgeConfigSpec.BooleanValue COMFORT_FOOD_TAG_EFFECT;
+	public static ForgeConfigSpec.BooleanValue VANILLA_SOUP_EXTRA_EFFECTS;
 	public static ForgeConfigSpec.BooleanValue RABBIT_STEW_JUMP_BOOST;
 	public static ForgeConfigSpec.BooleanValue DISPENSER_TOOLS_CUTTING_BOARD;
 
@@ -73,8 +73,8 @@ public class Configuration
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("Vanilla item overrides").push(CATEGORY_OVERRIDES);
-		COMFORT_FOOD_TAG_EFFECT = COMMON_BUILDER.comment("Should items inside the tag 'farmersdelight:comfort_foods' grant 2 minutes of Comfort when eaten? (defaults to vanilla SoupItems)")
-				.define("comfortFoodTagEffect", true);
+		VANILLA_SOUP_EXTRA_EFFECTS = COMMON_BUILDER.comment("Should soups and stews from vanilla Minecraft grant additional effects, like meals from this mod?")
+				.define("vanillaSoupExtraEffects", true);
 		RABBIT_STEW_JUMP_BOOST = COMMON_BUILDER.comment("Should Rabbit Stew grant users the jumping prowess of a rabbit when eaten?")
 				.define("rabbitStewJumpBoost", true);
 		DISPENSER_TOOLS_CUTTING_BOARD = COMMON_BUILDER.comment("Should most vanilla tools register a dispenser behavior when facing a Cutting Board?")
@@ -157,7 +157,7 @@ public class Configuration
 		CLIENT_BUILDER.comment("Client settings").push(CATEGORY_CLIENT);
 		NOURISHED_HUNGER_OVERLAY = CLIENT_BUILDER.comment("Should the hunger bar have a gilded overlay when the player has the Nourishment effect?")
 				.define("nourishmentHungerOverlay", true);
-		FOOD_EFFECT_TOOLTIP = CLIENT_BUILDER.comment("Should food tooltips display which effects they provide?")
+		FOOD_EFFECT_TOOLTIP = CLIENT_BUILDER.comment("Should meal and drink tooltips display which effects they provide?")
 				.define("foodEffectTooltip", true);
 		CLIENT_BUILDER.pop();
 

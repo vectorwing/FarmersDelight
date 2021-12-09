@@ -66,7 +66,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	private boolean checkNewRecipe;
 
 	public CookingPotBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntityTypes.COOKING_POT_TILE.get(), pos, state);
+		super(ModBlockEntityTypes.COOKING_POT.get(), pos, state);
 		this.inventory = createHandler();
 		this.inputHandler = LazyOptional.of(() -> new CookingPotItemHandler(inventory, Direction.UP));
 		this.outputHandler = LazyOptional.of(() -> new CookingPotItemHandler(inventory, Direction.DOWN));

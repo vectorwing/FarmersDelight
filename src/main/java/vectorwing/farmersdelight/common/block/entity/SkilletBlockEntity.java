@@ -43,7 +43,7 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 	private int fireAspectLevel;
 
 	public SkilletBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntityTypes.SKILLET_TILE.get(), pos, state);
+		super(ModBlockEntityTypes.SKILLET.get(), pos, state);
 		skilletStack = ItemStack.EMPTY;
 	}
 

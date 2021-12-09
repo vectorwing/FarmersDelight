@@ -52,7 +52,7 @@ public class PantryBlockEntity extends RandomizableContainerBlockEntity
 	};
 
 	public PantryBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntityTypes.PANTRY_TILE.get(), pos, state);
+		super(ModBlockEntityTypes.PANTRY.get(), pos, state);
 	}
 
 	@Override

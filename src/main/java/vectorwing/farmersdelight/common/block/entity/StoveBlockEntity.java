@@ -38,7 +38,7 @@ public class StoveBlockEntity extends SyncedBlockEntity
 	private ResourceLocation[] lastRecipeIDs;
 
 	public StoveBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntityTypes.STOVE_TILE.get(), pos, state);
+		super(ModBlockEntityTypes.STOVE.get(), pos, state);
 		inventory = createHandler();
 		cookingTimes = new int[INVENTORY_SLOT_COUNT];
 		cookingTimesTotal = new int[INVENTORY_SLOT_COUNT];

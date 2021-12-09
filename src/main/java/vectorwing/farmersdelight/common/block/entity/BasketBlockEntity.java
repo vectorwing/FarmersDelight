@@ -36,7 +36,7 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 	private int transferCooldown = -1;
 
 	public BasketBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntityTypes.BASKET_TILE.get(), pos, state);
+		super(ModBlockEntityTypes.BASKET.get(), pos, state);
 	}
 
 	@Override

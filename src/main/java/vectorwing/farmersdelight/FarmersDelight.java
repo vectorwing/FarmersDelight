@@ -3,6 +3,8 @@ package vectorwing.farmersdelight;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -19,17 +21,24 @@ import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.crafting.ingredient.ToolActionIngredient;
 import vectorwing.farmersdelight.common.world.VillageStructures;
 import vectorwing.farmersdelight.core.Configuration;
-import vectorwing.farmersdelight.core.FDCreativeModeTab;
-import vectorwing.farmersdelight.core.event.ClientSetupEvents;
-import vectorwing.farmersdelight.core.event.CommonEvents;
+import vectorwing.farmersdelight.client.ClientSetup;
+import vectorwing.farmersdelight.common.CommonSetup;
 import vectorwing.farmersdelight.core.registry.*;
+
+import javax.annotation.Nonnull;
 
 @Mod(FarmersDelight.MODID)
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class FarmersDelight
 {
 	public static final String MODID = "farmersdelight";
-	public static final FDCreativeModeTab CREATIVE_TAB = new FDCreativeModeTab(FarmersDelight.MODID);
+	public static final CreativeModeTab CREATIVE_TAB = new CreativeModeTab(FarmersDelight.MODID) {
+		@Nonnull
+		@Override
+		public ItemStack makeIcon() {
+			return new ItemStack(ModBlocks.STOVE.get());
+		}
+	};
 
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
@@ -37,8 +46,8 @@ public class FarmersDelight
 	public FarmersDelight() {
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-		modEventBus.addListener(CommonEvents::init);
-		modEventBus.addListener(ClientSetupEvents::init);
+		modEventBus.addListener(CommonSetup::init);
+		modEventBus.addListener(ClientSetup::init);
 		modEventBus.addGenericListener(RecipeSerializer.class, this::registerRecipeSerializers);
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);

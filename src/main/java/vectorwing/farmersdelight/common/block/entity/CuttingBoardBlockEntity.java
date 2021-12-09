@@ -51,7 +51,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 	private boolean isItemCarvingBoard;
 
 	public CuttingBoardBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntityTypes.CUTTING_BOARD_TILE.get(), pos, state);
+		super(ModBlockEntityTypes.CUTTING_BOARD.get(), pos, state);
 		inventory = createHandler();
 		inputHandler = LazyOptional.of(() -> inventory);
 		isItemCarvingBoard = false;
