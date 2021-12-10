@@ -52,7 +52,7 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotContaine
 	}
 
 	protected void renderMealDisplayTooltip(PoseStack ms, int mouseX, int mouseY) {
-		if (this.minecraft != null && this.minecraft.player != null && this.minecraft.player.getInventory().getSelected().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.hasItem()) {
+		if (this.minecraft != null && this.minecraft.player != null && this.menu.getCarried().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.hasItem()) {
 			if (this.hoveredSlot.index == 6) {
 				List<Component> tooltip = new ArrayList<>();
 
