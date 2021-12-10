@@ -1,10 +1,10 @@
-package vectorwing.farmersdelight.common.item.drink;
+package vectorwing.farmersdelight.common.item;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class MelonJuiceItem extends DrinkItem
+public class MelonJuiceItem extends DrinkableItem
 {
 	public MelonJuiceItem(Properties properties) {
 		super(properties, false, true);

@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.common.item.drink;
+package vectorwing.farmersdelight.common.item;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -10,7 +10,7 @@ import net.minecraft.world.level.Level;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class MilkBottleItem extends DrinkItem
+public class MilkBottleItem extends DrinkableItem
 {
 	public MilkBottleItem(Properties properties) {
 		super(properties, false, true);

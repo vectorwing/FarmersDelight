@@ -6,10 +6,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.item.*;
-import vectorwing.farmersdelight.common.item.drink.DrinkItem;
-import vectorwing.farmersdelight.common.item.drink.HotCocoaItem;
-import vectorwing.farmersdelight.common.item.drink.MelonJuiceItem;
-import vectorwing.farmersdelight.common.item.drink.MilkBottleItem;
+import vectorwing.farmersdelight.common.item.DrinkableItem;
+import vectorwing.farmersdelight.common.item.HotCocoaItem;
+import vectorwing.farmersdelight.common.item.MelonJuiceItem;
+import vectorwing.farmersdelight.common.item.MilkBottleItem;
 import vectorwing.farmersdelight.common.FoodValues;
 
 @SuppressWarnings("unused")
@@ -176,7 +176,7 @@ public class ModItems
 	public static final RegistryObject<Item> HOT_COCOA = ITEMS.register("hot_cocoa",
 			() -> new HotCocoaItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16).tab(FarmersDelight.CREATIVE_TAB)));
 	public static final RegistryObject<Item> APPLE_CIDER = ITEMS.register("apple_cider",
-			() -> new DrinkItem(new Item.Properties().food(FoodValues.APPLE_CIDER).craftRemainder(Items.GLASS_BOTTLE).stacksTo(16).tab(FarmersDelight.CREATIVE_TAB), true, false));
+			() -> new DrinkableItem(new Item.Properties().food(FoodValues.APPLE_CIDER).craftRemainder(Items.GLASS_BOTTLE).stacksTo(16).tab(FarmersDelight.CREATIVE_TAB), true, false));
 	public static final RegistryObject<Item> MELON_JUICE = ITEMS.register("melon_juice",
 			() -> new MelonJuiceItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16).tab(FarmersDelight.CREATIVE_TAB)));
 	public static final RegistryObject<Item> TOMATO_SAUCE = ITEMS.register("tomato_sauce",

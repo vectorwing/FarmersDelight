@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.common.item.drink;
+package vectorwing.farmersdelight.common.item;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -7,15 +7,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import vectorwing.farmersdelight.common.item.ConsumableItem;
 
-public class DrinkItem extends ConsumableItem
+public class DrinkableItem extends ConsumableItem
 {
-	public DrinkItem(Properties properties) {
+	public DrinkableItem(Properties properties) {
 		super(properties);
 	}
 
-	public DrinkItem(Properties properties, boolean hasPotionEffectTooltip, boolean hasCustomTooltip) {
+	public DrinkableItem(Properties properties, boolean hasPotionEffectTooltip, boolean hasCustomTooltip) {
 		super(properties, hasPotionEffectTooltip, hasCustomTooltip);
 	}
 
