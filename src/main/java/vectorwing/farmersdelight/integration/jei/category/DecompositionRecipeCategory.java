@@ -16,10 +16,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.core.registry.ModBlocks;
-import vectorwing.farmersdelight.core.registry.ModItems;
-import vectorwing.farmersdelight.core.tag.ModTags;
-import vectorwing.farmersdelight.core.util.TextUtils;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.tag.ModTags;
+import vectorwing.farmersdelight.common.utility.TextUtils;
 import vectorwing.farmersdelight.integration.jei.resource.DecompositionDummy;
 
 import javax.annotation.Nonnull;

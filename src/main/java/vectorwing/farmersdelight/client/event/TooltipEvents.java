@@ -13,8 +13,8 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.core.Configuration;
-import vectorwing.farmersdelight.core.FoodValues;
+import vectorwing.farmersdelight.common.Configuration;
+import vectorwing.farmersdelight.common.FoodValues;
 
 import java.util.List;
 

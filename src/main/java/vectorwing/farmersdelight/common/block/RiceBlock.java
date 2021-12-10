@@ -26,8 +26,8 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.Tags;
-import vectorwing.farmersdelight.core.registry.ModBlocks;
-import vectorwing.farmersdelight.core.registry.ModItems;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.registry.ModItems;
 
 import javax.annotation.Nullable;
 import java.util.Random;

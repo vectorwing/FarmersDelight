@@ -13,11 +13,10 @@ import vectorwing.farmersdelight.common.loot.function.CopyMealFunction;
 import vectorwing.farmersdelight.common.loot.function.CopySkilletFunction;
 import vectorwing.farmersdelight.common.loot.function.SmokerCookFunction;
 import vectorwing.farmersdelight.common.world.WildCropGeneration;
-import vectorwing.farmersdelight.core.Configuration;
-import vectorwing.farmersdelight.core.mixin.accessor.ChickenEntityAccessor;
-import vectorwing.farmersdelight.core.mixin.accessor.PigEntityAccessor;
-import vectorwing.farmersdelight.core.registry.ModAdvancements;
-import vectorwing.farmersdelight.core.registry.ModItems;
+import vectorwing.farmersdelight.common.mixin.accessor.ChickenEntityAccessor;
+import vectorwing.farmersdelight.common.mixin.accessor.PigEntityAccessor;
+import vectorwing.farmersdelight.common.registry.ModAdvancements;
+import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.ArrayList;
 import java.util.Collections;

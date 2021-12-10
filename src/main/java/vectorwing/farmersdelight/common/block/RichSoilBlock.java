@@ -16,10 +16,10 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.PlantType;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
-import vectorwing.farmersdelight.core.Configuration;
-import vectorwing.farmersdelight.core.registry.ModBlocks;
-import vectorwing.farmersdelight.core.tag.ModTags;
-import vectorwing.farmersdelight.core.util.MathUtils;
+import vectorwing.farmersdelight.common.Configuration;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.tag.ModTags;
+import vectorwing.farmersdelight.common.utility.MathUtils;
 
 import javax.annotation.Nullable;
 import java.util.Random;

@@ -32,10 +32,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolActions;
 import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
-import vectorwing.farmersdelight.core.registry.ModBlockEntityTypes;
-import vectorwing.farmersdelight.core.registry.ModSounds;
-import vectorwing.farmersdelight.core.util.ItemUtils;
-import vectorwing.farmersdelight.core.util.MathUtils;
+import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
+import vectorwing.farmersdelight.common.registry.ModSounds;
+import vectorwing.farmersdelight.common.utility.ItemUtils;
+import vectorwing.farmersdelight.common.utility.MathUtils;
 
 import javax.annotation.Nullable;
 import java.util.Optional;

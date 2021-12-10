@@ -12,10 +12,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.core.registry.ModBlocks;
-import vectorwing.farmersdelight.core.registry.ModItems;
-import vectorwing.farmersdelight.core.tag.ForgeTags;
-import vectorwing.farmersdelight.core.tag.ModTags;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.tag.ForgeTags;
+import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.function.Consumer;
 

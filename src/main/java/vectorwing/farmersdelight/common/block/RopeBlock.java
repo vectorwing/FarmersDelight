@@ -21,7 +21,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import vectorwing.farmersdelight.core.registry.ModBlocks;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
 
 @SuppressWarnings("deprecation")
 public class RopeBlock extends IronBarsBlock

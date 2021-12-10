@@ -11,7 +11,7 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.core.registry.ModEffects;
+import vectorwing.farmersdelight.common.registry.ModEffects;
 
 import java.util.Set;
 

@@ -22,8 +22,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import vectorwing.farmersdelight.common.block.BasketBlock;
-import vectorwing.farmersdelight.core.registry.ModBlockEntityTypes;
-import vectorwing.farmersdelight.core.util.TextUtils;
+import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
+import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;

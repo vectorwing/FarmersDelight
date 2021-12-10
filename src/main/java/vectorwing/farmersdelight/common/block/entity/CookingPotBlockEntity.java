@@ -32,11 +32,11 @@ import vectorwing.farmersdelight.common.block.CookingPotBlock;
 import vectorwing.farmersdelight.common.block.entity.container.CookingPotContainer;
 import vectorwing.farmersdelight.common.block.entity.inventory.CookingPotItemHandler;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.core.mixin.accessor.RecipeManagerAccessor;
-import vectorwing.farmersdelight.core.registry.ModBlockEntityTypes;
-import vectorwing.farmersdelight.core.registry.ModParticleTypes;
-import vectorwing.farmersdelight.core.util.ItemUtils;
-import vectorwing.farmersdelight.core.util.TextUtils;
+import vectorwing.farmersdelight.common.mixin.accessor.RecipeManagerAccessor;
+import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
+import vectorwing.farmersdelight.common.registry.ModParticleTypes;
+import vectorwing.farmersdelight.common.utility.ItemUtils;
+import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

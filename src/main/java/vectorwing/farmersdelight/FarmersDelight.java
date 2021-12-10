@@ -20,10 +20,10 @@ import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.crafting.ingredient.ToolActionIngredient;
 import vectorwing.farmersdelight.common.world.VillageStructures;
-import vectorwing.farmersdelight.core.Configuration;
+import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.client.ClientSetup;
 import vectorwing.farmersdelight.common.CommonSetup;
-import vectorwing.farmersdelight.core.registry.*;
+import vectorwing.farmersdelight.common.registry.*;
 
 import javax.annotation.Nonnull;
 

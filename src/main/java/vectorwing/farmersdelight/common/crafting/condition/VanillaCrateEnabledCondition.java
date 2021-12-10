@@ -5,7 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.core.Configuration;
+import vectorwing.farmersdelight.common.Configuration;
 
 public class VanillaCrateEnabledCondition implements ICondition
 {

@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.item.ItemStack;
-import vectorwing.farmersdelight.core.util.ClientRenderUtils;
+import vectorwing.farmersdelight.common.utility.ClientRenderUtils;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Supplier;

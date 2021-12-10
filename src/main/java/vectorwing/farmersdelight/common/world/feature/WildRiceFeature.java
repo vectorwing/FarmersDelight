@@ -12,7 +12,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import vectorwing.farmersdelight.common.block.WildRiceBlock;
-import vectorwing.farmersdelight.core.registry.ModBlocks;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
 
 import java.util.Random;
 

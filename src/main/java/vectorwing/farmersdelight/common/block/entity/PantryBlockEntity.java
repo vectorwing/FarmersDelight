@@ -20,8 +20,8 @@ import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import vectorwing.farmersdelight.common.block.PantryBlock;
-import vectorwing.farmersdelight.core.registry.ModBlockEntityTypes;
-import vectorwing.farmersdelight.core.util.TextUtils;
+import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
+import vectorwing.farmersdelight.common.utility.TextUtils;
 
 public class PantryBlockEntity extends RandomizableContainerBlockEntity
 {

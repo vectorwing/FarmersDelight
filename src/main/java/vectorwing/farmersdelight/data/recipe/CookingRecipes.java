@@ -5,9 +5,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import vectorwing.farmersdelight.data.builder.CookingPotRecipeBuilder;
-import vectorwing.farmersdelight.core.registry.ModItems;
-import vectorwing.farmersdelight.core.tag.ForgeTags;
-import vectorwing.farmersdelight.core.tag.ModTags;
+import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.tag.ForgeTags;
+import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.function.Consumer;
 import java.util.stream.Stream;

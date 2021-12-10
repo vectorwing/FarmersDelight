@@ -21,9 +21,9 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.common.block.StoveBlock;
-import vectorwing.farmersdelight.core.mixin.accessor.RecipeManagerAccessor;
-import vectorwing.farmersdelight.core.registry.ModBlockEntityTypes;
-import vectorwing.farmersdelight.core.util.ItemUtils;
+import vectorwing.farmersdelight.common.mixin.accessor.RecipeManagerAccessor;
+import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
+import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 import java.util.Optional;
 

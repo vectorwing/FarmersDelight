@@ -15,8 +15,8 @@ import net.minecraftforge.client.gui.ForgeIngameGui;
 import net.minecraftforge.client.gui.OverlayRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.core.Configuration;
-import vectorwing.farmersdelight.core.registry.ModEffects;
+import vectorwing.farmersdelight.common.Configuration;
+import vectorwing.farmersdelight.common.registry.ModEffects;
 
 import java.util.Random;
 

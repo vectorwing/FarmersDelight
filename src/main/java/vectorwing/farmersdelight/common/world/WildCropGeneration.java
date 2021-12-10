@@ -11,9 +11,9 @@ import net.minecraft.world.level.levelgen.feature.blockplacers.SimpleBlockPlacer
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
-import vectorwing.farmersdelight.core.registry.ModBiomeFeatures;
-import vectorwing.farmersdelight.core.registry.ModBlocks;
-import vectorwing.farmersdelight.core.Configuration;
+import vectorwing.farmersdelight.common.registry.ModBiomeFeatures;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.Configuration;
 
 public class WildCropGeneration
 {

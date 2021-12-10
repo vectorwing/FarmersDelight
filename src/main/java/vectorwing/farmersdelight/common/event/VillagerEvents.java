@@ -13,8 +13,8 @@ import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.core.Configuration;
-import vectorwing.farmersdelight.core.registry.ModItems;
+import vectorwing.farmersdelight.common.Configuration;
+import vectorwing.farmersdelight.common.registry.ModItems;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;

@@ -20,9 +20,9 @@ import vectorwing.farmersdelight.client.renderer.CanvasSignRenderer;
 import vectorwing.farmersdelight.client.renderer.CuttingBoardRenderer;
 import vectorwing.farmersdelight.client.renderer.SkilletRenderer;
 import vectorwing.farmersdelight.client.renderer.StoveRenderer;
-import vectorwing.farmersdelight.core.registry.ModAtlases;
-import vectorwing.farmersdelight.core.registry.ModBlockEntityTypes;
-import vectorwing.farmersdelight.core.registry.ModParticleTypes;
+import vectorwing.farmersdelight.common.registry.ModAtlases;
+import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
+import vectorwing.farmersdelight.common.registry.ModParticleTypes;
 
 import java.util.Map;
 

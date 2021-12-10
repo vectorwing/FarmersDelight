@@ -25,7 +25,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import vectorwing.farmersdelight.common.block.state.CanvasSign;
-import vectorwing.farmersdelight.core.registry.ModAtlases;
+import vectorwing.farmersdelight.common.registry.ModAtlases;
 
 import javax.annotation.Nullable;
 import java.util.List;

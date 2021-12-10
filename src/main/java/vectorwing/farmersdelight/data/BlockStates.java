@@ -19,7 +19,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.*;
 import vectorwing.farmersdelight.common.block.FeastBlock;
-import vectorwing.farmersdelight.core.registry.ModBlocks;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

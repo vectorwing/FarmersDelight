@@ -9,8 +9,8 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolActions;
 import vectorwing.farmersdelight.common.crafting.ingredient.ToolActionIngredient;
 import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
-import vectorwing.farmersdelight.core.registry.ModItems;
-import vectorwing.farmersdelight.core.tag.ForgeTags;
+import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.tag.ForgeTags;
 
 import java.util.function.Consumer;
 

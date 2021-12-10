@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import vectorwing.farmersdelight.core.tag.ModTags;
+import vectorwing.farmersdelight.common.tag.ModTags;
 
 /**
  * Blocks that can be heated by the block below them.
@@ -16,8 +16,8 @@ public interface HeatableBlockEntity
 	/**
 	 * Checks for heat sources below the block. If it can, it also checks for conducted heat.
 	 */
-	default boolean isHeated(Level world, BlockPos pos) {
-		BlockState stateBelow = world.getBlockState(pos.below());
+	default boolean isHeated(Level level, BlockPos pos) {
+		BlockState stateBelow = level.getBlockState(pos.below());
 
 		if (ModTags.HEAT_SOURCES.contains(stateBelow.getBlock())) {
 			if (stateBelow.hasProperty(BlockStateProperties.LIT))
@@ -26,7 +26,7 @@ public interface HeatableBlockEntity
 		}
 
 		if (!this.requiresDirectHeat() && ModTags.HEAT_CONDUCTORS.contains(stateBelow.getBlock())) {
-			BlockState stateFurtherBelow = world.getBlockState(pos.below(2));
+			BlockState stateFurtherBelow = level.getBlockState(pos.below(2));
 			if (ModTags.HEAT_SOURCES.contains(stateFurtherBelow.getBlock())) {
 				if (stateFurtherBelow.hasProperty(BlockStateProperties.LIT))
 					return stateFurtherBelow.getValue(BlockStateProperties.LIT);

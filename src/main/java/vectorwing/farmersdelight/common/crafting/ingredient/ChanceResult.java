@@ -12,7 +12,7 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.core.Configuration;
+import vectorwing.farmersdelight.common.Configuration;
 
 import java.util.Random;
 
