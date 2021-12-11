@@ -7,6 +7,9 @@
 - Removed `comfort_foods` tag. The mod now only adds the Comfort effect to vanilla SoupItems, which can be disabled in the config;
 
 ### Updates
+- Mutton Wrap no longer needs milk, and is made with an Onion instead of a Tomato;
+- Cooking Pot is easier to mine by hand;
+- Updated de_DE translation (thanks, DaLumma!);
 - Meal effect durations have been tweaked:
   - Both Comfort and Nourishment can now be obtained in ranges of 1, 3 and 5 minutes across meals;
   - Mushroom Stew and Beetroot Soup both grant 3 minutes of Comfort;
