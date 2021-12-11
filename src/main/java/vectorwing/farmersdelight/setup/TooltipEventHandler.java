@@ -1,6 +1,8 @@
 package vectorwing.farmersdelight.setup;
 
-import net.minecraft.item.ItemStack;
+import com.mojang.datafixers.util.Pair;
+import net.minecraft.item.Food;
+import net.minecraft.item.Item;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectUtils;
 import net.minecraft.util.text.IFormattableTextComponent;
@@ -11,25 +13,32 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.registry.ModEffects;
-import vectorwing.farmersdelight.utils.tags.ModTags;
+import vectorwing.farmersdelight.items.Foods;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = FarmersDelight.MODID, value = Dist.CLIENT)
 public class TooltipEventHandler
 {
 	@SubscribeEvent
-	public static void onItemTooltip(ItemTooltipEvent event) {
-		ItemStack soupStack = event.getItemStack();
-		if (Configuration.FOOD_EFFECT_TOOLTIP.get() && Configuration.COMFORT_FOOD_TAG_EFFECT.get() && soupStack.getItem().is(ModTags.COMFORT_FOODS)) {
+	public static void addTooltipToVanillaSoups(ItemTooltipEvent event) {
+		if (!Configuration.FOOD_EFFECT_TOOLTIP.get() || !Configuration.COMFORT_FOOD_TAG_EFFECT.get()) {
+			return;
+		}
+
+		Item food = event.getItemStack().getItem();
+		Food soupEffects = Foods.VANILLA_SOUP_EFFECTS.get(food);
+
+		if (soupEffects != null) {
 			List<ITextComponent> tooltip = event.getToolTip();
-			EffectInstance comfort = new EffectInstance(ModEffects.COMFORT.get(), 2400);
-			IFormattableTextComponent effectText = new TranslationTextComponent(comfort.getDescriptionId());
-			if (comfort.getDuration() > 20) {
-				effectText = new TranslationTextComponent("potion.withDuration", effectText, EffectUtils.formatDuration(comfort, 1));
+			for (Pair<EffectInstance, Float> pair : soupEffects.getEffects()) {
+				EffectInstance effect = pair.getFirst();
+				IFormattableTextComponent effectText = new TranslationTextComponent(effect.getDescriptionId());
+				if (effect.getDuration() > 20) {
+					effectText = new TranslationTextComponent("potion.withDuration", effectText, EffectUtils.formatDuration(effect, 1));
+				}
+				tooltip.add(effectText.withStyle(effect.getEffect().getCategory().getTooltipFormatting()));
 			}
-			tooltip.add(effectText.withStyle(comfort.getEffect().getCategory().getTooltipFormatting()));
 		}
 	}
 }

@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.5.3
+
+### Updates
+- Mutton Wrap no longer needs milk, and is made with an Onion instead of a Tomato;
+- Cooking Pot is easier to mine by hand;
+- Updated de_DE translation (thanks, DaLumma!);
+
+### Fixes
+- Fix crashes related to calling unbound tags on ItemTooltipEvent;
+  - This means any items in `comfort_foods` will work, but won't have an effect tooltip to them;
+- Fix Canvas Sign mixin not being marked as client;
+
 ## 0.5.2
 
 ### Additions

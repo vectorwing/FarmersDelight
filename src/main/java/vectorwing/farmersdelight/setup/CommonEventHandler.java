@@ -1,16 +1,14 @@
 package vectorwing.farmersdelight.setup;
 
 import com.google.common.collect.Sets;
+import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.merchant.villager.VillagerTrades;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.MerchantOffer;
+import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
@@ -33,6 +31,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.conditions.VanillaCrateEnabledCondition;
+import vectorwing.farmersdelight.items.Foods;
 import vectorwing.farmersdelight.loot.functions.CopyMealFunction;
 import vectorwing.farmersdelight.loot.functions.CopySkilletFunction;
 import vectorwing.farmersdelight.loot.functions.SmokerCookFunction;
@@ -232,14 +231,23 @@ public class CommonEventHandler
 		Item food = event.getItem().getItem();
 		LivingEntity entity = event.getEntityLiving();
 
-		// Adds 3:00 of Jump Boost II when eating Rabbit Stew
 		if (Configuration.RABBIT_STEW_JUMP_BOOST.get() && food.equals(Items.RABBIT_STEW)) {
-			entity.addEffect(new EffectInstance(Effects.JUMP, 100, 1));
+			entity.addEffect(new EffectInstance(Effects.JUMP, 200, 1));
 		}
 
-		// Adds 2:00 of Comfort when eating foods inside the tag farmersdelight:comfort_foods
-		if (Configuration.COMFORT_FOOD_TAG_EFFECT.get() && food.is(ModTags.COMFORT_FOODS)) {
-			entity.addEffect(new EffectInstance(ModEffects.COMFORT.get(), 2400, 0));
+		if (Configuration.COMFORT_FOOD_TAG_EFFECT.get()) {
+			Food soupEffects = Foods.VANILLA_SOUP_EFFECTS.get(food);
+
+			if (soupEffects != null) {
+				for (Pair<EffectInstance, Float> pair : soupEffects.getEffects()) {
+					entity.addEffect(pair.getFirst());
+				}
+				return;
+			}
+
+			if (ModTags.COMFORT_FOODS.contains(food)) {
+				entity.addEffect(new EffectInstance(ModEffects.COMFORT.get(), Foods.MEDIUM_DURATION, 0));
+			}
 		}
 	}
 
