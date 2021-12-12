@@ -3,13 +3,12 @@ package vectorwing.farmersdelight.common.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -17,27 +16,34 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class WildPatchBlock extends BushBlock implements BonemealableBlock
+public class WildCropBlock extends FlowerBlock implements BonemealableBlock
 {
 	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
+	private final boolean renderOffset;
 
-	public WildPatchBlock(Properties properties) {
-		super(properties);
+	public WildCropBlock(MobEffect suspiciousStewEffect, int effectDuration, Properties properties) {
+		super(suspiciousStewEffect, effectDuration, properties);
+		this.renderOffset = true;
+	}
+
+	public WildCropBlock(MobEffect suspiciousStewEffect, int effectDuration, Properties properties, boolean hasOffset) {
+		super(suspiciousStewEffect, effectDuration, properties);
+		this.renderOffset = hasOffset;
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return SHAPE;
 	}
 
 	@Override
-	protected boolean mayPlaceOn(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		return state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS_BLOCK || state.getBlock() == Blocks.SAND || state.getBlock() == Blocks.RED_SAND;
+	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
+		return state.is(BlockTags.DIRT) || state.is(BlockTags.SAND);
 	}
 
 	@Override
 	public Block.OffsetType getOffsetType() {
-		return OffsetType.XZ;
+		return renderOffset ? OffsetType.XZ : OffsetType.NONE;
 	}
 
 	@Override

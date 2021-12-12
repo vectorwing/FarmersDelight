@@ -127,7 +127,15 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.GREEN_CANVAS_WALL_SIGN.get(),
 				ModBlocks.RED_CANVAS_WALL_SIGN.get(),
 				ModBlocks.BLACK_CANVAS_WALL_SIGN.get());
-		tag(net.minecraft.tags.BlockTags.SMALL_FLOWERS).addTag(ModTags.WILD_CROPS);
+		tag(net.minecraft.tags.BlockTags.SMALL_FLOWERS).add(
+				ModBlocks.WILD_CARROTS.get(),
+				ModBlocks.WILD_POTATOES.get(),
+				ModBlocks.WILD_BEETROOTS.get(),
+				ModBlocks.WILD_CABBAGES.get(),
+				ModBlocks.WILD_TOMATOES.get(),
+				ModBlocks.WILD_ONIONS.get()
+		);
+		tag(net.minecraft.tags.BlockTags.TALL_FLOWERS).add(ModBlocks.WILD_RICE.get());
 	}
 
 	protected void registerForgeTags() {

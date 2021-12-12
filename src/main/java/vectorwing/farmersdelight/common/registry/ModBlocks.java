@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.common.registry;
 
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -174,17 +175,17 @@ public class ModBlocks
 
 	// Wild Crops
 	public static final RegistryObject<Block> WILD_CABBAGES = BLOCKS.register("wild_cabbages",
-			() -> new WildPatchBlock(Block.Properties.copy(Blocks.TALL_GRASS)));
+			() -> new WildCropBlock(MobEffects.DAMAGE_BOOST, 6, Block.Properties.copy(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_ONIONS = BLOCKS.register("wild_onions",
-			() -> new WildCropsBlock(Block.Properties.copy(Blocks.TALL_GRASS)));
+			() -> new WildCropBlock(MobEffects.FIRE_RESISTANCE, 6, Block.Properties.copy(Blocks.TALL_GRASS), false));
 	public static final RegistryObject<Block> WILD_TOMATOES = BLOCKS.register("wild_tomatoes",
-			() -> new WildPatchBlock(Block.Properties.copy(Blocks.TALL_GRASS)));
+			() -> new WildCropBlock(MobEffects.POISON, 10, Block.Properties.copy(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_CARROTS = BLOCKS.register("wild_carrots",
-			() -> new WildCropsBlock(Block.Properties.copy(Blocks.TALL_GRASS)));
+			() -> new WildCropBlock(MobEffects.DIG_SLOWDOWN, 6, Block.Properties.copy(Blocks.TALL_GRASS), false));
 	public static final RegistryObject<Block> WILD_POTATOES = BLOCKS.register("wild_potatoes",
-			() -> new WildPatchBlock(Block.Properties.copy(Blocks.TALL_GRASS)));
+			() -> new WildCropBlock(MobEffects.CONFUSION, 8, Block.Properties.copy(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_BEETROOTS = BLOCKS.register("wild_beetroots",
-			() -> new WildPatchBlock(Block.Properties.copy(Blocks.TALL_GRASS)));
+			() -> new WildCropBlock(MobEffects.WATER_BREATHING, 8, Block.Properties.copy(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_RICE = BLOCKS.register("wild_rice",
 			() -> new WildRiceBlock(Block.Properties.copy(Blocks.TALL_GRASS)));
 

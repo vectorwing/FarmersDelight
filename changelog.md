@@ -7,6 +7,8 @@
 - Removed `comfort_foods` tag. The mod now only adds the Comfort effect to vanilla SoupItems, which can be disabled in the config;
 
 ### Updates
+- Moved Wild Rice from `small_flowers` to `tall_flowers`;
+- Wild Crops, except for Wild Rice, can now provide effects when used to make Suspicious Stew. Curious? Try them for yourself! ;)
 - Mutton Wrap no longer needs milk, and is made with an Onion instead of a Tomato;
 - Cooking Pot is easier to mine by hand;
 - Updated de_DE translation (thanks, DaLumma!);
