@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "farmersdelight:block/rice_panicles_stage0"
+  }
+}

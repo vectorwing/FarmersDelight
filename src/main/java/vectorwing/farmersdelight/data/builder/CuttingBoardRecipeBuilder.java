@@ -11,8 +11,8 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
-import vectorwing.farmersdelight.crafting.ingredients.ChanceResult;
+import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;

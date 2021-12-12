@@ -17,12 +17,9 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.blocks.*;
-import vectorwing.farmersdelight.blocks.crops.CabbagesBlock;
-import vectorwing.farmersdelight.blocks.crops.OnionsBlock;
-import vectorwing.farmersdelight.blocks.crops.RiceUpperCropBlock;
-import vectorwing.farmersdelight.blocks.crops.TomatoesBlock;
-import vectorwing.farmersdelight.registry.ModBlocks;
+import vectorwing.farmersdelight.common.block.*;
+import vectorwing.farmersdelight.common.block.FeastBlock;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -132,10 +129,10 @@ public class BlockStates extends BlockStateProvider
 
 		this.stageBlock(ModBlocks.BROWN_MUSHROOM_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
 		this.stageBlock(ModBlocks.RED_MUSHROOM_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
-		this.stageBlock(ModBlocks.RICE_UPPER_CROP.get(), RiceUpperCropBlock.RICE_AGE);
-		this.customStageBlock(ModBlocks.CABBAGE_CROP.get(), resourceBlock("crop_cross"), "cross", CabbagesBlock.AGE, new ArrayList<>());
-		this.customStageBlock(ModBlocks.TOMATO_CROP.get(), resourceBlock("crop_cross"), "cross", TomatoesBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 3, 4));
-		this.customStageBlock(ModBlocks.ONION_CROP.get(), mcLoc("crop"), "crop", OnionsBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 2, 3));
+		this.stageBlock(ModBlocks.RICE_CROP_PANICLES.get(), RicePaniclesBlock.RICE_AGE);
+		this.customStageBlock(ModBlocks.CABBAGE_CROP.get(), resourceBlock("crop_cross"), "cross", CabbageBlock.AGE, new ArrayList<>());
+		this.customStageBlock(ModBlocks.TOMATO_CROP.get(), resourceBlock("crop_cross"), "cross", TomatoBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 3, 4));
+		this.customStageBlock(ModBlocks.ONION_CROP.get(), mcLoc("crop"), "crop", OnionBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 2, 3));
 
 		this.crateBlock(ModBlocks.CARROT_CRATE.get(), "carrot");
 		this.crateBlock(ModBlocks.POTATO_CRATE.get(), "potato");

@@ -4,7 +4,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import vectorwing.farmersdelight.utils.tags.ModTags;
+import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.Nullable;
 

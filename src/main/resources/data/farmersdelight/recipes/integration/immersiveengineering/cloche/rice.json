@@ -21,6 +21,6 @@
   "time": 1000,
   "render": {
     "type": "crop",
-    "block": "farmersdelight:rice_upper_crop"
+    "block": "farmersdelight:rice_panicles"
   }
 }

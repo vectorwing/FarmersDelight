@@ -14,8 +14,8 @@
 //import net.minecraft.core.NonNullList;
 //import net.minecraft.resources.ResourceLocation;
 //import org.openzen.zencode.java.ZenCodeType;
-//import vectorwing.farmersdelight.crafting.CookingPotRecipe;
-//import vectorwing.farmersdelight.utils.ListUtils;
+//import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
+//import vectorwing.farmersdelight.core.utils.ListUtils;
 //
 ///**
 // * Farmer's Delight Cooking Pot recipes.

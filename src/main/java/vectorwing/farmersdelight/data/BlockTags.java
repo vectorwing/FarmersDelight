@@ -3,13 +3,11 @@ package vectorwing.farmersdelight.data;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.fml.common.Mod;
-import vectorwing.farmersdelight.registry.ModBlocks;
-import vectorwing.farmersdelight.utils.tags.ModTags;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.Nullable;
 
@@ -91,7 +89,7 @@ public class BlockTags extends BlockTagsProvider
 		tag(net.minecraft.tags.BlockTags.CROPS).add(
 				ModBlocks.CABBAGE_CROP.get(),
 				ModBlocks.ONION_CROP.get(),
-				ModBlocks.RICE_UPPER_CROP.get(),
+				ModBlocks.RICE_CROP_PANICLES.get(),
 				ModBlocks.TOMATO_CROP.get());
 		tag(net.minecraft.tags.BlockTags.STANDING_SIGNS).add(
 				ModBlocks.CANVAS_SIGN.get(),

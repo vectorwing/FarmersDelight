@@ -18,11 +18,11 @@ import net.minecraft.world.level.block.Blocks;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.advancement.CuttingBoardTrigger;
-import vectorwing.farmersdelight.registry.ModBlocks;
-import vectorwing.farmersdelight.registry.ModEffects;
-import vectorwing.farmersdelight.registry.ModItems;
-import vectorwing.farmersdelight.utils.TextUtils;
+import vectorwing.farmersdelight.common.advancement.CuttingBoardTrigger;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.registry.ModEffects;
+import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.IOException;

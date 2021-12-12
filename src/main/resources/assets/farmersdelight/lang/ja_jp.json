@@ -52,8 +52,8 @@
   "block.farmersdelight.tomatoes": "トマト",
   "block.farmersdelight.cabbages": "キャベツ",
   "block.farmersdelight.onions": "タマネギ",
-  "block.farmersdelight.rice_crop": "稲",
-  "block.farmersdelight.rice_upper_crop": "稲",
+  "block.farmersdelight.rice": "稲",
+  "block.farmersdelight.rice_panicles": "稲",
   "block.farmersdelight.brown_mushroom_colony": "群生した茶色のキノコ",
   "block.farmersdelight.red_mushroom_colony": "群生した赤色のキノコ",
 

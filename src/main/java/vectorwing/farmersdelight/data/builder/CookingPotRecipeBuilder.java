@@ -13,7 +13,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.crafting.CookingPotRecipe;
+import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;

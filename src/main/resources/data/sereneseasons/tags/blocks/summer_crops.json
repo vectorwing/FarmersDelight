@@ -2,7 +2,7 @@
   "replace": false,
   "values": [
     "farmersdelight:tomatoes",
-    "farmersdelight:rice_crop",
-    "farmersdelight:rice_upper_crop"
+    "farmersdelight:rice",
+    "farmersdelight:rice_panicles"
   ]
 }

@@ -106,7 +106,7 @@
     "rice": {
       "trigger": "minecraft:placed_block",
       "conditions": {
-        "block": "farmersdelight:rice_crop"
+        "block": "farmersdelight:rice"
       }
     },
     "nether_wart": {

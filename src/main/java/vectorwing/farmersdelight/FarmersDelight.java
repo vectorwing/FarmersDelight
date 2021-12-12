@@ -3,6 +3,8 @@ package vectorwing.farmersdelight;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -14,32 +16,38 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import vectorwing.farmersdelight.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
-import vectorwing.farmersdelight.crafting.ingredients.ToolActionIngredient;
-import vectorwing.farmersdelight.registry.*;
-import vectorwing.farmersdelight.setup.ClientEventHandler;
-import vectorwing.farmersdelight.setup.CommonEventHandler;
-import vectorwing.farmersdelight.setup.Configuration;
-import vectorwing.farmersdelight.world.VillageStructures;
+import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
+import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.common.crafting.ingredient.ToolActionIngredient;
+import vectorwing.farmersdelight.common.world.VillageStructures;
+import vectorwing.farmersdelight.common.Configuration;
+import vectorwing.farmersdelight.client.ClientSetup;
+import vectorwing.farmersdelight.common.CommonSetup;
+import vectorwing.farmersdelight.common.registry.*;
+
+import javax.annotation.Nonnull;
 
 @Mod(FarmersDelight.MODID)
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class FarmersDelight
 {
 	public static final String MODID = "farmersdelight";
-	public static final FDItemGroup ITEM_GROUP = new FDItemGroup(FarmersDelight.MODID);
+	public static final CreativeModeTab CREATIVE_TAB = new CreativeModeTab(FarmersDelight.MODID) {
+		@Nonnull
+		@Override
+		public ItemStack makeIcon() {
+			return new ItemStack(ModBlocks.STOVE.get());
+		}
+	};
 
 	public static final Logger LOGGER = LogManager.getLogger();
-	public static final Gson GSON = new GsonBuilder().setPrettyPrinting()
-			.disableHtmlEscaping()
-			.create();
+	public static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
 	public FarmersDelight() {
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-		modEventBus.addListener(CommonEventHandler::init);
-		modEventBus.addListener(ClientEventHandler::init);
+		modEventBus.addListener(CommonSetup::init);
+		modEventBus.addListener(ClientSetup::init);
 		modEventBus.addGenericListener(RecipeSerializer.class, this::registerRecipeSerializers);
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
@@ -57,7 +65,6 @@ public class FarmersDelight
 		ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
 
 		MinecraftForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
-
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 

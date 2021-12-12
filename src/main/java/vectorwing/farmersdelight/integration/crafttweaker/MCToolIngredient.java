@@ -10,7 +10,7 @@
 //import net.minecraft.world.item.crafting.Ingredient;
 //import net.minecraftforge.common.ToolType;
 //import org.openzen.zencode.java.ZenCodeType;
-//import vectorwing.farmersdelight.crafting.ingredients.ToolIngredient;
+//import vectorwing.farmersdelight.common.crafting.ingredients.ToolIngredient;
 //
 ///**
 // * An ingredient that matches any item with the given tool type.

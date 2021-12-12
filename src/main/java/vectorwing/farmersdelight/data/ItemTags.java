@@ -8,9 +8,9 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import vectorwing.farmersdelight.registry.ModItems;
-import vectorwing.farmersdelight.utils.tags.ForgeTags;
-import vectorwing.farmersdelight.utils.tags.ModTags;
+import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.tag.ForgeTags;
+import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.Nullable;
 
@@ -36,7 +36,6 @@ public class ItemTags extends ItemTagsProvider
 	private void registerModTags() {
 		tag(ModTags.KNIVES).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get());
 		tag(ModTags.STRAW_HARVESTERS).addTag(ModTags.KNIVES);
-		tag(ModTags.COMFORT_FOODS).add(Items.MUSHROOM_STEW, Items.BEETROOT_SOUP, Items.RABBIT_STEW);
 		tag(ModTags.WOLF_PREY).addTag(ForgeTags.RAW_CHICKEN).addTag(ForgeTags.RAW_MUTTON).add(Items.RABBIT);
 		tag(ModTags.CABBAGE_ROLL_INGREDIENTS).addTag(ForgeTags.RAW_PORK).addTag(ForgeTags.RAW_FISHES).addTag(ForgeTags.RAW_CHICKEN).addTag(ForgeTags.RAW_BEEF).addTag(ForgeTags.RAW_MUTTON).addTag(ForgeTags.EGGS).addTag(Tags.Items.MUSHROOMS).add(Items.CARROT, Items.POTATO, Items.BEETROOT);
 		tag(ModTags.CANVAS_SIGNS)

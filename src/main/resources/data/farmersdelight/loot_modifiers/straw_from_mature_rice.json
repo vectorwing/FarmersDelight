@@ -9,7 +9,7 @@
     },
     {
       "condition": "block_state_property",
-      "block": "farmersdelight:rice_upper_crop",
+      "block": "farmersdelight:rice_panicles",
       "properties": {
         "age": "3"
       }
