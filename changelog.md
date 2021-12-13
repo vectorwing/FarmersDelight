@@ -3,6 +3,13 @@
 ## 1.0.0
 - 1.17 and 1.18 port! Codebase has been cleaned up and refactored;
 
+### Breaking Changes
+- This port remaps a few blocks and items. This remap may sometimes fail due to mod interactions. **MAKE A BACKUP BEFORE TRYING TO MIGRATE OLD WORLDS!**
+  - Remapped `rice_crop` to `rice`;
+  - Remapped `rice_upper_crop` to `rice_panicles`;
+  - Remapped all Pantries to Cabinets, in language and ID;
+    - Contents will usually be preserved when migrating existing worlds into version 1.0;
+
 ### Removals
 - Removed `comfort_foods` tag. The mod now only adds the Comfort effect to vanilla SoupItems, which can be disabled in the config;
 

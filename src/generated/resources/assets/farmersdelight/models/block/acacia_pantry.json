@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "side": "farmersdelight:block/acacia_pantry_side",
-    "front": "farmersdelight:block/acacia_pantry_front",
-    "top": "farmersdelight:block/acacia_pantry_top"
-  }
-}

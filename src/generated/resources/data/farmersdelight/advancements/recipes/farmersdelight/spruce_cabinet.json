@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:spruce_cabinet"
+    ]
+  },
+  "criteria": {
+    "has_spruce_trapdoor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:spruce_trapdoor"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:spruce_cabinet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_spruce_trapdoor",
+      "has_the_recipe"
+    ]
+  ]
+}

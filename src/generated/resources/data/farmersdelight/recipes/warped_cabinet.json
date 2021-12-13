@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "___",
+    "D D",
+    "___"
+  ],
+  "key": {
+    "_": {
+      "item": "minecraft:warped_slab"
+    },
+    "D": {
+      "item": "minecraft:warped_trapdoor"
+    }
+  },
+  "result": {
+    "item": "farmersdelight:warped_cabinet"
+  }
+}

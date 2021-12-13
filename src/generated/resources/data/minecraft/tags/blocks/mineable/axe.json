@@ -9,14 +9,14 @@
     "farmersdelight:cabbage_crate",
     "farmersdelight:tomato_crate",
     "farmersdelight:onion_crate",
-    "farmersdelight:oak_pantry",
-    "farmersdelight:birch_pantry",
-    "farmersdelight:spruce_pantry",
-    "farmersdelight:jungle_pantry",
-    "farmersdelight:acacia_pantry",
-    "farmersdelight:dark_oak_pantry",
-    "farmersdelight:crimson_pantry",
-    "farmersdelight:warped_pantry",
+    "farmersdelight:oak_cabinet",
+    "farmersdelight:birch_cabinet",
+    "farmersdelight:spruce_cabinet",
+    "farmersdelight:jungle_cabinet",
+    "farmersdelight:acacia_cabinet",
+    "farmersdelight:dark_oak_cabinet",
+    "farmersdelight:crimson_cabinet",
+    "farmersdelight:warped_cabinet",
     "farmersdelight:stuffed_pumpkin_block"
   ]
 }

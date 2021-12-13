@@ -50,22 +50,22 @@ public class ModItems
 
 	public static final RegistryObject<Item> SAFETY_NET = ITEMS.register("safety_net",
 			() -> new FuelBlockItem(ModBlocks.SAFETY_NET.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 200));
-	public static final RegistryObject<Item> OAK_PANTRY = ITEMS.register("oak_pantry",
-			() -> new FuelBlockItem(ModBlocks.OAK_PANTRY.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 300));
-	public static final RegistryObject<Item> BIRCH_PANTRY = ITEMS.register("birch_pantry",
-			() -> new FuelBlockItem(ModBlocks.BIRCH_PANTRY.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 300));
-	public static final RegistryObject<Item> SPRUCE_PANTRY = ITEMS.register("spruce_pantry",
-			() -> new FuelBlockItem(ModBlocks.SPRUCE_PANTRY.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 300));
-	public static final RegistryObject<Item> JUNGLE_PANTRY = ITEMS.register("jungle_pantry",
-			() -> new FuelBlockItem(ModBlocks.JUNGLE_PANTRY.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 300));
-	public static final RegistryObject<Item> ACACIA_PANTRY = ITEMS.register("acacia_pantry",
-			() -> new FuelBlockItem(ModBlocks.ACACIA_PANTRY.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 300));
-	public static final RegistryObject<Item> DARK_OAK_PANTRY = ITEMS.register("dark_oak_pantry",
-			() -> new FuelBlockItem(ModBlocks.DARK_OAK_PANTRY.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 300));
-	public static final RegistryObject<Item> CRIMSON_PANTRY = ITEMS.register("crimson_pantry",
-			() -> new BlockItem(ModBlocks.CRIMSON_PANTRY.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB)));
-	public static final RegistryObject<Item> WARPED_PANTRY = ITEMS.register("warped_pantry",
-			() -> new BlockItem(ModBlocks.WARPED_PANTRY.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB)));
+	public static final RegistryObject<Item> OAK_CABINET = ITEMS.register("oak_cabinet",
+			() -> new FuelBlockItem(ModBlocks.OAK_CABINET.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 300));
+	public static final RegistryObject<Item> BIRCH_CABINET = ITEMS.register("birch_cabinet",
+			() -> new FuelBlockItem(ModBlocks.BIRCH_CABINET.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 300));
+	public static final RegistryObject<Item> SPRUCE_CABINET = ITEMS.register("spruce_cabinet",
+			() -> new FuelBlockItem(ModBlocks.SPRUCE_CABINET.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 300));
+	public static final RegistryObject<Item> JUNGLE_CABINET = ITEMS.register("jungle_cabinet",
+			() -> new FuelBlockItem(ModBlocks.JUNGLE_CABINET.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 300));
+	public static final RegistryObject<Item> ACACIA_CABINET = ITEMS.register("acacia_cabinet",
+			() -> new FuelBlockItem(ModBlocks.ACACIA_CABINET.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 300));
+	public static final RegistryObject<Item> DARK_OAK_CABINET = ITEMS.register("dark_oak_cabinet",
+			() -> new FuelBlockItem(ModBlocks.DARK_OAK_CABINET.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 300));
+	public static final RegistryObject<Item> CRIMSON_CABINET = ITEMS.register("crimson_cabinet",
+			() -> new BlockItem(ModBlocks.CRIMSON_CABINET.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB)));
+	public static final RegistryObject<Item> WARPED_CABINET = ITEMS.register("warped_cabinet",
+			() -> new BlockItem(ModBlocks.WARPED_CABINET.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB)));
 	public static final RegistryObject<Item> TATAMI = ITEMS.register("tatami",
 			() -> new FuelBlockItem(ModBlocks.TATAMI.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 400));
 	public static final RegistryObject<Item> FULL_TATAMI_MAT = ITEMS.register("full_tatami_mat",

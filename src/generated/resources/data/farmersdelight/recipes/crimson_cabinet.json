@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "___",
+    "D D",
+    "___"
+  ],
+  "key": {
+    "_": {
+      "item": "minecraft:crimson_slab"
+    },
+    "D": {
+      "item": "minecraft:crimson_trapdoor"
+    }
+  },
+  "result": {
+    "item": "farmersdelight:crimson_cabinet"
+  }
+}
