@@ -21,7 +21,11 @@ public class ModBlockEntityTypes
 			() -> BlockEntityType.Builder.of(CuttingBoardBlockEntity::new, ModBlocks.CUTTING_BOARD.get()).build(null));
 	public static final RegistryObject<BlockEntityType<SkilletBlockEntity>> SKILLET = TILES.register("skillet",
 			() -> BlockEntityType.Builder.of(SkilletBlockEntity::new, ModBlocks.SKILLET.get()).build(null));
-	public static final RegistryObject<BlockEntityType<CabinetBlockEntity>> CABINET = TILES.register("pantry",
+	public static final RegistryObject<BlockEntityType<CabinetBlockEntity>> PANTRY = TILES.register("pantry",
+			() -> BlockEntityType.Builder.of(CabinetBlockEntity::new,
+							ModBlocks.OAK_CABINET.get(), ModBlocks.BIRCH_CABINET.get(), ModBlocks.SPRUCE_CABINET.get(), ModBlocks.JUNGLE_CABINET.get(), ModBlocks.ACACIA_CABINET.get(), ModBlocks.DARK_OAK_CABINET.get())
+					.build(null));
+	public static final RegistryObject<BlockEntityType<CabinetBlockEntity>> CABINET = TILES.register("cabinet",
 			() -> BlockEntityType.Builder.of(CabinetBlockEntity::new,
 							ModBlocks.OAK_CABINET.get(), ModBlocks.BIRCH_CABINET.get(), ModBlocks.SPRUCE_CABINET.get(), ModBlocks.JUNGLE_CABINET.get(), ModBlocks.ACACIA_CABINET.get(), ModBlocks.DARK_OAK_CABINET.get())
 					.build(null));
