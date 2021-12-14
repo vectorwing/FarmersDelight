@@ -38,12 +38,12 @@ public class NourishmentHungerOverlay
 			Minecraft mc = Minecraft.getInstance();
 			boolean isMounted = mc.player != null && mc.player.getVehicle() instanceof LivingEntity;
 			if (!isMounted && !mc.options.hideGui && gui.shouldDrawSurvivalElements()) {
-				renderNourishmentOverlay(gui, mStack, partialTicks, screenWidth, screenHeight);
+				renderNourishmentOverlay(gui, mStack);
 			}
 		});
 	}
 
-	public static void renderNourishmentOverlay(ForgeIngameGui gui, PoseStack poseStack, float partialTicks, int screenWidth, int screenHeight) {
+	public static void renderNourishmentOverlay(ForgeIngameGui gui, PoseStack poseStack) {
 		if (!Configuration.NOURISHED_HUNGER_OVERLAY.get()) {
 			return;
 		}

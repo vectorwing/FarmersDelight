@@ -16,14 +16,14 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import vectorwing.farmersdelight.client.ClientSetup;
+import vectorwing.farmersdelight.common.CommonSetup;
+import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.crafting.ingredient.ToolActionIngredient;
-import vectorwing.farmersdelight.common.world.VillageStructures;
-import vectorwing.farmersdelight.common.Configuration;
-import vectorwing.farmersdelight.client.ClientSetup;
-import vectorwing.farmersdelight.common.CommonSetup;
 import vectorwing.farmersdelight.common.registry.*;
+import vectorwing.farmersdelight.common.world.VillageStructures;
 
 import javax.annotation.Nonnull;
 
@@ -32,7 +32,8 @@ import javax.annotation.Nonnull;
 public class FarmersDelight
 {
 	public static final String MODID = "farmersdelight";
-	public static final CreativeModeTab CREATIVE_TAB = new CreativeModeTab(FarmersDelight.MODID) {
+	public static final CreativeModeTab CREATIVE_TAB = new CreativeModeTab(FarmersDelight.MODID)
+	{
 		@Nonnull
 		@Override
 		public ItemStack makeIcon() {

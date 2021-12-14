@@ -125,8 +125,7 @@ public class SkilletModel implements BakedModel
 			ResourceLocation name = new ResourceLocation(FarmersDelight.MODID, "skillet_with_" + ingredientLocation.toString().replace(':', '_'));
 
 			BakedModel ingredientBaked;
-			if (ingredientUnbaked instanceof BlockModel && ((BlockModel) ingredientUnbaked).getRootModel() == ModelBakery.GENERATION_MARKER) {
-				BlockModel bm = (BlockModel) ingredientUnbaked;
+			if (ingredientUnbaked instanceof BlockModel bm && ((BlockModel) ingredientUnbaked).getRootModel() == ModelBakery.GENERATION_MARKER) {
 				ingredientBaked = new ItemModelGenerator()
 						.generateBlockModel(ModelLoader.defaultTextureGetter(), bm)
 						.bake(bakery, bm, ModelLoader.defaultTextureGetter(), transform, name, false);
@@ -161,7 +160,7 @@ public class SkilletModel implements BakedModel
 
 		@Nonnull
 		@Override
-		public List<BakedQuad> getQuads(BlockState state, Direction face, @Nonnull Random rand) {
+		public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction face, @Nonnull Random rand) {
 			return face == null ? genQuads : faceQuads.get(face);
 		}
 
