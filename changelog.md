@@ -4,11 +4,12 @@
 - 1.17 and 1.18 port! Codebase has been cleaned up and refactored;
 
 ### Breaking Changes
+- Read this: https://github.com/vectorwing/FarmersDelight/wiki/1.0-Breaking-Changes
 - This port remaps a few blocks and items. This remap may sometimes fail due to mod interactions. **MAKE A BACKUP BEFORE TRYING TO MIGRATE OLD WORLDS!**
   - Remapped `rice_crop` to `rice`;
   - Remapped `rice_upper_crop` to `rice_panicles`;
   - Remapped all Pantries to Cabinets, in language and ID;
-    - Contents will usually be preserved when migrating existing worlds into version 1.0;
+    - The game will attempt to migrate stored contents. If this fails, stored items will be deleted.
 
 ### Removals
 - Removed `comfort_foods` tag. The mod now only adds the Comfort effect to vanilla SoupItems, which can be disabled in the config;
