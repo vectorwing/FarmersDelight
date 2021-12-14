@@ -25,7 +25,7 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 
 public class CabinetBlockEntity extends RandomizableContainerBlockEntity
 {
-	private NonNullList<ItemStack> pantryContents = NonNullList.withSize(27, ItemStack.EMPTY);
+	private NonNullList<ItemStack> contents = NonNullList.withSize(27, ItemStack.EMPTY);
 	private ContainerOpenersCounter openersCounter = new ContainerOpenersCounter()
 	{
 		protected void onOpen(Level level, BlockPos pos, BlockState state) {
@@ -59,7 +59,7 @@ public class CabinetBlockEntity extends RandomizableContainerBlockEntity
 	public CompoundTag save(CompoundTag compound) {
 		super.save(compound);
 		if (!trySaveLootTable(compound)) {
-			ContainerHelper.saveAllItems(compound, pantryContents);
+			ContainerHelper.saveAllItems(compound, contents);
 		}
 		return compound;
 	}
@@ -67,9 +67,9 @@ public class CabinetBlockEntity extends RandomizableContainerBlockEntity
 	@Override
 	public void load(CompoundTag compound) {
 		super.load(compound);
-		pantryContents = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
+		contents = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
 		if (!tryLoadLootTable(compound)) {
-			ContainerHelper.loadAllItems(compound, pantryContents);
+			ContainerHelper.loadAllItems(compound, contents);
 		}
 	}
 
@@ -80,12 +80,12 @@ public class CabinetBlockEntity extends RandomizableContainerBlockEntity
 
 	@Override
 	protected NonNullList<ItemStack> getItems() {
-		return pantryContents;
+		return contents;
 	}
 
 	@Override
 	protected void setItems(NonNullList<ItemStack> itemsIn) {
-		pantryContents = itemsIn;
+		contents = itemsIn;
 	}
 
 	@Override
