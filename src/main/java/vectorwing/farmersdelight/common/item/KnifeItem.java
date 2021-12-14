@@ -38,19 +38,11 @@ import java.util.Set;
 
 public class KnifeItem extends DiggerItem
 {
-//	public static final ToolType KNIFE_TOOL = ToolType.get(FarmersDelight.MODID + "_knife");
-
 	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet();
 
 	public KnifeItem(Tier tier, float attackDamageIn, float attackSpeedIn, Properties properties) {
 		super(attackDamageIn, attackSpeedIn, tier, ModTags.MINEABLE_WITH_KNIFE, properties);
 	}
-
-//	@Nonnull
-//	@Override
-//	public Set<ToolType> getToolTypes(ItemStack stack) {
-//		return ImmutableSet.of(KNIFE_TOOL);
-//	}
 
 	@Override
 	public float getDestroySpeed(ItemStack stack, BlockState state) {
