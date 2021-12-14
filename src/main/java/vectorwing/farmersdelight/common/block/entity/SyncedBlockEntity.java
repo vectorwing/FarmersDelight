@@ -28,7 +28,7 @@ public class SyncedBlockEntity extends BlockEntity
 
 	@Override
 	public CompoundTag getUpdateTag() {
-		return save(new CompoundTag());
+		return saveWithoutMetadata();
 	}
 
 	@Override

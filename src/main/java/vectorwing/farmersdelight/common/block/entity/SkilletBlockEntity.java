@@ -147,13 +147,12 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 	}
 
 	@Override
-	public CompoundTag save(CompoundTag compound) {
-		super.save(compound);
+	public void saveAdditional(CompoundTag compound) {
+		super.saveAdditional(compound);
 		compound.put("Inventory", inventory.serializeNBT());
 		compound.putInt("CookTime", cookingTime);
 		compound.putInt("CookTimeTotal", cookingTimeTotal);
 		compound.put("Skillet", skilletStack.save(new CompoundTag()));
-		return compound;
 	}
 
 	public CompoundTag writeSkilletItem(CompoundTag compound) {

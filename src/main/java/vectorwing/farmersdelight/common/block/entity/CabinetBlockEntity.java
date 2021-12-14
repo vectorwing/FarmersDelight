@@ -56,12 +56,11 @@ public class CabinetBlockEntity extends RandomizableContainerBlockEntity
 	}
 
 	@Override
-	public CompoundTag save(CompoundTag compound) {
-		super.save(compound);
+	public void saveAdditional(CompoundTag compound) {
+		super.saveAdditional(compound);
 		if (!trySaveLootTable(compound)) {
 			ContainerHelper.saveAllItems(compound, contents);
 		}
-		return compound;
 	}
 
 	@Override

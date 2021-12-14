@@ -50,14 +50,13 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 	}
 
 	@Override
-	public CompoundTag save(CompoundTag compound) {
-		super.save(compound);
+	public void saveAdditional(CompoundTag compound) {
+		super.saveAdditional(compound);
 		if (!this.trySaveLootTable(compound)) {
 			ContainerHelper.saveAllItems(compound, this.items);
 		}
 
 		compound.putInt("TransferCooldown", this.transferCooldown);
-		return compound;
 	}
 
 	@Override

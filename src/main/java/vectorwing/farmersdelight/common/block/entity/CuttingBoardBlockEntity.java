@@ -65,11 +65,10 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 	}
 
 	@Override
-	public CompoundTag save(CompoundTag compound) {
-		super.save(compound);
+	public void saveAdditional(CompoundTag compound) {
+		super.saveAdditional(compound);
 		compound.put("Inventory", inventory.serializeNBT());
 		compound.putBoolean("IsItemCarved", isItemCarvingBoard);
-		return compound;
 	}
 
 	public boolean processStoredItemUsingTool(ItemStack toolStack, @Nullable Player player) {

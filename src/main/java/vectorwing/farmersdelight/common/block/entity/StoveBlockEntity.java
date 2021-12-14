@@ -65,15 +65,14 @@ public class StoveBlockEntity extends SyncedBlockEntity
 	}
 
 	@Override
-	public CompoundTag save(CompoundTag compound) {
+	public void saveAdditional(CompoundTag compound) {
 		writeItems(compound);
 		compound.putIntArray("CookingTimes", cookingTimes);
 		compound.putIntArray("CookingTotalTimes", cookingTimesTotal);
-		return compound;
 	}
 
 	private CompoundTag writeItems(CompoundTag compound) {
-		super.save(compound);
+		super.saveAdditional(compound);
 		compound.put("Inventory", inventory.serializeNBT());
 		return compound;
 	}

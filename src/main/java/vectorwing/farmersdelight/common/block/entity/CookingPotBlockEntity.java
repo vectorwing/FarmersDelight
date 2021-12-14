@@ -92,8 +92,8 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	}
 
 	@Override
-	public CompoundTag save(CompoundTag compound) {
-		super.save(compound);
+	public void saveAdditional(CompoundTag compound) {
+		super.saveAdditional(compound);
 		compound.putInt("CookTime", cookTime);
 		compound.putInt("CookTimeTotal", cookTimeTotal);
 		compound.put("Container", mealContainerStack.serializeNBT());
@@ -104,7 +104,6 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		CompoundTag compoundRecipes = new CompoundTag();
 		experienceTracker.forEach((recipeId, craftedAmount) -> compoundRecipes.putInt(recipeId.toString(), craftedAmount));
 		compound.put("RecipesUsed", compoundRecipes);
-		return compound;
 	}
 
 	private CompoundTag writeItems(CompoundTag compound) {
