@@ -36,14 +36,14 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.CABBAGE_CRATE.get(),
 				ModBlocks.TOMATO_CRATE.get(),
 				ModBlocks.ONION_CRATE.get(),
-				ModBlocks.OAK_PANTRY.get(),
-				ModBlocks.BIRCH_PANTRY.get(),
-				ModBlocks.SPRUCE_PANTRY.get(),
-				ModBlocks.JUNGLE_PANTRY.get(),
-				ModBlocks.ACACIA_PANTRY.get(),
-				ModBlocks.DARK_OAK_PANTRY.get(),
-				ModBlocks.CRIMSON_PANTRY.get(),
-				ModBlocks.WARPED_PANTRY.get(),
+				ModBlocks.OAK_CABINET.get(),
+				ModBlocks.BIRCH_CABINET.get(),
+				ModBlocks.SPRUCE_CABINET.get(),
+				ModBlocks.JUNGLE_CABINET.get(),
+				ModBlocks.ACACIA_CABINET.get(),
+				ModBlocks.DARK_OAK_CABINET.get(),
+				ModBlocks.CRIMSON_CABINET.get(),
+				ModBlocks.WARPED_CABINET.get(),
 				ModBlocks.STUFFED_PUMPKIN_BLOCK.get()
 		);
 		tag(net.minecraft.tags.BlockTags.MINEABLE_WITH_HOE).add(

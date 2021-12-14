@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "side": "farmersdelight:block/crimson_cabinet_side",
+    "front": "farmersdelight:block/crimson_cabinet_front",
+    "top": "farmersdelight:block/crimson_cabinet_top"
+  }
+}

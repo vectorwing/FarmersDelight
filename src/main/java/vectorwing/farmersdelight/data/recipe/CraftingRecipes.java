@@ -264,7 +264,7 @@ public class CraftingRecipes
 				.define('#', Tags.Items.INGOTS_IRON)
 				.unlockedBy("has_brick", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BRICK))
 				.save(consumer);
-		ShapedRecipeBuilder.shaped(ModBlocks.OAK_PANTRY.get())
+		ShapedRecipeBuilder.shaped(ModBlocks.OAK_CABINET.get())
 				.pattern("___")
 				.pattern("D D")
 				.pattern("___")
@@ -272,7 +272,7 @@ public class CraftingRecipes
 				.define('D', Items.OAK_TRAPDOOR)
 				.unlockedBy("has_oak_trapdoor", InventoryChangeTrigger.TriggerInstance.hasItems(Items.OAK_TRAPDOOR))
 				.save(consumer);
-		ShapedRecipeBuilder.shaped(ModBlocks.BIRCH_PANTRY.get())
+		ShapedRecipeBuilder.shaped(ModBlocks.BIRCH_CABINET.get())
 				.pattern("___")
 				.pattern("D D")
 				.pattern("___")
@@ -280,7 +280,7 @@ public class CraftingRecipes
 				.define('D', Items.BIRCH_TRAPDOOR)
 				.unlockedBy("has_birch_trapdoor", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BIRCH_TRAPDOOR))
 				.save(consumer);
-		ShapedRecipeBuilder.shaped(ModBlocks.SPRUCE_PANTRY.get())
+		ShapedRecipeBuilder.shaped(ModBlocks.SPRUCE_CABINET.get())
 				.pattern("___")
 				.pattern("D D")
 				.pattern("___")
@@ -288,7 +288,7 @@ public class CraftingRecipes
 				.define('D', Items.SPRUCE_TRAPDOOR)
 				.unlockedBy("has_spruce_trapdoor", InventoryChangeTrigger.TriggerInstance.hasItems(Items.SPRUCE_TRAPDOOR))
 				.save(consumer);
-		ShapedRecipeBuilder.shaped(ModBlocks.JUNGLE_PANTRY.get())
+		ShapedRecipeBuilder.shaped(ModBlocks.JUNGLE_CABINET.get())
 				.pattern("___")
 				.pattern("D D")
 				.pattern("___")
@@ -296,7 +296,7 @@ public class CraftingRecipes
 				.define('D', Items.JUNGLE_TRAPDOOR)
 				.unlockedBy("has_jungle_trapdoor", InventoryChangeTrigger.TriggerInstance.hasItems(Items.JUNGLE_TRAPDOOR))
 				.save(consumer);
-		ShapedRecipeBuilder.shaped(ModBlocks.ACACIA_PANTRY.get())
+		ShapedRecipeBuilder.shaped(ModBlocks.ACACIA_CABINET.get())
 				.pattern("___")
 				.pattern("D D")
 				.pattern("___")
@@ -304,7 +304,7 @@ public class CraftingRecipes
 				.define('D', Items.ACACIA_TRAPDOOR)
 				.unlockedBy("has_acacia_trapdoor", InventoryChangeTrigger.TriggerInstance.hasItems(Items.ACACIA_TRAPDOOR))
 				.save(consumer);
-		ShapedRecipeBuilder.shaped(ModBlocks.DARK_OAK_PANTRY.get())
+		ShapedRecipeBuilder.shaped(ModBlocks.DARK_OAK_CABINET.get())
 				.pattern("___")
 				.pattern("D D")
 				.pattern("___")
@@ -312,7 +312,7 @@ public class CraftingRecipes
 				.define('D', Items.DARK_OAK_TRAPDOOR)
 				.unlockedBy("has_dark_oak_trapdoor", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DARK_OAK_TRAPDOOR))
 				.save(consumer);
-		ShapedRecipeBuilder.shaped(ModBlocks.CRIMSON_PANTRY.get())
+		ShapedRecipeBuilder.shaped(ModBlocks.CRIMSON_CABINET.get())
 				.pattern("___")
 				.pattern("D D")
 				.pattern("___")
@@ -320,7 +320,7 @@ public class CraftingRecipes
 				.define('D', Items.CRIMSON_TRAPDOOR)
 				.unlockedBy("has_crimson_trapdoor", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CRIMSON_TRAPDOOR))
 				.save(consumer);
-		ShapedRecipeBuilder.shaped(ModBlocks.WARPED_PANTRY.get())
+		ShapedRecipeBuilder.shaped(ModBlocks.WARPED_CABINET.get())
 				.pattern("___")
 				.pattern("D D")
 				.pattern("___")

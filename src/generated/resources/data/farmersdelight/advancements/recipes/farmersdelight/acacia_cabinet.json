@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:acacia_cabinet"
+    ]
+  },
+  "criteria": {
+    "has_acacia_trapdoor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:acacia_trapdoor"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:acacia_cabinet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_acacia_trapdoor",
+      "has_the_recipe"
+    ]
+  ]
+}

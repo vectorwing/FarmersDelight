@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "side": "farmersdelight:block/warped_pantry_side",
-    "front": "farmersdelight:block/warped_pantry_front",
-    "top": "farmersdelight:block/warped_pantry_top"
-  }
-}

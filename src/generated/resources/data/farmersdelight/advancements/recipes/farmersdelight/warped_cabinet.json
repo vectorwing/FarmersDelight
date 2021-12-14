@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:warped_cabinet"
+    ]
+  },
+  "criteria": {
+    "has_warped_trapdoor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:warped_trapdoor"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:warped_cabinet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_warped_trapdoor",
+      "has_the_recipe"
+    ]
+  ]
+}

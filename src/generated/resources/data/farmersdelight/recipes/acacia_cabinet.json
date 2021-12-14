@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "___",
+    "D D",
+    "___"
+  ],
+  "key": {
+    "_": {
+      "item": "minecraft:acacia_slab"
+    },
+    "D": {
+      "item": "minecraft:acacia_trapdoor"
+    }
+  },
+  "result": {
+    "item": "farmersdelight:acacia_cabinet"
+  }
+}

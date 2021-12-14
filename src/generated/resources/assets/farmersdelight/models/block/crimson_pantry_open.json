@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "side": "farmersdelight:block/crimson_pantry_side",
-    "front": "farmersdelight:block/crimson_pantry_front_open",
-    "top": "farmersdelight:block/crimson_pantry_top"
-  }
-}

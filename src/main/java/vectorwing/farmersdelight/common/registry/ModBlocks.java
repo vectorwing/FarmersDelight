@@ -15,12 +15,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.*;
-import vectorwing.farmersdelight.common.block.FeastBlock;
-import vectorwing.farmersdelight.common.block.HoneyGlazedHamBlock;
-import vectorwing.farmersdelight.common.block.RoastChickenBlock;
-import vectorwing.farmersdelight.common.block.ShepherdsPieBlock;
-import vectorwing.farmersdelight.common.block.StandingCanvasSignBlock;
-import vectorwing.farmersdelight.common.block.WallCanvasSignBlock;
 
 import java.util.function.ToIntFunction;
 
@@ -62,22 +56,22 @@ public class ModBlocks
 	// Building
 	public static final RegistryObject<Block> ROPE = BLOCKS.register("rope", RopeBlock::new);
 	public static final RegistryObject<Block> SAFETY_NET = BLOCKS.register("safety_net", SafetyNetBlock::new);
-	public static final RegistryObject<Block> OAK_PANTRY = BLOCKS.register("oak_pantry",
-			() -> new PantryBlock(Block.Properties.copy(Blocks.BARREL)));
-	public static final RegistryObject<Block> BIRCH_PANTRY = BLOCKS.register("birch_pantry",
-			() -> new PantryBlock(Block.Properties.copy(Blocks.BARREL)));
-	public static final RegistryObject<Block> SPRUCE_PANTRY = BLOCKS.register("spruce_pantry",
-			() -> new PantryBlock(Block.Properties.copy(Blocks.BARREL)));
-	public static final RegistryObject<Block> JUNGLE_PANTRY = BLOCKS.register("jungle_pantry",
-			() -> new PantryBlock(Block.Properties.copy(Blocks.BARREL)));
-	public static final RegistryObject<Block> ACACIA_PANTRY = BLOCKS.register("acacia_pantry",
-			() -> new PantryBlock(Block.Properties.copy(Blocks.BARREL)));
-	public static final RegistryObject<Block> DARK_OAK_PANTRY = BLOCKS.register("dark_oak_pantry",
-			() -> new PantryBlock(Block.Properties.copy(Blocks.BARREL)));
-	public static final RegistryObject<Block> CRIMSON_PANTRY = BLOCKS.register("crimson_pantry",
-			() -> new PantryBlock(Block.Properties.copy(Blocks.BARREL)));
-	public static final RegistryObject<Block> WARPED_PANTRY = BLOCKS.register("warped_pantry",
-			() -> new PantryBlock(Block.Properties.copy(Blocks.BARREL)));
+	public static final RegistryObject<Block> OAK_CABINET = BLOCKS.register("oak_cabinet",
+			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
+	public static final RegistryObject<Block> BIRCH_CABINET = BLOCKS.register("birch_cabinet",
+			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
+	public static final RegistryObject<Block> SPRUCE_CABINET = BLOCKS.register("spruce_cabinet",
+			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
+	public static final RegistryObject<Block> JUNGLE_CABINET = BLOCKS.register("jungle_cabinet",
+			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
+	public static final RegistryObject<Block> ACACIA_CABINET = BLOCKS.register("acacia_cabinet",
+			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
+	public static final RegistryObject<Block> DARK_OAK_CABINET = BLOCKS.register("dark_oak_cabinet",
+			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
+	public static final RegistryObject<Block> CRIMSON_CABINET = BLOCKS.register("crimson_cabinet",
+			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
+	public static final RegistryObject<Block> WARPED_CABINET = BLOCKS.register("warped_cabinet",
+			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
 	public static final RegistryObject<Block> CANVAS_RUG = BLOCKS.register("canvas_rug", CanvasRugBlock::new);
 	public static final RegistryObject<Block> TATAMI = BLOCKS.register("tatami", TatamiBlock::new);
 	public static final RegistryObject<Block> FULL_TATAMI_MAT = BLOCKS.register("full_tatami_mat", TatamiMatBlock::new);

@@ -18,7 +18,6 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.*;
-import vectorwing.farmersdelight.common.block.FeastBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
 import javax.annotation.Nullable;
@@ -143,14 +142,14 @@ public class BlockStates extends BlockStateProvider
 
 		this.axisBlock((RotatedPillarBlock) ModBlocks.STRAW_BALE.get());
 
-		this.pantryBlock(ModBlocks.OAK_PANTRY.get(), "oak");
-		this.pantryBlock(ModBlocks.BIRCH_PANTRY.get(), "birch");
-		this.pantryBlock(ModBlocks.SPRUCE_PANTRY.get(), "spruce");
-		this.pantryBlock(ModBlocks.JUNGLE_PANTRY.get(), "jungle");
-		this.pantryBlock(ModBlocks.ACACIA_PANTRY.get(), "acacia");
-		this.pantryBlock(ModBlocks.DARK_OAK_PANTRY.get(), "dark_oak");
-		this.pantryBlock(ModBlocks.CRIMSON_PANTRY.get(), "crimson");
-		this.pantryBlock(ModBlocks.WARPED_PANTRY.get(), "warped");
+		this.cabinetBlock(ModBlocks.OAK_CABINET.get(), "oak");
+		this.cabinetBlock(ModBlocks.BIRCH_CABINET.get(), "birch");
+		this.cabinetBlock(ModBlocks.SPRUCE_CABINET.get(), "spruce");
+		this.cabinetBlock(ModBlocks.JUNGLE_CABINET.get(), "jungle");
+		this.cabinetBlock(ModBlocks.ACACIA_CABINET.get(), "acacia");
+		this.cabinetBlock(ModBlocks.DARK_OAK_CABINET.get(), "dark_oak");
+		this.cabinetBlock(ModBlocks.CRIMSON_CABINET.get(), "crimson");
+		this.cabinetBlock(ModBlocks.WARPED_CABINET.get(), "warped");
 
 		this.pieBlock(ModBlocks.APPLE_PIE.get());
 		this.pieBlock(ModBlocks.CHOCOLATE_PIE.get());
@@ -234,13 +233,13 @@ public class BlockStates extends BlockStateProvider
 				models().cubeBottomTop(blockName(block), resourceBlock(cropName + "_crate_side"), resourceBlock("crate_bottom"), resourceBlock(cropName + "_crate_top")));
 	}
 
-	public void pantryBlock(Block block, String woodType) {
+	public void cabinetBlock(Block block, String woodType) {
 		this.horizontalBlock(block, state -> {
-			String suffix = state.getValue(PantryBlock.OPEN) ? "_open" : "";
+			String suffix = state.getValue(CabinetBlock.OPEN) ? "_open" : "";
 			return models().orientable(blockName(block) + suffix,
-					resourceBlock(woodType + "_pantry_side"),
-					resourceBlock(woodType + "_pantry_front" + suffix),
-					resourceBlock(woodType + "_pantry_top"));
+					resourceBlock(woodType + "_cabinet_side"),
+					resourceBlock(woodType + "_cabinet_front" + suffix),
+					resourceBlock(woodType + "_cabinet_top"));
 		});
 	}
 
