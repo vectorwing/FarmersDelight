@@ -8,7 +8,7 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
-import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.ForgeModelBakery;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -33,7 +33,7 @@ public class ClientSetupEvents
 
 	@SubscribeEvent
 	public static void onModelRegister(ModelRegistryEvent event) {
-		ModelLoader.addSpecialModel(new ModelResourceLocation(new ResourceLocation(FarmersDelight.MODID, "skillet_cooking"), "inventory"));
+		ForgeModelBakery.addSpecialModel(new ModelResourceLocation(new ResourceLocation(FarmersDelight.MODID, "skillet_cooking"), "inventory"));
 	}
 
 	@SubscribeEvent
@@ -49,7 +49,7 @@ public class ClientSetupEvents
 
 	@SubscribeEvent
 	public static void onStitchEvent(TextureStitchEvent.Pre event) {
-		ResourceLocation stitching = event.getMap().location();
+		ResourceLocation stitching = event.getAtlas().location();
 		if (stitching.equals(new ResourceLocation("textures/atlas/signs.png"))) {
 			event.addSprite(ModAtlases.BLANK_CANVAS_SIGN_MATERIAL.texture());
 			for (Material material : ModAtlases.DYED_CANVAS_SIGN_MATERIALS.values()) {

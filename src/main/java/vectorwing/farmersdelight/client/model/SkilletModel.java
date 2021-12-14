@@ -15,7 +15,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.ForgeModelBakery;
 import net.minecraftforge.client.model.SimpleModelState;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -127,10 +127,10 @@ public class SkilletModel implements BakedModel
 			BakedModel ingredientBaked;
 			if (ingredientUnbaked instanceof BlockModel bm && ((BlockModel) ingredientUnbaked).getRootModel() == ModelBakery.GENERATION_MARKER) {
 				ingredientBaked = new ItemModelGenerator()
-						.generateBlockModel(ModelLoader.defaultTextureGetter(), bm)
-						.bake(bakery, bm, ModelLoader.defaultTextureGetter(), transform, name, false);
+						.generateBlockModel(ForgeModelBakery.defaultTextureGetter(), bm)
+						.bake(bakery, bm, ForgeModelBakery.defaultTextureGetter(), transform, name, false);
 			} else {
-				ingredientBaked = ingredientUnbaked.bake(bakery, ModelLoader.defaultTextureGetter(), transform, name);
+				ingredientBaked = ingredientUnbaked.bake(bakery, ForgeModelBakery.defaultTextureGetter(), transform, name);
 			}
 
 			for (Direction e : Direction.values()) {

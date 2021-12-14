@@ -122,7 +122,7 @@ public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlo
 	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
 		BlockState state = super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 		if (!state.isAir()) {
-			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+			worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 			if (facing == Direction.UP) {
 				return state.setValue(SUPPORTING, isSupportingRiceUpper(facingState));
 			}

@@ -6,7 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.feature.structures.SinglePoolElement;
 import net.minecraft.world.level.levelgen.feature.structures.StructurePoolElement;
 import net.minecraft.world.level.levelgen.feature.structures.StructureTemplatePool;
-import net.minecraftforge.fmlserverevents.FMLServerAboutToStartEvent;
+import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class VillageStructures
 {
-	public static void addNewVillageBuilding(final FMLServerAboutToStartEvent event) {
+	public static void addNewVillageBuilding(final ServerAboutToStartEvent event) {
 		Registry<StructureTemplatePool> templatePool = event.getServer().registryAccess().registry(Registry.TEMPLATE_POOL_REGISTRY).get();
 
 		VillageStructures.addBuildingToPool(templatePool, new ResourceLocation("minecraft:village/plains/houses"), FarmersDelight.MODID + ":village/houses/plains_compost_pile", 5);
