@@ -1,63 +1,70 @@
-//package vectorwing.farmersdelight.common.world;
-//
-//import com.google.common.collect.ImmutableSet;
-//import net.minecraft.core.Registry;
-//import net.minecraft.data.BuiltinRegistries;
-//import net.minecraft.data.worldgen.Features;
-//import net.minecraft.world.level.block.Blocks;
-//import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-//import net.minecraft.world.level.levelgen.feature.Feature;
-//import net.minecraft.world.level.levelgen.feature.blockplacers.SimpleBlockPlacer;
-//import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-//import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
-//import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
-//import vectorwing.farmersdelight.common.registry.ModBiomeFeatures;
-//import vectorwing.farmersdelight.common.registry.ModBlocks;
-//import vectorwing.farmersdelight.common.Configuration;
-//
-//public class WildCropGeneration
-//{
-//	public static final RandomPatchConfiguration CABBAGE_PATCH_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(
-//			new SimpleStateProvider(ModBlocks.WILD_CABBAGES.get().defaultBlockState()), new SimpleBlockPlacer())).tries(64).xspread(2).zspread(2).whitelist(ImmutableSet.of(Blocks.SAND)).noProjection().build();
-//	public static final RandomPatchConfiguration ONION_PATCH_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(
-//			new SimpleStateProvider(ModBlocks.WILD_ONIONS.get().defaultBlockState()), new SimpleBlockPlacer())).tries(64).xspread(2).zspread(2).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK)).noProjection().build();
-//	public static final RandomPatchConfiguration TOMATO_PATCH_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(
-//			new SimpleStateProvider(ModBlocks.WILD_TOMATOES.get().defaultBlockState()), new SimpleBlockPlacer())).tries(64).xspread(2).zspread(2).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK, Blocks.RED_SAND, Blocks.SAND)).noProjection().build();
-//	public static final RandomPatchConfiguration CARROT_PATCH_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(
-//			new SimpleStateProvider(ModBlocks.WILD_CARROTS.get().defaultBlockState()), new SimpleBlockPlacer())).tries(64).xspread(2).zspread(2).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK)).noProjection().build();
-//	public static final RandomPatchConfiguration POTATO_PATCH_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(
-//			new SimpleStateProvider(ModBlocks.WILD_POTATOES.get().defaultBlockState()), new SimpleBlockPlacer())).tries(64).xspread(2).zspread(2).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK)).noProjection().build();
-//	public static final RandomPatchConfiguration BEETROOT_PATCH_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(
-//			new SimpleStateProvider(ModBlocks.WILD_BEETROOTS.get().defaultBlockState()), new SimpleBlockPlacer())).tries(64).xspread(2).zspread(2).whitelist(ImmutableSet.of(Blocks.SAND)).noProjection().build();
-//	public static final RandomPatchConfiguration RICE_PATCH_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(
-//			new SimpleStateProvider(ModBlocks.WILD_RICE.get().defaultBlockState()), new SimpleBlockPlacer())).tries(64).xspread(4).zspread(4).whitelist(ImmutableSet.of(Blocks.DIRT)).noProjection().build();
-//
-//	public static final ConfiguredFeature<?, ?> PATCH_WILD_CABBAGES = Feature.RANDOM_PATCH.configured(CABBAGE_PATCH_CONFIG)
-//			.decorated(Features.Decorators.HEIGHTMAP_SQUARE).rarity(Configuration.CHANCE_WILD_CABBAGES.get());
-//	public static final ConfiguredFeature<?, ?> PATCH_WILD_ONIONS = Feature.RANDOM_PATCH.configured(ONION_PATCH_CONFIG)
-//			.decorated(Features.Decorators.HEIGHTMAP_DOUBLE_SQUARE).rarity(Configuration.CHANCE_WILD_ONIONS.get());
-//	public static final ConfiguredFeature<?, ?> PATCH_WILD_TOMATOES = Feature.RANDOM_PATCH.configured(TOMATO_PATCH_CONFIG)
-//			.decorated(Features.Decorators.HEIGHTMAP_DOUBLE_SQUARE).rarity(Configuration.CHANCE_WILD_TOMATOES.get());
-//	public static final ConfiguredFeature<?, ?> PATCH_WILD_CARROTS = Feature.RANDOM_PATCH.configured(CARROT_PATCH_CONFIG)
-//			.decorated(Features.Decorators.HEIGHTMAP_DOUBLE_SQUARE).rarity(Configuration.CHANCE_WILD_CARROTS.get());
-//	public static final ConfiguredFeature<?, ?> PATCH_WILD_POTATOES = Feature.RANDOM_PATCH.configured(POTATO_PATCH_CONFIG)
-//			.decorated(Features.Decorators.HEIGHTMAP_DOUBLE_SQUARE).rarity(Configuration.CHANCE_WILD_POTATOES.get());
-//	public static final ConfiguredFeature<?, ?> PATCH_WILD_BEETROOTS = Feature.RANDOM_PATCH.configured(BEETROOT_PATCH_CONFIG)
-//			.decorated(Features.Decorators.HEIGHTMAP_SQUARE).rarity(Configuration.CHANCE_WILD_BEETROOTS.get());
-//	public static final ConfiguredFeature<?, ?> PATCH_WILD_RICE = ModBiomeFeatures.WILD_RICE.get().configured(RICE_PATCH_CONFIG)
-//			.decorated(Features.Decorators.HEIGHTMAP_SQUARE).rarity(Configuration.CHANCE_WILD_RICE.get());
-//
-//	private static <FC extends FeatureConfiguration> ConfiguredFeature<FC, ?> register(String key, ConfiguredFeature<FC, ?> configuredFeature) {
-//		return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, key, configuredFeature);
-//	}
-//
-//	public static void registerConfiguredFeatures() {
-//		register("patch_wild_cabbages", PATCH_WILD_CABBAGES);
-//		register("patch_wild_onions", PATCH_WILD_ONIONS);
-//		register("patch_wild_tomatoes", PATCH_WILD_TOMATOES);
-//		register("patch_wild_carrots", PATCH_WILD_CARROTS);
-//		register("patch_wild_potatoes", PATCH_WILD_POTATOES);
-//		register("patch_wild_beetroots", PATCH_WILD_BEETROOTS);
-//		register("patch_wild_rice", PATCH_WILD_RICE);
-//	}
-//}
+package vectorwing.farmersdelight.common.world;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.placement.BiomeFilter;
+import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.placement.RarityFilter;
+import vectorwing.farmersdelight.common.registry.ModBiomeFeatures;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
+
+import java.util.List;
+
+public class WildCropGeneration
+{
+	public static final ConfiguredFeature<RandomPatchConfiguration, ?> FEATURE_PATCH_WILD_CABBAGES = FeatureUtils.register("patch_wild_cabbages",
+			Feature.RANDOM_PATCH.configured(FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK.configured(
+					new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_CABBAGES.get()))), List.of(Blocks.SAND))));
+
+	public static final ConfiguredFeature<RandomPatchConfiguration, ?> FEATURE_PATCH_WILD_ONIONS = FeatureUtils.register("patch_wild_onions",
+			Feature.RANDOM_PATCH.configured(new RandomPatchConfiguration(64, 4, 3, () ->
+					Feature.SIMPLE_BLOCK.configured(new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_ONIONS.get())))
+							.filtered(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesBlock(Blocks.GRASS_BLOCK, new BlockPos(0, -1, 0)))))));
+
+	public static final ConfiguredFeature<RandomPatchConfiguration, ?> FEATURE_PATCH_WILD_TOMATOES = FeatureUtils.register("patch_wild_tomatoes",
+			Feature.RANDOM_PATCH.configured(new RandomPatchConfiguration(64, 4, 3, () ->
+					Feature.SIMPLE_BLOCK.configured(new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_TOMATOES.get())))
+							.filtered(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesBlocks(List.of(Blocks.GRASS_BLOCK, Blocks.RED_SAND, Blocks.SAND), new BlockPos(0, -1, 0)))))));
+
+	public static final ConfiguredFeature<RandomPatchConfiguration, ?> FEATURE_PATCH_WILD_CARROTS = FeatureUtils.register("patch_wild_carrots",
+			Feature.RANDOM_PATCH.configured(new RandomPatchConfiguration(64, 4, 3, () ->
+					Feature.SIMPLE_BLOCK.configured(new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_CARROTS.get())))
+							.filtered(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesBlock(Blocks.GRASS_BLOCK, new BlockPos(0, -1, 0)))))));
+
+	public static final ConfiguredFeature<RandomPatchConfiguration, ?> FEATURE_PATCH_WILD_POTATOES = FeatureUtils.register("patch_wild_potatoes",
+			Feature.RANDOM_PATCH.configured(new RandomPatchConfiguration(64, 4, 3, () ->
+					Feature.SIMPLE_BLOCK.configured(new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_POTATOES.get())))
+							.filtered(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesBlock(Blocks.GRASS_BLOCK, new BlockPos(0, -1, 0)))))));
+
+	public static final ConfiguredFeature<RandomPatchConfiguration, ?> FEATURE_PATCH_WILD_BEETROOTS = FeatureUtils.register("patch_wild_beetroots",
+			Feature.RANDOM_PATCH.configured(FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK.configured(
+					new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_BEETROOTS.get()))), List.of(Blocks.SAND))));
+
+	public static final ConfiguredFeature<RandomPatchConfiguration, ?> FEATURE_PATCH_WILD_RICE = FeatureUtils.register("patch_wild_beetroots",
+			ModBiomeFeatures.WILD_RICE.get().configured(FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK.configured(
+					new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_RICE.get()))), List.of(Blocks.DIRT))));
+
+	public static final PlacedFeature PATCH_WILD_CABBAGES = PlacementUtils.register("patch_wild_cabbages",
+			FEATURE_PATCH_WILD_CABBAGES.placed(RarityFilter.onAverageOnceEvery(50), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+	public static final PlacedFeature PATCH_WILD_ONIONS = PlacementUtils.register("patch_wild_onions",
+			FEATURE_PATCH_WILD_ONIONS.placed(RarityFilter.onAverageOnceEvery(100), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+	public static final PlacedFeature PATCH_WILD_TOMATOES = PlacementUtils.register("patch_wild_tomatoes",
+			FEATURE_PATCH_WILD_TOMATOES.placed(RarityFilter.onAverageOnceEvery(100), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+	public static final PlacedFeature PATCH_WILD_CARROTS = PlacementUtils.register("patch_wild_carrots",
+			FEATURE_PATCH_WILD_CARROTS.placed(RarityFilter.onAverageOnceEvery(100), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+	public static final PlacedFeature PATCH_WILD_POTATOES = PlacementUtils.register("patch_wild_potatoes",
+			FEATURE_PATCH_WILD_POTATOES.placed(RarityFilter.onAverageOnceEvery(100), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+	public static final PlacedFeature PATCH_WILD_BEETROOTS = PlacementUtils.register("patch_wild_beetroots",
+			FEATURE_PATCH_WILD_BEETROOTS.placed(RarityFilter.onAverageOnceEvery(50), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+	public static final PlacedFeature PATCH_WILD_RICE = PlacementUtils.register("patch_wild_rice",
+			FEATURE_PATCH_WILD_RICE.placed(RarityFilter.onAverageOnceEvery(10), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+}
