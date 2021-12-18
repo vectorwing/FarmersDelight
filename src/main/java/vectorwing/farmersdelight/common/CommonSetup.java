@@ -16,7 +16,7 @@ import vectorwing.farmersdelight.common.mixin.accessor.ChickenEntityAccessor;
 import vectorwing.farmersdelight.common.mixin.accessor.PigEntityAccessor;
 import vectorwing.farmersdelight.common.registry.ModAdvancements;
 import vectorwing.farmersdelight.common.registry.ModItems;
-//import vectorwing.farmersdelight.common.world.WildCropGeneration;
+import vectorwing.farmersdelight.common.world.WildCropGeneration;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,7 +28,7 @@ public class CommonSetup
 		event.enqueueWork(() -> {
 			registerCompostables();
 			registerDispenserBehaviors();
-//			WildCropGeneration.registerConfiguredFeatures();
+			WildCropGeneration.registerWildCropGeneration();
 
 			List<ItemStack> chickenFood = new ArrayList<>();
 			Collections.addAll(chickenFood, ChickenEntityAccessor.getFoodItems().getItems());
