@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.4
+
+### Fixes
+- Fix duplication bug when adding stacks into a Skillet;
+
 ## 0.5.3
 
 ### Updates
