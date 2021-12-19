@@ -7,6 +7,7 @@
 
 ### Fixes
 - Fix duplication bug when adding stacks into a Skillet;
+- Fix Cooking Pot not updating comparator signals for non-input slot changes;
 
 ## 0.5.3
 
