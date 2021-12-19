@@ -2,6 +2,9 @@
 
 ## 0.5.4
 
+### Updates
+- Updated zh_CN translation (thanks, WuzgXY-GitHub!)
+
 ### Fixes
 - Fix duplication bug when adding stacks into a Skillet;
 
