@@ -54,6 +54,11 @@ public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterlogged
 	}
 
 	@Override
+	protected boolean mayPlaceOn(BlockState state, BlockGetter getter, BlockPos pos) {
+		return state.is(BlockTags.DIRT) || state.is(Blocks.SAND);
+	}
+
+	@Override
 	public boolean canBeReplaced(BlockState state, BlockPlaceContext useContext) {
 		return false;
 	}
@@ -89,11 +94,6 @@ public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterlogged
 			}
 		}
 	}
-
-//	public void placeAt(LevelAccessor worldIn, BlockState pState, BlockPos pos, int flags) {
-//		worldIn.setBlock(pos, this.defaultBlockState().setValue(WATERLOGGED, true).setValue(HALF, DoubleBlockHalf.LOWER), flags);
-//		worldIn.setBlock(pos.above(), this.defaultBlockState().setValue(WATERLOGGED, false).setValue(HALF, DoubleBlockHalf.UPPER), flags);
-//	}
 
 	@Override
 	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
