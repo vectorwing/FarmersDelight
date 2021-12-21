@@ -707,7 +707,7 @@ bbb8f1c1e73a419715b0ecd914fcf9ed5a351795 data/farmersdelight/tags/entity_types/d
 d8299fb23c7107366799155646e0ac9ff5b937d2 data/farmersdelight/tags/items/canvas_signs.json
 19f40df906e79317ce8e573533c98ef558a1b412 data/farmersdelight/tags/items/offhand_equipment.json
 d69c7f77c9f395881dc13e7fde263d59394c516b data/farmersdelight/tags/items/straw_harvesters.json
-4329b636bcfb42626e8d9e78bd807473ac202e54 data/farmersdelight/tags/items/tools/knives.json
+f607cec7f36dff78aa0e9b7b158ec6044e53bd25 data/farmersdelight/tags/items/tools/knives.json
 8e09f6479e2e3da057594373b46e19b31457cf6e data/farmersdelight/tags/items/wild_crops.json
 b8377da08a307824c7029d914dedc4898704e681 data/farmersdelight/tags/items/wolf_prey.json
 721feacb3244b5607c0a12563963ca72b0be0ca9 data/forge/tags/blocks/dirt.json
@@ -752,10 +752,10 @@ cb360831d0cc362730ac23dab8e1b4bff97ac44c data/forge/tags/items/salad_ingredients
 94223ce4c11ce41d385a6cc8eb2d8efa1f48a6ad data/forge/tags/items/seeds/rice.json
 357e6a28383b4c9a08045b414da6d1ecd67a751f data/forge/tags/items/seeds/tomato.json
 86aa797c8e353c7be78e6394e1138119a1553db3 data/forge/tags/items/tools.json
-65dfa813faf1ed0999b1a62805b0223169905afe data/forge/tags/items/tools/axes.json
-4329b636bcfb42626e8d9e78bd807473ac202e54 data/forge/tags/items/tools/knives.json
-422be3ad75c09ae455605d0e8dd60f4469daef4b data/forge/tags/items/tools/pickaxes.json
-5cf85df61d012beb08d3aa1bae682131418e33eb data/forge/tags/items/tools/shovels.json
+8461c572dae84ff52cf2c9c6f83e0a7b6926459c data/forge/tags/items/tools/axes.json
+f607cec7f36dff78aa0e9b7b158ec6044e53bd25 data/forge/tags/items/tools/knives.json
+19a1a175f25fe7795cb8d81dc9874f073e1fde67 data/forge/tags/items/tools/pickaxes.json
+567759fa810f30598127332eb708bdc7ba17cdb1 data/forge/tags/items/tools/shovels.json
 e4f35db1cdd4410ca01a497a62322ad35bf0e137 data/forge/tags/items/vegetables.json
 be34126249ed7317b23ed824a011cda28cea13f5 data/forge/tags/items/vegetables/beetroot.json
 42065df7e74f6d89a1937c7876e342a03cdb97f2 data/forge/tags/items/vegetables/carrot.json
