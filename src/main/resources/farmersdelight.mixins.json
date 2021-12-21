@@ -12,8 +12,8 @@
     "accessor.RecipeManagerAccessor"
   ],
   "client": [
-    "HideBlockBreakProgressMixin",
-    "CanvasSignMaterialMixin"
+    "CanvasSignMaterialMixin",
+    "HideBlockBreakProgressMixin"
   ],
   "injectors": {
     "defaultRequire": 1
