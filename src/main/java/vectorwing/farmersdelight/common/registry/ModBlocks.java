@@ -169,19 +169,19 @@ public class ModBlocks
 
 	// Wild Crops
 	public static final RegistryObject<Block> WILD_CABBAGES = BLOCKS.register("wild_cabbages",
-			() -> new WildCropBlock(MobEffects.DAMAGE_BOOST, 6, Block.Properties.copy(Blocks.TALL_GRASS).lightLevel((state) -> 15)));
+			() -> new WildCropBlock(MobEffects.DAMAGE_BOOST, 6, Block.Properties.copy(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_ONIONS = BLOCKS.register("wild_onions",
-			() -> new WildCropBlock(MobEffects.FIRE_RESISTANCE, 6, Block.Properties.copy(Blocks.TALL_GRASS).lightLevel((state) -> 15), false));
+			() -> new WildCropBlock(MobEffects.FIRE_RESISTANCE, 6, Block.Properties.copy(Blocks.TALL_GRASS), false));
 	public static final RegistryObject<Block> WILD_TOMATOES = BLOCKS.register("wild_tomatoes",
-			() -> new WildCropBlock(MobEffects.POISON, 10, Block.Properties.copy(Blocks.TALL_GRASS).lightLevel((state) -> 15)));
+			() -> new WildCropBlock(MobEffects.POISON, 10, Block.Properties.copy(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_CARROTS = BLOCKS.register("wild_carrots",
-			() -> new WildCropBlock(MobEffects.DIG_SLOWDOWN, 6, Block.Properties.copy(Blocks.TALL_GRASS).lightLevel((state) -> 15), false));
+			() -> new WildCropBlock(MobEffects.DIG_SLOWDOWN, 6, Block.Properties.copy(Blocks.TALL_GRASS), false));
 	public static final RegistryObject<Block> WILD_POTATOES = BLOCKS.register("wild_potatoes",
-			() -> new WildCropBlock(MobEffects.CONFUSION, 8, Block.Properties.copy(Blocks.TALL_GRASS).lightLevel((state) -> 15)));
+			() -> new WildCropBlock(MobEffects.CONFUSION, 8, Block.Properties.copy(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_BEETROOTS = BLOCKS.register("wild_beetroots",
-			() -> new WildCropBlock(MobEffects.WATER_BREATHING, 8, Block.Properties.copy(Blocks.TALL_GRASS).lightLevel((state) -> 15)));
+			() -> new WildCropBlock(MobEffects.WATER_BREATHING, 8, Block.Properties.copy(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_RICE = BLOCKS.register("wild_rice",
-			() -> new WildRiceBlock(Block.Properties.copy(Blocks.TALL_GRASS).lightLevel((state) -> 15)));
+			() -> new WildRiceBlock(Block.Properties.copy(Blocks.TALL_GRASS)));
 
 	// Crops
 	public static final RegistryObject<Block> CABBAGE_CROP = BLOCKS.register("cabbages",
