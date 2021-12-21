@@ -448,8 +448,8 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 			protected void onContentsChanged(int slot) {
 				if (slot >= 0 && slot < MEAL_DISPLAY_SLOT) {
 					checkNewRecipe = true;
-					inventoryChanged();
 				}
+				inventoryChanged();
 			}
 		};
 	}

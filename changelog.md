@@ -25,6 +25,27 @@
   - Mushroom Stew and Beetroot Soup both grant 3 minutes of Comfort;
   - Rabbit Stew grants 5 minutes of Comfort, as well as a short burst of Jump Boost II;
 
+## 0.5.4
+
+### Updates
+- Updated zh_CN translation (thanks, WuzgXY-GitHub!)
+
+### Fixes
+- Fix duplication bug when adding stacks into a Skillet;
+- Fix Cooking Pot not updating comparator signals for non-input slot changes;
+
+## 0.5.3
+
+### Updates
+- Mutton Wrap no longer needs milk, and is made with an Onion instead of a Tomato;
+- Cooking Pot is easier to mine by hand;
+- Updated de_DE translation (thanks, DaLumma!);
+
+### Fixes
+- Fix crashes related to calling unbound tags on ItemTooltipEvent;
+  - This means any items in `comfort_foods` will work, but won't have an effect tooltip to them;
+- Fix Canvas Sign mixin not being marked as client;
+
 ## 0.5.2
 
 ### Additions

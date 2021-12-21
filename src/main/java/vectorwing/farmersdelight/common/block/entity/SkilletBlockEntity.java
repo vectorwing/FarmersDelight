@@ -172,7 +172,7 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 			cookingTimeTotal = SkilletBlock.getSkilletCookingTime(recipe.get().getCookingTime(), fireAspectLevel);
 			boolean wasEmpty = getStoredStack().isEmpty();
 			ItemStack remainderStack = inventory.insertItem(0, addedStack.copy(), false);
-			if (!ItemStack.isSame(remainderStack, addedStack)) {
+			if (!ItemStack.matches(remainderStack, addedStack)) {
 				lastRecipeID = recipe.get().getId();
 				cookingTime = 0;
 				if (wasEmpty && level != null && isHeated(level, worldPosition)) {
