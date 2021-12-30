@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -38,20 +39,8 @@ import java.util.Set;
 
 public class KnifeItem extends DiggerItem
 {
-	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet();
-
 	public KnifeItem(Tier tier, float attackDamageIn, float attackSpeedIn, Properties properties) {
 		super(attackDamageIn, attackSpeedIn, tier, ModTags.MINEABLE_WITH_KNIFE, properties);
-	}
-
-	@Override
-	public float getDestroySpeed(ItemStack stack, BlockState state) {
-		Material material = state.getMaterial();
-		if (EFFECTIVE_ON.contains(state.getBlock())) return this.speed;
-		return material != Material.WOOL
-				&& material != Material.CLOTH_DECORATION
-				&& material != Material.CAKE
-				&& material != Material.WEB ? super.getDestroySpeed(stack, state) : this.speed;
 	}
 
 	@Override
@@ -84,9 +73,10 @@ public class KnifeItem extends DiggerItem
 			Level world = event.getWorld();
 			BlockPos pos = event.getPos();
 			BlockState state = event.getWorld().getBlockState(pos);
+			Block block = state.getBlock();
 			ItemStack toolStack = event.getPlayer().getItemInHand(event.getHand());
 
-			if (state.getBlock() == Blocks.CAKE && ModTags.KNIVES.contains(toolStack.getItem())) {
+			if (block == Blocks.CAKE && ModTags.KNIVES.contains(toolStack.getItem())) {
 				int bites = state.getValue(CakeBlock.BITES);
 				if (bites < 6) {
 					world.setBlock(pos, state.setValue(CakeBlock.BITES, bites + 1), 3);
@@ -102,6 +92,7 @@ public class KnifeItem extends DiggerItem
 		}
 	}
 
+	@Override
 	public InteractionResult useOn(UseOnContext context) {
 		Level world = context.getLevel();
 		ItemStack toolStack = context.getItemInHand();

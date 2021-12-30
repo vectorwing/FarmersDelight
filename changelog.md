@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.0.1
+
+### Additions
+- `farmersdelight:straw_blocks` - Tag for blocks made (predominantly) out of Straw. Mineable with knives by default;
+
+### Updates
+- `farmersdelight:mineable/knife` has been properly configured:
+  - Previously hardcoded material checks are now done entirey within the tag;
+  - Included all candle cake variants, cobwebs, `#carpet` and `#wool`;
+  - Included `forge:mineable/knife` by default;
+
+### Fixes
+- Fix `forge:mineable/knife` being registered but not generated, causing reload problems on servers
+
 ## 1.0.0
 - 1.17 and 1.18 port! Codebase has been cleaned up and refactored;
 
