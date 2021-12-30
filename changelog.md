@@ -6,6 +6,7 @@
 - `farmersdelight:straw_blocks` - Tag for blocks made (predominantly) out of Straw. Mineable with knives by default;
 
 ### Updates
+- Candle cakes can now be sliced with a knife, dropping the first slice together with the candle;
 - `farmersdelight:mineable/knife` has been properly configured:
   - Previously hardcoded material checks are now done entirey within the tag;
   - Included all candle cake variants, cobwebs, `#carpet` and `#wool`;

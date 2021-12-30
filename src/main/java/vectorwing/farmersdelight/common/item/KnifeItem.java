@@ -70,13 +70,28 @@ public class KnifeItem extends DiggerItem
 		@SubscribeEvent
 		@SuppressWarnings("unused")
 		public static void onCakeInteraction(PlayerInteractEvent.RightClickBlock event) {
+			ItemStack toolStack = event.getPlayer().getItemInHand(event.getHand());
+
+			if (!ModTags.KNIVES.contains(toolStack.getItem())) {
+				return;
+			}
+
 			Level world = event.getWorld();
 			BlockPos pos = event.getPos();
 			BlockState state = event.getWorld().getBlockState(pos);
 			Block block = state.getBlock();
-			ItemStack toolStack = event.getPlayer().getItemInHand(event.getHand());
 
-			if (block == Blocks.CAKE && ModTags.KNIVES.contains(toolStack.getItem())) {
+			if (BlockTags.CANDLE_CAKES.contains(block)) {
+				world.setBlock(pos, Blocks.CAKE.defaultBlockState().setValue(CakeBlock.BITES, 1), 3);
+				Block.dropResources(state, world, pos);
+				Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ModItems.CAKE_SLICE.get()));
+				world.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
+
+				event.setCancellationResult(InteractionResult.SUCCESS);
+				event.setCanceled(true);
+			}
+
+			if (block == Blocks.CAKE) {
 				int bites = state.getValue(CakeBlock.BITES);
 				if (bites < 6) {
 					world.setBlock(pos, state.setValue(CakeBlock.BITES, bites + 1), 3);
