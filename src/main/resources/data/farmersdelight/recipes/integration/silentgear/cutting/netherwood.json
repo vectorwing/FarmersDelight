@@ -12,7 +12,8 @@
     }
   ],
   "tool": {
-    "type": "axe"
+    "type": "farmersdelight:tool_action",
+    "action": "axe_strip"
   },
   "result": [
     {
