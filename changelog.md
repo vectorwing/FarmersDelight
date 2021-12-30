@@ -13,7 +13,8 @@
   - Included `forge:mineable/knife` by default;
 
 ### Fixes
-- Fix `forge:mineable/knife` being registered but not generated, causing reload problems on servers
+- Fix `forge:mineable/knife` being registered but not generated, causing reload problems on servers;
+- Fix some langs still referring to `_pantry` IDs instead of `_cabinet`;
 
 ## 1.0.0
 - 1.17 and 1.18 port! Codebase has been cleaned up and refactored;
