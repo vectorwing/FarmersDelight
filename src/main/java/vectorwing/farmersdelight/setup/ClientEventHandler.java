@@ -16,6 +16,7 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.client.gui.ComfortHealthOverlay;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.client.gui.NourishedHungerOverlay;
 import vectorwing.farmersdelight.client.particles.StarParticle;
@@ -88,6 +89,7 @@ public class ClientEventHandler
 		ScreenManager.register(ModContainerTypes.COOKING_POT.get(), CookingPotScreen::new);
 
 		NourishedHungerOverlay.init();
+		ComfortHealthOverlay.init();
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
