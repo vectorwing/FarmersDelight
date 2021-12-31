@@ -52,6 +52,7 @@ public class Configuration
 	public static final String CATEGORY_CLIENT = "client";
 
 	public static ForgeConfigSpec.BooleanValue NOURISHED_HUNGER_OVERLAY;
+	public static ForgeConfigSpec.BooleanValue COMFORT_HEALTH_OVERLAY;
 	public static ForgeConfigSpec.BooleanValue FOOD_EFFECT_TOOLTIP;
 
 	static {
@@ -154,6 +155,8 @@ public class Configuration
 		CLIENT_BUILDER.comment("Client settings").push(CATEGORY_CLIENT);
 		NOURISHED_HUNGER_OVERLAY = CLIENT_BUILDER.comment("Should the hunger bar have a gilded overlay when the player has the Nourishment effect?")
 				.define("nourishmentHungerOverlay", true);
+		COMFORT_HEALTH_OVERLAY = CLIENT_BUILDER.comment("Should the health bar have a silver sheen when the player has the Comfort effect?")
+				.define("comfortHealthOverlay", true);
 		FOOD_EFFECT_TOOLTIP = CLIENT_BUILDER.comment("Should meal and drink tooltips display which effects they provide?")
 				.define("foodEffectTooltip", true);
 		CLIENT_BUILDER.pop();

@@ -40,5 +40,6 @@ public class ClientSetup
 		MenuScreens.register(ModContainerTypes.COOKING_POT.get(), CookingPotScreen::new);
 
 		NourishmentHungerOverlay.init();
+		ComfortHealthOverlay.init();
 	}
 }

@@ -54,11 +54,13 @@ public class ComfortEffect extends MobEffect
 
 	@Override
 	public void applyEffectTick(LivingEntity entity, int amplifier) {
-		entity.setTicksFrozen(0);
+		if (entity.getHealth() < entity.getMaxHealth()) {
+			entity.heal(1.0F);
+		}
 	}
 
 	@Override
 	public boolean isDurationEffectTick(int duration, int amplifier) {
-		return true;
+		return duration % 80 == 0;
 	}
 }
