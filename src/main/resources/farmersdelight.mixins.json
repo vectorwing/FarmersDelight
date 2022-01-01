@@ -7,8 +7,6 @@
     "CampfireBaleMixin",
     "KeepRichSoilMixin",
     "SoupItemMixin",
-    "accessor.ChickenEntityAccessor",
-    "accessor.PigEntityAccessor",
     "accessor.RecipeManagerAccessor"
   ],
   "client": [

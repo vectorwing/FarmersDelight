@@ -1,10 +1,13 @@
 package vectorwing.farmersdelight.common;
 
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.animal.Chicken;
+import net.minecraft.world.entity.animal.Parrot;
+import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctions;
+import net.minecraftforge.common.crafting.CompoundIngredient;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import vectorwing.farmersdelight.common.block.entity.dispenser.CuttingBoardDispenseBehavior;
@@ -12,15 +15,12 @@ import vectorwing.farmersdelight.common.crafting.condition.VanillaCrateEnabledCo
 import vectorwing.farmersdelight.common.loot.function.CopyMealFunction;
 import vectorwing.farmersdelight.common.loot.function.CopySkilletFunction;
 import vectorwing.farmersdelight.common.loot.function.SmokerCookFunction;
-import vectorwing.farmersdelight.common.mixin.accessor.ChickenEntityAccessor;
-import vectorwing.farmersdelight.common.mixin.accessor.PigEntityAccessor;
 import vectorwing.farmersdelight.common.registry.ModAdvancements;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.world.WildCropGeneration;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 public class CommonSetup
 {
@@ -28,20 +28,8 @@ public class CommonSetup
 		event.enqueueWork(() -> {
 			registerCompostables();
 			registerDispenserBehaviors();
+			registerAnimalFeeds();
 			WildCropGeneration.registerConfiguredFeatures();
-
-			List<ItemStack> chickenFood = new ArrayList<>();
-			Collections.addAll(chickenFood, ChickenEntityAccessor.getFoodItems().getItems());
-			chickenFood.add(new ItemStack(ModItems.CABBAGE_SEEDS.get()));
-			chickenFood.add(new ItemStack(ModItems.TOMATO_SEEDS.get()));
-			chickenFood.add(new ItemStack(ModItems.RICE.get()));
-			ChickenEntityAccessor.setFoodItems(Ingredient.of(chickenFood.stream()));
-
-			List<ItemStack> pigFood = new ArrayList<>();
-			Collections.addAll(pigFood, PigEntityAccessor.getFoodItems().getItems());
-			pigFood.add(new ItemStack(ModItems.CABBAGE.get()));
-			pigFood.add(new ItemStack(ModItems.TOMATO.get()));
-			PigEntityAccessor.setFoodItems(Ingredient.of(pigFood.stream()));
 		});
 
 		ModAdvancements.register();
@@ -126,5 +114,15 @@ public class CommonSetup
 		ComposterBlock.COMPOSTABLES.put(ModItems.STUFFED_PUMPKIN.get(), 1.0F);
 		ComposterBlock.COMPOSTABLES.put(ModItems.BROWN_MUSHROOM_COLONY.get(), 1.0F);
 		ComposterBlock.COMPOSTABLES.put(ModItems.RED_MUSHROOM_COLONY.get(), 1.0F);
+	}
+
+	public static void registerAnimalFeeds() {
+		Ingredient newChickenFood = Ingredient.of(ModItems.CABBAGE_SEEDS.get(), ModItems.TOMATO_SEEDS.get(), ModItems.RICE.get());
+		Chicken.FOOD_ITEMS = new CompoundIngredient(Arrays.asList(Chicken.FOOD_ITEMS, newChickenFood)) {};
+
+		Ingredient newPigFood = Ingredient.of(ModItems.CABBAGE.get(), ModItems.TOMATO.get());
+		Pig.FOOD_ITEMS = new CompoundIngredient(Arrays.asList(Pig.FOOD_ITEMS, newPigFood)) {};
+
+		Collections.addAll(Parrot.TAME_FOOD, ModItems.CABBAGE_SEEDS.get(), ModItems.TOMATO_SEEDS.get(), ModItems.RICE.get());
 	}
 }
