@@ -11,7 +11,6 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.FoodStats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.GameRules;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -63,22 +62,24 @@ public class ComfortHealthOverlay
 		int left = minecraft.getWindow().getGuiScaledWidth() / 2 - 91;
 		int top = minecraft.getWindow().getGuiScaledHeight() - healthIconsOffset;
 
-		boolean isPlayerHurtWithoutSaturation = stats.getSaturationLevel() == 0.0F && player.isHurt();
+		boolean isPlayerEligibleForComfort = stats.getSaturationLevel() == 0.0F
+				&& player.isHurt()
+				&& !player.hasEffect(Effects.REGENERATION);
 
-		if (player.getEffect(ModEffects.COMFORT.get()) != null) {
-			drawComfortOverlay(player, minecraft, event.getMatrixStack(), left, top, isPlayerHurtWithoutSaturation);
+		if (player.getEffect(ModEffects.COMFORT.get()) != null && isPlayerEligibleForComfort) {
+			drawComfortOverlay(player, minecraft, event.getMatrixStack(), left, top);
 		}
 	}
 
-	public static void drawComfortOverlay(PlayerEntity player, Minecraft minecraft, MatrixStack matrixStack, int left, int top, boolean isPlayerHurtWithoutSaturation) {
+	public static void drawComfortOverlay(PlayerEntity player, Minecraft minecraft, MatrixStack matrixStack, int left, int top) {
 		int ticks = minecraft.gui.getGuiTicks();
 		Random rand = new Random();
-		rand.setSeed((long)(ticks * 312871));
+		rand.setSeed((long) (ticks * 312871));
 
 		int health = MathHelper.ceil(player.getHealth());
 		float absorb = MathHelper.ceil(player.getAbsorptionAmount());
 		ModifiableAttributeInstance attrMaxHealth = player.getAttribute(Attributes.MAX_HEALTH);
-		float healthMax = (float)attrMaxHealth.getValue();
+		float healthMax = (float) attrMaxHealth.getValue();
 
 		int regen = -1;
 		if (player.hasEffect(Effects.REGENERATION)) regen = ticks % 25;
@@ -94,15 +95,14 @@ public class ComfortHealthOverlay
 		RenderSystem.enableBlend();
 
 		int totalHealth = MathHelper.ceil((healthMax + absorb) / 2.0F);
-		for (int i = totalHealth - 1; i >= 0; -- i) {
+		for (int i = totalHealth - 1; i >= 0; --i) {
 			int column = i % 10;
-			int row = MathHelper.ceil((float)(i + 1) / 10.0F) - 1;
+			int row = MathHelper.ceil((float) (i + 1) / 10.0F) - 1;
 			int x = left + column * 8;
 			int y = top - row * rowHeight;
 
 			if (health <= 4) y += rand.nextInt(2);
 			if (i == regen) y -= 2;
-
 
 
 			if (column == comfortSheen / 2) {
