@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.0.1
+
+### Additions
+- `farmersdelight:straw_blocks` - Tag for blocks made (predominantly) out of Straw. Mineable with knives by default;
+- Parrots can now be tamed using Cabbage Seeds, Tomato Seeds and Rice;
+
+### Updates
+- Candle cakes can now be sliced with a knife, dropping the first slice together with the candle;
+- `farmersdelight:mineable/knife` has been properly configured:
+  - Previously hardcoded material checks are now done entirely within the tag;
+  - Included all cake variants, cobwebs, `#carpet` and `#wool`;
+  - Included `forge:mineable/knife` by default;
+
+### Fixes
+- Fix Chickens and Pigs not being tempted by FD crops and seeds;
+- Fix `forge:mineable/knife` being registered but not generated, causing reload problems on servers;
+- Fix some langs still referring to `_pantry` IDs instead of `_cabinet`;
+- Fix log spam regarding cooking/cutting recipe types;
+
 ## 1.0.0
 - 1.17 and 1.18 port! Codebase has been cleaned up and refactored;
 

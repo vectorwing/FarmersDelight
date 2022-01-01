@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.tag.ForgeTags;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.Nullable;
@@ -61,20 +62,19 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.RICH_SOIL_FARMLAND.get()
 		);
 		tag(ModTags.MINEABLE_WITH_KNIFE).add(
-				ModBlocks.RICE_BAG.get(),
-				ModBlocks.ROPE.get(),
-				ModBlocks.SAFETY_NET.get(),
-				ModBlocks.CANVAS_RUG.get(),
-				ModBlocks.TATAMI.get(),
-				ModBlocks.FULL_TATAMI_MAT.get(),
-				ModBlocks.HALF_TATAMI_MAT.get(),
-				ModBlocks.APPLE_PIE.get(),
-				ModBlocks.SWEET_BERRY_CHEESECAKE.get(),
-				ModBlocks.CHOCOLATE_PIE.get(),
-				ModBlocks.ROAST_CHICKEN_BLOCK.get(),
-				ModBlocks.HONEY_GLAZED_HAM_BLOCK.get(),
-				ModBlocks.SHEPHERDS_PIE_BLOCK.get()
-		);
+						Blocks.COBWEB,
+						Blocks.CAKE,
+						ModBlocks.APPLE_PIE.get(),
+						ModBlocks.SWEET_BERRY_CHEESECAKE.get(),
+						ModBlocks.CHOCOLATE_PIE.get(),
+						ModBlocks.ROAST_CHICKEN_BLOCK.get(),
+						ModBlocks.HONEY_GLAZED_HAM_BLOCK.get(),
+						ModBlocks.SHEPHERDS_PIE_BLOCK.get())
+				.addTag(net.minecraft.tags.BlockTags.CARPETS)
+				.addTag(net.minecraft.tags.BlockTags.WOOL)
+				.addTag(net.minecraft.tags.BlockTags.CANDLE_CAKES)
+				.addTag(ModTags.STRAW_BLOCKS)
+				.addTag(ForgeTags.MINEABLE_WITH_KNIFE);
 	}
 
 	protected void registerMinecraftTags() {
@@ -141,9 +141,19 @@ public class BlockTags extends BlockTagsProvider
 	protected void registerForgeTags() {
 		tag(Tags.Blocks.DIRT).add(
 				ModBlocks.RICH_SOIL.get());
+		tag(ForgeTags.MINEABLE_WITH_KNIFE);
 	}
 
 	protected void registerModTags() {
+		tag(ModTags.STRAW_BLOCKS).add(
+				ModBlocks.RICE_BAG.get(),
+				ModBlocks.ROPE.get(),
+				ModBlocks.SAFETY_NET.get(),
+				ModBlocks.CANVAS_RUG.get(),
+				ModBlocks.TATAMI.get(),
+				ModBlocks.FULL_TATAMI_MAT.get(),
+				ModBlocks.HALF_TATAMI_MAT.get()
+		);
 		tag(ModTags.WILD_CROPS).add(
 				ModBlocks.WILD_CARROTS.get(),
 				ModBlocks.WILD_POTATOES.get(),

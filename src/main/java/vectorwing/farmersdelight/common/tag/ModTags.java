@@ -18,6 +18,9 @@ public class ModTags
 	// Blocks that are efficiently mined with a Knife.
 	public static final Tag.Named<Block> MINEABLE_WITH_KNIFE = modBlockTag("mineable/knife");
 
+	// Blocks made mostly of straw.
+	public static final Tag.Named<Block> STRAW_BLOCKS = modBlockTag("straw_blocks");
+
 	// Blocks that represent the wild form of a farmable crop.
 	public static final Tag.Named<Block> WILD_CROPS = modBlockTag("wild_crops");
 
