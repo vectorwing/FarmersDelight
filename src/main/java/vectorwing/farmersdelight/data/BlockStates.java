@@ -156,6 +156,7 @@ public class BlockStates extends BlockStateProvider
 		this.pieBlock(ModBlocks.APPLE_PIE.get());
 		this.pieBlock(ModBlocks.CHOCOLATE_PIE.get());
 		this.pieBlock(ModBlocks.SWEET_BERRY_CHEESECAKE.get());
+		this.pieBlock(ModBlocks.PUMPKIN_PIE.get());
 
 		this.feastBlock((FeastBlock) ModBlocks.STUFFED_PUMPKIN_BLOCK.get());
 		this.feastBlock((FeastBlock) ModBlocks.ROAST_CHICKEN_BLOCK.get());

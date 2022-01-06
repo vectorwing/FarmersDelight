@@ -68,6 +68,7 @@
   "block.farmersdelight.apple_pie": "Torta de maçã",
   "block.farmersdelight.sweet_berry_cheesecake": "Cheesecake de bagas doces",
   "block.farmersdelight.chocolate_pie": "Torta de chocolate",
+  "block.farmersdelight.pumpkin_pie": "Torta de abóbora",
 
   "item.farmersdelight.tomato": "Tomate",
   "item.farmersdelight.cabbage": "Repolho",
@@ -111,6 +112,7 @@
   "item.farmersdelight.apple_pie_slice": "Fatia de torta de maçã",
   "item.farmersdelight.sweet_berry_cheesecake_slice": "Fatia de cheesecake de bagas doces",
   "item.farmersdelight.chocolate_pie_slice": "Fatia de torta de chocolate",
+  "item.farmersdelight.pumpkin_pie_slice": "Fatia de torta de abóbora",
   "item.farmersdelight.fruit_salad": "Salada de frutas",
   "item.farmersdelight.sweet_berry_cookie": "Biscoito de bagas doces",
   "item.farmersdelight.honey_cookie": "Biscoito de mel",

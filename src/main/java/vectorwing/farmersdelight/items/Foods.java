@@ -81,10 +81,13 @@ public class Foods
 			.nutrition(2).saturationMod(0.1f).fast().build();
 	public static final Food CAKE_SLICE = (new Food.Builder())
 			.nutrition(2).saturationMod(0.1f).fast()
-			.effect(() -> new EffectInstance(Effects.MOVEMENT_SPEED, 400, 0), 1.0F).build();
+			.effect(() -> new EffectInstance(Effects.MOVEMENT_SPEED, 400, 0, false, false), 1.0F).build();
 	public static final Food PIE_SLICE = (new Food.Builder())
 			.nutrition(3).saturationMod(0.3f).fast()
-			.effect(() -> new EffectInstance(Effects.MOVEMENT_SPEED, 600, 0), 1.0F).build();
+			.effect(() -> new EffectInstance(Effects.MOVEMENT_SPEED, 600, 0, false, false), 1.0F).build();
+	public static final Food SMALL_PIE_SLICE = (new Food.Builder())
+			.nutrition(2).saturationMod(0.3f).fast()
+			.effect(() -> new EffectInstance(Effects.MOVEMENT_SPEED, 400, 0, false, false), 1.0F).build();
 	public static final Food FRUIT_SALAD = (new Food.Builder())
 			.nutrition(6).saturationMod(0.6f)
 			.effect(() -> new EffectInstance(Effects.REGENERATION, 100, 0), 1.0F).build();

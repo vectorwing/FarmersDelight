@@ -235,6 +235,8 @@ public class ModItems
 			() -> new Item(new Item.Properties().food(Foods.PIE_SLICE).tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> CHOCOLATE_PIE_SLICE = ITEMS.register("chocolate_pie_slice",
 			() -> new Item(new Item.Properties().food(Foods.PIE_SLICE).tab(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> PUMPKIN_PIE_SLICE = ITEMS.register("pumpkin_pie_slice",
+			() -> new Item(new Item.Properties().food(Foods.SMALL_PIE_SLICE).tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> SWEET_BERRY_COOKIE = ITEMS.register("sweet_berry_cookie",
 			() -> new Item(new Item.Properties().food(Foods.COOKIES).tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> HONEY_COOKIE = ITEMS.register("honey_cookie",
@@ -331,4 +333,8 @@ public class ModItems
 			() -> new DogFoodItem(new Item.Properties().food(Foods.DOG_FOOD).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> HORSE_FEED = ITEMS.register("horse_feed",
 			() -> new HorseFeedItem(new Item.Properties().stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
+
+	// Utility Items (can't be obtained normally)
+	public static final RegistryObject<Item> BLOCKITEM_PUMPKIN_PIE = ITEMS.register("blockitem_pumpkin_pie",
+			() -> new HiddenBlockItem(ModBlocks.PUMPKIN_PIE.get(), new Item.Properties()));
 }
