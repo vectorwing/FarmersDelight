@@ -1,6 +1,7 @@
 {
   "replace": false,
   "entries": [
+    "farmersdelight:add_loot_village_butcher",
     "farmersdelight:scavenging_ham_from_pig",
     "farmersdelight:scavenging_ham_from_hoglin",
     "farmersdelight:scavenging_smoked_ham_from_pig",
