@@ -33,8 +33,7 @@ public class Configuration
 	public static ForgeConfigSpec.BooleanValue OVERRIDE_ALL_SOUP_ITEMS;
 
 	public static final String CATEGORY_WORLD = "world";
-	public static ForgeConfigSpec.BooleanValue CROPS_ON_SHIPWRECKS;
-	public static ForgeConfigSpec.BooleanValue CROPS_ON_VILLAGE_HOUSES;
+	public static ForgeConfigSpec.BooleanValue GENERATE_FD_CHEST_LOOT;
 	public static ForgeConfigSpec.BooleanValue GENERATE_VILLAGE_COMPOST_HEAPS;
 	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_CABBAGES;
 	public static ForgeConfigSpec.IntValue CHANCE_WILD_CABBAGES;
@@ -94,10 +93,8 @@ public class Configuration
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("World generation").push(CATEGORY_WORLD);
-		CROPS_ON_SHIPWRECKS = COMMON_BUILDER.comment("Generate crop items on a Shipwreck's supply chests")
-				.define("cropsOnShipwreckSupplyLoot", true);
-		CROPS_ON_VILLAGE_HOUSES = COMMON_BUILDER.comment("Generate crop items on Village houses (all biomes)")
-				.define("cropsOnVillageHouseLoot", true);
+		GENERATE_FD_CHEST_LOOT = COMMON_BUILDER.comment("Should this mod add some of its items (ropes, seeds, knives, meals etc.) as extra chest loot across Minecraft?")
+				.define("generateFDChestLoot", true);
 		GENERATE_VILLAGE_COMPOST_HEAPS = COMMON_BUILDER.comment("Generate Compost Heaps across all village biomes")
 				.define("genVillageCompostHeaps", true);
 

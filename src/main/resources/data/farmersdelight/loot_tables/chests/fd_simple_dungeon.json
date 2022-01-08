@@ -3,13 +3,12 @@
     {
       "rolls": {
         "min": 1.0,
-        "max": 3.0,
+        "max": 4.0,
         "type": "minecraft:uniform"
       },
       "entries": [
         {
-          "type": "item",
-          "weight": 6,
+          "type": "minecraft:item",
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -23,8 +22,7 @@
           "name": "farmersdelight:tomato_seeds"
         },
         {
-          "type": "item",
-          "weight": 6,
+          "type": "minecraft:item",
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -38,34 +36,31 @@
           "name": "farmersdelight:cabbage_seeds"
         },
         {
-          "type": "item",
-          "weight": 6,
+          "type": "minecraft:empty",
+          "weight": 2
+        }
+      ]
+    },
+    {
+      "rolls": 3,
+      "entries": [
+        {
+          "type": "minecraft:item",
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "min": 2.0,
-                "max": 4.0,
+                "max": 12.0,
                 "type": "minecraft:uniform"
               }
             }
           ],
-          "name": "farmersdelight:onion"
+          "name": "farmersdelight:rope"
         },
         {
-          "type": "item",
-          "weight": 6,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 2.0,
-                "max": 4.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
-          "name": "farmersdelight:rice"
+          "type": "minecraft:empty",
+          "weight": 2
         }
       ]
     }

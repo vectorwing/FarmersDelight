@@ -17,28 +17,45 @@ import java.util.List;
 public class AddItemModifier extends LootModifier
 {
 	private final Item addedItem;
+	private final int count;
 
 	/**
 	 * This loot modifier adds an item to the loot table, given the conditions specified.
 	 */
-	protected AddItemModifier(ILootCondition[] conditionsIn, Item addedItemIn) {
+	protected AddItemModifier(ILootCondition[] conditionsIn, Item addedItemIn, int count) {
 		super(conditionsIn);
 		this.addedItem = addedItemIn;
+		this.count = count;
 	}
 
 	@Nonnull
 	@Override
 	protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
-		generatedLoot.add(new ItemStack(addedItem));
+		ItemStack addedStack = new ItemStack(addedItem, count);
+
+		if (addedStack.getCount() < addedStack.getMaxStackSize()) {
+			generatedLoot.add(addedStack);
+		} else {
+			int i = addedStack.getCount();
+
+			while (i > 0) {
+				ItemStack subStack = addedStack.copy();
+				subStack.setCount(Math.min(addedStack.getMaxStackSize(), i));
+				i -= subStack.getCount();
+				generatedLoot.add(subStack);
+			}
+		}
+
 		return generatedLoot;
 	}
 
 	public static class Serializer extends GlobalLootModifierSerializer<AddItemModifier>
 	{
 		@Override
-		public AddItemModifier read(ResourceLocation location, JsonObject object, ILootCondition[] ailootcondition) {
+		public AddItemModifier read(ResourceLocation location, JsonObject object, ILootCondition[] conditions) {
 			Item addedItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation((JSONUtils.getAsString(object, "item"))));
-			return new AddItemModifier(ailootcondition, addedItem);
+			int count = JSONUtils.getAsInt(object, "count", 1);
+			return new AddItemModifier(conditions, addedItem, count);
 		}
 
 		@Override
