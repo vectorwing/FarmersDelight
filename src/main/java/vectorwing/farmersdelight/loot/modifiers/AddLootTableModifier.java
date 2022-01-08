@@ -9,6 +9,7 @@ import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
+import vectorwing.farmersdelight.setup.Configuration;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -28,8 +29,10 @@ public class AddLootTableModifier extends LootModifier
 	@Nonnull
 	@Override
 	protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
-		LootTable extraTable = context.getLootTable(this.lootTable);
-		extraTable.getRandomItems(context, generatedLoot::add);
+		if (Configuration.GENERATE_FD_CHEST_LOOT.get()) {
+			LootTable extraTable = context.getLootTable(this.lootTable);
+			extraTable.getRandomItems(context, generatedLoot::add);
+		}
 		return generatedLoot;
 	}
 
