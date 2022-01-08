@@ -52,15 +52,6 @@ import java.util.*;
 @ParametersAreNonnullByDefault
 public class CommonEventHandler
 {
-	// TODO: Learn more about Loot Modifiers, and migrate remainder loot injections to it
-	private static final ResourceLocation SHIPWRECK_SUPPLY_CHEST = LootTables.SHIPWRECK_SUPPLY;
-	private static final Set<ResourceLocation> VILLAGE_HOUSE_CHESTS = Sets.newHashSet(
-			LootTables.VILLAGE_PLAINS_HOUSE,
-			LootTables.VILLAGE_SAVANNA_HOUSE,
-			LootTables.VILLAGE_SNOWY_HOUSE,
-			LootTables.VILLAGE_TAIGA_HOUSE,
-			LootTables.VILLAGE_DESERT_HOUSE);
-
 	public static void init(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			registerCompostables();
@@ -270,18 +261,6 @@ public class CommonEventHandler
 		public MerchantOffer getOffer(Entity trader, Random rand) {
 			ItemStack itemstack = new ItemStack(this.tradeItem, this.count);
 			return new MerchantOffer(itemstack, new ItemStack(Items.EMERALD), this.maxUses, this.xpValue, this.priceMultiplier);
-		}
-	}
-
-	@SubscribeEvent
-	public static void onLootLoad(LootTableLoadEvent event) {
-		if (Configuration.CROPS_ON_SHIPWRECKS.get() && event.getName().equals(SHIPWRECK_SUPPLY_CHEST)) {
-			event.getTable().addPool(LootPool.lootPool().add(TableLootEntry.lootTableReference(new ResourceLocation(FarmersDelight.MODID, "inject/shipwreck_supply")).setWeight(1).setQuality(0)).name("supply_fd_crops").build());
-		}
-
-		if (Configuration.CROPS_ON_VILLAGE_HOUSES.get() && VILLAGE_HOUSE_CHESTS.contains(event.getName())) {
-			event.getTable().addPool(LootPool.lootPool().add(
-					TableLootEntry.lootTableReference(new ResourceLocation(FarmersDelight.MODID, "inject/crops_villager_houses")).setWeight(1).setQuality(0)).name("villager_houses_fd_crops").build());
 		}
 	}
 }

@@ -4,8 +4,8 @@
   [
     {
       "condition": "forge:loot_table_id",
-      "loot_table_id": "minecraft:chests/village/village_butcher"
+      "loot_table_id": "minecraft:chests/shipwreck_supply"
     }
   ],
-  "lootTable": "farmersdelight:chests/fd_village_butcher"
+  "lootTable": "farmersdelight:chests/fd_shipwreck_supply"
 }

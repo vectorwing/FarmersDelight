@@ -1,71 +1,79 @@
 {
   "pools": [
     {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "farmersdelight:flint_knife"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "farmersdelight:iron_knife"
+        },
+        {
+          "type": "minecraft:empty"
+        }
+      ]
+    },
+    {
       "rolls": {
         "min": 1.0,
-        "max": 3.0,
+        "max": 2.0,
         "type": "minecraft:uniform"
       },
       "entries": [
         {
-          "type": "item",
-          "weight": 6,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 2.0,
-                "max": 4.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
-          "name": "farmersdelight:tomato_seeds"
+          "type": "minecraft:item",
+          "name": "farmersdelight:ham"
         },
         {
-          "type": "item",
-          "weight": 6,
+          "type": "minecraft:item",
+          "weight": 3,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "min": 2.0,
-                "max": 4.0,
+                "max": 6.0,
                 "type": "minecraft:uniform"
               }
             }
           ],
-          "name": "farmersdelight:cabbage_seeds"
+          "name": "farmersdelight:minced_beef"
         },
         {
-          "type": "item",
-          "weight": 6,
+          "type": "minecraft:item",
+          "weight": 3,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "min": 2.0,
-                "max": 4.0,
+                "max": 6.0,
                 "type": "minecraft:uniform"
               }
             }
           ],
-          "name": "farmersdelight:onion"
+          "name": "farmersdelight:bacon"
         },
         {
-          "type": "item",
-          "weight": 6,
+          "type": "minecraft:item",
+          "weight": 3,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "min": 2.0,
-                "max": 4.0,
+                "max": 6.0,
                 "type": "minecraft:uniform"
               }
             }
           ],
-          "name": "farmersdelight:rice"
+          "name": "farmersdelight:mutton_chops"
+        },
+        {
+          "type": "minecraft:empty"
         }
       ]
     }

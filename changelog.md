@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.0
+
+### Additions
+- Added some of this mod's items (ropes, seeds, meals, knives etc.) to many chest loot tables:  I'll leave most of them for you to discover, but here's a few:
+  - Butchers might have some knives and meat cuts in storage;
+  - Shipwrecks now have plenty spare ropes for rigging;
+  - Pillagers *really* like Onions...
+
 ## 0.5.4
 
 ### Updates
