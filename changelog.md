@@ -3,10 +3,13 @@
 ## 0.6.0
 
 ### Additions
-- Added some of this mod's items (ropes, seeds, meals, knives etc.) to many chest loot tables:  I'll leave most of them for you to discover, but here's a few:
-  - Butchers might have some knives and meat cuts in storage;
-  - Shipwrecks now have plenty spare ropes for rigging;
-  - Pillagers *really* like Onions...
+- Added some of this mod's items (ropes, seeds, meals, knives etc.) to many chest loot tables! I'll leave most of them for you to discover. ;)
+- Added `add_loot_table` loot modifier:
+  - Allows for adding unmodified extra loot rolls to specified `lootTable` paths;
+  - This modifier is governed by the `generateFDChestLoot` config; if set to false, it doesn't do anything.
+
+### Updates
+- The modifier `add_item` can now safely specify a `count` for the added item (optional);
 
 ## 0.5.4
 
