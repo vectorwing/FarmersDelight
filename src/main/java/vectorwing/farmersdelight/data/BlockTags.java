@@ -4,7 +4,6 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
@@ -139,7 +138,7 @@ public class BlockTags extends BlockTagsProvider
 	}
 
 	protected void registerForgeTags() {
-		tag(Tags.Blocks.DIRT).add(
+		tag(net.minecraft.tags.BlockTags.DIRT).add(
 				ModBlocks.RICH_SOIL.get());
 		tag(ForgeTags.MINEABLE_WITH_KNIFE);
 	}

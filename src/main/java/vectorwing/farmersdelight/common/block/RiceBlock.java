@@ -3,6 +3,7 @@ package vectorwing.farmersdelight.common.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
@@ -25,7 +26,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.Tags;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
@@ -85,7 +85,7 @@ public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlo
 
 	@Override
 	protected boolean mayPlaceOn(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		return super.mayPlaceOn(state, worldIn, pos) || Tags.Blocks.DIRT.contains(state.getBlock());
+		return super.mayPlaceOn(state, worldIn, pos) || BlockTags.DIRT.contains(state.getBlock());
 	}
 
 	public IntegerProperty getAgeProperty() {
