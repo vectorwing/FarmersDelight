@@ -1,15 +1,15 @@
 package vectorwing.farmersdelight.common.item;
 
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.FarmBlock;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.ItemNameBlockItem;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.core.Direction;
-import net.minecraftforge.common.Tags;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
 public class RiceItem extends ItemNameBlockItem
@@ -24,7 +24,7 @@ public class RiceItem extends ItemNameBlockItem
 		if (result.equals(InteractionResult.FAIL)) {
 			Player player = context.getPlayer();
 			BlockState targetState = context.getLevel().getBlockState(context.getClickedPos());
-			if (player != null && context.getClickedFace().equals(Direction.UP) && (targetState.is(Tags.Blocks.DIRT) || targetState.getBlock() instanceof FarmBlock)) {
+			if (player != null && context.getClickedFace().equals(Direction.UP) && (targetState.is(BlockTags.DIRT) || targetState.getBlock() instanceof FarmBlock)) {
 				player.displayClientMessage(TextUtils.getTranslation("block.rice.invalid_placement"), true);
 			}
 		}
