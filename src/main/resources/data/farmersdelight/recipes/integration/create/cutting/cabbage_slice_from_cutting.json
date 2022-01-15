@@ -5,7 +5,7 @@
       "modid": "create"
     }
   ],
-  "type": "create:mixing",
+  "type": "create:cutting",
   "ingredients": [
     {
       "item": "farmersdelight:cabbage"

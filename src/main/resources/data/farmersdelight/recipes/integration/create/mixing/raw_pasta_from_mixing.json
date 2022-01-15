@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+  	{ "item": "minecraft:wheat" },
+  	{ "item": "minecraft:wheat" },
+  	{ "item": "minecraft:wheat" },
+  	{ "item": "minecraft:wheat" },
+    { "fluid": "minecraft:water", "nbt": {}, "amount": 1000 }
+  ],
+  "results": [
+  	{ "item": "farmersdelight:raw_pasta", "count": 2 }
+  ]
+}

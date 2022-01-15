@@ -1,0 +1,17 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:cutting",
+  "ingredients": [
+  	{ "item": "minecraft:salmon" }
+  ],
+  "results": [
+  	{ "item": "farmersdelight:salmon_slice", "count": 2 },
+	{ "item": "farmersdelight:salmon_slice", "count": 1, "chance": 0.2 },
+	{ "item": "minecraft:bone_meal", "count": 1 }
+  ]
+}

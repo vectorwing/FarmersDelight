@@ -1,0 +1,15 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:cutting",
+  "ingredients": [
+  	{ "item": "create:dough" }
+  ],
+  "results": [
+  	{ "item": "farmersdelight:raw_pasta", "count": 1 }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+  	{ "item": "create:dough" },
+    { "item": "minecraft:egg" }
+  ],
+  "results": [
+  	{ "item": "farmersdelight:raw_pasta", "count": 1 }
+  ]
+}

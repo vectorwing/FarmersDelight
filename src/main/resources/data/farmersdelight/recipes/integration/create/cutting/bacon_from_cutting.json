@@ -1,0 +1,16 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:cutting",
+  "ingredients": [
+  	{ "item": "minecraft:porkchop" }
+  ],
+  "results": [
+  	{ "item": "farmersdelight:bacon", "count": 2 },
+	{ "item": "farmersdelight:bacon", "count": 1, "chance": 0.2 }
+  ]
+}
