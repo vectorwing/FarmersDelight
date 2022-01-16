@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2
+
+### Fixes
+- Fix crash involving Rice planting due to `forge:dirt` being removed in Forge 39.0.18 (using the vanilla tag instead);
+
 ## 1.0.1
 
 ### Additions
