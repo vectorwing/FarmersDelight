@@ -54,8 +54,8 @@
   "block.farmersdelight.onions": "Sipuli",
   "block.farmersdelight.rice": "Riisi",
   "block.farmersdelight.rice_panicles": "Riisi",
-  "block.farmersdelight.brown_mushroom_colony": "Ruskea sieniyhdyskunta",
-  "block.farmersdelight.red_mushroom_colony": "Kärpässieniyhdyskunta",
+  "block.farmersdelight.brown_mushroom_colony": "Ruskea sienirykelmä",
+  "block.farmersdelight.red_mushroom_colony": "Kärpässienirykelmä",
 
   "block.farmersdelight.wild_cabbages": "Villikaali",
   "block.farmersdelight.wild_tomatoes": "Tomaattiköynnös",
@@ -162,7 +162,7 @@
   "item.farmersdelight.stuffed_pumpkin": "Lautasellinen täytettyä kurpitsaa",
   "block.farmersdelight.honey_glazed_ham_block": "Hunajakuorrutettu kinkku",
   "item.farmersdelight.honey_glazed_ham": "Lautasellinen hunajakuorrutettua kinkkua",
-  "block.farmersdelight.honey_glazed_ham_block": "Lammaspaimenen piiras",
+  "block.farmersdelight.shepherds_pie_block": "Lammaspaimenen piiras",
   "item.farmersdelight.shepherds_pie": "Lammaspaimenen piiras",
 
   "item.farmersdelight.dog_food": "Koiranruoka",
@@ -210,7 +210,7 @@
   "farmersdelight.advancement.get_rich_soil": "Kasviruokaa",
   "farmersdelight.advancement.get_rich_soil.desc": "Anna orgaanisen kompostin hajota ravinteikkaaksi mullaksi. Sienistä voi olla hyötyä!",
   "farmersdelight.advancement.get_mushroom_colony": "Kuin sieniä sateella",
-  "farmersdelight.advancement.get_mushroom_colony.desc": "Istuta sieniä ravinteikkaaseen multaan pimeässä, odota yhdyskunnan muodostuvan ja kerää se keritsimillä!",
+  "farmersdelight.advancement.get_mushroom_colony.desc": "Istuta sieniä ravinteikkaaseen multaan pimeässä, odota rykelmän muodostumista ja kerää se keritsimillä!",
   "farmersdelight.advancement.obtain_netherite_knife": "Terävämpi veitsi",
   "farmersdelight.advancement.obtain_netherite_knife.desc": "Käytä netheriittiharkkoa veitsen päivittämiseen! Tai lähde keittiöstä.",
 
