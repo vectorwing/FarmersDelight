@@ -28,7 +28,7 @@
   "block.farmersdelight.tomato_crate": "Crate o' Tomatoes",
   "block.farmersdelight.onion_crate": "Crate o' Stink Bulbs",
   "block.farmersdelight.rice_bale": "Bale o' Rice",
-  "block.farmersdelight.rice_bag": "Bag Full o' Rice",
+  "block.farmersdelight.rice_bag": "Sack o' Rice",
   "block.farmersdelight.straw_bale": "Bale o' Fiber",
 
   "block.farmersdelight.canvas_sign": "Seal o' Sails",
@@ -172,7 +172,7 @@
   "effect.farmersdelight.comfort": "Free o' Scurvy",
 
   "effect.farmersdelight.nourished.0.desc": "Ye can't get hungry, lest yer belly be digestin' food ta heal ye.",
-  "effect.farmersdelight.comfort.0.desc": "Wards off Scurvy, Sloth and Laziness.",
+  "effect.farmersdelight.comfort.0.desc": "Yer body gon' heal up slowly, no matter if ye're starvin' or not.",
 
   "enchantment.farmersdelight.backstabbing": "Mutiny",
   "enchantment.farmersdelight.backstabbing.desc": "Strikes true at the heart o' yer victim, be their backs turned on ye.",

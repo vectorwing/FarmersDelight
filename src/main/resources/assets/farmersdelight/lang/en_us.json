@@ -172,7 +172,7 @@
   "effect.farmersdelight.comfort": "Comfort",
 
   "effect.farmersdelight.nourished.0.desc": "Prevents hunger loss, except when using saturation to heal damage.",
-  "effect.farmersdelight.comfort.0.desc": "Makes you immune to Hunger, Slowness and Weakness.",
+  "effect.farmersdelight.comfort.0.desc": "Provides natural regeneration, regardless of how hungry you are.",
 
   "enchantment.farmersdelight.backstabbing": "Backstabbing",
   "enchantment.farmersdelight.backstabbing.desc": "Amplifies damage when striking a target from behind.",

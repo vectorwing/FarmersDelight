@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "farmersdelight:wheat_dough"
+      "farmersdelight:wheat_dough_from_eggs"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "farmersdelight:wheat_dough"
+        "recipe": "farmersdelight:wheat_dough_from_eggs"
       }
     }
   },
