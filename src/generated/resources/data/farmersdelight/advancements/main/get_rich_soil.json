@@ -1,5 +1,5 @@
 {
-  "parent": "farmersdelight:main/plant_rice",
+  "parent": "farmersdelight:main/place_organic_compost",
   "display": {
     "icon": {
       "item": "farmersdelight:rich_soil"

@@ -1,5 +1,5 @@
 {
-  "parent": "farmersdelight:main/place_stove",
+  "parent": "farmersdelight:main/craft_knife",
   "display": {
     "icon": {
       "item": "farmersdelight:cutting_board"

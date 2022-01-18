@@ -1,5 +1,5 @@
 {
-  "parent": "farmersdelight:main/place_stove",
+  "parent": "farmersdelight:main/place_campfire",
   "display": {
     "icon": {
       "item": "farmersdelight:cooking_pot"

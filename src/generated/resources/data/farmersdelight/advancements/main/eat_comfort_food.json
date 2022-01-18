@@ -2,7 +2,7 @@
   "parent": "farmersdelight:main/place_cooking_pot",
   "display": {
     "icon": {
-      "item": "farmersdelight:chicken_soup"
+      "item": "farmersdelight:baked_cod_stew"
     },
     "title": {
       "translate": "farmersdelight.advancement.eat_comfort_food"
