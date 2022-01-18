@@ -1,5 +1,5 @@
 {
-  "parent": "farmersdelight:main/get_rich_soil",
+  "parent": "farmersdelight:main/get_fd_seed",
   "display": {
     "icon": {
       "item": "farmersdelight:red_mushroom_colony"

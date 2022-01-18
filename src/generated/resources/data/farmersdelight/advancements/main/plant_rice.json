@@ -1,8 +1,8 @@
 {
-  "parent": "farmersdelight:main/harvest_straw",
+  "parent": "farmersdelight:main/get_fd_seed",
   "display": {
     "icon": {
-      "item": "farmersdelight:rice_panicle"
+      "item": "farmersdelight:rice"
     },
     "title": {
       "translate": "farmersdelight.advancement.plant_rice"

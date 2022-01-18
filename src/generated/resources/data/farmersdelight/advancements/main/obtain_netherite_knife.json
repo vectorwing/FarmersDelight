@@ -1,5 +1,5 @@
 {
-  "parent": "farmersdelight:main/craft_knife",
+  "parent": "farmersdelight:main/use_cutting_board",
   "display": {
     "icon": {
       "item": "farmersdelight:netherite_knife",

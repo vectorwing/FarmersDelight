@@ -16,7 +16,7 @@
     "hidden": false
   },
   "criteria": {
-    "nourished": {
+    "nourishment": {
       "trigger": "minecraft:effects_changed",
       "conditions": {
         "effects": {
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "nourished"
+      "nourishment"
     ]
   ]
 }
