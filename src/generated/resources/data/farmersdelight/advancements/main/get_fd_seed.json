@@ -21,7 +21,9 @@
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:cabbage_seeds"
+            "items": [
+              "farmersdelight:cabbage_seeds"
+            ]
           }
         ]
       }
@@ -31,7 +33,9 @@
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:tomato_seeds"
+            "items": [
+              "farmersdelight:tomato_seeds"
+            ]
           }
         ]
       }
@@ -41,7 +45,9 @@
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:onion"
+            "items": [
+              "farmersdelight:onion"
+            ]
           }
         ]
       }
@@ -51,7 +57,9 @@
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:rice"
+            "items": [
+              "farmersdelight:rice"
+            ]
           }
         ]
       }
