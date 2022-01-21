@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3
+
+### Fixes
+- Fix crash when placing a Cooking Pot, due to a deleted method in BlockEntity, on Forge 39.0.45;
+  - Requires Forge 39.0.45 or above.
+
 ## 1.0.2
 
 ### Fixes
