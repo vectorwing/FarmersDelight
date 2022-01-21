@@ -107,7 +107,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	}
 
 	private CompoundTag writeItems(CompoundTag compound) {
-		super.save(compound);
+		super.saveAdditional(compound);
 		compound.put("Container", mealContainerStack.serializeNBT());
 		compound.put("Inventory", inventory.serializeNBT());
 		return compound;
