@@ -41,6 +41,6 @@ public class ClientSetup
 
 		NourishmentHungerOverlay.init();
 		// TODO: Fix the icon height offset problem
-//		ComfortHealthOverlay.init();
+		ComfortHealthOverlay.init();
 	}
 }
