@@ -6,7 +6,6 @@ buildscript {
             url "https://repo.spongepowered.org/repository/maven-public/"
             // content { includeGroup "org.spongepowered" }
         }
-        jcenter()
         mavenCentral()
     }
     dependencies {
