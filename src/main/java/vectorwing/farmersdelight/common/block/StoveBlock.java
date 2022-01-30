@@ -44,6 +44,8 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public class StoveBlock extends BaseEntityBlock
 {
+	public static final DamageSource STOVE_DAMAGE = (new DamageSource(FarmersDelight.MODID + ".stove")).setIsFire();
+
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
@@ -128,7 +130,7 @@ public class StoveBlock extends BaseEntityBlock
 	public void stepOn(Level world, BlockPos pos, BlockState state, Entity entityIn) {
 		boolean isLit = world.getBlockState(pos).getValue(StoveBlock.LIT);
 		if (isLit && !entityIn.fireImmune() && entityIn instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entityIn)) {
-			entityIn.hurt(DamageSource.HOT_FLOOR, 1.0F);
+			entityIn.hurt(STOVE_DAMAGE, 1.0F);
 		}
 
 		super.stepOn(world, pos, state, entityIn);

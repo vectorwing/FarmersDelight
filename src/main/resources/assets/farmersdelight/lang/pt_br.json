@@ -253,6 +253,9 @@
   "farmersdelight.block.skillet.invalid_item": "Isto não pode ser cozido...",
   "farmersdelight.item.skillet.how_to_cook": "Use sua outra mão para segurar ingredientes!",
 
+  "death.attack.farmersdelight.stove": "%1$s foi grelhado à perfeição",
+  "death.attack.farmersdelight.stove.player": "%1$s foi jogado na grelha por Chef %2$s",
+
   "farmersdelight.jei.cooking": "Panela",
   "farmersdelight.jei.cutting": "Tábua de corte",
   "farmersdelight.jei.chance": "%1$s%% de chance",
