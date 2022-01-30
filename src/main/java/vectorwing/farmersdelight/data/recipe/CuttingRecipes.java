@@ -18,13 +18,13 @@ public class CuttingRecipes
 {
 	public static void register(Consumer<FinishedRecipe> consumer) {
 		// Knife
-		cuttingMeats(consumer);
+		cuttingAnimalItems(consumer);
 		cuttingVegetables(consumer);
 		cuttingPastries(consumer);
 		cuttingFlowers(consumer);
 
 		// Pickaxe
-		salvagingBricks(consumer);
+		salvagingMinerals(consumer);
 
 		// Axe
 		strippingWood(consumer);
@@ -37,7 +37,7 @@ public class CuttingRecipes
 		salvagingUsingShears(consumer);
 	}
 
-	private static void cuttingMeats(Consumer<FinishedRecipe> consumer) {
+	private static void cuttingAnimalItems(Consumer<FinishedRecipe> consumer) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BEEF), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.MINCED_BEEF.get(), 2)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.PORKCHOP), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.BACON.get(), 2)
@@ -69,6 +69,8 @@ public class CuttingRecipes
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.MUTTON), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.MUTTON_CHOPS.get(), 2)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.COOKED_MUTTON), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.COOKED_MUTTON_CHOPS.get(), 2)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.INK_SAC), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.BLACK_DYE, 2)
 				.build(consumer);
 	}
 
@@ -153,10 +155,14 @@ public class CuttingRecipes
 				.build(consumer);
 	}
 
-	private static void salvagingBricks(Consumer<FinishedRecipe> consumer) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BRICKS), new ToolActionIngredient(ToolActions.PICKAXE_DIG), Items.BRICK, 4)
+	private static void salvagingMinerals(Consumer<FinishedRecipe> consumer) {
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BRICKS), new ToolIngredient(ToolType.PICKAXE), Items.BRICK, 4)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.NETHER_BRICKS), new ToolActionIngredient(ToolActions.PICKAXE_DIG), Items.NETHER_BRICK, 4)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.STONE), new ToolIngredient(ToolType.PICKAXE), Items.COBBLESTONE, 1)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.QUARTZ_BLOCK), new ToolIngredient(ToolType.PICKAXE), Items.QUARTZ, 4)
 				.build(consumer);
 	}
 
@@ -192,6 +198,9 @@ public class CuttingRecipes
 
 	private static void diggingSediments(Consumer<FinishedRecipe> consumer) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CLAY), new ToolActionIngredient(ToolActions.SHOVEL_DIG), Items.CLAY_BALL, 4)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.GRAVEL), new ToolIngredient(ToolType.SHOVEL), Items.GRAVEL, 1)
+				.addResultWithChance(Items.FLINT, 0.1F)
 				.build(consumer);
 	}
 
