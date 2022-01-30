@@ -253,6 +253,9 @@
   "farmersdelight.block.skillet.invalid_item": "A wee foolish to try an' cook this...",
   "farmersdelight.item.skillet.how_to_cook": "Hoist yer grub by yer other hand ta cook it!",
 
+  "death.attack.farmersdelight.stove": "%1$s got charr'd up in a grille",
+  "death.attack.farmersdelight.stove.player": "%1$s got grilled in the hands o' Chef %2$s",
+
   "farmersdelight.jei.cooking": "Cookin'",
   "farmersdelight.jei.cutting": "Choppin' Block",
   "farmersdelight.jei.chance": "Yer odds be %1$s%%",

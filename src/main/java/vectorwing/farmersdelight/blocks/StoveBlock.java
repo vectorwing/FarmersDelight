@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
+import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.registry.ModTileEntityTypes;
 import vectorwing.farmersdelight.tile.StoveTileEntity;
@@ -34,6 +35,7 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public class StoveBlock extends HorizontalBlock
 {
+	public static final DamageSource STOVE_DAMAGE = (new DamageSource(FarmersDelight.MODID + ".stove")).setIsFire();
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
 	public StoveBlock(AbstractBlock.Properties builder) {
@@ -112,7 +114,7 @@ public class StoveBlock extends HorizontalBlock
 	public void stepOn(World worldIn, BlockPos pos, Entity entityIn) {
 		boolean isLit = worldIn.getBlockState(pos).getValue(StoveBlock.LIT);
 		if (isLit && !entityIn.fireImmune() && entityIn instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entityIn)) {
-			entityIn.hurt(DamageSource.HOT_FLOOR, 1.0F);
+			entityIn.hurt(STOVE_DAMAGE, 1.0F);
 		}
 
 		super.stepOn(worldIn, pos, entityIn);
