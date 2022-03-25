@@ -7,7 +7,8 @@
 - Added no_NO translation (thanks, Bloodaxe95!)
 
 ### Fixes
-- Fix wrong interaction with Wild Rice's top half
+- Fix wrong interaction with Wild Rice's top half;
+- Fix Cabinets being in the wrong wood order in Creative;
 
 ## 1.0.3
 

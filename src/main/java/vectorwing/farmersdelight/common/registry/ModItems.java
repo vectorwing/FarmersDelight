@@ -52,10 +52,10 @@ public class ModItems
 			() -> new FuelBlockItem(ModBlocks.SAFETY_NET.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 200));
 	public static final RegistryObject<Item> OAK_CABINET = ITEMS.register("oak_cabinet",
 			() -> new FuelBlockItem(ModBlocks.OAK_CABINET.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 300));
-	public static final RegistryObject<Item> BIRCH_CABINET = ITEMS.register("birch_cabinet",
-			() -> new FuelBlockItem(ModBlocks.BIRCH_CABINET.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 300));
 	public static final RegistryObject<Item> SPRUCE_CABINET = ITEMS.register("spruce_cabinet",
 			() -> new FuelBlockItem(ModBlocks.SPRUCE_CABINET.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 300));
+	public static final RegistryObject<Item> BIRCH_CABINET = ITEMS.register("birch_cabinet",
+			() -> new FuelBlockItem(ModBlocks.BIRCH_CABINET.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 300));
 	public static final RegistryObject<Item> JUNGLE_CABINET = ITEMS.register("jungle_cabinet",
 			() -> new FuelBlockItem(ModBlocks.JUNGLE_CABINET.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 300));
 	public static final RegistryObject<Item> ACACIA_CABINET = ITEMS.register("acacia_cabinet",

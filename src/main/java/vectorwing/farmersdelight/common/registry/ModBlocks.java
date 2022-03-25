@@ -58,9 +58,9 @@ public class ModBlocks
 	public static final RegistryObject<Block> SAFETY_NET = BLOCKS.register("safety_net", SafetyNetBlock::new);
 	public static final RegistryObject<Block> OAK_CABINET = BLOCKS.register("oak_cabinet",
 			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
-	public static final RegistryObject<Block> BIRCH_CABINET = BLOCKS.register("birch_cabinet",
-			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
 	public static final RegistryObject<Block> SPRUCE_CABINET = BLOCKS.register("spruce_cabinet",
+			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
+	public static final RegistryObject<Block> BIRCH_CABINET = BLOCKS.register("birch_cabinet",
 			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
 	public static final RegistryObject<Block> JUNGLE_CABINET = BLOCKS.register("jungle_cabinet",
 			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
