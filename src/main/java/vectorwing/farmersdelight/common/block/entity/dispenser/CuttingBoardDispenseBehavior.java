@@ -26,7 +26,7 @@ import java.util.HashMap;
 @ParametersAreNonnullByDefault
 public class CuttingBoardDispenseBehavior extends OptionalDispenseItemBehavior
 {
-	private static final DispenserLookup BEHAVIOUR_LOOKUP = new DispenserLookup();
+	private static final DispenserBlock BEHAVIOUR_LOOKUP = (DispenserBlock) Blocks.DISPENSER;
 	private static final HashMap<Item, DispenseItemBehavior> DISPENSE_ITEM_BEHAVIOR_HASH_MAP = new HashMap<>();
 
 	public static void registerBehaviour(Item item, CuttingBoardDispenseBehavior behavior) {
@@ -51,8 +51,7 @@ public class CuttingBoardDispenseBehavior extends OptionalDispenseItemBehavior
 		BlockState blockstate = world.getBlockState(blockpos);
 		Block block = blockstate.getBlock();
 		BlockEntity te = world.getBlockEntity(blockpos);
-		if (block instanceof CuttingBoardBlock && te instanceof CuttingBoardBlockEntity) {
-			CuttingBoardBlockEntity tileEntity = (CuttingBoardBlockEntity) te;
+		if (block instanceof CuttingBoardBlock && te instanceof CuttingBoardBlockEntity tileEntity) {
 			ItemStack boardItem = tileEntity.getStoredItem().copy();
 			if (!boardItem.isEmpty() && tileEntity.processStoredItemUsingTool(stack, null)) {
 				CuttingBoardBlock.spawnCuttingParticles(world, blockpos, boardItem, 5);
@@ -61,19 +60,5 @@ public class CuttingBoardDispenseBehavior extends OptionalDispenseItemBehavior
 			return true;
 		}
 		return false;
-	}
-
-	@ParametersAreNonnullByDefault
-	@MethodsReturnNonnullByDefault
-	private static class DispenserLookup extends DispenserBlock
-	{
-		protected DispenserLookup() {
-			super(Block.Properties.copy(Blocks.DISPENSER));
-		}
-
-		@Override
-		public DispenseItemBehavior getDispenseMethod(ItemStack itemStack) {
-			return super.getDispenseMethod(itemStack);
-		}
 	}
 }
