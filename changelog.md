@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.5
+
+## Fixes
+- Fix Wild Rice not working properly with modded shears
+
 ## 0.5.4
 
 ### Updates
