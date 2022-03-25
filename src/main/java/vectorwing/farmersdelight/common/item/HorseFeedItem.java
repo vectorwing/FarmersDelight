@@ -57,7 +57,7 @@ public class HorseFeedItem extends Item
 			Entity target = event.getTarget();
 			ItemStack itemStack = event.getItemStack();
 
-			if (target instanceof LivingEntity entity && ModTags.HORSE_FEED_USERS.contains(target.getType())) {
+			if (target instanceof LivingEntity entity && target.getType().is(ModTags.HORSE_FEED_USERS)) {
 				boolean isTameable = entity instanceof AbstractHorse;
 
 				if (entity.isAlive() && (!isTameable || ((AbstractHorse) entity).isTamed()) && itemStack.getItem().equals(ModItems.HORSE_FEED.get())) {

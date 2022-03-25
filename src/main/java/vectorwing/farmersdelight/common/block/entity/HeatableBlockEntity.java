@@ -19,15 +19,15 @@ public interface HeatableBlockEntity
 	default boolean isHeated(Level level, BlockPos pos) {
 		BlockState stateBelow = level.getBlockState(pos.below());
 
-		if (ModTags.HEAT_SOURCES.contains(stateBelow.getBlock())) {
+		if (stateBelow.is(ModTags.HEAT_SOURCES)) {
 			if (stateBelow.hasProperty(BlockStateProperties.LIT))
 				return stateBelow.getValue(BlockStateProperties.LIT);
 			return true;
 		}
 
-		if (!this.requiresDirectHeat() && ModTags.HEAT_CONDUCTORS.contains(stateBelow.getBlock())) {
+		if (!this.requiresDirectHeat() && stateBelow.is(ModTags.HEAT_CONDUCTORS)) {
 			BlockState stateFurtherBelow = level.getBlockState(pos.below(2));
-			if (ModTags.HEAT_SOURCES.contains(stateFurtherBelow.getBlock())) {
+			if (stateFurtherBelow.is(ModTags.HEAT_SOURCES)) {
 				if (stateFurtherBelow.hasProperty(BlockStateProperties.LIT))
 					return stateFurtherBelow.getValue(BlockStateProperties.LIT);
 				return true;

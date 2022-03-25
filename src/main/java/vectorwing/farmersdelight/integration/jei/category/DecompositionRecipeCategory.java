@@ -10,11 +10,15 @@ import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -26,6 +30,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @ParametersAreNonnullByDefault
@@ -85,7 +90,9 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 
 	@Override
 	public void setRecipe(IRecipeLayout recipeLayout, DecompositionDummy decompositionRecipe, IIngredients iIngredients) {
-		List<ItemStack> accelerators = ModTags.COMPOST_ACTIVATORS.getValues().stream().map(ItemStack::new).collect(Collectors.toList());
+		final Registry<Block> registry = (Registry<Block>) Registry.REGISTRY.get(ModTags.COMPOST_ACTIVATORS.registry().getRegistryName());
+		final Optional<HolderSet.Named<Block>> holder = registry.getTag(ModTags.COMPOST_ACTIVATORS);
+		List<ItemStack> accelerators = holder.get().stream().map(Holder::value).map(ItemStack::new).collect(Collectors.toList());
 		IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
 
 		// Draw decomposing block

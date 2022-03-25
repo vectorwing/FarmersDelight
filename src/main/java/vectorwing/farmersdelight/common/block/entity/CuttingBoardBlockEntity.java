@@ -91,7 +91,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 					toolStack.setCount(0);
 				}
 			}
-			playProcessingSound(recipe.getSoundEventID(), toolStack.getItem(), getStoredItem().getItem());
+			playProcessingSound(recipe.getSoundEventID(), toolStack, getStoredItem());
 			removeItem();
 			if (player instanceof ServerPlayer) {
 				ModAdvancements.CUTTING_BOARD.trigger((ServerPlayer) player);
@@ -129,17 +129,17 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 		return recipe;
 	}
 
-	public void playProcessingSound(String soundEventID, Item tool, Item boardItem) {
+	public void playProcessingSound(String soundEventID, ItemStack tool, ItemStack boardItem) {
 		SoundEvent sound = ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation(soundEventID));
 
 		if (sound != null) {
 			playSound(sound, 1.0F, 1.0F);
-		} else if (Tags.Items.SHEARS.contains(tool)) {
+		} else if (tool.is(Tags.Items.SHEARS)) {
 			playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);
-		} else if (ForgeTags.TOOLS_KNIVES.contains(tool)) {
+		} else if (tool.is(ForgeTags.TOOLS_KNIVES)) {
 			playSound(ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), 0.8F, 1.0F);
-		} else if (boardItem instanceof BlockItem) {
-			Block block = ((BlockItem) boardItem).getBlock();
+		} else if (boardItem.getItem() instanceof BlockItem blockItem) {
+			Block block = blockItem.getBlock();
 			SoundType soundType = block.defaultBlockState().getSoundType();
 			playSound(soundType.getBreakSound(), 1.0F, 0.8F);
 		} else {

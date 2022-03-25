@@ -72,7 +72,7 @@ public class KnifeItem extends DiggerItem
 		public static void onCakeInteraction(PlayerInteractEvent.RightClickBlock event) {
 			ItemStack toolStack = event.getPlayer().getItemInHand(event.getHand());
 
-			if (!ModTags.KNIVES.contains(toolStack.getItem())) {
+			if (!toolStack.is(ModTags.KNIVES)) {
 				return;
 			}
 
@@ -81,7 +81,7 @@ public class KnifeItem extends DiggerItem
 			BlockState state = event.getWorld().getBlockState(pos);
 			Block block = state.getBlock();
 
-			if (BlockTags.CANDLE_CAKES.contains(block)) {
+			if (state.is(BlockTags.CANDLE_CAKES)) {
 				world.setBlock(pos, Blocks.CAKE.defaultBlockState().setValue(CakeBlock.BITES, 1), 3);
 				Block.dropResources(state, world, pos);
 				Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ModItems.CAKE_SLICE.get()));
@@ -115,7 +115,7 @@ public class KnifeItem extends DiggerItem
 		BlockState state = world.getBlockState(pos);
 		Direction facing = context.getClickedFace();
 
-		if (state.getBlock() == Blocks.PUMPKIN && ModTags.KNIVES.contains(toolStack.getItem())) {
+		if (state.getBlock() == Blocks.PUMPKIN && toolStack.is(ModTags.KNIVES)) {
 			Player player = context.getPlayer();
 			if (player != null && !world.isClientSide) {
 				Direction direction = facing.getAxis() == Direction.Axis.Y ? player.getDirection().getOpposite() : facing;

@@ -68,6 +68,7 @@ public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterlogged
 		worldIn.setBlock(pos.above(), this.defaultBlockState().setValue(WATERLOGGED, false).setValue(HALF, DoubleBlockHalf.UPPER), 3);
 	}
 
+	@Override
 	public void playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
 		if (!worldIn.isClientSide) {
 			if (player.isCreative()) {
@@ -78,7 +79,8 @@ public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterlogged
 		}
 
 		worldIn.levelEvent(player, 2001, pos, getId(state));
-		if (BlockTags.GUARDED_BY_PIGLINS.contains(this)) {
+		// TODO: 1.18.2 - is state == this
+		if (state.is(BlockTags.GUARDED_BY_PIGLINS)) {
 			PiglinAi.angerNearbyPiglins(player, false);
 		}
 	}

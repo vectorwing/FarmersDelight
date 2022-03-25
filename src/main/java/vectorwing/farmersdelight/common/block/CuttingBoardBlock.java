@@ -90,10 +90,10 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 
 			if (cuttingBoardEntity.isEmpty()) {
 				if (!offhandStack.isEmpty()) {
-					if (handIn.equals(InteractionHand.MAIN_HAND) && !ModTags.OFFHAND_EQUIPMENT.contains(offhandStack.getItem()) && !(heldStack.getItem() instanceof BlockItem)) {
+					if (handIn.equals(InteractionHand.MAIN_HAND) && !offhandStack.is(ModTags.OFFHAND_EQUIPMENT) && !(heldStack.getItem() instanceof BlockItem)) {
 						return InteractionResult.PASS; // Pass to off-hand if that item is placeable
 					}
-					if (handIn.equals(InteractionHand.OFF_HAND) && ModTags.OFFHAND_EQUIPMENT.contains(offhandStack.getItem())) {
+					if (handIn.equals(InteractionHand.OFF_HAND) && offhandStack.is(ModTags.OFFHAND_EQUIPMENT)) {
 						return InteractionResult.PASS; // Items in this tag should not be placed from the off-hand
 					}
 				}

@@ -41,7 +41,7 @@ public class RichSoilBlock extends Block
 			Block aboveBlock = aboveState.getBlock();
 
 			// Do nothing if the plant is unaffected by rich soil
-			if (ModTags.UNAFFECTED_BY_RICH_SOIL.contains(aboveBlock) || aboveBlock instanceof TallFlowerBlock) {
+			if (aboveState.is(ModTags.UNAFFECTED_BY_RICH_SOIL) || aboveBlock instanceof TallFlowerBlock) {
 				return;
 			}
 

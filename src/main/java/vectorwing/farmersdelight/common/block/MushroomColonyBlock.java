@@ -80,7 +80,7 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 		int age = state.getValue(COLONY_AGE);
 		ItemStack heldStack = player.getItemInHand(handIn);
 
-		if (age > 0 && Tags.Items.SHEARS.contains(heldStack.getItem())) {
+		if (age > 0 && heldStack.is(Tags.Items.SHEARS)) {
 			popResource(worldIn, pos, this.getCloneItemStack(worldIn, pos, state));
 			worldIn.playSound(null, pos, SoundEvents.MOOSHROOM_SHEAR, SoundSource.BLOCKS, 1.0F, 1.0F);
 			worldIn.setBlock(pos, state.setValue(COLONY_AGE, age - 1), 2);
@@ -110,8 +110,8 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 	@Override
 	public void tick(BlockState state, ServerLevel level, BlockPos pos, Random rand) {
 		int age = state.getValue(COLONY_AGE);
-		Block groundState = level.getBlockState(pos.below()).getBlock();
-		if (age < this.getMaxAge() && ModTags.MUSHROOM_COLONY_GROWABLE_ON.contains(groundState) && level.getRawBrightness(pos.above(), 0) <= GROWING_LIGHT_LEVEL && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, rand.nextInt(5) == 0)) {
+		BlockState groundState = level.getBlockState(pos.below());
+		if (age < this.getMaxAge() && groundState.is(ModTags.MUSHROOM_COLONY_GROWABLE_ON) && level.getRawBrightness(pos.above(), 0) <= GROWING_LIGHT_LEVEL && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, rand.nextInt(5) == 0)) {
 			level.setBlock(pos, state.setValue(COLONY_AGE, age + 1), 2);
 			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(level, pos, state);
 		}

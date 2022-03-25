@@ -7,6 +7,7 @@ import mezz.jei.api.MethodsReturnNonnullByDefault;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -47,7 +48,7 @@ public class CookingPotRecipeBuilder
 		return new CookingPotRecipeBuilder(mainResult, count, cookingTime, experience, container);
 	}
 
-	public CookingPotRecipeBuilder addIngredient(Tag<Item> tagIn) {
+	public CookingPotRecipeBuilder addIngredient(TagKey<Item> tagIn) {
 		return this.addIngredient(Ingredient.of(tagIn));
 	}
 
