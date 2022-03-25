@@ -4,7 +4,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -21,6 +23,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
 @SuppressWarnings("deprecation")
@@ -46,21 +49,59 @@ public class RopeBlock extends IronBarsBlock
 		return state != null ? state.setValue(TIED_TO_BELL, world.getBlockState(posAbove).getBlock() == Blocks.BELL) : null;
 	}
 
+	public int findSlotForRope(Inventory inventory) {
+		int firstEmpty = -1;
+		ItemStack rope = new ItemStack(this.asItem());
+		for(int i = 0; i < inventory.items.size(); i++) {
+			ItemStack stack = inventory.items.get(i);
+			if(ItemStack.isSameItemSameTags(stack, rope) && stack.getCount() < stack.getMaxStackSize()) {
+				return i;
+			} else if(firstEmpty == -1 && stack.isEmpty() && i != inventory.selected) {
+				firstEmpty = i;
+			}
+		}
+		return firstEmpty;
+	}
+
 	@Override
 	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
 		if (player.getItemInHand(handIn).isEmpty()) {
-			BlockPos.MutableBlockPos blockpos$mutable = pos.mutable().move(Direction.UP);
+			if(player.isSecondaryUseActive()) {
+				if(player.getAbilities().mayBuild) {
+					Inventory inventory = player.getInventory();
+					int ropeSlot = this.findSlotForRope(inventory);
+					if(ropeSlot > -1) {
+						BlockPos.MutableBlockPos blockpos$mutable = pos.mutable().move(Direction.DOWN);
+						int minBuildHeight = worldIn.getMinBuildHeight();
 
-			for (int i = 0; i < 24; i++) {
-				BlockState blockStateAbove = worldIn.getBlockState(blockpos$mutable);
-				Block blockAbove = blockStateAbove.getBlock();
-				if (blockAbove == Blocks.BELL) {
-					((BellBlock) blockAbove).attemptToRing(worldIn, blockpos$mutable, blockStateAbove.getValue(BellBlock.FACING).getClockWise());
-					return InteractionResult.SUCCESS;
-				} else if (blockAbove == ModBlocks.ROPE.get()) {
-					blockpos$mutable.move(Direction.UP);
-				} else {
-					return InteractionResult.PASS;
+						while(blockpos$mutable.getY() >= minBuildHeight) {
+							BlockState blockStateBelow = worldIn.getBlockState(blockpos$mutable);
+							if(blockStateBelow.is(this)) {
+								blockpos$mutable.move(Direction.DOWN);
+							} else {
+								blockpos$mutable.move(Direction.UP);
+								worldIn.destroyBlock(blockpos$mutable, false, player);
+								inventory.add(ropeSlot, new ItemStack(this.asItem()));
+
+								return InteractionResult.sidedSuccess(worldIn.isClientSide);
+							}
+						}
+					}
+				}
+			} else {
+				BlockPos.MutableBlockPos blockpos$mutable = pos.mutable().move(Direction.UP);
+
+				for (int i = 0; i < 24; i++) {
+					BlockState blockStateAbove = worldIn.getBlockState(blockpos$mutable);
+					Block blockAbove = blockStateAbove.getBlock();
+					if (blockAbove == Blocks.BELL) {
+						((BellBlock) blockAbove).attemptToRing(worldIn, blockpos$mutable, blockStateAbove.getValue(BellBlock.FACING).getClockWise());
+						return InteractionResult.SUCCESS;
+					} else if (blockAbove == ModBlocks.ROPE.get()) {
+						blockpos$mutable.move(Direction.UP);
+					} else {
+						return InteractionResult.PASS;
+					}
 				}
 			}
 		}
