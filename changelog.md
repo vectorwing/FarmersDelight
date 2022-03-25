@@ -3,7 +3,6 @@
 ## 1.0.4
 
 ### Additions
-<<<<<<< HEAD
 - Added `drops_cake_slice` tag, used for vanilla cake variants (e.g. candle cakes) which should drop a Cake Slice (thanks, Umpaz!)
 - Added no_NO translation (thanks, Bloodaxe95!);
 
