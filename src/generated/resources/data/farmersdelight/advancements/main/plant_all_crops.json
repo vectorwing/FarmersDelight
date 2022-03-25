@@ -120,6 +120,12 @@
       "conditions": {
         "block": "minecraft:chorus_flower"
       }
+    },
+    "glow_berries": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "minecraft:cave_vines"
+      }
     }
   },
   "requirements": [
@@ -173,6 +179,9 @@
     ],
     [
       "chorus_flower"
+    ],
+    [
+      "glow_berries"
     ]
   ]
 }

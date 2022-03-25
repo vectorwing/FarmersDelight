@@ -121,6 +121,7 @@ public class Advancements extends AdvancementProvider
 					.addCriterion("rice", PlacedBlockTrigger.TriggerInstance.placedBlock(ModBlocks.RICE_CROP.get()))
 					.addCriterion("nether_wart", PlacedBlockTrigger.TriggerInstance.placedBlock(Blocks.NETHER_WART))
 					.addCriterion("chorus_flower", PlacedBlockTrigger.TriggerInstance.placedBlock(Blocks.CHORUS_FLOWER))
+					.addCriterion("glow_berries", PlacedBlockTrigger.TriggerInstance.placedBlock(Blocks.CAVE_VINES))
 					.rewards(AdvancementRewards.Builder.experience(100))
 					.save(consumer, getNameId("main/plant_all_crops"));
 

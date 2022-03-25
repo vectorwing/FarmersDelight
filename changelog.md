@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.4
+
+### Updates
+- Added Glow Berries to the "Crop Rotation" advancement
+- Added no_NO translation (thanks, Bloodaxe95!)
+
+### Fixes
+- Fix wrong interaction with Wild Rice's top half
+
 ## 1.0.3
 
 ### Fixes
