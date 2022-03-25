@@ -2,8 +2,13 @@
 
 ## 0.5.5
 
-## Fixes
-- Fix Wild Rice not working properly with modded shears
+### Updates
+- Updated it_IT (thanks, SimGitHub5!);
+- Updated es_ES (thanks, STICKzilla21!);
+
+### Fixes
+- Fix Wild Rice not working properly with modded shears;
+- Fix Pantries being in the wrong wood order in Creative;
 
 ## 0.5.4
 
