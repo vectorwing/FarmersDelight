@@ -1,9 +1,11 @@
 package vectorwing.farmersdelight.common;
 
 import com.google.common.collect.ImmutableList;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mod.EventBusSubscriber
@@ -34,6 +36,8 @@ public class Configuration
 	public static ForgeConfigSpec.BooleanValue CROPS_ON_SHIPWRECKS;
 	public static ForgeConfigSpec.BooleanValue CROPS_ON_VILLAGE_HOUSES;
 	public static ForgeConfigSpec.BooleanValue GENERATE_VILLAGE_COMPOST_HEAPS;
+	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_CROPS_IN_VANILLA_BIOMES_ONLY;
+	public static ForgeConfigSpec.ConfigValue<List<? extends String>> WILD_CROPS_BIOME_BLACKLIST;
 	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_CABBAGES;
 	public static ForgeConfigSpec.IntValue CHANCE_WILD_CABBAGES;
 	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_BEETROOTS;
@@ -98,6 +102,10 @@ public class Configuration
 				.define("cropsOnVillageHouseLoot", true);
 		GENERATE_VILLAGE_COMPOST_HEAPS = COMMON_BUILDER.comment("Generate Compost Heaps across all village biomes")
 				.define("genVillageCompostHeaps", true);
+		GENERATE_WILD_CROPS_IN_VANILLA_BIOMES_ONLY = COMMON_BUILDER.comment("Generate wild crops in vanilla biomes only")
+			.define("genWildCropsInVanillaBiomesOnly", false);
+		WILD_CROPS_BIOME_BLACKLIST = COMMON_BUILDER.comment("Prevent wild crops' generation in certain biomes")
+				.defineList("wildCropsBiomeBlocklist", new ArrayList<>(), obj -> true);
 
 		COMMON_BUILDER.comment("Wild Cabbage generation").push("wild_cabbages");
 		GENERATE_WILD_CABBAGES = COMMON_BUILDER.comment("Generate wild cabbages on beaches")
