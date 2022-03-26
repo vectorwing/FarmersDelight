@@ -193,7 +193,7 @@ public class BlockTags extends BlockTagsProvider
 						ModBlocks.RED_MUSHROOM_COLONY.get())
 				.addTag(ModTags.WILD_CROPS);
 		tag(ModTags.MUSHROOM_COLONY_GROWABLE_ON).add(ModBlocks.RICH_SOIL.get());
-		tag(ModTags.VANILLA_CANDLE_CAKES).add(
+		tag(ModTags.DROPS_CAKE_SLICE).add(
 				Blocks.CANDLE_CAKE,
 				Blocks.WHITE_CANDLE_CAKE,
 				Blocks.ORANGE_CANDLE_CAKE,

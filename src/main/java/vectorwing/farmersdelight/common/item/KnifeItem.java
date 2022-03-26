@@ -81,7 +81,7 @@ public class KnifeItem extends DiggerItem
 			BlockState state = event.getWorld().getBlockState(pos);
 			Block block = state.getBlock();
 
-			if (BlockTags.VANILLA_CANDLE_CAKES.contains(block)) {
+			if (BlockTags.DROPS_CAKE_SLICE.contains(block)) {
 				world.setBlock(pos, Blocks.CAKE.defaultBlockState().setValue(CakeBlock.BITES, 1), 3);
 				Block.dropResources(state, world, pos);
 				Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ModItems.CAKE_SLICE.get()));
