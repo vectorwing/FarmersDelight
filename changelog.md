@@ -5,9 +5,11 @@
 ### Updates
 - Added Glow Berries to the "Crop Rotation" advancement
 - Added no_NO translation (thanks, Bloodaxe95!)
+- Updated es_ES (thanks, STICKzilla21!);
 
 ### Fixes
-- Fix wrong interaction with Wild Rice's top half;
+- Fix Ropes replacing Lava (and any non-water fluids) when being deployed into it;
+- Fix Wild Rice not working properly with modded shears;
 - Fix Cabinets being in the wrong wood order in Creative;
 
 ## 1.0.3
