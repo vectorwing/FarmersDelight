@@ -3,6 +3,7 @@
 ## 0.5.5
 
 ### Updates
+- Added no_NO translation (thanks, Bloodaxe95!);
 - Updated it_IT (thanks, SimGitHub5!);
 - Updated es_ES (thanks, STICKzilla21!);
 
