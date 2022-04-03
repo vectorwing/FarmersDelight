@@ -42,6 +42,9 @@ public class ModTags
 	// Blocks that should not have their growth boosted by Rich Soil, if planted on it.
 	public static final Tag.Named<Block> UNAFFECTED_BY_RICH_SOIL = modBlockTag("unaffected_by_rich_soil");
 
+	// Candle cakes that should drop the vanilla cake slice when sliced by a knife.
+	public static final Tag.Named<Block> DROPS_CAKE_SLICE = modBlockTag("drops_cake_slice");
+	
 	// Items that represent the wild form of a farmable crop.
 	public static final Tag.Named<Item> WILD_CROPS_ITEM = modItemTag("wild_crops");
 
