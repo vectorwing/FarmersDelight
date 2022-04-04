@@ -2,9 +2,12 @@
 
 ## 1.0.4
 
+### Additions
+- Added `drops_cake_slice` tag, used for vanilla cake variants (e.g. candle cakes) which should drop a Cake Slice (thanks, Umpaz!)
+- Added no_NO translation (thanks, Bloodaxe95!);
+
 ### Updates
 - Added Glow Berries to the "Crop Rotation" advancement;
-- Added no_NO translation (thanks, Bloodaxe95!);
 - Updated it_IT (thanks, SimGitHub5!);
 - Updated es_ES (thanks, STICKzilla21!);
 
@@ -66,6 +69,18 @@
   - Both Comfort and Nourishment can now be obtained in ranges of 1, 3 and 5 minutes across meals;
   - Mushroom Stew and Beetroot Soup both grant 3 minutes of Comfort;
   - Rabbit Stew grants 5 minutes of Comfort, as well as a short burst of Jump Boost II;
+
+## 0.5.5
+
+### Updates
+- Added no_NO translation (thanks, Bloodaxe95!);
+- Updated it_IT (thanks, SimGitHub5!);
+- Updated es_ES (thanks, STICKzilla21!);
+
+### Fixes
+- Fix Ropes replacing Lava (and any non-water fluids) when being deployed into it;
+- Fix Wild Rice not working properly with modded shears;
+- Fix Pantries being in the wrong wood order in Creative;
 
 ## 0.5.4
 
