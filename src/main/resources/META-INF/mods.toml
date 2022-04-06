@@ -1,6 +1,6 @@
 
 modLoader="javafml"
-loaderVersion="[37,)"
+loaderVersion="[40,)"
 issueTrackerURL="https://github.com/vectorwing/FarmersDelight/issues"
 license="MIT License"
 
@@ -21,7 +21,7 @@ configBackground="minecraft:textures/block/bricks.png"
 [[dependencies.farmersdelight]]
     modId="forge"
     mandatory=true
-    versionRange="[39.0.45,)"
+    versionRange="[40.0.0,)"
     ordering="NONE"
     side="BOTH"
 
