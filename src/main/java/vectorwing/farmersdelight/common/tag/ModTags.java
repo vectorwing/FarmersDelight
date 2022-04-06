@@ -2,7 +2,7 @@ package vectorwing.farmersdelight.common.tag;
 
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.*;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -42,8 +42,8 @@ public class ModTags
 	public static final TagKey<Block> UNAFFECTED_BY_RICH_SOIL = modBlockTag("unaffected_by_rich_soil");
 
 	// Candle cakes that should drop the vanilla cake slice when sliced by a knife.
-	public static final Tag.Named<Block> DROPS_CAKE_SLICE = modBlockTag("drops_cake_slice");
-	
+	public static final TagKey<Block> DROPS_CAKE_SLICE = modBlockTag("drops_cake_slice");
+
 	// Items that represent the wild form of a farmable crop.
 	public static final TagKey<Item> WILD_CROPS_ITEM = modItemTag("wild_crops");
 

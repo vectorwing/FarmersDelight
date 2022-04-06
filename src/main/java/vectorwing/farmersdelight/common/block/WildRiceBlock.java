@@ -6,8 +6,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.piglin.PiglinAi;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -66,35 +64,6 @@ public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterlogged
 	@Override
 	public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
 		worldIn.setBlock(pos.above(), this.defaultBlockState().setValue(WATERLOGGED, false).setValue(HALF, DoubleBlockHalf.UPPER), 3);
-	}
-
-	@Override
-	public void playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
-		if (!worldIn.isClientSide) {
-			if (player.isCreative()) {
-				removeBottomHalf(worldIn, pos, state, player);
-			} else {
-				dropResources(state, worldIn, pos, null, player, player.getMainHandItem());
-			}
-		}
-
-		worldIn.levelEvent(player, 2001, pos, getId(state));
-		// TODO: 1.18.2 - is state == this
-		if (state.is(BlockTags.GUARDED_BY_PIGLINS)) {
-			PiglinAi.angerNearbyPiglins(player, false);
-		}
-	}
-
-	protected static void removeBottomHalf(Level world, BlockPos pos, BlockState state, Player player) {
-		DoubleBlockHalf half = state.getValue(HALF);
-		if (half == DoubleBlockHalf.UPPER) {
-			BlockPos floorPos = pos.below();
-			BlockState floorState = world.getBlockState(floorPos);
-			if (floorState.getBlock() == state.getBlock() && floorState.getValue(HALF) == DoubleBlockHalf.LOWER) {
-				world.setBlock(floorPos, Blocks.WATER.defaultBlockState(), 35);
-				world.levelEvent(player, 2001, floorPos, Block.getId(floorState));
-			}
-		}
 	}
 
 	@Override
