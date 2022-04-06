@@ -27,7 +27,7 @@ public class CommonSetup
 	public static void init(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			registerCompostables();
-			registerDispenserBehaviors();
+//			registerDispenserBehaviors();
 			registerAnimalFeeds();
 			WildCropGeneration.registerWildCropGeneration();
 		});
