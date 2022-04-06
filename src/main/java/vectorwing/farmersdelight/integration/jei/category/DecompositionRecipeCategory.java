@@ -2,23 +2,20 @@ package vectorwing.farmersdelight.integration.jei.category;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
-import mezz.jei.api.MethodsReturnNonnullByDefault;
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderSet;
-import net.minecraft.core.Registry;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.block.Block;
+import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -30,7 +27,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @ParametersAreNonnullByDefault
@@ -53,7 +49,7 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 		background = helper.createDrawable(backgroundImage, 0, 0, 118, 80);
 		organicCompost = new ItemStack(ModBlocks.ORGANIC_COMPOST.get());
 		richSoil = new ItemStack(ModItems.RICH_SOIL.get());
-		icon = helper.createDrawableIngredient(richSoil);
+		icon = helper.createDrawableIngredient(VanillaTypes.ITEM, richSoil);
 		slotIcon = helper.createDrawable(backgroundImage, 119, 0, slotSize, slotSize);
 	}
 
@@ -82,39 +78,28 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 		return this.icon;
 	}
 
+//	@Override
+//	public void setIngredients(DecompositionDummy decompositionRecipe, IIngredients ingredients) {
+//		ingredients.setInputIngredients(ImmutableList.of(Ingredient.of(organicCompost)));
+//		ingredients.setOutput(VanillaTypes.ITEM, richSoil);
+//	}
+
 	@Override
-	public void setIngredients(DecompositionDummy decompositionRecipe, IIngredients ingredients) {
-		ingredients.setInputIngredients(ImmutableList.of(Ingredient.of(organicCompost)));
-		ingredients.setOutput(VanillaTypes.ITEM, richSoil);
+	public void setRecipe(IRecipeLayoutBuilder recipeLayout, DecompositionDummy decompositionRecipe, IFocusGroup iIngredients) {
+		List<ItemStack> accelerators = ForgeRegistries.BLOCKS.tags().getTag(ModTags.COMPOST_ACTIVATORS).stream().map(ItemStack::new).collect(Collectors.toList());
+
+		recipeLayout.addSlot(RecipeIngredientRole.INPUT, 9, 26).addItemStack(organicCompost);
+		recipeLayout.addSlot(RecipeIngredientRole.OUTPUT, 93, 26).addItemStack(richSoil);
+		recipeLayout.addSlot(RecipeIngredientRole.INPUT, 64, 54).addItemStacks(accelerators);
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, DecompositionDummy decompositionRecipe, IIngredients iIngredients) {
-		final Registry<Block> registry = (Registry<Block>) Registry.REGISTRY.get(ModTags.COMPOST_ACTIVATORS.registry().getRegistryName());
-		final Optional<HolderSet.Named<Block>> holder = registry.getTag(ModTags.COMPOST_ACTIVATORS);
-		List<ItemStack> accelerators = holder.get().stream().map(Holder::value).map(ItemStack::new).collect(Collectors.toList());
-		IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
-
-		// Draw decomposing block
-		itemStacks.init(0, false, 8, 25);
-		itemStacks.set(0, organicCompost);
-
-		// Draw decomposition result
-		itemStacks.init(1, false, 92, 25);
-		itemStacks.set(1, richSoil);
-
-		// Draw accelerators
-		itemStacks.init(2, false, 63, 53);
-		itemStacks.set(2, accelerators);
-	}
-
-	@Override
-	public void draw(DecompositionDummy recipe, PoseStack ms, double mouseX, double mouseY) {
+	public void draw(DecompositionDummy recipe, IRecipeSlotsView recipeSlotsView, PoseStack ms, double mouseX, double mouseY) {
 		this.slotIcon.draw(ms, 63, 53);
 	}
 
 	@Override
-	public List<Component> getTooltipStrings(DecompositionDummy recipe, double mouseX, double mouseY) {
+	public List<Component> getTooltipStrings(DecompositionDummy recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
 		if (inIconAt(40, 38, mouseX, mouseY)) {
 			return ImmutableList.of(translateKey(".light"));
 		}
@@ -135,6 +120,5 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 	private static TranslatableComponent translateKey(@Nonnull String suffix) {
 		return new TranslatableComponent(FarmersDelight.MODID + ".jei.decomposition" + suffix);
 	}
-
 }
 
