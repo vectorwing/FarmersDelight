@@ -142,7 +142,7 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 	}
 
 	private CookingPotSupport getTrayState(LevelAccessor world, BlockPos pos) {
-		if (ModTags.TRAY_HEAT_SOURCES.contains(world.getBlockState(pos.below()).getBlock())) {
+		if (world.getBlockState(pos.below()).is(ModTags.TRAY_HEAT_SOURCES)) {
 			return CookingPotSupport.TRAY;
 		}
 		return CookingPotSupport.NONE;

@@ -59,7 +59,7 @@ public class DogFoodItem extends ConsumableItem
 			Entity target = event.getTarget();
 			ItemStack itemStack = event.getItemStack();
 
-			if (target instanceof LivingEntity entity && ModTags.DOG_FOOD_USERS.contains(target.getType())) {
+			if (target instanceof LivingEntity entity && target.getType().is(ModTags.DOG_FOOD_USERS)) {
 				boolean isTameable = entity instanceof TamableAnimal;
 
 				if (entity.isAlive() && (!isTameable || ((TamableAnimal) entity).isTame()) && itemStack.getItem().equals(ModItems.DOG_FOOD.get())) {

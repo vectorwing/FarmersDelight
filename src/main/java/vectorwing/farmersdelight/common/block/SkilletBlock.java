@@ -183,7 +183,7 @@ public class SkilletBlock extends BaseEntityBlock
 	}
 
 	private boolean getTrayState(LevelAccessor world, BlockPos pos) {
-		return ModTags.TRAY_HEAT_SOURCES.contains(world.getBlockState(pos.below()).getBlock());
+		return world.getBlockState(pos.below()).is(ModTags.TRAY_HEAT_SOURCES);
 	}
 
 	/**

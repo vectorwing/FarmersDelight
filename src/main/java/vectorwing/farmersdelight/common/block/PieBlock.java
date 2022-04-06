@@ -71,7 +71,7 @@ public class PieBlock extends Block
 	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
 		ItemStack heldStack = player.getItemInHand(handIn);
 		if (worldIn.isClientSide) {
-			if (ModTags.KNIVES.contains(heldStack.getItem())) {
+			if (heldStack.is(ModTags.KNIVES)) {
 				return cutSlice(worldIn, pos, state);
 			}
 
@@ -84,7 +84,7 @@ public class PieBlock extends Block
 			}
 		}
 
-		if (ModTags.KNIVES.contains(heldStack.getItem())) {
+		if (heldStack.is(ModTags.KNIVES)) {
 			return cutSlice(worldIn, pos, state);
 		}
 		return this.consumeBite(worldIn, pos, state, player);

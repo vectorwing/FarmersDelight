@@ -77,7 +77,7 @@ public class RichSoilFarmlandBlock extends FarmBlock
 			BlockState aboveState = worldIn.getBlockState(pos.above());
 			Block aboveBlock = aboveState.getBlock();
 
-			if (ModTags.UNAFFECTED_BY_RICH_SOIL.contains(aboveBlock) || aboveBlock instanceof TallFlowerBlock) {
+			if (aboveState.is(ModTags.UNAFFECTED_BY_RICH_SOIL) || aboveBlock instanceof TallFlowerBlock) {
 				return;
 			}
 
