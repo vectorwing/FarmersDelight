@@ -9,6 +9,7 @@ import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
@@ -21,6 +22,7 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.TextUtils;
+import vectorwing.farmersdelight.integration.jei.FDRecipeTypes;
 import vectorwing.farmersdelight.integration.jei.resource.DecompositionDummy;
 
 import javax.annotation.Nonnull;
@@ -55,12 +57,17 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 
 	@Override
 	public ResourceLocation getUid() {
-		return UID;
+		return this.getRecipeType().getUid();
 	}
 
 	@Override
 	public Class<? extends DecompositionDummy> getRecipeClass() {
-		return DecompositionDummy.class;
+		return this.getRecipeType().getRecipeClass();
+	}
+
+	@Override
+	public RecipeType<DecompositionDummy> getRecipeType() {
+		return FDRecipeTypes.DECOMPOSITION;
 	}
 
 	@Override
@@ -78,19 +85,13 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 		return this.icon;
 	}
 
-//	@Override
-//	public void setIngredients(DecompositionDummy decompositionRecipe, IIngredients ingredients) {
-//		ingredients.setInputIngredients(ImmutableList.of(Ingredient.of(organicCompost)));
-//		ingredients.setOutput(VanillaTypes.ITEM, richSoil);
-//	}
-
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder recipeLayout, DecompositionDummy decompositionRecipe, IFocusGroup iIngredients) {
 		List<ItemStack> accelerators = ForgeRegistries.BLOCKS.tags().getTag(ModTags.COMPOST_ACTIVATORS).stream().map(ItemStack::new).collect(Collectors.toList());
 
 		recipeLayout.addSlot(RecipeIngredientRole.INPUT, 9, 26).addItemStack(organicCompost);
 		recipeLayout.addSlot(RecipeIngredientRole.OUTPUT, 93, 26).addItemStack(richSoil);
-		recipeLayout.addSlot(RecipeIngredientRole.INPUT, 64, 54).addItemStacks(accelerators);
+		recipeLayout.addSlot(RecipeIngredientRole.RENDER_ONLY, 64, 54).addItemStacks(accelerators);
 	}
 
 	@Override

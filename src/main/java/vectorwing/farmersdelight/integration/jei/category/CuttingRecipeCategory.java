@@ -5,8 +5,10 @@ import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -20,7 +22,9 @@ import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.utility.TextUtils;
+import vectorwing.farmersdelight.integration.jei.FDRecipeTypes;
 import vectorwing.farmersdelight.integration.jei.resource.CuttingBoardDrawable;
+import vectorwing.farmersdelight.integration.jei.resource.DecompositionDummy;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Arrays;
@@ -52,12 +56,17 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 
 	@Override
 	public ResourceLocation getUid() {
-		return UID;
+		return this.getRecipeType().getUid();
 	}
 
 	@Override
 	public Class<? extends CuttingBoardRecipe> getRecipeClass() {
-		return CuttingBoardRecipe.class;
+		return this.getRecipeType().getRecipeClass();
+	}
+
+	@Override
+	public RecipeType<CuttingBoardRecipe> getRecipeType() {
+		return FDRecipeTypes.CUTTING;
 	}
 
 	@Override
@@ -120,7 +129,7 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 	}
 
 	@Override
-	public void draw(CuttingBoardRecipe recipe, PoseStack matrixStack, double mouseX, double mouseY) {
+	public void draw(CuttingBoardRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
 		//cuttingBoard.draw(matrixStack, 15, 19);
 		NonNullList<ChanceResult> recipeOutputs = recipe.getRollableResults();
 

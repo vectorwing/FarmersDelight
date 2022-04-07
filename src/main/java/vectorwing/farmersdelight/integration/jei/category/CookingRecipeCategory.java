@@ -6,8 +6,10 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.NonNullList;
@@ -19,6 +21,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.utility.TextUtils;
+import vectorwing.farmersdelight.integration.jei.FDRecipeTypes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
@@ -40,7 +43,7 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 		title = TextUtils.getTranslation("jei.cooking");
 		ResourceLocation backgroundImage = new ResourceLocation(FarmersDelight.MODID, "textures/gui/cooking_pot.png");
 		background = helper.createDrawable(backgroundImage, 29, 16, 117, 57);
-		icon = helper.createDrawableIngredient(new ItemStack(ModItems.COOKING_POT.get()));
+		icon = helper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(ModItems.COOKING_POT.get()));
 		heatIndicator = helper.createDrawable(backgroundImage, 176, 0, 17, 15);
 		arrow = helper.drawableBuilder(backgroundImage, 176, 15, 24, 17)
 				.buildAnimated(200, IDrawableAnimated.StartDirection.LEFT, false);
@@ -48,12 +51,17 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 
 	@Override
 	public ResourceLocation getUid() {
-		return UID;
+		return this.getRecipeType().getUid();
 	}
 
 	@Override
 	public Class<? extends CookingPotRecipe> getRecipeClass() {
-		return CookingPotRecipe.class;
+		return this.getRecipeType().getRecipeClass();
+	}
+
+	@Override
+	public RecipeType<CookingPotRecipe> getRecipeType() {
+		return FDRecipeTypes.COOKING;
 	}
 
 	@Override
@@ -112,7 +120,7 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 	}
 
 	@Override
-	public void draw(CookingPotRecipe recipe, PoseStack matrixStack, double mouseX, double mouseY) {
+	public void draw(CookingPotRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
 		arrow.draw(matrixStack, 60, 9);
 		heatIndicator.draw(matrixStack, 18, 39);
 	}
