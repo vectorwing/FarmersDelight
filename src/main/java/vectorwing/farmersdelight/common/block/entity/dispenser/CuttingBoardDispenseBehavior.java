@@ -9,7 +9,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,11 +25,10 @@ import java.util.HashMap;
 @ParametersAreNonnullByDefault
 public class CuttingBoardDispenseBehavior extends OptionalDispenseItemBehavior
 {
-	private static final DispenserLookup BEHAVIOUR_LOOKUP = new DispenserLookup();
 	private static final HashMap<Item, DispenseItemBehavior> DISPENSE_ITEM_BEHAVIOR_HASH_MAP = new HashMap<>();
 
 	public static void registerBehaviour(Item item, CuttingBoardDispenseBehavior behavior) {
-		DISPENSE_ITEM_BEHAVIOR_HASH_MAP.put(item, BEHAVIOUR_LOOKUP.getDispenseMethod(new ItemStack(item))); // Save the old behaviours so they can be used later
+		DISPENSE_ITEM_BEHAVIOR_HASH_MAP.put(item, DispenserBlock.DISPENSER_REGISTRY.get(item)); // Save the old behaviours so they can be used later
 		DispenserBlock.registerBehavior(item, behavior);
 	}
 
@@ -61,19 +59,5 @@ public class CuttingBoardDispenseBehavior extends OptionalDispenseItemBehavior
 			return true;
 		}
 		return false;
-	}
-
-	@ParametersAreNonnullByDefault
-	@MethodsReturnNonnullByDefault
-	private static class DispenserLookup extends DispenserBlock
-	{
-		protected DispenserLookup() {
-			super(Block.Properties.copy(Blocks.DISPENSER));
-		}
-
-		@Override
-		public DispenseItemBehavior getDispenseMethod(ItemStack itemStack) {
-			return super.getDispenseMethod(itemStack);
-		}
 	}
 }

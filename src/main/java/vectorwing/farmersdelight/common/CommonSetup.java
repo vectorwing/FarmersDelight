@@ -27,7 +27,7 @@ public class CommonSetup
 	public static void init(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			registerCompostables();
-//			registerDispenserBehaviors();
+			registerDispenserBehaviors();
 			registerAnimalFeeds();
 			WildCropGeneration.registerWildCropGeneration();
 		});
@@ -118,10 +118,14 @@ public class CommonSetup
 
 	public static void registerAnimalFeeds() {
 		Ingredient newChickenFood = Ingredient.of(ModItems.CABBAGE_SEEDS.get(), ModItems.TOMATO_SEEDS.get(), ModItems.RICE.get());
-		Chicken.FOOD_ITEMS = new CompoundIngredient(Arrays.asList(Chicken.FOOD_ITEMS, newChickenFood)) {};
+		Chicken.FOOD_ITEMS = new CompoundIngredient(Arrays.asList(Chicken.FOOD_ITEMS, newChickenFood))
+		{
+		};
 
 		Ingredient newPigFood = Ingredient.of(ModItems.CABBAGE.get(), ModItems.TOMATO.get());
-		Pig.FOOD_ITEMS = new CompoundIngredient(Arrays.asList(Pig.FOOD_ITEMS, newPigFood)) {};
+		Pig.FOOD_ITEMS = new CompoundIngredient(Arrays.asList(Pig.FOOD_ITEMS, newPigFood))
+		{
+		};
 
 		Collections.addAll(Parrot.TAME_FOOD, ModItems.CABBAGE_SEEDS.get(), ModItems.TOMATO_SEEDS.get(), ModItems.RICE.get());
 	}
