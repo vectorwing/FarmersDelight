@@ -56,9 +56,9 @@ public class ModBlocks
 	public static final RegistryObject<Block> SAFETY_NET = BLOCKS.register("safety_net", SafetyNetBlock::new);
 	public static final RegistryObject<Block> OAK_PANTRY = BLOCKS.register("oak_pantry",
 			() -> new PantryBlock(Block.Properties.copy(Blocks.BARREL)));
-	public static final RegistryObject<Block> BIRCH_PANTRY = BLOCKS.register("birch_pantry",
-			() -> new PantryBlock(Block.Properties.copy(Blocks.BARREL)));
 	public static final RegistryObject<Block> SPRUCE_PANTRY = BLOCKS.register("spruce_pantry",
+			() -> new PantryBlock(Block.Properties.copy(Blocks.BARREL)));
+	public static final RegistryObject<Block> BIRCH_PANTRY = BLOCKS.register("birch_pantry",
 			() -> new PantryBlock(Block.Properties.copy(Blocks.BARREL)));
 	public static final RegistryObject<Block> JUNGLE_PANTRY = BLOCKS.register("jungle_pantry",
 			() -> new PantryBlock(Block.Properties.copy(Blocks.BARREL)));

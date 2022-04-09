@@ -2,7 +2,10 @@ package vectorwing.farmersdelight.items;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -41,6 +44,10 @@ public class RopeItem extends FuelBlockItem
 			while (i < 256) {
 				state = world.getBlockState(blockpos$mutable);
 				if (state.getBlock() != this.getBlock()) {
+					FluidState fluid = state.getFluidState();
+					if (!fluid.is(FluidTags.WATER) && !fluid.isEmpty()) {
+						return null;
+					}
 					if (state.canBeReplaced(context)) {
 						return BlockItemUseContext.at(context, blockpos$mutable, direction);
 					}

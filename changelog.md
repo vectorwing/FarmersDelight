@@ -11,6 +11,18 @@
 ### Updates
 - The modifier `add_item` can now safely specify a `count` for the added item (optional);
 
+## 0.5.5
+
+### Updates
+- Added no_NO translation (thanks, Bloodaxe95!);
+- Updated it_IT (thanks, SimGitHub5!);
+- Updated es_ES (thanks, STICKzilla21!);
+
+### Fixes
+- Fix Ropes replacing Lava (and any non-water fluids) when being deployed into it;
+- Fix Wild Rice not working properly with modded shears;
+- Fix Pantries being in the wrong wood order in Creative;
+
 ## 0.5.4
 
 ### Updates

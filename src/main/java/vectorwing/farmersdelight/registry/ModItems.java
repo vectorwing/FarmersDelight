@@ -52,10 +52,10 @@ public class ModItems
 			() -> new FuelBlockItem(ModBlocks.SAFETY_NET.get(), new Item.Properties().tab(FarmersDelight.ITEM_GROUP), 200));
 	public static final RegistryObject<Item> OAK_PANTRY = ITEMS.register("oak_pantry",
 			() -> new FuelBlockItem(ModBlocks.OAK_PANTRY.get(), new Item.Properties().tab(FarmersDelight.ITEM_GROUP), 300));
-	public static final RegistryObject<Item> BIRCH_PANTRY = ITEMS.register("birch_pantry",
-			() -> new FuelBlockItem(ModBlocks.BIRCH_PANTRY.get(), new Item.Properties().tab(FarmersDelight.ITEM_GROUP), 300));
 	public static final RegistryObject<Item> SPRUCE_PANTRY = ITEMS.register("spruce_pantry",
 			() -> new FuelBlockItem(ModBlocks.SPRUCE_PANTRY.get(), new Item.Properties().tab(FarmersDelight.ITEM_GROUP), 300));
+	public static final RegistryObject<Item> BIRCH_PANTRY = ITEMS.register("birch_pantry",
+			() -> new FuelBlockItem(ModBlocks.BIRCH_PANTRY.get(), new Item.Properties().tab(FarmersDelight.ITEM_GROUP), 300));
 	public static final RegistryObject<Item> JUNGLE_PANTRY = ITEMS.register("jungle_pantry",
 			() -> new FuelBlockItem(ModBlocks.JUNGLE_PANTRY.get(), new Item.Properties().tab(FarmersDelight.ITEM_GROUP), 300));
 	public static final RegistryObject<Item> ACACIA_PANTRY = ITEMS.register("acacia_pantry",
