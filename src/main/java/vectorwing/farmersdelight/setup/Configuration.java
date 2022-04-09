@@ -18,6 +18,7 @@ public class Configuration
 	public static final String CATEGORY_SETTINGS = "settings";
 	public static ForgeConfigSpec.BooleanValue ENABLE_VANILLA_CROP_CRATES;
 	public static ForgeConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS;
+	public static ForgeConfigSpec.BooleanValue WANDERING_TRADER_SELLS_FD_ITEMS;
 	public static ForgeConfigSpec.DoubleValue RICH_SOIL_BOOST_CHANCE;
 	public static ForgeConfigSpec.DoubleValue CUTTING_BOARD_FORTUNE_BONUS;
 	public static ForgeConfigSpec.ConfigValue<List<? extends String>> CANVAS_SIGN_DARK_BACKGROUND_LIST;
@@ -65,6 +66,8 @@ public class Configuration
 				.define("enableVanillaCropCrates", true);
 		FARMERS_BUY_FD_CROPS = COMMON_BUILDER.comment("Should Novice and Apprentice Farmers buy this mod's crops? (May reduce chances of other trades appearing)")
 				.define("farmersBuyFDCrops", true);
+		WANDERING_TRADER_SELLS_FD_ITEMS = COMMON_BUILDER.comment("Should the Wandering Trader sell some of this mod's items? (Currently includes crop seeds and onions)")
+				.define("wanderingTraderSellsFDItems", true);
 		RICH_SOIL_BOOST_CHANCE = COMMON_BUILDER.comment("How often (in percentage) should Rich Soil succeed in boosting a plant's growth at each random tick? Set it to 0.0 to disable this.")
 				.defineInRange("richSoilBoostChance", 0.2, 0.0, 1.0);
 		CUTTING_BOARD_FORTUNE_BONUS = COMMON_BUILDER.comment("How much of a bonus (in percentage) should each level of Fortune grant to Cutting Board chances? Set it to 0.0 to disable this.")

@@ -1,30 +1,26 @@
 package vectorwing.farmersdelight.setup;
 
-import com.google.common.collect.Sets;
 import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.block.ComposterBlock;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.merchant.villager.VillagerTrades;
-import net.minecraft.item.*;
+import net.minecraft.item.Food;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTables;
-import net.minecraft.loot.TableLootEntry;
 import net.minecraft.loot.functions.LootFunctionManager;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
-import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
+import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -46,7 +42,9 @@ import vectorwing.farmersdelight.world.CropPatchGeneration;
 import vectorwing.farmersdelight.world.VillageStructures;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID)
 @ParametersAreNonnullByDefault
@@ -204,16 +202,27 @@ public class CommonEventHandler
 
 	@SubscribeEvent
 	public static void onVillagerTrades(VillagerTradesEvent event) {
-		if (!Configuration.FARMERS_BUY_FD_CROPS.get()) return;
+		if (Configuration.FARMERS_BUY_FD_CROPS.get()) {
+			Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
+			VillagerProfession profession = event.getType();
+			if (profession.getRegistryName() == null) return;
+			if (profession.getRegistryName().getPath().equals("farmer")) {
+				trades.get(1).add(new VillagerTrades.EmeraldForItemsTrade(ModItems.ONION.get(), 26, 16, 2));
+				trades.get(1).add(new VillagerTrades.EmeraldForItemsTrade(ModItems.TOMATO.get(), 26, 16, 2));
+				trades.get(2).add(new VillagerTrades.EmeraldForItemsTrade(ModItems.CABBAGE.get(), 16, 16, 5));
+				trades.get(2).add(new VillagerTrades.EmeraldForItemsTrade(ModItems.RICE.get(), 20, 16, 5));
+			}
+		}
+	}
 
-		Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
-		VillagerProfession profession = event.getType();
-		if (profession.getRegistryName() == null) return;
-		if (profession.getRegistryName().getPath().equals("farmer")) {
-			trades.get(1).add(new EmeraldForItemsTrade(ModItems.ONION.get(), 26, 16, 2));
-			trades.get(1).add(new EmeraldForItemsTrade(ModItems.TOMATO.get(), 26, 16, 2));
-			trades.get(2).add(new EmeraldForItemsTrade(ModItems.CABBAGE.get(), 16, 16, 5));
-			trades.get(2).add(new EmeraldForItemsTrade(ModItems.RICE.get(), 20, 16, 5));
+	@SubscribeEvent
+	public static void onWandererTrades(WandererTradesEvent event) {
+		if (Configuration.WANDERING_TRADER_SELLS_FD_ITEMS.get()) {
+			List<VillagerTrades.ITrade> trades = event.getGenericTrades();
+			trades.add(new VillagerTrades.ItemsForEmeraldsTrade(ModItems.CABBAGE_SEEDS.get(), 1, 1, 12, 1));
+			trades.add(new VillagerTrades.ItemsForEmeraldsTrade(ModItems.TOMATO_SEEDS.get(), 1, 1, 12, 1));
+			trades.add(new VillagerTrades.ItemsForEmeraldsTrade(ModItems.RICE.get(), 1, 1, 12, 1));
+			trades.add(new VillagerTrades.ItemsForEmeraldsTrade(ModItems.ONION.get(), 1, 1, 12, 1));
 		}
 	}
 
@@ -239,28 +248,6 @@ public class CommonEventHandler
 			if (ModTags.COMFORT_FOODS.contains(food)) {
 				entity.addEffect(new EffectInstance(ModEffects.COMFORT.get(), Foods.MEDIUM_DURATION, 0));
 			}
-		}
-	}
-
-	static class EmeraldForItemsTrade implements VillagerTrades.ITrade
-	{
-		private final Item tradeItem;
-		private final int count;
-		private final int maxUses;
-		private final int xpValue;
-		private final float priceMultiplier;
-
-		public EmeraldForItemsTrade(IItemProvider tradeItemIn, int countIn, int maxUsesIn, int xpValueIn) {
-			this.tradeItem = tradeItemIn.asItem();
-			this.count = countIn;
-			this.maxUses = maxUsesIn;
-			this.xpValue = xpValueIn;
-			this.priceMultiplier = 0.05F;
-		}
-
-		public MerchantOffer getOffer(Entity trader, Random rand) {
-			ItemStack itemstack = new ItemStack(this.tradeItem, this.count);
-			return new MerchantOffer(itemstack, new ItemStack(Items.EMERALD), this.maxUses, this.xpValue, this.priceMultiplier);
 		}
 	}
 }

@@ -9,6 +9,18 @@
   - This modifier is governed by the `generateFDChestLoot` config; if set to false, it doesn't do anything.
 
 ### Updates
+- The Comfort effect has been redesigned:
+  - It no longer provides immunity to Slowness, Weakness or Hunger;
+  - Now, it extends natural regeneration (or provides it, if the gamerule is disabled), no matter how hungry you are;
+  - A silver sheen will scroll through your hearts to indicate the effect is active.
+- Updated a few crafting recipes:
+  - Dumplings are now cooked with Wheat Dough instead of Raw Pasta;
+  - Wheat Dough is now craftable from 3 Wheat, and either 1 egg or 1 Water Bucket;
+  - Raw Pasta is now made by cutting Wheat Dough in a Cutting Board;
+- Foods have been rebalanced:
+  - Nourishment and Comfort lengths have been tweaked, based on the complexity of the dish;
+  - Sandwiches no longer provide burst effects, to make them on par with other handheld foods;
+- Wandering Traders now sell the mod's seeds/plantables sometimes. This can be similarly disabled in the config;
 - The modifier `add_item` can now safely specify a `count` for the added item (optional);
 
 ## 0.5.5
