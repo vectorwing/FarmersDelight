@@ -13,6 +13,7 @@ import net.minecraft.data.AdvancementProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.IDataProvider;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
@@ -21,6 +22,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.advancement.CuttingBoardTrigger;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModEffects;
+import vectorwing.farmersdelight.registry.ModEntityTypes;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.TextUtils;
 
@@ -136,6 +138,14 @@ public class Advancements extends AdvancementProvider
 			Advancement dippingYourRoots = getAdvancement(cropsOfTheWild, ModItems.RICE.get(), "plant_rice", FrameType.TASK, true, true, false)
 					.addCriterion("plant_rice", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.RICE_CROP.get()))
 					.save(consumer, getNameId("main/plant_rice"));
+
+			Advancement booHiss = getAdvancement(cropsOfTheWild, ModItems.ROTTEN_TOMATO.get(), "hit_raider_with_rotten_tomato", FrameType.TASK, true, true, false)
+					.addCriterion("hit_raider_with_rotten_tomato", new PlayerHurtEntityTrigger.Instance(
+							EntityPredicate.AndPredicate.ANY,
+							DamagePredicate.Builder.damageInstance()
+									.type(DamageSourcePredicate.Builder.damageType().isProjectile(true).direct(EntityPredicate.Builder.entity().of(ModEntityTypes.ROTTEN_TOMATO.get()))).build(),
+							EntityPredicate.AndPredicate.wrap(EntityPredicate.Builder.entity().of(EntityTypeTags.RAIDERS).build())))
+					.save(consumer, getNameId("main/hit_raider_with_rotten_tomato"));
 
 			Advancement cropRotation = getAdvancement(dippingYourRoots, ModItems.CABBAGE.get(), "plant_all_crops", FrameType.CHALLENGE, true, true, false)
 					.addCriterion("wheat", PlacedBlockTrigger.Instance.placedBlock(Blocks.WHEAT))
