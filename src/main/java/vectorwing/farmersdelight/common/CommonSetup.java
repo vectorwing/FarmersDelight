@@ -42,6 +42,14 @@ public class CommonSetup
 	}
 
 	public static void registerDispenserBehaviors() {
+		DispenserBlock.registerBehavior(ModItems.ROTTEN_TOMATO.get(), new ProjectileDispenseBehavior()
+		{
+			@Nonnull
+			protected ProjectileEntity getProjectile(World pLevel, IPosition pPosition, ItemStack pStack) {
+				return new RottenTomatoEntity(pLevel, pPosition.x(), pPosition.y(), pPosition.z());
+			}
+		});
+		
 		if (Configuration.DISPENSER_TOOLS_CUTTING_BOARD.get()) {
 			CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_PICKAXE, new CuttingBoardDispenseBehavior());
 			CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_AXE, new CuttingBoardDispenseBehavior());
