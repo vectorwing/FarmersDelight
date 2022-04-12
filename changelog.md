@@ -7,12 +7,20 @@
 - Added `add_loot_table` loot modifier:
   - Allows for adding unmodified extra loot rolls to specified `lootTable` paths;
   - This modifier is governed by the `generateFDChestLoot` config; if set to false, it doesn't do anything.
+- New cutting recipes:
+  - Stone + Pickaxe -> Cobblestone;
+  - Quartz Block + Pickaxe -> 4 Nether Quartz
+- Added Rotten Tomatoes:
+  - Not all tomatoes are fresh off the vine. Rarely, you might end up plucking a bad one...
+  - Rotten Tomatoes are inedible and uncookable; they are meant to be **thrown** at others! Splatter that unfunny friend of yours right in the face!
+  - They are also more compostable than standard tomatoes (85% chance), in case you don't want them.
 
 ### Updates
 - The Comfort effect has been redesigned:
   - It no longer provides immunity to Slowness, Weakness or Hunger;
   - Now, it extends natural regeneration (or provides it, if the gamerule is disabled), no matter how hungry you are;
   - A silver sheen will scroll through your hearts to indicate the effect is active.
+- The Advancement tree has been redesigned, with more basic hints accessible at the start of a world;
 - Updated a few crafting recipes:
   - Dumplings are now cooked with Wheat Dough instead of Raw Pasta;
   - Wheat Dough is now craftable from 3 Wheat, and either 1 egg or 1 Water Bucket;

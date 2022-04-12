@@ -20,6 +20,7 @@ import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -546,7 +547,7 @@ public class Recipes extends RecipeProvider
 
 	private void recipesFoodstuffs(Consumer<IFinishedRecipe> consumer) {
 		ShapelessRecipeBuilder.shapeless(ModItems.TOMATO_SEEDS.get())
-				.requires(ModItems.TOMATO.get())
+				.requires(Ingredient.of(ModItems.TOMATO.get(), ModItems.ROTTEN_TOMATO.get()))
 				.unlockedBy("has_tomato", InventoryChangeTrigger.Instance.hasItems(ModItems.TOMATO.get()))
 				.save(consumer);
 		ShapelessRecipeBuilder.shapeless(ModItems.MILK_BOTTLE.get(), 3)
