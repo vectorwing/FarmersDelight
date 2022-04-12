@@ -47,6 +47,31 @@
           "name": "farmersdelight:tomato_seeds"
         }
       ]
+    },
+    {
+      "name": "pool3",
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:random_chance",
+              "chance": 0.05
+            }
+          ],
+          "name": "farmersdelight:rotten_tomato"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "farmersdelight:tomatoes",
+          "properties": {
+            "age": "7"
+          }
+        }
+      ]
     }
   ],
   "functions": [

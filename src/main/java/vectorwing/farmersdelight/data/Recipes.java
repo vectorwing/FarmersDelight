@@ -11,6 +11,7 @@ import vectorwing.farmersdelight.data.recipe.SmeltingRecipes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
