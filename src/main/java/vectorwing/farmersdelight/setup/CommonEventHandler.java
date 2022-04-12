@@ -3,9 +3,13 @@ package vectorwing.farmersdelight.setup;
 import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.block.ComposterBlock;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.dispenser.IPosition;
+import net.minecraft.dispenser.ProjectileDispenseBehavior;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.merchant.villager.VillagerTrades;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,6 +18,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.loot.functions.LootFunctionManager;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -27,6 +32,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.crafting.conditions.VanillaCrateEnabledCondition;
+import vectorwing.farmersdelight.entity.RottenTomatoEntity;
 import vectorwing.farmersdelight.items.Foods;
 import vectorwing.farmersdelight.loot.functions.CopyMealFunction;
 import vectorwing.farmersdelight.loot.functions.CopySkilletFunction;
@@ -41,6 +47,7 @@ import vectorwing.farmersdelight.utils.tags.ModTags;
 import vectorwing.farmersdelight.world.CropPatchGeneration;
 import vectorwing.farmersdelight.world.VillageStructures;
 
+import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -84,6 +91,14 @@ public class CommonEventHandler
 	}
 
 	public static void registerDispenserBehaviors() {
+		DispenserBlock.registerBehavior(ModItems.ROTTEN_TOMATO.get(), new ProjectileDispenseBehavior()
+		{
+			@Nonnull
+			protected ProjectileEntity getProjectile(World pLevel, IPosition pPosition, ItemStack pStack) {
+				return new RottenTomatoEntity(pLevel, pPosition.x(), pPosition.y(), pPosition.z());
+			}
+		});
+
 		if (Configuration.DISPENSER_TOOLS_CUTTING_BOARD.get()) {
 			CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_PICKAXE, new CuttingBoardDispenseBehavior());
 			CuttingBoardDispenseBehavior.registerBehaviour(Items.WOODEN_AXE, new CuttingBoardDispenseBehavior());
