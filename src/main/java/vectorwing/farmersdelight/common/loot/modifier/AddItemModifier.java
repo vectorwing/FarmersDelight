@@ -54,8 +54,8 @@ public class AddItemModifier extends LootModifier
 		@Override
 		public AddItemModifier read(ResourceLocation location, JsonObject object, LootItemCondition[] ailootcondition) {
 			Item addedItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation((GsonHelper.getAsString(object, "item"))));
-			int count = JSONUtils.getAsInt(object, "count", 1);
-			return new AddItemModifier(ailootcondition, addedItem);
+			int count = GsonHelper.getAsInt(object, "count", 1);
+			return new AddItemModifier(ailootcondition, addedItem, count);
 		}
 
 		@Override

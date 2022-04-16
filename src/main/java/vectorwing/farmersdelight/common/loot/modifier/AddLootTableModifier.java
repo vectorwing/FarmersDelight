@@ -1,15 +1,15 @@
-package vectorwing.farmersdelight.loot.modifiers;
+package vectorwing.farmersdelight.common.loot.modifier;
 
 import com.google.gson.JsonObject;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.conditions.ILootCondition;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
-import vectorwing.farmersdelight.setup.Configuration;
+import vectorwing.farmersdelight.common.Configuration;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -21,7 +21,7 @@ public class AddLootTableModifier extends LootModifier
 {
 	private final ResourceLocation lootTable;
 
-	protected AddLootTableModifier(ILootCondition[] conditionsIn, ResourceLocation lootTable) {
+	protected AddLootTableModifier(LootItemCondition[] conditionsIn, ResourceLocation lootTable) {
 		super(conditionsIn);
 		this.lootTable = lootTable;
 	}
@@ -39,14 +39,13 @@ public class AddLootTableModifier extends LootModifier
 	public static class Serializer extends GlobalLootModifierSerializer<AddLootTableModifier>
 	{
 		@Override
-		public AddLootTableModifier read(ResourceLocation location, JsonObject object, ILootCondition[] conditions) {
-			ResourceLocation lootTable = new ResourceLocation(JSONUtils.getAsString(object, "lootTable"));
+		public AddLootTableModifier read(ResourceLocation location, JsonObject object, LootItemCondition[] conditions) {
+			ResourceLocation lootTable = new ResourceLocation(GsonHelper.getAsString(object, "lootTable"));
 			return new AddLootTableModifier(conditions, lootTable);
 		}
 
 		@Override
-		public JsonObject write(AddLootTableModifier instance)
-		{
+		public JsonObject write(AddLootTableModifier instance) {
 			JsonObject object = this.makeConditions(instance.conditions);
 			object.addProperty("lootTable", instance.lootTable.toString());
 			return object;
