@@ -9,7 +9,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.common.BasicItemListing;
 import net.minecraftforge.event.village.VillagerTradesEvent;
+import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -36,6 +38,17 @@ public class VillagerEvents
 			trades.get(1).add(new EmeraldForItemsTrade(ModItems.TOMATO.get(), 26, 16, 2));
 			trades.get(2).add(new EmeraldForItemsTrade(ModItems.CABBAGE.get(), 16, 16, 5));
 			trades.get(2).add(new EmeraldForItemsTrade(ModItems.RICE.get(), 20, 16, 5));
+		}
+	}
+
+	@SubscribeEvent
+	public static void onWandererTrades(WandererTradesEvent event) {
+		if (Configuration.WANDERING_TRADER_SELLS_FD_ITEMS.get()) {
+			List<VillagerTrades.ItemListing> trades = event.getGenericTrades();
+			trades.add(new BasicItemListing(1, new ItemStack(ModItems.CABBAGE_SEEDS.get()), 1, 12, 1));
+			trades.add(new BasicItemListing(1, new ItemStack(ModItems.TOMATO_SEEDS.get()), 1, 12, 1));
+			trades.add(new BasicItemListing(1, new ItemStack(ModItems.RICE.get()), 1, 12, 1));
+			trades.add(new BasicItemListing(1, new ItemStack(ModItems.ONION.get()), 1, 12, 1));
 		}
 	}
 
