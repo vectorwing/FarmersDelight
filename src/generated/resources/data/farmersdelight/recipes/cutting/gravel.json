@@ -6,8 +6,8 @@
     }
   ],
   "tool": {
-    "type": "farmersdelight:tool",
-    "tool": "shovel"
+    "type": "farmersdelight:tool_action",
+    "action": "shovel_dig"
   },
   "result": [
     {
