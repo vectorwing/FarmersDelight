@@ -143,7 +143,7 @@ public class Advancements extends AdvancementProvider
 					.addCriterion("hit_raider_with_rotten_tomato", PlayerHurtEntityTrigger.TriggerInstance.playerHurtEntity(
 							DamagePredicate.Builder.damageInstance()
 									.type(DamageSourcePredicate.Builder.damageType().isProjectile(true).direct(EntityPredicate.Builder.entity().of(ModEntityTypes.ROTTEN_TOMATO.get()))).build(),
-							EntityPredicate.Builder.entity().m_204077_(EntityTypeTags.RAIDERS).build()))
+							EntityPredicate.Builder.entity().of(EntityTypeTags.RAIDERS).build()))
 					.save(consumer, getNameId("main/hit_raider_with_rotten_tomato"));
 
 			Advancement cropRotation = getAdvancement(dippingYourRoots, ModItems.CABBAGE.get(), "plant_all_crops", FrameType.CHALLENGE, true, true, false)
@@ -165,6 +165,7 @@ public class Advancements extends AdvancementProvider
 					.addCriterion("rice", PlacedBlockTrigger.TriggerInstance.placedBlock(ModBlocks.RICE_CROP.get()))
 					.addCriterion("nether_wart", PlacedBlockTrigger.TriggerInstance.placedBlock(Blocks.NETHER_WART))
 					.addCriterion("chorus_flower", PlacedBlockTrigger.TriggerInstance.placedBlock(Blocks.CHORUS_FLOWER))
+					.addCriterion("glow_berries", PlacedBlockTrigger.TriggerInstance.placedBlock(Blocks.CAVE_VINES))
 					.rewards(AdvancementRewards.Builder.experience(100))
 					.save(consumer, getNameId("main/plant_all_crops"));
 

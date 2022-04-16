@@ -1,10 +1,11 @@
 package vectorwing.farmersdelight.common.effect;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectType;
-import net.minecraft.potion.Effects;
+
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 
 @SuppressWarnings("unused")
 public class ComfortEffect extends MobEffect
@@ -20,11 +21,10 @@ public class ComfortEffect extends MobEffect
 
 	@Override
 	public void applyEffectTick(LivingEntity entity, int amplifier) {
-		if (entity.hasEffect(Effects.REGENERATION)) {
+		if (entity.hasEffect(MobEffects.REGENERATION)) {
 			return;
 		}
-		if (entity instanceof PlayerEntity) {
-			PlayerEntity player = (PlayerEntity) entity;
+		if (entity instanceof Player player) {
 			if (player.getFoodData().getSaturationLevel() > 0.0) {
 				return;
 			}

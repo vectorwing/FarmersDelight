@@ -8,9 +8,9 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolActions;
 import vectorwing.farmersdelight.common.crafting.ingredient.ToolActionIngredient;
-import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
+import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 
 import java.util.function.Consumer;
 
@@ -156,13 +156,13 @@ public class CuttingRecipes
 	}
 
 	private static void salvagingMinerals(Consumer<FinishedRecipe> consumer) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BRICKS), new ToolIngredient(ToolType.PICKAXE), Items.BRICK, 4)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BRICKS), new ToolActionIngredient(ToolActions.PICKAXE_DIG), Items.BRICK, 4)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.NETHER_BRICKS), new ToolActionIngredient(ToolActions.PICKAXE_DIG), Items.NETHER_BRICK, 4)
 				.build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.STONE), new ToolIngredient(ToolType.PICKAXE), Items.COBBLESTONE, 1)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.STONE), new ToolActionIngredient(ToolActions.PICKAXE_DIG), Items.COBBLESTONE, 1)
 				.build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.QUARTZ_BLOCK), new ToolIngredient(ToolType.PICKAXE), Items.QUARTZ, 4)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.QUARTZ_BLOCK), new ToolActionIngredient(ToolActions.PICKAXE_DIG), Items.QUARTZ, 4)
 				.build(consumer);
 	}
 
@@ -199,7 +199,7 @@ public class CuttingRecipes
 	private static void diggingSediments(Consumer<FinishedRecipe> consumer) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CLAY), new ToolActionIngredient(ToolActions.SHOVEL_DIG), Items.CLAY_BALL, 4)
 				.build(consumer);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.GRAVEL), new ToolIngredient(ToolType.SHOVEL), Items.GRAVEL, 1)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.GRAVEL), new ToolActionIngredient(ToolActions.SHOVEL_DIG), Items.GRAVEL, 1)
 				.addResultWithChance(Items.FLINT, 0.1F)
 				.build(consumer);
 	}

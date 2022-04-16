@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.common.event;
 
-import com.google.common.collect.Sets;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -18,11 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
-import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
@@ -35,32 +30,9 @@ import vectorwing.farmersdelight.common.FoodValues;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.world.WildCropGeneration;
 
-import java.util.Set;
-
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CommonEvents
 {
-	// TODO: Learn more about Loot Modifiers, and migrate remaining loot injections to it
-	private static final ResourceLocation SHIPWRECK_SUPPLY_CHEST = BuiltInLootTables.SHIPWRECK_SUPPLY;
-	private static final Set<ResourceLocation> VILLAGE_HOUSE_CHESTS = Sets.newHashSet(
-			BuiltInLootTables.VILLAGE_PLAINS_HOUSE,
-			BuiltInLootTables.VILLAGE_SAVANNA_HOUSE,
-			BuiltInLootTables.VILLAGE_SNOWY_HOUSE,
-			BuiltInLootTables.VILLAGE_TAIGA_HOUSE,
-			BuiltInLootTables.VILLAGE_DESERT_HOUSE);
-
-	@SubscribeEvent
-	public static void onLootLoad(LootTableLoadEvent event) {
-		if (Configuration.CROPS_ON_SHIPWRECKS.get() && event.getName().equals(SHIPWRECK_SUPPLY_CHEST)) {
-			event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(FarmersDelight.MODID, "inject/shipwreck_supply")).setWeight(1).setQuality(0)).name("supply_fd_crops").build());
-		}
-
-		if (Configuration.CROPS_ON_VILLAGE_HOUSES.get() && VILLAGE_HOUSE_CHESTS.contains(event.getName())) {
-			event.getTable().addPool(LootPool.lootPool().add(
-					LootTableReference.lootTableReference(new ResourceLocation(FarmersDelight.MODID, "inject/crops_villager_houses")).setWeight(1).setQuality(0)).name("villager_houses_fd_crops").build());
-		}
-	}
-
 	@SubscribeEvent
 	public static void onBiomeLoad(BiomeLoadingEvent event) {
 		BiomeGenerationSettingsBuilder builder = event.getGeneration();
