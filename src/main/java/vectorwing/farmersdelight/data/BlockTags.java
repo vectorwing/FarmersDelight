@@ -167,6 +167,7 @@ public class BlockTags extends BlockTagsProvider
 				.addTag(net.minecraft.tags.BlockTags.FIRE);
 		tag(ModTags.HEAT_SOURCES).add(
 						Blocks.MAGMA_BLOCK,
+						Blocks.LAVA_CAULDRON,
 						ModBlocks.STOVE.get())
 				.addTag(ModTags.TRAY_HEAT_SOURCES);
 		tag(ModTags.HEAT_CONDUCTORS).add(
