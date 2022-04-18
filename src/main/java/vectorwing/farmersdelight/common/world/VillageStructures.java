@@ -11,6 +11,7 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,10 @@ import java.util.List;
 public class VillageStructures
 {
 	public static void addNewVillageBuilding(final ServerAboutToStartEvent event) {
+		if (!Configuration.GENERATE_VILLAGE_COMPOST_HEAPS.get()) {
+			return;
+		}
+
 		Registry<StructureTemplatePool> templatePools = event.getServer().registryAccess().registry(Registry.TEMPLATE_POOL_REGISTRY).get();
 		Registry<StructureProcessorList> processorLists = event.getServer().registryAccess().registry(Registry.PROCESSOR_LIST_REGISTRY).get();
 

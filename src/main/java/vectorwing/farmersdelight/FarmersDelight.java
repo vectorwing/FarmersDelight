@@ -66,6 +66,7 @@ public class FarmersDelight
 		ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
 
 		MinecraftForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
+
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
