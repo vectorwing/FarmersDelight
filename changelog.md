@@ -9,7 +9,9 @@
   - This modifier is governed by the `generateFDChestLoot` config; if set to false, it doesn't do anything.
 - New cutting recipes:
   - Stone + Pickaxe -> Cobblestone;
+  - Deepslate + Pickaxe -> Cobbled Deepslate
   - Quartz Block + Pickaxe -> 4 Nether Quartz
+  - Amethyst Block + Pickaxe -> 4 Amethyst shards
 - Added Rotten Tomatoes:
   - Not all tomatoes are fresh off the vine. Rarely, you might end up plucking a bad one...
   - Rotten Tomatoes are inedible and uncookable; they are meant to be **thrown** at others! Splatter that unfunny friend of yours right in the face!
@@ -30,6 +32,10 @@
   - Sandwiches no longer provide burst effects, to make them on par with other handheld foods;
 - Wandering Traders now sell the mod's seeds/plantables sometimes. This can be similarly disabled in the config;
 - The modifier `add_item` can now safely specify a `count` for the added item (optional);
+
+### Fixes
+- Fixed configuration for generating Compost Heaps on villages not working;
+- Fixed Lava Cauldrons not being valid heat sources;
 
 ## 1.0.4
 

@@ -162,7 +162,11 @@ public class CuttingRecipes
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.STONE), new ToolActionIngredient(ToolActions.PICKAXE_DIG), Items.COBBLESTONE, 1)
 				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.DEEPSLATE), new ToolActionIngredient(ToolActions.PICKAXE_DIG), Items.COBBLED_DEEPSLATE, 1)
+				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.QUARTZ_BLOCK), new ToolActionIngredient(ToolActions.PICKAXE_DIG), Items.QUARTZ, 4)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.AMETHYST_BLOCK), new ToolActionIngredient(ToolActions.PICKAXE_DIG), Items.AMETHYST_SHARD, 4)
 				.build(consumer);
 	}
 
