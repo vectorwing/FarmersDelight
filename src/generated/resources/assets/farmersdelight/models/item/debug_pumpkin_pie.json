@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "farmersdelight:item/blockitem_pumpkin_pie"
+    "layer0": "farmersdelight:item/debug_pumpkin_pie"
   }
 }

@@ -91,7 +91,7 @@ public class ItemModels extends ItemModelProvider
 				ModItems.STUFFED_PUMPKIN_BLOCK.get(),
 				ModItems.HONEY_GLAZED_HAM_BLOCK.get(),
 				ModItems.SHEPHERDS_PIE_BLOCK.get(),
-				ModItems.BLOCKITEM_PUMPKIN_PIE.get()
+				ModItems.DEBUG_PUMPKIN_PIE.get()
 		);
 		takeAll(items, spriteBlockItems.toArray(new Item[0])).forEach(item -> withExistingParent(itemName(item), GENERATED).texture("layer0", resourceItem(itemName(item))));
 

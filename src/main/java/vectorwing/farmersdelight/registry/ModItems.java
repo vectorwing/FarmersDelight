@@ -334,7 +334,7 @@ public class ModItems
 	public static final RegistryObject<Item> HORSE_FEED = ITEMS.register("horse_feed",
 			() -> new HorseFeedItem(new Item.Properties().stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
 
-	// Utility Items (can't be obtained normally)
-	public static final RegistryObject<Item> BLOCKITEM_PUMPKIN_PIE = ITEMS.register("blockitem_pumpkin_pie",
-			() -> new HiddenBlockItem(ModBlocks.PUMPKIN_PIE.get(), new Item.Properties()));
+	// Debug Items (can't be obtained normally)
+	public static final RegistryObject<Item> DEBUG_PUMPKIN_PIE = ITEMS.register("debug_pumpkin_pie",
+			() -> new DebugBlockItem(ModBlocks.PUMPKIN_PIE.get(), new Item.Properties()));
 }

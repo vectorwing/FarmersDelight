@@ -16,19 +16,19 @@ import vectorwing.farmersdelight.utils.TextUtils;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class HiddenBlockItem extends BlockNamedItem
+public class DebugBlockItem extends BlockNamedItem
 {
 	private final boolean isFoil;
 
 	/**
 	 * Items that serve a low-level purpose, and are not meant to be obtained by players.
 	 */
-	public HiddenBlockItem(Block pBlock, Properties pProperties) {
+	public DebugBlockItem(Block pBlock, Properties pProperties) {
 		super(pBlock, pProperties);
 		this.isFoil = true;
 	}
 
-	public HiddenBlockItem(Block pBlock, Properties pProperties, boolean isFoil) {
+	public DebugBlockItem(Block pBlock, Properties pProperties, boolean isFoil) {
 		super(pBlock, pProperties);
 		this.isFoil = isFoil;
 	}
@@ -40,7 +40,7 @@ public class HiddenBlockItem extends BlockNamedItem
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		IFormattableTextComponent textDescription = TextUtils.getTranslation("tooltip.utility_item");
+		IFormattableTextComponent textDescription = TextUtils.getTranslation("tooltip.debug_item");
 		tooltip.add(textDescription.withStyle(TextFormatting.RED));
 	}
 }
