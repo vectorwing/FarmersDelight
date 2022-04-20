@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:pumpkin_pie_from_pie_crust"
+    ]
+  },
+  "criteria": {
+    "has_pie_crust": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelight:pie_crust"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:pumpkin_pie_from_pie_crust"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_pie_crust",
+      "has_the_recipe"
+    ]
+  ]
+}

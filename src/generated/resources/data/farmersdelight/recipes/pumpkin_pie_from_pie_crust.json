@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "cec",
+    "cOc"
+  ],
+  "key": {
+    "c": {
+      "item": "farmersdelight:pumpkin_slice"
+    },
+    "e": {
+      "tag": "forge:eggs"
+    },
+    "O": {
+      "item": "farmersdelight:pie_crust"
+    }
+  },
+  "result": {
+    "item": "minecraft:pumpkin_pie",
+    "count": 2
+  }
+}

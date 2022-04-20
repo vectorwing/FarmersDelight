@@ -686,6 +686,20 @@ public class Recipes extends RecipeProvider
 				.define('#', ModItems.CHOCOLATE_PIE_SLICE.get())
 				.unlockedBy("has_chocolate_pie_slice", InventoryChangeTrigger.Instance.hasItems(ModItems.CHOCOLATE_PIE_SLICE.get()))
 				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "chocolate_pie_from_slices"));
+		ShapedRecipeBuilder.shaped(Items.PUMPKIN_PIE, 2)
+				.pattern("cec")
+				.pattern("cOc")
+				.define('c', ModItems.PUMPKIN_SLICE.get())
+				.define('e', ForgeTags.EGGS)
+				.define('O', ModItems.PIE_CRUST.get())
+				.unlockedBy("has_pie_crust", InventoryChangeTrigger.Instance.hasItems(ModItems.PIE_CRUST.get()))
+				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "pumpkin_pie_from_pie_crust"));
+		ShapedRecipeBuilder.shaped(Items.PUMPKIN_PIE, 1)
+				.pattern("##")
+				.pattern("##")
+				.define('#', ModItems.PUMPKIN_PIE_SLICE.get())
+				.unlockedBy("has_pumpkin_pie_slice", InventoryChangeTrigger.Instance.hasItems(ModItems.PUMPKIN_PIE_SLICE.get()))
+				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "pumpkin_pie_from_slices"));
 	}
 
 	private void recipesCraftedMeals(Consumer<IFinishedRecipe> consumer) {
