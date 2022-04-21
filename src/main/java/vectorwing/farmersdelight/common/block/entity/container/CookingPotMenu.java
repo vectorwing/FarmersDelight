@@ -6,22 +6,25 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import net.minecraftforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
-import vectorwing.farmersdelight.common.registry.ModContainerTypes;
+import vectorwing.farmersdelight.common.registry.ModMenuTypes;
 
 import java.util.Objects;
 
-public class CookingPotContainer extends AbstractContainerMenu
+public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 {
 	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "item/empty_container_slot_bowl");
 
@@ -30,8 +33,8 @@ public class CookingPotContainer extends AbstractContainerMenu
 	private final ContainerData cookingPotData;
 	private final ContainerLevelAccess canInteractWithCallable;
 
-	public CookingPotContainer(final int windowId, final Inventory playerInventory, final CookingPotBlockEntity tileEntity, ContainerData cookingPotDataIn) {
-		super(ModContainerTypes.COOKING_POT.get(), windowId);
+	public CookingPotMenu(final int windowId, final Inventory playerInventory, final CookingPotBlockEntity tileEntity, ContainerData cookingPotDataIn) {
+		super(ModMenuTypes.COOKING_POT.get(), windowId);
 		this.tileEntity = tileEntity;
 		this.inventory = tileEntity.getInventory();
 		this.cookingPotData = cookingPotDataIn;
@@ -93,7 +96,7 @@ public class CookingPotContainer extends AbstractContainerMenu
 		throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);
 	}
 
-	public CookingPotContainer(final int windowId, final Inventory playerInventory, final FriendlyByteBuf data) {
+	public CookingPotMenu(final int windowId, final Inventory playerInventory, final FriendlyByteBuf data) {
 		this(windowId, playerInventory, getTileEntity(playerInventory, data), new SimpleContainerData(4));
 	}
 
@@ -155,5 +158,51 @@ public class CookingPotContainer extends AbstractContainerMenu
 	@OnlyIn(Dist.CLIENT)
 	public boolean isHeated() {
 		return this.tileEntity.isHeated();
+	}
+
+	@Override
+	public void fillCraftSlotsStackedContents(StackedContents p_40117_) {
+
+	}
+
+	@Override
+	public void clearCraftingContent() {
+
+	}
+
+	@Override
+	public boolean recipeMatches(Recipe<? super RecipeWrapper> recipe) {
+		//return recipe.matches(this.container, this.player.level);
+		return false;
+	}
+
+	@Override
+	public int getResultSlotIndex() {
+		return 0;
+	}
+
+	@Override
+	public int getGridWidth() {
+		return 3;
+	}
+
+	@Override
+	public int getGridHeight() {
+		return 2;
+	}
+
+	@Override
+	public int getSize() {
+		return 0;
+	}
+
+	@Override
+	public RecipeBookType getRecipeBookType() {
+		return FarmersDelight.RECIPE_TYPE_COOKING;
+	}
+
+	@Override
+	public boolean shouldMoveToInventory(int p_150635_) {
+		return false;
 	}
 }

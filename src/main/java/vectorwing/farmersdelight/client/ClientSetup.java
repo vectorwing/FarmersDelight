@@ -8,7 +8,7 @@ import vectorwing.farmersdelight.client.gui.ComfortHealthOverlay;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.client.gui.NourishmentHungerOverlay;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
-import vectorwing.farmersdelight.common.registry.ModContainerTypes;
+import vectorwing.farmersdelight.common.registry.ModMenuTypes;
 
 public class ClientSetup
 {
@@ -39,7 +39,11 @@ public class ClientSetup
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.FULL_TATAMI_MAT.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.ROAST_CHICKEN_BLOCK.get(), RenderType.cutout());
 
-		MenuScreens.register(ModContainerTypes.COOKING_POT.get(), CookingPotScreen::new);
+		event.enqueueWork(() ->
+		{
+			MenuScreens.register(ModMenuTypes.COOKING_POT.get(), CookingPotScreen::new);
+			FDRecipeCategories.init();
+		});
 
 		NourishmentHungerOverlay.init();
 		ComfortHealthOverlay.init();
