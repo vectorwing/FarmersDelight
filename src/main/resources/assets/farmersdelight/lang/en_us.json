@@ -189,6 +189,7 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
+  "farmersdelight.container.recipe_book.cookable": "Showing Cookable",
   "farmersdelight.container.cooking_pot": "Cooking Pot",
   "farmersdelight.container.cooking_pot.served_on": "Served on: %s",
   "farmersdelight.container.cooking_pot.not_heated": "Needs heat from below",

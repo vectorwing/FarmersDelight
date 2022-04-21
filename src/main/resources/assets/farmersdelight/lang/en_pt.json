@@ -189,6 +189,7 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
+  "farmersdelight.container.recipe_book.cookable": "Revealing Cookable Grub",
   "farmersdelight.container.cooking_pot": "Pot o' Grub",
   "farmersdelight.container.cooking_pot.served_on": "Grab yerself a: %s",
   "farmersdelight.container.cooking_pot.not_heated": "Ye hafta fire it up first",
