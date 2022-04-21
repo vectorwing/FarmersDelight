@@ -11,6 +11,7 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -32,12 +33,14 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 	public final ItemStackHandler inventory;
 	private final ContainerData cookingPotData;
 	private final ContainerLevelAccess canInteractWithCallable;
+	protected final Level level;
 
 	public CookingPotMenu(final int windowId, final Inventory playerInventory, final CookingPotBlockEntity tileEntity, ContainerData cookingPotDataIn) {
 		super(ModMenuTypes.COOKING_POT.get(), windowId);
 		this.tileEntity = tileEntity;
 		this.inventory = tileEntity.getInventory();
 		this.cookingPotData = cookingPotDataIn;
+		this.level = playerInventory.player.level;
 		this.canInteractWithCallable = ContainerLevelAccess.create(tileEntity.getLevel(), tileEntity.getBlockPos());
 
 		// Ingredient Slots - 2 Rows x 3 Columns
@@ -157,7 +160,7 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 
 	@OnlyIn(Dist.CLIENT)
 	public boolean isHeated() {
-		return this.tileEntity.isHeated();
+		return tileEntity.isHeated();
 	}
 
 	@Override
@@ -167,18 +170,17 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 
 	@Override
 	public void clearCraftingContent() {
-
+//		this.inventory.set
 	}
 
 	@Override
 	public boolean recipeMatches(Recipe<? super RecipeWrapper> recipe) {
-		//return recipe.matches(this.container, this.player.level);
-		return false;
+		return recipe.matches(new RecipeWrapper(inventory), level);
 	}
 
 	@Override
 	public int getResultSlotIndex() {
-		return 0;
+		return 7;
 	}
 
 	@Override
@@ -193,7 +195,7 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 
 	@Override
 	public int getSize() {
-		return 0;
+		return 7;
 	}
 
 	@Override
@@ -202,7 +204,7 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 	}
 
 	@Override
-	public boolean shouldMoveToInventory(int p_150635_) {
-		return false;
+	public boolean shouldMoveToInventory(int slot) {
+		return slot < (getGridWidth() * getGridHeight());
 	}
 }

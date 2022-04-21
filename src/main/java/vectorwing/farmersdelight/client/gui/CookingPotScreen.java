@@ -12,6 +12,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.container.CookingPotMenu;
@@ -31,7 +33,7 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 	private static final Rectangle HEAT_ICON = new Rectangle(47, 55, 17, 15);
 	private static final Rectangle PROGRESS_ARROW = new Rectangle(89, 25, 0, 17);
 
-	private final RecipeBookComponent recipeBookComponent = new RecipeBookComponent();
+	private final CookingPotRecipeBookComponent recipeBookComponent = new CookingPotRecipeBookComponent();
 	private boolean widthTooNarrow;
 
 	public CookingPotScreen(CookingPotMenu screenContainer, Inventory inv, Component titleIn) {
@@ -57,8 +59,7 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 	}
 
 	@Override
-	protected void containerTick()
-	{
+	protected void containerTick() {
 		super.containerTick();
 		this.recipeBookComponent.tick();
 	}
@@ -73,6 +74,7 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 		} else {
 			this.recipeBookComponent.render(ms, mouseX, mouseY, partialTicks);
 			super.render(ms, mouseX, mouseY, partialTicks);
+			this.recipeBookComponent.renderGhostRecipe(ms, this.leftPos, this.topPos, true, partialTicks);
 		}
 
 		this.renderMealDisplayTooltip(ms, mouseX, mouseY);
@@ -136,6 +138,12 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 	}
 
 	@Override
+	protected boolean isHovering(int x, int y, int width, int height, double mouseX, double mouseY)
+	{
+		return (!this.widthTooNarrow || !this.recipeBookComponent.isVisible()) && super.isHovering(x, y, width, height, mouseX, mouseY);
+	}
+
+	@Override
 	public boolean mouseClicked(double mouseX, double mouseY, int buttonId)
 	{
 		if (this.recipeBookComponent.mouseClicked(mouseX, mouseY, buttonId))
@@ -151,6 +159,13 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 	{
 		boolean flag = mouseX < (double)x || mouseY < (double)y || mouseX >= (double)(x + this.imageWidth) || mouseY >= (double)(y + this.imageHeight);
 		return flag && this.recipeBookComponent.hasClickedOutside(mouseX, mouseY, this.leftPos, this.topPos, this.imageWidth, this.imageHeight, buttonIdx);
+	}
+
+	@Override
+	protected void slotClicked(Slot slot, int mouseX, int mouseY, ClickType clickType)
+	{
+		super.slotClicked(slot, mouseX, mouseY, clickType);
+		this.recipeBookComponent.slotClicked(slot);
 	}
 
 	@Override
