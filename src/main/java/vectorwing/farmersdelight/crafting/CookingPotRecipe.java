@@ -121,6 +121,11 @@ public class CookingPotRecipe implements IRecipe<RecipeWrapper>
 		return CookingPotRecipe.TYPE;
 	}
 
+	@Override
+	public boolean isSpecial() {
+		return true;
+	}
+
 	private static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<CookingPotRecipe>
 	{
 		Serializer() {

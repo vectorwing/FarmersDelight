@@ -136,6 +136,11 @@ public class CuttingBoardRecipe implements IRecipe<RecipeWrapper>
 		return CuttingBoardRecipe.TYPE;
 	}
 
+	@Override
+	public boolean isSpecial() {
+		return true;
+	}
+
 	private static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<CuttingBoardRecipe>
 	{
 		Serializer() {
