@@ -35,6 +35,7 @@
 - Wandering Traders now sell the mod's seeds/plantables sometimes. This can be similarly disabled in the config;
 - The modifier `add_item` can now safely specify a `count` for the added item (optional);
 - Stoves now have custom death messages, if one's unlucky enough to die on top of them...;
+- Safety Nets have a slightly taller hitbox, to make placement easier.
 
 ### Fixes
 - Fixed configuration for generating Compost Heaps on villages not working;
