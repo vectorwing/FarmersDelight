@@ -20,6 +20,7 @@ import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -546,7 +547,7 @@ public class Recipes extends RecipeProvider
 
 	private void recipesFoodstuffs(Consumer<IFinishedRecipe> consumer) {
 		ShapelessRecipeBuilder.shapeless(ModItems.TOMATO_SEEDS.get())
-				.requires(ModItems.TOMATO.get())
+				.requires(Ingredient.of(ModItems.TOMATO.get(), ModItems.ROTTEN_TOMATO.get()))
 				.unlockedBy("has_tomato", InventoryChangeTrigger.Instance.hasItems(ModItems.TOMATO.get()))
 				.save(consumer);
 		ShapelessRecipeBuilder.shapeless(ModItems.MILK_BOTTLE.get(), 3)
@@ -565,27 +566,20 @@ public class Recipes extends RecipeProvider
 				.requires(Items.GLASS_BOTTLE)
 				.unlockedBy("has_melon_slice", InventoryChangeTrigger.Instance.hasItems(Items.MELON_SLICE))
 				.save(consumer);
-		ShapelessRecipeBuilder.shapeless(ModItems.RAW_PASTA.get(), 2)
+		ShapelessRecipeBuilder.shapeless(ModItems.WHEAT_DOUGH.get(), 3)
 				.requires(Items.WATER_BUCKET)
 				.requires(Items.WHEAT)
 				.requires(Items.WHEAT)
 				.requires(Items.WHEAT)
-				.requires(Items.WHEAT)
 				.unlockedBy("has_wheat", InventoryChangeTrigger.Instance.hasItems(Items.WHEAT))
-				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "raw_pasta_from_water"));
-		ShapelessRecipeBuilder.shapeless(ModItems.RAW_PASTA.get())
+				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "wheat_dough_from_water"));
+		ShapelessRecipeBuilder.shapeless(ModItems.WHEAT_DOUGH.get(), 3)
 				.requires(ForgeTags.EGGS)
 				.requires(Items.WHEAT)
 				.requires(Items.WHEAT)
+				.requires(Items.WHEAT)
 				.unlockedBy("has_wheat", InventoryChangeTrigger.Instance.hasItems(Items.WHEAT))
-				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "raw_pasta_from_eggs"));
-		ShapedRecipeBuilder.shaped(ModItems.WHEAT_DOUGH.get(), 3)
-				.pattern("www")
-				.pattern(" b ")
-				.define('w', Items.WHEAT)
-				.define('b', Items.WATER_BUCKET)
-				.unlockedBy("has_wheat", InventoryChangeTrigger.Instance.hasItems(Items.WHEAT))
-				.save(consumer);
+				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "wheat_dough_from_eggs"));
 		ShapedRecipeBuilder.shaped(ModItems.PIE_CRUST.get(), 1)
 				.pattern("wMw")
 				.pattern(" w ")

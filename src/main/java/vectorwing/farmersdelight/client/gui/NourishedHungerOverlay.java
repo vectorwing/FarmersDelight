@@ -30,7 +30,7 @@ import java.util.Random;
 public class NourishedHungerOverlay
 {
 	protected int foodIconsOffset;
-	private static final ResourceLocation MOD_ICONS_TEXTURE = new ResourceLocation(FarmersDelight.MODID, "textures/gui/nourished.png");
+	private static final ResourceLocation MOD_ICONS_TEXTURE = new ResourceLocation(FarmersDelight.MODID, "textures/gui/fd_icons.png");
 
 	public static void init() {
 		MinecraftForge.EVENT_BUS.register(new NourishedHungerOverlay());

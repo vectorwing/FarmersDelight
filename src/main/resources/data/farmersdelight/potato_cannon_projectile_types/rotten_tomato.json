@@ -1,0 +1,11 @@
+{
+  "items": [
+    "farmersdelight:rotten_tomato"
+  ],
+  "damage": 2,
+  "reload_ticks": 10,
+  "knockback": 0.8,
+  "velocity_multiplier": 1.5,
+  "sticky": true,
+  "sound_pitch": 1.0
+}

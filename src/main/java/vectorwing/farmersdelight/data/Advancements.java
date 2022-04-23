@@ -13,6 +13,7 @@ import net.minecraft.data.AdvancementProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.IDataProvider;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
@@ -21,6 +22,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.advancement.CuttingBoardTrigger;
 import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModEffects;
+import vectorwing.farmersdelight.registry.ModEntityTypes;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.TextUtils;
 
@@ -81,7 +83,7 @@ public class Advancements extends AdvancementProvider
 					.addCriterion("seeds", InventoryChangeTrigger.Instance.hasItems(new IItemProvider[]{}))
 					.save(consumer, getNameId("main/root"));
 
-			// Farming Branch
+			// Harvesting Branch
 			Advancement huntAndGather = getAdvancement(farmersDelight, ModItems.FLINT_KNIFE.get(), "craft_knife", FrameType.TASK, true, true, false)
 					.addCriterion("flint_knife", InventoryChangeTrigger.Instance.hasItems(ModItems.FLINT_KNIFE.get()))
 					.addCriterion("iron_knife", InventoryChangeTrigger.Instance.hasItems(ModItems.IRON_KNIFE.get()))
@@ -91,53 +93,80 @@ public class Advancements extends AdvancementProvider
 					.requirements(IRequirementsStrategy.OR)
 					.save(consumer, getNameId("main/craft_knife"));
 
-			Advancement graspingAtStraws = getAdvancement(huntAndGather, ModItems.STRAW.get(), "harvest_straw", FrameType.TASK, true, true, false)
+			Advancement graspingAtStraws = getAdvancement(huntAndGather, ModItems.STRAW.get(), "harvest_straw", FrameType.TASK, true, false, false)
 					.addCriterion("harvest_straw", InventoryChangeTrigger.Instance.hasItems(ModItems.STRAW.get()))
 					.save(consumer, getNameId("main/harvest_straw"));
 
-			Advancement wildButcher = getAdvancement(huntAndGather, ModItems.HAM.get(), "get_ham", FrameType.TASK, true, true, false)
+			Advancement advancedComposting = getAdvancement(graspingAtStraws, ModItems.ORGANIC_COMPOST.get(), "place_organic_compost", FrameType.TASK, true, false, false)
+					.addCriterion("place_organic_compost", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.ORGANIC_COMPOST.get()))
+					.save(consumer, getNameId("main/place_organic_compost"));
+
+			Advancement plantFood = getAdvancement(advancedComposting, ModItems.RICH_SOIL.get(), "get_rich_soil", FrameType.GOAL, true, true, false)
+					.addCriterion("get_rich_soil", InventoryChangeTrigger.Instance.hasItems(ModItems.RICH_SOIL.get()))
+					.save(consumer, getNameId("main/get_rich_soil"));
+
+			Advancement wildButcher = getAdvancement(huntAndGather, ModItems.HAM.get(), "get_ham", FrameType.TASK, true, false, false)
 					.addCriterion("ham", InventoryChangeTrigger.Instance.hasItems(ModItems.HAM.get()))
+					.addCriterion("smoked_ham", InventoryChangeTrigger.Instance.hasItems(ModItems.SMOKED_HAM.get()))
+					.requirements(IRequirementsStrategy.OR)
 					.save(consumer, getNameId("main/get_ham"));
 
-			Advancement dippingYourRoots = getAdvancement(graspingAtStraws, ModItems.RICE_PANICLE.get(), "plant_rice", FrameType.TASK, true, true, false)
+			Advancement watchYourFingers = getAdvancement(huntAndGather, ModItems.CUTTING_BOARD.get(), "use_cutting_board", FrameType.TASK, true, false, false)
+					.addCriterion("cutting_board", CuttingBoardTrigger.Instance.simple())
+					.save(consumer, getNameId("main/use_cutting_board"));
+
+			Advancement cantTakeTheHeat = getAdvancement(watchYourFingers, ModItems.NETHERITE_KNIFE.get(), "obtain_netherite_knife", FrameType.CHALLENGE, true, true, false)
+					.addCriterion("obtain_netherite_knife", InventoryChangeTrigger.Instance.hasItems(ModItems.NETHERITE_KNIFE.get()))
+					.rewards(AdvancementRewards.Builder.experience(200))
+					.save(consumer, getNameId("main/obtain_netherite_knife"));
+
+			// Farming Branch
+			Advancement cropsOfTheWild = getAdvancement(farmersDelight, ModItems.WILD_ONIONS.get(), "get_fd_seed", FrameType.TASK, true, true, false)
+					.addCriterion("cabbage_seeds", InventoryChangeTrigger.Instance.hasItems(ModItems.CABBAGE_SEEDS.get()))
+					.addCriterion("tomato_seeds", InventoryChangeTrigger.Instance.hasItems(ModItems.TOMATO_SEEDS.get()))
+					.addCriterion("onion", InventoryChangeTrigger.Instance.hasItems(ModItems.ONION.get()))
+					.addCriterion("rice", InventoryChangeTrigger.Instance.hasItems(ModItems.RICE.get()))
+					.requirements(IRequirementsStrategy.OR)
+					.save(consumer, getNameId("main/get_fd_seed"));
+
+			Advancement fungusAmongUs = getAdvancement(cropsOfTheWild, ModItems.RED_MUSHROOM_COLONY.get(), "get_mushroom_colony", FrameType.TASK, true, false, false)
+					.addCriterion("brown_mushroom_colony", InventoryChangeTrigger.Instance.hasItems(ModItems.BROWN_MUSHROOM_COLONY.get()))
+					.addCriterion("red_mushroom_colony", InventoryChangeTrigger.Instance.hasItems(ModItems.RED_MUSHROOM_COLONY.get()))
+					.requirements(IRequirementsStrategy.OR)
+					.save(consumer, getNameId("main/get_mushroom_colony"));
+
+			Advancement dippingYourRoots = getAdvancement(cropsOfTheWild, ModItems.RICE.get(), "plant_rice", FrameType.TASK, true, false, false)
 					.addCriterion("plant_rice", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.RICE_CROP.get()))
 					.save(consumer, getNameId("main/plant_rice"));
+
+			Advancement booHiss = getAdvancement(cropsOfTheWild, ModItems.ROTTEN_TOMATO.get(), "hit_raider_with_rotten_tomato", FrameType.TASK, true, false, false)
+					.addCriterion("hit_raider_with_rotten_tomato", new PlayerHurtEntityTrigger.Instance(
+							EntityPredicate.AndPredicate.ANY,
+							DamagePredicate.Builder.damageInstance()
+									.type(DamageSourcePredicate.Builder.damageType().isProjectile(true).direct(EntityPredicate.Builder.entity().of(ModEntityTypes.ROTTEN_TOMATO.get()))).build(),
+							EntityPredicate.AndPredicate.wrap(EntityPredicate.Builder.entity().of(EntityTypeTags.RAIDERS).build())))
+					.save(consumer, getNameId("main/hit_raider_with_rotten_tomato"));
 
 			Advancement cropRotation = getAdvancement(dippingYourRoots, ModItems.CABBAGE.get(), "plant_all_crops", FrameType.CHALLENGE, true, true, false)
 					.addCriterion("wheat", PlacedBlockTrigger.Instance.placedBlock(Blocks.WHEAT))
 					.addCriterion("beetroot", PlacedBlockTrigger.Instance.placedBlock(Blocks.BEETROOTS))
 					.addCriterion("carrot", PlacedBlockTrigger.Instance.placedBlock(Blocks.CARROTS))
 					.addCriterion("potato", PlacedBlockTrigger.Instance.placedBlock(Blocks.POTATOES))
-					.addCriterion("brown_mushroom", PlacedBlockTrigger.Instance.placedBlock(Blocks.BROWN_MUSHROOM))
-					.addCriterion("red_mushroom", PlacedBlockTrigger.Instance.placedBlock(Blocks.RED_MUSHROOM))
-					.addCriterion("sugar_cane", PlacedBlockTrigger.Instance.placedBlock(Blocks.SUGAR_CANE))
-					.addCriterion("melon", PlacedBlockTrigger.Instance.placedBlock(Blocks.MELON_STEM))
-					.addCriterion("pumpkin", PlacedBlockTrigger.Instance.placedBlock(Blocks.PUMPKIN_STEM))
-					.addCriterion("sweet_berries", PlacedBlockTrigger.Instance.placedBlock(Blocks.SWEET_BERRY_BUSH))
-					.addCriterion("cocoa", PlacedBlockTrigger.Instance.placedBlock(Blocks.COCOA))
 					.addCriterion("cabbage", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.CABBAGE_CROP.get()))
 					.addCriterion("tomato", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.TOMATO_CROP.get()))
 					.addCriterion("onion", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.ONION_CROP.get()))
 					.addCriterion("rice", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.RICE_CROP.get()))
+					.addCriterion("melon", PlacedBlockTrigger.Instance.placedBlock(Blocks.MELON_STEM))
+					.addCriterion("pumpkin", PlacedBlockTrigger.Instance.placedBlock(Blocks.PUMPKIN_STEM))
+					.addCriterion("sweet_berries", PlacedBlockTrigger.Instance.placedBlock(Blocks.SWEET_BERRY_BUSH))
+					.addCriterion("sugar_cane", PlacedBlockTrigger.Instance.placedBlock(Blocks.SUGAR_CANE))
+					.addCriterion("cocoa", PlacedBlockTrigger.Instance.placedBlock(Blocks.COCOA))
 					.addCriterion("nether_wart", PlacedBlockTrigger.Instance.placedBlock(Blocks.NETHER_WART))
 					.addCriterion("chorus_flower", PlacedBlockTrigger.Instance.placedBlock(Blocks.CHORUS_FLOWER))
+					.addCriterion("brown_mushroom", PlacedBlockTrigger.Instance.placedBlock(Blocks.BROWN_MUSHROOM))
+					.addCriterion("red_mushroom", PlacedBlockTrigger.Instance.placedBlock(Blocks.RED_MUSHROOM))
 					.rewards(AdvancementRewards.Builder.experience(100))
 					.save(consumer, getNameId("main/plant_all_crops"));
-
-			Advancement plantFood = getAdvancement(dippingYourRoots, ModItems.RICH_SOIL.get(), "get_rich_soil", FrameType.GOAL, true, true, false)
-					.addCriterion("get_rich_soil", InventoryChangeTrigger.Instance.hasItems(ModItems.RICH_SOIL.get()))
-					.save(consumer, getNameId("main/get_rich_soil"));
-
-			Advancement fungusAmongUs = getAdvancement(plantFood, ModItems.RED_MUSHROOM_COLONY.get(), "get_mushroom_colony", FrameType.TASK, true, true, false)
-					.addCriterion("brown_mushroom_colony", InventoryChangeTrigger.Instance.hasItems(ModItems.BROWN_MUSHROOM_COLONY.get()))
-					.addCriterion("red_mushroom_colony", InventoryChangeTrigger.Instance.hasItems(ModItems.RED_MUSHROOM_COLONY.get()))
-					.requirements(IRequirementsStrategy.OR)
-					.save(consumer, getNameId("main/get_mushroom_colony"));
-
-			Advancement cantTakeTheHeat = getAdvancement(huntAndGather, ModItems.NETHERITE_KNIFE.get(), "obtain_netherite_knife", FrameType.CHALLENGE, true, true, false)
-					.addCriterion("obtain_netherite_knife", InventoryChangeTrigger.Instance.hasItems(ModItems.NETHERITE_KNIFE.get()))
-					.rewards(AdvancementRewards.Builder.experience(200))
-					.save(consumer, getNameId("main/obtain_netherite_knife"));
 
 			// Cooking Branch
 			Advancement bonfireLit = getAdvancement(farmersDelight, Blocks.CAMPFIRE, "place_campfire", FrameType.TASK, true, true, false)
@@ -146,45 +175,33 @@ public class Advancements extends AdvancementProvider
 					.requirements(IRequirementsStrategy.OR)
 					.save(consumer, getNameId("main/place_campfire"));
 
-			Advancement fireUpTheGrill = getAdvancement(bonfireLit, ModItems.STOVE.get(), "place_stove", FrameType.TASK, true, true, false)
-					.addCriterion("stove", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.STOVE.get()))
-					.save(consumer, getNameId("main/place_stove"));
-
-			Advancement dinnerIsServed = getAdvancement(fireUpTheGrill, ModItems.COOKING_POT.get(), "place_cooking_pot", FrameType.GOAL, true, true, false)
-					.addCriterion("cooking_pot", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.COOKING_POT.get()))
-					.save(consumer, getNameId("main/place_cooking_pot"));
-
-			Advancement portableCooking = getAdvancement(fireUpTheGrill, ModItems.SKILLET.get(), "use_skillet", FrameType.TASK, true, true, false)
+			Advancement portableCooking = getAdvancement(bonfireLit, ModItems.SKILLET.get(), "use_skillet", FrameType.TASK, true, false, false)
 					.addCriterion("skillet", ConsumeItemTrigger.Instance.usedItem(ModItems.SKILLET.get()))
 					.save(consumer, getNameId("main/use_skillet"));
 
-			Advancement sizzlingHot = getAdvancement(portableCooking, ModItems.SKILLET.get(), "place_skillet", FrameType.TASK, true, true, false)
+			Advancement sizzlingHot = getAdvancement(portableCooking, ModItems.SKILLET.get(), "place_skillet", FrameType.TASK, true, false, false)
 					.addCriterion("skillet", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.SKILLET.get()))
 					.save(consumer, getNameId("main/place_skillet"));
 
-			Advancement cupOfHappiness = getAdvancement(dinnerIsServed, ModItems.HOT_COCOA.get(), "drink_hot_cocoa", FrameType.TASK, true, true, false)
-					.addCriterion("hot_cocoa", ConsumeItemTrigger.Instance.usedItem(ModItems.HOT_COCOA.get()))
-					.save(consumer, getNameId("main/drink_hot_cocoa"));
+			Advancement dinnerIsServed = getAdvancement(bonfireLit, ModItems.COOKING_POT.get(), "place_cooking_pot", FrameType.GOAL, true, true, false)
+					.addCriterion("cooking_pot", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.COOKING_POT.get()))
+					.save(consumer, getNameId("main/place_cooking_pot"));
 
-			Advancement warmAndCozy = getAdvancement(dinnerIsServed, ModItems.CHICKEN_SOUP.get(), "eat_comfort_food", FrameType.TASK, true, true, false)
+			Advancement comforting = getAdvancement(dinnerIsServed, ModItems.BAKED_COD_STEW.get(), "eat_comfort_food", FrameType.TASK, true, false, false)
 					.addCriterion("comfort", EffectsChangedTrigger.Instance.hasEffects(MobEffectsPredicate.effects().and(ModEffects.COMFORT.get())))
 					.save(consumer, getNameId("main/eat_comfort_food"));
 
-			Advancement wellServed = getAdvancement(warmAndCozy, ModItems.STEAK_AND_POTATOES.get(), "eat_nourishing_food", FrameType.TASK, true, true, false)
-					.addCriterion("nourished", EffectsChangedTrigger.Instance.hasEffects(MobEffectsPredicate.effects().and(ModEffects.NOURISHED.get())))
+			Advancement nourishing = getAdvancement(comforting, ModItems.STEAK_AND_POTATOES.get(), "eat_nourishing_food", FrameType.TASK, true, false, false)
+					.addCriterion("nourishment", EffectsChangedTrigger.Instance.hasEffects(MobEffectsPredicate.effects().and(ModEffects.NOURISHED.get())))
 					.save(consumer, getNameId("main/eat_nourishing_food"));
 
-			Advancement gloriousFeast = getAdvancement(wellServed, ModItems.ROAST_CHICKEN_BLOCK.get(), "place_feast", FrameType.TASK, true, true, false)
+			Advancement gloriousFeast = getAdvancement(nourishing, ModItems.ROAST_CHICKEN_BLOCK.get(), "place_feast", FrameType.TASK, true, true, false)
 					.addCriterion("roast_chicken", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.ROAST_CHICKEN_BLOCK.get()))
 					.addCriterion("stuffed_pumpkin", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.STUFFED_PUMPKIN_BLOCK.get()))
 					.addCriterion("honey_glazed_ham", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.HONEY_GLAZED_HAM_BLOCK.get()))
 					.addCriterion("shepherds_pie", PlacedBlockTrigger.Instance.placedBlock(ModBlocks.SHEPHERDS_PIE_BLOCK.get()))
 					.requirements(IRequirementsStrategy.OR)
 					.save(consumer, getNameId("main/place_feast"));
-
-			Advancement watchYourFingers = getAdvancement(fireUpTheGrill, ModItems.CUTTING_BOARD.get(), "use_cutting_board", FrameType.TASK, true, true, false)
-					.addCriterion("cutting_board", CuttingBoardTrigger.Instance.simple())
-					.save(consumer, getNameId("main/use_cutting_board"));
 
 			Advancement masterChef = getAdvancement(gloriousFeast, ModItems.HONEY_GLAZED_HAM.get(), "master_chef", FrameType.CHALLENGE, true, true, false)
 					.addCriterion("mixed_salad", ConsumeItemTrigger.Instance.usedItem(ModItems.MIXED_SALAD.get()))

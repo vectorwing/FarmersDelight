@@ -18,6 +18,7 @@ public class Configuration
 	public static final String CATEGORY_SETTINGS = "settings";
 	public static ForgeConfigSpec.BooleanValue ENABLE_VANILLA_CROP_CRATES;
 	public static ForgeConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS;
+	public static ForgeConfigSpec.BooleanValue WANDERING_TRADER_SELLS_FD_ITEMS;
 	public static ForgeConfigSpec.DoubleValue RICH_SOIL_BOOST_CHANCE;
 	public static ForgeConfigSpec.DoubleValue CUTTING_BOARD_FORTUNE_BONUS;
 	public static ForgeConfigSpec.ConfigValue<List<? extends String>> CANVAS_SIGN_DARK_BACKGROUND_LIST;
@@ -33,8 +34,7 @@ public class Configuration
 	public static ForgeConfigSpec.BooleanValue OVERRIDE_ALL_SOUP_ITEMS;
 
 	public static final String CATEGORY_WORLD = "world";
-	public static ForgeConfigSpec.BooleanValue CROPS_ON_SHIPWRECKS;
-	public static ForgeConfigSpec.BooleanValue CROPS_ON_VILLAGE_HOUSES;
+	public static ForgeConfigSpec.BooleanValue GENERATE_FD_CHEST_LOOT;
 	public static ForgeConfigSpec.BooleanValue GENERATE_VILLAGE_COMPOST_HEAPS;
 	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_CABBAGES;
 	public static ForgeConfigSpec.IntValue CHANCE_WILD_CABBAGES;
@@ -55,6 +55,7 @@ public class Configuration
 	public static final String CATEGORY_CLIENT = "client";
 
 	public static ForgeConfigSpec.BooleanValue NOURISHED_HUNGER_OVERLAY;
+	public static ForgeConfigSpec.BooleanValue COMFORT_HEALTH_OVERLAY;
 	public static ForgeConfigSpec.BooleanValue FOOD_EFFECT_TOOLTIP;
 
 	static {
@@ -65,6 +66,8 @@ public class Configuration
 				.define("enableVanillaCropCrates", true);
 		FARMERS_BUY_FD_CROPS = COMMON_BUILDER.comment("Should Novice and Apprentice Farmers buy this mod's crops? (May reduce chances of other trades appearing)")
 				.define("farmersBuyFDCrops", true);
+		WANDERING_TRADER_SELLS_FD_ITEMS = COMMON_BUILDER.comment("Should the Wandering Trader sell some of this mod's items? (Currently includes crop seeds and onions)")
+				.define("wanderingTraderSellsFDItems", true);
 		RICH_SOIL_BOOST_CHANCE = COMMON_BUILDER.comment("How often (in percentage) should Rich Soil succeed in boosting a plant's growth at each random tick? Set it to 0.0 to disable this.")
 				.defineInRange("richSoilBoostChance", 0.2, 0.0, 1.0);
 		CUTTING_BOARD_FORTUNE_BONUS = COMMON_BUILDER.comment("How much of a bonus (in percentage) should each level of Fortune grant to Cutting Board chances? Set it to 0.0 to disable this.")
@@ -94,10 +97,8 @@ public class Configuration
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("World generation").push(CATEGORY_WORLD);
-		CROPS_ON_SHIPWRECKS = COMMON_BUILDER.comment("Generate crop items on a Shipwreck's supply chests")
-				.define("cropsOnShipwreckSupplyLoot", true);
-		CROPS_ON_VILLAGE_HOUSES = COMMON_BUILDER.comment("Generate crop items on Village houses (all biomes)")
-				.define("cropsOnVillageHouseLoot", true);
+		GENERATE_FD_CHEST_LOOT = COMMON_BUILDER.comment("Should this mod add some of its items (ropes, seeds, knives, meals etc.) as extra chest loot across Minecraft?")
+				.define("generateFDChestLoot", true);
 		GENERATE_VILLAGE_COMPOST_HEAPS = COMMON_BUILDER.comment("Generate Compost Heaps across all village biomes")
 				.define("genVillageCompostHeaps", true);
 
@@ -159,6 +160,8 @@ public class Configuration
 		CLIENT_BUILDER.comment("Client settings").push(CATEGORY_CLIENT);
 		NOURISHED_HUNGER_OVERLAY = CLIENT_BUILDER.comment("Should the hunger bar have a gilded overlay when the player has the Nourishment effect?")
 				.define("nourishmentHungerOverlay", true);
+		COMFORT_HEALTH_OVERLAY = CLIENT_BUILDER.comment("Should the health bar have a silver sheen when the player has the Comfort effect?")
+				.define("comfortHealthOverlay", true);
 		FOOD_EFFECT_TOOLTIP = CLIENT_BUILDER.comment("Should food tooltips display which effects they provide?")
 				.define("foodEffectTooltip", true);
 		CLIENT_BUILDER.pop();

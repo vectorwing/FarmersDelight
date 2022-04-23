@@ -2,7 +2,7 @@
   "type": "farmersdelight:cooking",
   "ingredients": [
     {
-      "tag": "forge:pasta"
+      "item": "farmersdelight:wheat_dough"
     },
     {
       "tag": "forge:crops/cabbage"

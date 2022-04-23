@@ -167,6 +167,8 @@ public class ModItems
 			() -> new RiceCropItem(ModBlocks.RICE_CROP.get(), new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> CABBAGE_SEEDS = ITEMS.register("cabbage_seeds", () -> new BlockNamedItem(ModBlocks.CABBAGE_CROP.get(), new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
 	public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds", () -> new BlockNamedItem(ModBlocks.TOMATO_CROP.get(), new Item.Properties().tab(FarmersDelight.ITEM_GROUP)));
+	public static final RegistryObject<Item> ROTTEN_TOMATO = ITEMS.register("rotten_tomato",
+			() -> new RottenTomatoItem(new Item.Properties().stacksTo(16).tab(FarmersDelight.ITEM_GROUP)));
 
 	// Foodstuffs
 	public static final RegistryObject<Item> FRIED_EGG = ITEMS.register("fried_egg",

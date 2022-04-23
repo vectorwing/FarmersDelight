@@ -176,6 +176,11 @@ public class TomatoesBlock extends BushBlock implements IGrowable
 		} else if (isMature) {
 			int j = 1 + worldIn.random.nextInt(2);
 			popResource(worldIn, pos, new ItemStack(ModItems.TOMATO.get(), j));
+
+			if (worldIn.random.nextFloat() < 0.05) {
+				popResource(worldIn, pos, new ItemStack(ModItems.ROTTEN_TOMATO.get()));
+			}
+
 			worldIn.playSound(null, pos, ModSounds.ITEM_TOMATO_PICK_FROM_BUSH.get(), SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.random.nextFloat() * 0.4F);
 			worldIn.setBlock(pos, state.setValue(AGE, TOMATO_BEARING_AGE - 2), 2);
 			return ActionResultType.SUCCESS;

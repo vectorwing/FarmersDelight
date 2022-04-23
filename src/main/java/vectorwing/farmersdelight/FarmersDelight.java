@@ -54,6 +54,7 @@ public class FarmersDelight
 		ModTileEntityTypes.TILES.register(modEventBus);
 		ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
 		ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+		ModEntityTypes.ENTITIES.register(modEventBus);
 
 		MinecraftForge.EVENT_BUS.register(this);
 	}

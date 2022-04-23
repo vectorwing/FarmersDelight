@@ -12,11 +12,10 @@ import java.util.Map;
 
 public class Foods
 {
-	public static final int BURST_EFFECT = 200;
-	public static final int BRIEF_DURATION = 600;
-	public static final int SHORT_DURATION = 1200;
-	public static final int MEDIUM_DURATION = 3600;
-	public static final int LONG_DURATION = 6000;
+	public static final int BRIEF_DURATION = 600;	// 30 seconds
+	public static final int SHORT_DURATION = 1200;	// 1 minute
+	public static final int MEDIUM_DURATION = 3600;	// 3 minutes
+	public static final int LONG_DURATION = 6000;	// 5 minutes
 
 	// Raw Crops
 	public static final Food CABBAGE = (new Food.Builder())
@@ -101,17 +100,13 @@ public class Foods
 	public static final Food EGG_SANDWICH = (new Food.Builder())
 			.nutrition(8).saturationMod(0.8f).build();
 	public static final Food CHICKEN_SANDWICH = (new Food.Builder())
-			.nutrition(10).saturationMod(0.8f)
-			.effect(() -> new EffectInstance(Effects.DAMAGE_BOOST, BURST_EFFECT, 0), 1.0F).build();
+			.nutrition(10).saturationMod(0.8f).build();
 	public static final Food HAMBURGER = (new Food.Builder())
-			.nutrition(11).saturationMod(0.8f)
-			.effect(() -> new EffectInstance(Effects.DAMAGE_BOOST, BURST_EFFECT, 0), 1.0F).build();
+			.nutrition(11).saturationMod(0.8f).build();
 	public static final Food BACON_SANDWICH = (new Food.Builder())
-			.nutrition(10).saturationMod(0.8f)
-			.effect(() -> new EffectInstance(Effects.DAMAGE_RESISTANCE, BURST_EFFECT, 0), 1.0F).build();
+			.nutrition(10).saturationMod(0.8f).build();
 	public static final Food MUTTON_WRAP = (new Food.Builder())
-			.nutrition(11).saturationMod(0.8f)
-			.effect(() -> new EffectInstance(Effects.DAMAGE_RESISTANCE, BURST_EFFECT, 0), 1.0F).build();
+			.nutrition(10).saturationMod(0.8f).build();
 	public static final Food DUMPLINGS = (new Food.Builder())
 			.nutrition(8).saturationMod(0.8f).build();
 	public static final Food STUFFED_POTATO = (new Food.Builder())
@@ -124,71 +119,71 @@ public class Foods
 			.nutrition(6).saturationMod(0.4f)
 			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), BRIEF_DURATION, 0), 1.0F).build();
 	public static final Food BEEF_STEW = (new Food.Builder())
-			.nutrition(10).saturationMod(0.9f)
-			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), MEDIUM_DURATION, 0), 1.0F).build();
-	public static final Food CHICKEN_SOUP = (new Food.Builder())
 			.nutrition(10).saturationMod(0.8f)
 			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), MEDIUM_DURATION, 0), 1.0F).build();
 	public static final Food VEGETABLE_SOUP = (new Food.Builder())
 			.nutrition(10).saturationMod(0.8f)
-			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), LONG_DURATION, 0), 1.0F).build();
+			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), MEDIUM_DURATION, 0), 1.0F).build();
 	public static final Food FISH_STEW = (new Food.Builder())
-			.nutrition(10).saturationMod(0.8f)
+			.nutrition(10).saturationMod(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), MEDIUM_DURATION, 0), 1.0F).build();
+	public static final Food CHICKEN_SOUP = (new Food.Builder())
+			.nutrition(12).saturationMod(0.9f)
+			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), LONG_DURATION, 0), 1.0F).build();
 	public static final Food FRIED_RICE = (new Food.Builder())
-			.nutrition(10).saturationMod(0.8f)
-			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), MEDIUM_DURATION, 0), 1.0F).build();
+			.nutrition(12).saturationMod(0.9f)
+			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), LONG_DURATION, 0), 1.0F).build();
 	public static final Food PUMPKIN_SOUP = (new Food.Builder())
-			.nutrition(10).saturationMod(0.9f)
-			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), MEDIUM_DURATION, 0), 1.0F).build();
+			.nutrition(12).saturationMod(0.9f)
+			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), LONG_DURATION, 0), 1.0F).build();
 	public static final Food BAKED_COD_STEW = (new Food.Builder())
-			.nutrition(10).saturationMod(0.9f)
+			.nutrition(12).saturationMod(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), LONG_DURATION, 0), 1.0F).build();
 	public static final Food NOODLE_SOUP = (new Food.Builder())
-			.nutrition(10).saturationMod(0.9f)
+			.nutrition(12).saturationMod(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.COMFORT.get(), LONG_DURATION, 0), 1.0F).build();
 
 	// Plated Foods
 	public static final Food BACON_AND_EGGS = (new Food.Builder())
 			.nutrition(9).saturationMod(0.6f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), SHORT_DURATION, 0), 1.0F).build();
+	public static final Food RATATOUILLE = (new Food.Builder())
+			.nutrition(9).saturationMod(0.6f)
+			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), SHORT_DURATION, 0), 1.0F).build();
 	public static final Food STEAK_AND_POTATOES = (new Food.Builder())
-			.nutrition(12).saturationMod(0.8f)
+			.nutrition(10).saturationMod(0.8f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), MEDIUM_DURATION, 0), 1.0F).build();
 	public static final Food PASTA_WITH_MEATBALLS = (new Food.Builder())
-			.nutrition(12).saturationMod(0.9f)
-			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), LONG_DURATION, 0), 1.0F).build();
+			.nutrition(10).saturationMod(0.8f)
+			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), MEDIUM_DURATION, 0), 1.0F).build();
 	public static final Food PASTA_WITH_MUTTON_CHOP = (new Food.Builder())
-			.nutrition(12).saturationMod(0.9f)
-			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), LONG_DURATION, 0), 1.0F).build();
+			.nutrition(10).saturationMod(0.8f)
+			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), MEDIUM_DURATION, 0), 1.0F).build();
 	public static final Food ROASTED_MUTTON_CHOPS = (new Food.Builder())
 			.nutrition(12).saturationMod(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), LONG_DURATION, 0), 1.0F).build();
 	public static final Food VEGETABLE_NOODLES = (new Food.Builder())
-			.nutrition(14).saturationMod(0.9f)
+			.nutrition(12).saturationMod(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), LONG_DURATION, 0), 1.0F).build();
-	public static final Food RATATOUILLE = (new Food.Builder())
-			.nutrition(9).saturationMod(0.6f)
-			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), SHORT_DURATION, 0), 1.0F).build();
 	public static final Food SQUID_INK_PASTA = (new Food.Builder())
-			.nutrition(14).saturationMod(0.9f)
+			.nutrition(12).saturationMod(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), LONG_DURATION, 0), 1.0F).build();
 	public static final Food GRILLED_SALMON = (new Food.Builder())
 			.nutrition(12).saturationMod(0.9f)
-			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), LONG_DURATION, 0), 1.0F).build();
+			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), MEDIUM_DURATION, 0), 1.0F).build();
 
 	// Feast Portions
 	public static final Food ROAST_CHICKEN = (new Food.Builder())
-			.nutrition(14).saturationMod(0.9f)
+			.nutrition(12).saturationMod(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), LONG_DURATION, 0), 1.0F).build();
 	public static final Food STUFFED_PUMPKIN = (new Food.Builder())
-			.nutrition(14).saturationMod(0.9f)
+			.nutrition(12).saturationMod(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), LONG_DURATION, 0), 1.0F).build();
 	public static final Food HONEY_GLAZED_HAM = (new Food.Builder())
-			.nutrition(14).saturationMod(0.9f)
+			.nutrition(12).saturationMod(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), LONG_DURATION, 0), 1.0F).build();
 	public static final Food SHEPHERDS_PIE = (new Food.Builder())
-			.nutrition(14).saturationMod(0.9f)
+			.nutrition(12).saturationMod(0.9f)
 			.effect(() -> new EffectInstance(ModEffects.NOURISHED.get(), LONG_DURATION, 0), 1.0F).build();
 
 	public static final Food DOG_FOOD = (new Food.Builder())

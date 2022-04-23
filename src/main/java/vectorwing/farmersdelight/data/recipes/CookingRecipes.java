@@ -14,9 +14,9 @@ import java.util.stream.Stream;
 
 public class CookingRecipes
 {
-	public static final int FAST_COOKING = 100;
-	public static final int NORMAL_COOKING = 200;
-	public static final int SLOW_COOKING = 400;
+	public static final int FAST_COOKING = 100;		// 5 seconds
+	public static final int NORMAL_COOKING = 200;	// 10 seconds
+	public static final int SLOW_COOKING = 400;		// 20 seconds
 
 	public static void register(Consumer<IFinishedRecipe> consumer) {
 		cookMiscellaneous(consumer);
@@ -92,7 +92,7 @@ public class CookingRecipes
 				.addIngredient(ForgeTags.CROPS_RICE)
 				.build(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.DUMPLINGS.get(), 2, NORMAL_COOKING, 0.35F)
-				.addIngredient(ForgeTags.PASTA)
+				.addIngredient(ModItems.WHEAT_DOUGH.get())
 				.addIngredient(ForgeTags.CROPS_CABBAGE)
 				.addIngredient(ForgeTags.CROPS_ONION)
 				.addIngredient(Ingredient.fromValues(Stream.of(

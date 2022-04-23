@@ -1,0 +1,11 @@
+{
+  "type": "farmersdelight:add_loot_table",
+  "conditions":
+  [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/village/village_desert_house"
+    }
+  ],
+  "lootTable": "farmersdelight:chests/fd_village_desert_house"
+}

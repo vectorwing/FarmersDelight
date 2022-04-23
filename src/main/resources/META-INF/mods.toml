@@ -1,12 +1,12 @@
 
 modLoader="javafml"
-loaderVersion="[34,)"
+loaderVersion="[36,)"
 issueTrackerURL="https://github.com/vectorwing/FarmersDelight/issues"
 license="MIT License"
 
 [[mods]]
 modId="farmersdelight"
-version="1.16.5-0.5.5"
+version="1.16.5-0.6.0"
 displayName="Farmer's Delight"
 # updateJSONURL=""
 displayURL="https://github.com/vectorwing/FarmersDelight"

@@ -85,8 +85,8 @@
   "item.farmersdelight.fried_egg": "Huevo frito",
   "item.farmersdelight.milk_bottle": "Botella de leche",
   "item.farmersdelight.hot_cocoa": "Chocolate caliente",
-   "item.farmersdelight.apple_cider": "Sidra de manzana",
-   "item.farmersdelight.melon_juice": "Zumo de melón",
+  "item.farmersdelight.apple_cider": "Sidra de manzana",
+  "item.farmersdelight.melon_juice": "Zumo de melón",
   "item.farmersdelight.wheat_dough": "Masa de trigo",
   "item.farmersdelight.raw_pasta": "Pasta cruda",
   "item.farmersdelight.pumpkin_slice": "Rodaja de calabaza",
@@ -145,7 +145,7 @@
   "item.farmersdelight.pumpkin_soup": "Sopa de calabaza",
   "item.farmersdelight.baked_cod_stew": "Estofado de bacalao al horno",
   "item.farmersdelight.noodle_soup": "Sopa de fideos",
-  
+
   "item.farmersdelight.bacon_and_eggs": "Tocino con huevos",
   "item.farmersdelight.pasta_with_meatballs": "Pasta con albóndigas",
   "item.farmersdelight.pasta_with_mutton_chop": "Pasta con chuleta de cordero",
@@ -189,7 +189,7 @@
   "farmersdelight.tooltip.cooking_pot.empty": "Vacío",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Contiene 1 porción de:",
   "farmersdelight.tooltip.cooking_pot.many_servings": "Contiene %s porciones de:",
-   "farmersdelight.tooltip.dog_food.when_feeding": "Cuando se alimenta a un lobo domesticado:",
+  "farmersdelight.tooltip.dog_food.when_feeding": "Cuando se alimenta a un lobo domesticado:",
   "farmersdelight.tooltip.horse_feed.when_feeding": "Cuando se alimenta a un caballo domesticado:",
   "farmersdelight.tooltip.milk_bottle": "Quita un efecto",
   "farmersdelight.tooltip.hot_cocoa": "Quita un efecto nocivo",

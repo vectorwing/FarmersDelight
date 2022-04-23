@@ -18,13 +18,13 @@ public class CuttingRecipes
 {
 	public static void register(Consumer<IFinishedRecipe> consumer) {
 		// Knife
-		cuttingMeats(consumer);
+		cuttingAnimalItems(consumer);
 		cuttingVegetables(consumer);
 		cuttingPastries(consumer);
 		cuttingFlowers(consumer);
 
 		// Pickaxe
-		salvagingBricks(consumer);
+		salvagingMinerals(consumer);
 
 		// Axe
 		strippingWood(consumer);
@@ -37,7 +37,7 @@ public class CuttingRecipes
 		salvagingUsingShears(consumer);
 	}
 
-	private static void cuttingMeats(Consumer<IFinishedRecipe> consumer) {
+	private static void cuttingAnimalItems(Consumer<IFinishedRecipe> consumer) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BEEF), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.MINCED_BEEF.get(), 2)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.PORKCHOP), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.BACON.get(), 2)
@@ -70,6 +70,8 @@ public class CuttingRecipes
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.COOKED_MUTTON), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.COOKED_MUTTON_CHOPS.get(), 2)
 				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.INK_SAC), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.BLACK_DYE, 2)
+				.build(consumer);
 	}
 
 	private static void cuttingVegetables(Consumer<IFinishedRecipe> consumer) {
@@ -89,6 +91,8 @@ public class CuttingRecipes
 	}
 
 	private static void cuttingPastries(Consumer<IFinishedRecipe> consumer) {
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WHEAT_DOUGH.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.RAW_PASTA.get(), 1)
+				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CAKE), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.CAKE_SLICE.get(), 7)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.APPLE_PIE.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.APPLE_PIE_SLICE.get(), 4)
@@ -151,10 +155,14 @@ public class CuttingRecipes
 				.build(consumer);
 	}
 
-	private static void salvagingBricks(Consumer<IFinishedRecipe> consumer) {
+	private static void salvagingMinerals(Consumer<IFinishedRecipe> consumer) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BRICKS), new ToolIngredient(ToolType.PICKAXE), Items.BRICK, 4)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.NETHER_BRICKS), new ToolIngredient(ToolType.PICKAXE), Items.NETHER_BRICK, 4)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.STONE), new ToolIngredient(ToolType.PICKAXE), Items.COBBLESTONE, 1)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.QUARTZ_BLOCK), new ToolIngredient(ToolType.PICKAXE), Items.QUARTZ, 4)
 				.build(consumer);
 	}
 
@@ -190,6 +198,9 @@ public class CuttingRecipes
 
 	private static void diggingSediments(Consumer<IFinishedRecipe> consumer) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CLAY), new ToolIngredient(ToolType.SHOVEL), Items.CLAY_BALL, 4)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.GRAVEL), new ToolIngredient(ToolType.SHOVEL), Items.GRAVEL, 1)
+				.addResultWithChance(Items.FLINT, 0.1F)
 				.build(consumer);
 	}
 

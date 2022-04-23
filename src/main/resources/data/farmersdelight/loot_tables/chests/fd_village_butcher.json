@@ -1,0 +1,81 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "farmersdelight:flint_knife"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "farmersdelight:iron_knife"
+        },
+        {
+          "type": "minecraft:empty"
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "farmersdelight:ham"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2.0,
+                "max": 6.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "farmersdelight:minced_beef"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2.0,
+                "max": 6.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "farmersdelight:bacon"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2.0,
+                "max": 6.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "farmersdelight:mutton_chops"
+        },
+        {
+          "type": "minecraft:empty"
+        }
+      ]
+    }
+  ]
+}
