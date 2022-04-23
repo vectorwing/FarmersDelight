@@ -43,48 +43,6 @@
         "block": "minecraft:potatoes"
       }
     },
-    "brown_mushroom": {
-      "trigger": "minecraft:placed_block",
-      "conditions": {
-        "block": "minecraft:brown_mushroom"
-      }
-    },
-    "red_mushroom": {
-      "trigger": "minecraft:placed_block",
-      "conditions": {
-        "block": "minecraft:red_mushroom"
-      }
-    },
-    "sugar_cane": {
-      "trigger": "minecraft:placed_block",
-      "conditions": {
-        "block": "minecraft:sugar_cane"
-      }
-    },
-    "melon": {
-      "trigger": "minecraft:placed_block",
-      "conditions": {
-        "block": "minecraft:melon_stem"
-      }
-    },
-    "pumpkin": {
-      "trigger": "minecraft:placed_block",
-      "conditions": {
-        "block": "minecraft:pumpkin_stem"
-      }
-    },
-    "sweet_berries": {
-      "trigger": "minecraft:placed_block",
-      "conditions": {
-        "block": "minecraft:sweet_berry_bush"
-      }
-    },
-    "cocoa": {
-      "trigger": "minecraft:placed_block",
-      "conditions": {
-        "block": "minecraft:cocoa"
-      }
-    },
     "cabbage": {
       "trigger": "minecraft:placed_block",
       "conditions": {
@@ -109,6 +67,36 @@
         "block": "farmersdelight:rice_crop"
       }
     },
+    "melon": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "minecraft:melon_stem"
+      }
+    },
+    "pumpkin": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "minecraft:pumpkin_stem"
+      }
+    },
+    "sweet_berries": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "minecraft:sweet_berry_bush"
+      }
+    },
+    "sugar_cane": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "minecraft:sugar_cane"
+      }
+    },
+    "cocoa": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "minecraft:cocoa"
+      }
+    },
     "nether_wart": {
       "trigger": "minecraft:placed_block",
       "conditions": {
@@ -119,6 +107,18 @@
       "trigger": "minecraft:placed_block",
       "conditions": {
         "block": "minecraft:chorus_flower"
+      }
+    },
+    "brown_mushroom": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "minecraft:brown_mushroom"
+      }
+    },
+    "red_mushroom": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "minecraft:red_mushroom"
       }
     }
   },
@@ -136,27 +136,6 @@
       "potato"
     ],
     [
-      "brown_mushroom"
-    ],
-    [
-      "red_mushroom"
-    ],
-    [
-      "sugar_cane"
-    ],
-    [
-      "melon"
-    ],
-    [
-      "pumpkin"
-    ],
-    [
-      "sweet_berries"
-    ],
-    [
-      "cocoa"
-    ],
-    [
       "cabbage"
     ],
     [
@@ -169,10 +148,31 @@
       "rice"
     ],
     [
+      "melon"
+    ],
+    [
+      "pumpkin"
+    ],
+    [
+      "sweet_berries"
+    ],
+    [
+      "sugar_cane"
+    ],
+    [
+      "cocoa"
+    ],
+    [
       "nether_wart"
     ],
     [
       "chorus_flower"
+    ],
+    [
+      "brown_mushroom"
+    ],
+    [
+      "red_mushroom"
     ]
   ]
 }
