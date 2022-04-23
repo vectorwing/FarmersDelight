@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.setup;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.entity.SpriteRenderer;
@@ -50,6 +51,7 @@ public class ClientEventHandler
 		event.addSprite(EMPTY_CONTAINER_SLOT_BOWL);
 	}
 
+	@SubscribeEvent
 	public static void init(final FMLClientSetupEvent event) {
 		RenderTypeLookup.setRenderLayer(ModBlocks.WILD_CABBAGES.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.WILD_ONIONS.get(), RenderType.cutout());
@@ -85,8 +87,10 @@ public class ClientEventHandler
 		ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.SKILLET_TILE.get(),
 				SkilletTileEntityRenderer::new);
 
+		ItemRenderer itemRenderer = event.getMinecraftSupplier().get().getItemRenderer();
+
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.ROTTEN_TOMATO.get(),
-				(renderManager) -> new SpriteRenderer<>(renderManager, Minecraft.getInstance().getItemRenderer()));
+				(renderManager) -> new SpriteRenderer<>(renderManager, itemRenderer));
 
 		ScreenManager.register(ModContainerTypes.COOKING_POT.get(), CookingPotScreen::new);
 
