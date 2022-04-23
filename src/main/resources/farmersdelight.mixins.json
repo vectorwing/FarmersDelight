@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "vectorwing.farmersdelight.common.mixin",
-  "compatibilityLevel": "JAVA_16",
+  "compatibilityLevel": "JAVA_17",
   "refmap": "farmersdelight.refmap.json",
   "mixins": [
     "CampfireBaleMixin",

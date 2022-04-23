@@ -90,7 +90,7 @@ public class NourishmentHungerOverlay
 			}
 
 			// Background texture
-			mc.gui.blit(matrixStack, x, y, 0, 0, 11, 11);
+			mc.gui.blit(matrixStack, x, y, 0, 0, 9, 9);
 
 			float effectiveHungerOfBar = (stats.getFoodLevel()) / 2.0F - j;
 			int naturalHealingOffset = naturalHealing ? 18 : 0;
