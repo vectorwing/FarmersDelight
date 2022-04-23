@@ -218,12 +218,12 @@
   "farmersdelight.advancement.get_fd_seed.desc": "Quatro hortas novas podem ser encontradas na natureza, em vários climas... ou guardadas em um baú por aí.",
   "farmersdelight.advancement.plant_rice": "Molhando suas raízes",
   "farmersdelight.advancement.plant_rice.desc": "Plante grãos de Arroz em uma poça de água rasa",
-  "farmersdelight.advancement.hit_raider_with_rotten_tomato": "Boo! Sai daí!",
+  "farmersdelight.advancement.hit_raider_with_rotten_tomato": "Boo! Sai fora!",
   "farmersdelight.advancement.hit_raider_with_rotten_tomato.desc": "Jogue um tomate podre em um desses invasores enxeridos!",
   "farmersdelight.advancement.get_mushroom_colony": "Fungos entre nós",
   "farmersdelight.advancement.get_mushroom_colony.desc": "Tesoure uma colônia madura de cogumelos. Para crescer uma assim, precisará de um solo bem rico...",
   "farmersdelight.advancement.plant_all_crops": "Rotação de culturas",
-  "farmersdelight.advancement.plant_all_crops.desc": "Cultive todas as frutas, vegetais, fungos e raízes que encontrar!",
+  "farmersdelight.advancement.plant_all_crops.desc": "Cultive todas as plantas comestíveis que achar, como vegetais, frutas, fungos e raízes!",
 
   "farmersdelight.advancement.place_campfire": "Bonfire Lit",
   "farmersdelight.advancement.place_campfire.desc": "Acenda uma Fogueira para cozinhar algumas comidas",
@@ -248,6 +248,8 @@
   "farmersdelight.subtitles.skillet.sizzle": "Frigideira fritando",
   "farmersdelight.subtitles.skillet.add_food": "Frigideira chiando",
   "farmersdelight.subtitles.tomato.pick": "Tomates colhidos",
+  "farmersdelight.subtitles.rotten_tomato.throw": "Tomate podre lançado",
+  "farmersdelight.subtitles.rotten_tomato.hit": "Tomate podre estoura",
 
   "farmersdelight.block.feast.use_container": "Você precisa de uma %s para comer isto.",
   "farmersdelight.block.rice.invalid_placement": "Esta planta não crescerá bem fora de água rasa.",

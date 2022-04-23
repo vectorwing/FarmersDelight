@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.0
+## 0.6.0 / 1.1.0
 
 ### Additions
 - Added some of this mod's items (ropes, seeds, meals, knives etc.) to many chest loot tables! I'll leave most of them for you to discover. ;)
@@ -9,9 +9,11 @@
   - This modifier is governed by the `generateFDChestLoot` config; if set to false, it doesn't do anything.
 - New cutting recipes:
   - Stone + Pickaxe -> Cobblestone;
-  - Deepslate + Pickaxe -> Cobbled Deepslate
   - Quartz Block + Pickaxe -> 4 Nether Quartz
-  - Amethyst Block + Pickaxe -> 4 Amethyst shards
+  - Ink Sac + Knife -> 2 Black Dye;
+  - Gravel + Shovel -> Gravel, 10% Flint (infinite source);
+  - Deepslate + Pickaxe -> Cobbled Deepslate (1.18);
+  - Amethyst Block + Pickaxe -> 4 Amethyst Shards (1.18);
 - Added Rotten Tomatoes:
   - Not all tomatoes are fresh off the vine. Rarely, you might end up plucking a bad one...
   - Rotten Tomatoes are inedible and uncookable; they are meant to be **thrown** at others! Splatter that unfunny friend of yours right in the face!
@@ -25,13 +27,14 @@
 - The Advancement tree has been redesigned, with more basic hints accessible at the start of a world;
 - Updated a few crafting recipes:
   - Dumplings are now cooked with Wheat Dough instead of Raw Pasta;
-  - Wheat Dough is now craftable from 3 Wheat, and either 1 egg or 1 Water Bucket;
+  - Wheat Dough is now craftable from 3 Wheat, and either 1 Egg or 1 Water Bucket;
   - Raw Pasta is now made by cutting Wheat Dough in a Cutting Board;
 - Foods have been rebalanced:
   - Nourishment and Comfort lengths have been tweaked, based on the complexity of the dish;
   - Sandwiches no longer provide burst effects, to make them on par with other handheld foods;
 - Wandering Traders now sell the mod's seeds/plantables sometimes. This can be similarly disabled in the config;
 - The modifier `add_item` can now safely specify a `count` for the added item (optional);
+- Stoves now have custom death messages, if one's unlucky enough to die on top of them...;
 
 ### Fixes
 - Fixed configuration for generating Compost Heaps on villages not working;

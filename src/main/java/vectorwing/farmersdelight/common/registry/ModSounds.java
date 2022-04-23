@@ -38,4 +38,9 @@ public class ModSounds
 	// Tomato Bush
 	public static final RegistryObject<SoundEvent> ITEM_TOMATO_PICK_FROM_BUSH = SOUNDS.register("block.tomato_bush.pick_tomatoes",
 			() -> new SoundEvent(new ResourceLocation(FarmersDelight.MODID, "block.tomato_bush.pick_tomatoes")));
+	
+	public static final RegistryObject<SoundEvent> ENTITY_ROTTEN_TOMATO_THROW = SOUNDS.register("entity.rotten_tomato.throw",
+			() -> new SoundEvent(new ResourceLocation(FarmersDelight.MODID, "entity.rotten_tomato.throw")));
+	public static final RegistryObject<SoundEvent> ENTITY_ROTTEN_TOMATO_HIT = SOUNDS.register("entity.rotten_tomato.hit",
+			() -> new SoundEvent(new ResourceLocation(FarmersDelight.MODID, "entity.rotten_tomato.hit")));
 }
