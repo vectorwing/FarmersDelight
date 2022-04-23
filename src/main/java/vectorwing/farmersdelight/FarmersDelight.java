@@ -29,7 +29,6 @@ public class FarmersDelight
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
-	public static final RecipeBookType RECIPE_TYPE_COOKING = RecipeBookType.create("COOKING");
 	public static final CreativeModeTab CREATIVE_TAB = new CreativeModeTab(FarmersDelight.MODID)
 	{
 		@Nonnull
