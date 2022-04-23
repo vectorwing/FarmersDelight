@@ -9,8 +9,10 @@
   - This modifier is governed by the `generateFDChestLoot` config; if set to false, it doesn't do anything.
 - New cutting recipes:
   - Stone + Pickaxe -> Cobblestone;
-  - Deepslate + Pickaxe -> Cobbled Deepslate (1.18);
   - Quartz Block + Pickaxe -> 4 Nether Quartz
+  - Ink Sac + Knife -> 2 Black Dye;
+  - Gravel + Shovel -> Gravel, 10% Flint (infinite source);
+  - Deepslate + Pickaxe -> Cobbled Deepslate (1.18);
   - Amethyst Block + Pickaxe -> 4 Amethyst Shards (1.18);
 - Added Rotten Tomatoes:
   - Not all tomatoes are fresh off the vine. Rarely, you might end up plucking a bad one...
