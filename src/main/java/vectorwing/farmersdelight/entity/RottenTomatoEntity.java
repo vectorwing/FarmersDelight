@@ -21,6 +21,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 import vectorwing.farmersdelight.registry.ModEntityTypes;
 import vectorwing.farmersdelight.registry.ModItems;
+import vectorwing.farmersdelight.registry.ModSounds;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -66,7 +67,7 @@ public class RottenTomatoEntity extends ProjectileItemEntity
 		super.onHitEntity(pResult);
 		Entity entity = pResult.getEntity();
 		entity.hurt(DamageSource.thrown(this, this.getOwner()), 0);
-		this.playSound(SoundEvents.SLIME_ATTACK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+		this.playSound(ModSounds.ENTITY_ROTTEN_TOMATO_HIT.get(), 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 	}
 
 	@Override
@@ -74,7 +75,7 @@ public class RottenTomatoEntity extends ProjectileItemEntity
 		super.onHit(pResult);
 		if (!this.level.isClientSide) {
 			this.level.broadcastEntityEvent(this, (byte) 3);
-			this.playSound(SoundEvents.SLIME_ATTACK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+			this.playSound(ModSounds.ENTITY_ROTTEN_TOMATO_HIT.get(), 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 			this.remove();
 		}
 	}

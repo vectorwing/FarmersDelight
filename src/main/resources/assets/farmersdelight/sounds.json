@@ -63,5 +63,23 @@
         "type": "event"
       }
     ]
+  },
+  "entity.rotten_tomato.throw": {
+    "subtitle": "farmersdelight.subtitles.rotten_tomato.throw",
+    "sounds": [
+      {
+        "name": "entity.snowball.throw",
+        "type": "event"
+      }
+    ]
+  },
+  "entity.rotten_tomato.hit": {
+    "subtitle": "farmersdelight.subtitles.rotten_tomato.hit",
+    "sounds": [
+      {
+        "name": "entity.slime.attack",
+        "type": "event"
+      }
+    ]
   }
 }

@@ -10,6 +10,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 import vectorwing.farmersdelight.entity.RottenTomatoEntity;
+import vectorwing.farmersdelight.registry.ModSounds;
 
 public class RottenTomatoItem extends Item
 {
@@ -20,7 +21,7 @@ public class RottenTomatoItem extends Item
 	@Override
 	public ActionResult<ItemStack> use(World pLevel, PlayerEntity pPlayer, Hand pHand) {
 		ItemStack heldStack = pPlayer.getItemInHand(pHand);
-		pLevel.playSound(null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+		pLevel.playSound(null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), ModSounds.ENTITY_ROTTEN_TOMATO_THROW.get(), SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
 		if (!pLevel.isClientSide) {
 			RottenTomatoEntity projectile = new RottenTomatoEntity(pLevel, pPlayer);
 			projectile.setItem(heldStack);

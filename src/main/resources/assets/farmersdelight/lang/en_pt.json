@@ -220,10 +220,10 @@
   "farmersdelight.advancement.plant_rice.desc": "Plant a buncha Rice grains in a puddle o' bilgewater",
   "farmersdelight.advancement.hit_raider_with_rotten_tomato": "To tha plank wit' ye!",
   "farmersdelight.advancement.hit_raider_with_rotten_tomato.desc": "Show them raiders yer mettle... with a rottin' tomato?",
-  "farmersdelight.advancement.plant_all_crops": "Landlubber's Bounty",
-  "farmersdelight.advancement.plant_all_crops.desc": "Sow them plants o' all kinds: veggies, 'shrooms, tubers an' fruits!",
   "farmersdelight.advancement.get_mushroom_colony": "Not Mushroom Left!",
   "farmersdelight.advancement.get_mushroom_colony.desc": "Shear up a shroom infestation. Harr, they only grow this crazy in some real rich filth...",
+  "farmersdelight.advancement.plant_all_crops": "Landlubber's Bounty",
+  "farmersdelight.advancement.plant_all_crops.desc": "Sow them foodie plants o' all kinds: veggies, 'shrooms, tubers an' fruits!",
 
   "farmersdelight.advancement.place_campfire": "Bonfire Lit",
   "farmersdelight.advancement.place_campfire.desc": "Warm yerself an' yer food around a Campfire",
@@ -248,6 +248,8 @@
   "farmersdelight.subtitles.skillet.sizzle": "Skillet sizzles",
   "farmersdelight.subtitles.skillet.add_food": "Skillet hisses",
   "farmersdelight.subtitles.tomato.pick": "Tomatoes pop",
+  "farmersdelight.subtitles.rotten_tomato.throw": "Rottin' Tomato flies",
+  "farmersdelight.subtitles.rotten_tomato.hit": "Rottin' Tomato splatters",
 
   "farmersdelight.block.feast.use_container": "Oi! Ye need a %s ta eat this grub!",
   "farmersdelight.block.rice.invalid_placement": "This here seed will need a nice puddle o' water ta thrive.",

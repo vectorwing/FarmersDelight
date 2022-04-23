@@ -223,7 +223,7 @@
   "farmersdelight.advancement.get_mushroom_colony": "Fungus Among Us",
   "farmersdelight.advancement.get_mushroom_colony.desc": "Shear a fully mature Mushroom Colony. To grow them like this, you'll need a very rich soil...",
   "farmersdelight.advancement.plant_all_crops": "Crop Rotation",
-  "farmersdelight.advancement.plant_all_crops.desc": "Cultivate every fruit, vegetable, fungus or root you can find!",
+  "farmersdelight.advancement.plant_all_crops.desc": "Cultivate every food-related plant you can find, such as vegetables, fruits, fungi or roots!",
 
   "farmersdelight.advancement.place_campfire": "Bonfire Lit",
   "farmersdelight.advancement.place_campfire.desc": "Place down a Campfire to cook some food",
@@ -248,6 +248,8 @@
   "farmersdelight.subtitles.skillet.sizzle": "Skillet sizzles",
   "farmersdelight.subtitles.skillet.add_food": "Skillet hisses",
   "farmersdelight.subtitles.tomato.pick": "Tomatoes pop",
+  "farmersdelight.subtitles.rotten_tomato.throw": "Rotten Tomato flies",
+  "farmersdelight.subtitles.rotten_tomato.hit": "Rotten Tomato splatters",
 
   "farmersdelight.block.feast.use_container": "You need a %s to eat this.",
   "farmersdelight.block.rice.invalid_placement": "This crop won't survive well outside shallow water.",
