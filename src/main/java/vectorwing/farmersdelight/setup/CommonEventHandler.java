@@ -18,9 +18,11 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.loot.functions.LootFunctionManager;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
+import net.minecraftforge.common.BasicTrade;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
@@ -223,10 +225,10 @@ public class CommonEventHandler
 			VillagerProfession profession = event.getType();
 			if (profession.getRegistryName() == null) return;
 			if (profession.getRegistryName().getPath().equals("farmer")) {
-				trades.get(1).add(new VillagerTrades.EmeraldForItemsTrade(ModItems.ONION.get(), 26, 16, 2));
-				trades.get(1).add(new VillagerTrades.EmeraldForItemsTrade(ModItems.TOMATO.get(), 26, 16, 2));
-				trades.get(2).add(new VillagerTrades.EmeraldForItemsTrade(ModItems.CABBAGE.get(), 16, 16, 5));
-				trades.get(2).add(new VillagerTrades.EmeraldForItemsTrade(ModItems.RICE.get(), 20, 16, 5));
+				trades.get(1).add(emeraldForItemsTrade(ModItems.ONION.get(), 26, 16, 2));
+				trades.get(1).add(emeraldForItemsTrade(ModItems.TOMATO.get(), 26, 16, 2));
+				trades.get(2).add(emeraldForItemsTrade(ModItems.CABBAGE.get(), 16, 16, 5));
+				trades.get(2).add(emeraldForItemsTrade(ModItems.RICE.get(), 20, 16, 5));
 			}
 		}
 	}
@@ -235,11 +237,15 @@ public class CommonEventHandler
 	public static void onWandererTrades(WandererTradesEvent event) {
 		if (Configuration.WANDERING_TRADER_SELLS_FD_ITEMS.get()) {
 			List<VillagerTrades.ITrade> trades = event.getGenericTrades();
-			trades.add(new VillagerTrades.ItemsForEmeraldsTrade(ModItems.CABBAGE_SEEDS.get(), 1, 1, 12, 1));
-			trades.add(new VillagerTrades.ItemsForEmeraldsTrade(ModItems.TOMATO_SEEDS.get(), 1, 1, 12, 1));
-			trades.add(new VillagerTrades.ItemsForEmeraldsTrade(ModItems.RICE.get(), 1, 1, 12, 1));
-			trades.add(new VillagerTrades.ItemsForEmeraldsTrade(ModItems.ONION.get(), 1, 1, 12, 1));
+			trades.add(new BasicTrade(1, new ItemStack(ModItems.CABBAGE_SEEDS.get()), 1, 12, 1));
+			trades.add(new BasicTrade(1, new ItemStack(ModItems.TOMATO_SEEDS.get()), 1, 12, 1));
+			trades.add(new BasicTrade(1, new ItemStack(ModItems.RICE.get()), 1, 12, 1));
+			trades.add(new BasicTrade(1, new ItemStack(ModItems.ONION.get()), 1, 12, 1));
 		}
+	}
+
+	public static BasicTrade emeraldForItemsTrade(Item item, int count, int maxTrades, int xp) {
+		return new BasicTrade(new ItemStack(item, count), new ItemStack(Items.EMERALD), maxTrades, xp, 1);
 	}
 
 	@SubscribeEvent
