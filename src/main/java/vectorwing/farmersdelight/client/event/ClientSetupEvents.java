@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.client.event;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.Material;
@@ -22,6 +23,7 @@ import vectorwing.farmersdelight.client.renderer.SkilletRenderer;
 import vectorwing.farmersdelight.client.renderer.StoveRenderer;
 import vectorwing.farmersdelight.common.registry.ModAtlases;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
+import vectorwing.farmersdelight.common.registry.ModEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModParticleTypes;
 
 import java.util.Map;
@@ -34,6 +36,11 @@ public class ClientSetupEvents
 	@SubscribeEvent
 	public static void onModelRegister(ModelRegistryEvent event) {
 		ForgeModelBakery.addSpecialModel(new ModelResourceLocation(new ResourceLocation(FarmersDelight.MODID, "skillet_cooking"), "inventory"));
+	}
+
+	@SubscribeEvent
+	public static void onEntityRendererRegister(EntityRenderersEvent.RegisterRenderers event) {
+		event.registerEntityRenderer(ModEntityTypes.ROTTEN_TOMATO.get(), ThrownItemRenderer::new);
 	}
 
 	@SubscribeEvent

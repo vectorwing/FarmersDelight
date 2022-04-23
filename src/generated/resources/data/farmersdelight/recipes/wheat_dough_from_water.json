@@ -2,7 +2,10 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "tag": "forge:eggs"
+      "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "minecraft:wheat"
     },
     {
       "item": "minecraft:wheat"
@@ -12,6 +15,7 @@
     }
   ],
   "result": {
-    "item": "farmersdelight:raw_pasta"
+    "item": "farmersdelight:wheat_dough",
+    "count": 3
   }
 }

@@ -8,9 +8,9 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolActions;
 import vectorwing.farmersdelight.common.crafting.ingredient.ToolActionIngredient;
-import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
+import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 
 import java.util.function.Consumer;
 
@@ -18,13 +18,13 @@ public class CuttingRecipes
 {
 	public static void register(Consumer<FinishedRecipe> consumer) {
 		// Knife
-		cuttingMeats(consumer);
+		cuttingAnimalItems(consumer);
 		cuttingVegetables(consumer);
 		cuttingPastries(consumer);
 		cuttingFlowers(consumer);
 
 		// Pickaxe
-		salvagingBricks(consumer);
+		salvagingMinerals(consumer);
 
 		// Axe
 		strippingWood(consumer);
@@ -37,7 +37,7 @@ public class CuttingRecipes
 		salvagingUsingShears(consumer);
 	}
 
-	private static void cuttingMeats(Consumer<FinishedRecipe> consumer) {
+	private static void cuttingAnimalItems(Consumer<FinishedRecipe> consumer) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BEEF), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.MINCED_BEEF.get(), 2)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.PORKCHOP), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.BACON.get(), 2)
@@ -70,6 +70,8 @@ public class CuttingRecipes
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.COOKED_MUTTON), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.COOKED_MUTTON_CHOPS.get(), 2)
 				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.INK_SAC), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.BLACK_DYE, 2)
+				.build(consumer);
 	}
 
 	private static void cuttingVegetables(Consumer<FinishedRecipe> consumer) {
@@ -89,6 +91,8 @@ public class CuttingRecipes
 	}
 
 	private static void cuttingPastries(Consumer<FinishedRecipe> consumer) {
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WHEAT_DOUGH.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.RAW_PASTA.get(), 1)
+				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CAKE), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.CAKE_SLICE.get(), 7)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.APPLE_PIE.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.APPLE_PIE_SLICE.get(), 4)
@@ -151,10 +155,18 @@ public class CuttingRecipes
 				.build(consumer);
 	}
 
-	private static void salvagingBricks(Consumer<FinishedRecipe> consumer) {
+	private static void salvagingMinerals(Consumer<FinishedRecipe> consumer) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BRICKS), new ToolActionIngredient(ToolActions.PICKAXE_DIG), Items.BRICK, 4)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.NETHER_BRICKS), new ToolActionIngredient(ToolActions.PICKAXE_DIG), Items.NETHER_BRICK, 4)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.STONE), new ToolActionIngredient(ToolActions.PICKAXE_DIG), Items.COBBLESTONE, 1)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.DEEPSLATE), new ToolActionIngredient(ToolActions.PICKAXE_DIG), Items.COBBLED_DEEPSLATE, 1)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.QUARTZ_BLOCK), new ToolActionIngredient(ToolActions.PICKAXE_DIG), Items.QUARTZ, 4)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.AMETHYST_BLOCK), new ToolActionIngredient(ToolActions.PICKAXE_DIG), Items.AMETHYST_SHARD, 4)
 				.build(consumer);
 	}
 
@@ -190,6 +202,9 @@ public class CuttingRecipes
 
 	private static void diggingSediments(Consumer<FinishedRecipe> consumer) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CLAY), new ToolActionIngredient(ToolActions.SHOVEL_DIG), Items.CLAY_BALL, 4)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.GRAVEL), new ToolActionIngredient(ToolActions.SHOVEL_DIG), Items.GRAVEL, 1)
+				.addResultWithChance(Items.FLINT, 0.1F)
 				.build(consumer);
 	}
 

@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import vectorwing.farmersdelight.FarmersDelight;
 
-public class CuttingBoardTrigger extends SimpleCriterionTrigger<CuttingBoardTrigger.Instance>
+public class CuttingBoardTrigger extends SimpleCriterionTrigger<CuttingBoardTrigger.TriggerInstance>
 {
 	private static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "use_cutting_board");
 
@@ -18,22 +18,22 @@ public class CuttingBoardTrigger extends SimpleCriterionTrigger<CuttingBoardTrig
 	}
 
 	public void trigger(ServerPlayer player) {
-		this.trigger(player, Instance::test);
+		this.trigger(player, TriggerInstance::test);
 	}
 
 	@Override
-	protected Instance createInstance(JsonObject json, EntityPredicate.Composite player, DeserializationContext conditionsParser) {
-		return new CuttingBoardTrigger.Instance(player);
+	protected TriggerInstance createInstance(JsonObject json, EntityPredicate.Composite player, DeserializationContext conditionsParser) {
+		return new TriggerInstance(player);
 	}
 
-	public static class Instance extends AbstractCriterionTriggerInstance
+	public static class TriggerInstance extends AbstractCriterionTriggerInstance
 	{
-		public Instance(EntityPredicate.Composite player) {
+		public TriggerInstance(EntityPredicate.Composite player) {
 			super(CuttingBoardTrigger.ID, player);
 		}
 
-		public static CuttingBoardTrigger.Instance simple() {
-			return new CuttingBoardTrigger.Instance(EntityPredicate.Composite.ANY);
+		public static TriggerInstance simple() {
+			return new TriggerInstance(EntityPredicate.Composite.ANY);
 		}
 
 		public boolean test() {

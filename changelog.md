@@ -1,5 +1,45 @@
 # Changelog
 
+## 0.6.0 / 1.1.0
+
+### Additions
+- Added some of this mod's items (ropes, seeds, meals, knives etc.) to many chest loot tables! I'll leave most of them for you to discover. ;)
+- Added `add_loot_table` loot modifier:
+  - Allows for adding unmodified extra loot rolls to specified `lootTable` paths;
+  - This modifier is governed by the `generateFDChestLoot` config; if set to false, it doesn't do anything.
+- New cutting recipes:
+  - Stone + Pickaxe -> Cobblestone;
+  - Quartz Block + Pickaxe -> 4 Nether Quartz
+  - Ink Sac + Knife -> 2 Black Dye;
+  - Gravel + Shovel -> Gravel, 10% Flint (infinite source);
+  - Deepslate + Pickaxe -> Cobbled Deepslate (1.18);
+  - Amethyst Block + Pickaxe -> 4 Amethyst Shards (1.18);
+- Added Rotten Tomatoes:
+  - Not all tomatoes are fresh off the vine. Rarely, you might end up plucking a bad one...
+  - Rotten Tomatoes are inedible and uncookable; they are meant to be **thrown** at others! Splatter that unfunny friend of yours right in the face!
+  - They are also more compostable than standard tomatoes (85% chance), in case you don't want them.
+
+### Updates
+- The Comfort effect has been redesigned:
+  - It no longer provides immunity to Slowness, Weakness or Hunger;
+  - Now, it extends natural regeneration (or provides it, if the gamerule is disabled), no matter how hungry you are;
+  - A silver sheen will scroll through your hearts to indicate the effect is active.
+- The Advancement tree has been redesigned, with more basic hints accessible at the start of a world;
+- Updated a few crafting recipes:
+  - Dumplings are now cooked with Wheat Dough instead of Raw Pasta;
+  - Wheat Dough is now craftable from 3 Wheat, and either 1 Egg or 1 Water Bucket;
+  - Raw Pasta is now made by cutting Wheat Dough in a Cutting Board;
+- Foods have been rebalanced:
+  - Nourishment and Comfort lengths have been tweaked, based on the complexity of the dish;
+  - Sandwiches no longer provide burst effects, to make them on par with other handheld foods;
+- Wandering Traders now sell the mod's seeds/plantables sometimes. This can be similarly disabled in the config;
+- The modifier `add_item` can now safely specify a `count` for the added item (optional);
+- Stoves now have custom death messages, if one's unlucky enough to die on top of them...;
+
+### Fixes
+- Fixed configuration for generating Compost Heaps on villages not working;
+- Fixed Lava Cauldrons not being valid heat sources;
+
 ## 1.0.4
 
 ### Additions

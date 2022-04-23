@@ -6,6 +6,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.loot.modifier.AddItemModifier;
+import vectorwing.farmersdelight.common.loot.modifier.AddLootTableModifier;
 import vectorwing.farmersdelight.common.loot.modifier.PastrySlicingModifier;
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -18,6 +19,9 @@ public class LootModifierEvents
 		);
 		ev.getRegistry().register(
 				new AddItemModifier.Serializer().setRegistryName(FarmersDelight.MODID, "add_item")
+		);
+		ev.getRegistry().register(
+				new AddLootTableModifier.Serializer().setRegistryName(FarmersDelight.MODID, "add_loot_table")
 		);
 	}
 }

@@ -1,0 +1,76 @@
+{
+  "parent": "farmersdelight:main/root",
+  "display": {
+    "icon": {
+      "item": "farmersdelight:wild_onions"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.get_fd_seed"
+    },
+    "description": {
+      "translate": "farmersdelight.advancement.get_fd_seed.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "cabbage_seeds": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "farmersdelight:cabbage_seeds"
+            ]
+          }
+        ]
+      }
+    },
+    "tomato_seeds": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "farmersdelight:tomato_seeds"
+            ]
+          }
+        ]
+      }
+    },
+    "onion": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "farmersdelight:onion"
+            ]
+          }
+        ]
+      }
+    },
+    "rice": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "farmersdelight:rice"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "cabbage_seeds",
+      "tomato_seeds",
+      "onion",
+      "rice"
+    ]
+  ]
+}

@@ -5,12 +5,12 @@ import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.FoodValues;
 import vectorwing.farmersdelight.common.item.*;
 import vectorwing.farmersdelight.common.item.DrinkableItem;
 import vectorwing.farmersdelight.common.item.HotCocoaItem;
 import vectorwing.farmersdelight.common.item.MelonJuiceItem;
 import vectorwing.farmersdelight.common.item.MilkBottleItem;
-import vectorwing.farmersdelight.common.FoodValues;
 
 @SuppressWarnings("unused")
 public class ModItems
@@ -167,6 +167,8 @@ public class ModItems
 			() -> new RiceItem(ModBlocks.RICE_CROP.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB)));
 	public static final RegistryObject<Item> CABBAGE_SEEDS = ITEMS.register("cabbage_seeds", () -> new ItemNameBlockItem(ModBlocks.CABBAGE_CROP.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB)));
 	public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds", () -> new ItemNameBlockItem(ModBlocks.TOMATO_CROP.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB)));
+	public static final RegistryObject<Item> ROTTEN_TOMATO = ITEMS.register("rotten_tomato",
+			() -> new RottenTomatoItem(new Item.Properties().stacksTo(16).tab(FarmersDelight.CREATIVE_TAB)));
 
 	// Foodstuffs
 	public static final RegistryObject<Item> FRIED_EGG = ITEMS.register("fried_egg",

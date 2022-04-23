@@ -145,7 +145,7 @@
   "item.farmersdelight.pumpkin_soup": "Sopa de calabaza",
   "item.farmersdelight.baked_cod_stew": "Estofado de bacalao al horno",
   "item.farmersdelight.noodle_soup": "Sopa de fideos",
-
+  
   "item.farmersdelight.bacon_and_eggs": "Tocino con huevos",
   "item.farmersdelight.pasta_with_meatballs": "Pasta con albóndigas",
   "item.farmersdelight.pasta_with_mutton_chop": "Pasta con chuleta de cordero",
@@ -220,6 +220,10 @@
   "farmersdelight.advancement.place_stove.desc": "Coloca una parrilla",
   "farmersdelight.advancement.place_cooking_pot": "¡La cena está servida!",
   "farmersdelight.advancement.place_cooking_pot.desc": "Deje la olla y empieza a preparar las comidas!",
+  "farmersdelight.advancement.use_skillet": "Portable Cooking",
+  "farmersdelight.advancement.use_skillet.desc": "Skillets let you cook on the go. Stand near heat, then hold food in your other hand!",
+  "farmersdelight.advancement.place_skillet": "Sizzling Hot!",
+  "farmersdelight.advancement.place_skillet.desc": "Place down your Skillet as a block while sneaking",
   "farmersdelight.advancement.drink_hot_cocoa": "Una taza de felicidad",
   "farmersdelight.advancement.drink_hot_cocoa.desc": "Elimina un efecto nocivo bebiendo una botella de chocolate caliente",
   "farmersdelight.advancement.eat_comfort_food": "Cálido y acogedor",
