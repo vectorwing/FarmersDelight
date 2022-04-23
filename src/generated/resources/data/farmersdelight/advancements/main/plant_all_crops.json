@@ -61,12 +61,6 @@
         "block": "minecraft:sugar_cane"
       }
     },
-    "cactus": {
-      "trigger": "minecraft:placed_block",
-      "conditions": {
-        "block": "minecraft:cactus"
-      }
-    },
     "melon": {
       "trigger": "minecraft:placed_block",
       "conditions": {
@@ -149,9 +143,6 @@
     ],
     [
       "sugar_cane"
-    ],
-    [
-      "cactus"
     ],
     [
       "melon"
