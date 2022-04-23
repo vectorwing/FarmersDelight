@@ -5,7 +5,6 @@ import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -21,7 +20,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkHooks;
 import vectorwing.farmersdelight.common.registry.ModEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModItems;
-import vectorwing.farmersdelight.registry.ModSounds;
+import vectorwing.farmersdelight.common.registry.ModSounds;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

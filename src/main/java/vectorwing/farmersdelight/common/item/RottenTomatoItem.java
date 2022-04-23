@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.common.item;
 
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -10,7 +9,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import vectorwing.farmersdelight.common.entity.RottenTomatoEntity;
-import vectorwing.farmersdelight.registry.ModSounds;
+import vectorwing.farmersdelight.common.registry.ModSounds;
 
 public class RottenTomatoItem extends Item
 {
