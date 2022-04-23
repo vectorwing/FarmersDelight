@@ -534,7 +534,7 @@ public class CraftingRecipes
 
 	private static void recipesFoodstuffs(Consumer<FinishedRecipe> consumer) {
 		ShapelessRecipeBuilder.shapeless(ModItems.TOMATO_SEEDS.get())
-				.requires(ModItems.TOMATO.get())
+				.requires(Ingredient.of(ModItems.TOMATO.get(), ModItems.ROTTEN_TOMATO.get()))
 				.unlockedBy("has_tomato", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.TOMATO.get()))
 				.save(consumer);
 		ShapelessRecipeBuilder.shapeless(ModItems.MILK_BOTTLE.get(), 3)

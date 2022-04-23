@@ -34,10 +34,10 @@ public class VillagerEvents
 		VillagerProfession profession = event.getType();
 		if (profession.getRegistryName() == null) return;
 		if (profession.getRegistryName().getPath().equals("farmer")) {
-			trades.get(1).add(new EmeraldForItemsTrade(ModItems.ONION.get(), 26, 16, 2));
-			trades.get(1).add(new EmeraldForItemsTrade(ModItems.TOMATO.get(), 26, 16, 2));
-			trades.get(2).add(new EmeraldForItemsTrade(ModItems.CABBAGE.get(), 16, 16, 5));
-			trades.get(2).add(new EmeraldForItemsTrade(ModItems.RICE.get(), 20, 16, 5));
+			trades.get(1).add(emeraldForItemsTrade(ModItems.ONION.get(), 26, 16, 2));
+			trades.get(1).add(emeraldForItemsTrade(ModItems.TOMATO.get(), 26, 16, 2));
+			trades.get(2).add(emeraldForItemsTrade(ModItems.CABBAGE.get(), 16, 16, 5));
+			trades.get(2).add(emeraldForItemsTrade(ModItems.RICE.get(), 20, 16, 5));
 		}
 	}
 
@@ -52,25 +52,7 @@ public class VillagerEvents
 		}
 	}
 
-	static class EmeraldForItemsTrade implements VillagerTrades.ItemListing
-	{
-		private final Item tradeItem;
-		private final int count;
-		private final int maxUses;
-		private final int xpValue;
-		private final float priceMultiplier;
-
-		public EmeraldForItemsTrade(ItemLike tradeItemIn, int countIn, int maxUsesIn, int xpValueIn) {
-			this.tradeItem = tradeItemIn.asItem();
-			this.count = countIn;
-			this.maxUses = maxUsesIn;
-			this.xpValue = xpValueIn;
-			this.priceMultiplier = 0.05F;
-		}
-
-		public MerchantOffer getOffer(Entity trader, Random rand) {
-			ItemStack itemstack = new ItemStack(this.tradeItem, this.count);
-			return new MerchantOffer(itemstack, new ItemStack(Items.EMERALD), this.maxUses, this.xpValue, this.priceMultiplier);
-		}
+	public static BasicItemListing emeraldForItemsTrade(ItemLike item, int count, int maxTrades, int xp) {
+		return new BasicItemListing(new ItemStack(item, count), new ItemStack(Items.EMERALD), maxTrades, xp, 1);
 	}
 }

@@ -27,7 +27,7 @@ public class FoodValues
 
 	// Drinks (mostly for effects)
 	public static final FoodProperties APPLE_CIDER = (new FoodProperties.Builder())
-			.nutrition(0).saturationMod(0.0f).effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 1200, 0), 1.0F).build();
+			.effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 1200, 0), 1.0F).build();
 
 	// Basic Foods
 	public static final FoodProperties FRIED_EGG = (new FoodProperties.Builder())
