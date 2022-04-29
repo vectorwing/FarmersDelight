@@ -475,25 +475,18 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		{
 			@Override
 			public int get(int index) {
-				switch (index) {
-					case 0:
-						return CookingPotBlockEntity.this.cookTime;
-					case 1:
-						return CookingPotBlockEntity.this.cookTimeTotal;
-					default:
-						return 0;
-				}
+				return switch (index) {
+					case 0 -> CookingPotBlockEntity.this.cookTime;
+					case 1 -> CookingPotBlockEntity.this.cookTimeTotal;
+					default -> 0;
+				};
 			}
 
 			@Override
 			public void set(int index, int value) {
 				switch (index) {
-					case 0:
-						CookingPotBlockEntity.this.cookTime = value;
-						break;
-					case 1:
-						CookingPotBlockEntity.this.cookTimeTotal = value;
-						break;
+					case 0 -> CookingPotBlockEntity.this.cookTime = value;
+					case 1 -> CookingPotBlockEntity.this.cookTimeTotal = value;
 				}
 			}
 
