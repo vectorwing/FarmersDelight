@@ -70,9 +70,9 @@ public class OrganicCompostBlock extends Block
 
 		if (worldIn.getRandom().nextFloat() <= chance) {
 			if (state.getValue(COMPOSTING) == this.getMaxCompostingStage())
-				worldIn.setBlock(pos, ModBlocks.RICH_SOIL.get().defaultBlockState(), 2); // finished
+				worldIn.setBlock(pos, ModBlocks.RICH_SOIL.get().defaultBlockState(), 3); // finished
 			else
-				worldIn.setBlock(pos, state.setValue(COMPOSTING, state.getValue(COMPOSTING) + 1), 2); // next stage
+				worldIn.setBlock(pos, state.setValue(COMPOSTING, state.getValue(COMPOSTING) + 1), 3); // next stage
 		}
 	}
 

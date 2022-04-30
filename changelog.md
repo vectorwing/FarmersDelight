@@ -1,5 +1,10 @@
 # Changelog
 
+## Upcoming
+
+### Fixes
+- Fix Organic Compost not updating its comparator signal;
+
 ## 0.6.0 / 1.1.0
 
 ### Additions
