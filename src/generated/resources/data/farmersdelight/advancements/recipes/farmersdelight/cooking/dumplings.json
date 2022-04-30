@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:cooking/dumplings"
+    ]
+  },
+  "criteria": {
+    "has_wheat_dough": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "farmersdelight:wheat_dough"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:cooking/dumplings"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_wheat_dough",
+      "has_the_recipe"
+    ]
+  ]
+}
