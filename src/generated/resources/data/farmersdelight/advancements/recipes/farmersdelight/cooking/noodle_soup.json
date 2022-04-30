@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:cooking/noodle_soup"
+    ]
+  },
+  "criteria": {
+    "has_raw_pasta": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "farmersdelight:raw_pasta"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:cooking/noodle_soup"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_pasta",
+      "has_the_recipe"
+    ]
+  ]
+}

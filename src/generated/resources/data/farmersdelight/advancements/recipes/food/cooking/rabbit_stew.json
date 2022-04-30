@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:cooking/rabbit_stew"
+    ]
+  },
+  "criteria": {
+    "has_raw_rabbit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:rabbit"
+            ]
+          }
+        ]
+      }
+    },
+    "has_cooked_rabbit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:cooked_rabbit"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:cooking/rabbit_stew"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_rabbit",
+      "has_cooked_rabbit",
+      "has_the_recipe"
+    ]
+  ]
+}

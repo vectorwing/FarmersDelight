@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:cooking/fish_stew"
+    ]
+  },
+  "criteria": {
+    "has_tomato_sauce": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "farmersdelight:tomato_sauce"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:cooking/fish_stew"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tomato_sauce",
+      "has_the_recipe"
+    ]
+  ]
+}
