@@ -118,7 +118,7 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 		int endPlayerInv = startPlayerInv + 36;
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.slots.get(index);
-		if (slot != null && slot.hasItem()) {
+		if (slot.hasItem()) {
 			ItemStack itemstack1 = slot.getItem();
 			itemstack = itemstack1.copy();
 			if (index == indexOutput) {
@@ -165,13 +165,17 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 	}
 
 	@Override
-	public void fillCraftSlotsStackedContents(StackedContents p_40117_) {
-
+	public void fillCraftSlotsStackedContents(StackedContents helper) {
+		for(int i = 0; i < inventory.getSlots(); i++) {
+			helper.accountSimpleStack(inventory.getStackInSlot(i));
+		}
 	}
 
 	@Override
 	public void clearCraftingContent() {
-//		this.inventory.set
+		for (int i = 0; i < 6; i++) {
+			this.inventory.setStackInSlot(i, ItemStack.EMPTY);
+		}
 	}
 
 	@Override
