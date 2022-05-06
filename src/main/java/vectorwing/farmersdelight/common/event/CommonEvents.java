@@ -95,19 +95,4 @@ public class CommonEvents
 			}
 		}
 	}
-
-	// TODO: Remember to substitute this with an adequate hoe tool check in the future, if possible.
-	@SubscribeEvent
-	public static void onHoeUse(UseHoeEvent event) {
-		UseOnContext context = event.getContext();
-		BlockPos pos = context.getClickedPos();
-		Level world = context.getLevel();
-		BlockState state = world.getBlockState(pos);
-
-		if (context.getClickedFace() != Direction.DOWN && world.getBlockState(pos.above()).isAir() && state.getBlock() == ModBlocks.RICH_SOIL.get()) {
-			world.playSound(event.getPlayer(), pos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0F, 1.0F);
-			world.setBlock(pos, ModBlocks.RICH_SOIL_FARMLAND.get().defaultBlockState(), 11);
-			event.setResult(Event.Result.ALLOW);
-		}
-	}
 }

@@ -4,6 +4,7 @@
 
 ### Fixes
 - Fix Organic Compost not updating its comparator signal;
+- Fix Rich Soil only being tillable by instances of HoeItem, allowing custom modded hoes to work again;
 
 ## 0.6.0 / 1.1.0
 

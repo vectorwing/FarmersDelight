@@ -3,10 +3,8 @@ package vectorwing.farmersdelight.common.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
@@ -64,8 +62,7 @@ public class RichSoilBlock extends Block
 			}
 
 			// If all else fails, and it's a plant, give it a growth boost now and then!
-			if (aboveBlock instanceof BonemealableBlock && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
-				BonemealableBlock growable = (BonemealableBlock) aboveBlock;
+			if (aboveBlock instanceof BonemealableBlock growable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
 				if (growable.isValidBonemealTarget(worldIn, pos.above(), aboveState, false) && ForgeHooks.onCropsGrowPre(worldIn, pos.above(), aboveState, true)) {
 					growable.performBonemeal(worldIn, worldIn.random, pos.above(), aboveState);
 					worldIn.levelEvent(2005, pos.above(), 0);
@@ -75,13 +72,12 @@ public class RichSoilBlock extends Block
 		}
 	}
 
-	// TODO: The HOE_DIG action might not work! Revisit this later!
 	@Override
 	@Nullable
-	public BlockState getToolModifiedState(BlockState state, Level world, BlockPos pos, Player player, ItemStack stack, ToolAction toolAction) {
-		if (!stack.canPerformAction(toolAction)) return null;
-		if (ToolActions.HOE_DIG.equals(toolAction)) return ModBlocks.RICH_SOIL_FARMLAND.get().defaultBlockState();
-
+	public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
+		if (toolAction.equals(ToolActions.HOE_TILL)) {
+			return ModBlocks.RICH_SOIL_FARMLAND.get().defaultBlockState();
+		}
 		return null;
 	}
 
