@@ -23,7 +23,6 @@ import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 
 import java.util.Random;
-import java.util.Vector;
 
 @OnlyIn(Dist.CLIENT)
 public class ComfortHealthOverlay
@@ -93,15 +92,13 @@ public class ComfortHealthOverlay
 		RenderSystem.setShaderTexture(0, MOD_ICONS_TEXTURE);
 		RenderSystem.enableBlend();
 
-//		int totalHealth = Mth.ceil((healthMax + absorb) / 2.0F);
-//		for (int i = totalHealth - 1; i >= 0; --i) {
+		int healthMaxSingleRow = Mth.ceil(Math.min(healthMax, 20) / 2.0F);
+		int leftHeightOffset = ((healthRows - 1) * rowHeight); // This keeps the overlay on the bottommost row of hearts
 
-		// TODO: Temporary workaround for the icon heigh issue. Fix it later!
-		for (int i = 0; i < 10; ++i) {
+		for (int i = 0; i < healthMaxSingleRow; ++i) {
 			int column = i % 10;
-			int row = Mth.ceil((float) (i + 1) / 10.0F) - 1;
 			int x = left + column * 8;
-			int y = top - row * rowHeight;
+			int y = top + leftHeightOffset;
 
 			if (health <= 4) y += rand.nextInt(2);
 			if (i == regen) y -= 2;

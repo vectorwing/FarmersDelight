@@ -2,13 +2,18 @@
 
 ## 1.1.1
 
+### Additions
+- Added nl_NL translation (thanks, Sv3r!);
+- Added sr_SP translation (thanks, Smrtonosan!);
+
 ### Updates
-- Updated de_DE (thanks, DaLumma!);
-- Updated ko_KR (thanks, qkrehf2!);
+- Updated de_DE translation (thanks, DaLumma!);
+- Updated ko_KR translation (thanks, qkrehf2!);
 
 ### Fixes
 - Fix Organic Compost not updating its comparator signal;
 - Fix Rich Soil only being tillable by instances of HoeItem, allowing custom modded hoes to work again;
+- Fix Comfort overlay not following the HUD's height changes properly;
 
 ## 0.6.0 / 1.1.0
 
