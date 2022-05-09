@@ -58,17 +58,19 @@ public class ComfortHealthOverlay
 		}
 
 		FoodData stats = player.getFoodData();
+		int top = minecraft.getWindow().getGuiScaledHeight() - healthIconsOffset + 10;
+		int left = minecraft.getWindow().getGuiScaledWidth() / 2 - 91;
 
 		boolean isPlayerEligibleForComfort = stats.getSaturationLevel() == 0.0F
 				&& player.isHurt()
 				&& !player.hasEffect(MobEffects.REGENERATION);
 
 		if (player.getEffect(ModEffects.COMFORT.get()) != null && isPlayerEligibleForComfort) {
-			drawComfortOverlay(player, minecraft, poseStack);
+			drawComfortOverlay(player, minecraft, poseStack, left, top);
 		}
 	}
 
-	public static void drawComfortOverlay(Player player, Minecraft minecraft, PoseStack matrixStack) {
+	public static void drawComfortOverlay(Player player, Minecraft minecraft, PoseStack matrixStack, int left, int top) {
 		int ticks = minecraft.gui.getGuiTicks();
 		Random rand = new Random();
 		rand.setSeed((long) (ticks * 312871));
@@ -83,10 +85,6 @@ public class ComfortHealthOverlay
 
 		int healthRows = Mth.ceil((healthMax + absorb) / 2.0F / 10.0F);
 		int rowHeight = Math.max(10 - (healthRows - 2), 3);
-
-		int left = minecraft.getWindow().getGuiScaledWidth() / 2 - 91;
-		// TODO: Fix this height later, it's wrong!
-		int top = minecraft.getWindow().getGuiScaledHeight() - 39;
 
 		int comfortSheen = ticks % 50;
 		int comfortHeartFrame = comfortSheen % 2;
