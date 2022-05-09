@@ -1,6 +1,10 @@
 # Changelog
 
-## Upcoming
+## 1.1.1
+
+### Updates
+- Updated de_DE (thanks, DaLumma!);
+- Updated ko_KR (thanks, qkrehf2!);
 
 ### Fixes
 - Fix Organic Compost not updating its comparator signal;
