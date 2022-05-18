@@ -1,9 +1,9 @@
 package vectorwing.farmersdelight.common.effect;
 
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.level.GameRules;
 
@@ -18,8 +18,8 @@ public class NourishmentEffect extends MobEffect
 		super(MobEffectCategory.BENEFICIAL, 0);
 	}
 
-	public void applyEffectTick(LivingEntity entityLivingBaseIn, int amplifier) {
-		if (!entityLivingBaseIn.getCommandSenderWorld().isClientSide && entityLivingBaseIn instanceof Player player) {
+	public void applyEffectTick(LivingEntity entity, int amplifier) {
+		if (!entity.getCommandSenderWorld().isClientSide && entity instanceof Player player) {
 			FoodData foodData = player.getFoodData();
 			boolean isPlayerHealingWithSaturation =
 					player.level.getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION)

@@ -1,13 +1,10 @@
 package vectorwing.farmersdelight.common.event;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.BasicItemListing;
 import net.minecraftforge.event.village.VillagerTradesEvent;
@@ -20,7 +17,6 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
-import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID)
 @ParametersAreNonnullByDefault
@@ -45,14 +41,18 @@ public class VillagerEvents
 	public static void onWandererTrades(WandererTradesEvent event) {
 		if (Configuration.WANDERING_TRADER_SELLS_FD_ITEMS.get()) {
 			List<VillagerTrades.ItemListing> trades = event.getGenericTrades();
-			trades.add(new BasicItemListing(1, new ItemStack(ModItems.CABBAGE_SEEDS.get()), 1, 12, 1));
-			trades.add(new BasicItemListing(1, new ItemStack(ModItems.TOMATO_SEEDS.get()), 1, 12, 1));
-			trades.add(new BasicItemListing(1, new ItemStack(ModItems.RICE.get()), 1, 12, 1));
-			trades.add(new BasicItemListing(1, new ItemStack(ModItems.ONION.get()), 1, 12, 1));
+			trades.add(itemForEmeraldTrade(ModItems.CABBAGE_SEEDS.get(), 1, 12));
+			trades.add(itemForEmeraldTrade(ModItems.TOMATO_SEEDS.get(), 1, 12));
+			trades.add(itemForEmeraldTrade(ModItems.RICE.get(), 1, 12));
+			trades.add(itemForEmeraldTrade(ModItems.ONION.get(), 1, 12));
 		}
 	}
 
 	public static BasicItemListing emeraldForItemsTrade(ItemLike item, int count, int maxTrades, int xp) {
-		return new BasicItemListing(new ItemStack(item, count), new ItemStack(Items.EMERALD), maxTrades, xp, 1);
+		return new BasicItemListing(new ItemStack(item, count), new ItemStack(Items.EMERALD), maxTrades, xp, 0.05F);
+	}
+
+	public static BasicItemListing itemForEmeraldTrade(ItemLike item, int maxTrades, int xp) {
+		return new BasicItemListing(1, new ItemStack(item), maxTrades, xp, 0.05F);
 	}
 }

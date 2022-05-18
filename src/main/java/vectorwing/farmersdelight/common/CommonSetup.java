@@ -36,15 +36,11 @@ public class CommonSetup
 			registerCompostables();
 			registerDispenserBehaviors();
 			registerAnimalFeeds();
+			registerLootItemFunctions();
 			WildCropGeneration.registerWildCropGeneration();
 		});
 
 		ModAdvancements.register();
-
-		LootItemFunctions.register(CopyMealFunction.ID.toString(), new CopyMealFunction.Serializer());
-		LootItemFunctions.register(CopySkilletFunction.ID.toString(), new CopySkilletFunction.Serializer());
-		LootItemFunctions.register(SmokerCookFunction.ID.toString(), new SmokerCookFunction.Serializer());
-
 		CraftingHelper.register(new VanillaCrateEnabledCondition.Serializer());
 	}
 
@@ -144,5 +140,11 @@ public class CommonSetup
 		};
 
 		Collections.addAll(Parrot.TAME_FOOD, ModItems.CABBAGE_SEEDS.get(), ModItems.TOMATO_SEEDS.get(), ModItems.RICE.get());
+	}
+
+	public static void registerLootItemFunctions() {
+		LootItemFunctions.register(CopyMealFunction.ID.toString(), new CopyMealFunction.Serializer());
+		LootItemFunctions.register(CopySkilletFunction.ID.toString(), new CopySkilletFunction.Serializer());
+		LootItemFunctions.register(SmokerCookFunction.ID.toString(), new SmokerCookFunction.Serializer());
 	}
 }

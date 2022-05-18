@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.2
+
+### Fixes
+- Fix loot item function registries sometimes causing a race condition during mod loading;
+- Fix Farmer villagers giving too much discount after every trade, when buying FD crops;
+
 ## 1.1.1
 
 ### Additions
@@ -12,7 +18,7 @@
 
 ### Fixes
 - Fix Organic Compost not updating its comparator signal;
-- Fix Rich Soil only being tillable by instances of HoeItem, allowing custom modded hoes to work again;
+- Fix Rich Soil not being tillable except by instances of HoeItem, allowing custom modded hoes to work again;
 - Fix Comfort overlay not following the HUD's height changes properly;
 
 ## 0.6.0 / 1.1.0
