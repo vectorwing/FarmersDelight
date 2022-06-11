@@ -26,7 +26,7 @@
   "block.farmersdelight.beetroot_crate": "Bietenkrat",
   "block.farmersdelight.cabbage_crate": "Kolenkrat",
   "block.farmersdelight.tomato_crate": "Tomatenkrat",
-  "block.farmersdelight.onion_crate": "Uienkrat",
+  "block.farmersdelight.onion_crate": "Ajuinenkrat",
   "block.farmersdelight.rice_bale": "Rijstbaal",
   "block.farmersdelight.rice_bag": "Zak Rijst",
   "block.farmersdelight.straw_bale": "Strobaal",
@@ -51,7 +51,7 @@
 
   "block.farmersdelight.tomatoes": "Tomaten",
   "block.farmersdelight.cabbages": "Kolen",
-  "block.farmersdelight.onions": "Uien",
+  "block.farmersdelight.onions": "Ajuinen",
   "block.farmersdelight.rice": "Rijstgewassen",
   "block.farmersdelight.rice_panicles": "Rijstgewassen",
   "block.farmersdelight.brown_mushroom_colony": "Bruine Paddenstoelenkolonie",
@@ -59,7 +59,7 @@
 
   "block.farmersdelight.wild_cabbages": "Wilde Kolen",
   "block.farmersdelight.wild_tomatoes": "Tomaten Wijnstok",
-  "block.farmersdelight.wild_onions": "Wilde Uien",
+  "block.farmersdelight.wild_onions": "Wilde Ajuinen",
   "block.farmersdelight.wild_carrots": "Wilde Wortels",
   "block.farmersdelight.wild_potatoes": "Wilde Aardappelen",
   "block.farmersdelight.wild_beetroots": "Strandbiet",
@@ -71,7 +71,7 @@
 
   "item.farmersdelight.tomato": "Tomaat",
   "item.farmersdelight.cabbage": "Kool",
-  "item.farmersdelight.onion": "Ui",
+  "item.farmersdelight.onion": "Ajuin",
   "item.farmersdelight.rice": "Rijst",
   "item.farmersdelight.cabbage_seeds": "Koolzaden",
   "item.farmersdelight.tomato_seeds": "Tomatenzaden",
