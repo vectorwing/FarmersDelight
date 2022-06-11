@@ -11,7 +11,7 @@
   "block.farmersdelight.acacia_cabinet": "Armário de acácia",
   "block.farmersdelight.dark_oak_cabinet": "Armário de carvalho escuro",
   "block.farmersdelight.crimson_cabinet": "Armário carmesim",
-  "block.farmersdelight.warped_pantry": "Armário distorcida",
+  "block.farmersdelight.warped_cabinet": "Armário distorcida",
   "block.farmersdelight.rope": "Corda",
   "block.farmersdelight.safety_net": "Rede de segurança",
   "block.farmersdelight.canvas_rug": "Tapete de lona",
@@ -185,7 +185,7 @@
   "farmersdelight.container.cooking_pot.not_heated": "Precisa de calor por baixo",
   "farmersdelight.container.cooking_pot.heated": "Aquecida",
   "farmersdelight.container.basket": "Cesto",
-  "farmersdelight.container.pantry": "Armário",
+  "farmersdelight.container.cabinet": "Armário",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Vazia",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Contém 1 porção de:",

@@ -5,6 +5,7 @@
 ### Fixes
 - Fix loot item function registries sometimes causing a race condition during mod loading;
 - Fix Farmer villagers giving too much discount after every trade, when buying FD crops;
+- Fix wrong lang keys in pt_BR translation;
 
 ## 1.1.1
 
