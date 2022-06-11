@@ -2,6 +2,9 @@
 
 ## 1.1.2
 
+### Updates
+- Updated the palette and textures for Ropes and Safety Nets ab bit;
+
 ### Fixes
 - Fix loot item function registries sometimes causing a race condition during mod loading;
 - Fix Farmer villagers giving too much discount after every trade, when buying FD crops;
