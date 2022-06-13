@@ -19,8 +19,6 @@ import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.client.ClientSetup;
 import vectorwing.farmersdelight.common.CommonSetup;
 import vectorwing.farmersdelight.common.Configuration;
-import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.crafting.ingredient.ToolActionIngredient;
 import vectorwing.farmersdelight.common.registry.*;
 import vectorwing.farmersdelight.common.world.VillageStructures;
@@ -64,6 +62,7 @@ public class FarmersDelight
 		ModBlockEntityTypes.TILES.register(modEventBus);
 		ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
 		ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+		ModRecipeTypes.RECIPE_TYPES.register(modEventBus);
 		ModEntityTypes.ENTITIES.register(modEventBus);
 
 		MinecraftForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
@@ -73,8 +72,5 @@ public class FarmersDelight
 
 	private void registerRecipeSerializers(RegistryEvent.Register<RecipeSerializer<?>> event) {
 		CraftingHelper.register(new ResourceLocation(MODID, "tool_action"), ToolActionIngredient.SERIALIZER);
-
-		event.getRegistry().register(CookingPotRecipe.SERIALIZER);
-		event.getRegistry().register(CuttingBoardRecipe.SERIALIZER);
 	}
 }

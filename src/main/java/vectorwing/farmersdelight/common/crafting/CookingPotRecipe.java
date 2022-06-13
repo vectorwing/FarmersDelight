@@ -16,14 +16,13 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
-import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
+import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 import javax.annotation.Nullable;
 
 public class CookingPotRecipe implements Recipe<RecipeWrapper>
 {
-	public static RecipeType<CookingPotRecipe> TYPE = RecipeType.register(FarmersDelight.MODID + ":cooking");
-	public static final Serializer SERIALIZER = new Serializer();
 	public static final int INPUT_SLOTS = 6;
 
 	private final ResourceLocation id;
@@ -116,18 +115,17 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return CookingPotRecipe.SERIALIZER;
+		return ModRecipeSerializers.COOKING.get();
 	}
 
 	@Override
 	public RecipeType<?> getType() {
-		return CookingPotRecipe.TYPE;
+		return ModRecipeTypes.COOKING.get();
 	}
 
-	private static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<CookingPotRecipe>
+	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<CookingPotRecipe>
 	{
-		Serializer() {
-			this.setRegistryName(new ResourceLocation(FarmersDelight.MODID, "cooking"));
+		public Serializer() {
 		}
 
 		@Override

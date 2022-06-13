@@ -3,7 +3,8 @@
 ## 1.1.2
 
 ### Updates
-- Updated the palette and textures for Ropes and Safety Nets ab bit;
+- Updated the palette and textures for Ropes and Safety Nets a bit;
+- Moved recipe registration to DeferredRegister;
 
 ### Fixes
 - Fix loot item function registries sometimes causing a race condition during mod loading;

@@ -6,7 +6,6 @@ import com.google.gson.JsonObject;
 import mezz.jei.api.MethodsReturnNonnullByDefault;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -14,7 +13,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
+import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -146,7 +145,7 @@ public class CookingPotRecipeBuilder
 
 		@Override
 		public RecipeSerializer<?> getType() {
-			return CookingPotRecipe.SERIALIZER;
+			return ModRecipeSerializers.COOKING.get();
 		}
 
 		@Nullable

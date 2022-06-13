@@ -35,6 +35,7 @@ import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.mixin.accessor.RecipeManagerAccessor;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModParticleTypes;
+import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
@@ -187,7 +188,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 		if (lastRecipeID != null) {
 			Recipe<RecipeWrapper> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
-					.getRecipeMap(CookingPotRecipe.TYPE)
+					.getRecipeMap(ModRecipeTypes.COOKING.get())
 					.get(lastRecipeID);
 			if (recipe instanceof CookingPotRecipe) {
 				if (recipe.matches(inventoryWrapper, level)) {
@@ -200,7 +201,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		}
 
 		if (checkNewRecipe) {
-			Optional<CookingPotRecipe> recipe = level.getRecipeManager().getRecipeFor(CookingPotRecipe.TYPE, inventoryWrapper, level);
+			Optional<CookingPotRecipe> recipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.COOKING.get(), inventoryWrapper, level);
 			if (recipe.isPresent()) {
 				lastRecipeID = recipe.get().getId();
 				return recipe;

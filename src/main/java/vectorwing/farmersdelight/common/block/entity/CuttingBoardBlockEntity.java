@@ -11,7 +11,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -32,6 +31,7 @@ import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.mixin.accessor.RecipeManagerAccessor;
 import vectorwing.farmersdelight.common.registry.ModAdvancements;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
+import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
@@ -106,14 +106,14 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 
 		if (lastRecipeID != null) {
 			Recipe<RecipeWrapper> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
-					.getRecipeMap(CuttingBoardRecipe.TYPE)
+					.getRecipeMap(ModRecipeTypes.CUTTING.get())
 					.get(lastRecipeID);
 			if (recipe instanceof CuttingBoardRecipe && recipe.matches(recipeWrapper, level) && ((CuttingBoardRecipe) recipe).getTool().test(toolStack)) {
 				return Optional.of((CuttingBoardRecipe) recipe);
 			}
 		}
 
-		List<CuttingBoardRecipe> recipeList = level.getRecipeManager().getRecipesFor(CuttingBoardRecipe.TYPE, recipeWrapper, level);
+		List<CuttingBoardRecipe> recipeList = level.getRecipeManager().getRecipesFor(ModRecipeTypes.CUTTING.get(), recipeWrapper, level);
 		if (recipeList.isEmpty()) {
 			if (player != null)
 				player.displayClientMessage(TextUtils.getTranslation("block.cutting_board.invalid_item"), true);

@@ -11,8 +11,8 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
+import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -146,7 +146,7 @@ public class CuttingBoardRecipeBuilder
 
 		@Override
 		public RecipeSerializer<?> getType() {
-			return CuttingBoardRecipe.SERIALIZER;
+			return ModRecipeSerializers.CUTTING.get();
 		}
 
 		@Nullable

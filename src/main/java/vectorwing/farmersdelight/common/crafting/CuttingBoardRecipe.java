@@ -4,20 +4,21 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
-import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
+import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
+import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -27,8 +28,6 @@ import java.util.stream.Collectors;
 
 public class CuttingBoardRecipe implements Recipe<RecipeWrapper>
 {
-	public static RecipeType<CuttingBoardRecipe> TYPE = RecipeType.register(FarmersDelight.MODID + ":cutting");
-	public static final CuttingBoardRecipe.Serializer SERIALIZER = new CuttingBoardRecipe.Serializer();
 	public static final int MAX_RESULTS = 4;
 
 	private final ResourceLocation id;
@@ -133,18 +132,17 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper>
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return CuttingBoardRecipe.SERIALIZER;
+		return ModRecipeSerializers.CUTTING.get();
 	}
 
 	@Override
 	public RecipeType<?> getType() {
-		return CuttingBoardRecipe.TYPE;
+		return ModRecipeTypes.CUTTING.get();
 	}
 
-	private static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<CuttingBoardRecipe>
+	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<CuttingBoardRecipe>
 	{
-		Serializer() {
-			this.setRegistryName(new ResourceLocation(FarmersDelight.MODID, "cutting"));
+		public Serializer() {
 		}
 
 		@Override

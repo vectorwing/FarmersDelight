@@ -15,10 +15,9 @@ import net.minecraft.world.item.crafting.RecipeType;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.common.block.entity.container.CookingPotContainer;
-import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 import vectorwing.farmersdelight.integration.jei.category.CookingRecipeCategory;
 import vectorwing.farmersdelight.integration.jei.category.CuttingRecipeCategory;
@@ -56,8 +55,8 @@ public class JEIPlugin implements IModPlugin
 
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
-		registration.addRecipes(findRecipesByType(CookingPotRecipe.TYPE), CookingRecipeCategory.UID);
-		registration.addRecipes(findRecipesByType(CuttingBoardRecipe.TYPE), CuttingRecipeCategory.UID);
+		registration.addRecipes(findRecipesByType(ModRecipeTypes.COOKING.get()), CookingRecipeCategory.UID);
+		registration.addRecipes(findRecipesByType(ModRecipeTypes.CUTTING.get()), CuttingRecipeCategory.UID);
 		registration.addRecipes(FDRecipeTypes.DECOMPOSITION, ImmutableList.of(new DecompositionDummy()));
 		registration.addIngredientInfo(new ItemStack(ModItems.STRAW.get()), VanillaTypes.ITEM, TextUtils.getTranslation("jei.info.straw"));
 		registration.addIngredientInfo(new ItemStack(ModItems.HAM.get()), VanillaTypes.ITEM, TextUtils.getTranslation("jei.info.ham"));
