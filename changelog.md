@@ -2,11 +2,16 @@
 
 ## 1.1.2
 
+### Additions
+- Added nl_BE translation (thanks, Sv3r!);
+
 ### Updates
 - Updated the palette and textures for Ropes and Safety Nets a bit;
 - Moved recipe registration to DeferredRegister;
+- Updated nl_NL translation (thanks, Sv3r!);
 
 ### Fixes
+- Fix entities being able to pathfind over lit stoves, causing them to take damage (common victims: villagers, pets etc);
 - Fix loot item function registries sometimes causing a race condition during mod loading;
 - Fix Farmer villagers giving too much discount after every trade, when buying FD crops;
 - Fix wrong lang keys in pt_BR translation;
