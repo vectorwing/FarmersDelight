@@ -12,6 +12,7 @@
 
 ### Fixes
 - Fix entities being able to pathfind over lit stoves, causing them to take damage (common victims: villagers, pets etc);
+- Fix Cooking Pot resetting cooking progress, and stalling on a valid recipe, when unloading and reloading its chunk;
 - Fix loot item function registries sometimes causing a race condition during mod loading;
 - Fix Farmer villagers giving too much discount after every trade, when buying FD crops;
 - Fix wrong lang keys in pt_BR translation;

@@ -74,6 +74,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		this.mealContainerStack = ItemStack.EMPTY;
 		this.cookingPotData = createIntArray();
 		this.experienceTracker = new Object2IntOpenHashMap<>();
+		this.checkNewRecipe = true;
 	}
 
 	@Override
