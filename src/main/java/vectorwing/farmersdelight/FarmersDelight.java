@@ -56,6 +56,7 @@ public class FarmersDelight
 		ModBlockEntityTypes.TILES.register(modEventBus);
 		ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
 		ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+		ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
 		ModRecipeTypes.RECIPE_TYPES.register(modEventBus);
 		ModEntityTypes.ENTITIES.register(modEventBus);
 
