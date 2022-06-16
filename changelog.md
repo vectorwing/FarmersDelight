@@ -7,7 +7,7 @@
 
 ### Updates
 - Updated the palette and textures for Ropes and Safety Nets a bit;
-- Moved recipe registration to DeferredRegister;
+- Moved a few registrations to DeferredRegister, in preparation for future ports;
 - Updated nl_NL translation (thanks, Sv3r!);
 
 ### Fixes
