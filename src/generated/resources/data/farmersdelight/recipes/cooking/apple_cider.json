@@ -1,5 +1,6 @@
 {
   "type": "farmersdelight:cooking",
+  "recipe_book_tab": "drinks",
   "ingredients": [
     {
       "item": "minecraft:apple"

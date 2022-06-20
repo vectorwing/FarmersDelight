@@ -19,7 +19,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.client.FDRecipeCategories;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModMenuTypes;
@@ -166,7 +165,7 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 
 	@Override
 	public void fillCraftSlotsStackedContents(StackedContents helper) {
-		for(int i = 0; i < inventory.getSlots(); i++) {
+		for (int i = 0; i < inventory.getSlots(); i++) {
 			helper.accountSimpleStack(inventory.getStackInSlot(i));
 		}
 	}
