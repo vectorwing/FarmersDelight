@@ -205,7 +205,7 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 
 	@Override
 	public RecipeBookType getRecipeBookType() {
-		return FDRecipeCategories.RECIPE_TYPE_COOKING;
+		return FarmersDelight.RECIPE_TYPE_COOKING;
 	}
 
 	@Override
