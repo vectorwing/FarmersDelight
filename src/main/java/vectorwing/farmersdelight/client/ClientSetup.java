@@ -25,6 +25,7 @@ public class ClientSetup
 
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.ONION_CROP.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.CABBAGE_CROP.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.BUDDING_TOMATO_CROP.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.TOMATO_CROP.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.RICE_CROP.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.RICE_CROP_PANICLES.get(), RenderType.cutout());
