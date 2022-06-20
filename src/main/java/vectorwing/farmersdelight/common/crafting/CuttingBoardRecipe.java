@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("ClassCanBeRecord")
 public class CuttingBoardRecipe implements Recipe<RecipeWrapper>
 {
 	public static final int MAX_RESULTS = 4;

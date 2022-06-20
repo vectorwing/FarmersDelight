@@ -19,6 +19,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 
 import javax.annotation.Nullable;
@@ -30,6 +31,7 @@ import java.util.function.Consumer;
 @MethodsReturnNonnullByDefault
 public class CookingPotRecipeBuilder
 {
+	private CookingPotRecipeBookTab tab;
 	private final List<Ingredient> ingredients = Lists.newArrayList();
 	private final Item result;
 	private final int count;
@@ -44,6 +46,7 @@ public class CookingPotRecipeBuilder
 		this.cookingTime = cookingTime;
 		this.experience = experience;
 		this.container = container != null ? container.asItem() : null;
+		this.tab = null;
 	}
 
 	public static CookingPotRecipeBuilder cookingPotRecipe(ItemLike mainResult, int count, int cookingTime, float experience) {
@@ -89,6 +92,11 @@ public class CookingPotRecipeBuilder
 		return unlockedBy(criterionName, InventoryChangeTrigger.TriggerInstance.hasItems(items));
 	}
 
+	public CookingPotRecipeBuilder setRecipeBookTab(CookingPotRecipeBookTab tab) {
+		this.tab = tab;
+		return this;
+	}
+
 	public void build(Consumer<FinishedRecipe> consumerIn) {
 		ResourceLocation location = ForgeRegistries.ITEMS.getKey(result);
 		build(consumerIn, FarmersDelight.MODID + ":cooking/" + location.getPath());
@@ -109,15 +117,16 @@ public class CookingPotRecipeBuilder
 					.rewards(AdvancementRewards.Builder.recipe(id))
 					.requirements(RequirementsStrategy.OR);
 			ResourceLocation advancementId = new ResourceLocation(id.getNamespace(), "recipes/" + result.getItemCategory().getRecipeFolderName() + "/" + id.getPath());
-			consumerIn.accept(new CookingPotRecipeBuilder.Result(id, result, count, ingredients, cookingTime, experience, container, advancement, advancementId));
+			consumerIn.accept(new CookingPotRecipeBuilder.Result(id, result, count, ingredients, cookingTime, experience, container, tab, advancement, advancementId));
 		} else {
-			consumerIn.accept(new CookingPotRecipeBuilder.Result(id, result, count, ingredients, cookingTime, experience, container));
+			consumerIn.accept(new CookingPotRecipeBuilder.Result(id, result, count, ingredients, cookingTime, experience, container, tab));
 		}
 	}
 
 	public static class Result implements FinishedRecipe
 	{
 		private final ResourceLocation id;
+		private final CookingPotRecipeBookTab tab;
 		private final List<Ingredient> ingredients;
 		private final Item result;
 		private final int count;
@@ -127,8 +136,9 @@ public class CookingPotRecipeBuilder
 		private final Advancement.Builder advancement;
 		private final ResourceLocation advancementId;
 
-		public Result(ResourceLocation idIn, Item resultIn, int countIn, List<Ingredient> ingredientsIn, int cookingTimeIn, float experienceIn, @Nullable Item containerIn, @Nullable Advancement.Builder advancement, @Nullable ResourceLocation advancementId) {
+		public Result(ResourceLocation idIn, Item resultIn, int countIn, List<Ingredient> ingredientsIn, int cookingTimeIn, float experienceIn, @Nullable Item containerIn, @Nullable CookingPotRecipeBookTab tabIn, @Nullable Advancement.Builder advancement, @Nullable ResourceLocation advancementId) {
 			this.id = idIn;
+			this.tab = tabIn;
 			this.ingredients = ingredientsIn;
 			this.result = resultIn;
 			this.count = countIn;
@@ -139,12 +149,16 @@ public class CookingPotRecipeBuilder
 			this.advancementId = advancementId;
 		}
 
-		public Result(ResourceLocation idIn, Item resultIn, int countIn, List<Ingredient> ingredientsIn, int cookingTimeIn, float experienceIn, @Nullable Item containerIn) {
-			this(idIn, resultIn, countIn, ingredientsIn, cookingTimeIn, experienceIn, containerIn, null, null);
+		public Result(ResourceLocation idIn, Item resultIn, int countIn, List<Ingredient> ingredientsIn, int cookingTimeIn, float experienceIn, @Nullable Item containerIn, @Nullable CookingPotRecipeBookTab tabIn) {
+			this(idIn, resultIn, countIn, ingredientsIn, cookingTimeIn, experienceIn, containerIn, tabIn, null, null);
 		}
 
 		@Override
 		public void serializeRecipeData(JsonObject json) {
+			if (tab != null) {
+				json.addProperty("recipe_book_tab", tab.toString());
+			}
+
 			JsonArray arrayIngredients = new JsonArray();
 
 			for (Ingredient ingredient : ingredients) {
