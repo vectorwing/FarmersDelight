@@ -22,6 +22,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 
+@SuppressWarnings("deprecation")
 public class TomatoVineBlock extends CropBlock
 {
 	public static final IntegerProperty VINE_AGE = BlockStateProperties.AGE_3;
@@ -32,24 +33,24 @@ public class TomatoVineBlock extends CropBlock
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-		int age = state.getValue(AGE);
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		int age = state.getValue(getAgeProperty());
 		boolean isMature = age == getMaxAge();
-		if (!isMature && player.getItemInHand(handIn).is(Items.BONE_MEAL)) {
+		if (!isMature && player.getItemInHand(hand).is(Items.BONE_MEAL)) {
 			return InteractionResult.PASS;
 		} else if (isMature) {
-			int quantity = 1 + worldIn.random.nextInt(2);
-			popResource(worldIn, pos, new ItemStack(ModItems.TOMATO.get(), quantity));
+			int quantity = 1 + level.random.nextInt(2);
+			popResource(level, pos, new ItemStack(ModItems.TOMATO.get(), quantity));
 
-			if (worldIn.random.nextFloat() < 0.05) {
-				popResource(worldIn, pos, new ItemStack(ModItems.ROTTEN_TOMATO.get()));
+			if (level.random.nextFloat() < 0.05) {
+				popResource(level, pos, new ItemStack(ModItems.ROTTEN_TOMATO.get()));
 			}
 
-			worldIn.playSound(null, pos, ModSounds.ITEM_TOMATO_PICK_FROM_BUSH.get(), SoundSource.BLOCKS, 1.0F, 0.8F + worldIn.random.nextFloat() * 0.4F);
-			worldIn.setBlock(pos, state.setValue(AGE, 0), 2);
+			level.playSound(null, pos, ModSounds.ITEM_TOMATO_PICK_FROM_BUSH.get(), SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+			level.setBlock(pos, state.setValue(getAgeProperty(), 0), 2);
 			return InteractionResult.SUCCESS;
 		} else {
-			return super.use(state, worldIn, pos, player, handIn, hit);
+			return super.use(state, level, pos, player, hand, hit);
 		}
 	}
 
@@ -59,7 +60,7 @@ public class TomatoVineBlock extends CropBlock
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return SHAPE;
 	}
 
@@ -76,5 +77,10 @@ public class TomatoVineBlock extends CropBlock
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(VINE_AGE);
+	}
+
+	@Override
+	protected int getBonemealAgeIncrease(Level level) {
+		return super.getBonemealAgeIncrease(level) / 2;
 	}
 }

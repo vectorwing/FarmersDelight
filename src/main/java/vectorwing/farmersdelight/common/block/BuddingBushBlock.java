@@ -5,14 +5,12 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.monster.Ravager;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -25,10 +23,11 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 import java.util.Random;
 
 /**
- * Reimplementation of CropBlock without inheritance, so mods don't auto-harvest it with instanceof checks.
- * Used for growth stages which should not interact with automation of any kind.
+ * A bush which grows, representing the earlier stage of another plant.
+ * Once mature, a budding bush can "grow past" it, and turn into something different.
  */
-public class GrowingBushBlock extends BushBlock
+@SuppressWarnings("deprecation")
+public class BuddingBushBlock extends BushBlock
 {
 	public static final int MAX_AGE = 3;
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
@@ -38,12 +37,12 @@ public class GrowingBushBlock extends BushBlock
 			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D),
 			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D)};
 
-	public GrowingBushBlock(Properties properties) {
+	public BuddingBushBlock(Properties properties) {
 		super(properties);
 	}
 
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
+		return SHAPE_BY_AGE[state.getValue(getAgeProperty())];
 	}
 
 	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
@@ -59,74 +58,88 @@ public class GrowingBushBlock extends BushBlock
 	}
 
 	protected int getAge(BlockState state) {
-		return state.getValue(this.getAgeProperty());
+		return state.getValue(getAgeProperty());
 	}
 
 	public BlockState getStateForAge(int age) {
-		return this.defaultBlockState().setValue(this.getAgeProperty(), age);
+		return defaultBlockState().setValue(getAgeProperty(), age);
 	}
 
 	public boolean isMaxAge(BlockState state) {
-		return state.getValue(this.getAgeProperty()) >= this.getMaxAge();
+		return state.getValue(getAgeProperty()) >= getMaxAge();
 	}
 
 	public boolean isRandomlyTicking(BlockState state) {
-		return !this.isMaxAge(state);
+		return canGrowPastMaxAge() || !isMaxAge(state);
 	}
 
 	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random) {
 		if (!level.isAreaLoaded(pos, 1)) return;
 		if (level.getRawBrightness(pos, 0) >= 9) {
-			int age = this.getAge(state);
-			if (age < this.getMaxAge()) {
+			int age = getAge(state);
+			if (age <= getMaxAge()) {
 				float growthSpeed = getGrowthSpeed(this, level, pos);
-				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt((int)(25.0F / growthSpeed) + 1) == 0)) {
-					level.setBlock(pos, this.getStateForAge(age + 1), 2);
+				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt((int) (25.0F / growthSpeed) + 1) == 0)) {
+					if (isMaxAge(state)) {
+						growPastMaxAge(state, level, pos, random);
+					} else {
+						level.setBlockAndUpdate(pos, getStateForAge(age + 1));
+					}
 					net.minecraftforge.common.ForgeHooks.onCropsGrowPost(level, pos, state);
 				}
 			}
 		}
 	}
 
-	protected static float getGrowthSpeed(Block block, BlockGetter level, BlockPos pos) {
-		float f = 1.0F;
-		BlockPos blockpos = pos.below();
+	/**
+	 * Determines if this bush should keep ticking at max age. If true, calls growPastMaxAge() on each growth success.
+	 */
+	public boolean canGrowPastMaxAge() {
+		return false;
+	}
 
-		for(int i = -1; i <= 1; ++i) {
-			for(int j = -1; j <= 1; ++j) {
-				float f1 = 0.0F;
-				BlockState blockstate = level.getBlockState(blockpos.offset(i, 0, j));
-				if (blockstate.canSustainPlant(level, blockpos.offset(i, 0, j), net.minecraft.core.Direction.UP, (net.minecraftforge.common.IPlantable) block)) {
-					f1 = 1.0F;
-					if (blockstate.isFertile(level, pos.offset(i, 0, j))) {
-						f1 = 3.0F;
+	public void growPastMaxAge(BlockState state, ServerLevel level, BlockPos pos, Random random) {
+	}
+
+	protected static float getGrowthSpeed(Block block, BlockGetter level, BlockPos pos) {
+		float speed = 1.0F;
+		BlockPos posBelow = pos.below();
+
+		for (int posX = -1; posX <= 1; ++posX) {
+			for (int posZ = -1; posZ <= 1; ++posZ) {
+				float speedBonus = 0.0F;
+				BlockState stateBelow = level.getBlockState(posBelow.offset(posX, 0, posZ));
+				if (stateBelow.canSustainPlant(level, posBelow.offset(posX, 0, posZ), net.minecraft.core.Direction.UP, (net.minecraftforge.common.IPlantable) block)) {
+					speedBonus = 1.0F;
+					if (stateBelow.isFertile(level, pos.offset(posX, 0, posZ))) {
+						speedBonus = 3.0F;
 					}
 				}
 
-				if (i != 0 || j != 0) {
-					f1 /= 4.0F;
+				if (posX != 0 || posZ != 0) {
+					speedBonus /= 4.0F;
 				}
 
-				f += f1;
+				speed += speedBonus;
 			}
 		}
 
-		BlockPos blockpos1 = pos.north();
-		BlockPos blockpos2 = pos.south();
-		BlockPos blockpos3 = pos.west();
-		BlockPos blockpos4 = pos.east();
-		boolean flag = level.getBlockState(blockpos3).is(block) || level.getBlockState(blockpos4).is(block);
-		boolean flag1 = level.getBlockState(blockpos1).is(block) || level.getBlockState(blockpos2).is(block);
-		if (flag && flag1) {
-			f /= 2.0F;
+		BlockPos posNorth = pos.north();
+		BlockPos posSouth = pos.south();
+		BlockPos posWest = pos.west();
+		BlockPos posEast = pos.east();
+		boolean matchesEastWestRow = level.getBlockState(posWest).is(block) || level.getBlockState(posEast).is(block);
+		boolean matchesNorthSouthRow = level.getBlockState(posNorth).is(block) || level.getBlockState(posSouth).is(block);
+		if (matchesEastWestRow && matchesNorthSouthRow) {
+			speed /= 2.0F;
 		} else {
-			boolean flag2 = level.getBlockState(blockpos3.north()).is(block) || level.getBlockState(blockpos4.north()).is(block) || level.getBlockState(blockpos4.south()).is(block) || level.getBlockState(blockpos3.south()).is(block);
-			if (flag2) {
-				f /= 2.0F;
+			boolean matchesDiagonalRows = level.getBlockState(posWest.north()).is(block) || level.getBlockState(posEast.north()).is(block) || level.getBlockState(posEast.south()).is(block) || level.getBlockState(posWest.south()).is(block);
+			if (matchesDiagonalRows) {
+				speed /= 2.0F;
 			}
 		}
 
-		return f;
+		return speed;
 	}
 
 	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
@@ -147,7 +160,7 @@ public class GrowingBushBlock extends BushBlock
 	}
 
 	public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
-		return new ItemStack(this.getBaseSeedId());
+		return new ItemStack(getBaseSeedId());
 	}
 
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
