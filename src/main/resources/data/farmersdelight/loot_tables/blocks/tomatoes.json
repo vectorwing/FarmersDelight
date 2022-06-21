@@ -15,7 +15,7 @@
           "condition": "minecraft:block_state_property",
           "block": "farmersdelight:tomatoes",
           "properties": {
-            "age": "7"
+            "age": "3"
           }
         }
       ],
@@ -68,7 +68,26 @@
           "condition": "minecraft:block_state_property",
           "block": "farmersdelight:tomatoes",
           "properties": {
-            "age": "7"
+            "age": "3"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pool4",
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "farmersdelight:rope"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "farmersdelight:tomatoes",
+          "properties": {
+            "ropelogged": "true"
           }
         }
       ]

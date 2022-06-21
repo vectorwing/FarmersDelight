@@ -31,12 +31,12 @@ import java.util.Random;
 public class TomatoVineBlock extends CropBlock
 {
 	public static final IntegerProperty VINE_AGE = BlockStateProperties.AGE_3;
-	public static final BooleanProperty ROPE = BooleanProperty.create("rope");
+	public static final BooleanProperty ROPELOGGED = BooleanProperty.create("ropelogged");
 	private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 
 	public TomatoVineBlock(Properties properties) {
 		super(properties);
-		registerDefaultState(stateDefinition.any().setValue(getAgeProperty(), 0).setValue(ROPE, false));
+		registerDefaultState(stateDefinition.any().setValue(getAgeProperty(), 0).setValue(ROPELOGGED, false));
 	}
 
 	@Override
@@ -85,7 +85,12 @@ public class TomatoVineBlock extends CropBlock
 		if (random.nextFloat() < 0.2F) {
 			BlockPos posAbove = pos.above();
 			if (level.getBlockState(posAbove).is(ModBlocks.ROPE.get())) {
-				level.setBlockAndUpdate(posAbove, defaultBlockState().setValue(ROPE, true));
+				int vineHeight;
+				for (vineHeight = 1; level.getBlockState(pos.below(vineHeight)).is(this); ++vineHeight) {
+				}
+				if (vineHeight < 3) {
+					level.setBlockAndUpdate(posAbove, defaultBlockState().setValue(ROPELOGGED, true));
+				}
 			}
 		}
 
@@ -122,7 +127,7 @@ public class TomatoVineBlock extends CropBlock
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(VINE_AGE, ROPE);
+		builder.add(VINE_AGE, ROPELOGGED);
 	}
 
 	@Override
