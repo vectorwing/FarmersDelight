@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0,rope=false": {
+      "model": "farmersdelight:block/tomatoes_stage0"
+    },
+    "age=1,rope=false": {
+      "model": "farmersdelight:block/tomatoes_stage1"
+    },
+    "age=2,rope=false": {
+      "model": "farmersdelight:block/tomatoes_stage2"
+    },
+    "age=3,rope=false": {
+      "model": "farmersdelight:block/tomatoes_stage3"
+    },
+    "age=0,rope=true": {
+      "model": "farmersdelight:block/tomatoes_vine_stage0"
+    },
+    "age=1,rope=true": {
+      "model": "farmersdelight:block/tomatoes_vine_stage1"
+    },
+    "age=2,rope=true": {
+      "model": "farmersdelight:block/tomatoes_vine_stage2"
+    },
+    "age=3,rope=true": {
+      "model": "farmersdelight:block/tomatoes_vine_stage3"
+    }
+  }
+}
