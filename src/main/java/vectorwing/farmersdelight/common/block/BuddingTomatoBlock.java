@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BonemealableBlock;
@@ -10,7 +11,7 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 
 import java.util.Random;
 
-public class BuddingTomatoBlock extends GrowingBushBlock implements BonemealableBlock
+public class BuddingTomatoBlock extends BuddingBushBlock implements BonemealableBlock
 {
 	public BuddingTomatoBlock(Properties properties) {
 		super(properties);
@@ -21,18 +22,37 @@ public class BuddingTomatoBlock extends GrowingBushBlock implements Bonemealable
 		return ModBlocks.BUDDING_TOMATO_CROP.get().defaultBlockState();
 	}
 
-	@Override
-	public boolean isValidBonemealTarget(BlockGetter pLevel, BlockPos pPos, BlockState pState, boolean pIsClient) {
-		return false;
+	public boolean canGrowPastMaxAge() {
+		return true;
+	}
+
+	public void growPastMaxAge(BlockState state, ServerLevel level, BlockPos pos, Random random) {
+		level.setBlockAndUpdate(pos, ModBlocks.TOMATO_CROP.get().defaultBlockState());
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level pLevel, Random pRandom, BlockPos pPos, BlockState pState) {
-		return false;
+	public boolean isValidBonemealTarget(BlockGetter level, BlockPos pos, BlockState state, boolean isClient) {
+		return true;
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel pLevel, Random pRandom, BlockPos pPos, BlockState pState) {
+	public boolean isBonemealSuccess(Level level, Random random, BlockPos pos, BlockState state) {
+		return true;
+	}
 
+	protected int getBonemealAgeIncrease(Level level) {
+		return Mth.nextInt(level.random, 1, 4);
+	}
+
+	@Override
+	public void performBonemeal(ServerLevel level, Random random, BlockPos pos, BlockState state) {
+		int maxAge = getMaxAge();
+		int ageGrowth = Math.min(getAge(state) + getBonemealAgeIncrease(level), 7);
+		if (ageGrowth <= maxAge) {
+			level.setBlockAndUpdate(pos, state.setValue(AGE, ageGrowth));
+		} else {
+			int remainingGrowth = ageGrowth - maxAge - 1;
+			level.setBlockAndUpdate(pos, ModBlocks.TOMATO_CROP.get().defaultBlockState().setValue(TomatoVineBlock.VINE_AGE, remainingGrowth));
+		}
 	}
 }
