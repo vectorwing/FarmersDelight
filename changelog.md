@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.2.0
+
+## Additions
+- New foods:
+  - Bone Broth - Spelunking? In a pinch? Bring a Cooking Pot with you, and you'll be able to make a decent broth out of bone and cave vegetation!
+  - Mushroom Rice - A nourishing counterpart to Mushroom Stew, and a good sink for your colony farms;
+
+## Updates
+- All cooking recipes have received a bump in their experience reward, since the old ratios were very pitiful;
+- Skillet damage has been slightly buffed;
+
 ## 1.1.2
 
 ### Additions

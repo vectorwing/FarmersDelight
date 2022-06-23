@@ -26,6 +26,6 @@
   "container": {
     "item": "minecraft:pumpkin"
   },
-  "experience": 0.5,
+  "experience": 2.0,
   "cookingtime": 400
 }

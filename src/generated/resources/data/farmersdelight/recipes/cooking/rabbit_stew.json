@@ -30,6 +30,6 @@
   "container": {
     "item": "minecraft:bowl"
   },
-  "experience": 0.35,
+  "experience": 1.0,
   "cookingtime": 200
 }
