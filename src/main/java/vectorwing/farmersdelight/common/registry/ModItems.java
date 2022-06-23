@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.common.registry;
 
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -273,6 +274,8 @@ public class ModItems
 	// Soups and Stews
 	public static final RegistryObject<Item> COOKED_RICE = ITEMS.register("cooked_rice",
 			() -> new ConsumableItem(new Item.Properties().food(FoodValues.COOKED_RICE).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.CREATIVE_TAB), true));
+	public static final RegistryObject<Item> BONE_BROTH = ITEMS.register("bone_broth",
+			() -> new DrinkableItem(new Item.Properties().food(FoodValues.BONE_BROTH).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.CREATIVE_TAB), true));
 	public static final RegistryObject<Item> BEEF_STEW = ITEMS.register("beef_stew",
 			() -> new ConsumableItem(new Item.Properties().food(FoodValues.BEEF_STEW).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.CREATIVE_TAB), true));
 	public static final RegistryObject<Item> CHICKEN_SOUP = ITEMS.register("chicken_soup",
@@ -297,6 +300,8 @@ public class ModItems
 			() -> new ConsumableItem(new Item.Properties().food(FoodValues.PASTA_WITH_MEATBALLS).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.CREATIVE_TAB), true));
 	public static final RegistryObject<Item> PASTA_WITH_MUTTON_CHOP = ITEMS.register("pasta_with_mutton_chop",
 			() -> new ConsumableItem(new Item.Properties().food(FoodValues.PASTA_WITH_MUTTON_CHOP).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.CREATIVE_TAB), true));
+	public static final RegistryObject<Item> MUSHROOM_RICE = ITEMS.register("mushroom_rice",
+			() -> new ConsumableItem(new Item.Properties().food(FoodValues.MUSHROOM_RICE).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.CREATIVE_TAB), true));
 	public static final RegistryObject<Item> ROASTED_MUTTON_CHOPS = ITEMS.register("roasted_mutton_chops",
 			() -> new ConsumableItem(new Item.Properties().food(FoodValues.ROASTED_MUTTON_CHOPS).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.CREATIVE_TAB), true));
 	public static final RegistryObject<Item> VEGETABLE_NOODLES = ITEMS.register("vegetable_noodles",
@@ -333,4 +338,8 @@ public class ModItems
 			() -> new DogFoodItem(new Item.Properties().food(FoodValues.DOG_FOOD).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.CREATIVE_TAB)));
 	public static final RegistryObject<Item> HORSE_FEED = ITEMS.register("horse_feed",
 			() -> new HorseFeedItem(new Item.Properties().stacksTo(16).tab(FarmersDelight.CREATIVE_TAB)));
+
+	public static Item.Properties bowlFood(FoodProperties food) {
+		return new Item.Properties().food(food).craftRemainder(Items.BOWL).stacksTo(16).tab(FarmersDelight.CREATIVE_TAB);
+	}
 }
