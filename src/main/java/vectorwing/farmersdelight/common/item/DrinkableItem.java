@@ -14,6 +14,10 @@ public class DrinkableItem extends ConsumableItem
 		super(properties);
 	}
 
+	public DrinkableItem(Properties properties, boolean hasFoodEffectTooltip) {
+		super(properties, hasFoodEffectTooltip);
+	}
+
 	public DrinkableItem(Properties properties, boolean hasPotionEffectTooltip, boolean hasCustomTooltip) {
 		super(properties, hasPotionEffectTooltip, hasCustomTooltip);
 	}
