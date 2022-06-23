@@ -41,23 +41,24 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.SkilletBlock;
-import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
-import vectorwing.farmersdelight.common.utility.TextUtils;
+import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ModTags;
+import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.Set;
 
+@SuppressWarnings("deprecation")
 public class SkilletItem extends BlockItem
 {
 	public static final Tiers SKILLET_TIER = Tiers.IRON;
 	private final Multimap<Attribute, AttributeModifier> toolAttributes;
 
-	public SkilletItem(Block blockIn, Item.Properties builderIn) {
-		super(blockIn, builderIn.defaultDurability(SKILLET_TIER.getUses()));
-		float attackDamage = 4.0F + SKILLET_TIER.getAttackDamageBonus();
+	public SkilletItem(Block block, Item.Properties properties) {
+		super(block, properties.defaultDurability(SKILLET_TIER.getUses()));
+		float attackDamage = 5.0F + SKILLET_TIER.getAttackDamageBonus();
 		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", attackDamage, AttributeModifier.Operation.ADDITION));
 		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Tool modifier", -3.1F, AttributeModifier.Operation.ADDITION));
@@ -98,13 +99,13 @@ public class SkilletItem extends BlockItem
 		return true;
 	}
 
-	private static boolean isPlayerNearHeatSource(Player player, LevelReader worldIn) {
+	private static boolean isPlayerNearHeatSource(Player player, LevelReader level) {
 		if (player.isOnFire()) {
 			return true;
 		}
 		BlockPos pos = player.blockPosition();
 		for (BlockPos nearbyPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
-			if (worldIn.getBlockState(nearbyPos).is(ModTags.HEAT_SOURCES)) {
+			if (level.getBlockState(nearbyPos).is(ModTags.HEAT_SOURCES)) {
 				return true;
 			}
 		}
@@ -119,9 +120,9 @@ public class SkilletItem extends BlockItem
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 		ItemStack skilletStack = player.getItemInHand(hand);
-		if (isPlayerNearHeatSource(player, world)) {
+		if (isPlayerNearHeatSource(player, level)) {
 			InteractionHand otherHand = hand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
 			ItemStack cookingStack = player.getItemInHand(otherHand);
 
@@ -130,7 +131,7 @@ public class SkilletItem extends BlockItem
 				return InteractionResultHolder.pass(skilletStack);
 			}
 
-			Optional<CampfireCookingRecipe> recipe = getCookingRecipe(cookingStack, world);
+			Optional<CampfireCookingRecipe> recipe = getCookingRecipe(cookingStack, level);
 			if (recipe.isPresent()) {
 				ItemStack cookingStackCopy = cookingStack.copy();
 				ItemStack cookingStackUnit = cookingStackCopy.split(1);
@@ -147,78 +148,71 @@ public class SkilletItem extends BlockItem
 	}
 
 	@Override
-	public void onUseTick(Level worldIn, LivingEntity livingEntityIn, ItemStack stack, int count) {
-		if (livingEntityIn instanceof Player) {
-			Player player = (Player) livingEntityIn;
+	public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int count) {
+		if (entity instanceof Player player) {
 			Vec3 pos = player.position();
 			double x = pos.x() + 0.5D;
 			double y = pos.y();
 			double z = pos.z() + 0.5D;
-			if (worldIn.random.nextInt(50) == 0) {
-				worldIn.playLocalSound(x, y, z, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.BLOCKS, 0.4F, worldIn.random.nextFloat() * 0.2F + 0.9F, false);
+			if (level.random.nextInt(50) == 0) {
+				level.playLocalSound(x, y, z, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.BLOCKS, 0.4F, level.random.nextFloat() * 0.2F + 0.9F, false);
 			}
 		}
 	}
 
 	@Override
-	public void releaseUsing(ItemStack stack, Level worldIn, LivingEntity entityLiving, int timeLeft) {
-		if (!(entityLiving instanceof Player)) {
-			return;
-		}
+	public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
+		if (entity instanceof Player player) {
+			CompoundTag tag = stack.getOrCreateTag();
 
-		Player player = (Player) entityLiving;
-		CompoundTag tag = stack.getOrCreateTag();
-
-		if (tag.contains("Cooking")) {
-			ItemStack cookingStack = ItemStack.of(tag.getCompound("Cooking"));
-			player.getInventory().placeItemBackInInventory(cookingStack);
-			tag.remove("Cooking");
-			tag.remove("CookTimeHandheld");
+			if (tag.contains("Cooking")) {
+				ItemStack cookingStack = ItemStack.of(tag.getCompound("Cooking"));
+				player.getInventory().placeItemBackInInventory(cookingStack);
+				tag.remove("Cooking");
+				tag.remove("CookTimeHandheld");
+			}
 		}
 	}
 
 	@Override
-	public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity entityLiving) {
-		if (!(entityLiving instanceof Player)) {
-			return stack;
-		}
+	public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
+		if (entity instanceof Player player) {
+			CompoundTag tag = stack.getOrCreateTag();
 
-		Player player = (Player) entityLiving;
-		CompoundTag tag = stack.getOrCreateTag();
+			if (tag.contains("Cooking")) {
+				ItemStack cookingStack = ItemStack.of(tag.getCompound("Cooking"));
+				Optional<CampfireCookingRecipe> cookingRecipe = getCookingRecipe(cookingStack, level);
 
-		if (tag.contains("Cooking")) {
-			ItemStack cookingStack = ItemStack.of(tag.getCompound("Cooking"));
-			Optional<CampfireCookingRecipe> cookingRecipe = getCookingRecipe(cookingStack, world);
-
-			cookingRecipe.ifPresent((recipe) -> {
-				ItemStack resultStack = recipe.assemble(new SimpleContainer());
-				if (!player.getInventory().add(resultStack)) {
-					player.drop(resultStack, false);
-				}
-				if (player instanceof ServerPlayer) {
-					CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, stack);
-				}
-			});
-			tag.remove("Cooking");
-			tag.remove("CookTimeHandheld");
+				cookingRecipe.ifPresent((recipe) -> {
+					ItemStack resultStack = recipe.assemble(new SimpleContainer());
+					if (!player.getInventory().add(resultStack)) {
+						player.drop(resultStack, false);
+					}
+					if (player instanceof ServerPlayer) {
+						CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, stack);
+					}
+				});
+				tag.remove("Cooking");
+				tag.remove("CookTimeHandheld");
+			}
 		}
 
 		return stack;
 	}
 
-	public static Optional<CampfireCookingRecipe> getCookingRecipe(ItemStack stack, Level world) {
+	public static Optional<CampfireCookingRecipe> getCookingRecipe(ItemStack stack, Level level) {
 		if (stack.isEmpty()) {
 			return Optional.empty();
 		}
-		return world.getRecipeManager().getRecipeFor(RecipeType.CAMPFIRE_COOKING, new SimpleContainer(stack), world);
+		return level.getRecipeManager().getRecipeFor(RecipeType.CAMPFIRE_COOKING, new SimpleContainer(stack), level);
 	}
 
 	@Override
-	protected boolean updateCustomBlockEntityTag(BlockPos pos, Level worldIn, @Nullable Player player, ItemStack stack, BlockState state) {
-		super.updateCustomBlockEntityTag(pos, worldIn, player, stack, state);
-		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-		if (tileEntity instanceof SkilletBlockEntity) {
-			((SkilletBlockEntity) tileEntity).setSkilletItem(stack);
+	protected boolean updateCustomBlockEntityTag(BlockPos pos, Level level, @Nullable Player player, ItemStack stack, BlockState state) {
+		super.updateCustomBlockEntityTag(pos, level, player, stack, state);
+		BlockEntity tileEntity = level.getBlockEntity(pos);
+		if (tileEntity instanceof SkilletBlockEntity skillet) {
+			skillet.setSkilletItem(stack);
 			return true;
 		}
 		return false;
@@ -229,11 +223,9 @@ public class SkilletItem extends BlockItem
 		return SKILLET_TIER.getRepairIngredient().test(repair) || super.isValidRepairItem(toRepair, repair);
 	}
 
-	public boolean mineBlock(ItemStack stack, Level worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
-		if (!worldIn.isClientSide && state.getDestroySpeed(worldIn, pos) != 0.0F) {
-			stack.hurtAndBreak(1, entityLiving, (entity) -> {
-				entity.broadcastBreakEvent(EquipmentSlot.MAINHAND);
-			});
+	public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity entity) {
+		if (!level.isClientSide && state.getDestroySpeed(level, pos) != 0.0F) {
+			stack.hurtAndBreak(1, entity, (user) -> user.broadcastBreakEvent(EquipmentSlot.MAINHAND));
 		}
 
 		return true;
