@@ -68,6 +68,8 @@ public class ForgeTags
 	public static final TagKey<Item> SEEDS_RICE = forgeItemTag("seeds/rice");
 	public static final TagKey<Item> SEEDS_TOMATO = forgeItemTag("seeds/tomato");
 
+	public static final TagKey<Item> STRAW = forgeItemTag("straw");
+	
 	public static final TagKey<Item> VEGETABLES = forgeItemTag("vegetables");
 	public static final TagKey<Item> VEGETABLES_BEETROOT = forgeItemTag("vegetables/beetroot");
 	public static final TagKey<Item> VEGETABLES_CARROT = forgeItemTag("vegetables/carrot");

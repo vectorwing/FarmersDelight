@@ -84,6 +84,7 @@ public class ItemTags extends ItemTagsProvider
 		tag(ForgeTags.CROPS_TOMATO).add(ModItems.TOMATO.get());
 
 		tag(ForgeTags.EGGS).add(Items.EGG);
+		tag(ForgeTags.STRAW).add(ModItems.STRAW.get());
 
 		tag(ForgeTags.GRAIN).addTags(ForgeTags.GRAIN_WHEAT, ForgeTags.GRAIN_RICE);
 		tag(ForgeTags.GRAIN_WHEAT).add(Items.WHEAT);
