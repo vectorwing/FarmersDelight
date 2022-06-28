@@ -34,6 +34,7 @@ public class FeastBlock extends Block
 {
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final IntegerProperty SERVINGS = IntegerProperty.create("servings", 0, 4);
+
 	public final Supplier<Item> servingItem;
 	public final boolean hasLeftovers;
 
@@ -57,10 +58,18 @@ public class FeastBlock extends Block
 		super(properties);
 		this.servingItem = servingItem;
 		this.hasLeftovers = hasLeftovers;
-		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(SERVINGS, 4));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(getServingsProperty(), getMaxServings()));
 	}
 
-	public ItemStack getServingItem() {
+	public IntegerProperty getServingsProperty() {
+		return SERVINGS;
+	}
+
+	public int getMaxServings() {
+		return 4;
+	}
+
+	public ItemStack getServingItem(BlockState state) {
 		return new ItemStack(this.servingItem.get());
 	}
 
@@ -80,8 +89,8 @@ public class FeastBlock extends Block
 		return this.takeServing(worldIn, pos, state, player, handIn);
 	}
 
-	private InteractionResult takeServing(LevelAccessor worldIn, BlockPos pos, BlockState state, Player player, InteractionHand handIn) {
-		int servings = state.getValue(SERVINGS);
+	protected InteractionResult takeServing(LevelAccessor worldIn, BlockPos pos, BlockState state, Player player, InteractionHand handIn) {
+		int servings = state.getValue(getServingsProperty());
 
 		if (servings == 0) {
 			worldIn.playSound(null, pos, SoundEvents.WOOD_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
@@ -89,19 +98,19 @@ public class FeastBlock extends Block
 			return InteractionResult.SUCCESS;
 		}
 
-		ItemStack serving = this.getServingItem();
+		ItemStack serving = this.getServingItem(state);
 		ItemStack heldStack = player.getItemInHand(handIn);
 
 		if (servings > 0) {
-			if (heldStack.sameItem(serving.getContainerItem())) {
-				worldIn.setBlock(pos, state.setValue(SERVINGS, servings - 1), 3);
+			if (!serving.hasContainerItem() || heldStack.sameItem(serving.getContainerItem())) {
+				worldIn.setBlock(pos, state.setValue(getServingsProperty(), servings - 1), 3);
 				if (!player.getAbilities().instabuild) {
 					heldStack.shrink(1);
 				}
 				if (!player.getInventory().add(serving)) {
 					player.drop(serving, false);
 				}
-				if (worldIn.getBlockState(pos).getValue(SERVINGS) == 0 && !this.hasLeftovers) {
+				if (worldIn.getBlockState(pos).getValue(getServingsProperty()) == 0 && !this.hasLeftovers) {
 					worldIn.removeBlock(pos, false);
 				}
 				worldIn.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -135,11 +144,7 @@ public class FeastBlock extends Block
 
 	@Override
 	public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
-		return blockState.getValue(SERVINGS);
-	}
-
-	public int getMaxServings() {
-		return 4;
+		return blockState.getValue(getServingsProperty());
 	}
 
 	@Override
