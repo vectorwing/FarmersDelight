@@ -511,7 +511,7 @@ f56d291dc7b6732ff8b9e339db290afc0f732a74 data/farmersdelight/recipes/cooking/bak
 0babf5eeb7fed48684e8fdb17c2b2bb5e8384dd2 data/farmersdelight/recipes/cooking/chicken_soup.json
 22ed1342b960f2867c57c6229f015544acf0ff83 data/farmersdelight/recipes/cooking/cooked_rice.json
 383e1610ff84fa31245a1dc0682554b04a0db5ec data/farmersdelight/recipes/cooking/dog_food.json
-616e51c5e6e18ff8b0be40fcf8359b54fef467cd data/farmersdelight/recipes/cooking/dumplings.json
+4793acab230715052f8f754393ea89bb661af763 data/farmersdelight/recipes/cooking/dumplings.json
 334975d3a988bda6bb56dfabca863cc892aac643 data/farmersdelight/recipes/cooking/fish_stew.json
 cf4fa0163159cedb57336305af8c3d93623f1479 data/farmersdelight/recipes/cooking/fried_rice.json
 5ee299546ac80f568979832e343b826d6776ac45 data/farmersdelight/recipes/cooking/hot_cocoa.json
@@ -619,7 +619,6 @@ f386e988b81f651cf2bfe06316ed2e305e1995a3 data/farmersdelight/recipes/cutting/war
 b7fb83a92dfa7ad35357528e3992a9da32d3206e data/farmersdelight/recipes/cutting/warped_sign.json
 5e3f593f81debaf6c33d7d7db51b61b72fc98721 data/farmersdelight/recipes/cutting/warped_stem.json
 a53acddb5aee77c3f5686448583b0d8596e45c1e data/farmersdelight/recipes/cutting/warped_trapdoor.json
-e2dbd23e2a687fe549b3a4796e2ff904b381af5c data/farmersdelight/recipes/cutting/wheat_dough.json
 8de4e25f372ac400e1b82c7b86440559d98f07c8 data/farmersdelight/recipes/cutting/white_tulip.json
 7a5b1aed1bb578161b3c2f9ddb722cc7ae3180dd data/farmersdelight/recipes/cutting/wild_beetroots.json
 51bd5b18c5e432ce0755b8ae76976b51901e0025 data/farmersdelight/recipes/cutting/wild_cabbages.json
@@ -755,6 +754,7 @@ cb360831d0cc362730ac23dab8e1b4bff97ac44c data/forge/tags/items/crops/cabbage.jso
 40627c72fae961ee773ede39523ed65f68568e4c data/forge/tags/items/crops/onion.json
 94223ce4c11ce41d385a6cc8eb2d8efa1f48a6ad data/forge/tags/items/crops/rice.json
 96372565b5bba2039f97768cc9a924c4197e0947 data/forge/tags/items/crops/tomato.json
+44fd13f8f1e6550e657fc587b662a74277860687 data/forge/tags/items/dough.json
 56c529b1e058cfc78a67941c1efebf9376fb6ea9 data/forge/tags/items/eggs.json
 b9d90fe2e27bab571e8b978f5625adab25c6577d data/forge/tags/items/grain.json
 94223ce4c11ce41d385a6cc8eb2d8efa1f48a6ad data/forge/tags/items/grain/rice.json
@@ -790,6 +790,7 @@ be34126249ed7317b23ed824a011cda28cea13f5 data/forge/tags/items/vegetables/beetro
 40627c72fae961ee773ede39523ed65f68568e4c data/forge/tags/items/vegetables/onion.json
 1c951c2bae0947388025fc943118e4bf04fe0393 data/forge/tags/items/vegetables/potato.json
 96372565b5bba2039f97768cc9a924c4197e0947 data/forge/tags/items/vegetables/tomato.json
+680440c23f968f8153ecf24c5563657bd3f863d8 data/minecraft/recipes/tag_dough.json
 721feacb3244b5607c0a12563963ca72b0be0ca9 data/minecraft/tags/blocks/bamboo_plantable_on.json
 3d08a1b63877a3cd2a803269fca075c549c3efa1 data/minecraft/tags/blocks/carpets.json
 17400553e2b1412736051639eb15578a213cc9b2 data/minecraft/tags/blocks/crops.json
