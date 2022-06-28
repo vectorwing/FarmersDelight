@@ -11,6 +11,7 @@
 - New feast: **Rice Roll Medley!**
   - Display your knife skills with a selection of salmon, cod and kelp rolls!
   - Unlike other feasts, this gives individual rolls instead of meals. No, you can't put them back after taking one, it's bad manners!;
+- New tag: `forge:dough`. Used to add modded dough items to FD's recipes, and populated by Wheat Dough by default;
 
 ## Updates
 - Updated a few recipes:
