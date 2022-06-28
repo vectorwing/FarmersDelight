@@ -204,4 +204,6 @@ public class ModBlocks
 			() -> new HoneyGlazedHamBlock(Block.Properties.copy(Blocks.WHITE_WOOL), ModItems.HONEY_GLAZED_HAM, true));
 	public static final RegistryObject<Block> SHEPHERDS_PIE_BLOCK = BLOCKS.register("shepherds_pie_block",
 			() -> new ShepherdsPieBlock(Block.Properties.copy(Blocks.CAKE), ModItems.SHEPHERDS_PIE, true));
+	public static final RegistryObject<Block> RICE_ROLL_MEDLEY_BLOCK = BLOCKS.register("rice_roll_medley_block",
+			() -> new RiceRollMedleyBlock(Block.Properties.copy(Blocks.CAKE)));
 }
