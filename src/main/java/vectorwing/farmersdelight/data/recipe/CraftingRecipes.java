@@ -7,6 +7,7 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.UpgradeRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
@@ -18,6 +19,7 @@ import vectorwing.farmersdelight.common.tag.ForgeTags;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 public class CraftingRecipes
 {
@@ -684,15 +686,20 @@ public class CraftingRecipes
 				.requires(Items.BOWL)
 				.unlockedBy("has_bowl", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BOWL))
 				.save(consumer);
-		ShapelessRecipeBuilder.shapeless(ModItems.BARBECUE_STICK.get(), 2)
+		ShapelessRecipeBuilder.shapeless(ModItems.BARBECUE_STICK.get())
 				.requires(ForgeTags.CROPS_TOMATO)
 				.requires(ForgeTags.CROPS_ONION)
-				.requires(Items.COOKED_BEEF)
-				.requires(Items.COOKED_CHICKEN)
+				.requires(Ingredient.fromValues(Stream.of(
+						new Ingredient.TagValue(ForgeTags.COOKED_BEEF),
+						new Ingredient.TagValue(ForgeTags.COOKED_PORK),
+						new Ingredient.TagValue(ForgeTags.COOKED_CHICKEN),
+						new Ingredient.TagValue(ForgeTags.COOKED_MUTTON),
+						new Ingredient.TagValue(ForgeTags.COOKED_FISHES),
+						new Ingredient.ItemValue(new ItemStack(Items.COOKED_RABBIT))
+				)))
 				.requires(Items.STICK)
-				.requires(Items.STICK)
-				.unlockedBy("has_cooked_beef", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COOKED_BEEF))
-				.unlockedBy("has_cooked_chicken", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COOKED_CHICKEN))
+				.unlockedBy("has_tomato", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.TOMATO.get()))
+				.unlockedBy("has_onion", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.ONION.get()))
 				.save(consumer);
 		ShapelessRecipeBuilder.shapeless(ModItems.EGG_SANDWICH.get())
 				.requires(ForgeTags.BREAD)
