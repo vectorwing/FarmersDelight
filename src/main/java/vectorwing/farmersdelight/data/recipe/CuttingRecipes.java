@@ -20,7 +20,7 @@ public class CuttingRecipes
 		// Knife
 		cuttingAnimalItems(consumer);
 		cuttingVegetables(consumer);
-		cuttingPastries(consumer);
+		cuttingFoods(consumer);
 		cuttingFlowers(consumer);
 
 		// Pickaxe
@@ -90,8 +90,10 @@ public class CuttingRecipes
 				.build(consumer);
 	}
 
-	private static void cuttingPastries(Consumer<FinishedRecipe> consumer) {
+	private static void cuttingFoods(Consumer<FinishedRecipe> consumer) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WHEAT_DOUGH.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.RAW_PASTA.get(), 1)
+				.build(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.KELP_ROLL.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.KELP_ROLL_SLICE.get(), 3)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CAKE), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.CAKE_SLICE.get(), 7)
 				.build(consumer);
