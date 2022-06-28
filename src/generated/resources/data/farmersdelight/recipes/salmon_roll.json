@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "farmersdelight:salmon_slice"
+    },
+    {
+      "item": "farmersdelight:salmon_slice"
+    },
+    {
+      "item": "farmersdelight:cooked_rice"
+    },
+    {
+      "item": "minecraft:dried_kelp"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:salmon_roll",
+    "count": 2
+  }
+}
