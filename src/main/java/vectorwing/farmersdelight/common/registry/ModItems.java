@@ -287,6 +287,14 @@ public class ModItems
 			() -> new Item(foodItem(FoodValues.STUFFED_POTATO)));
 	public static final RegistryObject<Item> CABBAGE_ROLLS = ITEMS.register("cabbage_rolls",
 			() -> new Item(foodItem(FoodValues.CABBAGE_ROLLS)));
+	public static final RegistryObject<Item> SALMON_ROLL = ITEMS.register("salmon_roll",
+			() -> new Item(foodItem(FoodValues.SALMON_ROLL)));
+	public static final RegistryObject<Item> COD_ROLL = ITEMS.register("cod_roll",
+			() -> new Item(foodItem(FoodValues.COD_ROLL)));
+	public static final RegistryObject<Item> KELP_ROLL = ITEMS.register("kelp_roll",
+			() -> new KelpRollItem(foodItem(FoodValues.KELP_ROLL)));
+	public static final RegistryObject<Item> KELP_ROLL_SLICE = ITEMS.register("kelp_roll_slice",
+			() -> new Item(foodItem(FoodValues.KELP_ROLL_SLICE)));
 
 	// Soups and Stews
 	public static final RegistryObject<Item> COOKED_RICE = ITEMS.register("cooked_rice",

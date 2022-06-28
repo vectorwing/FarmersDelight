@@ -22,7 +22,7 @@ public class CuttingRecipes
 		// Knife
 		cuttingAnimalItems(consumer);
 		cuttingVegetables(consumer);
-		cuttingPastries(consumer);
+		cuttingFoods(consumer);
 		cuttingFlowers(consumer);
 
 		// Pickaxe
@@ -92,9 +92,11 @@ public class CuttingRecipes
 				.build(consumer);
 	}
 
-	private static void cuttingPastries(Consumer<FinishedRecipe> consumer) {
+	private static void cuttingFoods(Consumer<FinishedRecipe> consumer) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ForgeTags.DOUGH), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.RAW_PASTA.get(), 1)
 				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "cutting/tag_dough"));
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.KELP_ROLL.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.KELP_ROLL_SLICE.get(), 3)
+				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CAKE), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.CAKE_SLICE.get(), 7)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.APPLE_PIE.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.APPLE_PIE_SLICE.get(), 4)
