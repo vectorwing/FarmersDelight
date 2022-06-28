@@ -8,6 +8,8 @@
   - Mushroom Rice - A nourishing counterpart to Mushroom Stew, and a good sink for your colony farms;
 
 ## Updates
+- Updated a few recipes:
+  - Barbecue on a Stick is now made from any cooked meat! Have your barbecue your way;
 - All cooking recipes have received a bump in their experience reward, since the old ratios were very pitiful;
 - Skillet damage has been slightly buffed;
 
