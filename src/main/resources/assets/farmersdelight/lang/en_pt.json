@@ -171,12 +171,13 @@
   "item.farmersdelight.honey_glazed_ham": "Hog's Leg Roast Platter",
   "block.farmersdelight.shepherds_pie_block": "Sheep Herder's Specialty",
   "item.farmersdelight.shepherds_pie": "Sheep Herder's Specialty Platter",
+  "block.farmersdelight.rice_roll_medley_block": "All Kinds o' Ricey Rolls",
 
   "item.farmersdelight.dog_food": "Hound's Chow",
   "item.farmersdelight.horse_feed": "Land Beast's Hay",
 
   "effect.farmersdelight.nourishment": "Belly's Full",
-  "effect.farmersdelight.comfort": "Free o' Scurvy",
+  "effect.farmersdelight.comfort": "Heart's Warm",
 
   "effect.farmersdelight.nourishment.0.desc": "Ye can't get hungry, lest yer belly be digestin' food ta heal ye.",
   "effect.farmersdelight.comfort.0.desc": "Yer body gon' heal up slowly, no matter if ye're starvin' or not.",

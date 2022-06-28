@@ -1,0 +1,50 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"tray_top": "farmersdelight:block/tray_top",
+		"food": "farmersdelight:block/rice_roll_medley",
+		"particle": "farmersdelight:block/rice_roll_medley",
+		"tray_bottom": "farmersdelight:block/tray_bottom"
+	},
+	"elements": [
+		{
+			"name": "tray",
+			"from": [1, 0, 1],
+			"to": [15, 2, 15],
+			"faces": {
+				"north": {"uv": [1, 11, 15, 13], "texture": "#tray_bottom"},
+				"east": {"uv": [1, 11, 15, 13], "texture": "#tray_bottom"},
+				"south": {"uv": [1, 11, 15, 13], "texture": "#tray_bottom"},
+				"west": {"uv": [1, 11, 15, 13], "texture": "#tray_bottom"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#tray_top"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#tray_top"}
+			}
+		},
+		{
+			"name": "cod roll 1",
+			"from": [2, 2, 9],
+			"to": [4, 4, 14],
+			"faces": {
+				"north": {"uv": [8, 6, 10, 8], "texture": "#food"},
+				"east": {"uv": [10, 1, 15, 3], "texture": "#food"},
+				"south": {"uv": [8, 6, 10, 8], "texture": "#food"},
+				"west": {"uv": [10, 1, 15, 3], "texture": "#food"},
+				"up": {"uv": [8, 1, 10, 6], "texture": "#food"},
+				"down": {"uv": [8, 1, 10, 6], "texture": "#food"}
+			}
+		},
+		{
+			"name": "cod roll 2",
+			"from": [5, 2, 9],
+			"to": [7, 4, 14],
+			"faces": {
+				"north": {"uv": [8, 6, 10, 8], "texture": "#food"},
+				"east": {"uv": [10, 1, 15, 3], "texture": "#food"},
+				"south": {"uv": [8, 6, 10, 8], "texture": "#food"},
+				"west": {"uv": [10, 1, 15, 3], "texture": "#food"},
+				"up": {"uv": [8, 1, 10, 6], "texture": "#food"},
+				"down": {"uv": [8, 1, 10, 6], "texture": "#food"}
+			}
+		}
+	]
+}

@@ -834,5 +834,17 @@ public class CraftingRecipes
 				.requires(ModItems.COOKED_RICE.get())
 				.unlockedBy("has_smoked_ham", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SMOKED_HAM.get()))
 				.save(consumer);
+		ShapelessRecipeBuilder.shapeless(ModItems.RICE_ROLL_MEDLEY_BLOCK.get())
+				.requires(ModItems.KELP_ROLL_SLICE.get())
+				.requires(ModItems.KELP_ROLL_SLICE.get())
+				.requires(ModItems.KELP_ROLL_SLICE.get())
+				.requires(ModItems.SALMON_ROLL.get())
+				.requires(ModItems.SALMON_ROLL.get())
+				.requires(ModItems.SALMON_ROLL.get())
+				.requires(ModItems.COD_ROLL.get())
+				.requires(Items.BOWL)
+				.requires(ModItems.COD_ROLL.get())
+				.unlockedBy("has_rice_roll", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SALMON_ROLL.get(), ModItems.COD_ROLL.get(), ModItems.KELP_ROLL_SLICE.get()))
+				.save(consumer);
 	}
 }

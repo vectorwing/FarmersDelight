@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:rice_roll_medley_block"
+    ]
+  },
+  "criteria": {
+    "has_rice_roll": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "farmersdelight:salmon_roll"
+            ]
+          },
+          {
+            "items": [
+              "farmersdelight:cod_roll"
+            ]
+          },
+          {
+            "items": [
+              "farmersdelight:kelp_roll_slice"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:rice_roll_medley_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_rice_roll",
+      "has_the_recipe"
+    ]
+  ]
+}
