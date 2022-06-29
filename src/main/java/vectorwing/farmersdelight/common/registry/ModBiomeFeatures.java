@@ -6,6 +6,8 @@ import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.world.configuration.WildCropPatchConfiguration;
+import vectorwing.farmersdelight.common.world.feature.WildCropFeature;
 import vectorwing.farmersdelight.common.world.feature.WildRiceFeature;
 
 public class ModBiomeFeatures
@@ -13,4 +15,5 @@ public class ModBiomeFeatures
 	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, FarmersDelight.MODID);
 
 	public static final RegistryObject<Feature<RandomPatchConfiguration>> WILD_RICE = FEATURES.register("wild_rice", () -> new WildRiceFeature(RandomPatchConfiguration.CODEC));
+	public static final RegistryObject<Feature<WildCropPatchConfiguration>> WILD_CROP = FEATURES.register("wild_crop", () -> new WildCropFeature(WildCropPatchConfiguration.CODEC));
 }
