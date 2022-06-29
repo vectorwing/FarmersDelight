@@ -621,6 +621,7 @@ f386e988b81f651cf2bfe06316ed2e305e1995a3 data/farmersdelight/recipes/cutting/war
 b7fb83a92dfa7ad35357528e3992a9da32d3206e data/farmersdelight/recipes/cutting/warped_sign.json
 5e3f593f81debaf6c33d7d7db51b61b72fc98721 data/farmersdelight/recipes/cutting/warped_stem.json
 a53acddb5aee77c3f5686448583b0d8596e45c1e data/farmersdelight/recipes/cutting/warped_trapdoor.json
+e2dbd23e2a687fe549b3a4796e2ff904b381af5c data/farmersdelight/recipes/cutting/wheat_dough.json
 8de4e25f372ac400e1b82c7b86440559d98f07c8 data/farmersdelight/recipes/cutting/white_tulip.json
 7a5b1aed1bb578161b3c2f9ddb722cc7ae3180dd data/farmersdelight/recipes/cutting/wild_beetroots.json
 51bd5b18c5e432ce0755b8ae76976b51901e0025 data/farmersdelight/recipes/cutting/wild_cabbages.json
@@ -793,7 +794,6 @@ be34126249ed7317b23ed824a011cda28cea13f5 data/forge/tags/items/vegetables/beetro
 40627c72fae961ee773ede39523ed65f68568e4c data/forge/tags/items/vegetables/onion.json
 1c951c2bae0947388025fc943118e4bf04fe0393 data/forge/tags/items/vegetables/potato.json
 96372565b5bba2039f97768cc9a924c4197e0947 data/forge/tags/items/vegetables/tomato.json
-680440c23f968f8153ecf24c5563657bd3f863d8 data/minecraft/recipes/tag_dough.json
 721feacb3244b5607c0a12563963ca72b0be0ca9 data/minecraft/tags/blocks/bamboo_plantable_on.json
 3d08a1b63877a3cd2a803269fca075c549c3efa1 data/minecraft/tags/blocks/carpets.json
 17400553e2b1412736051639eb15578a213cc9b2 data/minecraft/tags/blocks/crops.json
