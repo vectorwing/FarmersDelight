@@ -22,18 +22,17 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModBiomeFeatures;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
-import vectorwing.farmersdelight.common.world.configuration.WildCropPatchConfiguration;
+import vectorwing.farmersdelight.common.world.configuration.WildCropConfiguration;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class WildCropGeneration
 {
 	public static Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> FEATURE_PATCH_WILD_CABBAGES;
-	public static Holder<ConfiguredFeature<WildCropPatchConfiguration, ?>> FEATURE_PATCH_WILD_ONIONS;
-	public static Holder<ConfiguredFeature<WildCropPatchConfiguration, ?>> FEATURE_PATCH_WILD_TOMATOES;
-	public static Holder<ConfiguredFeature<WildCropPatchConfiguration, ?>> FEATURE_PATCH_WILD_CARROTS;
-	public static Holder<ConfiguredFeature<WildCropPatchConfiguration, ?>> FEATURE_PATCH_WILD_POTATOES;
+	public static Holder<ConfiguredFeature<WildCropConfiguration, ?>> FEATURE_PATCH_WILD_ONIONS;
+	public static Holder<ConfiguredFeature<WildCropConfiguration, ?>> FEATURE_PATCH_WILD_TOMATOES;
+	public static Holder<ConfiguredFeature<WildCropConfiguration, ?>> FEATURE_PATCH_WILD_CARROTS;
+	public static Holder<ConfiguredFeature<WildCropConfiguration, ?>> FEATURE_PATCH_WILD_POTATOES;
 	public static Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> FEATURE_PATCH_WILD_BEETROOTS;
 	public static Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> FEATURE_PATCH_WILD_RICE;
 
@@ -46,23 +45,23 @@ public class WildCropGeneration
 	public static Holder<PlacedFeature> PATCH_WILD_RICE;
 
 	public static final BlockPos BLOCK_BELOW = new BlockPos(0, -1, 0);
-	public static final BlockPos BLOCK_ORIGIN = new BlockPos(0, 0, 0);
+	public static final BlockPos BLOCK_ABOVE = new BlockPos(0, 1, 0);
 
 	public static void registerWildCropGeneration() {
 		FEATURE_PATCH_WILD_CABBAGES = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_cabbages"),
 				Feature.RANDOM_PATCH, randomPatchConfig(ModBlocks.WILD_CABBAGES.get(), 64, 4, BlockPredicate.matchesBlock(Blocks.SAND, BLOCK_BELOW)));
 
 		FEATURE_PATCH_WILD_ONIONS = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_onions"),
-				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_ONIONS.get(), Blocks.ALLIUM, null, BlockPredicate.matchesTag(BlockTags.DIRT, BLOCK_BELOW)));
+				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_ONIONS.get(), Blocks.ALLIUM, BlockPredicate.matchesTag(BlockTags.DIRT, BLOCK_BELOW)));
 
 		FEATURE_PATCH_WILD_TOMATOES = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_tomatoes"),
-				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_TOMATOES.get(), Blocks.DEAD_BUSH, null, BlockPredicate.matchesBlocks(List.of(Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.COARSE_DIRT, Blocks.RED_SAND, Blocks.SAND), BLOCK_BELOW)));
+				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_TOMATOES.get(), Blocks.DEAD_BUSH, BlockPredicate.matchesBlocks(List.of(Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.COARSE_DIRT, Blocks.RED_SAND, Blocks.SAND), BLOCK_BELOW)));
 
 		FEATURE_PATCH_WILD_CARROTS = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_carrots"),
-				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_CARROTS.get(), Blocks.GRASS, Blocks.COARSE_DIRT, BlockPredicate.matchesTag(BlockTags.DIRT, BLOCK_BELOW)));
+				ModBiomeFeatures.WILD_CROP.get(), wildCropWithFloorConfig(ModBlocks.WILD_CARROTS.get(), Blocks.GRASS, BlockPredicate.matchesTag(BlockTags.DIRT, BLOCK_BELOW), Blocks.COARSE_DIRT, BlockPredicate.matchesTag(BlockTags.DIRT)));
 
 		FEATURE_PATCH_WILD_POTATOES = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_potatoes"),
-				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_POTATOES.get(), Blocks.FERN, null, BlockPredicate.matchesTag(BlockTags.DIRT, BLOCK_BELOW)));
+				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_POTATOES.get(), Blocks.FERN, BlockPredicate.matchesTag(BlockTags.DIRT, BLOCK_BELOW)));
 
 		FEATURE_PATCH_WILD_BEETROOTS = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_beetroots"),
 				Feature.RANDOM_PATCH, randomPatchConfig(ModBlocks.WILD_BEETROOTS.get(), 64, 4, BlockPredicate.matchesBlock(Blocks.SAND, BLOCK_BELOW)));
@@ -73,16 +72,22 @@ public class WildCropGeneration
 
 		PATCH_WILD_CABBAGES = registerPlacement(new ResourceLocation(FarmersDelight.MODID, "patch_wild_cabbages"),
 				FEATURE_PATCH_WILD_CABBAGES, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_CABBAGES.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+
 		PATCH_WILD_ONIONS = registerPlacement(new ResourceLocation("patch_wild_onions"),
 				FEATURE_PATCH_WILD_ONIONS, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_ONIONS.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+
 		PATCH_WILD_TOMATOES = registerPlacement(new ResourceLocation("patch_wild_tomatoes"),
 				FEATURE_PATCH_WILD_TOMATOES, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_TOMATOES.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+
 		PATCH_WILD_CARROTS = registerPlacement(new ResourceLocation("patch_wild_carrots"),
 				FEATURE_PATCH_WILD_CARROTS, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_CARROTS.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+
 		PATCH_WILD_POTATOES = registerPlacement(new ResourceLocation("patch_wild_potatoes"),
 				FEATURE_PATCH_WILD_POTATOES, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_POTATOES.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+
 		PATCH_WILD_BEETROOTS = registerPlacement(new ResourceLocation("patch_wild_beetroots"),
 				FEATURE_PATCH_WILD_BEETROOTS, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_BEETROOTS.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+
 		PATCH_WILD_RICE = registerPlacement(new ResourceLocation("patch_wild_rice"),
 				FEATURE_PATCH_WILD_RICE, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_RICE.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 	}
@@ -93,14 +98,24 @@ public class WildCropGeneration
 				BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, plantedOn)));
 	}
 
-	public static WildCropPatchConfiguration wildCropConfig(Block primaryBlock, Block secondaryBlock, @Nullable Block floorBlock, BlockPredicate plantedOn) {
-		return new WildCropPatchConfiguration(simpleBlockConfig(primaryBlock, plantedOn), simpleBlockConfig(secondaryBlock, plantedOn), simpleBlockConfig(floorBlock, plantedOn));
+	public static WildCropConfiguration wildCropConfig(Block primaryBlock, Block secondaryBlock, BlockPredicate plantedOn) {
+		return new WildCropConfiguration(plantBlockConfig(primaryBlock, plantedOn), plantBlockConfig(secondaryBlock, plantedOn), null);
 	}
 
-	public static Holder<PlacedFeature> simpleBlockConfig(Block block, BlockPredicate plantedOn) {
+	public static WildCropConfiguration wildCropWithFloorConfig(Block primaryBlock, Block secondaryBlock, BlockPredicate plantedOn, Block floorBlock, BlockPredicate replaces) {
+		return new WildCropConfiguration(plantBlockConfig(primaryBlock, plantedOn), plantBlockConfig(secondaryBlock, plantedOn), floorBlockConfig(floorBlock, replaces));
+	}
+
+	public static Holder<PlacedFeature> plantBlockConfig(Block block, BlockPredicate plantedOn) {
 		return PlacementUtils.filtered(
 				Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(block)),
 				BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, plantedOn));
+	}
+
+	public static Holder<PlacedFeature> floorBlockConfig(Block block, BlockPredicate replaces) {
+		return PlacementUtils.filtered(
+				Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(block)),
+				BlockPredicate.allOf(BlockPredicate.replaceable(BLOCK_ABOVE), replaces));
 	}
 
 	// Registry stuff
