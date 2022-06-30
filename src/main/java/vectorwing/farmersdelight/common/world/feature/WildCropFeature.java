@@ -32,7 +32,7 @@ public class WildCropFeature extends Feature<WildCropConfiguration>
 		if (floorFeature != null) {
 			for (int k = 0; k < 64; ++k) {
 				int xzSpread = 5;
-				int ySpread = 4;	// TODO: Just put these in your config, mate...
+				int ySpread = 4;
 				mutablePos.setWithOffset(origin, random.nextInt(xzSpread) - random.nextInt(xzSpread), random.nextInt(ySpread) - random.nextInt(ySpread), random.nextInt(xzSpread) - random.nextInt(xzSpread));
 				if (config.floorFeature().value().place(level, context.chunkGenerator(), random, mutablePos)) {
 					++i;
@@ -42,7 +42,7 @@ public class WildCropFeature extends Feature<WildCropConfiguration>
 
 		for (int j = 0; j < 64; ++j) {
 			int xzSpread = 5;
-			int ySpread = 4;	// TODO: Just put these in your config, mate...
+			int ySpread = 4;
 			mutablePos.setWithOffset(origin, random.nextInt(xzSpread) - random.nextInt(xzSpread), random.nextInt(ySpread) - random.nextInt(ySpread), random.nextInt(xzSpread) - random.nextInt(xzSpread));
 			if (config.primaryFeature().value().place(level, context.chunkGenerator(), random, mutablePos)) {
 				++i;
@@ -51,7 +51,7 @@ public class WildCropFeature extends Feature<WildCropConfiguration>
 
 		for (int k = 0; k < 64; ++k) {
 			int xzSpread = 5;
-			int ySpread = 4;	// TODO: Just put these in your config, mate...
+			int ySpread = 4;
 			mutablePos.setWithOffset(origin, random.nextInt(xzSpread) - random.nextInt(xzSpread), random.nextInt(ySpread) - random.nextInt(ySpread), random.nextInt(xzSpread) - random.nextInt(xzSpread));
 			if (config.secondaryFeature().value().place(level, context.chunkGenerator(), random, mutablePos)) {
 				++i;

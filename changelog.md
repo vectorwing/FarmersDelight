@@ -14,6 +14,10 @@
 - New tag: `forge:dough`. Used to add modded dough items to FD's recipes, and populated by Wheat Dough by default;
 
 ## Updates
+- Wild Crops have received some visual upgrades, both in art and in world generation!
+  - Wild Carrots, being weeds, will strangle some grass out, creating small patches of Coarse Dirt;
+  - Wild Potatoes now scatter individual Alliums around them, making a more natural bush;
+  - Tomato Vines and Wild Potatoes now grow amidst a bush of local foliage;
 - Updated a few recipes:
   - Barbecue on a Stick is now made from any cooked meat! Have your barbecue your way;
 - All cooking recipes have received a bump in their experience reward, since the old ratios were very pitiful;
