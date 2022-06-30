@@ -165,7 +165,7 @@ public class BlockStates extends BlockStateProvider
 		this.wildCropBlock(ModBlocks.WILD_CABBAGES.get(), false);
 		this.wildCropBlock(ModBlocks.WILD_POTATOES.get(), false);
 		this.wildCropBlock(ModBlocks.WILD_TOMATOES.get(), false);
-		this.wildCropBlock(ModBlocks.WILD_CARROTS.get(), true);
+		this.wildCropBlock(ModBlocks.WILD_CARROTS.get(), false);
 		this.wildCropBlock(ModBlocks.WILD_ONIONS.get(), true);
 		this.doublePlantBlock(ModBlocks.WILD_RICE.get());
 	}
