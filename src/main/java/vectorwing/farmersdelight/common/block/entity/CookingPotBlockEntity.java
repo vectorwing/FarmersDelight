@@ -217,7 +217,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		if (!mealContainerStack.isEmpty()) {
 			return mealContainerStack;
 		} else {
-			return getMeal().getContainerItem();
+			return getMeal().getCraftingRemainingItem();
 		}
 	}
 
@@ -272,12 +272,12 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 		for (int i = 0; i < MEAL_DISPLAY_SLOT; ++i) {
 			ItemStack slotStack = inventory.getStackInSlot(i);
-			if (slotStack.hasContainerItem()) {
+			if (slotStack.hasCraftingRemainingItem()) {
 				Direction direction = getBlockState().getValue(CookingPotBlock.FACING).getCounterClockWise();
 				double x = worldPosition.getX() + 0.5 + (direction.getStepX() * 0.25);
 				double y = worldPosition.getY() + 0.7;
 				double z = worldPosition.getZ() + 0.5 + (direction.getStepZ() * 0.25);
-				ItemUtils.spawnItemEntity(level, inventory.getStackInSlot(i).getContainerItem(), x, y, z,
+				ItemUtils.spawnItemEntity(level, inventory.getStackInSlot(i).getCraftingRemainingItem(), x, y, z,
 						direction.getStepX() * 0.08F, 0.25F, direction.getStepZ() * 0.08F);
 			}
 			if (!slotStack.isEmpty())
@@ -381,7 +381,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	}
 
 	private boolean doesMealHaveContainer(ItemStack meal) {
-		return !mealContainerStack.isEmpty() || meal.hasContainerItem();
+		return !mealContainerStack.isEmpty() || meal.hasCraftingRemainingItem();
 	}
 
 	public boolean isContainerValid(ItemStack containerItem) {
@@ -389,7 +389,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		if (!mealContainerStack.isEmpty()) {
 			return mealContainerStack.sameItem(containerItem);
 		} else {
-			return getMeal().getContainerItem().sameItem(containerItem);
+			return getMeal().getCraftingRemainingItem().sameItem(containerItem);
 		}
 	}
 

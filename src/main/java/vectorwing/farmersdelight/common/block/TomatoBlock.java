@@ -30,6 +30,8 @@ import vectorwing.farmersdelight.common.registry.ModSounds;
 
 import java.util.Random;
 
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
 @SuppressWarnings("deprecation")
 public class TomatoBlock extends BushBlock implements BonemealableBlock
 {

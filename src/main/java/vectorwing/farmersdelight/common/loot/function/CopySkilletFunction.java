@@ -18,6 +18,8 @@ import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction.Builder;
+
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class CopySkilletFunction extends LootItemConditionalFunction

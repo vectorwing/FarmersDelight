@@ -12,6 +12,8 @@ import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
+import net.minecraft.world.item.Item.Properties;
+
 public class RiceItem extends ItemNameBlockItem
 {
 	public RiceItem(Block blockIn, Properties properties) {

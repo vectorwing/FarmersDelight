@@ -11,7 +11,7 @@ import vectorwing.farmersdelight.common.loot.modifier.PastrySlicingModifier;
 
 public class ModLootModifiers
 {
-	public static final DeferredRegister<GlobalLootModifierSerializer<?>> LOOT_MODIFIERS = DeferredRegister.create(ForgeRegistries.Keys.LOOT_MODIFIER_SERIALIZERS, FarmersDelight.MODID);
+	public static final DeferredRegister<GlobalLootModifierSerializer<?>> LOOT_MODIFIERS = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, FarmersDelight.MODID);
 
 	public static final RegistryObject<GlobalLootModifierSerializer<?>> ADD_ITEM = LOOT_MODIFIERS.register("add_item", AddItemModifier.Serializer::new);
 	public static final RegistryObject<GlobalLootModifierSerializer<?>> ADD_LOOT_TABLE = LOOT_MODIFIERS.register("add_loot_table", AddLootTableModifier.Serializer::new);

@@ -15,6 +15,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Random;
 
+import net.minecraft.world.level.block.state.BlockBehaviour.OffsetType;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
 @SuppressWarnings("deprecation")
 public class WildCropBlock extends FlowerBlock implements BonemealableBlock
 {

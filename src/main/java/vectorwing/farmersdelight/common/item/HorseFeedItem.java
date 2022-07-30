@@ -37,6 +37,8 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import net.minecraft.world.item.Item.Properties;
+
 public class HorseFeedItem extends Item
 {
 	public static final List<MobEffectInstance> EFFECTS = Lists.newArrayList(
@@ -53,7 +55,7 @@ public class HorseFeedItem extends Item
 		@SubscribeEvent
 		@SuppressWarnings("unused")
 		public static void onHorseFeedApplied(PlayerInteractEvent.EntityInteract event) {
-			Player player = event.getPlayer();
+			Player player = event.getEntity();
 			Entity target = event.getTarget();
 			ItemStack itemStack = event.getItemStack();
 

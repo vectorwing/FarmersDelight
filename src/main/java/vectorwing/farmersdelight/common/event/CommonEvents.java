@@ -79,7 +79,7 @@ public class CommonEvents
 	@SubscribeEvent
 	public static void handleVanillaSoupEffects(LivingEntityUseItemEvent.Finish event) {
 		Item food = event.getItem().getItem();
-		LivingEntity entity = event.getEntityLiving();
+		LivingEntity entity = event.getEntity();
 
 		if (Configuration.RABBIT_STEW_JUMP_BOOST.get() && food.equals(Items.RABBIT_STEW)) {
 			entity.addEffect(new MobEffectInstance(MobEffects.JUMP, 200, 1));

@@ -32,6 +32,8 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
 @SuppressWarnings("deprecation")
 public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlockContainer
 {

@@ -17,6 +17,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import vectorwing.farmersdelight.common.Configuration;
 
+import net.minecraft.world.item.Item.Properties;
+
 @Mixin(BowlFoodItem.class)
 public abstract class SoupItemMixin extends Item
 {
@@ -25,7 +27,7 @@ public abstract class SoupItemMixin extends Item
 	}
 
 	@Override
-	public int getItemStackLimit(ItemStack stack) {
+	public int getMaxStackSize(ItemStack stack) {
 		if (Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) {
 			ResourceLocation stackable = stack.getItem().getRegistryName();
 			String stackableKey = "";
@@ -37,7 +39,7 @@ public abstract class SoupItemMixin extends Item
 				return 16;
 			}
 		}
-		return super.getItemStackLimit(stack);
+		return super.getMaxStackSize(stack);
 	}
 
 	/**
@@ -46,7 +48,7 @@ public abstract class SoupItemMixin extends Item
 	@Inject(at = @At(value = "HEAD"), method = "finishUsingItem", cancellable = true)
 	private void onItemUseFinish(ItemStack stack, Level worldIn, LivingEntity subject, CallbackInfoReturnable<ItemStack> cir) {
 		if (Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) {
-			ItemStack container = stack.getContainerItem();
+			ItemStack container = stack.getCraftingRemainingItem();
 			if (container.isEmpty())
 				container = new ItemStack(Items.BOWL);
 

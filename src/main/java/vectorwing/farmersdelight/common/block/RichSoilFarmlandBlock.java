@@ -20,6 +20,8 @@ import vectorwing.farmersdelight.common.utility.MathUtils;
 
 import java.util.Random;
 
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
 public class RichSoilFarmlandBlock extends FarmBlock
 {
 	public RichSoilFarmlandBlock(Properties properties) {

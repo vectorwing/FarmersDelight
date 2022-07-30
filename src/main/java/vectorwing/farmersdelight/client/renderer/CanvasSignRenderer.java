@@ -30,6 +30,8 @@ import vectorwing.farmersdelight.common.registry.ModAtlases;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import net.minecraft.client.renderer.blockentity.SignRenderer.SignModel;
+
 @OnlyIn(Dist.CLIENT)
 public class CanvasSignRenderer extends SignRenderer
 {

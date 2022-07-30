@@ -18,6 +18,8 @@ import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModEnchantments;
 
+import net.minecraft.world.item.enchantment.Enchantment.Rarity;
+
 public class BackstabbingEnchantment extends Enchantment
 {
 	public BackstabbingEnchantment(Rarity rarityIn, EnchantmentCategory typeIn, EquipmentSlot... slots) {
@@ -72,8 +74,8 @@ public class BackstabbingEnchantment extends Enchantment
 			if (attacker instanceof Player) {
 				ItemStack weapon = ((Player) attacker).getMainHandItem();
 				int level = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.BACKSTABBING.get(), weapon);
-				if (level > 0 && isLookingBehindTarget(event.getEntityLiving(), event.getSource().getSourcePosition())) {
-					Level world = event.getEntityLiving().getCommandSenderWorld();
+				if (level > 0 && isLookingBehindTarget(event.getEntity(), event.getSource().getSourcePosition())) {
+					Level world = event.getEntity().getCommandSenderWorld();
 					if (!world.isClientSide) {
 						event.setAmount(getBackstabbingDamagePerLevel(event.getAmount(), level));
 						world.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.BLOCKS, 1.0F, 1.0F);

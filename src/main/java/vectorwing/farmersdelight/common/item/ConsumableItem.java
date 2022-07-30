@@ -20,6 +20,8 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import net.minecraft.world.item.Item.Properties;
+
 public class ConsumableItem extends Item
 {
 	private final boolean hasFoodEffectTooltip;
@@ -53,7 +55,7 @@ public class ConsumableItem extends Item
 			this.affectConsumer(stack, worldIn, consumer);
 		}
 
-		ItemStack containerStack = stack.getContainerItem();
+		ItemStack containerStack = stack.getCraftingRemainingItem();
 
 		if (stack.isEdible()) {
 			super.finishUsingItem(stack, worldIn, consumer);

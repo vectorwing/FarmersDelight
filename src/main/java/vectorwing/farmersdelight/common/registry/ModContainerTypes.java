@@ -10,7 +10,7 @@ import vectorwing.farmersdelight.common.block.entity.container.CookingPotContain
 
 public class ModContainerTypes
 {
-	public static final DeferredRegister<MenuType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, FarmersDelight.MODID);
+	public static final DeferredRegister<MenuType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.MENU_TYPES, FarmersDelight.MODID);
 
 	public static final RegistryObject<MenuType<CookingPotContainer>> COOKING_POT = CONTAINER_TYPES
 			.register("cooking_pot", () -> IForgeMenuType.create(CookingPotContainer::new));

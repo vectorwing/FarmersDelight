@@ -7,6 +7,8 @@ import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.world.item.Item.Properties;
+
 public class FuelBlockItem extends BlockItem
 {
 	public final int burnTime;

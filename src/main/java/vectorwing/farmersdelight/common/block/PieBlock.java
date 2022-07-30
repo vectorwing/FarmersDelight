@@ -33,6 +33,8 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.function.Supplier;
 
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
 @SuppressWarnings("deprecation")
 public class PieBlock extends Block
 {

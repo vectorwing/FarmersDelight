@@ -28,13 +28,16 @@ import vectorwing.farmersdelight.common.registry.ModParticleTypes;
 
 import java.util.Map;
 
+import net.minecraftforge.client.event.ModelEvent.BakingCompleted;
+import net.minecraftforge.client.event.ModelEvent.RegisterGeometryLoaders;
+
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetupEvents
 {
 	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "item/empty_container_slot_bowl");
 
 	@SubscribeEvent
-	public static void onModelRegister(ModelRegistryEvent event) {
+	public static void onModelRegister(RegisterGeometryLoaders event) {
 		ForgeModelBakery.addSpecialModel(new ModelResourceLocation(new ResourceLocation(FarmersDelight.MODID, "skillet_cooking"), "inventory"));
 	}
 
@@ -44,7 +47,7 @@ public class ClientSetupEvents
 	}
 
 	@SubscribeEvent
-	public static void onModelBake(ModelBakeEvent event) {
+	public static void onModelBake(BakingCompleted event) {
 		Map<ResourceLocation, BakedModel> modelRegistry = event.getModelRegistry();
 
 		ModelResourceLocation skilletLocation = new ModelResourceLocation(new ResourceLocation(FarmersDelight.MODID, "skillet"), "inventory");
@@ -78,7 +81,7 @@ public class ClientSetupEvents
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
-	public static void registerParticles(ParticleFactoryRegisterEvent event) {
+	public static void registerParticles(RegisterParticleProvidersEvent event) {
 		Minecraft.getInstance().particleEngine.register(ModParticleTypes.STAR.get(), StarParticle.Factory::new);
 		Minecraft.getInstance().particleEngine.register(ModParticleTypes.STEAM.get(), SteamParticle.Factory::new);
 	}

@@ -11,8 +11,8 @@ import net.minecraft.world.food.FoodData;
 import net.minecraft.world.level.GameRules;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.gui.ForgeIngameGui;
-import net.minecraftforge.client.gui.OverlayRegistry;
+import net.minecraftforge.client.gui.overlay.ForgeGui;
+import net.minecraftforge.client.gui.overlay.GuiOverlayManager;
 import net.minecraftforge.common.MinecraftForge;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
@@ -34,7 +34,7 @@ public class NourishmentHungerOverlay
 	public static void init() {
 		MinecraftForge.EVENT_BUS.register(new NourishmentHungerOverlay());
 
-		OverlayRegistry.registerOverlayAbove(ForgeIngameGui.FOOD_LEVEL_ELEMENT, "Farmer's Delight Nourishment", (gui, mStack, partialTicks, screenWidth, screenHeight) -> {
+		GuiOverlayManager.registerOverlayAbove(ForgeGui.FOOD_LEVEL_ELEMENT, "Farmer's Delight Nourishment", (gui, mStack, partialTicks, screenWidth, screenHeight) -> {
 			Minecraft mc = Minecraft.getInstance();
 			boolean isMounted = mc.player != null && mc.player.getVehicle() instanceof LivingEntity;
 			if (!isMounted && !mc.options.hideGui && gui.shouldDrawSurvivalElements()) {
@@ -43,12 +43,12 @@ public class NourishmentHungerOverlay
 		});
 	}
 
-	public static void renderNourishmentOverlay(ForgeIngameGui gui, PoseStack poseStack) {
+	public static void renderNourishmentOverlay(ForgeGui gui, PoseStack poseStack) {
 		if (!Configuration.NOURISHED_HUNGER_OVERLAY.get()) {
 			return;
 		}
 
-		foodIconsOffset = gui.right_height;
+		foodIconsOffset = gui.rightHeight;
 		Minecraft minecraft = Minecraft.getInstance();
 		Player player = minecraft.player;
 

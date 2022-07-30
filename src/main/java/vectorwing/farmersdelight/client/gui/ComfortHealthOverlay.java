@@ -15,8 +15,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.gui.ForgeIngameGui;
-import net.minecraftforge.client.gui.OverlayRegistry;
+import net.minecraftforge.client.gui.overlay.ForgeGui;
+import net.minecraftforge.client.gui.overlay.GuiOverlayManager;
 import net.minecraftforge.common.MinecraftForge;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
@@ -35,7 +35,7 @@ public class ComfortHealthOverlay
 	public static void init() {
 		MinecraftForge.EVENT_BUS.register(new ComfortHealthOverlay());
 
-		OverlayRegistry.registerOverlayAbove(ForgeIngameGui.PLAYER_HEALTH_ELEMENT, "Farmer's Delight Comfort", (gui, mStack, partialTicks, screenWidth, screenHeight) -> {
+		GuiOverlayManager.registerOverlayAbove(ForgeGui.PLAYER_HEALTH_ELEMENT, "Farmer's Delight Comfort", (gui, mStack, partialTicks, screenWidth, screenHeight) -> {
 			Minecraft mc = Minecraft.getInstance();
 			if (!mc.options.hideGui && gui.shouldDrawSurvivalElements()) {
 				renderComfortOverlay(gui, mStack);
@@ -43,12 +43,12 @@ public class ComfortHealthOverlay
 		});
 	}
 
-	public static void renderComfortOverlay(ForgeIngameGui gui, PoseStack poseStack) {
+	public static void renderComfortOverlay(ForgeGui gui, PoseStack poseStack) {
 		if (!Configuration.COMFORT_HEALTH_OVERLAY.get()) {
 			return;
 		}
 
-		healthIconsOffset = gui.left_height;
+		healthIconsOffset = gui.leftHeight;
 		Minecraft minecraft = Minecraft.getInstance();
 		Player player = minecraft.player;
 

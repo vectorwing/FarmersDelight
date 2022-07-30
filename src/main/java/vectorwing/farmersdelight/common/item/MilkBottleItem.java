@@ -10,6 +10,8 @@ import net.minecraft.world.level.Level;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import net.minecraft.world.item.Item.Properties;
+
 public class MilkBottleItem extends DrinkableItem
 {
 	public MilkBottleItem(Properties properties) {
@@ -30,7 +32,7 @@ public class MilkBottleItem extends DrinkableItem
 
 		if (compatibleEffects.size() > 0) {
 			MobEffectInstance selectedEffect = consumer.getEffect(compatibleEffects.get(worldIn.random.nextInt(compatibleEffects.size())));
-			if (selectedEffect != null && !net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.living.PotionEvent.PotionRemoveEvent(consumer, selectedEffect))) {
+			if (selectedEffect != null && !net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.living.MobEffectEvent.Remove(consumer, selectedEffect))) {
 				consumer.removeEffect(selectedEffect.getEffect());
 			}
 		}

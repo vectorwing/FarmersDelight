@@ -38,6 +38,8 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import net.minecraft.world.item.Item.Properties;
+
 public class DogFoodItem extends ConsumableItem
 {
 	public static final List<MobEffectInstance> EFFECTS = Lists.newArrayList(
@@ -55,7 +57,7 @@ public class DogFoodItem extends ConsumableItem
 		@SubscribeEvent
 		@SuppressWarnings("unused")
 		public static void onDogFoodApplied(PlayerInteractEvent.EntityInteract event) {
-			Player player = event.getPlayer();
+			Player player = event.getEntity();
 			Entity target = event.getTarget();
 			ItemStack itemStack = event.getItemStack();
 
@@ -76,8 +78,8 @@ public class DogFoodItem extends ConsumableItem
 						entity.level.addParticle(ModParticleTypes.STAR.get(), entity.getRandomX(1.0D), entity.getRandomY() + 0.5D, entity.getRandomZ(1.0D), xSpeed, ySpeed, zSpeed);
 					}
 
-					if (itemStack.getContainerItem() != ItemStack.EMPTY && !player.isCreative()) {
-						player.addItem(itemStack.getContainerItem());
+					if (itemStack.getCraftingRemainingItem() != ItemStack.EMPTY && !player.isCreative()) {
+						player.addItem(itemStack.getCraftingRemainingItem());
 						itemStack.shrink(1);
 					}
 

@@ -55,6 +55,8 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
 @SuppressWarnings("deprecation")
 public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 {
@@ -91,7 +93,7 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 					}
 					world.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.BLOCKS, 1.0F, 1.0F);
 				} else {
-					NetworkHooks.openGui((ServerPlayer) player, cookingPotEntity, pos);
+					NetworkHooks.openScreen((ServerPlayer) player, cookingPotEntity, pos);
 				}
 			}
 			return InteractionResult.SUCCESS;

@@ -7,6 +7,8 @@ import net.minecraft.world.item.crafting.RecipeType;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.world.item.Item.Properties;
+
 public class FuelItem extends Item
 {
 	public final int burnTime;

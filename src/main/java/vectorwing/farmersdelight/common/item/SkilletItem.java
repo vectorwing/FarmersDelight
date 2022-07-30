@@ -69,7 +69,7 @@ public class SkilletItem extends BlockItem
 	{
 		@SubscribeEvent
 		public static void onSkilletKnockback(LivingKnockBackEvent event) {
-			LivingEntity attacker = event.getEntityLiving().getKillCredit();
+			LivingEntity attacker = event.getEntity().getKillCredit();
 			ItemStack tool = attacker != null ? attacker.getItemInHand(InteractionHand.MAIN_HAND) : ItemStack.EMPTY;
 			if (tool.getItem() instanceof SkilletItem) {
 				event.setStrength(event.getOriginalStrength() * 2.0F);
@@ -78,7 +78,7 @@ public class SkilletItem extends BlockItem
 
 		@SubscribeEvent
 		public static void onSkilletAttack(AttackEntityEvent event) {
-			Player player = event.getPlayer();
+			Player player = event.getEntity();
 			float attackPower = player.getAttackStrengthScale(0.0F);
 			ItemStack tool = player.getItemInHand(InteractionHand.MAIN_HAND);
 			if (tool.getItem() instanceof SkilletItem) {

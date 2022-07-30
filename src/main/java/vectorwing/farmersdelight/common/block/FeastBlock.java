@@ -29,6 +29,8 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import java.util.function.Supplier;
 
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
 @SuppressWarnings("deprecation")
 public class FeastBlock extends Block
 {
@@ -93,7 +95,7 @@ public class FeastBlock extends Block
 		ItemStack heldStack = player.getItemInHand(handIn);
 
 		if (servings > 0) {
-			if (heldStack.sameItem(serving.getContainerItem())) {
+			if (heldStack.sameItem(serving.getCraftingRemainingItem())) {
 				worldIn.setBlock(pos, state.setValue(SERVINGS, servings - 1), 3);
 				if (!player.getAbilities().instabuild) {
 					heldStack.shrink(1);
@@ -107,7 +109,7 @@ public class FeastBlock extends Block
 				worldIn.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.BLOCKS, 1.0F, 1.0F);
 				return InteractionResult.SUCCESS;
 			} else {
-				player.displayClientMessage(TextUtils.getTranslation("block.feast.use_container", serving.getContainerItem().getHoverName()), true);
+				player.displayClientMessage(TextUtils.getTranslation("block.feast.use_container", serving.getCraftingRemainingItem().getHoverName()), true);
 			}
 		}
 		return InteractionResult.PASS;

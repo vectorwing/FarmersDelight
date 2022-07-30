@@ -22,6 +22,8 @@ import vectorwing.farmersdelight.common.utility.MathUtils;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
 @SuppressWarnings("deprecation")
 public class RichSoilBlock extends Block
 {

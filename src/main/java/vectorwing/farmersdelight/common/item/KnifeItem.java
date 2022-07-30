@@ -37,6 +37,8 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.Set;
 
+import net.minecraft.world.item.Item.Properties;
+
 public class KnifeItem extends DiggerItem
 {
 	public KnifeItem(Tier tier, float attackDamageIn, float attackSpeedIn, Properties properties) {
@@ -59,7 +61,7 @@ public class KnifeItem extends DiggerItem
 	{
 		@SubscribeEvent
 		public static void onKnifeKnockback(LivingKnockBackEvent event) {
-			LivingEntity attacker = event.getEntityLiving().getKillCredit();
+			LivingEntity attacker = event.getEntity().getKillCredit();
 			ItemStack toolStack = attacker != null ? attacker.getItemInHand(InteractionHand.MAIN_HAND) : ItemStack.EMPTY;
 			if (toolStack.getItem() instanceof KnifeItem) {
 				float f = event.getOriginalStrength();
@@ -70,15 +72,15 @@ public class KnifeItem extends DiggerItem
 		@SubscribeEvent
 		@SuppressWarnings("unused")
 		public static void onCakeInteraction(PlayerInteractEvent.RightClickBlock event) {
-			ItemStack toolStack = event.getPlayer().getItemInHand(event.getHand());
+			ItemStack toolStack = event.getEntity().getItemInHand(event.getHand());
 
 			if (!toolStack.is(ModTags.KNIVES)) {
 				return;
 			}
 
-			Level world = event.getWorld();
+			Level world = event.getLevel();
 			BlockPos pos = event.getPos();
-			BlockState state = event.getWorld().getBlockState(pos);
+			BlockState state = event.getLevel().getBlockState(pos);
 			Block block = state.getBlock();
 
 			if (state.is(ModTags.DROPS_CAKE_SLICE)) {
