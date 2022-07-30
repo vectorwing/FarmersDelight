@@ -1,19 +1,22 @@
 package vectorwing.farmersdelight.common.event;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.MissingMappingsEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
+import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
+
+// TODO: Analyze and test this code, to see if the event should be checked all at once, or per-type like before.
 
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID)
 public class MappingEvents
@@ -23,8 +26,8 @@ public class MappingEvents
 	}
 
 	@SubscribeEvent
-	public static void blockRemapping(RegistryEvent.MissingMappings<Block> event) {
-		ImmutableList<RegistryEvent.MissingMappings.Mapping<Block>> mappings = event.getMappings(FarmersDelight.MODID);
+	public static void blockRemapping(MissingMappingsEvent event) {
+		List<MissingMappingsEvent.Mapping<Block>> mappings = event.getMappings(ForgeRegistries.Keys.BLOCKS, FarmersDelight.MODID);
 		Map<ResourceLocation, Supplier<Block>> blockRemapping = (new ImmutableMap.Builder<ResourceLocation, Supplier<Block>>())
 				.put(mapping("oak_pantry"), ModBlocks.OAK_CABINET)
 				.put(mapping("birch_pantry"), ModBlocks.BIRCH_CABINET)
@@ -38,21 +41,21 @@ public class MappingEvents
 				.put(mapping("rice_upper_crop"), ModBlocks.RICE_CROP_PANICLES)
 				.build();
 
-		for (RegistryEvent.MissingMappings.Mapping<Block> mapping : mappings) {
-			Supplier<Block> blockSupplier = blockRemapping.get(mapping.key);
+		for (MissingMappingsEvent.Mapping<Block> mapping : mappings) {
+			Supplier<Block> blockSupplier = blockRemapping.get(mapping.getKey());
 			if (blockSupplier != null) {
 				Block block = blockSupplier.get();
-				if (block.getRegistryName() != null) {
+				if (ForgeRegistries.BLOCKS.getKey(block) != null) {
 					mapping.remap(block);
-					FarmersDelight.LOGGER.warn("Remapping block '{}' to '{}'...", mapping.key.toString(), block.getRegistryName().toString());
+					FarmersDelight.LOGGER.warn("Remapping block '{}' to '{}'...", mapping.getKey().toString(), ForgeRegistries.BLOCKS.getKey(block).toString());
 				}
 			}
 		}
 	}
 
 	@SubscribeEvent
-	public static void itemRemapping(RegistryEvent.MissingMappings<Item> event) {
-		ImmutableList<RegistryEvent.MissingMappings.Mapping<Item>> mappings = event.getMappings(FarmersDelight.MODID);
+	public static void itemRemapping(MissingMappingsEvent event) {
+		List<MissingMappingsEvent.Mapping<Item>> mappings = event.getMappings(ForgeRegistries.Keys.ITEMS, FarmersDelight.MODID);
 		Map<ResourceLocation, Supplier<Item>> itemRemapping = (new ImmutableMap.Builder<ResourceLocation, Supplier<Item>>())
 				.put(mapping("oak_pantry"), ModItems.OAK_CABINET)
 				.put(mapping("birch_pantry"), ModItems.BIRCH_CABINET)
@@ -64,14 +67,14 @@ public class MappingEvents
 				.put(mapping("warped_pantry"), ModItems.WARPED_CABINET)
 				.build();
 
-		for (RegistryEvent.MissingMappings.Mapping<Item> mapping : mappings) {
-			Supplier<Item> itemSupplier = itemRemapping.get(mapping.key);
+		for (MissingMappingsEvent.Mapping<Item> mapping : mappings) {
+			Supplier<Item> itemSupplier = itemRemapping.get(mapping.getKey());
 
 			if (itemSupplier != null) {
 				Item item = itemSupplier.get();
-				if (item != null && item.getRegistryName() != null) {
+				if (item != null && ForgeRegistries.ITEMS.getKey(item) != null) {
 					mapping.remap(item);
-					FarmersDelight.LOGGER.warn("Remapping item '{}' to '{}'...", mapping.key.toString(), item.getRegistryName().toString());
+					FarmersDelight.LOGGER.warn("Remapping item '{}' to '{}'...", mapping.getKey().toString(), ForgeRegistries.ITEMS.getKey(item).toString());
 				}
 			}
 		}

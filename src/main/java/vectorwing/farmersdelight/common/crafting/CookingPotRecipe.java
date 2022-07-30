@@ -15,7 +15,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
@@ -123,7 +122,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 		return ModRecipeTypes.COOKING.get();
 	}
 
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<CookingPotRecipe>
+	public static class Serializer implements RecipeSerializer<CookingPotRecipe>
 	{
 		public Serializer() {
 		}

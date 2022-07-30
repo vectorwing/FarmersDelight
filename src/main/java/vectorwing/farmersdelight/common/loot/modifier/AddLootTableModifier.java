@@ -1,24 +1,31 @@
 package vectorwing.farmersdelight.common.loot.modifier;
 
-import com.google.gson.JsonObject;
+import com.google.common.base.Suppliers;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.common.loot.LootModifier;
 import vectorwing.farmersdelight.common.Configuration;
 
 import javax.annotation.Nonnull;
-import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Credits to Commoble for this implementation!
  */
 public class AddLootTableModifier extends LootModifier
 {
+	public static final Supplier<Codec<AddLootTableModifier>> CODEC = Suppliers.memoize(() ->
+			RecordCodecBuilder.create(inst -> codecStart(inst)
+					.and(ResourceLocation.CODEC.fieldOf("lootTable").forGetter((m) -> m.lootTable))
+					.apply(inst, AddLootTableModifier::new)));
+
 	private final ResourceLocation lootTable;
 
 	protected AddLootTableModifier(LootItemCondition[] conditionsIn, ResourceLocation lootTable) {
@@ -28,7 +35,7 @@ public class AddLootTableModifier extends LootModifier
 
 	@Nonnull
 	@Override
-	protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
+	protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
 		if (Configuration.GENERATE_FD_CHEST_LOOT.get()) {
 			LootTable extraTable = context.getLootTable(this.lootTable);
 			extraTable.getRandomItems(context, generatedLoot::add);
@@ -36,19 +43,8 @@ public class AddLootTableModifier extends LootModifier
 		return generatedLoot;
 	}
 
-	public static class Serializer extends GlobalLootModifierSerializer<AddLootTableModifier>
-	{
-		@Override
-		public AddLootTableModifier read(ResourceLocation location, JsonObject object, LootItemCondition[] conditions) {
-			ResourceLocation lootTable = new ResourceLocation(GsonHelper.getAsString(object, "lootTable"));
-			return new AddLootTableModifier(conditions, lootTable);
-		}
-
-		@Override
-		public JsonObject write(AddLootTableModifier instance) {
-			JsonObject object = this.makeConditions(instance.conditions);
-			object.addProperty("lootTable", instance.lootTable.toString());
-			return object;
-		}
+	@Override
+	public Codec<? extends IGlobalLootModifier> codec() {
+		return CODEC.get();
 	}
 }
