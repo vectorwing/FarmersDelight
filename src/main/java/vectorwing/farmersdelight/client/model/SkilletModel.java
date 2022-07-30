@@ -11,6 +11,7 @@ import net.minecraft.client.resources.model.*;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -65,7 +66,7 @@ public class SkilletModel implements BakedModel
 
 	@Nonnull
 	@Override
-	public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand) {
+	public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull RandomSource rand) {
 		return originalModel.getQuads(state, side, rand);
 	}
 
@@ -137,7 +138,7 @@ public class SkilletModel implements BakedModel
 				faceQuads.put(e, new ArrayList<>());
 			}
 
-			Random rand = new Random(0);
+			RandomSource rand = RandomSource.create(0);
 			genQuads.addAll(ingredientBaked.getQuads(null, null, rand));
 
 			for (Direction e : Direction.values()) {
@@ -160,13 +161,13 @@ public class SkilletModel implements BakedModel
 
 		@Nonnull
 		@Override
-		public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction face, @Nonnull Random rand) {
+		public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction face, @Nonnull RandomSource rand) {
 			return face == null ? genQuads : faceQuads.get(face);
 		}
 
 		@Override
-		public BakedModel handlePerspective(@Nonnull ItemTransforms.TransformType cameraTransformType, PoseStack stack) {
-			super.handlePerspective(cameraTransformType, stack);
+		public BakedModel applyTransform(@Nonnull ItemTransforms.TransformType cameraTransformType, PoseStack stack, boolean leftHand) {
+			super.applyTransform(cameraTransformType, stack, leftHand);
 			return this;
 		}
 	}

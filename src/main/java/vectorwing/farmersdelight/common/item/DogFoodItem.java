@@ -4,8 +4,6 @@ import com.google.common.collect.Lists;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -28,17 +26,15 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModParticleTypes;
-import vectorwing.farmersdelight.common.Configuration;
+import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.MathUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
-import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.Nullable;
 import java.util.List;
-
-import net.minecraft.world.item.Item.Properties;
 
 public class DogFoodItem extends ConsumableItem
 {
@@ -101,13 +97,13 @@ public class DogFoodItem extends ConsumableItem
 		tooltip.add(textWhenFeeding.withStyle(ChatFormatting.GRAY));
 
 		for (MobEffectInstance effectInstance : EFFECTS) {
-			MutableComponent effectDescription = new TextComponent(" ");
-			MutableComponent effectName = new TranslatableComponent(effectInstance.getDescriptionId());
+			MutableComponent effectDescription = Component.literal(" ");
+			MutableComponent effectName = Component.translatable(effectInstance.getDescriptionId());
 			effectDescription.append(effectName);
 			MobEffect effect = effectInstance.getEffect();
 
 			if (effectInstance.getAmplifier() > 0) {
-				effectDescription.append(" ").append(new TranslatableComponent("potion.potency." + effectInstance.getAmplifier()));
+				effectDescription.append(" ").append(Component.translatable("potion.potency." + effectInstance.getAmplifier()));
 			}
 
 			if (effectInstance.getDuration() > 20) {

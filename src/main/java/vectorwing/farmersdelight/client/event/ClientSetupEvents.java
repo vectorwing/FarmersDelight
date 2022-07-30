@@ -8,8 +8,11 @@ import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.*;
-import net.minecraftforge.client.model.ForgeModelBakery;
+import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.ModelEvent;
+import net.minecraftforge.client.event.ModelEvent.BakingCompleted;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -28,17 +31,14 @@ import vectorwing.farmersdelight.common.registry.ModParticleTypes;
 
 import java.util.Map;
 
-import net.minecraftforge.client.event.ModelEvent.BakingCompleted;
-import net.minecraftforge.client.event.ModelEvent.RegisterGeometryLoaders;
-
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetupEvents
 {
 	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "item/empty_container_slot_bowl");
 
 	@SubscribeEvent
-	public static void onModelRegister(RegisterGeometryLoaders event) {
-		ForgeModelBakery.addSpecialModel(new ModelResourceLocation(new ResourceLocation(FarmersDelight.MODID, "skillet_cooking"), "inventory"));
+	public static void onModelRegister(ModelEvent.RegisterAdditional event) {
+		event.register(new ModelResourceLocation(new ResourceLocation(FarmersDelight.MODID, "skillet_cooking"), "inventory"));
 	}
 
 	@SubscribeEvent
@@ -48,13 +48,13 @@ public class ClientSetupEvents
 
 	@SubscribeEvent
 	public static void onModelBake(BakingCompleted event) {
-		Map<ResourceLocation, BakedModel> modelRegistry = event.getModelRegistry();
+		Map<ResourceLocation, BakedModel> modelRegistry = event.getModels();
 
 		ModelResourceLocation skilletLocation = new ModelResourceLocation(new ResourceLocation(FarmersDelight.MODID, "skillet"), "inventory");
 		BakedModel skilletModel = modelRegistry.get(skilletLocation);
 		ModelResourceLocation skilletCookingLocation = new ModelResourceLocation(new ResourceLocation(FarmersDelight.MODID, "skillet_cooking"), "inventory");
 		BakedModel skilletCookingModel = modelRegistry.get(skilletCookingLocation);
-		modelRegistry.put(skilletLocation, new SkilletModel(event.getModelLoader(), skilletModel, skilletCookingModel));
+		modelRegistry.put(skilletLocation, new SkilletModel(event.getModelBakery(), skilletModel, skilletCookingModel));
 	}
 
 	@SubscribeEvent

@@ -3,7 +3,6 @@ package vectorwing.farmersdelight.client.event;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.food.FoodProperties;
@@ -35,9 +34,9 @@ public class TooltipEvents
 			List<Component> tooltip = event.getToolTip();
 			for (Pair<MobEffectInstance, Float> pair : soupEffects.getEffects()) {
 				MobEffectInstance effect = pair.getFirst();
-				MutableComponent effectText = new TranslatableComponent(effect.getDescriptionId());
+				MutableComponent effectText = Component.translatable(effect.getDescriptionId());
 				if (effect.getDuration() > 20) {
-					effectText = new TranslatableComponent("potion.withDuration", effectText, MobEffectUtil.formatDuration(effect, 1));
+					effectText = Component.translatable("potion.withDuration", effectText, MobEffectUtil.formatDuration(effect, 1));
 				}
 				tooltip.add(effectText.withStyle(effect.getEffect().getCategory().getTooltipFormatting()));
 			}

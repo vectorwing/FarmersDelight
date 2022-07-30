@@ -17,8 +17,8 @@ public class WrappedItemModel<T extends BakedModel> extends BakedModelWrapper<T>
 	}
 
 	@Override
-	public BakedModel handlePerspective(ItemTransforms.TransformType cameraTransformType, PoseStack mat) {
-		BakedModel model = super.handlePerspective(cameraTransformType, mat);
+	public BakedModel applyTransform(ItemTransforms.TransformType cameraTransformType, PoseStack poseStack, boolean applyLeftHandTransform) {
+		BakedModel model = super.applyTransform(cameraTransformType, poseStack, applyLeftHandTransform);
 		return model.equals(this) || model instanceof WrappedItemModel ? this : new WrappedItemModel<>(model);
 	}
 }
