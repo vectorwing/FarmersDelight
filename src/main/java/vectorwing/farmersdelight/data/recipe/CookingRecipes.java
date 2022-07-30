@@ -92,7 +92,7 @@ public class CookingRecipes
 				.addIngredient(ForgeTags.CROPS_RICE)
 				.build(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.DUMPLINGS.get(), 2, NORMAL_COOKING, 0.35F)
-				.addIngredient(ModItems.WHEAT_DOUGH.get())
+				.addIngredient(ForgeTags.DOUGH)
 				.addIngredient(ForgeTags.CROPS_CABBAGE)
 				.addIngredient(ForgeTags.CROPS_ONION)
 				.addIngredient(Ingredient.fromValues(Stream.of(
