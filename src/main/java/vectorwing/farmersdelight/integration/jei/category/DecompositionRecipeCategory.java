@@ -13,7 +13,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -51,19 +51,19 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 		background = helper.createDrawable(backgroundImage, 0, 0, 118, 80);
 		organicCompost = new ItemStack(ModBlocks.ORGANIC_COMPOST.get());
 		richSoil = new ItemStack(ModItems.RICH_SOIL.get());
-		icon = helper.createDrawableIngredient(VanillaTypes.ITEM, richSoil);
+		icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, richSoil);
 		slotIcon = helper.createDrawable(backgroundImage, 119, 0, slotSize, slotSize);
 	}
-
-	@Override
-	public ResourceLocation getUid() {
-		return this.getRecipeType().getUid();
-	}
-
-	@Override
-	public Class<? extends DecompositionDummy> getRecipeClass() {
-		return this.getRecipeType().getRecipeClass();
-	}
+//
+//	@Override
+//	public ResourceLocation getUid() {
+//		return this.getRecipeType().getUid();
+//	}
+//
+//	@Override
+//	public Class<? extends DecompositionDummy> getRecipeClass() {
+//		return this.getRecipeType().getRecipeClass();
+//	}
 
 	@Override
 	public RecipeType<DecompositionDummy> getRecipeType() {
@@ -118,8 +118,8 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 		return iconX <= mouseX && mouseX < iconX + icon_size && iconY <= mouseY && mouseY < iconY + icon_size;
 	}
 
-	private static TranslatableComponent translateKey(@Nonnull String suffix) {
-		return new TranslatableComponent(FarmersDelight.MODID + ".jei.decomposition" + suffix);
+	private static MutableComponent translateKey(@Nonnull String suffix) {
+		return Component.translatable(FarmersDelight.MODID + ".jei.decomposition" + suffix);
 	}
 }
 

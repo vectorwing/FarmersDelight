@@ -16,6 +16,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.common.block.entity.container.CookingPotContainer;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.registry.ModContainerTypes;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.utility.TextUtils;
@@ -37,14 +38,14 @@ public class JEIPlugin implements IModPlugin
 	private static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "jei_plugin");
 	private static final Minecraft MC = Minecraft.getInstance();
 
-	private static List<Recipe<?>> findRecipesByType(RecipeType<?> type) {
-		return MC.level
-				.getRecipeManager()
-				.getRecipes()
-				.stream()
-				.filter(r -> r.getType() == type)
-				.collect(Collectors.toList());
-	}
+//	private static List<Recipe<?>> findRecipesByType(RecipeType<?> type) {
+//		return MC.level
+//				.getRecipeManager()
+//				.getRecipes()
+//				.stream()
+//				.filter(r -> r.getType() == type)
+//				.collect(Collectors.toList());
+//	}
 
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registry) {
@@ -55,17 +56,18 @@ public class JEIPlugin implements IModPlugin
 
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
-		registration.addRecipes(findRecipesByType(ModRecipeTypes.COOKING.get()), CookingRecipeCategory.UID);
-		registration.addRecipes(findRecipesByType(ModRecipeTypes.CUTTING.get()), CuttingRecipeCategory.UID);
+		FDRecipes modRecipes = new FDRecipes();
+		registration.addRecipes(FDRecipeTypes.COOKING, modRecipes.getCookingPotRecipes());
+		registration.addRecipes(FDRecipeTypes.CUTTING, modRecipes.getCuttingBoardRecipes());
 		registration.addRecipes(FDRecipeTypes.DECOMPOSITION, ImmutableList.of(new DecompositionDummy()));
-		registration.addIngredientInfo(new ItemStack(ModItems.STRAW.get()), VanillaTypes.ITEM, TextUtils.getTranslation("jei.info.straw"));
-		registration.addIngredientInfo(new ItemStack(ModItems.HAM.get()), VanillaTypes.ITEM, TextUtils.getTranslation("jei.info.ham"));
-		registration.addIngredientInfo(new ItemStack(ModItems.SMOKED_HAM.get()), VanillaTypes.ITEM, TextUtils.getTranslation("jei.info.ham"));
-		registration.addIngredientInfo(new ItemStack(ModItems.FLINT_KNIFE.get()), VanillaTypes.ITEM, TextUtils.getTranslation("jei.info.knife"));
-		registration.addIngredientInfo(new ItemStack(ModItems.IRON_KNIFE.get()), VanillaTypes.ITEM, TextUtils.getTranslation("jei.info.knife"));
-		registration.addIngredientInfo(new ItemStack(ModItems.DIAMOND_KNIFE.get()), VanillaTypes.ITEM, TextUtils.getTranslation("jei.info.knife"));
-		registration.addIngredientInfo(new ItemStack(ModItems.NETHERITE_KNIFE.get()), VanillaTypes.ITEM, TextUtils.getTranslation("jei.info.knife"));
-		registration.addIngredientInfo(new ItemStack(ModItems.GOLDEN_KNIFE.get()), VanillaTypes.ITEM, TextUtils.getTranslation("jei.info.knife"));
+		registration.addIngredientInfo(new ItemStack(ModItems.STRAW.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.straw"));
+		registration.addIngredientInfo(new ItemStack(ModItems.HAM.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.ham"));
+		registration.addIngredientInfo(new ItemStack(ModItems.SMOKED_HAM.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.ham"));
+		registration.addIngredientInfo(new ItemStack(ModItems.FLINT_KNIFE.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.knife"));
+		registration.addIngredientInfo(new ItemStack(ModItems.IRON_KNIFE.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.knife"));
+		registration.addIngredientInfo(new ItemStack(ModItems.DIAMOND_KNIFE.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.knife"));
+		registration.addIngredientInfo(new ItemStack(ModItems.NETHERITE_KNIFE.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.knife"));
+		registration.addIngredientInfo(new ItemStack(ModItems.GOLDEN_KNIFE.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.knife"));
 	}
 
 	@Override
@@ -84,7 +86,7 @@ public class JEIPlugin implements IModPlugin
 
 	@Override
 	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
-		registration.addRecipeTransferHandler(CookingPotContainer.class, FDRecipeTypes.COOKING, 0, 6, 9, 36);
+		registration.addRecipeTransferHandler(CookingPotContainer.class, ModContainerTypes.COOKING_POT.get(), FDRecipeTypes.COOKING, 0, 6, 9, 36);
 	}
 
 	@Override
