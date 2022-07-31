@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/cross",
+  "render_type": "minecraft:cutout",
   "textures": {
     "cross": "farmersdelight:block/rice_panicles_stage0"
   }

@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smoking",
+  "cookingtime": 100,
+  "experience": 0.35,
   "ingredient": {
     "item": "farmersdelight:minced_beef"
   },
-  "result": "farmersdelight:beef_patty",
-  "experience": 0.35,
-  "cookingtime": 100
+  "result": "farmersdelight:beef_patty"
 }

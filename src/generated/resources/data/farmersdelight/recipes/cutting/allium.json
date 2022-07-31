@@ -5,13 +5,13 @@
       "item": "minecraft:allium"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "minecraft:magenta_dye",
-      "count": 2
+      "count": 2,
+      "item": "minecraft:magenta_dye"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

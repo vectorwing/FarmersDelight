@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "forge:ingots/iron"
+    },
+    "/": {
+      "item": "minecraft:brick"
+    }
+  },
   "pattern": [
     " ##",
     " ##",
     "/  "
   ],
-  "key": {
-    "/": {
-      "item": "minecraft:brick"
-    },
-    "#": {
-      "tag": "forge:ingots/iron"
-    }
-  },
   "result": {
     "item": "farmersdelight:skillet"
   }

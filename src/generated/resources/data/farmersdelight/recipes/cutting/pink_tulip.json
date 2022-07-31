@@ -5,13 +5,13 @@
       "item": "minecraft:pink_tulip"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "minecraft:pink_dye",
-      "count": 2
+      "count": 2,
+      "item": "minecraft:pink_dye"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

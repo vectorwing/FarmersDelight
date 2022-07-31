@@ -1,5 +1,7 @@
 {
   "type": "farmersdelight:cooking",
+  "cookingtime": 200,
+  "experience": 0.35,
   "ingredients": [
     {
       "item": "minecraft:carrot"
@@ -16,7 +18,5 @@
   ],
   "result": {
     "item": "farmersdelight:vegetable_soup"
-  },
-  "experience": 0.35,
-  "cookingtime": 200
+  }
 }

@@ -1,5 +1,6 @@
 {
   "credit": "Made with Blockbench",
+  "render_type": "minecraft:cutout",
   "textures": {
     "all": "farmersdelight:block/rope",
     "particle": "farmersdelight:block/rope"

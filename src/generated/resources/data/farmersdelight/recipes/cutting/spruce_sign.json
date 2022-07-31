@@ -5,13 +5,13 @@
       "item": "minecraft:spruce_sign"
     }
   ],
-  "tool": {
-    "type": "farmersdelight:tool_action",
-    "action": "axe_dig"
-  },
   "result": [
     {
       "item": "minecraft:spruce_planks"
     }
-  ]
+  ],
+  "tool": {
+    "type": "farmersdelight:tool_action",
+    "action": "axe_dig"
+  }
 }

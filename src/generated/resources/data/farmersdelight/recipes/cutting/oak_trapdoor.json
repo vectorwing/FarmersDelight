@@ -5,13 +5,13 @@
       "item": "minecraft:oak_trapdoor"
     }
   ],
-  "tool": {
-    "type": "farmersdelight:tool_action",
-    "action": "axe_dig"
-  },
   "result": [
     {
       "item": "minecraft:oak_planks"
     }
-  ]
+  ],
+  "tool": {
+    "type": "farmersdelight:tool_action",
+    "action": "axe_dig"
+  }
 }

@@ -5,9 +5,6 @@
       "item": "farmersdelight:rice_panicle"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
       "item": "farmersdelight:rice"
@@ -15,5 +12,8 @@
     {
       "item": "farmersdelight:straw"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

@@ -5,13 +5,13 @@
       "item": "minecraft:beef"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "farmersdelight:minced_beef",
-      "count": 2
+      "count": 2,
+      "item": "farmersdelight:minced_beef"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

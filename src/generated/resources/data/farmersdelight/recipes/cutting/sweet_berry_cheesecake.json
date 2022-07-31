@@ -5,13 +5,13 @@
       "item": "farmersdelight:sweet_berry_cheesecake"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "farmersdelight:sweet_berry_cheesecake_slice",
-      "count": 4
+      "count": 4,
+      "item": "farmersdelight:sweet_berry_cheesecake_slice"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

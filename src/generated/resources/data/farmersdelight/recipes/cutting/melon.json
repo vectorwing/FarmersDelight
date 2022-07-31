@@ -5,13 +5,13 @@
       "item": "minecraft:melon"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "minecraft:melon_slice",
-      "count": 9
+      "count": 9,
+      "item": "minecraft:melon_slice"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

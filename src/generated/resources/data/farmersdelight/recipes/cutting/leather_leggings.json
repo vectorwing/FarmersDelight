@@ -5,12 +5,12 @@
       "item": "minecraft:leather_leggings"
     }
   ],
-  "tool": {
-    "tag": "forge:shears"
-  },
   "result": [
     {
       "item": "minecraft:leather"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:shears"
+  }
 }

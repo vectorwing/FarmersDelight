@@ -5,17 +5,17 @@
       "item": "farmersdelight:wild_carrots"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
       "item": "minecraft:carrot"
     },
     {
-      "item": "minecraft:light_gray_dye",
+      "chance": 0.5,
       "count": 2,
-      "chance": 0.5
+      "item": "minecraft:light_gray_dye"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

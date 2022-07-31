@@ -1,23 +1,7 @@
 {
   "parent": "farmersdelight:main/craft_knife",
-  "display": {
-    "icon": {
-      "item": "farmersdelight:ham"
-    },
-    "title": {
-      "translate": "farmersdelight.advancement.get_ham"
-    },
-    "description": {
-      "translate": "farmersdelight.advancement.get_ham.desc"
-    },
-    "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": false,
-    "hidden": false
-  },
   "criteria": {
     "ham": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -26,10 +10,10 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "smoked_ham": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -38,7 +22,23 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "farmersdelight.advancement.get_ham.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "farmersdelight:ham"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "farmersdelight.advancement.get_ham"
     }
   },
   "requirements": [

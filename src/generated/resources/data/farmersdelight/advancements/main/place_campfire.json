@@ -1,32 +1,32 @@
 {
   "parent": "farmersdelight:main/root",
+  "criteria": {
+    "campfire": {
+      "conditions": {
+        "block": "minecraft:campfire"
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "soul_campfire": {
+      "conditions": {
+        "block": "minecraft:soul_campfire"
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
   "display": {
-    "icon": {
-      "item": "minecraft:campfire"
-    },
-    "title": {
-      "translate": "farmersdelight.advancement.place_campfire"
-    },
+    "announce_to_chat": true,
     "description": {
       "translate": "farmersdelight.advancement.place_campfire.desc"
     },
     "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
-  "criteria": {
-    "campfire": {
-      "trigger": "minecraft:placed_block",
-      "conditions": {
-        "block": "minecraft:campfire"
-      }
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:campfire"
     },
-    "soul_campfire": {
-      "trigger": "minecraft:placed_block",
-      "conditions": {
-        "block": "minecraft:soul_campfire"
-      }
+    "show_toast": true,
+    "title": {
+      "translate": "farmersdelight.advancement.place_campfire"
     }
   },
   "requirements": [

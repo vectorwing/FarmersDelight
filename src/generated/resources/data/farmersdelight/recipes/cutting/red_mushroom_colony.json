@@ -5,13 +5,13 @@
       "item": "farmersdelight:red_mushroom_colony"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "minecraft:red_mushroom",
-      "count": 5
+      "count": 5,
+      "item": "minecraft:red_mushroom"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

@@ -1,24 +1,24 @@
 {
+  "criteria": {
+    "seeds": {
+      "conditions": {},
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
   "display": {
-    "icon": {
-      "item": "farmersdelight:cooking_pot"
-    },
-    "title": {
-      "translate": "farmersdelight.advancement.root"
-    },
+    "announce_to_chat": false,
+    "background": "minecraft:textures/block/bricks.png",
     "description": {
       "translate": "farmersdelight.advancement.root.desc"
     },
     "frame": "task",
-    "show_toast": false,
-    "announce_to_chat": false,
     "hidden": false,
-    "background": "minecraft:textures/block/bricks.png"
-  },
-  "criteria": {
-    "seeds": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {}
+    "icon": {
+      "item": "farmersdelight:cooking_pot"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "farmersdelight.advancement.root"
     }
   },
   "requirements": [

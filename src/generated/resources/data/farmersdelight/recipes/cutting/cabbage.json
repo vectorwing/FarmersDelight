@@ -5,13 +5,13 @@
       "item": "farmersdelight:cabbage"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "farmersdelight:cabbage_leaf",
-      "count": 2
+      "count": 2,
+      "item": "farmersdelight:cabbage_leaf"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

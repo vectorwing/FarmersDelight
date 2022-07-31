@@ -1,5 +1,7 @@
 {
   "type": "farmersdelight:cooking",
+  "cookingtime": 200,
+  "experience": 0.35,
   "ingredients": [
     {
       "item": "farmersdelight:minced_beef"
@@ -13,7 +15,5 @@
   ],
   "result": {
     "item": "farmersdelight:pasta_with_meatballs"
-  },
-  "experience": 0.35,
-  "cookingtime": 200
+  }
 }

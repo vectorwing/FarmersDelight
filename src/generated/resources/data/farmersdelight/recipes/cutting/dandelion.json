@@ -5,13 +5,13 @@
       "item": "minecraft:dandelion"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "minecraft:yellow_dye",
-      "count": 2
+      "count": 2,
+      "item": "minecraft:yellow_dye"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

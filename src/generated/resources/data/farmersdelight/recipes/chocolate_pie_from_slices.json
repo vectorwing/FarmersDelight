@@ -1,14 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "##",
-    "##"
-  ],
   "key": {
     "#": {
       "item": "farmersdelight:chocolate_pie_slice"
     }
   },
+  "pattern": [
+    "##",
+    "##"
+  ],
   "result": {
     "item": "farmersdelight:chocolate_pie"
   }

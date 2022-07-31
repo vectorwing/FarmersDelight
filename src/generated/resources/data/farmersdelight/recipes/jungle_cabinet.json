@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "D": {
+      "item": "minecraft:jungle_trapdoor"
+    },
+    "_": {
+      "item": "minecraft:jungle_slab"
+    }
+  },
   "pattern": [
     "___",
     "D D",
     "___"
   ],
-  "key": {
-    "_": {
-      "item": "minecraft:jungle_slab"
-    },
-    "D": {
-      "item": "minecraft:jungle_trapdoor"
-    }
-  },
   "result": {
     "item": "farmersdelight:jungle_cabinet"
   }

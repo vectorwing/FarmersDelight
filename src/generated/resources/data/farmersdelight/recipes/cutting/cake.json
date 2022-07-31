@@ -5,13 +5,13 @@
       "item": "minecraft:cake"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "farmersdelight:cake_slice",
-      "count": 7
+      "count": 7,
+      "item": "farmersdelight:cake_slice"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

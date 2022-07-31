@@ -5,10 +5,6 @@
       "item": "minecraft:acacia_log"
     }
   ],
-  "tool": {
-    "type": "farmersdelight:tool_action",
-    "action": "axe_strip"
-  },
   "result": [
     {
       "item": "minecraft:stripped_acacia_log"
@@ -17,5 +13,9 @@
       "item": "farmersdelight:tree_bark"
     }
   ],
-  "sound": "minecraft:item.axe.strip"
+  "sound": "minecraft:item.axe.strip",
+  "tool": {
+    "type": "farmersdelight:tool_action",
+    "action": "axe_strip"
+  }
 }

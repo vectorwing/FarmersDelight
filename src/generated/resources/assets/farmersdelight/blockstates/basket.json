@@ -4,8 +4,10 @@
       "model": "farmersdelight:block/basket",
       "x": 180
     },
-    "facing=up": {
-      "model": "farmersdelight:block/basket"
+    "facing=east": {
+      "model": "farmersdelight:block/basket",
+      "x": 90,
+      "y": 90
     },
     "facing=north": {
       "model": "farmersdelight:block/basket",
@@ -16,15 +18,13 @@
       "x": 90,
       "y": 180
     },
+    "facing=up": {
+      "model": "farmersdelight:block/basket"
+    },
     "facing=west": {
       "model": "farmersdelight:block/basket",
       "x": 90,
       "y": 270
-    },
-    "facing=east": {
-      "model": "farmersdelight:block/basket",
-      "x": 90,
-      "y": 90
     }
   }
 }

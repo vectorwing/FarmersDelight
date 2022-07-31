@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
   "pattern": [
     "/##",
     "/##"
   ],
-  "key": {
-    "/": {
-      "item": "minecraft:stick"
-    },
-    "#": {
-      "tag": "minecraft:planks"
-    }
-  },
   "result": {
     "item": "farmersdelight:cutting_board"
   }

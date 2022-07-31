@@ -5,13 +5,13 @@
       "item": "minecraft:orange_tulip"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "minecraft:orange_dye",
-      "count": 2
+      "count": 2,
+      "item": "minecraft:orange_dye"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

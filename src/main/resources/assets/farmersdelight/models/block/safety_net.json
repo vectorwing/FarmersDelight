@@ -1,5 +1,6 @@
 {
   "credit": "Made with Blockbench",
+  "render_type": "minecraft:cutout",
   "textures": {
     "net": "farmersdelight:block/safety_net",
     "particle": "farmersdelight:block/safety_net"

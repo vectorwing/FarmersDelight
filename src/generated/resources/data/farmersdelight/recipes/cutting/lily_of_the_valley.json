@@ -5,13 +5,13 @@
       "item": "minecraft:lily_of_the_valley"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "minecraft:white_dye",
-      "count": 2
+      "count": 2,
+      "item": "minecraft:white_dye"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

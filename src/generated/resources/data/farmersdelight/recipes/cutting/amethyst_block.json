@@ -5,14 +5,14 @@
       "item": "minecraft:amethyst_block"
     }
   ],
+  "result": [
+    {
+      "count": 4,
+      "item": "minecraft:amethyst_shard"
+    }
+  ],
   "tool": {
     "type": "farmersdelight:tool_action",
     "action": "pickaxe_dig"
-  },
-  "result": [
-    {
-      "item": "minecraft:amethyst_shard",
-      "count": 4
-    }
-  ]
+  }
 }

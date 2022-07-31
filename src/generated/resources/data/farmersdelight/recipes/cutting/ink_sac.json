@@ -5,13 +5,13 @@
       "item": "minecraft:ink_sac"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "minecraft:black_dye",
-      "count": 2
+      "count": 2,
+      "item": "minecraft:black_dye"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

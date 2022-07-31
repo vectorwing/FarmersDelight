@@ -5,16 +5,16 @@
       "item": "minecraft:chicken"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "farmersdelight:chicken_cuts",
-      "count": 2
+      "count": 2,
+      "item": "farmersdelight:chicken_cuts"
     },
     {
       "item": "minecraft:bone_meal"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

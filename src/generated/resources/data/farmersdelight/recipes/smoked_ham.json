@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smoking",
+  "cookingtime": 200,
+  "experience": 0.35,
   "ingredient": {
     "item": "farmersdelight:ham"
   },
-  "result": "farmersdelight:smoked_ham",
-  "experience": 0.35,
-  "cookingtime": 200
+  "result": "farmersdelight:smoked_ham"
 }

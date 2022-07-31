@@ -1,24 +1,24 @@
 {
   "parent": "farmersdelight:main/craft_knife",
+  "criteria": {
+    "cutting_board": {
+      "conditions": {},
+      "trigger": "farmersdelight:use_cutting_board"
+    }
+  },
   "display": {
-    "icon": {
-      "item": "farmersdelight:cutting_board"
-    },
-    "title": {
-      "translate": "farmersdelight.advancement.use_cutting_board"
-    },
+    "announce_to_chat": false,
     "description": {
       "translate": "farmersdelight.advancement.use_cutting_board.desc"
     },
     "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "farmersdelight:cutting_board"
+    },
     "show_toast": true,
-    "announce_to_chat": false,
-    "hidden": false
-  },
-  "criteria": {
-    "cutting_board": {
-      "trigger": "farmersdelight:use_cutting_board",
-      "conditions": {}
+    "title": {
+      "translate": "farmersdelight.advancement.use_cutting_board"
     }
   },
   "requirements": [

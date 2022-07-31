@@ -1,5 +1,7 @@
 {
   "type": "farmersdelight:cooking",
+  "cookingtime": 200,
+  "experience": 0.35,
   "ingredients": [
     {
       "tag": "forge:crops/tomato"
@@ -16,7 +18,5 @@
   ],
   "result": {
     "item": "farmersdelight:ratatouille"
-  },
-  "experience": 0.35,
-  "cookingtime": 200
+  }
 }

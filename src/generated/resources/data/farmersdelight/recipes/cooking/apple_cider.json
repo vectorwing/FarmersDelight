@@ -1,5 +1,7 @@
 {
   "type": "farmersdelight:cooking",
+  "cookingtime": 200,
+  "experience": 0.35,
   "ingredients": [
     {
       "item": "minecraft:apple"
@@ -13,7 +15,5 @@
   ],
   "result": {
     "item": "farmersdelight:apple_cider"
-  },
-  "experience": 0.35,
-  "cookingtime": 200
+  }
 }

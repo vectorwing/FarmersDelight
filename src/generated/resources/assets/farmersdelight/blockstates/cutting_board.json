@@ -1,5 +1,9 @@
 {
   "variants": {
+    "facing=east": {
+      "model": "farmersdelight:block/cutting_board",
+      "y": 90
+    },
     "facing=north": {
       "model": "farmersdelight:block/cutting_board"
     },
@@ -10,10 +14,6 @@
     "facing=west": {
       "model": "farmersdelight:block/cutting_board",
       "y": 270
-    },
-    "facing=east": {
-      "model": "farmersdelight:block/cutting_board",
-      "y": 90
     }
   }
 }

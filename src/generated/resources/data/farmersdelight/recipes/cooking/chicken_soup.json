@@ -1,5 +1,7 @@
 {
   "type": "farmersdelight:cooking",
+  "cookingtime": 200,
+  "experience": 0.35,
   "ingredients": [
     {
       "tag": "forge:raw_chicken"
@@ -16,7 +18,5 @@
   ],
   "result": {
     "item": "farmersdelight:chicken_soup"
-  },
-  "experience": 0.35,
-  "cookingtime": 200
+  }
 }

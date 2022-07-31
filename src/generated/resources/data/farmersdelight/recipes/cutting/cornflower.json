@@ -5,13 +5,13 @@
       "item": "minecraft:cornflower"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "minecraft:blue_dye",
-      "count": 2
+      "count": 2,
+      "item": "minecraft:blue_dye"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

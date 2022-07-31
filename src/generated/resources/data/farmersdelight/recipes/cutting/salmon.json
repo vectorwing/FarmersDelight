@@ -5,16 +5,16 @@
       "item": "minecraft:salmon"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "farmersdelight:salmon_slice",
-      "count": 2
+      "count": 2,
+      "item": "farmersdelight:salmon_slice"
     },
     {
       "item": "minecraft:bone_meal"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

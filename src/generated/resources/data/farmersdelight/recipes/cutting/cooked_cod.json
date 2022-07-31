@@ -5,16 +5,16 @@
       "item": "minecraft:cooked_cod"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "farmersdelight:cooked_cod_slice",
-      "count": 2
+      "count": 2,
+      "item": "farmersdelight:cooked_cod_slice"
     },
     {
       "item": "minecraft:bone_meal"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

@@ -5,13 +5,13 @@
       "item": "minecraft:dark_oak_sign"
     }
   ],
-  "tool": {
-    "type": "farmersdelight:tool_action",
-    "action": "axe_dig"
-  },
   "result": [
     {
       "item": "minecraft:dark_oak_planks"
     }
-  ]
+  ],
+  "tool": {
+    "type": "farmersdelight:tool_action",
+    "action": "axe_dig"
+  }
 }

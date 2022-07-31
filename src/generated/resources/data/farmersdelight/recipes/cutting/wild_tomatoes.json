@@ -5,20 +5,20 @@
       "item": "farmersdelight:wild_tomatoes"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
       "item": "farmersdelight:tomato_seeds"
     },
     {
-      "item": "farmersdelight:tomato",
-      "chance": 0.2
+      "chance": 0.2,
+      "item": "farmersdelight:tomato"
     },
     {
-      "item": "minecraft:green_dye",
-      "chance": 0.1
+      "chance": 0.1,
+      "item": "minecraft:green_dye"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

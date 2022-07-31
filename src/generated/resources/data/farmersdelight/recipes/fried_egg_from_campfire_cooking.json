@@ -1,9 +1,9 @@
 {
   "type": "minecraft:campfire_cooking",
+  "cookingtime": 600,
+  "experience": 0.35,
   "ingredient": {
     "item": "minecraft:egg"
   },
-  "result": "farmersdelight:fried_egg",
-  "experience": 0.35,
-  "cookingtime": 600
+  "result": "farmersdelight:fried_egg"
 }

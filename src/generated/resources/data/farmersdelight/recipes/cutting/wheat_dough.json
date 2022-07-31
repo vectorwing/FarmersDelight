@@ -5,12 +5,12 @@
       "item": "farmersdelight:wheat_dough"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
       "item": "farmersdelight:raw_pasta"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

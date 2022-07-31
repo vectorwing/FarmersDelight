@@ -5,13 +5,13 @@
       "item": "farmersdelight:chocolate_pie"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "farmersdelight:chocolate_pie_slice",
-      "count": 4
+      "count": 4,
+      "item": "farmersdelight:chocolate_pie_slice"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

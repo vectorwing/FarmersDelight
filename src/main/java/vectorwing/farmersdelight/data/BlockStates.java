@@ -201,7 +201,7 @@ public class BlockStates extends BlockStateProvider
 					int ageSuffix = state.getValue(ageProperty);
 					String stageName = blockName(block) + "_stage" + ageSuffix;
 					return ConfiguredModel.builder()
-							.modelFile(models().cross(stageName, resourceBlock(stageName))).build();
+							.modelFile(models().cross(stageName, resourceBlock(stageName)).renderType("cutout")).build();
 				}, ignored);
 	}
 
@@ -214,18 +214,18 @@ public class BlockStates extends BlockStateProvider
 					stageName += suffixes.isEmpty() ? ageSuffix : suffixes.get(Math.min(suffixes.size(), ageSuffix));
 					if (parent == null) {
 						return ConfiguredModel.builder()
-								.modelFile(models().cross(stageName, resourceBlock(stageName))).build();
+								.modelFile(models().cross(stageName, resourceBlock(stageName)).renderType("cutout")).build();
 					}
 					return ConfiguredModel.builder()
-							.modelFile(models().singleTexture(stageName, parent, textureKey, resourceBlock(stageName))).build();
+							.modelFile(models().singleTexture(stageName, parent, textureKey, resourceBlock(stageName)).renderType("cutout")).build();
 				}, ignored);
 	}
 
 	public void wildCropBlock(Block block, boolean isBushCrop) {
 		if (isBushCrop) {
-			this.simpleBlock(block, models().singleTexture(blockName(block), resourceBlock("bush_crop"), "crop", resourceBlock(blockName(block))));
+			this.simpleBlock(block, models().singleTexture(blockName(block), resourceBlock("bush_crop"), "crop", resourceBlock(blockName(block))).renderType("cutout"));
 		} else {
-			this.simpleBlock(block, models().cross(blockName(block), resourceBlock(blockName(block))));
+			this.simpleBlock(block, models().cross(blockName(block), resourceBlock(blockName(block))).renderType("cutout"));
 		}
 	}
 
@@ -265,9 +265,9 @@ public class BlockStates extends BlockStateProvider
 	public void doublePlantBlock(Block block) {
 		getVariantBuilder(block)
 				.partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)
-				.modelForState().modelFile(models().cross(blockName(block) + "_bottom", resourceBlock(blockName(block) + "_bottom"))).addModel()
+				.modelForState().modelFile(models().cross(blockName(block) + "_bottom", resourceBlock(blockName(block) + "_bottom")).renderType("cutout")).addModel()
 				.partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER)
-				.modelForState().modelFile(models().cross(blockName(block) + "_top", resourceBlock(blockName(block) + "_top"))).addModel();
+				.modelForState().modelFile(models().cross(blockName(block) + "_top", resourceBlock(blockName(block) + "_top")).renderType("cutout")).addModel();
 	}
 
 	public void pieBlock(Block block) {

@@ -5,17 +5,17 @@
       "item": "farmersdelight:wild_cabbages"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
       "item": "farmersdelight:cabbage_seeds"
     },
     {
-      "item": "minecraft:yellow_dye",
+      "chance": 0.5,
       "count": 2,
-      "chance": 0.5
+      "item": "minecraft:yellow_dye"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

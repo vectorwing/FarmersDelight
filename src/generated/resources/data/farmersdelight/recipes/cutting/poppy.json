@@ -5,13 +5,13 @@
       "item": "minecraft:poppy"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "minecraft:red_dye",
-      "count": 2
+      "count": 2,
+      "item": "minecraft:red_dye"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

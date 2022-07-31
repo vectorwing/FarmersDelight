@@ -1,9 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "cs",
-    "sc"
-  ],
   "key": {
     "c": {
       "item": "farmersdelight:canvas"
@@ -12,8 +8,12 @@
       "item": "farmersdelight:straw"
     }
   },
+  "pattern": [
+    "cs",
+    "sc"
+  ],
   "result": {
-    "item": "farmersdelight:tatami",
-    "count": 2
+    "count": 2,
+    "item": "farmersdelight:tatami"
   }
 }

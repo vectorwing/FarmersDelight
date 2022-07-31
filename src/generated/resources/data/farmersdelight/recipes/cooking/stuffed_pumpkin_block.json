@@ -1,5 +1,10 @@
 {
   "type": "farmersdelight:cooking",
+  "container": {
+    "item": "minecraft:pumpkin"
+  },
+  "cookingtime": 400,
+  "experience": 0.5,
   "ingredients": [
     {
       "tag": "forge:crops/rice"
@@ -22,10 +27,5 @@
   ],
   "result": {
     "item": "farmersdelight:stuffed_pumpkin_block"
-  },
-  "container": {
-    "item": "minecraft:pumpkin"
-  },
-  "experience": 0.5,
-  "cookingtime": 400
+  }
 }

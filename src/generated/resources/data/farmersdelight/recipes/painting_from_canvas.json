@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "c": {
+      "item": "farmersdelight:canvas"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
   "pattern": [
     "sss",
     "scs",
     "sss"
   ],
-  "key": {
-    "s": {
-      "item": "minecraft:stick"
-    },
-    "c": {
-      "item": "farmersdelight:canvas"
-    }
-  },
   "result": {
     "item": "minecraft:painting"
   }

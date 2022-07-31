@@ -5,16 +5,16 @@
       "item": "farmersdelight:smoked_ham"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "minecraft:cooked_porkchop",
-      "count": 2
+      "count": 2,
+      "item": "minecraft:cooked_porkchop"
     },
     {
       "item": "minecraft:bone"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

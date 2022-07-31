@@ -1,5 +1,7 @@
 {
   "type": "farmersdelight:cooking",
+  "cookingtime": 100,
+  "experience": 0.1,
   "ingredients": [
     {
       "tag": "forge:crops/cabbage"
@@ -10,7 +12,5 @@
   ],
   "result": {
     "item": "farmersdelight:cabbage_rolls"
-  },
-  "experience": 0.1,
-  "cookingtime": 100
+  }
 }

@@ -1,23 +1,7 @@
 {
   "parent": "farmersdelight:main/root",
-  "display": {
-    "icon": {
-      "item": "farmersdelight:wild_onions"
-    },
-    "title": {
-      "translate": "farmersdelight.advancement.get_fd_seed"
-    },
-    "description": {
-      "translate": "farmersdelight.advancement.get_fd_seed.desc"
-    },
-    "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
   "criteria": {
     "cabbage_seeds": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -26,22 +10,10 @@
             ]
           }
         ]
-      }
-    },
-    "tomato_seeds": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "farmersdelight:tomato_seeds"
-            ]
-          }
-        ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "onion": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -50,10 +22,10 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "rice": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -62,7 +34,35 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "tomato_seeds": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "farmersdelight:tomato_seeds"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "farmersdelight.advancement.get_fd_seed.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "farmersdelight:wild_onions"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "farmersdelight.advancement.get_fd_seed"
     }
   },
   "requirements": [

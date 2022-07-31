@@ -5,13 +5,13 @@
       "item": "minecraft:mutton"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "farmersdelight:mutton_chops",
-      "count": 2
+      "count": 2,
+      "item": "farmersdelight:mutton_chops"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

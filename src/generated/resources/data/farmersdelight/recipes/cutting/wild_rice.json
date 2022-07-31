@@ -5,16 +5,16 @@
       "item": "farmersdelight:wild_rice"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
       "item": "farmersdelight:rice"
     },
     {
-      "item": "farmersdelight:straw",
-      "chance": 0.5
+      "chance": 0.5,
+      "item": "farmersdelight:straw"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

@@ -5,17 +5,17 @@
       "item": "farmersdelight:wild_potatoes"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
       "item": "minecraft:potato"
     },
     {
-      "item": "minecraft:purple_dye",
+      "chance": 0.5,
       "count": 2,
-      "chance": 0.5
+      "item": "minecraft:purple_dye"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }
