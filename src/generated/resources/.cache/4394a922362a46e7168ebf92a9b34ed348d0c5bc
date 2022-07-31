@@ -1,4 +1,4 @@
-// 1.19	2022-07-31T02:01:31.6217814	Item Models: farmersdelight
+// 1.19	2022-07-31T02:50:54.1822183	Item Models: farmersdelight
 01e23a47f469a0c2107b2a1b6fc7f7c8f0c23d55 assets/farmersdelight/models/item/acacia_cabinet.json
 a58cc863fafd0f13d1235a2f7344b446f853ae55 assets/farmersdelight/models/item/apple_cider.json
 8348e66b9efe6a92614cca78c3463d3efaea57fa assets/farmersdelight/models/item/apple_pie.json
@@ -72,6 +72,7 @@ cf2a22b63d8daf6cd9b1cdb2a2bd2da6932f7d6f assets/farmersdelight/models/item/horse
 e1c7ade4a3eef3131c8edd4de7484f15888bc6d4 assets/farmersdelight/models/item/light_gray_canvas_sign.json
 68b37c34e22afb1ddd484ab700936d7b0f60002e assets/farmersdelight/models/item/lime_canvas_sign.json
 6c0e75ae202186a85e8b8a5914022b766079b2f8 assets/farmersdelight/models/item/magenta_canvas_sign.json
+8af79d6418e9a0d651c40fda774b7655380d7a03 assets/farmersdelight/models/item/mangrove_cabinet.json
 92496d1709e022d50fd4bd0c57d5839eacff70fe assets/farmersdelight/models/item/melon_juice.json
 c3a381356341fa39957aca63a5f787fa9e7008ef assets/farmersdelight/models/item/melon_popsicle.json
 6ab158c9d3318baaf2ea2fac85ac74a1c15aaff4 assets/farmersdelight/models/item/milk_bottle.json

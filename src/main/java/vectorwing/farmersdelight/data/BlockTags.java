@@ -42,6 +42,7 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.JUNGLE_CABINET.get(),
 				ModBlocks.ACACIA_CABINET.get(),
 				ModBlocks.DARK_OAK_CABINET.get(),
+				ModBlocks.MANGROVE_CABINET.get(),
 				ModBlocks.CRIMSON_CABINET.get(),
 				ModBlocks.WARPED_CABINET.get(),
 				ModBlocks.STUFFED_PUMPKIN_BLOCK.get()

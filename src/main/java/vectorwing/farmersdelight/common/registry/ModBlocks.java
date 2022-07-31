@@ -68,6 +68,8 @@ public class ModBlocks
 			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
 	public static final RegistryObject<Block> DARK_OAK_CABINET = BLOCKS.register("dark_oak_cabinet",
 			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
+	public static final RegistryObject<Block> MANGROVE_CABINET = BLOCKS.register("mangrove_cabinet",
+			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
 	public static final RegistryObject<Block> CRIMSON_CABINET = BLOCKS.register("crimson_cabinet",
 			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
 	public static final RegistryObject<Block> WARPED_CABINET = BLOCKS.register("warped_cabinet",

@@ -4,6 +4,8 @@
 
 ### Additions
 - Added nl_BE translation (thanks, Sv3r!);
+- (1.19) Added Mangrove Cabinet;
+- (1.19) Added a recipe for making Packed Mud with Straw. One unit can pack 2 Mud blocks, being twice as efficient than Wheat;
 
 ### Updates
 - Updated the palette and textures for Ropes and Safety Nets a bit;

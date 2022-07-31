@@ -312,6 +312,14 @@ public class CraftingRecipes
 				.define('D', Items.DARK_OAK_TRAPDOOR)
 				.unlockedBy("has_dark_oak_trapdoor", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DARK_OAK_TRAPDOOR))
 				.save(consumer);
+		ShapedRecipeBuilder.shaped(ModBlocks.MANGROVE_CABINET.get())
+				.pattern("___")
+				.pattern("D D")
+				.pattern("___")
+				.define('_', Items.MANGROVE_SLAB)
+				.define('D', Items.MANGROVE_TRAPDOOR)
+				.unlockedBy("has_mangrove_trapdoor", InventoryChangeTrigger.TriggerInstance.hasItems(Items.MANGROVE_TRAPDOOR))
+				.save(consumer);
 		ShapedRecipeBuilder.shaped(ModBlocks.CRIMSON_CABINET.get())
 				.pattern("___")
 				.pattern("D D")
@@ -425,6 +433,12 @@ public class CraftingRecipes
 				.define('s', ModItems.STRAW.get())
 				.unlockedBy("has_canvas", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CANVAS.get()))
 				.save(consumer);
+		ShapelessRecipeBuilder.shapeless(Items.PACKED_MUD, 2)
+				.requires(ModItems.STRAW.get())
+				.requires(Items.MUD)
+				.requires(Items.MUD)
+				.unlockedBy("has_straw", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.STRAW.get()))
+				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "packed_mud_from_straw"));
 
 		// BREAKING DOWN
 		ShapelessRecipeBuilder.shapeless(ModItems.FULL_TATAMI_MAT.get(), 2)

@@ -62,6 +62,8 @@ public class ModItems
 			() -> new FuelBlockItem(ModBlocks.ACACIA_CABINET.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 300));
 	public static final RegistryObject<Item> DARK_OAK_CABINET = ITEMS.register("dark_oak_cabinet",
 			() -> new FuelBlockItem(ModBlocks.DARK_OAK_CABINET.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 300));
+	public static final RegistryObject<Item> MANGROVE_CABINET = ITEMS.register("mangrove_cabinet",
+			() -> new FuelBlockItem(ModBlocks.MANGROVE_CABINET.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB), 300));
 	public static final RegistryObject<Item> CRIMSON_CABINET = ITEMS.register("crimson_cabinet",
 			() -> new BlockItem(ModBlocks.CRIMSON_CABINET.get(), new Item.Properties().tab(FarmersDelight.CREATIVE_TAB)));
 	public static final RegistryObject<Item> WARPED_CABINET = ITEMS.register("warped_cabinet",
