@@ -7,18 +7,14 @@ import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.*;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeType;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.common.block.entity.container.CookingPotContainer;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModContainerTypes;
 import vectorwing.farmersdelight.common.registry.ModItems;
-import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 import vectorwing.farmersdelight.integration.jei.category.CookingRecipeCategory;
 import vectorwing.farmersdelight.integration.jei.category.CuttingRecipeCategory;
@@ -26,8 +22,6 @@ import vectorwing.farmersdelight.integration.jei.category.DecompositionRecipeCat
 import vectorwing.farmersdelight.integration.jei.resource.DecompositionDummy;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @JeiPlugin
 @ParametersAreNonnullByDefault
@@ -36,16 +30,6 @@ import java.util.stream.Collectors;
 public class JEIPlugin implements IModPlugin
 {
 	private static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "jei_plugin");
-	private static final Minecraft MC = Minecraft.getInstance();
-
-//	private static List<Recipe<?>> findRecipesByType(RecipeType<?> type) {
-//		return MC.level
-//				.getRecipeManager()
-//				.getRecipes()
-//				.stream()
-//				.filter(r -> r.getType() == type)
-//				.collect(Collectors.toList());
-//	}
 
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registry) {

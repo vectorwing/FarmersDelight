@@ -19,11 +19,9 @@ import net.minecraft.world.item.ItemStack;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
-import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 import vectorwing.farmersdelight.integration.jei.FDRecipeTypes;
-import vectorwing.farmersdelight.integration.jei.resource.CuttingBoardDrawable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -31,16 +29,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe>
 {
-	public static final ResourceLocation UID = new ResourceLocation(FarmersDelight.MODID, "cutting");
 	public static final int OUTPUT_GRID_X = 76;
 	public static final int OUTPUT_GRID_Y = 10;
-	public static final int SLOT_SPRITE_SIZE = 18;
 	private final IDrawable slot;
 	private final IDrawable slotChance;
 	private final Component title;
 	private final IDrawable background;
 	private final IDrawable icon;
-	private final CuttingBoardDrawable cuttingBoard;
 
 	public CuttingRecipeCategory(IGuiHelper helper) {
 		title = TextUtils.getTranslation("jei.cutting");
@@ -49,18 +44,7 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 		slotChance = helper.createDrawable(backgroundImage, 18, 58, 18, 18);
 		background = helper.createDrawable(backgroundImage, 0, 0, 117, 57);
 		icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModItems.CUTTING_BOARD.get()));
-		cuttingBoard = new CuttingBoardDrawable(() -> new ItemStack(ModBlocks.CUTTING_BOARD.get()));
 	}
-
-//	@Override
-//	public ResourceLocation getUid() {
-//		return this.getRecipeType().getUid();
-//	}
-//
-//	@Override
-//	public Class<? extends CuttingBoardRecipe> getRecipeClass() {
-//		return this.getRecipeType().getRecipeClass();
-//	}
 
 	@Override
 	public RecipeType<CuttingBoardRecipe> getRecipeType() {
@@ -84,20 +68,20 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, CuttingBoardRecipe recipe, IFocusGroup focusGroup) {
-		builder.addSlot(RecipeIngredientRole.INPUT, 15, 7).addIngredients(recipe.getTool());
-		builder.addSlot(RecipeIngredientRole.INPUT, 15, 26).addIngredients(recipe.getIngredients().get(0));
+		builder.addSlot(RecipeIngredientRole.INPUT, 16, 8).addIngredients(recipe.getTool());
+		builder.addSlot(RecipeIngredientRole.INPUT, 16, 27).addIngredients(recipe.getIngredients().get(0));
 
 		NonNullList<ChanceResult> recipeOutputs = recipe.getRollableResults();
 
 		int size = recipeOutputs.size();
-		int centerX = size > 1 ? 0 : 9;
-		int centerY = size > 2 ? 0 : 9;
+		int centerX = size > 1 ? 1 : 10;
+		int centerY = size > 2 ? 1 : 10;
 
 		for (int i = 0; i < size; i++) {
 			int xOffset = centerX + (i % 2 == 0 ? 0 : 19);
 			int yOffset = centerY + ((i / 2) * 19);
 
-			int index = i - 2;
+			int index = i;
 			builder.addSlot(RecipeIngredientRole.OUTPUT, OUTPUT_GRID_X + xOffset, OUTPUT_GRID_Y + yOffset)
 					.addItemStack(recipeOutputs.get(i).getStack())
 					.addTooltipCallback((slotView, tooltip) -> {

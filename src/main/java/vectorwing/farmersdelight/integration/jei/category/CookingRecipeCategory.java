@@ -30,7 +30,7 @@ import java.util.Arrays;
 @MethodsReturnNonnullByDefault
 public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 {
-//	public static final ResourceLocation UID = new ResourceLocation(FarmersDelight.MODID, "cooking");
+	//	public static final ResourceLocation UID = new ResourceLocation(FarmersDelight.MODID, "cooking");
 	protected final IDrawable heatIndicator;
 	protected final IDrawableAnimated arrow;
 	private final Component title;
@@ -88,60 +88,20 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 			for (int column = 0; column < 3; ++column) {
 				int inputIndex = row * 3 + column;
 				if (inputIndex < recipeIngredients.size()) {
-					builder.addSlot(RecipeIngredientRole.INPUT, column * borderSlotSize, row * borderSlotSize)
+					builder.addSlot(RecipeIngredientRole.INPUT, (column * borderSlotSize) + 1, (row * borderSlotSize) + 1)
 							.addItemStacks(Arrays.asList(recipeIngredients.get(inputIndex).getItems()));
 				}
 			}
 		}
 
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 94, 9).addItemStack(resultStack);
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 95, 10).addItemStack(resultStack);
 
 		if (!containerStack.isEmpty()) {
-			builder.addSlot(RecipeIngredientRole.OUTPUT, 62, 38).addItemStack(containerStack);
+			builder.addSlot(RecipeIngredientRole.OUTPUT, 63, 39).addItemStack(containerStack);
 		}
 
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 94, 38).addItemStack(resultStack);
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 95, 39).addItemStack(resultStack);
 	}
-
-//	@Override
-//	public void setRecipe(IRecipeLayout recipeLayout, CookingPotRecipe recipe, IIngredients ingredients) {
-//		final int MEAL_DISPLAY = 6;
-//		final int CONTAINER_INPUT = 7;
-//		final int OUTPUT = 8;
-//		IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
-//		NonNullList<Ingredient> recipeIngredients = recipe.getIngredients();
-//
-//		int borderSlotSize = 18;
-//		for (int row = 0; row < 2; ++row) {
-//			for (int column = 0; column < 3; ++column) {
-//				int inputIndex = row * 3 + column;
-//				if (inputIndex < recipeIngredients.size()) {
-//					itemStacks.init(inputIndex, true, column * borderSlotSize, row * borderSlotSize);
-//					itemStacks.set(inputIndex, Arrays.asList(recipeIngredients.get(inputIndex).getItems()));
-//				}
-//			}
-//		}
-//
-//		itemStacks.init(MEAL_DISPLAY, false, 94, 9);
-//		itemStacks.set(MEAL_DISPLAY, recipe.getResultItem());
-//
-//		if (!recipe.getOutputContainer().isEmpty()) {
-//			itemStacks.init(CONTAINER_INPUT, false, 62, 38);
-//			itemStacks.set(CONTAINER_INPUT, recipe.getOutputContainer());
-//		}
-//
-//		itemStacks.init(OUTPUT, false, 94, 38);
-//		itemStacks.set(OUTPUT, recipe.getResultItem());
-//	}
-
-//	@Override
-//	public void setIngredients(CookingPotRecipe cookingPotRecipe, IIngredients ingredients) {
-//		List<Ingredient> inputAndContainer = new ArrayList<>(cookingPotRecipe.getIngredients());
-//		inputAndContainer.add(Ingredient.of(cookingPotRecipe.getOutputContainer()));
-//
-//		ingredients.setInputIngredients(inputAndContainer);
-//		ingredients.setOutput(VanillaTypes.ITEM, cookingPotRecipe.getResultItem());
-//	}
 
 	@Override
 	public void draw(CookingPotRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
