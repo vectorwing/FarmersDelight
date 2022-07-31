@@ -149,9 +149,9 @@ public class ModBlocks
 
 	// Composting
 	public static final RegistryObject<Block> BROWN_MUSHROOM_COLONY = BLOCKS.register("brown_mushroom_colony",
-			() -> new MushroomColonyBlock(Block.Properties.copy(Blocks.BROWN_MUSHROOM), Items.BROWN_MUSHROOM.delegate));
+			() -> new MushroomColonyBlock(Block.Properties.copy(Blocks.BROWN_MUSHROOM), () -> Items.BROWN_MUSHROOM));
 	public static final RegistryObject<Block> RED_MUSHROOM_COLONY = BLOCKS.register("red_mushroom_colony",
-			() -> new MushroomColonyBlock(Block.Properties.copy(Blocks.RED_MUSHROOM), Items.RED_MUSHROOM.delegate));
+			() -> new MushroomColonyBlock(Block.Properties.copy(Blocks.RED_MUSHROOM), () -> Items.RED_MUSHROOM));
 	public static final RegistryObject<Block> ORGANIC_COMPOST = BLOCKS.register("organic_compost",
 			() -> new OrganicCompostBlock(Block.Properties.copy(Blocks.DIRT).strength(1.2F).sound(SoundType.CROP)));
 	public static final RegistryObject<Block> RICH_SOIL = BLOCKS.register("rich_soil",
@@ -171,11 +171,11 @@ public class ModBlocks
 	public static final RegistryObject<Block> WILD_CABBAGES = BLOCKS.register("wild_cabbages",
 			() -> new WildCropBlock(MobEffects.DAMAGE_BOOST, 6, Block.Properties.copy(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_ONIONS = BLOCKS.register("wild_onions",
-			() -> new WildCropBlock(MobEffects.FIRE_RESISTANCE, 6, Block.Properties.copy(Blocks.TALL_GRASS), false));
+			() -> new WildCropBlock(MobEffects.FIRE_RESISTANCE, 6, Block.Properties.copy(Blocks.TALL_GRASS).offsetType(BlockBehaviour.OffsetType.NONE)));
 	public static final RegistryObject<Block> WILD_TOMATOES = BLOCKS.register("wild_tomatoes",
 			() -> new WildCropBlock(MobEffects.POISON, 10, Block.Properties.copy(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_CARROTS = BLOCKS.register("wild_carrots",
-			() -> new WildCropBlock(MobEffects.DIG_SLOWDOWN, 6, Block.Properties.copy(Blocks.TALL_GRASS), false));
+			() -> new WildCropBlock(MobEffects.DIG_SLOWDOWN, 6, Block.Properties.copy(Blocks.TALL_GRASS).offsetType(BlockBehaviour.OffsetType.NONE)));
 	public static final RegistryObject<Block> WILD_POTATOES = BLOCKS.register("wild_potatoes",
 			() -> new WildCropBlock(MobEffects.CONFUSION, 8, Block.Properties.copy(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_BEETROOTS = BLOCKS.register("wild_beetroots",
