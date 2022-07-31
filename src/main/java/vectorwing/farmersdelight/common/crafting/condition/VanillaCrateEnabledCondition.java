@@ -21,7 +21,7 @@ public class VanillaCrateEnabledCondition implements ICondition
 	}
 
 	@Override
-	public boolean test() {
+	public boolean test(IContext context) {
 		return Configuration.ENABLE_VANILLA_CROP_CRATES.get();
 	}
 

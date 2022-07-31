@@ -8,6 +8,7 @@ import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.*;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
@@ -45,7 +46,7 @@ public class Advancements extends AdvancementProvider
 	}
 
 	@Override
-	public void run(HashCache cache) {
+	public void run(CachedOutput cache) {
 		Set<ResourceLocation> set = Sets.newHashSet();
 		Consumer<Advancement> consumer = (advancement) -> {
 			if (!set.add(advancement.getId())) {
@@ -54,7 +55,7 @@ public class Advancements extends AdvancementProvider
 				Path path1 = getPath(PATH, advancement);
 
 				try {
-					DataProvider.save((new GsonBuilder()).setPrettyPrinting().create(), cache, advancement.deconstruct().serializeToJson(), path1);
+					DataProvider.saveStable(cache, advancement.deconstruct().serializeToJson(), path1);
 				}
 				catch (IOException ioexception) {
 					LOGGER.error("Couldn't save advancement {}", path1, ioexception);

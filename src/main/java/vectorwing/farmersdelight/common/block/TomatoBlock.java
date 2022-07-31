@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -27,10 +28,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.PlantType;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModSounds;
-
-import java.util.Random;
-
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 @SuppressWarnings("deprecation")
 public class TomatoBlock extends BushBlock implements BonemealableBlock
@@ -124,15 +121,15 @@ public class TomatoBlock extends BushBlock implements BonemealableBlock
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random rand) {
-		super.tick(state, worldIn, pos, rand);
+	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
+		super.tick(state, worldIn, pos, random);
 		if (!worldIn.isAreaLoaded(pos, 1))
 			return;
 		if (worldIn.getRawBrightness(pos, 0) >= 9) {
 			int i = this.getAge(state);
 			if (i < this.getMaxAge()) {
 				float f = getGrowthChance(this, worldIn, pos);
-				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt((int) (25.0F / f) + 1) == 0)) {
+				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt((int) (25.0F / f) + 1) == 0)) {
 					worldIn.setBlock(pos, this.withAge(i + 1), 2);
 					net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 				}
@@ -151,12 +148,12 @@ public class TomatoBlock extends BushBlock implements BonemealableBlock
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level worldIn, RandomSource random, BlockPos pos, BlockState state) {
 		return true;
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel worldIn, RandomSource random, BlockPos pos, BlockState state) {
 		int newAge = this.getAge(state) + this.getBonemealAgeIncrease(worldIn);
 		int maxAge = this.getMaxAge();
 		if (newAge > maxAge) {
@@ -175,11 +172,11 @@ public class TomatoBlock extends BushBlock implements BonemealableBlock
 		} else if (isMature) {
 			int j = 1 + worldIn.random.nextInt(2);
 			popResource(worldIn, pos, new ItemStack(ModItems.TOMATO.get(), j));
-			
+
 			if (worldIn.random.nextFloat() < 0.05) {
 				popResource(worldIn, pos, new ItemStack(ModItems.ROTTEN_TOMATO.get()));
 			}
-			
+
 			worldIn.playSound(null, pos, ModSounds.ITEM_TOMATO_PICK_FROM_BUSH.get(), SoundSource.BLOCKS, 1.0F, 0.8F + worldIn.random.nextFloat() * 0.4F);
 			worldIn.setBlock(pos, state.setValue(AGE, TOMATO_BEARING_AGE - 2), 2);
 			return InteractionResult.SUCCESS;

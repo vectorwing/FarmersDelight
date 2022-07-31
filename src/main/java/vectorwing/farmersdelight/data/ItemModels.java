@@ -143,7 +143,7 @@ public class ItemModels extends ItemModelProvider
 	}
 
 	private String itemName(Item item) {
-		return item.getRegistryName().getPath();
+		return ForgeRegistries.ITEMS.getKey(item).getPath();
 	}
 
 	public ResourceLocation resourceBlock(String path) {

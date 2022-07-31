@@ -8,6 +8,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -22,7 +23,6 @@ import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 public class CuttingBoardRecipe implements Recipe<RecipeWrapper>
@@ -98,7 +98,7 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper>
 		return this.results;
 	}
 
-	public List<ItemStack> rollResults(Random rand, int fortuneLevel) {
+	public List<ItemStack> rollResults(RandomSource rand, int fortuneLevel) {
 		List<ItemStack> results = new ArrayList<>();
 		NonNullList<ChanceResult> rollableResults = getRollableResults();
 		for (ChanceResult output : rollableResults) {

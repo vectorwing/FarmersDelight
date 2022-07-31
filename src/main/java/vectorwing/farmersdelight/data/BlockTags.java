@@ -69,7 +69,7 @@ public class BlockTags extends BlockTagsProvider
 						ModBlocks.ROAST_CHICKEN_BLOCK.get(),
 						ModBlocks.HONEY_GLAZED_HAM_BLOCK.get(),
 						ModBlocks.SHEPHERDS_PIE_BLOCK.get())
-				.addTag(net.minecraft.tags.BlockTags.CARPETS)
+				.addTag(net.minecraft.tags.BlockTags.WOOL_CARPETS)
 				.addTag(net.minecraft.tags.BlockTags.WOOL)
 				.addTag(net.minecraft.tags.BlockTags.CANDLE_CAKES)
 				.addTag(ModTags.STRAW_BLOCKS)
@@ -82,9 +82,6 @@ public class BlockTags extends BlockTagsProvider
 		tag(net.minecraft.tags.BlockTags.MUSHROOM_GROW_BLOCK).add(
 				ModBlocks.ORGANIC_COMPOST.get(),
 				ModBlocks.RICH_SOIL.get());
-		tag(net.minecraft.tags.BlockTags.CARPETS).add(
-				ModBlocks.FULL_TATAMI_MAT.get(),
-				ModBlocks.HALF_TATAMI_MAT.get());
 		tag(net.minecraft.tags.BlockTags.CROPS).add(
 				ModBlocks.CABBAGE_CROP.get(),
 				ModBlocks.ONION_CROP.get(),

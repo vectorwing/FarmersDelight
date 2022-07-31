@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.common.world.feature;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
@@ -14,8 +15,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConf
 import vectorwing.farmersdelight.common.block.WildRiceBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
-import java.util.Random;
-
 public class WildRiceFeature extends Feature<RandomPatchConfiguration>
 {
 	public WildRiceFeature(Codec<RandomPatchConfiguration> configFactoryIn) {
@@ -27,7 +26,7 @@ public class WildRiceFeature extends Feature<RandomPatchConfiguration>
 		WorldGenLevel level = context.level();
 		BlockPos origin = context.origin();
 		RandomPatchConfiguration config = context.config();
-		Random rand = context.random();
+		RandomSource rand = context.random();
 
 		BlockPos blockpos = level.getHeightmapPos(Heightmap.Types.OCEAN_FLOOR_WG, origin);
 

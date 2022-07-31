@@ -15,18 +15,16 @@ public class DataGenerators
 	public static void gatherData(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();
 		ExistingFileHelper helper = event.getExistingFileHelper();
-		if (event.includeServer()) {
-			BlockTags blockTags = new BlockTags(generator, FarmersDelight.MODID, helper);
-			generator.addProvider(blockTags);
-			generator.addProvider(new ItemTags(generator, blockTags, FarmersDelight.MODID, helper));
-			generator.addProvider(new EntityTags(generator, FarmersDelight.MODID, helper));
-			generator.addProvider(new Recipes(generator));
-			generator.addProvider(new Advancements(generator));
-		}
-		if (event.includeClient()) {
-			BlockStates blockStates = new BlockStates(generator, helper);
-			generator.addProvider(blockStates);
-			generator.addProvider(new ItemModels(generator, blockStates.models().existingFileHelper));
-		}
+
+		BlockTags blockTags = new BlockTags(generator, FarmersDelight.MODID, helper);
+		generator.addProvider(event.includeServer(), blockTags);
+		generator.addProvider(event.includeServer(), new ItemTags(generator, blockTags, FarmersDelight.MODID, helper));
+		generator.addProvider(event.includeServer(), new EntityTags(generator, FarmersDelight.MODID, helper));
+		generator.addProvider(event.includeServer(), new Recipes(generator));
+		generator.addProvider(event.includeServer(), new Advancements(generator));
+
+		BlockStates blockStates = new BlockStates(generator, helper);
+		generator.addProvider(event.includeClient(), blockStates);
+		generator.addProvider(event.includeClient(), new ItemModels(generator, blockStates.models().existingFileHelper));
 	}
 }

@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -32,8 +33,6 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
 @SuppressWarnings("deprecation")
 public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlockContainer
 {
@@ -51,23 +50,23 @@ public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlo
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random rand) {
-		super.tick(state, worldIn, pos, rand);
-		if (!worldIn.isAreaLoaded(pos, 1)) return;
-		if (worldIn.getRawBrightness(pos.above(), 0) >= 6) {
+	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+		super.tick(state, level, pos, random);
+		if (!level.isAreaLoaded(pos, 1)) return;
+		if (level.getRawBrightness(pos.above(), 0) >= 6) {
 			int age = this.getAge(state);
 			if (age <= this.getMaxAge()) {
 				float chance = 10;
-				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt((int) (25.0F / chance) + 1) == 0)) {
+				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt((int) (25.0F / chance) + 1) == 0)) {
 					if (age == this.getMaxAge()) {
 						RicePaniclesBlock riceUpper = (RicePaniclesBlock) ModBlocks.RICE_CROP_PANICLES.get();
-						if (riceUpper.defaultBlockState().canSurvive(worldIn, pos.above()) && worldIn.isEmptyBlock(pos.above())) {
-							worldIn.setBlockAndUpdate(pos.above(), riceUpper.defaultBlockState());
-							net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
+						if (riceUpper.defaultBlockState().canSurvive(level, pos.above()) && level.isEmptyBlock(pos.above())) {
+							level.setBlockAndUpdate(pos.above(), riceUpper.defaultBlockState());
+							net.minecraftforge.common.ForgeHooks.onCropsGrowPost(level, pos, state);
 						}
 					} else {
-						worldIn.setBlock(pos, this.withAge(age + 1), 2);
-						net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
+						level.setBlock(pos, this.withAge(age + 1), 2);
+						net.minecraftforge.common.ForgeHooks.onCropsGrowPost(level, pos, state);
 					}
 				}
 			}
@@ -154,7 +153,7 @@ public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlo
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		return true;
 	}
 
@@ -163,7 +162,7 @@ public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlo
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		int ageGrowth = Math.min(this.getAge(state) + this.getBonemealAgeIncrease(worldIn), 7);
 		if (ageGrowth <= this.getMaxAge()) {
 			worldIn.setBlockAndUpdate(pos, state.setValue(AGE, ageGrowth));
