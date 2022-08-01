@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "minecraft:beach",
+  "features": "farmersdelight:patch_wild_beetroots",
+  "step": "vegetal_decoration"
+}

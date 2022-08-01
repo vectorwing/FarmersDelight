@@ -1,0 +1,9 @@
+{
+  "type": "farmersdelight:add_features_by_filter",
+  "allowed_biomes": "#minecraft:is_overworld",
+  "denied_biomes": "#forge:is_underground",
+  "min_temperature": 0.4,
+  "max_temperature": 0.9,
+  "features": "farmersdelight:patch_wild_carrots",
+  "step": "vegetal_decoration"
+}

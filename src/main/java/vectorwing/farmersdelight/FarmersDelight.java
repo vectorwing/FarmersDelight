@@ -52,6 +52,7 @@ public class FarmersDelight
 		ModBlocks.BLOCKS.register(modEventBus);
 		ModEffects.EFFECTS.register(modEventBus);
 		ModBiomeFeatures.FEATURES.register(modEventBus);
+		ModBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(modEventBus);
 		ModSounds.SOUNDS.register(modEventBus);
 		ModBlockEntityTypes.TILES.register(modEventBus);
 		ModContainerTypes.CONTAINER_TYPES.register(modEventBus);

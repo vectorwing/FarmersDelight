@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
-// TODO: Analyze and test this code, to see if the event should be checked all at once, or per-type like before.
-
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID)
 public class MappingEvents
 {

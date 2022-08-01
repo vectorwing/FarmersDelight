@@ -1,5 +1,3 @@
-// TODO: As usual, overlay stuff is broken. Fix it later!
-
 package vectorwing.farmersdelight.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -121,50 +119,4 @@ public class ComfortHealthOverlay
 		RenderSystem.disableBlend();
 		RenderSystem.setShaderTexture(0, GuiComponent.GUI_ICONS_LOCATION);
 	}
-
-//	private static void generateHealthBarOffsets(int top, int left, int right, int ticks, Player player) {
-//		HUD_RANDOM.setSeed((long) (ticks * 312871L));
-//
-//		final int preferHealthBars = 10;
-//		final float maxHealth = player.getMaxHealth();
-//		final float absorptionHealth = (float) Math.ceil(player.getAbsorptionAmount());
-//
-//		if (!Float.isFinite(maxHealth + absorptionHealth)) {
-//			healthBarOffsets.setSize(0);
-//			return;
-//		}
-//
-//		int healthBars = (int) Math.ceil((maxHealth + absorptionHealth) / 2.0F);
-//		int healthRows = (int) Math.ceil((float) healthBars / 10.0F);
-//
-//		int healthRowHeight = Math.max(10 - (healthRows - 2), 3);
-//
-//		boolean shouldAnimatedHealth = false;
-//
-//		if (Configuration.COMFORT_HEALTH_OVERLAY.get()) {
-//			shouldAnimatedHealth = Math.ceil(player.getHealth()) <= 4;
-//		}
-//
-//		if (healthBarOffsets.size() != healthBars)
-//			healthBarOffsets.setSize(healthBars);
-//
-//		for (int i = healthBars - 1; i >= 0; --i) {
-//			int row = (int) Math.ceil((float) (i + 1) / (float) preferHealthBars) - 1;
-//			int x = left + i % preferHealthBars * 8;
-//			int y = top - row * healthRowHeight;
-//			// apply the animated offset
-//			if (shouldAnimatedHealth)
-//				y += HUD_RANDOM.nextInt(2);
-//
-//			// reuse the point object to reduce memory usage
-//			IntPoint point = healthBarOffsets.get(i);
-//			if (point == null) {
-//				point = new IntPoint();
-//				healthBarOffsets.set(i, point);
-//			}
-//
-//			point.x = x - left;
-//			point.y = y - top;
-//		}
-//	}
 }
