@@ -6,7 +6,7 @@ license="MIT License"
 
 [[mods]]
 modId="farmersdelight"
-version="1.19-1.1.2"
+version="1.19-1.1.2-pre"
 displayName="Farmer's Delight"
 # updateJSONURL=""
 displayURL="https://github.com/vectorwing/FarmersDelight"
@@ -28,6 +28,6 @@ configBackground="minecraft:textures/block/bricks.png"
 [[dependencies.farmersdelight]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19]"
+    versionRange="[1.19,1.20)"
     ordering="NONE"
     side="BOTH"

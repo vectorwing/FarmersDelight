@@ -78,6 +78,8 @@ public class BlockTags extends BlockTagsProvider
 	}
 
 	protected void registerMinecraftTags() {
+		tag(net.minecraft.tags.BlockTags.CLIMBABLE).add(
+				ModBlocks.ROPE.get());
 		tag(net.minecraft.tags.BlockTags.BAMBOO_PLANTABLE_ON).add(
 				ModBlocks.RICH_SOIL.get());
 		tag(net.minecraft.tags.BlockTags.MUSHROOM_GROW_BLOCK).add(

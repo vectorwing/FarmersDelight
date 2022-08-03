@@ -17,53 +17,6 @@ import vectorwing.farmersdelight.common.FoodValues;
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CommonEvents
 {
-	// TODO: Translate this code into BiomeModifier datapacks:
-	// - Datagen datapacks for modifiers which work out of the box;
-	// - Create modifiers for your use cases
-
-//	@SubscribeEvent
-//	public static void onBiomeLoad(BiomeLoadingEvent event) {
-//		BiomeGenerationSettingsBuilder builder = event.getGeneration();
-//		Biome.ClimateSettings climate = event.getClimate();
-//
-//		ResourceLocation biomeName = event.getName();
-//		if (biomeName != null && biomeName.getPath().equals("beach")) {
-//			if (Configuration.GENERATE_WILD_BEETROOTS.get()) {
-//				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_BEETROOTS);
-//			}
-//			if (Configuration.GENERATE_WILD_CABBAGES.get()) {
-//				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_CABBAGES);
-//			}
-//		}
-//
-//		if (event.getCategory().equals(Biome.BiomeCategory.SWAMP) || event.getCategory().equals(Biome.BiomeCategory.JUNGLE)) {
-//			if (Configuration.GENERATE_WILD_RICE.get()) {
-//				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_RICE);
-//			}
-//		}
-//
-//		if (climate.temperature >= 1.0F) {
-//			if (Configuration.GENERATE_WILD_TOMATOES.get()) {
-//				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_TOMATOES);
-//			}
-//		}
-//
-//		if (climate.temperature > 0.3F && climate.temperature < 1.0F) {
-//			if (Configuration.GENERATE_WILD_CARROTS.get()) {
-//				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_CARROTS);
-//			}
-//			if (Configuration.GENERATE_WILD_ONIONS.get()) {
-//				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_ONIONS);
-//			}
-//		}
-//
-//		if (climate.temperature > 0.0F && climate.temperature <= 0.3F) {
-//			if (Configuration.GENERATE_WILD_POTATOES.get()) {
-//				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_POTATOES);
-//			}
-//		}
-//	}
-
 	@SubscribeEvent
 	public static void handleVanillaSoupEffects(LivingEntityUseItemEvent.Finish event) {
 		Item food = event.getItem().getItem();
