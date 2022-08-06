@@ -9,7 +9,7 @@
       "item": "farmersdelight:canvas"
     },
     "s": {
-      "item": "farmersdelight:straw"
+      "tag": "forge:straw"
     }
   },
   "result": {
