@@ -25,6 +25,9 @@
 - All cooking recipes have received a bump in their experience reward, since the old ratios were very pitiful;
 - Skillet damage has been slightly buffed;
 
+## Fixes
+- Fix Wild Crops being able to generate on non-Overworld biomes under the right conditions (such as valid dirt blocks in the Nether or End);
+
 ## 1.1.2
 
 ### Additions
