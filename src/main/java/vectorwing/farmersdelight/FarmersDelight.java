@@ -59,6 +59,7 @@ public class FarmersDelight
 		ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
 		ModRecipeTypes.RECIPE_TYPES.register(modEventBus);
 		ModEntityTypes.ENTITIES.register(modEventBus);
+		ModPlacementModifiers.PLACEMENT_MODIFIERS.register(modEventBus);
 
 		MinecraftForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
 

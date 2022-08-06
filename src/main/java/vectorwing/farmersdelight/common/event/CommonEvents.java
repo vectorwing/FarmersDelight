@@ -29,6 +29,7 @@ public class CommonEvents
 		Biome.ClimateSettings climate = event.getClimate();
 
 		ResourceLocation biomeName = event.getName();
+
 		if (biomeName != null && biomeName.getPath().equals("beach")) {
 			if (Configuration.GENERATE_WILD_BEETROOTS.get()) {
 				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_BEETROOTS);
