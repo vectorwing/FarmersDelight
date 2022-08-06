@@ -153,6 +153,8 @@ public class ModItems
 	public static final RegistryObject<Item> TREE_BARK = ITEMS.register("tree_bark", () -> new FuelItem(basicItem(), 200));
 
 	// Wild Crops
+	public static final RegistryObject<Item> SANDY_SHRUB = ITEMS.register("sandy_shrub",
+			() -> new BlockItem(ModBlocks.SANDY_SHRUB.get(), basicItem()));
 	public static final RegistryObject<Item> WILD_CABBAGES = ITEMS.register("wild_cabbages",
 			() -> new BlockItem(ModBlocks.WILD_CABBAGES.get(), basicItem()));
 	public static final RegistryObject<Item> WILD_ONIONS = ITEMS.register("wild_onions",

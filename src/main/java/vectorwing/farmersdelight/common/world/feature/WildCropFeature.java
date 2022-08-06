@@ -41,7 +41,7 @@ public class WildCropFeature extends Feature<WildCropConfiguration>
 		}
 
 		for (int j = 0; j < 64; ++j) {
-			int xzSpread = 5;
+			int xzSpread = 4;
 			int ySpread = 4;
 			mutablePos.setWithOffset(origin, random.nextInt(xzSpread) - random.nextInt(xzSpread), random.nextInt(ySpread) - random.nextInt(ySpread), random.nextInt(xzSpread) - random.nextInt(xzSpread));
 			if (config.primaryFeature().value().place(level, context.chunkGenerator(), random, mutablePos)) {
