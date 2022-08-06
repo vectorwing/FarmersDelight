@@ -13,6 +13,7 @@ import vectorwing.farmersdelight.common.registry.ModContainerTypes;
 public class ClientSetup
 {
 	public static void init(final FMLClientSetupEvent event) {
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.SANDY_SHRUB.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILD_CABBAGES.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILD_ONIONS.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILD_TOMATOES.get(), RenderType.cutout());

@@ -168,10 +168,13 @@ public class ModBlocks
 			() -> new PieBlock(Block.Properties.copy(Blocks.CAKE), ModItems.CHOCOLATE_PIE_SLICE));
 
 	// Wild Crops
+	public static final RegistryObject<Block> SANDY_SHRUB = BLOCKS.register("sandy_shrub",
+			() -> new SandyShrubBlock(Block.Properties.copy(Blocks.TALL_GRASS)));
+
 	public static final RegistryObject<Block> WILD_CABBAGES = BLOCKS.register("wild_cabbages",
 			() -> new WildCropBlock(MobEffects.DAMAGE_BOOST, 6, Block.Properties.copy(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_ONIONS = BLOCKS.register("wild_onions",
-			() -> new WildCropBlock(MobEffects.FIRE_RESISTANCE, 6, Block.Properties.copy(Blocks.TALL_GRASS), false));
+			() -> new WildCropBlock(MobEffects.FIRE_RESISTANCE, 6, Block.Properties.copy(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_TOMATOES = BLOCKS.register("wild_tomatoes",
 			() -> new WildCropBlock(MobEffects.POISON, 10, Block.Properties.copy(Blocks.TALL_GRASS)));
 	public static final RegistryObject<Block> WILD_CARROTS = BLOCKS.register("wild_carrots",
