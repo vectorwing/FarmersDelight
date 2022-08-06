@@ -98,6 +98,7 @@ public class ItemModels extends ItemModelProvider
 		// Blocks with flat block textures for their items
 		Set<Item> flatBlockItems = Sets.newHashSet(
 				ModItems.SAFETY_NET.get(),
+				ModItems.SANDY_SHRUB.get(),
 				ModItems.WILD_BEETROOTS.get(),
 				ModItems.WILD_CABBAGES.get(),
 				ModItems.WILD_CARROTS.get(),

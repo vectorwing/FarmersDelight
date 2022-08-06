@@ -161,12 +161,13 @@ public class BlockStates extends BlockStateProvider
 		this.feastBlock((FeastBlock) ModBlocks.SHEPHERDS_PIE_BLOCK.get());
 		this.feastBlock((FeastBlock) ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get());
 
+		this.wildCropBlock(ModBlocks.SANDY_SHRUB.get(), false);
 		this.wildCropBlock(ModBlocks.WILD_BEETROOTS.get(), false);
 		this.wildCropBlock(ModBlocks.WILD_CABBAGES.get(), false);
 		this.wildCropBlock(ModBlocks.WILD_POTATOES.get(), false);
 		this.wildCropBlock(ModBlocks.WILD_TOMATOES.get(), false);
 		this.wildCropBlock(ModBlocks.WILD_CARROTS.get(), false);
-		this.wildCropBlock(ModBlocks.WILD_ONIONS.get(), true);
+		this.wildCropBlock(ModBlocks.WILD_ONIONS.get(), false);
 		this.doublePlantBlock(ModBlocks.WILD_RICE.get());
 	}
 
