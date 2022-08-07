@@ -8,7 +8,9 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -19,16 +21,9 @@ import java.util.Random;
 public class WildCropBlock extends FlowerBlock implements BonemealableBlock
 {
 	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
-	private final boolean renderOffset;
 
 	public WildCropBlock(MobEffect suspiciousStewEffect, int effectDuration, Properties properties) {
 		super(suspiciousStewEffect, effectDuration, properties);
-		this.renderOffset = true;
-	}
-
-	public WildCropBlock(MobEffect suspiciousStewEffect, int effectDuration, Properties properties, boolean hasOffset) {
-		super(suspiciousStewEffect, effectDuration, properties);
-		this.renderOffset = hasOffset;
 	}
 
 	@Override
@@ -39,11 +34,6 @@ public class WildCropBlock extends FlowerBlock implements BonemealableBlock
 	@Override
 	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
 		return state.is(BlockTags.DIRT) || state.is(BlockTags.SAND);
-	}
-
-	@Override
-	public Block.OffsetType getOffsetType() {
-		return renderOffset ? OffsetType.XZ : OffsetType.NONE;
 	}
 
 	@Override

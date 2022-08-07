@@ -20,6 +20,7 @@
   - Wild Carrots, being weeds, will strangle some grass out, creating small patches of Coarse Dirt;
   - Wild Potatoes now scatter individual Alliums around them, making a more natural bush;
   - Tomato Vines and Wild Potatoes now grow amidst a bush of local foliage;
+  - Wild Cabbage and Sea Beet now grow amidst a patch of Sandy Shrub, a new beach plant;
 - Updated a few recipes:
   - Barbecue on a Stick is now made from any cooked meat! Have your barbecue your way;
 - All cooking recipes have received a bump in their experience reward, since the old ratios were very pitiful;
