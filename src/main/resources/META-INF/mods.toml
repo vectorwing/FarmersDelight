@@ -21,7 +21,7 @@ configBackground="minecraft:textures/block/bricks.png"
 [[dependencies.farmersdelight]]
     modId="forge"
     mandatory=true
-    versionRange="[40.1.41,)"
+    versionRange="[40.1.46,)"
     ordering="NONE"
     side="BOTH"
 
