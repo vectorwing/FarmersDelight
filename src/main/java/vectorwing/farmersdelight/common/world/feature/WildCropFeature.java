@@ -25,14 +25,15 @@ public class WildCropFeature extends Feature<WildCropConfiguration>
 		Random random = context.random();
 
 		int i = 0;
+		int tries = config.tries();
+		int xzSpread = config.xzSpread() + 1;
+		int ySpread = config.ySpread() + 1;
 
 		BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
 
 		Holder<PlacedFeature> floorFeature = config.floorFeature();
 		if (floorFeature != null) {
-			for (int k = 0; k < 64; ++k) {
-				int xzSpread = 5;
-				int ySpread = 4;
+			for (int j = 0; j < tries; ++j) {
 				mutablePos.setWithOffset(origin, random.nextInt(xzSpread) - random.nextInt(xzSpread), random.nextInt(ySpread) - random.nextInt(ySpread), random.nextInt(xzSpread) - random.nextInt(xzSpread));
 				if (config.floorFeature().value().place(level, context.chunkGenerator(), random, mutablePos)) {
 					++i;
@@ -40,18 +41,15 @@ public class WildCropFeature extends Feature<WildCropConfiguration>
 			}
 		}
 
-		for (int j = 0; j < 64; ++j) {
-			int xzSpread = 4;
-			int ySpread = 4;
-			mutablePos.setWithOffset(origin, random.nextInt(xzSpread) - random.nextInt(xzSpread), random.nextInt(ySpread) - random.nextInt(ySpread), random.nextInt(xzSpread) - random.nextInt(xzSpread));
+		for (int k = 0; k < tries; ++k) {
+			int shorterXZ = xzSpread - 1;
+			mutablePos.setWithOffset(origin, random.nextInt(shorterXZ) - random.nextInt(shorterXZ), random.nextInt(ySpread) - random.nextInt(ySpread), random.nextInt(shorterXZ) - random.nextInt(shorterXZ));
 			if (config.primaryFeature().value().place(level, context.chunkGenerator(), random, mutablePos)) {
 				++i;
 			}
 		}
 
-		for (int k = 0; k < 64; ++k) {
-			int xzSpread = 5;
-			int ySpread = 4;
+		for (int l = 0; l < tries; ++l) {
 			mutablePos.setWithOffset(origin, random.nextInt(xzSpread) - random.nextInt(xzSpread), random.nextInt(ySpread) - random.nextInt(ySpread), random.nextInt(xzSpread) - random.nextInt(xzSpread));
 			if (config.secondaryFeature().value().place(level, context.chunkGenerator(), random, mutablePos)) {
 				++i;
