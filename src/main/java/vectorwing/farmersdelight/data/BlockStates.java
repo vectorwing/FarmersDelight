@@ -161,13 +161,13 @@ public class BlockStates extends BlockStateProvider
 		this.feastBlock((FeastBlock) ModBlocks.SHEPHERDS_PIE_BLOCK.get());
 		this.feastBlock((FeastBlock) ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get());
 
-		this.wildCropBlock(ModBlocks.SANDY_SHRUB.get(), false);
-		this.wildCropBlock(ModBlocks.WILD_BEETROOTS.get(), false);
-		this.wildCropBlock(ModBlocks.WILD_CABBAGES.get(), false);
-		this.wildCropBlock(ModBlocks.WILD_POTATOES.get(), false);
-		this.wildCropBlock(ModBlocks.WILD_TOMATOES.get(), false);
-		this.wildCropBlock(ModBlocks.WILD_CARROTS.get(), false);
-		this.wildCropBlock(ModBlocks.WILD_ONIONS.get(), false);
+		this.wildCropBlock(ModBlocks.SANDY_SHRUB.get());
+		this.wildCropBlock(ModBlocks.WILD_BEETROOTS.get());
+		this.wildCropBlock(ModBlocks.WILD_CABBAGES.get());
+		this.wildCropBlock(ModBlocks.WILD_POTATOES.get());
+		this.wildCropBlock(ModBlocks.WILD_TOMATOES.get());
+		this.wildCropBlock(ModBlocks.WILD_CARROTS.get());
+		this.wildCropBlock(ModBlocks.WILD_ONIONS.get());
 		this.doublePlantBlock(ModBlocks.WILD_RICE.get());
 	}
 
@@ -220,6 +220,10 @@ public class BlockStates extends BlockStateProvider
 					return ConfiguredModel.builder()
 							.modelFile(models().singleTexture(stageName, parent, textureKey, resourceBlock(stageName))).build();
 				}, ignored);
+	}
+
+	public void wildCropBlock(Block block) {
+		this.wildCropBlock(block, false);
 	}
 
 	public void wildCropBlock(Block block, boolean isBushCrop) {
