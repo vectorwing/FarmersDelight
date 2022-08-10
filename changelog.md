@@ -6,7 +6,7 @@
 - New foods:
   - Salmon Roll, Cod Roll and Kelp Roll - A new way to enjoy your fishing spoils, if you're equipped with watery crops;
     - A full Kelp Roll is quite awkward to eat, so it takes a while. But if you cut it on a Cutting Board, you get bite-sized snacks to eat quickly;
-  - Bone Broth - Spelunking? In a pinch? Bring a Cooking Pot with you, and you'll be able to make a decent broth out of bone and cave vegetation!;
+  - Bone Broth - Spelunking? In a pinch? Bring a Cooking Pot with you, and you'll be able to make a decent broth out of bone and cave vegetation;
   - Mushroom Rice - A nourishing counterpart to Mushroom Stew, and a good sink for your mushroom colony farms;
 - New blocks:
   - **Sandy Shrub** - A short plant which invades the beach coast, alongside Wild Cabbage and Sea Beet!
@@ -24,6 +24,7 @@
   - Tomato Vines and Wild Potatoes now grow amidst a bush of local foliage;
   - Wild Cabbage and Sea Beet now grow amidst a patch of Sandy Shrub, a new beach plant;
 - Updated a few recipes:
+  - Knives are now crafted in a **vertical** arrangement instead of diagonal. This was done to reduce recipe conflicts with other mods;
   - Barbecue on a Stick is now made from any cooked meat! Have your barbecue your way;
 - All cooking recipes have received a bump in their experience reward, since the old ratios were very pitiful;
 - Skillet damage has been slightly buffed;
