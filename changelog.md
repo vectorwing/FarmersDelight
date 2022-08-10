@@ -9,11 +9,14 @@
   - Bone Broth - Spelunking? In a pinch? Bring a Cooking Pot with you, and you'll be able to make a decent broth out of bone and cave vegetation!;
   - Mushroom Rice - A nourishing counterpart to Mushroom Stew, and a good sink for your mushroom colony farms;
 - New blocks:
-  - Sandy Shrub - A short plant which invades the beach coast, alongside Wild Cabbage and Sea Beet. Bone meal it to make more of it;
+  - Sandy Shrub - A short plant which invades the beach coast, alongside Wild Cabbage and Sea Beet!
+    - You can bone meal the shrub to make it spread across nearby sand;
+    - This shrub is slightly more likely to give Straw than Grass, when broken with a Knife;
 - New feast: **Rice Roll Medley!**
   - Display your knife skills with a selection of salmon, cod and kelp rolls!
   - Unlike other feasts, this gives individual rolls instead of meals. No, you can't put them back after taking one, it's bad manners!;
 - New tag: `forge:dough`. Used to add modded dough items to FD's recipes, and populated by Wheat Dough by default;
+  - Recipes in FD now use this tag for ingredients, allowing mods to use it;
 
 ## Updates
 - Wild Crops have received some visual upgrades, both in art and in world generation!
@@ -25,6 +28,8 @@
   - Barbecue on a Stick is now made from any cooked meat! Have your barbecue your way;
 - All cooking recipes have received a bump in their experience reward, since the old ratios were very pitiful;
 - Skillet damage has been slightly buffed;
+- Updated translations:
+  - ca_ES (thanks, VerdaPegasus!);
 
 ## Fixes
 - Fix Wild Crops being able to generate on non-Overworld biomes under the right conditions (such as valid dirt blocks in the Nether or End);
