@@ -5,6 +5,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 import vectorwing.farmersdelight.data.builder.CookingPotRecipeBuilder;
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -119,6 +121,8 @@ public class CookingRecipes
 						new Ingredient.ItemValue(new ItemStack(Items.HANGING_ROOTS)),
 						new Ingredient.ItemValue(new ItemStack(Items.GLOW_LICHEN))
 				)))
+				.unlockedByItems("has_bone", Items.BONE)
+				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
 				.build(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.CABBAGE_ROLLS.get(), 1, FAST_COOKING, SMALL_EXP)
 				.addIngredient(ForgeTags.CROPS_CABBAGE)
@@ -172,6 +176,8 @@ public class CookingRecipes
 				.addIngredient(Items.RED_MUSHROOM)
 				.addIngredient(ForgeTags.CROPS_RICE)
 				.addIngredient(Ingredient.of(Items.CARROT, Items.POTATO))
+				.unlockedByItems("has_rice", ModItems.RICE.get())
+				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
 				.build(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.NOODLE_SOUP.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(ForgeTags.PASTA)
