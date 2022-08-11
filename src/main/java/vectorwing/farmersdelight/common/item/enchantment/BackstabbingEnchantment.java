@@ -20,8 +20,8 @@ import vectorwing.farmersdelight.common.registry.ModEnchantments;
 
 public class BackstabbingEnchantment extends Enchantment
 {
-	public BackstabbingEnchantment(Rarity rarityIn, EnchantmentCategory typeIn, EquipmentSlot... slots) {
-		super(rarityIn, typeIn, slots);
+	public BackstabbingEnchantment(Rarity rarity, EnchantmentCategory category, EquipmentSlot... applicableSlots) {
+		super(rarity, category, applicableSlots);
 	}
 
 	@Override

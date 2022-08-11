@@ -48,15 +48,15 @@ public class ConsumableItem extends Item
 	}
 
 	@Override
-	public ItemStack finishUsingItem(ItemStack stack, Level worldIn, LivingEntity consumer) {
-		if (!worldIn.isClientSide) {
-			this.affectConsumer(stack, worldIn, consumer);
+	public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity consumer) {
+		if (!level.isClientSide) {
+			this.affectConsumer(stack, level, consumer);
 		}
 
 		ItemStack containerStack = stack.getContainerItem();
 
 		if (stack.isEdible()) {
-			super.finishUsingItem(stack, worldIn, consumer);
+			super.finishUsingItem(stack, level, consumer);
 		} else {
 			Player player = consumer instanceof Player ? (Player) consumer : null;
 			if (player instanceof ServerPlayer) {
@@ -85,12 +85,12 @@ public class ConsumableItem extends Item
 	/**
 	 * Override this to apply changes to the consumer (e.g. curing effects).
 	 */
-	public void affectConsumer(ItemStack stack, Level worldIn, LivingEntity consumer) {
+	public void affectConsumer(ItemStack stack, Level level, LivingEntity consumer) {
 	}
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag isAdvanced) {
 		if (Configuration.FOOD_EFFECT_TOOLTIP.get()) {
 			if (this.hasCustomTooltip) {
 				MutableComponent textEmpty = TextUtils.getTranslation("tooltip." + this);

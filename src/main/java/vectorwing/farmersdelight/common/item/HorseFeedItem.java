@@ -55,12 +55,12 @@ public class HorseFeedItem extends Item
 		public static void onHorseFeedApplied(PlayerInteractEvent.EntityInteract event) {
 			Player player = event.getPlayer();
 			Entity target = event.getTarget();
-			ItemStack itemStack = event.getItemStack();
+			ItemStack heldStack = event.getItemStack();
 
 			if (target instanceof LivingEntity entity && target.getType().is(ModTags.HORSE_FEED_USERS)) {
 				boolean isTameable = entity instanceof AbstractHorse;
 
-				if (entity.isAlive() && (!isTameable || ((AbstractHorse) entity).isTamed()) && itemStack.getItem().equals(ModItems.HORSE_FEED.get())) {
+				if (entity.isAlive() && (!isTameable || ((AbstractHorse) entity).isTamed()) && heldStack.getItem().equals(ModItems.HORSE_FEED.get())) {
 					entity.setHealth(entity.getMaxHealth());
 					for (MobEffectInstance effect : EFFECTS) {
 						entity.addEffect(new MobEffectInstance(effect));
@@ -75,7 +75,7 @@ public class HorseFeedItem extends Item
 					}
 
 					if (!player.isCreative()) {
-						itemStack.shrink(1);
+						heldStack.shrink(1);
 					}
 
 					event.setCancellationResult(InteractionResult.SUCCESS);
@@ -86,7 +86,7 @@ public class HorseFeedItem extends Item
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag isAdvanced) {
 		if (!Configuration.FOOD_EFFECT_TOOLTIP.get()) {
 			return;
 		}
