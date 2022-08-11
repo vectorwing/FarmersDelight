@@ -34,7 +34,7 @@ public class RopeBlock extends IronBarsBlock
 	}
 
 	@Override
-	public boolean isPathfindable(BlockState state, BlockGetter worldIn, BlockPos pos, PathComputationType type) {
+	public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
 		return true;
 	}
 
@@ -47,15 +47,15 @@ public class RopeBlock extends IronBarsBlock
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-		if (player.getItemInHand(handIn).isEmpty()) {
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		if (player.getItemInHand(hand).isEmpty()) {
 			BlockPos.MutableBlockPos blockpos$mutable = pos.mutable().move(Direction.UP);
 
 			for (int i = 0; i < 24; i++) {
-				BlockState blockStateAbove = worldIn.getBlockState(blockpos$mutable);
+				BlockState blockStateAbove = level.getBlockState(blockpos$mutable);
 				Block blockAbove = blockStateAbove.getBlock();
 				if (blockAbove == Blocks.BELL) {
-					((BellBlock) blockAbove).attemptToRing(worldIn, blockpos$mutable, blockStateAbove.getValue(BellBlock.FACING).getClockWise());
+					((BellBlock) blockAbove).attemptToRing(level, blockpos$mutable, blockStateAbove.getValue(BellBlock.FACING).getClockWise());
 					return InteractionResult.SUCCESS;
 				} else if (blockAbove == ModBlocks.ROPE.get()) {
 					blockpos$mutable.move(Direction.UP);
@@ -69,7 +69,7 @@ public class RopeBlock extends IronBarsBlock
 	}
 
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+	public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return Shapes.empty();
 	}
 
@@ -79,19 +79,19 @@ public class RopeBlock extends IronBarsBlock
 	}
 
 	@Override
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
 		if (stateIn.getValue(WATERLOGGED)) {
-			worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+			level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
 
 		boolean tiedToBell = stateIn.getValue(TIED_TO_BELL);
 		if (facing == Direction.UP) {
-			tiedToBell = worldIn.getBlockState(facingPos).getBlock() == Blocks.BELL;
+			tiedToBell = level.getBlockState(facingPos).getBlock() == Blocks.BELL;
 		}
 
 		return facing.getAxis().isHorizontal()
-				? stateIn.setValue(TIED_TO_BELL, tiedToBell).setValue(PROPERTY_BY_DIRECTION.get(facing), this.attachsTo(facingState, facingState.isFaceSturdy(worldIn, facingPos, facing.getOpposite())))
-				: super.updateShape(stateIn.setValue(TIED_TO_BELL, tiedToBell), facing, facingState, worldIn, currentPos, facingPos);
+				? stateIn.setValue(TIED_TO_BELL, tiedToBell).setValue(PROPERTY_BY_DIRECTION.get(facing), this.attachsTo(facingState, facingState.isFaceSturdy(level, facingPos, facing.getOpposite())))
+				: super.updateShape(stateIn.setValue(TIED_TO_BELL, tiedToBell), facing, facingState, level, currentPos, facingPos);
 	}
 
 	@Override

@@ -115,7 +115,7 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper>
 	}
 
 	@Override
-	public boolean matches(RecipeWrapper inv, Level worldIn) {
+	public boolean matches(RecipeWrapper inv, Level level) {
 		if (inv.isEmpty())
 			return false;
 		return input.test(inv.getItem(0));

@@ -62,12 +62,12 @@ public class SkilletBlock extends BaseEntityBlock
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		BlockEntity tileEntity = level.getBlockEntity(pos);
 		if (tileEntity instanceof SkilletBlockEntity skilletEntity) {
-			if (!worldIn.isClientSide) {
-				ItemStack heldStack = player.getItemInHand(handIn);
-				EquipmentSlot heldSlot = handIn.equals(InteractionHand.MAIN_HAND) ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
+			if (!level.isClientSide) {
+				ItemStack heldStack = player.getItemInHand(hand);
+				EquipmentSlot heldSlot = hand.equals(InteractionHand.MAIN_HAND) ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
 				if (heldStack.isEmpty()) {
 					ItemStack extractedStack = skilletEntity.removeItem();
 					if (!player.isCreative()) {
@@ -80,7 +80,7 @@ public class SkilletBlock extends BaseEntityBlock
 						if (!player.isCreative()) {
 							player.setItemSlot(heldSlot, remainderStack);
 						}
-						worldIn.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundSource.BLOCKS, 0.7F, 1.0F);
+						level.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundSource.BLOCKS, 0.7F, 1.0F);
 						return InteractionResult.SUCCESS;
 					}
 				}
@@ -96,24 +96,24 @@ public class SkilletBlock extends BaseEntityBlock
 	}
 
 	@Override
-	public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
-			BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+			BlockEntity tileEntity = level.getBlockEntity(pos);
 			if (tileEntity instanceof SkilletBlockEntity) {
-				Containers.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), ((SkilletBlockEntity) tileEntity).getInventory().getStackInSlot(0));
+				Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), ((SkilletBlockEntity) tileEntity).getInventory().getStackInSlot(0));
 			}
 
-			super.onRemove(state, worldIn, pos, newState, isMoving);
+			super.onRemove(state, level, pos, newState, isMoving);
 		}
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return SHAPE;
 	}
 
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+	public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return state.getValue(SUPPORT).equals(true) ? SHAPE_WITH_TRAY : SHAPE;
 	}
 
@@ -133,9 +133,9 @@ public class SkilletBlock extends BaseEntityBlock
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(BlockGetter worldIn, BlockPos pos, BlockState state) {
-		ItemStack stack = super.getCloneItemStack(worldIn, pos, state);
-		SkilletBlockEntity skilletEntity = (SkilletBlockEntity) worldIn.getBlockEntity(pos);
+	public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
+		ItemStack stack = super.getCloneItemStack(level, pos, state);
+		SkilletBlockEntity skilletEntity = (SkilletBlockEntity) level.getBlockEntity(pos);
 		CompoundTag nbt = new CompoundTag();
 		if (skilletEntity != null) {
 			skilletEntity.writeSkilletItem(nbt);
@@ -153,15 +153,15 @@ public class SkilletBlock extends BaseEntityBlock
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
-		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+	public void animateTick(BlockState stateIn, Level level, BlockPos pos, Random rand) {
+		BlockEntity tileEntity = level.getBlockEntity(pos);
 		if (tileEntity instanceof SkilletBlockEntity skilletEntity) {
 			if (skilletEntity.isCooking()) {
 				double x = (double) pos.getX() + 0.5D;
 				double y = pos.getY();
 				double z = (double) pos.getZ() + 0.5D;
 				if (rand.nextInt(10) == 0) {
-					worldIn.playLocalSound(x, y, z, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.BLOCKS, 0.4F, rand.nextFloat() * 0.2F + 0.9F, false);
+					level.playLocalSound(x, y, z, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.BLOCKS, 0.4F, rand.nextFloat() * 0.2F + 0.9F, false);
 				}
 			}
 		}

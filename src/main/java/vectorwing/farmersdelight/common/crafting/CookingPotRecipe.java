@@ -94,7 +94,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 	}
 
 	@Override
-	public boolean matches(RecipeWrapper inv, Level worldIn) {
+	public boolean matches(RecipeWrapper inv, Level level) {
 		java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
 		int i = 0;
 

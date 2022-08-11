@@ -36,7 +36,7 @@ public class RicePaniclesBlock extends CropBlock
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
 	}
 
@@ -56,17 +56,17 @@ public class RicePaniclesBlock extends CropBlock
 	}
 
 	@Override
-	protected boolean mayPlaceOn(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
 		return state.getBlock() == ModBlocks.RICE_CROP.get();
 	}
 
 	@Override
-	protected int getBonemealAgeIncrease(Level worldIn) {
-		return super.getBonemealAgeIncrease(worldIn) / 3;
+	protected int getBonemealAgeIncrease(Level level) {
+		return super.getBonemealAgeIncrease(level) / 3;
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
-		return (worldIn.getRawBrightness(pos, 0) >= 8 || worldIn.canSeeSky(pos)) && worldIn.getBlockState(pos.below()).getBlock() == ModBlocks.RICE_CROP.get();
+	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+		return (level.getRawBrightness(pos, 0) >= 8 || level.canSeeSky(pos)) && level.getBlockState(pos.below()).getBlock() == ModBlocks.RICE_CROP.get();
 	}
 }

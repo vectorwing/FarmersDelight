@@ -50,17 +50,17 @@ public class TomatoBlock extends BushBlock implements BonemealableBlock
 		this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0));
 	}
 
-	protected static float getGrowthChance(Block blockIn, BlockGetter worldIn, BlockPos pos) {
+	protected static float getGrowthChance(Block blockIn, BlockGetter level, BlockPos pos) {
 		float f = 1.0F;
 		BlockPos floorPos = pos.below();
 
 		for (int i = -1; i <= 1; ++i) {
 			for (int j = -1; j <= 1; ++j) {
 				float f1 = 0.0F;
-				BlockState blockstate = worldIn.getBlockState(floorPos.offset(i, 0, j));
-				if (blockstate.canSustainPlant(worldIn, floorPos.offset(i, 0, j), net.minecraft.core.Direction.UP, (net.minecraftforge.common.IPlantable) blockIn)) {
+				BlockState blockstate = level.getBlockState(floorPos.offset(i, 0, j));
+				if (blockstate.canSustainPlant(level, floorPos.offset(i, 0, j), net.minecraft.core.Direction.UP, (net.minecraftforge.common.IPlantable) blockIn)) {
 					f1 = 1.0F;
-					if (blockstate.isFertile(worldIn, floorPos.offset(i, 0, j))) {
+					if (blockstate.isFertile(level, floorPos.offset(i, 0, j))) {
 						f1 = 3.0F;
 					}
 				}
@@ -77,12 +77,12 @@ public class TomatoBlock extends BushBlock implements BonemealableBlock
 		BlockPos southPos = pos.south();
 		BlockPos westPos = pos.west();
 		BlockPos eastPos = pos.east();
-		boolean isMatchedWestEast = blockIn == worldIn.getBlockState(westPos).getBlock() || blockIn == worldIn.getBlockState(eastPos).getBlock();
-		boolean isMatchedNorthSouth = blockIn == worldIn.getBlockState(northPos).getBlock() || blockIn == worldIn.getBlockState(southPos).getBlock();
+		boolean isMatchedWestEast = blockIn == level.getBlockState(westPos).getBlock() || blockIn == level.getBlockState(eastPos).getBlock();
+		boolean isMatchedNorthSouth = blockIn == level.getBlockState(northPos).getBlock() || blockIn == level.getBlockState(southPos).getBlock();
 		if (isMatchedWestEast && isMatchedNorthSouth) {
 			f /= 2.0F;
 		} else {
-			boolean flag2 = blockIn == worldIn.getBlockState(westPos.north()).getBlock() || blockIn == worldIn.getBlockState(eastPos.north()).getBlock() || blockIn == worldIn.getBlockState(eastPos.south()).getBlock() || blockIn == worldIn.getBlockState(westPos.south()).getBlock();
+			boolean flag2 = blockIn == level.getBlockState(westPos.north()).getBlock() || blockIn == level.getBlockState(eastPos.north()).getBlock() || blockIn == level.getBlockState(eastPos.south()).getBlock() || blockIn == level.getBlockState(westPos.south()).getBlock();
 			if (flag2) {
 				f /= 2.0F;
 			}
@@ -107,32 +107,32 @@ public class TomatoBlock extends BushBlock implements BonemealableBlock
 		return state.getValue(AGE) >= this.getMaxAge();
 	}
 
-	protected int getBonemealAgeIncrease(Level worldIn) {
-		return Mth.nextInt(worldIn.random, 2, 5);
+	protected int getBonemealAgeIncrease(Level level) {
+		return Mth.nextInt(level.random, 2, 5);
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return SHAPE_BY_AGE[state.getValue(AGE)];
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(BlockGetter worldIn, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
 		return new ItemStack(ModItems.TOMATO_SEEDS.get());
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random rand) {
-		super.tick(state, worldIn, pos, rand);
-		if (!worldIn.isAreaLoaded(pos, 1))
+	public void tick(BlockState state, ServerLevel level, BlockPos pos, Random rand) {
+		super.tick(state, level, pos, rand);
+		if (!level.isAreaLoaded(pos, 1))
 			return;
-		if (worldIn.getRawBrightness(pos, 0) >= 9) {
+		if (level.getRawBrightness(pos, 0) >= 9) {
 			int i = this.getAge(state);
 			if (i < this.getMaxAge()) {
-				float f = getGrowthChance(this, worldIn, pos);
-				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt((int) (25.0F / f) + 1) == 0)) {
-					worldIn.setBlock(pos, this.withAge(i + 1), 2);
-					net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
+				float f = getGrowthChance(this, level, pos);
+				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, rand.nextInt((int) (25.0F / f) + 1) == 0)) {
+					level.setBlock(pos, this.withAge(i + 1), 2);
+					net.minecraftforge.common.ForgeHooks.onCropsGrowPost(level, pos, state);
 				}
 			}
 		}
@@ -144,60 +144,60 @@ public class TomatoBlock extends BushBlock implements BonemealableBlock
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(BlockGetter level, BlockPos pos, BlockState state, boolean isClient) {
 		return !this.isMaxAge(state);
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level level, Random rand, BlockPos pos, BlockState state) {
 		return true;
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel worldIn, Random rand, BlockPos pos, BlockState state) {
-		int newAge = this.getAge(state) + this.getBonemealAgeIncrease(worldIn);
+	public void performBonemeal(ServerLevel level, Random rand, BlockPos pos, BlockState state) {
+		int newAge = this.getAge(state) + this.getBonemealAgeIncrease(level);
 		int maxAge = this.getMaxAge();
 		if (newAge > maxAge) {
 			newAge = maxAge;
 		}
 
-		worldIn.setBlock(pos, this.withAge(newAge), 2);
+		level.setBlock(pos, this.withAge(newAge), 2);
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		int age = state.getValue(AGE);
 		boolean isMature = age == TOMATO_BEARING_AGE;
-		if (!isMature && player.getItemInHand(handIn).getItem() == Items.BONE_MEAL) {
+		if (!isMature && player.getItemInHand(hand).getItem() == Items.BONE_MEAL) {
 			return InteractionResult.PASS;
 		} else if (isMature) {
-			int j = 1 + worldIn.random.nextInt(2);
-			popResource(worldIn, pos, new ItemStack(ModItems.TOMATO.get(), j));
+			int j = 1 + level.random.nextInt(2);
+			popResource(level, pos, new ItemStack(ModItems.TOMATO.get(), j));
 			
-			if (worldIn.random.nextFloat() < 0.05) {
-				popResource(worldIn, pos, new ItemStack(ModItems.ROTTEN_TOMATO.get()));
+			if (level.random.nextFloat() < 0.05) {
+				popResource(level, pos, new ItemStack(ModItems.ROTTEN_TOMATO.get()));
 			}
 			
-			worldIn.playSound(null, pos, ModSounds.ITEM_TOMATO_PICK_FROM_BUSH.get(), SoundSource.BLOCKS, 1.0F, 0.8F + worldIn.random.nextFloat() * 0.4F);
-			worldIn.setBlock(pos, state.setValue(AGE, TOMATO_BEARING_AGE - 2), 2);
+			level.playSound(null, pos, ModSounds.ITEM_TOMATO_PICK_FROM_BUSH.get(), SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+			level.setBlock(pos, state.setValue(AGE, TOMATO_BEARING_AGE - 2), 2);
 			return InteractionResult.SUCCESS;
 		} else {
-			return super.use(state, worldIn, pos, player, handIn, hit);
+			return super.use(state, level, pos, player, hand, hit);
 		}
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
-		return (worldIn.getRawBrightness(pos, 0) >= 8 || worldIn.canSeeSky(pos)) && super.canSurvive(state, worldIn, pos);
+	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+		return (level.getRawBrightness(pos, 0) >= 8 || level.canSeeSky(pos)) && super.canSurvive(state, level, pos);
 	}
 
 	@Override
-	public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
-		if (entityIn instanceof Ravager && net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(worldIn, entityIn)) {
-			worldIn.destroyBlock(pos, true, entityIn);
+	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entityIn) {
+		if (entityIn instanceof Ravager && net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(level, entityIn)) {
+			level.destroyBlock(pos, true, entityIn);
 		}
 
-		super.entityInside(state, worldIn, pos, entityIn);
+		super.entityInside(state, level, pos, entityIn);
 	}
 
 	@Override

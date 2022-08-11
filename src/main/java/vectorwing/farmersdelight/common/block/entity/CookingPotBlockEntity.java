@@ -298,13 +298,13 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		experienceTracker.clear();
 	}
 
-	public void grantStoredRecipeExperience(Level world, Vec3 pos) {
+	public void grantStoredRecipeExperience(Level level, Vec3 pos) {
 		for (Object2IntMap.Entry<ResourceLocation> entry : experienceTracker.object2IntEntrySet()) {
-			world.getRecipeManager().byKey(entry.getKey()).ifPresent((recipe) -> splitAndSpawnExperience(world, pos, entry.getIntValue(), ((CookingPotRecipe) recipe).getExperience()));
+			level.getRecipeManager().byKey(entry.getKey()).ifPresent((recipe) -> splitAndSpawnExperience(level, pos, entry.getIntValue(), ((CookingPotRecipe) recipe).getExperience()));
 		}
 	}
 
-	private static void splitAndSpawnExperience(Level world, Vec3 pos, int craftedAmount, float experience) {
+	private static void splitAndSpawnExperience(Level level, Vec3 pos, int craftedAmount, float experience) {
 		int expTotal = Mth.floor((float) craftedAmount * experience);
 		float expFraction = Mth.frac((float) craftedAmount * experience);
 		if (expFraction != 0.0F && Math.random() < (double) expFraction) {
@@ -314,7 +314,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		while (expTotal > 0) {
 			int expValue = ExperienceOrb.getExperienceValue(expTotal);
 			expTotal -= expValue;
-			world.addFreshEntity(new ExperienceOrb(world, pos.x, pos.y, pos.z, expValue));
+			level.addFreshEntity(new ExperienceOrb(level, pos.x, pos.y, pos.z, expValue));
 		}
 	}
 

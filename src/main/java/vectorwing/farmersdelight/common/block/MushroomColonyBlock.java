@@ -51,7 +51,7 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
 	}
 
@@ -60,32 +60,32 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 	}
 
 	@Override
-	protected boolean mayPlaceOn(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		return state.isSolidRender(worldIn, pos);
+	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
+		return state.isSolidRender(level, pos);
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
+	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
 		BlockPos floorPos = pos.below();
-		BlockState floorState = worldIn.getBlockState(floorPos);
+		BlockState floorState = level.getBlockState(floorPos);
 		if (floorState.is(BlockTags.MUSHROOM_GROW_BLOCK)) {
 			return true;
 		} else {
-			return worldIn.getRawBrightness(pos, 0) < PLACING_LIGHT_LEVEL && floorState.canSustainPlant(worldIn, floorPos, net.minecraft.core.Direction.UP, this);
+			return level.getRawBrightness(pos, 0) < PLACING_LIGHT_LEVEL && floorState.canSustainPlant(level, floorPos, net.minecraft.core.Direction.UP, this);
 		}
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		int age = state.getValue(COLONY_AGE);
-		ItemStack heldStack = player.getItemInHand(handIn);
+		ItemStack heldStack = player.getItemInHand(hand);
 
 		if (age > 0 && heldStack.is(Tags.Items.SHEARS)) {
-			popResource(worldIn, pos, this.getCloneItemStack(worldIn, pos, state));
-			worldIn.playSound(null, pos, SoundEvents.MOOSHROOM_SHEAR, SoundSource.BLOCKS, 1.0F, 1.0F);
-			worldIn.setBlock(pos, state.setValue(COLONY_AGE, age - 1), 2);
-			if (!worldIn.isClientSide) {
-				heldStack.hurtAndBreak(1, player, (playerIn) -> playerIn.broadcastBreakEvent(handIn));
+			popResource(level, pos, this.getCloneItemStack(level, pos, state));
+			level.playSound(null, pos, SoundEvents.MOOSHROOM_SHEAR, SoundSource.BLOCKS, 1.0F, 1.0F);
+			level.setBlock(pos, state.setValue(COLONY_AGE, age - 1), 2);
+			if (!level.isClientSide) {
+				heldStack.hurtAndBreak(1, player, (playerIn) -> playerIn.broadcastBreakEvent(hand));
 			}
 			return InteractionResult.SUCCESS;
 		}
@@ -94,7 +94,7 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(BlockGetter level, BlockPos pos, BlockState state, boolean isClient) {
 		return false;
 	}
 
@@ -103,7 +103,7 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level level, Random rand, BlockPos pos, BlockState state) {
 		return false;
 	}
 
@@ -118,7 +118,7 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(BlockGetter worldIn, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
 		return new ItemStack(this.mushroomType.get());
 	}
 
@@ -128,8 +128,8 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel level, Random rand, BlockPos pos, BlockState state) {
 		int age = Math.min(3, state.getValue(COLONY_AGE) + 1);
-		worldIn.setBlock(pos, state.setValue(COLONY_AGE, age), 2);
+		level.setBlock(pos, state.setValue(COLONY_AGE, age), 2);
 	}
 }
