@@ -265,6 +265,8 @@ public class ModItems
 			() -> new PopsicleItem(foodItem(FoodValues.POPSICLE)));
 	public static final RegistryObject<Item> FRUIT_SALAD = ITEMS.register("fruit_salad",
 			() -> new ConsumableItem(bowlFoodItem(FoodValues.FRUIT_SALAD), true));
+	public static final RegistryObject<Item> GLOW_BERRY_CUSTARD = ITEMS.register("glow_berry_custard",
+			() -> new ConsumableItem(foodItem(FoodValues.GLOW_BERRY_CUSTARD).craftRemainder(Items.GLASS_BOTTLE).stacksTo(16)));
 
 	// Basic Meals
 	public static final RegistryObject<Item> MIXED_SALAD = ITEMS.register("mixed_salad",

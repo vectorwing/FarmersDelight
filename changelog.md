@@ -8,6 +8,7 @@
     - A full Kelp Roll is quite awkward to eat, so it takes a while. But if you cut it on a Cutting Board, you get bite-sized snacks to eat quickly;
   - Bone Broth - Spelunking? In a pinch? Bring a Cooking Pot with you, and you'll be able to make a decent broth out of bone and cave vegetation;
   - Mushroom Rice - A nourishing counterpart to Mushroom Stew, and a good sink for your mushroom colony farms;
+  - Glow Berry Custard - This vibrant cave fruit goes well with cream! It's sure to make your stomach *glow* with joy, too;
 - New blocks:
   - **Sandy Shrub** - A short plant which invades the beach coast, alongside Wild Cabbage and Sea Beet!
     - You can bone meal the shrub to make it spread across nearby sand;

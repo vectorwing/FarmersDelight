@@ -87,6 +87,9 @@ public class FoodValues
 	public static final FoodProperties FRUIT_SALAD = (new FoodProperties.Builder())
 			.nutrition(6).saturationMod(0.6f)
 			.effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 100, 0), 1.0F).build();
+	public static final FoodProperties GLOW_BERRY_CUSTARD = (new FoodProperties.Builder())
+			.nutrition(7).saturationMod(0.6f).alwaysEat()
+			.effect(() -> new MobEffectInstance(MobEffects.GLOWING, 100, 0), 1.0F).build();
 
 	// Handheld Foods
 	public static final FoodProperties MIXED_SALAD = (new FoodProperties.Builder())
