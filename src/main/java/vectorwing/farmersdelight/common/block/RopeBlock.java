@@ -98,9 +98,4 @@ public class RopeBlock extends IronBarsBlock
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(NORTH, EAST, WEST, SOUTH, WATERLOGGED, TIED_TO_BELL);
 	}
-
-	@Override
-	public boolean isLadder(BlockState state, LevelReader world, BlockPos pos, net.minecraft.world.entity.LivingEntity entity) {
-		return true;
-	}
 }
