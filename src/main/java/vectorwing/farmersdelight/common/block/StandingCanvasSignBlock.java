@@ -37,8 +37,8 @@ public class StandingCanvasSignBlock extends StandingSignBlock implements Canvas
 	}
 
 	@Override
-	public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+		BlockEntity tileEntity = level.getBlockEntity(pos);
 		Block block = state.getBlock();
 		if (tileEntity instanceof SignBlockEntity && block instanceof CanvasSign) {
 			if (((CanvasSign) block).isDarkBackground()) {

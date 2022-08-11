@@ -44,14 +44,14 @@ public abstract class SoupItemMixin extends Item
 	 * Replication of ConsumableItem but in Mixin form, to allow SoupItems to stack
 	 */
 	@Inject(at = @At(value = "HEAD"), method = "finishUsingItem", cancellable = true)
-	private void onItemUseFinish(ItemStack stack, Level worldIn, LivingEntity subject, CallbackInfoReturnable<ItemStack> cir) {
+	private void onItemUseFinish(ItemStack stack, Level level, LivingEntity subject, CallbackInfoReturnable<ItemStack> cir) {
 		if (Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) {
 			ItemStack container = stack.getContainerItem();
 			if (container.isEmpty())
 				container = new ItemStack(Items.BOWL);
 
 			if (stack.isEdible()) {
-				super.finishUsingItem(stack, worldIn, subject);
+				super.finishUsingItem(stack, level, subject);
 			} else {
 				Player player = subject instanceof Player ? (Player) subject : null;
 				if (player instanceof ServerPlayer) {

@@ -42,13 +42,13 @@ public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterlogged
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
-		FluidState fluid = worldIn.getFluidState(pos);
+	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+		FluidState fluid = level.getFluidState(pos);
 		BlockPos floorPos = pos.below();
 		if (state.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.LOWER) {
-			return super.canSurvive(state, worldIn, pos) && this.mayPlaceOn(worldIn.getBlockState(floorPos), worldIn, floorPos) && fluid.is(FluidTags.WATER) && fluid.getAmount() == 8;
+			return super.canSurvive(state, level, pos) && this.mayPlaceOn(level.getBlockState(floorPos), level, floorPos) && fluid.is(FluidTags.WATER) && fluid.getAmount() == 8;
 		}
-		return super.canSurvive(state, worldIn, pos) && worldIn.getBlockState(pos.below()).getBlock() == ModBlocks.WILD_RICE.get();
+		return super.canSurvive(state, level, pos) && level.getBlockState(pos.below()).getBlock() == ModBlocks.WILD_RICE.get();
 	}
 
 	@Override
@@ -62,19 +62,19 @@ public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterlogged
 	}
 
 	@Override
-	public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
-		worldIn.setBlock(pos.above(), this.defaultBlockState().setValue(WATERLOGGED, false).setValue(HALF, DoubleBlockHalf.UPPER), 3);
+	public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+		level.setBlock(pos.above(), this.defaultBlockState().setValue(WATERLOGGED, false).setValue(HALF, DoubleBlockHalf.UPPER), 3);
 	}
 
 	@Override
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
-		BlockState currentState = super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+		BlockState currentState = super.updateShape(stateIn, facing, facingState, level, currentPos, facingPos);
 		DoubleBlockHalf half = stateIn.getValue(HALF);
 		if (!currentState.isAir()) {
-			worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+			level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
 		if (facing.getAxis() != Direction.Axis.Y || half == DoubleBlockHalf.LOWER != (facing == Direction.UP) || facingState.getBlock() == this && facingState.getValue(HALF) != half) {
-			return half == DoubleBlockHalf.LOWER && facing == Direction.DOWN && !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : stateIn;
+			return half == DoubleBlockHalf.LOWER && facing == Direction.DOWN && !stateIn.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : stateIn;
 		} else {
 			return Blocks.AIR.defaultBlockState();
 		}
@@ -93,7 +93,7 @@ public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterlogged
 	}
 
 	@Override
-	public boolean canPlaceLiquid(BlockGetter worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
+	public boolean canPlaceLiquid(BlockGetter level, BlockPos pos, BlockState state, Fluid fluidIn) {
 		return state.getValue(HALF) == DoubleBlockHalf.LOWER;
 	}
 
@@ -105,17 +105,17 @@ public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterlogged
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(BlockGetter level, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level level, Random rand, BlockPos pos, BlockState state) {
 		return (double) rand.nextFloat() < 0.3F;
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel worldIn, Random random, BlockPos pos, BlockState state) {
-		popResource(worldIn, pos, new ItemStack(this));
+	public void performBonemeal(ServerLevel level, Random random, BlockPos pos, BlockState state) {
+		popResource(level, pos, new ItemStack(this));
 	}
 }

@@ -32,10 +32,10 @@ public class RichSoilBlock extends Block
 	}
 
 	@Override
-	public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random rand) {
-		if (!worldIn.isClientSide) {
+	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random rand) {
+		if (!level.isClientSide) {
 			BlockPos abovePos = pos.above();
-			BlockState aboveState = worldIn.getBlockState(abovePos);
+			BlockState aboveState = level.getBlockState(abovePos);
 			Block aboveBlock = aboveState.getBlock();
 
 			// Do nothing if the plant is unaffected by rich soil
@@ -45,14 +45,14 @@ public class RichSoilBlock extends Block
 
 			// Convert mushrooms to colonies if it's dark enough
 			if (aboveBlock == Blocks.BROWN_MUSHROOM) {
-				if (worldIn.getRawBrightness(pos.above(), 0) <= COLONY_FORMING_LIGHT_LEVEL) {
-					worldIn.setBlockAndUpdate(pos.above(), ModBlocks.BROWN_MUSHROOM_COLONY.get().defaultBlockState());
+				if (level.getRawBrightness(pos.above(), 0) <= COLONY_FORMING_LIGHT_LEVEL) {
+					level.setBlockAndUpdate(pos.above(), ModBlocks.BROWN_MUSHROOM_COLONY.get().defaultBlockState());
 				}
 				return;
 			}
 			if (aboveBlock == Blocks.RED_MUSHROOM) {
-				if (worldIn.getRawBrightness(pos.above(), 0) <= COLONY_FORMING_LIGHT_LEVEL) {
-					worldIn.setBlockAndUpdate(pos.above(), ModBlocks.RED_MUSHROOM_COLONY.get().defaultBlockState());
+				if (level.getRawBrightness(pos.above(), 0) <= COLONY_FORMING_LIGHT_LEVEL) {
+					level.setBlockAndUpdate(pos.above(), ModBlocks.RED_MUSHROOM_COLONY.get().defaultBlockState());
 				}
 				return;
 			}
@@ -63,10 +63,10 @@ public class RichSoilBlock extends Block
 
 			// If all else fails, and it's a plant, give it a growth boost now and then!
 			if (aboveBlock instanceof BonemealableBlock growable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
-				if (growable.isValidBonemealTarget(worldIn, pos.above(), aboveState, false) && ForgeHooks.onCropsGrowPre(worldIn, pos.above(), aboveState, true)) {
-					growable.performBonemeal(worldIn, worldIn.random, pos.above(), aboveState);
-					worldIn.levelEvent(2005, pos.above(), 0);
-					ForgeHooks.onCropsGrowPost(worldIn, pos.above(), aboveState);
+				if (growable.isValidBonemealTarget(level, pos.above(), aboveState, false) && ForgeHooks.onCropsGrowPre(level, pos.above(), aboveState, true)) {
+					growable.performBonemeal(level, level.random, pos.above(), aboveState);
+					level.levelEvent(2005, pos.above(), 0);
+					ForgeHooks.onCropsGrowPost(level, pos.above(), aboveState);
 				}
 			}
 		}

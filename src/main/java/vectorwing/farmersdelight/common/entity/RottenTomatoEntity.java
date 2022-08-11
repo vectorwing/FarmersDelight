@@ -28,16 +28,16 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class RottenTomatoEntity extends ThrowableItemProjectile
 {
-	public RottenTomatoEntity(EntityType<? extends RottenTomatoEntity> entityType, Level world) {
-		super(entityType, world);
+	public RottenTomatoEntity(EntityType<? extends RottenTomatoEntity> entityType, Level level) {
+		super(entityType, level);
 	}
 
-	public RottenTomatoEntity(Level world, LivingEntity entity) {
-		super(ModEntityTypes.ROTTEN_TOMATO.get(), entity, world);
+	public RottenTomatoEntity(Level level, LivingEntity entity) {
+		super(ModEntityTypes.ROTTEN_TOMATO.get(), entity, level);
 	}
 
-	public RottenTomatoEntity(Level world, double x, double y, double z) {
-		super(ModEntityTypes.ROTTEN_TOMATO.get(), x, y, z, world);
+	public RottenTomatoEntity(Level level, double x, double y, double z) {
+		super(ModEntityTypes.ROTTEN_TOMATO.get(), x, y, z, level);
 	}
 
 	@Override
@@ -47,9 +47,9 @@ public class RottenTomatoEntity extends ThrowableItemProjectile
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void handleEntityEvent(byte pId) {
+	public void handleEntityEvent(byte id) {
 		ItemStack entityStack = new ItemStack(this.getDefaultItem());
-		if (pId == 3) {
+		if (id == 3) {
 			ParticleOptions iparticledata = new ItemParticleOption(ParticleTypes.ITEM, entityStack);
 
 			for (int i = 0; i < 12; ++i) {
@@ -62,16 +62,16 @@ public class RottenTomatoEntity extends ThrowableItemProjectile
 	}
 
 	@Override
-	protected void onHitEntity(EntityHitResult pResult) {
-		super.onHitEntity(pResult);
-		Entity entity = pResult.getEntity();
+	protected void onHitEntity(EntityHitResult result) {
+		super.onHitEntity(result);
+		Entity entity = result.getEntity();
 		entity.hurt(DamageSource.thrown(this, this.getOwner()), 0);
 		this.playSound(ModSounds.ENTITY_ROTTEN_TOMATO_HIT.get(), 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 	}
 
 	@Override
-	protected void onHit(HitResult pResult) {
-		super.onHit(pResult);
+	protected void onHit(HitResult result) {
+		super.onHit(result);
 		if (!this.level.isClientSide) {
 			this.level.broadcastEntityEvent(this, (byte) 3);
 			this.playSound(ModSounds.ENTITY_ROTTEN_TOMATO_HIT.get(), 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
