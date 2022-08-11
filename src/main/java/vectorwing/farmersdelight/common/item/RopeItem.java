@@ -13,8 +13,8 @@ import javax.annotation.Nullable;
 
 public class RopeItem extends FuelBlockItem
 {
-	public RopeItem(Block blockIn, Properties properties) {
-		super(blockIn, properties, 200);
+	public RopeItem(Block block, Properties properties) {
+		super(block, properties, 200);
 	}
 
 	@Override

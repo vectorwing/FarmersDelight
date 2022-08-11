@@ -13,26 +13,26 @@ import vectorwing.farmersdelight.common.registry.ModSounds;
 
 public class RottenTomatoItem extends Item
 {
-	public RottenTomatoItem(Properties pProperties) {
-		super(pProperties);
+	public RottenTomatoItem(Properties properties) {
+		super(properties);
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
-		ItemStack heldStack = pPlayer.getItemInHand(pHand);
-		pLevel.playSound(null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), ModSounds.ENTITY_ROTTEN_TOMATO_THROW.get(), SoundSource.NEUTRAL, 0.5F, 0.4F / (pLevel.random.nextFloat() * 0.4F + 0.8F));
-		if (!pLevel.isClientSide) {
-			RottenTomatoEntity projectile = new RottenTomatoEntity(pLevel, pPlayer);
+	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+		ItemStack heldStack = player.getItemInHand(hand);
+		level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.ENTITY_ROTTEN_TOMATO_THROW.get(), SoundSource.NEUTRAL, 0.5F, 0.4F / (level.random.nextFloat() * 0.4F + 0.8F));
+		if (!level.isClientSide) {
+			RottenTomatoEntity projectile = new RottenTomatoEntity(level, player);
 			projectile.setItem(heldStack);
-			projectile.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
-			pLevel.addFreshEntity(projectile);
+			projectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
+			level.addFreshEntity(projectile);
 		}
 
-		pPlayer.awardStat(Stats.ITEM_USED.get(this));
-		if (!pPlayer.getAbilities().instabuild) {
+		player.awardStat(Stats.ITEM_USED.get(this));
+		if (!player.getAbilities().instabuild) {
 			heldStack.shrink(1);
 		}
 
-		return InteractionResultHolder.sidedSuccess(heldStack, pLevel.isClientSide());
+		return InteractionResultHolder.sidedSuccess(heldStack, level.isClientSide());
 	}
 }

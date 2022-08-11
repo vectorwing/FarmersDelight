@@ -33,7 +33,7 @@ public class DrinkableItem extends ConsumableItem
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
-		return ItemUtils.startUsingInstantly(worldIn, playerIn, handIn);
+	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+		return ItemUtils.startUsingInstantly(level, player, hand);
 	}
 }
