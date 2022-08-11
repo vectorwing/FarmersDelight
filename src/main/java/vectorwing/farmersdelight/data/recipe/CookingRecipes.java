@@ -53,6 +53,12 @@ public class CookingRecipes
 				.addIngredient(ModTags.WOLF_PREY)
 				.addIngredient(ForgeTags.CROPS_RICE)
 				.build(consumer);
+		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.GLOW_BERRY_CUSTARD.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
+				.addIngredient(Items.GLOW_BERRIES)
+				.addIngredient(ForgeTags.MILK)
+				.addIngredient(ForgeTags.EGGS)
+				.addIngredient(Items.SUGAR)
+				.build(consumer);
 	}
 
 	private static void cookMinecraftSoups(Consumer<FinishedRecipe> consumer) {
