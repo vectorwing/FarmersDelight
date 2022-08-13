@@ -7,7 +7,6 @@ import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
-import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -16,6 +15,7 @@ import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.block.entity.container.CookingPotMenu;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
@@ -41,19 +41,23 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 	}
 
 	@Override
-	public void init()
-	{
+	public void init() {
 		super.init();
 		this.widthTooNarrow = this.width < 379;
 		this.titleLabelX = 28;
 		this.recipeBookComponent.init(this.width, this.height, this.minecraft, this.widthTooNarrow, this.menu);
 		this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth);
-		this.addRenderableWidget(new ImageButton(this.leftPos + 5, this.height / 2 - 49, 20, 18, 0, 0, 19, RECIPE_BUTTON_LOCATION, (button) ->
-		{
-			this.recipeBookComponent.toggleVisibility();
+		if (Configuration.ENABLE_RECIPE_BOOK_COOKING_POT.get()) {
+			this.addRenderableWidget(new ImageButton(this.leftPos + 5, this.height / 2 - 49, 20, 18, 0, 0, 19, RECIPE_BUTTON_LOCATION, (button) ->
+			{
+				this.recipeBookComponent.toggleVisibility();
+				this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth);
+				((ImageButton) button).setPosition(this.leftPos + 5, this.height / 2 - 49);
+			}));
+		} else {
+			this.recipeBookComponent.hide();
 			this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth);
-			((ImageButton)button).setPosition(this.leftPos + 5, this.height / 2 - 49);
-		}));
+		}
 		this.addWidget(this.recipeBookComponent);
 		this.setInitialFocus(this.recipeBookComponent);
 	}
@@ -138,16 +142,13 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 	}
 
 	@Override
-	protected boolean isHovering(int x, int y, int width, int height, double mouseX, double mouseY)
-	{
+	protected boolean isHovering(int x, int y, int width, int height, double mouseX, double mouseY) {
 		return (!this.widthTooNarrow || !this.recipeBookComponent.isVisible()) && super.isHovering(x, y, width, height, mouseX, mouseY);
 	}
 
 	@Override
-	public boolean mouseClicked(double mouseX, double mouseY, int buttonId)
-	{
-		if (this.recipeBookComponent.mouseClicked(mouseX, mouseY, buttonId))
-		{
+	public boolean mouseClicked(double mouseX, double mouseY, int buttonId) {
+		if (this.recipeBookComponent.mouseClicked(mouseX, mouseY, buttonId)) {
 			this.setFocused(this.recipeBookComponent);
 			return true;
 		}
@@ -155,15 +156,13 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 	}
 
 	@Override
-	protected boolean hasClickedOutside(double mouseX, double mouseY, int x, int y, int buttonIdx)
-	{
-		boolean flag = mouseX < (double)x || mouseY < (double)y || mouseX >= (double)(x + this.imageWidth) || mouseY >= (double)(y + this.imageHeight);
+	protected boolean hasClickedOutside(double mouseX, double mouseY, int x, int y, int buttonIdx) {
+		boolean flag = mouseX < (double) x || mouseY < (double) y || mouseX >= (double) (x + this.imageWidth) || mouseY >= (double) (y + this.imageHeight);
 		return flag && this.recipeBookComponent.hasClickedOutside(mouseX, mouseY, this.leftPos, this.topPos, this.imageWidth, this.imageHeight, buttonIdx);
 	}
 
 	@Override
-	protected void slotClicked(Slot slot, int mouseX, int mouseY, ClickType clickType)
-	{
+	protected void slotClicked(Slot slot, int mouseX, int mouseY, ClickType clickType) {
 		super.slotClicked(slot, mouseX, mouseY, clickType);
 		this.recipeBookComponent.slotClicked(slot);
 	}
@@ -174,8 +173,7 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 	}
 
 	@Override
-	public void removed()
-	{
+	public void removed() {
 		this.recipeBookComponent.removed();
 		super.removed();
 	}

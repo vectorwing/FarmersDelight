@@ -11,7 +11,7 @@ import vectorwing.farmersdelight.common.crafting.ingredient.ToolActionIngredient
 import static vectorwing.farmersdelight.FarmersDelight.MODID;
 
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class RecipeEvents
+public class SetupEvents
 {
 	@SubscribeEvent
 	public static void registerRecipeElements(RegistryEvent.Register<RecipeSerializer<?>> event) {
