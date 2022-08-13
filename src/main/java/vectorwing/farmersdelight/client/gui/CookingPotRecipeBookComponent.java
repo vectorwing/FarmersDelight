@@ -23,6 +23,10 @@ public class CookingPotRecipeBookComponent extends RecipeBookComponent
 		this.filterButton.initTextureValues(0, 0, 28, 18, RECIPE_BOOK_BUTTONS);
 	}
 
+	public void hide() {
+		this.setVisible(false);
+	}
+
 	@Override
 	@Nonnull
 	protected Component getRecipeFilterName() {
