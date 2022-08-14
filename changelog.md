@@ -6,6 +6,9 @@
 - The Cooking Pot now has its own **Recipe Book**!
   - Opening the GUI will reveal the familiar green book button. Press it to see your current cooking recipes;
   - Recipes are unlocked in the same fashion as vanilla: by having one of its ingredients, or cooking the recipe from memory once;
+  - Added optional `"recipe_book_tab"` field for cooking recipes, which lets the recipe specify which tab it goes into:
+    - Valid options are `meals, drinks, misc`;
+    - If not provided, the recipe's tab will be determined in-code;
 - New foods:
   - Salmon Roll, Cod Roll and Kelp Roll - A new way to enjoy your fishing spoils, if you're equipped with watery crops;
     - A full Kelp Roll is quite awkward to eat, so it takes a while. But if you cut it on a Cutting Board, you get bite-sized snacks to eat quickly;
