@@ -9,6 +9,7 @@ import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
@@ -90,6 +91,11 @@ public class CookingPotRecipeBuilder
 
 	public CookingPotRecipeBuilder unlockedByItems(String criterionName, ItemLike... items) {
 		return unlockedBy(criterionName, InventoryChangeTrigger.TriggerInstance.hasItems(items));
+	}
+
+	public CookingPotRecipeBuilder unlockedByAnyIngredient(ItemLike... items) {
+		advancement.addCriterion("has_any_ingredient", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(items).build()));
+		return this;
 	}
 
 	public CookingPotRecipeBuilder setRecipeBookTab(CookingPotRecipeBookTab tab) {

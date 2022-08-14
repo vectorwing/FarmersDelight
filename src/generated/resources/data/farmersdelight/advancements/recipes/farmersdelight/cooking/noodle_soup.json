@@ -6,13 +6,15 @@
     ]
   },
   "criteria": {
-    "has_raw_pasta": {
+    "has_any_ingredient": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "farmersdelight:raw_pasta"
+              "farmersdelight:raw_pasta",
+              "minecraft:dried_kelp",
+              "minecraft:porkchop"
             ]
           }
         ]
@@ -27,7 +29,7 @@
   },
   "requirements": [
     [
-      "has_raw_pasta",
+      "has_any_ingredient",
       "has_the_recipe"
     ]
   ]

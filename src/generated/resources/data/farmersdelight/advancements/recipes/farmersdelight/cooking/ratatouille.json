@@ -6,36 +6,14 @@
     ]
   },
   "criteria": {
-    "has_tomato": {
+    "has_any_ingredient": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "farmersdelight:tomato"
-            ]
-          }
-        ]
-      }
-    },
-    "has_onion": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "farmersdelight:onion"
-            ]
-          }
-        ]
-      }
-    },
-    "has_beetroot": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
+              "farmersdelight:tomato",
+              "farmersdelight:onion",
               "minecraft:beetroot"
             ]
           }
@@ -51,9 +29,7 @@
   },
   "requirements": [
     [
-      "has_tomato",
-      "has_onion",
-      "has_beetroot",
+      "has_any_ingredient",
       "has_the_recipe"
     ]
   ]

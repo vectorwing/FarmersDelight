@@ -6,25 +6,17 @@
     ]
   },
   "criteria": {
-    "has_pumpkin": {
+    "has_any_ingredient": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:pumpkin"
-            ]
-          }
-        ]
-      }
-    },
-    "has_pumpkin_slice": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "farmersdelight:pumpkin_slice"
+              "minecraft:pumpkin",
+              "farmersdelight:pumpkin_slice",
+              "minecraft:porkchop",
+              "minecraft:milk_bucket",
+              "farmersdelight:milk_bottle"
             ]
           }
         ]
@@ -39,8 +31,7 @@
   },
   "requirements": [
     [
-      "has_pumpkin",
-      "has_pumpkin_slice",
+      "has_any_ingredient",
       "has_the_recipe"
     ]
   ]

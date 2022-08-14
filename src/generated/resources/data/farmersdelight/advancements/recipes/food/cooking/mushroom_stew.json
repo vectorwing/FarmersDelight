@@ -6,24 +6,13 @@
     ]
   },
   "criteria": {
-    "has_brown_mushroom": {
+    "has_any_ingredient": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:brown_mushroom"
-            ]
-          }
-        ]
-      }
-    },
-    "has_red_mushroom": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
+              "minecraft:brown_mushroom",
               "minecraft:red_mushroom"
             ]
           }
@@ -39,8 +28,7 @@
   },
   "requirements": [
     [
-      "has_brown_mushroom",
-      "has_red_mushroom",
+      "has_any_ingredient",
       "has_the_recipe"
     ]
   ]

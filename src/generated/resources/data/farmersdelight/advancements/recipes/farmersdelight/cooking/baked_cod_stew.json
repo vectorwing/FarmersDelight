@@ -6,13 +6,16 @@
     ]
   },
   "criteria": {
-    "has_cod": {
+    "has_any_ingredient": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:cod"
+              "minecraft:cod",
+              "minecraft:potato",
+              "farmersdelight:tomato",
+              "minecraft:egg"
             ]
           }
         ]
@@ -27,7 +30,7 @@
   },
   "requirements": [
     [
-      "has_cod",
+      "has_any_ingredient",
       "has_the_recipe"
     ]
   ]

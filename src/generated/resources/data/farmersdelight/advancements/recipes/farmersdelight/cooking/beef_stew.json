@@ -6,13 +6,15 @@
     ]
   },
   "criteria": {
-    "has_beef": {
+    "has_any_ingredient": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:beef"
+              "minecraft:beef",
+              "minecraft:carrot",
+              "minecraft:potato"
             ]
           }
         ]
@@ -27,7 +29,7 @@
   },
   "requirements": [
     [
-      "has_beef",
+      "has_any_ingredient",
       "has_the_recipe"
     ]
   ]

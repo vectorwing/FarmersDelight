@@ -6,36 +6,14 @@
     ]
   },
   "criteria": {
-    "has_carrot": {
+    "has_any_ingredient": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:carrot"
-            ]
-          }
-        ]
-      }
-    },
-    "has_onion": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "farmersdelight:onion"
-            ]
-          }
-        ]
-      }
-    },
-    "has_beetroot": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
+              "minecraft:carrot",
+              "farmersdelight:onion",
               "minecraft:beetroot"
             ]
           }
@@ -51,9 +29,7 @@
   },
   "requirements": [
     [
-      "has_carrot",
-      "has_onion",
-      "has_beetroot",
+      "has_any_ingredient",
       "has_the_recipe"
     ]
   ]

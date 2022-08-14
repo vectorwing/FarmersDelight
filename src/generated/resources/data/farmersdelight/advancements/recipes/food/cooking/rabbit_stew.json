@@ -6,25 +6,17 @@
     ]
   },
   "criteria": {
-    "has_raw_rabbit": {
+    "has_any_ingredient": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:rabbit"
-            ]
-          }
-        ]
-      }
-    },
-    "has_cooked_rabbit": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:cooked_rabbit"
+              "minecraft:rabbit",
+              "minecraft:brown_mushroom",
+              "minecraft:red_mushroom",
+              "minecraft:carrot",
+              "minecraft:baked_potato"
             ]
           }
         ]
@@ -39,8 +31,7 @@
   },
   "requirements": [
     [
-      "has_raw_rabbit",
-      "has_cooked_rabbit",
+      "has_any_ingredient",
       "has_the_recipe"
     ]
   ]

@@ -6,13 +6,15 @@
     ]
   },
   "criteria": {
-    "has_rotten_flesh": {
+    "has_any_ingredient": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:rotten_flesh"
+              "minecraft:rotten_flesh",
+              "minecraft:bone_meal",
+              "farmersdelight:rice"
             ]
           }
         ]
@@ -27,7 +29,7 @@
   },
   "requirements": [
     [
-      "has_rotten_flesh",
+      "has_any_ingredient",
       "has_the_recipe"
     ]
   ]
