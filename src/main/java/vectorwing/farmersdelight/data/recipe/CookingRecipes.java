@@ -66,6 +66,8 @@ public class CookingRecipes
 				.addIngredient(ForgeTags.MILK)
 				.addIngredient(ForgeTags.EGGS)
 				.addIngredient(Items.SUGAR)
+				.unlockedByAnyIngredient(Items.GLOW_BERRIES, Items.MILK_BUCKET, ModItems.MILK_BOTTLE.get())
+				.setRecipeBookTab(CookingPotRecipeBookTab.MISC)
 				.build(consumer);
 	}
 
