@@ -6,13 +6,15 @@
     ]
   },
   "criteria": {
-    "has_wheat_dough": {
+    "has_any_ingredient": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "farmersdelight:wheat_dough"
+              "farmersdelight:wheat_dough",
+              "farmersdelight:cabbage",
+              "farmersdelight:onion"
             ]
           }
         ]
@@ -27,7 +29,7 @@
   },
   "requirements": [
     [
-      "has_wheat_dough",
+      "has_any_ingredient",
       "has_the_recipe"
     ]
   ]

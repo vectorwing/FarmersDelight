@@ -6,13 +6,16 @@
     ]
   },
   "criteria": {
-    "has_rice": {
+    "has_any_ingredient": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "farmersdelight:rice"
+              "farmersdelight:rice",
+              "minecraft:egg",
+              "minecraft:carrot",
+              "farmersdelight:onion"
             ]
           }
         ]
@@ -27,7 +30,7 @@
   },
   "requirements": [
     [
-      "has_rice",
+      "has_any_ingredient",
       "has_the_recipe"
     ]
   ]

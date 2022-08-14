@@ -6,13 +6,14 @@
     ]
   },
   "criteria": {
-    "has_chicken": {
+    "has_any_ingredient": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:chicken"
+              "minecraft:chicken",
+              "minecraft:carrot"
             ]
           }
         ]
@@ -27,7 +28,7 @@
   },
   "requirements": [
     [
-      "has_chicken",
+      "has_any_ingredient",
       "has_the_recipe"
     ]
   ]

@@ -5,14 +5,9 @@
     {
       "item": "minecraft:baked_potato"
     },
-    [
-      {
-        "item": "minecraft:rabbit"
-      },
-      {
-        "item": "minecraft:cooked_rabbit"
-      }
-    ],
+    {
+      "item": "minecraft:rabbit"
+    },
     {
       "item": "minecraft:carrot"
     },

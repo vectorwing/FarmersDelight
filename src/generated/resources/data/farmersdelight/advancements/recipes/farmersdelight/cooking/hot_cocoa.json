@@ -6,13 +6,15 @@
     ]
   },
   "criteria": {
-    "has_cocoa_beans": {
+    "has_any_ingredient": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:cocoa_beans"
+              "minecraft:cocoa_beans",
+              "minecraft:milk_bucket",
+              "farmersdelight:milk_bottle"
             ]
           }
         ]
@@ -27,7 +29,7 @@
   },
   "requirements": [
     [
-      "has_cocoa_beans",
+      "has_any_ingredient",
       "has_the_recipe"
     ]
   ]

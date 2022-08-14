@@ -6,13 +6,17 @@
     ]
   },
   "criteria": {
-    "has_tomato_sauce": {
+    "has_any_ingredient": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "farmersdelight:tomato_sauce"
+              "minecraft:salmon",
+              "minecraft:cod",
+              "minecraft:tropical_fish",
+              "farmersdelight:tomato_sauce",
+              "farmersdelight:onion"
             ]
           }
         ]
@@ -27,7 +31,7 @@
   },
   "requirements": [
     [
-      "has_tomato_sauce",
+      "has_any_ingredient",
       "has_the_recipe"
     ]
   ]
