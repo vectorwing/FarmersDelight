@@ -6,13 +6,14 @@
     ]
   },
   "criteria": {
-    "has_cabbage": {
+    "has_any_ingredient": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "farmersdelight:cabbage"
+              "farmersdelight:cabbage",
+              "farmersdelight:cabbage_leaf"
             ]
           }
         ]
@@ -27,7 +28,7 @@
   },
   "requirements": [
     [
-      "has_cabbage",
+      "has_any_ingredient",
       "has_the_recipe"
     ]
   ]
