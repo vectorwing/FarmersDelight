@@ -123,7 +123,7 @@ public class CookingRecipes
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.CABBAGE_ROLLS.get(), 1, FAST_COOKING, SMALL_EXP)
 				.addIngredient(ForgeTags.CROPS_CABBAGE)
 				.addIngredient(ModTags.CABBAGE_ROLL_INGREDIENTS)
-				.unlockedByItems("has_cabbage", ModItems.CABBAGE.get())
+				.unlockedByAnyIngredient(ModItems.CABBAGE.get(), ModItems.CABBAGE_LEAF.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.MISC)
 				.build(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.CHICKEN_SOUP.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
