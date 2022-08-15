@@ -41,7 +41,9 @@ public class CookingPotRecipeBookComponent extends RecipeBookComponent
 
 		if (recipe instanceof CookingPotRecipe cookingRecipe) {
 			ItemStack containerStack = cookingRecipe.getOutputContainer();
-			this.ghostRecipe.addIngredient(Ingredient.of(containerStack), (slots.get(7)).x, (slots.get(7)).y);
+			if (!containerStack.isEmpty()) {
+				this.ghostRecipe.addIngredient(Ingredient.of(containerStack), (slots.get(7)).x, (slots.get(7)).y);
+			}
 		}
 
 		this.placeRecipe(this.menu.getGridWidth(), this.menu.getGridHeight(), this.menu.getResultSlotIndex(), recipe, recipe.getIngredients().iterator(), 0);
