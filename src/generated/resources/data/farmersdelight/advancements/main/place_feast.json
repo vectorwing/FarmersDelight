@@ -39,6 +39,12 @@
       "conditions": {
         "block": "farmersdelight:shepherds_pie_block"
       }
+    },
+    "rice_roll_medley": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "farmersdelight:rice_roll_medley_block"
+      }
     }
   },
   "requirements": [
@@ -46,7 +52,8 @@
       "roast_chicken",
       "stuffed_pumpkin",
       "honey_glazed_ham",
-      "shepherds_pie"
+      "shepherds_pie",
+      "rice_roll_medley"
     ]
   ]
 }
