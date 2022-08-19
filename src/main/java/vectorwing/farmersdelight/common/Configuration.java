@@ -21,6 +21,9 @@ public class Configuration
 	public static ForgeConfigSpec.DoubleValue CUTTING_BOARD_FORTUNE_BONUS;
 	public static ForgeConfigSpec.ConfigValue<List<? extends String>> CANVAS_SIGN_DARK_BACKGROUND_LIST;
 
+	public static final String CATEGORY_RECIPE_BOOK = "recipe_book";
+	public static ForgeConfigSpec.BooleanValue ENABLE_RECIPE_BOOK_COOKING_POT;
+
 	public static final String CATEGORY_OVERRIDES = "overrides";
 	public static ForgeConfigSpec.BooleanValue VANILLA_SOUP_EXTRA_EFFECTS;
 	public static ForgeConfigSpec.BooleanValue RABBIT_STEW_JUMP_BOOST;
@@ -73,6 +76,11 @@ public class Configuration
 		CANVAS_SIGN_DARK_BACKGROUND_LIST = COMMON_BUILDER.comment("A list of dye colors that, when used as the background of a Canvas Sign, should default to white text when placed.",
 						"Dyes: [\"white\", \"orange\", \"magenta\", \"light_blue\", \"yellow\", \"lime\", \"pink\", \"gray\", \"light_gray\", \"cyan\", \"purple\", \"blue\", \"brown\", \"green\", \"red\", \"black\"]")
 				.defineList("canvasSignDarkBackgroundList", ImmutableList.of("gray", "purple", "blue", "brown", "green", "red", "black"), obj -> true);
+		COMMON_BUILDER.pop();
+
+		COMMON_BUILDER.comment("Recipe book").push(CATEGORY_RECIPE_BOOK);
+		ENABLE_RECIPE_BOOK_COOKING_POT = COMMON_BUILDER.comment("Should the Cooking Pot have a Recipe Book available on its interface?")
+				.define("enableRecipeBookCookingPot", true);
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("Vanilla item overrides").push(CATEGORY_OVERRIDES);

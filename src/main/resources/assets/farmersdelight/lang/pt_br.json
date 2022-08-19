@@ -189,6 +189,7 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
+  "farmersdelight.container.recipe_book.cookable": "Cozinháveis",
   "farmersdelight.container.cooking_pot": "Panela",
   "farmersdelight.container.cooking_pot.served_on": "Servido em: %s",
   "farmersdelight.container.cooking_pot.not_heated": "Precisa de calor por baixo",

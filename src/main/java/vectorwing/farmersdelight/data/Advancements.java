@@ -200,6 +200,7 @@ public class Advancements extends AdvancementProvider
 					.addCriterion("stuffed_pumpkin", PlacedBlockTrigger.TriggerInstance.placedBlock(ModBlocks.STUFFED_PUMPKIN_BLOCK.get()))
 					.addCriterion("honey_glazed_ham", PlacedBlockTrigger.TriggerInstance.placedBlock(ModBlocks.HONEY_GLAZED_HAM_BLOCK.get()))
 					.addCriterion("shepherds_pie", PlacedBlockTrigger.TriggerInstance.placedBlock(ModBlocks.SHEPHERDS_PIE_BLOCK.get()))
+					.addCriterion("rice_roll_medley", PlacedBlockTrigger.TriggerInstance.placedBlock(ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get()))
 					.requirements(RequirementsStrategy.OR)
 					.save(consumer, getNameId("main/place_feast"));
 
