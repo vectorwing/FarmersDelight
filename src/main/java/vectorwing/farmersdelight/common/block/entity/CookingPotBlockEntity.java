@@ -37,6 +37,7 @@ import vectorwing.farmersdelight.common.block.entity.inventory.CookingPotItemHan
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.mixin.accessor.RecipeManagerAccessor;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
+import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModParticleTypes;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
@@ -79,6 +80,56 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		this.cookingPotData = createIntArray();
 		this.usedRecipeTracker = new Object2IntOpenHashMap<>();
 		this.checkNewRecipe = true;
+	}
+
+	public static ItemStack getMealFromItem(ItemStack cookingPotStack) {
+		if (!cookingPotStack.is(ModItems.COOKING_POT.get())) {
+			return ItemStack.EMPTY;
+		}
+
+		CompoundTag compound = cookingPotStack.getTagElement("BlockEntityTag");
+		if (compound != null) {
+			CompoundTag inventoryTag = compound.getCompound("Inventory");
+			if (inventoryTag.contains("Items", 9)) {
+				ItemStackHandler handler = new ItemStackHandler();
+				handler.deserializeNBT(inventoryTag);
+				return handler.getStackInSlot(6);
+			}
+		}
+
+		return ItemStack.EMPTY;
+	}
+
+	public static void takeServingFromItem(ItemStack cookingPotStack) {
+		if (!cookingPotStack.is(ModItems.COOKING_POT.get())) {
+			return;
+		}
+
+		CompoundTag compound = cookingPotStack.getTagElement("BlockEntityTag");
+		if (compound != null) {
+			CompoundTag inventoryTag = compound.getCompound("Inventory");
+			if (inventoryTag.contains("Items", 9)) {
+				ItemStackHandler handler = new ItemStackHandler();
+				handler.deserializeNBT(inventoryTag);
+				ItemStack newMealStack = handler.getStackInSlot(6);
+				newMealStack.shrink(1);
+				compound.remove("Inventory");
+				compound.put("Inventory", handler.serializeNBT());
+			}
+		}
+	}
+
+	public static ItemStack getContainerFromItem(ItemStack cookingPotStack) {
+		if (!cookingPotStack.is(ModItems.COOKING_POT.get())) {
+			return ItemStack.EMPTY;
+		}
+
+		CompoundTag compound = cookingPotStack.getTagElement("BlockEntityTag");
+		if (compound != null) {
+			return ItemStack.of(compound.getCompound("Container"));
+		}
+
+		return ItemStack.EMPTY;
 	}
 
 	@Override
