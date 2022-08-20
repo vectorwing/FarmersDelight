@@ -824,6 +824,7 @@ be34126249ed7317b23ed824a011cda28cea13f5 data/forge/tags/items/vegetables/beetro
 40627c72fae961ee773ede39523ed65f68568e4c data/forge/tags/items/vegetables/onion.json
 1c951c2bae0947388025fc943118e4bf04fe0393 data/forge/tags/items/vegetables/potato.json
 96372565b5bba2039f97768cc9a924c4197e0947 data/forge/tags/items/vegetables/tomato.json
+7773d4b35e33a943fde5791011ee80a80e5c0e2a data/minecraft/recipes/food_serving.json
 721feacb3244b5607c0a12563963ca72b0be0ca9 data/minecraft/tags/blocks/bamboo_plantable_on.json
 3d08a1b63877a3cd2a803269fca075c549c3efa1 data/minecraft/tags/blocks/carpets.json
 d642d516a8ea6ba5652ec270b8f23d17d469c742 data/minecraft/tags/blocks/climbable.json

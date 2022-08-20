@@ -182,21 +182,15 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 	public void appendHoverText(ItemStack stack, @Nullable BlockGetter level, List<Component> tooltip, TooltipFlag flagIn) {
 		super.appendHoverText(stack, level, tooltip, flagIn);
 		CompoundTag nbt = stack.getTagElement("BlockEntityTag");
-		if (nbt != null) {
-			CompoundTag inventoryTag = nbt.getCompound("Inventory");
-			if (inventoryTag.contains("Items", 9)) {
-				ItemStackHandler handler = new ItemStackHandler();
-				handler.deserializeNBT(inventoryTag);
-				ItemStack mealStack = handler.getStackInSlot(6);
-				if (!mealStack.isEmpty()) {
-					MutableComponent textServingsOf = mealStack.getCount() == 1
-							? TextUtils.getTranslation("tooltip.cooking_pot.single_serving")
-							: TextUtils.getTranslation("tooltip.cooking_pot.many_servings", mealStack.getCount());
-					tooltip.add(textServingsOf.withStyle(ChatFormatting.GRAY));
-					MutableComponent textMealName = mealStack.getHoverName().copy();
-					tooltip.add(textMealName.withStyle(mealStack.getRarity().color));
-				}
-			}
+		ItemStack mealStack = CookingPotBlockEntity.getMealFromItem(stack);
+
+		if (!mealStack.isEmpty()) {
+			MutableComponent textServingsOf = mealStack.getCount() == 1
+					? TextUtils.getTranslation("tooltip.cooking_pot.single_serving")
+					: TextUtils.getTranslation("tooltip.cooking_pot.many_servings", mealStack.getCount());
+			tooltip.add(textServingsOf.withStyle(ChatFormatting.GRAY));
+			MutableComponent textMealName = mealStack.getHoverName().copy();
+			tooltip.add(textMealName.withStyle(mealStack.getRarity().color));
 		} else {
 			MutableComponent textEmpty = TextUtils.getTranslation("tooltip.cooking_pot.empty");
 			tooltip.add(textEmpty.withStyle(ChatFormatting.GRAY));
