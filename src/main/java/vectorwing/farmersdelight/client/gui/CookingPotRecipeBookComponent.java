@@ -37,7 +37,9 @@ public class CookingPotRecipeBookComponent extends RecipeBookComponent
 	public void setupGhostRecipe(Recipe<?> recipe, List<Slot> slots) {
 		ItemStack resultStack = recipe.getResultItem();
 		this.ghostRecipe.setRecipe(recipe);
-		this.ghostRecipe.addIngredient(Ingredient.of(resultStack), (slots.get(6)).x, (slots.get(6)).y);
+		if (slots.get(6).getItem().isEmpty()) {
+			this.ghostRecipe.addIngredient(Ingredient.of(resultStack), (slots.get(6)).x, (slots.get(6)).y);
+		}
 
 		if (recipe instanceof CookingPotRecipe cookingRecipe) {
 			ItemStack containerStack = cookingRecipe.getOutputContainer();

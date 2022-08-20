@@ -78,7 +78,7 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 		} else {
 			this.recipeBookComponent.render(ms, mouseX, mouseY, partialTicks);
 			super.render(ms, mouseX, mouseY, partialTicks);
-			this.recipeBookComponent.renderGhostRecipe(ms, this.leftPos, this.topPos, true, partialTicks);
+			this.recipeBookComponent.renderGhostRecipe(ms, this.leftPos, this.topPos, false, partialTicks);
 		}
 
 		this.renderMealDisplayTooltip(ms, mouseX, mouseY);
