@@ -746,14 +746,12 @@ public class CraftingRecipes
 				.requires(ModItems.SALMON_SLICE.get())
 				.requires(ModItems.SALMON_SLICE.get())
 				.requires(ModItems.COOKED_RICE.get())
-				.requires(Items.DRIED_KELP)
 				.unlockedBy("has_salmon_slice", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SALMON_SLICE.get()))
 				.save(consumer);
 		ShapelessRecipeBuilder.shapeless(ModItems.COD_ROLL.get(), 2)
 				.requires(ModItems.COD_SLICE.get())
 				.requires(ModItems.COD_SLICE.get())
 				.requires(ModItems.COOKED_RICE.get())
-				.requires(Items.DRIED_KELP)
 				.unlockedBy("has_cod_slice", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COD_SLICE.get()))
 				.save(consumer);
 		ShapedRecipeBuilder.shaped(ModItems.KELP_ROLL.get(), 1)

@@ -117,13 +117,13 @@ public class FoodValues
 	public static final FoodProperties CABBAGE_ROLLS = (new FoodProperties.Builder())
 			.nutrition(5).saturationMod(0.5f).build();
 	public static final FoodProperties SALMON_ROLL = (new FoodProperties.Builder())
-			.nutrition(9).saturationMod(0.8f).build();
+			.nutrition(7).saturationMod(0.6f).build();
 	public static final FoodProperties COD_ROLL = (new FoodProperties.Builder())
-			.nutrition(8).saturationMod(0.6f).build();
+			.nutrition(7).saturationMod(0.6f).build();
 	public static final FoodProperties KELP_ROLL = (new FoodProperties.Builder())
 			.nutrition(12).saturationMod(0.6f).build();
 	public static final FoodProperties KELP_ROLL_SLICE = (new FoodProperties.Builder())
-			.nutrition(6).saturationMod(0.6f).fast().build();
+			.nutrition(6).saturationMod(0.5f).fast().build();
 
 	// Bowl Foods
 	public static final FoodProperties COOKED_RICE = (new FoodProperties.Builder())
