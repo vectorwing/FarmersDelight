@@ -238,6 +238,16 @@
           ]
         }
       }
+    },
+    "mushroom_rice": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "farmersdelight:mushroom_rice"
+          ]
+        }
+      }
     }
   },
   "requirements": [
@@ -306,6 +316,9 @@
     ],
     [
       "bacon_and_eggs"
+    ],
+    [
+      "mushroom_rice"
     ]
   ]
 }

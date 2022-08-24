@@ -227,6 +227,7 @@ public class Advancements extends AdvancementProvider
 					.addCriterion("honey_glazed_ham", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.HONEY_GLAZED_HAM.get()))
 					.addCriterion("shepherds_pie", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.SHEPHERDS_PIE.get()))
 					.addCriterion("bacon_and_eggs", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.BACON_AND_EGGS.get()))
+					.addCriterion("mushroom_rice", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.MUSHROOM_RICE.get()))
 					.rewards(AdvancementRewards.Builder.experience(200))
 					.save(consumer, getNameId("main/master_chef"));
 		}
