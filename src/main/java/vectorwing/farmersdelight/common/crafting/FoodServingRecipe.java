@@ -21,38 +21,28 @@ public class FoodServingRecipe extends CustomRecipe
 	public boolean matches(CraftingContainer container, Level level) {
 		ItemStack cookingPotStack = ItemStack.EMPTY;
 		ItemStack containerStack = ItemStack.EMPTY;
+		ItemStack secondStack = ItemStack.EMPTY;
 
-		boolean hasFilledCookingPot = false;
-		boolean hasContainer = false;
-
-		for (int i = 0; i < container.getContainerSize(); ++i) {
-			ItemStack selectedStack = container.getItem(i);
-			if (!selectedStack.isEmpty() && selectedStack.is(ModItems.COOKING_POT.get())) {
-				if (hasFilledCookingPot) {
-					return false;
-				}
-				ItemStack mealStack = CookingPotBlockEntity.getMealFromItem(selectedStack);
-				if (mealStack.isEmpty()) {
-					return false;
-				}
-				cookingPotStack = selectedStack;
-				containerStack = CookingPotBlockEntity.getContainerFromItem(selectedStack);
-				hasFilledCookingPot = true;
-			}
-		}
-
-		for (int j = 0; j < container.getContainerSize(); ++j) {
-			ItemStack selectedStack = container.getItem(j);
+		for (int index = 0; index < container.getContainerSize(); ++index) {
+			ItemStack selectedStack = container.getItem(index);
 			if (!selectedStack.isEmpty()) {
-				if (selectedStack.is(containerStack.getItem()) && !hasContainer) {
-					hasContainer = true;
-				} else if (!selectedStack.equals(cookingPotStack)) {
+				if (cookingPotStack.isEmpty()) {
+					ItemStack mealStack = CookingPotBlockEntity.getMealFromItem(selectedStack);
+					if (!mealStack.isEmpty()) {
+						cookingPotStack = selectedStack;
+						containerStack = CookingPotBlockEntity.getContainerFromItem(selectedStack);
+						continue;
+					}
+				}
+				if (secondStack.isEmpty()) {
+					secondStack = selectedStack;
+				} else {
 					return false;
 				}
 			}
 		}
 
-		return hasFilledCookingPot && hasContainer;
+		return !cookingPotStack.isEmpty() && !secondStack.isEmpty() && secondStack.is(containerStack.getItem());
 	}
 
 	@Override
