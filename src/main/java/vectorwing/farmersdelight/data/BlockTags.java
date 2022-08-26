@@ -70,7 +70,8 @@ public class BlockTags extends BlockTagsProvider
 						ModBlocks.CHOCOLATE_PIE.get(),
 						ModBlocks.ROAST_CHICKEN_BLOCK.get(),
 						ModBlocks.HONEY_GLAZED_HAM_BLOCK.get(),
-						ModBlocks.SHEPHERDS_PIE_BLOCK.get())
+						ModBlocks.SHEPHERDS_PIE_BLOCK.get(),
+						ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get())
 				.addTag(net.minecraft.tags.BlockTags.WOOL_CARPETS)
 				.addTag(net.minecraft.tags.BlockTags.WOOL)
 				.addTag(net.minecraft.tags.BlockTags.CANDLE_CAKES)
@@ -80,7 +81,8 @@ public class BlockTags extends BlockTagsProvider
 
 	protected void registerMinecraftTags() {
 		tag(net.minecraft.tags.BlockTags.CLIMBABLE).add(
-				ModBlocks.ROPE.get());
+				ModBlocks.ROPE.get(),
+				ModBlocks.TOMATO_CROP.get());
 		tag(net.minecraft.tags.BlockTags.REPLACEABLE_PLANTS).add(
 				ModBlocks.SANDY_SHRUB.get());
 		tag(net.minecraft.tags.BlockTags.BAMBOO_PLANTABLE_ON).add(
@@ -92,6 +94,7 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.CABBAGE_CROP.get(),
 				ModBlocks.ONION_CROP.get(),
 				ModBlocks.RICE_CROP_PANICLES.get(),
+				ModBlocks.BUDDING_TOMATO_CROP.get(),
 				ModBlocks.TOMATO_CROP.get());
 		tag(net.minecraft.tags.BlockTags.STANDING_SIGNS).add(
 				ModBlocks.CANVAS_SIGN.get(),
