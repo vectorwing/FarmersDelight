@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.PlantType;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.Random;
@@ -41,12 +42,19 @@ public class BuddingBushBlock extends BushBlock
 		super(properties);
 	}
 
+	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return SHAPE_BY_AGE[state.getValue(getAgeProperty())];
 	}
 
+	@Override
 	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
 		return state.is(Blocks.FARMLAND);
+	}
+
+	@Override
+	public PlantType getPlantType(BlockGetter world, BlockPos pos) {
+		return PlantType.CROP;
 	}
 
 	public IntegerProperty getAgeProperty() {
@@ -69,10 +77,12 @@ public class BuddingBushBlock extends BushBlock
 		return state.getValue(getAgeProperty()) >= getMaxAge();
 	}
 
+	@Override
 	public boolean isRandomlyTicking(BlockState state) {
 		return canGrowPastMaxAge() || !isMaxAge(state);
 	}
 
+	@Override
 	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random) {
 		if (!level.isAreaLoaded(pos, 1)) return;
 		if (level.getRawBrightness(pos, 0) >= 9) {
@@ -142,11 +152,13 @@ public class BuddingBushBlock extends BushBlock
 		return speed;
 	}
 
+	@Override
 	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
 		return (level.getRawBrightness(pos, 0) >= 8 || level.canSeeSky(pos)) && super.canSurvive(state, level, pos);
 	}
 
 
+	@Override
 	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
 		if (entity instanceof Ravager && net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(level, entity)) {
 			level.destroyBlock(pos, true, entity);
@@ -159,10 +171,12 @@ public class BuddingBushBlock extends BushBlock
 		return ModItems.TOMATO_SEEDS.get();
 	}
 
+	@Override
 	public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
 		return new ItemStack(getBaseSeedId());
 	}
 
+	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(AGE);
 	}
