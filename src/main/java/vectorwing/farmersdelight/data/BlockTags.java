@@ -44,6 +44,7 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.DARK_OAK_CABINET.get(),
 				ModBlocks.CRIMSON_CABINET.get(),
 				ModBlocks.WARPED_CABINET.get(),
+				ModBlocks.SANDY_SHRUB.get(),
 				ModBlocks.STUFFED_PUMPKIN_BLOCK.get()
 		);
 		tag(net.minecraft.tags.BlockTags.MINEABLE_WITH_HOE).add(
@@ -79,6 +80,8 @@ public class BlockTags extends BlockTagsProvider
 	protected void registerMinecraftTags() {
 		tag(net.minecraft.tags.BlockTags.CLIMBABLE).add(
 				ModBlocks.ROPE.get());
+		tag(net.minecraft.tags.BlockTags.REPLACEABLE_PLANTS).add(
+				ModBlocks.SANDY_SHRUB.get());
 		tag(net.minecraft.tags.BlockTags.BAMBOO_PLANTABLE_ON).add(
 				ModBlocks.RICH_SOIL.get());
 		tag(net.minecraft.tags.BlockTags.MUSHROOM_GROW_BLOCK).add(
@@ -186,12 +189,12 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.BROWN_MUSHROOM_COLONY.get(),
 				ModBlocks.RED_MUSHROOM_COLONY.get());
 		tag(ModTags.UNAFFECTED_BY_RICH_SOIL).add(
+						Blocks.GRASS_BLOCK,
 						Blocks.GRASS,
-						Blocks.TALL_GRASS,
 						Blocks.FERN,
-						Blocks.LARGE_FERN,
 						Blocks.TWISTING_VINES,
 						Blocks.TWISTING_VINES_PLANT,
+						ModBlocks.SANDY_SHRUB.get(),
 						ModBlocks.BROWN_MUSHROOM_COLONY.get(),
 						ModBlocks.RED_MUSHROOM_COLONY.get())
 				.addTag(ModTags.WILD_CROPS);
