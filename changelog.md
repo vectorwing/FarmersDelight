@@ -24,6 +24,10 @@
   - `farmersdelight:cabinets`: This, together with `cabinets/wooden`, is used to classify cabinet items for searching, crafting and integration;
 
 ## Updates
+- The Tomato crop has been redesigned:
+  - Its first four growth stages are a block called `budding_tomatoes`. The normal `tomatoes` block involves four fruiting stages;
+  - The single crop works like before, growing 8 stages until it can be plucked for tomatoes;
+  - Hanging rope above the crop will make it **climb it up**, growing two additional tomato-bearing vines;
 - Some of the Wild Crops have received some visual upgrades, both in art and in world generation!
   - Wild Carrots, being weeds, will strangle some grass out, creating small patches of Coarse Dirt;
   - Wild Potatoes now scatter individual Alliums around them, making a more natural bush;
@@ -41,6 +45,8 @@
 ## Fixes
 - Fix Wild Crops being able to generate on non-Overworld biomes under the right conditions (such as valid dirt blocks in the Nether or End);
 - Fix Rope not emitting sounds when entities are climbing on it;
+- Fix minor pixel inconsistency on all cross crop templates;
+- Fix Grass Block not being in `unaffected_by_rich_soil` tag, and tall ferns/grasses being on it;
 - Fix Cabinets using Barrel subtitles;
 - Fix Nourishment not being strong enough to counter extreme exhaustion levels, such as Lv. 255 Hunger;
 
