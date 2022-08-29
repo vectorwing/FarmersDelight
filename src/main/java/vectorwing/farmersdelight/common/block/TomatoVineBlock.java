@@ -104,10 +104,6 @@ public class TomatoVineBlock extends CropBlock
 		return this.defaultBlockState().setValue(this.getAgeProperty(), age);
 	}
 
-	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
-		return state.is(ModBlocks.TOMATO_CROP.get()) || super.mayPlaceOn(state, level, pos);
-	}
-
 	@Override
 	public IntegerProperty getAgeProperty() {
 		return VINE_AGE;
@@ -154,5 +150,10 @@ public class TomatoVineBlock extends CropBlock
 	public boolean isLadder(BlockState state, LevelReader level, BlockPos pos, LivingEntity entity)
 	{
 		return state.getValue(ROPELOGGED) && state.is(BlockTags.CLIMBABLE);
+	}
+
+	@Override
+	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
+		return state.is(ModBlocks.TOMATO_CROP.get()) || super.mayPlaceOn(state, level, pos);
 	}
 }
