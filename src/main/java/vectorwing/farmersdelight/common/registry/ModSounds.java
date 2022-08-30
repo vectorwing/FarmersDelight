@@ -25,6 +25,12 @@ public class ModSounds
 	public static final RegistryObject<SoundEvent> BLOCK_CUTTING_BOARD_KNIFE = SOUNDS.register("block.cutting_board.knife",
 			() -> new SoundEvent(new ResourceLocation(FarmersDelight.MODID, "block.cutting_board.knife")));
 
+	// Cabinet
+	public static final RegistryObject<SoundEvent> BLOCK_CABINET_OPEN = SOUNDS.register("block.cabinet.open",
+			() -> new SoundEvent(new ResourceLocation(FarmersDelight.MODID, "block.cabinet.open")));
+	public static final RegistryObject<SoundEvent> BLOCK_CABINET_CLOSE = SOUNDS.register("block.cabinet.close",
+			() -> new SoundEvent(new ResourceLocation(FarmersDelight.MODID, "block.cabinet.close")));
+
 	// Skillet
 	public static final RegistryObject<SoundEvent> BLOCK_SKILLET_SIZZLE = SOUNDS.register("block.skillet.sizzle",
 			() -> new SoundEvent(new ResourceLocation(FarmersDelight.MODID, "block.skillet.sizzle")));

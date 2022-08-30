@@ -42,6 +42,7 @@
 ## Fixes
 - Fix Wild Crops being able to generate on non-Overworld biomes under the right conditions (such as valid dirt blocks in the Nether or End);
 - Fix Rope not emitting sounds when entities are climbing on it;
+- Fix Cabinets using Barrel subtitles;
 
 ## 1.1.2
 
