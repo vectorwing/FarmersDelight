@@ -7,8 +7,7 @@
   - Opening the GUI will reveal the familiar green book button. Press it to see your current cooking recipes;
   - Recipes are unlocked in the same fashion as vanilla: by having one of its ingredients, or cooking the recipe from memory once;
   - Added optional `"recipe_book_tab"` field for cooking recipes, which lets the recipe specify which tab it goes into:
-    - Valid options are `meals, drinks, misc`;
-    - If not provided, the recipe's tab will be determined in-code;
+    - Valid options are `meals, drinks, misc`. If not provided, the recipe's tab will be determined in-code;
 - New foods:
   - Salmon Roll, Cod Roll and Kelp Roll - A new way to enjoy your fishing spoils, if you're equipped with watery crops;
     - A full Kelp Roll is quite awkward to eat, so it takes a while. But if you cut it on a Cutting Board, you get bite-sized snacks to eat quickly;
@@ -18,7 +17,6 @@
 - New blocks:
   - **Sandy Shrub** - A short plant which invades the beach coast, alongside Wild Cabbage and Sea Beet!
     - You can bone meal the shrub to make it spread across nearby sand;
-    - This shrub is slightly more likely to give Straw than Grass, when broken with a Knife;
   - **Rice Roll Medley** - Display your knife skills with a selection of salmon, cod and kelp rolls!
     - Unlike other feasts, this gives individual rolls instead of meals. No, you can't put them back after taking one, it's bad manners!;
 - New tag: `forge:dough`. Used to add modded dough items to FD's recipes, and populated by Wheat Dough by default;
@@ -33,7 +31,7 @@
 - You can now take servings from a Cooking Pot directly in a crafting grid, by placing the pot and a valid container on it;
 - Updated a few recipes:
   - Knives are now crafted in a **vertical** arrangement instead of diagonal. This was done to reduce recipe conflicts with other mods;
-  - Barbecue on a Stick is now made from any cooked meat! Have your barbecue your way;
+  - Barbecue on a Stick can now be made from any cooked meat;
 - All cooking recipes have received a bump in their experience reward, since the old ratios were very pitiful;
 - Skillet damage has been slightly buffed;
 - Updated translations:
@@ -43,6 +41,7 @@
 - Fix Wild Crops being able to generate on non-Overworld biomes under the right conditions (such as valid dirt blocks in the Nether or End);
 - Fix Rope not emitting sounds when entities are climbing on it;
 - Fix Cabinets using Barrel subtitles;
+- Fix Nourishment not being strong enough to counter extreme exhaustion levels, such as Lv. 255 Hunger;
 
 ## 1.1.2
 

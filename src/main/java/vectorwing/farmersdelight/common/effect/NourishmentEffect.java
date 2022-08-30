@@ -28,7 +28,7 @@ public class NourishmentEffect extends MobEffect
 							&& foodData.getFoodLevel() >= 20;
 			if (!isPlayerHealingWithSaturation) {
 				float exhaustion = foodData.getExhaustionLevel();
-				float reduction = Math.min(exhaustion, 0.1F);
+				float reduction = Math.min(exhaustion, 4.0F);
 				if (exhaustion > 0.0F) {
 					player.causeFoodExhaustion(-reduction);
 				}
