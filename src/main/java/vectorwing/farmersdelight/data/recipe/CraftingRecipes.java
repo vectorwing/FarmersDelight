@@ -380,7 +380,7 @@ public class CraftingRecipes
 				.pattern("###")
 				.pattern("###")
 				.pattern("###")
-				.define('#', ModItems.STRAW.get())
+				.define('#', ForgeTags.STRAW)
 				.unlockedBy("has_straw", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.STRAW.get()))
 				.save(consumer);
 		ShapelessRecipeBuilder.shapeless(ModItems.CANVAS_RUG.get(), 2)
@@ -396,8 +396,8 @@ public class CraftingRecipes
 				.requires(Items.DIRT)
 				.requires(Items.ROTTEN_FLESH)
 				.requires(Items.ROTTEN_FLESH)
-				.requires(ModItems.STRAW.get())
-				.requires(ModItems.STRAW.get())
+				.requires(ForgeTags.STRAW)
+				.requires(ForgeTags.STRAW)
 				.requires(Items.BONE_MEAL)
 				.requires(Items.BONE_MEAL)
 				.requires(Items.BONE_MEAL)
@@ -407,8 +407,8 @@ public class CraftingRecipes
 				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "organic_compost_from_rotten_flesh"));
 		ShapelessRecipeBuilder.shapeless(ModItems.ORGANIC_COMPOST.get(), 1)
 				.requires(Items.DIRT)
-				.requires(ModItems.STRAW.get())
-				.requires(ModItems.STRAW.get())
+				.requires(ForgeTags.STRAW)
+				.requires(ForgeTags.STRAW)
 				.requires(Items.BONE_MEAL)
 				.requires(Items.BONE_MEAL)
 				.requires(ModItems.TREE_BARK.get())
@@ -422,7 +422,7 @@ public class CraftingRecipes
 				.pattern("cs")
 				.pattern("sc")
 				.define('c', ModItems.CANVAS.get())
-				.define('s', ModItems.STRAW.get())
+				.define('s', ForgeTags.STRAW)
 				.unlockedBy("has_canvas", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CANVAS.get()))
 				.save(consumer);
 
@@ -487,7 +487,7 @@ public class CraftingRecipes
 		ShapedRecipeBuilder.shaped(ModItems.CANVAS.get())
 				.pattern("##")
 				.pattern("##")
-				.define('#', ModItems.STRAW.get())
+				.define('#', ForgeTags.STRAW)
 				.unlockedBy("has_straw", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.STRAW.get()))
 				.save(consumer);
 		ShapelessRecipeBuilder.shapeless(Items.CARROT, 9)

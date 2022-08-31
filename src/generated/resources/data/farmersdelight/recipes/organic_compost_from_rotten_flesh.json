@@ -11,10 +11,10 @@
       "item": "minecraft:rotten_flesh"
     },
     {
-      "item": "farmersdelight:straw"
+      "tag": "forge:straw"
     },
     {
-      "item": "farmersdelight:straw"
+      "tag": "forge:straw"
     },
     {
       "item": "minecraft:bone_meal"

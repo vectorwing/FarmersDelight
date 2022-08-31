@@ -5,10 +5,10 @@
       "item": "minecraft:dirt"
     },
     {
-      "item": "farmersdelight:straw"
+      "tag": "forge:straw"
     },
     {
-      "item": "farmersdelight:straw"
+      "tag": "forge:straw"
     },
     {
       "item": "minecraft:bone_meal"
