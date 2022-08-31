@@ -19,8 +19,9 @@
     - You can bone meal the shrub to make it spread across nearby sand;
   - **Rice Roll Medley** - Display your knife skills with a selection of salmon, cod and kelp rolls!
     - Unlike other feasts, this gives individual rolls instead of meals. No, you can't put them back after taking one, it's bad manners!;
-- New tag: `forge:dough`. Used to add modded dough items to FD's recipes, and populated by Wheat Dough by default;
-  - Recipes in FD now use this tag for ingredients, allowing mods to use it;
+- New tags: 
+  - `forge:dough`: Used to add modded dough items to FD's recipes, and populated by Wheat Dough by default;
+  - `farmersdelight:cabinets`: This, together with `cabinets/wooden`, is used to classify cabinet items for searching, crafting and integration;
 
 ## Updates
 - Some of the Wild Crops have received some visual upgrades, both in art and in world generation!
@@ -36,14 +37,19 @@
   - Milk Buckets and Bottles now convert between each other at a 1:4 ratio;
 - All cooking recipes have received a bump in their experience reward, since the old ratios were very pitiful;
 - Skillet damage has been slightly buffed;
-- Updated translations:
-  - ca_ES (thanks, VerdaPegasus!);
 
 ## Fixes
 - Fix Wild Crops being able to generate on non-Overworld biomes under the right conditions (such as valid dirt blocks in the Nether or End);
 - Fix Rope not emitting sounds when entities are climbing on it;
 - Fix Cabinets using Barrel subtitles;
 - Fix Nourishment not being strong enough to counter extreme exhaustion levels, such as Lv. 255 Hunger;
+
+## Translations
+- Added:
+  - vi_VN (thanks, baooduy!);
+  - uk_UA (thanks, Altegar!);
+- Updated:
+  - ca_ES (thanks, VerdaPegasus!);
 
 ## 1.1.2
 

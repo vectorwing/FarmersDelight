@@ -51,7 +51,7 @@ public class RopeBlock extends IronBarsBlock
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (player.getItemInHand(hand).isEmpty()) {
 			if (Configuration.ENABLE_ROPE_REELING.get() && player.isSecondaryUseActive()) {
-				if (player.getAbilities().mayBuild && player.getInventory().add(new ItemStack(this.asItem()))) {
+				if (player.getAbilities().mayBuild && (player.getAbilities().instabuild || player.getInventory().add(new ItemStack(this.asItem())))) {
 					BlockPos.MutableBlockPos reelingPos = pos.mutable().move(Direction.DOWN);
 					int minBuildHeight = level.getMinBuildHeight();
 
