@@ -28,7 +28,8 @@
   - Wild Potatoes now scatter individual Alliums around them, making a more natural bush;
   - Tomato Vines and Wild Potatoes now grow amidst a bush of local foliage;
   - Wild Cabbage and Sea Beet now grow amidst a patch of Sandy Shrub, a new beach plant;
-- You can now take servings from a Cooking Pot directly in a crafting grid, by placing the pot and a valid container on it;
+- You can now take servings from a Cooking Pot **directly in a crafting grid**, by placing the pot and a valid container on it;
+- Rope can now be **reeled back** from the top end by sneak-using with am empty hand on it;
 - Updated a few recipes:
   - Knives are now crafted in a **vertical** arrangement instead of diagonal. This was done to reduce recipe conflicts with other mods;
   - Barbecue on a Stick can now be made from any cooked meat;
