@@ -33,6 +33,7 @@
 - Updated a few recipes:
   - Knives are now crafted in a **vertical** arrangement instead of diagonal. This was done to reduce recipe conflicts with other mods;
   - Barbecue on a Stick can now be made from any cooked meat;
+  - Milk Buckets and Bottles now convert between each other at a 1:4 ratio;
 - All cooking recipes have received a bump in their experience reward, since the old ratios were very pitiful;
 - Skillet damage has been slightly buffed;
 - Updated translations:

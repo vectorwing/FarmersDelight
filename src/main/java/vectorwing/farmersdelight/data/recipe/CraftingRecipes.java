@@ -104,6 +104,7 @@ public class CraftingRecipes
 				.requires(ModItems.MILK_BOTTLE.get())
 				.requires(ModItems.MILK_BOTTLE.get())
 				.requires(ModItems.MILK_BOTTLE.get())
+				.requires(ModItems.MILK_BOTTLE.get())
 				.unlockedBy("has_milk_bottle", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.MILK_BOTTLE.get()))
 				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "milk_bucket_from_bottles"));
 		ShapelessRecipeBuilder.shapeless(Items.PAPER)
@@ -538,8 +539,9 @@ public class CraftingRecipes
 				.requires(Ingredient.of(ModItems.TOMATO.get(), ModItems.ROTTEN_TOMATO.get()))
 				.unlockedBy("has_tomato", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.TOMATO.get()))
 				.save(consumer);
-		ShapelessRecipeBuilder.shapeless(ModItems.MILK_BOTTLE.get(), 3)
+		ShapelessRecipeBuilder.shapeless(ModItems.MILK_BOTTLE.get(), 4)
 				.requires(Items.MILK_BUCKET)
+				.requires(Items.GLASS_BOTTLE)
 				.requires(Items.GLASS_BOTTLE)
 				.requires(Items.GLASS_BOTTLE)
 				.requires(Items.GLASS_BOTTLE)
