@@ -87,6 +87,9 @@ public class FoodValues
 	public static final FoodProperties FRUIT_SALAD = (new FoodProperties.Builder())
 			.nutrition(6).saturationMod(0.6f)
 			.effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 100, 0), 1.0F).build();
+	public static final FoodProperties GLOW_BERRY_CUSTARD = (new FoodProperties.Builder())
+			.nutrition(7).saturationMod(0.6f).alwaysEat()
+			.effect(() -> new MobEffectInstance(MobEffects.GLOWING, 100, 0), 1.0F).build();
 
 	// Handheld Foods
 	public static final FoodProperties MIXED_SALAD = (new FoodProperties.Builder())
@@ -113,11 +116,22 @@ public class FoodValues
 			.nutrition(10).saturationMod(0.7f).build();
 	public static final FoodProperties CABBAGE_ROLLS = (new FoodProperties.Builder())
 			.nutrition(5).saturationMod(0.5f).build();
+	public static final FoodProperties SALMON_ROLL = (new FoodProperties.Builder())
+			.nutrition(7).saturationMod(0.6f).build();
+	public static final FoodProperties COD_ROLL = (new FoodProperties.Builder())
+			.nutrition(7).saturationMod(0.6f).build();
+	public static final FoodProperties KELP_ROLL = (new FoodProperties.Builder())
+			.nutrition(12).saturationMod(0.6f).build();
+	public static final FoodProperties KELP_ROLL_SLICE = (new FoodProperties.Builder())
+			.nutrition(6).saturationMod(0.5f).fast().build();
 
 	// Bowl Foods
 	public static final FoodProperties COOKED_RICE = (new FoodProperties.Builder())
 			.nutrition(6).saturationMod(0.4f)
 			.effect(() -> new MobEffectInstance(ModEffects.COMFORT.get(), BRIEF_DURATION, 0), 1.0F).build();
+	public static final FoodProperties BONE_BROTH = (new FoodProperties.Builder())
+			.nutrition(8).saturationMod(0.7f)
+			.effect(() -> new MobEffectInstance(ModEffects.COMFORT.get(), SHORT_DURATION, 0), 1.0F).build();
 	public static final FoodProperties BEEF_STEW = (new FoodProperties.Builder())
 			.nutrition(10).saturationMod(0.8f)
 			.effect(() -> new MobEffectInstance(ModEffects.COMFORT.get(), MEDIUM_DURATION, 0), 1.0F).build();
@@ -157,6 +171,9 @@ public class FoodValues
 			.nutrition(10).saturationMod(0.8f)
 			.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), MEDIUM_DURATION, 0), 1.0F).build();
 	public static final FoodProperties PASTA_WITH_MUTTON_CHOP = (new FoodProperties.Builder())
+			.nutrition(10).saturationMod(0.8f)
+			.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), MEDIUM_DURATION, 0), 1.0F).build();
+	public static final FoodProperties MUSHROOM_RICE = (new FoodProperties.Builder())
 			.nutrition(10).saturationMod(0.8f)
 			.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), MEDIUM_DURATION, 0), 1.0F).build();
 	public static final FoodProperties ROASTED_MUTTON_CHOPS = (new FoodProperties.Builder())

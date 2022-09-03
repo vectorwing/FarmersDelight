@@ -45,28 +45,28 @@ public class TatamiBlock extends Block
 	}
 
 	@Override
-	public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-		super.setPlacedBy(worldIn, pos, state, placer, stack);
-		if (!worldIn.isClientSide) {
+	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+		super.setPlacedBy(level, pos, state, placer, stack);
+		if (!level.isClientSide) {
 			if (placer != null && placer.isShiftKeyDown()) {
 				return;
 			}
 			BlockPos facingPos = pos.relative(state.getValue(FACING));
-			BlockState facingState = worldIn.getBlockState(facingPos);
+			BlockState facingState = level.getBlockState(facingPos);
 			if (facingState.getBlock() == this && !facingState.getValue(PAIRED)) {
-				worldIn.setBlock(facingPos, state.setValue(FACING, state.getValue(FACING).getOpposite()).setValue(PAIRED, true), 3);
-				worldIn.blockUpdated(pos, Blocks.AIR);
-				state.updateNeighbourShapes(worldIn, pos, 3);
+				level.setBlock(facingPos, state.setValue(FACING, state.getValue(FACING).getOpposite()).setValue(PAIRED, true), 3);
+				level.blockUpdated(pos, Blocks.AIR);
+				state.updateNeighbourShapes(level, pos, 3);
 			}
 		}
 	}
 
 	@Override
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
-		if (facing.equals(stateIn.getValue(FACING)) && stateIn.getValue(PAIRED) && worldIn.getBlockState(facingPos).getBlock() != this) {
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+		if (facing.equals(stateIn.getValue(FACING)) && stateIn.getValue(PAIRED) && level.getBlockState(facingPos).getBlock() != this) {
 			return stateIn.setValue(PAIRED, false);
 		}
-		return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+		return super.updateShape(stateIn, facing, facingState, level, currentPos, facingPos);
 	}
 
 	@Override

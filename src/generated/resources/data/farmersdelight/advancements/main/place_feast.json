@@ -7,13 +7,17 @@
       },
       "trigger": "minecraft:placed_block"
     },
-    "roast_chicken": {
-      "conditions": {
-        "block": "farmersdelight:roast_chicken_block"
-      },
-      "trigger": "minecraft:placed_block"
+    "description": {
+      "translate": "farmersdelight.advancement.place_feast.desc"
     },
-    "shepherds_pie": {
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "roast_chicken": {
+      "trigger": "minecraft:placed_block",
       "conditions": {
         "block": "farmersdelight:shepherds_pie_block"
       },
@@ -31,14 +35,11 @@
     "description": {
       "translate": "farmersdelight.advancement.place_feast.desc"
     },
-    "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "farmersdelight:roast_chicken_block"
-    },
-    "show_toast": true,
-    "title": {
-      "translate": "farmersdelight.advancement.place_feast"
+    "shepherds_pie": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "farmersdelight:shepherds_pie_block"
+      }
     }
   },
   "requirements": [
@@ -46,7 +47,8 @@
       "roast_chicken",
       "stuffed_pumpkin",
       "honey_glazed_ham",
-      "shepherds_pie"
+      "shepherds_pie",
+      "rice_roll_medley"
     ]
   ]
 }

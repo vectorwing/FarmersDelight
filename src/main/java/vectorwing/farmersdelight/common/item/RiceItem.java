@@ -16,8 +16,8 @@ import net.minecraft.world.item.Item.Properties;
 
 public class RiceItem extends ItemNameBlockItem
 {
-	public RiceItem(Block blockIn, Properties properties) {
-		super(blockIn, properties);
+	public RiceItem(Block block, Properties properties) {
+		super(block, properties);
 	}
 
 	@Override

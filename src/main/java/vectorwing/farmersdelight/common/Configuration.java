@@ -19,7 +19,11 @@ public class Configuration
 	public static ForgeConfigSpec.BooleanValue WANDERING_TRADER_SELLS_FD_ITEMS;
 	public static ForgeConfigSpec.DoubleValue RICH_SOIL_BOOST_CHANCE;
 	public static ForgeConfigSpec.DoubleValue CUTTING_BOARD_FORTUNE_BONUS;
+	public static ForgeConfigSpec.BooleanValue ENABLE_ROPE_REELING;
 	public static ForgeConfigSpec.ConfigValue<List<? extends String>> CANVAS_SIGN_DARK_BACKGROUND_LIST;
+
+	public static final String CATEGORY_RECIPE_BOOK = "recipe_book";
+	public static ForgeConfigSpec.BooleanValue ENABLE_RECIPE_BOOK_COOKING_POT;
 
 	public static final String CATEGORY_OVERRIDES = "overrides";
 	public static ForgeConfigSpec.BooleanValue VANILLA_SOUP_EXTRA_EFFECTS;
@@ -70,9 +74,16 @@ public class Configuration
 				.defineInRange("richSoilBoostChance", 0.2, 0.0, 1.0);
 		CUTTING_BOARD_FORTUNE_BONUS = COMMON_BUILDER.comment("How much of a bonus (in percentage) should each level of Fortune grant to Cutting Board chances? Set it to 0.0 to disable this.")
 				.defineInRange("cuttingBoardFortuneBonus", 0.1, 0.0, 1.0);
+		ENABLE_ROPE_REELING = COMMON_BUILDER.comment("Should players be able to reel back rope, bottom to top, when sneak-using with an empty hand on them?")
+				.define("enableRopeReeling", true);
 		CANVAS_SIGN_DARK_BACKGROUND_LIST = COMMON_BUILDER.comment("A list of dye colors that, when used as the background of a Canvas Sign, should default to white text when placed.",
 						"Dyes: [\"white\", \"orange\", \"magenta\", \"light_blue\", \"yellow\", \"lime\", \"pink\", \"gray\", \"light_gray\", \"cyan\", \"purple\", \"blue\", \"brown\", \"green\", \"red\", \"black\"]")
 				.defineList("canvasSignDarkBackgroundList", ImmutableList.of("gray", "purple", "blue", "brown", "green", "red", "black"), obj -> true);
+		COMMON_BUILDER.pop();
+
+		COMMON_BUILDER.comment("Recipe book").push(CATEGORY_RECIPE_BOOK);
+		ENABLE_RECIPE_BOOK_COOKING_POT = COMMON_BUILDER.comment("Should the Cooking Pot have a Recipe Book available on its interface?")
+				.define("enableRecipeBookCookingPot", true);
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("Vanilla item overrides").push(CATEGORY_OVERRIDES);

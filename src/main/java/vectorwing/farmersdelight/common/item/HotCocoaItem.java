@@ -19,7 +19,7 @@ public class HotCocoaItem extends DrinkableItem
 	}
 
 	@Override
-	public void affectConsumer(ItemStack stack, Level worldIn, LivingEntity consumer) {
+	public void affectConsumer(ItemStack stack, Level level, LivingEntity consumer) {
 		Iterator<MobEffectInstance> itr = consumer.getActiveEffects().iterator();
 		ArrayList<MobEffect> compatibleEffects = new ArrayList<>();
 
@@ -31,7 +31,7 @@ public class HotCocoaItem extends DrinkableItem
 		}
 
 		if (compatibleEffects.size() > 0) {
-			MobEffectInstance selectedEffect = consumer.getEffect(compatibleEffects.get(worldIn.random.nextInt(compatibleEffects.size())));
+			MobEffectInstance selectedEffect = consumer.getEffect(compatibleEffects.get(level.random.nextInt(compatibleEffects.size())));
 			if (selectedEffect != null && !net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.living.MobEffectEvent.Remove(consumer, selectedEffect))) {
 				consumer.removeEffect(selectedEffect.getEffect());
 			}

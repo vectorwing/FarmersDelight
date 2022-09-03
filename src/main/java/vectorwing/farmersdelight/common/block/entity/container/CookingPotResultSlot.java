@@ -54,7 +54,7 @@ public class CookingPotResultSlot extends SlotItemHandler
 		stack.onCraftedBy(this.player.level, this.player, this.removeCount);
 
 		if (!this.player.level.isClientSide) {
-			tileEntity.clearUsedRecipes(this.player);
+			tileEntity.awardUsedRecipes(this.player);
 		}
 
 		this.removeCount = 0;

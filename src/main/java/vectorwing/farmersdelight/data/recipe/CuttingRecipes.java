@@ -1,13 +1,14 @@
 package vectorwing.farmersdelight.data.recipe;
 
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolActions;
-import net.minecraftforge.registries.ForgeRegistries;
+import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.crafting.ingredient.ToolActionIngredient;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
@@ -21,7 +22,7 @@ public class CuttingRecipes
 		// Knife
 		cuttingAnimalItems(consumer);
 		cuttingVegetables(consumer);
-		cuttingPastries(consumer);
+		cuttingFoods(consumer);
 		cuttingFlowers(consumer);
 
 		// Pickaxe
@@ -91,8 +92,10 @@ public class CuttingRecipes
 				.build(consumer);
 	}
 
-	private static void cuttingPastries(Consumer<FinishedRecipe> consumer) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WHEAT_DOUGH.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.RAW_PASTA.get(), 1)
+	private static void cuttingFoods(Consumer<FinishedRecipe> consumer) {
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ForgeTags.DOUGH), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.RAW_PASTA.get(), 1)
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "cutting/tag_dough"));
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.KELP_ROLL.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.KELP_ROLL_SLICE.get(), 3)
 				.build(consumer);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CAKE), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.CAKE_SLICE.get(), 7)
 				.build(consumer);

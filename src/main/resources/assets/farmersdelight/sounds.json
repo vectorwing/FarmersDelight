@@ -55,6 +55,24 @@
       }
     ]
   },
+  "block.cabinet.open": {
+    "subtitle": "farmersdelight.subtitles.cabinet.open",
+    "sounds": [
+      {
+        "name": "block.barrel.open",
+        "type": "event"
+      }
+    ]
+  },
+  "block.cabinet.close": {
+    "subtitle": "farmersdelight.subtitles.cabinet.close",
+    "sounds": [
+      {
+        "name": "block.barrel.close",
+        "type": "event"
+      }
+    ]
+  },
   "block.tomato_bush.pick_tomatoes": {
     "subtitle": "farmersdelight.subtitles.tomato.pick",
     "sounds": [

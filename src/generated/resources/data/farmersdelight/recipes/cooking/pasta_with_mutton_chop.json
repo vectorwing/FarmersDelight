@@ -1,7 +1,6 @@
 {
   "type": "farmersdelight:cooking",
-  "cookingtime": 200,
-  "experience": 0.35,
+  "recipe_book_tab": "meals",
   "ingredients": [
     {
       "tag": "forge:raw_mutton"
@@ -15,5 +14,7 @@
   ],
   "result": {
     "item": "farmersdelight:pasta_with_mutton_chop"
-  }
+  },
+  "experience": 1.0,
+  "cookingtime": 200
 }

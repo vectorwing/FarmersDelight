@@ -1,5 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "m",
+    "s"
+  ],
   "key": {
     "m": {
       "item": "minecraft:flint"
@@ -8,10 +12,6 @@
       "item": "minecraft:stick"
     }
   },
-  "pattern": [
-    " m",
-    "s "
-  ],
   "result": {
     "item": "farmersdelight:flint_knife"
   }

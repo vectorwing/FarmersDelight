@@ -31,7 +31,7 @@ public class CabbageBlock extends CropBlock
 	}
 
 	@Override
-	public BlockState getPlant(BlockGetter world, BlockPos pos) {
+	public BlockState getPlant(BlockGetter level, BlockPos pos) {
 		return ModBlocks.CABBAGE_CROP.get().defaultBlockState();
 	}
 
@@ -41,7 +41,7 @@ public class CabbageBlock extends CropBlock
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
 	}
 }

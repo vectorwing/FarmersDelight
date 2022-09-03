@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:cod_roll"
+    ]
+  },
+  "criteria": {
+    "has_cod_slice": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "farmersdelight:cod_slice"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:cod_roll"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cod_slice",
+      "has_the_recipe"
+    ]
+  ]
+}

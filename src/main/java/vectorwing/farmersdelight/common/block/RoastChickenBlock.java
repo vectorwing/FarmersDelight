@@ -24,7 +24,7 @@ public class RoastChickenBlock extends FeastBlock
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return state.getValue(SERVINGS) == 0 ? PLATE_SHAPE : ROAST_SHAPE;
 	}
 }

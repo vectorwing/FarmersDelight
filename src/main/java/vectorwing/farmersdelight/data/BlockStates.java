@@ -161,13 +161,15 @@ public class BlockStates extends BlockStateProvider
 		this.feastBlock((FeastBlock) ModBlocks.ROAST_CHICKEN_BLOCK.get());
 		this.feastBlock((FeastBlock) ModBlocks.HONEY_GLAZED_HAM_BLOCK.get());
 		this.feastBlock((FeastBlock) ModBlocks.SHEPHERDS_PIE_BLOCK.get());
+		this.feastBlock((FeastBlock) ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get());
 
-		this.wildCropBlock(ModBlocks.WILD_BEETROOTS.get(), false);
-		this.wildCropBlock(ModBlocks.WILD_CABBAGES.get(), false);
-		this.wildCropBlock(ModBlocks.WILD_POTATOES.get(), false);
-		this.wildCropBlock(ModBlocks.WILD_TOMATOES.get(), false);
-		this.wildCropBlock(ModBlocks.WILD_CARROTS.get(), true);
-		this.wildCropBlock(ModBlocks.WILD_ONIONS.get(), true);
+		this.wildCropBlock(ModBlocks.SANDY_SHRUB.get());
+		this.wildCropBlock(ModBlocks.WILD_BEETROOTS.get());
+		this.wildCropBlock(ModBlocks.WILD_CABBAGES.get());
+		this.wildCropBlock(ModBlocks.WILD_POTATOES.get());
+		this.wildCropBlock(ModBlocks.WILD_TOMATOES.get());
+		this.wildCropBlock(ModBlocks.WILD_CARROTS.get());
+		this.wildCropBlock(ModBlocks.WILD_ONIONS.get());
 		this.doublePlantBlock(ModBlocks.WILD_RICE.get());
 	}
 
@@ -222,6 +224,10 @@ public class BlockStates extends BlockStateProvider
 				}, ignored);
 	}
 
+	public void wildCropBlock(Block block) {
+		this.wildCropBlock(block, false);
+	}
+
 	public void wildCropBlock(Block block, boolean isBushCrop) {
 		if (isBushCrop) {
 			this.simpleBlock(block, models().singleTexture(blockName(block), resourceBlock("bush_crop"), "crop", resourceBlock(blockName(block))).renderType("cutout"));
@@ -248,12 +254,13 @@ public class BlockStates extends BlockStateProvider
 	public void feastBlock(FeastBlock block) {
 		getVariantBuilder(block)
 				.forAllStates(state -> {
-					int servings = state.getValue(FeastBlock.SERVINGS);
+					IntegerProperty servingsProperty = block.getServingsProperty();
+					int servings = state.getValue(servingsProperty);
 
 					String suffix = "_stage" + (block.getMaxServings() - servings);
 
 					if (servings == 0) {
-						suffix = block.hasLeftovers ? "_leftover" : "_stage3";
+						suffix = block.hasLeftovers ? "_leftover" : "_stage" + (servingsProperty.getPossibleValues().toArray().length - 2);
 					}
 
 					return ConfiguredModel.builder()

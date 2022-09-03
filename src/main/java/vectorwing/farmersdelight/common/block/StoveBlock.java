@@ -59,34 +59,34 @@ public class StoveBlock extends BaseEntityBlock
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-		ItemStack heldStack = player.getItemInHand(handIn);
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		ItemStack heldStack = player.getItemInHand(hand);
 		Item heldItem = heldStack.getItem();
 
 		if (state.getValue(LIT)) {
 			if (heldStack.canPerformAction(ToolActions.SHOVEL_DIG)) {
-				extinguish(state, worldIn, pos);
-				heldStack.hurtAndBreak(1, player, action -> action.broadcastBreakEvent(handIn));
+				extinguish(state, level, pos);
+				heldStack.hurtAndBreak(1, player, action -> action.broadcastBreakEvent(hand));
 				return InteractionResult.SUCCESS;
 			} else if (heldItem == Items.WATER_BUCKET) {
-				if (!worldIn.isClientSide()) {
-					worldIn.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 1.0F, 1.0F);
+				if (!level.isClientSide()) {
+					level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 1.0F, 1.0F);
 				}
-				extinguish(state, worldIn, pos);
+				extinguish(state, level, pos);
 				if (!player.isCreative()) {
-					player.setItemInHand(handIn, new ItemStack(Items.BUCKET));
+					player.setItemInHand(hand, new ItemStack(Items.BUCKET));
 				}
 				return InteractionResult.SUCCESS;
 			}
 		} else {
 			if (heldItem instanceof FlintAndSteelItem) {
-				worldIn.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, MathUtils.RAND.nextFloat() * 0.4F + 0.8F);
-				worldIn.setBlock(pos, state.setValue(BlockStateProperties.LIT, Boolean.TRUE), 11);
-				heldStack.hurtAndBreak(1, player, action -> action.broadcastBreakEvent(handIn));
+				level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, MathUtils.RAND.nextFloat() * 0.4F + 0.8F);
+				level.setBlock(pos, state.setValue(BlockStateProperties.LIT, Boolean.TRUE), 11);
+				heldStack.hurtAndBreak(1, player, action -> action.broadcastBreakEvent(hand));
 				return InteractionResult.SUCCESS;
 			} else if (heldItem instanceof FireChargeItem) {
-				worldIn.playSound(null, pos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, (MathUtils.RAND.nextFloat() - MathUtils.RAND.nextFloat()) * 0.2F + 1.0F);
-				worldIn.setBlock(pos, state.setValue(BlockStateProperties.LIT, Boolean.TRUE), 11);
+				level.playSound(null, pos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, (MathUtils.RAND.nextFloat() - MathUtils.RAND.nextFloat()) * 0.2F + 1.0F);
+				level.setBlock(pos, state.setValue(BlockStateProperties.LIT, Boolean.TRUE), 11);
 				if (!player.isCreative()) {
 					heldStack.shrink(1);
 				}
@@ -94,7 +94,7 @@ public class StoveBlock extends BaseEntityBlock
 			}
 		}
 
-		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+		BlockEntity tileEntity = level.getBlockEntity(pos);
 		if (tileEntity instanceof StoveBlockEntity stoveEntity) {
 			int stoveSlot = stoveEntity.getNextEmptySlot();
 			if (stoveSlot < 0 || stoveEntity.isStoveBlockedAbove()) {
@@ -102,7 +102,7 @@ public class StoveBlock extends BaseEntityBlock
 			}
 			Optional<CampfireCookingRecipe> recipe = stoveEntity.getMatchingRecipe(new SimpleContainer(heldStack), stoveSlot);
 			if (recipe.isPresent()) {
-				if (!worldIn.isClientSide && stoveEntity.addItem(player.getAbilities().instabuild ? heldStack.copy() : heldStack, recipe.get(), stoveSlot)) {
+				if (!level.isClientSide && stoveEntity.addItem(player.getAbilities().instabuild ? heldStack.copy() : heldStack, recipe.get(), stoveSlot)) {
 					return InteractionResult.SUCCESS;
 				}
 				return InteractionResult.CONSUME;
@@ -117,12 +117,12 @@ public class StoveBlock extends BaseEntityBlock
 		return RenderShape.MODEL;
 	}
 
-	public void extinguish(BlockState state, Level worldIn, BlockPos pos) {
-		worldIn.setBlock(pos, state.setValue(LIT, false), 2);
+	public void extinguish(BlockState state, Level level, BlockPos pos) {
+		level.setBlock(pos, state.setValue(LIT, false), 2);
 		double x = (double) pos.getX() + 0.5D;
 		double y = pos.getY();
 		double z = (double) pos.getZ() + 0.5D;
-		worldIn.playLocalSound(x, y, z, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F, 2.6F, false);
+		level.playLocalSound(x, y, z, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F, 2.6F, false);
 	}
 
 	@Override
@@ -131,24 +131,24 @@ public class StoveBlock extends BaseEntityBlock
 	}
 
 	@Override
-	public void stepOn(Level world, BlockPos pos, BlockState state, Entity entityIn) {
-		boolean isLit = world.getBlockState(pos).getValue(StoveBlock.LIT);
-		if (isLit && !entityIn.fireImmune() && entityIn instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entityIn)) {
-			entityIn.hurt(STOVE_DAMAGE, 1.0F);
+	public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
+		boolean isLit = level.getBlockState(pos).getValue(StoveBlock.LIT);
+		if (isLit && !entity.fireImmune() && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entity)) {
+			entity.hurt(STOVE_DAMAGE, 1.0F);
 		}
 
-		super.stepOn(world, pos, state, entityIn);
+		super.stepOn(level, pos, state, entity);
 	}
 
 	@Override
-	public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
-			BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+			BlockEntity tileEntity = level.getBlockEntity(pos);
 			if (tileEntity instanceof StoveBlockEntity) {
-				ItemUtils.dropItems(worldIn, pos, ((StoveBlockEntity) tileEntity).getInventory());
+				ItemUtils.dropItems(level, pos, ((StoveBlockEntity) tileEntity).getInventory());
 			}
 
-			super.onRemove(state, worldIn, pos, newState, isMoving);
+			super.onRemove(state, level, pos, newState, isMoving);
 		}
 	}
 
@@ -159,13 +159,13 @@ public class StoveBlock extends BaseEntityBlock
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
+	public void animateTick(BlockState stateIn, Level level, BlockPos pos, Random rand) {
 		if (stateIn.getValue(CampfireBlock.LIT)) {
 			double x = (double) pos.getX() + 0.5D;
 			double y = pos.getY();
 			double z = (double) pos.getZ() + 0.5D;
 			if (rand.nextInt(10) == 0) {
-				worldIn.playLocalSound(x, y, z, ModSounds.BLOCK_STOVE_CRACKLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
+				level.playLocalSound(x, y, z, ModSounds.BLOCK_STOVE_CRACKLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
 			}
 
 			Direction direction = stateIn.getValue(HorizontalDirectionalBlock.FACING);
@@ -174,8 +174,8 @@ public class StoveBlock extends BaseEntityBlock
 			double xOffset = direction$axis == Direction.Axis.X ? (double) direction.getStepX() * 0.52D : horizontalOffset;
 			double yOffset = rand.nextDouble() * 6.0D / 16.0D;
 			double zOffset = direction$axis == Direction.Axis.Z ? (double) direction.getStepZ() * 0.52D : horizontalOffset;
-			worldIn.addParticle(ParticleTypes.SMOKE, x + xOffset, y + yOffset, z + zOffset, 0.0D, 0.0D, 0.0D);
-			worldIn.addParticle(ParticleTypes.FLAME, x + xOffset, y + yOffset, z + zOffset, 0.0D, 0.0D, 0.0D);
+			level.addParticle(ParticleTypes.SMOKE, x + xOffset, y + yOffset, z + zOffset, 0.0D, 0.0D, 0.0D);
+			level.addParticle(ParticleTypes.FLAME, x + xOffset, y + yOffset, z + zOffset, 0.0D, 0.0D, 0.0D);
 		}
 	}
 

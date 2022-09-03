@@ -25,23 +25,23 @@ public class RichSoilFarmlandBlock extends FarmBlock
 		super(properties);
 	}
 
-	private static boolean hasWater(LevelReader worldIn, BlockPos pos) {
+	private static boolean hasWater(LevelReader level, BlockPos pos) {
 		for (BlockPos nearbyPos : BlockPos.betweenClosed(pos.offset(-4, 0, -4), pos.offset(4, 1, 4))) {
-			if (worldIn.getFluidState(nearbyPos).is(FluidTags.WATER)) {
+			if (level.getFluidState(nearbyPos).is(FluidTags.WATER)) {
 				return true;
 			}
 		}
-		return net.minecraftforge.common.FarmlandWaterManager.hasBlockWaterTicket(worldIn, pos);
+		return net.minecraftforge.common.FarmlandWaterManager.hasBlockWaterTicket(level, pos);
 	}
 
-	public static void turnToRichSoil(BlockState state, Level worldIn, BlockPos pos) {
-		worldIn.setBlockAndUpdate(pos, pushEntitiesUp(state, ModBlocks.RICH_SOIL.get().defaultBlockState(), worldIn, pos));
+	public static void turnToRichSoil(BlockState state, Level level, BlockPos pos) {
+		level.setBlockAndUpdate(pos, pushEntitiesUp(state, ModBlocks.RICH_SOIL.get().defaultBlockState(), level, pos));
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
-		BlockState aboveState = worldIn.getBlockState(pos.above());
-		return super.canSurvive(state, worldIn, pos) || aboveState.getBlock() instanceof StemGrownBlock;
+	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+		BlockState aboveState = level.getBlockState(pos.above());
+		return super.canSurvive(state, level, pos) || aboveState.getBlock() instanceof StemGrownBlock;
 	}
 
 	@Override
@@ -53,27 +53,27 @@ public class RichSoilFarmlandBlock extends FarmBlock
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource rand) {
-		if (!state.canSurvive(worldIn, pos)) {
-			turnToRichSoil(state, worldIn, pos);
+	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
+		if (!state.canSurvive(level, pos)) {
+			turnToRichSoil(state, level, pos);
 		}
 	}
 
 	@Override
-	public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
+	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		int moisture = state.getValue(MOISTURE);
-		if (!hasWater(worldIn, pos) && !worldIn.isRainingAt(pos.above())) {
+		if (!hasWater(level, pos) && !level.isRainingAt(pos.above())) {
 			if (moisture > 0) {
-				worldIn.setBlock(pos, state.setValue(MOISTURE, moisture - 1), 2);
+				level.setBlock(pos, state.setValue(MOISTURE, moisture - 1), 2);
 			}
 		} else if (moisture < 7) {
-			worldIn.setBlock(pos, state.setValue(MOISTURE, 7), 2);
+			level.setBlock(pos, state.setValue(MOISTURE, 7), 2);
 		} else if (moisture == 7) {
 			if (Configuration.RICH_SOIL_BOOST_CHANCE.get() == 0.0) {
 				return;
 			}
 
-			BlockState aboveState = worldIn.getBlockState(pos.above());
+			BlockState aboveState = level.getBlockState(pos.above());
 			Block aboveBlock = aboveState.getBlock();
 
 			if (aboveState.is(ModTags.UNAFFECTED_BY_RICH_SOIL) || aboveBlock instanceof TallFlowerBlock) {
@@ -81,12 +81,12 @@ public class RichSoilFarmlandBlock extends FarmBlock
 			}
 
 			if (aboveBlock instanceof BonemealableBlock growable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
-				if (growable.isValidBonemealTarget(worldIn, pos.above(), aboveState, false) && ForgeHooks.onCropsGrowPre(worldIn, pos.above(), aboveState, true)) {
-					growable.performBonemeal(worldIn, worldIn.random, pos.above(), aboveState);
-					if (!worldIn.isClientSide) {
-						worldIn.levelEvent(2005, pos.above(), 0);
+				if (growable.isValidBonemealTarget(level, pos.above(), aboveState, false) && ForgeHooks.onCropsGrowPre(level, pos.above(), aboveState, true)) {
+					growable.performBonemeal(level, level.random, pos.above(), aboveState);
+					if (!level.isClientSide) {
+						level.levelEvent(2005, pos.above(), 0);
 					}
-					ForgeHooks.onCropsGrowPost(worldIn, pos.above(), aboveState);
+					ForgeHooks.onCropsGrowPost(level, pos.above(), aboveState);
 				}
 			}
 		}
@@ -104,7 +104,7 @@ public class RichSoilFarmlandBlock extends FarmBlock
 	}
 
 	@Override
-	public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
+	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
 		// Rich Soil is immune to trampling
 	}
 }

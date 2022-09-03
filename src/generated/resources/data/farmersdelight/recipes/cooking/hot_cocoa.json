@@ -1,7 +1,6 @@
 {
   "type": "farmersdelight:cooking",
-  "cookingtime": 200,
-  "experience": 0.35,
+  "recipe_book_tab": "drinks",
   "ingredients": [
     {
       "tag": "forge:milk"
@@ -18,5 +17,7 @@
   ],
   "result": {
     "item": "farmersdelight:hot_cocoa"
-  }
+  },
+  "experience": 1.0,
+  "cookingtime": 200
 }

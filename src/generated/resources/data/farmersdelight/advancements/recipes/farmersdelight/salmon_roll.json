@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:salmon_roll"
+    ]
+  },
+  "criteria": {
+    "has_salmon_slice": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "farmersdelight:salmon_slice"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:salmon_roll"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_salmon_slice",
+      "has_the_recipe"
+    ]
+  ]
+}

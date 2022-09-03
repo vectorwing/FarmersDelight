@@ -1,7 +1,6 @@
 {
   "type": "farmersdelight:cooking",
-  "cookingtime": 200,
-  "experience": 0.35,
+  "recipe_book_tab": "drinks",
   "ingredients": [
     {
       "item": "minecraft:apple"
@@ -15,5 +14,7 @@
   ],
   "result": {
     "item": "farmersdelight:apple_cider"
-  }
+  },
+  "experience": 1.0,
+  "cookingtime": 200
 }
