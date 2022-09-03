@@ -54,6 +54,7 @@ public class FarmersDelight
 		ModItems.ITEMS.register(modEventBus);
 		ModBlocks.BLOCKS.register(modEventBus);
 		ModEffects.EFFECTS.register(modEventBus);
+		ModPlacementModifiers.PLACEMENT_MODIFIERS.register(modEventBus);
 		ModBiomeFeatures.FEATURES.register(modEventBus);
 		ModBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(modEventBus);
 		ModSounds.SOUNDS.register(modEventBus);
@@ -63,7 +64,6 @@ public class FarmersDelight
 		ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
 		ModRecipeTypes.RECIPE_TYPES.register(modEventBus);
 		ModEntityTypes.ENTITIES.register(modEventBus);
-		ModPlacementModifiers.PLACEMENT_MODIFIERS.register(modEventBus);
 
 		MinecraftForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
 
