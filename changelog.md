@@ -2,7 +2,7 @@
 
 ## 1.2.0
 
-## Additions
+### Additions
 - The Cooking Pot now has its own **Recipe Book**!
   - Opening the GUI will reveal the familiar green book button. Press it to see your current cooking recipes;
   - Recipes are unlocked in the same fashion as vanilla: by having one of its ingredients, or cooking the recipe from memory once;
@@ -23,7 +23,7 @@
   - `forge:dough`: Used to add modded dough items to FD's recipes, and populated by Wheat Dough by default;
   - `farmersdelight:cabinets`: This, together with `cabinets/wooden`, is used to classify cabinet items for searching, crafting and integration;
 
-## Updates
+### Updates
 - Some of the Wild Crops have received some visual upgrades, both in art and in world generation!
   - Wild Carrots, being weeds, will strangle some grass out, creating small patches of Coarse Dirt;
   - Wild Potatoes now scatter individual Alliums around them, making a more natural bush;
@@ -36,9 +36,11 @@
   - Barbecue on a Stick can now be made from any cooked meat;
   - Milk Buckets and Bottles now convert between each other at a 1:4 ratio;
 - All cooking recipes have received a bump in their experience reward, since the old ratios were very pitiful;
+- Mushroom Colonies now grow a little faster, and can accept Bone Meal;
 - Skillet damage has been slightly buffed;
+- Added Better Combat integration for the Skillet (mace preset);
 
-## Fixes
+### Fixes
 - Fix Wild Crops being able to generate on non-Overworld biomes under the right conditions (such as valid dirt blocks in the Nether or End);
 - Fix Rope not emitting sounds when entities are climbing on it;
 - Fix Cabinets using Barrel subtitles;
