@@ -1,6 +1,7 @@
 {
   "type": "farmersdelight:cooking",
-  "recipe_book_tab": "meals",
+  "cookingtime": 200,
+  "experience": 1.0,
   "ingredients": [
     {
       "item": "minecraft:carrot"
@@ -15,9 +16,8 @@
       "tag": "forge:salad_ingredients"
     }
   ],
+  "recipe_book_tab": "meals",
   "result": {
     "item": "farmersdelight:vegetable_soup"
-  },
-  "experience": 1.0,
-  "cookingtime": 200
+  }
 }

@@ -1,6 +1,7 @@
 {
   "type": "farmersdelight:cooking",
-  "recipe_book_tab": "meals",
+  "cookingtime": 200,
+  "experience": 0.35,
   "ingredients": [
     {
       "tag": "forge:bones"
@@ -20,9 +21,8 @@
       }
     ]
   ],
+  "recipe_book_tab": "meals",
   "result": {
     "item": "farmersdelight:bone_broth"
-  },
-  "experience": 0.35,
-  "cookingtime": 200
+  }
 }

@@ -5,13 +5,13 @@
       "item": "farmersdelight:kelp_roll"
     }
   ],
-  "tool": {
-    "tag": "forge:tools/knives"
-  },
   "result": [
     {
-      "item": "farmersdelight:kelp_roll_slice",
-      "count": 3
+      "count": 3,
+      "item": "farmersdelight:kelp_roll_slice"
     }
-  ]
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

@@ -1,6 +1,7 @@
 {
   "type": "farmersdelight:cooking",
-  "recipe_book_tab": "misc",
+  "cookingtime": 200,
+  "experience": 1.0,
   "ingredients": [
     {
       "item": "minecraft:glow_berries"
@@ -15,9 +16,8 @@
       "item": "minecraft:sugar"
     }
   ],
+  "recipe_book_tab": "misc",
   "result": {
     "item": "farmersdelight:glow_berry_custard"
-  },
-  "experience": 1.0,
-  "cookingtime": 200
+  }
 }

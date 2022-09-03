@@ -1,4 +1,4 @@
-// 1.19	2022-07-31T02:50:54.1822183	Item Models: farmersdelight
+// 1.19	2022-09-03T02:38:13.0253663	Item Models: farmersdelight
 01e23a47f469a0c2107b2a1b6fc7f7c8f0c23d55 assets/farmersdelight/models/item/acacia_cabinet.json
 a58cc863fafd0f13d1235a2f7344b446f853ae55 assets/farmersdelight/models/item/apple_cider.json
 8348e66b9efe6a92614cca78c3463d3efaea57fa assets/farmersdelight/models/item/apple_pie.json
@@ -15,6 +15,7 @@ fde8de45de2287b31a35f8c563fcb445ab8c9906 assets/farmersdelight/models/item/baske
 791daff700210270a8580f1669db836632636f26 assets/farmersdelight/models/item/birch_cabinet.json
 4809e3369a27fc4e1b5d6c559d858c0daeeca10b assets/farmersdelight/models/item/black_canvas_sign.json
 9a1a8922c14b117316b3f55eb3192c7e4a32e9c4 assets/farmersdelight/models/item/blue_canvas_sign.json
+96a3f2a00ab931a19daacf8b3904837985907bc9 assets/farmersdelight/models/item/bone_broth.json
 3471c18a8d1a7b9a09d02b2286664f5c4b2df6b6 assets/farmersdelight/models/item/brown_canvas_sign.json
 62871cff7c5bd2746a3e4156baa3460eb1b903fb assets/farmersdelight/models/item/brown_mushroom_colony.json
 2cb118cee1b5aa89228ff3c7935c2b9712cab82f assets/farmersdelight/models/item/cabbage.json
@@ -32,6 +33,7 @@ dffb28c59c7451fdd763ab7157d59f7722b1a36f assets/farmersdelight/models/item/chick
 394628d5ee734c0c2c69c9ec31174198ce5a50de assets/farmersdelight/models/item/chicken_soup.json
 2c717c3b78eff927bac96dbc2e2c2d768cd168e0 assets/farmersdelight/models/item/chocolate_pie.json
 c0389c28d9a719192947390f82f8e21835c14542 assets/farmersdelight/models/item/chocolate_pie_slice.json
+c84474984c0eac247302331dc999c9a79aa7b787 assets/farmersdelight/models/item/cod_roll.json
 3e37ac289dcd54a1f0f4eec904be66530c0e6fbe assets/farmersdelight/models/item/cod_slice.json
 f097ef00daddcaeb4714fa0cf42df9482b98e047 assets/farmersdelight/models/item/cooked_bacon.json
 4d0143a2aabcfa016cb3a9527e58837108ba5cb7 assets/farmersdelight/models/item/cooked_chicken_cuts.json
@@ -54,6 +56,7 @@ ff5649c08334d4c2c8b6fef66989d12b040252bc assets/farmersdelight/models/item/flint
 12b3bd5c682412a932242927fa97d206fafac05f assets/farmersdelight/models/item/fried_rice.json
 6e6936311a0d6ff359613f6d84947140ea860266 assets/farmersdelight/models/item/fruit_salad.json
 7781caaeef1e03dbcaad9fdc822dcd83e84affde assets/farmersdelight/models/item/full_tatami_mat.json
+7478b2c8395db2ad15eb4d32fc15fe0cd376ce8a assets/farmersdelight/models/item/glow_berry_custard.json
 a4314660221dcffd6c4276a1ae8dc8e0914a3309 assets/farmersdelight/models/item/golden_knife.json
 4ba6f6ca71923cf71e4f7c1285b0901309023e97 assets/farmersdelight/models/item/gray_canvas_sign.json
 0707392a7b2cf8c889d724a644a728f27d8db21e assets/farmersdelight/models/item/green_canvas_sign.json
@@ -68,6 +71,8 @@ cf2a22b63d8daf6cd9b1cdb2a2bd2da6932f7d6f assets/farmersdelight/models/item/horse
 8dea6006499057f7b97173602c6ffa7b9f7e36b4 assets/farmersdelight/models/item/hot_cocoa.json
 133febcd14bbe80692c99d0f67542686780490de assets/farmersdelight/models/item/iron_knife.json
 3d4038cde35f6c1006addcf1e9f790fc78ca2c59 assets/farmersdelight/models/item/jungle_cabinet.json
+a0836f799b4c9b924f0def317912ec9182ab0b54 assets/farmersdelight/models/item/kelp_roll.json
+1e848c3f12993557d462f6ddfe41093988ef57ce assets/farmersdelight/models/item/kelp_roll_slice.json
 1a43b8a7161fb30d9310370018247e1ce96446ed assets/farmersdelight/models/item/light_blue_canvas_sign.json
 e1c7ade4a3eef3131c8edd4de7484f15888bc6d4 assets/farmersdelight/models/item/light_gray_canvas_sign.json
 68b37c34e22afb1ddd484ab700936d7b0f60002e assets/farmersdelight/models/item/lime_canvas_sign.json
@@ -78,6 +83,7 @@ c3a381356341fa39957aca63a5f787fa9e7008ef assets/farmersdelight/models/item/melon
 6ab158c9d3318baaf2ea2fac85ac74a1c15aaff4 assets/farmersdelight/models/item/milk_bottle.json
 3675d619cde5b97996a94432bf551f7664d129a8 assets/farmersdelight/models/item/minced_beef.json
 0eeab3877e770caaec83789ab8c9d76ef2db8975 assets/farmersdelight/models/item/mixed_salad.json
+492dbf3486f0b2558a31d49022caa9a11d836346 assets/farmersdelight/models/item/mushroom_rice.json
 1a39d8da91d4b4df29ec6a998eeb4de99f345c07 assets/farmersdelight/models/item/mutton_chops.json
 9b2fa3d0a64e63a92eee674992bf2cb832e0cb03 assets/farmersdelight/models/item/mutton_wrap.json
 cec3a2e5a114d876a21f4be6a65c9e87a3259441 assets/farmersdelight/models/item/netherite_knife.json
@@ -104,6 +110,7 @@ bb975bb4dafb2afc9fe854434e94557faf841b2d assets/farmersdelight/models/item/rice.
 6a9ad96b42ce534f2f0871f97cf6e0f44f35b031 assets/farmersdelight/models/item/rice_bag.json
 ab6f26a770692b1ba0d55d989858e850518a40e7 assets/farmersdelight/models/item/rice_bale.json
 e757f56f1f494b15e0fb40ebfc9cc8a12af3256f assets/farmersdelight/models/item/rice_panicle.json
+63e2894acae33e9912e85c0e9c941a7c7a3cc6f3 assets/farmersdelight/models/item/rice_roll_medley_block.json
 9937f5b62a6bc6b5caec58b45d16e751cec8a9eb assets/farmersdelight/models/item/rich_soil.json
 67c90c8abf35154aa852d0216fd1a30513225b93 assets/farmersdelight/models/item/rich_soil_farmland.json
 2d14bba24f1b4ebc7e22b71164934a653a1ae11e assets/farmersdelight/models/item/roasted_mutton_chops.json
@@ -112,7 +119,9 @@ e757f56f1f494b15e0fb40ebfc9cc8a12af3256f assets/farmersdelight/models/item/rice_
 b15a223c8c507c4e37589d6d8d04ab406e58c660 assets/farmersdelight/models/item/rope.json
 fc557dc149fd5dad772bb096cffe465d6352ffb7 assets/farmersdelight/models/item/rotten_tomato.json
 805a255189bc6723f392a197ce88c78804365e8f assets/farmersdelight/models/item/safety_net.json
+df9fcba774634b5fd6df69ed914ad983a954fcd5 assets/farmersdelight/models/item/salmon_roll.json
 5a4804df4b08628ad1a7c5848d34046210406230 assets/farmersdelight/models/item/salmon_slice.json
+ce514f125e3b8c84e0e03397b686ef11adaa4901 assets/farmersdelight/models/item/sandy_shrub.json
 fae467eaced9bfe275f42a92235a49d3cea40d2f assets/farmersdelight/models/item/shepherds_pie.json
 d9673de312d6419827b6822485821cdf39f2481e assets/farmersdelight/models/item/shepherds_pie_block.json
 c7b9c428da59e499e63fc63a6dffd18954540b2d assets/farmersdelight/models/item/smoked_ham.json

@@ -1,10 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###",
-    "RXR",
-    "###"
-  ],
   "key": {
     "#": {
       "item": "minecraft:dried_kelp"
@@ -16,6 +11,11 @@
       "item": "minecraft:carrot"
     }
   },
+  "pattern": [
+    "###",
+    "RXR",
+    "###"
+  ],
   "result": {
     "item": "farmersdelight:kelp_roll"
   }

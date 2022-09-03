@@ -1,9 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "m",
-    "s"
-  ],
   "key": {
     "m": {
       "item": "minecraft:diamond"
@@ -12,6 +8,10 @@
       "item": "minecraft:stick"
     }
   },
+  "pattern": [
+    "m",
+    "s"
+  ],
   "result": {
     "item": "farmersdelight:diamond_knife"
   }

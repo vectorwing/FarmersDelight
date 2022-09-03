@@ -1,6 +1,7 @@
 {
   "type": "farmersdelight:cooking",
-  "recipe_book_tab": "meals",
+  "cookingtime": 200,
+  "experience": 1.0,
   "ingredients": [
     {
       "tag": "forge:raw_fishes"
@@ -15,9 +16,8 @@
       "item": "minecraft:ink_sac"
     }
   ],
+  "recipe_book_tab": "meals",
   "result": {
     "item": "farmersdelight:squid_ink_pasta"
-  },
-  "experience": 1.0,
-  "cookingtime": 200
+  }
 }

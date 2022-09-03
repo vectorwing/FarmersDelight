@@ -1,6 +1,7 @@
 {
   "type": "farmersdelight:cooking",
-  "recipe_book_tab": "meals",
+  "cookingtime": 200,
+  "experience": 1.0,
   "ingredients": [
     {
       "item": "minecraft:brown_mushroom"
@@ -20,9 +21,8 @@
       }
     ]
   ],
+  "recipe_book_tab": "meals",
   "result": {
     "item": "farmersdelight:mushroom_rice"
-  },
-  "experience": 1.0,
-  "cookingtime": 200
+  }
 }

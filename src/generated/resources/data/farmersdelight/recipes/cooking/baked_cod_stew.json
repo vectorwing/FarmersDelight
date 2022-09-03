@@ -1,6 +1,7 @@
 {
   "type": "farmersdelight:cooking",
-  "recipe_book_tab": "meals",
+  "cookingtime": 200,
+  "experience": 1.0,
   "ingredients": [
     {
       "tag": "forge:raw_fishes/cod"
@@ -15,9 +16,8 @@
       "tag": "forge:crops/tomato"
     }
   ],
+  "recipe_book_tab": "meals",
   "result": {
     "item": "farmersdelight:baked_cod_stew"
-  },
-  "experience": 1.0,
-  "cookingtime": 200
+  }
 }

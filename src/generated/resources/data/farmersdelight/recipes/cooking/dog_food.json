@@ -1,6 +1,7 @@
 {
   "type": "farmersdelight:cooking",
-  "recipe_book_tab": "misc",
+  "cookingtime": 200,
+  "experience": 1.0,
   "ingredients": [
     {
       "item": "minecraft:rotten_flesh"
@@ -15,9 +16,8 @@
       "tag": "forge:crops/rice"
     }
   ],
+  "recipe_book_tab": "misc",
   "result": {
     "item": "farmersdelight:dog_food"
-  },
-  "experience": 1.0,
-  "cookingtime": 200
+  }
 }

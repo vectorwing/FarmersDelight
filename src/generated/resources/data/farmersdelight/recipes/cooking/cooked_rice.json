@@ -1,14 +1,14 @@
 {
   "type": "farmersdelight:cooking",
-  "recipe_book_tab": "misc",
+  "cookingtime": 100,
+  "experience": 0.35,
   "ingredients": [
     {
       "tag": "forge:crops/rice"
     }
   ],
+  "recipe_book_tab": "misc",
   "result": {
     "item": "farmersdelight:cooked_rice"
-  },
-  "experience": 0.35,
-  "cookingtime": 100
+  }
 }

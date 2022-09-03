@@ -1,6 +1,7 @@
 {
   "type": "farmersdelight:cooking",
-  "recipe_book_tab": "misc",
+  "cookingtime": 200,
+  "experience": 1.0,
   "ingredients": [
     {
       "tag": "forge:dough"
@@ -26,10 +27,9 @@
       }
     ]
   ],
+  "recipe_book_tab": "misc",
   "result": {
-    "item": "farmersdelight:dumplings",
-    "count": 2
-  },
-  "experience": 1.0,
-  "cookingtime": 200
+    "count": 2,
+    "item": "farmersdelight:dumplings"
+  }
 }

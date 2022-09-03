@@ -1,6 +1,7 @@
 {
   "type": "farmersdelight:cooking",
-  "recipe_book_tab": "meals",
+  "cookingtime": 200,
+  "experience": 1.0,
   "ingredients": [
     {
       "tag": "forge:raw_chicken"
@@ -15,9 +16,8 @@
       "tag": "forge:vegetables"
     }
   ],
+  "recipe_book_tab": "meals",
   "result": {
     "item": "farmersdelight:chicken_soup"
-  },
-  "experience": 1.0,
-  "cookingtime": 200
+  }
 }
