@@ -30,7 +30,7 @@
   - Tomato Vines and Wild Potatoes now grow amidst a bush of local foliage;
   - Wild Cabbage and Sea Beet now grow amidst a patch of Sandy Shrub, a new beach plant;
 - You can now take servings from a Cooking Pot **directly in a crafting grid**, by placing the pot and a valid container on it;
-- Rope can now be **reeled back** from the top end by sneak-using with am empty hand on it;
+- Rope can now be **reeled back into your inventory** from the top end by sneak-using with an empty hand on it;
 - Updated a few recipes:
   - Knives are now crafted in a **vertical** arrangement instead of diagonal. This was done to reduce recipe conflicts with other mods;
   - Barbecue on a Stick can now be made from any cooked meat;
@@ -38,13 +38,14 @@
 - All cooking recipes have received a bump in their experience reward, since the old ratios were very pitiful;
 - Mushroom Colonies now grow a little faster, and can accept Bone Meal;
 - Skillet damage has been slightly buffed;
+- Backstabbing damage multiplier has been nerfed to 1.4x, 1.6x and 1.8x;
 - Added Better Combat integration for the Skillet (mace preset);
 
 ### Fixes
 - Fix Wild Crops being able to generate on non-Overworld biomes under the right conditions (such as valid dirt blocks in the Nether or End);
 - Fix Rope not emitting sounds when entities are climbing on it;
 - Fix minor pixel inconsistency on all cross crop templates;
-- Fix Grass Block not being in unaffected_by_rich_soil tag, and tall ferns/grasses being on it;
+- Fix Grass Block not being `unaffected_by_rich_soil`, while non-bonemealable plants such as ferns/grasses were;
 - Fix Cabinets using Barrel subtitles;
 - Fix Nourishment not being strong enough to counter extreme exhaustion levels, such as Lv. 255 Hunger;
 
