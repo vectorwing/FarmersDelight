@@ -1,9 +1,9 @@
 package vectorwing.farmersdelight.common.block;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.data.worldgen.features.CaveFeatures;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -12,10 +12,7 @@ import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import vectorwing.farmersdelight.common.registry.ModBiomeFeatures;
 import vectorwing.farmersdelight.common.world.WildCropGeneration;
-
-import java.util.Random;
 
 public class SandyShrubBlock extends BushBlock implements net.minecraftforge.common.IForgeShearable, BonemealableBlock
 {
@@ -31,11 +28,6 @@ public class SandyShrubBlock extends BushBlock implements net.minecraftforge.com
 	}
 
 	@Override
-	public Block.OffsetType getOffsetType() {
-		return OffsetType.XZ;
-	}
-
-	@Override
 	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
 		return state.is(BlockTags.SAND);
 	}
@@ -46,12 +38,12 @@ public class SandyShrubBlock extends BushBlock implements net.minecraftforge.com
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level level, Random random, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
 		return true;
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel level, Random random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
 		WildCropGeneration.FEATURE_PATCH_SANDY_SHRUB_BONEMEAL.value().place(level, level.getChunkSource().getGenerator(), random, pos.above());
 	}
 }

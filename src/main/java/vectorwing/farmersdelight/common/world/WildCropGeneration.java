@@ -7,6 +7,7 @@ import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -18,7 +19,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConf
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.placement.*;
-import net.minecraftforge.common.Tags;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModBiomeFeatures;
@@ -50,33 +50,33 @@ public class WildCropGeneration
 	public static final BlockPos BLOCK_BELOW = new BlockPos(0, -1, 0);
 	public static final BlockPos BLOCK_ABOVE = new BlockPos(0, 1, 0);
 
-	public static final BiomeTagFilter TAGGED_IS_OVERWORLD = BiomeTagFilter.biomeIsInTag(Tags.Biomes.IS_OVERWORLD);
+	public static final BiomeTagFilter TAGGED_IS_OVERWORLD = BiomeTagFilter.biomeIsInTag(BiomeTags.IS_OVERWORLD);
 
 	public static void registerWildCropGeneration() {
 		FEATURE_PATCH_WILD_CABBAGES = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_cabbages"),
-				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_CABBAGES.get(), ModBlocks.SANDY_SHRUB.get(), BlockPredicate.matchesBlock(Blocks.SAND, BLOCK_BELOW)));
+				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_CABBAGES.get(), ModBlocks.SANDY_SHRUB.get(), BlockPredicate.matchesBlocks(BLOCK_BELOW, Blocks.SAND)));
 
 		FEATURE_PATCH_WILD_ONIONS = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_onions"),
-				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_ONIONS.get(), Blocks.ALLIUM, BlockPredicate.matchesTag(BlockTags.DIRT, BLOCK_BELOW)));
+				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_ONIONS.get(), Blocks.ALLIUM, BlockPredicate.matchesTag(BLOCK_BELOW, BlockTags.DIRT)));
 
 		FEATURE_PATCH_WILD_TOMATOES = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_tomatoes"),
-				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_TOMATOES.get(), Blocks.DEAD_BUSH, BlockPredicate.matchesBlocks(List.of(Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.COARSE_DIRT, Blocks.RED_SAND, Blocks.SAND), BLOCK_BELOW)));
+				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_TOMATOES.get(), Blocks.DEAD_BUSH, BlockPredicate.matchesBlocks(BLOCK_BELOW, List.of(Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.COARSE_DIRT, Blocks.RED_SAND, Blocks.SAND))));
 
 		FEATURE_PATCH_WILD_CARROTS = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_carrots"),
-				ModBiomeFeatures.WILD_CROP.get(), wildCropWithFloorConfig(ModBlocks.WILD_CARROTS.get(), Blocks.GRASS, BlockPredicate.matchesTag(BlockTags.DIRT, BLOCK_BELOW), Blocks.COARSE_DIRT, BlockPredicate.matchesTag(BlockTags.DIRT)));
+				ModBiomeFeatures.WILD_CROP.get(), wildCropWithFloorConfig(ModBlocks.WILD_CARROTS.get(), Blocks.GRASS, BlockPredicate.matchesTag(BLOCK_BELOW, BlockTags.DIRT), Blocks.COARSE_DIRT, BlockPredicate.matchesTag(BlockTags.DIRT)));
 
 		FEATURE_PATCH_WILD_POTATOES = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_potatoes"),
-				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_POTATOES.get(), Blocks.FERN, BlockPredicate.matchesTag(BlockTags.DIRT, BLOCK_BELOW)));
+				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_POTATOES.get(), Blocks.FERN, BlockPredicate.matchesTag(BLOCK_BELOW, BlockTags.DIRT)));
 
 		FEATURE_PATCH_WILD_BEETROOTS = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_beetroots"),
-				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_BEETROOTS.get(), ModBlocks.SANDY_SHRUB.get(), BlockPredicate.matchesBlock(Blocks.SAND, BLOCK_BELOW)));
+				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_BEETROOTS.get(), ModBlocks.SANDY_SHRUB.get(), BlockPredicate.matchesBlocks(BLOCK_BELOW, Blocks.SAND)));
 
 		FEATURE_PATCH_WILD_RICE = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_rice"),
 				ModBiomeFeatures.WILD_RICE.get(), FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK,
 						new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_RICE.get())), List.of(Blocks.DIRT)));
 
 		FEATURE_PATCH_SANDY_SHRUB_BONEMEAL = register(new ResourceLocation(FarmersDelight.MODID, "patch_sandy_shrub"),
-				Feature.RANDOM_PATCH, randomPatchConfig(ModBlocks.SANDY_SHRUB.get(), 32, 2, BlockPredicate.matchesTag(BlockTags.SAND, BLOCK_BELOW)));
+				Feature.RANDOM_PATCH, randomPatchConfig(ModBlocks.SANDY_SHRUB.get(), 32, 2, BlockPredicate.matchesTag(BLOCK_BELOW, BlockTags.SAND)));
 
 		PATCH_WILD_CABBAGES = registerPlacement(new ResourceLocation(FarmersDelight.MODID, "patch_wild_cabbages"),
 				FEATURE_PATCH_WILD_CABBAGES, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_CABBAGES.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome(), TAGGED_IS_OVERWORLD);

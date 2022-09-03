@@ -41,8 +41,6 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
 @SuppressWarnings("deprecation")
 public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 {
@@ -217,7 +215,7 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 		@SubscribeEvent
 		@SuppressWarnings("unused")
 		public static void onSneakPlaceTool(PlayerInteractEvent.RightClickBlock event) {
-			Level level = event.getWorld();
+			Level level = event.getLevel();
 			BlockPos pos = event.getPos();
 			Player player = event.getEntity();
 			ItemStack heldStack = player.getMainHandItem();

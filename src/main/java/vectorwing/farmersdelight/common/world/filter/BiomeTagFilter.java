@@ -5,14 +5,13 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.placement.PlacementContext;
 import net.minecraft.world.level.levelgen.placement.PlacementFilter;
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.common.registry.ModPlacementModifiers;
-
-import java.util.Random;
 
 public class BiomeTagFilter extends PlacementFilter
 {
@@ -31,8 +30,7 @@ public class BiomeTagFilter extends PlacementFilter
 	}
 
 	@Override
-
-	protected boolean shouldPlace(PlacementContext context, Random random, BlockPos pos) {
+	protected boolean shouldPlace(PlacementContext context, RandomSource random, BlockPos pos) {
 		Holder<Biome> biome = context.getLevel().getBiome(pos);
 		return biome.is(biomeTag);
 	}

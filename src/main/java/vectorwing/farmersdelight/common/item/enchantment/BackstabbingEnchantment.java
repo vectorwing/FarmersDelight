@@ -74,8 +74,8 @@ public class BackstabbingEnchantment extends Enchantment
 			if (attacker instanceof Player) {
 				ItemStack weapon = ((Player) attacker).getMainHandItem();
 				int enchantmentLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.BACKSTABBING.get(), weapon);
-				if (enchantmentLevel > 0 && isLookingBehindTarget(event.getEntityLiving(), event.getSource().getSourcePosition())) {
-					Level level = event.getEntityLiving().getCommandSenderWorld();
+				if (enchantmentLevel > 0 && isLookingBehindTarget(event.getEntity(), event.getSource().getSourcePosition())) {
+					Level level = event.getEntity().getCommandSenderWorld();
 					if (!level.isClientSide) {
 						event.setAmount(getBackstabbingDamagePerLevel(event.getAmount(), enchantmentLevel));
 						level.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.BLOCKS, 1.0F, 1.0F);

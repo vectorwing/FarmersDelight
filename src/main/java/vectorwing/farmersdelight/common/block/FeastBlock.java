@@ -29,8 +29,6 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import java.util.function.Supplier;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
 @SuppressWarnings("deprecation")
 public class FeastBlock extends Block
 {
@@ -104,7 +102,7 @@ public class FeastBlock extends Block
 		ItemStack heldStack = player.getItemInHand(hand);
 
 		if (servings > 0) {
-			if (!serving.hasContainerItem() || heldStack.sameItem(serving.getContainerItem())) {
+			if (!serving.hasCraftingRemainingItem() || heldStack.sameItem(serving.getCraftingRemainingItem())) {
 				level.setBlock(pos, state.setValue(getServingsProperty(), servings - 1), 3);
 				if (!player.getAbilities().instabuild) {
 					heldStack.shrink(1);

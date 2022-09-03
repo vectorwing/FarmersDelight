@@ -3,13 +3,12 @@ package vectorwing.farmersdelight.common.world.feature;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import vectorwing.farmersdelight.common.world.configuration.WildCropConfiguration;
-
-import java.util.Random;
 
 public class WildCropFeature extends Feature<WildCropConfiguration>
 {
@@ -22,7 +21,7 @@ public class WildCropFeature extends Feature<WildCropConfiguration>
 		WildCropConfiguration config = context.config();
 		BlockPos origin = context.origin();
 		WorldGenLevel level = context.level();
-		Random random = context.random();
+		RandomSource random = context.random();
 
 		int i = 0;
 		int tries = config.tries();

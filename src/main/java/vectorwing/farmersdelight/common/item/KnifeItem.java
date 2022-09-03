@@ -35,8 +35,6 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.Set;
 
-import net.minecraft.world.item.Item.Properties;
-
 public class KnifeItem extends DiggerItem
 {
 	public KnifeItem(Tier tier, float attackDamage, float attackSpeed, Properties properties) {
@@ -74,7 +72,7 @@ public class KnifeItem extends DiggerItem
 				return;
 			}
 
-			Level level = event.getWorld();
+			Level level = event.getLevel();
 			BlockPos pos = event.getPos();
 			BlockState state = event.getLevel().getBlockState(pos);
 			Block block = state.getBlock();

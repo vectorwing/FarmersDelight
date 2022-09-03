@@ -8,11 +8,8 @@ import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.ModelEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.event.ModelEvent.BakingCompleted;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
-import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -20,6 +17,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.model.SkilletModel;
 import vectorwing.farmersdelight.client.particle.StarParticle;
 import vectorwing.farmersdelight.client.particle.SteamParticle;
+import vectorwing.farmersdelight.client.recipebook.RecipeCategories;
 import vectorwing.farmersdelight.client.renderer.CanvasSignRenderer;
 import vectorwing.farmersdelight.client.renderer.CuttingBoardRenderer;
 import vectorwing.farmersdelight.client.renderer.SkilletRenderer;
@@ -35,6 +33,12 @@ import java.util.Map;
 public class ClientSetupEvents
 {
 	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "item/empty_container_slot_bowl");
+
+	@SubscribeEvent
+	public static void onRegisterRecipeBookCategories(RegisterRecipeBookCategoriesEvent event)
+	{
+		RecipeCategories.init(event);
+	}
 
 	@SubscribeEvent
 	public static void onModelRegister(ModelEvent.RegisterAdditional event) {
