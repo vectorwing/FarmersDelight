@@ -1,19 +1,21 @@
 package vectorwing.farmersdelight.common.block;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.*;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -28,8 +30,6 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ModTags;
-
-import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class TomatoVineBlock extends CropBlock
@@ -70,13 +70,13 @@ public class TomatoVineBlock extends CropBlock
 	}
 
 	@Override
-	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random) {
+	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		if (!level.isAreaLoaded(pos, 1)) return;
 		if (level.getRawBrightness(pos, 0) >= 9) {
 			int age = this.getAge(state);
 			if (age < this.getMaxAge()) {
 				float speed = getGrowthSpeed(this, level, pos);
-				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt((int)(25.0F / speed) + 1) == 0)) {
+				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt((int) (25.0F / speed) + 1) == 0)) {
 					level.setBlock(pos, state.setValue(getAgeProperty(), age + 1), 2);
 					net.minecraftforge.common.ForgeHooks.onCropsGrowPost(level, pos, state);
 				}
@@ -85,7 +85,7 @@ public class TomatoVineBlock extends CropBlock
 		}
 	}
 
-	public void attemptRopeClimb(ServerLevel level, BlockPos pos, Random random) {
+	public void attemptRopeClimb(ServerLevel level, BlockPos pos, RandomSource random) {
 		if (random.nextFloat() < 0.2F) {
 			BlockPos posAbove = pos.above();
 			BlockState stateAbove = level.getBlockState(posAbove);
@@ -138,7 +138,7 @@ public class TomatoVineBlock extends CropBlock
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel level, Random random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
 		int newAge = this.getAge(state) + this.getBonemealAgeIncrease(level);
 		int maxAge = this.getMaxAge();
 		if (newAge > maxAge) {
@@ -150,8 +150,7 @@ public class TomatoVineBlock extends CropBlock
 	}
 
 	@Override
-	public boolean isLadder(BlockState state, LevelReader level, BlockPos pos, LivingEntity entity)
-	{
+	public boolean isLadder(BlockState state, LevelReader level, BlockPos pos, LivingEntity entity) {
 		return state.getValue(ROPELOGGED) && state.is(BlockTags.CLIMBABLE);
 	}
 

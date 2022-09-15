@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.monster.Ravager;
 import net.minecraft.world.item.ItemStack;
@@ -14,14 +15,11 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.PlantType;
 import vectorwing.farmersdelight.common.registry.ModItems;
-
-import java.util.Random;
 
 /**
  * A bush which grows, representing the earlier stage of another plant.
@@ -84,7 +82,7 @@ public class BuddingBushBlock extends BushBlock
 	}
 
 	@Override
-	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random) {
+	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		if (!level.isAreaLoaded(pos, 1)) return;
 		if (level.getRawBrightness(pos, 0) >= 9) {
 			int age = getAge(state);
@@ -109,7 +107,7 @@ public class BuddingBushBlock extends BushBlock
 		return false;
 	}
 
-	public void growPastMaxAge(BlockState state, ServerLevel level, BlockPos pos, Random random) {
+	public void growPastMaxAge(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 	}
 
 	protected static float getGrowthSpeed(Block block, BlockGetter level, BlockPos pos) {

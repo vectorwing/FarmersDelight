@@ -1,20 +1,5 @@
 {
   "parent": "farmersdelight:main/harvest_ropelogged_tomato",
-  "display": {
-    "icon": {
-      "item": "farmersdelight:rotten_tomato"
-    },
-    "title": {
-      "translate": "farmersdelight.advancement.hit_raider_with_rotten_tomato"
-    },
-    "description": {
-      "translate": "farmersdelight.advancement.hit_raider_with_rotten_tomato.desc"
-    },
-    "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
   "criteria": {
     "hit_raider_with_rotten_tomato": {
       "conditions": {
