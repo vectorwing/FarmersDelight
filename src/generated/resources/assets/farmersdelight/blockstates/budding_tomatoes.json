@@ -11,6 +11,9 @@
     },
     "age=3": {
       "model": "farmersdelight:block/budding_tomatoes_stage3"
+    },
+    "age=4": {
+      "model": "farmersdelight:block/budding_tomatoes_stage3"
     }
   }
 }
