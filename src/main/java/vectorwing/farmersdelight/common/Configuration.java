@@ -20,6 +20,7 @@ public class Configuration
 	public static ForgeConfigSpec.DoubleValue RICH_SOIL_BOOST_CHANCE;
 	public static ForgeConfigSpec.DoubleValue CUTTING_BOARD_FORTUNE_BONUS;
 	public static ForgeConfigSpec.BooleanValue ENABLE_ROPE_REELING;
+	public static ForgeConfigSpec.BooleanValue ENABLE_TOMATO_VINE_CLIMBING_TAGGED_ROPES;
 	public static ForgeConfigSpec.ConfigValue<List<? extends String>> CANVAS_SIGN_DARK_BACKGROUND_LIST;
 
 	public static final String CATEGORY_RECIPE_BOOK = "recipe_book";
@@ -76,6 +77,8 @@ public class Configuration
 				.defineInRange("cuttingBoardFortuneBonus", 0.1, 0.0, 1.0);
 		ENABLE_ROPE_REELING = COMMON_BUILDER.comment("Should players be able to reel back rope, bottom to top, when sneak-using with an empty hand on them?")
 				.define("enableRopeReeling", true);
+		ENABLE_TOMATO_VINE_CLIMBING_TAGGED_ROPES = COMMON_BUILDER.comment("Should tomato vines be able to climb any rope tagged as farmersdelight:ropes? Beware, this will convert them into FD's rope item!")
+				.define("enableTomatoVineClimbingTaggedRopes", true);
 		CANVAS_SIGN_DARK_BACKGROUND_LIST = COMMON_BUILDER.comment("A list of dye colors that, when used as the background of a Canvas Sign, should default to white text when placed.",
 						"Dyes: [\"white\", \"orange\", \"magenta\", \"light_blue\", \"yellow\", \"lime\", \"pink\", \"gray\", \"light_gray\", \"cyan\", \"purple\", \"blue\", \"brown\", \"green\", \"red\", \"black\"]")
 				.defineList("canvasSignDarkBackgroundList", ImmutableList.of("gray", "purple", "blue", "brown", "green", "red", "black"), obj -> true);

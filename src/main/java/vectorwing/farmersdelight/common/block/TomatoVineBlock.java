@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.common.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
@@ -10,11 +11,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -24,9 +23,11 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModSounds;
+import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.Random;
 
@@ -87,7 +88,9 @@ public class TomatoVineBlock extends CropBlock
 	public void attemptRopeClimb(ServerLevel level, BlockPos pos, Random random) {
 		if (random.nextFloat() < 0.2F) {
 			BlockPos posAbove = pos.above();
-			if (level.getBlockState(posAbove).is(ModBlocks.ROPE.get())) {
+			BlockState stateAbove = level.getBlockState(posAbove);
+			boolean canClimb = Configuration.ENABLE_TOMATO_VINE_CLIMBING_TAGGED_ROPES.get() ? stateAbove.is(ModTags.ROPES) : stateAbove.is(ModBlocks.ROPE.get());
+			if (canClimb) {
 				int vineHeight;
 				for (vineHeight = 1; level.getBlockState(pos.below(vineHeight)).is(this); ++vineHeight) {
 				}
@@ -153,7 +156,18 @@ public class TomatoVineBlock extends CropBlock
 	}
 
 	@Override
-	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
-		return state.is(ModBlocks.TOMATO_CROP.get()) || super.mayPlaceOn(state, level, pos);
+	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+		BlockPos belowPos = pos.below();
+		BlockState belowState = level.getBlockState(belowPos);
+
+		if (state.getValue(TomatoVineBlock.ROPELOGGED)) {
+			return belowState.is(ModBlocks.TOMATO_CROP.get()) && hasGoodCropConditions(level, pos);
+		}
+
+		return super.canSurvive(state, level, pos);
+	}
+
+	public boolean hasGoodCropConditions(LevelReader level, BlockPos pos) {
+		return level.getRawBrightness(pos, 0) >= 8 || level.canSeeSky(pos);
 	}
 }
