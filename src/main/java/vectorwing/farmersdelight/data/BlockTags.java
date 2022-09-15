@@ -169,6 +169,9 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.WILD_TOMATOES.get(),
 				ModBlocks.WILD_ONIONS.get(),
 				ModBlocks.WILD_RICE.get());
+		tag(ModTags.ROPES).add(ModBlocks.ROPE.get())
+				.addOptional(new ResourceLocation("quark:rope"))
+				.addOptional(new ResourceLocation("supplementaries:rope"));
 		tag(ModTags.TRAY_HEAT_SOURCES).add(
 						Blocks.LAVA)
 				.addTag(net.minecraft.tags.BlockTags.CAMPFIRES)
