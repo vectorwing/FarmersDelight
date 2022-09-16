@@ -22,6 +22,7 @@
 - New tags: 
   - `forge:dough`: Used to add modded dough items to FD's recipes, and populated by Wheat Dough by default;
   - `farmersdelight:cabinets`: This, together with `cabinets/wooden`, is used to classify cabinet items for searching, crafting and integration;
+- Mushroom Colonies now generate in Mushroom Field biomes, at random growth stages;
 
 ### Updates
 - Some of the Wild Crops have received some visual upgrades, both in art and in world generation!

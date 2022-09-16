@@ -8,6 +8,7 @@ import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
@@ -17,10 +18,12 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.RandomizedIntStateProvider;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraftforge.common.Tags;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
+import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 import vectorwing.farmersdelight.common.registry.ModBiomeFeatures;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.world.configuration.WildCropConfiguration;
@@ -37,6 +40,9 @@ public class WildCropGeneration
 	public static Holder<ConfiguredFeature<WildCropConfiguration, ?>> FEATURE_PATCH_WILD_POTATOES;
 	public static Holder<ConfiguredFeature<WildCropConfiguration, ?>> FEATURE_PATCH_WILD_BEETROOTS;
 	public static Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> FEATURE_PATCH_WILD_RICE;
+	public static Holder<ConfiguredFeature<WildCropConfiguration, ?>> FEATURE_PATCH_BROWN_MUSHROOM_COLONIES;
+	public static Holder<ConfiguredFeature<WildCropConfiguration, ?>> FEATURE_PATCH_RED_MUSHROOM_COLONIES;
+
 	public static Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> FEATURE_PATCH_SANDY_SHRUB_BONEMEAL;
 
 	public static Holder<PlacedFeature> PATCH_WILD_CABBAGES;
@@ -46,6 +52,8 @@ public class WildCropGeneration
 	public static Holder<PlacedFeature> PATCH_WILD_POTATOES;
 	public static Holder<PlacedFeature> PATCH_WILD_BEETROOTS;
 	public static Holder<PlacedFeature> PATCH_WILD_RICE;
+	public static Holder<PlacedFeature> PATCH_BROWN_MUSHROOM_COLONIES;
+	public static Holder<PlacedFeature> PATCH_RED_MUSHROOM_COLONIES;
 
 	public static final BlockPos BLOCK_BELOW = new BlockPos(0, -1, 0);
 	public static final BlockPos BLOCK_ABOVE = new BlockPos(0, 1, 0);
@@ -75,6 +83,12 @@ public class WildCropGeneration
 				ModBiomeFeatures.WILD_RICE.get(), FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK,
 						new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_RICE.get())), List.of(Blocks.DIRT)));
 
+		FEATURE_PATCH_BROWN_MUSHROOM_COLONIES = register(new ResourceLocation(FarmersDelight.MODID, "patch_brown_mushroom_colonies"),
+				ModBiomeFeatures.WILD_CROP.get(), mushroomColonyConfig(ModBlocks.BROWN_MUSHROOM_COLONY.get(), Blocks.BROWN_MUSHROOM, BlockPredicate.matchesBlock(Blocks.MYCELIUM, BLOCK_BELOW)));
+
+		FEATURE_PATCH_RED_MUSHROOM_COLONIES = register(new ResourceLocation(FarmersDelight.MODID, "patch_red_mushroom_colonies"),
+				ModBiomeFeatures.WILD_CROP.get(), mushroomColonyConfig(ModBlocks.RED_MUSHROOM_COLONY.get(), Blocks.RED_MUSHROOM, BlockPredicate.matchesBlock(Blocks.MYCELIUM, BLOCK_BELOW)));
+
 		FEATURE_PATCH_SANDY_SHRUB_BONEMEAL = register(new ResourceLocation(FarmersDelight.MODID, "patch_sandy_shrub"),
 				Feature.RANDOM_PATCH, randomPatchConfig(ModBlocks.SANDY_SHRUB.get(), 32, 2, BlockPredicate.matchesTag(BlockTags.SAND, BLOCK_BELOW)));
 
@@ -98,6 +112,12 @@ public class WildCropGeneration
 
 		PATCH_WILD_RICE = registerPlacement(new ResourceLocation("patch_wild_rice"),
 				FEATURE_PATCH_WILD_RICE, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_RICE.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome(), TAGGED_IS_OVERWORLD);
+
+		PATCH_BROWN_MUSHROOM_COLONIES = registerPlacement(new ResourceLocation("patch_brown_mushroom_colonies"),
+				FEATURE_PATCH_BROWN_MUSHROOM_COLONIES, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_BROWN_MUSHROOM_COLONIES.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome(), TAGGED_IS_OVERWORLD);
+
+		PATCH_RED_MUSHROOM_COLONIES = registerPlacement(new ResourceLocation("patch_red_mushroom_colonies"),
+				FEATURE_PATCH_RED_MUSHROOM_COLONIES, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_RED_MUSHROOM_COLONIES.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome(), TAGGED_IS_OVERWORLD);
 	}
 
 	public static RandomPatchConfiguration randomPatchConfig(Block block, int tries, int xzSpread, BlockPredicate plantedOn) {
@@ -107,16 +127,26 @@ public class WildCropGeneration
 	}
 
 	public static WildCropConfiguration wildCropConfig(Block primaryBlock, Block secondaryBlock, BlockPredicate plantedOn) {
-		return new WildCropConfiguration(64, 4, 3, plantBlockConfig(primaryBlock, plantedOn), plantBlockConfig(secondaryBlock, plantedOn), null);
+		return new WildCropConfiguration(64, 6, 3, plantBlockConfig(primaryBlock, plantedOn), plantBlockConfig(secondaryBlock, plantedOn), null);
 	}
 
 	public static WildCropConfiguration wildCropWithFloorConfig(Block primaryBlock, Block secondaryBlock, BlockPredicate plantedOn, Block floorBlock, BlockPredicate replaces) {
-		return new WildCropConfiguration(64, 4, 3, plantBlockConfig(primaryBlock, plantedOn), plantBlockConfig(secondaryBlock, plantedOn), floorBlockConfig(floorBlock, replaces));
+		return new WildCropConfiguration(64, 6, 3, plantBlockConfig(primaryBlock, plantedOn), plantBlockConfig(secondaryBlock, plantedOn), floorBlockConfig(floorBlock, replaces));
+	}
+
+	public static WildCropConfiguration mushroomColonyConfig(Block colonyBlock, Block secondaryBlock, BlockPredicate plantedOn) {
+		return new WildCropConfiguration(64, 6, 3, colonyBlockConfig(colonyBlock, plantedOn), plantBlockConfig(secondaryBlock, plantedOn), null);
 	}
 
 	public static Holder<PlacedFeature> plantBlockConfig(Block block, BlockPredicate plantedOn) {
 		return PlacementUtils.filtered(
 				Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(block)),
+				BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, plantedOn));
+	}
+
+	public static Holder<PlacedFeature> colonyBlockConfig(Block block, BlockPredicate plantedOn) {
+		return PlacementUtils.filtered(
+				Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new RandomizedIntStateProvider(BlockStateProvider.simple(block), MushroomColonyBlock.COLONY_AGE, UniformInt.of(0, 3))),
 				BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, plantedOn));
 	}
 
