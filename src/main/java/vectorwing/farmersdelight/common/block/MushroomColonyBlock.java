@@ -5,6 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -52,7 +53,7 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
+		return SHAPE_BY_AGE[state.getValue(getAgeProperty())];
 	}
 
 	public IntegerProperty getAgeProperty() {
@@ -81,7 +82,7 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 		ItemStack heldStack = player.getItemInHand(hand);
 
 		if (age > 0 && heldStack.is(Tags.Items.SHEARS)) {
-			popResource(level, pos, this.getCloneItemStack(level, pos, state));
+			popResource(level, pos, getCloneItemStack(level, pos, state));
 			level.playSound(null, pos, SoundEvents.MOOSHROOM_SHEAR, SoundSource.BLOCKS, 1.0F, 1.0F);
 			level.setBlock(pos, state.setValue(COLONY_AGE, age - 1), 2);
 			if (!level.isClientSide) {
@@ -93,25 +94,15 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 		return InteractionResult.PASS;
 	}
 
-	@Override
-	public boolean isValidBonemealTarget(BlockGetter level, BlockPos pos, BlockState state, boolean isClient) {
-		return false;
-	}
-
 	public int getMaxAge() {
 		return 3;
-	}
-
-	@Override
-	public boolean isBonemealSuccess(Level level, Random rand, BlockPos pos, BlockState state) {
-		return false;
 	}
 
 	@Override
 	public void tick(BlockState state, ServerLevel level, BlockPos pos, Random rand) {
 		int age = state.getValue(COLONY_AGE);
 		BlockState groundState = level.getBlockState(pos.below());
-		if (age < this.getMaxAge() && groundState.is(ModTags.MUSHROOM_COLONY_GROWABLE_ON) && level.getRawBrightness(pos.above(), 0) <= GROWING_LIGHT_LEVEL && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, rand.nextInt(5) == 0)) {
+		if (age < getMaxAge() && groundState.is(ModTags.MUSHROOM_COLONY_GROWABLE_ON) && level.getRawBrightness(pos.above(), 0) <= GROWING_LIGHT_LEVEL && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, rand.nextInt(4) == 0)) {
 			level.setBlock(pos, state.setValue(COLONY_AGE, age + 1), 2);
 			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(level, pos, state);
 		}
@@ -128,8 +119,22 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 	}
 
 	@Override
+	public boolean isValidBonemealTarget(BlockGetter level, BlockPos pos, BlockState state, boolean isClient) {
+		return state.getValue(getAgeProperty()) < getMaxAge();
+	}
+
+	@Override
+	public boolean isBonemealSuccess(Level level, Random rand, BlockPos pos, BlockState state) {
+		return true;
+	}
+
+	protected int getBonemealAgeIncrease(Level level) {
+		return Mth.nextInt(level.random, 1, 2);
+	}
+
+	@Override
 	public void performBonemeal(ServerLevel level, Random rand, BlockPos pos, BlockState state) {
-		int age = Math.min(3, state.getValue(COLONY_AGE) + 1);
+		int age = Math.min(getMaxAge(), state.getValue(COLONY_AGE) + getBonemealAgeIncrease(level));
 		level.setBlock(pos, state.setValue(COLONY_AGE, age), 2);
 	}
 }

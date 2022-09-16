@@ -58,7 +58,7 @@ public class BackstabbingEnchantment extends Enchantment
 	}
 
 	public static float getBackstabbingDamagePerLevel(float amount, int level) {
-		float multiplier = ((level * 0.4F) + 1.0F);
+		float multiplier = ((level * 0.2F) + 1.2F);
 		return amount * multiplier;
 	}
 
