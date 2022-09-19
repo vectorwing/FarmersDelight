@@ -84,10 +84,10 @@ public class WildCropGeneration
 						new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_RICE.get())), List.of(Blocks.DIRT)));
 
 		FEATURE_PATCH_BROWN_MUSHROOM_COLONIES = register(new ResourceLocation(FarmersDelight.MODID, "patch_brown_mushroom_colonies"),
-				ModBiomeFeatures.WILD_CROP.get(), mushroomColonyConfig(ModBlocks.BROWN_MUSHROOM_COLONY.get(), Blocks.BROWN_MUSHROOM, BlockPredicate.matchesBlock(Blocks.MYCELIUM, BLOCK_BELOW)));
+				ModBiomeFeatures.WILD_CROP.get(), mushroomColonyConfig(ModBlocks.BROWN_MUSHROOM_COLONY.get(), Blocks.BROWN_MUSHROOM, BlockPredicate.matchesBlocks(BLOCK_BELOW, Blocks.MYCELIUM)));
 
 		FEATURE_PATCH_RED_MUSHROOM_COLONIES = register(new ResourceLocation(FarmersDelight.MODID, "patch_red_mushroom_colonies"),
-				ModBiomeFeatures.WILD_CROP.get(), mushroomColonyConfig(ModBlocks.RED_MUSHROOM_COLONY.get(), Blocks.RED_MUSHROOM, BlockPredicate.matchesBlock(Blocks.MYCELIUM, BLOCK_BELOW)));
+				ModBiomeFeatures.WILD_CROP.get(), mushroomColonyConfig(ModBlocks.RED_MUSHROOM_COLONY.get(), Blocks.RED_MUSHROOM, BlockPredicate.matchesBlocks(BLOCK_BELOW, Blocks.MYCELIUM)));
 
 		FEATURE_PATCH_SANDY_SHRUB_BONEMEAL = register(new ResourceLocation(FarmersDelight.MODID, "patch_sandy_shrub"),
 				Feature.RANDOM_PATCH, randomPatchConfig(ModBlocks.SANDY_SHRUB.get(), 32, 2, BlockPredicate.matchesTag(BLOCK_BELOW, BlockTags.SAND)));

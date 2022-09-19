@@ -1,4 +1,4 @@
-// 1.19	2022-09-03T02:38:13.024366	Tags for minecraft:item
+// 1.19	2022-09-18T23:33:36.9241723	Tags for minecraft:item
 eeb4249c8907bac30d3f4bb9daf67ecf689974c9 data/farmersdelight/tags/items/cabbage_roll_ingredients.json
 21d6792ce7de98e9396c3829ab52f8574595557b data/farmersdelight/tags/items/cabinets.json
 c7c759d5b40e2885912f0efc3250141d469c6220 data/farmersdelight/tags/items/cabinets/wooden.json
@@ -8,6 +8,7 @@ b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/farmersdelight/tags/items/straw_ha
 edaf49470d0e1c903468fd6902234bbeec85c337 data/farmersdelight/tags/items/tools/knives.json
 5596501768488a25c5bcc6ef16c2fc5ca3ab49e9 data/farmersdelight/tags/items/wild_crops.json
 7ba36ce602f3e081acf62bdb6ada5cc52f17eb7a data/farmersdelight/tags/items/wolf_prey.json
+02dfdb41688ccea8169a8d046943461f0aa3c361 data/forge/tags/items/berries.json
 3c97b80407cb369d06f88b8b31da41587486fa84 data/forge/tags/items/bread.json
 0bdc999a7f653eecbb3c513a0baf1b963a2587ab data/forge/tags/items/bread/wheat.json
 3303db8c35b37ceda9538f0642448ff9ee6c42d0 data/forge/tags/items/cooked_bacon.json
