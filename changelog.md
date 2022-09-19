@@ -9,11 +9,11 @@
   - Added optional `"recipe_book_tab"` field for cooking recipes, which lets the recipe specify which tab it goes into:
     - Valid options are `meals, drinks, misc`. If not provided, the recipe's tab will be determined in-code;
 - New foods:
-  - Salmon Roll, Cod Roll and Kelp Roll - A new way to enjoy your fishing spoils, if you're equipped with watery crops;
+  - **Salmon Roll, Cod Roll and Kelp Roll** - A new way to enjoy your fishing spoils, if you're equipped with watery crops;
     - A full Kelp Roll is quite awkward to eat, so it takes a while. But if you cut it on a Cutting Board, you get bite-sized snacks to eat quickly;
-  - Bone Broth - Spelunking? In a pinch? Bring a Cooking Pot with you, and you'll be able to make a decent broth out of bone and cave vegetation;
-  - Mushroom Rice - A nourishing counterpart to Mushroom Stew, and a good sink for your mushroom colony farms;
-  - Glow Berry Custard - This vibrant cave fruit goes well with cream! It's sure to make your stomach *glow* with joy, too;
+  - **Bone Broth** - Spelunking? In a pinch? Bring a Cooking Pot with you, and you'll be able to make a decent broth out of bone and cave vegetation;
+  - **Mushroom Rice** - A nourishing counterpart to Mushroom Stew, and a good sink for your mushroom colony farms;
+  - **Glow Berry Custard** - This vibrant cave fruit goes well with cream! It's sure to make your stomach *glow* with joy, too;
 - New blocks:
   - **Sandy Shrub** - A short plant which invades the beach coast, alongside Wild Cabbage and Sea Beet!
     - You can bone meal the shrub to make it spread across nearby sand;
@@ -33,7 +33,7 @@
 - Some of the Wild Crops have received some visual upgrades, both in art and in world generation!
   - Wild Carrots, being weeds, will strangle some grass out, creating small patches of Coarse Dirt;
   - Wild Onions now scatter individual Alliums around them, making a more natural bush;
-  - Tomato Vines and Wild Potatoes now grow amidst a bush of local foliage;
+  - Tomato Shrubs and Wild Potatoes now grow amidst a bush of local foliage;
   - Wild Cabbage and Sea Beet now grow amidst a patch of Sandy Shrub, a new beach plant;
 - You can now take servings from a Cooking Pot **directly in a crafting grid**, by placing the pot and a valid container on it;
 - Rope can now be **reeled back into your inventory** from the top end by sneak-using with an empty hand on it;
@@ -41,7 +41,7 @@
   - Knives are now crafted in a **vertical** arrangement instead of diagonal. This was done to reduce recipe conflicts with other mods;
   - Barbecue on a Stick can now be made from any cooked meat;
   - Milk Buckets and Bottles now convert between each other at a 1:4 ratio;
-  - Glow Berries can substitute Sweet Berries on the Fruit Saland and Stuffed Pumpkin;
+  - Glow Berries can substitute Sweet Berries on the Fruit Salad and Stuffed Pumpkin;
   - Stuffed Pumpkin has a simpler, more sensible recipe;
 - All cooking recipes have received a bump in their experience reward, since the old ratios were very pitiful;
 - Mushroom Colonies have been buffed in some ways:
