@@ -53,6 +53,10 @@ public class Configuration
 	public static ForgeConfigSpec.IntValue CHANCE_WILD_TOMATOES;
 	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_RICE;
 	public static ForgeConfigSpec.IntValue CHANCE_WILD_RICE;
+	public static ForgeConfigSpec.BooleanValue GENERATE_BROWN_MUSHROOM_COLONIES;
+	public static ForgeConfigSpec.IntValue CHANCE_BROWN_MUSHROOM_COLONIES;
+	public static ForgeConfigSpec.BooleanValue GENERATE_RED_MUSHROOM_COLONIES;
+	public static ForgeConfigSpec.IntValue CHANCE_RED_MUSHROOM_COLONIES;
 
 	// CLIENT
 	public static final String CATEGORY_CLIENT = "client";
@@ -147,6 +151,20 @@ public class Configuration
 		COMMON_BUILDER.comment("Wild Rice generation").push("wild_rice");
 		CHANCE_WILD_RICE = COMMON_BUILDER.comment("Chance of generating clusters. Smaller value = more frequent.")
 				.defineInRange("chance", 20, 0, Integer.MAX_VALUE);
+		COMMON_BUILDER.pop();
+
+		COMMON_BUILDER.comment("Brown Mushroom Colony generation").push("brown_mushroom_colonies");
+		GENERATE_BROWN_MUSHROOM_COLONIES = COMMON_BUILDER.comment("Generate brown mushroom colonies on mushroom fields")
+				.define("genBrownMushroomColony", true);
+		CHANCE_BROWN_MUSHROOM_COLONIES = COMMON_BUILDER.comment("Chance of generating clusters. Smaller value = more frequent.")
+				.defineInRange("chance", 15, 0, Integer.MAX_VALUE);
+		COMMON_BUILDER.pop();
+
+		COMMON_BUILDER.comment("Red Mushroom Colony generation").push("red_mushroom_colonies");
+		GENERATE_RED_MUSHROOM_COLONIES = COMMON_BUILDER.comment("Generate red mushroom colonies on mushroom fields")
+				.define("genRedMushroomColony", true);
+		CHANCE_RED_MUSHROOM_COLONIES = COMMON_BUILDER.comment("Chance of generating clusters. Smaller value = more frequent.")
+				.defineInRange("chance", 15, 0, Integer.MAX_VALUE);
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.pop();

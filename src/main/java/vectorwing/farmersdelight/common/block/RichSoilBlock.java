@@ -25,8 +25,6 @@ import javax.annotation.Nullable;
 @SuppressWarnings("deprecation")
 public class RichSoilBlock extends Block
 {
-	public static final int COLONY_FORMING_LIGHT_LEVEL = 12;
-
 	public RichSoilBlock(Properties properties) {
 		super(properties);
 	}
@@ -45,15 +43,11 @@ public class RichSoilBlock extends Block
 
 			// Convert mushrooms to colonies if it's dark enough
 			if (aboveBlock == Blocks.BROWN_MUSHROOM) {
-				if (level.getRawBrightness(pos.above(), 0) <= COLONY_FORMING_LIGHT_LEVEL) {
-					level.setBlockAndUpdate(pos.above(), ModBlocks.BROWN_MUSHROOM_COLONY.get().defaultBlockState());
-				}
+				level.setBlockAndUpdate(pos.above(), ModBlocks.BROWN_MUSHROOM_COLONY.get().defaultBlockState());
 				return;
 			}
 			if (aboveBlock == Blocks.RED_MUSHROOM) {
-				if (level.getRawBrightness(pos.above(), 0) <= COLONY_FORMING_LIGHT_LEVEL) {
-					level.setBlockAndUpdate(pos.above(), ModBlocks.RED_MUSHROOM_COLONY.get().defaultBlockState());
-				}
+				level.setBlockAndUpdate(pos.above(), ModBlocks.RED_MUSHROOM_COLONY.get().defaultBlockState());
 				return;
 			}
 

@@ -71,6 +71,7 @@ public class ItemTags extends ItemTagsProvider
 
 	@SuppressWarnings("unchecked")
 	private void registerForgeTags() {
+		tag(ForgeTags.BERRIES).add(Items.SWEET_BERRIES, Items.GLOW_BERRIES);
 		tag(ForgeTags.BREAD).addTag(ForgeTags.BREAD_WHEAT);
 		tag(ForgeTags.BREAD_WHEAT).add(Items.BREAD);
 

@@ -15,6 +15,8 @@ public class ForgeTags
 	// Blocks that are efficiently mined with a Knife.
 	public static final TagKey<Block> MINEABLE_WITH_KNIFE = forgeBlockTag("mineable/knife");
 
+	public static final TagKey<Item> BERRIES = forgeItemTag("berries");
+
 	public static final TagKey<Item> BREAD = forgeItemTag("bread");
 	public static final TagKey<Item> BREAD_WHEAT = forgeItemTag("bread/wheat");
 
