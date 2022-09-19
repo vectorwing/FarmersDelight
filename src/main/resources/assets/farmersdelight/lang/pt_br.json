@@ -50,7 +50,8 @@
   "block.farmersdelight.red_canvas_sign": "Placa de lona vermelha",
   "block.farmersdelight.black_canvas_sign": "Placa de lona preta",
 
-  "block.farmersdelight.tomatoes": "Tomates",
+  "block.farmersdelight.budding_tomatoes": "Broto de tomate",
+  "block.farmersdelight.tomatoes": "Cipó de tomates",
   "block.farmersdelight.cabbages": "Repolho",
   "block.farmersdelight.onions": "Cebolas",
   "block.farmersdelight.rice": "Plantio de arroz",
@@ -212,7 +213,7 @@
 
   "farmersdelight.advancement.craft_knife": "Caçar e colher",
   "farmersdelight.advancement.craft_knife.desc": "Crie uma Faca para pilhar mais matéria-prima de plantas e animais",
-  "farmersdelight.advancement.harvest_straw": "Agarrando palhas",
+  "farmersdelight.advancement.harvest_straw": "Dando uma palhinha",
   "farmersdelight.advancement.harvest_straw.desc": "Colha gramas, trigo e arroz com uma Faca para obter Palha",
   "farmersdelight.advancement.place_organic_compost": "Compostagem avançada",
   "farmersdelight.advancement.place_organic_compost.desc": "Faça um pouco de Composto Orgânico. O processo é mais rápido com sol, água e cogumelos!",
@@ -225,10 +226,12 @@
   "farmersdelight.advancement.obtain_netherite_knife": "Se você não aguenta o calor...",
   "farmersdelight.advancement.obtain_netherite_knife.desc": "Gaste uma barra inteira de Netherita para aprimorar sua faca! Ou saia da cozinha.",
 
-  "farmersdelight.advancement.get_fd_seed": "Hortas da Natureza",
+  "farmersdelight.advancement.get_fd_seed": "Hortas da natureza",
   "farmersdelight.advancement.get_fd_seed.desc": "Quatro hortas novas podem ser encontradas na natureza, em vários climas... ou guardadas em um baú por aí.",
   "farmersdelight.advancement.plant_rice": "Molhando suas raízes",
   "farmersdelight.advancement.plant_rice.desc": "Plante grãos de Arroz em uma poça de água rasa",
+  "farmersdelight.advancement.harvest_ropelogged_tomato": "Tom-alto",
+  "farmersdelight.advancement.harvest_ropelogged_tomato.desc": "Pendure cordas em cima de uma horta de tomate para que ela cresça mais alta",
   "farmersdelight.advancement.hit_raider_with_rotten_tomato": "Boo! Sai fora!",
   "farmersdelight.advancement.hit_raider_with_rotten_tomato.desc": "Jogue um tomate podre em um desses invasores enxeridos!",
   "farmersdelight.advancement.get_mushroom_colony": "Fungos entre nós",

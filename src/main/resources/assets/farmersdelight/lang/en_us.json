@@ -50,7 +50,8 @@
   "block.farmersdelight.red_canvas_sign": "Red Canvas Sign",
   "block.farmersdelight.black_canvas_sign": "Black Canvas Sign",
 
-  "block.farmersdelight.tomatoes": "Tomatoes",
+  "block.farmersdelight.budding_tomatoes": "Budding Tomato Vine",
+  "block.farmersdelight.tomatoes": "Tomato Vine",
   "block.farmersdelight.cabbages": "Cabbage",
   "block.farmersdelight.onions": "Onions",
   "block.farmersdelight.rice": "Rice Crops",
@@ -229,6 +230,8 @@
   "farmersdelight.advancement.get_fd_seed.desc": "Four new crops may be found in the wild, across many climates... or maybe in a chest somewhere.",
   "farmersdelight.advancement.plant_rice": "Dipping Your Roots",
   "farmersdelight.advancement.plant_rice.desc": "Plant grains of Rice in a shallow water puddle",
+  "farmersdelight.advancement.harvest_ropelogged_tomato": "Tall-mato",
+  "farmersdelight.advancement.harvest_ropelogged_tomato.desc": "Hang some rope above a tomato crop to make it grow taller",
   "farmersdelight.advancement.hit_raider_with_rotten_tomato": "Boo! Hiss!",
   "farmersdelight.advancement.hit_raider_with_rotten_tomato.desc": "Throw a Rotten Tomato at one of these pesky raiders!",
   "farmersdelight.advancement.get_mushroom_colony": "Fungus Among Us",

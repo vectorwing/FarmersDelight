@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.data;
 
 import com.google.common.collect.Sets;
-import com.google.gson.GsonBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
@@ -11,16 +10,19 @@ import net.minecraft.advancements.critereon.*;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
 import net.minecraft.data.advancements.AdvancementProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RespawnAnchorBlock;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.advancement.CuttingBoardTrigger;
+import vectorwing.farmersdelight.common.block.TomatoVineBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 import vectorwing.farmersdelight.common.registry.ModEntityTypes;
@@ -140,7 +142,23 @@ public class Advancements extends AdvancementProvider
 					.addCriterion("plant_rice", PlacedBlockTrigger.TriggerInstance.placedBlock(ModBlocks.RICE_CROP.get()))
 					.save(consumer, getNameId("main/plant_rice"));
 
-			Advancement booHiss = getAdvancement(cropsOfTheWild, ModItems.ROTTEN_TOMATO.get(), "hit_raider_with_rotten_tomato", FrameType.TASK, true, true, false)
+			Advancement tallmato = getAdvancement(cropsOfTheWild, ModItems.TOMATO.get(), "harvest_ropelogged_tomato", FrameType.TASK, true, false, false)
+					.addCriterion("harvest_ropelogged_tomato", ItemInteractWithBlockTrigger.TriggerInstance.itemUsedOnBlock(
+							LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(ModBlocks.TOMATO_CROP.get()).setProperties(
+									StatePropertiesPredicate.Builder.properties()
+											.hasProperty(TomatoVineBlock.VINE_AGE, 0)
+											.hasProperty(TomatoVineBlock.ROPELOGGED, true)
+											.build()
+							).build()),
+							ItemPredicate.Builder.item())
+					)
+					.save(consumer, getNameId("main/harvest_ropelogged_tomato"));
+
+			ItemInteractWithBlockTrigger.TriggerInstance.itemUsedOnBlock(
+					LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(BlockTags.BEEHIVES).build()).setSmokey(true),
+					ItemPredicate.Builder.item().of(Items.GLASS_BOTTLE));
+
+			Advancement booHiss = getAdvancement(tallmato, ModItems.ROTTEN_TOMATO.get(), "hit_raider_with_rotten_tomato", FrameType.TASK, true, true, false)
 					.addCriterion("hit_raider_with_rotten_tomato", PlayerHurtEntityTrigger.TriggerInstance.playerHurtEntity(
 							DamagePredicate.Builder.damageInstance()
 									.type(DamageSourcePredicate.Builder.damageType().isProjectile(true).direct(EntityPredicate.Builder.entity().of(ModEntityTypes.ROTTEN_TOMATO.get()))).build(),

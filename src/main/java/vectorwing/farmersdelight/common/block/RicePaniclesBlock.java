@@ -58,17 +58,17 @@ public class RicePaniclesBlock extends CropBlock
 	}
 
 	@Override
-	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
-		return state.getBlock() == ModBlocks.RICE_CROP.get();
-	}
-
-	@Override
 	protected int getBonemealAgeIncrease(Level level) {
 		return super.getBonemealAgeIncrease(level) / 3;
 	}
 
 	@Override
+	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
+		return state.is(ModBlocks.RICE_CROP.get());
+	}
+
+	@Override
 	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-		return (level.getRawBrightness(pos, 0) >= 8 || level.canSeeSky(pos)) && level.getBlockState(pos.below()).getBlock() == ModBlocks.RICE_CROP.get();
+		return (level.getRawBrightness(pos, 0) >= 8 || level.canSeeSky(pos)) && this.mayPlaceOn(level.getBlockState(pos.below()), level, pos);
 	}
 }

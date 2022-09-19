@@ -188,7 +188,7 @@ public class ModItems
 	public static final RegistryObject<Item> RICE = ITEMS.register("rice",
 			() -> new RiceItem(ModBlocks.RICE_CROP.get(), basicItem()));
 	public static final RegistryObject<Item> CABBAGE_SEEDS = ITEMS.register("cabbage_seeds", () -> new ItemNameBlockItem(ModBlocks.CABBAGE_CROP.get(), basicItem()));
-	public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds", () -> new ItemNameBlockItem(ModBlocks.TOMATO_CROP.get(), basicItem()));
+	public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds", () -> new ItemNameBlockItem(ModBlocks.BUDDING_TOMATO_CROP.get(), basicItem()));
 	public static final RegistryObject<Item> ROTTEN_TOMATO = ITEMS.register("rotten_tomato",
 			() -> new RottenTomatoItem(new Item.Properties().stacksTo(16).tab(FarmersDelight.CREATIVE_TAB)));
 
@@ -265,10 +265,10 @@ public class ModItems
 			() -> new Item(foodItem(FoodValues.COOKIES)));
 	public static final RegistryObject<Item> MELON_POPSICLE = ITEMS.register("melon_popsicle",
 			() -> new PopsicleItem(foodItem(FoodValues.POPSICLE)));
-	public static final RegistryObject<Item> FRUIT_SALAD = ITEMS.register("fruit_salad",
-			() -> new ConsumableItem(bowlFoodItem(FoodValues.FRUIT_SALAD), true));
 	public static final RegistryObject<Item> GLOW_BERRY_CUSTARD = ITEMS.register("glow_berry_custard",
 			() -> new ConsumableItem(foodItem(FoodValues.GLOW_BERRY_CUSTARD).craftRemainder(Items.GLASS_BOTTLE).stacksTo(16)));
+	public static final RegistryObject<Item> FRUIT_SALAD = ITEMS.register("fruit_salad",
+			() -> new ConsumableItem(bowlFoodItem(FoodValues.FRUIT_SALAD), true));
 
 	// Basic Meals
 	public static final RegistryObject<Item> MIXED_SALAD = ITEMS.register("mixed_salad",

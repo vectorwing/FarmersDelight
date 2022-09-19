@@ -2,6 +2,6 @@
   "parent": "farmersdelight:block/crop_cross",
   "render_type": "minecraft:cutout",
   "textures": {
-    "cross": "farmersdelight:block/tomatoes_stage4"
+    "cross": "farmersdelight:block/budding_tomatoes_stage3"
   }
 }

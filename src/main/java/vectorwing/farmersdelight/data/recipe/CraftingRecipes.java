@@ -690,7 +690,6 @@ public class CraftingRecipes
 		ShapelessRecipeBuilder.shapeless(ModItems.MIXED_SALAD.get())
 				.requires(ForgeTags.SALAD_INGREDIENTS)
 				.requires(ForgeTags.CROPS_TOMATO)
-				.requires(ForgeTags.CROPS_ONION)
 				.requires(Items.BEETROOT)
 				.requires(Items.BOWL)
 				.unlockedBy("has_bowl", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BOWL))
@@ -754,7 +753,6 @@ public class CraftingRecipes
 		ShapelessRecipeBuilder.shapeless(ModItems.STUFFED_POTATO.get())
 				.requires(Items.BAKED_POTATO)
 				.requires(ForgeTags.COOKED_BEEF)
-				.requires(Items.CARROT)
 				.requires(ForgeTags.MILK)
 				.unlockedBy("has_baked_potato", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BAKED_POTATO))
 				.save(consumer);
@@ -771,7 +769,6 @@ public class CraftingRecipes
 				.unlockedBy("has_cod_slice", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COD_SLICE.get()))
 				.save(consumer);
 		ShapedRecipeBuilder.shaped(ModItems.KELP_ROLL.get(), 1)
-				.pattern("###")
 				.pattern("RXR")
 				.pattern("###")
 				.define('#', Items.DRIED_KELP)

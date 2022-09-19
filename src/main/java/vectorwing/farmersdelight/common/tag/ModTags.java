@@ -23,6 +23,9 @@ public class ModTags
 	// Blocks that represent the wild form of a farmable crop.
 	public static final TagKey<Block> WILD_CROPS = modBlockTag("wild_crops");
 
+	// Blocks that represent a rope, for gameplay purposes.
+	public static final TagKey<Block> ROPES = modBlockTag("ropes");
+
 	// Blocks that can heat up cooking workstations.
 	public static final TagKey<Block> HEAT_SOURCES = modBlockTag("heat_sources");
 
