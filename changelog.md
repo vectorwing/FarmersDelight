@@ -44,7 +44,9 @@
   - Glow Berries can substitute Sweet Berries on the Fruit Saland and Stuffed Pumpkin;
   - Stuffed Pumpkin has a simpler, more sensible recipe;
 - All cooking recipes have received a bump in their experience reward, since the old ratios were very pitiful;
-- Mushroom Colonies now grow a little faster, and can accept Bone Meal;
+- Mushroom Colonies have been buffed in some ways:
+  - They can now grow in any light level, and do so faster than normal;
+  - They can accept Bone Meal to advance growth stages;
 - Skillet damage has been slightly buffed;
 - Backstabbing damage multiplier has been nerfed to 1.4x, 1.6x and 1.8x;
 - Added Better Combat integration for the Skillet (mace preset);

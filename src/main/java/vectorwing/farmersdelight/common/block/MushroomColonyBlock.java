@@ -33,7 +33,6 @@ import java.util.function.Supplier;
 @SuppressWarnings("deprecation")
 public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 {
-	public static final int GROWING_LIGHT_LEVEL = 12;
 	public static final int PLACING_LIGHT_LEVEL = 13;
 	public final Supplier<Item> mushroomType;
 
@@ -102,7 +101,7 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 	public void tick(BlockState state, ServerLevel level, BlockPos pos, Random rand) {
 		int age = state.getValue(COLONY_AGE);
 		BlockState groundState = level.getBlockState(pos.below());
-		if (age < getMaxAge() && groundState.is(ModTags.MUSHROOM_COLONY_GROWABLE_ON) && level.getRawBrightness(pos.above(), 0) <= GROWING_LIGHT_LEVEL && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, rand.nextInt(4) == 0)) {
+		if (age < getMaxAge() && groundState.is(ModTags.MUSHROOM_COLONY_GROWABLE_ON) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, rand.nextInt(4) == 0)) {
 			level.setBlock(pos, state.setValue(COLONY_AGE, age + 1), 2);
 			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(level, pos, state);
 		}
