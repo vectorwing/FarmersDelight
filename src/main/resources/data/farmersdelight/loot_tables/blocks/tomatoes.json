@@ -46,6 +46,15 @@
           "type": "minecraft:item",
           "name": "farmersdelight:tomato_seeds"
         }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "farmersdelight:tomatoes",
+          "properties": {
+            "ropelogged": false
+          }
+        }
       ]
     },
     {
@@ -69,25 +78,6 @@
           "block": "farmersdelight:tomatoes",
           "properties": {
             "age": "3"
-          }
-        }
-      ]
-    },
-    {
-      "name": "pool4",
-      "rolls": 1.0,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "farmersdelight:rope"
-        }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "farmersdelight:tomatoes",
-          "properties": {
-            "ropelogged": "true"
           }
         }
       ]
