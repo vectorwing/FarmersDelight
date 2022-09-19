@@ -1,7 +1,7 @@
 {
   "type": "farmersdelight:add_features_by_filter",
   "allowed_biomes": "#minecraft:is_overworld",
-  "denied_biomes": "#forge:is_underground",
+  "denied_biomes": ["minecraft:lush_caves", "minecraft:mushroom_fields"],
   "min_temperature": 0.4,
   "max_temperature": 0.9,
   "features": "farmersdelight:patch_wild_onions",

@@ -113,10 +113,10 @@ public class WildCropGeneration
 		PATCH_WILD_RICE = registerPlacement(new ResourceLocation(FarmersDelight.MODID, "patch_wild_rice"),
 				FEATURE_PATCH_WILD_RICE, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_RICE.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome(), TAGGED_IS_OVERWORLD);
 
-		PATCH_BROWN_MUSHROOM_COLONIES = registerPlacement(new ResourceLocation("patch_brown_mushroom_colonies"),
+		PATCH_BROWN_MUSHROOM_COLONIES = registerPlacement(new ResourceLocation(FarmersDelight.MODID, "patch_brown_mushroom_colonies"),
 				FEATURE_PATCH_BROWN_MUSHROOM_COLONIES, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_BROWN_MUSHROOM_COLONIES.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome(), TAGGED_IS_OVERWORLD);
 
-		PATCH_RED_MUSHROOM_COLONIES = registerPlacement(new ResourceLocation("patch_red_mushroom_colonies"),
+		PATCH_RED_MUSHROOM_COLONIES = registerPlacement(new ResourceLocation(FarmersDelight.MODID, "patch_red_mushroom_colonies"),
 				FEATURE_PATCH_RED_MUSHROOM_COLONIES, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_RED_MUSHROOM_COLONIES.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome(), TAGGED_IS_OVERWORLD);
 	}
 
