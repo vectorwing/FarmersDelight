@@ -1,5 +1,7 @@
 package vectorwing.farmersdelight.common.item;
 
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -34,6 +36,15 @@ public class DrinkableItem extends ConsumableItem
 
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+		ItemStack heldStack = player.getItemInHand(hand);
+		if (heldStack.isEdible()) {
+			if (player.canEat(heldStack.getFoodProperties(player).canAlwaysEat())) {
+				player.startUsingItem(hand);
+				return InteractionResultHolder.consume(heldStack);
+			} else {
+				return InteractionResultHolder.fail(heldStack);
+			}
+		}
 		return ItemUtils.startUsingInstantly(level, player, hand);
 	}
 }
