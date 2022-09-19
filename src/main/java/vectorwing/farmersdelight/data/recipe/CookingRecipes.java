@@ -225,11 +225,11 @@ public class CookingRecipes
 				.build(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.STUFFED_PUMPKIN_BLOCK.get(), 1, SLOW_COOKING, LARGE_EXP, Items.PUMPKIN)
 				.addIngredient(ForgeTags.CROPS_RICE)
+				.addIngredient(ForgeTags.CROPS_ONION)
+				.addIngredient(Items.BROWN_MUSHROOM)
+				.addIngredient(Items.POTATO)
+				.addIngredient(ForgeTags.BERRIES)
 				.addIngredient(ForgeTags.VEGETABLES)
-				.addIngredient(ModItems.TOMATO_SAUCE.get())
-				.addIngredient(Items.BAKED_POTATO)
-				.addIngredient(ModItems.BROWN_MUSHROOM_COLONY.get())
-				.addIngredient(Items.SWEET_BERRIES)
 				.unlockedByItems("has_pumpkin", Blocks.PUMPKIN)
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
 				.build(consumer);

@@ -6,19 +6,19 @@
       "tag": "forge:crops/rice"
     },
     {
+      "tag": "forge:crops/onion"
+    },
+    {
+      "item": "minecraft:brown_mushroom"
+    },
+    {
+      "item": "minecraft:potato"
+    },
+    {
+      "tag": "forge:berries"
+    },
+    {
       "tag": "forge:vegetables"
-    },
-    {
-      "item": "farmersdelight:tomato_sauce"
-    },
-    {
-      "item": "minecraft:baked_potato"
-    },
-    {
-      "item": "farmersdelight:brown_mushroom_colony"
-    },
-    {
-      "item": "minecraft:sweet_berries"
     }
   ],
   "result": {

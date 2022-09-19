@@ -21,6 +21,7 @@
     - Unlike other feasts, this gives individual rolls instead of meals. No, you can't put them back after taking one, it's bad manners!;
 - New tags: 
   - `forge:dough`: Used to add modded dough items to FD's recipes, and populated by Wheat Dough by default;
+  - `forge:berries`: Any kind of small berry. Currently used for Stuffed Pumpkin and Fruit Salad;
   - `farmersdelight:cabinets`: This, together with `cabinets/wooden`, is used to classify cabinet items for searching, crafting and integration;
 - Mushroom Colonies now generate in Mushroom Field biomes, at random growth stages;
 
@@ -40,6 +41,8 @@
   - Knives are now crafted in a **vertical** arrangement instead of diagonal. This was done to reduce recipe conflicts with other mods;
   - Barbecue on a Stick can now be made from any cooked meat;
   - Milk Buckets and Bottles now convert between each other at a 1:4 ratio;
+  - Glow Berries can substitute Sweet Berries on the Fruit Saland and Stuffed Pumpkin;
+  - Stuffed Pumpkin has a simpler, more sensible recipe;
 - All cooking recipes have received a bump in their experience reward, since the old ratios were very pitiful;
 - Mushroom Colonies now grow a little faster, and can accept Bone Meal;
 - Skillet damage has been slightly buffed;
