@@ -25,6 +25,10 @@
 - Mushroom Colonies now generate in Mushroom Field biomes, at random growth stages;
 
 ### Updates
+- The Tomato crop has been redesigned:
+  - Its first four growth stages are a block called `budding_tomatoes`. The normal `tomatoes` block involves four fruiting stages;
+  - The single crop works like before, growing 8 stages until it can be plucked for tomatoes;
+  - Hanging rope above the crop will make it **climb it up**, growing two additional tomato-bearing vines;
 - Some of the Wild Crops have received some visual upgrades, both in art and in world generation!
   - Wild Carrots, being weeds, will strangle some grass out, creating small patches of Coarse Dirt;
   - Wild Onions now scatter individual Alliums around them, making a more natural bush;

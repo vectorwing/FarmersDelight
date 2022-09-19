@@ -31,7 +31,14 @@ public class RopeBlock extends IronBarsBlock
 
 	public RopeBlock() {
 		super(Properties.of(Material.CLOTH_DECORATION).noCollission().noOcclusion().strength(0.2F).sound(SoundType.WOOL));
-		this.registerDefaultState(this.stateDefinition.any().setValue(TIED_TO_BELL, false));
+		this.registerDefaultState(this.stateDefinition.any()
+				.setValue(NORTH, false)
+				.setValue(SOUTH, false)
+				.setValue(EAST, false)
+				.setValue(WEST, false)
+				.setValue(TIED_TO_BELL, false)
+				.setValue(WATERLOGGED, false)
+		);
 	}
 
 	@Override

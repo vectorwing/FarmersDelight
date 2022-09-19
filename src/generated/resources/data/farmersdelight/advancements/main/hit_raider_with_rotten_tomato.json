@@ -1,5 +1,5 @@
 {
-  "parent": "farmersdelight:main/get_fd_seed",
+  "parent": "farmersdelight:main/harvest_ropelogged_tomato",
   "display": {
     "icon": {
       "item": "farmersdelight:rotten_tomato"
@@ -12,7 +12,7 @@
     },
     "frame": "task",
     "show_toast": true,
-    "announce_to_chat": false,
+    "announce_to_chat": true,
     "hidden": false
   },
   "criteria": {
