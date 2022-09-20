@@ -59,6 +59,7 @@
 - Fix minor pixel inconsistency on all cross crop templates;
 - Fix Grass Block not being `unaffected_by_rich_soil`, while non-bonemealable plants such as ferns/grasses were;
 - Fix Cabinets using Barrel subtitles;
+- Fix Rich Soil being tillable when the block above isn't air;
 - Fix Nourishment not being strong enough to counter extreme exhaustion levels, such as Lv. 255 Hunger;
   - The overlay now displays half-gilded shanks whenever the player is hurt, and can heal with hunger.
 

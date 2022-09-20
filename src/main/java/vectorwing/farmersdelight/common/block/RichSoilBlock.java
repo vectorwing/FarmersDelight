@@ -69,7 +69,7 @@ public class RichSoilBlock extends Block
 	@Override
 	@Nullable
 	public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
-		if (toolAction.equals(ToolActions.HOE_TILL)) {
+		if (toolAction.equals(ToolActions.HOE_TILL) && context.getLevel().getBlockState(context.getClickedPos().above()).isAir()) {
 			return ModBlocks.RICH_SOIL_FARMLAND.get().defaultBlockState();
 		}
 		return null;
