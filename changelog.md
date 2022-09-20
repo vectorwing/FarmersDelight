@@ -49,6 +49,7 @@
   - They can accept Bone Meal to advance growth stages;
 - Skillet damage has been slightly buffed;
 - Backstabbing damage multiplier has been nerfed to 1.4x, 1.6x and 1.8x;
+- All kinds of valid tools can now be used by a **Dispenser** when facing a **Cutting Board**;
 - Added Better Combat integration for the Skillet (mace preset);
 
 ### Fixes
@@ -58,6 +59,7 @@
 - Fix Grass Block not being `unaffected_by_rich_soil`, while non-bonemealable plants such as ferns/grasses were;
 - Fix Cabinets using Barrel subtitles;
 - Fix Nourishment not being strong enough to counter extreme exhaustion levels, such as Lv. 255 Hunger;
+  - The overlay now displays half-gilded shanks whenever the player is hurt, and can heal with hunger.
 
 ### Translations
 - Added:
