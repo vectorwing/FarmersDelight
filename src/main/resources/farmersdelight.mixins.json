@@ -6,6 +6,7 @@
   "mixins": [
     "CampfireBaleMixin",
     "KeepRichSoilMixin",
+    "CuttingBoardDispenserMixin",
     "SoupItemMixin",
     "accessor.RecipeManagerAccessor"
   ],

@@ -43,12 +43,14 @@
   - Milk Buckets and Bottles now convert between each other at a 1:4 ratio;
   - Glow Berries can substitute Sweet Berries on the Fruit Salad and Stuffed Pumpkin;
   - Stuffed Pumpkin has a simpler, more sensible recipe;
+  - Safety Nets can be loosened back into 4 Rope;
 - All cooking recipes have received a bump in their experience reward, since the old ratios were very pitiful;
 - Mushroom Colonies have been buffed in some ways:
   - They can now grow in any light level, and do so faster than normal;
   - They can accept Bone Meal to advance growth stages;
 - Skillet damage has been slightly buffed;
 - Backstabbing damage multiplier has been nerfed to 1.4x, 1.6x and 1.8x;
+- All kinds of valid tools can now be used by a **Dispenser** when facing a **Cutting Board**;
 - Added Better Combat integration for the Skillet (mace preset);
 
 ### Fixes
@@ -57,7 +59,9 @@
 - Fix minor pixel inconsistency on all cross crop templates;
 - Fix Grass Block not being `unaffected_by_rich_soil`, while non-bonemealable plants such as ferns/grasses were;
 - Fix Cabinets using Barrel subtitles;
+- Fix Rich Soil being tillable when the block above isn't air;
 - Fix Nourishment not being strong enough to counter extreme exhaustion levels, such as Lv. 255 Hunger;
+  - The overlay now displays half-gilded shanks whenever the player is hurt, and can heal with hunger.
 
 ### Translations
 - Added:

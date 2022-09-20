@@ -1,6 +1,8 @@
 package vectorwing.farmersdelight.common.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
@@ -17,14 +19,17 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -86,7 +91,7 @@ public class TomatoVineBlock extends CropBlock
 	}
 
 	public void attemptRopeClimb(ServerLevel level, BlockPos pos, RandomSource random) {
-		if (random.nextFloat() < 0.2F) {
+		if (random.nextFloat() < 0.3F) {
 			BlockPos posAbove = pos.above();
 			BlockState stateAbove = level.getBlockState(posAbove);
 			boolean canClimb = Configuration.ENABLE_TOMATO_VINE_CLIMBING_TAGGED_ROPES.get() ? stateAbove.is(ModTags.ROPES) : stateAbove.is(ModBlocks.ROPE.get());
@@ -168,5 +173,46 @@ public class TomatoVineBlock extends CropBlock
 
 	public boolean hasGoodCropConditions(LevelReader level, BlockPos pos) {
 		return level.getRawBrightness(pos, 0) >= 8 || level.canSeeSky(pos);
+	}
+
+	@Override
+	public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
+		boolean isRopelogged = state.getValue(TomatoVineBlock.ROPELOGGED);
+		super.playerDestroy(level, player, pos, state, blockEntity, stack);
+
+		if (isRopelogged) {
+			destroyAndPlaceRope(level, pos);
+		}
+	}
+
+	@Override
+	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+		if (!state.canSurvive(level, currentPos)) {
+			level.scheduleTick(currentPos, this, 1);
+		}
+
+		return state;
+	}
+
+	@Override
+	public PushReaction getPistonPushReaction(BlockState state) {
+		return PushReaction.NORMAL;
+	}
+
+	public static void destroyAndPlaceRope(Level level, BlockPos pos) {
+		Block configuredRopeBlock = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(Configuration.DEFAULT_TOMATO_VINE_ROPE.get()));
+		Block finalRopeBlock = configuredRopeBlock != null ? configuredRopeBlock : ModBlocks.ROPE.get();
+
+		level.setBlockAndUpdate(pos, finalRopeBlock.defaultBlockState());
+	}
+
+	@Override
+	public void tick(BlockState state, ServerLevel level, BlockPos pos, Random random) {
+		if (!state.canSurvive(level, pos)) {
+			level.destroyBlock(pos, true);
+			if (state.getValue(TomatoVineBlock.ROPELOGGED)) {
+				destroyAndPlaceRope(level, pos);
+			}
+		}
 	}
 }
