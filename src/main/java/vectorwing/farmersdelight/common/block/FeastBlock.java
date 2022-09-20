@@ -104,7 +104,7 @@ public class FeastBlock extends Block
 		if (servings > 0) {
 			if (!serving.hasCraftingRemainingItem() || heldStack.sameItem(serving.getCraftingRemainingItem())) {
 				level.setBlock(pos, state.setValue(getServingsProperty(), servings - 1), 3);
-				if (!player.getAbilities().instabuild && serving.hasContainerItem()) {
+				if (!player.getAbilities().instabuild && serving.hasCraftingRemainingItem()) {
 					heldStack.shrink(1);
 				}
 				if (!player.getInventory().add(serving)) {

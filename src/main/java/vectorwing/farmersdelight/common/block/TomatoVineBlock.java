@@ -13,10 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -35,6 +32,8 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ModTags;
+
+import javax.annotation.Nullable;
 
 @SuppressWarnings("deprecation")
 public class TomatoVineBlock extends CropBlock
@@ -207,7 +206,7 @@ public class TomatoVineBlock extends CropBlock
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel level, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		if (!state.canSurvive(level, pos)) {
 			level.destroyBlock(pos, true);
 			if (state.getValue(TomatoVineBlock.ROPELOGGED)) {
