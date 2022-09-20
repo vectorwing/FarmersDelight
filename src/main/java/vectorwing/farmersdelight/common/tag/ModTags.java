@@ -23,6 +23,9 @@ public class ModTags
 	// Blocks that represent the wild form of a farmable crop.
 	public static final TagKey<Block> WILD_CROPS = modBlockTag("wild_crops");
 
+	// Blocks that represent a rope, for gameplay purposes.
+	public static final TagKey<Block> ROPES = modBlockTag("ropes");
+
 	// Blocks that can heat up cooking workstations.
 	public static final TagKey<Block> HEAT_SOURCES = modBlockTag("heat_sources");
 
@@ -64,6 +67,12 @@ public class ModTags
 
 	// Canvas Signs items for crafting.
 	public static final TagKey<Item> CANVAS_SIGNS = modItemTag("canvas_signs");
+
+	// Wooden Cabinet items for crafting.
+	public static final TagKey<Item> WOODEN_CABINETS = modItemTag("cabinets/wooden");
+
+	// All Cabinet items for crafting.
+	public static final TagKey<Item> CABINETS = modItemTag("cabinets");
 
 	// Entities that should be able to eat Dog Food when tame. Defaults to tamed Wolves.
 	public static final TagKey<EntityType<?>> DOG_FOOD_USERS = modEntityTag("dog_food_users");

@@ -1,7 +1,7 @@
 {
   "type": "farmersdelight:cooking",
   "cookingtime": 200,
-  "experience": 0.35,
+  "experience": 1.0,
   "ingredients": [
     {
       "item": "farmersdelight:pumpkin_slice"
@@ -16,6 +16,7 @@
       "tag": "forge:milk"
     }
   ],
+  "recipe_book_tab": "meals",
   "result": {
     "item": "farmersdelight:pumpkin_soup"
   }

@@ -42,9 +42,9 @@ public class CabinetBlock extends BaseEntityBlock
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-		if (!worldIn.isClientSide) {
-			BlockEntity tile = worldIn.getBlockEntity(pos);
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		if (!level.isClientSide) {
+			BlockEntity tile = level.getBlockEntity(pos);
 			if (tile instanceof CabinetBlockEntity) {
 				player.openMenu((CabinetBlockEntity) tile);
 			}
@@ -53,20 +53,20 @@ public class CabinetBlock extends BaseEntityBlock
 	}
 
 	@Override
-	public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
-			BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+			BlockEntity tileEntity = level.getBlockEntity(pos);
 			if (tileEntity instanceof Container) {
-				Containers.dropContents(worldIn, pos, (Container) tileEntity);
-				worldIn.updateNeighbourForOutputSignal(pos, this);
+				Containers.dropContents(level, pos, (Container) tileEntity);
+				level.updateNeighbourForOutputSignal(pos, this);
 			}
-			super.onRemove(state, worldIn, pos, newState, isMoving);
+			super.onRemove(state, level, pos, newState, isMoving);
 		}
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
-		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+		BlockEntity tileEntity = level.getBlockEntity(pos);
 		if (tileEntity instanceof CabinetBlockEntity) {
 			((CabinetBlockEntity) tileEntity).recheckOpen();
 		}
@@ -78,9 +78,9 @@ public class CabinetBlock extends BaseEntityBlock
 	}
 
 	@Override
-	public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		if (stack.hasCustomHoverName()) {
-			BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+			BlockEntity tileEntity = level.getBlockEntity(pos);
 			if (tileEntity instanceof CabinetBlockEntity) {
 				((CabinetBlockEntity) tileEntity).setCustomName(stack.getHoverName());
 			}
@@ -99,8 +99,8 @@ public class CabinetBlock extends BaseEntityBlock
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
-		return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(worldIn.getBlockEntity(pos));
+	public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+		return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(level.getBlockEntity(pos));
 	}
 
 	@Nullable

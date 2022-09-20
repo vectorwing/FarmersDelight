@@ -7,6 +7,12 @@
       },
       "trigger": "minecraft:placed_block"
     },
+    "rice_roll_medley": {
+      "conditions": {
+        "block": "farmersdelight:rice_roll_medley_block"
+      },
+      "trigger": "minecraft:placed_block"
+    },
     "roast_chicken": {
       "conditions": {
         "block": "farmersdelight:roast_chicken_block"
@@ -46,7 +52,8 @@
       "roast_chicken",
       "stuffed_pumpkin",
       "honey_glazed_ham",
-      "shepherds_pie"
+      "shepherds_pie",
+      "rice_roll_medley"
     ]
   ]
 }

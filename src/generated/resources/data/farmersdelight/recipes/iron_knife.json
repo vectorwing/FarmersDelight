@@ -9,8 +9,8 @@
     }
   },
   "pattern": [
-    " m",
-    "s "
+    "m",
+    "s"
   ],
   "result": {
     "item": "farmersdelight:iron_knife"

@@ -6,7 +6,6 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
@@ -21,6 +20,7 @@ import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import vectorwing.farmersdelight.common.block.CabinetBlock;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
+import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
 public class CabinetBlockEntity extends RandomizableContainerBlockEntity
@@ -29,12 +29,12 @@ public class CabinetBlockEntity extends RandomizableContainerBlockEntity
 	private ContainerOpenersCounter openersCounter = new ContainerOpenersCounter()
 	{
 		protected void onOpen(Level level, BlockPos pos, BlockState state) {
-			CabinetBlockEntity.this.playSound(state, SoundEvents.BARREL_OPEN);
+			CabinetBlockEntity.this.playSound(state, ModSounds.BLOCK_CABINET_OPEN.get());
 			CabinetBlockEntity.this.updateBlockState(state, true);
 		}
 
 		protected void onClose(Level level, BlockPos pos, BlockState state) {
-			CabinetBlockEntity.this.playSound(state, SoundEvents.BARREL_CLOSE);
+			CabinetBlockEntity.this.playSound(state, ModSounds.BLOCK_CABINET_CLOSE.get());
 			CabinetBlockEntity.this.updateBlockState(state, false);
 		}
 

@@ -1,0 +1,16 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "tag": "forge:dough"
+    }
+  ],
+  "result": [
+    {
+      "item": "farmersdelight:raw_pasta"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}

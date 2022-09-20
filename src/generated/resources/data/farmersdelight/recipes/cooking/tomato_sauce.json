@@ -1,7 +1,7 @@
 {
   "type": "farmersdelight:cooking",
   "cookingtime": 100,
-  "experience": 0.1,
+  "experience": 0.35,
   "ingredients": [
     {
       "tag": "forge:crops/tomato"
@@ -10,6 +10,7 @@
       "tag": "forge:crops/tomato"
     }
   ],
+  "recipe_book_tab": "misc",
   "result": {
     "item": "farmersdelight:tomato_sauce"
   }

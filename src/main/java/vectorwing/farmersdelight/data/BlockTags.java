@@ -45,6 +45,7 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.MANGROVE_CABINET.get(),
 				ModBlocks.CRIMSON_CABINET.get(),
 				ModBlocks.WARPED_CABINET.get(),
+				ModBlocks.SANDY_SHRUB.get(),
 				ModBlocks.STUFFED_PUMPKIN_BLOCK.get()
 		);
 		tag(net.minecraft.tags.BlockTags.MINEABLE_WITH_HOE).add(
@@ -69,7 +70,8 @@ public class BlockTags extends BlockTagsProvider
 						ModBlocks.CHOCOLATE_PIE.get(),
 						ModBlocks.ROAST_CHICKEN_BLOCK.get(),
 						ModBlocks.HONEY_GLAZED_HAM_BLOCK.get(),
-						ModBlocks.SHEPHERDS_PIE_BLOCK.get())
+						ModBlocks.SHEPHERDS_PIE_BLOCK.get(),
+						ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get())
 				.addTag(net.minecraft.tags.BlockTags.WOOL_CARPETS)
 				.addTag(net.minecraft.tags.BlockTags.WOOL)
 				.addTag(net.minecraft.tags.BlockTags.CANDLE_CAKES)
@@ -79,7 +81,10 @@ public class BlockTags extends BlockTagsProvider
 
 	protected void registerMinecraftTags() {
 		tag(net.minecraft.tags.BlockTags.CLIMBABLE).add(
-				ModBlocks.ROPE.get());
+				ModBlocks.ROPE.get(),
+				ModBlocks.TOMATO_CROP.get());
+		tag(net.minecraft.tags.BlockTags.REPLACEABLE_PLANTS).add(
+				ModBlocks.SANDY_SHRUB.get());
 		tag(net.minecraft.tags.BlockTags.BAMBOO_PLANTABLE_ON).add(
 				ModBlocks.RICH_SOIL.get());
 		tag(net.minecraft.tags.BlockTags.MUSHROOM_GROW_BLOCK).add(
@@ -89,6 +94,7 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.CABBAGE_CROP.get(),
 				ModBlocks.ONION_CROP.get(),
 				ModBlocks.RICE_CROP_PANICLES.get(),
+				ModBlocks.BUDDING_TOMATO_CROP.get(),
 				ModBlocks.TOMATO_CROP.get());
 		tag(net.minecraft.tags.BlockTags.STANDING_SIGNS).add(
 				ModBlocks.CANVAS_SIGN.get(),
@@ -161,6 +167,9 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.WILD_TOMATOES.get(),
 				ModBlocks.WILD_ONIONS.get(),
 				ModBlocks.WILD_RICE.get());
+		tag(ModTags.ROPES).add(ModBlocks.ROPE.get())
+				.addOptional(new ResourceLocation("quark:rope"))
+				.addOptional(new ResourceLocation("supplementaries:rope"));
 		tag(ModTags.TRAY_HEAT_SOURCES).add(
 						Blocks.LAVA)
 				.addTag(net.minecraft.tags.BlockTags.CAMPFIRES)
@@ -184,12 +193,12 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.BROWN_MUSHROOM_COLONY.get(),
 				ModBlocks.RED_MUSHROOM_COLONY.get());
 		tag(ModTags.UNAFFECTED_BY_RICH_SOIL).add(
+						Blocks.GRASS_BLOCK,
 						Blocks.GRASS,
-						Blocks.TALL_GRASS,
 						Blocks.FERN,
-						Blocks.LARGE_FERN,
 						Blocks.TWISTING_VINES,
 						Blocks.TWISTING_VINES_PLANT,
+						ModBlocks.SANDY_SHRUB.get(),
 						ModBlocks.BROWN_MUSHROOM_COLONY.get(),
 						ModBlocks.RED_MUSHROOM_COLONY.get())
 				.addTag(ModTags.WILD_CROPS);

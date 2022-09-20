@@ -13,7 +13,7 @@ public class PopsicleItem extends ConsumableItem
 	}
 
 	@Override
-	public void affectConsumer(ItemStack stack, Level worldIn, LivingEntity consumer) {
+	public void affectConsumer(ItemStack stack, Level level, LivingEntity consumer) {
 		consumer.clearFire();
 	}
 }

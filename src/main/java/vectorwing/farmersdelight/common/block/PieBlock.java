@@ -60,7 +60,7 @@ public class PieBlock extends Block
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return SHAPE;
 	}
 
@@ -70,14 +70,14 @@ public class PieBlock extends Block
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-		ItemStack heldStack = player.getItemInHand(handIn);
-		if (worldIn.isClientSide) {
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		ItemStack heldStack = player.getItemInHand(hand);
+		if (level.isClientSide) {
 			if (heldStack.is(ModTags.KNIVES)) {
-				return cutSlice(worldIn, pos, state);
+				return cutSlice(level, pos, state);
 			}
 
-			if (this.consumeBite(worldIn, pos, state, player) == InteractionResult.SUCCESS) {
+			if (this.consumeBite(level, pos, state, player) == InteractionResult.SUCCESS) {
 				return InteractionResult.SUCCESS;
 			}
 
@@ -87,15 +87,15 @@ public class PieBlock extends Block
 		}
 
 		if (heldStack.is(ModTags.KNIVES)) {
-			return cutSlice(worldIn, pos, state);
+			return cutSlice(level, pos, state);
 		}
-		return this.consumeBite(worldIn, pos, state, player);
+		return this.consumeBite(level, pos, state, player);
 	}
 
 	/**
 	 * Eats a slice from the pie, feeding the player.
 	 */
-	protected InteractionResult consumeBite(Level worldIn, BlockPos pos, BlockState state, Player playerIn) {
+	protected InteractionResult consumeBite(Level level, BlockPos pos, BlockState state, Player playerIn) {
 		if (!playerIn.canEat(false)) {
 			return InteractionResult.PASS;
 		} else {
@@ -105,7 +105,7 @@ public class PieBlock extends Block
 			playerIn.getFoodData().eat(sliceStack.getItem(), sliceStack);
 			if (this.getPieSliceItem().getItem().isEdible() && sliceFood != null) {
 				for (Pair<MobEffectInstance, Float> pair : sliceFood.getEffects()) {
-					if (!worldIn.isClientSide && pair.getFirst() != null && worldIn.random.nextFloat() < pair.getSecond()) {
+					if (!level.isClientSide && pair.getFirst() != null && level.random.nextFloat() < pair.getSecond()) {
 						playerIn.addEffect(new MobEffectInstance(pair.getFirst()));
 					}
 				}
@@ -113,11 +113,11 @@ public class PieBlock extends Block
 
 			int bites = state.getValue(BITES);
 			if (bites < getMaxBites() - 1) {
-				worldIn.setBlock(pos, state.setValue(BITES, bites + 1), 3);
+				level.setBlock(pos, state.setValue(BITES, bites + 1), 3);
 			} else {
-				worldIn.removeBlock(pos, false);
+				level.removeBlock(pos, false);
 			}
-			worldIn.playSound(null, pos, SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 0.8F, 0.8F);
+			level.playSound(null, pos, SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 0.8F, 0.8F);
 			return InteractionResult.SUCCESS;
 		}
 	}
@@ -125,26 +125,26 @@ public class PieBlock extends Block
 	/**
 	 * Cuts off a bite and drops a slice item, without feeding the player.
 	 */
-	protected InteractionResult cutSlice(Level worldIn, BlockPos pos, BlockState state) {
+	protected InteractionResult cutSlice(Level level, BlockPos pos, BlockState state) {
 		int bites = state.getValue(BITES);
 		if (bites < getMaxBites() - 1) {
-			worldIn.setBlock(pos, state.setValue(BITES, bites + 1), 3);
+			level.setBlock(pos, state.setValue(BITES, bites + 1), 3);
 		} else {
-			worldIn.removeBlock(pos, false);
+			level.removeBlock(pos, false);
 		}
-		Containers.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), this.getPieSliceItem());
-		worldIn.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
+		Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), this.getPieSliceItem());
+		level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
 		return InteractionResult.SUCCESS;
 	}
 
 	@Override
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
-		return facing == Direction.DOWN && !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+		return facing == Direction.DOWN && !stateIn.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, level, currentPos, facingPos);
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
-		return worldIn.getBlockState(pos.below()).getMaterial().isSolid();
+	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+		return level.getBlockState(pos.below()).getMaterial().isSolid();
 	}
 
 	@Override
@@ -153,7 +153,7 @@ public class PieBlock extends Block
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
+	public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
 		return getMaxBites() - blockState.getValue(BITES);
 	}
 
@@ -163,7 +163,7 @@ public class PieBlock extends Block
 	}
 
 	@Override
-	public boolean isPathfindable(BlockState state, BlockGetter worldIn, BlockPos pos, PathComputationType type) {
+	public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
 		return false;
 	}
 }

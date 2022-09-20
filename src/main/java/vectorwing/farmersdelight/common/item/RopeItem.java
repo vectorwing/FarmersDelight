@@ -15,16 +15,16 @@ import net.minecraft.world.item.Item.Properties;
 
 public class RopeItem extends FuelBlockItem
 {
-	public RopeItem(Block blockIn, Properties properties) {
-		super(blockIn, properties, 200);
+	public RopeItem(Block block, Properties properties) {
+		super(block, properties, 200);
 	}
 
 	@Override
 	@Nullable
 	public BlockPlaceContext updatePlacementContext(BlockPlaceContext context) {
-		BlockPos blockpos = context.getClickedPos();
-		Level world = context.getLevel();
-		BlockState state = world.getBlockState(blockpos);
+		BlockPos pos = context.getClickedPos();
+		Level level = context.getLevel();
+		BlockState state = level.getBlockState(pos);
 		Block block = this.getBlock();
 
 		if (state.getBlock() != block) {
@@ -38,10 +38,10 @@ public class RopeItem extends FuelBlockItem
 			}
 
 			int i = 0;
-			BlockPos.MutableBlockPos blockpos$mutable = (new BlockPos.MutableBlockPos(blockpos.getX(), blockpos.getY(), blockpos.getZ())).move(direction);
+			BlockPos.MutableBlockPos blockpos$mutable = (new BlockPos.MutableBlockPos(pos.getX(), pos.getY(), pos.getZ())).move(direction);
 
 			while (i < 256) {
-				state = world.getBlockState(blockpos$mutable);
+				state = level.getBlockState(blockpos$mutable);
 				if (state.getBlock() != this.getBlock()) {
 					FluidState fluid = state.getFluidState();
 					if (!fluid.is(FluidTags.WATER) && !fluid.isEmpty()) {

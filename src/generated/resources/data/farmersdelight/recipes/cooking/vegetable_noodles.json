@@ -1,7 +1,7 @@
 {
   "type": "farmersdelight:cooking",
   "cookingtime": 200,
-  "experience": 0.35,
+  "experience": 1.0,
   "ingredients": [
     {
       "item": "minecraft:carrot"
@@ -19,6 +19,7 @@
       "tag": "forge:vegetables"
     }
   ],
+  "recipe_book_tab": "meals",
   "result": {
     "item": "farmersdelight:vegetable_noodles"
   }

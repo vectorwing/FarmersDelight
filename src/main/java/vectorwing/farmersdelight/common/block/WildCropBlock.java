@@ -51,21 +51,21 @@ public class WildCropBlock extends FlowerBlock implements BonemealableBlock
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(BlockGetter level, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level worldIn, RandomSource rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level level, RandomSource rand, BlockPos pos, BlockState state) {
 		return (double) rand.nextFloat() < 0.8F;
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel worldIn, RandomSource random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
 		int wildCropLimit = 10;
 
 		for (BlockPos nearbyPos : BlockPos.betweenClosed(pos.offset(-4, -1, -4), pos.offset(4, 1, 4))) {
-			if (worldIn.getBlockState(nearbyPos).is(this)) {
+			if (level.getBlockState(nearbyPos).is(this)) {
 				--wildCropLimit;
 				if (wildCropLimit <= 0) {
 					return;
@@ -76,15 +76,15 @@ public class WildCropBlock extends FlowerBlock implements BonemealableBlock
 		BlockPos randomPos = pos.offset(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);
 
 		for (int k = 0; k < 4; ++k) {
-			if (worldIn.isEmptyBlock(randomPos) && state.canSurvive(worldIn, randomPos)) {
+			if (level.isEmptyBlock(randomPos) && state.canSurvive(level, randomPos)) {
 				pos = randomPos;
 			}
 
 			randomPos = pos.offset(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);
 		}
 
-		if (worldIn.isEmptyBlock(randomPos) && state.canSurvive(worldIn, randomPos)) {
-			worldIn.setBlock(randomPos, state, 2);
+		if (level.isEmptyBlock(randomPos) && state.canSurvive(level, randomPos)) {
+			level.setBlock(randomPos, state, 2);
 		}
 	}
 }

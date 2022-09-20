@@ -4,7 +4,7 @@
     "item": "minecraft:bowl"
   },
   "cookingtime": 200,
-  "experience": 0.2,
+  "experience": 1.0,
   "ingredients": [
     {
       "item": "minecraft:brown_mushroom"
@@ -13,6 +13,7 @@
       "item": "minecraft:red_mushroom"
     }
   ],
+  "recipe_book_tab": "meals",
   "result": {
     "item": "minecraft:mushroom_stew"
   }

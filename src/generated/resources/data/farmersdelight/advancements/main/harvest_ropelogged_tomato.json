@@ -1,0 +1,42 @@
+{
+  "parent": "farmersdelight:main/get_fd_seed",
+  "criteria": {
+    "harvest_ropelogged_tomato": {
+      "conditions": {
+        "item": {},
+        "location": {
+          "block": {
+            "blocks": [
+              "farmersdelight:tomatoes"
+            ],
+            "state": {
+              "age": "0",
+              "ropelogged": "true"
+            }
+          }
+        }
+      },
+      "trigger": "minecraft:item_used_on_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "farmersdelight.advancement.harvest_ropelogged_tomato.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "farmersdelight:tomato"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "farmersdelight.advancement.harvest_ropelogged_tomato"
+    }
+  },
+  "requirements": [
+    [
+      "harvest_ropelogged_tomato"
+    ]
+  ]
+}

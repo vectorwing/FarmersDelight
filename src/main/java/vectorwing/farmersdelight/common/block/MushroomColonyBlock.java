@@ -5,6 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -32,7 +33,6 @@ import java.util.function.Supplier;
 @SuppressWarnings("deprecation")
 public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 {
-	public static final int GROWING_LIGHT_LEVEL = 12;
 	public static final int PLACING_LIGHT_LEVEL = 13;
 	public final Supplier<Item> mushroomType;
 
@@ -51,8 +51,8 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-		return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
+	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+		return SHAPE_BY_AGE[state.getValue(getAgeProperty())];
 	}
 
 	public IntegerProperty getAgeProperty() {
@@ -60,32 +60,32 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 	}
 
 	@Override
-	protected boolean mayPlaceOn(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		return state.isSolidRender(worldIn, pos);
+	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
+		return state.isSolidRender(level, pos);
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
+	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
 		BlockPos floorPos = pos.below();
-		BlockState floorState = worldIn.getBlockState(floorPos);
+		BlockState floorState = level.getBlockState(floorPos);
 		if (floorState.is(BlockTags.MUSHROOM_GROW_BLOCK)) {
 			return true;
 		} else {
-			return worldIn.getRawBrightness(pos, 0) < PLACING_LIGHT_LEVEL && floorState.canSustainPlant(worldIn, floorPos, net.minecraft.core.Direction.UP, this);
+			return level.getRawBrightness(pos, 0) < PLACING_LIGHT_LEVEL && floorState.canSustainPlant(level, floorPos, net.minecraft.core.Direction.UP, this);
 		}
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		int age = state.getValue(COLONY_AGE);
-		ItemStack heldStack = player.getItemInHand(handIn);
+		ItemStack heldStack = player.getItemInHand(hand);
 
 		if (age > 0 && heldStack.is(Tags.Items.SHEARS)) {
-			popResource(worldIn, pos, this.getCloneItemStack(worldIn, pos, state));
-			worldIn.playSound(null, pos, SoundEvents.MOOSHROOM_SHEAR, SoundSource.BLOCKS, 1.0F, 1.0F);
-			worldIn.setBlock(pos, state.setValue(COLONY_AGE, age - 1), 2);
-			if (!worldIn.isClientSide) {
-				heldStack.hurtAndBreak(1, player, (playerIn) -> playerIn.broadcastBreakEvent(handIn));
+			popResource(level, pos, getCloneItemStack(level, pos, state));
+			level.playSound(null, pos, SoundEvents.MOOSHROOM_SHEAR, SoundSource.BLOCKS, 1.0F, 1.0F);
+			level.setBlock(pos, state.setValue(COLONY_AGE, age - 1), 2);
+			if (!level.isClientSide) {
+				heldStack.hurtAndBreak(1, player, (playerIn) -> playerIn.broadcastBreakEvent(hand));
 			}
 			return InteractionResult.SUCCESS;
 		}
@@ -93,32 +93,22 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 		return InteractionResult.PASS;
 	}
 
-	@Override
-	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
-		return false;
-	}
-
 	public int getMaxAge() {
 		return 3;
-	}
-
-	@Override
-	public boolean isBonemealSuccess(Level worldIn, RandomSource random, BlockPos pos, BlockState state) {
-		return false;
 	}
 
 	@Override
 	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		int age = state.getValue(COLONY_AGE);
 		BlockState groundState = level.getBlockState(pos.below());
-		if (age < this.getMaxAge() && groundState.is(ModTags.MUSHROOM_COLONY_GROWABLE_ON) && level.getRawBrightness(pos.above(), 0) <= GROWING_LIGHT_LEVEL && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt(5) == 0)) {
+		if (age < getMaxAge() && groundState.is(ModTags.MUSHROOM_COLONY_GROWABLE_ON) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt(4) == 0)) {
 			level.setBlock(pos, state.setValue(COLONY_AGE, age + 1), 2);
 			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(level, pos, state);
 		}
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(BlockGetter worldIn, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
 		return new ItemStack(this.mushroomType.get());
 	}
 
@@ -128,8 +118,22 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 	}
 
 	@Override
+	public boolean isValidBonemealTarget(BlockGetter level, BlockPos pos, BlockState state, boolean isClient) {
+		return state.getValue(getAgeProperty()) < getMaxAge();
+	}
+
+	@Override
+	public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
+		return true;
+	}
+
+	protected int getBonemealAgeIncrease(Level level) {
+		return Mth.nextInt(level.random, 1, 2);
+	}
+
+	@Override
 	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-		int age = Math.min(3, state.getValue(COLONY_AGE) + 1);
+		int age = Math.min(getMaxAge(), state.getValue(COLONY_AGE) + getBonemealAgeIncrease(level));
 		level.setBlock(pos, state.setValue(COLONY_AGE, age), 2);
 	}
 }

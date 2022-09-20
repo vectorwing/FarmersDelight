@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("ClassCanBeRecord")
 public class CuttingBoardRecipe implements Recipe<RecipeWrapper>
 {
 	public static final int MAX_RESULTS = 4;
@@ -114,7 +115,7 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper>
 	}
 
 	@Override
-	public boolean matches(RecipeWrapper inv, Level worldIn) {
+	public boolean matches(RecipeWrapper inv, Level level) {
 		if (inv.isEmpty())
 			return false;
 		return input.test(inv.getItem(0));

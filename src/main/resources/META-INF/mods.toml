@@ -6,13 +6,13 @@ license="MIT License"
 
 [[mods]]
 modId="farmersdelight"
-version="1.19-1.1.2"
+version="1.19-1.2.0"
 displayName="Farmer's Delight"
 # updateJSONURL=""
 displayURL="https://github.com/vectorwing/FarmersDelight"
 logoFile="logo.png"
 logoBlur=false
-credits="Chloe Dawn, Grimmauld, CDAGaming, TelepathicGrunt, ConductiveFoam, simibubi, Jozufozu, bagel, Silk, SkySom, Eutro and many others!"
+credits="Chloe Dawn, Grimmauld, CDAGaming, TelepathicGrunt, ConductiveFoam, simibubi, Jozufozu, bagel, Silk, SkySom, Eutro, LimonBlaze and many others!"
 authors="vectorwing"
 description="A lightweight farming and cooking expansion for Minecraft!"
 itemIcon="farmersdelight:stove"

@@ -91,6 +91,16 @@
       },
       "trigger": "minecraft:consume_item"
     },
+    "mushroom_rice": {
+      "conditions": {
+        "item": {
+          "items": [
+            "farmersdelight:mushroom_rice"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
     "noodle_soup": {
       "conditions": {
         "item": {
@@ -303,6 +313,9 @@
     ],
     [
       "bacon_and_eggs"
+    ],
+    [
+      "mushroom_rice"
     ]
   ],
   "rewards": {

@@ -10,8 +10,8 @@ import javax.annotation.Nonnull;
 
 public class SteamParticle extends TextureSheetParticle
 {
-	protected SteamParticle(ClientLevel world, double x, double y, double z, double motionX, double motionY, double motionZ) {
-		super(world, x, y, z);
+	protected SteamParticle(ClientLevel level, double x, double y, double z, double motionX, double motionY, double motionZ) {
+		super(level, x, y, z);
 		this.scale(2.0F);
 		this.setSize(0.25F, 0.25F);
 
@@ -56,8 +56,8 @@ public class SteamParticle extends TextureSheetParticle
 		}
 
 		@Override
-		public Particle createParticle(SimpleParticleType typeIn, ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-			SteamParticle particle = new SteamParticle(worldIn, x, y + 0.3D, z, xSpeed, ySpeed, zSpeed);
+		public Particle createParticle(SimpleParticleType typeIn, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+			SteamParticle particle = new SteamParticle(level, x, y + 0.3D, z, xSpeed, ySpeed, zSpeed);
 			particle.setAlpha(0.6F);
 			particle.pickSprite(this.spriteSet);
 			return particle;

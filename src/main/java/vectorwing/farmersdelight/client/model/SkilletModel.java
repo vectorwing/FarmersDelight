@@ -47,7 +47,7 @@ public class SkilletModel implements BakedModel
 	{
 		@Nonnull
 		@Override
-		public BakedModel resolve(BakedModel model, ItemStack stack, @Nullable ClientLevel worldIn, @Nullable LivingEntity entityIn, int seed) {
+		public BakedModel resolve(BakedModel model, ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entityIn, int seed) {
 			CompoundTag tag = stack.getOrCreateTag();
 
 			if (tag.contains("Cooking")) {
