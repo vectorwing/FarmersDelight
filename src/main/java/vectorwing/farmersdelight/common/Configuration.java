@@ -98,7 +98,7 @@ public class Configuration
 				.define("vanillaSoupExtraEffects", true);
 		RABBIT_STEW_JUMP_BOOST = COMMON_BUILDER.comment("Should Rabbit Stew grant users the jumping prowess of a rabbit when eaten?")
 				.define("rabbitStewJumpBoost", true);
-		DISPENSER_TOOLS_CUTTING_BOARD = COMMON_BUILDER.comment("Should most vanilla tools register a dispenser behavior when facing a Cutting Board?")
+		DISPENSER_TOOLS_CUTTING_BOARD = COMMON_BUILDER.comment("Should the Dispenser be able to operate a Cutting Board in front of it?")
 				.define("dispenserUsesToolsOnCuttingBoard", true);
 
 		COMMON_BUILDER.comment("Stack size overrides").push(CATEGORY_OVERRIDES_STACK_SIZE);
