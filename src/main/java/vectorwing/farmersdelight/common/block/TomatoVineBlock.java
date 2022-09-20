@@ -90,7 +90,7 @@ public class TomatoVineBlock extends CropBlock
 	}
 
 	public void attemptRopeClimb(ServerLevel level, BlockPos pos, Random random) {
-		if (random.nextFloat() < 0.2F) {
+		if (random.nextFloat() < 0.3F) {
 			BlockPos posAbove = pos.above();
 			BlockState stateAbove = level.getBlockState(posAbove);
 			boolean canClimb = Configuration.ENABLE_TOMATO_VINE_CLIMBING_TAGGED_ROPES.get() ? stateAbove.is(ModTags.ROPES) : stateAbove.is(ModBlocks.ROPE.get());
