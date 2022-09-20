@@ -1,5 +1,6 @@
 {
   "type": "farmersdelight:cooking",
+  "recipe_book_tab": "meals",
   "ingredients": [
     {
       "tag": "forge:raw_fishes/cod"
@@ -17,6 +18,6 @@
   "result": {
     "item": "farmersdelight:baked_cod_stew"
   },
-  "experience": 0.35,
+  "experience": 1.0,
   "cookingtime": 200
 }

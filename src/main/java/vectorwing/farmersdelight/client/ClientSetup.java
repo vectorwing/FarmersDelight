@@ -7,12 +7,14 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import vectorwing.farmersdelight.client.gui.ComfortHealthOverlay;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.client.gui.NourishmentHungerOverlay;
+import vectorwing.farmersdelight.client.recipebook.RecipeCategories;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
-import vectorwing.farmersdelight.common.registry.ModContainerTypes;
+import vectorwing.farmersdelight.common.registry.ModMenuTypes;
 
 public class ClientSetup
 {
 	public static void init(final FMLClientSetupEvent event) {
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.SANDY_SHRUB.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILD_CABBAGES.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILD_ONIONS.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILD_TOMATOES.get(), RenderType.cutout());
@@ -23,6 +25,7 @@ public class ClientSetup
 
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.ONION_CROP.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.CABBAGE_CROP.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.BUDDING_TOMATO_CROP.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.TOMATO_CROP.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.RICE_CROP.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.RICE_CROP_PANICLES.get(), RenderType.cutout());
@@ -38,7 +41,11 @@ public class ClientSetup
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.FULL_TATAMI_MAT.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.ROAST_CHICKEN_BLOCK.get(), RenderType.cutout());
 
-		MenuScreens.register(ModContainerTypes.COOKING_POT.get(), CookingPotScreen::new);
+		event.enqueueWork(() ->
+		{
+			MenuScreens.register(ModMenuTypes.COOKING_POT.get(), CookingPotScreen::new);
+			RecipeCategories.init();
+		});
 
 		NourishmentHungerOverlay.init();
 		ComfortHealthOverlay.init();

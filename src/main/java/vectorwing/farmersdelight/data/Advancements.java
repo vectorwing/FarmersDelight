@@ -16,10 +16,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RespawnAnchorBlock;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.advancement.CuttingBoardTrigger;
+import vectorwing.farmersdelight.common.block.TomatoVineBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 import vectorwing.farmersdelight.common.registry.ModEntityTypes;
@@ -139,7 +141,20 @@ public class Advancements extends AdvancementProvider
 					.addCriterion("plant_rice", PlacedBlockTrigger.TriggerInstance.placedBlock(ModBlocks.RICE_CROP.get()))
 					.save(consumer, getNameId("main/plant_rice"));
 
-			Advancement booHiss = getAdvancement(cropsOfTheWild, ModItems.ROTTEN_TOMATO.get(), "hit_raider_with_rotten_tomato", FrameType.TASK, true, true, false)
+			Advancement tallmato = getAdvancement(cropsOfTheWild, ModItems.TOMATO.get(), "harvest_ropelogged_tomato", FrameType.TASK, true, false, false)
+					.addCriterion("harvest_ropelogged_tomato", new ItemUsedOnBlockTrigger.TriggerInstance(
+							EntityPredicate.Composite.ANY,
+							LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(ModBlocks.TOMATO_CROP.get()).setProperties(
+									StatePropertiesPredicate.Builder.properties()
+											.hasProperty(TomatoVineBlock.VINE_AGE, 0)
+											.hasProperty(TomatoVineBlock.ROPELOGGED, true)
+											.build()
+							).build()).build(),
+							ItemPredicate.ANY)
+					)
+					.save(consumer, getNameId("main/harvest_ropelogged_tomato"));
+
+			Advancement booHiss = getAdvancement(tallmato, ModItems.ROTTEN_TOMATO.get(), "hit_raider_with_rotten_tomato", FrameType.TASK, true, true, false)
 					.addCriterion("hit_raider_with_rotten_tomato", PlayerHurtEntityTrigger.TriggerInstance.playerHurtEntity(
 							DamagePredicate.Builder.damageInstance()
 									.type(DamageSourcePredicate.Builder.damageType().isProjectile(true).direct(EntityPredicate.Builder.entity().of(ModEntityTypes.ROTTEN_TOMATO.get()))).build(),
@@ -200,6 +215,7 @@ public class Advancements extends AdvancementProvider
 					.addCriterion("stuffed_pumpkin", PlacedBlockTrigger.TriggerInstance.placedBlock(ModBlocks.STUFFED_PUMPKIN_BLOCK.get()))
 					.addCriterion("honey_glazed_ham", PlacedBlockTrigger.TriggerInstance.placedBlock(ModBlocks.HONEY_GLAZED_HAM_BLOCK.get()))
 					.addCriterion("shepherds_pie", PlacedBlockTrigger.TriggerInstance.placedBlock(ModBlocks.SHEPHERDS_PIE_BLOCK.get()))
+					.addCriterion("rice_roll_medley", PlacedBlockTrigger.TriggerInstance.placedBlock(ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get()))
 					.requirements(RequirementsStrategy.OR)
 					.save(consumer, getNameId("main/place_feast"));
 
@@ -226,6 +242,7 @@ public class Advancements extends AdvancementProvider
 					.addCriterion("honey_glazed_ham", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.HONEY_GLAZED_HAM.get()))
 					.addCriterion("shepherds_pie", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.SHEPHERDS_PIE.get()))
 					.addCriterion("bacon_and_eggs", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.BACON_AND_EGGS.get()))
+					.addCriterion("mushroom_rice", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.MUSHROOM_RICE.get()))
 					.rewards(AdvancementRewards.Builder.experience(200))
 					.save(consumer, getNameId("main/master_chef"));
 		}

@@ -6,25 +6,25 @@
     ]
   },
   "criteria": {
-    "has_cooked_beef": {
+    "has_tomato": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:cooked_beef"
+              "farmersdelight:tomato"
             ]
           }
         ]
       }
     },
-    "has_cooked_chicken": {
+    "has_onion": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:cooked_chicken"
+              "farmersdelight:onion"
             ]
           }
         ]
@@ -39,8 +39,8 @@
   },
   "requirements": [
     [
-      "has_cooked_beef",
-      "has_cooked_chicken",
+      "has_tomato",
+      "has_onion",
       "has_the_recipe"
     ]
   ]

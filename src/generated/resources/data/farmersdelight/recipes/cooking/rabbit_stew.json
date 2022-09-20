@@ -1,17 +1,13 @@
 {
   "type": "farmersdelight:cooking",
+  "recipe_book_tab": "meals",
   "ingredients": [
     {
       "item": "minecraft:baked_potato"
     },
-    [
-      {
-        "item": "minecraft:rabbit"
-      },
-      {
-        "item": "minecraft:cooked_rabbit"
-      }
-    ],
+    {
+      "item": "minecraft:rabbit"
+    },
     {
       "item": "minecraft:carrot"
     },
@@ -30,6 +26,6 @@
   "container": {
     "item": "minecraft:bowl"
   },
-  "experience": 0.35,
+  "experience": 1.0,
   "cookingtime": 200
 }

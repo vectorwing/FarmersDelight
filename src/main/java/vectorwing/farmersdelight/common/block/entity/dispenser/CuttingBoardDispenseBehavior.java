@@ -26,6 +26,7 @@ import java.util.HashMap;
 public class CuttingBoardDispenseBehavior extends OptionalDispenseItemBehavior
 {
 	private static final HashMap<Item, DispenseItemBehavior> DISPENSE_ITEM_BEHAVIOR_HASH_MAP = new HashMap<>();
+	public static final CuttingBoardDispenseBehavior INSTANCE = new CuttingBoardDispenseBehavior();
 
 	public static void registerBehaviour(Item item, CuttingBoardDispenseBehavior behavior) {
 		DISPENSE_ITEM_BEHAVIOR_HASH_MAP.put(item, DispenserBlock.DISPENSER_REGISTRY.get(item)); // Save the old behaviours so they can be used later
@@ -44,16 +45,15 @@ public class CuttingBoardDispenseBehavior extends OptionalDispenseItemBehavior
 
 	public boolean tryDispenseStackOnCuttingBoard(BlockSource source, ItemStack stack) {
 		setSuccess(false);
-		Level world = source.getLevel();
-		BlockPos blockpos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
-		BlockState blockstate = world.getBlockState(blockpos);
-		Block block = blockstate.getBlock();
-		BlockEntity te = world.getBlockEntity(blockpos);
-		if (block instanceof CuttingBoardBlock && te instanceof CuttingBoardBlockEntity) {
-			CuttingBoardBlockEntity tileEntity = (CuttingBoardBlockEntity) te;
-			ItemStack boardItem = tileEntity.getStoredItem().copy();
-			if (!boardItem.isEmpty() && tileEntity.processStoredItemUsingTool(stack, null)) {
-				CuttingBoardBlock.spawnCuttingParticles(world, blockpos, boardItem, 5);
+		Level level = source.getLevel();
+		BlockPos pos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
+		BlockState state = level.getBlockState(pos);
+		Block block = state.getBlock();
+		BlockEntity blockEntity = level.getBlockEntity(pos);
+		if (block instanceof CuttingBoardBlock && blockEntity instanceof CuttingBoardBlockEntity cuttingBoard) {
+			ItemStack boardItem = cuttingBoard.getStoredItem().copy();
+			if (!boardItem.isEmpty() && cuttingBoard.processStoredItemUsingTool(stack, null)) {
+				CuttingBoardBlock.spawnCuttingParticles(level, pos, boardItem, 5);
 				setSuccess(true);
 			}
 			return true;

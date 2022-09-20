@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "farmersdelight:safety_net"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:rope",
+    "count": 4
+  }
+}

@@ -10,8 +10,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class StarParticle extends TextureSheetParticle
 {
-	protected StarParticle(ClientLevel world, double posX, double posY, double posZ) {
-		super(world, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
+	protected StarParticle(ClientLevel level, double posX, double posY, double posZ) {
+		super(level, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
 		this.xd *= 0.01F;
 		this.yd *= 0.01F;
 		this.zd *= 0.01F;
@@ -66,8 +66,8 @@ public class StarParticle extends TextureSheetParticle
 		}
 
 		@Override
-		public Particle createParticle(SimpleParticleType typeIn, ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-			StarParticle particle = new StarParticle(worldIn, x, y + 0.3D, z);
+		public Particle createParticle(SimpleParticleType typeIn, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+			StarParticle particle = new StarParticle(level, x, y + 0.3D, z);
 			particle.pickSprite(this.spriteSet);
 			particle.setColor(1.0F, 1.0F, 1.0F);
 			return particle;

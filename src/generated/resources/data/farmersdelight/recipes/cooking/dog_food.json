@@ -1,5 +1,6 @@
 {
   "type": "farmersdelight:cooking",
+  "recipe_book_tab": "misc",
   "ingredients": [
     {
       "item": "minecraft:rotten_flesh"
@@ -17,6 +18,6 @@
   "result": {
     "item": "farmersdelight:dog_food"
   },
-  "experience": 0.35,
+  "experience": 1.0,
   "cookingtime": 200
 }

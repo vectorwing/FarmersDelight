@@ -63,8 +63,7 @@ public class NourishmentHungerOverlay
 		boolean isPlayerHealingWithSaturation =
 				player.level.getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION)
 						&& player.isHurt()
-						&& stats.getSaturationLevel() > 0.0F
-						&& stats.getFoodLevel() >= 20;
+						&& stats.getFoodLevel() >= 18;
 
 		if (player.getEffect(ModEffects.NOURISHMENT.get()) != null) {
 			drawNourishmentOverlay(stats, minecraft, poseStack, left, top, isPlayerHealingWithSaturation);

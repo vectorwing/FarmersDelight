@@ -1,5 +1,75 @@
 # Changelog
 
+## 1.2.0
+
+### Additions
+- The Cooking Pot now has its own **Recipe Book**!
+  - Opening the GUI will reveal the familiar green book button. Press it to see your current cooking recipes;
+  - Recipes are unlocked in the same fashion as vanilla: by having one of its ingredients, or cooking the recipe from memory once;
+  - Added optional `"recipe_book_tab"` field for cooking recipes, which lets the recipe specify which tab it goes into:
+    - Valid options are `meals, drinks, misc`. If not provided, the recipe's tab will be determined in-code;
+- New foods:
+  - **Salmon Roll, Cod Roll and Kelp Roll** - A new way to enjoy your fishing spoils, if you're equipped with watery crops;
+    - A full Kelp Roll is quite awkward to eat, so it takes a while. But if you cut it on a Cutting Board, you get bite-sized snacks to eat quickly;
+  - **Bone Broth** - Spelunking? In a pinch? Bring a Cooking Pot with you, and you'll be able to make a decent broth out of bone and cave vegetation;
+  - **Mushroom Rice** - A nourishing counterpart to Mushroom Stew, and a good sink for your mushroom colony farms;
+  - **Glow Berry Custard** - This vibrant cave fruit goes well with cream! It's sure to make your stomach *glow* with joy, too;
+- New blocks:
+  - **Sandy Shrub** - A short plant which invades the beach coast, alongside Wild Cabbage and Sea Beet!
+    - You can bone meal the shrub to make it spread across nearby sand;
+  - **Rice Roll Medley** - Display your knife skills with a selection of salmon, cod and kelp rolls!
+    - Unlike other feasts, this gives individual rolls instead of meals. No, you can't put them back after taking one, it's bad manners!;
+- New tags: 
+  - `forge:dough`: Used to add modded dough items to FD's recipes, and populated by Wheat Dough by default;
+  - `forge:berries`: Any kind of small berry. Currently used for Stuffed Pumpkin and Fruit Salad;
+  - `farmersdelight:cabinets`: This, together with `cabinets/wooden`, is used to classify cabinet items for searching, crafting and integration;
+- Mushroom Colonies now generate in Mushroom Field biomes, at random growth stages;
+
+### Updates
+- The Tomato crop has been redesigned:
+  - Its first four growth stages are a block called `budding_tomatoes`. The normal `tomatoes` block involves four fruiting stages;
+  - The single crop works like before, growing 8 stages until it can be plucked for tomatoes;
+  - Hanging rope above the crop will make it **climb it up**, growing two additional tomato-bearing vines;
+- Some of the Wild Crops have received some visual upgrades, both in art and in world generation!
+  - Wild Carrots, being weeds, will strangle some grass out, creating small patches of Coarse Dirt;
+  - Wild Onions now scatter individual Alliums around them, making a more natural bush;
+  - Tomato Shrubs and Wild Potatoes now grow amidst a bush of local foliage;
+  - Wild Cabbage and Sea Beet now grow amidst a patch of Sandy Shrub, a new beach plant;
+- You can now take servings from a Cooking Pot **directly in a crafting grid**, by placing the pot and a valid container on it;
+- Rope can now be **reeled back into your inventory** from the top end by sneak-using with an empty hand on it;
+- Updated a few recipes:
+  - Knives are now crafted in a **vertical** arrangement instead of diagonal. This was done to reduce recipe conflicts with other mods;
+  - Barbecue on a Stick can now be made from any cooked meat;
+  - Milk Buckets and Bottles now convert between each other at a 1:4 ratio;
+  - Glow Berries can substitute Sweet Berries on the Fruit Salad and Stuffed Pumpkin;
+  - Stuffed Pumpkin has a simpler, more sensible recipe;
+  - Safety Nets can be loosened back into 4 Rope;
+- All cooking recipes have received a bump in their experience reward, since the old ratios were very pitiful;
+- Mushroom Colonies have been buffed in some ways:
+  - They can now grow in any light level, and do so faster than normal;
+  - They can accept Bone Meal to advance growth stages;
+- Skillet damage has been slightly buffed;
+- Backstabbing damage multiplier has been nerfed to 1.4x, 1.6x and 1.8x;
+- All kinds of valid tools can now be used by a **Dispenser** when facing a **Cutting Board**;
+- Added Better Combat integration for the Skillet (mace preset);
+
+### Fixes
+- Fix Wild Crops being able to generate on non-Overworld biomes under the right conditions (such as valid dirt blocks in the Nether or End);
+- Fix Rope not emitting sounds when entities are climbing on it;
+- Fix minor pixel inconsistency on all cross crop templates;
+- Fix Grass Block not being `unaffected_by_rich_soil`, while non-bonemealable plants such as ferns/grasses were;
+- Fix Cabinets using Barrel subtitles;
+- Fix Rich Soil being tillable when the block above isn't air;
+- Fix Nourishment not being strong enough to counter extreme exhaustion levels, such as Lv. 255 Hunger;
+  - The overlay now displays half-gilded shanks whenever the player is hurt, and can heal with hunger.
+
+### Translations
+- Added:
+  - vi_VN (thanks, baooduy!);
+  - uk_UA (thanks, Altegar!);
+- Updated:
+  - ca_ES (thanks, VerdaPegasus!);
+
 ## 1.1.2
 
 ### Additions

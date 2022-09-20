@@ -90,13 +90,15 @@ public class ItemModels extends ItemModelProvider
 				ModItems.ROAST_CHICKEN_BLOCK.get(),
 				ModItems.STUFFED_PUMPKIN_BLOCK.get(),
 				ModItems.HONEY_GLAZED_HAM_BLOCK.get(),
-				ModItems.SHEPHERDS_PIE_BLOCK.get()
+				ModItems.SHEPHERDS_PIE_BLOCK.get(),
+				ModItems.RICE_ROLL_MEDLEY_BLOCK.get()
 		);
 		takeAll(items, spriteBlockItems.toArray(new Item[0])).forEach(item -> withExistingParent(itemName(item), GENERATED).texture("layer0", resourceItem(itemName(item))));
 
 		// Blocks with flat block textures for their items
 		Set<Item> flatBlockItems = Sets.newHashSet(
 				ModItems.SAFETY_NET.get(),
+				ModItems.SANDY_SHRUB.get(),
 				ModItems.WILD_BEETROOTS.get(),
 				ModItems.WILD_CABBAGES.get(),
 				ModItems.WILD_CARROTS.get(),

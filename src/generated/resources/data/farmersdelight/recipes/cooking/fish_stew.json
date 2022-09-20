@@ -1,5 +1,6 @@
 {
   "type": "farmersdelight:cooking",
+  "recipe_book_tab": "meals",
   "ingredients": [
     {
       "tag": "forge:raw_fishes"
@@ -14,6 +15,6 @@
   "result": {
     "item": "farmersdelight:fish_stew"
   },
-  "experience": 0.35,
+  "experience": 1.0,
   "cookingtime": 200
 }

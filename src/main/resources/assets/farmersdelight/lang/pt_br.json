@@ -49,7 +49,8 @@
   "block.farmersdelight.red_canvas_sign": "Placa de lona vermelha",
   "block.farmersdelight.black_canvas_sign": "Placa de lona preta",
 
-  "block.farmersdelight.tomatoes": "Tomates",
+  "block.farmersdelight.budding_tomatoes": "Broto de tomate",
+  "block.farmersdelight.tomatoes": "Cipó de tomates",
   "block.farmersdelight.cabbages": "Repolho",
   "block.farmersdelight.onions": "Cebolas",
   "block.farmersdelight.rice": "Plantio de arroz",
@@ -57,6 +58,7 @@
   "block.farmersdelight.brown_mushroom_colony": "Colônia de cogumelos marrons",
   "block.farmersdelight.red_mushroom_colony": "Colônia de cogumelos vermelhos",
 
+  "block.farmersdelight.sandy_shrub": "Arbusto arenoso",
   "block.farmersdelight.wild_cabbages": "Couve silvestre",
   "block.farmersdelight.wild_tomatoes": "Tomates rasteiros",
   "block.farmersdelight.wild_onions": "Cebola silvestre",
@@ -116,6 +118,7 @@
   "item.farmersdelight.sweet_berry_cookie": "Biscoito de bagas doces",
   "item.farmersdelight.honey_cookie": "Biscoito de mel",
   "item.farmersdelight.melon_popsicle": "Picolé de melancia",
+  "item.farmersdelight.glow_berry_custard": "Creme de bagas brilhantes",
 
   "item.farmersdelight.earthworm": "Minhoca",
 
@@ -134,6 +137,10 @@
   "item.farmersdelight.dumplings": "Bolinhos no vapor",
   "item.farmersdelight.stuffed_potato": "Batata recheada",
   "item.farmersdelight.cabbage_rolls": "Rolinhos de repolho",
+  "item.farmersdelight.salmon_roll": "Rolinho de salmão",
+  "item.farmersdelight.cod_roll": "Rolinho de bacalhau",
+  "item.farmersdelight.kelp_roll": "Rolo de alga",
+  "item.farmersdelight.kelp_roll_slice": "Corte de rolo de alga",
 
   "item.farmersdelight.cooked_rice": "Arroz cozido",
   "item.farmersdelight.mixed_salad": "Salada mista",
@@ -146,6 +153,7 @@
   "item.farmersdelight.pumpkin_soup": "Sopa de abóbora",
   "item.farmersdelight.baked_cod_stew": "Bacalhoada",
   "item.farmersdelight.noodle_soup": "Sopa de macarrão",
+  "item.farmersdelight.bone_broth": "Caldo de osso",
 
   "item.farmersdelight.bacon_and_eggs": "Bacon e ovos",
   "item.farmersdelight.pasta_with_meatballs": "Macarrão com almôndegas",
@@ -156,6 +164,7 @@
   "item.farmersdelight.ratatouille": "Ratatouille",
   "item.farmersdelight.squid_ink_pasta": "Macarrão de tinta de lula",
   "item.farmersdelight.grilled_salmon": "Salmão grelhado",
+  "item.farmersdelight.mushroom_rice": "Arroz com cogumelos",
 
   "block.farmersdelight.roast_chicken_block": "Frango recheado",
   "item.farmersdelight.roast_chicken": "Porção de frango recheado",
@@ -165,6 +174,7 @@
   "item.farmersdelight.honey_glazed_ham": "Porção de presunto caramelado",
   "block.farmersdelight.shepherds_pie_block": "Escondidinho de cordeiro",
   "item.farmersdelight.shepherds_pie": "Porção de escondidinho de cordeiro",
+  "block.farmersdelight.rice_roll_medley_block": "Seleção de rolinhos de arroz",
 
   "item.farmersdelight.dog_food": "Ração para cães",
   "item.farmersdelight.horse_feed": "Alimento para cavalos",
@@ -180,6 +190,7 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
+  "farmersdelight.container.recipe_book.cookable": "Cozinháveis",
   "farmersdelight.container.cooking_pot": "Panela",
   "farmersdelight.container.cooking_pot.served_on": "Servido em: %s",
   "farmersdelight.container.cooking_pot.not_heated": "Precisa de calor por baixo",
@@ -201,7 +212,7 @@
 
   "farmersdelight.advancement.craft_knife": "Caçar e colher",
   "farmersdelight.advancement.craft_knife.desc": "Crie uma Faca para pilhar mais matéria-prima de plantas e animais",
-  "farmersdelight.advancement.harvest_straw": "Agarrando palhas",
+  "farmersdelight.advancement.harvest_straw": "Dando uma palhinha",
   "farmersdelight.advancement.harvest_straw.desc": "Colha gramas, trigo e arroz com uma Faca para obter Palha",
   "farmersdelight.advancement.place_organic_compost": "Compostagem avançada",
   "farmersdelight.advancement.place_organic_compost.desc": "Faça um pouco de Composto Orgânico. O processo é mais rápido com sol, água e cogumelos!",
@@ -214,10 +225,12 @@
   "farmersdelight.advancement.obtain_netherite_knife": "Se você não aguenta o calor...",
   "farmersdelight.advancement.obtain_netherite_knife.desc": "Gaste uma barra inteira de Netherita para aprimorar sua faca! Ou saia da cozinha.",
 
-  "farmersdelight.advancement.get_fd_seed": "Hortas da Natureza",
+  "farmersdelight.advancement.get_fd_seed": "Hortas da natureza",
   "farmersdelight.advancement.get_fd_seed.desc": "Quatro hortas novas podem ser encontradas na natureza, em vários climas... ou guardadas em um baú por aí.",
   "farmersdelight.advancement.plant_rice": "Molhando suas raízes",
   "farmersdelight.advancement.plant_rice.desc": "Plante grãos de Arroz em uma poça de água rasa",
+  "farmersdelight.advancement.harvest_ropelogged_tomato": "Tom-alto",
+  "farmersdelight.advancement.harvest_ropelogged_tomato.desc": "Pendure cordas em cima de uma horta de tomate para que ela cresça mais alta",
   "farmersdelight.advancement.hit_raider_with_rotten_tomato": "Boo! Sai fora!",
   "farmersdelight.advancement.hit_raider_with_rotten_tomato.desc": "Jogue um tomate podre em um desses invasores enxeridos!",
   "farmersdelight.advancement.get_mushroom_colony": "Fungos entre nós",
@@ -247,6 +260,8 @@
   "farmersdelight.subtitles.stove.crackle": "Fogão crepitando",
   "farmersdelight.subtitles.skillet.sizzle": "Frigideira fritando",
   "farmersdelight.subtitles.skillet.add_food": "Frigideira chiando",
+  "farmersdelight.subtitles.cabinet.open": "Armário aberto",
+  "farmersdelight.subtitles.cabinet.close": "Armário fechado",
   "farmersdelight.subtitles.tomato.pick": "Tomates colhidos",
   "farmersdelight.subtitles.rotten_tomato.throw": "Tomate podre lançado",
   "farmersdelight.subtitles.rotten_tomato.hit": "Tomate podre estoura",

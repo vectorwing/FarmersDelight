@@ -14,7 +14,9 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
-import vectorwing.farmersdelight.common.block.entity.container.CookingPotContainer;
+import vectorwing.farmersdelight.common.block.entity.container.CookingPotMenu;
+import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
+import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
@@ -84,7 +86,7 @@ public class JEIPlugin implements IModPlugin
 
 	@Override
 	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
-		registration.addRecipeTransferHandler(CookingPotContainer.class, FDRecipeTypes.COOKING, 0, 6, 9, 36);
+		registration.addRecipeTransferHandler(CookingPotMenu.class, FDRecipeTypes.COOKING, 0, 6, 9, 36);
 	}
 
 	@Override

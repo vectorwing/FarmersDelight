@@ -20,8 +20,8 @@ import vectorwing.farmersdelight.common.registry.ModEnchantments;
 
 public class BackstabbingEnchantment extends Enchantment
 {
-	public BackstabbingEnchantment(Rarity rarityIn, EnchantmentCategory typeIn, EquipmentSlot... slots) {
-		super(rarityIn, typeIn, slots);
+	public BackstabbingEnchantment(Rarity rarity, EnchantmentCategory category, EquipmentSlot... applicableSlots) {
+		super(rarity, category, applicableSlots);
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class BackstabbingEnchantment extends Enchantment
 	}
 
 	public static float getBackstabbingDamagePerLevel(float amount, int level) {
-		float multiplier = ((level * 0.4F) + 1.0F);
+		float multiplier = ((level * 0.2F) + 1.2F);
 		return amount * multiplier;
 	}
 
@@ -71,12 +71,12 @@ public class BackstabbingEnchantment extends Enchantment
 			Entity attacker = event.getSource().getEntity();
 			if (attacker instanceof Player) {
 				ItemStack weapon = ((Player) attacker).getMainHandItem();
-				int level = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.BACKSTABBING.get(), weapon);
-				if (level > 0 && isLookingBehindTarget(event.getEntityLiving(), event.getSource().getSourcePosition())) {
-					Level world = event.getEntityLiving().getCommandSenderWorld();
-					if (!world.isClientSide) {
-						event.setAmount(getBackstabbingDamagePerLevel(event.getAmount(), level));
-						world.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.BLOCKS, 1.0F, 1.0F);
+				int enchantmentLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.BACKSTABBING.get(), weapon);
+				if (enchantmentLevel > 0 && isLookingBehindTarget(event.getEntityLiving(), event.getSource().getSourcePosition())) {
+					Level level = event.getEntityLiving().getCommandSenderWorld();
+					if (!level.isClientSide) {
+						event.setAmount(getBackstabbingDamagePerLevel(event.getAmount(), enchantmentLevel));
+						level.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.BLOCKS, 1.0F, 1.0F);
 					}
 				}
 			}

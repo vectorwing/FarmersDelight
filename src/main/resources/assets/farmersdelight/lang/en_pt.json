@@ -49,7 +49,8 @@
   "block.farmersdelight.red_canvas_sign": "Seal o' Red Sails",
   "block.farmersdelight.black_canvas_sign": "Seal o' Black Sails",
 
-  "block.farmersdelight.tomatoes": "Tomato's",
+  "block.farmersdelight.budding_tomatoes": "Buddin' Tomato Vine",
+  "block.farmersdelight.tomatoes": "Tomato Vine",
   "block.farmersdelight.cabbages": "Leafer Harvest",
   "block.farmersdelight.onions": "Stink Bulbs",
   "block.farmersdelight.rice": "Rice Harvest",
@@ -57,11 +58,12 @@
   "block.farmersdelight.brown_mushroom_colony": "Infestation o' Tarnished Shrooms",
   "block.farmersdelight.red_mushroom_colony": "Infestation o' Scarlet Shrooms",
 
+  "block.farmersdelight.sandy_shrub": "Shrub o' the Beach",
   "block.farmersdelight.wild_cabbages": "Bush o' Green Leafs",
   "block.farmersdelight.wild_tomatoes": "Tomato Bramble",
   "block.farmersdelight.wild_onions": "Bush o' Pink Stinkers",
   "block.farmersdelight.wild_carrots": "Bush o' Orange Weed",
-  "block.farmersdelight.wild_potatoes": "Bush o' Flowering Taters",
+  "block.farmersdelight.wild_potatoes": "Bush o' Flowering Tater",
   "block.farmersdelight.wild_beetroots": "Buried Bloody Potato",
   "block.farmersdelight.wild_rice": "Soggy Weed o' Rice",
 
@@ -116,6 +118,7 @@
   "item.farmersdelight.sweet_berry_cookie": "Land Caper Biscuit",
   "item.farmersdelight.honey_cookie": "Bee Nectar Biscuit",
   "item.farmersdelight.melon_popsicle": "Frozen Melon in a Peg",
+  "item.farmersdelight.glow_berry_custard": "Creamy Glowin' Capers",
 
   "item.farmersdelight.earthworm": "Landgrubber",
 
@@ -134,6 +137,10 @@
   "item.farmersdelight.dumplings": "Hot Buns",
   "item.farmersdelight.stuffed_potato": "Stuff'd Taters",
   "item.farmersdelight.cabbage_rolls": "Leaf'd Up Leftovers",
+  "item.farmersdelight.salmon_roll": "Roll'd Salmon Cut",
+  "item.farmersdelight.cod_roll": "Roll'd Cod Cut",
+  "item.farmersdelight.kelp_roll": "Kelpy Blanket",
+  "item.farmersdelight.kelp_roll_slice": "Wee Kelpy Blanket",
 
   "item.farmersdelight.cooked_rice": "Bowl o' Boiled Rice",
   "item.farmersdelight.mixed_salad": "Bowl o' Leafy Veggies",
@@ -146,6 +153,7 @@
   "item.farmersdelight.pumpkin_soup": "Cream o' Gourd",
   "item.farmersdelight.baked_cod_stew": "Fisherman's Feast",
   "item.farmersdelight.noodle_soup": "Kelpy Soup wit' Noodles",
+  "item.farmersdelight.bone_broth": "Brine o' Bone",
 
   "item.farmersdelight.bacon_and_eggs": "Hog n' Egg",
   "item.farmersdelight.pasta_with_meatballs": "Meatwads n' Noodles",
@@ -156,6 +164,7 @@
   "item.farmersdelight.ratatouille": "Chopp'd Veggie Platter",
   "item.farmersdelight.squid_ink_pasta": "Kraken's Briny Noodles",
   "item.farmersdelight.grilled_salmon": "Captain's Salmon Platter",
+  "item.farmersdelight.mushroom_rice": "Shroom n' Rice",
 
   "block.farmersdelight.roast_chicken_block": "Stuff'd Fowl Roast",
   "item.farmersdelight.roast_chicken": "Stuff'd Fowl Roast Platter",
@@ -165,12 +174,13 @@
   "item.farmersdelight.honey_glazed_ham": "Hog's Leg Roast Platter",
   "block.farmersdelight.shepherds_pie_block": "Sheep Herder's Specialty",
   "item.farmersdelight.shepherds_pie": "Sheep Herder's Specialty Platter",
+  "block.farmersdelight.rice_roll_medley_block": "All Kinds o' Ricey Rolls",
 
   "item.farmersdelight.dog_food": "Hound's Chow",
   "item.farmersdelight.horse_feed": "Land Beast's Hay",
 
   "effect.farmersdelight.nourishment": "Belly's Full",
-  "effect.farmersdelight.comfort": "Free o' Scurvy",
+  "effect.farmersdelight.comfort": "Heart's Warm",
 
   "effect.farmersdelight.nourishment.0.desc": "Ye can't get hungry, lest yer belly be digestin' food ta heal ye.",
   "effect.farmersdelight.comfort.0.desc": "Yer body gon' heal up slowly, no matter if ye're starvin' or not.",
@@ -180,6 +190,7 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
+  "farmersdelight.container.recipe_book.cookable": "Revealing Cookable Grub",
   "farmersdelight.container.cooking_pot": "Pot o' Grub",
   "farmersdelight.container.cooking_pot.served_on": "Grab yerself a: %s",
   "farmersdelight.container.cooking_pot.not_heated": "Ye hafta fire it up first",
@@ -218,6 +229,8 @@
   "farmersdelight.advancement.get_fd_seed.desc": "Rumours sing o' four veggies growin' wild in many lands... but ye bet they got 'em in booty somewhere!",
   "farmersdelight.advancement.plant_rice": "Soggy Weeds",
   "farmersdelight.advancement.plant_rice.desc": "Plant a buncha Rice grains in a puddle o' bilgewater",
+  "farmersdelight.advancement.harvest_ropelogged_tomato": "To tha Crow's Nest!",
+  "farmersdelight.advancement.harvest_ropelogged_tomato.desc": "Yer tomato vines be mighty skilled at climbin' rope o'er them, so get ta hangin'!",
   "farmersdelight.advancement.hit_raider_with_rotten_tomato": "To tha plank wit' ye!",
   "farmersdelight.advancement.hit_raider_with_rotten_tomato.desc": "Show them raiders yer mettle... with a rottin' tomato?",
   "farmersdelight.advancement.get_mushroom_colony": "Not Mushroom Left!",
@@ -247,6 +260,8 @@
   "farmersdelight.subtitles.stove.crackle": "Grille crackles",
   "farmersdelight.subtitles.skillet.sizzle": "Skillet sizzles",
   "farmersdelight.subtitles.skillet.add_food": "Skillet hisses",
+  "farmersdelight.subtitles.cabinet.open": "Cabinet opens",
+  "farmersdelight.subtitles.cabinet.close": "Cabinet closes its locker",
   "farmersdelight.subtitles.tomato.pick": "Tomatoes pop",
   "farmersdelight.subtitles.rotten_tomato.throw": "Rottin' Tomato flies",
   "farmersdelight.subtitles.rotten_tomato.hit": "Rottin' Tomato splatters",

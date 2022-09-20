@@ -1,23 +1,24 @@
 {
   "type": "farmersdelight:cooking",
+  "recipe_book_tab": "meals",
   "ingredients": [
     {
       "tag": "forge:crops/rice"
     },
     {
+      "tag": "forge:crops/onion"
+    },
+    {
+      "item": "minecraft:brown_mushroom"
+    },
+    {
+      "item": "minecraft:potato"
+    },
+    {
+      "tag": "forge:berries"
+    },
+    {
       "tag": "forge:vegetables"
-    },
-    {
-      "item": "farmersdelight:tomato_sauce"
-    },
-    {
-      "item": "minecraft:baked_potato"
-    },
-    {
-      "item": "farmersdelight:brown_mushroom_colony"
-    },
-    {
-      "item": "minecraft:sweet_berries"
     }
   ],
   "result": {
@@ -26,6 +27,6 @@
   "container": {
     "item": "minecraft:pumpkin"
   },
-  "experience": 0.5,
+  "experience": 2.0,
   "cookingtime": 400
 }
