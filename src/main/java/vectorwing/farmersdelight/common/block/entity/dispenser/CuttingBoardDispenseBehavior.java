@@ -26,6 +26,7 @@ import java.util.HashMap;
 public class CuttingBoardDispenseBehavior extends OptionalDispenseItemBehavior
 {
 	private static final HashMap<Item, DispenseItemBehavior> DISPENSE_ITEM_BEHAVIOR_HASH_MAP = new HashMap<>();
+	public static final CuttingBoardDispenseBehavior INSTANCE = new CuttingBoardDispenseBehavior();
 
 	public static void registerBehaviour(Item item, CuttingBoardDispenseBehavior behavior) {
 		DISPENSE_ITEM_BEHAVIOR_HASH_MAP.put(item, DispenserBlock.DISPENSER_REGISTRY.get(item)); // Save the old behaviours so they can be used later

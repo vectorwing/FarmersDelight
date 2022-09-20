@@ -343,6 +343,10 @@ public class CraftingRecipes
 				.define('r', ModItems.ROPE.get())
 				.unlockedBy("has_rope", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.ROPE.get()))
 				.save(consumer);
+		ShapelessRecipeBuilder.shapeless(ModItems.ROPE.get(), 4)
+				.requires(ModItems.SAFETY_NET.get())
+				.unlockedBy("has_safety_net", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SAFETY_NET.get()))
+				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "rope_from_safety_net"));
 		ShapedRecipeBuilder.shaped(ModItems.CABBAGE_CRATE.get(), 1)
 				.pattern("###")
 				.pattern("###")

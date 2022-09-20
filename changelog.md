@@ -43,6 +43,7 @@
   - Milk Buckets and Bottles now convert between each other at a 1:4 ratio;
   - Glow Berries can substitute Sweet Berries on the Fruit Salad and Stuffed Pumpkin;
   - Stuffed Pumpkin has a simpler, more sensible recipe;
+  - Safety Nets can be loosened back into 4 Rope;
 - All cooking recipes have received a bump in their experience reward, since the old ratios were very pitiful;
 - Mushroom Colonies have been buffed in some ways:
   - They can now grow in any light level, and do so faster than normal;
