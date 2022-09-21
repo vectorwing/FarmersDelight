@@ -1,5 +1,6 @@
 {
   "type": "farmersdelight:cooking",
+  "recipe_book_tab": "meals",
   "ingredients": [
     {
       "tag": "forge:raw_beef"
@@ -14,6 +15,6 @@
   "result": {
     "item": "farmersdelight:beef_stew"
   },
-  "experience": 0.35,
+  "experience": 1.0,
   "cookingtime": 200
 }

@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "farmersdelight:cooking/fish_stew"
+    ]
+  },
+  "criteria": {
+    "has_any_ingredient": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:salmon",
+              "minecraft:cod",
+              "minecraft:tropical_fish",
+              "farmersdelight:tomato_sauce",
+              "farmersdelight:onion"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "farmersdelight:cooking/fish_stew"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_any_ingredient",
+      "has_the_recipe"
+    ]
+  ]
+}

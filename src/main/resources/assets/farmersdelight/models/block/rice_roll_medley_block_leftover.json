@@ -1,0 +1,23 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"tray_top": "farmersdelight:block/tray_top",
+		"particle": "farmersdelight:block/tray_top",
+		"tray_bottom": "farmersdelight:block/tray_bottom"
+	},
+	"elements": [
+		{
+			"name": "tray",
+			"from": [1, 0, 1],
+			"to": [15, 2, 15],
+			"faces": {
+				"north": {"uv": [1, 11, 15, 13], "texture": "#tray_bottom"},
+				"east": {"uv": [1, 11, 15, 13], "texture": "#tray_bottom"},
+				"south": {"uv": [1, 11, 15, 13], "texture": "#tray_bottom"},
+				"west": {"uv": [1, 11, 15, 13], "texture": "#tray_bottom"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#tray_top"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#tray_top"}
+			}
+		}
+	]
+}

@@ -12,10 +12,13 @@
     },
     {
       "item": "minecraft:glass_bottle"
+    },
+    {
+      "item": "minecraft:glass_bottle"
     }
   ],
   "result": {
     "item": "farmersdelight:milk_bottle",
-    "count": 3
+    "count": 4
   }
 }

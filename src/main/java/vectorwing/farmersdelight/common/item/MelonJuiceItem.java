@@ -11,7 +11,7 @@ public class MelonJuiceItem extends DrinkableItem
 	}
 
 	@Override
-	public void affectConsumer(ItemStack stack, Level worldIn, LivingEntity consumer) {
+	public void affectConsumer(ItemStack stack, Level level, LivingEntity consumer) {
 		consumer.heal(2.0F);
 	}
 }

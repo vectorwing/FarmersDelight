@@ -2,7 +2,7 @@ package vectorwing.farmersdelight.data.builder;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import mezz.jei.api.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;

@@ -12,9 +12,9 @@ import net.minecraftforge.items.IItemHandler;
  */
 public class ItemUtils
 {
-	public static void dropItems(Level world, BlockPos pos, IItemHandler inventory) {
+	public static void dropItems(Level level, BlockPos pos, IItemHandler inventory) {
 		for (int slot = 0; slot < inventory.getSlots(); slot++)
-			Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), inventory.getStackInSlot(slot));
+			Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), inventory.getStackInSlot(slot));
 	}
 
 	public static boolean isInventoryEmpty(IItemHandler inventory) {
@@ -26,9 +26,9 @@ public class ItemUtils
 		return true;
 	}
 
-	public static void spawnItemEntity(Level world, ItemStack stack, double x, double y, double z, double xMotion, double yMotion, double zMotion) {
-		ItemEntity entity = new ItemEntity(world, x, y, z, stack);
+	public static void spawnItemEntity(Level level, ItemStack stack, double x, double y, double z, double xMotion, double yMotion, double zMotion) {
+		ItemEntity entity = new ItemEntity(level, x, y, z, stack);
 		entity.setDeltaMovement(xMotion, yMotion, zMotion);
-		world.addFreshEntity(entity);
+		level.addFreshEntity(entity);
 	}
 }

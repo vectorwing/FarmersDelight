@@ -11,18 +11,18 @@ public class FuelBlockItem extends BlockItem
 {
 	public final int burnTime;
 
-	public FuelBlockItem(Block blockIn, Properties properties) {
-		super(blockIn, properties);
+	public FuelBlockItem(Block block, Properties properties) {
+		super(block, properties);
 		this.burnTime = 100;
 	}
 
-	public FuelBlockItem(Block blockIn, Properties properties, int burnTime) {
-		super(blockIn, properties);
+	public FuelBlockItem(Block block, Properties properties, int burnTime) {
+		super(block, properties);
 		this.burnTime = burnTime;
 	}
 
 	@Override
-	public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
+	public int getBurnTime(ItemStack stack, @Nullable RecipeType<?> recipeType) {
 		return this.burnTime;
 	}
 }

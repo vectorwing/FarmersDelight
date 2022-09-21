@@ -1,5 +1,6 @@
 {
   "type": "farmersdelight:cooking",
+  "recipe_book_tab": "meals",
   "ingredients": [
     {
       "item": "minecraft:brown_mushroom"
@@ -14,6 +15,6 @@
   "container": {
     "item": "minecraft:bowl"
   },
-  "experience": 0.2,
+  "experience": 1.0,
   "cookingtime": 200
 }
