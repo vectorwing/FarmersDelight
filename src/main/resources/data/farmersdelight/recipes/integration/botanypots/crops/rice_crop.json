@@ -10,16 +10,14 @@
     "item": "farmersdelight:rice"
   },
   "categories": ["dirt"],
-  "growthTicks": 1000,
+  "growthTicks": 1200,
   "display": {
-    "block": "farmersdelight:rice_panicles",
-    "properties": {
-      "age": 3
-    }
+    "type": "botanypots:aging",
+    "block": "farmersdelight:rice_panicles"
   },
-  "results": [
+  "drops": [
     {
-      "chance": 0.75,
+      "chance": 1.00,
       "output": {
         "item": "farmersdelight:rice_panicle"
       },
