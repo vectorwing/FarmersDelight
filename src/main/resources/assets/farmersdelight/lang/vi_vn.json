@@ -49,7 +49,7 @@
   "block.farmersdelight.green_canvas_sign": "Tấm biển vải xanh lá",
   "block.farmersdelight.red_canvas_sign": "Tấm biển vải đỏ",
   "block.farmersdelight.black_canvas_sign": "Tấm biển vải đen",
-
+  "block.farmersdelight.budding_tomatoes": "Mầm cây cà chua",
   "block.farmersdelight.tomatoes": "Cà chua",
   "block.farmersdelight.cabbages": "Bắp cải",
   "block.farmersdelight.onions": "Hành tây",
@@ -57,7 +57,7 @@
   "block.farmersdelight.rice_panicles": "Cây lúa đã trổ bông",
   "block.farmersdelight.brown_mushroom_colony": "Nhúm nấm nâu",
   "block.farmersdelight.red_mushroom_colony": "Nhúm nấm đỏ",
-
+  "block.farmersdelight.sandy_shrub": "Cây bụi cát",
   "block.farmersdelight.wild_cabbages": "Bắp cải dại",
   "block.farmersdelight.wild_tomatoes": "Cà chua dại",
   "block.farmersdelight.wild_onions": "Hành tây dại",
@@ -105,8 +105,8 @@
   "item.farmersdelight.cooked_salmon_slice": "Lát cá hồi chín",
   "item.farmersdelight.mutton_chops": "Thịt cừu sống đã chặt",
   "item.farmersdelight.cooked_mutton_chops": "Thịt cừu chín đã chặt",
-  "item.farmersdelight.ham": "Thịt nguội",
-  "item.farmersdelight.smoked_ham": "Thịt nguội hun khói",
+  "item.farmersdelight.ham": "Thịt đùi",
+  "item.farmersdelight.smoked_ham": "Thịt đùi hun khói",
 
   "item.farmersdelight.pie_crust": "Vỏ bánh",
   "item.farmersdelight.cake_slice": "Miếng bánh",
@@ -117,6 +117,7 @@
   "item.farmersdelight.sweet_berry_cookie": "Bánh quy quả mọng ngọt",
   "item.farmersdelight.honey_cookie": "Bánh quy mật ong",
   "item.farmersdelight.melon_popsicle": "Kem dưa hấu",
+  "item.farmersdelight.glow_berry_custard": "Sữa trứng quả mọng phát sáng",
 
   "item.farmersdelight.earthworm": "Giun đất",
 
@@ -135,6 +136,10 @@
   "item.farmersdelight.dumplings": "Bánh bao",
   "item.farmersdelight.stuffed_potato": "Khoai tây nhồi",
   "item.farmersdelight.cabbage_rolls": "Bắp cải cuộn",
+  "item.farmersdelight.salmon_roll": "Cá hồi cuộn",
+  "item.farmersdelight.cod_roll": "Cá tuyết cuộn",
+  "item.farmersdelight.kelp_roll": "Tảo bẹ cuộn",
+  "item.farmersdelight.kelp_roll_slice": "Tảo bẹ cuộn cắt lát",
 
   "item.farmersdelight.cooked_rice": "Cơm",
   "item.farmersdelight.mixed_salad": "Salad trộn",
@@ -168,6 +173,7 @@
   "item.farmersdelight.honey_glazed_ham": "Đĩa đùi heo tẩm mật ong",
   "block.farmersdelight.shepherds_pie_block": "Bánh Pie bò Shepherd",
   "item.farmersdelight.shepherds_pie": "Đĩa bánh Pie bò Shepherd",
+  "block.farmersdelight.rice_roll_medley_block": "Đĩa cơm cuộn",
 
   "item.farmersdelight.dog_food": "Thức ăn cho chó",
   "item.farmersdelight.horse_feed": "Thức ăn cho ngựa",
@@ -183,8 +189,9 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
+  "farmersdelight.container.recipe_book.cookable": "Hiển thị có thể nấu được",
   "farmersdelight.container.cooking_pot": "Nồi nấu ăn",
-  "farmersdelight.container.cooking_pot.served_on": "Served on: %s",
+  "farmersdelight.container.cooking_pot.served_on": "Phục vụ trên: %s",
   "farmersdelight.container.cooking_pot.not_heated": "Cần nguồn nhiệt từ bên dưới",
   "farmersdelight.container.cooking_pot.heated": "Đã nóng",
   "farmersdelight.container.basket": "Giỏ",
@@ -221,6 +228,8 @@
   "farmersdelight.advancement.get_fd_seed.desc": "Bốn loại cây trồng mới có thể được tìm thấy trong tự nhiên, qua nhiều vùng khí hậu... hoặc có thể trong rương ở đâu đó.",
   "farmersdelight.advancement.plant_rice": "Bén rễ đâm chồi",
   "farmersdelight.advancement.plant_rice.desc": "Trồng lúa trong vũng nước nông",
+  "farmersdelight.advancement.harvest_ropelogged_tomato": "Tall-mato",
+  "farmersdelight.advancement.harvest_ropelogged_tomato.desc": "Treo một số dây phía trên cây cà chua để làm cho nó phát triển cao hơn",
   "farmersdelight.advancement.hit_raider_with_rotten_tomato": "Boo! Hiss!",
   "farmersdelight.advancement.hit_raider_with_rotten_tomato.desc": "Ném một quả cà chua thối vào một trong những kẻ cướp khó chịu!",
   "farmersdelight.advancement.get_mushroom_colony": "Fungus Among Us",
@@ -250,6 +259,8 @@
   "farmersdelight.subtitles.stove.crackle": "Stove crackles",
   "farmersdelight.subtitles.skillet.sizzle": "Skillet sizzles",
   "farmersdelight.subtitles.skillet.add_food": "Skillet hisses",
+  "farmersdelight.subtitles.cabinet.open": "Cabinet opens",
+  "farmersdelight.subtitles.cabinet.close": "Cabinet closes",
   "farmersdelight.subtitles.tomato.pick": "Tomatoes pop",
   "farmersdelight.subtitles.rotten_tomato.throw": "Rotten Tomato flies",
   "farmersdelight.subtitles.rotten_tomato.hit": "Rotten Tomato splatters",
