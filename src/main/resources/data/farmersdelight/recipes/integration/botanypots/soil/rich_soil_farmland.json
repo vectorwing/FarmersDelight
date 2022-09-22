@@ -16,5 +16,5 @@
     }
   },
   "categories": ["dirt", "farmland"],
-  "growthModifier": 0.25
+  "growthModifier": 1.25
 }
