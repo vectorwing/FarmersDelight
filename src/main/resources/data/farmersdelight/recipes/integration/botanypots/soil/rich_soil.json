@@ -13,5 +13,5 @@
     "block": "farmersdelight:rich_soil"
   },
   "categories": ["dirt", "grass", "podzol", "mushroom"],
-  "growthModifier": 0.10
+  "growthModifier": 1.10
 }
