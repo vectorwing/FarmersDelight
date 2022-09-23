@@ -137,8 +137,8 @@
   "item.farmersdelight.dumplings": "饺子",
   "item.farmersdelight.stuffed_potato": "填馅马铃薯",
   "item.farmersdelight.cabbage_rolls": "卷心菜卷",
-  "item.farmersdelight.salmon_roll": "三文鱼寿司卷",
-  "item.farmersdelight.cod_roll": "鳕鱼寿司卷",
+  "item.farmersdelight.salmon_roll": "三文鱼寿司",
+  "item.farmersdelight.cod_roll": "鳕鱼寿司",
   "item.farmersdelight.kelp_roll": "海带寿司卷",
   "item.farmersdelight.kelp_roll_slice": "海带寿司",
 
@@ -174,7 +174,7 @@
   "item.farmersdelight.honey_glazed_ham": "盘装蜜汁火腿",
   "block.farmersdelight.shepherds_pie_block": "牧羊人派",
   "item.farmersdelight.shepherds_pie": "盘装牧羊人派",
-  "block.farmersdelight.rice_roll_medley_block": "混盘寿司",
+  "block.farmersdelight.rice_roll_medley_block": "寿司拼盘",
 
   "item.farmersdelight.dog_food": "狗粮",
   "item.farmersdelight.horse_feed": "马食",
@@ -197,8 +197,8 @@
   "farmersdelight.container.cabinet": "厨柜",
 
   "farmersdelight.tooltip.cooking_pot.empty": "空",
-  "farmersdelight.tooltip.cooking_pot.single_serving": "目前的1份食物：",
-  "farmersdelight.tooltip.cooking_pot.many_servings": "目前的%s份食物：",
+  "farmersdelight.tooltip.cooking_pot.single_serving": "装有1份食物：",
+  "farmersdelight.tooltip.cooking_pot.many_servings": "装有%s份食物：",
   "farmersdelight.tooltip.dog_food.when_feeding": "喂给已驯服的狗时：",
   "farmersdelight.tooltip.horse_feed.when_feeding": "喂给已驯服的马时：",
   "farmersdelight.tooltip.milk_bottle": "清除1个效果",
