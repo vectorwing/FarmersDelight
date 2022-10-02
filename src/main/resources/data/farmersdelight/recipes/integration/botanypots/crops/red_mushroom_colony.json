@@ -7,27 +7,27 @@
   ],
   "type": "botanypots:crop",
   "seed": {
-    "item": "farmersdelight:rice"
+    "item": "farmersdelight:red_mushroom_colony"
   },
-  "categories": ["dirt"],
-  "growthTicks": 1200,
+  "categories": ["mushroom"],
+  "growthTicks": 1400,
   "display": {
     "type": "botanypots:aging",
-    "block": "farmersdelight:rice_panicles"
+    "block": "farmersdelight:red_mushroom_colony"
   },
   "drops": [
     {
       "chance": 1.00,
       "output": {
-        "item": "farmersdelight:rice_panicle"
+        "item": "minecraft:red_mushroom"
       },
       "minRolls": 1,
-      "maxRolls": 1
+      "maxRolls": 3
     },
     {
       "chance": 0.05,
       "output": {
-        "item": "farmersdelight:rice_panicle"
+        "item": "minecraft:red_mushroom"
       },
       "minRolls": 1,
       "maxRolls": 2
