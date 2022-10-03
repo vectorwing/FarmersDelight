@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.2.1
+
+### Updates
+- Updated Botany Pots integration, to conform with new schemas and to allow Mushroom Colony growth (thanks, Darkhax!);
+
+### Fixes
+- Fix Rich Soil being turned into Rooted Dirt when growing Azalea trees on it;
+  - The fix should potentially prevent other modded trees from converting Rich Soil as well.
+
+### Translations
+- Updated:
+  - ja_JP (thanks, CKenJa!);
+  - ko_KR (thanks, qkrehf2!);
+  - vi_VN (thanks, baooduy!);
+  - zh_CN (thanks, IdealNightOcean!);
+
 ## 1.2.0
 
 ### Additions
