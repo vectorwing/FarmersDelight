@@ -4,6 +4,7 @@
 
 ### Updates
 - Updated Botany Pots integration, to conform with new schemas and to allow Mushroom Colony growth (thanks, Darkhax!);
+- Pie and cake slices no longer cause potion particles when granting Speed to the user;
 
 ### Fixes
 - Fix Rich Soil being turned into Rooted Dirt when growing Azalea trees on it;
