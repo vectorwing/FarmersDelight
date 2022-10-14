@@ -8,6 +8,7 @@ import com.blamejared.crafttweaker.api.annotation.ZenRegister;
 import com.blamejared.crafttweaker.api.ingredient.IIngredient;
 import com.blamejared.crafttweaker.api.item.IItemStack;
 import com.blamejared.crafttweaker.api.recipe.manager.base.IRecipeManager;
+import com.blamejared.crafttweaker.api.util.random.Percentaged;
 import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -46,7 +47,7 @@ public class CuttingBoardRecipeManager implements IRecipeManager
     @ZenCodeType.Method
     public void addRecipe(String name,
                           IIngredient input,
-                          IItemStack[] results,
+                          Percentaged<IItemStack>[] results,
                           IIngredient tool,
                           @ZenCodeType.OptionalString String sound) {
         CraftTweakerAPI.apply(new ActionAddRecipe(this,
@@ -55,7 +56,7 @@ public class CuttingBoardRecipeManager implements IRecipeManager
                         input.asVanillaIngredient(),
                         tool.asVanillaIngredient(),
                         ListUtils.mapArrayIndexSet(results,
-                                (stack) -> new ChanceResult(stack.getInternal(), 1),
+                                (stack) -> new ChanceResult(stack.getData().getInternal(), (float) stack.getPercentage()),
                                 NonNullList.withSize(results.length, ChanceResult.EMPTY)),
                         sound),
                 ""));
