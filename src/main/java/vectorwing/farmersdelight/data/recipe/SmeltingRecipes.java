@@ -44,7 +44,7 @@ public class SmeltingRecipes
 				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "iron_nugget_from_smelting_knife"));
 		SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.GOLDEN_KNIFE.get()),
 						Items.GOLD_NUGGET, 0.1F, 200)
-				.unlockedBy("has_golden_knife", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.IRON_KNIFE.get()))
+				.unlockedBy("has_golden_knife", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.GOLDEN_KNIFE.get()))
 				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "gold_nugget_from_smelting_knife"));
 		SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModItems.IRON_KNIFE.get()),
 						Items.IRON_NUGGET, 0.1F, 100)
@@ -52,7 +52,7 @@ public class SmeltingRecipes
 				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "iron_nugget_from_blasting_knife"));
 		SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModItems.GOLDEN_KNIFE.get()),
 						Items.GOLD_NUGGET, 0.1F, 100)
-				.unlockedBy("has_golden_knife", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.IRON_KNIFE.get()))
+				.unlockedBy("has_golden_knife", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.GOLDEN_KNIFE.get()))
 				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "gold_nugget_from_blasting_knife"));
 	}
 
