@@ -1,5 +1,27 @@
 # Changelog
 
+## 1.2.1
+
+### Updates
+- Updated Botany Pots integration, to conform with new schemas and to allow Mushroom Colony growth (thanks, Darkhax!);
+- Pie and cake slices no longer cause potion particles when granting Speed to the user;
+- Tomato Vines now have a slightly thinner hitbox, to facilitate clicking blocks behind them;
+- Added Kelp to Crop Rotation advancement, as it can be cooked into food;
+
+### Fixes
+- Fix the Crop Rotation advancement looking for `tomatoes` instead of `budding_tomatoes`, making it impossible to complete;
+- Fix wrong criterion on recipes for smelting Golden Knives;
+- Fix Rich Soil being turned into Rooted Dirt when growing Azalea trees on it;
+  - The fix should potentially prevent other modded trees from converting Rich Soil as well.
+
+### Translations
+- Updated:
+  - ja_JP (thanks, CKenJa!);
+  - ko_KR (thanks, qkrehf2!);
+  - pl_PL (thanks, KarolOfGutovo!);
+  - vi_VN (thanks, baooduy!);
+  - zh_CN (thanks, IdealNightOcean!);
+
 ## 1.2.0
 
 ### Additions

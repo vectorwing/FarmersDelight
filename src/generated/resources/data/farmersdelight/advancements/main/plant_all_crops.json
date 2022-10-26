@@ -52,7 +52,7 @@
     "tomato": {
       "trigger": "minecraft:placed_block",
       "conditions": {
-        "block": "farmersdelight:tomatoes"
+        "block": "farmersdelight:budding_tomatoes"
       }
     },
     "onion": {
