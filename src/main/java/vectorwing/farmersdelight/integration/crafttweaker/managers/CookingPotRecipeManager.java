@@ -41,6 +41,7 @@ public class CookingPotRecipeManager implements IRecipeManager
      * @docParam name "cooking_pot_test"
      * @docParam output <item:minecraft:enchanted_golden_apple>
      * @docParam inputs [<item:minecraft:gold_block>]
+     * @docParam cookingPotRecipeBookTab <constant:farmersdelight:cooking_pot_recipe_book_tab:misc>
      * @docParam container <item:minecraft:apple>
      * @docParam experience 100
      * @docParam cookTime 400
