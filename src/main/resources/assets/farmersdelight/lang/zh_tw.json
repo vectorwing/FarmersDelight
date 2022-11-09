@@ -110,7 +110,7 @@
   "item.farmersdelight.ham": "火腿",
   "item.farmersdelight.smoked_ham": "煙燻火腿",
 
-  "item.farmersdelight.pie_crust": "空派皮",
+  "item.farmersdelight.pie_crust": "派皮",
   "item.farmersdelight.cake_slice": "蛋糕片",
   "item.farmersdelight.apple_pie_slice": "蘋果派片",
   "item.farmersdelight.sweet_berry_cheesecake_slice": "甜莓起司蛋糕片",
@@ -274,7 +274,7 @@
   "farmersdelight.block.skillet.invalid_item": "無法被加熱……",
   "farmersdelight.item.skillet.how_to_cook": "用副手拿著食材！",
 
-  "death.attack.farmersdelight.stove": "%1$s 烤焦至完美",
+  "death.attack.farmersdelight.stove": "完美的烤 %1$s 出爐了",
   "death.attack.farmersdelight.stove.player": "%1$s 被 %2$s 扔到烤架上",
 
   "farmersdelight.jei.cooking": "烹飪",
