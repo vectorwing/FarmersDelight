@@ -107,7 +107,7 @@
   "item.farmersdelight.cooked_salmon_slice": "烤鮭魚片",
   "item.farmersdelight.mutton_chops": "生羊排",
   "item.farmersdelight.cooked_mutton_chops": "烤羊排",
-  "item.farmersdelight.ham": "火腿片",
+  "item.farmersdelight.ham": "火腿",
   "item.farmersdelight.smoked_ham": "煙燻火腿",
 
   "item.farmersdelight.pie_crust": "空派皮",
@@ -123,15 +123,15 @@
 
   "item.farmersdelight.earthworm": "蚯蚓",
 
-  "item.farmersdelight.flint_knife": "碎石刀",
-  "item.farmersdelight.iron_knife": "鐵斧",
+  "item.farmersdelight.flint_knife": "燧石刀",
+  "item.farmersdelight.iron_knife": "鐵刀",
   "item.farmersdelight.golden_knife": "金刀",
   "item.farmersdelight.diamond_knife": "鑽石刀",
   "item.farmersdelight.netherite_knife": "獄髓刀",
 
   "item.farmersdelight.barbecue_stick": "烤肉串",
   "item.farmersdelight.egg_sandwich": "夾蛋三明治",
-  "item.farmersdelight.chicken_sandwich": "肌肉三明治",
+  "item.farmersdelight.chicken_sandwich": "雞肉三明治",
   "item.farmersdelight.hamburger": "漢堡",
   "item.farmersdelight.bacon_sandwich": "培根三明治",
   "item.farmersdelight.mutton_wrap": "燉羊排",
@@ -189,7 +189,7 @@
   "enchantment.farmersdelight.backstabbing": "背刺",
   "enchantment.farmersdelight.backstabbing.desc": "從背後攻擊時的傷害增加.",
 
-  "itemGroup.farmersdelight": "Farmer's Delight",
+  "itemGroup.farmersdelight": "農夫樂事",
 
   "farmersdelight.container.recipe_book.cookable": "顯示可用",
   "farmersdelight.container.cooking_pot": "烹飪鍋",
@@ -209,7 +209,7 @@
   "farmersdelight.tooltip.melon_juice": "瞬間回血",
 
   "farmersdelight.advancement.root": "農夫樂事",
-  "farmersdelight.advancement.root.desc": "更有風味的世界等著你!",
+  "farmersdelight.advancement.root.desc": "更有風味的世界正等著你!",
 
   "farmersdelight.advancement.craft_knife": "狩獵採集",
   "farmersdelight.advancement.craft_knife.desc": "製作刀從動植物上獲取更多資源.",
