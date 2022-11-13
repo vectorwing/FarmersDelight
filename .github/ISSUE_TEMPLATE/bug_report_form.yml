@@ -18,17 +18,21 @@ body:
     id: reproduction_steps
     attributes:
       label: Steps to reproduce
-      description: What steps did you take to cause the issue? Can it be replicated?
+      description: Which steps did you take to cause the issue? Please describe below how to replicate it.
   - type: textarea
     id: logs
     attributes:
       label: Logs
-      description: Please provide the client or server logs from your launcher. They contain vital information to troubleshoot the issue.
+      description: | 
+        Please provide the client or server logs from your launcher. They contain vital information to troubleshoot the issue.
+        To upload logs, you can use websites such as: https://pastebin.com/ https://paste.ee/ https://mclo.gs/
   - type: textarea
     id: mod_list
     attributes:
       label: Mod List
-      description: Please provide the list of mods you're using, especially the versions of Forge and Farmer's Delight.
+      description: |
+        Please provide the list of mods you're using, especially the versions of Forge and Farmer's Delight.
+        You can generate a mod list by forcing a crash. In your game, hold F3+C for 10 seconds, then check your logs; the list of mods will be by the end.
   - type: checkboxes
     id: has_tested_minimal_instance
     attributes:
