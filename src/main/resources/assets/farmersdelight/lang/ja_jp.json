@@ -284,5 +284,7 @@
   "farmersdelight.jei.decomposition.light": "日光が当たっていると加速する",
   "farmersdelight.jei.decomposition.fluid": "水が隣接していると加速する",
   "farmersdelight.jei.decomposition.accelerators": "隣接する活性化剤(下記参照)で加速する",
+  "farmersdelight.jei.info.ham": "豚またはホグリンの足から取れる骨付きの肉。剣より軽いものでないと切れない",
+  "farmersdelight.jei.info.knife": "軽めの近接武器。草から藁を手に入れたり、動物から特別なアイテムをとることができる",
   "farmersdelight.jei.info.straw": "クラフトに使用する乾燥した植物繊維。ナイフで草や作物を切ると手に入る"
 }
