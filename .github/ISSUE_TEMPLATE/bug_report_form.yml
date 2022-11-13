@@ -46,7 +46,7 @@ body:
     id: is_forge
     attributes:
       label: Forge version
-      description: Please confirm you're playing on the Forge version. For issues regarding the Fabric port, go to: https://github.com/newhoryzon/farmers-delight-fabric/issues
+      description: "Please confirm you're playing on the Forge version. For issues regarding the Fabric port, go to: https://github.com/newhoryzon/farmers-delight-fabric/issues"
       options:
         - label: I am using the Forge version
           required: true
