@@ -43,6 +43,14 @@ body:
     validations:
       required: true
   - type: checkboxes
+    id: is_forge
+    attributes:
+      label: Forge version
+      description: Please confirm you're playing on the Forge version. For issues regarding the Fabric port, go to: https://github.com/newhoryzon/farmers-delight-fabric/issues
+      options:
+        - label: I am using the Forge version
+          required: true
+  - type: checkboxes
     id: has_tested_minimal_instance
     attributes:
       label: Minimal instance
