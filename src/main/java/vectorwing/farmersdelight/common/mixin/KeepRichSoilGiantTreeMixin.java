@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
 @Mixin(Feature.class)
-public class KeepRichSoilMixin
+public class KeepRichSoilGiantTreeMixin
 {
 	/**
 	 * Due to how Trees generate, this mixin is needed to prevent Rich Soil from becoming Podzol under a Giant Spruce Tree growth.

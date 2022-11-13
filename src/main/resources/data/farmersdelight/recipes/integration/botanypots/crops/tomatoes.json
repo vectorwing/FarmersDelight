@@ -10,21 +10,19 @@
     "item": "farmersdelight:tomato_seeds"
   },
   "categories": ["dirt"],
-  "growthTicks": 1000,
+  "growthTicks": 1200,
   "display": {
-    "block": "farmersdelight:tomatoes",
-    "properties": {
-      "age": 7
-    }
+    "type": "botanypots:aging",
+    "block": "farmersdelight:tomatoes"
   },
-  "results": [
+  "drops": [
     {
-      "chance": 0.75,
+      "chance": 1.00,
       "output": {
         "item": "farmersdelight:tomato"
       },
       "minRolls": 1,
-      "maxRolls": 1
+      "maxRolls": 2
     },
     {
       "chance": 0.05,

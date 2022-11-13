@@ -10,21 +10,19 @@
     "item": "farmersdelight:cabbage_seeds"
   },
   "categories": ["dirt"],
-  "growthTicks": 1000,
+  "growthTicks": 1200,
   "display": {
-    "block": "farmersdelight:cabbages",
-    "properties": {
-      "age": 7
-    }
+    "type": "botanypots:aging",
+    "block": "farmersdelight:cabbages"
   },
-  "results": [
+  "drops": [
     {
-      "chance": 0.75,
+      "chance": 1.00,
       "output": {
         "item": "farmersdelight:cabbage"
       },
       "minRolls": 1,
-      "maxRolls": 1
+      "maxRolls": 2
     },
     {
       "chance": 0.05,

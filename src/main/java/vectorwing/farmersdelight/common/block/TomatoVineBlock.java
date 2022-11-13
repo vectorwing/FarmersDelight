@@ -40,7 +40,7 @@ public class TomatoVineBlock extends CropBlock
 {
 	public static final IntegerProperty VINE_AGE = BlockStateProperties.AGE_3;
 	public static final BooleanProperty ROPELOGGED = BooleanProperty.create("ropelogged");
-	private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+	private static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 
 	public TomatoVineBlock(Properties properties) {
 		super(properties);

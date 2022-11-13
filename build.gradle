@@ -126,20 +126,17 @@ dependencies {
     compileOnly fg.deobf("squeek.appleskin:appleskin-forge:${appleskin_version}:api")
     runtimeOnly fg.deobf("squeek.appleskin:appleskin-forge:${appleskin_version}")
 
-    // implementation fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${mc_version}:${crafttweaker_version}")
+    def ctDep = fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${crafttweaker_version}")
+    compileOnly ctDep
+    //runtimeOnly ctDep
 
-    /* CT documentation
-    annotationProcessor "com.blamejared.crafttweaker:CraftTweaker-${mc_version}:${crafttweaker_version}"
-    annotationProcessor "com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors-${mc_version}:${crafttweaker_annotations_version}"
+    annotationProcessor ctDep
+    annotationProcessor "com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors:${crafttweaker_ap_version}"
     annotationProcessor "org.reflections:reflections:0.9.10" // CT dep
     annotationProcessor "com.google.code.gson:gson:2.8.7" // CT dep
-     */
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    // For more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
 }
 
 jar {
@@ -170,4 +167,8 @@ publishing {
             url "file:///${project.projectDir}/mcmodsrepo"
         }
     }
+}
+
+compileJava {
+    options.compilerArgs << "-Acrafttweaker.processor.document.output_directory=${file('docsOut')}"
 }

@@ -10,16 +10,14 @@
     "item": "farmersdelight:onion"
   },
   "categories": ["dirt"],
-  "growthTicks": 1000,
+  "growthTicks": 1200,
   "display": {
-    "block": "farmersdelight:onions",
-    "properties": {
-      "age": 7
-    }
+    "type": "botanypots:aging",
+    "block": "farmersdelight:onions"
   },
-  "results": [
+  "drops": [
     {
-      "chance": 0.75,
+      "chance": 1.00,
       "output": {
         "item": "farmersdelight:onion"
       },
