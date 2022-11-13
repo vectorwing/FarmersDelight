@@ -27,13 +27,6 @@ body:
         1. Place block;
         2. Attempt to right click the block.
   - type: textarea
-    id: logs
-    attributes:
-      label: Logs
-      description: | 
-        Please provide the client or server logs from your launcher. They contain vital information to troubleshoot the issue.
-        To upload logs, you can use websites such as: https://pastebin.com/ https://paste.ee/ https://mclo.gs/
-  - type: textarea
     id: mod_list
     attributes:
       label: Mod List
@@ -42,6 +35,13 @@ body:
         You can generate a mod list by forcing a crash. In your game, hold F3+C for 10 seconds, then check your logs; the list of mods will be by the end.
     validations:
       required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: | 
+        Please provide the client or server logs from your launcher. They contain vital information to troubleshoot the issue.
+        To upload logs, you can use websites such as: https://pastebin.com/ https://paste.ee/ https://mclo.gs/
   - type: checkboxes
     id: is_forge
     attributes:
@@ -50,7 +50,7 @@ body:
        Please confirm you're playing on the Forge mod loader.
        For issues regarding the Fabric port, go to: https://github.com/newhoryzon/farmers-delight-fabric/issues
       options:
-        - label: I am using the Forge version
+        - label: I am using the Forge version of Farmer's Delight
           required: true
   - type: checkboxes
     id: has_tested_minimal_instance
@@ -63,6 +63,6 @@ body:
     id: has_performance_mods
     attributes:
       label: Performance and shader mods
-      description: Sometimes, performance and shader mods (for example, Optifine, Rubidium etc.) can cause unpredictable problems. Have you tested this issue without those installed?
+      description: Sometimes, performance and shader mods (for example, Optifine, Rubidium, Oculus etc.) can cause unpredictable problems. Have you tested this issue without those installed?
       options:
         - label: I have tested this without performance or shader mods
