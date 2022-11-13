@@ -47,8 +47,8 @@ body:
     attributes:
       label: Forge
       description: |
-       "Please confirm you're playing on the Forge mod loader."
-       "For issues regarding the Fabric port, go to: https://github.com/newhoryzon/farmers-delight-fabric/issues"
+       Please confirm you're playing on the Forge mod loader.
+       For issues regarding the Fabric port, go to: https://github.com/newhoryzon/farmers-delight-fabric/issues
       options:
         - label: I am using the Forge version
           required: true
