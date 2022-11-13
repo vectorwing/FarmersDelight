@@ -5,13 +5,16 @@ body:
   - type: markdown
     attributes:
       value: |
-        Please fill out the template below to describe your issue. Doing so **greatly** helps us understand what happened!
-        Keep in mind that this board is **only for issues**! If you have a **suggestion**, please use the **Discussions** tab instead.
+        Please fill out the form below to describe your issue.
+        Keep in mind that this board is **only for issues**! If you have a **suggestion** (ideas, integration etc.), please use the **Discussions** tab instead.
   - type: textarea
     id: description
     attributes:
       label: Description
-      description: Please explain in detail what the issue is.
+      description: Please explain in detail what the issue is. Feel free to attach screenshots or videos, if it helps!
+      placeholder: | 
+        Example:
+        When right-clicking a certain block, the game crashes.
     validations:
       required: true
   - type: textarea
@@ -19,6 +22,10 @@ body:
     attributes:
       label: Steps to reproduce
       description: Which steps did you take to cause the issue? Please describe below how to replicate it.
+      placeholder: |
+        Example:
+        1. Place block;
+        2. Attempt to right click the block.
   - type: textarea
     id: logs
     attributes:
@@ -33,11 +40,13 @@ body:
       description: |
         Please provide the list of mods you're using, especially the versions of Forge and Farmer's Delight.
         You can generate a mod list by forcing a crash. In your game, hold F3+C for 10 seconds, then check your logs; the list of mods will be by the end.
+    validations:
+      required: true
   - type: checkboxes
     id: has_tested_minimal_instance
     attributes:
       label: Minimal instance
-      description: Have you tried testing the issue on a Minecraft instance with only Farmer's Delight installed?
+      description: Have you tried testing the issue on a Minecraft instance with only Farmer's Delight, and other relevant mods, installed?
       options:
         - label: I have tested this on a minimal instance
   - type: checkboxes
