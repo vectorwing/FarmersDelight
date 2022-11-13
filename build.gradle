@@ -128,7 +128,7 @@ dependencies {
 
     def ctDep = fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.19.2:${crafttweaker_version}")
     compileOnly ctDep
-    //runtimeOnly ctDep
+//    runtimeOnly ctDep
 
 //    annotationProcessor ctDep
 //    annotationProcessor "com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors:${crafttweaker_ap_version}"
