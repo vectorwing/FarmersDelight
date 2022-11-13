@@ -3,7 +3,7 @@
 ## 1.2.1
 
 ### Updates
-- CraftTweaker integration has been re-enabled (thanks, Witixin1512!):
+- (1.18 only) CraftTweaker integration has been re-enabled (thanks, Witixin1512!):
   - This integration exposes `recipe_book_tab` and `farmersdelight:tool_action` to CT scripts;
 - Updated Botany Pots integration, to conform with new schemas and to allow Mushroom Colony growth (thanks, Darkhax!);
 - Pie and cake slices no longer cause potion particles when granting Speed to the user;
