@@ -29,7 +29,7 @@ body:
   - type: textarea
     id: mod_list
     attributes:
-      label: Mod List
+      label: Mod list
       description: |
         Please provide the list of mods you're using, especially the versions of Forge and Farmer's Delight.
         You can generate a mod list by forcing a crash. In your game, hold F3+C for 10 seconds, then check your logs; the list of mods will be by the end.
@@ -56,11 +56,11 @@ body:
     id: has_tested_minimal_instance
     attributes:
       label: Minimal instance
-      description: Have you tried testing the issue on a Minecraft instance with only Farmer's Delight, and other relevant mods, installed?
+      description: Have you tried testing the issue on a Minecraft instance with only Farmer's Delight, and mods related to the issue, installed?
       options:
         - label: I have tested this on a minimal instance
   - type: checkboxes
-    id: has_performance_mods
+    id: has_removed_performance_mods
     attributes:
       label: Performance and shader mods
       description: Sometimes, performance and shader mods (for example, Optifine, Rubidium, Oculus etc.) can cause unpredictable problems. Have you tested this issue without those installed?
