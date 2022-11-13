@@ -45,8 +45,8 @@ body:
   - type: checkboxes
     id: is_forge
     attributes:
-      label: Forge version
-      description: "Please confirm you're playing on the Forge version. For issues regarding the Fabric port, go to: https://github.com/newhoryzon/farmers-delight-fabric/issues"
+      label: Forge
+      description: "Please confirm you're playing on the Forge mod loader. For issues regarding the Fabric port, go to: https://github.com/newhoryzon/farmers-delight-fabric/issues"
       options:
         - label: I am using the Forge version
           required: true
@@ -61,6 +61,6 @@ body:
     id: has_performance_mods
     attributes:
       label: Performance and shader mods
-      description: Sometimes, performance and shader mods (for example, Optifine, Iris etc.) can cause unpredictable problems. Have you tested this issue without those installed?
+      description: Sometimes, performance and shader mods (for example, Optifine, Rubidium etc.) can cause unpredictable problems. Have you tested this issue without those installed?
       options:
         - label: I have tested this without performance or shader mods
