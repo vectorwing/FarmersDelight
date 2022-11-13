@@ -19,7 +19,7 @@
 ### Translations
 - Updated:
   - es_MX (thanks, cerealconjugo!);
-  - ja_JP (thanks, CKenJa!);
+  - ja_JP (thanks, CKenJa and ksk3110!);
   - ko_KR (thanks, qkrehf2!);
   - pl_PL (thanks, KarolOfGutovo!);
   - vi_VN (thanks, baooduy!);

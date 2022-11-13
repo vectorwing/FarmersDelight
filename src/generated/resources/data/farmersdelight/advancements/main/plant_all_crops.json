@@ -91,6 +91,12 @@
         "block": "minecraft:sugar_cane"
       }
     },
+    "kelp": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "minecraft:kelp"
+      }
+    },
     "cocoa": {
       "trigger": "minecraft:placed_block",
       "conditions": {
@@ -164,6 +170,9 @@
     ],
     [
       "sugar_cane"
+    ],
+    [
+      "kelp"
     ],
     [
       "cocoa"
