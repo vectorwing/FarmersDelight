@@ -11,5 +11,6 @@ import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 @ZenRegister
 @BracketEnum("farmersdelight:cooking_pot_recipe_book_tab")
 @NativeTypeRegistration(zenCodeName = "mods.farmersdelight.CookingPotRecipeBookTab", value = CookingPotRecipeBookTab.class)
-public class CrTCookingPotRecipeBookTab {
+public class CTCookingPotRecipeBookTab
+{
 }

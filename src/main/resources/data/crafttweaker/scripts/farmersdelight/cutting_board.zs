@@ -12,7 +12,7 @@ You can also use a <toolaction> as a tool! You can get the list of valid tool ac
 
 <recipetype:farmersdelight:cutting>.addRecipe("cutting_board_test", <item:minecraft:gravel>, [<item:minecraft:flint>], <item:minecraft:string>, "minecraft:block.gravel.break");
 
-<recipetype:farmersdelight:cutting>.addRecipe("tool_action_example", <item:minecraft:jack_o_lantern>, [<item:minecraft:torch>, <item:farmersdelight:pumpkin_slice> * 3 % 60], <toolaction:shears_carve> as IIngredient, "block.pumpkin.carve");
+<recipetype:farmersdelight:cutting>.addRecipe("tool_action_example", <item:minecraft:jack_o_lantern>, [<item:minecraft:torch>, <item:farmersdelight:pumpkin_slice> * 3 % 60], <toolaction:shears_carve>, "block.pumpkin.carve");
 
 <recipetype:farmersdelight:cutting>.addRecipe("wool_to_string", <tag:items:minecraft:wool>, [(<item:minecraft:string> * 2) % 50], <item:minecraft:shears>);
 
