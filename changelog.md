@@ -3,6 +3,8 @@
 ## 1.2.1
 
 ### Updates
+- CraftTweaker integration has been re-enabled (thanks, Witixin1512!):
+  - This integration exposes `recipe_book_tab` and `farmersdelight:tool_action` to CT scripts;
 - Updated Botany Pots integration, to conform with new schemas and to allow Mushroom Colony growth (thanks, Darkhax!);
 - Pie and cake slices no longer cause potion particles when granting Speed to the user;
 - Tomato Vines now have a slightly thinner hitbox, to facilitate clicking blocks behind them;
@@ -16,11 +18,13 @@
 
 ### Translations
 - Updated:
+  - es_MX (thanks, cerealconjugo!);
   - ja_JP (thanks, CKenJa!);
   - ko_KR (thanks, qkrehf2!);
   - pl_PL (thanks, KarolOfGutovo!);
   - vi_VN (thanks, baooduy!);
   - zh_CN (thanks, IdealNightOcean!);
+  - zh_TW (thanks, xMikux, Pancakes0228 and StarskyXIII!);
 
 ## 1.2.0
 
