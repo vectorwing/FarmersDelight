@@ -126,12 +126,12 @@ dependencies {
     compileOnly fg.deobf("squeek.appleskin:appleskin-forge:${appleskin_version}:api")
     runtimeOnly fg.deobf("squeek.appleskin:appleskin-forge:${appleskin_version}")
 
-    def ctDep = fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${crafttweaker_version}")
+    def ctDep = fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.19.2:${crafttweaker_version}")
     compileOnly ctDep
     //runtimeOnly ctDep
 
-    annotationProcessor ctDep
-    annotationProcessor "com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors:${crafttweaker_ap_version}"
+//    annotationProcessor ctDep
+//    annotationProcessor "com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors:${crafttweaker_ap_version}"
     annotationProcessor "org.reflections:reflections:0.9.10" // CT dep
     annotationProcessor "com.google.code.gson:gson:2.8.7" // CT dep
 
