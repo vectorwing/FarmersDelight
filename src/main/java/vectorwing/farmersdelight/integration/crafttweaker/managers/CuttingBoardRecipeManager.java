@@ -24,9 +24,9 @@ import vectorwing.farmersdelight.integration.crafttweaker.actions.ActionRemoveCu
  *
  * @docParam this <recipetype:farmersdelight:cutting>
  */
-//@Document("mods/farmersdelight/CuttingBoard")
-//@ZenRegister
-//@ZenCodeType.Name("mods.farmersdelight.CuttingBoard")
+@Document("mods/farmersdelight/CuttingBoard")
+@ZenRegister
+@ZenCodeType.Name("mods.farmersdelight.CuttingBoard")
 public class CuttingBoardRecipeManager implements IRecipeManager
 {
     /**
