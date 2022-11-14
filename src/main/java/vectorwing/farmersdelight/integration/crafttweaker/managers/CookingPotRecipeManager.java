@@ -30,6 +30,7 @@ public class CookingPotRecipeManager implements IRecipeManager
 {
     /**
      * Add a cooking pot recipe.
+     * The Cooking Tab is optional.
      *
      * @param name       Name of the recipe to add
      * @param output     Output item
