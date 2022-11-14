@@ -5,7 +5,6 @@ import com.blamejared.crafttweaker.api.item.IItemStack;
 import com.blamejared.crafttweaker.api.item.MCItemStackMutable;
 import com.blamejared.crafttweaker.api.recipe.component.BuiltinRecipeComponents;
 import com.blamejared.crafttweaker.api.recipe.component.IDecomposedRecipe;
-import com.blamejared.crafttweaker.api.recipe.component.IRecipeComponent;
 import com.blamejared.crafttweaker.api.recipe.handler.IRecipeHandler;
 import com.blamejared.crafttweaker.api.recipe.manager.base.IRecipeManager;
 import com.blamejared.crafttweaker.api.util.StringUtil;
