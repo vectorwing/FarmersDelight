@@ -8,7 +8,6 @@ import com.blamejared.crafttweaker.api.recipe.component.IDecomposedRecipe;
 import com.blamejared.crafttweaker.api.recipe.component.IRecipeComponent;
 import com.blamejared.crafttweaker.api.recipe.handler.IRecipeHandler;
 import com.blamejared.crafttweaker.api.recipe.manager.base.IRecipeManager;
-import com.blamejared.crafttweaker.api.recipe.type.CTShapelessRecipeBase;
 import com.blamejared.crafttweaker.api.util.StringUtil;
 import com.blamejared.crafttweaker.api.util.random.Percentaged;
 import net.minecraft.core.NonNullList;
@@ -54,7 +53,7 @@ public class CuttingBoardRecipeHandler implements IRecipeHandler<CuttingBoardRec
                 .builder()
                 .with(BuiltinRecipeComponents.Input.INGREDIENTS, recipe.getIngredientsAndTool().stream().map(IIngredient::fromIngredient).toList())
                 .with(BuiltinRecipeComponents.Metadata.GROUP, recipe.getGroup())
-                .with((IRecipeComponent<List<Percentaged<IItemStack>>>) null, recipe.getRollableResults().stream().map(chanceResult -> new Percentaged<>(IItemStack.of(chanceResult.getStack()), chanceResult.getChance(), iItemStack -> iItemStack.getCommandString() + " % " + chanceResult.getChance())).toList())
+                .with(BuiltinRecipeComponents.Output.CHANCED_ITEMS, recipe.getRollableResults().stream().map(chanceResult -> new Percentaged<>(IItemStack.of(chanceResult.getStack()), chanceResult.getChance(), iItemStack -> iItemStack.getCommandString() + " % " + chanceResult.getChance())).toList())
                 .build();
         if (!recipe.getSoundEventID().equals("")){
             decomposedRecipe.set(RecipeHandlerUtils.SOUND_COMPONENT, recipe.getSoundEventID());
@@ -67,7 +66,7 @@ public class CuttingBoardRecipeHandler implements IRecipeHandler<CuttingBoardRec
         final String group = recipe.getOrThrowSingle(BuiltinRecipeComponents.Metadata.GROUP);
         final List<IIngredient> ingredients = recipe.getOrThrow(BuiltinRecipeComponents.Input.INGREDIENTS);
         final IIngredient[] ingredientArray = ingredients.toArray(IIngredient[]::new);
-        final Collection<Percentaged<IItemStack>> results = recipe.getOrThrowSingle(null);
+        final Collection<Percentaged<IItemStack>> results = recipe.getOrThrowSingle(BuiltinRecipeComponents.Output.CHANCED_ITEMS);
         final NonNullList<ChanceResult> stackedResults = NonNullList.create();
         stackedResults.addAll(results.stream().map(iItemStackPercentaged -> new ChanceResult(iItemStackPercentaged.getData().getInternal(), (float) iItemStackPercentaged.getPercentage())).toList());
         final List<String> soundList = recipe.get(RecipeHandlerUtils.SOUND_COMPONENT);
