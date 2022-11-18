@@ -3,7 +3,7 @@
   "block.farmersdelight.cooking_pot": "鍋",
   "block.farmersdelight.basket": "かご",
   "block.farmersdelight.cutting_board": "まな板",
-  "block.farmersdelight.skillet": "スキレット",
+  "block.farmersdelight.skillet": "フライパン",
   "block.farmersdelight.oak_cabinet": "オークの戸棚",
   "block.farmersdelight.birch_cabinet": "シラカバの戸棚",
   "block.farmersdelight.spruce_cabinet": "マツの戸棚",
@@ -58,7 +58,7 @@
   "block.farmersdelight.brown_mushroom_colony": "群生した茶色のキノコ",
   "block.farmersdelight.red_mushroom_colony": "群生した赤色のキノコ",
 
-  "block.farmersdelight.sandy_shrub": "砂地の低木",
+  "block.farmersdelight.sandy_shrub": "砂地の草",
   "block.farmersdelight.wild_cabbages": "野生のキャベツ",
   "block.farmersdelight.wild_tomatoes": "トマトの低木",
   "block.farmersdelight.wild_onions": "野生のタマネギ",
