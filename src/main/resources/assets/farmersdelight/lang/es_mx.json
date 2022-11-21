@@ -66,7 +66,7 @@
   "block.farmersdelight.wild_carrots": "Zanahoria silvestre",
   "block.farmersdelight.wild_potatoes": "Papa Silvestre",
   "block.farmersdelight.wild_beetroots": "Betabel Silvestre",
-  "block.farmersdelight.wild_rice": "Arroz silvestre",
+  "block.farmersdelight.wild_rice": "Arroz Silvestre",
 
   "block.farmersdelight.apple_pie": "Pastel de Manzana",
   "block.farmersdelight.sweet_berry_cheesecake": "Pastel de Bayas Dulces",
@@ -264,8 +264,8 @@
   "farmersdelight.subtitles.cabinet.open": "Gabinete Abriéndose",
   "farmersdelight.subtitles.cabinet.close": "Gabinete Cerrándose",
   "farmersdelight.subtitles.tomato.pick": "Tomate estrellándose",
-  "farmersdelight.subtitles.rotten_tomato.throw": "Tomate Podrido disparado",
-  "farmersdelight.subtitles.rotten_tomato.hit": "Tomate Podrido estrellándose",
+  "farmersdelight.subtitles.rotten_tomato.throw": "Tomate Podrido Arrojado",
+  "farmersdelight.subtitles.rotten_tomato.hit": "Tomate Podrido Estrellándose",
 
   "farmersdelight.block.feast.use_container": "Necesitas un %s para comer esto.",
   "farmersdelight.block.rice.invalid_placement": "Este cultivo no sobrevivirá fuera de aguas poco profundas.",
