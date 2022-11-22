@@ -54,8 +54,8 @@
   "block.farmersdelight.tomatoes": "Помідори",
   "block.farmersdelight.cabbages": "Капуста",
   "block.farmersdelight.onions": "Цибуля",
-  "block.farmersdelight.rice_crop": "Посіви рису",
-  "block.farmersdelight.rice_upper_crop": "Посіви рису",
+  "block.farmersdelight.rice": "Посіви рису",
+  "block.farmersdelight.rice_panicles": "Посіви рису",
   "block.farmersdelight.brown_mushroom_colony": "Колонія коричневих грибів",
   "block.farmersdelight.red_mushroom_colony": "Колонія червоних грибів",
 
@@ -189,7 +189,7 @@
   "enchantment.farmersdelight.backstabbing": "Зрада",
   "enchantment.farmersdelight.backstabbing.desc": "Збільшує шкоду при ударі по цілі ззаду.",
 
-  "itemGroup.farmersdelight.main": "Farmer's Delight",
+  "itemGroup.farmersdelight": "Farmer's Delight",
 
   "farmersdelight.container.recipe_book.cookable": "Доступні для приготування",
   "farmersdelight.container.cooking_pot": "Каструля",
@@ -277,14 +277,14 @@
   "death.attack.farmersdelight.stove": "%1$s був ідеально засмажений",
   "death.attack.farmersdelight.stove.player": "%1$s був кинутий на гриль шеф-кухарем %2$s",
 
-  "farmersdelight.rei.cooking": "Готування",
-  "farmersdelight.rei.cutting": "Дошка для нарізання",
-  "farmersdelight.rei.chance": "%1$s%% шанс",
-  "farmersdelight.rei.decomposition": "Розкладання",
-  "farmersdelight.rei.decomposition.light": "Процес пришвидшується під упливом сонячного світла",
-  "farmersdelight.rei.decomposition.fluid": "Процес пришвидшується за допомогою додавання води",
-  "farmersdelight.rei.decomposition.accelerators": "Процес пришвидшується за допомогою додавання активаторів (див. нижче)",
-  "farmersdelight.rei.info.straw": "Сухе рослинне волокно, яке використовується в майструванні. Отримується шляхом зрізання ножем трав'янистих культур і рослин.",
-  "farmersdelight.rei.info.knife": "Ножі — це легка холодна зброя. Вони можуть збирати солому з трав і гарантують отримання додаткової здобичі з тварин.",
-  "farmersdelight.rei.info.ham": "Великий шматок м'яса зі свинячої або гоґлінської ніжки. Вам знадобиться щось легше меча, щоб розрізати її..."
+  "farmersdelight.jei.cooking": "Готування",
+  "farmersdelight.jei.cutting": "Дошка для нарізання",
+  "farmersdelight.jei.chance": "%1$s%% шанс",
+  "farmersdelight.jei.decomposition": "Розкладання",
+  "farmersdelight.jei.decomposition.light": "Процес пришвидшується під упливом сонячного світла",
+  "farmersdelight.jei.decomposition.fluid": "Процес пришвидшується за допомогою додавання води",
+  "farmersdelight.jei.decomposition.accelerators": "Процес пришвидшується за допомогою додавання активаторів (див. нижче)",
+  "farmersdelight.jei.info.straw": "Сухе рослинне волокно, яке використовується в майструванні. Отримується шляхом зрізання ножем трав'янистих культур і рослин.",
+  "farmersdelight.jei.info.knife": "Ножі — це легка холодна зброя. Вони можуть збирати солому з трав і гарантують отримання додаткової здобичі з тварин.",
+  "farmersdelight.jei.info.ham": "Великий шматок м'яса зі свинячої або гоґлінської ніжки. Вам знадобиться щось легше меча, щоб розрізати її..."
 }
