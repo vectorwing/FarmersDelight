@@ -14,6 +14,7 @@ public class FarmersDelightCrTPlugin implements ICraftTweakerPlugin {
 
         handler.registerRecipeComponent(RecipeHandlerUtils.SOUND_COMPONENT);
         handler.registerRecipeComponent(RecipeHandlerUtils.CONTAINER_COMPONENT);
+        handler.registerRecipeComponent(RecipeHandlerUtils.TOOL_COMPONENT);
         handler.registerRecipeComponent(RecipeHandlerUtils.COOKING_TAB_COMPONENT);
     }
 }

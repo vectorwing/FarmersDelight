@@ -50,7 +50,8 @@ public class CuttingBoardRecipeHandler implements IRecipeHandler<CuttingBoardRec
 
         final IDecomposedRecipe decomposedRecipe = IDecomposedRecipe
                 .builder()
-                .with(BuiltinRecipeComponents.Input.INGREDIENTS, recipe.getIngredientsAndTool().stream().map(IIngredient::fromIngredient).toList())
+                .with(BuiltinRecipeComponents.Input.INGREDIENTS, recipe.getIngredients().stream().map(IIngredient::fromIngredient).toList())
+                .with(RecipeHandlerUtils.TOOL_COMPONENT, IIngredient.fromIngredient(recipe.getTool()))
                 .with(BuiltinRecipeComponents.Metadata.GROUP, recipe.getGroup())
                 .with(BuiltinRecipeComponents.Output.CHANCED_ITEMS, recipe.getRollableResults().stream().map(chanceResult -> new Percentaged<>(IItemStack.of(chanceResult.getStack()), chanceResult.getChance(), iItemStack -> iItemStack.getCommandString() + " % " + chanceResult.getChance())).toList())
                 .build();
@@ -64,14 +65,14 @@ public class CuttingBoardRecipeHandler implements IRecipeHandler<CuttingBoardRec
     public Optional<CuttingBoardRecipe> recompose(IRecipeManager<? super CuttingBoardRecipe> manager, ResourceLocation name, IDecomposedRecipe recipe) {
         final String group = recipe.getOrThrowSingle(BuiltinRecipeComponents.Metadata.GROUP);
         final List<IIngredient> ingredients = recipe.getOrThrow(BuiltinRecipeComponents.Input.INGREDIENTS);
+        final IIngredient tool = recipe.getOrThrowSingle(RecipeHandlerUtils.TOOL_COMPONENT);
         final IIngredient[] ingredientArray = ingredients.toArray(IIngredient[]::new);
         final Collection<Percentaged<IItemStack>> results = recipe.getOrThrowSingle(BuiltinRecipeComponents.Output.CHANCED_ITEMS);
         final NonNullList<ChanceResult> stackedResults = NonNullList.create();
         stackedResults.addAll(results.stream().map(iItemStackPercentaged -> new ChanceResult(iItemStackPercentaged.getData().getInternal(), (float) iItemStackPercentaged.getPercentage())).toList());
         final List<String> soundList = recipe.get(RecipeHandlerUtils.SOUND_COMPONENT);
         final String sound = soundList == null ? "" : soundList.get(0);
-        final Ingredient tool = ingredientArray[0].asVanillaIngredient();
-        final Ingredient input = ingredientArray[1].asVanillaIngredient();
-        return Optional.of(new CuttingBoardRecipe(name, group, input, tool, stackedResults, sound));
+        final Ingredient input = ingredientArray[0].asVanillaIngredient();
+        return Optional.of(new CuttingBoardRecipe(name, group, input, tool.asVanillaIngredient(), stackedResults, sound));
     }
 }
