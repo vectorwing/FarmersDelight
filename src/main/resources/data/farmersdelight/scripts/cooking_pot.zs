@@ -13,3 +13,4 @@ The CookingPotRecipeBookTab refers to a constant value.
 <recipetype:farmersdelight:cooking>.addRecipe("azalea_making", <item:minecraft:flowering_azalea>, [<item:minecraft:pink_tulip> | <item:minecraft:allium>], <constant:farmersdelight:cooking_pot_recipe_book_tab:meals>, <item:minecraft:oak_leaves>, 0, 100);
 
 <recipetype:farmersdelight:cooking>.remove(<item:farmersdelight:cooked_rice>);
+

@@ -14,3 +14,5 @@ You can also use a <toolaction> as a tool! You can get the list of valid tool ac
 <recipetype:farmersdelight:cutting>.addRecipe("wool_to_string", <tag:items:minecraft:wool>, [(<item:minecraft:string> * 2) % 50], <item:minecraft:shears>);
 
 <recipetype:farmersdelight:cutting>.remove(<item:minecraft:leather>);
+
+
