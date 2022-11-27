@@ -1,0 +1,18 @@
+{
+    "conditions": [
+      {
+        "type": "forge:mod_loaded",
+        "modid": "botanypotstiers"
+      }
+    ],
+    "type": "botanypotstiers:soil",
+    "input": {
+      "item": "farmersdelight:rich_soil"
+    },
+    "display": {
+      "block": "farmersdelight:rich_soil"
+    },
+    "categories": ["dirt", "grass", "podzol", "mushroom"],
+    "growthModifier": 1.10
+  }
+  
