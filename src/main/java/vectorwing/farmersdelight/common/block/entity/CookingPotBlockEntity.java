@@ -213,6 +213,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		}
 
 		if (didInventoryChange) {
+			cookingPot.cookTime = 0;
 			cookingPot.inventoryChanged();
 		}
 	}
