@@ -274,8 +274,8 @@
   "farmersdelight.block.skillet.invalid_item": "Esto no se puede cocinar...",
   "farmersdelight.item.skillet.how_to_cook": "¡Usa tu otra mano para sostener ingredientes!",
 
-  "death.attack.farmersdelight.stove": "%1$s Fue cocinado a la perfección",
-  "death.attack.farmersdelight.stove.player": "%1$s Fue lanzado a la parrilla por el chef %2$s",
+  "death.attack.farmersdelight.stove": "%1$s fue cocinado a la perfección",
+  "death.attack.farmersdelight.stove.player": "%1$s fue lanzado a la parrilla por el chef %2$s",
 
   "farmersdelight.jei.cooking": "Cocinando",
   "farmersdelight.jei.cutting": "Tabla de picar",
