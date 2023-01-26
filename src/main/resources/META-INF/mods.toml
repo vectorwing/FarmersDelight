@@ -36,6 +36,6 @@ configBackground="minecraft:textures/block/bricks.png"
 [[dependencies.farmersdelight]]
     modId = "crafttweaker"
     mandatory = false
-    versionRange = "[10.0.20,)"
+    versionRange = "[10.0.25,)"
     ordering = "NONE"
     side = "BOTH"
