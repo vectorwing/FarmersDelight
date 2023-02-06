@@ -8,6 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CakeBlock;
+import net.minecraft.world.level.block.CandleCakeBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -51,6 +52,8 @@ public class PastrySlicingModifier extends LootModifier
 			if (targetBlock instanceof CakeBlock) {
 				int bites = state.getValue(CakeBlock.BITES);
 				generatedLoot.add(new ItemStack(pastrySlice, MAX_CAKE_BITES - bites));
+			} else if (targetBlock instanceof CandleCakeBlock) {
+				generatedLoot.add(new ItemStack(pastrySlice, MAX_CAKE_BITES));
 			} else if (targetBlock instanceof PieBlock) {
 				int bites = state.getValue(PieBlock.BITES);
 				generatedLoot.add(new ItemStack(pastrySlice, MAX_PIE_BITES - bites));
