@@ -10,6 +10,8 @@ import java.util.List;
 
 public class WrappedItemModel<T extends BakedModel> extends BakedModelWrapper<T>
 {
+	private final List<BakedModel> renderPasses = List.of(this);
+
 	public WrappedItemModel(T originalModel) {
 		super(originalModel);
 	}
@@ -27,6 +29,6 @@ public class WrappedItemModel<T extends BakedModel> extends BakedModelWrapper<T>
 
 	@Override
 	public List<BakedModel> getRenderPasses(ItemStack itemStack, boolean fabulous) {
-		return List.of(this);
+		return renderPasses;
 	}
 }
