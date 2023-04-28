@@ -25,6 +25,7 @@ public class Configuration
 	public static final String CATEGORY_FARMING = "farming";
 	public static ForgeConfigSpec.ConfigValue<String> DEFAULT_TOMATO_VINE_ROPE;
 	public static ForgeConfigSpec.BooleanValue ENABLE_TOMATO_VINE_CLIMBING_TAGGED_ROPES;
+	public static ForgeConfigSpec.BooleanValue ENABLE_NARROW_CROP_HITBOXES;
 
 	public static final String CATEGORY_RECIPE_BOOK = "recipe_book";
 	public static ForgeConfigSpec.BooleanValue ENABLE_RECIPE_BOOK_COOKING_POT;
@@ -95,6 +96,8 @@ public class Configuration
 		ENABLE_TOMATO_VINE_CLIMBING_TAGGED_ROPES = COMMON_BUILDER.comment("Should tomato vines be able to climb any rope tagged as farmersdelight:ropes?",
 						"Beware: this will convert these blocks into the block specified in defaultTomatoVineRope.")
 				.define("enableTomatoVineClimbingTaggedRopes", true);
+		ENABLE_NARROW_CROP_HITBOXES = COMMON_BUILDER.comment("Should crops blocks use narrower hitboxes that follow their rendered size closer?")
+				.define("enableNarrowCropHitboxes", false);
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("Recipe book").push(CATEGORY_RECIPE_BOOK);

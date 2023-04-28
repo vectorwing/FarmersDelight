@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
@@ -26,6 +27,17 @@ public class CabbageBlock extends CropBlock
 			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D)
 	};
 
+	private static final VoxelShape[] NARROW_SHAPE_BY_AGE = new VoxelShape[]{
+			Block.box(4.0D, 0.0D, 4.0D, 12.0D, 2.0D, 12.0D),
+			Block.box(4.0D, 0.0D, 4.0D, 12.0D, 3.0D, 12.0D),
+			Block.box(4.0D, 0.0D, 4.0D, 12.0D, 5.0D, 12.0D),
+			Block.box(4.0D, 0.0D, 4.0D, 12.0D, 7.0D, 12.0D),
+			Block.box(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D),
+			Block.box(3.0D, 0.0D, 3.0D, 13.0D, 9.0D, 13.0D),
+			Block.box(2.0D, 0.0D, 2.0D, 14.0D, 9.0D, 14.0D),
+			Block.box(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D)
+	};
+
 	public CabbageBlock(Properties properties) {
 		super(properties);
 	}
@@ -42,6 +54,6 @@ public class CabbageBlock extends CropBlock
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
+		return Configuration.ENABLE_NARROW_CROP_HITBOXES.get() ? NARROW_SHAPE_BY_AGE[state.getValue(this.getAgeProperty())] : SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
 	}
 }
