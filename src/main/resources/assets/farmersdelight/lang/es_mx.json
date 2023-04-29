@@ -65,7 +65,7 @@
   "block.farmersdelight.wild_carrots": "Zanahoria silvestre",
   "block.farmersdelight.wild_potatoes": "Papa Silvestre",
   "block.farmersdelight.wild_beetroots": "Betabel Silvestre",
-  "block.farmersdelight.wild_rice": "Arroz silvestre",
+  "block.farmersdelight.wild_rice": "Arroz Silvestre",
 
   "block.farmersdelight.apple_pie": "Pastel de Manzana",
   "block.farmersdelight.sweet_berry_cheesecake": "Pastel de Bayas Dulces",
@@ -94,7 +94,7 @@
   "item.farmersdelight.raw_pasta": "Pasta Cruda",
   "item.farmersdelight.pumpkin_slice": "Rebanada de Calabaza",
   "item.farmersdelight.cabbage_leaf": "Hoja de Repollo",
-  "item.farmersdelight.minced_beef": "Carne Picada",
+  "item.farmersdelight.minced_beef": "Carne Molida",
   "item.farmersdelight.beef_patty": "Carne de Hamburguesa",
   "item.farmersdelight.chicken_cuts": "Cortes de Pollo Crudos",
   "item.farmersdelight.cooked_chicken_cuts": "Cortes de pollo cocidos",
@@ -122,7 +122,7 @@
 
   "item.farmersdelight.earthworm": "Lombriz",
 
-  "item.farmersdelight.flint_knife": "Cuchillo de pedernal",
+  "item.farmersdelight.flint_knife": "Cuchillo de Pedernal",
   "item.farmersdelight.iron_knife": "Cuchillo de Hierro",
   "item.farmersdelight.golden_knife": "Cuchillo de Oro",
   "item.farmersdelight.diamond_knife": "Cuchillo de Diamante",
@@ -135,9 +135,9 @@
   "item.farmersdelight.bacon_sandwich": "Sándwich de Tocino",
   "item.farmersdelight.mutton_wrap": "Wrap de Cordero",
   "item.farmersdelight.dumplings": "Albóndigas",
-  "item.farmersdelight.stuffed_potato": "Patata rellena",
+  "item.farmersdelight.stuffed_potato": "Papa Rellena",
   "item.farmersdelight.cabbage_rolls": "Rollos de Repollo",
-  "item.farmersdelight.salmon_roll": "Rollo de Salmon",
+  "item.farmersdelight.salmon_roll": "Rollo de Salmón",
   "item.farmersdelight.cod_roll": "Rollo de Bacalao",
   "item.farmersdelight.kelp_roll": "Rollo de Algas",
   "item.farmersdelight.kelp_roll_slice": "Pedazo de Rollo de Algas",
@@ -151,12 +151,12 @@
   "item.farmersdelight.fish_stew": "Estofado de Pescado",
   "item.farmersdelight.fried_rice": "Arroz Frito",
   "item.farmersdelight.pumpkin_soup": "Sopa de Calabaza",
-  "item.farmersdelight.baked_cod_stew": "Estofado de Bacalao al horno",
+  "item.farmersdelight.baked_cod_stew": "Estofado de Bacalao al Horno",
   "item.farmersdelight.noodle_soup": "Sopa de Fideos",
   "item.farmersdelight.bone_broth": "Caldo de Huesos",
 
   "item.farmersdelight.bacon_and_eggs": "Huevos con Tocino",
-  "item.farmersdelight.pasta_with_meatballs": "Espagueti con albóndigas",
+  "item.farmersdelight.pasta_with_meatballs": "Espagueti con Albóndigas",
   "item.farmersdelight.pasta_with_mutton_chop": "Espagueti con Chuletas de Cordero",
   "item.farmersdelight.roasted_mutton_chops": "Chuletas de Cordero Asadas",
   "item.farmersdelight.steak_and_potatoes": "Carne y Papas",
@@ -186,7 +186,7 @@
   "effect.farmersdelight.comfort.0.desc": "Te da Regeneración, sin importar cuanta Hambre tengas.",
 
   "enchantment.farmersdelight.backstabbing": "Puñaladas",
-  "enchantment.farmersdelight.backstabbing.desc": "Amplia el daño al golpear a un objetivo por detrás.",
+  "enchantment.farmersdelight.backstabbing.desc": "Amplifica el daño al golpear a un objetivo por detrás.",
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
@@ -213,7 +213,7 @@
   "farmersdelight.advancement.craft_knife": "Caza y recolección",
   "farmersdelight.advancement.craft_knife.desc": "Crea un Cuchillo para Obtener más Recursos de las Plantas y Animales.",
   "farmersdelight.advancement.harvest_straw": "Agarrándose a las pajas",
-  "farmersdelight.advancement.harvest_straw.desc": "Cosecha plantas y cultivos de hierba con un cuchillo para obtener paja.",
+  "farmersdelight.advancement.harvest_straw.desc": "Cosecha Plantas y Cultivos de hierba con un Cuchillo para obtener Paja.",
   "farmersdelight.advancement.place_organic_compost": "Composta Avanzada",
   "farmersdelight.advancement.place_organic_compost.desc": "Coloca un par de bloques de Composta Orgánica. Es mejor cuando está bajo el Sol, con algo de Agua y Hongos!",
   "farmersdelight.advancement.get_rich_soil": "Alimento para Plantas",
@@ -260,11 +260,11 @@
   "farmersdelight.subtitles.stove.crackle": "Crujidos de la parrilla",
   "farmersdelight.subtitles.skillet.sizzle": "Sartén Chispando",
   "farmersdelight.subtitles.skillet.add_food": "Sartén Siseando",
-  "farmersdelight.subtitles.cabinet.open": "Gabinete abriéndose",
+  "farmersdelight.subtitles.cabinet.open": "Gabinete Abriéndose",
   "farmersdelight.subtitles.cabinet.close": "Gabinete Cerrándose",
   "farmersdelight.subtitles.tomato.pick": "Tomate estrellándose",
-  "farmersdelight.subtitles.rotten_tomato.throw": "Tomate Podrido disparado",
-  "farmersdelight.subtitles.rotten_tomato.hit": "Tomate Podrido estrellándose",
+  "farmersdelight.subtitles.rotten_tomato.throw": "Tomate Podrido Arrojado",
+  "farmersdelight.subtitles.rotten_tomato.hit": "Tomate Podrido Estrellándose",
 
   "farmersdelight.block.feast.use_container": "Necesitas un %s para comer esto.",
   "farmersdelight.block.rice.invalid_placement": "Este cultivo no sobrevivirá fuera de aguas poco profundas.",
@@ -274,7 +274,7 @@
   "farmersdelight.item.skillet.how_to_cook": "¡Usa tu otra mano para sostener ingredientes!",
 
   "death.attack.farmersdelight.stove": "%1$s fue cocinado a la perfección",
-  "death.attack.farmersdelight.stove.player": "%1$s Fue lanzado a la parrilla por el chef %2$s",
+  "death.attack.farmersdelight.stove.player": "%1$s fue lanzado a la parrilla por el chef %2$s",
 
   "farmersdelight.jei.cooking": "Cocinando",
   "farmersdelight.jei.cutting": "Tabla de picar",

@@ -18,7 +18,7 @@
 
 ### Translations
 - Updated:
-  - es_MX (thanks, cerealconjugo!);
+  - es_MX (thanks, cerealconjugo and Witixin1512!);
   - ja_JP (thanks, CKenJa and ksk3110!);
   - ko_KR (thanks, qkrehf2!);
   - pl_PL (thanks, KarolOfGutovo!);
