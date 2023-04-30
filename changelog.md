@@ -17,6 +17,7 @@
   - The fix should potentially prevent other modded trees from converting Rich Soil as well.
 - Fix wrong composting rates for a few items;
 - Fix Stuffed Pumpkin, Kelp Rolls and Sandy Shrub not being compostable;
+- Fix Skillet being able to break blocks on creative, despite being a weapon;
 
 ### Translations
 - Updated:
