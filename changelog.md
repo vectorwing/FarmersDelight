@@ -9,6 +9,7 @@
 - Pie and cake slices no longer cause potion particles when granting Speed to the user;
 - Tomato Vines now have a slightly thinner hitbox, to facilitate clicking blocks behind them;
 - Added Kelp to Crop Rotation advancement, as it can be cooked into food;
+- Rich Soil Farmland now uses its own farmland template, so that resource packs won't break the model by improperly changing vanilla templates...;
 - Updated the Cutting Board:
   - The player can no longer "attempt" to process a carved tool.
 
