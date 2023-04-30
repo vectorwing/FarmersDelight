@@ -19,12 +19,15 @@
 ### Translations
 - Updated:
   - ca_ES (thanks, DyaMetR!);
+  - de_DE (thanks, DaLumma!);
   - es_MX (thanks, cerealconjugo and Witixin1512!);
   - it_IT (thanks, BlackShadow77!);
   - ja_JP (thanks, CKenJa and ksk3110!);
   - ko_KR (thanks, qkrehf2!);
   - pl_PL (thanks, KarolOfGutovo!);
   - ru_RU (thanks, Pahuhopu!);
+  - tr_TR (thanks, gyrozeppelifan!);
+  - uk_UA (thanks, unroman!);
   - vi_VN (thanks, baooduy!);
   - zh_CN (thanks, IdealNightOcean and Andows96!);
   - zh_TW (thanks, xMikux, Pancakes0228 and StarskyXIII!);
