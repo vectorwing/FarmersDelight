@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleContainer;
@@ -43,7 +44,6 @@ import vectorwing.farmersdelight.common.utility.MathUtils;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
-import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class StoveBlock extends BaseEntityBlock
@@ -159,7 +159,8 @@ public class StoveBlock extends BaseEntityBlock
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState stateIn, Level level, BlockPos pos, Random rand) {
+	@Override
+	public void animateTick(BlockState stateIn, Level level, BlockPos pos, RandomSource rand) {
 		if (stateIn.getValue(CampfireBlock.LIT)) {
 			double x = (double) pos.getX() + 0.5D;
 			double y = pos.getY();

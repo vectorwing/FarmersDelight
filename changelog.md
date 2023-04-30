@@ -11,6 +11,7 @@
 - Added Kelp to Crop Rotation advancement, as it can be cooked into food;
 
 ### Fixes
+- (1.19) Fix Stove not emitting particles or ambient noise;
 - Fix the Crop Rotation advancement looking for `tomatoes` instead of `budding_tomatoes`, making it impossible to complete;
 - Fix wrong criterion on recipes for smelting Golden Knives;
 - Fix Rich Soil being turned into Rooted Dirt when growing Azalea trees on it;
