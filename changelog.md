@@ -9,6 +9,8 @@
 - Pie and cake slices no longer cause potion particles when granting Speed to the user;
 - Tomato Vines now have a slightly thinner hitbox, to facilitate clicking blocks behind them;
 - Added Kelp to Crop Rotation advancement, as it can be cooked into food;
+- Updated the Cutting Board:
+  - The player can no longer "attempt" to process a carved tool.
 
 ### Fixes
 - Fix the Crop Rotation advancement looking for `tomatoes` instead of `budding_tomatoes`, making it impossible to complete;
