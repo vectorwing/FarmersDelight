@@ -15,6 +15,8 @@
 - Fix wrong criterion on recipes for smelting Golden Knives;
 - Fix Rich Soil being turned into Rooted Dirt when growing Azalea trees on it;
   - The fix should potentially prevent other modded trees from converting Rich Soil as well.
+- Fix wrong composting rates for a few items;
+- Fix Stuffed Pumpkin, Kelp Rolls and Sandy Shrub not being compostable;
 
 ### Translations
 - Updated:
