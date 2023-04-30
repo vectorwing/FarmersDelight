@@ -26,6 +26,7 @@
   - ko_KR (thanks, qkrehf2!);
   - pl_PL (thanks, KarolOfGutovo!);
   - ru_RU (thanks, Pahuhopu!);
+  - sk_SK (thanks, davx!);
   - tr_TR (thanks, gyrozeppelifan!);
   - uk_UA (thanks, unroman!);
   - vi_VN (thanks, baooduy!);
