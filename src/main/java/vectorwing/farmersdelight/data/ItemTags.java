@@ -64,7 +64,8 @@ public class ItemTags extends ItemTagsProvider
 				.add(ModItems.JUNGLE_CABINET.get())
 				.add(ModItems.OAK_CABINET.get())
 				.add(ModItems.SPRUCE_CABINET.get())
-				.add(ModItems.WARPED_CABINET.get());
+				.add(ModItems.WARPED_CABINET.get())
+				.add(ModItems.MANGROVE_CABINET.get());
 		tag(ModTags.CABINETS).addTag(ModTags.WOODEN_CABINETS);
 		tag(ModTags.OFFHAND_EQUIPMENT).add(Items.SHIELD).addOptional(new ResourceLocation("create:extendo_grip"));
 	}
