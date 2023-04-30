@@ -18,12 +18,15 @@
 
 ### Translations
 - Updated:
+  - ca_ES (thanks, DyaMetR!);
   - es_MX (thanks, cerealconjugo and Witixin1512!);
+  - it_IT (thanks, BlackShadow77!);
   - ja_JP (thanks, CKenJa and ksk3110!);
   - ko_KR (thanks, qkrehf2!);
   - pl_PL (thanks, KarolOfGutovo!);
+  - ru_RU (thanks, Pahuhopu!);
   - vi_VN (thanks, baooduy!);
-  - zh_CN (thanks, IdealNightOcean!);
+  - zh_CN (thanks, IdealNightOcean and Andows96!);
   - zh_TW (thanks, xMikux, Pancakes0228 and StarskyXIII!);
 
 ## 1.2.0
