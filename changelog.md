@@ -6,7 +6,10 @@
 - (1.18 only) CraftTweaker integration has been re-enabled (thanks, Witixin1512!):
   - This integration exposes `recipe_book_tab` and `farmersdelight:tool_action` to CT scripts;
 - Updated Botany Pots integration, to conform with new schemas and to allow Mushroom Colony growth (thanks, Darkhax!);
-- Pie and cake slices no longer cause potion particles when granting Speed to the user;
+- Updated Cake and Pie slices:
+  - When slicing a cake, slices will drop from the cut side in a neat little row;
+  - When slicing a pie, slices will drop towards the user's side;
+  - Eating either block or slice no longer causes potion particles when granting Speed to the user;
 - Tomato Vines now have a slightly thinner hitbox, to facilitate clicking blocks behind them;
 - Added Kelp to Crop Rotation advancement, as it can be cooked into food;
 - Rich Soil Farmland now uses its own farmland template, so that resource packs won't break the model by improperly changing vanilla templates...;

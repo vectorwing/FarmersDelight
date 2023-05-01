@@ -30,6 +30,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.tag.ModTags;
+import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 import java.util.function.Supplier;
 
@@ -72,7 +73,7 @@ public class PieBlock extends Block
 		ItemStack heldStack = player.getItemInHand(hand);
 		if (level.isClientSide) {
 			if (heldStack.is(ModTags.KNIVES)) {
-				return cutSlice(level, pos, state);
+				return cutSlice(level, pos, state, player);
 			}
 
 			if (this.consumeBite(level, pos, state, player) == InteractionResult.SUCCESS) {
@@ -85,7 +86,7 @@ public class PieBlock extends Block
 		}
 
 		if (heldStack.is(ModTags.KNIVES)) {
-			return cutSlice(level, pos, state);
+			return cutSlice(level, pos, state, player);
 		}
 		return this.consumeBite(level, pos, state, player);
 	}
@@ -123,14 +124,17 @@ public class PieBlock extends Block
 	/**
 	 * Cuts off a bite and drops a slice item, without feeding the player.
 	 */
-	protected InteractionResult cutSlice(Level level, BlockPos pos, BlockState state) {
+	protected InteractionResult cutSlice(Level level, BlockPos pos, BlockState state, Player player) {
 		int bites = state.getValue(BITES);
 		if (bites < getMaxBites() - 1) {
 			level.setBlock(pos, state.setValue(BITES, bites + 1), 3);
 		} else {
 			level.removeBlock(pos, false);
 		}
-		Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), this.getPieSliceItem());
+
+		Direction direction = player.getDirection().getOpposite();
+		ItemUtils.spawnItemEntity(level, this.getPieSliceItem(), pos.getX() + 0.5, pos.getY() + 0.3, pos.getZ() + 0.5,
+				direction.getStepX() * 0.15, 0.05, direction.getStepZ() * 0.15);
 		level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
 		return InteractionResult.SUCCESS;
 	}
