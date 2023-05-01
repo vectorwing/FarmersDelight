@@ -22,6 +22,7 @@
 - Fix Stuffed Pumpkin, Kelp Rolls and Sandy Shrub not being compostable;
 - Fix Skillet being able to break blocks on creative, despite being a weapon;
 - Fix Mooshroom and Trader Llama not being scavengeable for Leather when killed with a Knife;
+- Fix Full Tatami Mats being placeable if the space ahead is unsupported, which caused them to break instantly;
 
 ### Translations
 - Updated:
