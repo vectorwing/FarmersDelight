@@ -23,6 +23,7 @@
 - Fix Skillet being able to break blocks on creative, despite being a weapon;
 - Fix Mooshroom and Trader Llama not being scavengeable for Leather when killed with a Knife;
 - Fix Full Tatami Mats being placeable if the space ahead is unsupported, which caused them to break instantly;
+- Fix Candle Cakes not dropping slices when mined with a knife (thanks, edgarogh!);
 
 ### Translations
 - Updated:
