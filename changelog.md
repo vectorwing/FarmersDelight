@@ -21,6 +21,7 @@
 - Fix wrong composting rates for a few items;
 - Fix Stuffed Pumpkin, Kelp Rolls and Sandy Shrub not being compostable;
 - Fix Skillet being able to break blocks on creative, despite being a weapon;
+- Fix Mooshroom and Trader Llama not being scavengeable for Leather when killed with a Knife;
 
 ### Translations
 - Updated:

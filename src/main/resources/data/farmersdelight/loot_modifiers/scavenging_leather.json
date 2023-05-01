@@ -26,6 +26,13 @@
           "condition": "minecraft:entity_properties",
           "entity": "this",
           "predicate": {
+            "type": "minecraft:mooshroom"
+          }
+        },
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
             "type": "minecraft:donkey"
           }
         },
@@ -40,6 +47,13 @@
           "condition": "minecraft:entity_properties",
           "entity": "this",
           "predicate": {
+            "type": "minecraft:mule"
+          }
+        },
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
             "type": "minecraft:llama"
           }
         },
@@ -47,7 +61,7 @@
           "condition": "minecraft:entity_properties",
           "entity": "this",
           "predicate": {
-            "type": "minecraft:mule"
+            "type": "minecraft:trader_llama"
           }
         }
       ]
