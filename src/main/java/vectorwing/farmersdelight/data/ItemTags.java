@@ -124,7 +124,7 @@ public class ItemTags extends ItemTagsProvider
 		tag(ForgeTags.SALAD_INGREDIENTS).addTags(ForgeTags.SALAD_INGREDIENTS_CABBAGE);
 		tag(ForgeTags.SALAD_INGREDIENTS_CABBAGE).add(ModItems.CABBAGE.get(), ModItems.CABBAGE_LEAF.get());
 
-		tag(ForgeTags.SEEDS).addTags(ForgeTags.SEEDS_CABBAGE, ForgeTags.SEEDS_RICE, ForgeTags.SEEDS_TOMATO);
+		tag(ForgeTags.SEEDS).addTags(ForgeTags.SEEDS_CABBAGE, ForgeTags.SEEDS_RICE, ForgeTags.SEEDS_TOMATO).add(ModItems.ONION.get());
 		tag(ForgeTags.SEEDS_CABBAGE).add(ModItems.CABBAGE_SEEDS.get());
 		tag(ForgeTags.SEEDS_RICE).add(ModItems.RICE.get());
 		tag(ForgeTags.SEEDS_TOMATO).add(ModItems.TOMATO_SEEDS.get());
