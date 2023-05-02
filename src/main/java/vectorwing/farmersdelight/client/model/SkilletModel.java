@@ -17,11 +17,14 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.SimpleModelState;
+import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import vectorwing.farmersdelight.common.registry.ModItems;
+
 import java.util.*;
 
 /**
@@ -140,18 +143,22 @@ public class SkilletModel implements BakedModel
 			}
 
 			RandomSource rand = RandomSource.create(0);
-			genQuads.addAll(ingredientBaked.getQuads(null, null, rand));
+			for (BakedModel pass : ingredientBaked.getRenderPasses(ingredientStack, false)) {
+				genQuads.addAll(pass.getQuads(null, null, rand, ModelData.EMPTY, null));
 
-			for (Direction e : Direction.values()) {
-				rand.setSeed(0);
-				faceQuads.get(e).addAll(ingredientBaked.getQuads(null, e, rand));
+				for (Direction e : Direction.values()) {
+					rand.setSeed(0);
+					faceQuads.get(e).addAll(pass.getQuads(null, e, rand, ModelData.EMPTY, null));
+				}
 			}
 
-			rand.setSeed(0);
-			genQuads.addAll(skillet.getQuads(null, null, rand));
-			for (Direction e : Direction.values()) {
+			for (BakedModel pass : skillet.getRenderPasses(ModItems.SKILLET.get().getDefaultInstance(), false)) {
 				rand.setSeed(0);
-				faceQuads.get(e).addAll(skillet.getQuads(null, e, rand));
+				genQuads.addAll(pass.getQuads(null, null, rand, ModelData.EMPTY, null));
+				for (Direction e : Direction.values()) {
+					rand.setSeed(0);
+					faceQuads.get(e).addAll(pass.getQuads(null, e, rand, ModelData.EMPTY, null));
+				}
 			}
 		}
 
