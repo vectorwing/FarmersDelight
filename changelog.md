@@ -12,6 +12,7 @@
 
 ### Fixes
 - (1.19) Fix Stove not emitting particles or ambient noise;
+- (1.19) Fix containers (bowls, bottles etc.) not being searchable as recipe inputs in JEI;
 - Fix the Crop Rotation advancement looking for `tomatoes` instead of `budding_tomatoes`, making it impossible to complete;
 - Fix wrong criterion on recipes for smelting Golden Knives;
 - Fix Rich Soil being turned into Rooted Dirt when growing Azalea trees on it;
