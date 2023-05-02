@@ -5,7 +5,7 @@
 ### Updates
 - (1.18 only) CraftTweaker integration has been re-enabled (thanks, Witixin1512!):
   - This integration exposes `recipe_book_tab` and `farmersdelight:tool_action` to CT scripts;
-- Updated Botany Pots integration, to conform with new schemas and to allow Mushroom Colony growth (thanks, Darkhax!);
+- Removed local Botany Pots integration. It is now integrated within Botany Pots itself, in newer versions;
 - Updated Cake and Pie slices:
   - When slicing a cake, slices will drop from the cut side in a neat little row;
   - When slicing a pie, slices will drop towards the user's side;
