@@ -65,19 +65,18 @@ public final class CookingPotRecipeHandler implements IRecipeHandler<CookingPotR
         final IItemStack output = recipe.getOrThrowSingle(BuiltinRecipeComponents.Output.ITEMS);
         final List<IIngredient> ingredients = recipe.getOrThrow(BuiltinRecipeComponents.Input.INGREDIENTS);
         final NonNullList<Ingredient> inputList = NonNullList.create();
-
         for (IIngredient ingredient : ingredients) {
             if (!ingredient.isEmpty()) {
                 inputList.add(ingredient.asVanillaIngredient());
             }
         }
-
         final int time = recipe.getOrThrowSingle(BuiltinRecipeComponents.Processing.TIME);
         final String group = recipe.getOrThrowSingle(BuiltinRecipeComponents.Metadata.GROUP);
         final IItemStack container = recipe.getOrThrowSingle(RecipeHandlerUtils.CONTAINER_COMPONENT);
         final float exp = recipe.getOrThrowSingle(BuiltinRecipeComponents.Output.EXPERIENCE);
+        //We're using get here to avoid exceptions.
         final List<String> cookingRecipeBookTabList = recipe.get(RecipeHandlerUtils.COOKING_TAB_COMPONENT);
-        final CookingPotRecipeBookTab cookTab = cookingRecipeBookTabList == null ? null: CookingPotRecipeBookTab.valueOf(cookingRecipeBookTabList.get(0));
+        final CookingPotRecipeBookTab cookTab = cookingRecipeBookTabList == null ? null : CookingPotRecipeBookTab.valueOf(cookingRecipeBookTabList.get(0));
         return Optional.of(new CookingPotRecipe(name, group, cookTab, inputList, output.getInternal(), container.getInternal(), exp, time));
     }
 }
