@@ -23,7 +23,7 @@ import vectorwing.farmersdelight.common.utility.ListUtils;
  *
  * @docParam this <recipetype:farmersdelight:cooking>
  */
-@Document("mods/farmersdelight/CookingPot")
+@Document("mods/FarmersDelight/CookingPot")
 @ZenRegister
 @ZenCodeType.Name("mods.farmersdelight.CookingPot")
 public class CookingPotRecipeManager implements IRecipeManager

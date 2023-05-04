@@ -11,7 +11,7 @@ import net.minecraftforge.common.ToolAction;
 import org.openzen.zencode.java.ZenCodeType;
 import vectorwing.farmersdelight.common.crafting.ingredient.ToolActionIngredient;
 
-@Document("mods/farmersdelight/ToolActionIngredient")
+@Document("mods/FarmersDelight/ToolActionIngredient")
 @ZenRegister
 @ZenCodeType.Name("mods.farmersdelight.ToolActionIngredient")
 public class CTToolActionIngredient implements IIngredient {

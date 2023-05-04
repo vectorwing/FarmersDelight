@@ -7,7 +7,7 @@ import com.blamejared.crafttweaker_annotations.annotations.NativeTypeRegistratio
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 
 
-@Document("mods/farmersdelight/CookingPotRecipeBookTab")
+@Document("mods/FarmersDelight/CookingPotRecipeBookTab")
 @ZenRegister
 @BracketEnum("farmersdelight:cooking_pot_recipe_book_tab")
 @NativeTypeRegistration(zenCodeName = "mods.farmersdelight.CookingPotRecipeBookTab", value = CookingPotRecipeBookTab.class)
