@@ -155,7 +155,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 	public int hashCode() {
 		int result = getId().hashCode();
 		result = 31 * result + getGroup().hashCode();
-		result = 31 * result + tab.hashCode();
+		result = 31 * result + (getRecipeBookTab() != null ? getRecipeBookTab().hashCode() : 0);
 		result = 31 * result + inputItems.hashCode();
 		result = 31 * result + output.hashCode();
 		result = 31 * result + container.hashCode();

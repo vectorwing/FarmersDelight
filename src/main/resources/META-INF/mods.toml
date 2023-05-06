@@ -32,7 +32,6 @@ configBackground="minecraft:textures/block/bricks.png"
     ordering="NONE"
     side="BOTH"
 
-#This will obviously need updating on every major version...
 [[dependencies.farmersdelight]]
     modId = "crafttweaker"
     mandatory = false

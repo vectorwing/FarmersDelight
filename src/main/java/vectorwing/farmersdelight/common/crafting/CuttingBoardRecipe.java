@@ -69,14 +69,6 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper>
 		return nonnulllist;
 	}
 
-	//This method is unused in regular F'D. For CraftTweaker support, if the tool goes first we can easily wrap/unwrap to and from IIngredient
-	public NonNullList<Ingredient> getIngredientsAndTool() {
-		NonNullList<Ingredient> nonnulllist = NonNullList.create();
-		nonnulllist.add(this.tool);
-		nonnulllist.add(this.input);
-		return nonnulllist;
-	}
-
 	public Ingredient getTool() {
 		return this.tool;
 	}
