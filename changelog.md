@@ -3,9 +3,10 @@
 ## 1.2.1
 
 ### Updates
-- (1.18 only) CraftTweaker integration has been re-enabled (thanks, Witixin1512!):
+- CraftTweaker integration has been re-enabled (thanks, Witixin1512!):
   - This integration exposes `recipe_book_tab` and `farmersdelight:tool_action` to CT scripts;
-- Removed local Botany Pots integration. It is now integrated within Botany Pots itself, in newer versions;
+- Updated the Cutting Board:
+  - The player can no longer "attempt" to process a carved tool.
 - Updated Cake and Pie slices:
   - When slicing a cake, slices will drop from the cut side in a neat little row;
   - When slicing a pie, slices will drop towards the user's side;
@@ -13,8 +14,7 @@
 - Tomato Vines now have a slightly thinner hitbox, to facilitate clicking blocks behind them;
 - Added Kelp to Crop Rotation advancement, as it can be cooked into food;
 - Rich Soil Farmland now uses its own farmland template, so that resource packs won't break the model by improperly changing vanilla templates...;
-- Updated the Cutting Board:
-  - The player can no longer "attempt" to process a carved tool.
+- Removed local Botany Pots integration. It is now integrated within Botany Pots itself, in newer versions;
 
 ### Fixes
 - Fix the Crop Rotation advancement looking for `tomatoes` instead of `budding_tomatoes`, making it impossible to complete;
