@@ -3,12 +3,18 @@
 ## 1.2.1
 
 ### Updates
-- (1.18 only) CraftTweaker integration has been re-enabled (thanks, Witixin1512!):
+- CraftTweaker integration has been re-enabled (thanks, Witixin1512!):
   - This integration exposes `recipe_book_tab` and `farmersdelight:tool_action` to CT scripts;
-- Updated Botany Pots integration, to conform with new schemas and to allow Mushroom Colony growth (thanks, Darkhax!);
-- Pie and cake slices no longer cause potion particles when granting Speed to the user;
+- Updated the Cutting Board:
+  - The player can no longer "attempt" to process a carved tool.
+- Updated Cake and Pie slices:
+  - When slicing a cake, slices will drop from the cut side in a neat little row;
+  - When slicing a pie, slices will drop towards the user's side;
+  - Eating either block or slice no longer causes potion particles when granting Speed to the user;
 - Tomato Vines now have a slightly thinner hitbox, to facilitate clicking blocks behind them;
 - Added Kelp to Crop Rotation advancement, as it can be cooked into food;
+- Rich Soil Farmland now uses its own farmland template, so that resource packs won't break the model by improperly changing vanilla templates...;
+- Removed local Botany Pots integration. It is now integrated within Botany Pots itself, in newer versions;
 
 ### Fixes
 - (1.19) Fix Stove not emitting particles or ambient noise;
@@ -17,6 +23,12 @@
 - Fix wrong criterion on recipes for smelting Golden Knives;
 - Fix Rich Soil being turned into Rooted Dirt when growing Azalea trees on it;
   - The fix should potentially prevent other modded trees from converting Rich Soil as well.
+- Fix wrong composting rates for a few items;
+- Fix Stuffed Pumpkin, Kelp Rolls and Sandy Shrub not being compostable;
+- Fix Skillet being able to break blocks on creative, despite being a weapon;
+- Fix Mooshroom and Trader Llama not being scavengeable for Leather when killed with a Knife;
+- Fix Full Tatami Mats being placeable if the space ahead is unsupported, which caused them to break instantly;
+- Fix Candle Cakes not dropping slices when mined with a knife (thanks, edgarogh!);
 
 ### Translations
 - Updated:

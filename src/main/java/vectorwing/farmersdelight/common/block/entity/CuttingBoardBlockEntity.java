@@ -74,6 +74,8 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 	public boolean processStoredItemUsingTool(ItemStack toolStack, @Nullable Player player) {
 		if (level == null) return false;
 
+		if (isItemCarvingBoard) return false;
+
 		Optional<CuttingBoardRecipe> matchingRecipe = getMatchingRecipe(new RecipeWrapper(inventory), toolStack, player);
 
 		matchingRecipe.ifPresent(recipe -> {

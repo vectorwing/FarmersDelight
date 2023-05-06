@@ -32,6 +32,7 @@ import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ModTags;
+import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 import java.util.Set;
 
@@ -76,11 +77,14 @@ public class KnifeItem extends DiggerItem
 			BlockPos pos = event.getPos();
 			BlockState state = event.getLevel().getBlockState(pos);
 			Block block = state.getBlock();
+			Direction direction = event.getPlayer().getDirection().getOpposite();
 
 			if (state.is(ModTags.DROPS_CAKE_SLICE)) {
 				level.setBlock(pos, Blocks.CAKE.defaultBlockState().setValue(CakeBlock.BITES, 1), 3);
 				Block.dropResources(state, level, pos);
-				Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ModItems.CAKE_SLICE.get()));
+				ItemUtils.spawnItemEntity(level, new ItemStack(ModItems.CAKE_SLICE.get()),
+						pos.getX(), pos.getY() + 0.2, pos.getZ() + 0.5,
+						-0.05, 0, 0);
 				level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
 
 				event.setCancellationResult(InteractionResult.SUCCESS);
@@ -94,7 +98,9 @@ public class KnifeItem extends DiggerItem
 				} else {
 					level.removeBlock(pos, false);
 				}
-				Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ModItems.CAKE_SLICE.get()));
+				ItemUtils.spawnItemEntity(level, new ItemStack(ModItems.CAKE_SLICE.get()),
+						pos.getX() + (bites * 0.1), pos.getY() + 0.2, pos.getZ() + 0.5,
+						-0.05, 0, 0);
 				level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
 
 				event.setCancellationResult(InteractionResult.SUCCESS);

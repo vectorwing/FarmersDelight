@@ -105,9 +105,13 @@ public class TatamiMatBlock extends HorizontalDirectionalBlock
 	@Override
 	@Nullable
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		Level level = context.getLevel();
 		Direction facing = context.getHorizontalDirection();
-		BlockPos pos = context.getClickedPos();
-		BlockPos pairPos = pos.relative(facing);
-		return context.getLevel().getBlockState(pairPos).canBeReplaced(context) ? this.defaultBlockState().setValue(FACING, facing) : null;
+		BlockPos pairPos = context.getClickedPos().relative(facing);
+		BlockState pairState = context.getLevel().getBlockState(pairPos);
+		if (pairState.canBeReplaced(context) && canSurvive(pairState, level, pairPos)) {
+			return this.defaultBlockState().setValue(FACING, facing);
+		}
+		return null;
 	}
 }

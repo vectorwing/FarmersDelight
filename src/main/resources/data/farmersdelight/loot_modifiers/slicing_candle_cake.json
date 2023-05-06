@@ -1,0 +1,86 @@
+{
+  "type": "farmersdelight:add_item",
+  "conditions": [
+    {
+      "condition": "minecraft:match_tool",
+      "predicate": {
+        "tag": "farmersdelight:tools/knives"
+      }
+    },
+    {
+      "condition": "minecraft:alternative",
+      "terms":[
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:candle_cake"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:white_candle_cake"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:orange_candle_cake"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:magenta_candle_cake"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:light_blue_candle_cake"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:yellow_candle_cake"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:lime_candle_cake"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:pink_candle_cake"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:gray_candle_cake"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:light_gray_candle_cake"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:cyan_candle_cake"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:purple_candle_cake"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:blue_candle_cake"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:brown_candle_cake"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:green_candle_cake"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:red_candle_cake"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:black_candle_cake"
+        }
+      ]
+    }
+  ],
+  "item": "farmersdelight:cake_slice",
+  "count": 7
+}
