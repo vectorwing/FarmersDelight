@@ -31,3 +31,11 @@ configBackground="minecraft:textures/block/bricks.png"
     versionRange="[1.19,1.20)"
     ordering="NONE"
     side="BOTH"
+
+#This will obviously need updating on every major version...
+[[dependencies.farmersdelight]]
+    modId = "crafttweaker"
+    mandatory = false
+    versionRange = "[10.1.41,)"
+    ordering = "NONE"
+    side = "BOTH"

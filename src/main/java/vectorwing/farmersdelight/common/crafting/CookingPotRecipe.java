@@ -134,6 +134,36 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 		return new ItemStack(ModItems.COOKING_POT.get());
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		CookingPotRecipe that = (CookingPotRecipe) o;
+
+		if (Float.compare(that.getExperience(), getExperience()) != 0) return false;
+		if (getCookTime() != that.getCookTime()) return false;
+		if (!getId().equals(that.getId())) return false;
+		if (!getGroup().equals(that.getGroup())) return false;
+		if (tab != that.tab) return false;
+		if (!inputItems.equals(that.inputItems)) return false;
+		if (!output.equals(that.output)) return false;
+		return container.equals(that.container);
+	}
+
+	@Override
+	public int hashCode() {
+		int result = getId().hashCode();
+		result = 31 * result + getGroup().hashCode();
+		result = 31 * result + tab.hashCode();
+		result = 31 * result + inputItems.hashCode();
+		result = 31 * result + output.hashCode();
+		result = 31 * result + container.hashCode();
+		result = 31 * result + (getExperience() != +0.0f ? Float.floatToIntBits(getExperience()) : 0);
+		result = 31 * result + getCookTime();
+		return result;
+	}
+
 	public static class Serializer implements RecipeSerializer<CookingPotRecipe>
 	{
 		public Serializer() {

@@ -8,10 +8,10 @@ import com.blamejared.crafttweaker.api.ingredient.IIngredient;
 import com.blamejared.crafttweaker.api.item.IItemStack;
 import com.blamejared.crafttweaker.api.recipe.manager.base.IRecipeManager;
 import com.blamejared.crafttweaker_annotations.annotations.Document;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
 import org.openzen.zencode.java.ZenCodeType;
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
@@ -23,13 +23,14 @@ import vectorwing.farmersdelight.common.utility.ListUtils;
  *
  * @docParam this <recipetype:farmersdelight:cooking>
  */
-//@Document("mods/farmersdelight/CookingPot")
-//@ZenRegister
-//@ZenCodeType.Name("mods.farmersdelight.CookingPot")
+@Document("mods/FarmersDelight/CookingPot")
+@ZenRegister
+@ZenCodeType.Name("mods.farmersdelight.CookingPot")
 public class CookingPotRecipeManager implements IRecipeManager
 {
     /**
      * Add a cooking pot recipe.
+     * The Cooking Tab is optional.
      *
      * @param name       Name of the recipe to add
      * @param output     Output item
