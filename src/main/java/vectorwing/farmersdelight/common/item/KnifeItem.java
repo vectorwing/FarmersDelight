@@ -77,7 +77,6 @@ public class KnifeItem extends DiggerItem
 			BlockPos pos = event.getPos();
 			BlockState state = event.getWorld().getBlockState(pos);
 			Block block = state.getBlock();
-			Direction direction = event.getPlayer().getDirection().getOpposite();
 
 			if (state.is(ModTags.DROPS_CAKE_SLICE)) {
 				level.setBlock(pos, Blocks.CAKE.defaultBlockState().setValue(CakeBlock.BITES, 1), 3);

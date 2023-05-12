@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.2
+
+### Fixes
+- Fix Lily Pads and other water plants being plantable on Rich Soil;
+
 ## 1.2.1
 
 ### Updates
