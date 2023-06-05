@@ -150,8 +150,7 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper>
 		public CuttingBoardRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
 			final String groupIn = GsonHelper.getAsString(json, "group", "");
 			final NonNullList<Ingredient> inputItemsIn = readIngredients(GsonHelper.getAsJsonArray(json, "ingredients"));
-			final JsonObject toolObject = GsonHelper.getAsJsonObject(json, "tool");
-			final Ingredient toolIn = Ingredient.fromJson(toolObject);
+			final Ingredient toolIn = Ingredient.fromJson(json.get("tool"));
 			if (inputItemsIn.isEmpty()) {
 				throw new JsonParseException("No ingredients for cutting recipe");
 			} else if (toolIn.isEmpty()) {
