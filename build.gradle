@@ -33,7 +33,7 @@ archivesBaseName = 'FarmersDelight'
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 minecraft {
-//    mappings channel: 'parchment', version: '2022.06.05-1.18.2'
+//    mappings channel: 'parchment', version: '2023.03.12-1.19.3'
     mappings channel: 'official', version: "${mc_version}"
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
@@ -123,15 +123,15 @@ dependencies {
     // at runtime, use the full JEI jar for Forge
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 
-    compileOnly fg.deobf("squeek.appleskin:appleskin-forge:${appleskin_version}:api")
-    runtimeOnly fg.deobf("squeek.appleskin:appleskin-forge:${appleskin_version}")
+//    compileOnly fg.deobf("squeek.appleskin:appleskin-forge:${appleskin_version}:api")
+//    runtimeOnly fg.deobf("squeek.appleskin:appleskin-forge:${appleskin_version}")
 
-    def ctDep = fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.19.2:${crafttweaker_version}")
-    compileOnly ctDep
-    runtimeOnly ctDep
+//    def ctDep = fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.19.2:${crafttweaker_version}")
+//    compileOnly ctDep
+//    runtimeOnly ctDep
 
-    annotationProcessor ctDep
-    annotationProcessor "com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors:${crafttweaker_ap_version}"
+//    annotationProcessor ctDep
+//    annotationProcessor "com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors:${crafttweaker_ap_version}"
     annotationProcessor "org.reflections:reflections:0.9.10" // CT dep
     annotationProcessor "com.google.code.gson:gson:2.8.7" // CT dep
 
