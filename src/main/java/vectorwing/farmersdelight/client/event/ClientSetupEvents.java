@@ -11,6 +11,7 @@ import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.client.event.ModelEvent.BakingCompleted;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.client.event.RegisterRecipeBookCategoriesEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -23,9 +24,7 @@ import vectorwing.farmersdelight.client.renderer.CanvasSignRenderer;
 import vectorwing.farmersdelight.client.renderer.CuttingBoardRenderer;
 import vectorwing.farmersdelight.client.renderer.SkilletRenderer;
 import vectorwing.farmersdelight.client.renderer.StoveRenderer;
-import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
-import vectorwing.farmersdelight.common.registry.ModEntityTypes;
-import vectorwing.farmersdelight.common.registry.ModParticleTypes;
+import vectorwing.farmersdelight.common.registry.*;
 
 import java.util.Map;
 
@@ -48,6 +47,14 @@ public class ClientSetupEvents
 	@SubscribeEvent
 	public static void onEntityRendererRegister(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(ModEntityTypes.ROTTEN_TOMATO.get(), ThrownItemRenderer::new);
+	}
+
+
+	@SubscribeEvent
+	public static void onCreativeTabContents(BuildCreativeModeTabContentsEvent event) {
+		if (event.getTabKey() == ModCreativeTabs.TAB_FARMERS_DELIGHT.getKey()) {
+			ModItems.CREATIVE_TAB_ITEMS.forEach(event::accept);
+		}
 	}
 
 	@SubscribeEvent
