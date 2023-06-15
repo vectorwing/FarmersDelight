@@ -103,15 +103,17 @@ public class CanvasSignRenderer extends SignRenderer
 			return list.isEmpty() ? FormattedCharSequence.EMPTY : list.get(0);
 		});
 
-		int darkColor = getDarkColor(text);
+		int darkColor;
 		int baseColor;
 		boolean hasOutline;
 		int light;
 		if (text.hasGlowingText()) {
+			darkColor = getDarkColor(text, true);
 			baseColor = text.getColor().getTextColor();
 			hasOutline = isOutlineVisible(pos, baseColor);
 			light = 15728880;
 		} else {
+			darkColor = getDarkColor(text, false);
 			baseColor = darkColor;
 			hasOutline = false;
 			light = packedLight;
@@ -156,12 +158,12 @@ public class CanvasSignRenderer extends SignRenderer
 		}
 	}
 
-	protected static int getDarkColor(SignText text) {
+	protected static int getDarkColor(SignText text, boolean isOutlineVisible) {
 		int textColor = text.getColor().getTextColor();
 		if (textColor == DyeColor.BLACK.getTextColor() && text.hasGlowingText()) {
 			return -988212;
 		} else {
-			double brightness = 0.4D;
+			double brightness = isOutlineVisible ? 0.4D : 0.6D;
 			int red = (int) ((double) FastColor.ARGB32.red(textColor) * brightness);
 			int green = (int) ((double) FastColor.ARGB32.green(textColor) * brightness);
 			int blue = (int) ((double) FastColor.ARGB32.blue(textColor) * brightness);

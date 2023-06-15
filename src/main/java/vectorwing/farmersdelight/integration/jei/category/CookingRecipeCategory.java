@@ -12,6 +12,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -20,6 +21,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.utility.RecipeUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 import vectorwing.farmersdelight.integration.jei.FDRecipeTypes;
 
@@ -30,7 +32,6 @@ import java.util.Arrays;
 @MethodsReturnNonnullByDefault
 public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 {
-	//	public static final ResourceLocation UID = new ResourceLocation(FarmersDelight.MODID, "cooking");
 	protected final IDrawable heatIndicator;
 	protected final IDrawableAnimated arrow;
 	private final Component title;
@@ -46,16 +47,6 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 		arrow = helper.drawableBuilder(backgroundImage, 176, 15, 24, 17)
 				.buildAnimated(200, IDrawableAnimated.StartDirection.LEFT, false);
 	}
-
-//	@Override
-//	public ResourceLocation getUid() {
-//		return this.getRecipeType().getUid();
-//	}
-
-//	@Override
-//	public Class<? extends CookingPotRecipe> getRecipeClass() {
-//		return this.getRecipeType().getRecipeClass();
-//	}
 
 	@Override
 	public RecipeType<CookingPotRecipe> getRecipeType() {
@@ -80,7 +71,7 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, CookingPotRecipe recipe, IFocusGroup focusGroup) {
 		NonNullList<Ingredient> recipeIngredients = recipe.getIngredients();
-		ItemStack resultStack = recipe.getResultItem();
+		ItemStack resultStack = RecipeUtils.getResultItem(recipe);
 		ItemStack containerStack = recipe.getOutputContainer();
 
 		int borderSlotSize = 18;
@@ -104,8 +95,8 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 	}
 
 	@Override
-	public void draw(CookingPotRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
-		arrow.draw(matrixStack, 60, 9);
-		heatIndicator.draw(matrixStack, 18, 39);
+	public void draw(CookingPotRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+		arrow.draw(guiGraphics, 60, 9);
+		heatIndicator.draw(guiGraphics, 18, 39);
 	}
 }

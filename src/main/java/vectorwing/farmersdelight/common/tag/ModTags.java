@@ -1,7 +1,11 @@
 package vectorwing.farmersdelight.common.tag;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -81,14 +85,14 @@ public class ModTags
 	public static final TagKey<EntityType<?>> HORSE_FEED_USERS = modEntityTag("horse_feed_users");
 
 	private static TagKey<Item> modItemTag(String path) {
-		return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(FarmersDelight.MODID + ":" + path));
+		return ItemTags.create(new ResourceLocation(FarmersDelight.MODID, path));
 	}
 
 	private static TagKey<Block> modBlockTag(String path) {
-		return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(FarmersDelight.MODID + ":" + path));
+		return BlockTags.create(new ResourceLocation(FarmersDelight.MODID, path));
 	}
 
 	private static TagKey<EntityType<?>> modEntityTag(String path) {
-		return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(FarmersDelight.MODID + ":" + path));
+		return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(FarmersDelight.MODID, path));
 	}
 }

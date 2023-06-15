@@ -12,6 +12,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -94,46 +95,8 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 		}
 	}
 
-//	@Override
-//	public void setRecipe(IRecipeLayout recipeLayout, CuttingBoardRecipe recipe, IIngredients ingredients) {
-//		IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
-//		NonNullList<ChanceResult> recipeOutputs = recipe.getRollableResults();
-//
-//		// Draw required tool
-//		itemStacks.init(0, true, 15, 7);
-//		itemStacks.set(0, Arrays.asList(recipe.getTool().getItems()));
-//
-//		// Draw input
-//		itemStacks.init(1, true, 15, 26);
-//		itemStacks.set(1, Arrays.asList(recipe.getIngredients().get(0).getItems()));
-//
-//		// Draw outputs
-//		int size = recipeOutputs.size();
-//		int centerX = size > 1 ? 0 : 9;
-//		int centerY = size > 2 ? 0 : 9;
-//
-//		for (int i = 0; i < size; i++) {
-//			int xOffset = centerX + (i % 2 == 0 ? 0 : 19);
-//			int yOffset = centerY + ((i / 2) * 19);
-//
-//			itemStacks.init(i + 2, false, OUTPUT_GRID_X + xOffset, OUTPUT_GRID_Y + yOffset);
-//			itemStacks.set(i + 2, recipeOutputs.get(i).getStack());
-//		}
-//
-//		itemStacks.addTooltipCallback((slotIndex, input, ingredient, tooltip) -> {
-//			if (input || slotIndex < 2) {
-//				return;
-//			}
-//			ChanceResult output = recipeOutputs.get(slotIndex - 2);
-//			float chance = output.getChance();
-//			if (chance != 1)
-//				tooltip.add(1, TextUtils.getTranslation("jei.chance", chance < 0.01 ? "<1" : (int) (chance * 100))
-//						.withStyle(ChatFormatting.GOLD));
-//		});
-//	}
-
 	@Override
-	public void draw(CuttingBoardRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
+	public void draw(CuttingBoardRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
 		NonNullList<ChanceResult> recipeOutputs = recipe.getRollableResults();
 
 		int size = recipe.getResults().size();
@@ -145,16 +108,10 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 			int yOffset = centerY + ((i / 2) * 19);
 
 			if (recipeOutputs.get(i).getChance() != 1) {
-				slotChance.draw(matrixStack, OUTPUT_GRID_X + xOffset, OUTPUT_GRID_Y + yOffset);
+				slotChance.draw(guiGraphics, OUTPUT_GRID_X + xOffset, OUTPUT_GRID_Y + yOffset);
 			} else {
-				slot.draw(matrixStack, OUTPUT_GRID_X + xOffset, OUTPUT_GRID_Y + yOffset);
+				slot.draw(guiGraphics, OUTPUT_GRID_X + xOffset, OUTPUT_GRID_Y + yOffset);
 			}
 		}
 	}
-
-//	@Override
-//	public void setIngredients(CuttingBoardRecipe cuttingBoardRecipe, IIngredients ingredients) {
-//		ingredients.setInputIngredients(cuttingBoardRecipe.getIngredientsAndTool());
-//		ingredients.setOutputs(VanillaTypes.ITEM, cuttingBoardRecipe.getResults());
-//	}
 }

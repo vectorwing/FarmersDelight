@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.integration.jei.category;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -12,6 +11,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -54,17 +54,7 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 		icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, richSoil);
 		slotIcon = helper.createDrawable(backgroundImage, 119, 0, slotSize, slotSize);
 	}
-//
-//	@Override
-//	public ResourceLocation getUid() {
-//		return this.getRecipeType().getUid();
-//	}
-//
-//	@Override
-//	public Class<? extends DecompositionDummy> getRecipeClass() {
-//		return this.getRecipeType().getRecipeClass();
-//	}
-
+	
 	@Override
 	public RecipeType<DecompositionDummy> getRecipeType() {
 		return FDRecipeTypes.DECOMPOSITION;
@@ -95,8 +85,8 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 	}
 
 	@Override
-	public void draw(DecompositionDummy recipe, IRecipeSlotsView recipeSlotsView, PoseStack ms, double mouseX, double mouseY) {
-		this.slotIcon.draw(ms, 63, 53);
+	public void draw(DecompositionDummy recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+		this.slotIcon.draw(guiGraphics, 63, 53);
 	}
 
 	@Override

@@ -65,7 +65,7 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 	}
 
 	public BasketBlock() {
-		super(Properties.copy(Blocks.BAMBOO_BLOCK).strength(1.5F).sound(SoundType.BAMBOO_WOOD));
+		super(Properties.of().strength(1.5F).sound(SoundType.BAMBOO_WOOD));
 		this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.UP).setValue(WATERLOGGED, false));
 	}
 

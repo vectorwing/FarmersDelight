@@ -31,15 +31,6 @@ public class FarmersDelight
 
 	public static final RecipeBookType RECIPE_TYPE_COOKING = RecipeBookType.create("COOKING");
 
-	public static final CreativeModeTab CREATIVE_TAB = new CreativeModeTab(FarmersDelight.MODID)
-	{
-		@Nonnull
-		@Override
-		public ItemStack makeIcon() {
-			return new ItemStack(ModBlocks.STOVE.get());
-		}
-	};
-
 	public FarmersDelight() {
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -49,21 +40,22 @@ public class FarmersDelight
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Configuration.CLIENT_CONFIG);
 
-		ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
-		ModEnchantments.ENCHANTMENTS.register(modEventBus);
-		ModItems.ITEMS.register(modEventBus);
+		ModSounds.SOUNDS.register(modEventBus);
 		ModBlocks.BLOCKS.register(modEventBus);
 		ModEffects.EFFECTS.register(modEventBus);
-		ModPlacementModifiers.PLACEMENT_MODIFIERS.register(modEventBus);
-		ModBiomeFeatures.FEATURES.register(modEventBus);
-		ModBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(modEventBus);
-		ModSounds.SOUNDS.register(modEventBus);
+		ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
+		ModItems.ITEMS.register(modEventBus);
+		ModEntityTypes.ENTITIES.register(modEventBus);
+		ModEnchantments.ENCHANTMENTS.register(modEventBus);
 		ModBlockEntityTypes.TILES.register(modEventBus);
 		ModMenuTypes.MENU_TYPES.register(modEventBus);
-		ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
-		ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
 		ModRecipeTypes.RECIPE_TYPES.register(modEventBus);
-		ModEntityTypes.ENTITIES.register(modEventBus);
+		ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+		ModBiomeFeatures.FEATURES.register(modEventBus);
+		ModCreativeTabs.CREATIVE_TABS.register(modEventBus);
+		ModPlacementModifiers.PLACEMENT_MODIFIERS.register(modEventBus);
+		ModBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(modEventBus);
+		ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
 
 		MinecraftForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
 

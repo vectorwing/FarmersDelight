@@ -8,7 +8,6 @@ import net.minecraft.world.item.Items;
 import net.minecraftforge.client.event.RegisterRecipeBookCategoriesEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.common.item.DrinkableItem;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
@@ -35,11 +34,6 @@ public class RecipeCategories
 						case MISC -> COOKING_MISC.get();
 					};
 				}
-			}
-
-			// If no tab is specified in recipe, this fallback organizes them instead
-			if (recipe.getResultItem().getItem() instanceof DrinkableItem) {
-				return COOKING_DRINKS.get();
 			}
 			return COOKING_MISC.get();
 		});
