@@ -40,7 +40,7 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 		this.tileEntity = tileEntity;
 		this.inventory = tileEntity.getInventory();
 		this.cookingPotData = cookingPotDataIn;
-		this.level = playerInventory.player.level;
+		this.level = playerInventory.player.level();
 		this.canInteractWithCallable = ContainerLevelAccess.create(tileEntity.getLevel(), tileEntity.getBlockPos());
 
 		// Ingredient Slots - 2 Rows x 3 Columns
@@ -92,7 +92,7 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 	private static CookingPotBlockEntity getTileEntity(final Inventory playerInventory, final FriendlyByteBuf data) {
 		Objects.requireNonNull(playerInventory, "playerInventory cannot be null");
 		Objects.requireNonNull(data, "data cannot be null");
-		final BlockEntity tileAtPos = playerInventory.player.level.getBlockEntity(data.readBlockPos());
+		final BlockEntity tileAtPos = playerInventory.player.level().getBlockEntity(data.readBlockPos());
 		if (tileAtPos instanceof CookingPotBlockEntity) {
 			return (CookingPotBlockEntity) tileAtPos;
 		}

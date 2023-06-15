@@ -29,7 +29,7 @@ public class RiceBaleBlock extends Block
 
 	@Override
 	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
-		entityIn.causeFallDamage(fallDistance, 0.2F, DamageSource.FALL);
+		entityIn.causeFallDamage(fallDistance, 0.2F, level.damageSources().fall());
 	}
 
 	@Override

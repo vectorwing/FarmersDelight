@@ -32,7 +32,7 @@ public class TatamiMatBlock extends HorizontalDirectionalBlock
 	protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
 
 	public TatamiMatBlock() {
-		super(Block.Properties.copy(Blocks.WHITE_WOOL).strength(0.3F));
+		super(Block.Properties.copy(Blocks.WHITE_WOOL).strength(0.3F).pushReaction(PushReaction.DESTROY));
 		this.registerDefaultState(this.getStateDefinition().any().setValue(PART, BedPart.FOOT));
 	}
 
@@ -84,11 +84,6 @@ public class TatamiMatBlock extends HorizontalDirectionalBlock
 		}
 
 		super.playerWillDestroy(level, pos, state, player);
-	}
-
-	@Override
-	public PushReaction getPistonPushReaction(BlockState state) {
-		return PushReaction.DESTROY;
 	}
 
 	@Override

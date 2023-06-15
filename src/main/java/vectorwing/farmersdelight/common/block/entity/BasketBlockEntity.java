@@ -112,15 +112,7 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 	}
 
 	private static boolean canCombine(ItemStack stack1, ItemStack stack2) {
-		if (stack1.getItem() != stack2.getItem()) {
-			return false;
-		} else if (stack1.getDamageValue() != stack2.getDamageValue()) {
-			return false;
-		} else if (stack1.getCount() > stack1.getMaxStackSize()) {
-			return false;
-		} else {
-			return ItemStack.tagMatches(stack1, stack2);
-		}
+		return stack1.getCount() <= stack1.getMaxStackSize() && ItemStack.isSameItemSameTags(stack1, stack2);
 	}
 
 	private static ItemStack insertStack(Container destination, ItemStack stack, int index) {

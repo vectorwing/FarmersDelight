@@ -22,7 +22,7 @@ public class NourishmentEffect extends MobEffect
 		if (!entity.getCommandSenderWorld().isClientSide && entity instanceof Player player) {
 			FoodData foodData = player.getFoodData();
 			boolean isPlayerHealingWithHunger =
-					player.level.getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION)
+					player.level().getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION)
 							&& player.isHurt()
 //							&& foodData.getSaturationLevel() > 0.0F
 							&& foodData.getFoodLevel() >= 18;

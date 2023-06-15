@@ -354,7 +354,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	}
 
 	@Override
-	public void awardUsedRecipes(Player player, List<ItemStack> p_282578_) {
+	public void awardUsedRecipes(Player player, List<ItemStack> items) {
 		List<Recipe<?>> usedRecipes = getUsedRecipesAndPopExperience(player.level(), player.position());
 		player.awardRecipes(usedRecipes);
 		usedRecipeTracker.clear();

@@ -65,13 +65,13 @@ public class DogFoodItem extends ConsumableItem
 					for (MobEffectInstance effect : EFFECTS) {
 						entity.addEffect(new MobEffectInstance(effect));
 					}
-					entity.level.playSound(null, target.blockPosition(), SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 0.8F, 0.8F);
+					entity.level().playSound(null, target.blockPosition(), SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 0.8F, 0.8F);
 
 					for (int i = 0; i < 5; ++i) {
 						double xSpeed = MathUtils.RAND.nextGaussian() * 0.02D;
 						double ySpeed = MathUtils.RAND.nextGaussian() * 0.02D;
 						double zSpeed = MathUtils.RAND.nextGaussian() * 0.02D;
-						entity.level.addParticle(ModParticleTypes.STAR.get(), entity.getRandomX(1.0D), entity.getRandomY() + 0.5D, entity.getRandomZ(1.0D), xSpeed, ySpeed, zSpeed);
+						entity.level().addParticle(ModParticleTypes.STAR.get(), entity.getRandomX(1.0D), entity.getRandomY() + 0.5D, entity.getRandomZ(1.0D), xSpeed, ySpeed, zSpeed);
 					}
 
 					if (itemStack.getCraftingRemainingItem() != ItemStack.EMPTY && !player.isCreative()) {
