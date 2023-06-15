@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -24,15 +23,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
 @SuppressWarnings("deprecation")
 public class RopeBlock extends IronBarsBlock
 {
 	public static final BooleanProperty TIED_TO_BELL = BooleanProperty.create("tied_to_bell");
 
 	public RopeBlock() {
-		super(Properties.of(Material.CLOTH_DECORATION).noCollission().noOcclusion().strength(0.2F).sound(SoundType.WOOL));
+		super(Properties.copy(Blocks.BROWN_CARPET).noCollission().noOcclusion().strength(0.2F).sound(SoundType.WOOL));
 		this.registerDefaultState(this.stateDefinition.any()
 				.setValue(NORTH, false)
 				.setValue(SOUTH, false)

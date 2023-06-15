@@ -9,7 +9,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -35,17 +34,17 @@ public class ModBlocks
 
 	// Crop Storage
 	public static final RegistryObject<Block> CARROT_CRATE = BLOCKS.register("carrot_crate",
-			() -> new Block(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+			() -> new Block(Block.Properties.copy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> POTATO_CRATE = BLOCKS.register("potato_crate",
-			() -> new Block(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+			() -> new Block(Block.Properties.copy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> BEETROOT_CRATE = BLOCKS.register("beetroot_crate",
-			() -> new Block(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+			() -> new Block(Block.Properties.copy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> CABBAGE_CRATE = BLOCKS.register("cabbage_crate",
-			() -> new Block(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+			() -> new Block(Block.Properties.copy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> TOMATO_CRATE = BLOCKS.register("tomato_crate",
-			() -> new Block(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+			() -> new Block(Block.Properties.copy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> ONION_CRATE = BLOCKS.register("onion_crate",
-			() -> new Block(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+			() -> new Block(Block.Properties.copy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> RICE_BALE = BLOCKS.register("rice_bale",
 			() -> new RiceBaleBlock(Block.Properties.copy(Blocks.HAY_BLOCK)));
 	public static final RegistryObject<Block> RICE_BAG = BLOCKS.register("rice_bag",

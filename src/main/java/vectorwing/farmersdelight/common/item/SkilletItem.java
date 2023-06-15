@@ -189,7 +189,7 @@ public class SkilletItem extends BlockItem
 				Optional<CampfireCookingRecipe> cookingRecipe = getCookingRecipe(cookingStack, level);
 
 				cookingRecipe.ifPresent((recipe) -> {
-					ItemStack resultStack = recipe.assemble(new SimpleContainer());
+					ItemStack resultStack = recipe.assemble(new SimpleContainer(), level.registryAccess());
 					if (!player.getInventory().add(resultStack)) {
 						player.drop(resultStack, false);
 					}

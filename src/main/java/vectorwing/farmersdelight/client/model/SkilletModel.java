@@ -3,7 +3,6 @@ package vectorwing.farmersdelight.client.model;
 import com.google.common.base.Preconditions;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Transformation;
-import com.mojang.math.Vector3f;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -14,15 +13,19 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.SimpleModelState;
 import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 import vectorwing.farmersdelight.FarmersDelight;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.*;
@@ -36,11 +39,11 @@ import java.util.*;
 @SuppressWarnings("deprecation")
 public class SkilletModel implements BakedModel
 {
-	private final ModelBakery bakery;
+	private final ModelBaker bakery;
 	private final BakedModel originalModel;
 	private final BakedModel cookingModel;
 
-	public SkilletModel(ModelBakery bakery, BakedModel originalModel, BakedModel cookingModel) {
+	public SkilletModel(ModelBaker bakery, BakedModel originalModel, BakedModel cookingModel) {
 		this.bakery = bakery;
 		this.originalModel = Preconditions.checkNotNull(originalModel);
 		this.cookingModel = Preconditions.checkNotNull(cookingModel);
@@ -117,7 +120,7 @@ public class SkilletModel implements BakedModel
 		private final List<BakedQuad> genQuads = new ArrayList<>();
 		private final Map<Direction, List<BakedQuad>> faceQuads = new EnumMap<>(Direction.class);
 
-		public CompositeBakedModel(ModelBakery bakery, ItemStack ingredientStack, BakedModel skillet) {
+		public CompositeBakedModel(ModelBaker bakery, ItemStack ingredientStack, BakedModel skillet) {
 			super(skillet);
 
 			ResourceLocation ingredientLocation = ForgeRegistries.ITEMS.getKey(ingredientStack.getItem());
@@ -125,7 +128,7 @@ public class SkilletModel implements BakedModel
 			ModelState transform = new SimpleModelState(
 					new Transformation(
 							new Vector3f(0.0F, -0.4F, 0.0F),
-							Vector3f.XP.rotationDegrees(270),
+							new Quaternionf(1.0F, 0.0F, 0.0F, 270), // TODO: This quaternion might not work as intended!
 							new Vector3f(0.625F, 0.625F, 0.625F), null));
 			ResourceLocation name = new ResourceLocation(FarmersDelight.MODID, "skillet_with_" + ingredientLocation.toString().replace(':', '_'));
 
@@ -174,7 +177,7 @@ public class SkilletModel implements BakedModel
 		}
 
 		@Override
-		public BakedModel applyTransform(@Nonnull ItemTransforms.TransformType cameraTransformType, PoseStack stack, boolean leftHand) {
+		public BakedModel applyTransform(@Nonnull ItemDisplayContext cameraTransformType, PoseStack stack, boolean leftHand) {
 			super.applyTransform(cameraTransformType, stack, leftHand);
 			return this;
 		}

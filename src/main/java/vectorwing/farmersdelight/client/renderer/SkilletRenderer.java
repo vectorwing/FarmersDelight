@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import vectorwing.farmersdelight.common.block.StoveBlock;
@@ -45,16 +46,16 @@ public class SkilletRenderer implements BlockEntityRenderer<SkilletBlockEntity>
 
 				// Rotate item to face the skillet's front side
 				float degrees = -direction.toYRot();
-				poseStack.mulPose(Vector3f.YP.rotationDegrees(degrees));
+				poseStack.mulPose(Axis.YP.rotationDegrees(degrees));
 
 				// Rotate item flat on the skillet. Use X and Y from now on
-				poseStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
+				poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
 
 				// Resize the items
 				poseStack.scale(0.5F, 0.5F, 0.5F);
 
 				if (skilletEntity.getLevel() != null)
-					Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemTransforms.TransformType.FIXED, combinedLight, combinedOverlay, poseStack, buffer, posLong);
+					Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, combinedLight, combinedOverlay, poseStack, buffer, skilletEntity.getLevel(), posLong);
 				poseStack.popPose();
 			}
 		}

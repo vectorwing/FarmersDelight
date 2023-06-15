@@ -1,10 +1,7 @@
 package vectorwing.farmersdelight.common.advancement;
 
 import com.google.gson.JsonObject;
-import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
-import net.minecraft.advancements.critereon.DeserializationContext;
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import net.minecraft.advancements.critereon.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -22,18 +19,18 @@ public class CuttingBoardTrigger extends SimpleCriterionTrigger<CuttingBoardTrig
 	}
 
 	@Override
-	protected TriggerInstance createInstance(JsonObject json, EntityPredicate.Composite player, DeserializationContext conditionsParser) {
+	protected TriggerInstance createInstance(JsonObject json, ContextAwarePredicate player, DeserializationContext conditionsParser) {
 		return new TriggerInstance(player);
 	}
 
 	public static class TriggerInstance extends AbstractCriterionTriggerInstance
 	{
-		public TriggerInstance(EntityPredicate.Composite player) {
+		public TriggerInstance(ContextAwarePredicate player) {
 			super(CuttingBoardTrigger.ID, player);
 		}
 
 		public static TriggerInstance simple() {
-			return new TriggerInstance(EntityPredicate.Composite.ANY);
+			return new TriggerInstance(ContextAwarePredicate.ANY);
 		}
 
 		public boolean test() {

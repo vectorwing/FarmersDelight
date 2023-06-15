@@ -26,7 +26,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -50,7 +49,7 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 	protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 1.0D, 15.0D);
 
 	public CuttingBoardBlock() {
-		super(Properties.of(Material.WOOD).strength(2.0F).sound(SoundType.WOOD));
+		super(Properties.copy(Blocks.OAK_PLANKS).strength(2.0F).sound(SoundType.WOOD));
 		this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
 	}
 
@@ -141,7 +140,7 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 	}
 
 	@Override
-	public boolean isPossibleToRespawnInThis() {
+	public boolean isPossibleToRespawnInThis(BlockState state) {
 		return true;
 	}
 

@@ -35,7 +35,7 @@ public class CookingPotRecipeBookComponent extends RecipeBookComponent
 
 	@Override
 	public void setupGhostRecipe(Recipe<?> recipe, List<Slot> slots) {
-		ItemStack resultStack = recipe.getResultItem();
+		ItemStack resultStack = recipe.getResultItem(this.minecraft.level.registryAccess());
 		this.ghostRecipe.setRecipe(recipe);
 		if (slots.get(6).getItem().isEmpty()) {
 			this.ghostRecipe.addIngredient(Ingredient.of(resultStack), (slots.get(6)).x, (slots.get(6)).y);

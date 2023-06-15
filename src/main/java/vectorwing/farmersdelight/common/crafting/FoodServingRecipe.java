@@ -1,9 +1,11 @@
 package vectorwing.farmersdelight.common.crafting;
 
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -13,8 +15,8 @@ import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 
 public class FoodServingRecipe extends CustomRecipe
 {
-	public FoodServingRecipe(ResourceLocation id) {
-		super(id);
+	public FoodServingRecipe(ResourceLocation id, CraftingBookCategory category) {
+		super(id, category);
 	}
 
 	@Override
@@ -46,7 +48,7 @@ public class FoodServingRecipe extends CustomRecipe
 	}
 
 	@Override
-	public ItemStack assemble(CraftingContainer container) {
+	public ItemStack assemble(CraftingContainer container, RegistryAccess access) {
 		for (int i = 0; i < container.getContainerSize(); ++i) {
 			ItemStack selectedStack = container.getItem(i);
 			if (!selectedStack.isEmpty() && selectedStack.is(ModItems.COOKING_POT.get())) {

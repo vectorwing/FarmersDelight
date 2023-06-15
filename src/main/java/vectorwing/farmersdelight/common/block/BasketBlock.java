@@ -27,7 +27,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -66,7 +65,7 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 	}
 
 	public BasketBlock() {
-		super(Properties.of(Material.WOOD).strength(1.5F).sound(SoundType.WOOD));
+		super(Properties.copy(Blocks.BAMBOO_BLOCK).strength(1.5F).sound(SoundType.BAMBOO_WOOD));
 		this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.UP).setValue(WATERLOGGED, false));
 	}
 
