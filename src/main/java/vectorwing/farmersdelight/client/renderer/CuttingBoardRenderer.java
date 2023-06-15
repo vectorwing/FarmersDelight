@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -40,7 +40,7 @@ public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlo
 				renderItemLayingDown(poseStack, direction);
 			}
 
-			Minecraft.getInstance().getItemRenderer().renderStatic(boardStack, ItemTransforms.TransformType.FIXED, combinedLight, combinedOverlay, poseStack, buffer, posLong);
+			Minecraft.getInstance().getItemRenderer().renderStatic(boardStack, ItemDisplayContext.FIXED, combinedLight, combinedOverlay, poseStack, buffer, cuttingBoardEntity.getLevel(), posLong);
 			poseStack.popPose();
 		}
 	}
@@ -51,10 +51,10 @@ public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlo
 
 		// Rotate item to face the cutting board's front side
 		float f = -direction.toYRot();
-		matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f));
+		matrixStackIn.mulPose(Axis.YP.rotationDegrees(f));
 
 		// Rotate item flat on the cutting board. Use X and Y from now on
-		matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(90.0F));
+		matrixStackIn.mulPose(Axis.XP.rotationDegrees(90.0F));
 
 		// Resize the item
 		matrixStackIn.scale(0.6F, 0.6F, 0.6F);
@@ -66,7 +66,7 @@ public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlo
 
 		// Rotate block to face the cutting board's front side
 		float f = -direction.toYRot();
-		matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f));
+		matrixStackIn.mulPose(Axis.YP.rotationDegrees(f));
 
 		// Resize the block
 		matrixStackIn.scale(0.8F, 0.8F, 0.8F);
@@ -78,7 +78,7 @@ public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlo
 
 		// Rotate item to face the cutting board's front side
 		float f = -direction.toYRot() + 180;
-		matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f));
+		matrixStackIn.mulPose(Axis.YP.rotationDegrees(f));
 
 		// Rotate item to be carved on the surface, A little less so for hoes and pickaxes.
 		Item toolItem = itemStack.getItem();
@@ -90,7 +90,7 @@ public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlo
 		} else {
 			poseAngle = 180.0F;
 		}
-		matrixStackIn.mulPose(Vector3f.ZP.rotationDegrees(poseAngle));
+		matrixStackIn.mulPose(Axis.ZP.rotationDegrees(poseAngle));
 
 		// Resize the item
 		matrixStackIn.scale(0.6F, 0.6F, 0.6F);

@@ -27,8 +27,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
@@ -248,7 +248,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 				if (recipe.matches(inventoryWrapper, level)) {
 					return Optional.of((CookingPotRecipe) recipe);
 				}
-				if (recipe.getResultItem().sameItem(getMeal())) {
+				if (ItemStack.isSameItem(recipe.getResultItem(this.level.registryAccess()), getMeal())) {
 					return Optional.empty();
 				}
 			}
@@ -283,14 +283,14 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 	protected boolean canCook(CookingPotRecipe recipe) {
 		if (hasInput()) {
-			ItemStack resultStack = recipe.getResultItem();
+			ItemStack resultStack = recipe.getResultItem(this.level.registryAccess());
 			if (resultStack.isEmpty()) {
 				return false;
 			} else {
 				ItemStack storedMealStack = inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
 				if (storedMealStack.isEmpty()) {
 					return true;
-				} else if (!storedMealStack.sameItem(resultStack)) {
+				} else if (!ItemStack.isSameItem(storedMealStack, resultStack)) {
 					return false;
 				} else if (storedMealStack.getCount() + resultStack.getCount() <= inventory.getSlotLimit(MEAL_DISPLAY_SLOT)) {
 					return true;
@@ -314,11 +314,11 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 		cookTime = 0;
 		mealContainerStack = recipe.getOutputContainer();
-		ItemStack resultStack = recipe.getResultItem();
+		ItemStack resultStack = recipe.getResultItem(this.level.registryAccess());
 		ItemStack storedMealStack = inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
 		if (storedMealStack.isEmpty()) {
 			inventory.setStackInSlot(MEAL_DISPLAY_SLOT, resultStack.copy());
-		} else if (storedMealStack.sameItem(resultStack)) {
+		} else if (ItemStack.isSameItem(storedMealStack, resultStack)) {
 			storedMealStack.grow(resultStack.getCount());
 		}
 		cookingPot.setRecipeUsed(recipe);
@@ -354,8 +354,8 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	}
 
 	@Override
-	public void awardUsedRecipes(Player player) {
-		List<Recipe<?>> usedRecipes = getUsedRecipesAndPopExperience(player.level, player.position());
+	public void awardUsedRecipes(Player player, List<ItemStack> p_282578_) {
+		List<Recipe<?>> usedRecipes = getUsedRecipesAndPopExperience(player.level(), player.position());
 		player.awardRecipes(usedRecipes);
 		usedRecipeTracker.clear();
 	}
@@ -452,9 +452,9 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	public boolean isContainerValid(ItemStack containerItem) {
 		if (containerItem.isEmpty()) return false;
 		if (!mealContainerStack.isEmpty()) {
-			return mealContainerStack.sameItem(containerItem);
+			return ItemStack.isSameItem(mealContainerStack, containerItem);
 		} else {
-			return getMeal().getCraftingRemainingItem().sameItem(containerItem);
+			return ItemStack.isSameItem(getMeal(), containerItem);
 		}
 	}
 
@@ -486,7 +486,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	@Override
 	@Nonnull
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-		if (cap.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)) {
+		if (cap.equals(ForgeCapabilities.ITEM_HANDLER)) {
 			if (side == null || side.equals(Direction.UP)) {
 				return inputHandler.cast();
 			} else {

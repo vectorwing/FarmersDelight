@@ -1,9 +1,8 @@
 package vectorwing.farmersdelight.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
@@ -43,12 +42,12 @@ public class ComfortHealthOverlay
 			Minecraft mc = Minecraft.getInstance();
 			ForgeGui gui = (ForgeGui) mc.gui;
 			if (!mc.options.hideGui && gui.shouldDrawSurvivalElements()) {
-				renderComfortOverlay(gui, event.getPoseStack());
+				renderComfortOverlay(gui, event.getGuiGraphics());
 			}
 		}
 	}
 
-	public static void renderComfortOverlay(ForgeGui gui, PoseStack poseStack) {
+	public static void renderComfortOverlay(ForgeGui gui, GuiGraphics graphics) {
 		if (!Configuration.COMFORT_HEALTH_OVERLAY.get()) {
 			return;
 		}
@@ -70,11 +69,11 @@ public class ComfortHealthOverlay
 				&& !player.hasEffect(MobEffects.REGENERATION);
 
 		if (player.getEffect(ModEffects.COMFORT.get()) != null && isPlayerEligibleForComfort) {
-			drawComfortOverlay(player, minecraft, poseStack, left, top);
+			drawComfortOverlay(player, minecraft, graphics, left, top);
 		}
 	}
 
-	public static void drawComfortOverlay(Player player, Minecraft minecraft, PoseStack matrixStack, int left, int top) {
+	public static void drawComfortOverlay(Player player, Minecraft minecraft, GuiGraphics graphics, int left, int top) {
 		int ticks = minecraft.gui.getGuiTicks();
 		Random rand = new Random();
 		rand.setSeed((long) (ticks * 312871));
@@ -109,14 +108,13 @@ public class ComfortHealthOverlay
 			if (i == regen) y -= 2;
 
 			if (column == comfortSheen / 2) {
-				minecraft.gui.blit(matrixStack, x, y, 0, 9, textureWidth[comfortHeartFrame], 9);
+				graphics.blit(MOD_ICONS_TEXTURE, x, y, 0, 9, textureWidth[comfortHeartFrame], 9);
 			}
 			if (column == (comfortSheen / 2) - 1 && comfortHeartFrame == 0) {
-				minecraft.gui.blit(matrixStack, x + 5, y, 5, 9, 4, 9);
+				graphics.blit(MOD_ICONS_TEXTURE, x + 5, y, 5, 9, 4, 9);
 			}
 		}
 
 		RenderSystem.disableBlend();
-		RenderSystem.setShaderTexture(0, GuiComponent.GUI_ICONS_LOCATION);
 	}
 }
