@@ -71,9 +71,11 @@ public class ModBlocks
 	public static final RegistryObject<Block> MANGROVE_CABINET = BLOCKS.register("mangrove_cabinet",
 			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
 	public static final RegistryObject<Block> CRIMSON_CABINET = BLOCKS.register("crimson_cabinet",
-			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
+			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL).sound(SoundType.NETHER_WOOD)));
 	public static final RegistryObject<Block> WARPED_CABINET = BLOCKS.register("warped_cabinet",
-			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
+			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL).sound(SoundType.NETHER_WOOD)));
+	// TODO: Add a Bamboo Cabinet
+	// TODO: Add a Cherry Cabinet
 	public static final RegistryObject<Block> CANVAS_RUG = BLOCKS.register("canvas_rug", CanvasRugBlock::new);
 	public static final RegistryObject<Block> TATAMI = BLOCKS.register("tatami", TatamiBlock::new);
 	public static final RegistryObject<Block> FULL_TATAMI_MAT = BLOCKS.register("full_tatami_mat", TatamiMatBlock::new);
@@ -204,11 +206,11 @@ public class ModBlocks
 
 	// Feasts
 	public static final RegistryObject<Block> ROAST_CHICKEN_BLOCK = BLOCKS.register("roast_chicken_block",
-			() -> new RoastChickenBlock(Block.Properties.copy(Blocks.WHITE_WOOL), ModItems.ROAST_CHICKEN, true));
+			() -> new RoastChickenBlock(Block.Properties.copy(Blocks.CAKE), ModItems.ROAST_CHICKEN, true));
 	public static final RegistryObject<Block> STUFFED_PUMPKIN_BLOCK = BLOCKS.register("stuffed_pumpkin_block",
 			() -> new FeastBlock(Block.Properties.copy(Blocks.PUMPKIN), ModItems.STUFFED_PUMPKIN, false));
 	public static final RegistryObject<Block> HONEY_GLAZED_HAM_BLOCK = BLOCKS.register("honey_glazed_ham_block",
-			() -> new HoneyGlazedHamBlock(Block.Properties.copy(Blocks.WHITE_WOOL), ModItems.HONEY_GLAZED_HAM, true));
+			() -> new HoneyGlazedHamBlock(Block.Properties.copy(Blocks.CAKE), ModItems.HONEY_GLAZED_HAM, true));
 	public static final RegistryObject<Block> SHEPHERDS_PIE_BLOCK = BLOCKS.register("shepherds_pie_block",
 			() -> new ShepherdsPieBlock(Block.Properties.copy(Blocks.CAKE), ModItems.SHEPHERDS_PIE, true));
 	public static final RegistryObject<Block> RICE_ROLL_MEDLEY_BLOCK = BLOCKS.register("rice_roll_medley_block",
