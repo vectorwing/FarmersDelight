@@ -33,8 +33,8 @@ public class BlockStates extends BlockStateProvider
 {
 	private static final int DEFAULT_ANGLE_OFFSET = 180;
 
-	public BlockStates(PackOutput output, ExistingFileHelper exFileHelper) {
-		super(output, FarmersDelight.MODID, exFileHelper);
+	public BlockStates(PackOutput output, ExistingFileHelper existingFileHelper) {
+		super(output, FarmersDelight.MODID, existingFileHelper);
 	}
 
 	private String blockName(Block block) {

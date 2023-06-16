@@ -72,5 +72,6 @@
       "onion",
       "rice"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

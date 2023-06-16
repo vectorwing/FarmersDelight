@@ -22,13 +22,12 @@ public class DataGenerators
 		CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 		ExistingFileHelper helper = event.getExistingFileHelper();
 
-		BlockTags blockTags = new BlockTags(output, lookupProvider, FarmersDelight.MODID, helper);
+		BlockTags blockTags = new BlockTags(output, lookupProvider, helper);
 		generator.addProvider(event.includeServer(), blockTags);
-		generator.addProvider(event.includeServer(), new ItemTags(output, lookupProvider, blockTags.contentsGetter(), FarmersDelight.MODID, helper));
+		generator.addProvider(event.includeServer(), new ItemTags(output, lookupProvider, blockTags.contentsGetter(), helper));
 		generator.addProvider(event.includeServer(), new EntityTags(output, lookupProvider, helper));
 		generator.addProvider(event.includeServer(), new Recipes(output));
-		// TODO: Fix this monstrosity...
-//		generator.addProvider(event.includeServer(), new Advancements(generator));
+		generator.addProvider(event.includeServer(), new Advancements(output, lookupProvider, helper));
 
 		BlockStates blockStates = new BlockStates(output, helper);
 		generator.addProvider(event.includeClient(), blockStates);

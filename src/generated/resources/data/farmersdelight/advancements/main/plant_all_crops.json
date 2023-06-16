@@ -3,115 +3,210 @@
   "criteria": {
     "beetroot": {
       "conditions": {
-        "block": "minecraft:beetroots"
+        "location": [
+          {
+            "block": "minecraft:beetroots",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "brown_mushroom": {
       "conditions": {
-        "block": "minecraft:brown_mushroom"
+        "location": [
+          {
+            "block": "minecraft:brown_mushroom",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "cabbage": {
       "conditions": {
-        "block": "farmersdelight:cabbages"
+        "location": [
+          {
+            "block": "farmersdelight:cabbages",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "carrot": {
       "conditions": {
-        "block": "minecraft:carrots"
+        "location": [
+          {
+            "block": "minecraft:carrots",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "chorus_flower": {
       "conditions": {
-        "block": "minecraft:chorus_flower"
+        "location": [
+          {
+            "block": "minecraft:chorus_flower",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "cocoa": {
       "conditions": {
-        "block": "minecraft:cocoa"
+        "location": [
+          {
+            "block": "minecraft:cocoa",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "glow_berries": {
       "conditions": {
-        "block": "minecraft:cave_vines"
+        "location": [
+          {
+            "block": "minecraft:cave_vines",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "kelp": {
       "conditions": {
-        "block": "minecraft:kelp"
+        "location": [
+          {
+            "block": "minecraft:kelp",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "melon": {
       "conditions": {
-        "block": "minecraft:melon_stem"
+        "location": [
+          {
+            "block": "minecraft:melon_stem",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "nether_wart": {
       "conditions": {
-        "block": "minecraft:nether_wart"
+        "location": [
+          {
+            "block": "minecraft:nether_wart",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "onion": {
       "conditions": {
-        "block": "farmersdelight:onions"
+        "location": [
+          {
+            "block": "farmersdelight:onions",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "potato": {
       "conditions": {
-        "block": "minecraft:potatoes"
+        "location": [
+          {
+            "block": "minecraft:potatoes",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "pumpkin": {
       "conditions": {
-        "block": "minecraft:pumpkin_stem"
+        "location": [
+          {
+            "block": "minecraft:pumpkin_stem",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "red_mushroom": {
       "conditions": {
-        "block": "minecraft:red_mushroom"
+        "location": [
+          {
+            "block": "minecraft:red_mushroom",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "rice": {
       "conditions": {
-        "block": "farmersdelight:rice"
+        "location": [
+          {
+            "block": "farmersdelight:rice",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "sugar_cane": {
       "conditions": {
-        "block": "minecraft:sugar_cane"
+        "location": [
+          {
+            "block": "minecraft:sugar_cane",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "sweet_berries": {
       "conditions": {
-        "block": "minecraft:sweet_berry_bush"
+        "location": [
+          {
+            "block": "minecraft:sweet_berry_bush",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "tomato": {
       "conditions": {
-        "block": "farmersdelight:budding_tomatoes"
+        "location": [
+          {
+            "block": "farmersdelight:budding_tomatoes",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "wheat": {
       "conditions": {
-        "block": "minecraft:wheat"
+        "location": [
+          {
+            "block": "minecraft:wheat",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     }
@@ -192,5 +287,6 @@
   ],
   "rewards": {
     "experience": 100
-  }
+  },
+  "sends_telemetry_event": true
 }

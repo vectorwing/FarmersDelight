@@ -3,7 +3,12 @@
   "criteria": {
     "cooking_pot": {
       "conditions": {
-        "block": "farmersdelight:cooking_pot"
+        "location": [
+          {
+            "block": "farmersdelight:cooking_pot",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     }
@@ -27,5 +32,6 @@
     [
       "cooking_pot"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }
