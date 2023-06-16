@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "#": {
       "item": "farmersdelight:pumpkin_slice"
@@ -11,5 +12,6 @@
   ],
   "result": {
     "item": "minecraft:pumpkin"
-  }
+  },
+  "show_notification": true
 }

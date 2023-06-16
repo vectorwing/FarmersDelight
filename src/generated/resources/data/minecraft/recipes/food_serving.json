@@ -1,3 +1,4 @@
 {
-  "type": "farmersdelight:food_serving"
+  "type": "farmersdelight:food_serving",
+  "category": "misc"
 }

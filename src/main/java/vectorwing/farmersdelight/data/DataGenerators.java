@@ -25,12 +25,13 @@ public class DataGenerators
 		BlockTags blockTags = new BlockTags(output, lookupProvider, FarmersDelight.MODID, helper);
 		generator.addProvider(event.includeServer(), blockTags);
 		generator.addProvider(event.includeServer(), new ItemTags(output, lookupProvider, blockTags.contentsGetter(), FarmersDelight.MODID, helper));
-		generator.addProvider(event.includeServer(), new EntityTags(generator, FarmersDelight.MODID, helper));
-		generator.addProvider(event.includeServer(), new Recipes(generator));
-		generator.addProvider(event.includeServer(), new Advancements(generator));
+		generator.addProvider(event.includeServer(), new EntityTags(output, lookupProvider, helper));
+		generator.addProvider(event.includeServer(), new Recipes(output));
+		// TODO: Fix this monstrosity...
+//		generator.addProvider(event.includeServer(), new Advancements(generator));
 
-		BlockStates blockStates = new BlockStates(generator, helper);
+		BlockStates blockStates = new BlockStates(output, helper);
 		generator.addProvider(event.includeClient(), blockStates);
-		generator.addProvider(event.includeClient(), new ItemModels(generator, blockStates.models().existingFileHelper));
+		generator.addProvider(event.includeClient(), new ItemModels(output, blockStates.models().existingFileHelper));
 	}
 }

@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "B": {
       "item": "minecraft:bricks"
@@ -18,5 +19,6 @@
   ],
   "result": {
     "item": "farmersdelight:stove"
-  }
+  },
+  "show_notification": true
 }

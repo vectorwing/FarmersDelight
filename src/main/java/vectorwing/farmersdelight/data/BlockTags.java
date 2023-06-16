@@ -86,9 +86,10 @@ public class BlockTags extends BlockTagsProvider
 		tag(net.minecraft.tags.BlockTags.CLIMBABLE).add(
 				ModBlocks.ROPE.get(),
 				ModBlocks.TOMATO_CROP.get());
-		// TODO: Find the new equivalent tag
-//		tag(net.minecraft.tags.BlockTags.REPLACEABLE_PLANTS).add(
-//				ModBlocks.SANDY_SHRUB.get());
+		tag(net.minecraft.tags.BlockTags.REPLACEABLE).add(
+				ModBlocks.SANDY_SHRUB.get());
+		tag(net.minecraft.tags.BlockTags.REPLACEABLE_BY_TREES).add(
+				ModBlocks.SANDY_SHRUB.get());
 		tag(net.minecraft.tags.BlockTags.BAMBOO_PLANTABLE_ON).add(
 				ModBlocks.RICH_SOIL.get());
 		tag(net.minecraft.tags.BlockTags.MUSHROOM_GROW_BLOCK).add(

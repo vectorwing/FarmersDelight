@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "key": {
     "r": {
       "item": "farmersdelight:rope"
@@ -12,5 +13,6 @@
   ],
   "result": {
     "item": "minecraft:lead"
-  }
+  },
+  "show_notification": true
 }

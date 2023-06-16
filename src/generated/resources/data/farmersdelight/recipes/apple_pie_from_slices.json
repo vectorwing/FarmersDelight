@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "#": {
       "item": "farmersdelight:apple_pie_slice"
@@ -11,5 +12,6 @@
   ],
   "result": {
     "item": "farmersdelight:apple_pie"
-  }
+  },
+  "show_notification": true
 }

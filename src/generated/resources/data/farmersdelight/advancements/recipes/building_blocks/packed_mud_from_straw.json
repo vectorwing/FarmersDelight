@@ -30,5 +30,6 @@
     "recipes": [
       "farmersdelight:packed_mud_from_straw"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

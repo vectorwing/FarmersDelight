@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.data;
 
 import com.google.common.collect.Sets;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -24,8 +24,8 @@ public class ItemModels extends ItemModelProvider
 	public static final String HANDHELD = "item/handheld";
 	public static final ResourceLocation MUG = new ResourceLocation(FarmersDelight.MODID, "item/mug");
 
-	public ItemModels(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-		super(generator, FarmersDelight.MODID, existingFileHelper);
+	public ItemModels(PackOutput output, ExistingFileHelper existingFileHelper) {
+		super(output, FarmersDelight.MODID, existingFileHelper);
 	}
 
 	@Override

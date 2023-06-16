@@ -3,6 +3,8 @@
 ## 1.2.1
 
 ### Updates
+- (1.20) Updated tags to the newest conventions in 1.20:
+  - `replaceable` and `replaceable_by_trees`: Sandy Shrub;
 - CraftTweaker integration has been re-enabled (thanks, Witixin1512!):
   - This integration exposes `recipe_book_tab` and `farmersdelight:tool_action` to CT scripts;
 - Updated the Cutting Board:

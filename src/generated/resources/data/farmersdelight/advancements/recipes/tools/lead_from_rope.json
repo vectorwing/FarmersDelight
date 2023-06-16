@@ -30,5 +30,6 @@
     "recipes": [
       "farmersdelight:lead_from_rope"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

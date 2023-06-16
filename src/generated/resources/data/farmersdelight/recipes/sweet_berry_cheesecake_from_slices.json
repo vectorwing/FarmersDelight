@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "#": {
       "item": "farmersdelight:sweet_berry_cheesecake_slice"
@@ -11,5 +12,6 @@
   ],
   "result": {
     "item": "farmersdelight:sweet_berry_cheesecake"
-  }
+  },
+  "show_notification": true
 }

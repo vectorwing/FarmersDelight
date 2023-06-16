@@ -54,7 +54,7 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 		icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, richSoil);
 		slotIcon = helper.createDrawable(backgroundImage, 119, 0, slotSize, slotSize);
 	}
-	
+
 	@Override
 	public RecipeType<DecompositionDummy> getRecipeType() {
 		return FDRecipeTypes.DECOMPOSITION;

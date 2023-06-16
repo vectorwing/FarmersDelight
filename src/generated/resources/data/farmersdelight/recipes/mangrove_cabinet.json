@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "D": {
       "item": "minecraft:mangrove_trapdoor"
@@ -15,5 +16,6 @@
   ],
   "result": {
     "item": "farmersdelight:mangrove_cabinet"
-  }
+  },
+  "show_notification": true
 }
