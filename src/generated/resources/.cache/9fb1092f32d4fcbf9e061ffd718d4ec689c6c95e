@@ -1,4 +1,4 @@
-// 1.20.1	2023-06-15T18:39:44.0379431	Recipes
+// 1.20.1	2023-06-16T17:30:26.7755458	Recipes
 a498fcc8b72b6631ddbb164a0245b37491e7571a data/farmersdelight/advancements/recipes/building_blocks/cabbage_crate.json
 c941206993bfa59d31b38132b898fb94c29746a6 data/farmersdelight/advancements/recipes/building_blocks/onion_crate.json
 2b93ef657fca92a73775c750079ea1503d8f02cc data/farmersdelight/advancements/recipes/building_blocks/organic_compost_from_rotten_flesh.json
@@ -253,6 +253,7 @@ f2a091178d769e07f53f3edd49f868327a55af5d data/farmersdelight/recipes/cutting/all
 9e0df2d102325c53e8ef64a9dead1aa2715f058d data/farmersdelight/recipes/cutting/amethyst_block.json
 5a9f453bac541085752a7536a4a0453c8e046979 data/farmersdelight/recipes/cutting/apple_pie.json
 127f96ed9f607ab5facd8c47a3215c5347ddc103 data/farmersdelight/recipes/cutting/azure_bluet.json
+eea19f8c5a1acc01229ca42bc04b8baab7dc81f5 data/farmersdelight/recipes/cutting/bamboo_block.json
 01a0dda0fdf1416e861ee52f8b2e44e077e2c399 data/farmersdelight/recipes/cutting/beef.json
 172772a990256a9eb29ba76d60fd05dbf9ee120a data/farmersdelight/recipes/cutting/birch_door.json
 a5e81d90c6ddf6f81fe83fa441d9f4b6aa7fc686 data/farmersdelight/recipes/cutting/birch_log.json
@@ -264,6 +265,11 @@ e39a71a653b69bce1cd68beac16cfbb0e4de85fd data/farmersdelight/recipes/cutting/bir
 a37c587e7798a08267470bf6a5f450c844a2fc82 data/farmersdelight/recipes/cutting/brown_mushroom_colony.json
 9464f90223e147d9db1a4b5a4f406a741aea0d7f data/farmersdelight/recipes/cutting/cabbage.json
 3a11b5553cdba40dc75ca06d423d48c4f8144517 data/farmersdelight/recipes/cutting/cake.json
+557bfcc0f5dc59b98165b603ea6966de3dcef55e data/farmersdelight/recipes/cutting/cherry_door.json
+ca927d7a8da89a6fe3c9f33987de81a5e938e270 data/farmersdelight/recipes/cutting/cherry_log.json
+50eb1011521cd2ae606b84a9aa313f531a4554e9 data/farmersdelight/recipes/cutting/cherry_sign.json
+f25040c28a97656de86746210f3dd89e131b1310 data/farmersdelight/recipes/cutting/cherry_trapdoor.json
+618b09e0af3353b593c154f0a618801cba725175 data/farmersdelight/recipes/cutting/cherry_wood.json
 12fe2ba4014f6307743e4bc645b7943290f0d329 data/farmersdelight/recipes/cutting/chicken.json
 5550e631a7ea7d35eda183acda5f7ce28651e743 data/farmersdelight/recipes/cutting/chocolate_pie.json
 56ebab789ed1bff4bece22828bb2c2a134758a38 data/farmersdelight/recipes/cutting/clay.json

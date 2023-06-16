@@ -178,10 +178,10 @@ public class CuttingRecipes
 	private static void strippingWood(Consumer<FinishedRecipe> consumer) {
 		stripLogForBark(consumer, Items.OAK_LOG, Items.STRIPPED_OAK_LOG);
 		stripLogForBark(consumer, Items.OAK_WOOD, Items.STRIPPED_OAK_WOOD);
-		stripLogForBark(consumer, Items.BIRCH_LOG, Items.STRIPPED_BIRCH_LOG);
-		stripLogForBark(consumer, Items.BIRCH_WOOD, Items.STRIPPED_BIRCH_WOOD);
 		stripLogForBark(consumer, Items.SPRUCE_LOG, Items.STRIPPED_SPRUCE_LOG);
 		stripLogForBark(consumer, Items.SPRUCE_WOOD, Items.STRIPPED_SPRUCE_WOOD);
+		stripLogForBark(consumer, Items.BIRCH_LOG, Items.STRIPPED_BIRCH_LOG);
+		stripLogForBark(consumer, Items.BIRCH_WOOD, Items.STRIPPED_BIRCH_WOOD);
 		stripLogForBark(consumer, Items.JUNGLE_LOG, Items.STRIPPED_JUNGLE_LOG);
 		stripLogForBark(consumer, Items.JUNGLE_WOOD, Items.STRIPPED_JUNGLE_WOOD);
 		stripLogForBark(consumer, Items.ACACIA_LOG, Items.STRIPPED_ACACIA_LOG);
@@ -190,8 +190,13 @@ public class CuttingRecipes
 		stripLogForBark(consumer, Items.DARK_OAK_WOOD, Items.STRIPPED_DARK_OAK_WOOD);
 		stripLogForBark(consumer, Items.MANGROVE_LOG, Items.STRIPPED_MANGROVE_LOG);
 		stripLogForBark(consumer, Items.MANGROVE_WOOD, Items.STRIPPED_MANGROVE_WOOD);
+		stripLogForBark(consumer, Items.CHERRY_LOG, Items.STRIPPED_CHERRY_LOG);
+		stripLogForBark(consumer, Items.CHERRY_WOOD, Items.STRIPPED_CHERRY_WOOD);
 		stripLogForBark(consumer, Items.CRIMSON_STEM, Items.STRIPPED_CRIMSON_STEM);
 		stripLogForBark(consumer, Items.CRIMSON_HYPHAE, Items.STRIPPED_CRIMSON_HYPHAE);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BAMBOO_BLOCK), new ToolActionIngredient(ToolActions.AXE_STRIP), Items.STRIPPED_BAMBOO_BLOCK)
+				.addResult(ModItems.STRAW.get())
+				.addSound(ForgeRegistries.SOUND_EVENTS.getKey(SoundEvents.AXE_STRIP).toString()).build(consumer);
 		stripLogForBark(consumer, Items.WARPED_STEM, Items.STRIPPED_WARPED_STEM);
 		stripLogForBark(consumer, Items.WARPED_HYPHAE, Items.STRIPPED_WARPED_HYPHAE);
 	}
@@ -204,6 +209,7 @@ public class CuttingRecipes
 		salvagePlankFromFurniture(consumer, Items.ACACIA_PLANKS, Items.ACACIA_DOOR, Items.ACACIA_TRAPDOOR, Items.ACACIA_SIGN);
 		salvagePlankFromFurniture(consumer, Items.DARK_OAK_PLANKS, Items.DARK_OAK_DOOR, Items.DARK_OAK_TRAPDOOR, Items.DARK_OAK_SIGN);
 		salvagePlankFromFurniture(consumer, Items.MANGROVE_PLANKS, Items.MANGROVE_DOOR, Items.MANGROVE_TRAPDOOR, Items.MANGROVE_SIGN);
+		salvagePlankFromFurniture(consumer, Items.CHERRY_PLANKS, Items.CHERRY_DOOR, Items.CHERRY_TRAPDOOR, Items.CHERRY_SIGN);
 		salvagePlankFromFurniture(consumer, Items.CRIMSON_PLANKS, Items.CRIMSON_DOOR, Items.CRIMSON_TRAPDOOR, Items.CRIMSON_SIGN);
 		salvagePlankFromFurniture(consumer, Items.WARPED_PLANKS, Items.WARPED_DOOR, Items.WARPED_TRAPDOOR, Items.WARPED_SIGN);
 	}
