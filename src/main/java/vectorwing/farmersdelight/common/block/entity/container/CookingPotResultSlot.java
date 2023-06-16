@@ -8,6 +8,7 @@ import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 
 @ParametersAreNonnullByDefault
 public class CookingPotResultSlot extends SlotItemHandler
@@ -51,10 +52,10 @@ public class CookingPotResultSlot extends SlotItemHandler
 
 	@Override
 	protected void checkTakeAchievements(ItemStack stack) {
-		stack.onCraftedBy(this.player.level, this.player, this.removeCount);
+		stack.onCraftedBy(this.player.level(), this.player, this.removeCount);
 
-		if (!this.player.level.isClientSide) {
-			tileEntity.awardUsedRecipes(this.player);
+		if (!this.player.level().isClientSide) {
+			tileEntity.awardUsedRecipes(this.player, tileEntity.getDroppableInventory());
 		}
 
 		this.removeCount = 0;

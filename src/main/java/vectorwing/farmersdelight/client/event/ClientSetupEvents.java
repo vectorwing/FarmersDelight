@@ -69,22 +69,6 @@ public class ClientSetupEvents
 //		modelRegistry.put(skilletLocation, new SkilletModel(event.getModelBakery(), skilletModel, skilletCookingModel));
 	}
 
-	// TODO: Study the new atlas JSON system, and convert this to it.
-//	@SubscribeEvent
-//	public static void onStitchEvent(TextureStitchEvent.Pre event) {
-//		ResourceLocation stitching = event.getAtlas().location();
-//		if (stitching.equals(new ResourceLocation("textures/atlas/signs.png"))) {
-//			event.addSprite(ModAtlases.BLANK_CANVAS_SIGN_MATERIAL.texture());
-//			for (Material material : ModAtlases.DYED_CANVAS_SIGN_MATERIALS.values()) {
-//				event.addSprite(material.texture());
-//			}
-//		}
-//		if (!stitching.equals(TextureAtlas.LOCATION_BLOCKS)) {
-//			return;
-//		}
-//		event.addSprite(EMPTY_CONTAINER_SLOT_BOWL);
-//	}
-
 	@SubscribeEvent
 	public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.STOVE.get(), StoveRenderer::new);

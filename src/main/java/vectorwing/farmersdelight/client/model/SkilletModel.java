@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.client.model;
 
 import com.google.common.base.Preconditions;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import com.mojang.math.Transformation;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.model.*;
@@ -33,8 +34,6 @@ import java.util.*;
 /**
  * Credits to the Botania Team for the class reference!
  */
-
-// TODO: Check if Material::sprite is the proper substitute for ForgeModelBakery.defaultTextureGetter().
 
 @SuppressWarnings("deprecation")
 public class SkilletModel implements BakedModel
@@ -128,7 +127,7 @@ public class SkilletModel implements BakedModel
 			ModelState transform = new SimpleModelState(
 					new Transformation(
 							new Vector3f(0.0F, -0.4F, 0.0F),
-							new Quaternionf(1.0F, 0.0F, 0.0F, 270), // TODO: This quaternion might not work as intended!
+							Axis.XP.rotationDegrees(270),
 							new Vector3f(0.625F, 0.625F, 0.625F), null));
 			ResourceLocation name = new ResourceLocation(FarmersDelight.MODID, "skillet_with_" + ingredientLocation.toString().replace(':', '_'));
 
