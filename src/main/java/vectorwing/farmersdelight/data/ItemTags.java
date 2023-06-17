@@ -60,15 +60,17 @@ public class ItemTags extends ItemTagsProvider
 				.add(ModItems.RED_CANVAS_SIGN.get())
 				.add(ModItems.BLACK_CANVAS_SIGN.get());
 		tag(ModTags.WOODEN_CABINETS)
-				.add(ModItems.ACACIA_CABINET.get())
-				.add(ModItems.BIRCH_CABINET.get())
-				.add(ModItems.CRIMSON_CABINET.get())
-				.add(ModItems.DARK_OAK_CABINET.get())
-				.add(ModItems.JUNGLE_CABINET.get())
 				.add(ModItems.OAK_CABINET.get())
 				.add(ModItems.SPRUCE_CABINET.get())
-				.add(ModItems.WARPED_CABINET.get())
-				.add(ModItems.MANGROVE_CABINET.get());
+				.add(ModItems.BIRCH_CABINET.get())
+				.add(ModItems.JUNGLE_CABINET.get())
+				.add(ModItems.ACACIA_CABINET.get())
+				.add(ModItems.DARK_OAK_CABINET.get())
+				.add(ModItems.MANGROVE_CABINET.get())
+				.add(ModItems.CHERRY_CABINET.get())
+				.add(ModItems.BAMBOO_CABINET.get())
+				.add(ModItems.CRIMSON_CABINET.get())
+				.add(ModItems.WARPED_CABINET.get());
 		tag(ModTags.CABINETS).addTag(ModTags.WOODEN_CABINETS);
 		tag(ModTags.OFFHAND_EQUIPMENT).add(Items.SHIELD).addOptional(new ResourceLocation("create:extendo_grip"));
 	}

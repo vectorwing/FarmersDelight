@@ -151,6 +151,8 @@ public class BlockStates extends BlockStateProvider
 		this.cabinetBlock(ModBlocks.ACACIA_CABINET.get(), "acacia");
 		this.cabinetBlock(ModBlocks.DARK_OAK_CABINET.get(), "dark_oak");
 		this.cabinetBlock(ModBlocks.MANGROVE_CABINET.get(), "mangrove");
+		this.cabinetBlock(ModBlocks.CHERRY_CABINET.get(), "cherry");
+		this.cabinetBlock(ModBlocks.BAMBOO_CABINET.get(), "bamboo");
 		this.cabinetBlock(ModBlocks.CRIMSON_CABINET.get(), "crimson");
 		this.cabinetBlock(ModBlocks.WARPED_CABINET.get(), "warped");
 

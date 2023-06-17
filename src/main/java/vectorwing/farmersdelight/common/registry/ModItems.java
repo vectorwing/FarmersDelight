@@ -91,6 +91,10 @@ public class ModItems
 			() -> new FuelBlockItem(ModBlocks.DARK_OAK_CABINET.get(), basicItem(), 300));
 	public static final RegistryObject<Item> MANGROVE_CABINET = registerWithTab("mangrove_cabinet",
 			() -> new FuelBlockItem(ModBlocks.MANGROVE_CABINET.get(), basicItem(), 300));
+	public static final RegistryObject<Item> CHERRY_CABINET = registerWithTab("cherry_cabinet",
+			() -> new FuelBlockItem(ModBlocks.CHERRY_CABINET.get(), basicItem(), 300));
+	public static final RegistryObject<Item> BAMBOO_CABINET = registerWithTab("bamboo_cabinet",
+			() -> new FuelBlockItem(ModBlocks.BAMBOO_CABINET.get(), basicItem(), 300));
 	public static final RegistryObject<Item> CRIMSON_CABINET = registerWithTab("crimson_cabinet",
 			() -> new BlockItem(ModBlocks.CRIMSON_CABINET.get(), basicItem()));
 	public static final RegistryObject<Item> WARPED_CABINET = registerWithTab("warped_cabinet",

@@ -328,6 +328,22 @@ public class CraftingRecipes
 				.define('D', Items.MANGROVE_TRAPDOOR)
 				.unlockedBy("has_mangrove_trapdoor", InventoryChangeTrigger.TriggerInstance.hasItems(Items.MANGROVE_TRAPDOOR))
 				.save(consumer);
+		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.CHERRY_CABINET.get())
+				.pattern("___")
+				.pattern("D D")
+				.pattern("___")
+				.define('_', Items.CHERRY_SLAB)
+				.define('D', Items.CHERRY_TRAPDOOR)
+				.unlockedBy("has_cherry_trapdoor", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CHERRY_TRAPDOOR))
+				.save(consumer);
+		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.BAMBOO_CABINET.get())
+				.pattern("___")
+				.pattern("D D")
+				.pattern("___")
+				.define('_', Items.BAMBOO_SLAB)
+				.define('D', Items.BAMBOO_TRAPDOOR)
+				.unlockedBy("has_bamboo_trapdoor", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BAMBOO_TRAPDOOR))
+				.save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.CRIMSON_CABINET.get())
 				.pattern("___")
 				.pattern("D D")

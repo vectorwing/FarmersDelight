@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:bamboo_trapdoor"
+    },
+    "_": {
+      "item": "minecraft:bamboo_slab"
+    }
+  },
+  "pattern": [
+    "___",
+    "D D",
+    "___"
+  ],
+  "result": {
+    "item": "farmersdelight:bamboo_cabinet"
+  },
+  "show_notification": true
+}

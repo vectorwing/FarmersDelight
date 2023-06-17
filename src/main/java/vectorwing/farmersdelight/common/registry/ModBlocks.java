@@ -70,12 +70,14 @@ public class ModBlocks
 			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
 	public static final RegistryObject<Block> MANGROVE_CABINET = BLOCKS.register("mangrove_cabinet",
 			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
+	public static final RegistryObject<Block> CHERRY_CABINET = BLOCKS.register("cherry_cabinet",
+			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL).sound(SoundType.CHERRY_WOOD)));
+	public static final RegistryObject<Block> BAMBOO_CABINET = BLOCKS.register("bamboo_cabinet",
+			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL).sound(SoundType.BAMBOO_WOOD)));
 	public static final RegistryObject<Block> CRIMSON_CABINET = BLOCKS.register("crimson_cabinet",
 			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL).sound(SoundType.NETHER_WOOD)));
 	public static final RegistryObject<Block> WARPED_CABINET = BLOCKS.register("warped_cabinet",
 			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL).sound(SoundType.NETHER_WOOD)));
-	// TODO: Add a Bamboo Cabinet
-	// TODO: Add a Cherry Cabinet
 	public static final RegistryObject<Block> CANVAS_RUG = BLOCKS.register("canvas_rug", CanvasRugBlock::new);
 	public static final RegistryObject<Block> TATAMI = BLOCKS.register("tatami", TatamiBlock::new);
 	public static final RegistryObject<Block> FULL_TATAMI_MAT = BLOCKS.register("full_tatami_mat", TatamiMatBlock::new);
