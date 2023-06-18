@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.common.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
@@ -45,6 +46,8 @@ public class SandyShrubBlock extends BushBlock implements net.minecraftforge.com
 
 	@Override
 	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-		WildCropGeneration.FEATURE_PATCH_SANDY_SHRUB_BONEMEAL.value().place(level, level.getChunkSource().getGenerator(), random, pos.above());
+		level.registryAccess().registry(Registries.CONFIGURED_FEATURE).flatMap((value) -> value.getHolder(WildCropGeneration.FEATURE_PATCH_SANDY_SHRUB_BONEMEAL)).ifPresent((value) -> {
+			value.value().place(level, level.getChunkSource().getGenerator(), random, pos.above());
+		});
 	}
 }

@@ -2,10 +2,7 @@ package vectorwing.farmersdelight;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.RecipeBookType;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -19,8 +16,7 @@ import vectorwing.farmersdelight.common.CommonSetup;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.*;
 import vectorwing.farmersdelight.common.world.VillageStructures;
-
-import javax.annotation.Nonnull;
+import vectorwing.farmersdelight.common.world.WildCropGeneration;
 
 @Mod(FarmersDelight.MODID)
 public class FarmersDelight
@@ -57,6 +53,7 @@ public class FarmersDelight
 		ModBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(modEventBus);
 		ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
 
+		WildCropGeneration.load();
 		MinecraftForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
 
 		MinecraftForge.EVENT_BUS.register(this);

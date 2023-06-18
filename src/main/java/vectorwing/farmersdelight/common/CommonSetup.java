@@ -22,7 +22,6 @@ import vectorwing.farmersdelight.common.loot.function.CopySkilletFunction;
 import vectorwing.farmersdelight.common.loot.function.SmokerCookFunction;
 import vectorwing.farmersdelight.common.registry.ModAdvancements;
 import vectorwing.farmersdelight.common.registry.ModItems;
-import vectorwing.farmersdelight.common.world.WildCropGeneration;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -35,7 +34,6 @@ public class CommonSetup
 			registerDispenserBehaviors();
 			registerAnimalFeeds();
 			registerLootItemFunctions();
-			WildCropGeneration.registerWildCropGeneration();
 		});
 
 		ModAdvancements.register();

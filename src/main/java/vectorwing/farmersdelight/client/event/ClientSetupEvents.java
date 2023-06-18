@@ -31,8 +31,6 @@ import java.util.Map;
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetupEvents
 {
-	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "item/empty_container_slot_bowl");
-
 	@SubscribeEvent
 	public static void onRegisterRecipeBookCategories(RegisterRecipeBookCategoriesEvent event)
 	{
