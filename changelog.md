@@ -3,7 +3,8 @@
 ## 1.2.1
 
 ### Additions
-- (1.20) Added Cherry and Bamboo Cabinets
+- (1.20) Added Cherry and Bamboo Cabinets;
+- (1.20) Added salvaging recipes for Cherry and Bamboo furniture;
 
 ### Updates
 - (1.20) Updated tags to the newest conventions in 1.20:
