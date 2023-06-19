@@ -12,7 +12,7 @@
     "accessor.RecipeManagerAccessor"
   ],
   "client": [
-    "CanvasSignMaterialMixin",
+    "CanvasSignEditScreenMixin",
     "HideBlockBreakProgressMixin"
   ],
   "injectors": {
