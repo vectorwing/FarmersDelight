@@ -20,10 +20,7 @@ import vectorwing.farmersdelight.client.model.SkilletModel;
 import vectorwing.farmersdelight.client.particle.StarParticle;
 import vectorwing.farmersdelight.client.particle.SteamParticle;
 import vectorwing.farmersdelight.client.recipebook.RecipeCategories;
-import vectorwing.farmersdelight.client.renderer.CanvasSignRenderer;
-import vectorwing.farmersdelight.client.renderer.CuttingBoardRenderer;
-import vectorwing.farmersdelight.client.renderer.SkilletRenderer;
-import vectorwing.farmersdelight.client.renderer.StoveRenderer;
+import vectorwing.farmersdelight.client.renderer.*;
 import vectorwing.farmersdelight.common.registry.*;
 
 import java.util.Map;
@@ -72,6 +69,7 @@ public class ClientSetupEvents
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.STOVE.get(), StoveRenderer::new);
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.CUTTING_BOARD.get(), CuttingBoardRenderer::new);
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.CANVAS_SIGN.get(), CanvasSignRenderer::new);
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.HANGING_CANVAS_SIGN.get(), HangingCanvasSignRenderer::new);
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.SKILLET.get(), SkilletRenderer::new);
 	}
 

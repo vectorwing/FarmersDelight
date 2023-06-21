@@ -60,6 +60,7 @@ public class BlockStates extends BlockStateProvider
 
 		Set<Block> canvasSigns = Sets.newHashSet(
 				ModBlocks.CANVAS_SIGN.get(),
+				ModBlocks.HANGING_CANVAS_SIGN.get(),
 				ModBlocks.WHITE_CANVAS_SIGN.get(),
 				ModBlocks.ORANGE_CANVAS_SIGN.get(),
 				ModBlocks.MAGENTA_CANVAS_SIGN.get(),
@@ -77,6 +78,7 @@ public class BlockStates extends BlockStateProvider
 				ModBlocks.RED_CANVAS_SIGN.get(),
 				ModBlocks.BLACK_CANVAS_SIGN.get(),
 				ModBlocks.CANVAS_WALL_SIGN.get(),
+				ModBlocks.HANGING_CANVAS_WALL_SIGN.get(),
 				ModBlocks.WHITE_CANVAS_WALL_SIGN.get(),
 				ModBlocks.ORANGE_CANVAS_WALL_SIGN.get(),
 				ModBlocks.MAGENTA_CANVAS_WALL_SIGN.get(),

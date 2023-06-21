@@ -64,6 +64,7 @@ public class ItemModels extends ItemModelProvider
 				ModItems.HALF_TATAMI_MAT.get(),
 				ModItems.ROPE.get(),
 				ModItems.CANVAS_SIGN.get(),
+				ModItems.HANGING_CANVAS_SIGN.get(),
 				ModItems.WHITE_CANVAS_SIGN.get(),
 				ModItems.ORANGE_CANVAS_SIGN.get(),
 				ModItems.MAGENTA_CANVAS_SIGN.get(),

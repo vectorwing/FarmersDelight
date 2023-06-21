@@ -1,4 +1,4 @@
-// 1.20.1	2023-06-16T22:02:59.4257769	Item Models: farmersdelight
+// 1.20.1	2023-06-20T18:18:57.0243948	Item Models: farmersdelight
 01e23a47f469a0c2107b2a1b6fc7f7c8f0c23d55 assets/farmersdelight/models/item/acacia_cabinet.json
 a58cc863fafd0f13d1235a2f7344b446f853ae55 assets/farmersdelight/models/item/apple_cider.json
 8348e66b9efe6a92614cca78c3463d3efaea57fa assets/farmersdelight/models/item/apple_pie.json
@@ -66,6 +66,7 @@ a4314660221dcffd6c4276a1ae8dc8e0914a3309 assets/farmersdelight/models/item/golde
 e4a898e51b9e7e412756e886c09eacb449f0dd70 assets/farmersdelight/models/item/half_tatami_mat.json
 d4d4a5e824ae415efc16aedbaf04be3dd381ccef assets/farmersdelight/models/item/ham.json
 2409a4cff59afc6932b205ed287337765f412f8c assets/farmersdelight/models/item/hamburger.json
+6675be7dd97b8c19ac7344029cad926a3b444b61 assets/farmersdelight/models/item/hanging_canvas_sign.json
 6863801e307626d269f520abcf247ef7cb6818f4 assets/farmersdelight/models/item/honey_cookie.json
 2c43c586cc0553726a6904a4b1aa3f7aa5e12fd4 assets/farmersdelight/models/item/honey_glazed_ham.json
 db8cd73cb30ef5633964155e90c29897aa58810a assets/farmersdelight/models/item/honey_glazed_ham_block.json

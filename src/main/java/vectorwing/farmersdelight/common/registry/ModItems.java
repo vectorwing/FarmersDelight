@@ -118,6 +118,8 @@ public class ModItems
 
 	public static final RegistryObject<Item> CANVAS_SIGN = registerWithTab("canvas_sign",
 			() -> new SignItem(basicItem(), ModBlocks.CANVAS_SIGN.get(), ModBlocks.CANVAS_WALL_SIGN.get()));
+	public static final RegistryObject<Item> HANGING_CANVAS_SIGN = registerWithTab("hanging_canvas_sign",
+			() -> new HangingSignItem(ModBlocks.HANGING_CANVAS_SIGN.get(), ModBlocks.HANGING_CANVAS_WALL_SIGN.get(), basicItem()));
 	public static final RegistryObject<Item> WHITE_CANVAS_SIGN = registerWithTab("white_canvas_sign",
 			() -> new SignItem(basicItem(), ModBlocks.WHITE_CANVAS_SIGN.get(), ModBlocks.WHITE_CANVAS_WALL_SIGN.get()));
 	public static final RegistryObject<Item> ORANGE_CANVAS_SIGN = registerWithTab("orange_canvas_sign",

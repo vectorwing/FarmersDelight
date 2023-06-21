@@ -1,9 +1,9 @@
 package vectorwing.farmersdelight.common.registry;
 
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.*;
 
@@ -66,4 +66,6 @@ public class ModBlockEntityTypes
 							ModBlocks.RED_CANVAS_WALL_SIGN.get(),
 							ModBlocks.BLACK_CANVAS_WALL_SIGN.get())
 					.build(null));
+	public static final RegistryObject<BlockEntityType<HangingCanvasSignBlockEntity>> HANGING_CANVAS_SIGN = TILES.register("hanging_canvas_sign",
+			() -> BlockEntityType.Builder.of(HangingCanvasSignBlockEntity::new, ModBlocks.HANGING_CANVAS_SIGN.get(), ModBlocks.HANGING_CANVAS_WALL_SIGN.get()).build(null));
 }

@@ -7,7 +7,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.StandingSignBlock;
+import net.minecraft.world.level.block.CeilingHangingSignBlock;
+import net.minecraft.world.level.block.WallHangingSignBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -17,14 +18,12 @@ import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
-public class StandingCanvasSignBlock extends StandingSignBlock implements CanvasSign
+public class WallHangingCanvasSignBlock extends WallHangingSignBlock implements CanvasSign
 {
 	private final DyeColor backgroundColor;
 
-	public StandingCanvasSignBlock(@Nullable DyeColor backgroundColor) {
-		super(Properties.copy(Blocks.SPRUCE_SIGN), WoodType.SPRUCE);
+	public WallHangingCanvasSignBlock(Properties properties, @Nullable DyeColor backgroundColor) {
+		super(properties, WoodType.SPRUCE);
 		this.backgroundColor = backgroundColor;
 	}
 
@@ -35,7 +34,7 @@ public class StandingCanvasSignBlock extends StandingSignBlock implements Canvas
 
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return ModBlockEntityTypes.CANVAS_SIGN.get().create(pos, state);
+		return ModBlockEntityTypes.HANGING_CANVAS_SIGN.get().create(pos, state);
 	}
 
 	@Override
@@ -47,6 +46,9 @@ public class StandingCanvasSignBlock extends StandingSignBlock implements Canvas
 				signEntity.updateText((signText) -> {
 					return signText.setColor(DyeColor.WHITE);
 				}, true);
+				signEntity.updateText((signText) -> {
+					return signText.setColor(DyeColor.WHITE);
+				}, false);
 			}
 		}
 	}

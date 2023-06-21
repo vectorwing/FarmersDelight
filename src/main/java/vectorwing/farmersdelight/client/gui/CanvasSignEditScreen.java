@@ -13,10 +13,9 @@ import net.minecraft.world.level.block.StandingSignBlock;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import vectorwing.farmersdelight.common.block.state.CanvasSign;
+import vectorwing.farmersdelight.common.registry.ModAtlases;
 
 import javax.annotation.Nullable;
-
-import static vectorwing.farmersdelight.client.renderer.CanvasSignRenderer.getCanvasSignMaterial;
 
 public class CanvasSignEditScreen extends SignEditScreen
 {
@@ -48,7 +47,7 @@ public class CanvasSignEditScreen extends SignEditScreen
 				guiGraphics.pose().mulPose(Axis.YP.rotationDegrees(180));
 			}
 			guiGraphics.pose().scale(MAGIC_SCALE_NUMBER, MAGIC_SCALE_NUMBER, -MAGIC_SCALE_NUMBER);
-			Material material = getCanvasSignMaterial(dye);
+			Material material = ModAtlases.getCanvasSignMaterial(dye);
 			VertexConsumer vertexconsumer = material.buffer(guiGraphics.bufferSource(), this.signModel::renderType);
 			this.signModel.stick.visible = flag;
 			this.signModel.root.render(guiGraphics.pose(), vertexconsumer, 15728880, OverlayTexture.NO_OVERLAY);
