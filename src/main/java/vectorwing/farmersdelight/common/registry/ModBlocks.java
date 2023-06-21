@@ -155,8 +155,73 @@ public class ModBlocks
 
 	public static final RegistryObject<Block> HANGING_CANVAS_SIGN = BLOCKS.register("hanging_canvas_sign",
 			() -> new CeilingHangingCanvasSignBlock(null));
+	public static final RegistryObject<Block> WHITE_HANGING_CANVAS_SIGN = BLOCKS.register("white_hanging_canvas_sign",
+			() -> new CeilingHangingCanvasSignBlock(DyeColor.WHITE));
+	public static final RegistryObject<Block> ORANGE_HANGING_CANVAS_SIGN = BLOCKS.register("orange_hanging_canvas_sign",
+			() -> new CeilingHangingCanvasSignBlock(DyeColor.ORANGE));
+	public static final RegistryObject<Block> MAGENTA_HANGING_CANVAS_SIGN = BLOCKS.register("magenta_hanging_canvas_sign",
+			() -> new CeilingHangingCanvasSignBlock(DyeColor.MAGENTA));
+	public static final RegistryObject<Block> LIGHT_BLUE_HANGING_CANVAS_SIGN = BLOCKS.register("light_blue_hanging_canvas_sign",
+			() -> new CeilingHangingCanvasSignBlock(DyeColor.LIGHT_BLUE));
+	public static final RegistryObject<Block> YELLOW_HANGING_CANVAS_SIGN = BLOCKS.register("yellow_hanging_canvas_sign",
+			() -> new CeilingHangingCanvasSignBlock(DyeColor.YELLOW));
+	public static final RegistryObject<Block> LIME_HANGING_CANVAS_SIGN = BLOCKS.register("lime_hanging_canvas_sign",
+			() -> new CeilingHangingCanvasSignBlock(DyeColor.LIME));
+	public static final RegistryObject<Block> PINK_HANGING_CANVAS_SIGN = BLOCKS.register("pink_hanging_canvas_sign",
+			() -> new CeilingHangingCanvasSignBlock(DyeColor.PINK));
+	public static final RegistryObject<Block> GRAY_HANGING_CANVAS_SIGN = BLOCKS.register("gray_hanging_canvas_sign",
+			() -> new CeilingHangingCanvasSignBlock(DyeColor.GRAY));
+	public static final RegistryObject<Block> LIGHT_GRAY_HANGING_CANVAS_SIGN = BLOCKS.register("light_gray_hanging_canvas_sign",
+			() -> new CeilingHangingCanvasSignBlock(DyeColor.LIGHT_GRAY));
+	public static final RegistryObject<Block> CYAN_HANGING_CANVAS_SIGN = BLOCKS.register("cyan_hanging_canvas_sign",
+			() -> new CeilingHangingCanvasSignBlock(DyeColor.CYAN));
+	public static final RegistryObject<Block> PURPLE_HANGING_CANVAS_SIGN = BLOCKS.register("purple_hanging_canvas_sign",
+			() -> new CeilingHangingCanvasSignBlock(DyeColor.PURPLE));
+	public static final RegistryObject<Block> BLUE_HANGING_CANVAS_SIGN = BLOCKS.register("blue_hanging_canvas_sign",
+			() -> new CeilingHangingCanvasSignBlock(DyeColor.BLUE));
+	public static final RegistryObject<Block> BROWN_HANGING_CANVAS_SIGN = BLOCKS.register("brown_hanging_canvas_sign",
+			() -> new CeilingHangingCanvasSignBlock(DyeColor.BROWN));
+	public static final RegistryObject<Block> GREEN_HANGING_CANVAS_SIGN = BLOCKS.register("green_hanging_canvas_sign",
+			() -> new CeilingHangingCanvasSignBlock(DyeColor.GREEN));
+	public static final RegistryObject<Block> RED_HANGING_CANVAS_SIGN = BLOCKS.register("red_hanging_canvas_sign",
+			() -> new CeilingHangingCanvasSignBlock(DyeColor.RED));
+	public static final RegistryObject<Block> BLACK_HANGING_CANVAS_SIGN = BLOCKS.register("black_hanging_canvas_sign",
+			() -> new CeilingHangingCanvasSignBlock(DyeColor.BLACK));
+
 	public static final RegistryObject<Block> HANGING_CANVAS_WALL_SIGN = BLOCKS.register("hanging_canvas_wall_sign",
-			() -> new WallHangingCanvasSignBlock(Block.Properties.copy(Blocks.SPRUCE_HANGING_SIGN).lootFrom(HANGING_CANVAS_SIGN), null));
+			() -> new WallHangingCanvasSignBlock(Block.Properties.copy(Blocks.SPRUCE_WALL_HANGING_SIGN).lootFrom(HANGING_CANVAS_SIGN), null));
+	public static final RegistryObject<Block> WHITE_HANGING_CANVAS_WALL_SIGN = BLOCKS.register("white_hanging_canvas_wall_sign",
+			() -> new WallHangingCanvasSignBlock(Block.Properties.copy(Blocks.SPRUCE_WALL_HANGING_SIGN).lootFrom(WHITE_HANGING_CANVAS_SIGN), DyeColor.WHITE));
+	public static final RegistryObject<Block> ORANGE_HANGING_CANVAS_WALL_SIGN = BLOCKS.register("orange_hanging_canvas_wall_sign",
+			() -> new WallHangingCanvasSignBlock(Block.Properties.copy(Blocks.SPRUCE_WALL_HANGING_SIGN).lootFrom(ORANGE_HANGING_CANVAS_SIGN), DyeColor.ORANGE));
+	public static final RegistryObject<Block> MAGENTA_HANGING_CANVAS_WALL_SIGN = BLOCKS.register("magenta_hanging_canvas_wall_sign",
+			() -> new WallHangingCanvasSignBlock(Block.Properties.copy(Blocks.SPRUCE_WALL_HANGING_SIGN).lootFrom(MAGENTA_HANGING_CANVAS_SIGN), DyeColor.MAGENTA));
+	public static final RegistryObject<Block> LIGHT_BLUE_HANGING_CANVAS_WALL_SIGN = BLOCKS.register("light_blue_hanging_canvas_wall_sign",
+			() -> new WallHangingCanvasSignBlock(Block.Properties.copy(Blocks.SPRUCE_WALL_HANGING_SIGN).lootFrom(LIGHT_BLUE_HANGING_CANVAS_SIGN), DyeColor.LIGHT_BLUE));
+	public static final RegistryObject<Block> YELLOW_HANGING_CANVAS_WALL_SIGN = BLOCKS.register("yellow_hanging_canvas_wall_sign",
+			() -> new WallHangingCanvasSignBlock(Block.Properties.copy(Blocks.SPRUCE_WALL_HANGING_SIGN).lootFrom(YELLOW_HANGING_CANVAS_SIGN), DyeColor.YELLOW));
+	public static final RegistryObject<Block> LIME_HANGING_CANVAS_WALL_SIGN = BLOCKS.register("lime_hanging_canvas_wall_sign",
+			() -> new WallHangingCanvasSignBlock(Block.Properties.copy(Blocks.SPRUCE_WALL_HANGING_SIGN).lootFrom(LIME_HANGING_CANVAS_SIGN), DyeColor.LIME));
+	public static final RegistryObject<Block> PINK_HANGING_CANVAS_WALL_SIGN = BLOCKS.register("pink_hanging_canvas_wall_sign",
+			() -> new WallHangingCanvasSignBlock(Block.Properties.copy(Blocks.SPRUCE_WALL_HANGING_SIGN).lootFrom(PINK_HANGING_CANVAS_SIGN), DyeColor.PINK));
+	public static final RegistryObject<Block> GRAY_HANGING_CANVAS_WALL_SIGN = BLOCKS.register("gray_hanging_canvas_wall_sign",
+			() -> new WallHangingCanvasSignBlock(Block.Properties.copy(Blocks.SPRUCE_WALL_HANGING_SIGN).lootFrom(GRAY_HANGING_CANVAS_SIGN), DyeColor.GRAY));
+	public static final RegistryObject<Block> LIGHT_GRAY_HANGING_CANVAS_WALL_SIGN = BLOCKS.register("light_gray_hanging_canvas_wall_sign",
+			() -> new WallHangingCanvasSignBlock(Block.Properties.copy(Blocks.SPRUCE_WALL_HANGING_SIGN).lootFrom(LIGHT_GRAY_HANGING_CANVAS_SIGN), DyeColor.LIGHT_GRAY));
+	public static final RegistryObject<Block> CYAN_HANGING_CANVAS_WALL_SIGN = BLOCKS.register("cyan_hanging_canvas_wall_sign",
+			() -> new WallHangingCanvasSignBlock(Block.Properties.copy(Blocks.SPRUCE_WALL_HANGING_SIGN).lootFrom(CYAN_HANGING_CANVAS_SIGN), DyeColor.CYAN));
+	public static final RegistryObject<Block> PURPLE_HANGING_CANVAS_WALL_SIGN = BLOCKS.register("purple_hanging_canvas_wall_sign",
+			() -> new WallHangingCanvasSignBlock(Block.Properties.copy(Blocks.SPRUCE_WALL_HANGING_SIGN).lootFrom(PURPLE_HANGING_CANVAS_SIGN), DyeColor.PURPLE));
+	public static final RegistryObject<Block> BLUE_HANGING_CANVAS_WALL_SIGN = BLOCKS.register("blue_hanging_canvas_wall_sign",
+			() -> new WallHangingCanvasSignBlock(Block.Properties.copy(Blocks.SPRUCE_WALL_HANGING_SIGN).lootFrom(BLUE_HANGING_CANVAS_SIGN), DyeColor.BLUE));
+	public static final RegistryObject<Block> BROWN_HANGING_CANVAS_WALL_SIGN = BLOCKS.register("brown_hanging_canvas_wall_sign",
+			() -> new WallHangingCanvasSignBlock(Block.Properties.copy(Blocks.SPRUCE_WALL_HANGING_SIGN).lootFrom(BROWN_HANGING_CANVAS_SIGN), DyeColor.BROWN));
+	public static final RegistryObject<Block> GREEN_HANGING_CANVAS_WALL_SIGN = BLOCKS.register("green_hanging_canvas_wall_sign",
+			() -> new WallHangingCanvasSignBlock(Block.Properties.copy(Blocks.SPRUCE_WALL_HANGING_SIGN).lootFrom(GREEN_HANGING_CANVAS_SIGN), DyeColor.GREEN));
+	public static final RegistryObject<Block> RED_HANGING_CANVAS_WALL_SIGN = BLOCKS.register("red_hanging_canvas_wall_sign",
+			() -> new WallHangingCanvasSignBlock(Block.Properties.copy(Blocks.SPRUCE_WALL_HANGING_SIGN).lootFrom(RED_HANGING_CANVAS_SIGN), DyeColor.RED));
+	public static final RegistryObject<Block> BLACK_HANGING_CANVAS_WALL_SIGN = BLOCKS.register("black_hanging_canvas_wall_sign",
+			() -> new WallHangingCanvasSignBlock(Block.Properties.copy(Blocks.SPRUCE_WALL_HANGING_SIGN).lootFrom(BLACK_HANGING_CANVAS_SIGN), DyeColor.BLACK));
 
 	// Composting
 	public static final RegistryObject<Block> BROWN_MUSHROOM_COLONY = BLOCKS.register("brown_mushroom_colony",

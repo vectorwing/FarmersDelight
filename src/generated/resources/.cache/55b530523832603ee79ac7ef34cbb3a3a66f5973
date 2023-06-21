@@ -1,4 +1,4 @@
-// 1.20.1	2023-06-15T22:47:25.7556305	Tags for minecraft:block mod id farmersdelight
+// 1.20.1	2023-06-21T00:17:13.1119513	Tags for minecraft:block mod id farmersdelight
 8d7cbaffcdabbd68f45063e7fa616212824d0ca6 data/farmersdelight/tags/blocks/compost_activators.json
 17bf02f1662de477e421a897a9b1a092da3fd1b4 data/farmersdelight/tags/blocks/drops_cake_slice.json
 bfaccff8e729039a0c1d0db4d359ded77f7c60c8 data/farmersdelight/tags/blocks/heat_conductors.json
@@ -12,6 +12,7 @@ a3f8c7e1c1273e4619df79645193c14be80145df data/farmersdelight/tags/blocks/unaffec
 5596501768488a25c5bcc6ef16c2fc5ca3ab49e9 data/farmersdelight/tags/blocks/wild_crops.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/forge/tags/blocks/mineable/knife.json
 d0812613832bbc602d7ff3274c81d5729e91c2ea data/minecraft/tags/blocks/bamboo_plantable_on.json
+859810b0bf4f36e275af5b6a86c3c7b9a968dbd3 data/minecraft/tags/blocks/ceiling_hanging_signs.json
 f84897a4867a8218f34243fe5553b2ceaba22e2a data/minecraft/tags/blocks/climbable.json
 c59b7f6a296652589d886c68178a491a05620a24 data/minecraft/tags/blocks/crops.json
 d0812613832bbc602d7ff3274c81d5729e91c2ea data/minecraft/tags/blocks/dirt.json
@@ -25,4 +26,5 @@ d0812613832bbc602d7ff3274c81d5729e91c2ea data/minecraft/tags/blocks/dirt.json
 f3b1539ad9a9117d3c48eca8dc67768f1a118df4 data/minecraft/tags/blocks/small_flowers.json
 f689dbe322491c7ad7b7aa512fbd981bc4d7ec45 data/minecraft/tags/blocks/standing_signs.json
 166fca1b0d8b63bf7564f93e9e7d0bf3dd45bf03 data/minecraft/tags/blocks/tall_flowers.json
+e014668102239714be9ceee554271e1ae17de14b data/minecraft/tags/blocks/wall_hanging_signs.json
 42655e1b47b467aeaf7593e6f2fca0a16786fb87 data/minecraft/tags/blocks/wall_signs.json

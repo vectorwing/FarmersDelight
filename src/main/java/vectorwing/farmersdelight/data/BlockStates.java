@@ -21,6 +21,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.*;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.registry.ModItems;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -59,42 +60,76 @@ public class BlockStates extends BlockStateProvider
 		this.simpleBlock(ModBlocks.SAFETY_NET.get(), existingModel(ModBlocks.SAFETY_NET.get()));
 
 		Set<Block> canvasSigns = Sets.newHashSet(
+				// Standard
 				ModBlocks.CANVAS_SIGN.get(),
 				ModBlocks.HANGING_CANVAS_SIGN.get(),
 				ModBlocks.WHITE_CANVAS_SIGN.get(),
+				ModBlocks.WHITE_HANGING_CANVAS_SIGN.get(),
 				ModBlocks.ORANGE_CANVAS_SIGN.get(),
+				ModBlocks.ORANGE_HANGING_CANVAS_SIGN.get(),
 				ModBlocks.MAGENTA_CANVAS_SIGN.get(),
+				ModBlocks.MAGENTA_HANGING_CANVAS_SIGN.get(),
 				ModBlocks.LIGHT_BLUE_CANVAS_SIGN.get(),
+				ModBlocks.LIGHT_BLUE_HANGING_CANVAS_SIGN.get(),
 				ModBlocks.YELLOW_CANVAS_SIGN.get(),
+				ModBlocks.YELLOW_HANGING_CANVAS_SIGN.get(),
 				ModBlocks.LIME_CANVAS_SIGN.get(),
+				ModBlocks.LIME_HANGING_CANVAS_SIGN.get(),
 				ModBlocks.PINK_CANVAS_SIGN.get(),
+				ModBlocks.PINK_HANGING_CANVAS_SIGN.get(),
 				ModBlocks.GRAY_CANVAS_SIGN.get(),
+				ModBlocks.GRAY_HANGING_CANVAS_SIGN.get(),
 				ModBlocks.LIGHT_GRAY_CANVAS_SIGN.get(),
+				ModBlocks.LIGHT_GRAY_HANGING_CANVAS_SIGN.get(),
 				ModBlocks.CYAN_CANVAS_SIGN.get(),
+				ModBlocks.CYAN_HANGING_CANVAS_SIGN.get(),
 				ModBlocks.PURPLE_CANVAS_SIGN.get(),
+				ModBlocks.PURPLE_HANGING_CANVAS_SIGN.get(),
 				ModBlocks.BLUE_CANVAS_SIGN.get(),
+				ModBlocks.BLUE_HANGING_CANVAS_SIGN.get(),
 				ModBlocks.BROWN_CANVAS_SIGN.get(),
+				ModBlocks.BROWN_HANGING_CANVAS_SIGN.get(),
 				ModBlocks.GREEN_CANVAS_SIGN.get(),
+				ModBlocks.GREEN_HANGING_CANVAS_SIGN.get(),
 				ModBlocks.RED_CANVAS_SIGN.get(),
+				ModBlocks.RED_HANGING_CANVAS_SIGN.get(),
 				ModBlocks.BLACK_CANVAS_SIGN.get(),
+				ModBlocks.BLACK_HANGING_CANVAS_SIGN.get(),
+				// Wall
 				ModBlocks.CANVAS_WALL_SIGN.get(),
 				ModBlocks.HANGING_CANVAS_WALL_SIGN.get(),
 				ModBlocks.WHITE_CANVAS_WALL_SIGN.get(),
+				ModBlocks.WHITE_HANGING_CANVAS_WALL_SIGN.get(),
 				ModBlocks.ORANGE_CANVAS_WALL_SIGN.get(),
+				ModBlocks.ORANGE_HANGING_CANVAS_WALL_SIGN.get(),
 				ModBlocks.MAGENTA_CANVAS_WALL_SIGN.get(),
+				ModBlocks.MAGENTA_HANGING_CANVAS_WALL_SIGN.get(),
 				ModBlocks.LIGHT_BLUE_CANVAS_WALL_SIGN.get(),
+				ModBlocks.LIGHT_BLUE_HANGING_CANVAS_WALL_SIGN.get(),
 				ModBlocks.YELLOW_CANVAS_WALL_SIGN.get(),
+				ModBlocks.YELLOW_HANGING_CANVAS_WALL_SIGN.get(),
 				ModBlocks.LIME_CANVAS_WALL_SIGN.get(),
+				ModBlocks.LIME_HANGING_CANVAS_WALL_SIGN.get(),
 				ModBlocks.PINK_CANVAS_WALL_SIGN.get(),
+				ModBlocks.PINK_HANGING_CANVAS_WALL_SIGN.get(),
 				ModBlocks.GRAY_CANVAS_WALL_SIGN.get(),
+				ModBlocks.GRAY_HANGING_CANVAS_WALL_SIGN.get(),
 				ModBlocks.LIGHT_GRAY_CANVAS_WALL_SIGN.get(),
+				ModBlocks.LIGHT_GRAY_HANGING_CANVAS_WALL_SIGN.get(),
 				ModBlocks.CYAN_CANVAS_WALL_SIGN.get(),
+				ModBlocks.CYAN_HANGING_CANVAS_WALL_SIGN.get(),
 				ModBlocks.PURPLE_CANVAS_WALL_SIGN.get(),
+				ModBlocks.PURPLE_HANGING_CANVAS_WALL_SIGN.get(),
 				ModBlocks.BLUE_CANVAS_WALL_SIGN.get(),
+				ModBlocks.BLUE_HANGING_CANVAS_WALL_SIGN.get(),
 				ModBlocks.BROWN_CANVAS_WALL_SIGN.get(),
+				ModBlocks.BROWN_HANGING_CANVAS_WALL_SIGN.get(),
 				ModBlocks.GREEN_CANVAS_WALL_SIGN.get(),
+				ModBlocks.GREEN_HANGING_CANVAS_WALL_SIGN.get(),
 				ModBlocks.RED_CANVAS_WALL_SIGN.get(),
-				ModBlocks.BLACK_CANVAS_WALL_SIGN.get());
+				ModBlocks.RED_HANGING_CANVAS_WALL_SIGN.get(),
+				ModBlocks.BLACK_CANVAS_WALL_SIGN.get(),
+				ModBlocks.BLACK_HANGING_CANVAS_WALL_SIGN.get());
 
 		for (Block sign : canvasSigns) {
 			this.simpleBlock(sign, existingModel(ModBlocks.CANVAS_SIGN.get()));
