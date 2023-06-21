@@ -72,6 +72,9 @@ public class ModTags
 	// Canvas Signs items for crafting.
 	public static final TagKey<Item> CANVAS_SIGNS = modItemTag("canvas_signs");
 
+	// Canvas Signs items for crafting.
+	public static final TagKey<Item> HANGING_CANVAS_SIGNS = modItemTag("hanging_canvas_signs");
+
 	// Wooden Cabinet items for crafting.
 	public static final TagKey<Item> WOODEN_CABINETS = modItemTag("cabinets/wooden");
 

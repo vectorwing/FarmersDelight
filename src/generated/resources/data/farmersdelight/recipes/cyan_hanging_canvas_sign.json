@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "hanging_canvas_sign",
+  "ingredients": [
+    {
+      "tag": "farmersdelight:hanging_canvas_signs"
+    },
+    {
+      "tag": "forge:dyes/cyan"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:cyan_hanging_canvas_sign"
+  }
+}
