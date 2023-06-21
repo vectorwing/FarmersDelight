@@ -36,9 +36,7 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 public class CanvasSignRenderer extends SignRenderer
 {
-	private static final Vec3 TEXT_OFFSET = new Vec3(0.0D, (double) 0.33333334F, (double) 0.046666667F);
-	public static final float TEXT_LINE_HEIGHT = 10;
-	public static final float TEXT_VERTICAL_OFFSET = 19;
+	public static final Vec3 TEXT_OFFSET = new Vec3(0.0D, (double) 0.33333334F, (double) 0.046666667F);
 	private static final int OUTLINE_RENDER_DISTANCE = Mth.square(16);
 
 	private final SignModel signModel;
@@ -89,17 +87,21 @@ public class CanvasSignRenderer extends SignRenderer
 		poseStack.scale(rootScale, -rootScale, -rootScale);
 		Material material = getCanvasSignMaterial(dye);
 		VertexConsumer vertexConsumer = material.buffer(bufferSource, model::renderType);
-		SignRenderer.SignModel signModel = (SignRenderer.SignModel) model;
-		signModel.root.render(poseStack, vertexConsumer, packedLight, packedOverlay);
+		this.renderSignModel(poseStack, packedLight, packedOverlay, model, vertexConsumer);
 		poseStack.popPose();
 	}
 
-	protected void renderSignText(BlockPos pos, SignText text, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int p_279179_, int p_279357_, boolean isFrontText) {
+	protected void renderSignModel(PoseStack poseStack, int packedLight, int packedOverlay, Model model, VertexConsumer vertexConsumer) {
+		SignRenderer.SignModel signModel = (SignRenderer.SignModel) model;
+		signModel.root.render(poseStack, vertexConsumer, packedLight, packedOverlay);
+	}
+
+	protected void renderSignText(BlockPos pos, SignText text, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int textLineHeight, int maxTextLineWidth, boolean isFrontText) {
 		poseStack.pushPose();
-		translateSignText(poseStack, isFrontText, TEXT_OFFSET);
+		translateSignText(poseStack, isFrontText, this.getTextOffset());
 
 		FormattedCharSequence[] formattedCharSequenceList = text.getRenderMessages(Minecraft.getInstance().isTextFilteringEnabled(), (component) -> {
-			List<FormattedCharSequence> list = this.font.split(component, 90);
+			List<FormattedCharSequence> list = this.font.split(component, maxTextLineWidth);
 			return list.isEmpty() ? FormattedCharSequence.EMPTY : list.get(0);
 		});
 
@@ -119,10 +121,12 @@ public class CanvasSignRenderer extends SignRenderer
 			light = packedLight;
 		}
 
+		int verticalOffset = 2 * textLineHeight + this.getCustomVerticalOffset();
+
 		for (int i = 0; i < 4; ++i) {
 			FormattedCharSequence formattedCharSequence = formattedCharSequenceList[i];
 			float x = (float) (-this.font.width(formattedCharSequence) / 2);
-			float y = i * TEXT_LINE_HEIGHT - TEXT_VERTICAL_OFFSET;
+			float y = i * textLineHeight - verticalOffset;
 			if (hasOutline) {
 				this.font.drawInBatch8xOutline(formattedCharSequence, x, y, baseColor, darkColor, poseStack.last().pose(), bufferSource, light);
 			} else {
@@ -143,7 +147,7 @@ public class CanvasSignRenderer extends SignRenderer
 		poseStack.scale(textScale, -textScale, textScale);
 	}
 
-	private static boolean isOutlineVisible(BlockPos pos, int textColor) {
+	public static boolean isOutlineVisible(BlockPos pos, int textColor) {
 		if (textColor == DyeColor.BLACK.getTextColor()) {
 			return true;
 		} else {
@@ -171,7 +175,15 @@ public class CanvasSignRenderer extends SignRenderer
 		}
 	}
 
-	public static Material getCanvasSignMaterial(@Nullable DyeColor dyeColor) {
-		return dyeColor != null ? ModAtlases.DYED_CANVAS_SIGN_MATERIALS.get(dyeColor) : ModAtlases.BLANK_CANVAS_SIGN_MATERIAL;
+	Vec3 getTextOffset() {
+		return TEXT_OFFSET;
+	}
+
+	public int getCustomVerticalOffset() {
+		return -1;
+	}
+
+	public Material getCanvasSignMaterial(@Nullable DyeColor dyeColor) {
+		return ModAtlases.getCanvasSignMaterial(dyeColor);
 	}
 }
