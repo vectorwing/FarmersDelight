@@ -2,6 +2,11 @@
 
 ## 1.2.2
 
+### Additions
+- Added some of FD's meat items to the `origins:meat` tag, from the Origins mod:
+  - Carnivorous foods not defined as `meat()` in properties;
+  - Bacon and Eggs;
+
 ### Fixes
 - Fix loot functions lacking a type, causing errors with datagen and mods (such as Roughly Enough Resources);
 - Fix Lily Pads and other water plants being plantable on Rich Soil;

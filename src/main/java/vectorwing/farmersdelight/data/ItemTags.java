@@ -9,6 +9,7 @@ import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.tag.CompatibilityTags;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
@@ -31,6 +32,7 @@ public class ItemTags extends ItemTagsProvider
 
 		this.registerModTags();
 		this.registerForgeTags();
+		this.registerCompatibilityTags();
 	}
 
 
@@ -141,5 +143,15 @@ public class ItemTags extends ItemTagsProvider
 		tag(ForgeTags.TOOLS_KNIVES).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get(), ModItems.NETHERITE_KNIFE.get());
 		tag(ForgeTags.TOOLS_PICKAXES).add(Items.WOODEN_PICKAXE, Items.STONE_PICKAXE, Items.IRON_PICKAXE, Items.DIAMOND_PICKAXE, Items.GOLDEN_PICKAXE, Items.NETHERITE_PICKAXE);
 		tag(ForgeTags.TOOLS_SHOVELS).add(Items.WOODEN_SHOVEL, Items.STONE_SHOVEL, Items.IRON_SHOVEL, Items.DIAMOND_SHOVEL, Items.GOLDEN_SHOVEL, Items.NETHERITE_SHOVEL);
+	}
+
+	public void registerCompatibilityTags() {
+		tag(CompatibilityTags.ORIGINS_MEAT)
+				.add(ModItems.FRIED_EGG.get())
+				.add(ModItems.COD_SLICE.get())
+				.add(ModItems.COOKED_COD_SLICE.get())
+				.add(ModItems.SALMON_SLICE.get())
+				.add(ModItems.COOKED_SALMON_SLICE.get())
+				.add(ModItems.BACON_AND_EGGS.get());
 	}
 }
