@@ -19,6 +19,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction.Builder;
+import vectorwing.farmersdelight.common.registry.ModLootFunctions;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -47,9 +48,8 @@ public class CopySkilletFunction extends LootItemConditionalFunction
 	}
 
 	@Override
-	@Nullable
 	public LootItemFunctionType getType() {
-		return null;
+		return ModLootFunctions.COPY_SKILLET.get();
 	}
 
 	public static class Serializer extends LootItemConditionalFunction.Serializer<CopySkilletFunction>

@@ -14,6 +14,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
+import vectorwing.farmersdelight.common.registry.ModLootFunctions;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -45,9 +46,8 @@ public class CopyMealFunction extends LootItemConditionalFunction
 	}
 
 	@Override
-	@Nullable
 	public LootItemFunctionType getType() {
-		return null;
+		return ModLootFunctions.COPY_MEAL.get();
 	}
 
 	public static class Serializer extends LootItemConditionalFunction.Serializer<CopyMealFunction>
