@@ -6,7 +6,7 @@ license="MIT License"
 
 [[mods]]
 modId="farmersdelight"
-version="1.18.2-1.2.1"
+version="1.18.2-1.2.2-beta"
 displayName="Farmer's Delight"
 # updateJSONURL=""
 displayURL="https://github.com/vectorwing/FarmersDelight"

@@ -3,6 +3,7 @@
 ## 1.2.2
 
 ### Fixes
+- Fix loot functions lacking a type, causing errors with datagen and mods (such as Roughly Enough Resources);
 - Fix Lily Pads and other water plants being plantable on Rich Soil;
 
 ## 1.2.1

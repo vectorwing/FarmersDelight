@@ -11,15 +11,11 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctions;
 import net.minecraftforge.common.crafting.CompoundIngredient;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import vectorwing.farmersdelight.common.crafting.condition.VanillaCrateEnabledCondition;
 import vectorwing.farmersdelight.common.entity.RottenTomatoEntity;
-import vectorwing.farmersdelight.common.loot.function.CopyMealFunction;
-import vectorwing.farmersdelight.common.loot.function.CopySkilletFunction;
-import vectorwing.farmersdelight.common.loot.function.SmokerCookFunction;
 import vectorwing.farmersdelight.common.registry.ModAdvancements;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.world.WildCropGeneration;
@@ -34,7 +30,6 @@ public class CommonSetup
 			registerCompostables();
 			registerDispenserBehaviors();
 			registerAnimalFeeds();
-			registerLootItemFunctions();
 			WildCropGeneration.registerWildCropGeneration();
 		});
 
@@ -114,11 +109,5 @@ public class CommonSetup
 		};
 
 		Collections.addAll(Parrot.TAME_FOOD, ModItems.CABBAGE_SEEDS.get(), ModItems.TOMATO_SEEDS.get(), ModItems.RICE.get());
-	}
-
-	public static void registerLootItemFunctions() {
-		LootItemFunctions.register(CopyMealFunction.ID.toString(), new CopyMealFunction.Serializer());
-		LootItemFunctions.register(CopySkilletFunction.ID.toString(), new CopySkilletFunction.Serializer());
-		LootItemFunctions.register(SmokerCookFunction.ID.toString(), new SmokerCookFunction.Serializer());
 	}
 }
