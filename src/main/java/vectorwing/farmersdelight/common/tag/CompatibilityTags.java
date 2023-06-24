@@ -13,7 +13,11 @@ import net.minecraft.world.level.block.Block;
 public class CompatibilityTags
 {
 	// Create
+//	public static final TagKey<Block> CREATE_PASSIVE_BOILER_HEATERS = externalBlockTag("create", "passive_boiler_heaters");
 
+	@Deprecated // Legacy compatibility with Create 0.4. Remove on 1.19 and beyond.
+	public static final TagKey<Block> CREATE_FAN_HEATERS = externalBlockTag("create", "fan_heaters");
+	public static final TagKey<Item> CREATE_UPRIGHT_ON_BELT = externalItemTag("create", "upright_on_belt");
 
 	// Origins
 	public static final TagKey<Item> ORIGINS_MEAT = externalItemTag("origins", "meat");

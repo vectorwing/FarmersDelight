@@ -8,6 +8,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.CompatibilityTags;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
@@ -146,6 +147,15 @@ public class ItemTags extends ItemTagsProvider
 	}
 
 	public void registerCompatibilityTags() {
+		tag(CompatibilityTags.CREATE_UPRIGHT_ON_BELT)
+				.add(ModItems.MILK_BOTTLE.get())
+				.add(ModItems.HOT_COCOA.get())
+				.add(ModItems.APPLE_CIDER.get())
+				.add(ModItems.MELON_JUICE.get())
+				.add(ModItems.PIE_CRUST.get())
+				.add(ModItems.APPLE_PIE.get())
+				.add(ModItems.SWEET_BERRY_CHEESECAKE.get())
+				.add(ModItems.CHOCOLATE_PIE.get());
 		tag(CompatibilityTags.ORIGINS_MEAT)
 				.add(ModItems.FRIED_EGG.get())
 				.add(ModItems.COD_SLICE.get())

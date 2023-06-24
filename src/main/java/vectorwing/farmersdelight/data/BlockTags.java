@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.tag.CompatibilityTags;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
@@ -22,6 +23,7 @@ public class BlockTags extends BlockTagsProvider
 		this.registerModTags();
 		this.registerMinecraftTags();
 		this.registerForgeTags();
+		this.registerCompatibilityTags();
 
 		this.registerBlockMineables();
 	}
@@ -223,5 +225,9 @@ public class BlockTags extends BlockTagsProvider
 				Blocks.GREEN_CANDLE_CAKE,
 				Blocks.RED_CANDLE_CAKE,
 				Blocks.BLACK_CANDLE_CAKE);
+	}
+
+	private void registerCompatibilityTags() {
+		tag(CompatibilityTags.CREATE_FAN_HEATERS).add(ModBlocks.STOVE.get());
 	}
 }
