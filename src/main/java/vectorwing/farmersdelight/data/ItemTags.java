@@ -156,6 +156,7 @@ public class ItemTags extends ItemTagsProvider
 				.add(ModItems.APPLE_PIE.get())
 				.add(ModItems.SWEET_BERRY_CHEESECAKE.get())
 				.add(ModItems.CHOCOLATE_PIE.get());
+
 		tag(CompatibilityTags.ORIGINS_MEAT)
 				.add(ModItems.FRIED_EGG.get())
 				.add(ModItems.COD_SLICE.get())
@@ -163,5 +164,17 @@ public class ItemTags extends ItemTagsProvider
 				.add(ModItems.SALMON_SLICE.get())
 				.add(ModItems.COOKED_SALMON_SLICE.get())
 				.add(ModItems.BACON_AND_EGGS.get());
+
+		tag(CompatibilityTags.SERENE_SEASONS_AUTUMN_CROPS)
+				.add(ModItems.CABBAGE_SEEDS.get())
+				.add(ModItems.ONION.get())
+				.add(ModItems.RICE.get());
+		tag(CompatibilityTags.SERENE_SEASONS_SPRING_CROPS)
+				.add(ModItems.ONION.get());
+		tag(CompatibilityTags.SERENE_SEASONS_SUMMER_CROPS)
+				.add(ModItems.TOMATO_SEEDS.get())
+				.add(ModItems.RICE.get());
+		tag(CompatibilityTags.SERENE_SEASONS_WINTER_CROPS)
+				.add(ModItems.CABBAGE_SEEDS.get());
 	}
 }

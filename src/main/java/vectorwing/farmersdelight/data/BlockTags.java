@@ -229,5 +229,22 @@ public class BlockTags extends BlockTagsProvider
 
 	private void registerCompatibilityTags() {
 		tag(CompatibilityTags.CREATE_FAN_HEATERS).add(ModBlocks.STOVE.get());
+
+		tag(CompatibilityTags.SERENE_SEASONS_AUTUMN_CROPS_BLOCK)
+				.add(ModBlocks.CABBAGE_CROP.get())
+				.add(ModBlocks.ONION_CROP.get())
+				.add(ModBlocks.RICE_CROP.get())
+				.add(ModBlocks.RICE_CROP_PANICLES.get());
+		tag(CompatibilityTags.SERENE_SEASONS_SPRING_CROPS_BLOCK)
+				.add(ModBlocks.ONION_CROP.get());
+		tag(CompatibilityTags.SERENE_SEASONS_SUMMER_CROPS_BLOCK)
+				.add(ModBlocks.BUDDING_TOMATO_CROP.get())
+				.add(ModBlocks.TOMATO_CROP.get())
+				.add(ModBlocks.RICE_CROP.get())
+				.add(ModBlocks.RICE_CROP_PANICLES.get());
+		tag(CompatibilityTags.SERENE_SEASONS_WINTER_CROPS_BLOCK)
+				.add(ModBlocks.CABBAGE_CROP.get());
+		tag(CompatibilityTags.SERENE_SEASONS_UNBREAKABLE_FERTILE_CROPS)
+				.add(ModBlocks.ONION_CROP.get());
 	}
 }
