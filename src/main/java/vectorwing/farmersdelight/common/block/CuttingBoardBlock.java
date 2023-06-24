@@ -19,6 +19,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -49,8 +50,8 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 
 	protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 1.0D, 15.0D);
 
-	public CuttingBoardBlock() {
-		super(Properties.of(Material.WOOD).strength(2.0F).sound(SoundType.WOOD));
+	public CuttingBoardBlock(BlockBehaviour.Properties properties) {
+		super(properties);
 		this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
 	}
 
@@ -83,8 +84,7 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		BlockEntity tileEntity = level.getBlockEntity(pos);
-		if (tileEntity instanceof CuttingBoardBlockEntity) {
-			CuttingBoardBlockEntity cuttingBoardEntity = (CuttingBoardBlockEntity) tileEntity;
+		if (tileEntity instanceof CuttingBoardBlockEntity cuttingBoardEntity) {
 			ItemStack heldStack = player.getItemInHand(hand);
 			ItemStack offhandStack = player.getOffhandItem();
 
