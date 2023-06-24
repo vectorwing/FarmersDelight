@@ -22,6 +22,15 @@ body:
         Example: 1.2
     validations:
       required: true
+  - type: input
+    id: forge_version
+    attributes:
+      label: Forge version
+      description: "For issues regarding the Fabric port, go to: https://github.com/newhoryzon/farmers-delight-fabric/issues"
+      placeholder: | 
+        Example: 47.0.1
+    validations:
+      required: true
   - type: textarea
     id: description
     attributes:
@@ -58,16 +67,6 @@ body:
         Please provide the client or server logs from your launcher. They contain vital information to troubleshoot the issue.
         To upload logs, you can use websites such as: https://pastebin.com/ https://paste.ee/ https://mclo.gs/
   - type: checkboxes
-    id: is_forge
-    attributes:
-      label: Forge
-      description: |
-       Please confirm you're playing on the Forge mod loader.
-       For issues regarding the Fabric port, go to: https://github.com/newhoryzon/farmers-delight-fabric/issues
-      options:
-        - label: I am using the Forge version of Farmer's Delight
-          required: true
-  - type: checkboxes
     id: has_tested_minimal_instance
     attributes:
       label: Minimal instance
@@ -78,6 +77,6 @@ body:
     id: has_removed_performance_mods
     attributes:
       label: Performance and shader mods
-      description: Sometimes, performance and shader mods (for example, Optifine, Rubidium, Oculus etc.) can cause unpredictable problems. Have you tested this issue without those installed?
+      description: Sometimes, performance and shader mods (for example, Optifine, Rubidium, Oculus etc.) can cause unpredictable problems. Were you using such mods when the issue happened?
       options:
-        - label: I have tested this without performance or shader mods
+        - label: I am using performance or shader mods
