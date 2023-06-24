@@ -1,12 +1,27 @@
 name: Bug Report (Form)
 description: File a bug report through a simplified form
-title: "[MC Version]: "
 body:
   - type: markdown
     attributes:
       value: |
         Please fill out the form below to describe your issue.
         Keep in mind that this board is **only for issues**! If you have a **suggestion** (ideas, integration etc.), please use the **Discussions** tab instead.
+  - type: input
+    id: minecraft_version
+    attributes:
+      label: Minecraft version
+      placeholder: | 
+        Example: 1.19
+    validations:
+      required: true
+  - type: input
+    id: fd_version
+    attributes:
+      label: Farmer's Delight version
+      placeholder: | 
+        Example: 1.2
+    validations:
+      required: true
   - type: textarea
     id: description
     attributes:

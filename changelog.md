@@ -7,6 +7,9 @@
   - Carnivorous foods not defined as `meat()` in properties;
   - Bacon and Eggs;
 
+### Updates
+- Updated `create:upright_on_belt` with newer FD drinks;
+
 ### Fixes
 - Fix loot functions lacking a type, causing errors with datagen and mods (such as Roughly Enough Resources);
 - Fix Lily Pads and other water plants being plantable on Rich Soil;
