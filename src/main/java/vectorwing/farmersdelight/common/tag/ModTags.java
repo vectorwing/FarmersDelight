@@ -80,6 +80,9 @@ public class ModTags
 	// Entities that should be able to eat Horse Feed when tame. Defaults to most vanilla mounts, except Pigs and Striders.
 	public static final TagKey<EntityType<?>> HORSE_FEED_USERS = modEntityTag("horse_feed_users");
 
+	// Entities that should be given a TemptGoal for Horse Feed, allowing players to call them with it.
+	public static final TagKey<EntityType<?>> HORSE_FEED_TEMPTED = modEntityTag("horse_feed_tempted");
+
 	private static TagKey<Item> modItemTag(String path) {
 		return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(FarmersDelight.MODID, path));
 	}

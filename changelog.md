@@ -6,14 +6,16 @@
 - Added some of FD's meat items to the `origins:meat` tag, from the Origins mod:
   - Carnivorous foods not defined as `meat()` in properties;
   - Bacon and Eggs;
+- Added `horse_feed_tempted` tag, for entities which will be tempted by Horse Feed when held;
 
 ### Updates
 - Updated `create:upright_on_belt` with newer FD drinks;
 - Updated Wild Cabbage generation to be placeable on blocks tagged as `minecraft:sand`, instead of hardcoded to normal sand;
+- Rabbits can now be fed, and are now tempted by, Cabbage (whole or leaf);
 
 ### Fixes
 - Fix loot functions lacking a type, causing errors with datagen and mods (such as Roughly Enough Resources);
-- Fix Lily Pads and other water plants being plantable on Rich Soil;
+- Fix Lily Pads and other water plants being directly plantable on Rich Soil, as if it was water;
 
 ## 1.2.1
 
