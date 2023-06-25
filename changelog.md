@@ -9,6 +9,7 @@
 
 ### Updates
 - Updated `create:upright_on_belt` with newer FD drinks;
+- Updated Wild Cabbage generation to be placeable on blocks tagged as `minecraft:sand`, instead of hardcoded to normal sand;
 
 ### Fixes
 - Fix loot functions lacking a type, causing errors with datagen and mods (such as Roughly Enough Resources);

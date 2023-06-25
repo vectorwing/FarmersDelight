@@ -62,7 +62,7 @@ public class WildCropGeneration
 
 	public static void registerWildCropGeneration() {
 		FEATURE_PATCH_WILD_CABBAGES = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_cabbages"),
-				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_CABBAGES.get(), ModBlocks.SANDY_SHRUB.get(), BlockPredicate.matchesBlock(Blocks.SAND, BLOCK_BELOW)));
+				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_CABBAGES.get(), ModBlocks.SANDY_SHRUB.get(), BlockPredicate.matchesTag(BlockTags.SAND, BLOCK_BELOW)));
 
 		FEATURE_PATCH_WILD_ONIONS = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_onions"),
 				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_ONIONS.get(), Blocks.ALLIUM, BlockPredicate.matchesTag(BlockTags.DIRT, BLOCK_BELOW)));
