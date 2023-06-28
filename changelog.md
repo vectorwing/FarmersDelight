@@ -16,6 +16,7 @@
 ### Fixes
 - Fix loot functions lacking a type, causing errors with datagen and mods (such as Roughly Enough Resources);
 - Fix Lily Pads and other water plants being directly plantable on Rich Soil, as if it was water;
+- Fix wrong Cutting Board rendering for items with 3D model perspectives;
 
 ## 1.2.1
 
