@@ -3,6 +3,8 @@ package vectorwing.farmersdelight.common.registry;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 
 public class ModMaterials
 {
@@ -38,4 +40,6 @@ public class ModMaterials
 			return Ingredient.of(Items.FLINT);
 		}
 	};
+
+	public static final Material TOMATO_VINE = (new Material.Builder(MaterialColor.PLANT)).notSolidBlocking().nonSolid().destroyOnPush().build();
 }

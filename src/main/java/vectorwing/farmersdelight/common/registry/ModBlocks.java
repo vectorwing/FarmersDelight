@@ -205,7 +205,7 @@ public class ModBlocks
 	public static final RegistryObject<Block> BUDDING_TOMATO_CROP = BLOCKS.register("budding_tomatoes",
 			() -> new BuddingTomatoBlock(Block.Properties.copy(Blocks.WHEAT)));
 	public static final RegistryObject<Block> TOMATO_CROP = BLOCKS.register("tomatoes",
-			() -> new TomatoVineBlock(Block.Properties.copy(Blocks.WHEAT)));
+			() -> new TomatoVineBlock(Block.Properties.of(ModMaterials.TOMATO_VINE).noCollission().randomTicks().instabreak().sound(SoundType.CROP)));
 	public static final RegistryObject<Block> RICE_CROP = BLOCKS.register("rice",
 			() -> new RiceBlock(Block.Properties.copy(Blocks.WHEAT).strength(0.2F)));
 	public static final RegistryObject<Block> RICE_CROP_PANICLES = BLOCKS.register("rice_panicles",
