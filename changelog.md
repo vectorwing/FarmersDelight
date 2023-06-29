@@ -6,7 +6,9 @@
 - Added some of FD's meat items to the `origins:meat` tag, from the Origins mod:
   - Carnivorous foods not defined as `meat()` in properties;
   - Bacon and Eggs;
-- Added `horse_feed_tempted` tag, for entities which will be tempted by Horse Feed when held;
+- New tags:
+  - `horse_feed_tempted`: Entities which will be tempted by Horse Feed when held;
+  - `serving_containers`: Items commonly used as containers for Cooking Pot recipes. Used for shift-click logic in the UI;
 
 ### Updates
 - Updated `create:upright_on_belt` with newer FD drinks;

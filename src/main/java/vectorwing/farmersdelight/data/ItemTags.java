@@ -71,6 +71,7 @@ public class ItemTags extends ItemTagsProvider
 				.add(ModItems.WARPED_CABINET.get());
 		tag(ModTags.CABINETS).addTag(ModTags.WOODEN_CABINETS);
 		tag(ModTags.OFFHAND_EQUIPMENT).add(Items.SHIELD).addOptional(new ResourceLocation("create:extendo_grip"));
+		tag(ModTags.SERVING_CONTAINERS).add(Items.BOWL, Items.GLASS_BOTTLE, Items.BUCKET);
 	}
 
 	@SuppressWarnings("unchecked")

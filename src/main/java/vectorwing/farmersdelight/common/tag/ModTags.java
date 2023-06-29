@@ -74,6 +74,9 @@ public class ModTags
 	// All Cabinet items for crafting.
 	public static final TagKey<Item> CABINETS = modItemTag("cabinets");
 
+	// Items commonly used to contain products. Used by the Cooking Pot for sneak-clicking actions.
+	public static final TagKey<Item> SERVING_CONTAINERS = modItemTag("serving_containers");
+
 	// Entities that should be able to eat Dog Food when tame. Defaults to tamed Wolves.
 	public static final TagKey<EntityType<?>> DOG_FOOD_USERS = modEntityTag("dog_food_users");
 

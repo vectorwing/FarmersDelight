@@ -22,6 +22,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModMenuTypes;
+import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.Objects;
 
@@ -115,41 +116,41 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 		int indexOutput = 8;
 		int startPlayerInv = indexOutput + 1;
 		int endPlayerInv = startPlayerInv + 36;
-		ItemStack itemstack = ItemStack.EMPTY;
+		ItemStack slotStackCopy = ItemStack.EMPTY;
 		Slot slot = this.slots.get(index);
 		if (slot.hasItem()) {
-			ItemStack itemstack1 = slot.getItem();
-			itemstack = itemstack1.copy();
+			ItemStack slotStack = slot.getItem();
+			slotStackCopy = slotStack.copy();
 			if (index == indexOutput) {
-				if (!this.moveItemStackTo(itemstack1, startPlayerInv, endPlayerInv, true)) {
+				if (!this.moveItemStackTo(slotStack, startPlayerInv, endPlayerInv, true)) {
 					return ItemStack.EMPTY;
 				}
 			} else if (index > indexOutput) {
-				ItemStack containerStack = blockEntity.getContainer();
-				if (itemstack1.is(containerStack.getItem()) && !this.moveItemStackTo(itemstack1, indexContainerInput, indexContainerInput + 1, false)) {
+				boolean isValidContainer = slotStack.is(ModTags.SERVING_CONTAINERS) || slotStack.is(blockEntity.getContainer().getItem());
+				if (isValidContainer && !this.moveItemStackTo(slotStack, indexContainerInput, indexContainerInput + 1, false)) {
 					return ItemStack.EMPTY;
-				} else if (!this.moveItemStackTo(itemstack1, 0, indexMealDisplay, false)) {
+				} else if (!this.moveItemStackTo(slotStack, 0, indexMealDisplay, false)) {
 					return ItemStack.EMPTY;
-				} else if (!this.moveItemStackTo(itemstack1, indexContainerInput, indexOutput, false)) {
+				} else if (!this.moveItemStackTo(slotStack, indexContainerInput, indexOutput, false)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (!this.moveItemStackTo(itemstack1, startPlayerInv, endPlayerInv, false)) {
+			} else if (!this.moveItemStackTo(slotStack, startPlayerInv, endPlayerInv, false)) {
 				return ItemStack.EMPTY;
 			}
 
-			if (itemstack1.isEmpty()) {
+			if (slotStack.isEmpty()) {
 				slot.set(ItemStack.EMPTY);
 			} else {
 				slot.setChanged();
 			}
 
-			if (itemstack1.getCount() == itemstack.getCount()) {
+			if (slotStack.getCount() == slotStackCopy.getCount()) {
 				return ItemStack.EMPTY;
 			}
 
-			slot.onTake(playerIn, itemstack1);
+			slot.onTake(playerIn, slotStack);
 		}
-		return itemstack;
+		return slotStackCopy;
 	}
 
 	@OnlyIn(Dist.CLIENT)
