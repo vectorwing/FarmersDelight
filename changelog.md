@@ -12,6 +12,8 @@
 
 ### Updates
 - Updated `create:upright_on_belt` with newer FD drinks;
+- Updated `fan_heaters` to `passive_boiler_heaters`, according to Create 0.5 specs;
+  - (1.18.2) `fan_heaters` is still present for legacy compatibility with Create 0.4;
 - Updated Wild Cabbage generation to be placeable on blocks tagged as `minecraft:sand`, instead of hardcoded to normal sand;
 - Rabbits can now be fed, and are now tempted by, Cabbage (whole or leaf);
 

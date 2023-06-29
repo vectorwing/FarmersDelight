@@ -229,6 +229,7 @@ public class BlockTags extends BlockTagsProvider
 
 	private void registerCompatibilityTags() {
 		tag(CompatibilityTags.CREATE_FAN_HEATERS).add(ModBlocks.STOVE.get());
+		tag(CompatibilityTags.CREATE_PASSIVE_BOILER_HEATERS).add(ModBlocks.STOVE.get());
 
 		tag(CompatibilityTags.SERENE_SEASONS_AUTUMN_CROPS_BLOCK).add(
 				ModBlocks.CABBAGE_CROP.get(),
