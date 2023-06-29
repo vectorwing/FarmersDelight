@@ -29,19 +29,19 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 {
 	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "item/empty_container_slot_bowl");
 
-	public final CookingPotBlockEntity tileEntity;
+	public final CookingPotBlockEntity blockEntity;
 	public final ItemStackHandler inventory;
 	private final ContainerData cookingPotData;
 	private final ContainerLevelAccess canInteractWithCallable;
 	protected final Level level;
 
-	public CookingPotMenu(final int windowId, final Inventory playerInventory, final CookingPotBlockEntity tileEntity, ContainerData cookingPotDataIn) {
+	public CookingPotMenu(final int windowId, final Inventory playerInventory, final CookingPotBlockEntity blockEntity, ContainerData cookingPotDataIn) {
 		super(ModMenuTypes.COOKING_POT.get(), windowId);
-		this.tileEntity = tileEntity;
-		this.inventory = tileEntity.getInventory();
+		this.blockEntity = blockEntity;
+		this.inventory = blockEntity.getInventory();
 		this.cookingPotData = cookingPotDataIn;
 		this.level = playerInventory.player.level;
-		this.canInteractWithCallable = ContainerLevelAccess.create(tileEntity.getLevel(), tileEntity.getBlockPos());
+		this.canInteractWithCallable = ContainerLevelAccess.create(blockEntity.getLevel(), blockEntity.getBlockPos());
 
 		// Ingredient Slots - 2 Rows x 3 Columns
 		int startX = 8;
@@ -70,7 +70,7 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 		});
 
 		// Bowl Output
-		this.addSlot(new CookingPotResultSlot(playerInventory.player, tileEntity, inventory, 8, 124, 55));
+		this.addSlot(new CookingPotResultSlot(playerInventory.player, blockEntity, inventory, 8, 124, 55));
 
 		// Main Player Inventory
 		int startPlayerInvY = startY * 4 + 12;
@@ -125,7 +125,8 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 					return ItemStack.EMPTY;
 				}
 			} else if (index > indexOutput) {
-				if (itemstack1.getItem() == Items.BOWL && !this.moveItemStackTo(itemstack1, indexContainerInput, indexContainerInput + 1, false)) {
+				ItemStack containerStack = blockEntity.getContainer();
+				if (itemstack1.is(containerStack.getItem()) && !this.moveItemStackTo(itemstack1, indexContainerInput, indexContainerInput + 1, false)) {
 					return ItemStack.EMPTY;
 				} else if (!this.moveItemStackTo(itemstack1, 0, indexMealDisplay, false)) {
 					return ItemStack.EMPTY;
@@ -160,7 +161,7 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 
 	@OnlyIn(Dist.CLIENT)
 	public boolean isHeated() {
-		return tileEntity.isHeated();
+		return blockEntity.isHeated();
 	}
 
 	@Override
