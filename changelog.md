@@ -3,24 +3,24 @@
 ## 1.2.2
 
 ### Additions
-- Added some of FD's meat items to the `origins:meat` tag, from the Origins mod:
+- Added some of FD's meat items to the `origins:meat` tag, from the Origins mod, such as:
   - Carnivorous foods not defined as `meat()` in properties;
   - Bacon and Eggs;
 - New tags:
-  - `horse_feed_tempted`: Entities which will be tempted by Horse Feed when held;
-  - `serving_containers`: Items commonly used as containers for Cooking Pot recipes. Used for shift-click logic in the UI;
+  - `farmersdelight:horse_feed_tempted`: Entities which will be tempted by Horse Feed when held;
+  - `farmersdelight:serving_containers`: Items commonly used as containers for Cooking Pot recipes. Used for shift-click logic in the UI;
 
 ### Updates
 - Updated `create:upright_on_belt` with newer FD drinks;
 - Updated `fan_heaters` to `passive_boiler_heaters`, according to Create 0.5 specs;
   - (1.18.2) `fan_heaters` is still present for legacy compatibility with Create 0.4;
 - Updated Wild Cabbage generation to be placeable on blocks tagged as `minecraft:sand`, instead of hardcoded to normal sand;
-- Rabbits can now be fed, and are now tempted by, Cabbage (whole or leaf);
+- Rabbits can now be fed, and are tempted by, Cabbage (whole or leaf);
 
 ### Fixes
 - Fix loot functions lacking a type, causing errors with datagen and mods (such as Roughly Enough Resources);
 - Fix Lily Pads and other water plants being directly plantable on Rich Soil, as if it was water;
-- Fix wrong Cutting Board rendering for items with 3D model perspectives;
+- Fix wrong Cutting Board rendering for items with 3D model perspectives, but a 2D sprite on inventories;
 - Fix roped Tomato Vines being destroyed by water, deleting the rope;
 
 ## 1.2.1
