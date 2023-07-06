@@ -11,6 +11,10 @@
   - `farmersdelight:serving_containers`: Items commonly used as containers for Cooking Pot recipes. Used for shift-click logic in the UI;
 
 ### Updates
+- Updated the Cooking Pot's GUI with a small arrow, pointing from the meal slot to the output slot;
+- Updated the JEI widget for cooking recipes:
+  - Slightly smaller size, to fit more recipes per page;
+  - Progress arrow now shows icons for cooking time and experience, and displays those stats on mouse hover;
 - Updated `create:upright_on_belt` with newer FD drinks;
 - Updated `fan_heaters` to `passive_boiler_heaters`, according to Create 0.5 specs;
   - (1.18.2) `fan_heaters` is still present for legacy compatibility with Create 0.4;
