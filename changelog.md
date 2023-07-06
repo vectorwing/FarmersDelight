@@ -20,6 +20,7 @@
   - (1.18.2) `fan_heaters` is still present for legacy compatibility with Create 0.4;
 - Updated Wild Cabbage generation to be placeable on blocks tagged as `minecraft:sand`, instead of hardcoded to normal sand;
 - Rabbits can now be fed, and are tempted by, Cabbage (whole or leaf);
+- Updated Slice of Cake's texture, to be more accurate to the cake block it comes from;
 
 ### Fixes
 - Fix loot functions lacking a type, causing errors with datagen and mods (such as Roughly Enough Resources);
