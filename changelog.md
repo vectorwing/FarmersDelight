@@ -24,6 +24,9 @@
 - Updated Slice of Cake's texture, to be more accurate to the cake block it comes from;
 
 ### Fixes
+- Fix Wild Crops not generating in biomes from biome mods:
+  - Removes the check for `forge:is_overworld` on placed features, since the tag is unused by most mods;
+  - (1.18) The NETHER, THEEND and NONE BiomeCategories are excluded from wild crop generation instead.
 - Fix loot functions lacking a type, causing errors with datagen and mods (such as Roughly Enough Resources);
 - Fix Lily Pads and other water plants being directly plantable on Rich Soil, as if it was water;
 - Fix wrong Cutting Board rendering for items with 3D model perspectives, but a 2D sprite on inventories;

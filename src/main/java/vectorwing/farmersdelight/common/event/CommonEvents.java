@@ -34,18 +34,26 @@ public class CommonEvents
 {
 	@SubscribeEvent
 	public static void onBiomeLoad(BiomeLoadingEvent event) {
-		BiomeGenerationSettingsBuilder builder = event.getGeneration();
-		Biome.ClimateSettings climate = event.getClimate();
-
 		ResourceLocation biomeName = event.getName();
+		if (biomeName == null) {
+			return;
+		}
 
-		if (event.getCategory().equals(Biome.BiomeCategory.MUSHROOM)) {
+		Biome.BiomeCategory category = event.getCategory();
+		if (category.equals(Biome.BiomeCategory.NETHER) || category.equals(Biome.BiomeCategory.THEEND) || category.equals(Biome.BiomeCategory.NONE)) {
+			return;
+		}
+
+		BiomeGenerationSettingsBuilder builder = event.getGeneration();
+
+		// Category-based filter
+		if (category.equals(Biome.BiomeCategory.MUSHROOM)) {
 			builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_BROWN_MUSHROOM_COLONIES);
 			builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_RED_MUSHROOM_COLONIES);
 			return; // No other wild crops should exist here!
 		}
 
-		if (biomeName != null && biomeName.getPath().equals("beach")) {
+		if (biomeName.getPath().equals("beach")) {
 			if (Configuration.GENERATE_WILD_BEETROOTS.get()) {
 				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_BEETROOTS);
 			}
@@ -54,18 +62,19 @@ public class CommonEvents
 			}
 		}
 
-		if (event.getCategory().equals(Biome.BiomeCategory.SWAMP) || event.getCategory().equals(Biome.BiomeCategory.JUNGLE)) {
+		if (category.equals(Biome.BiomeCategory.SWAMP) || category.equals(Biome.BiomeCategory.JUNGLE)) {
 			if (Configuration.GENERATE_WILD_RICE.get()) {
 				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_RICE);
 			}
 		}
 
+		// Climate-based filter
+		Biome.ClimateSettings climate = event.getClimate();
 		if (climate.temperature >= 1.0F) {
 			if (Configuration.GENERATE_WILD_TOMATOES.get()) {
 				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_TOMATOES);
 			}
 		}
-
 		if (climate.temperature > 0.3F && climate.temperature < 1.0F) {
 			if (Configuration.GENERATE_WILD_CARROTS.get()) {
 				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_CARROTS);
@@ -74,7 +83,6 @@ public class CommonEvents
 				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_ONIONS);
 			}
 		}
-
 		if (climate.temperature > 0.0F && climate.temperature <= 0.3F) {
 			if (Configuration.GENERATE_WILD_POTATOES.get()) {
 				builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_POTATOES);
