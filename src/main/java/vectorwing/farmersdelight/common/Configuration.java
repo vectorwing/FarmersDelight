@@ -21,6 +21,7 @@ public class Configuration
 	public static ForgeConfigSpec.DoubleValue CUTTING_BOARD_FORTUNE_BONUS;
 	public static ForgeConfigSpec.BooleanValue ENABLE_ROPE_REELING;
 	public static ForgeConfigSpec.ConfigValue<List<? extends String>> CANVAS_SIGN_DARK_BACKGROUND_LIST;
+	public static ForgeConfigSpec.BooleanValue DEPLOYER_PLACES_ITEM_ON_CUTTING_BOARD;
 
 	public static final String CATEGORY_FARMING = "farming";
 	public static ForgeConfigSpec.ConfigValue<String> DEFAULT_TOMATO_VINE_ROPE;
@@ -87,6 +88,8 @@ public class Configuration
 		CANVAS_SIGN_DARK_BACKGROUND_LIST = COMMON_BUILDER.comment("A list of dye colors that, when used as the background of a Canvas Sign, should default to white text when placed.",
 						"Dyes: [\"white\", \"orange\", \"magenta\", \"light_blue\", \"yellow\", \"lime\", \"pink\", \"gray\", \"light_gray\", \"cyan\", \"purple\", \"blue\", \"brown\", \"green\", \"red\", \"black\"]")
 				.defineList("canvasSignDarkBackgroundList", ImmutableList.of("gray", "purple", "blue", "brown", "green", "red", "black"), obj -> true);
+		DEPLOYER_PLACES_ITEM_ON_CUTTING_BOARD = COMMON_BUILDER.comment("Should the Deployer from Create mod be able to place held item on Cutting Boards? (if set to false, it will be able to process Cutting Board recipes)")
+				.define("deployerPlacesItemOnCuttingBoard", false);
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("Farming").push(CATEGORY_FARMING);
