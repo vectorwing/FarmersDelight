@@ -177,5 +177,7 @@ public class ItemTags extends ItemTagsProvider
 				.add(ModItems.RICE.get());
 		tag(CompatibilityTags.SERENE_SEASONS_WINTER_CROPS)
 				.add(ModItems.CABBAGE_SEEDS.get());
+
+		tag(CompatibilityTags.TINKERS_CONSTRUCT_SEEDS).add(ModItems.ONION.get());
 	}
 }

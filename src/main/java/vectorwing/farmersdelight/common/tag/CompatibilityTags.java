@@ -35,6 +35,10 @@ public class CompatibilityTags
 	public static final TagKey<Item> SERENE_SEASONS_SUMMER_CROPS = externalItemTag(SERENE_SEASONS, "summer_crops");
 	public static final TagKey<Item> SERENE_SEASONS_WINTER_CROPS = externalItemTag(SERENE_SEASONS, "winter_crops");
 
+	// Tinker's Construct
+	public static final String TINKERS_CONSTRUCT = "tconstruct";
+	public static final TagKey<Item> TINKERS_CONSTRUCT_SEEDS = externalItemTag(TINKERS_CONSTRUCT, "seeds");
+
 	private static TagKey<Item> externalItemTag(String modId, String path) {
 		return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(modId, path));
 	}
