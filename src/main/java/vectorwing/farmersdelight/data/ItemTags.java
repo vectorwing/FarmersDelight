@@ -158,6 +158,15 @@ public class ItemTags extends ItemTagsProvider
 				.add(ModItems.SWEET_BERRY_CHEESECAKE.get())
 				.add(ModItems.CHOCOLATE_PIE.get());
 
+		tag(CompatibilityTags.CREATE_CA_PLANT_FOODS)
+				.add(ModItems.PUMPKIN_SLICE.get())
+				.add(ModItems.ROTTEN_TOMATO.get())
+				.add(ModItems.RICE_PANICLE.get());
+		tag(CompatibilityTags.CREATE_CA_PLANTS)
+				.add(ModItems.SANDY_SHRUB.get())
+				.add(ModItems.BROWN_MUSHROOM_COLONY.get())
+				.add(ModItems.RED_MUSHROOM_COLONY.get());
+
 		tag(CompatibilityTags.ORIGINS_MEAT)
 				.add(ModItems.FRIED_EGG.get())
 				.add(ModItems.COD_SLICE.get())

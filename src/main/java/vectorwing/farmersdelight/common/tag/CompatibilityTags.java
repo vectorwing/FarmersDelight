@@ -19,6 +19,11 @@ public class CompatibilityTags
 	public static final TagKey<Block> CREATE_PASSIVE_BOILER_HEATERS = externalBlockTag(CREATE, "passive_boiler_heaters");
 	public static final TagKey<Item> CREATE_UPRIGHT_ON_BELT = externalItemTag(CREATE, "upright_on_belt");
 
+	// Create Crafts and Additions
+	public static final String CREATE_CA = "createaddition";
+	public static final TagKey<Item> CREATE_CA_PLANT_FOODS = externalItemTag(CREATE_CA, "plant_foods");
+	public static final TagKey<Item> CREATE_CA_PLANTS = externalItemTag(CREATE_CA, "plants");
+
 	// Origins
 	public static final String ORIGINS = "origins";
 	public static final TagKey<Item> ORIGINS_MEAT = externalItemTag(ORIGINS, "meat");
