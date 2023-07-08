@@ -6,6 +6,7 @@
 - Added compatibility with the `origins:meat` tag from the Origins mod:
   - Carnivorous foods not defined as `meat()` in properties;
   - Bacon and Eggs;
+- Added some items to Create Crafts & Additions tags: `createaddition:plants` and `createaddition:plant_foods` (thanks, moltenwolfcub!);
 - Added Onions to the `tconstruct:seeds` tag from Tinker's Construct, to replant with Harvest modifiers;
 - New tags:
   - `farmersdelight:horse_feed_tempted`: Entities which will be tempted by Horse Feed when held;
@@ -32,6 +33,10 @@
 - Fix wrong Cutting Board rendering for items with 3D model perspectives, but a 2D sprite on inventories;
 - Fix roped Tomato Vines being destroyed by water, deleting the rope;
 - Fix Cooking Pot not resetting its cook time when quick-swapping recipes, such as through the Recipe Book (thanks, Umpaz!);
+
+### Translations
+- Updated:
+  - ru_RU (thanks, Edarlingen!);
 
 ## 1.2.1
 
