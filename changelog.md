@@ -2,8 +2,36 @@
 
 ## 1.2.2
 
+### Additions
+- Added compatibility with the `origins:meat` tag from the Origins mod:
+  - Carnivorous foods not defined as `meat()` in properties;
+  - Bacon and Eggs;
+- Added Onions to the `tconstruct:seeds` tag from Tinker's Construct, to replant with Harvest modifiers;
+- New tags:
+  - `farmersdelight:horse_feed_tempted`: Entities which will be tempted by Horse Feed when held;
+  - `farmersdelight:serving_containers`: Items commonly used as containers for Cooking Pot recipes. Used for shift-click logic in the UI;
+
+### Updates
+- Updated the Cooking Pot's GUI with a small arrow, pointing from the meal slot to the output slot;
+- Updated the JEI widget for cooking recipes:
+  - Slightly smaller size, to fit more recipes per page;
+  - Progress arrow now shows icons for cooking time and experience, and displays those stats on mouse hover;
+- Updated `create:upright_on_belt` with newer FD drinks;
+- Updated `fan_heaters` to `passive_boiler_heaters`, according to Create 0.5 specs;
+  - (1.18.2) `fan_heaters` is still present for legacy compatibility with Create 0.4;
+- Updated Wild Cabbage generation to be placeable on blocks tagged as `minecraft:sand`, instead of hardcoded to normal sand;
+- Rabbits can now be fed, and are tempted by, Cabbage (whole or leaf);
+- Updated Slice of Cake's texture, to be more accurate to the cake block it comes from;
+
 ### Fixes
-- Fix Lily Pads and other water plants being plantable on Rich Soil;
+- Fix Wild Crops not generating in biomes from biome mods:
+  - Removes the check for `forge:is_overworld` on placed features, since the tag is unused by most mods;
+  - (1.18) The NETHER, THEEND and NONE BiomeCategories are excluded from wild crop generation instead.
+- Fix loot functions lacking a type, causing errors with datagen and mods (such as Roughly Enough Resources);
+- Fix Lily Pads and other water plants being directly plantable on Rich Soil, as if it was water;
+- Fix wrong Cutting Board rendering for items with 3D model perspectives, but a 2D sprite on inventories;
+- Fix roped Tomato Vines being destroyed by water, deleting the rope;
+- Fix Cooking Pot not resetting its cook time when quick-swapping recipes, such as through the Recipe Book (thanks, Umpaz!);
 
 ## 1.2.1
 

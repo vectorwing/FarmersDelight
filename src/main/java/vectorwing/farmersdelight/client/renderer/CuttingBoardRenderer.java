@@ -29,8 +29,10 @@ public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlo
 
 			ItemRenderer itemRenderer = Minecraft.getInstance()
 					.getItemRenderer();
-			boolean isBlockItem = itemRenderer.getModel(boardStack, cuttingBoardEntity.getLevel(), null, 0)
-					.isGui3d();
+
+			// In 1.18, handlePerspective() pushes to the stack without popping, so we pop after it to compensate.
+			boolean isBlockItem = itemRenderer.getModel(boardStack, cuttingBoardEntity.getLevel(), null, 0).handlePerspective(ItemTransforms.TransformType.FIXED, poseStack).isGui3d();
+			poseStack.popPose();
 
 			if (cuttingBoardEntity.isItemCarvingBoard()) {
 				renderItemCarved(poseStack, direction, boardStack);

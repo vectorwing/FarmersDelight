@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.tag.CompatibilityTags;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
@@ -22,6 +23,7 @@ public class BlockTags extends BlockTagsProvider
 		this.registerModTags();
 		this.registerMinecraftTags();
 		this.registerForgeTags();
+		this.registerCompatibilityTags();
 
 		this.registerBlockMineables();
 	}
@@ -223,5 +225,27 @@ public class BlockTags extends BlockTagsProvider
 				Blocks.GREEN_CANDLE_CAKE,
 				Blocks.RED_CANDLE_CAKE,
 				Blocks.BLACK_CANDLE_CAKE);
+	}
+
+	private void registerCompatibilityTags() {
+		tag(CompatibilityTags.CREATE_FAN_HEATERS).add(ModBlocks.STOVE.get());
+		tag(CompatibilityTags.CREATE_PASSIVE_BOILER_HEATERS).add(ModBlocks.STOVE.get());
+
+		tag(CompatibilityTags.SERENE_SEASONS_AUTUMN_CROPS_BLOCK).add(
+				ModBlocks.CABBAGE_CROP.get(),
+				ModBlocks.ONION_CROP.get(),
+				ModBlocks.RICE_CROP.get(),
+				ModBlocks.RICE_CROP_PANICLES.get());
+		tag(CompatibilityTags.SERENE_SEASONS_SPRING_CROPS_BLOCK).add(
+				ModBlocks.ONION_CROP.get());
+		tag(CompatibilityTags.SERENE_SEASONS_SUMMER_CROPS_BLOCK).add(
+				ModBlocks.BUDDING_TOMATO_CROP.get(),
+				ModBlocks.TOMATO_CROP.get(),
+				ModBlocks.RICE_CROP.get(),
+				ModBlocks.RICE_CROP_PANICLES.get());
+		tag(CompatibilityTags.SERENE_SEASONS_WINTER_CROPS_BLOCK).add(
+				ModBlocks.CABBAGE_CROP.get());
+		tag(CompatibilityTags.SERENE_SEASONS_UNBREAKABLE_FERTILE_CROPS).add(
+				ModBlocks.ONION_CROP.get());
 	}
 }

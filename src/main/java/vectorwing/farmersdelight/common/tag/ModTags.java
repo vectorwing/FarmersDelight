@@ -74,21 +74,27 @@ public class ModTags
 	// All Cabinet items for crafting.
 	public static final TagKey<Item> CABINETS = modItemTag("cabinets");
 
+	// Items commonly used to contain products. Used by the Cooking Pot for sneak-clicking actions.
+	public static final TagKey<Item> SERVING_CONTAINERS = modItemTag("serving_containers");
+
 	// Entities that should be able to eat Dog Food when tame. Defaults to tamed Wolves.
 	public static final TagKey<EntityType<?>> DOG_FOOD_USERS = modEntityTag("dog_food_users");
 
 	// Entities that should be able to eat Horse Feed when tame. Defaults to most vanilla mounts, except Pigs and Striders.
 	public static final TagKey<EntityType<?>> HORSE_FEED_USERS = modEntityTag("horse_feed_users");
 
+	// Entities that should be given a TemptGoal for Horse Feed, allowing players to call them with it.
+	public static final TagKey<EntityType<?>> HORSE_FEED_TEMPTED = modEntityTag("horse_feed_tempted");
+
 	private static TagKey<Item> modItemTag(String path) {
-		return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(FarmersDelight.MODID + ":" + path));
+		return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(FarmersDelight.MODID, path));
 	}
 
 	private static TagKey<Block> modBlockTag(String path) {
-		return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(FarmersDelight.MODID + ":" + path));
+		return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(FarmersDelight.MODID, path));
 	}
 
 	private static TagKey<EntityType<?>> modEntityTag(String path) {
-		return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(FarmersDelight.MODID + ":" + path));
+		return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(FarmersDelight.MODID, path));
 	}
 }
