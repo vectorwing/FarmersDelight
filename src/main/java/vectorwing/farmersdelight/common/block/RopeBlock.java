@@ -29,6 +29,7 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 public class RopeBlock extends IronBarsBlock
 {
 	public static final BooleanProperty TIED_TO_BELL = BooleanProperty.create("tied_to_bell");
+	protected static final VoxelShape LOWER_SUPPORT_AABB = Block.box(7, 0, 7, 9, 1, 9);
 
 	public RopeBlock(BlockBehaviour.Properties properties) {
 		super(properties);
@@ -98,6 +99,11 @@ public class RopeBlock extends IronBarsBlock
 	@Override
 	public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return Shapes.empty();
+	}
+
+	@Override
+	public VoxelShape getBlockSupportShape(BlockState pState, BlockGetter pReader, BlockPos pPos) {
+		return LOWER_SUPPORT_AABB;
 	}
 
 	@Override
