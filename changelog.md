@@ -34,6 +34,7 @@
 - Fix wrong Cutting Board rendering for items with 3D model perspectives, but a 2D sprite on inventories;
 - Fix roped Tomato Vines being destroyed by water, deleting the rope;
 - Fix Cooking Pot not resetting its cook time when quick-swapping recipes, such as through the Recipe Book (thanks, Umpaz!);
+- Fix Comfort and Nourishment overlays not being cancellable by other mods (example: Vampirism Blood Bar);
 
 ### Translations
 - Updated:

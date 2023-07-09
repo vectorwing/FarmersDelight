@@ -11,9 +11,10 @@ import net.minecraft.world.food.FoodData;
 import net.minecraft.world.level.GameRules;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.gui.ForgeIngameGui;
-import net.minecraftforge.client.gui.OverlayRegistry;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModEffects;
@@ -33,14 +34,18 @@ public class NourishmentHungerOverlay
 
 	public static void init() {
 		MinecraftForge.EVENT_BUS.register(new NourishmentHungerOverlay());
+	}
 
-		OverlayRegistry.registerOverlayAbove(ForgeIngameGui.FOOD_LEVEL_ELEMENT, "Farmer's Delight Nourishment", (gui, mStack, partialTicks, screenWidth, screenHeight) -> {
+	@SubscribeEvent
+	public void onRenderGuiOverlayPost(RenderGameOverlayEvent.PostLayer event) {
+		if (event.getOverlay() == ForgeIngameGui.FOOD_LEVEL_ELEMENT) {
 			Minecraft mc = Minecraft.getInstance();
+			ForgeIngameGui gui = (ForgeIngameGui) mc.gui;
 			boolean isMounted = mc.player != null && mc.player.getVehicle() instanceof LivingEntity;
 			if (!isMounted && !mc.options.hideGui && gui.shouldDrawSurvivalElements()) {
-				renderNourishmentOverlay(gui, mStack);
+				renderNourishmentOverlay(gui, event.getMatrixStack());
 			}
-		});
+		}
 	}
 
 	public static void renderNourishmentOverlay(ForgeIngameGui gui, PoseStack poseStack) {
