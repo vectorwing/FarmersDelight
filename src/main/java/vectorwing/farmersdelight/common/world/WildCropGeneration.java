@@ -7,7 +7,6 @@ import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
@@ -26,6 +25,7 @@ import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 import vectorwing.farmersdelight.common.registry.ModBiomeFeatures;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.world.configuration.WildCropConfiguration;
 
 import java.util.List;
@@ -65,7 +65,7 @@ public class WildCropGeneration
 				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_ONIONS.get(), Blocks.ALLIUM, BlockPredicate.matchesTag(BLOCK_BELOW, BlockTags.DIRT)));
 
 		FEATURE_PATCH_WILD_TOMATOES = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_tomatoes"),
-				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_TOMATOES.get(), Blocks.DEAD_BUSH, BlockPredicate.matchesBlocks(BLOCK_BELOW, List.of(Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.COARSE_DIRT, Blocks.RED_SAND, Blocks.SAND))));
+				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_TOMATOES.get(), Blocks.DEAD_BUSH, BlockPredicate.matchesTag(BLOCK_BELOW, ModTags.TERRAIN)));
 
 		FEATURE_PATCH_WILD_CARROTS = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_carrots"),
 				ModBiomeFeatures.WILD_CROP.get(), wildCropWithFloorConfig(ModBlocks.WILD_CARROTS.get(), Blocks.GRASS, BlockPredicate.matchesTag(BLOCK_BELOW, BlockTags.DIRT), Blocks.COARSE_DIRT, BlockPredicate.matchesTag(BlockTags.DIRT)));
@@ -74,7 +74,7 @@ public class WildCropGeneration
 				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_POTATOES.get(), Blocks.FERN, BlockPredicate.matchesTag(BLOCK_BELOW, BlockTags.DIRT)));
 
 		FEATURE_PATCH_WILD_BEETROOTS = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_beetroots"),
-				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_BEETROOTS.get(), ModBlocks.SANDY_SHRUB.get(), BlockPredicate.matchesBlocks(BLOCK_BELOW, Blocks.SAND)));
+				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_BEETROOTS.get(), ModBlocks.SANDY_SHRUB.get(), BlockPredicate.matchesTag(BLOCK_BELOW, BlockTags.SAND)));
 
 		FEATURE_PATCH_WILD_RICE = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_rice"),
 				ModBiomeFeatures.WILD_RICE.get(), FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK,

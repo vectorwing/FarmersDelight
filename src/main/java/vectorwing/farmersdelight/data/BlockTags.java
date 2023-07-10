@@ -152,6 +152,9 @@ public class BlockTags extends BlockTagsProvider
 	}
 
 	protected void registerModTags() {
+		tag(ModTags.TERRAIN)
+				.addTag(net.minecraft.tags.BlockTags.DIRT)
+				.addTag(net.minecraft.tags.BlockTags.SAND);
 		tag(ModTags.STRAW_BLOCKS).add(
 				ModBlocks.RICE_BAG.get(),
 				ModBlocks.ROPE.get(),

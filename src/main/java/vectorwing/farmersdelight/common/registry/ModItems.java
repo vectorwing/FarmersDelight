@@ -2,16 +2,15 @@ package vectorwing.farmersdelight.common.registry;
 
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.FoodValues;
 import vectorwing.farmersdelight.common.item.*;
-import vectorwing.farmersdelight.common.item.DrinkableItem;
-import vectorwing.farmersdelight.common.item.HotCocoaItem;
-import vectorwing.farmersdelight.common.item.MelonJuiceItem;
-import vectorwing.farmersdelight.common.item.MilkBottleItem;
+
+import java.util.Map;
 
 @SuppressWarnings("unused")
 public class ModItems
@@ -188,7 +187,20 @@ public class ModItems
 	public static final RegistryObject<Item> RICE = ITEMS.register("rice",
 			() -> new RiceItem(ModBlocks.RICE_CROP.get(), basicItem()));
 	public static final RegistryObject<Item> CABBAGE_SEEDS = ITEMS.register("cabbage_seeds", () -> new ItemNameBlockItem(ModBlocks.CABBAGE_CROP.get(), basicItem()));
-	public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds", () -> new ItemNameBlockItem(ModBlocks.BUDDING_TOMATO_CROP.get(), basicItem()));
+	public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds", () -> new ItemNameBlockItem(ModBlocks.BUDDING_TOMATO_CROP.get(), basicItem())
+	{
+		@Override
+		public void registerBlocks(Map<Block, Item> blockToItemMap, Item item) {
+			super.registerBlocks(blockToItemMap, item);
+			blockToItemMap.put(ModBlocks.TOMATO_CROP.get(), item);
+		}
+
+		@Override
+		public void removeFromBlockToItemMap(Map<Block, Item> blockToItemMap, Item itemIn) {
+			super.removeFromBlockToItemMap(blockToItemMap, itemIn);
+			blockToItemMap.remove(ModBlocks.TOMATO_CROP.get());
+		}
+	});
 	public static final RegistryObject<Item> ROTTEN_TOMATO = ITEMS.register("rotten_tomato",
 			() -> new RottenTomatoItem(new Item.Properties().stacksTo(16).tab(FarmersDelight.CREATIVE_TAB)));
 

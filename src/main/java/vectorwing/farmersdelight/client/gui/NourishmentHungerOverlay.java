@@ -83,7 +83,7 @@ public class NourishmentHungerOverlay
 		int foodLevel = stats.getFoodLevel();
 		int ticks = mc.gui.getGuiTicks();
 		Random rand = new Random();
-		rand.setSeed((long) (ticks * 312871));
+		rand.setSeed((ticks * 312871L));
 
 		RenderSystem.setShaderTexture(0, MOD_ICONS_TEXTURE);
 		RenderSystem.enableBlend();

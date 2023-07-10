@@ -9,6 +9,7 @@
 - Added some items to Create Crafts & Additions tags: `createaddition:plants` and `createaddition:plant_foods` (thanks, moltenwolfcub!);
 - Added Onions to the `tconstruct:seeds` tag from Tinker's Construct, to replant with Harvest modifiers;
 - New tags:
+  - `farmersdelight:terrain`: Blocks commonly present in biome surfaces. Populated by `minecraft:dirt` and `minecraft:sand`, and used for wild crop generation;
   - `farmersdelight:horse_feed_tempted`: Entities which will be tempted by Horse Feed when held;
   - `farmersdelight:serving_containers`: Items commonly used as containers for Cooking Pot recipes. Used for shift-click logic in the UI;
 
@@ -22,10 +23,11 @@
 - Updated `create:upright_on_belt` with newer FD drinks;
 - Updated `fan_heaters` to `passive_boiler_heaters`, according to Create 0.5 specs;
   - (1.18.2) `fan_heaters` is still present for legacy compatibility with Create 0.4;
-- Updated Wild Cabbage generation to be placeable on blocks tagged as `minecraft:sand`, instead of hardcoded to normal sand;
+- Updated Wild Cabbage and Sea Beet generation to be placeable on blocks tagged as `minecraft:sand`, instead of hardcoded to normal sand;
 - Rabbits can now be fed, and are tempted by, Cabbage (whole or leaf);
 - Updated Slice of Cake's texture, to be more accurate to the cake block it comes from;
 - Ropes can now support center-hanging blocks beneath them, such as Lanterns;
+- Tomato Seeds are now associated as an item for both `tomatoes` and `budding_tomatoes` (thanks, RaymondBlaze!);
 
 ### Fixes
 - Fix Wild Crops not generating in biomes from biome mods:
