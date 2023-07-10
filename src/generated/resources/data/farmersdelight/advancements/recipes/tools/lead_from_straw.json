@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_rope": {
+    "has_straw": {
       "conditions": {
         "items": [
           {
             "items": [
-              "farmersdelight:rope"
+              "farmersdelight:straw"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "farmersdelight:lead_from_rope"
+        "recipe": "farmersdelight:lead_from_straw"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_rope",
+      "has_straw",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "farmersdelight:lead_from_rope"
+      "farmersdelight:lead_from_straw"
     ]
   }
 }

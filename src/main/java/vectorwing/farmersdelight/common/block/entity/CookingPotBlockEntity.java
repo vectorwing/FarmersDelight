@@ -257,7 +257,11 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		if (checkNewRecipe) {
 			Optional<CookingPotRecipe> recipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.COOKING.get(), inventoryWrapper, level);
 			if (recipe.isPresent()) {
-				lastRecipeID = recipe.get().getId();
+				ResourceLocation newRecipeID = recipe.get().getId();
+				if (!lastRecipeID.equals(newRecipeID)) {
+					cookTime = 0;
+				}
+				lastRecipeID = newRecipeID;
 				return recipe;
 			}
 		}
@@ -267,10 +271,11 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	}
 
 	public ItemStack getContainer() {
-		if (!mealContainerStack.isEmpty()) {
+		ItemStack mealStack = getMeal();
+		if (!mealStack.isEmpty() && !mealContainerStack.isEmpty()) {
 			return mealContainerStack;
 		} else {
-			return getMeal().getCraftingRemainingItem();
+			return mealStack.getCraftingRemainingItem();
 		}
 	}
 

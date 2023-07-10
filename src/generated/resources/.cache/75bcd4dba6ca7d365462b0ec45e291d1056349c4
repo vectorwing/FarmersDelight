@@ -1,4 +1,5 @@
-// 1.19	2022-09-15T19:18:00.7788406	Tags for minecraft:block
+// 1.19.2	2023-07-09T23:07:33.4625462	Tags for minecraft:block
+89dff4a2813a4b6fe13cde6e775266a1d606a4aa data/create/tags/blocks/passive_boiler_heaters.json
 8d7cbaffcdabbd68f45063e7fa616212824d0ca6 data/farmersdelight/tags/blocks/compost_activators.json
 17bf02f1662de477e421a897a9b1a092da3fd1b4 data/farmersdelight/tags/blocks/drops_cake_slice.json
 bfaccff8e729039a0c1d0db4d359ded77f7c60c8 data/farmersdelight/tags/blocks/heat_conductors.json
@@ -25,3 +26,8 @@ f3b1539ad9a9117d3c48eca8dc67768f1a118df4 data/minecraft/tags/blocks/small_flower
 f689dbe322491c7ad7b7aa512fbd981bc4d7ec45 data/minecraft/tags/blocks/standing_signs.json
 166fca1b0d8b63bf7564f93e9e7d0bf3dd45bf03 data/minecraft/tags/blocks/tall_flowers.json
 42655e1b47b467aeaf7593e6f2fca0a16786fb87 data/minecraft/tags/blocks/wall_signs.json
+4dcc51aef8cad784cecedbc69fe3a14020a9288c data/sereneseasons/tags/blocks/autumn_crops.json
+ee4421cfb87b30b984db41666b2a17df2d9097f9 data/sereneseasons/tags/blocks/spring_crops.json
+cd3a9531a9acf87ea35914ba6bfffa80d52b02b5 data/sereneseasons/tags/blocks/summer_crops.json
+ee4421cfb87b30b984db41666b2a17df2d9097f9 data/sereneseasons/tags/blocks/unbreakable_infertile_crops.json
+31d5d71e1ecdce81c8fb8b9e085d8a726cf9ce6c data/sereneseasons/tags/blocks/winter_crops.json

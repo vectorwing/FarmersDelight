@@ -12,8 +12,8 @@ import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunct
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.registry.ModLootFunctions;
 
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Optional;
 
@@ -45,9 +45,8 @@ public class SmokerCookFunction extends LootItemConditionalFunction
 	}
 
 	@Override
-	@Nullable
 	public LootItemFunctionType getType() {
-		return null;
+		return ModLootFunctions.SMOKER_COOK.get();
 	}
 
 	public static class Serializer extends LootItemConditionalFunction.Serializer<SmokerCookFunction>

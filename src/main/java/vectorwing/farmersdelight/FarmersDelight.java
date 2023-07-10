@@ -2,7 +2,6 @@ package vectorwing.farmersdelight;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -61,6 +60,7 @@ public class FarmersDelight
 		ModBlockEntityTypes.TILES.register(modEventBus);
 		ModMenuTypes.MENU_TYPES.register(modEventBus);
 		ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+		ModLootFunctions.LOOT_FUNCTIONS.register(modEventBus);
 		ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
 		ModRecipeTypes.RECIPE_TYPES.register(modEventBus);
 		ModEntityTypes.ENTITIES.register(modEventBus);

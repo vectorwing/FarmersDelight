@@ -1,9 +1,13 @@
-// 1.19	2023-04-29T23:30:26.0944871	Tags for minecraft:item
+// 1.19.2	2023-07-09T23:07:33.4593389	Tags for minecraft:item
+65eba9e0353834055ff822059bd7e1784fe218ad data/createaddition/tags/items/plants.json
+f55c336a7c0c249fc90b76c979cfa5d5f6a277bf data/createaddition/tags/items/plant_foods.json
+0c943816d6d2fa986a587d5c13c7d38aaed8e159 data/create/tags/items/upright_on_belt.json
 eeb4249c8907bac30d3f4bb9daf67ecf689974c9 data/farmersdelight/tags/items/cabbage_roll_ingredients.json
 21d6792ce7de98e9396c3829ab52f8574595557b data/farmersdelight/tags/items/cabinets.json
 365c437db67d3afba7994ef9c2fcb1c14e3b9851 data/farmersdelight/tags/items/cabinets/wooden.json
 f689dbe322491c7ad7b7aa512fbd981bc4d7ec45 data/farmersdelight/tags/items/canvas_signs.json
 a178cef1ad784b00218c2a07edacc3cc97c79e0c data/farmersdelight/tags/items/offhand_equipment.json
+d837fdcf195d0755d48909cc19e0ad7aed1c4c72 data/farmersdelight/tags/items/serving_containers.json
 b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/farmersdelight/tags/items/straw_harvesters.json
 edaf49470d0e1c903468fd6902234bbeec85c337 data/farmersdelight/tags/items/tools/knives.json
 5596501768488a25c5bcc6ef16c2fc5ca3ab49e9 data/farmersdelight/tags/items/wild_crops.json
@@ -65,3 +69,9 @@ f9570db096e701a0b8872dddbb31d8dffea2a204 data/forge/tags/items/vegetables/beetro
 fe7bdb9a3a19d42543aea1030ea44f1db041a878 data/minecraft/tags/items/piglin_loved.json
 f3b1539ad9a9117d3c48eca8dc67768f1a118df4 data/minecraft/tags/items/small_flowers.json
 166fca1b0d8b63bf7564f93e9e7d0bf3dd45bf03 data/minecraft/tags/items/tall_flowers.json
+f305fbe067478314b9763bd8e60893ec468f423b data/origins/tags/items/meat.json
+da9c9878a953f308686cf68600b9cc33de2301ae data/sereneseasons/tags/items/autumn_crops.json
+67cc2b5a00311a0164d09c5487c714d091be00d9 data/sereneseasons/tags/items/spring_crops.json
+50fb0b1581d0ccf95fd37303afe49dda35daaeb5 data/sereneseasons/tags/items/summer_crops.json
+637db2b92cd8d3c4e06bd04d8b9c6b35cbf3e9c2 data/sereneseasons/tags/items/winter_crops.json
+67cc2b5a00311a0164d09c5487c714d091be00d9 data/tconstruct/tags/items/seeds.json

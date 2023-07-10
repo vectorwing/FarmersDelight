@@ -27,7 +27,6 @@ import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 import vectorwing.farmersdelight.common.registry.ModBiomeFeatures;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.world.configuration.WildCropConfiguration;
-import vectorwing.farmersdelight.common.world.filter.BiomeTagFilter;
 
 import java.util.List;
 
@@ -58,11 +57,9 @@ public class WildCropGeneration
 	public static final BlockPos BLOCK_BELOW = new BlockPos(0, -1, 0);
 	public static final BlockPos BLOCK_ABOVE = new BlockPos(0, 1, 0);
 
-	public static final BiomeTagFilter TAGGED_IS_OVERWORLD = BiomeTagFilter.biomeIsInTag(BiomeTags.IS_OVERWORLD);
-
 	public static void registerWildCropGeneration() {
 		FEATURE_PATCH_WILD_CABBAGES = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_cabbages"),
-				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_CABBAGES.get(), ModBlocks.SANDY_SHRUB.get(), BlockPredicate.matchesBlocks(BLOCK_BELOW, Blocks.SAND)));
+				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_CABBAGES.get(), ModBlocks.SANDY_SHRUB.get(), BlockPredicate.matchesTag(BLOCK_BELOW, BlockTags.SAND)));
 
 		FEATURE_PATCH_WILD_ONIONS = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_onions"),
 				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_ONIONS.get(), Blocks.ALLIUM, BlockPredicate.matchesTag(BLOCK_BELOW, BlockTags.DIRT)));
@@ -93,31 +90,31 @@ public class WildCropGeneration
 				Feature.RANDOM_PATCH, randomPatchConfig(ModBlocks.SANDY_SHRUB.get(), 32, 2, BlockPredicate.matchesTag(BLOCK_BELOW, BlockTags.SAND)));
 
 		PATCH_WILD_CABBAGES = registerPlacement(new ResourceLocation(FarmersDelight.MODID, "patch_wild_cabbages"),
-				FEATURE_PATCH_WILD_CABBAGES, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_CABBAGES.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome(), TAGGED_IS_OVERWORLD);
+				FEATURE_PATCH_WILD_CABBAGES, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_CABBAGES.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
 		PATCH_WILD_ONIONS = registerPlacement(new ResourceLocation(FarmersDelight.MODID, "patch_wild_onions"),
-				FEATURE_PATCH_WILD_ONIONS, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_ONIONS.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome(), TAGGED_IS_OVERWORLD);
+				FEATURE_PATCH_WILD_ONIONS, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_ONIONS.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
 		PATCH_WILD_TOMATOES = registerPlacement(new ResourceLocation(FarmersDelight.MODID, "patch_wild_tomatoes"),
-				FEATURE_PATCH_WILD_TOMATOES, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_TOMATOES.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome(), TAGGED_IS_OVERWORLD);
+				FEATURE_PATCH_WILD_TOMATOES, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_TOMATOES.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
 		PATCH_WILD_CARROTS = registerPlacement(new ResourceLocation(FarmersDelight.MODID, "patch_wild_carrots"),
-				FEATURE_PATCH_WILD_CARROTS, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_CARROTS.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome(), TAGGED_IS_OVERWORLD);
+				FEATURE_PATCH_WILD_CARROTS, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_CARROTS.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
 		PATCH_WILD_POTATOES = registerPlacement(new ResourceLocation(FarmersDelight.MODID, "patch_wild_potatoes"),
-				FEATURE_PATCH_WILD_POTATOES, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_POTATOES.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome(), TAGGED_IS_OVERWORLD);
+				FEATURE_PATCH_WILD_POTATOES, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_POTATOES.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
 		PATCH_WILD_BEETROOTS = registerPlacement(new ResourceLocation(FarmersDelight.MODID, "patch_wild_beetroots"),
-				FEATURE_PATCH_WILD_BEETROOTS, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_BEETROOTS.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome(), TAGGED_IS_OVERWORLD);
+				FEATURE_PATCH_WILD_BEETROOTS, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_BEETROOTS.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
 		PATCH_WILD_RICE = registerPlacement(new ResourceLocation(FarmersDelight.MODID, "patch_wild_rice"),
-				FEATURE_PATCH_WILD_RICE, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_RICE.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome(), TAGGED_IS_OVERWORLD);
+				FEATURE_PATCH_WILD_RICE, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_WILD_RICE.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
 		PATCH_BROWN_MUSHROOM_COLONIES = registerPlacement(new ResourceLocation(FarmersDelight.MODID, "patch_brown_mushroom_colonies"),
-				FEATURE_PATCH_BROWN_MUSHROOM_COLONIES, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_BROWN_MUSHROOM_COLONIES.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome(), TAGGED_IS_OVERWORLD);
+				FEATURE_PATCH_BROWN_MUSHROOM_COLONIES, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_BROWN_MUSHROOM_COLONIES.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
 		PATCH_RED_MUSHROOM_COLONIES = registerPlacement(new ResourceLocation(FarmersDelight.MODID, "patch_red_mushroom_colonies"),
-				FEATURE_PATCH_RED_MUSHROOM_COLONIES, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_RED_MUSHROOM_COLONIES.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome(), TAGGED_IS_OVERWORLD);
+				FEATURE_PATCH_RED_MUSHROOM_COLONIES, RarityFilter.onAverageOnceEvery(Configuration.CHANCE_RED_MUSHROOM_COLONIES.get()), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 	}
 
 	public static RandomPatchConfiguration randomPatchConfig(Block block, int tries, int xzSpread, BlockPredicate plantedOn) {
