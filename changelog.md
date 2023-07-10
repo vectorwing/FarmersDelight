@@ -9,6 +9,7 @@
 - Added some items to Create Crafts & Additions tags: `createaddition:plants` and `createaddition:plant_foods` (thanks, moltenwolfcub!);
 - Added Onions to the `tconstruct:seeds` tag from Tinker's Construct, to replant with Harvest modifiers;
 - New tags:
+  - `farmersdelight:terrain`: Blocks commonly present in biome surfaces. Populated by `minecraft:dirt` and `minecraft:sand`, and used for wild crop generation;
   - `farmersdelight:horse_feed_tempted`: Entities which will be tempted by Horse Feed when held;
   - `farmersdelight:serving_containers`: Items commonly used as containers for Cooking Pot recipes. Used for shift-click logic in the UI;
 

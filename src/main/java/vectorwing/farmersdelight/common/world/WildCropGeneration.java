@@ -25,6 +25,7 @@ import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 import vectorwing.farmersdelight.common.registry.ModBiomeFeatures;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.world.configuration.WildCropConfiguration;
 
 import java.util.List;
@@ -64,7 +65,7 @@ public class WildCropGeneration
 				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_ONIONS.get(), Blocks.ALLIUM, BlockPredicate.matchesTag(BlockTags.DIRT, BLOCK_BELOW)));
 
 		FEATURE_PATCH_WILD_TOMATOES = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_tomatoes"),
-				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_TOMATOES.get(), Blocks.DEAD_BUSH, BlockPredicate.matchesBlocks(List.of(Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.COARSE_DIRT, Blocks.RED_SAND, Blocks.SAND), BLOCK_BELOW)));
+				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_TOMATOES.get(), Blocks.DEAD_BUSH, BlockPredicate.matchesTag(ModTags.TERRAIN, BLOCK_BELOW)));
 
 		FEATURE_PATCH_WILD_CARROTS = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_carrots"),
 				ModBiomeFeatures.WILD_CROP.get(), wildCropWithFloorConfig(ModBlocks.WILD_CARROTS.get(), Blocks.GRASS, BlockPredicate.matchesTag(BlockTags.DIRT, BLOCK_BELOW), Blocks.COARSE_DIRT, BlockPredicate.matchesTag(BlockTags.DIRT)));

@@ -17,6 +17,9 @@ public class ModTags
 	// Blocks that are efficiently mined with a Knife.
 	public static final TagKey<Block> MINEABLE_WITH_KNIFE = modBlockTag("mineable/knife");
 
+	// Blocks commonly present in biome surfaces. Populated by "minecraft:dirt" and "minecraft:sand" by default.
+	public static final TagKey<Block> TERRAIN = modBlockTag("terrain");
+
 	// Blocks made mostly of straw.
 	public static final TagKey<Block> STRAW_BLOCKS = modBlockTag("straw_blocks");
 
