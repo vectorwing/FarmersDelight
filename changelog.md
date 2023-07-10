@@ -13,6 +13,8 @@
   - `farmersdelight:serving_containers`: Items commonly used as containers for Cooking Pot recipes. Used for shift-click logic in the UI;
 
 ### Updates
+- Updated the Rope recipe to require 2 straw only, and output 4 units;
+- Updated alternate Lead recipe to use Straw instead of Rope, due to Rope being cheaper now;
 - Updated the Cooking Pot's GUI with a small arrow, pointing from the meal slot to the output slot;
 - Updated the JEI widget for cooking recipes:
   - Slightly smaller size, to fit more recipes per page;

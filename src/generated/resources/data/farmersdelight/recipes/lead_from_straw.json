@@ -1,13 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "rr ",
-    "rr ",
-    "  r"
+    "ss ",
+    "ss ",
+    "  s"
   ],
   "key": {
-    "r": {
-      "item": "farmersdelight:rope"
+    "s": {
+      "item": "farmersdelight:straw"
     }
   },
   "result": {
