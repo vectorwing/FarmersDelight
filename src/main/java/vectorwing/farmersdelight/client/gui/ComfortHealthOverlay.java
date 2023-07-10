@@ -77,7 +77,7 @@ public class ComfortHealthOverlay
 	public static void drawComfortOverlay(Player player, Minecraft minecraft, PoseStack matrixStack, int left, int top) {
 		int ticks = minecraft.gui.getGuiTicks();
 		Random rand = new Random();
-		rand.setSeed((long) (ticks * 312871));
+		rand.setSeed(ticks * 312871L);
 
 		int health = Mth.ceil(player.getHealth());
 		float absorb = Mth.ceil(player.getAbsorptionAmount());
