@@ -41,6 +41,7 @@
 ### Translations
 - Updated:
   - ru_RU (thanks, Edarlingen!);
+  - es_ES (thanks, GerardPolloRebozado!);
 
 ## 1.2.1
 
