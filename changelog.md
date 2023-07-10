@@ -27,6 +27,7 @@
 - Rabbits can now be fed, and are tempted by, Cabbage (whole or leaf);
 - Updated Slice of Cake's texture, to be more accurate to the cake block it comes from;
 - Ropes can now support center-hanging blocks beneath them, such as Lanterns;
+- Tomato Seeds are now associated as an item for both `tomatoes` and `budding_tomatoes` (thanks, RaymondBlaze!);
 
 ### Fixes
 - Fix Wild Crops not generating in biomes from biome mods:
