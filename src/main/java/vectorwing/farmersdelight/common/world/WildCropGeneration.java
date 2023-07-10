@@ -73,7 +73,7 @@ public class WildCropGeneration
 				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_POTATOES.get(), Blocks.FERN, BlockPredicate.matchesTag(BlockTags.DIRT, BLOCK_BELOW)));
 
 		FEATURE_PATCH_WILD_BEETROOTS = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_beetroots"),
-				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_BEETROOTS.get(), ModBlocks.SANDY_SHRUB.get(), BlockPredicate.matchesBlock(Blocks.SAND, BLOCK_BELOW)));
+				ModBiomeFeatures.WILD_CROP.get(), wildCropConfig(ModBlocks.WILD_BEETROOTS.get(), ModBlocks.SANDY_SHRUB.get(), BlockPredicate.matchesTag(BlockTags.SAND, BLOCK_BELOW)));
 
 		FEATURE_PATCH_WILD_RICE = register(new ResourceLocation(FarmersDelight.MODID, "patch_wild_rice"),
 				ModBiomeFeatures.WILD_RICE.get(), FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK,
