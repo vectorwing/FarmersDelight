@@ -258,7 +258,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 			Optional<CookingPotRecipe> recipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.COOKING.get(), inventoryWrapper, level);
 			if (recipe.isPresent()) {
 				ResourceLocation newRecipeID = recipe.get().getId();
-				if (!lastRecipeID.equals(newRecipeID)) {
+				if (lastRecipeID != null && !lastRecipeID.equals(newRecipeID)) {
 					cookTime = 0;
 				}
 				lastRecipeID = newRecipeID;
