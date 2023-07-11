@@ -282,6 +282,7 @@ public class ModBlocks
 			() -> new OnionBlock(Block.Properties.copy(Blocks.WHEAT)));
 	public static final RegistryObject<Block> BUDDING_TOMATO_CROP = BLOCKS.register("budding_tomatoes",
 			() -> new BuddingTomatoBlock(Block.Properties.copy(Blocks.WHEAT)));
+	// TODO: Figure out how to make Tomato Crop waterproof again.
 	public static final RegistryObject<Block> TOMATO_CROP = BLOCKS.register("tomatoes",
 			() -> new TomatoVineBlock(Block.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)));
 	public static final RegistryObject<Block> RICE_CROP = BLOCKS.register("rice",
