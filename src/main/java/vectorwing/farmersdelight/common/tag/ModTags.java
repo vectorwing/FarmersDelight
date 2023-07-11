@@ -21,6 +21,9 @@ public class ModTags
 	// Blocks that are efficiently mined with a Knife.
 	public static final TagKey<Block> MINEABLE_WITH_KNIFE = modBlockTag("mineable/knife");
 
+	// Blocks commonly present in biome surfaces. Populated by "minecraft:dirt" and "minecraft:sand" by default.
+	public static final TagKey<Block> TERRAIN = modBlockTag("terrain");
+
 	// Blocks made mostly of straw.
 	public static final TagKey<Block> STRAW_BLOCKS = modBlockTag("straw_blocks");
 
@@ -81,11 +84,17 @@ public class ModTags
 	// All Cabinet items for crafting.
 	public static final TagKey<Item> CABINETS = modItemTag("cabinets");
 
+	// Items commonly used to contain products. Used by the Cooking Pot for sneak-clicking actions.
+	public static final TagKey<Item> SERVING_CONTAINERS = modItemTag("serving_containers");
+
 	// Entities that should be able to eat Dog Food when tame. Defaults to tamed Wolves.
 	public static final TagKey<EntityType<?>> DOG_FOOD_USERS = modEntityTag("dog_food_users");
 
 	// Entities that should be able to eat Horse Feed when tame. Defaults to most vanilla mounts, except Pigs and Striders.
 	public static final TagKey<EntityType<?>> HORSE_FEED_USERS = modEntityTag("horse_feed_users");
+
+	// Entities that should be given a TemptGoal for Horse Feed, allowing players to call them with it.
+	public static final TagKey<EntityType<?>> HORSE_FEED_TEMPTED = modEntityTag("horse_feed_tempted");
 
 	private static TagKey<Item> modItemTag(String path) {
 		return ItemTags.create(new ResourceLocation(FarmersDelight.MODID, path));

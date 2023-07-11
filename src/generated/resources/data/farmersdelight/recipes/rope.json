@@ -8,11 +8,10 @@
   },
   "pattern": [
     "s",
-    "s",
     "s"
   ],
   "result": {
-    "count": 3,
+    "count": 4,
     "item": "farmersdelight:rope"
   },
   "show_notification": true

@@ -5,9 +5,10 @@
   "refmap": "farmersdelight.refmap.json",
   "mixins": [
     "CampfireBaleMixin",
-    "KeepRichSoilTreeMixin",
-    "KeepRichSoilGiantTreeMixin",
     "CuttingBoardDispenserMixin",
+    "KeepRichSoilGiantTreeMixin",
+    "KeepRichSoilTreeMixin",
+    "RabbitsEatCabbageMixin",
     "SoupItemMixin",
     "accessor.RecipeManagerAccessor"
   ],

@@ -9,10 +9,12 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.*;
 
@@ -27,11 +29,16 @@ public class ModBlocks
 	}
 
 	// Workstations
-	public static final RegistryObject<Block> STOVE = BLOCKS.register("stove", () -> new StoveBlock(BlockBehaviour.Properties.copy(Blocks.BRICKS).lightLevel(litBlockEmission(13))));
-	public static final RegistryObject<Block> COOKING_POT = BLOCKS.register("cooking_pot", CookingPotBlock::new);
-	public static final RegistryObject<Block> SKILLET = BLOCKS.register("skillet", SkilletBlock::new);
-	public static final RegistryObject<Block> BASKET = BLOCKS.register("basket", BasketBlock::new);
-	public static final RegistryObject<Block> CUTTING_BOARD = BLOCKS.register("cutting_board", CuttingBoardBlock::new);
+	public static final RegistryObject<Block> STOVE = BLOCKS.register("stove",
+			() -> new StoveBlock(Block.Properties.copy(Blocks.BRICKS).lightLevel(litBlockEmission(13))));
+	public static final RegistryObject<Block> COOKING_POT = BLOCKS.register("cooking_pot",
+			() -> new CookingPotBlock(Block.Properties.of().mapColor(MapColor.METAL).strength(0.5F, 6.0F).sound(SoundType.LANTERN)));
+	public static final RegistryObject<Block> SKILLET = BLOCKS.register("skillet",
+			() -> new SkilletBlock(Block.Properties.of().mapColor(MapColor.METAL).strength(0.5F, 6.0F).sound(SoundType.LANTERN)));
+	public static final RegistryObject<Block> BASKET = BLOCKS.register("basket",
+			() -> new BasketBlock(Block.Properties.of().strength(1.5F).sound(SoundType.BAMBOO_WOOD)));
+	public static final RegistryObject<Block> CUTTING_BOARD = BLOCKS.register("cutting_board",
+			() -> new CuttingBoardBlock(Block.Properties.copy(Blocks.OAK_PLANKS).strength(2.0F).sound(SoundType.WOOD)));
 
 	// Crop Storage
 	public static final RegistryObject<Block> CARROT_CRATE = BLOCKS.register("carrot_crate",
@@ -54,8 +61,10 @@ public class ModBlocks
 			() -> new StrawBaleBlock(Block.Properties.copy(Blocks.HAY_BLOCK)));
 
 	// Building
-	public static final RegistryObject<Block> ROPE = BLOCKS.register("rope", RopeBlock::new);
-	public static final RegistryObject<Block> SAFETY_NET = BLOCKS.register("safety_net", SafetyNetBlock::new);
+	public static final RegistryObject<Block> ROPE = BLOCKS.register("rope",
+			() -> new RopeBlock(Block.Properties.copy(Blocks.BROWN_CARPET).noCollission().noOcclusion().strength(0.2F).sound(SoundType.WOOL)));
+	public static final RegistryObject<Block> SAFETY_NET = BLOCKS.register("safety_net",
+			() -> new SafetyNetBlock(Block.Properties.copy(Blocks.BROWN_CARPET).strength(0.2F).sound(SoundType.WOOL)));
 	public static final RegistryObject<Block> OAK_CABINET = BLOCKS.register("oak_cabinet",
 			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
 	public static final RegistryObject<Block> SPRUCE_CABINET = BLOCKS.register("spruce_cabinet",
@@ -78,10 +87,14 @@ public class ModBlocks
 			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL).sound(SoundType.NETHER_WOOD)));
 	public static final RegistryObject<Block> WARPED_CABINET = BLOCKS.register("warped_cabinet",
 			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL).sound(SoundType.NETHER_WOOD)));
-	public static final RegistryObject<Block> CANVAS_RUG = BLOCKS.register("canvas_rug", CanvasRugBlock::new);
-	public static final RegistryObject<Block> TATAMI = BLOCKS.register("tatami", TatamiBlock::new);
-	public static final RegistryObject<Block> FULL_TATAMI_MAT = BLOCKS.register("full_tatami_mat", TatamiMatBlock::new);
-	public static final RegistryObject<Block> HALF_TATAMI_MAT = BLOCKS.register("half_tatami_mat", TatamiHalfMatBlock::new);
+	public static final RegistryObject<Block> CANVAS_RUG = BLOCKS.register("canvas_rug",
+			() -> new CanvasRugBlock(Block.Properties.copy(Blocks.WHITE_CARPET).sound(SoundType.GRASS).strength(0.2F)));
+	public static final RegistryObject<Block> TATAMI = BLOCKS.register("tatami",
+			() -> new TatamiBlock(Block.Properties.copy(Blocks.WHITE_WOOL)));
+	public static final RegistryObject<Block> FULL_TATAMI_MAT = BLOCKS.register("full_tatami_mat",
+			() -> new TatamiMatBlock(Block.Properties.copy(Blocks.WHITE_WOOL).strength(0.3F)));
+	public static final RegistryObject<Block> HALF_TATAMI_MAT = BLOCKS.register("half_tatami_mat",
+			() -> new TatamiHalfMatBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).strength(0.3F).pushReaction(PushReaction.DESTROY)));
 
 	public static final RegistryObject<Block> CANVAS_SIGN = BLOCKS.register("canvas_sign",
 			() -> new StandingCanvasSignBlock(null));
@@ -270,7 +283,7 @@ public class ModBlocks
 	public static final RegistryObject<Block> BUDDING_TOMATO_CROP = BLOCKS.register("budding_tomatoes",
 			() -> new BuddingTomatoBlock(Block.Properties.copy(Blocks.WHEAT)));
 	public static final RegistryObject<Block> TOMATO_CROP = BLOCKS.register("tomatoes",
-			() -> new TomatoVineBlock(Block.Properties.copy(Blocks.WHEAT).pushReaction(PushReaction.NORMAL)));
+			() -> new TomatoVineBlock(Block.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)));
 	public static final RegistryObject<Block> RICE_CROP = BLOCKS.register("rice",
 			() -> new RiceBlock(Block.Properties.copy(Blocks.WHEAT).strength(0.2F)));
 	public static final RegistryObject<Block> RICE_CROP_PANICLES = BLOCKS.register("rice_panicles",

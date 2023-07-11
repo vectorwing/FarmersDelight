@@ -5,7 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -77,7 +76,6 @@ public class KnifeItem extends DiggerItem
 			BlockPos pos = event.getPos();
 			BlockState state = event.getLevel().getBlockState(pos);
 			Block block = state.getBlock();
-			Direction direction = event.getEntity().getDirection().getOpposite();
 
 			if (state.is(ModTags.DROPS_CAKE_SLICE)) {
 				level.setBlock(pos, Blocks.CAKE.defaultBlockState().setValue(CakeBlock.BITES, 1), 3);

@@ -29,8 +29,10 @@ public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlo
 
 			ItemRenderer itemRenderer = Minecraft.getInstance()
 					.getItemRenderer();
-			boolean isBlockItem = itemRenderer.getModel(boardStack, cuttingBoardEntity.getLevel(), null, 0)
-					.isGui3d();
+
+			poseStack.pushPose();
+			boolean isBlockItem = itemRenderer.getModel(boardStack, cuttingBoardEntity.getLevel(), null, 0).applyTransform(ItemDisplayContext.FIXED, poseStack, false).isGui3d();
+			poseStack.popPose();
 
 			if (cuttingBoardEntity.isItemCarvingBoard()) {
 				renderItemCarved(poseStack, direction, boardStack);

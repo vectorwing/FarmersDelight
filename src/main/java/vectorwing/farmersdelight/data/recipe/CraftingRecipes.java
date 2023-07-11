@@ -70,12 +70,12 @@ public class CraftingRecipes
 				.unlockedBy("has_canvas", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CANVAS.get()))
 				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "scaffolding_from_canvas"));
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, Items.LEAD)
-				.pattern("rr ")
-				.pattern("rr ")
-				.pattern("  r")
-				.define('r', ModItems.ROPE.get())
-				.unlockedBy("has_rope", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.ROPE.get()))
-				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "lead_from_rope"));
+				.pattern("ss ")
+				.pattern("ss ")
+				.pattern("  s")
+				.define('s', ModItems.STRAW.get())
+				.unlockedBy("has_straw", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.STRAW.get()))
+				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "lead_from_straw"));
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, Items.PAINTING)
 				.pattern("sss")
 				.pattern("scs")
@@ -308,8 +308,7 @@ public class CraftingRecipes
 				.define('D', Items.WARPED_TRAPDOOR)
 				.unlockedBy("has_warped_trapdoor", InventoryChangeTrigger.TriggerInstance.hasItems(Items.WARPED_TRAPDOOR))
 				.save(consumer);
-		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.ROPE.get(), 3)
-				.pattern("s")
+		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.ROPE.get(), 4)
 				.pattern("s")
 				.pattern("s")
 				.define('s', ModItems.STRAW.get())

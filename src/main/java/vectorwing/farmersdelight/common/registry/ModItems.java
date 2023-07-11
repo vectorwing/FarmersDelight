@@ -3,6 +3,7 @@ package vectorwing.farmersdelight.common.registry;
 import com.google.common.collect.Sets;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -10,9 +11,8 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.FoodValues;
 import vectorwing.farmersdelight.common.item.*;
 
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.Map;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
@@ -252,7 +252,20 @@ public class ModItems
 	public static final RegistryObject<Item> RICE = registerWithTab("rice",
 			() -> new RiceItem(ModBlocks.RICE_CROP.get(), basicItem()));
 	public static final RegistryObject<Item> CABBAGE_SEEDS = registerWithTab("cabbage_seeds", () -> new ItemNameBlockItem(ModBlocks.CABBAGE_CROP.get(), basicItem()));
-	public static final RegistryObject<Item> TOMATO_SEEDS = registerWithTab("tomato_seeds", () -> new ItemNameBlockItem(ModBlocks.BUDDING_TOMATO_CROP.get(), basicItem()));
+	public static final RegistryObject<Item> TOMATO_SEEDS = registerWithTab("tomato_seeds", () -> new ItemNameBlockItem(ModBlocks.BUDDING_TOMATO_CROP.get(), basicItem())
+	{
+		@Override
+		public void registerBlocks(Map<Block, Item> blockToItemMap, Item item) {
+			super.registerBlocks(blockToItemMap, item);
+			blockToItemMap.put(ModBlocks.TOMATO_CROP.get(), item);
+		}
+
+		@Override
+		public void removeFromBlockToItemMap(Map<Block, Item> blockToItemMap, Item itemIn) {
+			super.removeFromBlockToItemMap(blockToItemMap, itemIn);
+			blockToItemMap.remove(ModBlocks.TOMATO_CROP.get());
+		}
+	});
 	public static final RegistryObject<Item> ROTTEN_TOMATO = registerWithTab("rotten_tomato",
 			() -> new RottenTomatoItem(new Item.Properties().stacksTo(16)));
 

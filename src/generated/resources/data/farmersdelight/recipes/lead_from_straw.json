@@ -2,14 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "r": {
-      "item": "farmersdelight:rope"
+    "s": {
+      "item": "farmersdelight:straw"
     }
   },
   "pattern": [
-    "rr ",
-    "rr ",
-    "  r"
+    "ss ",
+    "ss ",
+    "  s"
   ],
   "result": {
     "item": "minecraft:lead"

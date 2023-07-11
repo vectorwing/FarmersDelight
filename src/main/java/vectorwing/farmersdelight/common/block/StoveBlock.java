@@ -50,8 +50,8 @@ public class StoveBlock extends BaseEntityBlock
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-	public StoveBlock(BlockBehaviour.Properties builder) {
-		super(builder);
+	public StoveBlock(BlockBehaviour.Properties properties) {
+		super(properties);
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, false));
 	}
 

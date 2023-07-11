@@ -102,7 +102,7 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 				ItemStack mealStack = this.hoveredSlot.getItem();
 				tooltip.add(((MutableComponent) mealStack.getItem().getDescription()).withStyle(mealStack.getRarity().color));
 
-				ItemStack containerStack = this.menu.tileEntity.getContainer();
+				ItemStack containerStack = this.menu.blockEntity.getContainer();
 				String container = !containerStack.isEmpty() ? containerStack.getItem().getDescription().getString() : "";
 
 				tooltip.add(TextUtils.getTranslation("container.cooking_pot.served_on", container).withStyle(ChatFormatting.GRAY));

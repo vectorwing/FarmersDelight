@@ -11,7 +11,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.tag.CompatibilityTags;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
@@ -34,6 +36,7 @@ public class ItemTags extends ItemTagsProvider
 
 		this.registerModTags();
 		this.registerForgeTags();
+		this.registerCompatibilityTags();
 	}
 
 	private void registerModTags() {
@@ -91,6 +94,7 @@ public class ItemTags extends ItemTagsProvider
 				.add(ModItems.WARPED_CABINET.get());
 		tag(ModTags.CABINETS).addTag(ModTags.WOODEN_CABINETS);
 		tag(ModTags.OFFHAND_EQUIPMENT).add(Items.SHIELD).addOptional(new ResourceLocation("create:extendo_grip"));
+		tag(ModTags.SERVING_CONTAINERS).add(Items.BOWL, Items.GLASS_BOTTLE, Items.BUCKET);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -164,5 +168,48 @@ public class ItemTags extends ItemTagsProvider
 		tag(ForgeTags.TOOLS_KNIVES).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get(), ModItems.NETHERITE_KNIFE.get());
 		tag(ForgeTags.TOOLS_PICKAXES).add(Items.WOODEN_PICKAXE, Items.STONE_PICKAXE, Items.IRON_PICKAXE, Items.DIAMOND_PICKAXE, Items.GOLDEN_PICKAXE, Items.NETHERITE_PICKAXE);
 		tag(ForgeTags.TOOLS_SHOVELS).add(Items.WOODEN_SHOVEL, Items.STONE_SHOVEL, Items.IRON_SHOVEL, Items.DIAMOND_SHOVEL, Items.GOLDEN_SHOVEL, Items.NETHERITE_SHOVEL);
+	}
+
+	public void registerCompatibilityTags() {
+		tag(CompatibilityTags.CREATE_UPRIGHT_ON_BELT)
+				.add(ModItems.MILK_BOTTLE.get())
+				.add(ModItems.HOT_COCOA.get())
+				.add(ModItems.APPLE_CIDER.get())
+				.add(ModItems.MELON_JUICE.get())
+				.add(ModItems.PIE_CRUST.get())
+				.add(ModItems.APPLE_PIE.get())
+				.add(ModItems.SWEET_BERRY_CHEESECAKE.get())
+				.add(ModItems.CHOCOLATE_PIE.get());
+
+		tag(CompatibilityTags.CREATE_CA_PLANT_FOODS)
+				.add(ModItems.PUMPKIN_SLICE.get())
+				.add(ModItems.ROTTEN_TOMATO.get())
+				.add(ModItems.RICE_PANICLE.get());
+		tag(CompatibilityTags.CREATE_CA_PLANTS)
+				.add(ModItems.SANDY_SHRUB.get())
+				.add(ModItems.BROWN_MUSHROOM_COLONY.get())
+				.add(ModItems.RED_MUSHROOM_COLONY.get());
+
+		tag(CompatibilityTags.ORIGINS_MEAT)
+				.add(ModItems.FRIED_EGG.get())
+				.add(ModItems.COD_SLICE.get())
+				.add(ModItems.COOKED_COD_SLICE.get())
+				.add(ModItems.SALMON_SLICE.get())
+				.add(ModItems.COOKED_SALMON_SLICE.get())
+				.add(ModItems.BACON_AND_EGGS.get());
+
+		tag(CompatibilityTags.SERENE_SEASONS_AUTUMN_CROPS)
+				.add(ModItems.CABBAGE_SEEDS.get())
+				.add(ModItems.ONION.get())
+				.add(ModItems.RICE.get());
+		tag(CompatibilityTags.SERENE_SEASONS_SPRING_CROPS)
+				.add(ModItems.ONION.get());
+		tag(CompatibilityTags.SERENE_SEASONS_SUMMER_CROPS)
+				.add(ModItems.TOMATO_SEEDS.get())
+				.add(ModItems.RICE.get());
+		tag(CompatibilityTags.SERENE_SEASONS_WINTER_CROPS)
+				.add(ModItems.CABBAGE_SEEDS.get());
+
+		tag(CompatibilityTags.TINKERS_CONSTRUCT_SEEDS).add(ModItems.ONION.get());
 	}
 }
