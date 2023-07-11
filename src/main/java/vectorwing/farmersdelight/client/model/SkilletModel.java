@@ -38,12 +38,12 @@ import java.util.*;
 @SuppressWarnings("deprecation")
 public class SkilletModel implements BakedModel
 {
-	private final ModelBaker bakery;
+//	private final ModelBaker bakery;
 	private final BakedModel originalModel;
 	private final BakedModel cookingModel;
 
-	public SkilletModel(ModelBaker bakery, BakedModel originalModel, BakedModel cookingModel) {
-		this.bakery = bakery;
+	public SkilletModel(BakedModel originalModel, BakedModel cookingModel) {
+//		this.bakery = bakery;
 		this.originalModel = Preconditions.checkNotNull(originalModel);
 		this.cookingModel = Preconditions.checkNotNull(cookingModel);
 	}
@@ -56,8 +56,9 @@ public class SkilletModel implements BakedModel
 			CompoundTag tag = stack.getOrCreateTag();
 
 			if (tag.contains("Cooking")) {
-				ItemStack ingredientStack = ItemStack.of(tag.getCompound("Cooking"));
-				return SkilletModel.this.getCookingModel(ingredientStack);
+//				ItemStack ingredientStack = ItemStack.of(tag.getCompound("Cooking"));
+//				return SkilletModel.this.getCookingModel(ingredientStack);
+				return cookingModel;
 			}
 
 			return originalModel;
@@ -110,9 +111,9 @@ public class SkilletModel implements BakedModel
 
 	private final HashMap<Item, CompositeBakedModel> cache = new HashMap<>();
 
-	private CompositeBakedModel getCookingModel(ItemStack ingredientStack) {
-		return cache.computeIfAbsent(ingredientStack.getItem(), p -> new CompositeBakedModel(bakery, ingredientStack, cookingModel));
-	}
+//	private CompositeBakedModel getCookingModel(ItemStack ingredientStack) {
+//		return cache.computeIfAbsent(ingredientStack.getItem(), p -> new CompositeBakedModel(bakery, ingredientStack, cookingModel));
+//	}
 
 	private static class CompositeBakedModel extends WrappedItemModel<BakedModel>
 	{

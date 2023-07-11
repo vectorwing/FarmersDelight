@@ -53,7 +53,7 @@ public class ClientSetupEvents
 	}
 
 	@SubscribeEvent
-	public static void onModelBake(BakingCompleted event) {
+	public static void onModelBake(ModelEvent.ModifyBakingResult event) {
 		Map<ResourceLocation, BakedModel> modelRegistry = event.getModels();
 
 		ModelResourceLocation skilletLocation = new ModelResourceLocation(new ResourceLocation(FarmersDelight.MODID, "skillet"), "inventory");
@@ -61,7 +61,7 @@ public class ClientSetupEvents
 		ModelResourceLocation skilletCookingLocation = new ModelResourceLocation(new ResourceLocation(FarmersDelight.MODID, "skillet_cooking"), "inventory");
 		BakedModel skilletCookingModel = modelRegistry.get(skilletCookingLocation);
 		// TODO: Sigh... figure out what's wrong with the skillet. Again.
-//		modelRegistry.put(skilletLocation, new SkilletModel(event.getModelBakery(), skilletModel, skilletCookingModel));
+		modelRegistry.put(skilletLocation, new SkilletModel(skilletModel, skilletCookingModel));
 	}
 
 	@SubscribeEvent
