@@ -9,7 +9,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -35,6 +34,10 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 	private final ContainerData cookingPotData;
 	private final ContainerLevelAccess canInteractWithCallable;
 	protected final Level level;
+
+	public CookingPotMenu(final int windowId, final Inventory playerInventory, final FriendlyByteBuf data) {
+		this(windowId, playerInventory, getTileEntity(playerInventory, data), new SimpleContainerData(4));
+	}
 
 	public CookingPotMenu(final int windowId, final Inventory playerInventory, final CookingPotBlockEntity blockEntity, ContainerData cookingPotDataIn) {
 		super(ModMenuTypes.COOKING_POT.get(), windowId);
@@ -98,10 +101,6 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 			return (CookingPotBlockEntity) tileAtPos;
 		}
 		throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);
-	}
-
-	public CookingPotMenu(final int windowId, final Inventory playerInventory, final FriendlyByteBuf data) {
-		this(windowId, playerInventory, getTileEntity(playerInventory, data), new SimpleContainerData(4));
 	}
 
 	@Override
