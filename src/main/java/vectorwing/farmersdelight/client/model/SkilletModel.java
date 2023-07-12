@@ -35,6 +35,8 @@ import java.util.*;
 @SuppressWarnings("deprecation")
 public class SkilletModel implements BakedModel
 {
+	private static final ItemModelGenerator ITEM_MODEL_GENERATOR = new ItemModelGenerator();
+
 	private final ModelBakery bakery;
 	private final BakedModel originalModel;
 	private final BakedModel cookingModel;
@@ -132,7 +134,7 @@ public class SkilletModel implements BakedModel
 
 			BakedModel ingredientBaked;
 			if (ingredientUnbaked instanceof BlockModel bm && ((BlockModel) ingredientUnbaked).getRootModel() == ModelBakery.GENERATION_MARKER) {
-				ingredientBaked = new ItemModelGenerator()
+				ingredientBaked = ITEM_MODEL_GENERATOR
 						.generateBlockModel(Material::sprite, bm)
 						.bake(baker, bm, Material::sprite, transform, name, false);
 			} else {
