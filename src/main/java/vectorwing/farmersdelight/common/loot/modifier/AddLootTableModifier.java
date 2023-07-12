@@ -17,6 +17,8 @@ import vectorwing.farmersdelight.common.Configuration;
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
+import static net.minecraft.world.level.storage.loot.LootTable.createStackSplitter;
+
 /**
  * Credits to Commoble for this implementation!
  */
@@ -39,7 +41,7 @@ public class AddLootTableModifier extends LootModifier
 	protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
 		if (Configuration.GENERATE_FD_CHEST_LOOT.get()) {
 			LootTable extraTable = context.getResolver().getLootTable(this.lootTable);
-			extraTable.getRandomItems(context, generatedLoot::add);
+			extraTable.getRandomItemsRaw(context, createStackSplitter(context.getLevel(), generatedLoot::add));
 		}
 		return generatedLoot;
 	}

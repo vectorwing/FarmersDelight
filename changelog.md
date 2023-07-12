@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.2a
+
+### Fixes
+- Fix recursion crash when opening loot chests;
+
 ## 1.2.2
 
 ### Additions
