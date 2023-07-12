@@ -3,6 +3,7 @@
 ## 1.2.2
 
 ### Additions
+- (1.20) Added Hanging Canvas Signs;
 - (1.20) Added Cherry and Bamboo Cabinets;
 - (1.20) Added salvaging recipes for Cherry and Bamboo furniture;
 - Added compatibility with the `origins:meat` tag from the Origins mod:
