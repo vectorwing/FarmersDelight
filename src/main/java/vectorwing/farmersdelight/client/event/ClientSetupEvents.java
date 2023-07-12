@@ -8,7 +8,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelEvent;
-import net.minecraftforge.client.event.ModelEvent.BakingCompleted;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.client.event.RegisterRecipeBookCategoriesEvent;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -29,8 +28,7 @@ import java.util.Map;
 public class ClientSetupEvents
 {
 	@SubscribeEvent
-	public static void onRegisterRecipeBookCategories(RegisterRecipeBookCategoriesEvent event)
-	{
+	public static void onRegisterRecipeBookCategories(RegisterRecipeBookCategoriesEvent event) {
 		RecipeCategories.init(event);
 	}
 
@@ -60,8 +58,7 @@ public class ClientSetupEvents
 		BakedModel skilletModel = modelRegistry.get(skilletLocation);
 		ModelResourceLocation skilletCookingLocation = new ModelResourceLocation(new ResourceLocation(FarmersDelight.MODID, "skillet_cooking"), "inventory");
 		BakedModel skilletCookingModel = modelRegistry.get(skilletCookingLocation);
-		// TODO: Sigh... figure out what's wrong with the skillet. Again.
-		modelRegistry.put(skilletLocation, new SkilletModel(skilletModel, skilletCookingModel));
+		modelRegistry.put(skilletLocation, new SkilletModel(event.getModelBakery(), skilletModel, skilletCookingModel));
 	}
 
 	@SubscribeEvent

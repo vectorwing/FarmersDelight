@@ -20,15 +20,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.SimpleModelState;
 import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.registry.ModItems;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import vectorwing.farmersdelight.common.registry.ModItems;
-
 import java.util.*;
 
 /**
@@ -38,12 +35,12 @@ import java.util.*;
 @SuppressWarnings("deprecation")
 public class SkilletModel implements BakedModel
 {
-//	private final ModelBaker bakery;
+	private final ModelBakery bakery;
 	private final BakedModel originalModel;
 	private final BakedModel cookingModel;
 
-	public SkilletModel(BakedModel originalModel, BakedModel cookingModel) {
-//		this.bakery = bakery;
+	public SkilletModel(ModelBakery bakery, BakedModel originalModel, BakedModel cookingModel) {
+		this.bakery = bakery;
 		this.originalModel = Preconditions.checkNotNull(originalModel);
 		this.cookingModel = Preconditions.checkNotNull(cookingModel);
 	}
@@ -56,9 +53,8 @@ public class SkilletModel implements BakedModel
 			CompoundTag tag = stack.getOrCreateTag();
 
 			if (tag.contains("Cooking")) {
-//				ItemStack ingredientStack = ItemStack.of(tag.getCompound("Cooking"));
-//				return SkilletModel.this.getCookingModel(ingredientStack);
-				return cookingModel;
+				ItemStack ingredientStack = ItemStack.of(tag.getCompound("Cooking"));
+				return SkilletModel.this.getCookingModel(ingredientStack);
 			}
 
 			return originalModel;
@@ -111,16 +107,16 @@ public class SkilletModel implements BakedModel
 
 	private final HashMap<Item, CompositeBakedModel> cache = new HashMap<>();
 
-//	private CompositeBakedModel getCookingModel(ItemStack ingredientStack) {
-//		return cache.computeIfAbsent(ingredientStack.getItem(), p -> new CompositeBakedModel(bakery, ingredientStack, cookingModel));
-//	}
+	private CompositeBakedModel getCookingModel(ItemStack ingredientStack) {
+		return cache.computeIfAbsent(ingredientStack.getItem(), p -> new CompositeBakedModel(bakery, ingredientStack, cookingModel));
+	}
 
 	private static class CompositeBakedModel extends WrappedItemModel<BakedModel>
 	{
 		private final List<BakedQuad> genQuads = new ArrayList<>();
 		private final Map<Direction, List<BakedQuad>> faceQuads = new EnumMap<>(Direction.class);
 
-		public CompositeBakedModel(ModelBaker bakery, ItemStack ingredientStack, BakedModel skillet) {
+		public CompositeBakedModel(ModelBakery bakery, ItemStack ingredientStack, BakedModel skillet) {
 			super(skillet);
 
 			ResourceLocation ingredientLocation = ForgeRegistries.ITEMS.getKey(ingredientStack.getItem());
@@ -132,13 +128,15 @@ public class SkilletModel implements BakedModel
 							new Vector3f(0.625F, 0.625F, 0.625F), null));
 			ResourceLocation name = new ResourceLocation(FarmersDelight.MODID, "skillet_with_" + ingredientLocation.toString().replace(':', '_'));
 
+			ModelBaker baker = bakery.new ModelBakerImpl((modelLoc, material) -> material.sprite(), name);
+
 			BakedModel ingredientBaked;
 			if (ingredientUnbaked instanceof BlockModel bm && ((BlockModel) ingredientUnbaked).getRootModel() == ModelBakery.GENERATION_MARKER) {
 				ingredientBaked = new ItemModelGenerator()
 						.generateBlockModel(Material::sprite, bm)
-						.bake(bakery, bm, Material::sprite, transform, name, false);
+						.bake(baker, bm, Material::sprite, transform, name, false);
 			} else {
-				ingredientBaked = ingredientUnbaked.bake(bakery, Material::sprite, transform, name);
+				ingredientBaked = ingredientUnbaked.bake(baker, Material::sprite, transform, name);
 			}
 
 			for (Direction e : Direction.values()) {
