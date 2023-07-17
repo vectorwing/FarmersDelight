@@ -8,13 +8,14 @@ import net.minecraft.world.level.block.Block;
 
 /**
  * References to tags belonging to other mods, which Farmer's Delight innately supports.
- * These tags are data generated.
+ * These tags are used by other mods for their own mechanics.
  */
 public class CompatibilityTags
 {
 	// Create
 	public static final String CREATE = "create";
 	public static final TagKey<Block> CREATE_PASSIVE_BOILER_HEATERS = externalBlockTag(CREATE, "passive_boiler_heaters");
+	public static final TagKey<Block> CREATE_BRITTLE = externalBlockTag(CREATE, "brittle");
 	public static final TagKey<Item> CREATE_UPRIGHT_ON_BELT = externalItemTag(CREATE, "upright_on_belt");
 
 	// Create Crafts and Additions

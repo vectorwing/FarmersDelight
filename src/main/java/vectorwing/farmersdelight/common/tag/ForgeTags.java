@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.Block;
 
 /**
  * References to tags under the Forge namespace.
- * These tags are generic concepts, meant to be shared with other mods for compatibility.
+ * These tags are generally used for crafting recipes across different mods.
  */
 public class ForgeTags
 {

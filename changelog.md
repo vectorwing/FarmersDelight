@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.3 (WIP)
+
+### Additions
+- Added certain blocks to the `create:brittle` tag, to prevent them from being deleted randomly when disassembling contraptions;
+
 ## 1.2.2
 
 ### Additions
