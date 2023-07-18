@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.2.3 (WIP)
+
+### Additions
+- Added certain blocks to the `create:brittle` tag, to prevent them from being deleted randomly when disassembling contraptions;
+
+### Updates
+- Cooking recipes will now drop sensible remainders for vanilla items which don't have them configured;
+- (1.20) Updated Basket textures to match the new Bamboo design and palette;
+
+### Translations
+- Updated:
+  - ko_KR (thanks, Yusi0!);
+  - pl_PL (thanks, jogurciQ!);
+
 ## 1.2.2a
 
 ### Fixes

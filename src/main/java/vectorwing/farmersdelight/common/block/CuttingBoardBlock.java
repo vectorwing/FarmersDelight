@@ -54,17 +54,6 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 		this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
 	}
 
-	public static void spawnCuttingParticles(Level level, BlockPos pos, ItemStack stack, int count) {
-		for (int i = 0; i < count; ++i) {
-			Vec3 vec3d = new Vec3(((double) level.random.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, ((double) level.random.nextFloat() - 0.5D) * 0.1D);
-			if (level instanceof ServerLevel) {
-				((ServerLevel) level).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, stack), pos.getX() + 0.5F, pos.getY() + 0.1F, pos.getZ() + 0.5F, 1, vec3d.x, vec3d.y + 0.05D, vec3d.z, 0.0D);
-			} else {
-				level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, stack), pos.getX() + 0.5F, pos.getY() + 0.1F, pos.getZ() + 0.5F, vec3d.x, vec3d.y + 0.05D, vec3d.z);
-			}
-		}
-	}
-
 	@Override
 	public RenderShape getRenderShape(BlockState pState) {
 		return RenderShape.MODEL;
@@ -72,11 +61,6 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		return SHAPE;
-	}
-
-	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return SHAPE;
 	}
 
@@ -128,15 +112,17 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 
 	@Override
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (state.getBlock() != newState.getBlock()) {
-			BlockEntity tileEntity = level.getBlockEntity(pos);
-			if (tileEntity instanceof CuttingBoardBlockEntity) {
-				Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), ((CuttingBoardBlockEntity) tileEntity).getStoredItem());
-				level.updateNeighbourForOutputSignal(pos, this);
-			}
-
-			super.onRemove(state, level, pos, newState, isMoving);
+		if (state.getBlock() == newState.getBlock()) {
+			return;
 		}
+
+		BlockEntity tileEntity = level.getBlockEntity(pos);
+		if (tileEntity instanceof CuttingBoardBlockEntity cuttingBoard) {
+			Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), cuttingBoard.getStoredItem());
+			level.updateNeighbourForOutputSignal(pos, this);
+		}
+
+		super.onRemove(state, level, pos, newState, isMoving);
 	}
 
 	@Override
@@ -184,10 +170,10 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
-		BlockEntity tileEntity = level.getBlockEntity(pos);
-		if (tileEntity instanceof CuttingBoardBlockEntity) {
-			return !((CuttingBoardBlockEntity) tileEntity).isEmpty() ? 15 : 0;
+	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+		BlockEntity blockEntity = level.getBlockEntity(pos);
+		if (blockEntity instanceof CuttingBoardBlockEntity) {
+			return !((CuttingBoardBlockEntity) blockEntity).isEmpty() ? 15 : 0;
 		}
 		return 0;
 	}
@@ -206,6 +192,17 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 	@Override
 	public BlockState mirror(BlockState pState, Mirror pMirror) {
 		return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
+	}
+
+	public static void spawnCuttingParticles(Level level, BlockPos pos, ItemStack stack, int count) {
+		for (int i = 0; i < count; ++i) {
+			Vec3 vec3d = new Vec3(((double) level.random.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, ((double) level.random.nextFloat() - 0.5D) * 0.1D);
+			if (level instanceof ServerLevel) {
+				((ServerLevel) level).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, stack), pos.getX() + 0.5F, pos.getY() + 0.1F, pos.getZ() + 0.5F, 1, vec3d.x, vec3d.y + 0.05D, vec3d.z, 0.0D);
+			} else {
+				level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, stack), pos.getX() + 0.5F, pos.getY() + 0.1F, pos.getZ() + 0.5F, vec3d.x, vec3d.y + 0.05D, vec3d.z);
+			}
+		}
 	}
 
 	@Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
