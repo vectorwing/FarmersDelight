@@ -7,6 +7,7 @@
 
 ### Updates
 - Cooking recipes will now drop sensible remainders for vanilla items which don't have them configured;
+- (1.20) Updated Basket textures to match the new Bamboo design and palette;
 
 ### Translations
 - Updated:
