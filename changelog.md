@@ -8,6 +8,11 @@
 ### Updates
 - Cooking recipes will now drop sensible remainders for vanilla items which don't have them configured;
 
+### Translations
+- Updated:
+  - ko_KR (thanks, Yusi0!);
+  - pl_PL (thanks, jogurciQ!);
+
 ## 1.2.2
 
 ### Additions
