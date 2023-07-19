@@ -6,8 +6,14 @@
 - Added certain blocks to the `create:brittle` tag, to prevent them from being deleted randomly when disassembling contraptions;
 
 ### Updates
+- Updated method of modifying stack sizes for BowlFoodItems:
+  - Changes are now done on game start, rather than calculated during `maxStackSize()` calls;
+  - The `overrideAllSoupItems` config option has been removed, due to performance and usability concerns;
 - Cooking recipes will now drop sensible remainders for vanilla items which don't have them configured;
 - (1.20) Updated Basket textures to match the new Bamboo design and palette;
+
+### Fixes
+- Fix potential performance issues involving the stack size override for BowlFoodItems (see above);
 
 ### Translations
 - Updated:
