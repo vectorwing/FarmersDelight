@@ -9,9 +9,17 @@
     - Includes Trident and Spyglass by default, due to unique render cases;
     - Optionally includes items from a few mods, such as Autumnity's Turkey and Supplementaries' Quiver;
 
+### Updates
+- Updated method of modifying stack sizes for BowlFoodItems:
+  - Changes are now done on game start, rather than calculated during `maxStackSize()` calls;
+  - The `overrideAllSoupItems` config option has been removed, due to performance and usability concerns;
+- Cooking recipes will now drop sensible remainders for vanilla items which don't have them configured;
+- (1.20) Updated Basket textures to match the new Bamboo design and palette;
+
 ### Fixes
+- Fix potential performance issues involving the stack size override for BowlFoodItems (see above);
 - (1.18.2) Rollback and replacement to previous fix for Cutting Board's rendering issues with perspective items:
-  - The previous fix fails on 1.18.2, due to differences in how the method operates. On 1.19+, the fix works as intended;
+  - The previous fix fails (and may crash) with some resource packs on 1.18.2, due to differences in how the method operates. On 1.19+, the fix works as intended;
   - Instead of applying perspectives to determine 3D items, the `flat_on_cutting_board` tag will be used instead. Wrongly-angled items should be added to this tag;
 
 ### Translations

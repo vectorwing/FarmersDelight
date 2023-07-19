@@ -37,7 +37,6 @@ public class Configuration
 	public static final String CATEGORY_OVERRIDES_STACK_SIZE = "stack_size";
 	public static ForgeConfigSpec.BooleanValue ENABLE_STACKABLE_SOUP_ITEMS;
 	public static ForgeConfigSpec.ConfigValue<List<? extends String>> SOUP_ITEM_LIST;
-	public static ForgeConfigSpec.BooleanValue OVERRIDE_ALL_SOUP_ITEMS;
 
 	public static final String CATEGORY_WORLD = "world";
 	public static ForgeConfigSpec.BooleanValue GENERATE_FD_CHEST_LOOT;
@@ -111,12 +110,10 @@ public class Configuration
 				.define("dispenserUsesToolsOnCuttingBoard", true);
 
 		COMMON_BUILDER.comment("Stack size overrides").push(CATEGORY_OVERRIDES_STACK_SIZE);
-		ENABLE_STACKABLE_SOUP_ITEMS = COMMON_BUILDER.comment("Should SoupItems in the following list become stackable to 16, much like Farmer's Delight's meals?")
+		ENABLE_STACKABLE_SOUP_ITEMS = COMMON_BUILDER.comment("Should BowlFoodItems in the following list become stackable to 16, much like Farmer's Delight's meals?")
 				.define("enableStackableSoupItems", true);
-		SOUP_ITEM_LIST = COMMON_BUILDER.comment("List of SoupItems. Default: vanilla soups and stews.")
+		SOUP_ITEM_LIST = COMMON_BUILDER.comment("List of BowlFoodItems. They must extend this class to be affected. Default: vanilla soups and stews.")
 				.defineList("soupItemList", ImmutableList.of("minecraft:mushroom_stew", "minecraft:beetroot_soup", "minecraft:rabbit_stew"), obj -> true);
-		OVERRIDE_ALL_SOUP_ITEMS = COMMON_BUILDER.comment("Toggle this setting to instead make ALL SoupItems stackable, except the ones on the list (deny-list). This affects items from other mods, so be careful!")
-				.define("overrideAllSoupItems", false);
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.pop();

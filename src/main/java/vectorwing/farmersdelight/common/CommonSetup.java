@@ -2,10 +2,13 @@ package vectorwing.farmersdelight.common;
 
 import net.minecraft.core.Position;
 import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.BowlFoodItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
@@ -14,6 +17,8 @@ import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraftforge.common.crafting.CompoundIngredient;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.common.crafting.condition.VanillaCrateEnabledCondition;
 import vectorwing.farmersdelight.common.entity.RottenTomatoEntity;
 import vectorwing.farmersdelight.common.registry.ModAdvancements;
@@ -30,11 +35,23 @@ public class CommonSetup
 			registerCompostables();
 			registerDispenserBehaviors();
 			registerAnimalFeeds();
+			registerStackSizeOverrides();
 			WildCropGeneration.registerWildCropGeneration();
 		});
 
 		ModAdvancements.register();
 		CraftingHelper.register(new VanillaCrateEnabledCondition.Serializer());
+	}
+
+	public static void registerStackSizeOverrides() {
+		if (!Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) return;
+
+		Configuration.SOUP_ITEM_LIST.get().forEach((key) -> {
+			Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(key));
+			if (item instanceof BowlFoodItem) {
+				ObfuscationReflectionHelper.setPrivateValue(Item.class, item, 16, "f_41478_");
+			}
+		});
 	}
 
 	public static void registerDispenserBehaviors() {

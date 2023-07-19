@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.common.mixin;
 
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,25 +23,6 @@ public abstract class SoupItemMixin extends Item
 		super(properties);
 	}
 
-	@Override
-	public int getItemStackLimit(ItemStack stack) {
-		if (Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) {
-			ResourceLocation stackable = stack.getItem().getRegistryName();
-			String stackableKey = "";
-			if (stackable != null) {
-				stackableKey = stackable.toString();
-			}
-			if (Configuration.OVERRIDE_ALL_SOUP_ITEMS.get() && !Configuration.SOUP_ITEM_LIST.get().contains(stackableKey)
-					|| !Configuration.OVERRIDE_ALL_SOUP_ITEMS.get() && Configuration.SOUP_ITEM_LIST.get().contains(stackableKey)) {
-				return 16;
-			}
-		}
-		return super.getItemStackLimit(stack);
-	}
-
-	/**
-	 * Replication of ConsumableItem but in Mixin form, to allow SoupItems to stack
-	 */
 	@Inject(at = @At(value = "HEAD"), method = "finishUsingItem", cancellable = true)
 	private void onItemUseFinish(ItemStack stack, Level level, LivingEntity subject, CallbackInfoReturnable<ItemStack> cir) {
 		if (Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) {
