@@ -2,16 +2,13 @@ package vectorwing.farmersdelight.common.tag;
 
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 /**
  * References to tags under the Forge namespace.
- * These tags are generic concepts, meant to be shared with other mods for compatibility.
+ * These tags are generally used for crafting recipes across different mods.
  */
 public class ForgeTags
 {
