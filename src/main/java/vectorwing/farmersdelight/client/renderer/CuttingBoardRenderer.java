@@ -12,6 +12,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.*;
 import vectorwing.farmersdelight.common.block.CuttingBoardBlock;
 import vectorwing.farmersdelight.common.block.entity.CuttingBoardBlockEntity;
+import vectorwing.farmersdelight.common.tag.ModTags;
 
 public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlockEntity>
 {
@@ -36,7 +37,7 @@ public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlo
 
 			if (cuttingBoardEntity.isItemCarvingBoard()) {
 				renderItemCarved(poseStack, direction, boardStack);
-			} else if (isBlockItem) {
+			} else if (isBlockItem && !boardStack.is(ModTags.FLAT_ON_CUTTING_BOARD)) {
 				renderBlock(poseStack, direction);
 			} else {
 				renderItemLayingDown(poseStack, direction);

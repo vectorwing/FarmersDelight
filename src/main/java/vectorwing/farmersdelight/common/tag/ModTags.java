@@ -87,6 +87,9 @@ public class ModTags
 	// Items commonly used to contain products. Used by the Cooking Pot for sneak-clicking actions.
 	public static final TagKey<Item> SERVING_CONTAINERS = modItemTag("serving_containers");
 
+	// Items which render in 2D, laying down flat, when placed on the Cutting Board.
+	public static final TagKey<Item> FLAT_ON_CUTTING_BOARD = modItemTag("flat_on_cutting_board");
+
 	// Entities that should be able to eat Dog Food when tame. Defaults to tamed Wolves.
 	public static final TagKey<EntityType<?>> DOG_FOOD_USERS = modEntityTag("dog_food_users");
 
