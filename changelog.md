@@ -1,9 +1,13 @@
 # Changelog
 
-## 1.2.3 (WIP)
+## 1.2.3
 
 ### Additions
 - Added certain blocks to the `create:brittle` tag, to prevent them from being deleted randomly when disassembling contraptions;
+- New tags:
+  - `farmersdelight:flat_on_cutting_board`: Items which will always render flat and 2D when placed on a Cutting Board, to fix certain render cases.
+    - Includes Trident and Spyglass by default, due to unique render cases;
+    - Optionally includes items from a few mods, such as Autumnity's Turkey and Supplementaries' Quiver;
 
 ### Updates
 - Updated method of modifying stack sizes for BowlFoodItems:
@@ -14,6 +18,9 @@
 
 ### Fixes
 - Fix potential performance issues involving the stack size override for BowlFoodItems (see above);
+- (1.18.2) Rollback and replacement to previous fix for Cutting Board's rendering issues with perspective items:
+  - The previous fix fails (and may crash) with some resource packs on 1.18.2, due to differences in how the method operates. On 1.19+, the fix works as intended;
+  - Instead of applying perspectives to determine 3D items, the `flat_on_cutting_board` tag will be used instead. Wrongly-angled items should be added to this tag;
 
 ### Translations
 - Updated:

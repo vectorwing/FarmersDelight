@@ -70,8 +70,13 @@ public class ItemTags extends ItemTagsProvider
 				.add(ModItems.WARPED_CABINET.get())
 				.add(ModItems.MANGROVE_CABINET.get());
 		tag(ModTags.CABINETS).addTag(ModTags.WOODEN_CABINETS);
-		tag(ModTags.OFFHAND_EQUIPMENT).add(Items.SHIELD).addOptional(new ResourceLocation("create:extendo_grip"));
+		tag(ModTags.OFFHAND_EQUIPMENT).add(Items.SHIELD)
+				.addOptional(new ResourceLocation("create:extendo_grip"));
 		tag(ModTags.SERVING_CONTAINERS).add(Items.BOWL, Items.GLASS_BOTTLE, Items.BUCKET);
+		tag(ModTags.FLAT_ON_CUTTING_BOARD).add(Items.TRIDENT, Items.SPYGLASS)
+				.addOptional(new ResourceLocation("supplementaries:quiver"))
+				.addOptional(new ResourceLocation("autumnity:turkey"))
+				.addOptional(new ResourceLocation("autumnity:cooked_turkey"));
 	}
 
 	@SuppressWarnings("unchecked")
