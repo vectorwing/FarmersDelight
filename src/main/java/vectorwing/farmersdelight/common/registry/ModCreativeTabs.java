@@ -16,5 +16,6 @@ public class ModCreativeTabs
 			() -> CreativeModeTab.builder()
 					.title(Component.translatable("itemGroup.farmersdelight"))
 					.icon(() -> new ItemStack(ModBlocks.STOVE.get()))
+					.displayItems((parameters, output) -> ModItems.CREATIVE_TAB_ITEMS.forEach((item) -> output.accept(item.get())))
 					.build());
 }
