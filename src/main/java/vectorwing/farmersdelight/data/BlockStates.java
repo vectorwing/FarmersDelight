@@ -2,17 +2,13 @@ package vectorwing.farmersdelight.data;
 
 import com.google.common.collect.Sets;
 import net.minecraft.core.Direction;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.block.state.properties.*;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -21,7 +17,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.*;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
-import vectorwing.farmersdelight.common.registry.ModItems;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -56,8 +51,31 @@ public class BlockStates extends BlockStateProvider
 
 	@Override
 	protected void registerStatesAndModels() {
+		List<Integer> stages = Arrays.asList(0, 0, 1, 1, 2, 2, 3, 3);
+		this.getVariantBuilder(ModBlocks.ORGANIC_COMPOST.get()).forAllStates(state -> {
+			ModelFile currentFile = models().cubeAll("organic_compost_" + state.getValue(OrganicCompostBlock.COMPOSTING),
+					new ResourceLocation(FarmersDelight.MODID, "block/organic_compost_stage" + stages.get(state.getValue(OrganicCompostBlock.COMPOSTING))));
+
+			return ConfiguredModel.builder()
+					.modelFile(currentFile).nextModel()
+					.modelFile(currentFile).rotationY(90).nextModel()
+					.modelFile(currentFile).rotationY(180).nextModel()
+					.modelFile(currentFile).rotationY(270).build();
+		});
+
 		this.simpleBlock(ModBlocks.RICH_SOIL.get(), cubeRandomRotation(ModBlocks.RICH_SOIL.get(), ""));
-		this.simpleBlock(ModBlocks.SAFETY_NET.get(), existingModel(ModBlocks.SAFETY_NET.get()));
+		this.getVariantBuilder(ModBlocks.RICH_SOIL_FARMLAND.get()).forAllStates(state ->
+			ConfiguredModel.builder().modelFile(existingModel(state.getValue(RichSoilFarmlandBlock.MOISTURE) == 7 ? "rich_soil_farmland_moist" : "rich_soil_farmland")).build());
+		this.simpleBlock(ModBlocks.SAFETY_NET.get(), existingModel("safety_net"));
+		this.simpleBlock(ModBlocks.CANVAS_RUG.get(), existingModel("canvas_rug"));
+
+		this.getMultipartBuilder(ModBlocks.ROPE.get())
+				.part().modelFile(existingModel("rope_post")).addModel().end()
+				.part().modelFile(existingModel("rope_bell_tie")).addModel().condition(RopeBlock.TIED_TO_BELL, true).end()
+				.part().modelFile(existingModel("rope_side")).addModel().condition(RopeBlock.NORTH, true).end()
+				.part().modelFile(existingModel("rope_side")).rotationY(90).addModel().condition(RopeBlock.EAST, true).end()
+				.part().modelFile(existingModel("rope_side_alt")).addModel().condition(RopeBlock.SOUTH, true).end()
+				.part().modelFile(existingModel("rope_side_alt")).rotationY(90).addModel().condition(RopeBlock.WEST, true).end();
 
 		Set<Block> canvasSigns = Sets.newHashSet(
 				// Standard
@@ -154,6 +172,30 @@ public class BlockStates extends BlockStateProvider
 				$ -> existingModel(ModBlocks.CUTTING_BOARD.get()), BasketBlock.WATERLOGGED);
 
 		this.horizontalBlock(ModBlocks.HALF_TATAMI_MAT.get(), existingModel("tatami_mat_half"));
+		ModelFile head = existingModel("tatami_mat_head");
+		ModelFile foot = existingModel("tatami_mat_foot");
+		this.getVariantBuilder(ModBlocks.FULL_TATAMI_MAT.get()).forAllStates(state ->
+				ConfiguredModel.builder().modelFile(state.getValue(TatamiMatBlock.PART) == BedPart.HEAD ? head : foot).rotationY((int) state.getValue(TatamiMatBlock.FACING).toYRot()).build());
+
+		ModelFile odd = existingModel("tatami_odd");
+		ModelFile even = existingModel("tatami_even");
+		ModelFile notPaired = models().cubeAll(ModBlocks.TATAMI.getId().getPath() + "_half", new ResourceLocation(FarmersDelight.MODID, "block/tatami_mat_half"));
+		this.getVariantBuilder(ModBlocks.TATAMI.get()).forAllStates(state -> {
+			Direction dir = state.getValue(TatamiBlock.FACING);
+			return ConfiguredModel.builder().modelFile(state.getValue(TatamiBlock.PAIRED) ? dir.get3DDataValue() % 2 == 0 ? even : odd : notPaired)
+					.rotationX(dir == Direction.DOWN ? 180 : dir.getAxis().isHorizontal() ? 90 : 0)
+					.rotationY(dir.getAxis().isVertical() ? 0 : (((int) dir.toYRot()) + 180) % 360).build();
+		});
+
+		this.getVariantBuilder(ModBlocks.COOKING_POT.get()).forAllStates(state -> switch (state.getValue(CookingPotBlock.SUPPORT)) {
+			case NONE -> ConfiguredModel.builder().modelFile(existingModel("cooking_pot")).rotationY((int) state.getValue(CookingPotBlock.FACING).toYRot()).build();
+			case TRAY -> ConfiguredModel.builder().modelFile(existingModel("cooking_pot_tray")).rotationY((int) state.getValue(CookingPotBlock.FACING).toYRot()).build();
+			case HANDLE -> ConfiguredModel.builder().modelFile(existingModel("cooking_pot_handle")).rotationY((int) state.getValue(CookingPotBlock.FACING).toYRot()).build();
+		});
+
+		this.getVariantBuilder(ModBlocks.SKILLET.get()).forAllStates(state ->
+			ConfiguredModel.builder().modelFile(existingModel(state.getValue(SkilletBlock.SUPPORT) ? "skillet_tray" : "skillet")).rotationY((int) state.getValue(SkilletBlock.FACING).toYRot()).build());
+
 		this.horizontalBlock(ModBlocks.STOVE.get(), state -> {
 			String name = blockName(ModBlocks.STOVE.get());
 			String suffix = state.getValue(StoveBlock.LIT) ? "_on" : "";
@@ -171,6 +213,10 @@ public class BlockStates extends BlockStateProvider
 		this.customStageBlock(ModBlocks.CABBAGE_CROP.get(), resourceBlock("crop_cross"), "cross", CabbageBlock.AGE, new ArrayList<>());
 		this.customStageBlock(ModBlocks.ONION_CROP.get(), mcLoc("crop"), "crop", OnionBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 2, 3));
 		this.customStageBlock(ModBlocks.BUDDING_TOMATO_CROP.get(), resourceBlock("crop_cross"), "cross", BuddingTomatoBlock.AGE, Arrays.asList(0, 1, 2, 3, 3));
+		this.getVariantBuilder(ModBlocks.TOMATO_CROP.get()).forAllStates(state ->
+				ConfiguredModel.builder().modelFile(existingModel("tomatoes_" + (state.getValue(TomatoVineBlock.ROPELOGGED) ? "vine_" : "") + "stage" + state.getValue(TomatoVineBlock.VINE_AGE))).build());
+		this.getVariantBuilder(ModBlocks.RICE_CROP.get()).forAllStates(state ->
+				ConfiguredModel.builder().modelFile(existingModel("rice_" + (state.getValue(RiceBlock.SUPPORTING) && state.getValue(RiceBlock.AGE) == 3 ? "supporting" : "stage" + state.getValue(RiceBlock.AGE)))).build());
 
 		this.crateBlock(ModBlocks.CARROT_CRATE.get(), "carrot");
 		this.crateBlock(ModBlocks.POTATO_CRATE.get(), "potato");

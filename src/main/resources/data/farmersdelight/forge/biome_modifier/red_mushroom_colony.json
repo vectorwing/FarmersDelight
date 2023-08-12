@@ -1,6 +1,0 @@
-{
-  "type": "farmersdelight:add_features_by_filter",
-  "allowed_biomes": "#forge:is_mushroom",
-  "features": "farmersdelight:patch_red_mushroom_colony",
-  "step": "vegetal_decoration"
-}

@@ -1,0 +1,47 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "farmersdelight:shepherds_pie_block",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "servings": "4"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "farmersdelight:shepherds_pie_block"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+            "block": "farmersdelight:shepherds_pie_block",
+            "condition": "minecraft:block_state_property",
+            "properties": {
+              "servings": "4"
+            }
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bowl"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "farmersdelight:blocks/shepherds_pie_block"
+}

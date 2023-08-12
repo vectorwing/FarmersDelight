@@ -5,7 +5,6 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -13,7 +12,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.crafting.ConditionalRecipe;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.crafting.condition.VanillaCrateEnabledCondition;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
@@ -324,6 +325,37 @@ public class CraftingRecipes
 				.requires(ModItems.SAFETY_NET.get())
 				.unlockedBy("has_safety_net", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SAFETY_NET.get()))
 				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "rope_from_safety_net"));
+
+		ConditionalRecipe.builder().addCondition(VanillaCrateEnabledCondition.INSTANCE).addRecipe(
+				ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.BEETROOT_CRATE.get())
+						.pattern("###")
+						.pattern("###")
+						.pattern("###")
+						.define('#', Items.BEETROOT)
+						.unlockedBy("has_beetroot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BEETROOT))::save)
+				.generateAdvancement()
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "beetroot_crate"));
+
+		ConditionalRecipe.builder().addCondition(VanillaCrateEnabledCondition.INSTANCE).addRecipe(
+				ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.CARROT_CRATE.get())
+						.pattern("###")
+						.pattern("###")
+						.pattern("###")
+						.define('#', Items.CARROT)
+						.unlockedBy("has_carrot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CARROT))::save)
+				.generateAdvancement()
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "carrot_crate"));
+
+		ConditionalRecipe.builder().addCondition(VanillaCrateEnabledCondition.INSTANCE).addRecipe(
+				ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.POTATO_CRATE.get())
+						.pattern("###")
+						.pattern("###")
+						.pattern("###")
+						.define('#', Items.POTATO)
+						.unlockedBy("has_potato", InventoryChangeTrigger.TriggerInstance.hasItems(Items.POTATO))::save)
+				.generateAdvancement()
+				.build(consumer, new ResourceLocation(FarmersDelight.MODID, "potato_crate"));
+
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.CABBAGE_CRATE.get(), 1)
 				.pattern("###")
 				.pattern("###")

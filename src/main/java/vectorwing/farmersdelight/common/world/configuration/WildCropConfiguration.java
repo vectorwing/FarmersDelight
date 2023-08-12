@@ -5,7 +5,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 import javax.annotation.Nullable;
@@ -22,15 +21,6 @@ public record WildCropConfiguration(int tries, int xzSpread, int ySpread, Holder
 			PlacedFeature.CODEC.fieldOf("secondary_feature").forGetter(WildCropConfiguration::secondaryFeature),
 			PlacedFeature.CODEC.optionalFieldOf("floor_feature").forGetter(floorConfig -> Optional.ofNullable(floorConfig.floorFeature))
 	).apply(config, (tries, xzSpread, yspread, primary, secondary, floor) -> floor.map(placedFeatureHolder -> new WildCropConfiguration(tries, xzSpread, yspread, primary, secondary, placedFeatureHolder)).orElseGet(() -> new WildCropConfiguration(tries, xzSpread, yspread, primary, secondary, null))));
-
-	public WildCropConfiguration(int tries, int xzSpread, int ySpread, Holder<PlacedFeature> primaryFeature, Holder<PlacedFeature> secondaryFeature, @Nullable Holder<PlacedFeature> floorFeature) {
-		this.tries = tries;
-		this.xzSpread = xzSpread;
-		this.ySpread = ySpread;
-		this.primaryFeature = primaryFeature;
-		this.secondaryFeature = secondaryFeature;
-		this.floorFeature = floorFeature;
-	}
 
 	public int tries() {
 		return this.tries;

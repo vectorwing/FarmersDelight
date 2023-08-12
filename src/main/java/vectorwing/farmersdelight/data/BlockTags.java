@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.data;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
@@ -270,6 +269,14 @@ public class BlockTags extends BlockTagsProvider
 				Blocks.GREEN_CANDLE_CAKE,
 				Blocks.RED_CANDLE_CAKE,
 				Blocks.BLACK_CANDLE_CAKE);
+
+		tag(ModTags.WILD_TOMATO_GROWS_ON).add(
+				Blocks.DIRT,
+				Blocks.COARSE_DIRT,
+				Blocks.GRASS_BLOCK,
+				Blocks.SAND,
+				Blocks.RED_SAND
+		);
 	}
 
 	private void registerCompatibilityTags() {
