@@ -34,7 +34,7 @@ public class ComfortHealthOverlay
 	}
 
 
-	static ResourceLocation PLAYER_HEALTH_ELEMENT = new ResourceLocation("minecraft", "player_health");
+	static final ResourceLocation PLAYER_HEALTH_ELEMENT = new ResourceLocation("minecraft", "player_health");
 
 	@SubscribeEvent
 	public void onRenderGuiOverlayPost(RenderGuiOverlayEvent.Post event) {
@@ -76,7 +76,7 @@ public class ComfortHealthOverlay
 	public static void drawComfortOverlay(Player player, Minecraft minecraft, GuiGraphics graphics, int left, int top) {
 		int ticks = minecraft.gui.getGuiTicks();
 		Random rand = new Random();
-		rand.setSeed((long) (ticks * 312871));
+		rand.setSeed(ticks * 312871);
 
 		int health = Mth.ceil(player.getHealth());
 		float absorb = Mth.ceil(player.getAbsorptionAmount());

@@ -23,7 +23,7 @@ import java.util.Random;
 
 /**
  * Credits to squeek502 (AppleSkin) for the implementation reference!
- * https://www.curseforge.com/minecraft/mc-mods/appleskin
+ * <a href="https://www.curseforge.com/minecraft/mc-mods/appleskin">...</a>
  */
 
 @OnlyIn(Dist.CLIENT)
@@ -36,7 +36,7 @@ public class NourishmentHungerOverlay
 		MinecraftForge.EVENT_BUS.register(new NourishmentHungerOverlay());
 	}
 
-	static ResourceLocation FOOD_LEVEL_ELEMENT = new ResourceLocation("minecraft", "food_level");
+	static final ResourceLocation FOOD_LEVEL_ELEMENT = new ResourceLocation("minecraft", "food_level");
 
 	@SubscribeEvent
 	public void onRenderGuiOverlayPost(RenderGuiOverlayEvent.Post event) {

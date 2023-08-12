@@ -22,7 +22,7 @@ import javax.annotation.Nullable;
 
 public class HangingCanvasSignRenderer extends CanvasSignRenderer
 {
-	private static final Vec3 TEXT_OFFSET = new Vec3(0.0D, (double) -0.32F, (double) 0.073F);
+	private static final Vec3 TEXT_OFFSET = new Vec3(0.0D, -0.32F, 0.073F);
 	private final HangingSignRenderer.HangingSignModel signModel;
 
 	public HangingCanvasSignRenderer(BlockEntityRendererProvider.Context context) {

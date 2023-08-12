@@ -77,7 +77,7 @@ public class CookingPotRecipeManager implements IRecipeManager
             FarmersDelightCrTPlugin.LOGGER_CT.error("No ingredients for cooking recipe");
             return false;
         } else if (inputs.length > CookingPotRecipe.INPUT_SLOTS) {
-            FarmersDelightCrTPlugin.LOGGER_CT.error("Too many ingredients for cooking recipe! The max is %s", CookingPotRecipe.INPUT_SLOTS);
+            FarmersDelightCrTPlugin.LOGGER_CT.error("Too many ingredients for cooking recipe! The max is {}", CookingPotRecipe.INPUT_SLOTS);
             return false;
         }
         return true;

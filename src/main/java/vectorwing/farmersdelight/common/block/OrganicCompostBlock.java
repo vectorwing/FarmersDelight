@@ -19,7 +19,7 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 @SuppressWarnings("deprecation")
 public class OrganicCompostBlock extends Block
 {
-	public static IntegerProperty COMPOSTING = IntegerProperty.create("composting", 0, 7);
+	public static final IntegerProperty COMPOSTING = IntegerProperty.create("composting", 0, 7);
 
 	public OrganicCompostBlock(Properties properties) {
 		super(properties);

@@ -122,7 +122,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 			return Optional.empty();
 		}
 		Optional<CuttingBoardRecipe> recipe = recipeList.stream().filter(cuttingRecipe -> cuttingRecipe.getTool().test(toolStack)).findFirst();
-		if (!recipe.isPresent()) {
+		if (recipe.isEmpty()) {
 			if (player != null)
 				player.displayClientMessage(TextUtils.getTranslation("block.cutting_board.invalid_tool"), true);
 			return Optional.empty();

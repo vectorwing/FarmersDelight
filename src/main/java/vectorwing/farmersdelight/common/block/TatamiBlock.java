@@ -36,11 +36,7 @@ public class TatamiBlock extends Block
 		Direction face = context.getClickedFace();
 		BlockPos targetPos = context.getClickedPos().relative(face.getOpposite());
 		BlockState targetState = context.getLevel().getBlockState(targetPos);
-		boolean pairing = false;
-
-		if (context.getPlayer() != null && !context.getPlayer().isShiftKeyDown() && targetState.getBlock() == this && !targetState.getValue(PAIRED)) {
-			pairing = true;
-		}
+		boolean pairing = context.getPlayer() != null && !context.getPlayer().isShiftKeyDown() && targetState.getBlock() == this && !targetState.getValue(PAIRED);
 
 		return this.defaultBlockState().setValue(FACING, context.getClickedFace().getOpposite()).setValue(PAIRED, pairing);
 	}
