@@ -5,7 +5,9 @@ import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
+import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.registry.ModBiomeModifiers;
 import vectorwing.farmersdelight.common.registry.ModDamageTypes;
 import vectorwing.farmersdelight.common.world.WildCropGeneration;
 
@@ -17,7 +19,8 @@ public class DatapackRegistries extends DatapackBuiltinEntriesProvider
 	public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
 			.add(Registries.CONFIGURED_FEATURE, WildCropGeneration::bootstrapConfiguredFeatures)
 			.add(Registries.PLACED_FEATURE, WildCropGeneration::bootstrapPlacedFeatures)
-			.add(Registries.DAMAGE_TYPE, ModDamageTypes::bootstrap);
+			.add(Registries.DAMAGE_TYPE, ModDamageTypes::bootstrap)
+			.add(ForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap);
 
 	public DatapackRegistries(PackOutput output, CompletableFuture<HolderLookup.Provider> future) {
 		super(output, future, BUILDER, Set.of("minecraft", FarmersDelight.MODID));
