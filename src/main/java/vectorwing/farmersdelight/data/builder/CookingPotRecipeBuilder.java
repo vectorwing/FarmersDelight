@@ -103,9 +103,14 @@ public class CookingPotRecipeBuilder
 		return this;
 	}
 
+	protected String getDefaultRecipeName(ResourceLocation resultItemKey) {
+		return FarmersDelight.MODID + ":cooking/" + resultItemKey.getPath();
+	}
+
 	public void build(Consumer<FinishedRecipe> consumerIn) {
 		ResourceLocation location = ForgeRegistries.ITEMS.getKey(result);
-		build(consumerIn, FarmersDelight.MODID + ":cooking/" + location.getPath());
+		assert location != null;
+		build(consumerIn, getDefaultRecipeName(location));
 	}
 
 	public void build(Consumer<FinishedRecipe> consumerIn, String save) {

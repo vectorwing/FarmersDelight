@@ -79,9 +79,13 @@ public class CuttingBoardRecipeBuilder
 		return this;
 	}
 
+	protected String getDefaultRecipeName(ResourceLocation ingredientItemKey) {
+		return FarmersDelight.MODID + ":cutting/" + ingredientItemKey.getPath();
+	}
+
 	public void build(Consumer<FinishedRecipe> consumerIn) {
 		ResourceLocation location = ForgeRegistries.ITEMS.getKey(this.ingredient.getItems()[0].getItem());
-		this.build(consumerIn, FarmersDelight.MODID + ":cutting/" + location.getPath());
+		this.build(consumerIn, getDefaultRecipeName(location));
 	}
 
 	public void build(Consumer<FinishedRecipe> consumerIn, String save) {
