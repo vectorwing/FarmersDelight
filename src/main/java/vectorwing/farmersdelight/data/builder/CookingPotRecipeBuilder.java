@@ -41,7 +41,7 @@ public class CookingPotRecipeBuilder
 	private final Item container;
 	private final Advancement.Builder advancement = Advancement.Builder.advancement();
 
-	private CookingPotRecipeBuilder(ItemLike resultIn, int count, int cookingTime, float experience, @Nullable ItemLike container) {
+	protected CookingPotRecipeBuilder(ItemLike resultIn, int count, int cookingTime, float experience, @Nullable ItemLike container) {
 		this.result = resultIn.asItem();
 		this.count = count;
 		this.cookingTime = cookingTime;

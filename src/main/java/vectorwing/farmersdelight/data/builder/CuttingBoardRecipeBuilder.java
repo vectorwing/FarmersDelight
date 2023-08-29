@@ -29,7 +29,7 @@ public class CuttingBoardRecipeBuilder
 	private final Ingredient tool;
 	private String soundEventID;
 
-	private CuttingBoardRecipeBuilder(Ingredient ingredient, Ingredient tool, ItemLike mainResult, int count, float chance) {
+	protected CuttingBoardRecipeBuilder(Ingredient ingredient, Ingredient tool, ItemLike mainResult, int count, float chance) {
 		this.results.add(new ChanceResult(new ItemStack(mainResult.asItem(), count), chance));
 		this.ingredient = ingredient;
 		this.tool = tool;
