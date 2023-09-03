@@ -115,7 +115,8 @@ public class CookingPotRecipeBuilder
 
 	public void build(Consumer<FinishedRecipe> consumerIn, String save) {
 		ResourceLocation resourcelocation = ForgeRegistries.ITEMS.getKey(result);
-		if ((new ResourceLocation(save)).equals(resourcelocation)) {
+		assert resourcelocation != null;
+		if (save.equals(getDefaultRecipeName(resourcelocation))) {
 			throw new IllegalStateException("Cooking Recipe " + save + " should remove its 'save' argument");
 		} else {
 			build(consumerIn, new ResourceLocation(save));

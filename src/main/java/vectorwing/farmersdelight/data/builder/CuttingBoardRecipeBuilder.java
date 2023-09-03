@@ -90,7 +90,8 @@ public class CuttingBoardRecipeBuilder
 
 	public void build(Consumer<FinishedRecipe> consumerIn, String save) {
 		ResourceLocation resourcelocation = ForgeRegistries.ITEMS.getKey(this.ingredient.getItems()[0].getItem());
-		if ((new ResourceLocation(save)).equals(resourcelocation)) {
+		assert resourcelocation != null;
+		if (save.equals(getDefaultRecipeName(resourcelocation))) {
 			throw new IllegalStateException("Cutting Recipe " + save + " should remove its 'save' argument");
 		} else {
 			this.build(consumerIn, new ResourceLocation(save));
