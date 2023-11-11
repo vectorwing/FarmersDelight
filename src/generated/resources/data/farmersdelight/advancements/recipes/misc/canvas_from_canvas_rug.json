@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_canvas_rug",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_canvas_rug"
     ]
   ],
   "rewards": {

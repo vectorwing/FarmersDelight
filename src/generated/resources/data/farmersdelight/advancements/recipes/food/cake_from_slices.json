@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_cake_slice",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cake_slice"
     ]
   ],
   "rewards": {

@@ -8,6 +8,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -32,7 +34,7 @@ public class HotCocoaItem extends DrinkableItem
 
 		if (compatibleEffects.size() > 0) {
 			MobEffectInstance selectedEffect = consumer.getEffect(compatibleEffects.get(level.random.nextInt(compatibleEffects.size())));
-			if (selectedEffect != null && !net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.living.MobEffectEvent.Remove(consumer, selectedEffect))) {
+			if (selectedEffect != null && NeoForge.EVENT_BUS.post(new MobEffectEvent.Remove(consumer, selectedEffect)).isCanceled()) {
 				consumer.removeEffect(selectedEffect.getEffect());
 			}
 		}

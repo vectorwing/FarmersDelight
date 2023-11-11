@@ -52,7 +52,7 @@
           "condition": "minecraft:block_state_property",
           "block": "farmersdelight:tomatoes",
           "properties": {
-            "ropelogged": false
+            "ropelogged": "false"
           }
         }
       ]

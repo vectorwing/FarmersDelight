@@ -10,7 +10,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.placement.PlacementContext;
 import net.minecraft.world.level.levelgen.placement.PlacementFilter;
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.common.registry.ModPlacementModifiers;
 
 public class BiomeTagFilter extends PlacementFilter

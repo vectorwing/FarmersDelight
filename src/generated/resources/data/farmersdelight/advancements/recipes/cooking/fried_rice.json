@@ -34,5 +34,5 @@
       "farmersdelight:cooking/fried_rice"
     ]
   },
-  "sends_telemetry_event": true
+  "sends_telemetry_event": false
 }

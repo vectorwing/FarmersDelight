@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_birch_trapdoor",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_birch_trapdoor"
     ]
   ],
   "rewards": {

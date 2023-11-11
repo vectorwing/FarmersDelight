@@ -8,6 +8,6 @@ public class ModAdvancements
 	public static CuttingBoardTrigger CUTTING_BOARD = new CuttingBoardTrigger();
 
 	public static void register() {
-		CriteriaTriggers.register(CUTTING_BOARD);
+		CriteriaTriggers.register(CuttingBoardTrigger.ID.toString(), CUTTING_BOARD);
 	}
 }

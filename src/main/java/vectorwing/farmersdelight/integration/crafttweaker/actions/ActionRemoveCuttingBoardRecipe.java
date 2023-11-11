@@ -1,5 +1,7 @@
 package vectorwing.farmersdelight.integration.crafttweaker.actions;
 
+// TODO: Uncomment this once CraftTweaker updates.
+/*
 import com.blamejared.crafttweaker.api.action.recipe.ActionRecipeBase;
 import com.blamejared.crafttweaker.api.item.IItemStack;
 import com.blamejared.crafttweaker.api.item.MCItemStackMutable;
@@ -65,3 +67,4 @@ public class ActionRemoveCuttingBoardRecipe extends ActionRecipeBase
         return true;
     }
 }
+ */

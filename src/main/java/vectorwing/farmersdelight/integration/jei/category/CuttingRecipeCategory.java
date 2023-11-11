@@ -1,5 +1,7 @@
 package vectorwing.farmersdelight.integration.jei.category;
 
+// TODO: Uncomment this once JEI updates.
+/*
 import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -115,3 +117,4 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 		}
 	}
 }
+ */

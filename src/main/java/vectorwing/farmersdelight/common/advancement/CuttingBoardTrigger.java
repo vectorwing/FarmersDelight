@@ -1,14 +1,18 @@
 package vectorwing.farmersdelight.common.advancement;
 
 import com.google.gson.JsonObject;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.registry.ModAdvancements;
+
+import java.util.Optional;
 
 public class CuttingBoardTrigger extends SimpleCriterionTrigger<CuttingBoardTrigger.TriggerInstance>
 {
-	private static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "use_cutting_board");
+	public static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "use_cutting_board");
 
 	public ResourceLocation getId() {
 		return ID;
@@ -19,18 +23,18 @@ public class CuttingBoardTrigger extends SimpleCriterionTrigger<CuttingBoardTrig
 	}
 
 	@Override
-	protected TriggerInstance createInstance(JsonObject json, ContextAwarePredicate player, DeserializationContext conditionsParser) {
-		return new TriggerInstance(player);
+	protected TriggerInstance createInstance(JsonObject json, Optional<ContextAwarePredicate> predicate, DeserializationContext conditionsParser) {
+		return new TriggerInstance(predicate);
 	}
 
 	public static class TriggerInstance extends AbstractCriterionTriggerInstance
 	{
-		public TriggerInstance(ContextAwarePredicate player) {
-			super(CuttingBoardTrigger.ID, player);
+		public TriggerInstance(Optional<ContextAwarePredicate> predicate) {
+			super(predicate);
 		}
 
-		public static TriggerInstance simple() {
-			return new TriggerInstance(ContextAwarePredicate.ANY);
+		public static Criterion<TriggerInstance> simple() {
+			return ModAdvancements.CUTTING_BOARD.createCriterion(new TriggerInstance(Optional.empty()));
 		}
 
 		public boolean test() {

@@ -1,5 +1,7 @@
 package vectorwing.farmersdelight.integration.jei.category;
 
+// TODO: Uncomment this once JEI updates.
+/*
 import com.google.common.collect.ImmutableList;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -108,4 +110,4 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 		return Component.translatable(FarmersDelight.MODID + ".jei.decomposition" + suffix);
 	}
 }
-
+ */

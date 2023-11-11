@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_cod_slice",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cod_slice"
     ]
   ],
   "rewards": {

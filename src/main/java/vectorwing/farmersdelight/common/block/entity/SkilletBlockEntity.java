@@ -14,13 +14,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.common.block.SkilletBlock;
 import vectorwing.farmersdelight.common.mixin.accessor.RecipeManagerAccessor;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
@@ -90,9 +91,9 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 		++cookingTime;
 		if (cookingTime >= cookingTimeTotal) {
 			SimpleContainer wrapper = new SimpleContainer(cookingStack);
-			Optional<CampfireCookingRecipe> recipe = getMatchingRecipe(wrapper);
+			Optional<RecipeHolder<CampfireCookingRecipe>> recipe = getMatchingRecipe(wrapper);
 			if (recipe.isPresent()) {
-				ItemStack resultStack = recipe.get().assemble(wrapper, level.registryAccess());
+				ItemStack resultStack = recipe.get().value().assemble(wrapper, level.registryAccess());
 				Direction direction = getBlockState().getValue(SkilletBlock.FACING).getClockWise();
 				ItemUtils.spawnItemEntity(level, resultStack.copy(),
 						worldPosition.getX() + 0.5, worldPosition.getY() + 0.3, worldPosition.getZ() + 0.5,
@@ -115,21 +116,21 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 		return false;
 	}
 
-	private Optional<CampfireCookingRecipe> getMatchingRecipe(Container recipeWrapper) {
+	private Optional<RecipeHolder<CampfireCookingRecipe>> getMatchingRecipe(Container recipeWrapper) {
 		if (level == null) return Optional.empty();
 
 		if (lastRecipeID != null) {
-			Recipe<Container> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
+			RecipeHolder<CampfireCookingRecipe> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
 					.getRecipeMap(RecipeType.CAMPFIRE_COOKING)
 					.get(lastRecipeID);
-			if (recipe instanceof CampfireCookingRecipe && recipe.matches(recipeWrapper, level)) {
-				return Optional.of((CampfireCookingRecipe) recipe);
+			if (recipe.value().matches(recipeWrapper, level)) {
+				return Optional.of(recipe);
 			}
 		}
 
-		Optional<CampfireCookingRecipe> recipe = level.getRecipeManager().getRecipeFor(RecipeType.CAMPFIRE_COOKING, recipeWrapper, level);
+		Optional<RecipeHolder<CampfireCookingRecipe>> recipe = level.getRecipeManager().getRecipeFor(RecipeType.CAMPFIRE_COOKING, recipeWrapper, level);
 		if (recipe.isPresent()) {
-			lastRecipeID = recipe.get().getId();
+			lastRecipeID = recipe.get().id();
 			return recipe;
 		}
 
@@ -167,13 +168,13 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 	}
 
 	public ItemStack addItemToCook(ItemStack addedStack, @Nullable Player player) {
-		Optional<CampfireCookingRecipe> recipe = getMatchingRecipe(new SimpleContainer(addedStack));
+		Optional<RecipeHolder<CampfireCookingRecipe>> recipe = getMatchingRecipe(new SimpleContainer(addedStack));
 		if (recipe.isPresent()) {
-			cookingTimeTotal = SkilletBlock.getSkilletCookingTime(recipe.get().getCookingTime(), fireAspectLevel);
+			cookingTimeTotal = SkilletBlock.getSkilletCookingTime(recipe.get().value().getCookingTime(), fireAspectLevel);
 			boolean wasEmpty = getStoredStack().isEmpty();
 			ItemStack remainderStack = inventory.insertItem(0, addedStack.copy(), false);
 			if (!ItemStack.matches(remainderStack, addedStack)) {
-				lastRecipeID = recipe.get().getId();
+				lastRecipeID = recipe.get().id();
 				cookingTime = 0;
 				if (wasEmpty && level != null && isHeated(level, worldPosition)) {
 					level.playSound(null, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F, ModSounds.BLOCK_SKILLET_ADD_FOOD.get(), SoundSource.BLOCKS, 0.8F, 1.0F);

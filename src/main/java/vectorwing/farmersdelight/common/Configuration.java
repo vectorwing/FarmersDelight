@@ -1,74 +1,73 @@
 package vectorwing.farmersdelight.common;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber
 public class Configuration
 {
-	public static ForgeConfigSpec COMMON_CONFIG;
-	public static ForgeConfigSpec CLIENT_CONFIG;
+	public static ModConfigSpec COMMON_CONFIG;
+	public static ModConfigSpec CLIENT_CONFIG;
 
 	// COMMON
 	public static final String CATEGORY_SETTINGS = "settings";
-	public static ForgeConfigSpec.BooleanValue ENABLE_VANILLA_CROP_CRATES;
-	public static ForgeConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS;
-	public static ForgeConfigSpec.BooleanValue WANDERING_TRADER_SELLS_FD_ITEMS;
-	public static ForgeConfigSpec.DoubleValue RICH_SOIL_BOOST_CHANCE;
-	public static ForgeConfigSpec.DoubleValue CUTTING_BOARD_FORTUNE_BONUS;
-	public static ForgeConfigSpec.BooleanValue ENABLE_ROPE_REELING;
-	public static ForgeConfigSpec.ConfigValue<List<? extends String>> CANVAS_SIGN_DARK_BACKGROUND_LIST;
+	public static ModConfigSpec.BooleanValue ENABLE_VANILLA_CROP_CRATES;
+	public static ModConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS;
+	public static ModConfigSpec.BooleanValue WANDERING_TRADER_SELLS_FD_ITEMS;
+	public static ModConfigSpec.DoubleValue RICH_SOIL_BOOST_CHANCE;
+	public static ModConfigSpec.DoubleValue CUTTING_BOARD_FORTUNE_BONUS;
+	public static ModConfigSpec.BooleanValue ENABLE_ROPE_REELING;
+	public static ModConfigSpec.ConfigValue<List<? extends String>> CANVAS_SIGN_DARK_BACKGROUND_LIST;
 
 	public static final String CATEGORY_FARMING = "farming";
-	public static ForgeConfigSpec.ConfigValue<String> DEFAULT_TOMATO_VINE_ROPE;
-	public static ForgeConfigSpec.BooleanValue ENABLE_TOMATO_VINE_CLIMBING_TAGGED_ROPES;
+	public static ModConfigSpec.ConfigValue<String> DEFAULT_TOMATO_VINE_ROPE;
+	public static ModConfigSpec.BooleanValue ENABLE_TOMATO_VINE_CLIMBING_TAGGED_ROPES;
 
 	public static final String CATEGORY_RECIPE_BOOK = "recipe_book";
-	public static ForgeConfigSpec.BooleanValue ENABLE_RECIPE_BOOK_COOKING_POT;
+	public static ModConfigSpec.BooleanValue ENABLE_RECIPE_BOOK_COOKING_POT;
 
 	public static final String CATEGORY_OVERRIDES = "overrides";
-	public static ForgeConfigSpec.BooleanValue VANILLA_SOUP_EXTRA_EFFECTS;
-	public static ForgeConfigSpec.BooleanValue RABBIT_STEW_JUMP_BOOST;
-	public static ForgeConfigSpec.BooleanValue DISPENSER_TOOLS_CUTTING_BOARD;
+	public static ModConfigSpec.BooleanValue VANILLA_SOUP_EXTRA_EFFECTS;
+	public static ModConfigSpec.BooleanValue RABBIT_STEW_JUMP_BOOST;
+	public static ModConfigSpec.BooleanValue DISPENSER_TOOLS_CUTTING_BOARD;
 
 	public static final String CATEGORY_OVERRIDES_STACK_SIZE = "stack_size";
-	public static ForgeConfigSpec.BooleanValue ENABLE_STACKABLE_SOUP_ITEMS;
-	public static ForgeConfigSpec.ConfigValue<List<? extends String>> SOUP_ITEM_LIST;
+	public static ModConfigSpec.BooleanValue ENABLE_STACKABLE_SOUP_ITEMS;
+	public static ModConfigSpec.ConfigValue<List<? extends String>> SOUP_ITEM_LIST;
 
 	public static final String CATEGORY_WORLD = "world";
-	public static ForgeConfigSpec.BooleanValue GENERATE_FD_CHEST_LOOT;
-	public static ForgeConfigSpec.BooleanValue GENERATE_VILLAGE_COMPOST_HEAPS;
-	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_CABBAGES;
-	public static ForgeConfigSpec.IntValue CHANCE_WILD_CABBAGES;
-	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_BEETROOTS;
-	public static ForgeConfigSpec.IntValue CHANCE_WILD_BEETROOTS;
-	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_POTATOES;
-	public static ForgeConfigSpec.IntValue CHANCE_WILD_POTATOES;
-	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_ONIONS;
-	public static ForgeConfigSpec.IntValue CHANCE_WILD_ONIONS;
-	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_CARROTS;
-	public static ForgeConfigSpec.IntValue CHANCE_WILD_CARROTS;
-	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_TOMATOES;
-	public static ForgeConfigSpec.IntValue CHANCE_WILD_TOMATOES;
-	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_RICE;
-	public static ForgeConfigSpec.IntValue CHANCE_WILD_RICE;
-	public static ForgeConfigSpec.BooleanValue GENERATE_BROWN_MUSHROOM_COLONIES;
-	public static ForgeConfigSpec.IntValue CHANCE_BROWN_MUSHROOM_COLONIES;
-	public static ForgeConfigSpec.BooleanValue GENERATE_RED_MUSHROOM_COLONIES;
-	public static ForgeConfigSpec.IntValue CHANCE_RED_MUSHROOM_COLONIES;
+	public static ModConfigSpec.BooleanValue GENERATE_FD_CHEST_LOOT;
+	public static ModConfigSpec.BooleanValue GENERATE_VILLAGE_COMPOST_HEAPS;
+	public static ModConfigSpec.BooleanValue GENERATE_WILD_CABBAGES;
+	public static ModConfigSpec.IntValue CHANCE_WILD_CABBAGES;
+	public static ModConfigSpec.BooleanValue GENERATE_WILD_BEETROOTS;
+	public static ModConfigSpec.IntValue CHANCE_WILD_BEETROOTS;
+	public static ModConfigSpec.BooleanValue GENERATE_WILD_POTATOES;
+	public static ModConfigSpec.IntValue CHANCE_WILD_POTATOES;
+	public static ModConfigSpec.BooleanValue GENERATE_WILD_ONIONS;
+	public static ModConfigSpec.IntValue CHANCE_WILD_ONIONS;
+	public static ModConfigSpec.BooleanValue GENERATE_WILD_CARROTS;
+	public static ModConfigSpec.IntValue CHANCE_WILD_CARROTS;
+	public static ModConfigSpec.BooleanValue GENERATE_WILD_TOMATOES;
+	public static ModConfigSpec.IntValue CHANCE_WILD_TOMATOES;
+	public static ModConfigSpec.BooleanValue GENERATE_WILD_RICE;
+	public static ModConfigSpec.IntValue CHANCE_WILD_RICE;
+	public static ModConfigSpec.BooleanValue GENERATE_BROWN_MUSHROOM_COLONIES;
+	public static ModConfigSpec.IntValue CHANCE_BROWN_MUSHROOM_COLONIES;
+	public static ModConfigSpec.BooleanValue GENERATE_RED_MUSHROOM_COLONIES;
+	public static ModConfigSpec.IntValue CHANCE_RED_MUSHROOM_COLONIES;
 
 	// CLIENT
 	public static final String CATEGORY_CLIENT = "client";
 
-	public static ForgeConfigSpec.BooleanValue NOURISHED_HUNGER_OVERLAY;
-	public static ForgeConfigSpec.BooleanValue COMFORT_HEALTH_OVERLAY;
-	public static ForgeConfigSpec.BooleanValue FOOD_EFFECT_TOOLTIP;
+	public static ModConfigSpec.BooleanValue NOURISHED_HUNGER_OVERLAY;
+	public static ModConfigSpec.BooleanValue COMFORT_HEALTH_OVERLAY;
+	public static ModConfigSpec.BooleanValue FOOD_EFFECT_TOOLTIP;
 
 	static {
-		ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
+		ModConfigSpec.Builder COMMON_BUILDER = new ModConfigSpec.Builder();
 
 		COMMON_BUILDER.comment("Game settings").push(CATEGORY_SETTINGS);
 		ENABLE_VANILLA_CROP_CRATES = COMMON_BUILDER.comment("Farmer's Delight adds crates (3x3) for vanilla crops, similar to Quark and Thermal Cultivation. Should they be craftable?")
@@ -177,7 +176,7 @@ public class Configuration
 
 		COMMON_CONFIG = COMMON_BUILDER.build();
 
-		ForgeConfigSpec.Builder CLIENT_BUILDER = new ForgeConfigSpec.Builder();
+		ModConfigSpec.Builder CLIENT_BUILDER = new ModConfigSpec.Builder();
 
 		CLIENT_BUILDER.comment("Client settings").push(CATEGORY_CLIENT);
 		NOURISHED_HUNGER_OVERLAY = CLIENT_BUILDER.comment("Should the hunger bar have a gilded overlay when the player has the Nourishment effect?")

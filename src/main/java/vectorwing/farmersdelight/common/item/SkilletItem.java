@@ -26,6 +26,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
@@ -37,9 +38,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.SkilletBlock;
 import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
@@ -139,12 +140,12 @@ public class SkilletItem extends BlockItem
 				return InteractionResultHolder.pass(skilletStack);
 			}
 
-			Optional<CampfireCookingRecipe> recipe = getCookingRecipe(cookingStack, level);
+			Optional<RecipeHolder<CampfireCookingRecipe>> recipe = getCookingRecipe(cookingStack, level);
 			if (recipe.isPresent()) {
 				ItemStack cookingStackCopy = cookingStack.copy();
 				ItemStack cookingStackUnit = cookingStackCopy.split(1);
 				skilletStack.getOrCreateTag().put("Cooking", cookingStackUnit.serializeNBT());
-				skilletStack.getOrCreateTag().putInt("CookTimeHandheld", recipe.get().getCookingTime());
+				skilletStack.getOrCreateTag().putInt("CookTimeHandheld", recipe.get().value().getCookingTime());
 				player.startUsingItem(hand);
 				player.setItemInHand(otherHand, cookingStackCopy);
 				return InteractionResultHolder.consume(skilletStack);
@@ -189,10 +190,10 @@ public class SkilletItem extends BlockItem
 
 			if (tag.contains("Cooking")) {
 				ItemStack cookingStack = ItemStack.of(tag.getCompound("Cooking"));
-				Optional<CampfireCookingRecipe> cookingRecipe = getCookingRecipe(cookingStack, level);
+				Optional<RecipeHolder<CampfireCookingRecipe>> cookingRecipe = getCookingRecipe(cookingStack, level);
 
 				cookingRecipe.ifPresent((recipe) -> {
-					ItemStack resultStack = recipe.assemble(new SimpleContainer(), level.registryAccess());
+					ItemStack resultStack = recipe.value().assemble(new SimpleContainer(), level.registryAccess());
 					if (!player.getInventory().add(resultStack)) {
 						player.drop(resultStack, false);
 					}
@@ -208,7 +209,7 @@ public class SkilletItem extends BlockItem
 		return stack;
 	}
 
-	public static Optional<CampfireCookingRecipe> getCookingRecipe(ItemStack stack, Level level) {
+	public static Optional<RecipeHolder<CampfireCookingRecipe>> getCookingRecipe(ItemStack stack, Level level) {
 		if (stack.isEmpty()) {
 			return Optional.empty();
 		}

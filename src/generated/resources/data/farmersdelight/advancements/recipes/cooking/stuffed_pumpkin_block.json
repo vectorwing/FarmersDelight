@@ -31,5 +31,5 @@
       "farmersdelight:cooking/stuffed_pumpkin_block"
     ]
   },
-  "sends_telemetry_event": true
+  "sends_telemetry_event": false
 }

@@ -1,5 +1,7 @@
 package vectorwing.farmersdelight.integration.crafttweaker;
 
+// TODO: Uncomment this once CraftTweaker updates.
+/*
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
 import com.blamejared.crafttweaker_annotations.annotations.BracketEnum;
 import com.blamejared.crafttweaker_annotations.annotations.Document;
@@ -14,3 +16,4 @@ import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 public class CTCookingPotRecipeBookTab
 {
 }
+ */

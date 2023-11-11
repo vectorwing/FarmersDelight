@@ -10,13 +10,14 @@ import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.SlotItemHandler;
-import net.minecraftforge.items.wrapper.RecipeWrapper;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
@@ -179,8 +180,8 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 	}
 
 	@Override
-	public boolean recipeMatches(Recipe<? super RecipeWrapper> recipe) {
-		return recipe.matches(new RecipeWrapper(inventory), level);
+	public boolean recipeMatches(RecipeHolder<? extends Recipe<RecipeWrapper>> recipe) {
+		return recipe.value().matches(new RecipeWrapper(inventory), level);
 	}
 
 	@Override

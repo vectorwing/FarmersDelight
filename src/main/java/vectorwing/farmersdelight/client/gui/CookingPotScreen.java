@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
@@ -29,7 +30,7 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> implements RecipeUpdateListener
 {
-	private static final ResourceLocation RECIPE_BUTTON_LOCATION = new ResourceLocation("textures/gui/recipe_button.png");
+	private static final WidgetSprites RECIPE_BUTTON = new WidgetSprites(new ResourceLocation("recipe_book/button"), new ResourceLocation("recipe_book/button"));
 	private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(FarmersDelight.MODID, "textures/gui/cooking_pot.png");
 	private static final Rectangle HEAT_ICON = new Rectangle(47, 55, 17, 15);
 	private static final Rectangle PROGRESS_ARROW = new Rectangle(89, 25, 0, 17);
@@ -49,11 +50,11 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 		this.recipeBookComponent.init(this.width, this.height, this.minecraft, this.widthTooNarrow, this.menu);
 		this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth);
 		if (Configuration.ENABLE_RECIPE_BOOK_COOKING_POT.get()) {
-			this.addRenderableWidget(new ImageButton(this.leftPos + 5, this.height / 2 - 49, 20, 18, 0, 0, 19, RECIPE_BUTTON_LOCATION, (button) ->
+			this.addRenderableWidget(new ImageButton(this.leftPos + 5, this.height / 2 - 49, 20, 18, RECIPE_BUTTON, (button) ->
 			{
 				this.recipeBookComponent.toggleVisibility();
 				this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth);
-				((ImageButton) button).setPosition(this.leftPos + 5, this.height / 2 - 49);
+				button.setPosition(this.leftPos + 5, this.height / 2 - 49);
 			}));
 		} else {
 			this.recipeBookComponent.hide();
@@ -71,7 +72,7 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 
 	@Override
 	public void render(GuiGraphics gui, final int mouseX, final int mouseY, float partialTicks) {
-		this.renderBackground(gui);
+		this.renderBackground(gui, mouseX, mouseY, partialTicks);
 
 		if (this.recipeBookComponent.isVisible() && this.widthTooNarrow) {
 			this.renderBg(gui, partialTicks, mouseX, mouseY);

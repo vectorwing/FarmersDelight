@@ -3,12 +3,12 @@ package vectorwing.farmersdelight;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.minecraft.world.inventory.RecipeBookType;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.neoforge.common.NeoForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.client.ClientSetup;
@@ -53,10 +53,12 @@ public class FarmersDelight
 		ModBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(modEventBus);
 		ModLootFunctions.LOOT_FUNCTIONS.register(modEventBus);
 		ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
+		ModConditionCodecs.CONDITION_CODECS.register(modEventBus);
+		ModIngredientTypes.INGREDIENT_TYPES.register(modEventBus);
+
+		ModAdvancements.register();
 
 		WildCropGeneration.load();
-		MinecraftForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
-
-		MinecraftForge.EVENT_BUS.register(this);
+		NeoForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
 	}
 }

@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_crimson_trapdoor",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_crimson_trapdoor"
     ]
   ],
   "rewards": {

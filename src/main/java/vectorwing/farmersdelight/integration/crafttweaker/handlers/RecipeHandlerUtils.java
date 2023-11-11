@@ -1,5 +1,7 @@
 package vectorwing.farmersdelight.integration.crafttweaker.handlers;
 
+// TODO: Uncomment this once CraftTweaker updates.
+/*
 import com.blamejared.crafttweaker.api.CraftTweakerConstants;
 import com.blamejared.crafttweaker.api.ingredient.IIngredient;
 import com.blamejared.crafttweaker.api.ingredient.type.IIngredientEmpty;
@@ -34,3 +36,4 @@ public class RecipeHandlerUtils {
             new ResourceLocation(FarmersDelight.MODID, "recipe_component/cooking_pot_container"), new TypeToken<>(){},  RecipeComponentEqualityCheckers::areStacksEqual);
 
 }
+ */

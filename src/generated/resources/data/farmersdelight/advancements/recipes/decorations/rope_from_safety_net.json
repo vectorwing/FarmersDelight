@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_safety_net",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_safety_net"
     ]
   ],
   "rewards": {

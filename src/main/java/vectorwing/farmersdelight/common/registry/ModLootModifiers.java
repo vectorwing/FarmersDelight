@@ -1,10 +1,10 @@
 package vectorwing.farmersdelight.common.registry;
 
 import com.mojang.serialization.Codec;
-import net.minecraftforge.common.loot.IGlobalLootModifier;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.registries.RegistryObject;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.loot.modifier.AddItemModifier;
 import vectorwing.farmersdelight.common.loot.modifier.AddLootTableModifier;

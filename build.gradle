@@ -1,28 +1,9 @@
-buildscript {
-    repositories {
-        maven { url = 'https://files.minecraftforge.net' }
-        maven { url = 'https://maven.parchmentmc.org' }
-        maven {
-            url "https://repo.spongepowered.org/repository/maven-public/"
-            // content { includeGroup "org.spongepowered" }
-        }
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
-        classpath 'org.parchmentmc:librarian:1.+'
-    }
-}
-apply plugin: 'net.minecraftforge.gradle'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'org.parchmentmc.librarian.forgegradle'
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-apply plugin: "org.spongepowered.mixin"
-
-mixin {
-    add sourceSets.main, "farmersdelight.refmap.json"
+plugins {
+    id 'idea'
+    id 'maven-publish'
+    id 'net.neoforged.gradle.userdev' version '7.0.41'
+    id 'net.neoforged.gradle.mixin' version '7.0.41'
+    id 'java-library'
 }
 
 version = "${mc_version}-${mod_version}"
@@ -32,67 +13,33 @@ archivesBaseName = 'FarmersDelight'
 //sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-minecraft {
-    mappings channel: 'parchment', version: '1.19.3-2023.03.12-1.20.1'
-//    mappings channel: 'official', version: "${mc_version}"
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
 
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+mixin {
+    config 'farmersdelight.mixins.json'
+}
 
-    runs {
-        client {
-            workingDirectory project.file('run')
-            arg '-mixin.config=farmersdelight.mixins.json'
+runs {
+    configureEach {
+        workingDirectory project.file("run/${it.name}")
+        // Recommended logging data for a userdev environment
+        systemProperty 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+        // Recommended logging level for the console
+        systemProperty 'forge.logging.console.level', 'debug'
+        modSource project.sourceSets.main
+    }
 
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+    client {
+        systemProperty 'forge.enabledGameTestNamespaces', "farmersdelight"
+    }
 
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
+    server {
+        systemProperty 'forge.enabledGameTestNamespaces', "farmersdelight"
+        programArgument '--nogui'
+    }
 
-            mods {
-                farmersdelight {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('run')
-            arg "-mixin.config=farmersdelight.mixins.json"
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-
-            mods {
-                farmersdelight {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-            workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-
-            args '--mod', 'farmersdelight', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-
-            environment 'target', 'fmluserdevdata'
-
-            mods {
-                farmersdelight {
-                    source sourceSets.main
-                }
-            }
-        }
+    data {
+        programArguments.addAll '--mod', "farmersdelight", '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
     }
 }
 
@@ -115,17 +62,20 @@ sourceSets.main.resources {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+    implementation "net.neoforged:neoforge:${neo_version}"
 
     // compile against the JEI API but do not include it at runtime
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
+    /*
+    compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${mc_version}-forge-api:${jei_version}"
     // at runtime, use the full JEI jar for Forge
+    /*
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
+     */
+    compileOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}:api"
+    runtimeOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}"
 
-    compileOnly fg.deobf("squeek.appleskin:appleskin-forge:${appleskin_version}:api")
-    runtimeOnly fg.deobf("squeek.appleskin:appleskin-forge:${appleskin_version}")
-
+    /*
     def ctDep = fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.20.1:${crafttweaker_version}")
     compileOnly ctDep
     runtimeOnly ctDep
@@ -137,9 +87,11 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
+     */
+
 }
 
-jar {
+tasks.named('jar', Jar).configure {
     manifest {
         attributes([
                 "Specification-Title"     : "farmersdelight",
@@ -153,8 +105,6 @@ jar {
         ])
     }
 }
-
-jar.finalizedBy('reobfJar')
 
 publishing {
     publications {

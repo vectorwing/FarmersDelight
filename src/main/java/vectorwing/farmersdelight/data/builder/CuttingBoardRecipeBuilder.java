@@ -3,13 +3,15 @@ package vectorwing.farmersdelight.data.builder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
 import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
@@ -18,7 +20,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -79,22 +80,22 @@ public class CuttingBoardRecipeBuilder
 		return this;
 	}
 
-	public void build(Consumer<FinishedRecipe> consumerIn) {
+	public void build(RecipeOutput outputIn) {
 		ResourceLocation location = ForgeRegistries.ITEMS.getKey(this.ingredient.getItems()[0].getItem());
-		this.build(consumerIn, FarmersDelight.MODID + ":cutting/" + location.getPath());
+		this.build(outputIn, FarmersDelight.MODID + ":cutting/" + location.getPath());
 	}
 
-	public void build(Consumer<FinishedRecipe> consumerIn, String save) {
+	public void build(RecipeOutput outputIn, String save) {
 		ResourceLocation resourcelocation = ForgeRegistries.ITEMS.getKey(this.ingredient.getItems()[0].getItem());
 		if ((new ResourceLocation(save)).equals(resourcelocation)) {
 			throw new IllegalStateException("Cutting Recipe " + save + " should remove its 'save' argument");
 		} else {
-			this.build(consumerIn, new ResourceLocation(save));
+			this.build(outputIn, new ResourceLocation(save));
 		}
 	}
 
-	public void build(Consumer<FinishedRecipe> consumerIn, ResourceLocation id) {
-		consumerIn.accept(new CuttingBoardRecipeBuilder.Result(id, this.ingredient, this.tool, this.results, this.soundEventID == null ? "" : this.soundEventID));
+	public void build(RecipeOutput outputIn, ResourceLocation id) {
+		outputIn.accept(new CuttingBoardRecipeBuilder.Result(id, this.ingredient, this.tool, this.results, this.soundEventID == null ? "" : this.soundEventID));
 	}
 
 	public static class Result implements FinishedRecipe
@@ -116,10 +117,10 @@ public class CuttingBoardRecipeBuilder
 		@Override
 		public void serializeRecipeData(JsonObject json) {
 			JsonArray arrayIngredients = new JsonArray();
-			arrayIngredients.add(this.ingredient.toJson());
+			arrayIngredients.add(this.ingredient.toJson(true));
 			json.add("ingredients", arrayIngredients);
 
-			json.add("tool", this.tool.toJson());
+			json.add("tool", this.tool.toJson(true));
 
 			JsonArray arrayResults = new JsonArray();
 			for (ChanceResult result : this.results) {
@@ -140,24 +141,18 @@ public class CuttingBoardRecipeBuilder
 		}
 
 		@Override
-		public ResourceLocation getId() {
+		public ResourceLocation id() {
 			return this.id;
 		}
 
 		@Override
-		public RecipeSerializer<?> getType() {
+		public RecipeSerializer<?> type() {
 			return ModRecipeSerializers.CUTTING.get();
 		}
 
 		@Nullable
 		@Override
-		public JsonObject serializeAdvancement() {
-			return null;
-		}
-
-		@Nullable
-		@Override
-		public ResourceLocation getAdvancementId() {
+		public AdvancementHolder advancement() {
 			return null;
 		}
 	}

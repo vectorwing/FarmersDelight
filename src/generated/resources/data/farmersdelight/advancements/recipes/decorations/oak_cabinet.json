@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_oak_trapdoor",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_oak_trapdoor"
     ]
   ],
   "rewards": {

@@ -10,8 +10,24 @@
       "item": "minecraft:cobblestone"
     }
   ],
-  "tool": {
-    "type": "farmersdelight:tool_action",
-    "action": "pickaxe_dig"
-  }
+  "tool": [
+    {
+      "item": "minecraft:wooden_pickaxe"
+    },
+    {
+      "item": "minecraft:stone_pickaxe"
+    },
+    {
+      "item": "minecraft:golden_pickaxe"
+    },
+    {
+      "item": "minecraft:iron_pickaxe"
+    },
+    {
+      "item": "minecraft:diamond_pickaxe"
+    },
+    {
+      "item": "minecraft:netherite_pickaxe"
+    }
+  ]
 }

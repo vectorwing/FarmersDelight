@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.common.mixin;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockSourceImpl;
+import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
@@ -33,8 +33,8 @@ public abstract class CuttingBoardDispenserMixin
 			locals = LocalCapture.CAPTURE_FAILHARD,
 			cancellable = true
 	)
-	public void onCuttingBoardDispenseFromInject(ServerLevel level, BlockPos pos, CallbackInfo ci, BlockSourceImpl source, DispenserBlockEntity dispenser, int slot, ItemStack stack) {
-		BlockState facingState = level.getBlockState(pos.relative(source.getBlockState().getValue(DispenserBlock.FACING)));
+	public void onCuttingBoardDispenseFromInject(ServerLevel level, BlockState state, BlockPos pos, CallbackInfo ci, DispenserBlockEntity dispenser, BlockSource source, int slot, ItemStack stack) {
+		BlockState facingState = level.getBlockState(pos.relative(state.getValue(DispenserBlock.FACING)));
 		if (Configuration.DISPENSER_TOOLS_CUTTING_BOARD.get() && facingState.is(ModBlocks.CUTTING_BOARD.get())) {
 			dispenser.setItem(slot, CuttingBoardDispenseBehavior.INSTANCE.dispense(source, stack));
 			ci.cancel();

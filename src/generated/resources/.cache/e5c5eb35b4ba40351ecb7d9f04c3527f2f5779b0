@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-10T23:57:14.5511458	Advancements
+// 1.20.2	2023-11-12T09:00:34.5753247	Advancements
 be62d0c11bfa1de4eebb4613de24770a232ed6d4 data/farmersdelight/advancements/main/craft_knife.json
 206d07e6616bcf95c43c3ddd3a5ccd352c1b67fe data/farmersdelight/advancements/main/eat_comfort_food.json
 789aaad424f0727621d5a1ebdc3f38e4af56437f data/farmersdelight/advancements/main/eat_nourishing_food.json
@@ -18,6 +18,6 @@ b887c07f3650d1990992cd0a37dbd93197543787 data/farmersdelight/advancements/main/o
 367a6f35732ade895439a85a698d831e73e5531b data/farmersdelight/advancements/main/place_skillet.json
 2b2f0f25c44906117eb6ceef9ede715d34459b41 data/farmersdelight/advancements/main/plant_all_crops.json
 dbda9eca79a3d93fa2ec831172e44867f94aec9d data/farmersdelight/advancements/main/plant_rice.json
-95ce23f06c780e610cf88e814ebfcb38f83c72f8 data/farmersdelight/advancements/main/root.json
-9bf46d70d1d9da1dacdb2e7f20528d3a29b33f0d data/farmersdelight/advancements/main/use_cutting_board.json
+adcc1a7785745fae2217d9f6be8cff2ce9f46845 data/farmersdelight/advancements/main/root.json
+cf26bf7ce7147fd09c4f25a9a7a0aa55ad8e8a33 data/farmersdelight/advancements/main/use_cutting_board.json
 50502a68701294abbba6d94356d02539d5c9fb88 data/farmersdelight/advancements/main/use_skillet.json

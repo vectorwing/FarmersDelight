@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -49,7 +50,7 @@ public class BuddingTomatoBlock extends BuddingBushBlock implements Bonemealable
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
 		return true;
 	}
 
@@ -72,5 +73,10 @@ public class BuddingTomatoBlock extends BuddingBushBlock implements Bonemealable
 			int remainingGrowth = ageGrowth - maxAge - 1;
 			level.setBlockAndUpdate(pos, ModBlocks.TOMATO_CROP.get().defaultBlockState().setValue(TomatoVineBlock.VINE_AGE, remainingGrowth));
 		}
+	}
+
+	@Override
+	public boolean isEnabled(FeatureFlagSet p_249172_) {
+		return super.isEnabled(p_249172_);
 	}
 }

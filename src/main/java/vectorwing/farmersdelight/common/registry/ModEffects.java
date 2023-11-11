@@ -1,9 +1,9 @@
 package vectorwing.farmersdelight.common.registry;
 
 import net.minecraft.world.effect.MobEffect;
-import net.minecraftforge.registries.RegistryObject;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.registries.RegistryObject;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.effect.ComfortEffect;
 import vectorwing.farmersdelight.common.effect.NourishmentEffect;

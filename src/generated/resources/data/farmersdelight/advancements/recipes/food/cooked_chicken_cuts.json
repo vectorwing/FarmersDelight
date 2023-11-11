@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "cooked_chicken_cuts",
-      "has_the_recipe"
+      "has_the_recipe",
+      "cooked_chicken_cuts"
     ]
   ],
   "rewards": {

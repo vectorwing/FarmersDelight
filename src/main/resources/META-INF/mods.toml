@@ -1,11 +1,11 @@
 modLoader = "javafml"
-loaderVersion = "[46,)"
+loaderVersion = "[1,)"
 issueTrackerURL = "https://github.com/vectorwing/FarmersDelight/issues"
 license = "MIT License"
 
 [[mods]]
 modId = "farmersdelight"
-version = "1.20.1-1.2.3b"
+version = "1.20.2-1.2.3b"
 displayName = "Farmer's Delight"
 # updateJSONURL=""
 displayURL = "https://github.com/vectorwing/FarmersDelight"
@@ -18,16 +18,16 @@ itemIcon = "farmersdelight:stove"
 configBackground = "minecraft:textures/block/bricks.png"
 
 [[dependencies.farmersdelight]]
-modId = "forge"
+modId = "neoforge"
 mandatory = true
-versionRange = "[47.1.0,)"
+versionRange = "[1,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.farmersdelight]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.20,)"
+versionRange = "[1.20.2,)"
 ordering = "NONE"
 side = "BOTH"
 

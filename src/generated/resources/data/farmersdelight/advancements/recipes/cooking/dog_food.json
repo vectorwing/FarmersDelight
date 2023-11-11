@@ -33,5 +33,5 @@
       "farmersdelight:cooking/dog_food"
     ]
   },
-  "sends_telemetry_event": true
+  "sends_telemetry_event": false
 }

@@ -26,7 +26,8 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.CommonHooks;
+import net.neoforged.neoforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -80,9 +81,9 @@ public class TomatoVineBlock extends CropBlock
 			int age = this.getAge(state);
 			if (age < this.getMaxAge()) {
 				float speed = getGrowthSpeed(this, level, pos);
-				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt((int) (25.0F / speed) + 1) == 0)) {
+				if (CommonHooks.onCropsGrowPre(level, pos, state, random.nextInt((int) (25.0F / speed) + 1) == 0)) {
 					level.setBlock(pos, state.setValue(getAgeProperty(), age + 1), 2);
-					net.minecraftforge.common.ForgeHooks.onCropsGrowPost(level, pos, state);
+					CommonHooks.onCropsGrowPost(level, pos, state);
 				}
 			}
 			attemptRopeClimb(level, pos, random);

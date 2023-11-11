@@ -18,7 +18,10 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.PlantType;
+import net.neoforged.neoforge.common.CommonHooks;
+import net.neoforged.neoforge.common.IPlantable;
+import net.neoforged.neoforge.common.PlantType;
+import net.neoforged.neoforge.event.EventHooks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 /**
@@ -88,13 +91,13 @@ public class BuddingBushBlock extends BushBlock
 			int age = getAge(state);
 			if (age <= getMaxAge()) {
 				float growthSpeed = getGrowthSpeed(this, level, pos);
-				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt((int) (25.0F / growthSpeed) + 1) == 0)) {
+				if (CommonHooks.onCropsGrowPre(level, pos, state, random.nextInt((int) (25.0F / growthSpeed) + 1) == 0)) {
 					if (isMaxAge(state)) {
 						growPastMaxAge(state, level, pos, random);
 					} else {
 						level.setBlockAndUpdate(pos, getStateForAge(age + 1));
 					}
-					net.minecraftforge.common.ForgeHooks.onCropsGrowPost(level, pos, state);
+					CommonHooks.onCropsGrowPost(level, pos, state);
 				}
 			}
 		}
@@ -118,7 +121,7 @@ public class BuddingBushBlock extends BushBlock
 			for (int posZ = -1; posZ <= 1; ++posZ) {
 				float speedBonus = 0.0F;
 				BlockState stateBelow = level.getBlockState(posBelow.offset(posX, 0, posZ));
-				if (stateBelow.canSustainPlant(level, posBelow.offset(posX, 0, posZ), net.minecraft.core.Direction.UP, (net.minecraftforge.common.IPlantable) block)) {
+				if (stateBelow.canSustainPlant(level, posBelow.offset(posX, 0, posZ), net.minecraft.core.Direction.UP, (IPlantable) block)) {
 					speedBonus = 1.0F;
 					if (stateBelow.isFertile(level, pos.offset(posX, 0, posZ))) {
 						speedBonus = 3.0F;
@@ -159,7 +162,7 @@ public class BuddingBushBlock extends BushBlock
 
 	@Override
 	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-		if (entity instanceof Ravager && net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(level, entity)) {
+		if (entity instanceof Ravager && EventHooks.getMobGriefingEvent(level, entity)) {
 			level.destroyBlock(pos, true, entity);
 		}
 

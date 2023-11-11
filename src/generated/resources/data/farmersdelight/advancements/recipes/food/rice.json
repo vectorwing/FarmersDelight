@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_rice_panicle",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_rice_panicle"
     ]
   ],
   "rewards": {

@@ -6,6 +6,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.effect.AttributeModifierTemplate;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
@@ -13,8 +14,8 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import vectorwing.farmersdelight.FarmersDelight;
 
 import java.util.List;
@@ -53,11 +54,10 @@ public class TextUtils
 				MobEffectInstance instance = effectPair.getFirst();
 				MutableComponent iformattabletextcomponent = Component.translatable(instance.getDescriptionId());
 				MobEffect effect = instance.getEffect();
-				Map<Attribute, AttributeModifier> attributeMap = effect.getAttributeModifiers();
+				Map<Attribute, AttributeModifierTemplate> attributeMap = effect.getAttributeModifiers();
 				if (!attributeMap.isEmpty()) {
-					for (Map.Entry<Attribute, AttributeModifier> entry : attributeMap.entrySet()) {
-						AttributeModifier rawModifier = entry.getValue();
-						AttributeModifier modifier = new AttributeModifier(rawModifier.getName(), effect.getAttributeModifierValue(instance.getAmplifier(), rawModifier), rawModifier.getOperation());
+					for (Map.Entry<Attribute, AttributeModifierTemplate> entry : attributeMap.entrySet()) {
+						AttributeModifier modifier = entry.getValue().create(instance.getAmplifier());
 						attributeList.add(new Pair<>(entry.getKey(), modifier));
 					}
 				}

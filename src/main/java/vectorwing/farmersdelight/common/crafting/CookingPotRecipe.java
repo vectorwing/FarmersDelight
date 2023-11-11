@@ -1,36 +1,33 @@
 package vectorwing.farmersdelight.common.crafting;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingRecipeCodecs;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.items.wrapper.RecipeWrapper;
-import vectorwing.farmersdelight.FarmersDelight;
+import net.neoforged.neoforge.common.util.RecipeMatcher;
+import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 import javax.annotation.Nullable;
-import java.util.EnumSet;
+import java.util.Optional;
 
 @SuppressWarnings("ClassCanBeRecord")
 public class CookingPotRecipe implements Recipe<RecipeWrapper>
 {
 	public static final int INPUT_SLOTS = 6;
 
-	private final ResourceLocation id;
 	private final String group;
 	private final CookingPotRecipeBookTab tab;
 	private final NonNullList<Ingredient> inputItems;
@@ -39,8 +36,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 	private final float experience;
 	private final int cookTime;
 
-	public CookingPotRecipe(ResourceLocation id, String group, @Nullable CookingPotRecipeBookTab tab, NonNullList<Ingredient> inputItems, ItemStack output, ItemStack container, float experience, int cookTime) {
-		this.id = id;
+	public CookingPotRecipe(String group, @Nullable CookingPotRecipeBookTab tab, NonNullList<Ingredient> inputItems, ItemStack output, ItemStack container, float experience, int cookTime) {
 		this.group = group;
 		this.tab = tab;
 		this.inputItems = inputItems;
@@ -56,11 +52,6 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 
 		this.experience = experience;
 		this.cookTime = cookTime;
-	}
-
-	@Override
-	public ResourceLocation getId() {
-		return this.id;
 	}
 
 	@Override
@@ -112,7 +103,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 				inputs.add(itemstack);
 			}
 		}
-		return i == this.inputItems.size() && net.minecraftforge.common.util.RecipeMatcher.findMatches(inputs, this.inputItems) != null;
+		return i == this.inputItems.size() && RecipeMatcher.findMatches(inputs, this.inputItems) != null;
 	}
 
 	@Override
@@ -144,7 +135,6 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 
 		if (Float.compare(that.getExperience(), getExperience()) != 0) return false;
 		if (getCookTime() != that.getCookTime()) return false;
-		if (!getId().equals(that.getId())) return false;
 		if (!getGroup().equals(that.getGroup())) return false;
 		if (tab != that.tab) return false;
 		if (!inputItems.equals(that.inputItems)) return false;
@@ -154,8 +144,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 
 	@Override
 	public int hashCode() {
-		int result = getId().hashCode();
-		result = 31 * result + getGroup().hashCode();
+		int result = getGroup().hashCode();
 		result = 31 * result + (getRecipeBookTab() != null ? getRecipeBookTab().hashCode() : 0);
 		result = 31 * result + inputItems.hashCode();
 		result = 31 * result + output.hashCode();
@@ -167,47 +156,31 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 
 	public static class Serializer implements RecipeSerializer<CookingPotRecipe>
 	{
+		private static final Codec<CookingPotRecipe> CODEC = RecordCodecBuilder.create(inst -> inst.group(
+				ExtraCodecs.strictOptionalField(Codec.STRING, "group", "").forGetter(CookingPotRecipe::getGroup),
+				ExtraCodecs.strictOptionalField(CookingPotRecipeBookTab.CODEC, "recipe_book_tab").xmap(optional -> optional.orElse(null), Optional::of).forGetter(CookingPotRecipe::getRecipeBookTab),
+				Ingredient.LIST_CODEC_NONEMPTY.fieldOf("ingredients").xmap(ingredients -> {
+					NonNullList<Ingredient> nonNullList = NonNullList.create();
+					nonNullList.addAll(ingredients);
+					return nonNullList;
+				}, ingredients -> ingredients).forGetter(CookingPotRecipe::getIngredients),
+				CraftingRecipeCodecs.ITEMSTACK_OBJECT_CODEC.fieldOf("result").forGetter(r -> r.output),
+				ExtraCodecs.strictOptionalField(CraftingRecipeCodecs.ITEMSTACK_OBJECT_CODEC, "container", ItemStack.EMPTY).forGetter(CookingPotRecipe::getOutputContainer),
+				ExtraCodecs.strictOptionalField(Codec.FLOAT, "experience", 0.0F).forGetter(CookingPotRecipe::getExperience),
+				ExtraCodecs.strictOptionalField(Codec.INT, "cookingtime", 200).forGetter(CookingPotRecipe::getCookTime)
+		).apply(inst, CookingPotRecipe::new));
+
 		public Serializer() {
 		}
 
 		@Override
-		public CookingPotRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
-			final String groupIn = GsonHelper.getAsString(json, "group", "");
-			final NonNullList<Ingredient> inputItemsIn = readIngredients(GsonHelper.getAsJsonArray(json, "ingredients"));
-			if (inputItemsIn.isEmpty()) {
-				throw new JsonParseException("No ingredients for cooking recipe");
-			} else if (inputItemsIn.size() > CookingPotRecipe.INPUT_SLOTS) {
-				throw new JsonParseException("Too many ingredients for cooking recipe! The max is " + CookingPotRecipe.INPUT_SLOTS);
-			} else {
-				final String tabKeyIn = GsonHelper.getAsString(json, "recipe_book_tab", null);
-				final CookingPotRecipeBookTab tabIn = CookingPotRecipeBookTab.findByName(tabKeyIn);
-				if (tabKeyIn != null && tabIn == null) {
-					FarmersDelight.LOGGER.warn("Optional field 'recipe_book_tab' does not match any valid tab. If defined, must be one of the following: " + EnumSet.allOf(CookingPotRecipeBookTab.class));
-				}
-				final ItemStack outputIn = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "result"), true);
-				ItemStack container = GsonHelper.isValidNode(json, "container") ? CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "container"), true) : ItemStack.EMPTY;
-				final float experienceIn = GsonHelper.getAsFloat(json, "experience", 0.0F);
-				final int cookTimeIn = GsonHelper.getAsInt(json, "cookingtime", 200);
-				return new CookingPotRecipe(recipeId, groupIn, tabIn, inputItemsIn, outputIn, container, experienceIn, cookTimeIn);
-			}
+		public Codec<CookingPotRecipe> codec() {
+			return CODEC;
 		}
 
-		private static NonNullList<Ingredient> readIngredients(JsonArray ingredientArray) {
-			NonNullList<Ingredient> nonnulllist = NonNullList.create();
 
-			for (int i = 0; i < ingredientArray.size(); ++i) {
-				Ingredient ingredient = Ingredient.fromJson(ingredientArray.get(i));
-				if (!ingredient.isEmpty()) {
-					nonnulllist.add(ingredient);
-				}
-			}
-
-			return nonnulllist;
-		}
-
-		@Nullable
 		@Override
-		public CookingPotRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+		public @Nullable CookingPotRecipe fromNetwork(FriendlyByteBuf buffer) {
 			String groupIn = buffer.readUtf();
 			CookingPotRecipeBookTab tabIn = CookingPotRecipeBookTab.findByName(buffer.readUtf());
 			int i = buffer.readVarInt();
@@ -221,7 +194,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 			ItemStack container = buffer.readItem();
 			float experienceIn = buffer.readFloat();
 			int cookTimeIn = buffer.readVarInt();
-			return new CookingPotRecipe(recipeId, groupIn, tabIn, inputItemsIn, outputIn, container, experienceIn, cookTimeIn);
+			return new CookingPotRecipe(groupIn, tabIn, inputItemsIn, outputIn, container, experienceIn, cookTimeIn);
 		}
 
 		@Override
