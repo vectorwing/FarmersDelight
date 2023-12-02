@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.common.event;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
@@ -12,7 +13,6 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.BasicItemListing;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 import net.neoforged.neoforge.event.village.WandererTradesEvent;
-import net.neoforged.neoforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -30,7 +30,7 @@ public class VillagerEvents
 
 		Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
 		VillagerProfession profession = event.getType();
-		ResourceLocation professionKey = ForgeRegistries.VILLAGER_PROFESSIONS.getKey(profession);
+		ResourceLocation professionKey = BuiltInRegistries.VILLAGER_PROFESSION.getKey(profession);
 		if (professionKey == null) return;
 		if (professionKey.getPath().equals("farmer")) {
 			trades.get(1).add(emeraldForItemsTrade(ModItems.ONION.get(), 26, 16, 2));

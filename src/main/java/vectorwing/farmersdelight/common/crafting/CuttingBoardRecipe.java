@@ -6,6 +6,8 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -19,7 +21,6 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
-import net.neoforged.neoforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
 import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
@@ -184,7 +185,7 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper>
 					nonNullList.addAll(chanceResults);
 					return DataResult.success(nonNullList);
 				}, DataResult::success).forGetter(CuttingBoardRecipe::getRollableResults),
-				ExtraCodecs.strictOptionalField(ForgeRegistries.SOUND_EVENTS.getCodec(), "sound").forGetter(CuttingBoardRecipe::getSoundEvent)
+				ExtraCodecs.strictOptionalField(BuiltInRegistries.SOUND_EVENT.byNameCodec(), "sound").forGetter(CuttingBoardRecipe::getSoundEvent)
 		).apply(inst, CuttingBoardRecipe::new));
 
 		public Serializer() {
@@ -209,7 +210,7 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper>
 			}
 			Optional<SoundEvent> soundEventIn = Optional.empty();
 			if (buffer.readBoolean()) {
-				Optional<Holder<SoundEvent>> holder = ForgeRegistries.SOUND_EVENTS.getHolder(buffer.readResourceKey(ForgeRegistries.Keys.SOUND_EVENTS));
+				Optional<Holder.Reference<SoundEvent>> holder = BuiltInRegistries.SOUND_EVENT.getHolder(buffer.readResourceKey(Registries.SOUND_EVENT));
 				if (holder.isPresent() && holder.get().isBound()) {
 					soundEventIn = Optional.of(holder.get().value());
 				}
@@ -228,7 +229,7 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper>
 				result.write(buffer);
 			}
 			if (recipe.getSoundEvent().isPresent()) {
-				Optional<ResourceKey<SoundEvent>> resourceKey = ForgeRegistries.SOUND_EVENTS.getResourceKey(recipe.getSoundEvent().get());
+				Optional<ResourceKey<SoundEvent>> resourceKey = BuiltInRegistries.SOUND_EVENT.getResourceKey(recipe.getSoundEvent().get());
                 resourceKey.ifPresentOrElse(rk -> {
 					buffer.writeBoolean(true);
 					buffer.writeResourceKey(rk);

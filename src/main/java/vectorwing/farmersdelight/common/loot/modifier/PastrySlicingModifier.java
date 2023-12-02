@@ -4,6 +4,7 @@ import com.google.common.base.Suppliers;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -14,7 +15,6 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.common.loot.LootModifier;
-import net.neoforged.neoforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.common.block.PieBlock;
 
 import javax.annotation.Nonnull;
@@ -24,7 +24,7 @@ public class PastrySlicingModifier extends LootModifier
 {
 	public static final Supplier<Codec<PastrySlicingModifier>> CODEC = Suppliers.memoize(() ->
 			RecordCodecBuilder.create(inst -> codecStart(inst)
-					.and(ForgeRegistries.ITEMS.getCodec().fieldOf("slice").forGetter((m) -> m.pastrySlice))
+					.and(BuiltInRegistries.ITEM.byNameCodec().fieldOf("slice").forGetter((m) -> m.pastrySlice))
 					.apply(inst, PastrySlicingModifier::new)));
 
 	public static final int MAX_CAKE_BITES = 7;

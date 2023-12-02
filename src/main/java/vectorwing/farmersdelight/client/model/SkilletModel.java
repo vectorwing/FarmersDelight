@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.*;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
@@ -20,7 +21,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.SimpleModelState;
 import net.neoforged.neoforge.client.model.data.ModelData;
-import net.neoforged.neoforge.registries.ForgeRegistries;
 import org.joml.Vector3f;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -122,7 +122,7 @@ public class SkilletModel implements BakedModel
 		public CompositeBakedModel(ModelBakery bakery, ItemStack ingredientStack, BakedModel skillet) {
 			super(skillet);
 
-			ResourceLocation ingredientLocation = ForgeRegistries.ITEMS.getKey(ingredientStack.getItem());
+			ResourceLocation ingredientLocation = BuiltInRegistries.ITEM.getKey(ingredientStack.getItem());
 			UnbakedModel ingredientUnbaked = bakery.getModel(new ModelResourceLocation(ingredientLocation, "inventory"));
 			ModelState transform = new SimpleModelState(
 					new Transformation(

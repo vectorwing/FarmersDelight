@@ -13,6 +13,7 @@ import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -22,7 +23,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
@@ -108,12 +108,12 @@ public class CookingPotRecipeBuilder
 	}
 
 	public void build(RecipeOutput outputIn) {
-		ResourceLocation location = ForgeRegistries.ITEMS.getKey(result);
+		ResourceLocation location = BuiltInRegistries.ITEM.getKey(result);
 		build(outputIn, FarmersDelight.MODID + ":cooking/" + location.getPath());
 	}
 
 	public void build(RecipeOutput outputIn, String save) {
-		ResourceLocation resourcelocation = ForgeRegistries.ITEMS.getKey(result);
+		ResourceLocation resourcelocation = BuiltInRegistries.ITEM.getKey(result);
 		if ((new ResourceLocation(save)).equals(resourcelocation)) {
 			throw new IllegalStateException("Cooking Recipe " + save + " should remove its 'save' argument");
 		} else {
@@ -175,7 +175,7 @@ public class CookingPotRecipeBuilder
 			json.add("ingredients", arrayIngredients);
 
 			JsonObject objectResult = new JsonObject();
-			objectResult.addProperty("item", ForgeRegistries.ITEMS.getKey(result).toString());
+			objectResult.addProperty("item", BuiltInRegistries.ITEM.getKey(result).toString());
 			if (count > 1) {
 				objectResult.addProperty("count", count);
 			}
@@ -183,7 +183,7 @@ public class CookingPotRecipeBuilder
 
 			if (container != null) {
 				JsonObject objectContainer = new JsonObject();
-				objectContainer.addProperty("item", ForgeRegistries.ITEMS.getKey(container).toString());
+				objectContainer.addProperty("item", BuiltInRegistries.ITEM.getKey(container).toString());
 				json.add("container", objectContainer);
 			}
 			if (experience > 0) {

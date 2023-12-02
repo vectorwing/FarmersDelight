@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -11,7 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
 import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
@@ -81,12 +81,12 @@ public class CuttingBoardRecipeBuilder
 	}
 
 	public void build(RecipeOutput outputIn) {
-		ResourceLocation location = ForgeRegistries.ITEMS.getKey(this.ingredient.getItems()[0].getItem());
+		ResourceLocation location = BuiltInRegistries.ITEM.getKey(this.ingredient.getItems()[0].getItem());
 		this.build(outputIn, FarmersDelight.MODID + ":cutting/" + location.getPath());
 	}
 
 	public void build(RecipeOutput outputIn, String save) {
-		ResourceLocation resourcelocation = ForgeRegistries.ITEMS.getKey(this.ingredient.getItems()[0].getItem());
+		ResourceLocation resourcelocation = BuiltInRegistries.ITEM.getKey(this.ingredient.getItems()[0].getItem());
 		if ((new ResourceLocation(save)).equals(resourcelocation)) {
 			throw new IllegalStateException("Cutting Recipe " + save + " should remove its 'save' argument");
 		} else {
@@ -125,7 +125,7 @@ public class CuttingBoardRecipeBuilder
 			JsonArray arrayResults = new JsonArray();
 			for (ChanceResult result : this.results) {
 				JsonObject jsonobject = new JsonObject();
-				jsonobject.addProperty("item", ForgeRegistries.ITEMS.getKey(result.getStack().getItem()).toString());
+				jsonobject.addProperty("item", BuiltInRegistries.ITEM.getKey(result.getStack().getItem()).toString());
 				if (result.getStack().getCount() > 1) {
 					jsonobject.addProperty("count", result.getStack().getCount());
 				}

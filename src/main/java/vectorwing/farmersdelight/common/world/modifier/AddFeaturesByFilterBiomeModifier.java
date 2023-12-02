@@ -29,10 +29,10 @@ public record AddFeaturesByFilterBiomeModifier(
 			if (deniedBiomes.isPresent() && this.deniedBiomes.get().contains(biome)) {
 				return;
 			}
-			if (minimumTemperature.isPresent() && biome.get().getBaseTemperature() < minimumTemperature.get()) {
+			if (minimumTemperature.isPresent() && biome.value().getBaseTemperature() < minimumTemperature.get()) {
 				return;
 			}
-			if (maximumTemperature.isPresent() && biome.get().getBaseTemperature() > maximumTemperature.get()) {
+			if (maximumTemperature.isPresent() && biome.value().getBaseTemperature() > maximumTemperature.get()) {
 				return;
 			}
 			BiomeGenerationSettingsBuilder generationSettings = builder.getGenerationSettings();

@@ -1,5 +1,5 @@
 {
-  "conditions": [
+  "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
       "modid": "create"

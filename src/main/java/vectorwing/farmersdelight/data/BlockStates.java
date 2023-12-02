@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.data;
 
 import com.google.common.collect.Sets;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -17,7 +18,6 @@ import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.*;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
@@ -38,7 +38,7 @@ public class BlockStates extends BlockStateProvider
 	}
 
 	private String blockName(Block block) {
-		return ForgeRegistries.BLOCKS.getKey(block).getPath();
+		return BuiltInRegistries.BLOCK.getKey(block).getPath();
 	}
 
 	public ResourceLocation resourceBlock(String path) {

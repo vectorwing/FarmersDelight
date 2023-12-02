@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.common;
 
 import net.minecraft.core.Position;
 import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.animal.Parrot;
@@ -17,7 +18,6 @@ import net.minecraft.world.level.block.DispenserBlock;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.util.ObfuscationReflectionHelper;
 import net.neoforged.neoforge.common.crafting.CompoundIngredient;
-import net.neoforged.neoforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.common.entity.RottenTomatoEntity;
 import vectorwing.farmersdelight.common.registry.ModAdvancements;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -40,7 +40,7 @@ public class CommonSetup
 		if (!Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) return;
 
 		Configuration.SOUP_ITEM_LIST.get().forEach((key) -> {
-			Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(key));
+			Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(key));
 			if (item instanceof BowlFoodItem) {
 				ObfuscationReflectionHelper.setPrivateValue(Item.class, item, 16, "maxStackSize");
 			}
