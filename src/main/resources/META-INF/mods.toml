@@ -27,7 +27,7 @@ side = "BOTH"
 [[dependencies.farmersdelight]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.20.2,)"
+versionRange = "[1.20.2,1.20.3)"
 ordering = "NONE"
 side = "BOTH"
 
