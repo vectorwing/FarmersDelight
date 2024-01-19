@@ -14,6 +14,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.client.gui.CookingPotTooltip;
 import vectorwing.farmersdelight.client.model.SkilletModel;
 import vectorwing.farmersdelight.client.particle.StarParticle;
 import vectorwing.farmersdelight.client.particle.SteamParticle;
@@ -35,9 +36,13 @@ public class ClientSetupEvents
 	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "item/empty_container_slot_bowl");
 
 	@SubscribeEvent
-	public static void onRegisterRecipeBookCategories(RegisterRecipeBookCategoriesEvent event)
-	{
+	public static void onRegisterRecipeBookCategories(RegisterRecipeBookCategoriesEvent event) {
 		RecipeCategories.init(event);
+	}
+
+	@SubscribeEvent
+	public static void registerCustomTooltipRenderers(RegisterClientTooltipComponentFactoriesEvent event) {
+		event.register(CookingPotTooltip.CookingPotTooltipComponent.class, CookingPotTooltip::new);
 	}
 
 	@SubscribeEvent

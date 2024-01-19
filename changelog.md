@@ -3,7 +3,9 @@
 ## 1.2.4
 
 ### Updates
-- The Cooking Pot item now displays its number of stored servings as a blue bar, similar to how Bundles display their fullness;
+- The Cooking Pot item now displays more information than before:
+  - A blue bar will be shown to indicate the amount of meal servings stored, similar to how Bundles display their fullness;
+  - The tooltip will display the stored food's item sprite alongside its name.
 
 ### Fixes
 - (1.20) Creative Tab registration has been moved to server-side, so that other mods can access them for game logic;
