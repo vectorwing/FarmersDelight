@@ -5,6 +5,7 @@
 ### Fixes
 - (1.20) Creative Tab registration has been moved to server-side, so that other mods can access them for game logic;
 - Skillet's higher knockback is now implemented as an attribute, rather than an event, fixing a bug where the other hand's item also received this boost;
+- Skillet sounds now play at the correct stage of the damage cycle. This is noticeable on multiplayer, with some amount of latency;
 
 ## 1.2.3
 
