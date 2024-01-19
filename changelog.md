@@ -2,6 +2,9 @@
 
 ## 1.2.4
 
+### Updates
+- The Cooking Pot item now displays its number of stored servings as a blue bar, similar to how Bundles display their fullness;
+
 ### Fixes
 - (1.20) Creative Tab registration has been moved to server-side, so that other mods can access them for game logic;
 - Skillet's higher knockback is now implemented as an attribute, rather than an event, fixing a bug where the other hand's item also received this boost;
