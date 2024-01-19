@@ -49,11 +49,14 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 @SuppressWarnings("deprecation")
 public class SkilletItem extends BlockItem
 {
 	public static final Tiers SKILLET_TIER = Tiers.IRON;
+	protected static final UUID FD_ATTACK_KNOCKBACK_UUID = UUID.fromString("e56350e0-8756-464d-92f9-54289ab41e0a");
+
 	private final Multimap<Attribute, AttributeModifier> toolAttributes;
 
 	public SkilletItem(Block block, Item.Properties properties) {
@@ -62,20 +65,13 @@ public class SkilletItem extends BlockItem
 		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", attackDamage, AttributeModifier.Operation.ADDITION));
 		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Tool modifier", -3.1F, AttributeModifier.Operation.ADDITION));
+		builder.put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(FD_ATTACK_KNOCKBACK_UUID, "Tool modifier", 1, AttributeModifier.Operation.ADDITION));
 		this.toolAttributes = builder.build();
 	}
 
 	@Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 	public static class SkilletEvents
 	{
-		@SubscribeEvent
-		public static void onSkilletKnockback(LivingKnockBackEvent event) {
-			LivingEntity attacker = event.getEntity().getKillCredit();
-			ItemStack tool = attacker != null ? attacker.getItemInHand(InteractionHand.MAIN_HAND) : ItemStack.EMPTY;
-			if (tool.getItem() instanceof SkilletItem) {
-				event.setStrength(event.getOriginalStrength() * 2.0F);
-			}
-		}
 
 		@SubscribeEvent
 		public static void onSkilletAttack(AttackEntityEvent event) {
