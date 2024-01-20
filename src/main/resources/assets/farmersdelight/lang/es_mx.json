@@ -299,12 +299,12 @@
 
   "farmersdelight.jei.cooking": "Cocinando",
   "farmersdelight.jei.cutting": "Tabla de picar",
-  "farmersdelight.jei.chance": "%1$s%% prbabilidad",
+  "farmersdelight.jei.chance": "%1$s%% probabilidad",
   "farmersdelight.jei.decomposition": "Descomposición",
   "farmersdelight.jei.decomposition.light": "Acelerado por la luz del sol",
   "farmersdelight.jei.decomposition.fluid": "Acelerado por el agua adyacente",
   "farmersdelight.jei.decomposition.accelerators": "Acelerado por activadores adyacentes (ver más abajo)",
   "farmersdelight.jei.info.straw": "Una fibra vegetal seca utilizada en la artesanía. Se obtiene cortando cultivos y plantas herbáceas con un Cuchillo.",
-  "farmersdelight.jei.info.knife": "Los cuchillos son armas de comabate cuerpo a cuerpo ligeras. Con ellos puedes recolectar paja de los pastos, además de que garantiza obtener los drops secundarios de los animales.",
+  "farmersdelight.jei.info.knife": "Los cuchillos son armas de combate cuerpo a cuerpo ligeras. Con ellos puedes recolectar paja de los pastos, además de que garantiza obtener los drops secundarios de los animales.",
   "farmersdelight.jei.info.ham": "Un gran corte de carne que vine de la pierna de un Cerdo o de un Hoglin. Necesitarás algo más ligero que una espada para conseguirlo..."
 }
