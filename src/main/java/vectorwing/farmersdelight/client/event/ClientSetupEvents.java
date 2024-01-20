@@ -42,14 +42,6 @@ public class ClientSetupEvents
 		event.registerEntityRenderer(ModEntityTypes.ROTTEN_TOMATO.get(), ThrownItemRenderer::new);
 	}
 
-
-	@SubscribeEvent
-	public static void onCreativeTabContents(BuildCreativeModeTabContentsEvent event) {
-		if (event.getTabKey() == ModCreativeTabs.TAB_FARMERS_DELIGHT.getKey()) {
-			ModItems.CREATIVE_TAB_ITEMS.forEach(event::accept);
-		}
-	}
-
 	@SubscribeEvent
 	public static void onModelBake(ModelEvent.ModifyBakingResult event) {
 		Map<ResourceLocation, BakedModel> modelRegistry = event.getModels();
