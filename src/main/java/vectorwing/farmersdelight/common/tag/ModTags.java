@@ -1,7 +1,5 @@
 package vectorwing.farmersdelight.common.tag;
 
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -47,6 +45,9 @@ public class ModTags
 
 	// Blocks in which Mushroom Colonies can keep growing on, if it's dark enough. These blocks cannot form new colonies.
 	public static final TagKey<Block> MUSHROOM_COLONY_GROWABLE_ON = modBlockTag("mushroom_colony_growable_on");
+
+	// Blocks that wild tomato patches can spawn on. This only affects world generation.
+	public static final TagKey<Block> WILD_TOMATO_GROWS_ON = modBlockTag("wild_tomato_grows_on");
 
 	// Blocks that should not have their growth boosted by Rich Soil, if planted on it.
 	public static final TagKey<Block> UNAFFECTED_BY_RICH_SOIL = modBlockTag("unaffected_by_rich_soil");

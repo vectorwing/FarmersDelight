@@ -46,8 +46,6 @@ public class SandyShrubBlock extends BushBlock implements net.minecraftforge.com
 
 	@Override
 	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-		level.registryAccess().registry(Registries.CONFIGURED_FEATURE).flatMap((value) -> value.getHolder(WildCropGeneration.FEATURE_PATCH_SANDY_SHRUB)).ifPresent((value) -> {
-			value.value().place(level, level.getChunkSource().getGenerator(), random, pos.above());
-		});
+		level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getOrThrow(WildCropGeneration.SANDY_SHRUB).place(level, level.getChunkSource().getGenerator(), random, pos.above());
 	}
 }

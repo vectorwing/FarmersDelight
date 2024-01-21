@@ -1,0 +1,69 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "farmersdelight:honey_glazed_ham_block",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "servings": "4"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "farmersdelight:honey_glazed_ham_block"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+            "block": "farmersdelight:honey_glazed_ham_block",
+            "condition": "minecraft:block_state_property",
+            "properties": {
+              "servings": "4"
+            }
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bowl"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+            "block": "farmersdelight:honey_glazed_ham_block",
+            "condition": "minecraft:block_state_property",
+            "properties": {
+              "servings": "4"
+            }
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bone"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "farmersdelight:blocks/honey_glazed_ham_block"
+}

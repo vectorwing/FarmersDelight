@@ -4,8 +4,6 @@ import com.blamejared.crafttweaker.api.action.recipe.ActionRecipeBase;
 import com.blamejared.crafttweaker.api.item.IItemStack;
 import com.blamejared.crafttweaker.api.item.MCItemStackMutable;
 import com.blamejared.crafttweaker.api.recipe.manager.base.IRecipeManager;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;

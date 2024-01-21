@@ -24,8 +24,8 @@ public class VillageStructures
 			return;
 		}
 
-		Registry<StructureTemplatePool> templatePools = event.getServer().registryAccess().registry(Registries.TEMPLATE_POOL).get();
-		Registry<StructureProcessorList> processorLists = event.getServer().registryAccess().registry(Registries.PROCESSOR_LIST).get();
+		Registry<StructureTemplatePool> templatePools = event.getServer().registryAccess().registryOrThrow(Registries.TEMPLATE_POOL);
+		Registry<StructureProcessorList> processorLists = event.getServer().registryAccess().registryOrThrow(Registries.PROCESSOR_LIST);
 
 		VillageStructures.addBuildingToPool(templatePools, processorLists, new ResourceLocation("minecraft:village/plains/houses"), FarmersDelight.MODID + ":village/houses/plains_compost_pile", 5);
 		VillageStructures.addBuildingToPool(templatePools, processorLists, new ResourceLocation("minecraft:village/snowy/houses"), FarmersDelight.MODID + ":village/houses/snowy_compost_pile", 3);

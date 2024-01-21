@@ -15,11 +15,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraftforge.common.crafting.CompoundIngredient;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
-import vectorwing.farmersdelight.common.crafting.condition.VanillaCrateEnabledCondition;
 import vectorwing.farmersdelight.common.entity.RottenTomatoEntity;
 import vectorwing.farmersdelight.common.registry.ModAdvancements;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -38,7 +36,6 @@ public class CommonSetup
 		});
 
 		ModAdvancements.register();
-		CraftingHelper.register(new VanillaCrateEnabledCondition.Serializer());
 	}
 
 	public static void registerStackSizeOverrides() {

@@ -17,7 +17,6 @@ import net.minecraft.world.item.crafting.Recipe;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

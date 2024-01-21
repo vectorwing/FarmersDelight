@@ -1,0 +1,23 @@
+{
+  "type": "farmersdelight:add_item",
+  "conditions": [
+    {
+      "condition": "minecraft:match_tool",
+      "predicate": {
+        "tag": "farmersdelight:tools/knives"
+      }
+    },
+    {
+      "chance": 1.0,
+      "condition": "minecraft:random_chance"
+    },
+    {
+      "block": "farmersdelight:rice",
+      "condition": "minecraft:block_state_property",
+      "properties": {
+        "age": "3"
+      }
+    }
+  ],
+  "item": "farmersdelight:straw"
+}

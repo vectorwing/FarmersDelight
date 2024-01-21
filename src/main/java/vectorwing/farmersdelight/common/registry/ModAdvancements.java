@@ -5,7 +5,7 @@ import vectorwing.farmersdelight.common.advancement.CuttingBoardTrigger;
 
 public class ModAdvancements
 {
-	public static CuttingBoardTrigger CUTTING_BOARD = new CuttingBoardTrigger();
+	public static final CuttingBoardTrigger CUTTING_BOARD = new CuttingBoardTrigger();
 
 	public static void register() {
 		CriteriaTriggers.register(CUTTING_BOARD);

@@ -26,7 +26,7 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 public class CabinetBlockEntity extends RandomizableContainerBlockEntity
 {
 	private NonNullList<ItemStack> contents = NonNullList.withSize(27, ItemStack.EMPTY);
-	private ContainerOpenersCounter openersCounter = new ContainerOpenersCounter()
+	private final ContainerOpenersCounter openersCounter = new ContainerOpenersCounter()
 	{
 		protected void onOpen(Level level, BlockPos pos, BlockState state) {
 			CabinetBlockEntity.this.playSound(state, ModSounds.BLOCK_CABINET_OPEN.get());

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "farmersdelight:stuffed_pumpkin_block",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "servings": "4"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "farmersdelight:stuffed_pumpkin_block"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "farmersdelight:blocks/stuffed_pumpkin_block"
+}

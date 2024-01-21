@@ -160,7 +160,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 		result = 31 * result + inputItems.hashCode();
 		result = 31 * result + output.hashCode();
 		result = 31 * result + container.hashCode();
-		result = 31 * result + (getExperience() != +0.0f ? Float.floatToIntBits(getExperience()) : 0);
+		result = 31 * result + (getExperience() != 0.0f ? Float.floatToIntBits(getExperience()) : 0);
 		result = 31 * result + getCookTime();
 		return result;
 	}

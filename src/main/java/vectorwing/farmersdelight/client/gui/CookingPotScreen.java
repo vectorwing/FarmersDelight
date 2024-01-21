@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
@@ -53,7 +52,7 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 			{
 				this.recipeBookComponent.toggleVisibility();
 				this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth);
-				((ImageButton) button).setPosition(this.leftPos + 5, this.height / 2 - 49);
+				button.setPosition(this.leftPos + 5, this.height / 2 - 49);
 			}));
 		} else {
 			this.recipeBookComponent.hide();

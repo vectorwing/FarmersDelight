@@ -35,7 +35,7 @@ public class StoveBlockEntity extends SyncedBlockEntity
 	private final ItemStackHandler inventory;
 	private final int[] cookingTimes;
 	private final int[] cookingTimesTotal;
-	private ResourceLocation[] lastRecipeIDs;
+	private final ResourceLocation[] lastRecipeIDs;
 
 	public StoveBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntityTypes.STOVE.get(), pos, state);

@@ -1,0 +1,94 @@
+{
+  "variants": {
+    "facing=east,support=handle,waterlogged=false": {
+      "model": "farmersdelight:block/cooking_pot_handle",
+      "y": 270
+    },
+    "facing=east,support=handle,waterlogged=true": {
+      "model": "farmersdelight:block/cooking_pot_handle",
+      "y": 270
+    },
+    "facing=east,support=none,waterlogged=false": {
+      "model": "farmersdelight:block/cooking_pot",
+      "y": 270
+    },
+    "facing=east,support=none,waterlogged=true": {
+      "model": "farmersdelight:block/cooking_pot",
+      "y": 270
+    },
+    "facing=east,support=tray,waterlogged=false": {
+      "model": "farmersdelight:block/cooking_pot_tray",
+      "y": 270
+    },
+    "facing=east,support=tray,waterlogged=true": {
+      "model": "farmersdelight:block/cooking_pot_tray",
+      "y": 270
+    },
+    "facing=north,support=handle,waterlogged=false": {
+      "model": "farmersdelight:block/cooking_pot_handle",
+      "y": 180
+    },
+    "facing=north,support=handle,waterlogged=true": {
+      "model": "farmersdelight:block/cooking_pot_handle",
+      "y": 180
+    },
+    "facing=north,support=none,waterlogged=false": {
+      "model": "farmersdelight:block/cooking_pot",
+      "y": 180
+    },
+    "facing=north,support=none,waterlogged=true": {
+      "model": "farmersdelight:block/cooking_pot",
+      "y": 180
+    },
+    "facing=north,support=tray,waterlogged=false": {
+      "model": "farmersdelight:block/cooking_pot_tray",
+      "y": 180
+    },
+    "facing=north,support=tray,waterlogged=true": {
+      "model": "farmersdelight:block/cooking_pot_tray",
+      "y": 180
+    },
+    "facing=south,support=handle,waterlogged=false": {
+      "model": "farmersdelight:block/cooking_pot_handle"
+    },
+    "facing=south,support=handle,waterlogged=true": {
+      "model": "farmersdelight:block/cooking_pot_handle"
+    },
+    "facing=south,support=none,waterlogged=false": {
+      "model": "farmersdelight:block/cooking_pot"
+    },
+    "facing=south,support=none,waterlogged=true": {
+      "model": "farmersdelight:block/cooking_pot"
+    },
+    "facing=south,support=tray,waterlogged=false": {
+      "model": "farmersdelight:block/cooking_pot_tray"
+    },
+    "facing=south,support=tray,waterlogged=true": {
+      "model": "farmersdelight:block/cooking_pot_tray"
+    },
+    "facing=west,support=handle,waterlogged=false": {
+      "model": "farmersdelight:block/cooking_pot_handle",
+      "y": 90
+    },
+    "facing=west,support=handle,waterlogged=true": {
+      "model": "farmersdelight:block/cooking_pot_handle",
+      "y": 90
+    },
+    "facing=west,support=none,waterlogged=false": {
+      "model": "farmersdelight:block/cooking_pot",
+      "y": 90
+    },
+    "facing=west,support=none,waterlogged=true": {
+      "model": "farmersdelight:block/cooking_pot",
+      "y": 90
+    },
+    "facing=west,support=tray,waterlogged=false": {
+      "model": "farmersdelight:block/cooking_pot_tray",
+      "y": 90
+    },
+    "facing=west,support=tray,waterlogged=true": {
+      "model": "farmersdelight:block/cooking_pot_tray",
+      "y": 90
+    }
+  }
+}

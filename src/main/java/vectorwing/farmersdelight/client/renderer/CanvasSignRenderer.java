@@ -36,7 +36,7 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 public class CanvasSignRenderer extends SignRenderer
 {
-	public static final Vec3 TEXT_OFFSET = new Vec3(0.0D, (double) 0.33333334F, (double) 0.046666667F);
+	public static final Vec3 TEXT_OFFSET = new Vec3(0.0D, 0.33333334F, 0.046666667F);
 	private static final int OUTLINE_RENDER_DISTANCE = Mth.square(16);
 
 	private final SignModel signModel;

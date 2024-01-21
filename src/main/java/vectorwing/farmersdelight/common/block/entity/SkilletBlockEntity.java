@@ -212,8 +212,4 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 		};
 	}
 
-	@Override
-	public void setRemoved() {
-		super.setRemoved();
-	}
 }
