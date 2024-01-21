@@ -9,6 +9,8 @@
 
 ### Fixes
 - (1.20) Creative Tab registration has been moved to server-side, so that other mods can access them for game logic;
+- Structure files for compost heaps are now format-updated with datagen, thus avoiding excessive DFU triggers on world gen. This should improve performance!
+  - Credit to malte0811, co-author of Immersive Engineering, for the StructureUpdater implementation;
 - Skillet's higher knockback is now implemented as an attribute, rather than an event, fixing a bug where the other hand's item also received this boost;
 - Skillet sounds now play at the correct stage of the damage cycle. This is noticeable on multiplayer, with some amount of latency;
 

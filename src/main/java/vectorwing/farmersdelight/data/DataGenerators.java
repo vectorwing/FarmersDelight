@@ -6,6 +6,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.data.event.GatherDataEvent;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.data.tools.StructureUpdater;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -22,6 +23,7 @@ public class DataGenerators
 		generator.addProvider(event.includeServer(), new EntityTags(generator, FarmersDelight.MODID, helper));
 		generator.addProvider(event.includeServer(), new Recipes(generator));
 		generator.addProvider(event.includeServer(), new Advancements(generator));
+		generator.addProvider(event.includeServer(), new StructureUpdater("structures/village/houses", FarmersDelight.MODID, helper, generator));
 
 		BlockStates blockStates = new BlockStates(generator, helper);
 		generator.addProvider(event.includeClient(), blockStates);
