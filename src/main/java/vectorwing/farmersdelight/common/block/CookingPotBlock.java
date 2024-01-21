@@ -189,7 +189,6 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
 		BlockEntity tileEntity = level.getBlockEntity(pos);
 		if (tileEntity instanceof CookingPotBlockEntity cookingPotEntity && cookingPotEntity.isHeated()) {

@@ -46,7 +46,6 @@ public class SteamParticle extends TextureSheetParticle
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class Factory implements ParticleProvider<SimpleParticleType>
 	{
 		private final SpriteSet spriteSet;

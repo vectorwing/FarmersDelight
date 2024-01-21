@@ -24,7 +24,6 @@ import vectorwing.farmersdelight.common.registry.ModEffects;
 
 import java.util.Random;
 
-@OnlyIn(Dist.CLIENT)
 public class ComfortHealthOverlay
 {
 	protected static int healthIconsOffset;

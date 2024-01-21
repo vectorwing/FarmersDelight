@@ -86,7 +86,6 @@ public class OrganicCompostBlock extends Block
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
 		super.animateTick(state, level, pos, random);
 		if (random.nextInt(10) == 0) {

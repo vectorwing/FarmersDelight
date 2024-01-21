@@ -7,7 +7,6 @@ import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class StarParticle extends TextureSheetParticle
 {
 	protected StarParticle(ClientLevel level, double posX, double posY, double posZ) {
@@ -56,7 +55,6 @@ public class StarParticle extends TextureSheetParticle
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class Factory implements ParticleProvider<SimpleParticleType>
 	{
 		private final SpriteSet spriteSet;
