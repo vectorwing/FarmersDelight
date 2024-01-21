@@ -5,7 +5,8 @@
 ### Updates
 - The Cooking Pot item now displays more information than before:
   - A blue bar will be shown to indicate the amount of meal servings stored, similar to how Bundles display their fullness;
-  - The tooltip will display the stored food's item sprite alongside its name.
+  - The tooltip will display the stored food's item sprite alongside its name;
+- When viewing basic crops in JEI, it will display info on where they can be found as Wild Crops.
 
 ### Fixes
 - (1.20) Creative Tab registration has been moved to server-side, so that other mods can access them for game logic;
