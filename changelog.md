@@ -12,6 +12,19 @@
 - Skillet's higher knockback is now implemented as an attribute, rather than an event, fixing a bug where the other hand's item also received this boost;
 - Skillet sounds now play at the correct stage of the damage cycle. This is noticeable on multiplayer, with some amount of latency;
 
+### Translations
+- Added a line for the Rotten Tomato entity in most langs (thanks, leagris!);
+- Added:
+  - sv_SE (thanks, Bjorkan!);
+- Updated:
+  - es_MX (thanks, CerealConJugo!);
+  - fr_FR (thanks, leagris!);
+  - ja_JP (thanks, EndilCrafter!)
+  - ru_RU (thanks, VGamerGroup!);
+  - uk_UA (thanks, unroman!);
+  - zh_CN (thanks, NumberSir);
+  - zh_TW (thanks, Lobster0228!);
+
 ## 1.2.3
 
 ### Additions
