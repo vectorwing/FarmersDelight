@@ -10,6 +10,9 @@
   "block.farmersdelight.jungle_cabinet": "Кладовая из тропического дерева",
   "block.farmersdelight.acacia_cabinet": "Акациевая кладовая",
   "block.farmersdelight.dark_oak_cabinet": "Кладовая из тёмного дуба",
+	"block.farmersdelight.mangrove_cabinet": "Мангровая кладовая",
+  "block.farmersdelight.cherry_cabinet": "Вишнёвая кладовая",
+  "block.farmersdelight.bamboo_cabinet": "Бамбуковая кладовая",
   "block.farmersdelight.crimson_cabinet": "Багровая кладовая",
   "block.farmersdelight.warped_cabinet": "Искажённая кладовая",
   "block.farmersdelight.rope": "Верёвка",
@@ -190,7 +193,7 @@
   "enchantment.farmersdelight.backstabbing": "Предательство",
   "enchantment.farmersdelight.backstabbing.desc": "Увеличивает урон при атаке цели со спины.",
 
-  "itemGroup.farmersdelight": "Farmer's Delight",
+  "itemGroup.farmersdelight": "Фермерский восторг",
 
   "farmersdelight.container.recipe_book.cookable": "Доступно к готовке",
   "farmersdelight.container.cooking_pot": "Кухонный котел",
@@ -209,7 +212,7 @@
   "farmersdelight.tooltip.hot_cocoa": "Очищает от 1 вредного эффекта",
   "farmersdelight.tooltip.melon_juice": "Восстанавливает немного здоровья",
 
-  "farmersdelight.advancement.root": "Farmer's Delight",
+  "farmersdelight.advancement.root": "Фермерский восторг",
   "farmersdelight.advancement.root.desc": "Вас ожидает целый мир разнообразных вкусов!",
 
   "farmersdelight.advancement.craft_knife": "Охота и собирательство",
@@ -285,7 +288,15 @@
   "farmersdelight.jei.decomposition.light": "Процесс ускоряется под воздействием солнечного света",
   "farmersdelight.jei.decomposition.fluid": "Процесс ускоряется посредством добавления воды",
   "farmersdelight.jei.decomposition.accelerators": "Процесс ускоряется посредством добавления активаторов (см. выше)",
+	
   "farmersdelight.jei.info.straw": "Сухое растительное волокно, используемое для создания предметов. Получают путем срезания ножом травянистых культур и растений.",
-  "farmersdelight.jei.info.knife": "Ножи - это лёгкое оружие ближнего боя. Они могут собирать солому с травы и гарантируют получение вторичного дропа с животных.",
-  "farmersdelight.jei.info.ham": "Большой кусок мяса со Свиней или Хоглинов. Для разделки понадобится что-то полегче меча..."
+  "farmersdelight.jei.info.knife": "Ножи — это лёгкое оружие ближнего боя. Они могут собирать солому с травы и гарантируют получение вторичного дропа с животных.",
+  "farmersdelight.jei.info.ham": "Большой кусок мяса со Свиней или Хоглинов. Для разделки понадобится что-то полегче меча...",
+  "farmersdelight.jei.info.wild_cabbages": "Капусту обычно можно встретить в качестве дикорастущего растения на пляжных побережьях.",
+  "farmersdelight.jei.info.wild_beetroots": "Свеклу обычно можно встретить в виде дикорастущего растения на пляжных побережьях.",
+  "farmersdelight.jei.info.wild_carrots": "Морковь обычно можно встретить в виде дикорастущего растения в умеренных местах, таких как равнины и леса.",
+  "farmersdelight.jei.info.wild_onions": "Лук обычно можно встретить как дикорастущее растение в умеренных местах, таких как равнины и леса.",
+  "farmersdelight.jei.info.wild_potatoes": "Картофель обычно можно встретить как дикорастущее растение в холодных местах, таких как горы и тайга.",
+  "farmersdelight.jei.info.wild_tomatoes": "Помидоры обычно можно встретить как дикорастущее растение в засушливых местах, таких как саванны и пустыни.",
+  "farmersdelight.jei.info.wild_rice": "Рис обычно можно встретить как дикорастущее растение в водоемах на влажных землях, таких как болота и джунгли."
 }
