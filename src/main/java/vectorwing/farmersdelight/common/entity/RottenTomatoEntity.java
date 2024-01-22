@@ -46,7 +46,6 @@ public class RottenTomatoEntity extends ThrowableItemProjectile
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
 	public void handleEntityEvent(byte id) {
 		ItemStack entityStack = new ItemStack(this.getDefaultItem());
 		if (id == 3) {

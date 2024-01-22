@@ -12,6 +12,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -35,6 +37,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -42,6 +45,7 @@ import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.SkilletBlock;
 import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
+import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.TextUtils;
@@ -49,11 +53,16 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 @SuppressWarnings("deprecation")
 public class SkilletItem extends BlockItem
 {
 	public static final Tiers SKILLET_TIER = Tiers.IRON;
+	protected static final UUID FD_ATTACK_KNOCKBACK_UUID = UUID.fromString("e56350e0-8756-464d-92f9-54289ab41e0a");
+
+	public static float localAtkStrength = 1;
+
 	private final Multimap<Attribute, AttributeModifier> toolAttributes;
 
 	public SkilletItem(Block block, Item.Properties properties) {
@@ -62,6 +71,7 @@ public class SkilletItem extends BlockItem
 		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", attackDamage, AttributeModifier.Operation.ADDITION));
 		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Tool modifier", -3.1F, AttributeModifier.Operation.ADDITION));
+		builder.put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(FD_ATTACK_KNOCKBACK_UUID, "Tool modifier", 1, AttributeModifier.Operation.ADDITION));
 		this.toolAttributes = builder.build();
 	}
 
@@ -69,26 +79,28 @@ public class SkilletItem extends BlockItem
 	public static class SkilletEvents
 	{
 		@SubscribeEvent
-		public static void onSkilletKnockback(LivingKnockBackEvent event) {
-			LivingEntity attacker = event.getEntity().getKillCredit();
-			ItemStack tool = attacker != null ? attacker.getItemInHand(InteractionHand.MAIN_HAND) : ItemStack.EMPTY;
-			if (tool.getItem() instanceof SkilletItem) {
-				event.setStrength(event.getOriginalStrength() * 2.0F);
-			}
+		public static void trackCooldown(AttackEntityEvent event) {
+			Player player = event.getEntity();
+			localAtkStrength = player.getAttackStrengthScale(0.0F);
 		}
 
 		@SubscribeEvent
-		public static void onSkilletAttack(AttackEntityEvent event) {
-			Player player = event.getEntity();
-			float attackPower = player.getAttackStrengthScale(0.0F);
-			ItemStack tool = player.getItemInHand(InteractionHand.MAIN_HAND);
-			if (tool.getItem() instanceof SkilletItem) {
-				if (attackPower > 0.8F) {
-					float pitch = 0.9F + (player.getRandom().nextFloat() * 0.2F);
-					player.getCommandSenderWorld().playSound(player, player.getX(), player.getY(), player.getZ(), ModSounds.ITEM_SKILLET_ATTACK_STRONG.get(), SoundSource.PLAYERS, 1.0F, pitch);
+		public static void playSkilletAttackSound(LivingDamageEvent event) {
+			DamageSource damageSource = event.getSource();
+			Entity attacker = damageSource.getDirectEntity();
+
+			if (!(attacker instanceof LivingEntity livingEntity)) return;
+			if (!livingEntity.getItemInHand(InteractionHand.MAIN_HAND).is(ModItems.SKILLET.get())) return;
+
+			float pitch = 0.9F + (livingEntity.getRandom().nextFloat() * 0.2F);
+			if (livingEntity instanceof Player player) {
+				if (localAtkStrength > 0.8F) {
+					player.getCommandSenderWorld().playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.ITEM_SKILLET_ATTACK_STRONG.get(), SoundSource.PLAYERS, 1.0F, pitch);
 				} else {
-					player.getCommandSenderWorld().playSound(player, player.getX(), player.getY(), player.getZ(), ModSounds.ITEM_SKILLET_ATTACK_WEAK.get(), SoundSource.PLAYERS, 0.8F, 0.9F);
+					player.getCommandSenderWorld().playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.ITEM_SKILLET_ATTACK_WEAK.get(), SoundSource.PLAYERS, 0.8F, 0.9F);
 				}
+			} else {
+				livingEntity.getCommandSenderWorld().playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), ModSounds.ITEM_SKILLET_ATTACK_STRONG.get(), SoundSource.PLAYERS, 1.0F, pitch);
 			}
 		}
 	}

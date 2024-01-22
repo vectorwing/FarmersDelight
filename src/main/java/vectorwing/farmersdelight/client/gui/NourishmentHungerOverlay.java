@@ -27,7 +27,6 @@ import java.util.Random;
  * https://www.curseforge.com/minecraft/mc-mods/appleskin
  */
 
-@OnlyIn(Dist.CLIENT)
 public class NourishmentHungerOverlay
 {
 	public static int foodIconsOffset;

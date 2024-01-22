@@ -158,7 +158,6 @@ public class StoveBlock extends BaseEntityBlock
 		builder.add(LIT, FACING);
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	@Override
 	public void animateTick(BlockState stateIn, Level level, BlockPos pos, RandomSource rand) {
 		if (stateIn.getValue(CampfireBlock.LIT)) {

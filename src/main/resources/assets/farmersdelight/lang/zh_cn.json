@@ -10,6 +10,7 @@
   "block.farmersdelight.jungle_cabinet": "丛林木厨柜",
   "block.farmersdelight.acacia_cabinet": "金合欢木厨柜",
   "block.farmersdelight.dark_oak_cabinet": "深色橡木厨柜",
+  "block.farmersdelight.mangrove_cabinet": "红树木橱柜",
   "block.farmersdelight.crimson_cabinet": "绯红木厨柜",
   "block.farmersdelight.warped_cabinet": "诡异木厨柜",
   "block.farmersdelight.rope": "绳子",
@@ -178,6 +179,8 @@
 
   "item.farmersdelight.dog_food": "狗粮",
   "item.farmersdelight.horse_feed": "马食",
+
+  "entity.farmersdelight.rotten_tomato": "烂番茄",
 
   "effect.farmersdelight.nourishment": "滋养",
   "effect.farmersdelight.comfort": "舒适",

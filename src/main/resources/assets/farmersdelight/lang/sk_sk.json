@@ -178,10 +178,12 @@
   
   "item.farmersdelight.dog_food": "Psie žrádlo",
   "item.farmersdelight.horse_feed": "Žrádlo pre koňa",
-  
+
+  "entity.farmersdelight.rotten_tomato": "Jedovatá paradajka",
+
   "effect.farmersdelight.nourishment": "Výživa",
   "effect.farmersdelight.comfort": "Saturácia",
-  
+
   "effect.farmersdelight.nourishment.0.desc": "Zabraňuje strate hladu, okrem prípadov, keď sa na liečenie poškodenia používa saturácia.",
   "effect.farmersdelight.comfort.0.desc": "Poskytuje prirodzenú regeneráciu bez ohľadu na to, aký máte hlad.",
   

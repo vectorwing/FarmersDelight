@@ -38,7 +38,7 @@ public class ModItems
 	public static final RegistryObject<Item> STOVE = ITEMS.register("stove",
 			() -> new BlockItem(ModBlocks.STOVE.get(), basicItem()));
 	public static final RegistryObject<Item> COOKING_POT = ITEMS.register("cooking_pot",
-			() -> new BlockItem(ModBlocks.COOKING_POT.get(), basicItem().stacksTo(1)));
+			() -> new CookingPotItem(ModBlocks.COOKING_POT.get(), basicItem().stacksTo(1)));
 	public static final RegistryObject<Item> SKILLET = ITEMS.register("skillet",
 			() -> new SkilletItem(ModBlocks.SKILLET.get(), basicItem().stacksTo(1)));
 	public static final RegistryObject<Item> CUTTING_BOARD = ITEMS.register("cutting_board",

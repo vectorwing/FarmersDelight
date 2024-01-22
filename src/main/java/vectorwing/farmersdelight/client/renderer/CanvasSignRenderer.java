@@ -32,7 +32,6 @@ import java.util.List;
 
 import net.minecraft.client.renderer.blockentity.SignRenderer.SignModel;
 
-@OnlyIn(Dist.CLIENT)
 public class CanvasSignRenderer extends SignRenderer
 {
 	public static final float TEXT_LINE_HEIGHT = 10;
