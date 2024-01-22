@@ -95,10 +95,12 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 				}
 			}
 			playProcessingSound(recipe.getSoundEventID(), toolStack, getStoredItem());
-			getStoredItem().shrink(1);
+			inventory.extractItem(0, 1, false);
 			if (player instanceof ServerPlayer) {
 				ModAdvancements.CUTTING_BOARD.trigger((ServerPlayer) player);
-				player.displayClientMessage(Component.literal(Integer.toString(getStoredItem().getCount())), true);
+				if (!getStoredItem().isEmpty()) {
+					player.displayClientMessage(TextUtils.getTranslation("block.cutting_board.remaining_items", getStoredItem().getCount()), true);
+				}
 			}
 		});
 

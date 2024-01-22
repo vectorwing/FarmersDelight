@@ -273,6 +273,7 @@
   "farmersdelight.block.rice.invalid_placement": "Esta planta não crescerá bem fora de água rasa.",
   "farmersdelight.block.cutting_board.invalid_item": "Isto não parece cortável...",
   "farmersdelight.block.cutting_board.invalid_tool": "Talvez com outra ferramenta...",
+  "farmersdelight.block.cutting_board.remaining_items": "%s restante...",
   "farmersdelight.block.skillet.invalid_item": "Isto não pode ser cozido...",
   "farmersdelight.item.skillet.how_to_cook": "Use sua outra mão para segurar ingredientes!",
 
