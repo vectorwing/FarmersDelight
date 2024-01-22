@@ -41,7 +41,7 @@ public class CookingPotRecipeBuilder
 	private final Item container;
 	private final Advancement.Builder advancement = Advancement.Builder.advancement();
 
-	private CookingPotRecipeBuilder(ItemLike resultIn, int count, int cookingTime, float experience, @Nullable ItemLike container) {
+	protected CookingPotRecipeBuilder(ItemLike resultIn, int count, int cookingTime, float experience, @Nullable ItemLike container) {
 		this.result = resultIn.asItem();
 		this.count = count;
 		this.cookingTime = cookingTime;
@@ -103,14 +103,20 @@ public class CookingPotRecipeBuilder
 		return this;
 	}
 
+	protected String getDefaultRecipeName(ResourceLocation resultItemKey) {
+		return FarmersDelight.MODID + ":cooking/" + resultItemKey.getPath();
+	}
+
 	public void build(Consumer<FinishedRecipe> consumerIn) {
 		ResourceLocation location = ForgeRegistries.ITEMS.getKey(result);
-		build(consumerIn, FarmersDelight.MODID + ":cooking/" + location.getPath());
+		assert location != null;
+		build(consumerIn, getDefaultRecipeName(location));
 	}
 
 	public void build(Consumer<FinishedRecipe> consumerIn, String save) {
 		ResourceLocation resourcelocation = ForgeRegistries.ITEMS.getKey(result);
-		if ((new ResourceLocation(save)).equals(resourcelocation)) {
+		assert resourcelocation != null;
+		if (save.equals(getDefaultRecipeName(resourcelocation))) {
 			throw new IllegalStateException("Cooking Recipe " + save + " should remove its 'save' argument");
 		} else {
 			build(consumerIn, new ResourceLocation(save));
