@@ -5,7 +5,7 @@ license = "MIT License"
 
 [[mods]]
 modId = "farmersdelight"
-version = "1.20.1-1.2.3b"
+version = "1.20.1-1.2.4"
 displayName = "Farmer's Delight"
 # updateJSONURL=""
 displayURL = "https://github.com/vectorwing/FarmersDelight"

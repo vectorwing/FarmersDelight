@@ -11,6 +11,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.data.loot.FDBlockLoot;
+import vectorwing.farmersdelight.data.tools.StructureUpdater;
 
 import java.util.Collections;
 import java.util.List;
@@ -36,6 +37,7 @@ public class DataGenerators
 		generator.addProvider(event.includeServer(), new LootTableProvider(output, Collections.emptySet(), List.of(
 				new LootTableProvider.SubProviderEntry(FDBlockLoot::new, LootContextParamSets.BLOCK)
 		)));
+		generator.addProvider(event.includeServer(), new StructureUpdater("structures/village/houses", FarmersDelight.MODID, helper, generator));
 
 		BlockStates blockStates = new BlockStates(output, helper);
 		generator.addProvider(event.includeClient(), blockStates);

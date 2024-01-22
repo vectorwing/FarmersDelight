@@ -10,8 +10,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.GuiOverlayManager;
@@ -23,7 +21,6 @@ import vectorwing.farmersdelight.common.registry.ModEffects;
 
 import java.util.Random;
 
-@OnlyIn(Dist.CLIENT)
 public class ComfortHealthOverlay
 {
 	protected static int healthIconsOffset;

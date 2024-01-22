@@ -183,6 +183,8 @@
   "effect.farmersdelight.nourishment": "Näring",
   "effect.farmersdelight.comfort": "Bekvämlighet",
 
+  "entity.farmersdelight.rotten_tomato": "Rutten tomat",
+
   "effect.farmersdelight.nourishment.0.desc": "Förhindrar hungerförlust, förutom när man använder mättnad för att återfå hjärtan.",
   "effect.farmersdelight.comfort.0.desc": "Ger naturlig återhämtning, oavsett hur hungrig du är.",
 

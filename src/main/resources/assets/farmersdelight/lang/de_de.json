@@ -1,6 +1,4 @@
 {
-  "entity.farmersdelight.rotten_tomato": "Verdorbene Tomate",
-
   "block.farmersdelight.stove": "Herd",
   "block.farmersdelight.cooking_pot": "Kochtopf",
   "block.farmersdelight.basket": "Korb",
@@ -181,6 +179,8 @@
 
   "item.farmersdelight.dog_food": "Hundefutter",
   "item.farmersdelight.horse_feed": "Pferdefutter",
+
+  "entity.farmersdelight.rotten_tomato": "Verdorbene Tomate",
 
   "effect.farmersdelight.nourishment": "Genährt",
   "effect.farmersdelight.comfort": "Komfort",

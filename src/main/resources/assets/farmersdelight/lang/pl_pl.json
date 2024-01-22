@@ -1,6 +1,4 @@
 {
-  "entity.farmersdelight.rotten_tomato": "Zgniły pomidor",
-
   "block.farmersdelight.stove": "Kuchenka",
   "block.farmersdelight.cooking_pot": "Garnek",
   "block.farmersdelight.basket": "Koszyk",
@@ -201,6 +199,8 @@
 
   "item.farmersdelight.dog_food": "Psia karma",
   "item.farmersdelight.horse_feed": "Pasza dla koni",
+
+  "entity.farmersdelight.rotten_tomato": "Zgniły pomidor",
 
   "effect.farmersdelight.nourishment": "Najedzenie",
   "effect.farmersdelight.comfort": "Komfort",

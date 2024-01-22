@@ -8,8 +8,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.level.GameRules;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.GuiOverlayManager;
@@ -26,7 +24,6 @@ import java.util.Random;
  * https://www.curseforge.com/minecraft/mc-mods/appleskin
  */
 
-@OnlyIn(Dist.CLIENT)
 public class NourishmentHungerOverlay
 {
 	public static int foodIconsOffset;

@@ -48,7 +48,7 @@ public class ModItems
 	public static final RegistryObject<Item> STOVE = registerWithTab("stove",
 			() -> new BlockItem(ModBlocks.STOVE.get(), basicItem()));
 	public static final RegistryObject<Item> COOKING_POT = registerWithTab("cooking_pot",
-			() -> new BlockItem(ModBlocks.COOKING_POT.get(), basicItem().stacksTo(1)));
+			() -> new CookingPotItem(ModBlocks.COOKING_POT.get(), basicItem().stacksTo(1)));
 	public static final RegistryObject<Item> SKILLET = registerWithTab("skillet",
 			() -> new SkilletItem(ModBlocks.SKILLET.get(), basicItem().stacksTo(1)));
 	public static final RegistryObject<Item> CUTTING_BOARD = registerWithTab("cutting_board",

@@ -1,6 +1,4 @@
 {
-  "entity.farmersdelight.rotten_tomato": "Çürük Domates",
-
   "block.farmersdelight.stove": "Ocak",
   "block.farmersdelight.cooking_pot": "Tencere",
   "block.farmersdelight.basket": "Sepet",
@@ -180,6 +178,8 @@
 
   "item.farmersdelight.dog_food": "Köpek Maması",
   "item.farmersdelight.horse_feed": "At Yemi",
+
+  "entity.farmersdelight.rotten_tomato": "Çürük Domates",
 
   "effect.farmersdelight.nourishment": "Beslenme",
   "effect.farmersdelight.comfort": "Konfor",

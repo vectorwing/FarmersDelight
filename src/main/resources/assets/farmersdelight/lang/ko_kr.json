@@ -1,6 +1,4 @@
 {
-  "entity.farmersdelight.rotten_tomato": "썩은 토마토",
-
   "block.farmersdelight.stove": "난로",
   "block.farmersdelight.cooking_pot": "조리용 냄비",
   "block.farmersdelight.basket": "바구니",
@@ -201,6 +199,8 @@
   
   "item.farmersdelight.dog_food": "개밥",
   "item.farmersdelight.horse_feed":  "말먹이",
+
+  "entity.farmersdelight.rotten_tomato": "썩은 토마토",
 
   "effect.farmersdelight.nourishment": "배부름",
   "effect.farmersdelight.comfort": "편안함",

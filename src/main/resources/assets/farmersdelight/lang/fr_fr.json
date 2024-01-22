@@ -1,6 +1,4 @@
 {
-  "entity.farmersdelight.rotten_tomato": "Tomate pourrie",
-
   "block.farmersdelight.stove": "Four",
   "block.farmersdelight.cooking_pot": "Marmite",
   "block.farmersdelight.basket": "Panier",
@@ -202,6 +200,8 @@
   "item.farmersdelight.dog_food": "Nourriture pour chien",
   "item.farmersdelight.horse_feed": "Nourriture pour chevaux",
 
+  "entity.farmersdelight.rotten_tomato": "Tomate pourrie",
+
   "effect.farmersdelight.nourishment": "Bien mangé",
   "effect.farmersdelight.comfort": "Confort",
 
@@ -308,5 +308,5 @@
   "farmersdelight.jei.decomposition.accelerators": "Accéléré par les activateurs adjacents (voir ci-dessous)",
   "farmersdelight.jei.info.straw": "Une fibre végétale sèche utilisée dans l'artisanat. Obtenu en coupant des cultures et des plantes herbacées avec un couteau.",
   "farmersdelight.jei.info.knife": "Les couteaux sont des armes de mêlée légères. Ils peuvent récolter de la paille sur les herbes et garantir des pièces secondaires sur les animaux.",
-  "farmersdelight.jei.info.ham": "Une grosse pièce de viande provenant d'un cochon ou d'une patte de Hoglin. Vous aurez besoin d'un objet plus léger qu'une épée pour en couper une...",
+  "farmersdelight.jei.info.ham": "Une grosse pièce de viande provenant d'un cochon ou d'une patte de Hoglin. Vous aurez besoin d'un objet plus léger qu'une épée pour en couper une..."
 }

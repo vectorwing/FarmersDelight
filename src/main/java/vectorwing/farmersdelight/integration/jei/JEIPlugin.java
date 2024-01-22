@@ -9,6 +9,7 @@ import mezz.jei.api.registration.*;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.common.block.entity.container.CookingPotMenu;
@@ -22,6 +23,7 @@ import vectorwing.farmersdelight.integration.jei.category.DecompositionRecipeCat
 import vectorwing.farmersdelight.integration.jei.resource.DecompositionDummy;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 
 @JeiPlugin
 @ParametersAreNonnullByDefault
@@ -44,6 +46,7 @@ public class JEIPlugin implements IModPlugin
 		registration.addRecipes(FDRecipeTypes.COOKING, modRecipes.getCookingPotRecipes());
 		registration.addRecipes(FDRecipeTypes.CUTTING, modRecipes.getCuttingBoardRecipes());
 		registration.addRecipes(FDRecipeTypes.DECOMPOSITION, ImmutableList.of(new DecompositionDummy()));
+
 		registration.addIngredientInfo(new ItemStack(ModItems.STRAW.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.straw"));
 		registration.addIngredientInfo(new ItemStack(ModItems.HAM.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.ham"));
 		registration.addIngredientInfo(new ItemStack(ModItems.SMOKED_HAM.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.ham"));
@@ -52,6 +55,14 @@ public class JEIPlugin implements IModPlugin
 		registration.addIngredientInfo(new ItemStack(ModItems.DIAMOND_KNIFE.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.knife"));
 		registration.addIngredientInfo(new ItemStack(ModItems.NETHERITE_KNIFE.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.knife"));
 		registration.addIngredientInfo(new ItemStack(ModItems.GOLDEN_KNIFE.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.knife"));
+
+		registration.addIngredientInfo(List.of(new ItemStack(ModItems.WILD_CABBAGES.get()), new ItemStack(ModItems.CABBAGE.get()), new ItemStack(ModItems.CABBAGE_LEAF.get())), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.wild_cabbages"));
+		registration.addIngredientInfo(List.of(new ItemStack(ModItems.WILD_BEETROOTS.get()), new ItemStack(Items.BEETROOT)), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.wild_beetroots"));
+		registration.addIngredientInfo(List.of(new ItemStack(ModItems.WILD_CARROTS.get()), new ItemStack(Items.CARROT)), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.wild_carrots"));
+		registration.addIngredientInfo(List.of(new ItemStack(ModItems.WILD_ONIONS.get()), new ItemStack(ModItems.ONION.get())), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.wild_onions"));
+		registration.addIngredientInfo(List.of(new ItemStack(ModItems.WILD_POTATOES.get()), new ItemStack(Items.POTATO)), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.wild_potatoes"));
+		registration.addIngredientInfo(List.of(new ItemStack(ModItems.WILD_TOMATOES.get()), new ItemStack(ModItems.TOMATO.get())), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.wild_tomatoes"));
+		registration.addIngredientInfo(List.of(new ItemStack(ModItems.WILD_RICE.get()), new ItemStack(ModItems.RICE.get()), new ItemStack(ModItems.RICE_PANICLE.get())), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.wild_rice"));
 	}
 
 	@Override

@@ -1,6 +1,4 @@
 {
-  "entity.farmersdelight.rotten_tomato": "Tomate Podrido",
-
   "block.farmersdelight.stove": "Parrilla",
   "block.farmersdelight.cooking_pot": "Olla para cocer",
   "block.farmersdelight.basket": "Canasta",
@@ -201,6 +199,8 @@
 
   "item.farmersdelight.dog_food": "Comida para perro",
   "item.farmersdelight.horse_feed": "Comida para caballo",
+
+  "entity.farmersdelight.rotten_tomato": "Tomate Podrido",
 
   "effect.farmersdelight.nourishment": "Nutrición",
   "effect.farmersdelight.comfort": "Bienestar",

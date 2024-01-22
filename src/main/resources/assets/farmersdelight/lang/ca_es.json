@@ -1,6 +1,4 @@
 {
-  "entity.farmersdelight.rotten_tomato": "Tomàquet podrit",
-
   "block.farmersdelight.stove": "Graella",
   "block.farmersdelight.cooking_pot": "Olla",
   "block.farmersdelight.basket": "Cistella",
@@ -179,6 +177,8 @@
   "item.farmersdelight.dog_food": "Menjar per gossos",
   "item.farmersdelight.horse_feed": "Menjar per caballs",
 
+  "entity.farmersdelight.rotten_tomato": "Tomàquet podrit",
+  
   "effect.farmersdelight.nourishment": "Nodrit",
   "effect.farmersdelight.comfort": "Benesetar",
 

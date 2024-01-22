@@ -1,6 +1,4 @@
 {
-  "entity.farmersdelight.rotten_tomato": "Гнилий помідор",
-
   "block.farmersdelight.stove": "Кухонна плита",
   "block.farmersdelight.cooking_pot": "Каструля",
   "block.farmersdelight.basket": "Кошик",
@@ -201,6 +199,8 @@
 
   "item.farmersdelight.dog_food": "Собачий корм",
   "item.farmersdelight.horse_feed": "Кінський корм",
+
+  "entity.farmersdelight.rotten_tomato": "Гнилий помідор",
 
   "effect.farmersdelight.nourishment": "Ситість",
   "effect.farmersdelight.comfort": "Затишок",

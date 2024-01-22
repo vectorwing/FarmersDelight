@@ -1,6 +1,4 @@
 {
-  "entity.farmersdelight.rotten_tomato": "腐ったトマト",
-
   "block.farmersdelight.stove": "コンロ",
   "block.farmersdelight.cooking_pot": "鍋",
   "block.farmersdelight.basket": "かご",
@@ -202,11 +200,13 @@
   "item.farmersdelight.dog_food": "ドッグフード",
   "item.farmersdelight.horse_feed": "ウマの餌",
 
+  "entity.farmersdelight.rotten_tomato": "腐ったトマト",
+
   "effect.farmersdelight.nourishment": "栄養",
   "effect.farmersdelight.comfort": "健康",
 
-  "effect.farmersdelight.nourishment.desc": "体力を回復する場合を除き、空腹ゲージの減少を防ぐ",
-  "effect.farmersdelight.comfort.desc": "空腹、移動速度低下、弱体化に対しての耐性を与える",
+  "effect.farmersdelight.nourishment.0.desc": "体力を回復する場合を除き、空腹ゲージの減少を防ぐ",
+  "effect.farmersdelight.comfort.0.desc": "空腹、移動速度低下、弱体化に対しての耐性を与える",
   "effect.farmersdelight.nourishment.description": "体力を回復する場合を除き、空腹ゲージの減少を防ぐ",
   "effect.farmersdelight.comfort.description": "空腹、移動速度低下、弱体化に対しての耐性を与える",
 
