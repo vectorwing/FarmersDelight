@@ -3,6 +3,7 @@ package vectorwing.farmersdelight.common.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -79,7 +80,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 		Optional<CuttingBoardRecipe> matchingRecipe = getMatchingRecipe(new RecipeWrapper(inventory), toolStack, player);
 
 		matchingRecipe.ifPresent(recipe -> {
-			List<ItemStack> results = recipe.rollResults(level.random, EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, toolStack));
+			List<ItemStack> results = recipe.rollResults(level.random, EnchantmentHelper.getTagEnchantmentLevel(Enchantments.BLOCK_FORTUNE, toolStack));
 			for (ItemStack resultStack : results) {
 				Direction direction = getBlockState().getValue(CuttingBoardBlock.FACING).getCounterClockWise();
 				ItemUtils.spawnItemEntity(level, resultStack.copy(),
@@ -94,9 +95,10 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 				}
 			}
 			playProcessingSound(recipe.getSoundEventID(), toolStack, getStoredItem());
-			removeItem();
+			getStoredItem().shrink(1);
 			if (player instanceof ServerPlayer) {
 				ModAdvancements.CUTTING_BOARD.trigger((ServerPlayer) player);
+				player.displayClientMessage(Component.literal(Integer.toString(getStoredItem().getCount())), true);
 			}
 		});
 
@@ -154,18 +156,18 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 			level.playSound(null, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F, sound, SoundSource.BLOCKS, volume, pitch);
 	}
 
-	public boolean addItem(ItemStack itemStack) {
-		if (isEmpty() && !itemStack.isEmpty()) {
-			inventory.setStackInSlot(0, itemStack.split(1));
+	public ItemStack addItem(ItemStack addedStack) {
+		if (isEmpty() && !addedStack.isEmpty()) {
+			ItemStack remainderStack = inventory.insertItem(0, addedStack.copy(), false);
 			isItemCarvingBoard = false;
 			inventoryChanged();
-			return true;
+			return remainderStack;
 		}
-		return false;
+		return addedStack;
 	}
 
 	public boolean carveToolOnBoard(ItemStack tool) {
-		if (addItem(tool)) {
+		if (addItem(tool) == ItemStack.EMPTY) {
 			isItemCarvingBoard = true;
 			return true;
 		}
@@ -175,9 +177,10 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 	public ItemStack removeItem() {
 		if (!isEmpty()) {
 			isItemCarvingBoard = false;
-			ItemStack item = getStoredItem().split(1);
+			ItemStack item = getStoredItem();
+			ItemStack removedStack = item.split(item.getCount());
 			inventoryChanged();
-			return item;
+			return removedStack;
 		}
 		return ItemStack.EMPTY;
 	}
@@ -216,11 +219,6 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 	private ItemStackHandler createHandler() {
 		return new ItemStackHandler()
 		{
-			@Override
-			public int getSlotLimit(int slot) {
-				return 1;
-			}
-
 			@Override
 			protected void onContentsChanged(int slot) {
 				inventoryChanged();
