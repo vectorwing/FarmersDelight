@@ -1,13 +1,19 @@
 # Changelog
 
-## 1.3.0 (BETA)
+## 1.3.0-beta1
 
-This is a BETA version! The goal is to playtest experimental changes, and gather feedback on them. Please let me know what you think of the changes below!
+**This is a BETA build!** The goal is to playtest experimental changes, and gather feedback on them. Please let me know what you think of the changes below!
 
+### Experimental changes:
 - The Cutting Board has been redesigned!
   - It can now hold a full stack of items, instead of one at a time. This allows players to process their stacks in half the time it took before;
+  - If the board's stack isn't full yet, players can top it up with more items;
+  - When cutting, the status bar will show how many items are left on the board;
   - All off-hand interaction has been removed. Placing, removing and processing items is done entirely with the main hand;
   - The `offhand_equipment` tag has been removed.
+
+### Notes
+I am considering letting players use the processing tool from the off-hand, but doing so requires more code rewrites. I may release a second build with this change added in, if I can get it to work.
 
 ## 1.2.4
 
