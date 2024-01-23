@@ -159,7 +159,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 	}
 
 	public ItemStack addItem(ItemStack addedStack) {
-		if (isEmpty() && !addedStack.isEmpty()) {
+		if (!addedStack.isEmpty()) {
 			ItemStack remainderStack = inventory.insertItem(0, addedStack.copy(), false);
 			isItemCarvingBoard = false;
 			inventoryChanged();

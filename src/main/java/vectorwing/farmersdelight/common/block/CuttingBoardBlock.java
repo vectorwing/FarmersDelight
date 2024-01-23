@@ -58,34 +58,22 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 	}
 
 	@Override
-	public RenderShape getRenderShape(BlockState state) {
-		return RenderShape.MODEL;
-	}
-
-	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		return SHAPE;
-	}
-
-	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (!(level.getBlockEntity(pos) instanceof CuttingBoardBlockEntity cuttingBoard)) {
 			return InteractionResult.PASS;
 		}
 
 		ItemStack mainHandStack = player.getMainHandItem();
-		if (cuttingBoard.isEmpty()) {
-			if (!mainHandStack.isEmpty()) {
-				ItemStack remainderStack = cuttingBoard.addItem(player.getAbilities().instabuild ? mainHandStack.copy() : mainHandStack);
-				if (remainderStack.getCount() != mainHandStack.getCount()) {
-					if (!player.isCreative()) {
-						player.setItemSlot(EquipmentSlot.MAINHAND, remainderStack);
-					}
-					level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 0.8F);
-					return InteractionResult.SUCCESS;
+		if (!mainHandStack.isEmpty()) {
+			ItemStack remainderStack = cuttingBoard.addItem(player.getAbilities().instabuild ? mainHandStack.copy() : mainHandStack);
+			if (remainderStack.getCount() != mainHandStack.getCount()) {
+				if (!player.isCreative()) {
+					player.setItemSlot(EquipmentSlot.MAINHAND, remainderStack);
 				}
+				level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 0.8F);
+				return InteractionResult.SUCCESS;
 			}
-		} else if (mainHandStack.isEmpty()) {
+		} else {
 			if (!player.isCreative()) {
 				if (!player.getInventory().add(cuttingBoard.removeItem())) {
 					Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), cuttingBoard.removeItem());
@@ -95,12 +83,12 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 			}
 			level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOD_HIT, SoundSource.BLOCKS, 0.25F, 0.5F);
 			return InteractionResult.SUCCESS;
-		} else {
-			ItemStack boardStack = cuttingBoard.getStoredItem().copy();
-			if (cuttingBoard.processStoredItemUsingTool(mainHandStack, player)) {
-				spawnCuttingParticles(level, pos, boardStack, 5);
-				return InteractionResult.SUCCESS;
-			}
+		}
+
+		ItemStack boardStack = cuttingBoard.getStoredItem().copy();
+		if (cuttingBoard.processStoredItemUsingTool(mainHandStack, player)) {
+			spawnCuttingParticles(level, pos, boardStack, 5);
+			return InteractionResult.SUCCESS;
 		}
 
 		return InteractionResult.PASS;
@@ -130,6 +118,16 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 		FluidState fluid = context.getLevel().getFluidState(context.getClickedPos());
 		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite())
 				.setValue(WATERLOGGED, fluid.getType() == Fluids.WATER);
+	}
+
+	@Override
+	public RenderShape getRenderShape(BlockState state) {
+		return RenderShape.MODEL;
+	}
+
+	@Override
+	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+		return SHAPE;
 	}
 
 	@Override
