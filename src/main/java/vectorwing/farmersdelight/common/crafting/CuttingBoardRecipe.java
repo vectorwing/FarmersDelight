@@ -93,7 +93,7 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper>
 		return this.results;
 	}
 
-	public List<ItemStack> rollResults(RandomSource rand, int fortuneLevel) {
+	public List<ItemStack> rollResults(RandomSource rand, int fortuneLevel, RecipeWrapper inventory) {
 		List<ItemStack> results = new ArrayList<>();
 		NonNullList<ChanceResult> rollableResults = getRollableResults();
 		for (ChanceResult output : rollableResults) {

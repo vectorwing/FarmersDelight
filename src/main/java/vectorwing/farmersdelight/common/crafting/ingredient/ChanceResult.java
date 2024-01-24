@@ -77,7 +77,7 @@ public class ChanceResult
 		float chance = GsonHelper.getAsFloat(json, "chance", 1);
 		ItemStack itemstack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemId)), count);
 
-		if (GsonHelper.isValidPrimitive(json, "nbt")) {
+		if (json.has("nbt")) {
 			try {
 				JsonElement element = json.get("nbt");
 				itemstack.setTag(TagParser.parseTag(
