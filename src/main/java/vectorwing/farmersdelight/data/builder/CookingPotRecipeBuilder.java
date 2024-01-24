@@ -12,6 +12,7 @@ import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -30,8 +31,7 @@ import java.util.function.Consumer;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class CookingPotRecipeBuilder
-{
+public class CookingPotRecipeBuilder implements RecipeBuilder {
 	private CookingPotRecipeBookTab tab;
 	private final List<Ingredient> ingredients = Lists.newArrayList();
 	private final Item result;
@@ -103,21 +103,24 @@ public class CookingPotRecipeBuilder
 		return this;
 	}
 
-	public void build(Consumer<FinishedRecipe> consumerIn) {
+	@Override
+	public void save(Consumer<FinishedRecipe> consumerIn) {
 		ResourceLocation location = ForgeRegistries.ITEMS.getKey(result);
-		build(consumerIn, FarmersDelight.MODID + ":cooking/" + location.getPath());
+		save(consumerIn, FarmersDelight.MODID + ":cooking/" + location.getPath());
 	}
 
-	public void build(Consumer<FinishedRecipe> consumerIn, String save) {
+	@Override
+	public void save(Consumer<FinishedRecipe> consumerIn, String save) {
 		ResourceLocation resourcelocation = ForgeRegistries.ITEMS.getKey(result);
 		if ((new ResourceLocation(save)).equals(resourcelocation)) {
 			throw new IllegalStateException("Cooking Recipe " + save + " should remove its 'save' argument");
 		} else {
-			build(consumerIn, new ResourceLocation(save));
+			save(consumerIn, new ResourceLocation(save));
 		}
 	}
 
-	public void build(Consumer<FinishedRecipe> consumerIn, ResourceLocation id) {
+	@Override
+	public void save(Consumer<FinishedRecipe> consumerIn, ResourceLocation id) {
 		if (!advancement.getCriteria().isEmpty()) {
 			advancement.parent(new ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
 					.rewards(AdvancementRewards.Builder.recipe(id))
@@ -127,6 +130,17 @@ public class CookingPotRecipeBuilder
 		} else {
 			consumerIn.accept(new CookingPotRecipeBuilder.Result(id, result, count, ingredients, cookingTime, experience, container, tab));
 		}
+	}
+	
+	// use setRecipeBookTab(CookingPotRecipeBookTab tab)
+	@Override
+	public CookingPotRecipeBuilder group(String p_176495_) {
+		return this;
+	}
+
+	@Override
+	public Item getResult() {
+		return this.result;
 	}
 
 	public static class Result implements FinishedRecipe
@@ -212,4 +226,5 @@ public class CookingPotRecipeBuilder
 			return advancementId;
 		}
 	}
+
 }
