@@ -168,13 +168,11 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 		if (!(level.getBlockEntity(pos) instanceof CuttingBoardBlockEntity cuttingBoard)) {
 			return 0;
 		}
-
 		ItemStack storedStack = cuttingBoard.getStoredItem();
 		if (!storedStack.isEmpty()) {
 			float proportions = (float) storedStack.getCount() / Math.min(cuttingBoard.getMaxStackSize(), storedStack.getMaxStackSize());
 			return Mth.floor(proportions * 14.0F) + 1;
 		}
-
 		return 0;
 	}
 
@@ -226,6 +224,7 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 
 			if (heldStack.getItem() instanceof TieredItem || heldStack.getItem() instanceof TridentItem || heldStack.getItem() instanceof ShearsItem) {
 				if (cuttingBoard.carveToolOnBoard(player.getAbilities().instabuild ? heldStack.copy() : heldStack)) {
+					// TODO: only remove from their hand if it's not on creative!
 					player.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
 					level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 0.8F);
 					event.setCanceled(true);

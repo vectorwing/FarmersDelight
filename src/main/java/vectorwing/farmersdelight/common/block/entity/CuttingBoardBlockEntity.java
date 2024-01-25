@@ -73,7 +73,6 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 
 	public boolean processStoredItemUsingTool(ItemStack toolStack, @Nullable Player player) {
 		if (level == null) return false;
-
 		if (isItemCarvingBoard) return false;
 
 		Optional<CuttingBoardRecipe> matchingRecipe = getMatchingRecipe(new RecipeWrapper(inventory), toolStack, player);
@@ -158,36 +157,23 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 	}
 
 	public ItemStack addItem(ItemStack addedStack) {
-		if (!addedStack.isEmpty()) {
-			ItemStack remainderStack = inventory.insertItem(0, addedStack.copy(), false);
-			isItemCarvingBoard = false;
-			inventoryChanged();
-			return remainderStack;
+		if (!isItemCarvingBoard) {
+			return inventory.insertItem(0, addedStack.copy(), false);
 		}
 		return addedStack;
 	}
 
-	public boolean carveToolOnBoard(ItemStack tool) {
-		if (addItem(tool) == ItemStack.EMPTY) {
+	public ItemStack removeItem() {
+		isItemCarvingBoard = false;
+		return inventory.extractItem(0, getMaxStackSize(), false);
+	}
+
+	public boolean carveToolOnBoard(ItemStack toolStack) {
+		if (addItem(toolStack) == ItemStack.EMPTY) {
 			isItemCarvingBoard = true;
 			return true;
 		}
 		return false;
-	}
-
-	public ItemStack removeItem() {
-		if (!isEmpty()) {
-			isItemCarvingBoard = false;
-			ItemStack item = getStoredItem();
-			ItemStack removedStack = item.split(item.getCount());
-			inventoryChanged();
-			return removedStack;
-		}
-		return ItemStack.EMPTY;
-	}
-
-	public IItemHandler getInventory() {
-		return inventory;
 	}
 
 	public ItemStack getStoredItem() {
@@ -195,7 +181,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 	}
 
 	public int getMaxStackSize() {
-		return getInventory().getSlotLimit(0);
+		return inventory.getSlotLimit(0);
 	}
 
 	public boolean isEmpty() {
