@@ -3,7 +3,6 @@ package vectorwing.farmersdelight.common.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -21,8 +20,8 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
@@ -126,7 +125,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 			return Optional.empty();
 		}
 		Optional<CuttingBoardRecipe> recipe = recipeList.stream().filter(cuttingRecipe -> cuttingRecipe.getTool().test(toolStack)).findFirst();
-		if (!recipe.isPresent()) {
+		if (recipe.isEmpty()) {
 			if (player != null)
 				player.displayClientMessage(TextUtils.getTranslation("block.cutting_board.invalid_tool"), true);
 			return Optional.empty();
@@ -195,6 +194,10 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 		return inventory.getStackInSlot(0);
 	}
 
+	public int getMaxStackSize() {
+		return getInventory().getSlotLimit(0);
+	}
+
 	public boolean isEmpty() {
 		return inventory.getStackInSlot(0).isEmpty();
 	}
@@ -206,7 +209,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 	@Override
 	@Nonnull
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-		if (cap.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)) {
+		if (cap.equals(ForgeCapabilities.ITEM_HANDLER)) {
 			return inputHandler.cast();
 		}
 		return super.getCapability(cap, side);

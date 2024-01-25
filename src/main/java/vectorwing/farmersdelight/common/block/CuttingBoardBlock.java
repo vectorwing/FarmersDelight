@@ -7,6 +7,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -164,10 +165,16 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 
 	@Override
 	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-		BlockEntity blockEntity = level.getBlockEntity(pos);
-		if (blockEntity instanceof CuttingBoardBlockEntity) {
-			return !((CuttingBoardBlockEntity) blockEntity).isEmpty() ? 15 : 0;
+		if (!(level.getBlockEntity(pos) instanceof CuttingBoardBlockEntity cuttingBoard)) {
+			return 0;
 		}
+
+		ItemStack storedStack = cuttingBoard.getStoredItem();
+		if (!storedStack.isEmpty()) {
+			float proportions = (float) storedStack.getCount() / Math.min(cuttingBoard.getMaxStackSize(), storedStack.getMaxStackSize());
+			return Mth.floor(proportions * 14.0F) + 1;
+		}
+
 		return 0;
 	}
 
@@ -206,20 +213,23 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 		public static void onSneakPlaceTool(PlayerInteractEvent.RightClickBlock event) {
 			Level level = event.getLevel();
 			BlockPos pos = event.getPos();
+			BlockEntity blockEntity = level.getBlockEntity(pos);
+			if (!(blockEntity instanceof CuttingBoardBlockEntity cuttingBoard)) {
+				return;
+			}
+
 			Player player = event.getEntity();
 			ItemStack heldStack = player.getMainHandItem();
-			BlockEntity tileEntity = level.getBlockEntity(event.getPos());
+			if (!player.isSecondaryUseActive() || heldStack.isEmpty()) {
+				return;
+			}
 
-			if (player.isSecondaryUseActive() && !heldStack.isEmpty() && tileEntity instanceof CuttingBoardBlockEntity) {
-				if (heldStack.getItem() instanceof TieredItem ||
-						heldStack.getItem() instanceof TridentItem ||
-						heldStack.getItem() instanceof ShearsItem) {
-					boolean success = ((CuttingBoardBlockEntity) tileEntity).carveToolOnBoard(player.getAbilities().instabuild ? heldStack.copy() : heldStack);
-					if (success) {
-						level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 0.8F);
-						event.setCanceled(true);
-						event.setCancellationResult(InteractionResult.SUCCESS);
-					}
+			if (heldStack.getItem() instanceof TieredItem || heldStack.getItem() instanceof TridentItem || heldStack.getItem() instanceof ShearsItem) {
+				if (cuttingBoard.carveToolOnBoard(player.getAbilities().instabuild ? heldStack.copy() : heldStack)) {
+					player.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
+					level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 0.8F);
+					event.setCanceled(true);
+					event.setCancellationResult(InteractionResult.SUCCESS);
 				}
 			}
 		}
