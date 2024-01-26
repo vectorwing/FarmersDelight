@@ -32,6 +32,15 @@
       }
     ]
   },
+  "block.cutting_board.carve": {
+    "subtitle": "farmersdelight.subtitles.cutting_board.carve_tool",
+    "sounds": [
+      {
+        "name": "block.wood.place",
+        "type": "event"
+      }
+    ]
+  },
   "block.cutting_board.knife": {
     "subtitle": "farmersdelight.subtitles.cutting_board.knife_cut",
     "sounds": [

@@ -13,8 +13,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -187,9 +186,11 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 	}
 
 	public boolean carveToolOnBoard(ItemStack toolStack) {
-		if (addItem(toolStack) == ItemStack.EMPTY) {
-			isItemCarvingBoard = true;
-			return true;
+		if (toolStack.getItem() instanceof TieredItem || toolStack.getItem() instanceof TridentItem || toolStack.getItem() instanceof ShearsItem) {
+			if (addItem(toolStack) == ItemStack.EMPTY) {
+				isItemCarvingBoard = true;
+				return true;
+			}
 		}
 		return false;
 	}

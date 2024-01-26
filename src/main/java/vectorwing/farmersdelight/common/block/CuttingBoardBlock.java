@@ -11,9 +11,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShearsItem;
-import net.minecraft.world.item.TieredItem;
-import net.minecraft.world.item.TridentItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -85,7 +82,6 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 			level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.BLOCK_CUTTING_BOARD_PLACE.get(), SoundSource.BLOCKS, 1.0F, 0.8F);
 			return InteractionResult.SUCCESS;
 		} else {
-			// TODO: Make this call only on server side
 			if (cuttingBoard.processStoredItemUsingTool(mainHandStack, player)) {
 				return InteractionResult.SUCCESS;
 			}
@@ -210,14 +206,13 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 				return;
 			}
 
-			if (heldStack.getItem() instanceof TieredItem || heldStack.getItem() instanceof TridentItem || heldStack.getItem() instanceof ShearsItem) {
-				if (cuttingBoard.carveToolOnBoard(player.getAbilities().instabuild ? heldStack.copy() : heldStack)) {
-					// TODO: only remove from their hand if it's not on creative!
+			if (cuttingBoard.carveToolOnBoard(player.getAbilities().instabuild ? heldStack.copy() : heldStack)) {
+				if (!player.isCreative()) {
 					player.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
-					level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 0.8F);
-					event.setCanceled(true);
-					event.setCancellationResult(InteractionResult.SUCCESS);
 				}
+				level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.BLOCK_CUTTING_BOARD_CARVE.get(), SoundSource.BLOCKS, 1.0F, 0.8F);
+				event.setCanceled(true);
+				event.setCancellationResult(InteractionResult.SUCCESS);
 			}
 		}
 	}
