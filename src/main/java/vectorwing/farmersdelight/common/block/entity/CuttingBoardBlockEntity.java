@@ -2,8 +2,11 @@ package vectorwing.farmersdelight.common.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -18,6 +21,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -92,6 +96,9 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 					toolStack.setCount(0);
 				}
 			}
+			if (level instanceof ServerLevel serverLevel) {
+				spawnCuttingParticles(serverLevel, getBlockPos(), getStoredItem());
+			}
 			playProcessingSound(recipe.getSoundEventID(), toolStack, getStoredItem());
 			inventory.extractItem(0, 1, false);
 			if (player instanceof ServerPlayer) {
@@ -149,6 +156,10 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 		} else {
 			playSound(SoundEvents.WOOD_BREAK, 1.0F, 0.8F);
 		}
+	}
+
+	public void spawnCuttingParticles(ServerLevel level, BlockPos pos, ItemStack stack) {
+		level.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, stack), pos.getX() + 0.5, pos.getY() + 0.2, pos.getZ() + 0.5, 5, 0.1, 0.1, 0.1, 0.05D);
 	}
 
 	public void playSound(SoundEvent sound, float volume, float pitch) {

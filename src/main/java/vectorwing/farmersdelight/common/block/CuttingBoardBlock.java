@@ -71,7 +71,9 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 				return InteractionResult.CONSUME;
 			}
 			ItemStack removedStack = cuttingBoard.removeItem();
-			player.getInventory().add(removedStack);
+			if (!player.isCreative()) {
+				player.getInventory().add(removedStack);
+			}
 			level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOD_HIT, SoundSource.BLOCKS, 0.25F, 0.5F);
 			return InteractionResult.SUCCESS;
 		}
@@ -86,10 +88,8 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 			level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 0.8F);
 			return InteractionResult.SUCCESS;
 		} else {
-			ItemStack boardStack = cuttingBoard.getStoredItem().copy();
 			// TODO: Make this call only on server side
 			if (cuttingBoard.processStoredItemUsingTool(mainHandStack, player)) {
-				spawnCuttingParticles(level, pos, boardStack, 5);
 				return InteractionResult.SUCCESS;
 			}
 		}
@@ -192,17 +192,6 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 	@Override
 	public BlockState mirror(BlockState state, Mirror mirror) {
 		return state.rotate(mirror.getRotation(state.getValue(FACING)));
-	}
-
-	public static void spawnCuttingParticles(Level level, BlockPos pos, ItemStack stack, int count) {
-		for (int i = 0; i < count; ++i) {
-			Vec3 vec3d = new Vec3(((double) level.random.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, ((double) level.random.nextFloat() - 0.5D) * 0.1D);
-			if (level instanceof ServerLevel) {
-				((ServerLevel) level).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, stack), pos.getX() + 0.5F, pos.getY() + 0.1F, pos.getZ() + 0.5F, 1, vec3d.x, vec3d.y + 0.05D, vec3d.z, 0.0D);
-			} else {
-				level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, stack), pos.getX() + 0.5F, pos.getY() + 0.1F, pos.getZ() + 0.5F, vec3d.x, vec3d.y + 0.05D, vec3d.z);
-			}
-		}
 	}
 
 	@Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
