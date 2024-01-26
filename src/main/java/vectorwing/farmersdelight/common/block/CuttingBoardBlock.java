@@ -65,34 +65,36 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 		}
 
 		ItemStack mainHandStack = player.getMainHandItem();
-		if (!mainHandStack.isEmpty()) {
-			ItemStack remainderStack = cuttingBoard.addItem(player.getAbilities().instabuild ? mainHandStack.copy() : mainHandStack);
-			if (remainderStack.getCount() != mainHandStack.getCount()) {
-				if (!player.isCreative()) {
-					player.setItemSlot(EquipmentSlot.MAINHAND, remainderStack);
-				}
-				level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 0.8F);
-				return InteractionResult.SUCCESS;
+
+		if (mainHandStack.isEmpty() && !cuttingBoard.isEmpty()) {
+			if (level.isClientSide) {
+				return InteractionResult.CONSUME;
 			}
-		} else {
-			if (!player.isCreative()) {
-				if (!player.getInventory().add(cuttingBoard.removeItem())) {
-					Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), cuttingBoard.removeItem());
-				}
-			} else {
-				cuttingBoard.removeItem();
-			}
+			ItemStack removedStack = cuttingBoard.removeItem();
+			player.getInventory().add(removedStack);
 			level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOD_HIT, SoundSource.BLOCKS, 0.25F, 0.5F);
 			return InteractionResult.SUCCESS;
 		}
-
-		ItemStack boardStack = cuttingBoard.getStoredItem().copy();
-		if (cuttingBoard.processStoredItemUsingTool(mainHandStack, player)) {
-			spawnCuttingParticles(level, pos, boardStack, 5);
+		if (cuttingBoard.canAddItem(mainHandStack)) {
+			if (level.isClientSide) {
+				return InteractionResult.CONSUME;
+			}
+			ItemStack remainderStack = cuttingBoard.addItem(player.getAbilities().instabuild ? mainHandStack.copy() : mainHandStack);
+			if (!player.isCreative()) {
+				player.setItemSlot(EquipmentSlot.MAINHAND, remainderStack);
+			}
+			level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 0.8F);
 			return InteractionResult.SUCCESS;
+		} else {
+			ItemStack boardStack = cuttingBoard.getStoredItem().copy();
+			// TODO: Make this call only on server side
+			if (cuttingBoard.processStoredItemUsingTool(mainHandStack, player)) {
+				spawnCuttingParticles(level, pos, boardStack, 5);
+				return InteractionResult.SUCCESS;
+			}
 		}
 
-		return InteractionResult.PASS;
+		return InteractionResult.CONSUME;
 	}
 
 	@Override

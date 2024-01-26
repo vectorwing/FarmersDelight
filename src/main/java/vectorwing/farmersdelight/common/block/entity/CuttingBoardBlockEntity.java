@@ -156,6 +156,13 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 			level.playSound(null, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F, sound, SoundSource.BLOCKS, volume, pitch);
 	}
 
+	public boolean canAddItem(ItemStack addedStack) {
+		if (isItemCarvingBoard || addedStack.isEmpty()) {
+			return false;
+		}
+		return inventory.insertItem(0, addedStack.copy(), true).getCount() != addedStack.getCount();
+	}
+
 	public ItemStack addItem(ItemStack addedStack) {
 		if (!isItemCarvingBoard) {
 			return inventory.insertItem(0, addedStack.copy(), false);
