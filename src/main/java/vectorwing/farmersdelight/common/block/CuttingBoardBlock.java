@@ -59,8 +59,8 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 
 		ItemStack mainHandStack = player.getMainHandItem();
 
-		if (mainHandStack.isEmpty() && !cuttingBoard.isEmpty()) {
-			if (level.isClientSide) {
+		if (mainHandStack.isEmpty()) {
+			if (cuttingBoard.isEmpty() || level.isClientSide) {
 				return InteractionResult.CONSUME;
 			}
 			ItemStack removedStack = cuttingBoard.removeItem();
