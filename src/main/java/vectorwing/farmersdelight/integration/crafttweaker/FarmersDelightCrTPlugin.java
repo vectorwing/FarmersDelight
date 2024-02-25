@@ -1,7 +1,5 @@
 package vectorwing.farmersdelight.integration.crafttweaker;
 
-// TODO: Uncomment this once CraftTweaker updates.
-/*
 import com.blamejared.crafttweaker.api.CraftTweakerAPI;
 import com.blamejared.crafttweaker.api.plugin.CraftTweakerPlugin;
 import com.blamejared.crafttweaker.api.plugin.ICraftTweakerPlugin;
@@ -23,4 +21,3 @@ public class FarmersDelightCrTPlugin implements ICraftTweakerPlugin {
         handler.registerRecipeComponent(RecipeHandlerUtils.COOKING_TAB_COMPONENT);
     }
 }
- */

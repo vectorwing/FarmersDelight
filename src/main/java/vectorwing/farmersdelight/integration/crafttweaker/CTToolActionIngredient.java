@@ -1,7 +1,5 @@
 package vectorwing.farmersdelight.integration.crafttweaker;
 
-// TODO: Uncomment this once CraftTweaker updates.
-/*
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
 import com.blamejared.crafttweaker.api.ingredient.IIngredient;
 import com.blamejared.crafttweaker.api.item.IItemStack;
@@ -9,7 +7,7 @@ import com.blamejared.crafttweaker.api.item.MCItemStackMutable;
 import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.common.ToolAction;
+import net.neoforged.neoforge.common.ToolAction;
 import org.openzen.zencode.java.ZenCodeType;
 import vectorwing.farmersdelight.common.crafting.ingredient.ToolActionIngredient;
 
@@ -68,4 +66,3 @@ public class CTToolActionIngredient implements IIngredient {
 
     }
 }
- */

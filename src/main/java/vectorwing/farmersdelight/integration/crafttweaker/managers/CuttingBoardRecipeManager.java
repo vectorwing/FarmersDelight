@@ -1,7 +1,5 @@
 package vectorwing.farmersdelight.integration.crafttweaker.managers;
 
-// TODO: Uncomment this once CraftTweaker updates.
-/*
 import com.blamejared.crafttweaker.api.CraftTweakerAPI;
 import com.blamejared.crafttweaker.api.CraftTweakerConstants;
 import com.blamejared.crafttweaker.api.action.recipe.ActionAddRecipe;
@@ -19,23 +17,20 @@ import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.utility.ListUtils;
 import vectorwing.farmersdelight.integration.crafttweaker.actions.ActionRemoveCuttingBoardRecipe;
- */
 
 /**
  * Farmer's Delight Cutting Board recipes.
  *
  * @docParam this <recipetype:farmersdelight:cutting>
  */
-/*
 @Document("mods/FarmersDelight/CuttingBoard")
 @ZenRegister
 @ZenCodeType.Name("mods.farmersdelight.CuttingBoard")
 public class CuttingBoardRecipeManager implements IRecipeManager
 {
- */
     /**
      * Add a cutting board recipe.
-     * The tool ingredient can be a {@link net.minecraftforge.common.ToolAction}. It will get cast implicitly.
+     * The tool ingredient can be a {@link net.neoforged.common.ToolAction}. It will get cast implicitly.
      * This allows you to work with any tool that provides that action to Forge.
      *
      * @param name    Name of the recipe to add
@@ -50,7 +45,6 @@ public class CuttingBoardRecipeManager implements IRecipeManager
      * @docParam tool <item:minecraft:string>
      * @docParam sound "minecraft:block.gravel.break"
      */
-    /*
     @ZenCodeType.Method
     public void addRecipe(String name,
                           IIngredient input,
@@ -68,7 +62,6 @@ public class CuttingBoardRecipeManager implements IRecipeManager
                         sound),
                 ""));
     }
-     */
 
     /**
      * Remove a cutting board recipe with multiple outputs.
@@ -77,7 +70,6 @@ public class CuttingBoardRecipeManager implements IRecipeManager
      *
      * @docParam outputs [<item:farmersdelight:cooked_salmon_slice> * 2, <item:minecraft:bone_meal>]
      */
-    /*
     @ZenCodeType.Method
     public void removeRecipe(IItemStack[] outputs) {
         CraftTweakerAPI.apply(new ActionRemoveCuttingBoardRecipe(this, outputs));
@@ -88,4 +80,3 @@ public class CuttingBoardRecipeManager implements IRecipeManager
         return ModRecipeTypes.CUTTING.get();
     }
 }
-     */

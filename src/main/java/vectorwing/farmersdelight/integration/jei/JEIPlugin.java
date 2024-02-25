@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.integration.jei;
 
-// TODO: Uncomment this once JEI updates.
+// TODO: Uncomment this upon updating to 1.20.4
 /*
 import com.google.common.collect.ImmutableList;
 import mezz.jei.api.IModPlugin;

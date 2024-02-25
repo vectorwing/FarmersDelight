@@ -69,14 +69,13 @@ dependencies {
     compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${mc_version}-forge-api:${jei_version}"
     // at runtime, use the full JEI jar for Forge
-    /*
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
-     */
+    runtimeOnly "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
+    */
+
     compileOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}:api"
     runtimeOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}"
 
-    /*
-    def ctDep = fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.20.1:${crafttweaker_version}")
+    def ctDep = "com.blamejared.crafttweaker:CraftTweaker-neoforge-1.20.2:${crafttweaker_version}"
     compileOnly ctDep
     runtimeOnly ctDep
 
@@ -84,10 +83,6 @@ dependencies {
     annotationProcessor "com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors:${crafttweaker_ap_version}"
     annotationProcessor "org.reflections:reflections:0.9.10" // CT dep
     annotationProcessor "com.google.code.gson:gson:2.8.7" // CT dep
-
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-
-     */
 
 }
 

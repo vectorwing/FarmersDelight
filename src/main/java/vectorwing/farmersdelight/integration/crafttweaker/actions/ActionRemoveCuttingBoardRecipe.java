@@ -1,17 +1,13 @@
 package vectorwing.farmersdelight.integration.crafttweaker.actions;
 
-// TODO: Uncomment this once CraftTweaker updates.
-/*
 import com.blamejared.crafttweaker.api.action.recipe.ActionRecipeBase;
 import com.blamejared.crafttweaker.api.item.IItemStack;
 import com.blamejared.crafttweaker.api.item.MCItemStackMutable;
 import com.blamejared.crafttweaker.api.recipe.manager.base.IRecipeManager;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
@@ -54,7 +50,7 @@ public class ActionRemoveCuttingBoardRecipe extends ActionRecipeBase
 
     @Override
     public String describe() {
-        return "Removing \"" + ForgeRegistries.RECIPE_TYPES
+        return "Removing \"" + BuiltInRegistries.RECIPE_TYPE
                 .getKey(getManager().getRecipeType()) + "\" recipes with output: " + Arrays.toString(outputs) + "\"";
     }
 
@@ -67,4 +63,3 @@ public class ActionRemoveCuttingBoardRecipe extends ActionRecipeBase
         return true;
     }
 }
- */

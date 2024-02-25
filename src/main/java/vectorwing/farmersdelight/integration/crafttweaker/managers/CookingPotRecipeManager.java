@@ -1,8 +1,5 @@
 package vectorwing.farmersdelight.integration.crafttweaker.managers;
 
-// TODO: Uncomment this once CraftTweaker updates.
-/*
-/*
 import com.blamejared.crafttweaker.api.CraftTweakerAPI;
 import com.blamejared.crafttweaker.api.CraftTweakerConstants;
 import com.blamejared.crafttweaker.api.action.recipe.ActionAddRecipe;
@@ -14,6 +11,7 @@ import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import org.openzen.zencode.java.ZenCodeType;
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
@@ -21,20 +19,17 @@ import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.utility.ListUtils;
 import vectorwing.farmersdelight.integration.crafttweaker.FarmersDelightCrTPlugin;
- */
 
 /**
  * Farmer's Delight Cooking Pot recipes.
  *
  * @docParam this <recipetype:farmersdelight:cooking>
  */
-/*
 @Document("mods/FarmersDelight/CookingPot")
 @ZenRegister
 @ZenCodeType.Name("mods.farmersdelight.CookingPot")
 public class CookingPotRecipeManager implements IRecipeManager
 {
- */
     /**
      * Add a cooking pot recipe.
      * The Cooking Tab is optional.
@@ -54,7 +49,6 @@ public class CookingPotRecipeManager implements IRecipeManager
      * @docParam experience 100
      * @docParam cookTime 400
      */
-    /*
     @ZenCodeType.Method
     public void addRecipe(String name,
                           IItemStack output,
@@ -66,17 +60,19 @@ public class CookingPotRecipeManager implements IRecipeManager
         if (!validateInputs(inputs)) return;
 
         CraftTweakerAPI.apply(new ActionAddRecipe(this,
-                new CookingPotRecipe(CraftTweakerConstants.rl(name),
-                        "",
-                        cookingPotRecipeBookTab,
-                        ListUtils.mapArrayIndexSet(inputs,
-                                IIngredient::asVanillaIngredient,
-                                NonNullList.withSize(inputs.length, Ingredient.EMPTY)),
-                        output.getInternal(),
-                        container == null ? ItemStack.EMPTY : container.getInternal(),
-                        experience,
-                        cookTime),
-                ""));
+                new RecipeHolder<>(
+                        CraftTweakerConstants.rl(name),
+                        new CookingPotRecipe(
+                                "",
+                                cookingPotRecipeBookTab,
+                                ListUtils.mapArrayIndexSet(inputs,
+                                        IIngredient::asVanillaIngredient,
+                                        NonNullList.withSize(inputs.length, Ingredient.EMPTY)),
+                                output.getInternal(),
+                                container == null ? ItemStack.EMPTY : container.getInternal(),
+                                experience,
+                                cookTime)
+                ), ""));
     }
 
     private boolean validateInputs(IIngredient[] inputs) {
@@ -95,4 +91,3 @@ public class CookingPotRecipeManager implements IRecipeManager
         return ModRecipeTypes.COOKING.get();
     }
 }
-     */
