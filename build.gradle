@@ -79,11 +79,6 @@ dependencies {
     compileOnly ctDep
     runtimeOnly ctDep
 
-    annotationProcessor ctDep
-    annotationProcessor "com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors:${crafttweaker_ap_version}"
-    annotationProcessor "org.reflections:reflections:0.9.10" // CT dep
-    annotationProcessor "com.google.code.gson:gson:2.8.7" // CT dep
-
 }
 
 tasks.named('jar', Jar).configure {
