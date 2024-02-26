@@ -14,24 +14,8 @@
     }
   ],
   "sound": "minecraft:item.axe.strip",
-  "tool": [
-    {
-      "item": "minecraft:wooden_axe"
-    },
-    {
-      "item": "minecraft:stone_axe"
-    },
-    {
-      "item": "minecraft:golden_axe"
-    },
-    {
-      "item": "minecraft:iron_axe"
-    },
-    {
-      "item": "minecraft:diamond_axe"
-    },
-    {
-      "item": "minecraft:netherite_axe"
-    }
-  ]
+  "tool": {
+    "type": "farmersdelight:tool_action",
+    "action": "axe_strip"
+  }
 }

@@ -11,24 +11,8 @@
       "item": "minecraft:clay_ball"
     }
   ],
-  "tool": [
-    {
-      "item": "minecraft:wooden_shovel"
-    },
-    {
-      "item": "minecraft:stone_shovel"
-    },
-    {
-      "item": "minecraft:golden_shovel"
-    },
-    {
-      "item": "minecraft:iron_shovel"
-    },
-    {
-      "item": "minecraft:diamond_shovel"
-    },
-    {
-      "item": "minecraft:netherite_shovel"
-    }
-  ]
+  "tool": {
+    "type": "farmersdelight:tool_action",
+    "action": "shovel_dig"
+  }
 }

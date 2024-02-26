@@ -7,6 +7,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.ToolAction;
+import net.neoforged.neoforge.common.crafting.IngredientType;
+import vectorwing.farmersdelight.common.registry.ModIngredientTypes;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -16,8 +18,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class ToolActionIngredient extends Ingredient
 {
 	public static final Codec<ToolActionIngredient> CODEC = RecordCodecBuilder.create(inst ->
-		inst.group(ToolAction.CODEC.fieldOf("action").forGetter(ToolActionIngredient::getToolAction)
-	).apply(inst, ToolActionIngredient::new));
+			inst.group(ToolAction.CODEC.fieldOf("action").forGetter(ToolActionIngredient::getToolAction)
+			).apply(inst, ToolActionIngredient::new));
 
 	public final ToolAction toolAction;
 
@@ -39,5 +41,9 @@ public class ToolActionIngredient extends Ingredient
 
 	public ToolAction getToolAction() {
 		return toolAction;
+	}
+
+	public IngredientType<?> getType() {
+		return ModIngredientTypes.TOOL_ACTION_INGREDIENT.get();
 	}
 }
