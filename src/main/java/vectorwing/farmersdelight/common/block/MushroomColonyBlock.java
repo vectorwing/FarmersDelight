@@ -1,6 +1,10 @@
 package vectorwing.farmersdelight.common.block;
 
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -34,8 +38,13 @@ import java.util.function.Supplier;
 @SuppressWarnings("deprecation")
 public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 {
+	public static final MapCodec<MushroomColonyBlock> CODEC = RecordCodecBuilder.mapCodec(
+			builder -> builder.group(BuiltInRegistries.ITEM.holderByNameCodec().fieldOf("mushroom").forGetter(block -> block.mushroomType), propertiesCodec())
+					.apply(builder, MushroomColonyBlock::new)
+	);
+
 	public static final int PLACING_LIGHT_LEVEL = 13;
-	public final Supplier<Item> mushroomType;
+	public final Holder<Item> mushroomType;
 
 	public static final IntegerProperty COLONY_AGE = BlockStateProperties.AGE_3;
 	protected static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
@@ -45,7 +54,7 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 			Block.box(1.0D, 0.0D, 1.0D, 15.0D, 14.0D, 15.0D),
 	};
 
-	public MushroomColonyBlock(Properties properties, Supplier<Item> mushroomType) {
+	public MushroomColonyBlock(Holder<Item> mushroomType, Properties properties) {
 		super(properties);
 		this.mushroomType = mushroomType;
 		this.registerDefaultState(this.stateDefinition.any().setValue(COLONY_AGE, 0));
@@ -58,6 +67,11 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 
 	public IntegerProperty getAgeProperty() {
 		return COLONY_AGE;
+	}
+
+	@Override
+	protected MapCodec<? extends BushBlock> codec() {
+		return CODEC;
 	}
 
 	@Override
@@ -109,8 +123,8 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
-		return new ItemStack(this.mushroomType.get());
+	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+		return new ItemStack(this.mushroomType.value());
 	}
 
 	@Override

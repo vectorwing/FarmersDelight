@@ -37,7 +37,7 @@ public class TextUtils
 	/**
 	 * An alternate version of PotionUtils.addPotionTooltip, that obtains the item's food-property potion effects instead.
 	 */
-	public static void addFoodEffectTooltip(ItemStack itemIn, List<Component> lores, float durationFactor) {
+	public static void addFoodEffectTooltip(ItemStack itemIn, List<Component> lores, float durationFactor, float tickRate) {
 		FoodProperties foodStats = itemIn.getItem().getFoodProperties();
 		if (foodStats == null) {
 			return;
@@ -64,7 +64,7 @@ public class TextUtils
 				}
 
 				if (instance.getDuration() > 20) {
-					iformattabletextcomponent = Component.translatable("potion.withDuration", iformattabletextcomponent, MobEffectUtil.formatDuration(instance, durationFactor));
+					iformattabletextcomponent = Component.translatable("potion.withDuration", iformattabletextcomponent, MobEffectUtil.formatDuration(instance, durationFactor, tickRate));
 				}
 
 				lores.add(iformattabletextcomponent.withStyle(effect.getCategory().getTooltipFormatting()));

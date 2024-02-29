@@ -7,7 +7,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingRecipeCodecs;
 import vectorwing.farmersdelight.common.Configuration;
 
 /**
@@ -17,9 +16,9 @@ public class ChanceResult
 {
 	public static final ChanceResult EMPTY = new ChanceResult(ItemStack.EMPTY, 1);
 	public static final Codec<ChanceResult> CODEC = RecordCodecBuilder.create(inst -> inst.group(
-				((MapCodec.MapCodecCodec<ItemStack>)CraftingRecipeCodecs.ITEMSTACK_OBJECT_CODEC).codec().forGetter(ChanceResult::getStack),
-				ExtraCodecs.strictOptionalField(Codec.FLOAT, "chance", 1.0f).forGetter(ChanceResult::getChance)
-		).apply(inst, ChanceResult::new));
+			((MapCodec.MapCodecCodec<ItemStack>) ItemStack.ITEM_WITH_COUNT_CODEC).codec().forGetter(ChanceResult::getStack),
+			ExtraCodecs.strictOptionalField(Codec.FLOAT, "chance", 1.0f).forGetter(ChanceResult::getChance)
+	).apply(inst, ChanceResult::new));
 
 	private final ItemStack stack;
 	private final float chance;

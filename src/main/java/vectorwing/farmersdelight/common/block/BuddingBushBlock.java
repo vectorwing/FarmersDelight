@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.common.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -31,6 +32,8 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 @SuppressWarnings("deprecation")
 public class BuddingBushBlock extends BushBlock
 {
+	public static final MapCodec<BuddingBushBlock> CODEC = simpleCodec(BuddingBushBlock::new);
+
 	public static final int MAX_AGE = 3;
 	public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 4);
 	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
@@ -42,6 +45,11 @@ public class BuddingBushBlock extends BushBlock
 
 	public BuddingBushBlock(Properties properties) {
 		super(properties);
+	}
+
+	@Override
+	protected MapCodec<? extends BushBlock> codec() {
+		return CODEC;
 	}
 
 	@Override
@@ -174,7 +182,7 @@ public class BuddingBushBlock extends BushBlock
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
 		return new ItemStack(getBaseSeedId());
 	}
 

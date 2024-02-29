@@ -144,7 +144,7 @@ public class SkilletItem extends BlockItem
 			if (recipe.isPresent()) {
 				ItemStack cookingStackCopy = cookingStack.copy();
 				ItemStack cookingStackUnit = cookingStackCopy.split(1);
-				skilletStack.getOrCreateTag().put("Cooking", cookingStackUnit.serializeNBT());
+				skilletStack.getOrCreateTag().put("Cooking", cookingStackUnit.save(new CompoundTag()));
 				skilletStack.getOrCreateTag().putInt("CookTimeHandheld", recipe.get().value().getCookingTime());
 				player.startUsingItem(hand);
 				player.setItemInHand(otherHand, cookingStackCopy);

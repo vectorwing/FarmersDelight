@@ -8,6 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.EffectCures;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 
@@ -27,14 +28,14 @@ public class HotCocoaItem extends DrinkableItem
 
 		while (itr.hasNext()) {
 			MobEffectInstance effect = itr.next();
-			if (effect.getEffect().getCategory().equals(MobEffectCategory.HARMFUL) && effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET))) {
+			if (effect.getEffect().getCategory().equals(MobEffectCategory.HARMFUL) && effect.getCures().contains(EffectCures.MILK)) {
 				compatibleEffects.add(effect.getEffect());
 			}
 		}
 
 		if (compatibleEffects.size() > 0) {
 			MobEffectInstance selectedEffect = consumer.getEffect(compatibleEffects.get(level.random.nextInt(compatibleEffects.size())));
-			if (selectedEffect != null && NeoForge.EVENT_BUS.post(new MobEffectEvent.Remove(consumer, selectedEffect)).isCanceled()) {
+			if (selectedEffect != null && !net.neoforged.neoforge.event.EventHooks.onEffectRemoved(consumer, selectedEffect, EffectCures.MILK)) {
 				consumer.removeEffect(selectedEffect.getEffect());
 			}
 		}

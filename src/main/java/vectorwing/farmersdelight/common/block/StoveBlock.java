@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.common.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -46,12 +47,19 @@ import java.util.Optional;
 @SuppressWarnings("deprecation")
 public class StoveBlock extends BaseEntityBlock
 {
+	public static final MapCodec<StoveBlock> CODEC = simpleCodec(StoveBlock::new);
+
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
 	public StoveBlock(BlockBehaviour.Properties properties) {
 		super(properties);
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, false));
+	}
+
+	@Override
+	protected MapCodec<? extends BaseEntityBlock> codec() {
+		return CODEC;
 	}
 
 	@Override

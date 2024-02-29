@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.common.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -18,6 +19,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
@@ -40,7 +42,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.network.NetworkHooks;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.block.state.CookingPotSupport;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
@@ -53,6 +54,8 @@ import javax.annotation.Nullable;
 @SuppressWarnings("deprecation")
 public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 {
+	public static final MapCodec<CookingPotBlock> CODEC = simpleCodec(CookingPotBlock::new);
+
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final EnumProperty<CookingPotSupport> SUPPORT = EnumProperty.create("support", CookingPotSupport.class);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -63,6 +66,11 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 	public CookingPotBlock(BlockBehaviour.Properties properties) {
 		super(properties);
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(SUPPORT, CookingPotSupport.NONE).setValue(WATERLOGGED, false));
+	}
+
+	@Override
+	protected MapCodec<? extends BaseEntityBlock> codec() {
+		return CODEC;
 	}
 
 	@Override
@@ -83,7 +91,7 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 					}
 					level.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.BLOCKS, 1.0F, 1.0F);
 				} else {
-					NetworkHooks.openScreen((ServerPlayer) player, cookingPotEntity, pos);
+					player.openMenu(cookingPotEntity, pos);
 				}
 			}
 			return InteractionResult.SUCCESS;
@@ -141,7 +149,7 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
 		ItemStack stack = super.getCloneItemStack(level, pos, state);
 		CookingPotBlockEntity cookingPotEntity = (CookingPotBlockEntity) level.getBlockEntity(pos);
 		if (cookingPotEntity != null) {

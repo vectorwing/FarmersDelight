@@ -104,7 +104,7 @@ public class DogFoodItem extends ConsumableItem
 			}
 
 			if (effectInstance.getDuration() > 20) {
-				effectDescription.append(" (").append(MobEffectUtil.formatDuration(effectInstance, 1.0F)).append(")");
+				effectDescription.append(" (").append(MobEffectUtil.formatDuration(effectInstance, 1.0F, level == null ? 20 : level.tickRateManager().tickrate())).append(")");
 			}
 
 			tooltip.add(effectDescription.withStyle(effect.getCategory().getTooltipFormatting()));

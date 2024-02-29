@@ -5,8 +5,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
@@ -35,8 +37,9 @@ public class TooltipEvents
 			for (Pair<MobEffectInstance, Float> pair : soupEffects.getEffects()) {
 				MobEffectInstance effect = pair.getFirst();
 				MutableComponent effectText = Component.translatable(effect.getDescriptionId());
+				Player player = event.getEntity();
 				if (effect.getDuration() > 20) {
-					effectText = Component.translatable("potion.withDuration", effectText, MobEffectUtil.formatDuration(effect, 1));
+					effectText = Component.translatable("potion.withDuration", effectText, MobEffectUtil.formatDuration(effect, 1, player == null ? 20 : player.level().tickRateManager().tickrate()));
 				}
 				tooltip.add(effectText.withStyle(effect.getEffect().getCategory().getTooltipFormatting()));
 			}

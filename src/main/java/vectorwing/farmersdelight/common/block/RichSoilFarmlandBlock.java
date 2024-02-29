@@ -43,7 +43,8 @@ public class RichSoilFarmlandBlock extends FarmBlock
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
 		BlockState aboveState = level.getBlockState(pos.above());
-		return super.canSurvive(state, level, pos) || aboveState.getBlock() instanceof StemGrownBlock;
+		// TODO: Stem crops won't target Rich Soil Farmland currently. NeoForge needs to re-update them with a canSustainPlant check. Revisit this later.
+		return super.canSurvive(state, level, pos) || aboveState.getBlock().equals(Blocks.MELON) || aboveState.getBlock().equals(Blocks.PUMPKIN);
 	}
 
 	@Override

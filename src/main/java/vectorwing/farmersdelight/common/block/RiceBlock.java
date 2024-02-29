@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.common.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -37,6 +38,8 @@ import javax.annotation.Nullable;
 @SuppressWarnings("deprecation")
 public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlockContainer
 {
+	public static final MapCodec<RiceBlock> CODEC = simpleCodec(RiceBlock::new);
+
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
 	public static final BooleanProperty SUPPORTING = BooleanProperty.create("supporting");
 	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
@@ -48,6 +51,11 @@ public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlo
 	public RiceBlock(Properties properties) {
 		super(properties);
 		this.registerDefaultState(this.defaultBlockState().setValue(AGE, 0).setValue(SUPPORTING, false));
+	}
+
+	@Override
+	protected MapCodec<? extends BushBlock> codec() {
+		return CODEC;
 	}
 
 	@Override
@@ -103,7 +111,7 @@ public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlo
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
 		return new ItemStack(ModItems.RICE.get());
 	}
 

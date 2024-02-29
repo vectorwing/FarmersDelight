@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.common.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
@@ -19,10 +20,17 @@ import vectorwing.farmersdelight.common.world.WildCropGeneration;
 
 public class SandyShrubBlock extends BushBlock implements IShearable, BonemealableBlock
 {
+	public static final MapCodec<SandyShrubBlock> CODEC = simpleCodec(SandyShrubBlock::new);
+
 	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 
 	public SandyShrubBlock(Properties properties) {
 		super(properties);
+	}
+
+	@Override
+	protected MapCodec<? extends BushBlock> codec() {
+		return CODEC;
 	}
 
 	@Override

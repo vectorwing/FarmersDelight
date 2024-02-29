@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.common.block;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Container;
@@ -39,11 +40,11 @@ import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
 @SuppressWarnings("deprecation")
 public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 {
+	public static final MapCodec<BasketBlock> CODEC = simpleCodec(BasketBlock::new);
+
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
 	public static final BooleanProperty ENABLED = BlockStateProperties.ENABLED;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -68,6 +69,11 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 	public BasketBlock(BlockBehaviour.Properties properties) {
 		super(properties);
 		this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.UP).setValue(WATERLOGGED, false));
+	}
+
+	@Override
+	protected MapCodec<? extends BaseEntityBlock> codec() {
+		return CODEC;
 	}
 
 	@Override

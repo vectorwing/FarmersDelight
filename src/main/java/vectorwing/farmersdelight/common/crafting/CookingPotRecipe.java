@@ -7,7 +7,6 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingRecipeCodecs;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -164,8 +163,8 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 					nonNullList.addAll(ingredients);
 					return nonNullList;
 				}, ingredients -> ingredients).forGetter(CookingPotRecipe::getIngredients),
-				CraftingRecipeCodecs.ITEMSTACK_OBJECT_CODEC.fieldOf("result").forGetter(r -> r.output),
-				ExtraCodecs.strictOptionalField(CraftingRecipeCodecs.ITEMSTACK_OBJECT_CODEC, "container", ItemStack.EMPTY).forGetter(CookingPotRecipe::getOutputContainer),
+				ItemStack.ITEM_WITH_COUNT_CODEC.fieldOf("result").forGetter(r -> r.output),
+				ExtraCodecs.strictOptionalField(ItemStack.ITEM_WITH_COUNT_CODEC, "container", ItemStack.EMPTY).forGetter(CookingPotRecipe::getOutputContainer),
 				ExtraCodecs.strictOptionalField(Codec.FLOAT, "experience", 0.0F).forGetter(CookingPotRecipe::getExperience),
 				ExtraCodecs.strictOptionalField(Codec.INT, "cookingtime", 200).forGetter(CookingPotRecipe::getCookTime)
 		).apply(inst, CookingPotRecipe::new));
@@ -180,7 +179,8 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 
 
 		@Override
-		public @Nullable CookingPotRecipe fromNetwork(FriendlyByteBuf buffer) {
+		public @Nullable
+		CookingPotRecipe fromNetwork(FriendlyByteBuf buffer) {
 			String groupIn = buffer.readUtf();
 			CookingPotRecipeBookTab tabIn = CookingPotRecipeBookTab.findByName(buffer.readUtf());
 			int i = buffer.readVarInt();

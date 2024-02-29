@@ -4,15 +4,13 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.EffectCures;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import net.minecraft.world.item.Item.Properties;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 
 public class MilkBottleItem extends DrinkableItem
 {
@@ -27,14 +25,14 @@ public class MilkBottleItem extends DrinkableItem
 
 		while (itr.hasNext()) {
 			MobEffectInstance effect = itr.next();
-			if (effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET))) {
+			if (effect.getCures().contains(EffectCures.MILK)) {
 				compatibleEffects.add(effect.getEffect());
 			}
 		}
 
 		if (compatibleEffects.size() > 0) {
 			MobEffectInstance selectedEffect = consumer.getEffect(compatibleEffects.get(level.random.nextInt(compatibleEffects.size())));
-			if (selectedEffect != null && NeoForge.EVENT_BUS.post(new MobEffectEvent.Remove(consumer, selectedEffect)).isCanceled()) {
+			if (selectedEffect != null && !net.neoforged.neoforge.event.EventHooks.onEffectRemoved(consumer, selectedEffect, EffectCures.MILK)) {
 				consumer.removeEffect(selectedEffect.getEffect());
 			}
 		}

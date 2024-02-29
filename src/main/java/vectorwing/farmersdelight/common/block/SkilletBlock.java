@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.common.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -17,6 +18,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
@@ -43,6 +45,8 @@ import javax.annotation.Nullable;
 @SuppressWarnings("deprecation")
 public class SkilletBlock extends BaseEntityBlock
 {
+	public static final MapCodec<SkilletBlock> CODEC = simpleCodec(SkilletBlock::new);
+
 	public static final int MINIMUM_COOKING_TIME = 60;
 
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
@@ -54,6 +58,11 @@ public class SkilletBlock extends BaseEntityBlock
 	public SkilletBlock(BlockBehaviour.Properties properties) {
 		super(properties);
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(SUPPORT, false));
+	}
+
+	@Override
+	protected MapCodec<? extends BaseEntityBlock> codec() {
+		return CODEC;
 	}
 
 	@Override
@@ -128,7 +137,7 @@ public class SkilletBlock extends BaseEntityBlock
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
 		ItemStack stack = super.getCloneItemStack(level, pos, state);
 		SkilletBlockEntity skilletEntity = (SkilletBlockEntity) level.getBlockEntity(pos);
 		CompoundTag nbt = new CompoundTag();

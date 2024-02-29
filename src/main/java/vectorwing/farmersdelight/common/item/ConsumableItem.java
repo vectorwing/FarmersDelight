@@ -94,7 +94,7 @@ public class ConsumableItem extends Item
 				tooltip.add(textEmpty.withStyle(ChatFormatting.BLUE));
 			}
 			if (this.hasFoodEffectTooltip) {
-				TextUtils.addFoodEffectTooltip(stack, tooltip, 1.0F);
+				TextUtils.addFoodEffectTooltip(stack, tooltip, 1.0F, level == null ? 20 : level.tickRateManager().tickrate());
 			}
 		}
 	}
