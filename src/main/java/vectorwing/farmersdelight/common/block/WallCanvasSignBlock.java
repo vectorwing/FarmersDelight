@@ -23,7 +23,7 @@ public class WallCanvasSignBlock extends WallSignBlock implements CanvasSign
 	private final DyeColor backgroundColor;
 
 	public WallCanvasSignBlock(Properties properties, @Nullable DyeColor backgroundColor) {
-		super(properties, WoodType.SPRUCE);
+		super(WoodType.SPRUCE, properties);
 		this.backgroundColor = backgroundColor;
 	}
 

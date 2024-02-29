@@ -24,17 +24,18 @@ import net.minecraft.world.inventory.RecipeCraftingHolder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.capabilities.Capabilities;
-import net.neoforged.neoforge.common.capabilities.Capability;
-import net.neoforged.neoforge.common.util.LazyOptional;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.CookingPotBlock;
 import vectorwing.farmersdelight.common.block.entity.container.CookingPotMenu;
 import vectorwing.farmersdelight.common.block.entity.inventory.CookingPotItemHandler;
@@ -47,7 +48,6 @@ import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +55,7 @@ import java.util.Optional;
 
 import static java.util.Map.entry;
 
+@Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProvider, HeatableBlockEntity, Nameable, RecipeCraftingHolder
 {
 	public static final int MEAL_DISPLAY_SLOT = 6;
@@ -81,8 +82,8 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	);
 
 	private final ItemStackHandler inventory;
-	private final LazyOptional<IItemHandler> inputHandler;
-	private final LazyOptional<IItemHandler> outputHandler;
+	private final IItemHandler inputHandler;
+	private final IItemHandler outputHandler;
 
 	private int cookTime;
 	private int cookTimeTotal;
@@ -98,12 +99,26 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	public CookingPotBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntityTypes.COOKING_POT.get(), pos, state);
 		this.inventory = createHandler();
-		this.inputHandler = LazyOptional.of(() -> new CookingPotItemHandler(inventory, Direction.UP));
-		this.outputHandler = LazyOptional.of(() -> new CookingPotItemHandler(inventory, Direction.DOWN));
+		this.inputHandler = new CookingPotItemHandler(inventory, Direction.UP);
+		this.outputHandler = new CookingPotItemHandler(inventory, Direction.DOWN);
 		this.mealContainerStack = ItemStack.EMPTY;
 		this.cookingPotData = createIntArray();
 		this.usedRecipeTracker = new Object2IntOpenHashMap<>();
 		this.checkNewRecipe = true;
+	}
+
+	@SubscribeEvent
+	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+		event.registerBlockEntity(
+				Capabilities.ItemHandler.BLOCK,
+				ModBlockEntityTypes.COOKING_POT.get(),
+				(be, context) -> {
+					if (context == Direction.UP) {
+						return be.inputHandler;
+					}
+					return be.outputHandler;
+				}
+		);
 	}
 
 	public static ItemStack getMealFromItem(ItemStack cookingPotStack) {
@@ -177,7 +192,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		super.saveAdditional(compound);
 		compound.putInt("CookTime", cookTime);
 		compound.putInt("CookTimeTotal", cookTimeTotal);
-		compound.put("Container", mealContainerStack.serializeNBT());
+		compound.put("Container", mealContainerStack.save(new CompoundTag()));
 		if (customName != null) {
 			compound.putString("CustomName", Component.Serializer.toJson(customName));
 		}
@@ -189,7 +204,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 	private CompoundTag writeItems(CompoundTag compound) {
 		super.saveAdditional(compound);
-		compound.put("Container", mealContainerStack.serializeNBT());
+		compound.put("Container", mealContainerStack.save(new CompoundTag()));
 		compound.put("Inventory", inventory.serializeNBT());
 		return compound;
 	}
@@ -204,7 +219,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		if (customName != null) {
 			compound.putString("CustomName", Component.Serializer.toJson(customName));
 		}
-		compound.put("Container", mealContainerStack.serializeNBT());
+		compound.put("Container", mealContainerStack.save(new CompoundTag()));
 		compound.put("Inventory", drops.serializeNBT());
 		return compound;
 	}
@@ -270,7 +285,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 					.get(lastRecipeID);
 			if (recipe.value().matches(inventoryWrapper, level)) {
 				return Optional.of(recipe);
-				}
+			}
 			if (ItemStack.isSameItem(recipe.value().getResultItem(this.level.registryAccess()), getMeal())) {
 				return Optional.empty();
 			}
@@ -517,23 +532,8 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	}
 
 	@Override
-	@Nonnull
-	public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-		if (cap.equals(Capabilities.ITEM_HANDLER)) {
-			if (side == null || side.equals(Direction.UP)) {
-				return inputHandler.cast();
-			} else {
-				return outputHandler.cast();
-			}
-		}
-		return super.getCapability(cap, side);
-	}
-
-	@Override
 	public void setRemoved() {
 		super.setRemoved();
-		inputHandler.invalidate();
-		outputHandler.invalidate();
 	}
 
 	@Override

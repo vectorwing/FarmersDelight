@@ -21,7 +21,7 @@ public class WallHangingCanvasSignBlock extends WallHangingSignBlock implements 
 	private final DyeColor backgroundColor;
 
 	public WallHangingCanvasSignBlock(Properties properties, @Nullable DyeColor backgroundColor) {
-		super(properties, WoodType.SPRUCE);
+		super(WoodType.SPRUCE, properties);
 		this.backgroundColor = backgroundColor;
 	}
 
