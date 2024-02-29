@@ -32,7 +32,7 @@ public class DataGenerators
 		generator.addProvider(event.includeServer(), blockTags);
 		generator.addProvider(event.includeServer(), new ItemTags(output, lookupProvider, blockTags.contentsGetter(), helper));
 		generator.addProvider(event.includeServer(), new EntityTags(output, lookupProvider, helper));
-		generator.addProvider(event.includeServer(), new Recipes(output, lookupProvider));
+		generator.addProvider(event.includeServer(), new Recipes(output));
 		generator.addProvider(event.includeServer(), new Advancements(output, lookupProvider, helper));
 		generator.addProvider(event.includeServer(), new LootTableProvider(output, Collections.emptySet(), List.of(
 				new LootTableProvider.SubProviderEntry(FDBlockLoot::new, LootContextParamSets.BLOCK)

@@ -1,7 +1,5 @@
 package vectorwing.farmersdelight.data.recipe;
 
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -15,8 +13,6 @@ import vectorwing.farmersdelight.common.crafting.ingredient.ToolActionIngredient
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
-
-import java.util.function.Consumer;
 
 public class CuttingRecipes
 {
@@ -195,7 +191,7 @@ public class CuttingRecipes
 		stripLogForBark(output, Items.CHERRY_WOOD, Items.STRIPPED_CHERRY_WOOD);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BAMBOO_BLOCK), new ToolActionIngredient(ToolActions.AXE_STRIP), Items.STRIPPED_BAMBOO_BLOCK)
 				.addResult(ModItems.STRAW.get())
-				.addSound(BuiltInRegistries.SOUND_EVENT.getKey(SoundEvents.AXE_STRIP).toString()).build(output);
+				.addSound(SoundEvents.AXE_STRIP).build(output);
 		stripLogForBark(output, Items.CRIMSON_STEM, Items.STRIPPED_CRIMSON_STEM);
 		stripLogForBark(output, Items.CRIMSON_HYPHAE, Items.STRIPPED_CRIMSON_HYPHAE);
 		stripLogForBark(output, Items.WARPED_STEM, Items.STRIPPED_WARPED_STEM);
@@ -257,6 +253,6 @@ public class CuttingRecipes
 	private static void stripLogForBark(RecipeOutput output, ItemLike log, ItemLike strippedLog) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(log), new ToolActionIngredient(ToolActions.AXE_STRIP), strippedLog)
 				.addResult(ModItems.TREE_BARK.get())
-				.addSound(BuiltInRegistries.SOUND_EVENT.getKey(SoundEvents.AXE_STRIP).toString()).build(output);
+				.addSound(SoundEvents.AXE_STRIP).build(output);
 	}
 }

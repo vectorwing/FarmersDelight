@@ -1,34 +1,33 @@
 package vectorwing.farmersdelight.data.builder;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.Criterion;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
+import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
-import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class CuttingBoardRecipeBuilder
+public class CuttingBoardRecipeBuilder implements RecipeBuilder
 {
-	private final List<ChanceResult> results = new ArrayList<>(4);
+	private final NonNullList<ChanceResult> results = NonNullList.createWithCapacity(4);
 	private final Ingredient ingredient;
 	private final Ingredient tool;
-	private String soundEventID;
+	private SoundEvent soundEvent;
 
 	private CuttingBoardRecipeBuilder(Ingredient ingredient, Ingredient tool, ItemLike mainResult, int count, float chance) {
 		this.results.add(new ChanceResult(new ItemStack(mainResult.asItem(), count), chance));
@@ -75,18 +74,33 @@ public class CuttingBoardRecipeBuilder
 		return this;
 	}
 
-	public CuttingBoardRecipeBuilder addSound(String soundEventID) {
-		this.soundEventID = soundEventID;
+	public CuttingBoardRecipeBuilder addSound(SoundEvent soundEvent) {
+		this.soundEvent = soundEvent;
 		return this;
 	}
 
-	public void build(RecipeOutput outputIn) {
-		ResourceLocation location = BuiltInRegistries.ITEM.getKey(this.ingredient.getItems()[0].getItem());
-		this.build(outputIn, FarmersDelight.MODID + ":cutting/" + location.getPath());
+	@Override
+	public RecipeBuilder unlockedBy(String p_176496_, Criterion<?> p_301065_) {
+		return this; // No-op - Cutting Board has no recipe book unlocks
+	}
+
+	@Override
+	public RecipeBuilder group(@Nullable String p_176495_) {
+		return this;
+	}
+
+	@Override
+	public Item getResult() {
+		return this.ingredient.getItems()[0].getItem();
+	}
+
+	public void build(RecipeOutput output) {
+		ResourceLocation location = BuiltInRegistries.ITEM.getKey(getResult());
+		save(output, new ResourceLocation(FarmersDelight.MODID, location.getPath()));
 	}
 
 	public void build(RecipeOutput outputIn, String save) {
-		ResourceLocation resourcelocation = BuiltInRegistries.ITEM.getKey(this.ingredient.getItems()[0].getItem());
+		ResourceLocation resourcelocation = BuiltInRegistries.ITEM.getKey(getResult());
 		if ((new ResourceLocation(save)).equals(resourcelocation)) {
 			throw new IllegalStateException("Cutting Recipe " + save + " should remove its 'save' argument");
 		} else {
@@ -94,66 +108,78 @@ public class CuttingBoardRecipeBuilder
 		}
 	}
 
-	public void build(RecipeOutput outputIn, ResourceLocation id) {
-		outputIn.accept(new CuttingBoardRecipeBuilder.Result(id, this.ingredient, this.tool, this.results, this.soundEventID == null ? "" : this.soundEventID));
+	public void build(RecipeOutput output, ResourceLocation id) {
+		save(output, id);
 	}
 
-	public static class Result implements FinishedRecipe
-	{
-		private final ResourceLocation id;
-		private final Ingredient ingredient;
-		private final Ingredient tool;
-		private final List<ChanceResult> results;
-		private final String soundEventID;
-
-		public Result(ResourceLocation idIn, Ingredient ingredientIn, Ingredient toolIn, List<ChanceResult> resultsIn, String soundEventIDIn) {
-			this.id = idIn;
-			this.ingredient = ingredientIn;
-			this.tool = toolIn;
-			this.results = resultsIn;
-			this.soundEventID = soundEventIDIn;
-		}
-
-		@Override
-		public void serializeRecipeData(JsonObject json) {
-			JsonArray arrayIngredients = new JsonArray();
-			arrayIngredients.add(this.ingredient.toJson(true));
-			json.add("ingredients", arrayIngredients);
-
-			json.add("tool", this.tool.toJson(true));
-
-			JsonArray arrayResults = new JsonArray();
-			for (ChanceResult result : this.results) {
-				JsonObject jsonobject = new JsonObject();
-				jsonobject.addProperty("item", BuiltInRegistries.ITEM.getKey(result.getStack().getItem()).toString());
-				if (result.getStack().getCount() > 1) {
-					jsonobject.addProperty("count", result.getStack().getCount());
-				}
-				if (result.getChance() < 1) {
-					jsonobject.addProperty("chance", result.getChance());
-				}
-				arrayResults.add(jsonobject);
-			}
-			json.add("result", arrayResults);
-			if (!this.soundEventID.isEmpty()) {
-				json.addProperty("sound", this.soundEventID);
-			}
-		}
-
-		@Override
-		public ResourceLocation id() {
-			return this.id;
-		}
-
-		@Override
-		public RecipeSerializer<?> type() {
-			return ModRecipeSerializers.CUTTING.get();
-		}
-
-		@Nullable
-		@Override
-		public AdvancementHolder advancement() {
-			return null;
-		}
+	@Override
+	public void save(RecipeOutput output, ResourceLocation id) {
+		CuttingBoardRecipe recipe = new CuttingBoardRecipe(
+				"",
+				this.ingredient,
+				this.tool,
+				this.results,
+				Optional.of(this.soundEvent)
+		);
+		output.accept(id.withPrefix("cutting/"), recipe, null);
 	}
+
+//	public static class Result implements FinishedRecipe
+//	{
+//		private final ResourceLocation id;
+//		private final Ingredient ingredient;
+//		private final Ingredient tool;
+//		private final List<ChanceResult> results;
+//		private final String soundEventID;
+//
+//		public Result(ResourceLocation idIn, Ingredient ingredientIn, Ingredient toolIn, List<ChanceResult> resultsIn, String soundEventIDIn) {
+//			this.id = idIn;
+//			this.ingredient = ingredientIn;
+//			this.tool = toolIn;
+//			this.results = resultsIn;
+//			this.soundEventID = soundEventIDIn;
+//		}
+//
+//		@Override
+//		public void serializeRecipeData(JsonObject json) {
+//			JsonArray arrayIngredients = new JsonArray();
+//			arrayIngredients.add(this.ingredient.toJson(true));
+//			json.add("ingredients", arrayIngredients);
+//
+//			json.add("tool", this.tool.toJson(true));
+//
+//			JsonArray arrayResults = new JsonArray();
+//			for (ChanceResult result : this.results) {
+//				JsonObject jsonobject = new JsonObject();
+//				jsonobject.addProperty("item", BuiltInRegistries.ITEM.getKey(result.getStack().getItem()).toString());
+//				if (result.getStack().getCount() > 1) {
+//					jsonobject.addProperty("count", result.getStack().getCount());
+//				}
+//				if (result.getChance() < 1) {
+//					jsonobject.addProperty("chance", result.getChance());
+//				}
+//				arrayResults.add(jsonobject);
+//			}
+//			json.add("result", arrayResults);
+//			if (!this.soundEventID.isEmpty()) {
+//				json.addProperty("sound", this.soundEventID);
+//			}
+//		}
+//
+//		@Override
+//		public ResourceLocation id() {
+//			return this.id;
+//		}
+//
+//		@Override
+//		public RecipeSerializer<?> type() {
+//			return ModRecipeSerializers.CUTTING.get();
+//		}
+//
+//		@Nullable
+//		@Override
+//		public AdvancementHolder advancement() {
+//			return null;
+//		}
+//	}
 }

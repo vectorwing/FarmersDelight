@@ -2,14 +2,11 @@ package vectorwing.farmersdelight.client.recipebook;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import vectorwing.farmersdelight.FarmersDelight;
 
 import java.util.EnumSet;
 
 public enum CookingPotRecipeBookTab
 {
-
 	MEALS("meals"),
 	DRINKS("drinks"),
 	MISC("misc");
