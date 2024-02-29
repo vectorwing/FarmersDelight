@@ -33,5 +33,5 @@
       "farmersdelight:cooking/noodle_soup"
     ]
   },
-  "sends_telemetry_event": true
+  "sends_telemetry_event": false
 }

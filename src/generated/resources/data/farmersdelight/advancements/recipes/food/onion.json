@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_onion_crate",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_onion_crate"
     ]
   ],
   "rewards": {

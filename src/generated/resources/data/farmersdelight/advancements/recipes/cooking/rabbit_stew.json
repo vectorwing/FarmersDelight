@@ -35,5 +35,5 @@
       "farmersdelight:cooking/rabbit_stew"
     ]
   },
-  "sends_telemetry_event": true
+  "sends_telemetry_event": false
 }

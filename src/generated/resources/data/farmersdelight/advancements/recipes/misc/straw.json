@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_straw_bale",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_straw_bale"
     ]
   ],
   "rewards": {

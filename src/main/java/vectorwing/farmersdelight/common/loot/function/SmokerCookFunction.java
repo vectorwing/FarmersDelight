@@ -2,9 +2,12 @@ package vectorwing.farmersdelight.common.loot.function;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmokingRecipe;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -15,6 +18,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModLootFunctions;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 import java.util.Optional;
 
 @MethodsReturnNonnullByDefault
@@ -22,8 +26,11 @@ import java.util.Optional;
 public class SmokerCookFunction extends LootItemConditionalFunction
 {
 	public static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "smoker_cook");
+	public static final Codec<SmokerCookFunction> CODEC = RecordCodecBuilder.create(
+			p_298131_ -> commonFields(p_298131_).apply(p_298131_, SmokerCookFunction::new)
+	);
 
-	protected SmokerCookFunction(LootItemCondition[] conditionsIn) {
+	protected SmokerCookFunction(List<LootItemCondition> conditionsIn) {
 		super(conditionsIn);
 	}
 
@@ -32,10 +39,10 @@ public class SmokerCookFunction extends LootItemConditionalFunction
 		if (stack.isEmpty()) {
 			return stack;
 		} else {
-			Optional<SmokingRecipe> recipe = context.getLevel().getRecipeManager().getAllRecipesFor(RecipeType.SMOKING).stream()
-					.filter(r -> r.getIngredients().get(0).test(stack)).findFirst();
+			Optional<RecipeHolder<SmokingRecipe>> recipe = context.getLevel().getRecipeManager().getAllRecipesFor(RecipeType.SMOKING).stream()
+					.filter(r -> r.value().getIngredients().get(0).test(stack)).findFirst();
 			if (recipe.isPresent()) {
-				ItemStack result = recipe.get().getResultItem(context.getLevel().registryAccess()).copy();
+				ItemStack result = recipe.get().value().getResultItem(context.getLevel().registryAccess()).copy();
 				result.setCount(result.getCount() * stack.getCount());
 				return result;
 			} else {
@@ -47,13 +54,5 @@ public class SmokerCookFunction extends LootItemConditionalFunction
 	@Override
 	public LootItemFunctionType getType() {
 		return ModLootFunctions.SMOKER_COOK.get();
-	}
-
-	public static class Serializer extends LootItemConditionalFunction.Serializer<SmokerCookFunction>
-	{
-		@Override
-		public SmokerCookFunction deserialize(JsonObject _object, JsonDeserializationContext _context, LootItemCondition[] conditionsIn) {
-			return new SmokerCookFunction(conditionsIn);
-		}
 	}
 }

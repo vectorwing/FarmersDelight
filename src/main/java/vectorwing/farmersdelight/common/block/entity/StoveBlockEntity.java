@@ -11,6 +11,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -19,7 +20,7 @@ import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.common.block.StoveBlock;
 import vectorwing.farmersdelight.common.mixin.accessor.RecipeManagerAccessor;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
@@ -125,9 +126,9 @@ public class StoveBlockEntity extends SyncedBlockEntity
 				++cookingTimes[i];
 				if (cookingTimes[i] >= cookingTimesTotal[i]) {
 					Container inventoryWrapper = new SimpleContainer(stoveStack);
-					Optional<CampfireCookingRecipe> recipe = getMatchingRecipe(inventoryWrapper, i);
+					Optional<RecipeHolder<CampfireCookingRecipe>> recipe = getMatchingRecipe(inventoryWrapper, i);
 					if (recipe.isPresent()) {
-						ItemStack resultStack = recipe.get().getResultItem(level.registryAccess());
+						ItemStack resultStack = recipe.get().value().getResultItem(level.registryAccess());
 						if (!resultStack.isEmpty()) {
 							ItemUtils.spawnItemEntity(level, resultStack.copy(),
 									worldPosition.getX() + 0.5, worldPosition.getY() + 1.0, worldPosition.getZ() + 0.5,
@@ -155,14 +156,14 @@ public class StoveBlockEntity extends SyncedBlockEntity
 		return -1;
 	}
 
-	public boolean addItem(ItemStack itemStackIn, CampfireCookingRecipe recipe, int slot) {
+	public boolean addItem(ItemStack itemStackIn, RecipeHolder<CampfireCookingRecipe> recipe, int slot) {
 		if (0 <= slot && slot < inventory.getSlots()) {
 			ItemStack slotStack = inventory.getStackInSlot(slot);
 			if (slotStack.isEmpty()) {
-				cookingTimesTotal[slot] = recipe.getCookingTime();
+				cookingTimesTotal[slot] = recipe.value().getCookingTime();
 				cookingTimes[slot] = 0;
 				inventory.setStackInSlot(slot, itemStackIn.split(1));
-				lastRecipeIDs[slot] = recipe.getId();
+				lastRecipeIDs[slot] = recipe.id();
 				inventoryChanged();
 				return true;
 			}
@@ -170,15 +171,15 @@ public class StoveBlockEntity extends SyncedBlockEntity
 		return false;
 	}
 
-	public Optional<CampfireCookingRecipe> getMatchingRecipe(Container recipeWrapper, int slot) {
+	public Optional<RecipeHolder<CampfireCookingRecipe>> getMatchingRecipe(Container recipeWrapper, int slot) {
 		if (level == null) return Optional.empty();
 
 		if (lastRecipeIDs[slot] != null) {
-			Recipe<Container> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
+			RecipeHolder<CampfireCookingRecipe> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
 					.getRecipeMap(RecipeType.CAMPFIRE_COOKING)
 					.get(lastRecipeIDs[slot]);
-			if (recipe instanceof CampfireCookingRecipe && recipe.matches(recipeWrapper, level)) {
-				return Optional.of((CampfireCookingRecipe) recipe);
+			if (recipe.value().matches(recipeWrapper, level)) {
+				return Optional.of(recipe);
 			}
 		}
 

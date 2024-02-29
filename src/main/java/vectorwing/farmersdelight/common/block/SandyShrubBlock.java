@@ -14,9 +14,10 @@ import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.IShearable;
 import vectorwing.farmersdelight.common.world.WildCropGeneration;
 
-public class SandyShrubBlock extends BushBlock implements net.minecraftforge.common.IForgeShearable, BonemealableBlock
+public class SandyShrubBlock extends BushBlock implements IShearable, BonemealableBlock
 {
 	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 
@@ -35,7 +36,7 @@ public class SandyShrubBlock extends BushBlock implements net.minecraftforge.com
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
 		return true;
 	}
 

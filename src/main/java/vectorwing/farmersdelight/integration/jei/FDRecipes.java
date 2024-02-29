@@ -1,5 +1,7 @@
 package vectorwing.farmersdelight.integration.jei;
 
+// TODO: Uncomment this once JEI updates.
+/*
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -32,3 +34,4 @@ public class FDRecipes
 		return recipeManager.getAllRecipesFor(ModRecipeTypes.CUTTING.get()).stream().toList();
 	}
 }
+ */

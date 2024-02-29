@@ -5,20 +5,24 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.CriterionTriggerInstance;
-import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
@@ -39,7 +43,7 @@ public class CookingPotRecipeBuilder
 	private final int cookingTime;
 	private final float experience;
 	private final Item container;
-	private final Advancement.Builder advancement = Advancement.Builder.advancement();
+	private final Advancement.Builder advancement = Advancement.Builder.recipeAdvancement();
 
 	private CookingPotRecipeBuilder(ItemLike resultIn, int count, int cookingTime, float experience, @Nullable ItemLike container) {
 		this.result = resultIn.asItem();
@@ -84,7 +88,7 @@ public class CookingPotRecipeBuilder
 		return this;
 	}
 
-	public CookingPotRecipeBuilder unlockedBy(String criterionName, CriterionTriggerInstance criterionTrigger) {
+	public CookingPotRecipeBuilder unlockedBy(String criterionName, Criterion<?> criterionTrigger) {
 		advancement.addCriterion(criterionName, criterionTrigger);
 		return this;
 	}
@@ -103,29 +107,29 @@ public class CookingPotRecipeBuilder
 		return this;
 	}
 
-	public void build(Consumer<FinishedRecipe> consumerIn) {
-		ResourceLocation location = ForgeRegistries.ITEMS.getKey(result);
-		build(consumerIn, FarmersDelight.MODID + ":cooking/" + location.getPath());
+	public void build(RecipeOutput outputIn) {
+		ResourceLocation location = BuiltInRegistries.ITEM.getKey(result);
+		build(outputIn, FarmersDelight.MODID + ":cooking/" + location.getPath());
 	}
 
-	public void build(Consumer<FinishedRecipe> consumerIn, String save) {
-		ResourceLocation resourcelocation = ForgeRegistries.ITEMS.getKey(result);
+	public void build(RecipeOutput outputIn, String save) {
+		ResourceLocation resourcelocation = BuiltInRegistries.ITEM.getKey(result);
 		if ((new ResourceLocation(save)).equals(resourcelocation)) {
 			throw new IllegalStateException("Cooking Recipe " + save + " should remove its 'save' argument");
 		} else {
-			build(consumerIn, new ResourceLocation(save));
+			build(outputIn, new ResourceLocation(save));
 		}
 	}
 
-	public void build(Consumer<FinishedRecipe> consumerIn, ResourceLocation id) {
-		if (!advancement.getCriteria().isEmpty()) {
-			advancement.parent(new ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
+	public void build(RecipeOutput outputIn, ResourceLocation id) {
+		if (!advancement.criteria.buildOrThrow().isEmpty()) {
+			advancement.parent(RecipeBuilder.ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
 					.rewards(AdvancementRewards.Builder.recipe(id))
-					.requirements(RequirementsStrategy.OR);
+					.requirements(AdvancementRequirements.Strategy.OR);
 			ResourceLocation advancementId = new ResourceLocation(id.getNamespace(), "recipes/" + id.getPath());
-			consumerIn.accept(new CookingPotRecipeBuilder.Result(id, result, count, ingredients, cookingTime, experience, container, tab, advancement, advancementId));
+			outputIn.accept(new CookingPotRecipeBuilder.Result(id, result, count, ingredients, cookingTime, experience, container, tab, advancement.build(advancementId)));
 		} else {
-			consumerIn.accept(new CookingPotRecipeBuilder.Result(id, result, count, ingredients, cookingTime, experience, container, tab));
+			outputIn.accept(new CookingPotRecipeBuilder.Result(id, result, count, ingredients, cookingTime, experience, container, tab));
 		}
 	}
 
@@ -139,10 +143,9 @@ public class CookingPotRecipeBuilder
 		private final int cookingTime;
 		private final float experience;
 		private final Item container;
-		private final Advancement.Builder advancement;
-		private final ResourceLocation advancementId;
+		private final AdvancementHolder advancement;
 
-		public Result(ResourceLocation idIn, Item resultIn, int countIn, List<Ingredient> ingredientsIn, int cookingTimeIn, float experienceIn, @Nullable Item containerIn, @Nullable CookingPotRecipeBookTab tabIn, @Nullable Advancement.Builder advancement, @Nullable ResourceLocation advancementId) {
+		public Result(ResourceLocation idIn, Item resultIn, int countIn, List<Ingredient> ingredientsIn, int cookingTimeIn, float experienceIn, @Nullable Item containerIn, @Nullable CookingPotRecipeBookTab tabIn, @Nullable AdvancementHolder advancement) {
 			this.id = idIn;
 			this.tab = tabIn;
 			this.ingredients = ingredientsIn;
@@ -152,11 +155,10 @@ public class CookingPotRecipeBuilder
 			this.experience = experienceIn;
 			this.container = containerIn;
 			this.advancement = advancement;
-			this.advancementId = advancementId;
 		}
 
 		public Result(ResourceLocation idIn, Item resultIn, int countIn, List<Ingredient> ingredientsIn, int cookingTimeIn, float experienceIn, @Nullable Item containerIn, @Nullable CookingPotRecipeBookTab tabIn) {
-			this(idIn, resultIn, countIn, ingredientsIn, cookingTimeIn, experienceIn, containerIn, tabIn, null, null);
+			this(idIn, resultIn, countIn, ingredientsIn, cookingTimeIn, experienceIn, containerIn, tabIn, null);
 		}
 
 		@Override
@@ -168,12 +170,12 @@ public class CookingPotRecipeBuilder
 			JsonArray arrayIngredients = new JsonArray();
 
 			for (Ingredient ingredient : ingredients) {
-				arrayIngredients.add(ingredient.toJson());
+				arrayIngredients.add(ingredient.toJson(true));
 			}
 			json.add("ingredients", arrayIngredients);
 
 			JsonObject objectResult = new JsonObject();
-			objectResult.addProperty("item", ForgeRegistries.ITEMS.getKey(result).toString());
+			objectResult.addProperty("item", BuiltInRegistries.ITEM.getKey(result).toString());
 			if (count > 1) {
 				objectResult.addProperty("count", count);
 			}
@@ -181,7 +183,7 @@ public class CookingPotRecipeBuilder
 
 			if (container != null) {
 				JsonObject objectContainer = new JsonObject();
-				objectContainer.addProperty("item", ForgeRegistries.ITEMS.getKey(container).toString());
+				objectContainer.addProperty("item", BuiltInRegistries.ITEM.getKey(container).toString());
 				json.add("container", objectContainer);
 			}
 			if (experience > 0) {
@@ -191,25 +193,24 @@ public class CookingPotRecipeBuilder
 		}
 
 		@Override
-		public ResourceLocation getId() {
+		public JsonObject serializeRecipe() {
+			return FinishedRecipe.super.serializeRecipe();
+		}
+
+		@Override
+		public ResourceLocation id() {
 			return id;
 		}
 
 		@Override
-		public RecipeSerializer<?> getType() {
+		public RecipeSerializer<?> type() {
 			return ModRecipeSerializers.COOKING.get();
 		}
 
 		@Nullable
 		@Override
-		public JsonObject serializeAdvancement() {
-			return advancement != null ? advancement.serializeToJson() : null;
-		}
-
-		@Nullable
-		@Override
-		public ResourceLocation getAdvancementId() {
-			return advancementId;
+		public AdvancementHolder advancement() {
+			return advancement;
 		}
 	}
 }

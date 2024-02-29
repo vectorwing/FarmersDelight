@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.common;
 
 import net.minecraft.core.Position;
 import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.animal.Parrot;
@@ -14,12 +15,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraftforge.common.crafting.CompoundIngredient;
-import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
-import net.minecraftforge.registries.ForgeRegistries;
-import vectorwing.farmersdelight.common.crafting.condition.VanillaCrateEnabledCondition;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.util.ObfuscationReflectionHelper;
+import net.neoforged.neoforge.common.crafting.CompoundIngredient;
 import vectorwing.farmersdelight.common.entity.RottenTomatoEntity;
 import vectorwing.farmersdelight.common.registry.ModAdvancements;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -36,18 +34,15 @@ public class CommonSetup
 			registerAnimalFeeds();
 			registerStackSizeOverrides();
 		});
-
-		ModAdvancements.register();
-		CraftingHelper.register(new VanillaCrateEnabledCondition.Serializer());
 	}
 
 	public static void registerStackSizeOverrides() {
 		if (!Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) return;
 
 		Configuration.SOUP_ITEM_LIST.get().forEach((key) -> {
-			Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(key));
+			Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(key));
 			if (item instanceof BowlFoodItem) {
-				ObfuscationReflectionHelper.setPrivateValue(Item.class, item, 16, "f_41370_");
+				ObfuscationReflectionHelper.setPrivateValue(Item.class, item, 16, "maxStackSize");
 			}
 		});
 	}

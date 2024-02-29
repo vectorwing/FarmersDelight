@@ -1,7 +1,6 @@
 {
   "criteria": {
     "seeds": {
-      "conditions": {},
       "trigger": "minecraft:inventory_changed"
     }
   },

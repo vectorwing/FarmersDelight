@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_pie_crust",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_pie_crust"
     ]
   ],
   "rewards": {

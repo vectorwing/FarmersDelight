@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_milk_bucket",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_milk_bucket"
     ]
   ],
   "rewards": {

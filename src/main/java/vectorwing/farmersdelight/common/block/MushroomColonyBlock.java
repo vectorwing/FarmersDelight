@@ -25,7 +25,8 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.Tags;
+import net.neoforged.neoforge.common.CommonHooks;
+import net.neoforged.neoforge.common.Tags;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.function.Supplier;
@@ -101,9 +102,9 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		int age = state.getValue(COLONY_AGE);
 		BlockState groundState = level.getBlockState(pos.below());
-		if (age < getMaxAge() && groundState.is(ModTags.MUSHROOM_COLONY_GROWABLE_ON) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt(4) == 0)) {
+		if (age < getMaxAge() && groundState.is(ModTags.MUSHROOM_COLONY_GROWABLE_ON) && CommonHooks.onCropsGrowPre(level, pos, state, random.nextInt(4) == 0)) {
 			level.setBlock(pos, state.setValue(COLONY_AGE, age + 1), 2);
-			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(level, pos, state);
+			CommonHooks.onCropsGrowPost(level, pos, state);
 		}
 	}
 
@@ -118,7 +119,7 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
 		return state.getValue(getAgeProperty()) < getMaxAge();
 	}
 

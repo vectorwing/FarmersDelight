@@ -2,7 +2,7 @@ package vectorwing.farmersdelight.common.block.entity.dispenser;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockSource;
+import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.world.item.Item;
@@ -37,7 +37,7 @@ public class CuttingBoardDispenseBehavior extends OptionalDispenseItemBehavior
 	public final ItemStack dispense(BlockSource source, ItemStack stack) {
 		if (tryDispenseStackOnCuttingBoard(source, stack)) {
 			this.playSound(source); // I added this because i completely overrode the super implementation which had the sounds.
-			this.playAnimation(source, source.getBlockState().getValue(DispenserBlock.FACING)); // see above, same reasoning
+			this.playAnimation(source, source.state().getValue(DispenserBlock.FACING)); // see above, same reasoning
 			return stack;
 		}
 		return DISPENSE_ITEM_BEHAVIOR_HASH_MAP.get(stack.getItem()).dispense(source, stack); // Not targetted on cutting board, use vanilla/other mods behaviour
@@ -45,8 +45,8 @@ public class CuttingBoardDispenseBehavior extends OptionalDispenseItemBehavior
 
 	public boolean tryDispenseStackOnCuttingBoard(BlockSource source, ItemStack stack) {
 		setSuccess(false);
-		Level level = source.getLevel();
-		BlockPos pos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
+		Level level = source.level();
+		BlockPos pos = source.pos().relative(source.state().getValue(DispenserBlock.FACING));
 		BlockState state = level.getBlockState(pos);
 		Block block = state.getBlock();
 		BlockEntity blockEntity = level.getBlockEntity(pos);

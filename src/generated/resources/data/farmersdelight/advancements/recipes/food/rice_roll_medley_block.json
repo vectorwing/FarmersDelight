@@ -32,8 +32,8 @@
   },
   "requirements": [
     [
-      "has_rice_roll",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_rice_roll"
     ]
   ],
   "rewards": {

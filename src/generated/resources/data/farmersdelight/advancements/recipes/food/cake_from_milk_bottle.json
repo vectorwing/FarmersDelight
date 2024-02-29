@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_milk_bottle",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_milk_bottle"
     ]
   ],
   "rewards": {

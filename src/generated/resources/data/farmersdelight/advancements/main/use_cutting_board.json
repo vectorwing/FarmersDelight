@@ -2,7 +2,6 @@
   "parent": "farmersdelight:main/craft_knife",
   "criteria": {
     "cutting_board": {
-      "conditions": {},
       "trigger": "farmersdelight:use_cutting_board"
     }
   },

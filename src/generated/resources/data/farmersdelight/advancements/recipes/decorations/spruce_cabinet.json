@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_spruce_trapdoor",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_spruce_trapdoor"
     ]
   ],
   "rewards": {

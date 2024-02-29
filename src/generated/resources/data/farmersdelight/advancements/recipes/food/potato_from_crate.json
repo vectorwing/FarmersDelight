@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_potato_crate",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_potato_crate"
     ]
   ],
   "rewards": {

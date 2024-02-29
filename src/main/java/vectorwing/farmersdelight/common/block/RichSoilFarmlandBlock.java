@@ -12,8 +12,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.PlantType;
+import net.neoforged.neoforge.common.CommonHooks;
+import net.neoforged.neoforge.common.FarmlandWaterManager;
+import net.neoforged.neoforge.common.IPlantable;
+import net.neoforged.neoforge.common.PlantType;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.tag.ModTags;
@@ -31,7 +33,7 @@ public class RichSoilFarmlandBlock extends FarmBlock
 				return true;
 			}
 		}
-		return net.minecraftforge.common.FarmlandWaterManager.hasBlockWaterTicket(level, pos);
+		return FarmlandWaterManager.hasBlockWaterTicket(level, pos);
 	}
 
 	public static void turnToRichSoil(BlockState state, Level level, BlockPos pos) {
@@ -81,20 +83,20 @@ public class RichSoilFarmlandBlock extends FarmBlock
 			}
 
 			if (aboveBlock instanceof BonemealableBlock growable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
-				if (growable.isValidBonemealTarget(level, pos.above(), aboveState, false) && ForgeHooks.onCropsGrowPre(level, pos.above(), aboveState, true)) {
+				if (growable.isValidBonemealTarget(level, pos.above(), aboveState) && CommonHooks.onCropsGrowPre(level, pos.above(), aboveState, true)) {
 					growable.performBonemeal(level, level.random, pos.above(), aboveState);
 					if (!level.isClientSide) {
 						level.levelEvent(2005, pos.above(), 0);
 					}
-					ForgeHooks.onCropsGrowPost(level, pos.above(), aboveState);
+					CommonHooks.onCropsGrowPost(level, pos.above(), aboveState);
 				}
 			}
 		}
 	}
 
 	@Override
-	public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable) {
-		net.minecraftforge.common.PlantType plantType = plantable.getPlantType(world, pos.relative(facing));
+	public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable) {
+		PlantType plantType = plantable.getPlantType(world, pos.relative(facing));
 		return plantType == PlantType.CROP || plantType == PlantType.PLAINS;
 	}
 

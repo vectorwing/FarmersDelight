@@ -10,9 +10,10 @@ import com.blamejared.crafttweaker.api.recipe.manager.base.IRecipeManager;
 import com.blamejared.crafttweaker.api.util.StringUtil;
 import com.blamejared.crafttweaker.impl.helper.AccessibleElementsProvider;
 import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 
@@ -24,19 +25,19 @@ import java.util.stream.Collectors;
 public final class CookingPotRecipeHandler implements IRecipeHandler<CookingPotRecipe>
 {
     @Override
-    public String dumpToCommandString(IRecipeManager manager, CookingPotRecipe recipe) {
+    public String dumpToCommandString(IRecipeManager<? super CookingPotRecipe> manager, RegistryAccess registryAccess, RecipeHolder<CookingPotRecipe> recipe) {
         return String.format(
                 "%s.addRecipe(%s, %s, %s, %s, %s, %s);",
                 manager.getCommandString(),
-                StringUtil.quoteAndEscape(recipe.getId()),
-                IItemStack.of(AccessibleElementsProvider.get().registryAccess(recipe::getResultItem)).getCommandString(),
-                recipe.getIngredients().stream()
+                StringUtil.quoteAndEscape(recipe.id()),
+                IItemStack.of(recipe.value().getResultItem(registryAccess)).getCommandString(),
+                recipe.value().getIngredients().stream()
                         .map(IIngredient::fromIngredient)
                         .map(IIngredient::getCommandString)
                         .collect(Collectors.joining(", ", "[", "]")),
-                new MCItemStackMutable(recipe.getOutputContainer()).getCommandString(),
-                recipe.getExperience(),
-                recipe.getCookTime()
+                new MCItemStackMutable(recipe.value().getOutputContainer()).getCommandString(),
+                recipe.value().getExperience(),
+                recipe.value().getCookTime()
         );
     }
 
@@ -46,7 +47,7 @@ public final class CookingPotRecipeHandler implements IRecipeHandler<CookingPotR
     }
 
     @Override
-    public Optional<IDecomposedRecipe> decompose(IRecipeManager<? super CookingPotRecipe> manager, CookingPotRecipe recipe) {
+    public Optional<IDecomposedRecipe> decompose(IRecipeManager<? super CookingPotRecipe> manager, RegistryAccess registryAccess, CookingPotRecipe recipe) {
         final IDecomposedRecipe decomposedRecipe = IDecomposedRecipe.builder()
                 .with(BuiltinRecipeComponents.Output.ITEMS, IItemStack.of(AccessibleElementsProvider.get().registryAccess(recipe::getResultItem)))
                 .with(BuiltinRecipeComponents.Input.INGREDIENTS,  recipe.getIngredients().stream().map(IIngredient::fromIngredient).toList())
@@ -62,7 +63,7 @@ public final class CookingPotRecipeHandler implements IRecipeHandler<CookingPotR
     }
 
     @Override
-    public Optional<CookingPotRecipe> recompose(IRecipeManager<? super CookingPotRecipe> manager, ResourceLocation name, IDecomposedRecipe recipe) {
+    public Optional<CookingPotRecipe> recompose(IRecipeManager<? super CookingPotRecipe> manager, RegistryAccess registryAccess, IDecomposedRecipe recipe) {
         final IItemStack output = recipe.getOrThrowSingle(BuiltinRecipeComponents.Output.ITEMS);
         final List<IIngredient> ingredients = recipe.getOrThrow(BuiltinRecipeComponents.Input.INGREDIENTS);
         final NonNullList<Ingredient> inputList = NonNullList.create();
@@ -78,6 +79,6 @@ public final class CookingPotRecipeHandler implements IRecipeHandler<CookingPotR
         //We're using get here to avoid exceptions.
         final List<String> cookingRecipeBookTabList = recipe.get(RecipeHandlerUtils.COOKING_TAB_COMPONENT);
         final CookingPotRecipeBookTab cookTab = cookingRecipeBookTabList == null ? null : CookingPotRecipeBookTab.valueOf(cookingRecipeBookTabList.get(0));
-        return Optional.of(new CookingPotRecipe(name, group, cookTab, inputList, output.getInternal(), container.getInternal(), exp, time));
+        return Optional.of(new CookingPotRecipe(group, cookTab, inputList, output.getInternal(), container.getInternal(), exp, time));
     }
 }

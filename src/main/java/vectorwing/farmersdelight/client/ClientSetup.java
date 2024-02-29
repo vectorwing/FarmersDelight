@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.client;
 
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import vectorwing.farmersdelight.client.gui.ComfortHealthOverlay;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.client.gui.NourishmentHungerOverlay;

@@ -13,19 +13,19 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.wrapper.RecipeWrapper;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.capabilities.Capabilities;
+import net.neoforged.neoforge.common.capabilities.Capability;
+import net.neoforged.neoforge.common.util.LazyOptional;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.common.block.CuttingBoardBlock;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.mixin.accessor.RecipeManagerAccessor;
@@ -76,10 +76,10 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 
 		if (isItemCarvingBoard) return false;
 
-		Optional<CuttingBoardRecipe> matchingRecipe = getMatchingRecipe(new RecipeWrapper(inventory), toolStack, player);
+		Optional<RecipeHolder<CuttingBoardRecipe>> matchingRecipe = getMatchingRecipe(new RecipeWrapper(inventory), toolStack, player);
 
 		matchingRecipe.ifPresent(recipe -> {
-			List<ItemStack> results = recipe.rollResults(level.random, EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, toolStack));
+			List<ItemStack> results = recipe.value().rollResults(level.random, EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, toolStack));
 			for (ItemStack resultStack : results) {
 				Direction direction = getBlockState().getValue(CuttingBoardBlock.FACING).getCounterClockWise();
 				ItemUtils.spawnItemEntity(level, resultStack.copy(),
@@ -93,7 +93,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 					toolStack.setCount(0);
 				}
 			}
-			playProcessingSound(recipe.getSoundEventID(), toolStack, getStoredItem());
+			playProcessingSound(recipe.value().getSoundEvent().orElse(null), toolStack, getStoredItem());
 			removeItem();
 			if (player instanceof ServerPlayer) {
 				ModAdvancements.CUTTING_BOARD.trigger((ServerPlayer) player);
@@ -103,37 +103,35 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 		return matchingRecipe.isPresent();
 	}
 
-	private Optional<CuttingBoardRecipe> getMatchingRecipe(RecipeWrapper recipeWrapper, ItemStack toolStack, @Nullable Player player) {
+	private Optional<RecipeHolder<CuttingBoardRecipe>> getMatchingRecipe(RecipeWrapper recipeWrapper, ItemStack toolStack, @Nullable Player player) {
 		if (level == null) return Optional.empty();
 
 		if (lastRecipeID != null) {
-			Recipe<RecipeWrapper> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
+			RecipeHolder<CuttingBoardRecipe> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
 					.getRecipeMap(ModRecipeTypes.CUTTING.get())
 					.get(lastRecipeID);
-			if (recipe instanceof CuttingBoardRecipe && recipe.matches(recipeWrapper, level) && ((CuttingBoardRecipe) recipe).getTool().test(toolStack)) {
-				return Optional.of((CuttingBoardRecipe) recipe);
+			if (recipe.value().matches(recipeWrapper, level) && recipe.value().getTool().test(toolStack)) {
+				return Optional.of(recipe);
 			}
 		}
 
-		List<CuttingBoardRecipe> recipeList = level.getRecipeManager().getRecipesFor(ModRecipeTypes.CUTTING.get(), recipeWrapper, level);
+		List<RecipeHolder<CuttingBoardRecipe>> recipeList = level.getRecipeManager().getRecipesFor(ModRecipeTypes.CUTTING.get(), recipeWrapper, level);
 		if (recipeList.isEmpty()) {
 			if (player != null)
 				player.displayClientMessage(TextUtils.getTranslation("block.cutting_board.invalid_item"), true);
 			return Optional.empty();
 		}
-		Optional<CuttingBoardRecipe> recipe = recipeList.stream().filter(cuttingRecipe -> cuttingRecipe.getTool().test(toolStack)).findFirst();
+		Optional<RecipeHolder<CuttingBoardRecipe>> recipe = recipeList.stream().filter(cuttingRecipe -> cuttingRecipe.value().getTool().test(toolStack)).findFirst();
 		if (!recipe.isPresent()) {
 			if (player != null)
 				player.displayClientMessage(TextUtils.getTranslation("block.cutting_board.invalid_tool"), true);
 			return Optional.empty();
 		}
-		lastRecipeID = recipe.get().getId();
+		lastRecipeID = recipe.get().id();
 		return recipe;
 	}
 
-	public void playProcessingSound(String soundEventID, ItemStack tool, ItemStack boardItem) {
-		SoundEvent sound = ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation(soundEventID));
-
+	public void playProcessingSound(@Nullable SoundEvent sound, ItemStack tool, ItemStack boardItem) {
 		if (sound != null) {
 			playSound(sound, 1.0F, 1.0F);
 		} else if (tool.is(Tags.Items.SHEARS)) {
@@ -201,7 +199,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 	@Override
 	@Nonnull
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-		if (cap.equals(ForgeCapabilities.ITEM_HANDLER)) {
+		if (cap.equals(Capabilities.ITEM_HANDLER)) {
 			return inputHandler.cast();
 		}
 		return super.getCapability(cap, side);

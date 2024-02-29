@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.client.event.RegisterRecipeBookCategoriesEvent;
+import net.neoforged.neoforge.client.event.RegisterRecipeBookCategoriesEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -25,7 +25,7 @@ public class RecipeCategories
 		event.registerAggregateCategory(COOKING_SEARCH.get(), ImmutableList.of(COOKING_MEALS.get(), COOKING_DRINKS.get(), COOKING_MISC.get()));
 		event.registerRecipeCategoryFinder(ModRecipeTypes.COOKING.get(), recipe ->
 		{
-			if (recipe instanceof CookingPotRecipe cookingRecipe) {
+			if (recipe.value() instanceof CookingPotRecipe cookingRecipe) {
 				CookingPotRecipeBookTab tab = cookingRecipe.getRecipeBookTab();
 				if (tab != null) {
 					return switch (tab) {

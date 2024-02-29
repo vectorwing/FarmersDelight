@@ -1,5 +1,5 @@
 {
-  "conditions": [
+  "neoforge:conditions": [
     {
       "type": "farmersdelight:vanilla_crates_enabled"
     }

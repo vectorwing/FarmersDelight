@@ -1,5 +1,7 @@
 package vectorwing.farmersdelight.integration.jei;
 
+// TODO: Uncomment this upon updating to 1.20.4
+/*
 import com.google.common.collect.ImmutableList;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -89,3 +91,4 @@ public class JEIPlugin implements IModPlugin
 		return ID;
 	}
 }
+ */

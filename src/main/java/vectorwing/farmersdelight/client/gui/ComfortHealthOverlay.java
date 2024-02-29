@@ -10,11 +10,11 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
-import net.minecraftforge.client.event.RenderGuiOverlayEvent;
-import net.minecraftforge.client.gui.overlay.ForgeGui;
-import net.minecraftforge.client.gui.overlay.GuiOverlayManager;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.client.event.RenderGuiOverlayEvent;
+import net.neoforged.neoforge.client.gui.overlay.ExtendedGui;
+import net.neoforged.neoforge.client.gui.overlay.GuiOverlayManager;
+import net.neoforged.neoforge.common.NeoForge;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModEffects;
@@ -27,7 +27,6 @@ public class ComfortHealthOverlay
 	private static final ResourceLocation MOD_ICONS_TEXTURE = new ResourceLocation(FarmersDelight.MODID, "textures/gui/fd_icons.png");
 
 	public static void init() {
-		MinecraftForge.EVENT_BUS.register(new ComfortHealthOverlay());
 	}
 
 
@@ -37,14 +36,14 @@ public class ComfortHealthOverlay
 	public void onRenderGuiOverlayPost(RenderGuiOverlayEvent.Post event) {
 		if (event.getOverlay() == GuiOverlayManager.findOverlay(PLAYER_HEALTH_ELEMENT)) {
 			Minecraft mc = Minecraft.getInstance();
-			ForgeGui gui = (ForgeGui) mc.gui;
+			ExtendedGui gui = (ExtendedGui) mc.gui;
 			if (!mc.options.hideGui && gui.shouldDrawSurvivalElements()) {
 				renderComfortOverlay(gui, event.getGuiGraphics());
 			}
 		}
 	}
 
-	public static void renderComfortOverlay(ForgeGui gui, GuiGraphics graphics) {
+	public static void renderComfortOverlay(ExtendedGui gui, GuiGraphics graphics) {
 		if (!Configuration.COMFORT_HEALTH_OVERLAY.get()) {
 			return;
 		}

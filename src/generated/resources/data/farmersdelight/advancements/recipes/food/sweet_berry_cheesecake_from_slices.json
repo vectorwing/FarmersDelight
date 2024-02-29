@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_sweet_berry_cheesecake_slice",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_sweet_berry_cheesecake_slice"
     ]
   ],
   "rewards": {

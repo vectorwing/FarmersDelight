@@ -20,20 +20,21 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.RecipeHolder;
+import net.minecraft.world.inventory.RecipeCraftingHolder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.wrapper.RecipeWrapper;
+import net.neoforged.neoforge.common.capabilities.Capabilities;
+import net.neoforged.neoforge.common.capabilities.Capability;
+import net.neoforged.neoforge.common.util.LazyOptional;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.common.block.CookingPotBlock;
 import vectorwing.farmersdelight.common.block.entity.container.CookingPotMenu;
 import vectorwing.farmersdelight.common.block.entity.inventory.CookingPotItemHandler;
@@ -54,7 +55,7 @@ import java.util.Optional;
 
 import static java.util.Map.entry;
 
-public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProvider, HeatableBlockEntity, Nameable, RecipeHolder
+public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProvider, HeatableBlockEntity, Nameable, RecipeCraftingHolder
 {
 	public static final int MEAL_DISPLAY_SLOT = 6;
 	public static final int CONTAINER_SLOT = 7;
@@ -213,8 +214,8 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		boolean didInventoryChange = false;
 
 		if (isHeated && cookingPot.hasInput()) {
-			Optional<CookingPotRecipe> recipe = cookingPot.getMatchingRecipe(new RecipeWrapper(cookingPot.inventory));
-			if (recipe.isPresent() && cookingPot.canCook(recipe.get())) {
+			Optional<RecipeHolder<CookingPotRecipe>> recipe = cookingPot.getMatchingRecipe(new RecipeWrapper(cookingPot.inventory));
+			if (recipe.isPresent() && cookingPot.canCook(recipe.get().value())) {
 				didInventoryChange = cookingPot.processCooking(recipe.get(), cookingPot);
 			} else {
 				cookingPot.cookTime = 0;
@@ -260,27 +261,25 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 	}
 
-	private Optional<CookingPotRecipe> getMatchingRecipe(RecipeWrapper inventoryWrapper) {
+	private Optional<RecipeHolder<CookingPotRecipe>> getMatchingRecipe(RecipeWrapper inventoryWrapper) {
 		if (level == null) return Optional.empty();
 
 		if (lastRecipeID != null) {
-			Recipe<RecipeWrapper> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
+			RecipeHolder<CookingPotRecipe> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
 					.getRecipeMap(ModRecipeTypes.COOKING.get())
 					.get(lastRecipeID);
-			if (recipe instanceof CookingPotRecipe) {
-				if (recipe.matches(inventoryWrapper, level)) {
-					return Optional.of((CookingPotRecipe) recipe);
+			if (recipe.value().matches(inventoryWrapper, level)) {
+				return Optional.of(recipe);
 				}
-				if (ItemStack.isSameItem(recipe.getResultItem(this.level.registryAccess()), getMeal())) {
-					return Optional.empty();
-				}
+			if (ItemStack.isSameItem(recipe.value().getResultItem(this.level.registryAccess()), getMeal())) {
+				return Optional.empty();
 			}
 		}
 
 		if (checkNewRecipe) {
-			Optional<CookingPotRecipe> recipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.COOKING.get(), inventoryWrapper, level);
+			Optional<RecipeHolder<CookingPotRecipe>> recipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.COOKING.get(), inventoryWrapper, level);
 			if (recipe.isPresent()) {
-				ResourceLocation newRecipeID = recipe.get().getId();
+				ResourceLocation newRecipeID = recipe.get().id();
 				if (lastRecipeID != null && !lastRecipeID.equals(newRecipeID)) {
 					cookTime = 0;
 				}
@@ -331,18 +330,18 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		}
 	}
 
-	private boolean processCooking(CookingPotRecipe recipe, CookingPotBlockEntity cookingPot) {
+	private boolean processCooking(RecipeHolder<CookingPotRecipe> recipe, CookingPotBlockEntity cookingPot) {
 		if (level == null) return false;
 
 		++cookTime;
-		cookTimeTotal = recipe.getCookTime();
+		cookTimeTotal = recipe.value().getCookTime();
 		if (cookTime < cookTimeTotal) {
 			return false;
 		}
 
 		cookTime = 0;
-		mealContainerStack = recipe.getOutputContainer();
-		ItemStack resultStack = recipe.getResultItem(this.level.registryAccess());
+		mealContainerStack = recipe.value().getOutputContainer();
+		ItemStack resultStack = recipe.value().getResultItem(this.level.registryAccess());
 		ItemStack storedMealStack = inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
 		if (storedMealStack.isEmpty()) {
 			inventory.setStackInSlot(MEAL_DISPLAY_SLOT, resultStack.copy());
@@ -374,33 +373,33 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	}
 
 	@Override
-	public void setRecipeUsed(@Nullable Recipe<?> recipe) {
+	public void setRecipeUsed(@Nullable RecipeHolder<?> recipe) {
 		if (recipe != null) {
-			ResourceLocation recipeID = recipe.getId();
+			ResourceLocation recipeID = recipe.id();
 			usedRecipeTracker.addTo(recipeID, 1);
 		}
 	}
 
 	@Nullable
 	@Override
-	public Recipe<?> getRecipeUsed() {
+	public RecipeHolder<?> getRecipeUsed() {
 		return null;
 	}
 
 	@Override
 	public void awardUsedRecipes(Player player, List<ItemStack> items) {
-		List<Recipe<?>> usedRecipes = getUsedRecipesAndPopExperience(player.level(), player.position());
+		List<RecipeHolder<?>> usedRecipes = getUsedRecipesAndPopExperience(player.level(), player.position());
 		player.awardRecipes(usedRecipes);
 		usedRecipeTracker.clear();
 	}
 
-	public List<Recipe<?>> getUsedRecipesAndPopExperience(Level level, Vec3 pos) {
-		List<Recipe<?>> list = Lists.newArrayList();
+	public List<RecipeHolder<?>> getUsedRecipesAndPopExperience(Level level, Vec3 pos) {
+		List<RecipeHolder<?>> list = Lists.newArrayList();
 
 		for (Object2IntMap.Entry<ResourceLocation> entry : usedRecipeTracker.object2IntEntrySet()) {
 			level.getRecipeManager().byKey(entry.getKey()).ifPresent((recipe) -> {
 				list.add(recipe);
-				splitAndSpawnExperience((ServerLevel) level, pos, entry.getIntValue(), ((CookingPotRecipe) recipe).getExperience());
+				splitAndSpawnExperience((ServerLevel) level, pos, entry.getIntValue(), ((CookingPotRecipe) recipe.value()).getExperience());
 			});
 		}
 
@@ -520,7 +519,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	@Override
 	@Nonnull
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-		if (cap.equals(ForgeCapabilities.ITEM_HANDLER)) {
+		if (cap.equals(Capabilities.ITEM_HANDLER)) {
 			if (side == null || side.equals(Direction.UP)) {
 				return inputHandler.cast();
 			} else {

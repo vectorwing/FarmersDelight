@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "fried_egg",
-      "has_the_recipe"
+      "has_the_recipe",
+      "fried_egg"
     ]
   ],
   "rewards": {

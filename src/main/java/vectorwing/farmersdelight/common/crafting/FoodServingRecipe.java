@@ -2,7 +2,6 @@ package vectorwing.farmersdelight.common.crafting;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
@@ -15,8 +14,8 @@ import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 
 public class FoodServingRecipe extends CustomRecipe
 {
-	public FoodServingRecipe(ResourceLocation id, CraftingBookCategory category) {
-		super(id, category);
+	public FoodServingRecipe(CraftingBookCategory category) {
+		super(category);
 	}
 
 	@Override
