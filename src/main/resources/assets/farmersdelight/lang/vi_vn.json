@@ -11,6 +11,8 @@
   "block.farmersdelight.acacia_cabinet": "Tủ gỗ xiêm gai",
   "block.farmersdelight.dark_oak_cabinet": "Tủ gỗ sồi sẫm",
   "block.farmersdelight.mangrove_cabinet": "Tủ gỗ đước",
+  "block.farmersdelight.cherry_cabinet": "Tủ gỗ anh đào",
+  "block.farmersdelight.bamboo_cabinet": "Tủ gỗ tre",
   "block.farmersdelight.crimson_cabinet": "Tủ gỗ đỏ thẫm",
   "block.farmersdelight.warped_cabinet": "Tủ gỗ kì dị",
   "block.farmersdelight.rope": "Dây thừng",
@@ -49,6 +51,25 @@
   "block.farmersdelight.green_canvas_sign": "Tấm biển vải xanh lá",
   "block.farmersdelight.red_canvas_sign": "Tấm biển vải đỏ",
   "block.farmersdelight.black_canvas_sign": "Tấm biển vải đen",
+  
+  "block.farmersdelight.hanging_canvas_sign": "Bảng hiệu vải treo",
+  "block.farmersdelight.white_hanging_canvas_sign": "Bảng hiệu vải treo màu trắng",
+  "block.farmersdelight.orange_hanging_canvas_sign": "Bảng hiệu vải treo màu cam",
+  "block.farmersdelight.magenta_hanging_canvas_sign": "Bảng hiệu canvas treo màu đỏ tươi",
+  "block.farmersdelight.light_blue_hanging_canvas_sign": "Bảng hiệu vải treo màu xanh nhạt",
+  "block.farmersdelight.yellow_hanging_canvas_sign": "Bảng hiệu vải treo màu vàng",
+  "block.farmersdelight.lime_hanging_canvas_sign": "Bảng hiệu vải treo vôi",
+  "block.farmersdelight.pink_hanging_canvas_sign": "Bảng hiệu vải treo màu hồng",
+  "block.farmersdelight.gray_hanging_canvas_sign": "Bảng hiệu vải treo màu xám",
+  "block.farmersdelight.light_gray_hanging_canvas_sign": "Bảng hiệu vải treo màu xám nhạt",
+  "block.farmersdelight.cyan_hanging_canvas_sign": "Bảng hiệu vải treo màu lục lam",
+  "block.farmersdelight.purple_hanging_canvas_sign": "Bảng hiệu vải treo màu tím",
+  "block.farmersdelight.blue_hanging_canvas_sign": "Bảng hiệu vải treo màu xanh",
+  "block.farmersdelight.brown_hanging_canvas_sign": "Bảng hiệu vải treo màu nâu",
+  "block.farmersdelight.green_hanging_canvas_sign": "Bảng hiệu vải treo màu xanh lá cây",
+  "block.farmersdelight.red_hanging_canvas_sign": "Bảng hiệu vải treo màu đỏ",
+  "block.farmersdelight.black_hanging_canvas_sign": "Bảng hiệu vải treo màu đen",
+	
   "block.farmersdelight.budding_tomatoes": "Mầm cây cà chua",
   "block.farmersdelight.tomatoes": "Cà chua",
   "block.farmersdelight.cabbages": "Bắp cải",
@@ -57,6 +78,7 @@
   "block.farmersdelight.rice_panicles": "Cây lúa đã trổ bông",
   "block.farmersdelight.brown_mushroom_colony": "Nhúm nấm nâu",
   "block.farmersdelight.red_mushroom_colony": "Nhúm nấm đỏ",
+  
   "block.farmersdelight.sandy_shrub": "Cây bụi cát",
   "block.farmersdelight.wild_cabbages": "Bắp cải dại",
   "block.farmersdelight.wild_tomatoes": "Cà chua dại",
@@ -177,6 +199,8 @@
 
   "item.farmersdelight.dog_food": "Thức ăn cho chó",
   "item.farmersdelight.horse_feed": "Thức ăn cho ngựa",
+
+  "entity.farmersdelight.rotten_tomato": "Cà chua thối",
 
   "effect.farmersdelight.nourishment": "Nuôi dưỡng",
   "effect.farmersdelight.comfort": "An nhàn",

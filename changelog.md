@@ -1,5 +1,33 @@
 # Changelog
 
+## 1.2.4
+
+### Updates
+- The Cooking Pot item now displays more information than before:
+  - A blue bar will be shown to indicate the amount of meal servings stored, similar to how Bundles display their fullness;
+  - The tooltip will display the stored food's item sprite alongside its name;
+- When viewing basic crops in JEI, they will display info on where they can be found as Wild Crops.
+
+### Fixes
+- (1.20) Creative Tab registration has been moved to server-side, so that other mods can access them for game logic;
+- Structure files for compost heaps are now format-updated with datagen, thus avoiding excessive DFU triggers on world gen. This should improve performance!
+  - Credit to malte0811, co-author of Immersive Engineering, for the StructureUpdater implementation;
+- Skillet's higher knockback is now implemented as an attribute, rather than an event, fixing a bug where the other hand's item also received this boost;
+- Skillet sounds now play at the correct stage of the damage cycle. This is noticeable on multiplayer, with some amount of latency;
+
+### Translations
+- Added a line for the Rotten Tomato entity in most langs (thanks, leagris!);
+- Added:
+  - sv_SE (thanks, Bjorkan!);
+- Updated:
+  - es_MX (thanks, CerealConJugo!);
+  - fr_FR (thanks, leagris!);
+  - ja_JP (thanks, EndilCrafter!)
+  - ru_RU (thanks, VGamerGroup!);
+  - uk_UA (thanks, unroman!);
+  - zh_CN (thanks, NumberSir);
+  - zh_TW (thanks, Lobster0228!);
+
 ## 1.2.3
 
 ### Additions

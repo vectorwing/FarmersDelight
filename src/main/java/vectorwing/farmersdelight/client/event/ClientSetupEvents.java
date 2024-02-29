@@ -14,12 +14,15 @@ import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.event.RegisterRecipeBookCategoriesEvent;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.client.gui.CookingPotTooltip;
 import vectorwing.farmersdelight.client.model.SkilletModel;
 import vectorwing.farmersdelight.client.particle.StarParticle;
 import vectorwing.farmersdelight.client.particle.SteamParticle;
 import vectorwing.farmersdelight.client.recipebook.RecipeCategories;
 import vectorwing.farmersdelight.client.renderer.*;
-import vectorwing.farmersdelight.common.registry.*;
+import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
+import vectorwing.farmersdelight.common.registry.ModEntityTypes;
+import vectorwing.farmersdelight.common.registry.ModParticleTypes;
 
 import java.util.Map;
 
@@ -29,6 +32,11 @@ public class ClientSetupEvents
 	@SubscribeEvent
 	public static void onRegisterRecipeBookCategories(RegisterRecipeBookCategoriesEvent event) {
 		RecipeCategories.init(event);
+	}
+
+	@SubscribeEvent
+	public static void registerCustomTooltipRenderers(RegisterClientTooltipComponentFactoriesEvent event) {
+		event.register(CookingPotTooltip.CookingPotTooltipComponent.class, CookingPotTooltip::new);
 	}
 
 	@SubscribeEvent

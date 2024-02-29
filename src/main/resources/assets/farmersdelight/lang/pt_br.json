@@ -200,6 +200,8 @@
   "item.farmersdelight.dog_food": "Ração para cães",
   "item.farmersdelight.horse_feed": "Alimento para cavalos",
 
+  "entity.farmersdelight.rotten_tomato": "Tomate podre",
+
   "effect.farmersdelight.nourishment": "Nutrição",
   "effect.farmersdelight.comfort": "Conforto",
 
@@ -304,7 +306,15 @@
   "farmersdelight.jei.decomposition.light": "Acelerado pela luz do sol",
   "farmersdelight.jei.decomposition.fluid": "Acelerado por água ao redor",
   "farmersdelight.jei.decomposition.accelerators": "Acelerado por ativadores ao redor (veja abaixo)",
+
   "farmersdelight.jei.info.straw": "Uma fibra vegetal usada em criação. Obtida ao cortar plantas e hortas gramíneas com uma Faca.",
-  "farmersdelight.jei.info.knife": "Facas são armas leves e rápidas. Elas podem colher Palha de plantas gramíneas, ou garantir itens secundários de animais.",
-  "farmersdelight.jei.info.ham": "Um corte grande de carne, vindo da perna de Porcos ou Hoglins. Você precisará de uma arma mais leve para obter isto..."
+  "farmersdelight.jei.info.knife": "Uma arma leve, com ataques rápidos e dano mediano.\n\nElas podem colher Palha de plantas gramíneas, ou garantir itens secundários de animais.",
+  "farmersdelight.jei.info.ham": "Um corte grande de carne, vindo da perna de Porcos ou Hoglins.\n\nVocê precisará de uma arma mais leve para obter isto...",
+  "farmersdelight.jei.info.wild_cabbages": "Repolhos costumam ser encontrados como plantas silvestres na orla de praias.",
+  "farmersdelight.jei.info.wild_beetroots": "Beterrabas costumam ser encontradas como plantas silvestres na orla de praias.",
+  "farmersdelight.jei.info.wild_carrots": "Cenouras costumam ser encontradas como plantas silvestres em climas temperados, como planícies e florestas.",
+  "farmersdelight.jei.info.wild_onions": "Cebolas costumam ser encontradas como plantas silvestres em climas temperados, como planícies e florestas.",
+  "farmersdelight.jei.info.wild_potatoes": "Batatas costumam ser encontradas como plantas silvestres em climas frios, como montanhas e taigas.",
+  "farmersdelight.jei.info.wild_tomatoes": "Tomates costumam ser encontrados como plantas silvestres em climas áridos, como savanas e desertos.",
+  "farmersdelight.jei.info.wild_rice": "Arroz costuma ser encontrado como uma planta silvestre nas lagoas de climas úmidos, como pântanos e selvas."
 }

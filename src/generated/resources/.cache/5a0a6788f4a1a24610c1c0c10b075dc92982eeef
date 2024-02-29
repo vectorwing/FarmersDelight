@@ -1,0 +1,6 @@
+// 1.20.1	2024-01-21T22:41:35.1752451	Update structure files in structures/village/houses
+8e4540c613f6635b9c3317ed5ceebb3f5575beda data/farmersdelight/structures/village/houses/desert_compost_pile.nbt
+2276bddac04d74918237e38b867a066b9c127a1b data/farmersdelight/structures/village/houses/plains_compost_pile.nbt
+f1eaee90c665b56d600b1ba6fd7b11cd38aa528e data/farmersdelight/structures/village/houses/savanna_compost_pile.nbt
+03d480236e4457d75c8ea65496d1ff7d03c94d7a data/farmersdelight/structures/village/houses/snowy_compost_pile.nbt
+56b511b7bd8d658884581ceaf9a0fb5eaab6f44b data/farmersdelight/structures/village/houses/taiga_compost_pile.nbt

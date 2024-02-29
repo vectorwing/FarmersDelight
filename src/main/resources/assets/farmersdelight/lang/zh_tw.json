@@ -11,6 +11,8 @@
   "block.farmersdelight.acacia_cabinet": "相思木儲藏櫃",
   "block.farmersdelight.dark_oak_cabinet": "黑橡木儲藏櫃",
   "block.farmersdelight.mangrove_cabinet": "紅樹林木儲藏櫃",
+  "block.farmersdelight.cherry_cabinet": "櫻花木儲藏櫃",
+  "block.farmersdelight.bamboo_cabinet": "竹木儲藏櫃",
   "block.farmersdelight.crimson_cabinet": "緋紅蕈木儲藏櫃",
   "block.farmersdelight.warped_cabinet": "扭曲蕈木儲藏櫃",
   "block.farmersdelight.rope": "繩索",
@@ -49,6 +51,24 @@
   "block.farmersdelight.green_canvas_sign": "綠色帆布牌",
   "block.farmersdelight.red_canvas_sign": "紅色帆布牌",
   "block.farmersdelight.black_canvas_sign": "黑色帆布牌",
+
+  "block.farmersdelight.hanging_canvas_sign": "懸掛式帆布牌",
+  "block.farmersdelight.white_hanging_canvas_sign": "白色懸掛式帆布牌",
+  "block.farmersdelight.orange_hanging_canvas_sign": "橙色懸掛式帆布牌",
+  "block.farmersdelight.magenta_hanging_canvas_sign": "洋紅色懸掛式帆布牌",
+  "block.farmersdelight.light_blue_hanging_canvas_sign": "淺藍色懸掛式帆布牌",
+  "block.farmersdelight.yellow_hanging_canvas_sign": "黃色懸掛式帆布牌",
+  "block.farmersdelight.lime_hanging_canvas_sign": "淺綠色懸掛式帆布牌",
+  "block.farmersdelight.pink_hanging_canvas_sign": "粉色懸掛式帆布牌",
+  "block.farmersdelight.gray_hanging_canvas_sign": "灰色懸掛式帆布牌",
+  "block.farmersdelight.light_gray_hanging_canvas_sign": "淺灰色懸掛式帆布牌",
+  "block.farmersdelight.cyan_hanging_canvas_sign": "青色懸掛式帆布牌",
+  "block.farmersdelight.purple_hanging_canvas_sign": "紫色懸掛式帆布牌",
+  "block.farmersdelight.blue_hanging_canvas_sign": "藍色懸掛式帆布牌",
+  "block.farmersdelight.brown_hanging_canvas_sign": "棕色懸掛式帆布牌",
+  "block.farmersdelight.green_hanging_canvas_sign": "綠色懸掛式帆布牌",
+  "block.farmersdelight.red_hanging_canvas_sign": "紅色懸掛式帆布牌",
+  "block.farmersdelight.black_hanging_canvas_sign": "黑色懸掛式帆布牌",
 
   "block.farmersdelight.budding_tomatoes": "發芽番茄",
   "block.farmersdelight.tomatoes": "番茄",
@@ -179,6 +199,8 @@
 
   "item.farmersdelight.dog_food": "狗食",
   "item.farmersdelight.horse_feed": "馬糧",
+
+  "entity.farmersdelight.rotten_tomato": "腐爛番茄",
 
   "effect.farmersdelight.nourishment": "滋補",
   "effect.farmersdelight.comfort": "療癒",

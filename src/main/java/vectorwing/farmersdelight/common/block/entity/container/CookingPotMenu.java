@@ -13,8 +13,6 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
@@ -68,7 +66,6 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 		// Bowl Input
 		this.addSlot(new SlotItemHandler(inventory, 7, 92, 55)
 		{
-			@OnlyIn(Dist.CLIENT)
 			public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
 				return Pair.of(InventoryMenu.BLOCK_ATLAS, EMPTY_CONTAINER_SLOT_BOWL);
 			}
@@ -153,14 +150,12 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 		return slotStackCopy;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public int getCookProgressionScaled() {
 		int i = this.cookingPotData.get(0);
 		int j = this.cookingPotData.get(1);
 		return j != 0 && i != 0 ? i * 24 / j : 0;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public boolean isHeated() {
 		return blockEntity.isHeated();
 	}

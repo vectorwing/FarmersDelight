@@ -10,6 +10,9 @@
   "block.farmersdelight.jungle_cabinet": "Кладовая из тропического дерева",
   "block.farmersdelight.acacia_cabinet": "Акациевая кладовая",
   "block.farmersdelight.dark_oak_cabinet": "Кладовая из тёмного дуба",
+  "block.farmersdelight.mangrove_cabinet": "Мангровая кладовая",
+  "block.farmersdelight.cherry_cabinet": "Вишнёвая кладовая",
+  "block.farmersdelight.bamboo_cabinet": "Бамбуковая кладовая",
   "block.farmersdelight.crimson_cabinet": "Багровая кладовая",
   "block.farmersdelight.warped_cabinet": "Искажённая кладовая",
   "block.farmersdelight.rope": "Верёвка",
@@ -48,6 +51,24 @@
   "block.farmersdelight.green_canvas_sign": "Зелёная холщовая табличка",
   "block.farmersdelight.red_canvas_sign": "Красная холщовая табличка",
   "block.farmersdelight.black_canvas_sign": "Чёрная холщовая табличка",
+
+  "block.farmersdelight.hanging_canvas_sign": "Подвесная холщовая табличка",
+  "block.farmersdelight.white_hanging_canvas_sign": "Белая подвесная холщовая табличка",
+  "block.farmersdelight.orange_hanging_canvas_sign": "Оранжевая подвесная холщовая табличка",
+  "block.farmersdelight.magenta_hanging_canvas_sign": "Пурпурная подвесная холщовая табличка",
+  "block.farmersdelight.light_blue_hanging_canvas_sign": "Голубая подвесная холщовая табличка",
+  "block.farmersdelight.yellow_hanging_canvas_sign": "Жёлтая подвесная холщовая табличка",
+  "block.farmersdelight.lime_hanging_canvas_sign": "Лаймовая подвесная холщовая табличка",
+  "block.farmersdelight.pink_hanging_canvas_sign": "Розовая подвесная холщовая табличка",
+  "block.farmersdelight.gray_hanging_canvas_sign": "Серая подвесная холщовая табличка",
+  "block.farmersdelight.light_gray_hanging_canvas_sign": "Светло-серая подвесная холщовая табличка",
+  "block.farmersdelight.cyan_hanging_canvas_sign": "Бирюзовая подвесная холщовая табличка",
+  "block.farmersdelight.purple_hanging_canvas_sign": "Фиолетовая подвесная холщовая табличка",
+  "block.farmersdelight.blue_hanging_canvas_sign": "Синяя подвесная холщовая табличка",
+  "block.farmersdelight.brown_hanging_canvas_sign": "Коричневая подвесная холщовая табличка",
+  "block.farmersdelight.green_hanging_canvas_sign": "Зелёная подвесная холщовая табличка",
+  "block.farmersdelight.red_hanging_canvas_sign": "Красная подвесная холщовая табличка",
+  "block.farmersdelight.black_hanging_canvas_sign": "Чёрная подвесная холщовая табличка",
 
   "block.farmersdelight.budding_tomatoes": "Цветущая томатная лоза",
   "block.farmersdelight.tomatoes": "Томатная лоза",
@@ -178,6 +199,8 @@
   
   "item.farmersdelight.dog_food": "Собачий корм",
   "item.farmersdelight.horse_feed": "Лошадиный корм",
+
+  "entity.farmersdelight.rotten_tomato": "Гнилой томат",
 
   "effect.farmersdelight.nourishment": "Сытость",
   "effect.farmersdelight.comfort": "Комфорт",

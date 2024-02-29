@@ -39,6 +39,8 @@ public class CeilingHangingCanvasSignBlock extends CeilingHangingSignBlock imple
 
 	@Override
 	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+		super.setPlacedBy(level, pos, state, placer, stack);
+
 		BlockEntity tileEntity = level.getBlockEntity(pos);
 		Block block = state.getBlock();
 		if (tileEntity instanceof SignBlockEntity signEntity && block instanceof CanvasSign canvasSignBlock) {

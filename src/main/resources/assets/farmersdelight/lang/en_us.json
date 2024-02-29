@@ -200,6 +200,8 @@
   "item.farmersdelight.dog_food": "Dog Food",
   "item.farmersdelight.horse_feed": "Horse Feed",
 
+  "entity.farmersdelight.rotten_tomato": "Rotten Tomato",
+
   "effect.farmersdelight.nourishment": "Nourishment",
   "effect.farmersdelight.comfort": "Comfort",
 
@@ -304,7 +306,15 @@
   "farmersdelight.jei.decomposition.light": "Sped up by sunlight",
   "farmersdelight.jei.decomposition.fluid": "Sped up by adjacent water",
   "farmersdelight.jei.decomposition.accelerators": "Sped up by adjacent activators (see below)",
+
   "farmersdelight.jei.info.straw": "A dry plant fiber used in crafting. Obtained by cutting grassy crops and plants with a Knife.",
-  "farmersdelight.jei.info.knife": "Knives are lightweight melee weapons. They can harvest Straw from grasses, and guarantee secondary drops from animals.",
-  "farmersdelight.jei.info.ham": "A large cut of meat from a Pig or Hoglin's leg. You will need something lighter than a Sword to cut one..."
+  "farmersdelight.jei.info.knife": "A lightweight melee weapon, with fast swings and gentle damage.\n\nThey can harvest Straw from grasses, and guarantee secondary drops from animals.",
+  "farmersdelight.jei.info.ham": "A large cut of meat from a Pig or Hoglin's leg.\n\nYou will need something lighter than a Sword to cut one...",
+  "farmersdelight.jei.info.wild_cabbages": "Cabbages can be commonly found as a wild plant in beach coasts.",
+  "farmersdelight.jei.info.wild_beetroots": "Beetroot can be commonly found as a wild plant in beach coasts.",
+  "farmersdelight.jei.info.wild_carrots": "Carrots can be commonly found as a wild plant in temperate lands, such as plains and forests.",
+  "farmersdelight.jei.info.wild_onions": "Onions can be commonly found as a wild plant in temperate lands, such as plains and forests.",
+  "farmersdelight.jei.info.wild_potatoes": "Potatoes can be commonly found as a wild plant in cold lands, such as mountains and taigas.",
+  "farmersdelight.jei.info.wild_tomatoes": "Tomatoes can be commonly found as a wild plant in arid lands, such as savannas and deserts.",
+  "farmersdelight.jei.info.wild_rice": "Rice can be commonly found as a wild plant in the ponds of wet lands, such as swamps and jungles."
 }

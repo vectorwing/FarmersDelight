@@ -10,6 +10,9 @@
   "block.farmersdelight.jungle_cabinet": "丛林木厨柜",
   "block.farmersdelight.acacia_cabinet": "金合欢木厨柜",
   "block.farmersdelight.dark_oak_cabinet": "深色橡木厨柜",
+  "block.farmersdelight.mangrove_cabinet": "红树木橱柜",
+  "block.farmersdelight.cherry_cabinet": "樱桃木橱柜",
+  "block.farmersdelight.bamboo_cabinet": "竹橱柜",
   "block.farmersdelight.crimson_cabinet": "绯红木厨柜",
   "block.farmersdelight.warped_cabinet": "诡异木厨柜",
   "block.farmersdelight.rope": "绳子",
@@ -48,6 +51,24 @@
   "block.farmersdelight.green_canvas_sign": "绿色粗布告示牌",
   "block.farmersdelight.red_canvas_sign": "红色粗布告示牌",
   "block.farmersdelight.black_canvas_sign": "黑色粗布告示牌",
+
+  "block.farmersdelight.hanging_canvas_sign": "悬挂式粗布告示牌",
+  "block.farmersdelight.white_hanging_canvas_sign": "悬挂式白色粗布告示牌",
+  "block.farmersdelight.orange_hanging_canvas_sign": "悬挂式橙色粗布告示牌",
+  "block.farmersdelight.magenta_hanging_canvas_sign": "悬挂式品红色粗布告示牌",
+  "block.farmersdelight.light_blue_hanging_canvas_sign": "悬挂式淡蓝色粗布告示牌",
+  "block.farmersdelight.yellow_hanging_canvas_sign": "悬挂式黄色粗布告示牌",
+  "block.farmersdelight.lime_hanging_canvas_sign": "悬挂式黄绿色粗布告示牌",
+  "block.farmersdelight.pink_hanging_canvas_sign": "悬挂式粉红色粗布告示牌",
+  "block.farmersdelight.gray_hanging_canvas_sign": "悬挂式灰色粗布告示牌",
+  "block.farmersdelight.light_gray_hanging_canvas_sign": "悬挂式淡灰色粗布告示牌",
+  "block.farmersdelight.cyan_hanging_canvas_sign": "悬挂式青色粗布告示牌",
+  "block.farmersdelight.purple_hanging_canvas_sign": "悬挂式紫色粗布告示牌",
+  "block.farmersdelight.blue_hanging_canvas_sign": "悬挂式蓝色粗布告示牌",
+  "block.farmersdelight.brown_hanging_canvas_sign": "悬挂式棕色粗布告示牌",
+  "block.farmersdelight.green_hanging_canvas_sign": "悬挂式绿色粗布告示牌",
+  "block.farmersdelight.red_hanging_canvas_sign": "悬挂式红色粗布告示牌",
+  "block.farmersdelight.black_hanging_canvas_sign": "悬挂式黑色粗布告示牌",
 
   "block.farmersdelight.budding_tomatoes": "萌芽的番茄藤蔓",
   "block.farmersdelight.tomatoes": "番茄藤蔓",
@@ -178,6 +199,8 @@
 
   "item.farmersdelight.dog_food": "狗粮",
   "item.farmersdelight.horse_feed": "马食",
+
+  "entity.farmersdelight.rotten_tomato": "烂番茄",
 
   "effect.farmersdelight.nourishment": "滋养",
   "effect.farmersdelight.comfort": "舒适",

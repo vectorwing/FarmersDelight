@@ -47,7 +47,7 @@ public class ModItems
 	public static final Supplier<Item> STOVE = registerWithTab("stove",
 			() -> new BlockItem(ModBlocks.STOVE.get(), basicItem()));
 	public static final Supplier<Item> COOKING_POT = registerWithTab("cooking_pot",
-			() -> new BlockItem(ModBlocks.COOKING_POT.get(), basicItem().stacksTo(1)));
+			() -> new CookingPotItem(ModBlocks.COOKING_POT.get(), basicItem().stacksTo(1)));
 	public static final Supplier<Item> SKILLET = registerWithTab("skillet",
 			() -> new SkilletItem(ModBlocks.SKILLET.get(), basicItem().stacksTo(1)));
 	public static final Supplier<Item> CUTTING_BOARD = registerWithTab("cutting_board",

@@ -200,6 +200,8 @@
   "item.farmersdelight.dog_food": "Hound's Chow",
   "item.farmersdelight.horse_feed": "Land Beast's Hay",
 
+  "entity.farmersdelight.rotten_tomato": "Rottin' Tomato",
+
   "effect.farmersdelight.nourishment": "Belly's Full",
   "effect.farmersdelight.comfort": "Heart's Warm",
 
@@ -303,8 +305,16 @@
   "farmersdelight.jei.decomposition": "Garbage Rottin'",
   "farmersdelight.jei.decomposition.light": "Leave it by the mornin' sun",
   "farmersdelight.jei.decomposition.fluid": "Leave it by the ship's bilge",
-  "farmersdelight.jei.decomposition.accelerators": "Leave it by them spoiler's (see below)",
+  "farmersdelight.jei.decomposition.accelerators": "Leave it near decayin' stuffs (see below)",
+
   "farmersdelight.jei.info.straw": "Dry an' firm, good fer makin' ropes. Run yer dagger by them grasses, both crop an' wild, ta get some.",
-  "farmersdelight.jei.info.knife": "Daggers make fer a quick slashin'! Slay a beast ta always get a piece o' its other drops, or chop grasses an' wheats ta get Fiber.",
-  "farmersdelight.jei.info.ham": "Hogs an' Hoglins will give ye this fine meat cut, so long as yer cuttin' tool's light enough."
+  "farmersdelight.jei.info.knife": "Daggers make fer a quick slashin'!\n\nSlay a beast ta always get a piece o' its other drops, or chop grasses an' wheats ta get Fiber.",
+  "farmersdelight.jei.info.ham": "Hogs an' Hoglins will give ye this fine meat cut, so long as yer cuttin' tool's light enough.",
+  "farmersdelight.jei.info.wild_cabbages": "Leafers can be spotted sproutin' around port, by the sea shore.",
+  "farmersdelight.jei.info.wild_beetroots": "Bloody Potatoes can be spotted sproutin' around port, by the sea shore.",
+  "farmersdelight.jei.info.wild_carrots": "Orange Weeds can be spotted sproutin' in mild land. Set sail ta forests n' plains!",
+  "farmersdelight.jei.info.wild_onions": "Stink Bulbs can be spotted sproutin' in mild land. Set sail ta forests n' plains!",
+  "farmersdelight.jei.info.wild_potatoes": "Taters can be spotted sproutin' in frigid land. Set sail ta mountains n' taigas!",
+  "farmersdelight.jei.info.wild_tomatoes": "Tomatoes can be spotted sproutin' in hot, hot land. Set sail ta deserts n' savannas!",
+  "farmersdelight.jei.info.wild_rice": "Rice weeds can be spotted swimmin' by the shallow waters o' swamps n' jungles."
 }
