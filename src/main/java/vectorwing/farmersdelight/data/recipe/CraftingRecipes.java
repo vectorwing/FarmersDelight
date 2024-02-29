@@ -13,9 +13,9 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.crafting.FoodServingRecipe;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
-import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
@@ -32,7 +32,7 @@ public class CraftingRecipes
 		recipesFoodstuffs(output);
 		recipesFoodBlocks(output);
 		recipesCraftedMeals(output);
-		SpecialRecipeBuilder.special(ModRecipeSerializers.FOOD_SERVING.get()).save(output, "food_serving");
+		SpecialRecipeBuilder.special(FoodServingRecipe::new).save(output, "food_serving");
 	}
 
 	public static void canvasSignDyeing(RecipeOutput output, ItemLike canvasSign, ItemLike hangingCanvasSign, TagKey<Item> dyeTag) {

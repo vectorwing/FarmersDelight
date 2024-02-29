@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.data;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
@@ -243,7 +242,7 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.RED_MUSHROOM_COLONY.get());
 		tag(ModTags.UNAFFECTED_BY_RICH_SOIL).add(
 						Blocks.GRASS_BLOCK,
-						Blocks.GRASS,
+						Blocks.SHORT_GRASS,
 						Blocks.FERN,
 						Blocks.TWISTING_VINES,
 						Blocks.TWISTING_VINES_PLANT,

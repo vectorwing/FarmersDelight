@@ -7,7 +7,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForge;
 import org.apache.logging.log4j.LogManager;
@@ -28,9 +27,7 @@ public class FarmersDelight
 
 	public static final RecipeBookType RECIPE_TYPE_COOKING = RecipeBookType.create("COOKING");
 
-	public FarmersDelight() {
-		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
+	public FarmersDelight(IEventBus modEventBus) {
 		modEventBus.addListener(CommonSetup::init);
 		if (FMLEnvironment.dist.isClient()) {
 			modEventBus.addListener(ClientSetup::init);
@@ -58,8 +55,7 @@ public class FarmersDelight
 		ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
 		ModConditionCodecs.CONDITION_CODECS.register(modEventBus);
 		ModIngredientTypes.INGREDIENT_TYPES.register(modEventBus);
-
-		ModAdvancements.register();
+		ModAdvancements.TRIGGERS.register(modEventBus);
 
 		WildCropGeneration.load();
 		NeoForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);

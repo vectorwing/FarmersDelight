@@ -30,6 +30,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.CuttingBoardBlock;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.mixin.accessor.RecipeManagerAccessor;
+import vectorwing.farmersdelight.common.registry.ModAdvancements;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.registry.ModSounds;
@@ -103,7 +104,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 			playProcessingSound(recipe.value().getSoundEvent().orElse(null), toolStack, getStoredItem());
 			removeItem();
 			if (player instanceof ServerPlayer) {
-//				ModAdvancements.CUTTING_BOARD.trigger((ServerPlayer) player);
+				ModAdvancements.USE_CUTTING_BOARD.get().trigger((ServerPlayer) player);
 			}
 		});
 
