@@ -5,7 +5,7 @@ license = "MIT License"
 
 [[mods]]
 modId = "farmersdelight"
-version = "1.20.2-1.2.4"
+version = "1.20.4-1.2.4"
 displayName = "Farmer's Delight"
 # updateJSONURL=""
 displayURL = "https://github.com/vectorwing/FarmersDelight"
@@ -19,21 +19,21 @@ configBackground = "minecraft:textures/block/bricks.png"
 
 [[dependencies.farmersdelight]]
 modId = "neoforge"
-mandatory = true
+type = "required"
 versionRange = "[1,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.farmersdelight]]
 modId = "minecraft"
-mandatory = true
-versionRange = "[1.20.2,1.20.3)"
+type = "required"
+versionRange = "[1.20.4]"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.farmersdelight]]
 modId = "crafttweaker"
-mandatory = false
+type = "optional"
 versionRange = "[14.0.6,)"
 ordering = "NONE"
 side = "BOTH"

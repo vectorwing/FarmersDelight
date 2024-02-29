@@ -75,7 +75,7 @@ dependencies {
     compileOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}:api"
     runtimeOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}"
 
-    def ctDep = "com.blamejared.crafttweaker:CraftTweaker-neoforge-1.20.2:${crafttweaker_version}"
+    def ctDep = "com.blamejared.crafttweaker:CraftTweaker-neoforge-${mc_version}:${crafttweaker_version}"
     compileOnly ctDep
     runtimeOnly ctDep
 
