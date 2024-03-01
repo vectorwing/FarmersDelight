@@ -18,13 +18,10 @@
     "description": {
       "translate": "farmersdelight.advancement.place_skillet.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "farmersdelight:skillet",
       "nbt": "{Damage:0}"
     },
-    "show_toast": true,
     "title": {
       "translate": "farmersdelight.advancement.place_skillet"
     }

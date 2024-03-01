@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:warped_cabinet"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

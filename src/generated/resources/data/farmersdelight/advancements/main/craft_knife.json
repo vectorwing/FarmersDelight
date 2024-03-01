@@ -63,17 +63,13 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "farmersdelight.advancement.craft_knife.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "farmersdelight:flint_knife",
       "nbt": "{Damage:0}"
     },
-    "show_toast": true,
     "title": {
       "translate": "farmersdelight.advancement.craft_knife"
     }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_pumpkin",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_pumpkin"
     ]
   ],
   "rewards": {
     "recipes": [
       "farmersdelight:cooking/stuffed_pumpkin_block"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

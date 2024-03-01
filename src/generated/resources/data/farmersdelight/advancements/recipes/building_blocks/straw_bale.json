@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:straw_bale"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

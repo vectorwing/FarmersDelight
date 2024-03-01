@@ -31,12 +31,9 @@
     "description": {
       "translate": "farmersdelight.advancement.get_ham.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "farmersdelight:ham"
     },
-    "show_toast": true,
     "title": {
       "translate": "farmersdelight.advancement.get_ham"
     }

@@ -18,12 +18,9 @@
     "description": {
       "translate": "farmersdelight.advancement.place_organic_compost.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "farmersdelight:organic_compost"
     },
-    "show_toast": true,
     "title": {
       "translate": "farmersdelight.advancement.place_organic_compost"
     }

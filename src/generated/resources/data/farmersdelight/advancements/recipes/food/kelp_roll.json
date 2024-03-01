@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:kelp_roll"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

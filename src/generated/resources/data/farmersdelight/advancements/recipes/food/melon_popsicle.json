@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:melon_popsicle"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

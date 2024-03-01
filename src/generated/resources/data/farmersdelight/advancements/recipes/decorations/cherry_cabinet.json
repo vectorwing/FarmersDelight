@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:cherry_cabinet"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

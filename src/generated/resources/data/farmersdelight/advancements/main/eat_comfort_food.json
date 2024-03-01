@@ -15,12 +15,9 @@
     "description": {
       "translate": "farmersdelight.advancement.eat_comfort_food.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "farmersdelight:baked_cod_stew"
     },
-    "show_toast": true,
     "title": {
       "translate": "farmersdelight.advancement.eat_comfort_food"
     }

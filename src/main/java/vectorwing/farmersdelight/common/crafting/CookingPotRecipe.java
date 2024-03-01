@@ -32,6 +32,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 	private final NonNullList<Ingredient> inputItems;
 	private final ItemStack output;
 	private final ItemStack container;
+	private final ItemStack containerOverride;
 	private final float experience;
 	private final int cookTime;
 
@@ -49,6 +50,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 			this.container = ItemStack.EMPTY;
 		}
 
+		this.containerOverride = container;
 		this.experience = experience;
 		this.cookTime = cookTime;
 	}
@@ -75,6 +77,10 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 
 	public ItemStack getOutputContainer() {
 		return this.container;
+	}
+
+	public ItemStack getContainerOverride() {
+		return this.containerOverride;
 	}
 
 	@Override
@@ -164,7 +170,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 					return nonNullList;
 				}, ingredients -> ingredients).forGetter(CookingPotRecipe::getIngredients),
 				ItemStack.ITEM_WITH_COUNT_CODEC.fieldOf("result").forGetter(r -> r.output),
-				ExtraCodecs.strictOptionalField(ItemStack.ITEM_WITH_COUNT_CODEC, "container", ItemStack.EMPTY).forGetter(CookingPotRecipe::getOutputContainer),
+				ExtraCodecs.strictOptionalField(ItemStack.ITEM_WITH_COUNT_CODEC, "container", ItemStack.EMPTY).forGetter(CookingPotRecipe::getContainerOverride),
 				ExtraCodecs.strictOptionalField(Codec.FLOAT, "experience", 0.0F).forGetter(CookingPotRecipe::getExperience),
 				ExtraCodecs.strictOptionalField(Codec.INT, "cookingtime", 200).forGetter(CookingPotRecipe::getCookTime)
 		).apply(inst, CookingPotRecipe::new));

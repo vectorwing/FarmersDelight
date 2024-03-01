@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:nether_salad"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

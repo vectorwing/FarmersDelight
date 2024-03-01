@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_rice",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_rice"
     ]
   ],
   "rewards": {
     "recipes": [
       "farmersdelight:cooking/cooked_rice"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

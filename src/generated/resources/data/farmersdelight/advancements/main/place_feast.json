@@ -58,16 +58,12 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "farmersdelight.advancement.place_feast.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "farmersdelight:roast_chicken_block"
     },
-    "show_toast": true,
     "title": {
       "translate": "farmersdelight.advancement.place_feast"
     }

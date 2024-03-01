@@ -14,16 +14,13 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "farmersdelight.advancement.place_cooking_pot.desc"
     },
     "frame": "goal",
-    "hidden": false,
     "icon": {
       "item": "farmersdelight:cooking_pot"
     },
-    "show_toast": true,
     "title": {
       "translate": "farmersdelight.advancement.place_cooking_pot"
     }

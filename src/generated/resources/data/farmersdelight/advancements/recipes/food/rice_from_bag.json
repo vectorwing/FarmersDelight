@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:rice_from_bag"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:bamboo_cabinet"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

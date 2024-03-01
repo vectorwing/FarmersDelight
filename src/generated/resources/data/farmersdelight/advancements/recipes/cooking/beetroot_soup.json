@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_beetroot",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_beetroot"
     ]
   ],
   "rewards": {
     "recipes": [
       "farmersdelight:cooking/beetroot_soup"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

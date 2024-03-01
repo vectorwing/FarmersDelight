@@ -17,13 +17,10 @@
     "description": {
       "translate": "farmersdelight.advancement.use_skillet.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "farmersdelight:skillet",
       "nbt": "{Damage:0}"
     },
-    "show_toast": true,
     "title": {
       "translate": "farmersdelight.advancement.use_skillet"
     }

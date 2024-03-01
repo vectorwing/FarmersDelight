@@ -31,12 +31,9 @@
     "description": {
       "translate": "farmersdelight.advancement.get_mushroom_colony.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "farmersdelight:red_mushroom_colony"
     },
-    "show_toast": true,
     "title": {
       "translate": "farmersdelight.advancement.get_mushroom_colony"
     }

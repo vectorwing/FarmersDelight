@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:mutton_wrap"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

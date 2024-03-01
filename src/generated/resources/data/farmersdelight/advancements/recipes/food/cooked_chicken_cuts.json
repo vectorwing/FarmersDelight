@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:cooked_chicken_cuts"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

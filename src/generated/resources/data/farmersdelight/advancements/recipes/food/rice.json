@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:rice"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

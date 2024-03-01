@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:milk_bucket_from_bottles"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

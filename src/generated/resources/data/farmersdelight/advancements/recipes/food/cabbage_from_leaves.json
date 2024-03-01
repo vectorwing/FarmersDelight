@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:cabbage_from_leaves"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

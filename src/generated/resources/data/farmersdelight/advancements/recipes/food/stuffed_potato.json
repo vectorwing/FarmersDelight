@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:stuffed_potato"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

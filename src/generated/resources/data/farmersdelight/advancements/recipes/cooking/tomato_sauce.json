@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_tomato",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_tomato"
     ]
   ],
   "rewards": {
     "recipes": [
       "farmersdelight:cooking/tomato_sauce"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:hamburger"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

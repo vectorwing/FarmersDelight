@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:sweet_berry_cookie"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

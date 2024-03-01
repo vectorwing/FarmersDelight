@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_bone",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_bone"
     ]
   ],
   "rewards": {
     "recipes": [
       "farmersdelight:cooking/bone_broth"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

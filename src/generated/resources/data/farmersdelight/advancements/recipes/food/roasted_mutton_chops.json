@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:roasted_mutton_chops"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

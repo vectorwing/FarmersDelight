@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:canvas_rug"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

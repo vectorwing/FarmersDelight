@@ -15,16 +15,13 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "farmersdelight.advancement.get_rich_soil.desc"
     },
     "frame": "goal",
-    "hidden": false,
     "icon": {
       "item": "farmersdelight:rich_soil"
     },
-    "show_toast": true,
     "title": {
       "translate": "farmersdelight.advancement.get_rich_soil"
     }

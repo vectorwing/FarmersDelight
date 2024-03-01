@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:pie_crust"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

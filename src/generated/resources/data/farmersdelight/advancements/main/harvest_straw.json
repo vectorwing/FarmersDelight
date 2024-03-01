@@ -19,12 +19,9 @@
     "description": {
       "translate": "farmersdelight.advancement.harvest_straw.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "farmersdelight:straw"
     },
-    "show_toast": true,
     "title": {
       "translate": "farmersdelight.advancement.harvest_straw"
     }

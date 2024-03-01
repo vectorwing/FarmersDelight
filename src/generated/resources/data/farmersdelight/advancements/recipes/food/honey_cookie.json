@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:honey_cookie"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

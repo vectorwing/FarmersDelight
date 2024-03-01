@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:tatami_block_from_full"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -26,14 +26,13 @@
   },
   "requirements": [
     [
-      "has_any_ingredient",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_any_ingredient"
     ]
   ],
   "rewards": {
     "recipes": [
       "farmersdelight:cooking/pumpkin_soup"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

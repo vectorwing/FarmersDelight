@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:cake_from_milk_bottle"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

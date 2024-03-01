@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:sweet_berry_cheesecake_from_slices"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

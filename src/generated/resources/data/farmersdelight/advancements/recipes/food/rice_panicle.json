@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:rice_panicle"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

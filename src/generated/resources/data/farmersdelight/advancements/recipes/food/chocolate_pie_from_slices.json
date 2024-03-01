@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:chocolate_pie_from_slices"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

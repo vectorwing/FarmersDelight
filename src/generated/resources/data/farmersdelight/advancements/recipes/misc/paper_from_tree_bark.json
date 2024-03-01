@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:paper_from_tree_bark"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

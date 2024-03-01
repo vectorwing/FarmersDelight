@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:horse_feed"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

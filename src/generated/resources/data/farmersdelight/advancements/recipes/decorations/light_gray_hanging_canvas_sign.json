@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:light_gray_hanging_canvas_sign"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

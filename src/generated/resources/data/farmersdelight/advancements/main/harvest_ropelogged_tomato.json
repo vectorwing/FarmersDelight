@@ -32,12 +32,9 @@
     "description": {
       "translate": "farmersdelight.advancement.harvest_ropelogged_tomato.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "farmersdelight:tomato"
     },
-    "show_toast": true,
     "title": {
       "translate": "farmersdelight.advancement.harvest_ropelogged_tomato"
     }

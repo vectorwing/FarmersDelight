@@ -40,6 +40,5 @@
     "recipes": [
       "farmersdelight:rice_roll_medley_block"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

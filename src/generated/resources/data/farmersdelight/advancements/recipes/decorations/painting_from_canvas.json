@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:painting_from_canvas"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

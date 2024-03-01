@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:shepherds_pie_block"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

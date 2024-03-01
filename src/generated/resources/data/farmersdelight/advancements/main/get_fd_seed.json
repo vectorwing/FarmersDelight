@@ -51,16 +51,12 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "farmersdelight.advancement.get_fd_seed.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "farmersdelight:wild_onions"
     },
-    "show_toast": true,
     "title": {
       "translate": "farmersdelight.advancement.get_fd_seed"
     }

@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:bread_from_smoking"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

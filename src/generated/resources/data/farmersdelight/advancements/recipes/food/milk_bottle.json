@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:milk_bottle"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

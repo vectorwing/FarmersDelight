@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_apple",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_apple"
     ]
   ],
   "rewards": {
     "recipes": [
       "farmersdelight:cooking/apple_cider"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

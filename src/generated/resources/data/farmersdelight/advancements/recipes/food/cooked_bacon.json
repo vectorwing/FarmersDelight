@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:cooked_bacon"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

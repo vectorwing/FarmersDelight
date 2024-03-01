@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:beef_patty"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:smoked_ham"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

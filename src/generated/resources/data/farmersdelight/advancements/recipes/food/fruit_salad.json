@@ -45,6 +45,5 @@
     "recipes": [
       "farmersdelight:fruit_salad"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

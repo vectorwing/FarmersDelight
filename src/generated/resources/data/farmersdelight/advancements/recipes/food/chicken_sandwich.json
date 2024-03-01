@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:chicken_sandwich"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

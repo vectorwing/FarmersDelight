@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:mangrove_cabinet"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:apple_pie"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:wheat_dough_from_water"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

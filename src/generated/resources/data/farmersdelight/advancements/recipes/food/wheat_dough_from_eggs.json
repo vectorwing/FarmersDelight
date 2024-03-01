@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:wheat_dough_from_eggs"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -30,16 +30,12 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "farmersdelight.advancement.hit_raider_with_rotten_tomato.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "farmersdelight:rotten_tomato"
     },
-    "show_toast": true,
     "title": {
       "translate": "farmersdelight.advancement.hit_raider_with_rotten_tomato"
     }

@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:rope_from_safety_net"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

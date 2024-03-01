@@ -43,6 +43,5 @@
     "recipes": [
       "farmersdelight:barbecue_stick"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

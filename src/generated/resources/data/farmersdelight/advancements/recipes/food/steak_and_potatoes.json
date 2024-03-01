@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:steak_and_potatoes"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

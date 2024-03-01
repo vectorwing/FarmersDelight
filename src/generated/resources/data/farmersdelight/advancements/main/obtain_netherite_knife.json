@@ -15,17 +15,14 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "farmersdelight.advancement.obtain_netherite_knife.desc"
     },
     "frame": "challenge",
-    "hidden": false,
     "icon": {
       "item": "farmersdelight:netherite_knife",
       "nbt": "{Damage:0}"
     },
-    "show_toast": true,
     "title": {
       "translate": "farmersdelight.advancement.obtain_netherite_knife"
     }

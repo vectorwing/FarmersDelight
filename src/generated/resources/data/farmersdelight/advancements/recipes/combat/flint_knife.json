@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:flint_knife"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

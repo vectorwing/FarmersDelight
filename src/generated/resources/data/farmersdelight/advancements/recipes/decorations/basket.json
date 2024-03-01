@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:basket"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

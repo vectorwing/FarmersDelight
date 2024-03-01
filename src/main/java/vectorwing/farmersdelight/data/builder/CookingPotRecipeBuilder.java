@@ -37,10 +37,8 @@ public class CookingPotRecipeBuilder implements RecipeBuilder
 	private final ItemStack resultStack;
 	private final int cookingTime;
 	private final float experience;
-	private final Item container;
+	private final ItemStack container;
 	private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
-
-//	private final Advancement.Builder advancement = Advancement.Builder.recipeAdvancement();
 
 	public CookingPotRecipeBuilder(ItemLike result, int count, int cookingTime, float experience, @Nullable ItemLike container) {
 		this(new ItemStack(result, count), cookingTime, experience, container);
@@ -51,7 +49,7 @@ public class CookingPotRecipeBuilder implements RecipeBuilder
 		this.resultStack = resultIn;
 		this.cookingTime = cookingTime;
 		this.experience = experience;
-		this.container = container != null ? container.asItem() : null;
+		this.container = container != null ? new ItemStack(container) : ItemStack.EMPTY;
 		this.tab = null;
 	}
 
@@ -133,23 +131,12 @@ public class CookingPotRecipeBuilder implements RecipeBuilder
 		}
 	}
 
-//	public void build(RecipeOutput outputIn, ResourceLocation id) {
-//		if (!advancement.criteria.buildOrThrow().isEmpty()) {
-//			advancement.parent(RecipeBuilder.ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
-//					.rewards(AdvancementRewards.Builder.recipe(id))
-//					.requirements(AdvancementRequirements.Strategy.OR);
-//			ResourceLocation advancementId = new ResourceLocation(id.getNamespace(), "recipes/" + id.getPath());
-//			outputIn.accept(new CookingPotRecipeBuilder.Result(id, result, count, ingredients, cookingTime, experience, container, tab, advancement.build(advancementId)));
-//		} else {
-//			outputIn.accept(new CookingPotRecipeBuilder.Result(id, result, count, ingredients, cookingTime, experience, container, tab));
-//		}
-//	}
-
 	@Override
 	public void save(RecipeOutput output, ResourceLocation id) {
+		ResourceLocation recipeId = id.withPrefix("cooking/");
 		Advancement.Builder advancementBuilder = output.advancement()
-				.addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
-				.rewards(AdvancementRewards.Builder.recipe(id))
+				.addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeId))
+				.rewards(AdvancementRewards.Builder.recipe(recipeId))
 				.requirements(AdvancementRequirements.Strategy.OR);
 		this.criteria.forEach(advancementBuilder::addCriterion);
 		CookingPotRecipe recipe = new CookingPotRecipe(
@@ -157,91 +144,10 @@ public class CookingPotRecipeBuilder implements RecipeBuilder
 				this.tab,
 				this.ingredients,
 				this.resultStack,
-				new ItemStack(this.container),
+				this.container,
 				this.experience,
 				this.cookingTime
 		);
-		output.accept(id.withPrefix("cooking/"), recipe, advancementBuilder.build(id.withPrefix("recipes/cooking/")));
+		output.accept(recipeId, recipe, advancementBuilder.build(id.withPrefix("recipes/cooking/")));
 	}
-
-//	public static class Result implements FinishedRecipe
-//	{
-//		private final ResourceLocation id;
-//		private final CookingPotRecipeBookTab tab;
-//		private final List<Ingredient> ingredients;
-//		private final Item result;
-//		private final int count;
-//		private final int cookingTime;
-//		private final float experience;
-//		private final Item container;
-//		private final AdvancementHolder advancement;
-//
-//		public Result(ResourceLocation idIn, Item resultIn, int countIn, List<Ingredient> ingredientsIn, int cookingTimeIn, float experienceIn, @Nullable Item containerIn, @Nullable CookingPotRecipeBookTab tabIn, @Nullable AdvancementHolder advancement) {
-//			this.id = idIn;
-//			this.tab = tabIn;
-//			this.ingredients = ingredientsIn;
-//			this.result = resultIn;
-//			this.count = countIn;
-//			this.cookingTime = cookingTimeIn;
-//			this.experience = experienceIn;
-//			this.container = containerIn;
-//			this.advancement = advancement;
-//		}
-//
-//		public Result(ResourceLocation idIn, Item resultIn, int countIn, List<Ingredient> ingredientsIn, int cookingTimeIn, float experienceIn, @Nullable Item containerIn, @Nullable CookingPotRecipeBookTab tabIn) {
-//			this(idIn, resultIn, countIn, ingredientsIn, cookingTimeIn, experienceIn, containerIn, tabIn, null);
-//		}
-//
-//		@Override
-//		public void serializeRecipeData(JsonObject json) {
-//			if (tab != null) {
-//				json.addProperty("recipe_book_tab", tab.toString());
-//			}
-//
-//			JsonArray arrayIngredients = new JsonArray();
-//
-//			for (Ingredient ingredient : ingredients) {
-//				arrayIngredients.add(ingredient.toJson(true));
-//			}
-//			json.add("ingredients", arrayIngredients);
-//
-//			JsonObject objectResult = new JsonObject();
-//			objectResult.addProperty("item", BuiltInRegistries.ITEM.getKey(result).toString());
-//			if (count > 1) {
-//				objectResult.addProperty("count", count);
-//			}
-//			json.add("result", objectResult);
-//
-//			if (container != null) {
-//				JsonObject objectContainer = new JsonObject();
-//				objectContainer.addProperty("item", BuiltInRegistries.ITEM.getKey(container).toString());
-//				json.add("container", objectContainer);
-//			}
-//			if (experience > 0) {
-//				json.addProperty("experience", experience);
-//			}
-//			json.addProperty("cookingtime", cookingTime);
-//		}
-//
-//		@Override
-//		public JsonObject serializeRecipe() {
-//			return FinishedRecipe.super.serializeRecipe();
-//		}
-//
-//		@Override
-//		public ResourceLocation id() {
-//			return id;
-//		}
-//
-//		@Override
-//		public RecipeSerializer<?> type() {
-//			return ModRecipeSerializers.COOKING.get();
-//		}
-//
-//		@Nullable
-//		@Override
-//		public AdvancementHolder advancement() {
-//			return advancement;
-//		}
-//	}
 }

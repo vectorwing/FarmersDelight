@@ -25,16 +25,12 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "farmersdelight.advancement.place_campfire.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "minecraft:campfire"
     },
-    "show_toast": true,
     "title": {
       "translate": "farmersdelight.advancement.place_campfire"
     }

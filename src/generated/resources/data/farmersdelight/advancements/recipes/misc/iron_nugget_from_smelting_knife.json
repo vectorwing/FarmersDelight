@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:iron_nugget_from_smelting_knife"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

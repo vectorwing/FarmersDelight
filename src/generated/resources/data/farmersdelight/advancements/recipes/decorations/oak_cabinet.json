@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:oak_cabinet"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

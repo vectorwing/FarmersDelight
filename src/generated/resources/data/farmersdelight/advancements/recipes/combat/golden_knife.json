@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:golden_knife"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

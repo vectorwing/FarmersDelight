@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:pumpkin_from_slices"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

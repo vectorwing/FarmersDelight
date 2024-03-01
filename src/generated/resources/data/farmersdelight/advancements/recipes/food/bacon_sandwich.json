@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:bacon_sandwich"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

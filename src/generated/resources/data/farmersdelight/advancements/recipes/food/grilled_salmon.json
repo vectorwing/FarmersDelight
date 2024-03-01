@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:grilled_salmon"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:cod_roll"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

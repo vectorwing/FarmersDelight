@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:roast_chicken_block"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

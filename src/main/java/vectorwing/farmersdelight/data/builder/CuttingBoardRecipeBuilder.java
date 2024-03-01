@@ -119,67 +119,8 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder
 				this.ingredient,
 				this.tool,
 				this.results,
-				Optional.of(this.soundEvent)
+				this.soundEvent == null ? Optional.empty() : Optional.of(this.soundEvent)
 		);
 		output.accept(id.withPrefix("cutting/"), recipe, null);
 	}
-
-//	public static class Result implements FinishedRecipe
-//	{
-//		private final ResourceLocation id;
-//		private final Ingredient ingredient;
-//		private final Ingredient tool;
-//		private final List<ChanceResult> results;
-//		private final String soundEventID;
-//
-//		public Result(ResourceLocation idIn, Ingredient ingredientIn, Ingredient toolIn, List<ChanceResult> resultsIn, String soundEventIDIn) {
-//			this.id = idIn;
-//			this.ingredient = ingredientIn;
-//			this.tool = toolIn;
-//			this.results = resultsIn;
-//			this.soundEventID = soundEventIDIn;
-//		}
-//
-//		@Override
-//		public void serializeRecipeData(JsonObject json) {
-//			JsonArray arrayIngredients = new JsonArray();
-//			arrayIngredients.add(this.ingredient.toJson(true));
-//			json.add("ingredients", arrayIngredients);
-//
-//			json.add("tool", this.tool.toJson(true));
-//
-//			JsonArray arrayResults = new JsonArray();
-//			for (ChanceResult result : this.results) {
-//				JsonObject jsonobject = new JsonObject();
-//				jsonobject.addProperty("item", BuiltInRegistries.ITEM.getKey(result.getStack().getItem()).toString());
-//				if (result.getStack().getCount() > 1) {
-//					jsonobject.addProperty("count", result.getStack().getCount());
-//				}
-//				if (result.getChance() < 1) {
-//					jsonobject.addProperty("chance", result.getChance());
-//				}
-//				arrayResults.add(jsonobject);
-//			}
-//			json.add("result", arrayResults);
-//			if (!this.soundEventID.isEmpty()) {
-//				json.addProperty("sound", this.soundEventID);
-//			}
-//		}
-//
-//		@Override
-//		public ResourceLocation id() {
-//			return this.id;
-//		}
-//
-//		@Override
-//		public RecipeSerializer<?> type() {
-//			return ModRecipeSerializers.CUTTING.get();
-//		}
-//
-//		@Nullable
-//		@Override
-//		public AdvancementHolder advancement() {
-//			return null;
-//		}
-//	}
 }

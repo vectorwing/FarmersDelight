@@ -10,8 +10,6 @@
     "description": {
       "translate": "farmersdelight.advancement.root.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "farmersdelight:cooking_pot"
     },

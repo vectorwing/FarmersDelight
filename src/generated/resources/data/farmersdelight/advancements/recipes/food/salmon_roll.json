@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:salmon_roll"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

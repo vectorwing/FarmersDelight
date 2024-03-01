@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:honey_glazed_ham_block"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

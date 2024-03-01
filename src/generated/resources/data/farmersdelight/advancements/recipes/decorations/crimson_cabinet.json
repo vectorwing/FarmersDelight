@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:crimson_cabinet"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

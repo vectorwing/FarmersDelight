@@ -10,12 +10,9 @@
     "description": {
       "translate": "farmersdelight.advancement.use_cutting_board.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "farmersdelight:cutting_board"
     },
-    "show_toast": true,
     "title": {
       "translate": "farmersdelight.advancement.use_cutting_board"
     }

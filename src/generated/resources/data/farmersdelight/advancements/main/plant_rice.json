@@ -18,12 +18,9 @@
     "description": {
       "translate": "farmersdelight.advancement.plant_rice.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "farmersdelight:rice"
     },
-    "show_toast": true,
     "title": {
       "translate": "farmersdelight.advancement.plant_rice"
     }

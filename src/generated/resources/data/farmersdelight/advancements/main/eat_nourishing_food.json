@@ -15,12 +15,9 @@
     "description": {
       "translate": "farmersdelight.advancement.eat_nourishing_food.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "farmersdelight:steak_and_potatoes"
     },
-    "show_toast": true,
     "title": {
       "translate": "farmersdelight.advancement.eat_nourishing_food"
     }

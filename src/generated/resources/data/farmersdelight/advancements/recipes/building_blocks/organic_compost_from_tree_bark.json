@@ -43,6 +43,5 @@
     "recipes": [
       "farmersdelight:organic_compost_from_tree_bark"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

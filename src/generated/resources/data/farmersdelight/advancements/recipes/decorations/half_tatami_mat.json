@@ -30,6 +30,5 @@
     "recipes": [
       "farmersdelight:half_tatami_mat"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }
