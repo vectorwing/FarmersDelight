@@ -65,12 +65,10 @@ dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
     // compile against the JEI API but do not include it at runtime
-    /*
     compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${mc_version}-forge-api:${jei_version}"
     // at runtime, use the full JEI jar for Forge
     runtimeOnly "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
-    */
 
     compileOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}:api"
     runtimeOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}"

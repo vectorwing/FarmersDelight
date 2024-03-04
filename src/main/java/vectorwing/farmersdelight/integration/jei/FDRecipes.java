@@ -1,9 +1,8 @@
 package vectorwing.farmersdelight.integration.jei;
 
-// TODO: Uncomment this once JEI updates.
-/*
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
@@ -27,11 +26,10 @@ public class FDRecipes
 	}
 
 	public List<CookingPotRecipe> getCookingPotRecipes() {
-		return recipeManager.getAllRecipesFor(ModRecipeTypes.COOKING.get()).stream().toList();
+		return recipeManager.getAllRecipesFor(ModRecipeTypes.COOKING.get()).stream().map(RecipeHolder::value).toList();
 	}
 
 	public List<CuttingBoardRecipe> getCuttingBoardRecipes() {
-		return recipeManager.getAllRecipesFor(ModRecipeTypes.CUTTING.get()).stream().toList();
+		return recipeManager.getAllRecipesFor(ModRecipeTypes.CUTTING.get()).stream().map(RecipeHolder::value).toList();
 	}
 }
- */
