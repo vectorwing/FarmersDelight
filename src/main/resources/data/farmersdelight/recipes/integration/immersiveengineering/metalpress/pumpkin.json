@@ -6,13 +6,13 @@
     }
   ],
   "type": "immersiveengineering:metal_press",
-  "mold": "immersiveengineering:mold_unpacking",
-  "result": {
-    "item": "farmersdelight:pumpkin_slice",
-    "count": 4
-  },
+  "energy": 3200,
   "input": {
     "item": "minecraft:pumpkin"
   },
-  "energy": 3200
+  "mold": "immersiveengineering:mold_unpacking",
+  "result": {
+    "Count": 4,
+    "id": "farmersdelight:pumpkin_slice"
+  }
 }

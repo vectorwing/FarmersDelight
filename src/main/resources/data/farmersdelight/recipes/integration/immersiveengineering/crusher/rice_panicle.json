@@ -9,13 +9,16 @@
   "secondaries": [
     {
       "chance": 1,
+      "conditions": [],
       "output": {
         "item": "farmersdelight:straw"
       }
     }
   ],
   "result": {
-    "item": "farmersdelight:rice",
+    "basePredicate": {
+      "item": "farmersdelight:rice"
+    },
     "count": 1
   },
   "input": {

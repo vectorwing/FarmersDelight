@@ -9,6 +9,7 @@
   "secondaries": [
     {
       "chance": 0.2,
+      "conditions": [],
       "output": {
         "item": "minecraft:magenta_dye",
         "count": 3
@@ -23,10 +24,10 @@
     }
   ],
   "result": {
-    "count": 1,
-    "base_ingredient": {
+    "basePredicate": {
       "item": "minecraft:magenta_dye"
-    }
+    },
+    "count": 1
   },
   "input": {
     "item": "farmersdelight:wild_onions"

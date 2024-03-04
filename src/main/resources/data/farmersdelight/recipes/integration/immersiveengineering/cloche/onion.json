@@ -6,21 +6,21 @@
     }
   ],
   "type": "immersiveengineering:cloche",
-  "results": [
-    {
-      "item": "farmersdelight:onion",
-      "count": 2
-    }
-  ],
   "input": {
     "item": "farmersdelight:onion"
   },
+  "render": {
+    "type": "immersiveengineering:crop",
+    "value": "farmersdelight:onions"
+  },
+  "results": [
+    {
+      "Count": 2,
+      "id": "farmersdelight:onion"
+    }
+  ],
   "soil": {
     "item": "minecraft:dirt"
   },
-  "time": 800,
-  "render": {
-    "type": "crop",
-    "block": "farmersdelight:onions"
-  }
+  "time": 800
 }

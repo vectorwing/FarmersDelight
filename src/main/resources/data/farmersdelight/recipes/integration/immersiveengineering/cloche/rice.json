@@ -6,21 +6,21 @@
     }
   ],
   "type": "immersiveengineering:cloche",
-  "results": [
-    {
-      "item": "farmersdelight:rice_panicle",
-      "count": 2
-    }
-  ],
   "input": {
     "item": "farmersdelight:rice"
   },
+  "render": {
+    "type": "immersiveengineering:crop",
+    "value": "farmersdelight:rice_panicles"
+  },
+  "results": [
+    {
+      "Count": 2,
+      "id": "farmersdelight:rice_panicle"
+    }
+  ],
   "soil": {
     "item": "minecraft:dirt"
   },
-  "time": 1000,
-  "render": {
-    "type": "crop",
-    "block": "farmersdelight:rice_panicles"
-  }
+  "time": 1000
 }

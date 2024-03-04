@@ -9,6 +9,7 @@
   "secondaries": [
     {
       "chance": 0.1,
+      "conditions": [],
       "output": {
         "item": "minecraft:lime_dye",
         "count": 1
@@ -16,10 +17,10 @@
     }
   ],
   "result": {
-    "count": 2,
-    "base_ingredient": {
+    "basePredicate": {
       "item": "minecraft:purple_dye"
-    }
+    },
+    "count": 2
   },
   "input": {
     "item": "farmersdelight:wild_potatoes"

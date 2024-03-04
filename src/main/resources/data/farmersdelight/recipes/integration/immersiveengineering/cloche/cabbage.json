@@ -6,24 +6,25 @@
     }
   ],
   "type": "immersiveengineering:cloche",
-  "results": [
-    {
-      "item": "farmersdelight:cabbage",
-      "count": 2
-    },
-    {
-      "item": "farmersdelight:cabbage_seeds"
-    }
-  ],
   "input": {
     "item": "farmersdelight:cabbage_seeds"
   },
+  "render": {
+    "type": "immersiveengineering:crop",
+    "value": "farmersdelight:cabbages"
+  },
+  "results": [
+    {
+      "Count": 2,
+      "id": "farmersdelight:cabbage"
+    },
+    {
+      "Count": 1,
+      "id": "farmersdelight:cabbage_seeds"
+    }
+  ],
   "soil": {
     "item": "minecraft:dirt"
   },
-  "time": 800,
-  "render": {
-    "type": "crop",
-    "block": "farmersdelight:cabbages"
-  }
+  "time": 800
 }

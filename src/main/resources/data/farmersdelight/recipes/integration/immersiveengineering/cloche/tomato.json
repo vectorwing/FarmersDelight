@@ -6,21 +6,21 @@
     }
   ],
   "type": "immersiveengineering:cloche",
-  "results": [
-    {
-      "item": "farmersdelight:tomato",
-      "count": 2
-    }
-  ],
   "input": {
     "item": "farmersdelight:tomato_seeds"
   },
+  "render": {
+    "type": "immersiveengineering:crop",
+    "value": "farmersdelight:tomatoes"
+  },
+  "results": [
+    {
+      "Count": 2,
+      "id": "farmersdelight:tomato"
+    }
+  ],
   "soil": {
     "item": "minecraft:dirt"
   },
-  "time": 800,
-  "render": {
-    "type": "crop",
-    "block": "farmersdelight:tomatoes"
-  }
+  "time": 800
 }
