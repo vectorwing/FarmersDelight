@@ -4,6 +4,9 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import io.github.fabricators_of_create.porting_lib.enchant.CustomEnchantingBehaviorItem;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.impl.item.ItemExtensions;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -22,7 +25,10 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -175,7 +181,7 @@ public class SkilletItem extends BlockItem
 				level.playLocalSound(x, y, z, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.BLOCKS, 0.4F, level.random.nextFloat() * 0.2F + 0.9F, false);
 			}
 		CompoundTag tag = stack.getOrCreateTag();
-            if(tag.contains("FlipTimeStamp")) {
+            if (tag.contains("FlipTimeStamp")) {
                 long flipTimeStamp = tag.getLong("FlipTimeStamp");
                 if (level.getGameTime() - flipTimeStamp > FLIP_TIME) {
                     tag.remove("FlipTimeStamp");
@@ -223,21 +229,34 @@ public class SkilletItem extends BlockItem
 		return stack;
 	}
 
-	// uber hack
+    // uber hack
     @Environment(EnvType.CLIENT)
     @Override
     public int getBarWidth(ItemStack stack) {
-       return Math.round(13.0F - (float)Minecraft.getInstance().player.getUseItemRemainingTicks() * 13.0F / (float)this.getUseDuration(stack));
+        if (stack.getTagElement("Cooking") != null) {
+            return Math.round(13.0F - (float) getClientPlayerHack().getUseItemRemainingTicks() * 13.0F / (float) this.getUseDuration(stack));
+        }else{
+            return super.getBarWidth(stack);
+        }
+    }
+
+    // hack
+    @Environment(EnvType.CLIENT)
+    private static Player getClientPlayerHack(){
+        return Minecraft.getInstance().player;
     }
 
     @Override
     public int getBarColor(ItemStack stack) {
-        return 0xFF8B4F;
+        if (stack.getTagElement("Cooking") != null) {
+            return 0xFF8B4F;
+        }
+        else return super.getBarColor(stack);
     }
 
     @Override
     public boolean isBarVisible(ItemStack stack) {
-        return stack.getTagElement("Cooking") != null;
+        return super.isBarVisible(stack) || stack.getTagElement("Cooking") != null;
     }public static Optional<CampfireCookingRecipe> getCookingRecipe(ItemStack stack, Level level) {
 		if (stack.isEmpty()) {
 			return Optional.empty();
