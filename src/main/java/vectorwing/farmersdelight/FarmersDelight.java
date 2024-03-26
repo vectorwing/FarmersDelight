@@ -15,6 +15,13 @@ import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.client.ClientSetup;
 import vectorwing.farmersdelight.common.CommonSetup;
 import vectorwing.farmersdelight.common.Configuration;
+import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
+import vectorwing.farmersdelight.common.block.entity.CuttingBoardBlockEntity;
+import vectorwing.farmersdelight.common.event.CommonEvents;
+import vectorwing.farmersdelight.common.event.VillagerEvents;
+import vectorwing.farmersdelight.common.item.DogFoodItem;
+import vectorwing.farmersdelight.common.item.HorseFeedItem;
+import vectorwing.farmersdelight.common.item.KnifeItem;
 import vectorwing.farmersdelight.common.registry.*;
 import vectorwing.farmersdelight.common.world.VillageStructures;
 import vectorwing.farmersdelight.common.world.WildCropGeneration;
@@ -61,5 +68,6 @@ public class FarmersDelight
 		MinecraftForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
 
 		MinecraftForge.EVENT_BUS.register(this);
+		ModNetworking.init();
 	}
 }
