@@ -88,9 +88,8 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 					NetworkHooks.openScreen((ServerPlayer) player, cookingPotEntity, pos);
 				}
 			}
-			return InteractionResult.SUCCESS;
 		}
-		return InteractionResult.SUCCESS;
+		return InteractionResult.sidedSuccess(level.isClientSide);
 	}
 
 	@Override

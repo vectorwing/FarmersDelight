@@ -85,7 +85,7 @@ public class KnifeItem extends DiggerItem
 						-0.05, 0, 0);
 				level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
 
-				event.setCancellationResult(InteractionResult.SUCCESS);
+				event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide));
 				event.setCanceled(true);
 			}
 
@@ -101,7 +101,7 @@ public class KnifeItem extends DiggerItem
 						-0.05, 0, 0);
 				level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
 
-				event.setCancellationResult(InteractionResult.SUCCESS);
+				event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide));
 				event.setCanceled(true);
 			}
 		}

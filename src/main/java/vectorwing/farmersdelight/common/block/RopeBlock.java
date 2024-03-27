@@ -85,7 +85,7 @@ public class RopeBlock extends IronBarsBlock
 					Block blockAbove = blockStateAbove.getBlock();
 					if (blockAbove == Blocks.BELL) {
 						((BellBlock) blockAbove).attemptToRing(level, bellRingingPos, blockStateAbove.getValue(BellBlock.FACING).getClockWise());
-						return InteractionResult.SUCCESS;
+						return InteractionResult.sidedSuccess(level.isClientSide);
 					} else if (blockAbove == ModBlocks.ROPE.get()) {
 						bellRingingPos.move(Direction.UP);
 					} else {

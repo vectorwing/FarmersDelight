@@ -259,6 +259,9 @@
   "farmersdelight.advancement.master_chef.desc": "Eat a course of every meal available!",
 
   "farmersdelight.subtitles.cooking_pot.boil": "Cooking Pot boils",
+  "farmersdelight.subtitles.cutting_board.place_item": "Item placed on board",
+  "farmersdelight.subtitles.cutting_board.remove_item": "Item removed from board",
+  "farmersdelight.subtitles.cutting_board.carve_tool": "Tool carved on board",
   "farmersdelight.subtitles.cutting_board.knife_cut": "Knife cuts",
   "farmersdelight.subtitles.stove.crackle": "Stove crackles",
   "farmersdelight.subtitles.skillet.sizzle": "Skillet sizzles",
@@ -273,6 +276,7 @@
   "farmersdelight.block.rice.invalid_placement": "This crop won't survive well outside shallow water.",
   "farmersdelight.block.cutting_board.invalid_item": "This doesn't seem cuttable...",
   "farmersdelight.block.cutting_board.invalid_tool": "Maybe with a different tool...",
+  "farmersdelight.block.cutting_board.remaining_items": "%s remaining...",
   "farmersdelight.block.skillet.invalid_item": "This can't be cooked...",
   "farmersdelight.item.skillet.how_to_cook": "Use your other hand to hold ingredients!",
 

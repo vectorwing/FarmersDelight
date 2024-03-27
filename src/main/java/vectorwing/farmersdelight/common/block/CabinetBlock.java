@@ -46,7 +46,7 @@ public class CabinetBlock extends BaseEntityBlock
 				player.openMenu((CabinetBlockEntity) tile);
 			}
 		}
-		return InteractionResult.SUCCESS;
+		return InteractionResult.sidedSuccess(level.isClientSide);
 	}
 
 	@Override

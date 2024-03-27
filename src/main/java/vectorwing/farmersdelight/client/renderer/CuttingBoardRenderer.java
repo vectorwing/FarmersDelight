@@ -14,43 +14,56 @@ import vectorwing.farmersdelight.common.block.CuttingBoardBlock;
 import vectorwing.farmersdelight.common.block.entity.CuttingBoardBlockEntity;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
+import java.util.Random;
+
 public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlockEntity>
 {
+	private final Random random = new Random();
+
 	public CuttingBoardRenderer(BlockEntityRendererProvider.Context pContext) {
 	}
 
 	@Override
 	public void render(CuttingBoardBlockEntity cuttingBoardEntity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
 		Direction direction = cuttingBoardEntity.getBlockState().getValue(CuttingBoardBlock.FACING).getOpposite();
-		ItemStack boardStack = cuttingBoardEntity.getStoredItem();
+		ItemStack itemStack = cuttingBoardEntity.getStoredItem();
 		int posLong = (int) cuttingBoardEntity.getBlockPos().asLong();
 
-		if (!boardStack.isEmpty()) {
-			poseStack.pushPose();
+		int seed = itemStack.isEmpty() ? 187 : Item.getId(itemStack.getItem()) + itemStack.getDamageValue();
+		this.random.setSeed(seed);
 
+		if (!itemStack.isEmpty()) {
 			ItemRenderer itemRenderer = Minecraft.getInstance()
 					.getItemRenderer();
 
-			poseStack.pushPose();
-			boolean isBlockItem = itemRenderer.getModel(boardStack, cuttingBoardEntity.getLevel(), null, 0).applyTransform(ItemTransforms.TransformType.FIXED, poseStack, false).isGui3d();
-			poseStack.popPose();
+			int itemRenderCount = this.getModelCount(itemStack);
+			for (int i = 0; i < itemRenderCount; i++) {
+				poseStack.pushPose();
 
-			if (cuttingBoardEntity.isItemCarvingBoard()) {
-				renderItemCarved(poseStack, direction, boardStack);
-			} else if (isBlockItem && !boardStack.is(ModTags.FLAT_ON_CUTTING_BOARD)) {
-				renderBlock(poseStack, direction);
-			} else {
-				renderItemLayingDown(poseStack, direction);
+				poseStack.pushPose();
+				boolean isBlockItem = itemRenderer.getModel(itemStack, cuttingBoardEntity.getLevel(), null, 0).applyTransform(ItemTransforms.TransformType.FIXED, poseStack, false).isGui3d();
+				poseStack.popPose();
+
+				float xOffset = itemRenderCount == 1 ? 0 : (this.random.nextFloat() * 2.0F - 1.0F) * 0.15F * 0.5F;
+				float zOffset = itemRenderCount == 1 ? 0 : (this.random.nextFloat() * 2.0F - 1.0F) * 0.15F * 0.5F;
+
+				if (cuttingBoardEntity.isItemCarvingBoard()) {
+					renderItemCarved(poseStack, direction, itemStack);
+				} else if (isBlockItem && !itemStack.is(ModTags.FLAT_ON_CUTTING_BOARD)) {
+					renderBlock(poseStack, direction, xOffset, i, zOffset);
+				} else {
+					renderItemLayingDown(poseStack, direction, xOffset, i, zOffset);
+				}
+
+				Minecraft.getInstance().getItemRenderer().renderStatic(itemStack, ItemTransforms.TransformType.FIXED, combinedLight, combinedOverlay, poseStack, buffer, posLong);
+				poseStack.popPose();
 			}
-
-			Minecraft.getInstance().getItemRenderer().renderStatic(boardStack, ItemTransforms.TransformType.FIXED, combinedLight, combinedOverlay, poseStack, buffer, posLong);
-			poseStack.popPose();
 		}
 	}
 
-	public void renderItemLayingDown(PoseStack matrixStackIn, Direction direction) {
+	public void renderItemLayingDown(PoseStack matrixStackIn, Direction direction, float xOffset, int yIndex, float zOffset) {
 		// Center item above the cutting board
-		matrixStackIn.translate(0.5D, 0.08D, 0.5D);
+		matrixStackIn.translate(0.5D + xOffset, 0.08D + 0.03 * (yIndex + 1), 0.5D + zOffset);
 
 		// Rotate item to face the cutting board's front side
 		float f = -direction.toYRot();
@@ -63,9 +76,9 @@ public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlo
 		matrixStackIn.scale(0.6F, 0.6F, 0.6F);
 	}
 
-	public void renderBlock(PoseStack matrixStackIn, Direction direction) {
+	public void renderBlock(PoseStack matrixStackIn, Direction direction, float xOffset, int yIndex, float zOffset) {
 		// Center block above the cutting board
-		matrixStackIn.translate(0.5D, 0.27D, 0.5D);
+		matrixStackIn.translate(0.5D + xOffset, 0.27D + 0.03 * (yIndex + 1), 0.5D + zOffset);
 
 		// Rotate block to face the cutting board's front side
 		float f = -direction.toYRot();
@@ -97,5 +110,18 @@ public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlo
 
 		// Resize the item
 		matrixStackIn.scale(0.6F, 0.6F, 0.6F);
+	}
+
+	protected int getModelCount(ItemStack stack) {
+		if (stack.getCount() > 48) {
+			return 5;
+		} else if (stack.getCount() > 32) {
+			return 4;
+		} else if (stack.getCount() > 16) {
+			return 3;
+		} else if (stack.getCount() > 1) {
+			return 2;
+		}
+		return 1;
 	}
 }

@@ -22,6 +22,12 @@ public class ModSounds
 			() -> new SoundEvent(new ResourceLocation(FarmersDelight.MODID, "block.cooking_pot.boil_soup")));
 
 	// Cutting Board
+	public static final RegistryObject<SoundEvent> BLOCK_CUTTING_BOARD_PLACE = SOUNDS.register("block.cutting_board.place",
+			() -> new SoundEvent(new ResourceLocation(FarmersDelight.MODID, "block.cutting_board.place")));
+	public static final RegistryObject<SoundEvent> BLOCK_CUTTING_BOARD_REMOVE = SOUNDS.register("block.cutting_board.remove",
+			() -> new SoundEvent(new ResourceLocation(FarmersDelight.MODID, "block.cutting_board.remove")));
+	public static final RegistryObject<SoundEvent> BLOCK_CUTTING_BOARD_CARVE = SOUNDS.register("block.cutting_board.carve",
+			() -> new SoundEvent(new ResourceLocation(FarmersDelight.MODID, "block.cutting_board.carve")));
 	public static final RegistryObject<SoundEvent> BLOCK_CUTTING_BOARD_KNIFE = SOUNDS.register("block.cutting_board.knife",
 			() -> new SoundEvent(new ResourceLocation(FarmersDelight.MODID, "block.cutting_board.knife")));
 

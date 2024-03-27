@@ -72,7 +72,7 @@ public class SkilletBlock extends BaseEntityBlock
 					if (!player.isCreative()) {
 						player.setItemSlot(heldSlot, extractedStack);
 					}
-					return InteractionResult.SUCCESS;
+					return InteractionResult.CONSUME;
 				} else {
 					ItemStack remainderStack = skilletEntity.addItemToCook(heldStack, player);
 					if (remainderStack.getCount() != heldStack.getCount()) {
@@ -80,11 +80,12 @@ public class SkilletBlock extends BaseEntityBlock
 							player.setItemSlot(heldSlot, remainderStack);
 						}
 						level.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundSource.BLOCKS, 0.7F, 1.0F);
-						return InteractionResult.SUCCESS;
+						return InteractionResult.CONSUME;
 					}
 				}
 			}
-			return InteractionResult.CONSUME;
+			// might be needed here so no swing animation plays
+			return InteractionResult.SUCCESS;
 		}
 		return InteractionResult.PASS;
 	}

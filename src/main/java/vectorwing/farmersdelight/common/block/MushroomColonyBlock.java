@@ -87,7 +87,7 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 			if (!level.isClientSide) {
 				heldStack.hurtAndBreak(1, player, (playerIn) -> playerIn.broadcastBreakEvent(hand));
 			}
-			return InteractionResult.SUCCESS;
+			return InteractionResult.sidedSuccess(level.isClientSide);
 		}
 
 		return InteractionResult.PASS;

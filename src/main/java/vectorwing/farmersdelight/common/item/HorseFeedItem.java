@@ -76,7 +76,7 @@ public class HorseFeedItem extends Item
 						heldStack.shrink(1);
 					}
 
-					event.setCancellationResult(InteractionResult.SUCCESS);
+					event.setCancellationResult(InteractionResult.sidedSuccess(player.level.isClientSide));
 					event.setCanceled(true);
 				}
 			}
@@ -114,7 +114,7 @@ public class HorseFeedItem extends Item
 	public InteractionResult interactLivingEntity(ItemStack stack, Player playerIn, LivingEntity target, InteractionHand hand) {
 		if (target instanceof Horse horse) {
 			if (horse.isAlive() && horse.isTamed()) {
-				return InteractionResult.SUCCESS;
+				return InteractionResult.sidedSuccess(playerIn.level.isClientSide);
 			}
 		}
 		return InteractionResult.PASS;
