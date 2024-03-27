@@ -3,9 +3,9 @@ package vectorwing.farmersdelight.common.item;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
-import io.github.fabricators_of_create.porting_lib.enchant.CustomEnchantingBehaviorItem;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,7 +22,10 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -36,10 +39,17 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.client.renderer.SkilletItemRenderer;
 import vectorwing.farmersdelight.common.block.SkilletBlock;
 import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -50,14 +60,17 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.function.Consumer;
 
-@SuppressWarnings({"deprecation", "unused"})
+@SuppressWarnings("deprecation")
 public class SkilletItem extends BlockItem
 {
 	public static final float FLIP_TIME = 20;
 
     public static final Tiers SKILLET_TIER = Tiers.IRON;
 	protected static final UUID FD_ATTACK_KNOCKBACK_UUID = UUID.fromString("e56350e0-8756-464d-92f9-54289ab41e0a");
+
+	public static float localAtkStrength = 1;
 
 	private final Multimap<Attribute, AttributeModifier> toolAttributes;
 
@@ -75,6 +88,12 @@ public class SkilletItem extends BlockItem
 	public static class SkilletEvents
 	{
 		@SubscribeEvent
+		public static void trackCooldown(AttackEntityEvent event) {
+			Player player = event.getEntity();
+			localAtkStrength = player.getAttackStrengthScale(0.0F);
+		}
+
+		@SubscribeEvent
 		public static void playSkilletAttackSound(LivingDamageEvent event) {
 			DamageSource damageSource = event.getSource();
 			Entity attacker = damageSource.getDirectEntity();
@@ -84,8 +103,7 @@ public class SkilletItem extends BlockItem
 
 			float pitch = 0.9F + (livingEntity.getRandom().nextFloat() * 0.2F);
 			if (livingEntity instanceof Player player) {
-				float attackPower = player.getAttackStrengthScale(0.0F);
-				if (attackPower > 0.8F) {
+				if (localAtkStrength > 0.8F) {
 					player.getCommandSenderWorld().playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.ITEM_SKILLET_ATTACK_STRONG.get(), SoundSource.PLAYERS, 1.0F, pitch);
 				} else {
 					player.getCommandSenderWorld().playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.ITEM_SKILLET_ATTACK_WEAK.get(), SoundSource.PLAYERS, 0.8F, 0.9F);
@@ -166,7 +184,7 @@ public class SkilletItem extends BlockItem
 				level.playLocalSound(x, y, z, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.BLOCKS, 0.4F, level.random.nextFloat() * 0.2F + 0.9F, false);
 			}
 		CompoundTag tag = stack.getOrCreateTag();
-            if(tag.contains("FlipTimeStamp")) {
+            if (tag.contains("FlipTimeStamp")) {
                 long flipTimeStamp = tag.getLong("FlipTimeStamp");
                 if (level.getGameTime() - flipTimeStamp > FLIP_TIME) {
                     tag.remove("FlipTimeStamp");
@@ -198,7 +216,7 @@ public class SkilletItem extends BlockItem
 				Optional<CampfireCookingRecipe> cookingRecipe = getCookingRecipe(cookingStack, level);
 
 				cookingRecipe.ifPresent((recipe) -> {
-					ItemStack resultStack = recipe.assemble(new SimpleContainer(), level.registryAccess());
+					ItemStack resultStack = recipe.assemble(new SimpleContainer());
 					if (!player.getInventory().add(resultStack)) {
 						player.drop(resultStack, false);
 					}
@@ -214,21 +232,44 @@ public class SkilletItem extends BlockItem
 		return stack;
 	}
 
+	@Override
+	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+		consumer.accept(new IClientItemExtensions() {
+			BlockEntityWithoutLevelRenderer renderer = new SkilletItemRenderer();
+			@Override
+			public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+				return renderer;
+			}
+		});
+	}
+
 	// uber hack
-    @Environment(EnvType.CLIENT)
     @Override
     public int getBarWidth(ItemStack stack) {
-       return Math.round(13.0F - (float)Minecraft.getInstance().player.getUseItemRemainingTicks() * 13.0F / (float)this.getUseDuration(stack));
+        if (stack.getTagElement("Cooking") != null) {
+            return Math.round(13.0F - (float) getClientPlayerHack().getUseItemRemainingTicks() * 13.0F / (float) this.getUseDuration(stack));
+        }else{
+            return super.getBarWidth(stack);
+        }
+    }
+
+    // hack
+	@OnlyIn(Dist.CLIENT)
+    private static Player getClientPlayerHack(){
+        return Minecraft.getInstance().player;
     }
 
     @Override
     public int getBarColor(ItemStack stack) {
-        return 0xFF8B4F;
+        if (stack.getTagElement("Cooking") != null) {
+            return 0xFF8B4F;
+        }
+        else return super.getBarColor(stack);
     }
 
     @Override
     public boolean isBarVisible(ItemStack stack) {
-        return stack.getTagElement("Cooking") != null;
+        return super.isBarVisible(stack) || stack.getTagElement("Cooking") != null;
     }public static Optional<CampfireCookingRecipe> getCookingRecipe(ItemStack stack, Level level) {
 		if (stack.isEmpty()) {
 			return Optional.empty();
