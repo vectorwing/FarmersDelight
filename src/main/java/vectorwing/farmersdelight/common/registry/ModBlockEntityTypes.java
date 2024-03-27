@@ -7,21 +7,27 @@ import net.minecraftforge.registries.RegistryObject;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.*;
 
+import java.util.function.Supplier;
+
 public class ModBlockEntityTypes
 {
 	public static final DeferredRegister<BlockEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, FarmersDelight.MODID);
 
-	public static final RegistryObject<BlockEntityType<StoveBlockEntity>> STOVE = TILES.register("stove",
+	public static final Supplier<BlockEntityType<StoveBlockEntity>> STOVE = TILES.register("stove",
 			() -> BlockEntityType.Builder.of(StoveBlockEntity::new, ModBlocks.STOVE.get()).build(null));
-	public static final RegistryObject<BlockEntityType<CookingPotBlockEntity>> COOKING_POT = TILES.register("cooking_pot",
+	public static final Supplier<BlockEntityType<CookingPotBlockEntity>> COOKING_POT = TILES.register("cooking_pot",
 			() -> BlockEntityType.Builder.of(CookingPotBlockEntity::new, ModBlocks.COOKING_POT.get()).build(null));
-	public static final RegistryObject<BlockEntityType<BasketBlockEntity>> BASKET = TILES.register("basket",
+	public static final Supplier<BlockEntityType<BasketBlockEntity>> BASKET = TILES.register("basket",
 			() -> BlockEntityType.Builder.of(BasketBlockEntity::new, ModBlocks.BASKET.get()).build(null));
-	public static final RegistryObject<BlockEntityType<CuttingBoardBlockEntity>> CUTTING_BOARD = TILES.register("cutting_board",
+	public static final Supplier<BlockEntityType<CuttingBoardBlockEntity>> CUTTING_BOARD = TILES.register("cutting_board",
 			() -> BlockEntityType.Builder.of(CuttingBoardBlockEntity::new, ModBlocks.CUTTING_BOARD.get()).build(null));
-	public static final RegistryObject<BlockEntityType<SkilletBlockEntity>> SKILLET = TILES.register("skillet",
+	public static final Supplier<BlockEntityType<SkilletBlockEntity>> SKILLET = TILES.register("skillet",
 			() -> BlockEntityType.Builder.of(SkilletBlockEntity::new, ModBlocks.SKILLET.get()).build(null));
-	public static final RegistryObject<BlockEntityType<CabinetBlockEntity>> CABINET = TILES.register("cabinet",
+	public static final Supplier<BlockEntityType<CabinetBlockEntity>> PANTRY = TILES.register("pantry",
+			() -> BlockEntityType.Builder.of(CabinetBlockEntity::new,
+							ModBlocks.OAK_CABINET.get(), ModBlocks.BIRCH_CABINET.get(), ModBlocks.SPRUCE_CABINET.get(), ModBlocks.JUNGLE_CABINET.get(), ModBlocks.ACACIA_CABINET.get(), ModBlocks.DARK_OAK_CABINET.get())
+					.build(null));
+	public static final Supplier<BlockEntityType<CabinetBlockEntity>> CABINET = TILES.register("cabinet",
 			() -> BlockEntityType.Builder.of(CabinetBlockEntity::new,
 							ModBlocks.OAK_CABINET.get(),
 							ModBlocks.BIRCH_CABINET.get(),
@@ -34,7 +40,7 @@ public class ModBlockEntityTypes
 							ModBlocks.CRIMSON_CABINET.get(),
 							ModBlocks.WARPED_CABINET.get())
 					.build(null));
-	public static final RegistryObject<BlockEntityType<CanvasSignBlockEntity>> CANVAS_SIGN = TILES.register("canvas_sign",
+	public static final Supplier<BlockEntityType<CanvasSignBlockEntity>> CANVAS_SIGN = TILES.register("canvas_sign",
 			() -> BlockEntityType.Builder.of(CanvasSignBlockEntity::new,
 							ModBlocks.CANVAS_SIGN.get(),
 							ModBlocks.WHITE_CANVAS_SIGN.get(),
