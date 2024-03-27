@@ -66,45 +66,36 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 
 	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		BlockEntity tileEntity = level.getBlockEntity(pos);
-		if (tileEntity instanceof CuttingBoardBlockEntity cuttingBoardEntity) {
-			ItemStack heldStack = player.getItemInHand(hand);
-			ItemStack offhandStack = player.getOffhandItem();
+		if (!(level.getBlockEntity(pos) instanceof CuttingBoardBlockEntity cuttingBoard)) {
+			return InteractionResult.PASS;
+		}
 
-			if (cuttingBoardEntity.isEmpty()) {
-				if (!offhandStack.isEmpty()) {
-					if (hand.equals(InteractionHand.MAIN_HAND) && !offhandStack.is(ModTags.OFFHAND_EQUIPMENT) && !(heldStack.getItem() instanceof BlockItem)) {
-						return InteractionResult.PASS; // Pass to off-hand if that item is placeable
-					}
-					if (hand.equals(InteractionHand.OFF_HAND) && offhandStack.is(ModTags.OFFHAND_EQUIPMENT)) {
-						return InteractionResult.PASS; // Items in this tag should not be placed from the off-hand
-					}
-				}
-				if (heldStack.isEmpty()) {
-					return InteractionResult.PASS;
-				} else if (cuttingBoardEntity.addItem(player.getAbilities().instabuild ? heldStack.copy() : heldStack)) {
-					level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 0.8F);
-					return InteractionResult.SUCCESS;
-				}
+		ItemStack mainHandStack = player.getMainHandItem();
 
-			} else if (!heldStack.isEmpty()) {
-				ItemStack boardStack = cuttingBoardEntity.getStoredItem().copy();
-				if (cuttingBoardEntity.processStoredItemUsingTool(heldStack, player)) {
-					spawnCuttingParticles(level, pos, boardStack, 5);
-					return InteractionResult.SUCCESS;
-				}
-				return InteractionResult.CONSUME;
-
-			} else if (hand.equals(InteractionHand.MAIN_HAND)) {
-				if (!player.isCreative()) {
-					if (!player.getInventory().add(cuttingBoardEntity.removeItem())) {
-						Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), cuttingBoardEntity.removeItem());
-					}
-				} else {
-					cuttingBoardEntity.removeItem();
-				}
-				level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOD_HIT, SoundSource.BLOCKS, 0.25F, 0.5F);
+		if (mainHandStack.isEmpty()) {
+			if (cuttingBoard.isEmpty() || level.isClientSide) {
+				return InteractionResult.sidedSuccess(level.isClientSide);
+			}
+			ItemStack removedStack = cuttingBoard.removeItem();
+			if (!player.isCreative()) {
+				player.getInventory().add(removedStack);
+			}
+			level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.BLOCK_CUTTING_BOARD_REMOVE.get(), SoundSource.BLOCKS, 0.25F, 0.5F);
+			return InteractionResult.CONSUME;
+		}
+		if (cuttingBoard.canAddItem(mainHandStack)) {
+			if (level.isClientSide) {
 				return InteractionResult.SUCCESS;
+			}
+			ItemStack remainderStack = cuttingBoard.addItem(player.getAbilities().instabuild ? mainHandStack.copy() : mainHandStack);
+			if (!player.isCreative()) {
+				player.setItemSlot(EquipmentSlot.MAINHAND, remainderStack);
+			}
+			level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.BLOCK_CUTTING_BOARD_PLACE.get(), SoundSource.BLOCKS, 1.0F, 0.8F);
+			return InteractionResult.CONSUME;
+		} else {
+			if (cuttingBoard.processStoredItemUsingTool(mainHandStack, player)) {
+				return InteractionResult.sidedSuccess(level.isClientSide);
 			}
 		}
 		return InteractionResult.PASS;
@@ -217,6 +208,9 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 			ItemStack heldStack = player.getMainHandItem();
 			BlockEntity tileEntity = level.getBlockEntity(event.getPos());
 
+			if (!(level.getBlockEntity(pos) instanceof CuttingBoardBlockEntity cuttingBoard)) {
+				return;
+			}
 			if (player.isSecondaryUseActive() && !heldStack.isEmpty() && tileEntity instanceof CuttingBoardBlockEntity) {
 				if (heldStack.getItem() instanceof TieredItem ||
 						heldStack.getItem() instanceof TridentItem ||
@@ -225,7 +219,7 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 					if (success) {
 						level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 0.8F);
 						event.setCanceled(true);
-						event.setCancellationResult(InteractionResult.SUCCESS);
+						event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide));
 					}
 				}
 			}

@@ -98,7 +98,7 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 				player.openMenu((BasketBlockEntity) tileEntity);
 			}
 		}
-		return InteractionResult.SUCCESS;
+		return InteractionResult.sidedSuccess(level.isClientSide);
 	}
 
 	@Override
