@@ -3,12 +3,9 @@ package vectorwing.farmersdelight.common.item;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
-import io.github.fabricators_of_create.porting_lib.enchant.CustomEnchantingBehaviorItem;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.impl.item.ItemExtensions;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -42,12 +39,17 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.client.renderer.SkilletItemRenderer;
 import vectorwing.farmersdelight.common.block.SkilletBlock;
 import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -58,6 +60,7 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 @SuppressWarnings("deprecation")
 public class SkilletItem extends BlockItem
@@ -229,8 +232,18 @@ public class SkilletItem extends BlockItem
 		return stack;
 	}
 
-    // uber hack
-    @Environment(EnvType.CLIENT)
+	@Override
+	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+		consumer.accept(new IClientItemExtensions() {
+			BlockEntityWithoutLevelRenderer renderer = new SkilletItemRenderer();
+			@Override
+			public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+				return renderer;
+			}
+		});
+	}
+
+	// uber hack
     @Override
     public int getBarWidth(ItemStack stack) {
         if (stack.getTagElement("Cooking") != null) {
@@ -241,7 +254,7 @@ public class SkilletItem extends BlockItem
     }
 
     // hack
-    @Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
     private static Player getClientPlayerHack(){
         return Minecraft.getInstance().player;
     }

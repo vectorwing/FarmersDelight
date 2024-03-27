@@ -24,6 +24,7 @@ import vectorwing.farmersdelight.common.event.VillagerEvents;
 import vectorwing.farmersdelight.common.item.DogFoodItem;
 import vectorwing.farmersdelight.common.item.HorseFeedItem;
 import vectorwing.farmersdelight.common.item.KnifeItem;
+import vectorwing.farmersdelight.common.networking.ModNetworking;
 import vectorwing.farmersdelight.common.registry.*;
 import vectorwing.farmersdelight.common.world.VillageStructures;
 
