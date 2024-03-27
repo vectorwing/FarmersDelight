@@ -5,6 +5,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber
 public class Configuration
@@ -14,58 +15,58 @@ public class Configuration
 
 	// COMMON
 	public static final String CATEGORY_SETTINGS = "settings";
-	public static ForgeConfigSpec.BooleanValue ENABLE_VANILLA_CROP_CRATES;
-	public static ForgeConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS;
-	public static ForgeConfigSpec.BooleanValue WANDERING_TRADER_SELLS_FD_ITEMS;
-	public static ForgeConfigSpec.DoubleValue RICH_SOIL_BOOST_CHANCE;
-	public static ForgeConfigSpec.DoubleValue CUTTING_BOARD_FORTUNE_BONUS;
-	public static ForgeConfigSpec.BooleanValue ENABLE_ROPE_REELING;
-	public static ForgeConfigSpec.ConfigValue<List<? extends String>> CANVAS_SIGN_DARK_BACKGROUND_LIST;
+	public static Supplier<Boolean> ENABLE_VANILLA_CROP_CRATES;
+	public static Supplier<Boolean> FARMERS_BUY_FD_CROPS;
+	public static Supplier<Boolean> WANDERING_TRADER_SELLS_FD_ITEMS;
+	public static Supplier<Double> RICH_SOIL_BOOST_CHANCE;
+	public static Supplier<Double> CUTTING_BOARD_FORTUNE_BONUS;
+	public static Supplier<Boolean> ENABLE_ROPE_REELING;
+	public static Supplier<List<? extends String>> CANVAS_SIGN_DARK_BACKGROUND_LIST;
 
 	public static final String CATEGORY_FARMING = "farming";
-	public static ForgeConfigSpec.ConfigValue<String> DEFAULT_TOMATO_VINE_ROPE;
-	public static ForgeConfigSpec.BooleanValue ENABLE_TOMATO_VINE_CLIMBING_TAGGED_ROPES;
+	public static Supplier<String> DEFAULT_TOMATO_VINE_ROPE;
+	public static Supplier<Boolean> ENABLE_TOMATO_VINE_CLIMBING_TAGGED_ROPES;
 
 	public static final String CATEGORY_RECIPE_BOOK = "recipe_book";
-	public static ForgeConfigSpec.BooleanValue ENABLE_RECIPE_BOOK_COOKING_POT;
+	public static Supplier<Boolean> ENABLE_RECIPE_BOOK_COOKING_POT;
 
 	public static final String CATEGORY_OVERRIDES = "overrides";
-	public static ForgeConfigSpec.BooleanValue VANILLA_SOUP_EXTRA_EFFECTS;
-	public static ForgeConfigSpec.BooleanValue RABBIT_STEW_JUMP_BOOST;
-	public static ForgeConfigSpec.BooleanValue DISPENSER_TOOLS_CUTTING_BOARD;
+	public static Supplier<Boolean> VANILLA_SOUP_EXTRA_EFFECTS;
+	public static Supplier<Boolean> RABBIT_STEW_JUMP_BOOST;
+	public static Supplier<Boolean> DISPENSER_TOOLS_CUTTING_BOARD;
 
 	public static final String CATEGORY_OVERRIDES_STACK_SIZE = "stack_size";
-	public static ForgeConfigSpec.BooleanValue ENABLE_STACKABLE_SOUP_ITEMS;
-	public static ForgeConfigSpec.ConfigValue<List<? extends String>> SOUP_ITEM_LIST;
+	public static Supplier<Boolean> ENABLE_STACKABLE_SOUP_ITEMS;
+	public static Supplier<List<? extends String>> SOUP_ITEM_LIST;
 
 	public static final String CATEGORY_WORLD = "world";
-	public static ForgeConfigSpec.BooleanValue GENERATE_FD_CHEST_LOOT;
-	public static ForgeConfigSpec.BooleanValue GENERATE_VILLAGE_COMPOST_HEAPS;
-	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_CABBAGES;
-	public static ForgeConfigSpec.IntValue CHANCE_WILD_CABBAGES;
-	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_BEETROOTS;
-	public static ForgeConfigSpec.IntValue CHANCE_WILD_BEETROOTS;
-	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_POTATOES;
-	public static ForgeConfigSpec.IntValue CHANCE_WILD_POTATOES;
-	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_ONIONS;
-	public static ForgeConfigSpec.IntValue CHANCE_WILD_ONIONS;
-	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_CARROTS;
-	public static ForgeConfigSpec.IntValue CHANCE_WILD_CARROTS;
-	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_TOMATOES;
-	public static ForgeConfigSpec.IntValue CHANCE_WILD_TOMATOES;
-	public static ForgeConfigSpec.BooleanValue GENERATE_WILD_RICE;
-	public static ForgeConfigSpec.IntValue CHANCE_WILD_RICE;
-	public static ForgeConfigSpec.BooleanValue GENERATE_BROWN_MUSHROOM_COLONIES;
-	public static ForgeConfigSpec.IntValue CHANCE_BROWN_MUSHROOM_COLONIES;
-	public static ForgeConfigSpec.BooleanValue GENERATE_RED_MUSHROOM_COLONIES;
-	public static ForgeConfigSpec.IntValue CHANCE_RED_MUSHROOM_COLONIES;
+	public static Supplier<Boolean> GENERATE_FD_CHEST_LOOT;
+	public static Supplier<Boolean> GENERATE_VILLAGE_COMPOST_HEAPS;
+	public static Supplier<Boolean> GENERATE_WILD_CABBAGES;
+	public static Supplier<Integer> CHANCE_WILD_CABBAGES;
+	public static Supplier<Boolean> GENERATE_WILD_BEETROOTS;
+	public static Supplier<Integer> CHANCE_WILD_BEETROOTS;
+	public static Supplier<Boolean> GENERATE_WILD_POTATOES;
+	public static Supplier<Integer> CHANCE_WILD_POTATOES;
+	public static Supplier<Boolean> GENERATE_WILD_ONIONS;
+	public static Supplier<Integer> CHANCE_WILD_ONIONS;
+	public static Supplier<Boolean> GENERATE_WILD_CARROTS;
+	public static Supplier<Integer> CHANCE_WILD_CARROTS;
+	public static Supplier<Boolean> GENERATE_WILD_TOMATOES;
+	public static Supplier<Integer> CHANCE_WILD_TOMATOES;
+	public static Supplier<Boolean> GENERATE_WILD_RICE;
+	public static Supplier<Integer> CHANCE_WILD_RICE;
+	public static Supplier<Boolean> GENERATE_BROWN_MUSHROOM_COLONIES;
+	public static Supplier<Integer> CHANCE_BROWN_MUSHROOM_COLONIES;
+	public static Supplier<Boolean> GENERATE_RED_MUSHROOM_COLONIES;
+	public static Supplier<Integer> CHANCE_RED_MUSHROOM_COLONIES;
 
 	// CLIENT
 	public static final String CATEGORY_CLIENT = "client";
 
-	public static ForgeConfigSpec.BooleanValue NOURISHED_HUNGER_OVERLAY;
-	public static ForgeConfigSpec.BooleanValue COMFORT_HEALTH_OVERLAY;
-	public static ForgeConfigSpec.BooleanValue FOOD_EFFECT_TOOLTIP;
+	public static Supplier<Boolean> NOURISHED_HUNGER_OVERLAY;
+	public static Supplier<Boolean> COMFORT_HEALTH_OVERLAY;
+	public static Supplier<Boolean> FOOD_EFFECT_TOOLTIP;
 
 	static {
 		ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
