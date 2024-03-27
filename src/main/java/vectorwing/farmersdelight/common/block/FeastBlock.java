@@ -80,12 +80,6 @@ public class FeastBlock extends Block
 
 	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		if (level.isClientSide) {
-			if (this.takeServing(level, pos, state, player, hand).consumesAction()) {
-				return InteractionResult.SUCCESS;
-			}
-		}
-
 		return this.takeServing(level, pos, state, player, hand);
 	}
 
@@ -95,7 +89,7 @@ public class FeastBlock extends Block
 		if (servings == 0) {
 			level.playSound(null, pos, SoundEvents.WOOD_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
 			level.destroyBlock(pos, true);
-			return InteractionResult.SUCCESS;
+			return InteractionResult.sidedSuccess(level.isClientSide());
 		}
 
 		ItemStack serving = this.getServingItem(state);
@@ -114,7 +108,7 @@ public class FeastBlock extends Block
 					level.removeBlock(pos, false);
 				}
 				level.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.BLOCKS, 1.0F, 1.0F);
-				return InteractionResult.SUCCESS;
+				return InteractionResult.sidedSuccess(level.isClientSide());
 			} else {
 				player.displayClientMessage(TextUtils.getTranslation("block.feast.use_container", serving.getCraftingRemainingItem().getHoverName()), true);
 			}

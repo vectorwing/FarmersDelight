@@ -67,7 +67,7 @@ public class StoveBlock extends BaseEntityBlock
 			if (heldStack.canPerformAction(ToolActions.SHOVEL_DIG)) {
 				extinguish(state, level, pos);
 				heldStack.hurtAndBreak(1, player, action -> action.broadcastBreakEvent(hand));
-				return InteractionResult.SUCCESS;
+				return InteractionResult.sidedSuccess(level.isClientSide);
 			} else if (heldItem == Items.WATER_BUCKET) {
 				if (!level.isClientSide()) {
 					level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -76,21 +76,21 @@ public class StoveBlock extends BaseEntityBlock
 				if (!player.isCreative()) {
 					player.setItemInHand(hand, new ItemStack(Items.BUCKET));
 				}
-				return InteractionResult.SUCCESS;
+				return InteractionResult.sidedSuccess(level.isClientSide);
 			}
 		} else {
 			if (heldItem instanceof FlintAndSteelItem) {
 				level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, MathUtils.RAND.nextFloat() * 0.4F + 0.8F);
 				level.setBlock(pos, state.setValue(BlockStateProperties.LIT, Boolean.TRUE), 11);
 				heldStack.hurtAndBreak(1, player, action -> action.broadcastBreakEvent(hand));
-				return InteractionResult.SUCCESS;
+				return InteractionResult.sidedSuccess(level.isClientSide);
 			} else if (heldItem instanceof FireChargeItem) {
 				level.playSound(null, pos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, (MathUtils.RAND.nextFloat() - MathUtils.RAND.nextFloat()) * 0.2F + 1.0F);
 				level.setBlock(pos, state.setValue(BlockStateProperties.LIT, Boolean.TRUE), 11);
 				if (!player.isCreative()) {
 					heldStack.shrink(1);
 				}
-				return InteractionResult.SUCCESS;
+				return InteractionResult.sidedSuccess(level.isClientSide);
 			}
 		}
 
@@ -103,9 +103,9 @@ public class StoveBlock extends BaseEntityBlock
 			Optional<CampfireCookingRecipe> recipe = stoveEntity.getMatchingRecipe(new SimpleContainer(heldStack), stoveSlot);
 			if (recipe.isPresent()) {
 				if (!level.isClientSide && stoveEntity.addItem(player.getAbilities().instabuild ? heldStack.copy() : heldStack, recipe.get(), stoveSlot)) {
-					return InteractionResult.SUCCESS;
+					return InteractionResult.CONSUME;
 				}
-				return InteractionResult.CONSUME;
+				return InteractionResult.sidedSuccess(level.isClientSide);
 			}
 		}
 

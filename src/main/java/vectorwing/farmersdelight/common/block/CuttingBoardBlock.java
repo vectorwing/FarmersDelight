@@ -61,32 +61,31 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 
 		if (mainHandStack.isEmpty()) {
 			if (cuttingBoard.isEmpty() || level.isClientSide) {
-				return InteractionResult.CONSUME;
+				return InteractionResult.sidedSuccess(level.isClientSide);
 			}
 			ItemStack removedStack = cuttingBoard.removeItem();
 			if (!player.isCreative()) {
 				player.getInventory().add(removedStack);
 			}
 			level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.BLOCK_CUTTING_BOARD_REMOVE.get(), SoundSource.BLOCKS, 0.25F, 0.5F);
-			return InteractionResult.SUCCESS;
+			return InteractionResult.CONSUME;
 		}
 		if (cuttingBoard.canAddItem(mainHandStack)) {
 			if (level.isClientSide) {
-				return InteractionResult.CONSUME;
+				return InteractionResult.SUCCESS;
 			}
 			ItemStack remainderStack = cuttingBoard.addItem(player.getAbilities().instabuild ? mainHandStack.copy() : mainHandStack);
 			if (!player.isCreative()) {
 				player.setItemSlot(EquipmentSlot.MAINHAND, remainderStack);
 			}
 			level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.BLOCK_CUTTING_BOARD_PLACE.get(), SoundSource.BLOCKS, 1.0F, 0.8F);
-			return InteractionResult.SUCCESS;
+			return InteractionResult.CONSUME;
 		} else {
 			if (cuttingBoard.processStoredItemUsingTool(mainHandStack, player)) {
-				return InteractionResult.SUCCESS;
+				return InteractionResult.sidedSuccess(level.isClientSide);
 			}
 		}
-
-		return InteractionResult.CONSUME;
+		return InteractionResult.PASS;
 	}
 
 	@Override
@@ -194,10 +193,6 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 		public static void onSneakPlaceTool(PlayerInteractEvent.RightClickBlock event) {
 			Level level = event.getLevel();
 			BlockPos pos = event.getPos();
-			BlockEntity blockEntity = level.getBlockEntity(pos);
-			if (!(blockEntity instanceof CuttingBoardBlockEntity cuttingBoard)) {
-				return;
-			}
 
 			Player player = event.getEntity();
 			ItemStack heldStack = player.getMainHandItem();
@@ -205,13 +200,16 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 				return;
 			}
 
+			if (!(level.getBlockEntity(pos) instanceof CuttingBoardBlockEntity cuttingBoard)) {
+				return;
+			}
 			if (cuttingBoard.carveToolOnBoard(player.getAbilities().instabuild ? heldStack.copy() : heldStack)) {
 				if (!player.isCreative()) {
 					player.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
 				}
 				level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.BLOCK_CUTTING_BOARD_CARVE.get(), SoundSource.BLOCKS, 1.0F, 0.8F);
 				event.setCanceled(true);
-				event.setCancellationResult(InteractionResult.SUCCESS);
+				event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide));
 			}
 		}
 	}
