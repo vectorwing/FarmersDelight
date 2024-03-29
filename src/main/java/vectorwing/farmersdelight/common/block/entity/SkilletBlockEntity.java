@@ -32,6 +32,8 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
+import static vectorwing.farmersdelight.common.item.SkilletItem.FLIP_TIME;
+
 public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlockEntity
 {
 	private final ItemStackHandler inventory = createHandler();
@@ -62,6 +64,7 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 		} else if (skillet.cookingTime > 0) {
 			skillet.cookingTime = Mth.clamp(skillet.cookingTime - 2, 0, skillet.cookingTimeTotal);
 		}
+
 	}
 
 	public static void animationTick(Level level, BlockPos pos, BlockState state, SkilletBlockEntity skillet) {
@@ -82,6 +85,13 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 				double motionY = level.random.nextFloat() * 0.5F + 0.2f;
 				double motionZ = level.random.nextFloat() - 0.5F;
 				level.addParticle(ParticleTypes.ENCHANTED_HIT, x, y, z, motionX, motionY, motionZ);
+			}
+
+			if (level.getGameTime() - skillet.lastFlippedTime == FLIP_TIME) {
+				double x = (double) pos.getX() + 0.5D;
+				double y = (double) pos.getY() + 0.1D;
+				double z = (double) pos.getZ() + 0.5D;
+				level.playLocalSound(x, y, z, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.BLOCKS, 0.4F, level.random.nextFloat() * 0.2F + 0.9F, false);
 			}
 		}
 
