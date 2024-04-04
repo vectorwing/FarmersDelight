@@ -259,6 +259,9 @@
   "farmersdelight.advancement.master_chef.desc": "Coma uma porção de cada refeição disponível!",
 
   "farmersdelight.subtitles.cooking_pot.boil": "Panela fervendo",
+  "farmersdelight.subtitles.cutting_board.place_item": "Item colocado na tábua",
+  "farmersdelight.subtitles.cutting_board.remove_item": "Item removido da tábua",
+  "farmersdelight.subtitles.cutting_board.carve_tool": "Ferramenta fincada na tábua",
   "farmersdelight.subtitles.cutting_board.knife_cut": "Faca cortando",
   "farmersdelight.subtitles.stove.crackle": "Fogão crepitando",
   "farmersdelight.subtitles.skillet.sizzle": "Frigideira fritando",
@@ -273,6 +276,7 @@
   "farmersdelight.block.rice.invalid_placement": "Esta planta não crescerá bem fora de água rasa.",
   "farmersdelight.block.cutting_board.invalid_item": "Isto não parece cortável...",
   "farmersdelight.block.cutting_board.invalid_tool": "Talvez com outra ferramenta...",
+  "farmersdelight.block.cutting_board.remaining_items": "%s restante...",
   "farmersdelight.block.skillet.invalid_item": "Isto não pode ser cozido...",
   "farmersdelight.item.skillet.how_to_cook": "Use sua outra mão para segurar ingredientes!",
 

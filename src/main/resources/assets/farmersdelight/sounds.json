@@ -14,6 +14,33 @@
       "farmersdelight:block/cooking_pot/boil_soup3"
     ]
   },
+  "block.cutting_board.place": {
+    "subtitle": "farmersdelight.subtitles.cutting_board.place_item",
+    "sounds": [
+      {
+        "name": "block.wood.place",
+        "type": "event"
+      }
+    ]
+  },
+  "block.cutting_board.remove": {
+    "subtitle": "farmersdelight.subtitles.cutting_board.remove_item",
+    "sounds": [
+      {
+        "name": "block.wood.hit",
+        "type": "event"
+      }
+    ]
+  },
+  "block.cutting_board.carve": {
+    "subtitle": "farmersdelight.subtitles.cutting_board.carve_tool",
+    "sounds": [
+      {
+        "name": "block.wood.place",
+        "type": "event"
+      }
+    ]
+  },
   "block.cutting_board.knife": {
     "subtitle": "farmersdelight.subtitles.cutting_board.knife_cut",
     "sounds": [

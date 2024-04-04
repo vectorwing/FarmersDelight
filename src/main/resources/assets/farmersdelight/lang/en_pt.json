@@ -259,6 +259,9 @@
   "farmersdelight.advancement.master_chef.desc": "Have a taste o' every grub ye can get yer hook on!",
 
   "farmersdelight.subtitles.cooking_pot.boil": "Pot o' Grub boils",
+  "farmersdelight.subtitles.cutting_board.place_item": "Thingy put down fer choppin'",
+  "farmersdelight.subtitles.cutting_board.remove_item": "Thingy relieved from choppin'",
+  "farmersdelight.subtitles.cutting_board.carve_tool": "Tool stabbin' tha block",
   "farmersdelight.subtitles.cutting_board.knife_cut": "Dagger slashes",
   "farmersdelight.subtitles.stove.crackle": "Grille crackles",
   "farmersdelight.subtitles.skillet.sizzle": "Skillet sizzles",
@@ -273,6 +276,7 @@
   "farmersdelight.block.rice.invalid_placement": "This here seed will need a nice puddle o' water ta thrive.",
   "farmersdelight.block.cutting_board.invalid_item": "No good reason ta chop this thingy...",
   "farmersdelight.block.cutting_board.invalid_tool": "Ack, this here tool won't cut it...",
+  "farmersdelight.block.cutting_board.remaining_items": "%s ta go...",
   "farmersdelight.block.skillet.invalid_item": "A wee foolish to try an' cook this...",
   "farmersdelight.item.skillet.how_to_cook": "Hoist yer grub by yer other hand ta cook it!",
 
