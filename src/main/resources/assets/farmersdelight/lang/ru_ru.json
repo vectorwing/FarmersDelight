@@ -81,7 +81,7 @@
 
   "block.farmersdelight.sandy_shrub": "Песчаный куст",
   "block.farmersdelight.wild_cabbages": "Дикая капуста",
-  "block.farmersdelight.wild_tomatoes": "Куст томатов",
+  "block.farmersdelight.wild_tomatoes": "Томатный куст",
   "block.farmersdelight.wild_onions": "Дикий лук",
   "block.farmersdelight.wild_carrots": "Дикая морковь",
   "block.farmersdelight.wild_potatoes": "Дикий картофель",
@@ -206,12 +206,12 @@
   "effect.farmersdelight.comfort": "Комфорт",
 
   "effect.farmersdelight.nourishment.0.desc": "Предотвращает потерю голода, за исключением случаев использования насыщения для лечения.",
-  "effect.farmersdelight.comfort.0.desc": "Делает вас невосприимчивым к Голоду, Медлительности и Слабости.",
+  "effect.farmersdelight.comfort.0.desc": "Делает вас невосприимчивым к голоду, медлительности и слабости.",
 
   "enchantment.farmersdelight.backstabbing": "Предательство",
   "enchantment.farmersdelight.backstabbing.desc": "Увеличивает урон при атаке цели со спины.",
 
-  "itemGroup.farmersdelight": "Farmer's Delight",
+  "itemGroup.farmersdelight": "Фермерский восторг",
 
   "farmersdelight.container.recipe_book.cookable": "Доступно к готовке",
   "farmersdelight.container.cooking_pot": "Кухонный котел",
@@ -230,7 +230,7 @@
   "farmersdelight.tooltip.hot_cocoa": "Очищает от 1 вредного эффекта",
   "farmersdelight.tooltip.melon_juice": "Восстанавливает немного здоровья",
 
-  "farmersdelight.advancement.root": "Farmer's Delight",
+  "farmersdelight.advancement.root": "Фермерский восторг",
   "farmersdelight.advancement.root.desc": "Вас ожидает целый мир разнообразных вкусов!",
 
   "farmersdelight.advancement.craft_knife": "Охота и собирательство",
@@ -238,24 +238,24 @@
   "farmersdelight.advancement.harvest_straw": "Хватаясь за соломинку",
   "farmersdelight.advancement.harvest_straw.desc": "Срежьте траву ножом, чтобы получить солому",
   "farmersdelight.advancement.place_organic_compost": "Продвинутое компостирование",
-  "farmersdelight.advancement.place_organic_compost.desc": "Поставьте Органический компост. Он разлагается лучше с солнцем, водой и грибами!",
+  "farmersdelight.advancement.place_organic_compost.desc": "Разместите органический компост. Он разлагается лучше с солнцем, водой и грибами!",
   "farmersdelight.advancement.get_rich_soil": "Выращивание пищи",
   "farmersdelight.advancement.get_rich_soil.desc": "Оставьте немного органического компоста разлагаться, пока он не превратится в плодородную почву. Грибы могут помочь!",
   "farmersdelight.advancement.get_ham": "Дикий мясник",
   "farmersdelight.advancement.get_ham.desc": "Используйте нож для извлечения больших кусков мяса из Свиней",  
   "farmersdelight.advancement.use_cutting_board": "Следи за пальцами",
   "farmersdelight.advancement.use_cutting_board.desc": "Держа инструмент в руках, используйте его на разделочной доске, чтобы разделать некоторые предметы",
-  "farmersdelight.advancement.obtain_netherite_knife": "Если ты не выдержишь жару...",
+  "farmersdelight.advancement.obtain_netherite_knife": "Если ты не выдержишь жару…",
   "farmersdelight.advancement.obtain_netherite_knife.desc": "Потратьте целый незеритовый слиток, чтобы улучшить свой нож! Или свалите с кухни.",
 
-  "farmersdelight.advancement.get_fd_seed": "Дикие ростки",
-  "farmersdelight.advancement.get_fd_seed.desc": "Четыре новых культуры можно найти в природе, в разных климатах... или где-нибудь в сундуках.",
+  "farmersdelight.advancement.get_fd_seed": "Урожаи дикой природы",
+  "farmersdelight.advancement.get_fd_seed.desc": "Четыре новых культуры можно найти в природе, в разных климатах… или где-нибудь в сундуках.",
   "farmersdelight.advancement.plant_rice": "Погружая свои корни",
   "farmersdelight.advancement.plant_rice.desc": "Посадите рис в неглубокий водоём",
-  "farmersdelight.advancement.harvest_ropelogged_tomato": "Высо-томаты!",
-  "farmersdelight.advancement.harvest_ropelogged_tomato.desc": "Повесьте верёвку над Томатной лозой, чтобы она росла выше",
+  "farmersdelight.advancement.harvest_ropelogged_tomato": "Шпалера",
+  "farmersdelight.advancement.harvest_ropelogged_tomato.desc": "Повесьте верёвку над томатной лозой, чтобы она росла выше",
   "farmersdelight.advancement.hit_raider_with_rotten_tomato": "Фуу! Позор!",
-  "farmersdelight.advancement.hit_raider_with_rotten_tomato.desc": "Киньте Гнилым томатом в надоедливого разбойника!",
+  "farmersdelight.advancement.hit_raider_with_rotten_tomato.desc": "Бросьте гнилой томат в надоедливого разбойника!",
   "farmersdelight.advancement.get_mushroom_colony": "Грибы среди нас",
   "farmersdelight.advancement.get_mushroom_colony.desc": "Посадите грибы в тёмное место, дождитесь образования колонии, а затем срежьте её!",
   "farmersdelight.advancement.plant_all_crops": "Севооборот",
@@ -291,13 +291,13 @@
 
   "farmersdelight.block.feast.use_container": "Вам нужно %s чтобы съесть это.",
   "farmersdelight.block.rice.invalid_placement": "Этот посев не выживет за пределами мелководья.",
-  "farmersdelight.block.cutting_board.invalid_item": "Кажется это нельзя разрезать...",
-  "farmersdelight.block.cutting_board.invalid_tool": "Возможно другим инструментом...",
-  "farmersdelight.block.skillet.invalid_item": "Это нельзя приготовить...",
+  "farmersdelight.block.cutting_board.invalid_item": "Кажется это нельзя разрезать…",
+  "farmersdelight.block.cutting_board.invalid_tool": "Возможно другим инструментом…",
+  "farmersdelight.block.skillet.invalid_item": "Это нельзя приготовить…",
   "farmersdelight.item.skillet.how_to_cook": "Используйте другую руку, чтобы держать ингредиенты!",
 
   "death.attack.farmersdelight.stove": "%1$s был зажарен на гриле",
-  "death.attack.farmersdelight.stove.player": "%1$s был брошен на гриль Шефом %2$s",
+  "death.attack.farmersdelight.stove.player": "%1$s был брошен на гриль шефом %2$s",
 
   "farmersdelight.jei.cooking": "Готовка",
   "farmersdelight.jei.cutting": "Разделывание на доске",
@@ -306,7 +306,15 @@
   "farmersdelight.jei.decomposition.light": "Процесс ускоряется под воздействием солнечного света",
   "farmersdelight.jei.decomposition.fluid": "Процесс ускоряется посредством добавления воды",
   "farmersdelight.jei.decomposition.accelerators": "Процесс ускоряется посредством добавления активаторов (см. выше)",
+  
   "farmersdelight.jei.info.straw": "Сухое растительное волокно, используемое для создания предметов. Получают путем срезания ножом травянистых культур и растений.",
-  "farmersdelight.jei.info.knife": "Ножи - это лёгкое оружие ближнего боя. Они могут собирать солому с травы и гарантируют получение вторичного дропа с животных.",
-  "farmersdelight.jei.info.ham": "Большой кусок мяса со Свиней или Хоглинов. Для разделки понадобится что-то полегче меча..."
+  "farmersdelight.jei.info.knife": "Ножи — это лёгкое оружие ближнего боя. Они могут собирать солому с травы и гарантируют получение вторичного дропа с животных.",
+  "farmersdelight.jei.info.ham": "Большой кусок мяса со cвиней или хоглинов. Для разделки понадобится что-то полегче меча…",
+  "farmersdelight.jei.info.wild_cabbages": "Капусту обычно можно встретить в качестве дикорастущего растения на пляжных побережьях.",
+  "farmersdelight.jei.info.wild_beetroots": "Свеклу обычно можно встретить в виде дикорастущего растения на пляжных побережьях.",
+  "farmersdelight.jei.info.wild_carrots": "Морковь обычно можно встретить в виде дикорастущего растения в умеренных местах, таких как равнины и леса.",
+  "farmersdelight.jei.info.wild_onions": "Лук обычно можно встретить как дикорастущее растение в умеренных местах, таких как равнины и леса.",
+  "farmersdelight.jei.info.wild_potatoes": "Картофель обычно можно встретить как дикорастущее растение в холодных местах, таких как горы и тайга.",
+  "farmersdelight.jei.info.wild_tomatoes": "Томаты обычно можно встретить как дикорастущее растение в засушливых местах, таких как саванны и пустыни.",
+  "farmersdelight.jei.info.wild_rice": "Рис обычно можно встретить как дикорастущее растение в водоемах на влажных землях, таких как болота и джунгли."
 }
