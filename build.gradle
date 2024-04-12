@@ -25,6 +25,8 @@ mixin {
     add sourceSets.main, "farmersdelight.refmap.json"
 }
 
+jarJar.enable()
+
 version = "${mc_version}-${mod_version}"
 group = 'vectorwing.farmersdelight' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'FarmersDelight'
@@ -97,6 +99,7 @@ minecraft {
 }
 
 repositories {
+    mavenCentral()
     maven {
         // JEI
         name = "Progwml6 maven"
@@ -116,6 +119,11 @@ sourceSets.main.resources {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.5"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixinextras_version}")) {
+        jarJar.ranged(it, "[${mixinextras_version},)")
+    }
 
     // compile against the JEI API but do not include it at runtime
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
@@ -139,27 +147,42 @@ dependencies {
 
 }
 
-jar {
-    manifest {
-        attributes([
-                "Specification-Title"     : "farmersdelight",
-                "Specification-Vendor"    : "vectorwing",
-                "Specification-Version"   : "1", // We are version 1 of ourselves
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : "${version}",
-                "Implementation-Vendor"   : "vectorwing",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs"            : "farmersdelight.mixins.json"
-        ])
+void processJar(Jar jarTask) {
+    jarTask.configure {
+        from "LICENSE"
+        exclude ".cache"
+
+        manifest {
+            attributes([
+                    "Specification-Title"     : "farmersdelight",
+                    "Specification-Vendor"    : "vectorwing",
+                    "Specification-Version"   : "1", // We are version 1 of ourselves
+                    "Implementation-Title"    : project.name,
+                    "Implementation-Version"  : "${version}",
+                    "Implementation-Vendor"   : "vectorwing",
+                    "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                    "MixinConfigs"            : "farmersdelight.mixins.json"
+            ])
+        }
     }
 }
 
 jar.finalizedBy('reobfJar')
+jar.setArchiveClassifier('slim')
+tasks.jarJar.setArchiveClassifier('')
+tasks.jarJar.finalizedBy('reobfJarJar')
+
+processJar(jar)
+processJar(tasks.jarJar)
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifact jar
+            artifactId = archivesBaseName
+
+            from components.java
+            fg.component(it)
+            jarJar.component(it)
         }
     }
     repositories {
