@@ -10,7 +10,8 @@
     "KeepRichSoilTreeMixin",
     "RabbitsEatCabbageMixin",
     "SoupItemMixin",
-    "accessor.RecipeManagerAccessor"
+    "accessor.RecipeManagerAccessor",
+    "integration.KekimurusBlockEntity"
   ],
   "client": [
     "CanvasSignEditScreenMixin",
