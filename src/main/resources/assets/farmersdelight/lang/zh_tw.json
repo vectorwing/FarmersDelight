@@ -286,7 +286,15 @@
   "farmersdelight.jei.decomposition.light": "陽光照射",
   "farmersdelight.jei.decomposition.fluid": "鄰近水源",
   "farmersdelight.jei.decomposition.accelerators": "能夠加速分解過程（詳見以下）",
+
   "farmersdelight.jei.info.straw": "乾燥的植物纖維。用刀切割雜草等獲得。",
   "farmersdelight.jei.info.knife": "刀是小型的近戰武器。他們可以從草中收穫稻梗，並從動物身上獲得掉落物。",
-  "farmersdelight.jei.info.ham": "豬或豬布獸腿上的肉。你需要用比劍更輕的東西來切……"
+  "farmersdelight.jei.info.ham": "豬或豬布獸腿上的肉。你需要用比劍更輕的東西來切……",
+  "farmersdelight.jei.info.wild_cabbages": "野生高麗菜通常可以在海灘沿岸找到。",
+  "farmersdelight.jei.info.wild_beetroots": "野生甜菜根通常可以在海灘沿岸找到。",
+  "farmersdelight.jei.info.wild_carrots": "野生胡蘿蔔通常可以在溫帶地區，如平原和森林中找到。",
+  "farmersdelight.jei.info.wild_onions": "野生洋蔥通常可以在溫帶地區，如平原和森林中找到。",
+  "farmersdelight.jei.info.wild_potatoes": "野生馬鈴薯通常可以在寒冷地區，如山區和針葉林中找到。",
+  "farmersdelight.jei.info.wild_tomatoes": "野生番茄藤通常可以在乾旱地區，如熱帶草原和沙漠中找到。",
+  "farmersdelight.jei.info.wild_rice": "野生水稻通常可以在濕地的池塘中，如沼澤和叢林中找到。"
 }
