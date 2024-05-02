@@ -77,7 +77,7 @@ public class DogFoodItem extends ConsumableItem
 						itemStack.shrink(1);
 					}
 
-					event.setCancellationResult(InteractionResult.SUCCESS);
+					event.setCancellationResult(InteractionResult.sidedSuccess(event.getLevel().isClientSide));
 					event.setCanceled(true);
 				}
 			}
@@ -115,7 +115,7 @@ public class DogFoodItem extends ConsumableItem
 	public InteractionResult interactLivingEntity(ItemStack stack, Player playerIn, LivingEntity target, InteractionHand hand) {
 		if (target instanceof Wolf wolf) {
 			if (wolf.isAlive() && wolf.isTame()) {
-				return InteractionResult.SUCCESS;
+				return InteractionResult.sidedSuccess(playerIn.level.isClientSide);
 			}
 		}
 		return InteractionResult.PASS;

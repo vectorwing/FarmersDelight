@@ -73,20 +73,6 @@ public class PieBlock extends Block
 	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		ItemStack heldStack = player.getItemInHand(hand);
-		if (level.isClientSide) {
-			if (heldStack.is(ModTags.KNIVES)) {
-				return cutSlice(level, pos, state, player);
-			}
-
-			if (this.consumeBite(level, pos, state, player) == InteractionResult.SUCCESS) {
-				return InteractionResult.SUCCESS;
-			}
-
-			if (heldStack.isEmpty()) {
-				return InteractionResult.CONSUME;
-			}
-		}
-
 		if (heldStack.is(ModTags.KNIVES)) {
 			return cutSlice(level, pos, state, player);
 		}
@@ -119,7 +105,7 @@ public class PieBlock extends Block
 				level.removeBlock(pos, false);
 			}
 			level.playSound(null, pos, SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 0.8F, 0.8F);
-			return InteractionResult.SUCCESS;
+			return InteractionResult.sidedSuccess(level.isClientSide);
 		}
 	}
 
@@ -138,7 +124,7 @@ public class PieBlock extends Block
 		ItemUtils.spawnItemEntity(level, this.getPieSliceItem(), pos.getX() + 0.5, pos.getY() + 0.3, pos.getZ() + 0.5,
 				direction.getStepX() * 0.15, 0.05, direction.getStepZ() * 0.15);
 		level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
-		return InteractionResult.SUCCESS;
+		return InteractionResult.sidedSuccess(level.isClientSide);
 	}
 
 	@Override
