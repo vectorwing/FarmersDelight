@@ -57,6 +57,7 @@
   "block.farmersdelight.rice_panicles": "Cây lúa đã trổ bông",
   "block.farmersdelight.brown_mushroom_colony": "Nhúm nấm nâu",
   "block.farmersdelight.red_mushroom_colony": "Nhúm nấm đỏ",
+  
   "block.farmersdelight.sandy_shrub": "Cây bụi cát",
   "block.farmersdelight.wild_cabbages": "Bắp cải dại",
   "block.farmersdelight.wild_tomatoes": "Cà chua dại",
@@ -160,7 +161,6 @@
   "item.farmersdelight.roasted_mutton_chops": "Thịt cừu nướng",
   "item.farmersdelight.steak_and_potatoes": "Bít tết và khoai tây",
   "item.farmersdelight.vegetable_noodles": "Mì xào rau củ",
-  "item.farmersdelight.ratatouille": "Ratatouille",
   "item.farmersdelight.squid_ink_pasta": "Mỳ Ý mực đen",
   "item.farmersdelight.grilled_salmon": "Cá hồi nướng",
   "item.farmersdelight.mushroom_rice": "Cơm nấm",
@@ -287,4 +287,12 @@
   "farmersdelight.jei.info.straw": "Một loại sợi thực vật khô được sử dụng trong sản xuất thủ công. Thu được bằng cách cắt cỏ và cây trồng bằng Dao.",
   "farmersdelight.jei.info.knife": "Dao là vũ khí cận chiến hạng nhẹ. Nó có thể thu hoạch Rơm từ cỏ và đảm bảo động vật luôn rơi ra da và lông.",
   "farmersdelight.jei.info.ham": "Một miếng thịt lớn từ chân của Lợn hoặc Hoglin. Bạn sẽ cần một thứ gì đó nhẹ hơn Kiếm để cắt nó..."
+  "farmersdelight.jei.info.ham": "Một miếng thịt lớn từ chân của Lợn hoặc Hoglin. Bạn sẽ cần một thứ gì đó nhẹ hơn Kiếm để cắt nó...",
+  "farmersdelight.jei.info.wild_cabbages": "Bắp cải thường được tìm thấy dưới dạng cây dại ở các bờ biển.",
+  "farmersdelight.jei.info.wild_beetroots": "Củ dền thường được tìm thấy dưới dạng cây dại ở các bờ biển.",
+  "farmersdelight.jei.info.wild_carrots": "Cà rốt thường được tìm thấy dưới dạng cây dại ở các vùng đất ôn đới, như đồng bằng và rừng.",
+  "farmersdelight.jei.info.wild_onions": "Hành tây thường được tìm thấy dưới dạng cây dại ở các vùng đất ôn đới, như đồng bằng và rừng.",
+  "farmersdelight.jei.info.wild_potatoes": "Khoai tây thường được tìm thấy dưới dạng cây dại ở các vùng đất lạnh, như núi và rừng taiga.",
+  "farmersdelight.jei.info.wild_tomatoes": "Cà chua thường được tìm thấy dưới dạng cây dại ở các vùng đất khô cằn, như savan và sa mạc.",
+  "farmersdelight.jei.info.wild_rice": "Lúa thường được tìm thấy dưới dạng cây dại trong các ao của vùng đất ẩm ướt, như đầm lầy và rừng rậm."
 }
