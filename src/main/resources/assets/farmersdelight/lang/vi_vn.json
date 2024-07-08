@@ -211,7 +211,6 @@
   "enchantment.farmersdelight.backstabbing": "Đâm lén",
   "enchantment.farmersdelight.backstabbing.desc": "Tăng sát thương khi tấn công mục tiêu từ phía sau.",
 
-  "itemGroup.farmersdelight": "Farmer's Delight",
   "itemGroup.farmersdelight": "Niềm Vui Của Người Nông Dân",
 
   "farmersdelight.container.recipe_book.cookable": "Hiển thị có thể nấu được",
@@ -257,8 +256,6 @@
   "farmersdelight.advancement.harvest_ropelogged_tomato.desc": "Treo một số dây phía trên cây cà chua để làm cho nó phát triển cao hơn",
   "farmersdelight.advancement.hit_raider_with_rotten_tomato": "Boo! Hiss!",
   "farmersdelight.advancement.hit_raider_with_rotten_tomato.desc": "Ném một quả cà chua thối vào một trong những kẻ cướp khó chịu!",
-  "farmersdelight.advancement.get_mushroom_colony": "Fungus Among Us",
-  "farmersdelight.advancement.get_mushroom_colony.desc": "Cắt một nhúm nấm trưởng thành hoàn toàn. Để phát triển chúng như thế này, bạn sẽ cần một loại đất rất giàu dinh dưỡng...",
   "farmersdelight.advancement.get_mushroom_colony": "Nấm Tại Đây",
   "farmersdelight.advancement.get_mushroom_colony.desc": "Cắt một nhúm nấm đã trưởng thành hoàn toàn. Để phát triển chúng như thế này, bạn sẽ cần một loại đất rất giàu dinh dưỡng...",
   "farmersdelight.advancement.plant_all_crops": "Luân canh",
@@ -281,16 +278,6 @@
   "farmersdelight.advancement.master_chef": "Vua đầu bếp",
   "farmersdelight.advancement.master_chef.desc": "Ăn tất cả các loại đồ ăn!",
 
-  "farmersdelight.subtitles.cooking_pot.boil": "Cooking Pot boils",
-  "farmersdelight.subtitles.cutting_board.knife_cut": "Knife cuts",
-  "farmersdelight.subtitles.stove.crackle": "Stove crackles",
-  "farmersdelight.subtitles.skillet.sizzle": "Skillet sizzles",
-  "farmersdelight.subtitles.skillet.add_food": "Skillet hisses",
-  "farmersdelight.subtitles.cabinet.open": "Cabinet opens",
-  "farmersdelight.subtitles.cabinet.close": "Cabinet closes",
-  "farmersdelight.subtitles.tomato.pick": "Tomatoes pop",
-  "farmersdelight.subtitles.rotten_tomato.throw": "Rotten Tomato flies",
-  "farmersdelight.subtitles.rotten_tomato.hit": "Rotten Tomato splatters",
   "farmersdelight.subtitles.cooking_pot.boil": "Nồi Nấu sôi",
   "farmersdelight.subtitles.cutting_board.knife_cut": "Dao cắt",
   "farmersdelight.subtitles.stove.crackle": "Bếp kêu lách tách",
@@ -322,7 +309,6 @@
  
   "farmersdelight.jei.info.straw": "Một loại sợi thực vật khô được sử dụng trong sản xuất thủ công. Thu được bằng cách cắt cỏ và cây trồng bằng Dao.",
   "farmersdelight.jei.info.knife": "Dao là vũ khí cận chiến hạng nhẹ. Nó có thể thu hoạch Rơm từ cỏ và đảm bảo động vật luôn rơi ra da và lông.",
-  "farmersdelight.jei.info.ham": "Một miếng thịt lớn từ chân của Lợn hoặc Hoglin. Bạn sẽ cần một thứ gì đó nhẹ hơn Kiếm để cắt nó..."
   "farmersdelight.jei.info.ham": "Một miếng thịt lớn từ chân của Lợn hoặc Hoglin. Bạn sẽ cần một thứ gì đó nhẹ hơn Kiếm để cắt nó...",
   "farmersdelight.jei.info.wild_cabbages": "Bắp cải thường được tìm thấy dưới dạng cây dại ở các bờ biển.",
   "farmersdelight.jei.info.wild_beetroots": "Củ dền thường được tìm thấy dưới dạng cây dại ở các bờ biển.",
