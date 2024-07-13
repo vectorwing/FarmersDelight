@@ -1,39 +1,41 @@
 modLoader = "javafml"
-loaderVersion = "[1,)"
+loaderVersion = "${loader_version_range}"
 issueTrackerURL = "https://github.com/vectorwing/FarmersDelight/issues"
-license = "MIT License"
+license="${mod_license}"
 
 [[mods]]
-modId = "farmersdelight"
-version = "1.20.4-1.2.4-beta.3"
-displayName = "Farmer's Delight"
-# updateJSONURL=""
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
 displayURL = "https://github.com/vectorwing/FarmersDelight"
 logoFile = "logo.png"
 logoBlur = false
 credits = "Chloe Dawn, Grimmauld, CDAGaming, TelepathicGrunt, ConductiveFoam, simibubi, MerchantPug, Jozufozu, bagel, Silk, SkySom, Eutro, RaymondBlaze and many others!"
-authors = "vectorwing"
+authors = "${mod_authors}"
 description = "A cozy farming and cooking expansion for Minecraft!"
 itemIcon = "farmersdelight:stove"
 configBackground = "minecraft:textures/block/bricks.png"
 
-[[dependencies.farmersdelight]]
-modId = "neoforge"
-type = "required"
-versionRange = "[1,)"
-ordering = "NONE"
-side = "BOTH"
+[[mixins]]
+config = "${mod_id}.mixins.json"
 
-[[dependencies.farmersdelight]]
-modId = "minecraft"
-type = "required"
-versionRange = "[1.20.4]"
-ordering = "NONE"
-side = "BOTH"
+[[dependencies.${mod_id}]]
+    modId = "neoforge"
+    type = "required"
+    versionRange="${neo_version_range}"
+    ordering = "NONE"
+    side = "BOTH"
 
-[[dependencies.farmersdelight]]
-modId = "crafttweaker"
-type = "optional"
-versionRange = "[14.0.6,)"
-ordering = "NONE"
-side = "BOTH"
+[[dependencies.${mod_id}]]
+    modId = "minecraft"
+    type = "required"
+    versionRange = "${minecraft_version_range}"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.${mod_id}]]
+    modId = "crafttweaker"
+    type = "optional"
+    versionRange = "[14.0.6,)"
+    ordering = "NONE"
+    side = "BOTH"

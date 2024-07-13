@@ -1,47 +1,17 @@
 plugins {
+    id 'java-library'
+    id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.41'
-    id 'net.neoforged.gradle.mixin' version '7.0.41'
-    id 'java-library'
+    id 'net.neoforged.moddev' version '1.0.0'
 }
 
-version = "${mc_version}-${mod_version}"
+tasks.named('wrapper', Wrapper).configure {
+    distributionType = Wrapper.DistributionType.BIN
+}
+
+version = "${minecraft_version}-${mod_version}"
 group = 'vectorwing.farmersdelight' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'FarmersDelight'
-
-//sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-
-minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
-
-mixin {
-    config 'farmersdelight.mixins.json'
-}
-
-runs {
-    configureEach {
-        workingDirectory project.file("run/${it.name}")
-        // Recommended logging data for a userdev environment
-        systemProperty 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-        // Recommended logging level for the console
-        systemProperty 'forge.logging.console.level', 'debug'
-        modSource project.sourceSets.main
-    }
-
-    client {
-        systemProperty 'forge.enabledGameTestNamespaces', "farmersdelight"
-    }
-
-    server {
-        systemProperty 'forge.enabledGameTestNamespaces', "farmersdelight"
-        programArgument '--nogui'
-    }
-
-    data {
-        programArguments.addAll '--mod', "farmersdelight", '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
-    }
-}
 
 repositories {
     maven {
@@ -52,61 +22,152 @@ repositories {
     maven {
         // CraftTweaker
         name = "BlameJared"
-        url = "https://maven.blamejared.com/"
+        url = "https://maven.blamejared.com"
     }
     maven { url "https://maven.ryanliptak.com/" }
 }
 
-sourceSets.main.resources {
-    srcDirs += 'src/generated/resources'
+base {
+    archivesName = 'FarmersDelight'
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+neoForge {
+    version = project.neo_version
+
+    parchment {
+        mappingsVersion = project.parchment_mappings_version
+        minecraftVersion = project.parchment_minecraft_version
+    }
+
+    // This line is optional. Access Transformers are automatically detected
+    // accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
+
+    runs {
+        client {
+            client()
+
+            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        server {
+            server()
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        // This run config launches GameTestServer and runs all registered gametests, then exits.
+        // By default, the server will crash when no gametests are provided.
+        // The gametest system is also enabled by default for other run configs under the /test command.
+        gameTestServer {
+            type = "gameTestServer"
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        data {
+            data()
+
+            // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
+            // gameDirectory = project.file('run-data')
+
+            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+
+        configureEach {
+            // Recommended logging data for a userdev environment
+            // The markers can be added/remove as needed separated by commas.
+            // "SCAN": For mods scan.
+            // "REGISTRIES": For firing of registry events.
+            // "REGISTRYDUMP": For getting the contents of all registries.
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+
+            // Recommended logging level for the console
+            // You can set various levels here.
+            // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
 }
 
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
     // compile against the JEI API but do not include it at runtime
-    compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
-    compileOnly "mezz.jei:jei-${mc_version}-forge-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
     // at runtime, use the full JEI jar for Forge
-    runtimeOnly "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
+    localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
 
     compileOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}:api"
     runtimeOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}"
 
-    def ctDep = "com.blamejared.crafttweaker:CraftTweaker-neoforge-${mc_version}:${crafttweaker_version}"
+    def ctDep = "com.blamejared.crafttweaker:CraftTweaker-neoforge-${minecraft_version}:${crafttweaker_version}"
     compileOnly ctDep
     runtimeOnly ctDep
-
 }
 
-tasks.named('jar', Jar).configure {
-    manifest {
-        attributes([
-                "Specification-Title"     : "farmersdelight",
-                "Specification-Vendor"    : "vectorwing",
-                "Specification-Version"   : "1", // We are version 1 of ourselves
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : "${version}",
-                "Implementation-Vendor"   : "vectorwing",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs"            : "farmersdelight.mixins.json"
-        ])
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            neo_version_range      : neo_version_range,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+            mod_authors            : mod_authors,
+            mod_description        : mod_description
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/mods.toml']) {
+        expand replaceProperties
     }
 }
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
-            artifact jar
+        register('mavenJava', MavenPublication) {
+            from components.java
         }
     }
     repositories {
         maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
+            url "file://${project.projectDir}/repo"
         }
     }
 }
 
-compileJava {
-    options.compilerArgs << "-Acrafttweaker.processor.document.output_directory=${file('docsOut')}"
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
+
+////////////////
+
+//compileJava {
+//    options.compilerArgs << "-Acrafttweaker.processor.document.output_directory=${file('docsOut')}"
+//}
