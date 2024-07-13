@@ -10,7 +10,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 
 public class ModDamageTypes
 {
-	public static final ResourceKey<DamageType> STOVE_BURN = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(FarmersDelight.MODID, "stove_burn"));
+	public static final ResourceKey<DamageType> STOVE_BURN = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "stove_burn"));
 
 	public static DamageSource getSimpleDamageSource(Level level, ResourceKey<DamageType> type) {
 		return new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(type));

@@ -10,6 +10,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -47,13 +48,17 @@ public class TomatoVineBlock extends CropBlock
 		registerDefaultState(stateDefinition.any().setValue(getAgeProperty(), 0).setValue(ROPELOGGED, false));
 	}
 
-	@Override
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		int age = state.getValue(getAgeProperty());
 		boolean isMature = age == getMaxAge();
-		if (!isMature && player.getItemInHand(hand).is(Items.BONE_MEAL)) {
-			return InteractionResult.PASS;
-		} else if (isMature) {
+		return !isMature && stack.is(Items.BONE_MEAL) ? ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION : super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+	}
+
+	@Override
+	public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+		int age = state.getValue(getAgeProperty());
+		boolean isMature = age == getMaxAge();
+		if (isMature) {
 			int quantity = 1 + level.random.nextInt(2);
 			popResource(level, pos, new ItemStack(ModItems.TOMATO.get(), quantity));
 
@@ -65,7 +70,7 @@ public class TomatoVineBlock extends CropBlock
 			level.setBlock(pos, state.setValue(getAgeProperty(), 0), 2);
 			return InteractionResult.SUCCESS;
 		} else {
-			return super.use(state, level, pos, player, hand, hit);
+			return super.useWithoutItem(state, level, pos, player, hit);
 		}
 	}
 
@@ -79,10 +84,10 @@ public class TomatoVineBlock extends CropBlock
 		if (level.getRawBrightness(pos, 0) >= 9) {
 			int age = this.getAge(state);
 			if (age < this.getMaxAge()) {
-				float speed = getGrowthSpeed(this, level, pos);
-				if (CommonHooks.onCropsGrowPre(level, pos, state, random.nextInt((int) (25.0F / speed) + 1) == 0)) {
+				float speed = getGrowthSpeed(state, level, pos);
+				if (CommonHooks.canCropGrow(level, pos, state, random.nextInt((int) (25.0F / speed) + 1) == 0)) {
 					level.setBlock(pos, state.setValue(getAgeProperty(), age + 1), 2);
-					CommonHooks.onCropsGrowPost(level, pos, state);
+					CommonHooks.fireCropGrowPost(level, pos, state);
 				}
 			}
 			attemptRopeClimb(level, pos, random);

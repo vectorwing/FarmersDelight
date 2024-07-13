@@ -31,7 +31,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.common.ToolActions;
 import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
@@ -137,7 +136,8 @@ public class StoveBlock extends BaseEntityBlock
 	@Override
 	public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
 		boolean isLit = level.getBlockState(pos).getValue(StoveBlock.LIT);
-		if (isLit && !entity.fireImmune() && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entity)) {
+		if (isLit && !entity.isSteppingCarefully() && entity instanceof LivingEntity) {
+			// TODO: Revisit STOVE_BURN to make it equal to HOT_FLOOR. This may involve tags and datapacks.
 			entity.hurt(ModDamageTypes.getSimpleDamageSource(level, ModDamageTypes.STOVE_BURN), 1.0F);
 		}
 

@@ -15,6 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingHurtEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModEnchantments;
@@ -68,11 +69,11 @@ public class BackstabbingEnchantment extends Enchantment
 	{
 		@SubscribeEvent
 		@SuppressWarnings("unused")
-		public static void onKnifeBackstab(LivingHurtEvent event) {
+		public static void onKnifeBackstab(LivingDamageEvent.Post event) {
 			Entity attacker = event.getSource().getEntity();
 			if (attacker instanceof Player) {
 				ItemStack weapon = ((Player) attacker).getMainHandItem();
-				int enchantmentLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.BACKSTABBING.get(), weapon);
+				int enchantmentLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.BACKSTABBING, weapon);
 				if (enchantmentLevel > 0 && isLookingBehindTarget(event.getEntity(), event.getSource().getSourcePosition())) {
 					Level level = event.getEntity().getCommandSenderWorld();
 					if (!level.isClientSide) {

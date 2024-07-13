@@ -38,7 +38,7 @@ public class ClientSetupEvents
 
 	@SubscribeEvent
 	public static void onModelRegister(ModelEvent.RegisterAdditional event) {
-		event.register(new ModelResourceLocation(new ResourceLocation(FarmersDelight.MODID, "skillet_cooking"), "inventory"));
+		event.register(new ModelResourceLocation(ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "skillet_cooking"), "inventory"));
 	}
 
 	@SubscribeEvent
@@ -50,9 +50,9 @@ public class ClientSetupEvents
 	public static void onModelBake(ModelEvent.ModifyBakingResult event) {
 		Map<ResourceLocation, BakedModel> modelRegistry = event.getModels();
 
-		ModelResourceLocation skilletLocation = new ModelResourceLocation(new ResourceLocation(FarmersDelight.MODID, "skillet"), "inventory");
+		ModelResourceLocation skilletLocation = new ModelResourceLocation(ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "skillet"), "inventory");
 		BakedModel skilletModel = modelRegistry.get(skilletLocation);
-		ModelResourceLocation skilletCookingLocation = new ModelResourceLocation(new ResourceLocation(FarmersDelight.MODID, "skillet_cooking"), "inventory");
+		ModelResourceLocation skilletCookingLocation = new ModelResourceLocation(ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "skillet_cooking"), "inventory");
 		BakedModel skilletCookingModel = modelRegistry.get(skilletCookingLocation);
 		modelRegistry.put(skilletLocation, new SkilletModel(event.getModelBakery(), skilletModel, skilletCookingModel));
 	}

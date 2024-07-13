@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
@@ -30,8 +29,8 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> implements RecipeUpdateListener
 {
-	private static final WidgetSprites RECIPE_BUTTON = new WidgetSprites(new ResourceLocation("recipe_book/button"), new ResourceLocation("recipe_book/button"));
-	private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(FarmersDelight.MODID, "textures/gui/cooking_pot.png");
+	private static final WidgetSprites RECIPE_BUTTON = new WidgetSprites(ResourceLocation.withDefaultNamespace("recipe_book/button"), ResourceLocation.withDefaultNamespace("recipe_book/button"));
+	private static final ResourceLocation BACKGROUND_TEXTURE = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "textures/gui/cooking_pot.png");
 	private static final Rectangle HEAT_ICON = new Rectangle(47, 55, 17, 15);
 	private static final Rectangle PROGRESS_ARROW = new Rectangle(89, 25, 0, 17);
 
@@ -99,7 +98,7 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 				List<Component> tooltip = new ArrayList<>();
 
 				ItemStack mealStack = this.hoveredSlot.getItem();
-				tooltip.add(((MutableComponent) mealStack.getItem().getDescription()).withStyle(mealStack.getRarity().color));
+				tooltip.add(((MutableComponent) mealStack.getItem().getDescription()).withStyle(mealStack.getRarity().getStyleModifier()));
 
 				ItemStack containerStack = this.menu.blockEntity.getContainer();
 				String container = !containerStack.isEmpty() ? containerStack.getItem().getDescription().getString() : "";

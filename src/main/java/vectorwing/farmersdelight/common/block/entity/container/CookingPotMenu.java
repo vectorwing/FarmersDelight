@@ -26,7 +26,7 @@ import java.util.Objects;
 
 public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 {
-	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = new ResourceLocation(FarmersDelight.MODID, "item/empty_container_slot_bowl");
+	public static final ResourceLocation EMPTY_CONTAINER_SLOT_BOWL = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "item/empty_container_slot_bowl");
 
 	public final CookingPotBlockEntity blockEntity;
 	public final ItemStackHandler inventory;
@@ -175,7 +175,7 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 	}
 
 	@Override
-	public boolean recipeMatches(RecipeHolder<? extends Recipe<RecipeWrapper>> recipe) {
+	public boolean recipeMatches(RecipeHolder recipe) {
 		return recipe.value().matches(new RecipeWrapper(inventory), level);
 	}
 

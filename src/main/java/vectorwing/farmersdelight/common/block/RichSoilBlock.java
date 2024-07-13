@@ -12,10 +12,7 @@ import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.TallFlowerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.CommonHooks;
-import net.neoforged.neoforge.common.IPlantable;
-import net.neoforged.neoforge.common.PlantType;
-import net.neoforged.neoforge.common.ToolAction;
-import net.neoforged.neoforge.common.ToolActions;
+import net.neoforged.neoforge.common.util.TriState;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.tag.ModTags;
@@ -58,10 +55,10 @@ public class RichSoilBlock extends Block
 
 			// If all else fails, and it's a plant, give it a growth boost now and then!
 			if (aboveBlock instanceof BonemealableBlock growable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
-				if (growable.isValidBonemealTarget(level, pos.above(), aboveState) && CommonHooks.onCropsGrowPre(level, pos.above(), aboveState, true)) {
+				if (growable.isValidBonemealTarget(level, pos.above(), aboveState) && CommonHooks.canCropGrow(level, pos.above(), aboveState, true)) {
 					growable.performBonemeal(level, level.random, pos.above(), aboveState);
 					level.levelEvent(2005, pos.above(), 0);
-					CommonHooks.onCropsGrowPost(level, pos.above(), aboveState);
+					CommonHooks.fireCropGrowPost(level, pos.above(), aboveState);
 				}
 			}
 		}
@@ -78,8 +75,11 @@ public class RichSoilBlock extends Block
 
 
 	@Override
-	public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable) {
-		PlantType plantType = plantable.getPlantType(world, pos.relative(facing));
-		return plantType != PlantType.CROP && plantType != PlantType.NETHER && plantType != PlantType.WATER;
+	public TriState canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, BlockState plantState) {
+		return TriState.DEFAULT;
+
+		// TODO: Figure out how to correctly configure Rich Soil's plant compatibility, since PlantType was removed
+//		PlantType plantType = plantState.getPlantType(world, pos.relative(facing));
+//		return plantType != PlantType.CROP && plantType != PlantType.NETHER && plantType != PlantType.WATER;
 	}
 }
