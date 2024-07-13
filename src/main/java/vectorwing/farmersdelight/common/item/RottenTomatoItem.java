@@ -1,19 +1,23 @@
 package vectorwing.farmersdelight.common.item;
 
+import net.minecraft.core.Direction;
+import net.minecraft.core.Position;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.level.Level;
 import vectorwing.farmersdelight.common.entity.RottenTomatoEntity;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 
 import net.minecraft.world.item.Item.Properties;
 
-public class RottenTomatoItem extends Item
+public class RottenTomatoItem extends Item implements ProjectileItem
 {
 	public RottenTomatoItem(Properties properties) {
 		super(properties);
@@ -36,5 +40,12 @@ public class RottenTomatoItem extends Item
 		}
 
 		return InteractionResultHolder.sidedSuccess(heldStack, level.isClientSide());
+	}
+
+	@Override
+	public Projectile asProjectile(Level level, Position position, ItemStack itemStack, Direction direction) {
+		RottenTomatoEntity rottenTomato = new RottenTomatoEntity(level, position.x(), position.y(), position.z());
+		rottenTomato.setItem(itemStack);
+		return rottenTomato;
 	}
 }

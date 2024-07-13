@@ -4,6 +4,8 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -53,9 +55,10 @@ public class CommonEvents
 	@SubscribeEvent
 	public static void onModifyDefaultComponents(ModifyDefaultComponentsEvent event) {
 		if (Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) {
-			event.modify(Items.MUSHROOM_STEW, (builder) -> builder.set(DataComponents.MAX_STACK_SIZE, 16));
-			event.modify(Items.BEETROOT_SOUP, (builder) -> builder.set(DataComponents.MAX_STACK_SIZE, 16));
-			event.modify(Items.RABBIT_STEW, (builder) -> builder.set(DataComponents.MAX_STACK_SIZE, 16));
+			Configuration.SOUP_ITEM_LIST.get().forEach((key) -> {
+				Item item = BuiltInRegistries.ITEM.get(ResourceLocation.parse(key));
+				event.modify(item, (builder) -> builder.set(DataComponents.MAX_STACK_SIZE, 16));
+			});
 		}
 	}
 

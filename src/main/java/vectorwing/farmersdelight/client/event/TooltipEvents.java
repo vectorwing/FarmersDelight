@@ -28,19 +28,18 @@ public class TooltipEvents
 		}
 
 		Item food = event.getItemStack().getItem();
-
 		FoodProperties soupEffects = FoodValues.VANILLA_SOUP_EFFECTS.get(food);
 
 		if (soupEffects != null) {
 			List<Component> tooltip = event.getToolTip();
-			for (Pair<MobEffectInstance, Float> pair : soupEffects.getEffects()) {
-				MobEffectInstance effect = pair.getFirst();
-				MutableComponent effectText = Component.translatable(effect.getDescriptionId());
+			for (FoodProperties.PossibleEffect effect : soupEffects.effects()) {
+				MobEffectInstance effectInstance = effect.effect();
+				MutableComponent effectText = Component.translatable(effectInstance.getDescriptionId());
 				Player player = event.getEntity();
-				if (effect.getDuration() > 20) {
-					effectText = Component.translatable("potion.withDuration", effectText, MobEffectUtil.formatDuration(effect, 1, player == null ? 20 : player.level().tickRateManager().tickrate()));
+				if (effectInstance.getDuration() > 20) {
+					effectText = Component.translatable("potion.withDuration", effectText, MobEffectUtil.formatDuration(effectInstance, 1, player == null ? 20 : player.level().tickRateManager().tickrate()));
 				}
-				tooltip.add(effectText.withStyle(effect.getEffect().value().getCategory().getTooltipFormatting()));
+				tooltip.add(effectText.withStyle(effectInstance.getEffect().value().getCategory().getTooltipFormatting()));
 			}
 		}
 	}

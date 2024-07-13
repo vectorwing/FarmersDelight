@@ -1,25 +1,13 @@
 package vectorwing.farmersdelight.common;
 
-import net.minecraft.core.Position;
-import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.animal.Pig;
-import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.BowlFoodItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.util.ObfuscationReflectionHelper;
 import net.neoforged.neoforge.common.crafting.CompoundIngredient;
-import vectorwing.farmersdelight.common.entity.RottenTomatoEntity;
-import vectorwing.farmersdelight.common.registry.ModAdvancements;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.Arrays;
@@ -32,31 +20,14 @@ public class CommonSetup
 			registerCompostables();
 			registerDispenserBehaviors();
 			registerAnimalFeeds();
-			registerStackSizeOverrides();
-		});
-	}
-
-	public static void registerStackSizeOverrides() {
-		if (!Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) return;
-
-		Configuration.SOUP_ITEM_LIST.get().forEach((key) -> {
-			Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(key));
-			if (item instanceof BowlFoodItem) {
-				ObfuscationReflectionHelper.setPrivateValue(Item.class, item, 16, "maxStackSize");
-			}
 		});
 	}
 
 	public static void registerDispenserBehaviors() {
-		DispenserBlock.registerBehavior(ModItems.ROTTEN_TOMATO.get(), new AbstractProjectileDispenseBehavior()
-		{
-			@Override
-			protected Projectile getProjectile(Level pLevel, Position pPosition, ItemStack pStack) {
-				return new RottenTomatoEntity(pLevel, pPosition.x(), pPosition.y(), pPosition.z());
-			}
-		});
+		DispenserBlock.registerProjectileBehavior(ModItems.ROTTEN_TOMATO.get());
 	}
 
+	// TODO: Convert these to NeoForge's datamaps: https://docs.neoforged.net/docs/datamaps/neo_maps/
 	public static void registerCompostables() {
 		// 30% chance
 		ComposterBlock.COMPOSTABLES.put(ModItems.TREE_BARK.get(), 0.3F);

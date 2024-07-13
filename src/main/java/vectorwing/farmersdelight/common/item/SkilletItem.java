@@ -65,8 +65,8 @@ public class SkilletItem extends BlockItem
 		super(block, properties.defaultDurability(SKILLET_TIER.getUses()));
 		float attackDamage = 5.0F + SKILLET_TIER.getAttackDamageBonus();
 		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", attackDamage, AttributeModifier.Operation.ADDITION));
-		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Tool modifier", -3.1F, AttributeModifier.Operation.ADDITION));
+		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, "Tool modifier", attackDamage, AttributeModifier.Operation.ADDITION));
+		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, "Tool modifier", -3.1F, AttributeModifier.Operation.ADDITION));
 		builder.put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(FD_ATTACK_KNOCKBACK_UUID, "Tool modifier", 1, AttributeModifier.Operation.ADDITION));
 		this.toolAttributes = builder.build();
 	}
@@ -75,7 +75,7 @@ public class SkilletItem extends BlockItem
 	public static class SkilletEvents
 	{
 		@SubscribeEvent
-		public static void playSkilletAttackSound(LivingDamageEvent event) {
+		public static void playSkilletAttackSound(LivingDamageEvent.Pre event) {
 			DamageSource damageSource = event.getSource();
 			Entity attacker = damageSource.getDirectEntity();
 
@@ -103,7 +103,6 @@ public class SkilletItem extends BlockItem
 
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		stack.hurtAndBreak(1, attacker, (user) -> user.broadcastBreakEvent(EquipmentSlot.MAINHAND));
 		return true;
 	}
 

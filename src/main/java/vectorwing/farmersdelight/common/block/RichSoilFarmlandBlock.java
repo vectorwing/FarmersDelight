@@ -14,8 +14,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.FarmlandWaterManager;
-import net.neoforged.neoforge.common.IPlantable;
-import net.neoforged.neoforge.common.PlantType;
+import net.neoforged.neoforge.common.util.TriState;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.tag.ModTags;
@@ -84,21 +83,27 @@ public class RichSoilFarmlandBlock extends FarmBlock
 			}
 
 			if (aboveBlock instanceof BonemealableBlock growable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
-				if (growable.isValidBonemealTarget(level, pos.above(), aboveState) && CommonHooks.onCropsGrowPre(level, pos.above(), aboveState, true)) {
+				if (growable.isValidBonemealTarget(level, pos.above(), aboveState) && CommonHooks.canCropGrow(level, pos.above(), aboveState, true)) {
 					growable.performBonemeal(level, level.random, pos.above(), aboveState);
 					if (!level.isClientSide) {
 						level.levelEvent(2005, pos.above(), 0);
 					}
-					CommonHooks.onCropsGrowPost(level, pos.above(), aboveState);
+					CommonHooks.fireCropGrowPost(level, pos.above(), aboveState);
 				}
 			}
 		}
 	}
 
 	@Override
-	public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable) {
-		PlantType plantType = plantable.getPlantType(world, pos.relative(facing));
-		return plantType == PlantType.CROP || plantType == PlantType.PLAINS;
+	public TriState canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, BlockState plantState) {
+//		PlantType plantType = plantable.getPlantType(world, pos.relative(facing));
+//		return plantType == PlantType.CROP || plantType == PlantType.PLAINS;
+
+		// TODO: Revisit this method to filter out plants correctly. Also, there's a chance Rich Soil Farmland won't need it anymore.
+		if (plantState.getBlock() instanceof CropBlock) {
+			return TriState.TRUE;
+		}
+		return TriState.DEFAULT;
 	}
 
 	@Override
