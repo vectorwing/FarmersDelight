@@ -26,7 +26,7 @@ public class HangingCanvasSignEditScreen extends AbstractSignEditScreen
 			this.dye = canvasSign.getBackgroundColor();
 		}
 		String dyeName = dye != null ? "_" + dye.getName() : "";
-		this.texture = new ResourceLocation(FarmersDelight.MODID, "canvas" + dyeName + ".png").withPrefix("textures/gui/hanging_signs/");
+		this.texture = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "canvas" + dyeName + ".png").withPrefix("textures/gui/hanging_signs/");
 	}
 
 	protected void offsetSign(GuiGraphics gui, BlockState state) {

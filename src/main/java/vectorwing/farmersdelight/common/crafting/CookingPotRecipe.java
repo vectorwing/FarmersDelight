@@ -1,11 +1,12 @@
 package vectorwing.farmersdelight.common.crafting;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.ExtraCodecs;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -22,7 +23,6 @@ import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-@SuppressWarnings("ClassCanBeRecord")
 public class CookingPotRecipe implements Recipe<RecipeWrapper>
 {
 	public static final int INPUT_SLOTS = 6;
@@ -71,7 +71,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 	}
 
 	@Override
-	public ItemStack getResultItem(RegistryAccess access) {
+	public ItemStack getResultItem(HolderLookup.Provider provider) {
 		return this.output;
 	}
 
@@ -84,7 +84,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 	}
 
 	@Override
-	public ItemStack assemble(RecipeWrapper inv, RegistryAccess access) {
+	public ItemStack assemble(RecipeWrapper inv, HolderLookup.Provider provider) {
 		return this.output.copy();
 	}
 
@@ -154,67 +154,68 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 		result = 31 * result + inputItems.hashCode();
 		result = 31 * result + output.hashCode();
 		result = 31 * result + container.hashCode();
-		result = 31 * result + (getExperience() != +0.0f ? Float.floatToIntBits(getExperience()) : 0);
+		result = 31 * result + (getExperience() != 0.0f ? Float.floatToIntBits(getExperience()) : 0);
 		result = 31 * result + getCookTime();
 		return result;
 	}
 
 	public static class Serializer implements RecipeSerializer<CookingPotRecipe>
 	{
-		private static final Codec<CookingPotRecipe> CODEC = RecordCodecBuilder.create(inst -> inst.group(
-				ExtraCodecs.strictOptionalField(Codec.STRING, "group", "").forGetter(CookingPotRecipe::getGroup),
-				ExtraCodecs.strictOptionalField(CookingPotRecipeBookTab.CODEC, "recipe_book_tab").xmap(optional -> optional.orElse(null), Optional::of).forGetter(CookingPotRecipe::getRecipeBookTab),
+		private static final MapCodec<CookingPotRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
+				Codec.STRING.optionalFieldOf("group", "").forGetter(CookingPotRecipe::getGroup),
+				CookingPotRecipeBookTab.CODEC.optionalFieldOf("recipe_book_tab").xmap(optional -> optional.orElse(null), Optional::of).forGetter(CookingPotRecipe::getRecipeBookTab),
 				Ingredient.LIST_CODEC_NONEMPTY.fieldOf("ingredients").xmap(ingredients -> {
 					NonNullList<Ingredient> nonNullList = NonNullList.create();
 					nonNullList.addAll(ingredients);
 					return nonNullList;
 				}, ingredients -> ingredients).forGetter(CookingPotRecipe::getIngredients),
-				ItemStack.ITEM_WITH_COUNT_CODEC.fieldOf("result").forGetter(r -> r.output),
-				ExtraCodecs.strictOptionalField(ItemStack.ITEM_WITH_COUNT_CODEC, "container", ItemStack.EMPTY).forGetter(CookingPotRecipe::getContainerOverride),
-				ExtraCodecs.strictOptionalField(Codec.FLOAT, "experience", 0.0F).forGetter(CookingPotRecipe::getExperience),
-				ExtraCodecs.strictOptionalField(Codec.INT, "cookingtime", 200).forGetter(CookingPotRecipe::getCookTime)
+				ItemStack.STRICT_CODEC.fieldOf("result").forGetter(r -> r.output),
+				ItemStack.STRICT_CODEC.optionalFieldOf("container", ItemStack.EMPTY).forGetter(CookingPotRecipe::getContainerOverride),
+				Codec.FLOAT.optionalFieldOf("experience", 0.0F).forGetter(CookingPotRecipe::getExperience),
+				Codec.INT.optionalFieldOf("cookingtime", 200).forGetter(CookingPotRecipe::getCookTime)
 		).apply(inst, CookingPotRecipe::new));
+
+		public static final StreamCodec<RegistryFriendlyByteBuf, CookingPotRecipe> STREAM_CODEC = StreamCodec.of(CookingPotRecipe.Serializer::toNetwork, CookingPotRecipe.Serializer::fromNetwork);
 
 		public Serializer() {
 		}
 
 		@Override
-		public Codec<CookingPotRecipe> codec() {
+		public MapCodec<CookingPotRecipe> codec() {
 			return CODEC;
 		}
 
-
 		@Override
-		public @Nullable
-		CookingPotRecipe fromNetwork(FriendlyByteBuf buffer) {
+		public StreamCodec<RegistryFriendlyByteBuf, CookingPotRecipe> streamCodec() {
+			return STREAM_CODEC;
+		}
+
+		private static CookingPotRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
 			String groupIn = buffer.readUtf();
 			CookingPotRecipeBookTab tabIn = CookingPotRecipeBookTab.findByName(buffer.readUtf());
 			int i = buffer.readVarInt();
 			NonNullList<Ingredient> inputItemsIn = NonNullList.withSize(i, Ingredient.EMPTY);
 
-			for (int j = 0; j < inputItemsIn.size(); ++j) {
-				inputItemsIn.set(j, Ingredient.fromNetwork(buffer));
-			}
+			inputItemsIn.replaceAll(ignored -> Ingredient.CONTENTS_STREAM_CODEC.decode(buffer));
 
-			ItemStack outputIn = buffer.readItem();
-			ItemStack container = buffer.readItem();
+			ItemStack outputIn = ItemStack.STREAM_CODEC.decode(buffer);
+			ItemStack container = ItemStack.STREAM_CODEC.decode(buffer);
 			float experienceIn = buffer.readFloat();
 			int cookTimeIn = buffer.readVarInt();
 			return new CookingPotRecipe(groupIn, tabIn, inputItemsIn, outputIn, container, experienceIn, cookTimeIn);
 		}
 
-		@Override
-		public void toNetwork(FriendlyByteBuf buffer, CookingPotRecipe recipe) {
+		private static void toNetwork(RegistryFriendlyByteBuf buffer, CookingPotRecipe recipe) {
 			buffer.writeUtf(recipe.group);
 			buffer.writeUtf(recipe.tab != null ? recipe.tab.toString() : "");
 			buffer.writeVarInt(recipe.inputItems.size());
 
 			for (Ingredient ingredient : recipe.inputItems) {
-				ingredient.toNetwork(buffer);
+				Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, ingredient);
 			}
 
-			buffer.writeItem(recipe.output);
-			buffer.writeItem(recipe.container);
+			ItemStack.STREAM_CODEC.encode(buffer, recipe.output);
+			ItemStack.STREAM_CODEC.encode(buffer, recipe.container);
 			buffer.writeFloat(recipe.experience);
 			buffer.writeVarInt(recipe.cookTime);
 		}
