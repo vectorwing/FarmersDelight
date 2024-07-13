@@ -10,6 +10,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.NotNull;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -27,12 +28,28 @@ public class ItemTags extends ItemTagsProvider
 	}
 
 	@Override
-	protected void addTags(HolderLookup.Provider provider) {
+	protected void addTags(HolderLookup.@NotNull Provider provider) {
 		copy(ModTags.WILD_CROPS, ModTags.WILD_CROPS_ITEM);
 		copy(BlockTags.SMALL_FLOWERS, net.minecraft.tags.ItemTags.SMALL_FLOWERS);
 
 		tag(net.minecraft.tags.ItemTags.TALL_FLOWERS).add(ModItems.WILD_RICE.get());
 		tag(net.minecraft.tags.ItemTags.PIGLIN_LOVED).add(ModItems.GOLDEN_KNIFE.get());
+
+		tag(net.minecraft.tags.ItemTags.CHICKEN_FOOD)
+				.add(ModItems.CABBAGE_SEEDS.get())
+				.add(ModItems.TOMATO_SEEDS.get())
+				.add(ModItems.RICE.get());
+		tag(net.minecraft.tags.ItemTags.PIG_FOOD)
+				.add(ModItems.CABBAGE.get())
+				.add(ModItems.TOMATO.get());
+		tag(net.minecraft.tags.ItemTags.RABBIT_FOOD)
+				.add(ModItems.CABBAGE.get());
+		tag(net.minecraft.tags.ItemTags.PARROT_FOOD)
+				.add(ModItems.CABBAGE_SEEDS.get())
+				.add(ModItems.TOMATO_SEEDS.get())
+				.add(ModItems.RICE.get());
+		tag(net.minecraft.tags.ItemTags.HORSE_TEMPT_ITEMS)
+				.add(ModItems.HORSE_FEED.get());
 
 		this.registerModTags();
 		this.registerForgeTags();
@@ -94,12 +111,12 @@ public class ItemTags extends ItemTagsProvider
 				.add(ModItems.WARPED_CABINET.get());
 		tag(ModTags.CABINETS).addTag(ModTags.WOODEN_CABINETS);
 		tag(ModTags.OFFHAND_EQUIPMENT).add(Items.SHIELD)
-				.addOptional(new ResourceLocation("create:extendo_grip"));
+				.addOptional(ResourceLocation.parse("create:extendo_grip"));
 		tag(ModTags.SERVING_CONTAINERS).add(Items.BOWL, Items.GLASS_BOTTLE, Items.BUCKET);
 		tag(ModTags.FLAT_ON_CUTTING_BOARD).add(Items.TRIDENT, Items.SPYGLASS)
-				.addOptional(new ResourceLocation("supplementaries:quiver"))
-				.addOptional(new ResourceLocation("autumnity:turkey"))
-				.addOptional(new ResourceLocation("autumnity:cooked_turkey"));
+				.addOptional(ResourceLocation.parse("supplementaries:quiver"))
+				.addOptional(ResourceLocation.parse("autumnity:turkey"))
+				.addOptional(ResourceLocation.parse("autumnity:cooked_turkey"));
 	}
 
 	@SuppressWarnings("unchecked")

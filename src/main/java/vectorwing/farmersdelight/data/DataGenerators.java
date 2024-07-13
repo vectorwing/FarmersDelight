@@ -36,7 +36,7 @@ public class DataGenerators
 		generator.addProvider(event.includeServer(), new Advancements(output, lookupProvider, helper));
 		generator.addProvider(event.includeServer(), new LootTableProvider(output, Collections.emptySet(), List.of(
 				new LootTableProvider.SubProviderEntry(FDBlockLoot::new, LootContextParamSets.BLOCK)
-		)));
+		), lookupProvider));
 		generator.addProvider(event.includeServer(), new StructureUpdater("structures/village/houses", FarmersDelight.MODID, helper, output));
 
 		BlockStates blockStates = new BlockStates(output, helper);

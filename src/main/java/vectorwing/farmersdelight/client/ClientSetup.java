@@ -10,8 +10,6 @@ import vectorwing.farmersdelight.common.registry.ModMenuTypes;
 public class ClientSetup
 {
 	public static void init(final FMLClientSetupEvent event) {
-		event.enqueueWork(() -> MenuScreens.register(ModMenuTypes.COOKING_POT.get(), CookingPotScreen::new));
-
 		NourishmentHungerOverlay.init();
 		ComfortHealthOverlay.init();
 	}

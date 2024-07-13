@@ -201,7 +201,7 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 
 	@Override
 	public RecipeBookType getRecipeBookType() {
-		return FarmersDelight.RECIPE_TYPE_COOKING;
+		return RecipeBookType.valueOf("FARMERSDELIGHT_COOKING");
 	}
 
 	@Override

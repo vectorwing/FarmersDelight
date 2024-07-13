@@ -7,7 +7,6 @@
     "CuttingBoardDispenserMixin",
     "KeepRichSoilGiantTreeMixin",
     "KeepRichSoilTreeMixin",
-    "RabbitsEatCabbageMixin",
     "accessor.RecipeManagerAccessor"
   ],
   "client": [

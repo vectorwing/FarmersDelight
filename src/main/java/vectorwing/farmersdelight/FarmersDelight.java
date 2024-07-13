@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
@@ -23,18 +24,15 @@ public class FarmersDelight
 {
 	public static final String MODID = "farmersdelight";
 	public static final Logger LOGGER = LogManager.getLogger();
-	public static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
-	public static final RecipeBookType RECIPE_TYPE_COOKING = RecipeBookType.create("COOKING");
-
-	public FarmersDelight(IEventBus modEventBus) {
+	public FarmersDelight(IEventBus modEventBus, ModContainer modContainer) {
 		modEventBus.addListener(CommonSetup::init);
 		if (FMLEnvironment.dist.isClient()) {
 			modEventBus.addListener(ClientSetup::init);
 		}
 
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
-		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Configuration.CLIENT_CONFIG);
+		modContainer.registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
+		modContainer.registerConfig(ModConfig.Type.CLIENT, Configuration.CLIENT_CONFIG);
 
 		ModSounds.SOUNDS.register(modEventBus);
 		ModBlocks.BLOCKS.register(modEventBus);

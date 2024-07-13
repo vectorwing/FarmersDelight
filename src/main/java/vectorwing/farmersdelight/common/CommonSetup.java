@@ -1,17 +1,9 @@
 package vectorwing.farmersdelight.common;
 
-import net.minecraft.world.entity.animal.Chicken;
-import net.minecraft.world.entity.animal.Parrot;
-import net.minecraft.world.entity.animal.Pig;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.common.crafting.CompoundIngredient;
 import vectorwing.farmersdelight.common.registry.ModItems;
-
-import java.util.Arrays;
-import java.util.Collections;
 
 public class CommonSetup
 {
@@ -19,7 +11,6 @@ public class CommonSetup
 		event.enqueueWork(() -> {
 			registerCompostables();
 			registerDispenserBehaviors();
-			registerAnimalFeeds();
 		});
 	}
 
@@ -76,19 +67,5 @@ public class CommonSetup
 		ComposterBlock.COMPOSTABLES.put(ModItems.STUFFED_PUMPKIN_BLOCK.get(), 1.0F);
 		ComposterBlock.COMPOSTABLES.put(ModItems.BROWN_MUSHROOM_COLONY.get(), 1.0F);
 		ComposterBlock.COMPOSTABLES.put(ModItems.RED_MUSHROOM_COLONY.get(), 1.0F);
-	}
-
-	public static void registerAnimalFeeds() {
-		Ingredient newChickenFood = Ingredient.of(ModItems.CABBAGE_SEEDS.get(), ModItems.TOMATO_SEEDS.get(), ModItems.RICE.get());
-		Chicken.FOOD_ITEMS = new CompoundIngredient(Arrays.asList(Chicken.FOOD_ITEMS, newChickenFood))
-		{
-		};
-
-		Ingredient newPigFood = Ingredient.of(ModItems.CABBAGE.get(), ModItems.TOMATO.get());
-		Pig.FOOD_ITEMS = new CompoundIngredient(Arrays.asList(Pig.FOOD_ITEMS, newPigFood))
-		{
-		};
-
-		Collections.addAll(Parrot.TAME_FOOD, ModItems.CABBAGE_SEEDS.get(), ModItems.TOMATO_SEEDS.get(), ModItems.RICE.get());
 	}
 }

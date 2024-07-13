@@ -100,14 +100,14 @@ public class ModTags
 	public static final TagKey<EntityType<?>> HORSE_FEED_TEMPTED = modEntityTag("horse_feed_tempted");
 
 	private static TagKey<Item> modItemTag(String path) {
-		return ItemTags.create(new ResourceLocation(FarmersDelight.MODID, path));
+		return ItemTags.create(ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, path));
 	}
 
 	private static TagKey<Block> modBlockTag(String path) {
-		return BlockTags.create(new ResourceLocation(FarmersDelight.MODID, path));
+		return BlockTags.create(ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, path));
 	}
 
 	private static TagKey<EntityType<?>> modEntityTag(String path) {
-		return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(FarmersDelight.MODID, path));
+		return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, path));
 	}
 }

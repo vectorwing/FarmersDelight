@@ -11,6 +11,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.*;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.client.gui.CookingPotTooltip;
 import vectorwing.farmersdelight.client.model.SkilletModel;
 import vectorwing.farmersdelight.client.particle.StarParticle;
@@ -19,6 +20,7 @@ import vectorwing.farmersdelight.client.recipebook.RecipeCategories;
 import vectorwing.farmersdelight.client.renderer.*;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModEntityTypes;
+import vectorwing.farmersdelight.common.registry.ModMenuTypes;
 import vectorwing.farmersdelight.common.registry.ModParticleTypes;
 
 import java.util.Map;
@@ -47,8 +49,13 @@ public class ClientSetupEvents
 	}
 
 	@SubscribeEvent
+	public static void registerMenuScreens(RegisterMenuScreensEvent event) {
+		event.register(ModMenuTypes.COOKING_POT.get(), CookingPotScreen::new);
+	}
+
+	@SubscribeEvent
 	public static void onModelBake(ModelEvent.ModifyBakingResult event) {
-		Map<ResourceLocation, BakedModel> modelRegistry = event.getModels();
+		Map<ModelResourceLocation, BakedModel> modelRegistry = event.getModels();
 
 		ModelResourceLocation skilletLocation = new ModelResourceLocation(ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "skillet"), "inventory");
 		BakedModel skilletModel = modelRegistry.get(skilletLocation);

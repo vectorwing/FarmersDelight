@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.data.loot;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
@@ -18,8 +19,8 @@ public class FDBlockLoot extends BlockLootSubProvider
 {
 	private final Set<Block> generatedLootTables = new HashSet<>();
 
-	public FDBlockLoot() {
-		super(Set.of(), FeatureFlags.REGISTRY.allFlags());
+	public FDBlockLoot(HolderLookup.Provider holder) {
+		super(Set.of(), FeatureFlags.REGISTRY.allFlags(), holder);
 	}
 
 	@Override

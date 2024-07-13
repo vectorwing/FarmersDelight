@@ -13,6 +13,8 @@ logoBlur = false
 credits = "Chloe Dawn, Grimmauld, CDAGaming, TelepathicGrunt, ConductiveFoam, simibubi, MerchantPug, Jozufozu, bagel, Silk, SkySom, Eutro, RaymondBlaze and many others!"
 authors = "${mod_authors}"
 description = "A cozy farming and cooking expansion for Minecraft!"
+enumExtensions="META-INF/enumextensions.json"
+## Catalogue mod compatibility
 itemIcon = "farmersdelight:stove"
 configBackground = "minecraft:textures/block/bricks.png"
 
