@@ -8,10 +8,9 @@ import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
@@ -19,7 +18,7 @@ import vectorwing.farmersdelight.common.FoodValues;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = FarmersDelight.MODID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = FarmersDelight.MODID, value = Dist.CLIENT)
 public class TooltipEvents
 {
 	@SubscribeEvent
@@ -41,7 +40,7 @@ public class TooltipEvents
 				if (effect.getDuration() > 20) {
 					effectText = Component.translatable("potion.withDuration", effectText, MobEffectUtil.formatDuration(effect, 1, player == null ? 20 : player.level().tickRateManager().tickrate()));
 				}
-				tooltip.add(effectText.withStyle(effect.getEffect().getCategory().getTooltipFormatting()));
+				tooltip.add(effectText.withStyle(effect.getEffect().value().getCategory().getTooltipFormatting()));
 			}
 		}
 	}
