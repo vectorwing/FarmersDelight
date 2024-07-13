@@ -8,7 +8,6 @@
     "KeepRichSoilGiantTreeMixin",
     "KeepRichSoilTreeMixin",
     "RabbitsEatCabbageMixin",
-    "SoupItemMixin",
     "accessor.RecipeManagerAccessor"
   ],
   "client": [

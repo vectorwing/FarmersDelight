@@ -1,6 +1,9 @@
 package vectorwing.farmersdelight.common.event;
 
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,6 +18,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -43,6 +47,15 @@ public class CommonEvents
 					entity.addEffect(pair.getFirst());
 				}
 			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onModifyDefaultComponents(ModifyDefaultComponentsEvent event) {
+		if (Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) {
+			event.modify(Items.MUSHROOM_STEW, (builder) -> builder.set(DataComponents.MAX_STACK_SIZE, 16));
+			event.modify(Items.BEETROOT_SOUP, (builder) -> builder.set(DataComponents.MAX_STACK_SIZE, 16));
+			event.modify(Items.RABBIT_STEW, (builder) -> builder.set(DataComponents.MAX_STACK_SIZE, 16));
 		}
 	}
 
