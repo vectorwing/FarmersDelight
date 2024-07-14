@@ -2,17 +2,12 @@ package vectorwing.farmersdelight.common.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CampfireCookingRecipe;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,7 +17,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.common.block.StoveBlock;
-import vectorwing.farmersdelight.common.mixin.accessor.RecipeManagerAccessor;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 
@@ -36,45 +30,48 @@ public class StoveBlockEntity extends SyncedBlockEntity
 	private final ItemStackHandler inventory;
 	private final int[] cookingTimes;
 	private final int[] cookingTimesTotal;
-	private ResourceLocation[] lastRecipeIDs;
+//	private ResourceLocation[] lastRecipeIDs;
+
+	private final RecipeManager.CachedCheck<SingleRecipeInput, CampfireCookingRecipe> quickCheck;
 
 	public StoveBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntityTypes.STOVE.get(), pos, state);
 		inventory = createHandler();
 		cookingTimes = new int[INVENTORY_SLOT_COUNT];
 		cookingTimesTotal = new int[INVENTORY_SLOT_COUNT];
-		lastRecipeIDs = new ResourceLocation[INVENTORY_SLOT_COUNT];
+//		lastRecipeIDs = new ResourceLocation[INVENTORY_SLOT_COUNT];
+		quickCheck = RecipeManager.createCheck(RecipeType.CAMPFIRE_COOKING);
 	}
 
 	@Override
-	public void load(CompoundTag compound) {
-		super.load(compound);
-		if (compound.contains("Inventory")) {
-			inventory.deserializeNBT(compound.getCompound("Inventory"));
+	public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+		super.loadAdditional(tag, registries);
+		if (tag.contains("Inventory")) {
+			inventory.deserializeNBT(registries, tag.getCompound("Inventory"));
 		} else {
-			inventory.deserializeNBT(compound);
+			inventory.deserializeNBT(registries, tag);
 		}
-		if (compound.contains("CookingTimes", 11)) {
-			int[] arrayCookingTimes = compound.getIntArray("CookingTimes");
+		if (tag.contains("CookingTimes", 11)) {
+			int[] arrayCookingTimes = tag.getIntArray("CookingTimes");
 			System.arraycopy(arrayCookingTimes, 0, cookingTimes, 0, Math.min(cookingTimesTotal.length, arrayCookingTimes.length));
 		}
 
-		if (compound.contains("CookingTotalTimes", 11)) {
-			int[] arrayCookingTimesTotal = compound.getIntArray("CookingTotalTimes");
+		if (tag.contains("CookingTotalTimes", 11)) {
+			int[] arrayCookingTimesTotal = tag.getIntArray("CookingTotalTimes");
 			System.arraycopy(arrayCookingTimesTotal, 0, cookingTimesTotal, 0, Math.min(cookingTimesTotal.length, arrayCookingTimesTotal.length));
 		}
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag compound) {
-		writeItems(compound);
+	public void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+		writeItems(compound, registries);
 		compound.putIntArray("CookingTimes", cookingTimes);
 		compound.putIntArray("CookingTotalTimes", cookingTimesTotal);
 	}
 
-	private CompoundTag writeItems(CompoundTag compound) {
-		super.saveAdditional(compound);
-		compound.put("Inventory", inventory.serializeNBT());
+	private CompoundTag writeItems(CompoundTag compound, HolderLookup.Provider registries) {
+		super.saveAdditional(compound, registries);
+		compound.put("Inventory", inventory.serializeNBT(registries));
 		return compound;
 	}
 
@@ -125,8 +122,7 @@ public class StoveBlockEntity extends SyncedBlockEntity
 			if (!stoveStack.isEmpty()) {
 				++cookingTimes[i];
 				if (cookingTimes[i] >= cookingTimesTotal[i]) {
-					Container inventoryWrapper = new SimpleContainer(stoveStack);
-					Optional<RecipeHolder<CampfireCookingRecipe>> recipe = getMatchingRecipe(inventoryWrapper, i);
+					Optional<RecipeHolder<CampfireCookingRecipe>> recipe = getMatchingRecipe(stoveStack, i);
 					if (recipe.isPresent()) {
 						ItemStack resultStack = recipe.get().value().getResultItem(level.registryAccess());
 						if (!resultStack.isEmpty()) {
@@ -163,7 +159,7 @@ public class StoveBlockEntity extends SyncedBlockEntity
 				cookingTimesTotal[slot] = recipe.value().getCookingTime();
 				cookingTimes[slot] = 0;
 				inventory.setStackInSlot(slot, itemStackIn.split(1));
-				lastRecipeIDs[slot] = recipe.id();
+//				lastRecipeIDs[slot] = recipe.id();
 				inventoryChanged();
 				return true;
 			}
@@ -171,19 +167,10 @@ public class StoveBlockEntity extends SyncedBlockEntity
 		return false;
 	}
 
-	public Optional<RecipeHolder<CampfireCookingRecipe>> getMatchingRecipe(Container recipeWrapper, int slot) {
+	public Optional<RecipeHolder<CampfireCookingRecipe>> getMatchingRecipe(ItemStack stack, int slot) {
 		if (level == null) return Optional.empty();
 
-		if (lastRecipeIDs[slot] != null) {
-			RecipeHolder<CampfireCookingRecipe> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
-					.getRecipeMap(RecipeType.CAMPFIRE_COOKING)
-					.get(lastRecipeIDs[slot]);
-			if (recipe.value().matches(recipeWrapper, level)) {
-				return Optional.of(recipe);
-			}
-		}
-
-		return level.getRecipeManager().getRecipeFor(RecipeType.CAMPFIRE_COOKING, recipeWrapper, level);
+		return this.inventory.getStackInSlot(slot).isEmpty() ? Optional.empty() : this.quickCheck.getRecipeFor(new SingleRecipeInput(stack), this.level);
 	}
 
 	public ItemStackHandler getInventory() {
@@ -212,30 +199,9 @@ public class StoveBlockEntity extends SyncedBlockEntity
 		return OFFSETS[index];
 	}
 
-	private void addParticles() {
-		if (level == null) return;
-
-		for (int i = 0; i < inventory.getSlots(); ++i) {
-			if (!inventory.getStackInSlot(i).isEmpty() && level.random.nextFloat() < 0.2F) {
-				Vec2 stoveItemVector = getStoveItemOffset(i);
-				Direction direction = getBlockState().getValue(StoveBlock.FACING);
-				int directionIndex = direction.get2DDataValue();
-				Vec2 offset = directionIndex % 2 == 0 ? stoveItemVector : new Vec2(stoveItemVector.y, stoveItemVector.x);
-
-				double x = ((double) worldPosition.getX() + 0.5D) - (direction.getStepX() * offset.x) + (direction.getClockWise().getStepX() * offset.x);
-				double y = (double) worldPosition.getY() + 1.0D;
-				double z = ((double) worldPosition.getZ() + 0.5D) - (direction.getStepZ() * offset.y) + (direction.getClockWise().getStepZ() * offset.y);
-
-				for (int k = 0; k < 3; ++k) {
-					level.addParticle(ParticleTypes.SMOKE, x, y, z, 0.0D, 5.0E-4D, 0.0D);
-				}
-			}
-		}
-	}
-
 	@Override
-	public CompoundTag getUpdateTag() {
-		return writeItems(new CompoundTag());
+	public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+		return writeItems(new CompoundTag(), registries);
 	}
 
 	private ItemStackHandler createHandler() {

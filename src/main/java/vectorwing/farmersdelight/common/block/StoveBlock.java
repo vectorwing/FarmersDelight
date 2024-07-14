@@ -103,7 +103,7 @@ public class StoveBlock extends BaseEntityBlock
 			if (stoveSlot < 0 || stoveEntity.isStoveBlockedAbove()) {
 				return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 			}
-			Optional<RecipeHolder<CampfireCookingRecipe>> recipe = stoveEntity.getMatchingRecipe(new SimpleContainer(heldStack), stoveSlot);
+			Optional<RecipeHolder<CampfireCookingRecipe>> recipe = stoveEntity.getMatchingRecipe(heldStack, stoveSlot);
 			if (recipe.isPresent()) {
 				if (!level.isClientSide && stoveEntity.addItem(player.getAbilities().instabuild ? heldStack.copy() : heldStack, recipe.get(), stoveSlot)) {
 					return ItemInteractionResult.SUCCESS;
