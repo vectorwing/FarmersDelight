@@ -310,9 +310,9 @@ public class ModItems
 	public static final Supplier<Item> COOKED_SALMON_SLICE = registerWithTab("cooked_salmon_slice",
 			() -> new Item(foodItem(FoodValues.COOKED_SALMON_SLICE)));
 	public static final Supplier<Item> MUTTON_CHOPS = registerWithTab("mutton_chops",
-			() -> new Item(foodItem(FoodValues.MUTTON_CHOP)));
+			() -> new Item(foodItem(FoodValues.MUTTON_CHOPS)));
 	public static final Supplier<Item> COOKED_MUTTON_CHOPS = registerWithTab("cooked_mutton_chops",
-			() -> new Item(foodItem(FoodValues.COOKED_MUTTON_CHOP)));
+			() -> new Item(foodItem(FoodValues.COOKED_MUTTON_CHOPS)));
 	public static final Supplier<Item> HAM = registerWithTab("ham",
 			() -> new Item(foodItem(FoodValues.HAM)));
 	public static final Supplier<Item> SMOKED_HAM = registerWithTab("smoked_ham",
@@ -374,7 +374,7 @@ public class ModItems
 	public static final Supplier<Item> COD_ROLL = registerWithTab("cod_roll",
 			() -> new Item(foodItem(FoodValues.COD_ROLL)));
 	public static final Supplier<Item> KELP_ROLL = registerWithTab("kelp_roll",
-			() -> new KelpRollItem(foodItem(FoodValues.KELP_ROLL)));
+			() -> new Item(foodItem(FoodValues.KELP_ROLL)));
 	public static final Supplier<Item> KELP_ROLL_SLICE = registerWithTab("kelp_roll_slice",
 			() -> new Item(foodItem(FoodValues.KELP_ROLL_SLICE)));
 

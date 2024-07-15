@@ -12,7 +12,6 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.CompatibilityTags;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
@@ -35,6 +34,18 @@ public class ItemTags extends ItemTagsProvider
 		tag(net.minecraft.tags.ItemTags.TALL_FLOWERS).add(ModItems.WILD_RICE.get());
 		tag(net.minecraft.tags.ItemTags.PIGLIN_LOVED).add(ModItems.GOLDEN_KNIFE.get());
 
+		tag(net.minecraft.tags.ItemTags.MEAT)
+				.add(ModItems.MINCED_BEEF.get())
+				.add(ModItems.BEEF_PATTY.get())
+				.add(ModItems.CHICKEN_CUTS.get())
+				.add(ModItems.COOKED_CHICKEN_CUTS.get())
+				.add(ModItems.BACON.get())
+				.add(ModItems.COOKED_BACON.get())
+				.add(ModItems.MUTTON_CHOPS.get())
+				.add(ModItems.COOKED_MUTTON_CHOPS.get())
+				.add(ModItems.HAM.get())
+				.add(ModItems.SMOKED_HAM.get())
+				.add(ModItems.DOG_FOOD.get());
 		tag(net.minecraft.tags.ItemTags.CHICKEN_FOOD)
 				.add(ModItems.CABBAGE_SEEDS.get())
 				.add(ModItems.TOMATO_SEEDS.get())
