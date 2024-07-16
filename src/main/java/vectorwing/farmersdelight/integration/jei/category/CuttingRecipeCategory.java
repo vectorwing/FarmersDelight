@@ -39,7 +39,7 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 
 	public CuttingRecipeCategory(IGuiHelper helper) {
 		title = TextUtils.getTranslation("jei.cutting");
-		ResourceLocation backgroundImage = new ResourceLocation(FarmersDelight.MODID, "textures/gui/jei/cutting_board.png");
+		ResourceLocation backgroundImage = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "textures/gui/jei/cutting_board.png");
 		slot = helper.createDrawable(backgroundImage, 0, 58, 18, 18);
 		slotChance = helper.createDrawable(backgroundImage, 18, 58, 18, 18);
 		background = helper.createDrawable(backgroundImage, 0, 0, 117, 57);
@@ -83,10 +83,10 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 
 			int index = i;
 			builder.addSlot(RecipeIngredientRole.OUTPUT, OUTPUT_GRID_X + xOffset, OUTPUT_GRID_Y + yOffset)
-					.addItemStack(recipeOutputs.get(i).getStack())
+					.addItemStack(recipeOutputs.get(i).stack())
 					.addTooltipCallback((slotView, tooltip) -> {
 						ChanceResult output = recipeOutputs.get(index);
-						float chance = output.getChance();
+						float chance = output.chance();
 						if (chance != 1)
 							tooltip.add(1, TextUtils.getTranslation("jei.chance", chance < 0.01 ? "<1" : (int) (chance * 100))
 									.withStyle(ChatFormatting.GOLD));
@@ -106,7 +106,7 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 			int xOffset = centerX + (i % 2 == 0 ? 0 : 19);
 			int yOffset = centerY + ((i / 2) * 19);
 
-			if (recipeOutputs.get(i).getChance() != 1) {
+			if (recipeOutputs.get(i).chance() != 1) {
 				slotChance.draw(guiGraphics, OUTPUT_GRID_X + xOffset, OUTPUT_GRID_Y + yOffset);
 			} else {
 				slot.draw(guiGraphics, OUTPUT_GRID_X + xOffset, OUTPUT_GRID_Y + yOffset);

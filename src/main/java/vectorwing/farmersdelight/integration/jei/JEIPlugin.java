@@ -31,7 +31,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class JEIPlugin implements IModPlugin
 {
-	private static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "jei_plugin");
+	private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "jei_plugin");
 
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registry) {

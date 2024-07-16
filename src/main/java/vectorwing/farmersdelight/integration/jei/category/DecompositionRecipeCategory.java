@@ -39,7 +39,7 @@ import java.util.stream.Collectors;
 @MethodsReturnNonnullByDefault
 public class DecompositionRecipeCategory implements IRecipeCategory<DecompositionDummy>
 {
-	public static final ResourceLocation UID = new ResourceLocation(FarmersDelight.MODID, "decomposition");
+	public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "decomposition");
 	private static final int slotSize = 22;
 
 	private final Component title;
@@ -51,7 +51,7 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 
 	public DecompositionRecipeCategory(IGuiHelper helper) {
 		title = TextUtils.getTranslation("jei.decomposition");
-		ResourceLocation backgroundImage = new ResourceLocation(FarmersDelight.MODID, "textures/gui/jei/decomposition.png");
+		ResourceLocation backgroundImage = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "textures/gui/jei/decomposition.png");
 		background = helper.createDrawable(backgroundImage, 0, 0, 118, 80);
 		organicCompost = new ItemStack(ModBlocks.ORGANIC_COMPOST.get());
 		richSoil = new ItemStack(ModItems.RICH_SOIL.get());

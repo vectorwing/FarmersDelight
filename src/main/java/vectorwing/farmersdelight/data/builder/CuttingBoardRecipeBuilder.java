@@ -96,15 +96,15 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder
 
 	public void build(RecipeOutput output) {
 		ResourceLocation location = BuiltInRegistries.ITEM.getKey(getResult());
-		save(output, new ResourceLocation(FarmersDelight.MODID, location.getPath()));
+		save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, location.getPath()));
 	}
 
 	public void build(RecipeOutput outputIn, String save) {
 		ResourceLocation resourcelocation = BuiltInRegistries.ITEM.getKey(getResult());
-		if ((new ResourceLocation(save)).equals(resourcelocation)) {
+		if ((ResourceLocation.parse(save)).equals(resourcelocation)) {
 			throw new IllegalStateException("Cutting Recipe " + save + " should remove its 'save' argument");
 		} else {
-			this.build(outputIn, new ResourceLocation(save));
+			this.build(outputIn, ResourceLocation.parse(save));
 		}
 	}
 

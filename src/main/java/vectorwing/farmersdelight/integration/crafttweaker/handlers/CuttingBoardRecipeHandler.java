@@ -6,7 +6,6 @@ import com.blamejared.crafttweaker.api.item.MCItemStack;
 import com.blamejared.crafttweaker.api.item.MCItemStackMutable;
 import com.blamejared.crafttweaker.api.recipe.component.BuiltinRecipeComponents;
 import com.blamejared.crafttweaker.api.recipe.component.IDecomposedRecipe;
-import com.blamejared.crafttweaker.api.recipe.component.RecipeComponentEqualityCheckers;
 import com.blamejared.crafttweaker.api.recipe.handler.IRecipeHandler;
 import com.blamejared.crafttweaker.api.recipe.manager.base.IRecipeManager;
 import com.blamejared.crafttweaker.api.util.StringUtil;
@@ -14,7 +13,6 @@ import com.blamejared.crafttweaker.api.util.random.Percentaged;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -22,7 +20,6 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -62,8 +59,8 @@ public class CuttingBoardRecipeHandler implements IRecipeHandler<CuttingBoardRec
                 .with(BuiltinRecipeComponents.Metadata.GROUP, recipe.getGroup())
                 .with(BuiltinRecipeComponents.Output.CHANCED_ITEMS,
                         recipe.getRollableResults().stream()
-                                .map(chanceResult -> new MCItemStack(chanceResult.getStack()).percent(
-                                        chanceResult.getChance())).toList())
+                                .map(chanceResult -> new MCItemStack(chanceResult.stack()).percent(
+                                        chanceResult.chance())).toList())
                 .build();
         if (recipe.getSoundEvent().isPresent()){
             decomposedRecipe.set(RecipeHandlerUtils.SOUND_COMPONENT, recipe.getSoundEvent().get());

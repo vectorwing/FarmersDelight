@@ -45,10 +45,10 @@ public class CompatibilityTags
 	public static final TagKey<Item> TINKERS_CONSTRUCT_SEEDS = externalItemTag(TINKERS_CONSTRUCT, "seeds");
 
 	private static TagKey<Item> externalItemTag(String modId, String path) {
-		return ItemTags.create(new ResourceLocation(modId, path));
+		return ItemTags.create(ResourceLocation.fromNamespaceAndPath(modId, path));
 	}
 
 	private static TagKey<Block> externalBlockTag(String modId, String path) {
-		return BlockTags.create(new ResourceLocation(modId, path));
+		return BlockTags.create(ResourceLocation.fromNamespaceAndPath(modId, path));
 	}
 }

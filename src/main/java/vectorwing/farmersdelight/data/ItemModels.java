@@ -22,7 +22,7 @@ public class ItemModels extends ItemModelProvider
 {
 	public static final String GENERATED = "item/generated";
 	public static final String HANDHELD = "item/handheld";
-	public static final ResourceLocation MUG = new ResourceLocation(FarmersDelight.MODID, "item/mug");
+	public static final ResourceLocation MUG = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "item/mug");
 
 	public ItemModels(PackOutput output, ExistingFileHelper existingFileHelper) {
 		super(output, FarmersDelight.MODID, existingFileHelper);
@@ -166,11 +166,11 @@ public class ItemModels extends ItemModelProvider
 	}
 
 	public ResourceLocation resourceBlock(String path) {
-		return new ResourceLocation(FarmersDelight.MODID, "block/" + path);
+		return ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "block/" + path);
 	}
 
 	public ResourceLocation resourceItem(String path) {
-		return new ResourceLocation(FarmersDelight.MODID, "item/" + path);
+		return ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "item/" + path);
 	}
 
 	@SafeVarargs

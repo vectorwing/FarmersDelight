@@ -33,7 +33,7 @@ public class CuttingBoardRecipeManager implements IRecipeManager
 {
     /**
      * Add a cutting board recipe.
-     * The tool ingredient can be a {@link net.neoforged.neoforge.common.ToolAction}. It will get cast implicitly.
+     * The tool ingredient can be a {@link net.neoforged.neoforge.common.ItemAbility}. It will get cast implicitly.
      * This allows you to work with any tool that provides that action to Forge.
      *
      * @param name    Name of the recipe to add
@@ -62,7 +62,7 @@ public class CuttingBoardRecipeManager implements IRecipeManager
                         ListUtils.mapArrayIndexSet(results,
                                 (stack) -> new ChanceResult(stack.getData().getInternal(), (float) stack.getPercentage()),
                                 NonNullList.withSize(results.length, ChanceResult.EMPTY)),
-                        BuiltInRegistries.SOUND_EVENT.getOptional(new ResourceLocation(sound)))),
+                        BuiltInRegistries.SOUND_EVENT.getOptional(ResourceLocation.parse(sound)))),
                 ""));
     }
 

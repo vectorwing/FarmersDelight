@@ -58,7 +58,7 @@ public class CraftingRecipes
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.PUMPKIN_SEEDS)
 				.requires(ModItems.PUMPKIN_SLICE.get())
 				.unlockedBy("has_pumpkin_slice", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PUMPKIN_SLICE.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "pumpkin_seeds_from_slice"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "pumpkin_seeds_from_slice"));
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, Items.SCAFFOLDING, 6)
 				.pattern("b#b")
 				.pattern("b b")
@@ -66,14 +66,14 @@ public class CraftingRecipes
 				.define('b', Items.BAMBOO)
 				.define('#', ModItems.CANVAS.get())
 				.unlockedBy("has_canvas", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CANVAS.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "scaffolding_from_canvas"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "scaffolding_from_canvas"));
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, Items.LEAD)
 				.pattern("ss ")
 				.pattern("ss ")
 				.pattern("  s")
 				.define('s', ModItems.STRAW.get())
 				.unlockedBy("has_straw", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.STRAW.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "lead_from_straw"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "lead_from_straw"));
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, Items.PAINTING)
 				.pattern("sss")
 				.pattern("scs")
@@ -81,13 +81,13 @@ public class CraftingRecipes
 				.define('s', Items.STICK)
 				.define('c', ModItems.CANVAS.get())
 				.unlockedBy("has_canvas", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CANVAS.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "painting_from_canvas"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "painting_from_canvas"));
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Items.PUMPKIN)
 				.pattern("##")
 				.pattern("##")
 				.define('#', ModItems.PUMPKIN_SLICE.get())
 				.unlockedBy("has_pumpkin_slice", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PUMPKIN_SLICE.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "pumpkin_from_slices"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "pumpkin_from_slices"));
 		ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, Items.CAKE)
 				.pattern("mmm")
 				.pattern("ses")
@@ -97,7 +97,7 @@ public class CraftingRecipes
 				.define('e', ForgeTags.EGGS)
 				.define('w', Items.WHEAT)
 				.unlockedBy("has_milk_bottle", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.MILK_BOTTLE.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "cake_from_milk_bottle"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "cake_from_milk_bottle"));
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, Items.CAKE)
 				.requires(ModItems.CAKE_SLICE.get())
 				.requires(ModItems.CAKE_SLICE.get())
@@ -107,14 +107,14 @@ public class CraftingRecipes
 				.requires(ModItems.CAKE_SLICE.get())
 				.requires(ModItems.CAKE_SLICE.get())
 				.unlockedBy("has_cake_slice", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CAKE_SLICE.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "cake_from_slices"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "cake_from_slices"));
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.BOOK)
 				.requires(Items.PAPER)
 				.requires(Items.PAPER)
 				.requires(Items.PAPER)
 				.requires(ModItems.CANVAS.get())
 				.unlockedBy("has_canvas", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CANVAS.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "book_from_canvas"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "book_from_canvas"));
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.MILK_BUCKET)
 				.requires(Items.BUCKET)
 				.requires(ModItems.MILK_BOTTLE.get())
@@ -122,19 +122,19 @@ public class CraftingRecipes
 				.requires(ModItems.MILK_BOTTLE.get())
 				.requires(ModItems.MILK_BOTTLE.get())
 				.unlockedBy("has_milk_bottle", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.MILK_BOTTLE.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "milk_bucket_from_bottles"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "milk_bucket_from_bottles"));
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.PAPER)
 				.requires(ModItems.TREE_BARK.get())
 				.requires(ModItems.TREE_BARK.get())
 				.requires(ModItems.TREE_BARK.get())
 				.unlockedBy("has_tree_bark", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.TREE_BARK.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "paper_from_tree_bark"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "paper_from_tree_bark"));
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, Items.PACKED_MUD, 2)
 				.requires(ModItems.STRAW.get())
 				.requires(Items.MUD)
 				.requires(Items.MUD)
 				.unlockedBy("has_straw", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.STRAW.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "packed_mud_from_straw"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "packed_mud_from_straw"));
 	}
 
 	private static void recipesCanvasSigns(RecipeOutput output) {
@@ -321,7 +321,7 @@ public class CraftingRecipes
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, ModItems.ROPE.get(), 4)
 				.requires(ModItems.SAFETY_NET.get())
 				.unlockedBy("has_safety_net", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SAFETY_NET.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "rope_from_safety_net"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "rope_from_safety_net"));
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.CABBAGE_CRATE.get(), 1)
 				.pattern("###")
 				.pattern("###")
@@ -372,7 +372,7 @@ public class CraftingRecipes
 				.requires(ModItems.CANVAS_RUG.get())
 				.requires(ModItems.CANVAS_RUG.get())
 				.unlockedBy("has_canvas_rug", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CANVAS_RUG.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "canvas_from_canvas_rug"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "canvas_from_canvas_rug"));
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModItems.ORGANIC_COMPOST.get(), 1)
 				.requires(Items.DIRT)
 				.requires(Items.ROTTEN_FLESH)
@@ -385,7 +385,7 @@ public class CraftingRecipes
 				.requires(Items.BONE_MEAL)
 				.unlockedBy("has_rotten_flesh", InventoryChangeTrigger.TriggerInstance.hasItems(Items.ROTTEN_FLESH))
 				.unlockedBy("has_straw", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.STRAW.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "organic_compost_from_rotten_flesh"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "organic_compost_from_rotten_flesh"));
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModItems.ORGANIC_COMPOST.get(), 1)
 				.requires(Items.DIRT)
 				.requires(ModItems.STRAW.get())
@@ -398,7 +398,7 @@ public class CraftingRecipes
 				.requires(ModItems.TREE_BARK.get())
 				.unlockedBy("has_tree_bark", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.TREE_BARK.get()))
 				.unlockedBy("has_straw", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.STRAW.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "organic_compost_from_tree_bark"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "organic_compost_from_tree_bark"));
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.TATAMI.get(), 2)
 				.pattern("cs")
 				.pattern("sc")
@@ -422,12 +422,12 @@ public class CraftingRecipes
 				.requires(ModItems.HALF_TATAMI_MAT.get())
 				.requires(ModItems.HALF_TATAMI_MAT.get())
 				.unlockedBy("has_canvas", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CANVAS.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "full_tatami_mat_from_halves"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "full_tatami_mat_from_halves"));
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModItems.TATAMI.get(), 1)
 				.requires(ModItems.FULL_TATAMI_MAT.get())
 				.requires(ModItems.FULL_TATAMI_MAT.get())
 				.unlockedBy("has_canvas", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CANVAS.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "tatami_block_from_full"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "tatami_block_from_full"));
 	}
 
 	private static void recipesTools(RecipeOutput output) {
@@ -474,15 +474,15 @@ public class CraftingRecipes
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, Items.CARROT, 9)
 				.requires(ModItems.CARROT_CRATE.get())
 				.unlockedBy("has_carrot_crate", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CARROT_CRATE.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "carrot_from_crate"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "carrot_from_crate"));
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, Items.POTATO, 9)
 				.requires(ModItems.POTATO_CRATE.get())
 				.unlockedBy("has_potato_crate", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.POTATO_CRATE.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "potato_from_crate"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "potato_from_crate"));
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, Items.BEETROOT, 9)
 				.requires(ModItems.BEETROOT_CRATE.get())
 				.unlockedBy("has_beetroot_crate", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.BEETROOT_CRATE.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "beetroot_from_crate"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "beetroot_from_crate"));
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.CABBAGE.get(), 9)
 				.requires(ModItems.CABBAGE_CRATE.get())
 				.unlockedBy("has_cabbage_crate", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CABBAGE_CRATE.get()))
@@ -541,14 +541,14 @@ public class CraftingRecipes
 				.requires(Items.WHEAT)
 				.requires(Items.WHEAT)
 				.unlockedBy("has_wheat", InventoryChangeTrigger.TriggerInstance.hasItems(Items.WHEAT))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "wheat_dough_from_water"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "wheat_dough_from_water"));
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.WHEAT_DOUGH.get(), 3)
 				.requires(ForgeTags.EGGS)
 				.requires(Items.WHEAT)
 				.requires(Items.WHEAT)
 				.requires(Items.WHEAT)
 				.unlockedBy("has_wheat", InventoryChangeTrigger.TriggerInstance.hasItems(Items.WHEAT))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "wheat_dough_from_eggs"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "wheat_dough_from_eggs"));
 		ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.PIE_CRUST.get(), 1)
 				.pattern("wMw")
 				.pattern(" w ")
@@ -572,7 +572,7 @@ public class CraftingRecipes
 				.requires(ModItems.CABBAGE_LEAF.get())
 				.requires(ModItems.CABBAGE_LEAF.get())
 				.unlockedBy("has_cabbage_leaf", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CABBAGE_LEAF.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "cabbage_from_leaves"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "cabbage_from_leaves"));
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.HORSE_FEED.get(), 1)
 				.requires(Ingredient.of(Items.HAY_BLOCK, ModItems.RICE_BALE.get()))
 				.requires(Items.APPLE)
@@ -617,7 +617,7 @@ public class CraftingRecipes
 				.pattern("##")
 				.define('#', ModItems.APPLE_PIE_SLICE.get())
 				.unlockedBy("has_apple_pie_slice", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.APPLE_PIE_SLICE.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "apple_pie_from_slices"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "apple_pie_from_slices"));
 		ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.SWEET_BERRY_CHEESECAKE.get(), 1)
 				.pattern("sss")
 				.pattern("sss")
@@ -632,7 +632,7 @@ public class CraftingRecipes
 				.pattern("##")
 				.define('#', ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get())
 				.unlockedBy("has_sweet_berry_cheesecake_slice", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "sweet_berry_cheesecake_from_slices"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "sweet_berry_cheesecake_from_slices"));
 		ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.CHOCOLATE_PIE.get(), 1)
 				.pattern("ccc")
 				.pattern("mmm")
@@ -648,7 +648,7 @@ public class CraftingRecipes
 				.pattern("##")
 				.define('#', ModItems.CHOCOLATE_PIE_SLICE.get())
 				.unlockedBy("has_chocolate_pie_slice", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CHOCOLATE_PIE_SLICE.get()))
-				.save(output, new ResourceLocation(FarmersDelight.MODID, "chocolate_pie_from_slices"));
+				.save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "chocolate_pie_from_slices"));
 	}
 
 	private static void recipesCraftedMeals(RecipeOutput output) {

@@ -216,8 +216,8 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.WILD_ONIONS.get(),
 				ModBlocks.WILD_RICE.get());
 		tag(ModTags.ROPES).add(ModBlocks.ROPE.get())
-				.addOptional(new ResourceLocation("quark:rope"))
-				.addOptional(new ResourceLocation("supplementaries:rope"));
+				.addOptional(ResourceLocation.parse("quark:rope"))
+				.addOptional(ResourceLocation.parse("supplementaries:rope"));
 		tag(ModTags.TRAY_HEAT_SOURCES).add(
 						Blocks.LAVA)
 				.addTag(net.minecraft.tags.BlockTags.CAMPFIRES)
@@ -229,7 +229,7 @@ public class BlockTags extends BlockTagsProvider
 				.addTag(ModTags.TRAY_HEAT_SOURCES);
 		tag(ModTags.HEAT_CONDUCTORS).add(
 						Blocks.HOPPER)
-				.addOptional(new ResourceLocation("create:chute"));
+				.addOptional(ResourceLocation.parse("create:chute"));
 		tag(ModTags.COMPOST_ACTIVATORS).add(
 				Blocks.BROWN_MUSHROOM,
 				Blocks.RED_MUSHROOM,

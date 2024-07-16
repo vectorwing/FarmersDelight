@@ -119,15 +119,15 @@ public class CookingPotRecipeBuilder implements RecipeBuilder
 
 	public void build(RecipeOutput output) {
 		ResourceLocation location = BuiltInRegistries.ITEM.getKey(result);
-		save(output, new ResourceLocation(FarmersDelight.MODID, location.getPath()));
+		save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, location.getPath()));
 	}
 
 	public void build(RecipeOutput outputIn, String save) {
 		ResourceLocation resourcelocation = BuiltInRegistries.ITEM.getKey(result);
-		if ((new ResourceLocation(save)).equals(resourcelocation)) {
+		if ((ResourceLocation.parse(save)).equals(resourcelocation)) {
 			throw new IllegalStateException("Cooking Recipe " + save + " should remove its 'save' argument");
 		} else {
-			save(outputIn, new ResourceLocation(save));
+			save(outputIn, ResourceLocation.parse(save));
 		}
 	}
 

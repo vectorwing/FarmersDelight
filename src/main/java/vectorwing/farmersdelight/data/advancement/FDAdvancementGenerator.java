@@ -30,7 +30,7 @@ public class FDAdvancementGenerator implements AdvancementProvider.AdvancementGe
 				.display(ModItems.COOKING_POT.get(),
 						TextUtils.getTranslation("advancement.root"),
 						TextUtils.getTranslation("advancement.root.desc"),
-						new ResourceLocation("minecraft:textures/block/bricks.png"),
+						ResourceLocation.parse("minecraft:textures/block/bricks.png"),
 						AdvancementType.TASK, false, false, false)
 				.addCriterion("seeds", InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{}))
 				.save(consumer, getNameId("main/root"));
@@ -152,11 +152,11 @@ public class FDAdvancementGenerator implements AdvancementProvider.AdvancementGe
 				.save(consumer, getNameId("main/place_cooking_pot"));
 
 		AdvancementHolder comforting = getAdvancement(dinnerIsServed, ModItems.BAKED_COD_STEW.get(), "eat_comfort_food", AdvancementType.TASK, true, false, false)
-				.addCriterion("comfort", EffectsChangedTrigger.TriggerInstance.hasEffects(MobEffectsPredicate.Builder.effects().and(ModEffects.COMFORT.get())))
+				.addCriterion("comfort", EffectsChangedTrigger.TriggerInstance.hasEffects(MobEffectsPredicate.Builder.effects().and(ModEffects.COMFORT)))
 				.save(consumer, getNameId("main/eat_comfort_food"));
 
 		AdvancementHolder nourishing = getAdvancement(comforting, ModItems.STEAK_AND_POTATOES.get(), "eat_nourishing_food", AdvancementType.TASK, true, false, false)
-				.addCriterion("nourishment", EffectsChangedTrigger.TriggerInstance.hasEffects(MobEffectsPredicate.Builder.effects().and(ModEffects.NOURISHMENT.get())))
+				.addCriterion("nourishment", EffectsChangedTrigger.TriggerInstance.hasEffects(MobEffectsPredicate.Builder.effects().and(ModEffects.NOURISHMENT)))
 				.save(consumer, getNameId("main/eat_nourishing_food"));
 
 		AdvancementHolder gloriousFeast = getAdvancement(nourishing, ModItems.ROAST_CHICKEN_BLOCK.get(), "place_feast", AdvancementType.TASK, true, true, false)

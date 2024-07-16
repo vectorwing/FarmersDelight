@@ -1,7 +1,5 @@
 package vectorwing.farmersdelight.common.loot.function;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -19,17 +17,13 @@ import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModLootFunctions;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction.Builder;
-import vectorwing.farmersdelight.common.registry.ModLootFunctions;
-
 import java.util.List;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class CopySkilletFunction extends LootItemConditionalFunction
 {
-	public static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "copy_skillet");
+	public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "copy_skillet");
 	public static final Codec<CopySkilletFunction> CODEC = RecordCodecBuilder.create(
 			p_298131_ -> commonFields(p_298131_).apply(p_298131_, CopySkilletFunction::new)
 	);
@@ -55,7 +49,7 @@ public class CopySkilletFunction extends LootItemConditionalFunction
 	}
 
 	@Override
-	public LootItemFunctionType getType() {
+	public LootItemFunctionType<CopySkilletFunction> getType() {
 		return ModLootFunctions.COPY_SKILLET.get();
 	}
 }

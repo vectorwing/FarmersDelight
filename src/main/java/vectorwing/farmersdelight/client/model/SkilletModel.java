@@ -129,7 +129,7 @@ public class SkilletModel implements BakedModel
 							new Vector3f(0.0F, -0.4F, 0.0F),
 							Axis.XP.rotationDegrees(270),
 							new Vector3f(0.625F, 0.625F, 0.625F), null));
-			ResourceLocation name = new ResourceLocation(FarmersDelight.MODID, "skillet_with_" + ingredientLocation.toString().replace(':', '_'));
+			ResourceLocation name = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "skillet_with_" + ingredientLocation.toString().replace(':', '_'));
 
 			ModelBaker baker = bakery.new ModelBakerImpl((modelLoc, material) -> material.sprite(), name);
 

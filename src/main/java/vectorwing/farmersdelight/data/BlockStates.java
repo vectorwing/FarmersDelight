@@ -42,7 +42,7 @@ public class BlockStates extends BlockStateProvider
 	}
 
 	public ResourceLocation resourceBlock(String path) {
-		return new ResourceLocation(FarmersDelight.MODID, "block/" + path);
+		return ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "block/" + path);
 	}
 
 	public ModelFile existingModel(Block block) {

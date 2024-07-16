@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.common.loot.function;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;
@@ -23,8 +23,8 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public class CopyMealFunction extends LootItemConditionalFunction
 {
-	public static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "copy_meal");
-	public static final Codec<CopyMealFunction> CODEC = RecordCodecBuilder.create(
+	public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "copy_meal");
+	public static final MapCodec<CopyMealFunction> CODEC = RecordCodecBuilder.mapCodec(
 			p_298131_ -> commonFields(p_298131_).apply(p_298131_, CopyMealFunction::new)
 	);
 
@@ -49,7 +49,7 @@ public class CopyMealFunction extends LootItemConditionalFunction
 	}
 
 	@Override
-	public LootItemFunctionType getType() {
+	public LootItemFunctionType<CopyMealFunction> getType() {
 		return ModLootFunctions.COPY_MEAL.get();
 	}
 }

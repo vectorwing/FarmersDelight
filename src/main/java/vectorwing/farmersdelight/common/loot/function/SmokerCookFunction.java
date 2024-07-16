@@ -1,7 +1,5 @@
 package vectorwing.farmersdelight.common.loot.function;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -25,7 +23,7 @@ import java.util.Optional;
 @ParametersAreNonnullByDefault
 public class SmokerCookFunction extends LootItemConditionalFunction
 {
-	public static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "smoker_cook");
+	public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "smoker_cook");
 	public static final Codec<SmokerCookFunction> CODEC = RecordCodecBuilder.create(
 			p_298131_ -> commonFields(p_298131_).apply(p_298131_, SmokerCookFunction::new)
 	);
@@ -52,7 +50,7 @@ public class SmokerCookFunction extends LootItemConditionalFunction
 	}
 
 	@Override
-	public LootItemFunctionType getType() {
+	public LootItemFunctionType<SmokerCookFunction> getType() {
 		return ModLootFunctions.SMOKER_COOK.get();
 	}
 }

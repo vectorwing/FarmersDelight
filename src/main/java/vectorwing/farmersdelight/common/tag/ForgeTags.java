@@ -85,11 +85,11 @@ public class ForgeTags
 	public static final TagKey<Item> TOOLS_SHOVELS = forgeItemTag("tools/shovels");
 
 	private static TagKey<Block> forgeBlockTag(String path) {
-		return BlockTags.create(new ResourceLocation("forge", path));
+		return BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", path));
 	}
 
 	private static TagKey<Item> forgeItemTag(String path) {
-		return ItemTags.create(new ResourceLocation("forge", path));
+		return ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", path));
 	}
 
 }
