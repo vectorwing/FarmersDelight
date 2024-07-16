@@ -232,7 +232,7 @@ public class SkilletItem extends BlockItem
 
 	public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity entity) {
 		if (!level.isClientSide && state.getDestroySpeed(level, pos) != 0.0F) {
-			stack.hurtAndBreak(1, entity, (user) -> user.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+			stack.hurtAndBreak(1, entity, EquipmentSlot.MAINHAND);
 		}
 
 		return true;
@@ -247,14 +247,15 @@ public class SkilletItem extends BlockItem
 		return InteractionResult.PASS;
 	}
 
-	@Override
-	public boolean canApplyAtEnchantingTable(ItemStack stack, net.minecraft.world.item.enchantment.Enchantment enchantment) {
-		if (enchantment.category.equals(EnchantmentCategory.WEAPON)) {
-			Set<Enchantment> DENIED_ENCHANTMENTS = Sets.newHashSet(Enchantments.SWEEPING_EDGE);
-			return !DENIED_ENCHANTMENTS.contains(enchantment);
-		}
-		return enchantment.category.canEnchant(stack.getItem());
-	}
+	// TODO: Understand how this is done with the new enchantment code.
+//	@Override
+//	public boolean canApplyAtEnchantingTable(ItemStack stack, net.minecraft.world.item.enchantment.Enchantment enchantment) {
+//		if (enchantment.category.equals(EnchantmentCategory.WEAPON)) {
+//			Set<Enchantment> DENIED_ENCHANTMENTS = Sets.newHashSet(Enchantments.SWEEPING_EDGE);
+//			return !DENIED_ENCHANTMENTS.contains(enchantment);
+//		}
+//		return enchantment.category.canEnchant(stack.getItem());
+//	}
 
 	@Override
 	public int getEnchantmentValue() {

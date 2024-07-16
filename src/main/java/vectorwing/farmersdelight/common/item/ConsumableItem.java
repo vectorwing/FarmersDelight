@@ -54,7 +54,7 @@ public class ConsumableItem extends Item
 
 		ItemStack containerStack = stack.getCraftingRemainingItem();
 
-		if (stack.isEdible()) {
+		if (stack.getFoodProperties(consumer) != null) {
 			super.finishUsingItem(stack, level, consumer);
 		} else {
 			Player player = consumer instanceof Player ? (Player) consumer : null;
@@ -88,14 +88,14 @@ public class ConsumableItem extends Item
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag isAdvanced) {
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
 		if (Configuration.FOOD_EFFECT_TOOLTIP.get()) {
 			if (this.hasCustomTooltip) {
 				MutableComponent textEmpty = TextUtils.getTranslation("tooltip." + BuiltInRegistries.ITEM.getKey(this).getPath());
 				tooltip.add(textEmpty.withStyle(ChatFormatting.BLUE));
 			}
 			if (this.hasFoodEffectTooltip) {
-				TextUtils.addFoodEffectTooltip(stack, tooltip, 1.0F, level == null ? 20 : level.tickRateManager().tickrate());
+				TextUtils.addFoodEffectTooltip(stack, tooltip::add, 1.0F, context.tickRate());
 			}
 		}
 	}

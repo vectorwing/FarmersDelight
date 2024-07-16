@@ -30,6 +30,6 @@ public class RiceItem extends ItemNameBlockItem
 				player.displayClientMessage(TextUtils.getTranslation("block.rice.invalid_placement"), true);
 			}
 		}
-		return !result.consumesAction() && this.isEdible() ? this.use(context.getLevel(), context.getPlayer(), context.getHand()).getResult() : result;
+		return !result.consumesAction() ? this.use(context.getLevel(), context.getPlayer(), context.getHand()).getResult() : result;
 	}
 }

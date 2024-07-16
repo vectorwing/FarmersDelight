@@ -48,7 +48,7 @@ public class KnifeItem extends DiggerItem
 
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		stack.hurtAndBreak(1, attacker, (user) -> user.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+		stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
 		return true;
 	}
 

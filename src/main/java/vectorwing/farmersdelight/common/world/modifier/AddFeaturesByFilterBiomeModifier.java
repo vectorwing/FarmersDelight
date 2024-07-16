@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.common.world.modifier;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.world.level.biome.Biome;
@@ -41,7 +41,7 @@ public record AddFeaturesByFilterBiomeModifier(
 	}
 
 	@Override
-	public Codec<? extends BiomeModifier> codec() {
+	public MapCodec<? extends BiomeModifier> codec() {
 		return ModBiomeModifiers.ADD_FEATURES_BY_FILTER.get();
 	}
 }

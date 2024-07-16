@@ -27,11 +27,6 @@ public class DrinkableItem extends ConsumableItem
 	}
 
 	@Override
-	public int getUseDuration(ItemStack stack) {
-		return 32;
-	}
-
-	@Override
 	public UseAnim getUseAnimation(ItemStack stack) {
 		return UseAnim.DRINK;
 	}
@@ -39,7 +34,7 @@ public class DrinkableItem extends ConsumableItem
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 		ItemStack heldStack = player.getItemInHand(hand);
-		if (heldStack.isEdible()) {
+		if (heldStack.getFoodProperties(player) != null) {
 			if (player.canEat(heldStack.getFoodProperties(player).canAlwaysEat())) {
 				player.startUsingItem(hand);
 				return InteractionResultHolder.consume(heldStack);

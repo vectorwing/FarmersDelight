@@ -85,7 +85,7 @@ public class DogFoodItem extends ConsumableItem
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag isAdvanced) {
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
 		if (!Configuration.FOOD_EFFECT_TOOLTIP.get()) {
 			return;
 		}
@@ -97,14 +97,14 @@ public class DogFoodItem extends ConsumableItem
 			MutableComponent effectDescription = Component.literal(" ");
 			MutableComponent effectName = Component.translatable(effectInstance.getDescriptionId());
 			effectDescription.append(effectName);
-			MobEffect effect = effectInstance.getEffect();
+			MobEffect effect = effectInstance.getEffect().value();
 
 			if (effectInstance.getAmplifier() > 0) {
 				effectDescription.append(" ").append(Component.translatable("potion.potency." + effectInstance.getAmplifier()));
 			}
 
 			if (effectInstance.getDuration() > 20) {
-				effectDescription.append(" (").append(MobEffectUtil.formatDuration(effectInstance, 1.0F, level == null ? 20 : level.tickRateManager().tickrate())).append(")");
+				effectDescription.append(" (").append(MobEffectUtil.formatDuration(effectInstance, 1.0F, context.tickRate())).append(")");
 			}
 
 			tooltip.add(effectDescription.withStyle(effect.getCategory().getTooltipFormatting()));

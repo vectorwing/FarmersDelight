@@ -18,7 +18,7 @@ public class NourishmentEffect extends MobEffect
 		super(MobEffectCategory.BENEFICIAL, 0);
 	}
 
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
+	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
 		if (!entity.getCommandSenderWorld().isClientSide && entity instanceof Player player) {
 			FoodData foodData = player.getFoodData();
 			boolean isPlayerHealingWithHunger =
@@ -34,6 +34,8 @@ public class NourishmentEffect extends MobEffect
 				}
 			}
 		}
+
+		return true;
 	}
 
 	@Override

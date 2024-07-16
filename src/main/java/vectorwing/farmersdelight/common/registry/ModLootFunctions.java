@@ -12,9 +12,9 @@ import java.util.function.Supplier;
 
 public class ModLootFunctions
 {
-	public static final DeferredRegister<LootItemFunctionType> LOOT_FUNCTIONS = DeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, FarmersDelight.MODID);
+	public static final DeferredRegister<LootItemFunctionType<?>> LOOT_FUNCTIONS = DeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, FarmersDelight.MODID);
 
-	public static final Supplier<LootItemFunctionType> COPY_MEAL = LOOT_FUNCTIONS.register("copy_meal", () -> new LootItemFunctionType(CopyMealFunction.CODEC));
-	public static final Supplier<LootItemFunctionType> COPY_SKILLET = LOOT_FUNCTIONS.register("copy_skillet", () -> new LootItemFunctionType(CopySkilletFunction.CODEC));
-	public static final Supplier<LootItemFunctionType> SMOKER_COOK = LOOT_FUNCTIONS.register("smoker_cook", () -> new LootItemFunctionType(SmokerCookFunction.CODEC));
+	public static final Supplier<LootItemFunctionType<CopyMealFunction>> COPY_MEAL = LOOT_FUNCTIONS.register("copy_meal", () -> new LootItemFunctionType<>(CopyMealFunction.CODEC));
+	public static final Supplier<LootItemFunctionType<CopySkilletFunction>> COPY_SKILLET = LOOT_FUNCTIONS.register("copy_skillet", () -> new LootItemFunctionType<>(CopySkilletFunction.CODEC));
+	public static final Supplier<LootItemFunctionType<SmokerCookFunction>> SMOKER_COOK = LOOT_FUNCTIONS.register("smoker_cook", () -> new LootItemFunctionType<>(SmokerCookFunction.CODEC));
 }

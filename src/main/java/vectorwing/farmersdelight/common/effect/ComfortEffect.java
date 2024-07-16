@@ -20,18 +20,19 @@ public class ComfortEffect extends MobEffect
 	}
 
 	@Override
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
+	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
 		if (entity.hasEffect(MobEffects.REGENERATION)) {
-			return;
+			return false;
 		}
 		if (entity instanceof Player player) {
 			if (player.getFoodData().getSaturationLevel() > 0.0) {
-				return;
+				return false;
 			}
 		}
 		if (entity.getHealth() < entity.getMaxHealth()) {
 			entity.heal(1.0F);
 		}
+		return true;
 	}
 
 	@Override

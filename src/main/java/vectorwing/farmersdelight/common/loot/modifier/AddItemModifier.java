@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.common.loot.modifier;
 
 import com.google.common.base.Suppliers;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -17,14 +18,14 @@ import java.util.function.Supplier;
 
 public class AddItemModifier extends LootModifier
 {
-	public static final Supplier<Codec<AddItemModifier>> CODEC = Suppliers.memoize(() ->
-			RecordCodecBuilder.create(inst -> codecStart(inst).and(
-					inst.group(
-						BuiltInRegistries.ITEM.byNameCodec().fieldOf("item").forGetter((m) -> m.addedItem),
-						Codec.INT.optionalFieldOf("count", 1).forGetter((m) -> m.count)
+	public static final Supplier<MapCodec<AddItemModifier>> CODEC = Suppliers.memoize(() ->
+			RecordCodecBuilder.mapCodec(inst -> codecStart(inst).and(
+							inst.group(
+									BuiltInRegistries.ITEM.byNameCodec().fieldOf("item").forGetter((m) -> m.addedItem),
+									Codec.INT.optionalFieldOf("count", 1).forGetter((m) -> m.count)
+							)
 					)
-			)
-			.apply(inst, AddItemModifier::new)));
+					.apply(inst, AddItemModifier::new)));
 
 	private final Item addedItem;
 	private final int count;
@@ -60,7 +61,7 @@ public class AddItemModifier extends LootModifier
 	}
 
 	@Override
-	public Codec<? extends IGlobalLootModifier> codec() {
+	public MapCodec<? extends IGlobalLootModifier> codec() {
 		return CODEC.get();
 	}
 }

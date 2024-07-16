@@ -7,7 +7,6 @@ import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.ExtraCodecs;
 import vectorwing.farmersdelight.common.registry.ModAdvancements;
 
 import java.util.Optional;
@@ -28,7 +27,7 @@ public class CuttingBoardTrigger extends SimpleCriterionTrigger<CuttingBoardTrig
 	{
 		public static final Codec<CuttingBoardTrigger.TriggerInstance> CODEC = RecordCodecBuilder.create(
 				builder -> builder.group(
-								ExtraCodecs.strictOptionalField(EntityPredicate.ADVANCEMENT_CODEC, "player").forGetter(CuttingBoardTrigger.TriggerInstance::player))
+								EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(CuttingBoardTrigger.TriggerInstance::player))
 						.apply(builder, CuttingBoardTrigger.TriggerInstance::new)
 		);
 

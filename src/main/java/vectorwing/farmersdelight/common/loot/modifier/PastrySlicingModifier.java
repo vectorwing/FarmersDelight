@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.common.loot.modifier;
 
 import com.google.common.base.Suppliers;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -22,8 +23,8 @@ import java.util.function.Supplier;
 
 public class PastrySlicingModifier extends LootModifier
 {
-	public static final Supplier<Codec<PastrySlicingModifier>> CODEC = Suppliers.memoize(() ->
-			RecordCodecBuilder.create(inst -> codecStart(inst)
+	public static final Supplier<MapCodec<PastrySlicingModifier>> CODEC = Suppliers.memoize(() ->
+			RecordCodecBuilder.mapCodec(inst -> codecStart(inst)
 					.and(BuiltInRegistries.ITEM.byNameCodec().fieldOf("slice").forGetter((m) -> m.pastrySlice))
 					.apply(inst, PastrySlicingModifier::new)));
 
@@ -61,7 +62,7 @@ public class PastrySlicingModifier extends LootModifier
 	}
 
 	@Override
-	public Codec<? extends IGlobalLootModifier> codec() {
+	public MapCodec<? extends IGlobalLootModifier> codec() {
 		return CODEC.get();
 	}
 }
