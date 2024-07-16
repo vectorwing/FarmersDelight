@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.common.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -40,20 +41,20 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 	}
 
 	@Override
-	public void load(CompoundTag compound) {
-		super.load(compound);
+	protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+		super.loadAdditional(compound, registries);
 		this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
 		if (!this.tryLoadLootTable(compound)) {
-			ContainerHelper.loadAllItems(compound, this.items);
+			ContainerHelper.loadAllItems(compound, this.items, registries);
 		}
 		this.transferCooldown = compound.getInt("TransferCooldown");
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag compound) {
-		super.saveAdditional(compound);
+	public void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+		super.saveAdditional(compound, registries);
 		if (!this.trySaveLootTable(compound)) {
-			ContainerHelper.saveAllItems(compound, this.items);
+			ContainerHelper.saveAllItems(compound, this.items, registries);
 		}
 
 		compound.putInt("TransferCooldown", this.transferCooldown);
@@ -112,7 +113,7 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 	}
 
 	private static boolean canCombine(ItemStack stack1, ItemStack stack2) {
-		return stack1.getCount() <= stack1.getMaxStackSize() && ItemStack.isSameItemSameTags(stack1, stack2);
+		return stack1.getCount() <= stack1.getMaxStackSize() && ItemStack.isSameItemSameComponents(stack1, stack2);
 	}
 
 	private static ItemStack insertStack(Container destination, ItemStack stack, int index) {
@@ -133,11 +134,9 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 			}
 
 			if (flag) {
-				if (isDestinationEmpty && destination instanceof BasketBlockEntity) {
-					BasketBlockEntity firstBasket = (BasketBlockEntity) destination;
+				if (isDestinationEmpty && destination instanceof BasketBlockEntity firstBasket) {
 					if (!firstBasket.mayTransfer()) {
 						int k = 0;
-
 						firstBasket.setTransferCooldown(8 - k);
 					}
 				}

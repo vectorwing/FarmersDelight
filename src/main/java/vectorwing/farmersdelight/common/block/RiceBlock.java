@@ -66,16 +66,16 @@ public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlo
 			int age = this.getAge(state);
 			if (age <= this.getMaxAge()) {
 				float chance = 10;
-				if (CommonHooks.onCropsGrowPre(level, pos, state, random.nextInt((int) (25.0F / chance) + 1) == 0)) {
+				if (CommonHooks.canCropGrow(level, pos, state, random.nextInt((int) (25.0F / chance) + 1) == 0)) {
 					if (age == this.getMaxAge()) {
 						RicePaniclesBlock riceUpper = (RicePaniclesBlock) ModBlocks.RICE_CROP_PANICLES.get();
 						if (riceUpper.defaultBlockState().canSurvive(level, pos.above()) && level.isEmptyBlock(pos.above())) {
 							level.setBlockAndUpdate(pos.above(), riceUpper.defaultBlockState());
-							CommonHooks.onCropsGrowPost(level, pos, state);
+							CommonHooks.fireCropGrowPost(level, pos, state);
 						}
 					} else {
 						level.setBlock(pos, this.withAge(age + 1), 2);
-						CommonHooks.onCropsGrowPost(level, pos, state);
+						CommonHooks.fireCropGrowPost(level, pos, state);
 					}
 				}
 			}
@@ -119,9 +119,9 @@ public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlo
 		return this.defaultBlockState().setValue(this.getAgeProperty(), age);
 	}
 
-	public boolean isMaxAge(BlockState state) {
-		return state.getValue(this.getAgeProperty()) >= this.getMaxAge();
-	}
+//	public boolean isMaxAge(BlockState state) {
+//		return state.getValue(this.getAgeProperty()) >= this.getMaxAge();
+//	}
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

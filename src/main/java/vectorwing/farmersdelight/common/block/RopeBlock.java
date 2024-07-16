@@ -2,7 +2,6 @@ package vectorwing.farmersdelight.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -10,7 +9,10 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.BellBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -43,7 +45,7 @@ public class RopeBlock extends IronBarsBlock
 	}
 
 	@Override
-	public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
+	public boolean isPathfindable(BlockState state, PathComputationType type) {
 		return true;
 	}
 
@@ -56,38 +58,36 @@ public class RopeBlock extends IronBarsBlock
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		if (player.getItemInHand(hand).isEmpty()) {
-			if (Configuration.ENABLE_ROPE_REELING.get() && player.isSecondaryUseActive()) {
-				if (player.getAbilities().mayBuild && (player.getAbilities().instabuild || player.getInventory().add(new ItemStack(this.asItem())))) {
-					BlockPos.MutableBlockPos reelingPos = pos.mutable().move(Direction.DOWN);
-					int minBuildHeight = level.getMinBuildHeight();
+	public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+		if (Configuration.ENABLE_ROPE_REELING.get() && player.isSecondaryUseActive()) {
+			if (player.getAbilities().mayBuild && (player.getAbilities().instabuild || player.getInventory().add(new ItemStack(this.asItem())))) {
+				BlockPos.MutableBlockPos reelingPos = pos.mutable().move(Direction.DOWN);
+				int minBuildHeight = level.getMinBuildHeight();
 
-					while (reelingPos.getY() >= minBuildHeight) {
-						BlockState blockStateBelow = level.getBlockState(reelingPos);
-						if (blockStateBelow.is(this)) {
-							reelingPos.move(Direction.DOWN);
-						} else {
-							reelingPos.move(Direction.UP);
-							level.destroyBlock(reelingPos, false, player);
-							return InteractionResult.sidedSuccess(level.isClientSide);
-						}
+				while (reelingPos.getY() >= minBuildHeight) {
+					BlockState blockStateBelow = level.getBlockState(reelingPos);
+					if (blockStateBelow.is(this)) {
+						reelingPos.move(Direction.DOWN);
+					} else {
+						reelingPos.move(Direction.UP);
+						level.destroyBlock(reelingPos, false, player);
+						return InteractionResult.sidedSuccess(level.isClientSide);
 					}
 				}
-			} else {
-				BlockPos.MutableBlockPos bellRingingPos = pos.mutable().move(Direction.UP);
+			}
+		} else {
+			BlockPos.MutableBlockPos bellRingingPos = pos.mutable().move(Direction.UP);
 
-				for (int i = 0; i < 24; i++) {
-					BlockState blockStateAbove = level.getBlockState(bellRingingPos);
-					Block blockAbove = blockStateAbove.getBlock();
-					if (blockAbove == Blocks.BELL) {
-						((BellBlock) blockAbove).attemptToRing(level, bellRingingPos, blockStateAbove.getValue(BellBlock.FACING).getClockWise());
-						return InteractionResult.SUCCESS;
-					} else if (blockAbove == ModBlocks.ROPE.get()) {
-						bellRingingPos.move(Direction.UP);
-					} else {
-						return InteractionResult.PASS;
-					}
+			for (int i = 0; i < 24; i++) {
+				BlockState blockStateAbove = level.getBlockState(bellRingingPos);
+				Block blockAbove = blockStateAbove.getBlock();
+				if (blockAbove == Blocks.BELL) {
+					((BellBlock) blockAbove).attemptToRing(level, bellRingingPos, blockStateAbove.getValue(BellBlock.FACING).getClockWise());
+					return InteractionResult.SUCCESS;
+				} else if (blockAbove == ModBlocks.ROPE.get()) {
+					bellRingingPos.move(Direction.UP);
+				} else {
+					return InteractionResult.PASS;
 				}
 			}
 		}

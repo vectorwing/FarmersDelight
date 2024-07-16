@@ -30,10 +30,10 @@ public class CabbageBlock extends CropBlock
 		super(properties);
 	}
 
-	@Override
-	public BlockState getPlant(BlockGetter level, BlockPos pos) {
-		return ModBlocks.CABBAGE_CROP.get().defaultBlockState();
-	}
+//	@Override
+//	public BlockState getPlant(BlockGetter level, BlockPos pos) {
+//		return ModBlocks.CABBAGE_CROP.get().defaultBlockState();
+//	}
 
 	@Override
 	protected ItemLike getBaseSeedId() {
