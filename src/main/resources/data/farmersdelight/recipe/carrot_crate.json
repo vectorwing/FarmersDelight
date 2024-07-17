@@ -12,10 +12,11 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:beetroot"
+      "item": "minecraft:carrot"
     }
   },
   "result": {
-    "item": "farmersdelight:beetroot_crate"
+    "count": 1,
+    "id": "farmersdelight:carrot_crate"
   }
 }
