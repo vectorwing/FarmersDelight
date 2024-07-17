@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 public class EnumParameters
 {
 	public static final EnumProxy<RecipeBookCategories> PROXY_COOKING_SEARCH = new EnumProxy<>(
-			RecipeBookCategories.class, new ItemStack(Items.COMPASS)
+			RecipeBookCategories.class, (Supplier<List<ItemStack>>) () -> List.of(new ItemStack(Items.COMPASS))
 	);
 	public static final EnumProxy<RecipeBookCategories> PROXY_COOKING_MEALS = new EnumProxy<>(
 			RecipeBookCategories.class, (Supplier<List<ItemStack>>) () -> List.of(new ItemStack(ModItems.VEGETABLE_NOODLES.get()))

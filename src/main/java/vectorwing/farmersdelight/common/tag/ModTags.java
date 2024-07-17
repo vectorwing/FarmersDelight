@@ -18,6 +18,8 @@ import vectorwing.farmersdelight.FarmersDelight;
  */
 public class ModTags
 {
+	// -- Blocks --
+
 	// Blocks that are efficiently mined with a Knife.
 	public static final TagKey<Block> MINEABLE_WITH_KNIFE = modBlockTag("mineable/knife");
 
@@ -53,6 +55,11 @@ public class ModTags
 
 	// Candle cakes that should drop the vanilla cake slice when sliced by a knife.
 	public static final TagKey<Block> DROPS_CAKE_SLICE = modBlockTag("drops_cake_slice");
+
+	// -- Items --
+
+	// Items which are compatible with the Backstabbing enchantment. Populated by #tools/knives.
+	public static final TagKey<Item> ENCHANTABLE_KNIFE = modItemTag("enchantable/knife");
 
 	// Items that represent the wild form of a farmable crop.
 	public static final TagKey<Item> WILD_CROPS_ITEM = modItemTag("wild_crops");

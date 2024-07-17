@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.common.crafting.ingredient;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.item.ItemStack;
@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 @MethodsReturnNonnullByDefault
 public record ItemAbilityIngredient(ItemAbility itemAbility) implements ICustomIngredient
 {
-	public static final Codec<ItemAbilityIngredient> CODEC = RecordCodecBuilder.create(inst ->
+	public static final MapCodec<ItemAbilityIngredient> CODEC = RecordCodecBuilder.mapCodec(inst ->
 			inst.group(ItemAbility.CODEC.fieldOf("action").forGetter(ItemAbilityIngredient::getItemAbility)
 			).apply(inst, ItemAbilityIngredient::new));
 

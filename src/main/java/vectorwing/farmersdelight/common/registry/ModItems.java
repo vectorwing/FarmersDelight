@@ -31,6 +31,10 @@ public class ModItems
 		return new Item.Properties();
 	}
 
+	public static Item.Properties knifeItem(Tier tier) {
+		return new Item.Properties().attributes(KnifeItem.createAttributes(tier, 0.5F, -2.0F));
+	}
+
 	public static Item.Properties foodItem(FoodProperties food) {
 		return new Item.Properties().food(food);
 	}
@@ -49,7 +53,7 @@ public class ModItems
 	public static final Supplier<Item> COOKING_POT = registerWithTab("cooking_pot",
 			() -> new CookingPotItem(ModBlocks.COOKING_POT.get(), basicItem().stacksTo(1)));
 	public static final Supplier<Item> SKILLET = registerWithTab("skillet",
-			() -> new SkilletItem(ModBlocks.SKILLET.get(), basicItem().stacksTo(1)));
+			() -> new SkilletItem(ModBlocks.SKILLET.get(), basicItem().stacksTo(1).attributes(SkilletItem.createAttributes(SkilletItem.SKILLET_TIER, 5.0F, -3.1F))));
 	public static final Supplier<Item> CUTTING_BOARD = registerWithTab("cutting_board",
 			() -> new FuelBlockItem(ModBlocks.CUTTING_BOARD.get(), basicItem(), 200));
 	public static final Supplier<Item> BASKET = registerWithTab("basket",
@@ -203,15 +207,15 @@ public class ModItems
 
 	// Tools
 	public static final Supplier<Item> FLINT_KNIFE = registerWithTab("flint_knife",
-			() -> new KnifeItem(ModMaterials.FLINT, 0.5F, -2.0F, basicItem()));
+			() -> new KnifeItem(ModMaterials.FLINT, knifeItem(ModMaterials.FLINT)));
 	public static final Supplier<Item> IRON_KNIFE = registerWithTab("iron_knife",
-			() -> new KnifeItem(Tiers.IRON, 0.5F, -2.0F, basicItem()));
+			() -> new KnifeItem(Tiers.IRON, knifeItem(Tiers.IRON)));
 	public static final Supplier<Item> DIAMOND_KNIFE = registerWithTab("diamond_knife",
-			() -> new KnifeItem(Tiers.DIAMOND, 0.5F, -2.0F, basicItem()));
+			() -> new KnifeItem(Tiers.DIAMOND, knifeItem(Tiers.DIAMOND)));
 	public static final Supplier<Item> NETHERITE_KNIFE = registerWithTab("netherite_knife",
-			() -> new KnifeItem(Tiers.NETHERITE, 0.5F, -2.0F, basicItem().fireResistant()));
+			() -> new KnifeItem(Tiers.NETHERITE, knifeItem(Tiers.NETHERITE).fireResistant()));
 	public static final Supplier<Item> GOLDEN_KNIFE = registerWithTab("golden_knife",
-			() -> new KnifeItem(Tiers.GOLD, 0.5F, -2.0F, basicItem()));
+			() -> new KnifeItem(Tiers.GOLD, knifeItem(Tiers.GOLD)));
 
 	public static final Supplier<Item> STRAW = registerWithTab("straw", () -> new FuelItem(basicItem()));
 	public static final Supplier<Item> CANVAS = registerWithTab("canvas", () -> new FuelItem(basicItem(), 400));

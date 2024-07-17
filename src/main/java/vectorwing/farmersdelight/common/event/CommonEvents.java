@@ -40,16 +40,6 @@ public class CommonEvents
 		}
 	}
 
-	@SubscribeEvent
-	public static void onModifyDefaultComponents(ModifyDefaultComponentsEvent event) {
-		if (Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) {
-			Configuration.SOUP_ITEM_LIST.get().forEach((key) -> {
-				Item item = BuiltInRegistries.ITEM.get(ResourceLocation.parse(key));
-				event.modify(item, (builder) -> builder.set(DataComponents.MAX_STACK_SIZE, 16));
-			});
-		}
-	}
-
 //	@SubscribeEvent
 //	public static void onAnimalsJoinWorld(EntityJoinLevelEvent event) {
 //		if (event.getEntity() instanceof PathfinderMob mob) {

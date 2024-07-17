@@ -5,6 +5,7 @@ import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.entity.DispenserBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,13 +23,13 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 public abstract class CuttingBoardDispenserMixin
 {
 	@Shadow
-	protected abstract DispenseItemBehavior getDispenseMethod(ItemStack stack);
+	protected abstract DispenseItemBehavior getDispenseMethod(Level level, ItemStack stack);
 
 	@Inject(
 			method = "dispenseFrom",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/world/level/block/DispenserBlock;getDispenseMethod(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/core/dispenser/DispenseItemBehavior;"
+					target = "Lnet/minecraft/world/level/block/DispenserBlock;getDispenseMethod(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/core/dispenser/DispenseItemBehavior;"
 			),
 			locals = LocalCapture.CAPTURE_FAILHARD,
 			cancellable = true

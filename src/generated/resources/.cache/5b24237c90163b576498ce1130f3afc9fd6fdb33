@@ -1,4 +1,4 @@
-// 1.21	2024-07-16T23:55:21.6754065	Tags for minecraft:item mod id farmersdelight
+// 1.21	2024-07-17T11:05:24.1681335	Tags for minecraft:item mod id farmersdelight
 65eba9e0353834055ff822059bd7e1784fe218ad data/createaddition/tags/item/plants.json
 f55c336a7c0c249fc90b76c979cfa5d5f6a277bf data/createaddition/tags/item/plant_foods.json
 0c943816d6d2fa986a587d5c13c7d38aaed8e159 data/create/tags/item/upright_on_belt.json
@@ -6,6 +6,7 @@ fe1b67980607d49c51c0e28a5e1833ccf82bdd9a data/farmersdelight/tags/item/cabbage_r
 21d6792ce7de98e9396c3829ab52f8574595557b data/farmersdelight/tags/item/cabinets.json
 19fcfae5f5396dfec4a1ca0d53473ceec4d202c0 data/farmersdelight/tags/item/cabinets/wooden.json
 f689dbe322491c7ad7b7aa512fbd981bc4d7ec45 data/farmersdelight/tags/item/canvas_signs.json
+b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/farmersdelight/tags/item/enchantable/knife.json
 573af7240d931c25837df7bf140759f86076b288 data/farmersdelight/tags/item/flat_on_cutting_board.json
 859810b0bf4f36e275af5b6a86c3c7b9a968dbd3 data/farmersdelight/tags/item/hanging_canvas_signs.json
 a178cef1ad784b00218c2a07edacc3cc97c79e0c data/farmersdelight/tags/item/offhand_equipment.json

@@ -3,7 +3,7 @@
   "conditions": [
     {
       "condition": "minecraft:entity_properties",
-      "entity": "killer",
+      "entity": "attacker",
       "predicate": {
         "equipment": {
           "mainhand": {
@@ -29,9 +29,14 @@
       }
     },
     {
-      "condition": "minecraft:random_chance_with_looting",
-      "chance": 0.5,
-      "looting_multiplier": 0.1
+      "condition": "minecraft:random_chance_with_enchanted_bonus",
+      "enchantment": "minecraft:looting",
+      "unenchanted_chance": 0.5,
+      "enchanted_chance": {
+        "type": "minecraft:linear",
+        "base": 0.6,
+        "per_level_above_first": 0.1
+      }
     }
   ],
   "item": "farmersdelight:ham"

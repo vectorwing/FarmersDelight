@@ -3,7 +3,7 @@
   "conditions": [
     {
       "condition": "minecraft:entity_properties",
-      "entity": "killer",
+      "entity": "attacker",
       "predicate": {
         "equipment": {
           "mainhand": {
