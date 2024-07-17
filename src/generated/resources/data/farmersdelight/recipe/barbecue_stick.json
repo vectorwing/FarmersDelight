@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "forge:crops/tomato"
+    },
+    {
+      "tag": "forge:crops/onion"
+    },
+    [
+      {
+        "tag": "forge:cooked_beef"
+      },
+      {
+        "tag": "forge:cooked_pork"
+      },
+      {
+        "tag": "forge:cooked_chicken"
+      },
+      {
+        "tag": "forge:cooked_mutton"
+      },
+      {
+        "tag": "forge:cooked_fishes"
+      },
+      {
+        "item": "minecraft:cooked_rabbit"
+      }
+    ],
+    {
+      "item": "minecraft:stick"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:barbecue_stick"
+  }
+}

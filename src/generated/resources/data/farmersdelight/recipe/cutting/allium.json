@@ -1,0 +1,19 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:allium"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 2,
+        "id": "minecraft:magenta_dye"
+      }
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}

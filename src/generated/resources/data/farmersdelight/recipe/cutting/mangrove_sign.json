@@ -1,0 +1,20 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:mangrove_sign"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 1,
+        "id": "minecraft:mangrove_planks"
+      }
+    }
+  ],
+  "tool": {
+    "type": "farmersdelight:item_ability",
+    "action": "axe_dig"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "canvas_sign",
+  "ingredients": [
+    {
+      "tag": "farmersdelight:canvas_signs"
+    },
+    {
+      "tag": "c:dyes/purple"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:purple_canvas_sign"
+  }
+}

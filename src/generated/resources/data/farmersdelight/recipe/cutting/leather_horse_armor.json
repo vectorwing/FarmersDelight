@@ -1,0 +1,19 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:leather_horse_armor"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 2,
+        "id": "minecraft:leather"
+      }
+    }
+  ],
+  "tool": {
+    "tag": "c:tools/shear"
+  }
+}

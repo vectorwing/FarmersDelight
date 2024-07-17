@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:birch_trapdoor"
+    },
+    "_": {
+      "item": "minecraft:birch_slab"
+    }
+  },
+  "pattern": [
+    "___",
+    "D D",
+    "___"
+  ],
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:birch_cabinet"
+  }
+}

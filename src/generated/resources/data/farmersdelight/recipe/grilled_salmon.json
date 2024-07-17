@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "forge:cooked_fishes/salmon"
+    },
+    {
+      "item": "minecraft:sweet_berries"
+    },
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "tag": "forge:crops/cabbage"
+    },
+    {
+      "tag": "forge:crops/onion"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:grilled_salmon"
+  }
+}

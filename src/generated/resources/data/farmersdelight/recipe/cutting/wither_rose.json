@@ -1,0 +1,19 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:wither_rose"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 2,
+        "id": "minecraft:black_dye"
+      }
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "farmersdelight:main/place_organic_compost",
+  "criteria": {
+    "get_rich_soil": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:rich_soil"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "farmersdelight.advancement.get_rich_soil.desc"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "farmersdelight:rich_soil"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.get_rich_soil"
+    }
+  },
+  "requirements": [
+    [
+      "get_rich_soil"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

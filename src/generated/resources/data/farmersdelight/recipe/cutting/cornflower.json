@@ -1,0 +1,19 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:cornflower"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 2,
+        "id": "minecraft:blue_dye"
+      }
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}

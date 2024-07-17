@@ -1,0 +1,20 @@
+{
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "item": "farmersdelight:minced_beef"
+    },
+    {
+      "tag": "forge:pasta"
+    },
+    {
+      "item": "farmersdelight:tomato_sauce"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:pasta_with_meatballs"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:cherry_door"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 1,
+        "id": "minecraft:cherry_planks"
+      }
+    }
+  ],
+  "tool": {
+    "type": "farmersdelight:item_ability",
+    "action": "axe_dig"
+  }
+}

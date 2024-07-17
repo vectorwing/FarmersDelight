@@ -1,0 +1,23 @@
+{
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "tag": "forge:raw_chicken"
+    },
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "tag": "forge:salad_ingredients"
+    },
+    {
+      "tag": "forge:vegetables"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:chicken_soup"
+  }
+}

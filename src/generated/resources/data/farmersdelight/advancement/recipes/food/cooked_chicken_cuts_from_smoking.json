@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "cooked_chicken_cuts": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:chicken_cuts"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "farmersdelight:cooked_chicken_cuts_from_smoking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "cooked_chicken_cuts"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "farmersdelight:cooked_chicken_cuts_from_smoking"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "fried_egg": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:egg"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "farmersdelight:fried_egg_from_smoking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "fried_egg"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "farmersdelight:fried_egg_from_smoking"
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "farmersdelight:apple_pie"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 4,
+        "id": "farmersdelight:apple_pie_slice"
+      }
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}

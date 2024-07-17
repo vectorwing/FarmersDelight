@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "farmersdelight:canvas"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "w": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "w#w",
+    "w#w",
+    " / "
+  ],
+  "result": {
+    "count": 3,
+    "id": "farmersdelight:canvas_sign"
+  }
+}

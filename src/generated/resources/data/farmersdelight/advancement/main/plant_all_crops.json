@@ -1,0 +1,290 @@
+{
+  "parent": "farmersdelight:main/plant_rice",
+  "criteria": {
+    "beetroot": {
+      "conditions": {
+        "location": [
+          {
+            "block": "minecraft:beetroots",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "brown_mushroom": {
+      "conditions": {
+        "location": [
+          {
+            "block": "minecraft:brown_mushroom",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "cabbage": {
+      "conditions": {
+        "location": [
+          {
+            "block": "farmersdelight:cabbages",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "carrot": {
+      "conditions": {
+        "location": [
+          {
+            "block": "minecraft:carrots",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "chorus_flower": {
+      "conditions": {
+        "location": [
+          {
+            "block": "minecraft:chorus_flower",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "cocoa": {
+      "conditions": {
+        "location": [
+          {
+            "block": "minecraft:cocoa",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "glow_berries": {
+      "conditions": {
+        "location": [
+          {
+            "block": "minecraft:cave_vines",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "kelp": {
+      "conditions": {
+        "location": [
+          {
+            "block": "minecraft:kelp",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "melon": {
+      "conditions": {
+        "location": [
+          {
+            "block": "minecraft:melon_stem",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "nether_wart": {
+      "conditions": {
+        "location": [
+          {
+            "block": "minecraft:nether_wart",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "onion": {
+      "conditions": {
+        "location": [
+          {
+            "block": "farmersdelight:onions",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "potato": {
+      "conditions": {
+        "location": [
+          {
+            "block": "minecraft:potatoes",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "pumpkin": {
+      "conditions": {
+        "location": [
+          {
+            "block": "minecraft:pumpkin_stem",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "red_mushroom": {
+      "conditions": {
+        "location": [
+          {
+            "block": "minecraft:red_mushroom",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "rice": {
+      "conditions": {
+        "location": [
+          {
+            "block": "farmersdelight:rice",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "sugar_cane": {
+      "conditions": {
+        "location": [
+          {
+            "block": "minecraft:sugar_cane",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "sweet_berries": {
+      "conditions": {
+        "location": [
+          {
+            "block": "minecraft:sweet_berry_bush",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "tomato": {
+      "conditions": {
+        "location": [
+          {
+            "block": "farmersdelight:budding_tomatoes",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "wheat": {
+      "conditions": {
+        "location": [
+          {
+            "block": "minecraft:wheat",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "farmersdelight.advancement.plant_all_crops.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "farmersdelight:cabbage"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.plant_all_crops"
+    }
+  },
+  "requirements": [
+    [
+      "wheat"
+    ],
+    [
+      "beetroot"
+    ],
+    [
+      "carrot"
+    ],
+    [
+      "potato"
+    ],
+    [
+      "cabbage"
+    ],
+    [
+      "tomato"
+    ],
+    [
+      "onion"
+    ],
+    [
+      "rice"
+    ],
+    [
+      "melon"
+    ],
+    [
+      "pumpkin"
+    ],
+    [
+      "sweet_berries"
+    ],
+    [
+      "sugar_cane"
+    ],
+    [
+      "kelp"
+    ],
+    [
+      "cocoa"
+    ],
+    [
+      "nether_wart"
+    ],
+    [
+      "chorus_flower"
+    ],
+    [
+      "brown_mushroom"
+    ],
+    [
+      "red_mushroom"
+    ],
+    [
+      "glow_berries"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

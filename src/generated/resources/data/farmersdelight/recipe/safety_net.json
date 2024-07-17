@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "r": {
+      "item": "farmersdelight:rope"
+    }
+  },
+  "pattern": [
+    "rr",
+    "rr"
+  ],
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:safety_net"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "tag": "forge:raw_fishes"
+    },
+    {
+      "tag": "forge:pasta"
+    },
+    {
+      "tag": "forge:crops/tomato"
+    },
+    {
+      "item": "minecraft:ink_sac"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:squid_ink_pasta"
+  }
+}

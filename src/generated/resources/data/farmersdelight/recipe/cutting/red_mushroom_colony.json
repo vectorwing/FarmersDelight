@@ -1,0 +1,19 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "farmersdelight:red_mushroom_colony"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 5,
+        "id": "minecraft:red_mushroom"
+      }
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}

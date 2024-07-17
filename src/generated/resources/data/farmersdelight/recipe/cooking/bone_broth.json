@@ -1,0 +1,31 @@
+{
+  "type": "farmersdelight:cooking",
+  "experience": 0.35,
+  "ingredients": [
+    {
+      "tag": "c:bones"
+    },
+    {
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "item": "minecraft:glow_berries"
+        },
+        {
+          "tag": "c:mushrooms"
+        },
+        {
+          "item": "minecraft:hanging_roots"
+        },
+        {
+          "item": "minecraft:glow_lichen"
+        }
+      ]
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:bone_broth"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "seeds": {
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:textures/block/bricks.png",
+    "description": {
+      "translate": "farmersdelight.advancement.root.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "farmersdelight:cooking_pot"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "farmersdelight.advancement.root"
+    }
+  },
+  "requirements": [
+    [
+      "seeds"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,45 @@
+{
+  "parent": "farmersdelight:main/get_fd_seed",
+  "criteria": {
+    "brown_mushroom_colony": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:brown_mushroom_colony"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "red_mushroom_colony": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:red_mushroom_colony"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "farmersdelight.advancement.get_mushroom_colony.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "farmersdelight:red_mushroom_colony"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.get_mushroom_colony"
+    }
+  },
+  "requirements": [
+    [
+      "brown_mushroom_colony",
+      "red_mushroom_colony"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,20 @@
+{
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "tag": "forge:raw_fishes"
+    },
+    {
+      "item": "farmersdelight:tomato_sauce"
+    },
+    {
+      "tag": "forge:crops/onion"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:fish_stew"
+  }
+}

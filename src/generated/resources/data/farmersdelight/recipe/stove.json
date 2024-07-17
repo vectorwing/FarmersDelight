@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:bricks"
+    },
+    "C": {
+      "item": "minecraft:campfire"
+    },
+    "i": {
+      "tag": "c:ingots/iron"
+    }
+  },
+  "pattern": [
+    "iii",
+    "B B",
+    "BCB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:stove"
+  }
+}

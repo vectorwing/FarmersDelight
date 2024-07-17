@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "cooked_bacon": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:bacon"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "farmersdelight:cooked_bacon_from_smoking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "cooked_bacon"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "farmersdelight:cooked_bacon_from_smoking"
+    ]
+  }
+}

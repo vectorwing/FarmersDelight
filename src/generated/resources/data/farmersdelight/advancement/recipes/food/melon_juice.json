@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_melon_slice": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:melon_slice"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "farmersdelight:melon_juice"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_melon_slice"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "farmersdelight:melon_juice"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bacon": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:cooked_bacon"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "farmersdelight:bacon_sandwich"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_bacon"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "farmersdelight:bacon_sandwich"
+    ]
+  }
+}

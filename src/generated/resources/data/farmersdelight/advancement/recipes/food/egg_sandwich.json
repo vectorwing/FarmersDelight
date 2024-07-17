@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_fried_egg": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:fried_egg"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "farmersdelight:egg_sandwich"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_fried_egg"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "farmersdelight:egg_sandwich"
+    ]
+  }
+}

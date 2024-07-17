@@ -1,0 +1,33 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "farmersdelight:wild_tomatoes"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 1,
+        "id": "farmersdelight:tomato_seeds"
+      }
+    },
+    {
+      "chance": 0.2,
+      "item": {
+        "count": 1,
+        "id": "farmersdelight:tomato"
+      }
+    },
+    {
+      "chance": 0.1,
+      "item": {
+        "count": 1,
+        "id": "minecraft:green_dye"
+      }
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}

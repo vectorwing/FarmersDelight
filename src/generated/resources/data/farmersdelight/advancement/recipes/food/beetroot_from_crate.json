@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_beetroot_crate": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:beetroot_crate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "farmersdelight:beetroot_from_crate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_beetroot_crate"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "farmersdelight:beetroot_from_crate"
+    ]
+  }
+}

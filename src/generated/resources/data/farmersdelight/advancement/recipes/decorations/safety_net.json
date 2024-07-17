@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rope": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:rope"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "farmersdelight:safety_net"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_rope"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "farmersdelight:safety_net"
+    ]
+  }
+}

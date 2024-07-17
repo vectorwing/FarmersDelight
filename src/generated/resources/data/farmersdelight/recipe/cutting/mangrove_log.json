@@ -1,0 +1,29 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:mangrove_log"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 1,
+        "id": "minecraft:stripped_mangrove_log"
+      }
+    },
+    {
+      "item": {
+        "count": 1,
+        "id": "farmersdelight:tree_bark"
+      }
+    }
+  ],
+  "sound": {
+    "sound_id": "minecraft:item.axe.strip"
+  },
+  "tool": {
+    "type": "farmersdelight:item_ability",
+    "action": "axe_strip"
+  }
+}

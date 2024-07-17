@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "forge:bread"
+    },
+    {
+      "tag": "forge:cooked_bacon"
+    },
+    {
+      "tag": "forge:salad_ingredients"
+    },
+    {
+      "tag": "forge:crops/tomato"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:bacon_sandwich"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_birch_trapdoor": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:birch_trapdoor"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "farmersdelight:birch_cabinet"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_birch_trapdoor"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "farmersdelight:birch_cabinet"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:cooked_cod"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 2,
+        "id": "farmersdelight:cooked_cod_slice"
+      }
+    },
+    {
+      "item": {
+        "count": 1,
+        "id": "minecraft:bone_meal"
+      }
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}

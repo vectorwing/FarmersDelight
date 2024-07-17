@@ -1,0 +1,23 @@
+{
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "tag": "forge:crops/tomato"
+    },
+    {
+      "tag": "forge:crops/onion"
+    },
+    {
+      "item": "minecraft:beetroot"
+    },
+    {
+      "tag": "forge:vegetables"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:ratatouille"
+  }
+}

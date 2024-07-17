@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "farmersdelight:tree_bark"
+    },
+    {
+      "item": "farmersdelight:tree_bark"
+    },
+    {
+      "item": "farmersdelight:tree_bark"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:paper"
+  }
+}

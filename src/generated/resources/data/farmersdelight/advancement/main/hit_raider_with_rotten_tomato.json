@@ -1,0 +1,50 @@
+{
+  "parent": "farmersdelight:main/harvest_ropelogged_tomato",
+  "criteria": {
+    "hit_raider_with_rotten_tomato": {
+      "conditions": {
+        "damage": {
+          "type": {
+            "direct_entity": {
+              "type": "farmersdelight:rotten_tomato"
+            },
+            "tags": [
+              {
+                "expected": true,
+                "id": "minecraft:is_projectile"
+              }
+            ]
+          }
+        },
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "#minecraft:raiders"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_hurt_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "farmersdelight.advancement.hit_raider_with_rotten_tomato.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "farmersdelight:rotten_tomato"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.hit_raider_with_rotten_tomato"
+    }
+  },
+  "requirements": [
+    [
+      "hit_raider_with_rotten_tomato"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

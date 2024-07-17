@@ -1,0 +1,77 @@
+{
+  "parent": "farmersdelight:main/root",
+  "criteria": {
+    "diamond_knife": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:diamond_knife"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "flint_knife": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:flint_knife"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "golden_knife": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:golden_knife"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "iron_knife": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:iron_knife"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "netherite_knife": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:netherite_knife"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "farmersdelight.advancement.craft_knife.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "farmersdelight:flint_knife"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.craft_knife"
+    }
+  },
+  "requirements": [
+    [
+      "flint_knife",
+      "iron_knife",
+      "diamond_knife",
+      "golden_knife",
+      "netherite_knife"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

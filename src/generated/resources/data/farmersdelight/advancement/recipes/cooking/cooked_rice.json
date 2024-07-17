@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rice": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:rice"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "farmersdelight:cooking/cooked_rice"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_rice"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "farmersdelight:cooking/cooked_rice"
+    ]
+  }
+}

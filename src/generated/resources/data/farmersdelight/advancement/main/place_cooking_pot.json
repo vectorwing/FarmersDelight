@@ -1,0 +1,35 @@
+{
+  "parent": "farmersdelight:main/place_campfire",
+  "criteria": {
+    "cooking_pot": {
+      "conditions": {
+        "location": [
+          {
+            "block": "farmersdelight:cooking_pot",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "farmersdelight.advancement.place_cooking_pot.desc"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "farmersdelight:cooking_pot"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.place_cooking_pot"
+    }
+  },
+  "requirements": [
+    [
+      "cooking_pot"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

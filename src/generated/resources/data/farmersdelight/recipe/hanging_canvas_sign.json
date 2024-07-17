@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "farmersdelight:canvas"
+    },
+    "X": {
+      "item": "minecraft:chain"
+    },
+    "w": {
+      "tag": "minecraft:logs"
+    }
+  },
+  "pattern": [
+    "X X",
+    "w#w",
+    "w#w"
+  ],
+  "result": {
+    "count": 6,
+    "id": "farmersdelight:hanging_canvas_sign"
+  }
+}

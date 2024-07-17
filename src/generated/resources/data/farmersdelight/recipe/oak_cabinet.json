@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:oak_trapdoor"
+    },
+    "_": {
+      "item": "minecraft:oak_slab"
+    }
+  },
+  "pattern": [
+    "___",
+    "D D",
+    "___"
+  ],
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:oak_cabinet"
+  }
+}

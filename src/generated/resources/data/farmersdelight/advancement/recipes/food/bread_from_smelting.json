@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dough": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:wheat_dough"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "farmersdelight:bread_from_smelting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_dough"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "farmersdelight:bread_from_smelting"
+    ]
+  }
+}

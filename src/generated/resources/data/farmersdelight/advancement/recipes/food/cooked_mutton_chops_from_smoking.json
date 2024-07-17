@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "cooked_mutton_chops": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:mutton_chops"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "farmersdelight:cooked_mutton_chops_from_smoking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "cooked_mutton_chops"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "farmersdelight:cooked_mutton_chops_from_smoking"
+    ]
+  }
+}

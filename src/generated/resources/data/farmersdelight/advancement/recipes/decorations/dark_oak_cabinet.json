@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dark_oak_trapdoor": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:dark_oak_trapdoor"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "farmersdelight:dark_oak_cabinet"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_dark_oak_trapdoor"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "farmersdelight:dark_oak_cabinet"
+    ]
+  }
+}

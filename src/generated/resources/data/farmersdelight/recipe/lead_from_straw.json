@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "s": {
+      "item": "farmersdelight:straw"
+    }
+  },
+  "pattern": [
+    "ss ",
+    "ss ",
+    "  s"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:lead"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "farmersdelight:main/place_campfire",
+  "criteria": {
+    "skillet": {
+      "conditions": {
+        "item": {
+          "items": "farmersdelight:skillet"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "farmersdelight.advancement.use_skillet.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "farmersdelight:skillet"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.use_skillet"
+    }
+  },
+  "requirements": [
+    [
+      "skillet"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

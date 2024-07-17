@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "cookingtime": 100,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "farmersdelight:bacon"
+  },
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:cooked_bacon"
+  }
+}

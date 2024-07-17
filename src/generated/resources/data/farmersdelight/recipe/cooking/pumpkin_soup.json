@@ -1,0 +1,23 @@
+{
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "item": "farmersdelight:pumpkin_slice"
+    },
+    {
+      "tag": "forge:salad_ingredients"
+    },
+    {
+      "tag": "forge:raw_pork"
+    },
+    {
+      "tag": "forge:milk"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:pumpkin_soup"
+  }
+}

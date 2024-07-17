@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "hanging_canvas_sign",
+  "ingredients": [
+    {
+      "tag": "farmersdelight:hanging_canvas_signs"
+    },
+    {
+      "tag": "c:dyes/green"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:green_hanging_canvas_sign"
+  }
+}

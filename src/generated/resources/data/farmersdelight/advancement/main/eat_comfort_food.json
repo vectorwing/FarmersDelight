@@ -1,0 +1,32 @@
+{
+  "parent": "farmersdelight:main/place_cooking_pot",
+  "criteria": {
+    "comfort": {
+      "conditions": {
+        "effects": {
+          "farmersdelight:comfort": {}
+        }
+      },
+      "trigger": "minecraft:effects_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "farmersdelight.advancement.eat_comfort_food.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "farmersdelight:baked_cod_stew"
+    },
+    "title": {
+      "translate": "farmersdelight.advancement.eat_comfort_food"
+    }
+  },
+  "requirements": [
+    [
+      "comfort"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

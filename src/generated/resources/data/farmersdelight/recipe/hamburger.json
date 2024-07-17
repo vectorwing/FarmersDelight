@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "forge:bread"
+    },
+    {
+      "item": "farmersdelight:beef_patty"
+    },
+    {
+      "tag": "forge:salad_ingredients"
+    },
+    {
+      "tag": "forge:crops/tomato"
+    },
+    {
+      "tag": "forge:crops/onion"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:hamburger"
+  }
+}
