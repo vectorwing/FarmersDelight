@@ -87,7 +87,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 
 		if (isItemCarvingBoard) return false;
 
-		Optional<RecipeHolder<CuttingBoardRecipe>> matchingRecipe = getMatchingRecipe(new SingleRecipeInput(getStoredItem()), toolStack, player);
+		Optional<RecipeHolder<CuttingBoardRecipe>> matchingRecipe = getMatchingRecipe(toolStack, player);
 
 		matchingRecipe.ifPresent(recipe -> {
 			List<ItemStack> results = recipe.value().rollResults(level.random, EnchantmentHelper.getTagEnchantmentLevel(level.holder(Enchantments.FORTUNE).get(), toolStack));

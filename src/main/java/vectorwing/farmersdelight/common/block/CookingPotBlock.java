@@ -4,14 +4,13 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -74,9 +73,7 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player,
-								 InteractionHand hand, BlockHitResult result) {
-		ItemStack heldStack = player.getItemInHand(hand);
+	public ItemInteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		if (heldStack.isEmpty() && player.isShiftKeyDown()) {
 			level.setBlockAndUpdate(pos, state.setValue(SUPPORT, state.getValue(SUPPORT).equals(CookingPotSupport.HANDLE)
 					? getTrayState(level, pos) : CookingPotSupport.HANDLE));
@@ -89,14 +86,14 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 					if (!player.getInventory().add(servingStack)) {
 						player.drop(servingStack, false);
 					}
-					level.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.BLOCKS, 1.0F, 1.0F);
+					level.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC.value(), SoundSource.BLOCKS, 1.0F, 1.0F);
 				} else {
 					player.openMenu(cookingPotEntity, pos);
 				}
 			}
-			return InteractionResult.SUCCESS;
+			return ItemInteractionResult.SUCCESS;
 		}
-		return InteractionResult.SUCCESS;
+		return ItemInteractionResult.SUCCESS;
 	}
 
 	@Override
@@ -151,17 +148,23 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 	@Override
 	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
 		ItemStack stack = super.getCloneItemStack(level, pos, state);
-		CookingPotBlockEntity cookingPotEntity = (CookingPotBlockEntity) level.getBlockEntity(pos);
-		if (cookingPotEntity != null) {
-			CompoundTag nbt = cookingPotEntity.writeMeal(new CompoundTag());
-			if (!nbt.isEmpty()) {
-				stack.addTagElement("BlockEntityTag", nbt);
-			}
-			if (cookingPotEntity.hasCustomName()) {
-				stack.setHoverName(cookingPotEntity.getCustomName());
-			}
-		}
+
+		level.getBlockEntity(pos, ModBlockEntityTypes.COOKING_POT.get()).ifPresent((blockEntity) -> {
+			blockEntity.saveToItem(stack, level.registryAccess());
+		});
+
 		return stack;
+
+//		CookingPotBlockEntity cookingPotEntity = (CookingPotBlockEntity) level.getBlockEntity(pos);
+//		if (cookingPotEntity != null) {
+//			CompoundTag nbt = cookingPotEntity.writeMeal(new CompoundTag());
+//			if (!nbt.isEmpty()) {
+//				stack.addTagElement("BlockEntityTag", nbt);
+//			}
+//			if (cookingPotEntity.hasCustomName()) {
+//				stack.setHoverName(cookingPotEntity.getCustomName());
+//			}
+//		}
 	}
 
 	@Override
@@ -184,15 +187,15 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 		builder.add(FACING, SUPPORT, WATERLOGGED);
 	}
 
-	@Override
-	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-		if (stack.hasCustomHoverName()) {
-			BlockEntity tileEntity = level.getBlockEntity(pos);
-			if (tileEntity instanceof CookingPotBlockEntity) {
-				((CookingPotBlockEntity) tileEntity).setCustomName(stack.getHoverName());
-			}
-		}
-	}
+//	@Override
+//	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+//		if (stack.hasCustomHoverName()) {
+//			BlockEntity tileEntity = level.getBlockEntity(pos);
+//			if (tileEntity instanceof CookingPotBlockEntity) {
+//				((CookingPotBlockEntity) tileEntity).setCustomName(stack.getHoverName());
+//			}
+//		}
+//	}
 
 	@Override
 	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
