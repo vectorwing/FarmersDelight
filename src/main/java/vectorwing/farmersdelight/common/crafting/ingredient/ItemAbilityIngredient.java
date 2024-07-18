@@ -3,7 +3,9 @@ package vectorwing.farmersdelight.common.crafting.ingredient;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.crafting.ICustomIngredient;
 import net.neoforged.neoforge.common.crafting.IngredientType;
@@ -18,11 +20,26 @@ import java.util.stream.Stream;
  */
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public record ItemAbilityIngredient(ItemAbility itemAbility) implements ICustomIngredient
+public class ItemAbilityIngredient implements ICustomIngredient
 {
 	public static final MapCodec<ItemAbilityIngredient> CODEC = RecordCodecBuilder.mapCodec(inst ->
 			inst.group(ItemAbility.CODEC.fieldOf("action").forGetter(ItemAbilityIngredient::getItemAbility)
 			).apply(inst, ItemAbilityIngredient::new));
+
+	protected final ItemAbility itemAbility;
+	protected Stream<ItemStack> itemStacks;
+
+	public ItemAbilityIngredient(ItemAbility itemAbility) {
+		this.itemAbility = itemAbility;
+	}
+
+	protected void dissolve() {
+		if (this.itemStacks == null) {
+			itemStacks = BuiltInRegistries.ITEM.stream()
+					.map(ItemStack::new)
+					.filter(stack -> stack.canPerformAction(itemAbility));
+		}
+	}
 
 	@Override
 	public boolean test(@Nullable ItemStack stack) {
@@ -31,7 +48,8 @@ public record ItemAbilityIngredient(ItemAbility itemAbility) implements ICustomI
 
 	@Override
 	public Stream<ItemStack> getItems() {
-		return Stream.empty();
+		dissolve();
+		return itemStacks;
 	}
 
 	@Override

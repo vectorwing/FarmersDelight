@@ -199,7 +199,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 			inputItemsIn.replaceAll(ignored -> Ingredient.CONTENTS_STREAM_CODEC.decode(buffer));
 
 			ItemStack outputIn = ItemStack.STREAM_CODEC.decode(buffer);
-			ItemStack container = ItemStack.STREAM_CODEC.decode(buffer);
+			ItemStack container = ItemStack.OPTIONAL_STREAM_CODEC.decode(buffer);
 			float experienceIn = buffer.readFloat();
 			int cookTimeIn = buffer.readVarInt();
 			return new CookingPotRecipe(groupIn, tabIn, inputItemsIn, outputIn, container, experienceIn, cookTimeIn);
@@ -215,7 +215,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 			}
 
 			ItemStack.STREAM_CODEC.encode(buffer, recipe.output);
-			ItemStack.STREAM_CODEC.encode(buffer, recipe.container);
+			ItemStack.OPTIONAL_STREAM_CODEC.encode(buffer, recipe.container);
 			buffer.writeFloat(recipe.experience);
 			buffer.writeVarInt(recipe.cookTime);
 		}

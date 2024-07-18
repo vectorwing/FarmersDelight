@@ -15,7 +15,7 @@ public record ChanceResult(ItemStack stack, float chance)
 {
 	public static final ChanceResult EMPTY = new ChanceResult(ItemStack.EMPTY, 1);
 	public static final Codec<ChanceResult> CODEC = RecordCodecBuilder.create(inst -> inst.group(
-			((MapCodec.MapCodecCodec<ItemStack>) ItemStack.STRICT_CODEC).codec().forGetter(ChanceResult::stack),
+			ItemStack.CODEC.fieldOf("item").forGetter(ChanceResult::stack),
 			Codec.FLOAT.optionalFieldOf("chance", 1.0f).forGetter(ChanceResult::chance)
 	).apply(inst, ChanceResult::new));
 
