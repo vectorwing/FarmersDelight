@@ -1,8 +1,12 @@
 package vectorwing.farmersdelight.common.registry;
 
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
+import org.jetbrains.annotations.NotNull;
 
 public class ModMaterials
 {
@@ -24,8 +28,8 @@ public class ModMaterials
 		}
 
 		@Override
-		public int getLevel() {
-			return 1;
+		public @NotNull TagKey<Block> getIncorrectBlocksForDrops() {
+			return BlockTags.INCORRECT_FOR_WOODEN_TOOL;
 		}
 
 		@Override
@@ -34,7 +38,7 @@ public class ModMaterials
 		}
 
 		@Override
-		public Ingredient getRepairIngredient() {
+		public @NotNull Ingredient getRepairIngredient() {
 			return Ingredient.of(Items.FLINT);
 		}
 	};
