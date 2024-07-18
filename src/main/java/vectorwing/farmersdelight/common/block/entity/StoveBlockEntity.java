@@ -169,7 +169,6 @@ public class StoveBlockEntity extends SyncedBlockEntity
 
 	public Optional<RecipeHolder<CampfireCookingRecipe>> getMatchingRecipe(ItemStack stack, int slot) {
 		if (level == null) return Optional.empty();
-
 		return this.inventory.getStackInSlot(slot).isEmpty() ? Optional.empty() : this.quickCheck.getRecipeFor(new SingleRecipeInput(stack), this.level);
 	}
 

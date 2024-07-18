@@ -13,23 +13,22 @@ import net.neoforged.neoforge.common.ItemAbility;
 import org.openzen.zencode.java.ZenCodeType;
 import vectorwing.farmersdelight.common.crafting.ingredient.ItemAbilityIngredient;
 
-@Document("mods/FarmersDelight/ToolActionIngredient")
+@Document("mods/FarmersDelight/ItemAbilityIngredient")
 @ZenRegister
-@ZenCodeType.Name("mods.farmersdelight.ToolActionIngredient")
-public class CTToolActionIngredient implements IIngredient
+@ZenCodeType.Name("mods.farmersdelight.ItemAbilityIngredient")
+public class CTItemAbilityIngredient implements IIngredient
 {
-
 	public static final String PREFIX = "toolingredient";
 	private final ItemAbilityIngredient ingredient;
 
 	private final IngredientConditions conditions = new IngredientConditions();
 	private final IngredientTransformers transformers = new IngredientTransformers();
 
-	public CTToolActionIngredient(ItemAbility toolAction) {
-		this(new ItemAbilityIngredient(toolAction));
+	public CTItemAbilityIngredient(ItemAbility itemAbility) {
+		this(new ItemAbilityIngredient(itemAbility));
 	}
 
-	public CTToolActionIngredient(ItemAbilityIngredient ingredient) {
+	public CTItemAbilityIngredient(ItemAbilityIngredient ingredient) {
 		this.ingredient = ingredient;
 	}
 
@@ -45,7 +44,7 @@ public class CTToolActionIngredient implements IIngredient
 
 	@Override
 	public String getCommandString() {
-		return "<" + PREFIX + ":" + ingredient.itemAbility().name() + ">";
+		return "<" + PREFIX + ":" + ingredient.getItemAbility().name() + ">";
 	}
 
 	@Override
@@ -69,17 +68,16 @@ public class CTToolActionIngredient implements IIngredient
 	}
 
 
-	@ZenCodeType.Expansion("crafttweaker.api.tool.ToolAction")
+	@ZenCodeType.Expansion("crafttweaker.neoforge.api.item.ItemAbility")
 	@ZenRegister
-	public static class ExpandToolAction
+	public static class ExpandItemAbility
 	{
 		// Support the syntax:
-		// <tooltype:axe> as IIngredient
+		// <itemability:axe_dig> as IIngredient
 		@ZenCodeType.Method
 		@ZenCodeType.Caster(implicit = true)
 		public static IIngredient asIIngredient(ItemAbility internal) {
-			return new CTToolActionIngredient(internal);
+			return new CTItemAbilityIngredient(internal);
 		}
-
 	}
 }

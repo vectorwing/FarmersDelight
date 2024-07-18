@@ -22,7 +22,6 @@ import vectorwing.farmersdelight.common.utility.MathUtils;
 
 import javax.annotation.Nullable;
 
-@SuppressWarnings("deprecation")
 public class RichSoilBlock extends Block
 {
 	public RichSoilBlock(Properties properties) {

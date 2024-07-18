@@ -8,10 +8,7 @@ import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
-
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class CabbageBlock extends CropBlock
 {
@@ -29,11 +26,6 @@ public class CabbageBlock extends CropBlock
 	public CabbageBlock(Properties properties) {
 		super(properties);
 	}
-
-//	@Override
-//	public BlockState getPlant(BlockGetter level, BlockPos pos) {
-//		return ModBlocks.CABBAGE_CROP.get().defaultBlockState();
-//	}
 
 	@Override
 	protected ItemLike getBaseSeedId() {

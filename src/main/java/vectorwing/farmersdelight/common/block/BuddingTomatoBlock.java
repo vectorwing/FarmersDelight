@@ -5,7 +5,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -19,11 +18,6 @@ public class BuddingTomatoBlock extends BuddingBushBlock implements Bonemealable
 {
 	public BuddingTomatoBlock(Properties properties) {
 		super(properties);
-	}
-
-	@Override
-	public BlockState getPlant(BlockGetter world, BlockPos pos) {
-		return ModBlocks.BUDDING_TOMATO_CROP.get().defaultBlockState();
 	}
 
 	@Override

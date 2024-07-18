@@ -36,7 +36,6 @@ public class FarmersDelight
 		ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
 		ModItems.ITEMS.register(modEventBus);
 		ModEntityTypes.ENTITIES.register(modEventBus);
-		ModEnchantments.ENCHANTMENTS.register(modEventBus);
 		ModBlockEntityTypes.TILES.register(modEventBus);
 		ModMenuTypes.MENU_TYPES.register(modEventBus);
 		ModRecipeTypes.RECIPE_TYPES.register(modEventBus);
