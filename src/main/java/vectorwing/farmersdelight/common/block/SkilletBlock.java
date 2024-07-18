@@ -3,14 +3,13 @@ package vectorwing.farmersdelight.common.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -41,6 +40,7 @@ import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 @SuppressWarnings("deprecation")
 public class SkilletBlock extends BaseEntityBlock
@@ -66,7 +66,7 @@ public class SkilletBlock extends BaseEntityBlock
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+	public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		BlockEntity tileEntity = level.getBlockEntity(pos);
 		if (tileEntity instanceof SkilletBlockEntity skilletEntity) {
 			if (!level.isClientSide) {
@@ -77,7 +77,7 @@ public class SkilletBlock extends BaseEntityBlock
 					if (!player.isCreative()) {
 						player.setItemSlot(heldSlot, extractedStack);
 					}
-					return InteractionResult.SUCCESS;
+					return ItemInteractionResult.SUCCESS;
 				} else {
 					ItemStack remainderStack = skilletEntity.addItemToCook(heldStack, player);
 					if (remainderStack.getCount() != heldStack.getCount()) {
@@ -85,13 +85,13 @@ public class SkilletBlock extends BaseEntityBlock
 							player.setItemSlot(heldSlot, remainderStack);
 						}
 						level.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundSource.BLOCKS, 0.7F, 1.0F);
-						return InteractionResult.SUCCESS;
+						return ItemInteractionResult.SUCCESS;
 					}
 				}
 			}
-			return InteractionResult.CONSUME;
+			return ItemInteractionResult.CONSUME;
 		}
-		return InteractionResult.PASS;
+		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 	}
 
 	@Override
@@ -138,16 +138,19 @@ public class SkilletBlock extends BaseEntityBlock
 
 	@Override
 	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+		// TODO: Verify if this works properly on a server.
 		ItemStack stack = super.getCloneItemStack(level, pos, state);
-		SkilletBlockEntity skilletEntity = (SkilletBlockEntity) level.getBlockEntity(pos);
-		CompoundTag nbt = new CompoundTag();
-		if (skilletEntity != null) {
-			skilletEntity.writeSkilletItem(nbt);
-		}
-		if (!nbt.isEmpty()) {
-			stack = ItemStack.of(nbt.getCompound("Skillet"));
-		}
-		return stack;
+		Optional<SkilletBlockEntity> blockEntity = level.getBlockEntity(pos, ModBlockEntityTypes.SKILLET.get());
+		return blockEntity.map(SkilletBlockEntity::getSkilletAsItem).orElse(stack);
+
+//		SkilletBlockEntity skilletEntity = (SkilletBlockEntity) level.getBlockEntity(pos);
+//		CompoundTag nbt = new CompoundTag();
+//		if (skilletEntity != null) {
+//			skilletEntity.writeSkilletItem(nbt);
+//		}
+//		if (!nbt.isEmpty()) {
+//			stack = ItemStack.of(nbt.getCompound("Skillet"));
+//		}
 	}
 
 	@Override

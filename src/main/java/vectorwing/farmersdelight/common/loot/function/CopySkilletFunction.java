@@ -1,9 +1,8 @@
 package vectorwing.farmersdelight.common.loot.function;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -24,7 +23,7 @@ import java.util.List;
 public class CopySkilletFunction extends LootItemConditionalFunction
 {
 	public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "copy_skillet");
-	public static final Codec<CopySkilletFunction> CODEC = RecordCodecBuilder.create(
+	public static final MapCodec<CopySkilletFunction> CODEC = RecordCodecBuilder.mapCodec(
 			p_298131_ -> commonFields(p_298131_).apply(p_298131_, CopySkilletFunction::new)
 	);
 
@@ -39,11 +38,8 @@ public class CopySkilletFunction extends LootItemConditionalFunction
 	@Override
 	protected ItemStack run(ItemStack stack, LootContext context) {
 		BlockEntity tile = context.getParamOrNull(LootContextParams.BLOCK_ENTITY);
-		if (tile instanceof SkilletBlockEntity) {
-			CompoundTag tag = ((SkilletBlockEntity) tile).writeSkilletItem(new CompoundTag());
-			if (!tag.isEmpty()) {
-				stack = ItemStack.of(tag.getCompound("Skillet"));
-			}
+		if (tile instanceof SkilletBlockEntity blockEntity) {
+			stack = blockEntity.getSkilletAsItem();
 		}
 		return stack;
 	}
