@@ -30,7 +30,6 @@ public class StoveBlockEntity extends SyncedBlockEntity
 	private final ItemStackHandler inventory;
 	private final int[] cookingTimes;
 	private final int[] cookingTimesTotal;
-//	private ResourceLocation[] lastRecipeIDs;
 
 	private final RecipeManager.CachedCheck<SingleRecipeInput, CampfireCookingRecipe> quickCheck;
 
@@ -39,7 +38,6 @@ public class StoveBlockEntity extends SyncedBlockEntity
 		inventory = createHandler();
 		cookingTimes = new int[INVENTORY_SLOT_COUNT];
 		cookingTimesTotal = new int[INVENTORY_SLOT_COUNT];
-//		lastRecipeIDs = new ResourceLocation[INVENTORY_SLOT_COUNT];
 		quickCheck = RecipeManager.createCheck(RecipeType.CAMPFIRE_COOKING);
 	}
 
@@ -122,7 +120,7 @@ public class StoveBlockEntity extends SyncedBlockEntity
 			if (!stoveStack.isEmpty()) {
 				++cookingTimes[i];
 				if (cookingTimes[i] >= cookingTimesTotal[i]) {
-					Optional<RecipeHolder<CampfireCookingRecipe>> recipe = getMatchingRecipe(stoveStack, i);
+					Optional<RecipeHolder<CampfireCookingRecipe>> recipe = getMatchingRecipe(stoveStack);
 					if (recipe.isPresent()) {
 						ItemStack resultStack = recipe.get().value().getResultItem(level.registryAccess());
 						if (!resultStack.isEmpty()) {
@@ -159,7 +157,6 @@ public class StoveBlockEntity extends SyncedBlockEntity
 				cookingTimesTotal[slot] = recipe.value().getCookingTime();
 				cookingTimes[slot] = 0;
 				inventory.setStackInSlot(slot, itemStackIn.split(1));
-//				lastRecipeIDs[slot] = recipe.id();
 				inventoryChanged();
 				return true;
 			}
@@ -167,9 +164,9 @@ public class StoveBlockEntity extends SyncedBlockEntity
 		return false;
 	}
 
-	public Optional<RecipeHolder<CampfireCookingRecipe>> getMatchingRecipe(ItemStack stack, int slot) {
+	public Optional<RecipeHolder<CampfireCookingRecipe>> getMatchingRecipe(ItemStack stack) {
 		if (level == null) return Optional.empty();
-		return this.inventory.getStackInSlot(slot).isEmpty() ? Optional.empty() : this.quickCheck.getRecipeFor(new SingleRecipeInput(stack), this.level);
+		return this.quickCheck.getRecipeFor(new SingleRecipeInput(stack), this.level);
 	}
 
 	public ItemStackHandler getInventory() {
