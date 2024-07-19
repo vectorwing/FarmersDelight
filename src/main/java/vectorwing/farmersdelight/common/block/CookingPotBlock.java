@@ -3,7 +3,6 @@ package vectorwing.farmersdelight.common.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -11,7 +10,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -49,6 +47,7 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.MathUtils;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 @SuppressWarnings("deprecation")
 public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
@@ -149,22 +148,12 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
 		ItemStack stack = super.getCloneItemStack(level, pos, state);
 
-		level.getBlockEntity(pos, ModBlockEntityTypes.COOKING_POT.get()).ifPresent((blockEntity) -> {
-			blockEntity.saveToItem(stack, level.registryAccess());
-		});
+		Optional<CookingPotBlockEntity> cookingPot = level.getBlockEntity(pos, ModBlockEntityTypes.COOKING_POT.get());
+		if (cookingPot.isPresent()) {
+			stack = cookingPot.get().getAsItem();
+		}
 
 		return stack;
-
-//		CookingPotBlockEntity cookingPotEntity = (CookingPotBlockEntity) level.getBlockEntity(pos);
-//		if (cookingPotEntity != null) {
-//			CompoundTag nbt = cookingPotEntity.writeMeal(new CompoundTag());
-//			if (!nbt.isEmpty()) {
-//				stack.addTagElement("BlockEntityTag", nbt);
-//			}
-//			if (cookingPotEntity.hasCustomName()) {
-//				stack.setHoverName(cookingPotEntity.getCustomName());
-//			}
-//		}
 	}
 
 	@Override
@@ -186,16 +175,6 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 		super.createBlockStateDefinition(builder);
 		builder.add(FACING, SUPPORT, WATERLOGGED);
 	}
-
-//	@Override
-//	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-//		if (stack.hasCustomHoverName()) {
-//			BlockEntity tileEntity = level.getBlockEntity(pos);
-//			if (tileEntity instanceof CookingPotBlockEntity) {
-//				((CookingPotBlockEntity) tileEntity).setCustomName(stack.getHoverName());
-//			}
-//		}
-//	}
 
 	@Override
 	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {

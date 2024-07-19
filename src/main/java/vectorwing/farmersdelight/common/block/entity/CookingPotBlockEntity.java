@@ -7,6 +7,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -28,6 +30,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -42,10 +45,8 @@ import vectorwing.farmersdelight.common.block.CookingPotBlock;
 import vectorwing.farmersdelight.common.block.entity.container.CookingPotMenu;
 import vectorwing.farmersdelight.common.block.entity.inventory.CookingPotItemHandler;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
-import vectorwing.farmersdelight.common.registry.ModItems;
-import vectorwing.farmersdelight.common.registry.ModParticleTypes;
-import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
+import vectorwing.farmersdelight.common.item.component.ItemStackWrapper;
+import vectorwing.farmersdelight.common.registry.*;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
@@ -126,18 +127,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 			return ItemStack.EMPTY;
 		}
 
-		// TODO: Learn data components.
-//		CustomData data = cookingPotStack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY);
-//		if (data.contains("Inventory")) {
-//			CompoundTag inventoryTag = data.copyTag();
-//			if (inventoryTag.contains("Items", 9)) {
-//				ItemStackHandler handler = new ItemStackHandler();
-//				handler.deserializeNBT(inventoryTag);
-//				return handler.getStackInSlot(6);
-//			}
-//		}
-
-		return ItemStack.EMPTY;
+		return cookingPotStack.getOrDefault(ModDataComponents.MEAL, ItemStackWrapper.EMPTY).getStack();
 	}
 
 	public static void takeServingFromItem(ItemStack cookingPotStack) {
@@ -145,32 +135,16 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 			return;
 		}
 
-		// TODO: Learn data components.
-//		CompoundTag compound = cookingPotStack.getTagElement("BlockEntityTag");
-//		if (compound != null) {
-//			CompoundTag inventoryTag = compound.getCompound("Inventory");
-//			if (inventoryTag.contains("Items", 9)) {
-//				ItemStackHandler handler = new ItemStackHandler();
-//				handler.deserializeNBT(inventoryTag);
-//				ItemStack newMealStack = handler.getStackInSlot(6);
-//				newMealStack.shrink(1);
-//				compound.remove("Inventory");
-//				compound.put("Inventory", handler.serializeNBT());
-//			}
-//		}
+		ItemStack mealStack = cookingPotStack.getOrDefault(ModDataComponents.MEAL, ItemStackWrapper.EMPTY).getStack();
+		mealStack.shrink(1);
+		cookingPotStack.set(ModDataComponents.MEAL, new ItemStackWrapper(mealStack));
 	}
 
 	public static ItemStack getContainerFromItem(ItemStack cookingPotStack) {
 		if (!cookingPotStack.is(ModItems.COOKING_POT.get())) {
 			return ItemStack.EMPTY;
 		}
-
-//		CompoundTag compound = cookingPotStack.get(DataComponents.BLOCK_ENTITY_DATA);
-//		if (compound != null) {
-//			return ItemStack.parseOptional(compound.getCompound("Container"));
-//		}
-
-		return ItemStack.EMPTY;
+		return cookingPotStack.getOrDefault(ModDataComponents.CONTAINER.get(), ItemStackWrapper.EMPTY).getStack();
 	}
 
 	@Override
@@ -224,6 +198,12 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		compound.put("Container", mealContainerStack.save(registries));
 		compound.put("Inventory", drops.serializeNBT(registries));
 		return compound;
+	}
+
+	public ItemStack getAsItem() {
+		ItemStack stack = new ItemStack(ModItems.COOKING_POT.get());
+		stack.applyComponents(collectComponents());
+		return stack;
 	}
 
 	public static void cookingTick(Level level, BlockPos pos, BlockState state, CookingPotBlockEntity cookingPot) {
@@ -498,10 +478,6 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		return customName;
 	}
 
-	public void setCustomName(Component name) {
-		customName = name;
-	}
-
 	@Override
 	public AbstractContainerMenu createMenu(int id, Inventory player, Player entity) {
 		return new CookingPotMenu(id, player, this, cookingPotData);
@@ -515,6 +491,29 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	@Override
 	public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
 		return writeItems(new CompoundTag(), registries);
+	}
+
+	@Override
+	protected void applyImplicitComponents(BlockEntity.DataComponentInput componentInput) {
+		super.applyImplicitComponents(componentInput);
+		this.customName = componentInput.get(DataComponents.CUSTOM_NAME);
+		getInventory().setStackInSlot(MEAL_DISPLAY_SLOT, componentInput.getOrDefault(ModDataComponents.MEAL, ItemStackWrapper.EMPTY).getStack());
+		this.mealContainerStack = componentInput.getOrDefault(ModDataComponents.CONTAINER, ItemStackWrapper.EMPTY).getStack();
+	}
+
+	@Override
+	protected void collectImplicitComponents(DataComponentMap.Builder components) {
+		super.collectImplicitComponents(components);
+		components.set(DataComponents.CUSTOM_NAME, this.customName);
+		components.set(ModDataComponents.MEAL, new ItemStackWrapper(getMeal()));
+		components.set(ModDataComponents.CONTAINER, new ItemStackWrapper(getContainer()));
+	}
+
+	@Override
+	public void removeComponentsFromTag(CompoundTag tag) {
+		tag.remove("CustomName");
+		tag.remove("meal");
+		tag.remove("container");
 	}
 
 	private ItemStackHandler createHandler() {

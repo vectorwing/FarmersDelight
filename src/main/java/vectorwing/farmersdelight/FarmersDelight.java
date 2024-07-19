@@ -30,6 +30,7 @@ public class FarmersDelight
 		ModEffects.EFFECTS.register(modEventBus);
 		ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
 		ModItems.ITEMS.register(modEventBus);
+		ModDataComponents.DATA_COMPONENTS.register(modEventBus);
 		ModEntityTypes.ENTITIES.register(modEventBus);
 		ModBlockEntityTypes.TILES.register(modEventBus);
 		ModMenuTypes.MENU_TYPES.register(modEventBus);

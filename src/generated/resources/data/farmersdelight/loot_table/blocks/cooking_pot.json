@@ -13,11 +13,13 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:copy_name",
+              "function": "minecraft:copy_components",
+              "include": [
+                "minecraft:custom_name",
+                "farmersdelight:meal",
+                "farmersdelight:custom_container"
+              ],
               "source": "block_entity"
-            },
-            {
-              "function": "farmersdelight:copy_meal"
             }
           ],
           "name": "farmersdelight:cooking_pot"

@@ -88,7 +88,7 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 	private void renderHeatIndicatorTooltip(GuiGraphics gui, int mouseX, int mouseY) {
 		if (this.isHovering(HEAT_ICON.x, HEAT_ICON.y, HEAT_ICON.width, HEAT_ICON.height, mouseX, mouseY)) {
 			String key = "container.cooking_pot." + (this.menu.isHeated() ? "heated" : "not_heated");
-			gui.renderTooltip(this.font, TextUtils.getTranslation(key, menu), mouseX, mouseY);
+			gui.renderTooltip(this.font, TextUtils.getTranslation(key), mouseX, mouseY);
 		}
 	}
 
