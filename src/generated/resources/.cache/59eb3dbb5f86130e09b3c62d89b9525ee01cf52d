@@ -1,4 +1,4 @@
-// 1.21	2024-07-19T00:06:23.2678624	Loot Tables
+// 1.21	2024-07-19T11:13:07.6316984	Loot Tables
 cee3ddcf0129e742307f35926b2f1b713d0f5ea1 data/farmersdelight/loot_table/blocks/acacia_cabinet.json
 e088b51239f2c7e718d8da6f7d31a18334556251 data/farmersdelight/loot_table/blocks/bamboo_cabinet.json
 33717ee3f0fb043c264472abbc25ee60406b3dbc data/farmersdelight/loot_table/blocks/basket.json
@@ -11,7 +11,7 @@ ef30aafe2e8e73ef42ddedc5793ab18ee034aceb data/farmersdelight/loot_table/blocks/c
 b528bf71d8eff4d7ebbdf465d0ba09f0c0109df4 data/farmersdelight/loot_table/blocks/canvas_rug.json
 5e10190fc83f2ece9e8d48708b269e9fcc7a02bf data/farmersdelight/loot_table/blocks/carrot_crate.json
 f35d8244edd7924b59ebdd9afede2393e1379c82 data/farmersdelight/loot_table/blocks/cherry_cabinet.json
-685326d6ec03f4334e03aac2db93ed99870c14b2 data/farmersdelight/loot_table/blocks/cooking_pot.json
+4b475ec3b2d1b0d2c3c0bf55dfdbc59805922467 data/farmersdelight/loot_table/blocks/cooking_pot.json
 2758a40cabd48877f05c1bf2c0a4ec6fd4b7da39 data/farmersdelight/loot_table/blocks/crimson_cabinet.json
 8dcd4c77dc83f4b5f09a61c4c91252408155f5af data/farmersdelight/loot_table/blocks/cutting_board.json
 a65e59e4721635a0e414ce4a20dc2d533d713ee5 data/farmersdelight/loot_table/blocks/cyan_hanging_canvas_sign.json

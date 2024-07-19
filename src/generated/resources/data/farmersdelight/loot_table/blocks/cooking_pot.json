@@ -17,7 +17,7 @@
               "include": [
                 "minecraft:custom_name",
                 "farmersdelight:meal",
-                "farmersdelight:custom_container"
+                "farmersdelight:container"
               ],
               "source": "block_entity"
             }
