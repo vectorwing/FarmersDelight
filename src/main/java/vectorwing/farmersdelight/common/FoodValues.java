@@ -216,4 +216,7 @@ public class FoodValues
 			.put(Items.RABBIT_STEW, (new FoodProperties.Builder())
 					.effect(() -> new MobEffectInstance(ModEffects.COMFORT, LONG_DURATION, 0), 1.0F).build())
 			.build();
+
+	public static final FoodProperties RABBIT_STEW_BUFF = (new FoodProperties.Builder())
+			.nutrition(14).saturationModifier(0.75f).effect(() -> new MobEffectInstance(ModEffects.COMFORT, LONG_DURATION, 0), 1.0F).build();
 }

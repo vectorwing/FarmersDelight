@@ -7,7 +7,7 @@
       "predicate": {
         "equipment": {
           "mainhand": {
-            "tag": "farmersdelight:tools/knives"
+            "items": "#farmersdelight:tools/knives"
           }
         }
       }

@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.common;
 
 import com.google.common.collect.ImmutableList;
-import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.List;
@@ -30,7 +29,7 @@ public class Configuration
 
 	public static final String CATEGORY_OVERRIDES = "overrides";
 	public static ModConfigSpec.BooleanValue VANILLA_SOUP_EXTRA_EFFECTS;
-	public static ModConfigSpec.BooleanValue RABBIT_STEW_JUMP_BOOST;
+	public static ModConfigSpec.BooleanValue RABBIT_STEW_BUFF;
 	public static ModConfigSpec.BooleanValue DISPENSER_TOOLS_CUTTING_BOARD;
 
 	public static final String CATEGORY_OVERRIDES_STACK_SIZE = "stack_size";
@@ -103,8 +102,8 @@ public class Configuration
 		COMMON_BUILDER.comment("Vanilla item overrides").push(CATEGORY_OVERRIDES);
 		VANILLA_SOUP_EXTRA_EFFECTS = COMMON_BUILDER.comment("Should soups and stews from vanilla Minecraft grant additional effects, like meals from this mod?")
 				.define("vanillaSoupExtraEffects", true);
-		RABBIT_STEW_JUMP_BOOST = COMMON_BUILDER.comment("Should Rabbit Stew grant users the jumping prowess of a rabbit when eaten?")
-				.define("rabbitStewJumpBoost", true);
+		RABBIT_STEW_BUFF = COMMON_BUILDER.comment("Should Rabbit Stew be buffed with improved food stats?")
+				.define("rabbitStewBuff", true);
 		DISPENSER_TOOLS_CUTTING_BOARD = COMMON_BUILDER.comment("Should the Dispenser be able to operate a Cutting Board in front of it?")
 				.define("dispenserUsesToolsOnCuttingBoard", true);
 
