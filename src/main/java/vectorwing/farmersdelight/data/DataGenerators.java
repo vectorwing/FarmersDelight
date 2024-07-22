@@ -32,6 +32,7 @@ public class DataGenerators
 		generator.addProvider(event.includeServer(), blockTags);
 		generator.addProvider(event.includeServer(), new ItemTags(output, lookupProvider, blockTags.contentsGetter(), helper));
 		generator.addProvider(event.includeServer(), new EntityTags(output, lookupProvider, helper));
+		generator.addProvider(event.includeServer(), new DamageTypeTags(output, lookupProvider, FarmersDelight.MODID, helper));
 		generator.addProvider(event.includeServer(), new Recipes(output, lookupProvider));
 		generator.addProvider(event.includeServer(), new DataMaps(output, lookupProvider));
 		generator.addProvider(event.includeServer(), new Advancements(output, lookupProvider, helper));
