@@ -15,7 +15,7 @@ public class NourishmentEffect extends MobEffect
 	 * This means players can grow hungry by healing damage, but no further than 1.5 points, allowing them to eat more and keep healing.
 	 */
 	public NourishmentEffect() {
-		super(MobEffectCategory.BENEFICIAL, 0);
+		super(MobEffectCategory.BENEFICIAL, 15971072);
 	}
 
 	public boolean applyEffectTick(LivingEntity entity, int amplifier) {

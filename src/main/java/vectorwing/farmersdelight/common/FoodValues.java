@@ -19,6 +19,14 @@ public class FoodValues
 	public static final int MEDIUM_DURATION = 3600;    // 3 minutes
 	public static final int LONG_DURATION = 6000;    // 5 minutes
 
+	public static MobEffectInstance comfort(int duration) {
+		return new MobEffectInstance(ModEffects.COMFORT, duration, 0, false, false);
+	}
+
+	public static MobEffectInstance nourishment(int duration) {
+		return new MobEffectInstance(ModEffects.NOURISHMENT, duration, 0, false, false);
+	}
+
 	// Raw Crops
 	public static final FoodProperties CABBAGE = (new FoodProperties.Builder())
 			.nutrition(2).saturationModifier(0.4f).build();
@@ -129,80 +137,80 @@ public class FoodValues
 	// Bowl Foods
 	public static final FoodProperties COOKED_RICE = (new FoodProperties.Builder())
 			.nutrition(6).saturationModifier(0.4f)
-			.effect(() -> new MobEffectInstance(ModEffects.COMFORT, BRIEF_DURATION, 0), 1.0F).build();
+			.effect(() -> comfort(BRIEF_DURATION), 1.0F).build();
 	public static final FoodProperties BONE_BROTH = (new FoodProperties.Builder())
 			.nutrition(8).saturationModifier(0.7f)
-			.effect(() -> new MobEffectInstance(ModEffects.COMFORT, SHORT_DURATION, 0), 1.0F).build();
+			.effect(() -> comfort(SHORT_DURATION), 1.0F).build();
 	public static final FoodProperties BEEF_STEW = (new FoodProperties.Builder())
 			.nutrition(12).saturationModifier(0.8f)
-			.effect(() -> new MobEffectInstance(ModEffects.COMFORT, MEDIUM_DURATION, 0), 1.0F).build();
+			.effect(() -> comfort(MEDIUM_DURATION), 1.0F).build();
 	public static final FoodProperties VEGETABLE_SOUP = (new FoodProperties.Builder())
 			.nutrition(12).saturationModifier(0.8f)
-			.effect(() -> new MobEffectInstance(ModEffects.COMFORT, MEDIUM_DURATION, 0), 1.0F).build();
+			.effect(() -> comfort(MEDIUM_DURATION), 1.0F).build();
 	public static final FoodProperties FISH_STEW = (new FoodProperties.Builder())
 			.nutrition(12).saturationModifier(0.8f)
-			.effect(() -> new MobEffectInstance(ModEffects.COMFORT, MEDIUM_DURATION, 0), 1.0F).build();
+			.effect(() -> comfort(MEDIUM_DURATION), 1.0F).build();
 	public static final FoodProperties CHICKEN_SOUP = (new FoodProperties.Builder())
 			.nutrition(14).saturationModifier(0.75f)
-			.effect(() -> new MobEffectInstance(ModEffects.COMFORT, LONG_DURATION, 0), 1.0F).build();
+			.effect(() -> comfort(LONG_DURATION), 1.0F).build();
 	public static final FoodProperties FRIED_RICE = (new FoodProperties.Builder())
 			.nutrition(14).saturationModifier(0.75f)
-			.effect(() -> new MobEffectInstance(ModEffects.COMFORT, LONG_DURATION, 0), 1.0F).build();
+			.effect(() -> comfort(LONG_DURATION), 1.0F).build();
 	public static final FoodProperties PUMPKIN_SOUP = (new FoodProperties.Builder())
 			.nutrition(14).saturationModifier(0.75f)
-			.effect(() -> new MobEffectInstance(ModEffects.COMFORT, LONG_DURATION, 0), 1.0F).build();
+			.effect(() -> comfort(LONG_DURATION), 1.0F).build();
 	public static final FoodProperties BAKED_COD_STEW = (new FoodProperties.Builder())
 			.nutrition(14).saturationModifier(0.75f)
-			.effect(() -> new MobEffectInstance(ModEffects.COMFORT, LONG_DURATION, 0), 1.0F).build();
+			.effect(() -> comfort(LONG_DURATION), 1.0F).build();
 	public static final FoodProperties NOODLE_SOUP = (new FoodProperties.Builder())
 			.nutrition(14).saturationModifier(0.75f)
-			.effect(() -> new MobEffectInstance(ModEffects.COMFORT, LONG_DURATION, 0), 1.0F).build();
+			.effect(() -> comfort(LONG_DURATION), 1.0F).build();
 
 	// Plated Foods
 	public static final FoodProperties BACON_AND_EGGS = (new FoodProperties.Builder())
 			.nutrition(10).saturationModifier(0.6f)
-			.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, SHORT_DURATION, 0), 1.0F).build();
+			.effect(() -> nourishment(SHORT_DURATION), 1.0F).build();
 	public static final FoodProperties RATATOUILLE = (new FoodProperties.Builder())
 			.nutrition(10).saturationModifier(0.6f)
-			.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, SHORT_DURATION, 0), 1.0F).build();
+			.effect(() -> nourishment(SHORT_DURATION), 1.0F).build();
 	public static final FoodProperties STEAK_AND_POTATOES = (new FoodProperties.Builder())
 			.nutrition(12).saturationModifier(0.8f)
-			.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, MEDIUM_DURATION, 0), 1.0F).build();
+			.effect(() -> nourishment(MEDIUM_DURATION), 1.0F).build();
 	public static final FoodProperties PASTA_WITH_MEATBALLS = (new FoodProperties.Builder())
 			.nutrition(12).saturationModifier(0.8f)
-			.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, MEDIUM_DURATION, 0), 1.0F).build();
+			.effect(() -> nourishment(MEDIUM_DURATION), 1.0F).build();
 	public static final FoodProperties PASTA_WITH_MUTTON_CHOP = (new FoodProperties.Builder())
 			.nutrition(12).saturationModifier(0.8f)
-			.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, MEDIUM_DURATION, 0), 1.0F).build();
+			.effect(() -> nourishment(MEDIUM_DURATION), 1.0F).build();
 	public static final FoodProperties MUSHROOM_RICE = (new FoodProperties.Builder())
 			.nutrition(12).saturationModifier(0.8f)
-			.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, MEDIUM_DURATION, 0), 1.0F).build();
+			.effect(() -> nourishment(MEDIUM_DURATION), 1.0F).build();
 	public static final FoodProperties ROASTED_MUTTON_CHOPS = (new FoodProperties.Builder())
 			.nutrition(14).saturationModifier(0.75f)
-			.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, LONG_DURATION, 0), 1.0F).build();
+			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();
 	public static final FoodProperties VEGETABLE_NOODLES = (new FoodProperties.Builder())
 			.nutrition(14).saturationModifier(0.75f)
-			.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, LONG_DURATION, 0), 1.0F).build();
+			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();
 	public static final FoodProperties SQUID_INK_PASTA = (new FoodProperties.Builder())
 			.nutrition(14).saturationModifier(0.75f)
-			.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, LONG_DURATION, 0), 1.0F).build();
+			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();
 	public static final FoodProperties GRILLED_SALMON = (new FoodProperties.Builder())
 			.nutrition(14).saturationModifier(0.75f)
-			.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, MEDIUM_DURATION, 0), 1.0F).build();
+			.effect(() -> nourishment(MEDIUM_DURATION), 1.0F).build();
 
 	// Feast Portions
 	public static final FoodProperties ROAST_CHICKEN = (new FoodProperties.Builder())
 			.nutrition(14).saturationModifier(0.75f)
-			.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, LONG_DURATION, 0), 1.0F).build();
+			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();
 	public static final FoodProperties STUFFED_PUMPKIN = (new FoodProperties.Builder())
 			.nutrition(14).saturationModifier(0.75f)
-			.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, LONG_DURATION, 0), 1.0F).build();
+			.effect(() -> comfort(LONG_DURATION), 1.0F).build();
 	public static final FoodProperties HONEY_GLAZED_HAM = (new FoodProperties.Builder())
 			.nutrition(14).saturationModifier(0.75f)
-			.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, LONG_DURATION, 0), 1.0F).build();
+			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();
 	public static final FoodProperties SHEPHERDS_PIE = (new FoodProperties.Builder())
 			.nutrition(14).saturationModifier(0.75f)
-			.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, LONG_DURATION, 0), 1.0F).build();
+			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();
 
 	public static final FoodProperties DOG_FOOD = (new FoodProperties.Builder())
 			.nutrition(4).saturationModifier(0.2f).build();
@@ -210,13 +218,13 @@ public class FoodValues
 	// Vanilla SoupItems
 	public static final Map<Item, FoodProperties> VANILLA_SOUP_EFFECTS = (new ImmutableMap.Builder<Item, FoodProperties>())
 			.put(Items.MUSHROOM_STEW, (new FoodProperties.Builder())
-					.effect(() -> new MobEffectInstance(ModEffects.COMFORT, MEDIUM_DURATION, 0), 1.0F).build())
+					.effect(() -> comfort(MEDIUM_DURATION), 1.0F).build())
 			.put(Items.BEETROOT_SOUP, (new FoodProperties.Builder())
-					.effect(() -> new MobEffectInstance(ModEffects.COMFORT, MEDIUM_DURATION, 0), 1.0F).build())
+					.effect(() -> comfort(MEDIUM_DURATION), 1.0F).build())
 			.put(Items.RABBIT_STEW, (new FoodProperties.Builder())
-					.effect(() -> new MobEffectInstance(ModEffects.COMFORT, LONG_DURATION, 0), 1.0F).build())
+					.effect(() -> comfort(LONG_DURATION), 1.0F).build())
 			.build();
 
 	public static final FoodProperties RABBIT_STEW_BUFF = (new FoodProperties.Builder())
-			.nutrition(14).saturationModifier(0.75f).effect(() -> new MobEffectInstance(ModEffects.COMFORT, LONG_DURATION, 0), 1.0F).build();
+			.nutrition(14).saturationModifier(0.75f).effect(() -> comfort(LONG_DURATION), 1.0F).build();
 }

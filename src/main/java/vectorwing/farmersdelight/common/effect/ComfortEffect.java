@@ -16,7 +16,7 @@ public class ComfortEffect extends MobEffect
 	 * If the player has saturation to spend, or has the Regeneration effect, Comfort does nothing.
 	 */
 	public ComfortEffect() {
-		super(MobEffectCategory.BENEFICIAL, 0);
+		super(MobEffectCategory.BENEFICIAL, 14545909);
 	}
 
 	@Override
