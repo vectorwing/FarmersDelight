@@ -14,7 +14,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModDataComponents;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
-public class Enchantments
+public class ModEnchantments
 {
 	public static final ResourceKey<Enchantment> BACKSTABBING = key("backstabbing");
 

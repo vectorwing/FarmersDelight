@@ -3,6 +3,7 @@ package vectorwing.farmersdelight.common.item;
 import com.google.common.collect.Sets;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -50,6 +51,14 @@ public class KnifeItem extends DiggerItem
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 		stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
 		return true;
+	}
+
+	@Override
+	public boolean isPrimaryItemFor(ItemStack stack, Holder<Enchantment> enchantment) {
+		if (enchantment.value().isPrimaryItem(new ItemStack(Items.DIAMOND_SWORD)) && !enchantment.is(Enchantments.SWEEPING_EDGE)) {
+			return true;
+		}
+		return super.isPrimaryItemFor(stack, enchantment);
 	}
 
 	@EventBusSubscriber(modid = FarmersDelight.MODID, bus = EventBusSubscriber.Bus.GAME)
