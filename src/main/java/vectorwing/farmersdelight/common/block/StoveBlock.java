@@ -137,7 +137,6 @@ public class StoveBlock extends BaseEntityBlock
 	public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
 		boolean isLit = level.getBlockState(pos).getValue(StoveBlock.LIT);
 		if (isLit && !entity.isSteppingCarefully() && entity instanceof LivingEntity) {
-			// TODO: Revisit STOVE_BURN to make it equal to HOT_FLOOR. This may involve tags and datapacks.
 			entity.hurt(ModDamageTypes.getSimpleDamageSource(level, ModDamageTypes.STOVE_BURN), 1.0F);
 		}
 
