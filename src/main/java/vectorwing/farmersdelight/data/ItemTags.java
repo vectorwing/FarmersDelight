@@ -28,11 +28,25 @@ public class ItemTags extends ItemTagsProvider
 
 	@Override
 	protected void addTags(HolderLookup.@NotNull Provider provider) {
+		this.registerMinecraftTags();
+		this.registerModTags();
+		this.registerForgeTags();
+		this.registerCompatibilityTags();
+	}
+
+	private void registerMinecraftTags() {
 		copy(ModTags.WILD_CROPS, ModTags.WILD_CROPS_ITEM);
 		copy(BlockTags.SMALL_FLOWERS, net.minecraft.tags.ItemTags.SMALL_FLOWERS);
 
 		tag(net.minecraft.tags.ItemTags.TALL_FLOWERS).add(ModItems.WILD_RICE.get());
 		tag(net.minecraft.tags.ItemTags.PIGLIN_LOVED).add(ModItems.GOLDEN_KNIFE.get());
+
+		tag(net.minecraft.tags.ItemTags.DURABILITY_ENCHANTABLE).addTag(ModTags.KNIVES);
+		tag(net.minecraft.tags.ItemTags.WEAPON_ENCHANTABLE).addTag(ModTags.KNIVES);
+		tag(net.minecraft.tags.ItemTags.SHARP_WEAPON_ENCHANTABLE).addTag(ModTags.KNIVES);
+		tag(net.minecraft.tags.ItemTags.FIRE_ASPECT_ENCHANTABLE).addTag(ModTags.KNIVES);
+		tag(net.minecraft.tags.ItemTags.MINING_ENCHANTABLE).addTag(ModTags.KNIVES);
+		tag(net.minecraft.tags.ItemTags.MINING_LOOT_ENCHANTABLE).addTag(ModTags.KNIVES);
 
 		tag(net.minecraft.tags.ItemTags.MEAT)
 				.add(ModItems.MINCED_BEEF.get())
@@ -61,15 +75,11 @@ public class ItemTags extends ItemTagsProvider
 				.add(ModItems.RICE.get());
 		tag(net.minecraft.tags.ItemTags.HORSE_TEMPT_ITEMS)
 				.add(ModItems.HORSE_FEED.get());
-
-		this.registerModTags();
-		this.registerForgeTags();
-		this.registerCompatibilityTags();
 	}
 
 	private void registerModTags() {
 		tag(ModTags.KNIVES).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get(), ModItems.NETHERITE_KNIFE.get());
-		tag(ModTags.ENCHANTABLE_KNIFE).addTag(ModTags.KNIVES);
+		tag(ModTags.KNIFE_ENCHANTABLE).addTag(ModTags.KNIVES);
 		tag(ModTags.STRAW_HARVESTERS).addTag(ModTags.KNIVES);
 		tag(ModTags.WOLF_PREY).addTag(ForgeTags.RAW_CHICKEN).addTag(ForgeTags.RAW_MUTTON).add(Items.RABBIT);
 		tag(ModTags.CABBAGE_ROLL_INGREDIENTS).addTag(ForgeTags.RAW_PORK).addTag(ForgeTags.RAW_FISHES).addTag(ForgeTags.RAW_CHICKEN).addTag(ForgeTags.RAW_BEEF).addTag(ForgeTags.RAW_MUTTON).addTag(ForgeTags.EGGS).addTag(Tags.Items.MUSHROOMS).add(Items.CARROT, Items.POTATO, Items.BEETROOT);

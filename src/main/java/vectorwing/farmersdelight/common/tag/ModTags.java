@@ -1,7 +1,5 @@
 package vectorwing.farmersdelight.common.tag;
 
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -59,7 +57,7 @@ public class ModTags
 	// -- Items --
 
 	// Items which are compatible with the Backstabbing enchantment. Populated by #tools/knives.
-	public static final TagKey<Item> ENCHANTABLE_KNIFE = modItemTag("enchantable/knife");
+	public static final TagKey<Item> KNIFE_ENCHANTABLE = modItemTag("enchantable/knife");
 
 	// Items that represent the wild form of a farmable crop.
 	public static final TagKey<Item> WILD_CROPS_ITEM = modItemTag("wild_crops");

@@ -1,4 +1,4 @@
-// 1.21	2024-07-17T11:05:24.1681335	Tags for minecraft:item mod id farmersdelight
+// 1.21	2024-07-23T15:31:50.7094872	Tags for minecraft:item mod id farmersdelight
 65eba9e0353834055ff822059bd7e1784fe218ad data/createaddition/tags/item/plants.json
 f55c336a7c0c249fc90b76c979cfa5d5f6a277bf data/createaddition/tags/item/plant_foods.json
 0c943816d6d2fa986a587d5c13c7d38aaed8e159 data/create/tags/item/upright_on_belt.json
@@ -70,6 +70,12 @@ f9570db096e701a0b8872dddbb31d8dffea2a204 data/forge/tags/item/vegetables/beetroo
 849f851b30eb74acf2ca9316cd9708544427ecbc data/forge/tags/item/vegetables/potato.json
 0fe37095f12c7c6a3bca60606cab33162378e60d data/forge/tags/item/vegetables/tomato.json
 9980a57042decbe4d29e529febb0c76a7ae1b152 data/minecraft/tags/item/chicken_food.json
+b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/minecraft/tags/item/enchantable/durability.json
+b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/minecraft/tags/item/enchantable/fire_aspect.json
+b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/minecraft/tags/item/enchantable/mining.json
+b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/minecraft/tags/item/enchantable/mining_loot.json
+b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/minecraft/tags/item/enchantable/sharp_weapon.json
+b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/minecraft/tags/item/enchantable/weapon.json
 9f7c54970bfbea398bb27fdc66750b6459bc9946 data/minecraft/tags/item/horse_tempt_items.json
 ab8d571e62fc4b847ce3e023c22e53e76c98328a data/minecraft/tags/item/meat.json
 9980a57042decbe4d29e529febb0c76a7ae1b152 data/minecraft/tags/item/parrot_food.json
