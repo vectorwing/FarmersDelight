@@ -58,7 +58,7 @@ public class RichSoilBlock extends Block
 			if (aboveBlock instanceof BonemealableBlock growable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
 				if (growable.isValidBonemealTarget(level, pos.above(), aboveState) && CommonHooks.canCropGrow(level, pos.above(), aboveState, true)) {
 					growable.performBonemeal(level, level.random, pos.above(), aboveState);
-					level.levelEvent(2005, pos.above(), 0);
+					//level.levelEvent(1505, pos.above(), 0);
 					CommonHooks.fireCropGrowPost(level, pos.above(), aboveState);
 				}
 			}

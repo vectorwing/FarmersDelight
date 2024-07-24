@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.BoneMealItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -75,7 +76,8 @@ public class RichSoilFarmlandBlock extends FarmBlock
 				return;
 			}
 
-			BlockState aboveState = level.getBlockState(pos.above());
+			BlockPos abovePos = pos.above();
+			BlockState aboveState = level.getBlockState(abovePos);
 			Block aboveBlock = aboveState.getBlock();
 
 			if (aboveState.is(ModTags.UNAFFECTED_BY_RICH_SOIL) || aboveBlock instanceof TallFlowerBlock) {
@@ -83,12 +85,10 @@ public class RichSoilFarmlandBlock extends FarmBlock
 			}
 
 			if (aboveBlock instanceof BonemealableBlock growable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
-				if (growable.isValidBonemealTarget(level, pos.above(), aboveState) && CommonHooks.canCropGrow(level, pos.above(), aboveState, true)) {
-					growable.performBonemeal(level, level.random, pos.above(), aboveState);
-					if (!level.isClientSide) {
-						level.levelEvent(2005, pos.above(), 0);
-					}
-					CommonHooks.fireCropGrowPost(level, pos.above(), aboveState);
+				if (growable.isValidBonemealTarget(level, abovePos, aboveState) && CommonHooks.canCropGrow(level, abovePos, aboveState, true)) {
+					growable.performBonemeal(level, level.random, abovePos, aboveState);
+					//level.levelEvent(1505, abovePos, 15);
+					CommonHooks.fireCropGrowPost(level, abovePos, aboveState);
 				}
 			}
 		}
