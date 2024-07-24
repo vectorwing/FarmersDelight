@@ -4,9 +4,11 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import vectorwing.farmersdelight.client.event.ClientSetupEvents;
 import vectorwing.farmersdelight.common.CommonSetup;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.*;
@@ -21,6 +23,9 @@ public class FarmersDelight
 
 	public FarmersDelight(IEventBus modEventBus, ModContainer modContainer) {
 		modEventBus.addListener(CommonSetup::init);
+		if (FMLEnvironment.dist.isClient()) {
+			modEventBus.addListener(ClientSetupEvents::init);
+		}
 
 		modContainer.registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
 		modContainer.registerConfig(ModConfig.Type.CLIENT, Configuration.CLIENT_CONFIG);

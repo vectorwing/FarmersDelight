@@ -1,12 +1,19 @@
 package vectorwing.farmersdelight.client.event;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import org.jetbrains.annotations.NotNull;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.client.gui.CookingPotTooltip;
@@ -15,14 +22,28 @@ import vectorwing.farmersdelight.client.particle.StarParticle;
 import vectorwing.farmersdelight.client.particle.SteamParticle;
 import vectorwing.farmersdelight.client.recipebook.RecipeCategories;
 import vectorwing.farmersdelight.client.renderer.*;
-import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
-import vectorwing.farmersdelight.common.registry.ModEntityTypes;
-import vectorwing.farmersdelight.common.registry.ModMenuTypes;
-import vectorwing.farmersdelight.common.registry.ModParticleTypes;
+import vectorwing.farmersdelight.common.item.component.ItemStackWrapper;
+import vectorwing.farmersdelight.common.registry.*;
 
 @EventBusSubscriber(modid = FarmersDelight.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetupEvents
 {
+	public static void init(final FMLClientSetupEvent event) {
+		ItemProperties.register(ModItems.SKILLET.get(), ResourceLocation.withDefaultNamespace("cooking"),
+				(stack, world, entity, s) -> stack.getOrDefault(ModDataComponents.SKILLET_INGREDIENT, ItemStackWrapper.EMPTY).getStack().isEmpty() ? 0 : 1);
+	}
+
+	@SubscribeEvent
+	public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
+		event.registerItem(new IClientItemExtensions() {
+			BlockEntityWithoutLevelRenderer renderer = new SkilletItemRenderer();
+			@Override
+			public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+				return renderer;
+			}
+		}, ModItems.SKILLET.get());
+	}
+
 	@SubscribeEvent
 	public static void registerRecipeBookCategories(RegisterRecipeBookCategoriesEvent event) {
 		RecipeCategories.init(event);
