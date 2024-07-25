@@ -3,6 +3,12 @@
 ## 1.2.4
 
 ### Updates
+- (1.21) All `forge` tags have been updated to the `c` namespace, with a few changes and additions:
+  - Updated many tags to reside within the `c:foods/` subgroup, except for `c:crops/grain`, since the items are inedible;
+  - Many tags which had specific subgrouping were sunsetted.
+    - For example: forge:vegetables/tomato was phased out due to redundancy, in favor of c:foods/tomato instead, but tomatoes are still added to c:foods/vegetables;
+  - Removed `farmersdelight:wolf_prey`, in favor of using `c:foods/raw_meat` instead;
+  - Added `c:foods/safe_raw_fish`, a version of `c:foods/raw_fish` which does not include Pufferfish;
 - The Cooking Pot item now displays more information than before:
   - A blue bar will be shown to indicate the amount of meal servings stored, similar to how Bundles display their fullness;
   - The tooltip will display the stored food's item sprite alongside its name;

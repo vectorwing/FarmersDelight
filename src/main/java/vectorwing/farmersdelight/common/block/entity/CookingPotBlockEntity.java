@@ -505,8 +505,12 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	protected void collectImplicitComponents(DataComponentMap.Builder components) {
 		super.collectImplicitComponents(components);
 		components.set(DataComponents.CUSTOM_NAME, this.customName);
-		components.set(ModDataComponents.MEAL, new ItemStackWrapper(getMeal()));
-		components.set(ModDataComponents.CONTAINER, new ItemStackWrapper(getContainer()));
+		if (!getMeal().isEmpty()) {
+			components.set(ModDataComponents.MEAL, new ItemStackWrapper(getMeal()));
+		}
+		if (!getContainer().isEmpty()) {
+			components.set(ModDataComponents.CONTAINER, new ItemStackWrapper(getContainer()));
+		}
 	}
 
 	@Override

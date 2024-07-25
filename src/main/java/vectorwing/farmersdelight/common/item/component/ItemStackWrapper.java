@@ -30,8 +30,8 @@ public class ItemStackWrapper
 
 	@Override
 	public boolean equals(Object object) {
-		if (object instanceof ItemStack itemStack) {
-			return ItemStack.matches(this.itemStack, itemStack);
+		if (object instanceof ItemStackWrapper itemStackWrapper) {
+			return ItemStack.matches(this.itemStack, itemStackWrapper.getStack());
 		}
 		return false;
 	}
