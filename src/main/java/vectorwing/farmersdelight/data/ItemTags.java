@@ -143,9 +143,10 @@ public class ItemTags extends ItemTagsProvider
 
 	@SuppressWarnings("unchecked")
 	private void registerNeoForgeTags() {
+		tag(Tags.Items.CROPS)
+				.addTag(CommonTags.CROPS_GRAIN);
 		tag(Tags.Items.FOODS)
 				.addTag(CommonTags.FOODS_LEAFY_GREEN)
-				.addTag(CommonTags.FOODS_GRAIN)
 				.addTag(CommonTags.FOODS_DOUGH)
 				.addTag(CommonTags.FOODS_PASTA)
 				.addTag(CommonTags.FOODS_COOKED_EGG)
@@ -183,7 +184,7 @@ public class ItemTags extends ItemTagsProvider
 		tag(CommonTags.FOODS_ONION).add(ModItems.ONION.get());
 
 		tag(CommonTags.FOODS_DOUGH).add(ModItems.WHEAT_DOUGH.get());
-		tag(CommonTags.FOODS_GRAIN).add(Items.WHEAT, ModItems.RICE.get());
+		tag(CommonTags.CROPS_GRAIN).add(Items.WHEAT, ModItems.RICE.get());
 		tag(CommonTags.FOODS_MILK).add(Items.MILK_BUCKET, ModItems.MILK_BOTTLE.get());
 		tag(CommonTags.FOODS_PASTA).add(ModItems.RAW_PASTA.get());
 		tag(CommonTags.FOODS_LEAFY_GREEN).addTag(CommonTags.FOODS_CABBAGE);

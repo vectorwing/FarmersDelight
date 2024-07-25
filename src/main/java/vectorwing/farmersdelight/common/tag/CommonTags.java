@@ -21,6 +21,7 @@ public class CommonTags
 	public static final TagKey<Item> CROPS_TOMATO = commonItemTag("crops/tomato");
 	public static final TagKey<Item> CROPS_ONION = commonItemTag("crops/onion");
 	public static final TagKey<Item> CROPS_RICE = commonItemTag("crops/rice");
+	public static final TagKey<Item> CROPS_GRAIN = commonItemTag("crops/grain");
 
 	// Tags under the "foods" subgroup.
 	public static final TagKey<Item> FOODS_CABBAGE = commonItemTag("foods/cabbage");
@@ -28,7 +29,6 @@ public class CommonTags
 	public static final TagKey<Item> FOODS_ONION = commonItemTag("foods/onion");
 
 	public static final TagKey<Item> FOODS_LEAFY_GREEN = commonItemTag("foods/leafy_green");
-	public static final TagKey<Item> FOODS_GRAIN = commonItemTag("foods/grain");
 	public static final TagKey<Item> FOODS_DOUGH = commonItemTag("foods/dough");
 	public static final TagKey<Item> FOODS_PASTA = commonItemTag("foods/pasta");
 	public static final TagKey<Item> FOODS_MILK = commonItemTag("foods/milk");
