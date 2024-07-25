@@ -1,4 +1,4 @@
-// 1.21	2024-07-25T18:45:51.40072	Tags for minecraft:item mod id farmersdelight
+// 1.21	2024-07-25T19:18:11.3515595	Tags for minecraft:item mod id farmersdelight
 65eba9e0353834055ff822059bd7e1784fe218ad data/createaddition/tags/item/plants.json
 f55c336a7c0c249fc90b76c979cfa5d5f6a277bf data/createaddition/tags/item/plant_foods.json
 0c943816d6d2fa986a587d5c13c7d38aaed8e159 data/create/tags/item/upright_on_belt.json
@@ -55,7 +55,6 @@ d837fdcf195d0755d48909cc19e0ad7aed1c4c72 data/farmersdelight/tags/item/serving_c
 b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/farmersdelight/tags/item/straw_harvesters.json
 edaf49470d0e1c903468fd6902234bbeec85c337 data/farmersdelight/tags/item/tools/knives.json
 5596501768488a25c5bcc6ef16c2fc5ca3ab49e9 data/farmersdelight/tags/item/wild_crops.json
-d6a1747d6c2e3fe1979fee50c64b00b4a9d41b07 data/farmersdelight/tags/item/wolf_prey.json
 9980a57042decbe4d29e529febb0c76a7ae1b152 data/minecraft/tags/item/chicken_food.json
 b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/minecraft/tags/item/enchantable/durability.json
 b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/minecraft/tags/item/enchantable/fire_aspect.json
