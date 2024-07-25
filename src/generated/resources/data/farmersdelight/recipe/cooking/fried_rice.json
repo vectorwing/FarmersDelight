@@ -3,16 +3,16 @@
   "experience": 1.0,
   "ingredients": [
     {
-      "tag": "forge:crops/rice"
+      "tag": "c:crops/rice"
     },
     {
-      "tag": "forge:eggs"
+      "tag": "c:eggs"
     },
     {
       "item": "minecraft:carrot"
     },
     {
-      "tag": "forge:crops/onion"
+      "tag": "c:crops/onion"
     }
   ],
   "recipe_book_tab": "meals",

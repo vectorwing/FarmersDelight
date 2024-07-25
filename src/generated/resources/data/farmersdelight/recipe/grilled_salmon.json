@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "forge:cooked_fishes/salmon"
+      "tag": "c:foods/cooked_salmon"
     },
     {
       "item": "minecraft:sweet_berries"
@@ -12,10 +12,10 @@
       "item": "minecraft:bowl"
     },
     {
-      "tag": "forge:crops/cabbage"
+      "tag": "c:crops/cabbage"
     },
     {
-      "tag": "forge:crops/onion"
+      "tag": "c:crops/onion"
     }
   ],
   "result": {

@@ -3,16 +3,16 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "forge:bread"
+      "tag": "c:foods/bread"
     },
     {
-      "tag": "forge:cooked_bacon"
+      "tag": "c:foods/cooked_bacon"
     },
     {
-      "tag": "forge:salad_ingredients"
+      "tag": "c:foods/leafy_green"
     },
     {
-      "tag": "forge:crops/tomato"
+      "tag": "c:crops/tomato"
     }
   ],
   "result": {

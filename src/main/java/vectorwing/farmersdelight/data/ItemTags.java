@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.CompatibilityTags;
-import vectorwing.farmersdelight.common.tag.ForgeTags;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.Nullable;
@@ -28,16 +28,17 @@ public class ItemTags extends ItemTagsProvider
 
 	@Override
 	protected void addTags(HolderLookup.@NotNull Provider provider) {
+		copy(ModTags.WILD_CROPS, ModTags.WILD_CROPS_ITEM);
+		copy(BlockTags.SMALL_FLOWERS, net.minecraft.tags.ItemTags.SMALL_FLOWERS);
+
 		this.registerMinecraftTags();
 		this.registerModTags();
-		this.registerForgeTags();
+		this.registerNeoForgeTags();
+		this.registerCommonTags();
 		this.registerCompatibilityTags();
 	}
 
 	private void registerMinecraftTags() {
-		copy(ModTags.WILD_CROPS, ModTags.WILD_CROPS_ITEM);
-		copy(BlockTags.SMALL_FLOWERS, net.minecraft.tags.ItemTags.SMALL_FLOWERS);
-
 		tag(net.minecraft.tags.ItemTags.TALL_FLOWERS).add(ModItems.WILD_RICE.get());
 		tag(net.minecraft.tags.ItemTags.PIGLIN_LOVED).add(ModItems.GOLDEN_KNIFE.get());
 
@@ -81,8 +82,7 @@ public class ItemTags extends ItemTagsProvider
 		tag(ModTags.KNIVES).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get(), ModItems.NETHERITE_KNIFE.get());
 		tag(ModTags.KNIFE_ENCHANTABLE).addTag(ModTags.KNIVES);
 		tag(ModTags.STRAW_HARVESTERS).addTag(ModTags.KNIVES);
-		tag(ModTags.WOLF_PREY).addTag(ForgeTags.RAW_CHICKEN).addTag(ForgeTags.RAW_MUTTON).add(Items.RABBIT);
-		tag(ModTags.CABBAGE_ROLL_INGREDIENTS).addTag(ForgeTags.RAW_PORK).addTag(ForgeTags.RAW_FISHES).addTag(ForgeTags.RAW_CHICKEN).addTag(ForgeTags.RAW_BEEF).addTag(ForgeTags.RAW_MUTTON).addTag(ForgeTags.EGGS).addTag(Tags.Items.MUSHROOMS).add(Items.CARROT, Items.POTATO, Items.BEETROOT);
+		tag(ModTags.CABBAGE_ROLL_INGREDIENTS).addTag(CommonTags.FOODS_RAW_PORK).addTag(CommonTags.FOODS_SAFE_RAW_FISH).addTag(CommonTags.FOODS_RAW_CHICKEN).addTag(CommonTags.FOODS_RAW_BEEF).addTag(CommonTags.FOODS_RAW_MUTTON).addTag(Tags.Items.EGGS).addTag(Tags.Items.MUSHROOMS).add(Items.CARROT, Items.POTATO, Items.BEETROOT);
 		tag(ModTags.CANVAS_SIGNS)
 				.add(ModItems.CANVAS_SIGN.get())
 				.add(ModItems.WHITE_CANVAS_SIGN.get())
@@ -142,76 +142,71 @@ public class ItemTags extends ItemTagsProvider
 	}
 
 	@SuppressWarnings("unchecked")
-	private void registerForgeTags() {
-		tag(ForgeTags.BERRIES).add(Items.SWEET_BERRIES, Items.GLOW_BERRIES);
-		tag(ForgeTags.BREAD).addTag(ForgeTags.BREAD_WHEAT);
-		tag(ForgeTags.BREAD_WHEAT).add(Items.BREAD);
+	private void registerNeoForgeTags() {
+		tag(Tags.Items.FOODS)
+				.addTag(CommonTags.FOODS_LEAFY_GREEN)
+				.addTag(CommonTags.FOODS_GRAIN)
+				.addTag(CommonTags.FOODS_DOUGH)
+				.addTag(CommonTags.FOODS_PASTA)
+				.addTag(CommonTags.FOODS_COOKED_EGG)
+				.addTag(CommonTags.FOODS_MILK);
+		tag(Tags.Items.FOODS_VEGETABLE).add(ModItems.ONION.get(), ModItems.TOMATO.get());
+		tag(Tags.Items.FOODS_COOKIE).add(ModItems.HONEY_COOKIE.get(), ModItems.SWEET_BERRY_COOKIE.get());
+		tag(Tags.Items.FOODS_RAW_MEAT).addTags(CommonTags.FOODS_RAW_CHICKEN, CommonTags.FOODS_RAW_PORK, CommonTags.FOODS_RAW_BEEF, CommonTags.FOODS_RAW_MUTTON);
+		tag(Tags.Items.FOODS_RAW_FISH).addTags(CommonTags.FOODS_RAW_COD, CommonTags.FOODS_RAW_SALMON);
+		tag(Tags.Items.FOODS_COOKED_MEAT).addTags(CommonTags.FOODS_COOKED_CHICKEN, CommonTags.FOODS_COOKED_PORK, CommonTags.FOODS_COOKED_BEEF, CommonTags.FOODS_COOKED_MUTTON);
+		tag(Tags.Items.FOODS_COOKED_FISH).addTags(CommonTags.FOODS_COOKED_COD, CommonTags.FOODS_COOKED_SALMON);
+		tag(Tags.Items.FOODS_FOOD_POISONING).add(ModItems.CHICKEN_CUTS.get());
+		tag(Tags.Items.FOODS_EDIBLE_WHEN_PLACED)
+				.add(ModItems.APPLE_PIE.get())
+				.add(ModItems.SWEET_BERRY_CHEESECAKE.get())
+				.add(ModItems.CHOCOLATE_PIE.get())
+				.add(ModItems.ROAST_CHICKEN_BLOCK.get())
+				.add(ModItems.HONEY_GLAZED_HAM_BLOCK.get())
+				.add(ModItems.SHEPHERDS_PIE_BLOCK.get())
+				.add(ModItems.STUFFED_PUMPKIN_BLOCK.get())
+				.add(ModItems.RICE_ROLL_MEDLEY_BLOCK.get());
 
-		tag(ForgeTags.COOKED_BACON).add(ModItems.COOKED_BACON.get());
+		tag(Tags.Items.TOOLS).addTag(CommonTags.TOOLS_KNIFE);
+		tag(Tags.Items.SEEDS).add(ModItems.CABBAGE_SEEDS.get(), ModItems.RICE.get(), ModItems.TOMATO_SEEDS.get());
+		tag(Tags.Items.CROPS).addTags(CommonTags.CROPS_CABBAGE, CommonTags.CROPS_ONION, CommonTags.CROPS_RICE, CommonTags.CROPS_TOMATO);
+	}
 
-		tag(ForgeTags.COOKED_BEEF).add(Items.COOKED_BEEF, ModItems.BEEF_PATTY.get());
-		tag(ForgeTags.COOKED_CHICKEN).add(Items.COOKED_CHICKEN, ModItems.COOKED_CHICKEN_CUTS.get());
-		tag(ForgeTags.COOKED_PORK).add(Items.COOKED_PORKCHOP, ModItems.COOKED_BACON.get());
-		tag(ForgeTags.COOKED_MUTTON).add(Items.COOKED_MUTTON, ModItems.COOKED_MUTTON_CHOPS.get());
-		tag(ForgeTags.COOKED_EGGS).add(ModItems.FRIED_EGG.get());
+	public void registerCommonTags() {
+		tag(CommonTags.CROPS_CABBAGE).add(ModItems.CABBAGE.get(), ModItems.CABBAGE_LEAF.get());
+		tag(CommonTags.CROPS_ONION).add(ModItems.ONION.get());
+		tag(CommonTags.CROPS_TOMATO).add(ModItems.TOMATO.get());
+		tag(CommonTags.CROPS_RICE).add(ModItems.RICE.get());
 
-		tag(ForgeTags.COOKED_FISHES).addTags(ForgeTags.COOKED_FISHES_COD, ForgeTags.COOKED_FISHES_SALMON);
-		tag(ForgeTags.COOKED_FISHES_COD).add(Items.COOKED_COD, ModItems.COOKED_COD_SLICE.get());
-		tag(ForgeTags.COOKED_FISHES_SALMON).add(Items.COOKED_SALMON, ModItems.COOKED_SALMON_SLICE.get());
+		tag(CommonTags.FOODS_CABBAGE).add(ModItems.CABBAGE.get(), ModItems.CABBAGE_LEAF.get());
+		tag(CommonTags.FOODS_TOMATO).add(ModItems.TOMATO.get());
+		tag(CommonTags.FOODS_ONION).add(ModItems.ONION.get());
 
-		tag(ForgeTags.CROPS).addTags(ForgeTags.CROPS_CABBAGE, ForgeTags.CROPS_ONION, ForgeTags.CROPS_RICE, ForgeTags.CROPS_TOMATO);
-		tag(ForgeTags.CROPS_CABBAGE).add(ModItems.CABBAGE.get(), ModItems.CABBAGE_LEAF.get());
-		tag(ForgeTags.CROPS_ONION).add(ModItems.ONION.get());
-		tag(ForgeTags.CROPS_RICE).add(ModItems.RICE.get());
-		tag(ForgeTags.CROPS_TOMATO).add(ModItems.TOMATO.get());
+		tag(CommonTags.FOODS_DOUGH).add(ModItems.WHEAT_DOUGH.get());
+		tag(CommonTags.FOODS_GRAIN).add(Items.WHEAT, ModItems.RICE.get());
+		tag(CommonTags.FOODS_MILK).add(Items.MILK_BUCKET, ModItems.MILK_BOTTLE.get());
+		tag(CommonTags.FOODS_PASTA).add(ModItems.RAW_PASTA.get());
+		tag(CommonTags.FOODS_LEAFY_GREEN).addTag(CommonTags.FOODS_CABBAGE);
 
-		tag(ForgeTags.DOUGH).add(ModItems.WHEAT_DOUGH.get());
-		tag(ForgeTags.DOUGH_WHEAT).add(ModItems.WHEAT_DOUGH.get());
+		tag(CommonTags.FOODS_RAW_BACON).add(ModItems.BACON.get());
+		tag(CommonTags.FOODS_RAW_BEEF).add(Items.BEEF, ModItems.MINCED_BEEF.get());
+		tag(CommonTags.FOODS_RAW_CHICKEN).add(Items.CHICKEN, ModItems.CHICKEN_CUTS.get());
+		tag(CommonTags.FOODS_RAW_PORK).add(Items.PORKCHOP).addTag(CommonTags.FOODS_RAW_BACON);
+		tag(CommonTags.FOODS_RAW_MUTTON).add(Items.MUTTON, ModItems.MUTTON_CHOPS.get());
+		tag(CommonTags.FOODS_RAW_COD).add(Items.COD, ModItems.COD_SLICE.get());
+		tag(CommonTags.FOODS_RAW_SALMON).add(Items.SALMON, ModItems.SALMON_SLICE.get());
+		tag(CommonTags.FOODS_SAFE_RAW_FISH).addTag(Tags.Items.FOODS_RAW_FISH).remove(Items.PUFFERFISH);
 
-		tag(ForgeTags.EGGS).add(Items.EGG);
+		tag(CommonTags.FOODS_COOKED_BACON).add(ModItems.COOKED_BACON.get());
+		tag(CommonTags.FOODS_COOKED_BEEF).add(Items.COOKED_BEEF, ModItems.BEEF_PATTY.get());
+		tag(CommonTags.FOODS_COOKED_CHICKEN).add(Items.COOKED_CHICKEN, ModItems.COOKED_CHICKEN_CUTS.get());
+		tag(CommonTags.FOODS_COOKED_PORK).add(Items.COOKED_PORKCHOP).addTag(CommonTags.FOODS_COOKED_BACON);
+		tag(CommonTags.FOODS_COOKED_MUTTON).add(Items.COOKED_MUTTON, ModItems.COOKED_MUTTON_CHOPS.get());
+		tag(CommonTags.FOODS_COOKED_COD).add(Items.COOKED_COD, ModItems.COOKED_COD_SLICE.get());
+		tag(CommonTags.FOODS_COOKED_SALMON).add(Items.COOKED_SALMON, ModItems.COOKED_SALMON_SLICE.get());
+		tag(CommonTags.FOODS_COOKED_EGG).add(ModItems.FRIED_EGG.get());
 
-		tag(ForgeTags.GRAIN).addTags(ForgeTags.GRAIN_WHEAT, ForgeTags.GRAIN_RICE);
-		tag(ForgeTags.GRAIN_WHEAT).add(Items.WHEAT);
-		tag(ForgeTags.GRAIN_RICE).add(ModItems.RICE.get());
-
-		tag(ForgeTags.MILK).addTags(ForgeTags.MILK_BUCKET, ForgeTags.MILK_BOTTLE);
-		tag(ForgeTags.MILK_BUCKET).add(Items.MILK_BUCKET);
-		tag(ForgeTags.MILK_BOTTLE).add(ModItems.MILK_BOTTLE.get());
-
-		tag(ForgeTags.PASTA).addTags(ForgeTags.PASTA_RAW_PASTA);
-		tag(ForgeTags.PASTA_RAW_PASTA).add(ModItems.RAW_PASTA.get());
-
-		tag(ForgeTags.RAW_BACON).add(ModItems.BACON.get());
-		tag(ForgeTags.RAW_BEEF).add(Items.BEEF, ModItems.MINCED_BEEF.get());
-		tag(ForgeTags.RAW_CHICKEN).add(Items.CHICKEN, ModItems.CHICKEN_CUTS.get());
-		tag(ForgeTags.RAW_PORK).add(Items.PORKCHOP, ModItems.BACON.get());
-		tag(ForgeTags.RAW_MUTTON).add(Items.MUTTON, ModItems.MUTTON_CHOPS.get());
-
-		tag(ForgeTags.RAW_FISHES).addTags(ForgeTags.RAW_FISHES_COD, ForgeTags.RAW_FISHES_SALMON, ForgeTags.RAW_FISHES_TROPICAL);
-		tag(ForgeTags.RAW_FISHES_COD).add(Items.COD, ModItems.COD_SLICE.get());
-		tag(ForgeTags.RAW_FISHES_SALMON).add(Items.SALMON, ModItems.SALMON_SLICE.get());
-		tag(ForgeTags.RAW_FISHES_TROPICAL).add(Items.TROPICAL_FISH);
-
-		tag(ForgeTags.SALAD_INGREDIENTS).addTags(ForgeTags.SALAD_INGREDIENTS_CABBAGE);
-		tag(ForgeTags.SALAD_INGREDIENTS_CABBAGE).add(ModItems.CABBAGE.get(), ModItems.CABBAGE_LEAF.get());
-
-		tag(ForgeTags.SEEDS).addTags(ForgeTags.SEEDS_CABBAGE, ForgeTags.SEEDS_RICE, ForgeTags.SEEDS_TOMATO);
-		tag(ForgeTags.SEEDS_CABBAGE).add(ModItems.CABBAGE_SEEDS.get());
-		tag(ForgeTags.SEEDS_RICE).add(ModItems.RICE.get());
-		tag(ForgeTags.SEEDS_TOMATO).add(ModItems.TOMATO_SEEDS.get());
-
-		tag(ForgeTags.VEGETABLES).addTags(ForgeTags.VEGETABLES_BEETROOT, ForgeTags.VEGETABLES_CARROT, ForgeTags.VEGETABLES_ONION, ForgeTags.VEGETABLES_POTATO, ForgeTags.VEGETABLES_TOMATO);
-		tag(ForgeTags.VEGETABLES_BEETROOT).add(Items.BEETROOT);
-		tag(ForgeTags.VEGETABLES_CARROT).add(Items.CARROT);
-		tag(ForgeTags.VEGETABLES_ONION).add(ModItems.ONION.get());
-		tag(ForgeTags.VEGETABLES_POTATO).add(Items.POTATO);
-		tag(ForgeTags.VEGETABLES_TOMATO).add(ModItems.TOMATO.get());
-
-		tag(ForgeTags.TOOLS).addTags(ForgeTags.TOOLS_AXES, ForgeTags.TOOLS_KNIVES, ForgeTags.TOOLS_PICKAXES, ForgeTags.TOOLS_SHOVELS);
-		tag(ForgeTags.TOOLS_AXES).add(Items.WOODEN_AXE, Items.STONE_AXE, Items.IRON_AXE, Items.DIAMOND_AXE, Items.GOLDEN_AXE, Items.NETHERITE_AXE);
-		tag(ForgeTags.TOOLS_KNIVES).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get(), ModItems.NETHERITE_KNIFE.get());
-		tag(ForgeTags.TOOLS_PICKAXES).add(Items.WOODEN_PICKAXE, Items.STONE_PICKAXE, Items.IRON_PICKAXE, Items.DIAMOND_PICKAXE, Items.GOLDEN_PICKAXE, Items.NETHERITE_PICKAXE);
-		tag(ForgeTags.TOOLS_SHOVELS).add(Items.WOODEN_SHOVEL, Items.STONE_SHOVEL, Items.IRON_SHOVEL, Items.DIAMOND_SHOVEL, Items.GOLDEN_SHOVEL, Items.NETHERITE_SHOVEL);
+		tag(CommonTags.TOOLS_KNIFE).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get(), ModItems.NETHERITE_KNIFE.get());
 	}
 
 	public void registerCompatibilityTags() {

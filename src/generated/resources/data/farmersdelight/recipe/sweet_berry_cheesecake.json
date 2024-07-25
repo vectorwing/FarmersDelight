@@ -6,7 +6,7 @@
       "item": "farmersdelight:pie_crust"
     },
     "m": {
-      "tag": "forge:milk"
+      "tag": "c:foods/milk"
     },
     "s": {
       "item": "minecraft:sweet_berries"

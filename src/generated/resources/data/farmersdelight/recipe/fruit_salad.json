@@ -12,10 +12,10 @@
       "item": "minecraft:melon_slice"
     },
     {
-      "tag": "forge:berries"
+      "tag": "c:foods/berry"
     },
     {
-      "tag": "forge:berries"
+      "tag": "c:foods/berry"
     },
     {
       "item": "farmersdelight:pumpkin_slice"

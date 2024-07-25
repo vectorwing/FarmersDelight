@@ -11,7 +11,7 @@ import net.neoforged.neoforge.common.Tags;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.crafting.ingredient.ItemAbilityIngredient;
 import vectorwing.farmersdelight.common.registry.ModItems;
-import vectorwing.farmersdelight.common.tag.ForgeTags;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 
 public class CuttingRecipes
@@ -38,120 +38,120 @@ public class CuttingRecipes
 	}
 
 	private static void cuttingAnimalItems(RecipeOutput output) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BEEF), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.MINCED_BEEF.get(), 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BEEF), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.MINCED_BEEF.get(), 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.PORKCHOP), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.BACON.get(), 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.PORKCHOP), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.BACON.get(), 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CHICKEN), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.CHICKEN_CUTS.get(), 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CHICKEN), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.CHICKEN_CUTS.get(), 2)
 				.addResult(Items.BONE_MEAL)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.COOKED_CHICKEN), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.COOKED_CHICKEN_CUTS.get(), 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.COOKED_CHICKEN), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.COOKED_CHICKEN_CUTS.get(), 2)
 				.addResult(Items.BONE_MEAL)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.COD), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.COD_SLICE.get(), 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.COD), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.COD_SLICE.get(), 2)
 				.addResult(Items.BONE_MEAL)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.COOKED_COD), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.COOKED_COD_SLICE.get(), 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.COOKED_COD), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.COOKED_COD_SLICE.get(), 2)
 				.addResult(Items.BONE_MEAL)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.SALMON), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.SALMON_SLICE.get(), 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.SALMON), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.SALMON_SLICE.get(), 2)
 				.addResult(Items.BONE_MEAL)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.COOKED_SALMON), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.COOKED_SALMON_SLICE.get(), 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.COOKED_SALMON), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.COOKED_SALMON_SLICE.get(), 2)
 				.addResult(Items.BONE_MEAL)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.HAM.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.PORKCHOP, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.HAM.get()), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.PORKCHOP, 2)
 				.addResult(Items.BONE)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.SMOKED_HAM.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.COOKED_PORKCHOP, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.SMOKED_HAM.get()), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.COOKED_PORKCHOP, 2)
 				.addResult(Items.BONE)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.MUTTON), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.MUTTON_CHOPS.get(), 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.MUTTON), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.MUTTON_CHOPS.get(), 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.COOKED_MUTTON), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.COOKED_MUTTON_CHOPS.get(), 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.COOKED_MUTTON), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.COOKED_MUTTON_CHOPS.get(), 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.INK_SAC), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.BLACK_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.INK_SAC), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.BLACK_DYE, 2)
 				.build(output);
 	}
 
 	private static void cuttingVegetables(RecipeOutput output) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.CABBAGE.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.CABBAGE_LEAF.get(), 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.CABBAGE.get()), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.CABBAGE_LEAF.get(), 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.RICE_PANICLE.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.RICE.get(), 1)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.RICE_PANICLE.get()), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.RICE.get(), 1)
 				.addResult(ModItems.STRAW.get())
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.MELON), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.MELON_SLICE, 9)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.MELON), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.MELON_SLICE, 9)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.PUMPKIN), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.PUMPKIN_SLICE.get(), 4)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.PUMPKIN), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.PUMPKIN_SLICE.get(), 4)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.BROWN_MUSHROOM_COLONY.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.BROWN_MUSHROOM, 5)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.BROWN_MUSHROOM_COLONY.get()), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.BROWN_MUSHROOM, 5)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.RED_MUSHROOM_COLONY.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.RED_MUSHROOM, 5)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.RED_MUSHROOM_COLONY.get()), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.RED_MUSHROOM, 5)
 				.build(output);
 	}
 
 	private static void cuttingFoods(RecipeOutput output) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ForgeTags.DOUGH), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.RAW_PASTA.get(), 1)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(CommonTags.FOODS_DOUGH), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.RAW_PASTA.get(), 1)
 				.build(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "tag_dough"));
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.KELP_ROLL.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.KELP_ROLL_SLICE.get(), 3)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.KELP_ROLL.get()), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.KELP_ROLL_SLICE.get(), 3)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CAKE), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.CAKE_SLICE.get(), 7)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CAKE), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.CAKE_SLICE.get(), 7)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.APPLE_PIE.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.APPLE_PIE_SLICE.get(), 4)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.APPLE_PIE.get()), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.APPLE_PIE_SLICE.get(), 4)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.SWEET_BERRY_CHEESECAKE.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get(), 4)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.SWEET_BERRY_CHEESECAKE.get()), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get(), 4)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.CHOCOLATE_PIE.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.CHOCOLATE_PIE_SLICE.get(), 4)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.CHOCOLATE_PIE.get()), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.CHOCOLATE_PIE_SLICE.get(), 4)
 				.build(output);
 	}
 
 	private static void cuttingFlowers(RecipeOutput output) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.WITHER_ROSE), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.BLACK_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.WITHER_ROSE), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.BLACK_DYE, 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CORNFLOWER), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.BLUE_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CORNFLOWER), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.BLUE_DYE, 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BLUE_ORCHID), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.LIGHT_BLUE_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BLUE_ORCHID), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.LIGHT_BLUE_DYE, 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.AZURE_BLUET), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.LIGHT_GRAY_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.AZURE_BLUET), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.LIGHT_GRAY_DYE, 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.OXEYE_DAISY), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.LIGHT_GRAY_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.OXEYE_DAISY), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.LIGHT_GRAY_DYE, 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.WHITE_TULIP), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.LIGHT_GRAY_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.WHITE_TULIP), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.LIGHT_GRAY_DYE, 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.ALLIUM), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.MAGENTA_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.ALLIUM), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.MAGENTA_DYE, 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.ORANGE_TULIP), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.ORANGE_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.ORANGE_TULIP), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.ORANGE_DYE, 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.PINK_TULIP), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.PINK_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.PINK_TULIP), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.PINK_DYE, 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.RED_TULIP), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.RED_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.RED_TULIP), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.RED_DYE, 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.POPPY), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.RED_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.POPPY), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.RED_DYE, 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.LILY_OF_THE_VALLEY), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.WHITE_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.LILY_OF_THE_VALLEY), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.WHITE_DYE, 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.DANDELION), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.YELLOW_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.DANDELION), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.YELLOW_DYE, 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_BEETROOTS.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.BEETROOT_SEEDS, 1)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_BEETROOTS.get()), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.BEETROOT_SEEDS, 1)
 				.addResult(Items.RED_DYE)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_CABBAGES.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.CABBAGE_SEEDS.get(), 1)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_CABBAGES.get()), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.CABBAGE_SEEDS.get(), 1)
 				.addResultWithChance(Items.YELLOW_DYE, 0.5F, 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_CARROTS.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.CARROT, 1)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_CARROTS.get()), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.CARROT, 1)
 				.addResultWithChance(Items.LIGHT_GRAY_DYE, 0.5F, 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_ONIONS.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.ONION.get(), 1)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_ONIONS.get()), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.ONION.get(), 1)
 				.addResult(Items.MAGENTA_DYE, 2)
 				.addResultWithChance(Items.LIME_DYE, 0.1F)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_POTATOES.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), Items.POTATO, 1)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_POTATOES.get()), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.POTATO, 1)
 				.addResultWithChance(Items.PURPLE_DYE, 0.5F, 2)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_RICE.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.RICE.get(), 1)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_RICE.get()), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.RICE.get(), 1)
 				.addResultWithChance(ModItems.STRAW.get(), 0.5F)
 				.build(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_TOMATOES.get()), Ingredient.of(ForgeTags.TOOLS_KNIVES), ModItems.TOMATO_SEEDS.get(), 1)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_TOMATOES.get()), Ingredient.of(CommonTags.TOOLS_KNIFE), ModItems.TOMATO_SEEDS.get(), 1)
 				.addResultWithChance(ModItems.TOMATO.get(), 0.2F)
 				.addResultWithChance(Items.GREEN_DYE, 0.1F)
 				.build(output);

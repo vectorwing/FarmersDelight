@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "M": {
-      "tag": "forge:milk"
+      "tag": "c:foods/milk"
     },
     "w": {
       "item": "minecraft:wheat"

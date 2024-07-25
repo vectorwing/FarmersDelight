@@ -3,16 +3,16 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "forge:bread"
+      "tag": "c:foods/bread"
     },
     {
-      "tag": "forge:cooked_mutton"
+      "tag": "c:foods/cooked_mutton"
     },
     {
-      "tag": "forge:salad_ingredients"
+      "tag": "c:foods/leafy_green"
     },
     {
-      "tag": "forge:crops/onion"
+      "tag": "c:crops/onion"
     }
   ],
   "result": {

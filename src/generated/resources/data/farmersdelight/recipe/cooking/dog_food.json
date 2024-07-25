@@ -9,10 +9,10 @@
       "item": "minecraft:bone_meal"
     },
     {
-      "tag": "farmersdelight:wolf_prey"
+      "tag": "c:foods/raw_meat"
     },
     {
-      "tag": "forge:crops/rice"
+      "tag": "c:crops/rice"
     }
   ],
   "recipe_book_tab": "misc",

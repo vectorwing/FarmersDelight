@@ -9,7 +9,7 @@
       "item": "minecraft:cocoa_beans"
     },
     "m": {
-      "tag": "forge:milk"
+      "tag": "c:foods/milk"
     },
     "x": {
       "item": "minecraft:sugar"

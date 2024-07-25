@@ -9,7 +9,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.tag.CompatibilityTags;
-import vectorwing.farmersdelight.common.tag.ForgeTags;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.Nullable;
@@ -83,7 +83,7 @@ public class BlockTags extends BlockTagsProvider
 				.addTag(net.minecraft.tags.BlockTags.WOOL)
 				.addTag(net.minecraft.tags.BlockTags.CANDLE_CAKES)
 				.addTag(ModTags.STRAW_BLOCKS)
-				.addTag(ForgeTags.MINEABLE_WITH_KNIFE);
+				.addTag(CommonTags.MINEABLE_WITH_KNIFE);
 	}
 
 	protected void registerMinecraftTags() {
@@ -191,7 +191,7 @@ public class BlockTags extends BlockTagsProvider
 	protected void registerForgeTags() {
 		tag(net.minecraft.tags.BlockTags.DIRT).add(
 				ModBlocks.RICH_SOIL.get());
-		tag(ForgeTags.MINEABLE_WITH_KNIFE);
+		tag(CommonTags.MINEABLE_WITH_KNIFE);
 	}
 
 	protected void registerModTags() {

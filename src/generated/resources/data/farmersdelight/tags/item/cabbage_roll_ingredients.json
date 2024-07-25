@@ -1,11 +1,11 @@
 {
   "values": [
-    "#forge:raw_pork",
-    "#forge:raw_fishes",
-    "#forge:raw_chicken",
-    "#forge:raw_beef",
-    "#forge:raw_mutton",
-    "#forge:eggs",
+    "#c:foods/raw_pork",
+    "#c:foods/safe_raw_fish",
+    "#c:foods/raw_chicken",
+    "#c:foods/raw_beef",
+    "#c:foods/raw_mutton",
+    "#c:eggs",
     "#c:mushrooms",
     "minecraft:carrot",
     "minecraft:potato",

@@ -1,7 +1,7 @@
 {
   "values": [
-    "#forge:raw_chicken",
-    "#forge:raw_mutton",
+    "#c:foods/raw_chicken",
+    "#c:foods/raw_mutton",
     "minecraft:rabbit"
   ]
 }

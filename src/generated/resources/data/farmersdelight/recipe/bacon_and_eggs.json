@@ -3,19 +3,19 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "farmersdelight:cooked_bacon"
+      "tag": "c:foods/cooked_bacon"
     },
     {
-      "item": "farmersdelight:cooked_bacon"
+      "tag": "c:foods/cooked_bacon"
     },
     {
       "item": "minecraft:bowl"
     },
     {
-      "tag": "forge:cooked_eggs"
+      "tag": "c:foods/cooked_egg"
     },
     {
-      "tag": "forge:cooked_eggs"
+      "tag": "c:foods/cooked_egg"
     }
   ],
   "result": {

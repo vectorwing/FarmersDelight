@@ -3,13 +3,13 @@
   "experience": 1.0,
   "ingredients": [
     {
-      "tag": "forge:raw_fishes"
+      "tag": "c:foods/safe_raw_fish"
     },
     {
       "item": "farmersdelight:tomato_sauce"
     },
     {
-      "tag": "forge:crops/onion"
+      "tag": "c:crops/onion"
     }
   ],
   "recipe_book_tab": "meals",

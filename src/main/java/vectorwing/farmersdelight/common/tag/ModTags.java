@@ -65,9 +65,6 @@ public class ModTags
 	// Items (ideally tools) that can obtain straw when harvesting grassy plants. Populated by all knives by default.
 	public static final TagKey<Item> STRAW_HARVESTERS = modItemTag("straw_harvesters");
 
-	// Foods that drop from mobs that wolves prey upon (sheep, rabbit and chicken).
-	public static final TagKey<Item> WOLF_PREY = modItemTag("wolf_prey");
-
 	// Foods and items that serve as filling for Cabbage Rolls
 	public static final TagKey<Item> CABBAGE_ROLL_INGREDIENTS = modItemTag("cabbage_roll_ingredients");
 

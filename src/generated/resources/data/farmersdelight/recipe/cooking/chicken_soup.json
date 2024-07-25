@@ -3,16 +3,22 @@
   "experience": 1.0,
   "ingredients": [
     {
-      "tag": "forge:raw_chicken"
+      "tag": "c:foods/raw_chicken"
     },
     {
       "item": "minecraft:carrot"
     },
     {
-      "tag": "forge:salad_ingredients"
+      "tag": "c:foods/leafy_green"
     },
     {
-      "tag": "forge:vegetables"
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "c:foods/vegetable"
+      },
+      "subtracted": {
+        "item": "minecraft:melon_slice"
+      }
     }
   ],
   "recipe_book_tab": "meals",

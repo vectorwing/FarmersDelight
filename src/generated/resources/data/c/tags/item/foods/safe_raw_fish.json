@@ -1,0 +1,8 @@
+{
+  "remove": [
+    "minecraft:pufferfish"
+  ],
+  "values": [
+    "#c:foods/raw_fish"
+  ]
+}

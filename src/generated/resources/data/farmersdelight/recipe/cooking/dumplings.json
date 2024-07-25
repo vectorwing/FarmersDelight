@@ -3,25 +3,25 @@
   "experience": 1.0,
   "ingredients": [
     {
-      "tag": "forge:dough"
+      "tag": "c:foods/dough"
     },
     {
-      "tag": "forge:crops/cabbage"
+      "tag": "c:crops/cabbage"
     },
     {
-      "tag": "forge:crops/onion"
+      "tag": "c:crops/onion"
     },
     {
       "type": "neoforge:compound",
       "children": [
         {
-          "tag": "forge:raw_chicken"
+          "tag": "c:foods/raw_chicken"
         },
         {
-          "tag": "forge:raw_pork"
+          "tag": "c:foods/raw_pork"
         },
         {
-          "tag": "forge:raw_beef"
+          "tag": "c:foods/raw_beef"
         },
         {
           "item": "minecraft:brown_mushroom"

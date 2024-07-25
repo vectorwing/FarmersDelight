@@ -3,31 +3,14 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "forge:crops/tomato"
+      "tag": "c:crops/tomato"
     },
     {
-      "tag": "forge:crops/onion"
+      "tag": "c:crops/onion"
     },
-    [
-      {
-        "tag": "forge:cooked_beef"
-      },
-      {
-        "tag": "forge:cooked_pork"
-      },
-      {
-        "tag": "forge:cooked_chicken"
-      },
-      {
-        "tag": "forge:cooked_mutton"
-      },
-      {
-        "tag": "forge:cooked_fishes"
-      },
-      {
-        "item": "minecraft:cooked_rabbit"
-      }
-    ],
+    {
+      "tag": "c:foods/cooked_meat"
+    },
     {
       "item": "minecraft:stick"
     }

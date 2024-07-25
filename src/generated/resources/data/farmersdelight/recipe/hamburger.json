@@ -3,19 +3,19 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "forge:bread"
+      "tag": "c:foods/bread"
     },
     {
       "item": "farmersdelight:beef_patty"
     },
     {
-      "tag": "forge:salad_ingredients"
+      "tag": "c:foods/leafy_green"
     },
     {
-      "tag": "forge:crops/tomato"
+      "tag": "c:crops/tomato"
     },
     {
-      "tag": "forge:crops/onion"
+      "tag": "c:crops/onion"
     }
   ],
   "result": {

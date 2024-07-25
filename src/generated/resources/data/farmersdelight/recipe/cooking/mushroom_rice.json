@@ -9,7 +9,7 @@
       "item": "minecraft:red_mushroom"
     },
     {
-      "tag": "forge:crops/rice"
+      "tag": "c:crops/rice"
     },
     {
       "type": "neoforge:compound",

@@ -4,10 +4,10 @@
   "experience": 0.35,
   "ingredients": [
     {
-      "tag": "forge:crops/tomato"
+      "tag": "c:crops/tomato"
     },
     {
-      "tag": "forge:crops/tomato"
+      "tag": "c:crops/tomato"
     }
   ],
   "recipe_book_tab": "misc",

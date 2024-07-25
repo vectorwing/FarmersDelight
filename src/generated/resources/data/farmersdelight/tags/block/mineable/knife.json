@@ -13,6 +13,6 @@
     "#minecraft:wool",
     "#minecraft:candle_cakes",
     "#farmersdelight:straw_blocks",
-    "#forge:mineable/knife"
+    "#c:mineable/knife"
   ]
 }

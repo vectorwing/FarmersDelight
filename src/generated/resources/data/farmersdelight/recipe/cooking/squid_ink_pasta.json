@@ -3,13 +3,13 @@
   "experience": 1.0,
   "ingredients": [
     {
-      "tag": "forge:raw_fishes"
+      "tag": "c:foods/safe_raw_fish"
     },
     {
-      "tag": "forge:pasta"
+      "tag": "c:foods/pasta"
     },
     {
-      "tag": "forge:crops/tomato"
+      "tag": "c:crops/tomato"
     },
     {
       "item": "minecraft:ink_sac"

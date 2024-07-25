@@ -4,7 +4,7 @@
   "experience": 0.35,
   "ingredients": [
     {
-      "tag": "forge:crops/cabbage"
+      "tag": "c:crops/cabbage"
     },
     {
       "tag": "farmersdelight:cabbage_roll_ingredients"

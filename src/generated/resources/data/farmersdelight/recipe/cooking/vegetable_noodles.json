@@ -9,13 +9,19 @@
       "item": "minecraft:brown_mushroom"
     },
     {
-      "tag": "forge:pasta"
+      "tag": "c:foods/pasta"
     },
     {
-      "tag": "forge:salad_ingredients"
+      "tag": "c:foods/leafy_green"
     },
     {
-      "tag": "forge:vegetables"
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "c:foods/vegetable"
+      },
+      "subtracted": {
+        "item": "minecraft:melon_slice"
+      }
     }
   ],
   "recipe_book_tab": "meals",

@@ -12,7 +12,7 @@
       "item": "minecraft:beetroot"
     },
     {
-      "tag": "forge:salad_ingredients"
+      "tag": "c:foods/leafy_green"
     }
   ],
   "recipe_book_tab": "meals",

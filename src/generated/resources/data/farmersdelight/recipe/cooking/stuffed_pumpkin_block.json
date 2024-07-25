@@ -8,10 +8,10 @@
   "experience": 2.0,
   "ingredients": [
     {
-      "tag": "forge:crops/rice"
+      "tag": "c:crops/rice"
     },
     {
-      "tag": "forge:crops/onion"
+      "tag": "c:crops/onion"
     },
     {
       "item": "minecraft:brown_mushroom"
@@ -20,10 +20,16 @@
       "item": "minecraft:potato"
     },
     {
-      "tag": "forge:berries"
+      "tag": "c:foods/berry"
     },
     {
-      "tag": "forge:vegetables"
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "c:foods/vegetable"
+      },
+      "subtracted": {
+        "item": "minecraft:melon_slice"
+      }
     }
   ],
   "recipe_book_tab": "meals",
