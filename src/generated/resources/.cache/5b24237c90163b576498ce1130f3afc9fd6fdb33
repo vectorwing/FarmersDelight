@@ -1,4 +1,4 @@
-// 1.21	2024-07-25T19:47:05.0689139	Tags for minecraft:item mod id farmersdelight
+// 1.21	2024-07-29T20:42:32.3912289	Tags for minecraft:item mod id farmersdelight
 65eba9e0353834055ff822059bd7e1784fe218ad data/createaddition/tags/item/plants.json
 f55c336a7c0c249fc90b76c979cfa5d5f6a277bf data/createaddition/tags/item/plant_foods.json
 0c943816d6d2fa986a587d5c13c7d38aaed8e159 data/create/tags/item/upright_on_belt.json
@@ -56,12 +56,13 @@ b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/farmersdelight/tags/item/straw_har
 edaf49470d0e1c903468fd6902234bbeec85c337 data/farmersdelight/tags/item/tools/knives.json
 5596501768488a25c5bcc6ef16c2fc5ca3ab49e9 data/farmersdelight/tags/item/wild_crops.json
 9980a57042decbe4d29e529febb0c76a7ae1b152 data/minecraft/tags/item/chicken_food.json
-b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/minecraft/tags/item/enchantable/durability.json
-b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/minecraft/tags/item/enchantable/fire_aspect.json
+b144808149c1364e3cd3dc4b4128b76b24e00bf1 data/minecraft/tags/item/enchantable/durability.json
+b144808149c1364e3cd3dc4b4128b76b24e00bf1 data/minecraft/tags/item/enchantable/fire_aspect.json
 b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/minecraft/tags/item/enchantable/mining.json
 b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/minecraft/tags/item/enchantable/mining_loot.json
-b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/minecraft/tags/item/enchantable/sharp_weapon.json
-b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/minecraft/tags/item/enchantable/weapon.json
+b144808149c1364e3cd3dc4b4128b76b24e00bf1 data/minecraft/tags/item/enchantable/sharp_weapon.json
+b144808149c1364e3cd3dc4b4128b76b24e00bf1 data/minecraft/tags/item/enchantable/sword.json
+b144808149c1364e3cd3dc4b4128b76b24e00bf1 data/minecraft/tags/item/enchantable/weapon.json
 9f7c54970bfbea398bb27fdc66750b6459bc9946 data/minecraft/tags/item/horse_tempt_items.json
 ab8d571e62fc4b847ce3e023c22e53e76c98328a data/minecraft/tags/item/meat.json
 9980a57042decbe4d29e529febb0c76a7ae1b152 data/minecraft/tags/item/parrot_food.json

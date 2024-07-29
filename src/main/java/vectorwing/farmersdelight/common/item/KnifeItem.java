@@ -55,8 +55,8 @@ public class KnifeItem extends DiggerItem
 
 	@Override
 	public boolean isPrimaryItemFor(ItemStack stack, Holder<Enchantment> enchantment) {
-		if (enchantment.value().isPrimaryItem(new ItemStack(Items.DIAMOND_SWORD)) && !enchantment.is(Enchantments.SWEEPING_EDGE)) {
-			return true;
+		if (enchantment.is(Enchantments.SWEEPING_EDGE)) {
+			return false;
 		}
 		return super.isPrimaryItemFor(stack, enchantment);
 	}

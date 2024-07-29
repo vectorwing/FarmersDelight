@@ -130,7 +130,7 @@ public class FoodValues
 			.nutrition(7).saturationModifier(0.6f).build();
 	public static final FoodProperties COD_ROLL = (new FoodProperties.Builder())
 			.nutrition(7).saturationModifier(0.6f).build();
-	public static final FoodProperties KELP_ROLL = new FoodProperties(6, 0.5f, false, 2.4f, Optional.empty(), List.of());
+	public static final FoodProperties KELP_ROLL = new FoodProperties(12, 12, false, 2.4f, Optional.empty(), List.of());
 	public static final FoodProperties KELP_ROLL_SLICE = (new FoodProperties.Builder())
 			.nutrition(6).saturationModifier(0.5f).fast().build();
 

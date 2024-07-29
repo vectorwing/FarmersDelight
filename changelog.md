@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.5
+
+### Fixes
+- (1.21) Fixed Kelp Roll (whole) having wrng food stats;
+- (1.21) Fixed Skillet not being enchantable in an anvil;
+- (1.21) Fixed Knives being unable to receive Knockback and Looting;
+
 ## 1.2.4
 
 ### Updates
