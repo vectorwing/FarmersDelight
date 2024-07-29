@@ -7,6 +7,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.data.loading.DatagenModLoader;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
@@ -17,6 +18,9 @@ public class CommonModBusEvents
 {
 	@SubscribeEvent
 	public static void onModifyDefaultComponents(ModifyDefaultComponentsEvent event) {
+		if (DatagenModLoader.isRunningDataGen()) {
+			return;
+		}
 		if (Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) {
 			Configuration.SOUP_ITEM_LIST.get().forEach((key) -> {
 				Item item = BuiltInRegistries.ITEM.get(ResourceLocation.parse(key));
