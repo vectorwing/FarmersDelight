@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
+  "group": "fd_tatami",
   "key": {
     "c": {
       "item": "farmersdelight:canvas"

@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
+  "group": "fd_full_tatami_mat",
   "ingredients": [
     {
       "item": "farmersdelight:half_tatami_mat"

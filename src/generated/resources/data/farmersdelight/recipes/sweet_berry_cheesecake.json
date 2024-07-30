@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
+  "group": "fd_sweet_berry_cheesecake",
   "key": {
     "O": {
       "item": "farmersdelight:pie_crust"

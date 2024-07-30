@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
+  "group": "fd_rice",
   "ingredients": [
     {
       "item": "farmersdelight:rice_bag"
