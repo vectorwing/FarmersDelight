@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.5
+
+### Updates
+- Added Canvas Signs to the vanilla `signs` and `hanging_signs` tags;
+
 ## 1.2.4
 
 ### Updates

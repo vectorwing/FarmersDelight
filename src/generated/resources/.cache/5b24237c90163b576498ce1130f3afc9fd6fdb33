@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-02T11:15:29.5748195	Tags for minecraft:item mod id farmersdelight
+// 1.20.1	2024-07-29T23:35:03.9425805	Tags for minecraft:item mod id farmersdelight
 65eba9e0353834055ff822059bd7e1784fe218ad data/createaddition/tags/items/plants.json
 f55c336a7c0c249fc90b76c979cfa5d5f6a277bf data/createaddition/tags/items/plant_foods.json
 0c943816d6d2fa986a587d5c13c7d38aaed8e159 data/create/tags/items/upright_on_belt.json
@@ -68,7 +68,9 @@ f9570db096e701a0b8872dddbb31d8dffea2a204 data/forge/tags/items/vegetables/beetro
 67cc2b5a00311a0164d09c5487c714d091be00d9 data/forge/tags/items/vegetables/onion.json
 849f851b30eb74acf2ca9316cd9708544427ecbc data/forge/tags/items/vegetables/potato.json
 0fe37095f12c7c6a3bca60606cab33162378e60d data/forge/tags/items/vegetables/tomato.json
+7441d3370afb8b426c09f3608f0dd0aea4f54e4d data/minecraft/tags/items/hanging_signs.json
 fe7bdb9a3a19d42543aea1030ea44f1db041a878 data/minecraft/tags/items/piglin_loved.json
+38e1524ee683c493a01193efe4926abb88caa287 data/minecraft/tags/items/signs.json
 f3b1539ad9a9117d3c48eca8dc67768f1a118df4 data/minecraft/tags/items/small_flowers.json
 166fca1b0d8b63bf7564f93e9e7d0bf3dd45bf03 data/minecraft/tags/items/tall_flowers.json
 f305fbe067478314b9763bd8e60893ec468f423b data/origins/tags/items/meat.json
