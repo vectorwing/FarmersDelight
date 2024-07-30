@@ -2,11 +2,9 @@ package vectorwing.farmersdelight.common;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber
 public class Configuration
 {
 	public static ForgeConfigSpec COMMON_CONFIG;
