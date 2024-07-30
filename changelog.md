@@ -2,6 +2,9 @@
 
 ## 1.2.5
 
+### Additions
+- Added tag: `farmersdelight:campfire_signal_smoke`. Blocks in this tag will cause Campfires to emit "signal smoke", like the Hay Bale;
+
 ### Updates
 - Knives are now effective at mining Pumpkins and Melons;
 - Knives will harvest **4 Pumpkin Slices** when mining a Pumpkin, instead of a whole unit. Carved Pumpkins are unaffected;

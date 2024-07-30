@@ -54,6 +54,9 @@ public class ModTags
 	// Candle cakes that should drop the vanilla cake slice when sliced by a knife.
 	public static final TagKey<Block> DROPS_CAKE_SLICE = modBlockTag("drops_cake_slice");
 
+	// Blocks which cause Campfires to emit signal smoke when placed underneath them.
+	public static final TagKey<Block> CAMPFIRE_SIGNAL_SMOKE = modBlockTag("campfire_signal_smoke");
+
 	// Items that represent the wild form of a farmable crop.
 	public static final TagKey<Item> WILD_CROPS_ITEM = modItemTag("wild_crops");
 

@@ -1,6 +1,7 @@
-// 1.20.1	2024-07-30T11:16:41.2643177	Tags for minecraft:block mod id farmersdelight
+// 1.20.1	2024-07-30T17:18:17.268369	Tags for minecraft:block mod id farmersdelight
 97e4acbe405d9adae7df8073ec6e9af828285ec9 data/create/tags/blocks/brittle.json
 89dff4a2813a4b6fe13cde6e775266a1d606a4aa data/create/tags/blocks/passive_boiler_heaters.json
+6644ebda4035b2e597066fa2def42ba14650cfbc data/farmersdelight/tags/blocks/campfire_signal_smoke.json
 8d7cbaffcdabbd68f45063e7fa616212824d0ca6 data/farmersdelight/tags/blocks/compost_activators.json
 17bf02f1662de477e421a897a9b1a092da3fd1b4 data/farmersdelight/tags/blocks/drops_cake_slice.json
 bfaccff8e729039a0c1d0db4d359ded77f7c60c8 data/farmersdelight/tags/blocks/heat_conductors.json
