@@ -3,6 +3,8 @@
 ## 1.2.5
 
 ### Updates
+- Knives are now effective at mining Pumpkins and Melons;
+- Knives will harvest **4 Pumpkin Slices** when mining a Pumpkin, instead of a whole unit. Carved Pumpkins are unaffected;
 - Added Canvas Signs to the vanilla `signs` and `hanging_signs` tags;
 
 ## 1.2.4

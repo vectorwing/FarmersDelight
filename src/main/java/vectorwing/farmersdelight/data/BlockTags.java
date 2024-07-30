@@ -71,6 +71,8 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.RICH_SOIL_FARMLAND.get()
 		);
 		tag(ModTags.MINEABLE_WITH_KNIFE).add(
+						Blocks.MELON,
+						Blocks.PUMPKIN,
 						Blocks.COBWEB,
 						Blocks.CAKE,
 						ModBlocks.APPLE_PIE.get(),
