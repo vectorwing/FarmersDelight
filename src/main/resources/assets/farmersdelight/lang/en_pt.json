@@ -294,7 +294,9 @@
   "farmersdelight.block.cutting_board.invalid_item": "No good reason ta chop this thingy...",
   "farmersdelight.block.cutting_board.invalid_tool": "Ack, this here tool won't cut it...",
   "farmersdelight.block.skillet.invalid_item": "A wee foolish to try an' cook this...",
+  "farmersdelight.block.skillet.underwater": "Hafta drain all that bilge off first...",
   "farmersdelight.item.skillet.how_to_cook": "Hoist yer grub by yer other hand ta cook it!",
+  "farmersdelight.item.skillet.underwater": "Why are ye tryin' ta fry under the sea?",
 
   "death.attack.farmersdelight.stove": "%1$s got charr'd up in a grille",
   "death.attack.farmersdelight.stove.player": "%1$s got grilled in the hands o' Chef %2$s",

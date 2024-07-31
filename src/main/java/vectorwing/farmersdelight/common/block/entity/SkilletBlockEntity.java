@@ -29,7 +29,6 @@ import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
-import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlockEntity
@@ -49,7 +48,13 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 
 	public static void cookingTick(Level level, BlockPos pos, BlockState state, SkilletBlockEntity skillet) {
 		boolean isHeated = skillet.isHeated(level, pos);
-		if (isHeated) {
+
+		if (state.getValue(SkilletBlock.WATERLOGGED)) {
+			if (!ItemUtils.isInventoryEmpty(skillet.inventory)) {
+				ItemUtils.dropItems(level, pos, skillet.inventory);
+				skillet.inventoryChanged();
+			}
+		} else if (isHeated) {
 			ItemStack cookingStack = skillet.getStoredStack();
 			if (cookingStack.isEmpty()) {
 				skillet.cookingTime = 0;
@@ -143,7 +148,7 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 		cookingTime = compound.getInt("CookTime");
 		cookingTimeTotal = compound.getInt("CookTimeTotal");
 		skilletStack = ItemStack.of(compound.getCompound("Skillet"));
-		fireAspectLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FIRE_ASPECT, skilletStack);
+		fireAspectLevel = EnchantmentHelper.getTagEnchantmentLevel(Enchantments.FIRE_ASPECT, skilletStack);
 	}
 
 	@Override
@@ -162,13 +167,17 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 
 	public void setSkilletItem(ItemStack stack) {
 		skilletStack = stack.copy();
-		fireAspectLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FIRE_ASPECT, stack);
+		fireAspectLevel = EnchantmentHelper.getTagEnchantmentLevel(Enchantments.FIRE_ASPECT, stack);
 		inventoryChanged();
 	}
 
-	public ItemStack addItemToCook(ItemStack addedStack, @Nullable Player player) {
+	public ItemStack addItemToCook(ItemStack addedStack, Player player) {
 		Optional<CampfireCookingRecipe> recipe = getMatchingRecipe(new SimpleContainer(addedStack));
 		if (recipe.isPresent()) {
+			if (getBlockState().getValue(SkilletBlock.WATERLOGGED)) {
+				player.displayClientMessage(TextUtils.getTranslation("block.skillet.underwater"), true);
+				return addedStack;
+			}
 			cookingTimeTotal = SkilletBlock.getSkilletCookingTime(recipe.get().getCookingTime(), fireAspectLevel);
 			boolean wasEmpty = getStoredStack().isEmpty();
 			ItemStack remainderStack = inventory.insertItem(0, addedStack.copy(), false);
@@ -180,7 +189,7 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 				}
 				return remainderStack;
 			}
-		} else if (player != null) {
+		} else {
 			player.displayClientMessage(TextUtils.getTranslation("block.skillet.invalid_item"), true);
 		}
 		return addedStack;

@@ -20,6 +20,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -29,6 +30,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -41,12 +44,13 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 import javax.annotation.Nullable;
 
 @SuppressWarnings("deprecation")
-public class SkilletBlock extends BaseEntityBlock
+public class SkilletBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 {
 	public static final int MINIMUM_COOKING_TIME = 60;
 
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty SUPPORT = BooleanProperty.create("support");
+	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
 	protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 4.0D, 15.0D);
 	protected static final VoxelShape SHAPE_WITH_TRAY = Shapes.or(SHAPE, Block.box(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
@@ -114,15 +118,22 @@ public class SkilletBlock extends BaseEntityBlock
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		Level level = context.getLevel();
+		FluidState fluid = level.getFluidState(context.getClickedPos());
+
 		return this.defaultBlockState()
 				.setValue(FACING, context.getHorizontalDirection())
+				.setValue(WATERLOGGED, fluid.getType() == Fluids.WATER)
 				.setValue(SUPPORT, getTrayState(context.getLevel(), context.getClickedPos()));
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+		if (state.getValue(WATERLOGGED)) {
+			level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+		}
 		if (facing.getAxis().equals(Direction.Axis.Y)) {
-			return state.setValue(SUPPORT, getTrayState(world, currentPos));
+			return state.setValue(SUPPORT, getTrayState(level, currentPos));
 		}
 		return state;
 	}
@@ -143,7 +154,7 @@ public class SkilletBlock extends BaseEntityBlock
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(FACING, SUPPORT);
+		builder.add(FACING, SUPPORT, WATERLOGGED);
 	}
 
 	@Override
@@ -159,6 +170,11 @@ public class SkilletBlock extends BaseEntityBlock
 				}
 			}
 		}
+	}
+
+	@Override
+	public FluidState getFluidState(BlockState state) {
+		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 
 	@Nullable
