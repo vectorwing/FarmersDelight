@@ -1,11 +1,14 @@
 package vectorwing.farmersdelight.common;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
 import net.minecraft.core.Position;
 import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.animal.Pig;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.BowlFoodItem;
 import net.minecraft.world.item.Item;
@@ -26,6 +29,7 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Set;
 
 public class CommonSetup
 {
@@ -33,7 +37,7 @@ public class CommonSetup
 		event.enqueueWork(() -> {
 			registerCompostables();
 			registerDispenserBehaviors();
-			registerAnimalFeeds();
+			registerItemSetAdditions();
 			registerStackSizeOverrides();
 		});
 
@@ -112,7 +116,7 @@ public class CommonSetup
 		ComposterBlock.COMPOSTABLES.put(ModItems.RED_MUSHROOM_COLONY.get(), 1.0F);
 	}
 
-	public static void registerAnimalFeeds() {
+	public static void registerItemSetAdditions() {
 		Ingredient newChickenFood = Ingredient.of(ModItems.CABBAGE_SEEDS.get(), ModItems.TOMATO_SEEDS.get(), ModItems.RICE.get());
 		Chicken.FOOD_ITEMS = new CompoundIngredient(Arrays.asList(Chicken.FOOD_ITEMS, newChickenFood))
 		{
@@ -124,5 +128,16 @@ public class CommonSetup
 		};
 
 		Collections.addAll(Parrot.TAME_FOOD, ModItems.CABBAGE_SEEDS.get(), ModItems.TOMATO_SEEDS.get(), ModItems.RICE.get());
+
+		Set<Item> newWantedItems = Sets.newHashSet(
+				ModItems.CABBAGE.get(),
+				ModItems.TOMATO.get(),
+				ModItems.ONION.get(),
+				ModItems.RICE.get(),
+				ModItems.CABBAGE_SEEDS.get(),
+				ModItems.TOMATO_SEEDS.get(),
+				ModItems.RICE_PANICLE.get());
+		newWantedItems.addAll(Villager.WANTED_ITEMS);
+		Villager.WANTED_ITEMS = ImmutableSet.copyOf(newWantedItems);
 	}
 }
