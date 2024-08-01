@@ -11,7 +11,7 @@
 ### Updates
 - Knives are now effective at mining Pumpkins and Melons;
 - Knives will harvest **4 Pumpkin Slices** when mining a Pumpkin, instead of a whole unit. Carved Pumpkins are unaffected;
-- Added Canvas Signs to the vanilla `signs` and `hanging_signs` tags;
+- Added Canvas Signs to the vanilla `signs` and `hanging_signs` item tags;
 - Some crafting recipes are now properly grouped in the Crafting Table's recipe book;
 - Skillets are now waterloggable, but are unable to cook underwater, either handheld or as a block. Hard to fry when the skillet is flooded!
 
