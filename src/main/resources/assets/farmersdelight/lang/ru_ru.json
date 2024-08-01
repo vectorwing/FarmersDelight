@@ -211,7 +211,7 @@
   "enchantment.farmersdelight.backstabbing": "Предательство",
   "enchantment.farmersdelight.backstabbing.desc": "Увеличивает урон при атаке цели со спины.",
 
-  "itemGroup.farmersdelight": "Фермерский восторг",
+  "itemGroup.farmersdelight": "Фермерский Восторг",
 
   "farmersdelight.container.recipe_book.cookable": "Доступно к готовке",
   "farmersdelight.container.cooking_pot": "Кухонный котел",
@@ -230,7 +230,7 @@
   "farmersdelight.tooltip.hot_cocoa": "Очищает от 1 вредного эффекта",
   "farmersdelight.tooltip.melon_juice": "Восстанавливает немного здоровья",
 
-  "farmersdelight.advancement.root": "Фермерский восторг",
+  "farmersdelight.advancement.root": "Фермерский Восторг",
   "farmersdelight.advancement.root.desc": "Вас ожидает целый мир разнообразных вкусов!",
 
   "farmersdelight.advancement.craft_knife": "Охота и собирательство",
