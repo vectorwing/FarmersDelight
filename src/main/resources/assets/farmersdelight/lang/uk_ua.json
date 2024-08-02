@@ -51,8 +51,8 @@
   "block.farmersdelight.green_canvas_sign": "Зелена брезентова табличка",
   "block.farmersdelight.red_canvas_sign": "Червона брезентова табличка",
   "block.farmersdelight.black_canvas_sign": "Чорна брезентова табличка",
-  "block.farmersdelight.hanging_canvas_sign": "Брезентова вивіска",
 
+  "block.farmersdelight.hanging_canvas_sign": "Брезентова вивіска",
   "block.farmersdelight.white_hanging_canvas_sign": "Біла брезентова вивіска",
   "block.farmersdelight.orange_hanging_canvas_sign": "Помаранчева брезентова вивіска",
   "block.farmersdelight.magenta_hanging_canvas_sign": "Пурпурова брезентова вивіска",
@@ -306,7 +306,15 @@
   "farmersdelight.jei.decomposition.light": "Пришвидшується на осонні",
   "farmersdelight.jei.decomposition.fluid": "Пришвидшується прилеглою водою",
   "farmersdelight.jei.decomposition.accelerators": "Пришвидшується прилеглими активаторами (див. нижче)",
+  
   "farmersdelight.jei.info.straw": "Сухе рослинне волокно, що використовується в майструванні. Можна отримати зрізавши ножем трав'янисті культури та рослини.",
-  "farmersdelight.jei.info.knife": "Ножі — це легка холодна зброя. Вони можуть збирати сіно з трави й гарантують отримання додаткової здобичі з тварин.",
-  "farmersdelight.jei.info.ham": "Великий шмат м'яса зі свинячої або гоґлінської ноги. Вам знадобиться щось легше меча, щоб розрізати її..."
+  "farmersdelight.jei.info.knife": "Ножі — це легка холодна зброя.\n\nВони можуть збирати сіно з трави й гарантують отримання додаткової здобичі з тварин.",
+  "farmersdelight.jei.info.ham": "Великий шмат м'яса зі свинячої або гоґлінської ноги.\n\nВам знадобиться щось легше меча, щоб розрізати її...",
+  "farmersdelight.jei.info.wild_cabbages": "Капусту можна знайти дикорослою на пляжних узбережжях.",
+  "farmersdelight.jei.info.wild_beetroots": "Буряк можна знайти дикорослим на пляжних узбережжях.",
+  "farmersdelight.jei.info.wild_carrots": "Моркву можна знайти дикорослою у помірних краях, таких як рівнини та ліси.",
+  "farmersdelight.jei.info.wild_onions": "Цибулю можна знайти дикорослою у помірних краях, таких як рівнини та ліси.",
+  "farmersdelight.jei.info.wild_potatoes": "Картоплю можна знайти дикорослою у холодних краях, таких як гори та тайги.",
+  "farmersdelight.jei.info.wild_tomatoes": "Помідори можна знайти дикорослими у посушливих краях, таких як савани та пустелі.",
+  "farmersdelight.jei.info.wild_rice": "Рис можна знайти дикорослим у водоймах вологих країв, таких як болота та джунглі."
 }
