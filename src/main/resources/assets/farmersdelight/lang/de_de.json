@@ -294,7 +294,9 @@
   "farmersdelight.block.cutting_board.invalid_item": "Dies scheint nicht zerschneidbar zu sein...",
   "farmersdelight.block.cutting_board.invalid_tool": "Vielleicht mit einem anderen Werkzeug...",
   "farmersdelight.block.skillet.invalid_item": "Das kann nicht gekocht werden...",
+  "farmersdelight.block.skillet.underwater": "Du kannst nichts kochen wenn es geflutet ist...",
   "farmersdelight.item.skillet.how_to_cook": "Benutze deine andere Hand um Zutaten zu halten!",
+  "farmersdelight.item.skillet.underwater": "Du kannst nicht Unterwasser Kochen...",
 
   "death.attack.farmersdelight.stove": "%1$s fand heraus, dass Öfen nicht zum Kuscheln geeignet sind.",
   "death.attack.farmersdelight.stove.player": "%1$s wurde von %2$s zur Perfektion geröstet.",
