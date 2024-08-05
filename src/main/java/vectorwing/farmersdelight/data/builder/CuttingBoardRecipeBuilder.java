@@ -48,7 +48,7 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder {
 	/**
 	 * Creates a new builder for a cutting recipe, providing a chance for the main output to drop.
 	 */
-	public static CuttingBoardRecipeBuilder cuttingRecipe(Ingredient ingredient, Ingredient tool, ItemLike mainResult, int count, int chance) {
+	public static CuttingBoardRecipeBuilder cuttingRecipe(Ingredient ingredient, Ingredient tool, ItemLike mainResult, int count, float chance) {
 		return new CuttingBoardRecipeBuilder(ingredient, tool, mainResult, count, chance);
 	}
 
