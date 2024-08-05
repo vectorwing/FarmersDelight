@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.data.recipe;
 
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
@@ -24,33 +25,33 @@ public class SmeltingRecipes
 		foodSmeltingRecipes("cooked_bacon", ModItems.BACON.get(), ModItems.COOKED_BACON.get(), 0.35F, consumer);
 		foodSmeltingRecipes("cooked_mutton_chops", ModItems.MUTTON_CHOPS.get(), ModItems.COOKED_MUTTON_CHOPS.get(), 0.35F, consumer);
 
-		SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.WHEAT_DOUGH.get()),
+		SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.WHEAT_DOUGH.get()), RecipeCategory.FOOD,
 						Items.BREAD, 0.35F, 200)
 				.unlockedBy("has_dough", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.WHEAT_DOUGH.get()))
 				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "bread").toString() + "_from_smelting");
-		SimpleCookingRecipeBuilder.cooking(Ingredient.of(ModItems.WHEAT_DOUGH.get()),
-						Items.BREAD, 0.35F, 100, RecipeSerializer.SMOKING_RECIPE)
+		SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.WHEAT_DOUGH.get()), RecipeCategory.FOOD,
+						Items.BREAD, 0.35F, 100)
 				.unlockedBy("has_dough", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.WHEAT_DOUGH.get()))
 				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "bread").toString() + "_from_smoking");
 
-		SimpleCookingRecipeBuilder.cooking(Ingredient.of(ModItems.HAM.get()),
-						ModItems.SMOKED_HAM.get(), 0.35F, 200, RecipeSerializer.SMOKING_RECIPE)
+		SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.HAM.get()), RecipeCategory.FOOD,
+						ModItems.SMOKED_HAM.get(), 0.35F, 200)
 				.unlockedBy("has_ham", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.HAM.get()))
 				.save(consumer);
 
-		SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.IRON_KNIFE.get()),
+		SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.IRON_KNIFE.get()), RecipeCategory.MISC,
 						Items.IRON_NUGGET, 0.1F, 200)
 				.unlockedBy("has_iron_knife", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.IRON_KNIFE.get()))
 				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "iron_nugget_from_smelting_knife"));
-		SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.GOLDEN_KNIFE.get()),
+		SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.GOLDEN_KNIFE.get()), RecipeCategory.MISC,
 						Items.GOLD_NUGGET, 0.1F, 200)
 				.unlockedBy("has_golden_knife", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.GOLDEN_KNIFE.get()))
 				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "gold_nugget_from_smelting_knife"));
-		SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModItems.IRON_KNIFE.get()),
+		SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModItems.IRON_KNIFE.get()), RecipeCategory.MISC,
 						Items.IRON_NUGGET, 0.1F, 100)
 				.unlockedBy("has_iron_knife", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.IRON_KNIFE.get()))
 				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "iron_nugget_from_blasting_knife"));
-		SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModItems.GOLDEN_KNIFE.get()),
+		SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModItems.GOLDEN_KNIFE.get()), RecipeCategory.MISC,
 						Items.GOLD_NUGGET, 0.1F, 100)
 				.unlockedBy("has_golden_knife", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.GOLDEN_KNIFE.get()))
 				.save(consumer, new ResourceLocation(FarmersDelight.MODID, "gold_nugget_from_blasting_knife"));
@@ -58,16 +59,13 @@ public class SmeltingRecipes
 
 	private static void foodSmeltingRecipes(String name, ItemLike ingredient, ItemLike result, float experience, Consumer<FinishedRecipe> consumer) {
 		String namePrefix = new ResourceLocation(FarmersDelight.MODID, name).toString();
-		SimpleCookingRecipeBuilder.smelting(Ingredient.of(ingredient),
-						result, experience, 200)
+		SimpleCookingRecipeBuilder.smelting(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, 200)
 				.unlockedBy(name, InventoryChangeTrigger.TriggerInstance.hasItems(ingredient))
 				.save(consumer);
-		SimpleCookingRecipeBuilder.cooking(Ingredient.of(ingredient),
-						result, experience, 600, RecipeSerializer.CAMPFIRE_COOKING_RECIPE)
+		SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, 600)
 				.unlockedBy(name, InventoryChangeTrigger.TriggerInstance.hasItems(ingredient))
 				.save(consumer, namePrefix + "_from_campfire_cooking");
-		SimpleCookingRecipeBuilder.cooking(Ingredient.of(ingredient),
-						result, experience, 100, RecipeSerializer.SMOKING_RECIPE)
+		SimpleCookingRecipeBuilder.smoking(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, 100)
 				.unlockedBy(name, InventoryChangeTrigger.TriggerInstance.hasItems(ingredient))
 				.save(consumer, namePrefix + "_from_smoking");
 	}

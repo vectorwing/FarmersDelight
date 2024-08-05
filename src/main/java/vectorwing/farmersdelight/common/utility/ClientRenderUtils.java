@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
 /**
@@ -19,6 +20,10 @@ import net.minecraft.world.item.ItemStack;
  */
 public class ClientRenderUtils
 {
+	public static boolean isCursorInsideBounds(int iconX, int iconY, int iconWidth, int iconHeight, double cursorX, double cursorY) {
+		return iconX <= cursorX && cursorX < iconX + iconWidth && iconY <= cursorY && cursorY < iconY + iconHeight;
+	}
+
 	/**
 	 * Renders an Item into the GUI, allowing the size to be defined instead of hardcoded.
 	 * This function is ripped right from the game's rendering code. I am probably doing something stupid.
@@ -31,7 +36,7 @@ public class ClientRenderUtils
 
 		PoseStack modelViewStack = RenderSystem.getModelViewStack();
 		modelViewStack.pushPose();
-		modelViewStack.translate((float) 0, (float) 0, 100.0F + renderer.blitOffset);
+//		modelViewStack.translate((float) 0, (float) 0, 100.0F + renderer.blitOffset);
 		modelViewStack.translate(8.0F, 8.0F, 0.0F);
 		modelViewStack.scale(1.0F, -1.0F, 1.0F);
 		modelViewStack.scale(width, height, 48.0F);
@@ -44,7 +49,7 @@ public class ClientRenderUtils
 			Lighting.setupForFlatItems();
 		}
 
-		renderer.render(stack, ItemTransforms.TransformType.GUI, false, poseStack, multibuffersource$buffersource, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
+		renderer.render(stack, ItemDisplayContext.GUI, false, poseStack, multibuffersource$buffersource, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
 		multibuffersource$buffersource.endBatch();
 		RenderSystem.enableDepthTest();
 		if (usesBlockLight) {

@@ -8,28 +8,30 @@ import com.blamejared.crafttweaker.api.ingredient.IIngredient;
 import com.blamejared.crafttweaker.api.item.IItemStack;
 import com.blamejared.crafttweaker.api.recipe.manager.base.IRecipeManager;
 import com.blamejared.crafttweaker_annotations.annotations.Document;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
 import org.openzen.zencode.java.ZenCodeType;
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.utility.ListUtils;
+import vectorwing.farmersdelight.integration.crafttweaker.FarmersDelightCrTPlugin;
 
 /**
  * Farmer's Delight Cooking Pot recipes.
  *
  * @docParam this <recipetype:farmersdelight:cooking>
  */
-//@Document("mods/farmersdelight/CookingPot")
-//@ZenRegister
-//@ZenCodeType.Name("mods.farmersdelight.CookingPot")
+@Document("mods/FarmersDelight/CookingPot")
+@ZenRegister
+@ZenCodeType.Name("mods.farmersdelight.CookingPot")
 public class CookingPotRecipeManager implements IRecipeManager
 {
     /**
      * Add a cooking pot recipe.
+     * The Cooking Tab is optional.
      *
      * @param name       Name of the recipe to add
      * @param output     Output item
@@ -72,10 +74,10 @@ public class CookingPotRecipeManager implements IRecipeManager
 
     private boolean validateInputs(IIngredient[] inputs) {
         if (inputs.length == 0) {
-            CraftTweakerAPI.LOGGER.error("No ingredients for cooking recipe");
+            FarmersDelightCrTPlugin.LOGGER_CT.error("No ingredients for cooking recipe");
             return false;
         } else if (inputs.length > CookingPotRecipe.INPUT_SLOTS) {
-            CraftTweakerAPI.LOGGER.error("Too many ingredients for cooking recipe! The max is %s", CookingPotRecipe.INPUT_SLOTS);
+            FarmersDelightCrTPlugin.LOGGER_CT.error("Too many ingredients for cooking recipe! The max is %s", CookingPotRecipe.INPUT_SLOTS);
             return false;
         }
         return true;

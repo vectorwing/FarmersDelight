@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "#": {
       "item": "minecraft:dried_kelp"
@@ -17,5 +18,6 @@
   ],
   "result": {
     "item": "farmersdelight:kelp_roll"
-  }
+  },
+  "show_notification": true
 }

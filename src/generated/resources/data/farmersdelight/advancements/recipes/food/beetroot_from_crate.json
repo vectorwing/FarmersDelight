@@ -30,5 +30,6 @@
     "recipes": [
       "farmersdelight:beetroot_from_crate"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

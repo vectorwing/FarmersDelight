@@ -30,5 +30,6 @@
     "recipes": [
       "farmersdelight:scaffolding_from_canvas"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

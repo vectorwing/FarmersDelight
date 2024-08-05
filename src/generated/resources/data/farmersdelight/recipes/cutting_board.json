@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "#": {
       "tag": "minecraft:planks"
@@ -14,5 +15,6 @@
   ],
   "result": {
     "item": "farmersdelight:cutting_board"
-  }
+  },
+  "show_notification": true
 }

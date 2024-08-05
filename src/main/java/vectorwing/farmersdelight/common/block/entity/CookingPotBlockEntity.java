@@ -21,14 +21,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.RecipeHolder;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
@@ -47,8 +49,10 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-import java.util.Random;
+
+import static java.util.Map.entry;
 
 public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProvider, HeatableBlockEntity, Nameable, RecipeHolder
 {
@@ -56,6 +60,24 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	public static final int CONTAINER_SLOT = 7;
 	public static final int OUTPUT_SLOT = 8;
 	public static final int INVENTORY_SIZE = OUTPUT_SLOT + 1;
+
+	// TODO: Consider whether to leave this as-is, or open it to datapacks for modded cases.
+	public static final Map<Item, Item> INGREDIENT_REMAINDER_OVERRIDES = Map.ofEntries(
+			entry(Items.POWDER_SNOW_BUCKET, Items.BUCKET),
+			entry(Items.AXOLOTL_BUCKET, Items.BUCKET),
+			entry(Items.COD_BUCKET, Items.BUCKET),
+			entry(Items.PUFFERFISH_BUCKET, Items.BUCKET),
+			entry(Items.SALMON_BUCKET, Items.BUCKET),
+			entry(Items.TROPICAL_FISH_BUCKET, Items.BUCKET),
+			entry(Items.SUSPICIOUS_STEW, Items.BOWL),
+			entry(Items.MUSHROOM_STEW, Items.BOWL),
+			entry(Items.RABBIT_STEW, Items.BOWL),
+			entry(Items.BEETROOT_SOUP, Items.BOWL),
+			entry(Items.POTION, Items.GLASS_BOTTLE),
+			entry(Items.SPLASH_POTION, Items.GLASS_BOTTLE),
+			entry(Items.LINGERING_POTION, Items.GLASS_BOTTLE),
+			entry(Items.EXPERIENCE_BOTTLE, Items.GLASS_BOTTLE)
+	);
 
 	private final ItemStackHandler inventory;
 	private final LazyOptional<IItemHandler> inputHandler;
@@ -249,7 +271,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 				if (recipe.matches(inventoryWrapper, level)) {
 					return Optional.of((CookingPotRecipe) recipe);
 				}
-				if (recipe.getResultItem().sameItem(getMeal())) {
+				if (ItemStack.isSameItem(recipe.getResultItem(this.level.registryAccess()), getMeal())) {
 					return Optional.empty();
 				}
 			}
@@ -258,7 +280,11 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		if (checkNewRecipe) {
 			Optional<CookingPotRecipe> recipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.COOKING.get(), inventoryWrapper, level);
 			if (recipe.isPresent()) {
-				lastRecipeID = recipe.get().getId();
+				ResourceLocation newRecipeID = recipe.get().getId();
+				if (lastRecipeID != null && !lastRecipeID.equals(newRecipeID)) {
+					cookTime = 0;
+				}
+				lastRecipeID = newRecipeID;
 				return recipe;
 			}
 		}
@@ -268,10 +294,11 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	}
 
 	public ItemStack getContainer() {
-		if (!mealContainerStack.isEmpty()) {
+		ItemStack mealStack = getMeal();
+		if (!mealStack.isEmpty() && !mealContainerStack.isEmpty()) {
 			return mealContainerStack;
 		} else {
-			return getMeal().getCraftingRemainingItem();
+			return mealStack.getCraftingRemainingItem();
 		}
 	}
 
@@ -284,14 +311,14 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 	protected boolean canCook(CookingPotRecipe recipe) {
 		if (hasInput()) {
-			ItemStack resultStack = recipe.getResultItem();
+			ItemStack resultStack = recipe.getResultItem(this.level.registryAccess());
 			if (resultStack.isEmpty()) {
 				return false;
 			} else {
 				ItemStack storedMealStack = inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
 				if (storedMealStack.isEmpty()) {
 					return true;
-				} else if (!storedMealStack.sameItem(resultStack)) {
+				} else if (!ItemStack.isSameItem(storedMealStack, resultStack)) {
 					return false;
 				} else if (storedMealStack.getCount() + resultStack.getCount() <= inventory.getSlotLimit(MEAL_DISPLAY_SLOT)) {
 					return true;
@@ -315,11 +342,11 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 		cookTime = 0;
 		mealContainerStack = recipe.getOutputContainer();
-		ItemStack resultStack = recipe.getResultItem();
+		ItemStack resultStack = recipe.getResultItem(this.level.registryAccess());
 		ItemStack storedMealStack = inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
 		if (storedMealStack.isEmpty()) {
 			inventory.setStackInSlot(MEAL_DISPLAY_SLOT, resultStack.copy());
-		} else if (storedMealStack.sameItem(resultStack)) {
+		} else if (ItemStack.isSameItem(storedMealStack, resultStack)) {
 			storedMealStack.grow(resultStack.getCount());
 		}
 		cookingPot.setRecipeUsed(recipe);
@@ -327,17 +354,23 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		for (int i = 0; i < MEAL_DISPLAY_SLOT; ++i) {
 			ItemStack slotStack = inventory.getStackInSlot(i);
 			if (slotStack.hasCraftingRemainingItem()) {
-				Direction direction = getBlockState().getValue(CookingPotBlock.FACING).getCounterClockWise();
-				double x = worldPosition.getX() + 0.5 + (direction.getStepX() * 0.25);
-				double y = worldPosition.getY() + 0.7;
-				double z = worldPosition.getZ() + 0.5 + (direction.getStepZ() * 0.25);
-				ItemUtils.spawnItemEntity(level, inventory.getStackInSlot(i).getCraftingRemainingItem(), x, y, z,
-						direction.getStepX() * 0.08F, 0.25F, direction.getStepZ() * 0.08F);
+				ejectIngredientRemainder(slotStack.getCraftingRemainingItem());
+			} else if (INGREDIENT_REMAINDER_OVERRIDES.containsKey(slotStack.getItem())) {
+				ejectIngredientRemainder(INGREDIENT_REMAINDER_OVERRIDES.get(slotStack.getItem()).getDefaultInstance());
 			}
 			if (!slotStack.isEmpty())
 				slotStack.shrink(1);
 		}
 		return true;
+	}
+
+	protected void ejectIngredientRemainder(ItemStack remainderStack) {
+		Direction direction = getBlockState().getValue(CookingPotBlock.FACING).getCounterClockWise();
+		double x = worldPosition.getX() + 0.5 + (direction.getStepX() * 0.25);
+		double y = worldPosition.getY() + 0.7;
+		double z = worldPosition.getZ() + 0.5 + (direction.getStepZ() * 0.25);
+		ItemUtils.spawnItemEntity(level, remainderStack, x, y, z,
+				direction.getStepX() * 0.08F, 0.25F, direction.getStepZ() * 0.08F);
 	}
 
 	@Override
@@ -355,8 +388,8 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	}
 
 	@Override
-	public void awardUsedRecipes(Player player) {
-		List<Recipe<?>> usedRecipes = getUsedRecipesAndPopExperience(player.level, player.position());
+	public void awardUsedRecipes(Player player, List<ItemStack> items) {
+		List<Recipe<?>> usedRecipes = getUsedRecipesAndPopExperience(player.level(), player.position());
 		player.awardRecipes(usedRecipes);
 		usedRecipeTracker.clear();
 	}
@@ -453,9 +486,9 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	public boolean isContainerValid(ItemStack containerItem) {
 		if (containerItem.isEmpty()) return false;
 		if (!mealContainerStack.isEmpty()) {
-			return mealContainerStack.sameItem(containerItem);
+			return ItemStack.isSameItem(mealContainerStack, containerItem);
 		} else {
-			return getMeal().getCraftingRemainingItem().sameItem(containerItem);
+			return ItemStack.isSameItem(getMeal(), containerItem);
 		}
 	}
 
@@ -487,7 +520,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	@Override
 	@Nonnull
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-		if (cap.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)) {
+		if (cap.equals(ForgeCapabilities.ITEM_HANDLER)) {
 			if (side == null || side.equals(Direction.UP)) {
 				return inputHandler.cast();
 			} else {

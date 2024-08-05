@@ -2,13 +2,16 @@ package vectorwing.farmersdelight.common.tag;
 
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * References to tags under the Forge namespace.
- * These tags are generic concepts, meant to be shared with other mods for compatibility.
+ * These tags are generally used for crafting recipes across different mods.
  */
 public class ForgeTags
 {
@@ -84,11 +87,11 @@ public class ForgeTags
 	public static final TagKey<Item> TOOLS_SHOVELS = forgeItemTag("tools/shovels");
 
 	private static TagKey<Block> forgeBlockTag(String path) {
-		return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation("forge", path));
+		return BlockTags.create(new ResourceLocation("forge", path));
 	}
 
 	private static TagKey<Item> forgeItemTag(String path) {
-		return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation("forge", path));
+		return ItemTags.create(new ResourceLocation("forge", path));
 	}
 
 }

@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -23,6 +24,7 @@ import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("ClassCanBeRecord")
@@ -68,24 +70,17 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper>
 		return nonnulllist;
 	}
 
-	public NonNullList<Ingredient> getIngredientsAndTool() {
-		NonNullList<Ingredient> nonnulllist = NonNullList.create();
-		nonnulllist.add(this.input);
-		nonnulllist.add(this.tool);
-		return nonnulllist;
-	}
-
 	public Ingredient getTool() {
 		return this.tool;
 	}
 
 	@Override
-	public ItemStack assemble(RecipeWrapper inv) {
+	public ItemStack assemble(RecipeWrapper inv, RegistryAccess access) {
 		return this.results.get(0).getStack().copy();
 	}
 
 	@Override
-	public ItemStack getResultItem() {
+	public ItemStack getResultItem(RegistryAccess access) {
 		return this.results.get(0).getStack();
 	}
 
@@ -138,6 +133,32 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper>
 	@Override
 	public RecipeType<?> getType() {
 		return ModRecipeTypes.CUTTING.get();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		CuttingBoardRecipe that = (CuttingBoardRecipe) o;
+
+		if (!getId().equals(that.getId())) return false;
+		if (!getGroup().equals(that.getGroup())) return false;
+		if (!input.equals(that.input)) return false;
+		if (!getTool().equals(that.getTool())) return false;
+		if (!getResults().equals(that.getResults())) return false;
+		return Objects.equals(soundEvent, that.soundEvent);
+	}
+
+	@Override
+	public int hashCode() {
+		int result = getId().hashCode();
+		result = 31 * result + (getGroup() != null ? getGroup().hashCode() : 0);
+		result = 31 * result + input.hashCode();
+		result = 31 * result + getTool().hashCode();
+		result = 31 * result + getResults().hashCode();
+		result = 31 * result + (soundEvent != null ? soundEvent.hashCode() : 0);
+		return result;
 	}
 
 	public static class Serializer implements RecipeSerializer<CuttingBoardRecipe>

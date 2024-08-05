@@ -4,13 +4,14 @@ import com.blamejared.crafttweaker.api.action.recipe.ActionRecipeBase;
 import com.blamejared.crafttweaker.api.item.IItemStack;
 import com.blamejared.crafttweaker.api.item.MCItemStackMutable;
 import com.blamejared.crafttweaker.api.recipe.manager.base.IRecipeManager;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.core.Registry;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
-import org.spongepowered.asm.logging.ILogger;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 
 import javax.script.ScriptException;
@@ -51,7 +52,7 @@ public class ActionRemoveCuttingBoardRecipe extends ActionRecipeBase
 
     @Override
     public String describe() {
-        return "Removing \"" + Registry.RECIPE_TYPE
+        return "Removing \"" + ForgeRegistries.RECIPE_TYPES
                 .getKey(getManager().getRecipeType()) + "\" recipes with output: " + Arrays.toString(outputs) + "\"";
     }
 

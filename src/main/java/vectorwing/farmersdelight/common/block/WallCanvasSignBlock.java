@@ -41,9 +41,11 @@ public class WallCanvasSignBlock extends WallSignBlock implements CanvasSign
 	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		BlockEntity tileEntity = level.getBlockEntity(pos);
 		Block block = state.getBlock();
-		if (tileEntity instanceof SignBlockEntity && block instanceof CanvasSign) {
-			if (((CanvasSign) block).isDarkBackground()) {
-				((SignBlockEntity) tileEntity).setColor(DyeColor.WHITE);
+		if (tileEntity instanceof SignBlockEntity signEntity && block instanceof CanvasSign canvasSignBlock) {
+			if (canvasSignBlock.isDarkBackground()) {
+				signEntity.updateText((signText) -> {
+					return signText.setColor(DyeColor.WHITE);
+				}, true);
 			}
 		}
 	}

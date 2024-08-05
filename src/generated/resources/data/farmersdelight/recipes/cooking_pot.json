@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "S": {
       "item": "minecraft:wooden_shovel"
@@ -21,5 +22,6 @@
   ],
   "result": {
     "item": "farmersdelight:cooking_pot"
-  }
+  },
+  "show_notification": true
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "farmersdelight:item/white_hanging_canvas_sign"
+  }
+}

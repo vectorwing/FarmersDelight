@@ -3,18 +3,26 @@
   "criteria": {
     "harvest_ropelogged_tomato": {
       "conditions": {
-        "item": {},
-        "location": {
-          "block": {
-            "blocks": [
-              "farmersdelight:tomatoes"
-            ],
-            "state": {
-              "age": "0",
-              "ropelogged": "true"
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "farmersdelight:tomatoes"
+                ],
+                "state": {
+                  "age": "0",
+                  "ropelogged": "true"
+                }
+              }
             }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {}
           }
-        }
+        ]
       },
       "trigger": "minecraft:item_used_on_block"
     }
@@ -38,5 +46,6 @@
     [
       "harvest_ropelogged_tomato"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

@@ -29,5 +29,6 @@
     [
       "nourishment"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

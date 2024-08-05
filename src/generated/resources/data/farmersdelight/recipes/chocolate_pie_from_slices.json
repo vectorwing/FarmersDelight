@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "fd_chocolate_pie",
   "key": {
     "#": {
       "item": "farmersdelight:chocolate_pie_slice"
@@ -11,5 +13,6 @@
   ],
   "result": {
     "item": "farmersdelight:chocolate_pie"
-  }
+  },
+  "show_notification": true
 }

@@ -24,13 +24,15 @@ import vectorwing.farmersdelight.integration.crafttweaker.actions.ActionRemoveCu
  *
  * @docParam this <recipetype:farmersdelight:cutting>
  */
-//@Document("mods/farmersdelight/CuttingBoard")
-//@ZenRegister
-//@ZenCodeType.Name("mods.farmersdelight.CuttingBoard")
+@Document("mods/FarmersDelight/CuttingBoard")
+@ZenRegister
+@ZenCodeType.Name("mods.farmersdelight.CuttingBoard")
 public class CuttingBoardRecipeManager implements IRecipeManager
 {
     /**
      * Add a cutting board recipe.
+     * The tool ingredient can be a {@link net.minecraftforge.common.ToolAction}. It will get cast implicitly.
+     * This allows you to work with any tool that provides that action to Forge.
      *
      * @param name    Name of the recipe to add
      * @param input   Input ingredient

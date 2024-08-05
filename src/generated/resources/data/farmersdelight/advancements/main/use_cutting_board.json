@@ -25,5 +25,6 @@
     [
       "cutting_board"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

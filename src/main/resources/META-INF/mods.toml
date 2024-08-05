@@ -1,33 +1,39 @@
-
-modLoader="javafml"
-loaderVersion="[41,)"
-issueTrackerURL="https://github.com/vectorwing/FarmersDelight/issues"
-license="MIT License"
+modLoader = "javafml"
+loaderVersion = "[46,)"
+issueTrackerURL = "https://github.com/vectorwing/FarmersDelight/issues"
+license = "MIT License"
 
 [[mods]]
-modId="farmersdelight"
-version="1.19-1.2.1"
-displayName="Farmer's Delight"
+modId = "farmersdelight"
+version = "1.20.1-1.2.5"
+displayName = "Farmer's Delight"
 # updateJSONURL=""
-displayURL="https://github.com/vectorwing/FarmersDelight"
-logoFile="logo.png"
-logoBlur=false
-credits="Chloe Dawn, Grimmauld, CDAGaming, TelepathicGrunt, ConductiveFoam, simibubi, Jozufozu, bagel, Silk, SkySom, Eutro, LimonBlaze and many others!"
-authors="vectorwing"
-description="A lightweight farming and cooking expansion for Minecraft!"
-itemIcon="farmersdelight:stove"
-configBackground="minecraft:textures/block/bricks.png"
+displayURL = "https://github.com/vectorwing/FarmersDelight"
+logoFile = "logo.png"
+logoBlur = false
+credits = "Chloe Dawn, Grimmauld, CDAGaming, TelepathicGrunt, ConductiveFoam, simibubi, Jozufozu, bagel, Silk, SkySom, Eutro, RaymondBlaze and many others!"
+authors = "vectorwing"
+description = "A cozy farming and cooking expansion for Minecraft!"
+itemIcon = "farmersdelight:stove"
+configBackground = "minecraft:textures/block/bricks.png"
 
 [[dependencies.farmersdelight]]
-    modId="forge"
-    mandatory=true
-    versionRange="[41.1.0,)"
-    ordering="NONE"
-    side="BOTH"
+modId = "forge"
+mandatory = true
+versionRange = "[47.1.0,)"
+ordering = "NONE"
+side = "BOTH"
 
 [[dependencies.farmersdelight]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="[1.19,1.20)"
-    ordering="NONE"
-    side="BOTH"
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.farmersdelight]]
+modId = "crafttweaker"
+mandatory = false
+versionRange = "[14.0.6,)"
+ordering = "NONE"
+side = "BOTH"

@@ -3,31 +3,56 @@
   "criteria": {
     "honey_glazed_ham": {
       "conditions": {
-        "block": "farmersdelight:honey_glazed_ham_block"
+        "location": [
+          {
+            "block": "farmersdelight:honey_glazed_ham_block",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "rice_roll_medley": {
       "conditions": {
-        "block": "farmersdelight:rice_roll_medley_block"
+        "location": [
+          {
+            "block": "farmersdelight:rice_roll_medley_block",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "roast_chicken": {
       "conditions": {
-        "block": "farmersdelight:roast_chicken_block"
+        "location": [
+          {
+            "block": "farmersdelight:roast_chicken_block",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "shepherds_pie": {
       "conditions": {
-        "block": "farmersdelight:shepherds_pie_block"
+        "location": [
+          {
+            "block": "farmersdelight:shepherds_pie_block",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "stuffed_pumpkin": {
       "conditions": {
-        "block": "farmersdelight:stuffed_pumpkin_block"
+        "location": [
+          {
+            "block": "farmersdelight:stuffed_pumpkin_block",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     }
@@ -55,5 +80,6 @@
       "shepherds_pie",
       "rice_roll_medley"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

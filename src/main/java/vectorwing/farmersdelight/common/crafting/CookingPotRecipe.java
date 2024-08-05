@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -78,7 +79,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 	}
 
 	@Override
-	public ItemStack getResultItem() {
+	public ItemStack getResultItem(RegistryAccess access) {
 		return this.output;
 	}
 
@@ -87,7 +88,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 	}
 
 	@Override
-	public ItemStack assemble(RecipeWrapper inv) {
+	public ItemStack assemble(RecipeWrapper inv, RegistryAccess access) {
 		return this.output.copy();
 	}
 
@@ -132,6 +133,36 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 	@Override
 	public ItemStack getToastSymbol() {
 		return new ItemStack(ModItems.COOKING_POT.get());
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		CookingPotRecipe that = (CookingPotRecipe) o;
+
+		if (Float.compare(that.getExperience(), getExperience()) != 0) return false;
+		if (getCookTime() != that.getCookTime()) return false;
+		if (!getId().equals(that.getId())) return false;
+		if (!getGroup().equals(that.getGroup())) return false;
+		if (tab != that.tab) return false;
+		if (!inputItems.equals(that.inputItems)) return false;
+		if (!output.equals(that.output)) return false;
+		return container.equals(that.container);
+	}
+
+	@Override
+	public int hashCode() {
+		int result = getId().hashCode();
+		result = 31 * result + getGroup().hashCode();
+		result = 31 * result + (getRecipeBookTab() != null ? getRecipeBookTab().hashCode() : 0);
+		result = 31 * result + inputItems.hashCode();
+		result = 31 * result + output.hashCode();
+		result = 31 * result + container.hashCode();
+		result = 31 * result + (getExperience() != +0.0f ? Float.floatToIntBits(getExperience()) : 0);
+		result = 31 * result + getCookTime();
+		return result;
 	}
 
 	public static class Serializer implements RecipeSerializer<CookingPotRecipe>

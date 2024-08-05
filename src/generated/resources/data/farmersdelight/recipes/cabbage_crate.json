@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "#": {
       "item": "farmersdelight:cabbage"
@@ -12,5 +13,6 @@
   ],
   "result": {
     "item": "farmersdelight:cabbage_crate"
-  }
+  },
+  "show_notification": true
 }

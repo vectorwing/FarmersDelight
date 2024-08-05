@@ -11,6 +11,8 @@
   "block.farmersdelight.acacia_cabinet": "Acacia Cabinet",
   "block.farmersdelight.dark_oak_cabinet": "Dark Oak Cabinet",
   "block.farmersdelight.mangrove_cabinet": "Mangrove Cabinet",
+  "block.farmersdelight.cherry_cabinet": "Cherry Cabinet",
+  "block.farmersdelight.bamboo_cabinet": "Bamboo Cabinet",
   "block.farmersdelight.crimson_cabinet": "Crimson Cabinet",
   "block.farmersdelight.warped_cabinet": "Warped Cabinet",
   "block.farmersdelight.rope": "Rope",
@@ -49,6 +51,24 @@
   "block.farmersdelight.green_canvas_sign": "Green Canvas Sign",
   "block.farmersdelight.red_canvas_sign": "Red Canvas Sign",
   "block.farmersdelight.black_canvas_sign": "Black Canvas Sign",
+
+  "block.farmersdelight.hanging_canvas_sign": "Hanging Canvas Sign",
+  "block.farmersdelight.white_hanging_canvas_sign": "White Hanging Canvas Sign",
+  "block.farmersdelight.orange_hanging_canvas_sign": "Orange Hanging Canvas Sign",
+  "block.farmersdelight.magenta_hanging_canvas_sign": "Magenta Hanging Canvas Sign",
+  "block.farmersdelight.light_blue_hanging_canvas_sign": "Light Blue Hanging Canvas Sign",
+  "block.farmersdelight.yellow_hanging_canvas_sign": "Yellow Hanging Canvas Sign",
+  "block.farmersdelight.lime_hanging_canvas_sign": "Lime Hanging Canvas Sign",
+  "block.farmersdelight.pink_hanging_canvas_sign": "Pink Hanging Canvas Sign",
+  "block.farmersdelight.gray_hanging_canvas_sign": "Gray Hanging Canvas Sign",
+  "block.farmersdelight.light_gray_hanging_canvas_sign": "Light Gray Hanging Canvas Sign",
+  "block.farmersdelight.cyan_hanging_canvas_sign": "Cyan Hanging Canvas Sign",
+  "block.farmersdelight.purple_hanging_canvas_sign": "Purple Hanging Canvas Sign",
+  "block.farmersdelight.blue_hanging_canvas_sign": "Blue Hanging Canvas Sign",
+  "block.farmersdelight.brown_hanging_canvas_sign": "Brown Hanging Canvas Sign",
+  "block.farmersdelight.green_hanging_canvas_sign": "Green Hanging Canvas Sign",
+  "block.farmersdelight.red_hanging_canvas_sign": "Red Hanging Canvas Sign",
+  "block.farmersdelight.black_hanging_canvas_sign": "Black Hanging Canvas Sign",
 
   "block.farmersdelight.budding_tomatoes": "Budding Tomato Vine",
   "block.farmersdelight.tomatoes": "Tomato Vine",
@@ -180,6 +200,8 @@
   "item.farmersdelight.dog_food": "Dog Food",
   "item.farmersdelight.horse_feed": "Horse Feed",
 
+  "entity.farmersdelight.rotten_tomato": "Rotten Tomato",
+
   "effect.farmersdelight.nourishment": "Nourishment",
   "effect.farmersdelight.comfort": "Comfort",
 
@@ -272,7 +294,9 @@
   "farmersdelight.block.cutting_board.invalid_item": "This doesn't seem cuttable...",
   "farmersdelight.block.cutting_board.invalid_tool": "Maybe with a different tool...",
   "farmersdelight.block.skillet.invalid_item": "This can't be cooked...",
+  "farmersdelight.block.skillet.underwater": "Can't cook while flooded...",
   "farmersdelight.item.skillet.how_to_cook": "Use your other hand to hold ingredients!",
+  "farmersdelight.item.skillet.underwater": "Can't cook underwater...",
 
   "death.attack.farmersdelight.stove": "%1$s was grilled to perfection",
   "death.attack.farmersdelight.stove.player": "%1$s was thrown on the grill by Chef %2$s",
@@ -284,7 +308,15 @@
   "farmersdelight.jei.decomposition.light": "Sped up by sunlight",
   "farmersdelight.jei.decomposition.fluid": "Sped up by adjacent water",
   "farmersdelight.jei.decomposition.accelerators": "Sped up by adjacent activators (see below)",
+
   "farmersdelight.jei.info.straw": "A dry plant fiber used in crafting. Obtained by cutting grassy crops and plants with a Knife.",
-  "farmersdelight.jei.info.knife": "Knives are lightweight melee weapons. They can harvest Straw from grasses, and guarantee secondary drops from animals.",
-  "farmersdelight.jei.info.ham": "A large cut of meat from a Pig or Hoglin's leg. You will need something lighter than a Sword to cut one..."
+  "farmersdelight.jei.info.knife": "A lightweight melee weapon, with fast swings and gentle damage.\n\nThey can harvest Straw from grasses, and guarantee secondary drops from animals.",
+  "farmersdelight.jei.info.ham": "A large cut of meat from a Pig or Hoglin's leg.\n\nYou will need something lighter than a Sword to cut one...",
+  "farmersdelight.jei.info.wild_cabbages": "Cabbages can be commonly found as a wild plant in beach coasts.",
+  "farmersdelight.jei.info.wild_beetroots": "Beetroot can be commonly found as a wild plant in beach coasts.",
+  "farmersdelight.jei.info.wild_carrots": "Carrots can be commonly found as a wild plant in temperate lands, such as plains and forests.",
+  "farmersdelight.jei.info.wild_onions": "Onions can be commonly found as a wild plant in temperate lands, such as plains and forests.",
+  "farmersdelight.jei.info.wild_potatoes": "Potatoes can be commonly found as a wild plant in cold lands, such as mountains and taigas.",
+  "farmersdelight.jei.info.wild_tomatoes": "Tomatoes can be commonly found as a wild plant in arid lands, such as savannas and deserts.",
+  "farmersdelight.jei.info.wild_rice": "Rice can be commonly found as a wild plant in the ponds of wet lands, such as swamps and jungles."
 }

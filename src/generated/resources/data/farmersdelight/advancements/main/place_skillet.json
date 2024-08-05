@@ -3,7 +3,12 @@
   "criteria": {
     "skillet": {
       "conditions": {
-        "block": "farmersdelight:skillet"
+        "location": [
+          {
+            "block": "farmersdelight:skillet",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     }
@@ -28,5 +33,6 @@
     [
       "skillet"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

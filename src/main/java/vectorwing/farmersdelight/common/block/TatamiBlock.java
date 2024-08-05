@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -25,8 +26,8 @@ public class TatamiBlock extends Block
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
 	public static final BooleanProperty PAIRED = BooleanProperty.create("paired");
 
-	public TatamiBlock() {
-		super(Block.Properties.copy(Blocks.WHITE_WOOL));
+	public TatamiBlock(BlockBehaviour.Properties properties) {
+		super(properties);
 		this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.DOWN).setValue(PAIRED, false));
 	}
 

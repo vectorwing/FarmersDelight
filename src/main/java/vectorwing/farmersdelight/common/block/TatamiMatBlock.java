@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BedPart;
@@ -31,8 +32,8 @@ public class TatamiMatBlock extends HorizontalDirectionalBlock
 	public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
 	protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
 
-	public TatamiMatBlock() {
-		super(Block.Properties.copy(Blocks.WHITE_WOOL).strength(0.3F));
+	public TatamiMatBlock(BlockBehaviour.Properties properties) {
+		super(properties);
 		this.registerDefaultState(this.getStateDefinition().any().setValue(PART, BedPart.FOOT));
 	}
 
@@ -87,11 +88,6 @@ public class TatamiMatBlock extends HorizontalDirectionalBlock
 	}
 
 	@Override
-	public PushReaction getPistonPushReaction(BlockState state) {
-		return PushReaction.DESTROY;
-	}
-
-	@Override
 	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		super.setPlacedBy(level, pos, state, placer, stack);
 		if (!level.isClientSide) {
@@ -105,9 +101,13 @@ public class TatamiMatBlock extends HorizontalDirectionalBlock
 	@Override
 	@Nullable
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		Level level = context.getLevel();
 		Direction facing = context.getHorizontalDirection();
-		BlockPos pos = context.getClickedPos();
-		BlockPos pairPos = pos.relative(facing);
-		return context.getLevel().getBlockState(pairPos).canBeReplaced(context) ? this.defaultBlockState().setValue(FACING, facing) : null;
+		BlockPos pairPos = context.getClickedPos().relative(facing);
+		BlockState pairState = context.getLevel().getBlockState(pairPos);
+		if (pairState.canBeReplaced(context) && canSurvive(pairState, level, pairPos)) {
+			return this.defaultBlockState().setValue(FACING, facing);
+		}
+		return null;
 	}
 }
