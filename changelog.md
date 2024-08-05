@@ -17,7 +17,8 @@
 
 ## Technical
 - FD's recipe builders now implement `RecipeBuilder`, which should allow a few extra features for add-on developers (thanks, Lance5057!);
-- FD's recipes now call for `assemble()` in most places, allowing extenders of most workstations to use the inventory when creating their result (thanks, ColonelPanic!).
+- FD's recipes now call for `assemble()` in most places, allowing extenders of most workstations to use the inventory when creating their result (thanks, ColonelPanic!);
+- Cutting recipes now accept arrays of ingredients in the `tool` field (thanks, BobVarioa!).
 
 ## 1.2.4
 
