@@ -11,4 +11,4 @@ Replacer.create().filter(ManagerFilteringRule.of(<recipetype:farmersdelight:cook
 
 Replacer.create().replace<IIngredient>(<recipecomponent:farmersdelight:recipe_component/cutting_board_tool>, <tag:items:forge:tools/knives>, <tag:items:forge:tools/axes>).execute();
 
-Replacer.create().filter(ManagerFilteringRule.of(<recipetype:farmersdelight:cutting>)).replace<List<Percentaged<IItemStack>>>(<recipecomponent:crafttweaker:output/chanced_items>, [<item:minecraft:white_dye>*2 % 100], [<item:minecraft:white_dye> % 60, <item:minecraft:white_dye> % 30]).execute();
+// Replacer.create().filter(ManagerFilteringRule.of(<recipetype:farmersdelight:cutting>)).replace<List<Percentaged<IItemStack>>>(<recipecomponent:crafttweaker:output/chanced_items>, [<item:minecraft:white_dye>*2 % 100], [<item:minecraft:white_dye> % 60, <item:minecraft:white_dye> % 30]).execute();

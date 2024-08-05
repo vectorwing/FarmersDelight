@@ -3,7 +3,12 @@
   "criteria": {
     "plant_rice": {
       "conditions": {
-        "block": "farmersdelight:rice"
+        "location": [
+          {
+            "block": "farmersdelight:rice",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     }
@@ -27,5 +32,6 @@
     [
       "plant_rice"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

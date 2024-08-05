@@ -1,12 +1,36 @@
 name: Bug Report (Form)
 description: File a bug report through a simplified form
-title: "[MC Version]: "
 body:
   - type: markdown
     attributes:
       value: |
         Please fill out the form below to describe your issue.
         Keep in mind that this board is **only for issues**! If you have a **suggestion** (ideas, integration etc.), please use the **Discussions** tab instead.
+  - type: input
+    id: minecraft_version
+    attributes:
+      label: Minecraft version
+      placeholder: | 
+        Example: 1.19
+    validations:
+      required: true
+  - type: input
+    id: fd_version
+    attributes:
+      label: Farmer's Delight version
+      placeholder: | 
+        Example: 1.2
+    validations:
+      required: true
+  - type: input
+    id: forge_version
+    attributes:
+      label: NeoForge version
+      description: "For issues regarding the Fabric port, go to: https://github.com/newhoryzon/farmers-delight-fabric/issues"
+      placeholder: | 
+        Example: 21.0.160
+    validations:
+      required: true
   - type: textarea
     id: description
     attributes:
@@ -31,7 +55,7 @@ body:
     attributes:
       label: Mod list
       description: |
-        Please provide the list of mods you're using, especially the versions of Forge and Farmer's Delight.
+        Please provide the list of mods you're using.
         You can generate a mod list by forcing a crash. In your game, hold F3+C for 10 seconds, then check your logs; the list of mods will be by the end.
     validations:
       required: true
@@ -43,26 +67,16 @@ body:
         Please provide the client or server logs from your launcher. They contain vital information to troubleshoot the issue.
         To upload logs, you can use websites such as: https://pastebin.com/ https://paste.ee/ https://mclo.gs/
   - type: checkboxes
-    id: is_forge
-    attributes:
-      label: Forge
-      description: |
-       Please confirm you're playing on the Forge mod loader.
-       For issues regarding the Fabric port, go to: https://github.com/newhoryzon/farmers-delight-fabric/issues
-      options:
-        - label: I am using the Forge version of Farmer's Delight
-          required: true
-  - type: checkboxes
     id: has_tested_minimal_instance
     attributes:
       label: Minimal instance
-      description: Have you tried testing the issue on a Minecraft instance with only Farmer's Delight, and mods related to the issue, installed?
+      description: Have you tried testing the issue on a Minecraft instance containing only Farmer's Delight and mods related to the issue?
       options:
         - label: I have tested this on a minimal instance
   - type: checkboxes
-    id: has_removed_performance_mods
+    id: is_using_performance_mods
     attributes:
       label: Performance and shader mods
-      description: Sometimes, performance and shader mods (for example, Optifine, Rubidium, Oculus etc.) can cause unpredictable problems. Have you tested this issue without those installed?
+      description: Sometimes, performance and shader mods (for example, Optifine, Rubidium, Oculus etc.) can cause unpredictable problems. Were you using such mods when the issue happened?
       options:
-        - label: I have tested this without performance or shader mods
+        - label: I am using performance or shader mods

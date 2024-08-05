@@ -13,8 +13,6 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import vectorwing.farmersdelight.FarmersDelight;
 
 import java.util.List;
@@ -38,7 +36,6 @@ public class TextUtils
 	/**
 	 * An alternate version of PotionUtils.addPotionTooltip, that obtains the item's food-property potion effects instead.
 	 */
-	@OnlyIn(Dist.CLIENT)
 	public static void addFoodEffectTooltip(ItemStack itemIn, List<Component> lores, float durationFactor) {
 		FoodProperties foodStats = itemIn.getItem().getFoodProperties();
 		if (foodStats == null) {

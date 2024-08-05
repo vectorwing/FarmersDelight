@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "M": {
       "tag": "forge:milk"
@@ -14,5 +15,6 @@
   ],
   "result": {
     "item": "farmersdelight:pie_crust"
-  }
+  },
+  "show_notification": true
 }

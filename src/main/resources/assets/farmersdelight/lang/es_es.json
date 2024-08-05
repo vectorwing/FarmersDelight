@@ -76,6 +76,7 @@
   "item.farmersdelight.cabbage_seeds": "Semillas de col",
   "item.farmersdelight.tomato_seeds": "Semillas de tomate",
   "item.farmersdelight.rice_panicle": "Panícula de arroz",
+  "item.farmersdelight.rotten_tomato": "Tomate podrido",
 
   "item.farmersdelight.straw": "Paja",
   "item.farmersdelight.canvas": "Tela",
@@ -115,6 +116,7 @@
   "item.farmersdelight.sweet_berry_cookie": "Galleta de bayas dulces",
   "item.farmersdelight.honey_cookie": "Galleta de miel",
   "item.farmersdelight.melon_popsicle": "Palito de melón",
+   "item.farmersdelight.glow_berry_custard": "Natilla de bayas luminosas",
 
   "item.farmersdelight.earthworm": "Lombriz",
 
@@ -133,6 +135,10 @@
   "item.farmersdelight.dumplings": "Albóndigas",
   "item.farmersdelight.stuffed_potato": "Patata rellena",
   "item.farmersdelight.cabbage_rolls": "Rollos de col",
+   "item.farmersdelight.salmon_roll": "Rollos de salmon",
+  "item.farmersdelight.cod_roll": "Rollos de bacalao",
+  "item.farmersdelight.kelp_roll": "Rollos de sargazo",
+  "item.farmersdelight.kelp_roll_slice": "Rebanada de rollo de sargazo",
 
   "item.farmersdelight.cooked_rice": "Arroz cocido",
   "item.farmersdelight.mixed_salad": "Ensalada mixta",
@@ -145,6 +151,7 @@
   "item.farmersdelight.pumpkin_soup": "Sopa de calabaza",
   "item.farmersdelight.baked_cod_stew": "Estofado de bacalao al horno",
   "item.farmersdelight.noodle_soup": "Sopa de fideos",
+   "item.farmersdelight.bone_broth": "Caldo de huesos",
   
   "item.farmersdelight.bacon_and_eggs": "Tocino con huevos",
   "item.farmersdelight.pasta_with_meatballs": "Pasta con albóndigas",
@@ -155,6 +162,7 @@
   "item.farmersdelight.ratatouille": "Ratatouille",
   "item.farmersdelight.squid_ink_pasta": "Pasta con tinta de calamar",
   "item.farmersdelight.grilled_salmon": "Salmón a la parrilla",
+  "item.farmersdelight.mushroom_rice": "Arroz con champiñones",
 
   "block.farmersdelight.roast_chicken_block": "Pollo asado",
   "item.farmersdelight.roast_chicken": "Plato de pollo asado",
@@ -164,9 +172,12 @@
   "item.farmersdelight.honey_glazed_ham": "Plato de jamón glaseado con miel",
   "block.farmersdelight.shepherds_pie_block": "Pastel de pastor",
   "item.farmersdelight.shepherds_pie": "Plato de Pastel de Pastor",
-
+  "block.farmersdelight.rice_roll_medley_block": "Rollos de arroz",
+  
   "item.farmersdelight.dog_food": "Comida para perros",
   "item.farmersdelight.horse_feed": "Comida para caballos",
+
+  "entity.farmersdelight.rotten_tomato": "Tomate podrido",
 
   "effect.farmersdelight.nourishment": "Nutrido",
   "effect.farmersdelight.comfort": "Bienestar",
@@ -197,8 +208,11 @@
 
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "Un mundo de sabor le espera!",
+  
   "farmersdelight.advancement.craft_knife": "Caza y recolección",
   "farmersdelight.advancement.craft_knife.desc": "Crea un Cuchillo para obtener más bienes de las plantas y los animales",
+  "farmersdelight.advancement.get_fd_seed": "Cultivos silvestres",
+  "farmersdelight.advancement.get_fd_seed.desc": "Cuatro nuevos cultivos se pueden encontrar en la naturaleza, atraves de varios climas... o en algun cofre en algun lado.",
   "farmersdelight.advancement.plant_rice": "Sumergir las raíces",
   "farmersdelight.advancement.plant_rice.desc": "Planta granos de arroz en un charco poco profundo",
   "farmersdelight.advancement.plant_all_crops": "Rotación de cultivos",

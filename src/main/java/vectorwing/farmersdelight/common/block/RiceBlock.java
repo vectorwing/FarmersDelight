@@ -143,7 +143,7 @@ public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlo
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(BlockGetter level, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
 		BlockState upperState = level.getBlockState(pos.above());
 		if (upperState.getBlock() instanceof RicePaniclesBlock) {
 			return !((RicePaniclesBlock) upperState.getBlock()).isMaxAge(upperState);

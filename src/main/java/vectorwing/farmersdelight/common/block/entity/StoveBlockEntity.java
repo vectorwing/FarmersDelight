@@ -127,7 +127,7 @@ public class StoveBlockEntity extends SyncedBlockEntity
 					Container inventoryWrapper = new SimpleContainer(stoveStack);
 					Optional<CampfireCookingRecipe> recipe = getMatchingRecipe(inventoryWrapper, i);
 					if (recipe.isPresent()) {
-						ItemStack resultStack = recipe.get().assemble(inventoryWrapper);
+						ItemStack resultStack = recipe.get().assemble(inventoryWrapper, level.registryAccess());
 						if (!resultStack.isEmpty()) {
 							ItemUtils.spawnItemEntity(level, resultStack.copy(),
 									worldPosition.getX() + 0.5, worldPosition.getY() + 1.0, worldPosition.getZ() + 0.5,

@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.integration.jei.category;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -12,6 +11,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -21,6 +21,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ModTags;
+import vectorwing.farmersdelight.common.utility.ClientRenderUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 import vectorwing.farmersdelight.integration.jei.FDRecipeTypes;
 import vectorwing.farmersdelight.integration.jei.resource.DecompositionDummy;
@@ -54,16 +55,6 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 		icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, richSoil);
 		slotIcon = helper.createDrawable(backgroundImage, 119, 0, slotSize, slotSize);
 	}
-//
-//	@Override
-//	public ResourceLocation getUid() {
-//		return this.getRecipeType().getUid();
-//	}
-//
-//	@Override
-//	public Class<? extends DecompositionDummy> getRecipeClass() {
-//		return this.getRecipeType().getRecipeClass();
-//	}
 
 	@Override
 	public RecipeType<DecompositionDummy> getRecipeType() {
@@ -95,27 +86,22 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 	}
 
 	@Override
-	public void draw(DecompositionDummy recipe, IRecipeSlotsView recipeSlotsView, PoseStack ms, double mouseX, double mouseY) {
-		this.slotIcon.draw(ms, 63, 53);
+	public void draw(DecompositionDummy recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+		this.slotIcon.draw(guiGraphics, 63, 53);
 	}
 
 	@Override
 	public List<Component> getTooltipStrings(DecompositionDummy recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
-		if (inIconAt(40, 38, mouseX, mouseY)) {
+		if (ClientRenderUtils.isCursorInsideBounds(40, 38, 11, 11, mouseX, mouseY)) {
 			return ImmutableList.of(translateKey(".light"));
 		}
-		if (inIconAt(53, 38, mouseX, mouseY)) {
+		if (ClientRenderUtils.isCursorInsideBounds(53, 38, 11, 11, mouseX, mouseY)) {
 			return ImmutableList.of(translateKey(".fluid"));
 		}
-		if (inIconAt(67, 38, mouseX, mouseY)) {
+		if (ClientRenderUtils.isCursorInsideBounds(67, 38, 11, 11, mouseX, mouseY)) {
 			return ImmutableList.of(translateKey(".accelerators"));
 		}
 		return Collections.emptyList();
-	}
-
-	private static boolean inIconAt(int iconX, int iconY, double mouseX, double mouseY) {
-		final int icon_size = 11;
-		return iconX <= mouseX && mouseX < iconX + icon_size && iconY <= mouseY && mouseY < iconY + icon_size;
 	}
 
 	private static MutableComponent translateKey(@Nonnull String suffix) {

@@ -17,6 +17,7 @@ import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.utility.ListUtils;
+import vectorwing.farmersdelight.integration.crafttweaker.FarmersDelightCrTPlugin;
 
 /**
  * Farmer's Delight Cooking Pot recipes.
@@ -73,10 +74,10 @@ public class CookingPotRecipeManager implements IRecipeManager
 
     private boolean validateInputs(IIngredient[] inputs) {
         if (inputs.length == 0) {
-            CraftTweakerAPI.LOGGER.error("No ingredients for cooking recipe");
+            FarmersDelightCrTPlugin.LOGGER_CT.error("No ingredients for cooking recipe");
             return false;
         } else if (inputs.length > CookingPotRecipe.INPUT_SLOTS) {
-            CraftTweakerAPI.LOGGER.error("Too many ingredients for cooking recipe! The max is %s", CookingPotRecipe.INPUT_SLOTS);
+            FarmersDelightCrTPlugin.LOGGER_CT.error("Too many ingredients for cooking recipe! The max is %s", CookingPotRecipe.INPUT_SLOTS);
             return false;
         }
         return true;

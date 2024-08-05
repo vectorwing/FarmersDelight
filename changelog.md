@@ -1,5 +1,130 @@
 # Changelog
 
+## 1.2.5
+
+### Additions
+- Farmer Villagers are now capable of planting and harvesting FD crops!
+  - They can plant Cabbage, Tomato and Onion. Rice is excluded due to unique planting conditions. However...
+  - They can harvest all 4 crops once fully mature, and will collect the drops. This includes the top half of Rice, which means they can harvest it indefinitely;
+- Added tag: `farmersdelight:campfire_signal_smoke`. Blocks in this tag will cause Campfires to emit "signal smoke", like the Hay Bale;
+
+### Updates
+- Knives are now effective at mining Pumpkins and Melons;
+- Knives will harvest **4 Pumpkin Slices** when mining a Pumpkin, instead of a whole unit. Carved Pumpkins are unaffected;
+- Added Canvas Signs to the vanilla `signs` and `hanging_signs` item tags;
+- Some crafting recipes are now properly grouped in the Crafting Table's recipe book;
+- Skillets are now waterloggable, but are unable to cook underwater, either handheld or as a block. Hard to fry when the skillet is flooded!
+
+## 1.2.4
+
+### Updates
+- The Cooking Pot item now displays more information than before:
+  - A blue bar will be shown to indicate the amount of meal servings stored, similar to how Bundles display their fullness;
+  - The tooltip will display the stored food's item sprite alongside its name;
+- When viewing basic crops in JEI, they will display info on where they can be found as Wild Crops.
+
+### Fixes
+- (1.20) Creative Tab registration has been moved to server-side, so that other mods can access them for game logic;
+- Structure files for compost heaps are now format-updated with datagen, thus avoiding excessive DFU triggers on world gen. This should improve performance!
+  - Credit to malte0811, co-author of Immersive Engineering, for the StructureUpdater implementation;
+- Skillet's higher knockback is now implemented as an attribute, rather than an event, fixing a bug where the other hand's item also received this boost;
+- Skillet sounds now play at the correct stage of the damage cycle. This is noticeable on multiplayer, with some amount of latency;
+
+### Translations
+- Added a line for the Rotten Tomato entity in most langs (thanks, leagris!);
+- Added:
+  - sv_SE (thanks, Bjorkan!);
+- Updated:
+  - es_MX (thanks, CerealConJugo!);
+  - fr_FR (thanks, leagris!);
+  - ja_JP (thanks, EndilCrafter!)
+  - ru_RU (thanks, VGamerGroup!);
+  - uk_UA (thanks, unroman!);
+  - zh_CN (thanks, NumberSir);
+  - zh_TW (thanks, Lobster0228!);
+
+## 1.2.3
+
+### Additions
+- Added certain blocks to the `create:brittle` tag, to prevent them from being deleted randomly when disassembling contraptions;
+- New tags:
+  - `farmersdelight:flat_on_cutting_board`: Items which will always render flat and 2D when placed on a Cutting Board, to fix certain render cases.
+    - Includes Trident and Spyglass by default, due to unique render cases;
+    - Optionally includes items from a few mods, such as Autumnity's Turkey and Supplementaries' Quiver;
+
+### Updates
+- Updated method of modifying stack sizes for BowlFoodItems:
+  - Changes are now done on game start, rather than calculated during `maxStackSize()` calls;
+  - The `overrideAllSoupItems` config option has been removed, due to performance and usability concerns;
+- Cooking recipes will now drop sensible remainders for vanilla items which don't have them configured;
+- (1.20) Updated Basket textures to match the new Bamboo design and palette;
+
+### Fixes
+- Fix potential performance issues involving the stack size override for BowlFoodItems (see above);
+- (1.18.2) Rollback and replacement to previous fix for Cutting Board's rendering issues with perspective items:
+  - The previous fix fails (and may crash) with some resource packs on 1.18.2, due to differences in how the method operates. On 1.19+, the fix works as intended;
+  - Instead of applying perspectives to determine 3D items, the `flat_on_cutting_board` tag will be used instead. Wrongly-angled items should be added to this tag;
+
+### Translations
+- Updated:
+  - ko_KR (thanks, Yusi0!);
+  - pl_PL (thanks, jogurciQ!);
+
+## 1.2.2a
+
+### Fixes
+- Fix recursion crash when opening loot chests;
+
+## 1.2.2
+
+### Additions
+- (1.20) Added Hanging Canvas Signs;
+- (1.20) Added Cherry and Bamboo Cabinets;
+- (1.20) Added salvaging recipes for Cherry and Bamboo furniture;
+- Added compatibility with the `origins:meat` tag from the Origins mod:
+  - Carnivorous foods not defined as `meat()` in properties;
+  - Bacon and Eggs;
+- Added some items to Create Crafts & Additions tags: `createaddition:plants` and `createaddition:plant_foods` (thanks, moltenwolfcub!);
+- Added Onions to the `tconstruct:seeds` tag from Tinker's Construct, to replant with Harvest modifiers;
+- New tags:
+  - `farmersdelight:terrain`: Blocks commonly present in biome surfaces. Populated by `minecraft:dirt` and `minecraft:sand`, and used for wild crop generation;
+  - `farmersdelight:horse_feed_tempted`: Entities which will be tempted by Horse Feed when held;
+  - `farmersdelight:serving_containers`: Items commonly used as containers for Cooking Pot recipes. Used for shift-click logic in the UI;
+
+### Updates
+- (1.20) Updated tags to the newest conventions in 1.20:
+  - `replaceable` and `replaceable_by_trees`: Sandy Shrub;
+- Updated the Rope recipe to require 2 straw only, and output 4 units;
+- Updated alternate Lead recipe to use Straw instead of Rope, due to Rope being cheaper now;
+- Updated the Cooking Pot's GUI with a small arrow, pointing from the meal slot to the output slot;
+- Updated the JEI widget for cooking recipes:
+  - Slightly smaller size, to fit more recipes per page;
+  - Progress arrow now shows icons for cooking time and experience, and displays those stats on mouse hover;
+- Updated `create:upright_on_belt` with newer FD drinks;
+- Updated `fan_heaters` to `passive_boiler_heaters`, according to Create 0.5 specs;
+  - (1.18.2) `fan_heaters` is still present for legacy compatibility with Create 0.4;
+- Updated Wild Cabbage and Sea Beet generation to be placeable on blocks tagged as `minecraft:sand`, instead of hardcoded to normal sand;
+- Rabbits can now be fed, and are tempted by, Cabbage (whole or leaf);
+- Updated Slice of Cake's texture, to be more accurate to the cake block it comes from;
+- Ropes can now support center-hanging blocks beneath them, such as Lanterns;
+- Tomato Seeds are now associated as an item for both `tomatoes` and `budding_tomatoes` (thanks, RaymondBlaze!);
+
+### Fixes
+- Fix Wild Crops not generating in biomes from biome mods:
+  - Removes the check for `forge:is_overworld` on placed features, since the tag is unused by most mods;
+  - (1.18) The NETHER, THEEND and NONE BiomeCategories are excluded from wild crop generation instead.
+- Fix loot functions lacking a type, causing errors with datagen and mods (such as Roughly Enough Resources);
+- Fix Lily Pads and other water plants being directly plantable on Rich Soil, as if it was water;
+- Fix wrong Cutting Board rendering for items with 3D model perspectives, but a 2D sprite on inventories;
+- (1.19 and below) Fix roped Tomato Vines being destroyed by water, deleting the rope;
+- Fix Cooking Pot not resetting its cook time when quick-swapping recipes, such as through the Recipe Book (thanks, Umpaz!);
+- Fix Comfort and Nourishment overlays not being cancellable by other mods (example: Vampirism Blood Bar);
+
+### Translations
+- Updated:
+  - ru_RU (thanks, Edarlingen!);
+  - es_ES (thanks, GerardPolloRebozado!);
+
 ## 1.2.1
 
 ### Updates

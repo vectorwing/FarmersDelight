@@ -8,6 +8,7 @@ import com.blamejared.crafttweaker.api.recipe.component.IDecomposedRecipe;
 import com.blamejared.crafttweaker.api.recipe.handler.IRecipeHandler;
 import com.blamejared.crafttweaker.api.recipe.manager.base.IRecipeManager;
 import com.blamejared.crafttweaker.api.util.StringUtil;
+import com.blamejared.crafttweaker.impl.helper.AccessibleElementsProvider;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -28,7 +29,7 @@ public final class CookingPotRecipeHandler implements IRecipeHandler<CookingPotR
                 "%s.addRecipe(%s, %s, %s, %s, %s, %s);",
                 manager.getCommandString(),
                 StringUtil.quoteAndEscape(recipe.getId()),
-                new MCItemStackMutable(recipe.getResultItem()).getCommandString(),
+                IItemStack.of(AccessibleElementsProvider.get().registryAccess(recipe::getResultItem)).getCommandString(),
                 recipe.getIngredients().stream()
                         .map(IIngredient::fromIngredient)
                         .map(IIngredient::getCommandString)
@@ -47,7 +48,7 @@ public final class CookingPotRecipeHandler implements IRecipeHandler<CookingPotR
     @Override
     public Optional<IDecomposedRecipe> decompose(IRecipeManager<? super CookingPotRecipe> manager, CookingPotRecipe recipe) {
         final IDecomposedRecipe decomposedRecipe = IDecomposedRecipe.builder()
-                .with(BuiltinRecipeComponents.Output.ITEMS, new MCItemStackMutable(recipe.getResultItem()))
+                .with(BuiltinRecipeComponents.Output.ITEMS, IItemStack.of(AccessibleElementsProvider.get().registryAccess(recipe::getResultItem)))
                 .with(BuiltinRecipeComponents.Input.INGREDIENTS,  recipe.getIngredients().stream().map(IIngredient::fromIngredient).toList())
                 .with(BuiltinRecipeComponents.Processing.TIME, recipe.getCookTime())
                 .with(BuiltinRecipeComponents.Metadata.GROUP, recipe.getGroup())

@@ -2,8 +2,8 @@ package vectorwing.farmersdelight.client.model;
 
 import com.google.common.base.Preconditions;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import com.mojang.math.Transformation;
-import com.mojang.math.Vector3f;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -14,28 +14,29 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.SimpleModelState;
 import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.joml.Vector3f;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.registry.ModItems;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import vectorwing.farmersdelight.common.registry.ModItems;
-
 import java.util.*;
 
 /**
  * Credits to the Botania Team for the class reference!
  */
 
-// TODO: Check if Material::sprite is the proper substitute for ForgeModelBakery.defaultTextureGetter().
-
 @SuppressWarnings("deprecation")
 public class SkilletModel implements BakedModel
 {
+	private static final ItemModelGenerator ITEM_MODEL_GENERATOR = new ItemModelGenerator();
+
 	private final ModelBakery bakery;
 	private final BakedModel originalModel;
 	private final BakedModel cookingModel;
@@ -125,17 +126,19 @@ public class SkilletModel implements BakedModel
 			ModelState transform = new SimpleModelState(
 					new Transformation(
 							new Vector3f(0.0F, -0.4F, 0.0F),
-							Vector3f.XP.rotationDegrees(270),
+							Axis.XP.rotationDegrees(270),
 							new Vector3f(0.625F, 0.625F, 0.625F), null));
 			ResourceLocation name = new ResourceLocation(FarmersDelight.MODID, "skillet_with_" + ingredientLocation.toString().replace(':', '_'));
 
+			ModelBaker baker = bakery.new ModelBakerImpl((modelLoc, material) -> material.sprite(), name);
+
 			BakedModel ingredientBaked;
 			if (ingredientUnbaked instanceof BlockModel bm && ((BlockModel) ingredientUnbaked).getRootModel() == ModelBakery.GENERATION_MARKER) {
-				ingredientBaked = new ItemModelGenerator()
+				ingredientBaked = ITEM_MODEL_GENERATOR
 						.generateBlockModel(Material::sprite, bm)
-						.bake(bakery, bm, Material::sprite, transform, name, false);
+						.bake(baker, bm, Material::sprite, transform, name, false);
 			} else {
-				ingredientBaked = ingredientUnbaked.bake(bakery, Material::sprite, transform, name);
+				ingredientBaked = ingredientUnbaked.bake(baker, Material::sprite, transform, name);
 			}
 
 			for (Direction e : Direction.values()) {
@@ -174,7 +177,7 @@ public class SkilletModel implements BakedModel
 		}
 
 		@Override
-		public BakedModel applyTransform(@Nonnull ItemTransforms.TransformType cameraTransformType, PoseStack stack, boolean leftHand) {
+		public BakedModel applyTransform(@Nonnull ItemDisplayContext cameraTransformType, PoseStack stack, boolean leftHand) {
 			super.applyTransform(cameraTransformType, stack, leftHand);
 			return this;
 		}

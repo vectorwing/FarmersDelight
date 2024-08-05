@@ -1,7 +1,11 @@
 package vectorwing.farmersdelight.common.tag;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -16,6 +20,9 @@ public class ModTags
 {
 	// Blocks that are efficiently mined with a Knife.
 	public static final TagKey<Block> MINEABLE_WITH_KNIFE = modBlockTag("mineable/knife");
+
+	// Blocks commonly present in biome surfaces. Populated by "minecraft:dirt" and "minecraft:sand" by default.
+	public static final TagKey<Block> TERRAIN = modBlockTag("terrain");
 
 	// Blocks made mostly of straw.
 	public static final TagKey<Block> STRAW_BLOCKS = modBlockTag("straw_blocks");
@@ -47,6 +54,9 @@ public class ModTags
 	// Candle cakes that should drop the vanilla cake slice when sliced by a knife.
 	public static final TagKey<Block> DROPS_CAKE_SLICE = modBlockTag("drops_cake_slice");
 
+	// Blocks which cause Campfires to emit signal smoke when placed underneath them.
+	public static final TagKey<Block> CAMPFIRE_SIGNAL_SMOKE = modBlockTag("campfire_signal_smoke");
+
 	// Items that represent the wild form of a farmable crop.
 	public static final TagKey<Item> WILD_CROPS_ITEM = modItemTag("wild_crops");
 
@@ -68,11 +78,20 @@ public class ModTags
 	// Canvas Signs items for crafting.
 	public static final TagKey<Item> CANVAS_SIGNS = modItemTag("canvas_signs");
 
+	// Canvas Signs items for crafting.
+	public static final TagKey<Item> HANGING_CANVAS_SIGNS = modItemTag("hanging_canvas_signs");
+
 	// Wooden Cabinet items for crafting.
 	public static final TagKey<Item> WOODEN_CABINETS = modItemTag("cabinets/wooden");
 
 	// All Cabinet items for crafting.
 	public static final TagKey<Item> CABINETS = modItemTag("cabinets");
+
+	// Items commonly used to contain products. Used by the Cooking Pot for sneak-clicking actions.
+	public static final TagKey<Item> SERVING_CONTAINERS = modItemTag("serving_containers");
+
+	// Items which render in 2D, laying down flat, when placed on the Cutting Board.
+	public static final TagKey<Item> FLAT_ON_CUTTING_BOARD = modItemTag("flat_on_cutting_board");
 
 	// Entities that should be able to eat Dog Food when tame. Defaults to tamed Wolves.
 	public static final TagKey<EntityType<?>> DOG_FOOD_USERS = modEntityTag("dog_food_users");
@@ -80,15 +99,18 @@ public class ModTags
 	// Entities that should be able to eat Horse Feed when tame. Defaults to most vanilla mounts, except Pigs and Striders.
 	public static final TagKey<EntityType<?>> HORSE_FEED_USERS = modEntityTag("horse_feed_users");
 
+	// Entities that should be given a TemptGoal for Horse Feed, allowing players to call them with it.
+	public static final TagKey<EntityType<?>> HORSE_FEED_TEMPTED = modEntityTag("horse_feed_tempted");
+
 	private static TagKey<Item> modItemTag(String path) {
-		return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(FarmersDelight.MODID + ":" + path));
+		return ItemTags.create(new ResourceLocation(FarmersDelight.MODID, path));
 	}
 
 	private static TagKey<Block> modBlockTag(String path) {
-		return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(FarmersDelight.MODID + ":" + path));
+		return BlockTags.create(new ResourceLocation(FarmersDelight.MODID, path));
 	}
 
 	private static TagKey<EntityType<?>> modEntityTag(String path) {
-		return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(FarmersDelight.MODID + ":" + path));
+		return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(FarmersDelight.MODID, path));
 	}
 }

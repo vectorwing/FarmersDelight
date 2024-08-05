@@ -39,20 +39,20 @@ public class CookingRecipes
 				.addIngredient(Items.COCOA_BEANS)
 				.unlockedByAnyIngredient(Items.COCOA_BEANS, Items.MILK_BUCKET, ModItems.MILK_BOTTLE.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.DRINKS)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.APPLE_CIDER.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(Items.APPLE)
 				.addIngredient(Items.APPLE)
 				.addIngredient(Items.SUGAR)
 				.unlockedByItems("has_apple", Items.APPLE)
 				.setRecipeBookTab(CookingPotRecipeBookTab.DRINKS)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.TOMATO_SAUCE.get(), 1, FAST_COOKING, SMALL_EXP)
 				.addIngredient(ForgeTags.CROPS_TOMATO)
 				.addIngredient(ForgeTags.CROPS_TOMATO)
 				.unlockedByItems("has_tomato", ModItems.TOMATO.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.MISC)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.DOG_FOOD.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(Items.ROTTEN_FLESH)
 				.addIngredient(Items.BONE_MEAL)
@@ -60,7 +60,7 @@ public class CookingRecipes
 				.addIngredient(ForgeTags.CROPS_RICE)
 				.unlockedByAnyIngredient(Items.ROTTEN_FLESH, Items.BONE_MEAL, ModItems.RICE.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.MISC)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.GLOW_BERRY_CUSTARD.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(Items.GLOW_BERRIES)
 				.addIngredient(ForgeTags.MILK)
@@ -68,7 +68,7 @@ public class CookingRecipes
 				.addIngredient(Items.SUGAR)
 				.unlockedByAnyIngredient(Items.GLOW_BERRIES, Items.MILK_BUCKET, ModItems.MILK_BOTTLE.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.MISC)
-				.build(consumer);
+				.save(consumer);
 	}
 
 	private static void cookMinecraftSoups(Consumer<FinishedRecipe> consumer) {
@@ -77,14 +77,14 @@ public class CookingRecipes
 				.addIngredient(Items.RED_MUSHROOM)
 				.unlockedByAnyIngredient(Blocks.BROWN_MUSHROOM, Blocks.RED_MUSHROOM)
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(Items.BEETROOT_SOUP, 1, NORMAL_COOKING, MEDIUM_EXP, Items.BOWL)
 				.addIngredient(Items.BEETROOT)
 				.addIngredient(Items.BEETROOT)
 				.addIngredient(Items.BEETROOT)
 				.unlockedByItems("has_beetroot", Items.BEETROOT)
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(Items.RABBIT_STEW, 1, NORMAL_COOKING, MEDIUM_EXP, Items.BOWL)
 				.addIngredient(Items.BAKED_POTATO)
 				.addIngredient(Items.RABBIT)
@@ -92,7 +92,7 @@ public class CookingRecipes
 				.addIngredient(Ingredient.of(Items.BROWN_MUSHROOM, Items.RED_MUSHROOM))
 				.unlockedByAnyIngredient(Items.RABBIT, Items.BROWN_MUSHROOM, Items.RED_MUSHROOM, Items.CARROT, Items.BAKED_POTATO)
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-				.build(consumer);
+				.save(consumer);
 	}
 
 	private static void cookMeals(Consumer<FinishedRecipe> consumer) {
@@ -103,14 +103,14 @@ public class CookingRecipes
 				.addIngredient(ForgeTags.CROPS_TOMATO)
 				.unlockedByAnyIngredient(Items.COD, Items.POTATO, ModItems.TOMATO.get(), Items.EGG)
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.BEEF_STEW.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(ForgeTags.RAW_BEEF)
 				.addIngredient(Items.CARROT)
 				.addIngredient(Items.POTATO)
 				.unlockedByAnyIngredient(Items.BEEF, Items.CARROT, Items.POTATO)
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.BONE_BROTH.get(), 1, NORMAL_COOKING, SMALL_EXP)
 				.addIngredient(Tags.Items.BONES)
 				.addIngredient(Ingredient.fromValues(Stream.of(
@@ -121,13 +121,13 @@ public class CookingRecipes
 				)))
 				.unlockedByItems("has_bone", Items.BONE)
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.CABBAGE_ROLLS.get(), 1, FAST_COOKING, SMALL_EXP)
 				.addIngredient(ForgeTags.CROPS_CABBAGE)
 				.addIngredient(ModTags.CABBAGE_ROLL_INGREDIENTS)
 				.unlockedByAnyIngredient(ModItems.CABBAGE.get(), ModItems.CABBAGE_LEAF.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.MISC)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.CHICKEN_SOUP.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(ForgeTags.RAW_CHICKEN)
 				.addIngredient(Items.CARROT)
@@ -135,12 +135,12 @@ public class CookingRecipes
 				.addIngredient(ForgeTags.VEGETABLES)
 				.unlockedByAnyIngredient(Items.CHICKEN, Items.CARROT)
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.COOKED_RICE.get(), 1, FAST_COOKING, SMALL_EXP)
 				.addIngredient(ForgeTags.CROPS_RICE)
 				.unlockedByItems("has_rice", ModItems.RICE.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.MISC)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.DUMPLINGS.get(), 2, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(ForgeTags.DOUGH)
 				.addIngredient(ForgeTags.CROPS_CABBAGE)
@@ -153,14 +153,14 @@ public class CookingRecipes
 				)))
 				.unlockedByAnyIngredient(ModItems.WHEAT_DOUGH.get(), ModItems.CABBAGE.get(), ModItems.ONION.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.MISC)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.FISH_STEW.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(ForgeTags.RAW_FISHES)
 				.addIngredient(ModItems.TOMATO_SAUCE.get())
 				.addIngredient(ForgeTags.CROPS_ONION)
 				.unlockedByAnyIngredient(Items.SALMON, Items.COD, Items.TROPICAL_FISH, ModItems.TOMATO_SAUCE.get(), ModItems.ONION.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.FRIED_RICE.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(ForgeTags.CROPS_RICE)
 				.addIngredient(ForgeTags.EGGS)
@@ -168,7 +168,7 @@ public class CookingRecipes
 				.addIngredient(ForgeTags.CROPS_ONION)
 				.unlockedByAnyIngredient(ModItems.RICE.get(), Items.EGG, Items.CARROT, ModItems.ONION.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.MUSHROOM_RICE.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(Items.BROWN_MUSHROOM)
 				.addIngredient(Items.RED_MUSHROOM)
@@ -176,7 +176,7 @@ public class CookingRecipes
 				.addIngredient(Ingredient.of(Items.CARROT, Items.POTATO))
 				.unlockedByAnyIngredient(Blocks.BROWN_MUSHROOM, Blocks.RED_MUSHROOM, ModItems.RICE.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.NOODLE_SOUP.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(ForgeTags.PASTA)
 				.addIngredient(ForgeTags.COOKED_EGGS)
@@ -184,21 +184,21 @@ public class CookingRecipes
 				.addIngredient(ForgeTags.RAW_PORK)
 				.unlockedByAnyIngredient(ModItems.RAW_PASTA.get(), Items.DRIED_KELP, Items.PORKCHOP)
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.PASTA_WITH_MEATBALLS.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(ModItems.MINCED_BEEF.get())
 				.addIngredient(ForgeTags.PASTA)
 				.addIngredient(ModItems.TOMATO_SAUCE.get())
 				.unlockedByAnyIngredient(ModItems.RAW_PASTA.get(), Items.BEEF, ModItems.TOMATO_SAUCE.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.PASTA_WITH_MUTTON_CHOP.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(ForgeTags.RAW_MUTTON)
 				.addIngredient(ForgeTags.PASTA)
 				.addIngredient(ModItems.TOMATO_SAUCE.get())
 				.unlockedByAnyIngredient(ModItems.RAW_PASTA.get(), Items.MUTTON, ModItems.TOMATO_SAUCE.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.PUMPKIN_SOUP.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(ModItems.PUMPKIN_SLICE.get())
 				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
@@ -206,7 +206,7 @@ public class CookingRecipes
 				.addIngredient(ForgeTags.MILK)
 				.unlockedByAnyIngredient(Items.PUMPKIN, ModItems.PUMPKIN_SLICE.get(), Items.PORKCHOP, Items.MILK_BUCKET, ModItems.MILK_BOTTLE.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.RATATOUILLE.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(ForgeTags.CROPS_TOMATO)
 				.addIngredient(ForgeTags.CROPS_ONION)
@@ -214,7 +214,7 @@ public class CookingRecipes
 				.addIngredient(ForgeTags.VEGETABLES)
 				.unlockedByAnyIngredient(ModItems.TOMATO.get(), ModItems.ONION.get(), Items.BEETROOT)
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.SQUID_INK_PASTA.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(ForgeTags.RAW_FISHES)
 				.addIngredient(ForgeTags.PASTA)
@@ -222,7 +222,7 @@ public class CookingRecipes
 				.addIngredient(Items.INK_SAC)
 				.unlockedByAnyIngredient(ModItems.RAW_PASTA.get(), Items.INK_SAC, ModItems.TOMATO.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.STUFFED_PUMPKIN_BLOCK.get(), 1, SLOW_COOKING, LARGE_EXP, Items.PUMPKIN)
 				.addIngredient(ForgeTags.CROPS_RICE)
 				.addIngredient(ForgeTags.CROPS_ONION)
@@ -232,7 +232,7 @@ public class CookingRecipes
 				.addIngredient(ForgeTags.VEGETABLES)
 				.unlockedByItems("has_pumpkin", Blocks.PUMPKIN)
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.VEGETABLE_NOODLES.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(Items.CARROT)
 				.addIngredient(Items.BROWN_MUSHROOM)
@@ -241,7 +241,7 @@ public class CookingRecipes
 				.addIngredient(ForgeTags.VEGETABLES)
 				.unlockedByAnyIngredient(ModItems.RAW_PASTA.get(), Items.BROWN_MUSHROOM, Items.CARROT)
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-				.build(consumer);
+				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.VEGETABLE_SOUP.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(Items.CARROT)
 				.addIngredient(Items.POTATO)
@@ -249,6 +249,6 @@ public class CookingRecipes
 				.addIngredient(ForgeTags.SALAD_INGREDIENTS)
 				.unlockedByAnyIngredient(Items.CARROT, ModItems.ONION.get(), Items.BEETROOT)
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-				.build(consumer);
+				.save(consumer);
 	}
 }

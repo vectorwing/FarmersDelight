@@ -3,13 +3,23 @@
   "criteria": {
     "campfire": {
       "conditions": {
-        "block": "minecraft:campfire"
+        "location": [
+          {
+            "block": "minecraft:campfire",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     },
     "soul_campfire": {
       "conditions": {
-        "block": "minecraft:soul_campfire"
+        "location": [
+          {
+            "block": "minecraft:soul_campfire",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     }
@@ -34,5 +44,6 @@
       "campfire",
       "soul_campfire"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

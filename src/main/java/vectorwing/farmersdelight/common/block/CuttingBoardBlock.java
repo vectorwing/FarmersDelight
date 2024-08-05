@@ -19,6 +19,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -26,7 +27,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -49,20 +49,9 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 
 	protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 1.0D, 15.0D);
 
-	public CuttingBoardBlock() {
-		super(Properties.of(Material.WOOD).strength(2.0F).sound(SoundType.WOOD));
+	public CuttingBoardBlock(BlockBehaviour.Properties properties) {
+		super(properties);
 		this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
-	}
-
-	public static void spawnCuttingParticles(Level level, BlockPos pos, ItemStack stack, int count) {
-		for (int i = 0; i < count; ++i) {
-			Vec3 vec3d = new Vec3(((double) level.random.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, ((double) level.random.nextFloat() - 0.5D) * 0.1D);
-			if (level instanceof ServerLevel) {
-				((ServerLevel) level).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, stack), pos.getX() + 0.5F, pos.getY() + 0.1F, pos.getZ() + 0.5F, 1, vec3d.x, vec3d.y + 0.05D, vec3d.z, 0.0D);
-			} else {
-				level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, stack), pos.getX() + 0.5F, pos.getY() + 0.1F, pos.getZ() + 0.5F, vec3d.x, vec3d.y + 0.05D, vec3d.z);
-			}
-		}
 	}
 
 	@Override
@@ -76,15 +65,9 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 	}
 
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		return SHAPE;
-	}
-
-	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		BlockEntity tileEntity = level.getBlockEntity(pos);
-		if (tileEntity instanceof CuttingBoardBlockEntity) {
-			CuttingBoardBlockEntity cuttingBoardEntity = (CuttingBoardBlockEntity) tileEntity;
+		if (tileEntity instanceof CuttingBoardBlockEntity cuttingBoardEntity) {
 			ItemStack heldStack = player.getItemInHand(hand);
 			ItemStack offhandStack = player.getOffhandItem();
 
@@ -129,19 +112,21 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 
 	@Override
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (state.getBlock() != newState.getBlock()) {
-			BlockEntity tileEntity = level.getBlockEntity(pos);
-			if (tileEntity instanceof CuttingBoardBlockEntity) {
-				Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), ((CuttingBoardBlockEntity) tileEntity).getStoredItem());
-				level.updateNeighbourForOutputSignal(pos, this);
-			}
-
-			super.onRemove(state, level, pos, newState, isMoving);
+		if (state.getBlock() == newState.getBlock()) {
+			return;
 		}
+
+		BlockEntity tileEntity = level.getBlockEntity(pos);
+		if (tileEntity instanceof CuttingBoardBlockEntity cuttingBoard) {
+			Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), cuttingBoard.getStoredItem());
+			level.updateNeighbourForOutputSignal(pos, this);
+		}
+
+		super.onRemove(state, level, pos, newState, isMoving);
 	}
 
 	@Override
-	public boolean isPossibleToRespawnInThis() {
+	public boolean isPossibleToRespawnInThis(BlockState state) {
 		return true;
 	}
 
@@ -185,10 +170,10 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
-		BlockEntity tileEntity = level.getBlockEntity(pos);
-		if (tileEntity instanceof CuttingBoardBlockEntity) {
-			return !((CuttingBoardBlockEntity) tileEntity).isEmpty() ? 15 : 0;
+	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+		BlockEntity blockEntity = level.getBlockEntity(pos);
+		if (blockEntity instanceof CuttingBoardBlockEntity) {
+			return !((CuttingBoardBlockEntity) blockEntity).isEmpty() ? 15 : 0;
 		}
 		return 0;
 	}
@@ -207,6 +192,17 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 	@Override
 	public BlockState mirror(BlockState pState, Mirror pMirror) {
 		return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
+	}
+
+	public static void spawnCuttingParticles(Level level, BlockPos pos, ItemStack stack, int count) {
+		for (int i = 0; i < count; ++i) {
+			Vec3 vec3d = new Vec3(((double) level.random.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, ((double) level.random.nextFloat() - 0.5D) * 0.1D);
+			if (level instanceof ServerLevel) {
+				((ServerLevel) level).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, stack), pos.getX() + 0.5F, pos.getY() + 0.1F, pos.getZ() + 0.5F, 1, vec3d.x, vec3d.y + 0.05D, vec3d.z, 0.0D);
+			} else {
+				level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, stack), pos.getX() + 0.5F, pos.getY() + 0.1F, pos.getZ() + 0.5F, vec3d.x, vec3d.y + 0.05D, vec3d.z);
+			}
+		}
 	}
 
 	@Mod.EventBusSubscriber(modid = FarmersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)

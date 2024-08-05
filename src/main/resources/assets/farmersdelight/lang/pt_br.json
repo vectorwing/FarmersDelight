@@ -11,6 +11,8 @@
   "block.farmersdelight.acacia_cabinet": "Armário de acácia",
   "block.farmersdelight.dark_oak_cabinet": "Armário de carvalho escuro",
   "block.farmersdelight.mangrove_cabinet": "Armário de mangue",
+  "block.farmersdelight.cherry_cabinet": "Armário de cerejeira",
+  "block.farmersdelight.bamboo_cabinet": "Armário de bambu",
   "block.farmersdelight.crimson_cabinet": "Armário carmesim",
   "block.farmersdelight.warped_cabinet": "Armário distorcida",
   "block.farmersdelight.rope": "Corda",
@@ -49,6 +51,24 @@
   "block.farmersdelight.green_canvas_sign": "Placa de lona verde",
   "block.farmersdelight.red_canvas_sign": "Placa de lona vermelha",
   "block.farmersdelight.black_canvas_sign": "Placa de lona preta",
+
+  "block.farmersdelight.hanging_canvas_sign": "Placa suspensa de lona",
+  "block.farmersdelight.white_hanging_canvas_sign": "Placa suspensa de lona branca",
+  "block.farmersdelight.orange_hanging_canvas_sign": "Placa suspensa de lona laranja",
+  "block.farmersdelight.magenta_hanging_canvas_sign": "Placa suspensa de lona magenta",
+  "block.farmersdelight.light_blue_hanging_canvas_sign": "Placa suspensa de lona azul-clara",
+  "block.farmersdelight.yellow_hanging_canvas_sign": "Placa suspensa de lona amarela",
+  "block.farmersdelight.lime_hanging_canvas_sign": "Placa suspensa de lona verde-limão",
+  "block.farmersdelight.pink_hanging_canvas_sign": "Placa suspensa de lona rosa",
+  "block.farmersdelight.gray_hanging_canvas_sign": "Placa suspensa de lona cinza",
+  "block.farmersdelight.light_gray_hanging_canvas_sign": "Placa suspensa de lona cinza-clara",
+  "block.farmersdelight.cyan_hanging_canvas_sign": "Placa suspensa de lona ciano",
+  "block.farmersdelight.purple_hanging_canvas_sign": "Placa suspensa de lona roxa",
+  "block.farmersdelight.blue_hanging_canvas_sign": "Placa suspensa de lona azul",
+  "block.farmersdelight.brown_hanging_canvas_sign": "Placa suspensa de lona marrom",
+  "block.farmersdelight.green_hanging_canvas_sign": "Placa suspensa de lona verde",
+  "block.farmersdelight.red_hanging_canvas_sign": "Placa suspensa de lona vermelha",
+  "block.farmersdelight.black_hanging_canvas_sign": "Placa suspensa de lona preta",
 
   "block.farmersdelight.budding_tomatoes": "Broto de tomate",
   "block.farmersdelight.tomatoes": "Cipó de tomates",
@@ -180,6 +200,8 @@
   "item.farmersdelight.dog_food": "Ração para cães",
   "item.farmersdelight.horse_feed": "Alimento para cavalos",
 
+  "entity.farmersdelight.rotten_tomato": "Tomate podre",
+
   "effect.farmersdelight.nourishment": "Nutrição",
   "effect.farmersdelight.comfort": "Conforto",
 
@@ -272,7 +294,9 @@
   "farmersdelight.block.cutting_board.invalid_item": "Isto não parece cortável...",
   "farmersdelight.block.cutting_board.invalid_tool": "Talvez com outra ferramenta...",
   "farmersdelight.block.skillet.invalid_item": "Isto não pode ser cozido...",
+  "farmersdelight.block.skillet.underwater": "Não dá para cozinhar dentro d'água...",
   "farmersdelight.item.skillet.how_to_cook": "Use sua outra mão para segurar ingredientes!",
+  "farmersdelight.item.skillet.underwater": "Não dá para cozinhar embaixo d'água...",
 
   "death.attack.farmersdelight.stove": "%1$s foi grelhado à perfeição",
   "death.attack.farmersdelight.stove.player": "%1$s foi jogado na grelha por Chef %2$s",
@@ -284,7 +308,15 @@
   "farmersdelight.jei.decomposition.light": "Acelerado pela luz do sol",
   "farmersdelight.jei.decomposition.fluid": "Acelerado por água ao redor",
   "farmersdelight.jei.decomposition.accelerators": "Acelerado por ativadores ao redor (veja abaixo)",
+
   "farmersdelight.jei.info.straw": "Uma fibra vegetal usada em criação. Obtida ao cortar plantas e hortas gramíneas com uma Faca.",
-  "farmersdelight.jei.info.knife": "Facas são armas leves e rápidas. Elas podem colher Palha de plantas gramíneas, ou garantir itens secundários de animais.",
-  "farmersdelight.jei.info.ham": "Um corte grande de carne, vindo da perna de Porcos ou Hoglins. Você precisará de uma arma mais leve para obter isto..."
+  "farmersdelight.jei.info.knife": "Uma arma leve, com ataques rápidos e dano mediano.\n\nElas podem colher Palha de plantas gramíneas, ou garantir itens secundários de animais.",
+  "farmersdelight.jei.info.ham": "Um corte grande de carne, vindo da perna de Porcos ou Hoglins.\n\nVocê precisará de uma arma mais leve para obter isto...",
+  "farmersdelight.jei.info.wild_cabbages": "Repolhos costumam ser encontrados como plantas silvestres na orla de praias.",
+  "farmersdelight.jei.info.wild_beetroots": "Beterrabas costumam ser encontradas como plantas silvestres na orla de praias.",
+  "farmersdelight.jei.info.wild_carrots": "Cenouras costumam ser encontradas como plantas silvestres em climas temperados, como planícies e florestas.",
+  "farmersdelight.jei.info.wild_onions": "Cebolas costumam ser encontradas como plantas silvestres em climas temperados, como planícies e florestas.",
+  "farmersdelight.jei.info.wild_potatoes": "Batatas costumam ser encontradas como plantas silvestres em climas frios, como montanhas e taigas.",
+  "farmersdelight.jei.info.wild_tomatoes": "Tomates costumam ser encontrados como plantas silvestres em climas áridos, como savanas e desertos.",
+  "farmersdelight.jei.info.wild_rice": "Arroz costuma ser encontrado como uma planta silvestre nas lagoas de climas úmidos, como pântanos e selvas."
 }

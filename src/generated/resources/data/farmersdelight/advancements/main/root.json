@@ -25,5 +25,6 @@
     [
       "seeds"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

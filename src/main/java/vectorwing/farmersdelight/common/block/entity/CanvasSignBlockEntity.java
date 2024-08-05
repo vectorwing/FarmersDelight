@@ -8,8 +8,8 @@ import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 public class CanvasSignBlockEntity extends SignBlockEntity
 {
-	public CanvasSignBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-		super(pWorldPosition, pBlockState);
+	public CanvasSignBlockEntity(BlockPos pos, BlockState state) {
+		super(pos, state);
 	}
 
 	@Override

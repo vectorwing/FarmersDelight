@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.data;
 
 import com.google.common.collect.Sets;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -24,8 +24,8 @@ public class ItemModels extends ItemModelProvider
 	public static final String HANDHELD = "item/handheld";
 	public static final ResourceLocation MUG = new ResourceLocation(FarmersDelight.MODID, "item/mug");
 
-	public ItemModels(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-		super(generator, FarmersDelight.MODID, existingFileHelper);
+	public ItemModels(PackOutput output, ExistingFileHelper existingFileHelper) {
+		super(output, FarmersDelight.MODID, existingFileHelper);
 	}
 
 	@Override
@@ -64,22 +64,39 @@ public class ItemModels extends ItemModelProvider
 				ModItems.HALF_TATAMI_MAT.get(),
 				ModItems.ROPE.get(),
 				ModItems.CANVAS_SIGN.get(),
+				ModItems.HANGING_CANVAS_SIGN.get(),
 				ModItems.WHITE_CANVAS_SIGN.get(),
+				ModItems.WHITE_HANGING_CANVAS_SIGN.get(),
 				ModItems.ORANGE_CANVAS_SIGN.get(),
+				ModItems.ORANGE_HANGING_CANVAS_SIGN.get(),
 				ModItems.MAGENTA_CANVAS_SIGN.get(),
+				ModItems.MAGENTA_HANGING_CANVAS_SIGN.get(),
 				ModItems.LIGHT_BLUE_CANVAS_SIGN.get(),
+				ModItems.LIGHT_BLUE_HANGING_CANVAS_SIGN.get(),
 				ModItems.YELLOW_CANVAS_SIGN.get(),
+				ModItems.YELLOW_HANGING_CANVAS_SIGN.get(),
 				ModItems.LIME_CANVAS_SIGN.get(),
+				ModItems.LIME_HANGING_CANVAS_SIGN.get(),
 				ModItems.PINK_CANVAS_SIGN.get(),
+				ModItems.PINK_HANGING_CANVAS_SIGN.get(),
 				ModItems.GRAY_CANVAS_SIGN.get(),
+				ModItems.GRAY_HANGING_CANVAS_SIGN.get(),
 				ModItems.LIGHT_GRAY_CANVAS_SIGN.get(),
+				ModItems.LIGHT_GRAY_HANGING_CANVAS_SIGN.get(),
 				ModItems.CYAN_CANVAS_SIGN.get(),
+				ModItems.CYAN_HANGING_CANVAS_SIGN.get(),
 				ModItems.PURPLE_CANVAS_SIGN.get(),
+				ModItems.PURPLE_HANGING_CANVAS_SIGN.get(),
 				ModItems.BLUE_CANVAS_SIGN.get(),
+				ModItems.BLUE_HANGING_CANVAS_SIGN.get(),
 				ModItems.BROWN_CANVAS_SIGN.get(),
+				ModItems.BROWN_HANGING_CANVAS_SIGN.get(),
 				ModItems.GREEN_CANVAS_SIGN.get(),
+				ModItems.GREEN_HANGING_CANVAS_SIGN.get(),
 				ModItems.RED_CANVAS_SIGN.get(),
+				ModItems.RED_HANGING_CANVAS_SIGN.get(),
 				ModItems.BLACK_CANVAS_SIGN.get(),
+				ModItems.BLACK_HANGING_CANVAS_SIGN.get(),
 				ModItems.APPLE_PIE.get(),
 				ModItems.SWEET_BERRY_CHEESECAKE.get(),
 				ModItems.CHOCOLATE_PIE.get(),

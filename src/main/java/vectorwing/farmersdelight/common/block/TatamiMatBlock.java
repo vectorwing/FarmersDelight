@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BedPart;
@@ -31,8 +32,8 @@ public class TatamiMatBlock extends HorizontalDirectionalBlock
 	public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
 	protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
 
-	public TatamiMatBlock() {
-		super(Block.Properties.copy(Blocks.WHITE_WOOL).strength(0.3F));
+	public TatamiMatBlock(BlockBehaviour.Properties properties) {
+		super(properties);
 		this.registerDefaultState(this.getStateDefinition().any().setValue(PART, BedPart.FOOT));
 	}
 
@@ -84,11 +85,6 @@ public class TatamiMatBlock extends HorizontalDirectionalBlock
 		}
 
 		super.playerWillDestroy(level, pos, state, player);
-	}
-
-	@Override
-	public PushReaction getPistonPushReaction(BlockState state) {
-		return PushReaction.DESTROY;
 	}
 
 	@Override

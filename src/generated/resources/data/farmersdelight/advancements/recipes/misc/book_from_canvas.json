@@ -30,5 +30,6 @@
     "recipes": [
       "farmersdelight:book_from_canvas"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

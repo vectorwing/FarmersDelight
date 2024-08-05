@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "fd_cabinet",
   "key": {
     "D": {
       "item": "minecraft:birch_trapdoor"
@@ -15,5 +17,6 @@
   ],
   "result": {
     "item": "farmersdelight:birch_cabinet"
-  }
+  },
+  "show_notification": true
 }

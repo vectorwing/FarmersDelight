@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "fd_canvas",
   "key": {
     "#": {
       "item": "farmersdelight:straw"
@@ -11,5 +13,6 @@
   ],
   "result": {
     "item": "farmersdelight:canvas"
-  }
+  },
+  "show_notification": true
 }

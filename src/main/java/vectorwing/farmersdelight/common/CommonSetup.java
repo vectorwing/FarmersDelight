@@ -1,31 +1,35 @@
 package vectorwing.farmersdelight.common;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
 import net.minecraft.core.Position;
 import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.animal.Pig;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.BowlFoodItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctions;
 import net.minecraftforge.common.crafting.CompoundIngredient;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.common.crafting.condition.VanillaCrateEnabledCondition;
 import vectorwing.farmersdelight.common.entity.RottenTomatoEntity;
-import vectorwing.farmersdelight.common.loot.function.CopyMealFunction;
-import vectorwing.farmersdelight.common.loot.function.CopySkilletFunction;
-import vectorwing.farmersdelight.common.loot.function.SmokerCookFunction;
 import vectorwing.farmersdelight.common.registry.ModAdvancements;
 import vectorwing.farmersdelight.common.registry.ModItems;
-import vectorwing.farmersdelight.common.world.WildCropGeneration;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Set;
 
 public class CommonSetup
 {
@@ -33,13 +37,23 @@ public class CommonSetup
 		event.enqueueWork(() -> {
 			registerCompostables();
 			registerDispenserBehaviors();
-			registerAnimalFeeds();
-			registerLootItemFunctions();
-			WildCropGeneration.registerWildCropGeneration();
+			registerItemSetAdditions();
+			registerStackSizeOverrides();
 		});
 
 		ModAdvancements.register();
 		CraftingHelper.register(new VanillaCrateEnabledCondition.Serializer());
+	}
+
+	public static void registerStackSizeOverrides() {
+		if (!Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) return;
+
+		Configuration.SOUP_ITEM_LIST.get().forEach((key) -> {
+			Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(key));
+			if (item instanceof BowlFoodItem) {
+				ObfuscationReflectionHelper.setPrivateValue(Item.class, item, 16, "f_41370_");
+			}
+		});
 	}
 
 	public static void registerDispenserBehaviors() {
@@ -102,7 +116,7 @@ public class CommonSetup
 		ComposterBlock.COMPOSTABLES.put(ModItems.RED_MUSHROOM_COLONY.get(), 1.0F);
 	}
 
-	public static void registerAnimalFeeds() {
+	public static void registerItemSetAdditions() {
 		Ingredient newChickenFood = Ingredient.of(ModItems.CABBAGE_SEEDS.get(), ModItems.TOMATO_SEEDS.get(), ModItems.RICE.get());
 		Chicken.FOOD_ITEMS = new CompoundIngredient(Arrays.asList(Chicken.FOOD_ITEMS, newChickenFood))
 		{
@@ -114,11 +128,16 @@ public class CommonSetup
 		};
 
 		Collections.addAll(Parrot.TAME_FOOD, ModItems.CABBAGE_SEEDS.get(), ModItems.TOMATO_SEEDS.get(), ModItems.RICE.get());
-	}
 
-	public static void registerLootItemFunctions() {
-		LootItemFunctions.register(CopyMealFunction.ID.toString(), new CopyMealFunction.Serializer());
-		LootItemFunctions.register(CopySkilletFunction.ID.toString(), new CopySkilletFunction.Serializer());
-		LootItemFunctions.register(SmokerCookFunction.ID.toString(), new SmokerCookFunction.Serializer());
+		Set<Item> newWantedItems = Sets.newHashSet(
+				ModItems.CABBAGE.get(),
+				ModItems.TOMATO.get(),
+				ModItems.ONION.get(),
+				ModItems.RICE.get(),
+				ModItems.CABBAGE_SEEDS.get(),
+				ModItems.TOMATO_SEEDS.get(),
+				ModItems.RICE_PANICLE.get());
+		newWantedItems.addAll(Villager.WANTED_ITEMS);
+		Villager.WANTED_ITEMS = ImmutableSet.copyOf(newWantedItems);
 	}
 }

@@ -54,7 +54,7 @@ public class CuttingBoardRecipeHandler implements IRecipeHandler<CuttingBoardRec
                 .with(BuiltinRecipeComponents.Input.INGREDIENTS, recipe.getIngredients().stream().map(IIngredient::fromIngredient).toList())
                 .with(RecipeHandlerUtils.TOOL_COMPONENT, IIngredient.fromIngredient(recipe.getTool()))
                 .with(BuiltinRecipeComponents.Metadata.GROUP, recipe.getGroup())
-                .with(BuiltinRecipeComponents.Output.CHANCED_ITEMS_SINGLE,
+                .with(BuiltinRecipeComponents.Output.CHANCED_ITEMS,
                         recipe.getRollableResults().stream()
                         .map(chanceResult -> new MCItemStack(chanceResult.getStack()).percent(
                          chanceResult.getChance())).toList())
@@ -71,7 +71,7 @@ public class CuttingBoardRecipeHandler implements IRecipeHandler<CuttingBoardRec
         final List<IIngredient> ingredients = recipe.getOrThrow(BuiltinRecipeComponents.Input.INGREDIENTS);
         final IIngredient tool = recipe.getOrThrowSingle(RecipeHandlerUtils.TOOL_COMPONENT);
         final IIngredient[] ingredientArray = ingredients.toArray(IIngredient[]::new);
-        final List<Percentaged<IItemStack>> results = recipe.getOrThrow(BuiltinRecipeComponents.Output.CHANCED_ITEMS_SINGLE);
+        final List<Percentaged<IItemStack>> results = recipe.getOrThrow(BuiltinRecipeComponents.Output.CHANCED_ITEMS);
         final NonNullList<ChanceResult> stackedResults = NonNullList.create();
         stackedResults.addAll(results.stream().map(iItemStackPercentaged -> new ChanceResult(iItemStackPercentaged.getData().getInternal(), (float) iItemStackPercentaged.getPercentage())).toList());
         final List<String> soundList = recipe.get(RecipeHandlerUtils.SOUND_COMPONENT);

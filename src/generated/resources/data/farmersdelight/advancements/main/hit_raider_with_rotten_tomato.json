@@ -8,7 +8,12 @@
             "direct_entity": {
               "type": "farmersdelight:rotten_tomato"
             },
-            "is_projectile": true
+            "tags": [
+              {
+                "expected": true,
+                "id": "minecraft:is_projectile"
+              }
+            ]
           }
         },
         "entity": [
@@ -43,5 +48,6 @@
     [
       "hit_raider_with_rotten_tomato"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

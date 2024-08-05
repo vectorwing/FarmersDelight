@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "#": {
       "item": "farmersdelight:canvas"
@@ -15,5 +16,6 @@
   ],
   "result": {
     "item": "farmersdelight:basket"
-  }
+  },
+  "show_notification": true
 }

@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "cake",
   "key": {
     "e": {
       "tag": "forge:eggs"
@@ -21,5 +23,6 @@
   ],
   "result": {
     "item": "minecraft:cake"
-  }
+  },
+  "show_notification": true
 }

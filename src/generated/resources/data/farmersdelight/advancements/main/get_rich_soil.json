@@ -33,5 +33,6 @@
     [
       "get_rich_soil"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }
