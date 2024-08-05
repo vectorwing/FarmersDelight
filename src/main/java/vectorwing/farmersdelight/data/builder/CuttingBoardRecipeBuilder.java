@@ -3,8 +3,11 @@ package vectorwing.farmersdelight.data.builder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -22,8 +25,8 @@ import java.util.function.Consumer;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class CuttingBoardRecipeBuilder
-{
+public class CuttingBoardRecipeBuilder implements RecipeBuilder {
+
 	private final List<ChanceResult> results = new ArrayList<>(4);
 	private final Ingredient ingredient;
 	private final Ingredient tool;
@@ -78,22 +81,40 @@ public class CuttingBoardRecipeBuilder
 		this.soundEventID = soundEventID;
 		return this;
 	}
-
-	public void build(Consumer<FinishedRecipe> consumerIn) {
-		ResourceLocation location = ForgeRegistries.ITEMS.getKey(this.ingredient.getItems()[0].getItem());
-		this.build(consumerIn, FarmersDelight.MODID + ":cutting/" + location.getPath());
+	
+	//Unused but required
+	@Override
+	public CuttingBoardRecipeBuilder unlockedBy(String p_176496_, CriterionTriggerInstance p_176497_) {
+		return this;
 	}
 
-	public void build(Consumer<FinishedRecipe> consumerIn, String save) {
+	//Unused but required
+	@Override
+	public CuttingBoardRecipeBuilder group(String p_176495_) {
+		return this;
+	}
+
+	//Unused but required
+	@Override
+	public Item getResult() {
+		return this.results.get(0).getStack().getItem();
+	}
+
+	public void save(Consumer<FinishedRecipe> consumerIn) {
+		ResourceLocation location = ForgeRegistries.ITEMS.getKey(this.ingredient.getItems()[0].getItem());
+		this.save(consumerIn, FarmersDelight.MODID + ":cutting/" + location.getPath());
+	}
+
+	public void save(Consumer<FinishedRecipe> consumerIn, String save) {
 		ResourceLocation resourcelocation = ForgeRegistries.ITEMS.getKey(this.ingredient.getItems()[0].getItem());
 		if ((new ResourceLocation(save)).equals(resourcelocation)) {
 			throw new IllegalStateException("Cutting Recipe " + save + " should remove its 'save' argument");
 		} else {
-			this.build(consumerIn, new ResourceLocation(save));
+			this.save(consumerIn, new ResourceLocation(save));
 		}
 	}
 
-	public void build(Consumer<FinishedRecipe> consumerIn, ResourceLocation id) {
+	public void save(Consumer<FinishedRecipe> consumerIn, ResourceLocation id) {
 		consumerIn.accept(new CuttingBoardRecipeBuilder.Result(id, this.ingredient, this.tool, this.results, this.soundEventID == null ? "" : this.soundEventID));
 	}
 
@@ -161,4 +182,6 @@ public class CuttingBoardRecipeBuilder
 			return null;
 		}
 	}
+
+	
 }
