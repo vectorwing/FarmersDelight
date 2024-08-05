@@ -15,6 +15,10 @@
 - Some crafting recipes are now properly grouped in the Crafting Table's recipe book;
 - Skillets are now waterloggable, but are unable to cook underwater, either handheld or as a block. Hard to fry when the skillet is flooded!
 
+## Technical
+- FD's recipe builders now implement `RecipeBuilder`, which should allow a few extra features for add-on developers (thanks, Lance5057!);
+- FD's recipes now call for `assemble()` in most places, allowing extenders of most workstations to use the inventory when creating their result (thanks, ColonelPanic!).
+
 ## 1.2.4
 
 ### Updates

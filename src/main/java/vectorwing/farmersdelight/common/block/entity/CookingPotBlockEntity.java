@@ -310,8 +310,10 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	}
 
 	protected boolean canCook(CookingPotRecipe recipe) {
+		if (level == null) return false;
+
 		if (hasInput()) {
-			ItemStack resultStack = recipe.assemble(new RecipeWrapper(inventory));
+			ItemStack resultStack = recipe.assemble(new RecipeWrapper(inventory), this.level.registryAccess());
 			if (resultStack.isEmpty()) {
 				return false;
 			} else {
