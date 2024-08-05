@@ -11,8 +11,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
 public class OnionBlock extends CropBlock
 {
 	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{

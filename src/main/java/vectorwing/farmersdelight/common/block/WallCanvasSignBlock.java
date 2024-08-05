@@ -16,8 +16,6 @@ import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
 public class WallCanvasSignBlock extends WallSignBlock implements CanvasSign
 {
 	private final DyeColor backgroundColor;

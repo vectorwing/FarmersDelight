@@ -10,8 +10,6 @@ import net.minecraft.world.level.Level;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import net.minecraft.world.item.Item.Properties;
-
 public class MilkBottleItem extends DrinkableItem
 {
 	public MilkBottleItem(Properties properties) {

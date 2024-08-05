@@ -11,8 +11,6 @@ import net.minecraft.world.level.material.FluidState;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.world.item.Item.Properties;
-
 public class RopeItem extends FuelBlockItem
 {
 	public RopeItem(Block block, Properties properties) {

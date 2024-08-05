@@ -16,8 +16,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
 public class RicePaniclesBlock extends CropBlock
 {
 	public static final IntegerProperty RICE_AGE = BlockStateProperties.AGE_3;
