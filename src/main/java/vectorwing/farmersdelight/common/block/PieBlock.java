@@ -29,6 +29,7 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.event.ForgeEventFactory;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 
@@ -101,9 +102,12 @@ public class PieBlock extends Block
 			return InteractionResult.PASS;
 		} else {
 			ItemStack sliceStack = this.getPieSliceItem();
+			ItemStack sliceCopy = sliceStack.copy();
 			FoodProperties sliceFood = sliceStack.getItem().getFoodProperties();
 
 			playerIn.getFoodData().eat(sliceStack.getItem(), sliceStack);
+			// Fire an event for food-tracking mods like Spice of Life, but ignore the result.
+			ForgeEventFactory.onItemUseFinish(playerIn, sliceCopy, 0, ItemStack.EMPTY);
 			if (this.getPieSliceItem().getItem().isEdible() && sliceFood != null) {
 				for (Pair<MobEffectInstance, Float> pair : sliceFood.getEffects()) {
 					if (!level.isClientSide && pair.getFirst() != null && level.random.nextFloat() < pair.getSecond()) {
