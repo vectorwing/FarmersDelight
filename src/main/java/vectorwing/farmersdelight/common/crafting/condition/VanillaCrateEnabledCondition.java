@@ -7,17 +7,16 @@ import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
 
-public class VanillaCrateEnabledCondition implements ICondition
-{
-	private final ResourceLocation location;
+public class VanillaCrateEnabledCondition implements ICondition {
+	private static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "vanilla_crates_enabled");
+	public static final VanillaCrateEnabledCondition INSTANCE = new VanillaCrateEnabledCondition();
 
-	public VanillaCrateEnabledCondition(ResourceLocation location) {
-		this.location = location;
+	private VanillaCrateEnabledCondition() {
 	}
 
 	@Override
 	public ResourceLocation getID() {
-		return this.location;
+		return ID;
 	}
 
 	@Override
@@ -25,22 +24,17 @@ public class VanillaCrateEnabledCondition implements ICondition
 		return Configuration.ENABLE_VANILLA_CROP_CRATES.get();
 	}
 
-	public static class Serializer implements IConditionSerializer<VanillaCrateEnabledCondition>
-	{
-		private final ResourceLocation location;
-
-		public Serializer() {
-			this.location = new ResourceLocation(FarmersDelight.MODID, "vanilla_crates_enabled");
-		}
+	public static class Serializer implements IConditionSerializer<VanillaCrateEnabledCondition> {
+		public static final Serializer INSTANCE = new Serializer();
 
 		@Override
 		public ResourceLocation getID() {
-			return this.location;
+			return ID;
 		}
 
 		@Override
 		public VanillaCrateEnabledCondition read(JsonObject json) {
-			return new VanillaCrateEnabledCondition(this.location);
+			return new VanillaCrateEnabledCondition();
 		}
 
 		@Override

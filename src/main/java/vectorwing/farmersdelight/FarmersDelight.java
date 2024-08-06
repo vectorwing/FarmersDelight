@@ -57,7 +57,6 @@ public class FarmersDelight
 		ModLootFunctions.LOOT_FUNCTIONS.register(modEventBus);
 		ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
 
-		WildCropGeneration.load();
 		MinecraftForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
 
 		MinecraftForge.EVENT_BUS.register(this);

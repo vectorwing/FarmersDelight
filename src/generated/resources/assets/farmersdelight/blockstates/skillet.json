@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=east,support=false,waterlogged=false": {
+      "model": "farmersdelight:block/skillet",
+      "y": 270
+    },
+    "facing=east,support=false,waterlogged=true": {
+      "model": "farmersdelight:block/skillet",
+      "y": 270
+    },
+    "facing=east,support=true,waterlogged=false": {
+      "model": "farmersdelight:block/skillet_tray",
+      "y": 270
+    },
+    "facing=east,support=true,waterlogged=true": {
+      "model": "farmersdelight:block/skillet_tray",
+      "y": 270
+    },
+    "facing=north,support=false,waterlogged=false": {
+      "model": "farmersdelight:block/skillet",
+      "y": 180
+    },
+    "facing=north,support=false,waterlogged=true": {
+      "model": "farmersdelight:block/skillet",
+      "y": 180
+    },
+    "facing=north,support=true,waterlogged=false": {
+      "model": "farmersdelight:block/skillet_tray",
+      "y": 180
+    },
+    "facing=north,support=true,waterlogged=true": {
+      "model": "farmersdelight:block/skillet_tray",
+      "y": 180
+    },
+    "facing=south,support=false,waterlogged=false": {
+      "model": "farmersdelight:block/skillet"
+    },
+    "facing=south,support=false,waterlogged=true": {
+      "model": "farmersdelight:block/skillet"
+    },
+    "facing=south,support=true,waterlogged=false": {
+      "model": "farmersdelight:block/skillet_tray"
+    },
+    "facing=south,support=true,waterlogged=true": {
+      "model": "farmersdelight:block/skillet_tray"
+    },
+    "facing=west,support=false,waterlogged=false": {
+      "model": "farmersdelight:block/skillet",
+      "y": 90
+    },
+    "facing=west,support=false,waterlogged=true": {
+      "model": "farmersdelight:block/skillet",
+      "y": 90
+    },
+    "facing=west,support=true,waterlogged=false": {
+      "model": "farmersdelight:block/skillet_tray",
+      "y": 90
+    },
+    "facing=west,support=true,waterlogged=true": {
+      "model": "farmersdelight:block/skillet_tray",
+      "y": 90
+    }
+  }
+}

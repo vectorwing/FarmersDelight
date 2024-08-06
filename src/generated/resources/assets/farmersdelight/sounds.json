@@ -1,0 +1,103 @@
+{
+  "block.cabinet.close": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.barrel.close"
+      }
+    ],
+    "subtitle": "farmersdelight.subtitles.cabinet.close"
+  },
+  "block.cabinet.open": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.barrel.open"
+      }
+    ],
+    "subtitle": "farmersdelight.subtitles.cabinet.open"
+  },
+  "block.cooking_pot.boil": {
+    "sounds": [
+      "farmersdelight:block/cooking_pot/boil_water1",
+      "farmersdelight:block/cooking_pot/boil_water2"
+    ],
+    "subtitle": "farmersdelight.subtitles.cooking_pot.boil"
+  },
+  "block.cooking_pot.boil_soup": {
+    "sounds": [
+      "farmersdelight:block/cooking_pot/boil_soup1",
+      "farmersdelight:block/cooking_pot/boil_soup2",
+      "farmersdelight:block/cooking_pot/boil_soup3"
+    ],
+    "subtitle": "farmersdelight.subtitles.cooking_pot.boil"
+  },
+  "block.cutting_board.knife": {
+    "sounds": [
+      "farmersdelight:block/cutting_board/knife1",
+      "farmersdelight:block/cutting_board/knife2"
+    ],
+    "subtitle": "farmersdelight.subtitles.cutting_board.knife"
+  },
+  "block.skillet.add_food": {
+    "sounds": [
+      "farmersdelight:block/skillet/add_food1",
+      "farmersdelight:block/skillet/add_food2"
+    ],
+    "subtitle": "farmersdelight.subtitles.skillet.add_food"
+  },
+  "block.skillet.sizzle": {
+    "sounds": [
+      "farmersdelight:block/skillet/sizzle1",
+      "farmersdelight:block/skillet/sizzle2",
+      "farmersdelight:block/skillet/sizzle3"
+    ],
+    "subtitle": "farmersdelight.subtitles.skillet.sizzle"
+  },
+  "block.stove.crackle": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.campfire.crackle"
+      }
+    ],
+    "subtitle": "farmersdelight.subtitles.stove.crackle"
+  },
+  "block.tomato_bush.pick_tomatoes": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.sweet_berry_bush.pick_berries"
+      }
+    ],
+    "subtitle": "farmersdelight.subtitles.tomato_bush.pick_tomatoes"
+  },
+  "entity.rotten_tomato.hit": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.slime.attack"
+      }
+    ],
+    "subtitle": "farmersdelight.subtitles.rotten_tomato.hit"
+  },
+  "entity.rotten_tomato.throw": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.snowball.throw"
+      }
+    ],
+    "subtitle": "farmersdelight.subtitles.rotten_tomato.throw"
+  },
+  "item.skillet.attack.strong": {
+    "sounds": [
+      "farmersdelight:block/skillet/attack_strong"
+    ]
+  },
+  "item.skillet.attack.weak": {
+    "sounds": [
+      "farmersdelight:block/skillet/attack_weak"
+    ]
+  }
+}
