@@ -79,7 +79,7 @@ public class TomatoVineBlock extends CropBlock
 		if (level.getRawBrightness(pos, 0) >= 9) {
 			int age = this.getAge(state);
 			if (age < this.getMaxAge()) {
-				float speed = getGrowthSpeed(this, level, pos);
+				float speed = 5;
 				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt((int) (25.0F / speed) + 1) == 0)) {
 					level.setBlock(pos, state.setValue(getAgeProperty(), age + 1), 2);
 					net.minecraftforge.common.ForgeHooks.onCropsGrowPost(level, pos, state);
