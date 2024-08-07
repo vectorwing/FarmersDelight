@@ -53,7 +53,7 @@ public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterlogged
 
 	@Override
 	protected boolean mayPlaceOn(BlockState state, BlockGetter getter, BlockPos pos) {
-		return state.is(BlockTags.DIRT) || state.is(Blocks.SAND);
+		return state.is(BlockTags.DIRT) || state.is(BlockTags.SAND);
 	}
 
 	@Override
