@@ -16,6 +16,7 @@
 - Skillets are now waterloggable, but are unable to cook underwater, either handheld or as a block. Hard to fry when the skillet is flooded!
 - Tomato crops have been updated:
   - The crop no longer uses the standard growth speed checks of `CropBlock`, which was slowing down hanging vines. They grow at a fixed rate now, regardless of height;
+  - Applying bone meal to a mature tomato vine (sneaking, rich soil etc) will pass the boost to the vine above it, if possible;
   - Tomato seeds can now be planted on any farmland block;
 
 ## Technical
