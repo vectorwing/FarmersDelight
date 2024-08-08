@@ -95,10 +95,9 @@ public class FDAdvancementGenerator implements ForgeAdvancementProvider.Advancem
 
 		Advancement tallmato = getAdvancement(cropsOfTheWild, ModItems.TOMATO.get(), "harvest_ropelogged_tomato", FrameType.TASK, true, false, false)
 				.addCriterion("harvest_ropelogged_tomato", ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(
-						LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(ModBlocks.TOMATO_CROP.get()).setProperties(
+						LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(ModBlocks.HANGING_TOMATO_CROP.get()).setProperties(
 								StatePropertiesPredicate.Builder.properties()
 										.hasProperty(TomatoVineBlock.VINE_AGE, 0)
-										.hasProperty(TomatoVineBlock.ROPELOGGED, true)
 										.build()
 						).build()),
 						ItemPredicate.Builder.item())

@@ -9,11 +9,10 @@
             "predicate": {
               "block": {
                 "blocks": [
-                  "farmersdelight:tomatoes"
+                  "farmersdelight:hanging_tomatoes"
                 ],
                 "state": {
-                  "age": "0",
-                  "ropelogged": "true"
+                  "age": "0"
                 }
               }
             }
