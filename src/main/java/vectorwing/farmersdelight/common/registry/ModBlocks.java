@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -282,9 +281,10 @@ public class ModBlocks
 			() -> new OnionBlock(Block.Properties.copy(Blocks.WHEAT)));
 	public static final RegistryObject<Block> BUDDING_TOMATO_CROP = BLOCKS.register("budding_tomatoes",
 			() -> new BuddingTomatoBlock(Block.Properties.copy(Blocks.WHEAT)));
-	// TODO: Figure out how to make Tomato Crop waterproof again.
 	public static final RegistryObject<Block> TOMATO_CROP = BLOCKS.register("tomatoes",
-			() -> new TomatoVineBlock(Block.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)));
+			() -> new TomatoVineBlock(Block.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.CROP)));
+	public static final RegistryObject<Block> HANGING_TOMATO_CROP = BLOCKS.register("hanging_tomatoes",
+			() -> new HangingTomatoVineBlock(Block.Properties.copy(ModBlocks.TOMATO_CROP.get())));
 	public static final RegistryObject<Block> RICE_CROP = BLOCKS.register("rice",
 			() -> new RiceBlock(Block.Properties.copy(Blocks.WHEAT).strength(0.2F)));
 	public static final RegistryObject<Block> RICE_CROP_PANICLES = BLOCKS.register("rice_panicles",

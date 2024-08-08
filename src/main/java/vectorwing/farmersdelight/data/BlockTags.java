@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.data;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
@@ -92,7 +91,7 @@ public class BlockTags extends BlockTagsProvider
 	protected void registerMinecraftTags() {
 		tag(net.minecraft.tags.BlockTags.CLIMBABLE).add(
 				ModBlocks.ROPE.get(),
-				ModBlocks.TOMATO_CROP.get());
+				ModBlocks.HANGING_TOMATO_CROP.get());
 		tag(net.minecraft.tags.BlockTags.REPLACEABLE).add(
 				ModBlocks.SANDY_SHRUB.get());
 		tag(net.minecraft.tags.BlockTags.REPLACEABLE_BY_TREES).add(
@@ -107,7 +106,8 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.ONION_CROP.get(),
 				ModBlocks.RICE_CROP_PANICLES.get(),
 				ModBlocks.BUDDING_TOMATO_CROP.get(),
-				ModBlocks.TOMATO_CROP.get());
+				ModBlocks.TOMATO_CROP.get(),
+				ModBlocks.HANGING_TOMATO_CROP.get());
 		tag(net.minecraft.tags.BlockTags.STANDING_SIGNS).add(
 				ModBlocks.CANVAS_SIGN.get(),
 				ModBlocks.WHITE_CANVAS_SIGN.get(),

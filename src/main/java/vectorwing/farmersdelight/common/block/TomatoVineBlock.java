@@ -5,18 +5,15 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -32,8 +29,6 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
-import javax.annotation.Nullable;
-
 @SuppressWarnings("deprecation")
 public class TomatoVineBlock extends CropBlock
 {
@@ -44,6 +39,10 @@ public class TomatoVineBlock extends CropBlock
 	public TomatoVineBlock(Properties properties) {
 		super(properties);
 		registerDefaultState(stateDefinition.any().setValue(getAgeProperty(), 0).setValue(ROPELOGGED, false));
+	}
+
+	protected TomatoVineBlock(Properties properties, boolean dummy) {
+		super(properties);
 	}
 
 	@Override
@@ -131,7 +130,7 @@ public class TomatoVineBlock extends CropBlock
 			for (vineHeight = 1; level.getBlockState(pos.below(vineHeight)).is(this); ++vineHeight) {
 			}
 			if (vineHeight < 3) {
-				level.setBlockAndUpdate(posAbove, defaultBlockState().setValue(ROPELOGGED, true));
+				level.setBlockAndUpdate(posAbove, ModBlocks.HANGING_TOMATO_CROP.get().defaultBlockState());
 			}
 		}
 	}
@@ -154,7 +153,7 @@ public class TomatoVineBlock extends CropBlock
 			if (canClimbBlock(nextState)) {
 				return true;
 			}
-			if (nextState.is(ModBlocks.TOMATO_CROP.get())) {
+			if (nextState.is(ModBlocks.HANGING_TOMATO_CROP.get())) {
 				if (!isMaxAge(nextState)) {
 					return true;
 				}
@@ -177,15 +176,10 @@ public class TomatoVineBlock extends CropBlock
 			BlockState aboveState = level.getBlockState(pos.above());
 			if (canClimbBlock(level.getBlockState(pos.above()))) {
 				climbRopeAbove(level, pos, random);
-			} else if (aboveState.is(ModBlocks.TOMATO_CROP.get()) && isValidBonemealTarget(level, pos, aboveState, false)) {
+			} else if (aboveState.is(ModBlocks.HANGING_TOMATO_CROP.get()) && isValidBonemealTarget(level, pos, aboveState, false)) {
 				performBonemeal(level, random, pos.above(), aboveState);
 			}
 		}
-	}
-
-	@Override
-	public boolean isLadder(BlockState state, LevelReader level, BlockPos pos, LivingEntity entity) {
-		return state.getValue(ROPELOGGED) && state.is(BlockTags.CLIMBABLE);
 	}
 
 	@Override
@@ -193,25 +187,11 @@ public class TomatoVineBlock extends CropBlock
 		BlockPos belowPos = pos.below();
 		BlockState belowState = level.getBlockState(belowPos);
 
-		if (state.getValue(TomatoVineBlock.ROPELOGGED)) {
-			return belowState.is(ModBlocks.TOMATO_CROP.get()) && hasGoodCropConditions(level, pos);
-		}
-
-		return super.canSurvive(state, level, pos);
+		return (belowState.is(ModBlocks.TOMATO_CROP.get()) && hasGoodCropConditions(level, pos)) || super.canSurvive(state, level, pos);
 	}
 
 	public boolean hasGoodCropConditions(LevelReader level, BlockPos pos) {
 		return level.getRawBrightness(pos, 0) >= 8 || level.canSeeSky(pos);
-	}
-
-	@Override
-	public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
-		boolean isRopelogged = state.getValue(TomatoVineBlock.ROPELOGGED);
-		super.playerDestroy(level, player, pos, state, blockEntity, stack);
-
-		if (isRopelogged) {
-			destroyAndPlaceRope(level, pos);
-		}
 	}
 
 	@Override
