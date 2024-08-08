@@ -273,6 +273,14 @@ public class BlockTags extends BlockTagsProvider
 				Blocks.RED_CANDLE_CAKE,
 				Blocks.BLACK_CANDLE_CAKE);
 		tag(ModTags.CAMPFIRE_SIGNAL_SMOKE).add(ModBlocks.STRAW_BALE.get()).add(ModBlocks.RICE_BALE.get());
+
+		tag(ModTags.WILD_TOMATO_GROWS_ON).add(
+				Blocks.DIRT,
+				Blocks.COARSE_DIRT,
+				Blocks.GRASS_BLOCK,
+				Blocks.SAND,
+				Blocks.RED_SAND
+		);
 	}
 
 	private void registerCompatibilityTags() {

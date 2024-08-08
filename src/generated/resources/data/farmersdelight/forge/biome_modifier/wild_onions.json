@@ -1,0 +1,9 @@
+{
+  "type": "farmersdelight:add_features_by_filter",
+  "allowed_biomes": "#minecraft:is_overworld",
+  "denied_biomes": "#forge:is_underground",
+  "features": "farmersdelight:patch_wild_onions",
+  "max_temperature": 0.3,
+  "min_temperature": 0.1,
+  "step": "vegetal_decoration"
+}

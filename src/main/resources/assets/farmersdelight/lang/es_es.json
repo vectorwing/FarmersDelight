@@ -256,7 +256,7 @@
   "farmersdelight.subtitles.stove.crackle": "Crujidos de la parrilla",
   "farmersdelight.subtitles.skillet.sizzle": "Chisporroteos de sartén",
   "farmersdelight.subtitles.skillet.add_food": "Silbidos de sartén",
-  "farmersdelight.subtitles.tomato.pick": "Tomate estallando",
+  "farmersdelight.subtitles.tomato_bush.pick_tomatoes": "Tomate estallando",
 
   "farmersdelight.block.feast.use_container": "Necesitas un %s para comer esto.",
   "farmersdelight.block.rice.invalid_placement": "Este cultivo no sobrevivirá bien fuera de aguas poco profundas.",

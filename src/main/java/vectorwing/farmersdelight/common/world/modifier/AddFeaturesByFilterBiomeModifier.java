@@ -23,6 +23,14 @@ public record AddFeaturesByFilterBiomeModifier(
 ) implements BiomeModifier
 {
 
+	public AddFeaturesByFilterBiomeModifier(HolderSet<Biome> allowedBiomes, HolderSet<Biome> deniedBiomes, float minTemp, float maxTemp, HolderSet<PlacedFeature> features, GenerationStep.Decoration step) {
+		this(allowedBiomes, Optional.of(deniedBiomes), Optional.of(minTemp), Optional.of(maxTemp), features, step);
+	}
+
+	public AddFeaturesByFilterBiomeModifier(HolderSet<Biome> allowedBiomes, HolderSet<PlacedFeature> features, GenerationStep.Decoration step) {
+		this(allowedBiomes, Optional.empty(), Optional.empty(), Optional.empty(), features, step);
+	}
+
 	@Override
 	public void modify(Holder<Biome> biome, Phase phase, ModifiableBiomeInfo.BiomeInfo.Builder builder) {
 		if (phase == Phase.ADD && this.allowedBiomes.contains(biome)) {
