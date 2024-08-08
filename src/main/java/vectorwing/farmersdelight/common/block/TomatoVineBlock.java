@@ -74,6 +74,15 @@ public class TomatoVineBlock extends CropBlock
 	@Override
 	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		if (!level.isAreaLoaded(pos, 1)) return;
+
+		// TODO: Remove this conversion, as well as the ropelogged state, in future versions.
+		if (state.is(ModBlocks.TOMATO_CROP.get())) {
+			if (state.getValue(ROPELOGGED)) {
+				level.setBlockAndUpdate(pos, ModBlocks.HANGING_TOMATO_CROP.get().defaultBlockState().setValue(VINE_AGE, this.getAge(state)));
+				return;
+			}
+		}
+
 		if (level.getRawBrightness(pos, 0) >= 9) {
 			int age = this.getAge(state);
 			if (age < this.getMaxAge()) {
