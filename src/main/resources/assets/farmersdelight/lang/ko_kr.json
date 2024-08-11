@@ -228,7 +228,7 @@
   "farmersdelight.tooltip.horse_feed.when_feeding": "말에게 먹였을 때:",
   "farmersdelight.tooltip.milk_bottle": "효과를 1개 제거합니다",
   "farmersdelight.tooltip.hot_cocoa": "해로운 효과를 1개 제거합니다",
-  "farmersdelight.tooltip.melon_juice": "소량의 즉시 회복",
+  "farmersdelight.tooltip.melon_juice": "소량의 생명력을 즉시 회복합니다",
 
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "맛의 세계가 당신을 기다립니다!",
@@ -294,7 +294,9 @@
   "farmersdelight.block.cutting_board.invalid_item": "이건 자르지 못할 것 같습니다...",
   "farmersdelight.block.cutting_board.invalid_tool": "아마도 다른 도구가 필요할 것 같습니다...",
   "farmersdelight.block.skillet.invalid_item": "이건 조리할 수 없을 것 같습니다...",
+  "farmersdelight.block.skillet.underwater": "침수된 상태에서 요리를 할 수 없습니다...",
   "farmersdelight.item.skillet.how_to_cook": "다른 손에 재료를 들고 사용하세요!",
+  "farmersdelight.item.skillet.underwater": "수중에서 요리할 수 없습니다...",
 
   "death.attack.farmersdelight.stove": "%1$s이(가) 완벽하게 구워졌습니다",
   "death.attack.farmersdelight.stove.player": "%1$s이(가) 요리사 %2$s에게 조리되었습니다",
