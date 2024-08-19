@@ -26,7 +26,7 @@ body:
     id: forge_version
     attributes:
       label: Forge version
-      description: "For issues regarding the Fabric port, go to: https://github.com/newhoryzon/farmers-delight-fabric/issues"
+      description: "For issues regarding the Fabric port, go to: https://github.com/MehVahdJukaar/FarmersDelightRefabricated/issues"
       placeholder: | 
         Example: 47.0.1
     validations:
