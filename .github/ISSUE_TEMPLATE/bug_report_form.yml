@@ -26,7 +26,7 @@ body:
     id: forge_version
     attributes:
       label: NeoForge version
-      description: "For issues regarding the Fabric port, go to: https://github.com/newhoryzon/farmers-delight-fabric/issues"
+      description: "For issues regarding the Fabric port, go to: https://github.com/MehVahdJukaar/FarmersDelightRefabricated/issues"
       placeholder: | 
         Example: 21.0.160
     validations:
