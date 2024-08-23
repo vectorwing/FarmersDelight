@@ -25,6 +25,10 @@ repositories {
         url = "https://maven.blamejared.com"
     }
     maven { url "https://maven.ryanliptak.com/" }
+    maven {
+        // EMI
+        url = "https://maven.terraformersmc.com/"
+    }
 }
 
 base {
@@ -111,8 +115,12 @@ dependencies {
     // at runtime, use the full JEI jar for Forge
     localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
 
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+
     compileOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}:api"
     runtimeOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}"
+
+    compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
 
     def ctDep = "com.blamejared.crafttweaker:CraftTweaker-neoforge-${minecraft_version}:${crafttweaker_version}"
     compileOnly ctDep
