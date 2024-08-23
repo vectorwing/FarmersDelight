@@ -168,6 +168,15 @@ public class ItemTags extends ItemTagsProvider
 				.add(ModItems.SHEPHERDS_PIE_BLOCK.get())
 				.add(ModItems.STUFFED_PUMPKIN_BLOCK.get())
 				.add(ModItems.RICE_ROLL_MEDLEY_BLOCK.get());
+		tag(Tags.Items.FOODS_SOUP)
+				.add(ModItems.BONE_BROTH.get())
+				.add(ModItems.BEEF_STEW.get())
+				.add(ModItems.VEGETABLE_SOUP.get())
+				.add(ModItems.CHICKEN_SOUP.get())
+				.add(ModItems.FISH_STEW.get())
+				.add(ModItems.PUMPKIN_SOUP.get())
+				.add(ModItems.BAKED_COD_STEW.get())
+				.add(ModItems.NOODLE_SOUP.get());
 
 		tag(Tags.Items.TOOLS).addTag(CommonTags.TOOLS_KNIFE);
 		tag(Tags.Items.SEEDS).add(ModItems.CABBAGE_SEEDS.get(), ModItems.RICE.get(), ModItems.TOMATO_SEEDS.get());

@@ -1,4 +1,4 @@
-// 1.21	2024-07-29T20:42:32.3912289	Tags for minecraft:item mod id farmersdelight
+// 1.21	2024-08-24T06:49:43.2562954	Tags for minecraft:item mod id farmersdelight
 65eba9e0353834055ff822059bd7e1784fe218ad data/createaddition/tags/item/plants.json
 f55c336a7c0c249fc90b76c979cfa5d5f6a277bf data/createaddition/tags/item/plant_foods.json
 0c943816d6d2fa986a587d5c13c7d38aaed8e159 data/create/tags/item/upright_on_belt.json
@@ -38,6 +38,7 @@ ef52cc197127c8679eb1c5b78795a4bde37e1d04 data/c/tags/item/foods/raw_bacon.json
 3cd469a93f4fb0f57ba2466cea9ec798627ef103 data/c/tags/item/foods/raw_pork.json
 7c238208767949f224e484e22241b21edb79c2f0 data/c/tags/item/foods/raw_salmon.json
 47648304fde04bb2ad5c37551c4371ea3f6a548d data/c/tags/item/foods/safe_raw_fish.json
+4fca776d2df70acaa08665ca1dfb39ce23034a5e data/c/tags/item/foods/soup.json
 0fe37095f12c7c6a3bca60606cab33162378e60d data/c/tags/item/foods/tomato.json
 918c0f66af478fb6e30369d568b5a8fb9713348b data/c/tags/item/foods/vegetable.json
 72e49310839c0faed01ba86225e802ae4961cb5e data/c/tags/item/seeds.json
