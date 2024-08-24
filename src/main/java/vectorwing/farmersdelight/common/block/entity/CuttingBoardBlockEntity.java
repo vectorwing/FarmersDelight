@@ -1,5 +1,10 @@
 package vectorwing.farmersdelight.common.block.entity;
 
+import java.util.List;
+import java.util.Optional;
+
+import javax.annotation.Nullable;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -15,7 +20,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.item.crafting.RecipeManager.CachedCheck;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
@@ -31,6 +36,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.CuttingBoardBlock;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipeWrapper;
 import vectorwing.farmersdelight.common.registry.ModAdvancements;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
@@ -39,16 +45,11 @@ import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Optional;
-
 @EventBusSubscriber(modid = FarmersDelight.MODID, bus = EventBusSubscriber.Bus.MOD)
-public class CuttingBoardBlockEntity extends SyncedBlockEntity
-{
+public class CuttingBoardBlockEntity extends SyncedBlockEntity {
 	private final ItemStackHandler inventory;
 	private ResourceLocation lastRecipeID;
-	private final RecipeManager.CachedCheck<SingleRecipeInput, CuttingBoardRecipe> quickCheck;
+	private final CachedCheck<CuttingBoardRecipeWrapper, CuttingBoardRecipe> quickCheck;
 
 	private boolean isItemCarvingBoard;
 
@@ -61,11 +62,8 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 
 	@SubscribeEvent
 	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-		event.registerBlockEntity(
-				Capabilities.ItemHandler.BLOCK,
-				ModBlockEntityTypes.CUTTING_BOARD.get(),
-				(be, context) -> be.getInventory()
-		);
+		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntityTypes.CUTTING_BOARD.get(),
+				(be, context) -> be.getInventory());
 	}
 
 	@Override
@@ -83,19 +81,23 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 	}
 
 	public boolean processStoredItemUsingTool(ItemStack toolStack, @Nullable Player player) {
-		if (level == null) return false;
+		if (level == null)
+			return false;
 
-		if (isItemCarvingBoard) return false;
+		if (isItemCarvingBoard)
+			return false;
 
 		Optional<RecipeHolder<CuttingBoardRecipe>> matchingRecipe = getMatchingRecipe(toolStack, player);
 
 		matchingRecipe.ifPresent(recipe -> {
-			List<ItemStack> results = recipe.value().rollResults(level.random, EnchantmentHelper.getTagEnchantmentLevel(level.holder(Enchantments.FORTUNE).get(), toolStack));
+			List<ItemStack> results = recipe.value().rollResults(level.random,
+					EnchantmentHelper.getTagEnchantmentLevel(level.holder(Enchantments.FORTUNE).get(), toolStack));
 			for (ItemStack resultStack : results) {
 				Direction direction = getBlockState().getValue(CuttingBoardBlock.FACING).getCounterClockWise();
 				ItemUtils.spawnItemEntity(level, resultStack.copy(),
-						worldPosition.getX() + 0.5 + (direction.getStepX() * 0.2), worldPosition.getY() + 0.2, worldPosition.getZ() + 0.5 + (direction.getStepZ() * 0.2),
-						direction.getStepX() * 0.2F, 0.0F, direction.getStepZ() * 0.2F);
+						worldPosition.getX() + 0.5 + (direction.getStepX() * 0.2), worldPosition.getY() + 0.2,
+						worldPosition.getZ() + 0.5 + (direction.getStepZ() * 0.2), direction.getStepX() * 0.2F, 0.0F,
+						direction.getStepZ() * 0.2F);
 			}
 			if (!level.isClientSide) {
 				toolStack.hurtAndBreak(1, (ServerLevel) level, player, (item) -> {
@@ -113,9 +115,11 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 	}
 
 	private Optional<RecipeHolder<CuttingBoardRecipe>> getMatchingRecipe(ItemStack toolStack, @Nullable Player player) {
-		if (level == null) return Optional.empty();
+		if (level == null)
+			return Optional.empty();
 
-		Optional<RecipeHolder<CuttingBoardRecipe>> recipe = quickCheck.getRecipeFor(new SingleRecipeInput(getStoredItem()), level);
+		Optional<RecipeHolder<CuttingBoardRecipe>> recipe = quickCheck
+				.getRecipeFor(new CuttingBoardRecipeWrapper(getStoredItem(), toolStack), level);
 		if (recipe.isPresent()) {
 			if (recipe.get().value().getTool().test(toolStack)) {
 				return recipe;
@@ -147,7 +151,8 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 
 	public void playSound(SoundEvent sound, float volume, float pitch) {
 		if (level != null)
-			level.playSound(null, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F, sound, SoundSource.BLOCKS, volume, pitch);
+			level.playSound(null, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F,
+					sound, SoundSource.BLOCKS, volume, pitch);
 	}
 
 	public boolean addItem(ItemStack itemStack) {
@@ -200,8 +205,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 	}
 
 	private ItemStackHandler createHandler() {
-		return new ItemStackHandler()
-		{
+		return new ItemStackHandler() {
 			@Override
 			public int getSlotLimit(int slot) {
 				return 1;
