@@ -295,11 +295,8 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 	public ItemStack getContainer() {
 		ItemStack mealStack = getMeal();
-		if (!mealStack.isEmpty() && !mealContainerStack.isEmpty()) {
-			return mealContainerStack;
-		} else {
-			return mealStack.getCraftingRemainingItem();
-		}
+		if (mealStack.isEmpty() || mealContainerStack.isEmpty()) return mealStack.getCraftingRemainingItem();
+		return mealContainerStack;
 	}
 
 	private boolean hasInput() {
