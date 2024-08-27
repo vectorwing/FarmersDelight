@@ -23,8 +23,11 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import vectorwing.farmersdelight.common.utility.ShapeUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import java.util.function.Supplier;
@@ -76,6 +79,17 @@ public class FeastBlock extends Block
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return SHAPES[state.getValue(SERVINGS)];
+	}
+
+	/**
+	 * This method can be used to get a rotated shape of the block with plate and serving included.
+	 *
+	 * @param plateShape      Plate's shape.
+	 * @param shapesPerStages The array of VoxelShapes per each stage of the block except for the leftover, starting from the full one without any bites.
+	 * @return Full and rotated shape of the block.
+	 */
+	public VoxelShape getPlatedServingShape(BlockState state, VoxelShape plateShape, VoxelShape[] shapesPerStages) {
+		return state.getValue(SERVINGS) == 0 ? plateShape : ShapeUtils.rotateShape(Shapes.join(plateShape, shapesPerStages[getMaxServings() - state.getValue(SERVINGS)], BooleanOp.OR), state.getValue(FACING));
 	}
 
 	@Override
