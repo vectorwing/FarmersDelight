@@ -474,6 +474,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	public ItemStack useHeldItemOnMeal(ItemStack container) {
 		if (isContainerValid(container) && !getMeal().isEmpty()) {
 			container.shrink(1);
+			inventoryChanged();
 			return getMeal().split(1);
 		}
 		return ItemStack.EMPTY;

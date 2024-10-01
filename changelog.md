@@ -15,6 +15,9 @@
 - Some crafting recipes are now properly grouped in the Crafting Table's recipe book;
 - Skillets are now waterloggable, but are unable to cook underwater, either handheld or as a block. Hard to fry when the skillet is flooded!
 
+### Fixes
+- Fix meal duplication when using containers against a Cooking Pot block, then closing and reloading the world;
+
 ## 1.2.4
 
 ### Updates
