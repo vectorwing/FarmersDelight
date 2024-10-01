@@ -3,9 +3,23 @@
 ## 1.2.5
 
 ### Fixes
-- (1.21) Fixed Kelp Roll (whole) having wrng food stats;
+- (1.21) Fixed Kelp Roll (whole) having wrong food stats;
 - (1.21) Fixed Skillet not being enchantable in an anvil;
 - (1.21) Fixed Knives being unable to receive Knockback and Looting;
+
+## 1.2.4a (1.21)
+
+### Fixes
+- Fix crash when placing Mangrove Cabinet, Canvas Signs or Hanging Canvas Signs;
+- Fix sporadic CME crash due to item override registration;
+
+### Translations
+- Updated:
+  - de_de (thanks, DaLumma!)
+  - es_mx (thanks, cerealconjugo!)
+  - ja_jp (thanks, EndilCrafter!)
+  - ru_ru (thanks, mpustovoi!)
+  - uk_ua (thanks, TheGridExpert!)
 
 ## 1.2.4
 

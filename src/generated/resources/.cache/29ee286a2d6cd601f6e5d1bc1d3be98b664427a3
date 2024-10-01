@@ -1,4 +1,4 @@
-// 1.21	2024-07-21T21:53:43.2910547	Tags for minecraft:damage_type mod id farmersdelight
+// 1.21.1	2024-09-30T21:24:00.9272047	Tags for minecraft:damage_type mod id farmersdelight
 a1fcf33bc5dc1acb53ffc1e382daa29409111ff2 data/minecraft/tags/damage_type/burn_from_stepping.json
 a1fcf33bc5dc1acb53ffc1e382daa29409111ff2 data/minecraft/tags/damage_type/is_fire.json
 a1fcf33bc5dc1acb53ffc1e382daa29409111ff2 data/minecraft/tags/damage_type/no_knockback.json
