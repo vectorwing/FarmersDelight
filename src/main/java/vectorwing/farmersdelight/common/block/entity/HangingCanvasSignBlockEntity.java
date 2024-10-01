@@ -18,6 +18,11 @@ public class HangingCanvasSignBlockEntity extends HangingSignBlockEntity
 		return ModBlockEntityTypes.HANGING_CANVAS_SIGN.get();
 	}
 
+	@Override
+	public boolean isValidBlockState(BlockState state) {
+		return this.getType().isValid(state);
+	}
+
 	public int getTextLineHeight() {
 		return 9;
 	}
