@@ -12,6 +12,7 @@
 ### Fixes
 - Fix crash when placing Mangrove Cabinet, Canvas Signs or Hanging Canvas Signs;
 - Fix sporadic CME crash due to item override registration;
+- Fix meal duplication when using containers against a Cooking Pot block, then closing and reloading the world;
 
 ### Translations
 - Updated:
