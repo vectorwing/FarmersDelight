@@ -186,7 +186,7 @@
   "item.farmersdelight.squid_ink_pasta": "イカスミパスタ",
   "item.farmersdelight.grilled_salmon": "鮭のムニエル",
   "item.farmersdelight.mushroom_rice": "キノコの炊き込みご飯",
-  
+
   "block.farmersdelight.roast_chicken_block": "ローストチキン",
   "item.farmersdelight.roast_chicken": "大皿のローストチキン",
   "block.farmersdelight.stuffed_pumpkin_block": "スタッフドパンプキン",
@@ -308,7 +308,15 @@
   "farmersdelight.jei.decomposition.light": "日光が当たっていると加速する",
   "farmersdelight.jei.decomposition.fluid": "水が隣接していると加速する",
   "farmersdelight.jei.decomposition.accelerators": "隣接する活性化剤(下記参照)で加速する",
-  "farmersdelight.jei.info.ham": "豚またはホグリンの足から取れる骨付きの肉。剣より軽いものでないと切れない",
+
+  "farmersdelight.jei.info.straw": "クラフトに使用する乾燥した植物繊維。ナイフで草や作物を切ると手に入る",
   "farmersdelight.jei.info.knife": "軽めの近接武器。草から藁を手に入れたり、動物から特別なアイテムをとることができる",
-  "farmersdelight.jei.info.straw": "クラフトに使用する乾燥した植物繊維。ナイフで草や作物を切ると手に入る"
+  "farmersdelight.jei.info.ham": "豚またはホグリンの足から取れる骨付きの肉。剣より軽いものでないと切れない",
+  "farmersdelight.jei.info.wild_cabbages": "キャベツは海岸によく自生している",
+  "farmersdelight.jei.info.wild_beetroots": "ビートルートは海岸によく自生している",
+  "farmersdelight.jei.info.wild_carrots": "ニンジンは平原や森林といった温帯の土地によく自生している",
+  "farmersdelight.jei.info.wild_onions": "タマネギは平原や森林といった温帯の土地によく自生している",
+  "farmersdelight.jei.info.wild_potatoes": "ジャガイモは山岳やタイガのような寒い土地によく自生している",
+  "farmersdelight.jei.info.wild_tomatoes": "トマトはサバンナや砂漠のような乾燥した土地によく自生している",
+  "farmersdelight.jei.info.wild_rice": "イネは沼地やジャングルなどの湿った土地の池に自生よく自生している"
 }
