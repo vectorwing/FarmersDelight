@@ -14,6 +14,8 @@
 - Added Canvas Signs to the vanilla `signs` and `hanging_signs` item tags;
 - Some crafting recipes are now properly grouped in the Crafting Table's recipe book;
 - Skillets are now waterloggable, but are unable to cook underwater, either handheld or as a block. Hard to fry when the skillet is flooded!
+- `tomatoes` were temporarily removed from the `crops` tag, as bee pollination was breaking ropelogged vines unpredictably;
+  - This will likely be addressed in the next major release;
 
 ### Fixes
 - Fix meal duplication when using containers against a Cooking Pot block, then closing and reloading the world;

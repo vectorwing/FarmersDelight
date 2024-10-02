@@ -105,8 +105,7 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.CABBAGE_CROP.get(),
 				ModBlocks.ONION_CROP.get(),
 				ModBlocks.RICE_CROP_PANICLES.get(),
-				ModBlocks.BUDDING_TOMATO_CROP.get(),
-				ModBlocks.TOMATO_CROP.get());
+				ModBlocks.BUDDING_TOMATO_CROP.get());
 		tag(net.minecraft.tags.BlockTags.STANDING_SIGNS).add(
 				ModBlocks.CANVAS_SIGN.get(),
 				ModBlocks.WHITE_CANVAS_SIGN.get(),
