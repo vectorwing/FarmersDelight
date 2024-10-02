@@ -31,6 +31,7 @@ public class ModBlockEntityTypes
 							ModBlocks.JUNGLE_CABINET.get(),
 							ModBlocks.ACACIA_CABINET.get(),
 							ModBlocks.DARK_OAK_CABINET.get(),
+							ModBlocks.MANGROVE_CABINET.get(),
 							ModBlocks.BAMBOO_CABINET.get(),
 							ModBlocks.CHERRY_CABINET.get(),
 							ModBlocks.CRIMSON_CABINET.get(),
