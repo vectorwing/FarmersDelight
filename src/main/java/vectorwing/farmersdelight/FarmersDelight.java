@@ -5,6 +5,8 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.client.gui.ConfigurationScreen;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,6 +31,10 @@ public class FarmersDelight
 
 		modContainer.registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
 		modContainer.registerConfig(ModConfig.Type.CLIENT, Configuration.CLIENT_CONFIG);
+
+		if (FMLEnvironment.dist.isClient()) {
+			modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+		}
 
 		ModSounds.SOUNDS.register(modEventBus);
 		ModBlocks.BLOCKS.register(modEventBus);
