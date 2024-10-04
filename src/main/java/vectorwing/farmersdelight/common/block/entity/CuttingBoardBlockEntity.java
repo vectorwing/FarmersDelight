@@ -1,5 +1,11 @@
 package vectorwing.farmersdelight.common.block.entity;
 
+import java.util.List;
+import java.util.Optional;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -28,6 +34,7 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.common.block.CuttingBoardBlock;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipeWrapper;
 import vectorwing.farmersdelight.common.mixin.accessor.RecipeManagerAccessor;
 import vectorwing.farmersdelight.common.registry.ModAdvancements;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
@@ -36,11 +43,6 @@ import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Optional;
 
 public class CuttingBoardBlockEntity extends SyncedBlockEntity
 {
@@ -76,7 +78,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 
 		if (isItemCarvingBoard) return false;
 
-		Optional<CuttingBoardRecipe> matchingRecipe = getMatchingRecipe(new RecipeWrapper(inventory), toolStack, player);
+		Optional<CuttingBoardRecipe> matchingRecipe = getMatchingRecipe(new CuttingBoardRecipeWrapper(inventory), toolStack, player);
 
 		matchingRecipe.ifPresent(recipe -> {
 			List<ItemStack> results = recipe.rollResults(level.random, EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, toolStack));
@@ -103,11 +105,11 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 		return matchingRecipe.isPresent();
 	}
 
-	private Optional<CuttingBoardRecipe> getMatchingRecipe(RecipeWrapper recipeWrapper, ItemStack toolStack, @Nullable Player player) {
+	private Optional<CuttingBoardRecipe> getMatchingRecipe(CuttingBoardRecipeWrapper recipeWrapper, ItemStack toolStack, @Nullable Player player) {
 		if (level == null) return Optional.empty();
 
 		if (lastRecipeID != null) {
-			Recipe<RecipeWrapper> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
+			Recipe<CuttingBoardRecipeWrapper> recipe = ((RecipeManagerAccessor) level.getRecipeManager())
 					.getRecipeMap(ModRecipeTypes.CUTTING.get())
 					.get(lastRecipeID);
 			if (recipe instanceof CuttingBoardRecipe && recipe.matches(recipeWrapper, level) && ((CuttingBoardRecipe) recipe).getTool().test(toolStack)) {

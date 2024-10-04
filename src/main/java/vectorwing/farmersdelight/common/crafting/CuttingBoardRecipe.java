@@ -28,7 +28,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("ClassCanBeRecord")
-public class CuttingBoardRecipe implements Recipe<RecipeWrapper>
+public class CuttingBoardRecipe implements Recipe<CuttingBoardRecipeWrapper>
 {
 	public static final int MAX_RESULTS = 4;
 
@@ -75,7 +75,7 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper>
 	}
 
 	@Override
-	public ItemStack assemble(RecipeWrapper inv, RegistryAccess access) {
+	public ItemStack assemble(CuttingBoardRecipeWrapper inv, RegistryAccess access) {
 		return this.results.get(0).getStack().copy();
 	}
 
@@ -110,7 +110,7 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper>
 	}
 
 	@Override
-	public boolean matches(RecipeWrapper inv, Level level) {
+	public boolean matches(CuttingBoardRecipeWrapper inv, Level level) {
 		if (inv.isEmpty())
 			return false;
 		return input.test(inv.getItem(0));
