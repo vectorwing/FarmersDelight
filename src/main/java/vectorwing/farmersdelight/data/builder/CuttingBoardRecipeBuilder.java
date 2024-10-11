@@ -29,7 +29,7 @@ public class CuttingBoardRecipeBuilder
 	private final Ingredient tool;
 	private String soundEventID;
 
-	private CuttingBoardRecipeBuilder(Ingredient ingredient, Ingredient tool, ItemLike mainResult, int count, float chance) {
+	protected CuttingBoardRecipeBuilder(Ingredient ingredient, Ingredient tool, ItemLike mainResult, int count, float chance) {
 		this.results.add(new ChanceResult(new ItemStack(mainResult.asItem(), count), chance));
 		this.ingredient = ingredient;
 		this.tool = tool;
@@ -79,14 +79,19 @@ public class CuttingBoardRecipeBuilder
 		return this;
 	}
 
+	protected String getDefaultRecipeName(ResourceLocation ingredientItemKey) {
+		return FarmersDelight.MODID + ":cutting/" + ingredientItemKey.getPath();
+	}
+
 	public void build(Consumer<FinishedRecipe> consumerIn) {
 		ResourceLocation location = ForgeRegistries.ITEMS.getKey(this.ingredient.getItems()[0].getItem());
-		this.build(consumerIn, FarmersDelight.MODID + ":cutting/" + location.getPath());
+		this.build(consumerIn, getDefaultRecipeName(location));
 	}
 
 	public void build(Consumer<FinishedRecipe> consumerIn, String save) {
 		ResourceLocation resourcelocation = ForgeRegistries.ITEMS.getKey(this.ingredient.getItems()[0].getItem());
-		if ((new ResourceLocation(save)).equals(resourcelocation)) {
+		assert resourcelocation != null;
+		if (save.equals(getDefaultRecipeName(resourcelocation))) {
 			throw new IllegalStateException("Cutting Recipe " + save + " should remove its 'save' argument");
 		} else {
 			this.build(consumerIn, new ResourceLocation(save));
