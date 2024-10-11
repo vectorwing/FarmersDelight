@@ -12,12 +12,15 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.function.Supplier;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
 public class ShepherdsPieBlock extends FeastBlock
 {
 	protected static final VoxelShape PLATE_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 2.0D, 15.0D);
-	protected static final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 2.0D, 2.0D, 14.0D, 8.0D, 14.0D), BooleanOp.OR);
+	protected static final VoxelShape[] PIE_SHAPES = new VoxelShape[] {
+			Block.box(2, 2, 2, 14, 8, 14),
+			Shapes.join(Block.box(8, 2, 2, 14, 8, 8), Block.box(2, 2, 8, 14, 8, 14), BooleanOp.OR),
+			Block.box(2, 2, 8, 14, 8, 14),
+			Block.box(2, 2, 8, 8, 8, 14)
+	};
 
 	public ShepherdsPieBlock(Properties properties, Supplier<Item> servingItem, boolean hasLeftovers) {
 		super(properties, servingItem, hasLeftovers);
@@ -25,6 +28,6 @@ public class ShepherdsPieBlock extends FeastBlock
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		return state.getValue(SERVINGS) == 0 ? PLATE_SHAPE : PIE_SHAPE;
+		return getPlatedServingShape(state, PLATE_SHAPE, PIE_SHAPES);
 	}
 }

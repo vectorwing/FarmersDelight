@@ -25,10 +25,13 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
+import vectorwing.farmersdelight.common.utility.ShapeUtils;
 
 import java.util.function.Supplier;
 
@@ -38,7 +41,12 @@ public class PieBlock extends Block
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 3);
 
-	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 14.0D);
+	protected static final VoxelShape[] SHAPES = new VoxelShape[] {
+			Block.box(2, 0, 2, 14, 4, 14),
+			Shapes.join(Block.box(2, 0, 8, 8, 4, 14), Block.box(2, 0, 2, 14, 4, 8), BooleanOp.OR),
+			Block.box(2, 0, 2, 14, 4, 8),
+			Block.box(8, 0, 2, 14, 4, 8)
+	};
 
 	public final Supplier<Item> pieSlice;
 
@@ -58,7 +66,7 @@ public class PieBlock extends Block
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		return SHAPE;
+		return ShapeUtils.rotateShape(SHAPES[state.getValue(BITES)], state.getValue(FACING));
 	}
 
 	@Override
