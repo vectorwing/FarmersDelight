@@ -37,7 +37,7 @@ public class DecompositionEmiRecipe implements EmiRecipe {
 
     @Override
     public @Nullable ResourceLocation getId() {
-        return ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "decomposition/dummy");
+        return FarmersDelight.res("/decomposition/dummy");
     }
 
     @Override
