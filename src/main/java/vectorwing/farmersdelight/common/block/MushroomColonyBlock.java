@@ -6,7 +6,6 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -40,13 +39,13 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 {
 	public static final MapCodec<MushroomColonyBlock> CODEC = RecordCodecBuilder.mapCodec(
-			builder -> builder.group(BuiltInRegistries.ITEM.holderByNameCodec().fieldOf("mushroom").forGetter(block -> block.mushroomType), propertiesCodec())
+			builder -> builder.group(BuiltInRegistries.ITEM.byNameCodec().fieldOf("mushroom").forGetter(block -> block.mushroomType), propertiesCodec())
 					.apply(builder, MushroomColonyBlock::new)
 	);
 
-	public static HashMap<Holder<Item>, MushroomColonyBlock> COLONIES = new HashMap<>();
+	public static HashMap<Item, MushroomColonyBlock> COLONIES = new HashMap<>();
 	public static final int PLACING_LIGHT_LEVEL = 13;
-	public final Holder<Item> mushroomType;
+	public final Item mushroomType;
 
 	public static final IntegerProperty COLONY_AGE = BlockStateProperties.AGE_3;
 	protected static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
@@ -56,7 +55,7 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 			Block.box(1.0D, 0.0D, 1.0D, 15.0D, 14.0D, 15.0D),
 	};
 
-	public MushroomColonyBlock(Holder<Item> mushroomType, Properties properties) {
+	public MushroomColonyBlock(Item mushroomType, Properties properties) {
 		super(properties);
 		this.mushroomType = mushroomType;
 		this.registerDefaultState(this.stateDefinition.any().setValue(COLONY_AGE, 0));
@@ -126,7 +125,7 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 
 	@Override
 	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
-		return new ItemStack(this.mushroomType.value());
+		return new ItemStack(this.mushroomType);
 	}
 
 	@Override

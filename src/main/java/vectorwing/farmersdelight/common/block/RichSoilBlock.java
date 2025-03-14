@@ -1,8 +1,5 @@
 package vectorwing.farmersdelight.common.block;
 
-import java.util.HashMap;
-import java.util.function.Supplier;
-
 import javax.annotation.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -12,7 +9,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.CommonHooks;
@@ -24,7 +20,6 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.MathUtils;
 
-@SuppressWarnings("deprecation")
 public class RichSoilBlock extends Block
 {
 	public RichSoilBlock(Properties properties) {
@@ -33,35 +28,36 @@ public class RichSoilBlock extends Block
 
 	@Override
 	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
-		if (!level.isClientSide) {
-			BlockPos abovePos = pos.above();
-			BlockState aboveState = level.getBlockState(abovePos);
-			Block aboveBlock = aboveState.getBlock();
+		if (level.isClientSide)
+			return;
 
-			// Do nothing if the plant is unaffected by rich soil
-			if (aboveState.is(ModTags.UNAFFECTED_BY_RICH_SOIL)) {
-				return;
-			}
+		BlockPos abovePos = pos.above();
+		BlockState aboveState = level.getBlockState(abovePos);
+		Block aboveBlock = aboveState.getBlock();
 
-			// Convert mushrooms to colonies if it's dark enough
-			var newBlock = MushroomColonyBlock.COLONIES.get(aboveBlock.asItem().builtInRegistryHolder());
+		// Do nothing if the plant is unaffected by rich soil
+		if (aboveState.is(ModTags.UNAFFECTED_BY_RICH_SOIL)) {
+			return;
+		}
 
-			if (newBlock != null) {
-				level.setBlockAndUpdate(abovePos, newBlock.defaultBlockState());
-				return;
-			}
+		// Convert mushrooms to colonies if it's dark enough
+		var newBlock = MushroomColonyBlock.COLONIES.get(aboveBlock.asItem());
 
-			if (Configuration.RICH_SOIL_BOOST_CHANCE.get() == 0.0) {
-				return;
-			}
+		if (newBlock != null) {
+			level.setBlockAndUpdate(abovePos, newBlock.defaultBlockState());
+			return;
+		}
 
-			// If all else fails, and it's a plant, give it a growth boost now and then!
-			if (aboveBlock instanceof BonemealableBlock growable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
-				if (growable.isValidBonemealTarget(level, pos.above(), aboveState) && CommonHooks.canCropGrow(level, pos.above(), aboveState, true)) {
-					growable.performBonemeal(level, level.random, pos.above(), aboveState);
-					//level.levelEvent(1505, pos.above(), 0);
-					CommonHooks.fireCropGrowPost(level, pos.above(), aboveState);
-				}
+		if (Configuration.RICH_SOIL_BOOST_CHANCE.get() == 0.0) {
+			return;
+		}
+
+		// If all else fails, and it's a plant, give it a growth boost now and then!
+		if (aboveBlock instanceof BonemealableBlock growable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
+			if (growable.isValidBonemealTarget(level, pos.above(), aboveState) && CommonHooks.canCropGrow(level, pos.above(), aboveState, true)) {
+				growable.performBonemeal(level, level.random, pos.above(), aboveState);
+				//level.levelEvent(1505, pos.above(), 0);
+				CommonHooks.fireCropGrowPost(level, pos.above(), aboveState);
 			}
 		}
 	}
