@@ -1,5 +1,10 @@
 package vectorwing.farmersdelight.common.block;
 
+import java.util.HashMap;
+import java.util.function.Supplier;
+
+import javax.annotation.Nullable;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -19,8 +24,7 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.MathUtils;
 
-import javax.annotation.Nullable;
-
+@SuppressWarnings("deprecation")
 public class RichSoilBlock extends Block
 {
 	public RichSoilBlock(Properties properties) {
@@ -40,12 +44,10 @@ public class RichSoilBlock extends Block
 			}
 
 			// Convert mushrooms to colonies if it's dark enough
-			if (aboveBlock == Blocks.BROWN_MUSHROOM) {
-				level.setBlockAndUpdate(pos.above(), ModBlocks.BROWN_MUSHROOM_COLONY.get().defaultBlockState());
-				return;
-			}
-			if (aboveBlock == Blocks.RED_MUSHROOM) {
-				level.setBlockAndUpdate(pos.above(), ModBlocks.RED_MUSHROOM_COLONY.get().defaultBlockState());
+			var newBlock = MushroomColonyBlock.COLONIES.get(aboveBlock.asItem().builtInRegistryHolder());
+
+			if (newBlock != null) {
+				level.setBlockAndUpdate(abovePos, newBlock.defaultBlockState());
 				return;
 			}
 

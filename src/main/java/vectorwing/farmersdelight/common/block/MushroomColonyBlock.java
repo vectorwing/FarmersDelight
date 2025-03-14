@@ -1,7 +1,10 @@
 package vectorwing.farmersdelight.common.block;
 
+import java.util.HashMap;
+
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -34,7 +37,6 @@ import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.Tags;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
-@SuppressWarnings("deprecation")
 public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 {
 	public static final MapCodec<MushroomColonyBlock> CODEC = RecordCodecBuilder.mapCodec(
@@ -42,6 +44,7 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 					.apply(builder, MushroomColonyBlock::new)
 	);
 
+	public static HashMap<Holder<Item>, MushroomColonyBlock> COLONIES = new HashMap<>();
 	public static final int PLACING_LIGHT_LEVEL = 13;
 	public final Holder<Item> mushroomType;
 
@@ -57,6 +60,7 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 		super(properties);
 		this.mushroomType = mushroomType;
 		this.registerDefaultState(this.stateDefinition.any().setValue(COLONY_AGE, 0));
+		COLONIES.put(mushroomType, this);
 	}
 
 	@Override
