@@ -21,6 +21,7 @@ import vectorwing.farmersdelight.integration.emi.FDRecipeWorkstations;
 import java.util.List;
 
 public class DecompositionEmiRecipe implements EmiRecipe {
+    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "/decomposition/dummy");
     private static final ResourceLocation BACKGROUND = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "textures/gui/jei/decomposition.png");
 
     private static final EmiStack RICH_SOIL = EmiStack.of(ModItems.RICH_SOIL.get());
@@ -37,7 +38,7 @@ public class DecompositionEmiRecipe implements EmiRecipe {
 
     @Override
     public @Nullable ResourceLocation getId() {
-        return FarmersDelight.res("/decomposition/dummy");
+        return ID;
     }
 
     @Override
