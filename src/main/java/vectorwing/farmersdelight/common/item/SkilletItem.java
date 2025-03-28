@@ -102,6 +102,11 @@ public class SkilletItem extends BlockItem
 		return true;
 	}
 
+	@Override
+	public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+		stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
+	}
+
 	private static boolean isPlayerNearHeatSource(Player player, LevelReader level) {
 		if (player.isOnFire()) {
 			return true;
@@ -140,6 +145,10 @@ public class SkilletItem extends BlockItem
 
 			Optional<RecipeHolder<CampfireCookingRecipe>> recipe = getCookingRecipe(cookingStack, level);
 			if (recipe.isPresent()) {
+				if (player.isUnderWater()) {
+					player.displayClientMessage(TextUtils.getTranslation("item.skillet.underwater"), true);
+					return InteractionResultHolder.pass(skilletStack);
+				}
 				ItemStack cookingStackCopy = cookingStack.copy();
 				ItemStack cookingStackUnit = cookingStackCopy.split(1);
 				skilletStack.set(ModDataComponents.SKILLET_INGREDIENT, new ItemStackWrapper(cookingStackUnit));
@@ -251,6 +260,14 @@ public class SkilletItem extends BlockItem
 			return false;
 		}
 		return super.isPrimaryItemFor(stack, enchantment);
+	}
+
+	@Override
+	public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+		if (enchantment.is(Enchantments.SWEEPING_EDGE)) {
+			return false;
+		}
+		return super.supportsEnchantment(stack, enchantment);
 	}
 
 	@Override

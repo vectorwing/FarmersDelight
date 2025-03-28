@@ -132,6 +132,8 @@ public class CuttingRecipes
 				.build(output);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.DANDELION), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.YELLOW_DYE, 2)
 				.build(output);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.TORCHFLOWER), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.ORANGE_DYE, 2)
+				.build(output);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_BEETROOTS.get()), Ingredient.of(CommonTags.TOOLS_KNIFE), Items.BEETROOT_SEEDS, 1)
 				.addResult(Items.RED_DYE)
 				.build(output);

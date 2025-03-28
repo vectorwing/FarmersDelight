@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
+  "group": "fd_wheat_dough",
   "ingredients": [
     {
       "item": "minecraft:water_bucket"

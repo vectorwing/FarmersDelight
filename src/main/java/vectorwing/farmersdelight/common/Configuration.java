@@ -39,6 +39,7 @@ public class Configuration
 	public static final String CATEGORY_WORLD = "world";
 	public static ModConfigSpec.BooleanValue GENERATE_FD_CHEST_LOOT;
 	public static ModConfigSpec.BooleanValue GENERATE_VILLAGE_COMPOST_HEAPS;
+	public static ModConfigSpec.BooleanValue GENERATE_VILLAGE_FARM_FD_CROPS;
 	public static ModConfigSpec.BooleanValue GENERATE_WILD_CABBAGES;
 	public static ModConfigSpec.IntValue CHANCE_WILD_CABBAGES;
 	public static ModConfigSpec.BooleanValue GENERATE_WILD_BEETROOTS;
@@ -119,8 +120,10 @@ public class Configuration
 		COMMON_BUILDER.comment("World generation").push(CATEGORY_WORLD);
 		GENERATE_FD_CHEST_LOOT = COMMON_BUILDER.comment("Should this mod add some of its items (ropes, seeds, knives, meals etc.) as extra chest loot across Minecraft?")
 				.define("generateFDChestLoot", true);
-		GENERATE_VILLAGE_COMPOST_HEAPS = COMMON_BUILDER.comment("Generate Compost Heaps across all village biomes")
+		GENERATE_VILLAGE_COMPOST_HEAPS = COMMON_BUILDER.comment("Should FD generate Compost Heaps across all village biomes?")
 				.define("genVillageCompostHeaps", true);
+		GENERATE_VILLAGE_FARM_FD_CROPS = COMMON_BUILDER.comment("Should FD crops show up planted randomly in various village farms?")
+				.define("genFDCropsOnVillageFarms", true);
 
 		COMMON_BUILDER.comment("Wild Cabbage generation").push("wild_cabbages");
 		CHANCE_WILD_CABBAGES = COMMON_BUILDER.comment("Chance of generating clusters. Smaller value = more frequent.")

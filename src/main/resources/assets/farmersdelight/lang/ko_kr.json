@@ -8,9 +8,9 @@
   "block.farmersdelight.birch_cabinet": "자작나무 식료품 선반",
   "block.farmersdelight.spruce_cabinet": "가문비나무 식료품 선반",
   "block.farmersdelight.jungle_cabinet": "정글나무 식료품 선반",
-  "block.farmersdelight.acacia_cabinet": "아카시아 식료품 선반",
+  "block.farmersdelight.acacia_cabinet": "아카시아나무 식료품 선반",
   "block.farmersdelight.dark_oak_cabinet": "짙은 참나무 식료품 선반",
-  "block.farmersdelight.mangrove_cabinet": "맹그로브 식료품 선반",
+  "block.farmersdelight.mangrove_cabinet": "맹그로브나무 식료품 선반",
   "block.farmersdelight.cherry_cabinet": "벚나무 식료품 선반",
   "block.farmersdelight.bamboo_cabinet": "대나무 식료품 선반",
   "block.farmersdelight.crimson_cabinet": "진홍빛 식료품 선반",
@@ -69,7 +69,7 @@
   "block.farmersdelight.green_hanging_canvas_sign": "초록색 매다는 천 표지판",
   "block.farmersdelight.red_hanging_canvas_sign": "빨간색 매다는 천 표지판",
   "block.farmersdelight.black_hanging_canvas_sign": "검은색 매다는 천 표지판",
-  
+
   "block.farmersdelight.budding_tomatoes": "싹 틔우는 토마토",
   "block.farmersdelight.tomatoes": "토마토 덩굴",
   "block.farmersdelight.cabbages": "양배추",
@@ -81,7 +81,7 @@
 
   "block.farmersdelight.sandy_shrub": "거친 관목",
   "block.farmersdelight.wild_cabbages": "야생 양배추",
-  "block.farmersdelight.wild_tomatoes": "토마토 덩굴",
+  "block.farmersdelight.wild_tomatoes": "야생 토마토",
   "block.farmersdelight.wild_onions": "야생 양파",
   "block.farmersdelight.wild_carrots": "야생 당근",
   "block.farmersdelight.wild_potatoes": "야생 감자",
@@ -129,7 +129,7 @@
   "item.farmersdelight.cooked_mutton_chops": "익힌 양고기 살점",
   "item.farmersdelight.ham": "햄",
   "item.farmersdelight.smoked_ham": "훈제 햄",
-  
+
   "item.farmersdelight.pie_crust": "파이 껍질",
   "item.farmersdelight.cake_slice": "케이크 조각",
   "item.farmersdelight.apple_pie_slice": "사과 파이 조각",
@@ -140,7 +140,7 @@
   "item.farmersdelight.honey_cookie": "꿀 쿠키",
   "item.farmersdelight.melon_popsicle": "수박바",
   "item.farmersdelight.glow_berry_custard": "발광 열매 커스터드",
-  
+
   "item.farmersdelight.earthworm": "지렁이",
 
   "item.farmersdelight.flint_knife": "부싯돌 식칼",
@@ -154,9 +154,9 @@
   "item.farmersdelight.chicken_sandwich": "닭고기 샌드위치",
   "item.farmersdelight.hamburger": "햄버거",
   "item.farmersdelight.bacon_sandwich": "베이컨 샌드위치",
+  "item.farmersdelight.mutton_wrap": "케밥",
   "item.farmersdelight.dumplings": "만두",
-  "item.farmersdelight.stuffed_potato": "속을 채운 감자",
-  "item.farmersdelight.mutton_wrap": "케밥", 
+  "item.farmersdelight.stuffed_potato": "속 채운 감자",
   "item.farmersdelight.cabbage_rolls": "양배추 쌈",
   "item.farmersdelight.salmon_roll": "연어 초밥",
   "item.farmersdelight.cod_roll": "대구 초밥",
@@ -165,7 +165,7 @@
 
   "item.farmersdelight.cooked_rice": "밥",
   "item.farmersdelight.mixed_salad": "샐러드",
-  "item.farmersdelight.nether_salad": "지옥 샐러드",
+  "item.farmersdelight.nether_salad": "네더 샐러드",
   "item.farmersdelight.beef_stew": "소고기 스튜",
   "item.farmersdelight.chicken_soup": "닭고기 수프",
   "item.farmersdelight.vegetable_soup": "야채 수프",
@@ -175,7 +175,7 @@
   "item.farmersdelight.baked_cod_stew": "대구 스튜",
   "item.farmersdelight.noodle_soup": "우동",
   "item.farmersdelight.bone_broth": "사골국",
-  
+
   "item.farmersdelight.bacon_and_eggs": "베이컨과 계란 프라이",
   "item.farmersdelight.pasta_with_meatballs": "미트볼 파스타",
   "item.farmersdelight.pasta_with_mutton_chop": "양고기 파스타",
@@ -183,36 +183,36 @@
   "item.farmersdelight.steak_and_potatoes": "스테이크와 감자",
   "item.farmersdelight.vegetable_noodles": "잡채",
   "item.farmersdelight.ratatouille": "라따뚜이",
-  "item.farmersdelight.squid_ink_pasta": "먹물 파스타",
+  "item.farmersdelight.squid_ink_pasta": "오징어 먹물 파스타",
   "item.farmersdelight.grilled_salmon": "구운 연어요리",
   "item.farmersdelight.mushroom_rice": "버섯 볶음밥",
-  
+
   "block.farmersdelight.roast_chicken_block": "로스트 치킨",
-  "item.farmersdelight.roast_chicken": "로스트 치킨을 담은 그릇",
+  "item.farmersdelight.roast_chicken": "그릇에 담긴 로스트 치킨",
   "block.farmersdelight.stuffed_pumpkin_block": "속 채운 호박",
-  "item.farmersdelight.stuffed_pumpkin": "속 채운 호박을 담은 그릇",
+  "item.farmersdelight.stuffed_pumpkin": "그릇에 담긴 속 채운 호박",
   "block.farmersdelight.honey_glazed_ham_block": "꿀 바른 햄",
-  "item.farmersdelight.honey_glazed_ham": "꿀 바른 햄 요리",
+  "item.farmersdelight.honey_glazed_ham": "그릇에 담긴 꿀 바른 햄",
   "block.farmersdelight.shepherds_pie_block": "셰퍼드 파이",
-  "item.farmersdelight.shepherds_pie": "셰퍼드 파이를 담은 그릇",
+  "item.farmersdelight.shepherds_pie": "그릇에 담긴 셰퍼드 파이",
   "block.farmersdelight.rice_roll_medley_block": "모듬 초밥",
-  
+
   "item.farmersdelight.dog_food": "개밥",
-  "item.farmersdelight.horse_feed":  "말먹이",
+  "item.farmersdelight.horse_feed": "말먹이",
 
   "entity.farmersdelight.rotten_tomato": "썩은 토마토",
 
   "effect.farmersdelight.nourishment": "배부름",
   "effect.farmersdelight.comfort": "편안함",
-  
-  "effect.farmersdelight.nourishment.0.desc": "체력을 회복할 때를 제외하고 배고픔 수치가 줄어들지 않습니다.",
-  "effect.farmersdelight.comfort.0.desc": "배고픔 수치와 상관없이, 체력을 회복합니다.",
+
+  "effect.farmersdelight.nourishment.0.desc": "생명력을 회복할 때를 제외하고 배고픔 수치가 줄어들지 않습니다.",
+  "effect.farmersdelight.comfort.0.desc": "배고픔 수치와 상관없이, 생명력을 회복합니다.",
 
   "enchantment.farmersdelight.backstabbing": "암습",
-  "enchantment.farmersdelight.backstabbing.desc": "후방 공격 피해량이 증가합니다.",
+  "enchantment.farmersdelight.backstabbing.desc": "대상을 뒤에서 공격할 때 피해가 증가합니다.",
 
   "itemGroup.farmersdelight": "Farmer's Delight",
-  
+
   "farmersdelight.container.recipe_book.cookable": "조리 가능한 아이템 표시 중",
   "farmersdelight.container.cooking_pot": "조리용 냄비",
   "farmersdelight.container.cooking_pot.served_on": "%s이(가) 필요합니다",
@@ -221,35 +221,35 @@
   "farmersdelight.container.basket": "바구니",
   "farmersdelight.container.cabinet": "식료품 선반",
 
-  "farmersdelight.tooltip.cooking_pot.empty": "비어있음",
+  "farmersdelight.tooltip.cooking_pot.empty": "비어 있음",
   "farmersdelight.tooltip.cooking_pot.single_serving": "1인분의:",
   "farmersdelight.tooltip.cooking_pot.many_servings": "%s인분의:",
-  "farmersdelight.tooltip.dog_food.when_feeding": "개에게 먹였을 때:",
+  "farmersdelight.tooltip.dog_food.when_feeding": "늑대에게 먹였을 때:",
   "farmersdelight.tooltip.horse_feed.when_feeding": "말에게 먹였을 때:",
   "farmersdelight.tooltip.milk_bottle": "효과를 1개 제거합니다",
   "farmersdelight.tooltip.hot_cocoa": "해로운 효과를 1개 제거합니다",
-  "farmersdelight.tooltip.melon_juice": "소규모 즉시 회복",
+  "farmersdelight.tooltip.melon_juice": "소량의 생명력을 즉시 회복합니다",
 
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "맛의 세계가 당신을 기다립니다!",
-  
+
   "farmersdelight.advancement.craft_knife": "수렵과 채집",
-  "farmersdelight.advancement.craft_knife.desc": "식칼을 제작하고 동식물에서 아이템을 더 많이 획득하세요",
+  "farmersdelight.advancement.craft_knife.desc": "식칼을 제작하여 동식물에서 아이템을 더 많이 얻으세요",
   "farmersdelight.advancement.harvest_straw": "정원 관리",
   "farmersdelight.advancement.harvest_straw.desc": "식칼로 밀, 쌀, 잔디를 베어내어 지푸라기를 얻으세요",
   "farmersdelight.advancement.place_organic_compost": "고급 퇴비",
-  "farmersdelight.advancement.place_organic_compost.desc": "유기농 퇴비를 설치하세요. 햇빛, 물, 버섯이 분해를 돕습니다!",
+  "farmersdelight.advancement.place_organic_compost.desc": "유기농 퇴비를 설치하세요. 햇빛과 물, 버섯이 분해를 돕습니다!",
   "farmersdelight.advancement.get_rich_soil": "식물의 먹을거리",
   "farmersdelight.advancement.get_rich_soil.desc": "유기농 퇴비는 더 풍요로운 농장을 만들 기름진 흙으로 분해됩니다!",
-  "farmersdelight.advancement.get_ham": "신선한 고기!",
-  "farmersdelight.advancement.get_ham.desc": "식칼을 이용해 돼지, 호글린에게서 햄을 얻으세요",
-  "farmersdelight.advancement.use_cutting_board": "손 조심하세요",
+  "farmersdelight.advancement.get_ham": "신선한 고기",
+  "farmersdelight.advancement.get_ham.desc": "식칼을 이용해 돼지나 호글린에게서 햄을 얻으세요",
+  "farmersdelight.advancement.use_cutting_board": "손을 조심하세요",
   "farmersdelight.advancement.use_cutting_board.desc": "도구를 손에 들고, 도마를 사용해 아이템을 잘라보세요",
   "farmersdelight.advancement.obtain_netherite_knife": "열을 견딜 수 없다면...",
-  "farmersdelight.advancement.obtain_netherite_knife.desc": "네더라이트 주괴로 식칼을 강화하세요! 아니면 부엌을 나가세요.",
-  
+  "farmersdelight.advancement.obtain_netherite_knife.desc": "네더라이트 주괴를 사용해 식칼을 강화하세요! 아니면 부엌을 나가세요",
+
   "farmersdelight.advancement.get_fd_seed": "야생의 작물들",
-  "farmersdelight.advancement.get_fd_seed.desc": "다양한 생물군계에서 4가지의 새로운 작물을 찾아보세요... 아니면 상자 속에서요.",
+  "farmersdelight.advancement.get_fd_seed.desc": "다양한 생물 군계에서 4가지의 새로운 작물을 찾아보세요... 아니면 상자 속에서요",
   "farmersdelight.advancement.plant_rice": "모내기",
   "farmersdelight.advancement.plant_rice.desc": "벼를 얕은 물 웅덩이에 심으세요",
   "farmersdelight.advancement.harvest_ropelogged_tomato": "덩굴 토마토",
@@ -259,10 +259,10 @@
   "farmersdelight.advancement.get_mushroom_colony": "버섯의 힘이 솟아난다",
   "farmersdelight.advancement.get_mushroom_colony.desc": "완전히 자란 버섯 군집을 가위질하세요. 버섯 군집은 기름진 흙에서 자란다고 합니다...",
   "farmersdelight.advancement.plant_all_crops": "돌려짓기",
-  "farmersdelight.advancement.plant_all_crops.desc": "채소, 과일, 뿌리, 버섯 등 음식과 관련된 모든 식물을 재배하세요!",
+  "farmersdelight.advancement.plant_all_crops.desc": "채소, 과일, 뿌리, 버섯 등 음식과 관련된 모든 작물을 재배하세요!",
 
-  "farmersdelight.advancement.place_campfire": "Bonfire Lit",
-  "farmersdelight.advancement.place_campfire.desc": "모닥불을 설치하여 음식을 구우세요",
+  "farmersdelight.advancement.place_campfire": "모닥불 점화",
+  "farmersdelight.advancement.place_campfire.desc": "모닥불을 설치하여 음식을 요리하세요",
   "farmersdelight.advancement.use_skillet": "휴대용 조리기구",
   "farmersdelight.advancement.use_skillet.desc": "프라이팬은 간편한 조리기구입니다. 열원 근처에 서고, 다른 손에 음식을 드세요!",
   "farmersdelight.advancement.place_skillet": "지글지글!",
@@ -270,12 +270,12 @@
   "farmersdelight.advancement.place_cooking_pot": "요리 시작!",
   "farmersdelight.advancement.place_cooking_pot.desc": "조리용 냄비를 설치하고 식사를 준비하세요!",
   "farmersdelight.advancement.eat_comfort_food": "편안하다!",
-  "farmersdelight.advancement.eat_comfort_food.desc": "뜨끈한 음식은 배고픔과 상관없이 지속적으로 생명력을 회복시켜 줍니다!",
+  "farmersdelight.advancement.eat_comfort_food.desc": "따뜻한 음식은 배고픔과 상관없이 지속적으로 생명력을 회복시켜 줍니다!",
   "farmersdelight.advancement.eat_nourishing_food": "배부르다!",
-  "farmersdelight.advancement.eat_nourishing_food.desc": "접시에 담긴 음식은 오랫동안 배고프지 않게 만듭니다!",
+  "farmersdelight.advancement.eat_nourishing_food.desc": "그릇에 담긴 음식은 오랫동안 배고프지 않게 만듭니다!",
   "farmersdelight.advancement.place_feast": "성대한 잔치",
-  "farmersdelight.advancement.place_feast.desc": "몇몇 음식은 너무 커서 내려놓고 친구들과 함께 즐겨야합니다!",
-  "farmersdelight.advancement.master_chef": "마스터 쉐프",
+  "farmersdelight.advancement.place_feast.desc": "몇몇 음식은 너무 커서 내려놓고 친구들과 함께 즐겨야 합니다!",
+  "farmersdelight.advancement.master_chef": "마스터 셰프",
   "farmersdelight.advancement.master_chef.desc": "가능한 모든 요리를 먹어보세요!",
 
   "farmersdelight.subtitles.cooking_pot.boil": "냄비가 끓음",
@@ -287,18 +287,20 @@
   "farmersdelight.subtitles.cabinet.close": "선반이 닫힘",
   "farmersdelight.subtitles.tomato.pick": "토마토가 수확됨",
   "farmersdelight.subtitles.rotten_tomato.throw": "썩은 토마토가 날아감",
-  "farmersdelight.subtitles.rotten_tomato.hit": "썩은 토마토가 부딫힘",
-  
+  "farmersdelight.subtitles.rotten_tomato.hit": "썩은 토마토가 부딪힘",
+
   "farmersdelight.block.feast.use_container": "이 음식은 %s이(가) 필요합니다.",
-  "farmersdelight.block.rice.invalid_placement": "이 식물은 물 밖에선 살 수 없습니다.",
+  "farmersdelight.block.rice.invalid_placement": "이 작물은 얕은 물이 아니면 잘 자라지 않습니다.",
   "farmersdelight.block.cutting_board.invalid_item": "이건 자르지 못할 것 같습니다...",
   "farmersdelight.block.cutting_board.invalid_tool": "아마도 다른 도구가 필요할 것 같습니다...",
   "farmersdelight.block.skillet.invalid_item": "이건 조리할 수 없을 것 같습니다...",
-  "farmersdelight.item.skillet.how_to_cook": "다른 손에 재료를 드세요!",
+  "farmersdelight.block.skillet.underwater": "침수된 상태에서 요리를 할 수 없습니다...",
+  "farmersdelight.item.skillet.how_to_cook": "다른 손에 재료를 들고 사용하세요!",
+  "farmersdelight.item.skillet.underwater": "수중에서 요리할 수 없습니다...",
 
   "death.attack.farmersdelight.stove": "%1$s이(가) 완벽하게 구워졌습니다",
   "death.attack.farmersdelight.stove.player": "%1$s이(가) 요리사 %2$s에게 조리되었습니다",
-  
+
   "farmersdelight.jei.cooking": "조리",
   "farmersdelight.jei.cutting": "도마",
   "farmersdelight.jei.chance": "%1$s%% 확률",
@@ -306,7 +308,15 @@
   "farmersdelight.jei.decomposition.light": "햇빛에 의해 촉진됨",
   "farmersdelight.jei.decomposition.fluid": "근처 수분에 의해 촉진됨",
   "farmersdelight.jei.decomposition.accelerators": "근처 활성화제에 의해 촉진됨 (아래 참조)",
-  "farmersdelight.jei.info.straw": "조합에 사용되는 지푸라기입니다. 잔디나 작물을 식칼로 잘라내 얻을 수 있습니다.",
-  "farmersdelight.jei.info.knife": "식칼은 가벼운 무기입니다. 잔디를 잘라 지푸라기를 얻을 수 있고, 동물에게서 추가 전리품을 얻을 수 있습니다.",
-  "farmersdelight.jei.info.ham": "돼지나 호글린의 다리를 잘라내어 얻을 수 있습니다. 검보다는 가벼운 칼이 필요할 것 같습니다."
+
+  "farmersdelight.jei.info.straw": "제작에 사용되는 지푸라기입니다. 잔디나 작물을 식칼로 잘라내 얻을 수 있습니다.",
+  "farmersdelight.jei.info.knife": "식칼은 빠른 휘두름과 가벼운 피해를 입히는 가벼운 무기입니다.\n\n식칼로 잔디를 잘라 지푸라기를 얻을 수 있고, 동물에게서 추가 전리품을 얻을 수 있습니다.",
+  "farmersdelight.jei.info.ham": "돼지나 호글린의 다리를 잘라내어 얻을 수 있습니다.\n\n검보다는 가벼운 칼이 필요할 것 같습니다...",
+  "farmersdelight.jei.info.wild_cabbages": "양배추는 해변에서 흔히 발견되는 야생 작물입니다.",
+  "farmersdelight.jei.info.wild_beetroots": "비트는 해변에서 흔히 발견되는 야생 작물입니다.",
+  "farmersdelight.jei.info.wild_carrots": "당근은 평원과 숲과 같은 따뜻한 지역에서 흔히 발견되는 야생 작물입니다.",
+  "farmersdelight.jei.info.wild_onions": "양파는 평원과 숲과 같은 따뜻한 지역에서 흔히 발견되는 야생 작물입니다.",
+  "farmersdelight.jei.info.wild_potatoes": "감자는 산과 타이가와 같은 추운 지역에서 흔히 발견되는 야생 작물입니다.",
+  "farmersdelight.jei.info.wild_tomatoes": "토마토는 사바나와 사막과 같은 건조한 지역에서 흔히 발견되는 야생 작물입니다.",
+  "farmersdelight.jei.info.wild_rice": "벼는 늪지와 정글과 같은 습한 지역의 웅덩이에서 흔히 발견되는 야생 작물입니다."
 }

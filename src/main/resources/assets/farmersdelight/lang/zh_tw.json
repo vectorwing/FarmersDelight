@@ -252,9 +252,9 @@
   "farmersdelight.advancement.get_fd_seed.desc": "野外有 4 種新的植物，它們橫跨各種氣候……也許能在某些地方的箱子中找到。",
   "farmersdelight.advancement.plant_rice": "浸濕雙腳",
   "farmersdelight.advancement.plant_rice.desc": "在淺水坑中種植水稻",
-  "farmersdelight.advancement.harvest_ropelogged_tomato": "Tall-mato",
+  "farmersdelight.advancement.harvest_ropelogged_tomato": "一番衝天",
   "farmersdelight.advancement.harvest_ropelogged_tomato.desc": "在番茄藤上掛繩索讓他長得更高",
-  "farmersdelight.advancement.hit_raider_with_rotten_tomato": "Boo! Hiss!",
+  "farmersdelight.advancement.hit_raider_with_rotten_tomato": "嘘！走開！",
   "farmersdelight.advancement.hit_raider_with_rotten_tomato.desc": "對襲擊者扔出腐爛番茄！",
   "farmersdelight.advancement.get_mushroom_colony": "菌菇在我們之中",
   "farmersdelight.advancement.get_mushroom_colony.desc": "剪下完整的蘑菇菌落。你需要沃土才能種出來……",
@@ -306,7 +306,15 @@
   "farmersdelight.jei.decomposition.light": "陽光照射",
   "farmersdelight.jei.decomposition.fluid": "鄰近水源",
   "farmersdelight.jei.decomposition.accelerators": "能夠加速分解過程（詳見以下）",
+  
   "farmersdelight.jei.info.straw": "乾燥的植物纖維。用刀切割雜草等獲得。",
   "farmersdelight.jei.info.knife": "刀是小型的近戰武器。他們可以從草中收穫稻梗，並從動物身上獲得掉落物。",
-  "farmersdelight.jei.info.ham": "豬或豬布獸腿上的肉。你需要用比劍更輕的東西來切……"
+  "farmersdelight.jei.info.ham": "豬或豬布獸腿上的肉。你需要用比劍更輕的東西來切……",
+  "farmersdelight.jei.info.wild_cabbages": "野生高麗菜多半生長於沙灘沿岸。",
+  "farmersdelight.jei.info.wild_beetroots": "野生甜菜根多半生長於沙灘沿岸。",
+  "farmersdelight.jei.info.wild_carrots": "野生胡蘿蔔多半生長於平原及森林中。",
+  "farmersdelight.jei.info.wild_onions": "野生洋蔥多半生長於平原及森林中。",
+  "farmersdelight.jei.info.wild_potatoes": "野生馬鈴薯多半生長於較寒冷的地區，例如山峰和針葉林。",
+  "farmersdelight.jei.info.wild_tomatoes": "野生番茄藤多半生長於較乾燥的地區，例如莽原和沙漠。",
+  "farmersdelight.jei.info.wild_rice": "野生水稻多半生長於較潮溼的地區，例如沼澤和叢林。"
 }

@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
+  "group": "fd_rope",
   "ingredients": [
     {
       "item": "farmersdelight:safety_net"

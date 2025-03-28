@@ -41,6 +41,12 @@ public class ItemTags extends ItemTagsProvider
 	private void registerMinecraftTags() {
 		tag(net.minecraft.tags.ItemTags.TALL_FLOWERS).add(ModItems.WILD_RICE.get());
 		tag(net.minecraft.tags.ItemTags.PIGLIN_LOVED).add(ModItems.GOLDEN_KNIFE.get());
+		tag(net.minecraft.tags.ItemTags.SIGNS).addTag(ModTags.CANVAS_SIGNS);
+		tag(net.minecraft.tags.ItemTags.HANGING_SIGNS).addTag(ModTags.HANGING_CANVAS_SIGNS);
+		tag(net.minecraft.tags.ItemTags.VILLAGER_PLANTABLE_SEEDS)
+				.add(ModItems.CABBAGE_SEEDS.get())
+				.add(ModItems.TOMATO_SEEDS.get())
+				.add(ModItems.ONION.get());
 
 		tag(net.minecraft.tags.ItemTags.DURABILITY_ENCHANTABLE).addTag(ModTags.KNIVES).add(ModItems.SKILLET.get());
 		tag(net.minecraft.tags.ItemTags.WEAPON_ENCHANTABLE).addTag(ModTags.KNIVES).add(ModItems.SKILLET.get());
@@ -168,6 +174,15 @@ public class ItemTags extends ItemTagsProvider
 				.add(ModItems.SHEPHERDS_PIE_BLOCK.get())
 				.add(ModItems.STUFFED_PUMPKIN_BLOCK.get())
 				.add(ModItems.RICE_ROLL_MEDLEY_BLOCK.get());
+		tag(Tags.Items.FOODS_SOUP)
+				.add(ModItems.BONE_BROTH.get())
+				.add(ModItems.BEEF_STEW.get())
+				.add(ModItems.VEGETABLE_SOUP.get())
+				.add(ModItems.CHICKEN_SOUP.get())
+				.add(ModItems.FISH_STEW.get())
+				.add(ModItems.PUMPKIN_SOUP.get())
+				.add(ModItems.BAKED_COD_STEW.get())
+				.add(ModItems.NOODLE_SOUP.get());
 
 		tag(Tags.Items.TOOLS).addTag(CommonTags.TOOLS_KNIFE);
 		tag(Tags.Items.SEEDS).add(ModItems.CABBAGE_SEEDS.get(), ModItems.RICE.get(), ModItems.TOMATO_SEEDS.get());
@@ -207,6 +222,16 @@ public class ItemTags extends ItemTagsProvider
 		tag(CommonTags.FOODS_COOKED_COD).add(Items.COOKED_COD, ModItems.COOKED_COD_SLICE.get());
 		tag(CommonTags.FOODS_COOKED_SALMON).add(Items.COOKED_SALMON, ModItems.COOKED_SALMON_SLICE.get());
 		tag(CommonTags.FOODS_COOKED_EGG).add(ModItems.FRIED_EGG.get());
+
+		tag(CommonTags.STORAGE_BLOCKS_ITEM_CARROT).add(ModItems.CARROT_CRATE.get());
+		tag(CommonTags.STORAGE_BLOCKS_ITEM_POTATO).add(ModItems.POTATO_CRATE.get());
+		tag(CommonTags.STORAGE_BLOCKS_ITEM_BEETROOT).add(ModItems.BEETROOT_CRATE.get());
+		tag(CommonTags.STORAGE_BLOCKS_ITEM_CABBAGE).add(ModItems.CABBAGE_CRATE.get());
+		tag(CommonTags.STORAGE_BLOCKS_ITEM_TOMATO).add(ModItems.TOMATO_CRATE.get());
+		tag(CommonTags.STORAGE_BLOCKS_ITEM_ONION).add(ModItems.ONION_CRATE.get());
+		tag(CommonTags.STORAGE_BLOCKS_ITEM_RICE).add(ModItems.RICE_BAG.get());
+		tag(CommonTags.STORAGE_BLOCKS_ITEM_RICE_PANICLE).add(ModItems.RICE_BALE.get());
+		tag(CommonTags.STORAGE_BLOCKS_ITEM_STRAW).add(ModItems.STRAW_BALE.get());
 
 		tag(CommonTags.TOOLS_KNIFE).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get(), ModItems.NETHERITE_KNIFE.get());
 	}

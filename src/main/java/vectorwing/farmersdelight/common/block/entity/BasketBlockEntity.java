@@ -105,11 +105,8 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 	}
 
 	private static boolean canInsertItemInSlot(Container inventoryIn, ItemStack stack, int index, @Nullable Direction side) {
-		if (!inventoryIn.canPlaceItem(index, stack)) {
-			return false;
-		} else {
-			return !(inventoryIn instanceof WorldlyContainer) || ((WorldlyContainer) inventoryIn).canPlaceItemThroughFace(index, stack, side);
-		}
+		if (!inventoryIn.canPlaceItem(index, stack)) return false;
+		return !(inventoryIn instanceof WorldlyContainer) || ((WorldlyContainer) inventoryIn).canPlaceItemThroughFace(index, stack, side);
 	}
 
 	private static boolean canCombine(ItemStack stack1, ItemStack stack2) {

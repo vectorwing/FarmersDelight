@@ -54,6 +54,9 @@ public class ModTags
 	// Candle cakes that should drop the vanilla cake slice when sliced by a knife.
 	public static final TagKey<Block> DROPS_CAKE_SLICE = modBlockTag("drops_cake_slice");
 
+	// Blocks which cause Campfires to emit signal smoke when placed underneath them.
+	public static final TagKey<Block> CAMPFIRE_SIGNAL_SMOKE = modBlockTag("campfire_signal_smoke");
+
 	// -- Items --
 
 	// Items which are compatible with the Backstabbing enchantment. Populated by #tools/knives.

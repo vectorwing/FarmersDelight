@@ -1,0 +1,18 @@
+{
+  "type": "farmersdelight:replace_item",
+  "conditions": [
+    {
+      "condition": "minecraft:match_tool",
+      "predicate": {
+        "items": "#farmersdelight:tools/knives"
+      }
+    },
+    {
+      "condition": "block_state_property",
+      "block": "minecraft:pumpkin"
+    }
+  ],
+  "removed_item": "minecraft:pumpkin",
+  "added_item": "farmersdelight:pumpkin_slice",
+  "count": 4
+}

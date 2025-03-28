@@ -11,8 +11,6 @@ import net.minecraft.world.level.material.FluidState;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.world.item.Item.Properties;
-
 public class RopeItem extends FuelBlockItem
 {
 	public RopeItem(Block block, Properties properties) {
@@ -27,42 +25,39 @@ public class RopeItem extends FuelBlockItem
 		BlockState state = level.getBlockState(pos);
 		Block block = this.getBlock();
 
-		if (state.getBlock() != block) {
-			return context;
+		if (state.getBlock() != block) return context;
+		Direction direction;
+		if (context.isSecondaryUseActive()) {
+			direction = context.getClickedFace();
 		} else {
-			Direction direction;
-			if (context.isSecondaryUseActive()) {
-				direction = context.getClickedFace();
-			} else {
-				direction = Direction.DOWN;
-			}
-
-			int i = 0;
-			BlockPos.MutableBlockPos blockpos$mutable = (new BlockPos.MutableBlockPos(pos.getX(), pos.getY(), pos.getZ())).move(direction);
-
-			while (i < 256) {
-				state = level.getBlockState(blockpos$mutable);
-				if (state.getBlock() != this.getBlock()) {
-					FluidState fluid = state.getFluidState();
-					if (!fluid.is(FluidTags.WATER) && !fluid.isEmpty()) {
-						return null;
-					}
-					if (state.canBeReplaced(context)) {
-						return BlockPlaceContext.at(context, blockpos$mutable, direction);
-					}
-					break;
-				}
-
-				if (direction != Direction.DOWN) {
-					return context;
-				}
-
-				blockpos$mutable.move(direction);
-				++i;
-			}
-
-			return null;
+			direction = Direction.DOWN;
 		}
+
+		int i = 0;
+		BlockPos.MutableBlockPos blockpos$mutable = (new BlockPos.MutableBlockPos(pos.getX(), pos.getY(), pos.getZ())).move(direction);
+
+		while (i < 256) {
+			state = level.getBlockState(blockpos$mutable);
+			if (state.getBlock() != this.getBlock()) {
+				FluidState fluid = state.getFluidState();
+				if (!fluid.is(FluidTags.WATER) && !fluid.isEmpty()) {
+					return null;
+				}
+				if (state.canBeReplaced(context)) {
+					return BlockPlaceContext.at(context, blockpos$mutable, direction);
+				}
+				break;
+			}
+
+			if (direction != Direction.DOWN) {
+				return context;
+			}
+
+			blockpos$mutable.move(direction);
+			++i;
+		}
+
+		return null;
 	}
 
 	@Override

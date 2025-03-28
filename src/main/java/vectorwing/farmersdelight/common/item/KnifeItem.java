@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.common.item;
 
-import com.google.common.collect.Sets;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -27,6 +26,8 @@ import net.minecraft.world.level.block.CarvedPumpkinBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.event.entity.living.LivingKnockBackEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -38,6 +39,8 @@ import java.util.Set;
 
 public class KnifeItem extends DiggerItem
 {
+	public static final Set<ItemAbility> KNIFE_ACTIONS = Set.of(ItemAbilities.SHEARS_CARVE, ItemAbilities.SWORD_DIG);
+
 	public KnifeItem(Tier tier, Properties properties) {
 		super(tier, ModTags.MINEABLE_WITH_KNIFE, properties);
 	}
@@ -49,8 +52,11 @@ public class KnifeItem extends DiggerItem
 
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
 		return true;
+	}
+
+	public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+		stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
 	}
 
 	@Override
@@ -59,6 +65,18 @@ public class KnifeItem extends DiggerItem
 			return false;
 		}
 		return super.isPrimaryItemFor(stack, enchantment);
+	}
+
+	@Override
+	public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+		if (enchantment.is(Enchantments.SWEEPING_EDGE)) {
+			return false;
+		}
+		return super.supportsEnchantment(stack, enchantment);
+	}
+
+	public boolean canPerformAction(ItemStack stack, ItemAbility toolAction) {
+		return KNIFE_ACTIONS.contains(toolAction);
 	}
 
 	@EventBusSubscriber(modid = FarmersDelight.MODID, bus = EventBusSubscriber.Bus.GAME)
@@ -140,17 +158,4 @@ public class KnifeItem extends DiggerItem
 			return InteractionResult.PASS;
 		}
 	}
-
-//	@Override
-//	public boolean canApplyAtEnchantingTable(ItemStack stack, net.minecraft.world.item.enchantment.Enchantment enchantment) {
-//		Set<Enchantment> ALLOWED_ENCHANTMENTS = Sets.newHashSet(Enchantments.SHARPNESS, Enchantments.SMITE, Enchantments.BANE_OF_ARTHROPODS, Enchantments.KNOCKBACK, Enchantments.FIRE_ASPECT, Enchantments.MOB_LOOTING);
-//		if (ALLOWED_ENCHANTMENTS.contains(enchantment)) {
-//			return true;
-//		}
-//		Set<Enchantment> DENIED_ENCHANTMENTS = Sets.newHashSet(Enchantments.BLOCK_FORTUNE);
-//		if (DENIED_ENCHANTMENTS.contains(enchantment)) {
-//			return false;
-//		}
-//		return enchantment.category.canEnchant(stack.getItem());
-//	}
 }

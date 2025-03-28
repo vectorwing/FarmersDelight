@@ -294,7 +294,9 @@
   "farmersdelight.block.cutting_board.invalid_item": "Isto não parece cortável...",
   "farmersdelight.block.cutting_board.invalid_tool": "Talvez com outra ferramenta...",
   "farmersdelight.block.skillet.invalid_item": "Isto não pode ser cozido...",
+  "farmersdelight.block.skillet.underwater": "Não dá para cozinhar dentro d'água...",
   "farmersdelight.item.skillet.how_to_cook": "Use sua outra mão para segurar ingredientes!",
+  "farmersdelight.item.skillet.underwater": "Não dá para cozinhar embaixo d'água...",
 
   "death.attack.farmersdelight.stove": "%1$s foi grelhado à perfeição",
   "death.attack.farmersdelight.stove.player": "%1$s foi jogado na grelha por Chef %2$s",
