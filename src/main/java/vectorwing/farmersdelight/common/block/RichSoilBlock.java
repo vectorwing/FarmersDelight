@@ -41,7 +41,7 @@ public class RichSoilBlock extends Block
 		}
 
 		// Convert mushrooms to colonies if it's dark enough
-		var newBlock = MushroomColonyBlock.COLONIES.get(aboveBlock.asItem());
+		var newBlock = MushroomColonyBlock.getMushroomColonies().get(aboveBlock.asItem());
 
 		if (newBlock != null) {
 			level.setBlockAndUpdate(abovePos, newBlock.defaultBlockState());

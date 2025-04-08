@@ -47,7 +47,7 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 		.apply(builder, MushroomColonyBlock::new)
 	);
 
-	public static HashMap<ItemLike, MushroomColonyBlock> COLONIES = new HashMap<>();
+	private static HashMap<ItemLike, Block> COLONIES = new HashMap<>();
 	public static final int PLACING_LIGHT_LEVEL = 13;
 	public final ItemLike mushroomType;
 
@@ -125,6 +125,10 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 			level.setBlock(pos, state.setValue(COLONY_AGE, age + 1), 2);
 			CommonHooks.fireCropGrowPost(level, pos, state);
 		}
+	}
+
+	public static HashMap<ItemLike, Block> getMushroomColonies() {
+		return COLONIES;
 	}
 
 	@Override
