@@ -25,10 +25,26 @@
       },
       "trigger": "minecraft:consume_item"
     },
+    "bone_broth": {
+      "conditions": {
+        "item": {
+          "items": "farmersdelight:bone_broth"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
     "chicken_soup": {
       "conditions": {
         "item": {
           "items": "farmersdelight:chicken_soup"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "cooked_rice": {
+      "conditions": {
+        "item": {
+          "items": "farmersdelight:cooked_rice"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -204,16 +220,22 @@
       "mixed_salad"
     ],
     [
-      "beef_stew"
+      "cooked_rice"
     ],
     [
-      "chicken_soup"
+      "bone_broth"
+    ],
+    [
+      "beef_stew"
     ],
     [
       "vegetable_soup"
     ],
     [
       "fish_stew"
+    ],
+    [
+      "chicken_soup"
     ],
     [
       "fried_rice"
@@ -228,22 +250,28 @@
       "noodle_soup"
     ],
     [
+      "bacon_and_eggs"
+    ],
+    [
+      "ratatouille"
+    ],
+    [
+      "steak_and_potatoes"
+    ],
+    [
       "pasta_with_meatballs"
     ],
     [
       "pasta_with_mutton_chop"
     ],
     [
+      "mushroom_rice"
+    ],
+    [
       "roasted_mutton_chops"
     ],
     [
       "vegetable_noodles"
-    ],
-    [
-      "steak_and_potatoes"
-    ],
-    [
-      "ratatouille"
     ],
     [
       "squid_ink_pasta"
@@ -262,12 +290,6 @@
     ],
     [
       "shepherds_pie"
-    ],
-    [
-      "bacon_and_eggs"
-    ],
-    [
-      "mushroom_rice"
     ]
   ],
   "rewards": {

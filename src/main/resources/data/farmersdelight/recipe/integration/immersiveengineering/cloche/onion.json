@@ -11,11 +11,11 @@
   },
   "render": {
     "type": "immersiveengineering:crop",
-    "value": "farmersdelight:onions"
+    "block": "farmersdelight:onions"
   },
   "results": [
     {
-      "Count": 2,
+      "count": 2,
       "id": "farmersdelight:onion"
     }
   ],

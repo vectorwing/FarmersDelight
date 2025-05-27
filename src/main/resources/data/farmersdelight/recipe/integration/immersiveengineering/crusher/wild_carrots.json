@@ -6,6 +6,16 @@
     }
   ],
   "type": "immersiveengineering:crusher",
+  "energy": 3200,
+  "input": {
+    "item": "farmersdelight:wild_carrots"
+  },
+  "result": {
+    "basePredicate": {
+      "item": "minecraft:light_gray_dye"
+    },
+    "count": 2
+  },
   "secondaries": [
     {
       "chance": 0.1,
@@ -15,15 +25,5 @@
         "count": 1
       }
     }
-  ],
-  "result": {
-    "basePredicate": {
-      "item": "minecraft:light_gray_dye"
-    },
-    "count": 2
-  },
-  "input": {
-    "item": "farmersdelight:wild_carrots"
-  },
-  "energy": 3200
+  ]
 }

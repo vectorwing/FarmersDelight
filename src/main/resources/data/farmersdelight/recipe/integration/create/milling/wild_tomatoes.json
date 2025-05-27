@@ -13,11 +13,11 @@
   ],
   "results": [
     {
-      "item": "farmersdelight:tomato_seeds",
+      "id": "farmersdelight:tomato_seeds",
       "count": 1
     },
     {
-      "item": "minecraft:green_dye",
+      "id": "minecraft:green_dye",
       "count": 1
     }
   ],

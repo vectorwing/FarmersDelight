@@ -184,8 +184,8 @@
   "effect.farmersdelight.nourishment": "Výživa",
   "effect.farmersdelight.comfort": "Saturácia",
 
-  "effect.farmersdelight.nourishment.0.desc": "Zabraňuje strate hladu, okrem prípadov, keď sa na liečenie poškodenia používa saturácia.",
-  "effect.farmersdelight.comfort.0.desc": "Poskytuje prirodzenú regeneráciu bez ohľadu na to, aký máte hlad.",
+  "effect.farmersdelight.nourishment.description": "Zabraňuje strate hladu, okrem prípadov, keď sa na liečenie poškodenia používa saturácia.",
+  "effect.farmersdelight.comfort.description": "Poskytuje prirodzenú regeneráciu bez ohľadu na to, aký máte hlad.",
   
   "enchantment.farmersdelight.backstabbing": "Útok zozadu",
   "enchantment.farmersdelight.backstabbing.desc": "Zosilňuje poškodenie pri zasiahnutí cieľa zozadu.",

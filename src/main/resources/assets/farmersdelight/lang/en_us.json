@@ -205,8 +205,8 @@
   "effect.farmersdelight.nourishment": "Nourishment",
   "effect.farmersdelight.comfort": "Comfort",
 
-  "effect.farmersdelight.nourishment.0.desc": "Prevents hunger loss, except when using saturation to heal damage.",
-  "effect.farmersdelight.comfort.0.desc": "Provides natural regeneration, regardless of how hungry you are.",
+  "effect.farmersdelight.nourishment.description": "Prevents hunger loss, except when using saturation to heal damage.",
+  "effect.farmersdelight.comfort.description": "Provides natural regeneration, regardless of how hungry you are.",
 
   "enchantment.farmersdelight.backstabbing": "Backstabbing",
   "enchantment.farmersdelight.backstabbing.desc": "Amplifies damage when striking a target from behind.",
@@ -294,7 +294,9 @@
   "farmersdelight.block.cutting_board.invalid_item": "This doesn't seem cuttable...",
   "farmersdelight.block.cutting_board.invalid_tool": "Maybe with a different tool...",
   "farmersdelight.block.skillet.invalid_item": "This can't be cooked...",
+  "farmersdelight.block.skillet.underwater": "Can't cook while flooded...",
   "farmersdelight.item.skillet.how_to_cook": "Use your other hand to hold ingredients!",
+  "farmersdelight.item.skillet.underwater": "Can't cook underwater...",
 
   "death.attack.farmersdelight.stove": "%1$s was grilled to perfection",
   "death.attack.farmersdelight.stove.player": "%1$s was thrown on the grill by Chef %2$s",
@@ -307,6 +309,7 @@
   "farmersdelight.jei.decomposition.fluid": "Sped up by adjacent water",
   "farmersdelight.jei.decomposition.accelerators": "Sped up by adjacent activators (see below)",
 
+  "farmersdelight.jei.info.dough": "Wheat can be turned into Dough by crafting it with a Water Bucket. But don't worry, the bucket's water won't be depleted!",
   "farmersdelight.jei.info.straw": "A dry plant fiber used in crafting. Obtained by cutting grassy crops and plants with a Knife.",
   "farmersdelight.jei.info.knife": "A lightweight melee weapon, with fast swings and gentle damage.\n\nThey can harvest Straw from grasses, and guarantee secondary drops from animals.",
   "farmersdelight.jei.info.ham": "A large cut of meat from a Pig or Hoglin's leg.\n\nYou will need something lighter than a Sword to cut one...",

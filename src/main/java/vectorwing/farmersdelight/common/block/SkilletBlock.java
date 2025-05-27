@@ -21,6 +21,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -30,6 +31,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -43,7 +46,7 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 @SuppressWarnings("deprecation")
-public class SkilletBlock extends BaseEntityBlock
+public class SkilletBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 {
 	public static final MapCodec<SkilletBlock> CODEC = simpleCodec(SkilletBlock::new);
 
@@ -51,13 +54,14 @@ public class SkilletBlock extends BaseEntityBlock
 
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty SUPPORT = BooleanProperty.create("support");
+	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
 	protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 4.0D, 15.0D);
 	protected static final VoxelShape SHAPE_WITH_TRAY = Shapes.or(SHAPE, Block.box(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
 
 	public SkilletBlock(BlockBehaviour.Properties properties) {
 		super(properties);
-		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(SUPPORT, false));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(SUPPORT, false).setValue(WATERLOGGED, false));
 	}
 
 	@Override
@@ -123,39 +127,38 @@ public class SkilletBlock extends BaseEntityBlock
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		Level level = context.getLevel();
+		FluidState fluid = level.getFluidState(context.getClickedPos());
+
 		return this.defaultBlockState()
 				.setValue(FACING, context.getHorizontalDirection())
+				.setValue(WATERLOGGED, fluid.getType() == Fluids.WATER)
 				.setValue(SUPPORT, getTrayState(context.getLevel(), context.getClickedPos()));
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+		if (state.getValue(WATERLOGGED)) {
+			level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+		}
 		if (facing.getAxis().equals(Direction.Axis.Y)) {
-			return state.setValue(SUPPORT, getTrayState(world, currentPos));
+			return state.setValue(SUPPORT, getTrayState(level, currentPos));
 		}
 		return state;
 	}
 
 	@Override
 	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
-		// TODO: Verify if this works properly on a server.
-		ItemStack stack = super.getCloneItemStack(level, pos, state);
-		Optional<SkilletBlockEntity> blockEntity = level.getBlockEntity(pos, ModBlockEntityTypes.SKILLET.get());
-		return blockEntity.map(SkilletBlockEntity::getSkilletAsItem).orElse(stack);
+		if (level.getBlockEntity(pos) instanceof SkilletBlockEntity skillet) {
+			return skillet.getSkilletAsItem();
+		}
 
-//		SkilletBlockEntity skilletEntity = (SkilletBlockEntity) level.getBlockEntity(pos);
-//		CompoundTag nbt = new CompoundTag();
-//		if (skilletEntity != null) {
-//			skilletEntity.writeSkilletItem(nbt);
-//		}
-//		if (!nbt.isEmpty()) {
-//			stack = ItemStack.of(nbt.getCompound("Skillet"));
-//		}
+		return super.getCloneItemStack(level, pos, state);
 	}
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(FACING, SUPPORT);
+		builder.add(FACING, SUPPORT, WATERLOGGED);
 	}
 
 	@Override
@@ -171,6 +174,11 @@ public class SkilletBlock extends BaseEntityBlock
 				}
 			}
 		}
+	}
+
+	@Override
+	public FluidState getFluidState(BlockState state) {
+		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 
 	@Nullable

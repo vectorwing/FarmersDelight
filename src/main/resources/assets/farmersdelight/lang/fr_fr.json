@@ -205,8 +205,8 @@
   "effect.farmersdelight.nourishment": "Bien mangé",
   "effect.farmersdelight.comfort": "Confort",
 
-  "effect.farmersdelight.nourishment.0.desc": "Empêche la perte de faim, sauf lors de l'utilisation de la saturation pour soigner les dégâts.",
-  "effect.farmersdelight.comfort.0.desc": "Vous rend immunisé contre la faim, la lenteur et la faiblesse.",
+  "effect.farmersdelight.nourishment.description": "Empêche la perte de faim, sauf lors de l'utilisation de la saturation pour soigner les dégâts.",
+  "effect.farmersdelight.comfort.description": "Vous rend immunisé contre la faim, la lenteur et la faiblesse.",
 
   "enchantment.farmersdelight.backstabbing": "Poignardage par derrière",
   "enchantment.farmersdelight.backstabbing.desc": "Augmente les dégâts quand une cible est frappée par derrière.",

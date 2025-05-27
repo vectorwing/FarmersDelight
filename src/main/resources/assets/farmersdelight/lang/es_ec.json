@@ -148,8 +148,8 @@
   "effect.farmersdelight.nourishment": "Nutrido",
   "effect.farmersdelight.comfort": "Bienestar",
 
-  "effect.farmersdelight.nourishment.0.desc": "Evita la pérdida de hambre, excepto cuando se utiliza la saturación para curar el daño.",
-  "effect.farmersdelight.comfort.0.desc": "Te hace inmune al Hambre, la Lentitud y la Debilidad.",
+  "effect.farmersdelight.nourishment.description": "Evita la pérdida de hambre, excepto cuando se utiliza la saturación para curar el daño.",
+  "effect.farmersdelight.comfort.description": "Te hace inmune al Hambre, la Lentitud y la Debilidad.",
 
   "enchantment.farmersdelight.backstabbing": "Puñaladas por la espalda",
   "enchantment.farmersdelight.backstabbing.desc": "Amplifica el daño al golpear a un objetivo por detrás.",

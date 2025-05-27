@@ -3,9 +3,6 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "minecraft:water_bucket"
-    },
-    {
       "item": "minecraft:wheat"
     },
     {
@@ -13,6 +10,9 @@
     },
     {
       "item": "minecraft:wheat"
+    },
+    {
+      "tag": "c:eggs"
     }
   ],
   "result": {

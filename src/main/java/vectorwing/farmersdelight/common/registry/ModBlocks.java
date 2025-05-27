@@ -281,9 +281,8 @@ public class ModBlocks
 			() -> new OnionBlock(Block.Properties.ofFullCopy(Blocks.WHEAT)));
 	public static final Supplier<Block> BUDDING_TOMATO_CROP = BLOCKS.register("budding_tomatoes",
 			() -> new BuddingTomatoBlock(Block.Properties.ofFullCopy(Blocks.WHEAT)));
-	// TODO: Figure out how to make Tomato Crop waterproof again.
 	public static final Supplier<Block> TOMATO_CROP = BLOCKS.register("tomatoes",
-			() -> new TomatoVineBlock(Block.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)));
+			() -> new TomatoVineBlock(Block.Properties.ofFullCopy(Blocks.WHEAT)));
 	public static final Supplier<Block> RICE_CROP = BLOCKS.register("rice",
 			() -> new RiceBlock(Block.Properties.ofFullCopy(Blocks.WHEAT).strength(0.2F)));
 	public static final Supplier<Block> RICE_CROP_PANICLES = BLOCKS.register("rice_panicles",

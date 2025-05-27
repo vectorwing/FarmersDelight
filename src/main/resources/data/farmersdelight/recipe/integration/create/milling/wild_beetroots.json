@@ -13,11 +13,11 @@
   ],
   "results": [
     {
-      "item": "minecraft:beetroot_seeds",
+      "id": "minecraft:beetroot_seeds",
       "count": 1
     },
     {
-      "item": "minecraft:red_dye",
+      "id": "minecraft:red_dye",
       "count": 1
     }
   ],

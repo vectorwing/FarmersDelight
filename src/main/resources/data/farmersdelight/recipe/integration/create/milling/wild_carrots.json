@@ -13,11 +13,11 @@
   ],
   "results": [
     {
-      "item": "minecraft:light_gray_dye",
+      "id": "minecraft:light_gray_dye",
       "count": 2
     },
     {
-      "item": "minecraft:lime_dye",
+      "id": "minecraft:lime_dye",
       "count": 1,
       "chance": 0.1
     }

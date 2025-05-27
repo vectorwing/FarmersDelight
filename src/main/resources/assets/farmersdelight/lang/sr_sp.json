@@ -174,8 +174,8 @@
   "effect.farmersdelight.nourishment": "Ухрањеност",
   "effect.farmersdelight.comfort": "Удобност",
 
-  "effect.farmersdelight.nourishment.0.desc": "Спречава губитак глади, осим током коришћења засичћености за исцеливање повреда.",
-  "effect.farmersdelight.comfort.0.desc": "Обезбеђује природну регенерацију, без обзира колико си гладан.",
+  "effect.farmersdelight.nourishment.description": "Спречава губитак глади, осим током коришћења засичћености за исцеливање повреда.",
+  "effect.farmersdelight.comfort.description": "Обезбеђује природну регенерацију, без обзира колико си гладан.",
 
   "enchantment.farmersdelight.backstabbing": "Убод у леђа",
   "enchantment.farmersdelight.backstabbing.desc": "Појачава напад приликом удара мете отпозади.",

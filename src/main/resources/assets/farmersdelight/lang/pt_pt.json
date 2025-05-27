@@ -148,8 +148,8 @@
   "effect.farmersdelight.nourishment": "Nutrição",
   "effect.farmersdelight.comfort": "Conforto",
 
-  "effect.farmersdelight.nourishment.0.desc": "Previne o apetite, exceto ao usar saturação para curar dano.",
-  "effect.farmersdelight.comfort.0.desc": "Torna-te imune à Fome, Lentidão e Fraqueza.",
+  "effect.farmersdelight.nourishment.description": "Previne o apetite, exceto ao usar saturação para curar dano.",
+  "effect.farmersdelight.comfort.description": "Torna-te imune à Fome, Lentidão e Fraqueza.",
 
   "enchantment.farmersdelight.backstabbing": "Facada nas costas",
   "enchantment.farmersdelight.backstabbing.desc": "Amplifica dano ao atacar o alvo por trás.",

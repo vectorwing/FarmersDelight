@@ -39,6 +39,7 @@ public class Configuration
 	public static final String CATEGORY_WORLD = "world";
 	public static ModConfigSpec.BooleanValue GENERATE_FD_CHEST_LOOT;
 	public static ModConfigSpec.BooleanValue GENERATE_VILLAGE_COMPOST_HEAPS;
+  public static ModConfigSpec.BooleanValue GENERATE_VILLAGE_FARM_FD_CROPS;
 
 	// CLIENT
 	public static ModConfigSpec.BooleanValue NOURISHED_HUNGER_OVERLAY;
@@ -99,8 +100,11 @@ public class Configuration
 		COMMON_BUILDER.push(CATEGORY_WORLD);
 		GENERATE_FD_CHEST_LOOT = COMMON_BUILDER.comment("Should this mod add some of its items (ropes, seeds, knives, meals etc.) as extra chest loot across Minecraft?")
 				.define("generateFDChestLoot", true);
-		GENERATE_VILLAGE_COMPOST_HEAPS = COMMON_BUILDER.comment("Generate Compost Heaps across all village biomes")
+		GENERATE_VILLAGE_COMPOST_HEAPS = COMMON_BUILDER.comment("Should FD generate Compost Heaps across all village biomes?")
 				.define("genVillageCompostHeaps", true);
+    GENERATE_VILLAGE_FARM_FD_CROPS = COMMON_BUILDER.comment("Should FD crops show up planted randomly in various village farms?")
+				.define("genFDCropsOnVillageFarms", true);
+
 		COMMON_BUILDER.pop();
 
 		COMMON_CONFIG = COMMON_BUILDER.build();

@@ -171,8 +171,8 @@
   "effect.farmersdelight.nourishment": "Næring",
   "effect.farmersdelight.comfort": "Komfort",
 
-  "effect.farmersdelight.nourishment.0.desc": "Forhindrer sult, med unntak når metthet benyttes for å helberede skade.",
-  "effect.farmersdelight.comfort.0.desc": "Gjør deg immun mot Sult, Treghet og Svakhet.",
+  "effect.farmersdelight.nourishment.description": "Forhindrer sult, med unntak når metthet benyttes for å helberede skade.",
+  "effect.farmersdelight.comfort.description": "Gjør deg immun mot Sult, Treghet og Svakhet.",
 
   "enchantment.farmersdelight.backstabbing": "Bakholdsangrep",
   "enchantment.farmersdelight.backstabbing.desc": "Øker utført skade når du slår et mål bakfra.",

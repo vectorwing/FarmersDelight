@@ -184,8 +184,8 @@
   "effect.farmersdelight.nourishment": "Nutrimento",
   "effect.farmersdelight.comfort": "Benessere",
 
-  "effect.farmersdelight.nourishment.0.desc": "Impedisce la perdita della fame, tranne quando si utilizza saturazione per guarire i danni.",
-  "effect.farmersdelight.comfort.0.desc": "Ti rende immuno alla fame, lentezza e debolezza.",
+  "effect.farmersdelight.nourishment.description": "Impedisce la perdita della fame, tranne quando si utilizza saturazione per guarire i danni.",
+  "effect.farmersdelight.comfort.description": "Ti rende immuno alla fame, lentezza e debolezza.",
 
   "enchantment.farmersdelight.backstabbing": "Pugnalata alla schiena",
   "enchantment.farmersdelight.backstabbing.desc": "Amplifica i danni quando colpisci il bersaglio da dietro.",

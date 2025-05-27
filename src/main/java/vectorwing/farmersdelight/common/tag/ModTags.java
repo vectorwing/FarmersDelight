@@ -54,10 +54,19 @@ public class ModTags
 	// Candle cakes that should drop the vanilla cake slice when sliced by a knife.
 	public static final TagKey<Block> DROPS_CAKE_SLICE = modBlockTag("drops_cake_slice");
 
+	// Blocks which cause Campfires to emit signal smoke when placed underneath them.
+	public static final TagKey<Block> CAMPFIRE_SIGNAL_SMOKE = modBlockTag("campfire_signal_smoke");
+
 	// -- Items --
 
 	// Items which are compatible with the Backstabbing enchantment. Populated by #tools/knives.
 	public static final TagKey<Item> KNIFE_ENCHANTABLE = modItemTag("enchantable/knife");
+
+	// Items that represent a meal: prepared food contained in a bowl or plate.
+	public static final TagKey<Item> MEALS = modItemTag("meals");
+
+	// Items that represent a drink: a bottled consumable that isn't a potion.
+	public static final TagKey<Item> DRINKS = modItemTag("drinks");
 
 	// Items that represent the wild form of a farmable crop.
 	public static final TagKey<Item> WILD_CROPS_ITEM = modItemTag("wild_crops");

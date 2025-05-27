@@ -184,8 +184,8 @@
   "effect.farmersdelight.nourishment": "Beslenme",
   "effect.farmersdelight.comfort": "Konfor",
 
-  "effect.farmersdelight.nourishment.0.desc": "İyileşmek için doygunluğun kullanıldığı durumlar dışında açlık kaybetmeni önler.",
-  "effect.farmersdelight.comfort.0.desc": "Ne kadar aç olursanız olun doğal yenilenme sağlar.",
+  "effect.farmersdelight.nourishment.description": "İyileşmek için doygunluğun kullanıldığı durumlar dışında açlık kaybetmeni önler.",
+  "effect.farmersdelight.comfort.description": "Ne kadar aç olursanız olun doğal yenilenme sağlar.",
 
   "enchantment.farmersdelight.backstabbing": "Sırtından Bıçaklama",
   "enchantment.farmersdelight.backstabbing.desc": "Bir hedefe arkadan vururkenki hasarı artırır.",

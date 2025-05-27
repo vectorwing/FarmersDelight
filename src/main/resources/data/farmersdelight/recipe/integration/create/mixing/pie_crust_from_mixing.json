@@ -17,13 +17,14 @@
       "item": "create:wheat_flour"
     },
     {
-      "fluidTag": "forge:milk",
-      "amount": 250
+      "type": "fluid_tag",
+      "amount": 250,
+      "fluid_tag": "c:milk"
     }
   ],
   "results": [
     {
-      "item": "farmersdelight:pie_crust",
+      "id": "farmersdelight:pie_crust",
       "count": 1
     }
   ]

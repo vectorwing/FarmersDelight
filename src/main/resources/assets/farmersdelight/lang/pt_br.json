@@ -205,8 +205,8 @@
   "effect.farmersdelight.nourishment": "Nutrição",
   "effect.farmersdelight.comfort": "Conforto",
 
-  "effect.farmersdelight.nourishment.0.desc": "Previne perda de fome, exceto quando puder curar-se com saturação.",
-  "effect.farmersdelight.comfort.0.desc": "Concede regeneração natural, não importa o quão faminto você estiver.",
+  "effect.farmersdelight.nourishment.description": "Previne perda de fome, exceto quando puder curar-se com saturação.",
+  "effect.farmersdelight.comfort.description": "Concede regeneração natural, não importa o quão faminto você estiver.",
 
   "enchantment.farmersdelight.backstabbing": "Punhalada nas costas",
   "enchantment.farmersdelight.backstabbing.desc": "Amplifica o dano ao atingir um alvo pelas costas.",
@@ -294,7 +294,9 @@
   "farmersdelight.block.cutting_board.invalid_item": "Isto não parece cortável...",
   "farmersdelight.block.cutting_board.invalid_tool": "Talvez com outra ferramenta...",
   "farmersdelight.block.skillet.invalid_item": "Isto não pode ser cozido...",
+  "farmersdelight.block.skillet.underwater": "Não dá para cozinhar dentro d'água...",
   "farmersdelight.item.skillet.how_to_cook": "Use sua outra mão para segurar ingredientes!",
+  "farmersdelight.item.skillet.underwater": "Não dá para cozinhar embaixo d'água...",
 
   "death.attack.farmersdelight.stove": "%1$s foi grelhado à perfeição",
   "death.attack.farmersdelight.stove.player": "%1$s foi jogado na grelha por Chef %2$s",
@@ -307,6 +309,7 @@
   "farmersdelight.jei.decomposition.fluid": "Acelerado por água ao redor",
   "farmersdelight.jei.decomposition.accelerators": "Acelerado por ativadores ao redor (veja abaixo)",
 
+  "farmersdelight.jei.info.dough": "Trigo pode ser convertido em massa usando um balde de água. Não se preocupe, a água do balde não será consumida!",
   "farmersdelight.jei.info.straw": "Uma fibra vegetal usada em criação. Obtida ao cortar plantas e hortas gramíneas com uma Faca.",
   "farmersdelight.jei.info.knife": "Uma arma leve, com ataques rápidos e dano mediano.\n\nElas podem colher Palha de plantas gramíneas, ou garantir itens secundários de animais.",
   "farmersdelight.jei.info.ham": "Um corte grande de carne, vindo da perna de Porcos ou Hoglins.\n\nVocê precisará de uma arma mais leve para obter isto...",

@@ -1,0 +1,13 @@
+{
+  "item.farmersdelight.hot_cocoa": "Hot Chocolate",
+
+  "block.farmersdelight.gray_canvas_sign": "Grey Canvas Sign",
+  "block.farmersdelight.light_gray_canvas_sign": "Light Grey Canvas Sign",
+  
+  "block.farmersdelight.gray_hanging_canvas_sign": "Grey Hanging Canvas Sign",
+  "block.farmersdelight.light_gray_hanging_canvas_sign": "Light Grey Hanging Canvas Sign",
+
+  "farmersdelight.advancement.root.desc": "A world of flavour awaits you!",
+
+  "farmersdelight.jei.info.straw": "A dry plant fibre used in crafting. Obtained by cutting grassy crops and plants with a Knife."
+}

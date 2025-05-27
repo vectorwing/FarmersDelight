@@ -25,10 +25,10 @@ body:
   - type: input
     id: forge_version
     attributes:
-      label: Forge version
-      description: "For issues regarding the Fabric port, go to: https://github.com/newhoryzon/farmers-delight-fabric/issues"
+      label: NeoForge version
+      description: "For issues regarding the Fabric port, go to: https://github.com/MehVahdJukaar/FarmersDelightRefabricated/issues"
       placeholder: | 
-        Example: 47.0.1
+        Example: 21.0.160
     validations:
       required: true
   - type: textarea

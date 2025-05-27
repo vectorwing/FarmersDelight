@@ -215,7 +215,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 			if (recipe.isPresent() && cookingPot.canCook(recipe.get().value())) {
 				didInventoryChange = cookingPot.processCooking(recipe.get(), cookingPot);
 			} else {
-				cookingPot.cookTime = 0;
+				cookingPot.cookTime = Mth.clamp(cookingPot.cookTime - 2, 0, cookingPot.cookTimeTotal);
 			}
 		} else if (cookingPot.cookTime > 0) {
 			cookingPot.cookTime = Mth.clamp(cookingPot.cookTime - 2, 0, cookingPot.cookTimeTotal);
@@ -265,11 +265,8 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 	public ItemStack getContainer() {
 		ItemStack mealStack = getMeal();
-		if (!mealStack.isEmpty() && !mealContainerStack.isEmpty()) {
-			return mealContainerStack;
-		} else {
-			return mealStack.getCraftingRemainingItem();
-		}
+		if (mealStack.isEmpty() || mealContainerStack.isEmpty()) return mealStack.getCraftingRemainingItem();
+		return mealContainerStack;
 	}
 
 	private boolean hasInput() {
@@ -281,7 +278,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 	protected boolean canCook(CookingPotRecipe recipe) {
 		if (hasInput()) {
-			ItemStack resultStack = recipe.getResultItem(this.level.registryAccess());
+			ItemStack resultStack = recipe.assemble(new RecipeWrapper(this.inventory), this.level.registryAccess());
 			if (resultStack.isEmpty()) {
 				return false;
 			} else {
@@ -312,7 +309,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 		cookTime = 0;
 		mealContainerStack = recipe.value().getOutputContainer();
-		ItemStack resultStack = recipe.value().getResultItem(this.level.registryAccess());
+		ItemStack resultStack = recipe.value().assemble(new RecipeWrapper(this.inventory), this.level.registryAccess());
 		ItemStack storedMealStack = inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
 		if (storedMealStack.isEmpty()) {
 			inventory.setStackInSlot(MEAL_DISPLAY_SLOT, resultStack.copy());
@@ -444,6 +441,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	public ItemStack useHeldItemOnMeal(ItemStack container) {
 		if (isContainerValid(container) && !getMeal().isEmpty()) {
 			container.shrink(1);
+			inventoryChanged();
 			return getMeal().split(1);
 		}
 		return ItemStack.EMPTY;
@@ -455,11 +453,8 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 	public boolean isContainerValid(ItemStack containerItem) {
 		if (containerItem.isEmpty()) return false;
-		if (!mealContainerStack.isEmpty()) {
-			return ItemStack.isSameItem(mealContainerStack, containerItem);
-		} else {
-			return ItemStack.isSameItem(getMeal(), containerItem);
-		}
+		if (!mealContainerStack.isEmpty()) return ItemStack.isSameItem(mealContainerStack, containerItem);
+		return ItemStack.isSameItem(getMeal(), containerItem);
 	}
 
 	@Override

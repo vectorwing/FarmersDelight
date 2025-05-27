@@ -7,6 +7,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.common.crafting.DoughRecipe;
 import vectorwing.farmersdelight.common.crafting.FoodServingRecipe;
 
 import java.util.function.Supplier;
@@ -20,4 +21,6 @@ public class ModRecipeSerializers
 
 	public static final Supplier<SimpleCraftingRecipeSerializer<?>> FOOD_SERVING =
 			RECIPE_SERIALIZERS.register("food_serving", () -> new SimpleCraftingRecipeSerializer<>(FoodServingRecipe::new));
+	public static final Supplier<SimpleCraftingRecipeSerializer<?>> DOUGH =
+			RECIPE_SERIALIZERS.register("dough", () -> new SimpleCraftingRecipeSerializer<>(DoughRecipe::new));
 }

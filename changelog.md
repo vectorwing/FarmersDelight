@@ -1,11 +1,152 @@
 # Changelog
 
-## 1.2.5
+## 1.2.8
+
+### Additions
+- New tags:
+  - `#meals` - Groups bowl and plate foods which are considered a "meal" by the mod. Excludes Fruit Salad and Nether Salad;
+  - `#drinks` - Groups drinkable FD items that are not potions;
+
+### Updates
+- Wheat Dough now has a simpler, less cumbersome crafting recipe using a Water Bucket:
+  - Wheat can be crafted with a Water Bucket to make Dough. The bucket's water won't be depleted, letting you craft dough indefinitely;
+  - The bucket acts as a simple technology gate to unlock this recipe;
+  - The egg recipe is still present, to not break auto-crafting setups;
+- All usages of water buckets in the mod (recipes, interactions etc) now use a common tag (thanks, thelegitdolt!):
+  - 1.20.1: `forge:buckets/water` (unofficial);
+  - 1.21.1: `c:buckets/water`;
+- Added knives to the `breaks_decorated_pots` tag;
+- Updated integration with `create:upright_on_belt` to include all bowl, plate and bottle items;
+- Updated the Master Chef advancement with additional meals;
+  - The meals reflect the "vanilla FD" entries in the `meals` tag, but does not update with the tag itself;
+- Updated effect description IDs for all langs (thanks, mpustovoi!);
+- Cooking Pot will always "cool down" when the recipe becomes invalid mid-cooking, instead of losing all cooking progress in some circumstances;
 
 ### Fixes
-- (1.21) Fixed Kelp Roll (whole) having wrng food stats;
+- Fixed Jack-O-Lantern not being mineable with a Knife;
+- Fixed Create's Potato Cannon integration;
+- Fixed Knives with Silk Touch slicing Pumpkin blocks;
+- Fixed budding bushes (Tomato)'s planting rules being hardcoded to vanilla farmland;
+- (1.21.1) Fixed Baskets and Cabinets not having an item handler capability (thanks, RaymondBlaze!);
+- (1.21.1) Updated Create Integration to the newest update's syntax (thanks, mpustovoi!);
+- (1.21.1) Fixed `storage_blocks` tags not being nested in their parent (thanks, Lucky-56!);
+- (1.21.1) Fixed FD recipe ID's not being displayed on debug info on JEI screens (thanks, Abbie5!);
+- (1.21.1) Fixed Immersive Engineering integration recipes;
+- (1.21.1) Fixed Tall-mato advancement not working properly;
+- (1.21.1) Fixed HUD overlays rendering on top of AppleSkin overlays;
+
+### Translations
+- Updated:
+  - es_es (thanks, GGlangf!);
+  - zh_cn (thanks, NumberSir!);
+
+## 1.2.7
+
+### Updates
+- Knives are now effective at mining Cactus;
+- Knives can now instamine Bamboo, just like a Sword;
+- Added the following blocks to the `unaffected_by_rich_soil` tag:
+  - Moss, Nylium, Big Dripleaf, Pink Petals and Tall Flowers;
+- Added `storage_blocks/<material>` tags for each storage block (crates, bags, bales) in the mod:
+  - In 1.20.1, the namespace is `forge`;
+  - In 1.21.1, the namespace is `c`;
+- Rich Soil is no longer hardcoded to deny tall flower boosting; they have simply been added to the `unaffected_by_rich_soil` tag;
+
+### Fixes
+- Fixed wrong UV at the bottom of Pie models when there's 1 slice left;
+- (1.21) Fix Pumpkins always dropping Pumpkin Slices without needing a knife;
+
+### Translations
+- Updated:
+  - es_cl (thanks, Ganbare-Lucifer!);
+  - id_id (thanks, ichirei!);
+  - zh_cn (thanks, Boshigiri!);
+
+## 1.2.6
+
+### Additions
+- Farmer's Delight crops will now generate in village farms!
+  - Cabbage, Tomato and Onion will randomly replace either Wheat or Potato crops in villages;
+  - Crop availability varies between arid, temperate and cold biomes;
+  - Rice is excluded, as it requires a custom structure, and Villagers can't farm it yet.
+- Added cutting recipe for Torchflower;
+
+### Fixes
+- Fix Skillet's default block state having `waterlogged=true`;
+- Fix `tomatoes` not having a map color;
+- (1.21) Fix Cutting Board recipes crashing with recipe optimization mods;
+- (1.21) Fix Anvil being able to add Sweeping Edge to knives and skillets;
+- (1.21) Fix Skillets lacking item data when placed via commands, causing crashes and inconsistencies;
+
+### Translations
+- Added:
+  - en_nz (thanks, XlosVSM!);
+  - vp_vl (thanks, SquareScreamYT!);
+- Updated:
+  - es_mx (thanks, cerealconjugo!);
+  - ja_jp (thanks, Abbage230!);
+  - zh_cn (thanks, NumberSir!);
+
+## 1.2.5
+
+### Additions
+- Farmer Villagers are now capable of planting and harvesting FD crops!
+  - They can plant, harvest and collect the drops for Cabbage, Tomato and Onion;
+  - Rice is currently excluded from this equation, as farmer AI wasn't able to handle it properly without extensive changes.
+- Added tag: `farmersdelight:campfire_signal_smoke`. Blocks in this tag will cause Campfires to emit "signal smoke", like the Hay Bale;
+
+### Updates
+- Knives are now effective at mining Pumpkins (normal and carved) and Melons;
+- Knives will harvest **4 Pumpkin Slices** when mining a Pumpkin, instead of a whole unit. Carved Pumpkins are unaffected;
+- Added Canvas Signs to the vanilla `signs` and `hanging_signs` item tags;
+- Some crafting recipes are now properly grouped in the Crafting Table's recipe book;
+- Skillets are now waterloggable, but are unable to cook underwater, either handheld or as a block. Hard to fry when the skillet is flooded!
+- `tomatoes` were temporarily removed from the `crops` tag, as bee pollination was breaking ropelogged vines unpredictably;
+  - This will likely be addressed in the next major release;
+  
+### Fixes
+- Fix meal duplication when using containers against a Cooking Pot block, then closing and reloading the world;
+
+### Fixes
+- Fix meal duplication when using containers against a Cooking Pot block, then closing and reloading the world;
+- (1.21) Fixed Kelp Roll (whole) having wrong food stats;
 - (1.21) Fixed Skillet not being enchantable in an anvil;
 - (1.21) Fixed Knives being unable to receive Knockback and Looting;
+- (1.21) Fixed Cutting Boards being unable to handle two valid tools for the same input (thanks, Lance5057!);
+- (1.21) Fixed Skillets not losing durability when attacking mobs;
+
+### Translations
+- Added:
+  - be_by (thanks, observr1!)
+  - da_dk (thanks, gohkenytp!)
+  - en_gb (thanks, akkini1!)
+  - tok (thanks, PiggyDr!)
+- Updated:
+  - de_de (thanks, joernott and DaLumma!)
+  - es_ar (thanks, axperty!)
+  - es_mx (thanks, cerealconjugo!)
+  - ja_jp (thanks, konumatakaki and EndilCrafter!)
+  - ko_kr (thanks, smoong951!)
+  - ru_ru (thanks, mpustovoi!)
+  - uk_ua (thanks, TheGridExpert!)
+  - vi_vn (thanks, godkyo98!)
+  - zh_cn (thanks, DuckDuckStudio!)
+  - zh_tw (thanks, DuckDuckStudio and FuGu0416!)
+
+## 1.2.4a (1.21)
+
+### Fixes
+- Fix crash when placing Mangrove Cabinet, Canvas Signs or Hanging Canvas Signs;
+- Fix sporadic CME crash due to item override registration;
+- Fix meal duplication when using containers against a Cooking Pot block, then closing and reloading the world;
+
+### Translations
+- Updated:
+  - de_de (thanks, DaLumma!)
+  - es_mx (thanks, cerealconjugo!)
+  - ja_jp (thanks, EndilCrafter!)
+  - ru_ru (thanks, mpustovoi!)
+  - uk_ua (thanks, TheGridExpert!)
 
 ## 1.2.4
 

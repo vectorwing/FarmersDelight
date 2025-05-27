@@ -8,7 +8,6 @@ import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.List;
 
 @ParametersAreNonnullByDefault
 public class CookingPotResultSlot extends SlotItemHandler

@@ -106,15 +106,15 @@ configurations {
 
 dependencies {
     // compile against the JEI API but do not include it at runtime
-    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
-    compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${jei_minecraft}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${jei_minecraft}-neoforge-api:${jei_version}"
     // at runtime, use the full JEI jar for Forge
-    localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+    localRuntime "mezz.jei:jei-${jei_minecraft}-neoforge:${jei_version}"
 
     compileOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}:api"
     runtimeOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}"
 
-    def ctDep = "com.blamejared.crafttweaker:CraftTweaker-neoforge-${minecraft_version}:${crafttweaker_version}"
+    def ctDep = "com.blamejared.crafttweaker:CraftTweaker-neoforge-${crafttweaker_minecraft}:${crafttweaker_version}"
     compileOnly ctDep
     runtimeOnly ctDep
 }

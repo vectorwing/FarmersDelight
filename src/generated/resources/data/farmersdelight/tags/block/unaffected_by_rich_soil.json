@@ -2,12 +2,19 @@
   "values": [
     "minecraft:grass_block",
     "minecraft:short_grass",
+    "minecraft:moss_block",
+    "minecraft:crimson_nylium",
+    "minecraft:warped_nylium",
     "minecraft:fern",
     "minecraft:twisting_vines",
     "minecraft:twisting_vines_plant",
+    "minecraft:big_dripleaf",
+    "minecraft:big_dripleaf_stem",
+    "minecraft:pink_petals",
     "farmersdelight:sandy_shrub",
     "farmersdelight:brown_mushroom_colony",
     "farmersdelight:red_mushroom_colony",
-    "#farmersdelight:wild_crops"
+    "#farmersdelight:wild_crops",
+    "#minecraft:tall_flowers"
   ]
 }

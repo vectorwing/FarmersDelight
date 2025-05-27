@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
+  "group": "fd_cabinet",
   "key": {
     "D": {
       "item": "minecraft:jungle_trapdoor"

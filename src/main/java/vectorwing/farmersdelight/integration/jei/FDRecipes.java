@@ -25,11 +25,11 @@ public class FDRecipes
 		}
 	}
 
-	public List<CookingPotRecipe> getCookingPotRecipes() {
-		return recipeManager.getAllRecipesFor(ModRecipeTypes.COOKING.get()).stream().map(RecipeHolder::value).toList();
+	public List<RecipeHolder<CookingPotRecipe>> getCookingPotRecipes() {
+		return recipeManager.getAllRecipesFor(ModRecipeTypes.COOKING.get());
 	}
 
-	public List<CuttingBoardRecipe> getCuttingBoardRecipes() {
-		return recipeManager.getAllRecipesFor(ModRecipeTypes.CUTTING.get()).stream().map(RecipeHolder::value).toList();
+	public List<RecipeHolder<CuttingBoardRecipe>> getCuttingBoardRecipes() {
+		return recipeManager.getAllRecipesFor(ModRecipeTypes.CUTTING.get());
 	}
 }

@@ -4,12 +4,14 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.NotNull;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
-import vectorwing.farmersdelight.common.tag.CompatibilityTags;
 import vectorwing.farmersdelight.common.tag.CommonTags;
+import vectorwing.farmersdelight.common.tag.CompatibilityTags;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.Nullable;
@@ -22,10 +24,10 @@ public class BlockTags extends BlockTagsProvider
 	}
 
 	@Override
-	protected void addTags(HolderLookup.Provider provider) {
+	protected void addTags(HolderLookup.@NotNull Provider provider) {
 		this.registerModTags();
 		this.registerMinecraftTags();
-		this.registerForgeTags();
+		this.registerCommonTags();
 		this.registerCompatibilityTags();
 
 		this.registerBlockMineables();
@@ -70,6 +72,11 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.RICH_SOIL_FARMLAND.get()
 		);
 		tag(ModTags.MINEABLE_WITH_KNIFE).add(
+						Blocks.CACTUS,
+						Blocks.MELON,
+						Blocks.PUMPKIN,
+						Blocks.CARVED_PUMPKIN,
+						Blocks.JACK_O_LANTERN,
 						Blocks.COBWEB,
 						Blocks.CAKE,
 						ModBlocks.APPLE_PIE.get(),
@@ -103,8 +110,7 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.CABBAGE_CROP.get(),
 				ModBlocks.ONION_CROP.get(),
 				ModBlocks.RICE_CROP_PANICLES.get(),
-				ModBlocks.BUDDING_TOMATO_CROP.get(),
-				ModBlocks.TOMATO_CROP.get());
+				ModBlocks.BUDDING_TOMATO_CROP.get());
 		tag(net.minecraft.tags.BlockTags.STANDING_SIGNS).add(
 				ModBlocks.CANVAS_SIGN.get(),
 				ModBlocks.WHITE_CANVAS_SIGN.get(),
@@ -186,12 +192,40 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.WILD_ONIONS.get()
 		);
 		tag(net.minecraft.tags.BlockTags.TALL_FLOWERS).add(ModBlocks.WILD_RICE.get());
-	}
-
-	protected void registerForgeTags() {
 		tag(net.minecraft.tags.BlockTags.DIRT).add(
 				ModBlocks.RICH_SOIL.get());
+		tag(net.minecraft.tags.BlockTags.MAINTAINS_FARMLAND).add(
+				ModBlocks.CABBAGE_CROP.get(),
+				ModBlocks.BUDDING_TOMATO_CROP.get(),
+				ModBlocks.TOMATO_CROP.get(),
+				ModBlocks.ONION_CROP.get(),
+				ModBlocks.RICE_CROP.get()
+		);
+	}
+
+	protected void registerCommonTags() {
 		tag(CommonTags.MINEABLE_WITH_KNIFE);
+		tag(Tags.Blocks.VILLAGER_FARMLANDS).add(ModBlocks.RICH_SOIL_FARMLAND.get());
+		tag(Tags.Blocks.STORAGE_BLOCKS).addTags(
+			CommonTags.STORAGE_BLOCKS_CARROT,
+			CommonTags.STORAGE_BLOCKS_POTATO,
+			CommonTags.STORAGE_BLOCKS_BEETROOT,
+			CommonTags.STORAGE_BLOCKS_CABBAGE,
+			CommonTags.STORAGE_BLOCKS_TOMATO,
+			CommonTags.STORAGE_BLOCKS_ONION,
+			CommonTags.STORAGE_BLOCKS_RICE,
+			CommonTags.STORAGE_BLOCKS_RICE_PANICLE,
+			CommonTags.STORAGE_BLOCKS_STRAW
+		);
+		tag(CommonTags.STORAGE_BLOCKS_CARROT).add(ModBlocks.CARROT_CRATE.get());
+		tag(CommonTags.STORAGE_BLOCKS_POTATO).add(ModBlocks.POTATO_CRATE.get());
+		tag(CommonTags.STORAGE_BLOCKS_BEETROOT).add(ModBlocks.BEETROOT_CRATE.get());
+		tag(CommonTags.STORAGE_BLOCKS_CABBAGE).add(ModBlocks.CABBAGE_CRATE.get());
+		tag(CommonTags.STORAGE_BLOCKS_TOMATO).add(ModBlocks.TOMATO_CRATE.get());
+		tag(CommonTags.STORAGE_BLOCKS_ONION).add(ModBlocks.ONION_CRATE.get());
+		tag(CommonTags.STORAGE_BLOCKS_RICE).add(ModBlocks.RICE_BAG.get());
+		tag(CommonTags.STORAGE_BLOCKS_RICE_PANICLE).add(ModBlocks.RICE_BALE.get());
+		tag(CommonTags.STORAGE_BLOCKS_STRAW).add(ModBlocks.STRAW_BALE.get());
 	}
 
 	protected void registerModTags() {
@@ -243,13 +277,20 @@ public class BlockTags extends BlockTagsProvider
 		tag(ModTags.UNAFFECTED_BY_RICH_SOIL).add(
 						Blocks.GRASS_BLOCK,
 						Blocks.SHORT_GRASS,
+						Blocks.MOSS_BLOCK,
+						Blocks.CRIMSON_NYLIUM,
+						Blocks.WARPED_NYLIUM,
 						Blocks.FERN,
 						Blocks.TWISTING_VINES,
 						Blocks.TWISTING_VINES_PLANT,
+						Blocks.BIG_DRIPLEAF,
+						Blocks.BIG_DRIPLEAF_STEM,
+						Blocks.PINK_PETALS,
 						ModBlocks.SANDY_SHRUB.get(),
 						ModBlocks.BROWN_MUSHROOM_COLONY.get(),
 						ModBlocks.RED_MUSHROOM_COLONY.get())
-				.addTag(ModTags.WILD_CROPS);
+				.addTag(ModTags.WILD_CROPS)
+				.addTag(net.minecraft.tags.BlockTags.TALL_FLOWERS);
 		tag(ModTags.MUSHROOM_COLONY_GROWABLE_ON).add(ModBlocks.RICH_SOIL.get());
 		tag(ModTags.DROPS_CAKE_SLICE).add(
 				Blocks.CANDLE_CAKE,
@@ -269,6 +310,7 @@ public class BlockTags extends BlockTagsProvider
 				Blocks.GREEN_CANDLE_CAKE,
 				Blocks.RED_CANDLE_CAKE,
 				Blocks.BLACK_CANDLE_CAKE);
+		tag(ModTags.CAMPFIRE_SIGNAL_SMOKE).add(ModBlocks.STRAW_BALE.get()).add(ModBlocks.RICE_BALE.get());
 	}
 
 	private void registerCompatibilityTags() {

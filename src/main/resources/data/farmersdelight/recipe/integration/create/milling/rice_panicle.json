@@ -13,11 +13,11 @@
   ],
   "results": [
     {
-      "item": "farmersdelight:rice",
+      "id": "farmersdelight:rice",
       "count": 1
     },
     {
-      "item": "farmersdelight:straw",
+      "id": "farmersdelight:straw",
       "count": 1
     }
   ],

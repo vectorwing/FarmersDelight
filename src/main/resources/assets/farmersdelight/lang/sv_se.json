@@ -185,8 +185,8 @@
 
   "entity.farmersdelight.rotten_tomato": "Rutten tomat",
 
-  "effect.farmersdelight.nourishment.0.desc": "Förhindrar hungerförlust, förutom när man använder mättnad för att återfå hjärtan.",
-  "effect.farmersdelight.comfort.0.desc": "Ger naturlig återhämtning, oavsett hur hungrig du är.",
+  "effect.farmersdelight.nourishment.description": "Förhindrar hungerförlust, förutom när man använder mättnad för att återfå hjärtan.",
+  "effect.farmersdelight.comfort.description": "Ger naturlig återhämtning, oavsett hur hungrig du är.",
 
   "enchantment.farmersdelight.backstabbing": "Hugga i ryggen",
   "enchantment.farmersdelight.backstabbing.desc": "Förstärker skadan när du träffar ett mål bakifrån.",

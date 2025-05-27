@@ -205,8 +205,8 @@
   "effect.farmersdelight.nourishment": "Belly's Full",
   "effect.farmersdelight.comfort": "Heart's Warm",
 
-  "effect.farmersdelight.nourishment.0.desc": "Ye can't get hungry, lest yer belly be digestin' food ta heal ye.",
-  "effect.farmersdelight.comfort.0.desc": "Yer body gon' heal up slowly, no matter if ye're starvin' or not.",
+  "effect.farmersdelight.nourishment.description": "Ye can't get hungry, lest yer belly be digestin' food ta heal ye.",
+  "effect.farmersdelight.comfort.description": "Yer body gon' heal up slowly, no matter if ye're starvin' or not.",
 
   "enchantment.farmersdelight.backstabbing": "Mutiny",
   "enchantment.farmersdelight.backstabbing.desc": "Strikes true at the heart o' yer victim, be their backs turned on ye.",
@@ -294,7 +294,9 @@
   "farmersdelight.block.cutting_board.invalid_item": "No good reason ta chop this thingy...",
   "farmersdelight.block.cutting_board.invalid_tool": "Ack, this here tool won't cut it...",
   "farmersdelight.block.skillet.invalid_item": "A wee foolish to try an' cook this...",
+  "farmersdelight.block.skillet.underwater": "Hafta drain all that bilge off first...",
   "farmersdelight.item.skillet.how_to_cook": "Hoist yer grub by yer other hand ta cook it!",
+  "farmersdelight.item.skillet.underwater": "Why are ye tryin' ta fry under the sea?",
 
   "death.attack.farmersdelight.stove": "%1$s got charr'd up in a grille",
   "death.attack.farmersdelight.stove.player": "%1$s got grilled in the hands o' Chef %2$s",
@@ -307,6 +309,7 @@
   "farmersdelight.jei.decomposition.fluid": "Leave it by the ship's bilge",
   "farmersdelight.jei.decomposition.accelerators": "Leave it near decayin' stuffs (see below)",
 
+  "farmersdelight.jei.info.dough": "Ta mix some Raw Hard Tack, ye can drench some Wheat in a Pail o' Bilge. Fer some reason, the bilge never goes down...",
   "farmersdelight.jei.info.straw": "Dry an' firm, good fer makin' ropes. Run yer dagger by them grasses, both crop an' wild, ta get some.",
   "farmersdelight.jei.info.knife": "Daggers make fer a quick slashin'!\n\nSlay a beast ta always get a piece o' its other drops, or chop grasses an' wheats ta get Fiber.",
   "farmersdelight.jei.info.ham": "Hogs an' Hoglins will give ye this fine meat cut, so long as yer cuttin' tool's light enough.",

@@ -1,7 +1,5 @@
 package vectorwing.farmersdelight.common.item;
 
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -10,8 +8,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-
-import net.minecraft.world.item.Item.Properties;
 
 public class DrinkableItem extends ConsumableItem
 {

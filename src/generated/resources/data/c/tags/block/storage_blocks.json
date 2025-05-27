@@ -1,0 +1,13 @@
+{
+  "values": [
+    "#c:storage_blocks/carrot",
+    "#c:storage_blocks/potato",
+    "#c:storage_blocks/beetroot",
+    "#c:storage_blocks/cabbage",
+    "#c:storage_blocks/tomato",
+    "#c:storage_blocks/onion",
+    "#c:storage_blocks/rice",
+    "#c:storage_blocks/rice_panicle",
+    "#c:storage_blocks/straw"
+  ]
+}

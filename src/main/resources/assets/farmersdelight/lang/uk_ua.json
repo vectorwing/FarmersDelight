@@ -205,8 +205,8 @@
   "effect.farmersdelight.nourishment": "Ситість",
   "effect.farmersdelight.comfort": "Затишок",
 
-  "effect.farmersdelight.nourishment.0.desc": "Запобігає втраті голоду, за винятком використання насичення для лікування ушкоджень.",
-  "effect.farmersdelight.comfort.0.desc": "Забезпечує природне зцілення, незалежно від того, наскільки ви голодні.",
+  "effect.farmersdelight.nourishment.description": "Запобігає втраті голоду, за винятком використання насичення для лікування ушкоджень.",
+  "effect.farmersdelight.comfort.description": "Забезпечує природне зцілення, незалежно від того, наскільки ви голодні.",
 
   "enchantment.farmersdelight.backstabbing": "Підступність",
   "enchantment.farmersdelight.backstabbing.desc": "Збільшує шкоду при ударі цілі зі спини.",
