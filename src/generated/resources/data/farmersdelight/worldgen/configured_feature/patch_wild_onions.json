@@ -8,7 +8,7 @@
           "to_place": {
             "type": "minecraft:simple_state_provider",
             "state": {
-              "Name": "farmersdelight:wild_cabbages"
+              "Name": "farmersdelight:wild_onions"
             }
           }
         }
@@ -25,12 +25,12 @@
               },
               {
                 "type": "minecraft:matching_block_tag",
-                "tag": "minecraft:sand",
                 "offset": [
                   0,
                   -1,
                   0
-                ]
+                ],
+                "tag": "minecraft:dirt"
               }
             ]
           }
@@ -44,7 +44,7 @@
           "to_place": {
             "type": "minecraft:simple_state_provider",
             "state": {
-              "Name": "farmersdelight:sandy_shrub"
+              "Name": "minecraft:allium"
             }
           }
         }
@@ -61,12 +61,12 @@
               },
               {
                 "type": "minecraft:matching_block_tag",
-                "tag": "minecraft:sand",
                 "offset": [
                   0,
                   -1,
                   0
-                ]
+                ],
+                "tag": "minecraft:dirt"
               }
             ]
           }

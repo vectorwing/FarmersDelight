@@ -12,7 +12,11 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.registry.ModBiomeModifiers;
+import vectorwing.farmersdelight.common.registry.ModDamageTypes;
+import vectorwing.farmersdelight.common.world.WildCropGeneration;
 import vectorwing.farmersdelight.data.loot.FDBlockLoot;
 import vectorwing.farmersdelight.data.tools.StructureUpdater;
 
@@ -32,17 +36,22 @@ public class DataGenerators
 		CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 		ExistingFileHelper helper = event.getExistingFileHelper();
 		RegistrySetBuilder registrySetBuilder = new RegistrySetBuilder()
-				.add(Registries.ENCHANTMENT, ModEnchantments::bootstrap);
+				.add(Registries.ENCHANTMENT, ModEnchantments::bootstrap)
+				.add(Registries.CONFIGURED_FEATURE, WildCropGeneration::bootstrapConfiguredFeatures)
+				.add(Registries.PLACED_FEATURE, WildCropGeneration::bootstrapPlacedFeatures)
+				.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrapBiomeModifiers)
+				.add(Registries.DAMAGE_TYPE, ModDamageTypes::bootstrapDamageTypes);
+
+		DatapackBuiltinEntriesProvider datapackProvider = new DatapackBuiltinEntriesProvider(output, lookupProvider, registrySetBuilder, Set.of(FarmersDelight.MODID));
+		CompletableFuture<HolderLookup.Provider> builtinLookupProvider = datapackProvider.getRegistryProvider();
+		generator.addProvider(event.includeServer(), datapackProvider);
 
 		BlockTags blockTags = new BlockTags(output, lookupProvider, helper);
 		generator.addProvider(event.includeServer(), blockTags);
 		generator.addProvider(event.includeServer(), new ItemTags(output, lookupProvider, blockTags.contentsGetter(), helper));
 		generator.addProvider(event.includeServer(), new EntityTags(output, lookupProvider, helper));
-		generator.addProvider(event.includeServer(), new DamageTypeTags(output, lookupProvider, FarmersDelight.MODID, helper));
+		generator.addProvider(event.includeServer(), new DamageTypeTags(output, builtinLookupProvider, FarmersDelight.MODID, helper));
 
-		DatapackBuiltinEntriesProvider datapackProvider = new DatapackBuiltinEntriesProvider(output, lookupProvider, registrySetBuilder, Set.of(FarmersDelight.MODID));
-		CompletableFuture<HolderLookup.Provider> builtinLookupProvider = datapackProvider.getRegistryProvider();
-		generator.addProvider(event.includeServer(), datapackProvider);
 		generator.addProvider(event.includeServer(), new EnchantmentTags(output, builtinLookupProvider, helper));
 
 		generator.addProvider(event.includeServer(), new Recipes(output, lookupProvider));

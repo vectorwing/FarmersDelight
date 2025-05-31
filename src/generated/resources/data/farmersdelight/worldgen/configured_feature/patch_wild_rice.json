@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:random_patch",
+  "type": "farmersdelight:wild_rice",
   "config": {
     "feature": {
       "feature": {
@@ -8,7 +8,11 @@
           "to_place": {
             "type": "minecraft:simple_state_provider",
             "state": {
-              "Name": "farmersdelight:sandy_shrub"
+              "Name": "farmersdelight:wild_rice",
+              "Properties": {
+                "half": "lower",
+                "waterlogged": "true"
+              }
             }
           }
         }
@@ -24,8 +28,8 @@
                 "blocks": "minecraft:air"
               },
               {
-                "type": "minecraft:matching_block_tag",
-                "tag": "minecraft:sand",
+                "type": "minecraft:matching_blocks",
+                "blocks": "minecraft:dirt",
                 "offset": [
                   0,
                   -1,
@@ -37,8 +41,8 @@
         }
       ]
     },
-    "tries": 32,
-    "xz_spread": 2,
+    "tries": 96,
+    "xz_spread": 7,
     "y_spread": 3
   }
 }

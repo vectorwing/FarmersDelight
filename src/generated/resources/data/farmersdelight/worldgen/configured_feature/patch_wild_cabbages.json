@@ -8,7 +8,7 @@
           "to_place": {
             "type": "minecraft:simple_state_provider",
             "state": {
-              "Name": "farmersdelight:wild_carrots"
+              "Name": "farmersdelight:wild_cabbages"
             }
           }
         }
@@ -25,12 +25,12 @@
               },
               {
                 "type": "minecraft:matching_block_tag",
-                "tag": "minecraft:dirt",
                 "offset": [
                   0,
                   -1,
                   0
-                ]
+                ],
+                "tag": "minecraft:sand"
               }
             ]
           }
@@ -44,7 +44,7 @@
           "to_place": {
             "type": "minecraft:simple_state_provider",
             "state": {
-              "Name": "minecraft:short_grass"
+              "Name": "farmersdelight:sandy_shrub"
             }
           }
         }
@@ -61,47 +61,12 @@
               },
               {
                 "type": "minecraft:matching_block_tag",
-                "tag": "minecraft:dirt",
                 "offset": [
                   0,
                   -1,
                   0
-                ]
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "floor_feature": {
-      "feature": {
-        "type": "minecraft:simple_block",
-        "config": {
-          "to_place": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "minecraft:coarse_dirt"
-            }
-          }
-        }
-      },
-      "placement": [
-        {
-          "type": "minecraft:block_predicate_filter",
-          "predicate": {
-            "type": "minecraft:all_of",
-            "predicates": [
-              {
-                "type": "minecraft:replaceable",
-                "offset": [
-                  0,
-                  1,
-                  0
-                ]
-              },
-              {
-                "type": "minecraft:matching_block_tag",
-                "tag": "minecraft:dirt"
+                ],
+                "tag": "minecraft:sand"
               }
             ]
           }
