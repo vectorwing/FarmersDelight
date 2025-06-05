@@ -11,6 +11,7 @@
       "item": "farmersdelight:rice_panicle"
     }
   ],
+  "processing_time": 50,
   "results": [
     {
       "id": "farmersdelight:rice",
@@ -20,6 +21,6 @@
       "id": "farmersdelight:straw",
       "count": 1
     }
-  ],
-  "processingTime": 50
+  ]
+
 }
