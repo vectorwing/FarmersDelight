@@ -8,10 +8,10 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "farmersdelight:tomato"
+      "tag": "c:crops/tomato"
     },
     {
-      "item": "farmersdelight:tomato"
+      "tag": "c:crops/tomato"
     },
     {
       "item": "minecraft:bowl"

@@ -17,9 +17,9 @@
       "item": "create:wheat_flour"
     },
     {
-	    "type": "fluid_tag",
-      "fluid_tag": "c:milk",
-      "amount": 250
+      "type": "fluid_tag",
+      "amount": 250,
+      "fluid_tag": "c:milk"
     }
   ],
   "results": [
