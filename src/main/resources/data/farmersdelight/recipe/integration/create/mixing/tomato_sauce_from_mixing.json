@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "farmersdelight:tomato"
+    },
+    {
+      "item": "farmersdelight:tomato"
+    },
+    {
+      "item": "minecraft:bowl"
+    }
+  ],
+  "results": [
+    {
+      "id": "farmersdelight:tomato_sauce",
+      "count": 1
+    }
+  ]
+}

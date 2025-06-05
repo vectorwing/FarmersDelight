@@ -1,0 +1,31 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "create:wheat_flour"
+    },
+    {
+      "item": "create:wheat_flour"
+    },
+    {
+      "item": "create:wheat_flour"
+    },
+    {
+	    "type": "fluid_tag",
+      "fluid_tag": "c:milk",
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "id": "farmersdelight:pie_crust",
+      "count": 1
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "farmersdelight:cabbage"
+    }
+  ],
+  "results": [
+    {
+      "id": "farmersdelight:cabbage_leaf",
+      "count": 2
+    }
+  ]
+}
