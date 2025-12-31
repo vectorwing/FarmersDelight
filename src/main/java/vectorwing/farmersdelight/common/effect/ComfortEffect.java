@@ -6,6 +6,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.GameRules;
 
 @SuppressWarnings("unused")
 public class ComfortEffect extends MobEffect
@@ -21,13 +22,21 @@ public class ComfortEffect extends MobEffect
 
 	@Override
 	public void applyEffectTick(LivingEntity entity, int amplifier) {
+		boolean flag = entity.level().getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION);
+		if (!flag){
+			return;
+		}
 		if (entity.hasEffect(MobEffects.REGENERATION)) {
 			return;
 		}
 		if (entity instanceof Player player) {
+			if (player.getFoodData().getFoodLevel()>=18){
+				return;
+			}
 			if (player.getFoodData().getSaturationLevel() > 0.0) {
 				return;
 			}
+
 		}
 		if (entity.getHealth() < entity.getMaxHealth()) {
 			entity.heal(1.0F);
