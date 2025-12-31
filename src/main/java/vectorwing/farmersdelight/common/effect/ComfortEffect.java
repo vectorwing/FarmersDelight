@@ -33,10 +33,6 @@ public class ComfortEffect extends MobEffect
 			if (player.getFoodData().getFoodLevel()>=18){
 				return;
 			}
-			if (player.getFoodData().getSaturationLevel() > 0.0 && player.getFoodData().getFoodLevel()<18) {
-					return;
-			}
-
 		}
 		if (entity.getHealth() < entity.getMaxHealth()) {
 			entity.heal(1.0F);
