@@ -41,6 +41,8 @@ public class CommonTags
 	public static final TagKey<Item> FOODS_LEAFY_GREEN = commonItemTag("foods/leafy_green");
 	public static final TagKey<Item> FOODS_DOUGH = commonItemTag("foods/dough");
 	public static final TagKey<Item> FOODS_PASTA = commonItemTag("foods/pasta");
+
+	@Deprecated // Will be removed in version 1.3, in favor of the "c:drinks/milk" tag
 	public static final TagKey<Item> FOODS_MILK = commonItemTag("foods/milk");
 
 	public static final TagKey<Item> FOODS_RAW_BACON = commonItemTag("foods/raw_bacon");

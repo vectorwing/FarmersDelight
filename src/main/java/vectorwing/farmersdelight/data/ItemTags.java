@@ -191,14 +191,17 @@ public class ItemTags extends ItemTagsProvider
 
 	@SuppressWarnings("unchecked")
 	private void registerNeoForgeTags() {
+		// Add our custom tags to "common" tag groups
 		tag(Tags.Items.CROPS)
 				.addTag(CommonTags.CROPS_GRAIN);
 		tag(Tags.Items.FOODS)
 				.addTag(CommonTags.FOODS_LEAFY_GREEN)
 				.addTag(CommonTags.FOODS_DOUGH)
 				.addTag(CommonTags.FOODS_PASTA)
-				.addTag(CommonTags.FOODS_COOKED_EGG)
-				.addTag(CommonTags.FOODS_MILK);
+				.addTag(CommonTags.FOODS_COOKED_EGG);
+
+		// TODO: FOODS_MILK will be deprecated in 1.3, but is used here for now to not break add-on compat.
+		tag(Tags.Items.DRINKS_MILK).add(ModItems.MILK_BOTTLE.get()).addTag(CommonTags.FOODS_MILK);
 		tag(Tags.Items.FOODS_VEGETABLE).add(ModItems.ONION.get(), ModItems.TOMATO.get());
 		tag(Tags.Items.FOODS_COOKIE).add(ModItems.HONEY_COOKIE.get(), ModItems.SWEET_BERRY_COOKIE.get());
 		tag(Tags.Items.FOODS_RAW_MEAT).addTags(CommonTags.FOODS_RAW_CHICKEN, CommonTags.FOODS_RAW_PORK, CommonTags.FOODS_RAW_BEEF, CommonTags.FOODS_RAW_MUTTON);
@@ -232,6 +235,9 @@ public class ItemTags extends ItemTagsProvider
 	}
 
 	public void registerCommonTags() {
+		// TODO: Remove on 1.3
+		tag(CommonTags.FOODS_MILK).add(Items.MILK_BUCKET, ModItems.MILK_BOTTLE.get());
+
 		tag(CommonTags.CROPS_CABBAGE).add(ModItems.CABBAGE.get(), ModItems.CABBAGE_LEAF.get());
 		tag(CommonTags.CROPS_ONION).add(ModItems.ONION.get());
 		tag(CommonTags.CROPS_TOMATO).add(ModItems.TOMATO.get());
@@ -243,7 +249,6 @@ public class ItemTags extends ItemTagsProvider
 
 		tag(CommonTags.FOODS_DOUGH).add(ModItems.WHEAT_DOUGH.get());
 		tag(CommonTags.CROPS_GRAIN).add(Items.WHEAT, ModItems.RICE.get());
-		tag(CommonTags.FOODS_MILK).add(Items.MILK_BUCKET, ModItems.MILK_BOTTLE.get());
 		tag(CommonTags.FOODS_PASTA).add(ModItems.RAW_PASTA.get());
 		tag(CommonTags.FOODS_LEAFY_GREEN).addTag(CommonTags.FOODS_CABBAGE);
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.10
+
+### Fixes
+- (1.21+) Create Integration - Fixed Chocolate Pie spouting recipe to use correct fluid tag
+
 ## 1.2.9
 
 ### Updates

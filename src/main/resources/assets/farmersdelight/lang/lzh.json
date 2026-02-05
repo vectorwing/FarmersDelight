@@ -161,10 +161,10 @@
 
   "item.farmersdelight.stuffed_potato": "豐餡洋芋",
   "item.farmersdelight.cabbage_rolls": "包菜餜",
-  "item.farmersdelight.salmon_roll": "鮭壽司",
-  "item.farmersdelight.cod_roll": "鱈壽司",
-  "item.farmersdelight.kelp_roll": "海帶壽司卷",
-  "item.farmersdelight.kelp_roll_slice": "海帶壽司",
+  "item.farmersdelight.salmon_roll": "鮭握鮨",
+  "item.farmersdelight.cod_roll": "鱈握鮨",
+  "item.farmersdelight.kelp_roll": "海帶握鮨卷",
+  "item.farmersdelight.kelp_roll_slice": "海帶握鮨",
 
   "item.farmersdelight.cooked_rice": "飯",
   "item.farmersdelight.mixed_salad": "混拌",
@@ -198,7 +198,7 @@
   "item.farmersdelight.honey_glazed_ham": "蜜汁火腿碟",
   "block.farmersdelight.shepherds_pie_block": "牧者餡餅",
   "item.farmersdelight.shepherds_pie": "牧者餡餅碟",
-  "block.farmersdelight.rice_roll_medley_block": "壽司碟",
+  "block.farmersdelight.rice_roll_medley_block": "握鮨碟",
 
   "item.farmersdelight.dog_food": "犬食",
   "item.farmersdelight.horse_feed": "馬食",

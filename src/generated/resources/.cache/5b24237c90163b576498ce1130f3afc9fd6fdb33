@@ -1,4 +1,4 @@
-// 1.21.1	2025-08-22T16:49:16.8404314	Tags for minecraft:item mod id farmersdelight
+// 1.21.1	2026-02-05T16:39:46.0596448	Tags for minecraft:item mod id farmersdelight
 65eba9e0353834055ff822059bd7e1784fe218ad data/createaddition/tags/item/plants.json
 f55c336a7c0c249fc90b76c979cfa5d5f6a277bf data/createaddition/tags/item/plant_foods.json
 578c1c9a03e76fe2831f34ee8a74b0d5396e7c0e data/create/tags/item/upright_on_belt.json
@@ -8,7 +8,8 @@ f55c336a7c0c249fc90b76c979cfa5d5f6a277bf data/createaddition/tags/item/plant_foo
 67cc2b5a00311a0164d09c5487c714d091be00d9 data/c/tags/item/crops/onion.json
 e07a7ae115045b2965657efe36300a94364de4af data/c/tags/item/crops/rice.json
 0fe37095f12c7c6a3bca60606cab33162378e60d data/c/tags/item/crops/tomato.json
-d4e0728aa353eec833e4759c7a816af11453ac47 data/c/tags/item/foods.json
+e6fd1500f325694d56361f5f0bc3be409550cfb6 data/c/tags/item/drinks/milk.json
+f683cbba4d5951459db89a6e55a0b9551dfce61f data/c/tags/item/foods.json
 5bbfb299379c168bb2327bda9407b207ac10f4ea data/c/tags/item/foods/cabbage.json
 3303db8c35b37ceda9538f0642448ff9ee6c42d0 data/c/tags/item/foods/cooked_bacon.json
 239cd4652a85bba6a88770dbcc0daab6e9087ad8 data/c/tags/item/foods/cooked_beef.json
