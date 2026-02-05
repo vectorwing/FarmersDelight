@@ -1,5 +1,75 @@
 # Changelog
 
+## 1.2.9
+
+### Updates
+- The `offhand_equipment` tag now includes `forge:tools/shields` by default, extending default compatibility;
+- Rich Soil Farmland can now be hydrated by any fluid type capable of hydration;
+- Wild Cabbage and Sea Beet can now generate on any biome tagged with `minecraft:is_beach` (thanks, lyaneii!);
+
+### Fixes
+- Fixed Wheat Dough's water-based recipe still displaying in JEI when disabled;
+- Fixed FD's special recipes existing in the `minecraft` namespace;
+- Temporary fix for the Cooking Pot crashing when opened in spectator mode (access is now disabled);
+- (1.21+) Fixed Cooking Pot allowing players to cook and store up to 99 servings;
+- (1.21+) Fixed Create integration's milling recipes using invalid field, which caused them to never finish processing;
+- (1.21+) Fixed Rabbit Stew not returning bowls after being eaten, due to the Rabbit Stew buff;
+- (1.21+) Fixed a potential datapack error with cooking recipes in KubeJS (thanks, ianm1647!);
+
+### Translations
+- Update main langs to include lines for wall canvas signs;
+- Fixed es_ar translation having a JSON error;
+- Added:
+  - hu_hu (thanks, bayi!);
+  - lzh (thanks, BeiDou114514!);
+- Updated:
+  - it_it (thanks, BlackShadow77!);
+  - zh_cn (thanks, Don-Trueno!);
+  - zh_tw (thanks, CyanChanges!);
+
+## 1.2.8
+
+### Additions
+- New item tags:
+  - `#meals` - Groups bowl and plate foods which are considered a "meal" by the mod. Excludes Fruit Salad and Nether Salad;
+  - `#drinks` - Groups drinkable FD items that are not potions;
+  - `#feasts` - Groups the full forms of feasts. Their portions reside in `#meals`;
+
+### Updates
+- Wheat Dough now has a simpler, less cumbersome crafting recipe using a Water Bucket:
+  - Wheat can be crafted with a Water Bucket to make Dough. The bucket's water won't be depleted, letting you craft dough indefinitely;
+  - The bucket acts as a simple technology gate to unlock this recipe;
+  - The egg recipe is still present, to not break auto-crafting setups;
+- All usages of water buckets in the mod (recipes, interactions etc) now use a common tag (thanks, thelegitdolt!):
+  - 1.20.1: `forge:buckets/water` (unofficial);
+  - 1.21.1: `c:buckets/water`;
+- Added knives to the `breaks_decorated_pots` tag;
+- Updated integration with `create:upright_on_belt` to include all bowl, plate and bottle items;
+- Updated the Master Chef advancement with additional meals;
+  - The meals reflect the "vanilla FD" entries in the `meals` tag, but does not update with the tag itself;
+- Updated effect description IDs for all langs (thanks, mpustovoi!);
+- Cooking Pot will always "cool down" when the recipe becomes invalid mid-cooking, instead of losing all cooking progress in some circumstances;
+
+### Fixes
+- Fixed Jack-O-Lantern not being mineable with a Knife;
+- Fixed Create's Potato Cannon integration;
+- Fixed Knives with Silk Touch slicing Pumpkin blocks;
+- Fixed budding bushes (Tomato)'s planting rules being hardcoded to vanilla farmland;
+- Fixed Rich Soil negating fall damage (1.21.1) and `turnToDirt` converting it into normal dirt (thanks, SarahIsWeird!);
+- (1.21.1) Fixed Baskets and Cabinets not having an item handler capability (thanks, RaymondBlaze!);
+- (1.21.1) Updated Create Integration to the newest update's syntax (thanks, mpustovoi!);
+- (1.21.1) Fixed `storage_blocks` tags not being nested in their parent (thanks, Lucky-56!);
+- (1.21.1) Fixed FD recipe ID's not being displayed on debug info on JEI screens (thanks, Abbie5!);
+- (1.21.1) Fixed Immersive Engineering integration recipes;
+- (1.21.1) Fixed Tall-mato advancement not working properly;
+- (1.21.1) Fixed HUD overlays rendering on top of AppleSkin overlays;
+
+### Translations
+- Updated:
+  - es_es (thanks, GGlangf!);
+  - zh_cn (thanks, NumberSir!);
+  - zh_tw (thanks, DEEMsss!);
+
 ## 1.2.7
 
 ### Updates

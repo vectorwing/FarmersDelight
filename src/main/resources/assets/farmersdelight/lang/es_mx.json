@@ -205,8 +205,8 @@
   "effect.farmersdelight.nourishment": "Nutrición",
   "effect.farmersdelight.comfort": "Bienestar",
 
-  "effect.farmersdelight.nourishment.0.desc": "Evita el hambre, excepto cuando se utiliza la saturación para curar el daño.",
-  "effect.farmersdelight.comfort.0.desc": "Te da regeneración, sin importar cuanta hambre tengas.",
+  "effect.farmersdelight.nourishment.description": "Evita el hambre, excepto cuando se utiliza la saturación para curar el daño.",
+  "effect.farmersdelight.comfort.description": "Te da regeneración, sin importar cuanta hambre tengas.",
 
   "enchantment.farmersdelight.backstabbing": "Puñaladas",
   "enchantment.farmersdelight.backstabbing.desc": "Amplifica el daño al golpear a un objetivo por detrás.",

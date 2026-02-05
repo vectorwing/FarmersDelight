@@ -47,6 +47,9 @@ public class JEIPlugin implements IModPlugin
 		registration.addRecipes(FDRecipeTypes.CUTTING, modRecipes.getCuttingBoardRecipes());
 		registration.addRecipes(FDRecipeTypes.DECOMPOSITION, ImmutableList.of(new DecompositionDummy()));
 
+		registration.addRecipes(RecipeTypes.CRAFTING, modRecipes.getSpecialWheatDoughRecipe());
+
+		registration.addIngredientInfo(new ItemStack(ModItems.WHEAT_DOUGH.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.dough"));
 		registration.addIngredientInfo(new ItemStack(ModItems.STRAW.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.straw"));
 		registration.addIngredientInfo(new ItemStack(ModItems.HAM.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.ham"));
 		registration.addIngredientInfo(new ItemStack(ModItems.SMOKED_HAM.get()), VanillaTypes.ITEM_STACK, TextUtils.getTranslation("jei.info.ham"));

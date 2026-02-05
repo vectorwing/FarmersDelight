@@ -17,6 +17,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -33,7 +34,7 @@ import java.util.List;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
+public class CookingRecipeCategory implements IRecipeCategory<RecipeHolder<CookingPotRecipe>>
 {
 	protected final IDrawable heatIndicator;
 	protected final IDrawable timeIcon;
@@ -56,7 +57,7 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 	}
 
 	@Override
-	public RecipeType<CookingPotRecipe> getRecipeType() {
+	public RecipeType<RecipeHolder<CookingPotRecipe>> getRecipeType() {
 		return FDRecipeTypes.COOKING;
 	}
 
@@ -76,7 +77,8 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayoutBuilder builder, CookingPotRecipe recipe, IFocusGroup focusGroup) {
+	public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<CookingPotRecipe> holder, IFocusGroup focusGroup) {
+		CookingPotRecipe recipe = holder.value();
 		NonNullList<Ingredient> recipeIngredients = recipe.getIngredients();
 		ItemStack resultStack = RecipeUtils.getResultItem(recipe);
 		ItemStack containerStack = recipe.getOutputContainer();
@@ -102,17 +104,18 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 	}
 
 	@Override
-	public void draw(CookingPotRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+	public void draw(RecipeHolder<CookingPotRecipe> holder, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
 		arrow.draw(guiGraphics, 60, 9);
 		heatIndicator.draw(guiGraphics, 18, 39);
 		timeIcon.draw(guiGraphics, 64, 2);
-		if (recipe.getExperience() > 0) {
+		if (holder.value().getExperience() > 0) {
 			expIcon.draw(guiGraphics, 63, 21);
 		}
 	}
 
 	@Override
-	public List<Component> getTooltipStrings(CookingPotRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+	public List<Component> getTooltipStrings(RecipeHolder<CookingPotRecipe> holder, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+		CookingPotRecipe recipe = holder.value();
 		if (ClientRenderUtils.isCursorInsideBounds(61, 2, 22, 28, mouseX, mouseY)) {
 			List<Component> tooltipStrings = new ArrayList<>();
 

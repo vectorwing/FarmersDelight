@@ -205,8 +205,8 @@
   "effect.farmersdelight.nourishment": "Vonanamting",
   "effect.farmersdelight.comfort": "Poheiwa",
 
-  "effect.farmersdelight.nourishment.0.desc": "Lakinaj mahaminus oharemauge, linaj bruk oharemauge per reforma.",
-  "effect.farmersdelight.comfort.0.desc": "Nasi shiknu razbengvona, awen li du ohare.",
+  "effect.farmersdelight.nourishment.description": "Lakinaj mahaminus oharemauge, linaj bruk oharemauge per reforma.",
+  "effect.farmersdelight.comfort.description": "Nasi shiknu razbengvona, awen li du ohare.",
 
   "enchantment.farmersdelight.backstabbing": "Hinavras",
   "enchantment.farmersdelight.backstabbing.desc": "Mahaplus arkatai li arka hina fu jenadjin.",

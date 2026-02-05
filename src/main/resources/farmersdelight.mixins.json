@@ -6,7 +6,8 @@
     "CampfireBaleMixin",
     "CuttingBoardDispenserMixin",
     "KeepRichSoilGiantTreeMixin",
-    "KeepRichSoilTreeMixin"
+    "KeepRichSoilTreeMixin",
+    "KeepRichSoilUntrampledMixin"
   ],
   "client": [
     "CanvasSignEditScreenMixin",

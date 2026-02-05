@@ -205,8 +205,8 @@
   "effect.farmersdelight.nourishment": "Сытасць",
   "effect.farmersdelight.comfort": "Камфорт",
 
-  "effect.farmersdelight.nourishment.0.desc": "Папярэджвае голад, за выключэннем выкарыстання насычанасці для лячэння.",
-  "effect.farmersdelight.comfort.0.desc": "Забяспечвае натуральнае аднаўленне, нягледзячы наколькі вы галодныя.",
+  "effect.farmersdelight.nourishment.description": "Папярэджвае голад, за выключэннем выкарыстання насычанасці для лячэння.",
+  "effect.farmersdelight.comfort.description": "Забяспечвае натуральнае аднаўленне, нягледзячы наколькі вы галодныя.",
 
   "enchantment.farmersdelight.backstabbing": "Здрадніцтва",
   "enchantment.farmersdelight.backstabbing.desc": "Павялічвае шкоду пры атацы са спіны.",

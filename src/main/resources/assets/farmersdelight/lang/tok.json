@@ -204,8 +204,8 @@
   "effect.farmersdelight.nourishment": "moku suli",
   "effect.farmersdelight.comfort": "pilin pona",
 
-  "effect.farmersdelight.nourishment.0.desc": "ni la, sijelo sina li pakala ala la sina wile ala e moku.",
-  "effect.farmersdelight.comfort.0.desc": "ni la, mute moku ale la sijelo sina li kama pona.",
+  "effect.farmersdelight.nourishment.description": "ni la, sijelo sina li pakala ala la sina wile ala e moku.",
+  "effect.farmersdelight.comfort.description": "ni la, mute moku ale la sijelo sina li kama pona.",
 
   "enchantment.farmersdelight.backstabbing": "pakala monsi",
   "enchantment.farmersdelight.backstabbing.desc": "ni la, pakala lon monsi li pakala suli.",

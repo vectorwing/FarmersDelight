@@ -205,8 +205,8 @@
   "effect.farmersdelight.nourishment": "Najedzenie",
   "effect.farmersdelight.comfort": "Komfort",
   
-  "effect.farmersdelight.nourishment.0.desc": "Zapobiega spadaniu poziomu głodu kiedy nasycenie nie jest używane do leczenia obrażeń",
-  "effect.farmersdelight.comfort.0.desc": "Nadaje graczowi odporność na głód, spowolnienie i słabość",
+  "effect.farmersdelight.nourishment.description": "Zapobiega spadaniu poziomu głodu kiedy nasycenie nie jest używane do leczenia obrażeń",
+  "effect.farmersdelight.comfort.description": "Nadaje graczowi odporność na głód, spowolnienie i słabość",
 
   "enchantment.farmersdelight.backstabbing": "Dźganie w plecy",
   "enchantment.farmersdelight.backstabbing.desc": "Zwiększa obrażenia przy uderzeniu w cel od tyłu.",

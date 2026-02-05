@@ -6,5 +6,8 @@
   "reload_ticks": 8,
   "knockback": 0.1,
   "velocity_multiplier": 1.45,
-  "sound_pitch": 1.5
+  "sound_pitch": 1.5,
+  "render_mode": {
+    "type": "create:tumble"
+  }
 }

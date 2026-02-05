@@ -10,6 +10,9 @@
   "block.farmersdelight.jungle_cabinet": "Dispensa della giungla",
   "block.farmersdelight.acacia_cabinet": "Dispensa di acacia",
   "block.farmersdelight.dark_oak_cabinet": "Dispensa di quercia scura",
+  "block.farmersdelight.mangrove_cabinet": "Dispensa di mangrovie",
+  "block.farmersdelight.cherry_cabinet": "Dispensa di ciliegio",
+  "block.farmersdelight.bamboo_cabinet": "Dispensa di bambù",
   "block.farmersdelight.crimson_cabinet": "Dispensa cremisi",
   "block.farmersdelight.warped_cabinet": "Dispensa distorta",
   "block.farmersdelight.rope": "Corda",
@@ -48,6 +51,24 @@
   "block.farmersdelight.green_canvas_sign": "Cartello di tela verde",
   "block.farmersdelight.red_canvas_sign": "Cartello di tela rosso",
   "block.farmersdelight.black_canvas_sign": "Cartello di tela nero",
+
+  "block.farmersdelight.hanging_canvas_sign": "Cartello di tela pensile",
+  "block.farmersdelight.white_hanging_canvas_sign": "Cartello di tela bianco pensile",
+  "block.farmersdelight.orange_hanging_canvas_sign": "Cartello di tela arancione",
+  "block.farmersdelight.magenta_hanging_canvas_sign": "Cartello di tela magenta pensile",
+  "block.farmersdelight.light_blue_hanging_canvas_sign": "Cartello di tela azzurro pensile",
+  "block.farmersdelight.yellow_hanging_canvas_sign": "Cartello di tela giallo pensile",
+  "block.farmersdelight.lime_hanging_canvas_sign": "Cartello di tela lime pensile",
+  "block.farmersdelight.pink_hanging_canvas_sign": "Cartello di tela rosa pensile",
+  "block.farmersdelight.gray_hanging_canvas_sign": "Cartello di tela grigio pensile",
+  "block.farmersdelight.light_gray_hanging_canvas_sign": "Cartello di tela grigio chiaro pensile",
+  "block.farmersdelight.cyan_hanging_canvas_sign": "Cartello di tela ciano pensile",
+  "block.farmersdelight.purple_hanging_canvas_sign": "Cartello di tela viola pensile",
+  "block.farmersdelight.blue_hanging_canvas_sign": "Cartello di tela blu pensile",
+  "block.farmersdelight.brown_hanging_canvas_sign": "Cartello di tela marrone pensile",
+  "block.farmersdelight.green_hanging_canvas_sign": "Cartello di tela verde pensile",
+  "block.farmersdelight.red_hanging_canvas_sign": "Cartello di tela rosso pensile",
+  "block.farmersdelight.black_hanging_canvas_sign": "Cartello di tela nero pensile",
   
   "block.farmersdelight.budding_tomatoes": "Bacche di pomodoro in maturazione",
   "block.farmersdelight.tomatoes": "Pomodori maturi",
@@ -184,8 +205,8 @@
   "effect.farmersdelight.nourishment": "Nutrimento",
   "effect.farmersdelight.comfort": "Benessere",
 
-  "effect.farmersdelight.nourishment.0.desc": "Impedisce la perdita della fame, tranne quando si utilizza saturazione per guarire i danni.",
-  "effect.farmersdelight.comfort.0.desc": "Ti rende immuno alla fame, lentezza e debolezza.",
+  "effect.farmersdelight.nourishment.description": "Impedisce la perdita della fame, tranne quando si utilizza la saturazione per guarire i danni.",
+  "effect.farmersdelight.comfort.description": "Ti rende immune alla fame, lentezza e debolezza.",
 
   "enchantment.farmersdelight.backstabbing": "Pugnalata alla schiena",
   "enchantment.farmersdelight.backstabbing.desc": "Amplifica i danni quando colpisci il bersaglio da dietro.",
@@ -201,10 +222,10 @@
   "farmersdelight.container.cabinet": "Dispensa",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Vuoto",
-  "farmersdelight.tooltip.cooking_pot.single_serving": "Tiene 1 porzione di:",
-  "farmersdelight.tooltip.cooking_pot.many_servings": "Tiene %s porzioni di:",
-  "farmersdelight.tooltip.dog_food.when_feeding": "Quando alimentato a un lupo domestico:",
-  "farmersdelight.tooltip.horse_feed.when_feeding": "Quando alimentato a un domestico cavalcabile:",
+  "farmersdelight.tooltip.cooking_pot.single_serving": "Contiene 1 porzione di:",
+  "farmersdelight.tooltip.cooking_pot.many_servings": "Contiene %s porzioni di:",
+  "farmersdelight.tooltip.dog_food.when_feeding": "Quando si nutre un lupo domestico:",
+  "farmersdelight.tooltip.horse_feed.when_feeding": "Quando si nutre un animale cavalcabile:",
   "farmersdelight.tooltip.milk_bottle": "Cancella 1 effetto di stato",
   "farmersdelight.tooltip.hot_cocoa": "Cancella 1 effetto di stato dannoso",
   "farmersdelight.tooltip.melon_juice": "Recupera istantaneamente un po' di salute",
@@ -270,11 +291,13 @@
 
   "farmersdelight.block.feast.use_container": "Hai bisogno di %s per mangiare questo.",
   "farmersdelight.block.rice.invalid_placement": "Questa coltura non sopravvivrà bene fuori dall'acqua poco profonda.",
-  "farmersdelight.block.cutting_board.invalid_item": "Questo non sembra tagliabile...",
+  "farmersdelight.block.cutting_board.invalid_item": "Non sembra sminuzzabile...",
   "farmersdelight.block.cutting_board.invalid_tool": "Forse con un attrezzo diverso...",
-  "farmersdelight.block.skillet.invalid_item": "Questo non si può cucinare...",
+  "farmersdelight.block.skillet.invalid_item": "Questo non puoi cucinarlo...",
+  "farmersdelight.block.skillet.underwater": "Non si può cucinare nell'acqua...",
   "farmersdelight.item.skillet.how_to_cook": "Usa l'altra mano per tenere gli ingredienti!",
-
+  "farmersdelight.item.skillet.underwater": "Non puoi cucinare sottacqua...",
+  
   "death.attack.farmersdelight.stove": "%1$s è stato grigliato alla perfezione",
   "death.attack.farmersdelight.stove.player": "%1$s è stato messo sulla grigia dallo Chef %2$s",
 
@@ -285,7 +308,16 @@
   "farmersdelight.jei.decomposition.light": "Velocizzato dalla luce del sole",
   "farmersdelight.jei.decomposition.fluid": "Velocizzato dall'acqua adiacente",
   "farmersdelight.jei.decomposition.accelerators": "Velocizzato da attivatori adiacenti (vedi sotto)",
-  "farmersdelight.jei.info.straw": "Una fibra vegetale secca usata in fabbricazione. Ottenibile tagliando colture e piante erbacee con un coltello.",
-  "farmersdelight.jei.info.knife": "I coltelli sono armi da mischia leggere. Possono raccogliere paglia dalle erbe e garantire bottini secondari dagli animali.",
-  "farmersdelight.jei.info.ham": "Un grosso taglio di carne da una coscia di maiale o di Hoglin. Avrai bisogno di qualcosa di più pratico di una spada per tagliarne una..."
+
+  "farmersdelight.jei.info.dough": "Il grano può essere trasformato in impasto mettendolo nella tavola di fabbricazione con un secchio d'acqua. Non preoccuparti, il secchio d'acqua non verrà consumato!",
+  "farmersdelight.jei.info.straw": "Una fibra vegetale secca usata nel tavolo di fabbricazione. Ottenibile tagliando colture e piante erbacee con un coltello.",
+  "farmersdelight.jei.info.knife": "I coltelli sono armi da mischia con fendenti veloci e danno leggero.\n\n Possono raccogliere paglia dalle erbe e garantire bottini secondari dagli animali.",
+  "farmersdelight.jei.info.ham": "Un grosso taglio di carne da una coscia di maiale o di Hoglin.\n\n Avrai bisogno di qualcosa di più pratico di una spada per tagliarne una...",
+  "farmersdelight.jei.info.wild_cabbages": "Il cavolo può essere trovato come selvatico nelle coste sabbiose.",
+  "farmersdelight.jei.info.wild_beetroots": "La Barbabietola può essere trovata come selvatica nelle coste sabbiose.",
+  "farmersdelight.jei.info.wild_carrots": "Le carote possono essere trovate come selvatiche in terre miti, come le pianure e le foreste.",
+  "farmersdelight.jei.info.wild_onions": "Le cipolle possono essere trovate come selvatiche in terre miti, come le pianure e le foreste.",
+  "farmersdelight.jei.info.wild_potatoes": "Le patate possono essere trovate come selvatiche nelle zone fredde, come montagne e taiga.",
+  "farmersdelight.jei.info.wild_tomatoes": "I pomodori possono essere trovati come selvatici nelle zone aride, come savana e deserti.",
+  "farmersdelight.jei.info.wild_rice": "Il riso può essere trovato come selvatico nelle pozzanghere delle terre umide, come paludi e giungle."
 }

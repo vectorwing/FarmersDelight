@@ -174,8 +174,8 @@
   "effect.farmersdelight.nourishment": "Voeding",
   "effect.farmersdelight.comfort": "Comfort",
 
-  "effect.farmersdelight.nourishment.0.desc": "Voorkomt hongerverlies, behalve bij gebruik van verzadiging om schade te genezen.",
-  "effect.farmersdelight.comfort.0.desc": "Zorgt voor natuurlijke regeneratie, ongeacht hoe hongerig je bent.",
+  "effect.farmersdelight.nourishment.description": "Voorkomt hongerverlies, behalve bij gebruik van verzadiging om schade te genezen.",
+  "effect.farmersdelight.comfort.description": "Zorgt voor natuurlijke regeneratie, ongeacht hoe hongerig je bent.",
 
   "enchantment.farmersdelight.backstabbing": "Achtersteken",
   "enchantment.farmersdelight.backstabbing.desc": "Vergroot de schade bij het van achteren raken van een doelwit.",

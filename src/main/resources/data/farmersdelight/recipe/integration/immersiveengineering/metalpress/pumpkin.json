@@ -12,7 +12,7 @@
   },
   "mold": "immersiveengineering:mold_unpacking",
   "result": {
-    "Count": 4,
+    "count": 4,
     "id": "farmersdelight:pumpkin_slice"
   }
 }

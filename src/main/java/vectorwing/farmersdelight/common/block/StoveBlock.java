@@ -8,14 +8,15 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.FireChargeItem;
+import net.minecraft.world.item.FlintAndSteelItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -34,6 +35,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.Tags;
 import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModDamageTypes;
@@ -71,13 +73,13 @@ public class StoveBlock extends BaseEntityBlock
 				extinguish(state, level, pos);
 				heldStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
 				return ItemInteractionResult.SUCCESS;
-			} else if (heldItem == Items.WATER_BUCKET) {
+			} else if (heldStack.is(Tags.Items.BUCKETS_WATER)) {
 				if (!level.isClientSide()) {
 					level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 1.0F, 1.0F);
 				}
 				extinguish(state, level, pos);
 				if (!player.isCreative()) {
-					player.setItemInHand(hand, new ItemStack(Items.BUCKET));
+					player.setItemInHand(hand, heldStack.getCraftingRemainingItem());
 				}
 				return ItemInteractionResult.SUCCESS;
 			}

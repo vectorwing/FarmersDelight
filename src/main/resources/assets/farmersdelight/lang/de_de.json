@@ -205,8 +205,8 @@
   "effect.farmersdelight.nourishment": "Gesättigt",
   "effect.farmersdelight.comfort": "Komfort",
 
-  "effect.farmersdelight.nourishment.0.desc": "Verhindert Hungerverlust, es sei denn es wird Leben regeneriert.",
-  "effect.farmersdelight.comfort.0.desc": "Verleiht Immunität gegenüber Hunger, Langsamkeit und Schwäche",
+  "effect.farmersdelight.nourishment.description": "Verhindert Hungerverlust, es sei denn es wird Leben regeneriert.",
+  "effect.farmersdelight.comfort.description": "Verleiht Immunität gegenüber Hunger, Langsamkeit und Schwäche",
 
   "enchantment.farmersdelight.backstabbing": "Hinterhalt",
   "enchantment.farmersdelight.backstabbing.desc": "Mehr Schaden durch Angriffe von hinten.",

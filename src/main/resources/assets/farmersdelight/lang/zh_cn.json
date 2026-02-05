@@ -11,7 +11,7 @@
   "block.farmersdelight.acacia_cabinet": "金合欢木橱柜",
   "block.farmersdelight.dark_oak_cabinet": "深色橡木橱柜",
   "block.farmersdelight.mangrove_cabinet": "红树木橱柜",
-  "block.farmersdelight.cherry_cabinet": "樱桃木橱柜",
+  "block.farmersdelight.cherry_cabinet": "樱花木橱柜",
   "block.farmersdelight.bamboo_cabinet": "竹橱柜",
   "block.farmersdelight.crimson_cabinet": "绯红木橱柜",
   "block.farmersdelight.warped_cabinet": "诡异木橱柜",
@@ -31,7 +31,7 @@
   "block.farmersdelight.tomato_crate": "箱装番茄",
   "block.farmersdelight.onion_crate": "箱装洋葱",
   "block.farmersdelight.rice_bale": "稻米块",
-  "block.farmersdelight.rice_bag": "稻米袋",
+  "block.farmersdelight.rice_bag": "袋装稻米",
   "block.farmersdelight.straw_bale": "稻草",
 
   "block.farmersdelight.canvas_sign": "粗布告示牌",
@@ -205,8 +205,8 @@
   "effect.farmersdelight.nourishment": "滋养",
   "effect.farmersdelight.comfort": "舒适",
 
-  "effect.farmersdelight.nourishment.0.desc": "你不会再消耗饥饿值，除非需要借以恢复生命值。",
-  "effect.farmersdelight.comfort.0.desc": "使你对饥饿、缓慢和虚弱效果免疫。",
+  "effect.farmersdelight.nourishment.description": "你不会再消耗饥饿值，除非需要借以恢复生命值。",
+  "effect.farmersdelight.comfort.description": "使你对饥饿、缓慢和虚弱效果免疫。",
 
   "enchantment.farmersdelight.backstabbing": "背刺",
   "enchantment.farmersdelight.backstabbing.desc": "增加从后攻击目标时的伤害。",
@@ -246,7 +246,7 @@
   "farmersdelight.advancement.use_cutting_board": "当心伤手……",
   "farmersdelight.advancement.use_cutting_board.desc": "工具到手，在砧板上切开一些东西",
   "farmersdelight.advancement.obtain_netherite_knife": "没这金刚钻的话……",
-  "farmersdelight.advancement.obtain_netherite_knife.desc": "要么在你的刀上花一整块下界合金锭，要么离开厨房",
+  "farmersdelight.advancement.obtain_netherite_knife.desc": "要么在你的刀上花一整块下界合金锭，要么从厨房里出去",
 
   "farmersdelight.advancement.get_fd_seed": "野生作物",
   "farmersdelight.advancement.get_fd_seed.desc": "有四种新的作物在野外等待着你，你需要跨越山和大海……或者只需要翻翻箱子。",
@@ -261,7 +261,7 @@
   "farmersdelight.advancement.plant_all_crops": "轮作",
   "farmersdelight.advancement.plant_all_crops.desc": "种植所有你找得到的水果、蔬菜，或是菌类！",
 
-  "farmersdelight.advancement.place_campfire": "点燃篝火",
+  "farmersdelight.advancement.place_campfire": "点燃营火",
   "farmersdelight.advancement.place_campfire.desc": "放置一个营火，让夜晚不再寒冷",
   "farmersdelight.advancement.use_skillet": "移动厨房",
   "farmersdelight.advancement.use_skillet.desc": "煎锅能让你轻松烹饪食物。在另一只手上把食物拿好，然后离热源近些！",
@@ -309,6 +309,7 @@
   "farmersdelight.jei.decomposition.fluid": "周围有水时加快",
   "farmersdelight.jei.decomposition.accelerators": "周围有以下催化物时加快",
 
+  "farmersdelight.jei.info.dough": "小麦与水桶可以合成面团。别担心，水不会因此被浪费掉！",
   "farmersdelight.jei.info.straw": "用于合成的干燥植物纤维。使用小刀破坏草类植物或作物方块可以获得。",
   "farmersdelight.jei.info.knife": "小刀是轻量的近战武器。你可以用它们从草类植物中获得草秆，也可以击杀动物以获得副掉落物。",
   "farmersdelight.jei.info.ham": "从猪或疣猪兽腿上切下的一大块肉。剑太大了，想切下它你得找一把更轻的工具……",
@@ -316,7 +317,7 @@
   "farmersdelight.jei.info.wild_beetroots": "海甜菜通常可以在海滩沿岸找到。",
   "farmersdelight.jei.info.wild_carrots": "野生胡萝卜通常可以在温带地区，如平原和森林中找到。",
   "farmersdelight.jei.info.wild_onions": "野生洋葱通常可以在温带地区，如平原和森林中找到。",
-  "farmersdelight.jei.info.wild_potatoes": "野生马铃薯通常可以在寒冷地区，如山区和针叶林中找到。",
+  "farmersdelight.jei.info.wild_potatoes": "野生马铃薯通常可以在寒冷地区，如山地和针叶林中找到。",
   "farmersdelight.jei.info.wild_tomatoes": "番茄灌木通常可以在干旱地区，如热带草原和沙漠中找到。",
   "farmersdelight.jei.info.wild_rice": "野生稻米通常可以在湿地的池塘中，如沼泽和丛林中找到。"
 }

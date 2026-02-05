@@ -9,5 +9,8 @@
   "knockback": 0.05,
   "velocity_multiplier": 1.1,
   "sticky": true,
-  "sound_pitch": 1.1
+  "sound_pitch": 1.1,
+  "render_mode": {
+    "type": "create:tumble"
+  }
 }

@@ -1,6 +1,6 @@
 {
   "values": [
-    "minecraft:shield",
+    "#c:tools/shield",
     {
       "id": "create:extendo_grip",
       "required": false

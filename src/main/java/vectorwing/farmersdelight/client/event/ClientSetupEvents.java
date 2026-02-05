@@ -57,7 +57,7 @@ public class ClientSetupEvents
 		event.register(CookingPotTooltip.CookingPotTooltipComponent.class, CookingPotTooltip::new);
 	}
 
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOW)
 	public static void registerGuiLayers(RegisterGuiLayersEvent event) {
 		HUDOverlays.register(event);
 	}

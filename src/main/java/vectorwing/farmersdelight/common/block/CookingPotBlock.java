@@ -17,10 +17,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -50,7 +47,7 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 @SuppressWarnings("deprecation")
-public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
+public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, EntityBlock
 {
 	public static final MapCodec<CookingPotBlock> CODEC = simpleCodec(CookingPotBlock::new);
 
@@ -67,7 +64,7 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 	}
 
 	@Override
-	protected MapCodec<? extends BaseEntityBlock> codec() {
+	protected MapCodec<? extends Block> codec() {
 		return CODEC;
 	}
 
@@ -224,5 +221,10 @@ public class CookingPotBlock extends BaseEntityBlock implements SimpleWaterlogge
 			return createTickerHelper(blockEntity, ModBlockEntityTypes.COOKING_POT.get(), CookingPotBlockEntity::animationTick);
 		}
 		return createTickerHelper(blockEntity, ModBlockEntityTypes.COOKING_POT.get(), CookingPotBlockEntity::cookingTick);
+	}
+
+	@Nullable
+	protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> serverType, BlockEntityType<E> clientType, BlockEntityTicker<? super E> ticker) {
+		return clientType == serverType ? (BlockEntityTicker<A>)ticker : null;
 	}
 }

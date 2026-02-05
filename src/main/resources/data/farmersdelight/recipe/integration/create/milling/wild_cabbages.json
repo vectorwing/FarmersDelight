@@ -13,13 +13,13 @@
   ],
   "results": [
     {
-      "item": "farmersdelight:cabbage_seeds",
+      "id": "farmersdelight:cabbage_seeds",
       "count": 1
     },
     {
-      "item": "minecraft:yellow_dye",
+      "id": "minecraft:yellow_dye",
       "count": 1
     }
   ],
-  "processingTime": 50
+  "processing_time": 50
 }

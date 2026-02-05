@@ -205,8 +205,8 @@
   "effect.farmersdelight.nourishment": "Nuôi dưỡng",
   "effect.farmersdelight.comfort": "An nhàn",
 
-  "effect.farmersdelight.nourishment.0.desc": "Ngăn chặn đói, ngoại trừ khi sử dụng bão hòa để chữa lành sát thương.",
-  "effect.farmersdelight.comfort.0.desc": "Cung cấp khả năng hồi phục tự nhiên, bất kể bạn đói như thế nào.",
+  "effect.farmersdelight.nourishment.description": "Ngăn chặn đói, ngoại trừ khi sử dụng bão hòa để chữa lành sát thương.",
+  "effect.farmersdelight.comfort.description": "Cung cấp khả năng hồi phục tự nhiên, bất kể bạn đói như thế nào.",
 
   "enchantment.farmersdelight.backstabbing": "Đâm lén",
   "enchantment.farmersdelight.backstabbing.desc": "Tăng sát thương khi tấn công mục tiêu từ phía sau.",

@@ -226,5 +226,5 @@ public class FoodValues
 			.build();
 
 	public static final FoodProperties RABBIT_STEW_BUFF = (new FoodProperties.Builder())
-			.nutrition(14).saturationModifier(0.75f).effect(() -> comfort(LONG_DURATION), 1.0F).build();
+			.nutrition(14).saturationModifier(0.75f).effect(() -> comfort(LONG_DURATION), 1.0F).usingConvertsTo(Items.BOWL).build();
 }

@@ -205,8 +205,8 @@
   "effect.farmersdelight.nourishment": "배부름",
   "effect.farmersdelight.comfort": "편안함",
 
-  "effect.farmersdelight.nourishment.0.desc": "생명력을 회복할 때를 제외하고 배고픔 수치가 줄어들지 않습니다.",
-  "effect.farmersdelight.comfort.0.desc": "배고픔 수치와 상관없이, 생명력을 회복합니다.",
+  "effect.farmersdelight.nourishment.description": "생명력을 회복할 때를 제외하고 배고픔 수치가 줄어들지 않습니다.",
+  "effect.farmersdelight.comfort.description": "배고픔 수치와 상관없이, 생명력을 회복합니다.",
 
   "enchantment.farmersdelight.backstabbing": "암습",
   "enchantment.farmersdelight.backstabbing.desc": "대상을 뒤에서 공격할 때 피해가 증가합니다.",

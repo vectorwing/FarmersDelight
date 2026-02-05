@@ -205,8 +205,8 @@
   "effect.farmersdelight.nourishment": "Nutrición",
   "effect.farmersdelight.comfort": "Comodidad",
 
-  "effect.farmersdelight.nourishment.0.desc": "Previene la pérdida de hambre, excepto cuando se usa la saturación para curar el daño.",
-  "effect.farmersdelight.comfort.0.desc": "Proporciona regeneración natural, sin importar el hambre que tengas.",
+  "effect.farmersdelight.nourishment.description": "Previene la pérdida de hambre, excepto cuando se usa la saturación para curar el daño.",
+  "effect.farmersdelight.comfort.description": "Proporciona regeneración natural, sin importar el hambre que tengas.",
 
   "enchantment.farmersdelight.backstabbing": "Puñalada por la espalda",
   "enchantment.farmersdelight.backstabbing.desc": "Amplifica el daño al golpear a un objetivo por detrás.",
@@ -316,5 +316,5 @@
   "farmersdelight.jei.info.wild_onions": "Las cebollas se pueden encontrar comúnmente como planta silvestre en tierras templadas, como llanuras y bosques.",
   "farmersdelight.jei.info.wild_potatoes": "Las papas se encuentra comúnmente como planta silvestre en tierras frías, como montañas y taigas.",
   "farmersdelight.jei.info.wild_tomatoes": "Los tomates se pueden encontrar comúnmente como planta silvestre en tierras áridas, como sabanas y desiertos.",
-  "farmersdelight.jei.info.wild_rice": "El arroz se puede encontrar comúnmente como planta silvestre en los estanques de tierras húmedas, como pantanos y selvas.",
+  "farmersdelight.jei.info.wild_rice": "El arroz se puede encontrar comúnmente como planta silvestre en los estanques de tierras húmedas, como pantanos y selvas."
 }

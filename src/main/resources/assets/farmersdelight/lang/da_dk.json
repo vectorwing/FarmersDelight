@@ -205,8 +205,8 @@
   "effect.farmersdelight.nourishment": "Næring",
   "effect.farmersdelight.comfort": "Komfort",
 
-  "effect.farmersdelight.nourishment.0.desc": "Forhindrer tab af sult, undtagen når du bruger saturation til at helbrede skader.",
-  "effect.farmersdelight.comfort.0.desc": "Giver naturlig regenerering, uanset hvor sulten du er.",
+  "effect.farmersdelight.nourishment.description": "Forhindrer tab af sult, undtagen når du bruger saturation til at helbrede skader.",
+  "effect.farmersdelight.comfort.description": "Giver naturlig regenerering, uanset hvor sulten du er.",
 
   "enchantment.farmersdelight.backstabbing": "Rygstik",
   "enchantment.farmersdelight.backstabbing.desc": "Forstærker skaden, når du rammer et mål bagfra.",

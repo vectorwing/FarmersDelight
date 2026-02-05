@@ -7,7 +7,11 @@
   ],
   "damage": 4,
   "reload_ticks": 8,
-  "knockback": 0.2,
+  "knockback": 0.05,
   "velocity_multiplier": 1.4,
-  "sound_pitch": 1.5
+  "sticky": true,
+  "sound_pitch": 1.5,
+  "render_mode": {
+    "type": "create:tumble"
+  }
 }

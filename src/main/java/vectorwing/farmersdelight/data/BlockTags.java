@@ -76,6 +76,7 @@ public class BlockTags extends BlockTagsProvider
 						Blocks.MELON,
 						Blocks.PUMPKIN,
 						Blocks.CARVED_PUMPKIN,
+						Blocks.JACK_O_LANTERN,
 						Blocks.COBWEB,
 						Blocks.CAKE,
 						ModBlocks.APPLE_PIE.get(),
@@ -191,12 +192,31 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.WILD_ONIONS.get()
 		);
 		tag(net.minecraft.tags.BlockTags.TALL_FLOWERS).add(ModBlocks.WILD_RICE.get());
-		tag(net.minecraft.tags.BlockTags.DIRT).add(ModBlocks.RICH_SOIL.get());
+		tag(net.minecraft.tags.BlockTags.DIRT).add(
+				ModBlocks.RICH_SOIL.get());
+		tag(net.minecraft.tags.BlockTags.MAINTAINS_FARMLAND).add(
+				ModBlocks.CABBAGE_CROP.get(),
+				ModBlocks.BUDDING_TOMATO_CROP.get(),
+				ModBlocks.TOMATO_CROP.get(),
+				ModBlocks.ONION_CROP.get(),
+				ModBlocks.RICE_CROP.get()
+		);
 	}
 
 	protected void registerCommonTags() {
 		tag(CommonTags.MINEABLE_WITH_KNIFE);
 		tag(Tags.Blocks.VILLAGER_FARMLANDS).add(ModBlocks.RICH_SOIL_FARMLAND.get());
+		tag(Tags.Blocks.STORAGE_BLOCKS).addTags(
+			CommonTags.STORAGE_BLOCKS_CARROT,
+			CommonTags.STORAGE_BLOCKS_POTATO,
+			CommonTags.STORAGE_BLOCKS_BEETROOT,
+			CommonTags.STORAGE_BLOCKS_CABBAGE,
+			CommonTags.STORAGE_BLOCKS_TOMATO,
+			CommonTags.STORAGE_BLOCKS_ONION,
+			CommonTags.STORAGE_BLOCKS_RICE,
+			CommonTags.STORAGE_BLOCKS_RICE_PANICLE,
+			CommonTags.STORAGE_BLOCKS_STRAW
+		);
 		tag(CommonTags.STORAGE_BLOCKS_CARROT).add(ModBlocks.CARROT_CRATE.get());
 		tag(CommonTags.STORAGE_BLOCKS_POTATO).add(ModBlocks.POTATO_CRATE.get());
 		tag(CommonTags.STORAGE_BLOCKS_BEETROOT).add(ModBlocks.BEETROOT_CRATE.get());

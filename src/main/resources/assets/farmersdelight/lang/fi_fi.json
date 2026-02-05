@@ -171,8 +171,8 @@
   "effect.farmersdelight.nourishment": "Ravittu",
   "effect.farmersdelight.comfort": "Mukavuus",
 
-  "effect.farmersdelight.nourishment.0.desc": "Estää nälkiintymisen silloin kun kylläisyyttä ei käytetä elinvoiman palauttamiseen.",
-  "effect.farmersdelight.comfort.0.desc": "Estää nälän, hitauden ja heikkouden saamisen.",
+  "effect.farmersdelight.nourishment.description": "Estää nälkiintymisen silloin kun kylläisyyttä ei käytetä elinvoiman palauttamiseen.",
+  "effect.farmersdelight.comfort.description": "Estää nälän, hitauden ja heikkouden saamisen.",
 
   "enchantment.farmersdelight.backstabbing": "Selkäänpuukotus",
   "enchantment.farmersdelight.backstabbing.desc": "Vahvistaa vahinkoa takaa päin hyökätessä.",
