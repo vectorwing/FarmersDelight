@@ -4,7 +4,7 @@
   "cookingtime": 600,
   "experience": 0.35,
   "ingredient": {
-    "item": "minecraft:egg"
+    "tag": "forge:eggs"
   },
   "result": "farmersdelight:fried_egg"
 }
