@@ -34,11 +34,13 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder
 	private String soundEventID;
 	@Nullable
 	private String namespace;
+	private CuttingRecipeFolder folder;
 
 	public CuttingBoardRecipeBuilder(Ingredient ingredient, Ingredient tool, ItemLike mainResult, int count, float chance) {
 		this.results.add(new ChanceResult(new ItemStack(mainResult.asItem(), count), chance));
 		this.ingredient = ingredient;
 		this.tool = tool;
+		this.folder = CuttingRecipeFolder.CUTTING;
 	}
 
 	/**
@@ -98,6 +100,11 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder
 		return this;
 	}
 
+	public CuttingBoardRecipeBuilder salvaging() {
+		this.folder = CuttingRecipeFolder.SALVAGING;
+		return this;
+	}
+
 	@Override
 	public CuttingBoardRecipeBuilder group(@Nullable String group) {
 		return this; // no-op
@@ -122,7 +129,7 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder
 	public void save(Consumer<FinishedRecipe> consumer) {
 		ResourceLocation defaultLocation = getDefaultRecipeId(this.ingredient.getItems()[0].getItem());
 		save(consumer, new ResourceLocation(this.namespace != null ? namespace : defaultLocation.getNamespace(), defaultLocation.getPath())
-				.withPrefix("cutting/"));
+				.withPrefix(folder.getSerializedName() + "/"));
 	}
 
 	public void save(Consumer<FinishedRecipe> consumer, ResourceLocation recipeId) {
