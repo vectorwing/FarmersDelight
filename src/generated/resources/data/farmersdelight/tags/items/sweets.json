@@ -1,6 +1,9 @@
 {
   "values": [
     "#farmersdelight:pies",
+    "minecraft:cake",
+    "farmersdelight:cake_slice",
+    "minecraft:cookie",
     "farmersdelight:sweet_berry_cookie",
     "farmersdelight:honey_cookie",
     "farmersdelight:melon_popsicle",

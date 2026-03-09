@@ -50,6 +50,9 @@ public class ItemTags extends ItemTagsProvider
 
 	private void registerModTags() {
 		tag(ModTags.Items.MEALS).add(
+				Items.MUSHROOM_STEW,
+				Items.BEETROOT_SOUP,
+				Items.RABBIT_STEW,
 				ModItems.MIXED_SALAD.get(),
 				ModItems.COOKED_RICE.get(),
 				ModItems.BONE_BROTH.get(),
@@ -83,6 +86,9 @@ public class ItemTags extends ItemTagsProvider
 				ModItems.HOT_COCOA.get()
 		);
 		tag(ModTags.Items.SWEETS).addTag(ModTags.Items.PIES).add(
+				Items.CAKE,
+				ModItems.CAKE_SLICE.get(),
+				Items.COOKIE,
 				ModItems.SWEET_BERRY_COOKIE.get(),
 				ModItems.HONEY_COOKIE.get(),
 				ModItems.MELON_POPSICLE.get(),
