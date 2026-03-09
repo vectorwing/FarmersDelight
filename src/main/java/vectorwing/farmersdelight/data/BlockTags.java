@@ -69,7 +69,7 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.RICH_SOIL.get(),
 				ModBlocks.RICH_SOIL_FARMLAND.get()
 		);
-		tag(ModTags.MINEABLE_WITH_KNIFE).add(
+		tag(ModTags.Blocks.MINEABLE_WITH_KNIFE).add(
 						Blocks.CACTUS,
 						Blocks.MELON,
 						Blocks.PUMPKIN,
@@ -88,7 +88,7 @@ public class BlockTags extends BlockTagsProvider
 				.addTag(net.minecraft.tags.BlockTags.WOOL_CARPETS)
 				.addTag(net.minecraft.tags.BlockTags.WOOL)
 				.addTag(net.minecraft.tags.BlockTags.CANDLE_CAKES)
-				.addTag(ModTags.STRAW_BLOCKS)
+				.addTag(ModTags.Blocks.STRAW_BLOCKS)
 				.addTag(ForgeTags.MINEABLE_WITH_KNIFE);
 	}
 
@@ -221,10 +221,10 @@ public class BlockTags extends BlockTagsProvider
 	}
 
 	protected void registerModTags() {
-		tag(ModTags.TERRAIN)
+		tag(ModTags.Blocks.TERRAIN)
 				.addTag(net.minecraft.tags.BlockTags.DIRT)
 				.addTag(net.minecraft.tags.BlockTags.SAND);
-		tag(ModTags.STRAW_BLOCKS).add(
+		tag(ModTags.Blocks.STRAW_BLOCKS).add(
 				ModBlocks.RICE_BAG.get(),
 				ModBlocks.ROPE.get(),
 				ModBlocks.SAFETY_NET.get(),
@@ -233,7 +233,7 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.FULL_TATAMI_MAT.get(),
 				ModBlocks.HALF_TATAMI_MAT.get()
 		);
-		tag(ModTags.WILD_CROPS).add(
+		tag(ModTags.Blocks.WILD_CROPS).add(
 				ModBlocks.WILD_CARROTS.get(),
 				ModBlocks.WILD_POTATOES.get(),
 				ModBlocks.WILD_BEETROOTS.get(),
@@ -241,7 +241,7 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.WILD_TOMATOES.get(),
 				ModBlocks.WILD_ONIONS.get(),
 				ModBlocks.WILD_RICE.get());
-		tag(ModTags.WOODEN_CABINETS)
+		tag(ModTags.Blocks.CABINETS_WOODEN)
 				.add(ModBlocks.OAK_CABINET.get())
 				.add(ModBlocks.SPRUCE_CABINET.get())
 				.add(ModBlocks.BIRCH_CABINET.get())
@@ -253,28 +253,28 @@ public class BlockTags extends BlockTagsProvider
 				.add(ModBlocks.BAMBOO_CABINET.get())
 				.add(ModBlocks.CRIMSON_CABINET.get())
 				.add(ModBlocks.WARPED_CABINET.get());
-		tag(ModTags.CABINETS).addTag(ModTags.WOODEN_CABINETS);
+		tag(ModTags.Blocks.CABINETS).addTag(ModTags.Blocks.CABINETS_WOODEN);
 
-		tag(ModTags.MUSHROOM_COLONIES)
+		tag(ModTags.Blocks.MUSHROOM_COLONIES)
 				.add(ModBlocks.BROWN_MUSHROOM_COLONY.get())
 				.add(ModBlocks.RED_MUSHROOM_COLONY.get());
 
-		tag(ModTags.ROPES).add(ModBlocks.ROPE.get())
+		tag(ModTags.Blocks.ROPES).add(ModBlocks.ROPE.get())
 				.addOptional(new ResourceLocation("quark:rope"))
 				.addOptional(new ResourceLocation("supplementaries:rope"));
-		tag(ModTags.TRAY_HEAT_SOURCES).add(
+		tag(ModTags.Blocks.TRAY_HEAT_SOURCES).add(
 						Blocks.LAVA)
 				.addTag(net.minecraft.tags.BlockTags.CAMPFIRES)
 				.addTag(net.minecraft.tags.BlockTags.FIRE);
-		tag(ModTags.HEAT_SOURCES).add(
+		tag(ModTags.Blocks.HEAT_SOURCES).add(
 						Blocks.MAGMA_BLOCK,
 						Blocks.LAVA_CAULDRON,
 						ModBlocks.STOVE.get())
-				.addTag(ModTags.TRAY_HEAT_SOURCES);
-		tag(ModTags.HEAT_CONDUCTORS).add(
+				.addTag(ModTags.Blocks.TRAY_HEAT_SOURCES);
+		tag(ModTags.Blocks.HEAT_CONDUCTORS).add(
 						Blocks.HOPPER)
 				.addOptional(new ResourceLocation("create:chute"));
-		tag(ModTags.COMPOST_ACTIVATORS).add(
+		tag(ModTags.Blocks.COMPOST_ACTIVATORS).add(
 				Blocks.BROWN_MUSHROOM,
 				Blocks.RED_MUSHROOM,
 				Blocks.PODZOL,
@@ -282,8 +282,8 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.ORGANIC_COMPOST.get(),
 				ModBlocks.RICH_SOIL.get(),
 				ModBlocks.RICH_SOIL_FARMLAND.get())
-			.addTag(ModTags.MUSHROOM_COLONIES);
-		tag(ModTags.UNAFFECTED_BY_RICH_SOIL).add(
+			.addTag(ModTags.Blocks.MUSHROOM_COLONIES);
+		tag(ModTags.Blocks.UNAFFECTED_BY_RICH_SOIL).add(
 						Blocks.GRASS_BLOCK,
 						Blocks.MOSS_BLOCK,
 						Blocks.CRIMSON_NYLIUM,
@@ -296,11 +296,11 @@ public class BlockTags extends BlockTagsProvider
 						Blocks.BIG_DRIPLEAF_STEM,
 						Blocks.PINK_PETALS,
 						ModBlocks.SANDY_SHRUB.get())
-				.addTag(ModTags.MUSHROOM_COLONIES)
-				.addTag(ModTags.WILD_CROPS)
+				.addTag(ModTags.Blocks.MUSHROOM_COLONIES)
+				.addTag(ModTags.Blocks.WILD_CROPS)
 				.addTag(net.minecraft.tags.BlockTags.TALL_FLOWERS);
-		tag(ModTags.MUSHROOM_COLONY_GROWABLE_ON).add(ModBlocks.RICH_SOIL.get());
-		tag(ModTags.DROPS_CAKE_SLICE).add(
+		tag(ModTags.Blocks.MUSHROOM_COLONY_GROWABLE_ON).add(ModBlocks.RICH_SOIL.get());
+		tag(ModTags.Blocks.DROPS_CAKE_SLICE).add(
 				Blocks.CANDLE_CAKE,
 				Blocks.WHITE_CANDLE_CAKE,
 				Blocks.ORANGE_CANDLE_CAKE,
@@ -318,7 +318,7 @@ public class BlockTags extends BlockTagsProvider
 				Blocks.GREEN_CANDLE_CAKE,
 				Blocks.RED_CANDLE_CAKE,
 				Blocks.BLACK_CANDLE_CAKE);
-		tag(ModTags.CAMPFIRE_SIGNAL_SMOKE).add(ModBlocks.STRAW_BALE.get()).add(ModBlocks.RICE_BALE.get());
+		tag(ModTags.Blocks.CAMPFIRE_SIGNAL_SMOKE).add(ModBlocks.STRAW_BALE.get()).add(ModBlocks.RICE_BALE.get());
 	}
 
 	private void registerCompatibilityTags() {

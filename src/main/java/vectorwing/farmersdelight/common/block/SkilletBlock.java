@@ -193,7 +193,7 @@ public class SkilletBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 	}
 
 	private boolean getTrayState(LevelAccessor world, BlockPos pos) {
-		return world.getBlockState(pos.below()).is(ModTags.TRAY_HEAT_SOURCES);
+		return world.getBlockState(pos.below()).is(ModTags.Blocks.TRAY_HEAT_SOURCES);
 	}
 
 	/**

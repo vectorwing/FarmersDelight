@@ -68,7 +68,7 @@ public class FDBlockLoot extends BlockLootSubProvider {
 						LootItem.lootTableItem(ModItems.RICE.get())
 								.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
 										.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(RicePaniclesBlock.RICE_AGE, 3)))
-								.when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.KNIVES))),
+								.when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.Items.KNIVES))),
 						LootItem.lootTableItem(ModItems.RICE_PANICLE.get())
 								.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
 										.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(RicePaniclesBlock.RICE_AGE, 3))))))));

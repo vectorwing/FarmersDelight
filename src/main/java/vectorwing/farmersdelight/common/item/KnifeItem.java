@@ -38,7 +38,7 @@ public class KnifeItem extends DiggerItem
 	public static final Set<ToolAction> KNIFE_ACTIONS = Set.of(ToolActions.SHEARS_CARVE, ToolActions.SWORD_DIG);
 
 	public KnifeItem(Tier tier, float attackDamage, float attackSpeed, Properties properties) {
-		super(attackDamage, attackSpeed, tier, ModTags.MINEABLE_WITH_KNIFE, properties);
+		super(attackDamage, attackSpeed, tier, ModTags.Blocks.MINEABLE_WITH_KNIFE, properties);
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class KnifeItem extends DiggerItem
 		public static void onCakeInteraction(PlayerInteractEvent.RightClickBlock event) {
 			ItemStack toolStack = event.getEntity().getItemInHand(event.getHand());
 
-			if (!toolStack.is(ModTags.KNIVES)) {
+			if (!toolStack.is(ModTags.Items.KNIVES)) {
 				return;
 			}
 
@@ -81,7 +81,7 @@ public class KnifeItem extends DiggerItem
 			BlockState state = event.getLevel().getBlockState(pos);
 			Block block = state.getBlock();
 
-			if (state.is(ModTags.DROPS_CAKE_SLICE)) {
+			if (state.is(ModTags.Blocks.DROPS_CAKE_SLICE)) {
 				level.setBlock(pos, Blocks.CAKE.defaultBlockState().setValue(CakeBlock.BITES, 1), 3);
 				Block.dropResources(state, level, pos);
 				ItemUtils.spawnItemEntity(level, new ItemStack(ModItems.CAKE_SLICE.get()),

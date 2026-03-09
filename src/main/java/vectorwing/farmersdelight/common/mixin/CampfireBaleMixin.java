@@ -13,7 +13,7 @@ public abstract class CampfireBaleMixin
 {
 	@Inject(at = @At("HEAD"), method = "isSmokeSource", cancellable = true)
 	public void isFDSmokeSource(BlockState state, CallbackInfoReturnable<Boolean> cir) {
-		if (state.is(ModTags.CAMPFIRE_SIGNAL_SMOKE)) {
+		if (state.is(ModTags.Blocks.CAMPFIRE_SIGNAL_SMOKE)) {
 			cir.setReturnValue(true);
 		}
 	}

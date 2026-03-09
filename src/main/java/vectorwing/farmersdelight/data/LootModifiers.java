@@ -66,7 +66,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
 		//block drops
 		this.add("scavenging_pumpkin", new ReplaceItemModifier(new LootItemCondition[]{
 				LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.PUMPKIN).build(),
-				MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.KNIVES))
+				MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.Items.KNIVES))
 						.and(MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.ANY))).invert()).build()
 		}, Items.PUMPKIN, ModItems.PUMPKIN_SLICE.get(), 4));
 
@@ -105,7 +105,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
 		List<LootItemCondition> conditions = new ArrayList<>();
 
 		//check for knife kill
-		conditions.add(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.KILLER, EntityPredicate.Builder.entity().equipment(EntityEquipmentPredicate.Builder.equipment().mainhand(ItemPredicate.Builder.item().of(ModTags.KNIVES).build()).build()).build()).build());
+		conditions.add(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.KILLER, EntityPredicate.Builder.entity().equipment(EntityEquipmentPredicate.Builder.equipment().mainhand(ItemPredicate.Builder.item().of(ModTags.Items.KNIVES).build()).build()).build()).build());
 		conditions.add(entityConditions.length > 1 ? AnyOfCondition.anyOf(entityConditions).build() : entityConditions[0].build());
 
 		if (onFire != null) {
@@ -127,14 +127,14 @@ public class LootModifiers extends GlobalLootModifierProvider {
 			conditions[i] = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cakes.get(i));
 		}
 		return new AddItemModifier(new LootItemCondition[]{
-				MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.KNIVES)).build(),
+				MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.Items.KNIVES)).build(),
 				AnyOfCondition.anyOf(conditions).build()
 		}, ModItems.CAKE_SLICE.get(), 7);
 	}
 
 	private PastrySlicingModifier pastrySlicing(Item receivedItem, Block slicedBlock) {
 		return new PastrySlicingModifier(new LootItemCondition[]{
-				MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.KNIVES)).build(),
+				MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.Items.KNIVES)).build(),
 				LootItemBlockStatePropertyCondition.hasBlockStateProperties(slicedBlock).build()
 		}, receivedItem);
 	}
@@ -142,7 +142,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
 	private AddItemModifier strawHarvesting(LootItemBlockStatePropertyCondition.Builder slicedBlock, float chance) {
 		List<LootItemCondition> conditions = new ArrayList<>();
 
-		conditions.add(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.STRAW_HARVESTERS)).build());
+		conditions.add(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.Items.STRAW_HARVESTERS)).build());
 		if (chance < 1.0F) {
 			conditions.add(LootItemRandomChanceCondition.randomChance(chance).build());
 		}

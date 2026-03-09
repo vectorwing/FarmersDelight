@@ -49,7 +49,7 @@ public class CommonEvents
 	@SubscribeEvent
 	public static void onAnimalsJoinWorld(EntityJoinLevelEvent event) {
 		if (event.getEntity() instanceof PathfinderMob mob) {
-			if (mob.getType().is(ModTags.HORSE_FEED_TEMPTED)) {
+			if (mob.getType().is(ModTags.EntityTypes.HORSE_FEED_TEMPTED)) {
 				int priority = getTemptGoalPriority(mob);
 				if (priority >= 0)
 					mob.goalSelector.addGoal(priority, new TemptGoal(mob, 1.25D, Ingredient.of(ModItems.HORSE_FEED.get()), false));

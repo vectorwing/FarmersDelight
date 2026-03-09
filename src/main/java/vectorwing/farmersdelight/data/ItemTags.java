@@ -27,7 +27,7 @@ public class ItemTags extends ItemTagsProvider
 
 	@Override
 	protected void addTags(HolderLookup.Provider provider) {
-		copy(ModTags.WILD_CROPS, ModTags.WILD_CROPS_ITEM);
+		copy(ModTags.Blocks.WILD_CROPS, ModTags.Items.WILD_CROPS);
 		copy(BlockTags.SMALL_FLOWERS, net.minecraft.tags.ItemTags.SMALL_FLOWERS);
 
 		this.registerMinecraftTags();
@@ -37,11 +37,11 @@ public class ItemTags extends ItemTagsProvider
 	}
 
 	private void registerMinecraftTags() {
-		tag(net.minecraft.tags.ItemTags.TOOLS).addTag(ModTags.KNIVES);
+		tag(net.minecraft.tags.ItemTags.TOOLS).addTag(ModTags.Items.KNIVES);
 		tag(net.minecraft.tags.ItemTags.TALL_FLOWERS).add(ModItems.WILD_RICE.get());
 		tag(net.minecraft.tags.ItemTags.PIGLIN_LOVED).add(ModItems.GOLDEN_KNIFE.get());
-		tag(net.minecraft.tags.ItemTags.SIGNS).addTag(ModTags.CANVAS_SIGNS);
-		tag(net.minecraft.tags.ItemTags.HANGING_SIGNS).addTag(ModTags.HANGING_CANVAS_SIGNS);
+		tag(net.minecraft.tags.ItemTags.SIGNS).addTag(ModTags.Items.CANVAS_SIGNS);
+		tag(net.minecraft.tags.ItemTags.HANGING_SIGNS).addTag(ModTags.Items.HANGING_CANVAS_SIGNS);
 		tag(net.minecraft.tags.ItemTags.VILLAGER_PLANTABLE_SEEDS)
 				.add(ModItems.CABBAGE_SEEDS.get())
 				.add(ModItems.TOMATO_SEEDS.get())
@@ -49,7 +49,7 @@ public class ItemTags extends ItemTagsProvider
 	}
 
 	private void registerModTags() {
-		tag(ModTags.MEALS).add(
+		tag(ModTags.Items.MEALS).add(
 				ModItems.MIXED_SALAD.get(),
 				ModItems.COOKED_RICE.get(),
 				ModItems.BONE_BROTH.get(),
@@ -76,24 +76,24 @@ public class ItemTags extends ItemTagsProvider
 				ModItems.HONEY_GLAZED_HAM.get(),
 				ModItems.SHEPHERDS_PIE.get()
 		);
-		tag(ModTags.DRINKS).add(
+		tag(ModTags.Items.DRINKS).add(
 				ModItems.MILK_BOTTLE.get(),
 				ModItems.APPLE_CIDER.get(),
 				ModItems.MELON_JUICE.get(),
 				ModItems.HOT_COCOA.get()
 		);
-		tag(ModTags.FEASTS).add(
+		tag(ModTags.Items.FEASTS).add(
 				ModItems.ROAST_CHICKEN_BLOCK.get(),
 				ModItems.STUFFED_PUMPKIN_BLOCK.get(),
 				ModItems.SHEPHERDS_PIE_BLOCK.get(),
 				ModItems.HONEY_GLAZED_HAM_BLOCK.get(),
 				ModItems.RICE_ROLL_MEDLEY_BLOCK.get()
 		);
-		tag(ModTags.KNIVES).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get(), ModItems.NETHERITE_KNIFE.get());
-		tag(ModTags.STRAW_HARVESTERS).addTag(ModTags.KNIVES);
-		tag(ModTags.WOLF_PREY).addTag(ForgeTags.RAW_CHICKEN).addTag(ForgeTags.RAW_MUTTON).add(Items.RABBIT);
-		tag(ModTags.CABBAGE_ROLL_INGREDIENTS).addTag(ForgeTags.RAW_PORK).addTag(ForgeTags.RAW_FISHES).addTag(ForgeTags.RAW_CHICKEN).addTag(ForgeTags.RAW_BEEF).addTag(ForgeTags.RAW_MUTTON).addTag(ForgeTags.EGGS).addTag(Tags.Items.MUSHROOMS).add(Items.CARROT, Items.POTATO, Items.BEETROOT);
-		tag(ModTags.CANVAS_SIGNS)
+		tag(ModTags.Items.KNIVES).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get(), ModItems.NETHERITE_KNIFE.get());
+		tag(ModTags.Items.STRAW_HARVESTERS).addTag(ModTags.Items.KNIVES);
+		tag(ModTags.Items.WOLF_PREY).addTag(ForgeTags.RAW_CHICKEN).addTag(ForgeTags.RAW_MUTTON).add(Items.RABBIT);
+		tag(ModTags.Items.CABBAGE_ROLL_INGREDIENTS).addTag(ForgeTags.RAW_PORK).addTag(ForgeTags.RAW_FISHES).addTag(ForgeTags.RAW_CHICKEN).addTag(ForgeTags.RAW_BEEF).addTag(ForgeTags.RAW_MUTTON).addTag(ForgeTags.EGGS).addTag(Tags.Items.MUSHROOMS).add(Items.CARROT, Items.POTATO, Items.BEETROOT);
+		tag(ModTags.Items.CANVAS_SIGNS)
 				.add(ModItems.CANVAS_SIGN.get())
 				.add(ModItems.WHITE_CANVAS_SIGN.get())
 				.add(ModItems.ORANGE_CANVAS_SIGN.get())
@@ -111,7 +111,7 @@ public class ItemTags extends ItemTagsProvider
 				.add(ModItems.GREEN_CANVAS_SIGN.get())
 				.add(ModItems.RED_CANVAS_SIGN.get())
 				.add(ModItems.BLACK_CANVAS_SIGN.get());
-		tag(ModTags.HANGING_CANVAS_SIGNS)
+		tag(ModTags.Items.HANGING_CANVAS_SIGNS)
 				.add(ModItems.HANGING_CANVAS_SIGN.get())
 				.add(ModItems.WHITE_HANGING_CANVAS_SIGN.get())
 				.add(ModItems.ORANGE_HANGING_CANVAS_SIGN.get())
@@ -129,13 +129,13 @@ public class ItemTags extends ItemTagsProvider
 				.add(ModItems.GREEN_HANGING_CANVAS_SIGN.get())
 				.add(ModItems.RED_HANGING_CANVAS_SIGN.get())
 				.add(ModItems.BLACK_HANGING_CANVAS_SIGN.get());
-		copy(ModTags.CABINETS, ModTags.CABINET_ITEMS);
-		copy(ModTags.WOODEN_CABINETS, ModTags.WOODEN_CABINET_ITEMS);
+		copy(ModTags.Blocks.CABINETS, ModTags.Items.CABINETS);
+		copy(ModTags.Blocks.CABINETS_WOODEN, ModTags.Items.CABINETS_WOODEN);
 
-		copy(ModTags.MUSHROOM_COLONIES, ModTags.MUSHROOM_COLONY_ITEMS);
+		copy(ModTags.Blocks.MUSHROOM_COLONIES, ModTags.Items.MUSHROOM_COLONIES);
 
-		tag(ModTags.SERVING_CONTAINERS).add(Items.BOWL, Items.GLASS_BOTTLE, Items.BUCKET);
-		tag(ModTags.FLAT_ON_CUTTING_BOARD).add(Items.TRIDENT, Items.SPYGLASS)
+		tag(ModTags.Items.SERVING_CONTAINERS).add(Items.BOWL, Items.GLASS_BOTTLE, Items.BUCKET);
+		tag(ModTags.Items.FLAT_ON_CUTTING_BOARD).add(Items.TRIDENT, Items.SPYGLASS)
 				.addOptional(new ResourceLocation("supplementaries:quiver"))
 				.addOptional(new ResourceLocation("autumnity:turkey"))
 				.addOptional(new ResourceLocation("autumnity:cooked_turkey"));
@@ -228,9 +228,9 @@ public class ItemTags extends ItemTagsProvider
 
 	public void registerCompatibilityTags() {
 		tag(CompatibilityTags.CREATE_UPRIGHT_ON_BELT)
-				.addTag(ModTags.MEALS)
-				.addTag(ModTags.DRINKS)
-				.addTag(ModTags.FEASTS)
+				.addTag(ModTags.Items.MEALS)
+				.addTag(ModTags.Items.DRINKS)
+				.addTag(ModTags.Items.FEASTS)
 				.add(ModItems.TOMATO_SAUCE.get())
 				.add(ModItems.DOG_FOOD.get())
 				.add(ModItems.FRUIT_SALAD.get())

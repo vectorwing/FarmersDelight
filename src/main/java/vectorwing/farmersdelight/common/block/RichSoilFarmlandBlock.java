@@ -40,7 +40,7 @@ public class RichSoilFarmlandBlock extends FarmBlock
 		} else if (moisture == 7) {
 			if (Configuration.RICH_SOIL_BOOST_CHANCE.get() > 0.0 && random.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
 				BlockState aboveState = level.getBlockState(pos.above());
-				if (aboveState.is(ModTags.UNAFFECTED_BY_RICH_SOIL)) {
+				if (aboveState.is(ModTags.Blocks.UNAFFECTED_BY_RICH_SOIL)) {
 					return;
 				}
 				if (aboveState.getBlock() instanceof BonemealableBlock growable) {

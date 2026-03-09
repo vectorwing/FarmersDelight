@@ -2,7 +2,6 @@ package vectorwing.farmersdelight.data.recipe;
 
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -42,13 +41,13 @@ public class CraftingRecipes
 
 	public static void canvasSignDyeing(Consumer<FinishedRecipe> consumer, ItemLike canvasSign, ItemLike hangingCanvasSign, TagKey<Item> dyeTag) {
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, canvasSign, 1)
-				.requires(ModTags.CANVAS_SIGNS)
+				.requires(ModTags.Items.CANVAS_SIGNS)
 				.requires(dyeTag)
 				.unlockedBy("has_canvas_sign", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CANVAS_SIGN.get()))
 				.group("fd_canvas_sign")
 				.save(consumer);
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, hangingCanvasSign, 1)
-				.requires(ModTags.HANGING_CANVAS_SIGNS)
+				.requires(ModTags.Items.HANGING_CANVAS_SIGNS)
 				.requires(dyeTag)
 				.unlockedBy("has_hanging_canvas_sign", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.HANGING_CANVAS_SIGN.get()))
 				.group("fd_hanging_canvas_sign")

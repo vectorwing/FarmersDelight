@@ -56,7 +56,7 @@ public class CookingRecipes
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.DOG_FOOD.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(Items.ROTTEN_FLESH)
 				.addIngredient(Items.BONE_MEAL)
-				.addIngredient(ModTags.WOLF_PREY)
+				.addIngredient(ModTags.Items.WOLF_PREY)
 				.addIngredient(ForgeTags.CROPS_RICE)
 				.unlockedByAnyIngredient(Items.ROTTEN_FLESH, Items.BONE_MEAL, ModItems.RICE.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.MISC)
@@ -124,7 +124,7 @@ public class CookingRecipes
 				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.CABBAGE_ROLLS.get(), 1, FAST_COOKING, SMALL_EXP)
 				.addIngredient(ForgeTags.CROPS_CABBAGE)
-				.addIngredient(ModTags.CABBAGE_ROLL_INGREDIENTS)
+				.addIngredient(ModTags.Items.CABBAGE_ROLL_INGREDIENTS)
 				.unlockedByAnyIngredient(ModItems.CABBAGE.get(), ModItems.CABBAGE_LEAF.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.MISC)
 				.save(consumer);

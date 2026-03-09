@@ -37,7 +37,7 @@ public class RichSoilBlock extends Block
 		}
 
 		if (Configuration.RICH_SOIL_BOOST_CHANCE.get() > 0.0 && random.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
-			if (aboveState.is(ModTags.UNAFFECTED_BY_RICH_SOIL)) {
+			if (aboveState.is(ModTags.Blocks.UNAFFECTED_BY_RICH_SOIL)) {
 				return;
 			}
 			if (aboveState.getBlock() instanceof BonemealableBlock growable) {

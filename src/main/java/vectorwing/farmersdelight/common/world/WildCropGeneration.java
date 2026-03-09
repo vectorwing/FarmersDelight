@@ -99,7 +99,7 @@ public class WildCropGeneration
 				BlockTags.DIRT
 		));
 		context.register(FEATURE_PATCH_WILD_TOMATOES, wildCropConfiguredFeature(
-				ModBlocks.WILD_TOMATOES.get(), Blocks.DEAD_BUSH, ModTags.TERRAIN
+				ModBlocks.WILD_TOMATOES.get(), Blocks.DEAD_BUSH, ModTags.Blocks.TERRAIN
 		));
 		context.register(FEATURE_PATCH_WILD_RICE, new ConfiguredFeature<>(
 				ModBiomeFeatures.WILD_RICE.get(),
