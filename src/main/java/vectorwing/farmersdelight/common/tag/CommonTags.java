@@ -67,6 +67,8 @@ public class CommonTags
 		public static final TagKey<Item> PASTA = forgeItemTag("pasta");
 		public static final TagKey<Item> PASTA_RAW_PASTA = forgeItemTag("pasta/raw_pasta");
 
+		public static final TagKey<Item> RAW_MEAT = forgeItemTag("raw_meat");
+
 		public static final TagKey<Item> RAW_BACON = forgeItemTag("raw_bacon");
 		public static final TagKey<Item> RAW_BEEF = forgeItemTag("raw_beef");
 		public static final TagKey<Item> RAW_CHICKEN = forgeItemTag("raw_chicken");

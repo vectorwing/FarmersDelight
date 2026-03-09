@@ -17,7 +17,6 @@
   - When cutting, the status bar will show how many items are left on the board;
   - Comparator signal will now be based on the fill percentage for the item's max stack size;
   - All off-hand interaction has been removed. Placing, removing and processing items is done entirely with the main hand;
-  - The `offhand_equipment` tag has been removed.
 - The Skillet's handheld functions have been updated (thanks to MehVahdJukaar, ChrysanthCow and the Refabricated team!):
   - The Skillet can render foods in handheld mode again;
   - When cooking handheld, the durability meter will become an orange "frying meter", showing you the cooking progress;
@@ -36,6 +35,14 @@
   - Wild Tomatoes now checks for the `farmersdelight:terrain` tag when generating;
   - Wild Rice now checks for the `minecraft:dirt` tag when generating;
 - Stoves now only inflict burn in a small "grilling area" on top of them; the edges are safe to step on;
+- Dog Food can now be prepared with any raw meat, except for fish;
+  - (1.20.1) The recipe uses a custom `forge:raw_meat` tag;
+  - (1.21.1+) The recipe uses the official `c:foods/raw_meat` tag;
+
+### Removals
+- The following tags have been removed:
+  - `wolf_prey`: Replaced by `forge:raw_meat` when making Dog Food;
+  - `offhand_equipment`: Deprecated with the new Cutting Board mechanics;
 
 ### Fixes
 - Fix Canvas Rug and Tatami Mats not having their own stepping sounds, by tagging them as `combination_step_sound_blocks` (thanks, Mickeon!);

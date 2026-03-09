@@ -1,0 +1,9 @@
+{
+  "values": [
+    "minecraft:rabbit",
+    "#forge:raw_beef",
+    "#forge:raw_chicken",
+    "#forge:raw_pork",
+    "#forge:raw_mutton"
+  ]
+}

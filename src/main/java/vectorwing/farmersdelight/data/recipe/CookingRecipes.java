@@ -56,7 +56,7 @@ public class CookingRecipes
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.DOG_FOOD.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(Items.ROTTEN_FLESH)
 				.addIngredient(Items.BONE_MEAL)
-				.addIngredient(ModTags.Items.WOLF_PREY)
+				.addIngredient(CommonTags.Items.RAW_MEAT)
 				.addIngredient(CommonTags.Items.CROPS_RICE)
 				.unlockedByAnyIngredient(Items.ROTTEN_FLESH, Items.BONE_MEAL, ModItems.RICE.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.MISC)

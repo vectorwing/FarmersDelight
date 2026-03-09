@@ -84,9 +84,6 @@ public class ModTags
 		// Items which serve as filling for Cabbage Rolls.
 		public static final TagKey<Item> CABBAGE_ROLL_INGREDIENTS = modItemTag("cabbage_roll_ingredients");
 
-		// Foods that drop from mobs that wolves prey upon (sheep, rabbit and chicken).
-		public static final TagKey<Item> WOLF_PREY = modItemTag("wolf_prey");
-
 		public static final TagKey<Item> CABINETS = modItemTag("cabinets");
 
 		public static final TagKey<Item> CABINETS_WOODEN = modItemTag("cabinets/wooden");

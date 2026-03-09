@@ -91,7 +91,6 @@ public class ItemTags extends ItemTagsProvider
 		);
 		tag(ModTags.Items.KNIVES).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get(), ModItems.NETHERITE_KNIFE.get());
 		tag(ModTags.Items.STRAW_HARVESTERS).addTag(ModTags.Items.KNIVES);
-		tag(ModTags.Items.WOLF_PREY).addTag(CommonTags.Items.RAW_CHICKEN).addTag(CommonTags.Items.RAW_MUTTON).add(Items.RABBIT);
 		tag(ModTags.Items.CABBAGE_ROLL_INGREDIENTS).addTag(CommonTags.Items.RAW_PORK).addTag(CommonTags.Items.RAW_FISHES).addTag(CommonTags.Items.RAW_CHICKEN).addTag(CommonTags.Items.RAW_BEEF).addTag(CommonTags.Items.RAW_MUTTON).addTag(CommonTags.Items.EGGS).addTag(Tags.Items.MUSHROOMS).add(Items.CARROT, Items.POTATO, Items.BEETROOT);
 		tag(ModTags.Items.CANVAS_SIGNS)
 				.add(ModItems.CANVAS_SIGN.get())
@@ -180,6 +179,13 @@ public class ItemTags extends ItemTagsProvider
 
 		tag(CommonTags.Items.PASTA).addTags(CommonTags.Items.PASTA_RAW_PASTA);
 		tag(CommonTags.Items.PASTA_RAW_PASTA).add(ModItems.RAW_PASTA.get());
+
+		tag(CommonTags.Items.RAW_MEAT).add(Items.RABBIT).addTags(
+				CommonTags.Items.RAW_BEEF,
+				CommonTags.Items.RAW_CHICKEN,
+				CommonTags.Items.RAW_PORK,
+				CommonTags.Items.RAW_MUTTON
+		);
 
 		tag(CommonTags.Items.RAW_BACON).add(ModItems.BACON.get());
 		tag(CommonTags.Items.RAW_BEEF).add(Items.BEEF, ModItems.MINCED_BEEF.get());
