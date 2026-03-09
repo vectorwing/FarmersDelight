@@ -39,6 +39,7 @@
   - Wild Rice now checks for the `minecraft:dirt` tag when generating;
 - Stoves now only inflict burn in a small "grilling area" on top of them; the edges are safe to step on;
 - Mushroom Colonies can now be snipped all at once when using a Knife on them;
+- Zombies and Illagers now have a very small chance of dropping an Onion when killed by a player, similar to Carrots and Potatoes;
 - The following recipes were updated:
   - Kelp Rolls now accept any `forge:vegetables` (1.20.1) or `c:foods/vegetable` (1.21+) as filling, instead of just Carrot;
   - Dog Food can now be prepared with any `forge:raw_meat` (1.20.1) or `c:foods/raw_meat` (1.21_), both of which exclude raw fish;
