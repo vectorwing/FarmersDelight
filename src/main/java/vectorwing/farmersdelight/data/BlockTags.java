@@ -9,7 +9,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.tag.CompatibilityTags;
-import vectorwing.farmersdelight.common.tag.ForgeTags;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.Nullable;
@@ -89,7 +89,7 @@ public class BlockTags extends BlockTagsProvider
 				.addTag(net.minecraft.tags.BlockTags.WOOL)
 				.addTag(net.minecraft.tags.BlockTags.CANDLE_CAKES)
 				.addTag(ModTags.Blocks.STRAW_BLOCKS)
-				.addTag(ForgeTags.MINEABLE_WITH_KNIFE);
+				.addTag(CommonTags.Blocks.MINEABLE_WITH_KNIFE);
 	}
 
 	protected void registerMinecraftTags() {
@@ -208,16 +208,16 @@ public class BlockTags extends BlockTagsProvider
 	}
 
 	protected void registerForgeTags() {
-		tag(ForgeTags.MINEABLE_WITH_KNIFE);
-		tag(ForgeTags.STORAGE_BLOCKS_CARROT).add(ModBlocks.CARROT_CRATE.get());
-		tag(ForgeTags.STORAGE_BLOCKS_POTATO).add(ModBlocks.POTATO_CRATE.get());
-		tag(ForgeTags.STORAGE_BLOCKS_BEETROOT).add(ModBlocks.BEETROOT_CRATE.get());
-		tag(ForgeTags.STORAGE_BLOCKS_CABBAGE).add(ModBlocks.CABBAGE_CRATE.get());
-		tag(ForgeTags.STORAGE_BLOCKS_TOMATO).add(ModBlocks.TOMATO_CRATE.get());
-		tag(ForgeTags.STORAGE_BLOCKS_ONION).add(ModBlocks.ONION_CRATE.get());
-		tag(ForgeTags.STORAGE_BLOCKS_RICE).add(ModBlocks.RICE_BAG.get());
-		tag(ForgeTags.STORAGE_BLOCKS_RICE_PANICLE).add(ModBlocks.RICE_BALE.get());
-		tag(ForgeTags.STORAGE_BLOCKS_STRAW).add(ModBlocks.STRAW_BALE.get());
+		tag(CommonTags.Blocks.MINEABLE_WITH_KNIFE);
+		tag(CommonTags.Blocks.STORAGE_BLOCKS_CARROT).add(ModBlocks.CARROT_CRATE.get());
+		tag(CommonTags.Blocks.STORAGE_BLOCKS_POTATO).add(ModBlocks.POTATO_CRATE.get());
+		tag(CommonTags.Blocks.STORAGE_BLOCKS_BEETROOT).add(ModBlocks.BEETROOT_CRATE.get());
+		tag(CommonTags.Blocks.STORAGE_BLOCKS_CABBAGE).add(ModBlocks.CABBAGE_CRATE.get());
+		tag(CommonTags.Blocks.STORAGE_BLOCKS_TOMATO).add(ModBlocks.TOMATO_CRATE.get());
+		tag(CommonTags.Blocks.STORAGE_BLOCKS_ONION).add(ModBlocks.ONION_CRATE.get());
+		tag(CommonTags.Blocks.STORAGE_BLOCKS_RICE).add(ModBlocks.RICE_BAG.get());
+		tag(CommonTags.Blocks.STORAGE_BLOCKS_RICE_PANICLE).add(ModBlocks.RICE_BALE.get());
+		tag(CommonTags.Blocks.STORAGE_BLOCKS_STRAW).add(ModBlocks.STRAW_BALE.get());
 	}
 
 	protected void registerModTags() {
