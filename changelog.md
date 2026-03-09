@@ -35,9 +35,9 @@
   - Wild Tomatoes now checks for the `farmersdelight:terrain` tag when generating;
   - Wild Rice now checks for the `minecraft:dirt` tag when generating;
 - Stoves now only inflict burn in a small "grilling area" on top of them; the edges are safe to step on;
-- Dog Food can now be prepared with any raw meat, except for fish;
-  - (1.20.1) The recipe uses a custom `forge:raw_meat` tag;
-  - (1.21.1+) The recipe uses the official `c:foods/raw_meat` tag;
+- The following recipes were updated:
+  - Kelp Rolls now accept any `forge:vegetables` (1.20.1) or `c:foods/vegetable` (1.21+) as filling, instead of just Carrot;
+  - Dog Food can now be prepared with any `forge:raw_meat` (1.20.1) or `c:foods/raw_meat` (1.21_), both of which exclude raw fish;
 
 ### Removals
 - The following tags have been removed:

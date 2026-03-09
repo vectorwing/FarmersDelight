@@ -817,7 +817,7 @@ public class CraftingRecipes
 				.pattern("###")
 				.define('#', Items.DRIED_KELP)
 				.define('R', ModItems.COOKED_RICE.get())
-				.define('X', Items.CARROT)
+				.define('X', CommonTags.Items.VEGETABLES)
 				.unlockedBy("has_dried_kelp", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DRIED_KELP))
 				.save(consumer);
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.GRILLED_SALMON.get())
