@@ -37,12 +37,14 @@
 - Wild Crops have been updated:
   - Wild Tomatoes now checks for the `farmersdelight:terrain` tag when generating;
   - Wild Rice now checks for the `minecraft:dirt` tag when generating;
-- Stoves now only inflict burn in a small "grilling area" on top of them; the edges are safe to step on;
-- Mushroom Colonies can now be snipped all at once when using a Knife on them;
-- Zombies and Illagers now have a very small chance of dropping an Onion when killed by a player, similar to Carrots and Potatoes;
 - The following recipes were updated:
   - Kelp Rolls now accept any `forge:vegetables` (1.20.1) or `c:foods/vegetable` (1.21+) as filling, instead of just Carrot;
   - Dog Food can now be prepared with any `forge:raw_meat` (1.20.1) or `c:foods/raw_meat` (1.21_), both of which exclude raw fish;
+  - Cutting recipes where you "salvage" items are now condensed together, making the Cutting recipe list less bloated in item viewers:
+    - Wood furniture salvaging became a single `<wood>_furniture` recipe, includes several new items, and has a 75% chance to return a unit of that plank type;
+- Stoves now only inflict burn in a small "grilling area" on top of them; the edges are safe to step on;
+- Mushroom Colonies can now be snipped all at once when using a Knife on them;
+- Zombies and Illagers now have a very small chance of dropping an Onion when killed by a player, similar to Carrots and Potatoes;
 
 ### Removals
 - The following tags have been removed:
