@@ -69,8 +69,14 @@ public class ModTags
 		// Items which represent a drink: a bottled consumable that isn't a potion.
 		public static final TagKey<Item> DRINKS = modItemTag("drinks");
 
+		// Items which represent sweets: prepared foods made with sugar and/or sweet ingredients. Usually classified as desserts.
+		public static final TagKey<Item> SWEETS = modItemTag("sweets");
+
 		// Items which represent a feast: a larger, placeable meal which can serve many portions.
 		public static final TagKey<Item> FEASTS = modItemTag("feasts");
+
+		// Items which represent a pie: a placeable dessert which uses a Pie Crust, and usually provides 4 slices.
+		public static final TagKey<Item> PIES = modItemTag("pies");
 
 		// Items which should render in 2D, laying down flat, when placed on the Cutting Board.
 		public static final TagKey<Item> FLAT_ON_CUTTING_BOARD = modItemTag("flat_on_cutting_board");

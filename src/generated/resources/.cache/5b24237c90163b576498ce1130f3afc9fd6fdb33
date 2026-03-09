@@ -1,4 +1,4 @@
-// 1.20.1	2026-03-09T12:43:32.0667399	Tags for minecraft:item mod id farmersdelight
+// 1.20.1	2026-03-09T13:06:42.4721316	Tags for minecraft:item mod id farmersdelight
 65eba9e0353834055ff822059bd7e1784fe218ad data/createaddition/tags/items/plants.json
 f55c336a7c0c249fc90b76c979cfa5d5f6a277bf data/createaddition/tags/items/plant_foods.json
 578c1c9a03e76fe2831f34ee8a74b0d5396e7c0e data/create/tags/items/upright_on_belt.json
@@ -12,8 +12,10 @@ c1c892764c74767778f091d1250163b53d0276a0 data/farmersdelight/tags/items/feasts.j
 859810b0bf4f36e275af5b6a86c3c7b9a968dbd3 data/farmersdelight/tags/items/hanging_canvas_signs.json
 6510a1cbf216f0ae98454d6489aad73e75deda3b data/farmersdelight/tags/items/meals.json
 3c0ae55321aa932ca588fba70a103c5d62acaebc data/farmersdelight/tags/items/mushroom_colonies.json
+642d4db281748a9ff1b68be08a8e1e7aa7ff0455 data/farmersdelight/tags/items/pies.json
 d837fdcf195d0755d48909cc19e0ad7aed1c4c72 data/farmersdelight/tags/items/serving_containers.json
 b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/farmersdelight/tags/items/straw_harvesters.json
+e94f9ff43bf15f1a12c95c6f75fcb3c243a6a1e2 data/farmersdelight/tags/items/sweets.json
 edaf49470d0e1c903468fd6902234bbeec85c337 data/farmersdelight/tags/items/tools/knives.json
 5596501768488a25c5bcc6ef16c2fc5ca3ab49e9 data/farmersdelight/tags/items/wild_crops.json
 02dfdb41688ccea8169a8d046943461f0aa3c361 data/forge/tags/items/berries.json

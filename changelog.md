@@ -9,6 +9,9 @@
   - It works similarly to the built-in JEI plugin, but offering compatibility with EMI's unique features, such as chances and recipe trees;
   - With it, tags have been integrated into translation files. Both JEI and EMI now use them to display tags in-game.
   - Default recipes have been configured for most FD recipes. I'll try to keep this updated for pack makers, but I may forget now and then.
+- New tags:
+  - `farmersdelight:sweets`: Items which represent sweet prepared foods, usually desserts;
+  - `farmersdelight:pies`: Items which represent a whole pie, or its slice. Included in `sweets`;
 
 ### Updates
 - The Cutting Board has been redesigned:

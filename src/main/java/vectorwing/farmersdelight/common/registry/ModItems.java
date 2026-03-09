@@ -329,10 +329,10 @@ public class ModItems
 			() -> new Item(foodItem(FoodValues.HAM)));
 	public static final RegistryObject<Item> SMOKED_HAM = registerWithTab("smoked_ham",
 			() -> new Item(foodItem(FoodValues.SMOKED_HAM)));
-
-	// Sweets
 	public static final RegistryObject<Item> PIE_CRUST = registerWithTab("pie_crust",
 			() -> new Item(foodItem(FoodValues.PIE_CRUST)));
+
+	// Sweets
 	public static final RegistryObject<Item> APPLE_PIE = registerWithTab("apple_pie",
 			() -> new PlaceableItem(ModBlocks.APPLE_PIE.get(), basicItem()));
 	public static final RegistryObject<Item> SWEET_BERRY_CHEESECAKE = registerWithTab("sweet_berry_cheesecake",
