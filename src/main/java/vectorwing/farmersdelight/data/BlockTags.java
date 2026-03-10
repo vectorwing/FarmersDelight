@@ -34,6 +34,7 @@ public class BlockTags extends BlockTagsProvider
 	protected void registerBlockMineables() {
 		tag(net.minecraft.tags.BlockTags.MINEABLE_WITH_AXE).add(
 				ModBlocks.BASKET.get(),
+				ModBlocks.ROPE_FENCE.get(),
 				ModBlocks.CUTTING_BOARD.get(),
 				ModBlocks.CARROT_CRATE.get(),
 				ModBlocks.POTATO_CRATE.get(),
@@ -96,6 +97,7 @@ public class BlockTags extends BlockTagsProvider
 		tag(net.minecraft.tags.BlockTags.CLIMBABLE).add(
 				ModBlocks.ROPE.get(),
 				ModBlocks.TOMATO_CROP.get());
+		tag(net.minecraft.tags.BlockTags.FENCES).add(ModBlocks.ROPE_FENCE.get());
 		tag(net.minecraft.tags.BlockTags.REPLACEABLE).add(
 				ModBlocks.SANDY_SHRUB.get());
 		tag(net.minecraft.tags.BlockTags.REPLACEABLE_BY_TREES).add(

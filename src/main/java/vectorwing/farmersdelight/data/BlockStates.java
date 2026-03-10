@@ -6,6 +6,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.*;
@@ -109,6 +110,13 @@ public class BlockStates extends BlockStateProvider
 				.part().modelFile(existingModel("rope_side")).rotationY(90).addModel().condition(RopeBlock.EAST, true).end()
 				.part().modelFile(existingModel("rope_side_alt")).addModel().condition(RopeBlock.SOUTH, true).end()
 				.part().modelFile(existingModel("rope_side_alt")).rotationY(90).addModel().condition(RopeBlock.WEST, true).end();
+
+		this.getMultipartBuilder(ModBlocks.ROPE_FENCE.get())
+				.part().modelFile(existingModel("rope_fence_post")).addModel().end()
+				.part().modelFile(existingModel("rope_fence_side")).addModel().condition(FenceBlock.NORTH, true).end()
+				.part().modelFile(existingModel("rope_fence_side")).rotationY(90).addModel().condition(FenceBlock.EAST, true).end()
+				.part().modelFile(existingModel("rope_fence_side_alt")).addModel().condition(FenceBlock.SOUTH, true).end()
+				.part().modelFile(existingModel("rope_fence_side_alt")).rotationY(90).addModel().condition(FenceBlock.WEST, true).end();
 
 		ModelFile head = existingModel("tatami_mat_head");
 		ModelFile foot = existingModel("tatami_mat_foot");

@@ -1,4 +1,4 @@
-// 1.20.1	2026-03-06T12:34:14.5426211	Tags for minecraft:block mod id farmersdelight
+// 1.20.1	2026-03-10T16:41:40.2820624	Tags for minecraft:block mod id farmersdelight
 97e4acbe405d9adae7df8073ec6e9af828285ec9 data/create/tags/blocks/brittle.json
 89dff4a2813a4b6fe13cde6e775266a1d606a4aa data/create/tags/blocks/passive_boiler_heaters.json
 21d6792ce7de98e9396c3829ab52f8574595557b data/farmersdelight/tags/blocks/cabinets.json
@@ -33,8 +33,9 @@ f84897a4867a8218f34243fe5553b2ceaba22e2a data/minecraft/tags/blocks/climbable.js
 890e6e3198d2fbd6f98288728d8b3f073595dfc4 data/minecraft/tags/blocks/combination_step_sound_blocks.json
 c42958bd07d383e53a8b21b64684cff66158965c data/minecraft/tags/blocks/crops.json
 d0812613832bbc602d7ff3274c81d5729e91c2ea data/minecraft/tags/blocks/dirt.json
+76c23603e65410291af111793aa931640128fae8 data/minecraft/tags/blocks/fences.json
 46eba184858bae298b1430bbab858976e323111c data/minecraft/tags/blocks/maintains_farmland.json
-e7ee79caf4f32b529bd1fce158ca712311d66fa7 data/minecraft/tags/blocks/mineable/axe.json
+013d2ca4e224f515a616eacb33ccd79df9e9e3ab data/minecraft/tags/blocks/mineable/axe.json
 2a8f19bc7b45789f94892524a425f28c21f4d227 data/minecraft/tags/blocks/mineable/hoe.json
 963c2f1508fda246255005f0ac460a274c704ecd data/minecraft/tags/blocks/mineable/pickaxe.json
 0eb2b01360e681e4689610044f4da8ace960e921 data/minecraft/tags/blocks/mineable/shovel.json

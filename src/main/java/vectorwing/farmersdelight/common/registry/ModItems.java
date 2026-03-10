@@ -126,6 +126,8 @@ public class ModItems
 			() -> new BlockItem(ModBlocks.RICH_SOIL_FARMLAND.get(), basicItem()));
 	public static final RegistryObject<Item> ROPE = registerWithTab("rope",
 			() -> new RopeItem(ModBlocks.ROPE.get(), basicItem()));
+	public static final RegistryObject<Item> ROPE_FENCE = registerWithTab("rope_fence",
+			() -> new BlockItem(ModBlocks.ROPE_FENCE.get(), basicItem()));
 
 	// Canvas Signs...
 	public static final RegistryObject<Item> CANVAS_SIGN = registerWithTab("canvas_sign",

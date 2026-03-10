@@ -54,6 +54,9 @@ public class ItemModels extends ItemModelProvider
 		blockBasedModel(ModItems.ORGANIC_COMPOST.get(), "_stage0");
 		items.remove(ModItems.ORGANIC_COMPOST.get());
 
+		blockBasedModel(ModItems.ROPE_FENCE.get(), "_inventory");
+		items.remove(ModItems.ROPE_FENCE.get());
+
 		// Items that should be held like a mug
 		Set<Item> mugItems = Sets.newHashSet(
 				ModItems.HOT_COCOA.get(),

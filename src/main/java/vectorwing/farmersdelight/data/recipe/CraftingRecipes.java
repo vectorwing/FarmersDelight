@@ -330,17 +330,24 @@ public class CraftingRecipes
 				.unlockedBy("has_straw", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.STRAW.get()))
 				.group("fd_rope")
 				.save(consumer);
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, ModItems.ROPE.get(), 4)
+				.requires(ModItems.SAFETY_NET.get())
+				.unlockedBy("has_safety_net", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SAFETY_NET.get()))
+				.group("fd_rope")
+				.save(consumer, RecipeUtils.FDLocation("rope_from_safety_net"));
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.SAFETY_NET.get(), 1)
 				.pattern("rr")
 				.pattern("rr")
 				.define('r', ModItems.ROPE.get())
 				.unlockedBy("has_rope", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.ROPE.get()))
 				.save(consumer);
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, ModItems.ROPE.get(), 4)
-				.requires(ModItems.SAFETY_NET.get())
-				.unlockedBy("has_safety_net", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SAFETY_NET.get()))
-				.group("fd_rope")
-				.save(consumer, RecipeUtils.FDLocation("rope_from_safety_net"));
+		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.ROPE_FENCE.get(), 3)
+				.pattern("r/r")
+				.pattern(" / ")
+				.define('/', Items.STICK)
+				.define('r', ModItems.ROPE.get())
+				.unlockedBy("has_rope", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.ROPE.get()))
+				.save(consumer);
 
 		ConditionalRecipe.builder().addCondition(VanillaCrateEnabledCondition.INSTANCE).addRecipe(
 						ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.BEETROOT_CRATE.get())
