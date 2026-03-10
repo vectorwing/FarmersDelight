@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -48,7 +47,6 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 
 	public static final VoxelShape OUT_SHAPE = Shapes.block();
 	public static final VoxelShape RENDER_SHAPE = box(1.0D, 1.0D, 1.0D, 15.0D, 15.0D, 15.0D);
-	@SuppressWarnings("UnstableApiUsage")
 	public static final ImmutableMap<Direction, VoxelShape> COLLISION_SHAPE_FACING =
 			Maps.immutableEnumMap(ImmutableMap.<Direction, VoxelShape>builder()
 					.put(Direction.DOWN, makeHollowCubeShape(box(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D)))
@@ -69,18 +67,16 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		return COLLISION_SHAPE_FACING.get(state.getValue(FACING));
-	}
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		if (level.isClientSide) {
+			return InteractionResult.SUCCESS;
+		}
 
-	@Override
-	public VoxelShape getOcclusionShape(BlockState state, BlockGetter level, BlockPos pos) {
-		return RENDER_SHAPE;
-	}
+		if (level.getBlockEntity(pos) instanceof BasketBlockEntity basket) {
+			player.openMenu(basket);
+		}
 
-	@Override
-	public RenderShape getRenderShape(BlockState state) {
-		return RenderShape.MODEL;
+		return InteractionResult.CONSUME;
 	}
 
 	@Override
@@ -89,22 +85,10 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		if (!level.isClientSide) {
-			BlockEntity tileEntity = level.getBlockEntity(pos);
-			if (tileEntity instanceof BasketBlockEntity) {
-				player.openMenu((BasketBlockEntity) tileEntity);
-			}
-		}
-		return InteractionResult.SUCCESS;
-	}
-
-	@Override
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
-			BlockEntity tileEntity = level.getBlockEntity(pos);
-			if (tileEntity instanceof Container) {
-				Containers.dropContents(level, pos, (Container) tileEntity);
+			if (level.getBlockEntity(pos) instanceof BasketBlockEntity basket) {
+				Containers.dropContents(level, pos, basket);
 				level.updateNeighbourForOutputSignal(pos, this);
 			}
 
@@ -125,8 +109,6 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 
-	// --- HOPPER STUFF ---
-
 	@Override
 	public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
 		boolean isPowered = !level.hasNeighborSignal(pos);
@@ -134,8 +116,6 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 			level.setBlock(pos, state.setValue(ENABLED, isPowered), 4);
 		}
 	}
-
-	// --- BARREL STUFF ---
 
 	@Override
 	public boolean hasAnalogOutputSignal(BlockState state) {
@@ -150,9 +130,8 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 	@Override
 	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		if (stack.hasCustomHoverName()) {
-			BlockEntity tileEntity = level.getBlockEntity(pos);
-			if (tileEntity instanceof BasketBlockEntity) {
-				((BasketBlockEntity) tileEntity).setCustomName(stack.getHoverName());
+			if (level.getBlockEntity(pos) instanceof BasketBlockEntity basket) {
+				basket.setCustomName(stack.getHoverName());
 			}
 		}
 	}
@@ -160,21 +139,28 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		FluidState fluid = context.getLevel().getFluidState(context.getClickedPos());
-		return this.defaultBlockState().setValue(FACING, context.getNearestLookingDirection().getOpposite()).setValue(WATERLOGGED, fluid.getType() == Fluids.WATER);
-	}
-
-	@Override
-	public BlockState rotate(BlockState state, Rotation rotation) {
-		return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
-	}
-
-	@Override
-	public BlockState mirror(BlockState state, Mirror mirror) {
-		return state.rotate(mirror.getRotation(state.getValue(FACING)));
+		return this.defaultBlockState()
+				.setValue(FACING, context.getNearestLookingDirection().getOpposite())
+				.setValue(WATERLOGGED, fluid.getType() == Fluids.WATER);
 	}
 
 	public boolean useShapeForLightOcclusion(BlockState state) {
 		return true;
+	}
+
+	@Override
+	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+		return COLLISION_SHAPE_FACING.get(state.getValue(FACING));
+	}
+
+	@Override
+	public VoxelShape getOcclusionShape(BlockState state, BlockGetter level, BlockPos pos) {
+		return RENDER_SHAPE;
+	}
+
+	@Override
+	public RenderShape getRenderShape(BlockState state) {
+		return RenderShape.MODEL;
 	}
 
 	@Override
@@ -196,5 +182,15 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
 		return level.isClientSide ? null : createTickerHelper(blockEntityType, ModBlockEntityTypes.BASKET.get(), BasketBlockEntity::pushItemsTick);
+	}
+
+	@Override
+	public BlockState rotate(BlockState state, Rotation rotation) {
+		return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
+	}
+
+	@Override
+	public BlockState mirror(BlockState state, Mirror mirror) {
+		return state.rotate(mirror.getRotation(state.getValue(FACING)));
 	}
 }
