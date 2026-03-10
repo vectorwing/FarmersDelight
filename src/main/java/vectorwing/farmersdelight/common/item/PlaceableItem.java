@@ -1,8 +1,6 @@
 package vectorwing.farmersdelight.common.item;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -20,7 +18,6 @@ public class PlaceableItem extends BlockItem
 	}
 
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-		MutableComponent textDescription = TextUtils.tooltip("placeable");
-		tooltip.add(textDescription.withStyle(ChatFormatting.DARK_GRAY).withStyle(ChatFormatting.ITALIC));
+		tooltip.add(TextUtils.PLACEABLE);
 	}
 }

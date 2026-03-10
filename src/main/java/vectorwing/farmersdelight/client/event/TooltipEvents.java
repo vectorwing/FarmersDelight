@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.client.event;
 
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -28,9 +27,7 @@ public class TooltipEvents
 		Item food = event.getItemStack().getItem();
 
 		if (food.equals(Items.PUMPKIN_PIE)) {
-			MutableComponent placeableText = TextUtils.tooltip(Configuration.PUMPKIN_PIE_SNEAK_TO_PLACE.get() ? "placeable_sneaking" : "placeable");
-			List<Component> tooltip = event.getToolTip();
-			tooltip.add(placeableText.withStyle(ChatFormatting.DARK_GRAY).withStyle(ChatFormatting.ITALIC));
+			event.getToolTip().add(Configuration.PUMPKIN_PIE_SNEAK_TO_PLACE.get() ? TextUtils.PLACEABLE_SNEAKING : TextUtils.PLACEABLE);
 		}
 
 		if (!Configuration.VANILLA_SOUP_EXTRA_EFFECTS.get() || !Configuration.FOOD_EFFECT_TOOLTIP.get()) {
