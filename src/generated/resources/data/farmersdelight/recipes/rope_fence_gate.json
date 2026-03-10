@@ -10,12 +10,11 @@
     }
   },
   "pattern": [
-    "r/r",
-    "r/r"
+    "/r/",
+    "/r/"
   ],
   "result": {
-    "count": 3,
-    "item": "farmersdelight:rope_fence"
+    "item": "farmersdelight:rope_fence_gate"
   },
   "show_notification": true
 }

@@ -14,6 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CrossCollisionBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.FluidState;
@@ -26,6 +27,8 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 @SuppressWarnings("deprecation")
 public class RopeFenceBlock extends CrossCollisionBlock
 {
+	public static final VoxelShape POST = Block.box(7.0F, 0.0F, 7.0F, 9.0F, 16.0F, 9.0F);
+
 	public RopeFenceBlock(Properties properties) {
 		super(1.0F, 1.0F, 16.0F, 16.0F, 24.0F, properties);
 		this.registerDefaultState(this.stateDefinition.any()
@@ -46,11 +49,16 @@ public class RopeFenceBlock extends CrossCollisionBlock
 	}
 
 	public VoxelShape getVisualShape(BlockState pState, BlockGetter pReader, BlockPos pPos, CollisionContext pContext) {
-		return this.getShape(pState, pReader, pPos, pContext);
+		return POST;
+	}
+
+	public VoxelShape getOcclusionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
+		return POST;
 	}
 
 	public boolean connectsTo(BlockState state, boolean isSideSolid, Direction direction) {
-		return !isExceptionForConnection(state) && isSideSolid || this.isSameFence(state) ;
+		boolean isRopeFenceGate = state.is(ModBlocks.ROPE_FENCE_GATE.get()) && FenceGateBlock.connectsToDirection(state, direction);
+		return !isExceptionForConnection(state) && isSideSolid || this.isSameFence(state) || isRopeFenceGate;
 	}
 
 	protected boolean isSameFence(BlockState state) {

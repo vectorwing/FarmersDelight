@@ -343,7 +343,14 @@ public class CraftingRecipes
 				.save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.ROPE_FENCE.get(), 3)
 				.pattern("r/r")
-				.pattern(" / ")
+				.pattern("r/r")
+				.define('/', Items.STICK)
+				.define('r', ModItems.ROPE.get())
+				.unlockedBy("has_rope", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.ROPE.get()))
+				.save(consumer);
+		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.ROPE_FENCE_GATE.get())
+				.pattern("/r/")
+				.pattern("/r/")
 				.define('/', Items.STICK)
 				.define('r', ModItems.ROPE.get())
 				.unlockedBy("has_rope", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.ROPE.get()))

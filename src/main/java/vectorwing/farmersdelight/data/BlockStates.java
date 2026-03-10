@@ -4,10 +4,7 @@ import com.google.common.collect.Sets;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.DoublePlantBlock;
-import net.minecraft.world.level.block.FenceBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
@@ -117,6 +114,8 @@ public class BlockStates extends BlockStateProvider
 				.part().modelFile(existingModel("rope_fence_side")).rotationY(90).addModel().condition(FenceBlock.EAST, true).end()
 				.part().modelFile(existingModel("rope_fence_side_alt")).addModel().condition(FenceBlock.SOUTH, true).end()
 				.part().modelFile(existingModel("rope_fence_side_alt")).rotationY(90).addModel().condition(FenceBlock.WEST, true).end();
+
+		ropeFenceGateBlock(ModBlocks.ROPE_FENCE_GATE.get());
 
 		ModelFile head = existingModel("tatami_mat_head");
 		ModelFile foot = existingModel("tatami_mat_foot");
@@ -277,6 +276,17 @@ public class BlockStates extends BlockStateProvider
 					.rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + DEFAULT_ANGLE_OFFSET) % 360)
 					.build();
 		}, SkilletBlock.WATERLOGGED);
+	}
+
+	public void ropeFenceGateBlock(Block block) {
+		getVariantBuilder(block).forAllStatesExcept(state -> {
+			ModelFile modelClosed = existingModel(blockName(block));
+			ModelFile modelOpen = existingModel(blockName(block) + "_open");
+			return ConfiguredModel.builder()
+					.modelFile(state.getValue(FenceGateBlock.OPEN) ? modelOpen : modelClosed)
+					.rotationY((int) state.getValue(FenceGateBlock.FACING).toYRot())
+					.build();
+		}, FenceGateBlock.POWERED, FenceGateBlock.IN_WALL);
 	}
 
 	public void organicCompostBlock(Block block) {

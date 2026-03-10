@@ -128,6 +128,8 @@ public class ModItems
 			() -> new RopeItem(ModBlocks.ROPE.get(), basicItem()));
 	public static final RegistryObject<Item> ROPE_FENCE = registerWithTab("rope_fence",
 			() -> new BlockItem(ModBlocks.ROPE_FENCE.get(), basicItem()));
+	public static final RegistryObject<Item> ROPE_FENCE_GATE = registerWithTab("rope_fence_gate",
+			() -> new BlockItem(ModBlocks.ROPE_FENCE_GATE.get(), basicItem()));
 
 	// Canvas Signs...
 	public static final RegistryObject<Item> CANVAS_SIGN = registerWithTab("canvas_sign",

@@ -1,4 +1,4 @@
-// 1.20.1	2026-03-10T16:29:00.234974	Loot Tables
+// 1.20.1	2026-03-10T19:38:05.8616469	Loot Tables
 228f5797c46d942e33e7dec7ba2caebb37d26905 data/farmersdelight/loot_tables/blocks/acacia_cabinet.json
 23fb8611e8fde16b90b760500fb6d39c0042c092 data/farmersdelight/loot_tables/blocks/apple_pie.json
 9aa2c1672193447d3a448e1aa985ccbc1044542f data/farmersdelight/loot_tables/blocks/bamboo_cabinet.json
@@ -69,6 +69,7 @@ c1d03a43ac609d07995c2aa0e9b2abd73cefe3ae data/farmersdelight/loot_tables/blocks/
 62f85673d10bc300044b5f909aec017b0e33fefd data/farmersdelight/loot_tables/blocks/roast_chicken_block.json
 37528dbafe10dcbb0b52f7858cd67b84fa27587c data/farmersdelight/loot_tables/blocks/rope.json
 c7285841a32a8c9070c0162a5cbd7d76c184d0dd data/farmersdelight/loot_tables/blocks/rope_fence.json
+63e6ee8c9e04192f7bb624f30261cfac5963213e data/farmersdelight/loot_tables/blocks/rope_fence_gate.json
 4022aaf7e682d2846d57833eaf3a5d201a96a874 data/farmersdelight/loot_tables/blocks/safety_net.json
 67d30de9bd9d75ac8fb971985544571d05c983fa data/farmersdelight/loot_tables/blocks/sandy_shrub.json
 8d990d5783094b750d98b649076d9a040df5b506 data/farmersdelight/loot_tables/blocks/shepherds_pie_block.json
