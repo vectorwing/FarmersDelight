@@ -50,7 +50,7 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 		boolean isHeated = skillet.isHeated(level, pos);
 
 		if (state.getValue(SkilletBlock.WATERLOGGED)) {
-			if (!ItemUtils.isInventoryEmpty(skillet.inventory)) {
+			if (ItemUtils.doesInventoryHaveItems(skillet.inventory)) {
 				ItemUtils.dropItems(level, pos, skillet.inventory);
 				skillet.inventoryChanged();
 			}

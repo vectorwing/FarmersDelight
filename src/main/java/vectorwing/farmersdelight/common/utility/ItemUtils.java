@@ -30,13 +30,13 @@ public class ItemUtils
 			Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), inventory.getStackInSlot(slot));
 	}
 
-	public static boolean isInventoryEmpty(IItemHandler inventory) {
+	public static boolean doesInventoryHaveItems(IItemHandler inventory) {
 		for (int i = 0; i < inventory.getSlots(); i++) {
 			if (!inventory.getStackInSlot(i).isEmpty()) {
-				return false;
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	/**
