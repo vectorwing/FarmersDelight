@@ -72,7 +72,7 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 
 				return InteractionResult.sidedSuccess(level.isClientSide);
 			}
-			if (heldStack.is(ModTags.Items.KNIVES)) {
+			if (ItemUtils.isKnife(heldStack)) {
 				int colonyAge = state.getValue(COLONY_AGE);
 				mushroomStack.setCount(colonyAge);
 				level.setBlock(pos, state.setValue(COLONY_AGE, 0), 2);

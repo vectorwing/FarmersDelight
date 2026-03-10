@@ -9,6 +9,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.items.IItemHandler;
+import vectorwing.farmersdelight.common.item.KnifeItem;
+import vectorwing.farmersdelight.common.tag.ModTags;
 
 /**
  * Util for handling ItemStacks and inventories containing them.
@@ -23,6 +25,10 @@ public class ItemUtils
 	 */
 	public static boolean isValidTool(ItemStack stack, ToolAction toolAction, TagKey<Item> fallbackTag) {
 		return stack.canPerformAction(toolAction) || stack.is(fallbackTag);
+	}
+
+	public static boolean isKnife(ItemStack stack) {
+		return isValidTool(stack, KnifeItem.KNIFE_HARVEST, ModTags.Items.KNIVES);
 	}
 
 	public static void dropItems(Level level, BlockPos pos, IItemHandler inventory) {

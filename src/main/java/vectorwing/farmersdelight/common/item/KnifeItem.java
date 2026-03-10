@@ -35,7 +35,8 @@ import java.util.Set;
 
 public class KnifeItem extends DiggerItem
 {
-	public static final Set<ToolAction> KNIFE_ACTIONS = Set.of(ToolActions.SHEARS_CARVE, ToolActions.SWORD_DIG);
+	public static final ToolAction KNIFE_HARVEST = ToolAction.get("knife_harvest");
+	public static final Set<ToolAction> KNIFE_ACTIONS = Set.of(ToolActions.SHEARS_CARVE, ToolActions.SWORD_DIG, KNIFE_HARVEST);
 
 	public KnifeItem(Tier tier, float attackDamage, float attackSpeed, Properties properties) {
 		super(attackDamage, attackSpeed, tier, ModTags.Blocks.MINEABLE_WITH_KNIFE, properties);
@@ -70,9 +71,9 @@ public class KnifeItem extends DiggerItem
 
 		@SubscribeEvent
 		public static void onCakeInteraction(PlayerInteractEvent.RightClickBlock event) {
-			ItemStack toolStack = event.getEntity().getItemInHand(event.getHand());
+			ItemStack heldStack = event.getEntity().getItemInHand(event.getHand());
 
-			if (!toolStack.is(ModTags.Items.KNIVES)) {
+			if (!ItemUtils.isKnife(heldStack)) {
 				return;
 			}
 
@@ -89,7 +90,7 @@ public class KnifeItem extends DiggerItem
 						-0.05, 0, 0);
 				level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
 
-				event.getEntity().awardStat(Stats.ITEM_USED.get(toolStack.getItem()));
+				event.getEntity().awardStat(Stats.ITEM_USED.get(heldStack.getItem()));
 				event.setCancellationResult(InteractionResult.SUCCESS);
 				event.setCanceled(true);
 			}
@@ -106,7 +107,7 @@ public class KnifeItem extends DiggerItem
 						-0.05, 0, 0);
 				level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
 
-				event.getEntity().awardStat(Stats.ITEM_USED.get(toolStack.getItem()));
+				event.getEntity().awardStat(Stats.ITEM_USED.get(heldStack.getItem()));
 				event.setCancellationResult(InteractionResult.SUCCESS);
 				event.setCanceled(true);
 			}

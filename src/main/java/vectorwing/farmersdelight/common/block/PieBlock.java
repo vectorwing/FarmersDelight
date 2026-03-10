@@ -35,7 +35,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.event.ForgeEventFactory;
-import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vectorwing.farmersdelight.common.utility.ShapeUtils;
 
@@ -98,7 +97,7 @@ public class PieBlock extends Block
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		ItemStack heldStack = player.getItemInHand(hand);
 		if (level.isClientSide) {
-			if (heldStack.is(ModTags.Items.KNIVES)) {
+			if (ItemUtils.isKnife(heldStack)) {
 				return cutSlice(level, pos, state, player, heldStack.getItem());
 			}
 
@@ -111,7 +110,7 @@ public class PieBlock extends Block
 			}
 		}
 
-		if (heldStack.is(ModTags.Items.KNIVES)) {
+		if (ItemUtils.isKnife(heldStack)) {
 			return cutSlice(level, pos, state, player, heldStack.getItem());
 		}
 		return this.consumeBite(level, pos, state, player);
