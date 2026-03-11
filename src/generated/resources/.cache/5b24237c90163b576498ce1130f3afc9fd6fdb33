@@ -1,4 +1,4 @@
-// 1.20.1	2026-03-09T17:36:11.3686978	Tags for minecraft:item mod id farmersdelight
+// 1.20.1	2026-03-10T21:45:56.4153633	Tags for minecraft:item mod id farmersdelight
 65eba9e0353834055ff822059bd7e1784fe218ad data/createaddition/tags/items/plants.json
 f55c336a7c0c249fc90b76c979cfa5d5f6a277bf data/createaddition/tags/items/plant_foods.json
 578c1c9a03e76fe2831f34ee8a74b0d5396e7c0e data/create/tags/items/upright_on_belt.json
@@ -39,6 +39,8 @@ e07a7ae115045b2965657efe36300a94364de4af data/forge/tags/items/crops/rice.json
 009e3ca74df76edfe88b0b1f2a043b3bc593957a data/forge/tags/items/dough.json
 009e3ca74df76edfe88b0b1f2a043b3bc593957a data/forge/tags/items/dough/wheat.json
 d66078fe03c4a07a0a12934d4bb5bbf3b63a223e data/forge/tags/items/eggs.json
+76c23603e65410291af111793aa931640128fae8 data/forge/tags/items/fences.json
+1ba129ce39f820a673b8ed7d47d083a5252dd5e3 data/forge/tags/items/fence_gates.json
 2538076811e55ebb5c3c795a21b05c07d489297c data/forge/tags/items/grain.json
 e07a7ae115045b2965657efe36300a94364de4af data/forge/tags/items/grain/rice.json
 9c99444249ea9362072a08ee44c2d01c8ab03176 data/forge/tags/items/grain/wheat.json
