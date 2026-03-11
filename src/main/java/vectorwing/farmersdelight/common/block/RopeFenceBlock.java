@@ -41,18 +41,18 @@ public class RopeFenceBlock extends CrossCollisionBlock
 
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (level.isClientSide) {
-			ItemStack itemstack = player.getItemInHand(hand);
-			return itemstack.is(Items.LEAD) ? InteractionResult.SUCCESS : InteractionResult.PASS;
+			ItemStack stack = player.getItemInHand(hand);
+			return stack.is(Items.LEAD) ? InteractionResult.SUCCESS : InteractionResult.PASS;
 		} else {
 			return LeadItem.bindPlayerMobs(player, level, pos);
 		}
 	}
 
-	public VoxelShape getVisualShape(BlockState pState, BlockGetter pReader, BlockPos pPos, CollisionContext pContext) {
+	public VoxelShape getVisualShape(BlockState state, BlockGetter reader, BlockPos pos, CollisionContext context) {
 		return POST;
 	}
 
-	public VoxelShape getOcclusionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
+	public VoxelShape getOcclusionShape(BlockState state, BlockGetter level, BlockPos pos) {
 		return POST;
 	}
 
@@ -65,10 +65,10 @@ public class RopeFenceBlock extends CrossCollisionBlock
 		return state.is(ModBlocks.ROPE_FENCE.get());
 	}
 
-	public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-		BlockGetter level = pContext.getLevel();
-		BlockPos pos = pContext.getClickedPos();
-		FluidState fluidState = pContext.getLevel().getFluidState(pContext.getClickedPos());
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		BlockGetter level = context.getLevel();
+		BlockPos pos = context.getClickedPos();
+		FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
 		BlockPos northPos = pos.north();
 		BlockPos eastPos = pos.east();
 		BlockPos southPos = pos.south();
@@ -77,7 +77,7 @@ public class RopeFenceBlock extends CrossCollisionBlock
 		BlockState eastState = level.getBlockState(eastPos);
 		BlockState southState = level.getBlockState(southPos);
 		BlockState westState = level.getBlockState(westPos);
-		return super.getStateForPlacement(pContext)
+		return super.getStateForPlacement(context)
 				.setValue(NORTH, this.connectsTo(northState, northState.isFaceSturdy(level, northPos, Direction.SOUTH), Direction.SOUTH))
 				.setValue(EAST, this.connectsTo(eastState, eastState.isFaceSturdy(level, eastPos, Direction.WEST), Direction.WEST))
 				.setValue(SOUTH, this.connectsTo(southState, southState.isFaceSturdy(level, southPos, Direction.NORTH), Direction.NORTH))
