@@ -31,6 +31,12 @@ public class ModSounds
 	public static final RegistryObject<SoundEvent> BLOCK_CUTTING_BOARD_KNIFE = SOUNDS.register("block.cutting_board.knife",
 			() -> SoundEvent.createVariableRangeEvent(new ResourceLocation(FarmersDelight.MODID, "block.cutting_board.knife")));
 
+	// Rope Fence Gate
+	public static final RegistryObject<SoundEvent> BLOCK_ROPE_FENCE_GATE_OPEN = SOUNDS.register("block.rope_fence_gate.open",
+			() -> SoundEvent.createVariableRangeEvent(new ResourceLocation(FarmersDelight.MODID, "block.rope_fence_gate.open")));
+	public static final RegistryObject<SoundEvent> BLOCK_ROPE_FENCE_GATE_CLOSE = SOUNDS.register("block.rope_fence_gate.close",
+			() -> SoundEvent.createVariableRangeEvent(new ResourceLocation(FarmersDelight.MODID, "block.rope_fence_gate.close")));
+
 	// Cabinet
 	public static final RegistryObject<SoundEvent> BLOCK_CABINET_OPEN = SOUNDS.register("block.cabinet.open",
 			() -> SoundEvent.createVariableRangeEvent(new ResourceLocation(FarmersDelight.MODID, "block.cabinet.open")));

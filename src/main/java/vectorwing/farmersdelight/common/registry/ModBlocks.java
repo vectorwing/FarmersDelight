@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.common.registry;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
@@ -74,7 +73,7 @@ public class ModBlocks
 	public static final RegistryObject<Block> ROPE_FENCE = BLOCKS.register("rope_fence",
 			() -> new RopeFenceBlock(Block.Properties.copy(Blocks.OAK_FENCE).strength(1.0F)));
 	public static final RegistryObject<Block> ROPE_FENCE_GATE = BLOCKS.register("rope_fence_gate",
-			() -> new FenceGateBlock(Block.Properties.copy(Blocks.OAK_FENCE).strength(1.0F), SoundEvents.LEASH_KNOT_BREAK, SoundEvents.LEASH_KNOT_PLACE));
+			() -> new FenceGateBlock(Block.Properties.copy(Blocks.OAK_FENCE).strength(1.0F), ModSounds.BLOCK_ROPE_FENCE_GATE_OPEN.get(), ModSounds.BLOCK_ROPE_FENCE_GATE_CLOSE.get()));
 	public static final RegistryObject<Block> OAK_CABINET = BLOCKS.register("oak_cabinet",
 			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
 	public static final RegistryObject<Block> SPRUCE_CABINET = BLOCKS.register("spruce_cabinet",

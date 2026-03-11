@@ -66,6 +66,24 @@
     ],
     "subtitle": "farmersdelight.subtitles.cutting_board.remove_item"
   },
+  "block.rope_fence_gate.close": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.leash_knot.place"
+      }
+    ],
+    "subtitle": "farmersdelight.subtitles.rope_fence_gate.close"
+  },
+  "block.rope_fence_gate.open": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.leash_knot.break"
+      }
+    ],
+    "subtitle": "farmersdelight.subtitles.rope_fence_gate.open"
+  },
   "block.skillet.add_food": {
     "sounds": [
       "farmersdelight:block/skillet/add_food1",

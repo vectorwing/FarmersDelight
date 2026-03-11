@@ -31,6 +31,8 @@ public class SoundDefinitions extends SoundDefinitionsProvider {
 		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_CUTTING_BOARD_PLACE, SoundEvents.WOOD_PLACE);
 		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_CUTTING_BOARD_REMOVE, SoundEvents.WOOD_HIT);
 		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_STOVE_CRACKLE, SoundEvents.CAMPFIRE_CRACKLE);
+		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_ROPE_FENCE_GATE_CLOSE, SoundEvents.LEASH_KNOT_PLACE);
+		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_ROPE_FENCE_GATE_OPEN, SoundEvents.LEASH_KNOT_BREAK);
 		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_CABINET_CLOSE, SoundEvents.BARREL_CLOSE);
 		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_CABINET_OPEN, SoundEvents.BARREL_OPEN);
 		this.generateExistingSoundWithSubtitle(ModSounds.ITEM_TOMATO_PICK_FROM_BUSH, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES);
