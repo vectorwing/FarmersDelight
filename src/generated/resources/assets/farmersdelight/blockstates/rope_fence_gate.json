@@ -1,33 +1,63 @@
 {
   "variants": {
-    "facing=east,open=false": {
+    "facing=east,in_wall=false,open=false": {
       "model": "farmersdelight:block/rope_fence_gate",
       "y": 270
     },
-    "facing=east,open=true": {
+    "facing=east,in_wall=false,open=true": {
       "model": "farmersdelight:block/rope_fence_gate_open",
       "y": 270
     },
-    "facing=north,open=false": {
+    "facing=east,in_wall=true,open=false": {
+      "model": "farmersdelight:block/rope_fence_gate_wall",
+      "y": 270
+    },
+    "facing=east,in_wall=true,open=true": {
+      "model": "farmersdelight:block/rope_fence_gate_wall_open",
+      "y": 270
+    },
+    "facing=north,in_wall=false,open=false": {
       "model": "farmersdelight:block/rope_fence_gate",
       "y": 180
     },
-    "facing=north,open=true": {
+    "facing=north,in_wall=false,open=true": {
       "model": "farmersdelight:block/rope_fence_gate_open",
       "y": 180
     },
-    "facing=south,open=false": {
+    "facing=north,in_wall=true,open=false": {
+      "model": "farmersdelight:block/rope_fence_gate_wall",
+      "y": 180
+    },
+    "facing=north,in_wall=true,open=true": {
+      "model": "farmersdelight:block/rope_fence_gate_wall_open",
+      "y": 180
+    },
+    "facing=south,in_wall=false,open=false": {
       "model": "farmersdelight:block/rope_fence_gate"
     },
-    "facing=south,open=true": {
+    "facing=south,in_wall=false,open=true": {
       "model": "farmersdelight:block/rope_fence_gate_open"
     },
-    "facing=west,open=false": {
+    "facing=south,in_wall=true,open=false": {
+      "model": "farmersdelight:block/rope_fence_gate_wall"
+    },
+    "facing=south,in_wall=true,open=true": {
+      "model": "farmersdelight:block/rope_fence_gate_wall_open"
+    },
+    "facing=west,in_wall=false,open=false": {
       "model": "farmersdelight:block/rope_fence_gate",
       "y": 90
     },
-    "facing=west,open=true": {
+    "facing=west,in_wall=false,open=true": {
       "model": "farmersdelight:block/rope_fence_gate_open",
+      "y": 90
+    },
+    "facing=west,in_wall=true,open=false": {
+      "model": "farmersdelight:block/rope_fence_gate_wall",
+      "y": 90
+    },
+    "facing=west,in_wall=true,open=true": {
+      "model": "farmersdelight:block/rope_fence_gate_wall_open",
       "y": 90
     }
   }

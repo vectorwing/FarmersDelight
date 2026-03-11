@@ -8,7 +8,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -73,7 +72,7 @@ public class ModBlocks
 	public static final RegistryObject<Block> ROPE_FENCE = BLOCKS.register("rope_fence",
 			() -> new RopeFenceBlock(Block.Properties.copy(Blocks.OAK_FENCE).strength(1.0F)));
 	public static final RegistryObject<Block> ROPE_FENCE_GATE = BLOCKS.register("rope_fence_gate",
-			() -> new FenceGateBlock(Block.Properties.copy(Blocks.OAK_FENCE).strength(1.0F), ModSounds.BLOCK_ROPE_FENCE_GATE_OPEN.get(), ModSounds.BLOCK_ROPE_FENCE_GATE_CLOSE.get()));
+			() -> new RopeFenceGateBlock(Block.Properties.copy(Blocks.OAK_FENCE).strength(1.0F)));
 	public static final RegistryObject<Block> OAK_CABINET = BLOCKS.register("oak_cabinet",
 			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
 	public static final RegistryObject<Block> SPRUCE_CABINET = BLOCKS.register("spruce_cabinet",

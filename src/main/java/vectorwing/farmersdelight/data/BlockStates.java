@@ -280,13 +280,14 @@ public class BlockStates extends BlockStateProvider
 
 	public void ropeFenceGateBlock(Block block) {
 		getVariantBuilder(block).forAllStatesExcept(state -> {
-			ModelFile modelClosed = existingModel(blockName(block));
-			ModelFile modelOpen = existingModel(blockName(block) + "_open");
+			String wallInfix = state.getValue(FenceGateBlock.IN_WALL) ? "_wall" : "";
+			ModelFile modelClosed = existingModel(blockName(block) + wallInfix);
+			ModelFile modelOpen = existingModel(blockName(block) + wallInfix + "_open");
 			return ConfiguredModel.builder()
 					.modelFile(state.getValue(FenceGateBlock.OPEN) ? modelOpen : modelClosed)
 					.rotationY((int) state.getValue(FenceGateBlock.FACING).toYRot())
 					.build();
-		}, FenceGateBlock.POWERED, FenceGateBlock.IN_WALL);
+		}, FenceGateBlock.POWERED);
 	}
 
 	public void organicCompostBlock(Block block) {
