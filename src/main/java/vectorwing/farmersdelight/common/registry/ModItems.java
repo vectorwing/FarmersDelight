@@ -118,6 +118,10 @@ public class ModItems
 			() -> new FuelBlockItem(ModBlocks.HALF_TATAMI_MAT.get(), basicItem()));
 	public static final RegistryObject<Item> CANVAS_RUG = registerWithTab("canvas_rug",
 			() -> new FuelBlockItem(ModBlocks.CANVAS_RUG.get(), basicItem(), 200));
+	public static final RegistryObject<Item> ROPE_FENCE = registerWithTab("rope_fence",
+			() -> new BlockItem(ModBlocks.ROPE_FENCE.get(), basicItem()));
+	public static final RegistryObject<Item> ROPE_FENCE_GATE = registerWithTab("rope_fence_gate",
+			() -> new BlockItem(ModBlocks.ROPE_FENCE_GATE.get(), basicItem()));
 	public static final RegistryObject<Item> ORGANIC_COMPOST = registerWithTab("organic_compost",
 			() -> new BlockItem(ModBlocks.ORGANIC_COMPOST.get(), basicItem()));
 	public static final RegistryObject<Item> RICH_SOIL = registerWithTab("rich_soil",
@@ -126,10 +130,6 @@ public class ModItems
 			() -> new BlockItem(ModBlocks.RICH_SOIL_FARMLAND.get(), basicItem()));
 	public static final RegistryObject<Item> ROPE = registerWithTab("rope",
 			() -> new RopeItem(ModBlocks.ROPE.get(), basicItem()));
-	public static final RegistryObject<Item> ROPE_FENCE = registerWithTab("rope_fence",
-			() -> new BlockItem(ModBlocks.ROPE_FENCE.get(), basicItem()));
-	public static final RegistryObject<Item> ROPE_FENCE_GATE = registerWithTab("rope_fence_gate",
-			() -> new BlockItem(ModBlocks.ROPE_FENCE_GATE.get(), basicItem()));
 
 	// Canvas Signs...
 	public static final RegistryObject<Item> CANVAS_SIGN = registerWithTab("canvas_sign",
