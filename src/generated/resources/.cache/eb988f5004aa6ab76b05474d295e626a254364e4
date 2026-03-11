@@ -1,4 +1,4 @@
-// 1.20.1	2026-03-04T14:48:17.3252186	Block States: farmersdelight
+// 1.20.1	2026-03-10T22:32:05.6622853	Block States: farmersdelight
 d4d9057afde725ea2a48206d8c1ea6eee4ec1c24 assets/farmersdelight/blockstates/acacia_cabinet.json
 c1a643b06507467b350b8eedb4cc05f93d71abb2 assets/farmersdelight/blockstates/apple_pie.json
 5cf28a36e15368244462670289f57eb16fa0a086 assets/farmersdelight/blockstates/bamboo_cabinet.json
@@ -97,6 +97,8 @@ ee9526c2fe9ef142e74d2f52b3ba25dd7f5d55c4 assets/farmersdelight/blockstates/rich_
 8554219ee8e40471f8ac0d2b2f1f16227a6b636c assets/farmersdelight/blockstates/rich_soil_farmland.json
 4611d78590f032e316656f841f821883fe3c2430 assets/farmersdelight/blockstates/roast_chicken_block.json
 50b80e7e84e50cb4ffd96d5ac84284668ffb27ee assets/farmersdelight/blockstates/rope.json
+0e7f283cae48ae7368e8daeb064023d9cddc2521 assets/farmersdelight/blockstates/rope_fence.json
+f1073da24a6366a1ad65a90001a45311a9e6f3ee assets/farmersdelight/blockstates/rope_fence_gate.json
 61339c185ed423cf1b33dfd7d540977ab83a2a2a assets/farmersdelight/blockstates/safety_net.json
 487d56bbfa59470e8eca28982c05791be4791ed2 assets/farmersdelight/blockstates/sandy_shrub.json
 910183f56aa0fcbae9c24bf911ab6d1b64fa1b3d assets/farmersdelight/blockstates/shepherds_pie_block.json

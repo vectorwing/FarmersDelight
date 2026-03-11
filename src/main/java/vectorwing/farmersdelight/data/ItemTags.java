@@ -165,6 +165,8 @@ public class ItemTags extends ItemTagsProvider
 
 	@SuppressWarnings("unchecked")
 	private void registerForgeTags() {
+		tag(Tags.Items.FENCES).add(ModItems.ROPE_FENCE.get());
+		tag(Tags.Items.FENCE_GATES).add(ModItems.ROPE_FENCE_GATE.get());
 		tag(CommonTags.Items.BERRIES).add(Items.SWEET_BERRIES, Items.GLOW_BERRIES);
 		tag(CommonTags.Items.BREAD).addTag(CommonTags.Items.BREAD_WHEAT);
 		tag(CommonTags.Items.BREAD_WHEAT).add(Items.BREAD);

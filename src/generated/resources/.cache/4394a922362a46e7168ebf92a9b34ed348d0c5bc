@@ -1,4 +1,4 @@
-// 1.20.1	2026-03-01T13:38:04.9954588	Item Models: farmersdelight
+// 1.20.1	2026-03-10T19:38:05.8616469	Item Models: farmersdelight
 01e23a47f469a0c2107b2a1b6fc7f7c8f0c23d55 assets/farmersdelight/models/item/acacia_cabinet.json
 a58cc863fafd0f13d1235a2f7344b446f853ae55 assets/farmersdelight/models/item/apple_cider.json
 8348e66b9efe6a92614cca78c3463d3efaea57fa assets/farmersdelight/models/item/apple_pie.json
@@ -136,6 +136,8 @@ e757f56f1f494b15e0fb40ebfc9cc8a12af3256f assets/farmersdelight/models/item/rice_
 61977acbfe4a439f360e42bff6f2d27620734f9d assets/farmersdelight/models/item/roast_chicken.json
 98dd366831303816384882e4aa1a202ad544afc3 assets/farmersdelight/models/item/roast_chicken_block.json
 b15a223c8c507c4e37589d6d8d04ab406e58c660 assets/farmersdelight/models/item/rope.json
+f301173739c6edeacd34e65b3b5d9702fa2866ba assets/farmersdelight/models/item/rope_fence.json
+20ce4552759aaa97287f4063059a2a8b37238633 assets/farmersdelight/models/item/rope_fence_gate.json
 fc557dc149fd5dad772bb096cffe465d6352ffb7 assets/farmersdelight/models/item/rotten_tomato.json
 805a255189bc6723f392a197ce88c78804365e8f assets/farmersdelight/models/item/safety_net.json
 df9fcba774634b5fd6df69ed914ad983a954fcd5 assets/farmersdelight/models/item/salmon_roll.json

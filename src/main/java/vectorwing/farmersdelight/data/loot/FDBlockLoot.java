@@ -156,6 +156,8 @@ public class FDBlockLoot extends BlockLootSubProvider {
 		dropSelf(ModBlocks.STRAW_BALE.get());
 
 		dropSelf(ModBlocks.ROPE.get());
+		dropSelf(ModBlocks.ROPE_FENCE.get());
+		dropSelf(ModBlocks.ROPE_FENCE_GATE.get());
 		dropSelf(ModBlocks.SAFETY_NET.get());
 
 		dropSelf(ModBlocks.CANVAS_SIGN.get());

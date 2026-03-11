@@ -4,12 +4,13 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
-import vectorwing.farmersdelight.common.tag.CompatibilityTags;
 import vectorwing.farmersdelight.common.tag.CommonTags;
+import vectorwing.farmersdelight.common.tag.CompatibilityTags;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.Nullable;
@@ -34,6 +35,8 @@ public class BlockTags extends BlockTagsProvider
 	protected void registerBlockMineables() {
 		tag(net.minecraft.tags.BlockTags.MINEABLE_WITH_AXE).add(
 				ModBlocks.BASKET.get(),
+				ModBlocks.ROPE_FENCE.get(),
+				ModBlocks.ROPE_FENCE_GATE.get(),
 				ModBlocks.CUTTING_BOARD.get(),
 				ModBlocks.CARROT_CRATE.get(),
 				ModBlocks.POTATO_CRATE.get(),
@@ -96,6 +99,8 @@ public class BlockTags extends BlockTagsProvider
 		tag(net.minecraft.tags.BlockTags.CLIMBABLE).add(
 				ModBlocks.ROPE.get(),
 				ModBlocks.TOMATO_CROP.get());
+		tag(net.minecraft.tags.BlockTags.FENCES).add(ModBlocks.ROPE_FENCE.get());
+		tag(net.minecraft.tags.BlockTags.FENCE_GATES).add(ModBlocks.ROPE_FENCE_GATE.get());
 		tag(net.minecraft.tags.BlockTags.REPLACEABLE).add(
 				ModBlocks.SANDY_SHRUB.get());
 		tag(net.minecraft.tags.BlockTags.REPLACEABLE_BY_TREES).add(
@@ -209,6 +214,8 @@ public class BlockTags extends BlockTagsProvider
 
 	protected void registerForgeTags() {
 		tag(CommonTags.Blocks.MINEABLE_WITH_KNIFE);
+		tag(Tags.Blocks.FENCES).add(ModBlocks.ROPE_FENCE.get());
+		tag(Tags.Blocks.FENCE_GATES).add(ModBlocks.ROPE_FENCE_GATE.get());
 		tag(CommonTags.Blocks.STORAGE_BLOCKS_CARROT).add(ModBlocks.CARROT_CRATE.get());
 		tag(CommonTags.Blocks.STORAGE_BLOCKS_POTATO).add(ModBlocks.POTATO_CRATE.get());
 		tag(CommonTags.Blocks.STORAGE_BLOCKS_BEETROOT).add(ModBlocks.BEETROOT_CRATE.get());

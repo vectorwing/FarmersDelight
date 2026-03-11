@@ -69,6 +69,10 @@ public class ModBlocks
 			() -> new RopeBlock(Block.Properties.copy(Blocks.BROWN_CARPET).noCollission().noOcclusion().strength(0.2F).sound(SoundType.WOOL)));
 	public static final RegistryObject<Block> SAFETY_NET = BLOCKS.register("safety_net",
 			() -> new SafetyNetBlock(Block.Properties.copy(Blocks.BROWN_CARPET).strength(0.2F).sound(SoundType.WOOL)));
+	public static final RegistryObject<Block> ROPE_FENCE = BLOCKS.register("rope_fence",
+			() -> new RopeFenceBlock(Block.Properties.copy(Blocks.OAK_FENCE).strength(1.0F)));
+	public static final RegistryObject<Block> ROPE_FENCE_GATE = BLOCKS.register("rope_fence_gate",
+			() -> new RopeFenceGateBlock(Block.Properties.copy(Blocks.OAK_FENCE).strength(1.0F)));
 	public static final RegistryObject<Block> OAK_CABINET = BLOCKS.register("oak_cabinet",
 			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
 	public static final RegistryObject<Block> SPRUCE_CABINET = BLOCKS.register("spruce_cabinet",

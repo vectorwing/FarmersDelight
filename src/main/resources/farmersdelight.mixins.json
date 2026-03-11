@@ -11,6 +11,7 @@
     "KeepRichSoilUntrampledMixin",
     "PlacePumpkinPieMixin",
     "RabbitsEatCabbageMixin",
+    "RopeFenceConnectionMixin",
     "SoupItemMixin",
     "accessor.RecipeManagerAccessor"
   ],
