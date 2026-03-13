@@ -320,7 +320,7 @@ public class ModBlocks
 	public static final RegistryObject<Block> SHEPHERDS_PIE_BLOCK = BLOCKS.register("shepherds_pie_block",
 			() -> new RotatedFeastBlock(Block.Properties.copy(Blocks.OAK_PLANKS), ModItems.SHEPHERDS_PIE, true, BlockShapes.SHEPHERDS_PIE_SHAPES, BlockShapes.TRAY_SHAPE));
 	public static final RegistryObject<Block> GLEAMING_SALAD_BLOCK = BLOCKS.register("gleaming_salad_block",
-			() -> new FeastBlock(Block.Properties.copy(Blocks.OAK_PLANKS).lightLevel(glowingFeastBlockEmission()), ModItems.GLEAMING_SALAD, true));
+			() -> new GleamingSaladBlock(Block.Properties.copy(Blocks.OAK_PLANKS).lightLevel(glowingFeastBlockEmission()), ModItems.GLEAMING_SALAD, true));
 	public static final RegistryObject<Block> RICE_ROLL_MEDLEY_BLOCK = BLOCKS.register("rice_roll_medley_block",
 			() -> new RiceRollMedleyBlock(Block.Properties.copy(Blocks.OAK_PLANKS)));
 }
