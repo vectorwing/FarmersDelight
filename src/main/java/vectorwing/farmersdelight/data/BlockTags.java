@@ -208,7 +208,9 @@ public class BlockTags extends BlockTagsProvider
 		tag(net.minecraft.tags.BlockTags.COMBINATION_STEP_SOUND_BLOCKS).add(
 				ModBlocks.CANVAS_RUG.get(),
 				ModBlocks.FULL_TATAMI_MAT.get(),
-				ModBlocks.HALF_TATAMI_MAT.get()
+				ModBlocks.HALF_TATAMI_MAT.get(),
+				ModBlocks.CUTTING_BOARD.get(),
+				ModBlocks.ROPE.get()
 		);
 	}
 
