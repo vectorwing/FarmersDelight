@@ -232,6 +232,7 @@ public class FDBlockLoot extends BlockLootSubProvider {
 		add(ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get(), block -> this.platedFood(block, 8));
 		add(ModBlocks.ROAST_CHICKEN_BLOCK.get(), block -> this.platedFoodExtraDrop(block, Items.BONE_MEAL, 4));
 		add(ModBlocks.SHEPHERDS_PIE_BLOCK.get(), block -> this.platedFood(block, 4));
+		add(ModBlocks.GLEAMING_SALAD_BLOCK.get(), block -> this.platedFood(block, 4));
 		add(ModBlocks.STUFFED_PUMPKIN_BLOCK.get(), block -> LootTable.lootTable()
 				.withPool(LootPool.lootPool()
 						.setRolls(ConstantValue.exactly(1.0F))

@@ -902,6 +902,18 @@ public class CraftingRecipes
 				.requires(ModItems.COOKED_RICE.get())
 				.unlockedBy("has_smoked_ham", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SMOKED_HAM.get()))
 				.save(consumer);
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.GLEAMING_SALAD_BLOCK.get())
+				.requires(Items.GLOW_BERRIES)
+				.requires(Items.HONEY_BOTTLE)
+				.requires(Items.GLOW_BERRIES)
+				.requires(CommonTags.Items.CROPS_TOMATO)
+				.requires(Items.GOLDEN_CARROT)
+				.requires(Tags.Items.CROPS_BEETROOT)
+				.requires(ModItems.CABBAGE.get())
+				.requires(Items.BOWL)
+				.requires(ModItems.CABBAGE.get())
+				.unlockedBy("has_glow_berries", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.GLOW_BERRY_CUSTARD.get()))
+				.save(consumer);
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.RICE_ROLL_MEDLEY_BLOCK.get())
 				.requires(ModItems.KELP_ROLL_SLICE.get())
 				.requires(ModItems.KELP_ROLL_SLICE.get())

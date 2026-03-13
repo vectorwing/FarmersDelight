@@ -153,6 +153,7 @@ public class BlockStates extends BlockStateProvider
 		feastBlock((FeastBlock) ModBlocks.ROAST_CHICKEN_BLOCK.get());
 		feastBlock((FeastBlock) ModBlocks.HONEY_GLAZED_HAM_BLOCK.get());
 		feastBlock((FeastBlock) ModBlocks.SHEPHERDS_PIE_BLOCK.get());
+		feastBlock((FeastBlock) ModBlocks.GLEAMING_SALAD_BLOCK.get());
 		feastBlock((FeastBlock) ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get());
 
 		wildCropBlock(ModBlocks.SANDY_SHRUB.get());

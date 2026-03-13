@@ -81,6 +81,16 @@
       },
       "trigger": "minecraft:consume_item"
     },
+    "gleaming_salad": {
+      "conditions": {
+        "item": {
+          "items": [
+            "farmersdelight:gleaming_salad"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
     "grilled_salmon": {
       "conditions": {
         "item": {
@@ -342,6 +352,9 @@
     ],
     [
       "shepherds_pie"
+    ],
+    [
+      "gleaming_salad"
     ]
   ],
   "rewards": {

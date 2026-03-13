@@ -3,8 +3,10 @@
 ## 1.3.0 (WIP)
 
 ### Additions
-- **Rope Fence** - A thin and sleek flavor of fence, complete with its own **Rope Fence Gate**!
-  - Craft by replacing planks with rope in the standard recipe;
+- New blocks:
+  - **Gleaming Salad** - A salad that shines like a Lush Cave! Made with fresh Glow Berries and a rich selection of vegetables, it will (literally) illuminate your dinner table;
+  - **Rope Fence** - A thin and sleek flavor of fence, complete with its own **Rope Fence Gate**!
+    - Craft by replacing planks with rope in the standard recipe;
 - Pumpkin Pie can now be placed as a block, like the other pies!
   - By default, it is placeable without secondary action. A config exists to require sneaking, if preferred;
 - Farmer's Delight now has a native EMI plugin! (thanks, ChrysanthCow!)

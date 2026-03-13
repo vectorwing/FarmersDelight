@@ -461,6 +461,11 @@ public class ModItems
 	public static final RegistryObject<Item> SHEPHERDS_PIE = registerWithTab("shepherds_pie",
 			() -> new ConsumableItem(bowlFoodItem(FoodValues.SHEPHERDS_PIE), true));
 
+	public static final RegistryObject<Item> GLEAMING_SALAD_BLOCK = registerWithTab("gleaming_salad_block",
+			() -> new PlaceableItem(ModBlocks.GLEAMING_SALAD_BLOCK.get(), basicItem().stacksTo(1)));
+	public static final RegistryObject<Item> GLEAMING_SALAD = registerWithTab("gleaming_salad",
+			() -> new ConsumableItem(bowlFoodItem(FoodValues.GLEAMING_SALAD), true));
+
 	public static final RegistryObject<Item> RICE_ROLL_MEDLEY_BLOCK = registerWithTab("rice_roll_medley_block",
 			() -> new PlaceableItem(ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get(), basicItem().stacksTo(1)));
 

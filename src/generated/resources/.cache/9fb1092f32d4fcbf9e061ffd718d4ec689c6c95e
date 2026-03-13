@@ -1,4 +1,4 @@
-// 1.20.1	2026-03-10T20:20:02.980519	Recipes
+// 1.20.1	2026-03-13T17:18:30.7261082	Recipes
 169cfc1d11ca3cede161363799f6c0e00bc1412e data/farmersdelight/advancements/recipes/beetroot_crate.json
 a498fcc8b72b6631ddbb164a0245b37491e7571a data/farmersdelight/advancements/recipes/building_blocks/cabbage_crate.json
 c941206993bfa59d31b38132b898fb94c29746a6 data/farmersdelight/advancements/recipes/building_blocks/onion_crate.json
@@ -146,6 +146,7 @@ a11017cc4d1bacf81b5673e2319c337eddff6a78 data/farmersdelight/advancements/recipe
 0a11bc4703d45a661faedc2cda251bb869305eca data/farmersdelight/advancements/recipes/food/fried_egg_from_campfire_cooking.json
 5e98ac4d563f5f58847b94deef9f23131aeae41a data/farmersdelight/advancements/recipes/food/fried_egg_from_smoking.json
 56b3dacd524c7bd54dab452bff5bdfdb134023dd data/farmersdelight/advancements/recipes/food/fruit_salad.json
+0547427a762aaecb9d86ea9e10a1b88990c8314e data/farmersdelight/advancements/recipes/food/gleaming_salad_block.json
 f0c0d12fcf649ce814795ae0a63a5413d771986d data/farmersdelight/advancements/recipes/food/grilled_salmon.json
 43895e136610904bd552d7695a29dd263dbf6a17 data/farmersdelight/advancements/recipes/food/hamburger.json
 95c3ab80d673faca67c69b93ca20793376d45f1c data/farmersdelight/advancements/recipes/food/honey_cookie.json
@@ -360,6 +361,7 @@ ba81281221e281cf999dfe192179aa2b766f1797 data/farmersdelight/recipes/fried_egg.j
 9e9abd19dc7b1bfeef9f1c19588535a8a83726ff data/farmersdelight/recipes/fruit_salad.json
 1ea6c7887529e81ca3d9c6c73c3b52e39d7da59a data/farmersdelight/recipes/full_tatami_mat.json
 14f8cadf00d01b3bc199f609b2e6d8dc42cc9a55 data/farmersdelight/recipes/full_tatami_mat_from_halves.json
+bcca17d3b6fd4c2ebe44c90c84d67a71e6d100d9 data/farmersdelight/recipes/gleaming_salad_block.json
 f9258cde23539bcb54d00920dd10bec57d2199ec data/farmersdelight/recipes/golden_knife.json
 704945beb89e3797b8aa189d434e654503624f2f data/farmersdelight/recipes/gold_nugget_from_blasting_knife.json
 a27e1cd4397b3d3f448e7601193998368f0a061a data/farmersdelight/recipes/gold_nugget_from_smelting_knife.json
