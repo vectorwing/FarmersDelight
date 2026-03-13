@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.11
+
+### Fixes
+- Fix potential load error where `tomatoes` is not present when joining a server;
+
 ## 1.2.10
 
 ### Updates
