@@ -131,6 +131,11 @@
     },
     {
       "name": "SE_glow_berry",
+      "shade": false,
+      "forge_data": {
+        "block_light": 12,
+        "sky_light": 12
+      },
       "from": [9, 4, 8],
       "to": [12, 6, 11],
       "faces": {
@@ -143,6 +148,11 @@
     },
     {
       "name": "SW_glow_berry",
+      "shade": false,
+      "forge_data": {
+        "block_light": 12,
+        "sky_light": 12
+      },
       "from": [4, 4, 9],
       "to": [7, 5, 12],
       "faces": {

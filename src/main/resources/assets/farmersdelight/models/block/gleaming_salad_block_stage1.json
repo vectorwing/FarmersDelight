@@ -141,6 +141,11 @@
     },
     {
       "name": "NW_glow_berry",
+      "shade": false,
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
       "from": [4, 5, 5],
       "to": [7, 7, 8],
       "faces": {
@@ -153,6 +158,11 @@
     },
     {
       "name": "SE_glow_berry",
+      "shade": false,
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
       "from": [9, 5, 8],
       "to": [12, 7, 11],
       "faces": {
@@ -165,6 +175,11 @@
     },
     {
       "name": "SW_glow_berry",
+      "shade": false,
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
       "from": [4, 5, 9],
       "to": [7, 6, 12],
       "faces": {

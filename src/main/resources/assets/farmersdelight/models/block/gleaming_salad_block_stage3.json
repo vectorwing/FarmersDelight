@@ -110,6 +110,11 @@
     },
     {
       "name": "SW_glow_berry",
+      "shade": false,
+      "forge_data": {
+        "block_light": 10,
+        "sky_light": 10
+      },
       "from": [4, 3, 9],
       "to": [7, 4, 12],
       "faces": {
