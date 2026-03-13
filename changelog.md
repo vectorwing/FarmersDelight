@@ -4,6 +4,11 @@
 
 ### Fixes
 - Fix potential load error where `tomatoes` is not present when joining a server;
+- Fix Canvas Rug and Tatami Mats not having their own stepping sounds, by tagging them as `combination_step_sound_blocks` (thanks, Mickeon!);
+- Statistics are now properly awarded for:
+  - Using tools on the Cutting Board;
+  - Using Knives to cut cakes and pies;
+  - Using containers to take servings from feasts;
 
 ## 1.2.10
 

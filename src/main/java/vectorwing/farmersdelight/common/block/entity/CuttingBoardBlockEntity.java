@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -88,6 +89,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 			}
 			if (player != null) {
 				toolStack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+				player.awardStat(Stats.ITEM_USED.get(toolStack.getItem()));
 			} else {
 				if (toolStack.hurt(1, level.random, null)) {
 					toolStack.setCount(0);

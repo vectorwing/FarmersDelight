@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -88,6 +89,7 @@ public class KnifeItem extends DiggerItem
 						-0.05, 0, 0);
 				level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
 
+				event.getEntity().awardStat(Stats.ITEM_USED.get(toolStack.getItem()));
 				event.setCancellationResult(InteractionResult.SUCCESS);
 				event.setCanceled(true);
 			}
@@ -104,6 +106,7 @@ public class KnifeItem extends DiggerItem
 						-0.05, 0, 0);
 				level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
 
+				event.getEntity().awardStat(Stats.ITEM_USED.get(toolStack.getItem()));
 				event.setCancellationResult(InteractionResult.SUCCESS);
 				event.setCanceled(true);
 			}

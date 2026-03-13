@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -104,6 +105,7 @@ public class FeastBlock extends Block
 		if (servings > 0) {
 			if (!serving.hasCraftingRemainingItem() || ItemStack.isSameItem(heldStack, serving.getCraftingRemainingItem())) {
 				level.setBlock(pos, state.setValue(getServingsProperty(), servings - 1), 3);
+				player.awardStat(Stats.ITEM_USED.get(heldStack.getItem()));
 				if (!player.getAbilities().instabuild && serving.hasCraftingRemainingItem()) {
 					heldStack.shrink(1);
 				}
