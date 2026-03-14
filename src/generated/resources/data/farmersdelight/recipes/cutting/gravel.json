@@ -14,8 +14,13 @@
       "item": "minecraft:flint"
     }
   ],
-  "tool": {
-    "type": "farmersdelight:tool_action",
-    "action": "shovel_dig"
-  }
+  "tool": [
+    {
+      "type": "farmersdelight:tool_action",
+      "action": "shovel_dig"
+    },
+    {
+      "tag": "minecraft:shovels"
+    }
+  ]
 }

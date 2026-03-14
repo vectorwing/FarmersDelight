@@ -21,7 +21,13 @@
       "item": "minecraft:leather"
     }
   ],
-  "tool": {
-    "tag": "forge:shears"
-  }
+  "tool": [
+    {
+      "type": "farmersdelight:tool_action",
+      "action": "shears_dig"
+    },
+    {
+      "tag": "forge:shears"
+    }
+  ]
 }

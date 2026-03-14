@@ -35,8 +35,16 @@ import java.util.Set;
 
 public class KnifeItem extends DiggerItem
 {
+	/**
+	 * This action is used on cutting recipes which need a knife.
+	 */
+	public static final ToolAction KNIFE_DIG = ToolAction.get("knife_dig");
+	/**
+	 * This action is used in gameplay interactions where something is harvested.
+	 */
 	public static final ToolAction KNIFE_HARVEST = ToolAction.get("knife_harvest");
-	public static final Set<ToolAction> KNIFE_ACTIONS = Set.of(ToolActions.SHEARS_CARVE, ToolActions.SWORD_DIG, KNIFE_HARVEST);
+
+	public static final Set<ToolAction> KNIFE_ACTIONS = Set.of(ToolActions.SHEARS_CARVE, ToolActions.SWORD_DIG, KNIFE_DIG, KNIFE_HARVEST);
 
 	public KnifeItem(Tier tier, float attackDamage, float attackSpeed, Properties properties) {
 		super(attackDamage, attackSpeed, tier, ModTags.Blocks.MINEABLE_WITH_KNIFE, properties);
