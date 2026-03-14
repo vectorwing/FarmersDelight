@@ -245,9 +245,8 @@
   "entity.farmersdelight.rotten_tomato": "Tomate podre",
 
   "effect.farmersdelight.nourishment": "Nutrição",
+  "effect.farmersdelight.nourishment.description": "Previne a redução do medidor de fome, exceto quando puder curar-se com saturação.",
   "effect.farmersdelight.comfort": "Conforto",
-
-  "effect.farmersdelight.nourishment.description": "Previne perda de fome, exceto quando puder curar-se com saturação.",
   "effect.farmersdelight.comfort.description": "Concede regeneração natural, não importa o quão faminto você estiver.",
 
   "enchantment.farmersdelight.backstabbing": "Punhalada nas costas",
@@ -314,8 +313,6 @@
   "farmersdelight.advancement.place_skillet.desc": "Agache para colocar a Frigideira como um bloco",
   "farmersdelight.advancement.place_cooking_pot": "O jantar está servido!",
   "farmersdelight.advancement.place_cooking_pot.desc": "Coloque uma Panela e comece a preparar refeições!",
-  "farmersdelight.advancement.eat_comfort_food": "Confortador!",
-  "farmersdelight.advancement.eat_comfort_food.desc": "Refeições quentes em tigelas irão te curar lentamente, não importa o quão faminto esteja!",
   "farmersdelight.advancement.eat_nourishing_food": "Nutritivo!",
   "farmersdelight.advancement.eat_nourishing_food.desc": "Refeições em pratos previnem o acúmulo de exaustão e fome por um tempo!",
   "farmersdelight.advancement.place_feast": "Um banquete glorioso",

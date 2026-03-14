@@ -244,9 +244,10 @@
 
   "entity.farmersdelight.rotten_tomato": "Rotten Tomato",
 
-  "effect.farmersdelight.comfort": "Comfort",
   "effect.farmersdelight.nourishment": "Nourishment",
   "effect.farmersdelight.nourishment.description": "Prevents the food meter from decreasing, except when healing with saturation",
+  "effect.farmersdelight.comfort": "Comfort",
+  "effect.farmersdelight.comfort.description": "Provides natural regeneration, regardless of how hungry you are.",
 
   "enchantment.farmersdelight.backstabbing": "Backstabbing",
   "enchantment.farmersdelight.backstabbing.desc": "Amplifies damage when striking a target from behind.",
