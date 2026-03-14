@@ -28,7 +28,7 @@
       "from": [3, 5, 3],
       "to": [13, 5, 13],
       "faces": {
-        "up": {"uv": [3, 3, 13, 13], "texture": "#salad"}
+        "up": {"uv": [3, 3, 13, 13], "rotation": 180, "texture": "#salad"}
       }
     },
     {
@@ -141,53 +141,53 @@
     },
     {
       "name": "NW_glow_berry",
-      "shade": false,
       "forge_data": {
         "block_light": 15,
         "sky_light": 15
       },
-      "from": [4, 5, 5],
-      "to": [7, 7, 8],
+      "from": [5, 5, 5],
+      "to": [8, 6, 8],
+      "shade": false,
       "faces": {
-        "north": {"uv": [5, 2, 7, 5], "rotation": 90, "texture": "#details"},
-        "east": {"uv": [2, 5, 5, 7], "texture": "#details"},
-        "south": {"uv": [0, 2, 2, 5], "rotation": 270, "texture": "#details"},
-        "west": {"uv": [2, 0, 5, 2], "rotation": 180, "texture": "#details"},
-        "up": {"uv": [2, 2, 5, 5], "rotation": 270, "texture": "#details"}
+        "north": {"uv": [4, 1, 5, 4], "rotation": 90, "texture": "#details"},
+        "east": {"uv": [1, 4, 4, 5], "texture": "#details"},
+        "south": {"uv": [0, 1, 1, 4], "rotation": 270, "texture": "#details"},
+        "west": {"uv": [1, 0, 4, 1], "rotation": 180, "texture": "#details"},
+        "up": {"uv": [1, 1, 4, 4], "rotation": 270, "texture": "#details"}
       }
     },
     {
       "name": "SE_glow_berry",
-      "shade": false,
       "forge_data": {
         "block_light": 15,
         "sky_light": 15
       },
       "from": [9, 5, 8],
-      "to": [12, 7, 11],
+      "to": [12, 6, 11],
+      "shade": false,
       "faces": {
-        "north": {"uv": [0, 2, 2, 5], "rotation": 270, "texture": "#details"},
-        "east": {"uv": [2, 0, 5, 2], "rotation": 180, "texture": "#details"},
-        "south": {"uv": [5, 2, 7, 5], "rotation": 90, "texture": "#details"},
-        "west": {"uv": [2, 5, 5, 7], "texture": "#details"},
-        "up": {"uv": [2, 2, 5, 5], "rotation": 90, "texture": "#details"}
+        "north": {"uv": [0, 1, 1, 4], "rotation": 270, "texture": "#details"},
+        "east": {"uv": [1, 0, 4, 1], "rotation": 180, "texture": "#details"},
+        "south": {"uv": [4, 1, 5, 4], "rotation": 90, "texture": "#details"},
+        "west": {"uv": [1, 4, 4, 5], "texture": "#details"},
+        "up": {"uv": [1, 1, 4, 4], "rotation": 90, "texture": "#details"}
       }
     },
     {
       "name": "SW_glow_berry",
-      "shade": false,
       "forge_data": {
         "block_light": 15,
         "sky_light": 15
       },
       "from": [4, 5, 9],
       "to": [7, 6, 12],
+      "shade": false,
       "faces": {
-        "north": {"uv": [2, 1, 5, 2], "rotation": 180, "texture": "#details"},
-        "east": {"uv": [5, 2, 6, 5], "rotation": 90, "texture": "#details"},
-        "south": {"uv": [2, 5, 5, 6], "texture": "#details"},
-        "west": {"uv": [1, 2, 2, 5], "rotation": 270, "texture": "#details"},
-        "up": {"uv": [2, 2, 5, 5], "texture": "#details"}
+        "north": {"uv": [1, 0, 4, 1], "rotation": 180, "texture": "#details"},
+        "east": {"uv": [4, 1, 5, 4], "rotation": 90, "texture": "#details"},
+        "south": {"uv": [1, 4, 4, 5], "texture": "#details"},
+        "west": {"uv": [0, 1, 1, 4], "rotation": 270, "texture": "#details"},
+        "up": {"uv": [1, 1, 4, 4], "texture": "#details"}
       }
     }
   ],
@@ -219,6 +219,7 @@
           "name": "glow_berries",
           "origin": [5.5, 7, 5.5],
           "color": 0,
+          "shade": false,
           "children": [12, 13, 14]
         }
       ]
