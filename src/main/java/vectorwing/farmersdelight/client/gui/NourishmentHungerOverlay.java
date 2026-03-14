@@ -21,7 +21,7 @@ import java.util.Random;
 
 /**
  * Credits to squeek502 (AppleSkin) for the implementation reference!
- * https://www.curseforge.com/minecraft/mc-mods/appleskin
+ * <a href="https://www.curseforge.com/minecraft/mc-mods/appleskin">AppleSkin</a>
  */
 
 public class NourishmentHungerOverlay
