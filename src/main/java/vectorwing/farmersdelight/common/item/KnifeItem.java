@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -34,10 +35,11 @@ import java.util.Set;
 
 public class KnifeItem extends DiggerItem
 {
-	public static final Set<ToolAction> KNIFE_ACTIONS = Set.of(ToolActions.SHEARS_CARVE, ToolActions.SWORD_DIG);
+	public static final ToolAction KNIFE_HARVEST = ToolAction.get("knife_harvest");
+	public static final Set<ToolAction> KNIFE_ACTIONS = Set.of(ToolActions.SHEARS_CARVE, ToolActions.SWORD_DIG, KNIFE_HARVEST);
 
 	public KnifeItem(Tier tier, float attackDamage, float attackSpeed, Properties properties) {
-		super(attackDamage, attackSpeed, tier, ModTags.MINEABLE_WITH_KNIFE, properties);
+		super(attackDamage, attackSpeed, tier, ModTags.Blocks.MINEABLE_WITH_KNIFE, properties);
 	}
 
 	@Override
@@ -51,6 +53,7 @@ public class KnifeItem extends DiggerItem
 		return true;
 	}
 
+	@Override
 	public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
 		return KNIFE_ACTIONS.contains(toolAction);
 	}
@@ -69,9 +72,9 @@ public class KnifeItem extends DiggerItem
 
 		@SubscribeEvent
 		public static void onCakeInteraction(PlayerInteractEvent.RightClickBlock event) {
-			ItemStack toolStack = event.getEntity().getItemInHand(event.getHand());
+			ItemStack heldStack = event.getEntity().getItemInHand(event.getHand());
 
-			if (!toolStack.is(ModTags.KNIVES)) {
+			if (!ItemUtils.isKnife(heldStack)) {
 				return;
 			}
 
@@ -80,7 +83,7 @@ public class KnifeItem extends DiggerItem
 			BlockState state = event.getLevel().getBlockState(pos);
 			Block block = state.getBlock();
 
-			if (state.is(ModTags.DROPS_CAKE_SLICE)) {
+			if (state.is(ModTags.Blocks.DROPS_CAKE_SLICE)) {
 				level.setBlock(pos, Blocks.CAKE.defaultBlockState().setValue(CakeBlock.BITES, 1), 3);
 				Block.dropResources(state, level, pos);
 				ItemUtils.spawnItemEntity(level, new ItemStack(ModItems.CAKE_SLICE.get()),
@@ -88,6 +91,7 @@ public class KnifeItem extends DiggerItem
 						-0.05, 0, 0);
 				level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
 
+				event.getEntity().awardStat(Stats.ITEM_USED.get(heldStack.getItem()));
 				event.setCancellationResult(InteractionResult.SUCCESS);
 				event.setCanceled(true);
 			}
@@ -104,6 +108,7 @@ public class KnifeItem extends DiggerItem
 						-0.05, 0, 0);
 				level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
 
+				event.getEntity().awardStat(Stats.ITEM_USED.get(heldStack.getItem()));
 				event.setCancellationResult(InteractionResult.SUCCESS);
 				event.setCanceled(true);
 			}

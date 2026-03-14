@@ -19,6 +19,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.BlockShapes;
 import vectorwing.farmersdelight.common.block.*;
 
 import java.util.function.ToIntFunction;
@@ -29,6 +30,10 @@ public class ModBlocks
 
 	private static ToIntFunction<BlockState> litBlockEmission(int lightValue) {
 		return (state) -> state.getValue(BlockStateProperties.LIT) ? lightValue : 0;
+	}
+
+	private static ToIntFunction<BlockState> glowingFeastBlockEmission() {
+		return (state) -> state.getValue(FeastBlock.SERVINGS) * 3;
 	}
 
 	// Workstations
@@ -68,6 +73,10 @@ public class ModBlocks
 			() -> new RopeBlock(Block.Properties.copy(Blocks.BROWN_CARPET).noCollission().noOcclusion().strength(0.2F).sound(SoundType.WOOL)));
 	public static final RegistryObject<Block> SAFETY_NET = BLOCKS.register("safety_net",
 			() -> new SafetyNetBlock(Block.Properties.copy(Blocks.BROWN_CARPET).strength(0.2F).sound(SoundType.WOOL)));
+	public static final RegistryObject<Block> ROPE_FENCE = BLOCKS.register("rope_fence",
+			() -> new RopeFenceBlock(Block.Properties.copy(Blocks.OAK_FENCE).strength(1.0F)));
+	public static final RegistryObject<Block> ROPE_FENCE_GATE = BLOCKS.register("rope_fence_gate",
+			() -> new RopeFenceGateBlock(Block.Properties.copy(Blocks.OAK_FENCE).strength(1.0F)));
 	public static final RegistryObject<Block> OAK_CABINET = BLOCKS.register("oak_cabinet",
 			() -> new CabinetBlock(Block.Properties.copy(Blocks.BARREL)));
 	public static final RegistryObject<Block> SPRUCE_CABINET = BLOCKS.register("spruce_cabinet",
@@ -303,13 +312,15 @@ public class ModBlocks
 
 	// Feasts
 	public static final RegistryObject<Block> ROAST_CHICKEN_BLOCK = BLOCKS.register("roast_chicken_block",
-			() -> new RoastChickenBlock(Block.Properties.copy(Blocks.CAKE), ModItems.ROAST_CHICKEN, true));
+			() -> new RotatedFeastBlock(Block.Properties.copy(Blocks.OAK_PLANKS), ModItems.ROAST_CHICKEN, true, BlockShapes.ROAST_CHICKEN_SHAPES, BlockShapes.TRAY_SHAPE));
 	public static final RegistryObject<Block> STUFFED_PUMPKIN_BLOCK = BLOCKS.register("stuffed_pumpkin_block",
-			() -> new FeastBlock(Block.Properties.copy(Blocks.PUMPKIN), ModItems.STUFFED_PUMPKIN, false));
+			() -> new FeastBlock(Block.Properties.copy(Blocks.PUMPKIN), ModItems.STUFFED_PUMPKIN, false, true));
 	public static final RegistryObject<Block> HONEY_GLAZED_HAM_BLOCK = BLOCKS.register("honey_glazed_ham_block",
-			() -> new HoneyGlazedHamBlock(Block.Properties.copy(Blocks.CAKE), ModItems.HONEY_GLAZED_HAM, true));
+			() -> new RotatedFeastBlock(Block.Properties.copy(Blocks.OAK_PLANKS), ModItems.HONEY_GLAZED_HAM, true, BlockShapes.HONEY_GLAZED_HAM_SHAPES, BlockShapes.TRAY_SHAPE));
 	public static final RegistryObject<Block> SHEPHERDS_PIE_BLOCK = BLOCKS.register("shepherds_pie_block",
-			() -> new ShepherdsPieBlock(Block.Properties.copy(Blocks.CAKE), ModItems.SHEPHERDS_PIE, true));
+			() -> new RotatedFeastBlock(Block.Properties.copy(Blocks.OAK_PLANKS), ModItems.SHEPHERDS_PIE, true, BlockShapes.SHEPHERDS_PIE_SHAPES, BlockShapes.TRAY_SHAPE));
+	public static final RegistryObject<Block> GLEAMING_SALAD_BLOCK = BLOCKS.register("gleaming_salad_block",
+			() -> new GleamingSaladBlock(Block.Properties.copy(Blocks.OAK_PLANKS).lightLevel(glowingFeastBlockEmission()), ModItems.GLEAMING_SALAD, true));
 	public static final RegistryObject<Block> RICE_ROLL_MEDLEY_BLOCK = BLOCKS.register("rice_roll_medley_block",
-			() -> new RiceRollMedleyBlock(Block.Properties.copy(Blocks.CAKE)));
+			() -> new RiceRollMedleyBlock(Block.Properties.copy(Blocks.OAK_PLANKS)));
 }

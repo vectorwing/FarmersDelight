@@ -50,7 +50,7 @@ public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlo
 
 			if (cuttingBoardEntity.isItemCarvingBoard()) {
 				renderItemCarved(poseStack, direction, itemStack);
-			} else if (isBlockItem && !itemStack.is(ModTags.FLAT_ON_CUTTING_BOARD)) {
+			} else if (isBlockItem && !itemStack.is(ModTags.Items.FLAT_ON_CUTTING_BOARD)) {
 				renderBlock(poseStack, direction, xOffset, i, zOffset);
 			} else {
 				renderItemLayingDown(poseStack, direction, xOffset, i, zOffset);

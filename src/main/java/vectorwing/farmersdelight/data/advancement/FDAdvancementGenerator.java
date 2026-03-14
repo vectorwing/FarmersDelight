@@ -167,6 +167,7 @@ public class FDAdvancementGenerator implements ForgeAdvancementProvider.Advancem
 				.addCriterion("stuffed_pumpkin", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.STUFFED_PUMPKIN_BLOCK.get()))
 				.addCriterion("honey_glazed_ham", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.HONEY_GLAZED_HAM_BLOCK.get()))
 				.addCriterion("shepherds_pie", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.SHEPHERDS_PIE_BLOCK.get()))
+				.addCriterion("gleaming_salad", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.GLEAMING_SALAD_BLOCK.get()))
 				.addCriterion("rice_roll_medley", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get()))
 				.requirements(RequirementsStrategy.OR)
 				.save(consumer, getNameId("main/place_feast"));
@@ -197,6 +198,7 @@ public class FDAdvancementGenerator implements ForgeAdvancementProvider.Advancem
 				.addCriterion("stuffed_pumpkin", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.STUFFED_PUMPKIN.get()))
 				.addCriterion("honey_glazed_ham", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.HONEY_GLAZED_HAM.get()))
 				.addCriterion("shepherds_pie", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.SHEPHERDS_PIE.get()))
+				.addCriterion("gleaming_salad", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.GLEAMING_SALAD.get()))
 				.rewards(AdvancementRewards.Builder.experience(200))
 				.save(consumer, getNameId("main/master_chef"));
 	}

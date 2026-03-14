@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
@@ -36,7 +37,7 @@ import vectorwing.farmersdelight.common.registry.ModAdvancements;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.registry.ModSounds;
-import vectorwing.farmersdelight.common.tag.ForgeTags;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
@@ -91,6 +92,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 			}
 			if (player != null) {
 				toolStack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+				player.awardStat(Stats.ITEM_USED.get(toolStack.getItem()));
 			} else {
 				if (toolStack.hurt(1, level.random, null)) {
 					toolStack.setCount(0);
@@ -153,7 +155,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 			playSound(sound, 1.0F, 1.0F);
 		} else if (tool.is(Tags.Items.SHEARS)) {
 			playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);
-		} else if (tool.is(ForgeTags.TOOLS_KNIVES)) {
+		} else if (tool.is(CommonTags.Items.TOOLS_KNIVES)) {
 			playSound(ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), 0.8F, 1.0F);
 		} else if (boardItem.getItem() instanceof BlockItem blockItem) {
 			Block block = blockItem.getBlock();

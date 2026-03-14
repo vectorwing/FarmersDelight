@@ -17,7 +17,6 @@ import net.minecraftforge.common.ToolActions;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.tag.ModTags;
-import vectorwing.farmersdelight.common.utility.MathUtils;
 
 import javax.annotation.Nullable;
 
@@ -29,33 +28,19 @@ public class RichSoilBlock extends Block
 	}
 
 	@Override
-	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
-		if (!level.isClientSide) {
-			BlockPos abovePos = pos.above();
-			BlockState aboveState = level.getBlockState(abovePos);
-			Block aboveBlock = aboveState.getBlock();
+	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+		BlockPos abovePos = pos.above();
+		BlockState aboveState = level.getBlockState(abovePos);
 
-			// Do nothing if the plant is unaffected by rich soil
-			if (aboveState.is(ModTags.UNAFFECTED_BY_RICH_SOIL)) {
+		if (convertMushroomToColony(aboveState, abovePos, level)) {
+			return;
+		}
+
+		if (Configuration.RICH_SOIL_BOOST_CHANCE.get() > 0.0 && random.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
+			if (aboveState.is(ModTags.Blocks.UNAFFECTED_BY_RICH_SOIL)) {
 				return;
 			}
-
-			// Convert mushrooms to colonies if it's dark enough
-			if (aboveBlock == Blocks.BROWN_MUSHROOM) {
-				level.setBlockAndUpdate(pos.above(), ModBlocks.BROWN_MUSHROOM_COLONY.get().defaultBlockState());
-				return;
-			}
-			if (aboveBlock == Blocks.RED_MUSHROOM) {
-				level.setBlockAndUpdate(pos.above(), ModBlocks.RED_MUSHROOM_COLONY.get().defaultBlockState());
-				return;
-			}
-
-			if (Configuration.RICH_SOIL_BOOST_CHANCE.get() == 0.0) {
-				return;
-			}
-
-			// If all else fails, and it's a plant, give it a growth boost now and then!
-			if (aboveBlock instanceof BonemealableBlock growable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
+			if (aboveState.getBlock() instanceof BonemealableBlock growable) {
 				if (growable.isValidBonemealTarget(level, pos.above(), aboveState, false) && ForgeHooks.onCropsGrowPre(level, pos.above(), aboveState, true)) {
 					growable.performBonemeal(level, level.random, pos.above(), aboveState);
 					level.levelEvent(2005, pos.above(), 0);
@@ -63,6 +48,20 @@ public class RichSoilBlock extends Block
 				}
 			}
 		}
+	}
+
+	public boolean convertMushroomToColony(BlockState targetState, BlockPos targetPos, ServerLevel level) {
+		// TODO: Make this dynamic in some fashion. Is it worth doing it on 1.20.1?
+		if (targetState.is(Blocks.BROWN_MUSHROOM)) {
+			level.setBlockAndUpdate(targetPos, ModBlocks.BROWN_MUSHROOM_COLONY.get().defaultBlockState());
+			return true;
+		}
+		if (targetState.is(Blocks.RED_MUSHROOM)) {
+			level.setBlockAndUpdate(targetPos, ModBlocks.RED_MUSHROOM_COLONY.get().defaultBlockState());
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override

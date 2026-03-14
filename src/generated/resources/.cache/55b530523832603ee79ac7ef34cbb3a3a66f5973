@@ -1,4 +1,4 @@
-// 1.20.1	2026-02-19T01:34:32.2621186	Tags for minecraft:block mod id farmersdelight
+// 1.20.1	2026-03-10T21:45:56.4193646	Tags for minecraft:block mod id farmersdelight
 97e4acbe405d9adae7df8073ec6e9af828285ec9 data/create/tags/blocks/brittle.json
 89dff4a2813a4b6fe13cde6e775266a1d606a4aa data/create/tags/blocks/passive_boiler_heaters.json
 21d6792ce7de98e9396c3829ab52f8574595557b data/farmersdelight/tags/blocks/cabinets.json
@@ -17,6 +17,8 @@ e4d28099b3557b120274c2ef7593e202019c4d65 data/farmersdelight/tags/blocks/terrain
 90c6f0a64d1a682335e4b5dca86a5c85073951a0 data/farmersdelight/tags/blocks/tray_heat_sources.json
 cd9907e85accc2e9f62313daeb74930a0894f7d7 data/farmersdelight/tags/blocks/unaffected_by_rich_soil.json
 5596501768488a25c5bcc6ef16c2fc5ca3ab49e9 data/farmersdelight/tags/blocks/wild_crops.json
+76c23603e65410291af111793aa931640128fae8 data/forge/tags/blocks/fences.json
+1ba129ce39f820a673b8ed7d47d083a5252dd5e3 data/forge/tags/blocks/fence_gates.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/forge/tags/blocks/mineable/knife.json
 da0d6934eabdb3acd06d9f7491f75608e9f0641f data/forge/tags/blocks/storage_blocks/beetroot.json
 afd3592ccefe001b743061344b7d2c827f40eef3 data/forge/tags/blocks/storage_blocks/cabbage.json
@@ -30,10 +32,13 @@ b1919af26385c8c277cbefc52e2d517cfa896190 data/forge/tags/blocks/storage_blocks/r
 d0812613832bbc602d7ff3274c81d5729e91c2ea data/minecraft/tags/blocks/bamboo_plantable_on.json
 859810b0bf4f36e275af5b6a86c3c7b9a968dbd3 data/minecraft/tags/blocks/ceiling_hanging_signs.json
 f84897a4867a8218f34243fe5553b2ceaba22e2a data/minecraft/tags/blocks/climbable.json
+890e6e3198d2fbd6f98288728d8b3f073595dfc4 data/minecraft/tags/blocks/combination_step_sound_blocks.json
 c42958bd07d383e53a8b21b64684cff66158965c data/minecraft/tags/blocks/crops.json
 d0812613832bbc602d7ff3274c81d5729e91c2ea data/minecraft/tags/blocks/dirt.json
+76c23603e65410291af111793aa931640128fae8 data/minecraft/tags/blocks/fences.json
+1ba129ce39f820a673b8ed7d47d083a5252dd5e3 data/minecraft/tags/blocks/fence_gates.json
 46eba184858bae298b1430bbab858976e323111c data/minecraft/tags/blocks/maintains_farmland.json
-e7ee79caf4f32b529bd1fce158ca712311d66fa7 data/minecraft/tags/blocks/mineable/axe.json
+5589d0cf5e2a7fc37f13b9433232f49c1026bdf6 data/minecraft/tags/blocks/mineable/axe.json
 2a8f19bc7b45789f94892524a425f28c21f4d227 data/minecraft/tags/blocks/mineable/hoe.json
 963c2f1508fda246255005f0ac460a274c704ecd data/minecraft/tags/blocks/mineable/pickaxe.json
 0eb2b01360e681e4689610044f4da8ace960e921 data/minecraft/tags/blocks/mineable/shovel.json

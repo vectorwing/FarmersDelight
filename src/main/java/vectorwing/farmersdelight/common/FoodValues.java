@@ -206,6 +206,9 @@ public class FoodValues
 	public static final FoodProperties SHEPHERDS_PIE = (new FoodProperties.Builder())
 			.nutrition(14).saturationMod(0.75f)
 			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();
+	public static final FoodProperties GLEAMING_SALAD = (new FoodProperties.Builder())
+			.nutrition(14).saturationMod(0.75f)
+			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();
 
 	public static final FoodProperties DOG_FOOD = new FoodProperties.Builder()
 			.nutrition(4).saturationMod(0.2f).meat().build();

@@ -285,7 +285,7 @@
   "farmersdelight.subtitles.skillet.add_food": "Патэльня шыпіць",
   "farmersdelight.subtitles.cabinet.open": "Шафка адчыняецца",
   "farmersdelight.subtitles.cabinet.close": "Шафка зачыняецца",
-  "farmersdelight.subtitles.tomato.pick": "Памідоры сарваныя",
+  "farmersdelight.subtitles.tomato_bush.pick_tomatoes": "Памідоры сарваныя",
   "farmersdelight.subtitles.rotten_tomato.throw": "Гнілы памідор ляціць",
   "farmersdelight.subtitles.rotten_tomato.hit": "Гнілы памідор лопнуў",
 
@@ -316,5 +316,5 @@
   "farmersdelight.jei.info.wild_onions": "Цыбулю звычайна можна знайсці як дзікую расліну ў біёмах ў умераным кліматам, такіх як лясы і раўніныOnions can be commonly found as a wild plant in temperate lands, such as plains and forests.",
   "farmersdelight.jei.info.wild_potatoes": "Бульбу звычайна можна знайсці як дзікую расліну ў халодных біёмах, такіх як горы і тайга.",
   "farmersdelight.jei.info.wild_tomatoes": "Памідоры звычайна можна знайсці як дзікую расліну ў сухіх біёмах, такіх як саванны і пустыні.",
-  "farmersdelight.jei.info.wild_rice": "Рыс звычайна можна знайсці як дзікую расліну ў вадаёмах вільготных біёмаў, такіх як багна і джунглі.",
+  "farmersdelight.jei.info.wild_rice": "Рыс звычайна можна знайсці як дзікую расліну ў вадаёмах вільготных біёмаў, такіх як багна і джунглі."
 }

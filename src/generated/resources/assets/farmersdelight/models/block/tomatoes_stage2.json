@@ -1,0 +1,7 @@
+{
+  "parent": "farmersdelight:block/template_crop_cross",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "cross": "farmersdelight:block/tomatoes_stage2"
+  }
+}

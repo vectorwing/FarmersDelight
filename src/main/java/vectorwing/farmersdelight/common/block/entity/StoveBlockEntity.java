@@ -76,7 +76,7 @@ public class StoveBlockEntity extends SyncedBlockEntity
 		boolean isStoveLit = state.getValue(StoveBlock.LIT);
 
 		if (StoveBlock.isStoveTopCovered(level, pos, state)) {
-			if (!ItemUtils.isInventoryEmpty(stove.inventory)) {
+			if (ItemUtils.doesInventoryHaveItems(stove.inventory)) {
 				ItemUtils.dropItems(level, pos, stove.inventory);
 				stove.inventoryChanged();
 			}
