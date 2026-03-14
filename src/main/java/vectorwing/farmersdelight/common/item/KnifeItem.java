@@ -53,6 +53,7 @@ public class KnifeItem extends DiggerItem
 		return true;
 	}
 
+	@Override
 	public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
 		return KNIFE_ACTIONS.contains(toolAction);
 	}

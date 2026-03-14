@@ -41,12 +41,12 @@
     ],
     "subtitle": "farmersdelight.subtitles.cutting_board.carve_tool"
   },
-  "block.cutting_board.knife": {
+  "block.cutting_board.knife_cut": {
     "sounds": [
       "farmersdelight:block/cutting_board/knife1",
       "farmersdelight:block/cutting_board/knife2"
     ],
-    "subtitle": "farmersdelight.subtitles.cutting_board.knife"
+    "subtitle": "farmersdelight.subtitles.cutting_board.knife_cut"
   },
   "block.cutting_board.place_item": {
     "sounds": [

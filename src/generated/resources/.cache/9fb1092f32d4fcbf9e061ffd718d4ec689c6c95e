@@ -1,4 +1,4 @@
-// 1.20.1	2026-03-13T17:18:30.7261082	Recipes
+// 1.20.1	2026-03-14T16:38:20.2268641	Recipes
 169cfc1d11ca3cede161363799f6c0e00bc1412e data/farmersdelight/advancements/recipes/beetroot_crate.json
 a498fcc8b72b6631ddbb164a0245b37491e7571a data/farmersdelight/advancements/recipes/building_blocks/cabbage_crate.json
 c941206993bfa59d31b38132b898fb94c29746a6 data/farmersdelight/advancements/recipes/building_blocks/onion_crate.json
@@ -283,7 +283,7 @@ f2a091178d769e07f53f3edd49f868327a55af5d data/farmersdelight/recipes/cutting/all
 5a9f453bac541085752a7536a4a0453c8e046979 data/farmersdelight/recipes/cutting/apple_pie.json
 127f96ed9f607ab5facd8c47a3215c5347ddc103 data/farmersdelight/recipes/cutting/azure_bluet.json
 eea19f8c5a1acc01229ca42bc04b8baab7dc81f5 data/farmersdelight/recipes/cutting/bamboo_block.json
-01a0dda0fdf1416e861ee52f8b2e44e077e2c399 data/farmersdelight/recipes/cutting/beef.json
+1e8b706d7e1c735594c7d119106180d7f1bc75ed data/farmersdelight/recipes/cutting/beef.json
 a5e81d90c6ddf6f81fe83fa441d9f4b6aa7fc686 data/farmersdelight/recipes/cutting/birch_log.json
 e39a71a653b69bce1cd68beac16cfbb0e4de85fd data/farmersdelight/recipes/cutting/birch_wood.json
 533997f65bcc4b914d00a0adaaf6b9f664ad15ac data/farmersdelight/recipes/cutting/blue_orchid.json
