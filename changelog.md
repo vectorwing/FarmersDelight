@@ -10,6 +10,10 @@
   - Using Knives to cut cakes and pies;
   - Using containers to take servings from feasts;
 
+### Translations
+- Added:
+  - fr_ca (thanks, wool!);
+
 ## 1.2.10
 
 ### Updates
