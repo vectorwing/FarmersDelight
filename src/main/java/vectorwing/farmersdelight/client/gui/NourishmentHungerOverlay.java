@@ -21,7 +21,7 @@ import java.util.Random;
 
 /**
  * Credits to squeek502 (AppleSkin) for the implementation reference!
- * https://www.curseforge.com/minecraft/mc-mods/appleskin
+ * <a href="https://www.curseforge.com/minecraft/mc-mods/appleskin">AppleSkin</a>
  */
 
 public class NourishmentHungerOverlay
@@ -67,7 +67,7 @@ public class NourishmentHungerOverlay
 		boolean isPlayerHealingWithSaturation =
 				player.level().getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION)
 						&& player.isHurt()
-						&& stats.getFoodLevel() >= 18;
+						&& stats.getSaturationLevel() > 0.0;
 
 		if (player.getEffect(ModEffects.NOURISHMENT.get()) != null) {
 			drawNourishmentOverlay(stats, minecraft, graphics, left, top, isPlayerHealingWithSaturation);
@@ -81,7 +81,6 @@ public class NourishmentHungerOverlay
 		Random rand = new Random();
 		rand.setSeed(ticks * 312871);
 
-//		RenderSystem.setShaderTexture(0, MOD_ICONS_TEXTURE);
 		RenderSystem.enableBlend();
 
 		for (int j = 0; j < 10; ++j) {
@@ -106,6 +105,5 @@ public class NourishmentHungerOverlay
 		}
 
 		RenderSystem.disableBlend();
-//		RenderSystem.setShaderTexture(0, Gui.GUI_ICONS_LOCATION);
 	}
 }

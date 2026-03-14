@@ -24,6 +24,12 @@
   - When cutting, the status bar will show how many items are left on the board;
   - Comparator signal will now be based on the fill percentage for the item's max stack size;
   - All off-hand interaction has been removed. Placing, removing and processing items is done entirely with the main hand;
+- The Nourishment effect has been updated:
+  - The effect will no longer pause to consume hunger, only saturation. This means Nourishment can grant indefinite slow healing, so long as the bar itself is full;
+  - Players are now able to "always eat" when under Nourishment, letting them get more saturation to rapid-heal if they want;
+- The Comfort effect has been retired, as Nourishment now fulfills its role:
+  - All foods which previously granted Comfort now grant an equivalent amount of Nourishment instead;
+  - The effect is still registered in-game to avoid add-ons breaking, but it will be removed in the next major/minor version of the mod;
 - The Skillet's handheld functions have been updated (thanks to MehVahdJukaar, ChrysanthCow and the Refabricated team!):
   - The Skillet can render foods in handheld mode again;
   - When cooking handheld, the durability meter will become an orange "frying meter", showing you the cooking progress;

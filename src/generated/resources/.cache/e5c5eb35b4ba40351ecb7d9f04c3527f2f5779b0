@@ -1,7 +1,6 @@
 // 1.20.1	2026-03-13T18:46:30.6094435	Advancements
 be62d0c11bfa1de4eebb4613de24770a232ed6d4 data/farmersdelight/advancements/main/craft_knife.json
-206d07e6616bcf95c43c3ddd3a5ccd352c1b67fe data/farmersdelight/advancements/main/eat_comfort_food.json
-789aaad424f0727621d5a1ebdc3f38e4af56437f data/farmersdelight/advancements/main/eat_nourishing_food.json
+52188228baca1e2b7d7bf33a9b7f909d1de2ed26 data/farmersdelight/advancements/main/eat_nourishing_food.json
 f7b7ba8cbd4f1fb1fbe48c1ebaf175e05d68eb1d data/farmersdelight/advancements/main/get_fd_seed.json
 ce296b703852f812933ab066d02fb46d03d14825 data/farmersdelight/advancements/main/get_ham.json
 e2c8f15e409b0b14373b89fd9caa3619ecaeef69 data/farmersdelight/advancements/main/get_mushroom_colony.json

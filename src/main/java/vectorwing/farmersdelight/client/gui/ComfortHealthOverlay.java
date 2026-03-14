@@ -30,7 +30,6 @@ public class ComfortHealthOverlay
 		MinecraftForge.EVENT_BUS.register(new ComfortHealthOverlay());
 	}
 
-
 	static ResourceLocation PLAYER_HEALTH_ELEMENT = new ResourceLocation("minecraft", "player_health");
 
 	@SubscribeEvent

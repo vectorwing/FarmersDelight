@@ -245,9 +245,8 @@
   "entity.farmersdelight.rotten_tomato": "Rotten Tomato",
 
   "effect.farmersdelight.nourishment": "Nourishment",
+  "effect.farmersdelight.nourishment.description": "Prevents the food meter from decreasing, except when healing with saturation",
   "effect.farmersdelight.comfort": "Comfort",
-
-  "effect.farmersdelight.nourishment.description": "Prevents hunger loss, except when using saturation to heal damage.",
   "effect.farmersdelight.comfort.description": "Provides natural regeneration, regardless of how hungry you are.",
 
   "enchantment.farmersdelight.backstabbing": "Backstabbing",
@@ -314,10 +313,8 @@
   "farmersdelight.advancement.place_skillet.desc": "Sneak to place your Skillet down as a block",
   "farmersdelight.advancement.place_cooking_pot": "Dinner's Served!",
   "farmersdelight.advancement.place_cooking_pot.desc": "Put down a Cooking Pot and start preparing meals!",
-  "farmersdelight.advancement.eat_comfort_food": "Comforting!",
-  "farmersdelight.advancement.eat_comfort_food.desc": "Warm bowl meals will keep you healing steadily, no matter how hungry you are!",
   "farmersdelight.advancement.eat_nourishing_food": "Nourishing!",
-  "farmersdelight.advancement.eat_nourishing_food.desc": "Plated meals will prevent you from getting exhausted or hungry for a while!",
+  "farmersdelight.advancement.eat_nourishing_food.desc": "Meals made from many ingredients will keep you fed and healthy for much longer!",
   "farmersdelight.advancement.place_feast": "A Glorious Feast",
   "farmersdelight.advancement.place_feast.desc": "Some meals are big enough to be placed down and shared with friends!",
   "farmersdelight.advancement.master_chef": "Master Chef",

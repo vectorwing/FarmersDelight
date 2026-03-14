@@ -154,11 +154,7 @@ public class FDAdvancementGenerator implements ForgeAdvancementProvider.Advancem
 				.addCriterion("cooking_pot", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.COOKING_POT.get()))
 				.save(consumer, getNameId("main/place_cooking_pot"));
 
-		Advancement comforting = getAdvancement(dinnerIsServed, ModItems.BAKED_COD_STEW.get(), "eat_comfort_food", FrameType.TASK, true, false, false)
-				.addCriterion("comfort", EffectsChangedTrigger.TriggerInstance.hasEffects(MobEffectsPredicate.effects().and(ModEffects.COMFORT.get())))
-				.save(consumer, getNameId("main/eat_comfort_food"));
-
-		Advancement nourishing = getAdvancement(comforting, ModItems.STEAK_AND_POTATOES.get(), "eat_nourishing_food", FrameType.TASK, true, false, false)
+		Advancement nourishing = getAdvancement(dinnerIsServed, ModItems.STEAK_AND_POTATOES.get(), "eat_nourishing_food", FrameType.TASK, true, false, false)
 				.addCriterion("nourishment", EffectsChangedTrigger.TriggerInstance.hasEffects(MobEffectsPredicate.effects().and(ModEffects.NOURISHMENT.get())))
 				.save(consumer, getNameId("main/eat_nourishing_food"));
 

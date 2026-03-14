@@ -9,6 +9,7 @@
     "KeepRichSoilGiantTreeMixin",
     "KeepRichSoilTreeMixin",
     "KeepRichSoilUntrampledMixin",
+    "NourishmentAlwaysEatMixin",
     "PlacePumpkinPieMixin",
     "RabbitsEatCabbageMixin",
     "RopeFenceConnectionMixin",
