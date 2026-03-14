@@ -209,8 +209,7 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.CANVAS_RUG.get(),
 				ModBlocks.FULL_TATAMI_MAT.get(),
 				ModBlocks.HALF_TATAMI_MAT.get(),
-				ModBlocks.CUTTING_BOARD.get(),
-				ModBlocks.ROPE.get()
+				ModBlocks.CUTTING_BOARD.get()
 		);
 	}
 
