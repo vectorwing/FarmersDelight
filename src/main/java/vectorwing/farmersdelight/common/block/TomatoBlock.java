@@ -183,6 +183,11 @@ public class TomatoBlock extends CropBlock
 
 	@Override
 	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+		// TODO: Remove this conversion, as well as the ropelogged state, in future versions.
+		if (state.is(ModBlocks.TOMATO_CROP.get()) && state.getValue(ROPELOGGED)) {
+			level.setBlockAndUpdate(pos, ModBlocks.TOMATO_CROP_ON_ROPE.get().defaultBlockState().setValue(VINE_AGE, this.getAge(state)));
+			return;
+		}
 		int newAge = this.getAge(state) + this.getBonemealAgeIncrease(level);
 		if (newAge <= this.getMaxAge()) {
 			level.setBlockAndUpdate(pos, state.setValue(getAgeProperty(), newAge));
