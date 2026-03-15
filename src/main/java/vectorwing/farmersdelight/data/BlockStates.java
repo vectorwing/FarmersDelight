@@ -364,10 +364,10 @@ public class BlockStates extends BlockStateProvider
 
 	public void tomatoBlock(Block block, IntegerProperty ageProperty, BooleanProperty ropeloggedProperty, Property<?>... ignored) {
 		getVariantBuilder(block).forAllStatesExcept(state -> {
-			int ageSuffix = state.getValue(ageProperty);
+			int age = state.getValue(ageProperty);
 			boolean ropelogged = state.getValue(ropeloggedProperty);
-			String stageName = blockName(block) + "_stage" + ageSuffix;
-			String ropeloggedStageName = blockName(block) + "_old_stage" + ageSuffix; // TODO: Make this a customStageBlock once we remove the ropelogged state for good.
+			String stageName = blockName(block) + "_stage" + age;
+			String ropeloggedStageName = blockName(block) + "_old_stage" + age; // TODO: Make this a customStageBlock once we remove the ropelogged state for good.
 			return ConfiguredModel.builder()
 					.modelFile(ropelogged
 							? modelCropWithRope(ropeloggedStageName, "tomatoes_coiled_rope")
@@ -377,8 +377,8 @@ public class BlockStates extends BlockStateProvider
 
 	public void ropedTomatoBlock(Block block, IntegerProperty ageProperty, Property<?>... ignored) {
 		getVariantBuilder(block).forAllStatesExcept(state -> {
-			int ageSuffix = state.getValue(ageProperty);
-			String stageName = blockName(block) + "_stage" + ageSuffix;
+			int age = state.getValue(ageProperty);
+			String stageName = blockName(block) + "_stage" + age;
 			return ConfiguredModel.builder()
 					.modelFile(modelCropWithRope(stageName, "tomatoes_coiled_rope")).build();
 		}, ignored);
