@@ -79,7 +79,6 @@ public class BlockStates extends BlockStateProvider
 
 		stageBlock(ModBlocks.BROWN_MUSHROOM_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
 		stageBlock(ModBlocks.RED_MUSHROOM_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
-		stageBlock(ModBlocks.RICE_CROP_PANICLES.get(), RicePaniclesBlock.RICE_AGE);
 
 		customStageBlock(ModBlocks.CABBAGE_CROP.get(), resourceFDBlock("template_crop_cross"), "cross", CabbageBlock.AGE, new ArrayList<>());
 		customStageBlock(ModBlocks.ONION_CROP.get(), mcLoc("crop"), "crop", OnionBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 2, 3));
@@ -87,6 +86,7 @@ public class BlockStates extends BlockStateProvider
 		tomatoBlock(ModBlocks.TOMATO_CROP.get(), TomatoBlock.VINE_AGE, TomatoBlock.ROPELOGGED);
 		ropedTomatoBlock(ModBlocks.TOMATO_CROP_ON_ROPE.get(), TomatoBlock.VINE_AGE);
 		riceRootBlock(ModBlocks.RICE_CROP.get());
+		stageBlock(ModBlocks.RICE_CROP_PANICLES.get(), RicePaniclesBlock.RICE_AGE);
 
 		crateBlock(ModBlocks.CARROT_CRATE.get(), "carrot");
 		crateBlock(ModBlocks.POTATO_CRATE.get(), "potato");
@@ -363,27 +363,25 @@ public class BlockStates extends BlockStateProvider
 	}
 
 	public void tomatoBlock(Block block, IntegerProperty ageProperty, BooleanProperty ropeloggedProperty, Property<?>... ignored) {
-		getVariantBuilder(block)
-				.forAllStatesExcept(state -> {
-					int ageSuffix = state.getValue(ageProperty);
-					boolean ropelogged = state.getValue(ropeloggedProperty);
-					String stageName = blockName(block) + "_stage" + ageSuffix;
-					String ropeloggedStageName = blockName(block) + "_old_stage" + ageSuffix; // TODO: Make this a customStageBlock once we remove the ropelogged state for good.
-					return ConfiguredModel.builder()
-							.modelFile(ropelogged
-									? modelCropWithRope(ropeloggedStageName, "tomatoes_coiled_rope")
-									: models().singleTexture(stageName, resourceFDBlock("template_crop_cross"), "cross", resourceFDBlock(stageName)).renderType("cutout")).build();
-				}, ignored);
+		getVariantBuilder(block).forAllStatesExcept(state -> {
+			int ageSuffix = state.getValue(ageProperty);
+			boolean ropelogged = state.getValue(ropeloggedProperty);
+			String stageName = blockName(block) + "_stage" + ageSuffix;
+			String ropeloggedStageName = blockName(block) + "_old_stage" + ageSuffix; // TODO: Make this a customStageBlock once we remove the ropelogged state for good.
+			return ConfiguredModel.builder()
+					.modelFile(ropelogged
+							? modelCropWithRope(ropeloggedStageName, "tomatoes_coiled_rope")
+							: models().singleTexture(stageName, resourceFDBlock("template_crop_cross"), "cross", resourceFDBlock(stageName)).renderType("cutout")).build();
+		}, ignored);
 	}
 
 	public void ropedTomatoBlock(Block block, IntegerProperty ageProperty, Property<?>... ignored) {
-		getVariantBuilder(block)
-				.forAllStatesExcept(state -> {
-					int ageSuffix = state.getValue(ageProperty);
-					String stageName = blockName(block) + "_stage" + ageSuffix;
-					return ConfiguredModel.builder()
-							.modelFile(modelCropWithRope(stageName, "tomatoes_coiled_rope")).build();
-				}, ignored);
+		getVariantBuilder(block).forAllStatesExcept(state -> {
+			int ageSuffix = state.getValue(ageProperty);
+			String stageName = blockName(block) + "_stage" + ageSuffix;
+			return ConfiguredModel.builder()
+					.modelFile(modelCropWithRope(stageName, "tomatoes_coiled_rope")).build();
+		}, ignored);
 	}
 
 	public void wildCropBlock(Block block) {
