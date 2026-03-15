@@ -16,6 +16,8 @@
   "block.farmersdelight.crimson_cabinet": "Cabinet o' Ichor",
   "block.farmersdelight.warped_cabinet": "Cabinet o' Sorrow",
   "block.farmersdelight.rope": "Sail Rope",
+  "block.farmersdelight.rope_fence": "Riggin' Mast",
+  "block.farmersdelight.rope_fence_gate": "Riggin' Hitch",
   "block.farmersdelight.safety_net": "Rigging",
   "block.farmersdelight.canvas_rug": "Sail Rug",
   "block.farmersdelight.tatami": "Block o' Padded Sails",
@@ -234,6 +236,8 @@
   "item.farmersdelight.honey_glazed_ham": "Hog's Leg Roast Platter",
   "block.farmersdelight.shepherds_pie_block": "Sheep Herder's Specialty",
   "item.farmersdelight.shepherds_pie": "Sheep Herder's Specialty Platter",
+  "block.farmersdelight.gleaming_salad_block": "Shinin' Fruit Salad",
+  "item.farmersdelight.gleaming_salad": "Shinin' Fruit Salad Platter",
   "block.farmersdelight.rice_roll_medley_block": "All Kinds o' Ricey Rolls",
 
   "item.farmersdelight.dog_food": "Hound's Chow",
@@ -242,9 +246,8 @@
   "entity.farmersdelight.rotten_tomato": "Rottin' Tomato",
 
   "effect.farmersdelight.nourishment": "Belly's Full",
-  "effect.farmersdelight.comfort": "Heart's Warm",
-
   "effect.farmersdelight.nourishment.description": "Ye can't get hungry, lest yer belly be digestin' food ta heal ye.",
+  "effect.farmersdelight.comfort": "Heart's Warm",
   "effect.farmersdelight.comfort.description": "Yer body gon' heal up slowly, no matter if ye're starvin' or not.",
 
   "enchantment.farmersdelight.backstabbing": "Mutiny",
@@ -268,6 +271,8 @@
   "farmersdelight.tooltip.milk_bottle": "Scrub Off 1 Effect",
   "farmersdelight.tooltip.hot_cocoa": "Scrub Off 1 Cursed Ache",
   "farmersdelight.tooltip.melon_juice": "Wee Quick Healin'",
+  "farmersdelight.tooltip.placeable": "Ye can put this down",
+  "farmersdelight.tooltip.placeable_sneaking": "Ye can put this down if sneakin'",
   "farmersdelight.tooltip.debug_item": "Debug item - Not meant for gameplay",
 
   "farmersdelight.advancement.root": "Farmer's Delight",
@@ -309,10 +314,8 @@
   "farmersdelight.advancement.place_skillet.desc": "Tired o' wieldin' yer skillet? Crouch an' plop it down!",
   "farmersdelight.advancement.place_cooking_pot": "Come Eat, Ye Scallywags!",
   "farmersdelight.advancement.place_cooking_pot.desc": "Heat up a pot and get ta cookin' up some grub!",
-  "farmersdelight.advancement.eat_comfort_food": "Warm an' Cozy!",
-  "farmersdelight.advancement.eat_comfort_food.desc": "Eat a bowl's worth, an' get yerself healin' up steady, hunger be darned!",
   "farmersdelight.advancement.eat_nourishing_food": "Hearty an' Full!",
-  "farmersdelight.advancement.eat_nourishing_food.desc": "Eat a plate's worth, an' be free o' hunger or fatigue fer a good while!",
+  "farmersdelight.advancement.eat_nourishing_food.desc": "Make grub outta many kinds o' food, an' ye will be healthy an' fed fer a good while!",
   "farmersdelight.advancement.place_feast": "Captain's Treat",
   "farmersdelight.advancement.place_feast.desc": "Aye, some grubs be big enough ta put down an' serve a whole crew!",
   "farmersdelight.advancement.master_chef": "Grand Frigate's Cook",
@@ -326,9 +329,11 @@
   "farmersdelight.subtitles.stove.crackle": "Grille crackles",
   "farmersdelight.subtitles.skillet.sizzle": "Skillet sizzles",
   "farmersdelight.subtitles.skillet.add_food": "Skillet hisses",
+  "farmersdelight.subtitles.rope_fence_gate.open": "Riggin' Hitch unties",
+  "farmersdelight.subtitles.rope_fence_gate.close": "Riggin' Hitch ties",
   "farmersdelight.subtitles.cabinet.open": "Cabinet opens",
   "farmersdelight.subtitles.cabinet.close": "Cabinet closes its locker",
-  "farmersdelight.subtitles.tomato.pick": "Tomatoes pop",
+  "farmersdelight.subtitles.tomato_bush.pick_tomatoes": "Tomatoes pop",
   "farmersdelight.subtitles.rotten_tomato.throw": "Rottin' Tomato flies",
   "farmersdelight.subtitles.rotten_tomato.hit": "Rottin' Tomato splatters",
 
@@ -363,5 +368,9 @@
   "farmersdelight.jei.info.wild_onions": "Stink Bulbs can be spotted sproutin' in mild land. Set sail ta forests n' plains!",
   "farmersdelight.jei.info.wild_potatoes": "Taters can be spotted sproutin' in frigid land. Set sail ta mountains n' taigas!",
   "farmersdelight.jei.info.wild_tomatoes": "Tomatoes can be spotted sproutin' in hot, hot land. Set sail ta deserts n' savannas!",
-  "farmersdelight.jei.info.wild_rice": "Rice weeds can be spotted swimmin' by the shallow waters o' swamps n' jungles."
+  "farmersdelight.jei.info.wild_rice": "Rice weeds can be spotted swimmin' by the shallow waters o' swamps n' jungles.",
+
+  "emi.category.farmersdelight.cooking": "Cookin'",
+  "emi.category.farmersdelight.cutting": "Choppin' Block",
+  "emi.category.farmersdelight.decomposition": "Garbage Rottin'"
 }

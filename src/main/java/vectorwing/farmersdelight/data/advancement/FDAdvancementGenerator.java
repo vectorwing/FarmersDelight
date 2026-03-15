@@ -153,11 +153,7 @@ public class FDAdvancementGenerator implements ForgeAdvancementProvider.Advancem
 				.addCriterion("cooking_pot", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.COOKING_POT.get()))
 				.save(consumer, getNameId("main/place_cooking_pot"));
 
-		Advancement comforting = getAdvancement(dinnerIsServed, ModItems.BAKED_COD_STEW.get(), "eat_comfort_food", FrameType.TASK, true, false, false)
-				.addCriterion("comfort", EffectsChangedTrigger.TriggerInstance.hasEffects(MobEffectsPredicate.effects().and(ModEffects.COMFORT.get())))
-				.save(consumer, getNameId("main/eat_comfort_food"));
-
-		Advancement nourishing = getAdvancement(comforting, ModItems.STEAK_AND_POTATOES.get(), "eat_nourishing_food", FrameType.TASK, true, false, false)
+		Advancement nourishing = getAdvancement(dinnerIsServed, ModItems.STEAK_AND_POTATOES.get(), "eat_nourishing_food", FrameType.TASK, true, false, false)
 				.addCriterion("nourishment", EffectsChangedTrigger.TriggerInstance.hasEffects(MobEffectsPredicate.effects().and(ModEffects.NOURISHMENT.get())))
 				.save(consumer, getNameId("main/eat_nourishing_food"));
 
@@ -166,6 +162,7 @@ public class FDAdvancementGenerator implements ForgeAdvancementProvider.Advancem
 				.addCriterion("stuffed_pumpkin", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.STUFFED_PUMPKIN_BLOCK.get()))
 				.addCriterion("honey_glazed_ham", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.HONEY_GLAZED_HAM_BLOCK.get()))
 				.addCriterion("shepherds_pie", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.SHEPHERDS_PIE_BLOCK.get()))
+				.addCriterion("gleaming_salad", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.GLEAMING_SALAD_BLOCK.get()))
 				.addCriterion("rice_roll_medley", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get()))
 				.requirements(RequirementsStrategy.OR)
 				.save(consumer, getNameId("main/place_feast"));
@@ -196,6 +193,7 @@ public class FDAdvancementGenerator implements ForgeAdvancementProvider.Advancem
 				.addCriterion("stuffed_pumpkin", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.STUFFED_PUMPKIN.get()))
 				.addCriterion("honey_glazed_ham", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.HONEY_GLAZED_HAM.get()))
 				.addCriterion("shepherds_pie", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.SHEPHERDS_PIE.get()))
+				.addCriterion("gleaming_salad", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.GLEAMING_SALAD.get()))
 				.rewards(AdvancementRewards.Builder.experience(200))
 				.save(consumer, getNameId("main/master_chef"));
 	}

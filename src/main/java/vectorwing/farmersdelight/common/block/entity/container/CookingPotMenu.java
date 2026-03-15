@@ -122,7 +122,7 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 					return ItemStack.EMPTY;
 				}
 			} else if (index > indexOutput) {
-				boolean isValidContainer = slotStack.is(ModTags.SERVING_CONTAINERS) || slotStack.is(blockEntity.getContainer().getItem());
+				boolean isValidContainer = slotStack.is(ModTags.Items.SERVING_CONTAINERS) || slotStack.is(blockEntity.getContainer().getItem());
 				if (isValidContainer && !this.moveItemStackTo(slotStack, indexContainerInput, indexContainerInput + 1, false)) {
 					return ItemStack.EMPTY;
 				} else if (!this.moveItemStackTo(slotStack, 0, indexMealDisplay, false)) {

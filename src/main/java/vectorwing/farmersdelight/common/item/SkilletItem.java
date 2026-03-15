@@ -124,7 +124,7 @@ public class SkilletItem extends BlockItem
 		}
 		BlockPos pos = player.blockPosition();
 		for (BlockPos nearbyPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
-			if (level.getBlockState(nearbyPos).is(ModTags.HEAT_SOURCES)) {
+			if (level.getBlockState(nearbyPos).is(ModTags.Blocks.HEAT_SOURCES)) {
 				return true;
 			}
 		}

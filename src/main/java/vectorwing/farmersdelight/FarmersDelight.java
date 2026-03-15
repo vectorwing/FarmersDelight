@@ -17,7 +17,6 @@ import vectorwing.farmersdelight.common.CommonSetup;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.*;
 import vectorwing.farmersdelight.common.world.VillageStructures;
-import vectorwing.farmersdelight.common.world.WildCropGeneration;
 
 @Mod(FarmersDelight.MODID)
 public class FarmersDelight
@@ -57,7 +56,6 @@ public class FarmersDelight
 		ModLootFunctions.LOOT_FUNCTIONS.register(modEventBus);
 		ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
 
-		WildCropGeneration.load();
 		MinecraftForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
 
 		MinecraftForge.EVENT_BUS.register(this);

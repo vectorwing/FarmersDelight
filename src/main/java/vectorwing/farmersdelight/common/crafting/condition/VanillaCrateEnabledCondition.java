@@ -9,15 +9,12 @@ import vectorwing.farmersdelight.common.Configuration;
 
 public class VanillaCrateEnabledCondition implements ICondition
 {
-	private final ResourceLocation location;
-
-	public VanillaCrateEnabledCondition(ResourceLocation location) {
-		this.location = location;
-	}
+	private static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "vanilla_crates_enabled");
+	public static final VanillaCrateEnabledCondition INSTANCE = new VanillaCrateEnabledCondition();
 
 	@Override
 	public ResourceLocation getID() {
-		return this.location;
+		return ID;
 	}
 
 	@Override
@@ -27,20 +24,16 @@ public class VanillaCrateEnabledCondition implements ICondition
 
 	public static class Serializer implements IConditionSerializer<VanillaCrateEnabledCondition>
 	{
-		private final ResourceLocation location;
-
-		public Serializer() {
-			this.location = new ResourceLocation(FarmersDelight.MODID, "vanilla_crates_enabled");
-		}
+		public static final Serializer INSTANCE = new Serializer();
 
 		@Override
 		public ResourceLocation getID() {
-			return this.location;
+			return ID;
 		}
 
 		@Override
 		public VanillaCrateEnabledCondition read(JsonObject json) {
-			return new VanillaCrateEnabledCondition(this.location);
+			return VanillaCrateEnabledCondition.INSTANCE;
 		}
 
 		@Override

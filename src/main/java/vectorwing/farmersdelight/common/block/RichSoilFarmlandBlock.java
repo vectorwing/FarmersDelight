@@ -9,16 +9,12 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.StemGrownBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.PlantType;
-import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
-import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.Nullable;
 
@@ -38,19 +34,7 @@ public class RichSoilFarmlandBlock extends FarmBlock
 		} else if (moisture < 7) {
 			level.setBlock(pos, state.setValue(MOISTURE, 7), 2);
 		} else if (moisture == 7) {
-			if (Configuration.RICH_SOIL_BOOST_CHANCE.get() > 0.0 && random.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
-				BlockState aboveState = level.getBlockState(pos.above());
-				if (aboveState.is(ModTags.UNAFFECTED_BY_RICH_SOIL)) {
-					return;
-				}
-				if (aboveState.getBlock() instanceof BonemealableBlock growable) {
-					if (growable.isValidBonemealTarget(level, pos.above(), aboveState, false) && ForgeHooks.onCropsGrowPre(level, pos.above(), aboveState, true)) {
-						growable.performBonemeal(level, level.random, pos.above(), aboveState);
-						level.levelEvent(2005, pos.above(), 0);
-						ForgeHooks.onCropsGrowPost(level, pos.above(), aboveState);
-					}
-				}
-			}
+			RichSoilBlock.tryBoostingPlantsAboveAndBelow(level, pos, random);
 		}
 	}
 

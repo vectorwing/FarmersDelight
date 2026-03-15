@@ -37,7 +37,7 @@ import vectorwing.farmersdelight.common.registry.ModAdvancements;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.registry.ModSounds;
-import vectorwing.farmersdelight.common.tag.ForgeTags;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
@@ -155,7 +155,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 			playSound(sound, 1.0F, 1.0F);
 		} else if (tool.is(Tags.Items.SHEARS)) {
 			playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);
-		} else if (tool.is(ForgeTags.TOOLS_KNIVES)) {
+		} else if (tool.is(CommonTags.Items.TOOLS_KNIVES)) {
 			playSound(ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), 0.8F, 1.0F);
 		} else if (boardItem.getItem() instanceof BlockItem blockItem) {
 			Block block = blockItem.getBlock();

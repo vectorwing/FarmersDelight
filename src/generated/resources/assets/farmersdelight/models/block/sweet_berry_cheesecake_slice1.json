@@ -1,0 +1,9 @@
+{
+  "parent": "farmersdelight:block/template_pie_slice1",
+  "textures": {
+    "bottom": "farmersdelight:block/pie_bottom",
+    "inner": "farmersdelight:block/sweet_berry_cheesecake_inner",
+    "side": "farmersdelight:block/pie_side",
+    "top": "farmersdelight:block/sweet_berry_cheesecake_top"
+  }
+}

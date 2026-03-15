@@ -1,7 +1,7 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "particle": "farmersdelight:block/pie_bottom",
+    "particle": "farmersdelight:block/chocolate_pie_top",
     "bottom": "farmersdelight:block/pie_bottom",
     "inner": "farmersdelight:block/chocolate_pie_inner",
     "side": "farmersdelight:block/pie_side",

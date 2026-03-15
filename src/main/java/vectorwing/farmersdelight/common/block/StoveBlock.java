@@ -42,7 +42,7 @@ import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModDamageTypes;
 import vectorwing.farmersdelight.common.registry.ModSounds;
-import vectorwing.farmersdelight.common.tag.ForgeTags;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vectorwing.farmersdelight.common.utility.MathUtils;
 
@@ -72,7 +72,7 @@ public class StoveBlock extends BaseEntityBlock
 				extinguish(state, level, pos);
 				heldStack.hurtAndBreak(1, player, action -> action.broadcastBreakEvent(hand));
 				return InteractionResult.SUCCESS;
-			} else if (heldStack.is(ForgeTags.BUCKETS_WATER)) {
+			} else if (heldStack.is(CommonTags.Items.BUCKETS_WATER)) {
 				if (!level.isClientSide()) {
 					level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 1.0F, 1.0F);
 				}

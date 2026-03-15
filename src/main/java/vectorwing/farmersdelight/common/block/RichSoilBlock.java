@@ -36,22 +36,43 @@ public class RichSoilBlock extends Block
 			return;
 		}
 
-		if (Configuration.RICH_SOIL_BOOST_CHANCE.get() > 0.0 && random.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
-			if (aboveState.is(ModTags.UNAFFECTED_BY_RICH_SOIL)) {
-				return;
-			}
-			if (aboveState.getBlock() instanceof BonemealableBlock growable) {
-				if (growable.isValidBonemealTarget(level, pos.above(), aboveState, false) && ForgeHooks.onCropsGrowPre(level, pos.above(), aboveState, true)) {
-					growable.performBonemeal(level, level.random, pos.above(), aboveState);
-					level.levelEvent(2005, pos.above(), 0);
-					ForgeHooks.onCropsGrowPost(level, pos.above(), aboveState);
-				}
-			}
+		tryBoostingPlantsAboveAndBelow(level, pos, random);
+	}
+
+	public static void tryBoostingPlantsAboveAndBelow(ServerLevel level, BlockPos pos, RandomSource random) {
+		if (Configuration.RICH_SOIL_BOOST_CHANCE.get() == 0.0 || random.nextFloat() > Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
+			return;
+		}
+
+		BlockPos abovePos = pos.above();
+		BlockState aboveState = level.getBlockState(abovePos);
+		if (!aboveState.is(ModTags.Blocks.PLANTED_FROM_BELOW) && boostPlant(aboveState, abovePos, level)) {
+			return;
+		}
+
+		BlockPos belowPos = pos.below();
+		BlockState belowState = level.getBlockState(belowPos);
+		if (belowState.is(ModTags.Blocks.PLANTED_FROM_BELOW)) {
+			boostPlant(belowState, belowPos, level);
 		}
 	}
 
+	public static boolean boostPlant(BlockState plantState, BlockPos plantPos, ServerLevel level) {
+		if (plantState.is(ModTags.Blocks.UNAFFECTED_BY_RICH_SOIL)) {
+			return false;
+		}
+		if (plantState.getBlock() instanceof BonemealableBlock growable) {
+			if (growable.isValidBonemealTarget(level, plantPos, plantState, false) && ForgeHooks.onCropsGrowPre(level, plantPos, plantState, true)) {
+				growable.performBonemeal(level, level.random, plantPos, plantState);
+				level.levelEvent(2005, plantPos, 0);
+				ForgeHooks.onCropsGrowPost(level, plantPos, plantState);
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public boolean convertMushroomToColony(BlockState targetState, BlockPos targetPos, ServerLevel level) {
-		// TODO: Make this dynamic in some fashion. Is it worth doing it on 1.20.1?
 		if (targetState.is(Blocks.BROWN_MUSHROOM)) {
 			level.setBlockAndUpdate(targetPos, ModBlocks.BROWN_MUSHROOM_COLONY.get().defaultBlockState());
 			return true;

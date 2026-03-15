@@ -17,10 +17,6 @@ public class FoodValues
 	public static final int MEDIUM_DURATION = 3600;    // 3 minutes
 	public static final int LONG_DURATION = 6000;    // 5 minutes
 
-	public static MobEffectInstance comfort(int duration) {
-		return new MobEffectInstance(ModEffects.COMFORT.get(), duration, 0, false, false);
-	}
-
 	public static MobEffectInstance nourishment(int duration) {
 		return new MobEffectInstance(ModEffects.NOURISHMENT.get(), duration, 0, false, false);
 	}
@@ -136,34 +132,34 @@ public class FoodValues
 	// Bowl Foods
 	public static final FoodProperties COOKED_RICE = (new FoodProperties.Builder())
 			.nutrition(6).saturationMod(0.4f)
-			.effect(() -> comfort(BRIEF_DURATION), 1.0F).build();
+			.effect(() -> nourishment(BRIEF_DURATION), 1.0F).build();
 	public static final FoodProperties BONE_BROTH = (new FoodProperties.Builder())
 			.nutrition(8).saturationMod(0.7f)
-			.effect(() -> comfort(SHORT_DURATION), 1.0F).build();
+			.effect(() -> nourishment(SHORT_DURATION), 1.0F).build();
 	public static final FoodProperties BEEF_STEW = (new FoodProperties.Builder())
 			.nutrition(12).saturationMod(0.8f)
-			.effect(() -> comfort(MEDIUM_DURATION), 1.0F).build();
+			.effect(() -> nourishment(MEDIUM_DURATION), 1.0F).build();
 	public static final FoodProperties VEGETABLE_SOUP = (new FoodProperties.Builder())
 			.nutrition(12).saturationMod(0.8f)
-			.effect(() -> comfort(MEDIUM_DURATION), 1.0F).build();
+			.effect(() -> nourishment(MEDIUM_DURATION), 1.0F).build();
 	public static final FoodProperties FISH_STEW = (new FoodProperties.Builder())
 			.nutrition(12).saturationMod(0.8f)
-			.effect(() -> comfort(MEDIUM_DURATION), 1.0F).build();
+			.effect(() -> nourishment(MEDIUM_DURATION), 1.0F).build();
 	public static final FoodProperties CHICKEN_SOUP = (new FoodProperties.Builder())
 			.nutrition(14).saturationMod(0.75f)
-			.effect(() -> comfort(LONG_DURATION), 1.0F).build();
+			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();
 	public static final FoodProperties FRIED_RICE = (new FoodProperties.Builder())
 			.nutrition(14).saturationMod(0.75f)
-			.effect(() -> comfort(LONG_DURATION), 1.0F).build();
+			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();
 	public static final FoodProperties PUMPKIN_SOUP = (new FoodProperties.Builder())
 			.nutrition(14).saturationMod(0.75f)
-			.effect(() -> comfort(LONG_DURATION), 1.0F).build();
+			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();
 	public static final FoodProperties BAKED_COD_STEW = (new FoodProperties.Builder())
 			.nutrition(14).saturationMod(0.75f)
-			.effect(() -> comfort(LONG_DURATION), 1.0F).build();
+			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();
 	public static final FoodProperties NOODLE_SOUP = (new FoodProperties.Builder())
 			.nutrition(14).saturationMod(0.75f)
-			.effect(() -> comfort(LONG_DURATION), 1.0F).build();
+			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();
 
 	// Plated Foods
 	public static final FoodProperties BACON_AND_EGGS = (new FoodProperties.Builder())
@@ -203,24 +199,27 @@ public class FoodValues
 			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();
 	public static final FoodProperties STUFFED_PUMPKIN = (new FoodProperties.Builder())
 			.nutrition(14).saturationMod(0.75f)
-			.effect(() -> comfort(LONG_DURATION), 1.0F).build();
+			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();
 	public static final FoodProperties HONEY_GLAZED_HAM = (new FoodProperties.Builder())
 			.nutrition(14).saturationMod(0.75f)
 			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();
 	public static final FoodProperties SHEPHERDS_PIE = (new FoodProperties.Builder())
 			.nutrition(14).saturationMod(0.75f)
 			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();
+	public static final FoodProperties GLEAMING_SALAD = (new FoodProperties.Builder())
+			.nutrition(14).saturationMod(0.75f)
+			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();
 
-	public static final FoodProperties DOG_FOOD = (new FoodProperties.Builder())
+	public static final FoodProperties DOG_FOOD = new FoodProperties.Builder()
 			.nutrition(4).saturationMod(0.2f).meat().build();
 
 	// Vanilla SoupItems
 	public static final Map<Item, FoodProperties> VANILLA_SOUP_EFFECTS = (new ImmutableMap.Builder<Item, FoodProperties>())
 			.put(Items.MUSHROOM_STEW, (new FoodProperties.Builder())
-					.effect(() -> comfort(MEDIUM_DURATION), 1.0F).build())
+					.effect(() -> nourishment(MEDIUM_DURATION), 1.0F).build())
 			.put(Items.BEETROOT_SOUP, (new FoodProperties.Builder())
-					.effect(() -> comfort(MEDIUM_DURATION), 1.0F).build())
+					.effect(() -> nourishment(MEDIUM_DURATION), 1.0F).build())
 			.put(Items.RABBIT_STEW, (new FoodProperties.Builder())
-					.effect(() -> comfort(LONG_DURATION), 1.0F).build())
+					.effect(() -> nourishment(LONG_DURATION), 1.0F).build())
 			.build();
 }

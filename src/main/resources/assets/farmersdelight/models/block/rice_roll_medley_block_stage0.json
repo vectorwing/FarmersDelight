@@ -1,128 +1,159 @@
 {
-	"credit": "Made with Blockbench",
-	"textures": {
-		"tray_top": "farmersdelight:block/tray_top",
-		"food": "farmersdelight:block/rice_roll_medley",
-		"particle": "farmersdelight:block/rice_roll_medley",
-		"tray_bottom": "farmersdelight:block/tray_bottom"
-	},
-	"elements": [
-		{
-			"name": "tray",
-			"from": [1, 0, 1],
-			"to": [15, 2, 15],
-			"faces": {
-				"north": {"uv": [1, 11, 15, 13], "texture": "#tray_bottom"},
-				"east": {"uv": [1, 11, 15, 13], "texture": "#tray_bottom"},
-				"south": {"uv": [1, 11, 15, 13], "texture": "#tray_bottom"},
-				"west": {"uv": [1, 11, 15, 13], "texture": "#tray_bottom"},
-				"up": {"uv": [1, 1, 15, 15], "texture": "#tray_top"},
-				"down": {"uv": [1, 1, 15, 15], "texture": "#tray_top"}
-			}
-		},
-		{
-			"name": "kelp roll 1",
-			"from": [9, 2, 10],
-			"to": [12, 5, 13],
-			"faces": {
-				"north": {"uv": [1, 9, 4, 12], "texture": "#food"},
-				"east": {"uv": [1, 9, 4, 12], "texture": "#food"},
-				"south": {"uv": [1, 9, 4, 12], "texture": "#food"},
-				"west": {"uv": [1, 9, 4, 12], "texture": "#food"},
-				"up": {"uv": [4, 9, 7, 12], "texture": "#food"},
-				"down": {"uv": [4, 9, 7, 12], "texture": "#food"}
-			}
-		},
-		{
-			"name": "kelp roll 2",
-			"from": [11, 2, 6],
-			"to": [14, 5, 9],
-			"faces": {
-				"north": {"uv": [1, 9, 4, 12], "texture": "#food"},
-				"east": {"uv": [1, 9, 4, 12], "texture": "#food"},
-				"south": {"uv": [1, 9, 4, 12], "texture": "#food"},
-				"west": {"uv": [1, 9, 4, 12], "texture": "#food"},
-				"up": {"uv": [4, 9, 7, 12], "texture": "#food"},
-				"down": {"uv": [4, 9, 7, 12], "texture": "#food"}
-			}
-		},
-		{
-			"name": "kelp roll 3",
-			"from": [11, 2, 2],
-			"to": [14, 5, 5],
-			"faces": {
-				"north": {"uv": [1, 9, 4, 12], "texture": "#food"},
-				"east": {"uv": [1, 9, 4, 12], "texture": "#food"},
-				"south": {"uv": [1, 9, 4, 12], "texture": "#food"},
-				"west": {"uv": [1, 9, 4, 12], "texture": "#food"},
-				"up": {"uv": [4, 9, 7, 12], "texture": "#food"},
-				"down": {"uv": [4, 9, 7, 12], "texture": "#food"}
-			}
-		},
-		{
-			"name": "salmon roll 1",
-			"from": [2, 2, 2],
-			"to": [4, 4, 7],
-			"faces": {
-				"north": {"uv": [1, 6, 3, 8], "texture": "#food"},
-				"east": {"uv": [3, 1, 8, 3], "texture": "#food"},
-				"south": {"uv": [1, 6, 3, 8], "texture": "#food"},
-				"west": {"uv": [3, 1, 8, 3], "texture": "#food"},
-				"up": {"uv": [1, 1, 3, 6], "texture": "#food"},
-				"down": {"uv": [1, 1, 3, 6], "texture": "#food"}
-			}
-		},
-		{
-			"name": "salmon roll 2",
-			"from": [5, 2, 2],
-			"to": [7, 4, 7],
-			"faces": {
-				"north": {"uv": [1, 6, 3, 8], "texture": "#food"},
-				"east": {"uv": [3, 1, 8, 3], "texture": "#food"},
-				"south": {"uv": [1, 6, 3, 8], "texture": "#food"},
-				"west": {"uv": [3, 1, 8, 3], "texture": "#food"},
-				"up": {"uv": [1, 1, 3, 6], "texture": "#food"},
-				"down": {"uv": [1, 1, 3, 6], "texture": "#food"}
-			}
-		},
-		{
-			"name": "salmon roll 3",
-			"from": [8, 2, 2],
-			"to": [10, 4, 7],
-			"faces": {
-				"north": {"uv": [1, 6, 3, 8], "texture": "#food"},
-				"east": {"uv": [3, 1, 8, 3], "texture": "#food"},
-				"south": {"uv": [1, 6, 3, 8], "texture": "#food"},
-				"west": {"uv": [3, 1, 8, 3], "texture": "#food"},
-				"up": {"uv": [1, 1, 3, 6], "texture": "#food"},
-				"down": {"uv": [1, 1, 3, 6], "texture": "#food"}
-			}
-		},
-		{
-			"name": "cod roll 1",
-			"from": [2, 2, 9],
-			"to": [4, 4, 14],
-			"faces": {
-				"north": {"uv": [8, 6, 10, 8], "texture": "#food"},
-				"east": {"uv": [10, 1, 15, 3], "texture": "#food"},
-				"south": {"uv": [8, 6, 10, 8], "texture": "#food"},
-				"west": {"uv": [10, 1, 15, 3], "texture": "#food"},
-				"up": {"uv": [8, 1, 10, 6], "texture": "#food"},
-				"down": {"uv": [8, 1, 10, 6], "texture": "#food"}
-			}
-		},
-		{
-			"name": "cod roll 2",
-			"from": [5, 2, 9],
-			"to": [7, 4, 14],
-			"faces": {
-				"north": {"uv": [8, 6, 10, 8], "texture": "#food"},
-				"east": {"uv": [10, 1, 15, 3], "texture": "#food"},
-				"south": {"uv": [8, 6, 10, 8], "texture": "#food"},
-				"west": {"uv": [10, 1, 15, 3], "texture": "#food"},
-				"up": {"uv": [8, 1, 10, 6], "texture": "#food"},
-				"down": {"uv": [8, 1, 10, 6], "texture": "#food"}
-			}
-		}
-	]
+  "format_version": "1.9.0",
+  "credit": "Made with Blockbench",
+  "parent": "block/block",
+  "textures": {
+    "rolls": "farmersdelight:block/rice_roll_medley",
+    "particle": "farmersdelight:block/platter",
+    "platter": "farmersdelight:block/platter"
+  },
+  "elements": [
+    {
+      "name": "base",
+      "from": [1, 1, 2],
+      "to": [15, 3, 14],
+      "faces": {
+        "north": {"uv": [0, 12, 14, 14], "texture": "#platter"},
+        "east": {"uv": [14, 0, 16, 12], "rotation": 90, "texture": "#platter"},
+        "south": {"uv": [0, 12, 14, 14], "texture": "#platter"},
+        "west": {"uv": [14, 12, 16, 0], "rotation": 90, "texture": "#platter"},
+        "up": {"uv": [0, 0, 14, 12], "texture": "#platter"},
+        "down": {"uv": [0, 0, 14, 12], "texture": "#platter"}
+      }
+    },
+    {
+      "name": "east_support",
+      "from": [11, 0, 2],
+      "to": [13, 1, 14],
+      "faces": {
+        "north": {"uv": [14, 15, 16, 16], "texture": "#platter"},
+        "east": {"uv": [2, 15, 14, 16], "texture": "#platter"},
+        "south": {"uv": [0, 15, 2, 16], "texture": "#platter"},
+        "west": {"uv": [2, 15, 14, 16], "texture": "#platter"},
+        "down": {"uv": [2, 14, 14, 16], "rotation": 90, "texture": "#platter", "cullface": "down"}
+      }
+    },
+    {
+      "name": "west_support",
+      "from": [3, 0, 2],
+      "to": [5, 1, 14],
+      "faces": {
+        "north": {"uv": [14, 15, 16, 16], "texture": "#platter"},
+        "east": {"uv": [2, 15, 14, 16], "texture": "#platter"},
+        "south": {"uv": [0, 15, 2, 16], "texture": "#platter"},
+        "west": {"uv": [2, 15, 14, 16], "texture": "#platter"},
+        "down": {"uv": [2, 14, 14, 16], "rotation": 90, "texture": "#platter", "cullface": "down"}
+      }
+    },
+    {
+      "name": "kelp_1",
+      "from": [9, 3, 10],
+      "to": [12, 6, 13],
+      "faces": {
+        "north": {"uv": [0, 13, 3, 16], "texture": "#rolls"},
+        "east": {"uv": [0, 13, 3, 16], "texture": "#rolls"},
+        "south": {"uv": [0, 13, 3, 16], "texture": "#rolls"},
+        "west": {"uv": [0, 13, 3, 16], "texture": "#rolls"},
+        "up": {"uv": [0, 10, 3, 13], "texture": "#rolls"}
+      }
+    },
+    {
+      "name": "kelp_2",
+      "from": [11, 3, 7],
+      "to": [14, 6, 10],
+      "faces": {
+        "north": {"uv": [0, 13, 3, 16], "texture": "#rolls"},
+        "east": {"uv": [0, 13, 3, 16], "texture": "#rolls"},
+        "south": {"uv": [0, 13, 3, 16], "texture": "#rolls"},
+        "west": {"uv": [0, 13, 3, 16], "texture": "#rolls"},
+        "up": {"uv": [0, 10, 3, 13], "texture": "#rolls"}
+      }
+    },
+    {
+      "name": "kelp_3",
+      "from": [11, 3, 3],
+      "to": [14, 6, 6],
+      "faces": {
+        "north": {"uv": [0, 13, 3, 16], "texture": "#rolls"},
+        "east": {"uv": [0, 13, 3, 16], "texture": "#rolls"},
+        "south": {"uv": [0, 13, 3, 16], "texture": "#rolls"},
+        "west": {"uv": [0, 13, 3, 16], "texture": "#rolls"},
+        "up": {"uv": [0, 10, 3, 13], "texture": "#rolls"}
+      }
+    },
+    {
+      "name": "salmon_4",
+      "from": [8, 3, 3],
+      "to": [10, 5, 8],
+      "faces": {
+        "north": {"uv": [0, 5, 2, 7], "texture": "#rolls"},
+        "east": {"uv": [2, 0, 7, 2], "texture": "#rolls"},
+        "south": {"uv": [0, 5, 2, 7], "texture": "#rolls"},
+        "west": {"uv": [2, 0, 7, 2], "texture": "#rolls"},
+        "up": {"uv": [0, 0, 2, 5], "texture": "#rolls"}
+      }
+    },
+    {
+      "name": "salmon_5",
+      "from": [5, 3, 3],
+      "to": [7, 5, 8],
+      "faces": {
+        "north": {"uv": [0, 5, 2, 7], "texture": "#rolls"},
+        "east": {"uv": [2, 0, 7, 2], "texture": "#rolls"},
+        "south": {"uv": [0, 5, 2, 7], "texture": "#rolls"},
+        "west": {"uv": [2, 0, 7, 2], "texture": "#rolls"},
+        "up": {"uv": [0, 0, 2, 5], "texture": "#rolls"}
+      }
+    },
+    {
+      "name": "salmon_6",
+      "from": [2, 3, 3],
+      "to": [4, 5, 8],
+      "faces": {
+        "north": {"uv": [0, 5, 2, 7], "texture": "#rolls"},
+        "east": {"uv": [2, 0, 7, 2], "texture": "#rolls"},
+        "south": {"uv": [0, 5, 2, 7], "texture": "#rolls"},
+        "west": {"uv": [2, 0, 7, 2], "texture": "#rolls"},
+        "up": {"uv": [0, 0, 2, 5], "texture": "#rolls"}
+      }
+    },
+    {
+      "name": "cod_7",
+      "from": [6, 3, 8],
+      "to": [8, 5, 13],
+      "faces": {
+        "north": {"uv": [7, 5, 9, 7], "texture": "#rolls"},
+        "east": {"uv": [9, 0, 14, 2], "texture": "#rolls"},
+        "south": {"uv": [7, 5, 9, 7], "texture": "#rolls"},
+        "west": {"uv": [9, 0, 14, 2], "texture": "#rolls"},
+        "up": {"uv": [7, 0, 9, 5], "texture": "#rolls"}
+      }
+    },
+    {
+      "name": "cod_8",
+      "from": [3, 3, 8],
+      "to": [5, 5, 13],
+      "faces": {
+        "north": {"uv": [7, 5, 9, 7], "texture": "#rolls"},
+        "east": {"uv": [9, 0, 14, 2], "texture": "#rolls"},
+        "south": {"uv": [7, 5, 9, 7], "texture": "#rolls"},
+        "west": {"uv": [9, 0, 14, 2], "texture": "#rolls"},
+        "up": {"uv": [7, 0, 9, 5], "texture": "#rolls"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "platter",
+      "origin": [1, 1, 1],
+      "color": 0,
+      "children": [0, 1, 2]
+    },
+    {
+      "name": "rolls",
+      "origin": [10, 1, 10],
+      "color": 0,
+      "children": [3, 4, 5, 6, 7, 8, 9, 10]
+    }
+  ]
 }

@@ -1,0 +1,36 @@
+{
+  "type": "farmersdelight:replace_item",
+  "added_item": "farmersdelight:pumpkin_slice",
+  "conditions": [
+    {
+      "block": "minecraft:pumpkin",
+      "condition": "minecraft:block_state_property"
+    },
+    {
+      "condition": "minecraft:all_of",
+      "terms": [
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "tag": "farmersdelight:tools/knives"
+          }
+        },
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "enchantments": [
+                {
+                  "enchantment": "minecraft:silk_touch"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "count": 4,
+  "removed_item": "minecraft:pumpkin"
+}

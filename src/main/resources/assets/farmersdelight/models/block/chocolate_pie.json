@@ -1,7 +1,7 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "particle": "farmersdelight:block/pie_bottom",
+    "particle": "farmersdelight:block/chocolate_pie_top",
     "bottom": "farmersdelight:block/pie_bottom",
     "inner": "farmersdelight:block/chocolate_pie_inner",
     "side": "farmersdelight:block/pie_side",
@@ -17,7 +17,7 @@
         "south": {"uv": [2, 12, 14, 16], "texture": "#side"},
         "west": {"uv": [2, 12, 14, 16], "texture": "#side"},
         "up": {"uv": [2, 2, 14, 14], "texture": "#top"},
-        "down": {"uv": [2, 2, 14, 14], "texture": "#bottom"}
+        "down": {"uv": [2, 2, 14, 14], "texture": "#bottom", "cullface": "down"}
       }
     },
     {

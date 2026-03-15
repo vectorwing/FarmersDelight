@@ -135,8 +135,8 @@ public class TomatoBlock extends CropBlock
 	}
 
 
-	public boolean canClimbBlock(BlockState aboveState) {
-		return Configuration.ENABLE_TOMATO_VINE_CLIMBING_TAGGED_ROPES.get() ? aboveState.is(ModTags.ROPES) : aboveState.is(ModBlocks.ROPE.get());
+	public boolean canClimbBlock(BlockState stateAbove) {
+		return Configuration.ENABLE_TOMATO_VINE_CLIMBING_TAGGED_ROPES.get() ? stateAbove.is(ModTags.Blocks.ROPES) : stateAbove.is(ModBlocks.ROPE.get());
 	}
 
 	public void climbRopeAbove(ServerLevel level, BlockPos pos) {

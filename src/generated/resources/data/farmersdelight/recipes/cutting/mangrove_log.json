@@ -14,8 +14,13 @@
     }
   ],
   "sound": "minecraft:item.axe.strip",
-  "tool": {
-    "type": "farmersdelight:tool_action",
-    "action": "axe_strip"
-  }
+  "tool": [
+    {
+      "type": "farmersdelight:tool_action",
+      "action": "axe_strip"
+    },
+    {
+      "tag": "minecraft:axes"
+    }
+  ]
 }

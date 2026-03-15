@@ -44,7 +44,6 @@ public class CommonSetup
 			registerStackSizeOverrides();
             ModNetworking.register();
             ModAdvancements.register();
-			CraftingHelper.register(new VanillaCrateEnabledCondition.Serializer());
 		});
 	}
 
