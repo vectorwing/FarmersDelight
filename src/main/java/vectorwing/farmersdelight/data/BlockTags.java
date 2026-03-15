@@ -229,6 +229,20 @@ public class BlockTags extends BlockTagsProvider
 	}
 
 	protected void registerModTags() {
+		tag(ModTags.Blocks.FEASTS).add(
+				ModBlocks.ROAST_CHICKEN_BLOCK.get(),
+				ModBlocks.STUFFED_PUMPKIN_BLOCK.get(),
+				ModBlocks.SHEPHERDS_PIE_BLOCK.get(),
+				ModBlocks.HONEY_GLAZED_HAM_BLOCK.get(),
+				ModBlocks.GLEAMING_SALAD_BLOCK.get(),
+				ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get()
+		);
+		tag(ModTags.Blocks.PIES).add(
+				ModBlocks.APPLE_PIE.get(),
+				ModBlocks.SWEET_BERRY_CHEESECAKE.get(),
+				ModBlocks.CHOCOLATE_PIE.get(),
+				ModBlocks.PUMPKIN_PIE.get()
+		);
 		tag(ModTags.Blocks.TERRAIN)
 				.addTag(net.minecraft.tags.BlockTags.DIRT)
 				.addTag(net.minecraft.tags.BlockTags.SAND);
@@ -262,11 +276,9 @@ public class BlockTags extends BlockTagsProvider
 				.add(ModBlocks.CRIMSON_CABINET.get())
 				.add(ModBlocks.WARPED_CABINET.get());
 		tag(ModTags.Blocks.CABINETS).addTag(ModTags.Blocks.CABINETS_WOODEN);
-
 		tag(ModTags.Blocks.MUSHROOM_COLONIES)
 				.add(ModBlocks.BROWN_MUSHROOM_COLONY.get())
 				.add(ModBlocks.RED_MUSHROOM_COLONY.get());
-
 		tag(ModTags.Blocks.ROPES).add(ModBlocks.ROPE.get())
 				.addOptional(new ResourceLocation("quark:rope"))
 				.addOptional(new ResourceLocation("supplementaries:rope"));
@@ -283,14 +295,14 @@ public class BlockTags extends BlockTagsProvider
 						Blocks.HOPPER)
 				.addOptional(new ResourceLocation("create:chute"));
 		tag(ModTags.Blocks.COMPOST_ACTIVATORS).add(
-				Blocks.BROWN_MUSHROOM,
-				Blocks.RED_MUSHROOM,
-				Blocks.PODZOL,
-				Blocks.MYCELIUM,
-				ModBlocks.ORGANIC_COMPOST.get(),
-				ModBlocks.RICH_SOIL.get(),
-				ModBlocks.RICH_SOIL_FARMLAND.get())
-			.addTag(ModTags.Blocks.MUSHROOM_COLONIES);
+						Blocks.BROWN_MUSHROOM,
+						Blocks.RED_MUSHROOM,
+						Blocks.PODZOL,
+						Blocks.MYCELIUM,
+						ModBlocks.ORGANIC_COMPOST.get(),
+						ModBlocks.RICH_SOIL.get(),
+						ModBlocks.RICH_SOIL_FARMLAND.get())
+				.addTag(ModTags.Blocks.MUSHROOM_COLONIES);
 		tag(ModTags.Blocks.UNAFFECTED_BY_RICH_SOIL).add(
 						Blocks.GRASS_BLOCK,
 						Blocks.MOSS_BLOCK,
@@ -333,11 +345,11 @@ public class BlockTags extends BlockTagsProvider
 	private void registerCompatibilityTags() {
 		tag(CompatibilityTags.CREATE_PASSIVE_BOILER_HEATERS).add(ModBlocks.STOVE.get());
 		tag(CompatibilityTags.CREATE_BRITTLE).add(
-				ModBlocks.CUTTING_BOARD.get(),
-				ModBlocks.FULL_TATAMI_MAT.get(),
-				ModBlocks.HALF_TATAMI_MAT.get()
-		);
-
+						ModBlocks.CUTTING_BOARD.get(),
+						ModBlocks.FULL_TATAMI_MAT.get(),
+						ModBlocks.HALF_TATAMI_MAT.get())
+				.addTag(ModTags.Blocks.FEASTS)
+				.addTag(ModTags.Blocks.PIES);
 		tag(CompatibilityTags.SERENE_SEASONS_AUTUMN_CROPS_BLOCK).add(
 				ModBlocks.CABBAGE_CROP.get(),
 				ModBlocks.ONION_CROP.get(),

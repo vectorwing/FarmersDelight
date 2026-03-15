@@ -77,7 +77,8 @@ public class ItemTags extends ItemTagsProvider
 				ModItems.ROAST_CHICKEN.get(),
 				ModItems.STUFFED_PUMPKIN.get(),
 				ModItems.HONEY_GLAZED_HAM.get(),
-				ModItems.SHEPHERDS_PIE.get()
+				ModItems.SHEPHERDS_PIE.get(),
+				ModItems.GLEAMING_SALAD.get()
 		);
 		tag(ModTags.Items.DRINKS).add(
 				ModItems.MILK_BOTTLE.get(),
@@ -85,32 +86,26 @@ public class ItemTags extends ItemTagsProvider
 				ModItems.MELON_JUICE.get(),
 				ModItems.HOT_COCOA.get()
 		);
-		tag(ModTags.Items.SWEETS).addTag(ModTags.Items.PIES).add(
+		tag(ModTags.Items.SWEETS).add(
 				Items.CAKE,
-				ModItems.CAKE_SLICE.get(),
 				Items.COOKIE,
+				ModItems.CAKE_SLICE.get(),
+				ModItems.APPLE_PIE_SLICE.get(),
+				ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get(),
+				ModItems.CHOCOLATE_PIE_SLICE.get(),
+				ModItems.PUMPKIN_PIE_SLICE.get(),
 				ModItems.SWEET_BERRY_COOKIE.get(),
 				ModItems.HONEY_COOKIE.get(),
 				ModItems.MELON_POPSICLE.get(),
 				ModItems.GLOW_BERRY_CUSTARD.get(),
 				ModItems.FRUIT_SALAD.get()
 		);
-		tag(ModTags.Items.FEASTS).add(
-				ModItems.ROAST_CHICKEN_BLOCK.get(),
-				ModItems.STUFFED_PUMPKIN_BLOCK.get(),
-				ModItems.SHEPHERDS_PIE_BLOCK.get(),
-				ModItems.HONEY_GLAZED_HAM_BLOCK.get(),
-				ModItems.RICE_ROLL_MEDLEY_BLOCK.get()
-		);
+		copy(ModTags.Blocks.FEASTS, ModTags.Items.FEASTS);
 		tag(ModTags.Items.PIES).add(
 				Items.PUMPKIN_PIE,
-				ModItems.PUMPKIN_PIE_SLICE.get(),
 				ModItems.APPLE_PIE.get(),
-				ModItems.APPLE_PIE_SLICE.get(),
 				ModItems.SWEET_BERRY_CHEESECAKE.get(),
-				ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get(),
-				ModItems.CHOCOLATE_PIE.get(),
-				ModItems.CHOCOLATE_PIE_SLICE.get()
+				ModItems.CHOCOLATE_PIE.get()
 		);
 		tag(ModTags.Items.KNIVES).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get(), ModItems.NETHERITE_KNIFE.get());
 		tag(ModTags.Items.STRAW_HARVESTERS).addTag(ModTags.Items.KNIVES);

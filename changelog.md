@@ -15,9 +15,11 @@
   - Default recipes have been configured for most FD recipes. I'll try to keep this updated for pack makers, but I may forget now and then.
 - New block tags:
   - `farmersdelight:planted_from_below`: Plants which are rooted beneath the soil, rather than above. Includes Cave Vines;
+  - `farmersdelight:feasts`: Blocks which represent a placeable feast;
+  - `farmersdelight:pies`: Blocks which represent a placeable pie;
 - New item tags:
   - `farmersdelight:sweets`: Items which represent sweet prepared foods, usually desserts;
-  - `farmersdelight:pies`: Items which represent a whole pie, or its slice. Included in `sweets`;
+  - `farmersdelight:pies`: Items which represent a whole pie;
 
 ### Updates
 - The Cutting Board has been redesigned:

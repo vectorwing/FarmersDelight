@@ -42,6 +42,12 @@ public class ModTags
 		// Blocks which are planted beneath a soil block. Used by Rich Soil to ensure such blocks can only be bonemealed if planted below it.
 		public static final TagKey<Block> PLANTED_FROM_BELOW = modBlockTag("planted_from_below");
 
+		// Blocks which represent a feast: a larger, placeable meal which can serve many portions.
+		public static final TagKey<Block> FEASTS = modBlockTag("feasts");
+
+		// Blocks which represent a pie: a placeable dessert which uses a Pie Crust, and usually provides 4 slices.
+		public static final TagKey<Block> PIES = modBlockTag("pies");
+
 		// Blocks made mostly of straw. Populates MINEABLE_WITH_KNIFE.
 		public static final TagKey<Block> STRAW_BLOCKS = modBlockTag("straw_blocks");
 
