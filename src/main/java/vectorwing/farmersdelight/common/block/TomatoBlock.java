@@ -14,6 +14,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -28,6 +29,8 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ModTags;
+
+import javax.annotation.Nullable;
 
 @SuppressWarnings("deprecation")
 public class TomatoBlock extends CropBlock
@@ -227,6 +230,16 @@ public class TomatoBlock extends CropBlock
 		}
 
 		return state;
+	}
+
+	@Override
+	public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
+		boolean isRopelogged = state.getValue(TomatoBlock.ROPELOGGED);
+		super.playerDestroy(level, player, pos, state, blockEntity, stack);
+
+		if (isRopelogged) {
+			destroyAndPlaceRope(level, pos);
+		}
 	}
 
 	/**
