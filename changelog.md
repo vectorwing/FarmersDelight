@@ -13,7 +13,9 @@
   - It works similarly to the built-in JEI plugin, but offering compatibility with EMI's unique features, such as chances and recipe trees;
   - With it, tags have been integrated into translation files. Both JEI and EMI now use them to display tags in-game.
   - Default recipes have been configured for most FD recipes. I'll try to keep this updated for pack makers, but I may forget now and then.
-- New tags:
+- New block tags:
+  - `farmersdelight:planted_from_below`: Plants which are rooted beneath the soil, rather than above. Includes Cave Vines;
+- New item tags:
   - `farmersdelight:sweets`: Items which represent sweet prepared foods, usually desserts;
   - `farmersdelight:pies`: Items which represent a whole pie, or its slice. Included in `sweets`;
 
@@ -34,6 +36,9 @@
   - The Skillet can render foods in handheld mode again;
   - When cooking handheld, the durability meter will become an orange "frying meter", showing you the cooking progress;
   - When cooking handheld, you can press the "Attack" button to toss and flip the food inside the skillet. This has no gameplay effect, it's just for fun!;
+- Rich Soil can now boost plants which are `planted_from_below`:
+  - Any bonemealable plant tagged as such will only receive boosts if planted below Rich Soil. Otherwise, they will only be boosted from the top side;
+  - Rich Soil prioritizes boosting a plant above before boosting a plant below, so the bottom plant will only be chosen if the one above cannot be boosted further;
 - Tomato crops have been updated:
   - The crop no longer uses the standard growth speed checks of `CropBlock`, which was slowing down hanging vines. They grow at a fixed rate now, regardless of height;
   - Applying bone meal to a mature tomato vine (sneaking, rich soil etc) will pass the boost to the vine above it, if possible;

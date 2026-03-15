@@ -39,6 +39,9 @@ public class ModTags
 		// Blocks in which Mushroom Colonies can keep growing on. These blocks cannot form new colonies.
 		public static final TagKey<Block> MUSHROOM_COLONY_GROWABLE_ON = modBlockTag("mushroom_colony_growable_on");
 
+		// Blocks which are planted beneath a soil block. Used by Rich Soil to ensure such blocks can only be bonemealed if planted below it.
+		public static final TagKey<Block> PLANTED_FROM_BELOW = modBlockTag("planted_from_below");
+
 		// Blocks made mostly of straw. Populates MINEABLE_WITH_KNIFE.
 		public static final TagKey<Block> STRAW_BLOCKS = modBlockTag("straw_blocks");
 

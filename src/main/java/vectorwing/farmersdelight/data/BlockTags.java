@@ -327,6 +327,7 @@ public class BlockTags extends BlockTagsProvider
 				Blocks.RED_CANDLE_CAKE,
 				Blocks.BLACK_CANDLE_CAKE);
 		tag(ModTags.Blocks.CAMPFIRE_SIGNAL_SMOKE).add(ModBlocks.STRAW_BALE.get()).add(ModBlocks.RICE_BALE.get());
+		tag(ModTags.Blocks.PLANTED_FROM_BELOW).add(Blocks.CAVE_VINES, Blocks.CAVE_VINES_PLANT);
 	}
 
 	private void registerCompatibilityTags() {
