@@ -148,7 +148,7 @@ public class FeastBlock extends Block
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-		return level.getBlockState(pos.below()).isSolid();
+		return canSupportRigidBlock(level, pos.below());
 	}
 
 	@Override

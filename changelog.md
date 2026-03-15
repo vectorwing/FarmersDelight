@@ -47,6 +47,7 @@
   - All Feast models received a visual update, with new textures/models, proper cullfaces and UV optimization;
   - They will now emit particles when taking portions from them;
   - They now have more precise hitboxes, matching their shapes as they are consumed (thanks, TheGridExpert!);
+  - They now require a fully solid surface to be placed on, instead of floating over blocks like Cakes;
   - They now have "Placeable" in their tooltip, to better indicate their role;
     - Pumpkin Pie will say "Placeable when sneaking" if the sneak-to-place config is enabled;
 - Wild Crops have been updated:
