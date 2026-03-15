@@ -37,7 +37,7 @@ public class HangingTomatoBlock extends TomatoBlock
 
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
 		super.onRemove(state, level, pos, newState, movedByPiston);
-		if (!movedByPiston && !state.is(newState.getBlock())) {
+		if (Configuration.ENABLE_TOMATO_ROPE_PERMANENCE.get() && !movedByPiston && !state.is(newState.getBlock())) {
 			placeRope(level, pos);
 		}
 	}
