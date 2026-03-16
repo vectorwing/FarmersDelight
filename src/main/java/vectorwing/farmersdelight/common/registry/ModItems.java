@@ -272,15 +272,23 @@ public class ModItems
 		@Override
 		public void registerBlocks(Map<Block, Item> blockToItemMap, Item item) {
 			super.registerBlocks(blockToItemMap, item);
-			blockToItemMap.put(ModBlocks.TOMATO_CROP.get(), item);
-			blockToItemMap.put(ModBlocks.TOMATO_CROP_ON_ROPE.get(), item);
+			if (ModBlocks.TOMATO_CROP.isPresent()) {
+				blockToItemMap.put(ModBlocks.TOMATO_CROP.get(), item);
+			}
+			if (ModBlocks.TOMATO_CROP_ON_ROPE.isPresent()) {
+				blockToItemMap.put(ModBlocks.TOMATO_CROP_ON_ROPE.get(), item);
+			}
 		}
 
 		@Override
 		public void removeFromBlockToItemMap(Map<Block, Item> blockToItemMap, Item itemIn) {
 			super.removeFromBlockToItemMap(blockToItemMap, itemIn);
-			blockToItemMap.remove(ModBlocks.TOMATO_CROP.get());
-			blockToItemMap.remove(ModBlocks.TOMATO_CROP_ON_ROPE.get());
+			if (ModBlocks.TOMATO_CROP.isPresent()) {
+				blockToItemMap.remove(ModBlocks.TOMATO_CROP.get());
+			}
+			if (ModBlocks.TOMATO_CROP_ON_ROPE.isPresent()) {
+				blockToItemMap.remove(ModBlocks.TOMATO_CROP_ON_ROPE.get());
+			}
 		}
 	});
 	public static final RegistryObject<Item> ROTTEN_TOMATO = registerWithTab("rotten_tomato",
@@ -479,7 +487,8 @@ public class ModItems
 
 	// Hidden (Debug) Items
 	public static final RegistryObject<Item> DEBUG_PUMPKIN_PIE = registerHidden("debug_pumpkin_pie",
-			() -> new BlockItem(ModBlocks.PUMPKIN_PIE.get(), basicItem()){
+			() -> new BlockItem(ModBlocks.PUMPKIN_PIE.get(), basicItem())
+			{
 				@Override
 				public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
 					MutableComponent textDescription = TextUtils.getTranslation("tooltip.debug_item");
