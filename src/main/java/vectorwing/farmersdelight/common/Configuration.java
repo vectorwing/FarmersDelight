@@ -37,6 +37,9 @@ public class Configuration
 	public static ForgeConfigSpec.BooleanValue ENABLE_STACKABLE_SOUP_ITEMS;
 	public static ForgeConfigSpec.ConfigValue<List<? extends String>> SOUP_ITEM_LIST;
 
+	public static final String CATEGORY_DEBUG = "debug";
+	public static ForgeConfigSpec.BooleanValue ENABLE_TOMATO_ROPE_PERMANENCE;
+
 	public static final String CATEGORY_WORLD = "world";
 	public static ForgeConfigSpec.BooleanValue GENERATE_FD_CHEST_LOOT;
 	public static ForgeConfigSpec.BooleanValue GENERATE_VILLAGE_COMPOST_HEAPS;
@@ -118,6 +121,13 @@ public class Configuration
 				.defineList("soupItemList", ImmutableList.of("minecraft:mushroom_stew", "minecraft:beetroot_soup", "minecraft:rabbit_stew"), obj -> true);
 		COMMON_BUILDER.pop();
 
+		COMMON_BUILDER.pop();
+
+		COMMON_BUILDER.comment("Debug Settings - Not meant for gameplay").push(CATEGORY_DEBUG);
+		ENABLE_TOMATO_ROPE_PERMANENCE = COMMON_BUILDER
+				.comment("Tomato crops hanging on rope will force-place a Rope block when broken. Due to technical limitations, this affects things such as commands, making them fail to 'setblock' at first.")
+				.comment("Disable this if this block is preventing you from editing a region in creative or with commands. For normal gameplay, I recommend leaving this enabled.")
+				.define("enableTomatoRopePermanence", true);
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("World generation").push(CATEGORY_WORLD);

@@ -15,7 +15,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.advancement.CuttingBoardTrigger;
-import vectorwing.farmersdelight.common.block.TomatoVineBlock;
+import vectorwing.farmersdelight.common.block.TomatoBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 import vectorwing.farmersdelight.common.registry.ModEntityTypes;
@@ -95,10 +95,9 @@ public class FDAdvancementGenerator implements ForgeAdvancementProvider.Advancem
 
 		Advancement tallmato = getAdvancement(cropsOfTheWild, ModItems.TOMATO.get(), "harvest_ropelogged_tomato", FrameType.TASK, true, false, false)
 				.addCriterion("harvest_ropelogged_tomato", ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(
-						LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(ModBlocks.TOMATO_CROP.get()).setProperties(
+						LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(ModBlocks.TOMATO_CROP_ON_ROPE.get()).setProperties(
 								StatePropertiesPredicate.Builder.properties()
-										.hasProperty(TomatoVineBlock.VINE_AGE, 0)
-										.hasProperty(TomatoVineBlock.ROPELOGGED, true)
+										.hasProperty(TomatoBlock.VINE_AGE, 0)
 										.build()
 						).build()),
 						ItemPredicate.Builder.item())

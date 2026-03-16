@@ -42,6 +42,10 @@
   - Any bonemealable plant tagged as such will only receive boosts if planted below Rich Soil. Otherwise, they will only be boosted from the top side;
   - Rich Soil prioritizes boosting a plant above before boosting a plant below, so the bottom plant will only be chosen if the one above cannot be boosted further;
 - Tomato crops have been updated:
+  - Instead of a blockstate, grown tomato vines are now divided between `tomatoes` (old block) and `tomatoes_on_rope` (new):
+    - This was done to fix broken behaviours with vanilla bees, modded autofarming solutions and other things. It should be more resilient to bugs now (hopefully)!;
+    - Existing `tomatoes` with `ropelogged=true` will have a "pale" appearance, and convert into `tomatoes_on_rope` on random ticks;
+    - Ropes left behind by `tomatoes_on_rope` should now properly update their connections when placed;
   - The crop no longer uses the standard growth speed checks of `CropBlock`, which was slowing down hanging vines. They grow at a fixed rate now, regardless of height;
   - Applying bone meal to a mature tomato vine (sneaking, rich soil etc) will pass the boost to the vine above it, if possible;
   - Tomato seeds can now be planted on any farmland block;

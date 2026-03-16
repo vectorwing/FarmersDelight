@@ -98,7 +98,7 @@ public class BlockTags extends BlockTagsProvider
 	protected void registerMinecraftTags() {
 		tag(net.minecraft.tags.BlockTags.CLIMBABLE).add(
 				ModBlocks.ROPE.get(),
-				ModBlocks.TOMATO_CROP.get());
+				ModBlocks.TOMATO_CROP_ON_ROPE.get());
 		tag(net.minecraft.tags.BlockTags.FENCES).add(ModBlocks.ROPE_FENCE.get());
 		tag(net.minecraft.tags.BlockTags.FENCE_GATES).add(ModBlocks.ROPE_FENCE_GATE.get());
 		tag(net.minecraft.tags.BlockTags.REPLACEABLE).add(
@@ -114,7 +114,9 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.CABBAGE_CROP.get(),
 				ModBlocks.ONION_CROP.get(),
 				ModBlocks.RICE_CROP_PANICLES.get(),
-				ModBlocks.BUDDING_TOMATO_CROP.get());
+				ModBlocks.BUDDING_TOMATO_CROP.get(),
+				ModBlocks.TOMATO_CROP.get(),
+				ModBlocks.TOMATO_CROP_ON_ROPE.get());
 		tag(net.minecraft.tags.BlockTags.STANDING_SIGNS).add(
 				ModBlocks.CANVAS_SIGN.get(),
 				ModBlocks.WHITE_CANVAS_SIGN.get(),

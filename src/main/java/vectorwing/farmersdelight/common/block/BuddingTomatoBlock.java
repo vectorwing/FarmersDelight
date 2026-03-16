@@ -64,7 +64,7 @@ public class BuddingTomatoBlock extends BuddingBushBlock implements Bonemealable
 			level.setBlockAndUpdate(pos, state.setValue(AGE, ageGrowth));
 		} else {
 			int remainingGrowth = ageGrowth - maxAge - 1;
-			level.setBlockAndUpdate(pos, ModBlocks.TOMATO_CROP.get().defaultBlockState().setValue(TomatoVineBlock.VINE_AGE, remainingGrowth));
+			level.setBlockAndUpdate(pos, ModBlocks.TOMATO_CROP.get().defaultBlockState().setValue(TomatoBlock.VINE_AGE, remainingGrowth));
 		}
 	}
 }
