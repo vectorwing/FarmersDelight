@@ -23,7 +23,7 @@ public class PlacePumpkinPieMixin
 		if (!ctx.getItemInHand().is(Items.PUMPKIN_PIE))
 			return;
 
-		if (Configuration.PUMPKIN_PIE_SNEAK_TO_PLACE.get()) {
+		if (Configuration.ENABLE_PUMPKIN_PIE_SNEAK_TO_PLACE.get()) {
 			Player player = ctx.getPlayer();
 			if (player != null && player.isSecondaryUseActive()) {
 				cir.setReturnValue(ModItems.DEBUG_PUMPKIN_PIE.get().useOn(ctx));

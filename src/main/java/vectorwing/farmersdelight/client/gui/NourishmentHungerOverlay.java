@@ -48,7 +48,7 @@ public class NourishmentHungerOverlay
 	}
 
 	public static void renderNourishmentOverlay(ForgeGui gui, GuiGraphics graphics) {
-		if (!Configuration.NOURISHED_HUNGER_OVERLAY.get()) {
+		if (!Configuration.ENABLE_NOURISHMENT_HUNGER_OVERLAY.get()) {
 			return;
 		}
 

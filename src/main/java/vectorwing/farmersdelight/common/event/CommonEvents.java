@@ -31,11 +31,11 @@ public class CommonEvents
 		Item food = event.getItem().getItem();
 		LivingEntity entity = event.getEntity();
 
-		if (Configuration.RABBIT_STEW_JUMP_BOOST.get() && food.equals(Items.RABBIT_STEW)) {
+		if (Configuration.ENABLE_RABBIT_STEW_JUMP_BOOST.get() && food.equals(Items.RABBIT_STEW)) {
 			entity.addEffect(new MobEffectInstance(MobEffects.JUMP, 200, 1));
 		}
 
-		if (Configuration.VANILLA_SOUP_EXTRA_EFFECTS.get()) {
+		if (Configuration.ENABLE_VANILLA_SOUP_EXTRA_EFFECTS.get()) {
 			FoodProperties soupEffects = FoodValues.VANILLA_SOUP_EFFECTS.get(food);
 
 			if (soupEffects != null) {

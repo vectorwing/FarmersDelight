@@ -88,7 +88,7 @@ public class ConsumableItem extends Item
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag isAdvanced) {
-		if (Configuration.FOOD_EFFECT_TOOLTIP.get()) {
+		if (Configuration.ENABLE_FOOD_EFFECT_TOOLTIP.get()) {
 			if (this.hasCustomTooltip) {
 				MutableComponent textEmpty = TextUtils.getTranslation("tooltip." + this);
 				tooltip.add(textEmpty.withStyle(ChatFormatting.BLUE));

@@ -44,7 +44,7 @@ public class ComfortHealthOverlay
 	}
 
 	public static void renderComfortOverlay(ForgeGui gui, GuiGraphics graphics) {
-		if (!Configuration.COMFORT_HEALTH_OVERLAY.get()) {
+		if (!Configuration.ENABLE_COMFORT_HEALTH_OVERLAY.get()) {
 			return;
 		}
 
