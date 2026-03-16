@@ -6,10 +6,10 @@
 - New blocks:
   - **Gleaming Salad** - A salad that shines like a Lush Cave! Made with fresh Glow Berries and a rich selection of vegetables, it will (literally) illuminate your dinner table;
   - **Rope Fence** - A thin and sleek flavor of fence, complete with its own **Rope Fence Gate**!
-    - Craft by replacing planks with rope in the standard recipe;
-- Pumpkin Pie can now be placed as a block, like the other pies!
+    - Crafted by replacing planks with rope in the standard fence and fence gate recipes;
+- Pumpkin Pie can now be **placed as a block**, like the other pies!
   - By default, it is placeable without secondary action. A config exists to require sneaking, if preferred;
-- Farmer's Delight now has a native EMI plugin! (thanks, ChrysanthCow!)
+- Farmer's Delight now has a native **EMI plugin**! (thanks, ChrysanthCow!)
   - It works similarly to the built-in JEI plugin, but offering compatibility with EMI's unique features, such as chances and recipe trees;
   - With it, tags have been integrated into translation files. Both JEI and EMI now use them to display tags in-game.
   - Default recipes have been configured for most FD recipes. I'll try to keep this updated for pack makers, but I may forget now and then.
@@ -51,7 +51,7 @@
   - Tomato seeds can now be planted on any farmland block;
 - Feasts and Pies have been updated:
   - All Feast models received a visual update, with new textures/models, proper cullfaces and UV optimization;
-  - They will now emit particles when taking portions from them;
+  - They will now emit crumb particles when taking portions from them;
   - They now have more precise hitboxes, matching their shapes as they are consumed (thanks, TheGridExpert!);
   - They now require a fully solid surface to be placed on, instead of floating over blocks like Cakes;
   - They now have "Placeable" in their tooltip, to better indicate their role;
