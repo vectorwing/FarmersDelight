@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.common.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -48,7 +49,7 @@ public class HangingTomatoBlock extends TomatoBlock
 			configuredRopeBlock = ModBlocks.ROPE.get();
 		}
 		BlockState finalRopeState = configuredRopeBlock.equals(ModBlocks.ROPE.get())
-				? RopeBlock.getStateWithConnections(ModBlocks.ROPE.get().defaultBlockState(), level, pos)
+				? RopeBlock.getStateWithConnections(ModBlocks.ROPE.get().defaultBlockState(), level, pos, Direction.UP)
 				: configuredRopeBlock.defaultBlockState();
 
 		return level.setBlock(pos, finalRopeState, level.isClientSide ? 11 : 3);

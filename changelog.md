@@ -49,6 +49,9 @@
   - The crop no longer uses the standard growth speed checks of `CropBlock`, which was slowing down hanging vines. They grow at a fixed rate now, regardless of height;
   - Applying bone meal to a mature tomato vine (sneaking, rich soil etc) will pass the boost to the vine above it, if possible;
   - Tomato seeds can now be planted on any farmland block;
+- Rope has been updated:
+  - When placing Rope horizontally, it will try to connect to any solid faces horizontally, but won't reattach if they're modified;
+  - When placing Rope vertically, or when deploying it from one spot, it won't connect to side faces (loose rope), except for other ropes and bars;
 - Feasts and Pies have been updated:
   - All Feast models received a visual update, with new textures/models, proper cullfaces and UV optimization;
   - They will now emit crumb particles when taking portions from them;

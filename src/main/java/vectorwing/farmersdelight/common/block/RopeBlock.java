@@ -89,10 +89,10 @@ public class RopeBlock extends IronBarsBlock
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return getStateWithConnections(this.defaultBlockState(), context.getLevel(), context.getClickedPos());
+		return getStateWithConnections(this.defaultBlockState(), context.getLevel(), context.getClickedPos(), context.getClickedFace());
 	}
 
-	public static BlockState getStateWithConnections(BlockState state, Level level, BlockPos pos) {
+	public static BlockState getStateWithConnections(BlockState state, Level level, BlockPos pos, Direction clickedFace) {
 		FluidState fluidState = level.getFluidState(pos);
 		BlockPos northPos = pos.north();
 		BlockPos southPos = pos.south();
@@ -103,16 +103,22 @@ public class RopeBlock extends IronBarsBlock
 		BlockState westState = level.getBlockState(westPos);
 		BlockState eastState = level.getBlockState(eastPos);
 
+		boolean isHorizontalPlacement = clickedFace.getAxis().isHorizontal();
+
 		return state.setValue(TIED_TO_BELL, level.getBlockState(pos.above()).getBlock() == Blocks.BELL)
-				.setValue(NORTH, attachesTo(northState, northState.isFaceSturdy(level, northPos, Direction.SOUTH)))
-				.setValue(SOUTH, attachesTo(southState, southState.isFaceSturdy(level, southPos, Direction.NORTH)))
-				.setValue(WEST, attachesTo(westState, westState.isFaceSturdy(level, westPos, Direction.EAST)))
-				.setValue(EAST, attachesTo(eastState, eastState.isFaceSturdy(level, eastPos, Direction.WEST)))
+				.setValue(NORTH, isHorizontalPlacement ? tieToAnythingValid(northState, northState.isFaceSturdy(level, northPos, Direction.SOUTH)) : tieToRopeAndWalls(northState))
+				.setValue(SOUTH, isHorizontalPlacement ? tieToAnythingValid(southState, southState.isFaceSturdy(level, southPos, Direction.NORTH)) : tieToRopeAndWalls(southState))
+				.setValue(WEST, isHorizontalPlacement ? tieToAnythingValid(westState, westState.isFaceSturdy(level, westPos, Direction.EAST)) : tieToRopeAndWalls(westState))
+				.setValue(EAST, isHorizontalPlacement ? tieToAnythingValid(eastState, eastState.isFaceSturdy(level, eastPos, Direction.WEST)) : tieToRopeAndWalls(eastState))
 				.setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
 	}
 
-	public static boolean attachesTo(BlockState pState, boolean pSolidSide) {
-		return !isExceptionForConnection(pState) && pSolidSide || pState.getBlock() instanceof IronBarsBlock || pState.is(BlockTags.WALLS);
+	public static boolean tieToAnythingValid(BlockState state, boolean solidSide) {
+		return !isExceptionForConnection(state) && solidSide || tieToRopeAndWalls(state);
+	}
+
+	public static boolean tieToRopeAndWalls(BlockState pState) {
+		return pState.getBlock() instanceof IronBarsBlock || pState.is(BlockTags.WALLS);
 	}
 
 	@Override
@@ -142,7 +148,7 @@ public class RopeBlock extends IronBarsBlock
 		}
 
 		return facing.getAxis().isHorizontal()
-				? state.setValue(TIED_TO_BELL, tiedToBell).setValue(PROPERTY_BY_DIRECTION.get(facing), this.attachsTo(facingState, facingState.isFaceSturdy(level, facingPos, facing.getOpposite())))
+				? state.setValue(TIED_TO_BELL, tiedToBell).setValue(PROPERTY_BY_DIRECTION.get(facing), tieToRopeAndWalls(facingState))
 				: super.updateShape(state.setValue(TIED_TO_BELL, tiedToBell), facing, facingState, level, currentPos, facingPos);
 	}
 

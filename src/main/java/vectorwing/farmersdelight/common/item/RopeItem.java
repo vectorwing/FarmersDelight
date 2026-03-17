@@ -51,7 +51,7 @@ public class RopeItem extends FuelBlockItem
 			}
 
 			if (direction != Direction.DOWN) {
-				return context;
+				return null;
 			}
 
 			mutablePos.move(direction);
