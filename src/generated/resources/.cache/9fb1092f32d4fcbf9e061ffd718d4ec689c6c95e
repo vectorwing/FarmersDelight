@@ -1,4 +1,4 @@
-// 1.20.1	2026-03-14T19:54:52.8364694	Recipes
+// 1.20.1	2026-03-18T14:44:20.0181097	Recipes
 169cfc1d11ca3cede161363799f6c0e00bc1412e data/farmersdelight/advancements/recipes/beetroot_crate.json
 a498fcc8b72b6631ddbb164a0245b37491e7571a data/farmersdelight/advancements/recipes/building_blocks/cabbage_crate.json
 c941206993bfa59d31b38132b898fb94c29746a6 data/farmersdelight/advancements/recipes/building_blocks/onion_crate.json
@@ -253,7 +253,7 @@ c149c85bf406a2af06e8bc14ae6226878db14781 data/farmersdelight/recipes/cooked_salm
 4b5974d11fc825afecb3afd8be1d9fa9b51891e3 data/farmersdelight/recipes/cooking/beef_stew.json
 d283d9ac4a1c4988f9a07363d72263b603af4bec data/farmersdelight/recipes/cooking/beetroot_soup.json
 352f37a2b1178cd7c9ed22e6b2b5640ed35f4da7 data/farmersdelight/recipes/cooking/bone_broth.json
-5ebd166fd0fd5aa8080282b996326d2c3c17c511 data/farmersdelight/recipes/cooking/cabbage_rolls.json
+67e1c3be977bab014ab137e7b56f9cb6051aaf29 data/farmersdelight/recipes/cooking/cabbage_rolls.json
 21ea2bcea3e08b24408e7ef9acf0dbcfcf4b3c49 data/farmersdelight/recipes/cooking/chicken_soup.json
 a778da4b7b72120ee102ccaf584c860834d345ef data/farmersdelight/recipes/cooking/cooked_rice.json
 4b106ec6d874257e1bc7a944afdf277a1dea2c5c data/farmersdelight/recipes/cooking/dog_food.json

@@ -75,8 +75,9 @@
 
 ### Removals
 - The following tags have been removed:
-  - `wolf_prey`: Replaced by `forge:raw_meat` when making Dog Food;
+  - `cabbage_roll_ingredients`: Replaced by an array of equivalent tags: `raw_meat`, `raw_fishes`, `mushrooms` and `vegetables`;
   - `offhand_equipment`: Deprecated with the new Cutting Board mechanics;
+  - `wolf_prey`: Replaced by `forge:raw_meat` when making Dog Food;
 
 ### Fixes
 - Fix Canvas Rug and Tatami Mats not having their own stepping sounds, by tagging them as `combination_step_sound_blocks` (thanks, Mickeon!);

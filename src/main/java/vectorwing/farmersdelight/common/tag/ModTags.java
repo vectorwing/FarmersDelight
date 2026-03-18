@@ -96,9 +96,6 @@ public class ModTags
 		// Items (ideally tools) which can obtain straw when harvesting grassy plants. Populated by all knives by default.
 		public static final TagKey<Item> STRAW_HARVESTERS = modItemTag("straw_harvesters");
 
-		// Items which serve as filling for Cabbage Rolls.
-		public static final TagKey<Item> CABBAGE_ROLL_INGREDIENTS = modItemTag("cabbage_roll_ingredients");
-
 		public static final TagKey<Item> CABINETS = modItemTag("cabinets");
 
 		public static final TagKey<Item> CABINETS_WOODEN = modItemTag("cabinets/wooden");

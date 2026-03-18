@@ -109,7 +109,6 @@ public class ItemTags extends ItemTagsProvider
 		);
 		tag(ModTags.Items.KNIVES).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get(), ModItems.NETHERITE_KNIFE.get());
 		tag(ModTags.Items.STRAW_HARVESTERS).addTag(ModTags.Items.KNIVES);
-		tag(ModTags.Items.CABBAGE_ROLL_INGREDIENTS).addTag(CommonTags.Items.RAW_PORK).addTag(CommonTags.Items.RAW_FISHES).addTag(CommonTags.Items.RAW_CHICKEN).addTag(CommonTags.Items.RAW_BEEF).addTag(CommonTags.Items.RAW_MUTTON).addTag(CommonTags.Items.EGGS).addTag(Tags.Items.MUSHROOMS).add(Items.CARROT, Items.POTATO, Items.BEETROOT);
 		tag(ModTags.Items.CANVAS_SIGNS)
 				.add(ModItems.CANVAS_SIGN.get())
 				.add(ModItems.WHITE_CANVAS_SIGN.get())

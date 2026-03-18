@@ -6,10 +6,10 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.crafting.CompoundIngredient;
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.CommonTags;
-import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.data.builder.CookingPotRecipeBuilder;
 
 import java.util.function.Consumer;
@@ -124,7 +124,12 @@ public class CookingRecipes
 				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.CABBAGE_ROLLS.get(), 1, FAST_COOKING, SMALL_EXP)
 				.addIngredient(CommonTags.Items.CROPS_CABBAGE)
-				.addIngredient(ModTags.Items.CABBAGE_ROLL_INGREDIENTS)
+				.addIngredient(CompoundIngredient.of(
+						Ingredient.of(CommonTags.Items.RAW_MEAT),
+						Ingredient.of(CommonTags.Items.RAW_FISHES),
+						Ingredient.of(CommonTags.Items.VEGETABLES),
+						Ingredient.of(Tags.Items.MUSHROOMS)
+				))
 				.unlockedByAnyIngredient(ModItems.CABBAGE.get(), ModItems.CABBAGE_LEAF.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.MISC)
 				.save(consumer);
