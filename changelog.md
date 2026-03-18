@@ -70,7 +70,9 @@
     - Wood furniture salvaging became a single `<wood>_furniture` recipe, includes several new items, and has a 75% chance to return a unit of that plank type;
 - Stoves now only inflict burn in a small "grilling area" on top of them; the edges are safe to step on;
 - Mushroom Colonies can now be snipped all at once when using a Knife on them;
-- Knives now have a `knife_harvest` item ability, which is checked together with the `tools/knives` tag for gameplay actions;
+- Knives now have tool actions (1.20.1), or item abilities (1.21+):
+  - `knife_dig`: Checked together with the `forge:tools/knives` tag for crafting (Cutting Board);
+  - `knife_harvest`: Checked together with the `farmersdelight:tools/knives` tag for gameplay actions;
 - Zombies and Illagers now have a very small chance of dropping an Onion when killed by a player, similar to Carrots and Potatoes;
 
 ### Removals
