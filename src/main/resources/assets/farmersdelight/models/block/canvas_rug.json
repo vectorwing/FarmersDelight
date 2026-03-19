@@ -1,6 +1,5 @@
 {
   "format_version": "1.9.0",
-  "credit": "Made with Blockbench",
   "render_type": "minecraft:cutout",
   "parent": "block/thin_block",
   "textures": {
