@@ -1,6 +1,5 @@
 {
-  "credit": "Made with Blockbench",
-  "render_type": "minecraft:cutout",
+  "format_version": "1.9.0",
   "parent": "block/block",
   "textures": {
     "top": "farmersdelight:block/cooking_pot_top",
@@ -33,30 +32,29 @@
         "east": {"uv": [0, 2, 2, 14], "texture": "#parts"},
         "south": {"uv": [2, 2, 0, 14], "texture": "#parts"},
         "west": {"uv": [0, 2, 2, 14], "texture": "#parts"},
-        "up": {"uv": [0, 0, 2, 2], "texture": "#parts"},
-        "down": {"uv": [0, 0, 2, 2], "texture": "#parts"}
+        "up": {"uv": [0, 0, 2, 2], "texture": "#parts"}
       }
     },
     {
-      "name": "right handle",
+      "name": "east_handle",
       "from": [14, 7, 5],
       "to": [16, 9, 11],
       "faces": {
         "north": {"uv": [10, 0, 12, 2], "texture": "#parts"},
-        "east": {"uv": [4, 2, 10, 4], "texture": "#parts"},
+        "east": {"uv": [4, 2, 10, 4], "texture": "#parts", "cullface": "east"},
         "south": {"uv": [2, 0, 4, 2], "texture": "#parts"},
         "up": {"uv": [4, 0, 10, 2], "rotation": 90, "texture": "#parts"},
         "down": {"uv": [4, 2, 10, 4], "rotation": 90, "texture": "#parts"}
       }
     },
     {
-      "name": "left handle",
+      "name": "west_handle",
       "from": [0, 7, 5],
       "to": [2, 9, 11],
       "faces": {
         "north": {"uv": [2, 0, 4, 2], "texture": "#parts"},
         "south": {"uv": [10, 0, 12, 2], "texture": "#parts"},
-        "west": {"uv": [4, 2, 10, 4], "texture": "#parts"},
+        "west": {"uv": [4, 2, 10, 4], "texture": "#parts", "cullface": "west"},
         "up": {"uv": [4, 0, 10, 2], "rotation": 270, "texture": "#parts"},
         "down": {"uv": [4, 2, 10, 4], "rotation": 270, "texture": "#parts"}
       }
@@ -64,8 +62,9 @@
   ],
   "groups": [
     {
-      "name": "cooking pot",
+      "name": "cooking_pot",
       "origin": [8, 8, 8],
+      "color": 0,
       "children": [0, 1, 2, 3]
     }
   ]

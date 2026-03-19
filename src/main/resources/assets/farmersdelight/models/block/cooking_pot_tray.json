@@ -1,5 +1,4 @@
 {
-  "credit": "Made with Blockbench",
   "render_type": "minecraft:cutout",
   "parent": "block/block",
   "textures": {
@@ -8,8 +7,8 @@
     "side": "farmersdelight:block/cooking_pot_side",
     "parts": "farmersdelight:block/cooking_pot_parts",
     "bottom": "farmersdelight:block/cooking_pot_bottom",
-    "tray_top": "farmersdelight:block/cooking_pot_tray_top",
-    "tray_side": "farmersdelight:block/cooking_pot_tray_side"
+    "tray_top": "farmersdelight:block/heating_tray_top",
+    "tray_side": "farmersdelight:block/heating_tray_side"
   },
   "elements": [
     {
@@ -35,109 +34,90 @@
         "east": {"uv": [0, 2, 2, 14], "texture": "#parts"},
         "south": {"uv": [2, 2, 0, 14], "texture": "#parts"},
         "west": {"uv": [0, 2, 2, 14], "texture": "#parts"},
-        "up": {"uv": [0, 0, 2, 2], "texture": "#parts"},
-        "down": {"uv": [0, 0, 2, 2], "texture": "#parts"}
+        "up": {"uv": [0, 0, 2, 2], "texture": "#parts"}
       }
     },
     {
-      "name": "right handle",
+      "name": "east_handle",
       "from": [14, 7, 5],
       "to": [16, 9, 11],
       "faces": {
         "north": {"uv": [10, 0, 12, 2], "texture": "#parts"},
-        "east": {"uv": [4, 2, 10, 4], "texture": "#parts"},
+        "east": {"uv": [4, 2, 10, 4], "texture": "#parts", "cullface": "east"},
         "south": {"uv": [2, 0, 4, 2], "texture": "#parts"},
         "up": {"uv": [4, 0, 10, 2], "rotation": 90, "texture": "#parts"},
         "down": {"uv": [4, 2, 10, 4], "rotation": 90, "texture": "#parts"}
       }
     },
     {
-      "name": "left handle",
+      "name": "west_handle",
       "from": [0, 7, 5],
       "to": [2, 9, 11],
       "faces": {
         "north": {"uv": [2, 0, 4, 2], "texture": "#parts"},
         "south": {"uv": [10, 0, 12, 2], "texture": "#parts"},
-        "west": {"uv": [4, 2, 10, 4], "texture": "#parts"},
+        "west": {"uv": [4, 2, 10, 4], "texture": "#parts", "cullface": "west"},
         "up": {"uv": [4, 0, 10, 2], "rotation": 270, "texture": "#parts"},
         "down": {"uv": [4, 2, 10, 4], "rotation": 270, "texture": "#parts"}
       }
     },
     {
       "name": "grate",
-      "from": [0, -1, 0],
+      "from": [0, -0.001, 0],
+      "to": [16, -0.001, 16],
+      "faces": {
+        "up": {"uv": [0, 0, 16, 16], "texture": "#tray_top"},
+        "down": {"uv": [0, 0, 16, 16], "texture": "#tray_top", "cullface": "down"}
+      }
+    },
+    {
+      "name": "north_legs",
+      "from": [0, -16, 0],
+      "to": [16, 0, 0],
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#tray_side"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#tray_side"}
+      }
+    },
+    {
+      "name": "south_legs",
+      "from": [0, -16, 16],
       "to": [16, 0, 16],
       "faces": {
-        "north": {"uv": [0, 0, 16, 1], "texture": "#tray_side"},
-        "east": {"uv": [0, 0, 16, 1], "texture": "#tray_side"},
-        "south": {"uv": [0, 0, 16, 1], "texture": "#tray_side"},
-        "west": {"uv": [0, 0, 16, 1], "texture": "#tray_side"},
-        "up": {"uv": [0, 0, 16, 16], "texture": "#tray_top"},
-        "down": {"uv": [0, 0, 16, 16], "texture": "#tray_top"}
+        "north": {"uv": [0, 0, 16, 16], "texture": "#tray_side"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#tray_side"}
       }
     },
     {
-      "name": "leg SE",
-      "from": [15, -16, 15],
-      "to": [16, -1, 16],
+      "name": "east_legs",
+      "from": [16, -16, 0],
+      "to": [16, 0, 16],
       "faces": {
-        "north": {"uv": [0, 1, 1, 16], "texture": "#tray_side"},
-        "east": {"uv": [0, 1, 1, 16], "texture": "#tray_side"},
-        "south": {"uv": [15, 1, 16, 16], "texture": "#tray_side"},
-        "west": {"uv": [15, 1, 16, 16], "texture": "#tray_side"},
-        "up": {"uv": [0, 0, 0.5, 0.5], "texture": "#tray_side"},
-        "down": {"uv": [0, 0, 0.5, 0.5], "texture": "#tray_side"}
+        "east": {"uv": [0, 0, 16, 16], "texture": "#tray_side"},
+        "west": {"uv": [0, 0, 16, 16], "texture": "#tray_side"}
       }
     },
     {
-      "name": "leg SW",
-      "from": [0, -16, 15],
-      "to": [1, -1, 16],
-      "faces": {
-        "north": {"uv": [15, 1, 16, 16], "texture": "#tray_side"},
-        "east": {"uv": [0, 1, 1, 16], "texture": "#tray_side"},
-        "south": {"uv": [0, 1, 1, 16], "texture": "#tray_side"},
-        "west": {"uv": [15, 1, 16, 16], "texture": "#tray_side"},
-        "up": {"uv": [0, 0, 0.5, 0.5], "texture": "#tray_side"},
-        "down": {"uv": [0, 0, 0.5, 0.5], "texture": "#tray_side"}
-      }
-    },
-    {
-      "name": "leg NE",
-      "from": [15, -16, 0],
-      "to": [16, -1, 1],
-      "faces": {
-        "north": {"uv": [0, 1, 1, 16], "texture": "#tray_side"},
-        "east": {"uv": [15, 1, 16, 16], "texture": "#tray_side"},
-        "south": {"uv": [15, 1, 16, 16], "texture": "#tray_side"},
-        "west": {"uv": [0, 1, 1, 16], "texture": "#tray_side"},
-        "up": {"uv": [0, 0, 0.5, 0.5], "texture": "#tray_side"},
-        "down": {"uv": [0, 0, 0.5, 0.5], "texture": "#tray_side"}
-      }
-    },
-    {
-      "name": "leg NW",
+      "name": "west_legs",
       "from": [0, -16, 0],
-      "to": [1, -1, 1],
+      "to": [0, 0, 16],
       "faces": {
-        "north": {"uv": [15, 1, 16, 16], "texture": "#tray_side"},
-        "east": {"uv": [15, 1, 16, 16], "texture": "#tray_side"},
-        "south": {"uv": [0, 1, 1, 16], "texture": "#tray_side"},
-        "west": {"uv": [0, 1, 1, 16], "texture": "#tray_side"},
-        "up": {"uv": [0, 0, 0.5, 0.5], "texture": "#tray_side"},
-        "down": {"uv": [0, 0, 0.5, 0.5], "texture": "#tray_side"}
+        "east": {"uv": [0, 0, 16, 16], "texture": "#tray_side"},
+        "west": {"uv": [0, 0, 16, 16], "texture": "#tray_side"}
       }
     }
   ],
   "groups": [
     {
-      "name": "cooking pot",
+      "name": "cooking_pot",
       "origin": [8, 8, 8],
+      "color": 0,
       "children": [0, 1, 2, 3]
     },
     {
       "name": "tray",
       "origin": [8, 8, 8],
+      "color": 0,
       "children": [4, 5, 6, 7, 8]
     }
   ]
