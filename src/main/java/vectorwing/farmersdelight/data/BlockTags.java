@@ -56,7 +56,12 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.CRIMSON_CABINET.get(),
 				ModBlocks.WARPED_CABINET.get(),
 				ModBlocks.SANDY_SHRUB.get(),
-				ModBlocks.STUFFED_PUMPKIN_BLOCK.get()
+				ModBlocks.ROAST_CHICKEN_BLOCK.get(),
+				ModBlocks.STUFFED_PUMPKIN_BLOCK.get(),
+				ModBlocks.SHEPHERDS_PIE_BLOCK.get(),
+				ModBlocks.HONEY_GLAZED_HAM_BLOCK.get(),
+				ModBlocks.GLEAMING_SALAD_BLOCK.get(),
+				ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get()
 		);
 		tag(net.minecraft.tags.BlockTags.MINEABLE_WITH_HOE).add(
 				ModBlocks.RICE_BALE.get(),
@@ -83,11 +88,7 @@ public class BlockTags extends BlockTagsProvider
 						ModBlocks.APPLE_PIE.get(),
 						ModBlocks.SWEET_BERRY_CHEESECAKE.get(),
 						ModBlocks.CHOCOLATE_PIE.get(),
-						ModBlocks.PUMPKIN_PIE.get(),
-						ModBlocks.ROAST_CHICKEN_BLOCK.get(),
-						ModBlocks.HONEY_GLAZED_HAM_BLOCK.get(),
-						ModBlocks.SHEPHERDS_PIE_BLOCK.get(),
-						ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get())
+						ModBlocks.PUMPKIN_PIE.get())
 				.addTag(net.minecraft.tags.BlockTags.WOOL_CARPETS)
 				.addTag(net.minecraft.tags.BlockTags.WOOL)
 				.addTag(net.minecraft.tags.BlockTags.CANDLE_CAKES)
