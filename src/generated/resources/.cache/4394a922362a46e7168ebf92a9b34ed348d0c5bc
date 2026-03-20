@@ -1,4 +1,4 @@
-// 1.20.1	2026-03-19T23:31:12.9018976	Item Models: farmersdelight
+// 1.20.1	2026-03-20T17:45:22.3383977	Item Models: farmersdelight
 01e23a47f469a0c2107b2a1b6fc7f7c8f0c23d55 assets/farmersdelight/models/item/acacia_cabinet.json
 a58cc863fafd0f13d1235a2f7344b446f853ae55 assets/farmersdelight/models/item/apple_cider.json
 8348e66b9efe6a92614cca78c3463d3efaea57fa assets/farmersdelight/models/item/apple_pie.json
@@ -7,9 +7,9 @@ ad2a8f7967c3246637ca59cc318dd622da19e59c assets/farmersdelight/models/item/bacon
 52d5d47595857a38040a68d360b49037fd0f0e07 assets/farmersdelight/models/item/bacon_and_eggs.json
 fdf3aec6a0587d7433fc34838c06bc4629b42b6f assets/farmersdelight/models/item/bacon_sandwich.json
 bc153118bad1dff35ed07c8f14b40c7676c834b7 assets/farmersdelight/models/item/baked_cod_stew.json
+c4a8253f42ff047f4db79dcd111de31dea794751 assets/farmersdelight/models/item/bamboo_basket.json
 656871638f7f6400f46632cd51d5442dfdfcb58c assets/farmersdelight/models/item/bamboo_cabinet.json
 3f305623cf41b67d5a413a67291a1c0a5c50e8fc assets/farmersdelight/models/item/barbecue_stick.json
-fde8de45de2287b31a35f8c563fcb445ab8c9906 assets/farmersdelight/models/item/basket.json
 204aea5fb950c545194b505b420083f03d274fe5 assets/farmersdelight/models/item/beef_patty.json
 849ebf719f4e3dfe046dad1f95a294a05ad92669 assets/farmersdelight/models/item/beef_stew.json
 4dcb43ecd354f9df032c031d8d37f3c0a514c668 assets/farmersdelight/models/item/beetroot_crate.json

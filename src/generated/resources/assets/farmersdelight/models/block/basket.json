@@ -1,9 +1,0 @@
-{
-  "parent": "farmersdelight:block/template_basket",
-  "textures": {
-    "bottom": "farmersdelight:block/basket_bottom",
-    "handle": "farmersdelight:block/basket_handle",
-    "side": "farmersdelight:block/basket_side",
-    "top": "farmersdelight:block/basket_top"
-  }
-}

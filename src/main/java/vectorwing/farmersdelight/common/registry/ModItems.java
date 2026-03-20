@@ -66,7 +66,7 @@ public class ModItems
 			() -> new FuelBlockItem(ModBlocks.CUTTING_BOARD.get(), basicItem(), 200));
 	public static final RegistryObject<Item> WOODEN_BASKET = registerWithTab("wooden_basket",
 			() -> new FuelBlockItem(ModBlocks.WOODEN_BASKET.get(), basicItem(), 300));
-	public static final RegistryObject<Item> BAMBOO_BASKET = registerWithTab("basket",
+	public static final RegistryObject<Item> BAMBOO_BASKET = registerWithTab("bamboo_basket",
 			() -> new FuelBlockItem(ModBlocks.BAMBOO_BASKET.get(), basicItem(), 300));
 
 	public static final RegistryObject<Item> CARROT_CRATE = registerWithTab("carrot_crate",

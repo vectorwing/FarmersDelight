@@ -70,7 +70,7 @@ public class BlockStates extends BlockStateProvider
 		customDirectionalBlock(ModBlocks.WOODEN_BASKET.get(),
 				$ -> modelBasket("wooden_basket"), BasketBlock.ENABLED, BasketBlock.WATERLOGGED);
 		customDirectionalBlock(ModBlocks.BAMBOO_BASKET.get(),
-				$ -> modelBasket("basket"), BasketBlock.ENABLED, BasketBlock.WATERLOGGED);
+				$ -> modelBasket("bamboo_basket"), BasketBlock.ENABLED, BasketBlock.WATERLOGGED);
 		customDirectionalBlock(ModBlocks.RICE_BALE.get(),
 				$ -> modelCubeBottomTop(blockName(ModBlocks.RICE_BALE.get())));
 		customHorizontalBlock(ModBlocks.CUTTING_BOARD.get(),

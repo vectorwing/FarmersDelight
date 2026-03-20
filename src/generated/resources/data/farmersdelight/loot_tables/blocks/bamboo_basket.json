@@ -17,11 +17,11 @@
               "source": "block_entity"
             }
           ],
-          "name": "farmersdelight:basket"
+          "name": "farmersdelight:bamboo_basket"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "farmersdelight:blocks/basket"
+  "random_sequence": "farmersdelight:blocks/bamboo_basket"
 }
