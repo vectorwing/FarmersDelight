@@ -1,4 +1,4 @@
-// 1.20.1	2026-03-15T17:22:09.5914515	Loot Tables
+// 1.20.1	2026-03-19T23:17:11.0619198	Loot Tables
 228f5797c46d942e33e7dec7ba2caebb37d26905 data/farmersdelight/loot_tables/blocks/acacia_cabinet.json
 23fb8611e8fde16b90b760500fb6d39c0042c092 data/farmersdelight/loot_tables/blocks/apple_pie.json
 9aa2c1672193447d3a448e1aa985ccbc1044542f data/farmersdelight/loot_tables/blocks/bamboo_cabinet.json
@@ -94,6 +94,7 @@ d1198f2ee3d9e107ce1a9bf803ee40751c329acc data/farmersdelight/loot_tables/blocks/
 45637e2b3d3529ee64be9a5af88873ba6cc07334 data/farmersdelight/loot_tables/blocks/wild_potatoes.json
 d8ddbb69a31abaf19e7ef5d6c7ec195eeeadf82d data/farmersdelight/loot_tables/blocks/wild_rice.json
 caf8de2e3b672fb7f96fcc8c65da62beafea1229 data/farmersdelight/loot_tables/blocks/wild_tomatoes.json
+0707f02b356b092045ed3e974e05c15a86faade3 data/farmersdelight/loot_tables/blocks/wooden_basket.json
 95ea36155e6f8a089b4ca93783af1d5cd27e44d4 data/farmersdelight/loot_tables/blocks/yellow_canvas_sign.json
 94feb431ac6b7039d5e76313342a50982b6bac54 data/farmersdelight/loot_tables/blocks/yellow_hanging_canvas_sign.json
 29257be8f8e8b315f9818c64153d316cb94ec35b data/farmersdelight/loot_tables/chests/fd_abandoned_mineshaft.json

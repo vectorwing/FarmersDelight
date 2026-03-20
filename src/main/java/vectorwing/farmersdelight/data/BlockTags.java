@@ -34,7 +34,8 @@ public class BlockTags extends BlockTagsProvider
 
 	protected void registerBlockMineables() {
 		tag(net.minecraft.tags.BlockTags.MINEABLE_WITH_AXE).add(
-				ModBlocks.BASKET.get(),
+				ModBlocks.WOODEN_BASKET.get(),
+				ModBlocks.BAMBOO_BASKET.get(),
 				ModBlocks.ROPE_FENCE.get(),
 				ModBlocks.ROPE_FENCE_GATE.get(),
 				ModBlocks.CUTTING_BOARD.get(),

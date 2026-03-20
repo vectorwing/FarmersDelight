@@ -49,7 +49,8 @@ public class FDBlockLoot extends BlockLootSubProvider {
 	@Override
 	protected void generate() {
 		dropSelf(ModBlocks.STOVE.get());
-		dropNamedContainer(ModBlocks.BASKET.get());
+		dropNamedContainer(ModBlocks.WOODEN_BASKET.get());
+		dropNamedContainer(ModBlocks.BAMBOO_BASKET.get());
 		add(ModBlocks.COOKING_POT.get(), (block) -> LootTable.lootTable().withPool(this.applyExplosionCondition(block, LootPool.lootPool()
 				.setRolls(ConstantValue.exactly(1.0F))
 				.add(LootItem.lootTableItem(block)

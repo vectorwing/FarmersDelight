@@ -1,4 +1,4 @@
-// 1.20.1	2026-03-13T17:07:07.3067133	Item Models: farmersdelight
+// 1.20.1	2026-03-19T23:31:12.9018976	Item Models: farmersdelight
 01e23a47f469a0c2107b2a1b6fc7f7c8f0c23d55 assets/farmersdelight/models/item/acacia_cabinet.json
 a58cc863fafd0f13d1235a2f7344b446f853ae55 assets/farmersdelight/models/item/apple_cider.json
 8348e66b9efe6a92614cca78c3463d3efaea57fa assets/farmersdelight/models/item/apple_pie.json
@@ -179,5 +179,6 @@ fdb1712097f483c988f1772c4e2d5acb7ab5df5c assets/farmersdelight/models/item/wild_
 a6714943bd149e3f8d5ceec7360c97c2d73f58e0 assets/farmersdelight/models/item/wild_potatoes.json
 bbb0d8ddc79bea8017820879d8de85615bdb335a assets/farmersdelight/models/item/wild_rice.json
 a411b17beb9b8789122f746d47803b36e8282618 assets/farmersdelight/models/item/wild_tomatoes.json
+ae42d03e5476c9ac7655af87fd8f5712be62cf0d assets/farmersdelight/models/item/wooden_basket.json
 667a990f59dcf205ffb4fecc0f7667dc4383e8bf assets/farmersdelight/models/item/yellow_canvas_sign.json
 e21c56208bb57a47cd68b87c9ce04f0b0851becb assets/farmersdelight/models/item/yellow_hanging_canvas_sign.json

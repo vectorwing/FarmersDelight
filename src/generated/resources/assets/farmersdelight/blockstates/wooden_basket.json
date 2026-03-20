@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "farmersdelight:block/wooden_basket",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "farmersdelight:block/wooden_basket",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "farmersdelight:block/wooden_basket",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "farmersdelight:block/wooden_basket",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "farmersdelight:block/wooden_basket"
+    },
+    "facing=west": {
+      "model": "farmersdelight:block/wooden_basket",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

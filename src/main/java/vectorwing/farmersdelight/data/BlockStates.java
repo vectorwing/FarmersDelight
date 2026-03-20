@@ -67,9 +67,10 @@ public class BlockStates extends BlockStateProvider
 				.texture("east", resourceFDBlock(riceBag + "_side"))
 				.texture("west", resourceFDBlock(riceBag + "_side"))
 		);
-
-		customDirectionalBlock(ModBlocks.BASKET.get(),
-				$ -> existingModel(ModBlocks.BASKET.get()), BasketBlock.ENABLED, BasketBlock.WATERLOGGED);
+		customDirectionalBlock(ModBlocks.WOODEN_BASKET.get(),
+				$ -> modelBasket("wooden_basket"), BasketBlock.ENABLED, BasketBlock.WATERLOGGED);
+		customDirectionalBlock(ModBlocks.BAMBOO_BASKET.get(),
+				$ -> modelBasket("basket"), BasketBlock.ENABLED, BasketBlock.WATERLOGGED);
 		customDirectionalBlock(ModBlocks.RICE_BALE.get(),
 				$ -> modelCubeBottomTop(blockName(ModBlocks.RICE_BALE.get())));
 		customHorizontalBlock(ModBlocks.CUTTING_BOARD.get(),
@@ -476,6 +477,14 @@ public class BlockStates extends BlockStateProvider
 				.texture("bottom", resourceFDBlock(baseName + "_bottom"))
 				.texture("side", resourceFDBlock(baseName + "_side"))
 				.texture("top", resourceFDBlock(baseName + "_top"));
+	}
+
+	private ModelFile modelBasket(String baseName) {
+		return models().withExistingParent(baseName, resourceFDBlock("template_basket"))
+				.texture("bottom", resourceFDBlock(baseName + "_bottom"))
+				.texture("side", resourceFDBlock(baseName + "_side"))
+				.texture("top", resourceFDBlock(baseName + "_top"))
+				.texture("handle", resourceFDBlock(baseName + "_handle"));
 	}
 
 	private ModelFile modelCropCross(String baseName) {

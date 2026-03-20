@@ -6,7 +6,7 @@
       "item": "farmersdelight:canvas"
     },
     "/": {
-      "item": "minecraft:bamboo"
+      "item": "minecraft:stick"
     }
   },
   "pattern": [
@@ -15,7 +15,7 @@
     "/#/"
   ],
   "result": {
-    "item": "farmersdelight:basket"
+    "item": "farmersdelight:wooden_basket"
   },
   "show_notification": true
 }

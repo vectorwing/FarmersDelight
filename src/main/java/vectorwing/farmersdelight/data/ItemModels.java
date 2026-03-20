@@ -36,6 +36,7 @@ public class ItemModels extends ItemModelProvider
 		// Specific cases
 		items.remove(ModItems.SKILLET.get());
 
+
 		itemGeneratedModel(ModItems.WILD_RICE.get(), resourceBlock(itemName(ModItems.WILD_RICE.get()) + "_top"));
 		items.remove(ModItems.WILD_RICE.get());
 
@@ -53,6 +54,9 @@ public class ItemModels extends ItemModelProvider
 
 		blockBasedModel(ModItems.ORGANIC_COMPOST.get(), "_stage0");
 		items.remove(ModItems.ORGANIC_COMPOST.get());
+
+		blockBasedModel(ModItems.ROPE_FENCE.get(), "_inventory");
+		items.remove(ModItems.ROPE_FENCE.get());
 
 		blockBasedModel(ModItems.ROPE_FENCE.get(), "_inventory");
 		items.remove(ModItems.ROPE_FENCE.get());
@@ -154,6 +158,10 @@ public class ItemModels extends ItemModelProvider
 
 	public void blockBasedModel(Item item, String suffix) {
 		withExistingParent(itemName(item), resourceBlock(itemName(item) + suffix));
+	}
+
+	public void blockBasedModel(Item item, ResourceLocation block) {
+		withExistingParent(itemName(item), block);
 	}
 
 	public void itemHandheldModel(Item item, ResourceLocation texture) {
