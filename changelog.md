@@ -74,6 +74,9 @@
   - `knife_dig`: Checked together with the `forge:tools/knives` tag for crafting (Cutting Board);
   - `knife_harvest`: Checked together with the `farmersdelight:tools/knives` tag for gameplay actions;
 - Zombies and Illagers now have a very small chance of dropping an Onion when killed by a player, similar to Carrots and Potatoes;
+- All sounds in FD should now have accurate subtitles. Recently added:
+  - `food.take_portion`: Used when blocks provide food when used (Cooking Pot, Feasts etc);
+  - `pastry.slice`: Used when sweet food blocks, such as Pies, are sliced with a Knife;
 
 ### Removals
 - The following tags have been removed:

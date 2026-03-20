@@ -2,7 +2,6 @@ package vectorwing.farmersdelight.common.item;
 
 import com.google.common.collect.Sets;
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -28,6 +27,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 
@@ -97,7 +97,7 @@ public class KnifeItem extends DiggerItem
 				ItemUtils.spawnItemEntity(level, new ItemStack(ModItems.CAKE_SLICE.get()),
 						pos.getX(), pos.getY() + 0.2, pos.getZ() + 0.5,
 						-0.05, 0, 0);
-				level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
+				level.playSound(null, pos, ModSounds.BLOCK_PASTRY_SLICE.get(), SoundSource.PLAYERS, 0.8F, 0.8F);
 
 				event.getEntity().awardStat(Stats.ITEM_USED.get(heldStack.getItem()));
 				event.setCancellationResult(InteractionResult.SUCCESS);
@@ -114,7 +114,7 @@ public class KnifeItem extends DiggerItem
 				ItemUtils.spawnItemEntity(level, new ItemStack(ModItems.CAKE_SLICE.get()),
 						pos.getX() + (bites * 0.1), pos.getY() + 0.2, pos.getZ() + 0.5,
 						-0.05, 0, 0);
-				level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
+				level.playSound(null, pos, ModSounds.BLOCK_PASTRY_SLICE.get(), SoundSource.PLAYERS, 0.8F, 0.8F);
 
 				event.getEntity().awardStat(Stats.ITEM_USED.get(heldStack.getItem()));
 				event.setCancellationResult(InteractionResult.SUCCESS);

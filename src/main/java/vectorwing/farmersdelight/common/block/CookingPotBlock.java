@@ -78,7 +78,7 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 					if (!player.getInventory().add(servingStack)) {
 						player.drop(servingStack, false);
 					}
-					level.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.BLOCKS, 1.0F, 1.0F);
+					level.playSound(null, pos, ModSounds.BLOCK_TAKE_PORTION.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
 				} else {
 					NetworkHooks.openScreen((ServerPlayer) player, cookingPotEntity, pos);
 				}
