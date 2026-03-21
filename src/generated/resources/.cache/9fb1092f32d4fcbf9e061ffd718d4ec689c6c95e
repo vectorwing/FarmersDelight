@@ -1,4 +1,4 @@
-// 1.20.1	2026-03-20T17:45:22.3505044	Recipes
+// 1.20.1	2026-03-20T18:48:27.2200807	Recipes
 169cfc1d11ca3cede161363799f6c0e00bc1412e data/farmersdelight/advancements/recipes/beetroot_crate.json
 a498fcc8b72b6631ddbb164a0245b37491e7571a data/farmersdelight/advancements/recipes/building_blocks/cabbage_crate.json
 c941206993bfa59d31b38132b898fb94c29746a6 data/farmersdelight/advancements/recipes/building_blocks/onion_crate.json
@@ -283,6 +283,7 @@ b8c1db4441fbb9ed9b0e1236969d058ca315f5bf data/farmersdelight/recipes/cooking_pot
 d6d1c00fad9bf6b602b501e04967ef2f2333e3a4 data/farmersdelight/recipes/cutting/allium.json
 c830ef343504f400255a645a7272de4648a0aab2 data/farmersdelight/recipes/cutting/apple_pie.json
 d6cb4ed879204a52233d31f7902facde2e7c932b data/farmersdelight/recipes/cutting/azure_bluet.json
+8468acb5c8e42e2979f9a6d7e784b73b214f331d data/farmersdelight/recipes/cutting/bamboo_basket.json
 734a645e9f99187a982de16377d1de344230ada2 data/farmersdelight/recipes/cutting/bamboo_block.json
 1da25e4d6ef5d43522f9b565064a49c90c57aaeb data/farmersdelight/recipes/cutting/beef.json
 787b99d551afd87957e19fbfeaf3a58c352c37f4 data/farmersdelight/recipes/cutting/birch_log.json
@@ -348,6 +349,7 @@ fbe16d216e5138c54cad4e433edc41755e25275a data/farmersdelight/recipes/cutting/wil
 d268328bc4b0d7d8b4ea72def37b24a551b7717e data/farmersdelight/recipes/cutting/wild_rice.json
 4a6d4a6427d4c857c15d634123486040cbd9b32a data/farmersdelight/recipes/cutting/wild_tomatoes.json
 990862dbcc3587193f1e3cb77a13a0d110dd9dc6 data/farmersdelight/recipes/cutting/wither_rose.json
+6cd79469475d1807b75e6fa09e7c281908229ecc data/farmersdelight/recipes/cutting/wooden_basket.json
 55f398fecbede4a216a41c64af2877ab67d45bba data/farmersdelight/recipes/cutting_board.json
 1edc4dc1f22ff582d0c4bc387930fab8ffe7e55c data/farmersdelight/recipes/cyan_canvas_sign.json
 3bb27e270ee3d94f9b2d1ebad8fdfea9535d6633 data/farmersdelight/recipes/cyan_hanging_canvas_sign.json

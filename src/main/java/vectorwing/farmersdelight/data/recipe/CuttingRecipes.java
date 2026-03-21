@@ -260,6 +260,12 @@ public class CuttingRecipes
 		salvagePlankFromFurniture(consumer, WoodType.WARPED,
 				Items.WARPED_PLANKS, Items.WARPED_DOOR, Items.WARPED_TRAPDOOR, Items.WARPED_SIGN, Items.WARPED_HANGING_SIGN, Items.WARPED_FENCE, Items.WARPED_FENCE_GATE,
 				Items.WARPED_PRESSURE_PLATE, Items.WARPED_BUTTON, ModItems.WARPED_CABINET.get());
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WOODEN_BASKET.get()), AXES, ModItems.CANVAS.get())
+				.addResult(Items.STICK)
+				.saveToFD(consumer);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.BAMBOO_BASKET.get()), AXES, ModItems.CANVAS.get())
+				.addResult(Items.BAMBOO)
+				.saveToFD(consumer);
 	}
 
 	private static void diggingSediments(Consumer<FinishedRecipe> consumer) {
