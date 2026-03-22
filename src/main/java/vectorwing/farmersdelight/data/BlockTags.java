@@ -348,6 +348,7 @@ public class BlockTags extends BlockTagsProvider
 	}
 
 	private void registerCompatibilityTags() {
+		tag(CompatibilityTags.CREATE_FAN_TRANSPARENT).add(ModBlocks.SAFETY_NET.get());
 		tag(CompatibilityTags.CREATE_PASSIVE_BOILER_HEATERS).add(ModBlocks.STOVE.get());
 		tag(CompatibilityTags.CREATE_BRITTLE).add(
 						ModBlocks.CUTTING_BOARD.get(),
