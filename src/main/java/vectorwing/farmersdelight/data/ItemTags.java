@@ -32,7 +32,7 @@ public class ItemTags extends ItemTagsProvider
 
 		this.registerMinecraftTags();
 		this.registerModTags();
-		this.registerForgeTags();
+		this.registerCommonTags();
 		this.registerCompatibilityTags();
 	}
 
@@ -158,9 +158,10 @@ public class ItemTags extends ItemTagsProvider
 	}
 
 	@SuppressWarnings("unchecked")
-	private void registerForgeTags() {
+	private void registerCommonTags() {
 		tag(Tags.Items.FENCES).add(ModItems.ROPE_FENCE.get());
 		tag(Tags.Items.FENCE_GATES).add(ModItems.ROPE_FENCE_GATE.get());
+
 		tag(CommonTags.Items.BERRIES).add(Items.SWEET_BERRIES, Items.GLOW_BERRIES);
 		tag(CommonTags.Items.BREAD).addTag(CommonTags.Items.BREAD_WHEAT);
 		tag(CommonTags.Items.BREAD_WHEAT).add(Items.BREAD);

@@ -86,11 +86,11 @@ public class CookingRecipes
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
 				.saveToFD(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(Items.RABBIT_STEW, 1, NORMAL_COOKING, MEDIUM_EXP, Items.BOWL)
-				.addIngredient(Items.BAKED_POTATO)
+				.addIngredient(Tags.Items.CROPS_POTATO)
 				.addIngredient(Items.RABBIT)
 				.addIngredient(Items.CARROT)
 				.addIngredient(Ingredient.of(Items.BROWN_MUSHROOM, Items.RED_MUSHROOM))
-				.unlockedByAnyIngredient(Items.RABBIT, Items.BROWN_MUSHROOM, Items.RED_MUSHROOM, Items.CARROT, Items.BAKED_POTATO)
+				.unlockedByAnyIngredient(Items.RABBIT, Items.BROWN_MUSHROOM, Items.RED_MUSHROOM, Items.CARROT, Items.POTATO)
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
 				.saveToFD(consumer);
 	}

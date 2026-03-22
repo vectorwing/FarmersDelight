@@ -26,7 +26,7 @@ public class BlockTags extends BlockTagsProvider
 	protected void addTags(HolderLookup.Provider provider) {
 		this.registerModTags();
 		this.registerMinecraftTags();
-		this.registerForgeTags();
+		this.registerCommonTags();
 		this.registerCompatibilityTags();
 
 		this.registerBlockMineables();
@@ -95,6 +95,8 @@ public class BlockTags extends BlockTagsProvider
 				.addTag(net.minecraft.tags.BlockTags.CANDLE_CAKES)
 				.addTag(ModTags.Blocks.STRAW_BLOCKS)
 				.addTag(CommonTags.Blocks.MINEABLE_WITH_KNIFE);
+		tag(CommonTags.Blocks.MINEABLE_WITH_KNIFE);
+
 	}
 
 	protected void registerMinecraftTags() {
@@ -217,8 +219,7 @@ public class BlockTags extends BlockTagsProvider
 		);
 	}
 
-	protected void registerForgeTags() {
-		tag(CommonTags.Blocks.MINEABLE_WITH_KNIFE);
+	protected void registerCommonTags() {
 		tag(Tags.Blocks.FENCES).add(ModBlocks.ROPE_FENCE.get());
 		tag(Tags.Blocks.FENCE_GATES).add(ModBlocks.ROPE_FENCE_GATE.get());
 		tag(CommonTags.Blocks.STORAGE_BLOCKS_CARROT).add(ModBlocks.CARROT_CRATE.get());
