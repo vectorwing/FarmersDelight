@@ -17,7 +17,7 @@ import static vectorwing.farmersdelight.FarmersDelight.MODID;
 public class SetupEvents
 {
 	@SubscribeEvent
-	public static void registerRecipeElements(RegisterEvent event) {
+	public static void registryActions(RegisterEvent event) {
 		if (event.getRegistryKey().equals(ForgeRegistries.Keys.BLOCKS)) {
 			addBlockAlias("basket", "bamboo_basket");
 		}
