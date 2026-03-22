@@ -197,9 +197,8 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 		public static void onSneakPlaceTool(PlayerInteractEvent.RightClickBlock event) {
 			Level level = event.getLevel();
 			BlockPos pos = event.getPos();
-			BlockEntity blockEntity = level.getBlockEntity(pos);
 
-			if (!(blockEntity instanceof CuttingBoardBlockEntity cuttingBoard)) {
+			if (!(level.getBlockEntity(pos) instanceof CuttingBoardBlockEntity cuttingBoard)) {
 				return;
 			}
 

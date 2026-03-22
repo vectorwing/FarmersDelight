@@ -36,7 +36,6 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -265,8 +264,7 @@ public class SkilletItem extends BlockItem
 	@Override
 	protected boolean updateCustomBlockEntityTag(BlockPos pos, Level level, @Nullable Player player, ItemStack stack, BlockState state) {
 		super.updateCustomBlockEntityTag(pos, level, player, stack, state);
-		BlockEntity tileEntity = level.getBlockEntity(pos);
-		if (tileEntity instanceof SkilletBlockEntity skillet) {
+		if (level.getBlockEntity(pos) instanceof SkilletBlockEntity skillet) {
 			skillet.setSkilletItem(stack);
 			return true;
 		}

@@ -5,7 +5,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CeilingHangingSignBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -41,16 +40,10 @@ public class CeilingHangingCanvasSignBlock extends CeilingHangingSignBlock imple
 	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		super.setPlacedBy(level, pos, state, placer, stack);
 
-		BlockEntity tileEntity = level.getBlockEntity(pos);
-		Block block = state.getBlock();
-		if (tileEntity instanceof SignBlockEntity signEntity && block instanceof CanvasSign canvasSignBlock) {
+		if (level.getBlockEntity(pos) instanceof SignBlockEntity sign && state.getBlock() instanceof CanvasSign canvasSignBlock) {
 			if (canvasSignBlock.isDarkBackground()) {
-				signEntity.updateText((signText) -> {
-					return signText.setColor(DyeColor.WHITE);
-				}, true);
-				signEntity.updateText((signText) -> {
-					return signText.setColor(DyeColor.WHITE);
-				}, false);
+				sign.updateText((signText) -> signText.setColor(DyeColor.WHITE), true);
+				sign.updateText((signText) -> signText.setColor(DyeColor.WHITE), false);
 			}
 		}
 	}

@@ -35,7 +35,7 @@ public class ItemModels extends ItemModelProvider
 
 		// Specific cases
 		items.remove(ModItems.SKILLET.get());
-		
+
 		itemGeneratedModel(ModItems.WILD_RICE.get(), resourceBlock(itemName(ModItems.WILD_RICE.get()) + "_top"));
 		items.remove(ModItems.WILD_RICE.get());
 

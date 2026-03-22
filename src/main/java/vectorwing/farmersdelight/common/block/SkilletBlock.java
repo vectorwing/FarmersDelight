@@ -62,44 +62,41 @@ public class SkilletBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 
 	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		BlockEntity tileEntity = level.getBlockEntity(pos);
-		if (tileEntity instanceof SkilletBlockEntity skilletEntity) {
-			if (!level.isClientSide) {
-				ItemStack heldStack = player.getItemInHand(hand);
-				EquipmentSlot heldSlot = hand.equals(InteractionHand.MAIN_HAND) ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
-				if (heldStack.isEmpty()) {
-					ItemStack extractedStack = skilletEntity.removeItem();
-					if (!player.isCreative()) {
-						player.setItemSlot(heldSlot, extractedStack);
-					}
-					return InteractionResult.SUCCESS;
-				} else {
-					ItemStack remainderStack = skilletEntity.addItemToCook(heldStack, player);
-					if (remainderStack.getCount() != heldStack.getCount()) {
-						if (!player.isCreative()) {
-							player.setItemSlot(heldSlot, remainderStack);
-						}
-						level.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundSource.BLOCKS, 0.7F, 1.0F);
-						return InteractionResult.SUCCESS;
-					}
-				}
+		if (level.getBlockEntity(pos) instanceof SkilletBlockEntity skillet) {
+			if (level.isClientSide) {
+				return InteractionResult.CONSUME;
 			}
-			return InteractionResult.CONSUME;
+			ItemStack heldStack = player.getItemInHand(hand);
+			EquipmentSlot heldSlot = hand.equals(InteractionHand.MAIN_HAND) ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
+			if (heldStack.isEmpty()) {
+				ItemStack extractedStack = skillet.removeItem();
+				if (!player.isCreative()) {
+					player.setItemSlot(heldSlot, extractedStack);
+				}
+				return InteractionResult.SUCCESS;
+			}
+			ItemStack remainderStack = skillet.addItemToCook(heldStack, player);
+			if (remainderStack.getCount() != heldStack.getCount()) {
+				if (!player.isCreative()) {
+					player.setItemSlot(heldSlot, remainderStack);
+				}
+				level.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundSource.BLOCKS, 0.7F, 1.0F);
+				return InteractionResult.SUCCESS;
+			}
 		}
 		return InteractionResult.PASS;
 	}
 
 	@Override
-	public RenderShape getRenderShape(BlockState pState) {
+	public RenderShape getRenderShape(BlockState state) {
 		return RenderShape.MODEL;
 	}
 
 	@Override
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (state.getBlock() != newState.getBlock()) {
-			BlockEntity tileEntity = level.getBlockEntity(pos);
-			if (tileEntity instanceof SkilletBlockEntity) {
-				Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), ((SkilletBlockEntity) tileEntity).getInventory().getStackInSlot(0));
+		if (!state.is(newState.getBlock())) {
+			if (level.getBlockEntity(pos) instanceof SkilletBlockEntity skillet) {
+				Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), skillet.getInventory().getStackInSlot(0));
 			}
 
 			super.onRemove(state, level, pos, newState, isMoving);
@@ -159,9 +156,8 @@ public class SkilletBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 
 	@Override
 	public void animateTick(BlockState stateIn, Level level, BlockPos pos, RandomSource rand) {
-		BlockEntity tileEntity = level.getBlockEntity(pos);
-		if (tileEntity instanceof SkilletBlockEntity skilletEntity) {
-			if (skilletEntity.isCooking()) {
+		if (level.getBlockEntity(pos) instanceof SkilletBlockEntity skillet) {
+			if (skillet.isCooking()) {
 				double x = (double) pos.getX() + 0.5D;
 				double y = pos.getY();
 				double z = (double) pos.getZ() + 0.5D;

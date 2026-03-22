@@ -34,14 +34,14 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 	protected final Level level;
 
 	public CookingPotMenu(final int windowId, final Inventory playerInventory, final FriendlyByteBuf data) {
-		this(windowId, playerInventory, getTileEntity(playerInventory, data), new SimpleContainerData(4));
+		this(windowId, playerInventory, getBlockEntity(playerInventory, data), new SimpleContainerData(4));
 	}
 
-	public CookingPotMenu(final int windowId, final Inventory playerInventory, final CookingPotBlockEntity blockEntity, ContainerData cookingPotDataIn) {
+	public CookingPotMenu(final int windowId, final Inventory playerInventory, final CookingPotBlockEntity blockEntity, ContainerData cookingPotData) {
 		super(ModMenuTypes.COOKING_POT.get(), windowId);
 		this.blockEntity = blockEntity;
 		this.inventory = blockEntity.getInventory();
-		this.cookingPotData = cookingPotDataIn;
+		this.cookingPotData = cookingPotData;
 		this.level = playerInventory.player.level();
 		this.canInteractWithCallable = ContainerLevelAccess.create(blockEntity.getLevel(), blockEntity.getBlockPos());
 
@@ -87,17 +87,17 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper>
 			this.addSlot(new Slot(playerInventory, column, startX + (column * borderSlotSize), 142));
 		}
 
-		this.addDataSlots(cookingPotDataIn);
+		this.addDataSlots(cookingPotData);
 	}
 
-	private static CookingPotBlockEntity getTileEntity(final Inventory playerInventory, final FriendlyByteBuf data) {
+	private static CookingPotBlockEntity getBlockEntity(final Inventory playerInventory, final FriendlyByteBuf data) {
 		Objects.requireNonNull(playerInventory, "playerInventory cannot be null");
 		Objects.requireNonNull(data, "data cannot be null");
-		final BlockEntity tileAtPos = playerInventory.player.level().getBlockEntity(data.readBlockPos());
-		if (tileAtPos instanceof CookingPotBlockEntity) {
-			return (CookingPotBlockEntity) tileAtPos;
+		final BlockEntity blockEntity = playerInventory.player.level().getBlockEntity(data.readBlockPos());
+		if (blockEntity instanceof CookingPotBlockEntity cookingPot) {
+			return cookingPot;
 		}
-		throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);
+		throw new IllegalStateException("Block entity is not correct! " + blockEntity);
 	}
 
 	@Override

@@ -147,10 +147,9 @@ public class StoveBlock extends BaseEntityBlock
 
 	@Override
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (state.getBlock() != newState.getBlock()) {
-			BlockEntity blockEntity = level.getBlockEntity(pos);
-			if (blockEntity instanceof StoveBlockEntity) {
-				ItemUtils.dropItems(level, pos, ((StoveBlockEntity) blockEntity).getInventory());
+		if (!state.is(newState.getBlock())) {
+			if (level.getBlockEntity(pos) instanceof StoveBlockEntity stove) {
+				ItemUtils.dropItems(level, pos, stove.getInventory());
 			}
 
 			super.onRemove(state, level, pos, newState, isMoving);
