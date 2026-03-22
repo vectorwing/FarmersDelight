@@ -125,11 +125,11 @@ dependencies {
     // JEI
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
-//    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 
     // EMI
     compileOnly fg.deobf("dev.emi:emi-forge:${emi_version}:api")
-    runtimeOnly fg.deobf("dev.emi:emi-forge:${emi_version}")
+//    runtimeOnly fg.deobf("dev.emi:emi-forge:${emi_version}")
 
     // AppleSkin
     compileOnly fg.deobf("squeek.appleskin:appleskin-forge:${appleskin_version}:api")
