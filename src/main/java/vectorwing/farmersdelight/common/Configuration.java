@@ -55,9 +55,9 @@ public class Configuration
 
 		COMMON_BUILDER.comment("Game settings").push(CATEGORY_SETTINGS);
 		ENABLE_FARMERS_BUY_FD_CROPS = COMMON_BUILDER.comment("If enabled, Novice and Apprentice Farmer villagers will have a chance to buy crops from this mod.")
-				.define("farmersBuyFDCrops", true);
+				.define("enableFarmerFDTrades", true);
 		ENABLE_WANDERING_TRADER_SELLS_FD_ITEMS = COMMON_BUILDER.comment("If enabled, the Wandering Trader will have a chance to sell seeds and plantables from this mod.")
-				.define("wanderingTraderSellsFDItems", true);
+				.define("enableWanderingTraderFDTrades", true);
 		ENABLE_ROPE_REELING = COMMON_BUILDER.comment("If enabled, players will be able to reel back rope, bottom to top, when sneak-using with an empty hand on them.")
 				.define("enableRopeReeling", true);
 		CANVAS_SIGN_DARK_BACKGROUND_LIST = COMMON_BUILDER.comment("A list of dye colors that, when used as the background color of a Canvas Sign, should default to white text when placed.",
@@ -66,7 +66,7 @@ public class Configuration
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("Farming").push(CATEGORY_FARMING);
-		RICH_SOIL_BOOST_CHANCE = COMMON_BUILDER.comment("The chance (in decimal percentage) of Rich Soil providing bone meal to a crop planted on it. Set to 0.0 to disable.")
+		RICH_SOIL_BOOST_CHANCE = COMMON_BUILDER.comment("The chance (in decimal percentage) of Rich Soil providing a bone meal boost to a crop planted on it. Set to 0.0 to disable.")
 				.defineInRange("richSoilBoostChance", 0.2, 0.0, 1.0);
 		ENABLE_TOMATO_VINE_CLIMBING_TAGGED_ROPES = COMMON_BUILDER.comment("If enabled, tomato crops will be able to climb any rope tagged as farmersdelight:ropes. If disabled, this will be restricted to this mod's rope only.")
 				.comment("Beware: this will convert these blocks into the block specified in defaultTomatoVineRope.")
@@ -77,7 +77,7 @@ public class Configuration
 
 		COMMON_BUILDER.comment("Crafting").push(CATEGORY_CRAFTING);
 		ENABLE_COOKING_POT_RECIPE_BOOK = COMMON_BUILDER.comment("If enabled, the Cooking Pot will provide a Recipe Book on its interface, similar to the one on Crafting Tables and Furnaces.")
-				.define("enableRecipeBookCookingPot", true);
+				.define("enableCookingPotRecipeBook", true);
 		ENABLE_VANILLA_CROP_CRATES = COMMON_BUILDER.comment("If enabled, storage crates (3x3) for vanilla crops (similar to Quark and Thermal Cultivation) will become craftable.")
 				.define("enableVanillaCropCrates", true);
 		CUTTING_BOARD_FORTUNE_BONUS = COMMON_BUILDER.comment("How much (in decimal percentage) should each level of Fortune increase the odds of obtaining rare results on the Cutting Board? Set to 0.0 to disable.")
@@ -86,18 +86,18 @@ public class Configuration
 
 		COMMON_BUILDER.comment("Vanilla item overrides").push(CATEGORY_OVERRIDES);
 		ENABLE_VANILLA_SOUP_EXTRA_EFFECTS = COMMON_BUILDER.comment("If enabled, soups and stews from Minecraft will grant Nourishment when eaten, similar to meals from this mod.")
-				.define("vanillaSoupExtraEffects", true);
+				.define("enableVanillaSoupExtraEffects", true);
 		ENABLE_RABBIT_STEW_JUMP_BOOST = COMMON_BUILDER.comment("If enabled, Rabbit Stew will grant users the jumping prowess of a rabbit when eaten.")
-				.define("rabbitStewJumpBoost", true);
+				.define("enableRabbitStewJumpBoost", true);
 		ENABLE_PUMPKIN_PIE_SNEAK_TO_PLACE = COMMON_BUILDER.comment("If enabled, Pumpkin Pie will require the user to sneak to place it down as a block.")
-				.define("pumpkinPieSneakToPlace", false);
+				.define("enablePumpkinPieSneakToPlace", false);
 		ENABLE_DISPENSER_TOOLS_CUTTING_BOARD = COMMON_BUILDER.comment("If enabled, the Dispenser will be able to operate a Cutting Board in front of itself, using stored items as cutting tools.")
-				.define("dispenserUsesToolsOnCuttingBoard", true);
+				.define("enableCuttingBoardDispenserBehavior", true);
 
 		COMMON_BUILDER.comment("Stack size overrides").push(CATEGORY_OVERRIDES_STACK_SIZE);
-		ENABLE_STACKABLE_SOUP_ITEMS = COMMON_BUILDER.comment("If enabled, any BowlFoodItems in the following list become stackable to 16, much like Farmer's Delight's meals.")
+		ENABLE_STACKABLE_SOUP_ITEMS = COMMON_BUILDER.comment("If enabled, any BowlFoodItem in the following list become stackable to 16, much like Farmer's Delight's meals.")
 				.define("enableStackableSoupItems", true);
-		SOUP_ITEM_LIST = COMMON_BUILDER.comment("List of BowlFoodItems. They must extend this class to be affected. Defaults to vanilla soups and stews.")
+		SOUP_ITEM_LIST = COMMON_BUILDER.comment("List of targeted food items. They must extend the BowlFoodItem class in code to be affected. Defaults to vanilla soups and stews.")
 				.defineList("soupItemList", ImmutableList.of("minecraft:mushroom_stew", "minecraft:beetroot_soup", "minecraft:rabbit_stew"), obj -> true);
 		COMMON_BUILDER.pop();
 		COMMON_BUILDER.pop();
@@ -106,9 +106,9 @@ public class Configuration
 		GENERATE_FD_CHEST_LOOT = COMMON_BUILDER.comment("If enabled, new loot pools will be added to chest loot across the game, containing items from this mod (ropes, crops, tools etc).")
 				.define("generateFDChestLoot", true);
 		GENERATE_VILLAGE_COMPOST_HEAPS = COMMON_BUILDER.comment("If enabled, Compost Heaps (structures containing Organic Compost piles) will sometimes generate across Villages.")
-				.define("genVillageCompostHeaps", true);
+				.define("generateVillageCompostHeaps", true);
 		GENERATE_VILLAGE_FARM_FD_CROPS = COMMON_BUILDER.comment("If enabled, crops from Farmer's Delight will sometimes replace standard crops in village farm plots.")
-				.define("genFDCropsOnVillageFarms", true);
+				.define("generateFDCropsOnVillageFarms", true);
 		COMMON_BUILDER.pop();
 
 
@@ -124,11 +124,11 @@ public class Configuration
 		ForgeConfigSpec.Builder CLIENT_BUILDER = new ForgeConfigSpec.Builder();
 
 		ENABLE_NOURISHMENT_HUNGER_OVERLAY = CLIENT_BUILDER.comment("If enabled, a gilded overlay will be shown over the food meter when the player has the Nourishment effect.")
-				.define("nourishmentHungerOverlay", true);
+				.define("enableNourishmentHungerOverlay", true);
 		ENABLE_COMFORT_HEALTH_OVERLAY = CLIENT_BUILDER.comment("If enabled, a scrolling overlay will be shown over the health meter when the player has the Comfort effect.")
-				.define("comfortHealthOverlay", true);
+				.define("enableComfortHealthOverlay", true);
 		ENABLE_FOOD_EFFECT_TOOLTIP = CLIENT_BUILDER.comment("If enabled, food items will display tooltips showing which effects they grant when eaten, if any. Applies to foods from both Minecraft and this mod.")
-				.define("foodEffectTooltip", true);
+				.define("enableFoodEffectTooltip", true);
 
 		CLIENT_CONFIG = CLIENT_BUILDER.build();
 	}
