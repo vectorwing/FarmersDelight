@@ -2,11 +2,11 @@
   "format_version": "1.9.0",
   "parent": "block/block",
   "textures": {
-    "top": "farmersdelight:block/basket_top",
-    "bottom": "farmersdelight:block/basket_bottom",
-    "particle": "farmersdelight:block/basket_bottom",
-    "side": "farmersdelight:block/basket_side",
-    "handle": "farmersdelight:block/basket_handle"
+    "top": "#top",
+    "bottom": "#bottom",
+    "particle": "#bottom",
+    "side": "#side",
+    "handle": "#handle"
   },
   "elements": [
     {

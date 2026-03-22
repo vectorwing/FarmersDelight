@@ -43,7 +43,9 @@ public class ModBlocks
 			() -> new CookingPotBlock(Block.Properties.of().mapColor(MapColor.METAL).strength(0.5F, 6.0F).sound(SoundType.LANTERN)));
 	public static final RegistryObject<Block> SKILLET = BLOCKS.register("skillet",
 			() -> new SkilletBlock(Block.Properties.of().mapColor(MapColor.METAL).strength(0.5F, 6.0F).sound(SoundType.LANTERN)));
-	public static final RegistryObject<Block> BASKET = BLOCKS.register("basket",
+	public static final RegistryObject<Block> WOODEN_BASKET = BLOCKS.register("wooden_basket",
+			() -> new BasketBlock(Block.Properties.of().strength(1.5F).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> BAMBOO_BASKET = BLOCKS.register("bamboo_basket",
 			() -> new BasketBlock(Block.Properties.of().strength(1.5F).sound(SoundType.BAMBOO_WOOD)));
 	public static final RegistryObject<Block> CUTTING_BOARD = BLOCKS.register("cutting_board",
 			() -> new CuttingBoardBlock(Block.Properties.copy(Blocks.OAK_PLANKS).strength(2.0F).sound(SoundType.WOOD)));

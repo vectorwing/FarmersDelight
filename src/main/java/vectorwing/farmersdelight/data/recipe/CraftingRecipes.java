@@ -201,11 +201,19 @@ public class CraftingRecipes
 				.define('W', CommonTags.Items.BUCKETS_WATER)
 				.unlockedBy("has_iron_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
 				.save(consumer);
-		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.BASKET.get())
-				.pattern("b b")
+		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.WOODEN_BASKET.get())
+				.pattern("/ /")
 				.pattern("# #")
-				.pattern("b#b")
-				.define('b', Items.BAMBOO)
+				.pattern("/#/")
+				.define('/', Items.STICK)
+				.define('#', ModItems.CANVAS.get())
+				.unlockedBy("has_canvas", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CANVAS.get()))
+				.save(consumer);
+		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.BAMBOO_BASKET.get())
+				.pattern("/ /")
+				.pattern("# #")
+				.pattern("/#/")
+				.define('/', Items.BAMBOO)
 				.define('#', ModItems.CANVAS.get())
 				.unlockedBy("has_canvas", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CANVAS.get()))
 				.save(consumer);

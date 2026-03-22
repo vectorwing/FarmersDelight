@@ -7,6 +7,10 @@
   - **Gleaming Salad** - A salad that shines like a Lush Cave! Made with fresh Glow Berries and a rich selection of vegetables, it will (literally) illuminate your dinner table;
   - **Rope Fence** - A thin and sleek flavor of fence, complete with its own **Rope Fence Gate**!
     - Crafted by replacing planks with rope in the standard fence and fence gate recipes;
+  - The **Basket** has gained a **wooden variant**, made with Sticks instead of Bamboo! It functions exactly the same as the existing Basket:
+    - This was done to make the block easier to obtain; Bamboo has unpredictable/unreliable world gen conditions, so locking it behind this material felt pointless;
+    - The old Basket has been renamed to **Bamboo Basket**, and can still be crafted, using Bamboo instead of Sticks;
+    - Both blocks can be salvaged for Canvas and scraps on the Cutting Board, using an axe;
 - Pumpkin Pie can now be **placed as a block**, like the other pies!
   - By default, it is placeable without secondary action. A config exists to require sneaking, if preferred;
 - Farmer's Delight now has a native **EMI plugin**! (thanks, ChrysanthCow!)
