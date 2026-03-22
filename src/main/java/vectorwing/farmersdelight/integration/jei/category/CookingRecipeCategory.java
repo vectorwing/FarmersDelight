@@ -67,8 +67,13 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 	}
 
 	@Override
-	public IDrawable getBackground() {
-		return this.background;
+	public int getWidth() {
+		return 116;
+	}
+
+	@Override
+	public int getHeight() {
+		return 56;
 	}
 
 	@Override
@@ -104,6 +109,7 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 
 	@Override
 	public void draw(CookingPotRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+		background.draw(guiGraphics, 0, 0);
 		arrow.draw(guiGraphics, 60, 9);
 		heatIndicator.draw(guiGraphics, 18, 39);
 		timeIcon.draw(guiGraphics, 64, 2);

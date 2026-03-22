@@ -57,8 +57,13 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 	}
 
 	@Override
-	public IDrawable getBackground() {
-		return this.background;
+	public int getWidth() {
+		return 117;
+	}
+
+	@Override
+	public int getHeight() {
+		return 57;
 	}
 
 	@Override
@@ -96,6 +101,8 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 
 	@Override
 	public void draw(CuttingBoardRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+		background.draw(guiGraphics, 0, 0);
+
 		NonNullList<ChanceResult> recipeOutputs = recipe.getRollableResults();
 
 		int size = recipe.getResults().size();

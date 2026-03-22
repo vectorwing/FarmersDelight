@@ -67,8 +67,13 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 	}
 
 	@Override
-	public IDrawable getBackground() {
-		return this.background;
+	public int getWidth() {
+		return 118;
+	}
+
+	@Override
+	public int getHeight() {
+		return 80;
 	}
 
 	@Override
@@ -87,7 +92,8 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 
 	@Override
 	public void draw(DecompositionDummy recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-		this.slotIcon.draw(guiGraphics, 63, 53);
+		background.draw(guiGraphics, 0, 0);
+		slotIcon.draw(guiGraphics, 63, 53);
 	}
 
 	@Override
