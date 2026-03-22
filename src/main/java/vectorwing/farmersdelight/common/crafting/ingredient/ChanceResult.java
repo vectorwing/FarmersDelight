@@ -38,11 +38,11 @@ public class ChanceResult
 		return chance;
 	}
 
-	public ItemStack rollOutput(RandomSource rand, int fortuneLevel) {
+	public ItemStack rollOutput(RandomSource random, int fortuneLevel) {
 		int outputAmount = stack.getCount();
 		double fortuneBonus = Configuration.CUTTING_BOARD_FORTUNE_BONUS.get() * fortuneLevel;
 		for (int roll = 0; roll < stack.getCount(); roll++)
-			if (rand.nextFloat() > chance + fortuneBonus)
+			if (random.nextFloat() > chance + fortuneBonus)
 				outputAmount--;
 		if (outputAmount == 0)
 			return ItemStack.EMPTY;

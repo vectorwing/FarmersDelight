@@ -96,8 +96,8 @@ public class RichSoilBlock extends Block
 
 
 	@Override
-	public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable) {
-		net.minecraftforge.common.PlantType plantType = plantable.getPlantType(world, pos.relative(facing));
+	public boolean canSustainPlant(BlockState state, BlockGetter level, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable) {
+		net.minecraftforge.common.PlantType plantType = plantable.getPlantType(level, pos.relative(facing));
 		return plantType != PlantType.CROP && plantType != PlantType.NETHER && plantType != PlantType.WATER;
 	}
 }

@@ -42,7 +42,7 @@ public class ReplaceItemModifier extends LootModifier
 	}
 
 	@Override
-	protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext lootContext) {
+	protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
 		ItemStack addedStack = new ItemStack(addedItem, addedCount);
 
 		generatedLoot.forEach((item) -> {

@@ -112,7 +112,7 @@ public class DogFoodItem extends ConsumableItem
 	}
 
 	@Override
-	public InteractionResult interactLivingEntity(ItemStack stack, Player playerIn, LivingEntity target, InteractionHand hand) {
+	public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
 		if (target instanceof Wolf wolf) {
 			if (wolf.isAlive() && wolf.isTame()) {
 				return InteractionResult.SUCCESS;

@@ -19,17 +19,17 @@ public class PlacePumpkinPieMixin
 			method = "useOn",
 			at = @At("TAIL"),
 			cancellable = true)
-	private void usePumpkinPie(UseOnContext ctx, CallbackInfoReturnable<InteractionResult> cir) {
-		if (!ctx.getItemInHand().is(Items.PUMPKIN_PIE))
+	private void usePumpkinPie(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
+		if (!context.getItemInHand().is(Items.PUMPKIN_PIE))
 			return;
 
 		if (Configuration.ENABLE_PUMPKIN_PIE_SNEAK_TO_PLACE.get()) {
-			Player player = ctx.getPlayer();
+			Player player = context.getPlayer();
 			if (player != null && player.isSecondaryUseActive()) {
-				cir.setReturnValue(ModItems.DEBUG_PUMPKIN_PIE.get().useOn(ctx));
+				cir.setReturnValue(ModItems.DEBUG_PUMPKIN_PIE.get().useOn(context));
 			}
 		} else {
-			cir.setReturnValue(ModItems.DEBUG_PUMPKIN_PIE.get().useOn(ctx));
+			cir.setReturnValue(ModItems.DEBUG_PUMPKIN_PIE.get().useOn(context));
 		}
 	}
 }

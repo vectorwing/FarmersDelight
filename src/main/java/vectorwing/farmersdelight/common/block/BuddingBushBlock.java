@@ -52,7 +52,7 @@ public class BuddingBushBlock extends BushBlock
 	}
 
 	@Override
-	public PlantType getPlantType(BlockGetter world, BlockPos pos) {
+	public PlantType getPlantType(BlockGetter level, BlockPos pos) {
 		return PlantType.CROP;
 	}
 

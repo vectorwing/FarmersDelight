@@ -20,18 +20,18 @@ public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlo
 {
 	private final Random random = new Random();
 
-	public CuttingBoardRenderer(BlockEntityRendererProvider.Context pContext) {
+	public CuttingBoardRenderer(BlockEntityRendererProvider.Context context) {
 	}
 
 	@Override
-	public void render(CuttingBoardBlockEntity cuttingBoardEntity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
-		ItemStack itemStack = cuttingBoardEntity.getStoredItem();
+	public void render(CuttingBoardBlockEntity cuttingBoard, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+		ItemStack itemStack = cuttingBoard.getStoredItem();
 		if (itemStack.isEmpty()) {
 			return;
 		}
 
-		Direction direction = cuttingBoardEntity.getBlockState().getValue(CuttingBoardBlock.FACING).getOpposite();
-		int posLong = (int) cuttingBoardEntity.getBlockPos().asLong();
+		Direction direction = cuttingBoard.getBlockState().getValue(CuttingBoardBlock.FACING).getOpposite();
+		int posLong = (int) cuttingBoard.getBlockPos().asLong();
 		int seed = itemStack.isEmpty() ? 187 : Item.getId(itemStack.getItem()) + itemStack.getDamageValue();
 		this.random.setSeed(seed);
 
@@ -42,13 +42,13 @@ public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlo
 			poseStack.pushPose();
 
 			poseStack.pushPose();
-			boolean isBlockItem = itemRenderer.getModel(itemStack, cuttingBoardEntity.getLevel(), null, 0).applyTransform(ItemDisplayContext.FIXED, poseStack, false).isGui3d();
+			boolean isBlockItem = itemRenderer.getModel(itemStack, cuttingBoard.getLevel(), null, 0).applyTransform(ItemDisplayContext.FIXED, poseStack, false).isGui3d();
 			poseStack.popPose();
 
 			float xOffset = itemRenderCount == 1 ? 0 : (this.random.nextFloat() * 2.0F - 1.0F) * 0.15F * 0.5F;
 			float zOffset = itemRenderCount == 1 ? 0 : (this.random.nextFloat() * 2.0F - 1.0F) * 0.15F * 0.5F;
 
-			if (cuttingBoardEntity.isItemCarvingBoard()) {
+			if (cuttingBoard.isItemCarvingBoard()) {
 				renderItemCarved(poseStack, direction, itemStack);
 			} else if (isBlockItem && !itemStack.is(ModTags.Items.FLAT_ON_CUTTING_BOARD)) {
 				renderBlock(poseStack, direction, xOffset, i, zOffset);
@@ -56,7 +56,7 @@ public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlo
 				renderItemLayingDown(poseStack, direction, xOffset, i, zOffset);
 			}
 
-			Minecraft.getInstance().getItemRenderer().renderStatic(itemStack, ItemDisplayContext.FIXED, combinedLight, combinedOverlay, poseStack, buffer, cuttingBoardEntity.getLevel(), posLong);
+			Minecraft.getInstance().getItemRenderer().renderStatic(itemStack, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, buffer, cuttingBoard.getLevel(), posLong);
 			poseStack.popPose();
 		}
 	}

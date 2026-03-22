@@ -117,8 +117,8 @@ public class RopeBlock extends IronBarsBlock
 		return !isExceptionForConnection(state) && solidSide || tieToRopeAndWalls(state);
 	}
 
-	public static boolean tieToRopeAndWalls(BlockState pState) {
-		return pState.getBlock() instanceof IronBarsBlock || pState.is(BlockTags.WALLS);
+	public static boolean tieToRopeAndWalls(BlockState state) {
+		return state.getBlock() instanceof IronBarsBlock || state.is(BlockTags.WALLS);
 	}
 
 	@Override
@@ -127,7 +127,7 @@ public class RopeBlock extends IronBarsBlock
 	}
 
 	@Override
-	public VoxelShape getBlockSupportShape(BlockState pState, BlockGetter pReader, BlockPos pPos) {
+	public VoxelShape getBlockSupportShape(BlockState state, BlockGetter level, BlockPos pos) {
 		return LOWER_SUPPORT_AABB;
 	}
 

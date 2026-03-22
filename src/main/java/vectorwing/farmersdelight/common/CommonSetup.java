@@ -60,8 +60,8 @@ public class CommonSetup
 		DispenserBlock.registerBehavior(ModItems.ROTTEN_TOMATO.get(), new AbstractProjectileDispenseBehavior()
 		{
 			@Override
-			protected Projectile getProjectile(Level pLevel, Position pPosition, ItemStack pStack) {
-				return new RottenTomatoEntity(pLevel, pPosition.x(), pPosition.y(), pPosition.z());
+			protected Projectile getProjectile(Level level, Position position, ItemStack stack) {
+				return new RottenTomatoEntity(level, position.x(), position.y(), position.z());
 			}
 		});
 	}

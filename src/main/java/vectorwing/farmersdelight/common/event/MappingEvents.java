@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
+// TODO: Delete this!!!
 @Mod.EventBusSubscriber(modid = FarmersDelight.MODID)
 public class MappingEvents
 {

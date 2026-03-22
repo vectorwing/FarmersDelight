@@ -61,7 +61,7 @@ public class RichSoilFarmlandBlock extends FarmBlock
 	}
 
 	@Override
-	public boolean isFertile(BlockState state, BlockGetter world, BlockPos pos) {
+	public boolean isFertile(BlockState state, BlockGetter level, BlockPos pos) {
 		if (state.is(ModBlocks.RICH_SOIL_FARMLAND.get()))
 			return state.getValue(RichSoilFarmlandBlock.MOISTURE) > 0;
 
@@ -69,15 +69,15 @@ public class RichSoilFarmlandBlock extends FarmBlock
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
+	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		if (!state.canSurvive(level, pos)) {
 			turnToRichSoil(null, state, level, pos);
 		}
 	}
 
 	@Override
-	public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable) {
-		net.minecraftforge.common.PlantType plantType = plantable.getPlantType(world, pos.relative(facing));
+	public boolean canSustainPlant(BlockState state, BlockGetter level, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable) {
+		net.minecraftforge.common.PlantType plantType = plantable.getPlantType(level, pos.relative(facing));
 		return plantType == PlantType.CROP || plantType == PlantType.PLAINS;
 	}
 

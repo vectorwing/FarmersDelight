@@ -24,10 +24,10 @@ public class SkilletRenderer implements BlockEntityRenderer<SkilletBlockEntity>
 	}
 
 	@Override
-	public void render(SkilletBlockEntity skilletEntity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
-		Direction direction = skilletEntity.getBlockState().getValue(StoveBlock.FACING);
-		IItemHandler inventory = skilletEntity.getInventory();
-		int posLong = (int) skilletEntity.getBlockPos().asLong();
+	public void render(SkilletBlockEntity skillet, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+		Direction direction = skillet.getBlockState().getValue(StoveBlock.FACING);
+		IItemHandler inventory = skillet.getInventory();
+		int posLong = (int) skillet.getBlockPos().asLong();
 
 		ItemStack stack = inventory.getStackInSlot(0);
 		int seed = stack.isEmpty() ? 187 : Item.getId(stack.getItem()) + stack.getDamageValue();
@@ -53,8 +53,8 @@ public class SkilletRenderer implements BlockEntityRenderer<SkilletBlockEntity>
 				// Resize the items
 				poseStack.scale(0.5F, 0.5F, 0.5F);
 
-				if (skilletEntity.getLevel() != null)
-					Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, combinedLight, combinedOverlay, poseStack, buffer, skilletEntity.getLevel(), posLong);
+				if (skillet.getLevel() != null)
+					Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, buffer, skillet.getLevel(), posLong);
 				poseStack.popPose();
 			}
 		}

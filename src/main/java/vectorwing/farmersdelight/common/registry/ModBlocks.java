@@ -274,7 +274,7 @@ public class ModBlocks
 			{
 				@Override
 				@SuppressWarnings("deprecation")
-				public @NotNull ItemStack getCloneItemStack(BlockGetter pLevel, BlockPos pPos, BlockState pState) {
+				public @NotNull ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
 					return new ItemStack(Items.PUMPKIN_PIE);
 				}
 			});

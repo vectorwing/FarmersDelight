@@ -36,9 +36,9 @@ public class ModNetworking
 		public FlipSkilletMessage() {
 		}
 
-		public void handle(Supplier<NetworkEvent.Context> ctx) {
-			ctx.get().enqueueWork(() -> {
-				ServerPlayer player = ctx.get().getSender();
+		public void handle(Supplier<NetworkEvent.Context> context) {
+			context.get().enqueueWork(() -> {
+				ServerPlayer player = context.get().getSender();
 				ItemStack stack = player.getUseItem();
 				if (stack.getItem() instanceof SkilletItem) {
 					CompoundTag tag = stack.getOrCreateTag();
@@ -47,7 +47,7 @@ public class ModNetworking
 					}
 				}
 			});
-			ctx.get().setPacketHandled(true);
+			context.get().setPacketHandled(true);
 		}
 
 		public void encode(FriendlyByteBuf buf) {

@@ -29,6 +29,7 @@ public class HangingCanvasSignEditScreen extends AbstractSignEditScreen
 		this.texture = new ResourceLocation(FarmersDelight.MODID, "canvas" + dyeName + ".png").withPrefix("textures/gui/hanging_signs/");
 	}
 
+	@Override
 	protected void offsetSign(GuiGraphics gui, BlockState state) {
 		gui.pose().translate((float) this.width / 2.0F, 125.0F, 50.0F);
 	}

@@ -111,7 +111,7 @@ public class HorseFeedItem extends Item
 	}
 
 	@Override
-	public InteractionResult interactLivingEntity(ItemStack stack, Player playerIn, LivingEntity target, InteractionHand hand) {
+	public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
 		if (target instanceof Horse horse) {
 			if (horse.isAlive() && horse.isTamed()) {
 				return InteractionResult.SUCCESS;

@@ -48,7 +48,7 @@ public class RopeFenceBlock extends CrossCollisionBlock
 		}
 	}
 
-	public VoxelShape getVisualShape(BlockState state, BlockGetter reader, BlockPos pos, CollisionContext context) {
+	public VoxelShape getVisualShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return POST;
 	}
 

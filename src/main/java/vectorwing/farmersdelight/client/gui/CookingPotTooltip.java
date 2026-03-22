@@ -65,7 +65,7 @@ public class CookingPotTooltip implements ClientTooltipComponent
 		}
 	}
 
-	public static record CookingPotTooltipComponent(ItemStack mealStack) implements TooltipComponent
+	public record CookingPotTooltipComponent(ItemStack mealStack) implements TooltipComponent
 	{
 	}
 }

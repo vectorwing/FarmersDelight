@@ -155,14 +155,14 @@ public class SkilletBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 	}
 
 	@Override
-	public void animateTick(BlockState stateIn, Level level, BlockPos pos, RandomSource rand) {
+	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
 		if (level.getBlockEntity(pos) instanceof SkilletBlockEntity skillet) {
 			if (skillet.isCooking()) {
 				double x = (double) pos.getX() + 0.5D;
 				double y = pos.getY();
 				double z = (double) pos.getZ() + 0.5D;
-				if (rand.nextInt(10) == 0) {
-					level.playLocalSound(x, y, z, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.BLOCKS, 0.4F, rand.nextFloat() * 0.2F + 0.9F, false);
+				if (random.nextInt(10) == 0) {
+					level.playLocalSound(x, y, z, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.BLOCKS, 0.4F, random.nextFloat() * 0.2F + 0.9F, false);
 				}
 			}
 		}

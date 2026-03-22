@@ -20,7 +20,7 @@ public class BuddingTomatoBlock extends BuddingBushBlock implements Bonemealable
 	}
 
 	@Override
-	public BlockState getPlant(BlockGetter world, BlockPos pos) {
+	public BlockState getPlant(BlockGetter level, BlockPos pos) {
 		return ModBlocks.BUDDING_TOMATO_CROP.get().defaultBlockState();
 	}
 
