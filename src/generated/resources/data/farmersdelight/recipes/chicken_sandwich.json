@@ -12,7 +12,7 @@
       "tag": "forge:salad_ingredients"
     },
     {
-      "item": "minecraft:carrot"
+      "tag": "forge:crops/carrot"
     }
   ],
   "result": {

@@ -16,7 +16,7 @@
       "item": "minecraft:brown_mushroom"
     },
     {
-      "item": "minecraft:potato"
+      "tag": "forge:crops/potato"
     },
     {
       "tag": "forge:berries"

@@ -7,10 +7,10 @@
       "tag": "forge:raw_beef"
     },
     {
-      "item": "minecraft:carrot"
+      "tag": "forge:crops/carrot"
     },
     {
-      "item": "minecraft:potato"
+      "tag": "forge:crops/potato"
     }
   ],
   "recipe_book_tab": "meals",

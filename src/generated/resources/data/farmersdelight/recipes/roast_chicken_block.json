@@ -12,7 +12,7 @@
       "item": "minecraft:bread"
     },
     {
-      "item": "minecraft:carrot"
+      "tag": "forge:crops/carrot"
     },
     {
       "item": "minecraft:cooked_chicken"
@@ -21,7 +21,7 @@
       "item": "minecraft:baked_potato"
     },
     {
-      "item": "minecraft:carrot"
+      "tag": "forge:crops/carrot"
     },
     {
       "item": "minecraft:bowl"

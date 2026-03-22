@@ -6,7 +6,7 @@
       "tag": "forge:milk"
     },
     "w": {
-      "item": "minecraft:wheat"
+      "tag": "forge:crops/wheat"
     }
   },
   "pattern": [
