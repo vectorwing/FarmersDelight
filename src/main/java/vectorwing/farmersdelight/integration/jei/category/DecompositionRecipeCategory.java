@@ -1,8 +1,8 @@
 package vectorwing.farmersdelight.integration.jei.category;
 
-import com.google.common.collect.ImmutableList;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -28,7 +28,6 @@ import vectorwing.farmersdelight.integration.jei.resource.DecompositionDummy;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +35,6 @@ import java.util.stream.Collectors;
 @MethodsReturnNonnullByDefault
 public class DecompositionRecipeCategory implements IRecipeCategory<DecompositionDummy>
 {
-	public static final ResourceLocation UID = new ResourceLocation(FarmersDelight.MODID, "decomposition");
 	private static final int slotSize = 22;
 
 	private final Component title;
@@ -97,17 +95,16 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 	}
 
 	@Override
-	public List<Component> getTooltipStrings(DecompositionDummy recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+	public void getTooltip(ITooltipBuilder tooltip, DecompositionDummy recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
 		if (ClientRenderUtils.isCursorInsideBounds(40, 38, 11, 11, mouseX, mouseY)) {
-			return ImmutableList.of(translateKey(".light"));
+			tooltip.add(translateKey(".light"));
 		}
 		if (ClientRenderUtils.isCursorInsideBounds(53, 38, 11, 11, mouseX, mouseY)) {
-			return ImmutableList.of(translateKey(".fluid"));
+			tooltip.add(translateKey(".fluid"));
 		}
 		if (ClientRenderUtils.isCursorInsideBounds(67, 38, 11, 11, mouseX, mouseY)) {
-			return ImmutableList.of(translateKey(".accelerators"));
+			tooltip.add(translateKey(".accelerators"));
 		}
-		return Collections.emptyList();
 	}
 
 	private static MutableComponent translateKey(@Nonnull String suffix) {

@@ -89,11 +89,11 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 			int index = i;
 			builder.addSlot(RecipeIngredientRole.OUTPUT, OUTPUT_GRID_X + xOffset, OUTPUT_GRID_Y + yOffset)
 					.addItemStack(recipeOutputs.get(i).getStack())
-					.addTooltipCallback((slotView, tooltip) -> {
+					.addRichTooltipCallback((slotView, tooltip) -> {
 						ChanceResult output = recipeOutputs.get(index);
 						float chance = output.getChance();
 						if (chance != 1)
-							tooltip.add(1, TextUtils.getTranslation("jei.chance", chance < 0.01 ? "<1" : (int) (chance * 100))
+							tooltip.add(TextUtils.getTranslation("jei.chance", chance < 0.01 ? "<1" : (int) (chance * 100))
 									.withStyle(ChatFormatting.GOLD));
 					});
 		}
