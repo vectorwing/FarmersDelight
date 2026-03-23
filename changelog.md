@@ -89,13 +89,6 @@
   - `offhand_equipment`: Deprecated with the new Cutting Board mechanics;
   - `wolf_prey`: Replaced by `forge:raw_meat` when making Dog Food;
 
-### Fixes
-- Fix Canvas Rug and Tatami Mats not having their own stepping sounds, by tagging them as `combination_step_sound_blocks` (thanks, Mickeon!);
-- Statistics are now properly awarded for:
-  - Using tools on the Cutting Board;
-  - Using Knives to cut cakes and pies;
-  - Using containers to take servings from feasts;
-
 ### Technical
 - Added data generation for most things which were still manually written (thanks, GizmoTheMoonPig and Abbie5!);
 - All models have been standardized, cleaned up and optimized across the board:
@@ -117,6 +110,20 @@
   - `crop_with_rope` -> `template_crop_with_rope`;
   - `pie` -> `template_pie`;
   - `pie_slice[1-3]` -> `template_pie_slice[1-3]`;
+
+## 1.2.11
+
+### Fixes
+- Fix potential load error where `tomatoes` is not present when joining a server;
+- Fix Canvas Rug and Tatami Mats not having their own stepping sounds, by tagging them as `combination_step_sound_blocks` (thanks, Mickeon!);
+- Statistics are now properly awarded for:
+  - Using tools on the Cutting Board;
+  - Using Knives to cut cakes and pies;
+  - Using containers to take servings from feasts;
+
+### Translations
+- Added:
+  - fr_ca (thanks, wool!);
 
 ## 1.2.10
 
