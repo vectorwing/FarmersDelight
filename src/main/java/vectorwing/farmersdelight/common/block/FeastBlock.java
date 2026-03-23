@@ -123,9 +123,7 @@ public class FeastBlock extends Block
 					player.drop(serving, false);
 				}
 				if (level.getBlockState(pos).getValue(getServingsProperty()) == 0 && !this.hasLeftovers) {
-					if (level.isClientSide) {
-						level.destroyBlock(pos, true);
-					}
+					level.destroyBlock(pos, true);
 				}
 				level.playSound(null, pos, ModSounds.BLOCK_TAKE_PORTION.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
 				if (hasServingParticles && level instanceof ServerLevel serverLevel) {

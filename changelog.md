@@ -72,14 +72,14 @@
   - Cutting recipes now check for both a tag and a "tool action" (1.20.1) or "item ability" (1.21+), broadening compatibility with modded tools;
   - Cutting recipes where you "salvage" items are now condensed together, making the Cutting recipe list less bloated in item viewers:
     - Wood furniture salvaging became a single `<wood>_furniture` recipe, includes several new items, and has a 75% chance to return a unit of that plank type;
-- Mushroom Colonies can now be snipped all at once when using a Knife on them;
+- Knives now have tool actions (1.20.1), or item abilities (1.21+):
   - `knife_dig`: Checked together with the `forge:tools/knives` tag for crafting (Cutting Board);
   - `knife_harvest`: Checked together with the `farmersdelight:tools/knives` tag for gameplay actions;
 - All sounds in FD should now have accurate subtitles. Recently added:
   - `food.take_portion`: Used when blocks provide food when used (Cooking Pot, Feasts etc);
   - `pastry.slice`: Used when sweet food blocks, such as Pies, are sliced with a Knife;
+- Mushroom Colonies can now be snipped all at once when using a Knife on them;
 - Stoves now only inflict burn in a small "grilling area" on top of them; the edges are safe to step on;
-- Knives now have tool actions (1.20.1), or item abilities (1.21+):
 - Zombies and Illagers now have a very small chance of dropping an Onion when killed by a player, similar to Carrots and Potatoes;
 - Cats can now be tamed with Salmon Slice and Cod Slice;
 
@@ -98,7 +98,7 @@
 
 ### Technical
 - Added data generation for most things which were still manually written (thanks, GizmoTheMoonPig and Abbie5!);
-- All models have been standardizes, cleaned up and optimized across the board:
+- All models have been standardized, cleaned up and optimized across the board:
   - If you make a resource pack for FD, you may have to update to conform to these changes;
 - FD's internal recipe builders have been updated, and should now be more usable for add-on developers:
   - They now implement `RecipeBuilder`, which standardizes several methods in regards to file saving and naming (thanks, Lance5057!);
