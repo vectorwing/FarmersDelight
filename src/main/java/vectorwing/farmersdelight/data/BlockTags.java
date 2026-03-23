@@ -202,6 +202,11 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.ONION_CROP.get(),
 				ModBlocks.RICE_CROP.get()
 		);
+		tag(net.minecraft.tags.BlockTags.COMBINATION_STEP_SOUND_BLOCKS).add(
+				ModBlocks.CANVAS_RUG.get(),
+				ModBlocks.FULL_TATAMI_MAT.get(),
+				ModBlocks.HALF_TATAMI_MAT.get()
+		);
 	}
 
 	protected void registerNeoForgeTags() {

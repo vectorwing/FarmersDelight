@@ -10,6 +10,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -99,6 +101,9 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 			if (!level.isClientSide) {
 				toolStack.hurtAndBreak(1, (ServerLevel) level, player, (item) -> {
 				});
+				if (player != null) {
+					player.awardStat(Stats.ITEM_USED.get(toolStack.getItem()));
+				}
 			}
 
 			playProcessingSound(recipe.value().getSoundEvent().orElse(null), toolStack, getStoredItem());

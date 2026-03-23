@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.*;
@@ -281,7 +282,7 @@ public class ModBlocks
 			() -> new OnionBlock(Block.Properties.ofFullCopy(Blocks.WHEAT)));
 	public static final Supplier<Block> BUDDING_TOMATO_CROP = BLOCKS.register("budding_tomatoes",
 			() -> new BuddingTomatoBlock(Block.Properties.ofFullCopy(Blocks.WHEAT)));
-	public static final Supplier<Block> TOMATO_CROP = BLOCKS.register("tomatoes",
+	public static final DeferredHolder<Block, TomatoVineBlock> TOMATO_CROP = BLOCKS.register("tomatoes",
 			() -> new TomatoVineBlock(Block.Properties.ofFullCopy(Blocks.WHEAT)));
 	public static final Supplier<Block> RICE_CROP = BLOCKS.register("rice",
 			() -> new RiceBlock(Block.Properties.ofFullCopy(Blocks.WHEAT).strength(0.2F)));

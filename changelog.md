@@ -1,14 +1,24 @@
 # Changelog
 
-## 1.2.10a
+## 1.2.11
 
 ### Updates
 - (1.21+) Tag `farmersdelight:feasts` is now added to `c:edible_when_placed`;
 - (1.21+) Ropes are now tagged under the `c:ropes` block/item tags;
 
 ### Fixes
+- Fix potential load error where `tomatoes` is not present when joining a server;
+- Fix Canvas Rug and Tatami Mats not having their own stepping sounds, by tagging them as `combination_step_sound_blocks` (thanks, Mickeon!);
+- Statistics are now properly awarded for:
+  - Using tools on the Cutting Board;
+  - Using Knives to cut cakes and pies;
+  - Using containers to take servings from feasts;
 - (1.21+) Fix Mushroom Colonies floating without support when under a light level of 13;
 - (1.21+) Create Integration - Fix outdated fluid syntax;
+
+### Translations
+- Added:
+  - fr_ca (thanks, wool!);
 
 ## 1.2.10
 

@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -69,7 +70,7 @@ public class PieBlock extends Block
 	@Override
 	public ItemInteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (heldStack.is(ModTags.KNIVES)) {
-			return cutSlice(level, pos, state, player);
+			return cutSlice(level, pos, state, player, heldStack.getItem());
 		}
 
 		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -122,7 +123,7 @@ public class PieBlock extends Block
 	/**
 	 * Cuts off a bite and drops a slice item, without feeding the player.
 	 */
-	protected ItemInteractionResult cutSlice(Level level, BlockPos pos, BlockState state, Player player) {
+	protected ItemInteractionResult cutSlice(Level level, BlockPos pos, BlockState state, Player player, Item knife) {
 		int bites = state.getValue(BITES);
 		if (bites < getMaxBites() - 1) {
 			level.setBlock(pos, state.setValue(BITES, bites + 1), 3);
@@ -134,6 +135,8 @@ public class PieBlock extends Block
 		ItemUtils.spawnItemEntity(level, this.getPieSliceItem(), pos.getX() + 0.5, pos.getY() + 0.3, pos.getZ() + 0.5,
 				direction.getStepX() * 0.15, 0.05, direction.getStepZ() * 0.15);
 		level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
+		player.awardStat(Stats.ITEM_USED.get(knife));
+
 		return ItemInteractionResult.SUCCESS;
 	}
 
