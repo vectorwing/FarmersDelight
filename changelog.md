@@ -72,15 +72,16 @@
   - Cutting recipes now check for both a tag and a "tool action" (1.20.1) or "item ability" (1.21+), broadening compatibility with modded tools;
   - Cutting recipes where you "salvage" items are now condensed together, making the Cutting recipe list less bloated in item viewers:
     - Wood furniture salvaging became a single `<wood>_furniture` recipe, includes several new items, and has a 75% chance to return a unit of that plank type;
-- Stoves now only inflict burn in a small "grilling area" on top of them; the edges are safe to step on;
 - Mushroom Colonies can now be snipped all at once when using a Knife on them;
-- Knives now have tool actions (1.20.1), or item abilities (1.21+):
   - `knife_dig`: Checked together with the `forge:tools/knives` tag for crafting (Cutting Board);
   - `knife_harvest`: Checked together with the `farmersdelight:tools/knives` tag for gameplay actions;
-- Zombies and Illagers now have a very small chance of dropping an Onion when killed by a player, similar to Carrots and Potatoes;
 - All sounds in FD should now have accurate subtitles. Recently added:
   - `food.take_portion`: Used when blocks provide food when used (Cooking Pot, Feasts etc);
   - `pastry.slice`: Used when sweet food blocks, such as Pies, are sliced with a Knife;
+- Stoves now only inflict burn in a small "grilling area" on top of them; the edges are safe to step on;
+- Knives now have tool actions (1.20.1), or item abilities (1.21+):
+- Zombies and Illagers now have a very small chance of dropping an Onion when killed by a player, similar to Carrots and Potatoes;
+- Cats can now be tamed with Salmon Slice and Cod Slice;
 
 ### Removals
 - The following tags have been removed:

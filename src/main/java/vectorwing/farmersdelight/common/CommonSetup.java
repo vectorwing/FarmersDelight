@@ -6,6 +6,7 @@ import com.google.common.collect.Sets;
 import net.minecraft.core.Position;
 import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.animal.Pig;
@@ -40,8 +41,8 @@ public class CommonSetup
 			registerDispenserBehaviors();
 			registerItemSetAdditions();
 			registerStackSizeOverrides();
-            ModNetworking.register();
-            ModAdvancements.register();
+			ModNetworking.register();
+			ModAdvancements.register();
 		});
 	}
 
@@ -124,6 +125,11 @@ public class CommonSetup
 
 		Ingredient newPigFood = Ingredient.of(ModItems.CABBAGE.get(), ModItems.TOMATO.get());
 		Pig.FOOD_ITEMS = new CompoundIngredient(Arrays.asList(Pig.FOOD_ITEMS, newPigFood))
+		{
+		};
+
+		Ingredient newCatFood = Ingredient.of(ModItems.COD_SLICE.get(), ModItems.SALMON_SLICE.get());
+		Cat.TEMPT_INGREDIENT = new CompoundIngredient(Arrays.asList(Cat.TEMPT_INGREDIENT, newCatFood))
 		{
 		};
 
