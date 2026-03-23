@@ -18,4 +18,11 @@ public abstract class RopeFenceConnectionMixin
 			cir.setReturnValue(false);
 		}
 	}
+
+	@Inject(at = @At("HEAD"), method = "isSameFence", cancellable = true)
+	public void denyConnectionToRopeFence(BlockState state, CallbackInfoReturnable<Boolean> cir) {
+		if (state.is(ModBlocks.ROPE_FENCE.get())) {
+			cir.setReturnValue(false);
+		}
+	}
 }
