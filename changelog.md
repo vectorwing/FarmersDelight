@@ -107,6 +107,7 @@
     - Thanks to LordFirespeed for helping me realize the issue with the method override!;
 - FD's recipes now call for `assemble()` in most places, allowing extenders of most workstations to use the inventory when creating their result (thanks, ColonelPanic!);
 - Cutting recipes now accept arrays of ingredients in the `tool` field (thanks, BobVarioa!);
+- ConsumableItem's constructor now defaults the `hasFoodEffectTooltip` parameter to `true`, as nearly all cases in vanilla FD had it enabled. This may affect add-ons which do not explicitly set it;
 - Food blocks, such as Pies and Feasts, now have new class overrides for when their VoxelShapes can rotate horizontally (thanks, TheGridExpert!):
   - `RotatedFeastBlock` is an extension of `FeastBlock` for feasts with directional consumption shapes. You provide an array of shapes, and `ShapeUtils` will calculate and cache rotations for them;
   - If your feast's hitbox does not change horizontally as servings are taken (example: Stuffed Pumpkin), you can still use `FeastBlock`.
