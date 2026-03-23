@@ -366,6 +366,7 @@ public class BlockTags extends BlockTagsProvider
 		tag(CompatibilityTags.SERENE_SEASONS_SUMMER_CROPS_BLOCK).add(
 				ModBlocks.BUDDING_TOMATO_CROP.get(),
 				ModBlocks.TOMATO_CROP.get(),
+				ModBlocks.TOMATO_CROP_ON_ROPE.get(),
 				ModBlocks.RICE_CROP.get(),
 				ModBlocks.RICE_CROP_PANICLES.get());
 		tag(CompatibilityTags.SERENE_SEASONS_WINTER_CROPS_BLOCK).add(
