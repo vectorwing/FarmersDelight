@@ -52,6 +52,7 @@ public class RopeBlock extends IronBarsBlock
 		return true;
 	}
 
+	// TODO: Bell ringing seems to differ from 1.20.1, so try investigating it later.
 	@Override
 	public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
 		if (Configuration.ENABLE_ROPE_REELING.get() && player.isSecondaryUseActive()) {

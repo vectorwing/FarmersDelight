@@ -99,7 +99,7 @@ public class FDAdvancementGenerator implements AdvancementProvider.AdvancementGe
 								Optional.of(
 										ContextAwarePredicate.create(
 												LocationCheck.checkLocation(
-														LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(ModBlocks.TOMATO_CROP.get()).setProperties(
+														LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(ModBlocks.TOMATO_CROP_ON_ROPE.get()).setProperties(
 																StatePropertiesPredicate.Builder.properties()
 																		.hasProperty(TomatoBlock.VINE_AGE, 0)
 														))

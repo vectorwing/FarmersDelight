@@ -115,11 +115,11 @@ dependencies {
     // JEI
     compileOnly "mezz.jei:jei-${jei_minecraft}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${jei_minecraft}-neoforge-api:${jei_version}"
-    localRuntime "mezz.jei:jei-${jei_minecraft}-neoforge:${jei_version}"
+//    localRuntime "mezz.jei:jei-${jei_minecraft}-neoforge:${jei_version}"
 
     // EMI
-    compileOnly "dev.emi:emi-forge:${emi_version}:api"
-//    runtimeOnly "dev.emi:emi-forge:${emi_version}"
+    compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
+    runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
 
     // AppleSkin
     compileOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}:api"

@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.BoneMealItem;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -63,7 +64,8 @@ public class RichSoilBlock extends Block
 		if (plantState.getBlock() instanceof BonemealableBlock growable) {
 			if (growable.isValidBonemealTarget(level, plantPos, plantState) && CommonHooks.canCropGrow(level, plantPos, plantState, true)) {
 				growable.performBonemeal(level, level.random, plantPos, plantState);
-//				level.levelEvent(2005, plantPos, 0); // TODO: Check why this was commented out in 1.21.1
+//				level.levelEvent(1505, plantPos, 15);
+//				BoneMealItem.addGrowthParticles(level, plantPos, 15);		// TODO: Restoring these particles may require a network packet.
 				CommonHooks.fireCropGrowPost(level, plantPos, plantState);
 				return true;
 			}
