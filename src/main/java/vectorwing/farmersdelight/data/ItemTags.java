@@ -236,8 +236,7 @@ public class ItemTags extends ItemTagsProvider
 		tag(Tags.Items.FENCES).add(ModItems.ROPE_FENCE.get());
 		tag(Tags.Items.FENCE_GATES).add(ModItems.ROPE_FENCE_GATE.get());
 
-		// TODO: FOODS_MILK will be deprecated in 1.3, but is used here for now to not break add-on compat.
-		tag(Tags.Items.DRINKS_MILK).add(ModItems.MILK_BOTTLE.get()).addTag(CommonTags.Items.FOODS_MILK);
+		tag(Tags.Items.DRINKS_MILK).add(ModItems.MILK_BOTTLE.get());
 
 		tag(Tags.Items.FOODS_VEGETABLE).add(ModItems.ONION.get(), ModItems.TOMATO.get());
 		tag(Tags.Items.FOODS_COOKIE).add(ModItems.HONEY_COOKIE.get(), ModItems.SWEET_BERRY_COOKIE.get());
@@ -289,9 +288,6 @@ public class ItemTags extends ItemTagsProvider
 	}
 
 	public void registerCommonTags() {
-		// TODO: Remove on 1.3
-		tag(CommonTags.Items.FOODS_MILK).add(Items.MILK_BUCKET, ModItems.MILK_BOTTLE.get());
-
 		tag(CommonTags.Items.CROPS_CABBAGE).add(ModItems.CABBAGE.get(), ModItems.CABBAGE_LEAF.get());
 		tag(CommonTags.Items.CROPS_ONION).add(ModItems.ONION.get());
 		tag(CommonTags.Items.CROPS_TOMATO).add(ModItems.TOMATO.get());

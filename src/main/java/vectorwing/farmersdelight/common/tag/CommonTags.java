@@ -31,11 +31,6 @@ public class CommonTags
 
 	public static class Items
 	{
-		// The following tags are marked for removal in the next minor release.
-		// They were kept temporarily, for backwards compatibility.
-		@Deprecated
-		public static final TagKey<Item> FOODS_MILK = commonItemTag("foods/milk");
-
 		// Tags under the "crops" subgroup.
 		public static final TagKey<Item> CROPS_CABBAGE = commonItemTag("crops/cabbage");
 		public static final TagKey<Item> CROPS_TOMATO = commonItemTag("crops/tomato");

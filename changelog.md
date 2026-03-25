@@ -88,6 +88,7 @@
   - `cabbage_roll_ingredients`: Replaced by an array of equivalent tags: `raw_meat`, `raw_fishes`, `mushrooms` and `vegetables`;
   - `offhand_equipment`: Deprecated with the new Cutting Board mechanics;
   - `wolf_prey`: Replaced by `forge:raw_meat` when making Dog Food;
+  - (1.21+) `c:foods/milk`: Deprecated in favor of `c:drinks/milk`;
 
 ### Technical
 - Added data generation for most things which were still manually written (thanks, GizmoTheMoonPig and Abbie5!);
