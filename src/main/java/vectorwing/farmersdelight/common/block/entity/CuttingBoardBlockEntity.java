@@ -112,7 +112,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 				spawnCuttingParticles(serverLevel, getBlockPos(), getStoredItem());
 			}
 			playProcessingSound(recipe.value().getSoundEvent().orElse(null), toolStack, getStoredItem());
-			removeItem();
+			inventory.extractItem(0, 1, false);
 			if (player instanceof ServerPlayer) {
 				ModAdvancements.USE_CUTTING_BOARD.get().trigger((ServerPlayer) player);
 				if (!getStoredItem().isEmpty()) {
