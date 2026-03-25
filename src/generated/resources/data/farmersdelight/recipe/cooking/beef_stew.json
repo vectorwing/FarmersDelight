@@ -6,10 +6,10 @@
       "tag": "c:foods/raw_beef"
     },
     {
-      "item": "minecraft:carrot"
+      "tag": "c:crops/carrot"
     },
     {
-      "item": "minecraft:potato"
+      "tag": "c:crops/potato"
     }
   ],
   "recipe_book_tab": "meals",

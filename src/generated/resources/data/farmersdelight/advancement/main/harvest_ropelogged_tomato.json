@@ -10,8 +10,7 @@
               "block": {
                 "blocks": "farmersdelight:tomatoes",
                 "state": {
-                  "age": "0",
-                  "ropelogged": "true"
+                  "age": "0"
                 }
               }
             }

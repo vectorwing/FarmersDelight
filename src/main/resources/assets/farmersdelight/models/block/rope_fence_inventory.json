@@ -1,0 +1,66 @@
+{
+  "format_version": "1.9.0",
+  "parent": "block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "farmersdelight:block/rope_fence",
+    "all": "farmersdelight:block/rope_fence"
+  },
+  "elements": [
+    {
+      "name": "post",
+      "from": [7, 0, 0],
+      "to": [9, 16, 2],
+      "faces": {
+        "north": {"uv": [7, 0, 9, 16], "texture": "#all"},
+        "east": {"uv": [7, 0, 9, 16], "texture": "#all"},
+        "south": {"uv": [7, 0, 9, 16], "texture": "#all"},
+        "west": {"uv": [7, 0, 9, 16], "texture": "#all"},
+        "up": {"uv": [5, 14, 7, 16], "texture": "#all", "cullface": "up"},
+        "down": {"uv": [5, 14, 7, 16], "texture": "#all", "cullface": "down"}
+      }
+    },
+    {
+      "name": "post",
+      "from": [7, 0, 14],
+      "to": [9, 16, 16],
+      "faces": {
+        "north": {"uv": [7, 0, 9, 16], "texture": "#all"},
+        "east": {"uv": [7, 0, 9, 16], "texture": "#all"},
+        "south": {"uv": [7, 0, 9, 16], "texture": "#all"},
+        "west": {"uv": [7, 0, 9, 16], "texture": "#all"},
+        "up": {"uv": [5, 14, 7, 16], "texture": "#all", "cullface": "up"},
+        "down": {"uv": [5, 14, 7, 16], "texture": "#all", "cullface": "down"}
+      }
+    },
+    {
+      "name": "side",
+      "from": [8, 4, 8],
+      "to": [8, 14, 14],
+      "faces": {
+        "east": {"uv": [9, 2, 15, 12], "texture": "#all"},
+        "west": {"uv": [1, 2, 7, 12], "texture": "#all"}
+      }
+    },
+    {
+      "name": "side_alt",
+      "from": [8, 4, 2],
+      "to": [8, 14, 8],
+      "faces": {
+        "east": {"uv": [1, 2, 7, 12], "texture": "#all"},
+        "west": {"uv": [9, 2, 15, 12], "texture": "#all"}
+      }
+    }
+  ],
+  "gui_light": "front",
+  "display": {
+    "gui": {
+      "rotation": [30, 135, 0],
+      "scale": [0.625, 0.625, 0.625]
+    },
+    "fixed": {
+      "rotation": [0, 90, 0],
+      "scale": [0.5, 0.5, 0.5]
+    }
+  }
+}

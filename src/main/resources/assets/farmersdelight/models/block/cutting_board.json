@@ -1,58 +1,57 @@
 {
-  "credit": "Made with Blockbench",
-  "render_type": "minecraft:cutout",
+  "format_version": "1.9.0",
   "parent": "block/thin_block",
   "textures": {
     "particle": "farmersdelight:block/cutting_board",
-    "top": "farmersdelight:block/cutting_board"
+    "main": "farmersdelight:block/cutting_board"
   },
   "elements": [
-    {
-      "name": "handle",
-      "from": [13, 0, 1],
-      "to": [15, 1, 15],
-      "faces": {
-        "north": {"uv": [13, 1, 15, 2], "texture": "#top"},
-        "east": {"uv": [1, 1, 15, 2], "texture": "#top"},
-        "south": {"uv": [13, 14, 15, 15], "texture": "#top"},
-        "west": {"uv": [1, 2, 15, 3], "texture": "#top"},
-        "up": {"uv": [13, 1, 15, 15], "texture": "#top"},
-        "down": {"uv": [13, 1, 15, 15], "texture": "#top"}
-      }
-    },
     {
       "name": "base",
       "from": [1, 0, 1],
       "to": [12, 1, 15],
       "faces": {
-        "north": {"uv": [1, 1, 12, 2], "texture": "#top"},
-        "east": {"uv": [0, 13, 14, 14], "texture": "#top"},
-        "south": {"uv": [1, 14, 12, 15], "texture": "#top"},
-        "west": {"uv": [1, 14, 15, 15], "texture": "#top"},
-        "up": {"uv": [1, 1, 12, 15], "texture": "#top"},
-        "down": {"uv": [1, 1, 12, 15], "texture": "#top"}
+        "north": {"uv": [1, 15, 12, 16], "texture": "#main"},
+        "east": {"uv": [1, 15, 15, 16], "texture": "#main"},
+        "south": {"uv": [1, 15, 12, 16], "texture": "#main"},
+        "west": {"uv": [1, 15, 15, 16], "texture": "#main"},
+        "up": {"uv": [1, 1, 12, 15], "texture": "#main"},
+        "down": {"uv": [1, 1, 12, 15], "texture": "#main", "cullface": "down"}
       }
     },
     {
-      "name": "gap front",
+      "name": "handle",
+      "from": [13, 0, 1],
+      "to": [15, 1, 15],
+      "faces": {
+        "north": {"uv": [1, 15, 3, 16], "texture": "#main"},
+        "east": {"uv": [1, 15, 15, 16], "texture": "#main"},
+        "south": {"uv": [13, 15, 15, 16], "texture": "#main"},
+        "west": {"uv": [1, 15, 15, 16], "texture": "#main"},
+        "up": {"uv": [13, 1, 15, 15], "texture": "#main"},
+        "down": {"uv": [13, 1, 15, 15], "texture": "#main", "cullface": "down"}
+      }
+    },
+    {
+      "name": "north_gap",
       "from": [12, 0, 1],
       "to": [13, 1, 6],
       "faces": {
-        "north": {"uv": [12, 1, 13, 2], "texture": "#top"},
-        "south": {"uv": [12, 5, 13, 6], "texture": "#top"},
-        "up": {"uv": [12, 1, 13, 6], "texture": "#top"},
-        "down": {"uv": [12, 10, 13, 15], "texture": "#top"}
+        "north": {"uv": [3, 15, 4, 16], "texture": "#main"},
+        "south": {"uv": [12, 15, 13, 16], "texture": "#main"},
+        "up": {"uv": [12, 1, 13, 6], "texture": "#main"},
+        "down": {"uv": [12, 10, 13, 15], "texture": "#main", "cullface": "down"}
       }
     },
     {
-      "name": "gap back",
+      "name": "south_gap",
       "from": [12, 0, 10],
       "to": [13, 1, 15],
       "faces": {
-        "north": {"uv": [12, 10, 13, 11], "texture": "#top"},
-        "south": {"uv": [12, 14, 13, 15], "texture": "#top"},
-        "up": {"uv": [12, 10, 13, 15], "texture": "#top"},
-        "down": {"uv": [12, 1, 13, 6], "texture": "#top"}
+        "north": {"uv": [3, 15, 4, 16], "texture": "#main"},
+        "south": {"uv": [12, 15, 13, 16], "texture": "#main"},
+        "up": {"uv": [12, 10, 13, 15], "texture": "#main"},
+        "down": {"uv": [12, 1, 13, 6], "texture": "#main", "cullface": "down"}
       }
     }
   ]

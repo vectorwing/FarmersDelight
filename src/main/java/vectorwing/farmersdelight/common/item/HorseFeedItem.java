@@ -45,7 +45,7 @@ public class HorseFeedItem extends Item
 		super(properties);
 	}
 
-	@EventBusSubscriber(modid = FarmersDelight.MODID, bus = EventBusSubscriber.Bus.GAME)
+	@EventBusSubscriber(modid = FarmersDelight.MODID)
 	public static class HorseFeedEvent
 	{
 		@SubscribeEvent
@@ -55,7 +55,7 @@ public class HorseFeedItem extends Item
 			Entity target = event.getTarget();
 			ItemStack heldStack = event.getItemStack();
 
-			if (target instanceof LivingEntity entity && target.getType().is(ModTags.HORSE_FEED_USERS)) {
+			if (target instanceof LivingEntity entity && target.getType().is(ModTags.EntityTypes.HORSE_FEED_USERS)) {
 				boolean isTameable = entity instanceof AbstractHorse;
 
 				if (entity.isAlive() && (!isTameable || ((AbstractHorse) entity).isTamed()) && heldStack.getItem().equals(ModItems.HORSE_FEED.get())) {
@@ -85,7 +85,7 @@ public class HorseFeedItem extends Item
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
-		if (!Configuration.FOOD_EFFECT_TOOLTIP.get()) {
+		if (!Configuration.ENABLE_FOOD_EFFECT_TOOLTIP.get()) {
 			return;
 		}
 
@@ -111,7 +111,7 @@ public class HorseFeedItem extends Item
 	}
 
 	@Override
-	public InteractionResult interactLivingEntity(ItemStack stack, Player playerIn, LivingEntity target, InteractionHand hand) {
+	public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
 		if (target instanceof Horse horse) {
 			if (horse.isAlive() && horse.isTamed()) {
 				return InteractionResult.SUCCESS;

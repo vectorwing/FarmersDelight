@@ -26,7 +26,7 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import java.util.function.BooleanSupplier;
 
-@EventBusSubscriber(modid = FarmersDelight.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = FarmersDelight.MODID)
 public class BasketBlockEntity extends RandomizableContainerBlockEntity implements Basket
 {
 	private NonNullList<ItemStack> items = NonNullList.withSize(27, ItemStack.EMPTY);

@@ -30,7 +30,7 @@ import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
-@EventBusSubscriber(modid = FarmersDelight.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CabinetBlockEntity extends RandomizableContainerBlockEntity
 {
 	private NonNullList<ItemStack> contents = NonNullList.withSize(27, ItemStack.EMPTY);

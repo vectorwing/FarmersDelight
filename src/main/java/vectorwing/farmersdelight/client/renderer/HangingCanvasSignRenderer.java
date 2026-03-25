@@ -39,8 +39,8 @@ public class HangingCanvasSignRenderer extends CanvasSignRenderer
 	}
 
 	@Override
-	public void render(SignBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
-		BlockState state = blockEntity.getBlockState();
+	public void render(SignBlockEntity sign, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+		BlockState state = sign.getBlockState();
 		SignBlock block = (SignBlock) state.getBlock();
 		HangingSignRenderer.HangingSignModel model = signModel;
 		model.evaluateVisibleParts(state);
@@ -50,7 +50,7 @@ public class HangingCanvasSignRenderer extends CanvasSignRenderer
 			dye = canvasSign.getBackgroundColor();
 		}
 
-		renderSignWithText(blockEntity, poseStack, bufferSource, packedLight, packedOverlay, state, block, dye, model);
+		renderSignWithText(sign, poseStack, bufferSource, packedLight, packedOverlay, state, block, dye, model);
 	}
 
 	@Override

@@ -1,0 +1,58 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "item": "minecraft:bamboo_door"
+        },
+        {
+          "item": "minecraft:bamboo_trapdoor"
+        },
+        {
+          "item": "minecraft:bamboo_sign"
+        },
+        {
+          "item": "minecraft:bamboo_hanging_sign"
+        },
+        {
+          "item": "minecraft:bamboo_fence"
+        },
+        {
+          "item": "minecraft:bamboo_fence_gate"
+        },
+        {
+          "item": "minecraft:bamboo_pressure_plate"
+        },
+        {
+          "item": "minecraft:bamboo_button"
+        },
+        {
+          "item": "minecraft:bamboo_raft"
+        },
+        {
+          "item": "farmersdelight:bamboo_cabinet"
+        }
+      ]
+    }
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "count": 1,
+        "id": "minecraft:bamboo_planks"
+      }
+    }
+  ],
+  "tool": [
+    {
+      "type": "farmersdelight:item_ability",
+      "action": "axe_dig"
+    },
+    {
+      "tag": "minecraft:axes"
+    }
+  ]
+}

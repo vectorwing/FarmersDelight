@@ -1,5 +1,5 @@
 {
-  "parent": "farmersdelight:main/eat_comfort_food",
+  "parent": "farmersdelight:main/place_cooking_pot",
   "criteria": {
     "nourishment": {
       "conditions": {

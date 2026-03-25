@@ -63,11 +63,11 @@ public class TatamiBlock extends Block
 	}
 
 	@Override
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-		if (facing.equals(stateIn.getValue(FACING)) && stateIn.getValue(PAIRED) && level.getBlockState(facingPos).getBlock() != this) {
-			return stateIn.setValue(PAIRED, false);
+	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+		if (facing.equals(state.getValue(FACING)) && state.getValue(PAIRED) && level.getBlockState(facingPos).getBlock() != this) {
+			return state.setValue(PAIRED, false);
 		}
-		return super.updateShape(stateIn, facing, facingState, level, currentPos, facingPos);
+		return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
 	}
 
 	@Override
@@ -76,8 +76,8 @@ public class TatamiBlock extends Block
 	}
 
 	@Override
-	public BlockState rotate(BlockState state, Rotation rot) {
-		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
+	public BlockState rotate(BlockState state, Rotation rotation) {
+		return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
 	}
 
 	@Override

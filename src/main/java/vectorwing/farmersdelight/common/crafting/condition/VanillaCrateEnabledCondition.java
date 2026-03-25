@@ -9,6 +9,7 @@ public class VanillaCrateEnabledCondition implements ICondition
 {
 
 	public static final MapCodec<VanillaCrateEnabledCondition> CODEC = MapCodec.unit(new VanillaCrateEnabledCondition());
+	public static final VanillaCrateEnabledCondition INSTANCE = new VanillaCrateEnabledCondition();
 
 	public VanillaCrateEnabledCondition() {
 	}

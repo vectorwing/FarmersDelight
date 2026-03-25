@@ -48,7 +48,7 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 		this.titleLabelX = 28;
 		this.recipeBookComponent.init(this.width, this.height, this.minecraft, this.widthTooNarrow, this.menu);
 		this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth);
-		if (Configuration.ENABLE_RECIPE_BOOK_COOKING_POT.get()) {
+		if (Configuration.ENABLE_COOKING_POT_RECIPE_BOOK.get()) {
 			this.addRenderableWidget(new ImageButton(this.leftPos + 5, this.height / 2 - 49, 20, 18, RECIPE_BUTTON, (button) ->
 			{
 				this.recipeBookComponent.toggleVisibility();
@@ -168,12 +168,6 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 	public void recipesUpdated() {
 		this.recipeBookComponent.recipesUpdated();
 	}
-
-//	@Override
-//	public void removed() {
-//		this.recipeBookComponent.removed();
-//		super.removed();
-//	}
 
 	@Override
 	@Nonnull

@@ -12,8 +12,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec2;
-import net.minecraft.world.phys.shapes.BooleanOp;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.common.block.StoveBlock;
@@ -24,7 +22,6 @@ import java.util.Optional;
 
 public class StoveBlockEntity extends SyncedBlockEntity
 {
-	private static final VoxelShape GRILLING_AREA = Block.box(3.0F, 0.0F, 3.0F, 13.0F, 1.0F, 13.0F);
 	private static final int INVENTORY_SLOT_COUNT = 6;
 
 	private final ItemStackHandler inventory;
@@ -76,8 +73,8 @@ public class StoveBlockEntity extends SyncedBlockEntity
 	public static void cookingTick(Level level, BlockPos pos, BlockState state, StoveBlockEntity stove) {
 		boolean isStoveLit = state.getValue(StoveBlock.LIT);
 
-		if (stove.isStoveBlockedAbove()) {
-			if (!ItemUtils.isInventoryEmpty(stove.inventory)) {
+		if (StoveBlock.isStoveTopCovered(level, pos, state)) {
+			if (ItemUtils.doesInventoryHaveItems(stove.inventory)) {
 				ItemUtils.dropItems(level, pos, stove.inventory);
 				stove.inventoryChanged();
 			}
@@ -122,7 +119,7 @@ public class StoveBlockEntity extends SyncedBlockEntity
 				if (cookingTimes[i] >= cookingTimesTotal[i]) {
 					Optional<RecipeHolder<CampfireCookingRecipe>> recipe = getMatchingRecipe(stoveStack);
 					if (recipe.isPresent()) {
-						ItemStack resultStack = recipe.get().value().getResultItem(level.registryAccess());
+						ItemStack resultStack = recipe.get().value().assemble(new SingleRecipeInput(stoveStack), level.registryAccess());
 						if (!resultStack.isEmpty()) {
 							ItemUtils.spawnItemEntity(level, resultStack.copy(),
 									worldPosition.getX() + 0.5, worldPosition.getY() + 1.0, worldPosition.getZ() + 0.5,
@@ -171,14 +168,6 @@ public class StoveBlockEntity extends SyncedBlockEntity
 
 	public ItemStackHandler getInventory() {
 		return this.inventory;
-	}
-
-	public boolean isStoveBlockedAbove() {
-		if (level != null) {
-			BlockState above = level.getBlockState(worldPosition.above());
-			return Shapes.joinIsNotEmpty(GRILLING_AREA, above.getShape(level, worldPosition.above()), BooleanOp.AND);
-		}
-		return false;
 	}
 
 	public Vec2 getStoveItemOffset(int index) {

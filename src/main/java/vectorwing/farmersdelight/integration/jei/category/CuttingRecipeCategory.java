@@ -63,6 +63,16 @@ public class CuttingRecipeCategory implements IRecipeCategory<RecipeHolder<Cutti
 	}
 
 	@Override
+	public int getWidth() {
+		return 117;
+	}
+
+	@Override
+	public int getHeight() {
+		return 57;
+	}
+
+	@Override
 	public IDrawable getIcon() {
 		return this.icon;
 	}
@@ -98,6 +108,7 @@ public class CuttingRecipeCategory implements IRecipeCategory<RecipeHolder<Cutti
 
 	@Override
 	public void draw(RecipeHolder<CuttingBoardRecipe> holder, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+		background.draw(guiGraphics, 0, 0);
 		CuttingBoardRecipe recipe = holder.value();
 		NonNullList<ChanceResult> recipeOutputs = recipe.getRollableResults();
 

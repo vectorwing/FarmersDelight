@@ -17,7 +17,7 @@
       "item": "minecraft:brown_mushroom"
     },
     {
-      "item": "minecraft:potato"
+      "tag": "c:crops/potato"
     },
     {
       "tag": "c:foods/berry"

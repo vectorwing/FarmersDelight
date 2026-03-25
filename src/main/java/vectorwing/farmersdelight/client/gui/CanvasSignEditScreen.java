@@ -34,11 +34,13 @@ public class CanvasSignEditScreen extends SignEditScreen
 		this.isFrontText = isFront;
 	}
 
+	@Override
 	protected void init() {
 		super.init();
 		this.signModel = SignRenderer.createSignModel(this.minecraft.getEntityModels(), this.woodType);
 	}
 
+	@Override
 	protected void renderSignBackground(GuiGraphics guiGraphics, BlockState state) {
 		if (this.signModel != null) {
 			boolean flag = state.getBlock() instanceof StandingSignBlock;

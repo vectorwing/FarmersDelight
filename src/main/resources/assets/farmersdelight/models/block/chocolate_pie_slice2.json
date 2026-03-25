@@ -1,5 +1,5 @@
 {
-  "credit": "Made with Blockbench",
+  "parent": "block/block",
   "textures": {
     "particle": "farmersdelight:block/chocolate_pie_top",
     "bottom": "farmersdelight:block/pie_bottom",

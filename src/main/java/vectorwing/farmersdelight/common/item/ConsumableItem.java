@@ -30,7 +30,7 @@ public class ConsumableItem extends Item
 	 */
 	public ConsumableItem(Properties properties) {
 		super(properties);
-		this.hasFoodEffectTooltip = false;
+		this.hasFoodEffectTooltip = true;
 		this.hasCustomTooltip = false;
 	}
 
@@ -89,7 +89,7 @@ public class ConsumableItem extends Item
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
-		if (Configuration.FOOD_EFFECT_TOOLTIP.get()) {
+		if (Configuration.ENABLE_FOOD_EFFECT_TOOLTIP.get()) {
 			if (this.hasCustomTooltip) {
 				MutableComponent textEmpty = TextUtils.getTranslation("tooltip." + BuiltInRegistries.ITEM.getKey(this).getPath());
 				tooltip.add(textEmpty.withStyle(ChatFormatting.BLUE));

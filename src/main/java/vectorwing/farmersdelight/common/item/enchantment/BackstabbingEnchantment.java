@@ -37,7 +37,7 @@ public class BackstabbingEnchantment
 		return amount * multiplier;
 	}
 
-	@EventBusSubscriber(modid = FarmersDelight.MODID, bus = EventBusSubscriber.Bus.GAME)
+	@EventBusSubscriber(modid = FarmersDelight.MODID)
 	public static class BackstabbingEvent
 	{
 		@SubscribeEvent

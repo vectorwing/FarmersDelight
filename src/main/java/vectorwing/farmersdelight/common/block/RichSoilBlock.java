@@ -17,7 +17,6 @@ import net.neoforged.neoforge.common.util.TriState;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.tag.ModTags;
-import vectorwing.farmersdelight.common.utility.MathUtils;
 
 import javax.annotation.Nullable;
 
@@ -28,40 +27,61 @@ public class RichSoilBlock extends Block
 	}
 
 	@Override
-	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
-		if (!level.isClientSide) {
-			BlockPos abovePos = pos.above();
-			BlockState aboveState = level.getBlockState(abovePos);
-			Block aboveBlock = aboveState.getBlock();
+	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+		BlockPos abovePos = pos.above();
+		BlockState aboveState = level.getBlockState(abovePos);
 
-			// Do nothing if the plant is unaffected by rich soil
-			if (aboveState.is(ModTags.UNAFFECTED_BY_RICH_SOIL)) {
-				return;
-			}
+		if (convertMushroomToColony(aboveState, abovePos, level)) {
+			return;
+		}
 
-			// Convert mushrooms to colonies if it's dark enough
-			if (aboveBlock == Blocks.BROWN_MUSHROOM) {
-				level.setBlockAndUpdate(pos.above(), ModBlocks.BROWN_MUSHROOM_COLONY.get().defaultBlockState());
-				return;
-			}
-			if (aboveBlock == Blocks.RED_MUSHROOM) {
-				level.setBlockAndUpdate(pos.above(), ModBlocks.RED_MUSHROOM_COLONY.get().defaultBlockState());
-				return;
-			}
+		tryBoostingPlantsAboveAndBelow(level, pos, random);
+	}
 
-			if (Configuration.RICH_SOIL_BOOST_CHANCE.get() == 0.0) {
-				return;
-			}
+	public static void tryBoostingPlantsAboveAndBelow(ServerLevel level, BlockPos pos, RandomSource random) {
+		if (Configuration.RICH_SOIL_BOOST_CHANCE.get() == 0.0 || random.nextFloat() > Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
+			return;
+		}
 
-			// If all else fails, and it's a plant, give it a growth boost now and then!
-			if (aboveBlock instanceof BonemealableBlock growable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
-				if (growable.isValidBonemealTarget(level, pos.above(), aboveState) && CommonHooks.canCropGrow(level, pos.above(), aboveState, true)) {
-					growable.performBonemeal(level, level.random, pos.above(), aboveState);
-					//level.levelEvent(1505, pos.above(), 0);
-					CommonHooks.fireCropGrowPost(level, pos.above(), aboveState);
-				}
+		BlockPos abovePos = pos.above();
+		BlockState aboveState = level.getBlockState(abovePos);
+		if (!aboveState.is(ModTags.Blocks.PLANTED_FROM_BELOW) && boostPlant(aboveState, abovePos, level)) {
+			return;
+		}
+
+		BlockPos belowPos = pos.below();
+		BlockState belowState = level.getBlockState(belowPos);
+		if (belowState.is(ModTags.Blocks.PLANTED_FROM_BELOW)) {
+			boostPlant(belowState, belowPos, level);
+		}
+	}
+
+	public static boolean boostPlant(BlockState plantState, BlockPos plantPos, ServerLevel level) {
+		if (plantState.is(ModTags.Blocks.UNAFFECTED_BY_RICH_SOIL)) {
+			return false;
+		}
+		if (plantState.getBlock() instanceof BonemealableBlock growable) {
+			if (growable.isValidBonemealTarget(level, plantPos, plantState) && CommonHooks.canCropGrow(level, plantPos, plantState, true)) {
+				growable.performBonemeal(level, level.random, plantPos, plantState);
+//				level.levelEvent(2005, plantPos, 0); // TODO: Check why this was commented out in 1.21.1
+				CommonHooks.fireCropGrowPost(level, plantPos, plantState);
+				return true;
 			}
 		}
+		return false;
+	}
+
+	public boolean convertMushroomToColony(BlockState targetState, BlockPos targetPos, ServerLevel level) {
+		if (targetState.is(Blocks.BROWN_MUSHROOM)) {
+			level.setBlockAndUpdate(targetPos, ModBlocks.BROWN_MUSHROOM_COLONY.get().defaultBlockState());
+			return true;
+		}
+		if (targetState.is(Blocks.RED_MUSHROOM)) {
+			level.setBlockAndUpdate(targetPos, ModBlocks.RED_MUSHROOM_COLONY.get().defaultBlockState());
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
@@ -75,11 +95,11 @@ public class RichSoilBlock extends Block
 
 
 	@Override
-	public TriState canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, BlockState plantState) {
+	public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos pos, Direction facing, BlockState plantState) {
 		return TriState.DEFAULT;
 
 		// TODO: Figure out how to correctly configure Rich Soil's plant compatibility, since PlantType was removed
-//		PlantType plantType = plantState.getPlantType(world, pos.relative(facing));
+//		PlantType plantType = plantState.getPlantType(level, pos.relative(facing));
 //		return plantType != PlantType.CROP && plantType != PlantType.NETHER && plantType != PlantType.WATER;
 	}
 }

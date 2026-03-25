@@ -8,6 +8,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -45,21 +47,21 @@ public class CabinetBlock extends BaseEntityBlock
 
 	@Override
 	public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-		if (!level.isClientSide) {
-			BlockEntity tile = level.getBlockEntity(pos);
-			if (tile instanceof CabinetBlockEntity) {
-				player.openMenu((CabinetBlockEntity) tile);
-			}
+		if (level.isClientSide) {
+			return InteractionResult.SUCCESS;
 		}
-		return InteractionResult.SUCCESS;
+		if (level.getBlockEntity(pos) instanceof CabinetBlockEntity cabinet) {
+			player.openMenu(cabinet);
+			PiglinAi.angerNearbyPiglins(player, true);
+		}
+		return InteractionResult.CONSUME;
 	}
 
 	@Override
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (state.getBlock() != newState.getBlock()) {
-			BlockEntity tileEntity = level.getBlockEntity(pos);
-			if (tileEntity instanceof Container) {
-				Containers.dropContents(level, pos, (Container) tileEntity);
+		if (!state.is(newState.getBlock())) {
+			if (level.getBlockEntity(pos) instanceof Container container) {
+				Containers.dropContents(level, pos, container);
 				level.updateNeighbourForOutputSignal(pos, this);
 			}
 			super.onRemove(state, level, pos, newState, isMoving);
@@ -68,20 +70,18 @@ public class CabinetBlock extends BaseEntityBlock
 
 	@Override
 	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-		BlockEntity tileEntity = level.getBlockEntity(pos);
-		if (tileEntity instanceof CabinetBlockEntity) {
-			((CabinetBlockEntity) tileEntity).recheckOpen();
+		if (level.getBlockEntity(pos) instanceof CabinetBlockEntity cabinet) {
+			cabinet.recheckOpen();
 		}
 	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+		return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
 	}
 
 	@Override
 	protected void createBlockStateDefinition(final StateDefinition.Builder<Block, BlockState> builder) {
-		super.createBlockStateDefinition(builder);
 		builder.add(FACING, OPEN);
 	}
 
@@ -91,7 +91,7 @@ public class CabinetBlock extends BaseEntityBlock
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
 		return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(level.getBlockEntity(pos));
 	}
 
@@ -107,12 +107,12 @@ public class CabinetBlock extends BaseEntityBlock
 	}
 
 	@Override
-	public BlockState rotate(BlockState state, Rotation rot) {
-		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
+	public BlockState rotate(BlockState state, Rotation rotation) {
+		return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
 	}
 
 	@Override
-	public BlockState mirror(BlockState state, Mirror mirrorIn) {
-		return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
+	public BlockState mirror(BlockState state, Mirror mirror) {
+		return state.rotate(mirror.getRotation(state.getValue(FACING)));
 	}
 }

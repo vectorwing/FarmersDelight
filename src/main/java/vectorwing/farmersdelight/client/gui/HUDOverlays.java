@@ -94,7 +94,7 @@ public class HUDOverlays
 			if (!super.shouldRenderOverlay(mc, player, guiGraphics, guiTicks))
 				return false;
 
-			return Configuration.NOURISHED_HUNGER_OVERLAY.get();
+			return Configuration.ENABLE_NOURISHMENT_HUNGER_OVERLAY.get();
 		}
 	}
 
@@ -120,7 +120,7 @@ public class HUDOverlays
 			if (!super.shouldRenderOverlay(mc, player, guiGraphics, guiTicks))
 				return false;
 
-			return Configuration.COMFORT_HEALTH_OVERLAY.get();
+			return Configuration.ENABLE_COMFORT_HEALTH_OVERLAY.get();
 		}
 	}
 

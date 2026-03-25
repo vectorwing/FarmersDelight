@@ -18,7 +18,9 @@ import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -28,11 +30,15 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder
 	private final Ingredient ingredient;
 	private final Ingredient tool;
 	private SoundEvent soundEvent;
+	@Nullable
+	private String namespace;
+	private CuttingRecipeFolder folder;
 
-	private CuttingBoardRecipeBuilder(Ingredient ingredient, Ingredient tool, ItemLike mainResult, int count, float chance) {
+	public CuttingBoardRecipeBuilder(Ingredient ingredient, Ingredient tool, ItemLike mainResult, int count, float chance) {
 		this.results.add(new ChanceResult(new ItemStack(mainResult.asItem(), count), chance));
 		this.ingredient = ingredient;
 		this.tool = tool;
+		this.folder = CuttingRecipeFolder.CUTTING;
 	}
 
 	/**
@@ -84,6 +90,19 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder
 		return this; // No-op - Cutting Board has no recipe book unlocks
 	}
 
+	/**
+	 * Sets a custom namespace (mod ID) for the recipe. Use this only if the ingredient isn't registered to the mod ID you want.
+	 */
+	public CuttingBoardRecipeBuilder setNamespace(String namespace) {
+		this.namespace = namespace;
+		return this;
+	}
+
+	public CuttingBoardRecipeBuilder salvaging() {
+		this.folder = CuttingRecipeFolder.SALVAGING;
+		return this;
+	}
+
 	@Override
 	public RecipeBuilder group(@Nullable String p_176495_) {
 		return this;
@@ -94,9 +113,20 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder
 		return this.ingredient.getItems()[0].getItem();
 	}
 
-	public void build(RecipeOutput output) {
-		ResourceLocation location = BuiltInRegistries.ITEM.getKey(getResult());
-		save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, location.getPath()));
+	public static ResourceLocation getDefaultRecipeId(ItemLike itemLike) {
+		return Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(itemLike.asItem()));
+	}
+
+	/**
+	 * Shorthand for saving recipes in the FD namespace.
+	 */
+	public void saveToFD(RecipeOutput output) {
+		this.setNamespace(FarmersDelight.MODID).save(output);
+	}
+
+	public void save(RecipeOutput output) {
+		ResourceLocation defaultLocation = getDefaultRecipeId(getResult());
+		save(output, ResourceLocation.fromNamespaceAndPath(this.namespace != null ? namespace : defaultLocation.getNamespace(), defaultLocation.getPath()).withPrefix(folder.getSerializedName() + "/"));
 	}
 
 	public void build(RecipeOutput outputIn, String save) {
@@ -121,6 +151,6 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder
 				this.results,
 				this.soundEvent == null ? Optional.empty() : Optional.of(this.soundEvent)
 		);
-		output.accept(id.withPrefix("cutting/"), recipe, null);
+		output.accept(id, recipe, null);
 	}
 }

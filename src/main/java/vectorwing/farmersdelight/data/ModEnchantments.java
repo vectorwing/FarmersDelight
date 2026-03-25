@@ -24,7 +24,7 @@ public class ModEnchantments
 		register(context, BACKSTABBING,
 				Enchantment.enchantment(
 								Enchantment.definition(
-										items.getOrThrow(ModTags.KNIFE_ENCHANTABLE),
+										items.getOrThrow(ModTags.Items.KNIFE_ENCHANTABLE),
 										5, // weight
 										3, // max level
 										Enchantment.dynamicCost(15, 9),

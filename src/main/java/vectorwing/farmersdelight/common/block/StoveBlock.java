@@ -36,6 +36,9 @@ import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.Tags;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModDamageTypes;
@@ -53,6 +56,8 @@ public class StoveBlock extends BaseEntityBlock
 
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+
+	private static final VoxelShape GRILLING_AREA = Block.box(3.0F, 0.0F, 3.0F, 13.0F, 1.0F, 13.0F);
 
 	public StoveBlock(BlockBehaviour.Properties properties) {
 		super(properties);
@@ -99,10 +104,9 @@ public class StoveBlock extends BaseEntityBlock
 			}
 		}
 
-		BlockEntity tileEntity = level.getBlockEntity(pos);
-		if (tileEntity instanceof StoveBlockEntity stoveEntity) {
+		if (!isStoveTopCovered(level, pos, state) && level.getBlockEntity(pos) instanceof StoveBlockEntity stoveEntity) {
 			int stoveSlot = stoveEntity.getNextEmptySlot();
-			if (stoveSlot < 0 || stoveEntity.isStoveBlockedAbove()) {
+			if (stoveSlot < 0) {
 				return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 			}
 			Optional<RecipeHolder<CampfireCookingRecipe>> recipe = stoveEntity.getMatchingRecipe(heldStack);
@@ -118,7 +122,7 @@ public class StoveBlock extends BaseEntityBlock
 	}
 
 	@Override
-	public RenderShape getRenderShape(BlockState pState) {
+	public RenderShape getRenderShape(BlockState state) {
 		return RenderShape.MODEL;
 	}
 
@@ -137,9 +141,11 @@ public class StoveBlock extends BaseEntityBlock
 
 	@Override
 	public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
-		boolean isLit = level.getBlockState(pos).getValue(StoveBlock.LIT);
-		if (isLit && !entity.isSteppingCarefully() && entity instanceof LivingEntity) {
-			entity.hurt(ModDamageTypes.getSimpleDamageSource(level, ModDamageTypes.STOVE_BURN), 1.0F);
+		if (entity.getBoundingBox().intersects(GRILLING_AREA.bounds().move(pos.above()))) {
+			boolean isLit = level.getBlockState(pos).getValue(StoveBlock.LIT);
+			if (isLit && !entity.isSteppingCarefully() && !entity.fireImmune() && entity instanceof LivingEntity) {
+				entity.hurt(ModDamageTypes.getSimpleDamageSource(level, ModDamageTypes.STOVE_BURN), 1.0F);
+			}
 		}
 
 		super.stepOn(level, pos, state, entity);
@@ -147,14 +153,25 @@ public class StoveBlock extends BaseEntityBlock
 
 	@Override
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (state.getBlock() != newState.getBlock()) {
-			BlockEntity tileEntity = level.getBlockEntity(pos);
-			if (tileEntity instanceof StoveBlockEntity) {
-				ItemUtils.dropItems(level, pos, ((StoveBlockEntity) tileEntity).getInventory());
+		if (!state.is(newState.getBlock())) {
+			if (level.getBlockEntity(pos) instanceof StoveBlockEntity stove) {
+				ItemUtils.dropItems(level, pos, stove.getInventory());
 			}
 
 			super.onRemove(state, level, pos, newState, isMoving);
 		}
+	}
+
+	/**
+	 * Checks if the state is a Stove, and if the grilling area is being obstructed by the block above.
+	 */
+	public static boolean isStoveTopCovered(Level level, BlockPos pos, BlockState stoveState) {
+		if (stoveState.getBlock() instanceof StoveBlock) {
+			BlockPos abovePos = pos.above();
+			BlockState aboveState = level.getBlockState(abovePos);
+			return Shapes.joinIsNotEmpty(GRILLING_AREA, aboveState.getShape(level, abovePos), BooleanOp.AND);
+		}
+		return false;
 	}
 
 	@Override
@@ -164,20 +181,20 @@ public class StoveBlock extends BaseEntityBlock
 	}
 
 	@Override
-	public void animateTick(BlockState stateIn, Level level, BlockPos pos, RandomSource rand) {
-		if (stateIn.getValue(CampfireBlock.LIT)) {
+	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+		if (state.getValue(CampfireBlock.LIT)) {
 			double x = (double) pos.getX() + 0.5D;
 			double y = pos.getY();
 			double z = (double) pos.getZ() + 0.5D;
-			if (rand.nextInt(10) == 0) {
+			if (random.nextInt(10) == 0) {
 				level.playLocalSound(x, y, z, ModSounds.BLOCK_STOVE_CRACKLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
 			}
 
-			Direction direction = stateIn.getValue(HorizontalDirectionalBlock.FACING);
+			Direction direction = state.getValue(HorizontalDirectionalBlock.FACING);
 			Direction.Axis direction$axis = direction.getAxis();
-			double horizontalOffset = rand.nextDouble() * 0.6D - 0.3D;
+			double horizontalOffset = random.nextDouble() * 0.6D - 0.3D;
 			double xOffset = direction$axis == Direction.Axis.X ? (double) direction.getStepX() * 0.52D : horizontalOffset;
-			double yOffset = rand.nextDouble() * 6.0D / 16.0D;
+			double yOffset = random.nextDouble() * 6.0D / 16.0D;
 			double zOffset = direction$axis == Direction.Axis.Z ? (double) direction.getStepZ() * 0.52D : horizontalOffset;
 			level.addParticle(ParticleTypes.SMOKE, x + xOffset, y + yOffset, z + zOffset, 0.0D, 0.0D, 0.0D);
 			level.addParticle(ParticleTypes.FLAME, x + xOffset, y + yOffset, z + zOffset, 0.0D, 0.0D, 0.0D);
@@ -203,17 +220,17 @@ public class StoveBlock extends BaseEntityBlock
 
 	@Nullable
 	@Override
-	public PathType getBlockPathType(BlockState state, BlockGetter world, BlockPos pos, @Nullable Mob entity) {
+	public PathType getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob entity) {
 		return state.getValue(LIT) ? PathType.DAMAGE_FIRE : null;
 	}
 
 	@Override
-	public BlockState rotate(BlockState pState, Rotation pRot) {
-		return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
+	public BlockState rotate(BlockState state, Rotation rotation) {
+		return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
 	}
 
 	@Override
-	public BlockState mirror(BlockState pState, Mirror pMirror) {
-		return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
+	public BlockState mirror(BlockState state, Mirror mirror) {
+		return state.rotate(mirror.getRotation(state.getValue(FACING)));
 	}
 }

@@ -26,6 +26,8 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.function.Consumer;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -39,6 +41,8 @@ public class CookingPotRecipeBuilder implements RecipeBuilder
 	private final float experience;
 	private final ItemStack container;
 	private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
+	@Nullable
+	private String namespace;
 
 	public CookingPotRecipeBuilder(ItemLike result, int count, int cookingTime, float experience, @Nullable ItemLike container) {
 		this(new ItemStack(result, count), cookingTime, experience, container);
@@ -117,23 +121,42 @@ public class CookingPotRecipeBuilder implements RecipeBuilder
 		return this;
 	}
 
-	public void build(RecipeOutput output) {
-		ResourceLocation location = BuiltInRegistries.ITEM.getKey(result);
-		save(output, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, location.getPath()));
+	/**
+	 * Sets a custom namespace (mod ID) for the recipe. Use this only if the result isn't registered to the mod ID you want.
+	 */
+	public CookingPotRecipeBuilder setNamespace(String namespace) {
+		this.namespace = namespace;
+		return this;
 	}
 
-	public void build(RecipeOutput outputIn, String save) {
-		ResourceLocation resourcelocation = BuiltInRegistries.ITEM.getKey(result);
-		if ((ResourceLocation.parse(save)).equals(resourcelocation)) {
-			throw new IllegalStateException("Cooking Recipe " + save + " should remove its 'save' argument");
-		} else {
-			save(outputIn, ResourceLocation.parse(save));
-		}
+	public static ResourceLocation getDefaultRecipeId(ItemLike itemLike) {
+		return Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(itemLike.asItem()));
 	}
+
+	/**
+	 * Shorthand for saving recipes in the FD namespace.
+	 */
+	public void saveToFD(RecipeOutput output) {
+		this.setNamespace(FarmersDelight.MODID).save(output);
+	}
+
+	public void save(RecipeOutput output) {
+		ResourceLocation defaultLocation = getDefaultRecipeId(result);
+		save(output, ResourceLocation.fromNamespaceAndPath(this.namespace != null ? namespace : defaultLocation.getNamespace(), defaultLocation.getPath()).withPrefix("cooking/"));
+	}
+
+//	public void build(RecipeOutput outputIn, String save) {
+//		ResourceLocation resourcelocation = BuiltInRegistries.ITEM.getKey(result);
+//		if ((ResourceLocation.parse(save)).equals(resourcelocation)) {
+//			throw new IllegalStateException("Cooking Recipe " + save + " should remove its 'save' argument");
+//		} else {
+//			save(outputIn, ResourceLocation.parse(save));
+//		}
+//	}
 
 	@Override
 	public void save(RecipeOutput output, ResourceLocation id) {
-		ResourceLocation recipeId = id.withPrefix("cooking/");
+		ResourceLocation recipeId = id;
 		Advancement.Builder advancementBuilder = output.advancement()
 				.addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeId))
 				.rewards(AdvancementRewards.Builder.recipe(recipeId))
@@ -148,6 +171,6 @@ public class CookingPotRecipeBuilder implements RecipeBuilder
 				this.experience,
 				this.cookingTime
 		);
-		output.accept(recipeId, recipe, advancementBuilder.build(id.withPrefix("recipes/cooking/")));
+		output.accept(recipeId, recipe, advancementBuilder.build(id.withPrefix("recipes/")));
 	}
 }

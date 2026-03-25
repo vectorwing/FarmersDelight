@@ -1,0 +1,58 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "item": "minecraft:dark_oak_door"
+        },
+        {
+          "item": "minecraft:dark_oak_trapdoor"
+        },
+        {
+          "item": "minecraft:dark_oak_sign"
+        },
+        {
+          "item": "minecraft:dark_oak_hanging_sign"
+        },
+        {
+          "item": "minecraft:dark_oak_fence"
+        },
+        {
+          "item": "minecraft:dark_oak_fence_gate"
+        },
+        {
+          "item": "minecraft:dark_oak_pressure_plate"
+        },
+        {
+          "item": "minecraft:dark_oak_button"
+        },
+        {
+          "item": "minecraft:dark_oak_boat"
+        },
+        {
+          "item": "farmersdelight:dark_oak_cabinet"
+        }
+      ]
+    }
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "count": 1,
+        "id": "minecraft:dark_oak_planks"
+      }
+    }
+  ],
+  "tool": [
+    {
+      "type": "farmersdelight:item_ability",
+      "action": "axe_dig"
+    },
+    {
+      "tag": "minecraft:axes"
+    }
+  ]
+}

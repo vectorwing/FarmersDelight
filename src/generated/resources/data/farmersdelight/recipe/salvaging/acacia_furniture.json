@@ -1,0 +1,58 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "item": "minecraft:acacia_door"
+        },
+        {
+          "item": "minecraft:acacia_trapdoor"
+        },
+        {
+          "item": "minecraft:acacia_sign"
+        },
+        {
+          "item": "minecraft:acacia_hanging_sign"
+        },
+        {
+          "item": "minecraft:acacia_fence"
+        },
+        {
+          "item": "minecraft:acacia_fence_gate"
+        },
+        {
+          "item": "minecraft:acacia_pressure_plate"
+        },
+        {
+          "item": "minecraft:acacia_button"
+        },
+        {
+          "item": "minecraft:acacia_boat"
+        },
+        {
+          "item": "farmersdelight:acacia_cabinet"
+        }
+      ]
+    }
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "count": 1,
+        "id": "minecraft:acacia_planks"
+      }
+    }
+  ],
+  "tool": [
+    {
+      "type": "farmersdelight:item_ability",
+      "action": "axe_dig"
+    },
+    {
+      "tag": "minecraft:axes"
+    }
+  ]
+}
