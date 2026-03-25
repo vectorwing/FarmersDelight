@@ -20,7 +20,7 @@ public class NourishmentEffect extends MobEffect
 
 	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
 		if (entity.getCommandSenderWorld().isClientSide) {
-			return false;
+			return true;
 		}
 
 		if (entity instanceof Player player) {
