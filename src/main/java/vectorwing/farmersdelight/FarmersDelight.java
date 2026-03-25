@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.client.event.ClientSetupEvents;
 import vectorwing.farmersdelight.common.CommonSetup;
 import vectorwing.farmersdelight.common.Configuration;
+import vectorwing.farmersdelight.common.registry.RegistryAliases;
 import vectorwing.farmersdelight.common.registry.*;
 import vectorwing.farmersdelight.common.world.VillageStructures;
 
@@ -50,6 +51,8 @@ public class FarmersDelight
 		ModConditionCodecs.CONDITION_CODECS.register(modEventBus);
 		ModIngredientTypes.INGREDIENT_TYPES.register(modEventBus);
 		ModAdvancements.TRIGGERS.register(modEventBus);
+
+		RegistryAliases.addRegistryAliases();
 
 		NeoForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
 	}
