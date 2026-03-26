@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.BoneMealItem;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -15,7 +14,9 @@ import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.util.TriState;
+import net.neoforged.neoforge.network.PacketDistributor;
 import vectorwing.farmersdelight.common.Configuration;
+import vectorwing.farmersdelight.common.network.payload.RichSoilBoostParticlesPayload;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
@@ -64,8 +65,7 @@ public class RichSoilBlock extends Block
 		if (plantState.getBlock() instanceof BonemealableBlock growable) {
 			if (growable.isValidBonemealTarget(level, plantPos, plantState) && CommonHooks.canCropGrow(level, plantPos, plantState, true)) {
 				growable.performBonemeal(level, level.random, plantPos, plantState);
-//				level.levelEvent(1505, plantPos, 15);
-//				BoneMealItem.addGrowthParticles(level, plantPos, 15);		// TODO: Restoring these particles may require a network packet.
+				PacketDistributor.sendToPlayersTrackingChunk(level, level.getChunkAt(plantPos).getPos(), new RichSoilBoostParticlesPayload(plantPos));
 				CommonHooks.fireCropGrowPost(level, plantPos, plantState);
 				return true;
 			}
