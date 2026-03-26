@@ -31,14 +31,12 @@ public class CommonTags
 
 	public static class Items
 	{
-		// Tags under the "crops" subgroup.
 		public static final TagKey<Item> CROPS_CABBAGE = commonItemTag("crops/cabbage");
 		public static final TagKey<Item> CROPS_TOMATO = commonItemTag("crops/tomato");
 		public static final TagKey<Item> CROPS_ONION = commonItemTag("crops/onion");
 		public static final TagKey<Item> CROPS_RICE = commonItemTag("crops/rice");
 		public static final TagKey<Item> CROPS_GRAIN = commonItemTag("crops/grain");
 
-		// Tags under the "foods" subgroup.
 		public static final TagKey<Item> FOODS_CABBAGE = commonItemTag("foods/cabbage");
 		public static final TagKey<Item> FOODS_TOMATO = commonItemTag("foods/tomato");
 		public static final TagKey<Item> FOODS_ONION = commonItemTag("foods/onion");
@@ -66,7 +64,6 @@ public class CommonTags
 		public static final TagKey<Item> FOODS_COOKED_COD = commonItemTag("foods/cooked_cod");
 		public static final TagKey<Item> FOODS_COOKED_SALMON = commonItemTag("foods/cooked_salmon");
 
-		// Tags under the "tools" subgroup.
 		public static final TagKey<Item> TOOLS_KNIFE = commonItemTag("tools/knife");
 
 		public static final TagKey<Item> STORAGE_BLOCKS_CARROT = commonItemTag("storage_blocks/carrot");
@@ -79,37 +76,6 @@ public class CommonTags
 		public static final TagKey<Item> STORAGE_BLOCKS_RICE_PANICLE = commonItemTag("storage_blocks/rice_panicle");
 		public static final TagKey<Item> STORAGE_BLOCKS_STRAW = commonItemTag("storage_blocks/straw");
 	}
-	////////////////
-
-	// Legacy tags - these have been kept to avoid breakages, but may be removed/changed in the future.
-//	public static final TagKey<Item> RAW_FISHES_TROPICAL = commonItemTag("raw_fish/tropical_fish");
-//	public static final TagKey<Item> SEEDS_CABBAGE = commonItemTag("seeds/cabbage");
-//	public static final TagKey<Item> SEEDS_RICE = commonItemTag("seeds/rice");
-//	public static final TagKey<Item> SEEDS_TOMATO = commonItemTag("seeds/tomato");
-
-//	public static final TagKey<Item> FOODS_DOUGH_WHEAT = commonItemTag("foods/dough/wheat");
-//	public static final TagKey<Item> VEGETABLES_BEETROOT = commonItemTag("vegetables/beetroot");
-//	public static final TagKey<Item> VEGETABLES_CARROT = commonItemTag("vegetables/carrot");
-//	public static final TagKey<Item> VEGETABLES_ONION = commonItemTag("vegetables/onion");
-//	public static final TagKey<Item> VEGETABLES_POTATO = commonItemTag("vegetables/potato");
-//	public static final TagKey<Item> VEGETABLES_TOMATO = commonItemTag("vegetables/tomato");
-//	public static final TagKey<Item> GRAIN_WHEAT = commonItemTag("grain/wheat");
-//	public static final TagKey<Item> GRAIN_RICE = commonItemTag("grain/rice");
-//	public static final TagKey<Item> MILK_BUCKET = commonItemTag("foods/milk/milk_bucket");
-//	public static final TagKey<Item> MILK_BOTTLE = commonItemTag("foods/milk/milk_bottle");
-//	public static final TagKey<Item> PASTA_RAW_PASTA = commonItemTag("foods/pasta/raw_pasta");
-
-//	public static final TagKey<Item> BERRIES = forgeItemTag("berries");
-//	public static final TagKey<Item> BREAD = forgeItemTag("bread");
-//	public static final TagKey<Item> BREAD_WHEAT = forgeItemTag("bread/wheat");
-//	public static final TagKey<Item> COOKED_FISHES = commonItemTag("cooked_fish");
-//	public static final TagKey<Item> EGGS = commonItemTag("eggs");
-//	public static final TagKey<Item> SEEDS = commonItemTag("seeds");
-//	public static final TagKey<Item> VEGETABLES = commonItemTag("vegetables");
-//	public static final TagKey<Item> TOOLS = commonItemTag("tools");
-//	public static final TagKey<Item> TOOLS_AXES = commonItemTag("tools/axes");
-//	public static final TagKey<Item> TOOLS_PICKAXES = commonItemTag("tools/pickaxes");
-//	public static final TagKey<Item> TOOLS_SHOVELS = commonItemTag("tools/shovels");
 
 	private static TagKey<Block> commonBlockTag(String path) {
 		return BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", path));
