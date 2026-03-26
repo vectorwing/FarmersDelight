@@ -268,7 +268,8 @@ public class ItemTags extends ItemTagsProvider
 		tag(Tags.Items.FOODS_PIE)
 				.add(ModItems.APPLE_PIE_SLICE.get())
 				.add(ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get())
-				.add(ModItems.CHOCOLATE_PIE_SLICE.get());
+				.add(ModItems.CHOCOLATE_PIE_SLICE.get())
+				.add(ModItems.PUMPKIN_PIE_SLICE.get());
 
 		tag(Tags.Items.TOOLS).addTag(CommonTags.Items.TOOLS_KNIFE);
 		tag(Tags.Items.ROPES).add(ModItems.ROPE.get());

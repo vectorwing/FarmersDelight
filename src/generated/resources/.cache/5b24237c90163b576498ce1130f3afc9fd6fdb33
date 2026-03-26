@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-25T15:56:09.153457	Tags for minecraft:item mod id farmersdelight
+// 1.21.1	2026-03-26T20:26:37.547269	Tags for minecraft:item mod id farmersdelight
 65eba9e0353834055ff822059bd7e1784fe218ad data/createaddition/tags/item/plants.json
 f55c336a7c0c249fc90b76c979cfa5d5f6a277bf data/createaddition/tags/item/plant_foods.json
 578c1c9a03e76fe2831f34ee8a74b0d5396e7c0e data/create/tags/item/upright_on_belt.json
@@ -32,7 +32,7 @@ e2f69da8312f6b119d15ab810d2f7bc859f85e12 data/c/tags/item/foods/dough.json
 475e2e580d3e2d9e7d241515a791d6925591ca65 data/c/tags/item/foods/leafy_green.json
 67cc2b5a00311a0164d09c5487c714d091be00d9 data/c/tags/item/foods/onion.json
 cc07bf42ee781fd6b78320d408c87a7d65276184 data/c/tags/item/foods/pasta.json
-d9d7a49f23082c99c00ac798987f4ebde4eab7e1 data/c/tags/item/foods/pie.json
+2ab4137036af9ba68d84341e754e663edd00dc0a data/c/tags/item/foods/pie.json
 ef52cc197127c8679eb1c5b78795a4bde37e1d04 data/c/tags/item/foods/raw_bacon.json
 92f699bda4cf5f5533b1f7e80e1f95e32b0192d2 data/c/tags/item/foods/raw_beef.json
 05194311998bffa86a518e72aad4dcfa09f8b745 data/c/tags/item/foods/raw_chicken.json
