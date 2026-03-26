@@ -83,6 +83,9 @@
 - Zombies and Illagers now have a very small chance of dropping an Onion when killed by a player, similar to Carrots and Potatoes;
 - Cats can now be tamed with Salmon Slice and Cod Slice;
 
+### Fixes
+- (1.21+) Fix Skillet crashing when placed, if the server has disabled/removed the Fire Aspect enchantment;
+
 ### Removals
 - The following tags have been removed:
   - `cabbage_roll_ingredients`: Replaced by an array of equivalent tags: `raw_meat`, `raw_fishes`, `mushrooms` and `vegetables`;
