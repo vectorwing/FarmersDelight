@@ -10,7 +10,8 @@
     "KeepRichSoilUntrampledMixin",
     "NourishmentAlwaysEatMixin",
     "PlacePumpkinPieMixin",
-    "RopeFenceConnectionMixin"
+    "RopeFenceConnectionMixin",
+    "VillagersTargetRichSoilMixin"
   ],
   "client": [
     "CanvasSignEditScreenMixin",

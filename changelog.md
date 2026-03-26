@@ -78,6 +78,7 @@
 - All sounds in FD should now have accurate subtitles. Recently added:
   - `food.take_portion`: Used when blocks provide food when used (Cooking Pot, Feasts etc);
   - `pastry.slice`: Used when sweet food blocks, such as Pies, are sliced with a Knife;
+- Farmer Villagers can now detect Rich Soil Farmland as a valid point of interest for crop harvesting (thanks, MehVahdJukaar!);
 - Mushroom Colonies can now be snipped all at once when using a Knife on them;
 - Stoves now only inflict burn in a small "grilling area" on top of them; the edges are safe to step on;
 - Zombies and Illagers now have a very small chance of dropping an Onion when killed by a player, similar to Carrots and Potatoes;
