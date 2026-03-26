@@ -150,6 +150,12 @@
     "farmersdelight:cooked_chicken_cuts",
     "farmersdelight:cooked_cod_slice",
     "farmersdelight:cooked_salmon_slice",
-    "farmersdelight:wheat_dough_from_egg"
+    "farmersdelight:wheat_dough_from_egg",
+    "farmersdelight:wooden_basket",
+    "farmersdelight:cutting/pumpkin_pie",
+    "farmersdelight:rope_fence_gate",
+    "farmersdelight:rope_fence",
+    "farmersdelight:bamboo_basket",
+    "farmersdelight:gleaming_salad_block"
   ]
 }
