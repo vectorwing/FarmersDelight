@@ -22,6 +22,7 @@
   - `farmersdelight:feasts`: Blocks which represent a placeable feast;
   - `farmersdelight:pies`: Blocks which represent a placeable pie;
 - New item tags:
+  - `farmersdelight:snacks`: Items which represent a multi-ingredient food which doesn't need a container (backported from 1.21.1);
   - `farmersdelight:sweets`: Items which represent sweet prepared foods, usually desserts;
   - `farmersdelight:pies`: Items which represent a whole pie;
 

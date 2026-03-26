@@ -72,6 +72,9 @@ public class ModTags
 
 	public static class Items
 	{
+		// Items that represent a multi-ingredient food which isn't contained in a bowl or plate.
+		public static final TagKey<Item> SNACKS = modItemTag("snacks");
+
 		// Items which represent a meal: prepared food contained in a bowl or plate.
 		public static final TagKey<Item> MEALS = modItemTag("meals");
 

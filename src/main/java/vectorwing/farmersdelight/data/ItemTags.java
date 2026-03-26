@@ -49,6 +49,21 @@ public class ItemTags extends ItemTagsProvider
 	}
 
 	private void registerModTags() {
+		tag(ModTags.Items.SNACKS).add(
+				ModItems.BARBECUE_STICK.get(),
+				ModItems.EGG_SANDWICH.get(),
+				ModItems.CHICKEN_SANDWICH.get(),
+				ModItems.HAMBURGER.get(),
+				ModItems.BACON_SANDWICH.get(),
+				ModItems.MUTTON_WRAP.get(),
+				ModItems.DUMPLINGS.get(),
+				ModItems.STUFFED_POTATO.get(),
+				ModItems.CABBAGE_ROLLS.get(),
+				ModItems.SALMON_ROLL.get(),
+				ModItems.COD_ROLL.get(),
+				ModItems.KELP_ROLL.get(),
+				ModItems.KELP_ROLL_SLICE.get()
+		);
 		tag(ModTags.Items.MEALS).add(
 				Items.MUSHROOM_STEW,
 				Items.BEETROOT_SOUP,
