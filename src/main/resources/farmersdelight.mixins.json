@@ -14,6 +14,7 @@
     "RabbitsEatCabbageMixin",
     "RopeFenceConnectionMixin",
     "SoupItemMixin",
+    "VillagersTargetRichSoilMixin",
     "accessor.RecipeManagerAccessor"
   ],
   "client": [

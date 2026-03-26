@@ -146,6 +146,10 @@ dependencies {
     annotationProcessor "com.google.code.gson:gson:2.8.7" // CT dep
 
     // Mixin
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")) {
+        jarJar.ranged(it, "[${mixin_extras_version},)")
+    }
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
