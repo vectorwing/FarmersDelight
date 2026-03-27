@@ -1,4 +1,4 @@
-// 1.20.1	2026-03-26T17:26:40.9250404	Tags for minecraft:item mod id farmersdelight
+// 1.20.1	2026-03-27T17:24:51.4069926	Tags for minecraft:item mod id farmersdelight
 65eba9e0353834055ff822059bd7e1784fe218ad data/createaddition/tags/items/plants.json
 f55c336a7c0c249fc90b76c979cfa5d5f6a277bf data/createaddition/tags/items/plant_foods.json
 578c1c9a03e76fe2831f34ee8a74b0d5396e7c0e data/create/tags/items/upright_on_belt.json
@@ -9,7 +9,7 @@ b51fbc41ab996b99a6b4807508b1fbb7010069c3 data/farmersdelight/tags/items/drinks.j
 e0807dee5085dc45ed2c07737845f88270bc224e data/farmersdelight/tags/items/feasts.json
 573af7240d931c25837df7bf140759f86076b288 data/farmersdelight/tags/items/flat_on_cutting_board.json
 859810b0bf4f36e275af5b6a86c3c7b9a968dbd3 data/farmersdelight/tags/items/hanging_canvas_signs.json
-e43d8aa2b63e6853110f172f9b835c6f61580915 data/farmersdelight/tags/items/meals.json
+ccfa3b08069d06ce1fe3e23e3cfa19f8ecf44e15 data/farmersdelight/tags/items/meals.json
 3c0ae55321aa932ca588fba70a103c5d62acaebc data/farmersdelight/tags/items/mushroom_colonies.json
 c3e930dad76c9cbf50c1fc53fa493632e943a4e5 data/farmersdelight/tags/items/pies.json
 d837fdcf195d0755d48909cc19e0ad7aed1c4c72 data/farmersdelight/tags/items/serving_containers.json

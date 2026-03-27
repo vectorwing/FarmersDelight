@@ -431,6 +431,8 @@ public class ModItems
 			() -> new ConsumableItem(bowlFoodItem(FoodValues.BAKED_COD_STEW)));
 	public static final RegistryObject<Item> NOODLE_SOUP = registerWithTab("noodle_soup",
 			() -> new ConsumableItem(bowlFoodItem(FoodValues.NOODLE_SOUP)));
+	public static final RegistryObject<Item> ONION_SOUP = registerWithTab("onion_soup",
+			() -> new ConsumableItem(bowlFoodItem(FoodValues.ONION_SOUP)));
 
 	// Plated Meals
 	public static final RegistryObject<Item> BACON_AND_EGGS = registerWithTab("bacon_and_eggs",

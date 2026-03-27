@@ -1,4 +1,4 @@
-// 1.20.1	2026-03-20T17:45:22.3383977	Item Models: farmersdelight
+// 1.20.1	2026-03-27T17:24:51.4069926	Item Models: farmersdelight
 01e23a47f469a0c2107b2a1b6fc7f7c8f0c23d55 assets/farmersdelight/models/item/acacia_cabinet.json
 a58cc863fafd0f13d1235a2f7344b446f853ae55 assets/farmersdelight/models/item/apple_cider.json
 8348e66b9efe6a92614cca78c3463d3efaea57fa assets/farmersdelight/models/item/apple_pie.json
@@ -108,6 +108,7 @@ b0ef7784e4c3dc2ea1d66b3e81cbf592bb4a4722 assets/farmersdelight/models/item/nethe
 c618156e552a2b76ffc9c0407cb2ae5bb3170e1a assets/farmersdelight/models/item/oak_cabinet.json
 8238d120d6fb4abb3e3fc1c6a3a1e4e7ae6b54d9 assets/farmersdelight/models/item/onion.json
 5d84cfa5c552be830a7714fe23a43d857416c931 assets/farmersdelight/models/item/onion_crate.json
+719de2e57e084b100323aae588e7cb4c8753378c assets/farmersdelight/models/item/onion_soup.json
 396cd864adc7fbdb4c80ad81cc883ce2d975ae1c assets/farmersdelight/models/item/orange_canvas_sign.json
 a8c85cf3bfcd9253aeb47b6d644d48ffb3aada2c assets/farmersdelight/models/item/orange_hanging_canvas_sign.json
 6508ad0722f28b2bb4d0a9e508c6ed17cdd9af45 assets/farmersdelight/models/item/organic_compost.json

@@ -1,4 +1,4 @@
-// 1.20.1	2026-02-26T14:51:33.023393	Advancements
+// 1.20.1	2026-03-27T17:24:51.4217615	Advancements
 be62d0c11bfa1de4eebb4613de24770a232ed6d4 data/farmersdelight/advancements/main/craft_knife.json
 52188228baca1e2b7d7bf33a9b7f909d1de2ed26 data/farmersdelight/advancements/main/eat_nourishing_food.json
 f7b7ba8cbd4f1fb1fbe48c1ebaf175e05d68eb1d data/farmersdelight/advancements/main/get_fd_seed.json
@@ -8,7 +8,7 @@ c709dcb84ac9e8410e83b60a8556f7a2e2da7270 data/farmersdelight/advancements/main/g
 3dc807ff586a996f11f7980daa1495a34256a7c6 data/farmersdelight/advancements/main/harvest_ropelogged_tomato.json
 756b39991258350adacd3c625cb0cd644c807051 data/farmersdelight/advancements/main/harvest_straw.json
 82a677c15bb0c02b8945e10e5d1272a5706adae4 data/farmersdelight/advancements/main/hit_raider_with_rotten_tomato.json
-319b34830c0d620718d7a6fe422268eb9512a0ca data/farmersdelight/advancements/main/master_chef.json
+cdf0465a8c8167e98a721dc1347dcfe6742bc3a3 data/farmersdelight/advancements/main/master_chef.json
 b887c07f3650d1990992cd0a37dbd93197543787 data/farmersdelight/advancements/main/obtain_netherite_knife.json
 0b6defdd554439dc3b0414c32a37195206bf70bd data/farmersdelight/advancements/main/place_campfire.json
 7612beb177be2640956e043fecc2e830613f1525 data/farmersdelight/advancements/main/place_cooking_pot.json

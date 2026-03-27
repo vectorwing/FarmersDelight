@@ -1,4 +1,4 @@
-// 1.20.1	2026-03-22T20:15:58.5903357	Recipes
+// 1.20.1	2026-03-27T17:24:51.4167559	Recipes
 169cfc1d11ca3cede161363799f6c0e00bc1412e data/farmersdelight/advancements/recipes/beetroot_crate.json
 a498fcc8b72b6631ddbb164a0245b37491e7571a data/farmersdelight/advancements/recipes/building_blocks/cabbage_crate.json
 c941206993bfa59d31b38132b898fb94c29746a6 data/farmersdelight/advancements/recipes/building_blocks/onion_crate.json
@@ -35,6 +35,7 @@ c381a5141e694e49cf9d4c50a3a75672e49991bb data/farmersdelight/advancements/recipe
 2cf901eee9813a4e538707ba38e600e77c5e0607 data/farmersdelight/advancements/recipes/cooking/mushroom_rice.json
 1e08bcd640b9b6bb16e3160697e44942fe3bccbd data/farmersdelight/advancements/recipes/cooking/mushroom_stew.json
 dc74c27bf5ec65015e9ff3524390344f3eee9660 data/farmersdelight/advancements/recipes/cooking/noodle_soup.json
+08fa2212beb569bff99c5ddf2f063c7080dbb664 data/farmersdelight/advancements/recipes/cooking/onion_soup.json
 4a98a51240ccd3dd6b07b438762eeee2533787b0 data/farmersdelight/advancements/recipes/cooking/pasta_with_meatballs.json
 9e12d431e57b372842105cdbd82467e9bfe22899 data/farmersdelight/advancements/recipes/cooking/pasta_with_mutton_chop.json
 d2e2391404cbd730497e4f80065e1e5aea1338f3 data/farmersdelight/advancements/recipes/cooking/pumpkin_soup.json
@@ -266,6 +267,7 @@ ebba30b54cb1f20e7c0ac5a4465b4b2d57cb7114 data/farmersdelight/recipes/cooking/hot
 badbcb72c95e70251fcb92539c69cae20fcbc263 data/farmersdelight/recipes/cooking/mushroom_rice.json
 7246cea787d8f227e0a6fbc65c72a2853eeb8392 data/farmersdelight/recipes/cooking/mushroom_stew.json
 f011c578fe25eb997c6ab426d541e61ba7a0a36e data/farmersdelight/recipes/cooking/noodle_soup.json
+bb87ae2dbc5e57b7fa896a816ef96aedf2a6484b data/farmersdelight/recipes/cooking/onion_soup.json
 3bea501eab080d4055b0f88b69797c1954420f27 data/farmersdelight/recipes/cooking/pasta_with_meatballs.json
 2dd152a294f2711621e408aea994ac703f23d8c5 data/farmersdelight/recipes/cooking/pasta_with_mutton_chop.json
 1df5705ae191910f95c33915405dfd62381a533c data/farmersdelight/recipes/cooking/pumpkin_soup.json

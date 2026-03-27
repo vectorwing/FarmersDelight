@@ -79,6 +79,7 @@ public class ItemTags extends ItemTagsProvider
 				ModItems.PUMPKIN_SOUP.get(),
 				ModItems.BAKED_COD_STEW.get(),
 				ModItems.NOODLE_SOUP.get(),
+				ModItems.ONION_SOUP.get(),
 				ModItems.BACON_AND_EGGS.get(),
 				ModItems.RATATOUILLE.get(),
 				ModItems.STEAK_AND_POTATOES.get(),

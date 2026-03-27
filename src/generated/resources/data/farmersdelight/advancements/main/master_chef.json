@@ -141,6 +141,16 @@
       },
       "trigger": "minecraft:consume_item"
     },
+    "onion_soup": {
+      "conditions": {
+        "item": {
+          "items": [
+            "farmersdelight:onion_soup"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
     "pasta_with_meatballs": {
       "conditions": {
         "item": {
@@ -310,6 +320,9 @@
     ],
     [
       "noodle_soup"
+    ],
+    [
+      "onion_soup"
     ],
     [
       "bacon_and_eggs"
