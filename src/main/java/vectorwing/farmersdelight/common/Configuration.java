@@ -53,7 +53,7 @@ public class Configuration
 	static {
 		ModConfigSpec.Builder COMMON_BUILDER = new ModConfigSpec.Builder();
 
-		COMMON_BUILDER.comment("Game settings").push(CATEGORY_SETTINGS);
+		COMMON_BUILDER.push(CATEGORY_SETTINGS);
 		ENABLE_FARMERS_BUY_FD_CROPS = COMMON_BUILDER.comment("If enabled, Novice and Apprentice Farmer villagers will have a chance to buy crops from this mod.")
 				.define("enableFarmerFDTrades", true);
 		ENABLE_WANDERING_TRADER_SELLS_FD_ITEMS = COMMON_BUILDER.comment("If enabled, the Wandering Trader will have a chance to sell seeds and plantables from this mod.")
@@ -65,7 +65,7 @@ public class Configuration
 				.defineList("canvasSignDarkBackgroundList", ImmutableList.of("gray", "purple", "blue", "brown", "green", "red", "black"), obj -> true);
 		COMMON_BUILDER.pop();
 
-		COMMON_BUILDER.comment("Farming").push(CATEGORY_FARMING);
+		COMMON_BUILDER.push(CATEGORY_FARMING);
 		RICH_SOIL_BOOST_CHANCE = COMMON_BUILDER.comment("The chance (in decimal percentage) of Rich Soil providing a bone meal boost to a crop planted on it. Set to 0.0 to disable.")
 				.defineInRange("richSoilBoostChance", 0.2, 0.0, 1.0);
 		ENABLE_TOMATO_VINE_CLIMBING_TAGGED_ROPES = COMMON_BUILDER.comment("If enabled, tomato crops will be able to climb any rope tagged as farmersdelight:ropes. If disabled, this will be restricted to this mod's rope only.")
@@ -75,7 +75,7 @@ public class Configuration
 				.define("defaultTomatoVineRope", "farmersdelight:rope");
 		COMMON_BUILDER.pop();
 
-		COMMON_BUILDER.comment("Crafting").push(CATEGORY_CRAFTING);
+		COMMON_BUILDER.push(CATEGORY_CRAFTING);
 		ENABLE_COOKING_POT_RECIPE_BOOK = COMMON_BUILDER.comment("If enabled, the Cooking Pot will provide a Recipe Book on its interface, similar to the one on Crafting Tables and Furnaces.")
 				.define("enableCookingPotRecipeBook", true);
 		ENABLE_VANILLA_CROP_CRATES = COMMON_BUILDER.comment("If enabled, storage crates (3x3) for vanilla crops (similar to Quark and Thermal Cultivation) will become craftable.")
@@ -84,7 +84,7 @@ public class Configuration
 				.defineInRange("cuttingBoardFortuneBonus", 0.1, 0.0, 1.0);
 		COMMON_BUILDER.pop();
 
-		COMMON_BUILDER.comment("Vanilla item overrides").push(CATEGORY_OVERRIDES);
+		COMMON_BUILDER.push(CATEGORY_OVERRIDES);
 		ENABLE_VANILLA_SOUP_EXTRA_EFFECTS = COMMON_BUILDER.comment("If enabled, soups and stews from Minecraft will grant Nourishment when eaten, similar to meals from this mod.")
 				.define("enableVanillaSoupExtraEffects", true);
 		ENABLE_RABBIT_STEW_BUFF = COMMON_BUILDER.comment("If enabled, Rabbit Stew will be given improved food stats, to match its crafting cost.")
@@ -94,7 +94,7 @@ public class Configuration
 		ENABLE_DISPENSER_TOOLS_CUTTING_BOARD = COMMON_BUILDER.comment("If enabled, the Dispenser will be able to operate a Cutting Board in front of itself, using stored items as cutting tools.")
 				.define("enableCuttingBoardDispenserBehavior", true);
 
-		COMMON_BUILDER.comment("Stack size overrides").push(CATEGORY_OVERRIDES_STACK_SIZE);
+		COMMON_BUILDER.push(CATEGORY_OVERRIDES_STACK_SIZE);
 		ENABLE_STACKABLE_SOUP_ITEMS = COMMON_BUILDER.comment("If enabled, any BowlFoodItem in the following list become stackable to 16, much like Farmer's Delight's meals.")
 				.define("enableStackableSoupItems", true);
 		SOUP_ITEM_LIST = COMMON_BUILDER.comment("List of targeted food items. They must extend the BowlFoodItem class in code to be affected. Defaults to vanilla soups and stews.")
@@ -102,7 +102,7 @@ public class Configuration
 		COMMON_BUILDER.pop();
 		COMMON_BUILDER.pop();
 
-		COMMON_BUILDER.comment("World generation").push(CATEGORY_WORLD);
+		COMMON_BUILDER.push(CATEGORY_WORLD);
 		GENERATE_FD_CHEST_LOOT = COMMON_BUILDER.comment("If enabled, new loot pools will be added to chest loot across the game, containing items from this mod (ropes, crops, tools etc).")
 				.define("generateFDChestLoot", true);
 		GENERATE_VILLAGE_COMPOST_HEAPS = COMMON_BUILDER.comment("If enabled, Compost Heaps (structures containing Organic Compost piles) will sometimes generate across Villages.")
@@ -111,8 +111,7 @@ public class Configuration
 				.define("generateFDCropsOnVillageFarms", true);
 		COMMON_BUILDER.pop();
 
-
-		COMMON_BUILDER.comment("Debug settings (Not meant for gameplay)").push(CATEGORY_DEBUG);
+		COMMON_BUILDER.push(CATEGORY_DEBUG);
 		ENABLE_TOMATO_ROPE_PERMANENCE = COMMON_BUILDER
 				.comment("Tomato crops hanging on rope will force-place a Rope block when broken. Due to technical limitations, this affects things such as commands, making them fail to 'setblock' at first.")
 				.comment("Disable this if this block is preventing you from editing a region in creative or with commands. For normal gameplay, I recommend leaving this enabled.")

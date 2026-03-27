@@ -454,5 +454,75 @@
   "tag.item.farmersdelight.straw_harvesters": "Straw Harvesters",
   "tag.item.farmersdelight.sweets": "Sweets",
   "tag.item.farmersdelight.tools.knives": "Knives",
-  "tag.item.farmersdelight.wild_crops": "Wild Crops"
+  "tag.item.farmersdelight.wild_crops": "Wild Crops",
+
+  "farmersdelight.configuration.title": "Farmer's Delight Configuration",
+
+  "farmersdelight.configuration.section.farmersdelight.client.toml": "Client settings",
+  "farmersdelight.configuration.section.farmersdelight.client.toml.title": "Client settings",
+  "farmersdelight.configuration.section.farmersdelight.common.toml": "Common settings",
+  "farmersdelight.configuration.section.farmersdelight.common.toml.title": "Common settings",
+
+  "farmersdelight.configuration.settings": "Game Settings",
+  "farmersdelight.configuration.farming": "Farming",
+  "farmersdelight.configuration.crafting": "Crafting",
+  "farmersdelight.configuration.overrides": "Vanilla Item Overrides",
+  "farmersdelight.configuration.stack_size": "Stack Size Overrides",
+  "farmersdelight.configuration.world": "World Generation",
+  "farmersdelight.configuration.debug": "Debug Settings",
+  "farmersdelight.configuration.debug.tooltip": "This section is solely for testing purposes and is not meant for gameplay.",
+
+  "farmersdelight.configuration.enableFarmerFDTrades": "Special Farmer Trades",
+  "farmersdelight.configuration.enableFarmerFDTrades.tooltip": "If enabled, Novice and Apprentice Farmer villagers will have a chance to buy crops from this mod.",
+  "farmersdelight.configuration.enableWanderingTraderFDTrades": "Special Wandering Trader Trades",
+  "farmersdelight.configuration.enableWanderingTraderFDTrades.tooltip": "If enabled, the Wandering Trader will have a chance to sell seeds and plantables from this mod.",
+  "farmersdelight.configuration.enableRopeReeling": "Rope Reeling",
+  "farmersdelight.configuration.enableRopeReeling.tooltip": "If enabled, players will be able to reel back rope, bottom to top, when sneak-using with an empty hand on them.",
+  "farmersdelight.configuration.canvasSignDarkBackgroundList": "Dark Background Canvas Signs",
+  "farmersdelight.configuration.canvasSignDarkBackgroundList.tooltip": "A list of dye colors that, when used as the background color of a Canvas Sign, should default to white text when placed.\n\nDyes:\n[\"white\", \"orange\", \"magenta\", \"light_blue\", \"yellow\", \"lime\", \"pink\", \"gray\", \"light_gray\", \"cyan\", \"purple\", \"blue\", \"brown\", \"green\", \"red\", \"black\"]",
+
+  "farmersdelight.configuration.richSoilBoostChance": "Rich Soil Boost Chance",
+  "farmersdelight.configuration.richSoilBoostChance.tooltip": "The chance (in decimal percentage) of Rich Soil providing a bone meal boost to a crop planted on it. Set to 0.0 to disable.",
+  "farmersdelight.configuration.enableTomatoVineClimbingTaggedRopes": "Tomato Vine Climbs Tagged Ropes",
+  "farmersdelight.configuration.enableTomatoVineClimbingTaggedRopes.tooltip": "If enabled, tomato crops will be able to climb any rope tagged as farmersdelight:ropes. If disabled, this will be restricted to this mod's rope only.\n\n§lBeware: this will convert these blocks into the block specified in defaultTomatoVineRope.§r",
+  "farmersdelight.configuration.defaultTomatoVineRope": "Default Tomato Vine Rope",
+  "farmersdelight.configuration.defaultTomatoVineRope.tooltip": "Which rope should Tomato Vines leave behind when broken?",
+
+  "farmersdelight.configuration.enableCookingPotRecipeBook": "Cooking Pot Recipe Book",
+  "farmersdelight.configuration.enableCookingPotRecipeBook.tooltip": "If enabled, the Cooking Pot will provide a Recipe Book on its interface, similar to the one on Crafting Tables and Furnaces.",
+  "farmersdelight.configuration.enableVanillaCropCrates": "Vanilla Crop Crates",
+  "farmersdelight.configuration.enableVanillaCropCrates.tooltip": "If enabled, storage crates (3x3) for vanilla crops (similar to Quark and Thermal Cultivation) will become craftable.",
+  "farmersdelight.configuration.cuttingBoardFortuneBonus": "Cutting Board Fortune Bonus",
+  "farmersdelight.configuration.cuttingBoardFortuneBonus.tooltip": "How much (in decimal percentage) should each level of Fortune increase the odds of obtaining rare results on the Cutting Board? Set to 0.0 to disable.",
+
+  "farmersdelight.configuration.enableVanillaSoupExtraEffects": "Vanilla Soup Extra Effects",
+  "farmersdelight.configuration.enableVanillaSoupExtraEffects.tooltip": "If enabled, soups and stews from Minecraft will grant Nourishment when eaten, similar to meals from this mod.",
+  "farmersdelight.configuration.enableRabbitStewBuff": "Rabbit Stew Buff",
+  "farmersdelight.configuration.enableRabbitStewBuff.tooltip": "If enabled, Rabbit Stew will be given improved food stats, to match its crafting cost.",
+  "farmersdelight.configuration.enablePumpkinPieSneakToPlace": "Sneak to Place Pumpkin Pie",
+  "farmersdelight.configuration.enablePumpkinPieSneakToPlace.tooltip": "If enabled, Pumpkin Pie will require the user to sneak to place it down as a block.",
+  "farmersdelight.configuration.enableCuttingBoardDispenserBehavior": "Cutting Board Dispenser Behavior",
+  "farmersdelight.configuration.enableCuttingBoardDispenserBehavior.tooltip": "If enabled, the Dispenser will be able to operate a Cutting Board in front of itself, using stored items as cutting tools.",
+
+  "farmersdelight.configuration.enableStackableSoupItems": "Stackable Soup Items",
+  "farmersdelight.configuration.enableStackableSoupItems.tooltip": "If enabled, any BowlFoodItem in the following list become stackable to 16, much like Farmer's Delight's meals.",
+  "farmersdelight.configuration.soupItemList": "Soup Items",
+  "farmersdelight.configuration.soupItemList.tooltip": "List of targeted food items. They must extend the BowlFoodItem class in code to be affected. Defaults to vanilla soups and stews.",
+
+  "farmersdelight.configuration.generateFDChestLoot": "Generate Mod Chest Loot",
+  "farmersdelight.configuration.generateFDChestLoot.tooltip": "If enabled, new loot pools will be added to chest loot across the game, containing items from this mod (ropes, crops, tools etc).",
+  "farmersdelight.configuration.generateVillageCompostHeaps": "Generate Village Compost Heaps",
+  "farmersdelight.configuration.generateVillageCompostHeaps.tooltip": "If enabled, Compost Heaps (structures containing Organic Compost piles) will sometimes generate across Villages.",
+  "farmersdelight.configuration.generateFDCropsOnVillageFarms": "Generate Mod Crops on Village Farms",
+  "farmersdelight.configuration.generateFDCropsOnVillageFarms.tooltip": "If enabled, crops from Farmer's Delight will sometimes replace standard crops in village farm plots.",
+
+  "farmersdelight.configuration.enableTomatoRopePermanence": "Tomato Rope Permanence",
+  "farmersdelight.configuration.enableTomatoRopePermanence.tooltip": "Tomato crops hanging on rope will force-place a Rope block when broken. Due to technical limitations, this affects things such as commands, making them fail to 'setblock' at first.\n\nDisable this if this block is preventing you from editing a region in creative or with commands. For normal gameplay, I recommend leaving this enabled.",
+
+  "farmersdelight.configuration.enableNourishmentHungerOverlay": "Nourishment Hunger Overlay",
+  "farmersdelight.configuration.enableNourishmentHungerOverlay.tooltip": "If enabled, a gilded overlay will be shown over the food meter when the player has the Nourishment effect.",
+  "farmersdelight.configuration.enableComfortHealthOverlay": "Comfort Health Overlay",
+  "farmersdelight.configuration.enableComfortHealthOverlay.tooltip": "If enabled, a scrolling overlay will be shown over the health meter when the player has the Comfort effect.",
+  "farmersdelight.configuration.enableFoodEffectTooltip": "Food Effect Tooltip",
+  "farmersdelight.configuration.enableFoodEffectTooltip.tooltip": "If enabled, food items will display tooltips showing which effects they grant when eaten, if any. Applies to foods from both Minecraft and this mod."
 }
