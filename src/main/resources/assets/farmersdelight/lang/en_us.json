@@ -456,7 +456,7 @@
   "tag.item.farmersdelight.tools.knives": "Knives",
   "tag.item.farmersdelight.wild_crops": "Wild Crops",
 
-  "farmersdelight.configuration.title": "Farmer's Delight Configuration",
+  "farmersdelight.configuration.title": "Farmer's Delight - Settings",
 
   "farmersdelight.configuration.section.farmersdelight.client.toml": "Client settings",
   "farmersdelight.configuration.section.farmersdelight.client.toml.title": "Client settings",
@@ -466,11 +466,11 @@
   "farmersdelight.configuration.settings": "Game Settings",
   "farmersdelight.configuration.farming": "Farming",
   "farmersdelight.configuration.crafting": "Crafting",
-  "farmersdelight.configuration.overrides": "Vanilla Item Overrides",
+  "farmersdelight.configuration.overrides": "Vanilla Overrides",
   "farmersdelight.configuration.stack_size": "Stack Size Overrides",
   "farmersdelight.configuration.world": "World Generation",
   "farmersdelight.configuration.debug": "Debug Settings",
-  "farmersdelight.configuration.debug.tooltip": "This section is solely for testing purposes and is not meant for gameplay.",
+  "farmersdelight.configuration.debug.tooltip": "§lWarning:§r This section is not meant for standard gameplay.",
 
   "farmersdelight.configuration.enableFarmerFDTrades": "Special Farmer Trades",
   "farmersdelight.configuration.enableFarmerFDTrades.tooltip": "If enabled, Novice and Apprentice Farmer villagers will have a chance to buy crops from this mod.",
