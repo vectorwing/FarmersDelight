@@ -3,13 +3,13 @@
   "experience": 1.0,
   "ingredients": [
     {
-      "item": "minecraft:carrot"
+      "tag": "c:crops/carrot"
     },
     {
-      "item": "minecraft:potato"
+      "tag": "c:crops/potato"
     },
     {
-      "item": "minecraft:beetroot"
+      "tag": "c:crops/beetroot"
     },
     {
       "tag": "c:foods/leafy_green"

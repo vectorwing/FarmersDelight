@@ -1,53 +1,58 @@
 {
-  "credit": "Made with Blockbench",
+  "format_version": "1.9.0",
   "parent": "block/block",
+  "render_type": "minecraft:cutout",
   "textures": {
+    "top": "farmersdelight:block/stuffed_pumpkin_top_eaten",
+    "side": "farmersdelight:block/stuffed_pumpkin_side",
     "particle": "farmersdelight:block/stuffed_pumpkin_bottom",
     "bottom": "farmersdelight:block/stuffed_pumpkin_bottom",
-    "details": "farmersdelight:block/stuffed_pumpkin_details",
-    "side": "farmersdelight:block/stuffed_pumpkin_side",
-    "top": "farmersdelight:block/stuffed_pumpkin_top_eaten"
+    "details": "farmersdelight:block/stuffed_pumpkin_details"
   },
   "elements": [
     {
-      "name": "spoon",
-      "from": [8, 5, 7],
-      "to": [10, 15, 9],
-      "rotation": {"angle": -22.5, "axis": "z", "origin": [9, 6, 8]},
-      "faces": {
-        "north": {"uv": [2, 3, 4, 13], "texture": "#details"},
-        "east": {"uv": [2, 3, 4, 13], "rotation": 180, "texture": "#details"},
-        "south": {"uv": [2, 3, 4, 13], "texture": "#details"},
-        "west": {"uv": [2, 3, 4, 13], "rotation": 180, "texture": "#details"},
-        "up": {"uv": [2, 1, 4, 3], "texture": "#details"},
-        "down": {"uv": [2, 1, 4, 3], "texture": "#details"}
-      }
-    },
-    {
-      "name": "stuffing",
-      "from": [4, 7, 4],
-      "to": [12, 9, 12],
-      "faces": {
-        "north": {"uv": [6, 4, 14, 6], "rotation": 180, "texture": "#details"},
-        "east": {"uv": [12, 4, 14, 12], "rotation": 90, "texture": "#details"},
-        "south": {"uv": [6, 10, 14, 12], "texture": "#details"},
-        "west": {"uv": [6, 4, 8, 12], "rotation": 270, "texture": "#details"},
-        "up": {"uv": [6, 4, 14, 12], "texture": "#details"},
-        "down": {"uv": [6, 4, 14, 12], "texture": "#details"}
-      }
-    },
-    {
       "name": "pumpkin",
       "from": [2, 0, 2],
-      "to": [14, 8, 14],
+      "to": [14, 6, 14],
       "faces": {
-        "north": {"uv": [2, 8, 14, 16], "texture": "#side"},
-        "east": {"uv": [2, 8, 14, 16], "texture": "#side"},
-        "south": {"uv": [2, 8, 14, 16], "texture": "#side"},
-        "west": {"uv": [2, 8, 14, 16], "texture": "#side"},
+        "north": {"uv": [2, 10, 14, 16], "texture": "#side"},
+        "east": {"uv": [2, 10, 14, 16], "texture": "#side"},
+        "south": {"uv": [2, 10, 14, 16], "texture": "#side"},
+        "west": {"uv": [2, 10, 14, 16], "texture": "#side"},
         "up": {"uv": [2, 2, 14, 14], "texture": "#top"},
-        "down": {"uv": [2, 2, 14, 14], "texture": "#bottom"}
+        "down": {"uv": [2, 2, 14, 14], "texture": "#bottom", "cullface": "down"}
       }
+    },
+    {
+      "name": "filling",
+      "from": [4, 6, 4],
+      "to": [12, 7, 12],
+      "faces": {
+        "north": {"uv": [7, 0, 8, 8], "rotation": 90, "texture": "#details"},
+        "east": {"uv": [0, 7, 8, 8], "texture": "#details"},
+        "south": {"uv": [0, 0, 1, 8], "rotation": 270, "texture": "#details"},
+        "west": {"uv": [0, 0, 8, 1], "rotation": 180, "texture": "#details"},
+        "up": {"uv": [0, 0, 8, 8], "rotation": 270, "texture": "#details"}
+      }
+    },
+    {
+      "name": "berry_leaves",
+      "from": [10, 6, 12],
+      "to": [13, 10, 12],
+      "shade": false,
+      "rotation": {"angle": 22.5, "axis": "x", "origin": [10, 6, 12]},
+      "faces": {
+        "north": {"uv": [2, 12, 5, 16], "texture": "#details"},
+        "south": {"uv": [5, 12, 2, 16], "texture": "#details"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "stage1",
+      "origin": [9, 7, 8],
+      "color": 0,
+      "children": [0, 1, 2]
     }
   ]
 }

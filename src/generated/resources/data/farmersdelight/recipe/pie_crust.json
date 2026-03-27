@@ -3,10 +3,10 @@
   "category": "misc",
   "key": {
     "M": {
-      "tag": "c:foods/milk"
+      "tag": "c:drinks/milk"
     },
     "w": {
-      "item": "minecraft:wheat"
+      "tag": "c:crops/wheat"
     }
   },
   "pattern": [

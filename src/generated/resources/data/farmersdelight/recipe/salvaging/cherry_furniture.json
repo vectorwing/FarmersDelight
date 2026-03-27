@@ -1,0 +1,58 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "item": "minecraft:cherry_door"
+        },
+        {
+          "item": "minecraft:cherry_trapdoor"
+        },
+        {
+          "item": "minecraft:cherry_sign"
+        },
+        {
+          "item": "minecraft:cherry_hanging_sign"
+        },
+        {
+          "item": "minecraft:cherry_fence"
+        },
+        {
+          "item": "minecraft:cherry_fence_gate"
+        },
+        {
+          "item": "minecraft:cherry_pressure_plate"
+        },
+        {
+          "item": "minecraft:cherry_button"
+        },
+        {
+          "item": "minecraft:cherry_boat"
+        },
+        {
+          "item": "farmersdelight:cherry_cabinet"
+        }
+      ]
+    }
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "count": 1,
+        "id": "minecraft:cherry_planks"
+      }
+    }
+  ],
+  "tool": [
+    {
+      "type": "farmersdelight:item_ability",
+      "action": "axe_dig"
+    },
+    {
+      "tag": "minecraft:axes"
+    }
+  ]
+}

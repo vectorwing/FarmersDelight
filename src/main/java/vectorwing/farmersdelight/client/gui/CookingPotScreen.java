@@ -48,7 +48,7 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 		this.titleLabelX = 28;
 		this.recipeBookComponent.init(this.width, this.height, this.minecraft, this.widthTooNarrow, this.menu);
 		this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth);
-		if (Configuration.ENABLE_RECIPE_BOOK_COOKING_POT.get()) {
+		if (Configuration.ENABLE_COOKING_POT_RECIPE_BOOK.get()) {
 			this.addRenderableWidget(new ImageButton(this.leftPos + 5, this.height / 2 - 49, 20, 18, RECIPE_BUTTON, (button) ->
 			{
 				this.recipeBookComponent.toggleVisibility();
@@ -101,9 +101,10 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 				tooltip.add(((MutableComponent) mealStack.getItem().getDescription()).withStyle(mealStack.getRarity().getStyleModifier()));
 
 				ItemStack containerStack = this.menu.blockEntity.getContainer();
-				String container = !containerStack.isEmpty() ? containerStack.getItem().getDescription().getString() : "";
-
-				tooltip.add(TextUtils.getTranslation("container.cooking_pot.served_on", container).withStyle(ChatFormatting.GRAY));
+				if (!containerStack.isEmpty()) {
+					String container = !containerStack.isEmpty() ? containerStack.getItem().getDescription().getString() : "";
+					tooltip.add(TextUtils.getTranslation("container.cooking_pot.served_on", container).withStyle(ChatFormatting.GRAY));
+				}
 
 				gui.renderComponentTooltip(font, tooltip, mouseX, mouseY);
 			} else {
@@ -167,12 +168,6 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 	public void recipesUpdated() {
 		this.recipeBookComponent.recipesUpdated();
 	}
-
-//	@Override
-//	public void removed() {
-//		this.recipeBookComponent.removed();
-//		super.removed();
-//	}
 
 	@Override
 	@Nonnull

@@ -1,5 +1,247 @@
 # Changelog
 
+## 1.3.0 (WIP)
+
+### Additions
+- New blocks:
+  - **Gleaming Salad** - A salad that shines like a Lush Cave! Made with fresh Glow Berries and a rich selection of vegetables, it will (literally) illuminate your dinner table;
+  - **Rope Fence** - A thin and sleek flavor of fence, complete with its own **Rope Fence Gate**!
+    - Crafted by replacing planks with rope in the standard fence and fence gate recipes;
+  - The **Basket** has gained a **wooden variant**, made with Sticks instead of Bamboo! It functions exactly the same as the existing Basket:
+    - This was done to make the block easier to obtain; Bamboo has unpredictable/unreliable world gen conditions, so locking it behind this material felt pointless;
+    - The old Basket has been renamed to **Bamboo Basket**, and can still be crafted, using Bamboo instead of Sticks;
+    - Both blocks can be salvaged for Canvas and scraps on the Cutting Board, using an axe;
+- Pumpkin Pie can now be **placed as a block**, like the other pies!
+  - By default, it is placeable without secondary action. A config exists to require sneaking, if preferred;
+- Farmer's Delight now has a native **EMI plugin**! (thanks, ChrysanthCow!)
+  - It works similarly to the built-in JEI plugin, but offering compatibility with EMI's unique features, such as chances and recipe trees;
+  - With it, tags have been integrated into translation files. Both JEI and EMI now use them to display tags in-game.
+  - Default recipes have been configured for most FD recipes. I'll try to keep this updated for pack makers, but I may forget now and then.
+- New block tags:
+  - `farmersdelight:planted_from_below`: Plants which are rooted beneath the soil, rather than above. Includes Cave Vines;
+  - `farmersdelight:feasts`: Blocks which represent a placeable feast;
+  - `farmersdelight:pies`: Blocks which represent a placeable pie;
+- New item tags:
+  - `farmersdelight:sweets`: Items which represent sweet prepared foods, usually desserts;
+  - `farmersdelight:pies`: Items which represent a whole pie;
+
+### Updates
+- The Cutting Board has been redesigned:
+  - It can now hold a **full stack of items**, instead of one at a time. This allows players to process their stacks in half the time it took before;
+  - If the board's stack isn't full yet, players can top it up with more items;
+  - When cutting, the status bar will show how many items are left on the board;
+  - Comparator signal will now be based on the fill percentage for the item's max stack size;
+  - All off-hand interaction has been removed. Placing, removing and processing items is done entirely with the main hand;
+- The Nourishment effect has been updated:
+  - The effect will no longer pause to consume hunger, only saturation. This means Nourishment can grant indefinite slow healing, so long as the bar itself is full;
+  - Players are now able to "always eat" when under Nourishment, letting them get more saturation to rapid-heal if they want;
+- The Comfort effect has been retired, as Nourishment now fulfills its role:
+  - All foods which previously granted Comfort now grant an equivalent amount of Nourishment instead;
+  - The effect is still registered in-game to avoid add-ons breaking, but it will be removed in the next major/minor version of the mod;
+- The Skillet's handheld functions have been updated (thanks to MehVahdJukaar, ChrysanthCow and the Refabricated team!):
+  - The Skillet can render foods in handheld mode again;
+  - When cooking handheld, the durability meter will become an orange "frying meter", showing you the cooking progress;
+  - When cooking handheld, you can press the "Attack" button to toss and flip the food inside the skillet. This has no gameplay effect, it's just for fun!;
+- Rich Soil can now boost plants which are `planted_from_below`:
+  - Any bonemealable plant tagged as such will only receive boosts if planted below Rich Soil. Otherwise, they will only be boosted from the top side;
+  - Rich Soil prioritizes boosting a plant above before boosting a plant below, so the bottom plant will only be chosen if the one above cannot be boosted further;
+- Tomato crops have been updated:
+  - Instead of a blockstate, grown tomato vines are now divided between `tomatoes` (old block) and `tomatoes_on_rope` (new):
+    - This was done to fix broken behaviours with vanilla bees, modded autofarming solutions and other things. It should be more resilient to bugs now (hopefully)!;
+    - Existing `tomatoes` with `ropelogged=true` will have a "pale" appearance, and convert into `tomatoes_on_rope` on random ticks;
+    - Ropes left behind by `tomatoes_on_rope` should now properly update their connections when placed;
+  - The crop no longer uses the standard growth speed checks of `CropBlock`, which was slowing down hanging vines. They grow at a fixed rate now, regardless of height;
+  - Applying bone meal to a mature tomato vine (sneaking, rich soil etc) will pass the boost to the vine above it, if possible;
+  - Tomato seeds can now be planted on any farmland block;
+- Rope has been updated:
+  - When placing Rope horizontally, it will try to connect to any solid faces horizontally, but won't reattach if they're modified;
+  - When placing Rope vertically, or when deploying it from one spot, it won't connect to side faces (loose rope), except for other ropes and bars;
+- Feasts and Pies have been updated:
+  - All Feast models received a visual update, with new textures/models, proper cullfaces and UV optimization;
+  - They will now emit crumb particles when taking portions from them;
+  - They now have more precise hitboxes, matching their shapes as they are consumed (thanks, TheGridExpert!);
+  - They now require a fully solid surface to be placed on, instead of floating over blocks like Cakes;
+  - They now have "Placeable" in their tooltip, to better indicate their role;
+    - Pumpkin Pie will say "Placeable when sneaking" if the sneak-to-place config is enabled;
+- Wild Crops have been updated:
+  - Wild Tomatoes now checks for the `farmersdelight:terrain` tag when generating;
+  - Wild Rice now checks for the `minecraft:dirt` tag when generating;
+- The following recipes were updated:
+  - Kelp Rolls now accept any `forge:vegetables` (1.20.1) or `c:foods/vegetable` (1.21+) as filling, instead of just Carrot;
+  - Dog Food can now be prepared with any `forge:raw_meat` (1.20.1) or `c:foods/raw_meat` (1.21_), both of which exclude raw fish;
+  - Cutting recipes now check for both a tag and a "tool action" (1.20.1) or "item ability" (1.21+), broadening compatibility with modded tools;
+  - Cutting recipes where you "salvage" items are now condensed together, making the Cutting recipe list less bloated in item viewers:
+    - Wood furniture salvaging became a single `<wood>_furniture` recipe, includes several new items, and has a 75% chance to return a unit of that plank type;
+- Knives now have tool actions (1.20.1), or item abilities (1.21+):
+  - `knife_dig`: Checked together with the `forge:tools/knives` tag for crafting (Cutting Board);
+  - `knife_harvest`: Checked together with the `farmersdelight:tools/knives` tag for gameplay actions;
+- All sounds in FD should now have accurate subtitles. Recently added:
+  - `food.take_portion`: Used when blocks provide food when used (Cooking Pot, Feasts etc);
+  - `pastry.slice`: Used when sweet food blocks, such as Pies, are sliced with a Knife;
+- Farmer Villagers can now detect Rich Soil Farmland as a valid point of interest for crop harvesting (thanks, MehVahdJukaar!);
+- Mushroom Colonies can now be snipped all at once when using a Knife on them;
+- Stoves now only inflict burn in a small "grilling area" on top of them; the edges are safe to step on;
+- Zombies and Illagers now have a very small chance of dropping an Onion when killed by a player, similar to Carrots and Potatoes;
+- Cats can now be tamed with Salmon Slice and Cod Slice;
+
+### Fixes
+- (1.21+) Fix Skillet crashing when placed, if the server has disabled/removed the Fire Aspect enchantment;
+- (1.21+) Fix Rich Soil not emitting bone meal particles when boosting plants;
+
+### Removals
+- The following tags have been removed:
+  - `cabbage_roll_ingredients`: Replaced by an array of equivalent tags: `raw_meat`, `raw_fishes`, `mushrooms` and `vegetables`;
+  - `offhand_equipment`: Deprecated with the new Cutting Board mechanics;
+  - `wolf_prey`: Replaced by `forge:raw_meat` when making Dog Food;
+  - (1.21+) `c:foods/milk`: Deprecated in favor of `c:drinks/milk`;
+
+### Technical
+- Added data generation for most things which were still manually written (thanks, GizmoTheMoonPig and Abbie5!);
+- All models have been standardized, cleaned up and optimized across the board:
+  - If you make a resource pack for FD, you may have to update to conform to these changes;
+- FD's internal recipe builders have been updated, and should now be more usable for add-on developers:
+  - They now implement `RecipeBuilder`, which standardizes several methods in regards to file saving and naming (thanks, Lance5057!);
+  - Added `setNamespace(string)` to both builders, to allow users to specify a custom namespace (mod ID) for the recipe. Use it if the result isn't registered under your mod ID;
+  - The `save(consumer)` method override no longer hardcodes FD's mod ID in the recipe. Instead, it will use either the result's namespace by default, or a value set through `setNamespace(string)`;
+    - Thanks to LordFirespeed for helping me realize the issue with the method override!;
+- FD's recipes now call for `assemble()` in most places, allowing extenders of most workstations to use the inventory when creating their result (thanks, ColonelPanic!);
+- Cutting recipes now accept arrays of ingredients in the `tool` field (thanks, BobVarioa!);
+- ConsumableItem's constructor now defaults the `hasFoodEffectTooltip` parameter to `true`, as nearly all cases in vanilla FD had it enabled. This may affect add-ons which do not explicitly set it;
+- Food blocks, such as Pies and Feasts, now have new class overrides for when their VoxelShapes can rotate horizontally (thanks, TheGridExpert!):
+  - `RotatedFeastBlock` is an extension of `FeastBlock` for feasts with directional consumption shapes. You provide an array of shapes, and `ShapeUtils` will calculate and cache rotations for them;
+  - If your feast's hitbox does not change horizontally as servings are taken (example: Stuffed Pumpkin), you can still use `FeastBlock`.
+- The following model files were renamed, to make it clearer they're meant to be templates:
+  - `bush_crop` -> `template_bush_crop`
+  - `crop_cross` -> `template_crop_cross`;
+  - `crop_with_rope` -> `template_crop_with_rope`;
+  - `pie` -> `template_pie`;
+  - `pie_slice[1-3]` -> `template_pie_slice[1-3]`;
+
+## 1.2.11
+
+### Updates
+- (1.21+) Tag `farmersdelight:feasts` is now added to `c:edible_when_placed`;
+- (1.21+) Ropes are now tagged under the `c:ropes` block/item tags;
+
+### Fixes
+- Fix potential load error where `tomatoes` is not present when joining a server;
+- Fix Canvas Rug and Tatami Mats not having their own stepping sounds, by tagging them as `combination_step_sound_blocks` (thanks, Mickeon!);
+- Statistics are now properly awarded for:
+  - Using tools on the Cutting Board;
+  - Using Knives to cut cakes and pies;
+  - Using containers to take servings from feasts;
+- (1.21+) Fix Mushroom Colonies floating without support when under a light level of 13;
+- (1.21+) Create Integration - Fix outdated fluid syntax;
+
+### Translations
+- Added:
+  - fr_ca (thanks, wool!);
+
+## 1.2.10
+
+### Updates
+- The JEI widget for the Cooking Pot now has its own image file, to allow custom widget editing;
+  - The UI icons are still located in the main Cooking Pot UI file;
+- Villagers can now consume FD crops to become willing to breed (thanks, isErenG!);
+- (1.21+) Tag changes:
+  - New mod tags:
+    - `farmersdelight:snacks`: Non-sweet foods made of multiple ingredients, which don't need containers;
+    - `farmersdelight:sweets`: Sweet foods made of multiple ingredients, such as desserts;
+  - Properly tagged all FD foods inside `c:foods`, as well as adding them to relevant sub-tags:
+    - Wheat Dough, Raw Pasta and Nether Salad were added to `c:foods/food_poisoning`;
+    - All pie slices were added to `c:foods/pie`. The full pies already exist in `c:foods/edible_when_placed`;
+  - Added `c:foods/dough/wheat` to accomodate Wheat Dough within `c:foods/dough`, as per NeoForge specs;
+    - FD recipes still use `c:foods/dough`, as any type of grain is allowed;
+  - `c:foods/milk` is being sunsetted in favor of the official `c:drinks/milk` tag;
+    - All FD recipes now use `c:drinks/milk`;
+    - `c:foods/milk` still exists for backwards compatibility, but will be removed in the next minor release.
+
+### Fixes
+- Fixed `foodEffectTooltip` config not affecting the tooltip of vanilla foods with FD effect overrides;
+- Fixed Cutting Board playing sounds at the zero corner, instead of at the center of itself;
+- Fixed non-contained meals (example: Dumplings) being deleted if sitting on the meal slot, and using the same meal against the pot to serve it (thanks, VBlackCAT!);
+- (1.21+) Create Integration - Fixed Chocolate Pie spouting recipe to use correct fluid tag;
+
+### Translations
+- Added:
+  - kk_kz (thanks, ninsent!);
+  - zh_hk (thanks, Duppy-Conqueror!);
+- Updated:
+  - hu_hu (thanks, bayi!);
+  - ja_jp (thanks, Abbage230!);
+  - lzh (thanks, BeiDou114514!);
+  - ru_ru (thanks, pansangg!);
+
+## 1.2.9
+
+### Updates
+- The `offhand_equipment` tag now includes `forge:tools/shields` by default, extending default compatibility;
+- Rich Soil Farmland can now be hydrated by any fluid type capable of hydration;
+- Wild Cabbage and Sea Beet can now generate on any biome tagged with `minecraft:is_beach` (thanks, lyaneii!);
+
+### Fixes
+- Fixed Wheat Dough's water-based recipe still displaying in JEI when disabled;
+- Fixed FD's special recipes existing in the `minecraft` namespace;
+- Temporary fix for the Cooking Pot crashing when opened in spectator mode (access is now disabled);
+- (1.21+) Fixed Cooking Pot allowing players to cook and store up to 99 servings;
+- (1.21+) Fixed Create integration's milling recipes using invalid field, which caused them to never finish processing;
+- (1.21+) Fixed Rabbit Stew not returning bowls after being eaten, due to the Rabbit Stew buff;
+- (1.21+) Fixed a potential datapack error with cooking recipes in KubeJS (thanks, ianm1647!);
+
+### Translations
+- Update main langs to include lines for wall canvas signs;
+- Fixed es_ar translation having a JSON error;
+- Added:
+  - hu_hu (thanks, bayi!);
+  - lzh (thanks, BeiDou114514!);
+- Updated:
+  - it_it (thanks, BlackShadow77!);
+  - zh_cn (thanks, Don-Trueno!);
+  - zh_tw (thanks, CyanChanges!);
+
+## 1.2.8
+
+### Additions
+- New item tags:
+  - `#meals` - Groups bowl and plate foods which are considered a "meal" by the mod. Excludes Fruit Salad and Nether Salad;
+  - `#drinks` - Groups drinkable FD items that are not potions;
+  - `#feasts` - Groups the full forms of feasts. Their portions reside in `#meals`;
+
+### Updates
+- Wheat Dough now has a simpler, less cumbersome crafting recipe using a Water Bucket:
+  - Wheat can be crafted with a Water Bucket to make Dough. The bucket's water won't be depleted, letting you craft dough indefinitely;
+  - The bucket acts as a simple technology gate to unlock this recipe;
+  - The egg recipe is still present, to not break auto-crafting setups;
+- All usages of water buckets in the mod (recipes, interactions etc) now use a common tag (thanks, thelegitdolt!):
+  - 1.20.1: `forge:buckets/water` (unofficial);
+  - 1.21.1: `c:buckets/water`;
+- Added knives to the `breaks_decorated_pots` tag;
+- Updated integration with `create:upright_on_belt` to include all bowl, plate and bottle items;
+- Updated the Master Chef advancement with additional meals;
+  - The meals reflect the "vanilla FD" entries in the `meals` tag, but does not update with the tag itself;
+- Updated effect description IDs for all langs (thanks, mpustovoi!);
+- Cooking Pot will always "cool down" when the recipe becomes invalid mid-cooking, instead of losing all cooking progress in some circumstances;
+
+### Fixes
+- Fixed Jack-O-Lantern not being mineable with a Knife;
+- Fixed Create's Potato Cannon integration;
+- Fixed Knives with Silk Touch slicing Pumpkin blocks;
+- Fixed budding bushes (Tomato)'s planting rules being hardcoded to vanilla farmland;
+- Fixed Rich Soil negating fall damage (1.21.1) and `turnToDirt` converting it into normal dirt (thanks, SarahIsWeird!);
+- (1.21.1) Fixed Baskets and Cabinets not having an item handler capability (thanks, RaymondBlaze!);
+- (1.21.1) Updated Create Integration to the newest update's syntax (thanks, mpustovoi!);
+- (1.21.1) Fixed `storage_blocks` tags not being nested in their parent (thanks, Lucky-56!);
+- (1.21.1) Fixed FD recipe ID's not being displayed on debug info on JEI screens (thanks, Abbie5!);
+- (1.21.1) Fixed Immersive Engineering integration recipes;
+- (1.21.1) Fixed Tall-mato advancement not working properly;
+- (1.21.1) Fixed HUD overlays rendering on top of AppleSkin overlays;
+
+### Translations
+- Updated:
+  - es_es (thanks, GGlangf!);
+  - zh_cn (thanks, NumberSir!);
+  - zh_tw (thanks, DEEMsss!);
+
 ## 1.2.7
 
 ### Updates

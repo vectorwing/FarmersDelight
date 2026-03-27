@@ -6,6 +6,16 @@
     }
   ],
   "type": "immersiveengineering:crusher",
+  "energy": 3200,
+  "input": {
+    "item": "farmersdelight:wild_onions"
+  },
+  "result": {
+    "basePredicate": {
+      "item": "minecraft:magenta_dye"
+    },
+    "count": 1
+  },
   "secondaries": [
     {
       "chance": 0.2,
@@ -22,15 +32,5 @@
         "count": 1
       }
     }
-  ],
-  "result": {
-    "basePredicate": {
-      "item": "minecraft:magenta_dye"
-    },
-    "count": 1
-  },
-  "input": {
-    "item": "farmersdelight:wild_onions"
-  },
-  "energy": 3200
+  ]
 }

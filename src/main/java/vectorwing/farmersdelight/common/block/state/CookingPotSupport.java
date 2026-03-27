@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.common.block.state;
 
 import net.minecraft.util.StringRepresentable;
+import org.jetbrains.annotations.NotNull;
 
 public enum CookingPotSupport implements StringRepresentable
 {
@@ -20,7 +21,7 @@ public enum CookingPotSupport implements StringRepresentable
 	}
 
 	@Override
-	public String getSerializedName() {
+	public @NotNull String getSerializedName() {
 		return this.supportName;
 	}
 }

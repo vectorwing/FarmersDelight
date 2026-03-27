@@ -57,7 +57,7 @@ import java.util.Optional;
 
 import static java.util.Map.entry;
 
-@EventBusSubscriber(modid = FarmersDelight.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProvider, HeatableBlockEntity, Nameable, RecipeCraftingHolder
 {
 	public static final int MEAL_DISPLAY_SLOT = 6;
@@ -65,7 +65,6 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	public static final int OUTPUT_SLOT = 8;
 	public static final int INVENTORY_SIZE = OUTPUT_SLOT + 1;
 
-	// TODO: Consider whether to leave this as-is, or open it to datapacks for modded cases.
 	public static final Map<Item, Item> INGREDIENT_REMAINDER_OVERRIDES = Map.ofEntries(
 			entry(Items.POWDER_SNOW_BUCKET, Items.BUCKET),
 			entry(Items.AXOLOTL_BUCKET, Items.BUCKET),
@@ -215,7 +214,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 			if (recipe.isPresent() && cookingPot.canCook(recipe.get().value())) {
 				didInventoryChange = cookingPot.processCooking(recipe.get(), cookingPot);
 			} else {
-				cookingPot.cookTime = 0;
+				cookingPot.cookTime = Mth.clamp(cookingPot.cookTime - 2, 0, cookingPot.cookTimeTotal);
 			}
 		} else if (cookingPot.cookTime > 0) {
 			cookingPot.cookTime = Mth.clamp(cookingPot.cookTime - 2, 0, cookingPot.cookTimeTotal);
@@ -277,8 +276,10 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	}
 
 	protected boolean canCook(CookingPotRecipe recipe) {
+		if (level == null) return false;
+
 		if (hasInput()) {
-			ItemStack resultStack = recipe.getResultItem(this.level.registryAccess());
+			ItemStack resultStack = recipe.assemble(new RecipeWrapper(inventory), this.level.registryAccess());
 			if (resultStack.isEmpty()) {
 				return false;
 			} else {
@@ -287,7 +288,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 					return true;
 				} else if (!ItemStack.isSameItem(storedMealStack, resultStack)) {
 					return false;
-				} else if (storedMealStack.getCount() + resultStack.getCount() <= inventory.getSlotLimit(MEAL_DISPLAY_SLOT)) {
+				} else if (storedMealStack.getCount() + resultStack.getCount() <= Math.max(64, storedMealStack.getMaxStackSize())) {
 					return true;
 				} else {
 					return storedMealStack.getCount() + resultStack.getCount() <= resultStack.getMaxStackSize();
@@ -309,7 +310,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 		cookTime = 0;
 		mealContainerStack = recipe.value().getOutputContainer();
-		ItemStack resultStack = recipe.value().getResultItem(this.level.registryAccess());
+		ItemStack resultStack = recipe.value().assemble(new RecipeWrapper(inventory), this.level.registryAccess());
 		ItemStack storedMealStack = inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
 		if (storedMealStack.isEmpty()) {
 			inventory.setStackInSlot(MEAL_DISPLAY_SLOT, resultStack.copy());
@@ -413,7 +414,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		int mealCount = Math.min(mealStack.getCount(), mealStack.getMaxStackSize() - outputStack.getCount());
 		if (outputStack.isEmpty()) {
 			inventory.setStackInSlot(OUTPUT_SLOT, mealStack.split(mealCount));
-		} else if (outputStack.getItem() == mealStack.getItem()) {
+		} else if (ItemStack.isSameItem(mealStack, outputStack)) {
 			mealStack.shrink(mealCount);
 			outputStack.grow(mealCount);
 		}
@@ -430,7 +431,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 			if (outputStack.isEmpty()) {
 				containerInputStack.shrink(mealCount);
 				inventory.setStackInSlot(OUTPUT_SLOT, mealStack.split(mealCount));
-			} else if (outputStack.getItem() == mealStack.getItem()) {
+			} else if (ItemStack.isSameItem(outputStack, mealStack)) {
 				mealStack.shrink(mealCount);
 				containerInputStack.shrink(mealCount);
 				outputStack.grow(mealCount);
@@ -454,7 +455,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	public boolean isContainerValid(ItemStack containerItem) {
 		if (containerItem.isEmpty()) return false;
 		if (!mealContainerStack.isEmpty()) return ItemStack.isSameItem(mealContainerStack, containerItem);
-		return ItemStack.isSameItem(getMeal(), containerItem);
+		return false;
 	}
 
 	@Override
@@ -518,6 +519,14 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	private ItemStackHandler createHandler() {
 		return new ItemStackHandler(INVENTORY_SIZE)
 		{
+			@Override
+			protected int getStackLimit(int slot, ItemStack stack) {
+				if (slot == MEAL_DISPLAY_SLOT) {
+					return Math.max(64, stack.getMaxStackSize());
+				}
+				return super.getStackLimit(slot, stack);
+			}
+
 			@Override
 			protected void onContentsChanged(int slot) {
 				inventoryChanged();

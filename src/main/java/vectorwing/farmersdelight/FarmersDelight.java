@@ -11,9 +11,9 @@ import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.client.event.ClientSetupEvents;
 import vectorwing.farmersdelight.common.CommonSetup;
 import vectorwing.farmersdelight.common.Configuration;
+import vectorwing.farmersdelight.common.registry.RegistryAliases;
 import vectorwing.farmersdelight.common.registry.*;
 import vectorwing.farmersdelight.common.world.VillageStructures;
-import vectorwing.farmersdelight.common.world.WildCropGeneration;
 
 @Mod(FarmersDelight.MODID)
 public class FarmersDelight
@@ -52,7 +52,8 @@ public class FarmersDelight
 		ModIngredientTypes.INGREDIENT_TYPES.register(modEventBus);
 		ModAdvancements.TRIGGERS.register(modEventBus);
 
-		WildCropGeneration.load();
+		RegistryAliases.addRegistryAliases();
+
 		NeoForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
 	}
 }

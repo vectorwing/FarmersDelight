@@ -11,15 +11,15 @@
   },
   "render": {
     "type": "immersiveengineering:crop",
-    "value": "farmersdelight:cabbages"
+    "block": "farmersdelight:cabbages"
   },
   "results": [
     {
-      "Count": 2,
+      "count": 2,
       "id": "farmersdelight:cabbage"
     },
     {
-      "Count": 1,
+      "count": 1,
       "id": "farmersdelight:cabbage_seeds"
     }
   ],

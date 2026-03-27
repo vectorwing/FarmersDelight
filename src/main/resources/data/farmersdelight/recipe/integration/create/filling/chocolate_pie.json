@@ -11,13 +11,14 @@
       "item": "farmersdelight:pie_crust"
     },
     {
-      "fluidTag": "forge:chocolate",
-      "amount": 500
+      "type": "neoforge:tag",
+      "amount": 500,
+      "tag": "c:chocolate"
     }
   ],
   "results": [
     {
-      "item": "farmersdelight:chocolate_pie"
+      "id": "farmersdelight:chocolate_pie"
     }
   ]
 }

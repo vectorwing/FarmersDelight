@@ -1,7 +1,7 @@
 {
   "variants": {
     "facing=east,servings=0": {
-      "model": "farmersdelight:block/roast_chicken_block_leftover",
+      "model": "farmersdelight:block/roast_chicken_block_leftovers",
       "y": 90
     },
     "facing=east,servings=1": {
@@ -21,7 +21,7 @@
       "y": 90
     },
     "facing=north,servings=0": {
-      "model": "farmersdelight:block/roast_chicken_block_leftover"
+      "model": "farmersdelight:block/roast_chicken_block_leftovers"
     },
     "facing=north,servings=1": {
       "model": "farmersdelight:block/roast_chicken_block_stage3"
@@ -36,7 +36,7 @@
       "model": "farmersdelight:block/roast_chicken_block_stage0"
     },
     "facing=south,servings=0": {
-      "model": "farmersdelight:block/roast_chicken_block_leftover",
+      "model": "farmersdelight:block/roast_chicken_block_leftovers",
       "y": 180
     },
     "facing=south,servings=1": {
@@ -56,7 +56,7 @@
       "y": 180
     },
     "facing=west,servings=0": {
-      "model": "farmersdelight:block/roast_chicken_block_leftover",
+      "model": "farmersdelight:block/roast_chicken_block_leftovers",
       "y": 270
     },
     "facing=west,servings=1": {

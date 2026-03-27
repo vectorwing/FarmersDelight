@@ -6,7 +6,7 @@
       "item": "farmersdelight:cooked_mutton_chops"
     },
     {
-      "item": "minecraft:beetroot"
+      "tag": "c:crops/beetroot"
     },
     {
       "item": "minecraft:bowl"

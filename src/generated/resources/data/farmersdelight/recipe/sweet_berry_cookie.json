@@ -6,10 +6,10 @@
       "item": "minecraft:sweet_berries"
     },
     {
-      "item": "minecraft:wheat"
+      "tag": "c:crops/wheat"
     },
     {
-      "item": "minecraft:wheat"
+      "tag": "c:crops/wheat"
     }
   ],
   "result": {

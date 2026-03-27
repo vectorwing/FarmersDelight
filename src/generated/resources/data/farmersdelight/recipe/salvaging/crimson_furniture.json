@@ -1,0 +1,55 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "item": "minecraft:crimson_door"
+        },
+        {
+          "item": "minecraft:crimson_trapdoor"
+        },
+        {
+          "item": "minecraft:crimson_sign"
+        },
+        {
+          "item": "minecraft:crimson_hanging_sign"
+        },
+        {
+          "item": "minecraft:crimson_fence"
+        },
+        {
+          "item": "minecraft:crimson_fence_gate"
+        },
+        {
+          "item": "minecraft:crimson_pressure_plate"
+        },
+        {
+          "item": "minecraft:crimson_button"
+        },
+        {
+          "item": "farmersdelight:crimson_cabinet"
+        }
+      ]
+    }
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "count": 1,
+        "id": "minecraft:crimson_planks"
+      }
+    }
+  ],
+  "tool": [
+    {
+      "type": "farmersdelight:item_ability",
+      "action": "axe_dig"
+    },
+    {
+      "tag": "minecraft:axes"
+    }
+  ]
+}

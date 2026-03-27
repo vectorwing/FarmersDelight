@@ -204,8 +204,8 @@
   "effect.farmersdelight.nourishment": "moku suli",
   "effect.farmersdelight.comfort": "pilin pona",
 
-  "effect.farmersdelight.nourishment.0.desc": "ni la, sijelo sina li pakala ala la sina wile ala e moku.",
-  "effect.farmersdelight.comfort.0.desc": "ni la, mute moku ale la sijelo sina li kama pona.",
+  "effect.farmersdelight.nourishment.description": "ni la, sijelo sina li pakala ala la sina wile ala e moku.",
+  "effect.farmersdelight.comfort.description": "ni la, mute moku ale la sijelo sina li kama pona.",
 
   "enchantment.farmersdelight.backstabbing": "pakala monsi",
   "enchantment.farmersdelight.backstabbing.desc": "ni la, pakala lon monsi li pakala suli.",
@@ -284,7 +284,7 @@
   "farmersdelight.subtitles.skillet.add_food": "ilo luka pi seli moku li kama jo",
   "farmersdelight.subtitles.cabinet.open": "poki lupa li open",
   "farmersdelight.subtitles.cabinet.close": "poki lupa li kama open ala",
-  "farmersdelight.subtitles.tomato.pick": "kili linja li weka tan kasi linja",
+  "farmersdelight.subtitles.tomato_bush.pick_tomatoes": "kili linja li weka tan kasi linja",
   "farmersdelight.subtitles.rotten_tomato.throw": "jan li pana e kili linja jaki",
   "farmersdelight.subtitles.rotten_tomato.hit": "kili linja jaki li pakala",
 

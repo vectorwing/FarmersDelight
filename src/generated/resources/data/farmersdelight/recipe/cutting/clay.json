@@ -13,8 +13,13 @@
       }
     }
   ],
-  "tool": {
-    "type": "farmersdelight:item_ability",
-    "action": "shovel_dig"
-  }
+  "tool": [
+    {
+      "type": "farmersdelight:item_ability",
+      "action": "shovel_dig"
+    },
+    {
+      "tag": "minecraft:shovels"
+    }
+  ]
 }

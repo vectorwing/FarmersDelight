@@ -205,8 +205,8 @@
   "effect.farmersdelight.nourishment": "Bergizi",
   "effect.farmersdelight.comfort": "Kenyamanan",
 
-  "effect.farmersdelight.nourishment.0.desc": "Mencegah kehilangan rasa lapar, kecuali saat menggunakan saturasi untuk menyembuhkan luka.",
-  "effect.farmersdelight.comfort.0.desc": "Membuat Anda kebal terhadap Kelaparan, Kelambatan dan Kelemahan.",
+  "effect.farmersdelight.nourishment.description": "Mencegah kehilangan rasa lapar, kecuali saat menggunakan saturasi untuk menyembuhkan luka.",
+  "effect.farmersdelight.comfort.description": "Membuat Anda kebal terhadap Kelaparan, Kelambatan dan Kelemahan.",
 
   "enchantment.farmersdelight.backstabbing": "Menusuk dari Belakang",
   "enchantment.farmersdelight.backstabbing.desc": "Memperkuat kerusakan saat menyerang target dari belakang.",
@@ -285,7 +285,7 @@
   "farmersdelight.subtitles.skillet.add_food": "Wajan mendesis",
   "farmersdelight.subtitles.cabinet.open": "Kabinet Terbuka",
   "farmersdelight.subtitles.cabinet.close": "Kabinet Ditutup",
-  "farmersdelight.subtitles.tomato.pick": "Tomat bermunculan",
+  "farmersdelight.subtitles.tomato_bush.pick_tomatoes": "Tomat bermunculan",
   "farmersdelight.subtitles.rotten_tomato.throw": "Tomat Busuk terbang",
   "farmersdelight.subtitles.rotten_tomato.hit": "Percikan Tomat Busuk",
 

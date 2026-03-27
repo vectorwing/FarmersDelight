@@ -1,0 +1,6 @@
+{
+  "type": "farmersdelight:add_features_by_filter",
+  "allowed_biomes": "#minecraft:is_beach",
+  "features": "farmersdelight:patch_wild_beetroots",
+  "step": "vegetal_decoration"
+}

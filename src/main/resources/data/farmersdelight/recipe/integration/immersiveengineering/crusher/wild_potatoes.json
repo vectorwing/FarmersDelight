@@ -6,6 +6,16 @@
     }
   ],
   "type": "immersiveengineering:crusher",
+  "energy": 3200,
+  "input": {
+    "item": "farmersdelight:wild_potatoes"
+  },
+  "result": {
+    "basePredicate": {
+      "item": "minecraft:purple_dye"
+    },
+    "count": 2
+  },
   "secondaries": [
     {
       "chance": 0.1,
@@ -15,15 +25,5 @@
         "count": 1
       }
     }
-  ],
-  "result": {
-    "basePredicate": {
-      "item": "minecraft:purple_dye"
-    },
-    "count": 2
-  },
-  "input": {
-    "item": "farmersdelight:wild_potatoes"
-  },
-  "energy": 3200
+  ]
 }

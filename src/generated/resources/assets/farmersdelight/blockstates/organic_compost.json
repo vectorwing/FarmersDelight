@@ -1,0 +1,140 @@
+{
+  "variants": {
+    "composting=0": [
+      {
+        "model": "farmersdelight:block/organic_compost_stage0"
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage0",
+        "y": 90
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage0",
+        "y": 180
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage0",
+        "y": 270
+      }
+    ],
+    "composting=1": [
+      {
+        "model": "farmersdelight:block/organic_compost_stage0"
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage0",
+        "y": 90
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage0",
+        "y": 180
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage0",
+        "y": 270
+      }
+    ],
+    "composting=2": [
+      {
+        "model": "farmersdelight:block/organic_compost_stage1"
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage1",
+        "y": 90
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage1",
+        "y": 180
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage1",
+        "y": 270
+      }
+    ],
+    "composting=3": [
+      {
+        "model": "farmersdelight:block/organic_compost_stage1"
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage1",
+        "y": 90
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage1",
+        "y": 180
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage1",
+        "y": 270
+      }
+    ],
+    "composting=4": [
+      {
+        "model": "farmersdelight:block/organic_compost_stage2"
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage2",
+        "y": 90
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage2",
+        "y": 180
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage2",
+        "y": 270
+      }
+    ],
+    "composting=5": [
+      {
+        "model": "farmersdelight:block/organic_compost_stage2"
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage2",
+        "y": 90
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage2",
+        "y": 180
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage2",
+        "y": 270
+      }
+    ],
+    "composting=6": [
+      {
+        "model": "farmersdelight:block/organic_compost_stage3"
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage3",
+        "y": 90
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage3",
+        "y": 180
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage3",
+        "y": 270
+      }
+    ],
+    "composting=7": [
+      {
+        "model": "farmersdelight:block/organic_compost_stage3"
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage3",
+        "y": 90
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage3",
+        "y": 180
+      },
+      {
+        "model": "farmersdelight:block/organic_compost_stage3",
+        "y": 270
+      }
+    ]
+  }
+}

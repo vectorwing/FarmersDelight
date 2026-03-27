@@ -25,6 +25,10 @@ repositories {
         url = "https://maven.blamejared.com"
     }
     maven { url "https://maven.ryanliptak.com/" }
+    maven {
+        // EMI
+        url = "https://maven.terraformersmc.com/"
+    }
 }
 
 base {
@@ -98,19 +102,26 @@ neoForge {
     }
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
+sourceSets.main.resources {
+    exclude(".cache")
+    srcDir 'src/generated/resources'
+}
 
 configurations {
     runtimeClasspath.extendsFrom localRuntime
 }
 
 dependencies {
-    // compile against the JEI API but do not include it at runtime
+    // JEI
     compileOnly "mezz.jei:jei-${jei_minecraft}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${jei_minecraft}-neoforge-api:${jei_version}"
-    // at runtime, use the full JEI jar for Forge
-    localRuntime "mezz.jei:jei-${jei_minecraft}-neoforge:${jei_version}"
+//    localRuntime "mezz.jei:jei-${jei_minecraft}-neoforge:${jei_version}"
 
+    // EMI
+    compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
+    runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
+
+    // AppleSkin
     compileOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}:api"
     runtimeOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}"
 

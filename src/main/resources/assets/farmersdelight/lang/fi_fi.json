@@ -171,8 +171,8 @@
   "effect.farmersdelight.nourishment": "Ravittu",
   "effect.farmersdelight.comfort": "Mukavuus",
 
-  "effect.farmersdelight.nourishment.0.desc": "Estää nälkiintymisen silloin kun kylläisyyttä ei käytetä elinvoiman palauttamiseen.",
-  "effect.farmersdelight.comfort.0.desc": "Estää nälän, hitauden ja heikkouden saamisen.",
+  "effect.farmersdelight.nourishment.description": "Estää nälkiintymisen silloin kun kylläisyyttä ei käytetä elinvoiman palauttamiseen.",
+  "effect.farmersdelight.comfort.description": "Estää nälän, hitauden ja heikkouden saamisen.",
 
   "enchantment.farmersdelight.backstabbing": "Selkäänpuukotus",
   "enchantment.farmersdelight.backstabbing.desc": "Vahvistaa vahinkoa takaa päin hyökätessä.",
@@ -242,7 +242,7 @@
   "farmersdelight.subtitles.stove.crackle": "Liesi rätisee",
   "farmersdelight.subtitles.skillet.sizzle": "Paistinpannu kärisee",
   "farmersdelight.subtitles.skillet.add_food": "Paistinpannu sihisee",
-  "farmersdelight.subtitles.tomato.pick": "Tomaatit popsahtavat",
+  "farmersdelight.subtitles.tomato_bush.pick_tomatoes": "Tomaatit popsahtavat",
   
   "farmersdelight.block.feast.use_container": "Tarvitset esineen %s syödäksesti tätä.",
   "farmersdelight.block.rice.invalid_placement": "Tämä kasvi selviää parhaiten matalassa vedessä.",

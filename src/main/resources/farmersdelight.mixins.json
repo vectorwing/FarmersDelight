@@ -6,7 +6,12 @@
     "CampfireBaleMixin",
     "CuttingBoardDispenserMixin",
     "KeepRichSoilGiantTreeMixin",
-    "KeepRichSoilTreeMixin"
+    "KeepRichSoilTreeMixin",
+    "KeepRichSoilUntrampledMixin",
+    "NourishmentAlwaysEatMixin",
+    "PlacePumpkinPieMixin",
+    "RopeFenceConnectionMixin",
+    "VillagersTargetRichSoilMixin"
   ],
   "client": [
     "CanvasSignEditScreenMixin",

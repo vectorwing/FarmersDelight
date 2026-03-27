@@ -1,15 +1,16 @@
 {
-  "credit": "Made with Blockbench",
+  "format_version": "1.9.0",
+  "parent": "block/block",
   "ambientocclusion": false,
   "textures": {
     "particle": "farmersdelight:block/skillet_top",
-    "side": "farmersdelight:block/skillet_side",
     "top": "farmersdelight:block/skillet_top",
+    "side": "farmersdelight:block/skillet_side",
     "bottom": "farmersdelight:block/skillet_bottom"
   },
   "elements": [
     {
-      "name": "bottom",
+      "name": "base",
       "from": [1, 0, 1],
       "to": [15, 1, 15],
       "faces": {
@@ -22,7 +23,7 @@
       }
     },
     {
-      "name": "side north",
+      "name": "north_wall",
       "from": [1, 1, 1],
       "to": [15, 4, 2],
       "faces": {
@@ -34,7 +35,7 @@
       }
     },
     {
-      "name": "side south",
+      "name": "south_wall",
       "from": [1, 1, 14],
       "to": [15, 4, 15],
       "faces": {
@@ -46,7 +47,7 @@
       }
     },
     {
-      "name": "side west",
+      "name": "west_wall",
       "from": [1, 1, 2],
       "to": [2, 4, 14],
       "faces": {
@@ -56,7 +57,7 @@
       }
     },
     {
-      "name": "side east",
+      "name": "east_wall",
       "from": [14, 1, 2],
       "to": [15, 4, 14],
       "faces": {
@@ -70,7 +71,6 @@
       "from": [7, 1, 15],
       "to": [9, 3, 27],
       "faces": {
-        "north": {"uv": [7, 14, 9, 16], "texture": "#side"},
         "east": {"uv": [9, 4, 11, 16], "rotation": 90, "texture": "#side"},
         "south": {"uv": [3, 14, 5, 16], "texture": "#side"},
         "west": {"uv": [5, 4, 7, 16], "rotation": 270, "texture": "#side"},
@@ -81,9 +81,10 @@
   ],
   "groups": [
     {
-      "name": "pan",
+      "name": "skillet",
       "origin": [8, 8, 8],
-      "children": [0, 1, 2, 3, 4]
-    }, 5
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5]
+    }
   ]
 }

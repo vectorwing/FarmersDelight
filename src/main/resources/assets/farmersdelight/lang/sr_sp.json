@@ -174,8 +174,8 @@
   "effect.farmersdelight.nourishment": "Ухрањеност",
   "effect.farmersdelight.comfort": "Удобност",
 
-  "effect.farmersdelight.nourishment.0.desc": "Спречава губитак глади, осим током коришћења засичћености за исцеливање повреда.",
-  "effect.farmersdelight.comfort.0.desc": "Обезбеђује природну регенерацију, без обзира колико си гладан.",
+  "effect.farmersdelight.nourishment.description": "Спречава губитак глади, осим током коришћења засичћености за исцеливање повреда.",
+  "effect.farmersdelight.comfort.description": "Обезбеђује природну регенерацију, без обзира колико си гладан.",
 
   "enchantment.farmersdelight.backstabbing": "Убод у леђа",
   "enchantment.farmersdelight.backstabbing.desc": "Појачава напад приликом удара мете отпозади.",
@@ -249,7 +249,7 @@
   "farmersdelight.subtitles.stove.crackle": "Шпорет пуцкета",
   "farmersdelight.subtitles.skillet.sizzle": "Тигањ цврчи",
   "farmersdelight.subtitles.skillet.add_food": "Тигањ шишти",
-  "farmersdelight.subtitles.tomato.pick": "Пуцкет парадајза",
+  "farmersdelight.subtitles.tomato_bush.pick_tomatoes": "Пуцкет парадајза",
   "farmersdelight.subtitles.rotten_tomato.throw": "Трули парадајз лети",
   "farmersdelight.subtitles.rotten_tomato.hit": "Трули парадајз се распрштио",
 

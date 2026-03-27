@@ -23,6 +23,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.client.gui.CookingPotTooltip;
 import vectorwing.farmersdelight.client.gui.HUDOverlays;
+import vectorwing.farmersdelight.client.particle.SparkleParticle;
 import vectorwing.farmersdelight.client.particle.StarParticle;
 import vectorwing.farmersdelight.client.particle.SteamParticle;
 import vectorwing.farmersdelight.client.recipebook.RecipeCategories;
@@ -31,7 +32,7 @@ import vectorwing.farmersdelight.common.EnumParameters;
 import vectorwing.farmersdelight.common.item.component.ItemStackWrapper;
 import vectorwing.farmersdelight.common.registry.*;
 
-@EventBusSubscriber(modid = FarmersDelight.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = FarmersDelight.MODID, value = Dist.CLIENT)
 public class ClientSetupEvents
 {
 	public static void init(final FMLClientSetupEvent event) {
@@ -68,7 +69,7 @@ public class ClientSetupEvents
 		event.register(CookingPotTooltip.CookingPotTooltipComponent.class, CookingPotTooltip::new);
 	}
 
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOW)
 	public static void registerGuiLayers(RegisterGuiLayersEvent event) {
 		HUDOverlays.register(event);
 	}
@@ -92,5 +93,6 @@ public class ClientSetupEvents
 	public static void registerParticles(RegisterParticleProvidersEvent event) {
 		Minecraft.getInstance().particleEngine.register(ModParticleTypes.STAR.get(), StarParticle.Factory::new);
 		Minecraft.getInstance().particleEngine.register(ModParticleTypes.STEAM.get(), SteamParticle.Factory::new);
+		Minecraft.getInstance().particleEngine.register(ModParticleTypes.SPARKLE.get(), SparkleParticle.Factory::new);
 	}
 }

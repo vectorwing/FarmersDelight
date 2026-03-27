@@ -13,14 +13,14 @@
   ],
   "results": [
     {
-      "item": "farmersdelight:rice",
+      "id": "farmersdelight:rice",
       "count": 1
     },
     {
-      "item": "farmersdelight:straw",
+      "id": "farmersdelight:straw",
       "count": 1,
       "chance": 0.5
     }
   ],
-  "processingTime": 50
+  "processing_time": 50
 }

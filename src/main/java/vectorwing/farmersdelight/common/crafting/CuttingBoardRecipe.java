@@ -20,6 +20,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
 import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
@@ -94,11 +95,11 @@ public class CuttingBoardRecipe implements Recipe<CuttingBoardRecipeInput>
 		return this.results;
 	}
 
-	public List<ItemStack> rollResults(RandomSource rand, int fortuneLevel) {
+	public List<ItemStack> rollResults(RandomSource random, int fortuneLevel, RecipeWrapper inventory) {
 		List<ItemStack> results = new ArrayList<>();
 		NonNullList<ChanceResult> rollableResults = getRollableResults();
 		for (ChanceResult output : rollableResults) {
-			ItemStack stack = output.rollOutput(rand, fortuneLevel);
+			ItemStack stack = output.rollOutput(random, fortuneLevel);
 			if (!stack.isEmpty())
 				results.add(stack);
 		}
@@ -193,22 +194,22 @@ public class CuttingBoardRecipe implements Recipe<CuttingBoardRecipeInput>
 		}
 
 		public static CuttingBoardRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
-			String groupIn = buffer.readUtf(32767);
-			Ingredient inputItemIn = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
-			Ingredient toolIn = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
+			String group = buffer.readUtf(32767);
+			Ingredient inputItem = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
+			Ingredient tool = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
 
 			int i = buffer.readVarInt();
-			NonNullList<ChanceResult> resultsIn = NonNullList.withSize(i, ChanceResult.EMPTY);
-			resultsIn.replaceAll(ignored -> ChanceResult.read(buffer));
-			Optional<SoundEvent> soundEventIn = Optional.empty();
+			NonNullList<ChanceResult> results = NonNullList.withSize(i, ChanceResult.EMPTY);
+			results.replaceAll(ignored -> ChanceResult.read(buffer));
+			Optional<SoundEvent> soundEvent = Optional.empty();
 			if (buffer.readBoolean()) {
 				Optional<Holder.Reference<SoundEvent>> holder = BuiltInRegistries.SOUND_EVENT.getHolder(buffer.readResourceKey(Registries.SOUND_EVENT));
 				if (holder.isPresent() && holder.get().isBound()) {
-					soundEventIn = Optional.of(holder.get().value());
+					soundEvent = Optional.of(holder.get().value());
 				}
 			}
 
-			return new CuttingBoardRecipe(groupIn, inputItemIn, toolIn, resultsIn, soundEventIn);
+			return new CuttingBoardRecipe(group, inputItem, tool, results, soundEvent);
 		}
 
 		public static void toNetwork(RegistryFriendlyByteBuf buffer, CuttingBoardRecipe recipe) {

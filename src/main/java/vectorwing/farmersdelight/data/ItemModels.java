@@ -42,14 +42,20 @@ public class ItemModels extends ItemModelProvider
 		itemGeneratedModel(ModItems.BROWN_MUSHROOM_COLONY.get(), resourceBlock(itemName(ModItems.BROWN_MUSHROOM_COLONY.get()) + "_stage3"));
 		items.remove(ModItems.BROWN_MUSHROOM_COLONY.get());
 
+		itemGeneratedModel(ModItems.DEBUG_PUMPKIN_PIE.get(), resourceItem("debug_pumpkin_pie"));
+		items.remove(ModItems.DEBUG_PUMPKIN_PIE.get());
+
 		itemGeneratedModel(ModItems.RED_MUSHROOM_COLONY.get(), resourceBlock(itemName(ModItems.RED_MUSHROOM_COLONY.get()) + "_stage3"));
 		items.remove(ModItems.RED_MUSHROOM_COLONY.get());
 
 		blockBasedModel(ModItems.TATAMI.get(), "_half");
 		items.remove(ModItems.TATAMI.get());
 
-		blockBasedModel(ModItems.ORGANIC_COMPOST.get(), "_0");
+		blockBasedModel(ModItems.ORGANIC_COMPOST.get(), "_stage0");
 		items.remove(ModItems.ORGANIC_COMPOST.get());
+
+		blockBasedModel(ModItems.ROPE_FENCE.get(), "_inventory");
+		items.remove(ModItems.ROPE_FENCE.get());
 
 		// Items that should be held like a mug
 		Set<Item> mugItems = Sets.newHashSet(
@@ -108,6 +114,7 @@ public class ItemModels extends ItemModelProvider
 				ModItems.STUFFED_PUMPKIN_BLOCK.get(),
 				ModItems.HONEY_GLAZED_HAM_BLOCK.get(),
 				ModItems.SHEPHERDS_PIE_BLOCK.get(),
+				ModItems.GLEAMING_SALAD_BLOCK.get(),
 				ModItems.RICE_ROLL_MEDLEY_BLOCK.get()
 		);
 		takeAll(items, spriteBlockItems.toArray(new Item[0])).forEach(item -> withExistingParent(itemName(item), GENERATED).texture("layer0", resourceItem(itemName(item))));
@@ -147,6 +154,10 @@ public class ItemModels extends ItemModelProvider
 
 	public void blockBasedModel(Item item, String suffix) {
 		withExistingParent(itemName(item), resourceBlock(itemName(item) + suffix));
+	}
+
+	public void blockBasedModel(Item item, ResourceLocation block) {
+		withExistingParent(itemName(item), block);
 	}
 
 	public void itemHandheldModel(Item item, ResourceLocation texture) {

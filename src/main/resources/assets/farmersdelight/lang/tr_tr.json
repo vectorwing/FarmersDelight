@@ -184,8 +184,8 @@
   "effect.farmersdelight.nourishment": "Beslenme",
   "effect.farmersdelight.comfort": "Konfor",
 
-  "effect.farmersdelight.nourishment.0.desc": "İyileşmek için doygunluğun kullanıldığı durumlar dışında açlık kaybetmeni önler.",
-  "effect.farmersdelight.comfort.0.desc": "Ne kadar aç olursanız olun doğal yenilenme sağlar.",
+  "effect.farmersdelight.nourishment.description": "İyileşmek için doygunluğun kullanıldığı durumlar dışında açlık kaybetmeni önler.",
+  "effect.farmersdelight.comfort.description": "Ne kadar aç olursanız olun doğal yenilenme sağlar.",
 
   "enchantment.farmersdelight.backstabbing": "Sırtından Bıçaklama",
   "enchantment.farmersdelight.backstabbing.desc": "Bir hedefe arkadan vururkenki hasarı artırır.",
@@ -264,7 +264,7 @@
   "farmersdelight.subtitles.skillet.add_food": "Tava tıslıyor",
   "farmersdelight.subtitles.cabinet.open": "Kiler açıldı",
   "farmersdelight.subtitles.cabinet.close": "Kiler kapandı",
-  "farmersdelight.subtitles.tomato.pick": "Domates toplandı",
+  "farmersdelight.subtitles.tomato_bush.pick_tomatoes": "Domates toplandı",
   "farmersdelight.subtitles.rotten_tomato.throw": "Çürük Domates uçuyor",
   "farmersdelight.subtitles.rotten_tomato.hit": "Çürük Domates çarptı",
 

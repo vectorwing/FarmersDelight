@@ -50,7 +50,7 @@ public class OrganicCompostBlock extends Block
 
 		for (BlockPos neighborPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
 			BlockState neighborState = level.getBlockState(neighborPos);
-			if (neighborState.is(ModTags.COMPOST_ACTIVATORS)) {
+			if (neighborState.is(ModTags.Blocks.COMPOST_ACTIVATORS)) {
 				chance += 0.02F;
 			}
 			if (neighborState.getFluidState().is(FluidTags.WATER)) {

@@ -23,10 +23,11 @@ import java.util.function.Consumer;
 /**
  * Util for obtaining and formatting ITextComponents for use across the mod.
  */
-
 public class TextUtils
 {
-	private static final MutableComponent NO_EFFECTS = Component.translatable("effect.none").withStyle(ChatFormatting.GRAY);
+	public static final MutableComponent NO_EFFECTS = Component.translatable("effect.none").withStyle(ChatFormatting.GRAY);
+	public static final MutableComponent PLACEABLE = tooltip("placeable").withStyle(ChatFormatting.DARK_GRAY).withStyle(ChatFormatting.ITALIC);
+	public static final MutableComponent PLACEABLE_SNEAKING = tooltip("placeable_sneaking").withStyle(ChatFormatting.DARK_GRAY).withStyle(ChatFormatting.ITALIC);
 
 	/**
 	 * Syntactic sugar for custom translation keys. Always prefixed with the mod's ID in lang files (e.g. farmersdelight.your.key.here).
@@ -35,8 +36,12 @@ public class TextUtils
 		return Component.translatable(FarmersDelight.MODID + "." + key, args);
 	}
 
+	public static MutableComponent tooltip(String key, Object... args) {
+		return Component.translatable(FarmersDelight.MODID + ".tooltip." + key, args);
+	}
+
 	/**
-	 * An alternate version of PotionUtils.addPotionTooltip, that obtains the item's food-property potion effects instead.
+	 * An alternate version of PotionUtils.addPotionTooltip, that obtains the item's food property potion effects instead.
 	 */
 	public static void addFoodEffectTooltip(ItemStack stack, Consumer<Component> tooltipAdder, float durationFactor, float tickRate) {
 		FoodProperties foodStats = stack.getFoodProperties(null);

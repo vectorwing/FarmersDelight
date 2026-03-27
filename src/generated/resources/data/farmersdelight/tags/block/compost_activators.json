@@ -7,7 +7,6 @@
     "farmersdelight:organic_compost",
     "farmersdelight:rich_soil",
     "farmersdelight:rich_soil_farmland",
-    "farmersdelight:brown_mushroom_colony",
-    "farmersdelight:red_mushroom_colony"
+    "#farmersdelight:mushroom_colonies"
   ]
 }

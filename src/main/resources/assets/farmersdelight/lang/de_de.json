@@ -205,8 +205,8 @@
   "effect.farmersdelight.nourishment": "Gesättigt",
   "effect.farmersdelight.comfort": "Komfort",
 
-  "effect.farmersdelight.nourishment.0.desc": "Verhindert Hungerverlust, es sei denn es wird Leben regeneriert.",
-  "effect.farmersdelight.comfort.0.desc": "Verleiht Immunität gegenüber Hunger, Langsamkeit und Schwäche",
+  "effect.farmersdelight.nourishment.description": "Verhindert Hungerverlust, es sei denn es wird Leben regeneriert.",
+  "effect.farmersdelight.comfort.description": "Verleiht Immunität gegenüber Hunger, Langsamkeit und Schwäche",
 
   "enchantment.farmersdelight.backstabbing": "Hinterhalt",
   "enchantment.farmersdelight.backstabbing.desc": "Mehr Schaden durch Angriffe von hinten.",
@@ -285,7 +285,7 @@
   "farmersdelight.subtitles.skillet.add_food": "Bratpfanne zischt",
   "farmersdelight.subtitles.cabinet.open": "Küchenschrank öffnet",
   "farmersdelight.subtitles.cabinet.close": "Küchenschrank Schließt",
-  "farmersdelight.subtitles.tomato.pick": "Tomate gepflückt",
+  "farmersdelight.subtitles.tomato_bush.pick_tomatoes": "Tomate gepflückt",
   "farmersdelight.subtitles.rotten_tomato.throw": "Verdorbene Tomate fliegt",
   "farmersdelight.subtitles.rotten_tomato.hit": "Verdorbene Tomaten spritzt",
 

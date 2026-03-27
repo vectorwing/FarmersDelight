@@ -1,9 +1,0 @@
-{
-  "values": [
-    "minecraft:shield",
-    {
-      "id": "create:extendo_grip",
-      "required": false
-    }
-  ]
-}

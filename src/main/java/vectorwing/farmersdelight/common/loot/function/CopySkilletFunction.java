@@ -37,9 +37,8 @@ public class CopySkilletFunction extends LootItemConditionalFunction
 
 	@Override
 	protected ItemStack run(ItemStack stack, LootContext context) {
-		BlockEntity tile = context.getParamOrNull(LootContextParams.BLOCK_ENTITY);
-		if (tile instanceof SkilletBlockEntity blockEntity) {
-			stack = blockEntity.getSkilletAsItem();
+		if (context.getParamOrNull(LootContextParams.BLOCK_ENTITY) instanceof SkilletBlockEntity skillet) {
+			stack = skillet.getSkilletAsItem();
 		}
 		return stack;
 	}

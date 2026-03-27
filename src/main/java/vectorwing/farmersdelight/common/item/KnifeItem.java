@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -32,6 +33,7 @@ import net.neoforged.neoforge.event.entity.living.LivingKnockBackEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 
@@ -39,10 +41,19 @@ import java.util.Set;
 
 public class KnifeItem extends DiggerItem
 {
-	public static final Set<ItemAbility> KNIFE_ACTIONS = Set.of(ItemAbilities.SHEARS_CARVE, ItemAbilities.SWORD_DIG);
+	/**
+	 * This action is used on cutting recipes which need a knife.
+	 */
+	public static final ItemAbility KNIFE_DIG = ItemAbility.get("knife_dig");
+	/**
+	 * This action is used in gameplay interactions where something is harvested.
+	 */
+	public static final ItemAbility KNIFE_HARVEST = ItemAbility.get("knife_harvest");
+
+	public static final Set<ItemAbility> KNIFE_ACTIONS = Set.of(ItemAbilities.SHEARS_CARVE, ItemAbilities.SWORD_DIG, KNIFE_DIG, KNIFE_HARVEST);
 
 	public KnifeItem(Tier tier, Properties properties) {
-		super(tier, ModTags.MINEABLE_WITH_KNIFE, properties);
+		super(tier, ModTags.Blocks.MINEABLE_WITH_KNIFE, properties);
 	}
 
 	@Override
@@ -75,11 +86,12 @@ public class KnifeItem extends DiggerItem
 		return super.supportsEnchantment(stack, enchantment);
 	}
 
+	@Override
 	public boolean canPerformAction(ItemStack stack, ItemAbility toolAction) {
 		return KNIFE_ACTIONS.contains(toolAction);
 	}
 
-	@EventBusSubscriber(modid = FarmersDelight.MODID, bus = EventBusSubscriber.Bus.GAME)
+	@EventBusSubscriber(modid = FarmersDelight.MODID)
 	public static class KnifeEvents
 	{
 		@SubscribeEvent
@@ -93,9 +105,9 @@ public class KnifeItem extends DiggerItem
 
 		@SubscribeEvent
 		public static void onCakeInteraction(PlayerInteractEvent.RightClickBlock event) {
-			ItemStack toolStack = event.getEntity().getItemInHand(event.getHand());
+			ItemStack heldStack = event.getEntity().getItemInHand(event.getHand());
 
-			if (!toolStack.is(ModTags.KNIVES)) {
+			if (!ItemUtils.isKnife(heldStack)) {
 				return;
 			}
 
@@ -104,14 +116,15 @@ public class KnifeItem extends DiggerItem
 			BlockState state = event.getLevel().getBlockState(pos);
 			Block block = state.getBlock();
 
-			if (state.is(ModTags.DROPS_CAKE_SLICE)) {
+			if (state.is(ModTags.Blocks.DROPS_CAKE_SLICE)) {
 				level.setBlock(pos, Blocks.CAKE.defaultBlockState().setValue(CakeBlock.BITES, 1), 3);
 				Block.dropResources(state, level, pos);
 				ItemUtils.spawnItemEntity(level, new ItemStack(ModItems.CAKE_SLICE.get()),
 						pos.getX(), pos.getY() + 0.2, pos.getZ() + 0.5,
 						-0.05, 0, 0);
-				level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
+				level.playSound(null, pos, ModSounds.BLOCK_PASTRY_SLICE.get(), SoundSource.PLAYERS, 0.8F, 0.8F);
 
+				event.getEntity().awardStat(Stats.ITEM_USED.get(heldStack.getItem()));
 				event.setCancellationResult(InteractionResult.SUCCESS);
 				event.setCanceled(true);
 			}
@@ -126,8 +139,9 @@ public class KnifeItem extends DiggerItem
 				ItemUtils.spawnItemEntity(level, new ItemStack(ModItems.CAKE_SLICE.get()),
 						pos.getX() + (bites * 0.1), pos.getY() + 0.2, pos.getZ() + 0.5,
 						-0.05, 0, 0);
-				level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
+				level.playSound(null, pos, ModSounds.BLOCK_PASTRY_SLICE.get(), SoundSource.PLAYERS, 0.8F, 0.8F);
 
+				event.getEntity().awardStat(Stats.ITEM_USED.get(heldStack.getItem()));
 				event.setCancellationResult(InteractionResult.SUCCESS);
 				event.setCanceled(true);
 			}
@@ -142,7 +156,7 @@ public class KnifeItem extends DiggerItem
 		BlockState state = level.getBlockState(pos);
 		Direction facing = context.getClickedFace();
 
-		if (state.getBlock() == Blocks.PUMPKIN && toolStack.is(ModTags.KNIVES)) {
+		if (state.getBlock() == Blocks.PUMPKIN && toolStack.is(ModTags.Items.KNIVES)) {
 			Player player = context.getPlayer();
 			if (player != null && !level.isClientSide) {
 				Direction direction = facing.getAxis() == Direction.Axis.Y ? player.getDirection().getOpposite() : facing;

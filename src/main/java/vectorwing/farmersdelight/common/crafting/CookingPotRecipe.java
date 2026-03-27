@@ -163,7 +163,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 	{
 		private static final MapCodec<CookingPotRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
 				Codec.STRING.optionalFieldOf("group", "").forGetter(CookingPotRecipe::getGroup),
-				CookingPotRecipeBookTab.CODEC.optionalFieldOf("recipe_book_tab").xmap(optional -> optional.orElse(null), Optional::of).forGetter(CookingPotRecipe::getRecipeBookTab),
+				CookingPotRecipeBookTab.CODEC.optionalFieldOf("recipe_book_tab", CookingPotRecipeBookTab.MISC).forGetter(CookingPotRecipe::getRecipeBookTab),
 				Ingredient.LIST_CODEC_NONEMPTY.fieldOf("ingredients").xmap(ingredients -> {
 					NonNullList<Ingredient> nonNullList = NonNullList.create();
 					nonNullList.addAll(ingredients);
@@ -191,18 +191,18 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 		}
 
 		private static CookingPotRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
-			String groupIn = buffer.readUtf();
-			CookingPotRecipeBookTab tabIn = CookingPotRecipeBookTab.findByName(buffer.readUtf());
+			String group = buffer.readUtf();
+			CookingPotRecipeBookTab tab = CookingPotRecipeBookTab.findByName(buffer.readUtf());
 			int i = buffer.readVarInt();
-			NonNullList<Ingredient> inputItemsIn = NonNullList.withSize(i, Ingredient.EMPTY);
+			NonNullList<Ingredient> inputItems = NonNullList.withSize(i, Ingredient.EMPTY);
 
-			inputItemsIn.replaceAll(ignored -> Ingredient.CONTENTS_STREAM_CODEC.decode(buffer));
+			inputItems.replaceAll(ignored -> Ingredient.CONTENTS_STREAM_CODEC.decode(buffer));
 
-			ItemStack outputIn = ItemStack.STREAM_CODEC.decode(buffer);
+			ItemStack output = ItemStack.STREAM_CODEC.decode(buffer);
 			ItemStack container = ItemStack.OPTIONAL_STREAM_CODEC.decode(buffer);
-			float experienceIn = buffer.readFloat();
-			int cookTimeIn = buffer.readVarInt();
-			return new CookingPotRecipe(groupIn, tabIn, inputItemsIn, outputIn, container, experienceIn, cookTimeIn);
+			float experience = buffer.readFloat();
+			int cookTime = buffer.readVarInt();
+			return new CookingPotRecipe(group, tab, inputItems, output, container, experience, cookTime);
 		}
 
 		private static void toNetwork(RegistryFriendlyByteBuf buffer, CookingPotRecipe recipe) {

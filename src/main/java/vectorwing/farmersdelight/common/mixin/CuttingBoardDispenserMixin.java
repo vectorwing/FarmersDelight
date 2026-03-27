@@ -36,7 +36,7 @@ public abstract class CuttingBoardDispenserMixin
 	)
 	public void onCuttingBoardDispenseFromInject(ServerLevel level, BlockState state, BlockPos pos, CallbackInfo ci, DispenserBlockEntity dispenser, BlockSource source, int slot, ItemStack stack) {
 		BlockState facingState = level.getBlockState(pos.relative(state.getValue(DispenserBlock.FACING)));
-		if (Configuration.DISPENSER_TOOLS_CUTTING_BOARD.get() && facingState.is(ModBlocks.CUTTING_BOARD.get())) {
+		if (Configuration.ENABLE_DISPENSER_TOOLS_CUTTING_BOARD.get() && facingState.is(ModBlocks.CUTTING_BOARD.get())) {
 			dispenser.setItem(slot, CuttingBoardDispenseBehavior.INSTANCE.dispense(source, stack));
 			ci.cancel();
 		}

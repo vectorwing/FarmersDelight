@@ -13,7 +13,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.FoodValues;
 
-@EventBusSubscriber(modid = FarmersDelight.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CommonModBusEvents
 {
 	@SubscribeEvent
@@ -27,7 +27,7 @@ public class CommonModBusEvents
 				event.modify(item, (builder) -> builder.set(DataComponents.MAX_STACK_SIZE, 16));
 			});
 		}
-		if (Configuration.RABBIT_STEW_BUFF.get()) {
+		if (Configuration.ENABLE_RABBIT_STEW_BUFF.get()) {
 			event.modify(Items.RABBIT_STEW, (builder) -> builder.set(DataComponents.FOOD, FoodValues.RABBIT_STEW_BUFF));
 		}
 	}

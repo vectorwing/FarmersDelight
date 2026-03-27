@@ -7,10 +7,23 @@
       "tag": "c:crops/cabbage"
     },
     {
-      "tag": "farmersdelight:cabbage_roll_ingredients"
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "tag": "c:foods/raw_meat"
+        },
+        {
+          "tag": "c:foods/safe_raw_fish"
+        },
+        {
+          "tag": "c:foods/vegetable"
+        },
+        {
+          "tag": "c:mushrooms"
+        }
+      ]
     }
   ],
-  "recipe_book_tab": "misc",
   "result": {
     "count": 1,
     "id": "farmersdelight:cabbage_rolls"

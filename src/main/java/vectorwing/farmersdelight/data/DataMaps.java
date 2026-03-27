@@ -5,10 +5,12 @@ import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
+import org.jetbrains.annotations.NotNull;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.concurrent.CompletableFuture;
 
+@SuppressWarnings("deprecation")
 public class DataMaps extends DataMapProvider
 {
 	protected DataMaps(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
@@ -16,7 +18,7 @@ public class DataMaps extends DataMapProvider
 	}
 
 	@Override
-	protected void gather() {
+	protected void gather(HolderLookup.@NotNull Provider provider) {
 		builder(NeoForgeDataMaps.COMPOSTABLES)
 				// 30% chance
 				.add(ModItems.TREE_BARK.get().asItem().builtInRegistryHolder(), new Compostable(0.3F), false)

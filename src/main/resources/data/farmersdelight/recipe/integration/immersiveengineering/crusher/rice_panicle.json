@@ -6,6 +6,16 @@
     }
   ],
   "type": "immersiveengineering:crusher",
+  "energy": 1600,
+  "input": {
+    "item": "farmersdelight:rice_panicle"
+  },
+  "result": {
+    "basePredicate": {
+      "item": "farmersdelight:rice"
+    },
+    "count": 1
+  },
   "secondaries": [
     {
       "chance": 1,
@@ -14,15 +24,5 @@
         "item": "farmersdelight:straw"
       }
     }
-  ],
-  "result": {
-    "basePredicate": {
-      "item": "farmersdelight:rice"
-    },
-    "count": 1
-  },
-  "input": {
-    "item": "farmersdelight:rice_panicle"
-  },
-  "energy": 3200
+  ]
 }
