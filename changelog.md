@@ -86,6 +86,7 @@
 
 ### Fixes
 - (1.21+) Fix Skillet crashing when placed, if the server has disabled/removed the Fire Aspect enchantment;
+- (1.21+) Fix Rich Soil not emitting bone meal particles when boosting plants;
 
 ### Removals
 - The following tags have been removed:
