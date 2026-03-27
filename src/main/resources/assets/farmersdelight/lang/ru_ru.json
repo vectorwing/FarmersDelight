@@ -456,7 +456,7 @@
   "tag.item.farmersdelight.tools.knives": "Ножи",
   "tag.item.farmersdelight.wild_crops": "Дикие культуры",
 
-  "farmersdelight.configuration.title": "Настройки Фермерского восторга",
+  "farmersdelight.configuration.title": "Фермерский восторг — настройки",
 
   "farmersdelight.configuration.section.farmersdelight.client.toml": "Клиентские настройки",
   "farmersdelight.configuration.section.farmersdelight.client.toml.title": "Клиентские настройки",
@@ -470,7 +470,7 @@
   "farmersdelight.configuration.stack_size": "Переопределения размера стака",
   "farmersdelight.configuration.world": "Генерация мира",
   "farmersdelight.configuration.debug": "Настройки отладки",
-  "farmersdelight.configuration.debug.tooltip": "Этот раздел предназначен исключительно для тестирования и не рассчитан для игрового процесса.",
+  "farmersdelight.configuration.debug.tooltip": "§lВнимание:§r Этот раздел не предназначен для стандартного игрового процесса.",
 
   "farmersdelight.configuration.enableFarmerFDTrades": "Особые сделки у фермеров",
   "farmersdelight.configuration.enableFarmerFDTrades.tooltip": "Если включено, жители-фермеры уровня «Новичок» и «Подмастерье» будут иметь шанс покупать культуры из этого мода.",
@@ -517,7 +517,7 @@
   "farmersdelight.configuration.generateFDCropsOnVillageFarms.tooltip": "Если включено, культуры из Фермерского Восторга иногда будут заменять стандартные культуры на фермерских участках деревень.",
 
   "farmersdelight.configuration.enableTomatoRopePermanence": "Постоянство верёвки томатов",
-  "farmersdelight.configuration.enableTomatoRopePermanence.tooltip": "Томатные культуры, висящие на верёвке, принудительно размещают блок верёвки при разрушении. Из-за технических ограничений это влияет на такие вещи, как команды, заставляя их не срабатывать при первом «setblock».\n\nОтключите это, если данный блок мешает редактировать область в режиме творчества или с помощью команд. Для обычного игрового процесса рекомендуется оставить включённым.",
+  "farmersdelight.configuration.enableTomatoRopePermanence.tooltip": "Томатные культуры, висящие на верёвке, принудительно размещают блок верёвки при разрушении. Из-за технических ограничений это сказывается, в частности, на команды, из-за чего не удаётся выполнить команду «setblock» для данного блока с первого раза.\n\nОтключите это, если данный блок мешает редактировать область в режиме творчества или с помощью команд. Для обычного игрового процесса рекомендуется оставить включённым.",
 
   "farmersdelight.configuration.enableNourishmentHungerOverlay": "Наложение эффекта сытости на шкалу голода",
   "farmersdelight.configuration.enableNourishmentHungerOverlay.tooltip": "Если включено, при наличии у игрока эффекта Сытости поверх шкалы еды будет отображаться золотистое наложение.",
