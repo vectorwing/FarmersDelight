@@ -453,5 +453,75 @@
   "tag.item.farmersdelight.straw_harvesters": "Colhedores de palha",
   "tag.item.farmersdelight.sweets": "Doces",
   "tag.item.farmersdelight.tools.knives": "Facas",
-  "tag.item.farmersdelight.wild_crops": "Hortas silvestres"
+  "tag.item.farmersdelight.wild_crops": "Hortas silvestres",
+
+  "farmersdelight.configuration.title": "Farmer's Delight - Configurações",
+
+  "farmersdelight.configuration.section.farmersdelight.client.toml": "Configurações locais",
+  "farmersdelight.configuration.section.farmersdelight.client.toml.title": "Configurações locais",
+  "farmersdelight.configuration.section.farmersdelight.common.toml": "Configurações gerais",
+  "farmersdelight.configuration.section.farmersdelight.common.toml.title": "Configurações gerais",
+
+  "farmersdelight.configuration.settings": "Opções de jogo",
+  "farmersdelight.configuration.farming": "Colheita",
+  "farmersdelight.configuration.crafting": "Fabricação",
+  "farmersdelight.configuration.overrides": "Sobreposição do jogo base",
+  "farmersdelight.configuration.stack_size": "Sobreposição do tamanho de pilhas de itens",
+  "farmersdelight.configuration.world": "Geração de mundo",
+  "farmersdelight.configuration.debug": "Opções de debug",
+  "farmersdelight.configuration.debug.tooltip": "§lAviso:§r Esta seção não deve ser usada durante o jogo normal.",
+
+  "farmersdelight.configuration.enableFarmerFDTrades": "Trocas com Fazendeiros",
+  "farmersdelight.configuration.enableFarmerFDTrades.tooltip": "Ao habilitar, aldeões fazendeiros de nível Noviço e Aprendiz terão uma chance de comprar hortas deste mod.",
+  "farmersdelight.configuration.enableWanderingTraderFDTrades": "Trocas com Vendedor Ambulante",
+  "farmersdelight.configuration.enableWanderingTraderFDTrades.tooltip": "Ao habilitar, o Vendedor Ambulante terá uma chance de vender sementes e plantáveis deste mod.",
+  "farmersdelight.configuration.enableRopeReeling": "Recolhimento de corda",
+  "farmersdelight.configuration.enableRopeReeling.tooltip": "Ao habilitar, jogadores poderão recolher colunas de corda, de baixo para cima, ao agachar e usar cordas com uma mão vazia.",
+  "farmersdelight.configuration.canvasSignDarkBackgroundList": "Placas de lona com fundo escuro",
+  "farmersdelight.configuration.canvasSignDarkBackgroundList.tooltip": "Uma lista de tinturas que, ao tingirem o fundo de uma Placa de Lona, exibirão texto branco por padrão.\n\nTinturas (em inglês):\n[\"white\", \"orange\", \"magenta\", \"light_blue\", \"yellow\", \"lime\", \"pink\", \"gray\", \"light_gray\", \"cyan\", \"purple\", \"blue\", \"brown\", \"green\", \"red\", \"black\"]",
+
+  "farmersdelight.configuration.richSoilBoostChance": "Chance de nutrição do Solo Rico",
+  "farmersdelight.configuration.richSoilBoostChance.tooltip": "A chance (em porcentagem decimal) do Solo Rico prover nutrição (farinha de osso) a uma planta enraizada em si. Defina 0.0 para desabilitar.",
+  "farmersdelight.configuration.enableTomatoVineClimbingTaggedRopes": "Tomates escalam cordas dentro da tag",
+  "farmersdelight.configuration.enableTomatoVineClimbingTaggedRopes.tooltip": "Ao habilitar, hortas de tomate poderão escalar qualquer corda marcada como farmersdelight:ropes. Ao desabilitar, ela só poderá escalar a corda deste mod.\n\n§lAtenção: blocos compatíveis serão convertidos ao bloco definido em defaultTomatoVineRope.§r",
+  "farmersdelight.configuration.defaultTomatoVineRope": "Corda padrão para Horta de Tomate",
+  "farmersdelight.configuration.defaultTomatoVineRope.tooltip": "Qual corda a horta de tomate deve deixar no lugar ao ser destruída?",
+
+  "farmersdelight.configuration.enableCookingPotRecipeBook": "Livro de receitas da Panela",
+  "farmersdelight.configuration.enableCookingPotRecipeBook.tooltip": "Ao habilitar, a Panela exibirá um livro de receitas em sua interface, assim como o livro presente na Bancada de Trabalho e na Fornalha.",
+  "farmersdelight.configuration.enableVanillaCropCrates": "Caixotes de hortas do jogo base",
+  "farmersdelight.configuration.enableVanillaCropCrates.tooltip": "Ao habilitar, caixotes de armazenamento (3x3) serão fabricáveis para hortas do jogo base.",
+  "farmersdelight.configuration.cuttingBoardFortuneBonus": "Bônus de fortuna na Tábua de Corte",
+  "farmersdelight.configuration.cuttingBoardFortuneBonus.tooltip": "Por quanto (em porcentagem decimal) cada nível de Fortuna deve aumentar as chances de itens raros na Tábua de Corte? Defina 0.0 para desabilitar.",
+
+  "farmersdelight.configuration.enableVanillaSoupExtraEffects": "Efeitos extras em sopas do jogo base",
+  "farmersdelight.configuration.enableVanillaSoupExtraEffects.tooltip": "Ao habilitar, sopas e ensopados do Minecraft darão Nutrição ao serem consumidos, assim como as refeições deste mod.",
+  "farmersdelight.configuration.enableRabbitStewBuff": "Melhoria do Ensopado de Coelho",
+  "farmersdelight.configuration.enableRabbitStewBuff.tooltip": "Ao habilitar, o Ensopado de Coelho terá valores alimentícios melhorados, para equivaler ao seu custo de preparo.",
+  "farmersdelight.configuration.enablePumpkinPieSneakToPlace": "Agachar para colocar Torta de Abóbora",
+  "farmersdelight.configuration.enablePumpkinPieSneakToPlace.tooltip": "Ao habilitar, a Torta de Abóbora só poderá ser colocada como bloco se o jogador estiver agachado.",
+  "farmersdelight.configuration.enableCuttingBoardDispenserBehavior": "Ejetor opera Tábua de Corte",
+  "farmersdelight.configuration.enableCuttingBoardDispenserBehavior.tooltip": "Ao habilitar, o Ejetor poderá operar uma Tábua de Corte na sua frente, usando itens armazenados como ferramentas de corte.",
+
+  "farmersdelight.configuration.enableStackableSoupItems": "Empilhamento de itens de sopa",
+  "farmersdelight.configuration.enableStackableSoupItems.tooltip": "Ao habilitar, qualquer BowlFoodItem na lista a seguir poderá ser empilhado até 16 itens, assim como as refeições do Farmer's Delight.",
+  "farmersdelight.configuration.soupItemList": "Itens de sopa",
+  "farmersdelight.configuration.soupItemList.tooltip": "Lista de itens de sopa afetados. Eles devem estender a classe BowlFoodItem no código para serem afetados. Afeta sopas do jogo base por padrão.",
+
+  "farmersdelight.configuration.generateFDChestLoot": "Gerar itens do mod em baús",
+  "farmersdelight.configuration.generateFDChestLoot.tooltip": "Ao habilitar, o mod adicionará novas listas de itens a serem gerados em baús através do jogo (cordas, sementes, ferramentas etc).",
+  "farmersdelight.configuration.generateVillageCompostHeaps": "Gerar pilhas de composto em vilarejos",
+  "farmersdelight.configuration.generateVillageCompostHeaps.tooltip": "Ao habilitar, pilhas de composto (estruturas com pilhas de Composto Orgânico) serão geradas em Vilas de vez em quando.",
+  "farmersdelight.configuration.generateFDCropsOnVillageFarms": "Gerar hortas do mod em vilarejos",
+  "farmersdelight.configuration.generateFDCropsOnVillageFarms.tooltip": "Ao habilitar, hortas do Farmer's Delight substituirão hortas do jogo base em fazendas de Vilas de vez em quando.",
+
+  "farmersdelight.configuration.enableTomatoRopePermanence": "Permanência da corda em hortas de tomate",
+  "farmersdelight.configuration.enableTomatoRopePermanence.tooltip": "Hortas de tomate forçam a colocação de uma Corda quando destruídas. Devido a limitações técnicas, isto também afeta comandos, fazendo 'setblock' neste bloco falhar na primeira execução.\n\nDesabilite esta opção se o bloco está impedindo a edição de regiões no modo criativo, ou por comandos. Para o jogo normal, recomendo deixar habilitado.",
+
+  "farmersdelight.configuration.enableNourishmentHungerOverlay": "Indicador de Nutrição no medidor de fome",
+  "farmersdelight.configuration.enableNourishmentHungerOverlay.tooltip": "Ao habilitar, o medidor de fome será exibido com uma camada dourada quando o jogador estiver sob o efeito Nutrição.",
+  "farmersdelight.configuration.enableComfortHealthOverlay": "Indicador de Conforto no medidor de vida",
+  "farmersdelight.configuration.enableComfortHealthOverlay.tooltip": "Ao habilitar, o medidor de vida será exibido com um brilho corrente quando o jogador estiver sob o efeito Conforto.",
+  "farmersdelight.configuration.enableFoodEffectTooltip": "Dica de efeitos em itens comestíveis",
+  "farmersdelight.configuration.enableFoodEffectTooltip.tooltip": "Ao habilitar, itens de comida exibirão em suas descrições os efeitos que concedem quando consumidos. Se aplica a comidas tanto do Minecraft quanto deste mod."
 }

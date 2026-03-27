@@ -517,7 +517,7 @@
   "farmersdelight.configuration.generateFDCropsOnVillageFarms.tooltip": "If enabled, crops from Farmer's Delight will sometimes replace standard crops in village farm plots.",
 
   "farmersdelight.configuration.enableTomatoRopePermanence": "Tomato Rope Permanence",
-  "farmersdelight.configuration.enableTomatoRopePermanence.tooltip": "Tomato crops hanging on rope will force-place a Rope block when broken. Due to technical limitations, this affects things such as commands, making them fail to 'setblock' at first.\n\nDisable this if this block is preventing you from editing a region in creative or with commands. For normal gameplay, I recommend leaving this enabled.",
+  "farmersdelight.configuration.enableTomatoRopePermanence.tooltip": "Tomato crops hanging on rope will force-place a Rope block when broken. Due to technical limitations, this affects things such as commands, making them fail to 'setblock' this block on the first attempt.\n\nDisable this if this block is preventing you from editing a region in creative or with commands. For normal gameplay, I recommend leaving this enabled.",
 
   "farmersdelight.configuration.enableNourishmentHungerOverlay": "Nourishment Hunger Overlay",
   "farmersdelight.configuration.enableNourishmentHungerOverlay.tooltip": "If enabled, a gilded overlay will be shown over the food meter when the player has the Nourishment effect.",
