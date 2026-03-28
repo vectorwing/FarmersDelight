@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.common.block.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -8,9 +9,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.AbstractCookingRecipe;
-import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -29,7 +28,7 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
     private final RecipeType<? extends AbstractCookingRecipe> recipeType;
     private final int[] cookingProgress;
     private final int[] cookingTime;
-    private final RecipeManager.CachedCheck<Container, ? extends AbstractCookingRecipe> quickRecipeLookup;
+    private final RecipeManager.CachedCheck<SingleRecipeInput, ? extends AbstractCookingRecipe> quickRecipeLookup;
 
     protected AbstractStoveBlockEntity(
             BlockEntityType<?> blockEntityType,
@@ -56,11 +55,11 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
 
         this.items.clear();
-        ContainerHelper.loadAllItems(tag, this.items);
+        ContainerHelper.loadAllItems(tag, this.items, registries);
 
         if (tag.contains("CookingTimes", 11)) {
             int[] arrayCookingTimes = tag.getIntArray("CookingTimes");
@@ -74,9 +73,9 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
     }
 
     @Override
-    public void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
-        ContainerHelper.saveAllItems(tag, this.items, true);
+    public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
+        ContainerHelper.saveAllItems(tag, this.items, true, registries);
         tag.putIntArray("CookingTimes", this.cookingProgress);
         tag.putIntArray("CookingTotalTimes", this.cookingTime);
     }
@@ -87,9 +86,9 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
-        CompoundTag tag = super.getUpdateTag();
-        ContainerHelper.saveAllItems(tag, this.items, true);
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        CompoundTag tag = super.getUpdateTag(registries);
+        ContainerHelper.saveAllItems(tag, this.items, true, registries);
         return tag;
     }
 
@@ -119,10 +118,11 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 
             ++cookingProgress[i];
             if (cookingProgress[i] < cookingTime[i]) continue;
-            Container container = new SimpleContainer(ingredient);
-            ItemStack result = this.quickRecipeLookup.getRecipeFor(container, this.level).map(
-                (recipe) -> recipe.assemble(container, this.level.registryAccess())
-            ).orElse(ingredient);
+
+            var input = new SingleRecipeInput(ingredient);
+            ItemStack result = this.quickRecipeLookup.getRecipeFor(input, this.level)
+                .map((recipe) -> recipe.value().assemble(input, this.level.registryAccess()))
+                .orElse(ingredient);
 
             if (!result.isItemEnabled(this.level.enabledFeatures())) continue;
             Containers.dropItemStack(
@@ -153,9 +153,9 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
         if (didChange) this.setChanged();
     }
 
-    public Optional<? extends AbstractCookingRecipe> getCookingRecipe(ItemStack itemStack) {
+    public Optional<? extends RecipeHolder<? extends AbstractCookingRecipe>> getCookingRecipe(ItemStack itemStack) {
         assert this.level != null;
-        return this.quickRecipeLookup.getRecipeFor(new SimpleContainer(itemStack), this.level);
+        return this.quickRecipeLookup.getRecipeFor(new SingleRecipeInput(itemStack), this.level);
     }
 
     public int getNextEmptySlot() {
@@ -165,14 +165,14 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
                 .orElse(-1);
     }
 
-    public boolean placeFood(@Nullable Entity entity, ItemStack foodStackToPlace, int foodCookingTime) {
+    public boolean placeFood(@Nullable Entity entity, ItemStack foodStackToPlace, RecipeHolder<? extends AbstractCookingRecipe> recipe) {
         assert this.level != null;
 
         int emptySlotIndex = getNextEmptySlot();
         if (emptySlotIndex < 0) return false;
         assert this.items.get(emptySlotIndex).isEmpty();
 
-        this.cookingTime[emptySlotIndex] = foodCookingTime;
+        this.cookingTime[emptySlotIndex] = recipe.value().getCookingTime();
         this.cookingProgress[emptySlotIndex] = 0;
         this.items.set(emptySlotIndex, foodStackToPlace.split(1));
         var state = this.getBlockState();

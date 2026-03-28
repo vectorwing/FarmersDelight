@@ -118,10 +118,10 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock {
         if (isStoveTopCovered(level, pos, state)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (!(level.getBlockEntity(pos) instanceof AbstractStoveBlockEntity stoveEntity)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 
-        Optional<? extends AbstractCookingRecipe> maybeRecipe = stoveEntity.getCookingRecipe(heldStack);
+        var maybeRecipe = stoveEntity.getCookingRecipe(heldStack);
         if (maybeRecipe.isEmpty()) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (!level.isClientSide) {
-            boolean placeFoodSuccess = stoveEntity.placeFood(player, player.getAbilities().instabuild ? heldStack.copy() : heldStack, maybeRecipe.get().getCookingTime());
+            boolean placeFoodSuccess = stoveEntity.placeFood(player, player.getAbilities().instabuild ? heldStack.copy() : heldStack, maybeRecipe.get());
             if (placeFoodSuccess) return ItemInteractionResult.SUCCESS;
         }
         return ItemInteractionResult.CONSUME;
