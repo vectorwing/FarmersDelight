@@ -216,6 +216,7 @@
   "item.farmersdelight.pumpkin_soup": "Гарбузовий суп",
   "item.farmersdelight.baked_cod_stew": "Запечена тушкована тріска",
   "item.farmersdelight.noodle_soup": "Суп з локшиною",
+  "item.farmersdelight.onion_soup": "Цибулевий суп",
   "item.farmersdelight.bone_broth": "Кістяний бульйон",
 
   "item.farmersdelight.bacon_and_eggs": "Яєчня з беконом",
@@ -274,7 +275,7 @@
   "farmersdelight.tooltip.melon_juice": "Відновлює трохи здоров'я",
   "farmersdelight.tooltip.placeable": "Можна розмістити",
   "farmersdelight.tooltip.placeable_sneaking": "Можна розмістити крадучись",
-  "farmersdelight.tooltip.debug_item": "Предмет для налагодження - не призначений для гри",
+  "farmersdelight.tooltip.debug_item": "Предмет для налагодження — не призначений для гри",
 
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "Світ смаків чекає на вас!",
@@ -456,7 +457,7 @@
   "tag.item.farmersdelight.tools.knives": "Ножі",
   "tag.item.farmersdelight.wild_crops": "Дикі культури",
 
-  "farmersdelight.configuration.title": "Конфігурація Farmer's Delight",
+  "farmersdelight.configuration.title": "Farmer's Delight — налаштування",
 
   "farmersdelight.configuration.section.farmersdelight.client.toml": "Клієнтські налаштування",
   "farmersdelight.configuration.section.farmersdelight.client.toml.title": "Клієнтські налаштування",
@@ -470,7 +471,7 @@
   "farmersdelight.configuration.stack_size": "Заміна розміру стопки",
   "farmersdelight.configuration.world": "Генерація світу",
   "farmersdelight.configuration.debug": "Налаштування налагодження",
-  "farmersdelight.configuration.debug.tooltip": "Цей розділ призначений виключно для тестування і не призначений для ігрового процесу.",
+  "farmersdelight.configuration.debug.tooltip": "§lУвага:§r Цей розділ не призначений для стандартного ігрового процесу.",
 
   "farmersdelight.configuration.enableFarmerFDTrades": "Особливі торги у фермерів",
   "farmersdelight.configuration.enableFarmerFDTrades.tooltip": "Якщо увімкнено, селяни-фермери рівнів «Новачок» і «Підмайстер» матимуть шанс купувати культури з цього мода.",
@@ -517,7 +518,7 @@
   "farmersdelight.configuration.generateFDCropsOnVillageFarms.tooltip": "Якщо увімкнено, культури з Farmer's Delight іноді замінятимуть стандартні культури на фермах сіл.",
 
   "farmersdelight.configuration.enableTomatoRopePermanence": "Постійність томатної мотузки",
-  "farmersdelight.configuration.enableTomatoRopePermanence.tooltip": "Томатні культури, підвішені на мотузці, примусово розміщують блок мотузки при зламі. Через технічні обмеження це впливає на такі речі, як команди, змушуючи їх не виконувати «setblock» з першого разу.\n\nВимкніть це, якщо цей блок заважає вам редагувати регіон у творчому режимі або за допомогою команд. Для звичайного геймплею рекомендовано залишити увімкненим.",
+  "farmersdelight.configuration.enableTomatoRopePermanence.tooltip": "Томатні культури, підвішені на мотузці, примусово розміщують блок мотузки при зламі. Через технічні обмеження це впливає, зокрема, на команди, через що не вдається виконати команду «setblock» для цього блоку з першої спроби.\n\nВимкніть це, якщо цей блок заважає вам редагувати регіон у творчому режимі або за допомогою команд. Для звичайного геймплею рекомендовано залишити увімкненим.",
 
   "farmersdelight.configuration.enableNourishmentHungerOverlay": "Накладення ситості на індикатор голоду",
   "farmersdelight.configuration.enableNourishmentHungerOverlay.tooltip": "Якщо увімкнено, на індикаторі їжі відображатиметься позолочене накладення, коли гравець має ефект ситості.",

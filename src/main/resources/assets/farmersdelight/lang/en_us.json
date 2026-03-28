@@ -274,7 +274,7 @@
   "farmersdelight.tooltip.melon_juice": "Minor Instant Health",
   "farmersdelight.tooltip.placeable": "Placeable",
   "farmersdelight.tooltip.placeable_sneaking": "Placeable when sneaking",
-  "farmersdelight.tooltip.debug_item": "Debug item - Not meant for gameplay",
+  "farmersdelight.tooltip.debug_item": "Debug item — Not meant for gameplay",
 
   "farmersdelight.advancement.root": "Farmer's Delight",
   "farmersdelight.advancement.root.desc": "A world of flavor awaits you!",
@@ -456,7 +456,7 @@
   "tag.item.farmersdelight.tools.knives": "Knives",
   "tag.item.farmersdelight.wild_crops": "Wild Crops",
 
-  "farmersdelight.configuration.title": "Farmer's Delight - Settings",
+  "farmersdelight.configuration.title": "Farmer's Delight — Settings",
 
   "farmersdelight.configuration.section.farmersdelight.client.toml": "Client settings",
   "farmersdelight.configuration.section.farmersdelight.client.toml.title": "Client settings",
