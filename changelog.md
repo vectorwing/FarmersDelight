@@ -3,6 +3,8 @@
 ## 1.3.0 (WIP)
 
 ### Additions
+- New items:
+  - **Onion Soup** - A simple dish made with Onions, Milk and Bread;
 - New blocks:
   - **Gleaming Salad** - A salad that shines like a Lush Cave! Made with fresh Glow Berries and a rich selection of vegetables, it will (literally) illuminate your dinner table;
   - **Rope Fence** - A thin and sleek flavor of fence, complete with its own **Rope Fence Gate**!
