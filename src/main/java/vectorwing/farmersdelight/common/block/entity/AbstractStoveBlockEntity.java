@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec2;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.block.AbstractStoveBlock;
 
 import javax.annotation.Nullable;
@@ -51,8 +50,6 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
     protected abstract int getInventorySlotCount();
 
     public abstract Vec2 getStoveItemOffset(int index);
-
-    public abstract VoxelShape getGrillingArea();
 
     public NonNullList<ItemStack> getItems() {
         return this.items;
