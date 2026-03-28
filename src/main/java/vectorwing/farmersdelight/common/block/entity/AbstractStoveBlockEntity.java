@@ -96,34 +96,6 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
         return tag;
     }
 
-    public static void clientTick(Level level, BlockPos pos, BlockState state, AbstractStoveBlockEntity stoveEntity) {
-        if (stoveEntity.isEmpty()) return;
-        stoveEntity.addSmokeParticles();
-    }
-
-    private void addSmokeParticles() {
-        assert this.level != null;
-
-        for (int i = 0; i < this.items.size(); ++i) {
-            if (this.items.get(i).isEmpty()) continue;
-            if (level.random.nextFloat() >= 0.2F) continue;
-            Vec2 itemOffset = this.getStoveItemOffset(i);
-            Direction direction = this.getBlockState().getValue(AbstractStoveBlock.FACING);
-            if (direction.get2DDataValue() % 2 != 0) {
-                //noinspection SuspiciousNameCombination
-                itemOffset = new Vec2(itemOffset.y, itemOffset.x);
-            }
-
-            double x = (worldPosition.getX() + 0.5D) - (direction.getStepX() * itemOffset.x) + (direction.getClockWise().getStepX() * itemOffset.x);
-            double y = worldPosition.getY() + 1.0D;
-            double z = (worldPosition.getZ() + 0.5D) - (direction.getStepZ() * itemOffset.y) + (direction.getClockWise().getStepZ() * itemOffset.y);
-
-            for (int k = 0; k < 3; ++k) {
-                level.addParticle(ParticleTypes.SMOKE, x, y, z, 0.0D, 5.0E-4D, 0.0D);
-            }
-        }
-    }
-
     public static void serverTick(Level level, BlockPos pos, BlockState state, AbstractStoveBlockEntity stoveEntity) {
         if (stoveEntity.isEmpty()) return;
         if (stoveEntity.shouldDropItems()) {
