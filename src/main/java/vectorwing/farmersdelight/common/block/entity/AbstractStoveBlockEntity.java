@@ -213,4 +213,6 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
         this.setChanged();
         // level.gameEvent is called in AbstractStoveBlock::extinguish, so it is not called here
     }
+
+    public void clearContent() { this.items.clear(); }
 }
