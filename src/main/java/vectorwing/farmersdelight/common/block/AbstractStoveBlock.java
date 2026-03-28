@@ -168,7 +168,8 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock {
         if (!entity.getBoundingBox().intersects(GRILLING_AREA.bounds().move(pos.above()))) return;
         if (entity.isSteppingCarefully()) return;
         if (entity.fireImmune()) return;
-        if (entity instanceof LivingEntity livingEntity && EnchantmentHelper.hasFrostWalker(livingEntity)) return;
+        if (!(entity instanceof LivingEntity livingEntity)) return;
+        if (EnchantmentHelper.hasFrostWalker(livingEntity)) return;
         entity.hurt(ModDamageTypes.getSimpleDamageSource(level, ModDamageTypes.STOVE_BURN), 1.0F);
     }
 
