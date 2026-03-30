@@ -186,12 +186,10 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock {
 	 * Checks if the state is a Stove, and if the grilling area is being obstructed by the block above.
 	 */
 	public static boolean isStoveTopCovered(Level level, BlockPos pos, BlockState stoveState) {
-		if (stoveState.getBlock() instanceof StoveBlock) {
-			BlockPos abovePos = pos.above();
-			BlockState aboveState = level.getBlockState(abovePos);
-			return Shapes.joinIsNotEmpty(GRILLING_AREA, aboveState.getShape(level, abovePos), BooleanOp.AND);
-		}
-		return false;
+		if (!(stoveState.getBlock() instanceof StoveBlock)) return false;
+		BlockPos abovePos = pos.above();
+		BlockState aboveState = level.getBlockState(abovePos);
+		return Shapes.joinIsNotEmpty(GRILLING_AREA, aboveState.getShape(level, abovePos), BooleanOp.AND);
 	}
 
 	@Override
