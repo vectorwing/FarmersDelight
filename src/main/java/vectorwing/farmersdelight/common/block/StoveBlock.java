@@ -25,15 +25,15 @@ public class StoveBlock extends AbstractStoveBlock
 		super(properties);
 	}
 
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new StoveBlockEntity(pos, state);
-    }
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return new StoveBlockEntity(pos, state);
+	}
 
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        if (level.isClientSide && state.getValue(LIT)) return createTickerHelper(blockEntityType, ModBlockEntityTypes.STOVE.get(), StoveBlockEntity::particleTick);
-        return createStoveTicker(level, blockEntityType, ModBlockEntityTypes.STOVE.get());
-    }
+	@Nullable
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+		if (level.isClientSide && state.getValue(LIT)) return createTickerHelper(blockEntityType, ModBlockEntityTypes.STOVE.get(), StoveBlockEntity::particleTick);
+		return createStoveTicker(level, blockEntityType, ModBlockEntityTypes.STOVE.get());
+	}
 
 	@Override
 	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {

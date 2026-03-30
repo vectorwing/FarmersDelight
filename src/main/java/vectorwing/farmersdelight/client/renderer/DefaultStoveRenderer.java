@@ -18,45 +18,45 @@ import vectorwing.farmersdelight.common.block.entity.AbstractStoveBlockEntity;
 
 public class DefaultStoveRenderer<T extends AbstractStoveBlockEntity> implements BlockEntityRenderer<T>
 {
-    private static final float SIZE = 0.375F;
-    private final ItemRenderer itemRenderer;
+	private static final float SIZE = 0.375F;
+	private final ItemRenderer itemRenderer;
 
 	public DefaultStoveRenderer(BlockEntityRendererProvider.Context context) {
-        this.itemRenderer = context.getItemRenderer();
+		this.itemRenderer = context.getItemRenderer();
 	}
 
 	@Override
 	public void render(T stove, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
 		Direction direction = stove.getBlockState().getValue(StoveBlock.FACING).getOpposite();
 
-        NonNullList<ItemStack> items = stove.getItems();
+		NonNullList<ItemStack> items = stove.getItems();
 		int posLong = (int) stove.getBlockPos().asLong();
 
 		for (int i = 0; i < items.size(); ++i) {
 			ItemStack stoveStack = items.get(i);
-            if (stoveStack.isEmpty()) continue;
+			if (stoveStack.isEmpty()) continue;
 
-            poseStack.pushPose();
+			poseStack.pushPose();
 
-            // Center item above the stove
-            poseStack.translate(0.5D, 1.02D, 0.5D);
+			// Center item above the stove
+			poseStack.translate(0.5D, 1.02D, 0.5D);
 
-            // Rotate item to face the stove's front side
-            float f = -direction.toYRot();
-            poseStack.mulPose(Axis.YP.rotationDegrees(f));
+			// Rotate item to face the stove's front side
+			float f = -direction.toYRot();
+			poseStack.mulPose(Axis.YP.rotationDegrees(f));
 
-            // Rotate item flat on the stove. Use X and Y from now on
-            poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
+			// Rotate item flat on the stove. Use X and Y from now on
+			poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
 
-            // Neatly align items according to their index
-            Vec2 itemOffset = stove.getStoveItemOffset(i);
-            poseStack.translate(itemOffset.x, itemOffset.y, 0.0D);
+			// Neatly align items according to their index
+			Vec2 itemOffset = stove.getStoveItemOffset(i);
+			poseStack.translate(itemOffset.x, itemOffset.y, 0.0D);
 
-            // Resize the items
-            poseStack.scale(SIZE, SIZE, SIZE);
+			// Resize the items
+			poseStack.scale(SIZE, SIZE, SIZE);
 
-            itemRenderer.renderStatic(stoveStack, ItemDisplayContext.FIXED, LevelRenderer.getLightColor(stove.getLevel(), stove.getBlockPos().above()), packedOverlay, poseStack, buffer, stove.getLevel(), posLong + i);
-            poseStack.popPose();
-        }
+			itemRenderer.renderStatic(stoveStack, ItemDisplayContext.FIXED, LevelRenderer.getLightColor(stove.getLevel(), stove.getBlockPos().above()), packedOverlay, poseStack, buffer, stove.getLevel(), posLong + i);
+			poseStack.popPose();
+		}
 	}
 }
