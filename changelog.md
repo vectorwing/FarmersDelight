@@ -87,6 +87,9 @@
 - Zombies and Illagers now have a very small chance of dropping an Onion when killed by a player, similar to Carrots and Potatoes;
 - Cats can now be tamed with Salmon Slice and Cod Slice;
 
+### Fixes
+- Fix container items spilling into the ingredient slots when shift-clicking an excess amount into the Cooking Pot's container slot;
+
 ### Removals
 - The following tags have been removed:
   - `cabbage_roll_ingredients`: Replaced by an array of equivalent tags: `raw_meat`, `raw_fishes`, `mushrooms` and `vegetables`;
