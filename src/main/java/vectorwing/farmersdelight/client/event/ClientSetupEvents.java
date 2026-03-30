@@ -1,10 +1,14 @@
 package vectorwing.farmersdelight.client.event;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -14,6 +18,7 @@ import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.client.gui.CookingPotTooltip;
@@ -23,6 +28,7 @@ import vectorwing.farmersdelight.client.particle.StarParticle;
 import vectorwing.farmersdelight.client.particle.SteamParticle;
 import vectorwing.farmersdelight.client.recipebook.RecipeCategories;
 import vectorwing.farmersdelight.client.renderer.*;
+import vectorwing.farmersdelight.common.EnumParameters;
 import vectorwing.farmersdelight.common.item.component.ItemStackWrapper;
 import vectorwing.farmersdelight.common.registry.*;
 
@@ -44,6 +50,11 @@ public class ClientSetupEvents
 			@Override
 			public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
 				return renderer;
+			}
+
+			@Override
+			public HumanoidModel.@Nullable ArmPose getArmPose(LivingEntity living, InteractionHand hand, ItemStack stack) {
+				return stack.has(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get()) ? EnumParameters.PROXY_SKILLET_FLIP.getValue() : null;
 			}
 		}, ModItems.SKILLET.get());
 	}

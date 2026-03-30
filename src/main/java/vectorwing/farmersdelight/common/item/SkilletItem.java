@@ -3,8 +3,10 @@ package vectorwing.farmersdelight.common.item;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -43,6 +45,7 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.renderer.SkilletItemRenderer;
+import vectorwing.farmersdelight.common.EnumParameters;
 import vectorwing.farmersdelight.common.block.SkilletBlock;
 import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 import vectorwing.farmersdelight.common.item.component.ItemStackWrapper;
@@ -70,6 +73,20 @@ public class SkilletItem extends BlockItem
 	public SkilletItem(Block block, Item.Properties properties) {
 		super(block, properties.durability(SKILLET_TIER.getUses()));
 		float attackDamage = 5.0F + SKILLET_TIER.getAttackDamageBonus();
+	}
+
+	@Override
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+		if (oldStack.get(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get())
+				!= newStack.get(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get()) ||
+				oldStack.get(ModDataComponents.COOKING_TIME_LENGTH.get())
+						!= newStack.get(ModDataComponents.COOKING_TIME_LENGTH.get()) ||
+				oldStack.get(ModDataComponents.SKILLET_INGREDIENT.get()) !=
+						newStack.get(ModDataComponents.SKILLET_INGREDIENT.get())) {
+			return false;
+		}
+
+		return super.shouldCauseReequipAnimation(oldStack, newStack, slotChanged);
 	}
 
 	public static ItemAttributeModifiers createAttributes(Tier tier, float attackDamage, float attackSpeed) {
@@ -178,22 +195,22 @@ public class SkilletItem extends BlockItem
 	@Override
 	public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int count) {
 		if (entity instanceof Player player) {
-			Vec3 pos = player.position();
-			double x = pos.x() + 0.5D;
-			double y = pos.y();
-			double z = pos.z() + 0.5D;
-			if (level.random.nextInt(50) == 0) {
-				level.playLocalSound(x, y, z, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.BLOCKS, 0.4F, level.random.nextFloat() * 0.2F + 0.9F, false);
+			if (stack.has(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get())) {
+				long flipTimeStamp = stack.get(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
+				long l = level.getGameTime() - flipTimeStamp;
+				if (l > FLIP_TIME) {
+					stack.remove(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
+					stack.set(ModDataComponents.SKILLET_FLIPPED.get(), !stack.getOrDefault(ModDataComponents.SKILLET_FLIPPED.get(), false));
+				} else if (level.isClientSide && l == FLIP_TIME - 8) {
+					//why does it need to play early? idk
+					//plays instantly right before it lands & on client only so its instant. cant be done in statement above as that might not run fo player as stack is sent when updated
+					level.playSound(player, entity, ModSounds.BLOCK_SKILLET_ADD_FOOD.get(), SoundSource.PLAYERS, 0.4F, level.random.nextFloat() * 0.2F + 0.9F);
+				} else if (level.isClientSide && level.random.nextInt(50) == 0 && l < FLIP_TIME - 8 || l > FLIP_TIME - 3) {
+					level.playSound(null, entity, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.PLAYERS, 0.4F, level.random.nextFloat() * 0.2F + 0.9F);
+				}
+			} else if (level.isClientSide && level.random.nextInt(50) == 0) {
+				level.playSound(null, entity, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.PLAYERS, 0.4F, level.random.nextFloat() * 0.2F + 0.9F);
 			}
-//			CompoundTag tag = stack.getOrCreateTag();
-//			if (tag.contains("FlipTimeStamp")) {
-//				long flipTimeStamp = tag.getLong("FlipTimeStamp");
-//				if (level.getGameTime() - flipTimeStamp > FLIP_TIME) {
-//					tag.remove("FlipTimeStamp");
-//					tag.putBoolean("Flipped", !tag.getBoolean("Flipped"));
-//					level.playSound(null, x, y, z, ModSounds.BLOCK_SKILLET_ADD_FOOD.get(), SoundSource.BLOCKS, 0.4F, level.random.nextFloat() * 0.2F + 0.9F);
-//				}
-//			}
 		}
 	}
 
@@ -206,6 +223,8 @@ public class SkilletItem extends BlockItem
 				player.getInventory().placeItemBackInInventory(cookingStack);
 				stack.remove(ModDataComponents.SKILLET_INGREDIENT);
 				stack.remove(ModDataComponents.COOKING_TIME_LENGTH);
+				stack.remove(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
+				stack.remove(ModDataComponents.SKILLET_FLIPPED.get());
 			}
 		}
 	}
@@ -229,33 +248,34 @@ public class SkilletItem extends BlockItem
 				});
 				stack.remove(ModDataComponents.SKILLET_INGREDIENT);
 				stack.remove(ModDataComponents.COOKING_TIME_LENGTH);
+				stack.remove(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
+				stack.remove(ModDataComponents.SKILLET_FLIPPED.get());
 			}
 		}
 
 		return stack;
 	}
 
-//	@Override
-//	public int getBarWidth(ItemStack stack) {
-//		if (stack.getTagElement("Cooking") != null) {
-//			return Math.round(13.0F - (float) ClientRenderUtils.getClientPlayerHack().getUseItemRemainingTicks() * 13.0F / (float) this.getUseDuration(stack));
-//		}else{
-//			return super.getBarWidth(stack);
-//		}
-//	}
+	@Override
+	public int getBarWidth(ItemStack stack) {
+		if (stack.has(ModDataComponents.COOKING_TIME_LENGTH.get())) {
+			return Math.round(13.0F - (float) ClientRenderUtils.getClientPlayerHack().getUseItemRemainingTicks() * 13.0F / (float) this.getUseDuration(stack, ClientRenderUtils.getClientPlayerHack()));
+		} else {
+			return super.getBarWidth(stack);
+		}
+	}
 
-//	@Override
-//	public int getBarColor(ItemStack stack) {
-//		if (stack.getTagElement("Cooking") != null) {
-//			return 0xFF8B4F;
-//		}
-//		else return super.getBarColor(stack);
-//	}
-//
-//	@Override
-//	public boolean isBarVisible(ItemStack stack) {
-//		return super.isBarVisible(stack) || stack.getTagElement("Cooking") != null;
-//	}
+	@Override
+	public int getBarColor(ItemStack stack) {
+		if (stack.has(ModDataComponents.COOKING_TIME_LENGTH.get())) {
+			return 0xFF8B4F;
+		} else return super.getBarColor(stack);
+	}
+
+	@Override
+	public boolean isBarVisible(ItemStack stack) {
+		return super.isBarVisible(stack) || stack.has(ModDataComponents.COOKING_TIME_LENGTH.get());
+	}
 
 	public static Optional<RecipeHolder<CampfireCookingRecipe>> getCookingRecipe(ItemStack stack, Level level) {
 		if (stack.isEmpty()) {
@@ -316,22 +336,4 @@ public class SkilletItem extends BlockItem
 	public int getEnchantmentValue() {
 		return SKILLET_TIER.getEnchantmentValue();
 	}
-
-//	@Override
-//	@OnlyIn(Dist.CLIENT)
-//	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-//		consumer.accept(new IClientItemExtensions() {
-//			private static BlockEntityWithoutLevelRenderer renderer = new SkilletItemRenderer();
-//
-//			@Override
-//			public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-//				return renderer;
-//			}
-//
-//			@Override
-//			public HumanoidModel.@org.jetbrains.annotations.Nullable ArmPose getArmPose(LivingEntity living, InteractionHand hand, ItemStack stack) {
-//				return stack.getOrCreateTag().contains("FlipTimeStamp") ? ClientSetup.SKILLET_FLIP : null;
-//			}
-//		});
-//	}
 }
