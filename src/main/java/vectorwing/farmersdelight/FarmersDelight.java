@@ -27,12 +27,11 @@ public class FarmersDelight
 		modEventBus.addListener(CommonSetup::init);
 		if (FMLEnvironment.dist.isClient()) {
 			modEventBus.addListener(ClientSetupEvents::init);
+			modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 		}
 
 		modContainer.registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
 		modContainer.registerConfig(ModConfig.Type.CLIENT, Configuration.CLIENT_CONFIG);
-
-        modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 
 		ModSounds.SOUNDS.register(modEventBus);
 		ModBlocks.BLOCKS.register(modEventBus);
