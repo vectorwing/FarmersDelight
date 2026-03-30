@@ -96,6 +96,10 @@
   - `offhand_equipment`: Deprecated with the new Cutting Board mechanics;
   - `wolf_prey`: Replaced by `forge:raw_meat` when making Dog Food;
 
+### Translations
+- Updated:
+  - zh_cn (thanks, Artoria2e5!);
+
 ### Technical
 - Added data generation for most things which were still manually written (thanks, GizmoTheMoonPig and Abbie5!);
 - All models have been standardized, cleaned up and optimized across the board:
