@@ -11,6 +11,7 @@
     "NourishmentAlwaysEatMixin",
     "PlacePumpkinPieMixin",
     "RopeFenceConnectionMixin",
+    "V1460Mixin",
     "VillagersTargetRichSoilMixin"
   ],
   "client": [
