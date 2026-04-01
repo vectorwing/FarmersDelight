@@ -56,7 +56,8 @@ public class EMIPlugin implements EmiPlugin {
     public void addSpecialRecipes(EmiRegistry registry) {
         ResourceLocation doughRecipeId = RecipeUtils.FDLocation("wheat_dough_from_water");
         if (registry.getRecipeManager().byKey(doughRecipeId).isPresent()) {
-            registry.addRecipe(new EmiCraftingRecipe(List.of(EmiStack.of(Items.WHEAT), EmiStack.of(Items.WATER_BUCKET)), EmiStack.of(ModItems.WHEAT_DOUGH.get()), doughRecipeId, true));
+            ResourceLocation syntheticLocation = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "/crafting/wheat_dough_from_water");
+            registry.addRecipe(new EmiCraftingRecipe(List.of(EmiStack.of(Items.WHEAT), EmiStack.of(Items.WATER_BUCKET)), EmiStack.of(ModItems.WHEAT_DOUGH.get()), syntheticLocation, true));
         }
     }
 }
