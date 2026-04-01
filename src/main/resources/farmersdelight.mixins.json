@@ -5,6 +5,7 @@
   "mixins": [
     "CampfireBaleMixin",
     "CuttingBoardDispenserMixin",
+    "ItemStackComponentizationFixMixin",
     "KeepRichSoilGiantTreeMixin",
     "KeepRichSoilTreeMixin",
     "KeepRichSoilUntrampledMixin",
@@ -12,6 +13,7 @@
     "PlacePumpkinPieMixin",
     "RopeFenceConnectionMixin",
     "V1460Mixin",
+    "V3818_3Mixin",
     "VillagersTargetRichSoilMixin"
   ],
   "client": [

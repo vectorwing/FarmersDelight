@@ -30,22 +30,22 @@ public abstract class V1460Mixin extends Schema
 	private void registerFarmersDelightBlockEntities(Schema schema, CallbackInfoReturnable<Map<String, Supplier<TypeTemplate>>> cir) {
 		var map = cir.getReturnValue();
 
-		farmersdelight$registerHandlerInventory(schema, map, farmersdelight$mod("stove"));
-		farmersdelight$registerHandlerInventory(schema, map, farmersdelight$mod("cutting_board"));
-		farmersdelight$registerHandlerInventory(schema, map, farmersdelight$mod("skillet"));
+		farmersdelight$registerHandlerInventory(schema, map, farmersdelight$id("stove"));
+		farmersdelight$registerHandlerInventory(schema, map, farmersdelight$id("cutting_board"));
+		farmersdelight$registerHandlerInventory(schema, map, farmersdelight$id("skillet"));
 
-		schema.register(map, farmersdelight$mod("cooking_pot"), p_17586_ ->
+		schema.register(map, farmersdelight$id("cooking_pot"), p_17586_ ->
 				DSL.optionalFields(
 						"Inventory", DSL.optionalFields("Items", DSL.list(References.ITEM_STACK.in(schema))),
 						"Container", References.ITEM_STACK.in(schema)
 				));
 
-		registerInventory(schema, map, farmersdelight$mod("cabinet"));
-		registerInventory(schema, map, farmersdelight$mod("basket"));
+		registerInventory(schema, map, farmersdelight$id("cabinet"));
+		registerInventory(schema, map, farmersdelight$id("basket"));
 	}
 
 	@Unique
-	private static String farmersdelight$mod(String path) {
+	private static String farmersdelight$id(String path) {
 		return FarmersDelight.MODID + ":" + path;
 	}
 
