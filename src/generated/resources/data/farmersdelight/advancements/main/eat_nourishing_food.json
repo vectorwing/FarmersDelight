@@ -22,7 +22,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.farmersdelight.eat_nourishing_food"
+      "translate": "advancements.farmersdelight.eat_nourishing_food.title"
     }
   },
   "requirements": [

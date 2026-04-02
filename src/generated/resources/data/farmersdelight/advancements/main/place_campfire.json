@@ -36,7 +36,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.farmersdelight.place_campfire"
+      "translate": "advancements.farmersdelight.place_campfire.title"
     }
   },
   "requirements": [

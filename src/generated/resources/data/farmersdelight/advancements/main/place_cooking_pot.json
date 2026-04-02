@@ -25,7 +25,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.farmersdelight.place_cooking_pot"
+      "translate": "advancements.farmersdelight.place_cooking_pot.title"
     }
   },
   "requirements": [

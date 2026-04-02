@@ -75,7 +75,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.farmersdelight.craft_knife"
+      "translate": "advancements.farmersdelight.craft_knife.title"
     }
   },
   "requirements": [

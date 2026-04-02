@@ -26,7 +26,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.farmersdelight.place_skillet"
+      "translate": "advancements.farmersdelight.place_skillet.title"
     }
   },
   "requirements": [

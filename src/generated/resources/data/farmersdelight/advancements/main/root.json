@@ -18,7 +18,7 @@
     },
     "show_toast": false,
     "title": {
-      "translate": "advancements.farmersdelight.root"
+      "translate": "advancements.farmersdelight.root.title"
     }
   },
   "requirements": [

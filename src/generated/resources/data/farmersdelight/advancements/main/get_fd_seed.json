@@ -62,7 +62,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.farmersdelight.get_fd_seed"
+      "translate": "advancements.farmersdelight.get_fd_seed.title"
     }
   },
   "requirements": [

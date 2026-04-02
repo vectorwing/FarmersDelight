@@ -223,7 +223,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.farmersdelight.plant_all_crops"
+      "translate": "advancements.farmersdelight.plant_all_crops.title"
     }
   },
   "requirements": [

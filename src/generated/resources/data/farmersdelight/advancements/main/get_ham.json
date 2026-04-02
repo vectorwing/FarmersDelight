@@ -38,7 +38,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.farmersdelight.get_ham"
+      "translate": "advancements.farmersdelight.get_ham.title"
     }
   },
   "requirements": [

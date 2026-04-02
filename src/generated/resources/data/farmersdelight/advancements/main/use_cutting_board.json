@@ -18,7 +18,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.farmersdelight.use_cutting_board"
+      "translate": "advancements.farmersdelight.use_cutting_board.title"
     }
   },
   "requirements": [

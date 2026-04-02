@@ -27,7 +27,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.farmersdelight.obtain_netherite_knife"
+      "translate": "advancements.farmersdelight.obtain_netherite_knife.title"
     }
   },
   "requirements": [

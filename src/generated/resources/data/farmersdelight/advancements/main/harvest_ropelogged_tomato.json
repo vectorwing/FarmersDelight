@@ -38,7 +38,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.farmersdelight.harvest_ropelogged_tomato"
+      "translate": "advancements.farmersdelight.harvest_ropelogged_tomato.title"
     }
   },
   "requirements": [

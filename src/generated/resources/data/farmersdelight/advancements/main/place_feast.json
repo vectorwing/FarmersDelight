@@ -80,7 +80,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.farmersdelight.place_feast"
+      "translate": "advancements.farmersdelight.place_feast.title"
     }
   },
   "requirements": [
