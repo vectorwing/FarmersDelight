@@ -213,13 +213,13 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "farmersdelight.container.recipe_book.cookable": "Cuisinables",
-  "farmersdelight.container.cooking_pot": "Marmite",
-  "farmersdelight.container.cooking_pot.served_on": "Servi sur: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "A besoin d'être chauffé en dessous",
-  "farmersdelight.container.cooking_pot.heated": "Chauffé",
-  "farmersdelight.container.basket": "Panier",
-  "farmersdelight.container.cabinet": "Armoire",
+  "container.farmersdelight.recipe_book.cookable": "Cuisinables",
+  "container.farmersdelight.cooking_pot": "Marmite",
+  "container.farmersdelight.cooking_pot.served_on": "Servi sur: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "A besoin d'être chauffé en dessous",
+  "container.farmersdelight.cooking_pot.heated": "Chauffé",
+  "container.farmersdelight.basket": "Panier",
+  "container.farmersdelight.cabinet": "Armoire",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Vide",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Contient 1 portion de:",

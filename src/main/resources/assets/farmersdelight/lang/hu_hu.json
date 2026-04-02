@@ -249,13 +249,13 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "farmersdelight.container.recipe_book.cookable": "Főzhető",
-  "farmersdelight.container.cooking_pot": "Kondér",
-  "farmersdelight.container.cooking_pot.served_on": "Felszolgálva: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Nincs melegítve",
-  "farmersdelight.container.cooking_pot.heated": "Melegítve",
-  "farmersdelight.container.basket": "Kosár",
-  "farmersdelight.container.cabinet": "Szekrény",
+  "container.farmersdelight.recipe_book.cookable": "Főzhető",
+  "container.farmersdelight.cooking_pot": "Kondér",
+  "container.farmersdelight.cooking_pot.served_on": "Felszolgálva: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Nincs melegítve",
+  "container.farmersdelight.cooking_pot.heated": "Melegítve",
+  "container.farmersdelight.basket": "Kosár",
+  "container.farmersdelight.cabinet": "Szekrény",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Üres",
   "farmersdelight.tooltip.cooking_pot.single_serving": "1 adag:",

@@ -192,13 +192,13 @@
   
   "itemGroup.farmersdelight": "Potešenie farmára",
   
-  "farmersdelight.container.recipe_book.cookable": "Zobrazujú sa variteľné",
-  "farmersdelight.container.cooking_pot": "Hrniec",
-  "farmersdelight.container.cooking_pot.served_on": "Podávané na: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Potrebuje teplo zospodu",
-  "farmersdelight.container.cooking_pot.heated": "Vyhrievané",
-  "farmersdelight.container.basket": "Košík",
-  "farmersdelight.container.cabinet": "Kabinet",
+  "container.farmersdelight.recipe_book.cookable": "Zobrazujú sa variteľné",
+  "container.farmersdelight.cooking_pot": "Hrniec",
+  "container.farmersdelight.cooking_pot.served_on": "Podávané na: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Potrebuje teplo zospodu",
+  "container.farmersdelight.cooking_pot.heated": "Vyhrievané",
+  "container.farmersdelight.basket": "Košík",
+  "container.farmersdelight.cabinet": "Kabinet",
   
   "farmersdelight.tooltip.cooking_pot.empty": "Prázdné",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Obsahuje 1 porciu:",

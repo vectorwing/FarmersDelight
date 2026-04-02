@@ -213,13 +213,13 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "farmersdelight.container.recipe_book.cookable": "Kochbares wird angezeigt",
-  "farmersdelight.container.cooking_pot": "Kochtopf",
-  "farmersdelight.container.cooking_pot.served_on": "Serviert auf: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Benötigt Hitze von unten.",
-  "farmersdelight.container.cooking_pot.heated": "Erhitzt",
-  "farmersdelight.container.basket": "Korb",
-  "farmersdelight.container.cabinet": "Holzküchenschrank",
+  "container.farmersdelight.recipe_book.cookable": "Kochbares wird angezeigt",
+  "container.farmersdelight.cooking_pot": "Kochtopf",
+  "container.farmersdelight.cooking_pot.served_on": "Serviert auf: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Benötigt Hitze von unten.",
+  "container.farmersdelight.cooking_pot.heated": "Erhitzt",
+  "container.farmersdelight.basket": "Korb",
+  "container.farmersdelight.cabinet": "Holzküchenschrank",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Leer",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Enthält 1 Portion:",

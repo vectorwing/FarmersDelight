@@ -88,8 +88,8 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 
 	private void renderHeatIndicatorTooltip(GuiGraphics gui, int mouseX, int mouseY) {
 		if (this.isHovering(HEAT_ICON.x, HEAT_ICON.y, HEAT_ICON.width, HEAT_ICON.height, mouseX, mouseY)) {
-			String key = "container.cooking_pot." + (this.menu.isHeated() ? "heated" : "not_heated");
-			gui.renderTooltip(this.font, TextUtils.getTranslation(key, menu), mouseX, mouseY);
+			String key = "cooking_pot." + (this.menu.isHeated() ? "heated" : "not_heated");
+			gui.renderTooltip(this.font, TextUtils.container(key), mouseX, mouseY);
 		}
 	}
 
@@ -99,12 +99,12 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 				List<Component> tooltip = new ArrayList<>();
 
 				ItemStack mealStack = this.hoveredSlot.getItem();
-				tooltip.add(((MutableComponent) mealStack.getItem().getDescription()).withStyle(mealStack.getRarity().color));
+				tooltip.add(((MutableComponent) mealStack.getItem().getDescription()).withStyle(mealStack.getRarity().getStyleModifier()));
 
 				ItemStack containerStack = this.menu.blockEntity.getContainer();
 				if (!containerStack.isEmpty()) {
 					String container = !containerStack.isEmpty() ? containerStack.getItem().getDescription().getString() : "";
-					tooltip.add(TextUtils.getTranslation("container.cooking_pot.served_on", container).withStyle(ChatFormatting.GRAY));
+					tooltip.add(TextUtils.container("cooking_pot.served_on", container).withStyle(ChatFormatting.GRAY));
 				}
 
 				gui.renderComponentTooltip(font, tooltip, mouseX, mouseY);

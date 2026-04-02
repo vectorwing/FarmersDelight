@@ -182,12 +182,12 @@
 
   "itemGroup.farmersdelight": "Паорово одушевљење",
 
-  "farmersdelight.container.cooking_pot": "Лонац",
-  "farmersdelight.container.cooking_pot.served_on": "Послужено на: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Потребна је топлота испод",
-  "farmersdelight.container.cooking_pot.heated": "Загрејано",
-  "farmersdelight.container.basket": "Корпа",
-  "farmersdelight.container.cabinet": "Ормарић",
+  "container.farmersdelight.cooking_pot": "Лонац",
+  "container.farmersdelight.cooking_pot.served_on": "Послужено на: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Потребна је топлота испод",
+  "container.farmersdelight.cooking_pot.heated": "Загрејано",
+  "container.farmersdelight.basket": "Корпа",
+  "container.farmersdelight.cabinet": "Ормарић",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Празан",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Садржи 1 порцију:",

@@ -216,14 +216,14 @@
 
   "itemGroup.farmersdelight": "農家樂",
 
-  "farmersdelight.container.recipe_book.cookable": "惟顯可烹者",
-  "farmersdelight.container.cooking_pot": "鑊",
+  "container.farmersdelight.recipe_book.cookable": "惟顯可烹者",
+  "container.farmersdelight.cooking_pot": "鑊",
 
-  "farmersdelight.container.cooking_pot.served_on": "宜盛於：%s",
-  "farmersdelight.container.cooking_pot.not_heated": "下需熱",
-  "farmersdelight.container.cooking_pot.heated": "已熱",
-  "farmersdelight.container.basket": "竹籃",
-  "farmersdelight.container.cabinet": "櫥",
+  "container.farmersdelight.cooking_pot.served_on": "宜盛於：%s",
+  "container.farmersdelight.cooking_pot.not_heated": "下需熱",
+  "container.farmersdelight.cooking_pot.heated": "已熱",
+  "container.farmersdelight.basket": "竹籃",
+  "container.farmersdelight.cabinet": "櫥",
 
   "farmersdelight.tooltip.cooking_pot.empty": "空",
   "farmersdelight.tooltip.cooking_pot.single_serving": "盛一：",

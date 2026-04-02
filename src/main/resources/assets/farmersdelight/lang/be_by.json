@@ -213,13 +213,13 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "farmersdelight.container.recipe_book.cookable": "Даступныя да прыгатавання",
-  "farmersdelight.container.cooking_pot": "Рондаль",
-  "farmersdelight.container.cooking_pot.served_on": "Падаецца на: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Патрабуе нагрэву знізу",
-  "farmersdelight.container.cooking_pot.heated": "Нагрэты",
-  "farmersdelight.container.basket": "Кош",
-  "farmersdelight.container.cabinet": "Шафка",
+  "container.farmersdelight.recipe_book.cookable": "Даступныя да прыгатавання",
+  "container.farmersdelight.cooking_pot": "Рондаль",
+  "container.farmersdelight.cooking_pot.served_on": "Падаецца на: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Патрабуе нагрэву знізу",
+  "container.farmersdelight.cooking_pot.heated": "Нагрэты",
+  "container.farmersdelight.basket": "Кош",
+  "container.farmersdelight.cabinet": "Шафка",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Пусты",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Трымае 1 порцыю:",

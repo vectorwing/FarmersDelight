@@ -213,13 +213,13 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "farmersdelight.container.recipe_book.cookable": "Mostrando cocinables",
-  "farmersdelight.container.cooking_pot": "Olla Para cocer",
-  "farmersdelight.container.cooking_pot.served_on": "Servido en: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Necesita una fuente de calor debajo",
-  "farmersdelight.container.cooking_pot.heated": "Caliente",
-  "farmersdelight.container.basket": "Canasta",
-  "farmersdelight.container.cabinet": "Gabinete",
+  "container.farmersdelight.recipe_book.cookable": "Mostrando cocinables",
+  "container.farmersdelight.cooking_pot": "Olla Para cocer",
+  "container.farmersdelight.cooking_pot.served_on": "Servido en: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Necesita una fuente de calor debajo",
+  "container.farmersdelight.cooking_pot.heated": "Caliente",
+  "container.farmersdelight.basket": "Canasta",
+  "container.farmersdelight.cabinet": "Gabinete",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Vacía",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Contiene 1 porción de:",

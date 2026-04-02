@@ -213,13 +213,13 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "farmersdelight.container.recipe_book.cookable": "Mostra ciò che si può cuocere",
-  "farmersdelight.container.cooking_pot": "Pentola",
-  "farmersdelight.container.cooking_pot.served_on": "Servito su: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Ha bisogno di calore sotto",
-  "farmersdelight.container.cooking_pot.heated": "Riscaldato",
-  "farmersdelight.container.basket": "Cesto",
-  "farmersdelight.container.cabinet": "Dispensa",
+  "container.farmersdelight.recipe_book.cookable": "Mostra ciò che si può cuocere",
+  "container.farmersdelight.cooking_pot": "Pentola",
+  "container.farmersdelight.cooking_pot.served_on": "Servito su: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Ha bisogno di calore sotto",
+  "container.farmersdelight.cooking_pot.heated": "Riscaldato",
+  "container.farmersdelight.basket": "Cesto",
+  "container.farmersdelight.cabinet": "Dispensa",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Vuoto",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Contiene 1 porzione di:",

@@ -249,13 +249,13 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "farmersdelight.container.recipe_book.cookable": "調理可能なアイテムを表示中",
-  "farmersdelight.container.cooking_pot": "鍋",
-  "farmersdelight.container.cooking_pot.served_on": "%sで保存",
-  "farmersdelight.container.cooking_pot.not_heated": "下に熱源が必要",
-  "farmersdelight.container.cooking_pot.heated": "加熱中",
-  "farmersdelight.container.basket": "かご",
-  "farmersdelight.container.cabinet": "戸棚",
+  "container.farmersdelight.recipe_book.cookable": "調理可能なアイテムを表示中",
+  "container.farmersdelight.cooking_pot": "鍋",
+  "container.farmersdelight.cooking_pot.served_on": "%sで保存",
+  "container.farmersdelight.cooking_pot.not_heated": "下に熱源が必要",
+  "container.farmersdelight.cooking_pot.heated": "加熱中",
+  "container.farmersdelight.basket": "かご",
+  "container.farmersdelight.cabinet": "戸棚",
 
   "farmersdelight.tooltip.cooking_pot.empty": "空",
   "farmersdelight.tooltip.cooking_pot.single_serving": "1皿分を保存中",

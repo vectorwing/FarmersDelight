@@ -257,13 +257,13 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "farmersdelight.container.recipe_book.cookable": "Revealing Cookable Grub",
-  "farmersdelight.container.cooking_pot": "Pot o' Grub",
-  "farmersdelight.container.cooking_pot.served_on": "Grab yerself a: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Ye hafta fire it up first",
-  "farmersdelight.container.cooking_pot.heated": "All fired up",
-  "farmersdelight.container.basket": "Basket",
-  "farmersdelight.container.cabinet": "Cabinet",
+  "container.farmersdelight.recipe_book.cookable": "Revealing Cookable Grub",
+  "container.farmersdelight.cooking_pot": "Pot o' Grub",
+  "container.farmersdelight.cooking_pot.served_on": "Grab yerself a: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Ye hafta fire it up first",
+  "container.farmersdelight.cooking_pot.heated": "All fired up",
+  "container.farmersdelight.basket": "Basket",
+  "container.farmersdelight.cabinet": "Cabinet",
 
   "farmersdelight.tooltip.cooking_pot.empty": "'Tis empty!",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Haulin' one bunch o':",

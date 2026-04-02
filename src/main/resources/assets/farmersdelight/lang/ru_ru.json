@@ -249,13 +249,13 @@
 
   "itemGroup.farmersdelight": "Фермерский Восторг",
 
-  "farmersdelight.container.recipe_book.cookable": "Доступно к готовке",
-  "farmersdelight.container.cooking_pot": "Кухонный котёл",
-  "farmersdelight.container.cooking_pot.served_on": "Подаётся: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Нужен нагрев снизу",
-  "farmersdelight.container.cooking_pot.heated": "Нагрето",
-  "farmersdelight.container.basket": "Корзина",
-  "farmersdelight.container.cabinet": "Кладовая",
+  "container.farmersdelight.recipe_book.cookable": "Доступно к готовке",
+  "container.farmersdelight.cooking_pot": "Кухонный котёл",
+  "container.farmersdelight.cooking_pot.served_on": "Подаётся: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Нужен нагрев снизу",
+  "container.farmersdelight.cooking_pot.heated": "Нагрето",
+  "container.farmersdelight.basket": "Корзина",
+  "container.farmersdelight.cabinet": "Кладовая",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Пусто",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Содержит одну порцию:",

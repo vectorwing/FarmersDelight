@@ -257,13 +257,13 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "farmersdelight.container.recipe_book.cookable": "Cozinháveis",
-  "farmersdelight.container.cooking_pot": "Panela",
-  "farmersdelight.container.cooking_pot.served_on": "Servido em: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Precisa de calor por baixo",
-  "farmersdelight.container.cooking_pot.heated": "Aquecida",
-  "farmersdelight.container.basket": "Cesto",
-  "farmersdelight.container.cabinet": "Armário",
+  "container.farmersdelight.recipe_book.cookable": "Cozinháveis",
+  "container.farmersdelight.cooking_pot": "Panela",
+  "container.farmersdelight.cooking_pot.served_on": "Servido em: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Precisa de calor por baixo",
+  "container.farmersdelight.cooking_pot.heated": "Aquecida",
+  "container.farmersdelight.basket": "Cesto",
+  "container.farmersdelight.cabinet": "Armário",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Vazia",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Contém 1 porção de:",

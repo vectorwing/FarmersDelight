@@ -212,13 +212,13 @@
 
   "itemGroup.farmersdelight": "Landmandsglæde",
 
-  "farmersdelight.container.recipe_book.cookable": "Viser Cookable",
-  "farmersdelight.container.cooking_pot": "Gryde",
-  "farmersdelight.container.cooking_pot.served_on": "Serveres på: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Har brug for varme nedefra",
-  "farmersdelight.container.cooking_pot.heated": "Opvarmet",
-  "farmersdelight.container.basket": "Kurv",
-  "farmersdelight.container.cabinet": "Skab",
+  "container.farmersdelight.recipe_book.cookable": "Viser Cookable",
+  "container.farmersdelight.cooking_pot": "Gryde",
+  "container.farmersdelight.cooking_pot.served_on": "Serveres på: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Har brug for varme nedefra",
+  "container.farmersdelight.cooking_pot.heated": "Opvarmet",
+  "container.farmersdelight.basket": "Kurv",
+  "container.farmersdelight.cabinet": "Skab",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Tom",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Indeholder 1 portion af:",

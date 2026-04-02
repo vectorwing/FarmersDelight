@@ -249,13 +249,13 @@
 
   "itemGroup.farmersdelight": "Фермердің қуанышы",
 
-  "farmersdelight.container.recipe_book.cookable": "Пісіруге қолжетімді",
-  "farmersdelight.container.cooking_pot": "Қазан",
-  "farmersdelight.container.cooking_pot.served_on": "Ыдыста: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Астын қыздыру керек",
-  "farmersdelight.container.cooking_pot.heated": "Қыздырылған",
-  "farmersdelight.container.basket": "Себет",
-  "farmersdelight.container.cabinet": "acaдал",
+  "container.farmersdelight.recipe_book.cookable": "Пісіруге қолжетімді",
+  "container.farmersdelight.cooking_pot": "Қазан",
+  "container.farmersdelight.cooking_pot.served_on": "Ыдыста: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Астын қыздыру керек",
+  "container.farmersdelight.cooking_pot.heated": "Қыздырылған",
+  "container.farmersdelight.basket": "Себет",
+  "container.farmersdelight.cabinet": "acaдал",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Бос",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Ішінде мынаның 1 порциясы бар:",

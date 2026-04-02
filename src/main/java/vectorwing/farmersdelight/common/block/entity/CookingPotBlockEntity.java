@@ -491,7 +491,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 	@Override
 	public Component getName() {
-		return customName != null ? customName : TextUtils.getTranslation("container.cooking_pot");
+		return customName != null ? customName : TextUtils.container("cooking_pot");
 	}
 
 	@Override

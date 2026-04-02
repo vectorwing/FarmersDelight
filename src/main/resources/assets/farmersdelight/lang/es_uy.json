@@ -156,10 +156,10 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "farmersdelight.container.cooking_pot": "Olla",
-  "farmersdelight.container.cooking_pot.served_on": "Servido en: %s",
-  "farmersdelight.container.basket": "Cesta",
-  "farmersdelight.container.cabinet": "Despensa",
+  "container.farmersdelight.cooking_pot": "Olla",
+  "container.farmersdelight.cooking_pot.served_on": "Servido en: %s",
+  "container.farmersdelight.basket": "Cesta",
+  "container.farmersdelight.cabinet": "Despensa",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Vacío",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Contiene 1 porción de:",

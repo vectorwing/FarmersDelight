@@ -213,13 +213,13 @@
 
   "itemGroup.farmersdelight": "Glaudai fu Nunchangdjin",
 
-  "farmersdelight.container.recipe_book.cookable": "Mahase Dekikunjating",
-  "farmersdelight.container.cooking_pot": "Kunjastakline",
-  "farmersdelight.container.cooking_pot.served_on": "Mahase na: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Treng vapazma ona kara",
-  "farmersdelight.container.cooking_pot.heated": "Vapa",
-  "farmersdelight.container.basket": "Lanz",
-  "farmersdelight.container.cabinet": "Tingbaksu",
+  "container.farmersdelight.recipe_book.cookable": "Mahase Dekikunjating",
+  "container.farmersdelight.cooking_pot": "Kunjastakline",
+  "container.farmersdelight.cooking_pot.served_on": "Mahase na: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Treng vapazma ona kara",
+  "container.farmersdelight.cooking_pot.heated": "Vapa",
+  "container.farmersdelight.basket": "Lanz",
+  "container.farmersdelight.cabinet": "Tingbaksu",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Ohare",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Har 1 tel fu:",

@@ -212,13 +212,13 @@
 
   "itemGroup.farmersdelight": "ante Farmer's Delight",
 
-  "farmersdelight.container.recipe_book.cookable": "ijo tan poki seli telo",
-  "farmersdelight.container.cooking_pot": "poki seli telo",
-  "farmersdelight.container.cooking_pot.served_on": "ni o lon %s",
-  "farmersdelight.container.cooking_pot.not_heated": "poki li wile e seli lon anpa",
-  "farmersdelight.container.cooking_pot.heated": "seli",
-  "farmersdelight.container.basket": "poki palisa",
-  "farmersdelight.container.cabinet": "poki lupa",
+  "container.farmersdelight.recipe_book.cookable": "ijo tan poki seli telo",
+  "container.farmersdelight.cooking_pot": "poki seli telo",
+  "container.farmersdelight.cooking_pot.served_on": "ni o lon %s",
+  "container.farmersdelight.cooking_pot.not_heated": "poki li wile e seli lon anpa",
+  "container.farmersdelight.cooking_pot.heated": "seli",
+  "container.farmersdelight.basket": "poki palisa",
+  "container.farmersdelight.cabinet": "poki lupa",
 
   "farmersdelight.tooltip.cooking_pot.empty": "poki ni li poki e ala",
   "farmersdelight.tooltip.cooking_pot.single_serving": "poki ni li poki e ni wan:",

@@ -182,12 +182,12 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "farmersdelight.container.cooking_pot": "Kookpot",
-  "farmersdelight.container.cooking_pot.served_on": "Geserveerd op: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Heeft warmte van onderen nodig",
-  "farmersdelight.container.cooking_pot.heated": "Verwarmd",
-  "farmersdelight.container.basket": "Mand",
-  "farmersdelight.container.cabinet": "Kastje",
+  "container.farmersdelight.cooking_pot": "Kookpot",
+  "container.farmersdelight.cooking_pot.served_on": "Geserveerd op: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Heeft warmte van onderen nodig",
+  "container.farmersdelight.cooking_pot.heated": "Verwarmd",
+  "container.farmersdelight.basket": "Mand",
+  "container.farmersdelight.cabinet": "Kastje",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Leeg",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Bevat 1 portie van:",

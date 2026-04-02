@@ -189,13 +189,13 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "farmersdelight.container.recipe_book.cookable": "Mostrant plats cuinables",
-  "farmersdelight.container.cooking_pot": "Olla",
-  "farmersdelight.container.cooking_pot.served_on": "Servit en: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Necesita escalfar-se",
-  "farmersdelight.container.cooking_pot.heated": "Calent",
-  "farmersdelight.container.basket": "Cistella",
-  "farmersdelight.container.cabinet": "Armari",
+  "container.farmersdelight.recipe_book.cookable": "Mostrant plats cuinables",
+  "container.farmersdelight.cooking_pot": "Olla",
+  "container.farmersdelight.cooking_pot.served_on": "Servit en: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Necesita escalfar-se",
+  "container.farmersdelight.cooking_pot.heated": "Calent",
+  "container.farmersdelight.basket": "Cistella",
+  "container.farmersdelight.cabinet": "Armari",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Buit",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Conté una porció de:",

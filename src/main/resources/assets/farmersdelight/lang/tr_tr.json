@@ -192,13 +192,13 @@
 
   "itemGroup.farmersdelight": "Çiftçi'nin Keyfi",
 
-  "farmersdelight.container.recipe_book.cookable": "Pişirilebilirler Gösteriliyor",
-  "farmersdelight.container.cooking_pot": "Tencere",
-  "farmersdelight.container.cooking_pot.served_on": "Servis: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Altına ısı lazım",
-  "farmersdelight.container.cooking_pot.heated": "Isıtılmış",
-  "farmersdelight.container.basket": "Sepet",
-  "farmersdelight.container.cabinet": "Kiler",
+  "container.farmersdelight.recipe_book.cookable": "Pişirilebilirler Gösteriliyor",
+  "container.farmersdelight.cooking_pot": "Tencere",
+  "container.farmersdelight.cooking_pot.served_on": "Servis: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Altına ısı lazım",
+  "container.farmersdelight.cooking_pot.heated": "Isıtılmış",
+  "container.farmersdelight.basket": "Sepet",
+  "container.farmersdelight.cabinet": "Kiler",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Boş",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Şundan 1 porsiyon içerir:",

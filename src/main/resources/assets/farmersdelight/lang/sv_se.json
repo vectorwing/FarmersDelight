@@ -193,13 +193,13 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "farmersdelight.container.recipe_book.cookable": "Visar det som kan lagas",
-  "farmersdelight.container.cooking_pot": "Matlagningsgryta",
-  "farmersdelight.container.cooking_pot.served_on": "Serveras på: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Behöver värme underifrån",
-  "farmersdelight.container.cooking_pot.heated": "Värmd",
-  "farmersdelight.container.basket": "Korg",
-  "farmersdelight.container.cabinet": "Skåp",
+  "container.farmersdelight.recipe_book.cookable": "Visar det som kan lagas",
+  "container.farmersdelight.cooking_pot": "Matlagningsgryta",
+  "container.farmersdelight.cooking_pot.served_on": "Serveras på: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Behöver värme underifrån",
+  "container.farmersdelight.cooking_pot.heated": "Värmd",
+  "container.farmersdelight.basket": "Korg",
+  "container.farmersdelight.cabinet": "Skåp",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Tom",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Innehåller 1 servering av:",

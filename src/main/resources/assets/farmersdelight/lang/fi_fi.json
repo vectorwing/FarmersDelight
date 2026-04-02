@@ -179,12 +179,12 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "farmersdelight.container.cooking_pot": "Kattila",
-  "farmersdelight.container.cooking_pot.served_on": "Astia: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Tarvitsee lämpöä alapuolelta",
-  "farmersdelight.container.cooking_pot.heated": "Lämmitetty",
-  "farmersdelight.container.basket": "Kori",
-  "farmersdelight.container.cabinet": "Kaappi",
+  "container.farmersdelight.cooking_pot": "Kattila",
+  "container.farmersdelight.cooking_pot.served_on": "Astia: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Tarvitsee lämpöä alapuolelta",
+  "container.farmersdelight.cooking_pot.heated": "Lämmitetty",
+  "container.farmersdelight.basket": "Kori",
+  "container.farmersdelight.cabinet": "Kaappi",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Tyhjä",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Sisältää 1 annoksen ruokaa:",

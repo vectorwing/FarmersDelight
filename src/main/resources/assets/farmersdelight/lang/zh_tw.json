@@ -213,13 +213,13 @@
 
   "itemGroup.farmersdelight": "農夫樂事",
 
-  "farmersdelight.container.recipe_book.cookable": "顯示可用",
-  "farmersdelight.container.cooking_pot": "烹飪鍋",
-  "farmersdelight.container.cooking_pot.served_on": "需要：%s",
-  "farmersdelight.container.cooking_pot.not_heated": "底部需要熱源",
-  "farmersdelight.container.cooking_pot.heated": "正在加熱",
-  "farmersdelight.container.basket": "籃子",
-  "farmersdelight.container.cabinet": "儲藏櫃",
+  "container.farmersdelight.recipe_book.cookable": "顯示可用",
+  "container.farmersdelight.cooking_pot": "烹飪鍋",
+  "container.farmersdelight.cooking_pot.served_on": "需要：%s",
+  "container.farmersdelight.cooking_pot.not_heated": "底部需要熱源",
+  "container.farmersdelight.cooking_pot.heated": "正在加熱",
+  "container.farmersdelight.basket": "籃子",
+  "container.farmersdelight.cabinet": "儲藏櫃",
 
   "farmersdelight.tooltip.cooking_pot.empty": "空",
   "farmersdelight.tooltip.cooking_pot.single_serving": "目前的第 1 份：",

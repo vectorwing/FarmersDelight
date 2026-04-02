@@ -213,13 +213,13 @@
 
   "itemGroup.farmersdelight": "Niềm Vui Của Người Nông Dân",
 
-  "farmersdelight.container.recipe_book.cookable": "Hiển thị có thể nấu được",
-  "farmersdelight.container.cooking_pot": "Nồi nấu ăn",
-  "farmersdelight.container.cooking_pot.served_on": "Phục vụ trên: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Cần nguồn nhiệt từ bên dưới",
-  "farmersdelight.container.cooking_pot.heated": "Đã nóng",
-  "farmersdelight.container.basket": "Giỏ",
-  "farmersdelight.container.cabinet": "Tủ",
+  "container.farmersdelight.recipe_book.cookable": "Hiển thị có thể nấu được",
+  "container.farmersdelight.cooking_pot": "Nồi nấu ăn",
+  "container.farmersdelight.cooking_pot.served_on": "Phục vụ trên: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Cần nguồn nhiệt từ bên dưới",
+  "container.farmersdelight.cooking_pot.heated": "Đã nóng",
+  "container.farmersdelight.basket": "Giỏ",
+  "container.farmersdelight.cabinet": "Tủ",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Trống",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Giữ 1 phần ăn:",

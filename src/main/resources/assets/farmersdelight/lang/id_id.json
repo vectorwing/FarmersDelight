@@ -213,13 +213,13 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "farmersdelight.container.recipe_book.cookable": "Menampilkan Dapat Dimasak",
-  "farmersdelight.container.cooking_pot": "Panci Memasak",
-  "farmersdelight.container.cooking_pot.served_on": "Disajikan di: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Membutuhkan panas dari bawah",
-  "farmersdelight.container.cooking_pot.heated": "Dipanaskan",
-  "farmersdelight.container.basket": "Keranjang",
-  "farmersdelight.container.cabinet": "Kabinet",
+  "container.farmersdelight.recipe_book.cookable": "Menampilkan Dapat Dimasak",
+  "container.farmersdelight.cooking_pot": "Panci Memasak",
+  "container.farmersdelight.cooking_pot.served_on": "Disajikan di: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Membutuhkan panas dari bawah",
+  "container.farmersdelight.cooking_pot.heated": "Dipanaskan",
+  "container.farmersdelight.basket": "Keranjang",
+  "container.farmersdelight.cabinet": "Kabinet",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Kosong",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Menampung 1 porsi:",

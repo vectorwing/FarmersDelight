@@ -179,12 +179,12 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "farmersdelight.container.cooking_pot": "Kjele",
-  "farmersdelight.container.cooking_pot.served_on": "Serveres på/i: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Trenger varme fra undersiden",
-  "farmersdelight.container.cooking_pot.heated": "Oppvarmet",
-  "farmersdelight.container.basket": "Kurv",
-  "farmersdelight.container.cabinet": "Kabinett",
+  "container.farmersdelight.cooking_pot": "Kjele",
+  "container.farmersdelight.cooking_pot.served_on": "Serveres på/i: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Trenger varme fra undersiden",
+  "container.farmersdelight.cooking_pot.heated": "Oppvarmet",
+  "container.farmersdelight.basket": "Kurv",
+  "container.farmersdelight.cabinet": "Kabinett",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Tom",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Holder 1 servering med:",

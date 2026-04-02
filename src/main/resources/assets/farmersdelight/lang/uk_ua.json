@@ -213,13 +213,13 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "farmersdelight.container.recipe_book.cookable": "Доступні для приготування",
-  "farmersdelight.container.cooking_pot": "Каструля",
-  "farmersdelight.container.cooking_pot.served_on": "Подається на: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Потрібне тепло знизу",
-  "farmersdelight.container.cooking_pot.heated": "Нагріта",
-  "farmersdelight.container.basket": "Кошик",
-  "farmersdelight.container.cabinet": "Шафка",
+  "container.farmersdelight.recipe_book.cookable": "Доступні для приготування",
+  "container.farmersdelight.cooking_pot": "Каструля",
+  "container.farmersdelight.cooking_pot.served_on": "Подається на: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Потрібне тепло знизу",
+  "container.farmersdelight.cooking_pot.heated": "Нагріта",
+  "container.farmersdelight.basket": "Кошик",
+  "container.farmersdelight.cabinet": "Шафка",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Порожньо",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Містить 1 порцію:",

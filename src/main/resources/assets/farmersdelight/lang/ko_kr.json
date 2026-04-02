@@ -213,13 +213,13 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "farmersdelight.container.recipe_book.cookable": "조리 가능한 아이템 표시 중",
-  "farmersdelight.container.cooking_pot": "조리용 냄비",
-  "farmersdelight.container.cooking_pot.served_on": "%s이(가) 필요합니다",
-  "farmersdelight.container.cooking_pot.not_heated": "아래에 열원이 필요합니다",
-  "farmersdelight.container.cooking_pot.heated": "달궈짐",
-  "farmersdelight.container.basket": "바구니",
-  "farmersdelight.container.cabinet": "식료품 선반",
+  "container.farmersdelight.recipe_book.cookable": "조리 가능한 아이템 표시 중",
+  "container.farmersdelight.cooking_pot": "조리용 냄비",
+  "container.farmersdelight.cooking_pot.served_on": "%s이(가) 필요합니다",
+  "container.farmersdelight.cooking_pot.not_heated": "아래에 열원이 필요합니다",
+  "container.farmersdelight.cooking_pot.heated": "달궈짐",
+  "container.farmersdelight.basket": "바구니",
+  "container.farmersdelight.cabinet": "식료품 선반",
 
   "farmersdelight.tooltip.cooking_pot.empty": "비어 있음",
   "farmersdelight.tooltip.cooking_pot.single_serving": "1인분의:",

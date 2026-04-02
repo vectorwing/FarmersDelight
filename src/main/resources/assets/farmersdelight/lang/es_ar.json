@@ -213,13 +213,13 @@
 
   "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "farmersdelight.container.recipe_book.cookable": "Mostrando lo cocinable",
-  "farmersdelight.container.cooking_pot": "Olla",
-  "farmersdelight.container.cooking_pot.served_on": "Servido en: %s",
-  "farmersdelight.container.cooking_pot.not_heated": "Necesita calor desde abajo",
-  "farmersdelight.container.cooking_pot.heated": "Calentada",
-  "farmersdelight.container.basket": "Canasta",
-  "farmersdelight.container.cabinet": "Alacena",
+  "container.farmersdelight.recipe_book.cookable": "Mostrando lo cocinable",
+  "container.farmersdelight.cooking_pot": "Olla",
+  "container.farmersdelight.cooking_pot.served_on": "Servido en: %s",
+  "container.farmersdelight.cooking_pot.not_heated": "Necesita calor desde abajo",
+  "container.farmersdelight.cooking_pot.heated": "Calentada",
+  "container.farmersdelight.basket": "Canasta",
+  "container.farmersdelight.cabinet": "Alacena",
 
   "farmersdelight.tooltip.cooking_pot.empty": "Vacío",
   "farmersdelight.tooltip.cooking_pot.single_serving": "Contiene capacidad para 1 porción de:",

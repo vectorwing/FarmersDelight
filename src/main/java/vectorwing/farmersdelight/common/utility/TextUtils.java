@@ -42,6 +42,10 @@ public class TextUtils
 		return getTextWithType("advancements", key, args);
 	}
 
+	public static MutableComponent container(String key, Object... args) {
+		return getTextWithType("container", key, args);
+	}
+
 	public static MutableComponent tooltip(String key, Object... args) {
 		return Component.translatable(FarmersDelight.MODID + ".tooltip." + key, args);
 	}
