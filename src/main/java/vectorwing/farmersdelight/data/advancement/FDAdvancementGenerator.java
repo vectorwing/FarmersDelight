@@ -22,16 +22,18 @@ import vectorwing.farmersdelight.common.registry.ModEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Consumer;
 
+@ParametersAreNonnullByDefault
 public class FDAdvancementGenerator implements ForgeAdvancementProvider.AdvancementGenerator
 {
 	@Override
 	public void generate(HolderLookup.Provider registries, Consumer<Advancement> consumer, ExistingFileHelper existingFileHelper) {
 		Advancement farmersDelight = Advancement.Builder.advancement()
 				.display(ModItems.COOKING_POT.get(),
-						TextUtils.getTranslation("advancement.root"),
-						TextUtils.getTranslation("advancement.root.desc"),
+						TextUtils.advancement("root.title"),
+						TextUtils.advancement("root.description"),
 						new ResourceLocation("minecraft:textures/block/bricks.png"),
 						FrameType.TASK, false, false, false)
 				.addCriterion("seeds", InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{}))
@@ -201,8 +203,8 @@ public class FDAdvancementGenerator implements ForgeAdvancementProvider.Advancem
 
 	protected static Advancement.Builder getAdvancement(Advancement parent, ItemLike display, String name, FrameType frame, boolean showToast, boolean announceToChat, boolean hidden) {
 		return Advancement.Builder.advancement().parent(parent).display(display,
-				TextUtils.getTranslation("advancement." + name),
-				TextUtils.getTranslation("advancement." + name + ".desc"),
+				TextUtils.advancement(name + ".title"),
+				TextUtils.advancement(name + ".description"),
 				null, frame, showToast, announceToChat, hidden);
 	}
 

@@ -275,7 +275,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "farmersdelight.advancement.master_chef.desc"
+      "translate": "advancements.farmersdelight.master_chef.description"
     },
     "frame": "challenge",
     "hidden": false,
@@ -284,7 +284,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "farmersdelight.advancement.master_chef"
+      "translate": "advancements.farmersdelight.master_chef"
     }
   },
   "requirements": [

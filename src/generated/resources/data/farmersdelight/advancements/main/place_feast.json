@@ -71,7 +71,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "farmersdelight.advancement.place_feast.desc"
+      "translate": "advancements.farmersdelight.place_feast.description"
     },
     "frame": "task",
     "hidden": false,
@@ -80,7 +80,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "farmersdelight.advancement.place_feast"
+      "translate": "advancements.farmersdelight.place_feast"
     }
   },
   "requirements": [
