@@ -66,6 +66,7 @@
   - They now require a fully solid surface to be placed on, instead of floating over blocks like Cakes;
   - They now have "Placeable" in their tooltip, to better indicate their role;
     - Pumpkin Pie will say "Placeable when sneaking" if the sneak-to-place config is enabled;
+    - Skillets will also display the above tooltip;
 - Wild Crops have been updated:
   - Wild Tomatoes now checks for the `farmersdelight:terrain` tag when generating;
   - Wild Rice now checks for the `minecraft:dirt` tag when generating;
