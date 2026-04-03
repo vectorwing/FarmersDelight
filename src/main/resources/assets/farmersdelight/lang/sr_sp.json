@@ -261,14 +261,14 @@
   "death.attack.farmersdelight.stove": "%1$s беше испечен до савршенства",
   "death.attack.farmersdelight.stove.player": "%1$s беше бачен на роштиљ од стране кувара %2$s",
 
-  "farmersdelight.jei.cooking": "Кување",
-  "farmersdelight.jei.cutting": "Даска за сечење",
-  "farmersdelight.jei.chance": "%1$s%% шанса",
-  "farmersdelight.jei.decomposition": "Распадање",
-  "farmersdelight.jei.decomposition.light": "Убрзано светлошћу сунца",
-  "farmersdelight.jei.decomposition.fluid": "Убрзано суседном воде",
-  "farmersdelight.jei.decomposition.accelerators": "Убрзано суседним активаторима (види испод)",
-  "farmersdelight.jei.info.straw": "Суво биљно влакно кориштено за производњу. Добијена кошењем травкастих усева и биљака ножем.",
-  "farmersdelight.jei.info.knife": "Ножеви су лака оружја за борбу прса у прса. Они могу да сакупљају Сено из трава, и да гарантују споредне ствари од животиња.",
-  "farmersdelight.jei.info.ham": "Велики одрезак меса од ноге Свиње или Хоглина. Биће ти потребно нешто лакше од мача како би исекао један..."
+  "jei.farmersdelight.cooking": "Кување",
+  "jei.farmersdelight.cutting": "Даска за сечење",
+  "jei.farmersdelight.chance": "%1$s%% шанса",
+  "jei.farmersdelight.decomposition": "Распадање",
+  "jei.farmersdelight.decomposition.light": "Убрзано светлошћу сунца",
+  "jei.farmersdelight.decomposition.fluid": "Убрзано суседном воде",
+  "jei.farmersdelight.decomposition.accelerators": "Убрзано суседним активаторима (види испод)",
+  "jei.farmersdelight.info.straw": "Суво биљно влакно кориштено за производњу. Добијена кошењем травкастих усева и биљака ножем.",
+  "jei.farmersdelight.info.knife": "Ножеви су лака оружја за борбу прса у прса. Они могу да сакупљају Сено из трава, и да гарантују споредне ствари од животиња.",
+  "jei.farmersdelight.info.ham": "Велики одрезак меса од ноге Свиње или Хоглина. Биће ти потребно нешто лакше од мача како би исекао један..."
 }

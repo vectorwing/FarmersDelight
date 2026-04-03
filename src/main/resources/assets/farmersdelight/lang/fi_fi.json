@@ -245,14 +245,14 @@
   "farmersdelight.block.skillet.invalid_item": "Tätä ei voi paistaa...",
   "farmersdelight.item.skillet.how_to_cook": "Pidä ainesosia toisessa kädessä!",
 
-  "farmersdelight.jei.cooking": "Ruoanlaitto",
-  "farmersdelight.jei.cutting": "Leikkuulauta",
-  "farmersdelight.jei.chance": "%1$s%% mahdollisuus",
-  "farmersdelight.jei.decomposition": "Hajoaminen",
-  "farmersdelight.jei.decomposition.light": "Auringonvalo nopeuttaa hajoamista",
-  "farmersdelight.jei.decomposition.fluid": "Vesi nopeuttaa hajoamista",
-  "farmersdelight.jei.decomposition.accelerators": "Vieressä olevat tehostajat nopeuttavat hajoamista (ks. jäljempänä)",
-  "farmersdelight.jei.info.straw": "Kuiva korsi, jota käytetään muiden esineiden valmistamiseen. Niitä saa leikkaamalla ruohomaisia kasveja veitsellä.",
-  "farmersdelight.jei.info.knife": "Veitset ovat kevyitä lähitaisteluaseita. Niiden avulla ruohoista saa olkia ja eläimistä taattua lisäsaalista.",
-  "farmersdelight.jei.info.ham": "Sian tai hoglinin jalasta saatu suuri lihapala. Saadaksesi yhden tarvitset jotain miekkaa kevyempää..."
+  "jei.farmersdelight.cooking": "Ruoanlaitto",
+  "jei.farmersdelight.cutting": "Leikkuulauta",
+  "jei.farmersdelight.chance": "%1$s%% mahdollisuus",
+  "jei.farmersdelight.decomposition": "Hajoaminen",
+  "jei.farmersdelight.decomposition.light": "Auringonvalo nopeuttaa hajoamista",
+  "jei.farmersdelight.decomposition.fluid": "Vesi nopeuttaa hajoamista",
+  "jei.farmersdelight.decomposition.accelerators": "Vieressä olevat tehostajat nopeuttavat hajoamista (ks. jäljempänä)",
+  "jei.farmersdelight.info.straw": "Kuiva korsi, jota käytetään muiden esineiden valmistamiseen. Niitä saa leikkaamalla ruohomaisia kasveja veitsellä.",
+  "jei.farmersdelight.info.knife": "Veitset ovat kevyitä lähitaisteluaseita. Niiden avulla ruohoista saa olkia ja eläimistä taattua lisäsaalista.",
+  "jei.farmersdelight.info.ham": "Sian tai hoglinin jalasta saatu suuri lihapala. Saadaksesi yhden tarvitset jotain miekkaa kevyempää..."
 }

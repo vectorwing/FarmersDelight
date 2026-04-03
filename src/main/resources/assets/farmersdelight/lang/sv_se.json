@@ -277,14 +277,14 @@
   "death.attack.farmersdelight.stove": "%1$s var grillad till perfektion",
   "death.attack.farmersdelight.stove.player": "%1$s kastades på grillen av kocken %2$s",
 
-  "farmersdelight.jei.cooking": "Matlagning",
-  "farmersdelight.jei.cutting": "Skärbräda",
-  "farmersdelight.jei.chance": "%1$s%% chans",
-  "farmersdelight.jei.decomposition": "Sönderfall",
-  "farmersdelight.jei.decomposition.light": "Snabbas upp av solljus",
-  "farmersdelight.jei.decomposition.fluid": "Snabbas upp av intilliggande vatten",
-  "farmersdelight.jei.decomposition.accelerators": "Snabbas upp av intilliggande aktivatorer (se nedan)",
-  "farmersdelight.jei.info.straw": "En torr växtfiber som används i hantverk. Erhålls genom att skära gräsbevuxna grödor och växter med en kniv.",
-  "farmersdelight.jei.info.knife": "Knivar är lätta närstridsvapen. De kan skörda halm från gräs och garantera sekundära droppar från djur.",
-  "farmersdelight.jei.info.ham": "En stor köttbit från en gris eller Hoglins ben. Du behöver något lättare än ett svärd för att skära ett..."
+  "jei.farmersdelight.cooking": "Matlagning",
+  "jei.farmersdelight.cutting": "Skärbräda",
+  "jei.farmersdelight.chance": "%1$s%% chans",
+  "jei.farmersdelight.decomposition": "Sönderfall",
+  "jei.farmersdelight.decomposition.light": "Snabbas upp av solljus",
+  "jei.farmersdelight.decomposition.fluid": "Snabbas upp av intilliggande vatten",
+  "jei.farmersdelight.decomposition.accelerators": "Snabbas upp av intilliggande aktivatorer (se nedan)",
+  "jei.farmersdelight.info.straw": "En torr växtfiber som används i hantverk. Erhålls genom att skära gräsbevuxna grödor och växter med en kniv.",
+  "jei.farmersdelight.info.knife": "Knivar är lätta närstridsvapen. De kan skörda halm från gräs och garantera sekundära droppar från djur.",
+  "jei.farmersdelight.info.ham": "En stor köttbit från en gris eller Hoglins ben. Du behöver något lättare än ett svärd för att skära ett..."
 }

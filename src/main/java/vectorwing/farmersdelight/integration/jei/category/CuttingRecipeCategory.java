@@ -38,7 +38,7 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 	private final IDrawable icon;
 
 	public CuttingRecipeCategory(IGuiHelper helper) {
-		title = TextUtils.getTranslation("jei.cutting");
+		title = TextUtils.JEI("cutting");
 		ResourceLocation backgroundImage = new ResourceLocation(FarmersDelight.MODID, "textures/gui/jei/cutting_board.png");
 		slot = helper.createDrawable(backgroundImage, 0, 58, 18, 18);
 		slotChance = helper.createDrawable(backgroundImage, 18, 58, 18, 18);
@@ -93,7 +93,7 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 						ChanceResult output = recipeOutputs.get(index);
 						float chance = output.getChance();
 						if (chance != 1)
-							tooltip.add(TextUtils.getTranslation("jei.chance", chance < 0.01 ? "<1" : (int) (chance * 100))
+							tooltip.add(TextUtils.JEI("chance", chance < 0.01 ? "<1" : (int) (chance * 100))
 									.withStyle(ChatFormatting.GOLD));
 					});
 		}

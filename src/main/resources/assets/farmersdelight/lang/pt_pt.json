@@ -213,11 +213,11 @@
   "farmersdelight.block.cutting_board.invalid_item": "Isto não parece cortável...",
   "farmersdelight.block.cutting_board.invalid_tool": "Talvez com uma ferramenta diferente...",
 
-  "farmersdelight.jei.cooking": "Panela",
-  "farmersdelight.jei.cutting": "Tábua de corte",
-  "farmersdelight.jei.decomposition": "Decomposição",
-  "farmersdelight.jei.decomposition.light": "Acelerado pela luz do sol",
-  "farmersdelight.jei.decomposition.fluid": "Acelerado pela água próxima",
-  "farmersdelight.jei.decomposition.accelerators": "Acelerado por ativadores próximos (ver abaixo)",
-  "farmersdelight.jei.info.straw": "Uma fibra vegetal usada em construção. Obtida ao cortar herbáceas e outras plantas com uma Faca."
+  "jei.farmersdelight.cooking": "Panela",
+  "jei.farmersdelight.cutting": "Tábua de corte",
+  "jei.farmersdelight.decomposition": "Decomposição",
+  "jei.farmersdelight.decomposition.light": "Acelerado pela luz do sol",
+  "jei.farmersdelight.decomposition.fluid": "Acelerado pela água próxima",
+  "jei.farmersdelight.decomposition.accelerators": "Acelerado por ativadores próximos (ver abaixo)",
+  "jei.farmersdelight.info.straw": "Uma fibra vegetal usada em construção. Obtida ao cortar herbáceas e outras plantas com uma Faca."
 }

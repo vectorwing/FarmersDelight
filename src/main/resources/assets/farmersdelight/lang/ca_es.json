@@ -269,14 +269,14 @@
   "death.attack.farmersdelight.stove": "%1$s s'ha rostit a la perfecció",
   "death.attack.farmersdelight.stove.player": "%1$s ha estat llençat a la paella per el chef %2$s",
 
-  "farmersdelight.jei.cooking": "Cuinant",
-  "farmersdelight.jei.cutting": "Taula per tallar",
-  "farmersdelight.jei.chance": "%1$s%% de probabilitat",
-  "farmersdelight.jei.decomposition": "Descomposició",
-  "farmersdelight.jei.decomposition.light": "Accelerat per la llum del sol",
-  "farmersdelight.jei.decomposition.fluid": "Accelerat per aigua propera",
-  "farmersdelight.jei.decomposition.accelerators": "Accelerat per activadors propers (veure mes avall)",
-  "farmersdelight.jei.info.straw": "Una fibra de vegetal seca utilitzada en l'artesania. S'obté tallant cultius i plantes herbàcies amb el ganivet.",
-  "farmersdelight.jei.info.knife": "Els ganivets són armes lleugeres. Poden collir fibra de les herbes, i t'asseguren un segon botí dels animals.",
-  "farmersdelight.jei.info.ham": "Per tallar un bon tros de carn de porc o cama de Hoglin necessitaràs alguna cosa més lleugera que una espasa."
+  "jei.farmersdelight.cooking": "Cuinant",
+  "jei.farmersdelight.cutting": "Taula per tallar",
+  "jei.farmersdelight.chance": "%1$s%% de probabilitat",
+  "jei.farmersdelight.decomposition": "Descomposició",
+  "jei.farmersdelight.decomposition.light": "Accelerat per la llum del sol",
+  "jei.farmersdelight.decomposition.fluid": "Accelerat per aigua propera",
+  "jei.farmersdelight.decomposition.accelerators": "Accelerat per activadors propers (veure mes avall)",
+  "jei.farmersdelight.info.straw": "Una fibra de vegetal seca utilitzada en l'artesania. S'obté tallant cultius i plantes herbàcies amb el ganivet.",
+  "jei.farmersdelight.info.knife": "Els ganivets són armes lleugeres. Poden collir fibra de les herbes, i t'asseguren un segon botí dels animals.",
+  "jei.farmersdelight.info.ham": "Per tallar un bon tros de carn de porc o cama de Hoglin necessitaràs alguna cosa més lleugera que una espasa."
 }

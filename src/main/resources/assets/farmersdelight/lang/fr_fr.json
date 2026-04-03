@@ -297,14 +297,14 @@
   "death.attack.farmersdelight.stove": "%1$s ont été grillés à la perfection",
   "death.attack.farmersdelight.stove.player": "%1$s a été mis sur le grill par le chef %2$s",
 
-  "farmersdelight.jei.cooking": "Cuisine",
-  "farmersdelight.jei.cutting": "Planche à découper",
-  "farmersdelight.jei.chance": "%1$s%% de chance",
-  "farmersdelight.jei.decomposition": "Décomposition",
-  "farmersdelight.jei.decomposition.light": "Accéléré par la lumière du soleil",
-  "farmersdelight.jei.decomposition.fluid": "Accéléré par l'eau adjacente",
-  "farmersdelight.jei.decomposition.accelerators": "Accéléré par les activateurs adjacents (voir ci-dessous)",
-  "farmersdelight.jei.info.straw": "Une fibre végétale sèche utilisée dans l'artisanat. Obtenu en coupant des cultures et des plantes herbacées avec un couteau.",
-  "farmersdelight.jei.info.knife": "Les couteaux sont des armes de mêlée légères. Ils peuvent récolter de la paille sur les herbes et garantir des pièces secondaires sur les animaux.",
-  "farmersdelight.jei.info.ham": "Une grosse pièce de viande provenant d'un cochon ou d'une patte de Hoglin. Vous aurez besoin d'un objet plus léger qu'une épée pour en couper une..."
+  "jei.farmersdelight.cooking": "Cuisine",
+  "jei.farmersdelight.cutting": "Planche à découper",
+  "jei.farmersdelight.chance": "%1$s%% de chance",
+  "jei.farmersdelight.decomposition": "Décomposition",
+  "jei.farmersdelight.decomposition.light": "Accéléré par la lumière du soleil",
+  "jei.farmersdelight.decomposition.fluid": "Accéléré par l'eau adjacente",
+  "jei.farmersdelight.decomposition.accelerators": "Accéléré par les activateurs adjacents (voir ci-dessous)",
+  "jei.farmersdelight.info.straw": "Une fibre végétale sèche utilisée dans l'artisanat. Obtenu en coupant des cultures et des plantes herbacées avec un couteau.",
+  "jei.farmersdelight.info.knife": "Les couteaux sont des armes de mêlée légères. Ils peuvent récolter de la paille sur les herbes et garantir des pièces secondaires sur les animaux.",
+  "jei.farmersdelight.info.ham": "Une grosse pièce de viande provenant d'un cochon ou d'une patte de Hoglin. Vous aurez besoin d'un objet plus léger qu'une épée pour en couper une..."
 }

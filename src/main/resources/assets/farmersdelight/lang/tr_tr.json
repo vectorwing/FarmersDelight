@@ -276,14 +276,14 @@
   "death.attack.farmersdelight.stove": "%1$s mükemmel bir şekilde cızbız oldu",
   "death.attack.farmersdelight.stove.player": "%1$s, Şef %2$s tarafından ızgaraya atıldı",
 
-  "farmersdelight.jei.cooking": "Pişirme",
-  "farmersdelight.jei.cutting": "Kesme Tahtası",
-  "farmersdelight.jei.chance": "%1$s%% şansla",
-  "farmersdelight.jei.decomposition": "Ayrıştırma",
-  "farmersdelight.jei.decomposition.light": "Gün ışığıyla hızlanır",
-  "farmersdelight.jei.decomposition.fluid": "Bitişiğindeki suyla hızlanır",
-  "farmersdelight.jei.decomposition.accelerators": "Bitişiğindeki etkinleştiriciler tarafından hızlanır (aşağıya bakın)",
-  "farmersdelight.jei.info.straw": "Üretimde kullanılabilen kuru bir bitki lifi. Çimenli bitkileri ve bitkileri Bıçak ile keserek elde edilir.",
-  "farmersdelight.jei.info.knife": "Bıçaklar hafif yakın dövüş silahlarıdır. Otlardan Saman toplayabilirler ve hayvanlardan düşen ikincil şeyleri garanti edebilirler.",
-  "farmersdelight.jei.info.ham": "Domuz veya Hoglin'in bacağından kesilmiş büyük bir et parçası. Birini kesmek için Kılıçtan daha hafif bir şeye ihtiyacın olacak..."
+  "jei.farmersdelight.cooking": "Pişirme",
+  "jei.farmersdelight.cutting": "Kesme Tahtası",
+  "jei.farmersdelight.chance": "%1$s%% şansla",
+  "jei.farmersdelight.decomposition": "Ayrıştırma",
+  "jei.farmersdelight.decomposition.light": "Gün ışığıyla hızlanır",
+  "jei.farmersdelight.decomposition.fluid": "Bitişiğindeki suyla hızlanır",
+  "jei.farmersdelight.decomposition.accelerators": "Bitişiğindeki etkinleştiriciler tarafından hızlanır (aşağıya bakın)",
+  "jei.farmersdelight.info.straw": "Üretimde kullanılabilen kuru bir bitki lifi. Çimenli bitkileri ve bitkileri Bıçak ile keserek elde edilir.",
+  "jei.farmersdelight.info.knife": "Bıçaklar hafif yakın dövüş silahlarıdır. Otlardan Saman toplayabilirler ve hayvanlardan düşen ikincil şeyleri garanti edebilirler.",
+  "jei.farmersdelight.info.ham": "Domuz veya Hoglin'in bacağından kesilmiş büyük bir et parçası. Birini kesmek için Kılıçtan daha hafif bir şeye ihtiyacın olacak..."
 }

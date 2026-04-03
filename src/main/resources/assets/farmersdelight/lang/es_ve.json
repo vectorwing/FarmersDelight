@@ -211,11 +211,11 @@
   "farmersdelight.block.cutting_board.invalid_item": "Esto no parece que se pueda cortar...",
   "farmersdelight.block.cutting_board.invalid_tool": "Tal vez con una herramienta diferente...",
 
-  "farmersdelight.jei.cooking": "Cocinando",
-  "farmersdelight.jei.cutting": "Tabla de picar",
-  "farmersdelight.jei.decomposition": "Descomposición",
-  "farmersdelight.jei.decomposition.light": "Acelerado por la luz del sol",
-  "farmersdelight.jei.decomposition.fluid": "Acelerado por el agua adyacente",
-  "farmersdelight.jei.decomposition.accelerators": "Acelerado por activadores adyacentes (ver más abajo)",
-  "farmersdelight.jei.info.straw": "Una fibra vegetal seca utilizada en la artesanía. Se obtiene cortando cultivos y plantas herbáceas con un Cuchillo."
+  "jei.farmersdelight.cooking": "Cocinando",
+  "jei.farmersdelight.cutting": "Tabla de picar",
+  "jei.farmersdelight.decomposition": "Descomposición",
+  "jei.farmersdelight.decomposition.light": "Acelerado por la luz del sol",
+  "jei.farmersdelight.decomposition.fluid": "Acelerado por el agua adyacente",
+  "jei.farmersdelight.decomposition.accelerators": "Acelerado por activadores adyacentes (ver más abajo)",
+  "jei.farmersdelight.info.straw": "Una fibra vegetal seca utilizada en la artesanía. Se obtiene cortando cultivos y plantas herbáceas con un Cuchillo."
 }

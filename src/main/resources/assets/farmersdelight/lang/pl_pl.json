@@ -297,14 +297,14 @@
   "death.attack.farmersdelight.stove": "Gracz %1$s został usmażony do perfekcji",
   "death.attack.farmersdelight.stove.player": "Gracz %1$s został rzucony na ruszt przez %2$s, szefa kuchni",
 
-  "farmersdelight.jei.cooking": "Gotowanie",
-  "farmersdelight.jei.cutting": "Deska do krojenia",
-  "farmersdelight.jei.chance": "%1$s%% szansy",
-  "farmersdelight.jei.decomposition": "Rozkład",
-  "farmersdelight.jei.decomposition.light": "Przyspieszony przez promienie słoneczne",
-  "farmersdelight.jei.decomposition.fluid": "Przyspieszony przez przylegającą wodę",
-  "farmersdelight.jei.decomposition.accelerators": "Przyspieszony przez przyległe aktywatory (patrz poniżej)",
-  "farmersdelight.jei.info.straw": "Suche włókno roślinne używane w konstruowaniu. Otrzymywana przez ścinanie traw i roślin nożem",
-  "farmersdelight.jei.info.knife": "Noże są lekką bronią białą. Mogą zbierać słomę z traw, oraz gwarantują drugorzędne łupy ze zwierząt.",
-  "farmersdelight.jei.info.ham": "Duży kawałek mięsa z uda świni lub hoglina. Będziesz potrzebował czegoś lżejszego niż miecz by to uciąć..."
+  "jei.farmersdelight.cooking": "Gotowanie",
+  "jei.farmersdelight.cutting": "Deska do krojenia",
+  "jei.farmersdelight.chance": "%1$s%% szansy",
+  "jei.farmersdelight.decomposition": "Rozkład",
+  "jei.farmersdelight.decomposition.light": "Przyspieszony przez promienie słoneczne",
+  "jei.farmersdelight.decomposition.fluid": "Przyspieszony przez przylegającą wodę",
+  "jei.farmersdelight.decomposition.accelerators": "Przyspieszony przez przyległe aktywatory (patrz poniżej)",
+  "jei.farmersdelight.info.straw": "Suche włókno roślinne używane w konstruowaniu. Otrzymywana przez ścinanie traw i roślin nożem",
+  "jei.farmersdelight.info.knife": "Noże są lekką bronią białą. Mogą zbierać słomę z traw, oraz gwarantują drugorzędne łupy ze zwierząt.",
+  "jei.farmersdelight.info.ham": "Duży kawałek mięsa z uda świni lub hoglina. Będziesz potrzebował czegoś lżejszego niż miecz by to uciąć..."
 }

@@ -42,7 +42,7 @@ public class CookingRecipeCategory implements IRecipeCategory<CookingPotRecipe>
 	private final IDrawable icon;
 
 	public CookingRecipeCategory(IGuiHelper helper) {
-		title = TextUtils.getTranslation("jei.cooking");
+		title = TextUtils.JEI("cooking");
 		ResourceLocation widgetBackgroundImage = new ResourceLocation(FarmersDelight.MODID, "textures/gui/jei/cooking_pot.png");
 		ResourceLocation interfaceImage = new ResourceLocation(FarmersDelight.MODID, "textures/gui/cooking_pot.png");
 		background = helper.createDrawable(widgetBackgroundImage, 0, 0, 116, 56);

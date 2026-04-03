@@ -245,14 +245,14 @@
   "farmersdelight.block.skillet.invalid_item": "Dette kan ikke tilberedes...",
   "farmersdelight.item.skillet.how_to_cook": "Bruk den andre hånden til å holde ingrediensene!",
 
-  "farmersdelight.jei.cooking": "Matlaging",
-  "farmersdelight.jei.cutting": "Skjærebrett",
-  "farmersdelight.jei.chance": "%1$s%% sjangse",
-  "farmersdelight.jei.decomposition": "Nedbrytning",
-  "farmersdelight.jei.decomposition.light": "Fremskyndes av sollys",
-  "farmersdelight.jei.decomposition.fluid": "Fremskyndes av nærtliggende vann",
-  "farmersdelight.jei.decomposition.accelerators": "Fremskyndet av nærliggende aktivatorer (se nedenfor)",
-  "farmersdelight.jei.info.straw": "En tørr plantefiber som brukes i håndverk. Skaffes ved å kutte gresskledde avlinger og planter med en kniv.",
-  "farmersdelight.jei.info.knife": "Kniver er lette nærkampvåpen. De kan høste halm fra gress, og garantere sekundærgjenstander fra dyr.",
-  "farmersdelight.jei.info.ham": "Et stort kjøttstykke fra en gris eller Hoglins ben. Du trenger noe lettere enn et sverd for å kutte det..."
+  "jei.farmersdelight.cooking": "Matlaging",
+  "jei.farmersdelight.cutting": "Skjærebrett",
+  "jei.farmersdelight.chance": "%1$s%% sjangse",
+  "jei.farmersdelight.decomposition": "Nedbrytning",
+  "jei.farmersdelight.decomposition.light": "Fremskyndes av sollys",
+  "jei.farmersdelight.decomposition.fluid": "Fremskyndes av nærtliggende vann",
+  "jei.farmersdelight.decomposition.accelerators": "Fremskyndet av nærliggende aktivatorer (se nedenfor)",
+  "jei.farmersdelight.info.straw": "En tørr plantefiber som brukes i håndverk. Skaffes ved å kutte gresskledde avlinger og planter med en kniv.",
+  "jei.farmersdelight.info.knife": "Kniver er lette nærkampvåpen. De kan høste halm fra gress, og garantere sekundærgjenstander fra dyr.",
+  "jei.farmersdelight.info.ham": "Et stort kjøttstykke fra en gris eller Hoglins ben. Du trenger noe lettere enn et sverd for å kutte det..."
 }

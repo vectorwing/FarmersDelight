@@ -276,15 +276,15 @@
   "death.attack.farmersdelight.stove": "%1$s bol perfektne ugrilovaný!",
   "death.attack.farmersdelight.stove.player": "%1$s bol hodený na gril kuchárom %2$s",
   
-  "farmersdelight.jei.cooking": "Varenie",
-  "farmersdelight.jei.cutting": "Denko",
-  "farmersdelight.jei.chance": "%1$s%% šanca",
-  "farmersdelight.jei.decomposition": "Rozklad",
-  "farmersdelight.jei.decomposition.light": "Zrýchlené slnečným žiarením",
-  "farmersdelight.jei.decomposition.fluid": "Zrýchlené susednou vodou",
-  "farmersdelight.jei.decomposition.accelerators": "Zrýchlené susednými aktivátormi (pozri nižšie)",
-  "farmersdelight.jei.info.straw": "Suché rastlinné vlákno používané pri výrobe. Získané rezaním trávnatých plodín a rastlín nožom.",
-  "farmersdelight.jei.info.knife": "Nože sú ľahké zbrane na blízko. Dokážu zbierať slamu z tráv a zaručujú nejaké veci zo zvierat.",
-  "farmersdelight.jei.info.ham": "Veľký kus mäsa z prasaťa alebo Hoglinovho stehna. Na rozsekanie budete potrebovať niečo ľahšie ako meč..."
+  "jei.farmersdelight.cooking": "Varenie",
+  "jei.farmersdelight.cutting": "Denko",
+  "jei.farmersdelight.chance": "%1$s%% šanca",
+  "jei.farmersdelight.decomposition": "Rozklad",
+  "jei.farmersdelight.decomposition.light": "Zrýchlené slnečným žiarením",
+  "jei.farmersdelight.decomposition.fluid": "Zrýchlené susednou vodou",
+  "jei.farmersdelight.decomposition.accelerators": "Zrýchlené susednými aktivátormi (pozri nižšie)",
+  "jei.farmersdelight.info.straw": "Suché rastlinné vlákno používané pri výrobe. Získané rezaním trávnatých plodín a rastlín nožom.",
+  "jei.farmersdelight.info.knife": "Nože sú ľahké zbrane na blízko. Dokážu zbierať slamu z tráv a zaručujú nejaké veci zo zvierat.",
+  "jei.farmersdelight.info.ham": "Veľký kus mäsa z prasaťa alebo Hoglinovho stehna. Na rozsekanie budete potrebovať niečo ľahšie ako meč..."
   }
   

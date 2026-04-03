@@ -261,14 +261,14 @@
   "death.attack.farmersdelight.stove": "%1$s was tot in de perfectie gegrild",
   "death.attack.farmersdelight.stove.player": "%1$s werd op de grill gegooid door Chef %2$s",
 
-  "farmersdelight.jei.cooking": "Koken",
-  "farmersdelight.jei.cutting": "Snijplank",
-  "farmersdelight.jei.chance": "%1$s%% kans",
-  "farmersdelight.jei.decomposition": "Ontleding",
-  "farmersdelight.jei.decomposition.light": "Versneld door zonlicht",
-  "farmersdelight.jei.decomposition.fluid": "Versneld door aangrenzend water",
-  "farmersdelight.jei.decomposition.accelerators": "Versneld door aangrenzende activatoren (zie hieronder)",
-  "farmersdelight.jei.info.straw": "Een droge plantaardige vezel die wordt gebruikt bij dingen te maken. Verkregen door grasachtige gewassen en planten te snijden met een mes.",
-  "farmersdelight.jei.info.knife": "Messen zijn lichtgewicht slagwapens. Ze kunnen stro van grassen oogsten en secundaire materialen van dieren garanderen.",
-  "farmersdelight.jei.info.ham": "Een grote snee vlees van een Varkens- of Hoglin's been. Je hebt iets lichters dan een Zwaard nodig om er een te snijden..."
+  "jei.farmersdelight.cooking": "Koken",
+  "jei.farmersdelight.cutting": "Snijplank",
+  "jei.farmersdelight.chance": "%1$s%% kans",
+  "jei.farmersdelight.decomposition": "Ontleding",
+  "jei.farmersdelight.decomposition.light": "Versneld door zonlicht",
+  "jei.farmersdelight.decomposition.fluid": "Versneld door aangrenzend water",
+  "jei.farmersdelight.decomposition.accelerators": "Versneld door aangrenzende activatoren (zie hieronder)",
+  "jei.farmersdelight.info.straw": "Een droge plantaardige vezel die wordt gebruikt bij dingen te maken. Verkregen door grasachtige gewassen en planten te snijden met een mes.",
+  "jei.farmersdelight.info.knife": "Messen zijn lichtgewicht slagwapens. Ze kunnen stro van grassen oogsten en secundaire materialen van dieren garanderen.",
+  "jei.farmersdelight.info.ham": "Een grote snee vlees van een Varkens- of Hoglin's been. Je hebt iets lichters dan een Zwaard nodig om er een te snijden..."
 }
