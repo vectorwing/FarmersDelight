@@ -259,12 +259,12 @@
   "subtitles.farmersdelight.entity.rotten_tomato.throw": "Tomàquet podrit llançat",
   "subtitles.farmersdelight.entity.rotten_tomato.hit": "Tomàquet podrit esclatant",
 
-  "farmersdelight.block.feast.use_container": "Necessites un %s per menjar això.",
-  "farmersdelight.block.rice.invalid_placement": "Aquest cultiu no sobreviurà bé fora d'aigues poc profundes.",
-  "farmersdelight.block.cutting_board.invalid_item": "No sembla que això es pugui tallar...",
-  "farmersdelight.block.cutting_board.invalid_tool": "Potser amb una eina diferent...",
-  "farmersdelight.block.skillet.invalid_item": "Això no es pot cuinar...",
-  "farmersdelight.item.skillet.how_to_cook": "Utilitza l'altre mà per sostenir els ingredients!",
+  "block.farmersdelight.feast.use_container": "Necessites un %s per menjar això.",
+  "block.farmersdelight.rice.invalid_placement": "Aquest cultiu no sobreviurà bé fora d'aigues poc profundes.",
+  "block.farmersdelight.cutting_board.invalid_item": "No sembla que això es pugui tallar...",
+  "block.farmersdelight.cutting_board.invalid_tool": "Potser amb una eina diferent...",
+  "block.farmersdelight.skillet.invalid_item": "Això no es pot cuinar...",
+  "item.farmersdelight.skillet.how_to_cook": "Utilitza l'altre mà per sostenir els ingredients!",
 
   "death.attack.farmersdelight.stove": "%1$s s'ha rostit a la perfecció",
   "death.attack.farmersdelight.stove.player": "%1$s ha estat llençat a la paella per el chef %2$s",

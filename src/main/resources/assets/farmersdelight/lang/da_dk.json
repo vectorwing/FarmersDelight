@@ -286,12 +286,12 @@
   "subtitles.farmersdelight.entity.rotten_tomato.throw": "Rådne tomatfluer",
   "subtitles.farmersdelight.entity.rotten_tomato.hit": "Rådden tomat sprøjter",
 
-  "farmersdelight.block.feast.use_container": "Du skal bruge en %s for at spise dette.",
-  "farmersdelight.block.rice.invalid_placement": "Denne afgrøde vil ikke overleve godt uden for lavt vand.",
-  "farmersdelight.block.cutting_board.invalid_item": "Dette virker ikke skærbart...",
-  "farmersdelight.block.cutting_board.invalid_tool": "Måske med et andet værktøj...",
-  "farmersdelight.block.skillet.invalid_item": "Dette kan ikke tilberedes...",
-  "farmersdelight.item.skillet.how_to_cook": "Brug din anden hånd til at holde ingredienserne!",
+  "block.farmersdelight.feast.use_container": "Du skal bruge en %s for at spise dette.",
+  "block.farmersdelight.rice.invalid_placement": "Denne afgrøde vil ikke overleve godt uden for lavt vand.",
+  "block.farmersdelight.cutting_board.invalid_item": "Dette virker ikke skærbart...",
+  "block.farmersdelight.cutting_board.invalid_tool": "Måske med et andet værktøj...",
+  "block.farmersdelight.skillet.invalid_item": "Dette kan ikke tilberedes...",
+  "item.farmersdelight.skillet.how_to_cook": "Brug din anden hånd til at holde ingredienserne!",
 
   "death.attack.farmersdelight.stove": "%1$s blev grillet til perfektion",
   "death.attack.farmersdelight.stove.player": "%1$s blev smidt på grillen af Chef %2$s",

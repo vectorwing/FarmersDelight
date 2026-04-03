@@ -287,12 +287,12 @@
   "subtitles.farmersdelight.entity.rotten_tomato.throw": "Гнілы памідор ляціць",
   "subtitles.farmersdelight.entity.rotten_tomato.hit": "Гнілы памідор лопнуў",
 
-  "farmersdelight.block.feast.use_container": "Вам патрэбна %s каб з’есці гэта.",
-  "farmersdelight.block.rice.invalid_placement": "Гэтая расліны не выжыве па-за мелкаводдзем.",
-  "farmersdelight.block.cutting_board.invalid_item": "Відаць гэта нельга разрэзаць...",
-  "farmersdelight.block.cutting_board.invalid_tool": "Можа з іншым інструментам...",
-  "farmersdelight.block.skillet.invalid_item": "Гэта нельга пасмажыць...",
-  "farmersdelight.item.skillet.how_to_cook": "Трымайце інгрэдыенты ў другой руцэ!",
+  "block.farmersdelight.feast.use_container": "Вам патрэбна %s каб з’есці гэта.",
+  "block.farmersdelight.rice.invalid_placement": "Гэтая расліны не выжыве па-за мелкаводдзем.",
+  "block.farmersdelight.cutting_board.invalid_item": "Відаць гэта нельга разрэзаць...",
+  "block.farmersdelight.cutting_board.invalid_tool": "Можа з іншым інструментам...",
+  "block.farmersdelight.skillet.invalid_item": "Гэта нельга пасмажыць...",
+  "item.farmersdelight.skillet.how_to_cook": "Трымайце інгрэдыенты ў другой руцэ!",
 
   "death.attack.farmersdelight.stove": "Гулец %1$s быў засмажаны да прыгаркі",
   "death.attack.farmersdelight.stove.player": "Гулец %1$s быў засмажаны на пліце шэфам %2$s",

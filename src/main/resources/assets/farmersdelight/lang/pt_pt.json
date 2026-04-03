@@ -208,10 +208,10 @@
   "subtitles.farmersdelight.block.stove.crackle": "Fogão a crepitar",
   "subtitles.farmersdelight.block.tomato_bush.pick_tomatoes": "Tomates a saltar",
 
-  "farmersdelight.block.feast.use_container": "Precisas de uma %s para comer isto.",
-  "farmersdelight.block.rice.invalid_placement": "Esta planta não sobreviverá fora de água.",
-  "farmersdelight.block.cutting_board.invalid_item": "Isto não parece cortável...",
-  "farmersdelight.block.cutting_board.invalid_tool": "Talvez com uma ferramenta diferente...",
+  "block.farmersdelight.feast.use_container": "Precisas de uma %s para comer isto.",
+  "block.farmersdelight.rice.invalid_placement": "Esta planta não sobreviverá fora de água.",
+  "block.farmersdelight.cutting_board.invalid_item": "Isto não parece cortável...",
+  "block.farmersdelight.cutting_board.invalid_tool": "Talvez com uma ferramenta diferente...",
 
   "jei.farmersdelight.cooking": "Panela",
   "jei.farmersdelight.cutting": "Tábua de corte",

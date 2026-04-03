@@ -23,7 +23,6 @@ import java.util.Map;
  */
 public class TextUtils
 {
-	public static final MutableComponent NO_EFFECTS = Component.translatable("effect.none").withStyle(ChatFormatting.GRAY);
 	public static final MutableComponent PLACEABLE = tooltip("placeable").withStyle(ChatFormatting.DARK_GRAY).withStyle(ChatFormatting.ITALIC);
 	public static final MutableComponent PLACEABLE_SNEAKING = tooltip("placeable_sneaking").withStyle(ChatFormatting.DARK_GRAY).withStyle(ChatFormatting.ITALIC);
 	public static final MutableComponent DEBUG_ITEM = tooltip("debug_item").withStyle(ChatFormatting.RED);
@@ -45,6 +44,14 @@ public class TextUtils
 	 */
 	public static MutableComponent getTextWithType(String translationType, String translationKey, Object... args) {
 		return Component.translatable(translationType + "." + FarmersDelight.MODID + "." + translationKey, args);
+	}
+
+	public static MutableComponent block(String key, Object... args) {
+		return getTextWithType("block", key, args);
+	}
+
+	public static MutableComponent item(String key, Object... args) {
+		return getTextWithType("item", key, args);
 	}
 
 	public static MutableComponent advancement(String key, Object... args) {

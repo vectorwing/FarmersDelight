@@ -287,12 +287,12 @@
   "subtitles.farmersdelight.entity.rotten_tomato.throw": "Vol de tomate pourrie",
   "subtitles.farmersdelight.entity.rotten_tomato.hit": "Écrasement de tomate pourrie",
 
-  "farmersdelight.block.feast.use_container": "Il faut un %s pour manger ça.",
-  "farmersdelight.block.rice.invalid_placement": "Cette culture ne survivra pas bien en dehors des eaux peu profondes.",
-  "farmersdelight.block.cutting_board.invalid_item": "Cela ne semble pas pouvoir être coupé...",
-  "farmersdelight.block.cutting_board.invalid_tool": "Peut-être avec un autre outil...",
-  "farmersdelight.block.skillet.invalid_item": "Cela ne peut pas être cuit...",
-  "farmersdelight.item.skillet.how_to_cook": "Utilisez votre autre main pour tenir les ingrédients !",
+  "block.farmersdelight.feast.use_container": "Il faut un %s pour manger ça.",
+  "block.farmersdelight.rice.invalid_placement": "Cette culture ne survivra pas bien en dehors des eaux peu profondes.",
+  "block.farmersdelight.cutting_board.invalid_item": "Cela ne semble pas pouvoir être coupé...",
+  "block.farmersdelight.cutting_board.invalid_tool": "Peut-être avec un autre outil...",
+  "block.farmersdelight.skillet.invalid_item": "Cela ne peut pas être cuit...",
+  "item.farmersdelight.skillet.how_to_cook": "Utilisez votre autre main pour tenir les ingrédients !",
 
   "death.attack.farmersdelight.stove": "%1$s ont été grillés à la perfection",
   "death.attack.farmersdelight.stove.player": "%1$s a été mis sur le grill par le chef %2$s",

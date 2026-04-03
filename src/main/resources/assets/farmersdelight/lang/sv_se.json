@@ -267,12 +267,12 @@
   "subtitles.farmersdelight.entity.rotten_tomato.throw": "Rutten tomat flyger",
   "subtitles.farmersdelight.entity.rotten_tomato.hit": "Rutten tomat stänker",
 
-  "farmersdelight.block.feast.use_container": "Du behöver en %s för att äta detta.",
-  "farmersdelight.block.rice.invalid_placement": "Denna gröda kommer inte att överleva bra utanför grunt vatten.",
-  "farmersdelight.block.cutting_board.invalid_item": "Det här verkar inte gå att skära...",
-  "farmersdelight.block.cutting_board.invalid_tool": "Kanske med ett annat verktyg...",
-  "farmersdelight.block.skillet.invalid_item": "Det här går inte att tillaga...",
-  "farmersdelight.item.skillet.how_to_cook": "Använd din andra hand för att hålla ingredienserna!",
+  "block.farmersdelight.feast.use_container": "Du behöver en %s för att äta detta.",
+  "block.farmersdelight.rice.invalid_placement": "Denna gröda kommer inte att överleva bra utanför grunt vatten.",
+  "block.farmersdelight.cutting_board.invalid_item": "Det här verkar inte gå att skära...",
+  "block.farmersdelight.cutting_board.invalid_tool": "Kanske med ett annat verktyg...",
+  "block.farmersdelight.skillet.invalid_item": "Det här går inte att tillaga...",
+  "item.farmersdelight.skillet.how_to_cook": "Använd din andra hand för att hålla ingredienserna!",
 
   "death.attack.farmersdelight.stove": "%1$s var grillad till perfektion",
   "death.attack.farmersdelight.stove.player": "%1$s kastades på grillen av kocken %2$s",

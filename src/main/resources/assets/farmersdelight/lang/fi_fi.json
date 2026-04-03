@@ -238,12 +238,12 @@
   "subtitles.farmersdelight.block.skillet.add_food": "Paistinpannu sihisee",
   "subtitles.farmersdelight.block.tomato_bush.pick_tomatoes": "Tomaatit popsahtavat",
   
-  "farmersdelight.block.feast.use_container": "Tarvitset esineen %s syödäksesti tätä.",
-  "farmersdelight.block.rice.invalid_placement": "Tämä kasvi selviää parhaiten matalassa vedessä.",
-  "farmersdelight.block.cutting_board.invalid_item": "Tätä ei voi leikata...",
-  "farmersdelight.block.cutting_board.invalid_tool": "Ehkä toisella työkalulla...",
-  "farmersdelight.block.skillet.invalid_item": "Tätä ei voi paistaa...",
-  "farmersdelight.item.skillet.how_to_cook": "Pidä ainesosia toisessa kädessä!",
+  "block.farmersdelight.feast.use_container": "Tarvitset esineen %s syödäksesti tätä.",
+  "block.farmersdelight.rice.invalid_placement": "Tämä kasvi selviää parhaiten matalassa vedessä.",
+  "block.farmersdelight.cutting_board.invalid_item": "Tätä ei voi leikata...",
+  "block.farmersdelight.cutting_board.invalid_tool": "Ehkä toisella työkalulla...",
+  "block.farmersdelight.skillet.invalid_item": "Tätä ei voi paistaa...",
+  "item.farmersdelight.skillet.how_to_cook": "Pidä ainesosia toisessa kädessä!",
 
   "jei.farmersdelight.cooking": "Ruoanlaitto",
   "jei.farmersdelight.cutting": "Leikkuulauta",

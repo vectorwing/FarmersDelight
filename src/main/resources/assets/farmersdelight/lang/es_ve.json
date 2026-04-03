@@ -206,10 +206,10 @@
   "subtitles.farmersdelight.block.stove.crackle": "Crujidos de la parrilla",
   "subtitles.farmersdelight.block.tomato_bush.pick_tomatoes": "Tomate estallando",
 
-  "farmersdelight.block.feast.use_container": "Necesitas un %s para comer esto.",
-  "farmersdelight.block.rice.invalid_placement": "Este cultivo no sobrevivirá bien fuera de aguas poco profundas.",
-  "farmersdelight.block.cutting_board.invalid_item": "Esto no parece que se pueda cortar...",
-  "farmersdelight.block.cutting_board.invalid_tool": "Tal vez con una herramienta diferente...",
+  "block.farmersdelight.feast.use_container": "Necesitas un %s para comer esto.",
+  "block.farmersdelight.rice.invalid_placement": "Este cultivo no sobrevivirá bien fuera de aguas poco profundas.",
+  "block.farmersdelight.cutting_board.invalid_item": "Esto no parece que se pueda cortar...",
+  "block.farmersdelight.cutting_board.invalid_tool": "Tal vez con una herramienta diferente...",
 
   "jei.farmersdelight.cooking": "Cocinando",
   "jei.farmersdelight.cutting": "Tabla de picar",

@@ -287,12 +287,12 @@
   "subtitles.farmersdelight.entity.rotten_tomato.throw": "Verdorbene Tomate fliegt",
   "subtitles.farmersdelight.entity.rotten_tomato.hit": "Verdorbene Tomaten spritzt",
 
-  "farmersdelight.block.feast.use_container": "Du brauchst ein(e)(n) %s ,um dies zu essen.",
-  "farmersdelight.block.rice.invalid_placement": "Außerhalb von seichtem Wasser wird diese Pflanze nicht überleben.",
-  "farmersdelight.block.cutting_board.invalid_item": "Dies scheint nicht zerschneidbar zu sein...",
-  "farmersdelight.block.cutting_board.invalid_tool": "Vielleicht mit einem anderen Werkzeug...",
-  "farmersdelight.block.skillet.invalid_item": "Das kann nicht gekocht werden...",
-  "farmersdelight.item.skillet.how_to_cook": "Benutze deine andere Hand um Zutaten zu halten!",
+  "block.farmersdelight.feast.use_container": "Du brauchst ein(e)(n) %s ,um dies zu essen.",
+  "block.farmersdelight.rice.invalid_placement": "Außerhalb von seichtem Wasser wird diese Pflanze nicht überleben.",
+  "block.farmersdelight.cutting_board.invalid_item": "Dies scheint nicht zerschneidbar zu sein...",
+  "block.farmersdelight.cutting_board.invalid_tool": "Vielleicht mit einem anderen Werkzeug...",
+  "block.farmersdelight.skillet.invalid_item": "Das kann nicht gekocht werden...",
+  "item.farmersdelight.skillet.how_to_cook": "Benutze deine andere Hand um Zutaten zu halten!",
 
   "death.attack.farmersdelight.stove": "%1$s fand heraus, dass Öfen nicht zum Kuscheln geeignet sind.",
   "death.attack.farmersdelight.stove.player": "%1$s wurde von %2$s zur Perfektion geröstet.",

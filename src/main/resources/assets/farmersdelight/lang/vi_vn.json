@@ -287,12 +287,12 @@
   "subtitles.farmersdelight.entity.rotten_tomato.throw": "Cà chua thối bay",
   "subtitles.farmersdelight.entity.rotten_tomato.hit": "Cà chua thối vỡ",
 
-  "farmersdelight.block.feast.use_container": "Bạn cần một cái %s để ăn cái này.",
-  "farmersdelight.block.rice.invalid_placement": "Cây trồng này sẽ không sống được khi ở ngoài vùng nước nông.",
-  "farmersdelight.block.cutting_board.invalid_item": "Cái này trông có vẻ không cắt được...",
-  "farmersdelight.block.cutting_board.invalid_tool": "Có lẽ nên dùng một công cụ khác...",
-  "farmersdelight.block.skillet.invalid_item": "Cái này không thể nấu được...",
-  "farmersdelight.item.skillet.how_to_cook": "Dùng tay còn lại của bạn để giữ nguyên liệu!",
+  "block.farmersdelight.feast.use_container": "Bạn cần một cái %s để ăn cái này.",
+  "block.farmersdelight.rice.invalid_placement": "Cây trồng này sẽ không sống được khi ở ngoài vùng nước nông.",
+  "block.farmersdelight.cutting_board.invalid_item": "Cái này trông có vẻ không cắt được...",
+  "block.farmersdelight.cutting_board.invalid_tool": "Có lẽ nên dùng một công cụ khác...",
+  "block.farmersdelight.skillet.invalid_item": "Cái này không thể nấu được...",
+  "item.farmersdelight.skillet.how_to_cook": "Dùng tay còn lại của bạn để giữ nguyên liệu!",
 
   "death.attack.farmersdelight.stove": "%1$s đã được nướng đến hoàn hảo",
   "death.attack.farmersdelight.stove.player": "%1$s đã bị nướng bởi đầu bếp %2$s",

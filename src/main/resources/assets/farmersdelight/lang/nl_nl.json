@@ -251,12 +251,12 @@
   "subtitles.farmersdelight.entity.rotten_tomato.throw": "Verrotte Tomaat vliegt",
   "subtitles.farmersdelight.entity.rotten_tomato.hit": "Verrotte Tomaat spat",
 
-  "farmersdelight.block.feast.use_container": "Je hebt een %s nodig om dit te eten.",
-  "farmersdelight.block.rice.invalid_placement": "Dit gewas zal buiten ondiep water niet goed overleven.",
-  "farmersdelight.block.cutting_board.invalid_item": "Dit lijkt me niet te snijden...",
-  "farmersdelight.block.cutting_board.invalid_tool": "Misschien met een andere tool...",
-  "farmersdelight.block.skillet.invalid_item": "Dit kan niet gekookt worden...",
-  "farmersdelight.item.skillet.how_to_cook": "Gebruik je andere hand om ingrediënten vast te houden!",
+  "block.farmersdelight.feast.use_container": "Je hebt een %s nodig om dit te eten.",
+  "block.farmersdelight.rice.invalid_placement": "Dit gewas zal buiten ondiep water niet goed overleven.",
+  "block.farmersdelight.cutting_board.invalid_item": "Dit lijkt me niet te snijden...",
+  "block.farmersdelight.cutting_board.invalid_tool": "Misschien met een andere tool...",
+  "block.farmersdelight.skillet.invalid_item": "Dit kan niet gekookt worden...",
+  "item.farmersdelight.skillet.how_to_cook": "Gebruik je andere hand om ingrediënten vast te houden!",
 
   "death.attack.farmersdelight.stove": "%1$s was tot in de perfectie gegrild",
   "death.attack.farmersdelight.stove.player": "%1$s werd op de grill gegooid door Chef %2$s",

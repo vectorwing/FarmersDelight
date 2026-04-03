@@ -287,12 +287,12 @@
   "subtitles.farmersdelight.entity.rotten_tomato.throw": "El tomate podrido vuela",
   "subtitles.farmersdelight.entity.rotten_tomato.hit": "El tomate podrido salpica",
 
-  "farmersdelight.block.feast.use_container": "Necesitás un %s para comer esto.",
-  "farmersdelight.block.rice.invalid_placement": "Este cultivo no sobrevivirá bien fuera de aguas poco profundas.",
-  "farmersdelight.block.cutting_board.invalid_item": "Esto no parece cortable...",
-  "farmersdelight.block.cutting_board.invalid_tool": "Quizás con una herramienta diferente...",
-  "farmersdelight.block.skillet.invalid_item": "Esto no puede ser cocinado...",
-  "farmersdelight.item.skillet.how_to_cook": "¡Usá tu otra mano para sostener los ingredientes!",
+  "block.farmersdelight.feast.use_container": "Necesitás un %s para comer esto.",
+  "block.farmersdelight.rice.invalid_placement": "Este cultivo no sobrevivirá bien fuera de aguas poco profundas.",
+  "block.farmersdelight.cutting_board.invalid_item": "Esto no parece cortable...",
+  "block.farmersdelight.cutting_board.invalid_tool": "Quizás con una herramienta diferente...",
+  "block.farmersdelight.skillet.invalid_item": "Esto no puede ser cocinado...",
+  "item.farmersdelight.skillet.how_to_cook": "¡Usá tu otra mano para sostener los ingredientes!",
 
   "death.attack.farmersdelight.stove": "%1$s fue asado a la perfección",
   "death.attack.farmersdelight.stove.player": "%1$s fue arrojado a la parrila por el chef %2$s",

@@ -286,12 +286,12 @@
   "subtitles.farmersdelight.entity.rotten_tomato.throw": "jan li pana e kili linja jaki",
   "subtitles.farmersdelight.entity.rotten_tomato.hit": "kili linja jaki li pakala",
 
-  "farmersdelight.block.feast.use_container": "sina jo e %s la sina ken moku e ni.",
-  "farmersdelight.block.rice.invalid_placement": "kasi ni li lon ala telo lili la ona li moli.",
-  "farmersdelight.block.cutting_board.invalid_item": "sina ken ala kipisi e ni.",
-  "farmersdelight.block.cutting_board.invalid_tool": "ilo ni la, sina ken ala kipisi e ni.",
-  "farmersdelight.block.skillet.invalid_item": "sina ken ala seli moku e ni.",
-  "farmersdelight.item.skillet.how_to_cook": "o luka e moku kepeken luka ante sina!",
+  "block.farmersdelight.feast.use_container": "sina jo e %s la sina ken moku e ni.",
+  "block.farmersdelight.rice.invalid_placement": "kasi ni li lon ala telo lili la ona li moli.",
+  "block.farmersdelight.cutting_board.invalid_item": "sina ken ala kipisi e ni.",
+  "block.farmersdelight.cutting_board.invalid_tool": "ilo ni la, sina ken ala kipisi e ni.",
+  "block.farmersdelight.skillet.invalid_item": "sina ken ala seli moku e ni.",
+  "item.farmersdelight.skillet.how_to_cook": "o luka e moku kepeken luka ante sina!",
 
   "death.attack.farmersdelight.stove": "supa pi seli moku li seli moku e %1$s",
   "death.attack.farmersdelight.stove.player": "jan moku %2$s li seli moku e %1$s",

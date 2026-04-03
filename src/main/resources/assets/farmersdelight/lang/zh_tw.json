@@ -287,12 +287,12 @@
   "subtitles.farmersdelight.entity.rotten_tomato.throw": "蒼蠅飛繞",
   "subtitles.farmersdelight.entity.rotten_tomato.hit": "腐爛番茄飛濺",
 
-  "farmersdelight.block.feast.use_container": "你需要 %s 才能吃他。",
-  "farmersdelight.block.rice.invalid_placement": "這作物無法在淺水區外生存。",
-  "farmersdelight.block.cutting_board.invalid_item": "似乎無法切割……",
-  "farmersdelight.block.cutting_board.invalid_tool": "該用別種工具……",
-  "farmersdelight.block.skillet.invalid_item": "無法被加熱……",
-  "farmersdelight.item.skillet.how_to_cook": "用副手拿著食材！",
+  "block.farmersdelight.feast.use_container": "你需要 %s 才能吃他。",
+  "block.farmersdelight.rice.invalid_placement": "這作物無法在淺水區外生存。",
+  "block.farmersdelight.cutting_board.invalid_item": "似乎無法切割……",
+  "block.farmersdelight.cutting_board.invalid_tool": "該用別種工具……",
+  "block.farmersdelight.skillet.invalid_item": "無法被加熱……",
+  "item.farmersdelight.skillet.how_to_cook": "用副手拿著食材！",
 
   "death.attack.farmersdelight.stove": "完美的烤 %1$s 出爐了",
   "death.attack.farmersdelight.stove.player": "%1$s 被 %2$s 大廚扔到烤架上烤",

@@ -156,7 +156,7 @@ public class SkilletItem extends BlockItem
 			Optional<CampfireCookingRecipe> recipe = getCookingRecipe(cookingStack, level);
 			if (recipe.isPresent()) {
 				if (player.isUnderWater()) {
-					player.displayClientMessage(TextUtils.getTranslation("item.skillet.underwater"), true);
+					player.displayClientMessage(TextUtils.item("skillet.underwater"), true);
 					return InteractionResultHolder.pass(skilletStack);
 				}
 				ItemStack cookingStackCopy = cookingStack.copy();
@@ -168,7 +168,7 @@ public class SkilletItem extends BlockItem
 				player.setItemInHand(otherHand, cookingStackCopy);
 				return InteractionResultHolder.consume(skilletStack);
 			} else {
-				player.displayClientMessage(TextUtils.getTranslation("item.skillet.how_to_cook"), true);
+				player.displayClientMessage(TextUtils.item("skillet.how_to_cook"), true);
 			}
 		}
 		return InteractionResultHolder.pass(skilletStack);
