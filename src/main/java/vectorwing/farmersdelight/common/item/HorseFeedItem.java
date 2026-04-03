@@ -89,7 +89,7 @@ public class HorseFeedItem extends Item
 			return;
 		}
 
-		MutableComponent textWhenFeeding = TextUtils.getTranslation("tooltip.horse_feed.when_feeding");
+		MutableComponent textWhenFeeding = TextUtils.tooltip("horse_feed.when_feeding");
 		tooltip.add(textWhenFeeding.withStyle(ChatFormatting.GRAY));
 
 		for (MobEffectInstance effectInstance : EFFECTS) {

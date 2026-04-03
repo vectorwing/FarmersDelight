@@ -38,9 +38,10 @@ public class TextUtils
 	/**
 	 * Gets text from a translation key, where "type" prefixes Farmer's Delight's mod ID.
 	 * Example: "type.farmersdelight.key".
+	 *
 	 * @param translationType The type of lang being read, added as a prefix
-	 * @param translationKey The key itself, added as a suffix after the mod ID
-	 * @param args Additional values to be keyed into the text, through markers such as %s
+	 * @param translationKey  The key itself, added as a suffix after the mod ID
+	 * @param args            Additional values to be keyed into the text, through markers such as %s
 	 */
 	public static MutableComponent getTextWithType(String translationType, String translationKey, Object... args) {
 		return Component.translatable(translationType + "." + FarmersDelight.MODID + "." + translationKey, args);
@@ -69,16 +70,14 @@ public class TextUtils
 	/**
 	 * An alternate version of PotionUtils.addPotionTooltip, that obtains the item's food property potion effects instead.
 	 */
-	public static void addFoodEffectTooltip(ItemStack itemIn, List<Component> lores, float durationFactor) {
-		FoodProperties foodStats = itemIn.getItem().getFoodProperties();
+	public static void addFoodEffectTooltip(ItemStack stack, List<Component> lores, float durationFactor) {
+		FoodProperties foodStats = stack.getItem().getFoodProperties(stack, null);
 		if (foodStats == null) {
 			return;
 		}
 		List<Pair<MobEffectInstance, Float>> effectList = foodStats.getEffects();
 		List<Pair<Attribute, AttributeModifier>> attributeList = Lists.newArrayList();
-		if (effectList.isEmpty()) {
-			lores.add(NO_EFFECTS);
-		} else {
+		if (!effectList.isEmpty()) {
 			for (Pair<MobEffectInstance, Float> effectPair : effectList) {
 				MobEffectInstance instance = effectPair.getFirst();
 				MutableComponent iformattabletextcomponent = Component.translatable(instance.getDescriptionId());
