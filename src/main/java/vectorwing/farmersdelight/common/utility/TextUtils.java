@@ -26,6 +26,7 @@ public class TextUtils
 	public static final MutableComponent NO_EFFECTS = Component.translatable("effect.none").withStyle(ChatFormatting.GRAY);
 	public static final MutableComponent PLACEABLE = tooltip("placeable").withStyle(ChatFormatting.DARK_GRAY).withStyle(ChatFormatting.ITALIC);
 	public static final MutableComponent PLACEABLE_SNEAKING = tooltip("placeable_sneaking").withStyle(ChatFormatting.DARK_GRAY).withStyle(ChatFormatting.ITALIC);
+	public static final MutableComponent DEBUG_ITEM = tooltip("debug_item").withStyle(ChatFormatting.RED);
 
 	/**
 	 * Syntactic sugar for custom translation keys. Always prefixed with the mod's ID in lang files (e.g. farmersdelight.your.key.here).
@@ -49,10 +50,6 @@ public class TextUtils
 		return getTextWithType("advancements", key, args);
 	}
 
-	public static String subtitleKey(String key, Object... args) {
-		return getTextWithType("subtitles", key, args).getString();
-	}
-
 	public static MutableComponent container(String key, Object... args) {
 		return getTextWithType("container", key, args);
 	}
@@ -62,7 +59,11 @@ public class TextUtils
 	}
 
 	public static MutableComponent tooltip(String key, Object... args) {
-		return Component.translatable(FarmersDelight.MODID + ".tooltip." + key, args);
+		return getTextWithType("tooltip", key, args);
+	}
+
+	public static String subtitleKey(String key, Object... args) {
+		return getTextWithType("subtitles", key, args).getString();
 	}
 
 	/**

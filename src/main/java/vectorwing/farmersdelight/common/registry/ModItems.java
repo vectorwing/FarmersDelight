@@ -1,9 +1,7 @@
 package vectorwing.farmersdelight.common.registry;
 
 import com.google.common.collect.Sets;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
@@ -497,8 +495,7 @@ public class ModItems
 			{
 				@Override
 				public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-					MutableComponent textDescription = TextUtils.getTranslation("tooltip.debug_item");
-					tooltip.add(textDescription.withStyle(ChatFormatting.RED));
+					tooltip.add(TextUtils.DEBUG_ITEM);
 				}
 			});
 }
