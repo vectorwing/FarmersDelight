@@ -49,6 +49,10 @@ public class TextUtils
 		return getTextWithType("advancements", key, args);
 	}
 
+	public static String subtitleKey(String key, Object... args) {
+		return getTextWithType("subtitles", key, args).getString();
+	}
+
 	public static MutableComponent container(String key, Object... args) {
 		return getTextWithType("container", key, args);
 	}

@@ -201,10 +201,10 @@
   "advancements.farmersdelight.master_chef.title": "Master Chef",
   "advancements.farmersdelight.master_chef.description": "¡Coma un plato de cada comida disponible!",
 
-  "farmersdelight.subtitles.cooking_pot.boil": "Blobs de la olla hirviendo",
-  "farmersdelight.subtitles.cutting_board.knife_cut": "Cortes de cuchillo",
-  "farmersdelight.subtitles.stove.crackle": "Crujidos de la parrilla",
-  "farmersdelight.subtitles.tomato_bush.pick_tomatoes": "Tomate estallando",
+  "subtitles.farmersdelight.block.cooking_pot.boil": "Blobs de la olla hirviendo",
+  "subtitles.farmersdelight.block.cutting_board.knife_cut": "Cortes de cuchillo",
+  "subtitles.farmersdelight.block.stove.crackle": "Crujidos de la parrilla",
+  "subtitles.farmersdelight.block.tomato_bush.pick_tomatoes": "Tomate estallando",
 
   "farmersdelight.block.feast.use_container": "Necesitas un %s para comer esto.",
   "farmersdelight.block.rice.invalid_placement": "Este cultivo no sobrevivirá bien fuera de aguas poco profundas.",

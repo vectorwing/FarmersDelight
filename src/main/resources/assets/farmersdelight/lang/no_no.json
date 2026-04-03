@@ -231,12 +231,12 @@
   "advancements.farmersdelight.master_chef.title": "Mesterkok",
   "advancements.farmersdelight.master_chef.description": "Spis en porsjon av hvert måltid som er tilgjengelig!",
 
-  "farmersdelight.subtitles.cooking_pot.boil": "Kjele koker",
-  "farmersdelight.subtitles.cutting_board.knife_cut": "Kniv kutter",
-  "farmersdelight.subtitles.stove.crackle": "Komfyr knitrer",
-  "farmersdelight.subtitles.skillet.sizzle": "Stekepanne suser",
-  "farmersdelight.subtitles.skillet.add_food": "Skillet freser",
-  "farmersdelight.subtitles.tomato_bush.pick_tomatoes": "Tomat plukkes",
+  "subtitles.farmersdelight.block.cooking_pot.boil": "Kjele koker",
+  "subtitles.farmersdelight.block.cutting_board.knife_cut": "Kniv kutter",
+  "subtitles.farmersdelight.block.stove.crackle": "Komfyr knitrer",
+  "subtitles.farmersdelight.block.skillet.sizzle": "Stekepanne suser",
+  "subtitles.farmersdelight.block.skillet.add_food": "Skillet freser",
+  "subtitles.farmersdelight.block.tomato_bush.pick_tomatoes": "Tomat plukkes",
 
   "farmersdelight.block.feast.use_container": "Du trenger en %s for å spise dette.",
   "farmersdelight.block.rice.invalid_placement": "Denne avlingen vil ikke vokse godt utenfor grunt vann.",

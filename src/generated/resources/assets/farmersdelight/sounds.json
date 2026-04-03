@@ -6,7 +6,7 @@
         "name": "block.barrel.close"
       }
     ],
-    "subtitle": "farmersdelight.subtitles.cabinet.close"
+    "subtitle": "subtitles.farmersdelight.block.cabinet.close"
   },
   "block.cabinet.open": {
     "sounds": [
@@ -15,14 +15,14 @@
         "name": "block.barrel.open"
       }
     ],
-    "subtitle": "farmersdelight.subtitles.cabinet.open"
+    "subtitle": "subtitles.farmersdelight.block.cabinet.open"
   },
   "block.cooking_pot.boil": {
     "sounds": [
       "farmersdelight:block/cooking_pot/boil_water1",
       "farmersdelight:block/cooking_pot/boil_water2"
     ],
-    "subtitle": "farmersdelight.subtitles.cooking_pot.boil"
+    "subtitle": "subtitles.farmersdelight.block.cooking_pot.boil"
   },
   "block.cooking_pot.boil_soup": {
     "sounds": [
@@ -30,7 +30,7 @@
       "farmersdelight:block/cooking_pot/boil_soup2",
       "farmersdelight:block/cooking_pot/boil_soup3"
     ],
-    "subtitle": "farmersdelight.subtitles.cooking_pot.boil"
+    "subtitle": "subtitles.farmersdelight.block.cooking_pot.boil"
   },
   "block.cutting_board.carve_tool": {
     "sounds": [
@@ -39,14 +39,14 @@
         "name": "block.wood.place"
       }
     ],
-    "subtitle": "farmersdelight.subtitles.cutting_board.carve_tool"
+    "subtitle": "subtitles.farmersdelight.block.cutting_board.carve_tool"
   },
   "block.cutting_board.knife_cut": {
     "sounds": [
       "farmersdelight:block/cutting_board/knife1",
       "farmersdelight:block/cutting_board/knife2"
     ],
-    "subtitle": "farmersdelight.subtitles.cutting_board.knife_cut"
+    "subtitle": "subtitles.farmersdelight.block.cutting_board.knife_cut"
   },
   "block.cutting_board.place_item": {
     "sounds": [
@@ -55,7 +55,7 @@
         "name": "block.wood.place"
       }
     ],
-    "subtitle": "farmersdelight.subtitles.cutting_board.place_item"
+    "subtitle": "subtitles.farmersdelight.block.cutting_board.place_item"
   },
   "block.cutting_board.remove_item": {
     "sounds": [
@@ -64,7 +64,7 @@
         "name": "block.wood.hit"
       }
     ],
-    "subtitle": "farmersdelight.subtitles.cutting_board.remove_item"
+    "subtitle": "subtitles.farmersdelight.block.cutting_board.remove_item"
   },
   "block.food.take_portion": {
     "sounds": [
@@ -73,7 +73,7 @@
         "name": "item.armor.equip_generic"
       }
     ],
-    "subtitle": "farmersdelight.subtitles.food.take_portion"
+    "subtitle": "subtitles.farmersdelight.block.food.take_portion"
   },
   "block.pastry.slice": {
     "sounds": [
@@ -82,7 +82,7 @@
         "name": "block.wool.break"
       }
     ],
-    "subtitle": "farmersdelight.subtitles.pastry.slice"
+    "subtitle": "subtitles.farmersdelight.block.pastry.slice"
   },
   "block.rope_fence_gate.close": {
     "sounds": [
@@ -91,7 +91,7 @@
         "name": "entity.leash_knot.place"
       }
     ],
-    "subtitle": "farmersdelight.subtitles.rope_fence_gate.close"
+    "subtitle": "subtitles.farmersdelight.block.rope_fence_gate.close"
   },
   "block.rope_fence_gate.open": {
     "sounds": [
@@ -100,14 +100,14 @@
         "name": "entity.leash_knot.break"
       }
     ],
-    "subtitle": "farmersdelight.subtitles.rope_fence_gate.open"
+    "subtitle": "subtitles.farmersdelight.block.rope_fence_gate.open"
   },
   "block.skillet.add_food": {
     "sounds": [
       "farmersdelight:block/skillet/add_food1",
       "farmersdelight:block/skillet/add_food2"
     ],
-    "subtitle": "farmersdelight.subtitles.skillet.add_food"
+    "subtitle": "subtitles.farmersdelight.block.skillet.add_food"
   },
   "block.skillet.sizzle": {
     "sounds": [
@@ -115,7 +115,7 @@
       "farmersdelight:block/skillet/sizzle2",
       "farmersdelight:block/skillet/sizzle3"
     ],
-    "subtitle": "farmersdelight.subtitles.skillet.sizzle"
+    "subtitle": "subtitles.farmersdelight.block.skillet.sizzle"
   },
   "block.stove.crackle": {
     "sounds": [
@@ -124,7 +124,7 @@
         "name": "block.campfire.crackle"
       }
     ],
-    "subtitle": "farmersdelight.subtitles.stove.crackle"
+    "subtitle": "subtitles.farmersdelight.block.stove.crackle"
   },
   "block.tomato_bush.pick_tomatoes": {
     "sounds": [
@@ -133,7 +133,7 @@
         "name": "block.sweet_berry_bush.pick_berries"
       }
     ],
-    "subtitle": "farmersdelight.subtitles.tomato_bush.pick_tomatoes"
+    "subtitle": "subtitles.farmersdelight.block.tomato_bush.pick_tomatoes"
   },
   "entity.rotten_tomato.hit": {
     "sounds": [
@@ -142,7 +142,7 @@
         "name": "entity.slime.attack"
       }
     ],
-    "subtitle": "farmersdelight.subtitles.rotten_tomato.hit"
+    "subtitle": "subtitles.farmersdelight.entity.rotten_tomato.hit"
   },
   "entity.rotten_tomato.throw": {
     "sounds": [
@@ -151,7 +151,7 @@
         "name": "entity.snowball.throw"
       }
     ],
-    "subtitle": "farmersdelight.subtitles.rotten_tomato.throw"
+    "subtitle": "subtitles.farmersdelight.entity.rotten_tomato.throw"
   },
   "item.skillet.attack.strong": {
     "sounds": [

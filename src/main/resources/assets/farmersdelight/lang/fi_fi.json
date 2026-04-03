@@ -231,12 +231,12 @@
   "advancements.farmersdelight.master_chef.title": "Mestarikokki",
   "advancements.farmersdelight.master_chef.description": "Syö jokaista saatavilla olevaa ateriaa!",
 
-  "farmersdelight.subtitles.cooking_pot.boil": "Kattila kiehuu",
-  "farmersdelight.subtitles.cutting_board.knife_cut": "Veitsi leikkaa",
-  "farmersdelight.subtitles.stove.crackle": "Liesi rätisee",
-  "farmersdelight.subtitles.skillet.sizzle": "Paistinpannu kärisee",
-  "farmersdelight.subtitles.skillet.add_food": "Paistinpannu sihisee",
-  "farmersdelight.subtitles.tomato_bush.pick_tomatoes": "Tomaatit popsahtavat",
+  "subtitles.farmersdelight.block.cooking_pot.boil": "Kattila kiehuu",
+  "subtitles.farmersdelight.block.cutting_board.knife_cut": "Veitsi leikkaa",
+  "subtitles.farmersdelight.block.stove.crackle": "Liesi rätisee",
+  "subtitles.farmersdelight.block.skillet.sizzle": "Paistinpannu kärisee",
+  "subtitles.farmersdelight.block.skillet.add_food": "Paistinpannu sihisee",
+  "subtitles.farmersdelight.block.tomato_bush.pick_tomatoes": "Tomaatit popsahtavat",
   
   "farmersdelight.block.feast.use_container": "Tarvitset esineen %s syödäksesti tätä.",
   "farmersdelight.block.rice.invalid_placement": "Tämä kasvi selviää parhaiten matalassa vedessä.",

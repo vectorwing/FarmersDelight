@@ -11,6 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModSounds;
+import vectorwing.farmersdelight.common.utility.TextUtils;
 
 public class SoundDefinitions extends SoundDefinitionsProvider {
 	protected SoundDefinitions(PackOutput output, ExistingFileHelper helper) {
@@ -20,7 +21,7 @@ public class SoundDefinitions extends SoundDefinitionsProvider {
 	@Override
 	public void registerSounds() {
 		this.generateNewSoundWithSubtitle(ModSounds.BLOCK_COOKING_POT_BOIL, "block/cooking_pot/boil_water", 2);
-		this.generateNewSoundCustomSubtitle(ModSounds.BLOCK_COOKING_POT_BOIL_SOUP, "block/cooking_pot/boil_soup", 3, "farmersdelight.subtitles.cooking_pot.boil");
+		this.generateNewSoundCustomSubtitle(ModSounds.BLOCK_COOKING_POT_BOIL_SOUP, "block/cooking_pot/boil_soup", 3, "subtitles.farmersdelight.block.cooking_pot.boil");
 		this.generateNewSoundWithSubtitle(ModSounds.BLOCK_CUTTING_BOARD_KNIFE, "block/cutting_board/knife", 2);
 		this.generateNewSoundWithSubtitle(ModSounds.BLOCK_SKILLET_ADD_FOOD, "block/skillet/add_food", 2);
 		this.generateNewSound(ModSounds.ITEM_SKILLET_ATTACK_STRONG, "block/skillet/attack_strong", 1, false);
@@ -47,11 +48,7 @@ public class SoundDefinitions extends SoundDefinitionsProvider {
 	}
 
 	public void generateNewSound(RegistryObject<SoundEvent> event, String baseSoundDirectory, int numberOfSounds, boolean subtitle) {
-		String formattedSub = null;
-		if (subtitle) {
-			String[] splitSoundName = event.getId().getPath().split("\\.", 3);
-			formattedSub = "farmersdelight.subtitles." + splitSoundName[1] + "." + splitSoundName[2];
-		}
+		String formattedSub = subtitle ? TextUtils.subtitleKey(event.getId().getPath()) : null;
 		this.generateNewSoundCustomSubtitle(event, baseSoundDirectory, numberOfSounds, formattedSub);
 	}
 
@@ -73,8 +70,7 @@ public class SoundDefinitions extends SoundDefinitionsProvider {
 	public void generateExistingSound(RegistryObject<SoundEvent> event, SoundEvent referencedSound, boolean subtitle) {
 		SoundDefinition definition = SoundDefinition.definition();
 		if (subtitle) {
-			String[] splitSoundName = event.getId().getPath().split("\\.", 3);
-			definition.subtitle("farmersdelight.subtitles." + splitSoundName[1] + "." + splitSoundName[2]);
+			definition.subtitle(TextUtils.subtitleKey(event.getId().getPath()));
 		}
 		this.add(event, definition
 				.with(SoundDefinition.Sound.sound(referencedSound.getLocation(), SoundDefinition.SoundType.EVENT)));
