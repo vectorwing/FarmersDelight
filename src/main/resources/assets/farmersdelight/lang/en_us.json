@@ -317,7 +317,7 @@
   "advancements.farmersdelight.place_cooking_pot.title": "Dinner's Served!",
   "advancements.farmersdelight.place_cooking_pot.description": "Put down a Cooking Pot and start preparing meals!",
   "advancements.farmersdelight.eat_nourishing_food.title": "Nourishing!",
-  "advancements.farmersdelight.eat_nourishing_food.description": "Meals made from many ingredients will keep you fed and healthy for much longer!",
+  "advancements.farmersdelight.eat_nourishing_food.description": "A balanced and diverse meal will keep you fed and healthy for a long time!",
   "advancements.farmersdelight.place_feast.title": "A Glorious Feast",
   "advancements.farmersdelight.place_feast.description": "Some meals are big enough to be placed down and shared with friends!",
   "advancements.farmersdelight.master_chef.title": "Master Chef",
@@ -342,7 +342,7 @@
   "subtitles.farmersdelight.entity.rotten_tomato.hit": "Rotten Tomato splatters",
 
   "farmersdelight.block.feast.use_container": "You need a %s to eat this.",
-  "farmersdelight.block.rice.invalid_placement": "This crop won't survive well outside shallow water.",
+  "farmersdelight.block.rice.invalid_placement": "This seed must be planted in shallow water.",
   "farmersdelight.block.cutting_board.invalid_item": "This doesn't seem cuttable...",
   "farmersdelight.block.cutting_board.invalid_tool": "Maybe with a different tool...",
   "farmersdelight.block.cutting_board.remaining_items": "%s remaining...",
