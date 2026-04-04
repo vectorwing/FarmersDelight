@@ -15,7 +15,7 @@
   },
   "display": {
     "description": {
-      "translate": "farmersdelight.advancement.place_cooking_pot.desc"
+      "translate": "advancements.farmersdelight.place_cooking_pot.description"
     },
     "frame": "goal",
     "icon": {
@@ -23,7 +23,7 @@
       "id": "farmersdelight:cooking_pot"
     },
     "title": {
-      "translate": "farmersdelight.advancement.place_cooking_pot"
+      "translate": "advancements.farmersdelight.place_cooking_pot.title"
     }
   },
   "requirements": [

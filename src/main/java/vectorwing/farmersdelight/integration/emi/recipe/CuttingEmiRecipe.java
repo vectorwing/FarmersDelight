@@ -28,7 +28,6 @@ public class CuttingEmiRecipe implements EmiRecipe {
         this.tool = tool;
         this.input = input;
         this.outputs = outputs;
-
     }
 
     @Override

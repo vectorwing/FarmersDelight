@@ -2,12 +2,9 @@ package vectorwing.farmersdelight.common.registry;
 
 import com.google.common.collect.Sets;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -15,7 +12,6 @@ import vectorwing.farmersdelight.common.FoodValues;
 import vectorwing.farmersdelight.common.item.*;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -434,6 +430,8 @@ public class ModItems
 			() -> new ConsumableItem(bowlFoodItem(FoodValues.BAKED_COD_STEW)));
 	public static final Supplier<Item> NOODLE_SOUP = registerWithTab("noodle_soup",
 			() -> new ConsumableItem(bowlFoodItem(FoodValues.NOODLE_SOUP)));
+	public static final Supplier<Item> ONION_SOUP = registerWithTab("onion_soup",
+			() -> new ConsumableItem(bowlFoodItem(FoodValues.ONION_SOUP)));
 
 	// Plated Meals
 	public static final Supplier<Item> BACON_AND_EGGS = registerWithTab("bacon_and_eggs",
@@ -498,8 +496,7 @@ public class ModItems
 			{
 				@Override
 				public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
-					MutableComponent textDescription = TextUtils.getTranslation("tooltip.debug_item");
-					tooltip.add(textDescription.withStyle(ChatFormatting.RED));
+					tooltip.add(TextUtils.DEBUG_ITEM);
 				}
 			});
 }

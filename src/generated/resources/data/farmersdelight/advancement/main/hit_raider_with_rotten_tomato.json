@@ -31,14 +31,14 @@
   },
   "display": {
     "description": {
-      "translate": "farmersdelight.advancement.hit_raider_with_rotten_tomato.desc"
+      "translate": "advancements.farmersdelight.hit_raider_with_rotten_tomato.description"
     },
     "icon": {
       "count": 1,
       "id": "farmersdelight:rotten_tomato"
     },
     "title": {
-      "translate": "farmersdelight.advancement.hit_raider_with_rotten_tomato"
+      "translate": "advancements.farmersdelight.hit_raider_with_rotten_tomato.title"
     }
   },
   "requirements": [

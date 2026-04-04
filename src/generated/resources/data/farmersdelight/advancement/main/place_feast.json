@@ -70,14 +70,14 @@
   },
   "display": {
     "description": {
-      "translate": "farmersdelight.advancement.place_feast.desc"
+      "translate": "advancements.farmersdelight.place_feast.description"
     },
     "icon": {
       "count": 1,
       "id": "farmersdelight:roast_chicken_block"
     },
     "title": {
-      "translate": "farmersdelight.advancement.place_feast"
+      "translate": "advancements.farmersdelight.place_feast.title"
     }
   },
   "requirements": [

@@ -29,8 +29,8 @@ public class FDAdvancementGenerator implements AdvancementProvider.AdvancementGe
 	public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> consumer, ExistingFileHelper existingFileHelper) {
 		AdvancementHolder farmersDelight = Advancement.Builder.advancement()
 				.display(ModItems.COOKING_POT.get(),
-						TextUtils.getTranslation("advancement.root"),
-						TextUtils.getTranslation("advancement.root.desc"),
+						TextUtils.advancement("root.title"),
+						TextUtils.advancement("root.description"),
 						ResourceLocation.parse("minecraft:textures/block/bricks.png"),
 						AdvancementType.TASK, false, false, false)
 				.addCriterion("seeds", InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{}))
@@ -185,6 +185,7 @@ public class FDAdvancementGenerator implements AdvancementProvider.AdvancementGe
 				.addCriterion("pumpkin_soup", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.PUMPKIN_SOUP.get()))
 				.addCriterion("baked_cod_stew", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.BAKED_COD_STEW.get()))
 				.addCriterion("noodle_soup", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.NOODLE_SOUP.get()))
+				.addCriterion("onion_soup", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.ONION_SOUP.get()))
 				.addCriterion("bacon_and_eggs", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.BACON_AND_EGGS.get()))
 				.addCriterion("ratatouille", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.RATATOUILLE.get()))
 				.addCriterion("steak_and_potatoes", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.STEAK_AND_POTATOES.get()))
@@ -206,8 +207,8 @@ public class FDAdvancementGenerator implements AdvancementProvider.AdvancementGe
 
 	protected static Advancement.Builder getAdvancement(AdvancementHolder parent, ItemLike display, String name, AdvancementType frame, boolean showToast, boolean announceToChat, boolean hidden) {
 		return Advancement.Builder.advancement().parent(parent).display(display,
-				TextUtils.getTranslation("advancement." + name),
-				TextUtils.getTranslation("advancement." + name + ".desc"),
+				TextUtils.advancement(name + ".title"),
+				TextUtils.advancement(name + ".description"),
 				null, frame, showToast, announceToChat, hidden);
 	}
 

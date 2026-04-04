@@ -7,7 +7,6 @@ import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.SlotWidget;
 import dev.emi.emi.api.widget.WidgetHolder;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -16,6 +15,7 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.ClientRenderUtils;
 import vectorwing.farmersdelight.common.utility.RecipeUtils;
+import vectorwing.farmersdelight.common.utility.TextUtils;
 import vectorwing.farmersdelight.integration.emi.FDRecipeCategories;
 import vectorwing.farmersdelight.integration.emi.FDRecipeWorkstations;
 
@@ -28,9 +28,9 @@ public class DecompositionEmiRecipe implements EmiRecipe {
     private static final EmiStack RICH_SOIL = EmiStack.of(ModItems.RICH_SOIL.get());
     private static final EmiIngredient ACCELERATORS = EmiIngredient.of(ModTags.Blocks.COMPOST_ACTIVATORS);
 
-    private static final ClientTooltipComponent LIGHT_TOOLTIP = createTooltip(".light");
-    private static final ClientTooltipComponent FLUID_TOOLTIP = createTooltip(".fluid");
-    private static final ClientTooltipComponent ACCELERATORS_TOOLTIP = createTooltip(".accelerators");
+    private static final ClientTooltipComponent LIGHT_TOOLTIP = createTooltip("light");
+    private static final ClientTooltipComponent FLUID_TOOLTIP = createTooltip("fluid");
+    private static final ClientTooltipComponent ACCELERATORS_TOOLTIP = createTooltip("accelerators");
 
     @Override
     public EmiRecipeCategory getCategory() {
@@ -87,6 +87,6 @@ public class DecompositionEmiRecipe implements EmiRecipe {
     }
 
     private static ClientTooltipComponent createTooltip(@NotNull String suffix) {
-        return ClientTooltipComponent.create(Component.translatable(FarmersDelight.MODID + ".jei.decomposition" + suffix).getVisualOrderText());
+        return ClientTooltipComponent.create(TextUtils.JEI("decomposition." + suffix).getVisualOrderText());
     }
 }

@@ -14,8 +14,6 @@ public class FDRecipeCategories {
     public static final EmiRecipeCategory DECOMPOSITION = new EmiRecipeCategory(RecipeUtils.FDLocation("decomposition"), FDRecipeWorkstations.ORGANIC_COMPOST, simplifiedRenderer(32, 0));
 
     private static EmiRenderable simplifiedRenderer(int u, int v) {
-        return (draw, x, y, delta) -> {
-            draw.blit(SIMPLIFIED_TEXTURES, x, y, u, v, 16, 16, 48, 16);
-        };
+        return (draw, x, y, delta) -> draw.blit(SIMPLIFIED_TEXTURES, x, y, u, v, 16, 16, 48, 16);
     }
 }

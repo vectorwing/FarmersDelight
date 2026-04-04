@@ -3,6 +3,8 @@
 ## 1.3.0 (WIP)
 
 ### Additions
+- New items:
+  - **Onion Soup** - A simple dish made with Onions, Milk and Bread;
 - New blocks:
   - **Gleaming Salad** - A salad that shines like a Lush Cave! Made with fresh Glow Berries and a rich selection of vegetables, it will (literally) illuminate your dinner table;
   - **Rope Fence** - A thin and sleek flavor of fence, complete with its own **Rope Fence Gate**!
@@ -22,6 +24,7 @@
   - `farmersdelight:feasts`: Blocks which represent a placeable feast;
   - `farmersdelight:pies`: Blocks which represent a placeable pie;
 - New item tags:
+  - `farmersdelight:snacks`: Items which represent a multi-ingredient food which doesn't need a container (backported from 1.21.1);
   - `farmersdelight:sweets`: Items which represent sweet prepared foods, usually desserts;
   - `farmersdelight:pies`: Items which represent a whole pie;
 
@@ -63,6 +66,7 @@
   - They now require a fully solid surface to be placed on, instead of floating over blocks like Cakes;
   - They now have "Placeable" in their tooltip, to better indicate their role;
     - Pumpkin Pie will say "Placeable when sneaking" if the sneak-to-place config is enabled;
+    - Skillets will also display the above tooltip;
 - Wild Crops have been updated:
   - Wild Tomatoes now checks for the `farmersdelight:terrain` tag when generating;
   - Wild Rice now checks for the `minecraft:dirt` tag when generating;
@@ -85,6 +89,7 @@
 - Cats can now be tamed with Salmon Slice and Cod Slice;
 
 ### Fixes
+- Fix container items spilling into the ingredient slots when shift-clicking an excess amount into the Cooking Pot's container slot;
 - (1.21+) Fix Skillet crashing when placed, if the server has disabled/removed the Fire Aspect enchantment;
 - (1.21+) Fix Rich Soil not emitting bone meal particles when boosting plants;
 
@@ -94,6 +99,10 @@
   - `offhand_equipment`: Deprecated with the new Cutting Board mechanics;
   - `wolf_prey`: Replaced by `forge:raw_meat` when making Dog Food;
   - (1.21+) `c:foods/milk`: Deprecated in favor of `c:drinks/milk`;
+
+### Translations
+- Updated:
+  - zh_cn (thanks, Artoria2e5!);
 
 ### Technical
 - Added data generation for most things which were still manually written (thanks, GizmoTheMoonPig and Abbie5!);

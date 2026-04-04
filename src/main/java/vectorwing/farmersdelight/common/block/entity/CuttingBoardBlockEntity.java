@@ -116,7 +116,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 			if (player instanceof ServerPlayer) {
 				ModAdvancements.USE_CUTTING_BOARD.get().trigger((ServerPlayer) player);
 				if (!getStoredItem().isEmpty()) {
-					player.displayClientMessage(TextUtils.getTranslation("block.cutting_board.remaining_items", getStoredItem().getCount()), true);
+					player.displayClientMessage(TextUtils.block("cutting_board.remaining_items", getStoredItem().getCount()), true);
 				} else {
 					player.displayClientMessage(Component.empty(), true);
 				}
@@ -134,10 +134,10 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 			if (recipe.get().value().getTool().test(toolStack)) {
 				return recipe;
 			} else if (player != null) {
-				player.displayClientMessage(TextUtils.getTranslation("block.cutting_board.invalid_tool"), true);
+				player.displayClientMessage(TextUtils.block("cutting_board.invalid_item"), true);
 			}
 		} else if (player != null) {
-			player.displayClientMessage(TextUtils.getTranslation("block.cutting_board.invalid_item"), true);
+			player.displayClientMessage(TextUtils.block("cutting_board.invalid_tool"), true);
 		}
 
 		return Optional.empty();

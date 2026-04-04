@@ -87,7 +87,7 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 
 	@Override
 	protected Component getDefaultName() {
-		return TextUtils.getTranslation("container.basket");
+		return TextUtils.container("basket");
 	}
 
 	// -- STANDARD INVENTORY STUFF --

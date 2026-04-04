@@ -16,14 +16,14 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "farmersdelight.advancement.place_organic_compost.desc"
+      "translate": "advancements.farmersdelight.place_organic_compost.description"
     },
     "icon": {
       "count": 1,
       "id": "farmersdelight:organic_compost"
     },
     "title": {
-      "translate": "farmersdelight.advancement.place_organic_compost"
+      "translate": "advancements.farmersdelight.place_organic_compost.title"
     }
   },
   "requirements": [

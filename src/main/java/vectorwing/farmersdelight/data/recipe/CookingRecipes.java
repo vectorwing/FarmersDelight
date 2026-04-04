@@ -195,6 +195,14 @@ public class CookingRecipes
 				.unlockedByAnyIngredient(ModItems.RAW_PASTA.get(), Items.DRIED_KELP, Items.PORKCHOP)
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
 				.save(output);
+		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.ONION_SOUP.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
+				.addIngredient(CommonTags.Items.CROPS_ONION)
+				.addIngredient(CommonTags.Items.CROPS_ONION)
+				.addIngredient(Tags.Items.FOODS_BREAD)
+				.addIngredient(Tags.Items.DRINKS_MILK)
+				.unlockedByAnyIngredient(ModItems.ONION.get(), Items.BREAD, Items.MILK_BUCKET, ModItems.MILK_BOTTLE.get())
+				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
+				.save(output);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.PASTA_WITH_MEATBALLS.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(ModItems.MINCED_BEEF.get())
 				.addIngredient(CommonTags.Items.FOODS_PASTA)

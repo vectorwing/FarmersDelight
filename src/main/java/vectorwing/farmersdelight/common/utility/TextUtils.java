@@ -25,9 +25,9 @@ import java.util.function.Consumer;
  */
 public class TextUtils
 {
-	public static final MutableComponent NO_EFFECTS = Component.translatable("effect.none").withStyle(ChatFormatting.GRAY);
 	public static final MutableComponent PLACEABLE = tooltip("placeable").withStyle(ChatFormatting.DARK_GRAY).withStyle(ChatFormatting.ITALIC);
 	public static final MutableComponent PLACEABLE_SNEAKING = tooltip("placeable_sneaking").withStyle(ChatFormatting.DARK_GRAY).withStyle(ChatFormatting.ITALIC);
+	public static final MutableComponent DEBUG_ITEM = tooltip("debug_item").withStyle(ChatFormatting.RED);
 
 	/**
 	 * Syntactic sugar for custom translation keys. Always prefixed with the mod's ID in lang files (e.g. farmersdelight.your.key.here).
@@ -36,8 +36,44 @@ public class TextUtils
 		return Component.translatable(FarmersDelight.MODID + "." + key, args);
 	}
 
+	/**
+	 * Gets text from a translation key, where "type" prefixes Farmer's Delight's mod ID.
+	 * Example: "type.farmersdelight.key".
+	 *
+	 * @param translationType The type of lang being read, added as a prefix
+	 * @param translationKey  The key itself, added as a suffix after the mod ID
+	 * @param args            Additional values to be keyed into the text, through markers such as %s
+	 */
+	public static MutableComponent getTextWithType(String translationType, String translationKey, Object... args) {
+		return Component.translatable(translationType + "." + FarmersDelight.MODID + "." + translationKey, args);
+	}
+
+	public static MutableComponent block(String key, Object... args) {
+		return getTextWithType("block", key, args);
+	}
+
+	public static MutableComponent item(String key, Object... args) {
+		return getTextWithType("item", key, args);
+	}
+
+	public static MutableComponent advancement(String key, Object... args) {
+		return getTextWithType("advancements", key, args);
+	}
+
+	public static MutableComponent container(String key, Object... args) {
+		return getTextWithType("container", key, args);
+	}
+
+	public static MutableComponent JEI(String key, Object... args) {
+		return getTextWithType("jei", key, args);
+	}
+
 	public static MutableComponent tooltip(String key, Object... args) {
-		return Component.translatable(FarmersDelight.MODID + ".tooltip." + key, args);
+		return getTextWithType("tooltip", key, args);
+	}
+
+	public static String subtitleKey(String key, Object... args) {
+		return getTextWithType("subtitles", key, args).getString();
 	}
 
 	/**
@@ -54,8 +90,6 @@ public class TextUtils
 		MutableComponent mutableComponent;
 
 		if (effectList.isEmpty()) {
-			tooltipAdder.accept(NO_EFFECTS);
-		} else {
 			for (FoodProperties.PossibleEffect possibleEffect : effectList) {
 				MobEffectInstance instance = possibleEffect.effect();
 				mutableComponent = Component.translatable(instance.getDescriptionId());

@@ -1,0 +1,23 @@
+{
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "tag": "c:crops/onion"
+    },
+    {
+      "tag": "c:crops/onion"
+    },
+    {
+      "tag": "c:foods/bread"
+    },
+    {
+      "tag": "c:drinks/milk"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:onion_soup"
+  }
+}

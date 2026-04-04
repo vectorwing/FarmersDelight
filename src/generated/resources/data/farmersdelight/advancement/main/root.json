@@ -8,7 +8,7 @@
     "announce_to_chat": false,
     "background": "minecraft:textures/block/bricks.png",
     "description": {
-      "translate": "farmersdelight.advancement.root.desc"
+      "translate": "advancements.farmersdelight.root.description"
     },
     "icon": {
       "count": 1,
@@ -16,7 +16,7 @@
     },
     "show_toast": false,
     "title": {
-      "translate": "farmersdelight.advancement.root"
+      "translate": "advancements.farmersdelight.root.title"
     }
   },
   "requirements": [

@@ -10,6 +10,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -57,6 +58,7 @@ import vectorwing.farmersdelight.common.utility.ClientRenderUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -150,6 +152,11 @@ public class SkilletItem extends BlockItem
 	}
 
 	@Override
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
+		tooltip.add(TextUtils.PLACEABLE_SNEAKING);
+	}
+
+	@Override
 	public int getUseDuration(ItemStack stack, LivingEntity entity) {
 		Optional<Holder.Reference<Enchantment>> fireAspect = entity.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).get(Enchantments.FIRE_ASPECT);
 		if (fireAspect.isEmpty()) {
@@ -175,7 +182,7 @@ public class SkilletItem extends BlockItem
 			Optional<RecipeHolder<CampfireCookingRecipe>> recipe = getCookingRecipe(cookingStack, level);
 			if (recipe.isPresent()) {
 				if (player.isUnderWater()) {
-					player.displayClientMessage(TextUtils.getTranslation("item.skillet.underwater"), true);
+					player.displayClientMessage(TextUtils.item("skillet.underwater"), true);
 					return InteractionResultHolder.pass(skilletStack);
 				}
 				ItemStack cookingStackCopy = cookingStack.copy();
@@ -186,7 +193,7 @@ public class SkilletItem extends BlockItem
 				player.setItemInHand(otherHand, cookingStackCopy);
 				return InteractionResultHolder.consume(skilletStack);
 			} else {
-				player.displayClientMessage(TextUtils.getTranslation("item.skillet.how_to_cook"), true);
+				player.displayClientMessage(TextUtils.item("skillet.how_to_cook"), true);
 			}
 		}
 		return InteractionResultHolder.pass(skilletStack);

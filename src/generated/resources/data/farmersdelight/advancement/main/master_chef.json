@@ -113,6 +113,14 @@
       },
       "trigger": "minecraft:consume_item"
     },
+    "onion_soup": {
+      "conditions": {
+        "item": {
+          "items": "farmersdelight:onion_soup"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
     "pasta_with_meatballs": {
       "conditions": {
         "item": {
@@ -212,7 +220,7 @@
   },
   "display": {
     "description": {
-      "translate": "farmersdelight.advancement.master_chef.desc"
+      "translate": "advancements.farmersdelight.master_chef.description"
     },
     "frame": "challenge",
     "icon": {
@@ -220,7 +228,7 @@
       "id": "farmersdelight:honey_glazed_ham"
     },
     "title": {
-      "translate": "farmersdelight.advancement.master_chef"
+      "translate": "advancements.farmersdelight.master_chef.title"
     }
   },
   "requirements": [
@@ -256,6 +264,9 @@
     ],
     [
       "noodle_soup"
+    ],
+    [
+      "onion_soup"
     ],
     [
       "bacon_and_eggs"

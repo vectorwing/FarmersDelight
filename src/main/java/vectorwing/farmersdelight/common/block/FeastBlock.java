@@ -131,7 +131,7 @@ public class FeastBlock extends Block
 				}
 				return ItemInteractionResult.SUCCESS;
 			} else {
-				player.displayClientMessage(TextUtils.getTranslation("block.feast.use_container", serving.getCraftingRemainingItem().getHoverName()), true);
+				player.displayClientMessage(TextUtils.block("feast.use_container", serving.getCraftingRemainingItem().getHoverName()), true);
 			}
 		}
 		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
