@@ -506,7 +506,7 @@
   "farmersdelight.configuration.enableCuttingBoardDispenserBehavior.tooltip": "If enabled, the Dispenser will be able to operate a Cutting Board in front of itself, using stored items as cutting tools.",
 
   "farmersdelight.configuration.enableStackableSoupItems": "Stackable Soup Items",
-  "farmersdelight.configuration.enableStackableSoupItems.tooltip": "If enabled, any BowlFoodItem in the following list become stackable to 16, much like Farmer's Delight's meals.",
+  "farmersdelight.configuration.enableStackableSoupItems.tooltip": "If enabled, any BowlFoodItem in the following list will become stackable to 16, much like Farmer's Delight's meals.",
   "farmersdelight.configuration.soupItemList": "Soup Items",
   "farmersdelight.configuration.soupItemList.tooltip": "List of targeted food items. They must extend the BowlFoodItem class in code to be affected. Defaults to vanilla soups and stews.",
 

@@ -62,7 +62,7 @@ public class Configuration
 				.define("enableRopeReeling", true);
 		CANVAS_SIGN_DARK_BACKGROUND_LIST = COMMON_BUILDER.comment("A list of dye colors that, when used as the background color of a Canvas Sign, should default to white text when placed.",
 						"Dyes: [\"white\", \"orange\", \"magenta\", \"light_blue\", \"yellow\", \"lime\", \"pink\", \"gray\", \"light_gray\", \"cyan\", \"purple\", \"blue\", \"brown\", \"green\", \"red\", \"black\"]")
-				.defineList("canvasSignDarkBackgroundList", ImmutableList.of("gray", "purple", "blue", "brown", "green", "red", "black"), obj -> true);
+				.defineList("canvasSignDarkBackgroundList", ImmutableList.of("gray", "purple", "blue", "brown", "green", "red", "black"), () -> "", obj -> true);
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.push(CATEGORY_FARMING);
@@ -95,10 +95,10 @@ public class Configuration
 				.define("enableCuttingBoardDispenserBehavior", true);
 
 		COMMON_BUILDER.push(CATEGORY_OVERRIDES_STACK_SIZE);
-		ENABLE_STACKABLE_SOUP_ITEMS = COMMON_BUILDER.comment("If enabled, any BowlFoodItem in the following list become stackable to 16, much like Farmer's Delight's meals.")
+		ENABLE_STACKABLE_SOUP_ITEMS = COMMON_BUILDER.comment("If enabled, any BowlFoodItem in the following list will become stackable to 16, much like Farmer's Delight's meals.")
 				.define("enableStackableSoupItems", true);
 		SOUP_ITEM_LIST = COMMON_BUILDER.comment("List of targeted food items. They must extend the BowlFoodItem class in code to be affected. Defaults to vanilla soups and stews.")
-				.defineList("soupItemList", ImmutableList.of("minecraft:mushroom_stew", "minecraft:beetroot_soup", "minecraft:rabbit_stew"), obj -> true);
+				.defineList("soupItemList", ImmutableList.of("minecraft:mushroom_stew", "minecraft:beetroot_soup", "minecraft:rabbit_stew"), () -> "", obj -> true);
 		COMMON_BUILDER.pop();
 		COMMON_BUILDER.pop();
 
