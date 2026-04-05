@@ -92,6 +92,7 @@
 - Fix container items spilling into the ingredient slots when shift-clicking an excess amount into the Cooking Pot's container slot;
 - (1.21+) Fix Skillet crashing when placed, if the server has disabled/removed the Fire Aspect enchantment;
 - (1.21+) Fix Rich Soil not emitting bone meal particles when boosting plants;
+- (1.21+) Fix Rope being non-extendable when hanging under a Bell;
 
 ### Removals
 - The following tags have been removed:
