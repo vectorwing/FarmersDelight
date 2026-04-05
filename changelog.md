@@ -87,6 +87,7 @@
 - Stoves now only inflict burn in a small "grilling area" on top of them; the edges are safe to step on;
 - Zombies and Illagers now have a very small chance of dropping an Onion when killed by a player, similar to Carrots and Potatoes;
 - Cats can now be tamed with Salmon Slice and Cod Slice;
+- Various block and item textures were retouched here and there;
 
 ### Fixes
 - Fix container items spilling into the ingredient slots when shift-clicking an excess amount into the Cooking Pot's container slot;
