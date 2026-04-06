@@ -112,6 +112,7 @@ public class StoveBlock extends BaseEntityBlock
 			Optional<RecipeHolder<CampfireCookingRecipe>> recipe = stoveEntity.getMatchingRecipe(heldStack);
 			if (recipe.isPresent()) {
 				if (!level.isClientSide && stoveEntity.addItem(player.getAbilities().instabuild ? heldStack.copy() : heldStack, recipe.get(), stoveSlot)) {
+					level.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundSource.BLOCKS, 0.5F, 1.0F);
 					return ItemInteractionResult.SUCCESS;
 				}
 				return ItemInteractionResult.CONSUME;
