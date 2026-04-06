@@ -19,6 +19,9 @@
   - It works similarly to the built-in JEI plugin, but offering compatibility with EMI's unique features, such as chances and recipe trees;
   - With it, tags have been integrated into translation files. Both JEI and EMI now use them to display tags in-game.
   - Default recipes have been configured for most FD recipes. I'll try to keep this updated for pack makers, but I may forget now and then.
+- (1.21+) You can now edit the mod's configuration from in-game (thanks, TheGridExpert!):
+  - From the main screen, click "Mods", select Farmer's Delight, and click the "Config" button at the bottom left to open the config screen;
+  - All config options are now translatable, and changes will take effect right away, without the need to relaunch the game;
 - New block tags:
   - `farmersdelight:planted_from_below`: Plants which are rooted beneath the soil, rather than above. Includes Cave Vines;
   - `farmersdelight:feasts`: Blocks which represent a placeable feast;
