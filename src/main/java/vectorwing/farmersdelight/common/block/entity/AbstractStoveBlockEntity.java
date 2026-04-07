@@ -1,7 +1,6 @@
 package vectorwing.farmersdelight.common.block.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.util.Mth;
@@ -18,14 +17,17 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec2;
+import net.minecraftforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.common.block.AbstractStoveBlock;
+import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public abstract class AbstractStoveBlockEntity extends BlockEntity implements Clearable {
-	private final NonNullList<ItemStack> items;
+	private final ItemStackHandler items;
 	private final int[] cookingProgress;
 	private final int[] cookingTime;
 	private final RecipeManager.CachedCheck<Container, ? extends AbstractCookingRecipe> quickRecipeLookup;
@@ -39,7 +41,7 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 		super(blockEntityType, blockPos, blockState);
 
 		int inventorySlotCount = this.getInventorySlotCount();
-		items = NonNullList.withSize(inventorySlotCount, ItemStack.EMPTY);
+		items = createHandler(inventorySlotCount);
 		cookingProgress = new int[inventorySlotCount];
 		cookingTime = new int[inventorySlotCount];
 		quickRecipeLookup = RecipeManager.createCheck(recipeType);
@@ -49,7 +51,7 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 
 	public abstract Vec2 getStoveItemOffset(int index);
 
-	public NonNullList<ItemStack> getItems() {
+	public ItemStackHandler getItems() {
 		return this.items;
 	}
 
@@ -57,8 +59,10 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 	public void load(CompoundTag tag) {
 		super.load(tag);
 
-		this.items.clear();
-		ContainerHelper.loadAllItems(tag, this.items);
+		CompoundTag inventoryTag;
+		if (tag.contains("Inventory")) inventoryTag = tag.getCompound("Inventory");
+		else inventoryTag = tag;
+		items.deserializeNBT(inventoryTag);
 
 		if (tag.contains("CookingTimes", 11)) {
 			int[] arrayCookingTimes = tag.getIntArray("CookingTimes");
@@ -74,7 +78,7 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 	@Override
 	public void saveAdditional(CompoundTag tag) {
 		super.saveAdditional(tag);
-		ContainerHelper.saveAllItems(tag, this.items, true);
+		tag.put("Inventory", items.serializeNBT());
 		tag.putIntArray("CookingTimes", this.cookingProgress);
 		tag.putIntArray("CookingTotalTimes", this.cookingTime);
 	}
@@ -87,7 +91,7 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 	@Override
 	public CompoundTag getUpdateTag() {
 		CompoundTag tag = super.getUpdateTag();
-		ContainerHelper.saveAllItems(tag, this.items, true);
+		tag.put("Inventory", items.serializeNBT());
 		return tag;
 	}
 
@@ -110,8 +114,8 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 		assert this.level != null;
 
 		boolean didChange = false;
-		for (int i = 0; i < this.items.size(); ++i) {
-			ItemStack ingredient = this.items.get(i);
+		for (int i = 0; i < items.getSlots(); ++i) {
+			ItemStack ingredient = this.items.getStackInSlot(i);
 			if (ingredient.isEmpty()) continue;
 			didChange = true;
 
@@ -130,7 +134,7 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 				this.worldPosition.getZ() + 0.5,
 				result
 			);
-			this.items.set(i, ItemStack.EMPTY);
+			this.items.setStackInSlot(i, ItemStack.EMPTY);
 			var state = this.getBlockState();
 			this.level.sendBlockUpdated(this.worldPosition, state, state, Block.UPDATE_ALL);
 			this.level.gameEvent(GameEvent.BLOCK_CHANGE, this.worldPosition, GameEvent.Context.of(state));
@@ -142,7 +146,7 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 		assert this.level != null;
 
 		boolean didChange = false;
-		for (int i = 0; i < this.items.size(); ++i) {
+		for (int i = 0; i < this.items.getSlots(); ++i) {
 			int thisItemCookingProgress = this.cookingProgress[i];
 			if (thisItemCookingProgress <= 0) continue;
 			didChange = true;
@@ -157,8 +161,8 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 	}
 
 	public int getNextEmptySlot() {
-		return IntStream.range(0, this.items.size())
-			.filter((i) -> this.items.get(i).isEmpty())
+		return IntStream.range(0, this.items.getSlots())
+			.filter((i) -> this.items.getStackInSlot(i).isEmpty())
 			.findFirst()
 			.orElse(-1);
 	}
@@ -168,11 +172,11 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 
 		int emptySlotIndex = getNextEmptySlot();
 		if (emptySlotIndex < 0) return false;
-		assert this.items.get(emptySlotIndex).isEmpty();
+		assert this.items.getStackInSlot(emptySlotIndex).isEmpty();
 
 		this.cookingTime[emptySlotIndex] = foodCookingTime;
 		this.cookingProgress[emptySlotIndex] = 0;
-		this.items.set(emptySlotIndex, foodStackToPlace.split(1));
+		this.items.setStackInSlot(emptySlotIndex, foodStackToPlace.split(1));
 		var state = this.getBlockState();
 		this.level.sendBlockUpdated(this.worldPosition, state, state, Block.UPDATE_ALL);
 		this.level.gameEvent(GameEvent.BLOCK_CHANGE, this.worldPosition, GameEvent.Context.of(entity, state));
@@ -185,18 +189,22 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 		return AbstractStoveBlock.isStoveTopCovered(this.level, this.worldPosition, this.getBlockState());
 	}
 
+	public Stream<ItemStack> streamItems() {
+		return IntStream.range(0, this.items.getSlots())
+			.mapToObj(this.items::getStackInSlot);
+	}
+
 	public boolean isEmpty() {
-		return this.items.stream().allMatch(ItemStack::isEmpty);
+		return streamItems().allMatch(ItemStack::isEmpty);
 	}
 
 	public boolean isFull() {
-		return this.items.stream().noneMatch(ItemStack::isEmpty);
+		return streamItems().noneMatch(ItemStack::isEmpty);
 	}
 
 	public void dropAllItems() {
 		if (this.level == null) return;
-		Containers.dropContents(this.level, this.worldPosition, items);
-		this.items.clear();
+		ItemUtils.dropItems(this.level, this.worldPosition, this.items);
 		var state = this.getBlockState();
 		this.level.sendBlockUpdated(this.worldPosition, state, state, Block.UPDATE_ALL);
 		this.level.gameEvent(GameEvent.BLOCK_CHANGE, this.worldPosition, GameEvent.Context.of(state));
@@ -209,5 +217,16 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 		// level.gameEvent is called in AbstractStoveBlock::extinguish, so it is not called here
 	}
 
-	public void clearContent() { this.items.clear(); }
+	public void clearContent() { streamItems().forEach((stack) -> stack.setCount(0)); }
+
+	private static ItemStackHandler createHandler(int slotCount) {
+		return new ItemStackHandler(slotCount)
+		{
+			@Override
+			public int getSlotLimit(int slot) {
+				return 1;
+			}
+		};
+	}
+
 }
