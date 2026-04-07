@@ -18,7 +18,6 @@ import vectorwing.farmersdelight.common.registry.ModSounds;
 
 import javax.annotation.Nullable;
 
-@SuppressWarnings("deprecation")
 public class StoveBlock extends AbstractStoveBlock
 {
 	public StoveBlock(BlockBehaviour.Properties properties) {
