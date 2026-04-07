@@ -24,8 +24,9 @@ public class StoveBlockEntity extends AbstractStoveBlockEntity
 	public void addSmokeParticles() {
 		assert this.level != null;
 
-		for (int i = 0; i < this.getItems().size(); ++i) {
-			if (this.getItems().get(i).isEmpty()) continue;
+		var items = this.getItems();
+		for (int i = 0; i < items.getSlots(); ++i) {
+			if (items.getStackInSlot(i).isEmpty()) continue;
 			if (level.random.nextFloat() >= 0.2F) continue;
 			Vec2 itemOffset = this.getStoveItemOffset(i);
 			Direction direction = this.getBlockState().getValue(AbstractStoveBlock.FACING);
