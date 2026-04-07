@@ -89,7 +89,7 @@ public class TextUtils
 		List<Pair<Holder<Attribute>, AttributeModifier>> attributeList = Lists.newArrayList();
 		MutableComponent mutableComponent;
 
-		if (effectList.isEmpty()) {
+		if (!effectList.isEmpty()) {
 			for (FoodProperties.PossibleEffect possibleEffect : effectList) {
 				MobEffectInstance instance = possibleEffect.effect();
 				mutableComponent = Component.translatable(instance.getDescriptionId());

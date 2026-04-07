@@ -90,7 +90,7 @@ public class ConsumableItem extends Item
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
 		if (Configuration.ENABLE_FOOD_EFFECT_TOOLTIP.get()) {
 			if (this.hasCustomTooltip) {
-				tooltip.add(TextUtils.tooltip(this.toString()).withStyle(ChatFormatting.BLUE));
+				tooltip.add(TextUtils.tooltip(BuiltInRegistries.ITEM.getKey(this).getPath()).withStyle(ChatFormatting.BLUE));
 			}
 			if (this.hasFoodEffectTooltip) {
 				TextUtils.addFoodEffectTooltip(stack, tooltip::add, 1.0F, context.tickRate());

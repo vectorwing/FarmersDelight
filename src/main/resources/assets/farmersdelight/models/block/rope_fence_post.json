@@ -1,6 +1,7 @@
 {
   "format_version": "1.9.0",
   "parent": "block/block",
+  "render_type": "minecraft:cutout",
   "textures": {
     "particle": "farmersdelight:block/rope_fence",
     "all": "farmersdelight:block/rope_fence"
