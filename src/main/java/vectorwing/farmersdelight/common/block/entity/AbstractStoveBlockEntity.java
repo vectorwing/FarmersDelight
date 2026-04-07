@@ -26,7 +26,6 @@ import java.util.stream.IntStream;
 
 public abstract class AbstractStoveBlockEntity extends BlockEntity implements Clearable {
 	private final NonNullList<ItemStack> items;
-	private final RecipeType<? extends AbstractCookingRecipe> recipeType;
 	private final int[] cookingProgress;
 	private final int[] cookingTime;
 	private final RecipeManager.CachedCheck<Container, ? extends AbstractCookingRecipe> quickRecipeLookup;
@@ -43,7 +42,6 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 		items = NonNullList.withSize(inventorySlotCount, ItemStack.EMPTY);
 		cookingProgress = new int[inventorySlotCount];
 		cookingTime = new int[inventorySlotCount];
-		this.recipeType = recipeType;
 		quickRecipeLookup = RecipeManager.createCheck(recipeType);
 	}
 
