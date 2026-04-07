@@ -19,7 +19,6 @@ import vectorwing.farmersdelight.common.registry.ModSounds;
 
 import javax.annotation.Nullable;
 
-@SuppressWarnings("deprecation")
 public class StoveBlock extends AbstractStoveBlock
 {
     public static final MapCodec<StoveBlock> CODEC = simpleCodec(StoveBlock::new);

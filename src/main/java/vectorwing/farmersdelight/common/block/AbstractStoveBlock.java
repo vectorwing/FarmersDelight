@@ -42,6 +42,7 @@ import vectorwing.farmersdelight.common.utility.MathUtils;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
+@SuppressWarnings("deprecation")
 public abstract class AbstractStoveBlock extends BaseEntityBlock {
 	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
