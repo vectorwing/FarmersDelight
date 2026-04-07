@@ -21,7 +21,7 @@ public class StoveBlockEntity extends AbstractStoveBlockEntity
 		stoveEntity.addSmokeParticles();
 	}
 
-	private void addSmokeParticles() {
+	public void addSmokeParticles() {
 		assert this.level != null;
 
 		for (int i = 0; i < this.getItems().size(); ++i) {
