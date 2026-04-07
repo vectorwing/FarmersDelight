@@ -29,11 +29,11 @@ public class DefaultStoveRenderer<T extends AbstractStoveBlockEntity> implements
 	public void render(T stove, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
 		Direction direction = stove.getBlockState().getValue(StoveBlock.FACING).getOpposite();
 
-		NonNullList<ItemStack> items = stove.getItems();
+		var items = stove.getItems();
 		int posLong = (int) stove.getBlockPos().asLong();
 
-		for (int i = 0; i < items.size(); ++i) {
-			ItemStack stoveStack = items.get(i);
+		for (int i = 0; i < items.getSlots(); ++i) {
+			ItemStack stoveStack = items.getStackInSlot(i);
 			if (stoveStack.isEmpty()) continue;
 
 			poseStack.pushPose();

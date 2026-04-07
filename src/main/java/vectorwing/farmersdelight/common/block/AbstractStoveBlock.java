@@ -37,6 +37,8 @@ import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.Tags;
 import vectorwing.farmersdelight.common.block.entity.AbstractStoveBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModDamageTypes;
+import vectorwing.farmersdelight.common.tag.CommonTags;
+import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vectorwing.farmersdelight.common.utility.MathUtils;
 
 import javax.annotation.Nullable;
@@ -167,7 +169,7 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock {
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.is(newState.getBlock())) return;
 		if (level.getBlockEntity(pos) instanceof AbstractStoveBlockEntity stoveEntity) {
-			Containers.dropContents(level, pos, stoveEntity.getItems());
+			ItemUtils.dropItems(level, pos, stoveEntity.getItems());
 		}
 		super.onRemove(state, level, pos, newState, isMoving);
 	}
