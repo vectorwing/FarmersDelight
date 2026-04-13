@@ -77,14 +77,18 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock {
 		Item heldItem = heldStack.getItem();
 
 		if (heldItem instanceof FlintAndSteelItem) {
-			level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, MathUtils.RAND.nextFloat() * 0.4F + 0.8F);
+			if (!level.isClientSide()) {
+				level.playSound(null, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, MathUtils.RAND.nextFloat() * 0.4F + 0.8F);
+			}
 			ignite(player, level, pos, state);
 			heldStack.hurtAndBreak(1, player, action -> action.broadcastBreakEvent(hand));
 			return InteractionResult.SUCCESS;
 		}
 
 		if (heldItem instanceof FireChargeItem) {
-			level.playSound(null, pos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, (MathUtils.RAND.nextFloat() - MathUtils.RAND.nextFloat()) * 0.2F + 1.0F);
+			if (!level.isClientSide()) {
+				level.playSound(null, pos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, (MathUtils.RAND.nextFloat() - MathUtils.RAND.nextFloat()) * 0.2F + 1.0F);
+			}
 			ignite(player, level, pos, state);
 			if (!player.isCreative()) {
 				heldStack.shrink(1);
