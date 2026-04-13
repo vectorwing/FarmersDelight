@@ -100,7 +100,7 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock {
 
 		if (heldStack.canPerformAction(ToolActions.SHOVEL_DIG)) {
 			if (!level.isClientSide()) {
-				level.levelEvent(null, 1009, pos, 0);
+				level.levelEvent(null, LevelEvent.SOUND_EXTINGUISH_FIRE, pos, 0);
 			}
 			extinguish(player, level, pos, state);
 			heldStack.hurtAndBreak(1, player, (action) -> action.broadcastBreakEvent(hand));
