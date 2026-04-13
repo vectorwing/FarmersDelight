@@ -90,7 +90,7 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock {
 				level.playSound(null, pos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, (MathUtils.RAND.nextFloat() - MathUtils.RAND.nextFloat()) * 0.2F + 1.0F);
 			}
 			ignite(player, level, pos, state);
-			if (!player.isCreative()) {
+			if (!player.getAbilities().instabuild) {
 				heldStack.shrink(1);
 			}
 			return InteractionResult.SUCCESS;
@@ -116,7 +116,7 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock {
 				level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 1.0F, 1.0F);
 			}
 			extinguish(player, level, pos, state);
-			if (!player.isCreative()) player.setItemInHand(hand, heldStack.getCraftingRemainingItem());
+			if (!player.getAbilities().instabuild) player.setItemInHand(hand, heldStack.getCraftingRemainingItem());
 			return InteractionResult.sidedSuccess(level.isClientSide());
 		}
 
