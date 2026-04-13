@@ -77,14 +77,14 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock {
 
 		if (heldItem instanceof FlintAndSteelItem) {
 			level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, MathUtils.RAND.nextFloat() * 0.4F + 0.8F);
-			level.setBlock(pos, state.setValue(BlockStateProperties.LIT, Boolean.TRUE), 11);
+			ignite(player, level, pos, state);
 			heldStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
 			return ItemInteractionResult.SUCCESS;
 		}
 
 		if (heldItem instanceof FireChargeItem) {
 			level.playSound(null, pos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, (MathUtils.RAND.nextFloat() - MathUtils.RAND.nextFloat()) * 0.2F + 1.0F);
-			level.setBlock(pos, state.setValue(BlockStateProperties.LIT, Boolean.TRUE), 11);
+			ignite(player, level, pos, state);
 			if (!player.isCreative()) {
 				heldStack.shrink(1);
 			}
@@ -127,6 +127,14 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock {
 		if (!placeFoodSuccess) return ItemInteractionResult.CONSUME;
 		level.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundSource.BLOCKS, 0.5F, 1.0F);
 		return ItemInteractionResult.SUCCESS;
+	}
+
+	public void ignite(@Nullable Entity entity, LevelAccessor level, BlockPos pos, BlockState state) {
+		if (level.isClientSide()) return;
+
+		var newState = state.setValue(LIT, true);
+		level.setBlock(pos, newState, 11);
+		level.gameEvent(entity, GameEvent.BLOCK_CHANGE, pos);
 	}
 
 	public void extinguish(@Nullable Entity entity, LevelAccessor level, BlockPos pos, BlockState state) {
