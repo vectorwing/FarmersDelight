@@ -133,12 +133,11 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock {
 		if (level.getBlockEntity(pos) instanceof AbstractStoveBlockEntity stoveEntity) {
 			stoveEntity.extinguish();
 		}
-		level.gameEvent(entity, GameEvent.BLOCK_CHANGE, pos);
 		if (level.isClientSide()) return;
 
 		var newState = state.setValue(LIT, false);
 		level.setBlock(pos, newState, 11);
-		level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(entity, newState));
+		level.gameEvent(entity, GameEvent.BLOCK_CHANGE, pos);
 	}
 
 	@Override
