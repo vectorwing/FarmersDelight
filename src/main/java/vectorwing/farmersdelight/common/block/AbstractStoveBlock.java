@@ -134,6 +134,9 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock {
 	}
 
 	public void ignite(@Nullable Entity entity, LevelAccessor level, BlockPos pos, BlockState state) {
+		if (level.getBlockEntity(pos) instanceof AbstractStoveBlockEntity stoveEntity) {
+			stoveEntity.ignite();
+		}
 		if (level.isClientSide()) return;
 
 		var newState = state.setValue(LIT, true);
