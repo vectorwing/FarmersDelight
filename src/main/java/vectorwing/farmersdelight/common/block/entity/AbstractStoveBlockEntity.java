@@ -217,6 +217,8 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 		// level.gameEvent is called in AbstractStoveBlock::extinguish, so it is not called here
 	}
 
+	public void ignite() {}
+
 	public void clearContent() { streamItems().forEach((stack) -> stack.setCount(0)); }
 
 	private static ItemStackHandler createHandler(int slotCount) {
