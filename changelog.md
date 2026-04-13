@@ -72,6 +72,7 @@
   - Wild Rice now checks for the `minecraft:dirt` tag when generating;
 - The following recipes were updated:
   - Kelp Rolls now accept any `forge:vegetables` (1.20.1) or `c:foods/vegetable` (1.21+) as filling, instead of just Carrot;
+  - Vegetable Noodles now accept any mushroom;
   - Dog Food can now be prepared with any `forge:raw_meat` (1.20.1) or `c:foods/raw_meat` (1.21_), both of which exclude raw fish;
   - Cutting recipes now check for both a tag and a "tool action" (1.20.1) or "item ability" (1.21+), broadening compatibility with modded tools;
   - Cutting recipes where you "salvage" items are now condensed together, making the Cutting recipe list less bloated in item viewers:
@@ -100,7 +101,9 @@
 
 ### Translations
 - Updated:
+  - id_id (thanks, barabestfriend!);
   - zh_cn (thanks, Artoria2e5!);
+  - zh_tw (thanks, DEEMsss!);
 
 ### Technical
 - Added data generation for most things which were still manually written (thanks, GizmoTheMoonPig and Abbie5!);
