@@ -10,7 +10,10 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.FireChargeItem;
+import net.minecraft.world.item.FlintAndSteelItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -44,7 +47,8 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 @SuppressWarnings("deprecation")
-public abstract class AbstractStoveBlock extends BaseEntityBlock {
+public abstract class AbstractStoveBlock extends BaseEntityBlock
+{
 	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
@@ -160,7 +164,9 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock {
 	}
 
 	@Override
-	public RenderShape getRenderShape(BlockState pState) { return RenderShape.MODEL; }
+	public RenderShape getRenderShape(BlockState pState) {
+		return RenderShape.MODEL;
+	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {

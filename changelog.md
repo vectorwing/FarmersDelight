@@ -107,6 +107,7 @@
 
 ### Technical
 - Added data generation for most things which were still manually written (thanks, GizmoTheMoonPig and Abbie5!);
+- The Stove now has a pair of "abstract" classes, which are extendable for defining your own stove (thanks, LordFirespeed!);
 - All models have been standardized, cleaned up and optimized across the board:
   - If you make a resource pack for FD, you may have to update to conform to these changes;
 - FD's internal recipe builders have been updated, and should now be more usable for add-on developers:
