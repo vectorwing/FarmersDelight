@@ -5,7 +5,9 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.util.Mth;
-import net.minecraft.world.*;
+import net.minecraft.world.Clearable;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
@@ -25,18 +27,14 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public abstract class AbstractStoveBlockEntity extends BlockEntity implements Clearable {
+public abstract class AbstractStoveBlockEntity extends BlockEntity implements Clearable
+{
 	private final ItemStackHandler items;
 	private final int[] cookingProgress;
 	private final int[] cookingTime;
 	private final RecipeManager.CachedCheck<SingleRecipeInput, ? extends AbstractCookingRecipe> quickRecipeLookup;
 
-	protected AbstractStoveBlockEntity(
-		BlockEntityType<?> blockEntityType,
-		BlockPos blockPos,
-		BlockState blockState,
-		RecipeType<? extends AbstractCookingRecipe> recipeType
-	) {
+	protected AbstractStoveBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState, RecipeType<? extends AbstractCookingRecipe> recipeType) {
 		super(blockEntityType, blockPos, blockState);
 
 		int inventorySlotCount = this.getInventorySlotCount();
@@ -127,13 +125,9 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 				.orElse(ingredient);
 
 			if (!result.isItemEnabled(this.level.enabledFeatures())) continue;
-			Containers.dropItemStack(
-				this.level,
-				this.worldPosition.getX() + 0.5,
-				this.worldPosition.getY() + 1.0,
-				this.worldPosition.getZ() + 0.5,
-				result
-			);
+			ItemUtils.spawnItemEntity(level, result.copy(),
+				worldPosition.getX() + 0.5, worldPosition.getY() + 1.0, worldPosition.getZ() + 0.5,
+				level.random.nextGaussian() * (double) 0.01F, 0.1F, level.random.nextGaussian() * (double) 0.01F);
 			this.items.setStackInSlot(i, ItemStack.EMPTY);
 			var state = this.getBlockState();
 			this.level.sendBlockUpdated(this.worldPosition, state, state, Block.UPDATE_ALL);
@@ -214,17 +208,17 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 		if (this.level == null) return;
 		this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
 		this.setChanged();
-		// level.gameEvent is called in AbstractStoveBlock::extinguish, so it is not called here
 	}
 
 	public void ignite() {
 		if (this.level == null) return;
 		this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
 		this.setChanged();
-		// level.gameEvent is called in AbstractStoveBLock::ignite, so it is not called here
 	}
 
-	public void clearContent() { streamItems().forEach((stack) -> stack.setCount(0)); }
+	public void clearContent() {
+		streamItems().forEach((stack) -> stack.setCount(0));
+	}
 
 	private static ItemStackHandler createHandler(int slotCount) {
 		return new ItemStackHandler(slotCount)
@@ -235,5 +229,4 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 			}
 		};
 	}
-
 }
