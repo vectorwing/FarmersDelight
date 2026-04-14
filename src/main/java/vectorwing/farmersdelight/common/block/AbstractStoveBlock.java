@@ -123,6 +123,7 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock {
         if (level.isClientSide) return ItemInteractionResult.CONSUME;
         boolean placeFoodSuccess = stoveEntity.placeFood(player, player.getAbilities().instabuild ? heldStack.copy() : heldStack, maybeRecipe.get());
         if (!placeFoodSuccess) return ItemInteractionResult.CONSUME;
+        level.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundSource.BLOCKS, 0.5F, 1.0F);
         return ItemInteractionResult.SUCCESS;
     }
 
