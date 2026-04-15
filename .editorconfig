@@ -1,6 +1,9 @@
 # http://editorconfig.org
 root = true
 
+[*.java]
+indent_style = tab
+
 [*.json]
 indent_style = space
 indent_size = 2
