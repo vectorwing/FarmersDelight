@@ -88,7 +88,7 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 				level.playSound(null, pos, this.soundType.getBreakSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
 				popResource(level, pos, mushroomStack);
 				if (!level.isClientSide) {
-					heldStack.hurtAndBreak(colonyAge, player, LivingEntity.getSlotForHand(hand));
+					heldStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
 					((ServerLevel) level).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, state), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 10, 0.2, 0.2, 0.2, 0.1D);
 				}
 
