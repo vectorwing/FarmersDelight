@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -61,15 +62,12 @@ public class SkilletRenderer implements BlockEntityRenderer<SkilletBlockEntity>
 	}
 
 	protected int getModelCount(ItemStack stack) {
-		if (stack.getCount() > 48) {
-			return 5;
-		} else if (stack.getCount() > 32) {
-			return 4;
-		} else if (stack.getCount() > 16) {
-			return 3;
-		} else if (stack.getCount() > 1) {
-			return 2;
+		int modelCount = 1;
+
+		if (stack.getCount() > 1) {
+			modelCount += Mth.ceil(((float) stack.getCount() / stack.getMaxStackSize()) * 4);
 		}
-		return 1;
+
+		return modelCount;
 	}
 }
