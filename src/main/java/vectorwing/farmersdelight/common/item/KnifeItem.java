@@ -97,7 +97,7 @@ public class KnifeItem extends DiggerItem
 				ItemUtils.spawnItemEntity(level, new ItemStack(ModItems.CAKE_SLICE.get()),
 						pos.getX(), pos.getY() + 0.2, pos.getZ() + 0.5,
 						-0.05, 0, 0);
-				level.playSound(null, pos, ModSounds.BLOCK_PASTRY_SLICE.get(), SoundSource.PLAYERS, 0.8F, 0.8F);
+				level.playSound(null, pos, ModSounds.BLOCK_FOOD_SLICE.get(), SoundSource.PLAYERS, 0.8F, 0.8F);
 
 				event.getEntity().awardStat(Stats.ITEM_USED.get(heldStack.getItem()));
 				event.setCancellationResult(InteractionResult.SUCCESS);
@@ -114,7 +114,7 @@ public class KnifeItem extends DiggerItem
 				ItemUtils.spawnItemEntity(level, new ItemStack(ModItems.CAKE_SLICE.get()),
 						pos.getX() + (bites * 0.1), pos.getY() + 0.2, pos.getZ() + 0.5,
 						-0.05, 0, 0);
-				level.playSound(null, pos, ModSounds.BLOCK_PASTRY_SLICE.get(), SoundSource.PLAYERS, 0.8F, 0.8F);
+				level.playSound(null, pos, ModSounds.BLOCK_FOOD_SLICE.get(), SoundSource.PLAYERS, 0.8F, 0.8F);
 
 				event.getEntity().awardStat(Stats.ITEM_USED.get(heldStack.getItem()));
 				event.setCancellationResult(InteractionResult.SUCCESS);

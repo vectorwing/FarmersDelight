@@ -167,7 +167,7 @@ public class PieBlock extends Block
 		Direction direction = player.getDirection().getOpposite();
 		ItemUtils.spawnItemEntity(level, this.getPieSliceItem(), pos.getX() + 0.5, pos.getY() + 0.3, pos.getZ() + 0.5,
 				direction.getStepX() * 0.15, 0.05, direction.getStepZ() * 0.15);
-		level.playSound(null, pos, ModSounds.BLOCK_PASTRY_SLICE.get(), SoundSource.PLAYERS, 0.8F, 0.8F);
+		level.playSound(null, pos, ModSounds.BLOCK_FOOD_SLICE.get(), SoundSource.PLAYERS, 0.8F, 0.8F);
 		if (level instanceof ServerLevel serverLevel) {
 			serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, state), pos.getX() + 0.5, pos.getY() + 0.3, pos.getZ() + 0.5, 3, 0.1, 0.1, 0.1, 0.001D);
 		}
