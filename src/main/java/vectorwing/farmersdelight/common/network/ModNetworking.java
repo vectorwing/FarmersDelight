@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.common.networking;
+package vectorwing.farmersdelight.common.network;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;

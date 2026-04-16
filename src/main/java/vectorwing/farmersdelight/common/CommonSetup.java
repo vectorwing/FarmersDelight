@@ -24,7 +24,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.common.entity.RottenTomatoEntity;
-import vectorwing.farmersdelight.common.networking.ModNetworking;
+import vectorwing.farmersdelight.common.network.ModNetworking;
 import vectorwing.farmersdelight.common.registry.ModAdvancements;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
