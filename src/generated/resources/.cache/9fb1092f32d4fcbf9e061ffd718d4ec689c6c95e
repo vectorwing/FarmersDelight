@@ -1,4 +1,4 @@
-// 1.20.1	2026-04-09T18:03:17.0752218	Recipes
+// 1.20.1	2026-04-16T13:49:22.7445249	Recipes
 169cfc1d11ca3cede161363799f6c0e00bc1412e data/farmersdelight/advancements/recipes/beetroot_crate.json
 a498fcc8b72b6631ddbb164a0245b37491e7571a data/farmersdelight/advancements/recipes/building_blocks/cabbage_crate.json
 c941206993bfa59d31b38132b898fb94c29746a6 data/farmersdelight/advancements/recipes/building_blocks/onion_crate.json
@@ -266,7 +266,7 @@ bbea42c713e621d5584088ebdabccf73e403dbb3 data/farmersdelight/recipes/cooking/glo
 ebba30b54cb1f20e7c0ac5a4465b4b2d57cb7114 data/farmersdelight/recipes/cooking/hot_cocoa.json
 badbcb72c95e70251fcb92539c69cae20fcbc263 data/farmersdelight/recipes/cooking/mushroom_rice.json
 7246cea787d8f227e0a6fbc65c72a2853eeb8392 data/farmersdelight/recipes/cooking/mushroom_stew.json
-f011c578fe25eb997c6ab426d541e61ba7a0a36e data/farmersdelight/recipes/cooking/noodle_soup.json
+5a996f72c85237faa38905551564d0ac29bb4be5 data/farmersdelight/recipes/cooking/noodle_soup.json
 bb87ae2dbc5e57b7fa896a816ef96aedf2a6484b data/farmersdelight/recipes/cooking/onion_soup.json
 3bea501eab080d4055b0f88b69797c1954420f27 data/farmersdelight/recipes/cooking/pasta_with_meatballs.json
 2dd152a294f2711621e408aea994ac703f23d8c5 data/farmersdelight/recipes/cooking/pasta_with_mutton_chop.json

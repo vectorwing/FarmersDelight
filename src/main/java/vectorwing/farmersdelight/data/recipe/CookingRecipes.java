@@ -184,7 +184,7 @@ public class CookingRecipes
 				.save(consumer);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.NOODLE_SOUP.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(CommonTags.Items.PASTA)
-				.addIngredient(CommonTags.Items.COOKED_EGGS)
+				.addIngredient(CommonTags.Items.EGGS)
 				.addIngredient(Items.DRIED_KELP)
 				.addIngredient(CommonTags.Items.RAW_PORK)
 				.unlockedByAnyIngredient(ModItems.RAW_PASTA.get(), Items.DRIED_KELP, Items.PORKCHOP)
