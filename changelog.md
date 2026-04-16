@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.3.0 (WIP)
+## 1.3
 
 ### Additions
 - New items:
