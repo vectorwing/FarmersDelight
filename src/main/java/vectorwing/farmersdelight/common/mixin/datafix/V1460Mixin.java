@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.common.mixin;
+package vectorwing.farmersdelight.common.mixin.datafix;
 
 import com.mojang.datafixers.DSL;
 import com.mojang.datafixers.schemas.Schema;

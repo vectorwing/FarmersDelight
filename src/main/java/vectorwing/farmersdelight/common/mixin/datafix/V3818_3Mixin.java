@@ -1,4 +1,4 @@
-package vectorwing.farmersdelight.common.mixin;
+package vectorwing.farmersdelight.common.mixin.datafix;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.datafixers.schemas.Schema;
