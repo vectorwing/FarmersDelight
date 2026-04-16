@@ -9,6 +9,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.PlantType;
@@ -64,7 +65,7 @@ public class RichSoilBlock extends Block
 		if (plantState.getBlock() instanceof BonemealableBlock growable) {
 			if (growable.isValidBonemealTarget(level, plantPos, plantState, false) && ForgeHooks.onCropsGrowPre(level, plantPos, plantState, true)) {
 				growable.performBonemeal(level, level.random, plantPos, plantState);
-				level.levelEvent(2005, plantPos, 0);
+				level.levelEvent(LevelEvent.PARTICLES_PLANT_GROWTH, plantPos, 0);
 				ForgeHooks.onCropsGrowPost(level, plantPos, plantState);
 				return true;
 			}
