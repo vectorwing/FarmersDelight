@@ -253,7 +253,7 @@ public class CookingRecipes
 				.save(output);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.VEGETABLE_NOODLES.get(), 1, NORMAL_COOKING, MEDIUM_EXP)
 				.addIngredient(Tags.Items.CROPS_CARROT)
-				.addIngredient(Items.BROWN_MUSHROOM)
+				.addIngredient(Tags.Items.MUSHROOMS)
 				.addIngredient(CommonTags.Items.FOODS_PASTA)
 				.addIngredient(CommonTags.Items.FOODS_LEAFY_GREEN)
 				.addIngredient(vegetablesPatch())

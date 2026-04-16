@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-04T20:31:43.5150673	Recipes
+// 1.21.1	2026-04-16T12:58:13.5468489	Recipes
 0053d4db6868789324c8ab586cbfc9b588ce30ff data/farmersdelight/advancement/recipes/building_blocks/beetroot_crate.json
 527c466425a9e580792dfe83176fd8057f08fb72 data/farmersdelight/advancement/recipes/building_blocks/cabbage_crate.json
 5b6b7b02e582b796cef6d0c65ac910f9789f8897 data/farmersdelight/advancement/recipes/building_blocks/carrot_crate.json
@@ -276,7 +276,7 @@ efe076fef5383aa6bc7f4532293cf84cbe5cfa80 data/farmersdelight/recipe/cooking/pump
 20db3de20a0187bbeec68053935ea8f4ee0e4801 data/farmersdelight/recipe/cooking/squid_ink_pasta.json
 572e6d0ebf744915fce0681b8286876ffa5bd4de data/farmersdelight/recipe/cooking/stuffed_pumpkin_block.json
 2eba6da2f1f5a1c3b75d5a0473f4222ccf7ccf1d data/farmersdelight/recipe/cooking/tomato_sauce.json
-8ac9ac5d9669f45d95deeb10b468a445128e7414 data/farmersdelight/recipe/cooking/vegetable_noodles.json
+c0b0f908ca4eb66c06a939c3e0688fd455e11020 data/farmersdelight/recipe/cooking/vegetable_noodles.json
 2a16c767e0cd8911b732c0ff9dbeab2f4d7aee64 data/farmersdelight/recipe/cooking/vegetable_soup.json
 87d17a7ddb79d9693a5d10165ec0bb86dfd724a3 data/farmersdelight/recipe/cooking_pot.json
 08bbf5ef3918a1a76cf40983a662e7d6d084af72 data/farmersdelight/recipe/crimson_cabinet.json
