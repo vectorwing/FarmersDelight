@@ -517,11 +517,11 @@
   "farmersdelight.configuration.generateFDCropsOnVillageFarms.tooltip": "Ao habilitar, hortas do Farmer's Delight substituirão hortas do jogo base em fazendas de Vilas de vez em quando.",
 
   "farmersdelight.configuration.enableTomatoRopePermanence": "Permanência da corda em hortas de tomate",
-  "farmersdelight.configuration.enableTomatoRopePermanence.tooltip": "Hortas de tomate forçam a colocação de uma Corda quando destruídas. Devido a limitações técnicas, isto também afeta comandos, fazendo 'setblock' neste bloco falhar na primeira execução.\n\nDesabilite esta opção se o bloco está impedindo a edição de regiões no modo criativo, ou por comandos. Para o jogo normal, recomendo deixar habilitado.",
+  "farmersdelight.configuration.enableTomatoRopePermanence.tooltip": "Hortas de tomate forçam a colocação de uma Corda quando destruídas. Devido a limitações técnicas, isto também afeta comandos, fazendo 'setblock' neste bloco falhar na primeira execução.\n\nDesabilite esta opção se o bloco estiver impedindo a edição de regiões no modo criativo, ou por comandos. Para o jogo normal, recomendo deixar habilitado.",
 
-  "farmersdelight.configuration.enableNourishmentHungerOverlay": "Indicador de Nutrição no medidor de fome",
+  "farmersdelight.configuration.enableNourishmentHungerOverlay": "Indicador de Nutrição",
   "farmersdelight.configuration.enableNourishmentHungerOverlay.tooltip": "Ao habilitar, o medidor de fome será exibido com uma camada dourada quando o jogador estiver sob o efeito Nutrição.",
-  "farmersdelight.configuration.enableComfortHealthOverlay": "Indicador de Conforto no medidor de vida",
+  "farmersdelight.configuration.enableComfortHealthOverlay": "Indicador de Conforto",
   "farmersdelight.configuration.enableComfortHealthOverlay.tooltip": "Ao habilitar, o medidor de vida será exibido com um brilho corrente quando o jogador estiver sob o efeito Conforto.",
   "farmersdelight.configuration.enableFoodEffectTooltip": "Dica de efeitos em itens comestíveis",
   "farmersdelight.configuration.enableFoodEffectTooltip.tooltip": "Ao habilitar, itens de comida exibirão em suas descrições os efeitos que concedem quando consumidos. Se aplica a comidas tanto do Minecraft quanto deste mod."
