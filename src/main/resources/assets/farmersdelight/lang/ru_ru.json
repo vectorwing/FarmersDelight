@@ -335,9 +335,9 @@
   "subtitles.farmersdelight.block.rope_fence_gate.close": "Верёвочная калитка завязана",
   "subtitles.farmersdelight.block.cabinet.open": "Кладовая открывается",
   "subtitles.farmersdelight.block.cabinet.close": "Кладовая закрывается",
-  "subtitles.farmersdelight.block.tomato_bush.pick_tomatoes": "Томат сорван",
+  "subtitles.farmersdelight.block.tomatoes.pick_tomatoes": "Томат сорван",
   "subtitles.farmersdelight.block.food.take_portion": "Порция подана",
-  "subtitles.farmersdelight.block.pastry.slice": "Выпечка нарезана",
+  "subtitles.farmersdelight.block.food.slice": "Выпечка нарезана",
   "subtitles.farmersdelight.entity.rotten_tomato.throw": "Гнилой томат летит",
   "subtitles.farmersdelight.entity.rotten_tomato.hit": "Гнилой томат лопается",
 

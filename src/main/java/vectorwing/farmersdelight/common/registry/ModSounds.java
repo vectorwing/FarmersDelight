@@ -55,14 +55,14 @@ public class ModSounds
 			() -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "item.skillet.attack.weak")));
 
 	// Tomato Bush
-	public static final Supplier<SoundEvent> ITEM_TOMATO_PICK_FROM_BUSH = SOUNDS.register("block.tomato_bush.pick_tomatoes",
-			() -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "block.tomato_bush.pick_tomatoes")));
+	public static final Supplier<SoundEvent> BLOCK_TOMATOES_PICK_TOMATOES = SOUNDS.register("block.tomatoes.pick_tomatoes",
+			() -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "block.tomatoes.pick_tomatoes")));
 
 	// Food
-	public static final Supplier<SoundEvent> BLOCK_TAKE_PORTION = SOUNDS.register("block.food.take_portion",
+	public static final Supplier<SoundEvent> BLOCK_FOOD_TAKE_PORTION = SOUNDS.register("block.food.take_portion",
 			() -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "block.food.take_portion")));
-	public static final Supplier<SoundEvent> BLOCK_PASTRY_SLICE = SOUNDS.register("block.pastry.slice",
-			() -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "block.pastry.slice")));
+	public static final Supplier<SoundEvent> BLOCK_FOOD_SLICE = SOUNDS.register("block.food.slice",
+			() -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "block.food.slice")));
 
 	public static final Supplier<SoundEvent> ENTITY_ROTTEN_TOMATO_THROW = SOUNDS.register("entity.rotten_tomato.throw",
 			() -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "entity.rotten_tomato.throw")));

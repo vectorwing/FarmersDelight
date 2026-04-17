@@ -236,7 +236,7 @@
   "subtitles.farmersdelight.block.stove.crackle": "Liesi rätisee",
   "subtitles.farmersdelight.block.skillet.sizzle": "Paistinpannu kärisee",
   "subtitles.farmersdelight.block.skillet.add_food": "Paistinpannu sihisee",
-  "subtitles.farmersdelight.block.tomato_bush.pick_tomatoes": "Tomaatit popsahtavat",
+  "subtitles.farmersdelight.block.tomatoes.pick_tomatoes": "Tomaatit popsahtavat",
   
   "block.farmersdelight.feast.use_container": "Tarvitset esineen %s syödäksesti tätä.",
   "block.farmersdelight.rice.invalid_placement": "Tämä kasvi selviää parhaiten matalassa vedessä.",

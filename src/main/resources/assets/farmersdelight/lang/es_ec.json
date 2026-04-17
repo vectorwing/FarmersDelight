@@ -203,7 +203,7 @@
   "subtitles.farmersdelight.block.cooking_pot.boil": "Blobs de la olla hirviendo",
   "subtitles.farmersdelight.block.cutting_board.knife_cut": "Cortes de cuchillo",
   "subtitles.farmersdelight.block.stove.crackle": "Crujidos de la parrilla",
-  "subtitles.farmersdelight.block.tomato_bush.pick_tomatoes": "Tomate estallando",
+  "subtitles.farmersdelight.block.tomatoes.pick_tomatoes": "Tomate estallando",
 
   "block.farmersdelight.feast.use_container": "Necesitas un %s para comer esto.",
   "block.farmersdelight.rice.invalid_placement": "Este cultivo no sobrevivirá bien fuera de aguas poco profundas.",

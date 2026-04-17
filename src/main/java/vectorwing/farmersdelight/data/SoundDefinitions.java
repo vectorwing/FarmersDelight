@@ -38,9 +38,9 @@ public class SoundDefinitions extends SoundDefinitionsProvider
 		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_ROPE_FENCE_GATE_OPEN, SoundEvents.LEASH_KNOT_BREAK);
 		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_CABINET_CLOSE, SoundEvents.BARREL_CLOSE);
 		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_CABINET_OPEN, SoundEvents.BARREL_OPEN);
-		this.generateExistingSoundWithSubtitle(ModSounds.ITEM_TOMATO_PICK_FROM_BUSH, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES);
-		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_TAKE_PORTION, SoundEvents.ARMOR_EQUIP_GENERIC.value());
-		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_PASTRY_SLICE, SoundEvents.WOOL_BREAK);
+		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_TOMATOES_PICK_TOMATOES, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES);
+		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_FOOD_TAKE_PORTION, SoundEvents.ARMOR_EQUIP_GENERIC.value());
+		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_FOOD_SLICE, SoundEvents.WOOL_BREAK);
 		this.generateExistingSoundWithSubtitle(ModSounds.ENTITY_ROTTEN_TOMATO_THROW, SoundEvents.SNOWBALL_THROW);
 		this.generateExistingSoundWithSubtitle(ModSounds.ENTITY_ROTTEN_TOMATO_HIT, SoundEvents.SLIME_ATTACK);
 	}

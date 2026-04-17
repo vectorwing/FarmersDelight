@@ -1,7 +1,8 @@
 {
   "block.farmersdelight.stove": "爐灶",
   "block.farmersdelight.cooking_pot": "烹飪鍋",
-  "block.farmersdelight.wooden_basket": "籃子",
+  "block.farmersdelight.wooden_basket": "木籃",
+  "block.farmersdelight.bamboo_basket": "竹籃",
   "block.farmersdelight.cutting_board": "砧板",
   "block.farmersdelight.skillet": "平底鍋",
   "block.farmersdelight.oak_cabinet": "橡木儲藏櫃",
@@ -254,7 +255,7 @@
   "advancements.farmersdelight.plant_rice.description": "在淺水坑中種植水稻",
   "advancements.farmersdelight.harvest_ropelogged_tomato.title": "一番衝天",
   "advancements.farmersdelight.harvest_ropelogged_tomato.description": "在番茄藤上掛繩索讓他長得更高",
-  "advancements.farmersdelight.hit_raider_with_rotten_tomato.title": "嘘！走開！",
+  "advancements.farmersdelight.hit_raider_with_rotten_tomato.title": "噓！走開！",
   "advancements.farmersdelight.hit_raider_with_rotten_tomato.description": "對襲擊者扔出腐爛番茄！",
   "advancements.farmersdelight.get_mushroom_colony.title": "菌菇在我們之中",
   "advancements.farmersdelight.get_mushroom_colony.description": "剪下完整的蘑菇菌落。你需要沃土才能種出來……",
@@ -283,7 +284,7 @@
   "subtitles.farmersdelight.block.skillet.add_food": "平底鍋滋滋聲",
   "subtitles.farmersdelight.block.cabinet.open": "儲藏櫃開啟",
   "subtitles.farmersdelight.block.cabinet.close": "儲藏櫃關閉",
-  "subtitles.farmersdelight.block.tomato_bush.pick_tomatoes": "番茄彈出",
+  "subtitles.farmersdelight.block.tomatoes.pick_tomatoes": "番茄彈出",
   "subtitles.farmersdelight.entity.rotten_tomato.throw": "蒼蠅飛繞",
   "subtitles.farmersdelight.entity.rotten_tomato.hit": "腐爛番茄飛濺",
 

@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.3.0 (WIP)
+## 1.3.0
 
 ### Additions
 - New items:
@@ -77,6 +77,7 @@
   - Kelp Rolls now accept any `forge:vegetables` (1.20.1) or `c:foods/vegetable` (1.21+) as filling, instead of just Carrot;
   - Vegetable Noodles now accept any mushroom;
   - Dog Food can now be prepared with any `forge:raw_meat` (1.20.1) or `c:foods/raw_meat` (1.21+), both of which exclude raw fish;
+  - Hoes can now pry blocks out of vehicles (Minecarts and Boats) on a Cutting Board;
   - Cutting recipes now check for both a tag and a "tool action" (1.20.1) or "item ability" (1.21+), broadening compatibility with modded tools;
   - Cutting recipes where you "salvage" items are now condensed together, making the Cutting recipe list less bloated in item viewers:
     - Wood furniture salvaging became a single `<wood>_furniture` recipe, includes several new items, and has a 75% chance to return a unit of that plank type;
@@ -85,7 +86,7 @@
   - `knife_harvest`: Checked together with the `farmersdelight:tools/knives` tag for gameplay actions;
 - All sounds in FD should now have accurate subtitles. Recently added:
   - `food.take_portion`: Used when blocks provide food when used (Cooking Pot, Feasts etc);
-  - `pastry.slice`: Used when sweet food blocks, such as Pies, are sliced with a Knife;
+  - `food.slice`: Used when sweet food blocks, such as Pies, are sliced with a Knife;
 - Farmer Villagers can now detect Rich Soil Farmland as a valid point of interest for crop harvesting (thanks, MehVahdJukaar!);
 - Mushroom Colonies can now be snipped all at once when using a Knife on them;
 - Stoves now only inflict burn in a small "grilling area" on top of them; the edges are safe to step on;

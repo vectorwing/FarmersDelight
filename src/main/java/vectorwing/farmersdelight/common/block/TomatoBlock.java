@@ -68,7 +68,7 @@ public class TomatoBlock extends CropBlock
 				popResource(level, pos, new ItemStack(ModItems.ROTTEN_TOMATO.get()));
 			}
 
-			level.playSound(null, pos, ModSounds.ITEM_TOMATO_PICK_FROM_BUSH.get(), SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+			level.playSound(null, pos, ModSounds.BLOCK_TOMATOES_PICK_TOMATOES.get(), SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
 			level.setBlock(pos, state.setValue(getAgeProperty(), 0), 2);
 			return InteractionResult.SUCCESS;
 		} else {

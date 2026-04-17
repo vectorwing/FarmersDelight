@@ -29,6 +29,7 @@ public class CuttingRecipes
 	public static Ingredient AXES = matchesTool(ItemAbilities.AXE_DIG, ItemTags.AXES);
 	public static Ingredient AXES_STRIP = matchesTool(ItemAbilities.AXE_STRIP, ItemTags.AXES);
 	public static Ingredient SHOVELS = matchesTool(ItemAbilities.SHOVEL_DIG, ItemTags.SHOVELS);
+	public static Ingredient HOES = matchesTool(ItemAbilities.HOE_DIG, ItemTags.HOES);
 	public static Ingredient SHEARS = matchesTool(ItemAbilities.SHEARS_DIG, Tags.Items.TOOLS_SHEAR);
 
 	public static void register(RecipeOutput output) {
@@ -50,6 +51,9 @@ public class CuttingRecipes
 
 		// Shears
 		salvagingUsingShears(output);
+
+		// Hoe
+		salvagingBlockFromVehicle(output);
 	}
 
 	private static void cuttingAnimalItems(RecipeOutput output) {
@@ -281,6 +285,65 @@ public class CuttingRecipes
 				.save(output, salvagingRecipe("leather_horse_armor"));
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.LEATHER_HELMET, Items.LEATHER_CHESTPLATE, Items.LEATHER_LEGGINGS, Items.LEATHER_BOOTS), SHEARS, Items.LEATHER, 1)
 				.save(output, salvagingRecipe("leather_armor"));
+	}
+
+	private static void salvagingBlockFromVehicle(RecipeOutput output) {
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CHEST_MINECART), HOES, Items.MINECART)
+			.addResult(Items.CHEST)
+			.addSound(SoundEvents.METAL_BREAK)
+			.salvaging()
+			.saveToFD(output);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.FURNACE_MINECART), HOES, Items.MINECART)
+			.addResult(Items.FURNACE)
+			.addSound(SoundEvents.METAL_BREAK)
+			.salvaging()
+			.saveToFD(output);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.HOPPER_MINECART), HOES, Items.MINECART)
+			.addResult(Items.HOPPER)
+			.addSound(SoundEvents.METAL_BREAK)
+			.salvaging()
+			.saveToFD(output);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.TNT_MINECART), HOES, Items.MINECART)
+			.addResult(Items.TNT)
+			.addSound(SoundEvents.METAL_BREAK)
+			.salvaging()
+			.saveToFD(output);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.OAK_CHEST_BOAT), HOES, Items.OAK_BOAT)
+			.addResult(Items.CHEST)
+			.salvaging()
+			.saveToFD(output);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.SPRUCE_CHEST_BOAT), HOES, Items.SPRUCE_BOAT)
+			.addResult(Items.CHEST)
+			.salvaging()
+			.saveToFD(output);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BIRCH_CHEST_BOAT), HOES, Items.BIRCH_BOAT)
+			.addResult(Items.CHEST)
+			.salvaging()
+			.saveToFD(output);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.JUNGLE_CHEST_BOAT), HOES, Items.JUNGLE_BOAT)
+			.addResult(Items.CHEST)
+			.salvaging()
+			.saveToFD(output);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.ACACIA_CHEST_BOAT), HOES, Items.ACACIA_BOAT)
+			.addResult(Items.CHEST)
+			.salvaging()
+			.saveToFD(output);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.DARK_OAK_CHEST_BOAT), HOES, Items.DARK_OAK_BOAT)
+			.addResult(Items.CHEST)
+			.salvaging()
+			.saveToFD(output);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.MANGROVE_CHEST_BOAT), HOES, Items.MANGROVE_BOAT)
+			.addResult(Items.CHEST)
+			.salvaging()
+			.saveToFD(output);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CHERRY_CHEST_BOAT), HOES, Items.CHERRY_BOAT)
+			.addResult(Items.CHEST)
+			.salvaging()
+			.saveToFD(output);
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BAMBOO_CHEST_RAFT), HOES, Items.BAMBOO_RAFT)
+			.addResult(Items.CHEST)
+			.salvaging()
+			.saveToFD(output);
 	}
 
 	/**

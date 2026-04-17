@@ -1,0 +1,31 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:acacia_chest_boat"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 1,
+        "id": "minecraft:acacia_boat"
+      }
+    },
+    {
+      "item": {
+        "count": 1,
+        "id": "minecraft:chest"
+      }
+    }
+  ],
+  "tool": [
+    {
+      "type": "farmersdelight:item_ability",
+      "action": "hoe_dig"
+    },
+    {
+      "tag": "minecraft:hoes"
+    }
+  ]
+}

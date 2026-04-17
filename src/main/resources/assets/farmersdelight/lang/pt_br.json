@@ -335,9 +335,9 @@
   "subtitles.farmersdelight.block.rope_fence_gate.close": "Portão de corda amarra",
   "subtitles.farmersdelight.block.cabinet.open": "Armário aberto",
   "subtitles.farmersdelight.block.cabinet.close": "Armário fechado",
-  "subtitles.farmersdelight.block.tomato_bush.pick_tomatoes": "Tomates colhidos",
+  "subtitles.farmersdelight.block.tomatoes.pick_tomatoes": "Tomates colhidos",
   "subtitles.farmersdelight.block.food.take_portion": "Porção servida",
-  "subtitles.farmersdelight.block.pastry.slice": "Doce cortado",
+  "subtitles.farmersdelight.block.food.slice": "Comida cortada",
   "subtitles.farmersdelight.entity.rotten_tomato.throw": "Tomate podre lançado",
   "subtitles.farmersdelight.entity.rotten_tomato.hit": "Tomate podre estoura",
 

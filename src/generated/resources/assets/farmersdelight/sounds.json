@@ -66,6 +66,15 @@
     ],
     "subtitle": "subtitles.farmersdelight.block.cutting_board.remove_item"
   },
+  "block.food.slice": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.wool.break"
+      }
+    ],
+    "subtitle": "subtitles.farmersdelight.block.food.slice"
+  },
   "block.food.take_portion": {
     "sounds": [
       {
@@ -74,15 +83,6 @@
       }
     ],
     "subtitle": "subtitles.farmersdelight.block.food.take_portion"
-  },
-  "block.pastry.slice": {
-    "sounds": [
-      {
-        "type": "event",
-        "name": "block.wool.break"
-      }
-    ],
-    "subtitle": "subtitles.farmersdelight.block.pastry.slice"
   },
   "block.rope_fence_gate.close": {
     "sounds": [
@@ -126,14 +126,14 @@
     ],
     "subtitle": "subtitles.farmersdelight.block.stove.crackle"
   },
-  "block.tomato_bush.pick_tomatoes": {
+  "block.tomatoes.pick_tomatoes": {
     "sounds": [
       {
         "type": "event",
         "name": "block.sweet_berry_bush.pick_berries"
       }
     ],
-    "subtitle": "subtitles.farmersdelight.block.tomato_bush.pick_tomatoes"
+    "subtitle": "subtitles.farmersdelight.block.tomatoes.pick_tomatoes"
   },
   "entity.rotten_tomato.hit": {
     "sounds": [

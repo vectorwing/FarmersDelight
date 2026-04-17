@@ -335,9 +335,9 @@
   "subtitles.farmersdelight.block.rope_fence_gate.close": "Мотузкову хвіртку завʼязано",
   "subtitles.farmersdelight.block.cabinet.open": "Шафка відчиняється",
   "subtitles.farmersdelight.block.cabinet.close": "Шафка зачиняється",
-  "subtitles.farmersdelight.block.tomato_bush.pick_tomatoes": "Помідор лопається",
+  "subtitles.farmersdelight.block.tomatoes.pick_tomatoes": "Помідор лопається",
   "subtitles.farmersdelight.block.food.take_portion": "Порцію подано",
-  "subtitles.farmersdelight.block.pastry.slice": "Випічку нарізано",
+  "subtitles.farmersdelight.block.food.slice": "Випічку нарізано",
   "subtitles.farmersdelight.entity.rotten_tomato.throw": "Гнилий помідор летить",
   "subtitles.farmersdelight.entity.rotten_tomato.hit": "Гнилий помідор бризкає",
 
@@ -371,7 +371,7 @@
   "jei.farmersdelight.info.wild_onions": "Цибулю можна знайти дикорослою у помірних краях, таких як рівнини та ліси.",
   "jei.farmersdelight.info.wild_potatoes": "Картоплю можна знайти дикорослою у холодних краях, таких як гори та тайги.",
   "jei.farmersdelight.info.wild_tomatoes": "Помідори можна знайти дикорослими у посушливих краях, таких як савани та пустелі.",
-  "jei.farmersdelight.info.wild_rice": "Рис можна знайти дикорослим у водоймах вологих країв, таких як болота та джунглі."
+  "jei.farmersdelight.info.wild_rice": "Рис можна знайти дикорослим у водоймах вологих країв, таких як болота та джунглі.",
 
   "emi.category.farmersdelight.cooking": "Приготування",
   "emi.category.farmersdelight.cutting": "Нарізка",
