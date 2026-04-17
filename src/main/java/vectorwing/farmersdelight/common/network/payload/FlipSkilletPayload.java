@@ -7,15 +7,12 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import vectorwing.farmersdelight.FarmersDelight;
 
-public class FlipSkilletPayload implements CustomPacketPayload
+public record FlipSkilletPayload() implements CustomPacketPayload
 {
     public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "flip_skillet");
     public static final FlipSkilletPayload INSTANCE = new FlipSkilletPayload();
     public static final Type<FlipSkilletPayload> TYPE = new Type<>(ID);
     public static final StreamCodec<RegistryFriendlyByteBuf, FlipSkilletPayload> STREAM_CODEC = StreamCodec.unit(INSTANCE);
-
-    public FlipSkilletPayload() {
-    }
 
     @Override
     public @NotNull Type<? extends CustomPacketPayload> type() {

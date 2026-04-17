@@ -26,9 +26,9 @@ public class ModItems
 	public static LinkedHashSet<Supplier<Item>> CREATIVE_TAB_ITEMS = Sets.newLinkedHashSet();
 
 	public static Supplier<Item> registerWithTab(final String name, final Supplier<Item> supplier) {
-		Supplier<Item> block = ITEMS.register(name, supplier);
-		CREATIVE_TAB_ITEMS.add(block);
-		return block;
+		Supplier<Item> newItem = ITEMS.register(name, supplier);
+		CREATIVE_TAB_ITEMS.add(newItem);
+		return newItem;
 	}
 
 	public static Supplier<Item> registerHidden(final String name, final Supplier<Item> supplier) {
