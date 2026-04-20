@@ -6,6 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
+import net.minecraft.world.Clearable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
@@ -22,7 +23,7 @@ import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 import java.util.Optional;
 
-public class StoveBlockEntity extends SyncedBlockEntity
+public class StoveBlockEntity extends SyncedBlockEntity implements Clearable
 {
 	private static final VoxelShape GRILLING_AREA = Block.box(3.0F, 0.0F, 3.0F, 13.0F, 1.0F, 13.0F);
 	private static final int INVENTORY_SLOT_COUNT = 6;
@@ -208,5 +209,10 @@ public class StoveBlockEntity extends SyncedBlockEntity
 				return 1;
 			}
 		};
+	}
+
+	@Override
+	public void clearContent() {
+		ItemUtils.clearItems(inventory);
 	}
 }
