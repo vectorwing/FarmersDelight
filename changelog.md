@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.11a
+
+### Fixes
+- Fix block entities not clearing properly on contraption mods;
+
 ## 1.2.11
 
 ### Fixes

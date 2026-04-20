@@ -6,6 +6,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
 /**
  * Util for handling ItemStacks and inventories containing them.
@@ -15,6 +16,12 @@ public class ItemUtils
 	public static void dropItems(Level level, BlockPos pos, IItemHandler inventory) {
 		for (int slot = 0; slot < inventory.getSlots(); slot++)
 			Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), inventory.getStackInSlot(slot));
+	}
+
+	public static void clearItems(ItemStackHandler inventory) {
+		for (int i = 0; i < inventory.getSlots(); i++) {
+			inventory.setStackInSlot(i, ItemStack.EMPTY);
+		}
 	}
 
 	public static boolean isInventoryEmpty(IItemHandler inventory) {
