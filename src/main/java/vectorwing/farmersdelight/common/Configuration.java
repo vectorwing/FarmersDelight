@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class Configuration
 {
@@ -12,43 +13,43 @@ public class Configuration
 
 	// COMMON
 	public static final String CATEGORY_SETTINGS = "settings";
-	public static ModConfigSpec.BooleanValue ENABLE_FARMERS_BUY_FD_CROPS;
-	public static ModConfigSpec.BooleanValue ENABLE_WANDERING_TRADER_SELLS_FD_ITEMS;
-	public static ModConfigSpec.BooleanValue ENABLE_ROPE_REELING;
-	public static ModConfigSpec.ConfigValue<List<? extends String>> CANVAS_SIGN_DARK_BACKGROUND_LIST;
+	public static Supplier<Boolean> ENABLE_FARMERS_BUY_FD_CROPS;
+	public static Supplier<Boolean> ENABLE_WANDERING_TRADER_SELLS_FD_ITEMS;
+	public static Supplier<Boolean> ENABLE_ROPE_REELING;
+	public static Supplier<List<? extends String>> CANVAS_SIGN_DARK_BACKGROUND_LIST;
 
 	public static final String CATEGORY_FARMING = "farming";
-	public static ModConfigSpec.DoubleValue RICH_SOIL_BOOST_CHANCE;
-	public static ModConfigSpec.BooleanValue ENABLE_TOMATO_VINE_CLIMBING_TAGGED_ROPES;
-	public static ModConfigSpec.ConfigValue<String> DEFAULT_TOMATO_VINE_ROPE;
+	public static Supplier<Double> RICH_SOIL_BOOST_CHANCE;
+	public static Supplier<Boolean> ENABLE_TOMATO_VINE_CLIMBING_TAGGED_ROPES;
+	public static Supplier<String> DEFAULT_TOMATO_VINE_ROPE;
 
 	public static final String CATEGORY_CRAFTING = "crafting";
-	public static ModConfigSpec.BooleanValue ENABLE_COOKING_POT_RECIPE_BOOK;
-	public static ModConfigSpec.BooleanValue ENABLE_VANILLA_CROP_CRATES;
-	public static ModConfigSpec.DoubleValue CUTTING_BOARD_FORTUNE_BONUS;
+	public static Supplier<Boolean> ENABLE_COOKING_POT_RECIPE_BOOK;
+	public static Supplier<Boolean> ENABLE_VANILLA_CROP_CRATES;
+	public static Supplier<Double> CUTTING_BOARD_FORTUNE_BONUS;
 
 	public static final String CATEGORY_OVERRIDES = "overrides";
-	public static ModConfigSpec.BooleanValue ENABLE_VANILLA_SOUP_EXTRA_EFFECTS;
-	public static ModConfigSpec.BooleanValue ENABLE_RABBIT_STEW_BUFF;
-	public static ModConfigSpec.BooleanValue ENABLE_PUMPKIN_PIE_SNEAK_TO_PLACE;
-	public static ModConfigSpec.BooleanValue ENABLE_DISPENSER_TOOLS_CUTTING_BOARD;
+	public static Supplier<Boolean> ENABLE_VANILLA_SOUP_EXTRA_EFFECTS;
+	public static Supplier<Boolean> ENABLE_RABBIT_STEW_BUFF;
+	public static Supplier<Boolean> ENABLE_PUMPKIN_PIE_SNEAK_TO_PLACE;
+	public static Supplier<Boolean> ENABLE_DISPENSER_TOOLS_CUTTING_BOARD;
 
 	public static final String CATEGORY_OVERRIDES_STACK_SIZE = "stack_size";
-	public static ModConfigSpec.BooleanValue ENABLE_STACKABLE_SOUP_ITEMS;
-	public static ModConfigSpec.ConfigValue<List<? extends String>> SOUP_ITEM_LIST;
+	public static Supplier<Boolean> ENABLE_STACKABLE_SOUP_ITEMS;
+	public static Supplier<List<? extends String>> SOUP_ITEM_LIST;
 
 	public static final String CATEGORY_WORLD = "world";
-	public static ModConfigSpec.BooleanValue GENERATE_FD_CHEST_LOOT;
-	public static ModConfigSpec.BooleanValue GENERATE_VILLAGE_COMPOST_HEAPS;
-	public static ModConfigSpec.BooleanValue GENERATE_VILLAGE_FARM_FD_CROPS;
+	public static Supplier<Boolean> GENERATE_FD_CHEST_LOOT;
+	public static Supplier<Boolean> GENERATE_VILLAGE_COMPOST_HEAPS;
+	public static Supplier<Boolean> GENERATE_VILLAGE_FARM_FD_CROPS;
 
 	public static final String CATEGORY_DEBUG = "debug";
-	public static ModConfigSpec.BooleanValue ENABLE_TOMATO_ROPE_PERMANENCE;
+	public static Supplier<Boolean> ENABLE_TOMATO_ROPE_PERMANENCE;
 
 	// CLIENT
-	public static ModConfigSpec.BooleanValue ENABLE_NOURISHMENT_HUNGER_OVERLAY;
-	public static ModConfigSpec.BooleanValue ENABLE_COMFORT_HEALTH_OVERLAY;
-	public static ModConfigSpec.BooleanValue ENABLE_FOOD_EFFECT_TOOLTIP;
+	public static Supplier<Boolean> ENABLE_NOURISHMENT_HUNGER_OVERLAY;
+	public static Supplier<Boolean> ENABLE_COMFORT_HEALTH_OVERLAY;
+	public static Supplier<Boolean> ENABLE_FOOD_EFFECT_TOOLTIP;
 
 	static {
 		ModConfigSpec.Builder COMMON_BUILDER = new ModConfigSpec.Builder();
