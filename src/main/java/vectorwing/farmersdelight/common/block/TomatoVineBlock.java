@@ -1,8 +1,9 @@
 package vectorwing.farmersdelight.common.block;
 
-// remove in the future
+// Renamed to TomatoBlock. This class will be removed in the next minor/major release.
 @Deprecated(forRemoval = true)
-public class TomatoVineBlock extends TomatoBlock{
+public class TomatoVineBlock extends TomatoBlock
+{
 	public TomatoVineBlock(Properties properties) {
 		super(properties);
 	}
