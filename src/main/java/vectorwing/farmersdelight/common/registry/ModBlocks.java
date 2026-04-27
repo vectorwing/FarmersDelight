@@ -307,7 +307,7 @@ public class ModBlocks
 	public static final Supplier<Block> BUDDING_TOMATO_CROP = BLOCKS.register("budding_tomatoes",
 			() -> new BuddingTomatoBlock(Block.Properties.ofFullCopy(Blocks.WHEAT)));
 	public static final DeferredHolder<Block, TomatoBlock> TOMATO_CROP = BLOCKS.register("tomatoes",
-			() -> new TomatoBlock(Block.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.CROP)));
+			() -> new TomatoBlock(Block.Properties.of().noCollision().randomTicks().instabreak().sound(SoundType.CROP)));
 	public static final DeferredHolder<Block, HangingTomatoBlock> TOMATO_CROP_ON_ROPE = BLOCKS.register("tomatoes_on_rope",
 			() -> new HangingTomatoBlock(Block.Properties.ofFullCopy(ModBlocks.TOMATO_CROP.get()).pushReaction(PushReaction.NORMAL)));
 	public static final Supplier<Block> RICE_CROP = BLOCKS.register("rice",

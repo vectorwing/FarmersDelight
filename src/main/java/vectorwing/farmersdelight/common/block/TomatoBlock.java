@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
@@ -32,8 +33,10 @@ import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
-@SuppressWarnings("deprecation")
+// TODO: Remove ropelogged state from TomatoBlock on 26.1.2.
+
 public class TomatoBlock extends CropBlock
 {
 	public static final IntegerProperty VINE_AGE = BlockStateProperties.AGE_3;
@@ -49,10 +52,11 @@ public class TomatoBlock extends CropBlock
 		super(properties);
 	}
 
-	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+	protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		int age = state.getValue(getAgeProperty());
 		boolean isMature = age == getMaxAge();
-		return !isMature && stack.is(Items.BONE_MEAL) ? ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION : super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+		// TODO: This used to skip block interaction for bone meal. Test if it works as intended with SUCCESS.
+		return !isMature && stack.is(Items.BONE_MEAL) ? InteractionResult.SUCCESS : super.useItemOn(stack, state, level, pos, player, hand, hitResult);
 	}
 
 	@Override
@@ -60,14 +64,14 @@ public class TomatoBlock extends CropBlock
 		int age = state.getValue(getAgeProperty());
 		boolean isMature = age == getMaxAge();
 		if (isMature) {
-			int quantity = 1 + level.random.nextInt(2);
+			int quantity = 1 + level.getRandom().nextInt(2);
 			popResource(level, pos, new ItemStack(ModItems.TOMATO.get(), quantity));
 
-			if (level.random.nextFloat() < 0.05) {
+			if (level.getRandom().nextFloat() < 0.05) {
 				popResource(level, pos, new ItemStack(ModItems.ROTTEN_TOMATO.get()));
 			}
 
-			level.playSound(null, pos, ModSounds.BLOCK_TOMATOES_PICK_TOMATOES.get(), SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+			level.playSound(null, pos, ModSounds.BLOCK_TOMATOES_PICK_TOMATOES.get(), SoundSource.BLOCKS, 1.0F, 0.8F + level.getRandom().nextFloat() * 0.4F);
 			level.setBlock(pos, state.setValue(getAgeProperty(), 0), 2);
 			return InteractionResult.SUCCESS;
 		} else {
@@ -229,9 +233,9 @@ public class TomatoBlock extends CropBlock
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-		if (!state.canSurvive(level, currentPos)) {
-			level.scheduleTick(currentPos, this, 1);
+	public BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos, Direction directionToNeighbour, BlockPos neighbourPos, BlockState neighbourState, RandomSource random) {
+		if (!state.canSurvive(level, pos)) {
+			ticks.scheduleTick(pos, this, 1);
 		}
 
 		return state;
@@ -252,8 +256,8 @@ public class TomatoBlock extends CropBlock
 	 */
 	@Deprecated
 	public static void destroyAndPlaceRope(Level level, BlockPos pos) {
-		Block configuredRopeBlock = BuiltInRegistries.BLOCK.get(Identifier.parse(Configuration.DEFAULT_TOMATO_VINE_ROPE.get()));
-		Block finalRopeBlock = configuredRopeBlock != null ? configuredRopeBlock : ModBlocks.ROPE.get();
+		Optional<Holder.Reference<Block>> configuredRopeBlock = BuiltInRegistries.BLOCK.get(Identifier.parse(Configuration.DEFAULT_TOMATO_VINE_ROPE.get()));
+		Block finalRopeBlock = configuredRopeBlock.map(Holder.Reference::value).orElseGet(ModBlocks.ROPE);
 		level.setBlockAndUpdate(pos, finalRopeBlock.defaultBlockState());
 	}
 }

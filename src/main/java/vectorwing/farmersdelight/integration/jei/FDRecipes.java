@@ -19,21 +19,22 @@ import java.util.Optional;
 
 public class FDRecipes
 {
-	private final RecipeManager recipeManager;
+	// TODO: RecipeAccess isn't the same thing. Maybe you'll have to access the registries directly?
+	private final RecipeAccess recipeManager;
 
 	public FDRecipes() {
 		Minecraft minecraft = Minecraft.getInstance();
 		ClientLevel level = minecraft.level;
 
 		if (level != null) {
-			this.recipeManager = level.getRecipeManager();
+			this.recipeManager = level.recipeAccess();
 		} else {
 			throw new NullPointerException("Minecraft level must not be null.");
 		}
 	}
 
 	public List<RecipeHolder<CookingPotRecipe>> getCookingPotRecipes() {
-		return recipeManager.getAllRecipesFor(ModRecipeTypes.COOKING.get());
+		return recipeManager..getAllRecipesFor(ModRecipeTypes.COOKING.get());
 	}
 
 	public List<RecipeHolder<CuttingBoardRecipe>> getCuttingBoardRecipes() {
@@ -45,7 +46,7 @@ public class FDRecipes
 
 		addValidatedSpecialRecipe(recipes, "wheat_dough_from_water", "fd_dough",
 				NonNullList.of(
-						Ingredient.EMPTY,
+						Ingredient.of(),
 						Ingredient.of(Items.WHEAT),
 						Ingredient.of(Items.WATER_BUCKET)
 				),
