@@ -1,10 +1,7 @@
 package vectorwing.farmersdelight.client.event;
 
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -91,8 +88,8 @@ public class ClientSetupEvents
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void registerParticles(RegisterParticleProvidersEvent event) {
-		event.registerSpriteSet(ModParticleTypes.STAR.get(), StarParticle.Factory::new);
-		event.registerSpriteSet(ModParticleTypes.STEAM.get(), SteamParticle.Factory::new);
-		event.registerSpriteSet(ModParticleTypes.SPARKLE.get(), SparkleParticle.Factory::new);
+		event.registerSpriteSet(ModParticleTypes.STAR.get(), StarParticle.Provider::new);
+		event.registerSpriteSet(ModParticleTypes.STEAM.get(), SteamParticle.Provider::new);
+		event.registerSpriteSet(ModParticleTypes.SPARKLE.get(), SparkleParticle.Provider::new);
 	}
 }

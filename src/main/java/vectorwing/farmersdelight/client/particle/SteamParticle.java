@@ -1,15 +1,19 @@
 package vectorwing.farmersdelight.client.particle;
 
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SingleQuadParticle;
+import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.RandomSource;
 
-import javax.annotation.Nonnull;
-
-public class SteamParticle extends TextureSheetParticle
+public class SteamParticle extends SingleQuadParticle
 {
-	protected SteamParticle(ClientLevel level, double x, double y, double z, double motionX, double motionY, double motionZ) {
-		super(level, x, y, z);
+//	private final SpriteSet sprites;
+
+	protected SteamParticle(ClientLevel level, double x, double y, double z, double motionX, double motionY, double motionZ, SpriteSet sprites) {
+		super(level, x, y, z, sprites.first());
 		this.scale(2.0F);
 		this.setSize(0.25F, 0.25F);
 
@@ -19,12 +23,13 @@ public class SteamParticle extends TextureSheetParticle
 		this.xd = motionX;
 		this.yd = motionY + (double) (this.random.nextFloat() / 500.0F);
 		this.zd = motionZ;
+
+//		this.sprites = sprites;
 	}
 
 	@Override
-	@Nonnull
-	public ParticleRenderType getRenderType() {
-		return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+	protected Layer getLayer() {
+		return Layer.TRANSLUCENT;
 	}
 
 	public void tick() {
@@ -44,19 +49,18 @@ public class SteamParticle extends TextureSheetParticle
 		}
 	}
 
-	public static class Factory implements ParticleProvider<SimpleParticleType>
+	public static class Provider implements ParticleProvider<SimpleParticleType>
 	{
 		private final SpriteSet spriteSet;
 
-		public Factory(SpriteSet sprite) {
+		public Provider(SpriteSet sprite) {
 			this.spriteSet = sprite;
 		}
 
 		@Override
-		public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-			SteamParticle particle = new SteamParticle(level, x, y + 0.3D, z, xSpeed, ySpeed, zSpeed);
+		public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource random) {
+			SteamParticle particle = new SteamParticle(level, x, y + 0.3D, z, xSpeed, ySpeed, zSpeed, this.spriteSet);
 			particle.setAlpha(0.6F);
-			particle.pickSprite(this.spriteSet);
 			return particle;
 		}
 	}
