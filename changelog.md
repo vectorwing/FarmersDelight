@@ -138,6 +138,11 @@
   - `pie` -> `template_pie`;
   - `pie_slice[1-3]` -> `template_pie_slice[1-3]`;
 
+## 1.2.11a
+
+### Fixes
+- Fix block entities not clearing properly on contraption mods;
+
 ## 1.2.11
 
 ### Updates

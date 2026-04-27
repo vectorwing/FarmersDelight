@@ -14,6 +14,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.world.Clearable;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
@@ -49,7 +50,7 @@ import java.util.List;
 import java.util.Optional;
 
 @EventBusSubscriber(modid = FarmersDelight.MODID)
-public class CuttingBoardBlockEntity extends SyncedBlockEntity
+public class CuttingBoardBlockEntity extends SyncedBlockEntity implements Clearable
 {
 	private final ItemStackHandler inventory;
 	private final RecipeManager.CachedCheck<CuttingBoardRecipeInput, CuttingBoardRecipe> quickCheck;
@@ -230,5 +231,10 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity
 				inventoryChanged();
 			}
 		};
+	}
+
+	@Override
+	public void clearContent() {
+		ItemUtils.clearItems(inventory);
 	}
 }

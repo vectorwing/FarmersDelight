@@ -11,6 +11,7 @@ import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.items.IItemHandler;
 import vectorwing.farmersdelight.common.item.KnifeItem;
 import vectorwing.farmersdelight.common.tag.ModTags;
+import net.neoforged.neoforge.items.ItemStackHandler;
 
 /**
  * Util for handling ItemStacks and inventories containing them.
@@ -34,6 +35,12 @@ public class ItemUtils
 	public static void dropItems(Level level, BlockPos pos, IItemHandler inventory) {
 		for (int slot = 0; slot < inventory.getSlots(); slot++)
 			Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), inventory.getStackInSlot(slot));
+	}
+
+	public static void clearItems(ItemStackHandler inventory) {
+		for (int i = 0; i < inventory.getSlots(); i++) {
+			inventory.setStackInSlot(i, ItemStack.EMPTY);
+		}
 	}
 
 	public static boolean doesInventoryHaveItems(IItemHandler inventory) {
