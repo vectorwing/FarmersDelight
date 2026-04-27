@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.*;
@@ -36,12 +36,12 @@ public class BlockStates extends BlockStateProvider
 		return BuiltInRegistries.BLOCK.getKey(block).getPath();
 	}
 
-	public ResourceLocation resourceMCBlock(String path) {
-		return ResourceLocation.withDefaultNamespace(ModelProvider.BLOCK_FOLDER + "/" + path);
+	public Identifier resourceMCBlock(String path) {
+		return Identifier.withDefaultNamespace(ModelProvider.BLOCK_FOLDER + "/" + path);
 	}
 
-	public ResourceLocation resourceFDBlock(String path) {
-		return ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, ModelProvider.BLOCK_FOLDER + "/" + path);
+	public Identifier resourceFDBlock(String path) {
+		return Identifier.fromNamespaceAndPath(FarmersDelight.MODID, ModelProvider.BLOCK_FOLDER + "/" + path);
 	}
 
 	public ModelFile existingModel(Block block) {
@@ -126,7 +126,7 @@ public class BlockStates extends BlockStateProvider
 
 		ModelFile odd = existingModel("tatami_odd");
 		ModelFile even = existingModel("tatami_even");
-		ModelFile notPaired = models().cubeAll(blockName(ModBlocks.TATAMI.get()) + "_half", ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "block/tatami_mat_half"));
+		ModelFile notPaired = models().cubeAll(blockName(ModBlocks.TATAMI.get()) + "_half", Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/tatami_mat_half"));
 		this.getVariantBuilder(ModBlocks.TATAMI.get()).forAllStates(state -> {
 			Direction dir = state.getValue(TatamiBlock.FACING);
 			return ConfiguredModel.builder().modelFile(state.getValue(TatamiBlock.PAIRED) ? dir.get3DDataValue() % 2 == 0 ? even : odd : notPaired)
@@ -337,7 +337,7 @@ public class BlockStates extends BlockStateProvider
 		}, ignored);
 	}
 
-	public void customStageBlock(Block block, @Nullable ResourceLocation parent, String textureKey, IntegerProperty ageProperty, List<Integer> suffixes, Property<?>... ignored) {
+	public void customStageBlock(Block block, @Nullable Identifier parent, String textureKey, IntegerProperty ageProperty, List<Integer> suffixes, Property<?>... ignored) {
 		getVariantBuilder(block).forAllStatesExcept(state -> {
 			int age = state.getValue(ageProperty);
 			String stageName = blockName(block) + "_stage";

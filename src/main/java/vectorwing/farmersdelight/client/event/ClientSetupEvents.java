@@ -33,7 +33,7 @@ import vectorwing.farmersdelight.common.registry.*;
 public class ClientSetupEvents
 {
 	public static void init(final FMLClientSetupEvent event) {
-		event.enqueueWork(() -> ItemProperties.register(ModItems.SKILLET.get(), ResourceLocation.withDefaultNamespace("cooking"),
+		event.enqueueWork(() -> ItemProperties.register(ModItems.SKILLET.get(), Identifier.withDefaultNamespace("cooking"),
 			(stack, world, entity, s) -> stack.getOrDefault(ModDataComponents.SKILLET_INGREDIENT, ItemStackWrapper.EMPTY).getStack().isEmpty() ? 0 : 1)
 		);
 	}

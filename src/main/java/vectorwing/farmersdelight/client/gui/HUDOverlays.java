@@ -5,7 +5,7 @@ import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -32,17 +32,17 @@ public class HUDOverlays
 {
 	public static int healthIconsOffset;
 	public static int foodIconsOffset;
-	private static final ResourceLocation MOD_ICONS_TEXTURE = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "textures/gui/fd_icons.png");
+	private static final Identifier MOD_ICONS_TEXTURE = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "textures/gui/fd_icons.png");
 
 	public static void register(RegisterGuiLayersEvent event) {
 		event.registerBelow(
 				VanillaGuiLayers.PLAYER_HEALTH,
-				ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "health_offset"),
+				Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "health_offset"),
 				(guiGraphics, deltaTracker) -> healthIconsOffset = Minecraft.getInstance().gui.leftHeight
 		);
 		event.registerBelow(
 				VanillaGuiLayers.FOOD_LEVEL,
-				ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "food_offset"),
+				Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "food_offset"),
 				(guiGraphics, deltaTracker) -> foodIconsOffset = Minecraft.getInstance().gui.rightHeight
 		);
 		event.registerAbove(VanillaGuiLayers.PLAYER_HEALTH, ComfortOverlay.ID, new ComfortOverlay());
@@ -73,7 +73,7 @@ public class HUDOverlays
 
 	public static class NourishmentOverlay extends BaseOverlay
 	{
-		public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "nourishment");
+		public static final Identifier ID = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "nourishment");
 
 		@Override
 		public void render(Minecraft minecraft, Player player, GuiGraphics guiGraphics, int left, int right, int top, int guiTicks) {

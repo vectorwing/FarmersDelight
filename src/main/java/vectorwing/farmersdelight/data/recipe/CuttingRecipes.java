@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.data.recipe;
 
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -368,7 +368,7 @@ public class CuttingRecipes
 		return CompoundIngredient.of(new ItemAbilityIngredient(toolAction).toVanilla(), Ingredient.of(fallbackTag));
 	}
 
-	private static ResourceLocation salvagingRecipe(String name) {
+	private static Identifier salvagingRecipe(String name) {
 		return ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "salvaging/" + name);
 	}
 }

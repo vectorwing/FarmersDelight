@@ -3,7 +3,7 @@ package vectorwing.farmersdelight.common.loot.function;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -22,7 +22,7 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public class CopySkilletFunction extends LootItemConditionalFunction
 {
-	public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "copy_skillet");
+	public static final Identifier ID = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "copy_skillet");
 	public static final MapCodec<CopySkilletFunction> CODEC = RecordCodecBuilder.mapCodec(
 			p_298131_ -> commonFields(p_298131_).apply(p_298131_, CopySkilletFunction::new)
 	);

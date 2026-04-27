@@ -3,7 +3,7 @@ package vectorwing.farmersdelight.data;
 import com.google.common.collect.Sets;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
@@ -22,7 +22,7 @@ public class ItemModels extends ItemModelProvider
 {
 	public static final String GENERATED = "item/generated";
 	public static final String HANDHELD = "item/handheld";
-	public static final ResourceLocation MUG = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "item/mug");
+	public static final Identifier MUG = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "item/mug");
 
 	public ItemModels(PackOutput output, ExistingFileHelper existingFileHelper) {
 		super(output, FarmersDelight.MODID, existingFileHelper);
@@ -156,19 +156,19 @@ public class ItemModels extends ItemModelProvider
 		withExistingParent(itemName(item), resourceBlock(itemName(item) + suffix));
 	}
 
-	public void blockBasedModel(Item item, ResourceLocation block) {
+	public void blockBasedModel(Item item, Identifier block) {
 		withExistingParent(itemName(item), block);
 	}
 
-	public void itemHandheldModel(Item item, ResourceLocation texture) {
+	public void itemHandheldModel(Item item, Identifier texture) {
 		withExistingParent(itemName(item), HANDHELD).texture("layer0", texture);
 	}
 
-	public void itemGeneratedModel(Item item, ResourceLocation texture) {
+	public void itemGeneratedModel(Item item, Identifier texture) {
 		withExistingParent(itemName(item), GENERATED).texture("layer0", texture);
 	}
 
-	public void itemMugModel(Item item, ResourceLocation texture) {
+	public void itemMugModel(Item item, Identifier texture) {
 		withExistingParent(itemName(item), MUG).texture("layer0", texture);
 	}
 
@@ -176,12 +176,12 @@ public class ItemModels extends ItemModelProvider
 		return BuiltInRegistries.ITEM.getKey(item).getPath();
 	}
 
-	public ResourceLocation resourceBlock(String path) {
-		return ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "block/" + path);
+	public Identifier resourceBlock(String path) {
+		return Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/" + path);
 	}
 
-	public ResourceLocation resourceItem(String path) {
-		return ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "item/" + path);
+	public Identifier resourceItem(String path) {
+		return Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "item/" + path);
 	}
 
 	@SafeVarargs

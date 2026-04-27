@@ -12,7 +12,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -129,7 +129,7 @@ public class CookingPotRecipeBuilder implements RecipeBuilder
 		return this;
 	}
 
-	public static ResourceLocation getDefaultRecipeId(ItemLike itemLike) {
+	public static Identifier getDefaultRecipeId(ItemLike itemLike) {
 		return Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(itemLike.asItem()));
 	}
 
@@ -141,22 +141,22 @@ public class CookingPotRecipeBuilder implements RecipeBuilder
 	}
 
 	public void save(RecipeOutput output) {
-		ResourceLocation defaultLocation = getDefaultRecipeId(result);
-		save(output, ResourceLocation.fromNamespaceAndPath(this.namespace != null ? namespace : defaultLocation.getNamespace(), defaultLocation.getPath()).withPrefix("cooking/"));
+		Identifier defaultLocation = getDefaultRecipeId(result);
+		save(output, Identifier.fromNamespaceAndPath(this.namespace != null ? namespace : defaultLocation.getNamespace(), defaultLocation.getPath()).withPrefix("cooking/"));
 	}
 
 //	public void build(RecipeOutput outputIn, String save) {
-//		ResourceLocation resourcelocation = BuiltInRegistries.ITEM.getKey(result);
-//		if ((ResourceLocation.parse(save)).equals(resourcelocation)) {
+//		Identifier resourcelocation = BuiltInRegistries.ITEM.getKey(result);
+//		if ((Identifier.parse(save)).equals(resourcelocation)) {
 //			throw new IllegalStateException("Cooking Recipe " + save + " should remove its 'save' argument");
 //		} else {
-//			save(outputIn, ResourceLocation.parse(save));
+//			save(outputIn, Identifier.parse(save));
 //		}
 //	}
 
 	@Override
-	public void save(RecipeOutput output, ResourceLocation id) {
-		ResourceLocation recipeId = id;
+	public void save(RecipeOutput output, Identifier id) {
+		Identifier recipeId = id;
 		Advancement.Builder advancementBuilder = output.advancement()
 				.addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeId))
 				.rewards(AdvancementRewards.Builder.recipe(recipeId))
