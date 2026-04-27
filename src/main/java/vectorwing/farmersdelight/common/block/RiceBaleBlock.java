@@ -25,8 +25,8 @@ public class RiceBaleBlock extends Block
 	}
 
 	@Override
-	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
-		entityIn.causeFallDamage(fallDistance, 0.2F, level.damageSources().fall());
+	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+		entity.causeFallDamage(fallDistance, 0.2F, level.damageSources().fall());
 	}
 
 	@Override
@@ -35,12 +35,12 @@ public class RiceBaleBlock extends Block
 	}
 
 	@Override
-	public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+	public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction face) {
 		return 60;
 	}
 
 	@Override
-	public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+	public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction face) {
 		return 20;
 	}
 
@@ -50,8 +50,8 @@ public class RiceBaleBlock extends Block
 	}
 
 	@Override
-	public BlockState rotate(BlockState state, Rotation rot) {
-		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
+	public BlockState rotate(BlockState state, Rotation rotation) {
+		return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
 	}
 
 	@Override

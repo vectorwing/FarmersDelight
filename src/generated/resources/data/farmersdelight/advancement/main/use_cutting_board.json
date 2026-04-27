@@ -8,14 +8,14 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "farmersdelight.advancement.use_cutting_board.desc"
+      "translate": "advancements.farmersdelight.use_cutting_board.description"
     },
     "icon": {
       "count": 1,
       "id": "farmersdelight:cutting_board"
     },
     "title": {
-      "translate": "farmersdelight.advancement.use_cutting_board"
+      "translate": "advancements.farmersdelight.use_cutting_board.title"
     }
   },
   "requirements": [

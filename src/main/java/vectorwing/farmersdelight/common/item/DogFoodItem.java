@@ -45,7 +45,7 @@ public class DogFoodItem extends ConsumableItem
 		super(properties);
 	}
 
-	@EventBusSubscriber(modid = FarmersDelight.MODID, bus = EventBusSubscriber.Bus.GAME)
+	@EventBusSubscriber(modid = FarmersDelight.MODID)
 	public static class DogFoodEvent
 	{
 		@SubscribeEvent
@@ -55,7 +55,7 @@ public class DogFoodItem extends ConsumableItem
 			Entity target = event.getTarget();
 			ItemStack itemStack = event.getItemStack();
 
-			if (target instanceof LivingEntity entity && target.getType().is(ModTags.DOG_FOOD_USERS)) {
+			if (target instanceof LivingEntity entity && target.getType().is(ModTags.EntityTypes.DOG_FOOD_USERS)) {
 				boolean isTameable = entity instanceof TamableAnimal;
 
 				if (entity.isAlive() && (!isTameable || ((TamableAnimal) entity).isTame()) && itemStack.getItem().equals(ModItems.DOG_FOOD.get())) {
@@ -86,11 +86,11 @@ public class DogFoodItem extends ConsumableItem
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
-		if (!Configuration.FOOD_EFFECT_TOOLTIP.get()) {
+		if (!Configuration.ENABLE_FOOD_EFFECT_TOOLTIP.get()) {
 			return;
 		}
 
-		MutableComponent textWhenFeeding = TextUtils.getTranslation("tooltip.dog_food.when_feeding");
+		MutableComponent textWhenFeeding = TextUtils.tooltip("dog_food.when_feeding");
 		tooltip.add(textWhenFeeding.withStyle(ChatFormatting.GRAY));
 
 		for (MobEffectInstance effectInstance : EFFECTS) {
@@ -112,7 +112,7 @@ public class DogFoodItem extends ConsumableItem
 	}
 
 	@Override
-	public InteractionResult interactLivingEntity(ItemStack stack, Player playerIn, LivingEntity target, InteractionHand hand) {
+	public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
 		if (target instanceof Wolf wolf) {
 			if (wolf.isAlive() && wolf.isTame()) {
 				return InteractionResult.SUCCESS;

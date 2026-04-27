@@ -6,7 +6,7 @@
       "tag": "c:drinks/milk"
     },
     "w": {
-      "item": "minecraft:wheat"
+      "tag": "c:crops/wheat"
     }
   },
   "pattern": [

@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "farmersdelight:vanilla_crates_enabled"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "minecraft:carrot"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:carrot_crate"
+  }
+}

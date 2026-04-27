@@ -1,0 +1,58 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "item": "minecraft:birch_door"
+        },
+        {
+          "item": "minecraft:birch_trapdoor"
+        },
+        {
+          "item": "minecraft:birch_sign"
+        },
+        {
+          "item": "minecraft:birch_hanging_sign"
+        },
+        {
+          "item": "minecraft:birch_fence"
+        },
+        {
+          "item": "minecraft:birch_fence_gate"
+        },
+        {
+          "item": "minecraft:birch_pressure_plate"
+        },
+        {
+          "item": "minecraft:birch_button"
+        },
+        {
+          "item": "minecraft:birch_boat"
+        },
+        {
+          "item": "farmersdelight:birch_cabinet"
+        }
+      ]
+    }
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "count": 1,
+        "id": "minecraft:birch_planks"
+      }
+    }
+  ],
+  "tool": [
+    {
+      "type": "farmersdelight:item_ability",
+      "action": "axe_dig"
+    },
+    {
+      "tag": "minecraft:axes"
+    }
+  ]
+}

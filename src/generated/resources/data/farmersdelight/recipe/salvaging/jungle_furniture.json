@@ -1,0 +1,58 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "item": "minecraft:jungle_door"
+        },
+        {
+          "item": "minecraft:jungle_trapdoor"
+        },
+        {
+          "item": "minecraft:jungle_sign"
+        },
+        {
+          "item": "minecraft:jungle_hanging_sign"
+        },
+        {
+          "item": "minecraft:jungle_fence"
+        },
+        {
+          "item": "minecraft:jungle_fence_gate"
+        },
+        {
+          "item": "minecraft:jungle_pressure_plate"
+        },
+        {
+          "item": "minecraft:jungle_button"
+        },
+        {
+          "item": "minecraft:jungle_boat"
+        },
+        {
+          "item": "farmersdelight:jungle_cabinet"
+        }
+      ]
+    }
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "count": 1,
+        "id": "minecraft:jungle_planks"
+      }
+    }
+  ],
+  "tool": [
+    {
+      "type": "farmersdelight:item_ability",
+      "action": "axe_dig"
+    },
+    {
+      "tag": "minecraft:axes"
+    }
+  ]
+}

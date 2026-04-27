@@ -3,6 +3,7 @@ package vectorwing.farmersdelight.integration.jei.category;
 import com.google.common.collect.ImmutableList;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -15,8 +16,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -28,8 +29,9 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 import vectorwing.farmersdelight.integration.jei.FDRecipeTypes;
 import vectorwing.farmersdelight.integration.jei.resource.DecompositionDummy;
 
-import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -50,7 +52,7 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 	private final ItemStack richSoil;
 
 	public DecompositionRecipeCategory(IGuiHelper helper) {
-		title = TextUtils.getTranslation("jei.decomposition");
+		title = TextUtils.JEI("decomposition");
 		ResourceLocation backgroundImage = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "textures/gui/jei/decomposition.png");
 		background = helper.createDrawable(backgroundImage, 0, 0, 118, 80);
 		organicCompost = new ItemStack(ModBlocks.ORGANIC_COMPOST.get());
@@ -71,7 +73,17 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 
 	@Override
 	public IDrawable getBackground() {
-		return this.background;
+		return null;
+	}
+
+	@Override
+	public int getWidth() {
+		return 118;
+	}
+
+	@Override
+	public int getHeight() {
+		return 80;
 	}
 
 	@Override
@@ -82,7 +94,7 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, DecompositionDummy recipe, IFocusGroup focusGroup) {
 		List<ItemStack> accelerators = new ArrayList<>();
-		BuiltInRegistries.BLOCK.getTag(ModTags.COMPOST_ACTIVATORS).ifPresent(s -> s.forEach(f -> accelerators.add(new ItemStack(f.value()))));
+		BuiltInRegistries.BLOCK.getTag(ModTags.Blocks.COMPOST_ACTIVATORS).ifPresent(s -> s.forEach(f -> accelerators.add(new ItemStack(f.value()))));
 
 		builder.addSlot(RecipeIngredientRole.INPUT, 9, 26).addItemStack(organicCompost);
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 93, 26).addItemStack(richSoil);
@@ -91,24 +103,21 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 
 	@Override
 	public void draw(DecompositionDummy recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-		this.slotIcon.draw(guiGraphics, 63, 53);
+		background.draw(guiGraphics, 0, 0);
+		slotIcon.draw(guiGraphics, 63, 53);
 	}
 
 	@Override
-	public List<Component> getTooltipStrings(DecompositionDummy recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+	public void getTooltip(ITooltipBuilder tooltip, DecompositionDummy recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
 		if (ClientRenderUtils.isCursorInsideBounds(40, 38, 11, 11, mouseX, mouseY)) {
-			return ImmutableList.of(translateKey(".light"));
+			tooltip.add(TextUtils.JEI("decomposition.light"));
 		}
 		if (ClientRenderUtils.isCursorInsideBounds(53, 38, 11, 11, mouseX, mouseY)) {
-			return ImmutableList.of(translateKey(".fluid"));
+			tooltip.add(TextUtils.JEI("decomposition.fluid"));
 		}
 		if (ClientRenderUtils.isCursorInsideBounds(67, 38, 11, 11, mouseX, mouseY)) {
-			return ImmutableList.of(translateKey(".accelerators"));
+			tooltip.add(TextUtils.JEI("decomposition.accelerators"));
 		}
-		return Collections.emptyList();
-	}
-
-	private static MutableComponent translateKey(@Nonnull String suffix) {
-		return Component.translatable(FarmersDelight.MODID + ".jei.decomposition" + suffix);
 	}
 }
+

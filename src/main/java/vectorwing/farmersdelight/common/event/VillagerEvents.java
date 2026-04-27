@@ -26,7 +26,7 @@ public class VillagerEvents
 {
 	@SubscribeEvent
 	public static void onVillagerTrades(VillagerTradesEvent event) {
-		if (!Configuration.FARMERS_BUY_FD_CROPS.get()) return;
+		if (!Configuration.ENABLE_FARMERS_BUY_FD_CROPS.get()) return;
 
 		Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
 		VillagerProfession profession = event.getType();
@@ -42,7 +42,7 @@ public class VillagerEvents
 
 	@SubscribeEvent
 	public static void onWandererTrades(WandererTradesEvent event) {
-		if (Configuration.WANDERING_TRADER_SELLS_FD_ITEMS.get()) {
+		if (Configuration.ENABLE_WANDERING_TRADER_SELLS_FD_ITEMS.get()) {
 			List<VillagerTrades.ItemListing> trades = event.getGenericTrades();
 			trades.add(itemForEmeraldTrade(ModItems.CABBAGE_SEEDS.get(), 1, 12));
 			trades.add(itemForEmeraldTrade(ModItems.TOMATO_SEEDS.get(), 1, 12));

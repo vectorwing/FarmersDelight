@@ -1,0 +1,59 @@
+{
+  "format_version": "1.9.0",
+  "parent": "block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "farmersdelight:block/rope_fence_gate",
+    "all": "farmersdelight:block/rope_fence_gate",
+    "open": "farmersdelight:block/rope_fence_gate_open"
+  },
+  "elements": [
+    {
+      "name": "east_post",
+      "from": [14, 0, 7],
+      "to": [16, 14, 9],
+      "faces": {
+        "north": {"uv": [0, 2, 2, 16], "texture": "#all"},
+        "east": {"uv": [0, 2, 2, 16], "texture": "#all", "cullface": "east"},
+        "south": {"uv": [0, 2, 2, 16], "texture": "#all"},
+        "west": {"uv": [0, 2, 2, 16], "texture": "#all"},
+        "up": {"uv": [2, 14, 4, 16], "texture": "#all"},
+        "down": {"uv": [2, 14, 4, 16], "texture": "#all", "cullface": "down"}
+      }
+    },
+    {
+      "name": "west_post",
+      "from": [0, 0, 7],
+      "to": [2, 14, 9],
+      "faces": {
+        "north": {"uv": [0, 2, 2, 16], "texture": "#all"},
+        "east": {"uv": [0, 2, 2, 16], "texture": "#all"},
+        "south": {"uv": [0, 2, 2, 16], "texture": "#all"},
+        "west": {"uv": [0, 2, 2, 16], "texture": "#all", "cullface": "west"},
+        "up": {"uv": [2, 14, 4, 16], "texture": "#all"},
+        "down": {"uv": [2, 14, 4, 16], "texture": "#all", "cullface": "down"}
+      }
+    },
+    {
+      "name": "coiled_gate",
+      "from": [1, 4, 6],
+      "to": [3, 12, 10],
+      "faces": {
+        "north": {"uv": [4, 0, 6, 8], "texture": "#open"},
+        "east": {"uv": [2, 0, 6, 8], "texture": "#open"},
+        "south": {"uv": [0, 0, 2, 8], "texture": "#open"},
+        "west": {"uv": [6, 0, 2, 8], "texture": "#open"},
+        "up": {"uv": [2, 3, 4, 7], "texture": "#open"},
+        "down": {"uv": [2, 2, 4, 6], "texture": "#open"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "open",
+      "origin": [15, 9, 8],
+      "color": 0,
+      "children": [0, 1, 2]
+    }
+  ]
+}

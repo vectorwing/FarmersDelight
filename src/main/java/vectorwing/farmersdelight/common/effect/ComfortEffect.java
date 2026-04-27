@@ -15,6 +15,7 @@ public class ComfortEffect extends MobEffect
 	 * Comfort does not care for amplifiers; it will always heal at the same slow pace.
 	 * If the player has saturation to spend, or has the Regeneration effect, Comfort does nothing.
 	 */
+	@Deprecated // Comfort is no longer used in Farmer's Delight, and will be removed in the next minor release. Use Nourishment instead.
 	public ComfortEffect() {
 		super(MobEffectCategory.BENEFICIAL, 14545909);
 	}

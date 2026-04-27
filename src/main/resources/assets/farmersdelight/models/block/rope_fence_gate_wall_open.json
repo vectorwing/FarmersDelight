@@ -1,0 +1,41 @@
+{
+  "format_version": "1.9.0",
+  "parent": "block/block",
+  "textures": {
+    "particle": "farmersdelight:block/rope_fence_gate",
+    "open": "farmersdelight:block/rope_fence_gate_open"
+  },
+  "elements": [
+    {
+      "name": "coiled_gate",
+      "from": [0, 5, 6],
+      "to": [2, 13, 10],
+      "faces": {
+        "north": {"uv": [4, 0, 6, 8], "texture": "#open"},
+        "east": {"uv": [2, 0, 6, 8], "texture": "#open"},
+        "south": {"uv": [0, 0, 2, 8], "texture": "#open"},
+        "west": {"uv": [6, 0, 2, 8], "texture": "#open"},
+        "up": {"uv": [2, 3, 4, 7], "texture": "#open"},
+        "down": {"uv": [2, 2, 4, 6], "texture": "#open"}
+      }
+    }
+  ],
+  "gui_light": "front",
+  "display": {
+    "gui": {
+      "rotation": [30, 45, 0],
+      "scale": [0.625, 0.7, 0.7]
+    },
+    "fixed": {
+      "scale": [0.5, 0.5, 0.5]
+    }
+  },
+  "groups": [
+    {
+      "name": "wall_open",
+      "origin": [15, 9, 8],
+      "color": 0,
+      "children": [0]
+    }
+  ]
+}

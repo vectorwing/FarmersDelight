@@ -22,13 +22,13 @@ public class CanvasSignEditScreenMixin
 	protected Minecraft minecraft;
 
 	@Inject(at = @At(value = "HEAD"), method = "openTextEdit", cancellable = true)
-	private void openCanvasSignEditScreen(SignBlockEntity signBlockEntity, boolean isFront, CallbackInfo ci) {
-		if (signBlockEntity instanceof CanvasSignBlockEntity) {
-			minecraft.setScreen(new CanvasSignEditScreen(signBlockEntity, isFront, minecraft.isTextFilteringEnabled()));
+	private void openCanvasSignEditScreen(SignBlockEntity sign, boolean isFront, CallbackInfo ci) {
+		if (sign instanceof CanvasSignBlockEntity) {
+			minecraft.setScreen(new CanvasSignEditScreen(sign, isFront, minecraft.isTextFilteringEnabled()));
 			ci.cancel();
 		}
-		if (signBlockEntity instanceof HangingCanvasSignBlockEntity) {
-			minecraft.setScreen(new HangingCanvasSignEditScreen(signBlockEntity, isFront, minecraft.isTextFilteringEnabled()));
+		if (sign instanceof HangingCanvasSignBlockEntity) {
+			minecraft.setScreen(new HangingCanvasSignEditScreen(sign, isFront, minecraft.isTextFilteringEnabled()));
 			ci.cancel();
 		}
 	}

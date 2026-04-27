@@ -1,5 +1,4 @@
 {
-  "credit": "Made with Blockbench",
   "render_type": "minecraft:cutout",
   "textures": {
     "all": "farmersdelight:block/rope",
@@ -15,8 +14,8 @@
         "east": {"uv": [7, 0, 9, 16], "texture": "#all"},
         "south": {"uv": [9, 0, 7, 16], "texture": "#all"},
         "west": {"uv": [7, 0, 9, 16], "texture": "#all"},
-        "up": {"uv": [7, 7, 9, 9], "texture": "#all"},
-        "down": {"uv": [7, 7, 9, 9], "texture": "#all"}
+        "up": {"uv": [7, 7, 9, 9], "texture": "#all", "cullface": "up"},
+        "down": {"uv": [7, 7, 9, 9], "texture": "#all", "cullface": "down"}
       }
     }
   ]

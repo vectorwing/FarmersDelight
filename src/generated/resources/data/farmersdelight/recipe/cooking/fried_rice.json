@@ -9,7 +9,7 @@
       "tag": "c:eggs"
     },
     {
-      "item": "minecraft:carrot"
+      "tag": "c:crops/carrot"
     },
     {
       "tag": "c:crops/onion"

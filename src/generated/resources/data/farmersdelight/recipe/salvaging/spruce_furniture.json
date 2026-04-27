@@ -1,0 +1,58 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "item": "minecraft:spruce_door"
+        },
+        {
+          "item": "minecraft:spruce_trapdoor"
+        },
+        {
+          "item": "minecraft:spruce_sign"
+        },
+        {
+          "item": "minecraft:spruce_hanging_sign"
+        },
+        {
+          "item": "minecraft:spruce_fence"
+        },
+        {
+          "item": "minecraft:spruce_fence_gate"
+        },
+        {
+          "item": "minecraft:spruce_pressure_plate"
+        },
+        {
+          "item": "minecraft:spruce_button"
+        },
+        {
+          "item": "minecraft:spruce_boat"
+        },
+        {
+          "item": "farmersdelight:spruce_cabinet"
+        }
+      ]
+    }
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "count": 1,
+        "id": "minecraft:spruce_planks"
+      }
+    }
+  ],
+  "tool": [
+    {
+      "type": "farmersdelight:item_ability",
+      "action": "axe_dig"
+    },
+    {
+      "tag": "minecraft:axes"
+    }
+  ]
+}

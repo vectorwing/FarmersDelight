@@ -8,10 +8,9 @@
             "condition": "minecraft:location_check",
             "predicate": {
               "block": {
-                "blocks": "farmersdelight:tomatoes",
+                "blocks": "farmersdelight:tomatoes_on_rope",
                 "state": {
-                  "age": "0",
-                  "ropelogged": "true"
+                  "age": "0"
                 }
               }
             }
@@ -24,14 +23,14 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "farmersdelight.advancement.harvest_ropelogged_tomato.desc"
+      "translate": "advancements.farmersdelight.harvest_ropelogged_tomato.description"
     },
     "icon": {
       "count": 1,
       "id": "farmersdelight:tomato"
     },
     "title": {
-      "translate": "farmersdelight.advancement.harvest_ropelogged_tomato"
+      "translate": "advancements.farmersdelight.harvest_ropelogged_tomato.title"
     }
   },
   "requirements": [

@@ -25,14 +25,14 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "farmersdelight.advancement.get_ham.desc"
+      "translate": "advancements.farmersdelight.get_ham.description"
     },
     "icon": {
       "count": 1,
       "id": "farmersdelight:ham"
     },
     "title": {
-      "translate": "farmersdelight.advancement.get_ham"
+      "translate": "advancements.farmersdelight.get_ham.title"
     }
   },
   "requirements": [

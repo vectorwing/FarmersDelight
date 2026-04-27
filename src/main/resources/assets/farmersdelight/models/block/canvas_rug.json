@@ -1,11 +1,11 @@
 {
-  "credit": "Made with Blockbench",
+  "format_version": "1.9.0",
   "render_type": "minecraft:cutout",
   "parent": "block/thin_block",
   "textures": {
     "particle": "farmersdelight:block/canvas_rug",
-    "body": "farmersdelight:block/canvas_rug",
-    "extrudes": "farmersdelight:block/canvas_rug_extrudes"
+    "rug": "farmersdelight:block/canvas_rug",
+    "fraying": "farmersdelight:block/canvas_rug_fraying"
   },
   "elements": [
     {
@@ -13,48 +13,48 @@
       "from": [0, 0, 0],
       "to": [16, 1, 16],
       "faces": {
-        "north": {"uv": [0, 1, 16, 2], "texture": "#body"},
-        "east": {"uv": [0, 1, 16, 2], "texture": "#body"},
-        "south": {"uv": [0, 1, 16, 2], "texture": "#body"},
-        "west": {"uv": [0, 1, 16, 2], "texture": "#body"},
-        "up": {"uv": [0, 0, 16, 16], "texture": "#body"},
-        "down": {"uv": [0, 16, 16, 0], "texture": "#body"}
+        "north": {"uv": [0, 1, 16, 2], "texture": "#rug", "cullface": "north"},
+        "east": {"uv": [0, 1, 16, 2], "texture": "#rug", "cullface": "east"},
+        "south": {"uv": [0, 1, 16, 2], "texture": "#rug", "cullface": "south"},
+        "west": {"uv": [0, 1, 16, 2], "texture": "#rug", "cullface": "west"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#rug"},
+        "down": {"uv": [0, 16, 16, 0], "texture": "#rug", "cullface": "down"}
       }
     },
     {
-      "name": "extrude north",
+      "name": "north_fraying",
       "from": [0, 0.999, -8],
       "to": [16, 0.999, 0],
       "faces": {
-        "up": {"uv": [0, 0, 16, 8], "rotation": 180, "texture": "#extrudes", "cullface": "north"},
-        "down": {"uv": [0, 8, 16, 0], "rotation": 180, "texture": "#extrudes", "cullface": "north"}
+        "up": {"uv": [0, 0, 16, 8], "rotation": 180, "texture": "#fraying", "cullface": "north"},
+        "down": {"uv": [0, 8, 16, 0], "rotation": 180, "texture": "#fraying", "cullface": "north"}
       }
     },
     {
-      "name": "extrude east",
+      "name": "east_fraying",
       "from": [16, 0.999, 0],
       "to": [24, 0.999, 16],
       "faces": {
-        "up": {"uv": [0, 8, 16, 16], "rotation": 270, "texture": "#extrudes", "cullface": "east"},
-        "down": {"uv": [0, 0, 16, 8], "rotation": 270, "texture": "#extrudes", "cullface": "east"}
+        "up": {"uv": [0, 8, 16, 16], "rotation": 270, "texture": "#fraying", "cullface": "east"},
+        "down": {"uv": [0, 0, 16, 8], "rotation": 270, "texture": "#fraying", "cullface": "east"}
       }
     },
     {
-      "name": "extrude south",
+      "name": "south_fraying",
       "from": [0, 0.999, 16],
       "to": [16, 0.999, 24],
       "faces": {
-        "up": {"uv": [0, 8, 16, 16], "texture": "#extrudes", "cullface": "south"},
-        "down": {"uv": [0, 16, 16, 8], "texture": "#extrudes", "cullface": "south"}
+        "up": {"uv": [0, 8, 16, 16], "texture": "#fraying", "cullface": "south"},
+        "down": {"uv": [0, 16, 16, 8], "texture": "#fraying", "cullface": "south"}
       }
     },
     {
-      "name": "extrude west",
+      "name": "west_fraying",
       "from": [-8, 0.999, 0],
       "to": [0, 0.999, 16],
       "faces": {
-        "up": {"uv": [0, 0, 16, 8], "rotation": 90, "texture": "#extrudes", "cullface": "west"},
-        "down": {"uv": [0, 8, 16, 16], "rotation": 90, "texture": "#extrudes", "cullface": "west"}
+        "up": {"uv": [0, 0, 16, 8], "rotation": 90, "texture": "#fraying", "cullface": "west"},
+        "down": {"uv": [0, 8, 16, 16], "rotation": 90, "texture": "#fraying", "cullface": "west"}
       }
     }
   ]

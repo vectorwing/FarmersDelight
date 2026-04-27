@@ -58,7 +58,7 @@ import java.util.Optional;
 
 import static java.util.Map.entry;
 
-@EventBusSubscriber(modid = FarmersDelight.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProvider, HeatableBlockEntity, Nameable, RecipeCraftingHolder, Clearable
 {
 	public static final int MEAL_DISPLAY_SLOT = 6;
@@ -66,7 +66,6 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	public static final int OUTPUT_SLOT = 8;
 	public static final int INVENTORY_SIZE = OUTPUT_SLOT + 1;
 
-	// TODO: Consider whether to leave this as-is, or open it to datapacks for modded cases.
 	public static final Map<Item, Item> INGREDIENT_REMAINDER_OVERRIDES = Map.ofEntries(
 			entry(Items.POWDER_SNOW_BUCKET, Items.BUCKET),
 			entry(Items.AXOLOTL_BUCKET, Items.BUCKET),
@@ -278,8 +277,10 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	}
 
 	protected boolean canCook(CookingPotRecipe recipe) {
+		if (level == null) return false;
+
 		if (hasInput()) {
-			ItemStack resultStack = recipe.assemble(new RecipeWrapper(this.inventory), this.level.registryAccess());
+			ItemStack resultStack = recipe.assemble(new RecipeWrapper(inventory), this.level.registryAccess());
 			if (resultStack.isEmpty()) {
 				return false;
 			} else {
@@ -310,7 +311,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 		cookTime = 0;
 		mealContainerStack = recipe.value().getOutputContainer();
-		ItemStack resultStack = recipe.value().assemble(new RecipeWrapper(this.inventory), this.level.registryAccess());
+		ItemStack resultStack = recipe.value().assemble(new RecipeWrapper(inventory), this.level.registryAccess());
 		ItemStack storedMealStack = inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
 		if (storedMealStack.isEmpty()) {
 			inventory.setStackInSlot(MEAL_DISPLAY_SLOT, resultStack.copy());
@@ -414,7 +415,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		int mealCount = Math.min(mealStack.getCount(), mealStack.getMaxStackSize() - outputStack.getCount());
 		if (outputStack.isEmpty()) {
 			inventory.setStackInSlot(OUTPUT_SLOT, mealStack.split(mealCount));
-		} else if (outputStack.getItem() == mealStack.getItem()) {
+		} else if (ItemStack.isSameItem(mealStack, outputStack)) {
 			mealStack.shrink(mealCount);
 			outputStack.grow(mealCount);
 		}
@@ -431,7 +432,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 			if (outputStack.isEmpty()) {
 				containerInputStack.shrink(mealCount);
 				inventory.setStackInSlot(OUTPUT_SLOT, mealStack.split(mealCount));
-			} else if (outputStack.getItem() == mealStack.getItem()) {
+			} else if (ItemStack.isSameItem(outputStack, mealStack)) {
 				mealStack.shrink(mealCount);
 				containerInputStack.shrink(mealCount);
 				outputStack.grow(mealCount);
@@ -460,7 +461,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 	@Override
 	public Component getName() {
-		return customName != null ? customName : TextUtils.getTranslation("container.cooking_pot");
+		return customName != null ? customName : TextUtils.container("cooking_pot");
 	}
 
 	@Override

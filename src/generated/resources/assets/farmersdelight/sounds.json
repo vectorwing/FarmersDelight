@@ -1,0 +1,166 @@
+{
+  "block.cabinet.close": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.barrel.close"
+      }
+    ],
+    "subtitle": "subtitles.farmersdelight.block.cabinet.close"
+  },
+  "block.cabinet.open": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.barrel.open"
+      }
+    ],
+    "subtitle": "subtitles.farmersdelight.block.cabinet.open"
+  },
+  "block.cooking_pot.boil": {
+    "sounds": [
+      "farmersdelight:block/cooking_pot/boil_water1",
+      "farmersdelight:block/cooking_pot/boil_water2"
+    ],
+    "subtitle": "subtitles.farmersdelight.block.cooking_pot.boil"
+  },
+  "block.cooking_pot.boil_soup": {
+    "sounds": [
+      "farmersdelight:block/cooking_pot/boil_soup1",
+      "farmersdelight:block/cooking_pot/boil_soup2",
+      "farmersdelight:block/cooking_pot/boil_soup3"
+    ],
+    "subtitle": "subtitles.farmersdelight.block.cooking_pot.boil"
+  },
+  "block.cutting_board.carve_tool": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.wood.place"
+      }
+    ],
+    "subtitle": "subtitles.farmersdelight.block.cutting_board.carve_tool"
+  },
+  "block.cutting_board.knife_cut": {
+    "sounds": [
+      "farmersdelight:block/cutting_board/knife1",
+      "farmersdelight:block/cutting_board/knife2"
+    ],
+    "subtitle": "subtitles.farmersdelight.block.cutting_board.knife_cut"
+  },
+  "block.cutting_board.place_item": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.wood.place"
+      }
+    ],
+    "subtitle": "subtitles.farmersdelight.block.cutting_board.place_item"
+  },
+  "block.cutting_board.remove_item": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.wood.hit"
+      }
+    ],
+    "subtitle": "subtitles.farmersdelight.block.cutting_board.remove_item"
+  },
+  "block.food.slice": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.wool.break"
+      }
+    ],
+    "subtitle": "subtitles.farmersdelight.block.food.slice"
+  },
+  "block.food.take_portion": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "item.armor.equip_generic"
+      }
+    ],
+    "subtitle": "subtitles.farmersdelight.block.food.take_portion"
+  },
+  "block.rope_fence_gate.close": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.leash_knot.place"
+      }
+    ],
+    "subtitle": "subtitles.farmersdelight.block.rope_fence_gate.close"
+  },
+  "block.rope_fence_gate.open": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.leash_knot.break"
+      }
+    ],
+    "subtitle": "subtitles.farmersdelight.block.rope_fence_gate.open"
+  },
+  "block.skillet.add_food": {
+    "sounds": [
+      "farmersdelight:block/skillet/add_food1",
+      "farmersdelight:block/skillet/add_food2"
+    ],
+    "subtitle": "subtitles.farmersdelight.block.skillet.add_food"
+  },
+  "block.skillet.sizzle": {
+    "sounds": [
+      "farmersdelight:block/skillet/sizzle1",
+      "farmersdelight:block/skillet/sizzle2",
+      "farmersdelight:block/skillet/sizzle3"
+    ],
+    "subtitle": "subtitles.farmersdelight.block.skillet.sizzle"
+  },
+  "block.stove.crackle": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.campfire.crackle"
+      }
+    ],
+    "subtitle": "subtitles.farmersdelight.block.stove.crackle"
+  },
+  "block.tomatoes.pick_tomatoes": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.sweet_berry_bush.pick_berries"
+      }
+    ],
+    "subtitle": "subtitles.farmersdelight.block.tomatoes.pick_tomatoes"
+  },
+  "entity.rotten_tomato.hit": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.slime.attack"
+      }
+    ],
+    "subtitle": "subtitles.farmersdelight.entity.rotten_tomato.hit"
+  },
+  "entity.rotten_tomato.throw": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.snowball.throw"
+      }
+    ],
+    "subtitle": "subtitles.farmersdelight.entity.rotten_tomato.throw"
+  },
+  "item.skillet.attack.strong": {
+    "sounds": [
+      "farmersdelight:block/skillet/attack_strong"
+    ]
+  },
+  "item.skillet.attack.weak": {
+    "sounds": [
+      "farmersdelight:block/skillet/attack_weak"
+    ]
+  }
+}

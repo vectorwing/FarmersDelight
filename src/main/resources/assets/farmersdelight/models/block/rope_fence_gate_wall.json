@@ -1,0 +1,38 @@
+{
+  "format_version": "1.9.0",
+  "parent": "block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "farmersdelight:block/rope_fence_gate",
+    "all": "farmersdelight:block/rope_fence_gate_wall"
+  },
+  "elements": [
+    {
+      "name": "gate",
+      "from": [0, 4, 8],
+      "to": [16, 13, 8],
+      "faces": {
+        "north": {"uv": [0, 3, 16, 12], "texture": "#all"},
+        "south": {"uv": [0, 3, 16, 12], "texture": "#all"}
+      }
+    }
+  ],
+  "gui_light": "front",
+  "display": {
+    "gui": {
+      "rotation": [30, 45, 0],
+      "scale": [0.625, 0.7, 0.7]
+    },
+    "fixed": {
+      "scale": [0.5, 0.5, 0.5]
+    }
+  },
+  "groups": [
+    {
+      "name": "wall_closed",
+      "origin": [15, 9, 8],
+      "color": 0,
+      "children": [0]
+    }
+  ]
+}

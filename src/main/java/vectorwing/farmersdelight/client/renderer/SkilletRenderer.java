@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -24,10 +25,10 @@ public class SkilletRenderer implements BlockEntityRenderer<SkilletBlockEntity>
 	}
 
 	@Override
-	public void render(SkilletBlockEntity skilletEntity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
-		Direction direction = skilletEntity.getBlockState().getValue(StoveBlock.FACING);
-		IItemHandler inventory = skilletEntity.getInventory();
-		int posLong = (int) skilletEntity.getBlockPos().asLong();
+	public void render(SkilletBlockEntity skillet, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+		Direction direction = skillet.getBlockState().getValue(StoveBlock.FACING);
+		IItemHandler inventory = skillet.getInventory();
+		int posLong = (int) skillet.getBlockPos().asLong();
 
 		ItemStack stack = inventory.getStackInSlot(0);
 		int seed = stack.isEmpty() ? 187 : Item.getId(stack.getItem()) + stack.getDamageValue();
@@ -53,23 +54,20 @@ public class SkilletRenderer implements BlockEntityRenderer<SkilletBlockEntity>
 				// Resize the items
 				poseStack.scale(0.5F, 0.5F, 0.5F);
 
-				if (skilletEntity.getLevel() != null)
-					Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, combinedLight, combinedOverlay, poseStack, buffer, skilletEntity.getLevel(), posLong);
+				if (skillet.getLevel() != null)
+					Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, buffer, skillet.getLevel(), posLong);
 				poseStack.popPose();
 			}
 		}
 	}
 
 	protected int getModelCount(ItemStack stack) {
-		if (stack.getCount() > 48) {
-			return 5;
-		} else if (stack.getCount() > 32) {
-			return 4;
-		} else if (stack.getCount() > 16) {
-			return 3;
-		} else if (stack.getCount() > 1) {
-			return 2;
+		int modelCount = 1;
+
+		if (stack.getCount() > 1) {
+			modelCount += Mth.ceil(((float) stack.getCount() / stack.getMaxStackSize()) * 4);
 		}
-		return 1;
+
+		return modelCount;
 	}
 }

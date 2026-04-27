@@ -1,10 +1,11 @@
 {
-  "credit": "Made with Blockbench",
+  "format_version": "1.9.0",
+  "parent": "block/block",
   "textures": {
-    "particle": "farmersdelight:block/tatami_mat_even",
-    "even": "farmersdelight:block/tatami_mat_even",
-    "odd": "farmersdelight:block/tatami_mat_odd",
-    "half": "farmersdelight:block/tatami_mat_half",
+    "particle": "farmersdelight:block/tatami",
+    "inner": "farmersdelight:block/tatami",
+    "odd": "farmersdelight:block/tatami_odd",
+    "even": "farmersdelight:block/tatami_even",
     "side": "farmersdelight:block/tatami_mat_side"
   },
   "elements": [
@@ -13,12 +14,12 @@
       "from": [0, 0, 0],
       "to": [16, 2, 16],
       "faces": {
-        "north": {"uv": [0, 14, 16, 16], "rotation": 180, "texture": "#side"},
-        "east": {"uv": [0, 14, 16, 16], "rotation": 180, "texture": "#side"},
-        "south": {"uv": [0, 12, 16, 14], "rotation": 180, "texture": "#half"},
-        "west": {"uv": [0, 14, 16, 16], "rotation": 180, "texture": "#side"},
-        "up": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#odd"},
-        "down": {"uv": [0, 0, 16, 16], "rotation": 270, "texture": "#even"}
+        "north": {"uv": [0, 14, 16, 16], "texture": "#side", "cullface": "north"},
+        "east": {"uv": [0, 14, 16, 16], "texture": "#side", "cullface": "east"},
+        "south": {"uv": [0, 7, 16, 9], "texture": "#inner", "cullface": "south"},
+        "west": {"uv": [0, 14, 16, 16], "texture": "#side", "cullface": "west"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#odd"},
+        "down": {"uv": [0, 0, 16, 16], "texture": "#even", "cullface": "down"}
       }
     }
   ]

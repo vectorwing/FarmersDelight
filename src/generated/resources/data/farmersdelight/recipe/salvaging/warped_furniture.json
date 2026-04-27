@@ -1,0 +1,55 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "item": "minecraft:warped_door"
+        },
+        {
+          "item": "minecraft:warped_trapdoor"
+        },
+        {
+          "item": "minecraft:warped_sign"
+        },
+        {
+          "item": "minecraft:warped_hanging_sign"
+        },
+        {
+          "item": "minecraft:warped_fence"
+        },
+        {
+          "item": "minecraft:warped_fence_gate"
+        },
+        {
+          "item": "minecraft:warped_pressure_plate"
+        },
+        {
+          "item": "minecraft:warped_button"
+        },
+        {
+          "item": "farmersdelight:warped_cabinet"
+        }
+      ]
+    }
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "count": 1,
+        "id": "minecraft:warped_planks"
+      }
+    }
+  ],
+  "tool": [
+    {
+      "type": "farmersdelight:item_ability",
+      "action": "axe_dig"
+    },
+    {
+      "tag": "minecraft:axes"
+    }
+  ]
+}

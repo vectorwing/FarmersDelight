@@ -1,5 +1,5 @@
 {
-  "parent": "farmersdelight:main/eat_comfort_food",
+  "parent": "farmersdelight:main/place_cooking_pot",
   "criteria": {
     "nourishment": {
       "conditions": {
@@ -13,14 +13,14 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "farmersdelight.advancement.eat_nourishing_food.desc"
+      "translate": "advancements.farmersdelight.eat_nourishing_food.description"
     },
     "icon": {
       "count": 1,
       "id": "farmersdelight:steak_and_potatoes"
     },
     "title": {
-      "translate": "farmersdelight.advancement.eat_nourishing_food"
+      "translate": "advancements.farmersdelight.eat_nourishing_food.title"
     }
   },
   "requirements": [

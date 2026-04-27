@@ -3,10 +3,10 @@
   "experience": 1.0,
   "ingredients": [
     {
-      "item": "minecraft:carrot"
+      "tag": "c:crops/carrot"
     },
     {
-      "item": "minecraft:brown_mushroom"
+      "tag": "c:mushrooms"
     },
     {
       "tag": "c:foods/pasta"

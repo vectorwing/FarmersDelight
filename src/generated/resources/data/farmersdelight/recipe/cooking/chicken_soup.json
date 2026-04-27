@@ -6,7 +6,7 @@
       "tag": "c:foods/raw_chicken"
     },
     {
-      "item": "minecraft:carrot"
+      "tag": "c:crops/carrot"
     },
     {
       "tag": "c:foods/leafy_green"

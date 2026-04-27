@@ -4,7 +4,7 @@
   "group": "fd_apple_pie",
   "key": {
     "#": {
-      "item": "minecraft:wheat"
+      "tag": "c:crops/wheat"
     },
     "O": {
       "item": "farmersdelight:pie_crust"

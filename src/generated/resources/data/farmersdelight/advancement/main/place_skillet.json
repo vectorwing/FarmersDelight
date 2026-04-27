@@ -16,14 +16,14 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "farmersdelight.advancement.place_skillet.desc"
+      "translate": "advancements.farmersdelight.place_skillet.description"
     },
     "icon": {
       "count": 1,
       "id": "farmersdelight:skillet"
     },
     "title": {
-      "translate": "farmersdelight.advancement.place_skillet"
+      "translate": "advancements.farmersdelight.place_skillet.title"
     }
   },
   "requirements": [

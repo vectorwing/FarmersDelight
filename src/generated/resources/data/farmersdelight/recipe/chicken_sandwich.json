@@ -12,7 +12,7 @@
       "tag": "c:foods/leafy_green"
     },
     {
-      "item": "minecraft:carrot"
+      "tag": "c:crops/carrot"
     }
   ],
   "result": {
