@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Clearable;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
@@ -31,7 +32,7 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import java.util.Optional;
 
-public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlockEntity
+public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlockEntity, Clearable
 {
 	private final ItemStackHandler inventory = createHandler();
 	private int cookingTime;
@@ -224,5 +225,10 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 	@Override
 	public void setRemoved() {
 		super.setRemoved();
+	}
+
+	@Override
+	public void clearContent() {
+		ItemUtils.clearItems(inventory);
 	}
 }
