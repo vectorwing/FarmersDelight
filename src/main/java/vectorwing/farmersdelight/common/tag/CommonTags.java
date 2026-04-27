@@ -82,6 +82,6 @@ public class CommonTags
 	}
 
 	private static TagKey<Item> commonItemTag(String path) {
-		return ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", path));
+		return ItemTags.create(Identifier.fromNamespaceAndPath("c", path));
 	}
 }

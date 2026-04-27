@@ -139,6 +139,6 @@ public class ModTags
 	}
 
 	private static TagKey<EntityType<?>> modEntityTag(String path) {
-		return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, path));
+		return TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, path));
 	}
 }

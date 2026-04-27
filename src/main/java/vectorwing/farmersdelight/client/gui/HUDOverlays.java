@@ -100,7 +100,7 @@ public class HUDOverlays
 
 	public static class ComfortOverlay extends BaseOverlay
 	{
-		public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "comfort");
+		public static final Identifier ID = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "comfort");
 
 		@Override
 		public void render(Minecraft minecraft, Player player, GuiGraphics guiGraphics, int left, int right, int top, int guiTicks) {

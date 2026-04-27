@@ -369,6 +369,6 @@ public class CuttingRecipes
 	}
 
 	private static Identifier salvagingRecipe(String name) {
-		return ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "salvaging/" + name);
+		return Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "salvaging/" + name);
 	}
 }

@@ -22,7 +22,7 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public class CopySkilletFunction extends LootItemConditionalFunction
 {
-	public static final Identifier ID = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "copy_skillet");
+	public static final Identifier ID = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "copy_skillet");
 	public static final MapCodec<CopySkilletFunction> CODEC = RecordCodecBuilder.mapCodec(
 			p_298131_ -> commonFields(p_298131_).apply(p_298131_, CopySkilletFunction::new)
 	);

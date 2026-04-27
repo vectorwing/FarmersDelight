@@ -23,7 +23,7 @@ import java.util.Optional;
 @ParametersAreNonnullByDefault
 public class SmokerCookFunction extends LootItemConditionalFunction
 {
-	public static final Identifier ID = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "smoker_cook");
+	public static final Identifier ID = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "smoker_cook");
 	public static final MapCodec<SmokerCookFunction> CODEC = RecordCodecBuilder.mapCodec(
 			p_298131_ -> commonFields(p_298131_).apply(p_298131_, SmokerCookFunction::new)
 	);

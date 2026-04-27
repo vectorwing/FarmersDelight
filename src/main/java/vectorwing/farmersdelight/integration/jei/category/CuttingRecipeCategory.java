@@ -14,7 +14,7 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -40,7 +40,7 @@ public class CuttingRecipeCategory implements IRecipeCategory<RecipeHolder<Cutti
 
 	public CuttingRecipeCategory(IGuiHelper helper) {
 		title = TextUtils.JEI("cutting");
-		ResourceLocation backgroundImage = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "textures/gui/jei/cutting_board.png");
+		Identifier backgroundImage = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "textures/gui/jei/cutting_board.png");
 		slot = helper.createDrawable(backgroundImage, 0, 58, 18, 18);
 		slotChance = helper.createDrawable(backgroundImage, 18, 58, 18, 18);
 		background = helper.createDrawable(backgroundImage, 0, 0, 117, 57);

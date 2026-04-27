@@ -70,7 +70,7 @@ public class SkilletItem extends BlockItem
 	public static final float FLIP_TIME = 12;
 
 	public static final Tiers SKILLET_TIER = Tiers.IRON;
-	protected static final Identifier FD_ATTACK_KNOCKBACK_UUID = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "base_attack_knockback");
+	protected static final Identifier FD_ATTACK_KNOCKBACK_UUID = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "base_attack_knockback");
 
 	public SkilletItem(Block block, Item.Properties properties) {
 		super(block, properties.durability(SKILLET_TIER.getUses()));

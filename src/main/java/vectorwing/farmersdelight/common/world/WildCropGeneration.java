@@ -6,7 +6,7 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -59,11 +59,11 @@ public class WildCropGeneration
 	public static ResourceKey<PlacedFeature> PATCH_RED_MUSHROOM_COLONIES = registerPlacedFeatureKey("patch_red_mushroom_colony");
 
 	private static ResourceKey<ConfiguredFeature<?, ?>> registerConfiguredFeatureKey(String name) {
-		return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, name));
+		return ResourceKey.create(Registries.CONFIGURED_FEATURE, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, name));
 	}
 
 	private static ResourceKey<PlacedFeature> registerPlacedFeatureKey(String name) {
-		return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, name));
+		return ResourceKey.create(Registries.PLACED_FEATURE, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, name));
 	}
 
 	public static void bootstrapConfiguredFeatures(BootstrapContext<ConfiguredFeature<?, ?>> context) {

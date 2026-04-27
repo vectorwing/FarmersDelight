@@ -70,11 +70,11 @@ public class JEIPlugin implements IModPlugin
 
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-		registration.addRecipeCatalyst(new ItemStack(ModItems.COOKING_POT.get()), FDRecipeTypes.COOKING);
-		registration.addRecipeCatalyst(new ItemStack(ModItems.CUTTING_BOARD.get()), FDRecipeTypes.CUTTING);
-		registration.addRecipeCatalyst(new ItemStack(ModItems.STOVE.get()), RecipeTypes.CAMPFIRE_COOKING);
-		registration.addRecipeCatalyst(new ItemStack(ModItems.SKILLET.get()), RecipeTypes.CAMPFIRE_COOKING);
-		registration.addRecipeCatalyst(new ItemStack(ModBlocks.ORGANIC_COMPOST.get()), FDRecipeTypes.DECOMPOSITION);
+		registration.addCraftingStation(FDRecipeTypes.COOKING, new ItemStack(ModItems.COOKING_POT.get()));
+		registration.addCraftingStation(FDRecipeTypes.CUTTING, new ItemStack(ModItems.CUTTING_BOARD.get()));
+		registration.addCraftingStation(RecipeTypes.CAMPFIRE_COOKING, new ItemStack(ModItems.STOVE.get()));
+		registration.addCraftingStation(RecipeTypes.CAMPFIRE_COOKING, new ItemStack(ModItems.SKILLET.get()));
+		registration.addCraftingStation(FDRecipeTypes.DECOMPOSITION, new ItemStack(ModBlocks.ORGANIC_COMPOST.get()));
 	}
 
 	@Override
