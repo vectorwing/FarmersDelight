@@ -16,7 +16,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "farmersdelight.advancement.place_cooking_pot.desc"
+      "translate": "advancements.farmersdelight.place_cooking_pot.description"
     },
     "frame": "goal",
     "hidden": false,
@@ -25,7 +25,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "farmersdelight.advancement.place_cooking_pot"
+      "translate": "advancements.farmersdelight.place_cooking_pot.title"
     }
   },
   "requirements": [

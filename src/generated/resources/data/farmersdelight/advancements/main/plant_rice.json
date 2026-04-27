@@ -16,7 +16,7 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "farmersdelight.advancement.plant_rice.desc"
+      "translate": "advancements.farmersdelight.plant_rice.description"
     },
     "frame": "task",
     "hidden": false,
@@ -25,7 +25,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "farmersdelight.advancement.plant_rice"
+      "translate": "advancements.farmersdelight.plant_rice.title"
     }
   },
   "requirements": [

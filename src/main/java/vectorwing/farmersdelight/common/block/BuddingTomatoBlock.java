@@ -9,7 +9,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
@@ -21,13 +20,8 @@ public class BuddingTomatoBlock extends BuddingBushBlock implements Bonemealable
 	}
 
 	@Override
-	public BlockState getPlant(BlockGetter world, BlockPos pos) {
+	public BlockState getPlant(BlockGetter level, BlockPos pos) {
 		return ModBlocks.BUDDING_TOMATO_CROP.get().defaultBlockState();
-	}
-
-	@Override
-	protected boolean mayPlaceOn(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
-		return pState.is(ModBlocks.RICH_SOIL_FARMLAND.get()) || pState.is(Blocks.FARMLAND);
 	}
 
 	@Override
@@ -70,7 +64,7 @@ public class BuddingTomatoBlock extends BuddingBushBlock implements Bonemealable
 			level.setBlockAndUpdate(pos, state.setValue(AGE, ageGrowth));
 		} else {
 			int remainingGrowth = ageGrowth - maxAge - 1;
-			level.setBlockAndUpdate(pos, ModBlocks.TOMATO_CROP.get().defaultBlockState().setValue(TomatoVineBlock.VINE_AGE, remainingGrowth));
+			level.setBlockAndUpdate(pos, ModBlocks.TOMATO_CROP.get().defaultBlockState().setValue(TomatoBlock.VINE_AGE, remainingGrowth));
 		}
 	}
 }

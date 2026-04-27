@@ -5,8 +5,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.common.effect.ComfortEffect;
 import vectorwing.farmersdelight.common.effect.NourishmentEffect;
+import vectorwing.farmersdelight.common.effect.ComfortEffect;
 
 public class ModEffects
 {

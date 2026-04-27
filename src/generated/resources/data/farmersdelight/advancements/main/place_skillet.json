@@ -16,7 +16,7 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "farmersdelight.advancement.place_skillet.desc"
+      "translate": "advancements.farmersdelight.place_skillet.description"
     },
     "frame": "task",
     "hidden": false,
@@ -26,7 +26,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "farmersdelight.advancement.place_skillet"
+      "translate": "advancements.farmersdelight.place_skillet.title"
     }
   },
   "requirements": [

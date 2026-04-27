@@ -1,0 +1,84 @@
+{
+  "format_version": "1.9.0",
+  "parent": "block/block",
+  "textures": {
+    "tray": "farmersdelight:block/tray",
+    "tray_bottom": "farmersdelight:block/tray_bottom",
+    "particle": "farmersdelight:block/shepherds_pie_leftovers",
+    "leftovers": "farmersdelight:block/shepherds_pie_leftovers"
+  },
+  "elements": [
+    {
+      "name": "base",
+      "from": [1, 0, 1],
+      "to": [15, 1, 15],
+      "faces": {
+        "north": {"uv": [1, 15, 15, 16], "texture": "#tray"},
+        "east": {"uv": [1, 15, 15, 16], "texture": "#tray"},
+        "south": {"uv": [1, 15, 15, 16], "texture": "#tray"},
+        "west": {"uv": [1, 15, 15, 16], "texture": "#tray"},
+        "up": {"uv": [1, 1, 15, 15], "texture": "#leftovers"},
+        "down": {"uv": [1, 1, 15, 15], "texture": "#tray_bottom", "cullface": "down"}
+      }
+    },
+    {
+      "name": "north_edge",
+      "from": [2, 1, 1],
+      "to": [14, 2, 2],
+      "faces": {
+        "north": {"uv": [2, 14, 14, 15], "texture": "#tray"},
+        "south": {"uv": [2, 14, 14, 15], "texture": "#tray"},
+        "up": {"uv": [2, 0, 14, 1], "texture": "#tray"}
+      }
+    },
+    {
+      "name": "south_edge",
+      "from": [2, 1, 14],
+      "to": [14, 2, 15],
+      "faces": {
+        "north": {"uv": [2, 14, 14, 15], "texture": "#tray"},
+        "south": {"uv": [2, 14, 14, 15], "texture": "#tray"},
+        "up": {"uv": [2, 13, 14, 14], "texture": "#tray"}
+      }
+    },
+    {
+      "name": "west_edge",
+      "from": [1, 1, 1],
+      "to": [2, 2, 15],
+      "faces": {
+        "north": {"uv": [14, 14, 15, 15], "texture": "#tray"},
+        "east": {"uv": [1, 14, 15, 15], "texture": "#tray"},
+        "south": {"uv": [1, 14, 2, 15], "texture": "#tray"},
+        "west": {"uv": [1, 14, 15, 15], "texture": "#tray"},
+        "up": {"uv": [1, 0, 2, 14], "texture": "#tray"}
+      }
+    },
+    {
+      "name": "east_edge",
+      "from": [14, 1, 1],
+      "to": [15, 2, 15],
+      "faces": {
+        "north": {"uv": [1, 14, 2, 15], "texture": "#tray"},
+        "east": {"uv": [1, 14, 15, 15], "texture": "#tray"},
+        "south": {"uv": [14, 14, 15, 15], "texture": "#tray"},
+        "west": {"uv": [1, 14, 15, 15], "texture": "#tray"},
+        "up": {"uv": [14, 0, 15, 14], "texture": "#tray"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "leftovers",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [
+        {
+          "name": "tray",
+          "origin": [1, 0, 1],
+          "color": 0,
+          "children": [0, 1, 2, 3, 4]
+        }
+      ]
+    }
+  ]
+}

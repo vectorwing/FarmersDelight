@@ -1,0 +1,33 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    [
+      {
+        "item": "minecraft:leather_helmet"
+      },
+      {
+        "item": "minecraft:leather_chestplate"
+      },
+      {
+        "item": "minecraft:leather_leggings"
+      },
+      {
+        "item": "minecraft:leather_boots"
+      }
+    ]
+  ],
+  "result": [
+    {
+      "item": "minecraft:leather"
+    }
+  ],
+  "tool": [
+    {
+      "type": "farmersdelight:tool_action",
+      "action": "shears_dig"
+    },
+    {
+      "tag": "forge:shears"
+    }
+  ]
+}

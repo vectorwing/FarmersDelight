@@ -4,15 +4,15 @@ import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
-import vectorwing.farmersdelight.FarmersDelight;
+import net.minecraft.world.level.ItemLike;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
+import vectorwing.farmersdelight.common.utility.RecipeUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +28,7 @@ public class FDRecipes
 		if (level != null) {
 			this.recipeManager = level.getRecipeManager();
 		} else {
-			throw new NullPointerException("minecraft world must not be null.");
+			throw new NullPointerException("Minecraft level must not be null.");
 		}
 	}
 
@@ -40,22 +40,26 @@ public class FDRecipes
 		return recipeManager.getAllRecipesFor(ModRecipeTypes.CUTTING.get()).stream().toList();
 	}
 
-	public List<CraftingRecipe> getSpecialWheatDoughRecipe() {
-		Optional<? extends Recipe<?>> specialRecipe = recipeManager.byKey(new ResourceLocation(FarmersDelight.MODID, "wheat_dough_from_water"));
+	public List<CraftingRecipe> getSpecialCraftingRecipes() {
 		List<CraftingRecipe> recipes = Lists.newArrayList();
 
-		specialRecipe.ifPresent((recipe) -> {
-			NonNullList<Ingredient> inputs = NonNullList.of(
-					Ingredient.EMPTY,
-					Ingredient.of(Items.WHEAT),
-					Ingredient.of(Items.WATER_BUCKET)
-			);
-			ItemStack output = new ItemStack(ModItems.WHEAT_DOUGH.get());
-
-			ResourceLocation id = recipe.getId();
-			recipes.add(new ShapelessRecipe(id, "fd_dough", CraftingBookCategory.MISC, output, inputs));
-		});
+		addValidatedSpecialRecipe(recipes, "wheat_dough_from_water", "fd_dough",
+				NonNullList.of(
+						Ingredient.EMPTY,
+						Ingredient.of(Items.WHEAT),
+						Ingredient.of(Items.WATER_BUCKET)
+				),
+				ModItems.WHEAT_DOUGH.get()
+		);
 
 		return recipes;
+	}
+
+	public void addValidatedSpecialRecipe(List<CraftingRecipe> recipeList, String recipeId, String group, NonNullList<Ingredient> inputs, ItemLike output) {
+		Optional<? extends Recipe<?>> specialRecipe = recipeManager.byKey(RecipeUtils.FDLocation(recipeId));
+
+		specialRecipe.ifPresent((recipe) -> {
+			recipeList.add(new ShapelessRecipe(recipe.getId(), group, CraftingBookCategory.MISC, new ItemStack(output.asItem()), inputs));
+		});
 	}
 }

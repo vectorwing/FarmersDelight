@@ -3,6 +3,9 @@ package vectorwing.farmersdelight.common.block;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -27,12 +30,16 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.event.ForgeEventFactory;
-import vectorwing.farmersdelight.common.tag.ModTags;
+import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
+import vectorwing.farmersdelight.common.utility.ShapeUtils;
 
+import java.util.Map;
 import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")
@@ -41,7 +48,14 @@ public class PieBlock extends Block
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 3);
 
-	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 14.0D);
+	protected static final VoxelShape[] SHAPES = {
+			Block.box(2, 0, 2, 14, 4, 14),
+			Shapes.join(Block.box(2, 0, 8, 8, 4, 14), Block.box(2, 0, 2, 14, 4, 8), BooleanOp.OR),
+			Block.box(2, 0, 2, 14, 4, 8),
+			Block.box(8, 0, 2, 14, 4, 8)
+	};
+
+	private static final VoxelShape[][] ROTATED_SHAPES = buildShapes();
 
 	public final Supplier<Item> pieSlice;
 
@@ -61,7 +75,18 @@ public class PieBlock extends Block
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		return SHAPE;
+		return ROTATED_SHAPES[state.getValue(BITES)][state.getValue(FACING).get2DDataValue()];
+	}
+
+	private static VoxelShape[][] buildShapes() {
+		VoxelShape[][] result = new VoxelShape[SHAPES.length][4];
+		for (int i = 0; i < SHAPES.length; i++) {
+			Map<Direction, VoxelShape> rotated = ShapeUtils.getShapesRotatedFromNorth(SHAPES[i]);
+			for (Map.Entry<Direction, VoxelShape> entry : rotated.entrySet()) {
+				result[i][entry.getKey().get2DDataValue()] = entry.getValue();
+			}
+		}
+		return result;
 	}
 
 	@Override
@@ -73,7 +98,7 @@ public class PieBlock extends Block
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		ItemStack heldStack = player.getItemInHand(hand);
 		if (level.isClientSide) {
-			if (heldStack.is(ModTags.KNIVES)) {
+			if (ItemUtils.isKnife(heldStack)) {
 				return cutSlice(level, pos, state, player, heldStack.getItem());
 			}
 
@@ -86,7 +111,7 @@ public class PieBlock extends Block
 			}
 		}
 
-		if (heldStack.is(ModTags.KNIVES)) {
+		if (ItemUtils.isKnife(heldStack)) {
 			return cutSlice(level, pos, state, player, heldStack.getItem());
 		}
 		return this.consumeBite(level, pos, state, player);
@@ -95,21 +120,21 @@ public class PieBlock extends Block
 	/**
 	 * Eats a slice from the pie, feeding the player.
 	 */
-	protected InteractionResult consumeBite(Level level, BlockPos pos, BlockState state, Player playerIn) {
-		if (!playerIn.canEat(false)) {
+	protected InteractionResult consumeBite(Level level, BlockPos pos, BlockState state, Player player) {
+		if (!player.canEat(false)) {
 			return InteractionResult.PASS;
 		} else {
 			ItemStack sliceStack = this.getPieSliceItem();
 			ItemStack sliceCopy = sliceStack.copy();
 			FoodProperties sliceFood = sliceStack.getItem().getFoodProperties();
 
-			playerIn.getFoodData().eat(sliceStack.getItem(), sliceStack);
+			player.getFoodData().eat(sliceStack.getItem(), sliceStack);
 			// Fire an event for food-tracking mods like Spice of Life, but ignore the result.
-			ForgeEventFactory.onItemUseFinish(playerIn, sliceCopy, 0, ItemStack.EMPTY);
+			ForgeEventFactory.onItemUseFinish(player, sliceCopy, 0, ItemStack.EMPTY);
 			if (this.getPieSliceItem().getItem().isEdible() && sliceFood != null) {
 				for (Pair<MobEffectInstance, Float> pair : sliceFood.getEffects()) {
 					if (!level.isClientSide && pair.getFirst() != null && level.random.nextFloat() < pair.getSecond()) {
-						playerIn.addEffect(new MobEffectInstance(pair.getFirst()));
+						player.addEffect(new MobEffectInstance(pair.getFirst()));
 					}
 				}
 			}
@@ -121,6 +146,9 @@ public class PieBlock extends Block
 				level.removeBlock(pos, false);
 			}
 			level.playSound(null, pos, SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 0.8F, 0.8F);
+			if (level instanceof ServerLevel serverLevel) {
+				serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, state), pos.getX() + 0.5, pos.getY() + 0.3, pos.getZ() + 0.5, 3, 0.1, 0.1, 0.1, 0.001D);
+			}
 			return InteractionResult.SUCCESS;
 		}
 	}
@@ -139,20 +167,23 @@ public class PieBlock extends Block
 		Direction direction = player.getDirection().getOpposite();
 		ItemUtils.spawnItemEntity(level, this.getPieSliceItem(), pos.getX() + 0.5, pos.getY() + 0.3, pos.getZ() + 0.5,
 				direction.getStepX() * 0.15, 0.05, direction.getStepZ() * 0.15);
-		level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
+		level.playSound(null, pos, ModSounds.BLOCK_FOOD_SLICE.get(), SoundSource.PLAYERS, 0.8F, 0.8F);
+		if (level instanceof ServerLevel serverLevel) {
+			serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, state), pos.getX() + 0.5, pos.getY() + 0.3, pos.getZ() + 0.5, 3, 0.1, 0.1, 0.1, 0.001D);
+		}
 		player.awardStat(Stats.ITEM_USED.get(knife));
 
 		return InteractionResult.SUCCESS;
 	}
 
 	@Override
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-		return facing == Direction.DOWN && !stateIn.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, level, currentPos, facingPos);
+	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+		return facing == Direction.DOWN && !state.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, level, currentPos, facingPos);
 	}
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-		return level.getBlockState(pos.below()).isSolid();
+		return canSupportRigidBlock(level, pos.below());
 	}
 
 	@Override
@@ -161,8 +192,8 @@ public class PieBlock extends Block
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
-		return getMaxBites() - blockState.getValue(BITES);
+	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+		return getMaxBites() - state.getValue(BITES);
 	}
 
 	@Override

@@ -26,7 +26,7 @@ public class WildRiceFeature extends Feature<RandomPatchConfiguration>
 		WorldGenLevel level = context.level();
 		BlockPos origin = context.origin();
 		RandomPatchConfiguration config = context.config();
-		RandomSource rand = context.random();
+		RandomSource random = context.random();
 
 		BlockPos blockpos = level.getHeightmapPos(Heightmap.Types.OCEAN_FLOOR_WG, origin);
 
@@ -35,9 +35,9 @@ public class WildRiceFeature extends Feature<RandomPatchConfiguration>
 
 		for (int j = 0; j < config.tries(); ++j) {
 			blockpos$mutable.set(blockpos).move(
-					rand.nextInt(config.xzSpread() + 1) - rand.nextInt(config.xzSpread() + 1),
-					rand.nextInt(config.ySpread() + 1) - rand.nextInt(config.ySpread() + 1),
-					rand.nextInt(config.xzSpread() + 1) - rand.nextInt(config.xzSpread() + 1));
+					random.nextInt(config.xzSpread() + 1) - random.nextInt(config.xzSpread() + 1),
+					random.nextInt(config.ySpread() + 1) - random.nextInt(config.ySpread() + 1),
+					random.nextInt(config.xzSpread() + 1) - random.nextInt(config.xzSpread() + 1));
 
 			if (level.getBlockState(blockpos$mutable).getBlock() == Blocks.WATER && level.getBlockState(blockpos$mutable.above()).getBlock() == Blocks.AIR) {
 				BlockState bottomRiceState = ModBlocks.WILD_RICE.get().defaultBlockState().setValue(WildRiceBlock.HALF, DoubleBlockHalf.LOWER);

@@ -29,7 +29,7 @@ public class OnionBlock extends CropBlock
 	}
 
 	@Override
-	public BlockState getPlant(BlockGetter world, BlockPos pos) {
+	public BlockState getPlant(BlockGetter level, BlockPos pos) {
 		return ModBlocks.ONION_CROP.get().defaultBlockState();
 	}
 

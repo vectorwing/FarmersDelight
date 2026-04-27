@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,part=foot": {
+      "model": "farmersdelight:block/tatami_mat_foot",
+      "y": 270
+    },
+    "facing=east,part=head": {
+      "model": "farmersdelight:block/tatami_mat_head",
+      "y": 270
+    },
+    "facing=north,part=foot": {
+      "model": "farmersdelight:block/tatami_mat_foot",
+      "y": 180
+    },
+    "facing=north,part=head": {
+      "model": "farmersdelight:block/tatami_mat_head",
+      "y": 180
+    },
+    "facing=south,part=foot": {
+      "model": "farmersdelight:block/tatami_mat_foot"
+    },
+    "facing=south,part=head": {
+      "model": "farmersdelight:block/tatami_mat_head"
+    },
+    "facing=west,part=foot": {
+      "model": "farmersdelight:block/tatami_mat_foot",
+      "y": 90
+    },
+    "facing=west,part=head": {
+      "model": "farmersdelight:block/tatami_mat_head",
+      "y": 90
+    }
+  }
+}

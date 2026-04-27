@@ -9,8 +9,12 @@
     "KeepRichSoilGiantTreeMixin",
     "KeepRichSoilTreeMixin",
     "KeepRichSoilUntrampledMixin",
+    "NourishmentAlwaysEatMixin",
+    "PlacePumpkinPieMixin",
     "RabbitsEatCabbageMixin",
+    "RopeFenceConnectionMixin",
     "SoupItemMixin",
+    "VillagersTargetRichSoilMixin",
     "accessor.RecipeManagerAccessor"
   ],
   "client": [

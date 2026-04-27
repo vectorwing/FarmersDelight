@@ -4,8 +4,11 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -20,10 +23,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -34,28 +34,37 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.client.ClientSetup;
+import vectorwing.farmersdelight.client.renderer.SkilletItemRenderer;
 import vectorwing.farmersdelight.common.block.SkilletBlock;
 import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ModTags;
+import vectorwing.farmersdelight.common.utility.ClientRenderUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 @SuppressWarnings({"deprecation", "unused"})
 public class SkilletItem extends BlockItem
 {
+	public static final float FLIP_TIME = 12;
+
 	public static final Tiers SKILLET_TIER = Tiers.IRON;
 	protected static final UUID FD_ATTACK_KNOCKBACK_UUID = UUID.fromString("e56350e0-8756-464d-92f9-54289ab41e0a");
 
@@ -113,11 +122,16 @@ public class SkilletItem extends BlockItem
 		}
 		BlockPos pos = player.blockPosition();
 		for (BlockPos nearbyPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
-			if (level.getBlockState(nearbyPos).is(ModTags.HEAT_SOURCES)) {
+			if (level.getBlockState(nearbyPos).is(ModTags.Blocks.HEAT_SOURCES)) {
 				return true;
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+		tooltip.add(TextUtils.PLACEABLE_SNEAKING);
 	}
 
 	@Override
@@ -142,18 +156,19 @@ public class SkilletItem extends BlockItem
 			Optional<CampfireCookingRecipe> recipe = getCookingRecipe(cookingStack, level);
 			if (recipe.isPresent()) {
 				if (player.isUnderWater()) {
-					player.displayClientMessage(TextUtils.getTranslation("item.skillet.underwater"), true);
+					player.displayClientMessage(TextUtils.item("skillet.underwater"), true);
 					return InteractionResultHolder.pass(skilletStack);
 				}
 				ItemStack cookingStackCopy = cookingStack.copy();
 				ItemStack cookingStackUnit = cookingStackCopy.split(1);
 				skilletStack.getOrCreateTag().put("Cooking", cookingStackUnit.serializeNBT());
 				skilletStack.getOrCreateTag().putInt("CookTimeHandheld", recipe.get().getCookingTime());
+				skilletStack.getOrCreateTag().putBoolean("Flipped", false);
 				player.startUsingItem(hand);
 				player.setItemInHand(otherHand, cookingStackCopy);
 				return InteractionResultHolder.consume(skilletStack);
 			} else {
-				player.displayClientMessage(TextUtils.getTranslation("item.skillet.how_to_cook"), true);
+				player.displayClientMessage(TextUtils.item("skillet.how_to_cook"), true);
 			}
 		}
 		return InteractionResultHolder.pass(skilletStack);
@@ -168,6 +183,15 @@ public class SkilletItem extends BlockItem
 			double z = pos.z() + 0.5D;
 			if (level.random.nextInt(50) == 0) {
 				level.playLocalSound(x, y, z, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.BLOCKS, 0.4F, level.random.nextFloat() * 0.2F + 0.9F, false);
+			}
+			CompoundTag tag = stack.getOrCreateTag();
+			if (tag.contains("FlipTimeStamp")) {
+				long flipTimeStamp = tag.getLong("FlipTimeStamp");
+				if (level.getGameTime() - flipTimeStamp > FLIP_TIME) {
+					tag.remove("FlipTimeStamp");
+					tag.putBoolean("Flipped", !tag.getBoolean("Flipped"));
+					level.playSound(null, x, y, z, ModSounds.BLOCK_SKILLET_ADD_FOOD.get(), SoundSource.BLOCKS, 0.4F, level.random.nextFloat() * 0.2F + 0.9F);
+				}
 			}
 		}
 	}
@@ -212,6 +236,28 @@ public class SkilletItem extends BlockItem
 		return stack;
 	}
 
+	@Override
+	public int getBarWidth(ItemStack stack) {
+		if (stack.getTagElement("Cooking") != null) {
+			return Math.round(13.0F - (float) ClientRenderUtils.getClientPlayerHack().getUseItemRemainingTicks() * 13.0F / (float) this.getUseDuration(stack));
+		}else{
+			return super.getBarWidth(stack);
+		}
+	}
+
+	@Override
+	public int getBarColor(ItemStack stack) {
+		if (stack.getTagElement("Cooking") != null) {
+			return 0xFF8B4F;
+		}
+		else return super.getBarColor(stack);
+	}
+
+	@Override
+	public boolean isBarVisible(ItemStack stack) {
+		return super.isBarVisible(stack) || stack.getTagElement("Cooking") != null;
+	}
+
 	public static Optional<CampfireCookingRecipe> getCookingRecipe(ItemStack stack, Level level) {
 		if (stack.isEmpty()) {
 			return Optional.empty();
@@ -222,8 +268,7 @@ public class SkilletItem extends BlockItem
 	@Override
 	protected boolean updateCustomBlockEntityTag(BlockPos pos, Level level, @Nullable Player player, ItemStack stack, BlockState state) {
 		super.updateCustomBlockEntityTag(pos, level, player, stack, state);
-		BlockEntity tileEntity = level.getBlockEntity(pos);
-		if (tileEntity instanceof SkilletBlockEntity skillet) {
+		if (level.getBlockEntity(pos) instanceof SkilletBlockEntity skillet) {
 			skillet.setSkilletItem(stack);
 			return true;
 		}
@@ -268,5 +313,23 @@ public class SkilletItem extends BlockItem
 
 	public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot equipmentSlot) {
 		return equipmentSlot == EquipmentSlot.MAINHAND ? this.toolAttributes : super.getDefaultAttributeModifiers(equipmentSlot);
+	}
+
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+		consumer.accept(new IClientItemExtensions() {
+			private static BlockEntityWithoutLevelRenderer renderer = new SkilletItemRenderer();
+
+			@Override
+			public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+				return renderer;
+			}
+
+			@Override
+			public HumanoidModel.@org.jetbrains.annotations.Nullable ArmPose getArmPose(LivingEntity living, InteractionHand hand, ItemStack stack) {
+				return stack.getOrCreateTag().contains("FlipTimeStamp") ? ClientSetup.SKILLET_FLIP : null;
+			}
+		});
 	}
 }

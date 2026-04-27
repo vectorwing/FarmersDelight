@@ -7,7 +7,7 @@
       "tag": "forge:raw_chicken"
     },
     {
-      "item": "minecraft:carrot"
+      "tag": "forge:crops/carrot"
     },
     {
       "tag": "forge:salad_ingredients"

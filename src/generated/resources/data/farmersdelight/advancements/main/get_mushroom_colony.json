@@ -29,7 +29,7 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "farmersdelight.advancement.get_mushroom_colony.desc"
+      "translate": "advancements.farmersdelight.get_mushroom_colony.description"
     },
     "frame": "task",
     "hidden": false,
@@ -38,7 +38,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "farmersdelight.advancement.get_mushroom_colony"
+      "translate": "advancements.farmersdelight.get_mushroom_colony.title"
     }
   },
   "requirements": [

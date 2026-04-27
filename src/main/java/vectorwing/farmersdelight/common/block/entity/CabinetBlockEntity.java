@@ -89,7 +89,7 @@ public class CabinetBlockEntity extends RandomizableContainerBlockEntity
 
 	@Override
 	protected Component getDefaultName() {
-		return TextUtils.getTranslation("container.cabinet");
+		return TextUtils.container("cabinet");
 	}
 
 	@Override

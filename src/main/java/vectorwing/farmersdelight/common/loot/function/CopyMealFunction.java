@@ -4,15 +4,12 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModLootFunctions;
 
@@ -22,8 +19,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class CopyMealFunction extends LootItemConditionalFunction
 {
-	public static final ResourceLocation ID = new ResourceLocation(FarmersDelight.MODID, "copy_meal");
-
 	private CopyMealFunction(LootItemCondition[] conditions) {
 		super(conditions);
 	}
@@ -34,9 +29,8 @@ public class CopyMealFunction extends LootItemConditionalFunction
 
 	@Override
 	protected ItemStack run(ItemStack stack, LootContext context) {
-		BlockEntity tile = context.getParamOrNull(LootContextParams.BLOCK_ENTITY);
-		if (tile instanceof CookingPotBlockEntity) {
-			CompoundTag tag = ((CookingPotBlockEntity) tile).writeMeal(new CompoundTag());
+		if (context.getParamOrNull(LootContextParams.BLOCK_ENTITY) instanceof CookingPotBlockEntity cookingPot) {
+			CompoundTag tag = cookingPot.writeMeal(new CompoundTag());
 			if (!tag.isEmpty()) {
 				stack.addTagElement("BlockEntityTag", tag);
 			}

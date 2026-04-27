@@ -81,6 +81,16 @@
       },
       "trigger": "minecraft:consume_item"
     },
+    "gleaming_salad": {
+      "conditions": {
+        "item": {
+          "items": [
+            "farmersdelight:gleaming_salad"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
     "grilled_salmon": {
       "conditions": {
         "item": {
@@ -126,6 +136,16 @@
         "item": {
           "items": [
             "farmersdelight:noodle_soup"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "onion_soup": {
+      "conditions": {
+        "item": {
+          "items": [
+            "farmersdelight:onion_soup"
           ]
         }
       },
@@ -255,7 +275,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "farmersdelight.advancement.master_chef.desc"
+      "translate": "advancements.farmersdelight.master_chef.description"
     },
     "frame": "challenge",
     "hidden": false,
@@ -264,7 +284,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "farmersdelight.advancement.master_chef"
+      "translate": "advancements.farmersdelight.master_chef.title"
     }
   },
   "requirements": [
@@ -300,6 +320,9 @@
     ],
     [
       "noodle_soup"
+    ],
+    [
+      "onion_soup"
     ],
     [
       "bacon_and_eggs"
@@ -342,6 +365,9 @@
     ],
     [
       "shepherds_pie"
+    ],
+    [
+      "gleaming_salad"
     ]
   ],
   "rewards": {

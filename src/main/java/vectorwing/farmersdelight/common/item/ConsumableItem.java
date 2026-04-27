@@ -3,7 +3,6 @@ package vectorwing.farmersdelight.common.item;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.LivingEntity;
@@ -29,7 +28,7 @@ public class ConsumableItem extends Item
 	 */
 	public ConsumableItem(Properties properties) {
 		super(properties);
-		this.hasFoodEffectTooltip = false;
+		this.hasFoodEffectTooltip = true;
 		this.hasCustomTooltip = false;
 	}
 
@@ -88,10 +87,9 @@ public class ConsumableItem extends Item
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag isAdvanced) {
-		if (Configuration.FOOD_EFFECT_TOOLTIP.get()) {
+		if (Configuration.ENABLE_FOOD_EFFECT_TOOLTIP.get()) {
 			if (this.hasCustomTooltip) {
-				MutableComponent textEmpty = TextUtils.getTranslation("tooltip." + this);
-				tooltip.add(textEmpty.withStyle(ChatFormatting.BLUE));
+				tooltip.add(TextUtils.tooltip(this.toString()).withStyle(ChatFormatting.BLUE));
 			}
 			if (this.hasFoodEffectTooltip) {
 				TextUtils.addFoodEffectTooltip(stack, tooltip, 1.0F);

@@ -46,12 +46,12 @@ public class SafetyNetBlock extends Block implements SimpleWaterloggedBlock
 	}
 
 	@Override
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-		if (stateIn.getValue(WATERLOGGED)) {
+	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+		if (state.getValue(WATERLOGGED)) {
 			level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
 
-		return super.updateShape(stateIn, facing, facingState, level, currentPos, facingPos);
+		return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
 	}
 
 	@Override
@@ -65,28 +65,28 @@ public class SafetyNetBlock extends Block implements SimpleWaterloggedBlock
 	}
 
 	@Override
-	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
-		if (entityIn.isSuppressingBounce()) {
-			super.fallOn(level, state, pos, entityIn, fallDistance);
+	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+		if (entity.isSuppressingBounce()) {
+			super.fallOn(level, state, pos, entity, fallDistance);
 		} else {
-			entityIn.causeFallDamage(fallDistance, 0.0F, level.damageSources().fall());
+			entity.causeFallDamage(fallDistance, 0.0F, level.damageSources().fall());
 		}
 	}
 
 	@Override
-	public void updateEntityAfterFallOn(BlockGetter level, Entity entityIn) {
-		if (entityIn.isSuppressingBounce()) {
-			super.updateEntityAfterFallOn(level, entityIn);
+	public void updateEntityAfterFallOn(BlockGetter level, Entity entity) {
+		if (entity.isSuppressingBounce()) {
+			super.updateEntityAfterFallOn(level, entity);
 		} else {
-			this.bounceEntity(entityIn);
+			this.bounceEntity(entity);
 		}
 	}
 
-	private void bounceEntity(Entity entityIn) {
-		Vec3 vec3d = entityIn.getDeltaMovement();
+	private void bounceEntity(Entity entity) {
+		Vec3 vec3d = entity.getDeltaMovement();
 		if (vec3d.y < 0.0D) {
-			double entityWeightOffset = entityIn instanceof LivingEntity ? 0.6D : 0.8D;
-			entityIn.setDeltaMovement(vec3d.x, -vec3d.y * entityWeightOffset, vec3d.z);
+			double entityWeightOffset = entity instanceof LivingEntity ? 0.6D : 0.8D;
+			entity.setDeltaMovement(vec3d.x, -vec3d.y * entityWeightOffset, vec3d.z);
 		}
 	}
 }

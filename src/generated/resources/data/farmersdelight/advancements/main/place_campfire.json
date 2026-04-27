@@ -27,7 +27,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "farmersdelight.advancement.place_campfire.desc"
+      "translate": "advancements.farmersdelight.place_campfire.description"
     },
     "frame": "task",
     "hidden": false,
@@ -36,7 +36,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "farmersdelight.advancement.place_campfire"
+      "translate": "advancements.farmersdelight.place_campfire.title"
     }
   },
   "requirements": [

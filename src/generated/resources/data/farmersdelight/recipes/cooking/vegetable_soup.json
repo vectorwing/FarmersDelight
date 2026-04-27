@@ -4,13 +4,13 @@
   "experience": 1.0,
   "ingredients": [
     {
-      "item": "minecraft:carrot"
+      "tag": "forge:crops/carrot"
     },
     {
-      "item": "minecraft:potato"
+      "tag": "forge:crops/potato"
     },
     {
-      "item": "minecraft:beetroot"
+      "tag": "forge:crops/beetroot"
     },
     {
       "tag": "forge:salad_ingredients"

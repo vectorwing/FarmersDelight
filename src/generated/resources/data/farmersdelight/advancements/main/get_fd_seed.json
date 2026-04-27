@@ -53,7 +53,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "farmersdelight.advancement.get_fd_seed.desc"
+      "translate": "advancements.farmersdelight.get_fd_seed.description"
     },
     "frame": "task",
     "hidden": false,
@@ -62,7 +62,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "farmersdelight.advancement.get_fd_seed"
+      "translate": "advancements.farmersdelight.get_fd_seed.title"
     }
   },
   "requirements": [

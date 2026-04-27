@@ -9,7 +9,7 @@
       "item": "farmersdelight:cooked_rice"
     },
     "X": {
-      "item": "minecraft:carrot"
+      "tag": "forge:vegetables"
     }
   },
   "pattern": [

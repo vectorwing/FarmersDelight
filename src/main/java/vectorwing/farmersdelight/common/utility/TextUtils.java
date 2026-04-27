@@ -21,10 +21,11 @@ import java.util.Map;
 /**
  * Util for obtaining and formatting ITextComponents for use across the mod.
  */
-
 public class TextUtils
 {
-	private static final MutableComponent NO_EFFECTS = Component.translatable("effect.none").withStyle(ChatFormatting.GRAY);
+	public static final MutableComponent PLACEABLE = tooltip("placeable").withStyle(ChatFormatting.DARK_GRAY).withStyle(ChatFormatting.ITALIC);
+	public static final MutableComponent PLACEABLE_SNEAKING = tooltip("placeable_sneaking").withStyle(ChatFormatting.DARK_GRAY).withStyle(ChatFormatting.ITALIC);
+	public static final MutableComponent DEBUG_ITEM = tooltip("debug_item").withStyle(ChatFormatting.RED);
 
 	/**
 	 * Syntactic sugar for custom translation keys. Always prefixed with the mod's ID in lang files (e.g. farmersdelight.your.key.here).
@@ -34,18 +35,56 @@ public class TextUtils
 	}
 
 	/**
-	 * An alternate version of PotionUtils.addPotionTooltip, that obtains the item's food-property potion effects instead.
+	 * Gets text from a translation key, where "type" prefixes Farmer's Delight's mod ID.
+	 * Example: "type.farmersdelight.key".
+	 *
+	 * @param translationType The type of lang being read, added as a prefix
+	 * @param translationKey  The key itself, added as a suffix after the mod ID
+	 * @param args            Additional values to be keyed into the text, through markers such as %s
 	 */
-	public static void addFoodEffectTooltip(ItemStack itemIn, List<Component> lores, float durationFactor) {
-		FoodProperties foodStats = itemIn.getItem().getFoodProperties();
+	public static MutableComponent getTextWithType(String translationType, String translationKey, Object... args) {
+		return Component.translatable(translationType + "." + FarmersDelight.MODID + "." + translationKey, args);
+	}
+
+	public static MutableComponent block(String key, Object... args) {
+		return getTextWithType("block", key, args);
+	}
+
+	public static MutableComponent item(String key, Object... args) {
+		return getTextWithType("item", key, args);
+	}
+
+	public static MutableComponent advancement(String key, Object... args) {
+		return getTextWithType("advancements", key, args);
+	}
+
+	public static MutableComponent container(String key, Object... args) {
+		return getTextWithType("container", key, args);
+	}
+
+	public static MutableComponent JEI(String key, Object... args) {
+		return getTextWithType("jei", key, args);
+	}
+
+	public static MutableComponent tooltip(String key, Object... args) {
+		return getTextWithType("tooltip", key, args);
+	}
+
+	public static String subtitleKey(String key, Object... args) {
+		return getTextWithType("subtitles", key, args).getString();
+	}
+
+	/**
+	 * An alternate version of PotionUtils.addPotionTooltip, that obtains the item's food property potion effects instead.
+	 */
+	public static void addFoodEffectTooltip(ItemStack stack, List<Component> lores, float durationFactor) {
+		FoodProperties foodStats = stack.getItem().getFoodProperties(stack, null);
 		if (foodStats == null) {
 			return;
 		}
 		List<Pair<MobEffectInstance, Float>> effectList = foodStats.getEffects();
 		List<Pair<Attribute, AttributeModifier>> attributeList = Lists.newArrayList();
-		if (effectList.isEmpty()) {
-			lores.add(NO_EFFECTS);
-		} else {
+		if (!effectList.isEmpty()) {
 			for (Pair<MobEffectInstance, Float> effectPair : effectList) {
 				MobEffectInstance instance = effectPair.getFirst();
 				MutableComponent iformattabletextcomponent = Component.translatable(instance.getDescriptionId());

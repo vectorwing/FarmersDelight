@@ -12,13 +12,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class CookingPotResultSlot extends SlotItemHandler
 {
-	public final CookingPotBlockEntity tileEntity;
+	public final CookingPotBlockEntity cookingPot;
 	private final Player player;
 	private int removeCount;
 
-	public CookingPotResultSlot(Player player, CookingPotBlockEntity tile, IItemHandler inventoryIn, int index, int xPosition, int yPosition) {
-		super(inventoryIn, index, xPosition, yPosition);
-		this.tileEntity = tile;
+	public CookingPotResultSlot(Player player, CookingPotBlockEntity blockEntity, IItemHandler inventory, int index, int xPosition, int yPosition) {
+		super(inventory, index, xPosition, yPosition);
+		this.cookingPot = blockEntity;
 		this.player = player;
 	}
 
@@ -38,9 +38,9 @@ public class CookingPotResultSlot extends SlotItemHandler
 	}
 
 	@Override
-	public void onTake(Player thePlayer, ItemStack stack) {
+	public void onTake(Player player, ItemStack stack) {
 		this.checkTakeAchievements(stack);
-		super.onTake(thePlayer, stack);
+		super.onTake(player, stack);
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class CookingPotResultSlot extends SlotItemHandler
 		stack.onCraftedBy(this.player.level(), this.player, this.removeCount);
 
 		if (!this.player.level().isClientSide) {
-			tileEntity.awardUsedRecipes(this.player, tileEntity.getDroppableInventory());
+			cookingPot.awardUsedRecipes(this.player, cookingPot.getDroppableInventory());
 		}
 
 		this.removeCount = 0;

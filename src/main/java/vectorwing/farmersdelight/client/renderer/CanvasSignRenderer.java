@@ -47,8 +47,8 @@ public class CanvasSignRenderer extends SignRenderer
 	}
 
 	@Override
-	public void render(SignBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
-		BlockState state = blockEntity.getBlockState();
+	public void render(SignBlockEntity sign, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+		BlockState state = sign.getBlockState();
 		SignBlock block = (SignBlock) state.getBlock();
 		SignRenderer.SignModel model = signModel;
 		model.stick.visible = block instanceof StandingSignBlock;
@@ -58,15 +58,15 @@ public class CanvasSignRenderer extends SignRenderer
 			dye = canvasSign.getBackgroundColor();
 		}
 
-		renderSignWithText(blockEntity, poseStack, bufferSource, packedLight, packedOverlay, state, block, dye, model);
+		renderSignWithText(sign, poseStack, bufferSource, packedLight, packedOverlay, state, block, dye, model);
 	}
 
-	protected void renderSignWithText(SignBlockEntity signBlockEntity, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay, BlockState state, SignBlock block, @Nullable DyeColor dye, Model model) {
+	protected void renderSignWithText(SignBlockEntity sign, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay, BlockState state, SignBlock block, @Nullable DyeColor dye, Model model) {
 		poseStack.pushPose();
 		translateSign(poseStack, -block.getYRotationDegrees(state), state);
 		renderSign(poseStack, bufferSource, packedLight, packedOverlay, dye, model);
-		renderSignText(signBlockEntity.getBlockPos(), signBlockEntity.getFrontText(), poseStack, bufferSource, packedLight, signBlockEntity.getTextLineHeight(), signBlockEntity.getMaxTextLineWidth(), true);
-		renderSignText(signBlockEntity.getBlockPos(), signBlockEntity.getBackText(), poseStack, bufferSource, packedLight, signBlockEntity.getTextLineHeight(), signBlockEntity.getMaxTextLineWidth(), false);
+		renderSignText(sign.getBlockPos(), sign.getFrontText(), poseStack, bufferSource, packedLight, sign.getTextLineHeight(), sign.getMaxTextLineWidth(), true);
+		renderSignText(sign.getBlockPos(), sign.getBackText(), poseStack, bufferSource, packedLight, sign.getTextLineHeight(), sign.getMaxTextLineWidth(), false);
 		poseStack.popPose();
 	}
 

@@ -38,7 +38,7 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 	private final IDrawable icon;
 
 	public CuttingRecipeCategory(IGuiHelper helper) {
-		title = TextUtils.getTranslation("jei.cutting");
+		title = TextUtils.JEI("cutting");
 		ResourceLocation backgroundImage = new ResourceLocation(FarmersDelight.MODID, "textures/gui/jei/cutting_board.png");
 		slot = helper.createDrawable(backgroundImage, 0, 58, 18, 18);
 		slotChance = helper.createDrawable(backgroundImage, 18, 58, 18, 18);
@@ -57,8 +57,13 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 	}
 
 	@Override
-	public IDrawable getBackground() {
-		return this.background;
+	public int getWidth() {
+		return 117;
+	}
+
+	@Override
+	public int getHeight() {
+		return 57;
 	}
 
 	@Override
@@ -84,11 +89,11 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 			int index = i;
 			builder.addSlot(RecipeIngredientRole.OUTPUT, OUTPUT_GRID_X + xOffset, OUTPUT_GRID_Y + yOffset)
 					.addItemStack(recipeOutputs.get(i).getStack())
-					.addTooltipCallback((slotView, tooltip) -> {
+					.addRichTooltipCallback((slotView, tooltip) -> {
 						ChanceResult output = recipeOutputs.get(index);
 						float chance = output.getChance();
 						if (chance != 1)
-							tooltip.add(1, TextUtils.getTranslation("jei.chance", chance < 0.01 ? "<1" : (int) (chance * 100))
+							tooltip.add(TextUtils.JEI("chance", chance < 0.01 ? "<1" : (int) (chance * 100))
 									.withStyle(ChatFormatting.GOLD));
 					});
 		}
@@ -96,6 +101,8 @@ public class CuttingRecipeCategory implements IRecipeCategory<CuttingBoardRecipe
 
 	@Override
 	public void draw(CuttingBoardRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+		background.draw(guiGraphics, 0, 0);
+
 		NonNullList<ChanceResult> recipeOutputs = recipe.getRollableResults();
 
 		int size = recipe.getResults().size();

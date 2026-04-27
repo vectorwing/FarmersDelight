@@ -32,7 +32,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "farmersdelight.advancement.hit_raider_with_rotten_tomato.desc"
+      "translate": "advancements.farmersdelight.hit_raider_with_rotten_tomato.description"
     },
     "frame": "task",
     "hidden": false,
@@ -41,7 +41,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "farmersdelight.advancement.hit_raider_with_rotten_tomato"
+      "translate": "advancements.farmersdelight.hit_raider_with_rotten_tomato.title"
     }
   },
   "requirements": [

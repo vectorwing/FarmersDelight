@@ -7,13 +7,13 @@
   "experience": 1.0,
   "ingredients": [
     {
-      "item": "minecraft:beetroot"
+      "tag": "forge:crops/beetroot"
     },
     {
-      "item": "minecraft:beetroot"
+      "tag": "forge:crops/beetroot"
     },
     {
-      "item": "minecraft:beetroot"
+      "tag": "forge:crops/beetroot"
     }
   ],
   "recipe_book_tab": "meals",

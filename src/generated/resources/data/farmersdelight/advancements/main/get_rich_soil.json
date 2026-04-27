@@ -17,7 +17,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "farmersdelight.advancement.get_rich_soil.desc"
+      "translate": "advancements.farmersdelight.get_rich_soil.description"
     },
     "frame": "goal",
     "hidden": false,
@@ -26,7 +26,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "farmersdelight.advancement.get_rich_soil"
+      "translate": "advancements.farmersdelight.get_rich_soil.title"
     }
   },
   "requirements": [

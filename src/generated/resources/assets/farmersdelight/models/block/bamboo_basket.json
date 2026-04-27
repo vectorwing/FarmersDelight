@@ -1,0 +1,9 @@
+{
+  "parent": "farmersdelight:block/template_basket",
+  "textures": {
+    "bottom": "farmersdelight:block/bamboo_basket_bottom",
+    "handle": "farmersdelight:block/bamboo_basket_handle",
+    "side": "farmersdelight:block/bamboo_basket_side",
+    "top": "farmersdelight:block/bamboo_basket_top"
+  }
+}

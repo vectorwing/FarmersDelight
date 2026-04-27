@@ -172,23 +172,23 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 
 		@Override
 		public CookingPotRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
-			final String groupIn = GsonHelper.getAsString(json, "group", "");
-			final NonNullList<Ingredient> inputItemsIn = readIngredients(GsonHelper.getAsJsonArray(json, "ingredients"));
-			if (inputItemsIn.isEmpty()) {
+			final String group = GsonHelper.getAsString(json, "group", "");
+			final NonNullList<Ingredient> inputItems = readIngredients(GsonHelper.getAsJsonArray(json, "ingredients"));
+			if (inputItems.isEmpty()) {
 				throw new JsonParseException("No ingredients for cooking recipe");
-			} else if (inputItemsIn.size() > CookingPotRecipe.INPUT_SLOTS) {
+			} else if (inputItems.size() > CookingPotRecipe.INPUT_SLOTS) {
 				throw new JsonParseException("Too many ingredients for cooking recipe! The max is " + CookingPotRecipe.INPUT_SLOTS);
 			} else {
 				final String tabKeyIn = GsonHelper.getAsString(json, "recipe_book_tab", null);
-				final CookingPotRecipeBookTab tabIn = CookingPotRecipeBookTab.findByName(tabKeyIn);
-				if (tabKeyIn != null && tabIn == null) {
+				final CookingPotRecipeBookTab tab = CookingPotRecipeBookTab.findByName(tabKeyIn);
+				if (tabKeyIn != null && tab == null) {
 					FarmersDelight.LOGGER.warn("Optional field 'recipe_book_tab' does not match any valid tab. If defined, must be one of the following: " + EnumSet.allOf(CookingPotRecipeBookTab.class));
 				}
-				final ItemStack outputIn = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "result"), true);
+				final ItemStack output = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "result"), true);
 				ItemStack container = GsonHelper.isValidNode(json, "container") ? CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "container"), true) : ItemStack.EMPTY;
-				final float experienceIn = GsonHelper.getAsFloat(json, "experience", 0.0F);
-				final int cookTimeIn = GsonHelper.getAsInt(json, "cookingtime", 200);
-				return new CookingPotRecipe(recipeId, groupIn, tabIn, inputItemsIn, outputIn, container, experienceIn, cookTimeIn);
+				final float experience = GsonHelper.getAsFloat(json, "experience", 0.0F);
+				final int cookTime = GsonHelper.getAsInt(json, "cookingtime", 200);
+				return new CookingPotRecipe(recipeId, group, tab, inputItems, output, container, experience, cookTime);
 			}
 		}
 
@@ -208,20 +208,20 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 		@Nullable
 		@Override
 		public CookingPotRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
-			String groupIn = buffer.readUtf();
-			CookingPotRecipeBookTab tabIn = CookingPotRecipeBookTab.findByName(buffer.readUtf());
+			String group = buffer.readUtf();
+			CookingPotRecipeBookTab tab = CookingPotRecipeBookTab.findByName(buffer.readUtf());
 			int i = buffer.readVarInt();
-			NonNullList<Ingredient> inputItemsIn = NonNullList.withSize(i, Ingredient.EMPTY);
+			NonNullList<Ingredient> inputItems = NonNullList.withSize(i, Ingredient.EMPTY);
 
-			for (int j = 0; j < inputItemsIn.size(); ++j) {
-				inputItemsIn.set(j, Ingredient.fromNetwork(buffer));
+			for (int j = 0; j < inputItems.size(); ++j) {
+				inputItems.set(j, Ingredient.fromNetwork(buffer));
 			}
 
-			ItemStack outputIn = buffer.readItem();
+			ItemStack output = buffer.readItem();
 			ItemStack container = buffer.readItem();
-			float experienceIn = buffer.readFloat();
-			int cookTimeIn = buffer.readVarInt();
-			return new CookingPotRecipe(recipeId, groupIn, tabIn, inputItemsIn, outputIn, container, experienceIn, cookTimeIn);
+			float experience = buffer.readFloat();
+			int cookTime = buffer.readVarInt();
+			return new CookingPotRecipe(recipeId, group, tab, inputItems, output, container, experience, cookTime);
 		}
 
 		@Override

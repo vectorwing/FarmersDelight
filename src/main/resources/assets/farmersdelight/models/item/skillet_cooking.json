@@ -1,5 +1,5 @@
 {
-  "parent": "farmersdelight:block/skillet",
+  "parent": "builtin/entity",
   "display": {
     "thirdperson_righthand": {
       "rotation": [70, 0, 0],

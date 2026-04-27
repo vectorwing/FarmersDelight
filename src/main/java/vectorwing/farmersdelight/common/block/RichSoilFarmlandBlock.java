@@ -9,15 +9,12 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.level.block.StemGrownBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.PlantType;
-import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
-import vectorwing.farmersdelight.common.tag.ModTags;
-import vectorwing.farmersdelight.common.utility.MathUtils;
 
 import javax.annotation.Nullable;
 
@@ -27,9 +24,23 @@ public class RichSoilFarmlandBlock extends FarmBlock
 		super(properties);
 	}
 
+	@Override
+	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+		int moisture = state.getValue(MOISTURE);
+		if (!isNearWater(level, pos) && !level.isRainingAt(pos.above())) {
+			if (moisture > 0) {
+				level.setBlock(pos, state.setValue(MOISTURE, moisture - 1), 2);
+			}
+		} else if (moisture < 7) {
+			level.setBlock(pos, state.setValue(MOISTURE, 7), 2);
+		} else if (moisture == 7) {
+			RichSoilBlock.tryBoostingPlantsAboveAndBelow(level, pos, random);
+		}
+	}
+
 	private static boolean isNearWater(LevelReader level, BlockPos pos) {
 		BlockState state = level.getBlockState(pos);
-		for(BlockPos nearbyPos : BlockPos.betweenClosed(pos.offset(-4, 0, -4), pos.offset(4, 1, 4))) {
+		for (BlockPos nearbyPos : BlockPos.betweenClosed(pos.offset(-4, 0, -4), pos.offset(4, 1, 4))) {
 			if (state.canBeHydrated(level, pos, level.getFluidState(nearbyPos), nearbyPos)) {
 				return true;
 			}
@@ -50,7 +61,7 @@ public class RichSoilFarmlandBlock extends FarmBlock
 	}
 
 	@Override
-	public boolean isFertile(BlockState state, BlockGetter world, BlockPos pos) {
+	public boolean isFertile(BlockState state, BlockGetter level, BlockPos pos) {
 		if (state.is(ModBlocks.RICH_SOIL_FARMLAND.get()))
 			return state.getValue(RichSoilFarmlandBlock.MOISTURE) > 0;
 
@@ -58,48 +69,15 @@ public class RichSoilFarmlandBlock extends FarmBlock
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
+	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		if (!state.canSurvive(level, pos)) {
 			turnToRichSoil(null, state, level, pos);
 		}
 	}
 
 	@Override
-	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-		int moisture = state.getValue(MOISTURE);
-		if (!isNearWater(level, pos) && !level.isRainingAt(pos.above())) {
-			if (moisture > 0) {
-				level.setBlock(pos, state.setValue(MOISTURE, moisture - 1), 2);
-			}
-		} else if (moisture < 7) {
-			level.setBlock(pos, state.setValue(MOISTURE, 7), 2);
-		} else if (moisture == 7) {
-			if (Configuration.RICH_SOIL_BOOST_CHANCE.get() == 0.0) {
-				return;
-			}
-
-			BlockState aboveState = level.getBlockState(pos.above());
-			Block aboveBlock = aboveState.getBlock();
-
-			if (aboveState.is(ModTags.UNAFFECTED_BY_RICH_SOIL) || aboveBlock instanceof TallFlowerBlock) {
-				return;
-			}
-
-			if (aboveBlock instanceof BonemealableBlock growable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
-				if (growable.isValidBonemealTarget(level, pos.above(), aboveState, false) && ForgeHooks.onCropsGrowPre(level, pos.above(), aboveState, true)) {
-					growable.performBonemeal(level, level.random, pos.above(), aboveState);
-					if (!level.isClientSide) {
-						level.levelEvent(2005, pos.above(), 0);
-					}
-					ForgeHooks.onCropsGrowPost(level, pos.above(), aboveState);
-				}
-			}
-		}
-	}
-
-	@Override
-	public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable) {
-		net.minecraftforge.common.PlantType plantType = plantable.getPlantType(world, pos.relative(facing));
+	public boolean canSustainPlant(BlockState state, BlockGetter level, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable) {
+		net.minecraftforge.common.PlantType plantType = plantable.getPlantType(level, pos.relative(facing));
 		return plantType == PlantType.CROP || plantType == PlantType.PLAINS;
 	}
 

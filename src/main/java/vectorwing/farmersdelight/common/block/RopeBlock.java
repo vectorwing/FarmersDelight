@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -18,6 +19,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
@@ -43,19 +45,6 @@ public class RopeBlock extends IronBarsBlock
 				.setValue(TIED_TO_BELL, false)
 				.setValue(WATERLOGGED, false)
 		);
-	}
-
-	@Override
-	public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
-		return true;
-	}
-
-	@Override
-	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		BlockGetter world = context.getLevel();
-		BlockPos posAbove = context.getClickedPos().above();
-		BlockState state = super.getStateForPlacement(context);
-		return state != null ? state.setValue(TIED_TO_BELL, world.getBlockState(posAbove).getBlock() == Blocks.BELL) : null;
 	}
 
 	@Override
@@ -99,12 +88,46 @@ public class RopeBlock extends IronBarsBlock
 	}
 
 	@Override
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		return getStateWithConnections(this.defaultBlockState(), context.getLevel(), context.getClickedPos(), context.getClickedFace());
+	}
+
+	public static BlockState getStateWithConnections(BlockState state, Level level, BlockPos pos, Direction clickedFace) {
+		FluidState fluidState = level.getFluidState(pos);
+		BlockPos northPos = pos.north();
+		BlockPos southPos = pos.south();
+		BlockPos westPos = pos.west();
+		BlockPos eastPos = pos.east();
+		BlockState northState = level.getBlockState(northPos);
+		BlockState southState = level.getBlockState(southPos);
+		BlockState westState = level.getBlockState(westPos);
+		BlockState eastState = level.getBlockState(eastPos);
+
+		boolean isHorizontalPlacement = clickedFace.getAxis().isHorizontal();
+
+		return state.setValue(TIED_TO_BELL, level.getBlockState(pos.above()).getBlock() == Blocks.BELL)
+				.setValue(NORTH, isHorizontalPlacement ? tieToAnythingValid(northState, northState.isFaceSturdy(level, northPos, Direction.SOUTH)) : tieToRopeAndWalls(northState))
+				.setValue(SOUTH, isHorizontalPlacement ? tieToAnythingValid(southState, southState.isFaceSturdy(level, southPos, Direction.NORTH)) : tieToRopeAndWalls(southState))
+				.setValue(WEST, isHorizontalPlacement ? tieToAnythingValid(westState, westState.isFaceSturdy(level, westPos, Direction.EAST)) : tieToRopeAndWalls(westState))
+				.setValue(EAST, isHorizontalPlacement ? tieToAnythingValid(eastState, eastState.isFaceSturdy(level, eastPos, Direction.WEST)) : tieToRopeAndWalls(eastState))
+				.setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
+	}
+
+	public static boolean tieToAnythingValid(BlockState state, boolean solidSide) {
+		return !isExceptionForConnection(state) && solidSide || tieToRopeAndWalls(state);
+	}
+
+	public static boolean tieToRopeAndWalls(BlockState state) {
+		return state.getBlock() instanceof IronBarsBlock || state.is(BlockTags.WALLS);
+	}
+
+	@Override
 	public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return Shapes.empty();
 	}
 
 	@Override
-	public VoxelShape getBlockSupportShape(BlockState pState, BlockGetter pReader, BlockPos pPos) {
+	public VoxelShape getBlockSupportShape(BlockState state, BlockGetter level, BlockPos pos) {
 		return LOWER_SUPPORT_AABB;
 	}
 
@@ -125,8 +148,13 @@ public class RopeBlock extends IronBarsBlock
 		}
 
 		return facing.getAxis().isHorizontal()
-				? state.setValue(TIED_TO_BELL, tiedToBell).setValue(PROPERTY_BY_DIRECTION.get(facing), this.attachsTo(facingState, facingState.isFaceSturdy(level, facingPos, facing.getOpposite())))
+				? state.setValue(TIED_TO_BELL, tiedToBell).setValue(PROPERTY_BY_DIRECTION.get(facing), tieToRopeAndWalls(facingState))
 				: super.updateShape(state.setValue(TIED_TO_BELL, tiedToBell), facing, facingState, level, currentPos, facingPos);
+	}
+
+	@Override
+	public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
+		return true;
 	}
 
 	@Override

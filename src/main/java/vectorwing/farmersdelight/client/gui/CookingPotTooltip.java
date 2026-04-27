@@ -33,11 +33,11 @@ public class CookingPotTooltip implements ClientTooltipComponent
 	public int getWidth(Font font) {
 		if (!mealStack.isEmpty()) {
 			MutableComponent textServingsOf = mealStack.getCount() == 1
-					? TextUtils.getTranslation("tooltip.cooking_pot.single_serving")
-					: TextUtils.getTranslation("tooltip.cooking_pot.many_servings", mealStack.getCount());
+					? TextUtils.tooltip("cooking_pot.single_serving")
+					: TextUtils.tooltip("cooking_pot.many_servings", mealStack.getCount());
 			return Math.max(font.width(textServingsOf), font.width(mealStack.getHoverName()) + 20);
 		} else {
-			return font.width(TextUtils.getTranslation("tooltip.cooking_pot.empty"));
+			return font.width(TextUtils.tooltip("cooking_pot.empty"));
 		}
 	}
 
@@ -54,18 +54,18 @@ public class CookingPotTooltip implements ClientTooltipComponent
 
 		if (!mealStack.isEmpty()) {
 			MutableComponent textServingsOf = mealStack.getCount() == 1
-					? TextUtils.getTranslation("tooltip.cooking_pot.single_serving")
-					: TextUtils.getTranslation("tooltip.cooking_pot.many_servings", mealStack.getCount());
+					? TextUtils.tooltip("cooking_pot.single_serving")
+					: TextUtils.tooltip("cooking_pot.many_servings", mealStack.getCount());
 
 			font.drawInBatch(textServingsOf, (float) x, (float) y, gray, true, matrix4f, bufferSource, Font.DisplayMode.NORMAL, 0, 15728880);
 			font.drawInBatch(mealStack.getHoverName(), x + ITEM_SIZE + MARGIN, y + textSpacing + MARGIN, -1, true, matrix4f, bufferSource, Font.DisplayMode.NORMAL, 0, 15728880);
 		} else {
-			MutableComponent textEmpty = TextUtils.getTranslation("tooltip.cooking_pot.empty");
+			MutableComponent textEmpty = TextUtils.tooltip("cooking_pot.empty");
 			font.drawInBatch(textEmpty, x, y, gray, true, matrix4f, bufferSource, Font.DisplayMode.NORMAL, 0, 15728880);
 		}
 	}
 
-	public static record CookingPotTooltipComponent(ItemStack mealStack) implements TooltipComponent
+	public record CookingPotTooltipComponent(ItemStack mealStack) implements TooltipComponent
 	{
 	}
 }

@@ -3,8 +3,10 @@ package vectorwing.farmersdelight.common.utility;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import vectorwing.farmersdelight.FarmersDelight;
 
 public class RecipeUtils
 {
@@ -17,5 +19,9 @@ public class RecipeUtils
 		}
 		RegistryAccess registryAccess = level.registryAccess();
 		return recipe.getResultItem(registryAccess);
+	}
+
+	public static ResourceLocation FDLocation(String name) {
+		return new ResourceLocation(FarmersDelight.MODID, name);
 	}
 }

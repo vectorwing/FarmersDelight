@@ -1,5 +1,8 @@
 {
   "values": [
+    "minecraft:mushroom_stew",
+    "minecraft:beetroot_soup",
+    "minecraft:rabbit_stew",
     "farmersdelight:mixed_salad",
     "farmersdelight:cooked_rice",
     "farmersdelight:bone_broth",
@@ -11,6 +14,7 @@
     "farmersdelight:pumpkin_soup",
     "farmersdelight:baked_cod_stew",
     "farmersdelight:noodle_soup",
+    "farmersdelight:onion_soup",
     "farmersdelight:bacon_and_eggs",
     "farmersdelight:ratatouille",
     "farmersdelight:steak_and_potatoes",
@@ -24,6 +28,7 @@
     "farmersdelight:roast_chicken",
     "farmersdelight:stuffed_pumpkin",
     "farmersdelight:honey_glazed_ham",
-    "farmersdelight:shepherds_pie"
+    "farmersdelight:shepherds_pie",
+    "farmersdelight:gleaming_salad"
   ]
 }

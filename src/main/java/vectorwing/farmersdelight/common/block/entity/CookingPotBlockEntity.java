@@ -308,15 +308,17 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	}
 
 	protected boolean canCook(CookingPotRecipe recipe) {
+		if (level == null) return false;
+
 		if (hasInput()) {
-			ItemStack resultStack = recipe.getResultItem(this.level.registryAccess());
+			ItemStack resultStack = recipe.assemble(new RecipeWrapper(inventory), this.level.registryAccess());
 			if (resultStack.isEmpty()) {
 				return false;
 			} else {
 				ItemStack storedMealStack = inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
 				if (storedMealStack.isEmpty()) {
 					return true;
-				} else if (!ItemStack.isSameItem(storedMealStack, resultStack)) {
+				} else if (!ItemStack.isSameItemSameTags(storedMealStack, resultStack)) {
 					return false;
 				} else if (storedMealStack.getCount() + resultStack.getCount() <= inventory.getSlotLimit(MEAL_DISPLAY_SLOT)) {
 					return true;
@@ -340,11 +342,11 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 		cookTime = 0;
 		mealContainerStack = recipe.getOutputContainer();
-		ItemStack resultStack = recipe.getResultItem(this.level.registryAccess());
+		ItemStack resultStack = recipe.assemble(new RecipeWrapper(inventory), this.level.registryAccess());
 		ItemStack storedMealStack = inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
 		if (storedMealStack.isEmpty()) {
 			inventory.setStackInSlot(MEAL_DISPLAY_SLOT, resultStack.copy());
-		} else if (ItemStack.isSameItem(storedMealStack, resultStack)) {
+		} else if (ItemStack.isSameItemSameTags(storedMealStack, resultStack)) {
 			storedMealStack.grow(resultStack.getCount());
 		}
 		cookingPot.setRecipeUsed(recipe);
@@ -444,7 +446,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		int mealCount = Math.min(mealStack.getCount(), mealStack.getMaxStackSize() - outputStack.getCount());
 		if (outputStack.isEmpty()) {
 			inventory.setStackInSlot(OUTPUT_SLOT, mealStack.split(mealCount));
-		} else if (outputStack.getItem() == mealStack.getItem()) {
+		} else if (ItemStack.isSameItemSameTags(mealStack, outputStack)) {
 			mealStack.shrink(mealCount);
 			outputStack.grow(mealCount);
 		}
@@ -461,7 +463,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 			if (outputStack.isEmpty()) {
 				containerInputStack.shrink(mealCount);
 				inventory.setStackInSlot(OUTPUT_SLOT, mealStack.split(mealCount));
-			} else if (outputStack.getItem() == mealStack.getItem()) {
+			} else if (ItemStack.isSameItemSameTags(outputStack, mealStack)) {
 				mealStack.shrink(mealCount);
 				containerInputStack.shrink(mealCount);
 				outputStack.grow(mealCount);
@@ -490,7 +492,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 	@Override
 	public Component getName() {
-		return customName != null ? customName : TextUtils.getTranslation("container.cooking_pot");
+		return customName != null ? customName : TextUtils.container("cooking_pot");
 	}
 
 	@Override

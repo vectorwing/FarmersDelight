@@ -62,7 +62,7 @@ public class StarParticle extends TextureSheetParticle
 		}
 
 		@Override
-		public Particle createParticle(SimpleParticleType typeIn, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
 			StarParticle particle = new StarParticle(level, x, y + 0.3D, z);
 			particle.pickSprite(this.spriteSet);
 			particle.setColor(1.0F, 1.0F, 1.0F);

@@ -214,7 +214,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "farmersdelight.advancement.plant_all_crops.desc"
+      "translate": "advancements.farmersdelight.plant_all_crops.description"
     },
     "frame": "challenge",
     "hidden": false,
@@ -223,7 +223,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "farmersdelight.advancement.plant_all_crops"
+      "translate": "advancements.farmersdelight.plant_all_crops.title"
     }
   },
   "requirements": [

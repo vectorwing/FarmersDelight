@@ -10,7 +10,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import vectorwing.farmersdelight.common.block.CuttingBoardBlock;
 import vectorwing.farmersdelight.common.block.entity.CuttingBoardBlockEntity;
@@ -49,11 +48,8 @@ public class CuttingBoardDispenseBehavior extends OptionalDispenseItemBehavior
 		BlockPos pos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
 		BlockState state = level.getBlockState(pos);
 		Block block = state.getBlock();
-		BlockEntity blockEntity = level.getBlockEntity(pos);
-		if (block instanceof CuttingBoardBlock && blockEntity instanceof CuttingBoardBlockEntity cuttingBoard) {
-			ItemStack boardItem = cuttingBoard.getStoredItem().copy();
-			if (!boardItem.isEmpty() && cuttingBoard.processStoredItemUsingTool(stack, null)) {
-				CuttingBoardBlock.spawnCuttingParticles(level, pos, boardItem, 5);
+		if (block instanceof CuttingBoardBlock && level.getBlockEntity(pos) instanceof CuttingBoardBlockEntity cuttingBoard) {
+			if (!cuttingBoard.isEmpty() && cuttingBoard.processStoredItemUsingTool(stack, null)) {
 				setSuccess(true);
 			}
 			return true;

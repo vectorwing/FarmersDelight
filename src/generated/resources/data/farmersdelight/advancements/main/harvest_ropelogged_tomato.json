@@ -9,11 +9,10 @@
             "predicate": {
               "block": {
                 "blocks": [
-                  "farmersdelight:tomatoes"
+                  "farmersdelight:tomatoes_on_rope"
                 ],
                 "state": {
-                  "age": "0",
-                  "ropelogged": "true"
+                  "age": "0"
                 }
               }
             }
@@ -30,7 +29,7 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "farmersdelight.advancement.harvest_ropelogged_tomato.desc"
+      "translate": "advancements.farmersdelight.harvest_ropelogged_tomato.description"
     },
     "frame": "task",
     "hidden": false,
@@ -39,7 +38,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "farmersdelight.advancement.harvest_ropelogged_tomato"
+      "translate": "advancements.farmersdelight.harvest_ropelogged_tomato.title"
     }
   },
   "requirements": [

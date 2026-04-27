@@ -1,8 +1,0 @@
-{
-  "parent": "farmersdelight:block/template_farmland_custom",
-  "textures": {
-    "top": "farmersdelight:block/rich_soil_farmland",
-    "bottom": "farmersdelight:block/rich_soil",
-    "side": "farmersdelight:block/rich_soil"
-  }
-}

@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "fd_pumpkin_pie",
+  "key": {
+    "O": {
+      "item": "farmersdelight:pie_crust"
+    },
+    "c": {
+      "item": "farmersdelight:pumpkin_slice"
+    },
+    "e": {
+      "tag": "forge:eggs"
+    },
+    "s": {
+      "item": "minecraft:sugar"
+    }
+  },
+  "pattern": [
+    "cec",
+    "csc",
+    " O "
+  ],
+  "result": {
+    "count": 2,
+    "item": "minecraft:pumpkin_pie"
+  },
+  "show_notification": true
+}

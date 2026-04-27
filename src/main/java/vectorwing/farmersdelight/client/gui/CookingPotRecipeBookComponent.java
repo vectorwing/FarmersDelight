@@ -30,7 +30,7 @@ public class CookingPotRecipeBookComponent extends RecipeBookComponent
 	@Override
 	@Nonnull
 	protected Component getRecipeFilterName() {
-		return TextUtils.getTranslation("container.recipe_book.cookable");
+		return TextUtils.container("recipe_book.cookable");
 	}
 
 	@Override

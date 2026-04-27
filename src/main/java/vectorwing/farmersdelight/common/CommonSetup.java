@@ -6,6 +6,7 @@ import com.google.common.collect.Sets;
 import net.minecraft.core.Position;
 import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.animal.Pig;
@@ -19,12 +20,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraftforge.common.crafting.CompoundIngredient;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
-import vectorwing.farmersdelight.common.crafting.condition.VanillaCrateEnabledCondition;
 import vectorwing.farmersdelight.common.entity.RottenTomatoEntity;
+import vectorwing.farmersdelight.common.network.ModNetworking;
 import vectorwing.farmersdelight.common.registry.ModAdvancements;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
@@ -41,10 +41,9 @@ public class CommonSetup
 			registerDispenserBehaviors();
 			registerItemSetAdditions();
 			registerStackSizeOverrides();
+			ModNetworking.register();
+			ModAdvancements.register();
 		});
-
-		ModAdvancements.register();
-		CraftingHelper.register(new VanillaCrateEnabledCondition.Serializer());
 	}
 
 	public static void registerStackSizeOverrides() {
@@ -62,8 +61,8 @@ public class CommonSetup
 		DispenserBlock.registerBehavior(ModItems.ROTTEN_TOMATO.get(), new AbstractProjectileDispenseBehavior()
 		{
 			@Override
-			protected Projectile getProjectile(Level pLevel, Position pPosition, ItemStack pStack) {
-				return new RottenTomatoEntity(pLevel, pPosition.x(), pPosition.y(), pPosition.z());
+			protected Projectile getProjectile(Level level, Position position, ItemStack stack) {
+				return new RottenTomatoEntity(level, position.x(), position.y(), position.z());
 			}
 		});
 	}
@@ -129,6 +128,11 @@ public class CommonSetup
 		{
 		};
 
+		Ingredient newCatFood = Ingredient.of(ModItems.COD_SLICE.get(), ModItems.SALMON_SLICE.get());
+		Cat.TEMPT_INGREDIENT = new CompoundIngredient(Arrays.asList(Cat.TEMPT_INGREDIENT, newCatFood))
+		{
+		};
+
 		Collections.addAll(Parrot.TAME_FOOD, ModItems.CABBAGE_SEEDS.get(), ModItems.TOMATO_SEEDS.get(), ModItems.RICE.get());
 
 		Set<Item> newWantedItems = Sets.newHashSet(
@@ -150,6 +154,5 @@ public class CommonSetup
 		newFoodPoints.putAll(Villager.FOOD_POINTS);
 
 		Villager.FOOD_POINTS = ImmutableMap.copyOf(newFoodPoints);
-
 	}
 }

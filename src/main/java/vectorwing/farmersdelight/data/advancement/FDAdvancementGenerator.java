@@ -15,23 +15,25 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.advancement.CuttingBoardTrigger;
-import vectorwing.farmersdelight.common.block.TomatoVineBlock;
+import vectorwing.farmersdelight.common.block.TomatoBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 import vectorwing.farmersdelight.common.registry.ModEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Consumer;
 
+@ParametersAreNonnullByDefault
 public class FDAdvancementGenerator implements ForgeAdvancementProvider.AdvancementGenerator
 {
 	@Override
 	public void generate(HolderLookup.Provider registries, Consumer<Advancement> consumer, ExistingFileHelper existingFileHelper) {
 		Advancement farmersDelight = Advancement.Builder.advancement()
 				.display(ModItems.COOKING_POT.get(),
-						TextUtils.getTranslation("advancement.root"),
-						TextUtils.getTranslation("advancement.root.desc"),
+						TextUtils.advancement("root.title"),
+						TextUtils.advancement("root.description"),
 						new ResourceLocation("minecraft:textures/block/bricks.png"),
 						FrameType.TASK, false, false, false)
 				.addCriterion("seeds", InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{}))
@@ -95,10 +97,9 @@ public class FDAdvancementGenerator implements ForgeAdvancementProvider.Advancem
 
 		Advancement tallmato = getAdvancement(cropsOfTheWild, ModItems.TOMATO.get(), "harvest_ropelogged_tomato", FrameType.TASK, true, false, false)
 				.addCriterion("harvest_ropelogged_tomato", ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(
-						LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(ModBlocks.TOMATO_CROP.get()).setProperties(
+						LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(ModBlocks.TOMATO_CROP_ON_ROPE.get()).setProperties(
 								StatePropertiesPredicate.Builder.properties()
-										.hasProperty(TomatoVineBlock.VINE_AGE, 0)
-										.hasProperty(TomatoVineBlock.ROPELOGGED, true)
+										.hasProperty(TomatoBlock.VINE_AGE, 0)
 										.build()
 						).build()),
 						ItemPredicate.Builder.item())
@@ -154,11 +155,7 @@ public class FDAdvancementGenerator implements ForgeAdvancementProvider.Advancem
 				.addCriterion("cooking_pot", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.COOKING_POT.get()))
 				.save(consumer, getNameId("main/place_cooking_pot"));
 
-		Advancement comforting = getAdvancement(dinnerIsServed, ModItems.BAKED_COD_STEW.get(), "eat_comfort_food", FrameType.TASK, true, false, false)
-				.addCriterion("comfort", EffectsChangedTrigger.TriggerInstance.hasEffects(MobEffectsPredicate.effects().and(ModEffects.COMFORT.get())))
-				.save(consumer, getNameId("main/eat_comfort_food"));
-
-		Advancement nourishing = getAdvancement(comforting, ModItems.STEAK_AND_POTATOES.get(), "eat_nourishing_food", FrameType.TASK, true, false, false)
+		Advancement nourishing = getAdvancement(dinnerIsServed, ModItems.STEAK_AND_POTATOES.get(), "eat_nourishing_food", FrameType.TASK, true, false, false)
 				.addCriterion("nourishment", EffectsChangedTrigger.TriggerInstance.hasEffects(MobEffectsPredicate.effects().and(ModEffects.NOURISHMENT.get())))
 				.save(consumer, getNameId("main/eat_nourishing_food"));
 
@@ -167,6 +164,7 @@ public class FDAdvancementGenerator implements ForgeAdvancementProvider.Advancem
 				.addCriterion("stuffed_pumpkin", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.STUFFED_PUMPKIN_BLOCK.get()))
 				.addCriterion("honey_glazed_ham", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.HONEY_GLAZED_HAM_BLOCK.get()))
 				.addCriterion("shepherds_pie", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.SHEPHERDS_PIE_BLOCK.get()))
+				.addCriterion("gleaming_salad", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.GLEAMING_SALAD_BLOCK.get()))
 				.addCriterion("rice_roll_medley", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get()))
 				.requirements(RequirementsStrategy.OR)
 				.save(consumer, getNameId("main/place_feast"));
@@ -183,6 +181,7 @@ public class FDAdvancementGenerator implements ForgeAdvancementProvider.Advancem
 				.addCriterion("pumpkin_soup", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.PUMPKIN_SOUP.get()))
 				.addCriterion("baked_cod_stew", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.BAKED_COD_STEW.get()))
 				.addCriterion("noodle_soup", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.NOODLE_SOUP.get()))
+				.addCriterion("onion_soup", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.ONION_SOUP.get()))
 				.addCriterion("bacon_and_eggs", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.BACON_AND_EGGS.get()))
 				.addCriterion("ratatouille", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.RATATOUILLE.get()))
 				.addCriterion("steak_and_potatoes", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.STEAK_AND_POTATOES.get()))
@@ -197,14 +196,15 @@ public class FDAdvancementGenerator implements ForgeAdvancementProvider.Advancem
 				.addCriterion("stuffed_pumpkin", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.STUFFED_PUMPKIN.get()))
 				.addCriterion("honey_glazed_ham", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.HONEY_GLAZED_HAM.get()))
 				.addCriterion("shepherds_pie", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.SHEPHERDS_PIE.get()))
+				.addCriterion("gleaming_salad", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.GLEAMING_SALAD.get()))
 				.rewards(AdvancementRewards.Builder.experience(200))
 				.save(consumer, getNameId("main/master_chef"));
 	}
 
 	protected static Advancement.Builder getAdvancement(Advancement parent, ItemLike display, String name, FrameType frame, boolean showToast, boolean announceToChat, boolean hidden) {
 		return Advancement.Builder.advancement().parent(parent).display(display,
-				TextUtils.getTranslation("advancement." + name),
-				TextUtils.getTranslation("advancement." + name + ".desc"),
+				TextUtils.advancement(name + ".title"),
+				TextUtils.advancement(name + ".description"),
 				null, frame, showToast, announceToChat, hidden);
 	}
 

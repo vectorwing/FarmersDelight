@@ -1,0 +1,55 @@
+{
+  "format_version": "1.9.0",
+  "parent": "block/block",
+  "textures": {
+    "particle": "farmersdelight:block/platter",
+    "platter": "farmersdelight:block/platter"
+  },
+  "elements": [
+    {
+      "name": "base",
+      "from": [1, 1, 2],
+      "to": [15, 3, 14],
+      "faces": {
+        "north": {"uv": [0, 12, 14, 14], "texture": "#platter"},
+        "east": {"uv": [14, 0, 16, 12], "rotation": 90, "texture": "#platter"},
+        "south": {"uv": [0, 12, 14, 14], "texture": "#platter"},
+        "west": {"uv": [14, 12, 16, 0], "rotation": 90, "texture": "#platter"},
+        "up": {"uv": [0, 0, 14, 12], "texture": "#platter"},
+        "down": {"uv": [0, 0, 14, 12], "texture": "#platter"}
+      }
+    },
+    {
+      "name": "east_support",
+      "from": [11, 0, 2],
+      "to": [13, 1, 14],
+      "faces": {
+        "north": {"uv": [14, 15, 16, 16], "texture": "#platter"},
+        "east": {"uv": [2, 15, 14, 16], "texture": "#platter"},
+        "south": {"uv": [0, 15, 2, 16], "texture": "#platter"},
+        "west": {"uv": [2, 15, 14, 16], "texture": "#platter"},
+        "down": {"uv": [2, 14, 14, 16], "rotation": 90, "texture": "#platter", "cullface": "down"}
+      }
+    },
+    {
+      "name": "west_support",
+      "from": [3, 0, 2],
+      "to": [5, 1, 14],
+      "faces": {
+        "north": {"uv": [14, 15, 16, 16], "texture": "#platter"},
+        "east": {"uv": [2, 15, 14, 16], "texture": "#platter"},
+        "south": {"uv": [0, 15, 2, 16], "texture": "#platter"},
+        "west": {"uv": [2, 15, 14, 16], "texture": "#platter"},
+        "down": {"uv": [2, 14, 14, 16], "rotation": 90, "texture": "#platter", "cullface": "down"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "platter",
+      "origin": [1, 1, 1],
+      "color": 0,
+      "children": [0, 1, 2]
+    }
+  ]
+}

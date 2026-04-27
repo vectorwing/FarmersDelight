@@ -18,7 +18,10 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -63,24 +66,22 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player,
-								 InteractionHand hand, BlockHitResult result) {
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		ItemStack heldStack = player.getItemInHand(hand);
 		if (heldStack.isEmpty() && player.isShiftKeyDown()) {
 			level.setBlockAndUpdate(pos, state.setValue(SUPPORT, state.getValue(SUPPORT).equals(CookingPotSupport.HANDLE)
 					? getTrayState(level, pos) : CookingPotSupport.HANDLE));
 			level.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundSource.BLOCKS, 0.7F, 1.0F);
 		} else if (!level.isClientSide) {
-			BlockEntity tileEntity = level.getBlockEntity(pos);
-			if (tileEntity instanceof CookingPotBlockEntity cookingPotEntity) {
-				ItemStack servingStack = cookingPotEntity.useHeldItemOnMeal(heldStack);
+			if (level.getBlockEntity(pos) instanceof CookingPotBlockEntity cookingPot) {
+				ItemStack servingStack = cookingPot.useHeldItemOnMeal(heldStack);
 				if (servingStack != ItemStack.EMPTY) {
 					if (!player.getInventory().add(servingStack)) {
 						player.drop(servingStack, false);
 					}
-					level.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.BLOCKS, 1.0F, 1.0F);
+					level.playSound(null, pos, ModSounds.BLOCK_FOOD_TAKE_PORTION.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
 				} else {
-					NetworkHooks.openScreen((ServerPlayer) player, cookingPotEntity, pos);
+					NetworkHooks.openScreen((ServerPlayer) player, cookingPot, pos);
 				}
 			}
 			return InteractionResult.SUCCESS;
@@ -89,7 +90,7 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 	}
 
 	@Override
-	public RenderShape getRenderShape(BlockState pState) {
+	public RenderShape getRenderShape(BlockState state) {
 		return RenderShape.MODEL;
 	}
 
@@ -131,7 +132,7 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 	}
 
 	private CookingPotSupport getTrayState(LevelAccessor level, BlockPos pos) {
-		if (level.getBlockState(pos.below()).is(ModTags.TRAY_HEAT_SOURCES)) {
+		if (level.getBlockState(pos.below()).is(ModTags.Blocks.TRAY_HEAT_SOURCES)) {
 			return CookingPotSupport.TRAY;
 		}
 		return CookingPotSupport.NONE;
@@ -140,14 +141,14 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 	@Override
 	public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
 		ItemStack stack = super.getCloneItemStack(level, pos, state);
-		CookingPotBlockEntity cookingPotEntity = (CookingPotBlockEntity) level.getBlockEntity(pos);
-		if (cookingPotEntity != null) {
-			CompoundTag nbt = cookingPotEntity.writeMeal(new CompoundTag());
+		CookingPotBlockEntity cookingPot = (CookingPotBlockEntity) level.getBlockEntity(pos);
+		if (cookingPot != null) {
+			CompoundTag nbt = cookingPot.writeMeal(new CompoundTag());
 			if (!nbt.isEmpty()) {
 				stack.addTagElement("BlockEntityTag", nbt);
 			}
-			if (cookingPotEntity.hasCustomName()) {
-				stack.setHoverName(cookingPotEntity.getCustomName());
+			if (cookingPot.hasCustomName()) {
+				stack.setHoverName(cookingPot.getCustomName());
 			}
 		}
 		return stack;
@@ -155,11 +156,10 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 
 	@Override
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (state.getBlock() != newState.getBlock()) {
-			BlockEntity tileEntity = level.getBlockEntity(pos);
-			if (tileEntity instanceof CookingPotBlockEntity cookingPotEntity) {
-				Containers.dropContents(level, pos, cookingPotEntity.getDroppableInventory());
-				cookingPotEntity.getUsedRecipesAndPopExperience(level, Vec3.atCenterOf(pos));
+		if (!state.is(newState.getBlock())) {
+			if (level.getBlockEntity(pos) instanceof CookingPotBlockEntity cookingPot) {
+				Containers.dropContents(level, pos, cookingPot.getDroppableInventory());
+				cookingPot.getUsedRecipesAndPopExperience(level, Vec3.atCenterOf(pos));
 				level.updateNeighbourForOutputSignal(pos, this);
 			}
 
@@ -175,19 +175,15 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 
 	@Override
 	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-		if (stack.hasCustomHoverName()) {
-			BlockEntity tileEntity = level.getBlockEntity(pos);
-			if (tileEntity instanceof CookingPotBlockEntity) {
-				((CookingPotBlockEntity) tileEntity).setCustomName(stack.getHoverName());
-			}
+		if (stack.hasCustomHoverName() && level.getBlockEntity(pos) instanceof CookingPotBlockEntity cookingPot) {
+			cookingPot.setCustomName(stack.getHoverName());
 		}
 	}
 
 	@Override
 	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-		BlockEntity tileEntity = level.getBlockEntity(pos);
-		if (tileEntity instanceof CookingPotBlockEntity cookingPotEntity && cookingPotEntity.isHeated()) {
-			SoundEvent boilSound = !cookingPotEntity.getMeal().isEmpty()
+		if (level.getBlockEntity(pos) instanceof CookingPotBlockEntity cookingPot && cookingPot.isHeated()) {
+			SoundEvent boilSound = !cookingPot.getMeal().isEmpty()
 					? ModSounds.BLOCK_COOKING_POT_BOIL_SOUP.get()
 					: ModSounds.BLOCK_COOKING_POT_BOIL.get();
 			double x = (double) pos.getX() + 0.5D;
@@ -205,10 +201,9 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
-		BlockEntity tileEntity = level.getBlockEntity(pos);
-		if (tileEntity instanceof CookingPotBlockEntity) {
-			ItemStackHandler inventory = ((CookingPotBlockEntity) tileEntity).getInventory();
+	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+		if (level.getBlockEntity(pos) instanceof CookingPotBlockEntity cookingPot) {
+			ItemStackHandler inventory = cookingPot.getInventory();
 			return MathUtils.calcRedstoneFromItemHandler(inventory);
 		}
 		return 0;
@@ -235,6 +230,6 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 
 	@Nullable
 	protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> serverType, BlockEntityType<E> clientType, BlockEntityTicker<? super E> ticker) {
-		return clientType == serverType ? (BlockEntityTicker<A>)ticker : null;
+		return clientType == serverType ? (BlockEntityTicker<A>) ticker : null;
 	}
 }

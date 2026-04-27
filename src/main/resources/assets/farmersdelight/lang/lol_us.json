@@ -1,7 +1,7 @@
 {
   "block.farmersdelight.stove": "hottin furnaz",
   "block.farmersdelight.cooking_pot": "Soups Brewin Pot",
-  "block.farmersdelight.basket": "Quantum Container",
+  "block.farmersdelight.wooden_basket": "Quantum Container",
   "block.farmersdelight.cutting_board": "CHOPPIN BORD",
   "block.farmersdelight.skillet": "sizzle pan",
   "block.farmersdelight.oak_cabinet": "Oaky Stuff Hole",
@@ -136,7 +136,7 @@
   "effect.farmersdelight.comfort": "Happy Tummy",
 
   "enchantment.farmersdelight.backstabbing": "Sniky Stab",
-  "enchantment.farmersdelight.backstabbing.desc": "Moar hurt if u stab from behind!",
+  "enchantment.farmersdelight.backstabbing.description": "Moar hurt if u stab from behind!",
 
   "itemGroup.farmersdelight": "Yum Yum Mod",
 

@@ -4,13 +4,13 @@
   "group": "fd_dough",
   "ingredients": [
     {
-      "item": "minecraft:wheat"
+      "tag": "forge:crops/wheat"
     },
     {
-      "item": "minecraft:wheat"
+      "tag": "forge:crops/wheat"
     },
     {
-      "item": "minecraft:wheat"
+      "tag": "forge:crops/wheat"
     },
     {
       "tag": "forge:eggs"
