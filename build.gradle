@@ -153,6 +153,12 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
+jarJar.enable()
+
+tasks.jarJar.configure {
+    classifier ''
+}
+
 jar {
     manifest {
         attributes([
