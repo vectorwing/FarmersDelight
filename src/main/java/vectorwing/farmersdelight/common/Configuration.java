@@ -135,21 +135,21 @@ public class Configuration
 
 	// Backwards compatibility configs.
 	@Deprecated(forRemoval = true)
-	public static Supplier<Boolean> FARMERS_BUY_FD_CROPS = ENABLE_FARMERS_BUY_FD_CROPS;
+	public static ModConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS = (ModConfigSpec.BooleanValue) ENABLE_FARMERS_BUY_FD_CROPS;
 	@Deprecated(forRemoval = true)
-	public static Supplier<Boolean> WANDERING_TRADER_SELLS_FD_ITEMS = ENABLE_WANDERING_TRADER_SELLS_FD_ITEMS;
+	public static ModConfigSpec.BooleanValue WANDERING_TRADER_SELLS_FD_ITEMS = (ModConfigSpec.BooleanValue) ENABLE_WANDERING_TRADER_SELLS_FD_ITEMS;
 	@Deprecated(forRemoval = true)
-	public static Supplier<Boolean> ENABLE_RECIPE_BOOK_COOKING_POT = ENABLE_COOKING_POT_RECIPE_BOOK;
+	public static ModConfigSpec.BooleanValue ENABLE_RECIPE_BOOK_COOKING_POT = (ModConfigSpec.BooleanValue) ENABLE_COOKING_POT_RECIPE_BOOK;
 	@Deprecated(forRemoval = true)
-	public static Supplier<Boolean> VANILLA_SOUP_EXTRA_EFFECTS = ENABLE_VANILLA_SOUP_EXTRA_EFFECTS;
+	public static ModConfigSpec.BooleanValue VANILLA_SOUP_EXTRA_EFFECTS = (ModConfigSpec.BooleanValue) ENABLE_VANILLA_SOUP_EXTRA_EFFECTS;
 	@Deprecated(forRemoval = true)
-	public static Supplier<Boolean> RABBIT_STEW_BUFF = ENABLE_RABBIT_STEW_BUFF;
+	public static ModConfigSpec.BooleanValue RABBIT_STEW_BUFF = (ModConfigSpec.BooleanValue) ENABLE_RABBIT_STEW_BUFF;
 	@Deprecated(forRemoval = true)
-	public static Supplier<Boolean> DISPENSER_TOOLS_CUTTING_BOARD = ENABLE_DISPENSER_TOOLS_CUTTING_BOARD;
+	public static ModConfigSpec.BooleanValue DISPENSER_TOOLS_CUTTING_BOARD = (ModConfigSpec.BooleanValue) ENABLE_DISPENSER_TOOLS_CUTTING_BOARD;
 	@Deprecated(forRemoval = true)
-	public static Supplier<Boolean> NOURISHMENT_HUNGER_OVERLAY = ENABLE_NOURISHMENT_HUNGER_OVERLAY;
+	public static ModConfigSpec.BooleanValue NOURISHMENT_HUNGER_OVERLAY = (ModConfigSpec.BooleanValue) ENABLE_NOURISHMENT_HUNGER_OVERLAY;
 	@Deprecated(forRemoval = true)
-	public static Supplier<Boolean> COMFORT_HEALTH_OVERLAY = ENABLE_COMFORT_HEALTH_OVERLAY;
+	public static ModConfigSpec.BooleanValue COMFORT_HEALTH_OVERLAY = (ModConfigSpec.BooleanValue) ENABLE_COMFORT_HEALTH_OVERLAY;
 	@Deprecated(forRemoval = true)
-	public static Supplier<Boolean> FOOD_EFFECT_TOOLTIP = ENABLE_FOOD_EFFECT_TOOLTIP;
+	public static ModConfigSpec.BooleanValue FOOD_EFFECT_TOOLTIP = (ModConfigSpec.BooleanValue) ENABLE_FOOD_EFFECT_TOOLTIP;
 }
