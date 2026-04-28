@@ -151,7 +151,7 @@ public class ModTags
 	@Deprecated(forRemoval = true)
 	public static final TagKey<Block> WILD_CROPS = Blocks.WILD_CROPS;
 	@Deprecated(forRemoval = true)
-	public static final TagKey<Block> CABINETS = Blocks.CABINETS
+	public static final TagKey<Block> CABINETS = Blocks.CABINETS;
 	@Deprecated(forRemoval = true)
 	public static final TagKey<Block> WOODEN_CABINETS = Blocks.CABINETS_WOODEN;
 	@Deprecated(forRemoval = true)
