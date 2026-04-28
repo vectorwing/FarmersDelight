@@ -137,4 +137,73 @@ public class ModTags
 	private static TagKey<EntityType<?>> modEntityTag(String path) {
 		return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(FarmersDelight.MODID, path));
 	}
+
+	/**
+	 * The following tag references are DEPRECATED, and should no longer be used by add-ons. Please use the sub-classed tag references moving forward.
+	 * They were re-introduced to prevent crashes, but they will be removed in the next major/minor release.
+	 */
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Block> MINEABLE_WITH_KNIFE = Blocks.MINEABLE_WITH_KNIFE;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Block> TERRAIN = Blocks.TERRAIN;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Block> STRAW_BLOCKS = Blocks.STRAW_BLOCKS;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Block> WILD_CROPS = Blocks.WILD_CROPS;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Block> CABINETS = Blocks.CABINETS
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Block> WOODEN_CABINETS = Blocks.CABINETS_WOODEN;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Block> MUSHROOM_COLONIES = Blocks.MUSHROOM_COLONIES;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Block> ROPES = Blocks.ROPES;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Block> HEAT_SOURCES = Blocks.HEAT_SOURCES;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Block> HEAT_CONDUCTORS = Blocks.HEAT_CONDUCTORS;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Block> TRAY_HEAT_SOURCES = Blocks.TRAY_HEAT_SOURCES;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Block> COMPOST_ACTIVATORS = Blocks.COMPOST_ACTIVATORS;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Block> MUSHROOM_COLONY_GROWABLE_ON = Blocks.MUSHROOM_COLONY_GROWABLE_ON;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Block> UNAFFECTED_BY_RICH_SOIL = Blocks.UNAFFECTED_BY_RICH_SOIL;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Block> DROPS_CAKE_SLICE = Blocks.DROPS_CAKE_SLICE;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Block> CAMPFIRE_SIGNAL_SMOKE = Blocks.CAMPFIRE_SIGNAL_SMOKE;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Item> MEALS = Items.MEALS;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Item> DRINKS = Items.DRINKS;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Item> FEASTS = Items.FEASTS;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Item> WILD_CROPS_ITEM = Items.WILD_CROPS;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Item> STRAW_HARVESTERS = Items.STRAW_HARVESTERS;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Item> KNIVES = Items.KNIVES;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Item> CANVAS_SIGNS = Items.CANVAS_SIGNS;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Item> HANGING_CANVAS_SIGNS = Items.HANGING_CANVAS_SIGNS;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Item> WOODEN_CABINET_ITEMS = Items.CABINETS_WOODEN;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Item> CABINET_ITEMS = Items.CABINETS;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Item> MUSHROOM_COLONY_ITEMS = Items.MUSHROOM_COLONIES;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Item> SERVING_CONTAINERS = Items.SERVING_CONTAINERS;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<Item> FLAT_ON_CUTTING_BOARD = Items.FLAT_ON_CUTTING_BOARD;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<EntityType<?>> DOG_FOOD_USERS = EntityTypes.DOG_FOOD_USERS;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<EntityType<?>> HORSE_FEED_USERS = EntityTypes.HORSE_FEED_USERS;
+	@Deprecated(forRemoval = true)
+	public static final TagKey<EntityType<?>> HORSE_FEED_TEMPTED = EntityTypes.HORSE_FEED_TEMPTED;
 }
