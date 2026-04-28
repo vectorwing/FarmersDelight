@@ -139,7 +139,7 @@ public class ModTags
 	}
 
 	/**
-	 * The following tag references are DEPRECATED, and should no longer be used by add-ons. Please use the sub-classed tag references moving forward.
+	 * The following tag references are deprecated, and should no longer be used by add-ons. Please use the sub-classed tag references moving forward, or create local tag references in your add-on.
 	 * They were re-introduced to prevent crashes, but they will be removed in the next major/minor release.
 	 */
 	@Deprecated(forRemoval = true)
