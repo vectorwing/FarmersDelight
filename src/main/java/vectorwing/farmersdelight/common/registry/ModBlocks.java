@@ -50,6 +50,12 @@ public class ModBlocks
 	public static final RegistryObject<Block> CUTTING_BOARD = BLOCKS.register("cutting_board",
 			() -> new CuttingBoardBlock(Block.Properties.copy(Blocks.OAK_PLANKS).strength(2.0F).sound(SoundType.WOOD)));
 
+	/**
+	 * Deprecated reference added for backwards compatibility. Use BAMBOO_BASKET instead.
+	 */
+	@Deprecated(forRemoval = true)
+	public static final RegistryObject<Block> BASKET = BAMBOO_BASKET;
+
 	// Crop Storage
 	public static final RegistryObject<Block> CARROT_CRATE = BLOCKS.register("carrot_crate",
 			() -> new Block(Block.Properties.copy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));

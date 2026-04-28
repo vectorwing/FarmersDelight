@@ -3,7 +3,9 @@
 ## 1.3.1
 
 ### Updates
-- Re-introduced deprecated tag references in code, to alleviate crashes with add-ons which depended on them;
+- Re-introduced deprecated references in code, to alleviate crashes with add-ons which depended on them:
+  - Tag references;
+  - Block and item fields for BASKET now point to BAMBOO_BASKET;
 
 ### Fixes
 - (1.20) Fix MixinExtras dependency not being present as a jar-jar in the mod file;

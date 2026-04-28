@@ -69,6 +69,12 @@ public class ModItems
 	public static final RegistryObject<Item> BAMBOO_BASKET = registerWithTab("bamboo_basket",
 			() -> new FuelBlockItem(ModBlocks.BAMBOO_BASKET.get(), basicItem(), 300));
 
+	/**
+	 * Deprecated reference added for backwards compatibility. Use BAMBOO_BASKET instead.
+	 */
+	@Deprecated(forRemoval = true)
+	public static final RegistryObject<Item> BASKET = BAMBOO_BASKET;
+
 	public static final RegistryObject<Item> CARROT_CRATE = registerWithTab("carrot_crate",
 			() -> new BlockItem(ModBlocks.CARROT_CRATE.get(), basicItem()));
 	public static final RegistryObject<Item> POTATO_CRATE = registerWithTab("potato_crate",
