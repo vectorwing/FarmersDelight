@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.3.1
+
+### Updates
+- Re-introduced deprecated tag references in code, to alleviate crashes with add-ons which depended on them;
+
+### Fixes
+- (1.20) Fix MixinExtras dependency not being present as a jar-jar in the mod file;
+
 ## 1.3.0
 
 ### Additions
