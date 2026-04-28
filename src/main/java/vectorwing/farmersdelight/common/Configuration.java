@@ -132,4 +132,24 @@ public class Configuration
 
 		CLIENT_CONFIG = CLIENT_BUILDER.build();
 	}
+
+	// Backwards compatibility configs.
+	@Deprecated(forRemoval = true)
+	public static Supplier<Boolean> FARMERS_BUY_FD_CROPS = ENABLE_FARMERS_BUY_FD_CROPS;
+	@Deprecated(forRemoval = true)
+	public static Supplier<Boolean> WANDERING_TRADER_SELLS_FD_ITEMS = ENABLE_WANDERING_TRADER_SELLS_FD_ITEMS;
+	@Deprecated(forRemoval = true)
+	public static Supplier<Boolean> ENABLE_RECIPE_BOOK_COOKING_POT = ENABLE_COOKING_POT_RECIPE_BOOK;
+	@Deprecated(forRemoval = true)
+	public static Supplier<Boolean> VANILLA_SOUP_EXTRA_EFFECTS = ENABLE_VANILLA_SOUP_EXTRA_EFFECTS;
+	@Deprecated(forRemoval = true)
+	public static Supplier<Boolean> RABBIT_STEW_BUFF = ENABLE_RABBIT_STEW_BUFF;
+	@Deprecated(forRemoval = true)
+	public static Supplier<Boolean> DISPENSER_TOOLS_CUTTING_BOARD = ENABLE_DISPENSER_TOOLS_CUTTING_BOARD;
+	@Deprecated(forRemoval = true)
+	public static Supplier<Boolean> NOURISHMENT_HUNGER_OVERLAY = ENABLE_NOURISHMENT_HUNGER_OVERLAY;
+	@Deprecated(forRemoval = true)
+	public static Supplier<Boolean> COMFORT_HEALTH_OVERLAY = ENABLE_COMFORT_HEALTH_OVERLAY;
+	@Deprecated(forRemoval = true)
+	public static Supplier<Boolean> FOOD_EFFECT_TOOLTIP = ENABLE_FOOD_EFFECT_TOOLTIP;
 }
