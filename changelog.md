@@ -5,6 +5,7 @@
 ### Updates
 - Re-introduced deprecated references in code, to alleviate crashes with add-ons which depended on them:
   - Tag references;
+  - Configuration;
   - Block and item fields for BASKET now point to BAMBOO_BASKET;
 
 ### Fixes

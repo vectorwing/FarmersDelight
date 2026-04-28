@@ -132,4 +132,24 @@ public class Configuration
 
 		CLIENT_CONFIG = CLIENT_BUILDER.build();
 	}
+
+	// Backwards compatibility configs.
+	@Deprecated(forRemoval = true)
+	public static ForgeConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS = ENABLE_FARMERS_BUY_FD_CROPS;
+	@Deprecated(forRemoval = true)
+	public static ForgeConfigSpec.BooleanValue WANDERING_TRADER_SELLS_FD_ITEMS = ENABLE_WANDERING_TRADER_SELLS_FD_ITEMS;
+	@Deprecated(forRemoval = true)
+	public static ForgeConfigSpec.BooleanValue ENABLE_RECIPE_BOOK_COOKING_POT = ENABLE_COOKING_POT_RECIPE_BOOK;
+	@Deprecated(forRemoval = true)
+	public static ForgeConfigSpec.BooleanValue VANILLA_SOUP_EXTRA_EFFECTS = ENABLE_VANILLA_SOUP_EXTRA_EFFECTS;
+	@Deprecated(forRemoval = true)
+	public static ForgeConfigSpec.BooleanValue RABBIT_STEW_JUMP_BOOST = ENABLE_RABBIT_STEW_JUMP_BOOST;
+	@Deprecated(forRemoval = true)
+	public static ForgeConfigSpec.BooleanValue DISPENSER_TOOLS_CUTTING_BOARD = ENABLE_DISPENSER_TOOLS_CUTTING_BOARD;
+	@Deprecated(forRemoval = true)
+	public static ForgeConfigSpec.BooleanValue NOURISHMENT_HUNGER_OVERLAY = ENABLE_NOURISHMENT_HUNGER_OVERLAY;
+	@Deprecated(forRemoval = true)
+	public static ForgeConfigSpec.BooleanValue COMFORT_HEALTH_OVERLAY = ENABLE_COMFORT_HEALTH_OVERLAY;
+	@Deprecated(forRemoval = true)
+	public static ForgeConfigSpec.BooleanValue FOOD_EFFECT_TOOLTIP = ENABLE_FOOD_EFFECT_TOOLTIP;
 }
