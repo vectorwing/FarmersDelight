@@ -53,7 +53,7 @@ public class CookingPotResultSlot extends SlotItemHandler
 	protected void checkTakeAchievements(ItemStack stack) {
 		stack.onCraftedBy(this.player.level(), this.player, this.removeCount);
 
-		if (!this.player.level().isClientSide) {
+		if (!this.player.level().isClientSide()) {
 			cookingPot.awardUsedRecipes(this.player, cookingPot.getDroppableInventory());
 		}
 

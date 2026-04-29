@@ -127,7 +127,7 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 			if (!result.isItemEnabled(this.level.enabledFeatures())) continue;
 			ItemUtils.spawnItemEntity(level, result.copy(),
 				worldPosition.getX() + 0.5, worldPosition.getY() + 1.0, worldPosition.getZ() + 0.5,
-				level.random.nextGaussian() * (double) 0.01F, 0.1F, level.random.nextGaussian() * (double) 0.01F);
+				level.getRandom().nextGaussian() * (double) 0.01F, 0.1F, level.getRandom().nextGaussian() * (double) 0.01F);
 			this.items.setStackInSlot(i, ItemStack.EMPTY);
 			var state = this.getBlockState();
 			this.level.sendBlockUpdated(this.worldPosition, state, state, Block.UPDATE_ALL);

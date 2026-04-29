@@ -3,20 +3,18 @@ package vectorwing.farmersdelight.common.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -24,7 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
@@ -46,7 +44,7 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 {
 	public static final MapCodec<CuttingBoardBlock> CODEC = simpleCodec(CuttingBoardBlock::new);
 
-	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+	public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
 	protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 1.0D, 15.0D);
@@ -58,20 +56,20 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 
 	@Override
 	protected MapCodec<? extends BaseEntityBlock> codec() {
-		return null;
+		return CODEC;
 	}
 
 	@Override
-	public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+	public InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (!(level.getBlockEntity(pos) instanceof CuttingBoardBlockEntity cuttingBoard)) {
-			return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+			return InteractionResult.PASS;
 		}
 
 		ItemStack mainHandStack = player.getMainHandItem();
 
 		if (mainHandStack.isEmpty()) {
-			if (cuttingBoard.isEmpty() || level.isClientSide) {
-				return ItemInteractionResult.CONSUME;
+			if (cuttingBoard.isEmpty() || level.isClientSide()) {
+				return InteractionResult.CONSUME;
 			}
 			ItemStack removedStack = cuttingBoard.removeItem();
 			if (!player.isCreative()) {
@@ -79,11 +77,11 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 			}
 			Vec3 centerPos = pos.getCenter();
 			level.playSound(null, centerPos.x(), centerPos.y(), centerPos.z(), ModSounds.BLOCK_CUTTING_BOARD_REMOVE.get(), SoundSource.BLOCKS, 0.25F, 0.5F);
-			return ItemInteractionResult.SUCCESS;
+			return InteractionResult.SUCCESS;
 		}
 		if (cuttingBoard.canAddItem(mainHandStack)) {
-			if (level.isClientSide) {
-				return ItemInteractionResult.CONSUME;
+			if (level.isClientSide()) {
+				return InteractionResult.CONSUME;
 			}
 			ItemStack remainderStack = cuttingBoard.addItem(player.getAbilities().instabuild ? mainHandStack.copy() : mainHandStack);
 			if (!player.isCreative()) {
@@ -91,27 +89,23 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 			}
 			Vec3 centerPos = pos.getCenter();
 			level.playSound(null, centerPos.x(), centerPos.y(), centerPos.z(), ModSounds.BLOCK_CUTTING_BOARD_PLACE.get(), SoundSource.BLOCKS, 1.0F, 0.8F);
-			return ItemInteractionResult.SUCCESS;
+			return InteractionResult.SUCCESS;
 		} else {
 			if (cuttingBoard.processStoredItemUsingTool(mainHandStack, player)) {
-				return ItemInteractionResult.SUCCESS;
+				return InteractionResult.SUCCESS;
 			}
 		}
-		return ItemInteractionResult.CONSUME;
+		return InteractionResult.CONSUME;
 	}
 
 	@Override
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (state.is(newState.getBlock())) {
-			return;
-		}
-
+	public void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston) {
 		if (level.getBlockEntity(pos) instanceof CuttingBoardBlockEntity cuttingBoard) {
 			Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), cuttingBoard.getStoredItem());
 			level.updateNeighbourForOutputSignal(pos, this);
 		}
 
-		super.onRemove(state, level, pos, newState, isMoving);
+		super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
 	}
 
 	@Override
@@ -123,17 +117,17 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		FluidState fluid = context.getLevel().getFluidState(context.getClickedPos());
 		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite())
-				.setValue(WATERLOGGED, fluid.getType() == Fluids.WATER);
+			.setValue(WATERLOGGED, fluid.getType() == Fluids.WATER);
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+	protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos, Direction directionToNeighbour, BlockPos neighbourPos, BlockState neighbourState, RandomSource random) {
 		if (state.getValue(WATERLOGGED)) {
-			level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+			ticks.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
-		return facing == Direction.DOWN && !state.canSurvive(level, currentPos)
-				? Blocks.AIR.defaultBlockState()
-				: super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+		return directionToNeighbour == Direction.DOWN && !state.canSurvive(level, pos)
+			? Blocks.AIR.defaultBlockState()
+			: super.updateShape(state, level, ticks, pos, directionToNeighbour, neighbourPos, neighbourState, random);
 	}
 
 	@Override
@@ -159,7 +153,7 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+	protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction) {
 		if (!(level.getBlockEntity(pos) instanceof CuttingBoardBlockEntity cuttingBoard)) {
 			return 0;
 		}

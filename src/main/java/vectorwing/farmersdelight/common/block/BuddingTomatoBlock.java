@@ -8,6 +8,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
@@ -19,11 +20,17 @@ public class BuddingTomatoBlock extends BuddingBushBlock implements Bonemealable
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+	protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos, Direction directionToNeighbour, BlockPos neighbourPos, BlockState neighbourState, RandomSource random) {
 		if (state.getValue(BuddingBushBlock.AGE) == 4) {
-			level.setBlock(currentPos, ModBlocks.TOMATO_CROP.get().defaultBlockState(), 3);
+			// TODO: We can't setBlock here anymore. See if this still works as intended.
+			ticks.scheduleTick(pos, this, 3);
 		}
-		return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+		return super.updateShape(state, level, ticks, pos, directionToNeighbour, neighbourPos, neighbourState, random);
+	}
+
+	@Override
+	protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+		growPastMaxAge(state, level, pos, random);
 	}
 
 	@Override
@@ -47,7 +54,7 @@ public class BuddingTomatoBlock extends BuddingBushBlock implements Bonemealable
 	}
 
 	protected int getBonemealAgeIncrease(Level level) {
-		return Mth.nextInt(level.random, 1, 4);
+		return Mth.nextInt(level.getRandom(), 1, 4);
 	}
 
 	@Override

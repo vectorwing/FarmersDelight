@@ -34,7 +34,7 @@ public class FDRecipes
 	}
 
 	public List<RecipeHolder<CookingPotRecipe>> getCookingPotRecipes() {
-		return recipeManager..getAllRecipesFor(ModRecipeTypes.COOKING.get());
+		return recipeManager.getAllRecipesFor(ModRecipeTypes.COOKING.get());
 	}
 
 	public List<RecipeHolder<CuttingBoardRecipe>> getCuttingBoardRecipes() {

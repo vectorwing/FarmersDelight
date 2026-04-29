@@ -8,24 +8,21 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
@@ -34,17 +31,15 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.registry.ModSounds;
-import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vectorwing.farmersdelight.common.utility.ShapeUtils;
 
 import java.util.Map;
 import java.util.function.Supplier;
 
-@SuppressWarnings("deprecation")
 public class PieBlock extends Block
 {
-	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+	public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 3);
 
 	protected static final VoxelShape[] SHAPES = {
@@ -94,16 +89,16 @@ public class PieBlock extends Block
 	}
 
 	@Override
-	public ItemInteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+	public InteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (ItemUtils.isKnife(heldStack)) {
 			return cutSlice(level, pos, state, player, heldStack.getItem());
 		}
 
-		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+		return InteractionResult.PASS;
 	}
 
 	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-		if (level.isClientSide) {
+		if (level.isClientSide()) {
 			if (consumeBite(level, pos, state, player).consumesAction()) {
 				return InteractionResult.SUCCESS;
 			}
@@ -124,12 +119,12 @@ public class PieBlock extends Block
 			return InteractionResult.PASS;
 		} else {
 			ItemStack sliceStack = this.getPieSliceItem();
-			FoodProperties sliceFood = sliceStack.getItem().getFoodProperties(sliceStack, player);
+			FoodProperties sliceFood = sliceStack.getItem().(sliceStack, player);
 
 			if (sliceFood != null) {
 				player.getFoodData().eat(sliceFood);
 				for (FoodProperties.PossibleEffect effect : sliceFood.effects()) {
-					if (!level.isClientSide && effect != null && level.random.nextFloat() < effect.probability()) {
+					if (!level.isClientSide() && effect != null && level.getRandom().nextFloat() < effect.probability()) {
 						player.addEffect(effect.effect());
 					}
 				}
@@ -141,7 +136,7 @@ public class PieBlock extends Block
 			} else {
 				level.removeBlock(pos, false);
 			}
-			level.playSound(null, pos, SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 0.8F, 0.8F);
+			level.playSound(null, pos, SoundEvents.GENERIC_EAT.value(), SoundSource.PLAYERS, 0.8F, 0.8F);
 			if (level instanceof ServerLevel serverLevel) {
 				serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, state), pos.getX() + 0.5, pos.getY() + 0.3, pos.getZ() + 0.5, 3, 0.1, 0.1, 0.1, 0.001D);
 			}
@@ -152,7 +147,7 @@ public class PieBlock extends Block
 	/**
 	 * Cuts off a bite and drops a slice item, without feeding the player.
 	 */
-	protected ItemInteractionResult cutSlice(Level level, BlockPos pos, BlockState state, Player player, Item knife) {
+	protected InteractionResult cutSlice(Level level, BlockPos pos, BlockState state, Player player, Item knife) {
 		int bites = state.getValue(BITES);
 		if (bites < getMaxBites() - 1) {
 			level.setBlock(pos, state.setValue(BITES, bites + 1), 3);
@@ -169,12 +164,12 @@ public class PieBlock extends Block
 		}
 		player.awardStat(Stats.ITEM_USED.get(knife));
 
-		return ItemInteractionResult.SUCCESS;
+		return InteractionResult.SUCCESS;
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-		return facing == Direction.DOWN && !state.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+	protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos, Direction directionToNeighbour, BlockPos neighbourPos, BlockState neighbourState, RandomSource random) {
+		return directionToNeighbour == Direction.DOWN && !state.canSurvive(level, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, level, ticks, pos, directionToNeighbour, neighbourPos, neighbourState, random);
 	}
 
 	@Override
@@ -188,7 +183,7 @@ public class PieBlock extends Block
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+	protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction) {
 		return getMaxBites() - state.getValue(BITES);
 	}
 

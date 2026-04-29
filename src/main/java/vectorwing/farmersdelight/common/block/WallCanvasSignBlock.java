@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
 
 public class WallCanvasSignBlock extends WallSignBlock implements CanvasSign
 {
-	private final DyeColor backgroundColor;
+	private final @Nullable DyeColor backgroundColor;
 
 	public WallCanvasSignBlock(Properties properties, @Nullable DyeColor backgroundColor) {
 		super(WoodType.SPRUCE, properties);

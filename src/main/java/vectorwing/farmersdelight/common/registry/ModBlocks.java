@@ -73,7 +73,7 @@ public class ModBlocks
 
 	// Building
 	public static final Supplier<Block> ROPE = BLOCKS.register("rope",
-			() -> new RopeBlock(Block.Properties.ofFullCopy(Blocks.BROWN_CARPET).noCollission().noOcclusion().strength(0.2F).sound(SoundType.WOOL)));
+			() -> new RopeBlock(Block.Properties.ofFullCopy(Blocks.BROWN_CARPET).noCollision().noOcclusion().strength(0.2F).sound(SoundType.WOOL)));
 	public static final Supplier<Block> SAFETY_NET = BLOCKS.register("safety_net",
 			() -> new SafetyNetBlock(Block.Properties.ofFullCopy(Blocks.BROWN_CARPET).strength(0.2F).sound(SoundType.WOOL)));
 	public static final Supplier<Block> ROPE_FENCE = BLOCKS.register("rope_fence",
@@ -274,8 +274,7 @@ public class ModBlocks
 			() -> new PieBlock(Block.Properties.ofFullCopy(Blocks.CAKE), ModItems.PUMPKIN_PIE_SLICE)
 			{
 				@Override
-				@SuppressWarnings("deprecation")
-				public @NotNull ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+				public @NotNull ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
 					return new ItemStack(Items.PUMPKIN_PIE);
 				}
 			});
@@ -285,15 +284,15 @@ public class ModBlocks
 			() -> new SandyShrubBlock(Block.Properties.ofFullCopy(Blocks.TALL_GRASS)));
 
 	public static final Supplier<Block> WILD_CABBAGES = BLOCKS.register("wild_cabbages",
-			() -> new WildCropBlock(MobEffects.DAMAGE_BOOST, 6, Block.Properties.ofFullCopy(Blocks.TALL_GRASS)));
+			() -> new WildCropBlock(MobEffects.STRENGTH, 6, Block.Properties.ofFullCopy(Blocks.TALL_GRASS)));
 	public static final Supplier<Block> WILD_ONIONS = BLOCKS.register("wild_onions",
 			() -> new WildCropBlock(MobEffects.FIRE_RESISTANCE, 6, Block.Properties.ofFullCopy(Blocks.TALL_GRASS)));
 	public static final Supplier<Block> WILD_TOMATOES = BLOCKS.register("wild_tomatoes",
 			() -> new WildCropBlock(MobEffects.POISON, 10, Block.Properties.ofFullCopy(Blocks.TALL_GRASS)));
 	public static final Supplier<Block> WILD_CARROTS = BLOCKS.register("wild_carrots",
-			() -> new WildCropBlock(MobEffects.DIG_SLOWDOWN, 6, Block.Properties.ofFullCopy(Blocks.TALL_GRASS)));
+			() -> new WildCropBlock(MobEffects.MINING_FATIGUE, 6, Block.Properties.ofFullCopy(Blocks.TALL_GRASS)));
 	public static final Supplier<Block> WILD_POTATOES = BLOCKS.register("wild_potatoes",
-			() -> new WildCropBlock(MobEffects.CONFUSION, 8, Block.Properties.ofFullCopy(Blocks.TALL_GRASS)));
+			() -> new WildCropBlock(MobEffects.NAUSEA, 8, Block.Properties.ofFullCopy(Blocks.TALL_GRASS)));
 	public static final Supplier<Block> WILD_BEETROOTS = BLOCKS.register("wild_beetroots",
 			() -> new WildCropBlock(MobEffects.WATER_BREATHING, 8, Block.Properties.ofFullCopy(Blocks.TALL_GRASS)));
 	public static final Supplier<Block> WILD_RICE = BLOCKS.register("wild_rice",

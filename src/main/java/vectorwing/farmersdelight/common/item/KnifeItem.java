@@ -158,16 +158,16 @@ public class KnifeItem extends DiggerItem
 
 		if (state.getBlock() == Blocks.PUMPKIN && toolStack.is(ModTags.Items.KNIVES)) {
 			Player player = context.getPlayer();
-			if (player != null && !level.isClientSide) {
+			if (player != null && !level.isClientSide()) {
 				Direction direction = facing.getAxis() == Direction.Axis.Y ? player.getDirection().getOpposite() : facing;
 				level.playSound(null, pos, SoundEvents.PUMPKIN_CARVE, SoundSource.BLOCKS, 1.0F, 1.0F);
 				level.setBlock(pos, Blocks.CARVED_PUMPKIN.defaultBlockState().setValue(CarvedPumpkinBlock.FACING, direction), 11);
 				ItemEntity itemEntity = new ItemEntity(level, (double) pos.getX() + 0.5D + (double) direction.getStepX() * 0.65D, (double) pos.getY() + 0.1D, (double) pos.getZ() + 0.5D + (double) direction.getStepZ() * 0.65D, new ItemStack(Items.PUMPKIN_SEEDS, 4));
-				itemEntity.setDeltaMovement(0.05D * (double) direction.getStepX() + level.random.nextDouble() * 0.02D, 0.05D, 0.05D * (double) direction.getStepZ() + level.random.nextDouble() * 0.02D);
+				itemEntity.setDeltaMovement(0.05D * (double) direction.getStepX() + level.getRandom().nextDouble() * 0.02D, 0.05D, 0.05D * (double) direction.getStepZ() + level.getRandom().nextDouble() * 0.02D);
 				level.addFreshEntity(itemEntity);
 				toolStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(context.getHand()));
 			}
-			return InteractionResult.sidedSuccess(level.isClientSide);
+			return InteractionResult.SUCCESS;
 		} else {
 			return InteractionResult.PASS;
 		}

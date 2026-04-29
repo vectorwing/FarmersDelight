@@ -5,7 +5,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.TriState;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.monster.Ravager;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -14,14 +16,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.level.block.FarmlandBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.CommonHooks;
-import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.event.EventHooks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
@@ -32,7 +33,7 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 @SuppressWarnings("deprecation")
 public class BuddingBushBlock extends BushBlock
 {
-	public static final MapCodec<BuddingBushBlock> CODEC = simpleCodec(BuddingBushBlock::new);
+	public static final MapCodec<BushBlock> CODEC = simpleCodec(BuddingBushBlock::new);
 
 	public static final int MAX_AGE = 3;
 	public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 4);
@@ -48,7 +49,7 @@ public class BuddingBushBlock extends BushBlock
 	}
 
 	@Override
-	protected MapCodec<? extends BushBlock> codec() {
+	public MapCodec<BushBlock> codec() {
 		return CODEC;
 	}
 
@@ -59,7 +60,7 @@ public class BuddingBushBlock extends BushBlock
 
 	@Override
 	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
-		return state.getBlock() instanceof FarmBlock;
+		return state.getBlock() instanceof FarmlandBlock;
 	}
 
 	public IntegerProperty getAgeProperty() {
@@ -174,12 +175,12 @@ public class BuddingBushBlock extends BushBlock
 	}
 
 	@Override
-	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-		if (entity instanceof Ravager && EventHooks.canEntityGrief(level, entity)) {
+	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean isPrecise) {
+		if (level instanceof ServerLevel serverLevel && entity instanceof Ravager && EventHooks.canEntityGrief(serverLevel, entity)) {
 			level.destroyBlock(pos, true, entity);
 		}
 
-		super.entityInside(state, level, pos, entity);
+		super.entityInside(state, level, pos, entity, effectApplier, isPrecise);
 	}
 
 	protected ItemLike getBaseSeedId() {
@@ -187,7 +188,7 @@ public class BuddingBushBlock extends BushBlock
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
 		return new ItemStack(getBaseSeedId());
 	}
 

@@ -2,12 +2,14 @@ package vectorwing.farmersdelight.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -23,7 +25,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-@SuppressWarnings("deprecation")
 public class SafetyNetBlock extends Block implements SimpleWaterloggedBlock
 {
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -46,12 +47,12 @@ public class SafetyNetBlock extends Block implements SimpleWaterloggedBlock
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+	protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos, Direction directionToNeighbour, BlockPos neighbourPos, BlockState neighbourState, RandomSource random) {
 		if (state.getValue(WATERLOGGED)) {
-			level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+			ticks.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
 
-		return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+		return super.updateShape(state, level, ticks, pos, directionToNeighbour, neighbourPos, neighbourState, random);
 	}
 
 	@Override
@@ -65,7 +66,7 @@ public class SafetyNetBlock extends Block implements SimpleWaterloggedBlock
 	}
 
 	@Override
-	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
 		if (entity.isSuppressingBounce()) {
 			super.fallOn(level, state, pos, entity, fallDistance);
 		} else {
@@ -74,9 +75,9 @@ public class SafetyNetBlock extends Block implements SimpleWaterloggedBlock
 	}
 
 	@Override
-	public void updateEntityAfterFallOn(BlockGetter level, Entity entity) {
+	public void updateEntityMovementAfterFallOn(BlockGetter level, Entity entity) {
 		if (entity.isSuppressingBounce()) {
-			super.updateEntityAfterFallOn(level, entity);
+			super.updateEntityMovementAfterFallOn(level, entity);
 		} else {
 			this.bounceEntity(entity);
 		}

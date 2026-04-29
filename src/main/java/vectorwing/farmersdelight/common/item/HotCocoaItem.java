@@ -32,7 +32,7 @@ public class HotCocoaItem extends DrinkableItem
 		}
 
 		if (!compatibleEffects.isEmpty()) {
-			MobEffectInstance selectedEffect = consumer.getEffect(compatibleEffects.get(level.random.nextInt(compatibleEffects.size())));
+			MobEffectInstance selectedEffect = consumer.getEffect(compatibleEffects.get(level.getRandom().nextInt(compatibleEffects.size())));
 			if (selectedEffect != null && !net.neoforged.neoforge.event.EventHooks.onEffectRemoved(consumer, selectedEffect, EffectCures.MILK)) {
 				consumer.removeEffect(selectedEffect.getEffect());
 			}

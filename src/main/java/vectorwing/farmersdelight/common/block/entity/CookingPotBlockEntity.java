@@ -240,7 +240,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 	public static void animationTick(Level level, BlockPos pos, BlockState state, CookingPotBlockEntity cookingPot) {
 		if (cookingPot.isHeated(level, pos)) {
-			RandomSource random = level.random;
+			RandomSource random = level.getRandom();
 			if (random.nextFloat() < 0.2F) {
 				double x = (double) pos.getX() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);
 				double y = (double) pos.getY() + 0.7D;

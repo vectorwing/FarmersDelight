@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.common.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
@@ -14,7 +15,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
-@SuppressWarnings("deprecation")
 public class OrganicCompostBlock extends Block
 {
 	public static IntegerProperty COMPOSTING = IntegerProperty.create("composting", 0, 7);
@@ -40,9 +40,8 @@ public class OrganicCompostBlock extends Block
 	}
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-		if (level.isClientSide) return;
+		if (level.isClientSide()) return;
 
 		float chance = 0F;
 		boolean hasWater = false;
@@ -79,8 +78,8 @@ public class OrganicCompostBlock extends Block
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
-		return (getMaxCompostingStage() + 1 - blockState.getValue(COMPOSTING));
+	protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction) {
+		return (getMaxCompostingStage() + 1 - state.getValue(COMPOSTING));
 	}
 
 	@Override

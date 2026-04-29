@@ -95,14 +95,14 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity implements Cleara
 		Optional<RecipeHolder<CuttingBoardRecipe>> matchingRecipe = getMatchingRecipe(toolStack, player);
 
 		matchingRecipe.ifPresent(recipe -> {
-			List<ItemStack> results = recipe.value().rollResults(level.random, EnchantmentHelper.getTagEnchantmentLevel(level.holder(Enchantments.FORTUNE).get(), toolStack), new RecipeWrapper(inventory));
+			List<ItemStack> results = recipe.value().rollResults(level.getRandom(), EnchantmentHelper.getTagEnchantmentLevel(level.holder(Enchantments.FORTUNE).get(), toolStack), new RecipeWrapper(inventory));
 			for (ItemStack resultStack : results) {
 				Direction direction = getBlockState().getValue(CuttingBoardBlock.FACING).getCounterClockWise();
 				ItemUtils.spawnItemEntity(level, resultStack.copy(),
 						worldPosition.getX() + 0.5 + (direction.getStepX() * 0.2), worldPosition.getY() + 0.2, worldPosition.getZ() + 0.5 + (direction.getStepZ() * 0.2),
 						direction.getStepX() * 0.2F, 0.0F, direction.getStepZ() * 0.2F);
 			}
-			if (!level.isClientSide) {
+			if (!level.isClientSide()) {
 				toolStack.hurtAndBreak(1, (ServerLevel) level, player, (item) -> {
 				});
 				if (player != null) {

@@ -70,7 +70,7 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 
 	public static void animationTick(Level level, BlockPos pos, BlockState state, SkilletBlockEntity skillet) {
 		if (skillet.isHeated(level, pos) && skillet.hasStoredStack()) {
-			RandomSource random = level.random;
+			RandomSource random = level.getRandom();
 			if (random.nextFloat() < 0.2F) {
 				double x = (double) pos.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
 				double y = (double) pos.getY() + 0.1D;
@@ -82,9 +82,9 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 				double x = (double) pos.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
 				double y = (double) pos.getY() + 0.1D;
 				double z = (double) pos.getZ() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
-				double motionX = level.random.nextFloat() - 0.5F;
-				double motionY = level.random.nextFloat() * 0.5F + 0.2f;
-				double motionZ = level.random.nextFloat() - 0.5F;
+				double motionX = level.getRandom().nextFloat() - 0.5F;
+				double motionY = level.getRandom().nextFloat() * 0.5F + 0.2f;
+				double motionZ = level.getRandom().nextFloat() - 0.5F;
 				level.addParticle(ParticleTypes.ENCHANTED_HIT, x, y, z, motionX, motionY, motionZ);
 			}
 		}

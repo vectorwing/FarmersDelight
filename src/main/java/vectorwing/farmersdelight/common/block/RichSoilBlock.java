@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.TriState;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -13,7 +14,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
-import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.network.PacketDistributor;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.network.payload.RichSoilBoostParticlesPayload;
@@ -64,7 +64,7 @@ public class RichSoilBlock extends Block
 		}
 		if (plantState.getBlock() instanceof BonemealableBlock growable) {
 			if (growable.isValidBonemealTarget(level, plantPos, plantState) && CommonHooks.canCropGrow(level, plantPos, plantState, true)) {
-				growable.performBonemeal(level, level.random, plantPos, plantState);
+				growable.performBonemeal(level, level.getRandom(), plantPos, plantState);
 				PacketDistributor.sendToPlayersTrackingChunk(level, level.getChunkAt(plantPos).getPos(), new RichSoilBoostParticlesPayload(plantPos));
 				CommonHooks.fireCropGrowPost(level, plantPos, plantState);
 				return true;
@@ -97,11 +97,11 @@ public class RichSoilBlock extends Block
 
 
 	@Override
-	public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos pos, Direction facing, BlockState plantState) {
+	public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos pos, Direction directionToNeighbour, BlockState plantState) {
 		return TriState.DEFAULT;
 
 		// TODO: Figure out how to correctly configure Rich Soil's plant compatibility, since PlantType was removed
-//		PlantType plantType = plantState.getPlantType(level, pos.relative(facing));
+//		PlantType plantType = plantState.getPlantType(level, pos.relative(directionToNeighbour));
 //		return plantType != PlantType.CROP && plantType != PlantType.NETHER && plantType != PlantType.WATER;
 	}
 }

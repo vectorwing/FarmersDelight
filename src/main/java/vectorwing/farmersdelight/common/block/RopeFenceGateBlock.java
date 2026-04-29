@@ -3,8 +3,10 @@ package vectorwing.farmersdelight.common.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,12 +26,12 @@ public class RopeFenceGateBlock extends FenceGateBlock
 		super(props, ModSounds.BLOCK_ROPE_FENCE_GATE_OPEN.get(), ModSounds.BLOCK_ROPE_FENCE_GATE_CLOSE.get());
 	}
 
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-		Direction.Axis axis = facing.getAxis();
+	protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos, Direction directionToNeighbour, BlockPos neighbourPos, BlockState neighbourState, RandomSource random) {
+		Direction.Axis axis = directionToNeighbour.getAxis();
 		if (state.getValue(FACING).getClockWise().getAxis() != axis) {
-			return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+			return super.updateShape(state, level, ticks, pos, directionToNeighbour, neighbourPos, neighbourState, random);
 		} else {
-			boolean isBorderedByWalls = this.isWall(facingState) && this.isWall(level.getBlockState(currentPos.relative(facing.getOpposite())));
+			boolean isBorderedByWalls = this.isWall(neighbourState) && this.isWall(level.getBlockState(pos.relative(directionToNeighbour.getOpposite())));
 			return state.setValue(IN_WALL, isBorderedByWalls);
 		}
 	}

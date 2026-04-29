@@ -18,7 +18,7 @@ import javax.annotation.Nullable;
 
 public class StandingCanvasSignBlock extends StandingSignBlock implements CanvasSign
 {
-	private final DyeColor backgroundColor;
+	private final @Nullable DyeColor backgroundColor;
 
 	public StandingCanvasSignBlock(@Nullable DyeColor backgroundColor) {
 		super(WoodType.SPRUCE, Properties.ofFullCopy(Blocks.SPRUCE_SIGN));

@@ -1,14 +1,10 @@
 package vectorwing.farmersdelight.common.item;
 
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.Identifier;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -37,16 +33,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.client.renderer.SkilletItemRenderer;
-import vectorwing.farmersdelight.common.EnumParameters;
 import vectorwing.farmersdelight.common.block.SkilletBlock;
 import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 import vectorwing.farmersdelight.common.item.component.ItemStackWrapper;
@@ -60,9 +50,6 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
-import java.util.function.Consumer;
 
 @SuppressWarnings({"deprecation", "unused"})
 public class SkilletItem extends BlockItem
@@ -168,7 +155,7 @@ public class SkilletItem extends BlockItem
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+	public InteractionResult use(Level level, Player player, InteractionHand hand) {
 		ItemStack skilletStack = player.getItemInHand(hand);
 		if (isPlayerNearHeatSource(player, level)) {
 			InteractionHand otherHand = hand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
@@ -176,14 +163,14 @@ public class SkilletItem extends BlockItem
 
 			if (!skilletStack.getOrDefault(ModDataComponents.SKILLET_INGREDIENT, ItemStackWrapper.EMPTY).getStack().isEmpty()) {
 				player.startUsingItem(hand);
-				return InteractionResultHolder.pass(skilletStack);
+				return InteractionResult.PASS;
 			}
 
 			Optional<RecipeHolder<CampfireCookingRecipe>> recipe = getCookingRecipe(cookingStack, level);
 			if (recipe.isPresent()) {
 				if (player.isUnderWater()) {
-					player.displayClientMessage(TextUtils.item("skillet.underwater"), true);
-					return InteractionResultHolder.pass(skilletStack);
+					player.sendOverlayMessage(TextUtils.item("skillet.underwater"));
+					return InteractionResult.PASS;
 				}
 				ItemStack cookingStackCopy = cookingStack.copy();
 				ItemStack cookingStackUnit = cookingStackCopy.split(1);
@@ -191,12 +178,12 @@ public class SkilletItem extends BlockItem
 				skilletStack.set(ModDataComponents.COOKING_TIME_LENGTH, recipe.get().value().getCookingTime());
 				player.startUsingItem(hand);
 				player.setItemInHand(otherHand, cookingStackCopy);
-				return InteractionResultHolder.consume(skilletStack);
+				return InteractionResult.CONSUME;
 			} else {
-				player.displayClientMessage(TextUtils.item("skillet.how_to_cook"), true);
+				player.sendOverlayMessage(TextUtils.item("skillet.how_to_cook"));
 			}
 		}
-		return InteractionResultHolder.pass(skilletStack);
+		return InteractionResult.PASS;
 	}
 
 	@Override
@@ -208,15 +195,15 @@ public class SkilletItem extends BlockItem
 				if (l > FLIP_TIME) {
 					stack.remove(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
 					stack.set(ModDataComponents.SKILLET_FLIPPED.get(), !stack.getOrDefault(ModDataComponents.SKILLET_FLIPPED.get(), false));
-				} else if (level.isClientSide && l == FLIP_TIME - 8) {
+				} else if (level.isClientSide() && l == FLIP_TIME - 8) {
 					//why does it need to play early? idk
 					//plays instantly right before it lands & on client only so its instant. cant be done in statement above as that might not run fo player as stack is sent when updated
-					level.playSound(player, entity, ModSounds.BLOCK_SKILLET_ADD_FOOD.get(), SoundSource.PLAYERS, 0.4F, level.random.nextFloat() * 0.2F + 0.9F);
-				} else if (level.isClientSide && level.random.nextInt(50) == 0 && l < FLIP_TIME - 8 || l > FLIP_TIME - 3) {
-					level.playSound(null, entity, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.PLAYERS, 0.4F, level.random.nextFloat() * 0.2F + 0.9F);
+					level.playSound(player, entity, ModSounds.BLOCK_SKILLET_ADD_FOOD.get(), SoundSource.PLAYERS, 0.4F, level.getRandom().nextFloat() * 0.2F + 0.9F);
+				} else if (level.isClientSide() && level.getRandom().nextInt(50) == 0 && l < FLIP_TIME - 8 || l > FLIP_TIME - 3) {
+					level.playSound(null, entity, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.PLAYERS, 0.4F, level.getRandom().nextFloat() * 0.2F + 0.9F);
 				}
-			} else if (level.isClientSide && level.random.nextInt(50) == 0) {
-				level.playSound(null, entity, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.PLAYERS, 0.4F, level.random.nextFloat() * 0.2F + 0.9F);
+			} else if (level.isClientSide() && level.getRandom().nextInt(50) == 0) {
+				level.playSound(null, entity, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.PLAYERS, 0.4F, level.getRandom().nextFloat() * 0.2F + 0.9F);
 			}
 		}
 	}
@@ -307,7 +294,7 @@ public class SkilletItem extends BlockItem
 	}
 
 	public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity entity) {
-		if (!level.isClientSide && state.getDestroySpeed(level, pos) != 0.0F) {
+		if (!level.isClientSide() && state.getDestroySpeed(level, pos) != 0.0F) {
 			stack.hurtAndBreak(1, entity, EquipmentSlot.MAINHAND);
 		}
 
