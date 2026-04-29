@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.2
+
+### Fixes
+- Fix Rope Fences not being able to hold leashed animals in some circumstances;
+
 ## 1.3.1
 
 ### Updates
