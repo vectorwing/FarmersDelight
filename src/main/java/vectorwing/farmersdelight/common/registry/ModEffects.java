@@ -13,5 +13,6 @@ public class ModEffects
 	public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(Registries.MOB_EFFECT, FarmersDelight.MODID);
 
 	public static final Holder<MobEffect> NOURISHMENT = EFFECTS.register("nourishment", NourishmentEffect::new);
+	// TODO: Remove Comfort.
 	public static final Holder<MobEffect> COMFORT = EFFECTS.register("comfort", ComfortEffect::new);
 }

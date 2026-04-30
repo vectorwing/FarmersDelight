@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.common.registry;
 
 import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.DyeColor;
 import vectorwing.farmersdelight.FarmersDelight;

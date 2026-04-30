@@ -1,7 +1,7 @@
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @NullMarked
-package vectorwing.farmersdelight.common.advancement;
+package vectorwing.farmersdelight.common.registry;
 
 import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
 import org.jspecify.annotations.NullMarked;

@@ -3,9 +3,9 @@ package vectorwing.farmersdelight.common.advancement;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.critereon.ContextAwarePredicate;
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import net.minecraft.advancements.criterion.ContextAwarePredicate;
+import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.criterion.SimpleCriterionTrigger;
 import net.minecraft.server.level.ServerPlayer;
 import vectorwing.farmersdelight.common.registry.ModAdvancements;
 
@@ -22,18 +22,18 @@ public class CuttingBoardTrigger extends SimpleCriterionTrigger<CuttingBoardTrig
 		this.trigger(player, TriggerInstance::test);
 	}
 
-	public static record TriggerInstance(
-			Optional<ContextAwarePredicate> player) implements SimpleCriterionTrigger.SimpleInstance
+	public record TriggerInstance(
+		Optional<ContextAwarePredicate> player) implements SimpleCriterionTrigger.SimpleInstance
 	{
 		public static final Codec<CuttingBoardTrigger.TriggerInstance> CODEC = RecordCodecBuilder.create(
-				builder -> builder.group(
-								EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(CuttingBoardTrigger.TriggerInstance::player))
-						.apply(builder, CuttingBoardTrigger.TriggerInstance::new)
+			builder -> builder.group(
+					EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(CuttingBoardTrigger.TriggerInstance::player))
+				.apply(builder, CuttingBoardTrigger.TriggerInstance::new)
 		);
 
 		public static Criterion<TriggerInstance> simple() {
 			return ModAdvancements.USE_CUTTING_BOARD.get().createCriterion(
-					new CuttingBoardTrigger.TriggerInstance(Optional.empty())
+				new CuttingBoardTrigger.TriggerInstance(Optional.empty())
 			);
 		}
 

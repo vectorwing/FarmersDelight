@@ -72,6 +72,9 @@ public class ModTags
 
 	public static class Items
 	{
+		// Items which can be used to repair a Flint tool.
+		public static final TagKey<Item> FLINT_TOOL_MATERIALS = modItemTag("flint_tool_materials");
+
 		// Items which are compatible with the Backstabbing enchantment. Populated by #tools/knives.
 		public static final TagKey<Item> KNIFE_ENCHANTABLE = modItemTag("enchantable/knife");
 

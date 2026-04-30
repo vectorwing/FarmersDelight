@@ -9,6 +9,7 @@ import vectorwing.farmersdelight.common.crafting.condition.VanillaCrateEnabledCo
 
 import java.util.function.Supplier;
 
+@SuppressWarnings("unused")
 public class ModConditionCodecs
 {
 	public static final DeferredRegister<MapCodec<? extends ICondition>> CONDITION_CODECS = DeferredRegister.create(NeoForgeRegistries.CONDITION_SERIALIZERS, FarmersDelight.MODID);

@@ -16,7 +16,7 @@ public class ModDamageTypes
 	public static final ResourceKey<DamageType> STOVE_BURN = ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "stove_burn"));
 
 	public static DamageSource getSimpleDamageSource(Level level, ResourceKey<DamageType> type) {
-		return new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(type));
+		return new DamageSource(level.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(type));
 	}
 
 	public static void bootstrapDamageTypes(BootstrapContext<DamageType> context) {

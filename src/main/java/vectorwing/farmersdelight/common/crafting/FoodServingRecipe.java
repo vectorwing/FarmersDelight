@@ -1,22 +1,25 @@
 package vectorwing.farmersdelight.common.crafting;
 
-import net.minecraft.core.HolderLookup;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.NonNullList;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModItems;
-import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 
 public class FoodServingRecipe extends CustomRecipe
 {
-	public FoodServingRecipe(CraftingBookCategory category) {
-		super(category);
-	}
+	public static final FoodServingRecipe INSTANCE = new FoodServingRecipe();
+	public static final MapCodec<FoodServingRecipe> MAP_CODEC = MapCodec.unit(INSTANCE);
+	public static final StreamCodec<RegistryFriendlyByteBuf, FoodServingRecipe> STREAM_CODEC = StreamCodec.unit(INSTANCE);
+	public static final RecipeSerializer<FoodServingRecipe> SERIALIZER = new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
 
 	@Override
 	public boolean matches(CraftingInput input, Level level) {
@@ -47,7 +50,7 @@ public class FoodServingRecipe extends CustomRecipe
 	}
 
 	@Override
-	public ItemStack assemble(CraftingInput input, HolderLookup.Provider access) {
+	public @NotNull ItemStack assemble(CraftingInput input) {
 		for (int i = 0; i < input.size(); ++i) {
 			ItemStack selectedStack = input.getItem(i);
 			if (!selectedStack.isEmpty() && selectedStack.is(ModItems.COOKING_POT.get())) {
@@ -66,8 +69,9 @@ public class FoodServingRecipe extends CustomRecipe
 
 		for (int i = 0; i < remainders.size(); ++i) {
 			ItemStack selectedStack = input.getItem(i);
-			if (selectedStack.hasCraftingRemainingItem()) {
-				remainders.set(i, selectedStack.getCraftingRemainingItem());
+			ItemStackTemplate remainder = selectedStack.getCraftingRemainder();
+			if (remainder != null) {
+				remainders.set(i, remainder.create());
 			} else if (selectedStack.is(ModItems.COOKING_POT.get())) {
 				CookingPotBlockEntity.takeServingFromItem(selectedStack);
 				ItemStack newCookingPotStack = selectedStack.copy();
@@ -80,13 +84,13 @@ public class FoodServingRecipe extends CustomRecipe
 		return remainders;
 	}
 
-	@Override
-	public boolean canCraftInDimensions(int width, int height) {
-		return width >= 2 && height >= 2;
-	}
+//	@Override
+//	public boolean canCraftInDimensions(int width, int height) {
+//		return width >= 2 && height >= 2;
+//	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
-		return ModRecipeSerializers.FOOD_SERVING.get();
+	public RecipeSerializer<? extends CustomRecipe> getSerializer() {
+		return SERIALIZER;
 	}
 }
