@@ -478,7 +478,7 @@
   "farmersdelight.configuration.enableWanderingTraderFDTrades": "流浪商人特殊交易",
   "farmersdelight.configuration.enableWanderingTraderFDTrades.tooltip": "若启用，流浪商人将有概率出售本模组中的种子和可种植作物。",
   "farmersdelight.configuration.enableRopeReeling": "绳子收回",
-  "farmersdelight.configuration.enableRopeReeling.tooltip": "若启用此选项，玩家在空手潜行并对绳子使用交互操作时，即可将绳子从下往上收回。",
+  "farmersdelight.configuration.enableRopeReeling.tooltip": "若启用此选项，玩家在潜行时与绳子空手交互即可将绳子从下往上收回。",
   "farmersdelight.configuration.canvasSignDarkBackgroundList": "深色背景粗布告示牌",
   "farmersdelight.configuration.canvasSignDarkBackgroundList.tooltip": "一个染料颜色的列表，用这些颜色作为背景色的粗布告示牌会默认使用白色文本。\n\n染料颜色：\n[\"white\", \"orange\", \"magenta\", \"light_blue\", \"yellow\", \"lime\", \"pink\", \"gray\", \"light_gray\", \"cyan\", \"purple\", \"blue\", \"brown\", \"green\", \"red\", \"black\"]",
 
@@ -492,7 +492,7 @@
   "farmersdelight.configuration.enableCookingPotRecipeBook": "厨锅配方书",
   "farmersdelight.configuration.enableCookingPotRecipeBook.tooltip": "若启用，厨锅会在其界面中提供一个与工作台和熔炉中相似的配方书。",
   "farmersdelight.configuration.enableVanillaCropCrates": "原版作物装箱",
-  "farmersdelight.configuration.enableVanillaCropCrates.tooltip": "若启用，即可合成原版作物的箱装（3x3）存储物品（类似夸克与热力耕耘模组）",
+  "farmersdelight.configuration.enableVanillaCropCrates.tooltip": "若启用，即可合成原版作物的箱装（3x3）存储物品（类似夸克与热力农业模组）",
   "farmersdelight.configuration.cuttingBoardFortuneBonus": "砧板时运奖励",
   "farmersdelight.configuration.cuttingBoardFortuneBonus.tooltip": "每一级时运将从砧板上获得稀有产物的概率提高多少（以小数百分比表示）？设为0.0以禁用。",
 
