@@ -8,10 +8,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.RecipeMatcher;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
@@ -23,7 +20,7 @@ import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class CookingPotRecipe implements Recipe<RecipeWrapper>
+public class CookingPotRecipe implements Recipe<RecipeInput>
 {
 	public static final int INPUT_SLOTS = 6;
 

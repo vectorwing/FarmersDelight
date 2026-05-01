@@ -1,8 +1,7 @@
 package vectorwing.farmersdelight.data;
 
-import net.minecraft.advancements.criterion.EntityPredicate;
-import net.minecraft.advancements.criterion.ItemPredicate;
-import net.minecraft.advancements.criterion.StatePropertiesPredicate;
+import net.minecraft.advancements.criterion.*;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -45,6 +44,7 @@ public class LootModifiers extends GlobalLootModifierProvider
 
 	@Override
 	protected void start() {
+		HolderGetter<EntityType<?>> entityTypes = this.registries.lookupOrThrow(Registries.ENTITY_TYPE);
 		// Chest Loot
 		this.add("add_loot_abandoned_mineshaft", this.addNewLootPool(BuiltInLootTables.ABANDONED_MINESHAFT, ModChestLootTables.ABANDONED_MINESHAFT));
 		this.add("add_loot_bastion_hoglin_stable", this.addNewLootPool(BuiltInLootTables.BASTION_HOGLIN_STABLE, ModChestLootTables.BASTION_HOGLIN_STABLE));
@@ -100,11 +100,11 @@ public class LootModifiers extends GlobalLootModifierProvider
 		return new AddTableLootModifier(new LootItemCondition[]{LootTableIdCondition.builder(lootToAddTo.registry()).build()}, newPool);
 	}
 
-	private AddItemModifier addItemOnPlayerKill(Item item, float chance, EntityType<?>... entity) {
+	private AddItemModifier addItemOnPlayerKill(HolderGetter<EntityType<?>> entityTypes, Item item, float chance, EntityType<?>... entity) {
 		LootItemCondition.Builder[] entityConditions = new LootItemCondition.Builder[entity.length];
 		for (int i = 0; i < entity.length; i++) {
 			entityConditions[i] = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS,
-					EntityPredicate.Builder.entity().of(entity[i]).build());
+					EntityPredicate.Builder.entity().of(entityTypes, entity[i]).build());
 		}
 		List<LootItemCondition> conditions = new ArrayList<>();
 		conditions.add(entityConditions.length > 1 ? AnyOfCondition.anyOf(entityConditions).build() : entityConditions[0].build());
@@ -117,15 +117,15 @@ public class LootModifiers extends GlobalLootModifierProvider
 		return new AddItemModifier(conditions.toArray(LootItemCondition[]::new), item, 1);
 	}
 
-	private AddItemModifier addItemOnKnifeKill(Item item, EntityType<?>... entity) {
-		return this.addItemOnKnifeKill(item, null, 1.0F, entity);
+	private AddItemModifier addItemOnKnifeKill(HolderGetter<EntityType<?>> entityTypes, Item item, EntityType<?>... entity) {
+		return this.addItemOnKnifeKill(entityTypes, item, null, 1.0F, entity);
 	}
 
-	private AddItemModifier addItemOnKnifeKill(Item item, Boolean onFire, float chance, EntityType<?>... entity) {
+	private AddItemModifier addItemOnKnifeKill(HolderGetter<EntityType<?>> entityTypes, Item item, Boolean onFire, float chance, EntityType<?>... entity) {
 		LootItemCondition.Builder[] entityConditions = new LootItemCondition.Builder[entity.length];
 		for (int i = 0; i < entity.length; i++) {
 			entityConditions[i] = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS,
-					EntityPredicate.Builder.entity().of(entity[i]).build());
+					EntityPredicate.Builder.entity().of(entityTypes, entity[i]).build());
 		}
 
 		List<LootItemCondition> conditions = new ArrayList<>();
@@ -171,7 +171,7 @@ public class LootModifiers extends GlobalLootModifierProvider
 		}
 		conditions.add(slicedBlock.build());
 
-		return new AddItemModifier(conditions.toArray(LootItemCondition[]::new), ModItems.STRAW.get(), 1);
+		return new AddItemModifier(conditions.toArray(LootItemCondition[]::new), null, ModItems.STRAW.get(), 1);
 	}
 
 	protected LootItemCondition hasSilkTouch() {

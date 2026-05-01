@@ -30,11 +30,6 @@ public class SyncedBlockEntity extends BlockEntity
 	public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
 		return saveWithoutMetadata(registries);
 	}
-//
-//	@Override
-//	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-//		load(pkt.getTag());
-//	}
 
 	protected void inventoryChanged() {
 		super.setChanged();

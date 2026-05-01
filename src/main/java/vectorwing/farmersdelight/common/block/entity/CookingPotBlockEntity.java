@@ -29,18 +29,23 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.CookingPotBlock;
 import vectorwing.farmersdelight.common.block.entity.container.CookingPotMenu;
@@ -67,25 +72,25 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	public static final int INVENTORY_SIZE = OUTPUT_SLOT + 1;
 
 	public static final Map<Item, Item> INGREDIENT_REMAINDER_OVERRIDES = Map.ofEntries(
-			entry(Items.POWDER_SNOW_BUCKET, Items.BUCKET),
-			entry(Items.AXOLOTL_BUCKET, Items.BUCKET),
-			entry(Items.COD_BUCKET, Items.BUCKET),
-			entry(Items.PUFFERFISH_BUCKET, Items.BUCKET),
-			entry(Items.SALMON_BUCKET, Items.BUCKET),
-			entry(Items.TROPICAL_FISH_BUCKET, Items.BUCKET),
-			entry(Items.SUSPICIOUS_STEW, Items.BOWL),
-			entry(Items.MUSHROOM_STEW, Items.BOWL),
-			entry(Items.RABBIT_STEW, Items.BOWL),
-			entry(Items.BEETROOT_SOUP, Items.BOWL),
-			entry(Items.POTION, Items.GLASS_BOTTLE),
-			entry(Items.SPLASH_POTION, Items.GLASS_BOTTLE),
-			entry(Items.LINGERING_POTION, Items.GLASS_BOTTLE),
-			entry(Items.EXPERIENCE_BOTTLE, Items.GLASS_BOTTLE)
+		entry(Items.POWDER_SNOW_BUCKET, Items.BUCKET),
+		entry(Items.AXOLOTL_BUCKET, Items.BUCKET),
+		entry(Items.COD_BUCKET, Items.BUCKET),
+		entry(Items.PUFFERFISH_BUCKET, Items.BUCKET),
+		entry(Items.SALMON_BUCKET, Items.BUCKET),
+		entry(Items.TROPICAL_FISH_BUCKET, Items.BUCKET),
+		entry(Items.SUSPICIOUS_STEW, Items.BOWL),
+		entry(Items.MUSHROOM_STEW, Items.BOWL),
+		entry(Items.RABBIT_STEW, Items.BOWL),
+		entry(Items.BEETROOT_SOUP, Items.BOWL),
+		entry(Items.POTION, Items.GLASS_BOTTLE),
+		entry(Items.SPLASH_POTION, Items.GLASS_BOTTLE),
+		entry(Items.LINGERING_POTION, Items.GLASS_BOTTLE),
+		entry(Items.EXPERIENCE_BOTTLE, Items.GLASS_BOTTLE)
 	);
 
-	private final ItemStackHandler inventory;
-	private final IItemHandler inputHandler;
-	private final IItemHandler outputHandler;
+	private final ItemStacksResourceHandler inventory;
+	private final ResourceHandler<ItemResource> inputHandler;
+	private final ResourceHandler<ItemResource> outputHandler;
 
 	private int cookTime;
 	private int cookTimeTotal;
@@ -95,7 +100,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	protected final ContainerData cookingPotData;
 	private final Object2IntOpenHashMap<Identifier> usedRecipeTracker;
 
-	private final RecipeManager.CachedCheck<RecipeWrapper, CookingPotRecipe> quickCheck;
+	private final RecipeManager.CachedCheck<RecipeInput, CookingPotRecipe> quickCheck;
 
 	public CookingPotBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntityTypes.COOKING_POT.get(), pos, state);
@@ -111,14 +116,14 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	@SubscribeEvent
 	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
 		event.registerBlockEntity(
-				Capabilities.ItemHandler.BLOCK,
-				ModBlockEntityTypes.COOKING_POT.get(),
-				(be, context) -> {
-					if (context == Direction.UP) {
-						return be.inputHandler;
-					}
-					return be.outputHandler;
+			Capabilities.Item.BLOCK,
+			ModBlockEntityTypes.COOKING_POT.get(),
+			(be, context) -> {
+				if (context == Direction.UP) {
+					return be.inputHandler;
 				}
+				return be.outputHandler;
+			}
 		);
 	}
 
@@ -148,29 +153,29 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	}
 
 	@Override
-	public void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
-		super.loadAdditional(compound, registries);
-		inventory.deserializeNBT(registries, compound.getCompound("Inventory"));
-		cookTime = compound.getInt("CookTime");
-		cookTimeTotal = compound.getInt("CookTimeTotal");
-		mealContainerStack = ItemStack.parseOptional(registries, compound.getCompound("Container"));
-		if (compound.contains("CustomName", 8)) {
-			customName = Component.Serializer.fromJson(compound.getString("CustomName"), registries);
+	public void loadAdditional(ValueInput input) {
+		super.loadAdditional(input);
+		inventory.deserializeNBT(input.getCompound("Inventory"));
+		cookTime = input.getInt("CookTime");
+		cookTimeTotal = input.getInt("CookTimeTotal");
+		mealContainerStack = ItemStack.parseOptional(input.getCompound("Container"));
+		if (input.contains("CustomName", 8)) {
+			customName = Component.Serializer.fromJson(input.getString("CustomName"));
 		}
-		CompoundTag compoundRecipes = compound.getCompound("RecipesUsed");
+		CompoundTag inputRecipes = input.getCompound("RecipesUsed");
 		for (String key : compoundRecipes.getAllKeys()) {
 			usedRecipeTracker.put(Identifier.parse(key), compoundRecipes.getInt(key));
 		}
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
-		super.saveAdditional(compound, registries);
+	public void saveAdditional(ValueOutput output) {
+		super.saveAdditional(compound);
 		compound.putInt("CookTime", cookTime);
 		compound.putInt("CookTimeTotal", cookTimeTotal);
 		compound.put("Container", mealContainerStack.saveOptional(registries));
 		if (customName != null) {
-			compound.putString("CustomName", Component.Serializer.toJson(customName, registries));
+			compound.putString("CustomName", Component.Serializer.toJson(customName));
 		}
 		compound.put("Inventory", inventory.serializeNBT(registries));
 		CompoundTag compoundRecipes = new CompoundTag();
@@ -339,7 +344,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		double y = worldPosition.getY() + 0.7;
 		double z = worldPosition.getZ() + 0.5 + (direction.getStepZ() * 0.25);
 		ItemUtils.spawnItemEntity(level, remainderStack, x, y, z,
-				direction.getStepX() * 0.08F, 0.25F, direction.getStepZ() * 0.08F);
+			direction.getStepX() * 0.08F, 0.25F, direction.getStepZ() * 0.08F);
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @NullMarked
-package vectorwing.farmersdelight.common.item;
+package vectorwing.farmersdelight.common.effect;
 
 import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
 import org.jspecify.annotations.NullMarked;

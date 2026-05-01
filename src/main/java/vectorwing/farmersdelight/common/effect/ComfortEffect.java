@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.common.effect;
 
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffects;
@@ -15,13 +16,13 @@ public class ComfortEffect extends MobEffect
 	 * Comfort does not care for amplifiers; it will always heal at the same slow pace.
 	 * If the player has saturation to spend, or has the Regeneration effect, Comfort does nothing.
 	 */
-	@Deprecated // Comfort is no longer used in Farmer's Delight, and will be removed in the next minor release. Use Nourishment instead.
+	@Deprecated
 	public ComfortEffect() {
 		super(MobEffectCategory.BENEFICIAL, 14545909);
 	}
 
 	@Override
-	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+	public boolean applyEffectTick(ServerLevel level, LivingEntity entity, int amplifier) {
 		if (entity.hasEffect(MobEffects.REGENERATION)) {
 			return true;
 		}

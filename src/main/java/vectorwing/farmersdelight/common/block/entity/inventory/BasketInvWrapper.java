@@ -2,9 +2,11 @@ package vectorwing.farmersdelight.common.block.entity.inventory;
 
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
+import net.neoforged.neoforge.transfer.item.VanillaContainerWrapper;
 import vectorwing.farmersdelight.common.block.entity.Basket;
 
-public class BasketInvWrapper extends InvWrapper {
+public class BasketInvWrapper extends VanillaContainerWrapper
+{
     protected final Basket basket;
 
     public BasketInvWrapper(Basket basket) {

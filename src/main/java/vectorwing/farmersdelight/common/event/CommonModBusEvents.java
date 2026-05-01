@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.common.event;
 
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -13,6 +14,8 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.FoodValues;
 
+import java.util.Optional;
+
 @EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CommonModBusEvents
 {
@@ -23,8 +26,8 @@ public class CommonModBusEvents
 		}
 		if (Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) {
 			Configuration.SOUP_ITEM_LIST.get().forEach((key) -> {
-				Item item = BuiltInRegistries.ITEM.get(Identifier.parse(key));
-				event.modify(item, (builder) -> builder.set(DataComponents.MAX_STACK_SIZE, 16));
+				Optional<Holder.Reference<Item>> item = BuiltInRegistries.ITEM.get(Identifier.parse(key));
+				item.ifPresent(itemReference -> event.modify(itemReference.value(), (builder) -> builder.set(DataComponents.MAX_STACK_SIZE, 16)));
 			});
 		}
 		if (Configuration.ENABLE_RABBIT_STEW_BUFF.get()) {

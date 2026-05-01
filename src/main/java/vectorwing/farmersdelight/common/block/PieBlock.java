@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -16,7 +17,10 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.*;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -43,10 +47,10 @@ public class PieBlock extends Block
 	public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 3);
 
 	protected static final VoxelShape[] SHAPES = {
-			Block.box(2, 0, 2, 14, 4, 14),
-			Shapes.join(Block.box(2, 0, 8, 8, 4, 14), Block.box(2, 0, 2, 14, 4, 8), BooleanOp.OR),
-			Block.box(2, 0, 2, 14, 4, 8),
-			Block.box(8, 0, 2, 14, 4, 8)
+		Block.box(2, 0, 2, 14, 4, 14),
+		Shapes.join(Block.box(2, 0, 8, 8, 4, 14), Block.box(2, 0, 2, 14, 4, 8), BooleanOp.OR),
+		Block.box(2, 0, 2, 14, 4, 8),
+		Block.box(8, 0, 2, 14, 4, 8)
 	};
 
 	private static final VoxelShape[][] ROTATED_SHAPES = buildShapes();
@@ -119,16 +123,19 @@ public class PieBlock extends Block
 			return InteractionResult.PASS;
 		} else {
 			ItemStack sliceStack = this.getPieSliceItem();
-			FoodProperties sliceFood = sliceStack.getItem().(sliceStack, player);
 
+			FoodProperties sliceFood = sliceStack.get(DataComponents.FOOD);
 			if (sliceFood != null) {
 				player.getFoodData().eat(sliceFood);
-				for (FoodProperties.PossibleEffect effect : sliceFood.effects()) {
-					if (!level.isClientSide() && effect != null && level.getRandom().nextFloat() < effect.probability()) {
-						player.addEffect(effect.effect());
-					}
-				}
 			}
+
+			// TODO: Seems you can just call this now. See if this is equivalent, now that we have two foodstuff components.
+			sliceStack.finishUsingItem(level, player);
+//			for (ConsumeEffect effect : sliceEffects.onConsumeEffects()) {
+//				if (!level.isClientSide() && level.getRandom().nextFloat() < effect.probability()) {
+//					player.addEffect(effect.effect());
+//				}
+//			}
 
 			int bites = state.getValue(BITES);
 			if (bites < getMaxBites() - 1) {
@@ -157,7 +164,7 @@ public class PieBlock extends Block
 
 		Direction direction = player.getDirection().getOpposite();
 		ItemUtils.spawnItemEntity(level, this.getPieSliceItem(), pos.getX() + 0.5, pos.getY() + 0.3, pos.getZ() + 0.5,
-				direction.getStepX() * 0.15, 0.05, direction.getStepZ() * 0.15);
+			direction.getStepX() * 0.15, 0.05, direction.getStepZ() * 0.15);
 		level.playSound(null, pos, ModSounds.BLOCK_FOOD_SLICE.get(), SoundSource.PLAYERS, 0.8F, 0.8F);
 		if (level instanceof ServerLevel serverLevel) {
 			serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, state), pos.getX() + 0.5, pos.getY() + 0.3, pos.getZ() + 0.5, 3, 0.1, 0.1, 0.1, 0.001D);

@@ -1,14 +1,13 @@
 package vectorwing.farmersdelight.common.loot.function;
 
+import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -31,6 +30,11 @@ public class CopySkilletFunction extends LootItemConditionalFunction
 		super(conditions);
 	}
 
+	@Override
+	public MapCodec<? extends LootItemConditionalFunction> codec() {
+		return null;
+	}
+
 	public static Builder<?> builder() {
 		return simpleBuilder(CopySkilletFunction::new);
 	}
@@ -44,7 +48,7 @@ public class CopySkilletFunction extends LootItemConditionalFunction
 	}
 
 	@Override
-	public LootItemFunctionType<CopySkilletFunction> getType() {
+	public LootItemFunction getType() {
 		return ModLootFunctions.COPY_SKILLET.get();
 	}
 }
