@@ -5,7 +5,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -27,8 +26,8 @@ import vectorwing.farmersdelight.common.loot.modifier.AddItemModifier;
 import vectorwing.farmersdelight.common.loot.modifier.PastrySlicingModifier;
 import vectorwing.farmersdelight.common.loot.modifier.ReplaceItemModifier;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
-import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModChestLootTables;
+import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.ArrayList;
@@ -74,9 +73,10 @@ public class LootModifiers extends GlobalLootModifierProvider
 		this.add("scavenging_smoked_ham_from_pig", this.addItemOnKnifeKill(ModItems.SMOKED_HAM.get(), true, 0.5F, EntityType.PIG));
 		this.add("scavenging_string", this.addItemOnKnifeKill(Items.STRING, EntityType.SPIDER, EntityType.CAVE_SPIDER));
 		this.add("scavenging_pumpkin", new ReplaceItemModifier(new LootItemCondition[]{
-				LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.PUMPKIN).build(),
-				hasSilkTouch()
-		}, Items.PUMPKIN, ModItems.PUMPKIN_SLICE.get(), 4));
+			LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.PUMPKIN).build(),
+			MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.Items.KNIVES))
+				.and(hasSilkTouch().invert()).build()
+		},Items.PUMPKIN, ModItems.PUMPKIN_SLICE.get(), 4));
 
 		// Pastry Slicing
 		this.add("slicing_apple_pie", this.pastrySlicing(ModItems.APPLE_PIE_SLICE.get(), ModBlocks.APPLE_PIE.get()));
@@ -102,7 +102,7 @@ public class LootModifiers extends GlobalLootModifierProvider
 		LootItemCondition.Builder[] entityConditions = new LootItemCondition.Builder[entity.length];
 		for (int i = 0; i < entity.length; i++) {
 			entityConditions[i] = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS,
-					EntityPredicate.Builder.entity().of(entity[i]).build());
+				EntityPredicate.Builder.entity().of(entity[i]).build());
 		}
 		List<LootItemCondition> conditions = new ArrayList<>();
 		conditions.add(entityConditions.length > 1 ? AnyOfCondition.anyOf(entityConditions).build() : entityConditions[0].build());
@@ -123,7 +123,7 @@ public class LootModifiers extends GlobalLootModifierProvider
 		LootItemCondition.Builder[] entityConditions = new LootItemCondition.Builder[entity.length];
 		for (int i = 0; i < entity.length; i++) {
 			entityConditions[i] = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS,
-					EntityPredicate.Builder.entity().of(entity[i]).build());
+				EntityPredicate.Builder.entity().of(entity[i]).build());
 		}
 
 		List<LootItemCondition> conditions = new ArrayList<>();
@@ -148,15 +148,15 @@ public class LootModifiers extends GlobalLootModifierProvider
 			conditions[i] = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cakes.get(i));
 		}
 		return new AddItemModifier(new LootItemCondition[]{
-				MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.Items.KNIVES)).build(),
-				AnyOfCondition.anyOf(conditions).build()
+			MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.Items.KNIVES)).build(),
+			AnyOfCondition.anyOf(conditions).build()
 		}, ModItems.CAKE_SLICE.get(), 7);
 	}
 
 	private PastrySlicingModifier pastrySlicing(Item receivedItem, Block slicedBlock) {
 		return new PastrySlicingModifier(new LootItemCondition[]{
-				MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.Items.KNIVES)).build(),
-				LootItemBlockStatePropertyCondition.hasBlockStateProperties(slicedBlock).build()
+			MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.Items.KNIVES)).build(),
+			LootItemBlockStatePropertyCondition.hasBlockStateProperties(slicedBlock).build()
 		}, receivedItem);
 	}
 
@@ -172,16 +172,16 @@ public class LootModifiers extends GlobalLootModifierProvider
 		return new AddItemModifier(conditions.toArray(LootItemCondition[]::new), ModItems.STRAW.get(), 1);
 	}
 
-	protected LootItemCondition hasSilkTouch() {
+	protected LootItemCondition.Builder hasSilkTouch() {
 		HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
 		return MatchTool.toolMatches(
-				ItemPredicate.Builder.item()
-						.withSubPredicate(
-								ItemSubPredicates.ENCHANTMENTS,
-								ItemEnchantmentsPredicate.enchantments(
-										List.of(new EnchantmentPredicate(registrylookup.getOrThrow(Enchantments.SILK_TOUCH), MinMaxBounds.Ints.atLeast(1)))
-								)
-						)
-		).build();
+			ItemPredicate.Builder.item()
+				.withSubPredicate(
+					ItemSubPredicates.ENCHANTMENTS,
+					ItemEnchantmentsPredicate.enchantments(
+						List.of(new EnchantmentPredicate(registrylookup.getOrThrow(Enchantments.SILK_TOUCH), MinMaxBounds.Ints.atLeast(1)))
+					)
+				)
+		);
 	}
 }

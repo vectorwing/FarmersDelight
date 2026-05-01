@@ -3,7 +3,8 @@
 ## 1.3.2
 
 ### Fixes
-- Fix Rope Fences not being able to hold leashed animals in some circumstances;
+- Fixed Rope Fences not being able to hold leashed animals in some circumstances;
+- (1.21+) Fixed Pumpkins having inverted slicing logic with the Silk Touch enchantment;
 
 ## 1.3.1
 
@@ -14,7 +15,7 @@
   - Block and item fields for BASKET now point to BAMBOO_BASKET;
 
 ### Fixes
-- (1.20) Fix MixinExtras dependency not being present as a jar-jar in the mod file;
+- (1.20) Fixed MixinExtras dependency not being present as a jar-jar in the mod file;
 
 ### Translations:
 - Updated:
