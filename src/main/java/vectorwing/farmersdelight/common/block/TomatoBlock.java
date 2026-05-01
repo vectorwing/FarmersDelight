@@ -148,15 +148,24 @@ public class TomatoBlock extends CropBlock
 		return Configuration.ENABLE_TOMATO_VINE_CLIMBING_TAGGED_ROPES.get() ? stateAbove.is(ModTags.Blocks.ROPES) : stateAbove.is(ModBlocks.ROPE.get());
 	}
 
+	@Nullable
+	public BlockState getClimbingState(BlockState stateAbove) {
+		if (this.canClimbBlock(stateAbove)){
+			return ModBlocks.TOMATO_CROP_ON_ROPE.get().defaultBlockState();
+		}
+		return null;
+	}
+
 	public void climbRopeAbove(ServerLevel level, BlockPos pos) {
 		BlockPos posAbove = pos.above();
 		BlockState stateAbove = level.getBlockState(posAbove);
-		if (canClimbBlock(stateAbove)) {
+		BlockState climbingState = getClimbingState(stateAbove);
+		if (climbingState != null) {
 			int vineHeight;
 			for (vineHeight = 1; level.getBlockState(pos.below(vineHeight)).is(this); ++vineHeight) {
 			}
 			if (vineHeight < 3) {
-				level.setBlockAndUpdate(posAbove, ModBlocks.TOMATO_CROP_ON_ROPE.get().defaultBlockState());
+				level.setBlockAndUpdate(posAbove, climbingState);
 			}
 		}
 	}
@@ -179,7 +188,7 @@ public class TomatoBlock extends CropBlock
 			if (canClimbBlock(nextState)) {
 				return true;
 			}
-			if (nextState.is(ModBlocks.TOMATO_CROP_ON_ROPE.get())) {
+			if (nextState.getBlock() instanceof HangingTomatoBlock) {
 				if (!isMaxAge(nextState)) {
 					return true;
 				}
@@ -218,7 +227,7 @@ public class TomatoBlock extends CropBlock
 		BlockPos belowPos = pos.below();
 		BlockState belowState = level.getBlockState(belowPos);
 
-		if (belowState.is(ModBlocks.TOMATO_CROP.get()) || belowState.is(ModBlocks.TOMATO_CROP_ON_ROPE.get())) {
+		if (belowState.getBlock() instanceof TomatoBlock) {
 			return hasGoodCropConditions(level, pos);
 		}
 
@@ -238,6 +247,7 @@ public class TomatoBlock extends CropBlock
 		return state;
 	}
 
+	@Deprecated(forRemoval = true)
 	@Override
 	public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
 		boolean isRopelogged = state.getValue(TomatoBlock.ROPELOGGED);
@@ -251,7 +261,7 @@ public class TomatoBlock extends CropBlock
 	/**
 	 * Deprecated - This block will no longer use its ropelogged state. Refer to HangingTomatoBlock instead.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public static void destroyAndPlaceRope(Level level, BlockPos pos) {
 		Block configuredRopeBlock = BuiltInRegistries.BLOCK.get(ResourceLocation.parse(Configuration.DEFAULT_TOMATO_VINE_ROPE.get()));
 		Block finalRopeBlock = configuredRopeBlock != null ? configuredRopeBlock : ModBlocks.ROPE.get();
