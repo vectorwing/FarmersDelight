@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.data.recipe;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -25,7 +26,7 @@ public class CookingRecipes
 	public static final float MEDIUM_EXP = 1.0F;
 	public static final float LARGE_EXP = 2.0F;
 
-	public static void register(RecipeOutput output) {
+	public static void register(HolderLookup.Provider registries, RecipeOutput output) {
 		cookMiscellaneous(output);
 		cookMinecraftSoups(output);
 		cookMeals(output);

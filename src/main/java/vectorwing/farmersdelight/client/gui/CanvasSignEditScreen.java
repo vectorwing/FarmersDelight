@@ -2,11 +2,10 @@ package vectorwing.farmersdelight.client.gui;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.SignEditScreen;
-import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.StandingSignBlock;
@@ -41,7 +40,7 @@ public class CanvasSignEditScreen extends SignEditScreen
 	}
 
 	@Override
-	protected void renderSignBackground(GuiGraphics guiGraphics, BlockState state) {
+	protected void renderSignBackground(GuiGraphicsExtractor guiGraphics, BlockState state) {
 		if (this.signModel != null) {
 			boolean flag = state.getBlock() instanceof StandingSignBlock;
 			guiGraphics.pose().translate(0.0F, 31.0F, 0.0F);

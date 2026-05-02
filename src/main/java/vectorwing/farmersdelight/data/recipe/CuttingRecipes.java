@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.data.recipe;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
@@ -32,7 +33,7 @@ public class CuttingRecipes
 	public static Ingredient HOES = matchesTool(ItemAbilities.HOE_DIG, ItemTags.HOES);
 	public static Ingredient SHEARS = matchesTool(ItemAbilities.SHEARS_DIG, Tags.Items.TOOLS_SHEAR);
 
-	public static void register(RecipeOutput output) {
+	public static void register(HolderLookup.Provider registries, RecipeOutput output) {
 		// Knife
 		cuttingAnimalItems(output);
 		cuttingVegetables(output);

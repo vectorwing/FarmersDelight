@@ -1,16 +1,19 @@
 package vectorwing.farmersdelight.data.advancement;
 
 import net.minecraft.advancements.*;
-import net.minecraft.advancements.critereon.*;
+import net.minecraft.advancements.criterion.*;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.predicates.LocationCheck;
-import net.neoforged.neoforge.common.data.AdvancementProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jspecify.annotations.NullMarked;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.advancement.CuttingBoardTrigger;
 import vectorwing.farmersdelight.common.block.TomatoBlock;
@@ -23,10 +26,14 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-public class FDAdvancementGenerator implements AdvancementProvider.AdvancementGenerator
+@NullMarked
+@SuppressWarnings("unused")
+public class FDAdvancementGenerator implements AdvancementSubProvider
 {
 	@Override
-	public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> consumer, ExistingFileHelper existingFileHelper) {
+	public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> consumer) {
+		HolderGetter<Item> holderGetter = registries.lookupOrThrow(Registries.ITEM);
+
 		AdvancementHolder farmersDelight = Advancement.Builder.advancement()
 				.display(ModItems.COOKING_POT.get(),
 						TextUtils.advancement("root.title"),
@@ -99,7 +106,7 @@ public class FDAdvancementGenerator implements AdvancementProvider.AdvancementGe
 								Optional.of(
 										ContextAwarePredicate.create(
 												LocationCheck.checkLocation(
-														LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(ModBlocks.TOMATO_CROP_ON_ROPE.get()).setProperties(
+														LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(registries.lookupOrThrow(Registries.BLOCK), ModBlocks.TOMATO_CROP_ON_ROPE.get()).setProperties(
 																StatePropertiesPredicate.Builder.properties()
 																		.hasProperty(TomatoBlock.VINE_AGE, 0)
 														))
@@ -113,8 +120,8 @@ public class FDAdvancementGenerator implements AdvancementProvider.AdvancementGe
 		AdvancementHolder booHiss = getAdvancement(tallmato, ModItems.ROTTEN_TOMATO.get(), "hit_raider_with_rotten_tomato", AdvancementType.TASK, true, true, false)
 				.addCriterion("hit_raider_with_rotten_tomato", PlayerHurtEntityTrigger.TriggerInstance.playerHurtEntity(
 						Optional.of(DamagePredicate.Builder.damageInstance()
-								.type(DamageSourcePredicate.Builder.damageType().tag(TagPredicate.is(DamageTypeTags.IS_PROJECTILE)).direct(EntityPredicate.Builder.entity().of(ModEntityTypes.ROTTEN_TOMATO.get()))).build()),
-						Optional.of(EntityPredicate.Builder.entity().of(EntityTypeTags.RAIDERS).build())))
+								.type(DamageSourcePredicate.Builder.damageType().tag(TagPredicate.is(DamageTypeTags.IS_PROJECTILE)).direct(EntityPredicate.Builder.entity().of(registries.lookupOrThrow(Registries.ENTITY_TYPE), ModEntityTypes.ROTTEN_TOMATO.get()))).build()),
+						Optional.of(EntityPredicate.Builder.entity().of(registries.lookupOrThrow(Registries.ENTITY_TYPE), EntityTypeTags.RAIDERS).build())))
 				.save(consumer, getNameId("main/hit_raider_with_rotten_tomato"));
 
 		AdvancementHolder cropRotation = getAdvancement(dippingYourRoots, ModItems.CABBAGE.get(), "plant_all_crops", AdvancementType.CHALLENGE, true, true, false)
@@ -148,7 +155,7 @@ public class FDAdvancementGenerator implements AdvancementProvider.AdvancementGe
 				.save(consumer, getNameId("main/place_campfire"));
 
 		AdvancementHolder portableCooking = getAdvancement(bonfireLit, ModItems.SKILLET.get(), "use_skillet", AdvancementType.TASK, true, false, false)
-				.addCriterion("skillet", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.SKILLET.get()))
+				.addCriterion("skillet", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.SKILLET.get()))
 				.save(consumer, getNameId("main/use_skillet"));
 
 		AdvancementHolder sizzlingHot = getAdvancement(portableCooking, ModItems.SKILLET.get(), "place_skillet", AdvancementType.TASK, true, false, false)
@@ -174,33 +181,33 @@ public class FDAdvancementGenerator implements AdvancementProvider.AdvancementGe
 				.save(consumer, getNameId("main/place_feast"));
 
 		AdvancementHolder masterChef = getAdvancement(gloriousFeast, ModItems.HONEY_GLAZED_HAM.get(), "master_chef", AdvancementType.CHALLENGE, true, true, false)
-				.addCriterion("mixed_salad", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.MIXED_SALAD.get()))
-				.addCriterion("cooked_rice", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.COOKED_RICE.get()))
-				.addCriterion("bone_broth", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.BONE_BROTH.get()))
-				.addCriterion("beef_stew", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.BEEF_STEW.get()))
-				.addCriterion("vegetable_soup", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.VEGETABLE_SOUP.get()))
-				.addCriterion("fish_stew", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.FISH_STEW.get()))
-				.addCriterion("chicken_soup", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.CHICKEN_SOUP.get()))
-				.addCriterion("fried_rice", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.FRIED_RICE.get()))
-				.addCriterion("pumpkin_soup", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.PUMPKIN_SOUP.get()))
-				.addCriterion("baked_cod_stew", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.BAKED_COD_STEW.get()))
-				.addCriterion("noodle_soup", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.NOODLE_SOUP.get()))
-				.addCriterion("onion_soup", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.ONION_SOUP.get()))
-				.addCriterion("bacon_and_eggs", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.BACON_AND_EGGS.get()))
-				.addCriterion("ratatouille", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.RATATOUILLE.get()))
-				.addCriterion("steak_and_potatoes", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.STEAK_AND_POTATOES.get()))
-				.addCriterion("pasta_with_meatballs", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.PASTA_WITH_MEATBALLS.get()))
-				.addCriterion("pasta_with_mutton_chop", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.PASTA_WITH_MUTTON_CHOP.get()))
-				.addCriterion("mushroom_rice", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.MUSHROOM_RICE.get()))
-				.addCriterion("roasted_mutton_chops", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.ROASTED_MUTTON_CHOPS.get()))
-				.addCriterion("vegetable_noodles", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.VEGETABLE_NOODLES.get()))
-				.addCriterion("squid_ink_pasta", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.SQUID_INK_PASTA.get()))
-				.addCriterion("grilled_salmon", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.GRILLED_SALMON.get()))
-				.addCriterion("roast_chicken", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.ROAST_CHICKEN.get()))
-				.addCriterion("stuffed_pumpkin", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.STUFFED_PUMPKIN.get()))
-				.addCriterion("honey_glazed_ham", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.HONEY_GLAZED_HAM.get()))
-				.addCriterion("shepherds_pie", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.SHEPHERDS_PIE.get()))
-				.addCriterion("gleaming_salad", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.GLEAMING_SALAD.get()))
+				.addCriterion("mixed_salad", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.MIXED_SALAD.get()))
+				.addCriterion("cooked_rice", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.COOKED_RICE.get()))
+				.addCriterion("bone_broth", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.BONE_BROTH.get()))
+				.addCriterion("beef_stew", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.BEEF_STEW.get()))
+				.addCriterion("vegetable_soup", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.VEGETABLE_SOUP.get()))
+				.addCriterion("fish_stew", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.FISH_STEW.get()))
+				.addCriterion("chicken_soup", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.CHICKEN_SOUP.get()))
+				.addCriterion("fried_rice", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.FRIED_RICE.get()))
+				.addCriterion("pumpkin_soup", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.PUMPKIN_SOUP.get()))
+				.addCriterion("baked_cod_stew", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.BAKED_COD_STEW.get()))
+				.addCriterion("noodle_soup", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.NOODLE_SOUP.get()))
+				.addCriterion("onion_soup", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.ONION_SOUP.get()))
+				.addCriterion("bacon_and_eggs", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.BACON_AND_EGGS.get()))
+				.addCriterion("ratatouille", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.RATATOUILLE.get()))
+				.addCriterion("steak_and_potatoes", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.STEAK_AND_POTATOES.get()))
+				.addCriterion("pasta_with_meatballs", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.PASTA_WITH_MEATBALLS.get()))
+				.addCriterion("pasta_with_mutton_chop", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.PASTA_WITH_MUTTON_CHOP.get()))
+				.addCriterion("mushroom_rice", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.MUSHROOM_RICE.get()))
+				.addCriterion("roasted_mutton_chops", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.ROASTED_MUTTON_CHOPS.get()))
+				.addCriterion("vegetable_noodles", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.VEGETABLE_NOODLES.get()))
+				.addCriterion("squid_ink_pasta", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.SQUID_INK_PASTA.get()))
+				.addCriterion("grilled_salmon", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.GRILLED_SALMON.get()))
+				.addCriterion("roast_chicken", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.ROAST_CHICKEN.get()))
+				.addCriterion("stuffed_pumpkin", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.STUFFED_PUMPKIN.get()))
+				.addCriterion("honey_glazed_ham", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.HONEY_GLAZED_HAM.get()))
+				.addCriterion("shepherds_pie", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.SHEPHERDS_PIE.get()))
+				.addCriterion("gleaming_salad", ConsumeItemTrigger.TriggerInstance.usedItem(holderGetter, ModItems.GLEAMING_SALAD.get()))
 				.rewards(AdvancementRewards.Builder.experience(200))
 				.save(consumer, getNameId("main/master_chef"));
 	}

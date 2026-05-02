@@ -5,6 +5,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -133,6 +134,14 @@ public class ModTags
 		public static final TagKey<EntityType<?>> HORSE_FEED_TEMPTED = modEntityTag("horse_feed_tempted");
 	}
 
+	public static class MobEffects
+	{
+		// Effects which are immune to Hot Cocoa curing.
+		public static final TagKey<MobEffect> HOT_COCOA_IGNORED = modMobEffectTag("hot_cocoa_ignored");
+		// Effects which are immune to Milk Bottle curing.
+		public static final TagKey<MobEffect> MILK_BOTTLE_IGNORED = modMobEffectTag("milk_bottle_ignored");
+	}
+
 	private static TagKey<Item> modItemTag(String path) {
 		return ItemTags.create(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, path));
 	}
@@ -143,5 +152,9 @@ public class ModTags
 
 	private static TagKey<EntityType<?>> modEntityTag(String path) {
 		return TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, path));
+	}
+
+	private static TagKey<MobEffect> modMobEffectTag(String path) {
+		return TagKey.create(Registries.MOB_EFFECT, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, path));
 	}
 }

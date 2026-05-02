@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.client.event;
 
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -57,7 +58,7 @@ public class ClientSetupEvents
 	}
 
 	@SubscribeEvent
-	public static void registerRecipeBookCategories(RegisterRecipeBookCategoriesEvent event) {
+	public static void registerRecipeBookCategories(RegisterRecipeBookSearchCategoriesEvent event) {
 		RecipeCategories.init(event);
 	}
 

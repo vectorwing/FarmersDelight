@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight;
 
+import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -13,7 +14,6 @@ import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.client.event.ClientSetupEvents;
 import vectorwing.farmersdelight.common.CommonSetup;
 import vectorwing.farmersdelight.common.Configuration;
-import vectorwing.farmersdelight.common.registry.RegistryAliases;
 import vectorwing.farmersdelight.common.registry.*;
 import vectorwing.farmersdelight.common.world.VillageStructures;
 
@@ -22,6 +22,10 @@ public class FarmersDelight
 {
 	public static final String MODID = "farmersdelight";
 	public static final Logger LOGGER = LogManager.getLogger();
+
+	public static Identifier id(String name) {
+		return Identifier.fromNamespaceAndPath(MODID, name);
+	}
 
 	public FarmersDelight(IEventBus modEventBus, ModContainer modContainer) {
 		modEventBus.addListener(CommonSetup::init);
@@ -54,6 +58,7 @@ public class FarmersDelight
 		ModConditionCodecs.CONDITION_CODECS.register(modEventBus);
 		ModIngredientTypes.INGREDIENT_TYPES.register(modEventBus);
 		ModAdvancements.TRIGGERS.register(modEventBus);
+		ModConsumeEffectTypes.CONSUME_EFFECTS.register(modEventBus);
 
 		RegistryAliases.addRegistryAliases();
 

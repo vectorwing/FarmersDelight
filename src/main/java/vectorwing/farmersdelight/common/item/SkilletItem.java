@@ -1,17 +1,15 @@
 package vectorwing.farmersdelight.common.item;
 
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -49,7 +47,6 @@ import vectorwing.farmersdelight.common.utility.ClientRenderUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
@@ -58,33 +55,33 @@ public class SkilletItem extends BlockItem
 {
 	public static final float FLIP_TIME = 12;
 
-	public static final Tiers SKILLET_TIER = Tiers.IRON;
+	public static final ToolMaterial SKILLET_MATERIAL = ToolMaterial.IRON;
 	protected static final Identifier FD_ATTACK_KNOCKBACK_UUID = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "base_attack_knockback");
 
 	public SkilletItem(Block block, Item.Properties properties) {
-		super(block, properties.durability(SKILLET_TIER.getUses()));
-		float attackDamage = 5.0F + SKILLET_TIER.getAttackDamageBonus();
+		super(block, properties.durability(SKILLET_MATERIAL.getUses()));
+		float attackDamage = 5.0F + SKILLET_MATERIAL.getAttackDamageBonus();
 	}
 
 	@Override
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
 		if (oldStack.get(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get())
-				!= newStack.get(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get()) ||
-				oldStack.get(ModDataComponents.COOKING_TIME_LENGTH.get())
-						!= newStack.get(ModDataComponents.COOKING_TIME_LENGTH.get()) ||
-				oldStack.get(ModDataComponents.SKILLET_INGREDIENT.get()) !=
-						newStack.get(ModDataComponents.SKILLET_INGREDIENT.get())) {
+			!= newStack.get(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get()) ||
+			oldStack.get(ModDataComponents.COOKING_TIME_LENGTH.get())
+				!= newStack.get(ModDataComponents.COOKING_TIME_LENGTH.get()) ||
+			oldStack.get(ModDataComponents.SKILLET_INGREDIENT.get()) !=
+				newStack.get(ModDataComponents.SKILLET_INGREDIENT.get())) {
 			return false;
 		}
 
 		return super.shouldCauseReequipAnimation(oldStack, newStack, slotChanged);
 	}
 
-	public static ItemAttributeModifiers createAttributes(Tier tier, float attackDamage, float attackSpeed) {
+	public static ItemAttributeModifiers createAttributes(ToolMaterial tier, float attackDamage, float attackSpeed) {
 		return ItemAttributeModifiers.builder()
-				.add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, attackDamage + tier.getAttackDamageBonus(), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-				.add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, attackSpeed, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-				.add(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(FD_ATTACK_KNOCKBACK_UUID, 1, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build();
+			.add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, attackDamage + tier.attackDamageBonus(), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+			.add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, attackSpeed, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+			.add(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(FD_ATTACK_KNOCKBACK_UUID, 1, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build();
 	}
 
 	@EventBusSubscriber(modid = FarmersDelight.MODID)
@@ -292,7 +289,7 @@ public class SkilletItem extends BlockItem
 
 	@Override
 	public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
-		return SKILLET_TIER.getRepairIngredient().test(repair) || super.isValidRepairItem(toRepair, repair);
+		return SKILLET_MATERIAL.getRepairIngredient().test(repair) || super.isValidRepairItem(toRepair, repair);
 	}
 
 	public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity entity) {
@@ -330,6 +327,6 @@ public class SkilletItem extends BlockItem
 
 	@Override
 	public int getEnchantmentValue() {
-		return SKILLET_TIER.getEnchantmentValue();
+		return SKILLET_MATERIAL.getEnchantmentValue();
 	}
 }
