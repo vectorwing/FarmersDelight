@@ -266,8 +266,8 @@
   "container.farmersdelight.cabinet": "Alacena",
 
   "tooltip.farmersdelight.cooking_pot.empty": "Vacío",
-  "tooltip.farmersdelight.cooking_pot.single_serving": "Holds 1 serving of:",
-  "tooltip.farmersdelight.cooking_pot.many_servings": "Holds %s servings of:",
+  "tooltip.farmersdelight.cooking_pot.single_serving": "Contiene 1 porción de:",
+  "tooltip.farmersdelight.cooking_pot.many_servings": "Contiene %s porciones de:",
   "tooltip.farmersdelight.dog_food.when_feeding": "Cuando se alimenta a un lobo domesticado:",
   "tooltip.farmersdelight.horse_feed.when_feeding": "Cuando se alimenta a un caballo domesticado:",
   "tooltip.farmersdelight.milk_bottle": "Purga 1 efecto",
