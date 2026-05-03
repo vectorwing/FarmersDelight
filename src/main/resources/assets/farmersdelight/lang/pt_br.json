@@ -507,7 +507,7 @@
   "farmersdelight.configuration.enableCuttingBoardDispenserBehavior.tooltip": "Se ativado, o Ejetor poderá operar uma Tábua de Corte na sua frente, usando seus próprios itens como ferramenta de corte.",
 
   "farmersdelight.configuration.enableStackableSoupItems": "Itens de Sopa Empilháveis",
-  "farmersdelight.configuration.enableStackableSoupItems.tooltip": Se ativado, qualquer item da lista 'BowlFoodItem' se tornará empilhável até 16, assim como as refeições do Farmer's Delight.",
+  "farmersdelight.configuration.enableStackableSoupItems.tooltip": "Se ativado, qualquer item da lista 'BowlFoodItem' se tornará empilhável até 16, assim como as refeições do Farmer's Delight.",
   "farmersdelight.configuration.soupItemList": "Itens de Sopa",
   "farmersdelight.configuration.soupItemList.tooltip": "Lista de itens alimentares afetados. Eles devem estar na classe 'BowlFoodItem' no código para serem afetados. Por padrão, são sopas e ensopados comuns.",
 
