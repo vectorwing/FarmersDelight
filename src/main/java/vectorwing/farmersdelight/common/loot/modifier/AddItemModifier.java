@@ -38,6 +38,10 @@ public class AddItemModifier extends LootModifier
 		this.count = count;
 	}
 
+	public AddItemModifier(LootItemCondition[] conditions, Item addedItem, int count) {
+		this(conditions, IGlobalLootModifier.DEFAULT_PRIORITY, addedItem, count);
+	}
+
 	@Nonnull
 	@Override
 	protected ObjectArrayList<ItemStack> doApply(@NotNull ObjectArrayList<ItemStack> generatedLoot, @NotNull LootContext context) {

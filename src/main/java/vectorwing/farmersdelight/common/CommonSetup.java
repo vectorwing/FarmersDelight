@@ -23,18 +23,6 @@ public class CommonSetup
 	}
 
 	public static void registerItemSetAdditions() {
-		// TODO: Replaced by ItemTags.VILLAGER_PICKS_UP. Add them to this tag once datagen isn't broken.
-//		Set<Item> newWantedItems = Sets.newHashSet(
-//				ModItems.CABBAGE.get(),
-//				ModItems.TOMATO.get(),
-//				ModItems.ONION.get(),
-//				ModItems.RICE.get(),
-//				ModItems.CABBAGE_SEEDS.get(),
-//				ModItems.TOMATO_SEEDS.get(),
-//				ModItems.RICE_PANICLE.get());
-//		newWantedItems.addAll(Villager.WANTED_ITEMS);
-//		Villager.WANTED_ITEMS = ImmutableSet.copyOf(newWantedItems);
-
 		HashMap<Item, Integer> newFoodPoints = new HashMap<>();
 		newFoodPoints.put(ModItems.CABBAGE.get(), 1);
 		newFoodPoints.put(ModItems.TOMATO.get(), 1);

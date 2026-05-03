@@ -5,8 +5,8 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -17,7 +17,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.RandomizedIntStateProvider;
@@ -37,6 +37,7 @@ import java.util.List;
 @SuppressWarnings("SameParameterValue")
 public class WildCropGeneration
 {
+	// TODO: Random offsets and block target rules were moved to PlacedFeature. You'll have to rewrite some things...
 	public static ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PATCH_SANDY_SHRUB = registerConfiguredFeatureKey("patch_sandy_shrub");
 	public static ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PATCH_WILD_CABBAGES = registerConfiguredFeatureKey("patch_wild_cabbages");
 	public static ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PATCH_WILD_ONIONS = registerConfiguredFeatureKey("patch_wild_onions");
@@ -68,52 +69,49 @@ public class WildCropGeneration
 
 	public static void bootstrapConfiguredFeatures(BootstrapContext<ConfiguredFeature<?, ?>> context) {
 		context.register(FEATURE_PATCH_SANDY_SHRUB, new ConfiguredFeature<>(
-				Feature.RANDOM_PATCH,
-				new RandomPatchConfiguration(32, 2, 3,
-						plantPlacedFeature(ModBlocks.SANDY_SHRUB.get(), BlockTags.SAND))
+			Feature.SIMPLE_BLOCK,
+			new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.SANDY_SHRUB.get()))
 		));
 		context.register(FEATURE_PATCH_WILD_CABBAGES, wildCropConfiguredFeature(
-				ModBlocks.WILD_CABBAGES.get(),
-				ModBlocks.SANDY_SHRUB.get(),
-				BlockTags.SAND
+			ModBlocks.WILD_CABBAGES.get(),
+			ModBlocks.SANDY_SHRUB.get(),
+			BlockTags.SAND
 		));
 		context.register(FEATURE_PATCH_WILD_BEETROOTS, wildCropConfiguredFeature(
-				ModBlocks.WILD_BEETROOTS.get(),
-				ModBlocks.SANDY_SHRUB.get(),
-				BlockTags.SAND
+			ModBlocks.WILD_BEETROOTS.get(),
+			ModBlocks.SANDY_SHRUB.get(),
+			BlockTags.SAND
 		));
 		context.register(FEATURE_PATCH_WILD_CARROTS, wildCropConfiguredFeature(
-				ModBlocks.WILD_CARROTS.get(),
-				Blocks.SHORT_GRASS,
-				Blocks.COARSE_DIRT,
-				BlockTags.DIRT
+			ModBlocks.WILD_CARROTS.get(),
+			Blocks.SHORT_GRASS,
+			Blocks.COARSE_DIRT,
+			BlockTags.DIRT
 		));
 		context.register(FEATURE_PATCH_WILD_ONIONS, wildCropConfiguredFeature(
-				ModBlocks.WILD_ONIONS.get(),
-				Blocks.ALLIUM,
-				BlockTags.DIRT
+			ModBlocks.WILD_ONIONS.get(),
+			Blocks.ALLIUM,
+			BlockTags.DIRT
 		));
 		context.register(FEATURE_PATCH_WILD_POTATOES, wildCropConfiguredFeature(
-				ModBlocks.WILD_POTATOES.get(),
-				Blocks.FERN,
-				BlockTags.DIRT
+			ModBlocks.WILD_POTATOES.get(),
+			Blocks.FERN,
+			BlockTags.DIRT
 		));
 		context.register(FEATURE_PATCH_WILD_TOMATOES, wildCropConfiguredFeature(
-				ModBlocks.WILD_TOMATOES.get(), Blocks.DEAD_BUSH, ModTags.Blocks.TERRAIN
+			ModBlocks.WILD_TOMATOES.get(), Blocks.DEAD_BUSH, ModTags.Blocks.TERRAIN
 		));
 		context.register(FEATURE_PATCH_WILD_RICE, new ConfiguredFeature<>(
-				ModBiomeFeatures.WILD_RICE.get(),
-				new RandomPatchConfiguration(96, 7, 3,
-						plantPlacedFeature(ModBlocks.WILD_RICE.get(), BlockTags.DIRT)
-				)
+			ModBiomeFeatures.WILD_RICE.get(),
+			new NoneFeatureConfiguration()
 		));
 		context.register(FEATURE_PATCH_BROWN_MUSHROOM_COLONIES, mushroomColonyConfiguredFeature(
-				ModBlocks.BROWN_MUSHROOM_COLONY.get(),
-				Blocks.BROWN_MUSHROOM
+			ModBlocks.BROWN_MUSHROOM_COLONY.get(),
+			Blocks.BROWN_MUSHROOM
 		));
 		context.register(FEATURE_PATCH_RED_MUSHROOM_COLONIES, mushroomColonyConfiguredFeature(
-				ModBlocks.RED_MUSHROOM_COLONY.get(),
-				Blocks.RED_MUSHROOM
+			ModBlocks.RED_MUSHROOM_COLONY.get(),
+			Blocks.RED_MUSHROOM
 		));
 	}
 
@@ -132,103 +130,103 @@ public class WildCropGeneration
 
 	private static ConfiguredFeature<?, ?> wildCropConfiguredFeature(Block primaryBlock, Block secondaryBlock, TagKey<Block> blocksToTarget) {
 		return defaultWildCropConfiguredFeature(
-				plantPlacedFeature(primaryBlock, blocksToTarget),
-				plantPlacedFeature(secondaryBlock, blocksToTarget),
-				null
+			plantPlacedFeature(primaryBlock, blocksToTarget),
+			plantPlacedFeature(secondaryBlock, blocksToTarget),
+			null
 		);
 	}
 
 	private static ConfiguredFeature<?, ?> wildCropConfiguredFeature(Block primaryBlock, Block secondaryBlock, Block floorBlock, TagKey<Block> blocksToTarget) {
 		return defaultWildCropConfiguredFeature(
-				plantPlacedFeature(primaryBlock, blocksToTarget),
-				plantPlacedFeature(secondaryBlock, blocksToTarget),
-				floorPlacedFeature(floorBlock, blocksToTarget)
+			plantPlacedFeature(primaryBlock, blocksToTarget),
+			plantPlacedFeature(secondaryBlock, blocksToTarget),
+			floorPlacedFeature(floorBlock, blocksToTarget)
 		);
 	}
 
 	private static ConfiguredFeature<?, ?> mushroomColonyConfiguredFeature(Block colonyBlock, Block mushroomBlock) {
 		return defaultWildCropConfiguredFeature(
-				Holder.direct(new PlacedFeature(
-						Holder.direct(new ConfiguredFeature<>(
-								Feature.SIMPLE_BLOCK,
-								new SimpleBlockConfiguration(new RandomizedIntStateProvider(
-										BlockStateProvider.simple(colonyBlock),
-										MushroomColonyBlock.COLONY_AGE,
-										UniformInt.of(0, 3)
-								))
-						)),
-						placeOnTopOfModifier(Blocks.MYCELIUM)
+			Holder.direct(new PlacedFeature(
+				Holder.direct(new ConfiguredFeature<>(
+					Feature.SIMPLE_BLOCK,
+					new SimpleBlockConfiguration(new RandomizedIntStateProvider(
+						BlockStateProvider.simple(colonyBlock),
+						MushroomColonyBlock.COLONY_AGE,
+						UniformInt.of(0, 3)
+					))
 				)),
-				plantPlacedFeature(mushroomBlock, Blocks.MYCELIUM),
-				null
+				placeOnTopOfModifier(Blocks.MYCELIUM)
+			)),
+			plantPlacedFeature(mushroomBlock, Blocks.MYCELIUM),
+			null
 		);
 	}
 
 	private static ConfiguredFeature<?, ?> defaultWildCropConfiguredFeature(Holder<PlacedFeature> primaryFeature, Holder<PlacedFeature> secondaryFeature, @Nullable Holder<PlacedFeature> floorFeature) {
 		return new ConfiguredFeature<>(
-				ModBiomeFeatures.WILD_CROP.get(),
-				new WildCropConfiguration(64, 6, 3, primaryFeature, secondaryFeature, floorFeature)
+			ModBiomeFeatures.WILD_CROP.get(),
+			new WildCropConfiguration(64, 6, 3, primaryFeature, secondaryFeature, floorFeature)
 		);
 	}
 
 	private static Holder<PlacedFeature> plantPlacedFeature(Block block, Block blocksToPlaceOn) {
 		return Holder.direct(new PlacedFeature(
-				Holder.direct(new ConfiguredFeature<>(
-						Feature.SIMPLE_BLOCK,
-						new SimpleBlockConfiguration(SimpleStateProvider.simple(block))
-				)),
-				placeOnTopOfModifier(blocksToPlaceOn)
+			Holder.direct(new ConfiguredFeature<>(
+				Feature.SIMPLE_BLOCK,
+				new SimpleBlockConfiguration(SimpleStateProvider.simple(block))
+			)),
+			placeOnTopOfModifier(blocksToPlaceOn)
 		));
 	}
 
 	private static Holder<PlacedFeature> plantPlacedFeature(Block block, TagKey<Block> blocksToPlaceOn) {
 		return Holder.direct(new PlacedFeature(
-				Holder.direct(new ConfiguredFeature<>(
-						Feature.SIMPLE_BLOCK,
-						new SimpleBlockConfiguration(SimpleStateProvider.simple(block))
-				)),
-				placeOnTopOfModifier(blocksToPlaceOn)
+			Holder.direct(new ConfiguredFeature<>(
+				Feature.SIMPLE_BLOCK,
+				new SimpleBlockConfiguration(SimpleStateProvider.simple(block))
+			)),
+			placeOnTopOfModifier(blocksToPlaceOn)
 		));
 	}
 
 	private static Holder<PlacedFeature> floorPlacedFeature(Block block, TagKey<Block> blocksToReplace) {
 		return Holder.direct(new PlacedFeature(
-				Holder.direct(new ConfiguredFeature<>(
-						Feature.SIMPLE_BLOCK,
-						new SimpleBlockConfiguration(SimpleStateProvider.simple(block))
-				)),
-				replaceBlockModifier(blocksToReplace)
+			Holder.direct(new ConfiguredFeature<>(
+				Feature.SIMPLE_BLOCK,
+				new SimpleBlockConfiguration(SimpleStateProvider.simple(block))
+			)),
+			replaceBlockModifier(blocksToReplace)
 		));
 	}
 
 	private static List<PlacementModifier> placeOnTopOfModifier(Block blockToPlaceOn) {
 		return List.of(BlockPredicateFilter.forPredicate(BlockPredicate.allOf(
-				BlockPredicate.matchesBlocks(Blocks.AIR),
-				BlockPredicate.matchesBlocks(new Vec3i(0, -1, 0), blockToPlaceOn)
+			BlockPredicate.matchesBlocks(Blocks.AIR),
+			BlockPredicate.matchesBlocks(new Vec3i(0, -1, 0), blockToPlaceOn)
 		)));
 	}
 
 	private static List<PlacementModifier> placeOnTopOfModifier(TagKey<Block> blocksToPlaceOn) {
 		return List.of(BlockPredicateFilter.forPredicate(BlockPredicate.allOf(
-				BlockPredicate.matchesBlocks(Blocks.AIR),
-				BlockPredicate.matchesTag(new Vec3i(0, -1, 0), blocksToPlaceOn)
+			BlockPredicate.matchesBlocks(Blocks.AIR),
+			BlockPredicate.matchesTag(new Vec3i(0, -1, 0), blocksToPlaceOn)
 		)));
 	}
 
 	private static List<PlacementModifier> replaceBlockModifier(TagKey<Block> blocksToReplace) {
 		return List.of(BlockPredicateFilter.forPredicate(BlockPredicate.allOf(
-				BlockPredicate.replaceable(new Vec3i(0, 1, 0)),
-				BlockPredicate.matchesTag(blocksToReplace)
+			BlockPredicate.replaceable(new Vec3i(0, 1, 0)),
+			BlockPredicate.matchesTag(blocksToReplace)
 		)));
 	}
 
 	private static PlacedFeature createPlacedFeature(HolderGetter<ConfiguredFeature<?, ?>> featureGetter, ResourceKey<ConfiguredFeature<?, ?>> feature, int rarity) {
 		return new PlacedFeature(featureGetter.getOrThrow(feature), List.of(
-				RarityFilter.onAverageOnceEvery(rarity),
-				InSquarePlacement.spread(),
-				HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
-				BiomeFilter.biome(),
-				BiomeTagFilter.biomeIsInTag(BiomeTags.IS_OVERWORLD)
+			RarityFilter.onAverageOnceEvery(rarity),
+			InSquarePlacement.spread(),
+			HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
+			BiomeFilter.biome(),
+			BiomeTagFilter.biomeIsInTag(BiomeTags.IS_OVERWORLD)
 		));
 	}
 }

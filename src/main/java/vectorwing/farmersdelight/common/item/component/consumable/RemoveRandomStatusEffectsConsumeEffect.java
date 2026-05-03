@@ -21,7 +21,9 @@ import vectorwing.farmersdelight.common.registry.ModConsumeEffectTypes;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public record RemoveRandomStatusEffectsConsumeEffect(TagKey<MobEffect> excluded, boolean harmfulOnly) implements ConsumeEffect {
+public record RemoveRandomStatusEffectsConsumeEffect(TagKey<MobEffect> excluded,
+													 boolean harmfulOnly) implements ConsumeEffect
+{
 	public static final MapCodec<RemoveRandomStatusEffectsConsumeEffect> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
 		TagKey.codec(Registries.MOB_EFFECT).fieldOf("excluded").forGetter(RemoveRandomStatusEffectsConsumeEffect::excluded),
 		Codec.BOOL.optionalFieldOf("harmful_only", false).forGetter(RemoveRandomStatusEffectsConsumeEffect::harmfulOnly)

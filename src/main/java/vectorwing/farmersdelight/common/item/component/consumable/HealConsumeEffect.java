@@ -12,7 +12,8 @@ import net.minecraft.world.item.consume_effects.ConsumeEffect;
 import net.minecraft.world.level.Level;
 import vectorwing.farmersdelight.common.registry.ModConsumeEffectTypes;
 
-public record HealConsumeEffect(float amount) implements ConsumeEffect {
+public record HealConsumeEffect(float amount) implements ConsumeEffect
+{
 	public static final MapCodec<HealConsumeEffect> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 		Codec.FLOAT.fieldOf("amount").forGetter(HealConsumeEffect::amount)
 	).apply(instance, HealConsumeEffect::new));

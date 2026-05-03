@@ -7,12 +7,10 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
-import vectorwing.farmersdelight.common.registry.ModLootFunctions;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
@@ -23,16 +21,16 @@ public class CopySkilletFunction extends LootItemConditionalFunction
 {
 	public static final Identifier ID = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "copy_skillet");
 	public static final MapCodec<CopySkilletFunction> CODEC = RecordCodecBuilder.mapCodec(
-			p_298131_ -> commonFields(p_298131_).apply(p_298131_, CopySkilletFunction::new)
+		i -> commonFields(i).apply(i, CopySkilletFunction::new)
 	);
 
-	private CopySkilletFunction(List<LootItemCondition> conditions) {
-		super(conditions);
+	private CopySkilletFunction(List<LootItemCondition> predicates) {
+		super(predicates);
 	}
 
 	@Override
 	public MapCodec<? extends LootItemConditionalFunction> codec() {
-		return null;
+		return CODEC;
 	}
 
 	public static Builder<?> builder() {
@@ -41,14 +39,9 @@ public class CopySkilletFunction extends LootItemConditionalFunction
 
 	@Override
 	protected ItemStack run(ItemStack stack, LootContext context) {
-		if (context.getParamOrNull(LootContextParams.BLOCK_ENTITY) instanceof SkilletBlockEntity skillet) {
+		if (context.getOptionalParameter(LootContextParams.BLOCK_ENTITY) instanceof SkilletBlockEntity skillet) {
 			stack = skillet.getSkilletAsItem();
 		}
 		return stack;
-	}
-
-	@Override
-	public LootItemFunction getType() {
-		return ModLootFunctions.COPY_SKILLET.get();
 	}
 }

@@ -1,19 +1,16 @@
 package vectorwing.farmersdelight.common.loot.function;
 
+import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.crafting.SmokingRecipe;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.common.registry.ModLootFunctions;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
@@ -23,13 +20,17 @@ import java.util.Optional;
 @ParametersAreNonnullByDefault
 public class SmokerCookFunction extends LootItemConditionalFunction
 {
-	public static final Identifier ID = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "smoker_cook");
 	public static final MapCodec<SmokerCookFunction> CODEC = RecordCodecBuilder.mapCodec(
-			p_298131_ -> commonFields(p_298131_).apply(p_298131_, SmokerCookFunction::new)
+		i -> commonFields(i).apply(i, SmokerCookFunction::new)
 	);
 
-	protected SmokerCookFunction(List<LootItemCondition> conditionsIn) {
-		super(conditionsIn);
+	protected SmokerCookFunction(List<LootItemCondition> predicates) {
+		super(predicates);
+	}
+
+	@Override
+	public MapCodec<? extends LootItemConditionalFunction> codec() {
+		return CODEC;
 	}
 
 	@Override
@@ -37,20 +38,16 @@ public class SmokerCookFunction extends LootItemConditionalFunction
 		if (stack.isEmpty()) {
 			return stack;
 		}
-
-		Optional<RecipeHolder<SmokingRecipe>> recipe = context.getLevel().getRecipeManager().getAllRecipesFor(RecipeType.SMOKING).stream()
-				.filter(r -> r.value().getIngredients().get(0).test(stack)).findFirst();
+		SingleRecipeInput input = new SingleRecipeInput(stack);
+		Optional<RecipeHolder<SmokingRecipe>> recipe = context.getLevel().recipeAccess().getRecipeFor(RecipeType.SMOKING, input, context.getLevel());
 		if (recipe.isPresent()) {
-			ItemStack resultStack = recipe.get().value().getResultItem(context.getLevel().registryAccess()).copy();
-			resultStack.setCount(resultStack.getCount() * stack.getCount());
-			return resultStack;
+			ItemStack resultStack = recipe.get().value().assemble(input).copy();
+			if (!resultStack.isEmpty()) {
+				int newCount = stack.count() * resultStack.getCount();
+				return resultStack.copyWithCount(Math.min(newCount, resultStack.getMaxStackSize()));
+			}
 		}
 
 		return stack;
-	}
-
-	@Override
-	public LootItemFunctionType<SmokerCookFunction> getType() {
-		return ModLootFunctions.SMOKER_COOK.get();
 	}
 }

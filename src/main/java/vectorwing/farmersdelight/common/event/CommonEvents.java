@@ -1,11 +1,10 @@
 package vectorwing.farmersdelight.common.event;
 
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
@@ -26,11 +25,11 @@ public class CommonEvents
 		}
 
 		if (Configuration.ENABLE_VANILLA_SOUP_EXTRA_EFFECTS.get()) {
-			FoodProperties soupEffects = FoodValues.VANILLA_SOUP_EFFECTS.get(food);
+			ApplyStatusEffectsConsumeEffect soupEffects = FoodValues.ConsumableValues.VANILLA_SOUP_EFFECTS.get(food);
 
 			if (soupEffects != null) {
-				for (FoodProperties.PossibleEffect effect : soupEffects.effects()) {
-					entity.addEffect(effect.effect());
+				for (MobEffectInstance effect : soupEffects.effects()) {
+					entity.addEffect(effect);
 				}
 			}
 		}

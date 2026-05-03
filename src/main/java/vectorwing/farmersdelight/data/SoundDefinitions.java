@@ -61,7 +61,7 @@ public class SoundDefinitions extends SoundDefinitionsProvider
 		for (int i = 1; i <= numberOfSounds; i++) {
 			definition.with(SoundDefinition.Sound.sound(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, baseSoundDirectory + (numberOfSounds > 1 ? i : "")), SoundDefinition.SoundType.SOUND));
 		}
-		this.add(event, definition);
+		this.add(event.get(), definition);
 	}
 
 	public void generateExistingSoundWithSubtitle(Supplier<SoundEvent> event, SoundEvent referencedSound) {
@@ -73,7 +73,7 @@ public class SoundDefinitions extends SoundDefinitionsProvider
 		if (subtitle) {
 			definition.subtitle(TextUtils.subtitleKey(event.get().location().getPath()));
 		}
-		this.add(event, definition
-				.with(SoundDefinition.Sound.sound(referencedSound.location(), SoundDefinition.SoundType.EVENT)));
+		this.add(event.get(), definition
+			.with(SoundDefinition.Sound.sound(referencedSound.location(), SoundDefinition.SoundType.EVENT)));
 	}
 }
