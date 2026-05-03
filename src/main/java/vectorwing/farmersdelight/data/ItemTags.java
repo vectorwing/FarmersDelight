@@ -2,10 +2,9 @@ package vectorwing.farmersdelight.data;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.Identifier;
-import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagEntry;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
@@ -22,13 +21,31 @@ import java.util.concurrent.CompletableFuture;
 public class ItemTags extends ItemTagsProvider
 {
 	public ItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, CompletableFuture<TagsProvider.TagLookup<Block>> blockTagProvider) {
-		super(output, provider, blockTagProvider, FarmersDelight.MODID);
+		super(output, provider, FarmersDelight.MODID);
 	}
 
 	@Override
 	protected void addTags(HolderLookup.@NotNull Provider provider) {
-		copy(ModTags.Blocks.WILD_CROPS, ModTags.Items.WILD_CROPS);
-		copy(BlockTags.SMALL_FLOWERS, net.minecraft.tags.ItemTags.SMALL_FLOWERS);
+		// TODO: Manual copy is fine, but try to figure out how to reimplement copy() for block/item mirror tags.
+
+//		copy(ModTags.Blocks.WILD_CROPS, ModTags.Items.WILD_CROPS);
+		tag(ModTags.Items.WILD_CROPS).add(
+			ModItems.WILD_CARROTS.get(),
+			ModItems.WILD_POTATOES.get(),
+			ModItems.WILD_BEETROOTS.get(),
+			ModItems.WILD_CABBAGES.get(),
+			ModItems.WILD_TOMATOES.get(),
+			ModItems.WILD_ONIONS.get(),
+			ModItems.WILD_RICE.get());
+//		copy(BlockTags.SMALL_FLOWERS, net.minecraft.tags.ItemTags.SMALL_FLOWERS);
+		tag(net.minecraft.tags.ItemTags.SMALL_FLOWERS).add(
+			ModItems.WILD_CARROTS.get(),
+			ModItems.WILD_POTATOES.get(),
+			ModItems.WILD_BEETROOTS.get(),
+			ModItems.WILD_CABBAGES.get(),
+			ModItems.WILD_TOMATOES.get(),
+			ModItems.WILD_ONIONS.get()
+		);
 
 		this.registerMinecraftTags();
 		this.registerModTags();
@@ -47,6 +64,13 @@ public class ItemTags extends ItemTagsProvider
 			.add(ModItems.CABBAGE_SEEDS.get())
 			.add(ModItems.TOMATO_SEEDS.get())
 			.add(ModItems.ONION.get());
+		tag(net.minecraft.tags.ItemTags.VILLAGER_PICKS_UP)
+			.add(ModItems.CABBAGE.get())
+			.add(ModItems.TOMATO.get())
+			.add(ModItems.ONION.get())
+			.add(ModItems.RICE.get())
+			.add(ModItems.CABBAGE_SEEDS.get())
+			.add(ModItems.RICE_PANICLE.get());
 
 		tag(net.minecraft.tags.ItemTags.DURABILITY_ENCHANTABLE).addTag(ModTags.Items.KNIVES).add(ModItems.SKILLET.get());
 		tag(net.minecraft.tags.ItemTags.WEAPON_ENCHANTABLE).addTag(ModTags.Items.KNIVES).add(ModItems.SKILLET.get());
@@ -156,7 +180,15 @@ public class ItemTags extends ItemTagsProvider
 			ModItems.GLOW_BERRY_CUSTARD.get(),
 			ModItems.FRUIT_SALAD.get()
 		);
-		copy(ModTags.Blocks.FEASTS, ModTags.Items.FEASTS);
+//		copy(ModTags.Blocks.FEASTS, ModTags.Items.FEASTS);
+		tag(ModTags.Items.FEASTS).add(
+			ModItems.ROAST_CHICKEN_BLOCK.get(),
+			ModItems.STUFFED_PUMPKIN_BLOCK.get(),
+			ModItems.SHEPHERDS_PIE_BLOCK.get(),
+			ModItems.HONEY_GLAZED_HAM_BLOCK.get(),
+			ModItems.GLEAMING_SALAD_BLOCK.get(),
+			ModItems.RICE_ROLL_MEDLEY_BLOCK.get()
+		);
 		tag(ModTags.Items.PIES).add(
 			Items.PUMPKIN_PIE,
 			ModItems.APPLE_PIE.get(),
@@ -202,17 +234,32 @@ public class ItemTags extends ItemTagsProvider
 			.add(ModItems.GREEN_HANGING_CANVAS_SIGN.get())
 			.add(ModItems.RED_HANGING_CANVAS_SIGN.get())
 			.add(ModItems.BLACK_HANGING_CANVAS_SIGN.get());
-		copy(ModTags.Blocks.CABINETS, ModTags.Items.CABINETS);
-		copy(ModTags.Blocks.CABINETS_WOODEN, ModTags.Items.CABINETS_WOODEN);
+//		copy(ModTags.Blocks.CABINETS, ModTags.Items.CABINETS);
+//		copy(ModTags.Blocks.CABINETS_WOODEN, ModTags.Items.CABINETS_WOODEN);
+		tag(ModTags.Items.CABINETS_WOODEN)
+			.add(ModItems.OAK_CABINET.get())
+			.add(ModItems.SPRUCE_CABINET.get())
+			.add(ModItems.BIRCH_CABINET.get())
+			.add(ModItems.JUNGLE_CABINET.get())
+			.add(ModItems.ACACIA_CABINET.get())
+			.add(ModItems.DARK_OAK_CABINET.get())
+			.add(ModItems.MANGROVE_CABINET.get())
+			.add(ModItems.CHERRY_CABINET.get())
+			.add(ModItems.BAMBOO_CABINET.get())
+			.add(ModItems.CRIMSON_CABINET.get())
+			.add(ModItems.WARPED_CABINET.get());
+		tag(ModTags.Items.CABINETS).addTag(ModTags.Items.CABINETS_WOODEN);
 
-		copy(ModTags.Blocks.MUSHROOM_COLONIES, ModTags.Items.MUSHROOM_COLONIES);
+//		copy(ModTags.Blocks.MUSHROOM_COLONIES, ModTags.Items.MUSHROOM_COLONIES);
+		tag(ModTags.Items.MUSHROOM_COLONIES)
+			.add(ModItems.BROWN_MUSHROOM_COLONY.get())
+			.add(ModItems.RED_MUSHROOM_COLONY.get());
 
 		tag(ModTags.Items.SERVING_CONTAINERS).add(Items.BOWL, Items.GLASS_BOTTLE, Items.BUCKET);
-		// TODO: Figure out how to refer to modded items on tag datagen.
-//		tag(ModTags.Items.FLAT_ON_CUTTING_BOARD).add(Items.TRIDENT, Items.SPYGLASS)
-//			.addOptional(Identifier.parse("supplementaries:quiver"))
-//			.addOptional(Identifier.parse("autumnity:turkey"))
-//			.addOptional(Identifier.parse("autumnity:cooked_turkey"));
+		tag(ModTags.Items.FLAT_ON_CUTTING_BOARD).add(Items.TRIDENT, Items.SPYGLASS)
+			.add(TagEntry.optionalElement(Identifier.parse("supplementaries:quiver")))
+			.add(TagEntry.optionalElement(Identifier.parse("autumnity:turkey")))
+			.add(TagEntry.optionalElement(Identifier.parse("autumnity:cooked_turkey")));
 	}
 
 	@SuppressWarnings("unchecked")

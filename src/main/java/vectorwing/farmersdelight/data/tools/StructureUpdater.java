@@ -40,7 +40,7 @@ public class StructureUpdater implements DataProvider
 	private final MultiPackResourceManager resources;
 
 	public StructureUpdater(
-			String basePath, String modid, ExistingFileHelper helper, PackOutput output
+			String basePath, String modid, PackOutput output
 	) {
 		this.basePath = basePath;
 		this.modid = modid;

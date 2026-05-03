@@ -1,39 +1,27 @@
 package vectorwing.farmersdelight.data;
 
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModBiomeModifiers;
 import vectorwing.farmersdelight.common.registry.ModDamageTypes;
 import vectorwing.farmersdelight.common.world.WildCropGeneration;
-import vectorwing.farmersdelight.data.loot.FDBlockLoot;
-import vectorwing.farmersdelight.data.loot.FDChestLoot;
-import vectorwing.farmersdelight.data.tools.StructureUpdater;
+import vectorwing.farmersdelight.data.provider.LootTables;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-
-@SuppressWarnings("unused")
 @EventBusSubscriber(modid = FarmersDelight.MODID)
 public class DataGenerators
 {
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
+		// TODO: Looks like these guys are going away once everything is migrated.
 		DataGenerator generator = event.getGenerator();
 		PackOutput output = generator.getPackOutput();
-		ExistingFileHelper helper = event.getExistingFileHelper();
 
 		RegistrySetBuilder registrySetBuilder = new RegistrySetBuilder()
 			.add(Registries.CONFIGURED_FEATURE, WildCropGeneration::bootstrapConfiguredFeatures)
@@ -41,29 +29,23 @@ public class DataGenerators
 			.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrapBiomeModifiers)
 			.add(Registries.DAMAGE_TYPE, ModDamageTypes::bootstrapDamageTypes)
 			.add(Registries.ENCHANTMENT, ModEnchantments::bootstrap);
-		DatapackBuiltinEntriesProvider datapackProvider = new DatapackBuiltinEntriesProvider(output, event.getLookupProvider(), registrySetBuilder, Set.of(FarmersDelight.MODID));
-		CompletableFuture<HolderLookup.Provider> lookupProvider = datapackProvider.getRegistryProvider();
-		generator.addProvider(event.includeServer(), datapackProvider);
+		event.createDatapackRegistryObjects(registrySetBuilder);
 
-		BlockTags blockTags = new BlockTags(output, lookupProvider, helper);
-		generator.addProvider(event.includeServer(), blockTags);
-		generator.addProvider(event.includeServer(), new ItemTags(output, lookupProvider, blockTags.contentsGetter(), helper));
-		generator.addProvider(event.includeServer(), new EntityTags(output, lookupProvider, helper));
-		generator.addProvider(event.includeServer(), new DamageTypeTags(output, lookupProvider, FarmersDelight.MODID, helper));
-		generator.addProvider(event.includeServer(), new EnchantmentTags(output, lookupProvider, helper));
-		generator.addProvider(event.includeServer(), new Recipes(output, lookupProvider));
-		generator.addProvider(event.includeServer(), new LootModifiers(output, lookupProvider));
-		generator.addProvider(event.includeServer(), new DataMaps(output, lookupProvider));
-		generator.addProvider(event.includeServer(), new Advancements(output, lookupProvider, helper));
-		generator.addProvider(event.includeServer(), new LootTableProvider(output, Collections.emptySet(), List.of(
-			new LootTableProvider.SubProviderEntry(FDBlockLoot::new, LootContextParamSets.BLOCK),
-			new LootTableProvider.SubProviderEntry(FDChestLoot::new, LootContextParamSets.CHEST)
-		), lookupProvider));
-		generator.addProvider(event.includeServer(), new StructureUpdater("structures/village/houses", FarmersDelight.MODID, helper, output));
+		event.createBlockAndItemTags(BlockTags::new, ItemTags::new);
+		event.createProvider(EntityTags::new);
+		event.createProvider(DamageTypeTags::new);
+		event.createProvider(EnchantmentTags::new);
+		event.createProvider(Recipes.Runner::new);
+		event.createProvider(LootModifiers::new);
+		event.createProvider(DataMaps::new);
+		event.createProvider(Advancements::new);
+		event.createProvider(LootTables::new);
+		// TODO: IE hasn't updated to 26.1 yet. This depends on ExistingFileHelper, which no longer exists. See if this can be fixed.
+//		event.createProvider(new StructureUpdater("structures/village/houses", FarmersDelight.MODID, helper, output));
 
 		BlockStates blockStates = new BlockStates(output, helper);
 		generator.addProvider(event.includeClient(), blockStates);
 		generator.addProvider(event.includeClient(), new ItemModels(output, blockStates.models().existingFileHelper));
-		generator.addProvider(event.includeClient(), new SoundDefinitions(output, helper));
+		event.createProvider(SoundDefinitions::new);
 	}
 }
