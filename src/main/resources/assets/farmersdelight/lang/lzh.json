@@ -1,7 +1,7 @@
 {
   "block.farmersdelight.stove": "竈",
   "block.farmersdelight.cooking_pot": "鑊",
-  "block.farmersdelight.wooden_basket": "籃",
+  "block.farmersdelight.wooden_basket": "木籃",
   "block.farmersdelight.bamboo_basket": "竹籃",
   "block.farmersdelight.cutting_board": "俎",
   "block.farmersdelight.skillet": "鏊",
@@ -35,7 +35,7 @@
   "block.farmersdelight.onion_crate": "胡蔥箱",
   "block.farmersdelight.rice_bale": "稻束",
   "block.farmersdelight.rice_bag": "米囊",
-  "block.farmersdelight.straw_bale": "稻稈",
+  "block.farmersdelight.straw_bale": "艸稈",
 
   "block.farmersdelight.canvas_sign": "粗布牌",
   "block.farmersdelight.white_canvas_sign": "素粗布牌",
