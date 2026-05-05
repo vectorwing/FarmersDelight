@@ -64,11 +64,11 @@ public class ModItems
 	public static final Supplier<Item> SKILLET = registerWithTab("skillet",
 			() -> new SkilletItem(ModBlocks.SKILLET.get(), basicItem().stacksTo(1).attributes(SkilletItem.createAttributes(SkilletItem.SKILLET_TIER, 5.0F, -3.1F))));
 	public static final Supplier<Item> CUTTING_BOARD = registerWithTab("cutting_board",
-			() -> new FuelBlockItem(ModBlocks.CUTTING_BOARD.get(), basicItem(), 200));
+			() -> new BlockItem(ModBlocks.CUTTING_BOARD.get(), basicItem()));
 	public static final Supplier<Item> WOODEN_BASKET = registerWithTab("wooden_basket",
-			() -> new FuelBlockItem(ModBlocks.WOODEN_BASKET.get(), basicItem(), 300));
+			() -> new BlockItem(ModBlocks.WOODEN_BASKET.get(), basicItem()));
 	public static final Supplier<Item> BAMBOO_BASKET = registerWithTab("bamboo_basket",
-			() -> new FuelBlockItem(ModBlocks.BAMBOO_BASKET.get(), basicItem(), 300));
+			() -> new BlockItem(ModBlocks.BAMBOO_BASKET.get(), basicItem()));
 
 	/**
 	 * Deprecated reference added for backwards compatibility. Use BAMBOO_BASKET instead.
@@ -96,37 +96,37 @@ public class ModItems
 			() -> new BlockItem(ModBlocks.STRAW_BALE.get(), basicItem()));
 
 	public static final Supplier<Item> SAFETY_NET = registerWithTab("safety_net",
-			() -> new FuelBlockItem(ModBlocks.SAFETY_NET.get(), basicItem(), 200));
+			() -> new BlockItem(ModBlocks.SAFETY_NET.get(), basicItem()));
 	public static final Supplier<Item> OAK_CABINET = registerWithTab("oak_cabinet",
-			() -> new FuelBlockItem(ModBlocks.OAK_CABINET.get(), basicItem(), 300));
+			() -> new BlockItem(ModBlocks.OAK_CABINET.get(), basicItem()));
 	public static final Supplier<Item> SPRUCE_CABINET = registerWithTab("spruce_cabinet",
-			() -> new FuelBlockItem(ModBlocks.SPRUCE_CABINET.get(), basicItem(), 300));
+			() -> new BlockItem(ModBlocks.SPRUCE_CABINET.get(), basicItem()));
 	public static final Supplier<Item> BIRCH_CABINET = registerWithTab("birch_cabinet",
-			() -> new FuelBlockItem(ModBlocks.BIRCH_CABINET.get(), basicItem(), 300));
+			() -> new BlockItem(ModBlocks.BIRCH_CABINET.get(), basicItem()));
 	public static final Supplier<Item> JUNGLE_CABINET = registerWithTab("jungle_cabinet",
-			() -> new FuelBlockItem(ModBlocks.JUNGLE_CABINET.get(), basicItem(), 300));
+			() -> new BlockItem(ModBlocks.JUNGLE_CABINET.get(), basicItem()));
 	public static final Supplier<Item> ACACIA_CABINET = registerWithTab("acacia_cabinet",
-			() -> new FuelBlockItem(ModBlocks.ACACIA_CABINET.get(), basicItem(), 300));
+			() -> new BlockItem(ModBlocks.ACACIA_CABINET.get(), basicItem()));
 	public static final Supplier<Item> DARK_OAK_CABINET = registerWithTab("dark_oak_cabinet",
-			() -> new FuelBlockItem(ModBlocks.DARK_OAK_CABINET.get(), basicItem(), 300));
+			() -> new BlockItem(ModBlocks.DARK_OAK_CABINET.get(), basicItem()));
 	public static final Supplier<Item> MANGROVE_CABINET = registerWithTab("mangrove_cabinet",
-			() -> new FuelBlockItem(ModBlocks.MANGROVE_CABINET.get(), basicItem(), 300));
+			() -> new BlockItem(ModBlocks.MANGROVE_CABINET.get(), basicItem()));
 	public static final Supplier<Item> CHERRY_CABINET = registerWithTab("cherry_cabinet",
-			() -> new FuelBlockItem(ModBlocks.CHERRY_CABINET.get(), basicItem(), 300));
+			() -> new BlockItem(ModBlocks.CHERRY_CABINET.get(), basicItem()));
 	public static final Supplier<Item> BAMBOO_CABINET = registerWithTab("bamboo_cabinet",
-			() -> new FuelBlockItem(ModBlocks.BAMBOO_CABINET.get(), basicItem(), 300));
+			() -> new BlockItem(ModBlocks.BAMBOO_CABINET.get(), basicItem()));
 	public static final Supplier<Item> CRIMSON_CABINET = registerWithTab("crimson_cabinet",
 			() -> new BlockItem(ModBlocks.CRIMSON_CABINET.get(), basicItem()));
 	public static final Supplier<Item> WARPED_CABINET = registerWithTab("warped_cabinet",
 			() -> new BlockItem(ModBlocks.WARPED_CABINET.get(), basicItem()));
 	public static final Supplier<Item> TATAMI = registerWithTab("tatami",
-			() -> new FuelBlockItem(ModBlocks.TATAMI.get(), basicItem(), 400));
+			() -> new BlockItem(ModBlocks.TATAMI.get(), basicItem()));
 	public static final Supplier<Item> FULL_TATAMI_MAT = registerWithTab("full_tatami_mat",
-			() -> new FuelBlockItem(ModBlocks.FULL_TATAMI_MAT.get(), basicItem(), 200));
+			() -> new BlockItem(ModBlocks.FULL_TATAMI_MAT.get(), basicItem()));
 	public static final Supplier<Item> HALF_TATAMI_MAT = registerWithTab("half_tatami_mat",
-			() -> new FuelBlockItem(ModBlocks.HALF_TATAMI_MAT.get(), basicItem()));
+			() -> new BlockItem(ModBlocks.HALF_TATAMI_MAT.get(), basicItem()));
 	public static final Supplier<Item> CANVAS_RUG = registerWithTab("canvas_rug",
-			() -> new FuelBlockItem(ModBlocks.CANVAS_RUG.get(), basicItem(), 200));
+			() -> new BlockItem(ModBlocks.CANVAS_RUG.get(), basicItem()));
 	public static final Supplier<Item> ROPE_FENCE = registerWithTab("rope_fence",
 			() -> new BlockItem(ModBlocks.ROPE_FENCE.get(), basicItem()));
 	public static final Supplier<Item> ROPE_FENCE_GATE = registerWithTab("rope_fence_gate",
@@ -238,9 +238,9 @@ public class ModItems
 	public static final Supplier<Item> GOLDEN_KNIFE = registerWithTab("golden_knife",
 			() -> new KnifeItem(Tiers.GOLD, knifeItem(Tiers.GOLD)));
 
-	public static final Supplier<Item> STRAW = registerWithTab("straw", () -> new FuelItem(basicItem()));
-	public static final Supplier<Item> CANVAS = registerWithTab("canvas", () -> new FuelItem(basicItem(), 400));
-	public static final Supplier<Item> TREE_BARK = registerWithTab("tree_bark", () -> new FuelItem(basicItem(), 200));
+	public static final Supplier<Item> STRAW = registerWithTab("straw", () -> new Item(basicItem()));
+	public static final Supplier<Item> CANVAS = registerWithTab("canvas", () -> new Item(basicItem()));
+	public static final Supplier<Item> TREE_BARK = registerWithTab("tree_bark", () -> new Item(basicItem()));
 
 	// Wild Crops
 	public static final Supplier<Item> SANDY_SHRUB = registerWithTab("sandy_shrub",

@@ -1,0 +1,64 @@
+{
+  "values": {
+    "farmersdelight:acacia_cabinet": {
+      "burn_time": 300
+    },
+    "farmersdelight:bamboo_basket": {
+      "burn_time": 300
+    },
+    "farmersdelight:bamboo_cabinet": {
+      "burn_time": 300
+    },
+    "farmersdelight:birch_cabinet": {
+      "burn_time": 300
+    },
+    "farmersdelight:canvas": {
+      "burn_time": 400
+    },
+    "farmersdelight:canvas_rug": {
+      "burn_time": 200
+    },
+    "farmersdelight:cherry_cabinet": {
+      "burn_time": 300
+    },
+    "farmersdelight:cutting_board": {
+      "burn_time": 200
+    },
+    "farmersdelight:dark_oak_cabinet": {
+      "burn_time": 300
+    },
+    "farmersdelight:full_tatami_mat": {
+      "burn_time": 200
+    },
+    "farmersdelight:half_tatami_mat": {
+      "burn_time": 100
+    },
+    "farmersdelight:jungle_cabinet": {
+      "burn_time": 300
+    },
+    "farmersdelight:mangrove_cabinet": {
+      "burn_time": 300
+    },
+    "farmersdelight:oak_cabinet": {
+      "burn_time": 300
+    },
+    "farmersdelight:safety_net": {
+      "burn_time": 200
+    },
+    "farmersdelight:spruce_cabinet": {
+      "burn_time": 300
+    },
+    "farmersdelight:straw": {
+      "burn_time": 100
+    },
+    "farmersdelight:tatami": {
+      "burn_time": 400
+    },
+    "farmersdelight:tree_bark": {
+      "burn_time": 200
+    },
+    "farmersdelight:wooden_basket": {
+      "burn_time": 300
+    }
+  }
+}

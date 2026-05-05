@@ -3,6 +3,7 @@ package vectorwing.farmersdelight.common.item;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -11,10 +12,10 @@ import net.minecraft.world.level.material.FluidState;
 
 import javax.annotation.Nullable;
 
-public class RopeItem extends FuelBlockItem
+public class RopeItem extends BlockItem
 {
 	public RopeItem(Block block, Properties properties) {
-		super(block, properties, 200);
+		super(block, properties);
 	}
 
 	@Override
