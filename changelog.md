@@ -5,6 +5,7 @@
 ### Fixes
 - Fixed Rope Fences not being able to hold leashed animals in some circumstances;
 - (1.21+) Fixed Pumpkins having inverted slicing logic with the Silk Touch enchantment;
+- (1.21+) Fixed Cutting Board crash when the Fortune enchantment is disabled through datapacks;
 
 ## 1.3.1
 

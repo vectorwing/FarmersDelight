@@ -131,7 +131,7 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 		cookingTime = compound.getInt("CookTime");
 		cookingTimeTotal = compound.getInt("CookTimeTotal");
 		skilletStack = ItemStack.parseOptional(registries, compound.getCompound("Skillet"));
-		fireAspectLevel = EnchantmentHelper.getTagEnchantmentLevel(registries.holder(Enchantments.FIRE_ASPECT).get(), skilletStack);
+		fireAspectLevel = ItemUtils.getValidatedEnchantmentLevel(Enchantments.FIRE_ASPECT, registries, skilletStack);
 	}
 
 	@Override
@@ -151,12 +151,7 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 
 	public void setSkilletItem(ItemStack stack) {
 		skilletStack = stack.copy();
-		if (level != null) {
-			Optional<Holder.Reference<Enchantment>> fireAspect = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).get(Enchantments.FIRE_ASPECT);
-			fireAspectLevel = fireAspect.map(stack::getEnchantmentLevel).orElse(0);
-		} else {
-			fireAspectLevel = 0;
-		}
+		fireAspectLevel = ItemUtils.getValidatedEnchantmentLevel(Enchantments.FIRE_ASPECT, level.registryAccess(), stack);
 		inventoryChanged();
 	}
 
