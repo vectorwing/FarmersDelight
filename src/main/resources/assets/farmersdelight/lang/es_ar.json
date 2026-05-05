@@ -423,7 +423,7 @@
   "tag.block.farmersdelight.cabinets.wooden": "Alacenas de madera",
   "tag.block.farmersdelight.campfire_signal_smoke": "Señal de humo de fogata",
   "tag.block.farmersdelight.compost_activators": "Activadores de abono",
-  "tag.block.farmersdelight.drops_cake_slice": "Drops Cake Slices",
+  "tag.block.farmersdelight.drops_cake_slice": "Suelta rebanadas de torta/tarta",
   "tag.block.farmersdelight.feasts": "Festines",
   "tag.block.farmersdelight.heat_conductors": "Conductores de calor",
   "tag.block.farmersdelight.heat_sources": "Fuentes de calor",
@@ -520,10 +520,10 @@
   "farmersdelight.configuration.enableTomateRopePermanence": "Permanencia de la cuerda del tomate",
   "farmersdelight.configuration.enableTomateRopePermanence.tooltip": "Los cultivos de tomate colgados de una cuerda forzarán la colocación de una cuerda al romperse. Debido a limitaciones tecnicas, esto afecta cosas como comandos, haciendo que falle el 'setblock' de dicho bloque al primer intento.\n\nDeshabilita esto si este bloque está previniendo la edición de una region en creativo o con comandos. Para jugabilidad normal, recomiendo dejar esto habilitado.",
 
-  "farmersdelight.configuration.enableNourishmentHungerOverlay": "Nourishment Hunger Overlay",
-  "farmersdelight.configuration.enableNourishmentHungerOverlay.tooltip": "Si está habilitado, a gilded overlay will be shown over the food meter when the player has the Nourishment effect.",
-  "farmersdelight.configuration.enableComfortHealthOverlay": "Comfort Health Overlay",
-  "farmersdelight.configuration.enableComfortHealthOverlay.tooltip": "Si está habilitado, a scrolling overlay will be shown over the health meter when the player has the Comfort effect.",
-  "farmersdelight.configuration.enableFoodEffectTooltip": "Food Effect Tooltip",
-  "farmersdelight.configuration.enableFoodEffectTooltip.tooltip": "Si está habilitado, food items will display tooltips showing which effects they grant when eaten, if any. Applies to foods from both Minecraft and this mod."
+  "farmersdelight.configuration.enableNourishmentHungerOverlay": "Interfaz de Nutrición",
+  "farmersdelight.configuration.enableNourishmentHungerOverlay.tooltip": "Si está habilitado, un marco dorado aparecerá en la barra de hambre del jugador cuando tenga el efecto de Nutrición.",
+  "farmersdelight.configuration.enableComfortHealthOverlay": "Interfaz de Comodidad",
+  "farmersdelight.configuration.enableComfortHealthOverlay.tooltip": "Si está habilitado, una interfaz deslizante aparecerá en la barra de vida del jugador cuando tenga el efecto de Comodidad.",
+  "farmersdelight.configuration.enableFoodEffectTooltip": "Descripción de efectos de comida",
+  "farmersdelight.configuration.enableFoodEffectTooltip.tooltip": "Si está habilitado, los objetos de comida tendrán descripciones mostrando que efectos otorgan al comerlos, si es que poseen alguno. Aplica tanto a comidas del juego base como a las de este mod."
 }
