@@ -11,6 +11,7 @@ import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 import org.jetbrains.annotations.NotNull;
 import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
@@ -34,22 +35,21 @@ public class DataMaps extends DataMapProvider
 			.add(item(ModItems.SAFETY_NET.get()), new FurnaceFuel(200), false)
 			.add(item(ModItems.FULL_TATAMI_MAT.get()), new FurnaceFuel(200), false)
 			.add(item(ModItems.CANVAS_RUG.get()), new FurnaceFuel(200), false)
+			.add(item(ModItems.ROPE_FENCE.get()), new FurnaceFuel(200), false)
+			.add(item(ModItems.ROPE_FENCE_GATE.get()), new FurnaceFuel(200), false)
 			.add(item(ModItems.TREE_BARK.get()), new FurnaceFuel(200), false)
 			// 1.5 items
 			.add(item(ModItems.WOODEN_BASKET.get()), new FurnaceFuel(300), false)
 			.add(item(ModItems.BAMBOO_BASKET.get()), new FurnaceFuel(300), false)
-			.add(item(ModItems.OAK_CABINET.get()), new FurnaceFuel(300), false)
-			.add(item(ModItems.SPRUCE_CABINET.get()), new FurnaceFuel(300), false)
-			.add(item(ModItems.BIRCH_CABINET.get()), new FurnaceFuel(300), false)
-			.add(item(ModItems.JUNGLE_CABINET.get()), new FurnaceFuel(300), false)
-			.add(item(ModItems.ACACIA_CABINET.get()), new FurnaceFuel(300), false)
-			.add(item(ModItems.DARK_OAK_CABINET.get()), new FurnaceFuel(300), false)
-			.add(item(ModItems.MANGROVE_CABINET.get()), new FurnaceFuel(300), false)
-			.add(item(ModItems.CHERRY_CABINET.get()), new FurnaceFuel(300), false)
-			.add(item(ModItems.BAMBOO_CABINET.get()), new FurnaceFuel(300), false)
+			.add(ModTags.Items.CABINETS_WOODEN, new FurnaceFuel(300), false)
 			// 2 items
 			.add(item(ModItems.TATAMI.get()), new FurnaceFuel(400), false)
-			.add(item(ModItems.CANVAS.get()), new FurnaceFuel(400), false);
+			.add(item(ModItems.CANVAS.get()), new FurnaceFuel(400), false)
+			// 5 items
+			.add(item(ModItems.STRAW_BALE.get()), new FurnaceFuel(1000), false)
+			// Exclusions
+			.remove(ModItems.CRIMSON_CABINET.get().builtInRegistryHolder())
+			.remove(ModItems.WARPED_CABINET.get().builtInRegistryHolder());
 		builder(NeoForgeDataMaps.COMPOSTABLES)
 			// 30% chance
 			.add(item(ModItems.TREE_BARK.get()), new Compostable(0.3F), false)

@@ -2,6 +2,12 @@
 
 ## 1.3.2
 
+### Updates
+- Fuel values have been moved into a NeoForge datamap, `furnace_fuels.json`, and the list of fuels has been updated:
+  - Added Straw Bale, smelts 5 items;
+  - Added Rope Fence and Rope Fence Gate, each smelts 1 item;
+  - The `FuelItem` and `FuelBlockItem` classes have been deprecated, and will be removed in the next major/minor update;
+
 ### Fixes
 - Fixed Rope Fences not being able to hold leashed animals in some circumstances;
 - (1.21+) Fixed Pumpkins having inverted slicing logic with the Silk Touch enchantment;
