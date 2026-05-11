@@ -351,8 +351,8 @@
   "item.farmersdelight.skillet.how_to_cook": "Ползвай ръцете си да държиш съставки!",
   "item.farmersdelight.skillet.underwater": "Не може да готви под вода...",
 
-  "death.attack.farmersdelight.stove": "%1$s was grilled to perfection",
-  "death.attack.farmersdelight.stove.player": "%1$s was thrown on the grill by Chef %2$s",
+  "death.attack.farmersdelight.stove": "%1$s бе стогвен",
+  "death.attack.farmersdelight.stove.player": "%1$s бе хврълен на грила от шеф %2$s",
 
   "jei.farmersdelight.cooking": "Cooking",
   "jei.farmersdelight.cutting": "Cutting Board",
