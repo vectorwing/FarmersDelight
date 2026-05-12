@@ -4,6 +4,7 @@
 
 ### Updates
 - Fried Rice and Chicken Soup have been nerfed down to the 3-minute tier of meals, due to their ease of cooking;
+- Added Sable weight tagging to FD blocks which aren't covered by default tagging;
 - (1.21+) TomatoBlock now has broader compatibility checks for integration with different supports (thanks, MehVahdJukaar!);
 - (1.21+) Fuel values have been moved into a NeoForge datamap, `furnace_fuels.json`, and the list of fuels has been updated:
   - Added Straw Bale, smelts 5 items;

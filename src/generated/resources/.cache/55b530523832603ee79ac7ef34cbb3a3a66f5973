@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-25T01:14:08.5466278	Tags for minecraft:block mod id farmersdelight
+// 1.21.1	2026-05-12T17:17:23.2343913	Tags for minecraft:block mod id farmersdelight
 38f828e4676e464f280ee9fcbbd1065fa89e4218 data/create/tags/block/brittle.json
 8481234a20c9d13f4da1a07b9651d1b99bbd0fad data/create/tags/block/fan_transparent.json
 89dff4a2813a4b6fe13cde6e775266a1d606a4aa data/create/tags/block/passive_boiler_heaters.json
@@ -57,6 +57,8 @@ f689dbe322491c7ad7b7aa512fbd981bc4d7ec45 data/minecraft/tags/block/standing_sign
 4bc9553c952a9d40a7ff218395d48f27f8c08df7 data/minecraft/tags/block/wall_hanging_signs.json
 42655e1b47b467aeaf7593e6f2fca0a16786fb87 data/minecraft/tags/block/wall_signs.json
 d899a783b5e4f2dcef445788a2e88b0d687a20b8 data/neoforge/tags/block/villager_farmlands.json
+ffcda20518c10de0e50800211be05f13cf25b4cb data/sable/tags/block/light.json
+9fda3460187737aebd30a3fe54c798fef33d9f0b data/sable/tags/block/super_light.json
 4dcc51aef8cad784cecedbc69fe3a14020a9288c data/sereneseasons/tags/block/autumn_crops.json
 ee4421cfb87b30b984db41666b2a17df2d9097f9 data/sereneseasons/tags/block/spring_crops.json
 842275996c27c76aaae4c691715f96933d5ff0b0 data/sereneseasons/tags/block/summer_crops.json
