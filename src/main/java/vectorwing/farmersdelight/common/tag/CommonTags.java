@@ -10,6 +10,8 @@ import net.minecraft.world.level.block.Block;
 /**
  * References to common tags under the Forge namespace.
  * These tags are generally used for crafting recipes across different mods.
+ * <p>
+ * For add-ons: I recommend copying these as local tag references in your code, as these are not actual registries. The tags below are subject to changes which may break add-ons referencing them.
  */
 public class CommonTags
 {
