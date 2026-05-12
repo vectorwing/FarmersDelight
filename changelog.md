@@ -7,7 +7,7 @@
 
 ### Translations
 - Updated:
-  -ru_ru (thanks, mpustovoi!);
+  - ru_ru (thanks, mpustovoi!);
 
 ## 1.3.1
 
