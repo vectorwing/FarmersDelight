@@ -36,6 +36,7 @@ public class HangingTomatoBlock extends TomatoBlock
 		return placeRope(level, pos);
 	}
 
+	@Override
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
 		super.onRemove(state, level, pos, newState, movedByPiston);
 		if (Configuration.ENABLE_TOMATO_ROPE_PERMANENCE.get() && !movedByPiston && !state.is(newState.getBlock())) {
@@ -43,7 +44,7 @@ public class HangingTomatoBlock extends TomatoBlock
 		}
 	}
 
-	public static boolean placeRope(Level level, BlockPos pos) {
+	public boolean placeRope(Level level, BlockPos pos) {
 		Block configuredRopeBlock = BuiltInRegistries.BLOCK.get(ResourceLocation.parse(Configuration.DEFAULT_TOMATO_VINE_ROPE.get()));
 		if (configuredRopeBlock == null) {
 			configuredRopeBlock = ModBlocks.ROPE.get();
