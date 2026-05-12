@@ -150,11 +150,11 @@ public class FoodValues
 			.nutrition(12).saturationModifier(0.8f)
 			.effect(() -> nourishment(MEDIUM_DURATION), 1.0F).build();
 	public static final FoodProperties CHICKEN_SOUP = (new FoodProperties.Builder())
-			.nutrition(14).saturationModifier(0.75f)
-			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();
+			.nutrition(12).saturationModifier(0.8f)
+			.effect(() -> nourishment(MEDIUM_DURATION), 1.0F).build();
 	public static final FoodProperties FRIED_RICE = (new FoodProperties.Builder())
-			.nutrition(14).saturationModifier(0.75f)
-			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();
+			.nutrition(12).saturationModifier(0.8f)
+			.effect(() -> nourishment(MEDIUM_DURATION), 1.0F).build();
 	public static final FoodProperties PUMPKIN_SOUP = (new FoodProperties.Builder())
 			.nutrition(14).saturationModifier(0.75f)
 			.effect(() -> nourishment(LONG_DURATION), 1.0F).build();

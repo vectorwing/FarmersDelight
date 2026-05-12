@@ -3,16 +3,26 @@
 ## 1.3.2
 
 ### Updates
-- Fuel values have been moved into a NeoForge datamap, `furnace_fuels.json`, and the list of fuels has been updated:
+- Fried Rice and Chicken Soup have been nerfed down to the 3-minute tier of meals, due to their ease of cooking;
+- (1.21+) Fuel values have been moved into a NeoForge datamap, `furnace_fuels.json`, and the list of fuels has been updated:
   - Added Straw Bale, smelts 5 items;
   - Added Rope Fence and Rope Fence Gate, each smelts 1 item;
   - The `FuelItem` and `FuelBlockItem` classes have been deprecated, and will be removed in the next major/minor update;
 
 ### Fixes
-- Fixed Rope Fences not being able to hold leashed animals in some circumstances;
+- (1.21+) Fixed Rope Fences not being able to hold leashed animals in some circumstances;
 - (1.21+) Fixed Pumpkins having inverted slicing logic with the Silk Touch enchantment;
 - (1.21+) Fixed Cutting Board crash when the Fortune enchantment is disabled through datapacks;
 - (1.21+) Fixed occasional crash with a tag reference load order;
+
+### Translations
+- Updated:
+  - es_ar (thanks, MilanesaGG!);
+  - ja_jp (thanks, Abbage230!);
+  - ko_kr (thanks, Kardane!);
+  - ru_ru (thanks, mpustovoi!);
+  - zh_cn, zh_tw, zh_hk and lzh;
+    - Thanks to BoredYukolin, deemsss2, MechtaSnezhevna and Kaohaaa for this translation batch!;
 
 ## 1.3.1
 
