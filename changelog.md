@@ -6,8 +6,15 @@
 - Fried Rice and Chicken Soup have been nerfed down to the 3-minute tier of meals, due to their ease of cooking;
 
 ### Translations
+- Added:
+  - bg_bg (thanks, OmegaSleepy and friends!);
 - Updated:
+  - es_ar (thanks, MilanesaGG!);
+  - ja_jp (thanks, Abbage230!);
+  - ko_kr (thanks, Kardane!);
   - ru_ru (thanks, mpustovoi!);
+  - zh_cn, zh_tw, zh_hk and lzh;
+    - Thanks to BoredYukolin, deemsss2, MechtaSnezhevna and Kaohaaa for this translation batch!;
 
 ## 1.3.1
 
