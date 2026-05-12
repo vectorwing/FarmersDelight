@@ -18,6 +18,8 @@
 - (1.21+) Fixed occasional crash with a tag reference load order;
 
 ### Translations
+- Added:
+  - bg_bg (thanks, OmegaSleepy and friends!);
 - Updated:
   - es_ar (thanks, MilanesaGG!);
   - ja_jp (thanks, Abbage230!);
