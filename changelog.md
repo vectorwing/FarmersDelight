@@ -6,11 +6,12 @@
 - Fried Rice and Chicken Soup have been nerfed down to the 3-minute tier of meals, due to their ease of cooking;
 - Rice Bag has been removed from the `straw_blocks` tag, due to not being actually made with Straw.
   - Instead, it has been directly added to `mineable/knife`, which is the main use of the tag above.
-- Added Sable weight tagging to FD blocks which aren't covered by default tagging;
+- Added fuel values to the following items:
+  - Straw Bale: Smelts 5 items;
+  - Rope Fence and Rope Fence Gate: Smelts 1 item each;
+- (1.21+) Added Sable weight tagging to FD blocks which aren't covered by default tagging;
 - (1.21+) TomatoBlock now has broader compatibility checks for integration with different supports (thanks, MehVahdJukaar!);
-- (1.21+) Fuel values have been moved into a NeoForge datamap, `furnace_fuels.json`, and the list of fuels has been updated:
-  - Added Straw Bale, smelts 5 items;
-  - Added Rope Fence and Rope Fence Gate, each smelts 1 item;
+- (1.21+) Fuel values have been moved into a NeoForge datamap, `furnace_fuels.json`:
   - The `FuelItem` and `FuelBlockItem` classes have been deprecated, and will be removed in the next major/minor update;
 
 ### Fixes
