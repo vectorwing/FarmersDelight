@@ -7,6 +7,9 @@
 - Rice Bag has been removed from the `straw_blocks` tag, due to not being actually made with Straw.
   - Instead, it has been directly added to `mineable/knife`, which is the main use of the tag above.
 
+### Fixes
+- Fixed occasional crash with a tag reference load order;
+
 ### Translations
 - Added:
   - bg_bg (thanks, OmegaSleepy and friends!);
