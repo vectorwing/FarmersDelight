@@ -88,6 +88,7 @@ public class BlockTags extends BlockTagsProvider
 				Blocks.JACK_O_LANTERN,
 				Blocks.COBWEB,
 				Blocks.CAKE,
+				ModBlocks.RICE_BAG.get(),
 				ModBlocks.APPLE_PIE.get(),
 				ModBlocks.SWEET_BERRY_CHEESECAKE.get(),
 				ModBlocks.CHOCOLATE_PIE.get(),
@@ -271,7 +272,6 @@ public class BlockTags extends BlockTagsProvider
 			.addTag(net.minecraft.tags.BlockTags.DIRT)
 			.addTag(net.minecraft.tags.BlockTags.SAND);
 		tag(ModTags.Blocks.STRAW_BLOCKS).add(
-			ModBlocks.RICE_BAG.get(),
 			ModBlocks.ROPE.get(),
 			ModBlocks.SAFETY_NET.get(),
 			ModBlocks.CANVAS_RUG.get(),

@@ -13,6 +13,8 @@ import vectorwing.farmersdelight.FarmersDelight;
 /**
  * References to tags under the Farmer's Delight namespace.
  * These tags are used for mod mechanics.
+ * <p>
+ * For add-ons: I recommend copying these as local tag references in your code, as these are not actual registries. The tags below are subject to changes which may break add-ons referencing them.
  */
 public class ModTags
 {
