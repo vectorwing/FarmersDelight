@@ -92,7 +92,7 @@ public class ModItems
 	public static final RegistryObject<Item> RICE_BAG = registerWithTab("rice_bag",
 			() -> new BlockItem(ModBlocks.RICE_BAG.get(), basicItem()));
 	public static final RegistryObject<Item> STRAW_BALE = registerWithTab("straw_bale",
-			() -> new BlockItem(ModBlocks.STRAW_BALE.get(), basicItem()));
+			() -> new FuelBlockItem(ModBlocks.STRAW_BALE.get(), basicItem(), 1000));
 
 	public static final RegistryObject<Item> SAFETY_NET = registerWithTab("safety_net",
 			() -> new FuelBlockItem(ModBlocks.SAFETY_NET.get(), basicItem(), 200));
@@ -127,9 +127,9 @@ public class ModItems
 	public static final RegistryObject<Item> CANVAS_RUG = registerWithTab("canvas_rug",
 			() -> new FuelBlockItem(ModBlocks.CANVAS_RUG.get(), basicItem(), 200));
 	public static final RegistryObject<Item> ROPE_FENCE = registerWithTab("rope_fence",
-			() -> new BlockItem(ModBlocks.ROPE_FENCE.get(), basicItem()));
+			() -> new FuelBlockItem(ModBlocks.ROPE_FENCE.get(), basicItem(), 200));
 	public static final RegistryObject<Item> ROPE_FENCE_GATE = registerWithTab("rope_fence_gate",
-			() -> new BlockItem(ModBlocks.ROPE_FENCE_GATE.get(), basicItem()));
+			() -> new FuelBlockItem(ModBlocks.ROPE_FENCE_GATE.get(), basicItem(), 200));
 	public static final RegistryObject<Item> ORGANIC_COMPOST = registerWithTab("organic_compost",
 			() -> new BlockItem(ModBlocks.ORGANIC_COMPOST.get(), basicItem()));
 	public static final RegistryObject<Item> RICH_SOIL = registerWithTab("rich_soil",

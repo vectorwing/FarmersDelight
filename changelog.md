@@ -6,6 +6,9 @@
 - Fried Rice and Chicken Soup have been nerfed down to the 3-minute tier of meals, due to their ease of cooking;
 - Rice Bag has been removed from the `straw_blocks` tag, due to not being actually made with Straw.
   - Instead, it has been directly added to `mineable/knife`, which is the main use of the tag above.
+- Added fuel values to the following items:
+  - Straw Bale: Smelts 5 items;
+  - Rope Fence and Rope Fence Gate: Smelts 1 item each;
 
 ### Fixes
 - Fixed occasional crash with a tag reference load order;
