@@ -4,6 +4,8 @@
 
 ### Updates
 - Fried Rice and Chicken Soup have been nerfed down to the 3-minute tier of meals, due to their ease of cooking;
+- Rice Bag has been removed from the `straw_blocks` tag, due to not being actually made with Straw.
+  - Instead, it has been directly added to `mineable/knife`, which is the main use of the tag above.
 
 ### Translations
 - Added:
