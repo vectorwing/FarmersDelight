@@ -1,7 +1,7 @@
 {
   "block.farmersdelight.stove": "Soba",
   "block.farmersdelight.cooking_pot": "Tencere",
-  "block.farmersdelight.cutting_board": "Kesim Tahtası",
+  "block.farmersdelight.cutting_board": "Kesme Tahtası",
   "block.farmersdelight.skillet": "Tava",
   "block.farmersdelight.wooden_basket": "Sepet",
   "block.farmersdelight.bamboo_basket": "Bambu Sepet",
@@ -291,7 +291,7 @@
   "advancements.farmersdelight.get_ham.title": "Vahşi Kasap",
   "advancements.farmersdelight.get_ham.description": "Bıçak kullanarak Domuzlardan ve Hoglinlerden Jambon çıkarın",
   "advancements.farmersdelight.use_cutting_board.title": "Parmaklara Dikkat",
-  "advancements.farmersdelight.use_cutting_board.description": "Elinizde bir alet varken, bir öğeyi parçalamak için bir Kesim Tahtası kullanın.",
+  "advancements.farmersdelight.use_cutting_board.description": "Elinizde bir alet varken, bir öğeyi parçalamak için bir Kesme Tahtası kullanın.",
   "advancements.farmersdelight.obtain_netherite_knife.title": "Ateşi Kaldıramıyorsan...",
   "advancements.farmersdelight.obtain_netherite_knife.description": "Bıçağınızı yükseltmek için bir Netherit Külçesi harcayın. Ya da mutfağı terk edin!",
 
@@ -355,7 +355,7 @@
   "death.attack.farmersdelight.stove.player": "%1$s, Şef %2$s tarafından ızgaraya atıldı",
 
   "jei.farmersdelight.cooking": "Pişirme",
-  "jei.farmersdelight.cutting": "Kesim Tahtası",
+  "jei.farmersdelight.cutting": "Kesme Tahtası",
   "jei.farmersdelight.chance": "%1$s%% şansla",
   "jei.farmersdelight.decomposition": "Ayrıştırma",
   "jei.farmersdelight.decomposition.light": "Gün ışığıyla hızlanır",
@@ -375,7 +375,7 @@
   "jei.farmersdelight.info.wild_rice": "Pirinç, çoğunlukla bataklıklar ve yağmur ormanları gibi nemli yerlerin göletlerinde yabani bir ekin olarak bulunabilir.",
 
   "emi.category.farmersdelight.cooking": "Pişirme",
-  "emi.category.farmersdelight.cutting": "Kesim Tahtası",
+  "emi.category.farmersdelight.cutting": "Kesme Tahtası",
   "emi.category.farmersdelight.decomposition": "Ayrıştırma",
 
   "tag.item.c.crops.cabbage": "Lahana Ekinleri",
@@ -444,7 +444,7 @@
   "tag.item.farmersdelight.canvas_signs": "Kanvas Tabelalar",
   "tag.item.farmersdelight.drinks": "İçecekler",
   "tag.item.farmersdelight.feasts": "Ziyafetler",
-  "tag.item.farmersdelight.flat_on_cutting_board": "Kesim Tahtasında Düz Duranlar",
+  "tag.item.farmersdelight.flat_on_cutting_board": "Kesme Tahtasında Düz Duranlar",
   "tag.item.farmersdelight.hanging_canvas_signs": "Asılı Kanvas Tabelalar",
   "tag.item.farmersdelight.enchantable.knife": "Büyülenebilen Bıçaklar",
   "tag.item.farmersdelight.meals": "Öğünler",
@@ -493,8 +493,8 @@
   "farmersdelight.configuration.enableCookingPotRecipeBook.tooltip": "Etkinleştirildiğinde Tencere kendi arayüzünde Çalışma Masaları ve Fırınlardaki gibi bir Tarif Kitabı sağlar.",
   "farmersdelight.configuration.enableVanillaCropCrates": "Ana Oyun Ekin Kasaları",
   "farmersdelight.configuration.enableVanillaCropCrates.tooltip": "Etkinleştirildiğinde ana oyundaki ekinler için (Quark ve Thermal Cultivation'da olduğu gibi) depolama kasaları (3x3)  üretilebilir olur.",
-  "farmersdelight.configuration.cuttingBoardFortuneBonus": "Kesim Tahtası Servet Bonusu",
-  "farmersdelight.configuration.cuttingBoardFortuneBonus.tooltip": "Servet büyüsünün her bir seviyesi için Kesim Tahtasında nadir sonuçlar elde etme şansı ne kadar (ondalık yüzdeyle) artmalı? Devre dışı bırakmak için 0.0'a ayarlayın.",
+  "farmersdelight.configuration.cuttingBoardFortuneBonus": "Kesme Tahtası Servet Bonusu",
+  "farmersdelight.configuration.cuttingBoardFortuneBonus.tooltip": "Servet büyüsünün her bir seviyesi için Kesme Tahtasında nadir sonuçlar elde etme şansı ne kadar (ondalık yüzdeyle) artmalı? Devre dışı bırakmak için 0.0'a ayarlayın.",
 
   "farmersdelight.configuration.enableVanillaSoupExtraEffects": "Ana Oyun Çorbaları için Ekstra Etkiler",
   "farmersdelight.configuration.enableVanillaSoupExtraEffects.tooltip": "Etkinleştirildiğinde Minecraft'taki çorba ve güveçler yendiğinde bu moddaki öğünler gibi Beslenme etkisi sağlar.",
@@ -502,8 +502,8 @@
   "farmersdelight.configuration.enableRabbitStewBuff.tooltip": "Etkinleştirildiğinde üretim maliyetine uygun olması için Tavşan Güvecinin besin değerleri geliştirilir.",
   "farmersdelight.configuration.enablePumpkinPieSneakToPlace": "Bal Kabağı Turtasını Eğilerek Yerleştirme",
   "farmersdelight.configuration.enablePumpkinPieSneakToPlace.tooltip": "Etkinleştirildiğinde Bal Kabağı Turtası bir blok olarak yerleştirilmek için kullanıcının eğilmesini gerektirir.",
-  "farmersdelight.configuration.enableCuttingBoardDispenserBehavior": "Kesim Tahtası-Fırlatıcı Etkileşimi",
-  "farmersdelight.configuration.enableCuttingBoardDispenserBehavior.tooltip": "Etkinleştirildiğinde Fırlatıcı, depolanan eşyaları kesim aleti olarak kullanarak önünde duran bir Kesim Tahtasıyla etkileşime geçebilir.",
+  "farmersdelight.configuration.enableCuttingBoardDispenserBehavior": "Kesme Tahtası-Fırlatıcı Etkileşimi",
+  "farmersdelight.configuration.enableCuttingBoardDispenserBehavior.tooltip": "Etkinleştirildiğinde Fırlatıcı, depolanan eşyaları kesim aleti olarak kullanarak önünde duran bir Kesme Tahtasıyla etkileşime geçebilir.",
 
    "farmersdelight.configuration.enableStackableSoupItems": "Yığınlanabilir Çorbalar",
   "farmersdelight.configuration.enableStackableSoupItems.tooltip": "Etkinleştirildiğinde, sonraki BowlFoodItem listesinde bulunan herhangi bir çorba, Çiftçi'nin Keyfi öğünleri gibi 16'ya kadar yığınlanabilir.",
