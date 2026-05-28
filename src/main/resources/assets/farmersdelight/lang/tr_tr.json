@@ -490,7 +490,7 @@
   "farmersdelight.configuration.defaultTomatoVineRope.tooltip": "Domates Sarmaşığı kırıldığında geriye hangi halatı bırakmalı?",
 
   "farmersdelight.configuration.enableCookingPotRecipeBook": "Tencere Tarif Kitabı",
-  "farmersdelight.configuration.enableCookingPotRecipeBook.tooltip": "Etkinleştirildiğinde Tencere kendi arayüzünde Çalışma Masaları ve Fırınlardaki gibi bir Tarif Kitabı sağlar.",
+  "farmersdelight.configuration.enableCookingPotRecipeBook.tooltip": "Etkinleştirildiğinde Tencere kendi arayüzünde Çalışma Masaları ve Ocaklardaki gibi bir Tarif Kitabı sağlar.",
   "farmersdelight.configuration.enableVanillaCropCrates": "Ana Oyun Ekin Kasaları",
   "farmersdelight.configuration.enableVanillaCropCrates.tooltip": "Etkinleştirildiğinde ana oyundaki ekinler için (Quark ve Thermal Cultivation'da olduğu gibi) depolama kasaları (3x3)  üretilebilir olur.",
   "farmersdelight.configuration.cuttingBoardFortuneBonus": "Kesme Tahtası Servet Bonusu",
