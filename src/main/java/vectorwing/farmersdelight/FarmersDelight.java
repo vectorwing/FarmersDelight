@@ -55,6 +55,7 @@ public class FarmersDelight
 		ModBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(modEventBus);
 		ModLootFunctions.LOOT_FUNCTIONS.register(modEventBus);
 		ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
+		ModLootConditions.LOOT_CONDITIONS.register(modEventBus);
 		ModConditionCodecs.CONDITION_CODECS.register(modEventBus);
 		ModIngredientTypes.INGREDIENT_TYPES.register(modEventBus);
 		ModAdvancements.TRIGGERS.register(modEventBus);

@@ -2,10 +2,8 @@
   "type": "farmersdelight:pastry_slicing",
   "conditions": [
     {
-      "condition": "minecraft:match_tool",
-      "predicate": {
-        "items": "#farmersdelight:tools/knives"
-      }
+      "condition": "farmersdelight:tool_tag",
+      "tag": "farmersdelight:tools/knives"
     },
     {
       "block": "farmersdelight:pumpkin_pie",

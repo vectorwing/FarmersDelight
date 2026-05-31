@@ -2,10 +2,8 @@
   "type": "farmersdelight:add_item",
   "conditions": [
     {
-      "condition": "minecraft:match_tool",
-      "predicate": {
-        "items": "#farmersdelight:tools/knives"
-      }
+      "condition": "farmersdelight:tool_tag",
+      "tag": "farmersdelight:tools/knives"
     },
     {
       "condition": "minecraft:any_of",

@@ -2,10 +2,8 @@
   "type": "farmersdelight:add_item",
   "conditions": [
     {
-      "condition": "minecraft:match_tool",
-      "predicate": {
-        "items": "#farmersdelight:straw_harvesters"
-      }
+      "condition": "farmersdelight:tool_tag",
+      "tag": "farmersdelight:straw_harvesters"
     },
     {
       "block": "farmersdelight:rice_panicles",

@@ -2,15 +2,9 @@
   "type": "farmersdelight:add_item",
   "conditions": [
     {
-      "condition": "minecraft:entity_properties",
-      "entity": "attacker",
-      "predicate": {
-        "equipment": {
-          "mainhand": {
-            "items": "#farmersdelight:tools/knives"
-          }
-        }
-      }
+      "condition": "farmersdelight:tool_tag",
+      "source": "attacker_mainhand",
+      "tag": "farmersdelight:tools/knives"
     },
     {
       "condition": "minecraft:entity_properties",
