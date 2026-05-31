@@ -268,8 +268,12 @@ public class BlockStates extends ModelProvider
 	}
 
 	private void axisBlock(RotatedPillarBlock block) {
-		blockModels.createAxisAlignedPillarBlockCustomModel(block,
-				plainVariant(ModelLocationUtils.getModelLocation(block)));
+		String name = blockName(block);
+		TextureMapping mapping = new TextureMapping()
+				.put(TextureSlot.END, fdBlockTexture(name + "_end"))
+				.put(TextureSlot.SIDE, fdBlockTexture(name + "_side"));
+		MultiVariant model = plainVariant(ModelTemplates.CUBE_COLUMN.create(block, mapping, modelOutput));
+		blockModels.createAxisAlignedPillarBlockCustomModel(block, model);
 	}
 
 	// Individual block builders -------------------

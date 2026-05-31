@@ -1,4 +1,4 @@
-// 26.1.2	2026-05-31T16:47:53.1458131	Model Definitions - farmersdelight
+// 26.1.2	2026-05-31T17:15:48.3212454	Model Definitions - farmersdelight
 d4d9057afde725ea2a48206d8c1ea6eee4ec1c24 assets/farmersdelight/blockstates/acacia_cabinet.json
 c1a643b06507467b350b8eedb4cc05f93d71abb2 assets/farmersdelight/blockstates/apple_pie.json
 9b32f44318d93a46cd087e21d1834a77d2b14fa7 assets/farmersdelight/blockstates/bamboo_basket.json
@@ -396,6 +396,7 @@ edceda6d919789455e6add4d2b63ea150ef3a26f assets/farmersdelight/models/block/rich
 bee1fa8b8cfae229b920578100130bf29545b8c4 assets/farmersdelight/models/block/spruce_cabinet_open.json
 35887d2cfc65ae1c39d38f2f39b7d06fddb66e6c assets/farmersdelight/models/block/stove.json
 3546e13bda0952bbf34366087aab27b5822bd1fb assets/farmersdelight/models/block/stove_on.json
+f837eb2172d2e9c93511715b8ad99eefea0f1306 assets/farmersdelight/models/block/straw_bale.json
 b1cf4e84aa3f2a4d7c71d88232f49412f21218c5 assets/farmersdelight/models/block/sweet_berry_cheesecake.json
 229da3f5d478b6dab1886871bcb8fb7fc1490858 assets/farmersdelight/models/block/sweet_berry_cheesecake_slice1.json
 e9578bde598d70bfb430fa4bffd4df0f8016500d assets/farmersdelight/models/block/sweet_berry_cheesecake_slice2.json
