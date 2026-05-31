@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "farmersdelight:salmon_slice"
-    },
-    {
-      "item": "farmersdelight:salmon_slice"
-    },
-    {
-      "item": "farmersdelight:cooked_rice"
-    }
+    "farmersdelight:salmon_slice",
+    "farmersdelight:salmon_slice",
+    "farmersdelight:cooked_rice"
   ],
   "result": {
     "count": 2,

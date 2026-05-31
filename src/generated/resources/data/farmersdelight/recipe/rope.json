@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "fd_rope",
   "key": {
-    "s": {
-      "item": "farmersdelight:straw"
-    }
+    "s": "farmersdelight:straw"
   },
   "pattern": [
     "s",

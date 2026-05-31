@@ -3,11 +3,8 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.1,
-  "ingredient": {
-    "item": "farmersdelight:iron_knife"
-  },
+  "ingredient": "farmersdelight:iron_knife",
   "result": {
-    "count": 1,
     "id": "minecraft:iron_nugget"
   }
 }

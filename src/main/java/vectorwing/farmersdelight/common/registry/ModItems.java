@@ -58,25 +58,49 @@ public class ModItems
 		return item;
 	}
 
-	private static Supplier<Item> registerBlockWithTab(final String name, final BiFunction<Block, Item.Properties, Item> function, final Block block, final Item.Properties properties) {
+	private static Supplier<Item> registerBlockWithTab(final String name, final BiFunction<Block, Item.Properties, Item> function, final Supplier<? extends Block> block, final Item.Properties properties) {
 		properties.setId(key(name));
 		properties.useBlockDescriptionPrefix();
-		Supplier<Item> item = ITEMS.register(name, () -> function.apply(block, properties));
+		Supplier<Item> item = ITEMS.register(name, () -> function.apply(block.get(), properties));
 		CREATIVE_TAB_ITEMS.add(item);
 		return item;
 	}
 
-	private static Supplier<Item> registerItemNameBlockWithTab(final String name, final BiFunction<Block, Item.Properties, Item> function, final Block block, final Item.Properties properties) {
+	private static Supplier<Item> registerItemNameBlockWithTab(final String name, final BiFunction<Block, Item.Properties, Item> function, final Supplier<? extends Block> block, final Item.Properties properties) {
 		properties.setId(key(name));
-		Supplier<Item> item = ITEMS.register(name, () -> function.apply(block, properties));
+		Supplier<Item> item = ITEMS.register(name, () -> function.apply(block.get(), properties));
 		CREATIVE_TAB_ITEMS.add(item);
 		return item;
 	}
 
-	private static Supplier<Item> registerFuelBlockWithTab(final String name, final Block block, final Item.Properties properties, final int burnTime) {
+	private static Supplier<Item> registerFuelBlockWithTab(final String name, final Supplier<? extends Block> block, final Item.Properties properties, final int burnTime) {
 		properties.setId(key(name));
 		properties.useBlockDescriptionPrefix();
-		Supplier<Item> item = ITEMS.register(name, () -> new FuelBlockItem(block, properties, burnTime));
+		Supplier<Item> item = ITEMS.register(name, () -> new FuelBlockItem(block.get(), properties, burnTime));
+		CREATIVE_TAB_ITEMS.add(item);
+		return item;
+	}
+
+	// Tool items build registry/tag-touching components (e.g. repairable, mining rules), which is only valid
+	// while the registries are unfrozen — i.e. during item registration, not at static-init. These overloads
+	// build the Item.Properties lazily inside the registration supplier.
+	private static Supplier<Item> registerWithTab(final String name, final Function<Item.Properties, Item> function, final Supplier<Item.Properties> properties) {
+		Supplier<Item> item = ITEMS.register(name, () -> {
+			Item.Properties props = properties.get();
+			props.setId(key(name));
+			return function.apply(props);
+		});
+		CREATIVE_TAB_ITEMS.add(item);
+		return item;
+	}
+
+	private static Supplier<Item> registerBlockWithTab(final String name, final BiFunction<Block, Item.Properties, Item> function, final Supplier<? extends Block> block, final Supplier<Item.Properties> properties) {
+		Supplier<Item> item = ITEMS.register(name, () -> {
+			Item.Properties props = properties.get();
+			props.setId(key(name));
+			props.useBlockDescriptionPrefix();
+			return function.apply(block.get(), props);
+		});
 		CREATIVE_TAB_ITEMS.add(item);
 		return item;
 	}
@@ -133,11 +157,11 @@ public class ModItems
 
 	// Blocks
 	public static final Supplier<Item> STOVE = registerBlockWithTab("stove",
-		BlockItem::new, ModBlocks.STOVE.get(), basicItem());
+		BlockItem::new, ModBlocks.STOVE, basicItem());
 	public static final Supplier<Item> COOKING_POT = registerBlockWithTab("cooking_pot",
-		CookingPotItem::new, ModBlocks.COOKING_POT.get(), basicItem().stacksTo(1));
+		CookingPotItem::new, ModBlocks.COOKING_POT, basicItem().stacksTo(1));
 	public static final Supplier<Item> SKILLET = registerBlockWithTab("skillet",
-		SkilletItem::new, ModBlocks.SKILLET.get(), basicItem().stacksTo(1)
+		SkilletItem::new, ModBlocks.SKILLET, () -> basicItem().stacksTo(1)
 			.durability(SkilletItem.SKILLET_MATERIAL.durability())
 			.repairable(SkilletItem.SKILLET_MATERIAL.repairItems())
 			.enchantable(SkilletItem.SKILLET_MATERIAL.enchantmentValue())
@@ -145,78 +169,78 @@ public class ModItems
 			.component(DataComponents.TOOL, new Tool(Collections.emptyList(), 1.0F, 1, false))
 			.component(DataComponents.WEAPON, new Weapon(1)));
 	public static final Supplier<Item> CUTTING_BOARD = registerFuelBlockWithTab("cutting_board",
-		ModBlocks.CUTTING_BOARD.get(), basicItem(), 200);
+		ModBlocks.CUTTING_BOARD, basicItem(), 200);
 	public static final Supplier<Item> WOODEN_BASKET = registerFuelBlockWithTab("wooden_basket",
-		ModBlocks.WOODEN_BASKET.get(), basicItem(), 300);
+		ModBlocks.WOODEN_BASKET, basicItem(), 300);
 	public static final Supplier<Item> BAMBOO_BASKET = registerFuelBlockWithTab("bamboo_basket",
-		ModBlocks.BAMBOO_BASKET.get(), basicItem(), 300);
+		ModBlocks.BAMBOO_BASKET, basicItem(), 300);
 
 	public static final Supplier<Item> CARROT_CRATE = registerBlockWithTab("carrot_crate",
-		BlockItem::new, ModBlocks.CARROT_CRATE.get(), basicItem());
+		BlockItem::new, ModBlocks.CARROT_CRATE, basicItem());
 	public static final Supplier<Item> POTATO_CRATE = registerBlockWithTab("potato_crate",
-		BlockItem::new, ModBlocks.POTATO_CRATE.get(), basicItem());
+		BlockItem::new, ModBlocks.POTATO_CRATE, basicItem());
 	public static final Supplier<Item> BEETROOT_CRATE = registerBlockWithTab("beetroot_crate",
-		BlockItem::new, ModBlocks.BEETROOT_CRATE.get(), basicItem());
+		BlockItem::new, ModBlocks.BEETROOT_CRATE, basicItem());
 	public static final Supplier<Item> CABBAGE_CRATE = registerBlockWithTab("cabbage_crate",
-		BlockItem::new, ModBlocks.CABBAGE_CRATE.get(), basicItem());
+		BlockItem::new, ModBlocks.CABBAGE_CRATE, basicItem());
 	public static final Supplier<Item> TOMATO_CRATE = registerBlockWithTab("tomato_crate",
-		BlockItem::new, ModBlocks.TOMATO_CRATE.get(), basicItem());
+		BlockItem::new, ModBlocks.TOMATO_CRATE, basicItem());
 	public static final Supplier<Item> ONION_CRATE = registerBlockWithTab("onion_crate",
-		BlockItem::new, ModBlocks.ONION_CRATE.get(), basicItem());
+		BlockItem::new, ModBlocks.ONION_CRATE, basicItem());
 	public static final Supplier<Item> RICE_BALE = registerBlockWithTab("rice_bale",
-		BlockItem::new, ModBlocks.RICE_BALE.get(), basicItem());
+		BlockItem::new, ModBlocks.RICE_BALE, basicItem());
 	public static final Supplier<Item> RICE_BAG = registerBlockWithTab("rice_bag",
-		BlockItem::new, ModBlocks.RICE_BAG.get(), basicItem());
+		BlockItem::new, ModBlocks.RICE_BAG, basicItem());
 	public static final Supplier<Item> STRAW_BALE = registerBlockWithTab("straw_bale",
-		BlockItem::new, ModBlocks.STRAW_BALE.get(), basicItem());
+		BlockItem::new, ModBlocks.STRAW_BALE, basicItem());
 
 	public static final Supplier<Item> SAFETY_NET = registerFuelBlockWithTab("safety_net",
-		ModBlocks.SAFETY_NET.get(), basicItem(), 200);
+		ModBlocks.SAFETY_NET, basicItem(), 200);
 	public static final Supplier<Item> OAK_CABINET = registerFuelBlockWithTab("oak_cabinet",
-		ModBlocks.OAK_CABINET.get(), basicItem(), 300);
+		ModBlocks.OAK_CABINET, basicItem(), 300);
 	public static final Supplier<Item> SPRUCE_CABINET = registerFuelBlockWithTab("spruce_cabinet",
-		ModBlocks.SPRUCE_CABINET.get(), basicItem(), 300);
+		ModBlocks.SPRUCE_CABINET, basicItem(), 300);
 	public static final Supplier<Item> BIRCH_CABINET = registerFuelBlockWithTab("birch_cabinet",
-		ModBlocks.BIRCH_CABINET.get(), basicItem(), 300);
+		ModBlocks.BIRCH_CABINET, basicItem(), 300);
 	public static final Supplier<Item> JUNGLE_CABINET = registerFuelBlockWithTab("jungle_cabinet",
-		ModBlocks.JUNGLE_CABINET.get(), basicItem(), 300);
+		ModBlocks.JUNGLE_CABINET, basicItem(), 300);
 	public static final Supplier<Item> ACACIA_CABINET = registerFuelBlockWithTab("acacia_cabinet",
-		ModBlocks.ACACIA_CABINET.get(), basicItem(), 300);
+		ModBlocks.ACACIA_CABINET, basicItem(), 300);
 	public static final Supplier<Item> DARK_OAK_CABINET = registerFuelBlockWithTab("dark_oak_cabinet",
-		ModBlocks.DARK_OAK_CABINET.get(), basicItem(), 300);
+		ModBlocks.DARK_OAK_CABINET, basicItem(), 300);
 	public static final Supplier<Item> MANGROVE_CABINET = registerFuelBlockWithTab("mangrove_cabinet",
-		ModBlocks.MANGROVE_CABINET.get(), basicItem(), 300);
+		ModBlocks.MANGROVE_CABINET, basicItem(), 300);
 	public static final Supplier<Item> CHERRY_CABINET = registerFuelBlockWithTab("cherry_cabinet",
-		ModBlocks.CHERRY_CABINET.get(), basicItem(), 300);
+		ModBlocks.CHERRY_CABINET, basicItem(), 300);
 	public static final Supplier<Item> BAMBOO_CABINET = registerFuelBlockWithTab("bamboo_cabinet",
-		ModBlocks.BAMBOO_CABINET.get(), basicItem(), 300);
+		ModBlocks.BAMBOO_CABINET, basicItem(), 300);
 	// TODO: Not yet! Make it boot first!
 //	public static final Supplier<Item> PALE_OAK_CABINET = registerFuelBlockWithTab("pale_oak_cabinet",
-//		ModBlocks.PALE_OAK_CABINET.get(), basicItem(), 300);
+//		ModBlocks.PALE_OAK_CABINET, basicItem(), 300);
 	public static final Supplier<Item> CRIMSON_CABINET = registerBlockWithTab("crimson_cabinet",
-		BlockItem::new, ModBlocks.CRIMSON_CABINET.get(), basicItem());
+		BlockItem::new, ModBlocks.CRIMSON_CABINET, basicItem());
 	public static final Supplier<Item> WARPED_CABINET = registerBlockWithTab("warped_cabinet",
-		BlockItem::new, ModBlocks.WARPED_CABINET.get(), basicItem());
+		BlockItem::new, ModBlocks.WARPED_CABINET, basicItem());
 	public static final Supplier<Item> TATAMI = registerFuelBlockWithTab("tatami",
-		ModBlocks.TATAMI.get(), basicItem(), 400);
+		ModBlocks.TATAMI, basicItem(), 400);
 	public static final Supplier<Item> FULL_TATAMI_MAT = registerFuelBlockWithTab("full_tatami_mat",
-		ModBlocks.FULL_TATAMI_MAT.get(), basicItem(), 200);
+		ModBlocks.FULL_TATAMI_MAT, basicItem(), 200);
 	public static final Supplier<Item> HALF_TATAMI_MAT = registerFuelBlockWithTab("half_tatami_mat",
-		ModBlocks.HALF_TATAMI_MAT.get(), basicItem(), 100);
+		ModBlocks.HALF_TATAMI_MAT, basicItem(), 100);
 	public static final Supplier<Item> CANVAS_RUG = registerFuelBlockWithTab("canvas_rug",
-		ModBlocks.CANVAS_RUG.get(), basicItem(), 200);
+		ModBlocks.CANVAS_RUG, basicItem(), 200);
 	public static final Supplier<Item> ROPE_FENCE = registerBlockWithTab("rope_fence",
-		BlockItem::new, ModBlocks.ROPE_FENCE.get(), basicItem());
+		BlockItem::new, ModBlocks.ROPE_FENCE, basicItem());
 	public static final Supplier<Item> ROPE_FENCE_GATE = registerBlockWithTab("rope_fence_gate",
-		BlockItem::new, ModBlocks.ROPE_FENCE_GATE.get(), basicItem());
+		BlockItem::new, ModBlocks.ROPE_FENCE_GATE, basicItem());
 	public static final Supplier<Item> ORGANIC_COMPOST = registerBlockWithTab("organic_compost",
-		BlockItem::new, ModBlocks.ORGANIC_COMPOST.get(), basicItem());
+		BlockItem::new, ModBlocks.ORGANIC_COMPOST, basicItem());
 	public static final Supplier<Item> RICH_SOIL = registerBlockWithTab("rich_soil",
-		BlockItem::new, ModBlocks.RICH_SOIL.get(), basicItem());
+		BlockItem::new, ModBlocks.RICH_SOIL, basicItem());
 	public static final Supplier<Item> RICH_SOIL_FARMLAND = registerBlockWithTab("rich_soil_farmland",
-		BlockItem::new, ModBlocks.RICH_SOIL_FARMLAND.get(), basicItem());
+		BlockItem::new, ModBlocks.RICH_SOIL_FARMLAND, basicItem());
 	public static final Supplier<Item> ROPE = registerBlockWithTab("rope",
-		RopeItem::new, ModBlocks.ROPE.get(), basicItem());
+		RopeItem::new, ModBlocks.ROPE, basicItem());
 
 	// Canvas Signs...
 	public static final Supplier<Item> CANVAS_SIGN = registerWithTab("canvas_sign",
@@ -306,17 +330,17 @@ public class ModItems
 
 	// Tools
 	public static final Supplier<Item> FLINT_KNIFE = registerWithTab("flint_knife",
-		KnifeItem::new, knifeItem(ModMaterials.FLINT));
+		KnifeItem::new, () -> knifeItem(ModMaterials.FLINT));
 	public static final Supplier<Item> COPPER_KNIFE = registerWithTab("copper_knife",
-		KnifeItem::new, knifeItem(ToolMaterial.COPPER));
+		KnifeItem::new, () -> knifeItem(ToolMaterial.COPPER));
 	public static final Supplier<Item> IRON_KNIFE = registerWithTab("iron_knife",
-		KnifeItem::new, knifeItem(ToolMaterial.IRON));
+		KnifeItem::new, () -> knifeItem(ToolMaterial.IRON));
 	public static final Supplier<Item> DIAMOND_KNIFE = registerWithTab("diamond_knife",
-		KnifeItem::new, knifeItem(ToolMaterial.DIAMOND));
+		KnifeItem::new, () -> knifeItem(ToolMaterial.DIAMOND));
 	public static final Supplier<Item> NETHERITE_KNIFE = registerWithTab("netherite_knife",
-		KnifeItem::new, knifeItem(ToolMaterial.NETHERITE).fireResistant());
+		KnifeItem::new, () -> knifeItem(ToolMaterial.NETHERITE).fireResistant());
 	public static final Supplier<Item> GOLDEN_KNIFE = registerWithTab("golden_knife",
-		KnifeItem::new, knifeItem(ToolMaterial.GOLD));
+		KnifeItem::new, () -> knifeItem(ToolMaterial.GOLD));
 
 	public static final Supplier<Item> STRAW = registerFuelWithTab("straw", basicItem(), 100);
 	public static final Supplier<Item> CANVAS = registerFuelWithTab("canvas", basicItem(), 400);
@@ -324,26 +348,26 @@ public class ModItems
 
 	// Wild Crops
 	public static final Supplier<Item> SANDY_SHRUB = registerBlockWithTab("sandy_shrub",
-		BlockItem::new, ModBlocks.SANDY_SHRUB.get(), basicItem());
+		BlockItem::new, ModBlocks.SANDY_SHRUB, basicItem());
 	public static final Supplier<Item> WILD_CABBAGES = registerBlockWithTab("wild_cabbages",
-		BlockItem::new, ModBlocks.WILD_CABBAGES.get(), basicItem());
+		BlockItem::new, ModBlocks.WILD_CABBAGES, basicItem());
 	public static final Supplier<Item> WILD_ONIONS = registerBlockWithTab("wild_onions",
-		BlockItem::new, ModBlocks.WILD_ONIONS.get(), basicItem());
+		BlockItem::new, ModBlocks.WILD_ONIONS, basicItem());
 	public static final Supplier<Item> WILD_TOMATOES = registerBlockWithTab("wild_tomatoes",
-		BlockItem::new, ModBlocks.WILD_TOMATOES.get(), basicItem());
+		BlockItem::new, ModBlocks.WILD_TOMATOES, basicItem());
 	public static final Supplier<Item> WILD_CARROTS = registerBlockWithTab("wild_carrots",
-		BlockItem::new, ModBlocks.WILD_CARROTS.get(), basicItem());
+		BlockItem::new, ModBlocks.WILD_CARROTS, basicItem());
 	public static final Supplier<Item> WILD_POTATOES = registerBlockWithTab("wild_potatoes",
-		BlockItem::new, ModBlocks.WILD_POTATOES.get(), basicItem());
+		BlockItem::new, ModBlocks.WILD_POTATOES, basicItem());
 	public static final Supplier<Item> WILD_BEETROOTS = registerBlockWithTab("wild_beetroots",
-		BlockItem::new, ModBlocks.WILD_BEETROOTS.get(), basicItem());
+		BlockItem::new, ModBlocks.WILD_BEETROOTS, basicItem());
 	public static final Supplier<Item> WILD_RICE = registerBlockWithTab("wild_rice",
-		DoubleHighBlockItem::new, ModBlocks.WILD_RICE.get(), basicItem());
+		DoubleHighBlockItem::new, ModBlocks.WILD_RICE, basicItem());
 
 	public static final Supplier<Item> BROWN_MUSHROOM_COLONY = registerBlockWithTab("brown_mushroom_colony",
-		MushroomColonyItem::new, ModBlocks.BROWN_MUSHROOM_COLONY.get(), basicItem());
+		MushroomColonyItem::new, ModBlocks.BROWN_MUSHROOM_COLONY, basicItem());
 	public static final Supplier<Item> RED_MUSHROOM_COLONY = registerBlockWithTab("red_mushroom_colony",
-		MushroomColonyItem::new, ModBlocks.RED_MUSHROOM_COLONY.get(), basicItem());
+		MushroomColonyItem::new, ModBlocks.RED_MUSHROOM_COLONY, basicItem());
 
 	// Basic Crops
 	public static final Supplier<Item> CABBAGE = registerWithTab("cabbage",
@@ -351,13 +375,13 @@ public class ModItems
 	public static final Supplier<Item> TOMATO = registerWithTab("tomato",
 		Item::new, foodItem(FoodValues.TOMATO));
 	public static final Supplier<Item> ONION = registerItemNameBlockWithTab("onion",
-		BlockItem::new, ModBlocks.ONION_CROP.get(), foodItem(FoodValues.ONION));
+		BlockItem::new, ModBlocks.ONION_CROP, foodItem(FoodValues.ONION));
 	public static final Supplier<Item> RICE_PANICLE = registerWithTab("rice_panicle",
 		Item::new, basicItem());
 	public static final Supplier<Item> RICE = registerItemNameBlockWithTab("rice",
-		RiceItem::new, ModBlocks.RICE_CROP.get(), basicItem());
+		RiceItem::new, ModBlocks.RICE_CROP, basicItem());
 	public static final Supplier<Item> CABBAGE_SEEDS = registerItemNameBlockWithTab("cabbage_seeds",
-		BlockItem::new, ModBlocks.CABBAGE_CROP.get(), basicItem());
+		BlockItem::new, ModBlocks.CABBAGE_CROP, basicItem());
 	public static final Supplier<Item> TOMATO_SEEDS = registerItemNameBlockWithTab("tomato_seeds",
 		(block, properties) -> new BlockItem(block, properties)
 		{
@@ -366,7 +390,7 @@ public class ModItems
 				super.registerBlocks(blockToItemMap, item);
 				blockToItemMap.put(ModBlocks.TOMATO_CROP.get(), item);
 			}
-		}, ModBlocks.BUDDING_TOMATO_CROP.get(), basicItem());
+		}, ModBlocks.BUDDING_TOMATO_CROP, basicItem());
 	public static final Supplier<Item> ROTTEN_TOMATO = registerWithTab("rotten_tomato",
 		RottenTomatoItem::new, basicItem().stacksTo(16));
 
@@ -425,11 +449,11 @@ public class ModItems
 
 	// Sweets
 	public static final Supplier<Item> APPLE_PIE = registerBlockWithTab("apple_pie",
-		PlaceableItem::new, ModBlocks.APPLE_PIE.get(), basicItem());
+		PlaceableItem::new, ModBlocks.APPLE_PIE, basicItem());
 	public static final Supplier<Item> SWEET_BERRY_CHEESECAKE = registerBlockWithTab("sweet_berry_cheesecake",
-		PlaceableItem::new, ModBlocks.SWEET_BERRY_CHEESECAKE.get(), basicItem());
+		PlaceableItem::new, ModBlocks.SWEET_BERRY_CHEESECAKE, basicItem());
 	public static final Supplier<Item> CHOCOLATE_PIE = registerBlockWithTab("chocolate_pie",
-		PlaceableItem::new, ModBlocks.CHOCOLATE_PIE.get(), basicItem());
+		PlaceableItem::new, ModBlocks.CHOCOLATE_PIE, basicItem());
 	public static final Supplier<Item> CAKE_SLICE = registerWithTab("cake_slice",
 		Item::new, foodItem(FoodValues.CAKE_SLICE, FoodValues.ConsumableValues.CAKE_SLICE));
 	public static final Supplier<Item> APPLE_PIE_SLICE = registerWithTab("apple_pie_slice",
@@ -557,37 +581,37 @@ public class ModItems
 
 	// Feasts
 	public static final Supplier<Item> ROAST_CHICKEN_BLOCK = registerBlockWithTab("roast_chicken_block",
-		PlaceableItem::new, ModBlocks.ROAST_CHICKEN_BLOCK.get(), basicItem().stacksTo(1));
+		PlaceableItem::new, ModBlocks.ROAST_CHICKEN_BLOCK, basicItem().stacksTo(1));
 	public static final Supplier<Item> ROAST_CHICKEN = registerWithTab("roast_chicken",
 		properties -> new ConsumableItem(properties, true),
 		bowlFoodItem(FoodValues.ROAST_CHICKEN, FoodValues.ConsumableValues.NOURISHMENT_LONG_DURATION));
 
 	public static final Supplier<Item> STUFFED_PUMPKIN_BLOCK = registerBlockWithTab("stuffed_pumpkin_block",
-		PlaceableItem::new, ModBlocks.STUFFED_PUMPKIN_BLOCK.get(), basicItem().stacksTo(1));
+		PlaceableItem::new, ModBlocks.STUFFED_PUMPKIN_BLOCK, basicItem().stacksTo(1));
 	public static final Supplier<Item> STUFFED_PUMPKIN = registerWithTab("stuffed_pumpkin",
 		properties -> new ConsumableItem(properties, true),
 		bowlFoodItem(FoodValues.STUFFED_PUMPKIN, FoodValues.ConsumableValues.NOURISHMENT_LONG_DURATION));
 
 	public static final Supplier<Item> HONEY_GLAZED_HAM_BLOCK = registerBlockWithTab("honey_glazed_ham_block",
-		PlaceableItem::new, ModBlocks.HONEY_GLAZED_HAM_BLOCK.get(), basicItem().stacksTo(1));
+		PlaceableItem::new, ModBlocks.HONEY_GLAZED_HAM_BLOCK, basicItem().stacksTo(1));
 	public static final Supplier<Item> HONEY_GLAZED_HAM = registerWithTab("honey_glazed_ham",
 		properties -> new ConsumableItem(properties, true),
 		bowlFoodItem(FoodValues.HONEY_GLAZED_HAM, FoodValues.ConsumableValues.NOURISHMENT_LONG_DURATION));
 
 	public static final Supplier<Item> SHEPHERDS_PIE_BLOCK = registerBlockWithTab("shepherds_pie_block",
-		PlaceableItem::new, ModBlocks.SHEPHERDS_PIE_BLOCK.get(), basicItem().stacksTo(1));
+		PlaceableItem::new, ModBlocks.SHEPHERDS_PIE_BLOCK, basicItem().stacksTo(1));
 	public static final Supplier<Item> SHEPHERDS_PIE = registerWithTab("shepherds_pie",
 		properties -> new ConsumableItem(properties, true),
 		bowlFoodItem(FoodValues.SHEPHERDS_PIE, FoodValues.ConsumableValues.NOURISHMENT_LONG_DURATION));
 
 	public static final Supplier<Item> GLEAMING_SALAD_BLOCK = registerBlockWithTab("gleaming_salad_block",
-		PlaceableItem::new, ModBlocks.GLEAMING_SALAD_BLOCK.get(), basicItem().stacksTo(1));
+		PlaceableItem::new, ModBlocks.GLEAMING_SALAD_BLOCK, basicItem().stacksTo(1));
 	public static final Supplier<Item> GLEAMING_SALAD = registerWithTab("gleaming_salad",
 		properties -> new ConsumableItem(properties, true),
 		bowlFoodItem(FoodValues.GLEAMING_SALAD, FoodValues.ConsumableValues.NOURISHMENT_LONG_DURATION));
 
 	public static final Supplier<Item> RICE_ROLL_MEDLEY_BLOCK = registerBlockWithTab("rice_roll_medley_block",
-		PlaceableItem::new, ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get(), basicItem().stacksTo(1));
+		PlaceableItem::new, ModBlocks.RICE_ROLL_MEDLEY_BLOCK, basicItem().stacksTo(1));
 
 	// Pet Foods
 	public static final Supplier<Item> DOG_FOOD = registerWithTab("dog_food",

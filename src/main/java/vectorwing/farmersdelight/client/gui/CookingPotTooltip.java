@@ -3,13 +3,11 @@ package vectorwing.farmersdelight.client.gui;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
-import org.joml.Matrix4f;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
 public class CookingPotTooltip implements ClientTooltipComponent
@@ -25,7 +23,7 @@ public class CookingPotTooltip implements ClientTooltipComponent
 	}
 
 	@Override
-	public int getHeight() {
+	public int getHeight(Font font) {
 		return mealStack.isEmpty() ? textSpacing : textSpacing + ITEM_SIZE;
 	}
 
@@ -42,13 +40,13 @@ public class CookingPotTooltip implements ClientTooltipComponent
 	}
 
 	@Override
-	public void renderImage(Font font, int mouseX, int mouseY, GuiGraphics gui) {
+	public void extractImage(Font font, int x, int y, int w, int h, GuiGraphicsExtractor gui) {
 		if (mealStack.isEmpty()) return;
-		gui.renderItem(mealStack, mouseX, mouseY + textSpacing, 0);
+		gui.item(mealStack, x, y + textSpacing, 0);
 	}
 
 	@Override
-	public void renderText(Font font, int x, int y, Matrix4f matrix4f, MultiBufferSource.BufferSource bufferSource) {
+	public void extractText(GuiGraphicsExtractor gui, Font font, int x, int y) {
 		Integer color = ChatFormatting.GRAY.getColor();
 		int gray = color == null ? -1 : color;
 
@@ -57,11 +55,11 @@ public class CookingPotTooltip implements ClientTooltipComponent
 					? TextUtils.tooltip("cooking_pot.single_serving")
 					: TextUtils.tooltip("cooking_pot.many_servings", mealStack.getCount());
 
-			font.drawInBatch(textServingsOf, (float) x, (float) y, gray, true, matrix4f, bufferSource, Font.DisplayMode.NORMAL, 0, 15728880);
-			font.drawInBatch(mealStack.getHoverName(), x + ITEM_SIZE + MARGIN, y + textSpacing + MARGIN, -1, true, matrix4f, bufferSource, Font.DisplayMode.NORMAL, 0, 15728880);
+			gui.text(font, textServingsOf, x, y, gray, true);
+			gui.text(font, mealStack.getHoverName(), x + ITEM_SIZE + MARGIN, y + textSpacing + MARGIN, -1, true);
 		} else {
 			MutableComponent textEmpty = TextUtils.tooltip("cooking_pot.empty");
-			font.drawInBatch(textEmpty, x, y, gray, true, matrix4f, bufferSource, Font.DisplayMode.NORMAL, 0, 15728880);
+			gui.text(font, textEmpty, x, y, gray, true);
 		}
 	}
 

@@ -34,22 +34,19 @@ import vectorwing.farmersdelight.common.registry.*;
 public class ClientSetupEvents
 {
 	public static void init(final FMLClientSetupEvent event) {
-		event.enqueueWork(() -> ItemProperties.register(ModItems.SKILLET.get(), Identifier.withDefaultNamespace("cooking"),
-			(stack, world, entity, s) -> stack.getOrDefault(ModDataComponents.SKILLET_INGREDIENT, ItemStackWrapper.EMPTY).getStack().isEmpty() ? 0 : 1)
-		);
+		// NOTE (26.1 port): The client-side ItemProperties predicate/override model system was removed in 1.21.4.
+		// The conditional skillet model (empty vs. "cooking") must now be expressed in the skillet item-model JSON
+		// (a "condition"/"select" item model that inspects the SKILLET_INGREDIENT component). That belongs to datagen.
 	}
 
 	@SubscribeEvent
 	public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
+		// NOTE (26.1 port): IClientItemExtensions#getCustomRenderer() and BlockEntityWithoutLevelRenderer were removed.
+		// The skillet's custom in-hand/dropped rendering (block + cooked ingredient + flip animation) must move to a
+		// data-driven "special" item model backed by a SpecialModelRenderer (see SkilletItemRenderer notes) and
+		// registered via RegisterSpecialModelRendererEvent. Only the arm-pose extension survives here.
 		event.registerItem(new IClientItemExtensions()
 		{
-			BlockEntityWithoutLevelRenderer renderer = new SkilletItemRenderer();
-
-			@Override
-			public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
-				return renderer;
-			}
-
 			@Override
 			public HumanoidModel.@Nullable ArmPose getArmPose(LivingEntity living, InteractionHand hand, ItemStack stack) {
 				return stack.has(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get()) ? EnumParameters.PROXY_SKILLET_FLIP.getValue() : null;

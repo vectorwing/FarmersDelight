@@ -18,7 +18,7 @@ import vectorwing.farmersdelight.data.provider.LootTables;
 public class DataGenerators
 {
 	@SubscribeEvent
-	public static void gatherData(GatherDataEvent event) {
+	public static void gatherData(GatherDataEvent.Client event) {
 		// TODO: Looks like these guys are going away once everything is migrated.
 		DataGenerator generator = event.getGenerator();
 		PackOutput output = generator.getPackOutput();
@@ -43,9 +43,8 @@ public class DataGenerators
 		// TODO: IE hasn't updated to 26.1 yet. This depends on ExistingFileHelper, which no longer exists. See if this can be fixed.
 //		event.createProvider(new StructureUpdater("structures/village/houses", FarmersDelight.MODID, helper, output));
 
-		BlockStates blockStates = new BlockStates(output, helper);
-		generator.addProvider(event.includeClient(), blockStates);
-		generator.addProvider(event.includeClient(), new ItemModels(output, blockStates.models().existingFileHelper));
+		// BlockStates is now a vanilla ModelProvider producing blockstates, block models AND item models in one pass.
+		event.createProvider(BlockStates::new);
 		event.createProvider(SoundDefinitions::new);
 	}
 }

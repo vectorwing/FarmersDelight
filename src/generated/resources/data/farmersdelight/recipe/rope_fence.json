@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "/": {
-      "item": "minecraft:stick"
-    },
-    "r": {
-      "item": "farmersdelight:rope"
-    }
+    "/": "minecraft:stick",
+    "r": "farmersdelight:rope"
   },
   "pattern": [
     "r/r",

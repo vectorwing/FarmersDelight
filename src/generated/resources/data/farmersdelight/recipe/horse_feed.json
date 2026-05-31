@@ -3,25 +3,14 @@
   "category": "misc",
   "ingredients": [
     [
-      {
-        "item": "minecraft:hay_block"
-      },
-      {
-        "item": "farmersdelight:rice_bale"
-      }
+      "minecraft:hay_block",
+      "farmersdelight:rice_bale"
     ],
-    {
-      "item": "minecraft:apple"
-    },
-    {
-      "item": "minecraft:apple"
-    },
-    {
-      "item": "minecraft:golden_carrot"
-    }
+    "minecraft:apple",
+    "minecraft:apple",
+    "minecraft:golden_carrot"
   ],
   "result": {
-    "count": 1,
     "id": "farmersdelight:horse_feed"
   }
 }

@@ -3,7 +3,7 @@
   "conditions": [
     {
       "condition": "neoforge:loot_table_id",
-      "loot_table_id": "minecraft:chests/simple_dungeon"
+      "loot_table_id": "minecraft:loot_table"
     }
   ],
   "table": "farmersdelight:chests/fd_simple_dungeon"

@@ -20,6 +20,6 @@ public class EnumParameters
 //		RecipeBookCategories.class, (Supplier<List<ItemStack>>) () -> List.of(new ItemStack(ModItems.DUMPLINGS.get()), new ItemStack(ModItems.TOMATO_SAUCE.get()))
 //	);
 	public static final EnumProxy<HumanoidModel.ArmPose> PROXY_SKILLET_FLIP = new EnumProxy<>(
-		HumanoidModel.ArmPose.class, false, new SkilletItemRenderer.ArmPoseTransformer()
+		HumanoidModel.ArmPose.class, false, false, new SkilletItemRenderer.ArmPoseTransformer()
 	);
 }

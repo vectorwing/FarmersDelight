@@ -1,31 +1,19 @@
 {
   "type": "farmersdelight:cutting",
   "ingredients": [
-    {
-      "item": "minecraft:oak_chest_boat"
-    }
+    "minecraft:oak_chest_boat"
   ],
   "result": [
     {
       "item": {
-        "count": 1,
         "id": "minecraft:oak_boat"
       }
     },
     {
       "item": {
-        "count": 1,
         "id": "minecraft:chest"
       }
     }
   ],
-  "tool": [
-    {
-      "type": "farmersdelight:item_ability",
-      "action": "hoe_dig"
-    },
-    {
-      "tag": "minecraft:hoes"
-    }
-  ]
+  "tool": "#minecraft:hoes"
 }

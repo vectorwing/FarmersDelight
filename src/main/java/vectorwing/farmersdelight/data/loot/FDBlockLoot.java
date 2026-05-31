@@ -1,9 +1,9 @@
 package vectorwing.farmersdelight.data.loot;
 
-import net.minecraft.advancements.critereon.BlockPredicate;
-import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.LocationPredicate;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.advancements.criterion.BlockPredicate;
+import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.criterion.LocationPredicate;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
@@ -27,6 +27,7 @@ import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.ApplyExplosionDecay;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.*;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -58,7 +59,7 @@ public class FDBlockLoot extends BlockLootSubProvider
 		dropNamedContainer(ModBlocks.WOODEN_BASKET.get());
 		dropNamedContainer(ModBlocks.BAMBOO_BASKET.get());
 		add(ModBlocks.COOKING_POT.get(), (block) -> LootTable.lootTable().withPool(this.applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(block)
-				.apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
+				.apply(CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
 						.include(DataComponents.CUSTOM_NAME)
 						.include(ModDataComponents.MEAL.get())
 						.include(ModDataComponents.CONTAINER.get())
@@ -77,7 +78,7 @@ public class FDBlockLoot extends BlockLootSubProvider
 						LootItem.lootTableItem(ModItems.RICE.get())
 								.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
 										.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(RicePaniclesBlock.RICE_AGE, 3)))
-								.when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.Items.KNIVES))),
+								.when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(this.registries.lookupOrThrow(Registries.ITEM), ModTags.Items.KNIVES))),
 						LootItem.lootTableItem(ModItems.RICE_PANICLE.get())
 								.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
 										.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(RicePaniclesBlock.RICE_AGE, 3))))))));
@@ -152,7 +153,7 @@ public class FDBlockLoot extends BlockLootSubProvider
 								.setProperties(StatePropertiesPredicate.Builder.properties()
 										.hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)))
 						.when(LocationCheck.checkLocation(LocationPredicate.Builder.location()
-								.setBlock(BlockPredicate.Builder.block().of(block)
+								.setBlock(BlockPredicate.Builder.block().of(this.registries.lookupOrThrow(Registries.BLOCK), block)
 										.setProperties(StatePropertiesPredicate.Builder.properties()
 												.hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER))), new BlockPos(0, 1, 0))))
 				.withPool(LootPool.lootPool()
@@ -165,7 +166,7 @@ public class FDBlockLoot extends BlockLootSubProvider
 								.setProperties(StatePropertiesPredicate.Builder.properties()
 										.hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER)))
 						.when(LocationCheck.checkLocation(LocationPredicate.Builder.location()
-								.setBlock(BlockPredicate.Builder.block().of(block)
+								.setBlock(BlockPredicate.Builder.block().of(this.registries.lookupOrThrow(Registries.BLOCK), block)
 										.setProperties(StatePropertiesPredicate.Builder.properties()
 												.hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER))), new BlockPos(0, -1, 0)))));
 

@@ -3,18 +3,10 @@
   "category": "misc",
   "group": "fd_dough",
   "ingredients": [
-    {
-      "tag": "c:crops/wheat"
-    },
-    {
-      "tag": "c:crops/wheat"
-    },
-    {
-      "tag": "c:crops/wheat"
-    },
-    {
-      "tag": "c:eggs"
-    }
+    "#c:crops/wheat",
+    "#c:crops/wheat",
+    "#c:crops/wheat",
+    "#c:eggs"
   ],
   "result": {
     "count": 3,

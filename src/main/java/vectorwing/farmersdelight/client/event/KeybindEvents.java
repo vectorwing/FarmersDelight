@@ -7,7 +7,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.item.SkilletItem;
 import vectorwing.farmersdelight.common.network.payload.FlipSkilletPayload;
@@ -24,7 +24,7 @@ public class KeybindEvents
 			ItemStack useItem = player.getUseItem();
 			if (useItem.getItem() instanceof SkilletItem && !useItem.has(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get())) {
 				while (mc.options.keyAttack.consumeClick()) {
-					PacketDistributor.sendToServer(FlipSkilletPayload.INSTANCE);
+					ClientPacketDistributor.sendToServer(FlipSkilletPayload.INSTANCE);
 				}
 			}
 		}

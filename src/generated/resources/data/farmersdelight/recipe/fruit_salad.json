@@ -2,30 +2,15 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:apple"
-    },
-    {
-      "item": "minecraft:melon_slice"
-    },
-    {
-      "item": "minecraft:melon_slice"
-    },
-    {
-      "tag": "c:foods/berry"
-    },
-    {
-      "tag": "c:foods/berry"
-    },
-    {
-      "item": "farmersdelight:pumpkin_slice"
-    },
-    {
-      "item": "minecraft:bowl"
-    }
+    "minecraft:apple",
+    "minecraft:melon_slice",
+    "minecraft:melon_slice",
+    "#c:foods/berry",
+    "#c:foods/berry",
+    "farmersdelight:pumpkin_slice",
+    "minecraft:bowl"
   ],
   "result": {
-    "count": 1,
     "id": "farmersdelight:fruit_salad"
   }
 }

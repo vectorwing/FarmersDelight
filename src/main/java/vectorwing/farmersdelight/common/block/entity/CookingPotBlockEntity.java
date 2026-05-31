@@ -1,20 +1,24 @@
 package vectorwing.farmersdelight.common.block.entity;
 
 import com.google.common.collect.Lists;
+import com.mojang.serialization.Codec;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.network.chat.ComponentSerialization;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.MenuProvider;
@@ -28,12 +32,13 @@ import net.minecraft.world.inventory.RecipeCraftingHolder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
@@ -41,11 +46,12 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemUtil;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.CookingPotBlock;
 import vectorwing.farmersdelight.common.block.entity.container.CookingPotMenu;
@@ -71,6 +77,8 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	public static final int OUTPUT_SLOT = 8;
 	public static final int INVENTORY_SIZE = OUTPUT_SLOT + 1;
 
+	private static final Codec<Map<ResourceKey<Recipe<?>>, Integer>> RECIPES_USED_CODEC = Codec.unboundedMap(Recipe.KEY_CODEC, Codec.INT);
+
 	public static final Map<Item, Item> INGREDIENT_REMAINDER_OVERRIDES = Map.ofEntries(
 		entry(Items.POWDER_SNOW_BUCKET, Items.BUCKET),
 		entry(Items.AXOLOTL_BUCKET, Items.BUCKET),
@@ -89,6 +97,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	);
 
 	private final ItemStacksResourceHandler inventory;
+	private final IItemHandler itemHandlerView;
 	private final ResourceHandler<ItemResource> inputHandler;
 	private final ResourceHandler<ItemResource> outputHandler;
 
@@ -98,13 +107,14 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	private Component customName;
 
 	protected final ContainerData cookingPotData;
-	private final Object2IntOpenHashMap<Identifier> usedRecipeTracker;
+	private final Object2IntOpenHashMap<ResourceKey<Recipe<?>>> usedRecipeTracker;
 
 	private final RecipeManager.CachedCheck<RecipeInput, CookingPotRecipe> quickCheck;
 
 	public CookingPotBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntityTypes.COOKING_POT.get(), pos, state);
 		this.inventory = createHandler();
+		this.itemHandlerView = IItemHandler.of(inventory);
 		this.inputHandler = new CookingPotItemHandler(inventory, Direction.UP);
 		this.outputHandler = new CookingPotItemHandler(inventory, Direction.DOWN);
 		this.mealContainerStack = ItemStack.EMPTY;
@@ -153,56 +163,47 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	}
 
 	@Override
-	public void loadAdditional(ValueInput input) {
+	protected void loadAdditional(ValueInput input) {
 		super.loadAdditional(input);
-		inventory.deserializeNBT(input.getCompound("Inventory"));
-		cookTime = input.getInt("CookTime");
-		cookTimeTotal = input.getInt("CookTimeTotal");
-		mealContainerStack = ItemStack.parseOptional(input.getCompound("Container"));
-		if (input.contains("CustomName", 8)) {
-			customName = Component.Serializer.fromJson(input.getString("CustomName"));
-		}
-		CompoundTag inputRecipes = input.getCompound("RecipesUsed");
-		for (String key : compoundRecipes.getAllKeys()) {
-			usedRecipeTracker.put(Identifier.parse(key), compoundRecipes.getInt(key));
-		}
+		inventory.deserialize(input.childOrEmpty("Inventory"));
+		cookTime = input.getIntOr("CookTime", 0);
+		cookTimeTotal = input.getIntOr("CookTimeTotal", 0);
+		mealContainerStack = input.read("Container", ItemStack.OPTIONAL_CODEC).orElse(ItemStack.EMPTY);
+		customName = input.read("CustomName", ComponentSerialization.CODEC).orElse(null);
+		usedRecipeTracker.clear();
+		usedRecipeTracker.putAll(input.read("RecipesUsed", RECIPES_USED_CODEC).orElse(Map.of()));
 	}
 
 	@Override
-	public void saveAdditional(ValueOutput output) {
-		super.saveAdditional(compound);
-		compound.putInt("CookTime", cookTime);
-		compound.putInt("CookTimeTotal", cookTimeTotal);
-		compound.put("Container", mealContainerStack.saveOptional(registries));
-		if (customName != null) {
-			compound.putString("CustomName", Component.Serializer.toJson(customName));
-		}
-		compound.put("Inventory", inventory.serializeNBT(registries));
-		CompoundTag compoundRecipes = new CompoundTag();
-		usedRecipeTracker.forEach((recipeId, craftedAmount) -> compoundRecipes.putInt(recipeId.toString(), craftedAmount));
-		compound.put("RecipesUsed", compoundRecipes);
+	protected void saveAdditional(ValueOutput output) {
+		super.saveAdditional(output);
+		output.putInt("CookTime", cookTime);
+		output.putInt("CookTimeTotal", cookTimeTotal);
+		output.store("Container", ItemStack.OPTIONAL_CODEC, mealContainerStack);
+		output.storeNullable("CustomName", ComponentSerialization.CODEC, customName);
+		inventory.serialize(output.child("Inventory"));
+		output.store("RecipesUsed", RECIPES_USED_CODEC, usedRecipeTracker);
 	}
 
-	private CompoundTag writeItems(CompoundTag compound, HolderLookup.Provider registries) {
-		super.saveAdditional(compound, registries);
-		compound.put("Container", mealContainerStack.saveOptional(registries));
-		compound.put("Inventory", inventory.serializeNBT(registries));
-		return compound;
+	private void writeItems(ValueOutput output) {
+		output.store("Container", ItemStack.OPTIONAL_CODEC, mealContainerStack);
+		inventory.serialize(output.child("Inventory"));
 	}
 
-	public CompoundTag writeMeal(CompoundTag compound, HolderLookup.Provider registries) {
-		if (getMeal().isEmpty()) return compound;
+	public CompoundTag writeMeal(HolderLookup.Provider registries) {
+		if (getMeal().isEmpty()) return new CompoundTag();
 
-		ItemStackHandler drops = new ItemStackHandler(INVENTORY_SIZE);
+		ItemStacksResourceHandler drops = new ItemStacksResourceHandler(INVENTORY_SIZE);
 		for (int i = 0; i < INVENTORY_SIZE; ++i) {
-			drops.setStackInSlot(i, i == MEAL_DISPLAY_SLOT ? inventory.getStackInSlot(i) : ItemStack.EMPTY);
+			ItemStack stack = i == MEAL_DISPLAY_SLOT ? getStack(i) : ItemStack.EMPTY;
+			drops.set(i, ItemResource.of(stack), stack.getCount());
 		}
-		if (customName != null) {
-			compound.putString("CustomName", Component.Serializer.toJson(customName, registries));
-		}
-		compound.put("Container", mealContainerStack.save(registries));
-		compound.put("Inventory", drops.serializeNBT(registries));
-		return compound;
+
+		TagValueOutput output = TagValueOutput.createWithContext(ProblemReporter.DISCARDING, registries);
+		output.storeNullable("CustomName", ComponentSerialization.CODEC, customName);
+		output.store("Container", ItemStack.OPTIONAL_CODEC, mealContainerStack);
+		drops.serialize(output.child("Inventory"));
+		return output.buildResult();
 	}
 
 	public ItemStack getAsItem() {
@@ -216,7 +217,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		boolean didInventoryChange = false;
 
 		if (isHeated && cookingPot.hasInput()) {
-			Optional<RecipeHolder<CookingPotRecipe>> recipe = cookingPot.getMatchingRecipe(new RecipeWrapper(cookingPot.inventory));
+			Optional<RecipeHolder<CookingPotRecipe>> recipe = cookingPot.getMatchingRecipe(new RecipeWrapper(cookingPot.itemHandlerView));
 			if (recipe.isPresent() && cookingPot.canCook(recipe.get().value())) {
 				didInventoryChange = cookingPot.processCooking(recipe.get(), cookingPot);
 			} else {
@@ -231,7 +232,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 			if (!cookingPot.doesMealHaveContainer(mealStack)) {
 				cookingPot.moveMealToOutput();
 				didInventoryChange = true;
-			} else if (!cookingPot.inventory.getStackInSlot(CONTAINER_SLOT).isEmpty()) {
+			} else if (!cookingPot.getStack(CONTAINER_SLOT).isEmpty()) {
 				cookingPot.useStoredContainersOnMeal();
 				didInventoryChange = true;
 			}
@@ -264,19 +265,22 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	}
 
 	private Optional<RecipeHolder<CookingPotRecipe>> getMatchingRecipe(RecipeWrapper inventoryWrapper) {
-		if (level == null) return Optional.empty();
-		return hasInput() ? quickCheck.getRecipeFor(inventoryWrapper, this.level) : Optional.empty();
+		if (!(level instanceof ServerLevel serverLevel)) return Optional.empty();
+		return hasInput() ? quickCheck.getRecipeFor(inventoryWrapper, serverLevel) : Optional.empty();
 	}
 
 	public ItemStack getContainer() {
 		ItemStack mealStack = getMeal();
-		if (mealStack.isEmpty() || mealContainerStack.isEmpty()) return mealStack.getCraftingRemainingItem();
+		if (mealStack.isEmpty() || mealContainerStack.isEmpty()) {
+			net.minecraft.world.item.ItemStackTemplate remainder = mealStack.getCraftingRemainder();
+			return remainder != null ? remainder.create() : ItemStack.EMPTY;
+		}
 		return mealContainerStack;
 	}
 
 	private boolean hasInput() {
 		for (int i = 0; i < MEAL_DISPLAY_SLOT; ++i) {
-			if (!inventory.getStackInSlot(i).isEmpty()) return true;
+			if (!getStack(i).isEmpty()) return true;
 		}
 		return false;
 	}
@@ -285,11 +289,11 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		if (level == null) return false;
 
 		if (hasInput()) {
-			ItemStack resultStack = recipe.assemble(new RecipeWrapper(inventory), this.level.registryAccess());
+			ItemStack resultStack = recipe.assemble(new RecipeWrapper(itemHandlerView));
 			if (resultStack.isEmpty()) {
 				return false;
 			} else {
-				ItemStack storedMealStack = inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
+				ItemStack storedMealStack = getStack(MEAL_DISPLAY_SLOT);
 				if (storedMealStack.isEmpty()) {
 					return true;
 				} else if (!ItemStack.isSameItem(storedMealStack, resultStack)) {
@@ -316,24 +320,28 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 		cookTime = 0;
 		mealContainerStack = recipe.value().getOutputContainer();
-		ItemStack resultStack = recipe.value().assemble(new RecipeWrapper(inventory), this.level.registryAccess());
-		ItemStack storedMealStack = inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
+		ItemStack resultStack = recipe.value().assemble(new RecipeWrapper(itemHandlerView));
+		ItemStack storedMealStack = getStack(MEAL_DISPLAY_SLOT);
 		if (storedMealStack.isEmpty()) {
-			inventory.setStackInSlot(MEAL_DISPLAY_SLOT, resultStack.copy());
+			setStack(MEAL_DISPLAY_SLOT, resultStack.copy());
 		} else if (ItemStack.isSameItem(storedMealStack, resultStack)) {
 			storedMealStack.grow(resultStack.getCount());
+			setStack(MEAL_DISPLAY_SLOT, storedMealStack);
 		}
 		cookingPot.setRecipeUsed(recipe);
 
 		for (int i = 0; i < MEAL_DISPLAY_SLOT; ++i) {
-			ItemStack slotStack = inventory.getStackInSlot(i);
-			if (slotStack.hasCraftingRemainingItem()) {
-				ejectIngredientRemainder(slotStack.getCraftingRemainingItem());
+			ItemStack slotStack = getStack(i);
+			net.minecraft.world.item.ItemStackTemplate craftingRemainder = slotStack.getCraftingRemainder();
+			if (craftingRemainder != null) {
+				ejectIngredientRemainder(craftingRemainder.create());
 			} else if (INGREDIENT_REMAINDER_OVERRIDES.containsKey(slotStack.getItem())) {
 				ejectIngredientRemainder(INGREDIENT_REMAINDER_OVERRIDES.get(slotStack.getItem()).getDefaultInstance());
 			}
-			if (!slotStack.isEmpty())
+			if (!slotStack.isEmpty()) {
 				slotStack.shrink(1);
+				setStack(i, slotStack);
+			}
 		}
 		return true;
 	}
@@ -350,7 +358,7 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	@Override
 	public void setRecipeUsed(@Nullable RecipeHolder<?> recipe) {
 		if (recipe != null) {
-			Identifier recipeID = recipe.id();
+			ResourceKey<Recipe<?>> recipeID = recipe.id();
 			usedRecipeTracker.addTo(recipeID, 1);
 		}
 	}
@@ -370,11 +378,12 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 	public List<RecipeHolder<?>> getUsedRecipesAndPopExperience(Level level, Vec3 pos) {
 		List<RecipeHolder<?>> list = Lists.newArrayList();
+		if (!(level instanceof ServerLevel serverLevel)) return list;
 
-		for (Object2IntMap.Entry<Identifier> entry : usedRecipeTracker.object2IntEntrySet()) {
-			level.getRecipeManager().byKey(entry.getKey()).ifPresent((recipe) -> {
+		for (Object2IntMap.Entry<ResourceKey<Recipe<?>>> entry : usedRecipeTracker.object2IntEntrySet()) {
+			serverLevel.recipeAccess().byKey(entry.getKey()).ifPresent((recipe) -> {
 				list.add(recipe);
-				splitAndSpawnExperience((ServerLevel) level, pos, entry.getIntValue(), ((CookingPotRecipe) recipe.value()).getExperience());
+				splitAndSpawnExperience(serverLevel, pos, entry.getIntValue(), ((CookingPotRecipe) recipe.value()).getExperience());
 			});
 		}
 
@@ -396,51 +405,59 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		return this.isHeated(level, worldPosition);
 	}
 
-	public ItemStackHandler getInventory() {
+	public ItemStacksResourceHandler getInventory() {
 		return inventory;
 	}
 
 	public ItemStack getMeal() {
-		return inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
+		return getStack(MEAL_DISPLAY_SLOT);
 	}
 
 	public NonNullList<ItemStack> getDroppableInventory() {
 		NonNullList<ItemStack> drops = NonNullList.create();
 		for (int i = 0; i < INVENTORY_SIZE; ++i) {
 			if (i != MEAL_DISPLAY_SLOT) {
-				drops.add(inventory.getStackInSlot(i));
+				drops.add(getStack(i));
 			}
 		}
 		return drops;
 	}
 
 	private void moveMealToOutput() {
-		ItemStack mealStack = inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
-		ItemStack outputStack = inventory.getStackInSlot(OUTPUT_SLOT);
+		ItemStack mealStack = getStack(MEAL_DISPLAY_SLOT);
+		ItemStack outputStack = getStack(OUTPUT_SLOT);
 		int mealCount = Math.min(mealStack.getCount(), mealStack.getMaxStackSize() - outputStack.getCount());
 		if (outputStack.isEmpty()) {
-			inventory.setStackInSlot(OUTPUT_SLOT, mealStack.split(mealCount));
+			setStack(OUTPUT_SLOT, mealStack.split(mealCount));
+			setStack(MEAL_DISPLAY_SLOT, mealStack);
 		} else if (ItemStack.isSameItem(mealStack, outputStack)) {
 			mealStack.shrink(mealCount);
 			outputStack.grow(mealCount);
+			setStack(MEAL_DISPLAY_SLOT, mealStack);
+			setStack(OUTPUT_SLOT, outputStack);
 		}
 	}
 
 	private void useStoredContainersOnMeal() {
-		ItemStack mealStack = inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
-		ItemStack containerInputStack = inventory.getStackInSlot(CONTAINER_SLOT);
-		ItemStack outputStack = inventory.getStackInSlot(OUTPUT_SLOT);
+		ItemStack mealStack = getStack(MEAL_DISPLAY_SLOT);
+		ItemStack containerInputStack = getStack(CONTAINER_SLOT);
+		ItemStack outputStack = getStack(OUTPUT_SLOT);
 
 		if (isContainerValid(containerInputStack) && outputStack.getCount() < outputStack.getMaxStackSize()) {
 			int smallerStackCount = Math.min(mealStack.getCount(), containerInputStack.getCount());
 			int mealCount = Math.min(smallerStackCount, mealStack.getMaxStackSize() - outputStack.getCount());
 			if (outputStack.isEmpty()) {
 				containerInputStack.shrink(mealCount);
-				inventory.setStackInSlot(OUTPUT_SLOT, mealStack.split(mealCount));
+				setStack(CONTAINER_SLOT, containerInputStack);
+				setStack(OUTPUT_SLOT, mealStack.split(mealCount));
+				setStack(MEAL_DISPLAY_SLOT, mealStack);
 			} else if (ItemStack.isSameItem(outputStack, mealStack)) {
 				mealStack.shrink(mealCount);
 				containerInputStack.shrink(mealCount);
 				outputStack.grow(mealCount);
+				setStack(MEAL_DISPLAY_SLOT, mealStack);
+				setStack(CONTAINER_SLOT, containerInputStack);
+				setStack(OUTPUT_SLOT, outputStack);
 			}
 		}
 	}
@@ -449,13 +466,16 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		if (isContainerValid(container) && !getMeal().isEmpty()) {
 			container.shrink(1);
 			inventoryChanged();
-			return getMeal().split(1);
+			ItemStack meal = getMeal();
+			ItemStack serving = meal.split(1);
+			setStack(MEAL_DISPLAY_SLOT, meal);
+			return serving;
 		}
 		return ItemStack.EMPTY;
 	}
 
 	private boolean doesMealHaveContainer(ItemStack meal) {
-		return !mealContainerStack.isEmpty() || meal.hasCraftingRemainingItem();
+		return !mealContainerStack.isEmpty() || meal.getCraftingRemainder() != null;
 	}
 
 	public boolean isContainerValid(ItemStack containerItem) {
@@ -492,14 +512,16 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 	@Override
 	public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-		return writeItems(new CompoundTag(), registries);
+		TagValueOutput output = TagValueOutput.createWithContext(ProblemReporter.DISCARDING, registries);
+		writeItems(output);
+		return output.buildResult();
 	}
 
 	@Override
-	protected void applyImplicitComponents(BlockEntity.DataComponentInput componentInput) {
+	protected void applyImplicitComponents(DataComponentGetter componentInput) {
 		super.applyImplicitComponents(componentInput);
 		this.customName = componentInput.get(DataComponents.CUSTOM_NAME);
-		getInventory().setStackInSlot(MEAL_DISPLAY_SLOT, componentInput.getOrDefault(ModDataComponents.MEAL, ItemStackWrapper.EMPTY).getStack());
+		setStack(MEAL_DISPLAY_SLOT, componentInput.getOrDefault(ModDataComponents.MEAL, ItemStackWrapper.EMPTY).getStack());
 		this.mealContainerStack = componentInput.getOrDefault(ModDataComponents.CONTAINER, ItemStackWrapper.EMPTY).getStack();
 	}
 
@@ -516,25 +538,33 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	}
 
 	@Override
-	public void removeComponentsFromTag(CompoundTag tag) {
-		tag.remove("CustomName");
-		tag.remove("meal");
-		tag.remove("container");
+	public void removeComponentsFromTag(ValueOutput output) {
+		output.discard("CustomName");
+		output.discard("meal");
+		output.discard("container");
 	}
 
-	private ItemStackHandler createHandler() {
-		return new ItemStackHandler(INVENTORY_SIZE)
+	private ItemStack getStack(int slot) {
+		return ItemUtil.getStack(inventory, slot);
+	}
+
+	private void setStack(int slot, ItemStack stack) {
+		inventory.set(slot, ItemResource.of(stack), stack.getCount());
+	}
+
+	private ItemStacksResourceHandler createHandler() {
+		return new ItemStacksResourceHandler(INVENTORY_SIZE)
 		{
 			@Override
-			protected int getStackLimit(int slot, ItemStack stack) {
-				if (slot == MEAL_DISPLAY_SLOT) {
-					return Math.max(64, stack.getMaxStackSize());
+			protected int getCapacity(int index, ItemResource resource) {
+				if (index == MEAL_DISPLAY_SLOT) {
+					return Math.max(64, resource.isEmpty() ? Item.ABSOLUTE_MAX_STACK_SIZE : resource.getMaxStackSize());
 				}
-				return super.getStackLimit(slot, stack);
+				return super.getCapacity(index, resource);
 			}
 
 			@Override
-			protected void onContentsChanged(int slot) {
+			protected void onContentsChanged(int index, ItemStack previousContents) {
 				inventoryChanged();
 			}
 		};

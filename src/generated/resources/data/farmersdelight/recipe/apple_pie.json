@@ -3,18 +3,10 @@
   "category": "misc",
   "group": "fd_apple_pie",
   "key": {
-    "#": {
-      "tag": "c:crops/wheat"
-    },
-    "O": {
-      "item": "farmersdelight:pie_crust"
-    },
-    "a": {
-      "item": "minecraft:apple"
-    },
-    "x": {
-      "item": "minecraft:sugar"
-    }
+    "#": "#c:crops/wheat",
+    "O": "farmersdelight:pie_crust",
+    "a": "minecraft:apple",
+    "x": "minecraft:sugar"
   },
   "pattern": [
     "###",
@@ -22,7 +14,6 @@
     "xOx"
   ],
   "result": {
-    "count": 1,
     "id": "farmersdelight:apple_pie"
   }
 }

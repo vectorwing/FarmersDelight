@@ -3,11 +3,8 @@
   "category": "food",
   "cookingtime": 100,
   "experience": 0.35,
-  "ingredient": {
-    "item": "farmersdelight:wheat_dough"
-  },
+  "ingredient": "farmersdelight:wheat_dough",
   "result": {
-    "count": 1,
     "id": "minecraft:bread"
   }
 }

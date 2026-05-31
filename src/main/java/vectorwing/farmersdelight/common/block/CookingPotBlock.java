@@ -193,7 +193,7 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 	@Override
 	protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction) {
 		if (level.getBlockEntity(pos) instanceof CookingPotBlockEntity cookingPot) {
-			ItemStackHandler inventory = cookingPot.getInventory();
+			var inventory = cookingPot.getInventory();
 			return MathUtils.calcRedstoneFromItemHandler(inventory);
 		}
 		return 0;

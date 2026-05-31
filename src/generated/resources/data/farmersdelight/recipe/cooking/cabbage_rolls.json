@@ -3,29 +3,18 @@
   "cookingtime": 100,
   "experience": 0.35,
   "ingredients": [
+    "#c:crops/cabbage",
     {
-      "tag": "c:crops/cabbage"
-    },
-    {
-      "type": "neoforge:compound",
+      "neoforge:ingredient_type": "neoforge:compound",
       "children": [
-        {
-          "tag": "c:foods/raw_meat"
-        },
-        {
-          "tag": "c:foods/safe_raw_fish"
-        },
-        {
-          "tag": "c:foods/vegetable"
-        },
-        {
-          "tag": "c:mushrooms"
-        }
+        "#c:foods/raw_meat",
+        "#c:foods/safe_raw_fish",
+        "#c:foods/vegetable",
+        "#c:mushrooms"
       ]
     }
   ],
   "result": {
-    "count": 1,
     "id": "farmersdelight:cabbage_rolls"
   }
 }

@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:sweet_berries"
-    },
-    {
-      "tag": "c:crops/wheat"
-    },
-    {
-      "tag": "c:crops/wheat"
-    }
+    "minecraft:sweet_berries",
+    "#c:crops/wheat",
+    "#c:crops/wheat"
   ],
   "result": {
     "count": 8,

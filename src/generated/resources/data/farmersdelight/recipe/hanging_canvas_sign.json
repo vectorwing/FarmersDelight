@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "farmersdelight:canvas"
-    },
-    "X": {
-      "item": "minecraft:chain"
-    },
-    "w": {
-      "tag": "minecraft:logs"
-    }
+    "#": "farmersdelight:canvas",
+    "X": "minecraft:iron_chain",
+    "w": "#minecraft:logs"
   },
   "pattern": [
     "X X",

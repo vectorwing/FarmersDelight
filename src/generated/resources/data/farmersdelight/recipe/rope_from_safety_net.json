@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "fd_rope",
   "ingredients": [
-    {
-      "item": "farmersdelight:safety_net"
-    }
+    "farmersdelight:safety_net"
   ],
   "result": {
     "count": 4,

@@ -3,16 +3,13 @@
   "category": "misc",
   "group": "fd_apple_pie",
   "key": {
-    "#": {
-      "item": "farmersdelight:apple_pie_slice"
-    }
+    "#": "farmersdelight:apple_pie_slice"
   },
   "pattern": [
     "##",
     "##"
   ],
   "result": {
-    "count": 1,
     "id": "farmersdelight:apple_pie"
   }
 }

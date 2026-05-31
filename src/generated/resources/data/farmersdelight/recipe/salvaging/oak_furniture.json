@@ -1,58 +1,26 @@
 {
   "type": "farmersdelight:cutting",
   "ingredients": [
-    {
-      "type": "neoforge:compound",
-      "children": [
-        {
-          "item": "minecraft:oak_door"
-        },
-        {
-          "item": "minecraft:oak_trapdoor"
-        },
-        {
-          "item": "minecraft:oak_sign"
-        },
-        {
-          "item": "minecraft:oak_hanging_sign"
-        },
-        {
-          "item": "minecraft:oak_fence"
-        },
-        {
-          "item": "minecraft:oak_fence_gate"
-        },
-        {
-          "item": "minecraft:oak_pressure_plate"
-        },
-        {
-          "item": "minecraft:oak_button"
-        },
-        {
-          "item": "minecraft:oak_boat"
-        },
-        {
-          "item": "farmersdelight:oak_cabinet"
-        }
-      ]
-    }
+    [
+      "minecraft:oak_door",
+      "minecraft:oak_trapdoor",
+      "minecraft:oak_sign",
+      "minecraft:oak_hanging_sign",
+      "minecraft:oak_fence",
+      "minecraft:oak_fence_gate",
+      "minecraft:oak_pressure_plate",
+      "minecraft:oak_button",
+      "minecraft:oak_boat",
+      "farmersdelight:oak_cabinet"
+    ]
   ],
   "result": [
     {
       "chance": 0.75,
       "item": {
-        "count": 1,
         "id": "minecraft:oak_planks"
       }
     }
   ],
-  "tool": [
-    {
-      "type": "farmersdelight:item_ability",
-      "action": "axe_dig"
-    },
-    {
-      "tag": "minecraft:axes"
-    }
-  ]
+  "tool": "#minecraft:axes"
 }

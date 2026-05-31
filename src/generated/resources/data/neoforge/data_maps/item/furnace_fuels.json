@@ -1,0 +1,13 @@
+{
+  "values": {
+    "farmersdelight:canvas": {
+      "burn_time": 400
+    },
+    "farmersdelight:straw": {
+      "burn_time": 100
+    },
+    "farmersdelight:tree_bark": {
+      "burn_time": 200
+    }
+  }
+}

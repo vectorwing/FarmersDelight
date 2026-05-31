@@ -1,7 +1,7 @@
 {
   "anvil_cost": 2,
   "description": {
-    "translate": "enchantment.farmersdelight.backstabbing"
+    "translate": "enchantment.minecraft.enchantment"
   },
   "effects": {
     "farmersdelight:backstabbing": [

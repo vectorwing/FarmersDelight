@@ -3,12 +3,8 @@
   "category": "building",
   "group": "fd_tatami",
   "key": {
-    "c": {
-      "item": "farmersdelight:canvas"
-    },
-    "s": {
-      "item": "farmersdelight:straw"
-    }
+    "c": "farmersdelight:canvas",
+    "s": "farmersdelight:straw"
   },
   "pattern": [
     "cs",

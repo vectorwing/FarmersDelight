@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "farmersdelight:rice_bale"
-    }
+    "farmersdelight:rice_bale"
   ],
   "result": {
     "count": 9,

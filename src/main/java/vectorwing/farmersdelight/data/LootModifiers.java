@@ -80,7 +80,7 @@ public class LootModifiers extends GlobalLootModifierProvider
 		this.add("scavenging_pumpkin", new ReplaceItemModifier(new LootItemCondition[]{
 			LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.PUMPKIN).build(),
 			hasSilkTouch().build()
-		}, Items.PUMPKIN, ModItems.PUMPKIN_SLICE.get(), 4));
+		}, IGlobalLootModifier.DEFAULT_PRIORITY, Items.PUMPKIN, ModItems.PUMPKIN_SLICE.get(), 4));
 
 		// Pastry Slicing
 		this.add("slicing_apple_pie", this.pastrySlicing(items, ModItems.APPLE_PIE_SLICE.get(), ModBlocks.APPLE_PIE.get()));
@@ -161,7 +161,7 @@ public class LootModifiers extends GlobalLootModifierProvider
 		return new PastrySlicingModifier(new LootItemCondition[]{
 			MatchTool.toolMatches(ItemPredicate.Builder.item().of(items, ModTags.Items.KNIVES)).build(),
 			LootItemBlockStatePropertyCondition.hasBlockStateProperties(slicedBlock).build()
-		}, receivedItem);
+		}, IGlobalLootModifier.DEFAULT_PRIORITY, receivedItem);
 	}
 
 	private AddItemModifier strawHarvesting(HolderGetter<Item> items, LootItemBlockStatePropertyCondition.Builder slicedBlock, float chance) {

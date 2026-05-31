@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "fd_full_tatami_mat",
   "ingredients": [
-    {
-      "item": "farmersdelight:tatami"
-    }
+    "farmersdelight:tatami"
   ],
   "result": {
     "count": 2,

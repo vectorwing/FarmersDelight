@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "fd_rice",
   "ingredients": [
-    {
-      "item": "farmersdelight:rice_bag"
-    }
+    "farmersdelight:rice_bag"
   ],
   "result": {
     "count": 9,

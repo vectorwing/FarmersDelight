@@ -3,15 +3,10 @@
   "category": "misc",
   "group": "fd_canvas_sign",
   "ingredients": [
-    {
-      "tag": "farmersdelight:canvas_signs"
-    },
-    {
-      "tag": "c:dyes/green"
-    }
+    "#farmersdelight:canvas_signs",
+    "#c:dyes/green"
   ],
   "result": {
-    "count": 1,
     "id": "farmersdelight:green_canvas_sign"
   }
 }

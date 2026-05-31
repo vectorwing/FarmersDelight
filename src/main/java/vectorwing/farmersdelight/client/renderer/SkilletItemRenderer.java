@@ -1,104 +1,70 @@
 package vectorwing.farmersdelight.client.renderer;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.client.IArmPoseTransformer;
 import vectorwing.farmersdelight.common.item.SkilletItem;
-import vectorwing.farmersdelight.common.item.component.ItemStackWrapper;
 import vectorwing.farmersdelight.common.registry.ModDataComponents;
 
-public class SkilletItemRenderer extends BlockEntityWithoutLevelRenderer
+/**
+ * 26.1 port note:
+ * <p>
+ * The skillet used to render its in-hand / dropped-item visuals (skillet block + cooked ingredient + flip animation)
+ * through a {@code BlockEntityWithoutLevelRenderer} wired up via {@code IClientItemExtensions#getCustomRenderer()}.
+ * Both of those APIs were removed in the 1.21.4+ item-model rework. The replacement is a data-driven {@code special}
+ * item model backed by a {@link net.minecraft.client.renderer.special.SpecialModelRenderer} registered through
+ * {@code RegisterSpecialModelRendererEvent}. That migration (the new renderer + its {@code Unbaked} codec + the
+ * skillet item-model JSON) is owned by datagen and is intentionally NOT recreated here.
+ * <p>
+ * What survives client-side is the arm-pose transformer below, which is still referenced by
+ * {@link vectorwing.farmersdelight.common.EnumParameters#PROXY_SKILLET_FLIP} and remains valid under the
+ * {@code IClientItemExtensions#getArmPose(...)} extension. NOTE that {@link IArmPoseTransformer} is now render-state
+ * based: {@code applyTransform} receives a {@link HumanoidRenderState} instead of the {@code LivingEntity}, so the
+ * held skillet stack is read from the render state and the flip timing uses the client game time.
+ */
+public class SkilletItemRenderer
 {
-	public SkilletItemRenderer() {
-		super(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
+	private SkilletItemRenderer() {
 	}
 
-	@Override
-	public void renderByItem(ItemStack stack, ItemDisplayContext displayContext, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
-		//render block
-		BlockItem item = ((BlockItem) stack.getItem());
-		BlockState state = item.getBlock().defaultBlockState();
-
-
-		Minecraft mc = Minecraft.getInstance();
-
-		ItemStackWrapper stackWrapper = stack.getOrDefault(ModDataComponents.SKILLET_INGREDIENT.get(), ItemStackWrapper.EMPTY);
-		ItemStack ingredientStack = stackWrapper.getStack();
-
-		float animation = 0;
-
-		if (!ingredientStack.isEmpty()) {
-			poseStack.pushPose();
-			poseStack.translate(0.5, 1 / 16f, 0.5);
-
-			long gameTime = mc.level.getGameTime();
-			if (stack.has(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get()) && displayContext != ItemDisplayContext.GUI) {
-				long time = stack.get(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
-				float partialTicks = mc.getTimer().getGameTimeDeltaPartialTick(false);
-				animation = ((gameTime - time) + partialTicks) / SkilletItem.FLIP_TIME;
-				animation = Mth.clamp(animation, 0, 1);
-				float maxH = 0.4F;
-				poseStack.translate(0, maxH * Mth.sin(animation * Mth.PI), 0);
-				float rotationAnimation = stack.getOrDefault(ModDataComponents.SKILLET_FLIPPED.get(), false) ? animation + 1.0F : animation;
-				poseStack.mulPose(Axis.XP.rotationDegrees(180 * rotationAnimation));
-			} else {
-				poseStack.mulPose(Axis.XP.rotationDegrees(stack.getOrDefault(ModDataComponents.SKILLET_FLIPPED.get(), false) ? 180 : 0));
-			}
-
-			poseStack.mulPose(Axis.XP.rotationDegrees(90));
-			poseStack.scale(0.5F, 0.5F, 0.5F);
-
-			if (displayContext != ItemDisplayContext.GUI) {
-				var itemRenderer = mc.getItemRenderer();
-				itemRenderer.renderStatic(ingredientStack, ItemDisplayContext.FIXED, packedLight,
-						packedOverlay, poseStack, buffer, null, 0);
-			}
-
-			poseStack.popPose();
+	/**
+	 * Returns the skillet flip animation progress in the range [0, 1] for the given stack, or 0 if not flipping.
+	 * Mirrors the timing used by the (now data-driven) skillet item renderer and the arm-pose transformer.
+	 */
+	public static float getFlipAnimationProgress(ItemStack stack) {
+		if (!stack.has(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get())) {
+			return 0.0F;
 		}
-
-		poseStack.pushPose();
-
-		if (animation != 0 && displayContext.firstPerson()) {
-			poseStack.translate(0, 0, 1);
-			poseStack.mulPose(Axis.XN.rotationDegrees(Mth.sin(animation * Mth.TWO_PI) * 15));
-			poseStack.translate(0F, 0, -1);
-			poseStack.translate(0, 0, -Mth.sin(animation * Mth.PI) * 0.2);
+		Minecraft minecraft = Minecraft.getInstance();
+		Level level = minecraft.level;
+		if (level == null) {
+			return 0.0F;
 		}
-		mc.getBlockRenderer().renderSingleBlock(state, poseStack, buffer, packedLight, packedOverlay);
-
-		poseStack.popPose();
+		long time = stack.get(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
+		float partialTicks = minecraft.getDeltaTracker().getGameTimeDeltaPartialTick(false);
+		float animation = ((level.getGameTime() - time) + partialTicks) / SkilletItem.FLIP_TIME;
+		return Mth.clamp(animation, 0, 1);
 	}
 
-	public static class ArmPoseTransformer implements IArmPoseTransformer {
+	public static class ArmPoseTransformer implements IArmPoseTransformer
+	{
 		@Override
-		public void applyTransform(HumanoidModel<?> model, LivingEntity entity, HumanoidArm arm) {
-			ItemStack stack = entity.getUseItem();
+		public void applyTransform(HumanoidModel<?> model, HumanoidRenderState entity, HumanoidArm arm) {
+			ItemStack stack = entity.getUseItemStackForArm(arm);
 			if (stack.has(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get())) {
-				long time = stack.get(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
-				float partialTicks = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false);
-				float animation = ((entity.level().getGameTime() - time) + partialTicks) / SkilletItem.FLIP_TIME;
-				animation = Mth.clamp(animation, 0, 1);
+				float animation = getFlipAnimationProgress(stack);
 
 				if (arm == HumanoidArm.LEFT) {
 					model.leftArm.xRot = (-Mth.sin(animation * Mth.TWO_PI) * 15 - 20) * (float) (Math.PI / 180.0);
 				} else {
 					model.rightArm.xRot = (-Mth.sin(animation * Mth.TWO_PI) * 15 - 20) * (float) (Math.PI / 180.0);
 				}
-            }
+			}
 		}
 	}
 }

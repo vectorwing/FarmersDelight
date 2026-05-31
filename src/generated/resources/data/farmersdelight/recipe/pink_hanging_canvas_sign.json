@@ -3,15 +3,10 @@
   "category": "misc",
   "group": "fd_hanging_canvas_sign",
   "ingredients": [
-    {
-      "tag": "farmersdelight:hanging_canvas_signs"
-    },
-    {
-      "tag": "c:dyes/pink"
-    }
+    "#farmersdelight:hanging_canvas_signs",
+    "#c:dyes/pink"
   ],
   "result": {
-    "count": 1,
     "id": "farmersdelight:pink_hanging_canvas_sign"
   }
 }

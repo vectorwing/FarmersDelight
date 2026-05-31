@@ -9,11 +9,12 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 
 public class RecipeUtils
 {
 	// Copyright (c) 2014-2015 mezz
-	public static ItemStack getResultItem(Recipe<?> recipe) {
+	public static ItemStack getResultItem(CookingPotRecipe recipe) {
 		Minecraft minecraft = Minecraft.getInstance();
 		ClientLevel level = minecraft.level;
 		if (level == null) {

@@ -3,16 +3,11 @@
   "category": "misc",
   "ingredients": [
     [
-      {
-        "item": "farmersdelight:tomato"
-      },
-      {
-        "item": "farmersdelight:rotten_tomato"
-      }
+      "farmersdelight:tomato",
+      "farmersdelight:rotten_tomato"
     ]
   ],
   "result": {
-    "count": 1,
     "id": "farmersdelight:tomato_seeds"
   }
 }

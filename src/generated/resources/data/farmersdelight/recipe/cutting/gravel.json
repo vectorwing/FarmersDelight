@@ -1,32 +1,20 @@
 {
   "type": "farmersdelight:cutting",
   "ingredients": [
-    {
-      "item": "minecraft:gravel"
-    }
+    "minecraft:gravel"
   ],
   "result": [
     {
       "item": {
-        "count": 1,
         "id": "minecraft:gravel"
       }
     },
     {
       "chance": 0.1,
       "item": {
-        "count": 1,
         "id": "minecraft:flint"
       }
     }
   ],
-  "tool": [
-    {
-      "type": "farmersdelight:item_ability",
-      "action": "shovel_dig"
-    },
-    {
-      "tag": "minecraft:shovels"
-    }
-  ]
+  "tool": "#minecraft:shovels"
 }

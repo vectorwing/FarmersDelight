@@ -1,5 +1,17 @@
 # Changelog
 
+## Minecraft 26.1.2 Port
+
+Farmer's Delight has been ported to **Minecraft 26.1.2** (NeoForge `26.1.2.30-beta`, Java 25, Gradle 9.4.1), adopting the de-obfuscated official Mojang mappings introduced in the 26.1 versioning era.
+
+### Known limitations & follow-ups
+- **EMI** and **CraftTweaker** integrations are temporarily disabled — neither has a Minecraft 26.1 release yet. They will be re-enabled once those mods are updated upstream. **JEI** is fully supported.
+- JEI shows Cooking Pot / Cutting Board recipes in **single-player only**: 26.1 no longer syncs full recipes to the client, so a dedicated-server sync is a planned follow-up.
+- The Cooking Pot's custom recipe-book sub-tabs (Meals/Drinks/Misc) were folded into the vanilla "Misc" category due to the 26.1 recipe-book rework; recipe browsing still works.
+- The Skillet's in-world "cooking" appearance, flip animation, and held-block rendering need re-implementing against 26.1's new special item-model renderer; the Skillet currently shows its static model.
+- The dyed-canvas preview inside the standing canvas-sign edit screen is temporarily lost (the placed sign still renders its canvas correctly); hanging canvas signs are unaffected.
+- The "hide block-break overlay on the Canvas Rug" tweak was removed (its rendering hook no longer exists in 26.1), and the "keep Rich Soil under giant trees" effect is now data-driven rather than a mixin.
+
 ## 1.3.0
 
 ### Additions

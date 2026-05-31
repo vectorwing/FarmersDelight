@@ -2,22 +2,22 @@ package vectorwing.farmersdelight.common.block.entity.container;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.transfer.IndexModifier;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 
-import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class CookingPotResultSlot extends SlotItemHandler
+public class CookingPotResultSlot extends ResourceHandlerSlot
 {
 	public final CookingPotBlockEntity cookingPot;
 	private final Player player;
-	private int removeCount;
 
-	public CookingPotResultSlot(Player player, CookingPotBlockEntity blockEntity, IItemHandler inventory, int index, int xPosition, int yPosition) {
-		super(inventory, index, xPosition, yPosition);
+	public CookingPotResultSlot(Player player, CookingPotBlockEntity blockEntity, ResourceHandler<ItemResource> handler, IndexModifier<ItemResource> modifier, int index, int xPosition, int yPosition) {
+		super(handler, modifier, index, xPosition, yPosition);
 		this.cookingPot = blockEntity;
 		this.player = player;
 	}
@@ -28,35 +28,19 @@ public class CookingPotResultSlot extends SlotItemHandler
 	}
 
 	@Override
-	@Nonnull
-	public ItemStack remove(int amount) {
-		if (this.hasItem()) {
-			this.removeCount += Math.min(amount, this.getItem().getCount());
-		}
-
-		return super.remove(amount);
-	}
-
-	@Override
 	public void onTake(Player player, ItemStack stack) {
 		this.checkTakeAchievements(stack);
 		super.onTake(player, stack);
 	}
 
-	@Override
-	protected void onQuickCraft(ItemStack stack, int amount) {
-		this.removeCount += amount;
-		this.checkTakeAchievements(stack);
-	}
-
+	// 26.1: StackCopySlot#remove is final (extraction is handled by the resource handler), so the crafted
+	// count is taken from the stack pulled out of the slot rather than accumulated via a remove() override.
 	@Override
 	protected void checkTakeAchievements(ItemStack stack) {
-		stack.onCraftedBy(this.player.level(), this.player, this.removeCount);
+		stack.onCraftedBy(this.player, stack.getCount());
 
 		if (!this.player.level().isClientSide()) {
 			cookingPot.awardUsedRecipes(this.player, cookingPot.getDroppableInventory());
 		}
-
-		this.removeCount = 0;
 	}
 }

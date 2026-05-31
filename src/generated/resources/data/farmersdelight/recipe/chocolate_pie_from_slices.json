@@ -3,16 +3,13 @@
   "category": "misc",
   "group": "fd_chocolate_pie",
   "key": {
-    "#": {
-      "item": "farmersdelight:chocolate_pie_slice"
-    }
+    "#": "farmersdelight:chocolate_pie_slice"
   },
   "pattern": [
     "##",
     "##"
   ],
   "result": {
-    "count": 1,
     "id": "farmersdelight:chocolate_pie"
   }
 }

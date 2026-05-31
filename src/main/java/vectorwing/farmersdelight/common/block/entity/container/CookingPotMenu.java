@@ -1,30 +1,28 @@
 package vectorwing.farmersdelight.common.block.entity.container;
 
 
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.StackedContents;
+import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.items.SlotItemHandler;
-import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
+import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
-import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModMenuTypes;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.Objects;
 
-public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper, CookingPotRecipe>
+public class CookingPotMenu extends RecipeBookMenu
 {
 	public static final Identifier EMPTY_CONTAINER_SLOT_BOWL = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "item/empty_container_slot_bowl");
 
@@ -33,7 +31,7 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper, CookingPotReci
 	public static final int INDEX_OUTPUT = 8;
 
 	public final CookingPotBlockEntity blockEntity;
-	public final ItemStackHandler inventory;
+	public final ItemStacksResourceHandler inventory;
 	private final ContainerData cookingPotData;
 	private final ContainerLevelAccess canInteractWithCallable;
 	protected final Level level;
@@ -58,25 +56,26 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper, CookingPotReci
 		int borderSlotSize = 18;
 		for (int row = 0; row < 2; ++row) {
 			for (int column = 0; column < 3; ++column) {
-				this.addSlot(new SlotItemHandler(inventory, (row * 3) + column,
+				this.addSlot(new ResourceHandlerSlot(inventory, inventory::set, (row * 3) + column,
 						inputStartX + (column * borderSlotSize),
 						inputStartY + (row * borderSlotSize)));
 			}
 		}
 
 		// Meal Display
-		this.addSlot(new CookingPotMealSlot(inventory, 6, 124, 26));
+		this.addSlot(new CookingPotMealSlot(inventory, inventory::set, 6, 124, 26));
 
 		// Bowl Input
-		this.addSlot(new SlotItemHandler(inventory, 7, 92, 55)
+		this.addSlot(new ResourceHandlerSlot(inventory, inventory::set, 7, 92, 55)
 		{
-			public Pair<Identifier, Identifier> getNoItemIcon() {
-				return Pair.of(InventoryMenu.BLOCK_ATLAS, EMPTY_CONTAINER_SLOT_BOWL);
+			@Override
+			public Identifier getNoItemIcon() {
+				return EMPTY_CONTAINER_SLOT_BOWL;
 			}
 		});
 
 		// Bowl Output
-		this.addSlot(new CookingPotResultSlot(playerInventory.player, blockEntity, inventory, 8, 124, 55));
+		this.addSlot(new CookingPotResultSlot(playerInventory.player, blockEntity, inventory, inventory::set, 8, 124, 55));
 
 		// Main Player Inventory
 		int startPlayerInvY = startY * 4 + 12;
@@ -161,42 +160,17 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper, CookingPotReci
 	}
 
 	@Override
-	public void fillCraftSlotsStackedContents(StackedContents helper) {
-		for (int i = 0; i < inventory.getSlots(); i++) {
-			helper.accountSimpleStack(inventory.getStackInSlot(i));
+	public void fillCraftSlotsStackedContents(StackedItemContents helper) {
+		for (int i = 0; i < inventory.size(); i++) {
+			helper.accountSimpleStack(inventory.getResource(i).toStack(inventory.getAmountAsInt(i)));
 		}
 	}
 
 	@Override
-	public void clearCraftingContent() {
-		for (int i = 0; i < 6; i++) {
-			this.inventory.setStackInSlot(i, ItemStack.EMPTY);
-		}
-	}
-
-	@Override
-	public boolean recipeMatches(RecipeHolder<CookingPotRecipe> recipe) {
-		return recipe.value().matches(new RecipeWrapper(inventory), level);
-	}
-
-	@Override
-	public int getResultSlotIndex() {
-		return 7;
-	}
-
-	@Override
-	public int getGridWidth() {
-		return 3;
-	}
-
-	@Override
-	public int getGridHeight() {
-		return 2;
-	}
-
-	@Override
-	public int getSize() {
-		return 7;
+	public PostPlaceAction handlePlacement(boolean useMaxItems, boolean allowDroppingItemsToClear, RecipeHolder<?> recipe, ServerLevel level, Inventory inventory) {
+		// Ghost-recipe placement into the cooking pot's custom slots is not wired; the recipe book still
+		// functions for browsing/searching via the custom RecipeBookType + categories.
+		return PostPlaceAction.NOTHING;
 	}
 
 	@Override
@@ -204,8 +178,17 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper, CookingPotReci
 		return RecipeBookType.valueOf("FARMERSDELIGHT_COOKING");
 	}
 
-	@Override
-	public boolean shouldMoveToInventory(int slot) {
-		return slot < (getGridWidth() * getGridHeight());
+	// Helper methods retained for the client-side recipe book component (CookingPotRecipeBookComponent),
+	// which previously fed these into RecipeBookMenu#placeRecipe.
+	public int getResultSlotIndex() {
+		return 7;
+	}
+
+	public int getGridWidth() {
+		return 3;
+	}
+
+	public int getGridHeight() {
+		return 2;
 	}
 }

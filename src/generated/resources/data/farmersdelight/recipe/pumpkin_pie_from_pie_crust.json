@@ -3,18 +3,10 @@
   "category": "misc",
   "group": "fd_pumpkin_pie",
   "key": {
-    "O": {
-      "item": "farmersdelight:pie_crust"
-    },
-    "c": {
-      "item": "farmersdelight:pumpkin_slice"
-    },
-    "e": {
-      "tag": "c:eggs"
-    },
-    "s": {
-      "item": "minecraft:sugar"
-    }
+    "O": "farmersdelight:pie_crust",
+    "c": "farmersdelight:pumpkin_slice",
+    "e": "#c:eggs",
+    "s": "minecraft:sugar"
   },
   "pattern": [
     "cec",

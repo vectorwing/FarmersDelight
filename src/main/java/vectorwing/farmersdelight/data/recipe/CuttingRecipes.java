@@ -1,14 +1,18 @@
 package vectorwing.farmersdelight.data.recipe;
 
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.neoforged.neoforge.common.ItemAbilities;
@@ -25,19 +29,28 @@ import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 
 public class CuttingRecipes
 {
-	public static Ingredient KNIVES = matchesTool(KnifeItem.KNIFE_DIG, CommonTags.Items.TOOLS_KNIFE);
-	public static Ingredient PICKAXES = matchesTool(ItemAbilities.PICKAXE_DIG, ItemTags.PICKAXES);
-	public static Ingredient AXES = matchesTool(ItemAbilities.AXE_DIG, ItemTags.AXES);
-	public static Ingredient AXES_STRIP = matchesTool(ItemAbilities.AXE_STRIP, ItemTags.AXES);
-	public static Ingredient SHOVELS = matchesTool(ItemAbilities.SHOVEL_DIG, ItemTags.SHOVELS);
-	public static Ingredient HOES = matchesTool(ItemAbilities.HOE_DIG, ItemTags.HOES);
-	public static Ingredient SHEARS = matchesTool(ItemAbilities.SHEARS_DIG, Tags.Items.TOOLS_SHEAR);
+	public static Ingredient KNIVES;
+	public static Ingredient PICKAXES;
+	public static Ingredient AXES;
+	public static Ingredient AXES_STRIP;
+	public static Ingredient SHOVELS;
+	public static Ingredient HOES;
+	public static Ingredient SHEARS;
 
 	public static void register(HolderLookup.Provider registries, RecipeOutput output) {
+		HolderGetter<Item> items = registries.lookupOrThrow(Registries.ITEM);
+		KNIVES = matchesTool(items, KnifeItem.KNIFE_DIG, CommonTags.Items.TOOLS_KNIFE);
+		PICKAXES = matchesTool(items, ItemTags.PICKAXES);
+		AXES = matchesTool(items, ItemTags.AXES);
+		AXES_STRIP = matchesTool(items, ItemAbilities.AXE_STRIP, ItemTags.AXES);
+		SHOVELS = matchesTool(items, ItemTags.SHOVELS);
+		HOES = matchesTool(items, ItemTags.HOES);
+		SHEARS = matchesTool(items, ItemAbilities.SHEARS_DIG, Tags.Items.TOOLS_SHEAR);
+
 		// Knife
 		cuttingAnimalItems(output);
 		cuttingVegetables(output);
-		cuttingFoods(output);
+		cuttingFoods(items, output);
 		cuttingFlowers(output);
 
 		// Pickaxe
@@ -110,9 +123,9 @@ public class CuttingRecipes
 				.saveToFD(output);
 	}
 
-	private static void cuttingFoods(RecipeOutput output) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(CommonTags.Items.FOODS_DOUGH), KNIVES, ModItems.RAW_PASTA.get(), 1)
-				.save(output, RecipeUtils.FDLocation("cutting/tag_dough"));
+	private static void cuttingFoods(HolderGetter<Item> items, RecipeOutput output) {
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(items.getOrThrow(CommonTags.Items.FOODS_DOUGH)), KNIVES, ModItems.RAW_PASTA.get(), 1)
+				.save(output, RecipeUtils.FDKey("cutting/tag_dough"));
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.KELP_ROLL.get()), KNIVES, ModItems.KELP_ROLL_SLICE.get(), 3)
 				.saveToFD(output);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CAKE), KNIVES, ModItems.CAKE_SLICE.get(), 7)
@@ -365,11 +378,17 @@ public class CuttingRecipes
 				.saveToFD(output);
 	}
 
-	private static Ingredient matchesTool(ItemAbility toolAction, TagKey<Item> fallbackTag) {
-		return CompoundIngredient.of(new ItemAbilityIngredient(toolAction).toVanilla(), Ingredient.of(fallbackTag));
+	private static Ingredient matchesTool(HolderGetter<Item> items, ItemAbility toolAction, TagKey<Item> fallbackTag) {
+		return CompoundIngredient.of(new ItemAbilityIngredient(toolAction).toVanilla(), Ingredient.of(items.getOrThrow(fallbackTag)));
 	}
 
-	private static Identifier salvagingRecipe(String name) {
-		return Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "salvaging/" + name);
+	// 26.1: the vanilla PICKAXE_DIG/AXE_DIG/SHOVEL_DIG/HOE_DIG ItemAbilities were removed (tools are tag-driven now),
+	// so tools without a dedicated remaining ItemAbility are matched purely by their item tag.
+	private static Ingredient matchesTool(HolderGetter<Item> items, TagKey<Item> tag) {
+		return Ingredient.of(items.getOrThrow(tag));
+	}
+
+	private static ResourceKey<Recipe<?>> salvagingRecipe(String name) {
+		return ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "salvaging/" + name));
 	}
 }

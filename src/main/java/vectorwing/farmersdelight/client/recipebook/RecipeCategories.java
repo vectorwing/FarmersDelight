@@ -1,35 +1,41 @@
 package vectorwing.farmersdelight.client.recipebook;
 
-import com.google.common.collect.ImmutableList;
-import net.minecraft.world.inventory.RecipeBookType;
-import net.minecraft.world.item.crafting.RecipeBookCategories;
 import net.neoforged.neoforge.client.event.RegisterRecipeBookSearchCategoriesEvent;
-import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
+/**
+ * Cooking Pot recipe-book categories.
+ *
+ * <p>NOTE (26.1 port): In 1.21.1 Farmer's Delight added four custom {@code RecipeBookCategories} enum
+ * constants (a search aggregate plus MEALS/DRINKS/MISC sub-tabs) and wired them up through the old
+ * {@code RegisterRecipeBookSearchCategoriesEvent} methods {@code registerBookCategories(RecipeBookType, ...)},
+ * {@code registerAggregateCategory(...)} and {@code registerRecipeCategoryFinder(RecipeType, finder)}.
+ *
+ * <p>None of that survives in 26.1:
+ * <ul>
+ *   <li>{@code net.minecraft.client.RecipeBookCategories} was moved to
+ *       {@code net.minecraft.world.item.crafting.RecipeBookCategories} and is no longer an enum; it is a
+ *       holder of {@link net.minecraft.world.item.crafting.RecipeBookCategory} instances registered into
+ *       {@code BuiltInRegistries.RECIPE_BOOK_CATEGORY}. {@code RecipeBookCategories.valueOf(...)} no longer
+ *       exists, so the four custom constants cannot be created the old way (and their enum-extension proxies
+ *       in {@code EnumParameters} are gone too).</li>
+ *   <li>The NeoForge event now only exposes
+ *       {@link RegisterRecipeBookSearchCategoriesEvent#register(net.minecraft.world.item.crafting.ExtendedRecipeBookCategory, net.minecraft.world.item.crafting.RecipeBookCategory...)}.
+ *       The per-{@code RecipeType} category finder and the {@code RecipeBookType}-to-categories binding are
+ *       gone, so there is no longer any hook to route Cooking Pot recipes into bespoke sub-tabs.</li>
+ * </ul>
+ *
+ * <p>Consequently the Cooking Pot recipe book has been simplified to the vanilla
+ * {@link net.minecraft.world.item.crafting.RecipeBookCategories#CRAFTING_MISC} category:
+ * {@code CookingPotRecipe#recipeBookCategory()} returns {@code CRAFTING_MISC} and
+ * {@code CookingPotRecipeBookComponent} declares a single {@code CRAFTING_MISC} tab. Registering bespoke
+ * {@code RecipeBookCategory} instances here would be dead code (nothing routes recipes into them), so this
+ * registration is intentionally a no-op. The MEALS/DRINKS/MISC distinction still exists as
+ * {@code CookingPotRecipeBookTab} on the recipe data, it just no longer drives separate recipe-book tabs.
+ */
 public class RecipeCategories
 {
-	public static RecipeBookCategories COOKING_SEARCH = RecipeBookCategories.valueOf("FARMERSDELIGHT_COOKING_SEARCH");
-	public static RecipeBookCategories COOKING_MEALS = RecipeBookCategories.valueOf("FARMERSDELIGHT_COOKING_MEALS");
-	public static RecipeBookCategories COOKING_DRINKS = RecipeBookCategories.valueOf("FARMERSDELIGHT_COOKING_DRINKS");
-	public static RecipeBookCategories COOKING_MISC = RecipeBookCategories.valueOf("FARMERSDELIGHT_COOKING_MISC");
-
 	public static void init(RegisterRecipeBookSearchCategoriesEvent event) {
-		event.registerBookCategories(RecipeBookType.valueOf("FARMERSDELIGHT_COOKING"), ImmutableList.of(COOKING_SEARCH, COOKING_MEALS, COOKING_DRINKS, COOKING_MISC));
-		event.registerAggregateCategory(COOKING_SEARCH, ImmutableList.of(COOKING_MEALS, COOKING_DRINKS, COOKING_MISC));
-		event.registerRecipeCategoryFinder(ModRecipeTypes.COOKING.get(), recipe ->
-		{
-			if (recipe.value() instanceof CookingPotRecipe cookingRecipe) {
-				CookingPotRecipeBookTab tab = cookingRecipe.getRecipeBookTab();
-				if (tab != null) {
-					return switch (tab) {
-						case MEALS -> COOKING_MEALS;
-						case DRINKS -> COOKING_DRINKS;
-						case MISC -> COOKING_MISC;
-					};
-				}
-			}
-			return COOKING_MISC;
-		});
+		// Intentionally empty: see class javadoc. The Cooking Pot recipe book uses the vanilla
+		// CRAFTING_MISC category, which needs no custom search-category registration.
 	}
 }

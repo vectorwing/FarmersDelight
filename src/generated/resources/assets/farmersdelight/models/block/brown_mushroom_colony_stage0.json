@@ -1,6 +1,5 @@
 {
   "parent": "minecraft:block/cross",
-  "render_type": "minecraft:cutout",
   "textures": {
     "cross": "farmersdelight:block/brown_mushroom_colony_stage0"
   }

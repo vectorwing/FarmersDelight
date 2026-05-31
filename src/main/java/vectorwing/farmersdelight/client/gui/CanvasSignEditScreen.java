@@ -1,57 +1,27 @@
 package vectorwing.farmersdelight.client.gui;
 
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.SignEditScreen;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.sprite.Material;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.StandingSignBlock;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import vectorwing.farmersdelight.common.block.state.CanvasSign;
-import vectorwing.farmersdelight.common.registry.ModAtlases;
 
-import javax.annotation.Nullable;
-
+/**
+ * Edit screen for canvas (standing/wall) signs.
+ * <p>
+ * In MC 26.1 the standing-sign preview is rendered through the picture-in-picture
+ * {@code GuiSignRenderer}, which always resolves its texture from
+ * {@code Sheets.getSignSprite(woodType)} and offers no hook to substitute the dyed
+ * canvas material. The previous implementation rendered the sign model directly with a
+ * custom {@code Material}; that path no longer exists ({@code GuiGraphics#pose()} is now a
+ * 2D {@code Matrix3x2fStack} and {@code SignRenderer} was removed). We therefore fall back
+ * to the vanilla standing-sign preview (correct wood type, no canvas tint). The in-world
+ * block still renders its canvas texture via {@code CanvasSignRenderer}.
+ * <p>
+ * To restore the dyed preview, register a custom canvas sign
+ * {@code PictureInPictureRenderer} (RegisterPictureInPictureRenderersEvent) that uses
+ * {@code ModAtlases.getCanvasSignMaterial(dye)} and submit it from {@code extractSignBackground}.
+ */
 public class CanvasSignEditScreen extends SignEditScreen
 {
-	@Nullable
-	protected SignRenderer.SignModel signModel;
-	@Nullable
-	protected DyeColor dye;
-	protected final boolean isFrontText;
-
 	public CanvasSignEditScreen(SignBlockEntity signBlockEntity, boolean isFront, boolean isTextFilteringEnabled) {
 		super(signBlockEntity, isFront, isTextFilteringEnabled);
-		Block block = signBlockEntity.getBlockState().getBlock();
-		if (block instanceof CanvasSign canvasSign) {
-			this.dye = canvasSign.getBackgroundColor();
-		}
-		this.isFrontText = isFront;
-	}
-
-	@Override
-	protected void init() {
-		super.init();
-		this.signModel = SignRenderer.createSignModel(this.minecraft.getEntityModels(), this.woodType);
-	}
-
-	@Override
-	protected void renderSignBackground(GuiGraphicsExtractor guiGraphics, BlockState state) {
-		if (this.signModel != null) {
-			boolean flag = state.getBlock() instanceof StandingSignBlock;
-			guiGraphics.pose().translate(0.0F, 31.0F, 0.0F);
-			if (!isFrontText) {
-				guiGraphics.pose().mulPose(Axis.YP.rotationDegrees(180));
-			}
-			guiGraphics.pose().scale(MAGIC_SCALE_NUMBER, MAGIC_SCALE_NUMBER, -MAGIC_SCALE_NUMBER);
-			Material material = ModAtlases.getCanvasSignMaterial(dye);
-			VertexConsumer vertexconsumer = material.buffer(guiGraphics.bufferSource(), this.signModel::renderType);
-			this.signModel.stick.visible = flag;
-			this.signModel.root.render(guiGraphics.pose(), vertexconsumer, 15728880, OverlayTexture.NO_OVERLAY);
-		}
 	}
 }
