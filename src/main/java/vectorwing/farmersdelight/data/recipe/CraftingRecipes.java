@@ -504,6 +504,13 @@ public class CraftingRecipes
 			.define('s', Items.STICK)
 			.unlockedBy("has_stick", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK))
 			.save(output);
+		ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, ModItems.COPPER_KNIFE.get())
+			.pattern("m")
+			.pattern("s")
+			.define('m', Tags.Items.INGOTS_COPPER)
+			.define('s', Items.STICK)
+			.unlockedBy("has_copper_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COPPER_INGOT))
+			.save(output);
 		ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, ModItems.IRON_KNIFE.get())
 			.pattern("m")
 			.pattern("s")

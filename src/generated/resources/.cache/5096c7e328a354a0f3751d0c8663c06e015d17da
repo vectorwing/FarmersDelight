@@ -1,4 +1,4 @@
-// 26.1.2	2026-05-31T16:47:53.1503127	Farmer's Delight recipes
+// 26.1.2	2026-05-31T18:10:54.3872569	Farmer's Delight recipes
 0053d4db6868789324c8ab586cbfc9b588ce30ff data/farmersdelight/advancement/recipes/building_blocks/beetroot_crate.json
 527c466425a9e580792dfe83176fd8057f08fb72 data/farmersdelight/advancement/recipes/building_blocks/cabbage_crate.json
 5b6b7b02e582b796cef6d0c65ac910f9789f8897 data/farmersdelight/advancement/recipes/building_blocks/carrot_crate.json
@@ -14,6 +14,7 @@ bb925172c8412ba4a973cfa48292ef592108bd85 data/farmersdelight/advancement/recipes
 d10de7a1e6b09c1f6e49d83ddafaa575cff8179e data/farmersdelight/advancement/recipes/building_blocks/tatami.json
 05529e72ac866ecabb30ba199bfbfe3aef2640a3 data/farmersdelight/advancement/recipes/building_blocks/tatami_block_from_full.json
 f47d67c52ab5b27f3ead4a97ce1c312ab93eb0c0 data/farmersdelight/advancement/recipes/building_blocks/tomato_crate.json
+68277b693aef6055ddcd6a1635fcde6c0b426d70 data/farmersdelight/advancement/recipes/combat/copper_knife.json
 0b235fda96c307bd590e18b7caeca6590d391c79 data/farmersdelight/advancement/recipes/combat/diamond_knife.json
 b94e06475951529c04216359a2cb7d8d456a0a45 data/farmersdelight/advancement/recipes/combat/flint_knife.json
 28daf25aa5f0a612da00e3af184e14ba74bfd064 data/farmersdelight/advancement/recipes/combat/golden_knife.json
@@ -279,6 +280,7 @@ b03de6ba0f1a35d61add8a6c2a4fd4f755f73895 data/farmersdelight/recipe/cooking/rata
 4fa7d6f158db733955f40c395d932baa17b22348 data/farmersdelight/recipe/cooking/vegetable_noodles.json
 cfb23c5b93627ab5a767694f7c7a5e03ed45987c data/farmersdelight/recipe/cooking/vegetable_soup.json
 c959aec9ed455c710393e8faad4c15f007de91e7 data/farmersdelight/recipe/cooking_pot.json
+8c99c00036b484b4c84cacb196e5a81a02fde1e6 data/farmersdelight/recipe/copper_knife.json
 6a251851a13b08b2f75c14c5ec0db1a1ac95823a data/farmersdelight/recipe/crimson_cabinet.json
 6cda35fea261946ab123fecf6e020ae9b9efa730 data/farmersdelight/recipe/cutting/acacia_log.json
 e2178791d6d1383c289983b82ec5fb06af8b52b8 data/farmersdelight/recipe/cutting/acacia_wood.json
