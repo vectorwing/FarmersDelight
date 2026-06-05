@@ -1,12 +1,12 @@
 package vectorwing.farmersdelight.common.block.entity.container;
 
 
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.StackedContents;
+import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -14,17 +14,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
-import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
-import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModMenuTypes;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.Objects;
 
-public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper, CookingPotRecipe>
+public class CookingPotMenu extends RecipeBookMenu
 {
 	public static final Identifier EMPTY_CONTAINER_SLOT_BOWL = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "item/empty_container_slot_bowl");
 
@@ -68,12 +66,9 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper, CookingPotReci
 		this.addSlot(new CookingPotMealSlot(inventory, 6, 124, 26));
 
 		// Bowl Input
-		this.addSlot(new SlotItemHandler(inventory, 7, 92, 55)
-		{
-			public Pair<Identifier, Identifier> getNoItemIcon() {
-				return Pair.of(InventoryMenu.BLOCK_ATLAS, EMPTY_CONTAINER_SLOT_BOWL);
-			}
-		});
+		Slot bowlSlot = new SlotItemHandler(inventory, 7, 92, 55);
+		bowlSlot.setBackground(EMPTY_CONTAINER_SLOT_BOWL);
+		this.addSlot(bowlSlot);
 
 		// Bowl Output
 		this.addSlot(new CookingPotResultSlot(playerInventory.player, blockEntity, inventory, 8, 124, 55));
@@ -160,52 +155,39 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper, CookingPotReci
 		return blockEntity.isHeated();
 	}
 
+
+	public int getResultSlotIndex() {
+		return 7;
+	}
+
+	public int getGridWidth() {
+		return 3;
+	}
+
+	public int getGridHeight() {
+		return 2;
+	}
+
+	public int getSize() {
+		return 7;
+	}
+
 	@Override
-	public void fillCraftSlotsStackedContents(StackedContents helper) {
+	public PostPlaceAction handlePlacement(boolean useMaxItems, boolean allowDroppingItemsToClear, RecipeHolder<?> recipe, ServerLevel level, Inventory inventory) {
+		//TODO this shouldn't be null but I'm handling it later
+		//     worth referencing the implementation in AbstractCraftingMenu, i think.
+		return null;
+	}
+
+	@Override
+	public void fillCraftSlotsStackedContents(StackedItemContents helper) {
 		for (int i = 0; i < inventory.getSlots(); i++) {
 			helper.accountSimpleStack(inventory.getStackInSlot(i));
 		}
 	}
 
 	@Override
-	public void clearCraftingContent() {
-		for (int i = 0; i < 6; i++) {
-			this.inventory.setStackInSlot(i, ItemStack.EMPTY);
-		}
-	}
-
-	@Override
-	public boolean recipeMatches(RecipeHolder<CookingPotRecipe> recipe) {
-		return recipe.value().matches(new RecipeWrapper(inventory), level);
-	}
-
-	@Override
-	public int getResultSlotIndex() {
-		return 7;
-	}
-
-	@Override
-	public int getGridWidth() {
-		return 3;
-	}
-
-	@Override
-	public int getGridHeight() {
-		return 2;
-	}
-
-	@Override
-	public int getSize() {
-		return 7;
-	}
-
-	@Override
 	public RecipeBookType getRecipeBookType() {
 		return RecipeBookType.valueOf("FARMERSDELIGHT_COOKING");
-	}
-
-	@Override
-	public boolean shouldMoveToInventory(int slot) {
-		return slot < (getGridWidth() * getGridHeight());
 	}
 }
