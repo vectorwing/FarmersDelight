@@ -74,12 +74,12 @@ public class DefaultStoveRenderer<T extends AbstractStoveBlockEntity> implements
 		state.lightCoords = LevelRenderer.getLightCoords(stove.getLevel(), stove.getBlockPos().above());
 
 		var items = stove.getItems();
-		state.slotCount = items.getSlots();
+		state.slotCount = items.size();
 		state.offsets = new Vec2[state.slotCount];
 		state.itemRenderStates = new ItemStackRenderState[state.slotCount];
 
 		for (int i = 0; i < state.slotCount; i++) {
-			ItemStack stack = items.getStackInSlot(i);
+			ItemStack stack = items.getResource(i).toStack(items.getAmountAsInt(i));
 			if (stack.isEmpty()) {
 				state.itemRenderStates[i] = null;
 				state.offsets[i] = null;

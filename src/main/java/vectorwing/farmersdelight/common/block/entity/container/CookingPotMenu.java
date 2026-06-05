@@ -12,8 +12,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
@@ -31,7 +31,7 @@ public class CookingPotMenu extends RecipeBookMenu
 	public static final int INDEX_OUTPUT = 8;
 
 	public final CookingPotBlockEntity blockEntity;
-	public final ItemStackHandler inventory;
+	public final ItemStacksResourceHandler inventory;
 	private final ContainerData cookingPotData;
 	private final ContainerLevelAccess canInteractWithCallable;
 	protected final Level level;
@@ -181,8 +181,8 @@ public class CookingPotMenu extends RecipeBookMenu
 
 	@Override
 	public void fillCraftSlotsStackedContents(StackedItemContents helper) {
-		for (int i = 0; i < inventory.getSlots(); i++) {
-			helper.accountSimpleStack(inventory.getStackInSlot(i));
+		for (int i = 0; i < inventory.size(); i++) {
+			helper.accountSimpleStack(inventory.getResource(i).toStack(inventory.getAmountAsInt(i)));
 		}
 	}
 
