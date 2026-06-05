@@ -1,10 +1,11 @@
 package vectorwing.farmersdelight.client.gui;
 
+import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.LayeredDraw;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
@@ -12,12 +13,12 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
-import net.minecraft.world.level.GameRules;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.neoforged.neoforge.client.gui.GuiLayer;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
-import org.jetbrains.annotations.NotNull;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
+import vectorwing.farmersdelight.common.network.payload.NaturalRegenerationGameRulePayload;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 
 import java.util.Random;
@@ -49,12 +50,12 @@ public class HUDOverlays
 		event.registerAbove(VanillaGuiLayers.FOOD_LEVEL, NourishmentOverlay.ID, new NourishmentOverlay());
 	}
 
-	public static abstract class BaseOverlay implements LayeredDraw.Layer
+	public static abstract class BaseOverlay implements GuiLayer
 	{
-		public abstract void render(Minecraft mc, Player player, GuiGraphics guiGraphics, int left, int right, int top, int guiTicks);
+		public abstract void render(Minecraft mc, Player player, GuiGraphicsExtractor guiGraphics, int left, int right, int top, int guiTicks);
 
 		@Override
-		public final void render(@NotNull GuiGraphics guiGraphics, @NotNull DeltaTracker deltaTracker) {
+		public final void render(GuiGraphicsExtractor guiGraphics, DeltaTracker deltaTracker) {
 			Minecraft minecraft = Minecraft.getInstance();
 			if (minecraft.player == null || !shouldRenderOverlay(minecraft, minecraft.player, guiGraphics, minecraft.gui.getGuiTicks()))
 				return;
@@ -66,7 +67,7 @@ public class HUDOverlays
 			render(minecraft, minecraft.player, guiGraphics, left, right, top, minecraft.gui.getGuiTicks());
 		}
 
-		public boolean shouldRenderOverlay(Minecraft minecraft, Player player, GuiGraphics guiGraphics, int guiTicks) {
+		public boolean shouldRenderOverlay(Minecraft minecraft, Player player, GuiGraphicsExtractor guiGraphics, int guiTicks) {
 			return !minecraft.options.hideGui && minecraft.gameMode != null && minecraft.gameMode.canHurtPlayer();
 		}
 	}
@@ -76,11 +77,11 @@ public class HUDOverlays
 		public static final Identifier ID = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "nourishment");
 
 		@Override
-		public void render(Minecraft minecraft, Player player, GuiGraphics guiGraphics, int left, int right, int top, int guiTicks) {
+		public void render(Minecraft minecraft, Player player, GuiGraphicsExtractor guiGraphics, int left, int right, int top, int guiTicks) {
 			FoodData stats = player.getFoodData();
 
 			boolean isPlayerHealingWithSaturation =
-					player.level().getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION)
+					NaturalRegenerationGameRulePayload.NATURAL_REGENERATION
 							&& player.isHurt()
 							&& stats.getSaturationLevel() > 0.0;
 
@@ -90,7 +91,7 @@ public class HUDOverlays
 		}
 
 		@Override
-		public boolean shouldRenderOverlay(Minecraft mc, Player player, GuiGraphics guiGraphics, int guiTicks) {
+		public boolean shouldRenderOverlay(Minecraft mc, Player player, GuiGraphicsExtractor guiGraphics, int guiTicks) {
 			if (!super.shouldRenderOverlay(mc, player, guiGraphics, guiTicks))
 				return false;
 
@@ -103,7 +104,7 @@ public class HUDOverlays
 		public static final Identifier ID = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "comfort");
 
 		@Override
-		public void render(Minecraft minecraft, Player player, GuiGraphics guiGraphics, int left, int right, int top, int guiTicks) {
+		public void render(Minecraft minecraft, Player player, GuiGraphicsExtractor guiGraphics, int left, int right, int top, int guiTicks) {
 			FoodData stats = player.getFoodData();
 
 			boolean isPlayerEligibleForComfort = stats.getSaturationLevel() == 0.0F
@@ -116,7 +117,7 @@ public class HUDOverlays
 		}
 
 		@Override
-		public boolean shouldRenderOverlay(Minecraft mc, Player player, GuiGraphics guiGraphics, int guiTicks) {
+		public boolean shouldRenderOverlay(Minecraft mc, Player player, GuiGraphicsExtractor guiGraphics, int guiTicks) {
 			if (!super.shouldRenderOverlay(mc, player, guiGraphics, guiTicks))
 				return false;
 
@@ -124,14 +125,15 @@ public class HUDOverlays
 		}
 	}
 
-	public static void drawNourishmentOverlay(FoodData foodData, Minecraft minecraft, GuiGraphics graphics, int right, int top, boolean naturalHealing) {
+	// TODO this might not render transparently correctly.
+	public static void drawNourishmentOverlay(FoodData foodData, Minecraft minecraft, GuiGraphicsExtractor graphics, int right, int top, boolean naturalHealing) {
 		float saturation = foodData.getSaturationLevel();
 		int foodLevel = foodData.getFoodLevel();
 		int ticks = minecraft.gui.getGuiTicks();
 		Random rand = new Random();
-		rand.setSeed(ticks * 312871);
+		rand.setSeed((long) ticks * 312871);
 
-		RenderSystem.enableBlend();
+		//RenderSystem.enableBlend();
 
 		for (int j = 0; j < 10; ++j) {
 			int x = right - j * 8 - 9;
@@ -142,25 +144,26 @@ public class HUDOverlays
 			}
 
 			// Background texture
-			graphics.blit(MOD_ICONS_TEXTURE, x, y, 0, 0, 9, 9);
+			graphics.blit(RenderPipelines.GUI_TEXTURED, MOD_ICONS_TEXTURE, x, y, 0, 0, 9, 9, 9, 9, 256, 256);
 
 			float effectiveHungerOfBar = (foodData.getFoodLevel()) / 2.0F - j;
 			int naturalHealingOffset = naturalHealing ? 18 : 0;
 
 			// Gilded hunger icons
 			if (effectiveHungerOfBar >= 1)
-				graphics.blit(MOD_ICONS_TEXTURE, x, y, 18 + naturalHealingOffset, 0, 9, 9);
+				graphics.blit(RenderPipelines.GUI_TEXTURED, MOD_ICONS_TEXTURE, x, y, 18 + naturalHealingOffset, 0, 9, 9, 256, 256);
 			else if (effectiveHungerOfBar >= .5)
-				graphics.blit(MOD_ICONS_TEXTURE, x, y, 9 + naturalHealingOffset, 0, 9, 9);
+				graphics.blit(RenderPipelines.GUI_TEXTURED, MOD_ICONS_TEXTURE, x, y, 9 + naturalHealingOffset, 0, 9, 9, 256, 256);
 		}
 
-		RenderSystem.disableBlend();
+		//RenderSystem.disableBlend();
 	}
 
-	public static void drawComfortOverlay(Player player, Minecraft minecraft, GuiGraphics graphics, int left, int top) {
+	// TODO this might not render transparently correctly.
+	public static void drawComfortOverlay(Player player, Minecraft minecraft, GuiGraphicsExtractor graphics, int left, int top) {
 		int ticks = minecraft.gui.getGuiTicks();
 		Random rand = new Random();
-		rand.setSeed((long) (ticks * 312871));
+		rand.setSeed((long) ticks * 312871);
 
 		int health = Mth.ceil(player.getHealth());
 		float absorb = Mth.ceil(player.getAbsorptionAmount());
@@ -177,7 +180,7 @@ public class HUDOverlays
 		int comfortHeartFrame = comfortSheen % 2;
 		int[] textureWidth = {5, 9};
 
-		RenderSystem.enableBlend();
+		//RenderSystem.enableBlend();
 
 		int healthMaxSingleRow = Mth.ceil(Math.min(healthMax, 20) / 2.0F);
 		int leftHeightOffset = ((healthRows - 1) * rowHeight); // This keeps the overlay on the bottommost row of hearts
@@ -191,13 +194,13 @@ public class HUDOverlays
 			if (i == regen) y -= 2;
 
 			if (column == comfortSheen / 2) {
-				graphics.blit(MOD_ICONS_TEXTURE, x, y, 0, 9, textureWidth[comfortHeartFrame], 9);
+				graphics.blit(RenderPipelines.GUI_TEXTURED,MOD_ICONS_TEXTURE, x, y, 0, 9, textureWidth[comfortHeartFrame], 9, 256, 256);
 			}
 			if (column == (comfortSheen / 2) - 1 && comfortHeartFrame == 0) {
-				graphics.blit(MOD_ICONS_TEXTURE, x + 5, y, 5, 9, 4, 9);
+				graphics.blit(RenderPipelines.GUI_TEXTURED,MOD_ICONS_TEXTURE, x + 5, y, 5, 9, 4, 9, 256, 256);
 			}
 		}
 
-		RenderSystem.disableBlend();
+		//RenderSystem.disableBlend();
 	}
 }
