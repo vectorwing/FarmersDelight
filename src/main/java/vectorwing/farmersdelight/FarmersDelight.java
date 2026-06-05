@@ -59,6 +59,7 @@ public class FarmersDelight
 		ModIngredientTypes.INGREDIENT_TYPES.register(modEventBus);
 		ModAdvancements.TRIGGERS.register(modEventBus);
 		ModConsumeEffectTypes.CONSUME_EFFECTS.register(modEventBus);
+		ModRecipeCategories.RECIPE_BOOK_CATEGORIES.register(modEventBus);
 
 		RegistryAliases.addRegistryAliases();
 

@@ -23,7 +23,7 @@ import vectorwing.farmersdelight.client.gui.HUDOverlays;
 import vectorwing.farmersdelight.client.particle.SparkleParticle;
 import vectorwing.farmersdelight.client.particle.StarParticle;
 import vectorwing.farmersdelight.client.particle.SteamParticle;
-import vectorwing.farmersdelight.client.recipebook.RecipeCategories;
+import vectorwing.farmersdelight.common.registry.ModRecipeCategories;
 import vectorwing.farmersdelight.client.renderer.*;
 import vectorwing.farmersdelight.common.EnumParameters;
 import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
@@ -59,7 +59,7 @@ public class ClientSetupEvents
 
 	@SubscribeEvent
 	public static void registerRecipeBookCategories(RegisterRecipeBookSearchCategoriesEvent event) {
-		RecipeCategories.init(event);
+		ModRecipeCategories.init(event);
 	}
 
 	@SubscribeEvent

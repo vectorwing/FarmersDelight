@@ -11,13 +11,12 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.RecipeMatcher;
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
+import vectorwing.farmersdelight.common.registry.ModRecipeCategories;
 import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
 
 public class CookingPotRecipe implements Recipe<RecipeInput>
@@ -159,7 +158,11 @@ public class CookingPotRecipe implements Recipe<RecipeInput>
 
 	@Override
 	public RecipeBookCategory recipeBookCategory() {
-		return RecipeBookCategories.CRAFTING_MISC; // Never read for our purposes, AFAIK?
+		return switch(tab) {
+			case MEALS -> ModRecipeCategories.COOKING_MEALS.get();
+			case DRINKS -> ModRecipeCategories.COOKING_DRINKS.get();
+			case MISC -> ModRecipeCategories.COOKING_MISC.get();
+		};
 	}
 
 	@Override
