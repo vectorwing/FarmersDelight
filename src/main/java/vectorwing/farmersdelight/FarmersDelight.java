@@ -30,7 +30,8 @@ public class FarmersDelight
 	public FarmersDelight(IEventBus modEventBus, ModContainer modContainer) {
 		modEventBus.addListener(CommonSetup::init);
 		if (FMLEnvironment.getDist().isClient()) {
-			modEventBus.addListener(ClientSetupEvents::init);
+			// TODO may be unnecessary?
+			//modEventBus.addListener(ClientSetupEvents::init);
 			modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 		}
 
