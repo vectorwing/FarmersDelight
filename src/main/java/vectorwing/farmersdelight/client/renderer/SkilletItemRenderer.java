@@ -137,7 +137,7 @@ public record SkilletItemRenderer(SpriteGetter spriteGetter) implements SpecialM
 
 	}
 
-	public record ArmPoseTransformer(long skilletFlipTimestamp) implements IArmPoseTransformer {
+	public record ArmPoseTransformer() implements IArmPoseTransformer {
 		@Override
 		public void applyTransform(HumanoidModel<?> model, HumanoidRenderState entity, HumanoidArm arm) {
 			ItemStack stack = arm == HumanoidArm.LEFT ? entity.leftHandItemStack : entity.rightHandItemStack;
