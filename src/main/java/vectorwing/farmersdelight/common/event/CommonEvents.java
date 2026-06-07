@@ -12,12 +12,14 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.FoodValues;
 import vectorwing.farmersdelight.common.network.payload.NaturalRegenerationGameRulePayload;
+import vectorwing.farmersdelight.integration.jei.FDRecipes;
 
 @EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CommonEvents
@@ -60,6 +62,12 @@ public class CommonEvents
 				sendPayload(player, payload);
 			}
 		}
+	}
+
+	// TODO this absolutely sucks but might be necessary for JEI recipe registration
+	@SubscribeEvent
+	public void onServerAboutToStart(ServerAboutToStartEvent event) {
+		FDRecipes.SERVER = event.getServer();
 	}
 
 	private static void sendPayload(ServerPlayer player, CustomPacketPayload payload) {
