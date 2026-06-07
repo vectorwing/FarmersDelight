@@ -4,7 +4,13 @@ import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
@@ -19,26 +25,30 @@ import java.util.Optional;
 
 public class FDRecipes
 {
-	// TODO: RecipeAccess isn't the same thing. Maybe you'll have to access the registries directly?
-	private final RecipeAccess recipeManager;
+	// TODO this absolutely sucks but might be necessary for JEI recipe registration
+	public static MinecraftServer SERVER;
+	private final RecipeManager recipeManager;
 
 	public FDRecipes() {
-		Minecraft minecraft = Minecraft.getInstance();
-		ClientLevel level = minecraft.level;
-
-		if (level != null) {
-			this.recipeManager = level.recipeAccess();
+		if (SERVER != null) {
+			this.recipeManager = SERVER.getRecipeManager();
 		} else {
 			throw new NullPointerException("Minecraft level must not be null.");
 		}
 	}
 
 	public List<RecipeHolder<CookingPotRecipe>> getCookingPotRecipes() {
-		return recipeManager.getAllRecipesFor(ModRecipeTypes.COOKING.get());
+		return recipeManager.getRecipes().stream()
+			.filter(r -> r.value().getType() == ModRecipeTypes.COOKING.get())
+			.map(r -> (RecipeHolder<CookingPotRecipe>) (r) )
+			.toList();
 	}
 
 	public List<RecipeHolder<CuttingBoardRecipe>> getCuttingBoardRecipes() {
-		return recipeManager.getAllRecipesFor(ModRecipeTypes.CUTTING.get());
+		return recipeManager.getRecipes().stream()
+			.filter(r -> r.value().getType() == ModRecipeTypes.CUTTING.get())
+			.map(r -> (RecipeHolder<CuttingBoardRecipe>) (r) )
+			.toList();
 	}
 
 	public List<RecipeHolder<CraftingRecipe>> getSpecialCraftingRecipes() {
@@ -57,10 +67,16 @@ public class FDRecipes
 	}
 
 	public void addValidatedSpecialRecipe(List<RecipeHolder<CraftingRecipe>> recipeList, String recipeId, String group, NonNullList<Ingredient> inputs, ItemLike output) {
-		Optional<RecipeHolder<?>> specialRecipe = recipeManager.byKey(RecipeUtils.FDLocation(recipeId));
+		Optional<RecipeHolder<?>> specialRecipe = recipeManager.byKey(ResourceKey.create(Registries.RECIPE, RecipeUtils.FDLocation(recipeId)));
 
 		specialRecipe.ifPresent((recipe) -> {
-			recipeList.add(new RecipeHolder<>(specialRecipe.get().id(), new ShapelessRecipe(group, CraftingBookCategory.MISC, new ItemStack(output.asItem()), inputs)));
+			ShapelessRecipe shapeless = new ShapelessRecipe(
+				new Recipe.CommonInfo(false),
+				new CraftingRecipe.CraftingBookInfo(CraftingBookCategory.MISC, group),
+				ItemStackTemplate.fromNonEmptyStack(new ItemStack(output)),
+				inputs
+			);
+			recipeList.add(new RecipeHolder<>(specialRecipe.get().id(), shapeless));
 		});
 	}
 }

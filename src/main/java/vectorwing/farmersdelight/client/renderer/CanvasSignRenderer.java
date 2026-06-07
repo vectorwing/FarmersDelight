@@ -1,183 +1,176 @@
 package vectorwing.farmersdelight.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.model.Model;
-import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.blockentity.*;
+import net.minecraft.client.renderer.blockentity.state.SignRenderState;
+import net.minecraft.client.renderer.blockentity.state.StandingSignRenderState;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.resources.model.sprite.SpriteGetter;
+import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
+import net.minecraft.util.Unit;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.PlainSignBlock;
 import net.minecraft.world.level.block.SignBlock;
 import net.minecraft.world.level.block.StandingSignBlock;
+import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.entity.SignText;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import vectorwing.farmersdelight.common.block.entity.CanvasSignBlockEntity;
 import vectorwing.farmersdelight.common.block.state.CanvasSign;
 import vectorwing.farmersdelight.common.registry.ModAtlases;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class CanvasSignRenderer extends SignRenderer
+// TODO this is gross and duplicates a bunch of code, but it works for now
+public class CanvasSignRenderer implements BlockEntityRenderer<CanvasSignBlockEntity, CanvasSignRenderer.CanvasSignRenderState>
 {
-	public static final Vec3 TEXT_OFFSET = new Vec3(0.0D, (double) 0.33333334F, (double) 0.046666667F);
 	private static final int OUTLINE_RENDER_DISTANCE = Mth.square(16);
 
-	private final SignModel signModel;
+	private final Model.Simple groundModel;
+	private final Model.Simple wallModel;
+	private final SpriteGetter sprites;
 	private final Font font;
 
 	public CanvasSignRenderer(BlockEntityRendererProvider.Context context) {
-		super(context);
-
-		this.signModel = new SignRenderer.SignModel(context.bakeLayer(ModelLayers.createSignModelName(WoodType.SPRUCE)));
-		this.font = context.getFont();
+		this.groundModel = StandingSignRenderer.createSignModel(context.entityModelSet(), WoodType.SPRUCE, PlainSignBlock.Attachment.GROUND);
+		this.wallModel = StandingSignRenderer.createSignModel(context.entityModelSet(), WoodType.SPRUCE, PlainSignBlock.Attachment.WALL);
+		this.font = context.font();
+		this.sprites = context.sprites();
 	}
 
 	@Override
-	public void render(SignBlockEntity sign, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
-		BlockState state = sign.getBlockState();
-		SignBlock block = (SignBlock) state.getBlock();
-		SignRenderer.SignModel model = signModel;
-		model.stick.visible = block instanceof StandingSignBlock;
+	public CanvasSignRenderState createRenderState() {
+		return new CanvasSignRenderState();
+	}
 
-		DyeColor dye = null;
-		if (block instanceof CanvasSign canvasSign) {
-			dye = canvasSign.getBackgroundColor();
+	@Override
+	public void submit(CanvasSignRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
+		this.submitSignWithText(state, poseStack, state.breakProgress, submitNodeCollector);
+	}
+
+	private void submitSignWithText(CanvasSignRenderState state, PoseStack poseStack, ModelFeatureRenderer.CrumblingOverlay breakProgress, SubmitNodeCollector submitNodeCollector) {
+		Model.Simple bodyModel = state.attachmentType == PlainSignBlock.Attachment.GROUND ? groundModel : wallModel;
+		poseStack.pushPose();
+		poseStack.mulPose(state.transformations.body());
+		submitNodeCollector.submitModel(bodyModel, Unit.INSTANCE, poseStack, state.lightCoords, OverlayTexture.NO_OVERLAY, -1, ModAtlases.getCanvasSignSprite(state.dye), this.sprites, 0, breakProgress);
+		poseStack.popPose();
+		if (state.frontText != null) {
+			poseStack.pushPose();
+			poseStack.mulPose(state.transformations.frontText());
+			this.submitSignText(state, poseStack, submitNodeCollector, state.frontText);
+			poseStack.popPose();
 		}
 
-		renderSignWithText(sign, poseStack, bufferSource, packedLight, packedOverlay, state, block, dye, model);
-	}
-
-	protected void renderSignWithText(SignBlockEntity sign, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay, BlockState state, SignBlock block, @Nullable DyeColor dye, Model model) {
-		poseStack.pushPose();
-		translateSign(poseStack, -block.getYRotationDegrees(state), state);
-		renderSign(poseStack, bufferSource, packedLight, packedOverlay, dye, model);
-		renderSignText(sign.getBlockPos(), sign.getFrontText(), poseStack, bufferSource, packedLight, sign.getTextLineHeight(), sign.getMaxTextLineWidth(), true);
-		renderSignText(sign.getBlockPos(), sign.getBackText(), poseStack, bufferSource, packedLight, sign.getTextLineHeight(), sign.getMaxTextLineWidth(), false);
-		poseStack.popPose();
-	}
-
-	protected void translateSign(PoseStack poseStack, float angle, BlockState state) {
-		poseStack.translate(0.5F, 0.75F * this.getSignModelRenderScale(), 0.5F);
-		poseStack.mulPose(Axis.YP.rotationDegrees(angle));
-		if (!(state.getBlock() instanceof StandingSignBlock)) {
-			poseStack.translate(0.0F, -0.3125F, -0.4375F);
+		if (state.backText != null) {
+			poseStack.pushPose();
+			poseStack.mulPose(state.transformations.backText());
+			this.submitSignText(state, poseStack, submitNodeCollector, state.backText);
+			poseStack.popPose();
 		}
+
 	}
 
-	protected void renderSign(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay, @Nullable DyeColor dye, Model model) {
-		poseStack.pushPose();
-		float rootScale = getSignModelRenderScale();
-		poseStack.scale(rootScale, -rootScale, -rootScale);
-		Material material = getCanvasSignMaterial(dye);
-		VertexConsumer vertexConsumer = material.buffer(bufferSource, model::renderType);
-		this.renderSignModel(poseStack, packedLight, packedOverlay, model, vertexConsumer);
-		poseStack.popPose();
-	}
-
-	protected void renderSignModel(PoseStack poseStack, int packedLight, int packedOverlay, Model model, VertexConsumer vertexConsumer) {
-		SignRenderer.SignModel signModel = (SignRenderer.SignModel) model;
-		signModel.root.render(poseStack, vertexConsumer, packedLight, packedOverlay);
-	}
-
-	protected void renderSignText(BlockPos pos, SignText text, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int textLineHeight, int maxTextLineWidth, boolean isFrontText) {
-		poseStack.pushPose();
-		translateSignText(poseStack, isFrontText, this.getTextOffset());
-
-		FormattedCharSequence[] formattedCharSequenceList = text.getRenderMessages(Minecraft.getInstance().isTextFilteringEnabled(), (component) -> {
-			List<FormattedCharSequence> list = this.font.split(component, maxTextLineWidth);
-			return list.isEmpty() ? FormattedCharSequence.EMPTY : list.get(0);
+	private void submitSignText(CanvasSignRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, SignText signText) {
+		int signMidpoint = 4 * state.textLineHeight / 2;
+		FormattedCharSequence[] formattedLines = signText.getRenderMessages(state.isTextFilteringEnabled, (input) -> {
+			List<FormattedCharSequence> components = this.font.split(input, state.maxTextLineWidth);
+			return components.isEmpty() ? FormattedCharSequence.EMPTY : (FormattedCharSequence)components.get(0);
 		});
-
 		int darkColor;
-		int baseColor;
-		boolean hasOutline;
-		int light;
-		if (text.hasGlowingText()) {
-			darkColor = getDarkColor(text, true);
-			baseColor = text.getColor().getTextColor();
-			hasOutline = isOutlineVisible(pos, baseColor);
-			light = 15728880;
+		int textColor;
+		boolean drawOutline;
+		int lightVal;
+		if (signText.hasGlowingText()) {
+			darkColor = getDarkColor(signText, true);
+			textColor = signText.getColor().getTextColor();
+			drawOutline = textColor == DyeColor.BLACK.getTextColor() || state.drawOutline;
+			lightVal = 15728880;
 		} else {
-			darkColor = getDarkColor(text, false);
-			baseColor = darkColor;
-			hasOutline = false;
-			light = packedLight;
+			darkColor = getDarkColor(signText, false);
+			textColor = darkColor;
+			drawOutline = false;
+			lightVal = state.lightCoords;
 		}
 
-		int verticalOffset = 2 * textLineHeight + this.getCustomVerticalOffset();
-
-		for (int i = 0; i < 4; ++i) {
-			FormattedCharSequence formattedCharSequence = formattedCharSequenceList[i];
-			float x = (float) (-this.font.width(formattedCharSequence) / 2);
-			float y = i * textLineHeight - verticalOffset;
-			if (hasOutline) {
-				this.font.drawInBatch8xOutline(formattedCharSequence, x, y, baseColor, darkColor, poseStack.last().pose(), bufferSource, light);
-			} else {
-				this.font.drawInBatch(formattedCharSequence, x, y, baseColor, false, poseStack.last().pose(), bufferSource, Font.DisplayMode.POLYGON_OFFSET, 0, light);
-			}
+		for(int i = 0; i < 4; ++i) {
+			FormattedCharSequence actualLine = formattedLines[i];
+			float x1 = (float)(-this.font.width(actualLine) / 2);
+			submitNodeCollector.submitText(poseStack, x1, (float)(i * state.textLineHeight - signMidpoint), actualLine, false, Font.DisplayMode.POLYGON_OFFSET, lightVal, textColor, 0, drawOutline ? darkColor : 0);
 		}
-
-		poseStack.popPose();
 	}
 
-	private void translateSignText(PoseStack poseStack, boolean isFrontText, Vec3 pos) {
-		if (!isFrontText) {
-			poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
-		}
-
-		float textScale = 0.015625F * this.getSignTextRenderScale();
-		poseStack.translate(pos.x, pos.y, pos.z);
-		poseStack.scale(textScale, -textScale, textScale);
-	}
-
-	public static boolean isOutlineVisible(BlockPos pos, int textColor) {
-		if (textColor == DyeColor.BLACK.getTextColor()) {
+	private static boolean isOutlineVisible(BlockPos pos) {
+		Minecraft minecraft = Minecraft.getInstance();
+		LocalPlayer player = minecraft.player;
+		if (player != null && minecraft.options.getCameraType().isFirstPerson() && player.isScoping()) {
 			return true;
 		} else {
-			Minecraft minecraft = Minecraft.getInstance();
-			LocalPlayer localPlayer = minecraft.player;
-			if (localPlayer != null && minecraft.options.getCameraType().isFirstPerson() && localPlayer.isScoping()) {
-				return true;
-			} else {
-				Entity entity = minecraft.getCameraEntity();
-				return entity != null && entity.distanceToSqr(Vec3.atCenterOf(pos)) < (double) OUTLINE_RENDER_DISTANCE;
-			}
+			Entity camera = minecraft.getCameraEntity();
+			return camera != null && camera.distanceToSqr(Vec3.atCenterOf(pos)) < (double)OUTLINE_RENDER_DISTANCE;
 		}
 	}
 
 	protected static int getDarkColor(SignText text, boolean isOutlineVisible) {
 		int textColor = text.getColor().getTextColor();
-		if (textColor == DyeColor.BLACK.getTextColor() && text.hasGlowingText()) {
-			return -988212;
+		float brightness = isOutlineVisible ? 0.4f : 0.6f;
+		return textColor == DyeColor.BLACK.getTextColor() && text.hasGlowingText() ? -988212 : ARGB.scaleRGB(textColor, brightness);
+	}
+
+	@Override
+	public void extractRenderState(CanvasSignBlockEntity blockEntity, CanvasSignRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@org.jspecify.annotations.Nullable CrumblingOverlay breakProgress) {
+		BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
+		state.maxTextLineWidth = blockEntity.getMaxTextLineWidth();
+		state.textLineHeight = blockEntity.getTextLineHeight();
+		state.frontText = blockEntity.getFrontText();
+		state.backText = blockEntity.getBackText();
+		state.isTextFilteringEnabled = Minecraft.getInstance().isTextFilteringEnabled();
+		state.drawOutline = isOutlineVisible(blockEntity.getBlockPos());
+		state.woodType = SignBlock.getWoodType(blockEntity.getBlockState().getBlock());
+
+		BlockState blockState = blockEntity.getBlockState();
+		state.attachmentType = PlainSignBlock.getAttachmentPoint(blockState);
+		if (blockState.getBlock() instanceof WallSignBlock) {
+			state.transformations = StandingSignRenderer.TRANSFORMATIONS.wallTransformation(blockState.getValue(WallSignBlock.FACING));
 		} else {
-			double brightness = isOutlineVisible ? 0.4D : 0.6D;
-			int red = (int) ((double) FastColor.ARGB32.red(textColor) * brightness);
-			int green = (int) ((double) FastColor.ARGB32.green(textColor) * brightness);
-			int blue = (int) ((double) FastColor.ARGB32.blue(textColor) * brightness);
-			return FastColor.ARGB32.color(0, red, green, blue);
+			state.transformations = StandingSignRenderer.TRANSFORMATIONS.freeTransformations(blockState.getValue(StandingSignBlock.ROTATION));
+		}
+
+		state.dye = ((CanvasSign)blockState.getBlock()).getBackgroundColor();
+	}
+
+	@Override
+	public AABB getRenderBoundingBox(CanvasSignBlockEntity blockEntity) {
+		if (blockEntity.getBlockState().getBlock() instanceof StandingSignBlock) {
+			BlockPos pos = blockEntity.getBlockPos();
+			return new AABB(pos.getX(), pos.getY(), pos.getZ(), (double)pos.getX() + (double)1.0F, (double)pos.getY() + (double)1.125F, (double)pos.getZ() + (double)1.0F);
+		} else {
+			return BlockEntityRenderer.super.getRenderBoundingBox(blockEntity);
 		}
 	}
 
-	Vec3 getTextOffset() {
-		return TEXT_OFFSET;
-	}
-
-	public int getCustomVerticalOffset() {
-		return -1;
-	}
-
-	public Material getCanvasSignMaterial(@Nullable DyeColor dyeColor) {
-		return ModAtlases.getCanvasSignMaterial(dyeColor);
+	@OnlyIn(Dist.CLIENT)
+	public static class CanvasSignRenderState extends StandingSignRenderState
+	{
+		@Nullable public DyeColor dye;
 	}
 }
