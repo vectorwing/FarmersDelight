@@ -83,7 +83,7 @@ public class SkilletRenderer implements BlockEntityRenderer<SkilletBlockEntity, 
 		BlockEntityRenderer.super.extractRenderState(skillet, state, partialTicks, cameraPosition, breakProgress);
 		state.direction = skillet.getBlockState().getValue(StoveBlock.FACING);
 
-		ItemStack inventory = skillet.getInventory().getStackInSlot(0);
+		ItemStack inventory = skillet.getInventory().getResource(0).toStack(skillet.getInventory().getAmountAsInt(0));
 		state.contents = new ItemStackRenderState();
 		state.seed = state.contents.isEmpty() ? 187 : Item.getId(inventory.getItem()) + inventory.getDamageValue();;
 		this.itemModelResolver.updateForTopItem(
