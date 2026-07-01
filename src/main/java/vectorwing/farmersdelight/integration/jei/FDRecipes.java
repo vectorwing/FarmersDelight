@@ -1,47 +1,43 @@
 package vectorwing.farmersdelight.integration.jei;
 
 import com.google.common.collect.Lists;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.NonNullList;
+import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RecipesReceivedEvent;
+import net.neoforged.neoforge.event.OnDatapackSyncEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.utility.RecipeUtils;
 
+
 import java.util.List;
 import java.util.Optional;
 
-public class FDRecipes
+@EventBusSubscriber
+public final class FDRecipes
 {
-	// TODO: RecipeAccess isn't the same thing. Maybe you'll have to access the registries directly?
-	private final RecipeAccess recipeManager;
 
-	public FDRecipes() {
-		Minecraft minecraft = Minecraft.getInstance();
-		ClientLevel level = minecraft.level;
+	private static RecipeMap recipeManager = RecipeMap.EMPTY;
 
-		if (level != null) {
-			this.recipeManager = level.recipeAccess();
-		} else {
-			throw new NullPointerException("Minecraft level must not be null.");
-		}
+	public static List<RecipeHolder<CookingPotRecipe>> getCookingPotRecipes() {
+		return getRecipesByType(ModRecipeTypes.COOKING.get());
 	}
 
-	public List<RecipeHolder<CookingPotRecipe>> getCookingPotRecipes() {
-		return recipeManager.getAllRecipesFor(ModRecipeTypes.COOKING.get());
+	public static List<RecipeHolder<CuttingBoardRecipe>> getCuttingBoardRecipes() {
+		return getRecipesByType(ModRecipeTypes.CUTTING.get());
 	}
 
-	public List<RecipeHolder<CuttingBoardRecipe>> getCuttingBoardRecipes() {
-		return recipeManager.getAllRecipesFor(ModRecipeTypes.CUTTING.get());
-	}
-
-	public List<RecipeHolder<CraftingRecipe>> getSpecialCraftingRecipes() {
+	public static List<RecipeHolder<CraftingRecipe>> getSpecialCraftingRecipes() {
 		List<RecipeHolder<CraftingRecipe>> recipes = Lists.newArrayList();
 
 		addValidatedSpecialRecipe(recipes, "wheat_dough_from_water", "fd_dough",
@@ -56,11 +52,38 @@ public class FDRecipes
 		return recipes;
 	}
 
-	public void addValidatedSpecialRecipe(List<RecipeHolder<CraftingRecipe>> recipeList, String recipeId, String group, NonNullList<Ingredient> inputs, ItemLike output) {
-		Optional<RecipeHolder<?>> specialRecipe = recipeManager.byKey(RecipeUtils.FDLocation(recipeId));
+	public static void addValidatedSpecialRecipe(List<RecipeHolder<CraftingRecipe>> recipeList, String recipeId, String group, NonNullList<Ingredient> inputs, ItemLike output) {
+		Optional<RecipeHolder<?>> specialRecipe = Optional.ofNullable(recipeManager.byKey(RecipeUtils.FDKey(recipeId)));
 
 		specialRecipe.ifPresent((recipe) -> {
-			recipeList.add(new RecipeHolder<>(specialRecipe.get().id(), new ShapelessRecipe(group, CraftingBookCategory.MISC, new ItemStack(output.asItem()), inputs)));
+			recipeList.add(new RecipeHolder<>(
+				specialRecipe.get().id(),
+				new ShapelessRecipe(
+					RecipeBuilder.createCraftingCommonInfo(true),
+					new CraftingRecipe.CraftingBookInfo(CraftingBookCategory.MISC, group),
+					ItemStackTemplate.fromNonEmptyStack(new ItemStack(output.asItem())),
+					inputs)
+				)
+			);
 		});
 	}
+
+	public static <I extends RecipeInput, T extends Recipe<I>> List<RecipeHolder<T>> getRecipesByType(RecipeType<T> type) {
+		return recipeManager.byType(type).stream().toList();
+	}
+
+	@SubscribeEvent
+	public static void onReceiveRecipes(RecipesReceivedEvent event) {
+		recipeManager = event.getRecipeMap();
+	}
+
+	@SubscribeEvent
+	public static void onRecipeSend(OnDatapackSyncEvent event) {
+		ModRecipeTypes.RECIPE_TYPES.getEntries()
+			.stream()
+			.map(DeferredHolder::get)
+			.forEach(event::sendRecipes);
+	}
+
+	private FDRecipes() {}
 }

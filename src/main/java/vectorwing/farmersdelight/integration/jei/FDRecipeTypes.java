@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.integration.jei;
 
-import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import vectorwing.farmersdelight.FarmersDelight;
