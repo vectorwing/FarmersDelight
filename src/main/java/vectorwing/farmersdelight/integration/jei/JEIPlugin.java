@@ -42,12 +42,11 @@ public class JEIPlugin implements IModPlugin
 
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
-		FDRecipes modRecipes = new FDRecipes();
-		registration.addRecipes(FDRecipeTypes.COOKING, modRecipes.getCookingPotRecipes());
-		registration.addRecipes(FDRecipeTypes.CUTTING, modRecipes.getCuttingBoardRecipes());
+		registration.addRecipes(FDRecipeTypes.COOKING, FDRecipes.getCookingPotRecipes());
+		registration.addRecipes(FDRecipeTypes.CUTTING, FDRecipes.getCuttingBoardRecipes());
 		registration.addRecipes(FDRecipeTypes.DECOMPOSITION, ImmutableList.of(new DecompositionDummy()));
 
-		registration.addRecipes(RecipeTypes.CRAFTING, modRecipes.getSpecialCraftingRecipes());
+		registration.addRecipes(RecipeTypes.CRAFTING, FDRecipes.getSpecialCraftingRecipes());
 
 		registration.addIngredientInfo(new ItemStack(ModItems.WHEAT_DOUGH.get()), VanillaTypes.ITEM_STACK, TextUtils.JEI("info.dough"));
 		registration.addIngredientInfo(new ItemStack(ModItems.STRAW.get()), VanillaTypes.ITEM_STACK, TextUtils.JEI("info.straw"));
