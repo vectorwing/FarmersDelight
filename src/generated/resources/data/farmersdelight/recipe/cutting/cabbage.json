@@ -1,25 +1,24 @@
 {
-  "type": "farmersdelight:cutting",
-  "ingredients": [
-    {
-      "item": "farmersdelight:cabbage"
-    }
-  ],
-  "result": [
-    {
-      "item": {
-        "count": 2,
-        "id": "farmersdelight:cabbage_leaf"
-      }
-    }
-  ],
-  "tool": [
-    {
-      "type": "farmersdelight:item_ability",
-      "action": "knife_dig"
-    },
-    {
-      "tag": "c:tools/knife"
-    }
-  ]
+    "type":  "farmersdelight:cutting",
+    "ingredients":  [
+                        "farmersdelight:cabbage"
+                    ],
+    "result":  [
+                   {
+                       "item":  {
+                                    "count":  2,
+                                    "id":  "farmersdelight:cabbage_leaf"
+                                }
+                   }
+               ],
+    "tool":  {
+                 "neoforge:ingredient_type":  "neoforge:compound",
+                 "children":  [
+                                  {
+                                      "neoforge:ingredient_type":  "farmersdelight:item_ability",
+                                      "action":  "knife_dig"
+                                  },
+                                  "#c:tools/knife"
+                              ]
+             }
 }

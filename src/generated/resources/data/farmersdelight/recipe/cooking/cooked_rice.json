@@ -1,14 +1,12 @@
 {
-  "type": "farmersdelight:cooking",
-  "cookingtime": 100,
-  "experience": 0.35,
-  "ingredients": [
-    {
-      "tag": "c:crops/rice"
-    }
-  ],
-  "result": {
-    "count": 1,
-    "id": "farmersdelight:cooked_rice"
-  }
+    "type":  "farmersdelight:cooking",
+    "cookingtime":  100,
+    "experience":  0.35,
+    "ingredients":  [
+                        "#c:crops/rice"
+                    ],
+    "result":  {
+                   "count":  1,
+                   "id":  "farmersdelight:cooked_rice"
+               }
 }

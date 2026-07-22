@@ -6,6 +6,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.Containers;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
@@ -14,6 +15,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -36,33 +39,33 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 		super(ModBlockEntityTypes.BASKET.get(), pos, state);
 	}
 
-	@SubscribeEvent
-	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-		event.registerBlockEntity(
-				Capabilities.ItemHandler.BLOCK,
-				ModBlockEntityTypes.BASKET.get(),
-				(be, context) -> new BasketInvWrapper(be)
-		);
+	@Override
+	public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+		if (level != null) {
+			Containers.dropContents(level, pos, this);
+			level.updateNeighbourForOutputSignal(pos, state.getBlock());
+		}
+		super.preRemoveSideEffects(pos, state);
 	}
 
 	@Override
-	protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
-		super.loadAdditional(compound, registries);
+	protected void loadAdditional(ValueInput input) {
+		super.loadAdditional(input);
 		this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-		if (!this.tryLoadLootTable(compound)) {
-			ContainerHelper.loadAllItems(compound, this.items, registries);
+		if (!this.tryLoadLootTable(input)) {
+			ContainerHelper.loadAllItems(input, this.items);
 		}
-		this.transferCooldown = compound.getInt("TransferCooldown");
+		this.transferCooldown = input.getIntOr("TransferCooldown", -1);
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
-		super.saveAdditional(compound, registries);
-		if (!this.trySaveLootTable(compound)) {
-			ContainerHelper.saveAllItems(compound, this.items, registries);
+	public void saveAdditional(ValueOutput output) {
+		super.saveAdditional(output);
+		if (!this.trySaveLootTable(output)) {
+			ContainerHelper.saveAllItems(output, this.items);
 		}
 
-		compound.putInt("TransferCooldown", this.transferCooldown);
+		output.putInt("TransferCooldown", this.transferCooldown);
 	}
 
 	@Override
@@ -122,7 +125,7 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 
 	@Override
 	public void tryTransfer(BooleanSupplier transfer) {
-		if (this.level != null && !this.level.isClientSide) {
+		if (this.level != null && !this.level.isClientSide()) {
 			if (!this.isOnCooldown() && this.getBlockState().getValue(BlockStateProperties.ENABLED)) {
 				boolean flag = false;
 				if (!this.isFull()) {

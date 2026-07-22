@@ -2,64 +2,90 @@ package vectorwing.farmersdelight.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.item.ItemModelResolver;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.*;
+import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import vectorwing.farmersdelight.client.renderer.state.CuttingBoardRenderState;
 import vectorwing.farmersdelight.common.block.CuttingBoardBlock;
 import vectorwing.farmersdelight.common.block.entity.CuttingBoardBlockEntity;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
-import java.util.Random;
-
-public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlockEntity>
+public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlockEntity, CuttingBoardRenderState>
 {
-	private final Random random = new Random();
+    private final ItemModelResolver itemModelResolver;
 
-	public CuttingBoardRenderer(BlockEntityRendererProvider.Context context) {
+	public CuttingBoardRenderer(BlockEntityRendererProvider.Context pContext) {
+		itemModelResolver = pContext.itemModelResolver();
 	}
 
 	@Override
-	public void render(CuttingBoardBlockEntity cuttingBoard, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
-		ItemStack itemStack = cuttingBoard.getStoredItem();
-		if (itemStack.isEmpty()) {
-			return;
-		}
+	public CuttingBoardRenderState createRenderState() {
+		return new CuttingBoardRenderState();
+	}
 
-		Direction direction = cuttingBoard.getBlockState().getValue(CuttingBoardBlock.FACING).getOpposite();
-		int posLong = (int) cuttingBoard.getBlockPos().asLong();
-		int seed = itemStack.isEmpty() ? 187 : Item.getId(itemStack.getItem()) + itemStack.getDamageValue();
-		this.random.setSeed(seed);
+	@Override
+	public void extractRenderState(CuttingBoardBlockEntity cuttingBoardEntity, CuttingBoardRenderState renderState, float partialTick, @NonNull Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
+		BlockEntityRenderer.super.extractRenderState(cuttingBoardEntity, renderState, partialTick, cameraPosition, breakProgress);
 
-		ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-		int itemRenderCount = this.getModelCount(itemStack);
+		renderState.direction = cuttingBoardEntity.getBlockState().getValue(CuttingBoardBlock.FACING).getOpposite();
 
-		for (int i = 0; i < itemRenderCount; i++) {
+		ItemStack boardStack = cuttingBoardEntity.getStoredItem();
+		renderState.boardStack = boardStack.copy();
+
+		int posLong = (int) cuttingBoardEntity.getBlockPos().asLong();
+		int seed = boardStack.isEmpty() ? 187 : Item.getId(boardStack.getItem()) + boardStack.getDamageValue();
+		renderState.random.setSeed(seed);
+
+		renderState.displayItem = new ItemStackRenderState();
+		this.itemModelResolver.updateForTopItem(renderState.displayItem, boardStack, ItemDisplayContext.FIXED, cuttingBoardEntity.getLevel(), null, posLong);
+		renderState.isItemCarvingBoard = cuttingBoardEntity.isItemCarvingBoard();
+	}
+
+    @Override
+    public void submit(CuttingBoardRenderState state, @NonNull PoseStack poseStack, @NonNull SubmitNodeCollector nodeCollector, @NonNull CameraRenderState camera) {
+        Direction direction = state.direction;
+        ItemStack boardStack = state.boardStack;
+
+        int itemRenderCount = this.getModelCount(boardStack);
+
+        for (int i = 0; i < itemRenderCount; i++) {
+            poseStack.pushPose();
+
 			poseStack.pushPose();
 
-			poseStack.pushPose();
-			boolean isBlockItem = itemRenderer.getModel(itemStack, cuttingBoard.getLevel(), null, 0).applyTransform(ItemDisplayContext.FIXED, poseStack, false).isGui3d();
-			poseStack.popPose();
+			boolean isBlockItem = state.displayItem.usesBlockLight();
 
-			float xOffset = itemRenderCount == 1 ? 0 : (this.random.nextFloat() * 2.0F - 1.0F) * 0.15F * 0.5F;
-			float zOffset = itemRenderCount == 1 ? 0 : (this.random.nextFloat() * 2.0F - 1.0F) * 0.15F * 0.5F;
+			float xOffset = itemRenderCount == 1 ? 0 : (state.random.nextFloat() * 2.0F - 1.0F) * 0.15F * 0.5F;
+			float zOffset = itemRenderCount == 1 ? 0 : (state.random.nextFloat() * 2.0F - 1.0F) * 0.15F * 0.5F;
 
-			if (cuttingBoard.isItemCarvingBoard()) {
-				renderItemCarved(poseStack, direction, itemStack);
-			} else if (isBlockItem && !itemStack.is(ModTags.Items.FLAT_ON_CUTTING_BOARD)) {
+			if (state.isItemCarvingBoard) {
+				renderItemCarved(poseStack, direction, boardStack);
+			} else if (isBlockItem && !boardStack.is(ModTags.Items.FLAT_ON_CUTTING_BOARD)) {
 				renderBlock(poseStack, direction, xOffset, i, zOffset);
 			} else {
 				renderItemLayingDown(poseStack, direction, xOffset, i, zOffset);
 			}
 
-			Minecraft.getInstance().getItemRenderer().renderStatic(itemStack, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, buffer, cuttingBoard.getLevel(), posLong);
+
+			state.displayItem.submit(poseStack, nodeCollector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
 			poseStack.popPose();
-		}
-	}
+
+
+            poseStack.popPose();
+        }
+    }
 
 	public void renderItemLayingDown(PoseStack matrixStackIn, Direction direction, float xOffset, int yIndex, float zOffset) {
 		// Center item above the cutting board
@@ -99,7 +125,7 @@ public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlo
 		// Rotate item to be carved on the surface, A little less so for hoes and pickaxes.
 		Item toolItem = itemStack.getItem();
 		float poseAngle;
-		if (toolItem instanceof PickaxeItem || toolItem instanceof HoeItem) {
+		if (itemStack.is(ItemTags.PICKAXES)|| toolItem instanceof HoeItem) {
 			poseAngle = 225.0F;
 		} else if (toolItem instanceof TridentItem) {
 			poseAngle = 135.0F;
@@ -122,3 +148,4 @@ public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlo
 		return modelCount;
 	}
 }
+

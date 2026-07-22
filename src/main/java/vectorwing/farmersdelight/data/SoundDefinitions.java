@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.data;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -60,7 +60,7 @@ public class SoundDefinitions extends SoundDefinitionsProvider
 			definition.subtitle(subtitle);
 		}
 		for (int i = 1; i <= numberOfSounds; i++) {
-			definition.with(SoundDefinition.Sound.sound(ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, baseSoundDirectory + (numberOfSounds > 1 ? i : "")), SoundDefinition.SoundType.SOUND));
+			definition.with(SoundDefinition.Sound.sound(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, baseSoundDirectory + (numberOfSounds > 1 ? i : "")), SoundDefinition.SoundType.SOUND));
 		}
 		this.add(event, definition);
 	}
@@ -78,3 +78,5 @@ public class SoundDefinitions extends SoundDefinitionsProvider
 				.with(SoundDefinition.Sound.sound(referencedSound.getLocation(), SoundDefinition.SoundType.EVENT)));
 	}
 }
+
+

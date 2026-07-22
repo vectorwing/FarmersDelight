@@ -1,31 +1,30 @@
 {
-  "type": "farmersdelight:cutting",
-  "ingredients": [
-    {
-      "item": "minecraft:salmon"
-    }
-  ],
-  "result": [
-    {
-      "item": {
-        "count": 2,
-        "id": "farmersdelight:salmon_slice"
-      }
-    },
-    {
-      "item": {
-        "count": 1,
-        "id": "minecraft:bone_meal"
-      }
-    }
-  ],
-  "tool": [
-    {
-      "type": "farmersdelight:item_ability",
-      "action": "knife_dig"
-    },
-    {
-      "tag": "c:tools/knife"
-    }
-  ]
+    "type":  "farmersdelight:cutting",
+    "ingredients":  [
+                        "minecraft:salmon"
+                    ],
+    "result":  [
+                   {
+                       "item":  {
+                                    "count":  2,
+                                    "id":  "farmersdelight:salmon_slice"
+                                }
+                   },
+                   {
+                       "item":  {
+                                    "count":  1,
+                                    "id":  "minecraft:bone_meal"
+                                }
+                   }
+               ],
+    "tool":  {
+                 "neoforge:ingredient_type":  "neoforge:compound",
+                 "children":  [
+                                  {
+                                      "neoforge:ingredient_type":  "farmersdelight:item_ability",
+                                      "action":  "knife_dig"
+                                  },
+                                  "#c:tools/knife"
+                              ]
+             }
 }

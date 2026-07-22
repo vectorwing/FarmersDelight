@@ -1,20 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "equipment",
-  "key": {
-    "m": {
-      "item": "minecraft:gold_ingot"
-    },
-    "s": {
-      "item": "minecraft:stick"
-    }
-  },
-  "pattern": [
-    "m",
-    "s"
-  ],
-  "result": {
-    "count": 1,
-    "id": "farmersdelight:golden_knife"
-  }
+    "type":  "minecraft:crafting_shaped",
+    "category":  "equipment",
+    "key":  {
+                "m":  "minecraft:gold_ingot",
+                "s":  "minecraft:stick"
+            },
+    "pattern":  [
+                    "m",
+                    "s"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "farmersdelight:golden_knife"
+               }
 }

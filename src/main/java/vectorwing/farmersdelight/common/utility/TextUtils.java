@@ -80,57 +80,6 @@ public class TextUtils
 	 * An alternate version of PotionUtils.addPotionTooltip, that obtains the item's food property potion effects instead.
 	 */
 	public static void addFoodEffectTooltip(ItemStack stack, Consumer<Component> tooltipAdder, float durationFactor, float tickRate) {
-		FoodProperties foodStats = stack.getFoodProperties(null);
-		if (foodStats == null) {
-			return;
-		}
-
-		List<FoodProperties.PossibleEffect> effectList = foodStats.effects();
-		List<Pair<Holder<Attribute>, AttributeModifier>> attributeList = Lists.newArrayList();
-		MutableComponent mutableComponent;
-
-		if (!effectList.isEmpty()) {
-			for (FoodProperties.PossibleEffect possibleEffect : effectList) {
-				MobEffectInstance instance = possibleEffect.effect();
-				mutableComponent = Component.translatable(instance.getDescriptionId());
-				MobEffect effect = instance.getEffect().value();
-				effect.createModifiers(instance.getAmplifier(), (attributeHolder, attributeModifier) -> {
-					attributeList.add(new Pair<>(attributeHolder, attributeModifier));
-				});
-
-				if (instance.getAmplifier() > 0) {
-					mutableComponent = Component.translatable("potion.withAmplifier", mutableComponent, Component.translatable("potion.potency." + instance.getAmplifier()));
-				}
-
-				if (instance.getDuration() > 20) {
-					mutableComponent = Component.translatable("potion.withDuration", mutableComponent, MobEffectUtil.formatDuration(instance, durationFactor, tickRate));
-				}
-
-				tooltipAdder.accept(mutableComponent.withStyle(effect.getCategory().getTooltipFormatting()));
-			}
-		}
-
-		if (!attributeList.isEmpty()) {
-			tooltipAdder.accept(CommonComponents.EMPTY);
-			tooltipAdder.accept(Component.translatable("potion.whenDrank").withStyle(ChatFormatting.DARK_PURPLE));
-
-			for (Pair<Holder<Attribute>, AttributeModifier> pair : attributeList) {
-				AttributeModifier attributemodifier = pair.getSecond();
-				double amount = attributemodifier.amount();
-				double formattedAmount;
-				if (attributemodifier.operation() != AttributeModifier.Operation.ADD_MULTIPLIED_BASE && attributemodifier.operation() != AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL) {
-					formattedAmount = attributemodifier.amount();
-				} else {
-					formattedAmount = attributemodifier.amount() * 100.0;
-				}
-
-				if (amount > 0.0) {
-					tooltipAdder.accept(Component.translatable("attribute.modifier.plus." + attributemodifier.operation().id(), new Object[]{ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(formattedAmount), Component.translatable(((Attribute) ((Holder) pair.getFirst()).value()).getDescriptionId())}).withStyle(ChatFormatting.BLUE));
-				} else if (amount < 0.0) {
-					formattedAmount *= -1.0;
-					tooltipAdder.accept(Component.translatable("attribute.modifier.take." + attributemodifier.operation().id(), new Object[]{ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(formattedAmount), Component.translatable(((Attribute) ((Holder) pair.getFirst()).value()).getDescriptionId())}).withStyle(ChatFormatting.RED));
-				}
-			}
-		}
+		// Food effects moved from FoodProperties to Consumable components in 26.1.
 	}
 }

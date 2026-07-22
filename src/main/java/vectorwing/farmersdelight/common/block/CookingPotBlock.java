@@ -9,7 +9,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -17,6 +17,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -26,7 +27,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -51,7 +52,7 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 {
 	public static final MapCodec<CookingPotBlock> CODEC = simpleCodec(CookingPotBlock::new);
 
-	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+	public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final EnumProperty<CookingPotSupport> SUPPORT = EnumProperty.create("support", CookingPotSupport.class);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -69,12 +70,12 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 	}
 
 	@Override
-	public ItemInteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+	public InteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		if (heldStack.isEmpty() && player.isShiftKeyDown()) {
 			level.setBlockAndUpdate(pos, state.setValue(SUPPORT, state.getValue(SUPPORT).equals(CookingPotSupport.HANDLE)
 					? getTrayState(level, pos) : CookingPotSupport.HANDLE));
 			level.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundSource.BLOCKS, 0.7F, 1.0F);
-		} else if (!level.isClientSide) {
+		} else if (!level.isClientSide()) {
 			BlockEntity tileEntity = level.getBlockEntity(pos);
 			if (tileEntity instanceof CookingPotBlockEntity cookingPot) {
 				ItemStack servingStack = cookingPot.useHeldItemOnMeal(heldStack);
@@ -87,9 +88,9 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 					player.openMenu(cookingPot, pos);
 				}
 			}
-			return ItemInteractionResult.SUCCESS;
+			return InteractionResult.SUCCESS;
 		}
-		return ItemInteractionResult.SUCCESS;
+		return InteractionResult.SUCCESS;
 	}
 
 	@Override
@@ -124,9 +125,9 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource random) {
 		if (state.getValue(WATERLOGGED)) {
-			level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+			ticks.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
 		if (facing.getAxis().equals(Direction.Axis.Y) && !state.getValue(SUPPORT).equals(CookingPotSupport.HANDLE)) {
 			return state.setValue(SUPPORT, getTrayState(level, currentPos));
@@ -134,7 +135,7 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 		return state;
 	}
 
-	private CookingPotSupport getTrayState(LevelAccessor level, BlockPos pos) {
+	private CookingPotSupport getTrayState(LevelReader level, BlockPos pos) {
 		if (level.getBlockState(pos.below()).is(ModTags.Blocks.TRAY_HEAT_SOURCES)) {
 			return CookingPotSupport.TRAY;
 		}
@@ -142,8 +143,8 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
-		ItemStack stack = super.getCloneItemStack(level, pos, state);
+	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
+		ItemStack stack = super.getCloneItemStack(level, pos, state, includeData);
 
 		Optional<CookingPotBlockEntity> cookingPot = level.getBlockEntity(pos, ModBlockEntityTypes.COOKING_POT.get());
 		if (cookingPot.isPresent()) {
@@ -151,19 +152,6 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 		}
 
 		return stack;
-	}
-
-	@Override
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (!state.is(newState.getBlock())) {
-			if (level.getBlockEntity(pos) instanceof CookingPotBlockEntity cookingPot) {
-				Containers.dropContents(level, pos, cookingPot.getDroppableInventory());
-				cookingPot.getUsedRecipesAndPopExperience(level, Vec3.atCenterOf(pos));
-				level.updateNeighbourForOutputSignal(pos, this);
-			}
-
-			super.onRemove(state, level, pos, newState, isMoving);
-		}
 	}
 
 	@Override
@@ -193,7 +181,7 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction) {
 		if (level.getBlockEntity(pos) instanceof CookingPotBlockEntity cookingPot) {
 			ItemStackHandler inventory = cookingPot.getInventory();
 			return MathUtils.calcRedstoneFromItemHandler(inventory);
@@ -214,7 +202,7 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntity) {
-		if (level.isClientSide) {
+		if (level.isClientSide()) {
 			return createTickerHelper(blockEntity, ModBlockEntityTypes.COOKING_POT.get(), CookingPotBlockEntity::animationTick);
 		}
 		return createTickerHelper(blockEntity, ModBlockEntityTypes.COOKING_POT.get(), CookingPotBlockEntity::cookingTick);

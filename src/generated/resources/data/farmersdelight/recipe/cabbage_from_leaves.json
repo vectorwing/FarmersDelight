@@ -1,17 +1,13 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "group": "fd_cabbage",
-  "ingredients": [
-    {
-      "item": "farmersdelight:cabbage_leaf"
-    },
-    {
-      "item": "farmersdelight:cabbage_leaf"
-    }
-  ],
-  "result": {
-    "count": 1,
-    "id": "farmersdelight:cabbage"
-  }
+    "type":  "minecraft:crafting_shapeless",
+    "category":  "misc",
+    "group":  "fd_cabbage",
+    "ingredients":  [
+                        "farmersdelight:cabbage_leaf",
+                        "farmersdelight:cabbage_leaf"
+                    ],
+    "result":  {
+                   "count":  1,
+                   "id":  "farmersdelight:cabbage"
+               }
 }

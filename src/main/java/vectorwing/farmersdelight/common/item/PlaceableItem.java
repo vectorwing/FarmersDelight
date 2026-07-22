@@ -18,7 +18,7 @@ public class PlaceableItem extends BlockItem
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
-		tooltip.add(TextUtils.PLACEABLE);
+	public void appendHoverText(ItemStack stack, TooltipContext context, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> tooltip, TooltipFlag isAdvanced) {
+		tooltip.accept(TextUtils.PLACEABLE);
 	}
 }

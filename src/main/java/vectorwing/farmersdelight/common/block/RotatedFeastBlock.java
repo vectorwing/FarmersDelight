@@ -6,7 +6,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import vectorwing.farmersdelight.common.utility.ShapeUtils;
 
 import java.util.function.Supplier;
@@ -34,3 +34,5 @@ public class RotatedFeastBlock extends FeastBlock
 		return combinedShapes[state.getValue(SERVINGS)][state.getValue(FACING).get2DDataValue()];
 	}
 }
+
+

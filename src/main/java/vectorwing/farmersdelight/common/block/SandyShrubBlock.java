@@ -29,8 +29,9 @@ public class SandyShrubBlock extends BushBlock implements IShearable, Bonemealab
 	}
 
 	@Override
-	protected MapCodec<? extends BushBlock> codec() {
-		return CODEC;
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public MapCodec<BushBlock> codec() {
+		return (MapCodec) CODEC;
 	}
 
 	@Override
@@ -55,7 +56,7 @@ public class SandyShrubBlock extends BushBlock implements IShearable, Bonemealab
 
 	@Override
 	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-		level.registryAccess().registry(Registries.CONFIGURED_FEATURE).flatMap((value) -> value.getHolder(WildCropGeneration.FEATURE_PATCH_SANDY_SHRUB)).ifPresent((value) -> {
+		level.registryAccess().lookup(Registries.PLACED_FEATURE).flatMap((value) -> value.get(WildCropGeneration.PATCH_SANDY_SHRUB)).ifPresent((value) -> {
 			value.value().place(level, level.getChunkSource().getGenerator(), random, pos.above());
 		});
 	}

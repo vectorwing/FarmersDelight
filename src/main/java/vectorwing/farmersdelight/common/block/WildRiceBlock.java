@@ -68,11 +68,11 @@ public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterlogged
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-		BlockState currentState = super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+	public BlockState updateShape(BlockState state, net.minecraft.world.level.LevelReader level, net.minecraft.world.level.ScheduledTickAccess ticks, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, net.minecraft.util.RandomSource random) {
+		BlockState currentState = super.updateShape(state, level, ticks, currentPos, facing, facingPos, facingState, random);
 		DoubleBlockHalf half = state.getValue(HALF);
 		if (!currentState.isAir()) {
-			level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+			ticks.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
 		if (facing.getAxis() != Direction.Axis.Y || half == DoubleBlockHalf.LOWER != (facing == Direction.UP) || facingState.getBlock() == this && facingState.getValue(HALF) != half) {
 			return half == DoubleBlockHalf.LOWER && facing == Direction.DOWN && !state.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : state;
@@ -86,7 +86,7 @@ public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterlogged
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		BlockPos pos = context.getClickedPos();
 		FluidState fluid = context.getLevel().getFluidState(context.getClickedPos());
-		return pos.getY() < context.getLevel().getMaxBuildHeight() - 1
+		return pos.getY() < context.getLevel().getMaxY() - 1
 				&& fluid.is(FluidTags.WATER)
 				&& fluid.getAmount() == 8
 				&& context.getLevel().getBlockState(pos.above()).isAir()
@@ -94,7 +94,7 @@ public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterlogged
 	}
 
 	@Override
-	public boolean canPlaceLiquid(@Nullable Player player, BlockGetter level, BlockPos pos, BlockState state, Fluid fluid) {
+	public boolean canPlaceLiquid(@Nullable LivingEntity player, BlockGetter level, BlockPos pos, BlockState state, Fluid fluid) {
 		return state.getValue(HALF) == DoubleBlockHalf.LOWER;
 	}
 
@@ -120,3 +120,4 @@ public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterlogged
 		popResource(level, pos, new ItemStack(this));
 	}
 }
+

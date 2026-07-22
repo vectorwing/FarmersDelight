@@ -1,24 +1,18 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "-": {
-      "item": "minecraft:stick"
-    },
-    "i": {
-      "item": "minecraft:ice"
-    },
-    "m": {
-      "item": "minecraft:melon_slice"
-    }
-  },
-  "pattern": [
-    " mm",
-    "imm",
-    "-i "
-  ],
-  "result": {
-    "count": 1,
-    "id": "farmersdelight:melon_popsicle"
-  }
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "key":  {
+                "-":  "minecraft:stick",
+                "i":  "minecraft:ice",
+                "m":  "minecraft:melon_slice"
+            },
+    "pattern":  [
+                    " mm",
+                    "imm",
+                    "-i "
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "farmersdelight:melon_popsicle"
+               }
 }

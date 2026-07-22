@@ -13,6 +13,10 @@ import vectorwing.farmersdelight.common.registry.ModBiomeModifiers;
 
 import java.util.Optional;
 
+/**
+ * Deprecated: Look at {@link vectorwing.farmersdelight.common.registry.ModBiomeModifiers} instead.
+ */
+@Deprecated
 public record AddFeaturesByFilterBiomeModifier(
 		HolderSet<Biome> allowedBiomes,
 		Optional<HolderSet<Biome>> deniedBiomes,

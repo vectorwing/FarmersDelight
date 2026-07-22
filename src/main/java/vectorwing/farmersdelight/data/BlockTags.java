@@ -2,7 +2,7 @@ package vectorwing.farmersdelight.data;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
@@ -304,8 +304,8 @@ public class BlockTags extends BlockTagsProvider
 			.add(ModBlocks.BROWN_MUSHROOM_COLONY.get())
 			.add(ModBlocks.RED_MUSHROOM_COLONY.get());
 		tag(ModTags.Blocks.ROPES).add(ModBlocks.ROPE.get())
-			.addOptional(ResourceLocation.parse("quark:rope"))
-			.addOptional(ResourceLocation.parse("supplementaries:rope"));
+			.addOptional(Identifier.parse("quark:rope"))
+			.addOptional(Identifier.parse("supplementaries:rope"));
 		tag(ModTags.Blocks.TRAY_HEAT_SOURCES).add(
 				Blocks.LAVA)
 			.addTag(net.minecraft.tags.BlockTags.CAMPFIRES)
@@ -317,7 +317,7 @@ public class BlockTags extends BlockTagsProvider
 			.addTag(ModTags.Blocks.TRAY_HEAT_SOURCES);
 		tag(ModTags.Blocks.HEAT_CONDUCTORS).add(
 				Blocks.HOPPER)
-			.addOptional(ResourceLocation.parse("create:chute"));
+			.addOptional(Identifier.parse("create:chute"));
 		tag(ModTags.Blocks.COMPOST_ACTIVATORS).add(
 				Blocks.BROWN_MUSHROOM,
 				Blocks.RED_MUSHROOM,
@@ -406,3 +406,5 @@ public class BlockTags extends BlockTagsProvider
 			ModBlocks.ONION_CROP.get());
 	}
 }
+
+

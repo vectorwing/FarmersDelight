@@ -14,14 +14,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.level.block.FarmlandBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.CommonHooks;
-import net.neoforged.neoforge.common.util.TriState;
+import net.minecraft.util.TriState;
 import net.neoforged.neoforge.event.EventHooks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
@@ -48,8 +48,9 @@ public class BuddingBushBlock extends BushBlock
 	}
 
 	@Override
-	protected MapCodec<? extends BushBlock> codec() {
-		return CODEC;
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public MapCodec<BushBlock> codec() {
+		return (MapCodec) CODEC;
 	}
 
 	@Override
@@ -59,7 +60,7 @@ public class BuddingBushBlock extends BushBlock
 
 	@Override
 	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
-		return state.getBlock() instanceof FarmBlock;
+		return state.getBlock() instanceof FarmlandBlock;
 	}
 
 	public IntegerProperty getAgeProperty() {
@@ -174,12 +175,12 @@ public class BuddingBushBlock extends BushBlock
 	}
 
 	@Override
-	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-		if (entity instanceof Ravager && EventHooks.canEntityGrief(level, entity)) {
+	protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, net.minecraft.world.entity.InsideBlockEffectApplier effectApplier, boolean moving) {
+		if (entity instanceof Ravager && level instanceof net.minecraft.server.level.ServerLevel serverLevel && EventHooks.canEntityGrief(serverLevel, entity)) {
 			level.destroyBlock(pos, true, entity);
 		}
 
-		super.entityInside(state, level, pos, entity);
+		super.entityInside(state, level, pos, entity, effectApplier, moving);
 	}
 
 	protected ItemLike getBaseSeedId() {
@@ -187,7 +188,7 @@ public class BuddingBushBlock extends BushBlock
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
 		return new ItemStack(getBaseSeedId());
 	}
 

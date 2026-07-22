@@ -3,6 +3,11 @@ package vectorwing.farmersdelight.client.recipebook;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import net.minecraft.util.StringRepresentable;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.util.ByIdMap;
+import java.util.function.IntFunction;
 
 import java.util.EnumSet;
 import net.minecraft.util.StringRepresentable;
@@ -21,6 +26,8 @@ public enum CookingPotRecipeBookTab implements StringRepresentable
 		}
 		return DataResult.success(tab);
 	}, tab -> DataResult.success(tab.toString()));
+	public static final IntFunction<CookingPotRecipeBookTab> BY_ID = ByIdMap.continuous(CookingPotRecipeBookTab::ordinal, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
+	public static final StreamCodec<ByteBuf, CookingPotRecipeBookTab> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, CookingPotRecipeBookTab::ordinal);
 
 	public final String name;
 

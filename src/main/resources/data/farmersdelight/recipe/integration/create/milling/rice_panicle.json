@@ -1,25 +1,23 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "create"
-    }
-  ],
-  "type": "create:milling",
-  "ingredients": [
-    {
-      "item": "farmersdelight:rice_panicle"
-    }
-  ],
-  "results": [
-    {
-      "id": "farmersdelight:rice",
-      "count": 1
-    },
-    {
-      "id": "farmersdelight:straw",
-      "count": 1
-    }
-  ],
-  "processing_time": 50
+    "neoforge:conditions":  [
+                                {
+                                    "type":  "neoforge:mod_loaded",
+                                    "modid":  "create"
+                                }
+                            ],
+    "type":  "create:milling",
+    "ingredients":  [
+                        "farmersdelight:rice_panicle"
+                    ],
+    "results":  [
+                    {
+                        "id":  "farmersdelight:rice",
+                        "count":  1
+                    },
+                    {
+                        "id":  "farmersdelight:straw",
+                        "count":  1
+                    }
+                ],
+    "processing_time":  50
 }

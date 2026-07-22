@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.common.effect;
 
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffects;
@@ -21,7 +22,7 @@ public class ComfortEffect extends MobEffect
 	}
 
 	@Override
-	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+	public boolean applyEffectTick(ServerLevel level, LivingEntity entity, int amplifier)  {
 		if (entity.hasEffect(MobEffects.REGENERATION)) {
 			return true;
 		}
@@ -41,3 +42,5 @@ public class ComfortEffect extends MobEffect
 		return duration % 80 == 0;
 	}
 }
+
+

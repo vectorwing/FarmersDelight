@@ -1,23 +1,21 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "farmersdelight:vanilla_crates_enabled"
-    }
-  ],
-  "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "key": {
-    "#": {
-      "item": "minecraft:potato"
-    }
-  },
-  "pattern": [
-    "###",
-    "###",
-    "###"
-  ],
-  "result": {
-    "count": 1,
-    "id": "farmersdelight:potato_crate"
-  }
+    "neoforge:conditions":  [
+                                {
+                                    "type":  "farmersdelight:vanilla_crates_enabled"
+                                }
+                            ],
+    "type":  "minecraft:crafting_shaped",
+    "category":  "building",
+    "key":  {
+                "#":  "minecraft:potato"
+            },
+    "pattern":  [
+                    "###",
+                    "###",
+                    "###"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "farmersdelight:potato_crate"
+               }
 }

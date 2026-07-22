@@ -1,31 +1,29 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "create"
-    }
-  ],
-  "type": "create:milling",
-  "ingredients": [
-    {
-      "item": "farmersdelight:wild_onions"
-    }
-  ],
-  "results": [
-    {
-      "id": "minecraft:magenta_dye",
-      "count": 1
-    },
-    {
-      "id": "minecraft:magenta_dye",
-      "count": 3,
-      "chance": 0.2
-    },
-    {
-      "id": "minecraft:lime_dye",
-      "count": 1,
-      "chance": 0.1
-    }
-  ],
-  "processing_time": 50
+    "neoforge:conditions":  [
+                                {
+                                    "type":  "neoforge:mod_loaded",
+                                    "modid":  "create"
+                                }
+                            ],
+    "type":  "create:milling",
+    "ingredients":  [
+                        "farmersdelight:wild_onions"
+                    ],
+    "results":  [
+                    {
+                        "id":  "minecraft:magenta_dye",
+                        "count":  1
+                    },
+                    {
+                        "id":  "minecraft:magenta_dye",
+                        "count":  3,
+                        "chance":  0.2
+                    },
+                    {
+                        "id":  "minecraft:lime_dye",
+                        "count":  1,
+                        "chance":  0.1
+                    }
+                ],
+    "processing_time":  50
 }

@@ -8,46 +8,31 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import vectorwing.farmersdelight.common.block.WildRiceBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
-public class WildRiceFeature extends Feature<RandomPatchConfiguration>
-{
-	public WildRiceFeature(Codec<RandomPatchConfiguration> configFactoryIn) {
-		super(configFactoryIn);
+public class WildRiceFeature extends Feature<NoneFeatureConfiguration> {
+	public WildRiceFeature(Codec<NoneFeatureConfiguration> codec) {
+		super(codec);
 	}
 
 	@Override
-	public boolean place(FeaturePlaceContext<RandomPatchConfiguration> context) {
-		WorldGenLevel level = context.level();
-		BlockPos origin = context.origin();
-		RandomPatchConfiguration config = context.config();
-		RandomSource random = context.random();
+	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
+        WorldGenLevel level = context.level();
+        BlockPos origin = context.origin();
 
-		BlockPos blockpos = level.getHeightmapPos(Heightmap.Types.OCEAN_FLOOR_WG, origin);
-
-		int i = 0;
-		BlockPos.MutableBlockPos blockpos$mutable = new BlockPos.MutableBlockPos();
-
-		for (int j = 0; j < config.tries(); ++j) {
-			blockpos$mutable.set(blockpos).move(
-					random.nextInt(config.xzSpread() + 1) - random.nextInt(config.xzSpread() + 1),
-					random.nextInt(config.ySpread() + 1) - random.nextInt(config.ySpread() + 1),
-					random.nextInt(config.xzSpread() + 1) - random.nextInt(config.xzSpread() + 1));
-
-			if (level.getBlockState(blockpos$mutable).getBlock() == Blocks.WATER && level.getBlockState(blockpos$mutable.above()).getBlock() == Blocks.AIR) {
-				BlockState bottomRiceState = ModBlocks.WILD_RICE.get().defaultBlockState().setValue(WildRiceBlock.HALF, DoubleBlockHalf.LOWER);
-				if (bottomRiceState.canSurvive(level, blockpos$mutable)) {
-					DoublePlantBlock.placeAt(level, bottomRiceState, blockpos$mutable, 2);
-					++i;
-				}
-			}
-		}
-
-		return i > 0;
+        if (level.getBlockState(origin).getBlock() == Blocks.WATER && level.getBlockState(origin.above()).getBlock() == Blocks.AIR) {
+            BlockState bottomRiceState = ModBlocks.WILD_RICE.get().defaultBlockState().setValue(WildRiceBlock.HALF, DoubleBlockHalf.LOWER);
+            if (bottomRiceState.canSurvive(level, origin)) {
+                DoublePlantBlock.placeAt(level, bottomRiceState, origin, 2);
+                return true;
+            }
+        }
+        return false;
 	}
 }
+
+

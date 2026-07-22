@@ -1,23 +1,15 @@
 {
-  "type": "farmersdelight:cooking",
-  "experience": 1.0,
-  "ingredients": [
-    {
-      "tag": "c:drinks/milk"
-    },
-    {
-      "item": "minecraft:sugar"
-    },
-    {
-      "item": "minecraft:cocoa_beans"
-    },
-    {
-      "item": "minecraft:cocoa_beans"
-    }
-  ],
-  "recipe_book_tab": "drinks",
-  "result": {
-    "count": 1,
-    "id": "farmersdelight:hot_cocoa"
-  }
+    "type":  "farmersdelight:cooking",
+    "experience":  1.0,
+    "ingredients":  [
+                        "#c:drinks/milk",
+                        "minecraft:sugar",
+                        "minecraft:cocoa_beans",
+                        "minecraft:cocoa_beans"
+                    ],
+    "recipe_book_tab":  "drinks",
+    "result":  {
+                   "count":  1,
+                   "id":  "farmersdelight:hot_cocoa"
+               }
 }

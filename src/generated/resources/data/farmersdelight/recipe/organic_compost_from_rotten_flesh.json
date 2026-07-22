@@ -1,38 +1,20 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "building",
-  "group": "fd_organic_compost",
-  "ingredients": [
-    {
-      "item": "minecraft:dirt"
-    },
-    {
-      "item": "minecraft:rotten_flesh"
-    },
-    {
-      "item": "minecraft:rotten_flesh"
-    },
-    {
-      "item": "farmersdelight:straw"
-    },
-    {
-      "item": "farmersdelight:straw"
-    },
-    {
-      "item": "minecraft:bone_meal"
-    },
-    {
-      "item": "minecraft:bone_meal"
-    },
-    {
-      "item": "minecraft:bone_meal"
-    },
-    {
-      "item": "minecraft:bone_meal"
-    }
-  ],
-  "result": {
-    "count": 1,
-    "id": "farmersdelight:organic_compost"
-  }
+    "type":  "minecraft:crafting_shapeless",
+    "category":  "building",
+    "group":  "fd_organic_compost",
+    "ingredients":  [
+                        "minecraft:dirt",
+                        "minecraft:rotten_flesh",
+                        "minecraft:rotten_flesh",
+                        "farmersdelight:straw",
+                        "farmersdelight:straw",
+                        "minecraft:bone_meal",
+                        "minecraft:bone_meal",
+                        "minecraft:bone_meal",
+                        "minecraft:bone_meal"
+                    ],
+    "result":  {
+                   "count":  1,
+                   "id":  "farmersdelight:organic_compost"
+               }
 }

@@ -1,32 +1,20 @@
 {
-  "type": "farmersdelight:cooking",
-  "experience": 1.0,
-  "ingredients": [
-    {
-      "tag": "c:crops/carrot"
-    },
-    {
-      "tag": "c:mushrooms"
-    },
-    {
-      "tag": "c:foods/pasta"
-    },
-    {
-      "tag": "c:foods/leafy_green"
-    },
-    {
-      "type": "neoforge:difference",
-      "base": {
-        "tag": "c:foods/vegetable"
-      },
-      "subtracted": {
-        "item": "minecraft:melon_slice"
-      }
-    }
-  ],
-  "recipe_book_tab": "meals",
-  "result": {
-    "count": 1,
-    "id": "farmersdelight:vegetable_noodles"
-  }
+    "type":  "farmersdelight:cooking",
+    "experience":  1.0,
+    "ingredients":  [
+                        "#c:crops/carrot",
+                        "#c:mushrooms",
+                        "#c:foods/pasta",
+                        "#c:foods/leafy_green",
+                        {
+                            "neoforge:ingredient_type":  "neoforge:difference",
+                            "base":  "#c:foods/vegetable",
+                            "subtracted":  "minecraft:melon_slice"
+                        }
+                    ],
+    "recipe_book_tab":  "meals",
+    "result":  {
+                   "count":  1,
+                   "id":  "farmersdelight:vegetable_noodles"
+               }
 }

@@ -1,18 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "group": "fd_canvas",
-  "key": {
-    "#": {
-      "item": "farmersdelight:straw"
-    }
-  },
-  "pattern": [
-    "##",
-    "##"
-  ],
-  "result": {
-    "count": 1,
-    "id": "farmersdelight:canvas"
-  }
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "group":  "fd_canvas",
+    "key":  {
+                "#":  "farmersdelight:straw"
+            },
+    "pattern":  [
+                    "##",
+                    "##"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "farmersdelight:canvas"
+               }
 }

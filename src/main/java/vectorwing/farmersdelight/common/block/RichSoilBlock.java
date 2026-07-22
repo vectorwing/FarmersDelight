@@ -6,14 +6,16 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
-import net.neoforged.neoforge.common.util.TriState;
+import net.minecraft.util.TriState;
 import net.neoforged.neoforge.network.PacketDistributor;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.network.payload.RichSoilBoostParticlesPayload;
@@ -21,6 +23,7 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.Nullable;
+import java.util.function.BiConsumer;
 
 public class RichSoilBlock extends Block
 {
@@ -64,7 +67,7 @@ public class RichSoilBlock extends Block
 		}
 		if (plantState.getBlock() instanceof BonemealableBlock growable) {
 			if (growable.isValidBonemealTarget(level, plantPos, plantState) && CommonHooks.canCropGrow(level, plantPos, plantState, true)) {
-				growable.performBonemeal(level, level.random, plantPos, plantState);
+				growable.performBonemeal(level, level.getRandom(), plantPos, plantState);
 				PacketDistributor.sendToPlayersTrackingChunk(level, level.getChunkAt(plantPos).getPos(), new RichSoilBoostParticlesPayload(plantPos));
 				CommonHooks.fireCropGrowPost(level, plantPos, plantState);
 				return true;
@@ -93,6 +96,12 @@ public class RichSoilBlock extends Block
 			return ModBlocks.RICH_SOIL_FARMLAND.get().defaultBlockState();
 		}
 		return null;
+	}
+
+	@Override
+	public boolean onTreeGrow(BlockState state, WorldGenLevel level, BiConsumer<BlockPos, BlockState> blockSetter,
+			RandomSource random, BlockPos pos, TreeConfiguration config) {
+		return true;
 	}
 
 

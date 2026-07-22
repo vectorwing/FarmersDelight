@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.data;
 
-import net.minecraft.advancements.critereon.*;
+import net.minecraft.advancements.criterion.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -185,3 +185,5 @@ public class LootModifiers extends GlobalLootModifierProvider
 		);
 	}
 }
+
+

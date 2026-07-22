@@ -14,17 +14,17 @@ public class ModBlockEntityTypes
 	public static final DeferredRegister<BlockEntityType<?>> TILES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, FarmersDelight.MODID);
 
 	public static final Supplier<BlockEntityType<StoveBlockEntity>> STOVE = TILES.register("stove",
-			() -> BlockEntityType.Builder.of(StoveBlockEntity::new, ModBlocks.STOVE.get()).build(null));
+			() -> new BlockEntityType<>(StoveBlockEntity::new, ModBlocks.STOVE.get()));
 	public static final Supplier<BlockEntityType<CookingPotBlockEntity>> COOKING_POT = TILES.register("cooking_pot",
-			() -> BlockEntityType.Builder.of(CookingPotBlockEntity::new, ModBlocks.COOKING_POT.get()).build(null));
+			() -> new BlockEntityType<>(CookingPotBlockEntity::new, ModBlocks.COOKING_POT.get()));
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BasketBlockEntity>> BASKET = TILES.register("basket",
-			() -> BlockEntityType.Builder.of(BasketBlockEntity::new, ModBlocks.WOODEN_BASKET.get(), ModBlocks.BAMBOO_BASKET.get()).build(null));
+			() -> new BlockEntityType<>(BasketBlockEntity::new, ModBlocks.WOODEN_BASKET.get(), ModBlocks.BAMBOO_BASKET.get()));
 	public static final Supplier<BlockEntityType<CuttingBoardBlockEntity>> CUTTING_BOARD = TILES.register("cutting_board",
-			() -> BlockEntityType.Builder.of(CuttingBoardBlockEntity::new, ModBlocks.CUTTING_BOARD.get()).build(null));
+			() -> new BlockEntityType<>(CuttingBoardBlockEntity::new, ModBlocks.CUTTING_BOARD.get()));
 	public static final Supplier<BlockEntityType<SkilletBlockEntity>> SKILLET = TILES.register("skillet",
-			() -> BlockEntityType.Builder.of(SkilletBlockEntity::new, ModBlocks.SKILLET.get()).build(null));
+			() -> new BlockEntityType<>(SkilletBlockEntity::new, ModBlocks.SKILLET.get()));
 	public static final Supplier<BlockEntityType<CabinetBlockEntity>> CABINET = TILES.register("cabinet",
-			() -> BlockEntityType.Builder.of(CabinetBlockEntity::new,
+			() -> new BlockEntityType<>(CabinetBlockEntity::new,
 							ModBlocks.OAK_CABINET.get(),
 							ModBlocks.BIRCH_CABINET.get(),
 							ModBlocks.SPRUCE_CABINET.get(),
@@ -36,9 +36,9 @@ public class ModBlockEntityTypes
 							ModBlocks.CHERRY_CABINET.get(),
 							ModBlocks.CRIMSON_CABINET.get(),
 							ModBlocks.WARPED_CABINET.get())
-					.build(null));
+					);
 	public static final Supplier<BlockEntityType<CanvasSignBlockEntity>> CANVAS_SIGN = TILES.register("canvas_sign",
-			() -> BlockEntityType.Builder.of(CanvasSignBlockEntity::new,
+			() -> new BlockEntityType<>(CanvasSignBlockEntity::new,
 							ModBlocks.CANVAS_SIGN.get(),
 							ModBlocks.WHITE_CANVAS_SIGN.get(),
 							ModBlocks.ORANGE_CANVAS_SIGN.get(),
@@ -73,9 +73,9 @@ public class ModBlockEntityTypes
 							ModBlocks.GREEN_CANVAS_WALL_SIGN.get(),
 							ModBlocks.RED_CANVAS_WALL_SIGN.get(),
 							ModBlocks.BLACK_CANVAS_WALL_SIGN.get())
-					.build(null));
+					);
 	public static final Supplier<BlockEntityType<HangingCanvasSignBlockEntity>> HANGING_CANVAS_SIGN = TILES.register("hanging_canvas_sign",
-			() -> BlockEntityType.Builder.of(HangingCanvasSignBlockEntity::new,
+			() -> new BlockEntityType<>(HangingCanvasSignBlockEntity::new,
 							ModBlocks.HANGING_CANVAS_SIGN.get(),
 							ModBlocks.WHITE_HANGING_CANVAS_SIGN.get(),
 							ModBlocks.ORANGE_HANGING_CANVAS_SIGN.get(),
@@ -110,5 +110,7 @@ public class ModBlockEntityTypes
 							ModBlocks.GREEN_HANGING_CANVAS_WALL_SIGN.get(),
 							ModBlocks.RED_HANGING_CANVAS_WALL_SIGN.get(),
 							ModBlocks.BLACK_HANGING_CANVAS_WALL_SIGN.get())
-					.build(null));
+					);
 }
+
+

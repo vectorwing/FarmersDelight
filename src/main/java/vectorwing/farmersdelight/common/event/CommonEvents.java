@@ -18,21 +18,6 @@ public class CommonEvents
 {
 	@SubscribeEvent
 	public static void handleVanillaSoupEffects(LivingEntityUseItemEvent.Finish event) {
-		Item food = event.getItem().getItem();
-		LivingEntity entity = event.getEntity();
-
-		if (Configuration.ENABLE_RABBIT_STEW_BUFF.get() && food.equals(Items.RABBIT_STEW)) {
-			return;
-		}
-
-		if (Configuration.ENABLE_VANILLA_SOUP_EXTRA_EFFECTS.get()) {
-			FoodProperties soupEffects = FoodValues.VANILLA_SOUP_EFFECTS.get(food);
-
-			if (soupEffects != null) {
-				for (FoodProperties.PossibleEffect effect : soupEffects.effects()) {
-					entity.addEffect(effect.effect());
-				}
-			}
-		}
+		// Vanilla soup effects are installed through default item components in 26.1.
 	}
 }

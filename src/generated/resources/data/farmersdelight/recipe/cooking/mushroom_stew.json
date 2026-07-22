@@ -1,21 +1,17 @@
 {
-  "type": "farmersdelight:cooking",
-  "container": {
-    "count": 1,
-    "id": "minecraft:bowl"
-  },
-  "experience": 1.0,
-  "ingredients": [
-    {
-      "item": "minecraft:brown_mushroom"
-    },
-    {
-      "item": "minecraft:red_mushroom"
-    }
-  ],
-  "recipe_book_tab": "meals",
-  "result": {
-    "count": 1,
-    "id": "minecraft:mushroom_stew"
-  }
+    "type":  "farmersdelight:cooking",
+    "container":  {
+                      "count":  1,
+                      "id":  "minecraft:bowl"
+                  },
+    "experience":  1.0,
+    "ingredients":  [
+                        "minecraft:brown_mushroom",
+                        "minecraft:red_mushroom"
+                    ],
+    "recipe_book_tab":  "meals",
+    "result":  {
+                   "count":  1,
+                   "id":  "minecraft:mushroom_stew"
+               }
 }

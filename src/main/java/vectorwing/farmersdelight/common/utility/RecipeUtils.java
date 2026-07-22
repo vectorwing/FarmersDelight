@@ -3,7 +3,7 @@ package vectorwing.farmersdelight.common.utility;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -17,11 +17,11 @@ public class RecipeUtils
 		if (level == null) {
 			throw new NullPointerException("level must not be null.");
 		}
-		RegistryAccess registryAccess = level.registryAccess();
-		return recipe.getResultItem(registryAccess);
+		return ItemStack.EMPTY;
 	}
 
-	public static ResourceLocation FDLocation(String name) {
-		return ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, name);
+	public static Identifier FDLocation(String name) {
+		return Identifier.fromNamespaceAndPath(FarmersDelight.MODID, name);
 	}
 }
+

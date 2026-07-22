@@ -18,8 +18,8 @@ public class HangingCanvasSignBlockEntity extends HangingSignBlockEntity
 	}
 
 	@Override
-	public boolean isValidBlockState(BlockState state) {
-		return this.getType().isValid(state);
+	public boolean isValidBlockState(BlockState blockState) {
+		return this.getType().isValid(blockState);
 	}
 
 	public int getTextLineHeight() {
@@ -30,3 +30,5 @@ public class HangingCanvasSignBlockEntity extends HangingSignBlockEntity
 		return 60;
 	}
 }
+
+

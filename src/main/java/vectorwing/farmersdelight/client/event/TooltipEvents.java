@@ -35,19 +35,8 @@ public class TooltipEvents
 			return;
 		}
 
-		FoodProperties soupEffects = FoodValues.VANILLA_SOUP_EFFECTS.get(food);
-
-		if (soupEffects != null) {
-			List<Component> tooltip = event.getToolTip();
-			for (FoodProperties.PossibleEffect effect : soupEffects.effects()) {
-				MobEffectInstance effectInstance = effect.effect();
-				MutableComponent effectText = Component.translatable(effectInstance.getDescriptionId());
-				Player player = event.getEntity();
-				if (effectInstance.getDuration() > 20) {
-					effectText = Component.translatable("potion.withDuration", effectText, MobEffectUtil.formatDuration(effectInstance, 1, player == null ? 20 : player.level().tickRateManager().tickrate()));
-				}
-				tooltip.add(effectText.withStyle(effectInstance.getEffect().value().getCategory().getTooltipFormatting()));
-			}
-		}
+		// Food effects moved from FoodProperties into consumable components in
+		// 26.1. The vanilla-soup additions will be restored with that component
+		// migration; the placeable pumpkin-pie tooltip above remains active.
 	}
 }

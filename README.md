@@ -1,26 +1,60 @@
-# Farmer's Delight
+# Farmer's Delight - Unofficial NeoForge 26.1.2 Port
 
-<a href="https://www.curseforge.com/minecraft/mc-mods/farmers-delight">
-  <img src="http://cf.way2muchnoise.eu/full_398521_downloads.svg" alt="Curseforge Downloads">
-</a>
-<a href="https://discord.gg/eFsz5SK">
-  <img alt="Discord" src="https://img.shields.io/discord/734511833947439156?color=brightgreen&label=Discord">
-</a>
-<br>
-<img src="https://i.imgur.com/aDELzhM.png" width="50%">
+> **Unofficial community port.** This project is based on
+> [Farmer's Delight](https://github.com/vectorwing/FarmersDelight), originally
+> created by **vectorwing**. This project is not affiliated with, maintained by,
+> partnered with, or endorsed by vectorwing or the official Farmer's Delight
+> project.
 
-### Overview
+This repository adapts Farmer's Delight 1.3.2 to Minecraft 26.1.2 and
+NeoForge 26.1.2. To preserve world-save and add-on compatibility, this port
+keeps the original `farmersdelight` mod id.
 
-**Farmer's Delight** is a mod that gently expands upon farming and cooking in Minecraft.
 
-Using a simple cooking system and a few familiar ingredients, you'll be able to prepare a wide variety of **hearty meals**: from sandwiches to salads and stews, from beautiful desserts to mouth-watering feasts, no ingredient will be left behind in your kitchen!
+## Attribution
 
-It also introduces a rich set of utilities: a way to **improve the very soil** your crops grow in, a brand new kind of tool to **scavenge resources** with, cute **decorations** for your builds, and many blocks and items to help you on your adventure!
+- Original author: **vectorwing**
+- Original project: <https://github.com/vectorwing/FarmersDelight>
+- Original license: [MIT License](LICENSE)
+- Port role: **unofficial port maintainer**
+- Port maintainer: **Alkaid-707-404**
+- Port source: <https://github.com/Alkaid-707-404/FarmersDelight_NeoForge26.1.2>
+- Issue tracker: <https://github.com/Alkaid-707-404/FarmersDelight_NeoForge26.1.2/issues>
 
-It's time to farm a little bit of everything!
+This project preserves the original copyright notice and MIT License. Original
+project contributors remain credited in the mod metadata. Maintaining this port
+does not transfer authorship of the original mod.
 
-### Contributing
+## Installation
 
-Thank you for visiting the repository! If you'd like to contribute with the mod, feel free to check the wiki for more details, or take a look at the issues page!
+1. Install Minecraft 26.1.2.
+2. Install NeoForge 26.1.2. The current build uses NeoForge `26.1.2.80`.
+3. Download this port's jar, for example
+   `FarmersDelight-26.1.2-1.3.2-port.12.jar`.
+4. Put the jar into the `mods` folder of the target instance.
+5. Start the game and confirm that the mod list shows
+   `Farmer's Delight - Unofficial NeoForge 26.1.2 Port`.
 
-I am open to constructive feedback about the mod's code: if you spot any glaring mistakes in my code, and/or you know a better way to accomplish something, feel free to open an issue/PR about it. Any help is appreciated!
+This port does not require extra dependency mods by itself. Optional
+integrations such as JEI, EMI, AppleSkin, and CraftTweaker are not yet ported
+to 26.1.2, so they are not required dependencies.
+
+## Current Limitations
+
+- Optional integration source for JEI, EMI, AppleSkin, and CraftTweaker is not
+  enabled yet.
+- Data-generator source is not fully migrated yet; the current release package
+  ships the already usable generated data resources directly.
+- Some villager events, older rendering hooks, and other non-core systems may
+  still need follow-up porting.
+- Multiplayer servers, complex modpacks, add-on compatibility, and old-world
+  upgrades still need broader testing.
+
+## Redistribution and Support
+
+- Do not describe this project as an official new version, official update, or
+  official release.
+- Report port-specific issues to this port repository, not to the upstream
+  Farmer's Delight issue tracker.
+- Only add third-party assets or dependencies when their licenses and
+  redistribution terms are known and preserved.

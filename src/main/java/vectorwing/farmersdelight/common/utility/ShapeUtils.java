@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.*;
 
@@ -23,7 +23,7 @@ public class ShapeUtils
      * <p>
      * Credits to JTK222 for the algorithm.
      */
-    public static @NotNull VoxelShape rotateY(@NotNull VoxelShape shape, @NotNull RotationAmount rotation) {
+    public static @NonNull VoxelShape rotateY(@NonNull VoxelShape shape, @NonNull RotationAmount rotation) {
         List<VoxelShape> rotatedShapes = new ArrayList<>();
 
         shape.forAllBoxes((x1, y1, z1, x2, y2, z2) -> {
@@ -64,7 +64,7 @@ public class ShapeUtils
         return mergeShapes(rotatedShapes);
     }
 
-    public static @NotNull VoxelShape blockBox(double x1, double y1, double z1, double x2, double y2, double z2) {
+    public static @NonNull VoxelShape blockBox(double x1, double y1, double z1, double x2, double y2, double z2) {
         return Block.box(Math.min(x1, x2), Math.min(y1, y2), Math.min(z1, z2), Math.max(x1, x2), Math.max(y1, y2), Math.max(z1, z2));
     }
 
@@ -147,3 +147,5 @@ public class ShapeUtils
         TWO_HUNDRED_SEVENTY
     }
 }
+
+

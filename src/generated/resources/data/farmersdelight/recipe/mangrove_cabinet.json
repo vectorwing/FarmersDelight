@@ -1,22 +1,18 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "group": "fd_cabinet",
-  "key": {
-    "D": {
-      "item": "minecraft:mangrove_trapdoor"
-    },
-    "_": {
-      "item": "minecraft:mangrove_slab"
-    }
-  },
-  "pattern": [
-    "___",
-    "D D",
-    "___"
-  ],
-  "result": {
-    "count": 1,
-    "id": "farmersdelight:mangrove_cabinet"
-  }
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "group":  "fd_cabinet",
+    "key":  {
+                "D":  "minecraft:mangrove_trapdoor",
+                "_":  "minecraft:mangrove_slab"
+            },
+    "pattern":  [
+                    "___",
+                    "D D",
+                    "___"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "farmersdelight:mangrove_cabinet"
+               }
 }

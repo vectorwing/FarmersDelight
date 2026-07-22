@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.data.builder;
 
 import net.minecraft.util.StringRepresentable;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public enum CuttingRecipeFolder implements StringRepresentable
 {
@@ -20,7 +20,9 @@ public enum CuttingRecipeFolder implements StringRepresentable
 	}
 
 	@Override
-	public @NotNull String getSerializedName() {
+	public @NonNull String getSerializedName() {
 		return this.folder;
 	}
 }
+
+

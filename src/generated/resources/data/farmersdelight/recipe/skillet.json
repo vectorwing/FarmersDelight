@@ -1,21 +1,17 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "#": {
-      "tag": "c:ingots/iron"
-    },
-    "/": {
-      "item": "minecraft:brick"
-    }
-  },
-  "pattern": [
-    " ##",
-    " ##",
-    "/  "
-  ],
-  "result": {
-    "count": 1,
-    "id": "farmersdelight:skillet"
-  }
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "key":  {
+                "#":  "#c:ingots/iron",
+                "/":  "minecraft:brick"
+            },
+    "pattern":  [
+                    " ##",
+                    " ##",
+                    "/  "
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "farmersdelight:skillet"
+               }
 }

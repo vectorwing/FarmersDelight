@@ -4,7 +4,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -210,9 +210,9 @@ public class ItemTags extends ItemTagsProvider
 
 		tag(ModTags.Items.SERVING_CONTAINERS).add(Items.BOWL, Items.GLASS_BOTTLE, Items.BUCKET);
 		tag(ModTags.Items.FLAT_ON_CUTTING_BOARD).add(Items.TRIDENT, Items.SPYGLASS)
-			.addOptional(ResourceLocation.parse("supplementaries:quiver"))
-			.addOptional(ResourceLocation.parse("autumnity:turkey"))
-			.addOptional(ResourceLocation.parse("autumnity:cooked_turkey"));
+			.addOptional(Identifier.parse("supplementaries:quiver"))
+			.addOptional(Identifier.parse("autumnity:turkey"))
+			.addOptional(Identifier.parse("autumnity:cooked_turkey"));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -384,3 +384,5 @@ public class ItemTags extends ItemTagsProvider
 		tag(CompatibilityTags.TINKERS_CONSTRUCT_SEEDS).add(ModItems.ONION.get());
 	}
 }
+
+

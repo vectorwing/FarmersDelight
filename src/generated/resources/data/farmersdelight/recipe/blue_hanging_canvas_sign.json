@@ -1,17 +1,13 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "group": "fd_hanging_canvas_sign",
-  "ingredients": [
-    {
-      "tag": "farmersdelight:hanging_canvas_signs"
-    },
-    {
-      "tag": "c:dyes/blue"
-    }
-  ],
-  "result": {
-    "count": 1,
-    "id": "farmersdelight:blue_hanging_canvas_sign"
-  }
+    "type":  "minecraft:crafting_shapeless",
+    "category":  "misc",
+    "group":  "fd_hanging_canvas_sign",
+    "ingredients":  [
+                        "#farmersdelight:hanging_canvas_signs",
+                        "#c:dyes/blue"
+                    ],
+    "result":  {
+                   "count":  1,
+                   "id":  "farmersdelight:blue_hanging_canvas_sign"
+               }
 }

@@ -1,13 +1,11 @@
 {
-  "type": "minecraft:smelting",
-  "category": "food",
-  "cookingtime": 200,
-  "experience": 0.35,
-  "ingredient": {
-    "item": "farmersdelight:salmon_slice"
-  },
-  "result": {
-    "count": 1,
-    "id": "farmersdelight:cooked_salmon_slice"
-  }
+    "type":  "minecraft:smelting",
+    "category":  "food",
+    "cookingtime":  200,
+    "experience":  0.35,
+    "ingredient":  "farmersdelight:salmon_slice",
+    "result":  {
+                   "count":  1,
+                   "id":  "farmersdelight:cooked_salmon_slice"
+               }
 }

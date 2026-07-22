@@ -1,36 +1,34 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "immersiveengineering"
-    }
-  ],
-  "type": "immersiveengineering:crusher",
-  "energy": 3200,
-  "input": {
-    "item": "farmersdelight:wild_onions"
-  },
-  "result": {
-    "basePredicate": {
-      "item": "minecraft:magenta_dye"
-    },
-    "count": 1
-  },
-  "secondaries": [
-    {
-      "chance": 0.2,
-      "conditions": [],
-      "output": {
-        "item": "minecraft:magenta_dye",
-        "count": 3
-      }
-    },
-    {
-      "chance": 0.1,
-      "output": {
-        "item": "minecraft:lime_dye",
-        "count": 1
-      }
-    }
-  ]
+    "neoforge:conditions":  [
+                                {
+                                    "type":  "neoforge:mod_loaded",
+                                    "modid":  "immersiveengineering"
+                                }
+                            ],
+    "type":  "immersiveengineering:crusher",
+    "energy":  3200,
+    "input":  "farmersdelight:wild_onions",
+    "result":  {
+                   "basePredicate":  "minecraft:magenta_dye",
+                   "count":  1
+               },
+    "secondaries":  [
+                        {
+                            "chance":  0.2,
+                            "conditions":  [
+
+                                           ],
+                            "output":  {
+                                           "item":  "minecraft:magenta_dye",
+                                           "count":  3
+                                       }
+                        },
+                        {
+                            "chance":  0.1,
+                            "output":  {
+                                           "item":  "minecraft:lime_dye",
+                                           "count":  1
+                                       }
+                        }
+                    ]
 }

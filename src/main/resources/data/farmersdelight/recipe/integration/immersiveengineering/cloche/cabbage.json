@@ -1,30 +1,26 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "immersiveengineering"
-    }
-  ],
-  "type": "immersiveengineering:cloche",
-  "input": {
-    "item": "farmersdelight:cabbage_seeds"
-  },
-  "render": {
-    "type": "immersiveengineering:crop",
-    "block": "farmersdelight:cabbages"
-  },
-  "results": [
-    {
-      "count": 2,
-      "id": "farmersdelight:cabbage"
-    },
-    {
-      "count": 1,
-      "id": "farmersdelight:cabbage_seeds"
-    }
-  ],
-  "soil": {
-    "item": "minecraft:dirt"
-  },
-  "time": 800
+    "neoforge:conditions":  [
+                                {
+                                    "type":  "neoforge:mod_loaded",
+                                    "modid":  "immersiveengineering"
+                                }
+                            ],
+    "type":  "immersiveengineering:cloche",
+    "input":  "farmersdelight:cabbage_seeds",
+    "render":  {
+                   "type":  "immersiveengineering:crop",
+                   "block":  "farmersdelight:cabbages"
+               },
+    "results":  [
+                    {
+                        "count":  2,
+                        "id":  "farmersdelight:cabbage"
+                    },
+                    {
+                        "count":  1,
+                        "id":  "farmersdelight:cabbage_seeds"
+                    }
+                ],
+    "soil":  "minecraft:dirt",
+    "time":  800
 }

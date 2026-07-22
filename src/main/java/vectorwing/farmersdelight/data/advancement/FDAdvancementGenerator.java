@@ -1,9 +1,9 @@
 package vectorwing.farmersdelight.data.advancement;
 
 import net.minecraft.advancements.*;
-import net.minecraft.advancements.critereon.*;
+import net.minecraft.advancements.criterion.*;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.level.ItemLike;
@@ -31,7 +31,7 @@ public class FDAdvancementGenerator implements AdvancementProvider.AdvancementGe
 				.display(ModItems.COOKING_POT.get(),
 						TextUtils.advancement("root.title"),
 						TextUtils.advancement("root.description"),
-						ResourceLocation.parse("minecraft:textures/block/bricks.png"),
+						Identifier.parse("minecraft:textures/block/bricks.png"),
 						AdvancementType.TASK, false, false, false)
 				.addCriterion("seeds", InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{}))
 				.save(consumer, getNameId("main/root"));
@@ -216,3 +216,5 @@ public class FDAdvancementGenerator implements AdvancementProvider.AdvancementGe
 		return FarmersDelight.MODID + ":" + id;
 	}
 }
+
+

@@ -1,18 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "group": "fd_chocolate_pie",
-  "key": {
-    "#": {
-      "item": "farmersdelight:chocolate_pie_slice"
-    }
-  },
-  "pattern": [
-    "##",
-    "##"
-  ],
-  "result": {
-    "count": 1,
-    "id": "farmersdelight:chocolate_pie"
-  }
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "group":  "fd_chocolate_pie",
+    "key":  {
+                "#":  "farmersdelight:chocolate_pie_slice"
+            },
+    "pattern":  [
+                    "##",
+                    "##"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "farmersdelight:chocolate_pie"
+               }
 }

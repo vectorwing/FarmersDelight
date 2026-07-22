@@ -16,14 +16,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 import javax.annotation.Nullable;
 
 @SuppressWarnings("deprecation")
 public class TatamiBlock extends Block
 {
-	public static final DirectionProperty FACING = BlockStateProperties.FACING;
+	public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
 	public static final BooleanProperty PAIRED = BooleanProperty.create("paired");
 
 	public TatamiBlock(BlockBehaviour.Properties properties) {
@@ -48,7 +48,7 @@ public class TatamiBlock extends Block
 	@Override
 	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		super.setPlacedBy(level, pos, state, placer, stack);
-		if (!level.isClientSide) {
+		if (!level.isClientSide()) {
 			if (placer != null && placer.isShiftKeyDown()) {
 				return;
 			}
@@ -56,18 +56,18 @@ public class TatamiBlock extends Block
 			BlockState facingState = level.getBlockState(facingPos);
 			if (facingState.getBlock() == this && !facingState.getValue(PAIRED)) {
 				level.setBlock(facingPos, state.setValue(FACING, state.getValue(FACING).getOpposite()).setValue(PAIRED, true), 3);
-				level.blockUpdated(pos, Blocks.AIR);
+				level.updateNeighborsAt(pos, Blocks.AIR);
 				state.updateNeighbourShapes(level, pos, 3);
 			}
 		}
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState state, net.minecraft.world.level.LevelReader level, net.minecraft.world.level.ScheduledTickAccess ticks, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, net.minecraft.util.RandomSource random) {
 		if (facing.equals(state.getValue(FACING)) && state.getValue(PAIRED) && level.getBlockState(facingPos).getBlock() != this) {
 			return state.setValue(PAIRED, false);
 		}
-		return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+		return super.updateShape(state, level, ticks, currentPos, facing, facingPos, facingState, random);
 	}
 
 	@Override
@@ -85,3 +85,5 @@ public class TatamiBlock extends Block
 		return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
 	}
 }
+
+

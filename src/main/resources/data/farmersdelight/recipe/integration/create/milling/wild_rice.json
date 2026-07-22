@@ -1,26 +1,24 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "create"
-    }
-  ],
-  "type": "create:milling",
-  "ingredients": [
-    {
-      "item": "farmersdelight:wild_rice"
-    }
-  ],
-  "results": [
-    {
-      "id": "farmersdelight:rice",
-      "count": 1
-    },
-    {
-      "id": "farmersdelight:straw",
-      "count": 1,
-      "chance": 0.5
-    }
-  ],
-  "processing_time": 50
+    "neoforge:conditions":  [
+                                {
+                                    "type":  "neoforge:mod_loaded",
+                                    "modid":  "create"
+                                }
+                            ],
+    "type":  "create:milling",
+    "ingredients":  [
+                        "farmersdelight:wild_rice"
+                    ],
+    "results":  [
+                    {
+                        "id":  "farmersdelight:rice",
+                        "count":  1
+                    },
+                    {
+                        "id":  "farmersdelight:straw",
+                        "count":  1,
+                        "chance":  0.5
+                    }
+                ],
+    "processing_time":  50
 }

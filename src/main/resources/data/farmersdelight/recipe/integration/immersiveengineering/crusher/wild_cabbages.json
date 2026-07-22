@@ -1,29 +1,27 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "immersiveengineering"
-    }
-  ],
-  "type": "immersiveengineering:crusher",
-  "energy": 3200,
-  "input": {
-    "item": "farmersdelight:wild_cabbages"
-  },
-  "result": {
-    "basePredicate": {
-      "item": "farmersdelight:cabbage_seeds"
-    },
-    "count": 1
-  },
-  "secondaries": [
-    {
-      "chance": 1.0,
-      "conditions": [],
-      "output": {
-        "item": "minecraft:yellow_dye",
-        "count": 1
-      }
-    }
-  ]
+    "neoforge:conditions":  [
+                                {
+                                    "type":  "neoforge:mod_loaded",
+                                    "modid":  "immersiveengineering"
+                                }
+                            ],
+    "type":  "immersiveengineering:crusher",
+    "energy":  3200,
+    "input":  "farmersdelight:wild_cabbages",
+    "result":  {
+                   "basePredicate":  "farmersdelight:cabbage_seeds",
+                   "count":  1
+               },
+    "secondaries":  [
+                        {
+                            "chance":  1.0,
+                            "conditions":  [
+
+                                           ],
+                            "output":  {
+                                           "item":  "minecraft:yellow_dye",
+                                           "count":  1
+                                       }
+                        }
+                    ]
 }

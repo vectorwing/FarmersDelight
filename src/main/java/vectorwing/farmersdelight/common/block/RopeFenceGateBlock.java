@@ -25,10 +25,10 @@ public class RopeFenceGateBlock extends FenceGateBlock
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState state, net.minecraft.world.level.LevelReader level, net.minecraft.world.level.ScheduledTickAccess ticks, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, net.minecraft.util.RandomSource random) {
 		Direction.Axis axis = facing.getAxis();
 		if (state.getValue(FACING).getClockWise().getAxis() != axis) {
-			return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+			return super.updateShape(state, level, ticks, currentPos, facing, facingPos, facingState, random);
 		} else {
 			boolean isBorderedByWalls = this.isWall(facingState) && this.isWall(level.getBlockState(currentPos.relative(facing.getOpposite())));
 			return state.setValue(IN_WALL, isBorderedByWalls);
@@ -53,3 +53,5 @@ public class RopeFenceGateBlock extends FenceGateBlock
 		}
 	}
 }
+
+

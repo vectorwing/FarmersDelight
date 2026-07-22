@@ -1,26 +1,22 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "immersiveengineering"
-    }
-  ],
-  "type": "immersiveengineering:cloche",
-  "input": {
-    "item": "farmersdelight:tomato_seeds"
-  },
-  "render": {
-    "type": "immersiveengineering:crop",
-    "block": "farmersdelight:tomatoes"
-  },
-  "results": [
-    {
-      "count": 2,
-      "id": "farmersdelight:tomato"
-    }
-  ],
-  "soil": {
-    "item": "minecraft:dirt"
-  },
-  "time": 800
+    "neoforge:conditions":  [
+                                {
+                                    "type":  "neoforge:mod_loaded",
+                                    "modid":  "immersiveengineering"
+                                }
+                            ],
+    "type":  "immersiveengineering:cloche",
+    "input":  "farmersdelight:tomato_seeds",
+    "render":  {
+                   "type":  "immersiveengineering:crop",
+                   "block":  "farmersdelight:tomatoes"
+               },
+    "results":  [
+                    {
+                        "count":  2,
+                        "id":  "farmersdelight:tomato"
+                    }
+                ],
+    "soil":  "minecraft:dirt",
+    "time":  800
 }

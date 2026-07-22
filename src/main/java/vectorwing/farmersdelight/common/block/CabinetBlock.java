@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import vectorwing.farmersdelight.common.block.entity.CabinetBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
@@ -32,7 +32,7 @@ public class CabinetBlock extends BaseEntityBlock
 {
 	public static final MapCodec<CabinetBlock> CODEC = simpleCodec(CabinetBlock::new);
 
-	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+	public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
 
 	public CabinetBlock(Properties properties) {
@@ -47,25 +47,14 @@ public class CabinetBlock extends BaseEntityBlock
 
 	@Override
 	public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-		if (level.isClientSide) {
+		if (level.isClientSide()) {
 			return InteractionResult.SUCCESS;
 		}
 		if (level.getBlockEntity(pos) instanceof CabinetBlockEntity cabinet) {
 			player.openMenu(cabinet);
-			PiglinAi.angerNearbyPiglins(player, true);
+			if (level instanceof ServerLevel serverLevel) PiglinAi.angerNearbyPiglins(serverLevel, player, true);
 		}
 		return InteractionResult.CONSUME;
-	}
-
-	@Override
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (!state.is(newState.getBlock())) {
-			if (level.getBlockEntity(pos) instanceof Container container) {
-				Containers.dropContents(level, pos, container);
-				level.updateNeighbourForOutputSignal(pos, this);
-			}
-			super.onRemove(state, level, pos, newState, isMoving);
-		}
 	}
 
 	@Override
@@ -91,7 +80,7 @@ public class CabinetBlock extends BaseEntityBlock
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction) {
 		return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(level.getBlockEntity(pos));
 	}
 

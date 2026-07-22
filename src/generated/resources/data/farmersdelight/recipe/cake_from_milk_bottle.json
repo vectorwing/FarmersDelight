@@ -1,28 +1,20 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "group": "cake",
-  "key": {
-    "e": {
-      "tag": "c:eggs"
-    },
-    "m": {
-      "tag": "c:drinks/milk"
-    },
-    "s": {
-      "item": "minecraft:sugar"
-    },
-    "w": {
-      "tag": "c:crops/wheat"
-    }
-  },
-  "pattern": [
-    "mmm",
-    "ses",
-    "www"
-  ],
-  "result": {
-    "count": 1,
-    "id": "minecraft:cake"
-  }
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "group":  "cake",
+    "key":  {
+                "e":  "#c:eggs",
+                "m":  "#c:drinks/milk",
+                "s":  "minecraft:sugar",
+                "w":  "#c:crops/wheat"
+            },
+    "pattern":  [
+                    "mmm",
+                    "ses",
+                    "www"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "minecraft:cake"
+               }
 }

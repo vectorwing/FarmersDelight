@@ -15,7 +15,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
-import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.animal.wolf.Wolf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -37,9 +37,9 @@ import java.util.List;
 public class DogFoodItem extends ConsumableItem
 {
 	public static final List<MobEffectInstance> EFFECTS = Lists.newArrayList(
-			new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 6000, 0),
-			new MobEffectInstance(MobEffects.DAMAGE_BOOST, 6000, 0),
-			new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 6000, 0));
+			new MobEffectInstance(MobEffects.SPEED, 6000, 0),
+			new MobEffectInstance(MobEffects.STRENGTH, 6000, 0),
+			new MobEffectInstance(MobEffects.RESISTANCE, 6000, 0));
 
 	public DogFoodItem(Properties properties) {
 		super(properties);
@@ -55,7 +55,7 @@ public class DogFoodItem extends ConsumableItem
 			Entity target = event.getTarget();
 			ItemStack itemStack = event.getItemStack();
 
-			if (target instanceof LivingEntity entity && target.getType().is(ModTags.EntityTypes.DOG_FOOD_USERS)) {
+			if (target instanceof LivingEntity entity && target.getType().builtInRegistryHolder().is(ModTags.EntityTypes.DOG_FOOD_USERS)) {
 				boolean isTameable = entity instanceof TamableAnimal;
 
 				if (entity.isAlive() && (!isTameable || ((TamableAnimal) entity).isTame()) && itemStack.getItem().equals(ModItems.DOG_FOOD.get())) {
@@ -63,7 +63,7 @@ public class DogFoodItem extends ConsumableItem
 					for (MobEffectInstance effect : EFFECTS) {
 						entity.addEffect(new MobEffectInstance(effect));
 					}
-					entity.level().playSound(null, target.blockPosition(), SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 0.8F, 0.8F);
+					entity.level().playSound(null, target.blockPosition(), SoundEvents.GENERIC_EAT.value(), SoundSource.PLAYERS, 0.8F, 0.8F);
 
 					for (int i = 0; i < 5; ++i) {
 						double xSpeed = MathUtils.RAND.nextGaussian() * 0.02D;
@@ -72,8 +72,8 @@ public class DogFoodItem extends ConsumableItem
 						entity.level().addParticle(ModParticleTypes.STAR.get(), entity.getRandomX(1.0D), entity.getRandomY() + 0.5D, entity.getRandomZ(1.0D), xSpeed, ySpeed, zSpeed);
 					}
 
-					if (itemStack.getCraftingRemainingItem() != ItemStack.EMPTY && !player.isCreative()) {
-						player.addItem(itemStack.getCraftingRemainingItem());
+					if (itemStack.getCraftingRemainder() != null && !player.isCreative()) {
+						player.addItem(itemStack.getCraftingRemainder().create());
 						itemStack.shrink(1);
 					}
 
@@ -85,13 +85,13 @@ public class DogFoodItem extends ConsumableItem
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
+	public void appendHoverText(ItemStack stack, TooltipContext context, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> tooltip, TooltipFlag isAdvanced) {
 		if (!Configuration.ENABLE_FOOD_EFFECT_TOOLTIP.get()) {
 			return;
 		}
 
 		MutableComponent textWhenFeeding = TextUtils.tooltip("dog_food.when_feeding");
-		tooltip.add(textWhenFeeding.withStyle(ChatFormatting.GRAY));
+		tooltip.accept(textWhenFeeding.withStyle(ChatFormatting.GRAY));
 
 		for (MobEffectInstance effectInstance : EFFECTS) {
 			MutableComponent effectDescription = Component.literal(" ");
@@ -107,7 +107,7 @@ public class DogFoodItem extends ConsumableItem
 				effectDescription.append(" (").append(MobEffectUtil.formatDuration(effectInstance, 1.0F, context.tickRate())).append(")");
 			}
 
-			tooltip.add(effectDescription.withStyle(effect.getCategory().getTooltipFormatting()));
+			tooltip.accept(effectDescription.withStyle(effect.getCategory().getTooltipFormatting()));
 		}
 	}
 

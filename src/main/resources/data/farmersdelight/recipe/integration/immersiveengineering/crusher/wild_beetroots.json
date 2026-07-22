@@ -1,29 +1,27 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "immersiveengineering"
-    }
-  ],
-  "type": "immersiveengineering:crusher",
-  "energy": 1600,
-  "input": {
-    "item": "farmersdelight:wild_beetroots"
-  },
-  "result": {
-    "basePredicate": {
-      "item": "minecraft:beetroot_seeds"
-    },
-    "count": 1
-  },
-  "secondaries": [
-    {
-      "chance": 1.0,
-      "conditions": [],
-      "output": {
-        "item": "minecraft:red_dye",
-        "count": 1
-      }
-    }
-  ]
+    "neoforge:conditions":  [
+                                {
+                                    "type":  "neoforge:mod_loaded",
+                                    "modid":  "immersiveengineering"
+                                }
+                            ],
+    "type":  "immersiveengineering:crusher",
+    "energy":  1600,
+    "input":  "farmersdelight:wild_beetroots",
+    "result":  {
+                   "basePredicate":  "minecraft:beetroot_seeds",
+                   "count":  1
+               },
+    "secondaries":  [
+                        {
+                            "chance":  1.0,
+                            "conditions":  [
+
+                                           ],
+                            "output":  {
+                                           "item":  "minecraft:red_dye",
+                                           "count":  1
+                                       }
+                        }
+                    ]
 }

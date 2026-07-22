@@ -3,9 +3,9 @@ package vectorwing.farmersdelight.common.advancement;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.critereon.ContextAwarePredicate;
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import net.minecraft.advancements.criterion.ContextAwarePredicate;
+import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.criterion.SimpleCriterionTrigger;
 import net.minecraft.server.level.ServerPlayer;
 import vectorwing.farmersdelight.common.registry.ModAdvancements;
 
@@ -15,7 +15,7 @@ public class CuttingBoardTrigger extends SimpleCriterionTrigger<CuttingBoardTrig
 {
 	@Override
 	public Codec<TriggerInstance> codec() {
-		return CuttingBoardTrigger.TriggerInstance.CODEC;
+		return TriggerInstance.CODEC;
 	}
 
 	public void trigger(ServerPlayer player) {
@@ -23,17 +23,17 @@ public class CuttingBoardTrigger extends SimpleCriterionTrigger<CuttingBoardTrig
 	}
 
 	public static record TriggerInstance(
-			Optional<ContextAwarePredicate> player) implements SimpleCriterionTrigger.SimpleInstance
+			Optional<ContextAwarePredicate> player) implements SimpleInstance
 	{
-		public static final Codec<CuttingBoardTrigger.TriggerInstance> CODEC = RecordCodecBuilder.create(
+		public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create(
 				builder -> builder.group(
-								EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(CuttingBoardTrigger.TriggerInstance::player))
-						.apply(builder, CuttingBoardTrigger.TriggerInstance::new)
+								EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(TriggerInstance::player))
+						.apply(builder, TriggerInstance::new)
 		);
 
 		public static Criterion<TriggerInstance> simple() {
 			return ModAdvancements.USE_CUTTING_BOARD.get().createCriterion(
-					new CuttingBoardTrigger.TriggerInstance(Optional.empty())
+					new TriggerInstance(Optional.empty())
 			);
 		}
 
@@ -42,3 +42,5 @@ public class CuttingBoardTrigger extends SimpleCriterionTrigger<CuttingBoardTrig
 		}
 	}
 }
+
+

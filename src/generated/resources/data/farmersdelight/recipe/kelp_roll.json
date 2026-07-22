@@ -1,23 +1,17 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "#": {
-      "item": "minecraft:dried_kelp"
-    },
-    "R": {
-      "item": "farmersdelight:cooked_rice"
-    },
-    "X": {
-      "tag": "c:foods/vegetable"
-    }
-  },
-  "pattern": [
-    "RXR",
-    "###"
-  ],
-  "result": {
-    "count": 1,
-    "id": "farmersdelight:kelp_roll"
-  }
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "key":  {
+                "#":  "minecraft:dried_kelp",
+                "R":  "farmersdelight:cooked_rice",
+                "X":  "#c:foods/vegetable"
+            },
+    "pattern":  [
+                    "RXR",
+                    "###"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "farmersdelight:kelp_roll"
+               }
 }

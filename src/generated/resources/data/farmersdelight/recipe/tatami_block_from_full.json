@@ -1,17 +1,13 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "building",
-  "group": "fd_tatami",
-  "ingredients": [
-    {
-      "item": "farmersdelight:full_tatami_mat"
-    },
-    {
-      "item": "farmersdelight:full_tatami_mat"
-    }
-  ],
-  "result": {
-    "count": 1,
-    "id": "farmersdelight:tatami"
-  }
+    "type":  "minecraft:crafting_shapeless",
+    "category":  "building",
+    "group":  "fd_tatami",
+    "ingredients":  [
+                        "farmersdelight:full_tatami_mat",
+                        "farmersdelight:full_tatami_mat"
+                    ],
+    "result":  {
+                   "count":  1,
+                   "id":  "farmersdelight:tatami"
+               }
 }

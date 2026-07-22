@@ -1,7 +1,11 @@
 package vectorwing.farmersdelight.common.crafting;
 
+import com.mojang.serialization.MapCodec;
+
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
@@ -15,8 +19,13 @@ import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 
 public class DoughRecipe extends CustomRecipe
 {
-	public DoughRecipe(CraftingBookCategory category) {
-		super(category);
+	public static final DoughRecipe INSTANCE = new DoughRecipe();
+	public static final MapCodec<DoughRecipe> MAP_CODEC = MapCodec.unit(INSTANCE);
+	public static final StreamCodec<RegistryFriendlyByteBuf, DoughRecipe> STREAM_CODEC = StreamCodec.unit(INSTANCE);
+	public static final RecipeSerializer<DoughRecipe> SERIALIZER = new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
+
+	public DoughRecipe() {
+		super();
 	}
 
 	@Override
@@ -43,7 +52,7 @@ public class DoughRecipe extends CustomRecipe
 	}
 
 	@Override
-	public ItemStack assemble(CraftingInput container, HolderLookup.Provider registryAccess) {
+	public ItemStack assemble(CraftingInput container) {
 		return new ItemStack(ModItems.WHEAT_DOUGH.get());
 	}
 
@@ -62,12 +71,7 @@ public class DoughRecipe extends CustomRecipe
 	}
 
 	@Override
-	public boolean canCraftInDimensions(int width, int height) {
-		return width >= 2 && height >= 2;
-	}
-
-	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<DoughRecipe> getSerializer() {
 		return ModRecipeSerializers.DOUGH.get();
 	}
 }

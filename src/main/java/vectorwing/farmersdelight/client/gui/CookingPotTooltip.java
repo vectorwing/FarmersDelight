@@ -3,17 +3,16 @@ package vectorwing.farmersdelight.client.gui;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
-import org.joml.Matrix4f;
+import org.jspecify.annotations.NonNull;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
-public class CookingPotTooltip implements ClientTooltipComponent
-{
+public class CookingPotTooltip implements ClientTooltipComponent {
 	private static final int ITEM_SIZE = 16;
 	private static final int MARGIN = 4;
 
@@ -25,12 +24,12 @@ public class CookingPotTooltip implements ClientTooltipComponent
 	}
 
 	@Override
-	public int getHeight() {
+	public int getHeight(@NonNull Font font) {
 		return mealStack.isEmpty() ? textSpacing : textSpacing + ITEM_SIZE;
 	}
 
 	@Override
-	public int getWidth(Font font) {
+	public int getWidth(@NonNull Font font) {
 		if (!mealStack.isEmpty()) {
 			MutableComponent textServingsOf = mealStack.getCount() == 1
 					? TextUtils.tooltip("cooking_pot.single_serving")
@@ -42,30 +41,31 @@ public class CookingPotTooltip implements ClientTooltipComponent
 	}
 
 	@Override
-	public void renderImage(Font font, int mouseX, int mouseY, GuiGraphics gui) {
+	public void extractImage(@NonNull Font font, int mouseX, int mouseY, int width, int height, @NonNull GuiGraphicsExtractor gui) {
 		if (mealStack.isEmpty()) return;
-		gui.renderItem(mealStack, mouseX, mouseY + textSpacing, 0);
+		gui.item(mealStack, mouseX, mouseY + textSpacing, 0);
 	}
 
 	@Override
-	public void renderText(Font font, int x, int y, Matrix4f matrix4f, MultiBufferSource.BufferSource bufferSource) {
+	public void extractText(@NonNull GuiGraphicsExtractor guiGraphics, @NonNull Font font, int x, int y) {
 		Integer color = ChatFormatting.GRAY.getColor();
-		int gray = color == null ? -1 : color;
+		int gray = color == null ? -1 : ARGB.opaque(color);
 
 		if (!mealStack.isEmpty()) {
 			MutableComponent textServingsOf = mealStack.getCount() == 1
 					? TextUtils.tooltip("cooking_pot.single_serving")
 					: TextUtils.tooltip("cooking_pot.many_servings", mealStack.getCount());
 
-			font.drawInBatch(textServingsOf, (float) x, (float) y, gray, true, matrix4f, bufferSource, Font.DisplayMode.NORMAL, 0, 15728880);
-			font.drawInBatch(mealStack.getHoverName(), x + ITEM_SIZE + MARGIN, y + textSpacing + MARGIN, -1, true, matrix4f, bufferSource, Font.DisplayMode.NORMAL, 0, 15728880);
+			guiGraphics.textWithWordWrap(font, textServingsOf, x, y, 96, gray);
+			guiGraphics.textWithWordWrap(font, mealStack.getHoverName(), x + ITEM_SIZE + MARGIN, y + textSpacing + MARGIN, 96, -1);
 		} else {
 			MutableComponent textEmpty = TextUtils.tooltip("cooking_pot.empty");
-			font.drawInBatch(textEmpty, x, y, gray, true, matrix4f, bufferSource, Font.DisplayMode.NORMAL, 0, 15728880);
+			guiGraphics.textWithWordWrap(font, textEmpty, x, y, 96, gray);
 		}
 	}
 
-	public record CookingPotTooltipComponent(ItemStack mealStack) implements TooltipComponent
-	{
+	public record CookingPotTooltipComponent(ItemStack mealStack) implements TooltipComponent {
 	}
 }
+
+

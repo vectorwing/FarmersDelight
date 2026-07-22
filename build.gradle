@@ -3,7 +3,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '1.0.0'
+    id 'net.neoforged.moddev' version '2.0.141'
 }
 
 tasks.named('wrapper', Wrapper).configure {
@@ -35,15 +35,10 @@ base {
     archivesName = 'FarmersDelight'
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
 neoForge {
     version = project.neo_version
-
-    parchment {
-        mappingsVersion = project.parchment_mappings_version
-        minecraftVersion = project.parchment_minecraft_version
-    }
 
     // This line is optional. Access Transformers are automatically detected
     // accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
@@ -71,7 +66,7 @@ neoForge {
         }
 
         data {
-            data()
+            clientData()
 
             // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
             // gameDirectory = project.file('run-data')
@@ -107,27 +102,27 @@ sourceSets.main.resources {
     srcDir 'src/generated/resources'
 }
 
+// The generated JSON assets are shipped with the mod and do not need the
+// generator classes at runtime. NeoForge 26.1 changed its data-generation API;
+// keep the runtime port buildable while that development-only tooling is ported.
+sourceSets.main.java {
+    exclude 'vectorwing/farmersdelight/data/**'
+    // Optional integrations currently target Minecraft 1.21. Re-enable each
+    // package when a matching 26.1 dependency and API port are available.
+    exclude 'vectorwing/farmersdelight/integration/**'
+    // These two optional hooks depend on systems that were redesigned in
+    // 26.1 (data-driven villager trades and the extracted block renderer).
+    exclude 'vectorwing/farmersdelight/common/event/VillagerEvents.java'
+    exclude 'vectorwing/farmersdelight/common/mixin/HideBlockBreakProgressMixin.java'
+}
+
 configurations {
     runtimeClasspath.extendsFrom localRuntime
 }
 
 dependencies {
-    // JEI
-    compileOnly "mezz.jei:jei-${jei_minecraft}-common-api:${jei_version}"
-    compileOnly "mezz.jei:jei-${jei_minecraft}-neoforge-api:${jei_version}"
-//    localRuntime "mezz.jei:jei-${jei_minecraft}-neoforge:${jei_version}"
-
-    // EMI
-    compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
-    runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
-
-    // AppleSkin
-    compileOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}:api"
-    runtimeOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}"
-
-    def ctDep = "com.blamejared.crafttweaker:CraftTweaker-neoforge-${crafttweaker_minecraft}:${crafttweaker_version}"
-    compileOnly ctDep
-    runtimeOnly ctDep
+    // Optional integrations are intentionally disabled for the initial 26.1
+    // runtime port. Their previous artifacts target Minecraft 1.21/1.21.1.
 }
 
 tasks.withType(ProcessResources).configureEach {
@@ -142,6 +137,9 @@ tasks.withType(ProcessResources).configureEach {
             mod_license            : mod_license,
             mod_version            : mod_version,
             mod_authors            : mod_authors,
+            port_maintainer        : port_maintainer,
+            port_source_url        : port_source_url,
+            port_issue_url         : port_issue_url,
             mod_description        : mod_description
     ]
     inputs.properties replaceProperties
@@ -149,6 +147,15 @@ tasks.withType(ProcessResources).configureEach {
     filesMatching(['META-INF/neoforge.mods.toml']) {
         expand replaceProperties
     }
+}
+
+tasks.named('jar', Jar).configure {
+    // Preserve upstream licensing and make the unofficial-port attribution
+    // available inside every distributable artifact.
+    from('LICENSE')
+    from('README.md')
+    from('README_ZH.md')
+    from('NOTICE.md')
 }
 
 publishing {
@@ -166,6 +173,7 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+    options.compilerArgs += ['-Xmaxerrs', '1000']
 }
 
 idea {

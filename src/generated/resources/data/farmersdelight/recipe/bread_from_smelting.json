@@ -1,13 +1,11 @@
 {
-  "type": "minecraft:smelting",
-  "category": "food",
-  "cookingtime": 200,
-  "experience": 0.35,
-  "ingredient": {
-    "item": "farmersdelight:wheat_dough"
-  },
-  "result": {
-    "count": 1,
-    "id": "minecraft:bread"
-  }
+    "type":  "minecraft:smelting",
+    "category":  "food",
+    "cookingtime":  200,
+    "experience":  0.35,
+    "ingredient":  "farmersdelight:wheat_dough",
+    "result":  {
+                   "count":  1,
+                   "id":  "minecraft:bread"
+               }
 }

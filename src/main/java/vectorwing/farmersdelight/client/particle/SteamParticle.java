@@ -2,19 +2,18 @@ package vectorwing.farmersdelight.client.particle;
 
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.RandomSource;
 
-import javax.annotation.Nonnull;
-
-public class SteamParticle extends TextureSheetParticle
+public class SteamParticle extends SingleQuadParticle
 {
-	protected SteamParticle(ClientLevel level, double x, double y, double z, double motionX, double motionY, double motionZ) {
-		super(level, x, y, z);
+	protected SteamParticle(ClientLevel level, double x, double y, double z, double motionX, double motionY, double motionZ, TextureAtlasSprite textureAtlasSprite) {
+		super(level, x, y, z, textureAtlasSprite);
 		this.scale(2.0F);
 		this.setSize(0.25F, 0.25F);
 
 		this.lifetime = this.random.nextInt(50) + 80;
-
 		this.gravity = 3.0E-6F;
 		this.xd = motionX;
 		this.yd = motionY + (double) (this.random.nextFloat() / 500.0F);
@@ -22,11 +21,6 @@ public class SteamParticle extends TextureSheetParticle
 	}
 
 	@Override
-	@Nonnull
-	public ParticleRenderType getRenderType() {
-		return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
-	}
-
 	public void tick() {
 		this.xo = this.x;
 		this.yo = this.y;
@@ -44,6 +38,11 @@ public class SteamParticle extends TextureSheetParticle
 		}
 	}
 
+	@Override
+	protected Layer getLayer() {
+		return Layer.TRANSLUCENT;
+	}
+
 	public static class Factory implements ParticleProvider<SimpleParticleType>
 	{
 		private final SpriteSet spriteSet;
@@ -53,10 +52,9 @@ public class SteamParticle extends TextureSheetParticle
 		}
 
 		@Override
-		public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-			SteamParticle particle = new SteamParticle(level, x, y + 0.3D, z, xSpeed, ySpeed, zSpeed);
+		public Particle createParticle(SimpleParticleType typeIn, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource random) {
+			SteamParticle particle = new SteamParticle(level, x, y + 0.3D, z, xSpeed, ySpeed, zSpeed, this.spriteSet.get(random));
 			particle.setAlpha(0.6F);
-			particle.pickSprite(this.spriteSet);
 			return particle;
 		}
 	}
