@@ -27,7 +27,7 @@ repositories {
     maven { url "https://maven.ryanliptak.com/" }
     maven {
         // EMI
-        url = "https://maven.terraformersmc.com/"
+        url = "https://maven.terraformersmc.com/releases/"
     }
 }
 
