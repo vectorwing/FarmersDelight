@@ -1,19 +1,10 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
-    "S": {
-      "item": "minecraft:wooden_shovel"
-    },
-    "W": {
-      "tag": "c:buckets/water"
-    },
-    "b": {
-      "item": "minecraft:brick"
-    },
-    "i": {
-      "tag": "c:ingots/iron"
-    }
+    "S": "minecraft:wooden_shovel",
+    "W": "#c:buckets/water",
+    "b": "minecraft:brick",
+    "i": "#c:ingots/iron"
   },
   "pattern": [
     "bSb",
@@ -21,7 +12,6 @@
     "iii"
   ],
   "result": {
-    "count": 1,
     "id": "farmersdelight:cooking_pot"
   }
 }

@@ -11,7 +11,7 @@ import com.blamejared.crafttweaker.api.util.random.Percentaged;
 import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import org.openzen.zencode.java.ZenCodeType;
@@ -62,7 +62,7 @@ public class CuttingBoardRecipeManager implements IRecipeManager
                         ListUtils.mapArrayIndexSet(results,
                                 (stack) -> new ChanceResult(stack.getData().getInternal(), (float) stack.getPercentage()),
                                 NonNullList.withSize(results.length, ChanceResult.EMPTY)),
-                        BuiltInRegistries.SOUND_EVENT.getOptional(ResourceLocation.parse(sound)))),
+                        BuiltInRegistries.SOUND_EVENT.getOptional(Identifier.parse(sound)))),
                 ""));
     }
 

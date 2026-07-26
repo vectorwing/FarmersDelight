@@ -1,15 +1,15 @@
 package vectorwing.farmersdelight.common.entity;
 
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -20,7 +20,6 @@ import vectorwing.farmersdelight.common.registry.ModSounds;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class RottenTomatoEntity extends ThrowableItemProjectile
 {
 	public RottenTomatoEntity(EntityType<? extends RottenTomatoEntity> entityType, Level level) {
@@ -28,11 +27,11 @@ public class RottenTomatoEntity extends ThrowableItemProjectile
 	}
 
 	public RottenTomatoEntity(Level level, LivingEntity entity) {
-		super(ModEntityTypes.ROTTEN_TOMATO.get(), entity, level);
+		super(ModEntityTypes.ROTTEN_TOMATO.get(), entity, level, new ItemStack(ModItems.ROTTEN_TOMATO.get()));
 	}
 
 	public RottenTomatoEntity(Level level, double x, double y, double z) {
-		super(ModEntityTypes.ROTTEN_TOMATO.get(), x, y, z, level);
+		super(ModEntityTypes.ROTTEN_TOMATO.get(), x, y, z, level, new ItemStack(ModItems.ROTTEN_TOMATO.get()));
 	}
 
 	@Override
@@ -44,7 +43,7 @@ public class RottenTomatoEntity extends ThrowableItemProjectile
 	public void handleEntityEvent(byte id) {
 		ItemStack entityStack = new ItemStack(this.getDefaultItem());
 		if (id == 3) {
-			ParticleOptions iparticledata = new ItemParticleOption(ParticleTypes.ITEM, entityStack);
+			ParticleOptions iparticledata = new ItemParticleOption(ParticleTypes.ITEM, ItemStackTemplate.fromStack(entityStack));
 
 			for (int i = 0; i < 12; ++i) {
 				this.level().addParticle(iparticledata, this.getX(), this.getY(), this.getZ(),
@@ -66,7 +65,7 @@ public class RottenTomatoEntity extends ThrowableItemProjectile
 	@Override
 	protected void onHit(HitResult result) {
 		super.onHit(result);
-		if (!this.level().isClientSide) {
+		if (!this.level().isClientSide()) {
 			this.level().broadcastEntityEvent(this, (byte) 3);
 			this.playSound(ModSounds.ENTITY_ROTTEN_TOMATO_HIT.get(), 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 			this.discard();

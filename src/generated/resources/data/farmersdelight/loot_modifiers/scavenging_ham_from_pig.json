@@ -5,7 +5,7 @@
       "condition": "minecraft:entity_properties",
       "entity": "attacker",
       "predicate": {
-        "equipment": {
+        "minecraft:equipment": {
           "mainhand": {
             "items": "#farmersdelight:tools/knives"
           }
@@ -16,14 +16,14 @@
       "condition": "minecraft:entity_properties",
       "entity": "this",
       "predicate": {
-        "type": "minecraft:pig"
+        "minecraft:entity_type": "minecraft:pig"
       }
     },
     {
       "condition": "minecraft:entity_properties",
       "entity": "this",
       "predicate": {
-        "flags": {
+        "minecraft:flags": {
           "is_on_fire": false
         }
       }
@@ -39,5 +39,6 @@
       "unenchanted_chance": 0.5
     }
   ],
-  "item": "farmersdelight:ham"
+  "item": "farmersdelight:ham",
+  "priority": 0
 }

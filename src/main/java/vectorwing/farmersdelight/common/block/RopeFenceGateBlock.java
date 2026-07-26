@@ -3,8 +3,10 @@ package vectorwing.farmersdelight.common.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -25,10 +27,10 @@ public class RopeFenceGateBlock extends FenceGateBlock
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+	protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource random) {
 		Direction.Axis axis = facing.getAxis();
 		if (state.getValue(FACING).getClockWise().getAxis() != axis) {
-			return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+			return super.updateShape(state, level, scheduledTickAccess, currentPos, facing, facingPos, facingState, random);
 		} else {
 			boolean isBorderedByWalls = this.isWall(facingState) && this.isWall(level.getBlockState(currentPos.relative(facing.getOpposite())));
 			return state.setValue(IN_WALL, isBorderedByWalls);
@@ -40,12 +42,12 @@ public class RopeFenceGateBlock extends FenceGateBlock
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+	protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return state.getValue(FACING).getAxis() == Direction.Axis.X ? X_SHAPE : Z_SHAPE;
 	}
 
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+	protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		if (state.getValue(OPEN)) {
 			return Shapes.empty();
 		} else {

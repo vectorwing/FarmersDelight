@@ -6,8 +6,9 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
@@ -29,7 +30,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.BlockHitResult;
@@ -50,7 +51,7 @@ import java.util.Optional;
 @SuppressWarnings("deprecation")
 public abstract class AbstractStoveBlock extends BaseEntityBlock
 {
-	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+	public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
 	private static final VoxelShape GRILLING_AREA = Block.box(3.0F, 0.0F, 3.0F, 13.0F, 1.0F, 13.0F);
@@ -64,19 +65,19 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock
 		);
 	}
 	@Override
-	public ItemInteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+	public InteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (state.getValue(LIT)) {
 			var extinguishResult = tryToExtinguish(heldStack, state, level, pos, player, hand, hit);
-			if (extinguishResult != ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION) return extinguishResult;
+			if (extinguishResult != InteractionResult.PASS) return extinguishResult;
 		} else {
 			var igniteResult = tryToIgnite(heldStack, state, level, pos, player, hand, hit);
-			if (igniteResult != ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION) return igniteResult;
+			if (igniteResult != InteractionResult.PASS) return igniteResult;
 		}
 
 		return tryToPlaceFoodItem(heldStack, state, level, pos, player, hand, hit);
 	}
 
-	protected ItemInteractionResult tryToIgnite(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+	protected InteractionResult tryToIgnite(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		Item heldItem = heldStack.getItem();
 
 		if (heldItem instanceof FlintAndSteelItem) {
@@ -84,8 +85,8 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock
 				level.playSound(null, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, MathUtils.RAND.nextFloat() * 0.4F + 0.8F);
 			}
 			ignite(player, level, pos, state);
-			heldStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
-			return ItemInteractionResult.SUCCESS;
+			heldStack.hurtAndBreak(1, player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
+			return InteractionResult.SUCCESS;
 		}
 
 		if (heldItem instanceof FireChargeItem) {
@@ -96,20 +97,20 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock
 			if (!player.getAbilities().instabuild) {
 				heldStack.shrink(1);
 			}
-			return ItemInteractionResult.SUCCESS;
+			return InteractionResult.SUCCESS;
 		}
 
-		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+		return InteractionResult.PASS;
 	}
 
-	protected ItemInteractionResult tryToExtinguish(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		if (heldStack.canPerformAction(ItemAbilities.SHOVEL_DIG)) {
+	protected InteractionResult tryToExtinguish(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		if (heldStack.canPerformAction(ItemAbilities.SHOVEL_DOUSE)) {
 			if (!level.isClientSide()) {
 				level.levelEvent(null, LevelEvent.SOUND_EXTINGUISH_FIRE, pos, 0);
 			}
 			extinguish(player, level, pos, state);
-			heldStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
-			return ItemInteractionResult.sidedSuccess(level.isClientSide());
+			heldStack.hurtAndBreak(1, player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
+			return InteractionResult.SUCCESS;
 		}
 
 		if (heldStack.is(Tags.Items.BUCKETS_WATER)) {
@@ -117,24 +118,24 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock
 				level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 1.0F, 1.0F);
 			}
 			extinguish(player, level, pos, state);
-			if (!player.getAbilities().instabuild) player.setItemInHand(hand, heldStack.getCraftingRemainingItem());
-			return ItemInteractionResult.sidedSuccess(level.isClientSide());
+			if (!player.getAbilities().instabuild) player.setItemInHand(hand, ItemUtils.getCraftingRemainingItem(heldStack));
+			return InteractionResult.SUCCESS;
 		}
 
-		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+		return InteractionResult.PASS;
 	}
 
-	protected ItemInteractionResult tryToPlaceFoodItem(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		if (isStoveTopCovered(level, pos, state)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-		if (!(level.getBlockEntity(pos) instanceof AbstractStoveBlockEntity stoveEntity)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+	protected InteractionResult tryToPlaceFoodItem(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		if (isStoveTopCovered(level, pos, state)) return InteractionResult.PASS;
+		if (!(level.getBlockEntity(pos) instanceof AbstractStoveBlockEntity stoveEntity)) return InteractionResult.PASS;
 
 		var maybeRecipe = stoveEntity.getCookingRecipe(heldStack);
-		if (maybeRecipe.isEmpty()) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-		if (level.isClientSide) return ItemInteractionResult.CONSUME;
+		if (maybeRecipe.isEmpty()) return InteractionResult.PASS;
+		if (level.isClientSide()) return InteractionResult.CONSUME;
 		boolean placeFoodSuccess = stoveEntity.placeFood(player, player.getAbilities().instabuild ? heldStack.copy() : heldStack, maybeRecipe.get());
-		if (!placeFoodSuccess) return ItemInteractionResult.CONSUME;
+		if (!placeFoodSuccess) return InteractionResult.CONSUME;
 		level.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundSource.BLOCKS, 0.5F, 1.0F);
-		return ItemInteractionResult.SUCCESS;
+		return InteractionResult.SUCCESS;
 	}
 
 	public void ignite(@Nullable Entity entity, LevelAccessor level, BlockPos pos, BlockState state) {
@@ -186,12 +187,11 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock
 	}
 
 	@Override
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (state.is(newState.getBlock())) return;
+	public void destroy(LevelAccessor level, BlockPos pos, BlockState state) {
 		if (level.getBlockEntity(pos) instanceof AbstractStoveBlockEntity stoveEntity) {
-			ItemUtils.dropItems(level, pos, stoveEntity.getItems());
+			ItemUtils.dropItems((Level) level, pos, stoveEntity.getItems());
 		}
-		super.onRemove(state, level, pos, newState, isMoving);
+		super.destroy(level, pos, state);
 	}
 
 	/**
@@ -212,14 +212,14 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock
 
 	@Nullable
 	protected static <T extends BlockEntity> BlockEntityTicker<T> createStoveTicker(Level level, BlockEntityType<T> serverType, BlockEntityType<? extends AbstractStoveBlockEntity> clientType) {
-		if (level.isClientSide) return null;
+		if (level.isClientSide()) return null;
 		return createTickerHelper(serverType, clientType, AbstractStoveBlockEntity::serverTick);
 	}
 
 	@Nullable
 	@Override
 	public PathType getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob entity) {
-		return state.getValue(LIT) ? PathType.DAMAGE_FIRE : null;
+		return state.getValue(LIT) ? PathType.DAMAGING : null;
 	}
 
 	@Override

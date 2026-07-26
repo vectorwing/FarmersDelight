@@ -7,7 +7,7 @@ import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.SlotWidget;
 import dev.emi.emi.api.widget.WidgetHolder;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -22,8 +22,8 @@ import vectorwing.farmersdelight.integration.emi.FDRecipeWorkstations;
 import java.util.List;
 
 public class DecompositionEmiRecipe implements EmiRecipe {
-    public static final ResourceLocation ID = RecipeUtils.FDLocation("/decomposition/dummy");
-    private static final ResourceLocation BACKGROUND = RecipeUtils.FDLocation("textures/gui/jei/decomposition.png");
+    public static final Identifier ID = RecipeUtils.FDLocation("/decomposition/dummy");
+    private static final Identifier BACKGROUND = RecipeUtils.FDLocation("textures/gui/jei/decomposition.png");
 
     private static final EmiStack RICH_SOIL = EmiStack.of(ModItems.RICH_SOIL.get());
     private static final EmiIngredient ACCELERATORS = EmiIngredient.of(ModTags.Blocks.COMPOST_ACTIVATORS);
@@ -38,7 +38,7 @@ public class DecompositionEmiRecipe implements EmiRecipe {
     }
 
     @Override
-    public @Nullable ResourceLocation getId() {
+    public @Nullable Identifier getId() {
         return ID;
     }
 

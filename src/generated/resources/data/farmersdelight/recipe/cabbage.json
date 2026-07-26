@@ -1,11 +1,8 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "fd_cabbage",
   "ingredients": [
-    {
-      "item": "farmersdelight:cabbage_crate"
-    }
+    "farmersdelight:cabbage_crate"
   ],
   "result": {
     "count": 9,

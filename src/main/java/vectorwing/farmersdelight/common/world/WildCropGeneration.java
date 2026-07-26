@@ -6,7 +6,7 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -17,7 +17,6 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.RandomizedIntStateProvider;
@@ -29,6 +28,7 @@ import vectorwing.farmersdelight.common.registry.ModBiomeFeatures;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.world.configuration.WildCropConfiguration;
+import vectorwing.farmersdelight.common.world.configuration.WildRiceConfiguration;
 import vectorwing.farmersdelight.common.world.filter.BiomeTagFilter;
 
 import javax.annotation.Nullable;
@@ -59,18 +59,20 @@ public class WildCropGeneration
 	public static ResourceKey<PlacedFeature> PATCH_RED_MUSHROOM_COLONIES = registerPlacedFeatureKey("patch_red_mushroom_colony");
 
 	private static ResourceKey<ConfiguredFeature<?, ?>> registerConfiguredFeatureKey(String name) {
-		return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, name));
+		return ResourceKey.create(Registries.CONFIGURED_FEATURE, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, name));
 	}
 
 	private static ResourceKey<PlacedFeature> registerPlacedFeatureKey(String name) {
-		return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, name));
+		return ResourceKey.create(Registries.PLACED_FEATURE, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, name));
 	}
 
 	public static void bootstrapConfiguredFeatures(BootstrapContext<ConfiguredFeature<?, ?>> context) {
 		context.register(FEATURE_PATCH_SANDY_SHRUB, new ConfiguredFeature<>(
-				Feature.RANDOM_PATCH,
-				new RandomPatchConfiguration(32, 2, 3,
-						plantPlacedFeature(ModBlocks.SANDY_SHRUB.get(), BlockTags.SAND))
+				ModBiomeFeatures.WILD_CROP.get(),
+				new WildCropConfiguration(32, 2, 3,
+						plantPlacedFeature(ModBlocks.SANDY_SHRUB.get(), BlockTags.SAND),
+						plantPlacedFeature(ModBlocks.SANDY_SHRUB.get(), BlockTags.SAND),
+						null)
 		));
 		context.register(FEATURE_PATCH_WILD_CABBAGES, wildCropConfiguredFeature(
 				ModBlocks.WILD_CABBAGES.get(),
@@ -103,9 +105,7 @@ public class WildCropGeneration
 		));
 		context.register(FEATURE_PATCH_WILD_RICE, new ConfiguredFeature<>(
 				ModBiomeFeatures.WILD_RICE.get(),
-				new RandomPatchConfiguration(96, 7, 3,
-						plantPlacedFeature(ModBlocks.WILD_RICE.get(), BlockTags.DIRT)
-				)
+				new WildRiceConfiguration(96, 7, 3)
 		));
 		context.register(FEATURE_PATCH_BROWN_MUSHROOM_COLONIES, mushroomColonyConfiguredFeature(
 				ModBlocks.BROWN_MUSHROOM_COLONY.get(),

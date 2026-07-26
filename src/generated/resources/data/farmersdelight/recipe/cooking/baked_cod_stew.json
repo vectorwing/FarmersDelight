@@ -2,22 +2,13 @@
   "type": "farmersdelight:cooking",
   "experience": 1.0,
   "ingredients": [
-    {
-      "tag": "c:foods/raw_cod"
-    },
-    {
-      "tag": "c:crops/potato"
-    },
-    {
-      "tag": "c:eggs"
-    },
-    {
-      "tag": "c:crops/tomato"
-    }
+    "#c:foods/raw_cod",
+    "#c:crops/potato",
+    "#c:eggs",
+    "#c:crops/tomato"
   ],
   "recipe_book_tab": "meals",
   "result": {
-    "count": 1,
     "id": "farmersdelight:baked_cod_stew"
   }
 }

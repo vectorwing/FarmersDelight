@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-12T22:48:02.3817964	Tags for minecraft:block mod id farmersdelight
+// 26.2	2026-07-26T18:52:18.5749773	Tags for minecraft:block mod id farmersdelight
 38f828e4676e464f280ee9fcbbd1065fa89e4218 data/create/tags/block/brittle.json
 8481234a20c9d13f4da1a07b9651d1b99bbd0fad data/create/tags/block/fan_transparent.json
 89dff4a2813a4b6fe13cde6e775266a1d606a4aa data/create/tags/block/passive_boiler_heaters.json
@@ -20,7 +20,7 @@ b1919af26385c8c277cbefc52e2d517cfa896190 data/c/tags/block/storage_blocks/rice_p
 19fcfae5f5396dfec4a1ca0d53473ceec4d202c0 data/farmersdelight/tags/block/cabinets/wooden.json
 6644ebda4035b2e597066fa2def42ba14650cfbc data/farmersdelight/tags/block/campfire_signal_smoke.json
 a3e0620f099da33e71998eb0cb6aa2fd9e457a51 data/farmersdelight/tags/block/compost_activators.json
-17bf02f1662de477e421a897a9b1a092da3fd1b4 data/farmersdelight/tags/block/drops_cake_slice.json
+55214b20812db2a28666df43349c23f7ac0e45ea data/farmersdelight/tags/block/drops_cake_slice.json
 e0807dee5085dc45ed2c07737845f88270bc224e data/farmersdelight/tags/block/feasts.json
 bfaccff8e729039a0c1d0db4d359ded77f7c60c8 data/farmersdelight/tags/block/heat_conductors.json
 641a6e1f4ea5020a7d3d0ccd6b1642b3426c3455 data/farmersdelight/tags/block/heat_sources.json
@@ -33,9 +33,8 @@ d0812613832bbc602d7ff3274c81d5729e91c2ea data/farmersdelight/tags/block/mushroom
 7fb4a165414cdcfd2ba7931bc908720e4eeb9d0f data/farmersdelight/tags/block/straw_blocks.json
 e4d28099b3557b120274c2ef7593e202019c4d65 data/farmersdelight/tags/block/terrain.json
 90c6f0a64d1a682335e4b5dca86a5c85073951a0 data/farmersdelight/tags/block/tray_heat_sources.json
-106f8e5a8993cd993c7bba3b04b5e6431908e5fb data/farmersdelight/tags/block/unaffected_by_rich_soil.json
+0d4f9dead27627e2cb7009d07bb5d86165f43307 data/farmersdelight/tags/block/unaffected_by_rich_soil.json
 5596501768488a25c5bcc6ef16c2fc5ca3ab49e9 data/farmersdelight/tags/block/wild_crops.json
-d0812613832bbc602d7ff3274c81d5729e91c2ea data/minecraft/tags/block/bamboo_plantable_on.json
 859810b0bf4f36e275af5b6a86c3c7b9a968dbd3 data/minecraft/tags/block/ceiling_hanging_signs.json
 ba20db5500d52fd1d778ebf4beffbb5f5f3e9ef8 data/minecraft/tags/block/climbable.json
 0da15d7e6b0822bc549fda4415b52284b244626d data/minecraft/tags/block/combination_step_sound_blocks.json
@@ -43,17 +42,18 @@ b6a491ddff6438e24735c2dd0910826455e61c68 data/minecraft/tags/block/crops.json
 d0812613832bbc602d7ff3274c81d5729e91c2ea data/minecraft/tags/block/dirt.json
 76c23603e65410291af111793aa931640128fae8 data/minecraft/tags/block/fences.json
 1ba129ce39f820a673b8ed7d47d083a5252dd5e3 data/minecraft/tags/block/fence_gates.json
+166fca1b0d8b63bf7564f93e9e7d0bf3dd45bf03 data/minecraft/tags/block/flowers.json
+70df609f6a7436162e87d14c6a742f3f0c3dff35 data/minecraft/tags/block/huge_brown_mushroom_can_place_on.json
 46eba184858bae298b1430bbab858976e323111c data/minecraft/tags/block/maintains_farmland.json
 6b3db202de5fe047ba94806e175ccf38b458afba data/minecraft/tags/block/mineable/axe.json
 2a8f19bc7b45789f94892524a425f28c21f4d227 data/minecraft/tags/block/mineable/hoe.json
 963c2f1508fda246255005f0ac460a274c704ecd data/minecraft/tags/block/mineable/pickaxe.json
 0eb2b01360e681e4689610044f4da8ace960e921 data/minecraft/tags/block/mineable/shovel.json
-70df609f6a7436162e87d14c6a742f3f0c3dff35 data/minecraft/tags/block/mushroom_grow_block.json
 6bed2bc685973bf66e23513668eae44c1b875754 data/minecraft/tags/block/replaceable.json
 6bed2bc685973bf66e23513668eae44c1b875754 data/minecraft/tags/block/replaceable_by_trees.json
 f3b1539ad9a9117d3c48eca8dc67768f1a118df4 data/minecraft/tags/block/small_flowers.json
 f689dbe322491c7ad7b7aa512fbd981bc4d7ec45 data/minecraft/tags/block/standing_signs.json
-166fca1b0d8b63bf7564f93e9e7d0bf3dd45bf03 data/minecraft/tags/block/tall_flowers.json
+d0812613832bbc602d7ff3274c81d5729e91c2ea data/minecraft/tags/block/supports_bamboo.json
 4bc9553c952a9d40a7ff218395d48f27f8c08df7 data/minecraft/tags/block/wall_hanging_signs.json
 42655e1b47b467aeaf7593e6f2fca0a16786fb87 data/minecraft/tags/block/wall_signs.json
 d899a783b5e4f2dcef445788a2e88b0d687a20b8 data/neoforge/tags/block/villager_farmlands.json

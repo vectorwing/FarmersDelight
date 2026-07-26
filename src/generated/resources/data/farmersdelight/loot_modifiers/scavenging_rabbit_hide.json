@@ -5,7 +5,7 @@
       "condition": "minecraft:entity_properties",
       "entity": "attacker",
       "predicate": {
-        "equipment": {
+        "minecraft:equipment": {
           "mainhand": {
             "items": "#farmersdelight:tools/knives"
           }
@@ -16,9 +16,10 @@
       "condition": "minecraft:entity_properties",
       "entity": "this",
       "predicate": {
-        "type": "minecraft:rabbit"
+        "minecraft:entity_type": "minecraft:rabbit"
       }
     }
   ],
-  "item": "minecraft:rabbit_hide"
+  "item": "minecraft:rabbit_hide",
+  "priority": 0
 }

@@ -7,45 +7,9 @@
       "parameters": []
     },
     {
-      "enum": "net/minecraft/client/RecipeBookCategories",
-      "name": "FARMERSDELIGHT_COOKING_SEARCH",
-      "constructor": "(Ljava/util/function/Supplier;)V",
-      "parameters": {
-        "class": "vectorwing/farmersdelight/common/EnumParameters",
-        "field": "PROXY_COOKING_SEARCH"
-      }
-    },
-    {
-      "enum": "net/minecraft/client/RecipeBookCategories",
-      "name": "FARMERSDELIGHT_COOKING_MEALS",
-      "constructor": "(Ljava/util/function/Supplier;)V",
-      "parameters": {
-        "class": "vectorwing/farmersdelight/common/EnumParameters",
-        "field": "PROXY_COOKING_MEALS"
-      }
-    },
-    {
-      "enum": "net/minecraft/client/RecipeBookCategories",
-      "name": "FARMERSDELIGHT_COOKING_DRINKS",
-      "constructor": "(Ljava/util/function/Supplier;)V",
-      "parameters": {
-        "class": "vectorwing/farmersdelight/common/EnumParameters",
-        "field": "PROXY_COOKING_DRINKS"
-      }
-    },
-    {
-      "enum": "net/minecraft/client/RecipeBookCategories",
-      "name": "FARMERSDELIGHT_COOKING_MISC",
-      "constructor": "(Ljava/util/function/Supplier;)V",
-      "parameters": {
-        "class": "vectorwing/farmersdelight/common/EnumParameters",
-        "field": "PROXY_COOKING_MISC"
-      }
-    },
-    {
       "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
       "name": "FARMERSDELIGHT_SKILLET_FLIP",
-      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "constructor": "(ZZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
         "class": "vectorwing/farmersdelight/common/EnumParameters",
         "field": "PROXY_SKILLET_FLIP"

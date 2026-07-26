@@ -65,6 +65,17 @@ public class ItemUtils
 		level.addFreshEntity(entity);
 	}
 
+	public static ItemStack getCraftingRemainingItem(ItemStack stack) {
+		if (stack.isEmpty()) {
+			return ItemStack.EMPTY;
+		}
+		return stack.getItem().getCraftingRemainder().create();
+	}
+
+	public static boolean hasCraftingRemainingItem(ItemStack stack) {
+		return !getCraftingRemainingItem(stack).isEmpty();
+	}
+
 	/**
 	 * Checks if the enchantment is registered, and if so, gets that enchantment's level on the passed stack. Defaults to 0 in all edge cases.
 	 * @param enchantment The ResourceKey for the enchantment

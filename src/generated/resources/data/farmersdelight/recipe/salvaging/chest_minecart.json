@@ -1,20 +1,16 @@
 {
   "type": "farmersdelight:cutting",
   "ingredients": [
-    {
-      "item": "minecraft:chest_minecart"
-    }
+    "minecraft:chest_minecart"
   ],
   "result": [
     {
       "item": {
-        "count": 1,
         "id": "minecraft:minecart"
       }
     },
     {
       "item": {
-        "count": 1,
         "id": "minecraft:chest"
       }
     }
@@ -22,13 +18,14 @@
   "sound": {
     "sound_id": "minecraft:block.metal.break"
   },
-  "tool": [
-    {
-      "type": "farmersdelight:item_ability",
-      "action": "hoe_dig"
-    },
-    {
-      "tag": "minecraft:hoes"
-    }
-  ]
+  "tool": {
+    "neoforge:ingredient_type": "neoforge:compound",
+    "children": [
+      {
+        "neoforge:ingredient_type": "farmersdelight:item_ability",
+        "action": "hoe_dig"
+      },
+      "#minecraft:hoes"
+    ]
+  }
 }

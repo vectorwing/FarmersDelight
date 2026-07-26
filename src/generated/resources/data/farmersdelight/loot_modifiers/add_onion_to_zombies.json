@@ -8,21 +8,21 @@
           "condition": "minecraft:entity_properties",
           "entity": "this",
           "predicate": {
-            "type": "minecraft:zombie"
+            "minecraft:entity_type": "minecraft:zombie"
           }
         },
         {
           "condition": "minecraft:entity_properties",
           "entity": "this",
           "predicate": {
-            "type": "minecraft:husk"
+            "minecraft:entity_type": "minecraft:husk"
           }
         },
         {
           "condition": "minecraft:entity_properties",
           "entity": "this",
           "predicate": {
-            "type": "minecraft:zombie_villager"
+            "minecraft:entity_type": "minecraft:zombie_villager"
           }
         }
       ]
@@ -41,5 +41,6 @@
       "unenchanted_chance": 0.02
     }
   ],
-  "item": "farmersdelight:onion"
+  "item": "farmersdelight:onion",
+  "priority": 0
 }

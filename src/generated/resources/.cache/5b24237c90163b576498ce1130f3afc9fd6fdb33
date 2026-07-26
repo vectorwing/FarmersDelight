@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-17T15:50:57.228736	Tags for minecraft:item mod id farmersdelight
+// 26.2	2026-07-26T18:52:18.5718648	Tags for minecraft:item mod id farmersdelight
 65eba9e0353834055ff822059bd7e1784fe218ad data/createaddition/tags/item/plants.json
 f55c336a7c0c249fc90b76c979cfa5d5f6a277bf data/createaddition/tags/item/plant_foods.json
 578c1c9a03e76fe2831f34ee8a74b0d5396e7c0e data/create/tags/item/upright_on_belt.json
@@ -85,7 +85,6 @@ b144808149c1364e3cd3dc4b4128b76b24e00bf1 data/minecraft/tags/item/enchantable/fi
 b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/minecraft/tags/item/enchantable/mining.json
 b1d4ce3e56c5776870a8fdd487526210fd93ecbd data/minecraft/tags/item/enchantable/mining_loot.json
 b144808149c1364e3cd3dc4b4128b76b24e00bf1 data/minecraft/tags/item/enchantable/sharp_weapon.json
-b144808149c1364e3cd3dc4b4128b76b24e00bf1 data/minecraft/tags/item/enchantable/sword.json
 b144808149c1364e3cd3dc4b4128b76b24e00bf1 data/minecraft/tags/item/enchantable/weapon.json
 7441d3370afb8b426c09f3608f0dd0aea4f54e4d data/minecraft/tags/item/hanging_signs.json
 9f7c54970bfbea398bb27fdc66750b6459bc9946 data/minecraft/tags/item/horse_tempt_items.json
@@ -95,8 +94,6 @@ fe7bdb9a3a19d42543aea1030ea44f1db041a878 data/minecraft/tags/item/piglin_loved.j
 0b772a759b7363772f8ebecf5ec7df857d4ac6aa data/minecraft/tags/item/pig_food.json
 f1e2b43c8bc399294b2561cb228e3da8fc403a94 data/minecraft/tags/item/rabbit_food.json
 38e1524ee683c493a01193efe4926abb88caa287 data/minecraft/tags/item/signs.json
-f3b1539ad9a9117d3c48eca8dc67768f1a118df4 data/minecraft/tags/item/small_flowers.json
-166fca1b0d8b63bf7564f93e9e7d0bf3dd45bf03 data/minecraft/tags/item/tall_flowers.json
 71f39b71e1a7298641682ad8682ca945f8f7a35d data/minecraft/tags/item/villager_plantable_seeds.json
 f305fbe067478314b9763bd8e60893ec468f423b data/origins/tags/item/meat.json
 da9c9878a953f308686cf68600b9cc33de2301ae data/sereneseasons/tags/item/autumn_crops.json

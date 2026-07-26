@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.common.tag;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -51,10 +51,10 @@ public class CompatibilityTags
 	public static final TagKey<Item> TINKERS_CONSTRUCT_SEEDS = externalItemTag(TINKERS_CONSTRUCT, "seeds");
 
 	private static TagKey<Item> externalItemTag(String modId, String path) {
-		return ItemTags.create(ResourceLocation.fromNamespaceAndPath(modId, path));
+		return ItemTags.create(Identifier.fromNamespaceAndPath(modId, path));
 	}
 
 	private static TagKey<Block> externalBlockTag(String modId, String path) {
-		return BlockTags.create(ResourceLocation.fromNamespaceAndPath(modId, path));
+		return BlockTags.create(Identifier.fromNamespaceAndPath(modId, path));
 	}
 }

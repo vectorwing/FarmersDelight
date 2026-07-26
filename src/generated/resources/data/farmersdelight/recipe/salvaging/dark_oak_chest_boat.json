@@ -1,31 +1,28 @@
 {
   "type": "farmersdelight:cutting",
   "ingredients": [
-    {
-      "item": "minecraft:dark_oak_chest_boat"
-    }
+    "minecraft:dark_oak_chest_boat"
   ],
   "result": [
     {
       "item": {
-        "count": 1,
         "id": "minecraft:dark_oak_boat"
       }
     },
     {
       "item": {
-        "count": 1,
         "id": "minecraft:chest"
       }
     }
   ],
-  "tool": [
-    {
-      "type": "farmersdelight:item_ability",
-      "action": "hoe_dig"
-    },
-    {
-      "tag": "minecraft:hoes"
-    }
-  ]
+  "tool": {
+    "neoforge:ingredient_type": "neoforge:compound",
+    "children": [
+      {
+        "neoforge:ingredient_type": "farmersdelight:item_ability",
+        "action": "hoe_dig"
+      },
+      "#minecraft:hoes"
+    ]
+  }
 }

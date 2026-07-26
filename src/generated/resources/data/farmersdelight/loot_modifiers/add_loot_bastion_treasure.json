@@ -6,5 +6,6 @@
       "loot_table_id": "minecraft:chests/bastion_treasure"
     }
   ],
+  "priority": 0,
   "table": "farmersdelight:chests/fd_bastion_treasure"
 }

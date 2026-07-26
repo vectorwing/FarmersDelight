@@ -14,12 +14,13 @@ import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
-import net.minecraft.world.entity.animal.horse.Horse;
+import net.minecraft.world.entity.animal.equine.AbstractHorse;
+import net.minecraft.world.entity.animal.equine.Horse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -34,12 +35,13 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class HorseFeedItem extends Item
 {
 	public static final List<MobEffectInstance> EFFECTS = Lists.newArrayList(
-			new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 6000, 1),
-			new MobEffectInstance(MobEffects.JUMP, 6000, 0));
+			new MobEffectInstance(MobEffects.SPEED, 6000, 1),
+			new MobEffectInstance(MobEffects.JUMP_BOOST, 6000, 0));
 
 	public HorseFeedItem(Properties properties) {
 		super(properties);
@@ -55,7 +57,7 @@ public class HorseFeedItem extends Item
 			Entity target = event.getTarget();
 			ItemStack heldStack = event.getItemStack();
 
-			if (target instanceof LivingEntity entity && target.getType().is(ModTags.EntityTypes.HORSE_FEED_USERS)) {
+			if (target instanceof LivingEntity entity && target.typeHolder().is(ModTags.EntityTypes.HORSE_FEED_USERS)) {
 				boolean isTameable = entity instanceof AbstractHorse;
 
 				if (entity.isAlive() && (!isTameable || ((AbstractHorse) entity).isTamed()) && heldStack.getItem().equals(ModItems.HORSE_FEED.get())) {
@@ -84,13 +86,13 @@ public class HorseFeedItem extends Item
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
+	public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltip, TooltipFlag isAdvanced) {
 		if (!Configuration.ENABLE_FOOD_EFFECT_TOOLTIP.get()) {
 			return;
 		}
 
 		MutableComponent textWhenFeeding = TextUtils.tooltip("horse_feed.when_feeding");
-		tooltip.add(textWhenFeeding.withStyle(ChatFormatting.GRAY));
+		tooltip.accept(textWhenFeeding.withStyle(ChatFormatting.GRAY));
 
 		for (MobEffectInstance effectInstance : EFFECTS) {
 			MutableComponent effectDescription = Component.literal(" ");
@@ -106,7 +108,7 @@ public class HorseFeedItem extends Item
 				effectDescription.append(" (").append(MobEffectUtil.formatDuration(effectInstance, 1.0F, context.tickRate())).append(")");
 			}
 
-			tooltip.add(effectDescription.withStyle(effect.getCategory().getTooltipFormatting()));
+			tooltip.accept(effectDescription.withStyle(effect.getCategory().getTooltipFormatting()));
 		}
 	}
 

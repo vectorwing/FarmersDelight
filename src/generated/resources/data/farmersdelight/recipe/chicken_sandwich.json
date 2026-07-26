@@ -1,22 +1,12 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "ingredients": [
-    {
-      "tag": "c:foods/bread"
-    },
-    {
-      "tag": "c:foods/cooked_chicken"
-    },
-    {
-      "tag": "c:foods/leafy_green"
-    },
-    {
-      "tag": "c:crops/carrot"
-    }
+    "#c:foods/bread",
+    "#c:foods/cooked_chicken",
+    "#c:foods/leafy_green",
+    "#c:crops/carrot"
   ],
   "result": {
-    "count": 1,
     "id": "farmersdelight:chicken_sandwich"
   }
 }

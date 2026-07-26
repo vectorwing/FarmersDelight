@@ -88,7 +88,7 @@
     "sounds": [
       {
         "type": "event",
-        "name": "entity.leash_knot.place"
+        "name": "item.lead.tied"
       }
     ],
     "subtitle": "subtitles.farmersdelight.block.rope_fence_gate.close"
@@ -97,7 +97,7 @@
     "sounds": [
       {
         "type": "event",
-        "name": "entity.leash_knot.break"
+        "name": "item.lead.untied"
       }
     ],
     "subtitle": "subtitles.farmersdelight.block.rope_fence_gate.open"

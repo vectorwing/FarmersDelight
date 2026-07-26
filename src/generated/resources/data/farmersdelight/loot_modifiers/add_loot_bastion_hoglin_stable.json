@@ -6,5 +6,6 @@
       "loot_table_id": "minecraft:chests/bastion_hoglin_stable"
     }
   ],
+  "priority": 0,
   "table": "farmersdelight:chests/fd_bastion_hoglin_stable"
 }

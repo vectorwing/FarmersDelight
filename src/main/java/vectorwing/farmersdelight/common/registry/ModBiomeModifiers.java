@@ -10,7 +10,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
@@ -43,15 +43,15 @@ public class ModBiomeModifiers
 					GenerationStep.Decoration.CODEC.fieldOf("step").forGetter(AddFeaturesByFilterBiomeModifier::step)
 			).apply(builder, AddFeaturesByFilterBiomeModifier::new)));
 
-	public static ResourceKey<BiomeModifier> WILD_CABBAGES = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "wild_cabbages"));
-	public static ResourceKey<BiomeModifier> WILD_ONIONS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "wild_onions"));
-	public static ResourceKey<BiomeModifier> WILD_TOMATOES = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "wild_tomatoes"));
-	public static ResourceKey<BiomeModifier> WILD_CARROTS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "wild_carrots"));
-	public static ResourceKey<BiomeModifier> WILD_POTATOES = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "wild_potatoes"));
-	public static ResourceKey<BiomeModifier> WILD_BEETROOTS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "wild_beetroots"));
-	public static ResourceKey<BiomeModifier> WILD_RICE = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "wild_rice"));
-	public static ResourceKey<BiomeModifier> BROWN_MUSHROOM_COLONIES = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "brown_mushroom_colony"));
-	public static ResourceKey<BiomeModifier> RED_MUSHROOM_COLONIES = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "red_mushroom_colony"));
+	public static ResourceKey<BiomeModifier> WILD_CABBAGES = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "wild_cabbages"));
+	public static ResourceKey<BiomeModifier> WILD_ONIONS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "wild_onions"));
+	public static ResourceKey<BiomeModifier> WILD_TOMATOES = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "wild_tomatoes"));
+	public static ResourceKey<BiomeModifier> WILD_CARROTS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "wild_carrots"));
+	public static ResourceKey<BiomeModifier> WILD_POTATOES = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "wild_potatoes"));
+	public static ResourceKey<BiomeModifier> WILD_BEETROOTS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "wild_beetroots"));
+	public static ResourceKey<BiomeModifier> WILD_RICE = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "wild_rice"));
+	public static ResourceKey<BiomeModifier> BROWN_MUSHROOM_COLONIES = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "brown_mushroom_colony"));
+	public static ResourceKey<BiomeModifier> RED_MUSHROOM_COLONIES = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "red_mushroom_colony"));
 
 	public static void bootstrapBiomeModifiers(BootstrapContext<BiomeModifier> context) {
 		HolderGetter<Biome> biomeGetter = context.lookup(Registries.BIOME);

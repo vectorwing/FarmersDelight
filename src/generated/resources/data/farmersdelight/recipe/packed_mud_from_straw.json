@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "farmersdelight:straw"
-    },
-    {
-      "item": "minecraft:mud"
-    },
-    {
-      "item": "minecraft:mud"
-    }
+    "farmersdelight:straw",
+    "minecraft:mud",
+    "minecraft:mud"
   ],
   "result": {
     "count": 2,

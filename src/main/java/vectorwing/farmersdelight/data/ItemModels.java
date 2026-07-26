@@ -1,70 +1,93 @@
 package vectorwing.farmersdelight.data;
 
 import com.google.common.collect.Sets;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.model.ItemModelUtils;
+import net.minecraft.client.data.models.model.ModelTemplate;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraft.world.level.block.Block;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Credits to Vazkii and team for some references on mass-reading blocks to datagen!
  */
-public class ItemModels extends ItemModelProvider
+public class ItemModels extends ModelProvider
 {
-	public static final String GENERATED = "item/generated";
-	public static final String HANDHELD = "item/handheld";
-	public static final ResourceLocation MUG = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "item/mug");
+	public static final Identifier MUG = resourceItem("mug");
+	private static final ModelTemplate MUG_TEMPLATE = new ModelTemplate(java.util.Optional.of(MUG), java.util.Optional.empty(), TextureSlot.LAYER0);
 
-	public ItemModels(PackOutput output, ExistingFileHelper existingFileHelper) {
-		super(output, FarmersDelight.MODID, existingFileHelper);
+	public ItemModels(PackOutput output) {
+		super(output, FarmersDelight.MODID);
 	}
 
 	@Override
-	protected void registerModels() {
-		Set<Item> items = BuiltInRegistries.ITEM.stream().filter(i -> FarmersDelight.MODID.equals(BuiltInRegistries.ITEM.getKey(i).getNamespace()))
-				.collect(Collectors.toSet());
+	protected Stream<? extends Holder<Block>> getKnownBlocks() {
+		return Stream.empty();
+	}
 
-		// Specific cases
-		items.remove(ModItems.SKILLET.get());
+	@Override
+	protected Stream<? extends Holder<Item>> getKnownItems() {
+		return BuiltInRegistries.ITEM.listElements()
+				.filter(holder -> holder.getKey().identifier().getNamespace().equals(FarmersDelight.MODID))
+				.filter(holder -> holder.value() != ModItems.SKILLET.get());
+	}
 
-		itemGeneratedModel(ModItems.WILD_RICE.get(), resourceBlock(itemName(ModItems.WILD_RICE.get()) + "_top"));
+	@Override
+	protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
+		Set<Item> items = BuiltInRegistries.ITEM.stream()
+				.filter(item -> FarmersDelight.MODID.equals(BuiltInRegistries.ITEM.getKey(item).getNamespace()))
+				.filter(item -> item != ModItems.SKILLET.get())
+				.collect(Collectors.toCollection(LinkedHashSet::new));
+
+		itemGeneratedModel(itemModels, ModItems.WILD_RICE.get(), resourceBlock(itemName(ModItems.WILD_RICE.get()) + "_top"));
 		items.remove(ModItems.WILD_RICE.get());
 
-		itemGeneratedModel(ModItems.BROWN_MUSHROOM_COLONY.get(), resourceBlock(itemName(ModItems.BROWN_MUSHROOM_COLONY.get()) + "_stage3"));
+		itemGeneratedModel(itemModels, ModItems.BROWN_MUSHROOM_COLONY.get(), resourceBlock(itemName(ModItems.BROWN_MUSHROOM_COLONY.get()) + "_stage3"));
 		items.remove(ModItems.BROWN_MUSHROOM_COLONY.get());
 
-		itemGeneratedModel(ModItems.DEBUG_PUMPKIN_PIE.get(), resourceItem("debug_pumpkin_pie"));
+		itemGeneratedModel(itemModels, ModItems.DEBUG_PUMPKIN_PIE.get(), resourceItem("debug_pumpkin_pie"));
 		items.remove(ModItems.DEBUG_PUMPKIN_PIE.get());
 
-		itemGeneratedModel(ModItems.RED_MUSHROOM_COLONY.get(), resourceBlock(itemName(ModItems.RED_MUSHROOM_COLONY.get()) + "_stage3"));
+		itemGeneratedModel(itemModels, ModItems.RED_MUSHROOM_COLONY.get(), resourceBlock(itemName(ModItems.RED_MUSHROOM_COLONY.get()) + "_stage3"));
 		items.remove(ModItems.RED_MUSHROOM_COLONY.get());
 
-		blockBasedModel(ModItems.TATAMI.get(), "_half");
+		blockBasedModel(itemModels, ModItems.TATAMI.get(), "_half");
 		items.remove(ModItems.TATAMI.get());
 
-		blockBasedModel(ModItems.ORGANIC_COMPOST.get(), "_stage0");
+		blockBasedModel(itemModels, ModItems.ORGANIC_COMPOST.get(), "_stage0");
 		items.remove(ModItems.ORGANIC_COMPOST.get());
 
-		blockBasedModel(ModItems.ROPE_FENCE.get(), "_inventory");
+		blockBasedModel(itemModels, ModItems.ROPE_FENCE.get(), "_inventory");
 		items.remove(ModItems.ROPE_FENCE.get());
 
-		// Items that should be held like a mug
 		Set<Item> mugItems = Sets.newHashSet(
 				ModItems.HOT_COCOA.get(),
 				ModItems.APPLE_CIDER.get(),
 				ModItems.MELON_JUICE.get());
-		takeAll(items, mugItems.toArray(new Item[0])).forEach(item -> itemMugModel(item, resourceItem(itemName(item))));
+		takeAll(items, mugItems.toArray(new Item[0])).forEach(item -> itemMugModel(itemModels, item, resourceItem(itemName(item))));
 
-		// Blocks with special item sprites
 		Set<Item> spriteBlockItems = Sets.newHashSet(
 				ModItems.FULL_TATAMI_MAT.get(),
 				ModItems.HALF_TATAMI_MAT.get(),
@@ -117,9 +140,8 @@ public class ItemModels extends ItemModelProvider
 				ModItems.GLEAMING_SALAD_BLOCK.get(),
 				ModItems.RICE_ROLL_MEDLEY_BLOCK.get()
 		);
-		takeAll(items, spriteBlockItems.toArray(new Item[0])).forEach(item -> withExistingParent(itemName(item), GENERATED).texture("layer0", resourceItem(itemName(item))));
+		takeAll(items, spriteBlockItems.toArray(new Item[0])).forEach(item -> itemGeneratedModel(itemModels, item, resourceItem(itemName(item))));
 
-		// Blocks with flat block textures for their items
 		Set<Item> flatBlockItems = Sets.newHashSet(
 				ModItems.SAFETY_NET.get(),
 				ModItems.SANDY_SHRUB.get(),
@@ -130,12 +152,10 @@ public class ItemModels extends ItemModelProvider
 				ModItems.WILD_POTATOES.get(),
 				ModItems.WILD_TOMATOES.get()
 		);
-		takeAll(items, flatBlockItems.toArray(new Item[0])).forEach(item -> itemGeneratedModel(item, resourceBlock(itemName(item))));
+		takeAll(items, flatBlockItems.toArray(new Item[0])).forEach(item -> itemGeneratedModel(itemModels, item, resourceBlock(itemName(item))));
 
-		// Blocks whose items look alike
-		takeAll(items, i -> i instanceof BlockItem).forEach(item -> blockBasedModel(item, ""));
+		takeAll(items, item -> item instanceof BlockItem).forEach(item -> blockBasedModel(itemModels, item, ""));
 
-		// Handheld items
 		Set<Item> handheldItems = Sets.newHashSet(
 				ModItems.BARBECUE_STICK.get(),
 				ModItems.HAM.get(),
@@ -146,48 +166,50 @@ public class ItemModels extends ItemModelProvider
 				ModItems.GOLDEN_KNIFE.get(),
 				ModItems.NETHERITE_KNIFE.get()
 		);
-		takeAll(items, handheldItems.toArray(new Item[0])).forEach(item -> itemHandheldModel(item, resourceItem(itemName(item))));
+		takeAll(items, handheldItems.toArray(new Item[0])).forEach(item -> itemHandheldModel(itemModels, item));
 
-		// Generated items
-		items.forEach(item -> itemGeneratedModel(item, resourceItem(itemName(item))));
+		items.forEach(item -> itemGeneratedModel(itemModels, item, resourceItem(itemName(item))));
 	}
 
-	public void blockBasedModel(Item item, String suffix) {
-		withExistingParent(itemName(item), resourceBlock(itemName(item) + suffix));
+	@Override
+	public String getName() {
+		return "Item Model Definitions - " + FarmersDelight.MODID;
 	}
 
-	public void blockBasedModel(Item item, ResourceLocation block) {
-		withExistingParent(itemName(item), block);
+	public static void blockBasedModel(ItemModelGenerators itemModels, Item item, String suffix) {
+		itemModels.itemModelOutput.accept(item, ItemModelUtils.plainModel(resourceBlock(itemName(item) + suffix)));
 	}
 
-	public void itemHandheldModel(Item item, ResourceLocation texture) {
-		withExistingParent(itemName(item), HANDHELD).texture("layer0", texture);
+	public static void itemHandheldModel(ItemModelGenerators itemModels, Item item) {
+		itemModels.generateFlatItem(item, ModelTemplates.FLAT_HANDHELD_ITEM);
 	}
 
-	public void itemGeneratedModel(Item item, ResourceLocation texture) {
-		withExistingParent(itemName(item), GENERATED).texture("layer0", texture);
+	public static void itemGeneratedModel(ItemModelGenerators itemModels, Item item, Identifier texture) {
+		Identifier model = ModelTemplates.FLAT_ITEM.create(resourceItem(itemName(item)), TextureMapping.layer0(new Material(texture)), itemModels.modelOutput);
+		itemModels.itemModelOutput.accept(item, ItemModelUtils.plainModel(model));
 	}
 
-	public void itemMugModel(Item item, ResourceLocation texture) {
-		withExistingParent(itemName(item), MUG).texture("layer0", texture);
+	public static void itemMugModel(ItemModelGenerators itemModels, Item item, Identifier texture) {
+		Identifier model = MUG_TEMPLATE.create(resourceItem(itemName(item)), TextureMapping.layer0(new Material(texture)), itemModels.modelOutput);
+		itemModels.itemModelOutput.accept(item, ItemModelUtils.plainModel(model));
 	}
 
-	private String itemName(Item item) {
+	private static String itemName(Item item) {
 		return BuiltInRegistries.ITEM.getKey(item).getPath();
 	}
 
-	public ResourceLocation resourceBlock(String path) {
-		return ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "block/" + path);
+	public static Identifier resourceBlock(String path) {
+		return Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/" + path);
 	}
 
-	public ResourceLocation resourceItem(String path) {
-		return ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "item/" + path);
+	public static Identifier resourceItem(String path) {
+		return Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "item/" + path);
 	}
 
 	@SafeVarargs
 	@SuppressWarnings("varargs")
 	public static <T> Collection<T> takeAll(Set<? extends T> src, T... items) {
-		List<T> ret = Arrays.asList(items);
+		java.util.List<T> ret = Arrays.asList(items);
 		for (T item : items) {
 			if (!src.contains(item)) {
 				FarmersDelight.LOGGER.warn("Item {} not found in set", item);
@@ -200,7 +222,7 @@ public class ItemModels extends ItemModelProvider
 	}
 
 	public static <T> Collection<T> takeAll(Set<T> src, Predicate<T> pred) {
-		List<T> ret = new ArrayList<>();
+		java.util.List<T> ret = new ArrayList<>();
 
 		Iterator<T> iter = src.iterator();
 		while (iter.hasNext()) {

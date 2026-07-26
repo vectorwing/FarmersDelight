@@ -1,10 +1,13 @@
 package vectorwing.farmersdelight.data.recipe;
 
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -24,15 +27,25 @@ import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 
 public class CuttingRecipes
 {
-	public static Ingredient KNIVES = matchesTool(KnifeItem.KNIFE_DIG, CommonTags.Items.TOOLS_KNIFE);
-	public static Ingredient PICKAXES = matchesTool(ItemAbilities.PICKAXE_DIG, ItemTags.PICKAXES);
-	public static Ingredient AXES = matchesTool(ItemAbilities.AXE_DIG, ItemTags.AXES);
-	public static Ingredient AXES_STRIP = matchesTool(ItemAbilities.AXE_STRIP, ItemTags.AXES);
-	public static Ingredient SHOVELS = matchesTool(ItemAbilities.SHOVEL_DIG, ItemTags.SHOVELS);
-	public static Ingredient HOES = matchesTool(ItemAbilities.HOE_DIG, ItemTags.HOES);
-	public static Ingredient SHEARS = matchesTool(ItemAbilities.SHEARS_DIG, Tags.Items.TOOLS_SHEAR);
+	private static HolderGetter<Item> items;
+	public static Ingredient KNIVES;
+	public static Ingredient PICKAXES;
+	public static Ingredient AXES;
+	public static Ingredient AXES_STRIP;
+	public static Ingredient SHOVELS;
+	public static Ingredient HOES;
+	public static Ingredient SHEARS;
 
-	public static void register(RecipeOutput output) {
+	public static void register(RecipeOutput output, HolderGetter<Item> itemLookup) {
+		items = itemLookup;
+		KNIVES = matchesTool(KnifeItem.KNIFE_DIG, CommonTags.Items.TOOLS_KNIFE);
+		PICKAXES = matchesTool(ItemAbility.get("pickaxe_dig"), ItemTags.PICKAXES);
+		AXES = matchesTool(ItemAbility.get("axe_dig"), ItemTags.AXES);
+		AXES_STRIP = matchesTool(ItemAbilities.AXE_STRIP, ItemTags.AXES);
+		SHOVELS = matchesTool(ItemAbility.get("shovel_dig"), ItemTags.SHOVELS);
+		HOES = matchesTool(ItemAbility.get("hoe_dig"), ItemTags.HOES);
+		SHEARS = matchesTool(ItemAbilities.SHEARS_DIG, Tags.Items.TOOLS_SHEAR);
+
 		// Knife
 		cuttingAnimalItems(output);
 		cuttingVegetables(output);
@@ -89,7 +102,7 @@ public class CuttingRecipes
 				.saveToFD(output);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.COOKED_MUTTON), KNIVES, ModItems.COOKED_MUTTON_CHOPS.get(), 2)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.INK_SAC), KNIVES, Items.BLACK_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.INK_SAC), KNIVES, Items.DYE.pick(DyeColor.BLACK), 2)
 				.saveToFD(output);
 	}
 
@@ -110,7 +123,7 @@ public class CuttingRecipes
 	}
 
 	private static void cuttingFoods(RecipeOutput output) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(CommonTags.Items.FOODS_DOUGH), KNIVES, ModItems.RAW_PASTA.get(), 1)
+		CuttingBoardRecipeBuilder.cuttingRecipe(ingredient(CommonTags.Items.FOODS_DOUGH), KNIVES, ModItems.RAW_PASTA.get(), 1)
 				.save(output, RecipeUtils.FDLocation("cutting/tag_dough"));
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.KELP_ROLL.get()), KNIVES, ModItems.KELP_ROLL_SLICE.get(), 3)
 				.saveToFD(output);
@@ -127,56 +140,56 @@ public class CuttingRecipes
 	}
 
 	private static void cuttingFlowers(RecipeOutput output) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.WITHER_ROSE), KNIVES, Items.BLACK_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.WITHER_ROSE), KNIVES, Items.DYE.pick(DyeColor.BLACK), 2)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CORNFLOWER), KNIVES, Items.BLUE_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CORNFLOWER), KNIVES, Items.DYE.pick(DyeColor.BLUE), 2)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BLUE_ORCHID), KNIVES, Items.LIGHT_BLUE_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BLUE_ORCHID), KNIVES, Items.DYE.pick(DyeColor.LIGHT_BLUE), 2)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.AZURE_BLUET), KNIVES, Items.LIGHT_GRAY_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.AZURE_BLUET), KNIVES, Items.DYE.pick(DyeColor.LIGHT_GRAY), 2)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.OXEYE_DAISY), KNIVES, Items.LIGHT_GRAY_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.OXEYE_DAISY), KNIVES, Items.DYE.pick(DyeColor.LIGHT_GRAY), 2)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.WHITE_TULIP), KNIVES, Items.LIGHT_GRAY_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.WHITE_TULIP), KNIVES, Items.DYE.pick(DyeColor.LIGHT_GRAY), 2)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.ALLIUM), KNIVES, Items.MAGENTA_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.ALLIUM), KNIVES, Items.DYE.pick(DyeColor.MAGENTA), 2)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.ORANGE_TULIP), KNIVES, Items.ORANGE_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.ORANGE_TULIP), KNIVES, Items.DYE.pick(DyeColor.ORANGE), 2)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.PINK_TULIP), KNIVES, Items.PINK_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.PINK_TULIP), KNIVES, Items.DYE.pick(DyeColor.PINK), 2)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.RED_TULIP), KNIVES, Items.RED_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.RED_TULIP), KNIVES, Items.DYE.pick(DyeColor.RED), 2)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.POPPY), KNIVES, Items.RED_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.POPPY), KNIVES, Items.DYE.pick(DyeColor.RED), 2)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.LILY_OF_THE_VALLEY), KNIVES, Items.WHITE_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.LILY_OF_THE_VALLEY), KNIVES, Items.DYE.pick(DyeColor.WHITE), 2)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.DANDELION), KNIVES, Items.YELLOW_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.DANDELION), KNIVES, Items.DYE.pick(DyeColor.YELLOW), 2)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.TORCHFLOWER), KNIVES, Items.ORANGE_DYE, 2)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.TORCHFLOWER), KNIVES, Items.DYE.pick(DyeColor.ORANGE), 2)
 				.saveToFD(output);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_BEETROOTS.get()), KNIVES, Items.BEETROOT_SEEDS, 1)
-				.addResult(Items.RED_DYE)
+				.addResult(Items.DYE.pick(DyeColor.RED))
 				.saveToFD(output);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_CABBAGES.get()), KNIVES, ModItems.CABBAGE_SEEDS.get(), 1)
-				.addResultWithChance(Items.YELLOW_DYE, 0.5F, 2)
+				.addResultWithChance(Items.DYE.pick(DyeColor.YELLOW), 0.5F, 2)
 				.saveToFD(output);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_CARROTS.get()), KNIVES, Items.CARROT, 1)
-				.addResultWithChance(Items.LIGHT_GRAY_DYE, 0.5F, 2)
+				.addResultWithChance(Items.DYE.pick(DyeColor.LIGHT_GRAY), 0.5F, 2)
 				.saveToFD(output);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_ONIONS.get()), KNIVES, ModItems.ONION.get(), 1)
-				.addResult(Items.MAGENTA_DYE, 2)
-				.addResultWithChance(Items.LIME_DYE, 0.1F)
+				.addResult(Items.DYE.pick(DyeColor.MAGENTA), 2)
+				.addResultWithChance(Items.DYE.pick(DyeColor.LIME), 0.1F)
 				.saveToFD(output);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_POTATOES.get()), KNIVES, Items.POTATO, 1)
-				.addResultWithChance(Items.PURPLE_DYE, 0.5F, 2)
+				.addResultWithChance(Items.DYE.pick(DyeColor.PURPLE), 0.5F, 2)
 				.saveToFD(output);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_RICE.get()), KNIVES, ModItems.RICE.get(), 1)
 				.addResultWithChance(ModItems.STRAW.get(), 0.5F)
 				.saveToFD(output);
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_TOMATOES.get()), KNIVES, ModItems.TOMATO_SEEDS.get(), 1)
 				.addResultWithChance(ModItems.TOMATO.get(), 0.2F)
-				.addResultWithChance(Items.GREEN_DYE, 0.1F)
+				.addResultWithChance(Items.DYE.pick(DyeColor.GREEN), 0.1F)
 				.saveToFD(output);
 	}
 
@@ -365,10 +378,14 @@ public class CuttingRecipes
 	}
 
 	private static Ingredient matchesTool(ItemAbility toolAction, TagKey<Item> fallbackTag) {
-		return CompoundIngredient.of(new ItemAbilityIngredient(toolAction).toVanilla(), Ingredient.of(fallbackTag));
+		return CompoundIngredient.of(new ItemAbilityIngredient(toolAction).toVanilla(), ingredient(fallbackTag));
 	}
 
-	private static ResourceLocation salvagingRecipe(String name) {
-		return ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "salvaging/" + name);
+	private static Ingredient ingredient(TagKey<Item> tag) {
+		return Ingredient.of(items.getOrThrow(tag));
+	}
+
+	private static Identifier salvagingRecipe(String name) {
+		return Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "salvaging/" + name);
 	}
 }

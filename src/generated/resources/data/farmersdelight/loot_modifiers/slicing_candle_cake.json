@@ -82,5 +82,6 @@
     }
   ],
   "count": 7,
-  "item": "farmersdelight:cake_slice"
+  "item": "farmersdelight:cake_slice",
+  "priority": 0
 }

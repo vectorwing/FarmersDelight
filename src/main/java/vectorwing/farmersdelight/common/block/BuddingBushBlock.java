@@ -6,6 +6,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.monster.Ravager;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -14,14 +15,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.level.block.FarmlandBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.CommonHooks;
-import net.neoforged.neoforge.common.util.TriState;
+import net.minecraft.util.TriState;
 import net.neoforged.neoforge.event.EventHooks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
@@ -48,18 +49,19 @@ public class BuddingBushBlock extends BushBlock
 	}
 
 	@Override
-	protected MapCodec<? extends BushBlock> codec() {
-		return CODEC;
+	@SuppressWarnings("unchecked")
+	public MapCodec<BushBlock> codec() {
+		return (MapCodec<BushBlock>) (MapCodec<?>) CODEC;
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+	protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return SHAPE_BY_AGE[state.getValue(getAgeProperty())];
 	}
 
 	@Override
 	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
-		return state.getBlock() instanceof FarmBlock;
+		return state.getBlock() instanceof FarmlandBlock;
 	}
 
 	public IntegerProperty getAgeProperty() {
@@ -83,12 +85,12 @@ public class BuddingBushBlock extends BushBlock
 	}
 
 	@Override
-	public boolean isRandomlyTicking(BlockState state) {
+	protected boolean isRandomlyTicking(BlockState state) {
 		return canGrowPastMaxAge() || !isMaxAge(state);
 	}
 
 	@Override
-	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+	protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		if (!level.isAreaLoaded(pos, 1)) return;
 		if (level.getRawBrightness(pos, 0) >= 9) {
 			int age = getAge(state);
@@ -160,7 +162,7 @@ public class BuddingBushBlock extends BushBlock
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+	protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
 		TriState soilDecision = level.getBlockState(pos.below()).canSustainPlant(level, pos.below(), Direction.UP, state);
 		if (!soilDecision.isDefault()) {
 			return soilDecision.isTrue();
@@ -174,12 +176,12 @@ public class BuddingBushBlock extends BushBlock
 	}
 
 	@Override
-	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-		if (entity instanceof Ravager && EventHooks.canEntityGrief(level, entity)) {
+	protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean isInside) {
+		if (entity instanceof Ravager && level instanceof ServerLevel serverLevel && EventHooks.canEntityGrief(serverLevel, entity)) {
 			level.destroyBlock(pos, true, entity);
 		}
 
-		super.entityInside(state, level, pos, entity);
+		super.entityInside(state, level, pos, entity, effectApplier, isInside);
 	}
 
 	protected ItemLike getBaseSeedId() {
@@ -187,7 +189,7 @@ public class BuddingBushBlock extends BushBlock
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+	protected ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
 		return new ItemStack(getBaseSeedId());
 	}
 

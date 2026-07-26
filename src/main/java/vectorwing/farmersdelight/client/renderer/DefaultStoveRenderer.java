@@ -2,61 +2,82 @@ package vectorwing.farmersdelight.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.item.ItemModelResolver;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec2;
-import vectorwing.farmersdelight.common.block.StoveBlock;
-import vectorwing.farmersdelight.common.block.entity.AbstractStoveBlockEntity;
+import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
+import vectorwing.farmersdelight.common.block.AbstractStoveBlock;
+import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
 
-public class DefaultStoveRenderer<T extends AbstractStoveBlockEntity> implements BlockEntityRenderer<T>
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class DefaultStoveRenderer implements BlockEntityRenderer<StoveBlockEntity, DefaultStoveRenderer.StoveRenderState>
 {
-	private static final float SIZE = 0.375F;
-	private final ItemRenderer itemRenderer;
+	private final ItemModelResolver itemModelResolver;
 
 	public DefaultStoveRenderer(BlockEntityRendererProvider.Context context) {
-		this.itemRenderer = context.getItemRenderer();
+		this.itemModelResolver = context.itemModelResolver();
 	}
 
 	@Override
-	public void render(T stove, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
-		Direction direction = stove.getBlockState().getValue(StoveBlock.FACING).getOpposite();
+	public StoveRenderState createRenderState() {
+		return new StoveRenderState();
+	}
 
-		var items = stove.getItems();
-		int posLong = (int) stove.getBlockPos().asLong();
+	@Override
+	public void extractRenderState(StoveBlockEntity stove, StoveRenderState state, float partialTicks, Vec3 cameraPosition,
+			ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
+		BlockEntityRenderer.super.extractRenderState(stove, state, partialTicks, cameraPosition, breakProgress);
+		state.direction = stove.getBlockState().getValue(AbstractStoveBlock.FACING).getOpposite();
 
-		for (int i = 0; i < items.getSlots(); ++i) {
-			ItemStack stoveStack = items.getStackInSlot(i);
-			if (stoveStack.isEmpty()) continue;
+		Level level = stove.getLevel();
+		var inventory = stove.getItems();
+		List<RenderedItem> items = new ArrayList<>();
+		for (int i = 0; i < inventory.getSlots(); ++i) {
+			ItemStack stack = inventory.getStackInSlot(i);
+			if (stack.isEmpty()) {
+				continue;
+			}
+			ItemStackRenderState itemState = new ItemStackRenderState();
+			this.itemModelResolver.updateForTopItem(itemState, stack, ItemDisplayContext.FIXED, level, null, (int) stove.getBlockPos().asLong() + i);
+			items.add(new RenderedItem(itemState, stove.getStoveItemOffset(i)));
+		}
+		state.items = items.isEmpty() ? Collections.emptyList() : items;
+	}
 
+	@Override
+	public void submit(StoveRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
+		for (RenderedItem item : state.items) {
 			poseStack.pushPose();
-
-			// Center item above the stove
 			poseStack.translate(0.5D, 1.02D, 0.5D);
-
-			// Rotate item to face the stove's front side
-			float f = -direction.toYRot();
-			poseStack.mulPose(Axis.YP.rotationDegrees(f));
-
-			// Rotate item flat on the stove. Use X and Y from now on
+			poseStack.mulPose(Axis.YP.rotationDegrees(-state.direction.toYRot()));
 			poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
-
-			// Neatly align items according to their index
-			Vec2 itemOffset = stove.getStoveItemOffset(i);
-			poseStack.translate(itemOffset.x, itemOffset.y, 0.0D);
-
-			// Resize the items
-			poseStack.scale(SIZE, SIZE, SIZE);
-
-			itemRenderer.renderStatic(stoveStack, ItemDisplayContext.FIXED, LevelRenderer.getLightColor(stove.getLevel(), stove.getBlockPos().above()), packedOverlay, poseStack, buffer, stove.getLevel(), posLong + i);
+			poseStack.translate(item.offset.x, item.offset.y, 0.0D);
+			poseStack.scale(0.375F, 0.375F, 0.375F);
+			item.itemState.submit(poseStack, submitNodeCollector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
 			poseStack.popPose();
 		}
 	}
+
+	public static class StoveRenderState extends BlockEntityRenderState
+	{
+		public List<RenderedItem> items = Collections.emptyList();
+		public Direction direction = Direction.NORTH;
+	}
+
+	public record RenderedItem(ItemStackRenderState itemState, Vec2 offset) {}
 }

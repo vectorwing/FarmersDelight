@@ -7,7 +7,7 @@ import dev.emi.emi.api.recipe.EmiCraftingRecipe;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -54,9 +54,9 @@ public class EMIPlugin implements EmiPlugin {
     }
 
     public void addSpecialRecipes(EmiRegistry registry) {
-        ResourceLocation doughRecipeId = RecipeUtils.FDLocation("wheat_dough_from_water");
+        Identifier doughRecipeId = RecipeUtils.FDLocation("wheat_dough_from_water");
         if (registry.getRecipeManager().byKey(doughRecipeId).isPresent()) {
-            ResourceLocation syntheticLocation = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "/crafting/wheat_dough_from_water");
+            Identifier syntheticLocation = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "/crafting/wheat_dough_from_water");
             registry.addRecipe(new EmiCraftingRecipe(List.of(EmiStack.of(Items.WHEAT), EmiStack.of(Items.WATER_BUCKET)), EmiStack.of(ModItems.WHEAT_DOUGH.get()), syntheticLocation, true));
         }
     }

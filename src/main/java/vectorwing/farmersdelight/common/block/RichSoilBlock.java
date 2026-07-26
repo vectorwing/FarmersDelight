@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
-import net.neoforged.neoforge.common.util.TriState;
+import net.minecraft.util.TriState;
 import net.neoforged.neoforge.network.PacketDistributor;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.network.payload.RichSoilBoostParticlesPayload;
@@ -64,7 +64,7 @@ public class RichSoilBlock extends Block
 		}
 		if (plantState.getBlock() instanceof BonemealableBlock growable) {
 			if (growable.isValidBonemealTarget(level, plantPos, plantState) && CommonHooks.canCropGrow(level, plantPos, plantState, true)) {
-				growable.performBonemeal(level, level.random, plantPos, plantState);
+				growable.performBonemeal(level, level.getRandom(), plantPos, plantState);
 				PacketDistributor.sendToPlayersTrackingChunk(level, level.getChunkAt(plantPos).getPos(), new RichSoilBoostParticlesPayload(plantPos));
 				CommonHooks.fireCropGrowPost(level, plantPos, plantState);
 				return true;

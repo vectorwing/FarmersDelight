@@ -1,9 +1,7 @@
 {
   "type": "farmersdelight:cutting",
   "ingredients": [
-    {
-      "item": "minecraft:bricks"
-    }
+    "minecraft:bricks"
   ],
   "result": [
     {
@@ -13,13 +11,14 @@
       }
     }
   ],
-  "tool": [
-    {
-      "type": "farmersdelight:item_ability",
-      "action": "pickaxe_dig"
-    },
-    {
-      "tag": "minecraft:pickaxes"
-    }
-  ]
+  "tool": {
+    "neoforge:ingredient_type": "neoforge:compound",
+    "children": [
+      {
+        "neoforge:ingredient_type": "farmersdelight:item_ability",
+        "action": "pickaxe_dig"
+      },
+      "#minecraft:pickaxes"
+    ]
+  }
 }
