@@ -1,0 +1,11 @@
+{
+  "gives": {
+    "id": "farmersdelight:cabbage_seeds"
+  },
+  "max_uses": 1.0,
+  "reputation_discount": 0.05,
+  "wants": {
+    "id": "minecraft:emerald"
+  },
+  "xp": 12.0
+}

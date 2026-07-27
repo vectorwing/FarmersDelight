@@ -17,7 +17,11 @@ import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 public class DoughRecipe extends CustomRecipe
 {
 	public static final MapCodec<DoughRecipe> CODEC = MapCodec.unit(DoughRecipe::new);
-	public static final StreamCodec<RegistryFriendlyByteBuf, DoughRecipe> STREAM_CODEC = StreamCodec.unit(new DoughRecipe());
+	public static final StreamCodec<RegistryFriendlyByteBuf, DoughRecipe> STREAM_CODEC = StreamCodec.of(
+			(buffer, recipe) -> {
+			},
+			buffer -> new DoughRecipe()
+	);
 
 	@Override
 	public boolean matches(CraftingInput container, Level level) {

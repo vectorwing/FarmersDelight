@@ -1,0 +1,16 @@
+{
+  "sources": [
+    {
+      "type": "neoforge:namespaced_directory",
+      "namespace": "farmersdelight",
+      "source": "entity/signs",
+      "prefix": "entity/signs/"
+    },
+    {
+      "type": "neoforge:namespaced_directory",
+      "namespace": "farmersdelight",
+      "source": "entity/signs/hanging",
+      "prefix": "entity/signs/hanging/"
+    }
+  ]
+}

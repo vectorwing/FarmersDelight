@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.common.block.entity.container;
 
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.recipebook.ServerPlaceRecipe;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
@@ -14,12 +15,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
+import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModMenuTypes;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
+import java.util.List;
 import java.util.Objects;
 
 public class CookingPotMenu extends RecipeBookMenu
@@ -161,7 +165,7 @@ public class CookingPotMenu extends RecipeBookMenu
 
 	@Override
 	public void fillCraftSlotsStackedContents(StackedItemContents helper) {
-		for (int i = 0; i < inventory.getSlots(); i++) {
+		for (int i = 0; i < INDEX_MEAL; i++) {
 			ItemStack stack = inventory.getStackInSlot(i);
 			if (!stack.isEmpty()) {
 				helper.accountStack(stack);
@@ -193,12 +197,30 @@ public class CookingPotMenu extends RecipeBookMenu
 
 	@Override
 	public RecipeBookType getRecipeBookType() {
-		return RecipeBookType.FURNACE;
+		return RecipeBookType.valueOf("FARMERSDELIGHT_COOKING");
 	}
 
 	@Override
 	public PostPlaceAction handlePlacement(boolean useMaxItems, boolean isCreative, RecipeHolder<?> recipe, ServerLevel level, Inventory inventory) {
-		return PostPlaceAction.NOTHING;
+		RecipeHolder<CookingPotRecipe> typedRecipe = (RecipeHolder<CookingPotRecipe>) recipe;
+		List<Slot> inputSlots = this.slots.subList(0, INDEX_MEAL);
+		return ServerPlaceRecipe.placeRecipe(new ServerPlaceRecipe.CraftingMenuAccess<>()
+		{
+			@Override
+			public void fillCraftSlotsStackedContents(StackedItemContents stackedContents) {
+				CookingPotMenu.this.fillCraftSlotsStackedContents(stackedContents);
+			}
+
+			@Override
+			public void clearCraftingContent() {
+				CookingPotMenu.this.clearCraftingContent();
+			}
+
+			@Override
+			public boolean recipeMatches(RecipeHolder<CookingPotRecipe> recipe) {
+				return recipe.value().matches(new RecipeWrapper(CookingPotMenu.this.inventory), level);
+			}
+		}, getGridWidth(), getGridHeight(), inputSlots, inputSlots, inventory, typedRecipe, useMaxItems, isCreative);
 	}
 
 	public boolean shouldMoveToInventory(int slot) {

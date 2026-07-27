@@ -10,13 +10,13 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.ItemAbility;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 import vectorwing.farmersdelight.common.item.KnifeItem;
 import vectorwing.farmersdelight.common.tag.ModTags;
-import net.neoforged.neoforge.items.ItemStackHandler;
 
 import java.util.Optional;
 
@@ -39,20 +39,32 @@ public class ItemUtils
 		return isValidTool(stack, KnifeItem.KNIFE_HARVEST, ModTags.Items.KNIVES);
 	}
 
-	public static void dropItems(Level level, BlockPos pos, IItemHandler inventory) {
-		for (int slot = 0; slot < inventory.getSlots(); slot++)
-			Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), inventory.getStackInSlot(slot));
-	}
-
-	public static void clearItems(ItemStackHandler inventory) {
-		for (int i = 0; i < inventory.getSlots(); i++) {
-			inventory.setStackInSlot(i, ItemStack.EMPTY);
+	public static void dropItems(Level level, BlockPos pos, ResourceHandler<ItemResource> inventory) {
+		for (int slot = 0; slot < inventory.size(); slot++) {
+			ItemResource resource = inventory.getResource(slot);
+			int amount = inventory.getAmountAsInt(slot);
+			if (!resource.isEmpty() && amount > 0) {
+				Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), resource.toStack(amount));
+			}
 		}
 	}
 
-	public static boolean doesInventoryHaveItems(IItemHandler inventory) {
-		for (int i = 0; i < inventory.getSlots(); i++) {
-			if (!inventory.getStackInSlot(i).isEmpty()) {
+	public static void clearItems(ResourceHandler<ItemResource> inventory) {
+		try (Transaction transaction = Transaction.openRoot()) {
+			for (int i = 0; i < inventory.size(); i++) {
+				ItemResource resource = inventory.getResource(i);
+				int amount = inventory.getAmountAsInt(i);
+				if (!resource.isEmpty() && amount > 0) {
+					inventory.extract(i, resource, amount, transaction);
+				}
+			}
+			transaction.commit();
+		}
+	}
+
+	public static boolean doesInventoryHaveItems(ResourceHandler<ItemResource> inventory) {
+		for (int i = 0; i < inventory.size(); i++) {
+			if (!inventory.getResource(i).isEmpty() && inventory.getAmountAsInt(i) > 0) {
 				return true;
 			}
 		}

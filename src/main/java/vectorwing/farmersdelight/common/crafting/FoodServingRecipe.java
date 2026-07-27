@@ -17,7 +17,11 @@ import vectorwing.farmersdelight.common.utility.ItemUtils;
 public class FoodServingRecipe extends CustomRecipe
 {
 	public static final MapCodec<FoodServingRecipe> CODEC = MapCodec.unit(FoodServingRecipe::new);
-	public static final StreamCodec<RegistryFriendlyByteBuf, FoodServingRecipe> STREAM_CODEC = StreamCodec.unit(new FoodServingRecipe());
+	public static final StreamCodec<RegistryFriendlyByteBuf, FoodServingRecipe> STREAM_CODEC = StreamCodec.of(
+			(buffer, recipe) -> {
+			},
+			buffer -> new FoodServingRecipe()
+	);
 
 	@Override
 	public boolean matches(CraftingInput input, Level level) {

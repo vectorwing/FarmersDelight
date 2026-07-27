@@ -47,13 +47,14 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.CookingPotBlock;
 import vectorwing.farmersdelight.common.block.entity.container.CookingPotMenu;
-import vectorwing.farmersdelight.common.block.entity.inventory.CookingPotItemHandler;
+import vectorwing.farmersdelight.common.block.entity.inventory.ItemHandlerResourceHandler;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.item.component.ItemStackWrapper;
 import vectorwing.farmersdelight.common.registry.*;
@@ -93,8 +94,9 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	);
 
 	private final ItemStackHandler inventory;
-	private final IItemHandler inputHandler;
-	private final IItemHandler outputHandler;
+	private final ResourceHandler<ItemResource> transferInventory;
+	private final ResourceHandler<ItemResource> inputHandler;
+	private final ResourceHandler<ItemResource> outputHandler;
 
 	private int cookTime;
 	private int cookTimeTotal;
@@ -109,8 +111,9 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	public CookingPotBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntityTypes.COOKING_POT.get(), pos, state);
 		this.inventory = createHandler();
-		this.inputHandler = new CookingPotItemHandler(inventory, Direction.UP);
-		this.outputHandler = new CookingPotItemHandler(inventory, Direction.DOWN);
+		this.transferInventory = new ItemHandlerResourceHandler(inventory, slot -> true, slot -> true, originalState -> inventoryChanged());
+		this.inputHandler = new ItemHandlerResourceHandler(inventory, slot -> slot < MEAL_DISPLAY_SLOT, slot -> slot < MEAL_DISPLAY_SLOT, originalState -> inventoryChanged());
+		this.outputHandler = new ItemHandlerResourceHandler(inventory, slot -> slot == CONTAINER_SLOT, slot -> slot == OUTPUT_SLOT, originalState -> inventoryChanged());
 		this.mealContainerStack = ItemStack.EMPTY;
 		this.cookingPotData = createIntArray();
 		this.usedRecipeTracker = new Object2IntOpenHashMap<>();
@@ -119,7 +122,8 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 	@SubscribeEvent
 	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-		// TODO 26.2: Port deprecated IItemHandler capabilities to NeoForge transfer ResourceHandler.
+		event.registerBlockEntity(Capabilities.Item.BLOCK, ModBlockEntityTypes.COOKING_POT.get(),
+				(cookingPot, side) -> side == null || side == Direction.UP ? cookingPot.inputHandler : cookingPot.outputHandler);
 	}
 
 	public static ItemStack getMealFromItem(ItemStack cookingPotStack) {
@@ -401,6 +405,10 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		return inventory;
 	}
 
+	public ResourceHandler<ItemResource> getTransferInventory() {
+		return transferInventory;
+	}
+
 	public ItemStack getMeal() {
 		return inventory.getStackInSlot(MEAL_DISPLAY_SLOT);
 	}
@@ -570,6 +578,6 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 	@Override
 	public void clearContent() {
-		ItemUtils.clearItems(inventory);
+		ItemUtils.clearItems(transferInventory);
 	}
 }

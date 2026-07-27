@@ -8,7 +8,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -43,6 +42,7 @@ import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ModTags;
+import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -106,7 +106,7 @@ public class SkilletBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 	@Override
 	protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean isMoving) {
 			if (level.getBlockEntity(pos) instanceof SkilletBlockEntity skillet) {
-				Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), skillet.getInventory().getStackInSlot(0));
+				ItemUtils.dropItems(level, pos, skillet.getTransferInventory());
 			}
 
 			super.affectNeighborsAfterRemoval(state, level, pos, isMoving);

@@ -21,6 +21,7 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.BasketBlock;
 import vectorwing.farmersdelight.common.block.entity.inventory.BasketInvWrapper;
+import vectorwing.farmersdelight.common.block.entity.inventory.ItemHandlerResourceHandler;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
@@ -38,7 +39,13 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 
 	@SubscribeEvent
 	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-		// TODO 26.2: Port deprecated IItemHandler capabilities to NeoForge transfer ResourceHandler.
+		event.registerBlockEntity(Capabilities.Item.BLOCK, ModBlockEntityTypes.BASKET.get(), (basket, side) ->
+				new ItemHandlerResourceHandler(new BasketInvWrapper(basket), slot -> true, slot -> true, originalState -> {
+					if (originalState.stream().allMatch(ItemStack::isEmpty) && !basket.isEmpty() && !basket.isOnCustomCooldown()) {
+						basket.setCooldown(8);
+					}
+					basket.setChanged();
+				}));
 	}
 
 	@Override

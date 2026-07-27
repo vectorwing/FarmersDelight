@@ -2,6 +2,14 @@
 
 ## 1.3.2
 
+### 26.2 Port
+- Ported the NeoForge build to Minecraft 26.2 and NeoForge 26.2.
+- Reworked generated blockstates, item definitions, loot/data outputs, recipe book support, transfer support, and client render hooks for the 26.2 APIs.
+- Repacked canvas sign block textures for Minecraft 26.2's baked sign models.
+- Fixed stateless Farmer's Delight custom recipes failing NeoForge recipe-content network sync when joining a world.
+- Verified `build`, datagen, GameTest server, FD-only client startup, and FD-only dedicated server startup.
+- JEI and AppleSkin compile against 26.2 artifacts. EMI and CraftTweaker integrations are temporarily excluded until usable 26.2-compatible APIs are published.
+
 ### Updates
 - Fried Rice and Chicken Soup have been nerfed down to the 3-minute tier of meals, due to their ease of cooking;
 - Rice Bag has been removed from the `straw_blocks` tag, due to not being actually made with Straw.

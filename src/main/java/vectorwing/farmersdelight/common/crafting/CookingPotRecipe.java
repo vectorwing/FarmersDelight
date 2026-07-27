@@ -12,15 +12,18 @@ import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeBookCategories;
 import net.minecraft.world.item.crafting.RecipeBookCategory;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.ShapelessCraftingRecipeDisplay;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.RecipeMatcher;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.registry.ModRecipeBookCategories;
 import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
@@ -143,8 +146,21 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 	}
 
 	@Override
+	public List<RecipeDisplay> display() {
+		return List.of(new ShapelessCraftingRecipeDisplay(
+				this.inputItems.stream().map(Ingredient::display).toList(),
+				new SlotDisplay.ItemStackSlotDisplay(this.output),
+				new SlotDisplay.ItemSlotDisplay(ModItems.COOKING_POT.get())
+		));
+	}
+
+	@Override
 	public RecipeBookCategory recipeBookCategory() {
-		return RecipeBookCategories.FURNACE_FOOD;
+		return switch (this.tab == null ? CookingPotRecipeBookTab.MISC : this.tab) {
+			case MEALS -> ModRecipeBookCategories.COOKING_MEALS.get();
+			case DRINKS -> ModRecipeBookCategories.COOKING_DRINKS.get();
+			case MISC -> ModRecipeBookCategories.COOKING_MISC.get();
+		};
 	}
 
 	@Override

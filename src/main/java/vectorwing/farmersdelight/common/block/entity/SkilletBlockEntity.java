@@ -23,7 +23,10 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import vectorwing.farmersdelight.common.block.SkilletBlock;
+import vectorwing.farmersdelight.common.block.entity.inventory.ItemHandlerResourceHandler;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModParticleTypes;
@@ -36,6 +39,7 @@ import java.util.Optional;
 public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlockEntity, Clearable
 {
 	private final ItemStackHandler inventory = createHandler();
+	private final ResourceHandler<ItemResource> transferInventory = new ItemHandlerResourceHandler(inventory, slot -> true, slot -> true, originalState -> inventoryChanged());
 	private int cookingTime;
 	private int cookingTimeTotal;
 
@@ -54,8 +58,8 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 		boolean isHeated = skillet.isHeated(level, pos);
 
 		if (state.getValue(SkilletBlock.WATERLOGGED)) {
-			if (ItemUtils.doesInventoryHaveItems(skillet.inventory)) {
-				ItemUtils.dropItems(level, pos, skillet.inventory);
+			if (ItemUtils.doesInventoryHaveItems(skillet.transferInventory)) {
+				ItemUtils.dropItems(level, pos, skillet.transferInventory);
 				skillet.inventoryChanged();
 			}
 		} else if (isHeated) {
@@ -188,6 +192,10 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 		return inventory;
 	}
 
+	public ResourceHandler<ItemResource> getTransferInventory() {
+		return transferInventory;
+	}
+
 	public ItemStack getStoredStack() {
 		return inventory.getStackInSlot(0);
 	}
@@ -213,6 +221,6 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 
 	@Override
 	public void clearContent() {
-		ItemUtils.clearItems(inventory);
+		ItemUtils.clearItems(transferInventory);
 	}
 }

@@ -24,7 +24,10 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec2;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import vectorwing.farmersdelight.common.block.AbstractStoveBlock;
+import vectorwing.farmersdelight.common.block.entity.inventory.ItemHandlerResourceHandler;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 import javax.annotation.Nullable;
@@ -35,6 +38,7 @@ import java.util.stream.Stream;
 public abstract class AbstractStoveBlockEntity extends BlockEntity implements Clearable
 {
 	private final ItemStackHandler items;
+	private final ResourceHandler<ItemResource> transferItems;
 	private final int[] cookingProgress;
 	private final int[] cookingTime;
 	private final RecipeManager.CachedCheck<SingleRecipeInput, ? extends AbstractCookingRecipe> quickRecipeLookup;
@@ -44,6 +48,7 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 
 		int inventorySlotCount = this.getInventorySlotCount();
 		items = createHandler(inventorySlotCount);
+		transferItems = new ItemHandlerResourceHandler(items, slot -> true, slot -> true, originalState -> setChanged());
 		cookingProgress = new int[inventorySlotCount];
 		cookingTime = new int[inventorySlotCount];
 		quickRecipeLookup = RecipeManager.createCheck(recipeType);
@@ -55,6 +60,10 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 
 	public ItemStackHandler getItems() {
 		return this.items;
+	}
+
+	public ResourceHandler<ItemResource> getTransferItems() {
+		return this.transferItems;
 	}
 
 	@Override
@@ -197,7 +206,7 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 
 	public void dropAllItems() {
 		if (this.level == null) return;
-		ItemUtils.dropItems(this.level, this.worldPosition, this.items);
+		ItemUtils.dropItems(this.level, this.worldPosition, this.transferItems);
 		var state = this.getBlockState();
 		this.level.sendBlockUpdated(this.worldPosition, state, state, Block.UPDATE_ALL);
 		this.level.gameEvent(GameEvent.BLOCK_CHANGE, this.worldPosition, GameEvent.Context.of(state));
@@ -216,7 +225,7 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 	}
 
 	public void clearContent() {
-		streamItems().forEach((stack) -> stack.setCount(0));
+		ItemUtils.clearItems(transferItems);
 	}
 
 	private static ItemStackHandler createHandler(int slotCount) {

@@ -54,6 +54,9 @@ neoForge {
         server {
             server()
 //            programArgument '--nogui'
+            providers.gradleProperty('fd.serverWorld').orNull?.with {
+                programArguments.addAll '--world', it
+            }
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
@@ -110,7 +113,7 @@ sourceSets.main.resources {
 }
 
 sourceSets.main.java {
-    // TODO 26.2: Re-enable once EMI and CraftTweaker publish 26.2-compatible NeoForge APIs.
+    // Re-enable once EMI and CraftTweaker publish 26.2-compatible NeoForge APIs.
     exclude 'vectorwing/farmersdelight/integration/emi/**'
     exclude 'vectorwing/farmersdelight/integration/crafttweaker/**'
 }
@@ -123,19 +126,20 @@ dependencies {
     // JEI
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
-//    localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
 
-    // EMI
-    compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
-//    runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
+    if (providers.gradleProperty('fd.includeUnavailableIntegrations').map { it.toBoolean() }.orElse(false).get()) {
+        // EMI and CraftTweaker do not publish usable 26.2 NeoForge APIs yet.
+        compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
+
+        def ctDep = "com.blamejared.crafttweaker:CraftTweaker-neoforge-${crafttweaker_minecraft}:${crafttweaker_version}"
+        compileOnly ctDep
+    }
 
     // AppleSkin
     compileOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}:api"
-//    runtimeOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}"
-
-    def ctDep = "com.blamejared.crafttweaker:CraftTweaker-neoforge-${crafttweaker_minecraft}:${crafttweaker_version}"
-    compileOnly ctDep
-//    runtimeOnly ctDep
+    if (providers.gradleProperty('fd.includeAppleSkinRuntime').map { it.toBoolean() }.orElse(false).get()) {
+        runtimeOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}"
+    }
 }
 
 tasks.withType(ProcessResources).configureEach {
@@ -182,9 +186,3 @@ idea {
         downloadJavadoc = true
     }
 }
-
-////////////////
-
-//compileJava {
-//    options.compilerArgs << "-Acrafttweaker.processor.document.output_directory=${file('docsOut')}"
-//}

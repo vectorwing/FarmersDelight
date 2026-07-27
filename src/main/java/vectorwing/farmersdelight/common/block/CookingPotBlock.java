@@ -37,7 +37,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.block.state.CookingPotSupport;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
@@ -194,8 +193,7 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 	@Override
 	protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction) {
 		if (level.getBlockEntity(pos) instanceof CookingPotBlockEntity cookingPot) {
-			ItemStackHandler inventory = cookingPot.getInventory();
-			return MathUtils.calcRedstoneFromItemHandler(inventory);
+			return MathUtils.calcRedstoneFromItemHandler(cookingPot.getTransferInventory());
 		}
 		return 0;
 	}

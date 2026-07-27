@@ -36,8 +36,11 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.CuttingBoardBlock;
+import vectorwing.farmersdelight.common.block.entity.inventory.ItemHandlerResourceHandler;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipeInput;
 import vectorwing.farmersdelight.common.registry.ModAdvancements;
@@ -56,6 +59,7 @@ import java.util.Optional;
 public class CuttingBoardBlockEntity extends SyncedBlockEntity implements Clearable
 {
 	private final ItemStackHandler inventory;
+	private final ResourceHandler<ItemResource> transferInventory;
 	private final RecipeManager.CachedCheck<CuttingBoardRecipeInput, CuttingBoardRecipe> quickCheck;
 	private Identifier lastRecipeID;
 	private boolean isItemCarvingBoard;
@@ -63,13 +67,14 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity implements Cleara
 	public CuttingBoardBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntityTypes.CUTTING_BOARD.get(), pos, state);
 		inventory = createHandler();
+		transferInventory = new ItemHandlerResourceHandler(inventory, slot -> true, slot -> true, originalState -> inventoryChanged());
 		isItemCarvingBoard = false;
 		quickCheck = RecipeManager.createCheck(ModRecipeTypes.CUTTING.get());
 	}
 
 	@SubscribeEvent
 	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-		// TODO 26.2: Port deprecated IItemHandler capabilities to NeoForge transfer ResourceHandler.
+		event.registerBlockEntity(Capabilities.Item.BLOCK, ModBlockEntityTypes.CUTTING_BOARD.get(), (cuttingBoard, side) -> cuttingBoard.transferInventory);
 	}
 
 	@Override
@@ -236,6 +241,6 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity implements Cleara
 
 	@Override
 	public void clearContent() {
-		ItemUtils.clearItems(inventory);
+		ItemUtils.clearItems(transferInventory);
 	}
 }

@@ -28,6 +28,7 @@ public class FarmersDelight
 		modEventBus.addListener(CommonSetup::init);
 		if (FMLEnvironment.getDist() == Dist.CLIENT) {
 			modEventBus.addListener(ClientSetupEvents::init);
+			modEventBus.addListener(ClientSetupEvents::registerRecipeBookSearchCategories);
 			modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 		}
 
@@ -46,6 +47,7 @@ public class FarmersDelight
 		ModMenuTypes.MENU_TYPES.register(modEventBus);
 		ModRecipeTypes.RECIPE_TYPES.register(modEventBus);
 		ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+		ModRecipeBookCategories.RECIPE_BOOK_CATEGORIES.register(modEventBus);
 		ModBiomeFeatures.FEATURES.register(modEventBus);
 		ModCreativeTabs.CREATIVE_TABS.register(modEventBus);
 		ModPlacementModifiers.PLACEMENT_MODIFIERS.register(modEventBus);

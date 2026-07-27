@@ -1,6 +1,26 @@
-﻿{
-    "model":  {
-                  "model":  "farmersdelight:item/skillet",
-                  "type":  "minecraft:model"
-              }
+{
+  "model": {
+    "type": "minecraft:composite",
+    "models": [
+      {
+        "type": "minecraft:model",
+        "model": "farmersdelight:item/skillet"
+      },
+      {
+        "type": "minecraft:condition",
+        "property": "minecraft:has_component",
+        "component": "farmersdelight:skillet_ingredient",
+        "on_true": {
+          "type": "minecraft:special",
+          "base": "farmersdelight:item/skillet",
+          "model": {
+            "type": "farmersdelight:skillet_ingredient"
+          }
+        },
+        "on_false": {
+          "type": "minecraft:empty"
+        }
+      }
+    ]
+  }
 }

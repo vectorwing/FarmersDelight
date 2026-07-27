@@ -32,6 +32,7 @@ public class DataGenerators
 	@SubscribeEvent
 	public static void gatherServerData(GatherDataEvent.Server event) {
 		PackOutput output = event.getGenerator().getPackOutput();
+		event.addProvider(new GeneratedResourcePreserver(output, "assets"));
 		RegistrySetBuilder registrySetBuilder = new RegistrySetBuilder()
 				.add(Registries.CONFIGURED_FEATURE, WildCropGeneration::bootstrapConfiguredFeatures)
 				.add(Registries.PLACED_FEATURE, WildCropGeneration::bootstrapPlacedFeatures)
@@ -40,7 +41,6 @@ public class DataGenerators
 				.add(Registries.ENCHANTMENT, ModEnchantments::bootstrap);
 		DatapackBuiltinEntriesProvider datapackProvider = new DatapackBuiltinEntriesProvider(output, event.getLookupProvider(), registrySetBuilder, Set.of(FarmersDelight.MODID));
 		CompletableFuture<HolderLookup.Provider> lookupProvider = datapackProvider.getRegistryProvider();
-		event.addProvider(new ExistingGeneratedResources(output));
 		event.addProvider(datapackProvider);
 
 		BlockTags blockTags = new BlockTags(output, lookupProvider);
@@ -64,7 +64,7 @@ public class DataGenerators
 	@SubscribeEvent
 	public static void gatherClientData(GatherDataEvent.Client event) {
 		PackOutput output = event.getGenerator().getPackOutput();
-		event.addProvider(new ExistingGeneratedResources(output));
+		event.addProvider(new GeneratedResourcePreserver(output, "data"));
 		event.addProvider(new BlockStates(output));
 		event.addProvider(new ItemModels(output));
 		event.addProvider(new SoundDefinitions(output));

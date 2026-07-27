@@ -5,6 +5,7 @@
   "mixins": [
     "datafix.ItemStackComponentizationFixMixin",
     "datafix.V1460Mixin",
+    "datafix.V3818_3Mixin",
     "CampfireBaleMixin",
     "CuttingBoardDispenserMixin",
     "KeepRichSoilTreeMixin",
@@ -15,7 +16,8 @@
     "VillagersTargetRichSoilMixin"
   ],
   "client": [
-    "CanvasSignEditScreenMixin"
+    "CanvasSignEditScreenMixin",
+    "HideBlockBreakProgressMixin"
   ],
   "injectors": {
     "defaultRequire": 1

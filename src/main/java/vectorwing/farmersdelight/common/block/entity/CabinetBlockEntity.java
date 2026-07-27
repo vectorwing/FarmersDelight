@@ -23,7 +23,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.items.wrapper.InvWrapper;
+import net.neoforged.neoforge.transfer.item.VanillaContainerWrapper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.CabinetBlock;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
@@ -65,7 +65,7 @@ public class CabinetBlockEntity extends RandomizableContainerBlockEntity
 
 	@SubscribeEvent
 	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-		// TODO 26.2: Port deprecated IItemHandler capabilities to NeoForge transfer ResourceHandler.
+		event.registerBlockEntity(Capabilities.Item.BLOCK, ModBlockEntityTypes.CABINET.get(), (cabinet, side) -> VanillaContainerWrapper.of(cabinet));
 	}
 
 	@Override
