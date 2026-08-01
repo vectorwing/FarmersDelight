@@ -24,6 +24,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
@@ -32,6 +33,10 @@ public class RopeFenceBlock extends CrossCollisionBlock
 	public static final MapCodec<RopeFenceBlock> CODEC = simpleCodec(RopeFenceBlock::new);
 
 	public static final VoxelShape POST = Block.box(7.0F, 0.0F, 7.0F, 9.0F, 16.0F, 9.0F);
+	public static final VoxelShape NORTH_SIDE = Block.box(7.0F, 4.0F, 0.0F, 9.0F, 14.0F, 9.0F);
+	public static final VoxelShape EAST_SIDE = Block.box(7.0F, 4.0F, 7.0F, 16.0F, 14.0F, 9.0F);
+	public static final VoxelShape SOUTH_SIDE = Block.box(7.0F, 4.0F, 7.0F, 9.0F, 14.0F, 16.0F);
+	public static final VoxelShape WEST_SIDE = Block.box(0.0F, 4.0F, 7.0F, 9.0F, 14.0F, 9.0F);
 
 	@Override
 	protected MapCodec<? extends CrossCollisionBlock> codec() {
@@ -39,7 +44,7 @@ public class RopeFenceBlock extends CrossCollisionBlock
 	}
 
 	public RopeFenceBlock(Properties properties) {
-		super(1.0F, 1.0F, 16.0F, 16.0F, 24.0F, properties);
+		super(2.0F, 16.0F, 2.0F, 14.0F, 24.0F, properties);
 		this.registerDefaultState(this.stateDefinition.any()
 			.setValue(NORTH, false)
 			.setValue(EAST, false)
@@ -63,8 +68,26 @@ public class RopeFenceBlock extends CrossCollisionBlock
 	}
 
 	@Override
+	protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+		VoxelShape shape = POST;
+		if (state.getValue(NORTH)) {
+			shape = Shapes.or(shape, NORTH_SIDE);
+		}
+		if (state.getValue(EAST)) {
+			shape = Shapes.or(shape, EAST_SIDE);
+		}
+		if (state.getValue(SOUTH)) {
+			shape = Shapes.or(shape, SOUTH_SIDE);
+		}
+		if (state.getValue(WEST)) {
+			shape = Shapes.or(shape, WEST_SIDE);
+		}
+		return shape;
+	}
+
+	@Override
 	protected VoxelShape getVisualShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		return POST;
+		return this.getShape(state, level, pos, context);
 	}
 
 	@Override

@@ -91,5 +91,5 @@ Current state observed on 2026-07-27:
 - [x] Confirm the generated resource diff is intentional and reproducible.
   - Re-ran `runServerData` followed by `runClientData` on 2026-07-27 and confirmed the generated-resource diff name list stayed stable.
 - [x] Update README, changelog, supported Minecraft/NeoForge version ranges, and release metadata.
-- [ ] Build the release jar and smoke-test it outside the dev workspace.
-  - Built and installed `FarmersDelight-26.2-1.3.2.jar` into the CurseForge `Test 26.2` instance after the recipe-sync fix; pending manual world-load retest in that instance.
+- [x] Build the release jar and smoke-test it outside the dev workspace.
+  - Built and installed `FarmersDelight-26.2-1.3.2.jar` into the CurseForge `Test 26.2` instance after the recipe-sync fix; manual jar retest passed on 2026-08-01.
