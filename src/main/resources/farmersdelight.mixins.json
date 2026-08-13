@@ -3,6 +3,7 @@
   "package": "vectorwing.farmersdelight.common.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "accessor.CropBlockAccessor",
     "datafix.ItemStackComponentizationFixMixin",
     "datafix.V1460Mixin",
     "datafix.V3818_3Mixin",
