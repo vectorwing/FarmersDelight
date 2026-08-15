@@ -6,6 +6,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -21,12 +22,10 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.level.material.FluidState;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.ItemAbilities;
@@ -63,31 +62,52 @@ public class KnifeItem extends DiggerItem
 	public boolean canAttackBlock(BlockState state, Level level, BlockPos pos, Player player) {
 		if (player.isCreative()) return false;
 
-		if (!player.isSecondaryUseActive() && state.getBlock().defaultDestroyTime() == 0.0F) {
-			return isValidCrop(level, pos, state);
+		if (!player.isSecondaryUseActive() && isValidCrop(level, pos, state)) {
+			return isCropMature(level, pos, state);
 		}
 
 		return true;
 	}
 
 	public static boolean isValidCrop(Level level, BlockPos pos, BlockState state) {
+		if (state.getBlock() instanceof CropBlock) {
+			return true;
+		}
+
+		if (state.is(BlockTags.CROPS)) {
+			return true;
+		}
+
+		if (state.getCollisionShape(level, pos).isEmpty() && state.getBlock().defaultDestroyTime() == 0.0F) {
+			for (Property<?> property : state.getProperties()) {
+				if (!(property instanceof IntegerProperty))
+					continue;
+				if (property.equals(BlockStateProperties.AGE_25) || property.equals(BlockStateProperties.AGE_15))
+					continue;
+				if (!property.getName().equals(BlockStateProperties.AGE_1.getName()))
+					continue;
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public static boolean isCropMature(Level level, BlockPos pos, BlockState state) {
 		if (state.getBlock() instanceof CropBlock crop) {
 			return crop.isMaxAge(state);
 		}
 
-		if (state.getCollisionShape(level, pos)
-			.isEmpty() || state.getBlock() instanceof CocoaBlock) {
+		if (state.getCollisionShape(level, pos).isEmpty() || state.getBlock() instanceof CocoaBlock) {
 			for (Property<?> property : state.getProperties()) {
 				if (!(property instanceof IntegerProperty ageProperty))
 					continue;
-				if (!property.getName()
-					.equals(BlockStateProperties.AGE_1.getName()))
+				if (!property.getName().equals(BlockStateProperties.AGE_1.getName()))
 					continue;
 				int age = state.getValue(ageProperty);
 				if (state.getBlock() instanceof SweetBerryBushBlock && age <= 1)
 					continue;
-				if (age == 0 || (ageProperty.getPossibleValues()
-					.size() - 1 != age))
+				if (age == 0 || (ageProperty.getPossibleValues().size() - 1 != age))
 					continue;
 				return true;
 			}
@@ -168,7 +188,7 @@ public class KnifeItem extends DiggerItem
 			BlockPos pos = event.getPos();
 			BlockState state = level.getBlockState(pos);
 
-			if (!isValidCrop(level, pos, state)) {
+			if (!isCropMature(level, pos, state)) {
 				return;
 			}
 
