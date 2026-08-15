@@ -9,13 +9,20 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.loading.DatagenModLoader;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
+import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.FoodValues;
+import vectorwing.farmersdelight.common.registry.ModDataMaps;
 
 @EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CommonModBusEvents
 {
+	@SubscribeEvent
+	public static void registerDataMapTypes(RegisterDataMapTypesEvent event) {
+		event.register(ModDataMaps.MUSHROOM_COLONIES);
+	}
+
 	@SubscribeEvent
 	public static void onModifyDefaultComponents(ModifyDefaultComponentsEvent event) {
 		if (DatagenModLoader.isRunningDataGen()) {

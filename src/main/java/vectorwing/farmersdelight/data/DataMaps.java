@@ -5,11 +5,16 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 import org.jetbrains.annotations.NotNull;
+import vectorwing.farmersdelight.common.datamap.MushroomColony;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.registry.ModDataMaps;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
@@ -25,6 +30,9 @@ public class DataMaps extends DataMapProvider
 
 	@Override
 	protected void gather(HolderLookup.@NotNull Provider provider) {
+		builder(ModDataMaps.MUSHROOM_COLONIES)
+			.add(block(Blocks.BROWN_MUSHROOM), new MushroomColony(ModBlocks.BROWN_MUSHROOM_COLONY.get()), false)
+			.add(block(Blocks.RED_MUSHROOM), new MushroomColony(ModBlocks.RED_MUSHROOM_COLONY.get()), false);
 		builder(NeoForgeDataMaps.FURNACE_FUELS)
 			// 0.5 items
 			.add(item(ModItems.HALF_TATAMI_MAT.get()), new FurnaceFuel(100), false)
@@ -98,5 +106,9 @@ public class DataMaps extends DataMapProvider
 
 	private static ResourceKey<Item> item(Item item) {
 		return BuiltInRegistries.ITEM.getResourceKey(item).orElseThrow();
+	}
+
+	private static ResourceKey<Block> block(Block block) {
+		return BuiltInRegistries.BLOCK.getResourceKey(block).orElseThrow();
 	}
 }

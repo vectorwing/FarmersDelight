@@ -16,8 +16,10 @@ import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.network.PacketDistributor;
 import vectorwing.farmersdelight.common.Configuration;
+import vectorwing.farmersdelight.common.datamap.MushroomColony;
 import vectorwing.farmersdelight.common.network.payload.RichSoilBoostParticlesPayload;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.registry.ModDataMaps;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.Nullable;
@@ -74,12 +76,9 @@ public class RichSoilBlock extends Block
 	}
 
 	public boolean convertMushroomToColony(BlockState targetState, BlockPos targetPos, ServerLevel level) {
-		if (targetState.is(Blocks.BROWN_MUSHROOM)) {
-			level.setBlockAndUpdate(targetPos, ModBlocks.BROWN_MUSHROOM_COLONY.get().defaultBlockState());
-			return true;
-		}
-		if (targetState.is(Blocks.RED_MUSHROOM)) {
-			level.setBlockAndUpdate(targetPos, ModBlocks.RED_MUSHROOM_COLONY.get().defaultBlockState());
+		MushroomColony mushroomColony = targetState.getBlock().builtInRegistryHolder().getData(ModDataMaps.MUSHROOM_COLONIES);
+		if (mushroomColony != null) {
+			level.setBlockAndUpdate(targetPos, mushroomColony.colonyBlock().defaultBlockState());
 			return true;
 		}
 

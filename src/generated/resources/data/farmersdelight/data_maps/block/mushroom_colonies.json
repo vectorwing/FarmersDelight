@@ -1,0 +1,10 @@
+{
+  "values": {
+    "minecraft:brown_mushroom": {
+      "colony_block": "farmersdelight:brown_mushroom_colony"
+    },
+    "minecraft:red_mushroom": {
+      "colony_block": "farmersdelight:red_mushroom_colony"
+    }
+  }
+}
