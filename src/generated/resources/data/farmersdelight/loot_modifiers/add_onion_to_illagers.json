@@ -8,21 +8,21 @@
           "condition": "minecraft:entity_properties",
           "entity": "this",
           "predicate": {
-            "type": "minecraft:pillager"
+            "minecraft:entity_type": "minecraft:pillager"
           }
         },
         {
           "condition": "minecraft:entity_properties",
           "entity": "this",
           "predicate": {
-            "type": "minecraft:evoker"
+            "minecraft:entity_type": "minecraft:evoker"
           }
         },
         {
           "condition": "minecraft:entity_properties",
           "entity": "this",
           "predicate": {
-            "type": "minecraft:vindicator"
+            "minecraft:entity_type": "minecraft:vindicator"
           }
         }
       ]
@@ -41,5 +41,6 @@
       "unenchanted_chance": 0.02
     }
   ],
-  "item": "farmersdelight:onion"
+  "item": "farmersdelight:onion",
+  "priority": 0
 }

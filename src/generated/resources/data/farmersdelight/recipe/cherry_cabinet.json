@@ -1,14 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "fd_cabinet",
   "key": {
-    "D": {
-      "item": "minecraft:cherry_trapdoor"
-    },
-    "_": {
-      "item": "minecraft:cherry_slab"
-    }
+    "D": "minecraft:cherry_trapdoor",
+    "_": "minecraft:cherry_slab"
   },
   "pattern": [
     "___",
@@ -16,7 +11,6 @@
     "___"
   ],
   "result": {
-    "count": 1,
     "id": "farmersdelight:cherry_cabinet"
   }
 }

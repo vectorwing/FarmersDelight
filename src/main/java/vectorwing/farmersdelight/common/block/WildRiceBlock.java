@@ -12,8 +12,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -43,7 +43,7 @@ public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterlogged
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+	protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
 		FluidState fluid = level.getFluidState(pos);
 		BlockPos floorPos = pos.below();
 		if (state.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.LOWER) {
@@ -58,7 +58,7 @@ public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterlogged
 	}
 
 	@Override
-	public boolean canBeReplaced(BlockState state, BlockPlaceContext useContext) {
+	protected boolean canBeReplaced(BlockState state, BlockPlaceContext useContext) {
 		return false;
 	}
 
@@ -68,11 +68,11 @@ public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterlogged
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-		BlockState currentState = super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+	protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource random) {
+		BlockState currentState = super.updateShape(state, level, scheduledTickAccess, currentPos, facing, facingPos, facingState, random);
 		DoubleBlockHalf half = state.getValue(HALF);
 		if (!currentState.isAir()) {
-			level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+			scheduledTickAccess.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
 		if (facing.getAxis() != Direction.Axis.Y || half == DoubleBlockHalf.LOWER != (facing == Direction.UP) || facingState.getBlock() == this && facingState.getValue(HALF) != half) {
 			return half == DoubleBlockHalf.LOWER && facing == Direction.DOWN && !state.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : state;
@@ -86,7 +86,7 @@ public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterlogged
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		BlockPos pos = context.getClickedPos();
 		FluidState fluid = context.getLevel().getFluidState(context.getClickedPos());
-		return pos.getY() < context.getLevel().getMaxBuildHeight() - 1
+		return pos.getY() < context.getLevel().dimensionType().minY() + context.getLevel().dimensionType().height() - 1
 				&& fluid.is(FluidTags.WATER)
 				&& fluid.getAmount() == 8
 				&& context.getLevel().getBlockState(pos.above()).isAir()
@@ -94,12 +94,12 @@ public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterlogged
 	}
 
 	@Override
-	public boolean canPlaceLiquid(@Nullable Player player, BlockGetter level, BlockPos pos, BlockState state, Fluid fluid) {
+	public boolean canPlaceLiquid(@Nullable LivingEntity entity, BlockGetter level, BlockPos pos, BlockState state, Fluid fluid) {
 		return state.getValue(HALF) == DoubleBlockHalf.LOWER;
 	}
 
 	@Override
-	public FluidState getFluidState(BlockState state) {
+	protected FluidState getFluidState(BlockState state) {
 		return state.getValue(HALF) == DoubleBlockHalf.LOWER
 				? Fluids.WATER.getSource(false)
 				: Fluids.EMPTY.defaultFluidState();

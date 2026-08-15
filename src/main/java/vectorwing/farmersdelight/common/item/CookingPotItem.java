@@ -1,21 +1,18 @@
 package vectorwing.farmersdelight.common.item;
 
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.block.Block;
-import vectorwing.farmersdelight.client.gui.CookingPotTooltip;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
+import vectorwing.farmersdelight.common.item.component.CookingPotTooltipComponent;
 
 import java.util.Optional;
 
 public class CookingPotItem extends BlockItem
 {
-	private static final int BAR_COLOR = Mth.color(0.4F, 0.4F, 1.0F);
+	private static final int BAR_COLOR = 0x6666FF;
 
 	public CookingPotItem(Block block, Properties properties) {
 		super(block, properties);
@@ -39,7 +36,7 @@ public class CookingPotItem extends BlockItem
 	@Override
 	public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
 		ItemStack mealStack = CookingPotBlockEntity.getMealFromItem(stack);
-		return Optional.of(new CookingPotTooltip.CookingPotTooltipComponent(mealStack));
+		return Optional.of(new CookingPotTooltipComponent(mealStack));
 	}
 
 	private static int getServingCount(ItemStack stack) {

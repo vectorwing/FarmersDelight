@@ -3,10 +3,10 @@ package vectorwing.farmersdelight.common.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -19,8 +19,11 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import vectorwing.farmersdelight.common.block.entity.inventory.ItemStackInventory;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import vectorwing.farmersdelight.common.block.SkilletBlock;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -33,7 +36,8 @@ import java.util.Optional;
 
 public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlockEntity, Clearable
 {
-	private final ItemStackHandler inventory = createHandler();
+	private final ItemStackInventory inventory = createHandler();
+	private final ResourceHandler<ItemResource> transferInventory = inventory;
 	private int cookingTime;
 	private int cookingTimeTotal;
 
@@ -52,8 +56,8 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 		boolean isHeated = skillet.isHeated(level, pos);
 
 		if (state.getValue(SkilletBlock.WATERLOGGED)) {
-			if (ItemUtils.doesInventoryHaveItems(skillet.inventory)) {
-				ItemUtils.dropItems(level, pos, skillet.inventory);
+			if (ItemUtils.doesInventoryHaveItems(skillet.transferInventory)) {
+				ItemUtils.dropItems(level, pos, skillet.transferInventory);
 				skillet.inventoryChanged();
 			}
 		} else if (isHeated) {
@@ -70,7 +74,7 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 
 	public static void animationTick(Level level, BlockPos pos, BlockState state, SkilletBlockEntity skillet) {
 		if (skillet.isHeated(level, pos) && skillet.hasStoredStack()) {
-			RandomSource random = level.random;
+			RandomSource random = level.getRandom();
 			if (random.nextFloat() < 0.2F) {
 				double x = (double) pos.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
 				double y = (double) pos.getY() + 0.1D;
@@ -82,9 +86,9 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 				double x = (double) pos.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
 				double y = (double) pos.getY() + 0.1D;
 				double z = (double) pos.getZ() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
-				double motionX = level.random.nextFloat() - 0.5F;
-				double motionY = level.random.nextFloat() * 0.5F + 0.2f;
-				double motionZ = level.random.nextFloat() - 0.5F;
+				double motionX = level.getRandom().nextFloat() - 0.5F;
+				double motionY = level.getRandom().nextFloat() * 0.5F + 0.2f;
+				double motionZ = level.getRandom().nextFloat() - 0.5F;
 				level.addParticle(ParticleTypes.ENCHANTED_HIT, x, y, z, motionX, motionY, motionZ);
 			}
 		}
@@ -96,14 +100,14 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 		if (cookingTime >= cookingTimeTotal) {
 			Optional<RecipeHolder<CampfireCookingRecipe>> recipe = getMatchingRecipe(cookingStack);
 			if (recipe.isPresent()) {
-				ItemStack resultStack = recipe.get().value().assemble(new SingleRecipeInput(cookingStack), level.registryAccess());
+				ItemStack resultStack = recipe.get().value().assemble(new SingleRecipeInput(cookingStack));
 				Direction direction = getBlockState().getValue(SkilletBlock.FACING).getClockWise();
 				ItemUtils.spawnItemEntity(level, resultStack.copy(),
 						worldPosition.getX() + 0.5, worldPosition.getY() + 0.3, worldPosition.getZ() + 0.5,
 						direction.getStepX() * 0.08F, 0.25F, direction.getStepZ() * 0.08F);
 
 				cookingTime = 0;
-				inventory.extractItem(0, 1, false);
+				inventory.extract(0, 1, false);
 			}
 		}
 	}
@@ -121,27 +125,27 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 
 	private Optional<RecipeHolder<CampfireCookingRecipe>> getMatchingRecipe(ItemStack stack) {
 		if (level == null) return Optional.empty();
-		return this.quickCheck.getRecipeFor(new SingleRecipeInput(stack), this.level);
+		return this.level instanceof ServerLevel serverLevel ? this.quickCheck.getRecipeFor(new SingleRecipeInput(stack), serverLevel) : Optional.empty();
 	}
 
 	@Override
-	public void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
-		super.loadAdditional(compound, registries);
-		inventory.deserializeNBT(registries, compound.getCompound("Inventory"));
-		cookingTime = compound.getInt("CookTime");
-		cookingTimeTotal = compound.getInt("CookTimeTotal");
-		skilletStack = ItemStack.parseOptional(registries, compound.getCompound("Skillet"));
-		fireAspectLevel = ItemUtils.getValidatedEnchantmentLevel(Enchantments.FIRE_ASPECT, registries, skilletStack);
+	protected void loadAdditional(ValueInput input) {
+		super.loadAdditional(input);
+		inventory.deserialize(input.childOrEmpty("Inventory"));
+		cookingTime = input.getIntOr("CookTime", 0);
+		cookingTimeTotal = input.getIntOr("CookTimeTotal", 0);
+		skilletStack = input.read("Skillet", ItemStack.OPTIONAL_CODEC).orElse(ItemStack.EMPTY);
+		fireAspectLevel = ItemUtils.getValidatedEnchantmentLevel(Enchantments.FIRE_ASPECT, input.lookup(), skilletStack);
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
-		super.saveAdditional(compound, registries);
-		compound.put("Inventory", inventory.serializeNBT(registries));
-		compound.putInt("CookTime", cookingTime);
-		compound.putInt("CookTimeTotal", cookingTimeTotal);
+	protected void saveAdditional(ValueOutput output) {
+		super.saveAdditional(output);
+		inventory.serialize(output.child("Inventory"));
+		output.putInt("CookTime", cookingTime);
+		output.putInt("CookTimeTotal", cookingTimeTotal);
 		if (!skilletStack.isEmpty()) {
-			compound.put("Skillet", skilletStack.save(registries));
+			output.store("Skillet", ItemStack.OPTIONAL_CODEC, skilletStack);
 		}
 	}
 
@@ -159,13 +163,13 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 		Optional<RecipeHolder<CampfireCookingRecipe>> recipe = getMatchingRecipe(addedStack);
 		if (recipe.isPresent() && getStoredStack().isEmpty()) {
 			if (getBlockState().getValue(SkilletBlock.WATERLOGGED)) {
-				player.displayClientMessage(TextUtils.block("skillet.underwater"), true);
+				player.sendOverlayMessage(TextUtils.block("skillet.underwater"));
 				return addedStack;
 			}
 			boolean wasEmpty = getStoredStack().isEmpty();
-			ItemStack remainderStack = inventory.insertItem(0, addedStack.copy(), false);
+			ItemStack remainderStack = inventory.insert(0, addedStack.copy(), false);
 			if (!ItemStack.matches(remainderStack, addedStack)) {
-				cookingTimeTotal = SkilletBlock.getSkilletCookingTime(recipe.get().value().getCookingTime(), fireAspectLevel);
+				cookingTimeTotal = SkilletBlock.getSkilletCookingTime(recipe.get().value().cookingTime(), fireAspectLevel);
 				cookingTime = 0;
 				if (wasEmpty && level != null && isHeated(level, worldPosition)) {
 					level.playSound(null, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F, ModSounds.BLOCK_SKILLET_ADD_FOOD.get(), SoundSource.BLOCKS, 0.8F, 1.0F);
@@ -173,32 +177,36 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 				return remainderStack;
 			}
 		} else {
-			player.displayClientMessage(TextUtils.block("skillet.invalid_item"), true);
+			player.sendOverlayMessage(TextUtils.block("skillet.invalid_item"));
 		}
 		return addedStack;
 	}
 
 	public ItemStack removeItem() {
-		return inventory.extractItem(0, getStoredStack().getMaxStackSize(), false);
+		return inventory.extract(0, getStoredStack().getMaxStackSize(), false);
 	}
 
-	public IItemHandler getInventory() {
+	public ItemStackInventory getInventory() {
 		return inventory;
 	}
 
+	public ResourceHandler<ItemResource> getTransferInventory() {
+		return transferInventory;
+	}
+
 	public ItemStack getStoredStack() {
-		return inventory.getStackInSlot(0);
+		return inventory.getStack(0);
 	}
 
 	public boolean hasStoredStack() {
 		return !getStoredStack().isEmpty();
 	}
 
-	private ItemStackHandler createHandler() {
-		return new ItemStackHandler()
+	private ItemStackInventory createHandler() {
+		return new ItemStackInventory(1)
 		{
 			@Override
-			protected void onContentsChanged(int slot) {
+			protected void onContentsChanged(int slot, ItemStack previousContents) {
 				inventoryChanged();
 			}
 		};
@@ -211,6 +219,6 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 
 	@Override
 	public void clearContent() {
-		ItemUtils.clearItems(inventory);
+		ItemUtils.clearItems(transferInventory);
 	}
 }

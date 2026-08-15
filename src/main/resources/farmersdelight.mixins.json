@@ -8,7 +8,6 @@
     "datafix.V3818_3Mixin",
     "CampfireBaleMixin",
     "CuttingBoardDispenserMixin",
-    "KeepRichSoilGiantTreeMixin",
     "KeepRichSoilTreeMixin",
     "KeepRichSoilUntrampledMixin",
     "NourishmentAlwaysEatMixin",

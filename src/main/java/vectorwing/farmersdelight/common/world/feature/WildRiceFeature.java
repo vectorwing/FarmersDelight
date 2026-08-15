@@ -11,21 +11,21 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import vectorwing.farmersdelight.common.block.WildRiceBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.world.configuration.WildRiceConfiguration;
 
-public class WildRiceFeature extends Feature<RandomPatchConfiguration>
+public class WildRiceFeature extends Feature<WildRiceConfiguration>
 {
-	public WildRiceFeature(Codec<RandomPatchConfiguration> configFactoryIn) {
+	public WildRiceFeature(Codec<WildRiceConfiguration> configFactoryIn) {
 		super(configFactoryIn);
 	}
 
 	@Override
-	public boolean place(FeaturePlaceContext<RandomPatchConfiguration> context) {
+	public boolean place(FeaturePlaceContext<WildRiceConfiguration> context) {
 		WorldGenLevel level = context.level();
 		BlockPos origin = context.origin();
-		RandomPatchConfiguration config = context.config();
+		WildRiceConfiguration config = context.config();
 		RandomSource random = context.random();
 
 		BlockPos blockpos = level.getHeightmapPos(Heightmap.Types.OCEAN_FLOOR_WG, origin);

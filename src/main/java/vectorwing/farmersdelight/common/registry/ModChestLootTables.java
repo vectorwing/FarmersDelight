@@ -2,10 +2,9 @@ package vectorwing.farmersdelight.common.registry;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.storage.loot.LootTable;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.common.utility.RecipeUtils;
 
 public class ModChestLootTables {
     public static final ResourceKey<LootTable> ABANDONED_MINESHAFT = register("chests/fd_abandoned_mineshaft");
@@ -24,7 +23,6 @@ public class ModChestLootTables {
     public static final ResourceKey<LootTable> VILLAGE_TAIGA_HOUSE = register("chests/fd_village_taiga_house");
 
     private static ResourceKey<LootTable> register(String id) {
-//        return ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, id);
-        return ResourceKey.create(Registries.LOOT_TABLE, RecipeUtils.FDLocation(id));
+        return ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, id));
     }
 }

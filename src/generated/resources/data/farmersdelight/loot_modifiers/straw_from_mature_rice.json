@@ -15,5 +15,6 @@
       }
     }
   ],
-  "item": "farmersdelight:straw"
+  "item": "farmersdelight:straw",
+  "priority": 0
 }

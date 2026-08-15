@@ -7,9 +7,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "minecraft:beetroot"
-    }
+    "#": "minecraft:beetroot"
   },
   "pattern": [
     "###",
@@ -17,7 +15,6 @@
     "###"
   ],
   "result": {
-    "count": 1,
     "id": "farmersdelight:beetroot_crate"
   }
 }

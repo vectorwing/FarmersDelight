@@ -1,9 +1,7 @@
 package vectorwing.farmersdelight.common.block.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
@@ -14,13 +12,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.BasketBlock;
-import vectorwing.farmersdelight.common.block.entity.inventory.BasketInvWrapper;
+import vectorwing.farmersdelight.common.block.entity.inventory.BasketResourceHandler;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
@@ -30,39 +30,32 @@ import java.util.function.BooleanSupplier;
 public class BasketBlockEntity extends RandomizableContainerBlockEntity implements Basket
 {
 	private NonNullList<ItemStack> items = NonNullList.withSize(27, ItemStack.EMPTY);
+	private final BasketResourceHandler transferInventory;
 	private int transferCooldown = -1;
 
 	public BasketBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntityTypes.BASKET.get(), pos, state);
+		this.transferInventory = new BasketResourceHandler(this);
 	}
 
 	@SubscribeEvent
 	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-		event.registerBlockEntity(
-				Capabilities.ItemHandler.BLOCK,
-				ModBlockEntityTypes.BASKET.get(),
-				(be, context) -> new BasketInvWrapper(be)
-		);
+		event.registerBlockEntity(Capabilities.Item.BLOCK, ModBlockEntityTypes.BASKET.get(), (basket, side) -> basket.transferInventory);
 	}
 
 	@Override
-	protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
-		super.loadAdditional(compound, registries);
+	protected void loadAdditional(ValueInput input) {
+		super.loadAdditional(input);
 		this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-		if (!this.tryLoadLootTable(compound)) {
-			ContainerHelper.loadAllItems(compound, this.items, registries);
-		}
-		this.transferCooldown = compound.getInt("TransferCooldown");
+		ContainerHelper.loadAllItems(input, this.items);
+		this.transferCooldown = input.getIntOr("TransferCooldown", -1);
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
-		super.saveAdditional(compound, registries);
-		if (!this.trySaveLootTable(compound)) {
-			ContainerHelper.saveAllItems(compound, this.items, registries);
-		}
-
-		compound.putInt("TransferCooldown", this.transferCooldown);
+	protected void saveAdditional(ValueOutput output) {
+		super.saveAdditional(output);
+		ContainerHelper.saveAllItems(output, this.items);
+		output.putInt("TransferCooldown", this.transferCooldown);
 	}
 
 	@Override
@@ -122,7 +115,7 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 
 	@Override
 	public void tryTransfer(BooleanSupplier transfer) {
-		if (this.level != null && !this.level.isClientSide) {
+		if (this.level != null && !this.level.isClientSide()) {
 			if (!this.isOnCooldown() && this.getBlockState().getValue(BlockStateProperties.ENABLED)) {
 				boolean flag = false;
 				if (!this.isFull()) {

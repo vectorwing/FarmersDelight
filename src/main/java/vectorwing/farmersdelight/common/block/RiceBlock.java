@@ -8,6 +8,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.BushBlock;
@@ -54,12 +56,13 @@ public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlo
 	}
 
 	@Override
-	protected MapCodec<? extends BushBlock> codec() {
-		return CODEC;
+	@SuppressWarnings("unchecked")
+	public MapCodec<BushBlock> codec() {
+		return (MapCodec<BushBlock>) (MapCodec<?>) CODEC;
 	}
 
 	@Override
-	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+	protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		super.tick(state, level, pos, random);
 		if (!level.isAreaLoaded(pos, 1)) return;
 		if (level.getRawBrightness(pos.above(), 0) >= 6) {
@@ -83,12 +86,12 @@ public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlo
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+	protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+	protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
 		FluidState fluid = level.getFluidState(pos);
 		return super.canSurvive(state, level, pos) && fluid.is(FluidTags.WATER) && fluid.getAmount() == 8;
 	}
@@ -111,7 +114,7 @@ public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlo
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+	protected ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
 		return new ItemStack(ModItems.RICE.get());
 	}
 
@@ -129,10 +132,10 @@ public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlo
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-		BlockState updatedState = super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+	protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource random) {
+		BlockState updatedState = super.updateShape(state, level, scheduledTickAccess, currentPos, facing, facingPos, facingState, random);
 		if (!updatedState.isAir()) {
-			level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+			scheduledTickAccess.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 			if (facing == Direction.UP) {
 				return updatedState.setValue(SUPPORTING, isSupportingRiceUpper(facingState));
 			}
@@ -167,7 +170,7 @@ public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlo
 	}
 
 	protected int getBonemealAgeIncrease(Level level) {
-		return Mth.nextInt(level.random, 1, 4);
+		return Mth.nextInt(level.getRandom(), 1, 4);
 	}
 
 	@Override
@@ -180,7 +183,7 @@ public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlo
 			if (top.getBlock() == ModBlocks.RICE_CROP_PANICLES.get()) {
 				BonemealableBlock growable = (BonemealableBlock) level.getBlockState(pos.above()).getBlock();
 				if (growable.isValidBonemealTarget(level, pos.above(), top)) {
-					growable.performBonemeal(level, level.random, pos.above(), top);
+					growable.performBonemeal(level, level.getRandom(), pos.above(), top);
 				}
 			} else {
 				RicePaniclesBlock riceUpper = (RicePaniclesBlock) ModBlocks.RICE_CROP_PANICLES.get();
@@ -194,12 +197,12 @@ public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlo
 	}
 
 	@Override
-	public FluidState getFluidState(BlockState state) {
+	protected FluidState getFluidState(BlockState state) {
 		return Fluids.WATER.getSource(false);
 	}
 
 	@Override
-	public boolean canPlaceLiquid(@Nullable Player player, BlockGetter level, BlockPos pos, BlockState state, Fluid fluid) {
+	public boolean canPlaceLiquid(@Nullable LivingEntity entity, BlockGetter level, BlockPos pos, BlockState state, Fluid fluid) {
 		return false;
 	}
 

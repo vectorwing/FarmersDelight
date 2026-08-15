@@ -1,31 +1,28 @@
 {
   "type": "farmersdelight:cutting",
   "ingredients": [
-    {
-      "item": "farmersdelight:bamboo_basket"
-    }
+    "farmersdelight:bamboo_basket"
   ],
   "result": [
     {
       "item": {
-        "count": 1,
         "id": "farmersdelight:canvas"
       }
     },
     {
       "item": {
-        "count": 1,
         "id": "minecraft:bamboo"
       }
     }
   ],
-  "tool": [
-    {
-      "type": "farmersdelight:item_ability",
-      "action": "axe_dig"
-    },
-    {
-      "tag": "minecraft:axes"
-    }
-  ]
+  "tool": {
+    "neoforge:ingredient_type": "neoforge:compound",
+    "children": [
+      {
+        "neoforge:ingredient_type": "farmersdelight:item_ability",
+        "action": "axe_dig"
+      },
+      "#minecraft:axes"
+    ]
+  }
 }

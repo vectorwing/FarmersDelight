@@ -16,5 +16,6 @@
       "condition": "minecraft:block_state_property"
     }
   ],
-  "item": "farmersdelight:straw"
+  "item": "farmersdelight:straw",
+  "priority": 0
 }

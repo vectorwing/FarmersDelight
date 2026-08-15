@@ -33,8 +33,8 @@ public class AddItemModifier extends LootModifier
 	/**
 	 * This loot modifier adds an item to the loot table, given the conditions specified.
 	 */
-	public AddItemModifier(LootItemCondition[] conditions, Item addedItem, int count) {
-		super(conditions);
+	public AddItemModifier(LootItemCondition[] conditions, int priority, Item addedItem, int count) {
+		super(conditions, priority);
 		this.addedItem = addedItem;
 		this.count = count;
 	}

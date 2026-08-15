@@ -1,9 +1,7 @@
 {
   "type": "farmersdelight:cutting",
   "ingredients": [
-    {
-      "item": "minecraft:clay"
-    }
+    "minecraft:clay"
   ],
   "result": [
     {
@@ -13,13 +11,14 @@
       }
     }
   ],
-  "tool": [
-    {
-      "type": "farmersdelight:item_ability",
-      "action": "shovel_dig"
-    },
-    {
-      "tag": "minecraft:shovels"
-    }
-  ]
+  "tool": {
+    "neoforge:ingredient_type": "neoforge:compound",
+    "children": [
+      {
+        "neoforge:ingredient_type": "farmersdelight:item_ability",
+        "action": "shovel_dig"
+      },
+      "#minecraft:shovels"
+    ]
+  }
 }

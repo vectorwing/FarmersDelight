@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_hanging_sign_rot_0",
+  "textures": {
+    "all": "farmersdelight:block/green_hanging_canvas_sign",
+    "particle": "minecraft:block/stripped_spruce_log"
+  }
+}

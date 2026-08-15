@@ -18,18 +18,17 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtAccounter;
 import net.minecraft.nbt.NbtIo;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.MultiPackResourceManager;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.datafix.DataFixTypes;
 import net.minecraft.util.datafix.DataFixers;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nonnull;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.nio.file.Path;
 import java.util.concurrent.CompletableFuture;
 
@@ -38,22 +37,15 @@ public class StructureUpdater implements DataProvider
 	private final String basePath;
 	private final String modid;
 	private final PackOutput output;
-	private final MultiPackResourceManager resources;
+	private final ResourceManager resources;
 
 	public StructureUpdater(
-			String basePath, String modid, ExistingFileHelper helper, PackOutput output
+			String basePath, String modid, ResourceManager resources, PackOutput output
 	) {
 		this.basePath = basePath;
 		this.modid = modid;
 		this.output = output;
-		try {
-			Field serverData = ExistingFileHelper.class.getDeclaredField("serverData");
-			serverData.setAccessible(true);
-			resources = (MultiPackResourceManager) serverData.get(helper);
-		}
-		catch (NoSuchFieldException | IllegalAccessException e) {
-			throw new RuntimeException(e);
-		}
+		this.resources = resources;
 	}
 
 	@Override
@@ -69,7 +61,7 @@ public class StructureUpdater implements DataProvider
 		}
 	}
 
-	private void process(ResourceLocation loc, Resource resource, CachedOutput cache) throws IOException {
+	private void process(Identifier loc, Resource resource, CachedOutput cache) throws IOException {
 		CompoundTag inputNBT = NbtIo.readCompressed(resource.open(), NbtAccounter.unlimitedHeap());
 		CompoundTag converted = updateNBT(inputNBT);
 		if (!converted.equals(inputNBT)) {
@@ -80,7 +72,7 @@ public class StructureUpdater implements DataProvider
 		}
 	}
 
-	private void writeNBTTo(ResourceLocation loc, CompoundTag data, CachedOutput cache) throws IOException {
+	private void writeNBTTo(Identifier loc, CompoundTag data, CachedOutput cache) throws IOException {
 		ByteArrayOutputStream bytearrayoutputstream = new ByteArrayOutputStream();
 		NbtIo.writeCompressed(data, bytearrayoutputstream);
 		byte[] bytes = bytearrayoutputstream.toByteArray();
@@ -90,10 +82,10 @@ public class StructureUpdater implements DataProvider
 
 	private static CompoundTag updateNBT(CompoundTag nbt) {
 		final CompoundTag updatedNBT = DataFixTypes.STRUCTURE.updateToCurrentVersion(
-				DataFixers.getDataFixer(), nbt, nbt.getInt("DataVersion")
+				DataFixers.getDataFixer(), nbt, NbtUtils.getDataVersion(nbt)
 		);
 		StructureTemplate template = new StructureTemplate();
-		template.load(BuiltInRegistries.BLOCK.asLookup(), updatedNBT);
+		template.load(BuiltInRegistries.BLOCK, updatedNBT);
 		return template.save(new CompoundTag());
 	}
 

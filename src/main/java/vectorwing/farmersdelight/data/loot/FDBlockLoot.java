@@ -1,9 +1,9 @@
 package vectorwing.farmersdelight.data.loot;
 
-import net.minecraft.advancements.critereon.BlockPredicate;
-import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.LocationPredicate;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.advancements.predicates.BlockPredicate;
+import net.minecraft.advancements.predicates.ItemPredicate;
+import net.minecraft.advancements.predicates.LocationPredicate;
+import net.minecraft.advancements.predicates.StatePropertiesPredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
@@ -26,6 +26,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.ApplyExplosionDecay;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.*;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
@@ -53,12 +54,14 @@ public class FDBlockLoot extends BlockLootSubProvider
 	@Override
 	protected void generate() {
 		HolderLookup.RegistryLookup<Enchantment> registryLookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+		HolderLookup.RegistryLookup<Item> items = this.registries.lookupOrThrow(Registries.ITEM);
+		HolderLookup.RegistryLookup<Block> blocks = this.registries.lookupOrThrow(Registries.BLOCK);
 
 		dropSelf(ModBlocks.STOVE.get());
 		dropNamedContainer(ModBlocks.WOODEN_BASKET.get());
 		dropNamedContainer(ModBlocks.BAMBOO_BASKET.get());
 		add(ModBlocks.COOKING_POT.get(), (block) -> LootTable.lootTable().withPool(this.applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(block)
-				.apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
+				.apply(CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
 						.include(DataComponents.CUSTOM_NAME)
 						.include(ModDataComponents.MEAL.get())
 						.include(ModDataComponents.CONTAINER.get())
@@ -77,7 +80,7 @@ public class FDBlockLoot extends BlockLootSubProvider
 						LootItem.lootTableItem(ModItems.RICE.get())
 								.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
 										.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(RicePaniclesBlock.RICE_AGE, 3)))
-								.when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.Items.KNIVES))),
+								.when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(items, ModTags.Items.KNIVES))),
 						LootItem.lootTableItem(ModItems.RICE_PANICLE.get())
 								.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
 										.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(RicePaniclesBlock.RICE_AGE, 3))))))));
@@ -152,7 +155,7 @@ public class FDBlockLoot extends BlockLootSubProvider
 								.setProperties(StatePropertiesPredicate.Builder.properties()
 										.hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)))
 						.when(LocationCheck.checkLocation(LocationPredicate.Builder.location()
-								.setBlock(BlockPredicate.Builder.block().of(block)
+								.setBlock(BlockPredicate.Builder.block().of(blocks, block)
 										.setProperties(StatePropertiesPredicate.Builder.properties()
 												.hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER))), new BlockPos(0, 1, 0))))
 				.withPool(LootPool.lootPool()
@@ -165,7 +168,7 @@ public class FDBlockLoot extends BlockLootSubProvider
 								.setProperties(StatePropertiesPredicate.Builder.properties()
 										.hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER)))
 						.when(LocationCheck.checkLocation(LocationPredicate.Builder.location()
-								.setBlock(BlockPredicate.Builder.block().of(block)
+								.setBlock(BlockPredicate.Builder.block().of(blocks, block)
 										.setProperties(StatePropertiesPredicate.Builder.properties()
 												.hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER))), new BlockPos(0, -1, 0)))));
 
@@ -202,6 +205,24 @@ public class FDBlockLoot extends BlockLootSubProvider
 		dropSelf(ModBlocks.RED_CANVAS_SIGN.get());
 		dropSelf(ModBlocks.BLACK_CANVAS_SIGN.get());
 
+		dropOther(ModBlocks.CANVAS_WALL_SIGN.get(), ModItems.CANVAS_SIGN.get());
+		dropOther(ModBlocks.WHITE_CANVAS_WALL_SIGN.get(), ModItems.WHITE_CANVAS_SIGN.get());
+		dropOther(ModBlocks.ORANGE_CANVAS_WALL_SIGN.get(), ModItems.ORANGE_CANVAS_SIGN.get());
+		dropOther(ModBlocks.MAGENTA_CANVAS_WALL_SIGN.get(), ModItems.MAGENTA_CANVAS_SIGN.get());
+		dropOther(ModBlocks.LIGHT_BLUE_CANVAS_WALL_SIGN.get(), ModItems.LIGHT_BLUE_CANVAS_SIGN.get());
+		dropOther(ModBlocks.YELLOW_CANVAS_WALL_SIGN.get(), ModItems.YELLOW_CANVAS_SIGN.get());
+		dropOther(ModBlocks.LIME_CANVAS_WALL_SIGN.get(), ModItems.LIME_CANVAS_SIGN.get());
+		dropOther(ModBlocks.PINK_CANVAS_WALL_SIGN.get(), ModItems.PINK_CANVAS_SIGN.get());
+		dropOther(ModBlocks.GRAY_CANVAS_WALL_SIGN.get(), ModItems.GRAY_CANVAS_SIGN.get());
+		dropOther(ModBlocks.LIGHT_GRAY_CANVAS_WALL_SIGN.get(), ModItems.LIGHT_GRAY_CANVAS_SIGN.get());
+		dropOther(ModBlocks.CYAN_CANVAS_WALL_SIGN.get(), ModItems.CYAN_CANVAS_SIGN.get());
+		dropOther(ModBlocks.PURPLE_CANVAS_WALL_SIGN.get(), ModItems.PURPLE_CANVAS_SIGN.get());
+		dropOther(ModBlocks.BLUE_CANVAS_WALL_SIGN.get(), ModItems.BLUE_CANVAS_SIGN.get());
+		dropOther(ModBlocks.BROWN_CANVAS_WALL_SIGN.get(), ModItems.BROWN_CANVAS_SIGN.get());
+		dropOther(ModBlocks.GREEN_CANVAS_WALL_SIGN.get(), ModItems.GREEN_CANVAS_SIGN.get());
+		dropOther(ModBlocks.RED_CANVAS_WALL_SIGN.get(), ModItems.RED_CANVAS_SIGN.get());
+		dropOther(ModBlocks.BLACK_CANVAS_WALL_SIGN.get(), ModItems.BLACK_CANVAS_SIGN.get());
+
 		dropSelf(ModBlocks.HANGING_CANVAS_SIGN.get());
 		dropSelf(ModBlocks.WHITE_HANGING_CANVAS_SIGN.get());
 		dropSelf(ModBlocks.ORANGE_HANGING_CANVAS_SIGN.get());
@@ -219,6 +240,24 @@ public class FDBlockLoot extends BlockLootSubProvider
 		dropSelf(ModBlocks.GREEN_HANGING_CANVAS_SIGN.get());
 		dropSelf(ModBlocks.RED_HANGING_CANVAS_SIGN.get());
 		dropSelf(ModBlocks.BLACK_HANGING_CANVAS_SIGN.get());
+
+		dropOther(ModBlocks.HANGING_CANVAS_WALL_SIGN.get(), ModItems.HANGING_CANVAS_SIGN.get());
+		dropOther(ModBlocks.WHITE_HANGING_CANVAS_WALL_SIGN.get(), ModItems.WHITE_HANGING_CANVAS_SIGN.get());
+		dropOther(ModBlocks.ORANGE_HANGING_CANVAS_WALL_SIGN.get(), ModItems.ORANGE_HANGING_CANVAS_SIGN.get());
+		dropOther(ModBlocks.MAGENTA_HANGING_CANVAS_WALL_SIGN.get(), ModItems.MAGENTA_HANGING_CANVAS_SIGN.get());
+		dropOther(ModBlocks.LIGHT_BLUE_HANGING_CANVAS_WALL_SIGN.get(), ModItems.LIGHT_BLUE_HANGING_CANVAS_SIGN.get());
+		dropOther(ModBlocks.YELLOW_HANGING_CANVAS_WALL_SIGN.get(), ModItems.YELLOW_HANGING_CANVAS_SIGN.get());
+		dropOther(ModBlocks.LIME_HANGING_CANVAS_WALL_SIGN.get(), ModItems.LIME_HANGING_CANVAS_SIGN.get());
+		dropOther(ModBlocks.PINK_HANGING_CANVAS_WALL_SIGN.get(), ModItems.PINK_HANGING_CANVAS_SIGN.get());
+		dropOther(ModBlocks.GRAY_HANGING_CANVAS_WALL_SIGN.get(), ModItems.GRAY_HANGING_CANVAS_SIGN.get());
+		dropOther(ModBlocks.LIGHT_GRAY_HANGING_CANVAS_WALL_SIGN.get(), ModItems.LIGHT_GRAY_HANGING_CANVAS_SIGN.get());
+		dropOther(ModBlocks.CYAN_HANGING_CANVAS_WALL_SIGN.get(), ModItems.CYAN_HANGING_CANVAS_SIGN.get());
+		dropOther(ModBlocks.PURPLE_HANGING_CANVAS_WALL_SIGN.get(), ModItems.PURPLE_HANGING_CANVAS_SIGN.get());
+		dropOther(ModBlocks.BLUE_HANGING_CANVAS_WALL_SIGN.get(), ModItems.BLUE_HANGING_CANVAS_SIGN.get());
+		dropOther(ModBlocks.BROWN_HANGING_CANVAS_WALL_SIGN.get(), ModItems.BROWN_HANGING_CANVAS_SIGN.get());
+		dropOther(ModBlocks.GREEN_HANGING_CANVAS_WALL_SIGN.get(), ModItems.GREEN_HANGING_CANVAS_SIGN.get());
+		dropOther(ModBlocks.RED_HANGING_CANVAS_WALL_SIGN.get(), ModItems.RED_HANGING_CANVAS_SIGN.get());
+		dropOther(ModBlocks.BLACK_HANGING_CANVAS_WALL_SIGN.get(), ModItems.BLACK_HANGING_CANVAS_SIGN.get());
 
 		dropNamedContainer(ModBlocks.OAK_CABINET.get());
 		dropNamedContainer(ModBlocks.SPRUCE_CABINET.get());

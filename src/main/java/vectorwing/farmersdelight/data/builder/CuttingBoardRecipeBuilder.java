@@ -1,16 +1,19 @@
 package vectorwing.farmersdelight.data.builder;
 
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.triggers.Criterion;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -20,9 +23,7 @@ import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Consumer;
 
-@MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class CuttingBoardRecipeBuilder implements RecipeBuilder
 {
@@ -35,7 +36,7 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder
 	private CuttingRecipeFolder folder;
 
 	public CuttingBoardRecipeBuilder(Ingredient ingredient, Ingredient tool, ItemLike mainResult, int count, float chance) {
-		this.results.add(new ChanceResult(new ItemStack(mainResult.asItem(), count), chance));
+		this.results.add(new ChanceResult(new ItemStackTemplate(mainResult.asItem(), count), chance));
 		this.ingredient = ingredient;
 		this.tool = tool;
 		this.folder = CuttingRecipeFolder.CUTTING;
@@ -67,7 +68,7 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder
 	}
 
 	public CuttingBoardRecipeBuilder addResult(ItemLike result, int count) {
-		this.results.add(new ChanceResult(new ItemStack(result.asItem(), count), 1));
+		this.results.add(new ChanceResult(new ItemStackTemplate(result.asItem(), count), 1));
 		return this;
 	}
 
@@ -76,7 +77,7 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder
 	}
 
 	public CuttingBoardRecipeBuilder addResultWithChance(ItemLike result, float chance, int count) {
-		this.results.add(new ChanceResult(new ItemStack(result.asItem(), count), chance));
+		this.results.add(new ChanceResult(new ItemStackTemplate(result.asItem(), count), chance));
 		return this;
 	}
 
@@ -108,12 +109,11 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder
 		return this;
 	}
 
-	@Override
 	public Item getResult() {
-		return this.ingredient.getItems()[0].getItem();
+		return this.ingredient.items().findFirst().orElseThrow().value();
 	}
 
-	public static ResourceLocation getDefaultRecipeId(ItemLike itemLike) {
+	public static Identifier getDefaultRecipeId(ItemLike itemLike) {
 		return Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(itemLike.asItem()));
 	}
 
@@ -125,25 +125,35 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder
 	}
 
 	public void save(RecipeOutput output) {
-		ResourceLocation defaultLocation = getDefaultRecipeId(getResult());
-		save(output, ResourceLocation.fromNamespaceAndPath(this.namespace != null ? namespace : defaultLocation.getNamespace(), defaultLocation.getPath()).withPrefix(folder.getSerializedName() + "/"));
+		Identifier defaultLocation = getDefaultRecipeId(getResult());
+		save(output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath(this.namespace != null ? namespace : defaultLocation.getNamespace(), defaultLocation.getPath()).withPrefix(folder.getSerializedName() + "/")));
 	}
 
 	public void build(RecipeOutput outputIn, String save) {
-		ResourceLocation resourcelocation = BuiltInRegistries.ITEM.getKey(getResult());
-		if ((ResourceLocation.parse(save)).equals(resourcelocation)) {
+		Identifier Identifier = BuiltInRegistries.ITEM.getKey(getResult());
+		if ((Identifier.parse(save)).equals(Identifier)) {
 			throw new IllegalStateException("Cutting Recipe " + save + " should remove its 'save' argument");
 		} else {
-			this.build(outputIn, ResourceLocation.parse(save));
+			this.build(outputIn, Identifier.parse(save));
 		}
 	}
 
-	public void build(RecipeOutput output, ResourceLocation id) {
-		save(output, id);
+	public void build(RecipeOutput output, Identifier id) {
+		save(output, ResourceKey.create(Registries.RECIPE, id));
+	}
+
+	public void save(RecipeOutput output, Identifier id) {
+		save(output, ResourceKey.create(Registries.RECIPE, id));
 	}
 
 	@Override
-	public void save(RecipeOutput output, ResourceLocation id) {
+	public ResourceKey<Recipe<?>> defaultId() {
+		Identifier defaultLocation = getDefaultRecipeId(getResult());
+		return ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath(this.namespace != null ? namespace : defaultLocation.getNamespace(), defaultLocation.getPath()).withPrefix(folder.getSerializedName() + "/"));
+	}
+
+	@Override
+	public void save(RecipeOutput output, ResourceKey<Recipe<?>> id) {
 		CuttingBoardRecipe recipe = new CuttingBoardRecipe(
 				"",
 				this.ingredient,

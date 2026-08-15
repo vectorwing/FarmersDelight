@@ -5,6 +5,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
@@ -25,8 +26,9 @@ public class FarmersDelight
 
 	public FarmersDelight(IEventBus modEventBus, ModContainer modContainer) {
 		modEventBus.addListener(CommonSetup::init);
-		if (FMLEnvironment.dist.isClient()) {
+		if (FMLEnvironment.getDist() == Dist.CLIENT) {
 			modEventBus.addListener(ClientSetupEvents::init);
+			modEventBus.addListener(ClientSetupEvents::registerRecipeBookSearchCategories);
 			modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 		}
 
@@ -45,6 +47,7 @@ public class FarmersDelight
 		ModMenuTypes.MENU_TYPES.register(modEventBus);
 		ModRecipeTypes.RECIPE_TYPES.register(modEventBus);
 		ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+		ModRecipeBookCategories.RECIPE_BOOK_CATEGORIES.register(modEventBus);
 		ModBiomeFeatures.FEATURES.register(modEventBus);
 		ModCreativeTabs.CREATIVE_TABS.register(modEventBus);
 		ModPlacementModifiers.PLACEMENT_MODIFIERS.register(modEventBus);

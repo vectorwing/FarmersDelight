@@ -11,14 +11,10 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderSet;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
@@ -31,17 +27,12 @@ import vectorwing.farmersdelight.integration.jei.resource.DecompositionDummy;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class DecompositionRecipeCategory implements IRecipeCategory<DecompositionDummy>
 {
-	public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "decomposition");
+	public static final Identifier UID = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "decomposition");
 	private static final int slotSize = 22;
 
 	private final Component title;
@@ -53,7 +44,7 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 
 	public DecompositionRecipeCategory(IGuiHelper helper) {
 		title = TextUtils.JEI("decomposition");
-		ResourceLocation backgroundImage = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "textures/gui/jei/decomposition.png");
+		Identifier backgroundImage = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "textures/gui/jei/decomposition.png");
 		background = helper.createDrawable(backgroundImage, 0, 0, 118, 80);
 		organicCompost = new ItemStack(ModBlocks.ORGANIC_COMPOST.get());
 		richSoil = new ItemStack(ModItems.RICH_SOIL.get());
@@ -71,7 +62,6 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 		return this.title;
 	}
 
-	@Override
 	public IDrawable getBackground() {
 		return null;
 	}
@@ -94,15 +84,15 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, DecompositionDummy recipe, IFocusGroup focusGroup) {
 		List<ItemStack> accelerators = new ArrayList<>();
-		BuiltInRegistries.BLOCK.getTag(ModTags.Blocks.COMPOST_ACTIVATORS).ifPresent(s -> s.forEach(f -> accelerators.add(new ItemStack(f.value()))));
+		BuiltInRegistries.BLOCK.getTagOrEmpty(ModTags.Blocks.COMPOST_ACTIVATORS).forEach(f -> accelerators.add(new ItemStack(f.value())));
 
-		builder.addSlot(RecipeIngredientRole.INPUT, 9, 26).addItemStack(organicCompost);
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 93, 26).addItemStack(richSoil);
+		builder.addSlot(RecipeIngredientRole.INPUT, 9, 26).add(organicCompost);
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 93, 26).add(richSoil);
 		builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 64, 54).addItemStacks(accelerators);
 	}
 
 	@Override
-	public void draw(DecompositionDummy recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+	public void draw(DecompositionDummy recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
 		background.draw(guiGraphics, 0, 0);
 		slotIcon.draw(guiGraphics, 63, 53);
 	}

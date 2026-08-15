@@ -13,8 +13,6 @@ public class Configuration
 
 	// COMMON
 	public static final String CATEGORY_SETTINGS = "settings";
-	public static Supplier<Boolean> ENABLE_FARMERS_BUY_FD_CROPS;
-	public static Supplier<Boolean> ENABLE_WANDERING_TRADER_SELLS_FD_ITEMS;
 	public static Supplier<Boolean> ENABLE_ROPE_REELING;
 	public static Supplier<List<? extends String>> CANVAS_SIGN_DARK_BACKGROUND_LIST;
 
@@ -55,10 +53,6 @@ public class Configuration
 		ModConfigSpec.Builder COMMON_BUILDER = new ModConfigSpec.Builder();
 
 		COMMON_BUILDER.push(CATEGORY_SETTINGS);
-		ENABLE_FARMERS_BUY_FD_CROPS = COMMON_BUILDER.comment("If enabled, Novice and Apprentice Farmer villagers will have a chance to buy crops from this mod.")
-			.define("enableFarmerFDTrades", true);
-		ENABLE_WANDERING_TRADER_SELLS_FD_ITEMS = COMMON_BUILDER.comment("If enabled, the Wandering Trader will have a chance to sell seeds and plantables from this mod.")
-			.define("enableWanderingTraderFDTrades", true);
 		ENABLE_ROPE_REELING = COMMON_BUILDER.comment("If enabled, players will be able to reel back rope, bottom to top, when sneak-using with an empty hand on them.")
 			.define("enableRopeReeling", true);
 		CANVAS_SIGN_DARK_BACKGROUND_LIST = COMMON_BUILDER.comment("A list of dye colors that, when used as the background color of a Canvas Sign, should default to white text when placed.",
@@ -134,10 +128,6 @@ public class Configuration
 	}
 
 	// Backwards compatibility configs.
-	@Deprecated(forRemoval = true)
-	public static ModConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS = (ModConfigSpec.BooleanValue) ENABLE_FARMERS_BUY_FD_CROPS;
-	@Deprecated(forRemoval = true)
-	public static ModConfigSpec.BooleanValue WANDERING_TRADER_SELLS_FD_ITEMS = (ModConfigSpec.BooleanValue) ENABLE_WANDERING_TRADER_SELLS_FD_ITEMS;
 	@Deprecated(forRemoval = true)
 	public static ModConfigSpec.BooleanValue ENABLE_RECIPE_BOOK_COOKING_POT = (ModConfigSpec.BooleanValue) ENABLE_COOKING_POT_RECIPE_BOOK;
 	@Deprecated(forRemoval = true)

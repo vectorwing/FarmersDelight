@@ -4,11 +4,12 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 
-public class StarParticle extends TextureSheetParticle
+public class StarParticle extends SingleQuadParticle
 {
-	protected StarParticle(ClientLevel level, double posX, double posY, double posZ) {
-		super(level, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
+	protected StarParticle(ClientLevel level, double posX, double posY, double posZ, SpriteSet sprites) {
+		super(level, posX, posY, posZ, 0.0D, 0.0D, 0.0D, sprites.get(level.getRandom()));
 		this.xd *= 0.01F;
 		this.yd *= 0.01F;
 		this.zd *= 0.01F;
@@ -19,8 +20,8 @@ public class StarParticle extends TextureSheetParticle
 	}
 
 	@Override
-	public ParticleRenderType getRenderType() {
-		return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
+	protected SingleQuadParticle.Layer getLayer() {
+		return SingleQuadParticle.Layer.OPAQUE;
 	}
 
 	@Override
@@ -62,9 +63,9 @@ public class StarParticle extends TextureSheetParticle
 		}
 
 		@Override
-		public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-			StarParticle particle = new StarParticle(level, x, y + 0.3D, z);
-			particle.pickSprite(this.spriteSet);
+		public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource random) {
+			StarParticle particle = new StarParticle(level, x, y + 0.3D, z, this.spriteSet);
+			particle.setSpriteFromAge(this.spriteSet);
 			particle.setColor(1.0F, 1.0F, 1.0F);
 			return particle;
 		}

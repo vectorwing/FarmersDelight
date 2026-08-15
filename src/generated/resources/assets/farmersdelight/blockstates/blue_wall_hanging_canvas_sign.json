@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
-      "model": "farmersdelight:block/canvas_sign"
+    "facing=east": {
+      "model": "farmersdelight:block/blue_wall_hanging_canvas_sign",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "farmersdelight:block/blue_wall_hanging_canvas_sign",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "farmersdelight:block/blue_wall_hanging_canvas_sign"
+    },
+    "facing=west": {
+      "model": "farmersdelight:block/blue_wall_hanging_canvas_sign",
+      "y": 90
     }
   }
 }

@@ -9,5 +9,11 @@
 
   "advancements.farmersdelight.root.description": "A world of flavour awaits you!",
 
-  "jei.farmersdelight.info.straw": "A dry plant fibre used in crafting. Obtained by cutting grassy crops and plants with a Knife."
+  "jei.farmersdelight.info.straw": "A dry plant fibre used in crafting. Obtained by cutting grassy crops and plants with a Knife.",
+
+  "_comment.farmersdelight.item_aliases": "Block item aliases for Minecraft 26.2 item translation keys.",
+  "item.farmersdelight.gray_canvas_sign": "Grey Canvas Sign",
+  "item.farmersdelight.gray_hanging_canvas_sign": "Grey Hanging Canvas Sign",
+  "item.farmersdelight.light_gray_canvas_sign": "Light Grey Canvas Sign",
+  "item.farmersdelight.light_gray_hanging_canvas_sign": "Light Grey Hanging Canvas Sign"
 }

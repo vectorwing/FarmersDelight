@@ -1,10 +1,9 @@
 package vectorwing.farmersdelight.data;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.SoundDefinition;
 import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 import org.jetbrains.annotations.Nullable;
@@ -16,8 +15,8 @@ import java.util.function.Supplier;
 
 public class SoundDefinitions extends SoundDefinitionsProvider
 {
-	protected SoundDefinitions(PackOutput output, ExistingFileHelper helper) {
-		super(output, FarmersDelight.MODID, helper);
+	protected SoundDefinitions(PackOutput output) {
+		super(output, FarmersDelight.MODID);
 	}
 
 	@Override
@@ -34,8 +33,8 @@ public class SoundDefinitions extends SoundDefinitionsProvider
 		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_CUTTING_BOARD_PLACE, SoundEvents.WOOD_PLACE);
 		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_CUTTING_BOARD_REMOVE, SoundEvents.WOOD_HIT);
 		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_STOVE_CRACKLE, SoundEvents.CAMPFIRE_CRACKLE);
-		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_ROPE_FENCE_GATE_CLOSE, SoundEvents.LEASH_KNOT_PLACE);
-		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_ROPE_FENCE_GATE_OPEN, SoundEvents.LEASH_KNOT_BREAK);
+		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_ROPE_FENCE_GATE_CLOSE, SoundEvents.LEAD_TIED);
+		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_ROPE_FENCE_GATE_OPEN, SoundEvents.LEAD_UNTIED);
 		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_CABINET_CLOSE, SoundEvents.BARREL_CLOSE);
 		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_CABINET_OPEN, SoundEvents.BARREL_OPEN);
 		this.generateExistingSoundWithSubtitle(ModSounds.BLOCK_TOMATOES_PICK_TOMATOES, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES);
@@ -50,7 +49,7 @@ public class SoundDefinitions extends SoundDefinitionsProvider
 	}
 
 	public void generateNewSound(Supplier<SoundEvent> event, String baseSoundDirectory, int numberOfSounds, boolean subtitle) {
-		String formattedSub = subtitle ? TextUtils.subtitleKey(event.get().getLocation().getPath()) : null;
+		String formattedSub = subtitle ? TextUtils.subtitleKey(event.get().location().getPath()) : null;
 		this.generateNewSoundCustomSubtitle(event, baseSoundDirectory, numberOfSounds, formattedSub);
 	}
 
@@ -60,9 +59,9 @@ public class SoundDefinitions extends SoundDefinitionsProvider
 			definition.subtitle(subtitle);
 		}
 		for (int i = 1; i <= numberOfSounds; i++) {
-			definition.with(SoundDefinition.Sound.sound(ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, baseSoundDirectory + (numberOfSounds > 1 ? i : "")), SoundDefinition.SoundType.SOUND));
+			definition.with(SoundDefinition.Sound.sound(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, baseSoundDirectory + (numberOfSounds > 1 ? i : "")), SoundDefinition.SoundType.SOUND));
 		}
-		this.add(event, definition);
+		this.add(event.get(), definition);
 	}
 
 	public void generateExistingSoundWithSubtitle(Supplier<SoundEvent> event, SoundEvent referencedSound) {
@@ -72,9 +71,9 @@ public class SoundDefinitions extends SoundDefinitionsProvider
 	public void generateExistingSound(Supplier<SoundEvent> event, SoundEvent referencedSound, boolean subtitle) {
 		SoundDefinition definition = SoundDefinition.definition();
 		if (subtitle) {
-			definition.subtitle(TextUtils.subtitleKey(event.get().getLocation().getPath()));
+			definition.subtitle(TextUtils.subtitleKey(event.get().location().getPath()));
 		}
-		this.add(event, definition
-				.with(SoundDefinition.Sound.sound(referencedSound.getLocation(), SoundDefinition.SoundType.EVENT)));
+		this.add(event.get(), definition
+				.with(SoundDefinition.Sound.sound(referencedSound.location(), SoundDefinition.SoundType.EVENT)));
 	}
 }

@@ -12,5 +12,6 @@
       "condition": "minecraft:block_state_property"
     }
   ],
+  "priority": 0,
   "slice": "farmersdelight:sweet_berry_cheesecake_slice"
 }

@@ -1,58 +1,60 @@
 package vectorwing.farmersdelight.client.gui;
 
 import net.minecraft.client.gui.components.WidgetSprites;
+import net.minecraft.client.gui.screens.recipebook.GhostSlots;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
+import net.minecraft.client.gui.screens.recipebook.RecipeCollection;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.context.ContextMap;
+import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.common.utility.TextUtils;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.ShapelessCraftingRecipeDisplay;
+import vectorwing.farmersdelight.client.recipebook.RecipeCategories;
+import vectorwing.farmersdelight.common.block.entity.container.CookingPotMenu;
 
-import javax.annotation.Nonnull;
-import java.util.List;
-
-public class CookingPotRecipeBookComponent extends RecipeBookComponent
+public class CookingPotRecipeBookComponent extends RecipeBookComponent<CookingPotMenu>
 {
-	protected static final WidgetSprites RECIPE_BOOK_BUTTONS = new WidgetSprites(
-			ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "recipe_book/cooking_pot_enabled"),
-			ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "recipe_book/cooking_pot_disabled"),
-			ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "recipe_book/cooking_pot_enabled_highlighted"),
-			ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "recipe_book/cooking_pot_disabled_highlighted"));
+	private static final WidgetSprites FILTER_SPRITES = new WidgetSprites(
+			Identifier.withDefaultNamespace("recipe_book/furnace_filter_enabled"),
+			Identifier.withDefaultNamespace("recipe_book/furnace_filter_disabled"),
+			Identifier.withDefaultNamespace("recipe_book/furnace_filter_enabled_highlighted"),
+			Identifier.withDefaultNamespace("recipe_book/furnace_filter_disabled_highlighted")
+	);
+	private static final Component FILTER_NAME = Component.translatable("gui.recipebook.toggleRecipes.cookable");
 
-	@Override
-	protected void initFilterButtonTextures() {
-		this.filterButton.initTextureValues(RECIPE_BOOK_BUTTONS);
-	}
-
-	public void hide() {
-		this.setVisible(false);
+	public CookingPotRecipeBookComponent(CookingPotMenu menu) {
+		super(menu, RecipeCategories.cookingPotTabs());
 	}
 
 	@Override
-	@Nonnull
-	protected Component getRecipeFilterName() {
-		return TextUtils.container("recipe_book.cookable");
+	protected WidgetSprites getFilterButtonTextures() {
+		return FILTER_SPRITES;
 	}
 
 	@Override
-	public void setupGhostRecipe(RecipeHolder<?> recipe, List<Slot> slots) {
-		ItemStack resultStack = recipe.value().getResultItem(this.minecraft.level.registryAccess());
-		this.ghostRecipe.setRecipe(recipe);
-		if (slots.get(6).getItem().isEmpty()) {
-			this.ghostRecipe.addIngredient(Ingredient.of(resultStack), (slots.get(6)).x, (slots.get(6)).y);
-		}
+	protected boolean isCraftingSlot(Slot slot) {
+		return slot.index >= 0 && slot.index < CookingPotMenu.INDEX_MEAL;
+	}
 
-		if (recipe.value() instanceof CookingPotRecipe cookingRecipe) {
-			ItemStack containerStack = cookingRecipe.getOutputContainer();
-			if (!containerStack.isEmpty()) {
-				this.ghostRecipe.addIngredient(Ingredient.of(containerStack), (slots.get(7)).x, (slots.get(7)).y);
+	@Override
+	protected void fillGhostRecipe(GhostSlots ghostSlots, RecipeDisplay recipe, ContextMap context) {
+		ghostSlots.setResult(this.menu.slots.get(CookingPotMenu.INDEX_OUTPUT), context, recipe.result());
+		if (recipe instanceof ShapelessCraftingRecipeDisplay cookingRecipe) {
+			for (int i = 0; i < cookingRecipe.ingredients().size() && i < CookingPotMenu.INDEX_MEAL; i++) {
+				ghostSlots.setInput(this.menu.slots.get(i), context, cookingRecipe.ingredients().get(i));
 			}
 		}
+	}
 
-		this.placeRecipe(this.menu.getGridWidth(), this.menu.getGridHeight(), this.menu.getResultSlotIndex(), recipe, recipe.value().getIngredients().iterator(), 0);
+	@Override
+	protected Component getRecipeFilterName() {
+		return FILTER_NAME;
+	}
+
+	@Override
+	protected void selectMatchingRecipes(RecipeCollection collection, StackedItemContents stackedContents) {
+		collection.selectRecipes(stackedContents, display -> display instanceof ShapelessCraftingRecipeDisplay);
 	}
 }

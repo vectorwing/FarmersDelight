@@ -2,30 +2,16 @@
   "type": "farmersdelight:cooking",
   "experience": 1.0,
   "ingredients": [
+    "#c:foods/dough",
+    "#c:crops/cabbage",
+    "#c:crops/onion",
     {
-      "tag": "c:foods/dough"
-    },
-    {
-      "tag": "c:crops/cabbage"
-    },
-    {
-      "tag": "c:crops/onion"
-    },
-    {
-      "type": "neoforge:compound",
+      "neoforge:ingredient_type": "neoforge:compound",
       "children": [
-        {
-          "tag": "c:foods/raw_chicken"
-        },
-        {
-          "tag": "c:foods/raw_pork"
-        },
-        {
-          "tag": "c:foods/raw_beef"
-        },
-        {
-          "item": "minecraft:brown_mushroom"
-        }
+        "#c:foods/raw_chicken",
+        "#c:foods/raw_pork",
+        "#c:foods/raw_beef",
+        "minecraft:brown_mushroom"
       ]
     }
   ],

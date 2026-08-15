@@ -1,10 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "ingredients": [
-    {
-      "item": "farmersdelight:canvas"
-    }
+    "farmersdelight:canvas"
   ],
   "result": {
     "count": 2,

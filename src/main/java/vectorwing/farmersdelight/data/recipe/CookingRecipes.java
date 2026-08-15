@@ -1,22 +1,24 @@
 package vectorwing.farmersdelight.data.recipe;
 
+import net.minecraft.core.HolderGetter;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.CompoundIngredient;
 import net.neoforged.neoforge.common.crafting.DifferenceIngredient;
-import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
+import vectorwing.farmersdelight.common.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.data.builder.CookingPotRecipeBuilder;
 
-import java.util.stream.Stream;
-
 public class CookingRecipes
 {
+	private static HolderGetter<Item> items;
+
 	public static final int FAST_COOKING = 100;      // 5 seconds
 	public static final int NORMAL_COOKING = 200;    // 10 seconds
 	public static final int SLOW_COOKING = 400;      // 20 seconds
@@ -25,7 +27,8 @@ public class CookingRecipes
 	public static final float MEDIUM_EXP = 1.0F;
 	public static final float LARGE_EXP = 2.0F;
 
-	public static void register(RecipeOutput output) {
+	public static void register(RecipeOutput output, HolderGetter<Item> itemLookup) {
+		items = itemLookup;
 		cookMiscellaneous(output);
 		cookMinecraftSoups(output);
 		cookMeals(output);
@@ -33,7 +36,11 @@ public class CookingRecipes
 
 	// TODO: Deprecate this if NeoForge removes melon_slice from the vegetables tag.
 	private static Ingredient vegetablesPatch() {
-		return DifferenceIngredient.of(Ingredient.of(Tags.Items.FOODS_VEGETABLE), Ingredient.of(Items.MELON_SLICE));
+		return DifferenceIngredient.of(ingredient(Tags.Items.FOODS_VEGETABLE), Ingredient.of(Items.MELON_SLICE));
+	}
+
+	private static Ingredient ingredient(TagKey<Item> tag) {
+		return Ingredient.of(items.getOrThrow(tag));
 	}
 
 	private static void cookMiscellaneous(RecipeOutput output) {
@@ -118,22 +125,22 @@ public class CookingRecipes
 				.save(output);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.BONE_BROTH.get(), 1, NORMAL_COOKING, SMALL_EXP)
 				.addIngredient(Tags.Items.BONES)
-				.addIngredient(Ingredient.fromValues(Stream.of(
-						new Ingredient.ItemValue(new ItemStack(Items.GLOW_BERRIES)),
-						new Ingredient.TagValue(Tags.Items.MUSHROOMS),
-						new Ingredient.ItemValue(new ItemStack(Items.HANGING_ROOTS)),
-						new Ingredient.ItemValue(new ItemStack(Items.GLOW_LICHEN))
-				)))
+				.addIngredient(CompoundIngredient.of(
+						Ingredient.of(Items.GLOW_BERRIES),
+						ingredient(Tags.Items.MUSHROOMS),
+						Ingredient.of(Items.HANGING_ROOTS),
+						Ingredient.of(Items.GLOW_LICHEN)
+				))
 				.unlockedByItems("has_bone", Items.BONE)
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
 				.save(output);
 		CookingPotRecipeBuilder.cookingPotRecipe(ModItems.CABBAGE_ROLLS.get(), 1, FAST_COOKING, SMALL_EXP)
 				.addIngredient(CommonTags.Items.CROPS_CABBAGE)
 				.addIngredient(CompoundIngredient.of(
-						Ingredient.of(Tags.Items.FOODS_RAW_MEAT),
-						Ingredient.of(CommonTags.Items.FOODS_SAFE_RAW_FISH),
-						Ingredient.of(Tags.Items.FOODS_VEGETABLE),
-						Ingredient.of(Tags.Items.MUSHROOMS)
+						ingredient(Tags.Items.FOODS_RAW_MEAT),
+						ingredient(CommonTags.Items.FOODS_SAFE_RAW_FISH),
+						ingredient(Tags.Items.FOODS_VEGETABLE),
+						ingredient(Tags.Items.MUSHROOMS)
 				))
 				.unlockedByAnyIngredient(ModItems.CABBAGE.get(), ModItems.CABBAGE_LEAF.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.MISC)
@@ -155,12 +162,12 @@ public class CookingRecipes
 				.addIngredient(CommonTags.Items.FOODS_DOUGH)
 				.addIngredient(CommonTags.Items.CROPS_CABBAGE)
 				.addIngredient(CommonTags.Items.CROPS_ONION)
-				.addIngredient(Ingredient.fromValues(Stream.of(
-						new Ingredient.TagValue(CommonTags.Items.FOODS_RAW_CHICKEN),
-						new Ingredient.TagValue(CommonTags.Items.FOODS_RAW_PORK),
-						new Ingredient.TagValue(CommonTags.Items.FOODS_RAW_BEEF),
-						new Ingredient.ItemValue(new ItemStack(Items.BROWN_MUSHROOM))
-				)))
+				.addIngredient(CompoundIngredient.of(
+						ingredient(CommonTags.Items.FOODS_RAW_CHICKEN),
+						ingredient(CommonTags.Items.FOODS_RAW_PORK),
+						ingredient(CommonTags.Items.FOODS_RAW_BEEF),
+						Ingredient.of(Items.BROWN_MUSHROOM)
+				))
 				.unlockedByAnyIngredient(ModItems.WHEAT_DOUGH.get(), ModItems.CABBAGE.get(), ModItems.ONION.get())
 				.setRecipeBookTab(CookingPotRecipeBookTab.MISC)
 				.save(output);

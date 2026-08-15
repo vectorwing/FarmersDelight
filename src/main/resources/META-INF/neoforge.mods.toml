@@ -34,10 +34,3 @@ config = "${mod_id}.mixins.json"
     versionRange = "${minecraft_version_range}"
     ordering = "NONE"
     side = "BOTH"
-
-[[dependencies.${mod_id}]]
-    modId = "crafttweaker"
-    type = "optional"
-    versionRange = "[14.0.6,)"
-    ordering = "NONE"
-    side = "BOTH"

@@ -1,526 +1,794 @@
 package vectorwing.farmersdelight.data;
 
-import com.google.common.collect.Sets;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.mojang.serialization.JsonOps;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
+import net.minecraft.client.data.models.model.ModelTemplate;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.client.renderer.block.dispatch.VariantMutator;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.*;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
-import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.client.model.generators.ModelProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CrossCollisionBlock;
+import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.BedPart;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.common.block.*;
+import vectorwing.farmersdelight.common.block.AbstractStoveBlock;
+import vectorwing.farmersdelight.common.block.BasketBlock;
+import vectorwing.farmersdelight.common.block.BuddingBushBlock;
+import vectorwing.farmersdelight.common.block.CabinetBlock;
+import vectorwing.farmersdelight.common.block.CabbageBlock;
+import vectorwing.farmersdelight.common.block.CookingPotBlock;
+import vectorwing.farmersdelight.common.block.CuttingBoardBlock;
+import vectorwing.farmersdelight.common.block.FeastBlock;
+import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
+import vectorwing.farmersdelight.common.block.OnionBlock;
+import vectorwing.farmersdelight.common.block.OrganicCompostBlock;
+import vectorwing.farmersdelight.common.block.PieBlock;
+import vectorwing.farmersdelight.common.block.RichSoilFarmlandBlock;
+import vectorwing.farmersdelight.common.block.RiceBaleBlock;
+import vectorwing.farmersdelight.common.block.RiceBlock;
+import vectorwing.farmersdelight.common.block.RicePaniclesBlock;
+import vectorwing.farmersdelight.common.block.RopeBlock;
+import vectorwing.farmersdelight.common.block.SkilletBlock;
+import vectorwing.farmersdelight.common.block.TatamiBlock;
+import vectorwing.farmersdelight.common.block.TatamiHalfMatBlock;
+import vectorwing.farmersdelight.common.block.TatamiMatBlock;
+import vectorwing.farmersdelight.common.block.TomatoBlock;
+import vectorwing.farmersdelight.common.block.state.CookingPotSupport;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.function.Function;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Stream;
 
-public class BlockStates extends BlockStateProvider
+public class BlockStates extends ModelProvider
 {
-	private static final int DEFAULT_ANGLE_OFFSET = 180;
+	private static final TextureSlot HANDLE = TextureSlot.create("handle");
+	private static final TextureSlot INNER = TextureSlot.create("inner");
+	private static final TextureSlot ROPE_SIDE = TextureSlot.create("rope_side");
+	private static final TextureSlot ROPE_TOP = TextureSlot.create("rope_top");
 
-	public BlockStates(PackOutput output, ExistingFileHelper existingFileHelper) {
-		super(output, FarmersDelight.MODID, existingFileHelper);
-	}
-
-	private String blockName(Block block) {
-		return BuiltInRegistries.BLOCK.getKey(block).getPath();
-	}
-
-	public ResourceLocation resourceMCBlock(String path) {
-		return ResourceLocation.withDefaultNamespace(ModelProvider.BLOCK_FOLDER + "/" + path);
-	}
-
-	public ResourceLocation resourceFDBlock(String path) {
-		return ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, ModelProvider.BLOCK_FOLDER + "/" + path);
-	}
-
-	public ModelFile existingModel(Block block) {
-		return new ModelFile.ExistingModelFile(resourceFDBlock(blockName(block)), models().existingFileHelper);
-	}
-
-	public ModelFile existingModel(String path) {
-		return new ModelFile.ExistingModelFile(resourceFDBlock(path), models().existingFileHelper);
+	public BlockStates(PackOutput output) {
+		super(output, FarmersDelight.MODID);
 	}
 
 	@Override
-	protected void registerStatesAndModels() {
-		simpleBlock(ModBlocks.SAFETY_NET.get(), existingModel(ModBlocks.SAFETY_NET.get()));
-		simpleBlock(ModBlocks.CANVAS_RUG.get(), existingModel(ModBlocks.CANVAS_RUG.get()));
+	protected Stream<? extends Holder<Item>> getKnownItems() {
+		return Stream.empty();
+	}
 
-		String riceBag = blockName(ModBlocks.RICE_BAG.get());
-		this.simpleBlock(ModBlocks.RICE_BAG.get(), models().withExistingParent(riceBag, "cube")
-				.texture("particle", resourceFDBlock(riceBag + "_top"))
-				.texture("down", resourceFDBlock(riceBag + "_bottom"))
-				.texture("up", resourceFDBlock(riceBag + "_top"))
-				.texture("north", resourceFDBlock(riceBag + "_side_tied"))
-				.texture("south", resourceFDBlock(riceBag + "_side_tied"))
-				.texture("east", resourceFDBlock(riceBag + "_side"))
-				.texture("west", resourceFDBlock(riceBag + "_side"))
+	@Override
+	protected Stream<? extends Holder<Block>> getKnownBlocks() {
+		return Stream.concat(Stream.concat(standingSigns().stream().flatMap(pair -> Stream.of(pair.sign(), pair.wallSign())),
+						hangingSigns().stream().flatMap(pair -> Stream.of(pair.sign(), pair.wallSign()))),
+				generatedBlocks().stream())
+				.map(Block::builtInRegistryHolder);
+	}
+
+	@Override
+	protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
+		registerSimpleBlocks(blockModels);
+		standingSigns().forEach(pair -> registerStandingSign(blockModels, pair));
+		hangingSigns().forEach(pair -> registerHangingSign(blockModels, pair));
+	}
+
+	@Override
+	public String getName() {
+		return "Block Model Definitions - " + FarmersDelight.MODID;
+	}
+
+	private static void registerSimpleBlocks(BlockModelGenerators blockModels) {
+		registerSimpleExistingBlock(blockModels, ModBlocks.SAFETY_NET.get());
+		registerSimpleExistingBlock(blockModels, ModBlocks.CANVAS_RUG.get());
+		registerRiceBag(blockModels);
+		registerBasket(blockModels, ModBlocks.WOODEN_BASKET.get());
+		registerBasket(blockModels, ModBlocks.BAMBOO_BASKET.get());
+		registerDirectionalBottomTop(blockModels, ModBlocks.RICE_BALE.get());
+		registerRope(blockModels);
+		registerRopeFence(blockModels);
+		registerRopeFenceGate(blockModels);
+		registerTatami(blockModels);
+		registerFullTatamiMat(blockModels);
+		registerCuttingBoard(blockModels);
+		registerHalfTatami(blockModels);
+		registerCrate(blockModels, ModBlocks.CARROT_CRATE.get(), "carrot");
+		registerCrate(blockModels, ModBlocks.POTATO_CRATE.get(), "potato");
+		registerCrate(blockModels, ModBlocks.BEETROOT_CRATE.get(), "beetroot");
+		registerCrate(blockModels, ModBlocks.CABBAGE_CRATE.get(), "cabbage");
+		registerCrate(blockModels, ModBlocks.TOMATO_CRATE.get(), "tomato");
+		registerCrate(blockModels, ModBlocks.ONION_CRATE.get(), "onion");
+		registerStrawBale(blockModels);
+		registerRichSoil(blockModels);
+		registerRichSoilFarmland(blockModels);
+		registerOrganicCompost(blockModels);
+		registerCabinet(blockModels, ModBlocks.OAK_CABINET.get(), "oak");
+		registerCabinet(blockModels, ModBlocks.BIRCH_CABINET.get(), "birch");
+		registerCabinet(blockModels, ModBlocks.SPRUCE_CABINET.get(), "spruce");
+		registerCabinet(blockModels, ModBlocks.JUNGLE_CABINET.get(), "jungle");
+		registerCabinet(blockModels, ModBlocks.ACACIA_CABINET.get(), "acacia");
+		registerCabinet(blockModels, ModBlocks.DARK_OAK_CABINET.get(), "dark_oak");
+		registerCabinet(blockModels, ModBlocks.MANGROVE_CABINET.get(), "mangrove");
+		registerCabinet(blockModels, ModBlocks.CHERRY_CABINET.get(), "cherry");
+		registerCabinet(blockModels, ModBlocks.BAMBOO_CABINET.get(), "bamboo");
+		registerCabinet(blockModels, ModBlocks.CRIMSON_CABINET.get(), "crimson");
+		registerCabinet(blockModels, ModBlocks.WARPED_CABINET.get(), "warped");
+		registerCookingPot(blockModels);
+		registerSkillet(blockModels);
+		registerStove(blockModels);
+		registerPie(blockModels, ModBlocks.APPLE_PIE.get());
+		registerCustomPie(blockModels, ModBlocks.CHOCOLATE_PIE.get());
+		registerPie(blockModels, ModBlocks.SWEET_BERRY_CHEESECAKE.get());
+		registerPie(blockModels, ModBlocks.PUMPKIN_PIE.get());
+		registerFeast(blockModels, (FeastBlock) ModBlocks.STUFFED_PUMPKIN_BLOCK.get());
+		registerFeast(blockModels, (FeastBlock) ModBlocks.ROAST_CHICKEN_BLOCK.get());
+		registerFeast(blockModels, (FeastBlock) ModBlocks.HONEY_GLAZED_HAM_BLOCK.get());
+		registerFeast(blockModels, (FeastBlock) ModBlocks.SHEPHERDS_PIE_BLOCK.get());
+		registerFeast(blockModels, (FeastBlock) ModBlocks.GLEAMING_SALAD_BLOCK.get());
+		registerFeast(blockModels, (FeastBlock) ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get());
+		registerStageBlock(blockModels, ModBlocks.BROWN_MUSHROOM_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
+		registerStageBlock(blockModels, ModBlocks.RED_MUSHROOM_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
+		registerCustomStageBlock(blockModels, ModBlocks.CABBAGE_CROP.get(), cutoutTemplate(blockId("template_crop_cross"), TextureSlot.CROSS), TextureSlot.CROSS, CabbageBlock.AGE);
+		registerCustomStageBlock(blockModels, ModBlocks.ONION_CROP.get(), cutoutTemplate(Identifier.withDefaultNamespace("block/crop"), TextureSlot.CROP), TextureSlot.CROP, OnionBlock.AGE, 0, 0, 1, 1, 2, 2, 2, 3);
+		registerCustomStageBlock(blockModels, ModBlocks.BUDDING_TOMATO_CROP.get(), cutoutTemplate(blockId("template_crop_cross"), TextureSlot.CROSS), TextureSlot.CROSS, BuddingBushBlock.AGE, 0, 1, 2, 3, 3);
+		registerTomato(blockModels);
+		registerRopedTomato(blockModels);
+		registerRiceRoot(blockModels);
+		registerStageBlock(blockModels, ModBlocks.RICE_CROP_PANICLES.get(), RicePaniclesBlock.RICE_AGE);
+		registerWildCrop(blockModels, ModBlocks.SANDY_SHRUB.get());
+		registerWildCrop(blockModels, ModBlocks.WILD_BEETROOTS.get());
+		registerWildCrop(blockModels, ModBlocks.WILD_CABBAGES.get());
+		registerWildCrop(blockModels, ModBlocks.WILD_POTATOES.get());
+		registerWildCrop(blockModels, ModBlocks.WILD_TOMATOES.get());
+		registerWildCrop(blockModels, ModBlocks.WILD_CARROTS.get());
+		registerWildCrop(blockModels, ModBlocks.WILD_ONIONS.get());
+		registerDoublePlant(blockModels, ModBlocks.WILD_RICE.get());
+	}
+
+	private static void registerSimpleExistingBlock(BlockModelGenerators blockModels, Block block) {
+		blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(ModelLocationUtils.getModelLocation(block))));
+	}
+
+	private static void registerRiceBag(BlockModelGenerators blockModels) {
+		Block block = ModBlocks.RICE_BAG.get();
+		TextureMapping mapping = new TextureMapping()
+				.put(TextureSlot.PARTICLE, blockMaterial("rice_bag_top"))
+				.put(TextureSlot.DOWN, blockMaterial("rice_bag_bottom"))
+				.put(TextureSlot.UP, blockMaterial("rice_bag_top"))
+				.put(TextureSlot.NORTH, blockMaterial("rice_bag_side_tied"))
+				.put(TextureSlot.SOUTH, blockMaterial("rice_bag_side_tied"))
+				.put(TextureSlot.EAST, blockMaterial("rice_bag_side"))
+				.put(TextureSlot.WEST, blockMaterial("rice_bag_side"));
+		Identifier model = ModelTemplates.CUBE.create(block, mapping, blockModels.modelOutput);
+		blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(model)));
+	}
+
+	private static void registerBasket(BlockModelGenerators blockModels, Block block) {
+		String name = blockName(block);
+		TextureMapping mapping = new TextureMapping()
+				.put(TextureSlot.BOTTOM, blockMaterial(name + "_bottom"))
+				.put(HANDLE, blockMaterial(name + "_handle"))
+				.put(TextureSlot.SIDE, blockMaterial(name + "_side"))
+				.put(TextureSlot.TOP, blockMaterial(name + "_top"));
+		Identifier model = blockTemplate("template_basket", TextureSlot.BOTTOM, HANDLE, TextureSlot.SIDE, TextureSlot.TOP)
+				.create(block, mapping, blockModels.modelOutput);
+		MultiVariant variant = BlockModelGenerators.plainVariant(model);
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, variant)
+				.with(PropertyDispatch.modify(BasketBlock.FACING)
+						.select(Direction.DOWN, BlockModelGenerators.X_ROT_180)
+						.select(Direction.UP, BlockModelGenerators.NOP)
+						.select(Direction.NORTH, BlockModelGenerators.X_ROT_90)
+						.select(Direction.SOUTH, BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_180))
+						.select(Direction.WEST, BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_270))
+						.select(Direction.EAST, BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_90))));
+	}
+
+	private static void registerDirectionalBottomTop(BlockModelGenerators blockModels, Block block) {
+		Identifier model = ModelTemplates.CUBE_BOTTOM_TOP.create(block, cubeBottomTop(blockName(block)), blockModels.modelOutput);
+		MultiVariant variant = BlockModelGenerators.plainVariant(model);
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, variant)
+				.with(PropertyDispatch.modify(RiceBaleBlock.FACING)
+						.select(Direction.DOWN, BlockModelGenerators.X_ROT_180)
+						.select(Direction.UP, BlockModelGenerators.NOP)
+						.select(Direction.NORTH, BlockModelGenerators.X_ROT_90)
+						.select(Direction.SOUTH, BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_180))
+						.select(Direction.WEST, BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_270))
+						.select(Direction.EAST, BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_90))));
+	}
+
+	private static void registerRope(BlockModelGenerators blockModels) {
+		Block block = ModBlocks.ROPE.get();
+		blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(block)
+				.with(BlockModelGenerators.plainVariant(blockId("rope_post")))
+				.with(BlockModelGenerators.condition(RopeBlock.TIED_TO_BELL, true), BlockModelGenerators.plainVariant(blockId("rope_bell_tie")))
+				.with(BlockModelGenerators.condition(CrossCollisionBlock.NORTH, true), BlockModelGenerators.plainVariant(blockId("rope_side")))
+				.with(BlockModelGenerators.condition(CrossCollisionBlock.EAST, true), BlockModelGenerators.plainVariant(blockId("rope_side")).with(BlockModelGenerators.Y_ROT_90))
+				.with(BlockModelGenerators.condition(CrossCollisionBlock.SOUTH, true), BlockModelGenerators.plainVariant(blockId("rope_side_alt")))
+				.with(BlockModelGenerators.condition(CrossCollisionBlock.WEST, true), BlockModelGenerators.plainVariant(blockId("rope_side_alt")).with(BlockModelGenerators.Y_ROT_90)));
+	}
+
+	private static void registerRopeFence(BlockModelGenerators blockModels) {
+		Block block = ModBlocks.ROPE_FENCE.get();
+		blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(block)
+				.with(BlockModelGenerators.plainVariant(blockId("rope_fence_post")))
+				.with(BlockModelGenerators.condition(CrossCollisionBlock.NORTH, true), BlockModelGenerators.plainVariant(blockId("rope_fence_side")))
+				.with(BlockModelGenerators.condition(CrossCollisionBlock.EAST, true), BlockModelGenerators.plainVariant(blockId("rope_fence_side")).with(BlockModelGenerators.Y_ROT_90))
+				.with(BlockModelGenerators.condition(CrossCollisionBlock.SOUTH, true), BlockModelGenerators.plainVariant(blockId("rope_fence_side_alt")))
+				.with(BlockModelGenerators.condition(CrossCollisionBlock.WEST, true), BlockModelGenerators.plainVariant(blockId("rope_fence_side_alt")).with(BlockModelGenerators.Y_ROT_90)));
+	}
+
+	private static void registerRopeFenceGate(BlockModelGenerators blockModels) {
+		Block block = ModBlocks.ROPE_FENCE_GATE.get();
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(FenceGateBlock.FACING, FenceGateBlock.IN_WALL, FenceGateBlock.OPEN)
+						.generate((facing, inWall, open) -> BlockModelGenerators.plainVariant(blockId("rope_fence_gate" + (inWall ? "_wall" : "") + (open ? "_open" : "")))
+								.with(fenceGateRotation(facing)))));
+	}
+
+	private static void registerTatami(BlockModelGenerators blockModels) {
+		Block block = ModBlocks.TATAMI.get();
+		ModelTemplates.CUBE_ALL.create(blockId("tatami_half"), TextureMapping.cube(blockMaterial("tatami_mat_half")), blockModels.modelOutput);
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(TatamiBlock.FACING, TatamiBlock.PAIRED)
+						.generate((facing, paired) -> BlockModelGenerators.plainVariant(blockId(tatamiModel(facing, paired))).with(directionRotation(facing)))));
+	}
+
+	private static String tatamiModel(Direction facing, boolean paired) {
+		if (!paired) {
+			return "tatami_half";
+		}
+		return facing.getAxisDirection() == Direction.AxisDirection.POSITIVE ? "tatami_odd" : "tatami_even";
+	}
+
+	private static void registerFullTatamiMat(BlockModelGenerators blockModels) {
+		Block block = ModBlocks.FULL_TATAMI_MAT.get();
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(TatamiMatBlock.FACING, TatamiMatBlock.PART)
+						.generate((facing, part) -> BlockModelGenerators.plainVariant(blockId(part == BedPart.HEAD ? "tatami_mat_head" : "tatami_mat_foot"))
+								.with(fenceGateRotation(facing)))));
+	}
+
+	private static void registerCuttingBoard(BlockModelGenerators blockModels) {
+		Block block = ModBlocks.CUTTING_BOARD.get();
+		MultiVariant variant = BlockModelGenerators.plainVariant(ModelLocationUtils.getModelLocation(block));
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, variant)
+				.with(PropertyDispatch.modify(CuttingBoardBlock.FACING)
+						.select(Direction.EAST, BlockModelGenerators.Y_ROT_90)
+						.select(Direction.SOUTH, BlockModelGenerators.Y_ROT_180)
+						.select(Direction.WEST, BlockModelGenerators.Y_ROT_270)
+						.select(Direction.NORTH, BlockModelGenerators.NOP)));
+	}
+
+	private static void registerHalfTatami(BlockModelGenerators blockModels) {
+		Block block = ModBlocks.HALF_TATAMI_MAT.get();
+		MultiVariant variant = BlockModelGenerators.plainVariant(blockId("tatami_mat_half"));
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, variant)
+				.with(PropertyDispatch.modify(TatamiHalfMatBlock.FACING)
+						.select(Direction.EAST, BlockModelGenerators.Y_ROT_90)
+						.select(Direction.SOUTH, BlockModelGenerators.Y_ROT_180)
+						.select(Direction.WEST, BlockModelGenerators.Y_ROT_270)
+						.select(Direction.NORTH, BlockModelGenerators.NOP)));
+	}
+
+	private static void registerCrate(BlockModelGenerators blockModels, Block block, String cropName) {
+		TextureMapping mapping = new TextureMapping()
+				.put(TextureSlot.BOTTOM, blockMaterial("crate_bottom"))
+				.put(TextureSlot.SIDE, blockMaterial(cropName + "_crate_side"))
+				.put(TextureSlot.TOP, blockMaterial(cropName + "_crate_top"));
+		Identifier model = ModelTemplates.CUBE_BOTTOM_TOP.create(block, mapping, blockModels.modelOutput);
+		blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(model)));
+	}
+
+	private static void registerStrawBale(BlockModelGenerators blockModels) {
+		Block block = ModBlocks.STRAW_BALE.get();
+		TextureMapping mapping = new TextureMapping()
+				.put(TextureSlot.END, blockMaterial("straw_bale_end"))
+				.put(TextureSlot.SIDE, blockMaterial("straw_bale_side"));
+		MultiVariant model = BlockModelGenerators.plainVariant(ModelTemplates.CUBE_COLUMN.create(block, mapping, blockModels.modelOutput));
+		MultiVariant horizontalModel = BlockModelGenerators.plainVariant(ModelTemplates.CUBE_COLUMN_HORIZONTAL.create(block, mapping, blockModels.modelOutput));
+		blockModels.blockStateOutput.accept(BlockModelGenerators.createRotatedPillarWithHorizontalVariant(block, model, horizontalModel));
+	}
+
+	private static void registerRichSoil(BlockModelGenerators blockModels) {
+		Block block = ModBlocks.RICH_SOIL.get();
+		Identifier model = ModelTemplates.CUBE_ALL.create(block, TextureMapping.cube(blockMaterial(blockName(block))), blockModels.modelOutput);
+		blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, randomRotatedVariant(model)));
+	}
+
+	private static void registerRichSoilFarmland(BlockModelGenerators blockModels) {
+		Block block = ModBlocks.RICH_SOIL_FARMLAND.get();
+		Identifier dryModel = farmlandModel(blockModels, false);
+		Identifier moistModel = farmlandModel(blockModels, true);
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(RichSoilFarmlandBlock.MOISTURE)
+						.generate(moisture -> BlockModelGenerators.plainVariant(moisture == 7 ? moistModel : dryModel))));
+	}
+
+	private static Identifier farmlandModel(BlockModelGenerators blockModels, boolean moist) {
+		String name = blockName(ModBlocks.RICH_SOIL_FARMLAND.get());
+		String suffix = moist ? "_moist" : "";
+		TextureMapping mapping = new TextureMapping()
+				.put(TextureSlot.BOTTOM, blockMaterial("rich_soil"))
+				.put(TextureSlot.SIDE, blockMaterial(moist ? name + suffix + "_side" : "rich_soil"))
+				.put(TextureSlot.TOP, blockMaterial(name + suffix));
+		return blockTemplate("template_farmland_custom", TextureSlot.BOTTOM, TextureSlot.SIDE, TextureSlot.TOP)
+				.create(blockId(name + suffix), mapping, blockModels.modelOutput);
+	}
+
+	private static void registerOrganicCompost(BlockModelGenerators blockModels) {
+		Block block = ModBlocks.ORGANIC_COMPOST.get();
+		Identifier[] models = new Identifier[4];
+		for (int stage = 0; stage < models.length; stage++) {
+			String stageName = blockName(block) + "_stage" + stage;
+			models[stage] = ModelTemplates.CUBE_ALL.create(blockId(stageName), TextureMapping.cube(blockMaterial(stageName)), blockModels.modelOutput);
+		}
+
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(OrganicCompostBlock.COMPOSTING)
+						.generate(composting -> randomRotatedVariant(models[composting / 2]))));
+	}
+
+	private static void registerCabinet(BlockModelGenerators blockModels, Block block, String woodType) {
+		Identifier closedModel = cabinetModel(blockModels, block, woodType, false);
+		Identifier openModel = cabinetModel(blockModels, block, woodType, true);
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(CabinetBlock.FACING, CabinetBlock.OPEN)
+						.generate((facing, open) -> BlockModelGenerators.plainVariant(open ? openModel : closedModel).with(horizontalRotation(facing)))));
+	}
+
+	private static Identifier cabinetModel(BlockModelGenerators blockModels, Block block, String woodType, boolean open) {
+		String suffix = open ? "_open" : "";
+		TextureMapping mapping = new TextureMapping()
+				.put(TextureSlot.FRONT, blockMaterial(woodType + "_cabinet_front" + suffix))
+				.put(TextureSlot.SIDE, blockMaterial(woodType + "_cabinet_side"))
+				.put(TextureSlot.TOP, blockMaterial(woodType + "_cabinet_top"));
+		return ModelTemplates.CUBE_ORIENTABLE.create(blockId(blockName(block) + suffix), mapping, blockModels.modelOutput);
+	}
+
+	private static void registerCookingPot(BlockModelGenerators blockModels) {
+		Block block = ModBlocks.COOKING_POT.get();
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(CookingPotBlock.FACING, CookingPotBlock.SUPPORT)
+						.generate((facing, support) -> BlockModelGenerators.plainVariant(blockId(blockName(block) + cookingPotSupportSuffix(support))).with(horizontalRotation(facing)))));
+	}
+
+	private static String cookingPotSupportSuffix(CookingPotSupport support) {
+		return switch (support) {
+			case NONE -> "";
+			case TRAY -> "_tray";
+			case HANDLE -> "_handle";
+		};
+	}
+
+	private static void registerSkillet(BlockModelGenerators blockModels) {
+		Block block = ModBlocks.SKILLET.get();
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(SkilletBlock.FACING, SkilletBlock.SUPPORT)
+						.generate((facing, support) -> BlockModelGenerators.plainVariant(blockId(blockName(block) + (support ? "_tray" : ""))).with(horizontalRotation(facing)))));
+	}
+
+	private static void registerStove(BlockModelGenerators blockModels) {
+		Block block = ModBlocks.STOVE.get();
+		Identifier offModel = stoveModel(blockModels, false);
+		Identifier onModel = stoveModel(blockModels, true);
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(AbstractStoveBlock.FACING, AbstractStoveBlock.LIT)
+						.generate((facing, lit) -> BlockModelGenerators.plainVariant(lit ? onModel : offModel).with(horizontalRotation(facing)))));
+	}
+
+	private static Identifier stoveModel(BlockModelGenerators blockModels, boolean lit) {
+		String suffix = lit ? "_on" : "";
+		TextureMapping mapping = new TextureMapping()
+				.put(TextureSlot.BOTTOM, blockMaterial("stove_bottom"))
+				.put(TextureSlot.FRONT, blockMaterial("stove_front" + suffix))
+				.put(TextureSlot.SIDE, blockMaterial("stove_side"))
+				.put(TextureSlot.TOP, blockMaterial("stove_top" + suffix));
+		return ModelTemplates.CUBE_ORIENTABLE_TOP_BOTTOM.create(blockId("stove" + suffix), mapping, blockModels.modelOutput);
+	}
+
+	private static void registerPie(BlockModelGenerators blockModels, Block block) {
+		Identifier wholeModel = pieModel(blockModels, block);
+		Identifier slice1 = pieSliceModel(blockModels, block, 1);
+		Identifier slice2 = pieSliceModel(blockModels, block, 2);
+		Identifier slice3 = pieSliceModel(blockModels, block, 3);
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(PieBlock.BITES, PieBlock.FACING)
+						.generate((bites, facing) -> BlockModelGenerators.plainVariant(switch (bites) {
+							case 1 -> slice1;
+							case 2 -> slice2;
+							case 3 -> slice3;
+							default -> wholeModel;
+						}).with(horizontalRotation(facing)))));
+	}
+
+	private static void registerCustomPie(BlockModelGenerators blockModels, Block block) {
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(PieBlock.BITES, PieBlock.FACING)
+						.generate((bites, facing) -> BlockModelGenerators.plainVariant(blockId(blockName(block) + (bites > 0 ? "_slice" + bites : "")))
+								.with(horizontalRotation(facing)))));
+	}
+
+	private static Identifier pieModel(BlockModelGenerators blockModels, Block block) {
+		String name = blockName(block);
+		TextureMapping mapping = new TextureMapping()
+				.put(TextureSlot.BOTTOM, blockMaterial("pie_bottom"))
+				.put(TextureSlot.SIDE, blockMaterial("pie_side"))
+				.put(TextureSlot.TOP, blockMaterial(name + "_top"));
+		return blockTemplate("template_pie", TextureSlot.BOTTOM, TextureSlot.SIDE, TextureSlot.TOP)
+				.create(block, mapping, blockModels.modelOutput);
+	}
+
+	private static Identifier pieSliceModel(BlockModelGenerators blockModels, Block block, int bites) {
+		String name = blockName(block);
+		TextureMapping mapping = new TextureMapping()
+				.put(TextureSlot.BOTTOM, blockMaterial("pie_bottom"))
+				.put(TextureSlot.SIDE, blockMaterial("pie_side"))
+				.put(INNER, blockMaterial(name + "_inner"))
+				.put(TextureSlot.TOP, blockMaterial(name + "_top"));
+		return blockTemplate("template_pie_slice" + bites, TextureSlot.BOTTOM, INNER, TextureSlot.SIDE, TextureSlot.TOP)
+				.create(blockId(name + "_slice" + bites), mapping, blockModels.modelOutput);
+	}
+
+	private static void registerFeast(BlockModelGenerators blockModels, FeastBlock block) {
+		IntegerProperty servingsProperty = block.getServingsProperty();
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(FeastBlock.FACING, servingsProperty)
+						.generate((facing, servings) -> BlockModelGenerators.plainVariant(blockId(blockName(block) + feastSuffix(block, servingsProperty, servings)))
+								.with(horizontalRotation(facing)))));
+	}
+
+	private static String feastSuffix(FeastBlock block, IntegerProperty servingsProperty, int servings) {
+		if (servings == 0) {
+			return block.hasLeftovers ? "_leftovers" : "_stage" + (servingsProperty.getPossibleValues().size() - 2);
+		}
+		return "_stage" + (block.getMaxServings() - servings);
+	}
+
+	private static void registerStageBlock(BlockModelGenerators blockModels, Block block, IntegerProperty ageProperty) {
+		registerCustomStageBlock(blockModels, block, cutoutTemplate(Identifier.withDefaultNamespace("block/cross"), TextureSlot.CROSS), TextureSlot.CROSS, ageProperty);
+	}
+
+	private static void registerCustomStageBlock(BlockModelGenerators blockModels, Block block, ModelTemplate template, TextureSlot textureSlot, IntegerProperty ageProperty, int... ageSuffixes) {
+		Map<Integer, Identifier> models = new java.util.HashMap<>();
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(ageProperty)
+						.generate(age -> BlockModelGenerators.plainVariant(models.computeIfAbsent(ageSuffix(age, ageSuffixes), stage -> stageModel(blockModels, block, template, textureSlot, stage))))));
+	}
+
+	private static int ageSuffix(int age, int... ageSuffixes) {
+		return ageSuffixes.length > age ? ageSuffixes[age] : age;
+	}
+
+	private static Identifier stageModel(BlockModelGenerators blockModels, Block block, ModelTemplate template, TextureSlot textureSlot, int stage) {
+		String stageName = blockName(block) + "_stage" + stage;
+		return template.create(blockId(stageName), new TextureMapping().put(textureSlot, blockMaterial(stageName)), blockModels.modelOutput);
+	}
+
+	private static void registerTomato(BlockModelGenerators blockModels) {
+		Block block = ModBlocks.TOMATO_CROP.get();
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(TomatoBlock.VINE_AGE, TomatoBlock.ROPELOGGED)
+						.generate((age, ropelogged) -> BlockModelGenerators.plainVariant(ropelogged ? tomatoRopeModel(blockModels, age, true) : tomatoCropModel(blockModels, age)))));
+	}
+
+	private static Identifier tomatoCropModel(BlockModelGenerators blockModels, int age) {
+		String stageName = blockName(ModBlocks.TOMATO_CROP.get()) + "_stage" + age;
+		return cutoutTemplate(blockId("template_crop_cross"), TextureSlot.CROSS)
+				.create(blockId(stageName), new TextureMapping().put(TextureSlot.CROSS, blockMaterial(stageName)), blockModels.modelOutput);
+	}
+
+	private static Identifier tomatoRopeModel(BlockModelGenerators blockModels, int age, boolean old) {
+		String stageName = blockName(ModBlocks.TOMATO_CROP.get()) + (old ? "_old" : "_on_rope") + "_stage" + age;
+		return cutoutTemplate(blockId("template_crop_with_rope"), TextureSlot.CROP, ROPE_SIDE, ROPE_TOP)
+				.create(blockId(stageName), tomatoRopeMapping(stageName), blockModels.modelOutput);
+	}
+
+	private static TextureMapping tomatoRopeMapping(String stageName) {
+		return new TextureMapping()
+				.put(TextureSlot.CROP, blockMaterial(stageName))
+				.put(ROPE_SIDE, blockMaterial("tomatoes_coiled_rope"))
+				.put(ROPE_TOP, blockMaterial("rope_top"));
+	}
+
+	private static void registerRopedTomato(BlockModelGenerators blockModels) {
+		Block block = ModBlocks.TOMATO_CROP_ON_ROPE.get();
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(TomatoBlock.VINE_AGE)
+						.generate(age -> BlockModelGenerators.plainVariant(tomatoRopeModel(blockModels, age, false)))));
+	}
+
+	private static void registerRiceRoot(BlockModelGenerators blockModels) {
+		Block block = ModBlocks.RICE_CROP.get();
+		ModelTemplate template = cutoutTemplate(Identifier.withDefaultNamespace("block/cross"), TextureSlot.CROSS);
+		Map<String, Identifier> models = new java.util.HashMap<>();
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(RiceBlock.AGE, RiceBlock.SUPPORTING)
+						.generate((age, supporting) -> {
+							String modelName = supporting && age == 3 ? blockName(block) + "_supporting" : blockName(block) + "_stage" + age;
+							Identifier model = models.computeIfAbsent(modelName, name -> template.create(blockId(name), new TextureMapping().put(TextureSlot.CROSS, blockMaterial(name)), blockModels.modelOutput));
+							return BlockModelGenerators.plainVariant(model);
+						})));
+	}
+
+	private static void registerWildCrop(BlockModelGenerators blockModels, Block block) {
+		Identifier model = cutoutTemplate(Identifier.withDefaultNamespace("block/cross"), TextureSlot.CROSS)
+				.create(block, new TextureMapping().put(TextureSlot.CROSS, blockMaterial(blockName(block))), blockModels.modelOutput);
+		blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(model)));
+	}
+
+	private static void registerDoublePlant(BlockModelGenerators blockModels, Block block) {
+		ModelTemplate template = cutoutTemplate(Identifier.withDefaultNamespace("block/cross"), TextureSlot.CROSS);
+		Identifier lowerModel = template.create(blockId(blockName(block) + "_bottom"), new TextureMapping().put(TextureSlot.CROSS, blockMaterial(blockName(block) + "_bottom")), blockModels.modelOutput);
+		Identifier upperModel = template.create(blockId(blockName(block) + "_top"), new TextureMapping().put(TextureSlot.CROSS, blockMaterial(blockName(block) + "_top")), blockModels.modelOutput);
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(DoublePlantBlock.HALF)
+						.generate(half -> BlockModelGenerators.plainVariant(half == DoubleBlockHalf.UPPER ? upperModel : lowerModel))));
+	}
+
+	private static void registerStandingSign(BlockModelGenerators blockModels, SignPair pair) {
+		TextureMapping mapping = signMapping(standingSignTexture(pair.texture()), Identifier.withDefaultNamespace("block/spruce_planks"));
+		MultiVariant rot0 = BlockModelGenerators.plainVariant(ModelTemplates.SIGN_ROT_0.create(ModelLocationUtils.getModelLocation(pair.sign(), "_rot_0"), mapping, blockModels.modelOutput));
+		MultiVariant rot1 = BlockModelGenerators.plainVariant(ModelTemplates.SIGN_ROT_1.create(ModelLocationUtils.getModelLocation(pair.sign(), "_rot_1"), mapping, blockModels.modelOutput));
+		MultiVariant rot2 = BlockModelGenerators.plainVariant(ModelTemplates.SIGN_ROT_2.create(ModelLocationUtils.getModelLocation(pair.sign(), "_rot_2"), mapping, blockModels.modelOutput));
+		MultiVariant rot3 = BlockModelGenerators.plainVariant(ModelTemplates.SIGN_ROT_3.create(ModelLocationUtils.getModelLocation(pair.sign(), "_rot_3"), mapping, blockModels.modelOutput));
+
+		blockModels.blockStateOutput.accept(BlockModelGenerators.createSign(pair.sign(), rot0, rot1, rot2, rot3));
+
+		MultiVariant wallModel = BlockModelGenerators.plainVariant(ModelTemplates.WALL_SIGN.create(pair.wallSign(), mapping, blockModels.modelOutput));
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(pair.wallSign(), wallModel).with(BlockModelGenerators.ROTATION_HORIZONTAL_FACING_ALT));
+	}
+
+	private static void registerHangingSign(BlockModelGenerators blockModels, SignPair pair) {
+		TextureMapping mapping = signMapping(hangingSignTexture(pair.texture()), Identifier.withDefaultNamespace("block/stripped_spruce_log"));
+		MultiVariant rot0 = BlockModelGenerators.plainVariant(ModelTemplates.HANGING_SIGN_ROT_0.create(ModelLocationUtils.getModelLocation(pair.sign(), "_rot_0"), mapping, blockModels.modelOutput));
+		MultiVariant rot1 = BlockModelGenerators.plainVariant(ModelTemplates.HANGING_SIGN_ROT_1.create(ModelLocationUtils.getModelLocation(pair.sign(), "_rot_1"), mapping, blockModels.modelOutput));
+		MultiVariant rot2 = BlockModelGenerators.plainVariant(ModelTemplates.HANGING_SIGN_ROT_2.create(ModelLocationUtils.getModelLocation(pair.sign(), "_rot_2"), mapping, blockModels.modelOutput));
+		MultiVariant rot3 = BlockModelGenerators.plainVariant(ModelTemplates.HANGING_SIGN_ROT_3.create(ModelLocationUtils.getModelLocation(pair.sign(), "_rot_3"), mapping, blockModels.modelOutput));
+		MultiVariant attachedRot0 = BlockModelGenerators.plainVariant(ModelTemplates.ATTACHED_HANGING_SIGN_ROT_0.create(ModelLocationUtils.getModelLocation(pair.sign(), "_attached_rot_0"), mapping, blockModels.modelOutput));
+		MultiVariant attachedRot1 = BlockModelGenerators.plainVariant(ModelTemplates.ATTACHED_HANGING_SIGN_ROT_1.create(ModelLocationUtils.getModelLocation(pair.sign(), "_attached_rot_1"), mapping, blockModels.modelOutput));
+		MultiVariant attachedRot2 = BlockModelGenerators.plainVariant(ModelTemplates.ATTACHED_HANGING_SIGN_ROT_2.create(ModelLocationUtils.getModelLocation(pair.sign(), "_attached_rot_2"), mapping, blockModels.modelOutput));
+		MultiVariant attachedRot3 = BlockModelGenerators.plainVariant(ModelTemplates.ATTACHED_HANGING_SIGN_ROT_3.create(ModelLocationUtils.getModelLocation(pair.sign(), "_attached_rot_3"), mapping, blockModels.modelOutput));
+
+		blockModels.blockStateOutput.accept(BlockModelGenerators.createHangingSign(pair.sign(), rot0, rot1, rot2, rot3, attachedRot0, attachedRot1, attachedRot2, attachedRot3));
+
+		MultiVariant wallModel = BlockModelGenerators.plainVariant(ModelTemplates.WALL_HANGING_SIGN.create(pair.wallSign(), mapping, blockModels.modelOutput));
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(pair.wallSign(), wallModel).with(BlockModelGenerators.ROTATION_HORIZONTAL_FACING_ALT));
+	}
+
+	private static TextureMapping signMapping(String texture, Identifier particle) {
+		return new TextureMapping()
+				.put(TextureSlot.ALL, new Material(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, texture)))
+				.put(TextureSlot.PARTICLE, new Material(particle));
+	}
+
+	private static String standingSignTexture(String texture) {
+		return texture.equals("canvas") ? "block/canvas_sign" : "block/" + texture.substring("canvas_".length()) + "_canvas_sign";
+	}
+
+	private static String hangingSignTexture(String texture) {
+		return texture.equals("canvas") ? "block/hanging_canvas_sign" : "block/" + texture.substring("canvas_".length()) + "_hanging_canvas_sign";
+	}
+
+	private static TextureMapping cubeBottomTop(String baseName) {
+		return new TextureMapping()
+				.put(TextureSlot.BOTTOM, blockMaterial(baseName + "_bottom"))
+				.put(TextureSlot.SIDE, blockMaterial(baseName + "_side"))
+				.put(TextureSlot.TOP, blockMaterial(baseName + "_top"));
+	}
+
+	private static MultiVariant randomRotatedVariant(Identifier model) {
+		return BlockModelGenerators.variants(
+				BlockModelGenerators.plainModel(model),
+				BlockModelGenerators.plainModel(model).with(BlockModelGenerators.Y_ROT_90),
+				BlockModelGenerators.plainModel(model).with(BlockModelGenerators.Y_ROT_180),
+				BlockModelGenerators.plainModel(model).with(BlockModelGenerators.Y_ROT_270));
+	}
+
+	private static VariantMutator horizontalRotation(Direction facing) {
+		return switch (facing) {
+			case EAST -> BlockModelGenerators.Y_ROT_90;
+			case SOUTH -> BlockModelGenerators.Y_ROT_180;
+			case WEST -> BlockModelGenerators.Y_ROT_270;
+			default -> BlockModelGenerators.NOP;
+		};
+	}
+
+	private static VariantMutator fenceGateRotation(Direction facing) {
+		return switch (facing) {
+			case WEST -> BlockModelGenerators.Y_ROT_90;
+			case NORTH -> BlockModelGenerators.Y_ROT_180;
+			case EAST -> BlockModelGenerators.Y_ROT_270;
+			default -> BlockModelGenerators.NOP;
+		};
+	}
+
+	private static VariantMutator directionRotation(Direction facing) {
+		return switch (facing) {
+			case DOWN -> BlockModelGenerators.X_ROT_180;
+			case NORTH -> BlockModelGenerators.X_ROT_90;
+			case SOUTH -> BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_180);
+			case WEST -> BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_270);
+			case EAST -> BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_90);
+			default -> BlockModelGenerators.NOP;
+		};
+	}
+
+	private static ModelTemplate blockTemplate(String parent, TextureSlot... slots) {
+		return new ModelTemplate(Optional.of(blockId(parent)), Optional.empty(), slots);
+	}
+
+	private static ModelTemplate cutoutTemplate(Identifier parent, TextureSlot... slots) {
+		return new RenderTypeModelTemplate(parent, "minecraft:cutout", slots);
+	}
+
+	private static Material blockMaterial(String path) {
+		return new Material(blockId(path));
+	}
+
+	private static Identifier blockId(String path) {
+		return Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/" + path);
+	}
+
+	private static String blockName(Block block) {
+		return ModelLocationUtils.getModelLocation(block).getPath().replace("block/", "");
+	}
+
+	private static List<Block> generatedBlocks() {
+		return List.of(
+				ModBlocks.SAFETY_NET.get(),
+				ModBlocks.CANVAS_RUG.get(),
+				ModBlocks.RICE_BAG.get(),
+				ModBlocks.WOODEN_BASKET.get(),
+				ModBlocks.BAMBOO_BASKET.get(),
+				ModBlocks.RICE_BALE.get(),
+				ModBlocks.ROPE.get(),
+				ModBlocks.ROPE_FENCE.get(),
+				ModBlocks.ROPE_FENCE_GATE.get(),
+				ModBlocks.TATAMI.get(),
+				ModBlocks.FULL_TATAMI_MAT.get(),
+				ModBlocks.CUTTING_BOARD.get(),
+				ModBlocks.HALF_TATAMI_MAT.get(),
+				ModBlocks.CARROT_CRATE.get(),
+				ModBlocks.POTATO_CRATE.get(),
+				ModBlocks.BEETROOT_CRATE.get(),
+				ModBlocks.CABBAGE_CRATE.get(),
+				ModBlocks.TOMATO_CRATE.get(),
+				ModBlocks.ONION_CRATE.get(),
+				ModBlocks.STRAW_BALE.get(),
+				ModBlocks.RICH_SOIL.get(),
+				ModBlocks.RICH_SOIL_FARMLAND.get(),
+				ModBlocks.ORGANIC_COMPOST.get(),
+				ModBlocks.OAK_CABINET.get(),
+				ModBlocks.BIRCH_CABINET.get(),
+				ModBlocks.SPRUCE_CABINET.get(),
+				ModBlocks.JUNGLE_CABINET.get(),
+				ModBlocks.ACACIA_CABINET.get(),
+				ModBlocks.DARK_OAK_CABINET.get(),
+				ModBlocks.MANGROVE_CABINET.get(),
+				ModBlocks.CHERRY_CABINET.get(),
+				ModBlocks.BAMBOO_CABINET.get(),
+				ModBlocks.CRIMSON_CABINET.get(),
+				ModBlocks.WARPED_CABINET.get(),
+				ModBlocks.COOKING_POT.get(),
+				ModBlocks.SKILLET.get(),
+				ModBlocks.STOVE.get(),
+				ModBlocks.APPLE_PIE.get(),
+				ModBlocks.CHOCOLATE_PIE.get(),
+				ModBlocks.SWEET_BERRY_CHEESECAKE.get(),
+				ModBlocks.PUMPKIN_PIE.get(),
+				ModBlocks.STUFFED_PUMPKIN_BLOCK.get(),
+				ModBlocks.ROAST_CHICKEN_BLOCK.get(),
+				ModBlocks.HONEY_GLAZED_HAM_BLOCK.get(),
+				ModBlocks.SHEPHERDS_PIE_BLOCK.get(),
+				ModBlocks.GLEAMING_SALAD_BLOCK.get(),
+				ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get(),
+				ModBlocks.BROWN_MUSHROOM_COLONY.get(),
+				ModBlocks.RED_MUSHROOM_COLONY.get(),
+				ModBlocks.CABBAGE_CROP.get(),
+				ModBlocks.ONION_CROP.get(),
+				ModBlocks.BUDDING_TOMATO_CROP.get(),
+				ModBlocks.TOMATO_CROP.get(),
+				ModBlocks.TOMATO_CROP_ON_ROPE.get(),
+				ModBlocks.RICE_CROP.get(),
+				ModBlocks.RICE_CROP_PANICLES.get(),
+				ModBlocks.SANDY_SHRUB.get(),
+				ModBlocks.WILD_BEETROOTS.get(),
+				ModBlocks.WILD_CABBAGES.get(),
+				ModBlocks.WILD_POTATOES.get(),
+				ModBlocks.WILD_TOMATOES.get(),
+				ModBlocks.WILD_CARROTS.get(),
+				ModBlocks.WILD_ONIONS.get(),
+				ModBlocks.WILD_RICE.get()
 		);
-		customDirectionalBlock(ModBlocks.WOODEN_BASKET.get(),
-				$ -> modelBasket(blockName(ModBlocks.WOODEN_BASKET.get())), BasketBlock.ENABLED, BasketBlock.WATERLOGGED);
-		customDirectionalBlock(ModBlocks.BAMBOO_BASKET.get(),
-				$ -> modelBasket(blockName(ModBlocks.BAMBOO_BASKET.get())), BasketBlock.ENABLED, BasketBlock.WATERLOGGED);
-		customDirectionalBlock(ModBlocks.RICE_BALE.get(),
-				$ -> modelCubeBottomTop(blockName(ModBlocks.RICE_BALE.get())));
-		customHorizontalBlock(ModBlocks.CUTTING_BOARD.get(),
-				$ -> existingModel(ModBlocks.CUTTING_BOARD.get()), BasketBlock.WATERLOGGED);
+	}
 
-		horizontalBlock(ModBlocks.HALF_TATAMI_MAT.get(), existingModel("tatami_mat_half"));
+	private static List<SignPair> standingSigns() {
+		return List.of(
+				new SignPair(ModBlocks.CANVAS_SIGN.get(), ModBlocks.CANVAS_WALL_SIGN.get(), "canvas"),
+				new SignPair(ModBlocks.WHITE_CANVAS_SIGN.get(), ModBlocks.WHITE_CANVAS_WALL_SIGN.get(), "canvas_white"),
+				new SignPair(ModBlocks.ORANGE_CANVAS_SIGN.get(), ModBlocks.ORANGE_CANVAS_WALL_SIGN.get(), "canvas_orange"),
+				new SignPair(ModBlocks.MAGENTA_CANVAS_SIGN.get(), ModBlocks.MAGENTA_CANVAS_WALL_SIGN.get(), "canvas_magenta"),
+				new SignPair(ModBlocks.LIGHT_BLUE_CANVAS_SIGN.get(), ModBlocks.LIGHT_BLUE_CANVAS_WALL_SIGN.get(), "canvas_light_blue"),
+				new SignPair(ModBlocks.YELLOW_CANVAS_SIGN.get(), ModBlocks.YELLOW_CANVAS_WALL_SIGN.get(), "canvas_yellow"),
+				new SignPair(ModBlocks.LIME_CANVAS_SIGN.get(), ModBlocks.LIME_CANVAS_WALL_SIGN.get(), "canvas_lime"),
+				new SignPair(ModBlocks.PINK_CANVAS_SIGN.get(), ModBlocks.PINK_CANVAS_WALL_SIGN.get(), "canvas_pink"),
+				new SignPair(ModBlocks.GRAY_CANVAS_SIGN.get(), ModBlocks.GRAY_CANVAS_WALL_SIGN.get(), "canvas_gray"),
+				new SignPair(ModBlocks.LIGHT_GRAY_CANVAS_SIGN.get(), ModBlocks.LIGHT_GRAY_CANVAS_WALL_SIGN.get(), "canvas_light_gray"),
+				new SignPair(ModBlocks.CYAN_CANVAS_SIGN.get(), ModBlocks.CYAN_CANVAS_WALL_SIGN.get(), "canvas_cyan"),
+				new SignPair(ModBlocks.PURPLE_CANVAS_SIGN.get(), ModBlocks.PURPLE_CANVAS_WALL_SIGN.get(), "canvas_purple"),
+				new SignPair(ModBlocks.BLUE_CANVAS_SIGN.get(), ModBlocks.BLUE_CANVAS_WALL_SIGN.get(), "canvas_blue"),
+				new SignPair(ModBlocks.BROWN_CANVAS_SIGN.get(), ModBlocks.BROWN_CANVAS_WALL_SIGN.get(), "canvas_brown"),
+				new SignPair(ModBlocks.GREEN_CANVAS_SIGN.get(), ModBlocks.GREEN_CANVAS_WALL_SIGN.get(), "canvas_green"),
+				new SignPair(ModBlocks.RED_CANVAS_SIGN.get(), ModBlocks.RED_CANVAS_WALL_SIGN.get(), "canvas_red"),
+				new SignPair(ModBlocks.BLACK_CANVAS_SIGN.get(), ModBlocks.BLACK_CANVAS_WALL_SIGN.get(), "canvas_black")
+		);
+	}
 
-		stageBlock(ModBlocks.BROWN_MUSHROOM_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
-		stageBlock(ModBlocks.RED_MUSHROOM_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
+	private static List<SignPair> hangingSigns() {
+		return List.of(
+				new SignPair(ModBlocks.HANGING_CANVAS_SIGN.get(), ModBlocks.HANGING_CANVAS_WALL_SIGN.get(), "canvas"),
+				new SignPair(ModBlocks.WHITE_HANGING_CANVAS_SIGN.get(), ModBlocks.WHITE_HANGING_CANVAS_WALL_SIGN.get(), "canvas_white"),
+				new SignPair(ModBlocks.ORANGE_HANGING_CANVAS_SIGN.get(), ModBlocks.ORANGE_HANGING_CANVAS_WALL_SIGN.get(), "canvas_orange"),
+				new SignPair(ModBlocks.MAGENTA_HANGING_CANVAS_SIGN.get(), ModBlocks.MAGENTA_HANGING_CANVAS_WALL_SIGN.get(), "canvas_magenta"),
+				new SignPair(ModBlocks.LIGHT_BLUE_HANGING_CANVAS_SIGN.get(), ModBlocks.LIGHT_BLUE_HANGING_CANVAS_WALL_SIGN.get(), "canvas_light_blue"),
+				new SignPair(ModBlocks.YELLOW_HANGING_CANVAS_SIGN.get(), ModBlocks.YELLOW_HANGING_CANVAS_WALL_SIGN.get(), "canvas_yellow"),
+				new SignPair(ModBlocks.LIME_HANGING_CANVAS_SIGN.get(), ModBlocks.LIME_HANGING_CANVAS_WALL_SIGN.get(), "canvas_lime"),
+				new SignPair(ModBlocks.PINK_HANGING_CANVAS_SIGN.get(), ModBlocks.PINK_HANGING_CANVAS_WALL_SIGN.get(), "canvas_pink"),
+				new SignPair(ModBlocks.GRAY_HANGING_CANVAS_SIGN.get(), ModBlocks.GRAY_HANGING_CANVAS_WALL_SIGN.get(), "canvas_gray"),
+				new SignPair(ModBlocks.LIGHT_GRAY_HANGING_CANVAS_SIGN.get(), ModBlocks.LIGHT_GRAY_HANGING_CANVAS_WALL_SIGN.get(), "canvas_light_gray"),
+				new SignPair(ModBlocks.CYAN_HANGING_CANVAS_SIGN.get(), ModBlocks.CYAN_HANGING_CANVAS_WALL_SIGN.get(), "canvas_cyan"),
+				new SignPair(ModBlocks.PURPLE_HANGING_CANVAS_SIGN.get(), ModBlocks.PURPLE_HANGING_CANVAS_WALL_SIGN.get(), "canvas_purple"),
+				new SignPair(ModBlocks.BLUE_HANGING_CANVAS_SIGN.get(), ModBlocks.BLUE_HANGING_CANVAS_WALL_SIGN.get(), "canvas_blue"),
+				new SignPair(ModBlocks.BROWN_HANGING_CANVAS_SIGN.get(), ModBlocks.BROWN_HANGING_CANVAS_WALL_SIGN.get(), "canvas_brown"),
+				new SignPair(ModBlocks.GREEN_HANGING_CANVAS_SIGN.get(), ModBlocks.GREEN_HANGING_CANVAS_WALL_SIGN.get(), "canvas_green"),
+				new SignPair(ModBlocks.RED_HANGING_CANVAS_SIGN.get(), ModBlocks.RED_HANGING_CANVAS_WALL_SIGN.get(), "canvas_red"),
+				new SignPair(ModBlocks.BLACK_HANGING_CANVAS_SIGN.get(), ModBlocks.BLACK_HANGING_CANVAS_WALL_SIGN.get(), "canvas_black")
+		);
+	}
 
-		customStageBlock(ModBlocks.CABBAGE_CROP.get(), resourceFDBlock("template_crop_cross"), "cross", CabbageBlock.AGE, new ArrayList<>());
-		customStageBlock(ModBlocks.ONION_CROP.get(), mcLoc("crop"), "crop", OnionBlock.AGE, Arrays.asList(0, 0, 1, 1, 2, 2, 2, 3));
-		customStageBlock(ModBlocks.BUDDING_TOMATO_CROP.get(), resourceFDBlock("template_crop_cross"), "cross", BuddingTomatoBlock.AGE, Arrays.asList(0, 1, 2, 3, 3));
-		tomatoBlock(ModBlocks.TOMATO_CROP.get(), TomatoBlock.VINE_AGE, TomatoBlock.ROPELOGGED);
-		ropedTomatoBlock(ModBlocks.TOMATO_CROP_ON_ROPE.get(), TomatoBlock.VINE_AGE);
-		riceRootBlock(ModBlocks.RICE_CROP.get());
-		stageBlock(ModBlocks.RICE_CROP_PANICLES.get(), RicePaniclesBlock.RICE_AGE);
+	private record SignPair(Block sign, Block wallSign, String texture) {
+	}
 
-		crateBlock(ModBlocks.CARROT_CRATE.get(), "carrot");
-		crateBlock(ModBlocks.POTATO_CRATE.get(), "potato");
-		crateBlock(ModBlocks.BEETROOT_CRATE.get(), "beetroot");
-		crateBlock(ModBlocks.CABBAGE_CRATE.get(), "cabbage");
-		crateBlock(ModBlocks.TOMATO_CRATE.get(), "tomato");
-		crateBlock(ModBlocks.ONION_CRATE.get(), "onion");
+	private static class RenderTypeModelTemplate extends ModelTemplate {
+		private final String renderType;
 
-		axisBlock((RotatedPillarBlock) ModBlocks.STRAW_BALE.get());
-
-		organicCompostBlock(ModBlocks.ORGANIC_COMPOST.get());
-		simpleBlock(ModBlocks.RICH_SOIL.get(), cubeRandomRotation(ModBlocks.RICH_SOIL.get(), ""));
-		farmlandBlock(ModBlocks.RICH_SOIL_FARMLAND.get(), ModBlocks.RICH_SOIL.get());
-
-		this.getMultipartBuilder(ModBlocks.ROPE.get())
-				.part().modelFile(existingModel("rope_post")).addModel().end()
-				.part().modelFile(existingModel("rope_bell_tie")).addModel().condition(RopeBlock.TIED_TO_BELL, true).end()
-				.part().modelFile(existingModel("rope_side")).addModel().condition(RopeBlock.NORTH, true).end()
-				.part().modelFile(existingModel("rope_side")).rotationY(90).addModel().condition(RopeBlock.EAST, true).end()
-				.part().modelFile(existingModel("rope_side_alt")).addModel().condition(RopeBlock.SOUTH, true).end()
-				.part().modelFile(existingModel("rope_side_alt")).rotationY(90).addModel().condition(RopeBlock.WEST, true).end();
-
-		this.getMultipartBuilder(ModBlocks.ROPE_FENCE.get())
-				.part().modelFile(existingModel("rope_fence_post")).addModel().end()
-				.part().modelFile(existingModel("rope_fence_side")).addModel().condition(FenceBlock.NORTH, true).end()
-				.part().modelFile(existingModel("rope_fence_side")).rotationY(90).addModel().condition(FenceBlock.EAST, true).end()
-				.part().modelFile(existingModel("rope_fence_side_alt")).addModel().condition(FenceBlock.SOUTH, true).end()
-				.part().modelFile(existingModel("rope_fence_side_alt")).rotationY(90).addModel().condition(FenceBlock.WEST, true).end();
-
-		ropeFenceGateBlock(ModBlocks.ROPE_FENCE_GATE.get());
-
-		ModelFile head = existingModel("tatami_mat_head");
-		ModelFile foot = existingModel("tatami_mat_foot");
-		this.getVariantBuilder(ModBlocks.FULL_TATAMI_MAT.get()).forAllStates(state ->
-				ConfiguredModel.builder().modelFile(state.getValue(TatamiMatBlock.PART) == BedPart.HEAD ? head : foot).rotationY((int) state.getValue(TatamiMatBlock.FACING).toYRot()).build());
-
-		ModelFile odd = existingModel("tatami_odd");
-		ModelFile even = existingModel("tatami_even");
-		ModelFile notPaired = models().cubeAll(blockName(ModBlocks.TATAMI.get()) + "_half", ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "block/tatami_mat_half"));
-		this.getVariantBuilder(ModBlocks.TATAMI.get()).forAllStates(state -> {
-			Direction dir = state.getValue(TatamiBlock.FACING);
-			return ConfiguredModel.builder().modelFile(state.getValue(TatamiBlock.PAIRED) ? dir.get3DDataValue() % 2 == 0 ? even : odd : notPaired)
-					.rotationX(dir == Direction.DOWN ? 180 : dir.getAxis().isHorizontal() ? 90 : 0)
-					.rotationY(dir.getAxis().isVertical() ? 0 : (((int) dir.toYRot()) + 180) % 360).build();
-		});
-
-		cabinetBlock(ModBlocks.OAK_CABINET.get(), "oak");
-		cabinetBlock(ModBlocks.BIRCH_CABINET.get(), "birch");
-		cabinetBlock(ModBlocks.SPRUCE_CABINET.get(), "spruce");
-		cabinetBlock(ModBlocks.JUNGLE_CABINET.get(), "jungle");
-		cabinetBlock(ModBlocks.ACACIA_CABINET.get(), "acacia");
-		cabinetBlock(ModBlocks.DARK_OAK_CABINET.get(), "dark_oak");
-		cabinetBlock(ModBlocks.MANGROVE_CABINET.get(), "mangrove");
-		cabinetBlock(ModBlocks.CHERRY_CABINET.get(), "cherry");
-		cabinetBlock(ModBlocks.BAMBOO_CABINET.get(), "bamboo");
-		cabinetBlock(ModBlocks.CRIMSON_CABINET.get(), "crimson");
-		cabinetBlock(ModBlocks.WARPED_CABINET.get(), "warped");
-
-		pieBlock(ModBlocks.APPLE_PIE.get());
-		customPieBlock(ModBlocks.CHOCOLATE_PIE.get());
-		pieBlock(ModBlocks.SWEET_BERRY_CHEESECAKE.get());
-		pieBlock(ModBlocks.PUMPKIN_PIE.get());
-
-		feastBlock((FeastBlock) ModBlocks.STUFFED_PUMPKIN_BLOCK.get());
-		feastBlock((FeastBlock) ModBlocks.ROAST_CHICKEN_BLOCK.get());
-		feastBlock((FeastBlock) ModBlocks.HONEY_GLAZED_HAM_BLOCK.get());
-		feastBlock((FeastBlock) ModBlocks.SHEPHERDS_PIE_BLOCK.get());
-		feastBlock((FeastBlock) ModBlocks.GLEAMING_SALAD_BLOCK.get());
-		feastBlock((FeastBlock) ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get());
-
-		wildCropBlock(ModBlocks.SANDY_SHRUB.get());
-		wildCropBlock(ModBlocks.WILD_BEETROOTS.get());
-		wildCropBlock(ModBlocks.WILD_CABBAGES.get());
-		wildCropBlock(ModBlocks.WILD_POTATOES.get());
-		wildCropBlock(ModBlocks.WILD_TOMATOES.get());
-		wildCropBlock(ModBlocks.WILD_CARROTS.get());
-		wildCropBlock(ModBlocks.WILD_ONIONS.get());
-		doublePlantBlock(ModBlocks.WILD_RICE.get());
-
-		cookingPotBlock(ModBlocks.COOKING_POT.get());
-		skilletBlock(ModBlocks.SKILLET.get());
-		horizontalBlock(ModBlocks.STOVE.get(), state -> {
-			String name = blockName(ModBlocks.STOVE.get());
-			String suffix = state.getValue(StoveBlock.LIT) ? "_on" : "";
-
-			return models().orientableWithBottom(name + suffix,
-					resourceFDBlock(name + "_side"),
-					resourceFDBlock(name + "_front" + suffix),
-					resourceFDBlock(name + "_bottom"),
-					resourceFDBlock(name + "_top" + suffix));
-		});
-
-		Set<Block> canvasSigns = Sets.newHashSet(
-				// Standard
-				ModBlocks.CANVAS_SIGN.get(),
-				ModBlocks.HANGING_CANVAS_SIGN.get(),
-				ModBlocks.WHITE_CANVAS_SIGN.get(),
-				ModBlocks.WHITE_HANGING_CANVAS_SIGN.get(),
-				ModBlocks.ORANGE_CANVAS_SIGN.get(),
-				ModBlocks.ORANGE_HANGING_CANVAS_SIGN.get(),
-				ModBlocks.MAGENTA_CANVAS_SIGN.get(),
-				ModBlocks.MAGENTA_HANGING_CANVAS_SIGN.get(),
-				ModBlocks.LIGHT_BLUE_CANVAS_SIGN.get(),
-				ModBlocks.LIGHT_BLUE_HANGING_CANVAS_SIGN.get(),
-				ModBlocks.YELLOW_CANVAS_SIGN.get(),
-				ModBlocks.YELLOW_HANGING_CANVAS_SIGN.get(),
-				ModBlocks.LIME_CANVAS_SIGN.get(),
-				ModBlocks.LIME_HANGING_CANVAS_SIGN.get(),
-				ModBlocks.PINK_CANVAS_SIGN.get(),
-				ModBlocks.PINK_HANGING_CANVAS_SIGN.get(),
-				ModBlocks.GRAY_CANVAS_SIGN.get(),
-				ModBlocks.GRAY_HANGING_CANVAS_SIGN.get(),
-				ModBlocks.LIGHT_GRAY_CANVAS_SIGN.get(),
-				ModBlocks.LIGHT_GRAY_HANGING_CANVAS_SIGN.get(),
-				ModBlocks.CYAN_CANVAS_SIGN.get(),
-				ModBlocks.CYAN_HANGING_CANVAS_SIGN.get(),
-				ModBlocks.PURPLE_CANVAS_SIGN.get(),
-				ModBlocks.PURPLE_HANGING_CANVAS_SIGN.get(),
-				ModBlocks.BLUE_CANVAS_SIGN.get(),
-				ModBlocks.BLUE_HANGING_CANVAS_SIGN.get(),
-				ModBlocks.BROWN_CANVAS_SIGN.get(),
-				ModBlocks.BROWN_HANGING_CANVAS_SIGN.get(),
-				ModBlocks.GREEN_CANVAS_SIGN.get(),
-				ModBlocks.GREEN_HANGING_CANVAS_SIGN.get(),
-				ModBlocks.RED_CANVAS_SIGN.get(),
-				ModBlocks.RED_HANGING_CANVAS_SIGN.get(),
-				ModBlocks.BLACK_CANVAS_SIGN.get(),
-				ModBlocks.BLACK_HANGING_CANVAS_SIGN.get(),
-				// Wall
-				ModBlocks.CANVAS_WALL_SIGN.get(),
-				ModBlocks.HANGING_CANVAS_WALL_SIGN.get(),
-				ModBlocks.WHITE_CANVAS_WALL_SIGN.get(),
-				ModBlocks.WHITE_HANGING_CANVAS_WALL_SIGN.get(),
-				ModBlocks.ORANGE_CANVAS_WALL_SIGN.get(),
-				ModBlocks.ORANGE_HANGING_CANVAS_WALL_SIGN.get(),
-				ModBlocks.MAGENTA_CANVAS_WALL_SIGN.get(),
-				ModBlocks.MAGENTA_HANGING_CANVAS_WALL_SIGN.get(),
-				ModBlocks.LIGHT_BLUE_CANVAS_WALL_SIGN.get(),
-				ModBlocks.LIGHT_BLUE_HANGING_CANVAS_WALL_SIGN.get(),
-				ModBlocks.YELLOW_CANVAS_WALL_SIGN.get(),
-				ModBlocks.YELLOW_HANGING_CANVAS_WALL_SIGN.get(),
-				ModBlocks.LIME_CANVAS_WALL_SIGN.get(),
-				ModBlocks.LIME_HANGING_CANVAS_WALL_SIGN.get(),
-				ModBlocks.PINK_CANVAS_WALL_SIGN.get(),
-				ModBlocks.PINK_HANGING_CANVAS_WALL_SIGN.get(),
-				ModBlocks.GRAY_CANVAS_WALL_SIGN.get(),
-				ModBlocks.GRAY_HANGING_CANVAS_WALL_SIGN.get(),
-				ModBlocks.LIGHT_GRAY_CANVAS_WALL_SIGN.get(),
-				ModBlocks.LIGHT_GRAY_HANGING_CANVAS_WALL_SIGN.get(),
-				ModBlocks.CYAN_CANVAS_WALL_SIGN.get(),
-				ModBlocks.CYAN_HANGING_CANVAS_WALL_SIGN.get(),
-				ModBlocks.PURPLE_CANVAS_WALL_SIGN.get(),
-				ModBlocks.PURPLE_HANGING_CANVAS_WALL_SIGN.get(),
-				ModBlocks.BLUE_CANVAS_WALL_SIGN.get(),
-				ModBlocks.BLUE_HANGING_CANVAS_WALL_SIGN.get(),
-				ModBlocks.BROWN_CANVAS_WALL_SIGN.get(),
-				ModBlocks.BROWN_HANGING_CANVAS_WALL_SIGN.get(),
-				ModBlocks.GREEN_CANVAS_WALL_SIGN.get(),
-				ModBlocks.GREEN_HANGING_CANVAS_WALL_SIGN.get(),
-				ModBlocks.RED_CANVAS_WALL_SIGN.get(),
-				ModBlocks.RED_HANGING_CANVAS_WALL_SIGN.get(),
-				ModBlocks.BLACK_CANVAS_WALL_SIGN.get(),
-				ModBlocks.BLACK_HANGING_CANVAS_WALL_SIGN.get());
-
-		for (Block sign : canvasSigns) {
-			simpleBlock(sign, existingModel(ModBlocks.CANVAS_SIGN.get()));
+		RenderTypeModelTemplate(Identifier parent, String renderType, TextureSlot... slots) {
+			super(Optional.of(parent), Optional.empty(), slots);
+			this.renderType = renderType;
 		}
-	}
 
-	public void cookingPotBlock(Block block) {
-		getVariantBuilder(block).forAllStatesExcept(state -> {
-			String supportSuffix = switch (state.getValue(CookingPotBlock.SUPPORT)) {
-				case NONE -> "";
-				case TRAY -> "_tray";
-				case HANDLE -> "_handle";
-			};
-			return ConfiguredModel.builder()
-					.modelFile(existingModel(blockName(block) + supportSuffix))
-					.rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + DEFAULT_ANGLE_OFFSET) % 360)
-					.build();
-		}, CookingPotBlock.WATERLOGGED);
-	}
-
-	public void skilletBlock(Block block) {
-		getVariantBuilder(block).forAllStatesExcept(state -> {
-			String supportSuffix = state.getValue(SkilletBlock.SUPPORT) ? "_tray" : "";
-			return ConfiguredModel.builder()
-					.modelFile(existingModel(blockName(block) + supportSuffix))
-					.rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + DEFAULT_ANGLE_OFFSET) % 360)
-					.build();
-		}, SkilletBlock.WATERLOGGED);
-	}
-
-	public void ropeFenceGateBlock(Block block) {
-		getVariantBuilder(block).forAllStatesExcept(state -> {
-			String wallInfix = state.getValue(FenceGateBlock.IN_WALL) ? "_wall" : "";
-			ModelFile modelClosed = existingModel(blockName(block) + wallInfix);
-			ModelFile modelOpen = existingModel(blockName(block) + wallInfix + "_open");
-			return ConfiguredModel.builder()
-					.modelFile(state.getValue(FenceGateBlock.OPEN) ? modelOpen : modelClosed)
-					.rotationY((int) state.getValue(FenceGateBlock.FACING).toYRot())
-					.build();
-		}, FenceGateBlock.POWERED);
-	}
-
-	public void organicCompostBlock(Block block) {
-		getVariantBuilder(block).forAllStates(state -> {
-			int composting = state.getValue(OrganicCompostBlock.COMPOSTING);
-			String textureName = blockName(block) + "_stage" + composting / 2;
-			return ConfiguredModel.allYRotations(models().cubeAll(textureName, resourceFDBlock(textureName)), 0, false);
-		});
-	}
-
-	public void farmlandBlock(Block farmlandBlock, Block dirtBlock) {
-		getVariantBuilder(farmlandBlock).forAllStates(state -> {
-			int moisture = state.getValue(RichSoilFarmlandBlock.MOISTURE);
-			return ConfiguredModel.builder()
-					.modelFile(modelFarmland(blockName(farmlandBlock), blockName(dirtBlock), moisture == 7))
-					.build();
-		});
-	}
-
-	public void customDirectionalBlock(Block block, Function<BlockState, ModelFile> modelFunc, Property<?>... ignored) {
-		getVariantBuilder(block).forAllStatesExcept(state -> {
-			Direction dir = state.getValue(BlockStateProperties.FACING);
-			return ConfiguredModel.builder()
-					.modelFile(modelFunc.apply(state))
-					.rotationX(dir == Direction.DOWN ? 180 : dir.getAxis().isHorizontal() ? 90 : 0)
-					.rotationY(dir.getAxis().isVertical() ? 0 : ((int) dir.toYRot() + DEFAULT_ANGLE_OFFSET) % 360)
-					.build();
-		}, ignored);
-	}
-
-	public void customHorizontalBlock(Block block, Function<BlockState, ModelFile> modelFunc, Property<?>... ignored) {
-		getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder()
-				.modelFile(modelFunc.apply(state))
-				.rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + DEFAULT_ANGLE_OFFSET) % 360)
-				.build(), ignored);
-	}
-
-	public void stageBlock(Block block, IntegerProperty ageProperty, Property<?>... ignored) {
-		getVariantBuilder(block).forAllStatesExcept(state -> {
-			int age = state.getValue(ageProperty);
-			String stageName = blockName(block) + "_stage" + age;
-			return ConfiguredModel.builder()
-					.modelFile(models().cross(stageName, resourceFDBlock(stageName)).renderType("cutout")).build();
-		}, ignored);
-	}
-
-	public void customStageBlock(Block block, @Nullable ResourceLocation parent, String textureKey, IntegerProperty ageProperty, List<Integer> suffixes, Property<?>... ignored) {
-		getVariantBuilder(block).forAllStatesExcept(state -> {
-			int age = state.getValue(ageProperty);
-			String stageName = blockName(block) + "_stage";
-			stageName += suffixes.isEmpty() ? age : suffixes.get(Math.min(suffixes.size(), age));
-			if (parent == null) {
-				return ConfiguredModel.builder()
-						.modelFile(models().cross(stageName, resourceFDBlock(stageName)).renderType("cutout")).build();
+		@Override
+		public JsonObject createBaseTemplate(Identifier target, Map<TextureSlot, Material> slots) {
+			JsonObject result = new JsonObject();
+			this.model.ifPresent(model -> result.addProperty("parent", model.toString()));
+			result.addProperty("render_type", this.renderType);
+			if (!slots.isEmpty()) {
+				JsonObject textures = new JsonObject();
+				slots.forEach((slot, material) -> {
+					JsonElement value = Material.CODEC.encodeStart(JsonOps.INSTANCE, material).getOrThrow();
+					textures.add(slot.getId(), value);
+				});
+				result.add("textures", textures);
 			}
-			return ConfiguredModel.builder()
-					.modelFile(models().singleTexture(stageName, parent, textureKey, resourceFDBlock(stageName)).renderType("cutout")).build();
-		}, ignored);
-	}
-
-	public void riceRootBlock(Block block) {
-		getVariantBuilder(block).forAllStatesExcept(state -> {
-			int age = state.getValue(RiceBlock.AGE);
-			boolean isSupporting = state.getValue(RiceBlock.SUPPORTING) && age == 3;
-			String stageName = isSupporting
-					? blockName(block) + "_supporting"
-					: blockName(block) + "_stage" + age;
-			return ConfiguredModel.builder().modelFile(models().cross(stageName, resourceFDBlock(stageName))
-					.renderType("cutout")).build();
-		});
-	}
-
-	public void tomatoBlock(Block block, IntegerProperty ageProperty, BooleanProperty ropeloggedProperty, Property<?>... ignored) {
-		getVariantBuilder(block).forAllStatesExcept(state -> {
-			int age = state.getValue(ageProperty);
-			boolean ropelogged = state.getValue(ropeloggedProperty);
-			String stageName = blockName(block) + "_stage" + age;
-			String ropeloggedStageName = blockName(block) + "_old_stage" + age; // TODO: Make this a customStageBlock once we remove the ropelogged state for good.
-			return ConfiguredModel.builder()
-					.modelFile(ropelogged
-							? modelCropWithRope(ropeloggedStageName, "tomatoes_coiled_rope")
-							: models().singleTexture(stageName, resourceFDBlock("template_crop_cross"), "cross", resourceFDBlock(stageName)).renderType("cutout")).build();
-		}, ignored);
-	}
-
-	public void ropedTomatoBlock(Block block, IntegerProperty ageProperty, Property<?>... ignored) {
-		getVariantBuilder(block).forAllStatesExcept(state -> {
-			int age = state.getValue(ageProperty);
-			String stageName = blockName(block) + "_stage" + age;
-			return ConfiguredModel.builder()
-					.modelFile(modelCropWithRope(stageName, "tomatoes_coiled_rope")).build();
-		}, ignored);
-	}
-
-	public void wildCropBlock(Block block) {
-		this.wildCropBlock(block, false);
-	}
-
-	public void wildCropBlock(Block block, boolean isBushCrop) {
-		if (isBushCrop) {
-			this.simpleBlock(block, models().singleTexture(blockName(block), resourceFDBlock("template_bush_crop"), "crop", resourceFDBlock(blockName(block))).renderType("cutout"));
-		} else {
-			this.simpleBlock(block, models().cross(blockName(block), resourceFDBlock(blockName(block))).renderType("cutout"));
+			return result;
 		}
-	}
-
-	public void crateBlock(Block block, String cropName) {
-		this.simpleBlock(block,
-				models().cubeBottomTop(blockName(block), resourceFDBlock(cropName + "_crate_side"), resourceFDBlock("crate_bottom"), resourceFDBlock(cropName + "_crate_top")));
-	}
-
-	public void cabinetBlock(Block block, String woodType) {
-		this.horizontalBlock(block, state -> {
-			String suffix = state.getValue(CabinetBlock.OPEN) ? "_open" : "";
-			return models().orientable(blockName(block) + suffix,
-					resourceFDBlock(woodType + "_cabinet_side"),
-					resourceFDBlock(woodType + "_cabinet_front" + suffix),
-					resourceFDBlock(woodType + "_cabinet_top"));
-		});
-	}
-
-	public void feastBlock(FeastBlock block) {
-		getVariantBuilder(block).forAllStates(state -> {
-			IntegerProperty servingsProperty = block.getServingsProperty();
-			int servings = state.getValue(servingsProperty);
-
-			String suffix = "_stage" + (block.getMaxServings() - servings);
-
-			if (servings == 0) {
-				suffix = block.hasLeftovers ? "_leftovers" : "_stage" + (servingsProperty.getPossibleValues().toArray().length - 2);
-			}
-
-			return ConfiguredModel.builder()
-					.modelFile(existingModel(blockName(block) + suffix))
-					.rotationY(((int) state.getValue(FeastBlock.FACING).toYRot() + DEFAULT_ANGLE_OFFSET) % 360)
-					.build();
-		});
-	}
-
-	public void doublePlantBlock(Block block) {
-		getVariantBuilder(block)
-				.partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)
-				.modelForState().modelFile(models().cross(blockName(block) + "_bottom", resourceFDBlock(blockName(block) + "_bottom")).renderType("cutout")).addModel()
-				.partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER)
-				.modelForState().modelFile(models().cross(blockName(block) + "_top", resourceFDBlock(blockName(block) + "_top")).renderType("cutout")).addModel();
-	}
-
-	/**
-	 * Creates blockstates for a pie whose model is based on the pie template.
-	 */
-	public void pieBlock(Block block) {
-		getVariantBuilder(block).forAllStates(state -> {
-			int bites = state.getValue(PieBlock.BITES);
-			return ConfiguredModel.builder()
-					.modelFile(bites > 0 ? modelPieSlice(blockName(block), bites) : modelPie(blockName(block)))
-					.rotationY(((int) state.getValue(PieBlock.FACING).toYRot() + DEFAULT_ANGLE_OFFSET) % 360)
-					.build();
-		});
-	}
-
-	/**
-	 * Creates blockstates for a pie whose model is custom, in an existing file.
-	 */
-	public void customPieBlock(Block block) {
-		getVariantBuilder(block).forAllStates(state -> {
-			int bites = state.getValue(PieBlock.BITES);
-			String suffix = bites > 0 ? "_slice" + bites : "";
-			return ConfiguredModel.builder()
-					.modelFile(existingModel(blockName(block) + suffix))
-					.rotationY(((int) state.getValue(PieBlock.FACING).toYRot() + DEFAULT_ANGLE_OFFSET) % 360)
-					.build();
-		});
-	}
-
-	// Model Functions --------------------------
-
-	public ConfiguredModel[] cubeRandomRotation(Block block, String suffix) {
-		String formattedName = blockName(block) + (suffix.isEmpty() ? "" : "_" + suffix);
-		return ConfiguredModel.allYRotations(models().cubeAll(formattedName, resourceFDBlock(formattedName)), 0, false);
-	}
-
-	private ModelFile modelCubeBottomTop(String baseName) {
-		return models().withExistingParent(baseName, resourceMCBlock("cube_bottom_top"))
-				.texture("bottom", resourceFDBlock(baseName + "_bottom"))
-				.texture("side", resourceFDBlock(baseName + "_side"))
-				.texture("top", resourceFDBlock(baseName + "_top"));
-	}
-
-	private ModelFile modelBasket(String baseName) {
-		return models().withExistingParent(baseName, resourceFDBlock("template_basket"))
-				.texture("bottom", resourceFDBlock(baseName + "_bottom"))
-				.texture("side", resourceFDBlock(baseName + "_side"))
-				.texture("top", resourceFDBlock(baseName + "_top"))
-				.texture("handle", resourceFDBlock(baseName + "_handle"));
-	}
-
-	private ModelFile modelCropCross(String baseName) {
-		return models().withExistingParent(baseName, resourceFDBlock("template_crop_cross"))
-				.texture("cross", resourceFDBlock(baseName))
-				.renderType("cutout");
-	}
-
-	private ModelFile modelCropWithRope(String baseName, String ropeSideTextureName) {
-		return models().withExistingParent(baseName, resourceFDBlock("template_crop_with_rope"))
-				.texture("crop", resourceFDBlock(baseName))
-				.texture("rope_side", resourceFDBlock(ropeSideTextureName))
-				.texture("rope_top", resourceFDBlock("rope_top"))
-				.renderType("cutout");
-	}
-
-	private ModelFile modelPie(String baseName) {
-		return models().withExistingParent(baseName, resourceFDBlock("template_pie"))
-				.texture("bottom", resourceFDBlock("pie_bottom"))
-				.texture("side", resourceFDBlock("pie_side"))
-				.texture("top", resourceFDBlock(baseName + "_top"));
-	}
-
-	private ModelFile modelPieSlice(String baseName, int bites) {
-		return models().withExistingParent(baseName + "_slice" + bites, resourceFDBlock("template_pie_slice" + bites))
-				.texture("bottom", resourceFDBlock("pie_bottom"))
-				.texture("side", resourceFDBlock("pie_side"))
-				.texture("inner", resourceFDBlock(baseName + "_inner"))
-				.texture("top", resourceFDBlock(baseName + "_top"));
-	}
-
-	private ModelFile modelFarmland(String farmlandName, String dirtName, boolean moist) {
-		String moistSuffix = moist ? "_moist" : "";
-		return models().withExistingParent(farmlandName + moistSuffix, resourceFDBlock("template_farmland_custom"))
-				.texture("bottom", resourceFDBlock(dirtName))
-				.texture("side", resourceFDBlock(moist ? farmlandName + moistSuffix + "_side" : dirtName))
-				.texture("top", resourceFDBlock(farmlandName + moistSuffix));
 	}
 }

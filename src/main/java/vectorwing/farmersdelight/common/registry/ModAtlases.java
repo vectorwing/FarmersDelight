@@ -1,8 +1,7 @@
 package vectorwing.farmersdelight.common.registry;
 
-import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.DyeColor;
 import vectorwing.farmersdelight.FarmersDelight;
 
@@ -14,8 +13,8 @@ import java.util.stream.Collectors;
 
 public class ModAtlases
 {
-	public static final Material BLANK_CANVAS_SIGN_MATERIAL = new Material(Sheets.SIGN_SHEET, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "entity/signs/canvas"));
-	public static final Material BLANK_HANGING_CANVAS_SIGN_MATERIAL = new Material(Sheets.SIGN_SHEET, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "entity/signs/hanging/canvas"));
+	public static final Material BLANK_CANVAS_SIGN_MATERIAL = new Material(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "entity/signs/canvas"));
+	public static final Material BLANK_HANGING_CANVAS_SIGN_MATERIAL = new Material(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "entity/signs/hanging/canvas"));
 
 	public static final Map<DyeColor, Material> DYED_CANVAS_SIGN_MATERIALS =
 			Arrays.stream(DyeColor.values()).collect(Collectors.toMap(Function.identity(), ModAtlases::createCanvasSignMaterial));
@@ -23,11 +22,11 @@ public class ModAtlases
 			Arrays.stream(DyeColor.values()).collect(Collectors.toMap(Function.identity(), ModAtlases::createHangingCanvasSignMaterial));
 
 	public static Material createCanvasSignMaterial(DyeColor dyeType) {
-		return new Material(Sheets.SIGN_SHEET, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "entity/signs/canvas_" + dyeType.getName()));
+		return new Material(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "entity/signs/canvas_" + dyeType.getName()));
 	}
 
 	public static Material createHangingCanvasSignMaterial(DyeColor dyeType) {
-		return new Material(Sheets.SIGN_SHEET, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "entity/signs/hanging/canvas_" + dyeType.getName()));
+		return new Material(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "entity/signs/hanging/canvas_" + dyeType.getName()));
 	}
 
 	public static Material getCanvasSignMaterial(@Nullable DyeColor dyeColor) {

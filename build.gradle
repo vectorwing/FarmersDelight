@@ -3,7 +3,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '1.0.0'
+    id 'net.neoforged.moddev' version '2.0.142'
 }
 
 tasks.named('wrapper', Wrapper).configure {
@@ -27,7 +27,7 @@ repositories {
     maven { url "https://maven.ryanliptak.com/" }
     maven {
         // EMI
-        url = "https://maven.terraformersmc.com/"
+        url = "https://maven.terraformersmc.com/releases/"
     }
 }
 
@@ -35,15 +35,10 @@ base {
     archivesName = 'FarmersDelight'
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
 neoForge {
     version = project.neo_version
-
-    parchment {
-        mappingsVersion = project.parchment_mappings_version
-        minecraftVersion = project.parchment_minecraft_version
-    }
 
     // This line is optional. Access Transformers are automatically detected
     // accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
@@ -59,6 +54,9 @@ neoForge {
         server {
             server()
 //            programArgument '--nogui'
+            providers.gradleProperty('fd.serverWorld').orNull?.with {
+                programArguments.addAll '--world', it
+            }
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
@@ -70,11 +68,18 @@ neoForge {
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
-        data {
-            data()
+        clientData {
+            clientData()
 
             // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
             // gameDirectory = project.file('run-data')
+
+            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+
+        serverData {
+            serverData()
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
             programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
@@ -107,27 +112,46 @@ sourceSets.main.resources {
     srcDir 'src/generated/resources'
 }
 
+def enableEmiIntegration = providers.gradleProperty('fd.enableEmiIntegration').map { it.toBoolean() }.orElse(false)
+def enableCraftTweakerIntegration = providers.gradleProperty('fd.enableCraftTweakerIntegration').map { it.toBoolean() }.orElse(false)
+
+sourceSets.main.java {
+    if (!enableEmiIntegration.get()) {
+        exclude 'vectorwing/farmersdelight/integration/emi/**'
+    }
+    if (!enableCraftTweakerIntegration.get()) {
+        exclude 'vectorwing/farmersdelight/integration/crafttweaker/**'
+    }
+}
+
 configurations {
     runtimeClasspath.extendsFrom localRuntime
 }
 
 dependencies {
-    // JEI
-    compileOnly "mezz.jei:jei-${jei_minecraft}-common-api:${jei_version}"
-    compileOnly "mezz.jei:jei-${jei_minecraft}-neoforge-api:${jei_version}"
-//    localRuntime "mezz.jei:jei-${jei_minecraft}-neoforge:${jei_version}"
+    testImplementation platform('org.junit:junit-bom:5.11.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.4'
 
-    // EMI
-    compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
-    runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
+    // JEI
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
+
+    // These integrations are disabled by default until 26.2-compatible APIs are published.
+    if (enableEmiIntegration.get()) {
+        compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
+    }
+
+    if (enableCraftTweakerIntegration.get()) {
+        def ctDep = "com.blamejared.crafttweaker:CraftTweaker-neoforge-${crafttweaker_minecraft}:${crafttweaker_version}"
+        compileOnly ctDep
+    }
 
     // AppleSkin
     compileOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}:api"
-    runtimeOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}"
-
-    def ctDep = "com.blamejared.crafttweaker:CraftTweaker-neoforge-${crafttweaker_minecraft}:${crafttweaker_version}"
-    compileOnly ctDep
-    runtimeOnly ctDep
+    if (providers.gradleProperty('fd.includeAppleSkinRuntime').map { it.toBoolean() }.orElse(false).get()) {
+        runtimeOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}"
+    }
 }
 
 tasks.withType(ProcessResources).configureEach {
@@ -168,15 +192,13 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
 
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}
+
 idea {
     module {
         downloadSources = true
         downloadJavadoc = true
     }
 }
-
-////////////////
-
-//compileJava {
-//    options.compilerArgs << "-Acrafttweaker.processor.document.output_directory=${file('docsOut')}"
-//}

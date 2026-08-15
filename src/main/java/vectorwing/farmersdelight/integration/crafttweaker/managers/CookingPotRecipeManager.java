@@ -14,7 +14,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import org.openzen.zencode.java.ZenCodeType;
-import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
+import vectorwing.farmersdelight.common.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.utility.ListUtils;
@@ -67,7 +67,7 @@ public class CookingPotRecipeManager implements IRecipeManager
                                 cookingPotRecipeBookTab,
                                 ListUtils.mapArrayIndexSet(inputs,
                                         IIngredient::asVanillaIngredient,
-                                        NonNullList.withSize(inputs.length, Ingredient.EMPTY)),
+                                        NonNullList.withSize(inputs.length, Ingredient.of())),
                                 output.getInternal(),
                                 container == null ? ItemStack.EMPTY : container.getInternal(),
                                 experience,

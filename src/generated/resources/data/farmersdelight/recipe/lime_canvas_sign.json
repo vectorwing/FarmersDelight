@@ -1,17 +1,11 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "fd_canvas_sign",
   "ingredients": [
-    {
-      "tag": "farmersdelight:canvas_signs"
-    },
-    {
-      "tag": "c:dyes/lime"
-    }
+    "#farmersdelight:canvas_signs",
+    "#c:dyes/lime"
   ],
   "result": {
-    "count": 1,
     "id": "farmersdelight:lime_canvas_sign"
   }
 }

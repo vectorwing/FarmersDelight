@@ -12,7 +12,6 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "add": false,
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 0.8,
@@ -37,7 +36,6 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "add": false,
               "count": {
                 "type": "minecraft:uniform",
                 "max": 4.0,
@@ -52,7 +50,6 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "add": false,
               "count": {
                 "type": "minecraft:uniform",
                 "max": 4.0,
@@ -67,7 +64,6 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "add": false,
               "count": {
                 "type": "minecraft:uniform",
                 "max": 4.0,
@@ -96,7 +92,6 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "add": false,
               "count": {
                 "type": "minecraft:uniform",
                 "max": 12.0,
