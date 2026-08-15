@@ -61,7 +61,7 @@ public class CuttingBoardRecipeManager implements IRecipeManager
                         tool.asVanillaIngredient(),
                         ListUtils.mapArrayIndexSet(results,
                                 (stack) -> new ChanceResult(stack.getData().getInternal(), (float) stack.getPercentage()),
-                                NonNullList.withSize(results.length, ChanceResult.EMPTY)),
+                                NonNullList.withSize(results.length, null)),
                         BuiltInRegistries.SOUND_EVENT.getOptional(Identifier.parse(sound)))),
                 ""));
     }

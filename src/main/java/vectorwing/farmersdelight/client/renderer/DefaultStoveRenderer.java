@@ -47,8 +47,8 @@ public class DefaultStoveRenderer implements BlockEntityRenderer<StoveBlockEntit
 		Level level = stove.getLevel();
 		var inventory = stove.getItems();
 		List<RenderedItem> items = new ArrayList<>();
-		for (int i = 0; i < inventory.getSlots(); ++i) {
-			ItemStack stack = inventory.getStackInSlot(i);
+		for (int i = 0; i < inventory.size(); ++i) {
+			ItemStack stack = inventory.getStack(i);
 			if (stack.isEmpty()) {
 				continue;
 			}

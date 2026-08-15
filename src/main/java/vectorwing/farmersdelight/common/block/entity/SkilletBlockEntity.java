@@ -21,12 +21,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import vectorwing.farmersdelight.common.block.entity.inventory.ItemStackInventory;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import vectorwing.farmersdelight.common.block.SkilletBlock;
-import vectorwing.farmersdelight.common.block.entity.inventory.ItemHandlerResourceHandler;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModParticleTypes;
@@ -38,8 +36,8 @@ import java.util.Optional;
 
 public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlockEntity, Clearable
 {
-	private final ItemStackHandler inventory = createHandler();
-	private final ResourceHandler<ItemResource> transferInventory = new ItemHandlerResourceHandler(inventory, slot -> true, slot -> true, originalState -> inventoryChanged());
+	private final ItemStackInventory inventory = createHandler();
+	private final ResourceHandler<ItemResource> transferInventory = inventory;
 	private int cookingTime;
 	private int cookingTimeTotal;
 
@@ -109,7 +107,7 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 						direction.getStepX() * 0.08F, 0.25F, direction.getStepZ() * 0.08F);
 
 				cookingTime = 0;
-				inventory.extractItem(0, 1, false);
+				inventory.extract(0, 1, false);
 			}
 		}
 	}
@@ -169,7 +167,7 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 				return addedStack;
 			}
 			boolean wasEmpty = getStoredStack().isEmpty();
-			ItemStack remainderStack = inventory.insertItem(0, addedStack.copy(), false);
+			ItemStack remainderStack = inventory.insert(0, addedStack.copy(), false);
 			if (!ItemStack.matches(remainderStack, addedStack)) {
 				cookingTimeTotal = SkilletBlock.getSkilletCookingTime(recipe.get().value().cookingTime(), fireAspectLevel);
 				cookingTime = 0;
@@ -185,10 +183,10 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 	}
 
 	public ItemStack removeItem() {
-		return inventory.extractItem(0, getStoredStack().getMaxStackSize(), false);
+		return inventory.extract(0, getStoredStack().getMaxStackSize(), false);
 	}
 
-	public IItemHandler getInventory() {
+	public ItemStackInventory getInventory() {
 		return inventory;
 	}
 
@@ -197,18 +195,18 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 	}
 
 	public ItemStack getStoredStack() {
-		return inventory.getStackInSlot(0);
+		return inventory.getStack(0);
 	}
 
 	public boolean hasStoredStack() {
 		return !getStoredStack().isEmpty();
 	}
 
-	private ItemStackHandler createHandler() {
-		return new ItemStackHandler()
+	private ItemStackInventory createHandler() {
+		return new ItemStackInventory(1)
 		{
 			@Override
-			protected void onContentsChanged(int slot) {
+			protected void onContentsChanged(int slot, ItemStack previousContents) {
 				inventoryChanged();
 			}
 		};

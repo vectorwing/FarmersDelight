@@ -49,7 +49,7 @@ public class CTItemAbilityIngredient implements IIngredient
 
 	@Override
 	public IItemStack[] getItems() {
-		ItemStack[] stacks = (ItemStack[]) ingredient.getItems().toArray();
+		ItemStack[] stacks = ingredient.items().map(ItemStack::new).toArray(ItemStack[]::new);
 		IItemStack[] out = new IItemStack[stacks.length];
 		for (int i = 0; i < stacks.length; i++) {
 			out[i] = new MCItemStackMutable(stacks[i]);

@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.common.crafting;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderLookup;
@@ -20,8 +21,7 @@ import net.minecraft.world.item.crafting.display.ShapelessCraftingRecipeDisplay;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.RecipeMatcher;
-import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
-import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
+import vectorwing.farmersdelight.common.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeBookCategories;
 import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
@@ -31,9 +31,18 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class CookingPotRecipe implements Recipe<RecipeWrapper>
+public class CookingPotRecipe implements Recipe<CookingPotRecipeInput>
 {
 	public static final int INPUT_SLOTS = 6;
+	private static final Codec<List<Ingredient>> INGREDIENTS_CODEC = Codec.list(Ingredient.CODEC).validate(ingredients -> {
+		if (ingredients.isEmpty()) {
+			return DataResult.error(() -> "Cooking pot recipes must define at least one ingredient");
+		}
+		if (ingredients.size() > INPUT_SLOTS) {
+			return DataResult.error(() -> "Cooking pot recipes support at most " + INPUT_SLOTS + " ingredients");
+		}
+		return DataResult.success(ingredients);
+	});
 
 	private final String group;
 	private final CookingPotRecipeBookTab tab;
@@ -94,7 +103,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 	}
 
 	@Override
-	public ItemStack assemble(RecipeWrapper inv) {
+	public ItemStack assemble(CookingPotRecipeInput inv) {
 		return this.output.create();
 	}
 
@@ -107,7 +116,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 	}
 
 	@Override
-	public boolean matches(RecipeWrapper inv, Level level) {
+	public boolean matches(CookingPotRecipeInput inv, Level level) {
 		java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
 		int i = 0;
 
@@ -126,12 +135,12 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 	}
 
 	@Override
-	public RecipeSerializer<? extends Recipe<RecipeWrapper>> getSerializer() {
+	public RecipeSerializer<? extends Recipe<CookingPotRecipeInput>> getSerializer() {
 		return ModRecipeSerializers.COOKING.get();
 	}
 
 	@Override
-	public RecipeType<? extends Recipe<RecipeWrapper>> getType() {
+	public RecipeType<? extends Recipe<CookingPotRecipeInput>> getType() {
 		return ModRecipeTypes.COOKING.get();
 	}
 
@@ -196,7 +205,7 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 		public static final MapCodec<CookingPotRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
 				Codec.STRING.optionalFieldOf("group", "").forGetter(CookingPotRecipe::getGroup),
 				CookingPotRecipeBookTab.CODEC.optionalFieldOf("recipe_book_tab", CookingPotRecipeBookTab.MISC).forGetter(CookingPotRecipe::getRecipeBookTab),
-				Codec.list(Ingredient.CODEC).fieldOf("ingredients").xmap(ingredients -> {
+				INGREDIENTS_CODEC.fieldOf("ingredients").xmap(ingredients -> {
 					NonNullList<Ingredient> nonNullList = NonNullList.create();
 					nonNullList.addAll(ingredients);
 					return nonNullList;

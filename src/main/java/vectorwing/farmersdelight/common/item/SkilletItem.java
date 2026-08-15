@@ -25,6 +25,7 @@ import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipePropertySet;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -161,6 +162,9 @@ public class SkilletItem extends BlockItem
 				player.startUsingItem(hand);
 				return InteractionResult.PASS;
 			}
+			if (level.isClientSide()) {
+				return hasCookingRecipe(cookingStack, level) ? InteractionResult.CONSUME : InteractionResult.PASS;
+			}
 
 			Optional<RecipeHolder<CampfireCookingRecipe>> recipe = getCookingRecipe(cookingStack, level);
 			if (recipe.isPresent()) {
@@ -195,7 +199,7 @@ public class SkilletItem extends BlockItem
 					//why does it need to play early? idk
 					//plays instantly right before it lands & on client only so its instant. cant be done in statement above as that might not run fo player as stack is sent when updated
 					level.playSound(player, entity, ModSounds.BLOCK_SKILLET_ADD_FOOD.get(), SoundSource.PLAYERS, 0.4F, level.getRandom().nextFloat() * 0.2F + 0.9F);
-				} else if (level.isClientSide() && level.getRandom().nextInt(50) == 0 && l < FLIP_TIME - 8 || l > FLIP_TIME - 3) {
+				} else if (level.isClientSide() && (level.getRandom().nextInt(50) == 0 && l < FLIP_TIME - 8 || l > FLIP_TIME - 3)) {
 					level.playSound(null, entity, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.PLAYERS, 0.4F, level.getRandom().nextFloat() * 0.2F + 0.9F);
 				}
 			} else if (level.isClientSide() && level.getRandom().nextInt(50) == 0) {
@@ -276,6 +280,16 @@ public class SkilletItem extends BlockItem
 			return serverLevel.recipeAccess().getRecipeFor(RecipeType.CAMPFIRE_COOKING, new SingleRecipeInput(stack), serverLevel);
 		}
 		return Optional.empty();
+	}
+
+	private static boolean hasCookingRecipe(ItemStack stack, Level level) {
+		if (stack.isEmpty()) {
+			return false;
+		}
+		if (level.isClientSide()) {
+			return level.recipeAccess().propertySet(RecipePropertySet.CAMPFIRE_INPUT).test(stack);
+		}
+		return getCookingRecipe(stack, level).isPresent();
 	}
 
 	@Override

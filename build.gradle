@@ -112,10 +112,16 @@ sourceSets.main.resources {
     srcDir 'src/generated/resources'
 }
 
+def enableEmiIntegration = providers.gradleProperty('fd.enableEmiIntegration').map { it.toBoolean() }.orElse(false)
+def enableCraftTweakerIntegration = providers.gradleProperty('fd.enableCraftTweakerIntegration').map { it.toBoolean() }.orElse(false)
+
 sourceSets.main.java {
-    // Re-enable once EMI and CraftTweaker publish 26.2-compatible NeoForge APIs.
-    exclude 'vectorwing/farmersdelight/integration/emi/**'
-    exclude 'vectorwing/farmersdelight/integration/crafttweaker/**'
+    if (!enableEmiIntegration.get()) {
+        exclude 'vectorwing/farmersdelight/integration/emi/**'
+    }
+    if (!enableCraftTweakerIntegration.get()) {
+        exclude 'vectorwing/farmersdelight/integration/crafttweaker/**'
+    }
 }
 
 configurations {
@@ -123,14 +129,20 @@ configurations {
 }
 
 dependencies {
+    testImplementation platform('org.junit:junit-bom:5.11.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.4'
+
     // JEI
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
 
-    if (providers.gradleProperty('fd.includeUnavailableIntegrations').map { it.toBoolean() }.orElse(false).get()) {
-        // EMI and CraftTweaker do not publish usable 26.2 NeoForge APIs yet.
+    // These integrations are disabled by default until 26.2-compatible APIs are published.
+    if (enableEmiIntegration.get()) {
         compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
+    }
 
+    if (enableCraftTweakerIntegration.get()) {
         def ctDep = "com.blamejared.crafttweaker:CraftTweaker-neoforge-${crafttweaker_minecraft}:${crafttweaker_version}"
         compileOnly ctDep
     }
@@ -178,6 +190,10 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
 }
 
 idea {

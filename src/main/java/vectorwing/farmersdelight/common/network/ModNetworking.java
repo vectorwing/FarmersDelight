@@ -9,6 +9,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.item.SkilletItem;
+import vectorwing.farmersdelight.common.item.component.ItemStackWrapper;
 import vectorwing.farmersdelight.common.network.payload.FlipSkilletPayload;
 import vectorwing.farmersdelight.common.network.payload.RichSoilBoostParticlesPayload;
 import vectorwing.farmersdelight.common.registry.ModDataComponents;
@@ -34,7 +35,9 @@ public class ModNetworking
     {
         public static void handleFlipSkillet(FlipSkilletPayload payload, IPayloadContext context) {
             ItemStack stack = context.player().getUseItem();
-            if (stack.getItem() instanceof SkilletItem) {
+            if (context.player().isUsingItem()
+                    && stack.getItem() instanceof SkilletItem
+                    && !stack.getOrDefault(ModDataComponents.SKILLET_INGREDIENT, ItemStackWrapper.EMPTY).getStack().isEmpty()) {
                 stack.set(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get(), context.player().level().getGameTime());
             }
         }

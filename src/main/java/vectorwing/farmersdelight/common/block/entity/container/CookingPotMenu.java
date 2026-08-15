@@ -13,12 +13,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.items.SlotItemHandler;
-import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+import vectorwing.farmersdelight.common.block.entity.inventory.ItemStackInventory;
+import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
+import vectorwing.farmersdelight.common.block.entity.inventory.ItemStackInventory;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
+import vectorwing.farmersdelight.common.crafting.CookingPotRecipeInput;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModMenuTypes;
 import vectorwing.farmersdelight.common.tag.ModTags;
@@ -35,7 +36,7 @@ public class CookingPotMenu extends RecipeBookMenu
 	public static final int INDEX_OUTPUT = 8;
 
 	public final CookingPotBlockEntity blockEntity;
-	public final ItemStackHandler inventory;
+	public final ItemStackInventory inventory;
 	private final ContainerData cookingPotData;
 	private final ContainerLevelAccess canInteractWithCallable;
 	protected final Level level;
@@ -60,7 +61,7 @@ public class CookingPotMenu extends RecipeBookMenu
 		int borderSlotSize = 18;
 		for (int row = 0; row < 2; ++row) {
 			for (int column = 0; column < 3; ++column) {
-				this.addSlot(new SlotItemHandler(inventory, (row * 3) + column,
+				this.addSlot(new ResourceHandlerSlot(inventory, inventory::set, (row * 3) + column,
 						inputStartX + (column * borderSlotSize),
 						inputStartY + (row * borderSlotSize)));
 			}
@@ -70,7 +71,7 @@ public class CookingPotMenu extends RecipeBookMenu
 		this.addSlot(new CookingPotMealSlot(inventory, 6, 124, 26));
 
 		// Bowl Input
-		this.addSlot(new SlotItemHandler(inventory, 7, 92, 55)
+		this.addSlot(new ResourceHandlerSlot(inventory, inventory::set, 7, 92, 55)
 		{
 			@Override
 			public Identifier getNoItemIcon() {
@@ -166,7 +167,7 @@ public class CookingPotMenu extends RecipeBookMenu
 	@Override
 	public void fillCraftSlotsStackedContents(StackedItemContents helper) {
 		for (int i = 0; i < INDEX_MEAL; i++) {
-			ItemStack stack = inventory.getStackInSlot(i);
+			ItemStack stack = inventory.getStack(i);
 			if (!stack.isEmpty()) {
 				helper.accountStack(stack);
 			}
@@ -175,7 +176,7 @@ public class CookingPotMenu extends RecipeBookMenu
 
 	public void clearCraftingContent() {
 		for (int i = 0; i < 6; i++) {
-			this.inventory.setStackInSlot(i, ItemStack.EMPTY);
+			this.inventory.setStack(i, ItemStack.EMPTY);
 		}
 	}
 
@@ -218,7 +219,7 @@ public class CookingPotMenu extends RecipeBookMenu
 
 			@Override
 			public boolean recipeMatches(RecipeHolder<CookingPotRecipe> recipe) {
-				return recipe.value().matches(new RecipeWrapper(CookingPotMenu.this.inventory), level);
+				return recipe.value().matches(new CookingPotRecipeInput(CookingPotMenu.this.inventory), level);
 			}
 		}, getGridWidth(), getGridHeight(), inputSlots, inputSlots, inventory, typedRecipe, useMaxItems, isCreative);
 	}

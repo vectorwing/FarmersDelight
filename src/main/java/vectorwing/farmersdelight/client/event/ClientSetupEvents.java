@@ -12,6 +12,7 @@ import net.minecraft.resources.Identifier;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.client.gui.CookingPotTooltip;
+import vectorwing.farmersdelight.common.item.component.CookingPotTooltipComponent;
 import vectorwing.farmersdelight.client.gui.HUDOverlays;
 import vectorwing.farmersdelight.client.particle.SparkleParticle;
 import vectorwing.farmersdelight.client.particle.StarParticle;
@@ -40,7 +41,7 @@ public class ClientSetupEvents
 
 	@SubscribeEvent
 	public static void registerCustomTooltipRenderers(RegisterClientTooltipComponentFactoriesEvent event) {
-		event.register(CookingPotTooltip.CookingPotTooltipComponent.class, CookingPotTooltip::new);
+		event.register(CookingPotTooltipComponent.class, CookingPotTooltip::new);
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOW)

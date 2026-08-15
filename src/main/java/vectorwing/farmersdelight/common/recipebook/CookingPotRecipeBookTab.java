@@ -1,12 +1,11 @@
-package vectorwing.farmersdelight.client.recipebook;
+package vectorwing.farmersdelight.common.recipebook;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import net.minecraft.util.StringRepresentable;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumSet;
-import net.minecraft.util.StringRepresentable;
-import org.jetbrains.annotations.NotNull;
 
 public enum CookingPotRecipeBookTab implements StringRepresentable
 {

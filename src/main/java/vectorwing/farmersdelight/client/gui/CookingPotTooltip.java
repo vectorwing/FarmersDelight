@@ -6,8 +6,8 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
+import vectorwing.farmersdelight.common.item.component.CookingPotTooltipComponent;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
 public class CookingPotTooltip implements ClientTooltipComponent
@@ -19,7 +19,7 @@ public class CookingPotTooltip implements ClientTooltipComponent
 	private final ItemStack mealStack;
 
 	public CookingPotTooltip(CookingPotTooltipComponent tooltip) {
-		this.mealStack = tooltip.mealStack;
+		this.mealStack = tooltip.mealStack();
 	}
 
 	@Override
@@ -63,7 +63,4 @@ public class CookingPotTooltip implements ClientTooltipComponent
 		}
 	}
 
-	public record CookingPotTooltipComponent(ItemStack mealStack) implements TooltipComponent
-	{
-	}
 }

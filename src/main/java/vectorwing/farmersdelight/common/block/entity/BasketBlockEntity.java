@@ -20,8 +20,7 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.BasketBlock;
-import vectorwing.farmersdelight.common.block.entity.inventory.BasketInvWrapper;
-import vectorwing.farmersdelight.common.block.entity.inventory.ItemHandlerResourceHandler;
+import vectorwing.farmersdelight.common.block.entity.inventory.BasketResourceHandler;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
@@ -31,21 +30,17 @@ import java.util.function.BooleanSupplier;
 public class BasketBlockEntity extends RandomizableContainerBlockEntity implements Basket
 {
 	private NonNullList<ItemStack> items = NonNullList.withSize(27, ItemStack.EMPTY);
+	private final BasketResourceHandler transferInventory;
 	private int transferCooldown = -1;
 
 	public BasketBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntityTypes.BASKET.get(), pos, state);
+		this.transferInventory = new BasketResourceHandler(this);
 	}
 
 	@SubscribeEvent
 	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-		event.registerBlockEntity(Capabilities.Item.BLOCK, ModBlockEntityTypes.BASKET.get(), (basket, side) ->
-				new ItemHandlerResourceHandler(new BasketInvWrapper(basket), slot -> true, slot -> true, originalState -> {
-					if (originalState.stream().allMatch(ItemStack::isEmpty) && !basket.isEmpty() && !basket.isOnCustomCooldown()) {
-						basket.setCooldown(8);
-					}
-					basket.setChanged();
-				}));
+		event.registerBlockEntity(Capabilities.Item.BLOCK, ModBlockEntityTypes.BASKET.get(), (basket, side) -> basket.transferInventory);
 	}
 
 	@Override

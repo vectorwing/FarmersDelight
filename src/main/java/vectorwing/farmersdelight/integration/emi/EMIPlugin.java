@@ -7,7 +7,9 @@ import dev.emi.emi.api.recipe.EmiCraftingRecipe;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -37,16 +39,14 @@ public class EMIPlugin implements EmiPlugin {
         registry.addWorkstation(FDRecipeCategories.CUTTING, FDRecipeWorkstations.CUTTING_BOARD);
         registry.addRecipeHandler(ModMenuTypes.COOKING_POT.get(), new CookingPotEmiRecipeHandler());
 
-        for (RecipeHolder<CookingPotRecipe> recipeHolder : registry.getRecipeManager().getAllRecipesFor(ModRecipeTypes.COOKING.get())) {
-            CookingPotRecipe recipe = recipeHolder.value();
-            registry.addRecipe(new CookingPotEmiRecipe(recipeHolder.id(), recipe.getIngredients().stream().map(EmiIngredient::of).toList(),
-                    EmiStack.of(recipe.getResultItem(Minecraft.getInstance().level.registryAccess())), EmiStack.of(recipe.getOutputContainer()), recipe.getCookTime(), recipe.getExperience()));
-        }
-
-        for (RecipeHolder<CuttingBoardRecipe> recipeHolder : registry.getRecipeManager().getAllRecipesFor(ModRecipeTypes.CUTTING.get())) {
-            CuttingBoardRecipe recipe = recipeHolder.value();
-            registry.addRecipe(new CuttingEmiRecipe(recipeHolder.id(), EmiIngredient.of(recipe.getTool()), EmiIngredient.of(recipe.getIngredients().getFirst()),
-                    recipe.getRollableResults().stream().map(chanceResult -> EmiStack.of(chanceResult.stack()).setChance(chanceResult.chance())).toList()));
+        for (RecipeHolder<?> recipeHolder : registry.getRecipeManager().getRecipes()) {
+            if (recipeHolder.value() instanceof CookingPotRecipe recipe) {
+                registry.addRecipe(new CookingPotEmiRecipe(recipeHolder.id().identifier(), recipe.getIngredients().stream().map(EmiIngredient::of).toList(),
+                        EmiStack.of(recipe.getResultItem(Minecraft.getInstance().level.registryAccess())), EmiStack.of(recipe.getOutputContainer()), recipe.getCookTime(), recipe.getExperience()));
+            } else if (recipeHolder.value() instanceof CuttingBoardRecipe recipe) {
+                registry.addRecipe(new CuttingEmiRecipe(recipeHolder.id().identifier(), EmiIngredient.of(recipe.getTool()), EmiIngredient.of(recipe.getIngredients().getFirst()),
+                        recipe.getRollableResults().stream().map(chanceResult -> EmiStack.of(chanceResult.stack()).setChance(chanceResult.chance())).toList()));
+            }
         }
         registry.addRecipe(new DecompositionEmiRecipe());
 
@@ -55,7 +55,7 @@ public class EMIPlugin implements EmiPlugin {
 
     public void addSpecialRecipes(EmiRegistry registry) {
         Identifier doughRecipeId = RecipeUtils.FDLocation("wheat_dough_from_water");
-        if (registry.getRecipeManager().byKey(doughRecipeId).isPresent()) {
+        if (registry.getRecipeManager().byKey(ResourceKey.create(Registries.RECIPE, doughRecipeId)).isPresent()) {
             Identifier syntheticLocation = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "/crafting/wheat_dough_from_water");
             registry.addRecipe(new EmiCraftingRecipe(List.of(EmiStack.of(Items.WHEAT), EmiStack.of(Items.WATER_BUCKET)), EmiStack.of(ModItems.WHEAT_DOUGH.get()), syntheticLocation, true));
         }

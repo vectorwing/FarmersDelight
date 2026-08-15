@@ -2,16 +2,16 @@ package vectorwing.farmersdelight.common.block.entity.container;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
+import vectorwing.farmersdelight.common.block.entity.inventory.ItemStackInventory;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class CookingPotMealSlot extends SlotItemHandler
+public class CookingPotMealSlot extends ResourceHandlerSlot
 {
-	public CookingPotMealSlot(IItemHandler inventoryIn, int index, int xPosition, int yPosition) {
-		super(inventoryIn, index, xPosition, yPosition);
+	public CookingPotMealSlot(ItemStackInventory inventory, int index, int xPosition, int yPosition) {
+		super(inventory, inventory::set, index, xPosition, yPosition);
 	}
 
 	@Override
