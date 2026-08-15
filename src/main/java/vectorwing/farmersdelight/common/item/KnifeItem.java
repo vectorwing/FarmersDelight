@@ -20,13 +20,11 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CakeBlock;
+import net.minecraft.world.level.block.CarvedPumpkinBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.level.material.FluidState;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.ItemAbilities;
@@ -34,7 +32,6 @@ import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.event.entity.living.LivingKnockBackEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.common.mixin.accessor.CropBlockAccessor;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ModTags;
@@ -61,39 +58,12 @@ public class KnifeItem extends DiggerItem
 
 	@Override
 	public boolean canAttackBlock(BlockState state, Level level, BlockPos pos, Player player) {
-		if (player.isCreative()) return false;
-
-		if (!player.isSecondaryUseActive() && state.getBlock().defaultDestroyTime() == 0.0F) {
-			return isValidCrop(level, pos, state);
-		}
-
-		return true;
+		return !player.isCreative();
 	}
 
-	public static boolean isValidCrop(Level level, BlockPos pos, BlockState state) {
-		if (state.getBlock() instanceof CropBlock crop) {
-			return crop.isMaxAge(state);
-		}
-
-		if (state.getCollisionShape(level, pos)
-			.isEmpty() || state.getBlock() instanceof CocoaBlock) {
-			for (Property<?> property : state.getProperties()) {
-				if (!(property instanceof IntegerProperty ageProperty))
-					continue;
-				if (!property.getName()
-					.equals(BlockStateProperties.AGE_1.getName()))
-					continue;
-				int age = state.getValue(ageProperty);
-				if (state.getBlock() instanceof SweetBerryBushBlock && age <= 1)
-					continue;
-				if (age == 0 || (ageProperty.getPossibleValues()
-					.size() - 1 != age))
-					continue;
-				return true;
-			}
-		}
-
-		return false;
+	@Override
+	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+		return true;
 	}
 
 	public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
@@ -121,65 +91,9 @@ public class KnifeItem extends DiggerItem
 		return KNIFE_ACTIONS.contains(toolAction);
 	}
 
-	public static BlockState getHarvestedCropState(Level world, BlockPos pos, BlockState state) {
-		Block block = state.getBlock();
-		if (block instanceof CropBlock crop) {
-			BlockState newState = crop.getStateForAge(0);
-			if (!newState.is(block))
-				return newState;
-			IntegerProperty ageProperty = ((CropBlockAccessor) crop).fd$getAgeProperty();
-			return state.setValue(ageProperty, 0);
-		}
-		if (block == Blocks.SWEET_BERRY_BUSH) {
-			return state.setValue(BlockStateProperties.AGE_3, 1);
-		}
-		if (state.getCollisionShape(world, pos)
-			.isEmpty() || block instanceof CocoaBlock) {
-			for (Property<?> property : state.getProperties()) {
-				if (!(property instanceof IntegerProperty))
-					continue;
-				if (!property.getName()
-					.equals(BlockStateProperties.AGE_1.getName()))
-					continue;
-				return state.setValue((IntegerProperty) property, 0);
-			}
-		}
-
-		if (state.getFluidState()
-			.isEmpty())
-			return Blocks.AIR.defaultBlockState();
-		return state.getFluidState()
-			.createLegacyBlock();
-	}
-
 	@EventBusSubscriber(modid = FarmersDelight.MODID)
 	public static class KnifeEvents
 	{
-		@SubscribeEvent
-		public static void onKnifeBreak(PlayerInteractEvent.LeftClickBlock event) {
-			if (event.getAction() != PlayerInteractEvent.LeftClickBlock.Action.START)
-				return;
-
-			if (!(event.getItemStack().getItem() instanceof KnifeItem)) {
-				return;
-			}
-
-			Level level = event.getLevel();
-			BlockPos pos = event.getPos();
-			BlockState state = level.getBlockState(pos);
-
-			if (!isValidCrop(level, pos, state)) {
-				return;
-			}
-
-			if (!level.isClientSide) {
-				level.destroyBlock(pos, true, event.getEntity());
-			}
-
-			BlockState cutCrop = getHarvestedCropState(level, pos, state);
-			level.setBlockAndUpdate(pos, cutCrop.canSurvive(level, pos) ? cutCrop : Blocks.AIR.defaultBlockState());
-		}
-
 		@SubscribeEvent
 		public static void onKnifeKnockback(LivingKnockBackEvent event) {
 			LivingEntity attacker = event.getEntity().getKillCredit();
