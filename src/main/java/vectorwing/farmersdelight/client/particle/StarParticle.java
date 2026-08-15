@@ -21,7 +21,7 @@ public class StarParticle extends SingleQuadParticle
 
 	@Override
 	protected SingleQuadParticle.Layer getLayer() {
-		return SingleQuadParticle.Layer.OPAQUE_TERRAIN;
+		return SingleQuadParticle.Layer.OPAQUE;
 	}
 
 	@Override
