@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.3
+
+### Fixes
+- Fixed Rope reeling not working if the rope is touching the void layer (minimum build height);
+- Fixed suppressed packet error due to an unsafe property check in TomatoBlock;
+
 ## 1.3.2
 
 ### Updates
