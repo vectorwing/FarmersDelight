@@ -55,7 +55,7 @@ public class RopeBlock extends IronBarsBlock
 					BlockPos.MutableBlockPos reelingPos = pos.mutable().move(Direction.DOWN);
 					int minBuildHeight = level.getMinBuildHeight();
 
-					while (reelingPos.getY() >= minBuildHeight) {
+					while (reelingPos.getY() >= minBuildHeight - 1) {
 						BlockState blockStateBelow = level.getBlockState(reelingPos);
 						if (blockStateBelow.is(this)) {
 							reelingPos.move(Direction.DOWN);

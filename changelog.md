@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.3
+
+### Fixes
+- Fix Rope reeling not working if the rope is touching the void layer (minimum build height);
+
 ## 1.3.2
 
 ### Updates
