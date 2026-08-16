@@ -5,6 +5,7 @@
 ### Fixes
 - Fixed Rope reeling not working if the rope is touching the void layer (minimum build height);
 - Fixed suppressed packet error due to an unsafe property check in TomatoBlock;
+- (1.21+) Fixed Cooking Pot not comparing data components when merging meal output stacks (deciding to cook, meal slot to output slot etc);
 
 ## 1.3.2
 
