@@ -1,17 +1,19 @@
 package vectorwing.farmersdelight.client.event;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.item.SkilletItem;
 import vectorwing.farmersdelight.common.network.payload.FlipSkilletPayload;
 import vectorwing.farmersdelight.common.registry.ModDataComponents;
+
+import java.util.Objects;
 
 @EventBusSubscriber(modid = FarmersDelight.MODID, value = Dist.CLIENT)
 public class KeybindEvents
@@ -24,7 +26,8 @@ public class KeybindEvents
 			ItemStack useItem = player.getUseItem();
 			if (useItem.getItem() instanceof SkilletItem && !useItem.has(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get())) {
 				while (mc.options.keyAttack.consumeClick()) {
-					PacketDistributor.sendToServer(FlipSkilletPayload.INSTANCE);
+					ClientPacketListener listener = Objects.requireNonNull(Minecraft.getInstance().getConnection());
+					listener.send(FlipSkilletPayload.INSTANCE);
 				}
 			}
 		}

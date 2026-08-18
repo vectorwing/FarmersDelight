@@ -1,13 +1,15 @@
 package vectorwing.farmersdelight.data;
 
 import com.google.common.collect.Sets;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.model.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
@@ -15,21 +17,25 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import static net.minecraft.client.data.models.model.ModelTemplates.createItem;
+
 /**
  * Credits to Vazkii and team for some references on mass-reading blocks to datagen!
  */
-public class ItemModels extends ItemModelProvider
+public class ItemModels extends ModelProvider
 {
-	public static final String GENERATED = "item/generated";
-	public static final String HANDHELD = "item/handheld";
-	public static final Identifier MUG = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "item/mug");
+	public static final ModelTemplate MUG = createItem("item/mug", TextureSlot.LAYER0);
+	private ItemModelGenerators itemModels;
+	private BlockModelGenerators blockModels;
 
-	public ItemModels(PackOutput output, ExistingFileHelper existingFileHelper) {
-		super(output, FarmersDelight.MODID, existingFileHelper);
+	public ItemModels(PackOutput output) {
+		super(output, FarmersDelight.MODID);
 	}
 
 	@Override
-	protected void registerModels() {
+	protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
+		this.blockModels = blockModels;
+		this.itemModels = itemModels;
 		Set<Item> items = BuiltInRegistries.ITEM.stream().filter(i -> FarmersDelight.MODID.equals(BuiltInRegistries.ITEM.getKey(i).getNamespace()))
 				.collect(Collectors.toSet());
 
@@ -117,7 +123,7 @@ public class ItemModels extends ItemModelProvider
 				ModItems.GLEAMING_SALAD_BLOCK.get(),
 				ModItems.RICE_ROLL_MEDLEY_BLOCK.get()
 		);
-		takeAll(items, spriteBlockItems.toArray(new Item[0])).forEach(item -> withExistingParent(itemName(item), GENERATED).texture("layer0", resourceItem(itemName(item))));
+		takeAll(items, spriteBlockItems.toArray(new Item[0])).forEach(item -> itemModels.generateFlatItem(item, ModelTemplates.FLAT_ITEM));
 
 		// Blocks with flat block textures for their items
 		Set<Item> flatBlockItems = Sets.newHashSet(
@@ -153,23 +159,23 @@ public class ItemModels extends ItemModelProvider
 	}
 
 	public void blockBasedModel(Item item, String suffix) {
-		withExistingParent(itemName(item), resourceBlock(itemName(item) + suffix));
+//		withExistingParent(itemName(item), resourceBlock(itemName(item) + suffix));
 	}
 
 	public void blockBasedModel(Item item, Identifier block) {
-		withExistingParent(itemName(item), block);
+//		withExistingParent(itemName(item), block);
 	}
 
 	public void itemHandheldModel(Item item, Identifier texture) {
-		withExistingParent(itemName(item), HANDHELD).texture("layer0", texture);
+		itemModels.itemModelOutput.accept(item, ItemModelUtils.plainModel(ModelTemplates.FLAT_HANDHELD_ITEM.create(texture.withPrefix("item/"), TextureMapping.layer0(item), itemModels.modelOutput)));
 	}
 
 	public void itemGeneratedModel(Item item, Identifier texture) {
-		withExistingParent(itemName(item), GENERATED).texture("layer0", texture);
+		itemModels.itemModelOutput.accept(item, ItemModelUtils.plainModel(ModelTemplates.FLAT_ITEM.create(texture.withPrefix("item/"), TextureMapping.layer0(item), itemModels.modelOutput)));
 	}
 
 	public void itemMugModel(Item item, Identifier texture) {
-		withExistingParent(itemName(item), MUG).texture("layer0", texture);
+		itemModels.itemModelOutput.accept(item, ItemModelUtils.plainModel(MUG.create(texture.withPrefix("item/"), TextureMapping.layer0(item), itemModels.modelOutput)));
 	}
 
 	private String itemName(Item item) {

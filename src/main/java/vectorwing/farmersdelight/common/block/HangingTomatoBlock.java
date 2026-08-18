@@ -40,21 +40,20 @@ public class HangingTomatoBlock extends TomatoBlock
 		return placeRope(level, pos);
 	}
 
-	public void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston) {
-		super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
-		if (Configuration.ENABLE_TOMATO_ROPE_PERMANENCE.get() && !movedByPiston) {
+	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+		if (Configuration.ENABLE_TOMATO_ROPE_PERMANENCE.get() && !movedByPiston && !state.is(newState.getBlock())) {
 			placeRope(level, pos);
 		}
 	}
 
-	// TODO: Verify if this is working.
-	public static boolean placeRope(Level level, BlockPos pos) {
-		Optional<Holder.Reference<Block>> configuredRopeBlock = BuiltInRegistries.BLOCK.get(Identifier.parse(Configuration.DEFAULT_TOMATO_VINE_ROPE.get()));
-		Block ropeBlock = configuredRopeBlock.map(Holder.Reference::value).orElseGet(ModBlocks.ROPE);
-
-		BlockState finalRopeState = ropeBlock.equals(ModBlocks.ROPE.get())
+	public boolean placeRope(Level level, BlockPos pos) {
+		Block configuredRopeBlock = BuiltInRegistries.BLOCK.getValue(Identifier.parse(Configuration.DEFAULT_TOMATO_VINE_ROPE.get()));
+		if (configuredRopeBlock == null) {
+			configuredRopeBlock = ModBlocks.ROPE.get();
+		}
+		BlockState finalRopeState = configuredRopeBlock.equals(ModBlocks.ROPE.get())
 				? RopeBlock.getStateWithConnections(ModBlocks.ROPE.get().defaultBlockState(), level, pos, Direction.UP)
-				: ropeBlock.defaultBlockState();
+				: configuredRopeBlock.defaultBlockState();
 
 		return level.setBlock(pos, finalRopeState, level.isClientSide() ? 11 : 3);
 	}

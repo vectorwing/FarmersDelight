@@ -30,7 +30,8 @@ public class FarmersDelight
 	public FarmersDelight(IEventBus modEventBus, ModContainer modContainer) {
 		modEventBus.addListener(CommonSetup::init);
 		if (FMLEnvironment.getDist().isClient()) {
-			modEventBus.addListener(ClientSetupEvents::init);
+			// TODO may be unnecessary?
+			//modEventBus.addListener(ClientSetupEvents::init);
 			modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 		}
 
@@ -38,10 +39,8 @@ public class FarmersDelight
 		modContainer.registerConfig(ModConfig.Type.CLIENT, Configuration.CLIENT_CONFIG);
 
 		ModSounds.SOUNDS.register(modEventBus);
-		ModBlocks.BLOCKS.register(modEventBus);
 		ModEffects.EFFECTS.register(modEventBus);
 		ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
-		ModItems.ITEMS.register(modEventBus);
 		ModDataComponents.DATA_COMPONENTS.register(modEventBus);
 		ModDataComponents.ENCHANTMENT_EFFECT_COMPONENTS.register(modEventBus);
 		ModEntityTypes.ENTITIES.register(modEventBus);
@@ -59,6 +58,7 @@ public class FarmersDelight
 		ModIngredientTypes.INGREDIENT_TYPES.register(modEventBus);
 		ModAdvancements.TRIGGERS.register(modEventBus);
 		ModConsumeEffectTypes.CONSUME_EFFECTS.register(modEventBus);
+		ModRecipeCategories.RECIPE_BOOK_CATEGORIES.register(modEventBus);
 
 		RegistryAliases.addRegistryAliases();
 

@@ -27,11 +27,11 @@ public class CommonModBusEvents
 		if (Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) {
 			Configuration.SOUP_ITEM_LIST.get().forEach((key) -> {
 				Optional<Holder.Reference<Item>> item = BuiltInRegistries.ITEM.get(Identifier.parse(key));
-				item.ifPresent(itemReference -> event.modify(itemReference.value(), (builder) -> builder.set(DataComponents.MAX_STACK_SIZE, 16)));
+				item.ifPresent(itemReference -> event.modify(itemReference.value(), (builder, provider, item2) -> builder.set(DataComponents.MAX_STACK_SIZE, 16)));
 			});
 		}
 		if (Configuration.ENABLE_RABBIT_STEW_BUFF.get()) {
-			event.modify(Items.RABBIT_STEW, (builder) -> builder.set(DataComponents.FOOD, FoodValues.RABBIT_STEW_BUFF));
+			event.modify(Items.RABBIT_STEW, (builder, provider, item) -> builder.set(DataComponents.FOOD, FoodValues.RABBIT_STEW_BUFF));
 		}
 	}
 }

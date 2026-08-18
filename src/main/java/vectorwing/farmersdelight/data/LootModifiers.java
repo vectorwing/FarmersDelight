@@ -3,6 +3,7 @@ package vectorwing.farmersdelight.data;
 import net.minecraft.advancements.criterion.*;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.component.predicates.DataComponentPredicates;
 import net.minecraft.core.component.predicates.EnchantmentsPredicate;
 import net.minecraft.core.registries.Registries;
@@ -11,6 +12,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -79,8 +81,9 @@ public class LootModifiers extends GlobalLootModifierProvider
 		this.add("scavenging_string", this.addItemOnKnifeKill(items, entityTypes, Items.STRING, EntityType.SPIDER, EntityType.CAVE_SPIDER));
 		this.add("scavenging_pumpkin", new ReplaceItemModifier(new LootItemCondition[]{
 			LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.PUMPKIN).build(),
-			hasSilkTouch().build()
-		}, Items.PUMPKIN, ModItems.PUMPKIN_SLICE.get(), 4));
+			MatchTool.toolMatches(ItemPredicate.Builder.item().of(items, ModTags.Items.KNIVES))
+				.and(hasSilkTouch().invert()).build()
+		},Items.PUMPKIN, ModItems.PUMPKIN_SLICE.get(), 4));
 
 		// Pastry Slicing
 		this.add("slicing_apple_pie", this.pastrySlicing(items, ModItems.APPLE_PIE_SLICE.get(), ModBlocks.APPLE_PIE.get()));

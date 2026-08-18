@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.common.registry;
 
 import com.google.common.collect.Sets;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -11,7 +12,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.*;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.bus.api.IEventBus;
 import org.jspecify.annotations.Nullable;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.FoodValues;
@@ -31,8 +32,6 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public class ModItems
 {
-	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(FarmersDelight.MODID);
-
 	public static LinkedHashSet<Supplier<Item>> CREATIVE_TAB_ITEMS = Sets.newLinkedHashSet();
 
 	public static ResourceKey<Item> key(String path) {
@@ -41,19 +40,24 @@ public class ModItems
 
 	private static Supplier<Item> registerWithTab(final String name, final Function<Item.Properties, Item> function, final Item.Properties properties) {
 		properties.setId(key(name));
-		Supplier<Item> item = ITEMS.register(name, () -> function.apply(properties));
+		Supplier<Item> item = regItem(name, () -> function.apply(properties));
 		CREATIVE_TAB_ITEMS.add(item);
 		return item;
 	}
 
+	private static Supplier<Item> regItem(String name, Supplier<Item> o) {
+		Item register = Registry.register(BuiltInRegistries.ITEM, FarmersDelight.id(name), o.get());
+		return ()-> register;
+	}
+
 	public static Supplier<Item> registerHidden(final String name, final Function<Item.Properties, Item> function, final Item.Properties properties) {
 		properties.setId(key(name));
-		return ITEMS.register(name, () -> function.apply(properties));
+		return regItem(name, () -> function.apply(properties));
 	}
 
 	private static Supplier<Item> registerFuelWithTab(final String name, final Item.Properties properties, final int burnTime) {
 		properties.setId(key(name));
-		Supplier<Item> item = ITEMS.register(name, () -> new FuelItem(properties, burnTime));
+		Supplier<Item> item = regItem(name, () -> new FuelItem(properties, burnTime));
 		CREATIVE_TAB_ITEMS.add(item);
 		return item;
 	}
@@ -61,14 +65,14 @@ public class ModItems
 	private static Supplier<Item> registerBlockWithTab(final String name, final BiFunction<Block, Item.Properties, Item> function, final Block block, final Item.Properties properties) {
 		properties.setId(key(name));
 		properties.useBlockDescriptionPrefix();
-		Supplier<Item> item = ITEMS.register(name, () -> function.apply(block, properties));
+		Supplier<Item> item = regItem(name, () -> function.apply(block, properties));
 		CREATIVE_TAB_ITEMS.add(item);
 		return item;
 	}
 
 	private static Supplier<Item> registerItemNameBlockWithTab(final String name, final BiFunction<Block, Item.Properties, Item> function, final Block block, final Item.Properties properties) {
 		properties.setId(key(name));
-		Supplier<Item> item = ITEMS.register(name, () -> function.apply(block, properties));
+		Supplier<Item> item = regItem(name, () -> function.apply(block, properties));
 		CREATIVE_TAB_ITEMS.add(item);
 		return item;
 	}
@@ -76,7 +80,7 @@ public class ModItems
 	private static Supplier<Item> registerFuelBlockWithTab(final String name, final Block block, final Item.Properties properties, final int burnTime) {
 		properties.setId(key(name));
 		properties.useBlockDescriptionPrefix();
-		Supplier<Item> item = ITEMS.register(name, () -> new FuelBlockItem(block, properties, burnTime));
+		Supplier<Item> item = regItem(name, () -> new FuelBlockItem(block, properties, burnTime));
 		CREATIVE_TAB_ITEMS.add(item);
 		return item;
 	}
@@ -151,6 +155,12 @@ public class ModItems
 	public static final Supplier<Item> BAMBOO_BASKET = registerFuelBlockWithTab("bamboo_basket",
 		ModBlocks.BAMBOO_BASKET.get(), basicItem(), 300);
 
+	/**
+	 * Deprecated reference added for backwards compatibility. Use BAMBOO_BASKET instead.
+	 */
+	@Deprecated(forRemoval = true)
+	public static final Supplier<Item> BASKET = BAMBOO_BASKET;
+
 	public static final Supplier<Item> CARROT_CRATE = registerBlockWithTab("carrot_crate",
 		BlockItem::new, ModBlocks.CARROT_CRATE.get(), basicItem());
 	public static final Supplier<Item> POTATO_CRATE = registerBlockWithTab("potato_crate",
@@ -190,7 +200,6 @@ public class ModItems
 		ModBlocks.CHERRY_CABINET.get(), basicItem(), 300);
 	public static final Supplier<Item> BAMBOO_CABINET = registerFuelBlockWithTab("bamboo_cabinet",
 		ModBlocks.BAMBOO_CABINET.get(), basicItem(), 300);
-	// TODO: Not yet! Make it boot first!
 //	public static final Supplier<Item> PALE_OAK_CABINET = registerFuelBlockWithTab("pale_oak_cabinet",
 //		ModBlocks.PALE_OAK_CABINET.get(), basicItem(), 300);
 	public static final Supplier<Item> CRIMSON_CABINET = registerBlockWithTab("crimson_cabinet",
@@ -306,7 +315,7 @@ public class ModItems
 
 	// Tools
 	public static final Supplier<Item> FLINT_KNIFE = registerWithTab("flint_knife",
-		KnifeItem::new, knifeItem(ModMaterials.FLINT));
+		KnifeItem::new, knifeItem(ToolMaterial.STONE));
 	public static final Supplier<Item> COPPER_KNIFE = registerWithTab("copper_knife",
 		KnifeItem::new, knifeItem(ToolMaterial.COPPER));
 	public static final Supplier<Item> IRON_KNIFE = registerWithTab("iron_knife",
@@ -359,8 +368,7 @@ public class ModItems
 	public static final Supplier<Item> CABBAGE_SEEDS = registerItemNameBlockWithTab("cabbage_seeds",
 		BlockItem::new, ModBlocks.CABBAGE_CROP.get(), basicItem());
 	public static final Supplier<Item> TOMATO_SEEDS = registerItemNameBlockWithTab("tomato_seeds",
-		(block, properties) -> new BlockItem(block, properties)
-		{
+		(block, properties) -> new BlockItem(block, properties) {
 			@Override
 			public void registerBlocks(Map<Block, Item> blockToItemMap, Item item) {
 				super.registerBlocks(blockToItemMap, item);
@@ -605,4 +613,12 @@ public class ModItems
 				builder.accept(TextUtils.DEBUG_ITEM);
 			}
 		}, basicItem());
+
+	public static void touch() {
+
+	}
+
+	public static void register(IEventBus modEventBus) {
+
+	}
 }

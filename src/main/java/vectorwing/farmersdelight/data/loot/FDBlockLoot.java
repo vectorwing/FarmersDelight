@@ -1,12 +1,14 @@
 package vectorwing.farmersdelight.data.loot;
 
-import net.minecraft.advancements.critereon.BlockPredicate;
-import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.LocationPredicate;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.advancements.criterion.BlockPredicate;
+import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.criterion.LocationPredicate;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
@@ -27,6 +29,7 @@ import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.ApplyExplosionDecay;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.*;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -34,6 +37,7 @@ import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.loot.CanItemPerformAbility;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
+import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.*;
 import vectorwing.farmersdelight.common.loot.function.CopySkilletFunction;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
@@ -53,12 +57,14 @@ public class FDBlockLoot extends BlockLootSubProvider
 	@Override
 	protected void generate() {
 		HolderLookup.RegistryLookup<Enchantment> registryLookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+		HolderLookup.RegistryLookup<Item> itemLookup = this.registries.lookupOrThrow(Registries.ITEM);
+		HolderLookup.RegistryLookup<Block> blockLookup = this.registries.lookupOrThrow(Registries.BLOCK);
 
 		dropSelf(ModBlocks.STOVE.get());
 		dropNamedContainer(ModBlocks.WOODEN_BASKET.get());
 		dropNamedContainer(ModBlocks.BAMBOO_BASKET.get());
 		add(ModBlocks.COOKING_POT.get(), (block) -> LootTable.lootTable().withPool(this.applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(block)
-				.apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
+				.apply(CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
 						.include(DataComponents.CUSTOM_NAME)
 						.include(ModDataComponents.MEAL.get())
 						.include(ModDataComponents.CONTAINER.get())
@@ -77,7 +83,7 @@ public class FDBlockLoot extends BlockLootSubProvider
 						LootItem.lootTableItem(ModItems.RICE.get())
 								.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
 										.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(RicePaniclesBlock.RICE_AGE, 3)))
-								.when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.Items.KNIVES))),
+								.when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ModTags.Items.KNIVES))),
 						LootItem.lootTableItem(ModItems.RICE_PANICLE.get())
 								.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
 										.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(RicePaniclesBlock.RICE_AGE, 3))))))));
@@ -152,7 +158,7 @@ public class FDBlockLoot extends BlockLootSubProvider
 								.setProperties(StatePropertiesPredicate.Builder.properties()
 										.hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)))
 						.when(LocationCheck.checkLocation(LocationPredicate.Builder.location()
-								.setBlock(BlockPredicate.Builder.block().of(block)
+								.setBlock(BlockPredicate.Builder.block().of(blockLookup, block)
 										.setProperties(StatePropertiesPredicate.Builder.properties()
 												.hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER))), new BlockPos(0, 1, 0))))
 				.withPool(LootPool.lootPool()
@@ -165,7 +171,7 @@ public class FDBlockLoot extends BlockLootSubProvider
 								.setProperties(StatePropertiesPredicate.Builder.properties()
 										.hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER)))
 						.when(LocationCheck.checkLocation(LocationPredicate.Builder.location()
-								.setBlock(BlockPredicate.Builder.block().of(block)
+								.setBlock(BlockPredicate.Builder.block().of(blockLookup, block)
 										.setProperties(StatePropertiesPredicate.Builder.properties()
 												.hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER))), new BlockPos(0, -1, 0)))));
 
@@ -271,7 +277,7 @@ public class FDBlockLoot extends BlockLootSubProvider
 
 	@Override
 	protected @NotNull Iterable<Block> getKnownBlocks() {
-		return ModBlocks.BLOCKS.getEntries().stream().map(DeferredHolder::value).collect(Collectors.toList());
+		return BuiltInRegistries.BLOCK.listElements().filter(c->c.key().identifier().getNamespace().equals(FarmersDelight.MODID)).map(Holder::value).toList();
 	}
 
 	protected LootTable.Builder mushroomColony(Block block, Item mushroom) {
