@@ -98,6 +98,12 @@ public class ModBlocks
 	@Deprecated(forRemoval = true)
 	public static final Supplier<Block> BASKET = BAMBOO_BASKET;
 
+	/**
+	 * Deprecated reference added for backwards compatibility. Use BAMBOO_BASKET instead.
+	 */
+	@Deprecated(forRemoval = true)
+	public static final Supplier<Block> BASKET = BAMBOO_BASKET;
+
 	// Crop Storage
 	public static final Supplier<Block> CARROT_CRATE = regBlock("carrot_crate",
 		Block::new, Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD));

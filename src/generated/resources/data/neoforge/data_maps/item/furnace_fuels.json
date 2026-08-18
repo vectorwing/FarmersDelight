@@ -1,0 +1,56 @@
+{
+  "remove": [
+    "farmersdelight:crimson_cabinet",
+    "farmersdelight:warped_cabinet"
+  ],
+  "values": {
+    "#farmersdelight:cabinets/wooden": {
+      "burn_time": 300
+    },
+    "farmersdelight:bamboo_basket": {
+      "burn_time": 300
+    },
+    "farmersdelight:canvas": {
+      "burn_time": 400
+    },
+    "farmersdelight:canvas_rug": {
+      "burn_time": 200
+    },
+    "farmersdelight:cutting_board": {
+      "burn_time": 200
+    },
+    "farmersdelight:full_tatami_mat": {
+      "burn_time": 200
+    },
+    "farmersdelight:half_tatami_mat": {
+      "burn_time": 100
+    },
+    "farmersdelight:rope": {
+      "burn_time": 200
+    },
+    "farmersdelight:rope_fence": {
+      "burn_time": 200
+    },
+    "farmersdelight:rope_fence_gate": {
+      "burn_time": 200
+    },
+    "farmersdelight:safety_net": {
+      "burn_time": 200
+    },
+    "farmersdelight:straw": {
+      "burn_time": 100
+    },
+    "farmersdelight:straw_bale": {
+      "burn_time": 1000
+    },
+    "farmersdelight:tatami": {
+      "burn_time": 400
+    },
+    "farmersdelight:tree_bark": {
+      "burn_time": 200
+    },
+    "farmersdelight:wooden_basket": {
+      "burn_time": 300
+    }
+  }
+}

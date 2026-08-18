@@ -87,6 +87,7 @@ public class BlockTags extends BlockTagsProvider
 				Blocks.JACK_O_LANTERN,
 				Blocks.COBWEB,
 				Blocks.CAKE,
+				ModBlocks.RICE_BAG.get(),
 				ModBlocks.APPLE_PIE.get(),
 				ModBlocks.SWEET_BERRY_CHEESECAKE.get(),
 				ModBlocks.CHOCOLATE_PIE.get(),
@@ -270,7 +271,6 @@ public class BlockTags extends BlockTagsProvider
 			.addTag(net.minecraft.tags.BlockTags.DIRT)
 			.addTag(net.minecraft.tags.BlockTags.SAND);
 		tag(ModTags.Blocks.STRAW_BLOCKS).add(
-			ModBlocks.RICE_BAG.get(),
 			ModBlocks.ROPE.get(),
 			ModBlocks.SAFETY_NET.get(),
 			ModBlocks.CANVAS_RUG.get(),
@@ -303,8 +303,8 @@ public class BlockTags extends BlockTagsProvider
 			.add(ModBlocks.BROWN_MUSHROOM_COLONY.get())
 			.add(ModBlocks.RED_MUSHROOM_COLONY.get());
 		tag(ModTags.Blocks.ROPES).add(ModBlocks.ROPE.get())
-			.add(TagEntry.optionalElement(Identifier.parse("quark:rope")))
-			.add(TagEntry.optionalElement(Identifier.parse("supplementaries:rope")));
+			.addOptional(Identifier.parse("quark:rope"))
+			.addOptional(Identifier.parse("supplementaries:rope"));
 		tag(ModTags.Blocks.TRAY_HEAT_SOURCES).add(
 				Blocks.LAVA)
 			.addTag(net.minecraft.tags.BlockTags.CAMPFIRES)
@@ -316,7 +316,7 @@ public class BlockTags extends BlockTagsProvider
 			.addTag(ModTags.Blocks.TRAY_HEAT_SOURCES);
 		tag(ModTags.Blocks.HEAT_CONDUCTORS).add(
 				Blocks.HOPPER)
-			.add(TagEntry.optionalElement(Identifier.parse("create:chute")));
+			.addOptional(Identifier.parse("create:chute"));
 		tag(ModTags.Blocks.COMPOST_ACTIVATORS).add(
 				Blocks.BROWN_MUSHROOM,
 				Blocks.RED_MUSHROOM,
@@ -341,7 +341,7 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.SANDY_SHRUB.get())
 			.addTag(ModTags.Blocks.MUSHROOM_COLONIES)
 			.addTag(ModTags.Blocks.WILD_CROPS)
-			.addTag(net.minecraft.tags.BlockTags.FLOWERS);
+			.addTag(net.minecraft.tags.BlockTags.TALL_FLOWERS);
 		tag(ModTags.Blocks.MUSHROOM_COLONY_GROWABLE_ON).add(ModBlocks.RICH_SOIL.get());
 		tag(ModTags.Blocks.DROPS_CAKE_SLICE).add(
 			Blocks.CANDLE_CAKE,
@@ -374,6 +374,18 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.HALF_TATAMI_MAT.get())
 			.addTag(ModTags.Blocks.FEASTS)
 			.addTag(ModTags.Blocks.PIES);
+
+		tag(CompatibilityTags.SABLE_SUPER_LIGHT)
+			.add(ModBlocks.CUTTING_BOARD.get())
+			.add(ModBlocks.CANVAS_RUG.get())
+			.add(ModBlocks.FULL_TATAMI_MAT.get())
+			.add(ModBlocks.HALF_TATAMI_MAT.get())
+			.add(ModBlocks.SAFETY_NET.get());
+		tag(CompatibilityTags.SABLE_LIGHT)
+			.addTag(ModTags.Blocks.CABINETS)
+			.add(ModBlocks.WOODEN_BASKET.get())
+			.add(ModBlocks.BAMBOO_BASKET.get());
+
 		tag(CompatibilityTags.SERENE_SEASONS_AUTUMN_CROPS_BLOCK).add(
 			ModBlocks.CABBAGE_CROP.get(),
 			ModBlocks.ONION_CROP.get(),
