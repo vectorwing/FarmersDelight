@@ -41,6 +41,11 @@ public class BlockUtils
 			return crop.isMaxAge(state);
 		}
 
+		// TODO: This seems like the perfect case for the datamap!
+		if (state.getBlock() instanceof SweetBerryBushBlock && state.getValue(SweetBerryBushBlock.AGE) > 1) {
+			return true;
+		}
+
 		if (state.is(BlockTags.CROPS) || state.getBlock() instanceof CocoaBlock) {
 			for (Property<?> property : state.getProperties()) {
 				if (!(property instanceof IntegerProperty ageProperty))

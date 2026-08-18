@@ -20,7 +20,10 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CakeBlock;
+import net.minecraft.world.level.block.CarvedPumpkinBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -104,9 +107,14 @@ public class KnifeItem extends DiggerItem
 				return;
 			}
 
+
 			Level level = event.getLevel();
 			BlockPos pos = event.getPos();
 			BlockState state = level.getBlockState(pos);
+
+			if (state.is(ModTags.Blocks.UNAFFECTED_BY_KNIFE_HARVEST)) {
+				return;
+			}
 
 			if (!BlockUtils.isCropMature(level, pos, state)) {
 				return;
@@ -146,8 +154,8 @@ public class KnifeItem extends DiggerItem
 				level.setBlock(pos, Blocks.CAKE.defaultBlockState().setValue(CakeBlock.BITES, 1), 3);
 				Block.dropResources(state, level, pos);
 				ItemUtils.spawnItemEntity(level, new ItemStack(ModItems.CAKE_SLICE.get()),
-						pos.getX(), pos.getY() + 0.2, pos.getZ() + 0.5,
-						-0.05, 0, 0);
+					pos.getX(), pos.getY() + 0.2, pos.getZ() + 0.5,
+					-0.05, 0, 0);
 				level.playSound(null, pos, ModSounds.BLOCK_FOOD_SLICE.get(), SoundSource.PLAYERS, 0.8F, 0.8F);
 
 				event.getEntity().awardStat(Stats.ITEM_USED.get(heldStack.getItem()));
@@ -163,8 +171,8 @@ public class KnifeItem extends DiggerItem
 					level.removeBlock(pos, false);
 				}
 				ItemUtils.spawnItemEntity(level, new ItemStack(ModItems.CAKE_SLICE.get()),
-						pos.getX() + (bites * 0.1), pos.getY() + 0.2, pos.getZ() + 0.5,
-						-0.05, 0, 0);
+					pos.getX() + (bites * 0.1), pos.getY() + 0.2, pos.getZ() + 0.5,
+					-0.05, 0, 0);
 				level.playSound(null, pos, ModSounds.BLOCK_FOOD_SLICE.get(), SoundSource.PLAYERS, 0.8F, 0.8F);
 
 				event.getEntity().awardStat(Stats.ITEM_USED.get(heldStack.getItem()));

@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.4.0
+
+### Additions
+- Knives are now able to "ratoon" crops, breaking them while leaving them planted!
+  - This action happens when **mining** crops, allowing you to harvest them fairly quickly;
+  - Knives are now unable to break unripe crop blocks normally, unless the player is **sneaking**. Any other block is still broken normally;
+  - Knives take 1 durability damage for each crop harvested this way;
+- New tags:
+  - `unaffected_by_knife_harvest`: Blocks in this tag will ignore knife harvesting. Knives will break them normally without replanting;
+
 ## 1.3.3
 
 ### Fixes
