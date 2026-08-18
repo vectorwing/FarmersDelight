@@ -208,7 +208,7 @@
   "item.farmersdelight.cooked_rice": "Pişmiş Pirinç",
   "item.farmersdelight.mixed_salad": "Karışık Salata",
   "item.farmersdelight.nether_salad": "Nether Salatası",
-  "item.farmersdelight.beef_stew": "Biftekli Güveç",
+  "item.farmersdelight.beef_stew": "Biftek Güveci",
   "item.farmersdelight.chicken_soup": "Tavuk Çorbası",
   "item.farmersdelight.vegetable_soup": "Sebze Çorbası",
   "item.farmersdelight.fish_stew": "Balık Güveci",
@@ -248,16 +248,16 @@
   "entity.farmersdelight.rotten_tomato": "Çürük Domates",
 
   "effect.farmersdelight.nourishment": "Beslenme",
-  "effect.farmersdelight.nourishment.description": "İyileşmek için doygunluğun kullanıldığı durumlar dışında açlık kaybetmeni önler.",
+  "effect.farmersdelight.nourishment.description": "İyileşmek için doygunluğun kullanıldığı durumlar dışında açlık kaybetmeyi önler.",
   "effect.farmersdelight.comfort": "Konfor",
   "effect.farmersdelight.comfort.description": "Ne kadar aç olursanız olun doğal yenilenme sağlar.",
 
   "enchantment.farmersdelight.backstabbing": "Sırtından Bıçaklama",
   "enchantment.farmersdelight.backstabbing.description": "Bir hedefe arkadan vururken verilen hasarı artırır.",
 
-  "itemGroup.farmersdelight": "Çiftçi'nin Keyfi",
+  "itemGroup.farmersdelight": "Farmer's Delight",
 
-  "container.farmersdelight.recipe_book.cookable": "Pişirilebilirler Gösteriliyor",
+  "container.farmersdelight.recipe_book.cookable": "Pişirilebilenler Gösteriliyor",
   "container.farmersdelight.cooking_pot": "Tencere",
   "container.farmersdelight.cooking_pot.served_on": "Servis: %s",
   "container.farmersdelight.cooking_pot.not_heated": "Alttan ısıtılması lazım",
@@ -277,7 +277,7 @@
   "tooltip.farmersdelight.placeable_sneaking": "Eğilirken yerleştirilebilir",
   "tooltip.farmersdelight.debug_item": "Hata ayıklama eşyası — Oynanış için değildir",
 
-  "advancements.farmersdelight.root.title": "Çiftçi'nin Keyfi",
+  "advancements.farmersdelight.root.title": "Farmer's Delight",
   "advancements.farmersdelight.root.description": "Dünya dolusu lezzetler sizi bekliyor!",
 
   "advancements.farmersdelight.craft_knife.title": "Avla ve Topla",
@@ -304,7 +304,7 @@
   "advancements.farmersdelight.hit_raider_with_rotten_tomato.title": "YÜRÜ GİT!",
   "advancements.farmersdelight.hit_raider_with_rotten_tomato.description": "Şu sinir bozucu yağmacılardan birine Çürük Domates fırlatın!",
   "advancements.farmersdelight.get_mushroom_colony.title": "Fungus Among Us",
-  "advancements.farmersdelight.get_mushroom_colony.description": "Tamamen olgunlaşmış bir Mantar Kolonisini makasla kesin. Onları bu şekilde yetiştirmek için çok zengin bir toprağa ihtiyacın olacak...",
+  "advancements.farmersdelight.get_mushroom_colony.description": "Tamamen olgunlaşmış bir Mantar Kolonisini makasla kesin. Onları bu şekilde yetiştirmek için çok zengin bir toprağa ihtiyacınız olacak...",
   "advancements.farmersdelight.plant_all_crops.title": "Ekin Nöbeti",
   "advancements.farmersdelight.plant_all_crops.description": "Sebzeler, meyveler, mantarlar veya kökler gibi yiyecekle ilgili bulabileceğiniz her türlü bitkiyi yetiştirin!",
 
@@ -344,7 +344,7 @@
   "block.farmersdelight.feast.use_container": "Bunu yemek için %s gerekli",
   "block.farmersdelight.rice.invalid_placement": "Bu ekin, sığ suların dışında hayatta kalamaz.",
   "block.farmersdelight.cutting_board.invalid_item": "Bu kesilebilir gibi durmuyor...",
-  "block.farmersdelight.cutting_board.invalid_tool": "Belki başka bir araçla...",
+  "block.farmersdelight.cutting_board.invalid_tool": "Belki başka bir aletle...",
   "block.farmersdelight.cutting_board.remaining_items": "%s kaldı...",
   "block.farmersdelight.skillet.invalid_item": "Bu pişirilemez...",
   "block.farmersdelight.skillet.underwater": "Su içinde bir şey pişirilemez...",
@@ -364,8 +364,8 @@
 
   "jei.farmersdelight.info.dough": "Bir Su Kovası ve Buğdaydan Hamur üretilebilir. Ama endişelenmeyin, kovadaki su azalmayacaktır!",
   "jei.farmersdelight.info.straw": "Üretimde kullanılabilen kuru bir bitki lifi. Çimenli bitkileri ve ekinleri Bıçak ile keserek elde edilir.",
-  "jei.farmersdelight.info.knife": "Hızlı savrulan ve az hasar veren hafif bir yakın dövüş silahı. Otlardan Saman toplayabilir ve hayvanlardan düşen ikincil eşyaları garanti eder.",
-  "jei.farmersdelight.info.ham": "Domuz veya Hoglin'in bacağından kesilmiş büyük bir et parçası. Birini kesmek için Kılıçtan daha hafif bir şeye ihtiyacın olacak...",
+  "jei.farmersdelight.info.knife": "Hızlı savrulan ve az hasar veren hafif bir yakın dövüş silahı. Otlardan Hasır toplayabilir ve hayvanlardan düşen ikincil eşyaları garanti eder.",
+  "jei.farmersdelight.info.ham": "Domuz veya Hoglin'in bacağından kesilmiş büyük bir et parçası. Birini kesmek için Kılıçtan daha hafif bir şeye ihtiyacınız olacak...",
   "jei.farmersdelight.info.wild_cabbages": "Lahana, çoğunlukla sahil şeritlerinde yabani bir ekin olarak bulunabilir.",
   "jei.farmersdelight.info.wild_beetroots": "Pancar, çoğunlukla sahil şeritlerinde yabani bir ekin olarak bulunabilir.",
   "jei.farmersdelight.info.wild_carrots": "Havuç, çoğunlukla ovalar ve ormanlar gibi ılıman yerlerde yabani bir ekin olarak bulunabilir.",
@@ -457,7 +457,7 @@
   "tag.item.farmersdelight.tools.knives": "Bıçaklar",
   "tag.item.farmersdelight.wild_crops": "Yabani Ekinler",
 
-  "farmersdelight.configuration.title": "Çiftçi'nin Keyfi — Ayarlar",
+  "farmersdelight.configuration.title": "Farmer's Delight — Ayarlar",
 
   "farmersdelight.configuration.section.farmersdelight.client.toml": "İstemci ayarları",
   "farmersdelight.configuration.section.farmersdelight.client.toml.title": "İstemci ayarları",
@@ -506,7 +506,7 @@
   "farmersdelight.configuration.enableCuttingBoardDispenserBehavior.tooltip": "Etkinleştirildiğinde Fırlatıcı, depolanan eşyaları kesim aleti olarak kullanarak önünde duran bir Kesme Tahtasıyla etkileşime geçebilir.",
 
    "farmersdelight.configuration.enableStackableSoupItems": "Yığınlanabilir Çorbalar",
-  "farmersdelight.configuration.enableStackableSoupItems.tooltip": "Etkinleştirildiğinde, sonraki BowlFoodItem listesinde bulunan herhangi bir çorba, Çiftçi'nin Keyfi öğünleri gibi 16'ya kadar yığınlanabilir.",
+  "farmersdelight.configuration.enableStackableSoupItems.tooltip": "Etkinleştirildiğinde, sonraki BowlFoodItem listesinde bulunan herhangi bir çorba, Farmer's Delight öğünleri gibi 16'ya kadar yığınlanabilir.",
   "farmersdelight.configuration.soupItemList": "Çorbalar",
   "farmersdelight.configuration.soupItemList.tooltip": "Hedeflenen yemeklerin listesi. Eşyaların bu ayardan etkilenmesi için kodda BowlFoodItem sınıfını genişletmesi gerekir. Varsayılan olarak ana oyundaki çorba ve güveçleri içerir.",
 
@@ -515,7 +515,7 @@
   "farmersdelight.configuration.generateVillageCompostHeaps": "Köylerde Gübre Yığınları Oluştur",
   "farmersdelight.configuration.generateVillageCompostHeaps.tooltip": "Etkinleştirildiğinde Gübre Yığınları (Organik Gübre öbekleri içeren yapılar) bazen köylerde oluşabilir.",
   "farmersdelight.configuration.generateFDCropsOnVillageFarms": "Köy Tarlalarında Mod Ekinlerini Oluştur",
-  "farmersdelight.configuration.generateFDCropsOnVillageFarms.tooltip": "Etkinleştirildiğinde bazen köy tarlalarındaki standart ekinlerin yerine Çiftçi'nin Keyfi modunun ekinleri oluşur.",
+  "farmersdelight.configuration.generateFDCropsOnVillageFarms.tooltip": "Etkinleştirildiğinde bazen köy tarlalarındaki standart ekinlerin yerine Farmer's Delight modunun ekinleri oluşur.",
 
    "farmersdelight.configuration.enableTomatoRopePermanence": "Domates Halatı Kalıcılığı",
   "farmersdelight.configuration.enableTomatoRopePermanence.tooltip": "Halatta asılı duran domates ekinleri kırıldığı zaman kendi yerine bir halat yerleştirir. Teknik kısıtlamalar yüzünden komutlar gibi özellikler bu mekanikten etkilenir çünkü ilk denemede bu bloğa 'setblock' yapılması engellenir.\n\nYaratıcı modda veya komutlarla bir bölgeyi düzenlemenizi engelliyorsa bu ayarı devre dışı bırakın. Normal oynanış için etkinleştirilmesi tavsiye edilir.",
@@ -525,5 +525,5 @@
   "farmersdelight.configuration.enableComfortHealthOverlay": "Konfor Etkisi Sağlık Kaplaması",
   "farmersdelight.configuration.enableComfortHealthOverlay.tooltip": "Etkinleştirildiğinde oyuncu Konfor etkisine sahipken sağlık sayacının üstünde kayan bir kaplama gösterilir.",
   "farmersdelight.configuration.enableFoodEffectTooltip": "Yemek Etkisi İpuçları",
-  "farmersdelight.configuration.enableFoodEffectTooltip.tooltip": "Etkinleştirildiğinde yemek eşyaları, eğer varsa, yendiklerinde hangiyi etkiyi sağladıklarını belirten ipuçları gösterir. Hem Minecraft'taki hem de bu moddaki eşyalara uygulanır."
+  "farmersdelight.configuration.enableFoodEffectTooltip.tooltip": "Etkinleştirildiğinde yemek eşyaları yendiklerinde eğer etki sağlıyorlarsa hangisini sağladıklarını belirten ipuçları gösterir. Hem Minecraft'taki hem de bu moddaki eşyalara uygulanır."
 }
