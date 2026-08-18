@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.common.registry;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import vectorwing.farmersdelight.common.utility.RecipeUtils;
 
 public class RegistryAliases
@@ -10,10 +11,10 @@ public class RegistryAliases
 	}
 
 	public static void addBlockAlias(String oldName, String newName) {
-		ModBlocks.BLOCKS.addAlias(RecipeUtils.FDLocation(oldName), RecipeUtils.FDLocation(newName));
+		BuiltInRegistries.BLOCK.addAlias(RecipeUtils.FDLocation(oldName), RecipeUtils.FDLocation(newName));
 	}
 
 	public static void addItemAlias(String oldName, String newName) {
-		ModItems.ITEMS.addAlias(RecipeUtils.FDLocation(oldName), RecipeUtils.FDLocation(newName));
+		BuiltInRegistries.ITEM.addAlias(RecipeUtils.FDLocation(oldName), RecipeUtils.FDLocation(newName));
 	}
 }

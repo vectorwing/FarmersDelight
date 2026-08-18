@@ -39,10 +39,8 @@ public class FarmersDelight
 		modContainer.registerConfig(ModConfig.Type.CLIENT, Configuration.CLIENT_CONFIG);
 
 		ModSounds.SOUNDS.register(modEventBus);
-		ModBlocks.BLOCKS.register(modEventBus);
 		ModEffects.EFFECTS.register(modEventBus);
 		ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
-		ModItems.ITEMS.register(modEventBus);
 		ModDataComponents.DATA_COMPONENTS.register(modEventBus);
 		ModDataComponents.ENCHANTMENT_EFFECT_COMPONENTS.register(modEventBus);
 		ModEntityTypes.ENTITIES.register(modEventBus);

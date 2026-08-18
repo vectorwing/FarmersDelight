@@ -20,8 +20,8 @@ public class StandingCanvasSignBlock extends StandingSignBlock implements Canvas
 {
 	private final @Nullable DyeColor backgroundColor;
 
-	public StandingCanvasSignBlock(@Nullable DyeColor backgroundColor) {
-		super(WoodType.SPRUCE, Properties.ofFullCopy(Blocks.SPRUCE_SIGN));
+	public StandingCanvasSignBlock(Properties properties, @Nullable DyeColor backgroundColor) {
+		super(WoodType.SPRUCE, properties);
 		this.backgroundColor = backgroundColor;
 	}
 

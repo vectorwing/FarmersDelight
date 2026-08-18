@@ -25,7 +25,7 @@ import java.util.Optional;
 @EventBusSubscriber
 public class FDRecipes
 {
-	private @Nullable RecipeMap recipeMap;
+	private static @Nullable RecipeMap recipeMap;
 
 	public FDRecipes() {
 		if (recipeMap == null) {
@@ -34,8 +34,8 @@ public class FDRecipes
 	}
 
 	@SubscribeEvent
-	public void receiveRecipes(RecipesReceivedEvent event) {
-		this.recipeMap = event.getRecipeMap();
+	public static void receiveRecipes(RecipesReceivedEvent event) {
+		FDRecipes.recipeMap = event.getRecipeMap();
 	}
 
 	public List<RecipeHolder<CookingPotRecipe>> getCookingPotRecipes() {

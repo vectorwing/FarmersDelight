@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.common.event;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -16,10 +17,13 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.registries.RegisterEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.FoodValues;
 import vectorwing.farmersdelight.common.network.payload.NaturalRegenerationGameRulePayload;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.integration.jei.FDRecipeTypes;
 import vectorwing.farmersdelight.integration.jei.FDRecipes;
@@ -50,12 +54,12 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+	public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
 		sendPayload((ServerPlayer) event.getEntity(), new NaturalRegenerationGameRulePayload(NATURAL_REGENERATION));
 	}
 
 	@SubscribeEvent
-	public void onServerWorldTick(ServerTickEvent.Post event) {
+	public static void onServerWorldTick(ServerTickEvent.Post event) {
 		boolean currentNaturalRegen = event.getServer().getGameRules().get(GameRules.NATURAL_HEALTH_REGENERATION);
 		if (NATURAL_REGENERATION != currentNaturalRegen) {
 			NATURAL_REGENERATION = currentNaturalRegen;
@@ -68,8 +72,16 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public void sendSyncedRecipes(OnDatapackSyncEvent event) {
+	public static void sendSyncedRecipes(OnDatapackSyncEvent event) {
 		event.sendRecipes(ModRecipeTypes.COOKING.get(), ModRecipeTypes.CUTTING.get());
+	}
+
+	@SubscribeEvent
+	public static void register(RegisterEvent event) {
+		if (event.getRegistryKey().equals((Registries.BLOCK))) {
+			ModItems.register(null);
+			ModBlocks.register(null);
+		}
 	}
 
 	private static void sendPayload(ServerPlayer player, CustomPacketPayload payload) {
