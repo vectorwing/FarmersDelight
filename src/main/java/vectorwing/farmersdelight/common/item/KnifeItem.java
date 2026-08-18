@@ -6,7 +6,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -23,9 +22,6 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.ItemAbilities;
@@ -33,10 +29,10 @@ import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.event.entity.living.LivingKnockBackEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.common.mixin.accessor.CropBlockAccessor;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ModTags;
+import vectorwing.farmersdelight.common.utility.BlockUtils;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 import java.util.Set;
@@ -62,58 +58,11 @@ public class KnifeItem extends DiggerItem
 	public boolean canAttackBlock(BlockState state, Level level, BlockPos pos, Player player) {
 		if (player.isCreative()) return false;
 
-		if (!player.isSecondaryUseActive() && isValidCrop(level, pos, state)) {
-			return isCropMature(level, pos, state);
+		if (!player.isSecondaryUseActive() && BlockUtils.isValidCrop(level, pos, state)) {
+			return BlockUtils.isCropMature(level, pos, state);
 		}
 
 		return true;
-	}
-
-	public static boolean isValidCrop(Level level, BlockPos pos, BlockState state) {
-		if (state.getBlock() instanceof CropBlock) {
-			return true;
-		}
-
-		if (state.is(BlockTags.CROPS)) {
-			return true;
-		}
-
-		if (state.getCollisionShape(level, pos).isEmpty() && state.getBlock().defaultDestroyTime() == 0.0F) {
-			for (Property<?> property : state.getProperties()) {
-				if (!(property instanceof IntegerProperty))
-					continue;
-				if (property.equals(BlockStateProperties.AGE_25) || property.equals(BlockStateProperties.AGE_15))
-					continue;
-				if (!property.getName().equals(BlockStateProperties.AGE_1.getName()))
-					continue;
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	public static boolean isCropMature(Level level, BlockPos pos, BlockState state) {
-		if (state.getBlock() instanceof CropBlock crop) {
-			return crop.isMaxAge(state);
-		}
-
-		if (state.getCollisionShape(level, pos).isEmpty() || state.getBlock() instanceof CocoaBlock) {
-			for (Property<?> property : state.getProperties()) {
-				if (!(property instanceof IntegerProperty ageProperty))
-					continue;
-				if (!property.getName().equals(BlockStateProperties.AGE_1.getName()))
-					continue;
-				int age = state.getValue(ageProperty);
-				if (state.getBlock() instanceof SweetBerryBushBlock && age <= 1)
-					continue;
-				if (age == 0 || (ageProperty.getPossibleValues().size() - 1 != age))
-					continue;
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
@@ -141,37 +90,6 @@ public class KnifeItem extends DiggerItem
 		return KNIFE_ACTIONS.contains(toolAction);
 	}
 
-	public static BlockState getHarvestedCropState(Level world, BlockPos pos, BlockState state) {
-		Block block = state.getBlock();
-		if (block instanceof CropBlock crop) {
-			BlockState newState = crop.getStateForAge(0);
-			if (!newState.is(block))
-				return newState;
-			IntegerProperty ageProperty = ((CropBlockAccessor) crop).fd$getAgeProperty();
-			return state.setValue(ageProperty, 0);
-		}
-		if (block == Blocks.SWEET_BERRY_BUSH) {
-			return state.setValue(BlockStateProperties.AGE_3, 1);
-		}
-		if (state.getCollisionShape(world, pos)
-			.isEmpty() || block instanceof CocoaBlock) {
-			for (Property<?> property : state.getProperties()) {
-				if (!(property instanceof IntegerProperty))
-					continue;
-				if (!property.getName()
-					.equals(BlockStateProperties.AGE_1.getName()))
-					continue;
-				return state.setValue((IntegerProperty) property, 0);
-			}
-		}
-
-		if (state.getFluidState()
-			.isEmpty())
-			return Blocks.AIR.defaultBlockState();
-		return state.getFluidState()
-			.createLegacyBlock();
-	}
-
 	@EventBusSubscriber(modid = FarmersDelight.MODID)
 	public static class KnifeEvents
 	{
@@ -188,7 +106,7 @@ public class KnifeItem extends DiggerItem
 			BlockPos pos = event.getPos();
 			BlockState state = level.getBlockState(pos);
 
-			if (!isCropMature(level, pos, state)) {
+			if (!BlockUtils.isCropMature(level, pos, state)) {
 				return;
 			}
 
@@ -196,7 +114,7 @@ public class KnifeItem extends DiggerItem
 				level.destroyBlock(pos, true, event.getEntity());
 			}
 
-			BlockState cutCrop = getHarvestedCropState(level, pos, state);
+			BlockState cutCrop = BlockUtils.getHarvestedCropState(level, pos, state);
 			level.setBlockAndUpdate(pos, cutCrop.canSurvive(level, pos) ? cutCrop : Blocks.AIR.defaultBlockState());
 		}
 
