@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-25T01:14:08.5546299	Item Models: farmersdelight
+// 1.21.1	2026-08-18T19:28:49.4690796	Item Models: farmersdelight
 01e23a47f469a0c2107b2a1b6fc7f7c8f0c23d55 assets/farmersdelight/models/item/acacia_cabinet.json
 a58cc863fafd0f13d1235a2f7344b446f853ae55 assets/farmersdelight/models/item/apple_cider.json
 8348e66b9efe6a92614cca78c3463d3efaea57fa assets/farmersdelight/models/item/apple_pie.json
@@ -9,7 +9,6 @@ fdf3aec6a0587d7433fc34838c06bc4629b42b6f assets/farmersdelight/models/item/bacon
 bc153118bad1dff35ed07c8f14b40c7676c834b7 assets/farmersdelight/models/item/baked_cod_stew.json
 c4a8253f42ff047f4db79dcd111de31dea794751 assets/farmersdelight/models/item/bamboo_basket.json
 656871638f7f6400f46632cd51d5442dfdfcb58c assets/farmersdelight/models/item/bamboo_cabinet.json
-3f305623cf41b67d5a413a67291a1c0a5c50e8fc assets/farmersdelight/models/item/barbecue_stick.json
 204aea5fb950c545194b505b420083f03d274fe5 assets/farmersdelight/models/item/beef_patty.json
 849ebf719f4e3dfe046dad1f95a294a05ad92669 assets/farmersdelight/models/item/beef_stew.json
 4dcb43ecd354f9df032c031d8d37f3c0a514c668 assets/farmersdelight/models/item/beetroot_crate.json
@@ -43,9 +42,11 @@ c84474984c0eac247302331dc999c9a79aa7b787 assets/farmersdelight/models/item/cod_r
 f097ef00daddcaeb4714fa0cf42df9482b98e047 assets/farmersdelight/models/item/cooked_bacon.json
 4d0143a2aabcfa016cb3a9527e58837108ba5cb7 assets/farmersdelight/models/item/cooked_chicken_cuts.json
 3564bd42d781955191f4fd19d0c548d59957b7a8 assets/farmersdelight/models/item/cooked_cod_slice.json
+5e18e9984b0be3164d2063436ff1f4cbc22bcdab assets/farmersdelight/models/item/cooked_meat_skewer.json
 0a5899ea62a3bc142a969d00eb94b605491f5117 assets/farmersdelight/models/item/cooked_mutton_chops.json
 4da5710d0936158de50578f95ab0d85098c305f8 assets/farmersdelight/models/item/cooked_rice.json
 217248d43c15ff6f3212a6e9d40326d358a6bc39 assets/farmersdelight/models/item/cooked_salmon_slice.json
+72a6223421a61823de5c13c81c80715879099579 assets/farmersdelight/models/item/cooked_vegetable_skewer.json
 c31f20fa9fa0742e64a448a1c49a5c9e484ae31c assets/farmersdelight/models/item/cooking_pot.json
 679c209be0391227a3b2be54fd0b52917dcb3bed assets/farmersdelight/models/item/crimson_cabinet.json
 8aeae632a08ec1501c0c5fea12e7041907eee959 assets/farmersdelight/models/item/cutting_board.json
@@ -94,6 +95,7 @@ e1c7ade4a3eef3131c8edd4de7484f15888bc6d4 assets/farmersdelight/models/item/light
 6c0e75ae202186a85e8b8a5914022b766079b2f8 assets/farmersdelight/models/item/magenta_canvas_sign.json
 dd5abf5e41e50624420fcaa0171c4429be9cdf3a assets/farmersdelight/models/item/magenta_hanging_canvas_sign.json
 8af79d6418e9a0d651c40fda774b7655380d7a03 assets/farmersdelight/models/item/mangrove_cabinet.json
+caf2b05effdc6c0bd937cd721891d1dd470c6eca assets/farmersdelight/models/item/meat_skewer.json
 92496d1709e022d50fd4bd0c57d5839eacff70fe assets/farmersdelight/models/item/melon_juice.json
 c3a381356341fa39957aca63a5f787fa9e7008ef assets/farmersdelight/models/item/melon_popsicle.json
 6ab158c9d3318baaf2ea2fac85ac74a1c15aaff4 assets/farmersdelight/models/item/milk_bottle.json
@@ -168,6 +170,7 @@ bb7a680a396b98c468a2bb81e1822f7a6c8d6a47 assets/farmersdelight/models/item/stuff
 12a5748e427e3e6f6472784f73b0635e0ca3662a assets/farmersdelight/models/item/tomato_seeds.json
 4b8ac882b0d2da18a50dce84a3733d1d8b6c3dbc assets/farmersdelight/models/item/tree_bark.json
 4a52d396e47fea251781cb81682b1165c08ee4bf assets/farmersdelight/models/item/vegetable_noodles.json
+caf6ccfaf35dba2639e7cfa422e78955a391ec4f assets/farmersdelight/models/item/vegetable_skewer.json
 9ff3ce1e41f509694a0283523c223fcd162f0327 assets/farmersdelight/models/item/vegetable_soup.json
 aa9129a8faa42a698778f58de26e2eb4fab07365 assets/farmersdelight/models/item/warped_cabinet.json
 a634b899a40afb954687cb05b4d92420e1584fff assets/farmersdelight/models/item/wheat_dough.json

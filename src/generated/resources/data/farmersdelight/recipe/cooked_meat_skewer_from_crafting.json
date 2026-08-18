@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:stick"
+    },
+    [
+      {
+        "tag": "c:foods/cooked_meat"
+      },
+      {
+        "tag": "c:foods/cooked_fish"
+      }
+    ],
+    [
+      {
+        "tag": "c:foods/cooked_meat"
+      },
+      {
+        "tag": "c:foods/cooked_fish"
+      }
+    ]
+  ],
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:cooked_meat_skewer"
+  }
+}

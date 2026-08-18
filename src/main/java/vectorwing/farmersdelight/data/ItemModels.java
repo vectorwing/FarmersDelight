@@ -137,7 +137,7 @@ public class ItemModels extends ItemModelProvider
 
 		// Handheld items
 		Set<Item> handheldItems = Sets.newHashSet(
-				ModItems.BARBECUE_STICK.get(),
+				ModItems.COOKED_MEAT_SKEWER.get(),
 				ModItems.HAM.get(),
 				ModItems.SMOKED_HAM.get(),
 				ModItems.FLINT_KNIFE.get(),

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "farmersdelight:item/barbecue_stick"
+    "layer0": "farmersdelight:item/cooked_meat_skewer"
   }
 }

@@ -1,6 +1,9 @@
 {
   "values": [
-    "farmersdelight:barbecue_stick",
+    "farmersdelight:meat_skewer",
+    "farmersdelight:vegetable_skewer",
+    "farmersdelight:cooked_meat_skewer",
+    "farmersdelight:cooked_vegetable_skewer",
     "farmersdelight:egg_sandwich",
     "farmersdelight:chicken_sandwich",
     "farmersdelight:hamburger",

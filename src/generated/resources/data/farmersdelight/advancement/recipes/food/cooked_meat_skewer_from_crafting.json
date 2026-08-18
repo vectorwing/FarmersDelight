@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_onion": {
+    "has_stick": {
       "conditions": {
         "items": [
           {
-            "items": "farmersdelight:onion"
+            "items": "minecraft:stick"
           }
         ]
       },
@@ -13,31 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "farmersdelight:barbecue_stick"
+        "recipe": "farmersdelight:cooked_meat_skewer_from_crafting"
       },
       "trigger": "minecraft:recipe_unlocked"
-    },
-    "has_tomato": {
-      "conditions": {
-        "items": [
-          {
-            "items": "farmersdelight:tomato"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_tomato",
-      "has_onion"
+      "has_stick"
     ]
   ],
   "rewards": {
     "recipes": [
-      "farmersdelight:barbecue_stick"
+      "farmersdelight:cooked_meat_skewer_from_crafting"
     ]
   }
 }

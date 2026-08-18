@@ -21,6 +21,8 @@ public class SmeltingRecipes
 		foodSmeltingRecipes("cooked_salmon_slice", ModItems.SALMON_SLICE.get(), ModItems.COOKED_SALMON_SLICE.get(), 0.35F, output);
 		foodSmeltingRecipes("cooked_bacon", ModItems.BACON.get(), ModItems.COOKED_BACON.get(), 0.35F, output);
 		foodSmeltingRecipes("cooked_mutton_chops", ModItems.MUTTON_CHOPS.get(), ModItems.COOKED_MUTTON_CHOPS.get(), 0.35F, output);
+		foodSmeltingRecipes("cooked_meat_skewer", ModItems.MEAT_SKEWER.get(), ModItems.COOKED_MEAT_SKEWER.get(), 0.35F, output);
+		foodSmeltingRecipes("cooked_vegetable_skewer", ModItems.VEGETABLE_SKEWER.get(), ModItems.COOKED_VEGETABLE_SKEWER.get(), 0.35F, output);
 
 		SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.WHEAT_DOUGH.get()), RecipeCategory.FOOD,
 						Items.BREAD, 0.35F, 200)

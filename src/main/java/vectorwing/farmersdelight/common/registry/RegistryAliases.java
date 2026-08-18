@@ -7,6 +7,7 @@ public class RegistryAliases
 	public static void addRegistryAliases() {
 		addBlockAlias("basket", "bamboo_basket");
 		addItemAlias("basket", "bamboo_basket");
+		addItemAlias("barbecue_stick", "cooked_meat_skewer");
 	}
 
 	public static void addBlockAlias(String oldName, String newName) {
