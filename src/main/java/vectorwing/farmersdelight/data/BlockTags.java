@@ -343,6 +343,11 @@ public class BlockTags extends BlockTagsProvider
 			.addTag(ModTags.Blocks.MUSHROOM_COLONIES)
 			.addTag(ModTags.Blocks.WILD_CROPS)
 			.addTag(net.minecraft.tags.BlockTags.TALL_FLOWERS);
+		tag(ModTags.Blocks.UNAFFECTED_BY_KNIFE_HARVEST)
+			.add(Blocks.MELON_STEM)
+			.add(Blocks.PUMPKIN_STEM)
+			.add(Blocks.ATTACHED_MELON_STEM)
+			.add(Blocks.ATTACHED_PUMPKIN_STEM);
 		tag(ModTags.Blocks.MUSHROOM_COLONY_GROWABLE_ON).add(ModBlocks.RICH_SOIL.get());
 		tag(ModTags.Blocks.DROPS_CAKE_SLICE).add(
 			Blocks.CANDLE_CAKE,

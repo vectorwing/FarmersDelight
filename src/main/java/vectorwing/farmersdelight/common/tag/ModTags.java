@@ -56,6 +56,9 @@ public class ModTags
 		// Blocks commonly present in biome surfaces. Populated by "minecraft:dirt" and "minecraft:sand" by default.
 		public static final TagKey<Block> TERRAIN = modBlockTag("terrain");
 
+		// Blocks which the Knife cannot replant-harvest under any circumstance, breaking them normally. Overrides any datamap configured for the block.
+		public static final TagKey<Block> UNAFFECTED_BY_KNIFE_HARVEST = modBlockTag("unaffected_by_knife_harvest");
+
 		// Blocks which should not have their growth boosted by Rich Soil, if planted on it.
 		public static final TagKey<Block> UNAFFECTED_BY_RICH_SOIL = modBlockTag("unaffected_by_rich_soil");
 

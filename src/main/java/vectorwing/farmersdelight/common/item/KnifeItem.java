@@ -58,6 +58,8 @@ public class KnifeItem extends DiggerItem
 	public boolean canAttackBlock(BlockState state, Level level, BlockPos pos, Player player) {
 		if (player.isCreative()) return false;
 
+		if (state.is(ModTags.Blocks.UNAFFECTED_BY_KNIFE_HARVEST)) return true;
+
 		if (!player.isSecondaryUseActive() && BlockUtils.isValidCrop(level, pos, state)) {
 			return BlockUtils.isCropMature(level, pos, state);
 		}
