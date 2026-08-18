@@ -14,6 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
+import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
@@ -56,7 +57,7 @@ public class CookingPotMenu extends RecipeBookMenu
 		int borderSlotSize = 18;
 		for (int row = 0; row < 2; ++row) {
 			for (int column = 0; column < 3; ++column) {
-				this.addSlot(new SlotItemHandler(inventory, (row * 3) + column,
+				this.addSlot(new ResourceHandlerSlot(inventory, inventory::set, (row * 3) + column,
 						inputStartX + (column * borderSlotSize),
 						inputStartY + (row * borderSlotSize)));
 			}
@@ -66,7 +67,7 @@ public class CookingPotMenu extends RecipeBookMenu
 		this.addSlot(new CookingPotMealSlot(inventory, 6, 124, 26));
 
 		// Bowl Input
-		Slot bowlSlot = new SlotItemHandler(inventory, 7, 92, 55);
+		Slot bowlSlot = new ResourceHandlerSlot(inventory, inventory::set, 7, 92, 55);
 		bowlSlot.setBackground(EMPTY_CONTAINER_SLOT_BOWL);
 		this.addSlot(bowlSlot);
 

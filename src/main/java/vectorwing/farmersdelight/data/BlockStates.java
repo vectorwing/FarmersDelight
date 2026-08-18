@@ -1,6 +1,9 @@
 package vectorwing.farmersdelight.data;
 
 import com.google.common.collect.Sets;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -13,23 +16,23 @@ import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.client.model.generators.ModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jspecify.annotations.Nullable;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.*;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 
-public class BlockStates extends BlockStateProvider
+public class BlockStates extends ModelProvider
 {
 	private static final int DEFAULT_ANGLE_OFFSET = 180;
 
-	public BlockStates(PackOutput output, ExistingFileHelper existingFileHelper) {
-		super(output, FarmersDelight.MODID, existingFileHelper);
+	public BlockStates(PackOutput output) {
+		super(output, FarmersDelight.MODID);
 	}
 
 	private String blockName(Block block) {
@@ -53,7 +56,7 @@ public class BlockStates extends BlockStateProvider
 	}
 
 	@Override
-	protected void registerStatesAndModels() {
+	protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
 		simpleBlock(ModBlocks.SAFETY_NET.get(), existingModel(ModBlocks.SAFETY_NET.get()));
 		simpleBlock(ModBlocks.CANVAS_RUG.get(), existingModel(ModBlocks.CANVAS_RUG.get()));
 

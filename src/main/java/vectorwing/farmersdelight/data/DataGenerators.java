@@ -43,9 +43,9 @@ public class DataGenerators
 		// TODO: IE hasn't updated to 26.1 yet. This depends on ExistingFileHelper, which no longer exists. See if this can be fixed.
 //		event.createProvider(new StructureUpdater("structures/village/houses", FarmersDelight.MODID, helper, output));
 
-		BlockStates blockStates = new BlockStates(output, helper);
+		BlockStates blockStates = new BlockStates(output);
 		generator.addProvider(event.includeClient(), blockStates);
-		generator.addProvider(event.includeClient(), new ItemModels(output, blockStates.models().existingFileHelper));
+		generator.addProvider(event.includeClient(), new ItemModels(output));
 		event.createProvider(SoundDefinitions::new);
 	}
 }

@@ -1,13 +1,14 @@
 package vectorwing.farmersdelight.data;
 
 import com.google.common.collect.Sets;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
@@ -18,18 +19,20 @@ import java.util.stream.Collectors;
 /**
  * Credits to Vazkii and team for some references on mass-reading blocks to datagen!
  */
-public class ItemModels extends ItemModelProvider
+public class ItemModels extends ModelProvider
 {
 	public static final String GENERATED = "item/generated";
 	public static final String HANDHELD = "item/handheld";
 	public static final Identifier MUG = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "item/mug");
+	private ItemModelGenerators itemModels;
 
-	public ItemModels(PackOutput output, ExistingFileHelper existingFileHelper) {
-		super(output, FarmersDelight.MODID, existingFileHelper);
+	public ItemModels(PackOutput output) {
+		super(output, FarmersDelight.MODID);
 	}
 
 	@Override
-	protected void registerModels() {
+	protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
+		this.itemModels = itemModels;
 		Set<Item> items = BuiltInRegistries.ITEM.stream().filter(i -> FarmersDelight.MODID.equals(BuiltInRegistries.ITEM.getKey(i).getNamespace()))
 				.collect(Collectors.toSet());
 

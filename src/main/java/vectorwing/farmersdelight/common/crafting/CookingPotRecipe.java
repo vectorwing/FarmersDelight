@@ -5,18 +5,25 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.RecipeMatcher;
+import org.jspecify.annotations.Nullable;
+import vectorwing.farmersdelight.client.recipe.CookingPotRecipeDisplay;
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
+import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeCategories;
 import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
-import javax.annotation.Nullable;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 public class CookingPotRecipe implements Recipe<RecipeInput>
@@ -29,8 +36,8 @@ public class CookingPotRecipe implements Recipe<RecipeInput>
 			nonNullList.addAll(ingredients);
 			return nonNullList;
 		}, ingredients -> ingredients).forGetter(CookingPotRecipe::getIngredients),
-		ItemStack.CODEC.validate(ItemStack::validateStrict).fieldOf("result").forGetter(r -> r.output),
-		ItemStack.CODEC.validate(ItemStack::validateStrict).optionalFieldOf("container", ItemStack.EMPTY).forGetter(CookingPotRecipe::getContainerOverride),
+		ItemStackTemplate.CODEC.fieldOf("result").forGetter(r -> r.output),
+		ItemStackTemplate.CODEC.optionalFieldOf("container").forGetter(CookingPotRecipe::getContainerOverride),
 		Codec.FLOAT.optionalFieldOf("experience", 0.0F).forGetter(CookingPotRecipe::getExperience),
 		Codec.INT.optionalFieldOf("cookingtime", 200).forGetter(CookingPotRecipe::getCookTime)
 	).apply(inst, CookingPotRecipe::new));
@@ -41,49 +48,24 @@ public class CookingPotRecipe implements Recipe<RecipeInput>
 	public static final int INPUT_SLOTS = 6;
 
 	private final String group;
-	private final CookingPotRecipeBookTab tab;
+	private final @Nullable CookingPotRecipeBookTab tab;
 	private final NonNullList<Ingredient> inputItems;
-	private final ItemStack output;
-	private final ItemStack container;
-	private final ItemStack containerOverride;
+	private final ItemStackTemplate output;
+	private final @Nullable ItemStackTemplate container;
 	private final float experience;
 	private final int cookTime;
+	private final PlacementInfo placementInfo;
 
-	private PlacementInfo placementInfo;
 
-	public CookingPotRecipe(String group, @Nullable CookingPotRecipeBookTab tab, NonNullList<Ingredient> inputItems, ItemStack output, ItemStack container, float experience, int cookTime) {
+	public CookingPotRecipe(String group, @Nullable CookingPotRecipeBookTab tab, NonNullList<Ingredient> inputItems, ItemStackTemplate output, Optional<ItemStackTemplate> container, float experience, int cookTime) {
 		this.group = group;
 		this.tab = tab;
 		this.inputItems = inputItems;
 		this.output = output;
-
-		if (!container.isEmpty()) {
-			this.container = container;
-		} else if (output.getCraftingRemainder() != null && output.getCraftingRemainder().count() != 0) {
-			this.container = output.getCraftingRemainder().create();
-		} else {
-			this.container = ItemStack.EMPTY;
-		}
-
-		this.containerOverride = container;
+		this.container = container.orElse(null);
 		this.experience = experience;
 		this.cookTime = cookTime;
-
-		Optional<Ingredient> emptyIngredient = Optional.of(Ingredient.of());
-		LinkedList<Optional<Ingredient>> placementIngredients = new LinkedList<>();
-		// Add the actual ingredients
-		for (Ingredient ingredient : inputItems) {
-			placementIngredients.add(Optional.of(ingredient));
-		}
-		// Fill the remaining empty slots
-		for (int i = 0; i < INPUT_SLOTS - inputItems.size(); i++) {
-			placementIngredients.add(emptyIngredient);
-		}
-		placementIngredients.add(Optional.empty()); // Meal display
-		placementIngredients.add(this.container == ItemStack.EMPTY ? emptyIngredient : Optional.of(Ingredient.of(this.container.getItem()))); // Container
-		placementIngredients.add(Optional.empty()); // Output
-
-		this.placementInfo = PlacementInfo.createFromOptionals(placementIngredients);
+		this.placementInfo = PlacementInfo.create(inputItems);
 	}
 
 	@Nullable
@@ -96,11 +78,11 @@ public class CookingPotRecipe implements Recipe<RecipeInput>
 	}
 
 	public ItemStack getOutputContainer() {
-		return this.container;
+		return this.container.create();
 	}
 
-	public ItemStack getContainerOverride() {
-		return this.containerOverride;
+	public Optional<ItemStackTemplate> getContainerOverride() {
+		return Optional.ofNullable(this.container);
 	}
 
 	public float getExperience() {
@@ -128,7 +110,7 @@ public class CookingPotRecipe implements Recipe<RecipeInput>
 
 	@Override
 	public ItemStack assemble(RecipeInput recipeInput) {
-		return this.output.copy();
+		return this.output.create();
 	}
 
 	@Override
@@ -154,6 +136,16 @@ public class CookingPotRecipe implements Recipe<RecipeInput>
 	@Override
 	public PlacementInfo placementInfo() {
 		return placementInfo;
+	}
+
+	@Override
+	public List<RecipeDisplay> display() {
+		return List.of(new CookingPotRecipeDisplay(this.inputItems.stream().map(Ingredient::display).toList(),
+			container == null ? Optional.empty() : Optional.of(new SlotDisplay.ItemStackSlotDisplay(new ItemStackTemplate(container.item(), container.count(), container.components()))),
+			new SlotDisplay.ItemStackSlotDisplay(this.output),
+			new SlotDisplay.ItemSlotDisplay(ModItems.COOKING_POT.get()),
+			cookTime,
+			experience));
 	}
 
 	@Override
@@ -203,8 +195,8 @@ public class CookingPotRecipe implements Recipe<RecipeInput>
 
 			inputItems.replaceAll(ignored -> Ingredient.CONTENTS_STREAM_CODEC.decode(buffer));
 
-			ItemStack output = ItemStack.STREAM_CODEC.decode(buffer);
-			ItemStack container = ItemStack.OPTIONAL_STREAM_CODEC.decode(buffer);
+			ItemStackTemplate output = ItemStackTemplate.STREAM_CODEC.decode(buffer);
+			Optional<ItemStackTemplate> container = ByteBufCodecs.optional(ItemStackTemplate.STREAM_CODEC).decode(buffer);
 			float experience = buffer.readFloat();
 			int cookTime = buffer.readVarInt();
 			return new CookingPotRecipe(group, tab, inputItems, output, container, experience, cookTime);
@@ -219,8 +211,8 @@ public class CookingPotRecipe implements Recipe<RecipeInput>
 				Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, ingredient);
 			}
 
-			ItemStack.STREAM_CODEC.encode(buffer, recipe.output);
-			ItemStack.OPTIONAL_STREAM_CODEC.encode(buffer, recipe.container);
+			ItemStackTemplate.STREAM_CODEC.encode(buffer, recipe.output);
+			ByteBufCodecs.optional(ItemStackTemplate.STREAM_CODEC).encode(buffer, Optional.ofNullable(recipe.container));
 			buffer.writeFloat(recipe.experience);
 			buffer.writeVarInt(recipe.cookTime);
 		}

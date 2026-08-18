@@ -1,19 +1,18 @@
 package vectorwing.farmersdelight.integration.jei;
 
 import com.google.common.collect.Lists;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RecipesReceivedEvent;
+import org.jspecify.annotations.Nullable;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -23,32 +22,28 @@ import vectorwing.farmersdelight.common.utility.RecipeUtils;
 import java.util.List;
 import java.util.Optional;
 
+@EventBusSubscriber
 public class FDRecipes
 {
-	// TODO this absolutely sucks but might be necessary for JEI recipe registration
-	public static MinecraftServer SERVER;
-	private final RecipeManager recipeManager;
+	private @Nullable RecipeMap recipeMap;
 
 	public FDRecipes() {
-		if (SERVER != null) {
-			this.recipeManager = SERVER.getRecipeManager();
-		} else {
+		if (recipeMap == null) {
 			throw new NullPointerException("Minecraft level must not be null.");
 		}
 	}
 
+	@SubscribeEvent
+	public void receiveRecipes(RecipesReceivedEvent event) {
+		this.recipeMap = event.getRecipeMap();
+	}
+
 	public List<RecipeHolder<CookingPotRecipe>> getCookingPotRecipes() {
-		return recipeManager.getRecipes().stream()
-			.filter(r -> r.value().getType() == ModRecipeTypes.COOKING.get())
-			.map(r -> (RecipeHolder<CookingPotRecipe>) (r) )
-			.toList();
+		return recipeMap.byType(ModRecipeTypes.COOKING.get()).stream().toList();
 	}
 
 	public List<RecipeHolder<CuttingBoardRecipe>> getCuttingBoardRecipes() {
-		return recipeManager.getRecipes().stream()
-			.filter(r -> r.value().getType() == ModRecipeTypes.CUTTING.get())
-			.map(r -> (RecipeHolder<CuttingBoardRecipe>) (r) )
-			.toList();
+		return recipeMap.byType(ModRecipeTypes.CUTTING.get()).stream().toList();
 	}
 
 	public List<RecipeHolder<CraftingRecipe>> getSpecialCraftingRecipes() {
@@ -67,7 +62,7 @@ public class FDRecipes
 	}
 
 	public void addValidatedSpecialRecipe(List<RecipeHolder<CraftingRecipe>> recipeList, String recipeId, String group, NonNullList<Ingredient> inputs, ItemLike output) {
-		Optional<RecipeHolder<?>> specialRecipe = recipeManager.byKey(ResourceKey.create(Registries.RECIPE, RecipeUtils.FDLocation(recipeId)));
+		Optional<RecipeHolder<?>> specialRecipe = Optional.ofNullable(recipeMap.byKey(ResourceKey.create(Registries.RECIPE, RecipeUtils.FDLocation(recipeId))));
 
 		specialRecipe.ifPresent((recipe) -> {
 			ShapelessRecipe shapeless = new ShapelessRecipe(

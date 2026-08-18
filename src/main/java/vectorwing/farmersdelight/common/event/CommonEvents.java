@@ -10,6 +10,7 @@ import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import net.minecraft.world.level.gamerules.GameRules;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
@@ -19,6 +20,8 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.FoodValues;
 import vectorwing.farmersdelight.common.network.payload.NaturalRegenerationGameRulePayload;
+import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
+import vectorwing.farmersdelight.integration.jei.FDRecipeTypes;
 import vectorwing.farmersdelight.integration.jei.FDRecipes;
 
 @EventBusSubscriber(modid = FarmersDelight.MODID)
@@ -64,10 +67,9 @@ public class CommonEvents
 		}
 	}
 
-	// TODO this absolutely sucks but might be necessary for JEI recipe registration
 	@SubscribeEvent
-	public void onServerAboutToStart(ServerAboutToStartEvent event) {
-		FDRecipes.SERVER = event.getServer();
+	public void sendSyncedRecipes(OnDatapackSyncEvent event) {
+		event.sendRecipes(ModRecipeTypes.COOKING.get(), ModRecipeTypes.CUTTING.get());
 	}
 
 	private static void sendPayload(ServerPlayer player, CustomPacketPayload payload) {
