@@ -25,19 +25,13 @@ import java.util.List;
 
 public class CookingPotRecipeBookComponent extends RecipeBookComponent<CookingPotMenu>
 {
-	private static final SearchRecipeBookCategory COOKING_SEARCH_CATEGORY = ModRecipeCategories.COOKING_SEARCH.get();
 
 	protected static final WidgetSprites RECIPE_BOOK_BUTTONS = new WidgetSprites(
 		Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "recipe_book/cooking_pot_enabled"),
 		Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "recipe_book/cooking_pot_disabled"),
 		Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "recipe_book/cooking_pot_enabled_highlighted"),
 		Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "recipe_book/cooking_pot_disabled_highlighted"));
-	private static final List<TabInfo> TABS = List.of(
-		new TabInfo(COOKING_SEARCH_CATEGORY),
-		new TabInfo(ModItems.VEGETABLE_NOODLES.get(), ModRecipeCategories.COOKING_MEALS.get()),
-		new TabInfo(ModItems.APPLE_CIDER.get(), ModRecipeCategories.COOKING_DRINKS.get()),
-		new TabInfo(ModItems.DUMPLINGS.get(), ModItems.TOMATO_SAUCE.get(), ModRecipeCategories.COOKING_MISC.get())
-	);
+	private static final List<TabInfo> TABS = ModRecipeCategories.createCookingPotTabInfo();
 
 	public CookingPotRecipeBookComponent(CookingPotMenu menu) {
 		super(menu, TABS);

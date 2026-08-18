@@ -9,11 +9,13 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
@@ -57,7 +59,7 @@ public class CuttingBoardRecipe implements Recipe<CuttingBoardRecipeInput>
 					nonNullList.addAll(chanceResults);
 					return DataResult.success(nonNullList);
 				}, DataResult::success).forGetter(CuttingBoardRecipe::getRollableResults),
-				SoundEvent.DIRECT_CODEC.optionalFieldOf("sound").forGetter(CuttingBoardRecipe::getSoundEvent))
+				SoundEvent.CODEC.optionalFieldOf("sound").forGetter(CuttingBoardRecipe::getSoundEvent))
 			.apply(inst, CuttingBoardRecipe::new));
 
 	public static final StreamCodec<RegistryFriendlyByteBuf, CuttingBoardRecipe> STREAM_CODEC =
@@ -71,9 +73,9 @@ public class CuttingBoardRecipe implements Recipe<CuttingBoardRecipeInput>
 	private final Ingredient input;
 	private final Ingredient tool;
 	private final NonNullList<ChanceResult> results;
-	private final Optional<SoundEvent> soundEvent;
+	private final Optional<Holder<SoundEvent>> soundEvent;
 
-	public CuttingBoardRecipe(String group, Ingredient input, Ingredient tool, NonNullList<ChanceResult> results, Optional<SoundEvent> soundEvent) {
+	public CuttingBoardRecipe(String group, Ingredient input, Ingredient tool, NonNullList<ChanceResult> results, Optional<Holder<SoundEvent>> soundEvent) {
 		this.group = group;
 		this.input = input;
 		this.tool = tool;
@@ -88,7 +90,7 @@ public class CuttingBoardRecipe implements Recipe<CuttingBoardRecipeInput>
 
 	@Override
 	public ItemStack assemble(CuttingBoardRecipeInput cuttingBoardRecipeInput) {
-		return this.results.getFirst().stack().copy();
+		return this.results.getFirst().stack().create();
 	}
 
 	@Override
@@ -119,6 +121,7 @@ public class CuttingBoardRecipe implements Recipe<CuttingBoardRecipeInput>
 	public List<ItemStack> getResults() {
 		return getRollableResults().stream()
 				.map(ChanceResult::stack)
+				.map(ItemStackTemplate::create)
 				.collect(Collectors.toList());
 	}
 
@@ -137,7 +140,7 @@ public class CuttingBoardRecipe implements Recipe<CuttingBoardRecipeInput>
 		return results;
 	}
 
-	public Optional<SoundEvent> getSoundEvent() {
+	public Optional<Holder<SoundEvent>> getSoundEvent() {
 		return this.soundEvent;
 	}
 
@@ -192,37 +195,18 @@ public class CuttingBoardRecipe implements Recipe<CuttingBoardRecipeInput>
 			Ingredient inputItem = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
 			Ingredient tool = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
 
-			int i = buffer.readVarInt();
-			NonNullList<ChanceResult> results = NonNullList.withSize(i, ChanceResult.EMPTY);
-			results.replaceAll(ignored -> ChanceResult.read(buffer));
-			Optional<SoundEvent> soundEvent = Optional.empty();
-			if (buffer.readBoolean()) {
-				Optional<Holder.Reference<SoundEvent>> holder = BuiltInRegistries.SOUND_EVENT.get(buffer.readResourceKey(Registries.SOUND_EVENT));
-				if (holder.isPresent() && holder.get().isBound()) {
-					soundEvent = Optional.of(holder.get().value());
-				}
-			}
+			List<ChanceResult> results = ChanceResult.STREAM_CODEC.apply(ByteBufCodecs.list()).decode(buffer);
+			Optional<Holder<SoundEvent>> soundEvent = SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional).decode(buffer);
 
-			return new CuttingBoardRecipe(group, inputItem, tool, results, soundEvent);
+			return new CuttingBoardRecipe(group, inputItem, tool, NonNullList.copyOf(results), soundEvent);
 		}
 
 		public static void toNetwork(RegistryFriendlyByteBuf buffer, CuttingBoardRecipe recipe) {
 			buffer.writeUtf(recipe.group);
 			Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.input);
 			Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.tool);
-			buffer.writeVarInt(recipe.results.size());
-			for (ChanceResult result : recipe.results) {
-				result.write(buffer);
-			}
-			if (recipe.getSoundEvent().isPresent()) {
-				Optional<ResourceKey<SoundEvent>> resourceKey = BuiltInRegistries.SOUND_EVENT.getResourceKey(recipe.getSoundEvent().get());
-				resourceKey.ifPresentOrElse(rk -> {
-					buffer.writeBoolean(true);
-					buffer.writeResourceKey(rk);
-				}, () -> buffer.writeBoolean(false));
-			} else {
-				buffer.writeBoolean(false);
-			}
+			ChanceResult.STREAM_CODEC.apply(ByteBufCodecs.list()).encode(buffer, recipe.results);
+			SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional).encode(buffer, recipe.soundEvent);
 		}
 	}
 }

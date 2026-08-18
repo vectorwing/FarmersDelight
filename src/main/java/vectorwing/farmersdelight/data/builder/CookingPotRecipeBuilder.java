@@ -105,7 +105,7 @@ public class CookingPotRecipeBuilder implements RecipeBuilder
 		return RecipeBuilder.getDefaultRecipeId(resultStack);
 	}
 
-	public CookingPotRecipeBuilder setRecipeBookCategory(CookingPotRecipeBookTab category) {
+	public CookingPotRecipeBuilder setRecipeBookTab(CookingPotRecipeBookTab category) {
 		this.category = category;
 		return this;
 	}

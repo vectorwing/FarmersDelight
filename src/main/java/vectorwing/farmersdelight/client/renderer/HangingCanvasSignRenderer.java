@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.model.Model;
-import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -28,8 +27,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import vectorwing.farmersdelight.common.block.entity.HangingCanvasSignBlockEntity;
 import vectorwing.farmersdelight.common.block.state.CanvasSign;
 import vectorwing.farmersdelight.common.registry.ModAtlases;
@@ -175,7 +172,6 @@ public class HangingCanvasSignRenderer implements BlockEntityRenderer<HangingCan
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class HangingCanvasSignRenderState extends HangingSignRenderState
 	{
 		@Nullable public DyeColor dye;

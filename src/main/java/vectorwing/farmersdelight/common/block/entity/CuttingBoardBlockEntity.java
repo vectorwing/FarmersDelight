@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.common.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -155,9 +156,9 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity implements Cleara
 		level.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, stack.getItem()), pos.getX() + 0.5, pos.getY() + 0.2, pos.getZ() + 0.5, 5, 0.1, 0.1, 0.1, 0.05D);
 	}
 
-	public void playProcessingSound(@Nullable SoundEvent sound, ItemStack tool, ItemStack boardItem) {
+	public void playProcessingSound(@Nullable Holder<SoundEvent> sound, ItemStack tool, ItemStack boardItem) {
 		if (sound != null) {
-			playSound(sound, 1.0F, 1.0F);
+			playSound(sound.value(), 1.0F, 1.0F);
 		} else if (tool.is(Tags.Items.TOOLS_SHEAR)) {
 			playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);
 		} else if (tool.is(CommonTags.Items.TOOLS_KNIFE)) {
