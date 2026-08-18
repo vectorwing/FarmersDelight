@@ -21,6 +21,7 @@ import net.minecraft.nbt.NbtIo;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.MultiPackResourceManager;
 import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.datafix.DataFixTypes;
 import net.minecraft.util.datafix.DataFixers;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
@@ -37,22 +38,15 @@ public class StructureUpdater implements DataProvider
 	private final String basePath;
 	private final String modid;
 	private final PackOutput output;
-	private final MultiPackResourceManager resources;
+	private final ResourceManager resources;
 
 	public StructureUpdater(
-			String basePath, String modid, PackOutput output
+			String basePath, String modid, PackOutput output, ResourceManager resources
 	) {
 		this.basePath = basePath;
 		this.modid = modid;
 		this.output = output;
-		try {
-			Field serverData = ExistingFileHelper.class.getDeclaredField("serverData");
-			serverData.setAccessible(true);
-			resources = (MultiPackResourceManager) serverData.get(helper);
-		}
-		catch (NoSuchFieldException | IllegalAccessException e) {
-			throw new RuntimeException(e);
-		}
+		this.resources = resources;
 	}
 
 	@Override
@@ -89,10 +83,10 @@ public class StructureUpdater implements DataProvider
 
 	private static CompoundTag updateNBT(CompoundTag nbt) {
 		final CompoundTag updatedNBT = DataFixTypes.STRUCTURE.updateToCurrentVersion(
-				DataFixers.getDataFixer(), nbt, nbt.getInt("DataVersion")
+				DataFixers.getDataFixer(), nbt, nbt.getInt("DataVersion").orElse(4790)
 		);
 		StructureTemplate template = new StructureTemplate();
-		template.load(BuiltInRegistries.BLOCK.asLookup(), updatedNBT);
+		template.load(BuiltInRegistries.BLOCK, updatedNBT);
 		return template.save(new CompoundTag());
 	}
 

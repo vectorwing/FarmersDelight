@@ -303,8 +303,8 @@ public class BlockTags extends BlockTagsProvider
 			.add(ModBlocks.BROWN_MUSHROOM_COLONY.get())
 			.add(ModBlocks.RED_MUSHROOM_COLONY.get());
 		tag(ModTags.Blocks.ROPES).add(ModBlocks.ROPE.get())
-			.addOptional(Identifier.parse("quark:rope"))
-			.addOptional(Identifier.parse("supplementaries:rope"));
+			.add(TagEntry.optionalElement(Identifier.parse("quark:rope")))
+			.add(TagEntry.optionalElement(Identifier.parse("supplementaries:rope")));
 		tag(ModTags.Blocks.TRAY_HEAT_SOURCES).add(
 				Blocks.LAVA)
 			.addTag(net.minecraft.tags.BlockTags.CAMPFIRES)
@@ -316,7 +316,7 @@ public class BlockTags extends BlockTagsProvider
 			.addTag(ModTags.Blocks.TRAY_HEAT_SOURCES);
 		tag(ModTags.Blocks.HEAT_CONDUCTORS).add(
 				Blocks.HOPPER)
-			.addOptional(Identifier.parse("create:chute"));
+			.add(TagEntry.optionalElement(Identifier.parse("create:chute")));
 		tag(ModTags.Blocks.COMPOST_ACTIVATORS).add(
 				Blocks.BROWN_MUSHROOM,
 				Blocks.RED_MUSHROOM,
@@ -341,7 +341,7 @@ public class BlockTags extends BlockTagsProvider
 				ModBlocks.SANDY_SHRUB.get())
 			.addTag(ModTags.Blocks.MUSHROOM_COLONIES)
 			.addTag(ModTags.Blocks.WILD_CROPS)
-			.addTag(net.minecraft.tags.BlockTags.TALL_FLOWERS);
+			.addTag(Tags.Blocks.FLOWERS_TALL);
 		tag(ModTags.Blocks.MUSHROOM_COLONY_GROWABLE_ON).add(ModBlocks.RICH_SOIL.get());
 		tag(ModTags.Blocks.DROPS_CAKE_SLICE).add(
 			Blocks.CANDLE_CAKE,

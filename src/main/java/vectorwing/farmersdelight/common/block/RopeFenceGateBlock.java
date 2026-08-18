@@ -27,12 +27,12 @@ public class RopeFenceGateBlock extends FenceGateBlock
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+	protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos, Direction facing, BlockPos neighbourPos, BlockState neighbourState, RandomSource random) {
 		Direction.Axis axis = facing.getAxis();
 		if (state.getValue(FACING).getClockWise().getAxis() != axis) {
-			return super.updateShape(state, level, ticks, pos, directionToNeighbour, neighbourPos, neighbourState, random);
+			return super.updateShape(state, level, ticks, pos, facing, neighbourPos, neighbourState, random);
 		} else {
-			boolean isBorderedByWalls = this.isWall(neighbourState) && this.isWall(level.getBlockState(pos.relative(directionToNeighbour.getOpposite())));
+			boolean isBorderedByWalls = this.isWall(neighbourState) && this.isWall(level.getBlockState(pos.relative(facing.getOpposite())));
 			return state.setValue(IN_WALL, isBorderedByWalls);
 		}
 	}

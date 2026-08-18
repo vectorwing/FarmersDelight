@@ -3,6 +3,7 @@ package vectorwing.farmersdelight.data;
 import net.minecraft.advancements.criterion.*;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.component.predicates.DataComponentPredicates;
 import net.minecraft.core.component.predicates.EnchantmentsPredicate;
 import net.minecraft.core.registries.Registries;
@@ -11,6 +12,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -79,7 +81,7 @@ public class LootModifiers extends GlobalLootModifierProvider
 		this.add("scavenging_string", this.addItemOnKnifeKill(items, entityTypes, Items.STRING, EntityType.SPIDER, EntityType.CAVE_SPIDER));
 		this.add("scavenging_pumpkin", new ReplaceItemModifier(new LootItemCondition[]{
 			LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.PUMPKIN).build(),
-			MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.Items.KNIVES))
+			MatchTool.toolMatches(ItemPredicate.Builder.item().of(items, ModTags.Items.KNIVES))
 				.and(hasSilkTouch().invert()).build()
 		},Items.PUMPKIN, ModItems.PUMPKIN_SLICE.get(), 4));
 
@@ -107,7 +109,7 @@ public class LootModifiers extends GlobalLootModifierProvider
 		LootItemCondition.Builder[] entityConditions = new LootItemCondition.Builder[entity.length];
 		for (int i = 0; i < entity.length; i++) {
 			entityConditions[i] = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS,
-				EntityPredicate.Builder.entity().of(entity[i]).build());
+				EntityPredicate.Builder.entity().of(entityTypes, entity[i]).build());
 		}
 		List<LootItemCondition> conditions = new ArrayList<>();
 		conditions.add(entityConditions.length > 1 ? AnyOfCondition.anyOf(entityConditions).build() : entityConditions[0].build());
@@ -128,7 +130,7 @@ public class LootModifiers extends GlobalLootModifierProvider
 		LootItemCondition.Builder[] entityConditions = new LootItemCondition.Builder[entity.length];
 		for (int i = 0; i < entity.length; i++) {
 			entityConditions[i] = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS,
-				EntityPredicate.Builder.entity().of(entity[i]).build());
+				EntityPredicate.Builder.entity().of(entityTypes, entity[i]).build());
 		}
 
 		List<LootItemCondition> conditions = new ArrayList<>();
@@ -153,14 +155,14 @@ public class LootModifiers extends GlobalLootModifierProvider
 			conditions[i] = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cakes.get(i));
 		}
 		return new AddItemModifier(new LootItemCondition[]{
-			MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.Items.KNIVES)).build(),
+			MatchTool.toolMatches(ItemPredicate.Builder.item().of(items, ModTags.Items.KNIVES)).build(),
 			AnyOfCondition.anyOf(conditions).build()
 		}, ModItems.CAKE_SLICE.get(), 7);
 	}
 
 	private PastrySlicingModifier pastrySlicing(HolderGetter<Item> items, Item receivedItem, Block slicedBlock) {
 		return new PastrySlicingModifier(new LootItemCondition[]{
-			MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModTags.Items.KNIVES)).build(),
+			MatchTool.toolMatches(ItemPredicate.Builder.item().of(items, ModTags.Items.KNIVES)).build(),
 			LootItemBlockStatePropertyCondition.hasBlockStateProperties(slicedBlock).build()
 		}, receivedItem);
 	}
@@ -178,15 +180,20 @@ public class LootModifiers extends GlobalLootModifierProvider
 	}
 
 	protected LootItemCondition.Builder hasSilkTouch() {
-		HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
 		return MatchTool.toolMatches(
-			ItemPredicate.Builder.item()
-				.withSubPredicate(
-					ItemSubPredicates.ENCHANTMENTS,
-					ItemEnchantmentsPredicate.enchantments(
-						List.of(new EnchantmentPredicate(registrylookup.getOrThrow(Enchantments.SILK_TOUCH), MinMaxBounds.Ints.atLeast(1)))
+			ItemPredicate.Builder.item().withComponents(
+				DataComponentMatchers.Builder.components().partial(
+						DataComponentPredicates.ENCHANTMENTS,
+						EnchantmentsPredicate.enchantments(
+							List.of(
+								new EnchantmentPredicate(
+									this.registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.SILK_TOUCH), MinMaxBounds.Ints.atLeast(1)
+								)
+							)
+						)
 					)
-				)
+					.build()
+			)
 		);
 	}
 }
