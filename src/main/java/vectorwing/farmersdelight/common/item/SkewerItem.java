@@ -4,6 +4,7 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -20,6 +21,11 @@ import vectorwing.farmersdelight.common.utility.RecipeUtils;
 
 import java.util.Optional;
 
+/**
+ * Item which can be used near a heat source to campfire-cook it over time.
+ * <br><br>
+ * When used, the item checks if a valid campfire cooking recipe exists; if one does, it will cook the item on the player's hand over 6 seconds by default.
+ */
 public class SkewerItem extends Item
 {
 	public SkewerItem(Properties properties) {
@@ -38,6 +44,13 @@ public class SkewerItem extends Item
 			}
 		}
 		return super.use(level, player, hand);
+	}
+
+	@Override
+	public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+		if (entity instanceof Player player && !player.getUseItem().equals(stack)) {
+			stack.remove(ModDataComponents.COOKING_TIME_LENGTH);
+		}
 	}
 
 	@Override

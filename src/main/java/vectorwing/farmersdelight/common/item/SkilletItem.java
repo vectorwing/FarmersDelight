@@ -39,8 +39,8 @@ import vectorwing.farmersdelight.common.item.component.ItemStackWrapper;
 import vectorwing.farmersdelight.common.registry.ModDataComponents;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModSounds;
-import vectorwing.farmersdelight.common.utility.*;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
+import vectorwing.farmersdelight.common.utility.*;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -186,18 +186,29 @@ public class SkilletItem extends BlockItem
 		}
 	}
 
+	private void clearSkillet(ItemStack stack, Player player) {
+		ItemStackWrapper storedStack = stack.getOrDefault(ModDataComponents.SKILLET_INGREDIENT, ItemStackWrapper.EMPTY);
+		if (!storedStack.getStack().isEmpty()) {
+			ItemStack cookingStack = storedStack.getStack();
+			player.getInventory().placeItemBackInInventory(cookingStack);
+			stack.remove(ModDataComponents.SKILLET_INGREDIENT);
+			stack.remove(ModDataComponents.COOKING_TIME_LENGTH);
+			stack.remove(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
+			stack.remove(ModDataComponents.SKILLET_FLIPPED.get());
+		}
+	}
+
+	@Override
+	public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+		if (entity instanceof Player player && !player.getUseItem().equals(stack)) {
+			this.clearSkillet(stack, player);
+		}
+	}
+
 	@Override
 	public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
 		if (entity instanceof Player player) {
-			ItemStackWrapper storedStack = stack.getOrDefault(ModDataComponents.SKILLET_INGREDIENT, ItemStackWrapper.EMPTY);
-			if (!storedStack.getStack().isEmpty()) {
-				ItemStack cookingStack = storedStack.getStack();
-				player.getInventory().placeItemBackInInventory(cookingStack);
-				stack.remove(ModDataComponents.SKILLET_INGREDIENT);
-				stack.remove(ModDataComponents.COOKING_TIME_LENGTH);
-				stack.remove(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
-				stack.remove(ModDataComponents.SKILLET_FLIPPED.get());
-			}
+			this.clearSkillet(stack, player);
 		}
 	}
 
