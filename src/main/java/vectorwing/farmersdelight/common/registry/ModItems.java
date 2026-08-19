@@ -390,11 +390,11 @@ public class ModItems
 		() -> new ConsumableItem(bowlFoodItem(FoodValues.NETHER_SALAD), false));
 
 	public static final Supplier<Item> MEAT_SKEWER = registerWithTab("meat_skewer",
-		() -> new Item(foodItem(FoodValues.RAW_SKEWER)));
+		() -> new SkewerItem(foodItem(FoodValues.RAW_SKEWER)));
 	public static final Supplier<Item> COOKED_MEAT_SKEWER = registerWithTab("cooked_meat_skewer",
 		() -> new Item(foodItem(FoodValues.COOKED_SKEWER)));
 	public static final Supplier<Item> VEGETABLE_SKEWER = registerWithTab("vegetable_skewer",
-		() -> new Item(foodItem(FoodValues.RAW_SKEWER)));
+		() -> new SkewerItem(foodItem(FoodValues.RAW_SKEWER)));
 	public static final Supplier<Item> COOKED_VEGETABLE_SKEWER = registerWithTab("cooked_vegetable_skewer",
 		() -> new Item(foodItem(FoodValues.COOKED_SKEWER)));
 

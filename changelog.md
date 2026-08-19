@@ -2,6 +2,13 @@
 
 ## 1.4.0
 
+### Additions
+- New items:
+  - **Skewers!** The old Barbecue on a Stick has been converted into two separate items, to add variety to your barbecue:
+    - **Meat Skewer**: Can be made from any 2 pieces of meat or fish. Can be either crafted raw to cook later, or crafted from cooked meats/fishes directly;
+    - **Vegetable Skewer:**  A vegetarian variant, made from any 2 vegetables or mushrooms. Must be crafted raw and then cooked;
+    - Raw skewers can be used near heat sources to roast them over it. It takes 6 seconds to fully roast, and you do so one-by-one;
+
 ### Updates
 - Tweaked the Egg Sandwich texture slightly;
 

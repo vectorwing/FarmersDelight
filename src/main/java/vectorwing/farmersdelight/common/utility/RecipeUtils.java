@@ -5,8 +5,11 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.level.Level;
 import vectorwing.farmersdelight.FarmersDelight;
+
+import java.util.Optional;
 
 public class RecipeUtils
 {
@@ -23,5 +26,12 @@ public class RecipeUtils
 
 	public static ResourceLocation FDLocation(String name) {
 		return ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, name);
+	}
+
+	public static Optional<RecipeHolder<CampfireCookingRecipe>> getCampfireCookingRecipe(ItemStack stack, Level level) {
+		if (stack.isEmpty()) {
+			return Optional.empty();
+		}
+		return level.getRecipeManager().getRecipeFor(RecipeType.CAMPFIRE_COOKING, new SingleRecipeInput(stack), level);
 	}
 }

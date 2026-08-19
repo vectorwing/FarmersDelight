@@ -3,7 +3,6 @@ package vectorwing.farmersdelight.common.item;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -24,12 +23,10 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -42,10 +39,8 @@ import vectorwing.farmersdelight.common.item.component.ItemStackWrapper;
 import vectorwing.farmersdelight.common.registry.ModDataComponents;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModSounds;
-import vectorwing.farmersdelight.common.tag.ModTags;
-import vectorwing.farmersdelight.common.utility.ClientRenderUtils;
+import vectorwing.farmersdelight.common.utility.*;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
-import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -125,19 +120,6 @@ public class SkilletItem extends BlockItem
 		stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
 	}
 
-	private static boolean isPlayerNearHeatSource(Player player, LevelReader level) {
-		if (player.isOnFire()) {
-			return true;
-		}
-		BlockPos pos = player.blockPosition();
-		for (BlockPos nearbyPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
-			if (level.getBlockState(nearbyPos).is(ModTags.Blocks.HEAT_SOURCES)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
 		tooltip.add(TextUtils.PLACEABLE_SNEAKING);
@@ -153,7 +135,7 @@ public class SkilletItem extends BlockItem
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 		ItemStack skilletStack = player.getItemInHand(hand);
-		if (isPlayerNearHeatSource(player, level)) {
+		if (GameplayUtils.isPlayerNearHeatSource(player, level)) {
 			InteractionHand otherHand = hand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
 			ItemStack cookingStack = player.getItemInHand(otherHand);
 
@@ -162,7 +144,7 @@ public class SkilletItem extends BlockItem
 				return InteractionResultHolder.pass(skilletStack);
 			}
 
-			Optional<RecipeHolder<CampfireCookingRecipe>> recipe = getCookingRecipe(cookingStack, level);
+			Optional<RecipeHolder<CampfireCookingRecipe>> recipe = RecipeUtils.getCampfireCookingRecipe(cookingStack, level);
 			if (recipe.isPresent()) {
 				if (player.isUnderWater()) {
 					player.displayClientMessage(TextUtils.item("skillet.underwater"), true);
@@ -225,7 +207,7 @@ public class SkilletItem extends BlockItem
 			ItemStackWrapper storedStack = stack.getOrDefault(ModDataComponents.SKILLET_INGREDIENT, ItemStackWrapper.EMPTY);
 			if (!storedStack.getStack().isEmpty()) {
 				ItemStack cookingStack = storedStack.getStack();
-				Optional<RecipeHolder<CampfireCookingRecipe>> cookingRecipe = getCookingRecipe(cookingStack, level);
+				Optional<RecipeHolder<CampfireCookingRecipe>> cookingRecipe = RecipeUtils.getCampfireCookingRecipe(cookingStack, level);
 
 				cookingRecipe.ifPresent((recipe) -> {
 					ItemStack resultStack = recipe.value().assemble(new SingleRecipeInput(cookingStack), level.registryAccess());
@@ -265,13 +247,6 @@ public class SkilletItem extends BlockItem
 	@Override
 	public boolean isBarVisible(ItemStack stack) {
 		return super.isBarVisible(stack) || stack.has(ModDataComponents.COOKING_TIME_LENGTH.get());
-	}
-
-	public static Optional<RecipeHolder<CampfireCookingRecipe>> getCookingRecipe(ItemStack stack, Level level) {
-		if (stack.isEmpty()) {
-			return Optional.empty();
-		}
-		return level.getRecipeManager().getRecipeFor(RecipeType.CAMPFIRE_COOKING, new SingleRecipeInput(stack), level);
 	}
 
 	@Override
