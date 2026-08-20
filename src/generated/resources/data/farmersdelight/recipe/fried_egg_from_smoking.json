@@ -1,11 +1,9 @@
 {
-    "type":  "minecraft:smoking",
-    "category":  "food",
-    "cookingtime":  100,
-    "experience":  0.35,
-    "ingredient":  "minecraft:egg",
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:fried_egg"
-               }
+  "type": "minecraft:smoking",
+  "category": "food",
+  "experience": 0.35,
+  "ingredient": "#minecraft:eggs",
+  "result": {
+    "id": "farmersdelight:fried_egg"
+  }
 }

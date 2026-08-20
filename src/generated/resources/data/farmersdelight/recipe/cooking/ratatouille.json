@@ -1,19 +1,14 @@
 {
-    "type":  "farmersdelight:cooking",
-    "experience":  1.0,
-    "ingredients":  [
-                        "#c:crops/tomato",
-                        "#c:crops/onion",
-                        "#c:crops/beetroot",
-                        {
-                            "neoforge:ingredient_type":  "neoforge:difference",
-                            "base":  "#c:foods/vegetable",
-                            "subtracted":  "minecraft:melon_slice"
-                        }
-                    ],
-    "recipe_book_tab":  "meals",
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:ratatouille"
-               }
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "ingredients": [
+    "#c:crops/tomato",
+    "#c:crops/onion",
+    "#c:crops/beetroot",
+    "#c:foods/vegetable"
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "id": "farmersdelight:ratatouille"
+  }
 }

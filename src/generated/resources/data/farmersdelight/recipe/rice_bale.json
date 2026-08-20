@@ -1,16 +1,15 @@
 {
-    "type":  "minecraft:crafting_shaped",
-    "category":  "building",
-    "key":  {
-                "#":  "farmersdelight:rice_panicle"
-            },
-    "pattern":  [
-                    "###",
-                    "###",
-                    "###"
-                ],
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:rice_bale"
-               }
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": "farmersdelight:rice_panicle"
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "id": "farmersdelight:rice_bale"
+  }
 }

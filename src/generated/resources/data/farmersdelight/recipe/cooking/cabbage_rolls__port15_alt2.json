@@ -1,0 +1,12 @@
+{
+  "type": "farmersdelight:cooking",
+  "cookingtime": 100,
+  "experience": 0.35,
+  "ingredients": [
+    "#c:crops/cabbage",
+    "#c:foods/safe_raw_fish"
+  ],
+  "result": {
+    "id": "farmersdelight:cabbage_rolls"
+  }
+}

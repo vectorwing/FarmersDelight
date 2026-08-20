@@ -1,12 +1,11 @@
 {
-    "type":  "minecraft:crafting_shapeless",
-    "category":  "misc",
-    "group":  "fd_full_tatami_mat",
-    "ingredients":  [
-                        "farmersdelight:tatami"
-                    ],
-    "result":  {
-                   "count":  2,
-                   "id":  "farmersdelight:full_tatami_mat"
-               }
+  "type": "minecraft:crafting_shapeless",
+  "group": "fd_full_tatami_mat",
+  "ingredients": [
+    "farmersdelight:tatami"
+  ],
+  "result": {
+    "count": 2,
+    "id": "farmersdelight:full_tatami_mat"
+  }
 }

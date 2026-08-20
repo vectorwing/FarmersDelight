@@ -9,10 +9,10 @@ import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
-import net.minecraft.client.gui.GuiGraphics;
+import mezz.jei.api.recipe.types.IRecipeType;
+import org.jspecify.annotations.NullMarked;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -23,15 +23,13 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.utility.ClientRenderUtils;
-import vectorwing.farmersdelight.common.utility.RecipeUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 import vectorwing.farmersdelight.integration.jei.FDRecipeTypes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Arrays;
 
 @ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+@NullMarked
 public class CookingRecipeCategory implements IRecipeCategory<RecipeHolder<CookingPotRecipe>>
 {
 	protected final IDrawable heatIndicator;
@@ -56,18 +54,13 @@ public class CookingRecipeCategory implements IRecipeCategory<RecipeHolder<Cooki
 	}
 
 	@Override
-	public RecipeType<RecipeHolder<CookingPotRecipe>> getRecipeType() {
+	public IRecipeType<RecipeHolder<CookingPotRecipe>> getRecipeType() {
 		return FDRecipeTypes.COOKING;
 	}
 
 	@Override
 	public Component getTitle() {
 		return this.title;
-	}
-
-	@Override
-	public IDrawable getBackground() {
-		return this.background;
 	}
 
 	@Override
@@ -89,7 +82,10 @@ public class CookingRecipeCategory implements IRecipeCategory<RecipeHolder<Cooki
 	public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<CookingPotRecipe> holder, IFocusGroup focusGroup) {
 		CookingPotRecipe recipe = holder.value();
 		NonNullList<Ingredient> recipeIngredients = recipe.getIngredients();
-		ItemStack resultStack = RecipeUtils.getResultItem(recipe);
+		ItemStack resultStack = recipe.getJeiResultStack(); // PORT38: raw synced recipe output
+		if (resultStack.isEmpty()) {
+			FarmersDelight.LOGGER.warn("[FD port.38] JEI received EMPTY raw Cooking result for {}", holder.id());
+		}
 		ItemStack containerStack = recipe.getOutputContainer();
 
 		int borderSlotSize = 18;
@@ -98,22 +94,22 @@ public class CookingRecipeCategory implements IRecipeCategory<RecipeHolder<Cooki
 				int inputIndex = row * 3 + column;
 				if (inputIndex < recipeIngredients.size()) {
 					builder.addSlot(RecipeIngredientRole.INPUT, (column * borderSlotSize) + 1, (row * borderSlotSize) + 1)
-							.addItemStacks(Arrays.asList(recipeIngredients.get(inputIndex).getItems()));
+							.add(recipeIngredients.get(inputIndex));
 				}
 			}
 		}
 
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 95, 10).addItemStack(resultStack);
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 95, 10).add(resultStack);
 
 		if (!containerStack.isEmpty()) {
-			builder.addSlot(RecipeIngredientRole.CATALYST, 63, 39).addItemStack(containerStack);
+			builder.addSlot(RecipeIngredientRole.CRAFTING_STATION, 63, 39).add(containerStack);
 		}
 
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 95, 39).addItemStack(resultStack);
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 95, 39).add(resultStack);
 	}
 
 	@Override
-	public void draw(RecipeHolder<CookingPotRecipe> holder, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+	public void draw(RecipeHolder<CookingPotRecipe> holder, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
 		background.draw(guiGraphics, 0, 0);
 		arrow.draw(guiGraphics, 60, 9);
 		heatIndicator.draw(guiGraphics, 18, 39);

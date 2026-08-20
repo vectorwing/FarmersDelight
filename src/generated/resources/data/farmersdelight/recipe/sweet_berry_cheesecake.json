@@ -1,19 +1,17 @@
 {
-    "type":  "minecraft:crafting_shaped",
-    "category":  "misc",
-    "group":  "fd_sweet_berry_cheesecake",
-    "key":  {
-                "O":  "farmersdelight:pie_crust",
-                "m":  "#c:drinks/milk",
-                "s":  "minecraft:sweet_berries"
-            },
-    "pattern":  [
-                    "sss",
-                    "sss",
-                    "mOm"
-                ],
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:sweet_berry_cheesecake"
-               }
+  "type": "minecraft:crafting_shaped",
+  "group": "fd_sweet_berry_cheesecake",
+  "key": {
+    "O": "farmersdelight:pie_crust",
+    "m": "#c:drinks/milk",
+    "s": "minecraft:sweet_berries"
+  },
+  "pattern": [
+    "sss",
+    "sss",
+    "mOm"
+  ],
+  "result": {
+    "id": "farmersdelight:sweet_berry_cheesecake"
+  }
 }

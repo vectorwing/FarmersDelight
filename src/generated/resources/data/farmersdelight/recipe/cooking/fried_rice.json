@@ -1,15 +1,14 @@
 {
-    "type":  "farmersdelight:cooking",
-    "experience":  1.0,
-    "ingredients":  [
-                        "#c:crops/rice",
-                        "#c:eggs",
-                        "#c:crops/carrot",
-                        "#c:crops/onion"
-                    ],
-    "recipe_book_tab":  "meals",
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:fried_rice"
-               }
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "ingredients": [
+    "#c:crops/rice",
+    "#minecraft:eggs",
+    "#c:crops/carrot",
+    "#c:crops/onion"
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "id": "farmersdelight:fried_rice"
+  }
 }

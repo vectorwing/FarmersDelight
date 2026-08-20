@@ -1,13 +1,11 @@
 {
-    "type":  "minecraft:crafting_shapeless",
-    "category":  "misc",
-    "group":  "fd_canvas",
-    "ingredients":  [
-                        "farmersdelight:canvas_rug",
-                        "farmersdelight:canvas_rug"
-                    ],
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:canvas"
-               }
+  "type": "minecraft:crafting_shapeless",
+  "group": "fd_canvas",
+  "ingredients": [
+    "farmersdelight:canvas_rug",
+    "farmersdelight:canvas_rug"
+  ],
+  "result": {
+    "id": "farmersdelight:canvas"
+  }
 }

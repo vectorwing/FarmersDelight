@@ -1,15 +1,14 @@
 {
-    "type":  "farmersdelight:cooking",
-    "experience":  1.0,
-    "ingredients":  [
-                        "#c:crops/carrot",
-                        "#c:crops/potato",
-                        "#c:crops/beetroot",
-                        "#c:foods/leafy_green"
-                    ],
-    "recipe_book_tab":  "meals",
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:vegetable_soup"
-               }
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "ingredients": [
+    "#c:crops/carrot",
+    "#c:crops/potato",
+    "#c:crops/beetroot",
+    "#c:foods/leafy_green"
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "id": "farmersdelight:vegetable_soup"
+  }
 }

@@ -1,15 +1,13 @@
 {
-    "type":  "minecraft:crafting_shapeless",
-    "category":  "misc",
-    "ingredients":  [
-                        "farmersdelight:cooked_mutton_chops",
-                        "#c:crops/beetroot",
-                        "minecraft:bowl",
-                        "farmersdelight:cooked_rice",
-                        "#c:crops/tomato"
-                    ],
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:roasted_mutton_chops"
-               }
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "farmersdelight:cooked_mutton_chops",
+    "#c:crops/beetroot",
+    "minecraft:bowl",
+    "farmersdelight:cooked_rice",
+    "#c:crops/tomato"
+  ],
+  "result": {
+    "id": "farmersdelight:roasted_mutton_chops"
+  }
 }

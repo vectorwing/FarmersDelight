@@ -1,0 +1,12 @@
+{
+  "type": "farmersdelight:cooking",
+  "cookingtime": 100,
+  "experience": 0.35,
+  "ingredients": [
+    "#c:crops/cabbage",
+    "#c:mushrooms"
+  ],
+  "result": {
+    "id": "farmersdelight:cabbage_rolls"
+  }
+}

@@ -1,24 +1,15 @@
 {
-    "type":  "farmersdelight:cutting",
-    "ingredients":  [
-                        "farmersdelight:kelp_roll"
-                    ],
-    "result":  [
-                   {
-                       "item":  {
-                                    "count":  3,
-                                    "id":  "farmersdelight:kelp_roll_slice"
-                                }
-                   }
-               ],
-    "tool":  {
-                 "neoforge:ingredient_type":  "neoforge:compound",
-                 "children":  [
-                                  {
-                                      "neoforge:ingredient_type":  "farmersdelight:item_ability",
-                                      "action":  "knife_dig"
-                                  },
-                                  "#c:tools/knife"
-                              ]
-             }
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    "farmersdelight:kelp_roll"
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 3,
+        "id": "farmersdelight:kelp_roll_slice"
+      }
+    }
+  ],
+  "tool": "#c:tools/knife"
 }

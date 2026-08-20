@@ -1,13 +1,11 @@
 {
-    "type":  "minecraft:crafting_shapeless",
-    "category":  "misc",
-    "ingredients":  [
-                        "#c:foods/bread",
-                        "#c:foods/cooked_egg",
-                        "#c:foods/cooked_egg"
-                    ],
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:egg_sandwich"
-               }
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "#c:foods/bread",
+    "#c:foods/cooked_egg",
+    "#c:foods/cooked_egg"
+  ],
+  "result": {
+    "id": "farmersdelight:egg_sandwich"
+  }
 }

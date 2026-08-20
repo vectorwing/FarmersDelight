@@ -6,7 +6,7 @@
         "damage": {
           "type": {
             "direct_entity": {
-              "type": "farmersdelight:rotten_tomato"
+              "minecraft:entity_type": "farmersdelight:rotten_tomato"
             },
             "tags": [
               {
@@ -21,7 +21,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "#minecraft:raiders"
+              "minecraft:entity_type": "#minecraft:raiders"
             }
           }
         ]

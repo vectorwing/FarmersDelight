@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.integration.jei;
 
-import mezz.jei.api.recipe.RecipeType;
+import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
@@ -10,7 +10,12 @@ import vectorwing.farmersdelight.integration.jei.resource.DecompositionDummy;
 
 public final class FDRecipeTypes
 {
-	public static final RecipeType<RecipeHolder<CookingPotRecipe>> COOKING = RecipeType.createFromVanilla(ModRecipeTypes.COOKING.get());
-	public static final RecipeType<RecipeHolder<CuttingBoardRecipe>> CUTTING = RecipeType.createFromVanilla(ModRecipeTypes.CUTTING.get());
-	public static final RecipeType<DecompositionDummy> DECOMPOSITION = RecipeType.create(FarmersDelight.MODID, "decomposition", DecompositionDummy.class);
+    private FDRecipeTypes() {}
+
+    public static final IRecipeType<RecipeHolder<CookingPotRecipe>> COOKING =
+            IRecipeType.create(ModRecipeTypes.COOKING.get());
+    public static final IRecipeType<RecipeHolder<CuttingBoardRecipe>> CUTTING =
+            IRecipeType.create(ModRecipeTypes.CUTTING.get());
+    public static final IRecipeType<DecompositionDummy> DECOMPOSITION =
+            IRecipeType.create(FarmersDelight.MODID, "decomposition", DecompositionDummy.class);
 }

@@ -1,16 +1,14 @@
 {
-    "type":  "minecraft:crafting_shaped",
-    "category":  "misc",
-    "key":  {
-                "#":  "#minecraft:planks",
-                "/":  "minecraft:stick"
-            },
-    "pattern":  [
-                    "/##",
-                    "/##"
-                ],
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:cutting_board"
-               }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": "#minecraft:planks",
+    "/": "minecraft:stick"
+  },
+  "pattern": [
+    "/##",
+    "/##"
+  ],
+  "result": {
+    "id": "farmersdelight:cutting_board"
+  }
 }

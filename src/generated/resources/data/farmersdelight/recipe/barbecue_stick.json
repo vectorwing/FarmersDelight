@@ -1,14 +1,12 @@
 {
-    "type":  "minecraft:crafting_shapeless",
-    "category":  "misc",
-    "ingredients":  [
-                        "#c:crops/tomato",
-                        "#c:crops/onion",
-                        "#c:foods/cooked_meat",
-                        "minecraft:stick"
-                    ],
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:barbecue_stick"
-               }
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "#c:crops/tomato",
+    "#c:crops/onion",
+    "#c:foods/cooked_meat",
+    "minecraft:stick"
+  ],
+  "result": {
+    "id": "farmersdelight:barbecue_stick"
+  }
 }

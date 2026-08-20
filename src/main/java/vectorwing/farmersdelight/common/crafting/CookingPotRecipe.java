@@ -28,6 +28,9 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.List;
 
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
+import vectorwing.farmersdelight.client.recipe.CookingPotRecipeDisplay;
 public class CookingPotRecipe implements Recipe<RecipeWrapper>
 {
 	public static final int INPUT_SLOTS = 6;
@@ -76,6 +79,13 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 		return this.output.create();
 	}
 
+	/**
+	 * Port 38: materialize the stored result template only for JEI display.
+	 */
+	public ItemStack getJeiResultStack() {
+		return this.output.create();
+	}
+
 	public ItemStack getOutputContainer() {
 		if (this.container != null) return this.container.create();
 		ItemStack result = this.output.create();
@@ -111,6 +121,33 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 
 	public boolean canCraftInDimensions(int width, int height) {
 		return width * height >= this.inputItems.size();
+	}
+
+
+	@Override
+	public List<RecipeDisplay> display() {
+		ItemStack resultStack = this.getJeiResultStack();
+		ItemStack containerStack = this.getOutputContainer();
+
+		if (resultStack.isEmpty()) {
+			return List.of();
+		}
+
+		ItemStackTemplate resultTemplate = ItemStackTemplate.fromNonEmptyStack(resultStack);
+		java.util.Optional<SlotDisplay> containerDisplay = containerStack.isEmpty()
+				? java.util.Optional.empty()
+				: java.util.Optional.of(new SlotDisplay.ItemStackSlotDisplay(
+						ItemStackTemplate.fromNonEmptyStack(containerStack)
+				));
+
+		return List.of(new CookingPotRecipeDisplay(
+				this.getIngredients().stream().map(Ingredient::display).toList(),
+				containerDisplay,
+				new SlotDisplay.ItemStackSlotDisplay(resultTemplate),
+				new SlotDisplay.ItemSlotDisplay(ModItems.COOKING_POT.get()),
+				this.getCookTime(),
+				this.getExperience()
+		));
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.data.builder;
 
-import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
-import net.minecraft.advancements.Criterion;
+import org.jspecify.annotations.NullMarked;
+import net.minecraft.advancements.triggers.Criterion;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
@@ -22,7 +22,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-@MethodsReturnNonnullByDefault
+@NullMarked
 @ParametersAreNonnullByDefault
 public class CuttingBoardRecipeBuilder implements RecipeBuilder
 {

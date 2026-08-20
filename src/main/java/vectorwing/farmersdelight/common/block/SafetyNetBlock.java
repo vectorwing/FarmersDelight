@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -74,20 +73,8 @@ public class SafetyNetBlock extends Block implements SimpleWaterloggedBlock
 	}
 
 	@Override
-	public void updateEntityMovementAfterFallOn(BlockGetter level, Entity entity) {
-		if (entity.isSuppressingBounce()) {
-			super.updateEntityMovementAfterFallOn(level, entity);
-		} else {
-			this.bounceEntity(entity);
-		}
-	}
-
-	private void bounceEntity(Entity entity) {
-		Vec3 vec3d = entity.getDeltaMovement();
-		if (vec3d.y < 0.0D) {
-			double entityWeightOffset = entity instanceof LivingEntity ? 0.6D : 0.8D;
-			entity.setDeltaMovement(vec3d.x, -vec3d.y * entityWeightOffset, vec3d.z);
-		}
+	public float getBounceRestitution(Level level, BlockPos pos, BlockState state, Entity entity) {
+		return entity instanceof LivingEntity ? 0.6F : 1.0F;
 	}
 }
 

@@ -3,7 +3,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.141'
+    id 'net.neoforged.moddev' version '2.0.142'
 }
 
 tasks.named('wrapper', Wrapper).configure {
@@ -109,7 +109,8 @@ sourceSets.main.java {
     exclude 'vectorwing/farmersdelight/data/**'
     // Optional integrations currently target Minecraft 1.21. Re-enable each
     // package when a matching 26.1 dependency and API port are available.
-    exclude 'vectorwing/farmersdelight/integration/**'
+    exclude 'vectorwing/farmersdelight/integration/crafttweaker/**'
+    exclude 'vectorwing/farmersdelight/integration/emi/**'
     // These two optional hooks depend on systems that were redesigned in
     // 26.1 (data-driven villager trades and the extracted block renderer).
     exclude 'vectorwing/farmersdelight/common/event/VillagerEvents.java'
@@ -121,6 +122,11 @@ configurations {
 }
 
 dependencies {
+    // JEI 26.2 API; full JEI is only a dev/runtime dependency.
+    compileOnly "mezz.jei:jei-${jei_minecraft}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${jei_minecraft}-neoforge-api:${jei_version}"
+    localRuntime "mezz.jei:jei-${jei_minecraft}-neoforge:${jei_version}"
+
     // Optional integrations are intentionally disabled for the initial 26.1
     // runtime port. Their previous artifacts target Minecraft 1.21/1.21.1.
 }

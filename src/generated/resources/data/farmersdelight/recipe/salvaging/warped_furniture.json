@@ -1,38 +1,25 @@
 {
-    "type":  "farmersdelight:cutting",
-    "ingredients":  [
-                        {
-                            "neoforge:ingredient_type":  "neoforge:compound",
-                            "children":  [
-                                             "minecraft:warped_door",
-                                             "minecraft:warped_trapdoor",
-                                             "minecraft:warped_sign",
-                                             "minecraft:warped_hanging_sign",
-                                             "minecraft:warped_fence",
-                                             "minecraft:warped_fence_gate",
-                                             "minecraft:warped_pressure_plate",
-                                             "minecraft:warped_button",
-                                             "farmersdelight:warped_cabinet"
-                                         ]
-                        }
-                    ],
-    "result":  [
-                   {
-                       "chance":  0.75,
-                       "item":  {
-                                    "count":  1,
-                                    "id":  "minecraft:warped_planks"
-                                }
-                   }
-               ],
-    "tool":  {
-                 "neoforge:ingredient_type":  "neoforge:compound",
-                 "children":  [
-                                  {
-                                      "neoforge:ingredient_type":  "farmersdelight:item_ability",
-                                      "action":  "axe_dig"
-                                  },
-                                  "#minecraft:axes"
-                              ]
-             }
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    [
+      "minecraft:warped_door",
+      "minecraft:warped_trapdoor",
+      "minecraft:warped_sign",
+      "minecraft:warped_hanging_sign",
+      "minecraft:warped_fence",
+      "minecraft:warped_fence_gate",
+      "minecraft:warped_pressure_plate",
+      "minecraft:warped_button",
+      "farmersdelight:warped_cabinet"
+    ]
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "id": "minecraft:warped_planks"
+      }
+    }
+  ],
+  "tool": "#minecraft:axes"
 }

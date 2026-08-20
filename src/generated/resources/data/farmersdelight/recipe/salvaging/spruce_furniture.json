@@ -1,39 +1,26 @@
 {
-    "type":  "farmersdelight:cutting",
-    "ingredients":  [
-                        {
-                            "neoforge:ingredient_type":  "neoforge:compound",
-                            "children":  [
-                                             "minecraft:spruce_door",
-                                             "minecraft:spruce_trapdoor",
-                                             "minecraft:spruce_sign",
-                                             "minecraft:spruce_hanging_sign",
-                                             "minecraft:spruce_fence",
-                                             "minecraft:spruce_fence_gate",
-                                             "minecraft:spruce_pressure_plate",
-                                             "minecraft:spruce_button",
-                                             "minecraft:spruce_boat",
-                                             "farmersdelight:spruce_cabinet"
-                                         ]
-                        }
-                    ],
-    "result":  [
-                   {
-                       "chance":  0.75,
-                       "item":  {
-                                    "count":  1,
-                                    "id":  "minecraft:spruce_planks"
-                                }
-                   }
-               ],
-    "tool":  {
-                 "neoforge:ingredient_type":  "neoforge:compound",
-                 "children":  [
-                                  {
-                                      "neoforge:ingredient_type":  "farmersdelight:item_ability",
-                                      "action":  "axe_dig"
-                                  },
-                                  "#minecraft:axes"
-                              ]
-             }
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    [
+      "minecraft:spruce_door",
+      "minecraft:spruce_trapdoor",
+      "minecraft:spruce_sign",
+      "minecraft:spruce_hanging_sign",
+      "minecraft:spruce_fence",
+      "minecraft:spruce_fence_gate",
+      "minecraft:spruce_pressure_plate",
+      "minecraft:spruce_button",
+      "minecraft:spruce_boat",
+      "farmersdelight:spruce_cabinet"
+    ]
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "id": "minecraft:spruce_planks"
+      }
+    }
+  ],
+  "tool": "#minecraft:axes"
 }

@@ -1,16 +1,15 @@
 {
-    "type":  "minecraft:crafting_shaped",
-    "category":  "equipment",
-    "key":  {
-                "m":  "minecraft:diamond",
-                "s":  "minecraft:stick"
-            },
-    "pattern":  [
-                    "m",
-                    "s"
-                ],
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:diamond_knife"
-               }
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "m": "minecraft:diamond",
+    "s": "minecraft:stick"
+  },
+  "pattern": [
+    "m",
+    "s"
+  ],
+  "result": {
+    "id": "farmersdelight:diamond_knife"
+  }
 }

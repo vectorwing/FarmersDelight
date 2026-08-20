@@ -1,11 +1,9 @@
 {
-    "type":  "minecraft:smelting",
-    "category":  "food",
-    "cookingtime":  200,
-    "experience":  0.35,
-    "ingredient":  "farmersdelight:cod_slice",
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:cooked_cod_slice"
-               }
+  "type": "minecraft:smelting",
+  "category": "food",
+  "experience": 0.35,
+  "ingredient": "farmersdelight:cod_slice",
+  "result": {
+    "id": "farmersdelight:cooked_cod_slice"
+  }
 }

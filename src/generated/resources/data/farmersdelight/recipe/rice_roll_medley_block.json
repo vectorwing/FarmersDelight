@@ -1,19 +1,17 @@
 {
-    "type":  "minecraft:crafting_shapeless",
-    "category":  "misc",
-    "ingredients":  [
-                        "farmersdelight:kelp_roll_slice",
-                        "farmersdelight:kelp_roll_slice",
-                        "farmersdelight:kelp_roll_slice",
-                        "farmersdelight:salmon_roll",
-                        "farmersdelight:salmon_roll",
-                        "farmersdelight:salmon_roll",
-                        "farmersdelight:cod_roll",
-                        "minecraft:bowl",
-                        "farmersdelight:cod_roll"
-                    ],
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:rice_roll_medley_block"
-               }
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "farmersdelight:kelp_roll_slice",
+    "farmersdelight:kelp_roll_slice",
+    "farmersdelight:kelp_roll_slice",
+    "farmersdelight:salmon_roll",
+    "farmersdelight:salmon_roll",
+    "farmersdelight:salmon_roll",
+    "farmersdelight:cod_roll",
+    "minecraft:bowl",
+    "farmersdelight:cod_roll"
+  ],
+  "result": {
+    "id": "farmersdelight:rice_roll_medley_block"
+  }
 }

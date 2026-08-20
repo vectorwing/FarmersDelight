@@ -3,6 +3,7 @@ package vectorwing.farmersdelight.common.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -202,10 +203,15 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntity) {
-		if (level.isClientSide()) {
-			return createTickerHelper(blockEntity, ModBlockEntityTypes.COOKING_POT.get(), CookingPotBlockEntity::animationTick);
+		if (level instanceof ServerLevel serverLevel) {
+			return createTickerHelper(
+					blockEntity,
+					ModBlockEntityTypes.COOKING_POT.get(),
+					(_level, blockPos, blockState, cookingPot) ->
+							CookingPotBlockEntity.cookingTick(serverLevel, blockPos, blockState, cookingPot)
+			);
 		}
-		return createTickerHelper(blockEntity, ModBlockEntityTypes.COOKING_POT.get(), CookingPotBlockEntity::cookingTick);
+		return createTickerHelper(blockEntity, ModBlockEntityTypes.COOKING_POT.get(), CookingPotBlockEntity::animationTick);
 	}
 
 	@Nullable

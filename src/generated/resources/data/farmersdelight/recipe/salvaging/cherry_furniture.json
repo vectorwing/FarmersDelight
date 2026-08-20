@@ -1,39 +1,26 @@
 {
-    "type":  "farmersdelight:cutting",
-    "ingredients":  [
-                        {
-                            "neoforge:ingredient_type":  "neoforge:compound",
-                            "children":  [
-                                             "minecraft:cherry_door",
-                                             "minecraft:cherry_trapdoor",
-                                             "minecraft:cherry_sign",
-                                             "minecraft:cherry_hanging_sign",
-                                             "minecraft:cherry_fence",
-                                             "minecraft:cherry_fence_gate",
-                                             "minecraft:cherry_pressure_plate",
-                                             "minecraft:cherry_button",
-                                             "minecraft:cherry_boat",
-                                             "farmersdelight:cherry_cabinet"
-                                         ]
-                        }
-                    ],
-    "result":  [
-                   {
-                       "chance":  0.75,
-                       "item":  {
-                                    "count":  1,
-                                    "id":  "minecraft:cherry_planks"
-                                }
-                   }
-               ],
-    "tool":  {
-                 "neoforge:ingredient_type":  "neoforge:compound",
-                 "children":  [
-                                  {
-                                      "neoforge:ingredient_type":  "farmersdelight:item_ability",
-                                      "action":  "axe_dig"
-                                  },
-                                  "#minecraft:axes"
-                              ]
-             }
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    [
+      "minecraft:cherry_door",
+      "minecraft:cherry_trapdoor",
+      "minecraft:cherry_sign",
+      "minecraft:cherry_hanging_sign",
+      "minecraft:cherry_fence",
+      "minecraft:cherry_fence_gate",
+      "minecraft:cherry_pressure_plate",
+      "minecraft:cherry_button",
+      "minecraft:cherry_boat",
+      "farmersdelight:cherry_cabinet"
+    ]
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "id": "minecraft:cherry_planks"
+      }
+    }
+  ],
+  "tool": "#minecraft:axes"
 }

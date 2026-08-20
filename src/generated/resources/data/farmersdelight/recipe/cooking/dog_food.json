@@ -1,14 +1,13 @@
 {
-    "type":  "farmersdelight:cooking",
-    "experience":  1.0,
-    "ingredients":  [
-                        "minecraft:rotten_flesh",
-                        "minecraft:bone_meal",
-                        "#c:foods/raw_meat",
-                        "#c:crops/rice"
-                    ],
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:dog_food"
-               }
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "ingredients": [
+    "minecraft:rotten_flesh",
+    "minecraft:bone_meal",
+    "#c:foods/raw_meat",
+    "#c:crops/rice"
+  ],
+  "result": {
+    "id": "farmersdelight:dog_food"
+  }
 }

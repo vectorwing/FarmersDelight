@@ -1,15 +1,14 @@
 {
-    "type":  "farmersdelight:cooking",
-    "experience":  1.0,
-    "ingredients":  [
-                        "#c:foods/safe_raw_fish",
-                        "#c:foods/pasta",
-                        "#c:crops/tomato",
-                        "minecraft:ink_sac"
-                    ],
-    "recipe_book_tab":  "meals",
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:squid_ink_pasta"
-               }
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "ingredients": [
+    "#c:foods/safe_raw_fish",
+    "#c:foods/pasta",
+    "#c:crops/tomato",
+    "minecraft:ink_sac"
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "id": "farmersdelight:squid_ink_pasta"
+  }
 }

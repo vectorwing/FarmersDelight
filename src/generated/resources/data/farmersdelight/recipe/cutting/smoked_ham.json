@@ -1,30 +1,20 @@
 {
-    "type":  "farmersdelight:cutting",
-    "ingredients":  [
-                        "farmersdelight:smoked_ham"
-                    ],
-    "result":  [
-                   {
-                       "item":  {
-                                    "count":  2,
-                                    "id":  "minecraft:cooked_porkchop"
-                                }
-                   },
-                   {
-                       "item":  {
-                                    "count":  1,
-                                    "id":  "minecraft:bone"
-                                }
-                   }
-               ],
-    "tool":  {
-                 "neoforge:ingredient_type":  "neoforge:compound",
-                 "children":  [
-                                  {
-                                      "neoforge:ingredient_type":  "farmersdelight:item_ability",
-                                      "action":  "knife_dig"
-                                  },
-                                  "#c:tools/knife"
-                              ]
-             }
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    "farmersdelight:smoked_ham"
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 2,
+        "id": "minecraft:cooked_porkchop"
+      }
+    },
+    {
+      "item": {
+        "id": "minecraft:bone"
+      }
+    }
+  ],
+  "tool": "#c:tools/knife"
 }

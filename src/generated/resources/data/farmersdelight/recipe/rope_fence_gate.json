@@ -1,16 +1,14 @@
 {
-    "type":  "minecraft:crafting_shaped",
-    "category":  "misc",
-    "key":  {
-                "/":  "minecraft:stick",
-                "r":  "farmersdelight:rope"
-            },
-    "pattern":  [
-                    "/r/",
-                    "/r/"
-                ],
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:rope_fence_gate"
-               }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "/": "minecraft:stick",
+    "r": "farmersdelight:rope"
+  },
+  "pattern": [
+    "/r/",
+    "/r/"
+  ],
+  "result": {
+    "id": "farmersdelight:rope_fence_gate"
+  }
 }

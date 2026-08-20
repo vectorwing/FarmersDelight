@@ -1,14 +1,12 @@
 {
-    "type":  "minecraft:crafting_shapeless",
-    "category":  "misc",
-    "ingredients":  [
-                        "#c:foods/bread",
-                        "#c:foods/cooked_bacon",
-                        "#c:foods/leafy_green",
-                        "#c:crops/tomato"
-                    ],
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:bacon_sandwich"
-               }
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "#c:foods/bread",
+    "#c:foods/cooked_bacon",
+    "#c:foods/leafy_green",
+    "#c:crops/tomato"
+  ],
+  "result": {
+    "id": "farmersdelight:bacon_sandwich"
+  }
 }

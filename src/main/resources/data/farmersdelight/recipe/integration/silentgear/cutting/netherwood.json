@@ -1,21 +1,17 @@
 {
-    "neoforge:conditions":  [
-                                {
-                                    "type":  "neoforge:mod_loaded",
-                                    "modid":  "silentgear"
-                                }
-                            ],
-    "type":  "farmersdelight:cutting",
-    "ingredients":  [
-                        "silentgear:netherwood_log"
-                    ],
-    "tool":  {
-                 "type":  "farmersdelight:tool_action",
-                 "action":  "axe_strip"
-             },
-    "result":  [
-                   "silentgear:stripped_netherwood_log",
-                   "farmersdelight:tree_bark"
-               ],
-    "sound":  "minecraft:item.axe.strip"
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "silentgear"
+    }
+  ],
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    "silentgear:netherwood_log"
+  ],
+  "tool": "#minecraft:axes",
+  "result": [
+    "silentgear:stripped_netherwood_log",
+    "farmersdelight:tree_bark"
+  ]
 }

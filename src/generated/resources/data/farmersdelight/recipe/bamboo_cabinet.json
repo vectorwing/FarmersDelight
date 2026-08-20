@@ -1,18 +1,16 @@
 {
-    "type":  "minecraft:crafting_shaped",
-    "category":  "misc",
-    "group":  "fd_cabinet",
-    "key":  {
-                "D":  "minecraft:bamboo_trapdoor",
-                "_":  "minecraft:bamboo_slab"
-            },
-    "pattern":  [
-                    "___",
-                    "D D",
-                    "___"
-                ],
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:bamboo_cabinet"
-               }
+  "type": "minecraft:crafting_shaped",
+  "group": "fd_cabinet",
+  "key": {
+    "D": "minecraft:bamboo_trapdoor",
+    "_": "minecraft:bamboo_slab"
+  },
+  "pattern": [
+    "___",
+    "D D",
+    "___"
+  ],
+  "result": {
+    "id": "farmersdelight:bamboo_cabinet"
+  }
 }

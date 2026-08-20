@@ -1,30 +1,19 @@
 {
-    "type":  "farmersdelight:cutting",
-    "ingredients":  [
-                        "farmersdelight:rice_panicle"
-                    ],
-    "result":  [
-                   {
-                       "item":  {
-                                    "count":  1,
-                                    "id":  "farmersdelight:rice"
-                                }
-                   },
-                   {
-                       "item":  {
-                                    "count":  1,
-                                    "id":  "farmersdelight:straw"
-                                }
-                   }
-               ],
-    "tool":  {
-                 "neoforge:ingredient_type":  "neoforge:compound",
-                 "children":  [
-                                  {
-                                      "neoforge:ingredient_type":  "farmersdelight:item_ability",
-                                      "action":  "knife_dig"
-                                  },
-                                  "#c:tools/knife"
-                              ]
-             }
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    "farmersdelight:rice_panicle"
+  ],
+  "result": [
+    {
+      "item": {
+        "id": "farmersdelight:rice"
+      }
+    },
+    {
+      "item": {
+        "id": "farmersdelight:straw"
+      }
+    }
+  ],
+  "tool": "#c:tools/knife"
 }

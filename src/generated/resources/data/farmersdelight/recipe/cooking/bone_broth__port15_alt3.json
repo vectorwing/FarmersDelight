@@ -1,0 +1,12 @@
+{
+  "type": "farmersdelight:cooking",
+  "experience": 0.35,
+  "ingredients": [
+    "#c:bones",
+    "minecraft:hanging_roots"
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "id": "farmersdelight:bone_broth"
+  }
+}

@@ -1,18 +1,16 @@
 {
-    "type":  "minecraft:crafting_shaped",
-    "category":  "misc",
-    "group":  "fd_cabinet",
-    "key":  {
-                "D":  "minecraft:oak_trapdoor",
-                "_":  "minecraft:oak_slab"
-            },
-    "pattern":  [
-                    "___",
-                    "D D",
-                    "___"
-                ],
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:oak_cabinet"
-               }
+  "type": "minecraft:crafting_shaped",
+  "group": "fd_cabinet",
+  "key": {
+    "D": "minecraft:oak_trapdoor",
+    "_": "minecraft:oak_slab"
+  },
+  "pattern": [
+    "___",
+    "D D",
+    "___"
+  ],
+  "result": {
+    "id": "farmersdelight:oak_cabinet"
+  }
 }

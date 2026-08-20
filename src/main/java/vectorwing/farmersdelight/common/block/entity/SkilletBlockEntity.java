@@ -51,7 +51,7 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 		quickCheck = RecipeManager.createCheck(RecipeType.CAMPFIRE_COOKING);
 	}
 
-	public static void cookingTick(Level level, BlockPos pos, BlockState state, SkilletBlockEntity skillet) {
+	public static void cookingTick(ServerLevel level, BlockPos pos, BlockState state, SkilletBlockEntity skillet) {
 		boolean isHeated = skillet.isHeated(level, pos);
 
 		if (state.getValue(SkilletBlock.WATERLOGGED)) {
@@ -94,10 +94,10 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 
 	}
 
-	private void cookAndOutputItems(ItemStack cookingStack, Level level) {
+	private void cookAndOutputItems(ItemStack cookingStack, ServerLevel level) {
 		++cookingTime;
 		if (cookingTime >= cookingTimeTotal) {
-			Optional<RecipeHolder<CampfireCookingRecipe>> recipe = getMatchingRecipe(cookingStack);
+			Optional<RecipeHolder<CampfireCookingRecipe>> recipe = getMatchingRecipe(cookingStack, level);
 			if (recipe.isPresent()) {
 				ItemStack resultStack = recipe.get().value().assemble(new SingleRecipeInput(cookingStack));
 				Direction direction = getBlockState().getValue(SkilletBlock.FACING).getClockWise();
@@ -122,11 +122,8 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 		return false;
 	}
 
-	private Optional<RecipeHolder<CampfireCookingRecipe>> getMatchingRecipe(ItemStack stack) {
-		if (level == null) return Optional.empty();
-		return this.level instanceof ServerLevel serverLevel
-				? this.quickCheck.getRecipeFor(new SingleRecipeInput(stack), serverLevel)
-				: Optional.empty();
+	private Optional<RecipeHolder<CampfireCookingRecipe>> getMatchingRecipe(ItemStack stack, ServerLevel serverLevel) {
+		return this.quickCheck.getRecipeFor(new SingleRecipeInput(stack), serverLevel);
 	}
 
 	@Override
@@ -166,8 +163,8 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 		inventoryChanged();
 	}
 
-	public ItemStack addItemToCook(ItemStack addedStack, Player player) {
-		Optional<RecipeHolder<CampfireCookingRecipe>> recipe = getMatchingRecipe(addedStack);
+	public ItemStack addItemToCook(ItemStack addedStack, Player player, ServerLevel serverLevel) {
+		Optional<RecipeHolder<CampfireCookingRecipe>> recipe = getMatchingRecipe(addedStack, serverLevel);
 		if (recipe.isPresent() && getStoredStack().isEmpty()) {
 			if (getBlockState().getValue(SkilletBlock.WATERLOGGED)) {
 				player.sendOverlayMessage(TextUtils.block("skillet.underwater"));

@@ -2,7 +2,7 @@ package vectorwing.farmersdelight.common.loot.function;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
+import org.jspecify.annotations.NullMarked;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -17,7 +17,7 @@ import vectorwing.farmersdelight.common.registry.ModLootFunctions;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
-@MethodsReturnNonnullByDefault
+@NullMarked
 @ParametersAreNonnullByDefault
 public class CopySkilletFunction extends LootItemConditionalFunction
 {

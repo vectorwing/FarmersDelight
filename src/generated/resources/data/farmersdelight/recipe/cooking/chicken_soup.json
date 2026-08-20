@@ -1,19 +1,14 @@
 {
-    "type":  "farmersdelight:cooking",
-    "experience":  1.0,
-    "ingredients":  [
-                        "#c:foods/raw_chicken",
-                        "#c:crops/carrot",
-                        "#c:foods/leafy_green",
-                        {
-                            "neoforge:ingredient_type":  "neoforge:difference",
-                            "base":  "#c:foods/vegetable",
-                            "subtracted":  "minecraft:melon_slice"
-                        }
-                    ],
-    "recipe_book_tab":  "meals",
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:chicken_soup"
-               }
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "ingredients": [
+    "#c:foods/raw_chicken",
+    "#c:crops/carrot",
+    "#c:foods/leafy_green",
+    "#c:foods/vegetable"
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "id": "farmersdelight:chicken_soup"
+  }
 }

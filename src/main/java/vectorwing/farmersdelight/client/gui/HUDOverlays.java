@@ -44,18 +44,18 @@ public class HUDOverlays
 
 		public final void render(@NonNull GuiGraphicsExtractor guiGraphics, @NonNull DeltaTracker deltaTracker) {
 			Minecraft minecraft = Minecraft.getInstance();
-			if (minecraft.player == null || !shouldRenderOverlay(minecraft, minecraft.player, guiGraphics, minecraft.gui.getGuiTicks()))
+			if (minecraft.player == null || !shouldRenderOverlay(minecraft, minecraft.player, guiGraphics, minecraft.gui.hud.getGuiTicks()))
 				return;
 
 			int top = guiGraphics.guiHeight();
 			int left = guiGraphics.guiWidth() / 2 - 91; // left of health bar
 			int right = guiGraphics.guiWidth() / 2 + 91; // right of food bar
 
-			render(minecraft, minecraft.player, guiGraphics, left, right, top, minecraft.gui.getGuiTicks());
+			render(minecraft, minecraft.player, guiGraphics, left, right, top, minecraft.gui.hud.getGuiTicks());
 		}
 
 		public boolean shouldRenderOverlay(Minecraft minecraft, Player player, GuiGraphicsExtractor guiGraphics, int guiTicks) {
-			return !minecraft.options.hideGui && minecraft.gameMode != null && minecraft.gameMode.canHurtPlayer();
+			return !minecraft.gui.hud.isHidden() && minecraft.gameMode != null && minecraft.gameMode.canHurtPlayer();
 		}
 	}
 
@@ -120,7 +120,7 @@ public class HUDOverlays
 	public static void drawNourishmentOverlay(FoodData foodData, Minecraft minecraft, GuiGraphicsExtractor graphics, int right, int top, boolean naturalHealing) {
 		float saturation = foodData.getSaturationLevel();
 		int foodLevel = foodData.getFoodLevel();
-		int ticks = minecraft.gui.getGuiTicks();
+		int ticks = minecraft.gui.hud.getGuiTicks();
 		Random rand = new Random();
 		rand.setSeed(ticks * 312871L);
 
@@ -147,7 +147,7 @@ public class HUDOverlays
 	}
 
 	public static void drawComfortOverlay(Player player, Minecraft minecraft, GuiGraphicsExtractor graphics, int left, int top) {
-		int ticks = minecraft.gui.getGuiTicks();
+		int ticks = minecraft.gui.hud.getGuiTicks();
 		Random rand = new Random();
 		rand.setSeed(ticks * 312871L);
 

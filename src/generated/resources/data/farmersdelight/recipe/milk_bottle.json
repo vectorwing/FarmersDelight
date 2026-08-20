@@ -1,15 +1,14 @@
 {
-    "type":  "minecraft:crafting_shapeless",
-    "category":  "misc",
-    "ingredients":  [
-                        "minecraft:milk_bucket",
-                        "minecraft:glass_bottle",
-                        "minecraft:glass_bottle",
-                        "minecraft:glass_bottle",
-                        "minecraft:glass_bottle"
-                    ],
-    "result":  {
-                   "count":  4,
-                   "id":  "farmersdelight:milk_bottle"
-               }
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:milk_bucket",
+    "minecraft:glass_bottle",
+    "minecraft:glass_bottle",
+    "minecraft:glass_bottle",
+    "minecraft:glass_bottle"
+  ],
+  "result": {
+    "count": 4,
+    "id": "farmersdelight:milk_bottle"
+  }
 }

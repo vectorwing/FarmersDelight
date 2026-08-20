@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import vectorwing.farmersdelight.common.block.AbstractStoveBlock;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 /**
@@ -18,6 +19,12 @@ public interface HeatableBlockEntity
 	 */
 	default boolean isHeated(Level level, BlockPos pos) {
 		BlockState stateBelow = level.getBlockState(pos.below());
+
+		// Farmer's Delight must always recognize its own Stove as a heat source.
+		if (stateBelow.getBlock() instanceof AbstractStoveBlock) {
+			return !stateBelow.hasProperty(BlockStateProperties.LIT)
+					|| stateBelow.getValue(BlockStateProperties.LIT);
+		}
 
 		if (stateBelow.is(ModTags.Blocks.HEAT_SOURCES)) {
 			if (stateBelow.hasProperty(BlockStateProperties.LIT))

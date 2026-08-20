@@ -1,16 +1,14 @@
 {
-    "type":  "minecraft:crafting_shaped",
-    "category":  "misc",
-    "key":  {
-                "M":  "#c:drinks/milk",
-                "w":  "#c:crops/wheat"
-            },
-    "pattern":  [
-                    "wMw",
-                    " w "
-                ],
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:pie_crust"
-               }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": "#c:drinks/milk",
+    "w": "#c:crops/wheat"
+  },
+  "pattern": [
+    "wMw",
+    " w "
+  ],
+  "result": {
+    "id": "farmersdelight:pie_crust"
+  }
 }

@@ -1,0 +1,14 @@
+{
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "ingredients": [
+    "#c:foods/dough",
+    "#c:crops/cabbage",
+    "#c:crops/onion",
+    "#c:foods/raw_beef"
+  ],
+  "result": {
+    "count": 2,
+    "id": "farmersdelight:dumplings"
+  }
+}

@@ -9,10 +9,10 @@ import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
-import net.minecraft.client.gui.GuiGraphics;
+import mezz.jei.api.recipe.types.IRecipeType;
+import org.jspecify.annotations.NullMarked;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+@NullMarked
 public class DecompositionRecipeCategory implements IRecipeCategory<DecompositionDummy>
 {
 	public static final Identifier UID = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "decomposition");
@@ -62,18 +62,13 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 	}
 
 	@Override
-	public RecipeType<DecompositionDummy> getRecipeType() {
+	public IRecipeType<DecompositionDummy> getRecipeType() {
 		return FDRecipeTypes.DECOMPOSITION;
 	}
 
 	@Override
 	public Component getTitle() {
 		return this.title;
-	}
-
-	@Override
-	public IDrawable getBackground() {
-		return null;
 	}
 
 	@Override
@@ -94,15 +89,15 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, DecompositionDummy recipe, IFocusGroup focusGroup) {
 		List<ItemStack> accelerators = new ArrayList<>();
-		BuiltInRegistries.BLOCK.getTag(ModTags.Blocks.COMPOST_ACTIVATORS).ifPresent(s -> s.forEach(f -> accelerators.add(new ItemStack(f.value()))));
+		BuiltInRegistries.BLOCK.get(ModTags.Blocks.COMPOST_ACTIVATORS).ifPresent(s -> s.forEach(f -> accelerators.add(new ItemStack(f.value()))));
 
-		builder.addSlot(RecipeIngredientRole.INPUT, 9, 26).addItemStack(organicCompost);
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 93, 26).addItemStack(richSoil);
+		builder.addSlot(RecipeIngredientRole.INPUT, 9, 26).add(organicCompost);
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 93, 26).add(richSoil);
 		builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 64, 54).addItemStacks(accelerators);
 	}
 
 	@Override
-	public void draw(DecompositionDummy recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+	public void draw(DecompositionDummy recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
 		background.draw(guiGraphics, 0, 0);
 		slotIcon.draw(guiGraphics, 63, 53);
 	}

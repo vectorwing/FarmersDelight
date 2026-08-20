@@ -3,6 +3,7 @@ package vectorwing.farmersdelight.common.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -14,6 +15,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.crafting.RecipePropertySet;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -71,20 +73,29 @@ public class SkilletBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 
 	@Override
 	public InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		if (level.getBlockEntity(pos) instanceof SkilletBlockEntity skillet) {
-			if (level.isClientSide()) {
-				return InteractionResult.CONSUME;
+		if (!(level.getBlockEntity(pos) instanceof SkilletBlockEntity skillet)) {
+			return InteractionResult.TRY_WITH_EMPTY_HAND;
+		}
+
+		ItemStack heldStack = player.getItemInHand(hand);
+		EquipmentSlot heldSlot = hand.equals(InteractionHand.MAIN_HAND) ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
+
+		if (heldStack.isEmpty()) {
+			if (level.isClientSide()) return InteractionResult.SUCCESS;
+			ItemStack extractedStack = skillet.removeItem();
+			if (!player.isCreative()) {
+				player.setItemSlot(heldSlot, extractedStack);
 			}
-			ItemStack heldStack = player.getItemInHand(hand);
-			EquipmentSlot heldSlot = hand.equals(InteractionHand.MAIN_HAND) ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
-			if (heldStack.isEmpty()) {
-				ItemStack extractedStack = skillet.removeItem();
-				if (!player.isCreative()) {
-					player.setItemSlot(heldSlot, extractedStack);
-				}
+			return InteractionResult.SUCCESS;
+		}
+
+		if (!skillet.hasStoredStack()
+				&& level.recipeAccess().propertySet(RecipePropertySet.CAMPFIRE_INPUT).test(heldStack)) {
+			if (!(level instanceof ServerLevel serverLevel)) {
 				return InteractionResult.SUCCESS;
 			}
-			ItemStack remainderStack = skillet.addItemToCook(heldStack, player);
+
+			ItemStack remainderStack = skillet.addItemToCook(heldStack, player, serverLevel);
 			if (remainderStack.getCount() != heldStack.getCount()) {
 				if (!player.isCreative()) {
 					player.setItemSlot(heldSlot, remainderStack);
@@ -93,7 +104,8 @@ public class SkilletBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 				return InteractionResult.SUCCESS;
 			}
 		}
-		return InteractionResult.TRY_WITH_EMPTY_HAND;
+
+		return InteractionResult.CONSUME;
 	}
 
 	@Override
@@ -174,11 +186,15 @@ public class SkilletBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntity) {
-		if (level.isClientSide()) {
-			return createTickerHelper(blockEntity, ModBlockEntityTypes.SKILLET.get(), SkilletBlockEntity::animationTick);
-		} else {
-			return createTickerHelper(blockEntity, ModBlockEntityTypes.SKILLET.get(), SkilletBlockEntity::cookingTick);
+		if (level instanceof ServerLevel serverLevel) {
+			return createTickerHelper(
+					blockEntity,
+					ModBlockEntityTypes.SKILLET.get(),
+					(_level, blockPos, blockState, skillet) ->
+							SkilletBlockEntity.cookingTick(serverLevel, blockPos, blockState, skillet)
+			);
 		}
+		return createTickerHelper(blockEntity, ModBlockEntityTypes.SKILLET.get(), SkilletBlockEntity::animationTick);
 	}
 
 	private boolean getTrayState(LevelReader world, BlockPos pos) {

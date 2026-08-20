@@ -1,15 +1,14 @@
 {
-    "type":  "farmersdelight:cooking",
-    "experience":  1.0,
-    "ingredients":  [
-                        "#c:foods/pasta",
-                        "#c:eggs",
-                        "minecraft:dried_kelp",
-                        "#c:foods/raw_pork"
-                    ],
-    "recipe_book_tab":  "meals",
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:noodle_soup"
-               }
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "ingredients": [
+    "#c:foods/pasta",
+    "#minecraft:eggs",
+    "minecraft:dried_kelp",
+    "#c:foods/raw_pork"
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "id": "farmersdelight:noodle_soup"
+  }
 }

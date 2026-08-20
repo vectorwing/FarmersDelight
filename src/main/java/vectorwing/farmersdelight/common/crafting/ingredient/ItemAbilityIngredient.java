@@ -2,7 +2,7 @@ package vectorwing.farmersdelight.common.crafting.ingredient;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
+import org.jspecify.annotations.NullMarked;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
@@ -21,7 +21,7 @@ import java.util.stream.Stream;
  * Ingredient that checks if the given stack can perform a ItemAbility from Forge.
  */
 @ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+@NullMarked
 public class ItemAbilityIngredient implements ICustomIngredient
 {
 	public static final MapCodec<ItemAbilityIngredient> CODEC = RecordCodecBuilder.mapCodec(inst ->

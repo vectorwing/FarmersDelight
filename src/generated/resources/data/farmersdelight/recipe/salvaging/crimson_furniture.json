@@ -1,38 +1,25 @@
 {
-    "type":  "farmersdelight:cutting",
-    "ingredients":  [
-                        {
-                            "neoforge:ingredient_type":  "neoforge:compound",
-                            "children":  [
-                                             "minecraft:crimson_door",
-                                             "minecraft:crimson_trapdoor",
-                                             "minecraft:crimson_sign",
-                                             "minecraft:crimson_hanging_sign",
-                                             "minecraft:crimson_fence",
-                                             "minecraft:crimson_fence_gate",
-                                             "minecraft:crimson_pressure_plate",
-                                             "minecraft:crimson_button",
-                                             "farmersdelight:crimson_cabinet"
-                                         ]
-                        }
-                    ],
-    "result":  [
-                   {
-                       "chance":  0.75,
-                       "item":  {
-                                    "count":  1,
-                                    "id":  "minecraft:crimson_planks"
-                                }
-                   }
-               ],
-    "tool":  {
-                 "neoforge:ingredient_type":  "neoforge:compound",
-                 "children":  [
-                                  {
-                                      "neoforge:ingredient_type":  "farmersdelight:item_ability",
-                                      "action":  "axe_dig"
-                                  },
-                                  "#minecraft:axes"
-                              ]
-             }
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    [
+      "minecraft:crimson_door",
+      "minecraft:crimson_trapdoor",
+      "minecraft:crimson_sign",
+      "minecraft:crimson_hanging_sign",
+      "minecraft:crimson_fence",
+      "minecraft:crimson_fence_gate",
+      "minecraft:crimson_pressure_plate",
+      "minecraft:crimson_button",
+      "farmersdelight:crimson_cabinet"
+    ]
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "id": "minecraft:crimson_planks"
+      }
+    }
+  ],
+  "tool": "#minecraft:axes"
 }

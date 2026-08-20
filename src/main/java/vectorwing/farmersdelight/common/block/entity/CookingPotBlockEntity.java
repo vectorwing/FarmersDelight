@@ -182,12 +182,12 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 		super.preRemoveSideEffects(pos, state);
 	}
 
-	public static void cookingTick(Level level, BlockPos pos, BlockState state, CookingPotBlockEntity cookingPot) {
+	public static void cookingTick(ServerLevel level, BlockPos pos, BlockState state, CookingPotBlockEntity cookingPot) {
 		boolean isHeated = cookingPot.isHeated(level, pos);
 		boolean didInventoryChange = false;
 
 		if (isHeated && cookingPot.hasInput()) {
-			Optional<RecipeHolder<CookingPotRecipe>> recipe = cookingPot.getMatchingRecipe(new RecipeWrapper(cookingPot.inventory));
+			Optional<RecipeHolder<CookingPotRecipe>> recipe = cookingPot.getMatchingRecipe(new RecipeWrapper(cookingPot.inventory), level);
 			if (recipe.isPresent() && cookingPot.canCook(recipe.get().value())) {
 				didInventoryChange = cookingPot.processCooking(recipe.get(), cookingPot);
 			} else {
@@ -234,9 +234,10 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 	}
 
-	private Optional<RecipeHolder<CookingPotRecipe>> getMatchingRecipe(RecipeWrapper inventoryWrapper) {
-		if (level == null) return Optional.empty();
-		return hasInput() && this.level instanceof ServerLevel serverLevel ? quickCheck.getRecipeFor(inventoryWrapper, serverLevel) : Optional.empty();
+	private Optional<RecipeHolder<CookingPotRecipe>> getMatchingRecipe(RecipeWrapper inventoryWrapper, ServerLevel serverLevel) {
+		return hasInput()
+				? quickCheck.getRecipeFor(inventoryWrapper, serverLevel)
+				: Optional.empty();
 	}
 
 	public ItemStack getContainer() {

@@ -1,0 +1,12 @@
+{
+  "type": "farmersdelight:cooking",
+  "experience": 0.35,
+  "ingredients": [
+    "#c:bones",
+    "minecraft:glow_lichen"
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "id": "farmersdelight:bone_broth"
+  }
+}

@@ -2,8 +2,6 @@ package vectorwing.farmersdelight.common.tag;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -133,11 +131,11 @@ public class ModTags
 	}
 
 	private static TagKey<Item> modItemTag(String path) {
-		return ItemTags.create(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, path));
+		return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, path));
 	}
 
 	private static TagKey<Block> modBlockTag(String path) {
-		return BlockTags.create(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, path));
+		return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, path));
 	}
 
 	private static TagKey<EntityType<?>> modEntityTag(String path) {

@@ -1,39 +1,26 @@
 {
-    "type":  "farmersdelight:cutting",
-    "ingredients":  [
-                        {
-                            "neoforge:ingredient_type":  "neoforge:compound",
-                            "children":  [
-                                             "minecraft:acacia_door",
-                                             "minecraft:acacia_trapdoor",
-                                             "minecraft:acacia_sign",
-                                             "minecraft:acacia_hanging_sign",
-                                             "minecraft:acacia_fence",
-                                             "minecraft:acacia_fence_gate",
-                                             "minecraft:acacia_pressure_plate",
-                                             "minecraft:acacia_button",
-                                             "minecraft:acacia_boat",
-                                             "farmersdelight:acacia_cabinet"
-                                         ]
-                        }
-                    ],
-    "result":  [
-                   {
-                       "chance":  0.75,
-                       "item":  {
-                                    "count":  1,
-                                    "id":  "minecraft:acacia_planks"
-                                }
-                   }
-               ],
-    "tool":  {
-                 "neoforge:ingredient_type":  "neoforge:compound",
-                 "children":  [
-                                  {
-                                      "neoforge:ingredient_type":  "farmersdelight:item_ability",
-                                      "action":  "axe_dig"
-                                  },
-                                  "#minecraft:axes"
-                              ]
-             }
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    [
+      "minecraft:acacia_door",
+      "minecraft:acacia_trapdoor",
+      "minecraft:acacia_sign",
+      "minecraft:acacia_hanging_sign",
+      "minecraft:acacia_fence",
+      "minecraft:acacia_fence_gate",
+      "minecraft:acacia_pressure_plate",
+      "minecraft:acacia_button",
+      "minecraft:acacia_boat",
+      "farmersdelight:acacia_cabinet"
+    ]
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "id": "minecraft:acacia_planks"
+      }
+    }
+  ],
+  "tool": "#minecraft:axes"
 }

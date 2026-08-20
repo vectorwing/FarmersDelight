@@ -1,14 +1,12 @@
 {
-    "type":  "minecraft:crafting_shapeless",
-    "category":  "misc",
-    "ingredients":  [
-                        "#c:foods/leafy_green",
-                        "#c:crops/tomato",
-                        "#c:crops/beetroot",
-                        "minecraft:bowl"
-                    ],
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:mixed_salad"
-               }
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "#c:foods/leafy_green",
+    "#c:crops/tomato",
+    "#c:crops/beetroot",
+    "minecraft:bowl"
+  ],
+  "result": {
+    "id": "farmersdelight:mixed_salad"
+  }
 }

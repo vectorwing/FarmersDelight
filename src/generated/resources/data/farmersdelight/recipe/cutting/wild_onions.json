@@ -1,37 +1,26 @@
 {
-    "type":  "farmersdelight:cutting",
-    "ingredients":  [
-                        "farmersdelight:wild_onions"
-                    ],
-    "result":  [
-                   {
-                       "item":  {
-                                    "count":  1,
-                                    "id":  "farmersdelight:onion"
-                                }
-                   },
-                   {
-                       "item":  {
-                                    "count":  2,
-                                    "id":  "minecraft:magenta_dye"
-                                }
-                   },
-                   {
-                       "chance":  0.1,
-                       "item":  {
-                                    "count":  1,
-                                    "id":  "minecraft:lime_dye"
-                                }
-                   }
-               ],
-    "tool":  {
-                 "neoforge:ingredient_type":  "neoforge:compound",
-                 "children":  [
-                                  {
-                                      "neoforge:ingredient_type":  "farmersdelight:item_ability",
-                                      "action":  "knife_dig"
-                                  },
-                                  "#c:tools/knife"
-                              ]
-             }
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    "farmersdelight:wild_onions"
+  ],
+  "result": [
+    {
+      "item": {
+        "id": "farmersdelight:onion"
+      }
+    },
+    {
+      "item": {
+        "count": 2,
+        "id": "minecraft:magenta_dye"
+      }
+    },
+    {
+      "chance": 0.1,
+      "item": {
+        "id": "minecraft:lime_dye"
+      }
+    }
+  ],
+  "tool": "#c:tools/knife"
 }

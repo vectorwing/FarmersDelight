@@ -2,7 +2,7 @@ package vectorwing.farmersdelight.common.loot.function;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
+import org.jspecify.annotations.NullMarked;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -19,7 +19,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Optional;
 
-@MethodsReturnNonnullByDefault
+@NullMarked
 @ParametersAreNonnullByDefault
 public class SmokerCookFunction extends LootItemConditionalFunction
 {

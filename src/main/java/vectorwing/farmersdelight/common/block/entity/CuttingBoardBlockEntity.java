@@ -85,6 +85,10 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity implements Cleara
 	public boolean processStoredItemUsingTool(ItemStack toolStack, @Nullable Player player) {
 		if (level == null) return false;
 
+		// 26.2 clients do not own the complete server recipe cache. Let the
+		// interaction proceed locally; the ServerLevel path below is authoritative.
+		if (level.isClientSide()) return !toolStack.isEmpty() && !getStoredItem().isEmpty();
+
 		if (isItemCarvingBoard) return false;
 
 		Optional<RecipeHolder<CuttingBoardRecipe>> matchingRecipe = getMatchingRecipe(toolStack, player);

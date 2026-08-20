@@ -1,18 +1,16 @@
 {
-    "type":  "farmersdelight:cooking",
-    "container":  {
-                      "count":  1,
-                      "id":  "minecraft:bowl"
-                  },
-    "experience":  1.0,
-    "ingredients":  [
-                        "#c:crops/beetroot",
-                        "#c:crops/beetroot",
-                        "#c:crops/beetroot"
-                    ],
-    "recipe_book_tab":  "meals",
-    "result":  {
-                   "count":  1,
-                   "id":  "minecraft:beetroot_soup"
-               }
+  "type": "farmersdelight:cooking",
+  "container": {
+    "id": "minecraft:bowl"
+  },
+  "experience": 1.0,
+  "ingredients": [
+    "#c:crops/beetroot",
+    "#c:crops/beetroot",
+    "#c:crops/beetroot"
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "id": "minecraft:beetroot_soup"
+  }
 }

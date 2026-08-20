@@ -1,5 +1,5 @@
-@MethodsReturnNonnullByDefault
+@NullMarked
 package vectorwing.farmersdelight.client.renderer;
 
-import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
+import org.jspecify.annotations.NullMarked;
 

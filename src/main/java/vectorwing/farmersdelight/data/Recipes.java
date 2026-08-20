@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.data;
 
-import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
+import org.jspecify.annotations.NullMarked;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -14,7 +14,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.concurrent.CompletableFuture;
 
 @ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+@NullMarked
 public class Recipes extends RecipeProvider
 {
 	public Recipes(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {

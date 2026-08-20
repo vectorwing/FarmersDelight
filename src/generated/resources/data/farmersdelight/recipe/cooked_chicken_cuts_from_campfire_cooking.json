@@ -1,11 +1,10 @@
 {
-    "type":  "minecraft:campfire_cooking",
-    "category":  "food",
-    "cookingtime":  600,
-    "experience":  0.35,
-    "ingredient":  "farmersdelight:chicken_cuts",
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:cooked_chicken_cuts"
-               }
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.35,
+  "ingredient": "farmersdelight:chicken_cuts",
+  "result": {
+    "id": "farmersdelight:cooked_chicken_cuts"
+  }
 }

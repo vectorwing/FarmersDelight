@@ -1,13 +1,11 @@
 {
-    "type":  "minecraft:crafting_shapeless",
-    "category":  "misc",
-    "group":  "fd_hanging_canvas_sign",
-    "ingredients":  [
-                        "#farmersdelight:hanging_canvas_signs",
-                        "#c:dyes/red"
-                    ],
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:red_hanging_canvas_sign"
-               }
+  "type": "minecraft:crafting_shapeless",
+  "group": "fd_hanging_canvas_sign",
+  "ingredients": [
+    "#farmersdelight:hanging_canvas_signs",
+    "#c:dyes/red"
+  ],
+  "result": {
+    "id": "farmersdelight:red_hanging_canvas_sign"
+  }
 }

@@ -1,0 +1,14 @@
+{
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "ingredients": [
+    "minecraft:brown_mushroom",
+    "minecraft:red_mushroom",
+    "#c:crops/rice",
+    "minecraft:potato"
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "id": "farmersdelight:mushroom_rice"
+  }
+}

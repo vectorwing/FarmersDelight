@@ -1,39 +1,26 @@
 {
-    "type":  "farmersdelight:cutting",
-    "ingredients":  [
-                        {
-                            "neoforge:ingredient_type":  "neoforge:compound",
-                            "children":  [
-                                             "minecraft:bamboo_door",
-                                             "minecraft:bamboo_trapdoor",
-                                             "minecraft:bamboo_sign",
-                                             "minecraft:bamboo_hanging_sign",
-                                             "minecraft:bamboo_fence",
-                                             "minecraft:bamboo_fence_gate",
-                                             "minecraft:bamboo_pressure_plate",
-                                             "minecraft:bamboo_button",
-                                             "minecraft:bamboo_raft",
-                                             "farmersdelight:bamboo_cabinet"
-                                         ]
-                        }
-                    ],
-    "result":  [
-                   {
-                       "chance":  0.75,
-                       "item":  {
-                                    "count":  1,
-                                    "id":  "minecraft:bamboo_planks"
-                                }
-                   }
-               ],
-    "tool":  {
-                 "neoforge:ingredient_type":  "neoforge:compound",
-                 "children":  [
-                                  {
-                                      "neoforge:ingredient_type":  "farmersdelight:item_ability",
-                                      "action":  "axe_dig"
-                                  },
-                                  "#minecraft:axes"
-                              ]
-             }
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    [
+      "minecraft:bamboo_door",
+      "minecraft:bamboo_trapdoor",
+      "minecraft:bamboo_sign",
+      "minecraft:bamboo_hanging_sign",
+      "minecraft:bamboo_fence",
+      "minecraft:bamboo_fence_gate",
+      "minecraft:bamboo_pressure_plate",
+      "minecraft:bamboo_button",
+      "minecraft:bamboo_raft",
+      "farmersdelight:bamboo_cabinet"
+    ]
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "id": "minecraft:bamboo_planks"
+      }
+    }
+  ],
+  "tool": "#minecraft:axes"
 }

@@ -1,11 +1,8 @@
 {
-    "type":  "minecraft:smelting",
-    "category":  "misc",
-    "cookingtime":  200,
-    "experience":  0.1,
-    "ingredient":  "farmersdelight:golden_knife",
-    "result":  {
-                   "count":  1,
-                   "id":  "minecraft:gold_nugget"
-               }
+  "type": "minecraft:smelting",
+  "experience": 0.1,
+  "ingredient": "farmersdelight:golden_knife",
+  "result": {
+    "id": "minecraft:gold_nugget"
+  }
 }

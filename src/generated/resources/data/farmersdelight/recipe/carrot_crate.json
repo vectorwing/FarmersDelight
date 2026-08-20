@@ -1,21 +1,20 @@
 {
-    "neoforge:conditions":  [
-                                {
-                                    "type":  "farmersdelight:vanilla_crates_enabled"
-                                }
-                            ],
-    "type":  "minecraft:crafting_shaped",
-    "category":  "building",
-    "key":  {
-                "#":  "minecraft:carrot"
-            },
-    "pattern":  [
-                    "###",
-                    "###",
-                    "###"
-                ],
-    "result":  {
-                   "count":  1,
-                   "id":  "farmersdelight:carrot_crate"
-               }
+  "fabric:load_conditions": [
+    {
+      "condition": "farmersdelight:vanilla_crates_enabled"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": "minecraft:carrot"
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "id": "farmersdelight:carrot_crate"
+  }
 }

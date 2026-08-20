@@ -6,7 +6,7 @@
   },
   "display": {
     "announce_to_chat": false,
-    "background": "minecraft:textures/block/bricks.png",
+    "background": "minecraft:block/bricks",
     "description": {
       "translate": "advancements.farmersdelight.root.description"
     },
