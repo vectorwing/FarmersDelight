@@ -17,9 +17,8 @@ metadata. No upstream authorship is claimed by the port maintainer.
 
 - Name: **Farmer's Delight — Unofficial NeoForge 26.1.2 Port**
 - Target: Minecraft 26.1.2 / NeoForge 26.1.2
-- Port maintainer: **Alkaid-707-404**
-- Port source repository: <https://github.com/Alkaid-707-404/FarmersDelight_NeoForge26.1.2>
-- Port issue tracker: <https://github.com/Alkaid-707-404/FarmersDelight_NeoForge26.1.2/issues>
+- Port maintainer: **LexonBlackzz**
+- Port source repository: <https://github.com/LexonBlackzz/FarmersDelight>
 
 This port is not affiliated with, maintained by, sponsored by, or endorsed by
 vectorwing or the official Farmer's Delight project.
