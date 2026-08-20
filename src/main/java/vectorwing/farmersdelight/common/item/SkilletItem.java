@@ -137,25 +137,23 @@ public class SkilletItem extends BlockItem
 		ItemStack skilletStack = player.getItemInHand(hand);
 		if (GameplayUtils.isPlayerNearHeatSource(player, level)) {
 			InteractionHand otherHand = hand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
-			ItemStack cookingStack = player.getItemInHand(otherHand);
+			ItemStack ingredientStack = player.getItemInHand(otherHand);
 
 			if (!skilletStack.getOrDefault(ModDataComponents.SKILLET_INGREDIENT, ItemStackWrapper.EMPTY).getStack().isEmpty()) {
 				player.startUsingItem(hand);
 				return InteractionResultHolder.pass(skilletStack);
 			}
 
-			Optional<RecipeHolder<CampfireCookingRecipe>> recipe = RecipeUtils.getCampfireCookingRecipe(cookingStack, level);
+			Optional<RecipeHolder<CampfireCookingRecipe>> recipe = RecipeUtils.getCampfireCookingRecipe(ingredientStack, level);
 			if (recipe.isPresent()) {
 				if (player.isUnderWater()) {
 					player.displayClientMessage(TextUtils.item("skillet.underwater"), true);
 					return InteractionResultHolder.pass(skilletStack);
 				}
-				ItemStack cookingStackCopy = cookingStack.copy();
-				ItemStack cookingStackUnit = cookingStackCopy.split(1);
-				skilletStack.set(ModDataComponents.SKILLET_INGREDIENT, new ItemStackWrapper(cookingStackUnit));
+				ItemStack cookingStack = new ItemStack(ingredientStack.getItem());
+				skilletStack.set(ModDataComponents.SKILLET_INGREDIENT, new ItemStackWrapper(cookingStack));
 				skilletStack.set(ModDataComponents.COOKING_TIME_LENGTH, recipe.get().value().getCookingTime());
 				player.startUsingItem(hand);
-				player.setItemInHand(otherHand, cookingStackCopy);
 				return InteractionResultHolder.consume(skilletStack);
 			} else {
 				player.displayClientMessage(TextUtils.item("skillet.how_to_cook"), true);
@@ -189,8 +187,6 @@ public class SkilletItem extends BlockItem
 	private void clearSkillet(ItemStack stack, Player player) {
 		ItemStackWrapper storedStack = stack.getOrDefault(ModDataComponents.SKILLET_INGREDIENT, ItemStackWrapper.EMPTY);
 		if (!storedStack.getStack().isEmpty()) {
-			ItemStack cookingStack = storedStack.getStack();
-			player.getInventory().placeItemBackInInventory(cookingStack);
 			stack.remove(ModDataComponents.SKILLET_INGREDIENT);
 			stack.remove(ModDataComponents.COOKING_TIME_LENGTH);
 			stack.remove(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());

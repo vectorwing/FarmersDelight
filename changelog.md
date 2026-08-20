@@ -12,6 +12,10 @@
 ### Updates
 - Tweaked the Egg Sandwich texture slightly;
 
+### Fixes
+- Fix broken Skillet interactions when swapping slots while cooking an item;
+  - Due to this fix, the Skillet no longer "stores" an ingredient within itself on handheld mode. The ingredient is only subtracted once cooking finishes;
+
 ## 1.3.3
 
 ### Fixes
