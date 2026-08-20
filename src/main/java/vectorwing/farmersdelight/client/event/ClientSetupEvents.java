@@ -1,13 +1,17 @@
 package vectorwing.farmersdelight.client.event;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -19,6 +23,8 @@ import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsE
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.client.extension.HandCookedItemClientExtension;
+import vectorwing.farmersdelight.client.extension.SkilletItemClientExtension;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.client.gui.CookingPotTooltip;
 import vectorwing.farmersdelight.client.gui.HUDOverlays;
@@ -43,20 +49,8 @@ public class ClientSetupEvents
 
 	@SubscribeEvent
 	public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
-		event.registerItem(new IClientItemExtensions()
-		{
-			BlockEntityWithoutLevelRenderer renderer = new SkilletItemRenderer();
-
-			@Override
-			public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
-				return renderer;
-			}
-
-			@Override
-			public HumanoidModel.@Nullable ArmPose getArmPose(LivingEntity living, InteractionHand hand, ItemStack stack) {
-				return stack.has(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get()) ? EnumParameters.PROXY_SKILLET_FLIP.getValue() : null;
-			}
-		}, ModItems.SKILLET.get());
+		event.registerItem(new SkilletItemClientExtension(), ModItems.SKILLET.get());
+		event.registerItem(new HandCookedItemClientExtension(), ModItems.MEAT_SKEWER.get(), ModItems.VEGETABLE_SKEWER.get());
 	}
 
 	@SubscribeEvent

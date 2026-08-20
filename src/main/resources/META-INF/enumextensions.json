@@ -50,6 +50,15 @@
         "class": "vectorwing/farmersdelight/common/EnumParameters",
         "field": "PROXY_SKILLET_FLIP"
       }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "FARMERSDELIGHT_HAND_COOKING",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "vectorwing/farmersdelight/common/EnumParameters",
+        "field": "PROXY_HAND_COOKING"
+      }
     }
   ]
 }
