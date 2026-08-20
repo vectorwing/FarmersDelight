@@ -1,4 +1,4 @@
-# Farmer's Delight - Unofficial NeoForge 26.1.2 Port
+# Farmer's Delight - Unofficial NeoForge 26.2 Port
 
 > **Unofficial community port.** This project is based on
 > [Farmer's Delight](https://github.com/vectorwing/FarmersDelight), originally
@@ -6,8 +6,8 @@
 > partnered with, or endorsed by vectorwing or the official Farmer's Delight
 > project.
 
-This repository adapts Farmer's Delight 1.3.2 to Minecraft 26.1.2 and
-NeoForge 26.1.2. To preserve world-save and add-on compatibility, this port
+This repository adapts Farmer's Delight 1.3.2 to Minecraft 26.2 and
+NeoForge 26.2. To preserve world-save and add-on compatibility, this port
 keeps the original `farmersdelight` mod id.
 
 
@@ -17,9 +17,8 @@ keeps the original `farmersdelight` mod id.
 - Original project: <https://github.com/vectorwing/FarmersDelight>
 - Original license: [MIT License](LICENSE)
 - Port role: **unofficial port maintainer**
-- Port maintainer: **Alkaid-707-404**
-- Port source: <https://github.com/Alkaid-707-404/FarmersDelight_NeoForge26.1.2>
-- Issue tracker: <https://github.com/Alkaid-707-404/FarmersDelight_NeoForge26.1.2/issues>
+- Port maintainer: **LexonBlackzz**
+- Port source: <https://github.com/LexonBlackzz/FarmersDelight>
 
 This project preserves the original copyright notice and MIT License. Original
 project contributors remain credited in the mod metadata. Maintaining this port
@@ -27,21 +26,21 @@ does not transfer authorship of the original mod.
 
 ## Installation
 
-1. Install Minecraft 26.1.2.
-2. Install NeoForge 26.1.2. The current build uses NeoForge `26.1.2.80`.
+1. Install Minecraft 26.2
+2. Install NeoForge 26.2. The current build uses NeoForge `26.2.0.59`.
 3. Download this port's jar, for example
-   `FarmersDelight-26.1.2-1.3.2-port.12.jar`.
+   `FarmersDelight-26.2-1.3.2-port.40.jar`.
 4. Put the jar into the `mods` folder of the target instance.
 5. Start the game and confirm that the mod list shows
-   `Farmer's Delight - Unofficial NeoForge 26.1.2 Port`.
+   `Farmer's Delight - Unofficial NeoForge 26.2 Port`.
 
 This port does not require extra dependency mods by itself. Optional
-integrations such as JEI, EMI, AppleSkin, and CraftTweaker are not yet ported
-to 26.1.2, so they are not required dependencies.
+integrations such as EMI, AppleSkin, and CraftTweaker are not yet ported
+to 26.2, so they are not required dependencies.
 
 ## Current Limitations
 
-- Optional integration source for JEI, EMI, AppleSkin, and CraftTweaker is not
+- Optional integration source for EMI, AppleSkin, and CraftTweaker is not
   enabled yet.
 - Data-generator source is not fully migrated yet; the current release package
   ships the already usable generated data resources directly.
