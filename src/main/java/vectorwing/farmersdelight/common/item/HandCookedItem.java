@@ -26,9 +26,9 @@ import java.util.Optional;
  * <br><br>
  * When used, the item checks if a valid campfire cooking recipe exists; if one does, it will cook the item on the player's hand over 6 seconds by default.
  */
-public class SkewerItem extends Item
+public class HandCookedItem extends Item
 {
-	public SkewerItem(Properties properties) {
+	public HandCookedItem(Properties properties) {
 		super(properties);
 	}
 
