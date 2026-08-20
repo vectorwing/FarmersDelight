@@ -28,6 +28,7 @@ import vectorwing.farmersdelight.client.extension.SkilletItemClientExtension;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
 import vectorwing.farmersdelight.client.gui.CookingPotTooltip;
 import vectorwing.farmersdelight.client.gui.HUDOverlays;
+import vectorwing.farmersdelight.client.gui.JugScreen;
 import vectorwing.farmersdelight.client.particle.SparkleParticle;
 import vectorwing.farmersdelight.client.particle.StarParticle;
 import vectorwing.farmersdelight.client.particle.SteamParticle;
@@ -81,6 +82,7 @@ public class ClientSetupEvents
 	@SubscribeEvent
 	public static void registerMenuScreens(RegisterMenuScreensEvent event) {
 		event.register(ModMenuTypes.COOKING_POT.get(), CookingPotScreen::new);
+		event.register(ModMenuTypes.JUG.get(), JugScreen::new);
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
