@@ -75,6 +75,8 @@ public class BlockStates extends BlockStateProvider
 				$ -> modelCubeBottomTop(blockName(ModBlocks.RICE_BALE.get())));
 		customHorizontalBlock(ModBlocks.CUTTING_BOARD.get(),
 				$ -> existingModel(ModBlocks.CUTTING_BOARD.get()), BasketBlock.WATERLOGGED);
+		customHorizontalBlock(ModBlocks.JUG.get(),
+			$ -> existingModel(ModBlocks.JUG.get()), BasketBlock.WATERLOGGED);
 
 		horizontalBlock(ModBlocks.HALF_TATAMI_MAT.get(), existingModel("tatami_mat_half"));
 

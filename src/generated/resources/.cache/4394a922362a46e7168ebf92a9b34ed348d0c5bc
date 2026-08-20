@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-19T12:43:42.6498852	Item Models: farmersdelight
+// 1.21.1	2026-08-20T13:41:32.9177627	Item Models: farmersdelight
 01e23a47f469a0c2107b2a1b6fc7f7c8f0c23d55 assets/farmersdelight/models/item/acacia_cabinet.json
 a58cc863fafd0f13d1235a2f7344b446f853ae55 assets/farmersdelight/models/item/apple_cider.json
 8348e66b9efe6a92614cca78c3463d3efaea57fa assets/farmersdelight/models/item/apple_pie.json
@@ -83,6 +83,7 @@ db8cd73cb30ef5633964155e90c29897aa58810a assets/farmersdelight/models/item/honey
 cf2a22b63d8daf6cd9b1cdb2a2bd2da6932f7d6f assets/farmersdelight/models/item/horse_feed.json
 8dea6006499057f7b97173602c6ffa7b9f7e36b4 assets/farmersdelight/models/item/hot_cocoa.json
 133febcd14bbe80692c99d0f67542686780490de assets/farmersdelight/models/item/iron_knife.json
+10195fa0e60d374d8ed753e8322a6293b0dd72a0 assets/farmersdelight/models/item/jug.json
 3d4038cde35f6c1006addcf1e9f790fc78ca2c59 assets/farmersdelight/models/item/jungle_cabinet.json
 a0836f799b4c9b924f0def317912ec9182ab0b54 assets/farmersdelight/models/item/kelp_roll.json
 1e848c3f12993557d462f6ddfe41093988ef57ce assets/farmersdelight/models/item/kelp_roll_slice.json

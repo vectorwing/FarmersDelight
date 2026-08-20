@@ -65,6 +65,8 @@ public class ModItems
 		() -> new SkilletItem(ModBlocks.SKILLET.get(), basicItem().stacksTo(1).attributes(SkilletItem.createAttributes(SkilletItem.SKILLET_TIER, 5.0F, -3.1F))));
 	public static final Supplier<Item> CUTTING_BOARD = registerWithTab("cutting_board",
 		() -> new BlockItem(ModBlocks.CUTTING_BOARD.get(), basicItem()));
+	public static final Supplier<Item> JUG = registerWithTab("jug",
+		() -> new BlockItem(ModBlocks.JUG.get(), basicItem().stacksTo(1)));
 	public static final Supplier<Item> WOODEN_BASKET = registerWithTab("wooden_basket",
 		() -> new BlockItem(ModBlocks.WOODEN_BASKET.get(), basicItem()));
 	public static final Supplier<Item> BAMBOO_BASKET = registerWithTab("bamboo_basket",

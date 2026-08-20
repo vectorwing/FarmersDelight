@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-25T01:14:08.5546299	Loot Tables
+// 1.21.1	2026-08-20T13:41:32.9147619	Loot Tables
 cee3ddcf0129e742307f35926b2f1b713d0f5ea1 data/farmersdelight/loot_table/blocks/acacia_cabinet.json
 23fb8611e8fde16b90b760500fb6d39c0042c092 data/farmersdelight/loot_table/blocks/apple_pie.json
 9b2ab65cc0cff153f89f4ba4b59d2b807315767e data/farmersdelight/loot_table/blocks/bamboo_basket.json
@@ -35,6 +35,7 @@ bad04fd6f62ecfe5555dd0d4320c3e8bfe414262 data/farmersdelight/loot_table/blocks/g
 87360ee6a0b76f9b31c6e33993e4c09d1b994ab7 data/farmersdelight/loot_table/blocks/half_tatami_mat.json
 5d447efa169496f63fe5cdbba1edb608722e1154 data/farmersdelight/loot_table/blocks/hanging_canvas_sign.json
 5b77127e8c7dc8168ac520afe87a56c25103d59d data/farmersdelight/loot_table/blocks/honey_glazed_ham_block.json
+a2a4bdeade4bed770d654f2005cd1b0208f1078a data/farmersdelight/loot_table/blocks/jug.json
 014a385b59d3ea857a941c42f7cf3cd4233cee13 data/farmersdelight/loot_table/blocks/jungle_cabinet.json
 61d6fc49ad6388ba31c7a580b59ba41124df73ac data/farmersdelight/loot_table/blocks/light_blue_canvas_sign.json
 d82a0d0b3eabbc7eabe9d73bf28c2c97f0774b52 data/farmersdelight/loot_table/blocks/light_blue_hanging_canvas_sign.json

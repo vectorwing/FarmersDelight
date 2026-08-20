@@ -1,0 +1,67 @@
+{
+  "format_version": "1.9.0",
+  "parent": "block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "top": "farmersdelight:block/jug_top",
+    "particle": "farmersdelight:block/jug_side",
+    "side": "farmersdelight:block/jug_side",
+    "bottom": "farmersdelight:block/jug_bottom"
+  },
+  "elements": [
+    {
+      "name": "body",
+      "from": [3, 0, 3],
+      "to": [13, 12, 13],
+      "faces": {
+        "north": {"uv": [3, 4, 13, 16], "texture": "#side"},
+        "east": {"uv": [3, 4, 13, 16], "texture": "#side"},
+        "south": {"uv": [3, 4, 13, 16], "texture": "#side"},
+        "west": {"uv": [3, 4, 13, 16], "texture": "#side"},
+        "up": {"uv": [0, 0, 10, 10], "texture": "#top"},
+        "down": {"uv": [0, 0, 10, 10], "texture": "#bottom", "cullface": "down"}
+      }
+    },
+    {
+      "name": "neck",
+      "from": [5, 12, 5],
+      "to": [11, 16, 11],
+      "faces": {
+        "north": {"uv": [5, 0, 11, 4], "texture": "#side"},
+        "east": {"uv": [5, 0, 11, 4], "texture": "#side"},
+        "south": {"uv": [5, 0, 11, 4], "texture": "#side"},
+        "west": {"uv": [5, 0, 11, 4], "texture": "#side"},
+        "up": {"uv": [10, 0, 16, 6], "texture": "#top", "cullface": "up"}
+      }
+    },
+    {
+      "name": "handle_west",
+      "from": [12, 12, 5],
+      "to": [15, 12, 11],
+      "rotation": {"angle": 45, "axis": "z", "origin": [12, 12, 8]},
+      "faces": {
+        "up": {"uv": [10, 13, 16, 16], "rotation": 90, "texture": "#top"},
+        "down": {"uv": [10, 13, 16, 16], "rotation": 90, "texture": "#top"}
+      }
+    },
+    {
+      "name": "handle_east",
+      "from": [1, 12, 5],
+      "to": [4, 12, 11],
+      "rotation": {"angle": -45, "axis": "z", "origin": [4, 12, 8]},
+      "faces": {
+        "up": {"uv": [10, 13, 16, 16], "rotation": 270, "texture": "#top"},
+        "down": {"uv": [10, 13, 16, 16], "rotation": 270, "texture": "#top"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "jug",
+      "origin": [4, 12, 8],
+      "scope": 0,
+      "color": 0,
+      "children": [0, 1, 2, 3]
+    }
+  ]
+}
