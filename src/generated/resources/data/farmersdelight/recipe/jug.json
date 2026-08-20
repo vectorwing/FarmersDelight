@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "c:ingots/iron"
+    },
+    "I": {
+      "item": "minecraft:iron_block"
+    }
+  },
+  "pattern": [
+    " # ",
+    "# #",
+    "#I#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:jug"
+  }
+}

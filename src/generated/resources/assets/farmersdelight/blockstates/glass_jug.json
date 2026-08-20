@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "farmersdelight:block/glass_jug",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "farmersdelight:block/glass_jug"
+    },
+    "facing=south": {
+      "model": "farmersdelight:block/glass_jug",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "farmersdelight:block/glass_jug",
+      "y": 270
+    }
+  }
+}

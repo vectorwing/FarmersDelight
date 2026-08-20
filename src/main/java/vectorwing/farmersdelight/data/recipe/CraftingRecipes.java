@@ -229,6 +229,22 @@ public class CraftingRecipes
 			.define('#', Tags.Items.INGOTS_IRON)
 			.unlockedBy("has_brick", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BRICK))
 			.save(output);
+		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.JUG.get())
+			.pattern(" # ")
+			.pattern("# #")
+			.pattern("#I#")
+			.define('I', Items.IRON_BLOCK)
+			.define('#', Tags.Items.INGOTS_IRON)
+			.unlockedBy("has_iron", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
+			.save(output);
+		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.GLASS_JUG.get())
+			.pattern(" # ")
+			.pattern("# #")
+			.pattern("#I#")
+			.define('I', Items.IRON_BLOCK)
+			.define('#', Tags.Items.GLASS_BLOCKS_CHEAP)
+			.unlockedBy("has_iron", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
+			.save(output);
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.OAK_CABINET.get())
 			.pattern("___")
 			.pattern("D D")

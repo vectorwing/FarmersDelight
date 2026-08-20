@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-20T13:41:32.9177627	Item Models: farmersdelight
+// 1.21.1	2026-08-20T14:31:53.9297004	Item Models: farmersdelight
 01e23a47f469a0c2107b2a1b6fc7f7c8f0c23d55 assets/farmersdelight/models/item/acacia_cabinet.json
 a58cc863fafd0f13d1235a2f7344b446f853ae55 assets/farmersdelight/models/item/apple_cider.json
 8348e66b9efe6a92614cca78c3463d3efaea57fa assets/farmersdelight/models/item/apple_pie.json
@@ -64,6 +64,7 @@ ff5649c08334d4c2c8b6fef66989d12b040252bc assets/farmersdelight/models/item/flint
 12b3bd5c682412a932242927fa97d206fafac05f assets/farmersdelight/models/item/fried_rice.json
 6e6936311a0d6ff359613f6d84947140ea860266 assets/farmersdelight/models/item/fruit_salad.json
 7781caaeef1e03dbcaad9fdc822dcd83e84affde assets/farmersdelight/models/item/full_tatami_mat.json
+a6c9b695d0fa5b1fdd9e745af149b450f29af471 assets/farmersdelight/models/item/glass_jug.json
 56a04b176750bd9ebd04c47b361483b5f0a4a001 assets/farmersdelight/models/item/gleaming_salad.json
 025994a3e2f41db400539edd2a90eccfb11a67bf assets/farmersdelight/models/item/gleaming_salad_block.json
 7478b2c8395db2ad15eb4d32fc15fe0cd376ce8a assets/farmersdelight/models/item/glow_berry_custard.json

@@ -67,6 +67,7 @@ public class FDBlockLoot extends BlockLootSubProvider
 				.add(LootItem.lootTableItem(block).apply(CopySkilletFunction.builder())))));
 		dropSelf(ModBlocks.CUTTING_BOARD.get());
 		dropSelf(ModBlocks.JUG.get());
+		dropSelf(ModBlocks.GLASS_JUG.get());
 
 		dropOther(ModBlocks.BUDDING_TOMATO_CROP.get(), ModItems.TOMATO_SEEDS.get());
 		add(ModBlocks.CABBAGE_CROP.get(), createCropDrops(ModBlocks.CABBAGE_CROP.get(), ModItems.CABBAGE.get(), ModItems.CABBAGE_SEEDS.get(), registryLookup));

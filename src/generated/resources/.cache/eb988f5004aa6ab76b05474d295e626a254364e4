@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-20T13:41:32.9077615	Block States: farmersdelight
+// 1.21.1	2026-08-20T14:31:53.9186991	Block States: farmersdelight
 d4d9057afde725ea2a48206d8c1ea6eee4ec1c24 assets/farmersdelight/blockstates/acacia_cabinet.json
 c1a643b06507467b350b8eedb4cc05f93d71abb2 assets/farmersdelight/blockstates/apple_pie.json
 9b32f44318d93a46cd087e21d1834a77d2b14fa7 assets/farmersdelight/blockstates/bamboo_basket.json
@@ -36,6 +36,7 @@ f2cdfdf57f84b5e538ef28b793361da993bcc7d3 assets/farmersdelight/blockstates/cutti
 8ee2f7c922e1e098812e0bd0cc5c7633f5632216 assets/farmersdelight/blockstates/cyan_wall_hanging_canvas_sign.json
 7fe5bdcd3dab8725b3f9457657d11c490f9e4750 assets/farmersdelight/blockstates/dark_oak_cabinet.json
 55c4c48f207c7ad958f5d591c207847ab52b311d assets/farmersdelight/blockstates/full_tatami_mat.json
+8cc89ca4d21ef4645bef6e2b382fd2b22da5c22a assets/farmersdelight/blockstates/glass_jug.json
 a7fe5c7b4401d355ecbe19728198637810bebdd1 assets/farmersdelight/blockstates/gleaming_salad_block.json
 8ee2f7c922e1e098812e0bd0cc5c7633f5632216 assets/farmersdelight/blockstates/gray_canvas_sign.json
 8ee2f7c922e1e098812e0bd0cc5c7633f5632216 assets/farmersdelight/blockstates/gray_canvas_wall_sign.json
