@@ -145,7 +145,6 @@ tasks.withType(ProcessResources).configureEach {
             mod_authors            : mod_authors,
             port_maintainer        : port_maintainer,
             port_source_url        : port_source_url,
-            port_issue_url         : port_issue_url,
             mod_description        : mod_description
     ]
     inputs.properties replaceProperties

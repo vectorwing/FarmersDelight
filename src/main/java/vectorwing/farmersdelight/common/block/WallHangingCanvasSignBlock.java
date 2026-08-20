@@ -34,15 +34,4 @@ public class WallHangingCanvasSignBlock extends WallHangingSignBlock implements 
 		return ModBlockEntityTypes.HANGING_CANVAS_SIGN.get().create(pos, state);
 	}
 
-	@Override
-	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-		super.setPlacedBy(level, pos, state, placer, stack);
-
-		if (level.getBlockEntity(pos) instanceof SignBlockEntity sign && state.getBlock() instanceof CanvasSign canvasSignBlock) {
-			if (canvasSignBlock.isDarkBackground()) {
-				sign.updateText((signText) -> signText.setColor(DyeColor.WHITE), true);
-				sign.updateText((signText) -> signText.setColor(DyeColor.WHITE), false);
-			}
-		}
-	}
 }

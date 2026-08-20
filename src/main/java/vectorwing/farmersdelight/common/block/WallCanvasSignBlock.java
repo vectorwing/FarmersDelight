@@ -34,12 +34,4 @@ public class WallCanvasSignBlock extends WallSignBlock implements CanvasSign
 		return ModBlockEntityTypes.CANVAS_SIGN.get().create(pos, state);
 	}
 
-	@Override
-	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-		if (level.getBlockEntity(pos) instanceof SignBlockEntity sign && state.getBlock() instanceof CanvasSign canvasSignBlock) {
-			if (canvasSignBlock.isDarkBackground()) {
-				sign.updateText((signText) -> signText.setColor(DyeColor.WHITE), true);
-			}
-		}
-	}
 }

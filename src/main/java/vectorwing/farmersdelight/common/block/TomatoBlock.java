@@ -250,10 +250,9 @@ public class TomatoBlock extends CropBlock
 	@Deprecated(forRemoval = true)
 	@Override
 	public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
-		boolean isRopelogged = state.getValue(TomatoBlock.ROPELOGGED);
 		super.playerDestroy(level, player, pos, state, blockEntity, stack);
 
-		if (isRopelogged) {
+		if (state.hasProperty(TomatoBlock.ROPELOGGED) && state.getValue(TomatoBlock.ROPELOGGED)) {
 			destroyAndPlaceRope(level, pos);
 		}
 	}
