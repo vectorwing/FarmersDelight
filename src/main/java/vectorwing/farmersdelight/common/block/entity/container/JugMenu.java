@@ -21,7 +21,11 @@ public class JugMenu extends AbstractContainerMenu
 		int startY = 18;
 		int borderSlotSize = 18;
 
-		// Main Player Inventory
+		// Jug Input
+
+		// Jug Output
+
+		// Player Inventory
 		int startPlayerInvY = 96;
 		int startPlayerHotbarY = 154;
 		for (int row = 0; row < 3; ++row) {
@@ -40,8 +44,7 @@ public class JugMenu extends AbstractContainerMenu
 
 	@Override
 	public ItemStack quickMoveStack(Player player, int index) {
-		ItemStack slotStackCopy = ItemStack.EMPTY;
-		return slotStackCopy;
+		return ItemStack.EMPTY;
 	}
 
 	@Override

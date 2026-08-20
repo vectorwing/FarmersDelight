@@ -51,5 +51,8 @@ public class JugScreen extends AbstractContainerScreen<JugMenu>
 
 		guiGraphics.blit(TEXTURE_FLUID_RULER, this.leftPos + FLUID_RULER.x, this.topPos + FLUID_RULER.y,
 			0, 0, FLUID_RULER.width, FLUID_RULER.height, FLUID_RULER.width, FLUID_RULER.height);
+
+		guiGraphics.drawString(font, String.valueOf(0), this.leftPos + 121, this.topPos + 51, 16777215, true);
+		guiGraphics.drawString(font, String.valueOf(0), this.leftPos + 121, this.topPos + 71, 16777215, true);
 	}
 }
