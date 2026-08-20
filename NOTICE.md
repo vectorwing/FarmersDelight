@@ -15,8 +15,8 @@ metadata. No upstream authorship is claimed by the port maintainer.
 
 ## Unofficial port
 
-- Name: **Farmer's Delight — Unofficial NeoForge 26.1.2 Port**
-- Target: Minecraft 26.1.2 / NeoForge 26.1.2
+- Name: **Farmer's Delight — Unofficial NeoForge 26.2 Port**
+- Target: Minecraft 26.2 / NeoForge 26.2
 - Port maintainer: **LexonBlackzz**
 - Port source repository: <https://github.com/LexonBlackzz/FarmersDelight>
 
