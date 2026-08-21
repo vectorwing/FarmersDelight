@@ -13,9 +13,13 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.fluids.FluidActionResult;
+import net.neoforged.neoforge.fluids.FluidUtil;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.common.block.entity.container.JugMenu;
@@ -26,6 +30,7 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, Nameable, Clearable
 {
 	private final ItemStackHandler inventory;
+	private final FluidTank fluidTank;
 	private Component customName;
 
 	public JugBlockEntity(BlockPos pos, BlockState state) {
@@ -35,12 +40,14 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 	public JugBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state) {
 		super(blockEntityType, pos, state);
 		this.inventory = createHandler();
+		this.fluidTank = new FluidTank(16000);
 	}
 
 	@Override
 	protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
 		super.loadAdditional(tag, registries);
 		inventory.deserializeNBT(registries, tag);
+		fluidTank.readFromNBT(registries, tag);
 		if (tag.contains("CustomName", 8)) {
 			this.customName = parseCustomNameSafe(tag.getString("CustomName"), registries);
 		}
@@ -50,9 +57,26 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 	protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
 		super.saveAdditional(tag, registries);
 		tag.merge(inventory.serializeNBT(registries));
+		fluidTank.writeToNBT(registries, tag);
 		if (this.customName != null) {
 			tag.putString("CustomName", Component.Serializer.toJson(this.customName, registries));
 		}
+	}
+
+	public static void jugTick(Level level, BlockPos pos, BlockState state, JugBlockEntity jug) {
+		if (!jug.getInput().isEmpty()) {
+			ItemStack input = jug.getInput();
+			FluidActionResult fluidResult = FluidUtil.tryEmptyContainer(input, jug.fluidTank, jug.fluidTank.getSpace(), null, true);
+			if (fluidResult.isSuccess()) {
+				input.shrink(1);
+				jug.getInventory().setStackInSlot(0, input);
+				jug.getInventory().setStackInSlot(1, fluidResult.result);
+			}
+		}
+	}
+
+	public FluidTank getFluidTank() {
+		return fluidTank;
 	}
 
 	public ItemStackHandler getInventory() {

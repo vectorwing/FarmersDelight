@@ -12,6 +12,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -77,6 +79,15 @@ public class JugBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 			level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
 		return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+	}
+
+	@javax.annotation.Nullable
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntity) {
+		if (level.isClientSide) {
+//			return createTickerHelper(blockEntity, ModBlockEntityTypes.COOKING_POT.get(), JugBlockEntity::animationTick);
+			return null;
+		}
+		return createTickerHelper(blockEntity, ModBlockEntityTypes.JUG.get(), JugBlockEntity::jugTick);
 	}
 
 	@Override

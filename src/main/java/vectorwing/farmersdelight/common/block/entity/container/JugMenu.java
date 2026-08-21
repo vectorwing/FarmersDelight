@@ -7,6 +7,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import vectorwing.farmersdelight.common.block.entity.JugBlockEntity;
@@ -21,6 +22,7 @@ public class JugMenu extends AbstractContainerMenu
 
 	public final JugBlockEntity jug;
 	public final ItemStackHandler inventory;
+	public final FluidTank fluidTank;
 
 	public JugMenu(int containerId, Inventory playerInventory, final FriendlyByteBuf data) {
 		this(containerId, playerInventory, getBlockEntity(playerInventory, data));
@@ -30,6 +32,7 @@ public class JugMenu extends AbstractContainerMenu
 		super(ModMenuTypes.JUG.get(), containerId);
 		this.jug = jug;
 		this.inventory = jug.getInventory();
+		this.fluidTank = jug.getFluidTank();
 
 		int startX = 8;
 		int startY = 18;
