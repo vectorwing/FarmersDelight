@@ -16,6 +16,9 @@ import java.util.Objects;
 
 public class JugMenu extends AbstractContainerMenu
 {
+	public static final int INDEX_INPUT = 0;
+	public static final int INDEX_OUTPUT = 1;
+
 	public final JugBlockEntity jug;
 	public final ItemStackHandler inventory;
 
@@ -36,7 +39,7 @@ public class JugMenu extends AbstractContainerMenu
 		this.addSlot(new SlotItemHandler(inventory, 0, 51, 17));
 
 		// Jug Output
-		this.addSlot(new SlotItemHandler(inventory, 1, 51, 65));
+		this.addSlot(new ResultSlotItemHandler(inventory, 1, 51, 65));
 
 		// Player Inventory
 		int startPlayerInvY = 96;
@@ -67,7 +70,41 @@ public class JugMenu extends AbstractContainerMenu
 
 	@Override
 	public ItemStack quickMoveStack(Player player, int index) {
-		return ItemStack.EMPTY;
+		Slot slot = this.slots.get(index);
+		if (!slot.hasItem()) {
+			return ItemStack.EMPTY;
+		}
+
+		ItemStack slotStack = slot.getItem();
+		ItemStack slotStackCopy = slotStack.copy();
+		int indexInventoryStart = INDEX_OUTPUT + 1;
+		int indexInventoryEnd = indexInventoryStart + 36;
+
+		if (index == INDEX_OUTPUT) {
+			if (!this.moveItemStackTo(slotStack, indexInventoryStart, indexInventoryEnd, true)) {
+				return ItemStack.EMPTY;
+			}
+		} else if (index > INDEX_OUTPUT) {
+			if (!this.moveItemStackTo(slotStack, INDEX_INPUT, INDEX_OUTPUT, false)) {
+				return ItemStack.EMPTY;
+			}
+		} else if (!this.moveItemStackTo(slotStack, indexInventoryStart, indexInventoryEnd, false)) {
+			return ItemStack.EMPTY;
+		}
+
+		if (slotStack.isEmpty()) {
+			slot.set(ItemStack.EMPTY);
+		} else {
+			slot.setChanged();
+		}
+
+		if (slotStack.getCount() == slotStackCopy.getCount()) {
+			return ItemStack.EMPTY;
+		}
+
+		slot.onTake(player, slotStack);
+
+		return slotStackCopy;
 	}
 
 	@Override
