@@ -3,14 +3,9 @@ package vectorwing.farmersdelight.common.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.CraftingMenu;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -29,7 +24,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-import vectorwing.farmersdelight.common.block.entity.container.JugMenu;
+import vectorwing.farmersdelight.common.block.entity.JugBlockEntity;
+import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
 public class JugBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
@@ -59,15 +55,10 @@ public class JugBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 		if (level.isClientSide) {
 			return InteractionResult.SUCCESS;
 		}
-		player.openMenu(state.getMenuProvider(level, pos));
+		if (level.getBlockEntity(pos) instanceof JugBlockEntity jug) {
+			player.openMenu(jug, pos);
+		}
 		return InteractionResult.CONSUME;
-	}
-
-	@Override
-	protected MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
-		return new SimpleMenuProvider(
-			(id, inventory, player) -> new JugMenu(id, inventory), CONTAINER_TITLE
-		);
 	}
 
 	@Override
@@ -118,6 +109,6 @@ public class JugBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return null;
+		return ModBlockEntityTypes.JUG.get().create(pos, state);
 	}
 }

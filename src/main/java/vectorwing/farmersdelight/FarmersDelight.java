@@ -8,6 +8,7 @@ import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.client.event.ClientSetupEvents;
@@ -58,5 +59,7 @@ public class FarmersDelight
 		RegistryAliases.addRegistryAliases();
 
 		NeoForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
+
+		NeoForgeMod.enableMilkFluid();
 	}
 }

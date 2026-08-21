@@ -6,24 +6,37 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.SlotItemHandler;
+import vectorwing.farmersdelight.common.block.entity.JugBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModMenuTypes;
+
+import java.util.Objects;
 
 public class JugMenu extends AbstractContainerMenu
 {
+	public final JugBlockEntity jug;
+	public final ItemStackHandler inventory;
+
 	public JugMenu(int containerId, Inventory playerInventory, final FriendlyByteBuf data) {
-		this(containerId, playerInventory);
+		this(containerId, playerInventory, getBlockEntity(playerInventory, data));
 	}
 
-	public JugMenu(int containerId, Inventory playerInventory) {
+	public JugMenu(int containerId, Inventory playerInventory, JugBlockEntity jug) {
 		super(ModMenuTypes.JUG.get(), containerId);
+		this.jug = jug;
+		this.inventory = jug.getInventory();
 
 		int startX = 8;
 		int startY = 18;
 		int borderSlotSize = 18;
 
 		// Jug Input
+		this.addSlot(new SlotItemHandler(inventory, 0, 51, 17));
 
 		// Jug Output
+		this.addSlot(new SlotItemHandler(inventory, 1, 51, 65));
 
 		// Player Inventory
 		int startPlayerInvY = 96;
@@ -40,6 +53,16 @@ public class JugMenu extends AbstractContainerMenu
 		for (int column = 0; column < 9; ++column) {
 			this.addSlot(new Slot(playerInventory, column, startX + (column * borderSlotSize), startPlayerHotbarY));
 		}
+	}
+
+	private static JugBlockEntity getBlockEntity(final Inventory playerInventory, final FriendlyByteBuf data) {
+		Objects.requireNonNull(playerInventory, "playerInventory cannot be null");
+		Objects.requireNonNull(data, "data cannot be null");
+		final BlockEntity blockEntity = playerInventory.player.level().getBlockEntity(data.readBlockPos());
+		if (blockEntity instanceof JugBlockEntity jug) {
+			return jug;
+		}
+		throw new IllegalStateException("Block entity is not correct! " + blockEntity);
 	}
 
 	@Override
