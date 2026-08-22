@@ -1,6 +1,9 @@
 package vectorwing.farmersdelight.common.utility;
 
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nullable;
@@ -38,5 +41,17 @@ public class MathUtils
 			f = f / (float) handler.getSlots();
 			return net.minecraft.util.Mth.floor(f * 14.0F) + (i > 0 ? 1 : 0);
 		}
+	}
+
+	public static int calcRedstoneFromFluidTank(@Nullable FluidTank handler) {
+		if (handler == null) {
+			return 0;
+		}
+		int amount = handler.getFluidAmount();
+		if (amount == 0) {
+			return 0;
+		}
+		int capacity = handler.getCapacity();
+		return Mth.floor(((float) amount / capacity) * 14.0F) + 1;
 	}
 }

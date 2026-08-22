@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -22,12 +23,18 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
+import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.JugBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
+import vectorwing.farmersdelight.common.utility.ItemUtils;
+import vectorwing.farmersdelight.common.utility.MathUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
 public class JugBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
@@ -91,20 +98,36 @@ public class JugBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 	}
 
 	@Override
-	protected BlockState rotate(BlockState state, Rotation rot) {
-		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
-	}
-
-	@Override
-	protected BlockState mirror(BlockState state, Mirror mirror) {
-		return state.rotate(mirror.getRotation(state.getValue(FACING)));
-	}
-
-	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		FluidState fluid = context.getLevel().getFluidState(context.getClickedPos());
 		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite())
 			.setValue(WATERLOGGED, fluid.getType() == Fluids.WATER);
+	}
+
+	@Override
+	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+		if (!state.is(newState.getBlock())) {
+			if (level.getBlockEntity(pos) instanceof JugBlockEntity jug) {
+				ItemUtils.dropItems(level, pos, jug.getInventory());
+				level.updateNeighbourForOutputSignal(pos, this);
+			}
+
+			super.onRemove(state, level, pos, newState, isMoving);
+		}
+	}
+
+	@Override
+	public boolean hasAnalogOutputSignal(BlockState state) {
+		return true;
+	}
+
+	@Override
+	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+		if (level.getBlockEntity(pos) instanceof JugBlockEntity jug) {
+			FluidTank fluidTank = jug.getFluidTank();
+			return MathUtils.calcRedstoneFromFluidTank(fluidTank);
+		}
+		return 0;
 	}
 
 	@Override
@@ -121,5 +144,15 @@ public class JugBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return ModBlockEntityTypes.JUG.get().create(pos, state);
+	}
+
+	@Override
+	protected BlockState rotate(BlockState state, Rotation rot) {
+		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
+	}
+
+	@Override
+	protected BlockState mirror(BlockState state, Mirror mirror) {
+		return state.rotate(mirror.getRotation(state.getValue(FACING)));
 	}
 }
