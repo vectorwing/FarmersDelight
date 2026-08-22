@@ -17,8 +17,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidActionResult;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidUtil;
+import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
@@ -29,6 +32,10 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 
 public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, Nameable, Clearable
 {
+	public static final int INPUT_SLOT = 0;
+	public static final int OUTPUT_SLOT = 1;
+	public static final int JUG_CAPACITY = 16000;	// mB
+
 	private final ItemStackHandler inventory;
 	private final FluidTank fluidTank;
 	private Component customName;
@@ -39,8 +46,8 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 
 	public JugBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state) {
 		super(blockEntityType, pos, state);
-		this.inventory = createHandler();
-		this.fluidTank = new FluidTank(16000);
+		this.inventory = createItemHandler();
+		this.fluidTank = createFluidHandler();
 	}
 
 	@Override
@@ -64,15 +71,56 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 	}
 
 	public static void jugTick(Level level, BlockPos pos, BlockState state, JugBlockEntity jug) {
-		if (!jug.getInput().isEmpty()) {
-			ItemStack input = jug.getInput();
-			FluidActionResult fluidResult = FluidUtil.tryEmptyContainer(input, jug.fluidTank, jug.fluidTank.getSpace(), null, true);
-			if (fluidResult.isSuccess()) {
-				input.shrink(1);
-				jug.getInventory().setStackInSlot(0, input);
-				jug.getInventory().setStackInSlot(1, fluidResult.result);
+//		boolean didInventoryChange = false;
+
+		ItemStack input = jug.getInput();
+		if (!input.isEmpty()) {
+			jug.transferFluidWithInputSlot();
+
+		}
+	}
+
+	public void transferFluidWithInputSlot() {
+		ItemStack inputStack = getInput();
+
+		// Try to transfer fluid using capabilities
+		IFluidHandlerItem fluidHandler = inputStack.getCapability(Capabilities.FluidHandler.ITEM);
+		if (fluidHandler == null) return;
+
+		// We have an input which has a fluid handler (empty or filled).
+		// If the item contains fluid:
+			// Does the fluid match the Jug's stored fluid?
+			// Can the Jug fit the input's fluid?
+			// Can the output slot fit what will be left behind after transfer?
+				// If so, we empty the input into the Jug, and move the remainder to the output.
+		// If the item has no fluid:
+			// Can we fill the item with the Jug's stored fluid?
+			// Can the result be moved to the output?
+				// If so, we fill the input from the Jug, and move the remainder to the output.
+
+		if (canDrainInput(inputStack)) {
+			FluidActionResult result = FluidUtil.tryEmptyContainer(inputStack, fluidTank, fluidTank.getCapacity(), null, true);
+			if (result.isSuccess()) {
+				inventory.extractItem(INPUT_SLOT, 1, false);
+				inventory.insertItem(OUTPUT_SLOT, result.getResult(), false);
+			}
+		} else if (canFillInput(inputStack)) {
+			FluidActionResult result = FluidUtil.tryFillContainer(inputStack, fluidTank, fluidTank.getCapacity(), null, true);
+			if (result.isSuccess()) {
+				inventory.extractItem(INPUT_SLOT, 1, false);
+				inventory.insertItem(OUTPUT_SLOT, result.getResult(), false);
 			}
 		}
+	}
+
+	public boolean canDrainInput(ItemStack stack) {
+		FluidActionResult result = FluidUtil.tryEmptyContainer(stack, fluidTank, fluidTank.getCapacity(), null, false);
+		return result.isSuccess() && inventory.insertItem(OUTPUT_SLOT, result.getResult(), true).isEmpty();
+	}
+
+	public boolean canFillInput(ItemStack stack) {
+		FluidActionResult result = FluidUtil.tryFillContainer(stack, fluidTank, fluidTank.getCapacity(), null, false);
+		return result.isSuccess() && inventory.insertItem(OUTPUT_SLOT, result.getResult(), true).isEmpty();
 	}
 
 	public FluidTank getFluidTank() {
@@ -84,11 +132,11 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 	}
 
 	public ItemStack getInput() {
-		return inventory.getStackInSlot(0);
+		return inventory.getStackInSlot(INPUT_SLOT);
 	}
 
 	public ItemStack getOutput() {
-		return inventory.getStackInSlot(1);
+		return inventory.getStackInSlot(OUTPUT_SLOT);
 	}
 
 	@Override
@@ -130,7 +178,7 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 		return new JugMenu(containerId, playerInventory, this);
 	}
 
-	private ItemStackHandler createHandler() {
+	private ItemStackHandler createItemHandler() {
 		return new ItemStackHandler(2)
 		{
 			@Override
@@ -140,8 +188,19 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 		};
 	}
 
+	private FluidTank createFluidHandler() {
+		return new FluidTank(JUG_CAPACITY)
+		{
+			@Override
+			protected void onContentsChanged() {
+				inventoryChanged();
+			}
+		};
+	}
+
 	@Override
 	public void clearContent() {
 		ItemUtils.clearItems(inventory);
+		fluidTank.setFluid(FluidStack.EMPTY);
 	}
 }

@@ -58,21 +58,23 @@ public class JugScreen extends AbstractContainerScreen<JugMenu>
 
 		// TODO: Render the stored fluid between these!
 		FluidStack fluidStack = menu.fluidTank.getFluid();
-		IClientFluidTypeExtensions clientFluid = IClientFluidTypeExtensions.of(fluidStack.getFluid());
-		TextureAtlasSprite fluidSprite = this.getMinecraft().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(clientFluid.getStillTexture(fluidStack));
-		int tintColor = clientFluid.getTintColor(fluidStack);
-
-		float alpha = ((tintColor >> 24) & 0xFF) / 255f;
-		float red = ((tintColor >> 16) & 0xFF) / 255f;
-		float green = ((tintColor >> 8) & 0xFF) / 255f;
-		float blue = (tintColor & 0xFF) / 255f;
-
 		int fluidAmount = menu.fluidTank.getFluidAmount();
-		float fillLevel = (float) fluidAmount / menu.fluidTank.getCapacity();
-		int meterHeight = (int) (fillLevel * FLUID_METER_HEIGHT);
-		guiGraphics.setColor(red, green, blue, alpha);
-		ScreenUtils.drawTiledSprite(guiGraphics, this.leftPos + 77, this.topPos + 81, 0, 22, meterHeight, fluidSprite, 16, 16, 0, ScreenUtils.TilingDirection.UP_RIGHT);
-		guiGraphics.setColor(1, 1, 1, 1);
+		if (!fluidStack.isEmpty()) {
+			IClientFluidTypeExtensions clientFluid = IClientFluidTypeExtensions.of(fluidStack.getFluid());
+			TextureAtlasSprite fluidSprite = this.getMinecraft().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(clientFluid.getStillTexture(fluidStack));
+			int tintColor = clientFluid.getTintColor(fluidStack);
+
+			float alpha = ((tintColor >> 24) & 0xFF) / 255f;
+			float red = ((tintColor >> 16) & 0xFF) / 255f;
+			float green = ((tintColor >> 8) & 0xFF) / 255f;
+			float blue = (tintColor & 0xFF) / 255f;
+
+			float fillLevel = (float) fluidAmount / menu.fluidTank.getCapacity();
+			int meterHeight = (int) (fillLevel * FLUID_METER_HEIGHT);
+			guiGraphics.setColor(red, green, blue, alpha);
+			ScreenUtils.drawTiledSprite(guiGraphics, this.leftPos + 77, this.topPos + 81, 0, 22, meterHeight, fluidSprite, 16, 16, 0, ScreenUtils.TilingDirection.UP_RIGHT);
+			guiGraphics.setColor(1, 1, 1, 1);
+		}
 
 		guiGraphics.blit(TEXTURE_FLUID_RULER, this.leftPos + FLUID_RULER.x, this.topPos + FLUID_RULER.y,
 			0, 0, FLUID_RULER.width, FLUID_RULER.height, FLUID_RULER.width, FLUID_RULER.height);
