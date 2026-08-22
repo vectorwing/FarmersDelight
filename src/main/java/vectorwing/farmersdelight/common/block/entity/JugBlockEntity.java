@@ -21,12 +21,14 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidActionResult;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidUtil;
+import net.neoforged.neoforge.fluids.SimpleFluidContent;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.common.block.entity.container.JugMenu;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
+import vectorwing.farmersdelight.common.registry.ModDataComponents;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
@@ -63,7 +65,9 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 	@Override
 	protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
 		super.saveAdditional(tag, registries);
-		tag.merge(inventory.serializeNBT(registries));
+		if (ItemUtils.doesInventoryHaveItems(inventory)) {
+			tag.merge(inventory.serializeNBT(registries));
+		}
 		fluidTank.writeToNBT(registries, tag);
 		if (this.customName != null) {
 			tag.putString("CustomName", Component.Serializer.toJson(this.customName, registries));
@@ -159,17 +163,23 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 	protected void applyImplicitComponents(BlockEntity.DataComponentInput componentInput) {
 		super.applyImplicitComponents(componentInput);
 		this.customName = componentInput.get(DataComponents.CUSTOM_NAME);
+		this.fluidTank.setFluid(componentInput.getOrDefault(ModDataComponents.FLUID_TANK.get(), SimpleFluidContent.EMPTY).copy());
 	}
 
 	@Override
 	protected void collectImplicitComponents(DataComponentMap.Builder components) {
 		super.collectImplicitComponents(components);
 		components.set(DataComponents.CUSTOM_NAME, this.customName);
+		components.set(ModDataComponents.FLUID_TANK.get(), SimpleFluidContent.copyOf(this.fluidTank.getFluid()));
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public void removeComponentsFromTag(CompoundTag tag) {
 		tag.remove("CustomName");
+		tag.remove("Items");
+		tag.remove("Size");
+		tag.remove("Fluid");
 	}
 
 	@Nullable

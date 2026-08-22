@@ -8,14 +8,28 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
+import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
+import net.neoforged.neoforge.fluids.capability.wrappers.FluidBucketWrapper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.FoodValues;
+import vectorwing.farmersdelight.common.block.entity.JugBlockEntity;
+import vectorwing.farmersdelight.common.registry.ModDataComponents;
+import vectorwing.farmersdelight.common.registry.ModItems;
 
 @EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CommonEvents
 {
+	@SubscribeEvent
+	public static void registerItemCapabilities(RegisterCapabilitiesEvent event) {
+		event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new FluidHandlerItemStack(ModDataComponents.FLUID_TANK, stack, JugBlockEntity.JUG_CAPACITY),
+			ModItems.JUG.get(),
+			ModItems.GLASS_JUG.get());
+	}
+
 	@SubscribeEvent
 	public static void handleVanillaSoupEffects(LivingEntityUseItemEvent.Finish event) {
 		Item food = event.getItem().getItem();

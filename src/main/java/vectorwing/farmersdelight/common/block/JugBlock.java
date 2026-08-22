@@ -7,10 +7,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -23,6 +25,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -144,6 +147,13 @@ public class JugBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return ModBlockEntityTypes.JUG.get().create(pos, state);
+	}
+
+	@Override
+	public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+		ItemStack stack = super.getCloneItemStack(state, target, level, pos, player);
+		level.getBlockEntity(pos, ModBlockEntityTypes.JUG.get()).ifPresent(jug -> jug.saveToItem(stack, level.registryAccess()));
+		return stack;
 	}
 
 	@Override

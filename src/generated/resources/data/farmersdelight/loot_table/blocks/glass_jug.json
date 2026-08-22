@@ -11,6 +11,16 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_components",
+              "include": [
+                "minecraft:custom_name",
+                "farmersdelight:fluid_tank"
+              ],
+              "source": "block_entity"
+            }
+          ],
           "name": "farmersdelight:glass_jug"
         }
       ],

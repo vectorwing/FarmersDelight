@@ -66,8 +66,16 @@ public class FDBlockLoot extends BlockLootSubProvider
 		add(ModBlocks.SKILLET.get(), block -> LootTable.lootTable().withPool(this.applyExplosionCondition(block, LootPool.lootPool()
 				.add(LootItem.lootTableItem(block).apply(CopySkilletFunction.builder())))));
 		dropSelf(ModBlocks.CUTTING_BOARD.get());
-		dropSelf(ModBlocks.JUG.get());
-		dropSelf(ModBlocks.GLASS_JUG.get());
+		add(ModBlocks.JUG.get(), (block) -> LootTable.lootTable().withPool(this.applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(block)
+			.apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
+				.include(DataComponents.CUSTOM_NAME)
+				.include(ModDataComponents.FLUID_TANK.get())
+			)))));
+		add(ModBlocks.GLASS_JUG.get(), (block) -> LootTable.lootTable().withPool(this.applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(block)
+			.apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
+				.include(DataComponents.CUSTOM_NAME)
+				.include(ModDataComponents.FLUID_TANK.get())
+			)))));
 
 		dropOther(ModBlocks.BUDDING_TOMATO_CROP.get(), ModItems.TOMATO_SEEDS.get());
 		add(ModBlocks.CABBAGE_CROP.get(), createCropDrops(ModBlocks.CABBAGE_CROP.get(), ModItems.CABBAGE.get(), ModItems.CABBAGE_SEEDS.get(), registryLookup));

@@ -6,6 +6,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.fluids.SimpleFluidContent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.FoodValues;
@@ -66,9 +67,9 @@ public class ModItems
 	public static final Supplier<Item> CUTTING_BOARD = registerWithTab("cutting_board",
 		() -> new BlockItem(ModBlocks.CUTTING_BOARD.get(), basicItem()));
 	public static final Supplier<Item> JUG = registerWithTab("jug",
-		() -> new BlockItem(ModBlocks.JUG.get(), basicItem().stacksTo(1)));
+		() -> new BlockItem(ModBlocks.JUG.get(), basicItem().stacksTo(1).component(ModDataComponents.FLUID_TANK.get(), SimpleFluidContent.EMPTY)));
 	public static final Supplier<Item> GLASS_JUG = registerWithTab("glass_jug",
-		() -> new BlockItem(ModBlocks.GLASS_JUG.get(), basicItem().stacksTo(1)));
+		() -> new BlockItem(ModBlocks.GLASS_JUG.get(), basicItem().stacksTo(1).component(ModDataComponents.FLUID_TANK.get(), SimpleFluidContent.EMPTY)));
 	public static final Supplier<Item> WOODEN_BASKET = registerWithTab("wooden_basket",
 		() -> new BlockItem(ModBlocks.WOODEN_BASKET.get(), basicItem()));
 	public static final Supplier<Item> BAMBOO_BASKET = registerWithTab("bamboo_basket",

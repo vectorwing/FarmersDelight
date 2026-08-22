@@ -7,6 +7,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.world.item.enchantment.ConditionalEffect;
 import net.minecraft.world.item.enchantment.effects.EnchantmentValueEffect;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.neoforged.neoforge.fluids.SimpleFluidContent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -22,31 +23,36 @@ public class ModDataComponents
 
 	// Cooking Pot
 	public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemStackWrapper>> MEAL = DATA_COMPONENTS.registerComponentType(
-			"meal", builder -> builder.persistent(ItemStackWrapper.CODEC).networkSynchronized(ItemStackWrapper.STREAM_CODEC).cacheEncoding()
+		"meal", builder -> builder.persistent(ItemStackWrapper.CODEC).networkSynchronized(ItemStackWrapper.STREAM_CODEC).cacheEncoding()
 	);
 	public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemStackWrapper>> CONTAINER = DATA_COMPONENTS.registerComponentType(
-			"container", builder -> builder.persistent(ItemStackWrapper.CODEC).networkSynchronized(ItemStackWrapper.STREAM_CODEC).cacheEncoding()
+		"container", builder -> builder.persistent(ItemStackWrapper.CODEC).networkSynchronized(ItemStackWrapper.STREAM_CODEC).cacheEncoding()
 	);
 
 	// Skillet
 	public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> COOKING_TIME_LENGTH = DATA_COMPONENTS.registerComponentType(
-			"cooking_time_length", (builder) -> builder.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.INT)
+		"cooking_time_length", (builder) -> builder.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.INT)
 	);
 
 	public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemStackWrapper>> SKILLET_INGREDIENT = DATA_COMPONENTS.registerComponentType(
-			"skillet_ingredient", (builder) -> builder.persistent(ItemStackWrapper.CODEC).networkSynchronized(ItemStackWrapper.STREAM_CODEC).cacheEncoding()
+		"skillet_ingredient", (builder) -> builder.persistent(ItemStackWrapper.CODEC).networkSynchronized(ItemStackWrapper.STREAM_CODEC).cacheEncoding()
 	);
 
 	public static final DeferredHolder<DataComponentType<?>, DataComponentType<Long>> SKILLET_FLIP_TIMESTAMP = DATA_COMPONENTS.registerComponentType(
-			"skillet_flip_timestamp", (builder) -> builder.persistent(Codec.LONG).networkSynchronized(ByteBufCodecs.VAR_LONG).cacheEncoding()
+		"skillet_flip_timestamp", (builder) -> builder.persistent(Codec.LONG).networkSynchronized(ByteBufCodecs.VAR_LONG).cacheEncoding()
 	);
 
 	public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> SKILLET_FLIPPED = DATA_COMPONENTS.registerComponentType(
-			"skillet_flipped", (builder) -> builder.persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL).cacheEncoding()
+		"skillet_flipped", (builder) -> builder.persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL).cacheEncoding()
+	);
+
+	// Jug
+	public static final DeferredHolder<DataComponentType<?>, DataComponentType<SimpleFluidContent>> FLUID_TANK = DATA_COMPONENTS.registerComponentType(
+		"fluid_tank", (builder) -> builder.persistent(SimpleFluidContent.CODEC).networkSynchronized(SimpleFluidContent.STREAM_CODEC).cacheEncoding()
 	);
 
 	// Enchantment Effects
 	public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<ConditionalEffect<EnchantmentValueEffect>>>> BACKSTABBING = ENCHANTMENT_EFFECT_COMPONENTS.registerComponentType(
-			"backstabbing", builder -> builder.persistent(ConditionalEffect.codec(EnchantmentValueEffect.CODEC, LootContextParamSets.ENCHANTED_DAMAGE).listOf()
-			));
+		"backstabbing", builder -> builder.persistent(ConditionalEffect.codec(EnchantmentValueEffect.CODEC, LootContextParamSets.ENCHANTED_DAMAGE).listOf()
+		));
 }
