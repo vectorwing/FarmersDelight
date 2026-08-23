@@ -80,7 +80,6 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 		ItemStack input = jug.getInput();
 		if (!input.isEmpty()) {
 			jug.transferFluidWithInputSlot();
-
 		}
 	}
 

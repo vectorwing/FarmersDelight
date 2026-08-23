@@ -38,7 +38,7 @@ public class GlassJugRenderer implements BlockEntityRenderer<JugBlockEntity>
 		RenderType renderType = ItemBlockRenderTypes.getRenderLayer(fluidState);
 
 		float fillPercentage = (float) tank.getFluidAmount() / tank.getCapacity();
-		renderFluidTank(poseStack, 4, 12, 1, 10, fillPercentage, bufferSource, renderType, packedLight, fluidTexture, tint);
+		renderFluidTank(poseStack, 4, 12, 1, 10, fillPercentage, bufferSource, renderType, calculateGlowLight(packedLight, fluid.getFluidType().getLightLevel()), fluidTexture, tint);
 	}
 
 	public static void renderFluidTank(PoseStack poseStack, float startXZ, float endXZ, float startY, float maxHeight, float fillPercentage, MultiBufferSource buffer, RenderType renderType, int light, ResourceLocation texture, int tint) {
@@ -54,8 +54,8 @@ public class GlassJugRenderer implements BlockEntityRenderer<JugBlockEntity>
 		TextureAtlasSprite sprite = FluidSpriteCache.getSprite(texture);
 		float minU = sprite.getU(minXZ);
 		float maxU = sprite.getU(maxXZ);
-		float minV = sprite.getV(minY);
-		float maxV = sprite.getV(maxY);
+		float minV = sprite.getV(maxY);
+		float maxV = sprite.getV(minY);
 
 		consumer.addVertex(pose, minXZ, maxY, minXZ).setColor(tint).setUv(minU, minV).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, -1F, 0F, 0F);
 		consumer.addVertex(pose, minXZ, minY, minXZ).setColor(tint).setUv(minU, maxV).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, -1F, 0F, 0F);
@@ -100,5 +100,10 @@ public class GlassJugRenderer implements BlockEntityRenderer<JugBlockEntity>
 
 	public static float getPositionFrom16px(float pixelPos) {
 		return pixelPos / 16;
+	}
+
+	public static int calculateGlowLight(int combinedLight, int glow) {
+		//Only factor the glow into the block light portion
+		return (combinedLight & 0xFFFF0000) | Math.max(Math.min(glow, 15) << 4, combinedLight & 0xFFFF);
 	}
 }
