@@ -24,10 +24,9 @@ public class ModBlockEntityTypes
 	public static final Supplier<BlockEntityType<SkilletBlockEntity>> SKILLET = TILES.register("skillet",
 			() -> BlockEntityType.Builder.of(SkilletBlockEntity::new, ModBlocks.SKILLET.get()).build(null));
 	public static final Supplier<BlockEntityType<JugBlockEntity>> JUG = TILES.register("jug",
-		() -> BlockEntityType.Builder.of(JugBlockEntity::new,
-				ModBlocks.JUG.get(),
-				ModBlocks.GLASS_JUG.get())
-			.build(null));
+		() -> BlockEntityType.Builder.of(JugBlockEntity::new, ModBlocks.JUG.get()).build(null));
+	public static final Supplier<BlockEntityType<JugBlockEntity>> GLASS_JUG = TILES.register("glass_jug",
+		() -> BlockEntityType.Builder.of((pos, state) -> new JugBlockEntity(ModBlockEntityTypes.GLASS_JUG.get(), pos, state), ModBlocks.GLASS_JUG.get()).build(null));
 	public static final Supplier<BlockEntityType<CabinetBlockEntity>> CABINET = TILES.register("cabinet",
 			() -> BlockEntityType.Builder.of(CabinetBlockEntity::new,
 							ModBlocks.OAK_CABINET.get(),

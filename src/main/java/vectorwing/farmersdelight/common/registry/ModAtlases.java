@@ -18,9 +18,9 @@ public class ModAtlases
 	public static final Material BLANK_HANGING_CANVAS_SIGN_MATERIAL = new Material(Sheets.SIGN_SHEET, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "entity/signs/hanging/canvas"));
 
 	public static final Map<DyeColor, Material> DYED_CANVAS_SIGN_MATERIALS =
-			Arrays.stream(DyeColor.values()).collect(Collectors.toMap(Function.identity(), ModAtlases::createCanvasSignMaterial));
+		Arrays.stream(DyeColor.values()).collect(Collectors.toMap(Function.identity(), ModAtlases::createCanvasSignMaterial));
 	public static final Map<DyeColor, Material> DYED_HANGING_CANVAS_SIGN_MATERIALS =
-			Arrays.stream(DyeColor.values()).collect(Collectors.toMap(Function.identity(), ModAtlases::createHangingCanvasSignMaterial));
+		Arrays.stream(DyeColor.values()).collect(Collectors.toMap(Function.identity(), ModAtlases::createHangingCanvasSignMaterial));
 
 	public static Material createCanvasSignMaterial(DyeColor dyeType) {
 		return new Material(Sheets.SIGN_SHEET, ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "entity/signs/canvas_" + dyeType.getName()));

@@ -53,7 +53,7 @@ public class ModBlocks
 	public static final Supplier<Block> JUG = BLOCKS.register("jug",
 		() -> new JugBlock(Block.Properties.of().mapColor(MapColor.METAL).strength(1.0F, 6.0F).sound(SoundType.METAL)));
 	public static final Supplier<Block> GLASS_JUG = BLOCKS.register("glass_jug",
-		() -> new JugBlock(Block.Properties.ofFullCopy(Blocks.GLASS).strength(1.0F, 6.0F)));
+		() -> new GlassJugBlock(Block.Properties.ofFullCopy(Blocks.GLASS).strength(1.0F, 6.0F)));
 
 	/**
 	 * Deprecated reference added for backwards compatibility. Use BAMBOO_BASKET instead.

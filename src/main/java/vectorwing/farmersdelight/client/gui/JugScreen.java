@@ -10,7 +10,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import vectorwing.farmersdelight.client.utility.ScreenUtils;
 import vectorwing.farmersdelight.common.block.entity.container.JugMenu;
 import vectorwing.farmersdelight.common.utility.FluidUtils;

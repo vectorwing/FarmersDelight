@@ -3,8 +3,6 @@ package vectorwing.farmersdelight.common.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -26,24 +24,19 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
-import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
-import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.JugBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vectorwing.farmersdelight.common.utility.MathUtils;
-import vectorwing.farmersdelight.common.utility.TextUtils;
 
 public class JugBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 {
 	public static final MapCodec<JugBlock> CODEC = simpleCodec(JugBlock::new);
-	private static final Component CONTAINER_TITLE = TextUtils.container("jug");
 
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -94,7 +87,6 @@ public class JugBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 	@javax.annotation.Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntity) {
 		if (level.isClientSide) {
-//			return createTickerHelper(blockEntity, ModBlockEntityTypes.COOKING_POT.get(), JugBlockEntity::animationTick);
 			return null;
 		}
 		return createTickerHelper(blockEntity, ModBlockEntityTypes.JUG.get(), JugBlockEntity::jugTick);
@@ -152,7 +144,9 @@ public class JugBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 	@Override
 	public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
 		ItemStack stack = super.getCloneItemStack(state, target, level, pos, player);
-		level.getBlockEntity(pos, ModBlockEntityTypes.JUG.get()).ifPresent(jug -> jug.saveToItem(stack, level.registryAccess()));
+		if (level.getBlockEntity(pos) instanceof JugBlockEntity jug) {
+			jug.saveToItem(stack, level.registryAccess());
+		}
 		return stack;
 	}
 
