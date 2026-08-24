@@ -11,6 +11,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.client.extension.GlassJugItemClientExtension;
 import vectorwing.farmersdelight.client.extension.HandCookedItemClientExtension;
 import vectorwing.farmersdelight.client.extension.SkilletItemClientExtension;
 import vectorwing.farmersdelight.client.gui.CookingPotScreen;
@@ -38,6 +39,7 @@ public class ClientSetupEvents
 	@SubscribeEvent
 	public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
 		event.registerItem(new SkilletItemClientExtension(), ModItems.SKILLET.get());
+		event.registerItem(new GlassJugItemClientExtension(), ModItems.GLASS_JUG.get());
 		event.registerItem(new HandCookedItemClientExtension(), ModItems.MEAT_SKEWER.get(), ModItems.VEGETABLE_SKEWER.get());
 	}
 
