@@ -98,8 +98,6 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 	}
 
 	public static void jugTick(Level level, BlockPos pos, BlockState state, JugBlockEntity jug) {
-//		boolean didInventoryChange = false;
-
 		ItemStack input = jug.getInput();
 		if (!input.isEmpty()) {
 			jug.transferFluidWithInputSlot();
@@ -115,14 +113,14 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 
 		// We have an input which has a fluid handler (empty or filled).
 		// If the item contains fluid:
-		// Does the fluid match the Jug's stored fluid?
-		// Can the Jug fit the input's fluid?
-		// Can the output slot fit what will be left behind after transfer?
-		// If so, we empty the input into the Jug, and move the remainder to the output.
+		// 	Does the fluid match the Jug's stored fluid?
+		// 	Can the Jug fit the input's fluid?
+		// 	Can the output slot fit what will be left behind after transfer?
+		// 		If so, we empty the input into the Jug, and move the remainder to the output.
 		// If the item has no fluid:
-		// Can we fill the item with the Jug's stored fluid?
-		// Can the result be moved to the output?
-		// If so, we fill the input from the Jug, and move the remainder to the output.
+		// 	Can we fill the item with the Jug's stored fluid?
+		// 	Can the result be moved to the output?
+		// 		If so, we fill the input from the Jug, and move the remainder to the output.
 
 		if (canDrainInput(inputStack)) {
 			FluidActionResult result = FluidUtil.tryEmptyContainer(inputStack, fluidTank, fluidTank.getCapacity(), null, true);

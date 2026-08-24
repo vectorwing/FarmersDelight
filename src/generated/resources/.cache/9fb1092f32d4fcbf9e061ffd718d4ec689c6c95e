@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-20T14:31:53.9342163	Recipes
+// 1.21.1	2026-08-24T18:26:16.8536478	Recipes
 0053d4db6868789324c8ab586cbfc9b588ce30ff data/farmersdelight/advancement/recipes/building_blocks/beetroot_crate.json
 527c466425a9e580792dfe83176fd8057f08fb72 data/farmersdelight/advancement/recipes/building_blocks/cabbage_crate.json
 5b6b7b02e582b796cef6d0c65ac910f9789f8897 data/farmersdelight/advancement/recipes/building_blocks/carrot_crate.json
@@ -497,6 +497,8 @@ f30bd61abcb0f9b11295719c813ece89f3476977 data/farmersdelight/recipe/salvaging/sp
 76a42a6e8cf866ad19b4bb8403bf128ec41ac890 data/farmersdelight/recipe/shepherds_pie_block.json
 26d917e184877ebe507e379fde4bf85440373774 data/farmersdelight/recipe/skillet.json
 71b135d0b792cb51def9727b78d624f21f75996c data/farmersdelight/recipe/smoked_ham.json
+e7085610412f06ec62f49225828f22f1151d77de data/farmersdelight/recipe/soaking/mud.json
+8f7ca5799d521d3bbd88609b9fd5e82d82179738 data/farmersdelight/recipe/soaking/wheat_dough.json
 d178169fdc058502073692e074f129fb19c54c51 data/farmersdelight/recipe/spruce_cabinet.json
 b23725c0d9feb20bbf8243d3856f1a34599f2861 data/farmersdelight/recipe/steak_and_potatoes.json
 c67ba33f107f81aa6030a6478abca6565b8888b1 data/farmersdelight/recipe/stove.json

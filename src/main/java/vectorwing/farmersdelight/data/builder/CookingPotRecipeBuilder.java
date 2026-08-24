@@ -27,7 +27,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Consumer;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -156,21 +155,20 @@ public class CookingPotRecipeBuilder implements RecipeBuilder
 
 	@Override
 	public void save(RecipeOutput output, ResourceLocation id) {
-		ResourceLocation recipeId = id;
 		Advancement.Builder advancementBuilder = output.advancement()
-				.addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeId))
-				.rewards(AdvancementRewards.Builder.recipe(recipeId))
-				.requirements(AdvancementRequirements.Strategy.OR);
+			.addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
+			.rewards(AdvancementRewards.Builder.recipe(id))
+			.requirements(AdvancementRequirements.Strategy.OR);
 		this.criteria.forEach(advancementBuilder::addCriterion);
 		CookingPotRecipe recipe = new CookingPotRecipe(
-				"",
-				this.tab,
-				this.ingredients,
-				this.resultStack,
-				this.container,
-				this.experience,
-				this.cookingTime
+			"",
+			this.tab,
+			this.ingredients,
+			this.resultStack,
+			this.container,
+			this.experience,
+			this.cookingTime
 		);
-		output.accept(recipeId, recipe, advancementBuilder.build(id.withPrefix("recipes/")));
+		output.accept(id, recipe, advancementBuilder.build(id.withPrefix("recipes/")));
 	}
 }

@@ -5,10 +5,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
-import vectorwing.farmersdelight.data.recipe.CookingRecipes;
-import vectorwing.farmersdelight.data.recipe.CraftingRecipes;
-import vectorwing.farmersdelight.data.recipe.CuttingRecipes;
-import vectorwing.farmersdelight.data.recipe.SmeltingRecipes;
+import vectorwing.farmersdelight.data.recipe.*;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.concurrent.CompletableFuture;
@@ -27,5 +24,6 @@ public class Recipes extends RecipeProvider
 		SmeltingRecipes.register(output);
 		CookingRecipes.register(output);
 		CuttingRecipes.register(output);
+		SoakingRecipes.register(output);
 	}
 }

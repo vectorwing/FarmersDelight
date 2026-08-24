@@ -1,0 +1,16 @@
+{
+  "type": "farmersdelight:soaking",
+  "consume_fluid": false,
+  "fluid": {
+    "amount": 1,
+    "tag": "c:water"
+  },
+  "ingredient": {
+    "tag": "c:crops/wheat"
+  },
+  "processing_time": 20,
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:wheat_dough"
+  }
+}
