@@ -3,7 +3,9 @@ package vectorwing.farmersdelight.common.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -27,6 +29,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.fluids.FluidActionResult;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.common.block.entity.JugBlockEntity;
@@ -53,6 +56,23 @@ public class JugBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 	@Override
 	protected MapCodec<? extends BaseEntityBlock> codec() {
 		return CODEC;
+	}
+
+	@Override
+	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+		if ((level.getBlockEntity(pos) instanceof JugBlockEntity jug) && !stack.isEmpty()) {
+			if (level.isClientSide) {
+				return ItemInteractionResult.SUCCESS;
+			}
+			FluidActionResult result = jug.useFluidContainerOnJug(stack, player);
+			if (result.isSuccess()) {
+				if (!player.isCreative()) {
+					player.setItemInHand(hand, result.getResult());
+				}
+				return ItemInteractionResult.CONSUME;
+			}
+		}
+		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 	}
 
 	@Override

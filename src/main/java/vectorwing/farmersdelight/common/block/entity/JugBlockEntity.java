@@ -5,7 +5,9 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.Nameable;
@@ -25,6 +27,7 @@ import net.neoforged.neoforge.fluids.SimpleFluidContent;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.common.block.entity.container.JugMenu;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
@@ -36,7 +39,7 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 {
 	public static final int INPUT_SLOT = 0;
 	public static final int OUTPUT_SLOT = 1;
-	public static final int JUG_CAPACITY = 16000;	// mB
+	public static final int JUG_CAPACITY = 16000;    // mB
 
 	private final ItemStackHandler inventory;
 	private final FluidTank fluidTank;
@@ -92,14 +95,14 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 
 		// We have an input which has a fluid handler (empty or filled).
 		// If the item contains fluid:
-			// Does the fluid match the Jug's stored fluid?
-			// Can the Jug fit the input's fluid?
-			// Can the output slot fit what will be left behind after transfer?
-				// If so, we empty the input into the Jug, and move the remainder to the output.
+		// Does the fluid match the Jug's stored fluid?
+		// Can the Jug fit the input's fluid?
+		// Can the output slot fit what will be left behind after transfer?
+		// If so, we empty the input into the Jug, and move the remainder to the output.
 		// If the item has no fluid:
-			// Can we fill the item with the Jug's stored fluid?
-			// Can the result be moved to the output?
-				// If so, we fill the input from the Jug, and move the remainder to the output.
+		// Can we fill the item with the Jug's stored fluid?
+		// Can the result be moved to the output?
+		// If so, we fill the input from the Jug, and move the remainder to the output.
 
 		if (canDrainInput(inputStack)) {
 			FluidActionResult result = FluidUtil.tryEmptyContainer(inputStack, fluidTank, fluidTank.getCapacity(), null, true);
@@ -124,6 +127,19 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 	public boolean canFillInput(ItemStack stack) {
 		FluidActionResult result = FluidUtil.tryFillContainer(stack, fluidTank, fluidTank.getCapacity(), null, false);
 		return result.isSuccess() && inventory.insertItem(OUTPUT_SLOT, result.getResult(), true).isEmpty();
+	}
+
+	public FluidActionResult useFluidContainerOnJug(ItemStack stack, Player player) {
+		FluidActionResult emptyResult = FluidUtil.tryEmptyContainerAndStow(stack, fluidTank, new InvWrapper(player.getInventory()), fluidTank.getCapacity(), player, true);
+		if (emptyResult.isSuccess()) {
+			inventoryChanged();
+			return emptyResult;
+		}
+		FluidActionResult fillResult = FluidUtil.tryFillContainerAndStow(stack, fluidTank, new InvWrapper(player.getInventory()), fluidTank.getCapacity(), player, true);
+		if (fillResult.isSuccess()) {
+			inventoryChanged();
+		}
+		return fillResult;
 	}
 
 	public FluidTank getFluidTank() {
@@ -205,6 +221,11 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 				inventoryChanged();
 			}
 		};
+	}
+
+	@Override
+	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookupProvider) {
+		this.loadWithComponents(pkt.getTag(), lookupProvider);
 	}
 
 	@Override
