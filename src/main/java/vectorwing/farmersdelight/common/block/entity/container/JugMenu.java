@@ -4,6 +4,8 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -24,15 +26,18 @@ public class JugMenu extends AbstractContainerMenu
 	public final ItemStackHandler inventory;
 	public final FluidTank fluidTank;
 
+	private final ContainerData containerData;
+
 	public JugMenu(int containerId, Inventory playerInventory, final FriendlyByteBuf data) {
-		this(containerId, playerInventory, getBlockEntity(playerInventory, data));
+		this(containerId, playerInventory, getBlockEntity(playerInventory, data), new SimpleContainerData(4));
 	}
 
-	public JugMenu(int containerId, Inventory playerInventory, JugBlockEntity jug) {
+	public JugMenu(int containerId, Inventory playerInventory, JugBlockEntity jug, ContainerData containerData) {
 		super(ModMenuTypes.JUG.get(), containerId);
 		this.jug = jug;
 		this.inventory = jug.getInventory();
 		this.fluidTank = jug.getFluidTank();
+		this.containerData = containerData;
 
 		int startX = 8;
 		int startY = 18;
@@ -59,6 +64,8 @@ public class JugMenu extends AbstractContainerMenu
 		for (int column = 0; column < 9; ++column) {
 			this.addSlot(new Slot(playerInventory, column, startX + (column * borderSlotSize), startPlayerHotbarY));
 		}
+
+		this.addDataSlots(containerData);
 	}
 
 	private static JugBlockEntity getBlockEntity(final Inventory playerInventory, final FriendlyByteBuf data) {
@@ -69,6 +76,12 @@ public class JugMenu extends AbstractContainerMenu
 			return jug;
 		}
 		throw new IllegalStateException("Block entity is not correct! " + blockEntity);
+	}
+
+	public int getProgressScaled() {
+		int progress = this.containerData.get(0);
+		int progressTotal = this.containerData.get(1);
+		return progressTotal != 0 && progress != 0 ? progress * 24 / progressTotal : 0;
 	}
 
 	@Override

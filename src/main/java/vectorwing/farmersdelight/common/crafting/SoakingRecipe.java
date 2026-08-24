@@ -39,6 +39,18 @@ public class SoakingRecipe implements Recipe<SoakingRecipeInput>
 		return this.ingredient.test(input.getInput()) && this.fluid.test(input.getFluid());
 	}
 
+	public SizedFluidIngredient getFluid() {
+		return this.fluid;
+	}
+
+	public int getProcessingTime() {
+		return this.processingTime;
+	}
+
+	public boolean doesConsumeFluid() {
+		return this.consumeFluid;
+	}
+
 	@Override
 	public ItemStack assemble(SoakingRecipeInput input, HolderLookup.Provider registries) {
 		return this.result.copy();

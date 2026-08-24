@@ -15,7 +15,10 @@ import net.minecraft.world.Nameable;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -28,6 +31,7 @@ import net.neoforged.neoforge.fluids.FluidActionResult;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidUtil;
 import net.neoforged.neoforge.fluids.SimpleFluidContent;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -37,10 +41,15 @@ import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.container.JugMenu;
 import vectorwing.farmersdelight.common.block.entity.inventory.SingleSlotItemHandler;
+import vectorwing.farmersdelight.common.crafting.SoakingRecipe;
+import vectorwing.farmersdelight.common.crafting.input.SoakingRecipeInput;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModDataComponents;
+import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
+
+import java.util.Optional;
 
 @EventBusSubscriber(modid = FarmersDelight.MODID)
 public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, Nameable, Clearable
@@ -53,7 +62,14 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 	private final IItemHandler inputHandler;
 	private final IItemHandler outputHandler;
 	private final FluidTank fluidTank;
+
+	private int processingTime;
+	private int processingTimeTotal;
+	protected final ContainerData containerData;
+
 	private Component customName;
+
+	private final RecipeManager.CachedCheck<SoakingRecipeInput, SoakingRecipe> quickCheck;
 
 	public JugBlockEntity(BlockPos pos, BlockState state) {
 		this(ModBlockEntityTypes.JUG.get(), pos, state);
@@ -65,6 +81,8 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 		this.inputHandler = new SingleSlotItemHandler(inventory, INPUT_SLOT);
 		this.outputHandler = new SingleSlotItemHandler(inventory, OUTPUT_SLOT);
 		this.fluidTank = createFluidHandler();
+		this.containerData = createIntArray();
+		this.quickCheck = RecipeManager.createCheck(ModRecipeTypes.SOAKING.get());
 	}
 
 	@SubscribeEvent
@@ -99,8 +117,55 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 
 	public static void jugTick(Level level, BlockPos pos, BlockState state, JugBlockEntity jug) {
 		ItemStack input = jug.getInput();
+
 		if (!input.isEmpty()) {
+			// First, check if the item can transfer fluids (capabilities, fluid handling recipes etc).
 			jug.transferFluidWithInputSlot();
+
+			// Second, if the above fails, check if the item can be soaked in the fluid.
+			Optional<RecipeHolder<SoakingRecipe>> recipe = jug.getMatchingRecipe(new SoakingRecipeInput(jug.getInput(), jug.getFluidTank().getFluid()));
+			if (recipe.isPresent() && jug.canSoakInput(recipe.get().value())) {
+				jug.processSoaking(recipe.get(), jug);
+			} else {
+				jug.processingTime = 0;
+			}
+		} else {
+			jug.processingTime = 0;
+		}
+	}
+
+	private Optional<RecipeHolder<SoakingRecipe>> getMatchingRecipe(SoakingRecipeInput recipeInput) {
+		if (level == null) return Optional.empty();
+		return !getInput().isEmpty() ? quickCheck.getRecipeFor(recipeInput, this.level) : Optional.empty();
+	}
+
+	public boolean canSoakInput(SoakingRecipe recipe) {
+		if (level == null || getInput().isEmpty()) return false;
+
+		ItemStack resultStack = recipe.assemble(new SoakingRecipeInput(getInput(), fluidTank.getFluid()), this.level.registryAccess());
+		if (resultStack.isEmpty()) return false;
+		return inventory.insertItem(OUTPUT_SLOT, resultStack, true).isEmpty();
+	}
+
+	private void processSoaking(RecipeHolder<SoakingRecipe> recipe, JugBlockEntity jug) {
+		if (level == null) return;
+
+		SoakingRecipe soakingRecipe = recipe.value();
+
+		++processingTime;
+		processingTimeTotal = soakingRecipe.getProcessingTime();
+		if (processingTime < processingTimeTotal) {
+			return;
+		}
+
+		processingTime = 0;
+		ItemStack resultStack = soakingRecipe.assemble(new SoakingRecipeInput(jug.getInput(), jug.getFluidTank().getFluid()), this.level.registryAccess());
+		if (!resultStack.isEmpty()) {
+			inventory.insertItem(OUTPUT_SLOT, resultStack, false);
+			inventory.extractItem(INPUT_SLOT, 1, false);
+			if (soakingRecipe.doesConsumeFluid()) {
+				fluidTank.drain(soakingRecipe.getFluid().amount(), IFluidHandler.FluidAction.EXECUTE);
+			}
 		}
 	}
 
@@ -218,7 +283,7 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 	@Nullable
 	@Override
 	public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
-		return new JugMenu(containerId, playerInventory, this);
+		return new JugMenu(containerId, playerInventory, this, containerData);
 	}
 
 	private ItemStackHandler createItemHandler() {
@@ -244,6 +309,33 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 	@Override
 	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookupProvider) {
 		this.loadWithComponents(pkt.getTag(), lookupProvider);
+	}
+
+	private ContainerData createIntArray() {
+		return new ContainerData()
+		{
+			@Override
+			public int get(int index) {
+				return switch (index) {
+					case 0 -> JugBlockEntity.this.processingTime;
+					case 1 -> JugBlockEntity.this.processingTimeTotal;
+					default -> 0;
+				};
+			}
+
+			@Override
+			public void set(int index, int value) {
+				switch (index) {
+					case 0 -> JugBlockEntity.this.processingTime = value;
+					case 1 -> JugBlockEntity.this.processingTimeTotal = value;
+				}
+			}
+
+			@Override
+			public int getCount() {
+				return 2;
+			}
+		};
 	}
 
 	@Override

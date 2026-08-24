@@ -24,11 +24,13 @@ public class JugScreen extends AbstractContainerScreen<JugMenu>
 	private static final ResourceLocation TEXTURE_BUCKET_METER = RecipeUtils.FDLocation("textures/gui/sprites/jug/bucket_meter.png");
 	private static final ResourceLocation TEXTURE_BOTTLE_METER = RecipeUtils.FDLocation("textures/gui/sprites/jug/bottle_meter.png");
 	private static final ResourceLocation TEXTURE_FLUID_RULER = RecipeUtils.FDLocation("textures/gui/sprites/jug/fluid_ruler.png");
+	private static final ResourceLocation TEXTURE_SOAKING_PROGRESS = RecipeUtils.FDLocation("textures/gui/sprites/jug/soaking_progress.png");
 
 	private static final Rectangle BUCKET_METER = new Rectangle(104, 46, 16, 16);
 	private static final Rectangle BOTTLE_METER = new Rectangle(104, 66, 16, 16);
 	private static final Rectangle FLUID_RULER = new Rectangle(76, 16, 24, 66);
 	private static final Rectangle FLUID_RATIO = new Rectangle(104, 46, 32, 37);
+	private static final Rectangle SOAKING_PROGRESS = new Rectangle(53, 36, 12, 24);
 
 	private static final int FLUID_METER_HEIGHT = 64;
 
@@ -97,6 +99,10 @@ public class JugScreen extends AbstractContainerScreen<JugMenu>
 
 		guiGraphics.blit(TEXTURE_FLUID_RULER, this.leftPos + FLUID_RULER.x, this.topPos + FLUID_RULER.y,
 			0, 0, FLUID_RULER.width, FLUID_RULER.height, FLUID_RULER.width, FLUID_RULER.height);
+
+		int progress = this.menu.getProgressScaled();
+		guiGraphics.blit(TEXTURE_SOAKING_PROGRESS, this.leftPos + SOAKING_PROGRESS.x, this.topPos + SOAKING_PROGRESS.y,
+			0, 0, SOAKING_PROGRESS.width, progress + 1, SOAKING_PROGRESS.width, SOAKING_PROGRESS.height);
 
 		guiGraphics.drawString(font, String.valueOf(FluidUtils.getBucketAmount(fluidAmount)), this.leftPos + 121, this.topPos + 51, 16777215, true);
 		guiGraphics.drawString(font, String.valueOf(FluidUtils.getBottleAmount(fluidAmount)), this.leftPos + 121, this.topPos + 71, 16777215, true);
