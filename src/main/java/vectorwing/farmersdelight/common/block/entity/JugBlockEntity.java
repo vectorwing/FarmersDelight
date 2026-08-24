@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.common.block.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
@@ -19,22 +20,29 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.FluidActionResult;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidUtil;
 import net.neoforged.neoforge.fluids.SimpleFluidContent;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.Nullable;
+import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.container.JugMenu;
+import vectorwing.farmersdelight.common.block.entity.inventory.SingleSlotItemHandler;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModDataComponents;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
+@EventBusSubscriber(modid = FarmersDelight.MODID)
 public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, Nameable, Clearable
 {
 	public static final int INPUT_SLOT = 0;
@@ -42,6 +50,8 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 	public static final int JUG_CAPACITY = 16000;    // mB
 
 	private final ItemStackHandler inventory;
+	private final IItemHandler inputHandler;
+	private final IItemHandler outputHandler;
 	private final FluidTank fluidTank;
 	private Component customName;
 
@@ -52,7 +62,17 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 	public JugBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state) {
 		super(blockEntityType, pos, state);
 		this.inventory = createItemHandler();
+		this.inputHandler = new SingleSlotItemHandler(inventory, INPUT_SLOT);
+		this.outputHandler = new SingleSlotItemHandler(inventory, OUTPUT_SLOT);
 		this.fluidTank = createFluidHandler();
+	}
+
+	@SubscribeEvent
+	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntityTypes.JUG.get(), (be, context) -> context == Direction.UP ? be.inputHandler : be.outputHandler);
+		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntityTypes.GLASS_JUG.get(), (be, context) -> context == Direction.UP ? be.inputHandler : be.outputHandler);
+		event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntityTypes.JUG.get(), (be, context) -> be.fluidTank);
+		event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntityTypes.GLASS_JUG.get(), (be, context) -> be.fluidTank);
 	}
 
 	@Override

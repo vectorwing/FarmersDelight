@@ -6,8 +6,9 @@
 - New blocks:
   - **Jug** - A large, yet portable fluid container! It can hold up to 16 buckets (or 64 bottles) of any registered fluid:
     - It comes in two variants: a fully opaque **metal** jug, and a **glass** jug which displays its contents on the block;
-    - It has an interface to view its contents, and slots for fluid-containing items to either fill or drain the Jug;
+    - It has an interface to view its contents, and slots for filling/emptying the Jug using fluid containers (buckets, bottles, other jugs etc);
     - Jugs will keep their fluids when mined, letting you carry it with you somewhere else. However, any items on its input/output slots will be dropped;
+    - Jugs can interact with both item (top input, bottom output) and fluid (any direction) automation from other mods;
 - New items:
   - **Skewers** - The old Barbecue on a Stick has been converted into two separate items, to add variety to your barbecue:
     - **Meat Skewer**: Can be made from any 2 pieces of meat or fish. Can be either crafted raw to cook later, or crafted from cooked meats/fishes directly;
