@@ -14,6 +14,7 @@ import vectorwing.farmersdelight.client.utility.ScreenUtils;
 import vectorwing.farmersdelight.common.block.entity.container.JugMenu;
 import vectorwing.farmersdelight.common.utility.FluidUtils;
 import vectorwing.farmersdelight.common.utility.RecipeUtils;
+import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import java.awt.*;
 
@@ -27,6 +28,7 @@ public class JugScreen extends AbstractContainerScreen<JugMenu>
 	private static final Rectangle BUCKET_METER = new Rectangle(104, 46, 16, 16);
 	private static final Rectangle BOTTLE_METER = new Rectangle(104, 66, 16, 16);
 	private static final Rectangle FLUID_RULER = new Rectangle(76, 16, 24, 66);
+	private static final Rectangle FLUID_RATIO = new Rectangle(104, 46, 32, 37);
 
 	private static final int FLUID_METER_HEIGHT = 64;
 
@@ -41,6 +43,22 @@ public class JugScreen extends AbstractContainerScreen<JugMenu>
 	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
 		super.render(guiGraphics, mouseX, mouseY, partialTick);
 		this.renderTooltip(guiGraphics, mouseX, mouseY);
+		this.renderFluidMeterTooltip(guiGraphics, mouseX, mouseY);
+		this.renderFluidRatioTooltip(guiGraphics, mouseX, mouseY);
+	}
+
+	private void renderFluidMeterTooltip(GuiGraphics gui, int mouseX, int mouseY) {
+		if (this.isHovering(FLUID_RULER.x, FLUID_RULER.y, FLUID_RULER.width, FLUID_RULER.height, mouseX, mouseY)) {
+			FluidStack fluid = this.menu.fluidTank.getFluid();
+			gui.renderTooltip(this.font, TextUtils.container(fluid.isEmpty() ? "jug.empty" : "jug.fluid", fluid.getFluidType().getDescription(), fluid.getAmount()), mouseX, mouseY);
+		}
+	}
+
+	private void renderFluidRatioTooltip(GuiGraphics gui, int mouseX, int mouseY) {
+		if (this.isHovering(FLUID_RATIO.x, FLUID_RATIO.y, FLUID_RATIO.width, FLUID_RATIO.height, mouseX, mouseY)) {
+			// TODO: The bucket/bottle ratio should probably be configurable, even if recipes don't need to stick to it.
+			gui.renderTooltip(this.font, TextUtils.container("jug.ratio", 4), mouseX, mouseY);
+		}
 	}
 
 	@Override
@@ -55,7 +73,6 @@ public class JugScreen extends AbstractContainerScreen<JugMenu>
 		guiGraphics.blit(TEXTURE_BOTTLE_METER, this.leftPos + BOTTLE_METER.x, this.topPos + BOTTLE_METER.y,
 			0, 0, 16, 16, 16, 16);
 
-		// TODO: Render the stored fluid between these!
 		FluidStack fluidStack = menu.fluidTank.getFluid();
 		int fluidAmount = menu.fluidTank.getFluidAmount();
 		if (!fluidStack.isEmpty()) {
@@ -72,6 +89,9 @@ public class JugScreen extends AbstractContainerScreen<JugMenu>
 			int meterHeight = (int) (fillLevel * FLUID_METER_HEIGHT);
 			guiGraphics.setColor(red, green, blue, alpha);
 			ScreenUtils.drawTiledSprite(guiGraphics, this.leftPos + 77, this.topPos + 81, 0, 22, meterHeight, fluidSprite, 16, 16, 0, ScreenUtils.TilingDirection.UP_RIGHT);
+
+			// Draw a "surface tension" line at the top of the fluid?
+
 			guiGraphics.setColor(1, 1, 1, 1);
 		}
 

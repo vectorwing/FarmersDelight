@@ -270,6 +270,9 @@
   "container.farmersdelight.basket": "Basket",
   "container.farmersdelight.cabinet": "Cabinet",
   "container.farmersdelight.jug": "Jug",
+  "container.farmersdelight.jug.empty": "Empty",
+  "container.farmersdelight.jug.fluid": "%s (%s mB)",
+  "container.farmersdelight.jug.ratio": "1 Bucket = %s Bottles",
 
   "tooltip.farmersdelight.cooking_pot.empty": "Empty",
   "tooltip.farmersdelight.cooking_pot.single_serving": "Holds 1 serving of:",
