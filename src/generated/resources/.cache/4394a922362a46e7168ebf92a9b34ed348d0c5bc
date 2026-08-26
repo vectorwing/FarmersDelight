@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-26T16:01:45.6248755	Item Models: farmersdelight
+// 1.21.1	2026-08-26T18:58:19.5986199	Item Models: farmersdelight
 01e23a47f469a0c2107b2a1b6fc7f7c8f0c23d55 assets/farmersdelight/models/item/acacia_cabinet.json
 a58cc863fafd0f13d1235a2f7344b446f853ae55 assets/farmersdelight/models/item/apple_cider.json
 556ad1d569453f68bf70b51a17168e2d6f5cbd5a assets/farmersdelight/models/item/apple_crate.json
@@ -73,6 +73,8 @@ ff5649c08334d4c2c8b6fef66989d12b040252bc assets/farmersdelight/models/item/flint
 025994a3e2f41db400539edd2a90eccfb11a67bf assets/farmersdelight/models/item/gleaming_salad_block.json
 ab8bb294dd24de40808609d6a8a79501a7eac014 assets/farmersdelight/models/item/glow_berries_bag.json
 7478b2c8395db2ad15eb4d32fc15fe0cd376ce8a assets/farmersdelight/models/item/glow_berry_custard.json
+a691477b3aff288652debeaac354231b768d2793 assets/farmersdelight/models/item/golden_apple_crate.json
+610acce765802599cacb89fad728865fcebf2c9d assets/farmersdelight/models/item/golden_carrot_crate.json
 a4314660221dcffd6c4276a1ae8dc8e0914a3309 assets/farmersdelight/models/item/golden_knife.json
 4ba6f6ca71923cf71e4f7c1285b0901309023e97 assets/farmersdelight/models/item/gray_canvas_sign.json
 9a1054ae49b07d919f51434a7f28cb420f2e8dcb assets/farmersdelight/models/item/gray_hanging_canvas_sign.json

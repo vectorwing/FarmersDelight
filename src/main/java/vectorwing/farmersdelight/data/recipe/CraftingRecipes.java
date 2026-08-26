@@ -448,6 +448,8 @@ public class CraftingRecipes
 		crateBlock(output, ModItems.CARROT_CRATE.get(), Items.CARROT, "", true);
 		crateBlock(output, ModItems.POTATO_CRATE.get(), Items.POTATO, "", true);
 		crateBlock(output, ModItems.APPLE_CRATE.get(), Items.APPLE, "", true);
+		crateBlock(output, ModItems.GOLDEN_APPLE_CRATE.get(), Items.GOLDEN_APPLE, "golden_apple", true);
+		crateBlock(output, ModItems.GOLDEN_CARROT_CRATE.get(), Items.GOLDEN_CARROT, "golden_carrot", true);
 		crateBlock(output, ModItems.CHORUS_FRUIT_CRATE.get(), Items.CHORUS_FRUIT, "", true);
 		crateBlock(output, ModItems.BROWN_MUSHROOM_CRATE.get(), Items.BROWN_MUSHROOM, "", true);
 		crateBlock(output, ModItems.RED_MUSHROOM_CRATE.get(), Items.RED_MUSHROOM, "", true);

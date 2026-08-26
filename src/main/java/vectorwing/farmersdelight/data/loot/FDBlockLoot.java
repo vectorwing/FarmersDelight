@@ -176,6 +176,8 @@ public class FDBlockLoot extends BlockLootSubProvider
 		dropSelf(ModBlocks.TOMATO_CRATE.get());
 		dropSelf(ModBlocks.ONION_CRATE.get());
 		dropSelf(ModBlocks.APPLE_CRATE.get());
+		dropSelf(ModBlocks.GOLDEN_APPLE_CRATE.get());
+		dropSelf(ModBlocks.GOLDEN_CARROT_CRATE.get());
 		dropSelf(ModBlocks.CHORUS_FRUIT_CRATE.get());
 		dropSelf(ModBlocks.BROWN_MUSHROOM_CRATE.get());
 		dropSelf(ModBlocks.RED_MUSHROOM_CRATE.get());

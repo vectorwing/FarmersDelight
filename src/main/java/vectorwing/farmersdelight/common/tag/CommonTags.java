@@ -27,6 +27,8 @@ public class CommonTags
 		public static final TagKey<Block> STORAGE_BLOCKS_TOMATO = commonBlockTag("storage_blocks/tomato");
 		public static final TagKey<Block> STORAGE_BLOCKS_ONION = commonBlockTag("storage_blocks/onion");
 		public static final TagKey<Block> STORAGE_BLOCKS_APPLE = commonBlockTag("storage_blocks/apple");
+		public static final TagKey<Block> STORAGE_BLOCKS_GOLDEN_APPLE = commonBlockTag("storage_blocks/golden_apple");
+		public static final TagKey<Block> STORAGE_BLOCKS_GOLDEN_CARROT = commonBlockTag("storage_blocks/golden_carrot");
 		public static final TagKey<Block> STORAGE_BLOCKS_CHORUS_FRUIT = commonBlockTag("storage_blocks/chorus_fruit");
 		public static final TagKey<Block> STORAGE_BLOCKS_BROWN_MUSHROOM = commonBlockTag("storage_blocks/brown_mushroom");
 		public static final TagKey<Block> STORAGE_BLOCKS_RED_MUSHROOM = commonBlockTag("storage_blocks/red_mushroom");

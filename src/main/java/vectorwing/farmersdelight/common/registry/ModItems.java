@@ -90,6 +90,10 @@ public class ModItems
 		() -> new BlockItem(ModBlocks.ONION_CRATE.get(), basicItem()));
 	public static final Supplier<Item> APPLE_CRATE = registerWithTab("apple_crate",
 		() -> new BlockItem(ModBlocks.APPLE_CRATE.get(), basicItem()));
+	public static final Supplier<Item> GOLDEN_APPLE_CRATE = registerWithTab("golden_apple_crate",
+		() -> new BlockItem(ModBlocks.GOLDEN_APPLE_CRATE.get(), basicItem()));
+	public static final Supplier<Item> GOLDEN_CARROT_CRATE = registerWithTab("golden_carrot_crate",
+		() -> new BlockItem(ModBlocks.GOLDEN_CARROT_CRATE.get(), basicItem()));
 	public static final Supplier<Item> CHORUS_FRUIT_CRATE = registerWithTab("chorus_fruit_crate",
 		() -> new BlockItem(ModBlocks.CHORUS_FRUIT_CRATE.get(), basicItem()));
 	public static final Supplier<Item> BROWN_MUSHROOM_CRATE = registerWithTab("brown_mushroom_crate",

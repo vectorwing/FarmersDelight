@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-26T16:14:46.4868708	Tags for minecraft:block mod id farmersdelight
+// 1.21.1	2026-08-26T18:58:19.5866179	Tags for minecraft:block mod id farmersdelight
 38f828e4676e464f280ee9fcbbd1065fa89e4218 data/create/tags/block/brittle.json
 8481234a20c9d13f4da1a07b9651d1b99bbd0fad data/create/tags/block/fan_transparent.json
 89dff4a2813a4b6fe13cde6e775266a1d606a4aa data/create/tags/block/passive_boiler_heaters.json
@@ -14,7 +14,10 @@ afd3592ccefe001b743061344b7d2c827f40eef3 data/c/tags/block/storage_blocks/cabbag
 5732bc2b22a77e42ce97c02dfb2a353db7f7c496 data/c/tags/block/storage_blocks/carrot.json
 77ade0a7ccd3bfab5a99ad99a659209a8374b2e4 data/c/tags/block/storage_blocks/chorus_fruit.json
 005735fffafedd5927eb0a8acbbbf53aff13fa49 data/c/tags/block/storage_blocks/cocoa_beans.json
+ac1451603bcb1eeb6e20705660a5bac030033f04 data/c/tags/block/storage_blocks/egg.json
 a9e7df0f10d4c5b5f8a9f4b64922dfc35ed155de data/c/tags/block/storage_blocks/glow_berries.json
+7aae42a3df361ffbef07211b3436d8d5f6c1873c data/c/tags/block/storage_blocks/golden_apple.json
+b6d43b038c069f63d4d76050f2f9345166b2c0b4 data/c/tags/block/storage_blocks/golden_carrot.json
 dc41382aa4ff1c9d8989532e2a70d6139fe3985e data/c/tags/block/storage_blocks/onion.json
 38c32fcd46883629fae32771481257fe22079a22 data/c/tags/block/storage_blocks/potato.json
 908989aad45b5b8a471cd4c2b37201a416fdbf8a data/c/tags/block/storage_blocks/red_mushroom.json
@@ -51,7 +54,7 @@ d0812613832bbc602d7ff3274c81d5729e91c2ea data/minecraft/tags/block/dirt.json
 76c23603e65410291af111793aa931640128fae8 data/minecraft/tags/block/fences.json
 1ba129ce39f820a673b8ed7d47d083a5252dd5e3 data/minecraft/tags/block/fence_gates.json
 46eba184858bae298b1430bbab858976e323111c data/minecraft/tags/block/maintains_farmland.json
-fc87e5605445c3e9e4ca22375f110a780ce296b2 data/minecraft/tags/block/mineable/axe.json
+b8e87f0c4f33bf385248bf3d52aa03d073f96a1d data/minecraft/tags/block/mineable/axe.json
 2a8f19bc7b45789f94892524a425f28c21f4d227 data/minecraft/tags/block/mineable/hoe.json
 963c2f1508fda246255005f0ac460a274c704ecd data/minecraft/tags/block/mineable/pickaxe.json
 0eb2b01360e681e4689610044f4da8ace960e921 data/minecraft/tags/block/mineable/shovel.json

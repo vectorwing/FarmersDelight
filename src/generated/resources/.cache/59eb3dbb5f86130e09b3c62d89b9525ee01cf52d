@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-26T16:20:27.3857064	Loot Tables
+// 1.21.1	2026-08-26T18:58:19.5966191	Loot Tables
 cee3ddcf0129e742307f35926b2f1b713d0f5ea1 data/farmersdelight/loot_table/blocks/acacia_cabinet.json
 329ad61809e88a7756ddd7243fc2ceece5d1772d data/farmersdelight/loot_table/blocks/apple_crate.json
 23fb8611e8fde16b90b760500fb6d39c0042c092 data/farmersdelight/loot_table/blocks/apple_pie.json
@@ -34,6 +34,8 @@ b58c6181526bafd737cc98bf891dfdbda7685762 data/farmersdelight/loot_table/blocks/d
 88a96703cb60bdcd9d3d23c8afe1d57621609160 data/farmersdelight/loot_table/blocks/full_tatami_mat.json
 d529b5f3a368595999a9e3df50285639d4223e7b data/farmersdelight/loot_table/blocks/gleaming_salad_block.json
 85d71100b880591ae07ddb77c3a05f98f50a8ca2 data/farmersdelight/loot_table/blocks/glow_berries_bag.json
+24ebf595cffe9979501e838a32f4cdb9ac4acc47 data/farmersdelight/loot_table/blocks/golden_apple_crate.json
+492c450a0880eef3748dc29c7fea1b35cb6e30c8 data/farmersdelight/loot_table/blocks/golden_carrot_crate.json
 4d845038b429cdeb02c2bd3e34d1eafc5ddbcc08 data/farmersdelight/loot_table/blocks/gray_canvas_sign.json
 efb1d02be56af5931db784b1a8f59e74e1e9c530 data/farmersdelight/loot_table/blocks/gray_hanging_canvas_sign.json
 bad04fd6f62ecfe5555dd0d4320c3e8bfe414262 data/farmersdelight/loot_table/blocks/green_canvas_sign.json

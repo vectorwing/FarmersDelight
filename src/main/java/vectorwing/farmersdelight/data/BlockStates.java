@@ -87,6 +87,8 @@ public class BlockStates extends BlockStateProvider
 		crateBlock(ModBlocks.TOMATO_CRATE.get());
 		crateBlock(ModBlocks.ONION_CRATE.get());
 		crateBlock(ModBlocks.APPLE_CRATE.get());
+		crateBlock(ModBlocks.GOLDEN_APPLE_CRATE.get());
+		crateBlock(ModBlocks.GOLDEN_CARROT_CRATE.get());
 		crateBlock(ModBlocks.CHORUS_FRUIT_CRATE.get());
 		crateBlock(ModBlocks.BROWN_MUSHROOM_CRATE.get());
 		crateBlock(ModBlocks.RED_MUSHROOM_CRATE.get());
