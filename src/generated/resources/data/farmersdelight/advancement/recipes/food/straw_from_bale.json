@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_onion_crate": {
+    "has_straw_bale": {
       "conditions": {
         "items": [
           {
-            "items": "farmersdelight:onion_crate"
+            "items": "farmersdelight:straw_bale"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "farmersdelight:onion"
+        "recipe": "farmersdelight:straw_from_bale"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_onion_crate"
+      "has_straw_bale"
     ]
   ],
   "rewards": {
     "recipes": [
-      "farmersdelight:onion"
+      "farmersdelight:straw_from_bale"
     ]
   }
 }

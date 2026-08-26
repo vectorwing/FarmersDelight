@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_rice_bale": {
+    "has_cabbage_crate": {
       "conditions": {
         "items": [
           {
-            "items": "farmersdelight:rice_bale"
+            "items": "farmersdelight:cabbage_crate"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "farmersdelight:rice_panicle"
+        "recipe": "farmersdelight:cabbage_from_crate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_rice_bale"
+      "has_cabbage_crate"
     ]
   ],
   "rewards": {
     "recipes": [
-      "farmersdelight:rice_panicle"
+      "farmersdelight:cabbage_from_crate"
     ]
   }
 }
