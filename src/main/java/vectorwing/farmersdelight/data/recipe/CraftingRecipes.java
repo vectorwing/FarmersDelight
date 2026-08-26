@@ -8,6 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.CompoundIngredient;
@@ -26,6 +27,7 @@ public class CraftingRecipes
 	public static void register(RecipeOutput output) {
 		recipesVanillaAlternatives(output);
 		recipesBlocks(output);
+		recipesStorageBlocks(output);
 		recipesCanvasSigns(output);
 		recipesTools(output);
 		recipesMaterials(output);
@@ -496,6 +498,11 @@ public class CraftingRecipes
 			.save(output, RecipeUtils.FDLocation("tatami_block_from_full"));
 	}
 
+	private static void recipesStorageBlocks(RecipeOutput output) {
+//		foodCrateBlock(output, ModItems.CABBAGE_CRATE.get(), ModItems.CABBAGE.get());
+//		foodBagBlock(output, ModItems.RICE_BAG.get(), ModItems.RICE.get());
+	}
+
 	private static void recipesTools(RecipeOutput output) {
 		ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.FLINT_KNIFE.get())
 			.pattern("m")
@@ -943,5 +950,32 @@ public class CraftingRecipes
 			.requires(ModItems.COD_ROLL.get())
 			.unlockedBy("has_rice_roll", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SALMON_ROLL.get(), ModItems.COD_ROLL.get(), ModItems.KELP_ROLL_SLICE.get()))
 			.save(output);
+	}
+
+	/**
+	 * Adds recipes for converting between a storage block (3x3) and the item it stores.
+	 */
+	public static void storageBlock(RecipeOutput output, ItemLike storageBlock, ItemLike storedItem, RecipeCategory category, String storageType) {
+		String blockName = RecipeUtils.itemName(storageBlock);
+		String itemName = RecipeUtils.itemName(storedItem);
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, storageBlock)
+			.pattern("###")
+			.pattern("###")
+			.pattern("###")
+			.define('#', storedItem)
+			.unlockedBy("has_" + itemName, InventoryChangeTrigger.TriggerInstance.hasItems(storedItem))
+			.save(output.withConditions(VanillaCrateEnabledCondition.INSTANCE), RecipeUtils.FDLocation(blockName));
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, storedItem, 9)
+			.requires(storageBlock)
+			.unlockedBy("has_" + blockName, InventoryChangeTrigger.TriggerInstance.hasItems(storageBlock))
+			.save(output, RecipeUtils.FDLocation(itemName + "_from_" + storageType));
+	}
+
+	public static void foodCrateBlock(RecipeOutput output, ItemLike storageBlock, ItemLike storedItem) {
+		storageBlock(output, storageBlock, storedItem, RecipeCategory.FOOD, "crate");
+	}
+
+	public static void foodBagBlock(RecipeOutput output, ItemLike storageBlock, ItemLike storedItem) {
+		storageBlock(output, storageBlock, storedItem, RecipeCategory.FOOD, "bag");
 	}
 }

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "farmersdelight:block/egg_carton_bottom",
+    "side": "farmersdelight:block/egg_carton_side",
+    "top": "farmersdelight:block/egg_carton_top"
+  }
+}

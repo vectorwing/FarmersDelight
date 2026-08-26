@@ -3,6 +3,9 @@
 ## 1.4.0
 
 ### Additions
+- New blocks:
+  - Added a multitude of **storage blocks** for various farmable items. This includes:
+    - Apple, Chorus Fruit, Brown Mushroom, Red Mushroom, Sweet Berries, Glow Berries, Cocoa Beans and Eggs;
 - New items:
   - **Skewers!** The old Barbecue on a Stick has been converted into two separate items, to add variety to your barbecue:
     - **Meat Skewer**: Can be made from any 2 pieces of meat or fish. Can be either crafted raw to cook later, or crafted from cooked meats/fishes directly;

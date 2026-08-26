@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
@@ -57,16 +58,6 @@ public class BlockStates extends BlockStateProvider
 		simpleBlock(ModBlocks.SAFETY_NET.get(), existingModel(ModBlocks.SAFETY_NET.get()));
 		simpleBlock(ModBlocks.CANVAS_RUG.get(), existingModel(ModBlocks.CANVAS_RUG.get()));
 
-		String riceBag = blockName(ModBlocks.RICE_BAG.get());
-		this.simpleBlock(ModBlocks.RICE_BAG.get(), models().withExistingParent(riceBag, "cube")
-				.texture("particle", resourceFDBlock(riceBag + "_top"))
-				.texture("down", resourceFDBlock(riceBag + "_bottom"))
-				.texture("up", resourceFDBlock(riceBag + "_top"))
-				.texture("north", resourceFDBlock(riceBag + "_side_tied"))
-				.texture("south", resourceFDBlock(riceBag + "_side_tied"))
-				.texture("east", resourceFDBlock(riceBag + "_side"))
-				.texture("west", resourceFDBlock(riceBag + "_side"))
-		);
 		customDirectionalBlock(ModBlocks.WOODEN_BASKET.get(),
 				$ -> modelBasket(blockName(ModBlocks.WOODEN_BASKET.get())), BasketBlock.ENABLED, BasketBlock.WATERLOGGED);
 		customDirectionalBlock(ModBlocks.BAMBOO_BASKET.get(),
@@ -89,14 +80,25 @@ public class BlockStates extends BlockStateProvider
 		riceRootBlock(ModBlocks.RICE_CROP.get());
 		stageBlock(ModBlocks.RICE_CROP_PANICLES.get(), RicePaniclesBlock.RICE_AGE);
 
-		crateBlock(ModBlocks.CARROT_CRATE.get(), "carrot");
-		crateBlock(ModBlocks.POTATO_CRATE.get(), "potato");
-		crateBlock(ModBlocks.BEETROOT_CRATE.get(), "beetroot");
-		crateBlock(ModBlocks.CABBAGE_CRATE.get(), "cabbage");
-		crateBlock(ModBlocks.TOMATO_CRATE.get(), "tomato");
-		crateBlock(ModBlocks.ONION_CRATE.get(), "onion");
+		crateBlock(ModBlocks.CARROT_CRATE.get());
+		crateBlock(ModBlocks.POTATO_CRATE.get());
+		crateBlock(ModBlocks.BEETROOT_CRATE.get());
+		crateBlock(ModBlocks.CABBAGE_CRATE.get());
+		crateBlock(ModBlocks.TOMATO_CRATE.get());
+		crateBlock(ModBlocks.ONION_CRATE.get());
+		crateBlock(ModBlocks.APPLE_CRATE.get());
+		crateBlock(ModBlocks.CHORUS_FRUIT_CRATE.get());
+		crateBlock(ModBlocks.BROWN_MUSHROOM_CRATE.get());
+		crateBlock(ModBlocks.RED_MUSHROOM_CRATE.get());
+
+		cartonBlock((SlabBlock) ModBlocks.EGG_CARTON.get());
 
 		axisBlock((RotatedPillarBlock) ModBlocks.STRAW_BALE.get());
+
+		bagBlockSimple(ModBlocks.RICE_BAG.get());
+		bagBlockCustom(ModBlocks.SWEET_BERRIES_BAG.get());
+		bagBlockCustom(ModBlocks.GLOW_BERRIES_BAG.get());
+		bagBlock(ModBlocks.COCOA_BEANS_BAG.get(), false, true, true);
 
 		organicCompostBlock(ModBlocks.ORGANIC_COMPOST.get());
 		simpleBlock(ModBlocks.RICH_SOIL.get(), cubeRandomRotation(ModBlocks.RICH_SOIL.get(), ""));
@@ -257,6 +259,18 @@ public class BlockStates extends BlockStateProvider
 		}
 	}
 
+	public void cartonBlock(SlabBlock block) {
+		String name = blockName(block);
+		ResourceLocation side = resourceFDBlock(name + "_side");
+		ResourceLocation bottom = resourceFDBlock(name + "_bottom");
+		ResourceLocation top = resourceFDBlock(name + "_top");
+		slabBlock(block,
+			models().slab(blockName(block), side, bottom, top),
+			models().slabTop(blockName(block) + "_top", side, bottom, top),
+			models().cubeBottomTop(blockName(block) + "_double", side, bottom, top)
+		);
+	}
+
 	public void cookingPotBlock(Block block) {
 		getVariantBuilder(block).forAllStatesExcept(state -> {
 			String supportSuffix = switch (state.getValue(CookingPotBlock.SUPPORT)) {
@@ -397,9 +411,31 @@ public class BlockStates extends BlockStateProvider
 		}
 	}
 
-	public void crateBlock(Block block, String cropName) {
+	public void crateBlock(Block block) {
+		String crateName = blockName(block);
 		this.simpleBlock(block,
-				models().cubeBottomTop(blockName(block), resourceFDBlock(cropName + "_crate_side"), resourceFDBlock("crate_bottom"), resourceFDBlock(cropName + "_crate_top")));
+				models().cubeBottomTop(blockName(block), resourceFDBlock(crateName + "_side"), resourceFDBlock("crate_bottom"), resourceFDBlock(crateName + "_top")));
+	}
+
+	public void bagBlockCustom(Block block) {
+		bagBlock(block, false, false, false);
+	}
+
+	public void bagBlockSimple(Block block) {
+		bagBlock(block, true, true, true);
+	}
+
+	public void bagBlock(Block block, boolean defaultSide, boolean defaultSideTied, boolean defaultBottom) {
+		String bagName = blockName(block);
+		this.simpleBlock(block, models().withExistingParent(bagName, "cube")
+			.texture("particle", resourceFDBlock(bagName + "_top"))
+			.texture("down", resourceFDBlock(defaultBottom ? "bag_bottom" : bagName + "_bottom"))
+			.texture("up", resourceFDBlock(bagName + "_top"))
+			.texture("north", resourceFDBlock(defaultSideTied ? "bag_side_tied" : bagName + "_side_tied"))
+			.texture("south", resourceFDBlock(defaultSideTied ? "bag_side_tied" : bagName + "_side_tied"))
+			.texture("east", resourceFDBlock(defaultSide ? "bag_side" : bagName + "_side"))
+			.texture("west", resourceFDBlock(defaultSide ? "bag_side" : bagName + "_side"))
+		);
 	}
 
 	public void cabinetBlock(Block block, String woodType) {

@@ -6,8 +6,15 @@
     "#c:storage_blocks/cabbage",
     "#c:storage_blocks/tomato",
     "#c:storage_blocks/onion",
-    "#c:storage_blocks/rice",
+    "#c:storage_blocks/apple",
+    "#c:storage_blocks/chorus_fruit",
+    "#c:storage_blocks/brown_mushroom",
+    "#c:storage_blocks/red_mushroom",
+    "#c:storage_blocks/straw",
     "#c:storage_blocks/rice_panicle",
-    "#c:storage_blocks/straw"
+    "#c:storage_blocks/rice",
+    "#c:storage_blocks/sweet_berries",
+    "#c:storage_blocks/glow_berries",
+    "#c:storage_blocks/cocoa_beans"
   ]
 }
