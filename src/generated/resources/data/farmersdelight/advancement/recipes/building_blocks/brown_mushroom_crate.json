@@ -1,0 +1,37 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "farmersdelight:vanilla_crates_enabled"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_brown_mushroom": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:brown_mushroom"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "farmersdelight:brown_mushroom_crate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_brown_mushroom"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "farmersdelight:brown_mushroom_crate"
+    ]
+  }
+}

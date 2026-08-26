@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sweet_berries_bag": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:sweet_berries_bag"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "farmersdelight:sweet_berries_from_bag"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_sweet_berries_bag"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "farmersdelight:sweet_berries_from_bag"
+    ]
+  }
+}

@@ -435,15 +435,26 @@ public class CraftingRecipes
 	}
 
 	private static void recipesStorageBlocks(RecipeOutput output) {
-		crateBlock(output, ModItems.BEETROOT_CRATE.get(), Items.BEETROOT, "", true);
-		crateBlock(output, ModItems.CARROT_CRATE.get(), Items.CARROT, "", true);
-		crateBlock(output, ModItems.POTATO_CRATE.get(), Items.POTATO, "", true);
+		// Items from Farmer's Delight
 		crateBlock(output, ModItems.CABBAGE_CRATE.get(), ModItems.CABBAGE.get(), "fd_cabbage", false);
 		crateBlock(output, ModItems.TOMATO_CRATE.get(), ModItems.TOMATO.get(), "", false);
 		crateBlock(output, ModItems.ONION_CRATE.get(), ModItems.ONION.get(), "", false);
 		baleBlock(output, ModItems.STRAW_BALE.get(), ModItems.STRAW.get(), "", false);
 		baleBlock(output, ModItems.RICE_BALE.get(), ModItems.RICE_PANICLE.get(), "", false);
 		bagBlock(output, ModItems.RICE_BAG.get(), ModItems.RICE.get(), "fd_rice", false);
+
+		// Items from Minecraft
+		crateBlock(output, ModItems.BEETROOT_CRATE.get(), Items.BEETROOT, "", true);
+		crateBlock(output, ModItems.CARROT_CRATE.get(), Items.CARROT, "", true);
+		crateBlock(output, ModItems.POTATO_CRATE.get(), Items.POTATO, "", true);
+		crateBlock(output, ModItems.APPLE_CRATE.get(), Items.APPLE, "", true);
+		crateBlock(output, ModItems.CHORUS_FRUIT_CRATE.get(), Items.CHORUS_FRUIT, "", true);
+		crateBlock(output, ModItems.BROWN_MUSHROOM_CRATE.get(), Items.BROWN_MUSHROOM, "", true);
+		crateBlock(output, ModItems.RED_MUSHROOM_CRATE.get(), Items.RED_MUSHROOM, "", true);
+		cartonBlock(output, ModItems.EGG_CARTON.get(), Items.EGG, "", true);
+		bagBlock(output, ModItems.SWEET_BERRIES_BAG.get(), Items.SWEET_BERRIES, "", true);
+		bagBlock(output, ModItems.GLOW_BERRIES_BAG.get(), Items.GLOW_BERRIES, "", true);
+		bagBlock(output, ModItems.COCOA_BEANS_BAG.get(), Items.COCOA_BEANS, "", true);
 	}
 
 	private static void recipesTools(RecipeOutput output) {
