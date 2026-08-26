@@ -90,7 +90,7 @@ public class ModBlocks
 	public static final Supplier<Block> SWEET_BERRIES_BAG = BLOCKS.register("sweet_berries_bag",
 		() -> new Block(Block.Properties.ofFullCopy(Blocks.WHITE_WOOL)));
 	public static final Supplier<Block> GLOW_BERRIES_BAG = BLOCKS.register("glow_berries_bag",
-		() -> new Block(Block.Properties.ofFullCopy(Blocks.WHITE_WOOL)));
+		() -> new Block(Block.Properties.ofFullCopy(Blocks.WHITE_WOOL).lightLevel((state) -> 10)));
 	public static final Supplier<Block> COCOA_BEANS_BAG = BLOCKS.register("cocoa_beans_bag",
 		() -> new Block(Block.Properties.ofFullCopy(Blocks.WHITE_WOOL)));
 
