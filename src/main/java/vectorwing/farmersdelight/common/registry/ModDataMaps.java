@@ -9,7 +9,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 
 public class ModDataMaps {
 
-	public static final DataMapType<Block, Block> MUSHROOM_COLONY_TRANSFORMATION = DataMapType.builder(
-		ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "mushroom_colony_transformation"), Registries.BLOCK, BuiltInRegistries.BLOCK.byNameCodec())
+	public static final DataMapType<Block, Block> RICH_SOIL_TRANSFORMATION = DataMapType.builder(
+		ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "rich_soil_transformation"), Registries.BLOCK, BuiltInRegistries.BLOCK.byNameCodec())
 		.synced(BuiltInRegistries.BLOCK.byNameCodec(), false).build();
 }

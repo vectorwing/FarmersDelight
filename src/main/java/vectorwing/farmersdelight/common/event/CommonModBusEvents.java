@@ -36,6 +36,6 @@ public class CommonModBusEvents
 
 	@SubscribeEvent
 	public static void registerDataMaps(RegisterDataMapTypesEvent event) {
-		event.register(ModDataMaps.MUSHROOM_COLONY_TRANSFORMATION);
+		event.register(ModDataMaps.RICH_SOIL_TRANSFORMATION);
 	}
 }

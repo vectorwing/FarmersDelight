@@ -17,7 +17,6 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")
 public class DataMaps extends DataMapProvider
@@ -98,7 +97,7 @@ public class DataMaps extends DataMapProvider
 			.add(item(ModItems.BROWN_MUSHROOM_COLONY.get()), new Compostable(1.0F), false)
 			.add(item(ModItems.RED_MUSHROOM_COLONY.get()), new Compostable(1.0F), false);
 
-		builder(ModDataMaps.MUSHROOM_COLONY_TRANSFORMATION)
+		builder(ModDataMaps.RICH_SOIL_TRANSFORMATION)
 			.add(Blocks.RED_MUSHROOM.builtInRegistryHolder(), ModBlocks.RED_MUSHROOM_COLONY.get(), false)
 			.add(Blocks.BROWN_MUSHROOM.builtInRegistryHolder(), ModBlocks.BROWN_MUSHROOM_COLONY.get(), false);
 	}
