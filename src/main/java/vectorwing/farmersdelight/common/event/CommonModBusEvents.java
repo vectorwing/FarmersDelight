@@ -9,9 +9,11 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.loading.DatagenModLoader;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
+import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.FoodValues;
+import vectorwing.farmersdelight.common.registry.ModDataMaps;
 
 @EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CommonModBusEvents
@@ -30,5 +32,10 @@ public class CommonModBusEvents
 		if (Configuration.ENABLE_RABBIT_STEW_BUFF.get()) {
 			event.modify(Items.RABBIT_STEW, (builder) -> builder.set(DataComponents.FOOD, FoodValues.RABBIT_STEW_BUFF));
 		}
+	}
+
+	@SubscribeEvent
+	public static void registerDataMaps(RegisterDataMapTypesEvent event) {
+		event.register(ModDataMaps.MUSHROOM_COLONY_TRANSFORMATION);
 	}
 }

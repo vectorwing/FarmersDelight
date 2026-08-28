@@ -7,7 +7,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.CommonHooks;
@@ -18,6 +17,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.network.payload.RichSoilBoostParticlesPayload;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.registry.ModDataMaps;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.Nullable;
@@ -74,12 +74,9 @@ public class RichSoilBlock extends Block
 	}
 
 	public boolean convertMushroomToColony(BlockState targetState, BlockPos targetPos, ServerLevel level) {
-		if (targetState.is(Blocks.BROWN_MUSHROOM)) {
-			level.setBlockAndUpdate(targetPos, ModBlocks.BROWN_MUSHROOM_COLONY.get().defaultBlockState());
-			return true;
-		}
-		if (targetState.is(Blocks.RED_MUSHROOM)) {
-			level.setBlockAndUpdate(targetPos, ModBlocks.RED_MUSHROOM_COLONY.get().defaultBlockState());
+		Block colony = targetState.getBlock().builtInRegistryHolder().getData(ModDataMaps.MUSHROOM_COLONY_TRANSFORMATION);
+		if (colony != null) {
+			level.setBlockAndUpdate(targetPos, colony.defaultBlockState());
 			return true;
 		}
 

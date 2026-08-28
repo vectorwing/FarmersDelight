@@ -5,11 +5,14 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 import org.jetbrains.annotations.NotNull;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.registry.ModDataMaps;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
@@ -94,6 +97,10 @@ public class DataMaps extends DataMapProvider
 			.add(item(ModItems.STUFFED_PUMPKIN_BLOCK.get()), new Compostable(1.0F), false)
 			.add(item(ModItems.BROWN_MUSHROOM_COLONY.get()), new Compostable(1.0F), false)
 			.add(item(ModItems.RED_MUSHROOM_COLONY.get()), new Compostable(1.0F), false);
+
+		builder(ModDataMaps.MUSHROOM_COLONY_TRANSFORMATION)
+			.add(Blocks.RED_MUSHROOM.builtInRegistryHolder(), ModBlocks.RED_MUSHROOM_COLONY.get(), false)
+			.add(Blocks.BROWN_MUSHROOM.builtInRegistryHolder(), ModBlocks.BROWN_MUSHROOM_COLONY.get(), false);
 	}
 
 	private static ResourceKey<Item> item(Item item) {
