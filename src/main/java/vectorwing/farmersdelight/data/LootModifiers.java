@@ -23,6 +23,7 @@ import net.neoforged.neoforge.common.loot.LootTableIdCondition;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.RicePaniclesBlock;
 import vectorwing.farmersdelight.common.loot.modifier.AddItemModifier;
+import vectorwing.farmersdelight.common.loot.modifier.FDAddTableLootModifier;
 import vectorwing.farmersdelight.common.loot.modifier.PastrySlicingModifier;
 import vectorwing.farmersdelight.common.loot.modifier.ReplaceItemModifier;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
@@ -95,7 +96,7 @@ public class LootModifiers extends GlobalLootModifierProvider
 	}
 
 	private AddTableLootModifier addNewLootPool(ResourceKey<LootTable> lootToAddTo, ResourceKey<LootTable> newPool) {
-		return new AddTableLootModifier(new LootItemCondition[]{LootTableIdCondition.builder(lootToAddTo.location()).build()}, newPool);
+		return new FDAddTableLootModifier(new LootItemCondition[]{LootTableIdCondition.builder(lootToAddTo.location()).build()}, newPool);
 	}
 
 	private AddItemModifier addItemOnPlayerKill(Item item, float chance, EntityType<?>... entity) {
