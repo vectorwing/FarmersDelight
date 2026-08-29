@@ -3,7 +3,8 @@
 ## 1.3.4
 
 ### Fixes
-- Fix a broken behavior when pushing Feasts with Pistons;
+- Fixed a broken behavior when pushing Feasts with Pistons;
+- (1.21.1+) Fixed config "generateFDChestLoot" not properly disabling FD's extra chest loot generation;
 
 ## 1.3.3
 
