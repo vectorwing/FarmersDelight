@@ -19,6 +19,12 @@
 - Fix broken Skillet interactions when swapping slots while cooking an item;
   - Due to this fix, the Skillet no longer "stores" an ingredient within itself on handheld mode. The ingredient is only subtracted once cooking finishes;
 
+## 1.3.4
+
+### Fixes
+- Fixed a broken behavior when pushing Feasts with Pistons;
+- (1.21.1+) Fixed config "generateFDChestLoot" not properly disabling FD's extra chest loot generation;
+
 ## 1.3.3
 
 ### Fixes
