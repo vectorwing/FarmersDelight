@@ -93,12 +93,32 @@ public class ModItems
 		() -> new BlockItem(ModBlocks.TOMATO_CRATE.get(), basicItem()));
 	public static final Supplier<Item> ONION_CRATE = registerWithTab("onion_crate",
 		() -> new BlockItem(ModBlocks.ONION_CRATE.get(), basicItem()));
+	public static final Supplier<Item> APPLE_CRATE = registerWithTab("apple_crate",
+		() -> new BlockItem(ModBlocks.APPLE_CRATE.get(), basicItem()));
+	public static final Supplier<Item> GOLDEN_APPLE_CRATE = registerWithTab("golden_apple_crate",
+		() -> new BlockItem(ModBlocks.GOLDEN_APPLE_CRATE.get(), basicItem()));
+	public static final Supplier<Item> GOLDEN_CARROT_CRATE = registerWithTab("golden_carrot_crate",
+		() -> new BlockItem(ModBlocks.GOLDEN_CARROT_CRATE.get(), basicItem()));
+	public static final Supplier<Item> CHORUS_FRUIT_CRATE = registerWithTab("chorus_fruit_crate",
+		() -> new BlockItem(ModBlocks.CHORUS_FRUIT_CRATE.get(), basicItem()));
+	public static final Supplier<Item> BROWN_MUSHROOM_CRATE = registerWithTab("brown_mushroom_crate",
+		() -> new BlockItem(ModBlocks.BROWN_MUSHROOM_CRATE.get(), basicItem()));
+	public static final Supplier<Item> RED_MUSHROOM_CRATE = registerWithTab("red_mushroom_crate",
+		() -> new BlockItem(ModBlocks.RED_MUSHROOM_CRATE.get(), basicItem()));
+	public static final Supplier<Item> EGG_CARTON = registerWithTab("egg_carton",
+		() -> new BlockItem(ModBlocks.EGG_CARTON.get(), basicItem()));
+	public static final Supplier<Item> STRAW_BALE = registerWithTab("straw_bale",
+		() -> new BlockItem(ModBlocks.STRAW_BALE.get(), basicItem()));
 	public static final Supplier<Item> RICE_BALE = registerWithTab("rice_bale",
 		() -> new BlockItem(ModBlocks.RICE_BALE.get(), basicItem()));
 	public static final Supplier<Item> RICE_BAG = registerWithTab("rice_bag",
 		() -> new BlockItem(ModBlocks.RICE_BAG.get(), basicItem()));
-	public static final Supplier<Item> STRAW_BALE = registerWithTab("straw_bale",
-		() -> new BlockItem(ModBlocks.STRAW_BALE.get(), basicItem()));
+	public static final Supplier<Item> SWEET_BERRIES_BAG = registerWithTab("sweet_berries_bag",
+		() -> new BlockItem(ModBlocks.SWEET_BERRIES_BAG.get(), basicItem()));
+	public static final Supplier<Item> GLOW_BERRIES_BAG = registerWithTab("glow_berries_bag",
+		() -> new BlockItem(ModBlocks.GLOW_BERRIES_BAG.get(), basicItem()));
+	public static final Supplier<Item> COCOA_BEANS_BAG = registerWithTab("cocoa_beans_bag",
+		() -> new BlockItem(ModBlocks.COCOA_BEANS_BAG.get(), basicItem()));
 
 	public static final Supplier<Item> SAFETY_NET = registerWithTab("safety_net",
 		() -> new BlockItem(ModBlocks.SAFETY_NET.get(), basicItem()));

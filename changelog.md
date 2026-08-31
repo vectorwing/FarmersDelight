@@ -9,6 +9,8 @@
     - It has an interface to view its contents, and slots for filling/emptying the Jug using fluid containers (buckets, bottles, other jugs etc);
     - Jugs will keep their fluids when mined, letting you carry it with you somewhere else. However, any items on its input/output slots will be dropped;
     - Jugs can interact with both item (top input, bottom output) and fluid (any direction) automation from other mods;
+  - Added a multitude of **storage blocks** for various farmable items. This includes:
+    - Apple, Chorus Fruit, Brown Mushroom, Red Mushroom, Sweet Berries, Glow Berries, Cocoa Beans and Eggs;
 - New items:
   - **Skewers** - The old Barbecue on a Stick has been converted into two separate items, to add variety to your barbecue:
     - **Meat Skewer**: Can be made from any 2 pieces of meat or fish. Can be either crafted raw to cook later, or crafted from cooked meats/fishes directly;
@@ -21,6 +23,12 @@
 ### Fixes
 - Fix broken Skillet interactions when swapping slots while cooking an item;
   - Due to this fix, the Skillet no longer "stores" an ingredient within itself on handheld mode. The ingredient is only subtracted once cooking finishes;
+
+## 1.3.4
+
+### Fixes
+- Fixed a broken behavior when pushing Feasts with Pistons;
+- (1.21.1+) Fixed config "generateFDChestLoot" not properly disabling FD's extra chest loot generation;
 
 ## 1.3.3
 

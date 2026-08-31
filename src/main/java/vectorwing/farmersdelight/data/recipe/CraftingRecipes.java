@@ -26,6 +26,7 @@ public class CraftingRecipes
 	public static void register(RecipeOutput output) {
 		recipesVanillaAlternatives(output);
 		recipesBlocks(output);
+		recipesStorageBlocks(output);
 		recipesCanvasSigns(output);
 		recipesTools(output);
 		recipesMaterials(output);
@@ -376,69 +377,6 @@ public class CraftingRecipes
 			.define('r', ModItems.ROPE.get())
 			.unlockedBy("has_rope", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.ROPE.get()))
 			.save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.BEETROOT_CRATE.get())
-			.pattern("###")
-			.pattern("###")
-			.pattern("###")
-			.define('#', Items.BEETROOT)
-			.unlockedBy("has_beetroot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BEETROOT))
-			.save(output.withConditions(VanillaCrateEnabledCondition.INSTANCE), RecipeUtils.FDLocation("beetroot_crate"));
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.CARROT_CRATE.get())
-			.pattern("###")
-			.pattern("###")
-			.pattern("###")
-			.define('#', Items.CARROT)
-			.unlockedBy("has_carrot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CARROT))
-			.save(output.withConditions(VanillaCrateEnabledCondition.INSTANCE), RecipeUtils.FDLocation("carrot_crate"));
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.POTATO_CRATE.get())
-			.pattern("###")
-			.pattern("###")
-			.pattern("###")
-			.define('#', Items.POTATO)
-			.unlockedBy("has_potato", InventoryChangeTrigger.TriggerInstance.hasItems(Items.POTATO))
-			.save(output.withConditions(VanillaCrateEnabledCondition.INSTANCE), RecipeUtils.FDLocation("potato_crate"));
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.CABBAGE_CRATE.get(), 1)
-			.pattern("###")
-			.pattern("###")
-			.pattern("###")
-			.define('#', ModItems.CABBAGE.get())
-			.unlockedBy("has_cabbage", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CABBAGE.get()))
-			.save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.TOMATO_CRATE.get(), 1)
-			.pattern("###")
-			.pattern("###")
-			.pattern("###")
-			.define('#', ModItems.TOMATO.get())
-			.unlockedBy("has_tomato", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.TOMATO.get()))
-			.save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.ONION_CRATE.get(), 1)
-			.pattern("###")
-			.pattern("###")
-			.pattern("###")
-			.define('#', ModItems.ONION.get())
-			.unlockedBy("has_onion", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.ONION.get()))
-			.save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.RICE_BALE.get(), 1)
-			.pattern("###")
-			.pattern("###")
-			.pattern("###")
-			.define('#', ModItems.RICE_PANICLE.get())
-			.unlockedBy("has_rice_panicle", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.RICE_PANICLE.get()))
-			.save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.RICE_BAG.get(), 1)
-			.pattern("###")
-			.pattern("###")
-			.pattern("###")
-			.define('#', ModItems.RICE.get())
-			.unlockedBy("has_rice", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.RICE.get()))
-			.save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.STRAW_BALE.get(), 1)
-			.pattern("###")
-			.pattern("###")
-			.pattern("###")
-			.define('#', ModItems.STRAW.get())
-			.unlockedBy("has_straw", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.STRAW.get()))
-			.save(output);
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, ModItems.CANVAS_RUG.get(), 2)
 			.requires(ModItems.CANVAS.get())
 			.unlockedBy("has_canvas", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CANVAS.get()))
@@ -512,6 +450,31 @@ public class CraftingRecipes
 			.save(output, RecipeUtils.FDLocation("tatami_block_from_full"));
 	}
 
+	private static void recipesStorageBlocks(RecipeOutput output) {
+		// Items from Farmer's Delight
+		crateBlock(output, ModItems.CABBAGE_CRATE.get(), ModItems.CABBAGE.get(), "fd_cabbage", false);
+		crateBlock(output, ModItems.TOMATO_CRATE.get(), ModItems.TOMATO.get(), "", false);
+		crateBlock(output, ModItems.ONION_CRATE.get(), ModItems.ONION.get(), "", false);
+		baleBlock(output, ModItems.STRAW_BALE.get(), ModItems.STRAW.get(), "", false);
+		baleBlock(output, ModItems.RICE_BALE.get(), ModItems.RICE_PANICLE.get(), "", false);
+		bagBlock(output, ModItems.RICE_BAG.get(), ModItems.RICE.get(), "fd_rice", false);
+
+		// Items from Minecraft
+		crateBlock(output, ModItems.BEETROOT_CRATE.get(), Items.BEETROOT, "", true);
+		crateBlock(output, ModItems.CARROT_CRATE.get(), Items.CARROT, "", true);
+		crateBlock(output, ModItems.POTATO_CRATE.get(), Items.POTATO, "", true);
+		crateBlock(output, ModItems.APPLE_CRATE.get(), Items.APPLE, "", true);
+		crateBlock(output, ModItems.GOLDEN_APPLE_CRATE.get(), Items.GOLDEN_APPLE, "golden_apple", true);
+		crateBlock(output, ModItems.GOLDEN_CARROT_CRATE.get(), Items.GOLDEN_CARROT, "golden_carrot", true);
+		crateBlock(output, ModItems.CHORUS_FRUIT_CRATE.get(), Items.CHORUS_FRUIT, "", true);
+		crateBlock(output, ModItems.BROWN_MUSHROOM_CRATE.get(), Items.BROWN_MUSHROOM, "", true);
+		crateBlock(output, ModItems.RED_MUSHROOM_CRATE.get(), Items.RED_MUSHROOM, "", true);
+		cartonBlock(output, ModItems.EGG_CARTON.get(), Items.EGG, "", true);
+		bagBlock(output, ModItems.SWEET_BERRIES_BAG.get(), Items.SWEET_BERRIES, "", true);
+		bagBlock(output, ModItems.GLOW_BERRIES_BAG.get(), Items.GLOW_BERRIES, "", true);
+		bagBlock(output, ModItems.COCOA_BEANS_BAG.get(), Items.COCOA_BEANS, "", true);
+	}
+
 	private static void recipesTools(RecipeOutput output) {
 		ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.FLINT_KNIFE.get())
 			.pattern("m")
@@ -553,44 +516,6 @@ public class CraftingRecipes
 			.define('#', ModItems.STRAW.get())
 			.unlockedBy("has_straw", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.STRAW.get()))
 			.group("fd_canvas")
-			.save(output);
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, Items.CARROT, 9)
-			.requires(ModItems.CARROT_CRATE.get())
-			.unlockedBy("has_carrot_crate", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CARROT_CRATE.get()))
-			.save(output, RecipeUtils.FDLocation("carrot_from_crate"));
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, Items.POTATO, 9)
-			.requires(ModItems.POTATO_CRATE.get())
-			.unlockedBy("has_potato_crate", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.POTATO_CRATE.get()))
-			.save(output, RecipeUtils.FDLocation("potato_from_crate"));
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, Items.BEETROOT, 9)
-			.requires(ModItems.BEETROOT_CRATE.get())
-			.unlockedBy("has_beetroot_crate", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.BEETROOT_CRATE.get()))
-			.save(output, RecipeUtils.FDLocation("beetroot_from_crate"));
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.CABBAGE.get(), 9)
-			.requires(ModItems.CABBAGE_CRATE.get())
-			.unlockedBy("has_cabbage_crate", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CABBAGE_CRATE.get()))
-			.group("fd_cabbage")
-			.save(output);
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.TOMATO.get(), 9)
-			.requires(ModItems.TOMATO_CRATE.get())
-			.unlockedBy("has_tomato_crate", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.TOMATO_CRATE.get()))
-			.save(output);
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.ONION.get(), 9)
-			.requires(ModItems.ONION_CRATE.get())
-			.unlockedBy("has_onion_crate", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.ONION_CRATE.get()))
-			.save(output);
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.RICE_PANICLE.get(), 9)
-			.requires(ModItems.RICE_BALE.get())
-			.unlockedBy("has_rice_bale", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.RICE_BALE.get()))
-			.save(output);
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.RICE.get(), 9)
-			.requires(ModItems.RICE_BAG.get())
-			.unlockedBy("has_rice_bag", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.RICE_BAG.get()))
-			.group("fd_rice")
-			.save(output, FarmersDelight.MODID + ":rice_from_bag");
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.STRAW.get(), 9)
-			.requires(ModItems.STRAW_BALE.get())
-			.unlockedBy("has_straw_bale", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.STRAW_BALE.get()))
 			.save(output);
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.RICE.get())
 			.requires(ModItems.RICE_PANICLE.get())
@@ -959,5 +884,47 @@ public class CraftingRecipes
 			.requires(ModItems.COD_ROLL.get())
 			.unlockedBy("has_rice_roll", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SALMON_ROLL.get(), ModItems.COD_ROLL.get(), ModItems.KELP_ROLL_SLICE.get()))
 			.save(output);
+	}
+
+	/**
+	 * Adds recipes for converting between a storage block (3x3) and the item it stores.
+	 * If "group" is empty, no group will be added to the block-to-item recipe.
+	 */
+	public static void storageBlock(RecipeOutput output, ItemLike storageBlock, ItemLike storedItem, RecipeCategory storedItemCategory, String storageType, String group, boolean usesConfig) {
+		String blockName = RecipeUtils.itemName(storageBlock);
+		String itemName = RecipeUtils.itemName(storedItem);
+
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, storageBlock)
+			.pattern("###")
+			.pattern("###")
+			.pattern("###")
+			.define('#', storedItem)
+			.unlockedBy("has_" + itemName, InventoryChangeTrigger.TriggerInstance.hasItems(storedItem))
+			.save(usesConfig ? output.withConditions(VanillaCrateEnabledCondition.INSTANCE) : output, RecipeUtils.FDLocation(blockName));
+		ShapelessRecipeBuilder blockToItem = ShapelessRecipeBuilder.shapeless(storedItemCategory, storedItem, 9)
+			.requires(storageBlock)
+			.unlockedBy("has_" + blockName, InventoryChangeTrigger.TriggerInstance.hasItems(storageBlock));
+
+		if (!group.isEmpty()) {
+			blockToItem.group(group);
+		}
+
+		blockToItem.save(output, RecipeUtils.FDLocation(itemName + "_from_" + storageType));
+	}
+
+	public static void crateBlock(RecipeOutput output, ItemLike storageBlock, ItemLike storedItem, String group, boolean usesConfig) {
+		storageBlock(output, storageBlock, storedItem, RecipeCategory.FOOD, "crate", group, usesConfig);
+	}
+
+	public static void cartonBlock(RecipeOutput output, ItemLike storageBlock, ItemLike storedItem, String group, boolean usesConfig) {
+		storageBlock(output, storageBlock, storedItem, RecipeCategory.FOOD, "carton", group, usesConfig);
+	}
+
+	public static void bagBlock(RecipeOutput output, ItemLike storageBlock, ItemLike storedItem, String group, boolean usesConfig) {
+		storageBlock(output, storageBlock, storedItem, RecipeCategory.FOOD, "bag", group, usesConfig);
+	}
+
+	public static void baleBlock(RecipeOutput output, ItemLike storageBlock, ItemLike storedItem, String group, boolean usesConfig) {
+		storageBlock(output, storageBlock, storedItem, RecipeCategory.FOOD, "bale", group, usesConfig);
 	}
 }

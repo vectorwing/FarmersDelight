@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "farmersdelight:block/bag_bottom",
+    "east": "farmersdelight:block/cocoa_beans_bag_side",
+    "north": "farmersdelight:block/bag_side_tied",
+    "particle": "farmersdelight:block/cocoa_beans_bag_top",
+    "south": "farmersdelight:block/bag_side_tied",
+    "up": "farmersdelight:block/cocoa_beans_bag_top",
+    "west": "farmersdelight:block/cocoa_beans_bag_side"
+  }
+}

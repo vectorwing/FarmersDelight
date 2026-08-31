@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "golden_carrot",
+  "ingredients": [
+    {
+      "item": "farmersdelight:golden_carrot_crate"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "minecraft:golden_carrot"
+  }
+}

@@ -1,11 +1,16 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "farmersdelight:vanilla_crates_enabled"
+    }
+  ],
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_onion_crate": {
+    "has_sweet_berries": {
       "conditions": {
         "items": [
           {
-            "items": "farmersdelight:onion_crate"
+            "items": "minecraft:sweet_berries"
           }
         ]
       },
@@ -13,7 +18,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "farmersdelight:onion"
+        "recipe": "farmersdelight:sweet_berries_bag"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +26,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_onion_crate"
+      "has_sweet_berries"
     ]
   ],
   "rewards": {
     "recipes": [
-      "farmersdelight:onion"
+      "farmersdelight:sweet_berries_bag"
     ]
   }
 }

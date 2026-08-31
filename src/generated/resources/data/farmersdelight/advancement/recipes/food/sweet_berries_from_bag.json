@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_rice_bale": {
+    "has_sweet_berries_bag": {
       "conditions": {
         "items": [
           {
-            "items": "farmersdelight:rice_bale"
+            "items": "farmersdelight:sweet_berries_bag"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "farmersdelight:rice_panicle"
+        "recipe": "farmersdelight:sweet_berries_from_bag"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_rice_bale"
+      "has_sweet_berries_bag"
     ]
   ],
   "rewards": {
     "recipes": [
-      "farmersdelight:rice_panicle"
+      "farmersdelight:sweet_berries_from_bag"
     ]
   }
 }

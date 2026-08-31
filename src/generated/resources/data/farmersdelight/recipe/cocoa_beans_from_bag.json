@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "farmersdelight:cocoa_beans_bag"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "minecraft:cocoa_beans"
+  }
+}

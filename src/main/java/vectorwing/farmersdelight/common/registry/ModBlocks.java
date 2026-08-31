@@ -9,6 +9,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -35,6 +36,10 @@ public class ModBlocks
 
 	private static ToIntFunction<BlockState> glowingFeastBlockEmission() {
 		return (state) -> state.getValue(FeastBlock.SERVINGS) * 3;
+	}
+
+	private static Block.Properties feastProperties() {
+		return BlockBehaviour.Properties.of().forceSolidOn().strength(0.5F).mapColor(MapColor.WOOD).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY);
 	}
 
 	// Workstations
@@ -73,13 +78,33 @@ public class ModBlocks
 	public static final Supplier<Block> TOMATO_CRATE = BLOCKS.register("tomato_crate",
 		() -> new Block(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
 	public static final Supplier<Block> ONION_CRATE = BLOCKS.register("onion_crate",
+			() -> new Block(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+	public static final Supplier<Block> APPLE_CRATE = BLOCKS.register("apple_crate",
 		() -> new Block(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+	public static final Supplier<Block> GOLDEN_APPLE_CRATE = BLOCKS.register("golden_apple_crate",
+		() -> new Block(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+	public static final Supplier<Block> GOLDEN_CARROT_CRATE = BLOCKS.register("golden_carrot_crate",
+		() -> new Block(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+	public static final Supplier<Block> CHORUS_FRUIT_CRATE = BLOCKS.register("chorus_fruit_crate",
+		() -> new Block(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+	public static final Supplier<Block> BROWN_MUSHROOM_CRATE = BLOCKS.register("brown_mushroom_crate",
+		() -> new Block(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+	public static final Supplier<Block> RED_MUSHROOM_CRATE = BLOCKS.register("red_mushroom_crate",
+		() -> new Block(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+	public static final Supplier<Block> EGG_CARTON = BLOCKS.register("egg_carton",
+		() -> new SlabBlock(Block.Properties.ofFullCopy(Blocks.OAK_SLAB).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+	public static final Supplier<Block> STRAW_BALE = BLOCKS.register("straw_bale",
+			() -> new StrawBaleBlock(Block.Properties.ofFullCopy(Blocks.HAY_BLOCK)));
 	public static final Supplier<Block> RICE_BALE = BLOCKS.register("rice_bale",
 		() -> new RiceBaleBlock(Block.Properties.ofFullCopy(Blocks.HAY_BLOCK)));
 	public static final Supplier<Block> RICE_BAG = BLOCKS.register("rice_bag",
+			() -> new Block(Block.Properties.ofFullCopy(Blocks.WHITE_WOOL)));
+	public static final Supplier<Block> SWEET_BERRIES_BAG = BLOCKS.register("sweet_berries_bag",
 		() -> new Block(Block.Properties.ofFullCopy(Blocks.WHITE_WOOL)));
-	public static final Supplier<Block> STRAW_BALE = BLOCKS.register("straw_bale",
-		() -> new StrawBaleBlock(Block.Properties.ofFullCopy(Blocks.HAY_BLOCK)));
+	public static final Supplier<Block> GLOW_BERRIES_BAG = BLOCKS.register("glow_berries_bag",
+		() -> new Block(Block.Properties.ofFullCopy(Blocks.WHITE_WOOL).lightLevel((state) -> 10)));
+	public static final Supplier<Block> COCOA_BEANS_BAG = BLOCKS.register("cocoa_beans_bag",
+		() -> new Block(Block.Properties.ofFullCopy(Blocks.WHITE_WOOL)));
 
 	// Building
 	public static final Supplier<Block> ROPE = BLOCKS.register("rope",
@@ -327,15 +352,15 @@ public class ModBlocks
 
 	// Feasts
 	public static final Supplier<Block> ROAST_CHICKEN_BLOCK = BLOCKS.register("roast_chicken_block",
-		() -> new RotatedFeastBlock(Block.Properties.ofFullCopy(Blocks.CAKE), ModItems.ROAST_CHICKEN, true, BlockShapes.ROAST_CHICKEN_SHAPES, BlockShapes.TRAY_SHAPE));
+			() -> new RotatedFeastBlock(feastProperties(), ModItems.ROAST_CHICKEN, true, BlockShapes.ROAST_CHICKEN_SHAPES, BlockShapes.TRAY_SHAPE));
 	public static final Supplier<Block> STUFFED_PUMPKIN_BLOCK = BLOCKS.register("stuffed_pumpkin_block",
-		() -> new FeastBlock(Block.Properties.ofFullCopy(Blocks.PUMPKIN), ModItems.STUFFED_PUMPKIN, false, true));
+			() -> new FeastBlock(feastProperties(), ModItems.STUFFED_PUMPKIN, false, true));
 	public static final Supplier<Block> HONEY_GLAZED_HAM_BLOCK = BLOCKS.register("honey_glazed_ham_block",
-		() -> new RotatedFeastBlock(Block.Properties.ofFullCopy(Blocks.CAKE), ModItems.HONEY_GLAZED_HAM, true, BlockShapes.HONEY_GLAZED_HAM_SHAPES, BlockShapes.TRAY_SHAPE));
+			() -> new RotatedFeastBlock(feastProperties(), ModItems.HONEY_GLAZED_HAM, true, BlockShapes.HONEY_GLAZED_HAM_SHAPES, BlockShapes.TRAY_SHAPE));
 	public static final Supplier<Block> SHEPHERDS_PIE_BLOCK = BLOCKS.register("shepherds_pie_block",
-		() -> new RotatedFeastBlock(Block.Properties.ofFullCopy(Blocks.CAKE), ModItems.SHEPHERDS_PIE, true, BlockShapes.SHEPHERDS_PIE_SHAPES, BlockShapes.TRAY_SHAPE));
+			() -> new RotatedFeastBlock(feastProperties(), ModItems.SHEPHERDS_PIE, true, BlockShapes.SHEPHERDS_PIE_SHAPES, BlockShapes.TRAY_SHAPE));
 	public static final Supplier<Block> GLEAMING_SALAD_BLOCK = BLOCKS.register("gleaming_salad_block",
-		() -> new GleamingSaladBlock(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).lightLevel(glowingFeastBlockEmission()), ModItems.GLEAMING_SALAD, true));
+			() -> new GleamingSaladBlock(feastProperties().lightLevel(glowingFeastBlockEmission()), ModItems.GLEAMING_SALAD, true));
 	public static final Supplier<Block> RICE_ROLL_MEDLEY_BLOCK = BLOCKS.register("rice_roll_medley_block",
-		() -> new RiceRollMedleyBlock(Block.Properties.ofFullCopy(Blocks.CAKE)));
+			() -> new RiceRollMedleyBlock(feastProperties()));
 }

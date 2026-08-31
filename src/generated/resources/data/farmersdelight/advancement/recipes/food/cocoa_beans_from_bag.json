@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_straw_bale": {
+    "has_cocoa_beans_bag": {
       "conditions": {
         "items": [
           {
-            "items": "farmersdelight:straw_bale"
+            "items": "farmersdelight:cocoa_beans_bag"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "farmersdelight:straw"
+        "recipe": "farmersdelight:cocoa_beans_from_bag"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_straw_bale"
+      "has_cocoa_beans_bag"
     ]
   ],
   "rewards": {
     "recipes": [
-      "farmersdelight:straw"
+      "farmersdelight:cocoa_beans_from_bag"
     ]
   }
 }

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "golden_apple",
+  "ingredients": [
+    {
+      "item": "farmersdelight:golden_apple_crate"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "minecraft:golden_apple"
+  }
+}
