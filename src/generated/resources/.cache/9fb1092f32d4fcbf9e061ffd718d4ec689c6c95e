@@ -1,4 +1,4 @@
-// 1.21.1	2026-09-01T17:11:57.5934352	Recipes
+// 1.21.1	2026-09-01T17:46:43.7572187	Recipes
 d58ef6a3d9798d94b972bf074fd3c3ac7ea03568 data/farmersdelight/advancement/recipes/building_blocks/apple_crate.json
 0053d4db6868789324c8ab586cbfc9b588ce30ff data/farmersdelight/advancement/recipes/building_blocks/beetroot_crate.json
 f083a039ac59355cbd19e1e02f8453a8f4fde37b data/farmersdelight/advancement/recipes/building_blocks/brown_mushroom_crate.json
@@ -535,6 +535,7 @@ f30bd61abcb0f9b11295719c813ece89f3476977 data/farmersdelight/recipe/salvaging/sp
 76a42a6e8cf866ad19b4bb8403bf128ec41ac890 data/farmersdelight/recipe/shepherds_pie_block.json
 26d917e184877ebe507e379fde4bf85440373774 data/farmersdelight/recipe/skillet.json
 71b135d0b792cb51def9727b78d624f21f75996c data/farmersdelight/recipe/smoked_ham.json
+0c0daf63dad6f07886c89f770b2032ca21b6fa48 data/farmersdelight/recipe/soaking/honey_bottle.json
 2ed8f9c806de6172875a1df05a2090c425c757cc data/farmersdelight/recipe/soaking/milk_bottle.json
 e7085610412f06ec62f49225828f22f1151d77de data/farmersdelight/recipe/soaking/mud.json
 8f7ca5799d521d3bbd88609b9fd5e82d82179738 data/farmersdelight/recipe/soaking/wheat_dough.json

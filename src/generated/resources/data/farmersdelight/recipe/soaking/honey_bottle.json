@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "farmersdelight:fluid_tag_empty",
+        "tag": "c:honey"
+      }
+    }
+  ],
+  "type": "farmersdelight:fluid_filling",
+  "empty_input": {
+    "item": "minecraft:glass_bottle"
+  },
+  "filled_result": {
+    "count": 1,
+    "id": "minecraft:honey_bottle"
+  },
+  "fluid": {
+    "amount": 250,
+    "tag": "c:honey"
+  }
+}
