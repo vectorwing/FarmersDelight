@@ -7,6 +7,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.common.crafting.FluidFillingRecipe;
 import vectorwing.farmersdelight.common.crafting.SoakingRecipe;
 
 import java.util.function.Supplier;
@@ -21,7 +22,7 @@ public class ModRecipeTypes
 	public static final Supplier<RecipeType<SoakingRecipe>> SOAKING = RECIPE_TYPES.register("soaking", () -> registerRecipeType("soaking"));
 
 	// Technical
-	public static final Supplier<RecipeType<SoakingRecipe>> FLUID_FILLING = RECIPE_TYPES.register("fluid_filling", () -> registerRecipeType("fluid_filling"));
+	public static final Supplier<RecipeType<FluidFillingRecipe>> FLUID_FILLING = RECIPE_TYPES.register("fluid_filling", () -> registerRecipeType("fluid_filling"));
 
 	public static <T extends Recipe<?>> RecipeType<T> registerRecipeType(final String identifier) {
 		return new RecipeType<>()
