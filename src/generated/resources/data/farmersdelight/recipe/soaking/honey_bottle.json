@@ -1,11 +1,8 @@
 {
   "neoforge:conditions": [
     {
-      "type": "neoforge:not",
-      "value": {
-        "type": "farmersdelight:fluid_tag_empty",
-        "tag": "c:honey"
-      }
+      "type": "farmersdelight:validate_fluid_tag",
+      "tag": "c:honey"
     }
   ],
   "type": "farmersdelight:fluid_filling",

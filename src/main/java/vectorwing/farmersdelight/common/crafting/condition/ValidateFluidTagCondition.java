@@ -8,29 +8,33 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.common.conditions.ICondition;
 
-public record FluidTagEmptyCondition(TagKey<Fluid> tag) implements ICondition
+/**
+ * Validates the given fluid tag to ensure it isn't empty.
+ * @param tag The tag to be validated
+ */
+public record ValidateFluidTagCondition(TagKey<Fluid> tag) implements ICondition
 {
-	public static final MapCodec<FluidTagEmptyCondition> CODEC = RecordCodecBuilder.mapCodec(
+	public static final MapCodec<ValidateFluidTagCondition> CODEC = RecordCodecBuilder.mapCodec(
 		builder -> builder
 			.group(
-				ResourceLocation.CODEC.xmap(loc -> TagKey.create(Registries.FLUID, loc), TagKey::location).fieldOf("tag").forGetter(FluidTagEmptyCondition::tag))
-			.apply(builder, FluidTagEmptyCondition::new));
+				ResourceLocation.CODEC.xmap(loc -> TagKey.create(Registries.FLUID, loc), TagKey::location).fieldOf("tag").forGetter(ValidateFluidTagCondition::tag))
+			.apply(builder, ValidateFluidTagCondition::new));
 
-	public FluidTagEmptyCondition(String location) {
+	public ValidateFluidTagCondition(String location) {
 		this(ResourceLocation.parse(location));
 	}
 
-	public FluidTagEmptyCondition(String namespace, String path) {
+	public ValidateFluidTagCondition(String namespace, String path) {
 		this(ResourceLocation.fromNamespaceAndPath(namespace, path));
 	}
 
-	public FluidTagEmptyCondition(ResourceLocation tag) {
+	public ValidateFluidTagCondition(ResourceLocation tag) {
 		this(TagKey.create(Registries.FLUID, tag));
 	}
 
 	@Override
 	public boolean test(IContext context) {
-		return context.getTag(tag).isEmpty();
+		return !context.getTag(tag).isEmpty();
 	}
 
 	@Override
@@ -40,6 +44,6 @@ public record FluidTagEmptyCondition(TagKey<Fluid> tag) implements ICondition
 
 	@Override
 	public String toString() {
-		return "tag_empty(\"" + tag.location() + "\")";
+		return "validate_fluid_tag(\"" + tag.location() + "\")";
 	}
 }
