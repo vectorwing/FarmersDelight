@@ -1,0 +1,14 @@
+{
+  "type": "farmersdelight:fluid_filling",
+  "empty_input": {
+    "item": "minecraft:glass_bottle"
+  },
+  "filled_result": {
+    "count": 1,
+    "id": "farmersdelight:milk_bottle"
+  },
+  "fluid": {
+    "amount": 250,
+    "tag": "c:milk"
+  }
+}

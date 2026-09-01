@@ -5,13 +5,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
-import vectorwing.farmersdelight.common.crafting.FluidHandlingRecipe;
+import vectorwing.farmersdelight.common.crafting.FluidFillingRecipe;
 
 /**
  * This capability allows an ItemStack to hold a speficic amount of a specific fluid, working similarly to a fluid-holding bucket.
  *
  * <p>When emptied, it swaps for an empty form. The empty form, however, won't be able to convert back into this
- * fluid without a capability of its own, or a {@link FluidHandlingRecipe}.</p>
+ * fluid without a capability of its own, or a {@link FluidFillingRecipe}.</p>
  */
 public class StaticFluidItemCapability implements IFluidHandlerItem
 {

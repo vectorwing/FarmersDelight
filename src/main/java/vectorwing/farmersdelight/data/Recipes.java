@@ -24,6 +24,6 @@ public class Recipes extends RecipeProvider
 		SmeltingRecipes.register(output);
 		CookingRecipes.register(output);
 		CuttingRecipes.register(output);
-		SoakingRecipes.register(output);
+		FluidHandlingRecipes.register(output);
 	}
 }

@@ -15,9 +15,13 @@ public class ModRecipeTypes
 {
 	public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, FarmersDelight.MODID);
 
+	// Crafting
 	public static final Supplier<RecipeType<CookingPotRecipe>> COOKING = RECIPE_TYPES.register("cooking", () -> registerRecipeType("cooking"));
 	public static final Supplier<RecipeType<CuttingBoardRecipe>> CUTTING = RECIPE_TYPES.register("cutting", () -> registerRecipeType("cutting"));
 	public static final Supplier<RecipeType<SoakingRecipe>> SOAKING = RECIPE_TYPES.register("soaking", () -> registerRecipeType("soaking"));
+
+	// Technical
+	public static final Supplier<RecipeType<SoakingRecipe>> FLUID_FILLING = RECIPE_TYPES.register("fluid_filling", () -> registerRecipeType("fluid_filling"));
 
 	public static <T extends Recipe<?>> RecipeType<T> registerRecipeType(final String identifier) {
 		return new RecipeType<>()

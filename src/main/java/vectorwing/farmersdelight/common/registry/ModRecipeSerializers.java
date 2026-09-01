@@ -17,6 +17,8 @@ public class ModRecipeSerializers
 	public static final Supplier<RecipeSerializer<?>> CUTTING = RECIPE_SERIALIZERS.register("cutting", CuttingBoardRecipe.Serializer::new);
 	public static final Supplier<RecipeSerializer<?>> SOAKING = RECIPE_SERIALIZERS.register("soaking", SoakingRecipe.Serializer::new);
 
+	public static final Supplier<RecipeSerializer<?>> FLUID_FILLING = RECIPE_SERIALIZERS.register("fluid_filling", FluidFillingRecipe.Serializer::new);
+
 	public static final Supplier<SimpleCraftingRecipeSerializer<?>> FOOD_SERVING =
 			RECIPE_SERIALIZERS.register("food_serving", () -> new SimpleCraftingRecipeSerializer<>(FoodServingRecipe::new));
 	public static final Supplier<SimpleCraftingRecipeSerializer<?>> DOUGH =
