@@ -52,6 +52,10 @@ public class SoakingRecipeBuilder implements RecipeBuilder
 		this.processingTime = processingTime;
 	}
 
+	public static SoakingRecipeBuilder soaking(Ingredient ingredient, SizedFluidIngredient fluid, ItemLike result) {
+		return new SoakingRecipeBuilder(ingredient, fluid, result);
+	}
+
 	public static SoakingRecipeBuilder instant(Ingredient ingredient, SizedFluidIngredient fluid, ItemLike result, int count) {
 		return new SoakingRecipeBuilder(ingredient, fluid, result, count, 0);
 	}

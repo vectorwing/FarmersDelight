@@ -1,0 +1,15 @@
+{
+  "type": "farmersdelight:soaking",
+  "fluid": {
+    "amount": 1000,
+    "tag": "c:water"
+  },
+  "ingredient": {
+    "item": "minecraft:sponge"
+  },
+  "processing_time": 20,
+  "result": {
+    "count": 1,
+    "id": "minecraft:wet_sponge"
+  }
+}

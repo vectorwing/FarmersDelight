@@ -34,5 +34,23 @@ public class FluidHandlingRecipes
 			.saveToFD(output);
 		SoakingRecipeBuilder.waterSoaking(Ingredient.of(Items.DIRT), Items.MUD)
 			.saveToFD(output);
+		SoakingRecipeBuilder.soaking(Ingredient.of(Items.SPONGE), SizedFluidIngredient.of(Tags.Fluids.WATER, 1000), Items.WET_SPONGE)
+			.saveToFD(output);
+		SoakingRecipeBuilder.waterSoaking(Ingredient.of(Items.WHITE_CONCRETE_POWDER), Items.WHITE_CONCRETE).saveToFD(output);
+		SoakingRecipeBuilder.waterSoaking(Ingredient.of(Items.LIGHT_GRAY_CONCRETE_POWDER), Items.LIGHT_GRAY_CONCRETE).saveToFD(output);
+		SoakingRecipeBuilder.waterSoaking(Ingredient.of(Items.GRAY_CONCRETE_POWDER), Items.GRAY_CONCRETE).saveToFD(output);
+		SoakingRecipeBuilder.waterSoaking(Ingredient.of(Items.BLACK_CONCRETE_POWDER), Items.BLACK_CONCRETE).saveToFD(output);
+		SoakingRecipeBuilder.waterSoaking(Ingredient.of(Items.BROWN_CONCRETE_POWDER), Items.BROWN_CONCRETE).saveToFD(output);
+		SoakingRecipeBuilder.waterSoaking(Ingredient.of(Items.RED_CONCRETE_POWDER), Items.RED_CONCRETE).saveToFD(output);
+		SoakingRecipeBuilder.waterSoaking(Ingredient.of(Items.ORANGE_CONCRETE_POWDER), Items.ORANGE_CONCRETE).saveToFD(output);
+		SoakingRecipeBuilder.waterSoaking(Ingredient.of(Items.YELLOW_CONCRETE_POWDER), Items.YELLOW_CONCRETE).saveToFD(output);
+		SoakingRecipeBuilder.waterSoaking(Ingredient.of(Items.LIME_CONCRETE_POWDER), Items.LIME_CONCRETE).saveToFD(output);
+		SoakingRecipeBuilder.waterSoaking(Ingredient.of(Items.GREEN_CONCRETE_POWDER), Items.GREEN_CONCRETE).saveToFD(output);
+		SoakingRecipeBuilder.waterSoaking(Ingredient.of(Items.CYAN_CONCRETE_POWDER), Items.CYAN_CONCRETE).saveToFD(output);
+		SoakingRecipeBuilder.waterSoaking(Ingredient.of(Items.LIGHT_BLUE_CONCRETE_POWDER), Items.LIGHT_BLUE_CONCRETE).saveToFD(output);
+		SoakingRecipeBuilder.waterSoaking(Ingredient.of(Items.BLUE_CONCRETE_POWDER), Items.BLUE_CONCRETE).saveToFD(output);
+		SoakingRecipeBuilder.waterSoaking(Ingredient.of(Items.PURPLE_CONCRETE_POWDER), Items.PURPLE_CONCRETE).saveToFD(output);
+		SoakingRecipeBuilder.waterSoaking(Ingredient.of(Items.MAGENTA_CONCRETE_POWDER), Items.MAGENTA_CONCRETE).saveToFD(output);
+		SoakingRecipeBuilder.waterSoaking(Ingredient.of(Items.PINK_CONCRETE_POWDER), Items.PINK_CONCRETE).saveToFD(output);
 	}
 }
