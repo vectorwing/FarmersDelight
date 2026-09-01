@@ -41,7 +41,9 @@ import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.container.JugMenu;
 import vectorwing.farmersdelight.common.block.entity.inventory.SingleSlotItemHandler;
+import vectorwing.farmersdelight.common.crafting.FluidFillingRecipe;
 import vectorwing.farmersdelight.common.crafting.SoakingRecipe;
+import vectorwing.farmersdelight.common.crafting.input.FluidHandlingInput;
 import vectorwing.farmersdelight.common.crafting.input.SoakingRecipeInput;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModDataComponents;
@@ -69,7 +71,8 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 
 	private Component customName;
 
-	private final RecipeManager.CachedCheck<SoakingRecipeInput, SoakingRecipe> quickCheck;
+	private final RecipeManager.CachedCheck<SoakingRecipeInput, SoakingRecipe> soakingCache;
+	private final RecipeManager.CachedCheck<FluidHandlingInput, FluidFillingRecipe> fillingCache;
 
 	public JugBlockEntity(BlockPos pos, BlockState state) {
 		this(ModBlockEntityTypes.JUG.get(), pos, state);
@@ -82,7 +85,8 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 		this.outputHandler = new SingleSlotItemHandler(inventory, OUTPUT_SLOT);
 		this.fluidTank = createFluidHandler();
 		this.containerData = createIntArray();
-		this.quickCheck = RecipeManager.createCheck(ModRecipeTypes.SOAKING.get());
+		this.soakingCache = RecipeManager.createCheck(ModRecipeTypes.SOAKING.get());
+		this.fillingCache = RecipeManager.createCheck(ModRecipeTypes.FLUID_FILLING.get());
 	}
 
 	@SubscribeEvent
@@ -115,15 +119,25 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 		}
 	}
 
+	private Optional<RecipeHolder<SoakingRecipe>> getSoakingRecipe(SoakingRecipeInput recipeInput) {
+		if (level == null) return Optional.empty();
+		return !getInput().isEmpty() ? soakingCache.getRecipeFor(recipeInput, this.level) : Optional.empty();
+	}
+
+	private Optional<RecipeHolder<FluidFillingRecipe>> getFillingRecipe(FluidHandlingInput recipeInput) {
+		if (level == null) return Optional.empty();
+		return !getInput().isEmpty() ? fillingCache.getRecipeFor(recipeInput, this.level) : Optional.empty();
+	}
+
 	public static void jugTick(Level level, BlockPos pos, BlockState state, JugBlockEntity jug) {
 		ItemStack input = jug.getInput();
 
 		if (!input.isEmpty()) {
-			// First, check if the item can transfer fluids (capabilities, fluid handling recipes etc).
-			jug.transferFluidWithInputSlot();
+			if (jug.emptyInput()) return;
+			if (jug.fillInput()) return;
 
 			// Second, if the above fails, check if the item can be soaked in the fluid.
-			Optional<RecipeHolder<SoakingRecipe>> recipe = jug.getMatchingRecipe(new SoakingRecipeInput(jug.getInput(), jug.getFluidTank().getFluid()));
+			Optional<RecipeHolder<SoakingRecipe>> recipe = jug.getSoakingRecipe(new SoakingRecipeInput(jug.getInput(), jug.getFluidTank().getFluid()));
 			if (recipe.isPresent() && jug.canSoakInput(recipe.get().value())) {
 				jug.processSoaking(recipe.get(), jug);
 			} else {
@@ -134,10 +148,99 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 		}
 	}
 
-	private Optional<RecipeHolder<SoakingRecipe>> getMatchingRecipe(SoakingRecipeInput recipeInput) {
-		if (level == null) return Optional.empty();
-		return !getInput().isEmpty() ? quickCheck.getRecipeFor(recipeInput, this.level) : Optional.empty();
+	public boolean emptyInput() {
+		if (level == null) return false;
+
+		ItemStack inputStack = getInput();
+
+		IFluidHandlerItem fluidHandler = inputStack.getCapability(Capabilities.FluidHandler.ITEM);
+		if (fluidHandler == null) return false;
+
+		FluidActionResult result = FluidUtil.tryEmptyContainer(inputStack, fluidTank, fluidTank.getCapacity(), null, false);
+		if (result.isSuccess() && canMoveItemToOutput(result.getResult())) {
+			FluidUtil.tryEmptyContainer(inputStack, fluidTank, fluidTank.getCapacity(), null, true);
+			inventory.extractItem(INPUT_SLOT, 1, false);
+			inventory.insertItem(OUTPUT_SLOT, result.getResult(), false);
+			return true;
+		}
+
+		return false;
 	}
+
+	public boolean fillInput() {
+		if (level == null) return false;
+
+		ItemStack inputStack = getInput();
+
+		// Try using a recipe
+		FluidHandlingInput fillingInput = new FluidHandlingInput(inputStack, fluidTank);
+		Optional<RecipeHolder<FluidFillingRecipe>> recipe = getFillingRecipe(fillingInput);
+		if (recipe.isPresent()) {
+			FluidFillingRecipe fillingRecipe = recipe.get().value();
+			ItemStack resultStack = fillingRecipe.assemble(fillingInput, this.level.registryAccess());
+			if (canMoveItemToOutput(resultStack)) {
+				inventory.extractItem(INPUT_SLOT, 1, false);
+				inventory.insertItem(OUTPUT_SLOT, resultStack, false);
+				fluidTank.drain(fillingRecipe.getFluid().amount(), IFluidHandler.FluidAction.EXECUTE);
+				return true;
+			}
+		}
+
+		// Try using a capability
+		IFluidHandlerItem fluidHandler = inputStack.getCapability(Capabilities.FluidHandler.ITEM);
+		if (fluidHandler == null) return false;
+
+		FluidActionResult result = FluidUtil.tryFillContainer(inputStack, fluidTank, fluidTank.getCapacity(), null, false);
+		if (result.isSuccess() && canMoveItemToOutput(result.getResult())) {
+			FluidUtil.tryFillContainer(inputStack, fluidTank, fluidTank.getCapacity(), null, true);
+			inventory.extractItem(INPUT_SLOT, 1, false);
+			inventory.insertItem(OUTPUT_SLOT, result.getResult(), false);
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean canDrainInput(ItemStack stack) {
+		if (level == null || stack.isEmpty()) return false;
+
+		FluidActionResult result = FluidUtil.tryEmptyContainer(stack, fluidTank, fluidTank.getCapacity(), null, false);
+		return result.isSuccess() && canMoveItemToOutput(result.getResult());
+	}
+
+	public boolean canFillInput(ItemStack stack) {
+		if (level == null || stack.isEmpty()) return false;
+
+		// Check for a fluid filling recipe
+		FluidHandlingInput input = new FluidHandlingInput(getInput(), getFluidTank());
+		Optional<RecipeHolder<FluidFillingRecipe>> recipe = this.getFillingRecipe(input);
+		if (recipe.isPresent()) {
+			ItemStack resultStack = recipe.get().value().assemble(input, this.level.registryAccess());
+			return !resultStack.isEmpty() && canMoveItemToOutput(resultStack);
+		}
+
+		// Check if the input has a fluid capability
+		FluidActionResult result = FluidUtil.tryFillContainer(stack, fluidTank, fluidTank.getCapacity(), null, false);
+		return result.isSuccess() && canMoveItemToOutput(result.getResult());
+	}
+
+	public boolean canMoveItemToOutput(ItemStack stack) {
+		return inventory.insertItem(OUTPUT_SLOT, stack, true).isEmpty();
+	}
+
+	public FluidActionResult useFluidContainerOnJug(ItemStack stack, Player player) {
+		FluidActionResult emptyResult = FluidUtil.tryEmptyContainerAndStow(stack, fluidTank, new InvWrapper(player.getInventory()), fluidTank.getCapacity(), player, true);
+		if (emptyResult.isSuccess()) {
+			inventoryChanged();
+			return emptyResult;
+		}
+		FluidActionResult fillResult = FluidUtil.tryFillContainerAndStow(stack, fluidTank, new InvWrapper(player.getInventory()), fluidTank.getCapacity(), player, true);
+		if (fillResult.isSuccess()) {
+			inventoryChanged();
+		}
+		return fillResult;
+	}
+
 
 	public boolean canSoakInput(SoakingRecipe recipe) {
 		if (level == null || getInput().isEmpty()) return false;
@@ -167,62 +270,6 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 				fluidTank.drain(soakingRecipe.getFluid().amount(), IFluidHandler.FluidAction.EXECUTE);
 			}
 		}
-	}
-
-	public void transferFluidWithInputSlot() {
-		ItemStack inputStack = getInput();
-
-		// Try to transfer fluid using capabilities
-		IFluidHandlerItem fluidHandler = inputStack.getCapability(Capabilities.FluidHandler.ITEM);
-		if (fluidHandler == null) return;
-
-		// We have an input which has a fluid handler (empty or filled).
-		// If the item contains fluid:
-		// 	Does the fluid match the Jug's stored fluid?
-		// 	Can the Jug fit the input's fluid?
-		// 	Can the output slot fit what will be left behind after transfer?
-		// 		If so, we empty the input into the Jug, and move the remainder to the output.
-		// If the item has no fluid:
-		// 	Can we fill the item with the Jug's stored fluid?
-		// 	Can the result be moved to the output?
-		// 		If so, we fill the input from the Jug, and move the remainder to the output.
-
-		if (canDrainInput(inputStack)) {
-			FluidActionResult result = FluidUtil.tryEmptyContainer(inputStack, fluidTank, fluidTank.getCapacity(), null, true);
-			if (result.isSuccess()) {
-				inventory.extractItem(INPUT_SLOT, 1, false);
-				inventory.insertItem(OUTPUT_SLOT, result.getResult(), false);
-			}
-		} else if (canFillInput(inputStack)) {
-			FluidActionResult result = FluidUtil.tryFillContainer(inputStack, fluidTank, fluidTank.getCapacity(), null, true);
-			if (result.isSuccess()) {
-				inventory.extractItem(INPUT_SLOT, 1, false);
-				inventory.insertItem(OUTPUT_SLOT, result.getResult(), false);
-			}
-		}
-	}
-
-	public boolean canDrainInput(ItemStack stack) {
-		FluidActionResult result = FluidUtil.tryEmptyContainer(stack, fluidTank, fluidTank.getCapacity(), null, false);
-		return result.isSuccess() && inventory.insertItem(OUTPUT_SLOT, result.getResult(), true).isEmpty();
-	}
-
-	public boolean canFillInput(ItemStack stack) {
-		FluidActionResult result = FluidUtil.tryFillContainer(stack, fluidTank, fluidTank.getCapacity(), null, false);
-		return result.isSuccess() && inventory.insertItem(OUTPUT_SLOT, result.getResult(), true).isEmpty();
-	}
-
-	public FluidActionResult useFluidContainerOnJug(ItemStack stack, Player player) {
-		FluidActionResult emptyResult = FluidUtil.tryEmptyContainerAndStow(stack, fluidTank, new InvWrapper(player.getInventory()), fluidTank.getCapacity(), player, true);
-		if (emptyResult.isSuccess()) {
-			inventoryChanged();
-			return emptyResult;
-		}
-		FluidActionResult fillResult = FluidUtil.tryFillContainerAndStow(stack, fluidTank, new InvWrapper(player.getInventory()), fluidTank.getCapacity(), player, true);
-		if (fillResult.isSuccess()) {
-			inventoryChanged();
-		}
-		return fillResult;
 	}
 
 	public FluidTank getFluidTank() {

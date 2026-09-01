@@ -38,6 +38,10 @@ public class FluidFillingRecipe implements Recipe<FluidHandlingInput>
 		return emptyInput.test(input.getInput()) && fluid.test(input.getFluidTank().getFluid());
 	}
 
+	public SizedFluidIngredient getFluid() {
+		return this.fluid;
+	}
+
 	@Override
 	public ItemStack assemble(FluidHandlingInput input, HolderLookup.Provider registries) {
 		return filledResult.copy();
