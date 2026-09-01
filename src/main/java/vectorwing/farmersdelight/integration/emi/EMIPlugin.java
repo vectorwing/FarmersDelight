@@ -4,9 +4,11 @@ import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiCraftingRecipe;
+import dev.emi.emi.api.recipe.EmiInfoRecipe;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -17,6 +19,7 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModMenuTypes;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.utility.RecipeUtils;
+import vectorwing.farmersdelight.integration.InfoRecipe;
 import vectorwing.farmersdelight.integration.emi.handler.CookingPotEmiRecipeHandler;
 import vectorwing.farmersdelight.integration.emi.recipe.CookingPotEmiRecipe;
 import vectorwing.farmersdelight.integration.emi.recipe.CuttingEmiRecipe;
@@ -49,6 +52,11 @@ public class EMIPlugin implements EmiPlugin {
                     recipe.getRollableResults().stream().map(chanceResult -> EmiStack.of(chanceResult.stack()).setChance(chanceResult.chance())).toList()));
         }
         registry.addRecipe(new DecompositionEmiRecipe());
+
+		for (InfoRecipe infoRecipe : InfoRecipe.infoRecipes()) {
+			ResourceLocation id = BuiltInRegistries.ITEM.getKey(infoRecipe.stacks().getFirst().getItem()).withPrefix("/info/"); // e.g. 'farmersdelight:/info/ham'
+			registry.addRecipe(new EmiInfoRecipe(infoRecipe.stacks().stream().map(stack-> (EmiIngredient) EmiStack.of(stack)).toList(), List.of(infoRecipe.info()), id));
+		}
 
         addSpecialRecipes(registry);
     }
