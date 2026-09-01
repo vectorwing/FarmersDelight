@@ -5,10 +5,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
-import vectorwing.farmersdelight.common.crafting.FluidFillingRecipe;
-import vectorwing.farmersdelight.common.crafting.SoakingRecipe;
+import vectorwing.farmersdelight.common.crafting.*;
 
 import java.util.function.Supplier;
 
@@ -23,6 +20,7 @@ public class ModRecipeTypes
 
 	// Technical
 	public static final Supplier<RecipeType<FluidFillingRecipe>> FLUID_FILLING = RECIPE_TYPES.register("fluid_filling", () -> registerRecipeType("fluid_filling"));
+	public static final Supplier<RecipeType<FluidEmptyingRecipe>> FLUID_EMPTYING = RECIPE_TYPES.register("fluid_emptying", () -> registerRecipeType("fluid_emptying"));
 
 	public static <T extends Recipe<?>> RecipeType<T> registerRecipeType(final String identifier) {
 		return new RecipeType<>()

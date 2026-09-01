@@ -3,11 +3,13 @@ package vectorwing.farmersdelight.data.recipe;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.conditions.NotCondition;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import vectorwing.farmersdelight.common.crafting.condition.ValidateFluidTagCondition;
 import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.data.builder.FluidEmptyingRecipeBuilder;
 import vectorwing.farmersdelight.data.builder.FluidFillingRecipeBuilder;
 import vectorwing.farmersdelight.data.builder.SoakingRecipeBuilder;
 
@@ -15,6 +17,7 @@ public class FluidHandlingRecipes
 {
 	public static void register(RecipeOutput output) {
 		fillingRecipes(output);
+		emptyingRecipes(output);
 		soakInWater(output);
 	}
 
@@ -23,6 +26,11 @@ public class FluidHandlingRecipes
 			.saveToFD(output);
 		FluidFillingRecipeBuilder.filling(SizedFluidIngredient.of(Tags.Fluids.HONEY, 250), Ingredient.of(Items.GLASS_BOTTLE), Items.HONEY_BOTTLE)
 			.saveToFD(output.withConditions(new ValidateFluidTagCondition(Tags.Fluids.HONEY)));
+	}
+
+	private static void emptyingRecipes(RecipeOutput output) {
+		FluidEmptyingRecipeBuilder.emptying(new FluidStack(NeoForgeMod.MILK.get(), 250), Ingredient.of(ModItems.MILK_BOTTLE.get()), Items.GLASS_BOTTLE)
+			.saveToFD(output, ModItems.MILK_BOTTLE.get());
 	}
 
 	private static void soakInWater(RecipeOutput output) {
