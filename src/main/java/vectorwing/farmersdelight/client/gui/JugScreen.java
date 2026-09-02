@@ -43,6 +43,8 @@ public class JugScreen extends AbstractContainerScreen<JugMenu>
 
 	@Override
 	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+		int titleCenterOffset = (-this.font.width(title)) / 2;
+		this.titleLabelX = 88 + titleCenterOffset;
 		super.render(guiGraphics, mouseX, mouseY, partialTick);
 		this.renderTooltip(guiGraphics, mouseX, mouseY);
 		this.renderFluidMeterTooltip(guiGraphics, mouseX, mouseY);
