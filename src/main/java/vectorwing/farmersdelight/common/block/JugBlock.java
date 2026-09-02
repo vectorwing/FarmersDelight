@@ -64,7 +64,8 @@ public class JugBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 			if (level.isClientSide) {
 				return ItemInteractionResult.SUCCESS;
 			}
-			FluidActionResult result = jug.useFluidContainerOnJug(stack, player);
+
+			FluidActionResult result = jug.useItemOnJug(stack, player);
 			if (result.isSuccess()) {
 				if (!player.isCreative()) {
 					player.setItemInHand(hand, result.getResult());
