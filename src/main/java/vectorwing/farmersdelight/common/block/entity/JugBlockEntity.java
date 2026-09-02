@@ -41,6 +41,7 @@ import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.container.JugMenu;
 import vectorwing.farmersdelight.common.block.entity.inventory.SingleSlotItemHandler;
+import vectorwing.farmersdelight.common.crafting.FluidEmptyingRecipe;
 import vectorwing.farmersdelight.common.crafting.FluidFillingRecipe;
 import vectorwing.farmersdelight.common.crafting.SoakingRecipe;
 import vectorwing.farmersdelight.common.crafting.input.FluidHandlingInput;
@@ -73,6 +74,7 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 
 	private final RecipeManager.CachedCheck<SoakingRecipeInput, SoakingRecipe> soakingCache;
 	private final RecipeManager.CachedCheck<FluidHandlingInput, FluidFillingRecipe> fillingCache;
+	private final RecipeManager.CachedCheck<FluidHandlingInput, FluidEmptyingRecipe> emptyingCache;
 
 	public JugBlockEntity(BlockPos pos, BlockState state) {
 		this(ModBlockEntityTypes.JUG.get(), pos, state);
@@ -85,8 +87,10 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 		this.outputHandler = new SingleSlotItemHandler(inventory, OUTPUT_SLOT);
 		this.fluidTank = createFluidHandler();
 		this.containerData = createIntArray();
+
 		this.soakingCache = RecipeManager.createCheck(ModRecipeTypes.SOAKING.get());
 		this.fillingCache = RecipeManager.createCheck(ModRecipeTypes.FLUID_FILLING.get());
+		this.emptyingCache = RecipeManager.createCheck(ModRecipeTypes.FLUID_EMPTYING.get());
 	}
 
 	@SubscribeEvent
@@ -129,6 +133,11 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 		return !getInput().isEmpty() ? fillingCache.getRecipeFor(recipeInput, this.level) : Optional.empty();
 	}
 
+	private Optional<RecipeHolder<FluidEmptyingRecipe>> getEmptyingRecipe(FluidHandlingInput recipeInput) {
+		if (level == null) return Optional.empty();
+		return !getInput().isEmpty() ? emptyingCache.getRecipeFor(recipeInput, this.level) : Optional.empty();
+	}
+
 	public static void jugTick(Level level, BlockPos pos, BlockState state, JugBlockEntity jug) {
 		ItemStack input = jug.getInput();
 
@@ -153,6 +162,21 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 
 		ItemStack inputStack = getInput();
 
+		// Try using a recipe
+		FluidHandlingInput fillingInput = new FluidHandlingInput(inputStack, fluidTank);
+		Optional<RecipeHolder<FluidEmptyingRecipe>> recipe = getEmptyingRecipe(fillingInput);
+		if (recipe.isPresent()) {
+			FluidEmptyingRecipe fillingRecipe = recipe.get().value();
+			ItemStack resultStack = fillingRecipe.assemble(fillingInput, this.level.registryAccess());
+			if (canMoveItemToOutput(resultStack)) {
+				inventory.extractItem(INPUT_SLOT, 1, false);
+				inventory.insertItem(OUTPUT_SLOT, resultStack, false);
+				fluidTank.fill(fillingRecipe.getFluid(), IFluidHandler.FluidAction.EXECUTE);
+				return true;
+			}
+		}
+
+		// Try using a capability
 		IFluidHandlerItem fluidHandler = inputStack.getCapability(Capabilities.FluidHandler.ITEM);
 		if (fluidHandler == null) return false;
 

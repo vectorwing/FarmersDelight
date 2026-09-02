@@ -36,7 +36,8 @@ public class FluidEmptyingRecipe implements Recipe<FluidHandlingInput>
 
 	@Override
 	public boolean matches(FluidHandlingInput input, Level level) {
-		return filledInput.test(input.getInput()) && fluid.getAmount() <= input.getSpaceInTank();
+		boolean canReceiveFluid = input.fluidTank().isEmpty() || FluidStack.isSameFluidSameComponents(fluid, input.getFluid());
+		return filledInput.test(input.getInput()) && canReceiveFluid && fluid.getAmount() <= input.getSpaceInTank();
 	}
 
 	public FluidStack getFluid() {
