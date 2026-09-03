@@ -22,7 +22,7 @@ public class FluidFillingRecipeBuilder implements RecipeBuilder
 {
 	protected final SizedFluidIngredient fluid;
 	protected final Ingredient ingredient;
-	protected final ItemStack result;
+	protected ItemStack result;
 
 	@Nullable
 	private String namespace;
@@ -47,6 +47,11 @@ public class FluidFillingRecipeBuilder implements RecipeBuilder
 	 */
 	public FluidFillingRecipeBuilder setNamespace(String namespace) {
 		this.namespace = namespace;
+		return this;
+	}
+
+	public FluidFillingRecipeBuilder setCustomResult(ItemStack customResult) {
+		this.result = customResult;
 		return this;
 	}
 

@@ -1,12 +1,21 @@
 package vectorwing.farmersdelight.data.recipe;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.PotionItem;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
+import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.crafting.condition.ValidateFluidTagCondition;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.data.builder.FluidEmptyingRecipeBuilder;
@@ -18,6 +27,7 @@ public class FluidHandlingRecipes
 	public static void register(RecipeOutput output) {
 		fillingRecipes(output);
 		emptyingRecipes(output);
+		waterBottleRecipes(output);
 		soakInWater(output);
 	}
 
@@ -31,6 +41,16 @@ public class FluidHandlingRecipes
 	private static void emptyingRecipes(RecipeOutput output) {
 		FluidEmptyingRecipeBuilder.emptying(new FluidStack(NeoForgeMod.MILK.get(), 250), Ingredient.of(ModItems.MILK_BOTTLE.get()), Items.GLASS_BOTTLE)
 			.saveToFD(output, ModItems.MILK_BOTTLE.get());
+	}
+
+	private static void waterBottleRecipes(RecipeOutput output) {
+		FluidFillingRecipeBuilder.filling(SizedFluidIngredient.of(Tags.Fluids.WATER, 250), Ingredient.of(Items.GLASS_BOTTLE), ModItems.MILK_BOTTLE.get())
+			.setCustomResult(waterBottle(Items.POTION))
+			.setNamespace(FarmersDelight.MODID)
+			.save(output, "fluid_filling/water_bottle");
+		FluidEmptyingRecipeBuilder.emptying(new FluidStack(Fluids.WATER, 250), DataComponentIngredient.of(true, DataComponents.POTION_CONTENTS, new PotionContents(Potions.WATER), Items.POTION), Items.GLASS_BOTTLE)
+			.setNamespace(FarmersDelight.MODID)
+			.save(output, "fluid_emptying/water_bottle");
 	}
 
 	private static void soakInWater(RecipeOutput output) {
@@ -56,5 +76,17 @@ public class FluidHandlingRecipes
 		SoakingRecipeBuilder.waterSoaking(Ingredient.of(Items.PURPLE_CONCRETE_POWDER), Items.PURPLE_CONCRETE).saveToFD(output);
 		SoakingRecipeBuilder.waterSoaking(Ingredient.of(Items.MAGENTA_CONCRETE_POWDER), Items.MAGENTA_CONCRETE).saveToFD(output);
 		SoakingRecipeBuilder.waterSoaking(Ingredient.of(Items.PINK_CONCRETE_POWDER), Items.PINK_CONCRETE).saveToFD(output);
+	}
+
+	/**
+	 * Creates a water bottle for the given potion item. If the item isn't a potion, returns an empty stack.
+	 */
+	public static ItemStack waterBottle(ItemLike potion) {
+		if (potion instanceof PotionItem) {
+			ItemStack waterBottle = new ItemStack(potion);
+			waterBottle.set(DataComponents.POTION_CONTENTS, new PotionContents(Potions.WATER));
+			return waterBottle;
+		}
+		return ItemStack.EMPTY;
 	}
 }

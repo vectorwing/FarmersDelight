@@ -1,0 +1,21 @@
+{
+  "type": "farmersdelight:fluid_emptying",
+  "empty_result": {
+    "count": 1,
+    "id": "minecraft:glass_bottle"
+  },
+  "filled_input": {
+    "type": "neoforge:components",
+    "components": {
+      "minecraft:potion_contents": {
+        "potion": "minecraft:water"
+      }
+    },
+    "items": "minecraft:potion",
+    "strict": true
+  },
+  "fluid": {
+    "amount": 250,
+    "id": "minecraft:water"
+  }
+}

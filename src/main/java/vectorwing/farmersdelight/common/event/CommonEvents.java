@@ -33,7 +33,7 @@ public class CommonEvents
 		event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new FluidHandlerItemStack(ModDataComponents.FLUID_TANK, stack, JugBlockEntity.JUG_CAPACITY),
 			ModItems.JUG.get(),
 			ModItems.GLASS_JUG.get());
-		event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new StaticFluidItemCapability(NeoForgeMod.MILK.get(), stack, Items.GLASS_BOTTLE, 250), ModItems.MILK_BOTTLE.get());
+//		event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new StaticFluidItemCapability(NeoForgeMod.MILK.get(), stack, Items.GLASS_BOTTLE, 250), ModItems.MILK_BOTTLE.get());
 	}
 
 	@SubscribeEvent

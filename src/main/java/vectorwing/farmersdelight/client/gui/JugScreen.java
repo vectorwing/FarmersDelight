@@ -12,7 +12,7 @@ import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtension
 import net.neoforged.neoforge.fluids.FluidStack;
 import vectorwing.farmersdelight.client.utility.ScreenUtils;
 import vectorwing.farmersdelight.common.block.entity.container.JugMenu;
-import vectorwing.farmersdelight.common.utility.FluidUtils;
+import vectorwing.farmersdelight.common.utility.FluidHandlingUtils;
 import vectorwing.farmersdelight.common.utility.RecipeUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
@@ -106,7 +106,7 @@ public class JugScreen extends AbstractContainerScreen<JugMenu>
 		guiGraphics.blit(TEXTURE_SOAKING_PROGRESS, this.leftPos + SOAKING_PROGRESS.x, this.topPos + SOAKING_PROGRESS.y,
 			0, 0, SOAKING_PROGRESS.width, progress + 1, SOAKING_PROGRESS.width, SOAKING_PROGRESS.height);
 
-		guiGraphics.drawString(font, String.valueOf(FluidUtils.getBucketAmount(fluidAmount)), this.leftPos + 121, this.topPos + 51, 16777215, true);
-		guiGraphics.drawString(font, String.valueOf(FluidUtils.getBottleAmount(fluidAmount)), this.leftPos + 121, this.topPos + 71, 16777215, true);
+		guiGraphics.drawString(font, String.valueOf(FluidHandlingUtils.getBucketAmount(fluidAmount)), this.leftPos + 121, this.topPos + 51, 16777215, true);
+		guiGraphics.drawString(font, String.valueOf(FluidHandlingUtils.getBottleAmount(fluidAmount)), this.leftPos + 121, this.topPos + 71, 16777215, true);
 	}
 }

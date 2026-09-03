@@ -1,4 +1,4 @@
-// 1.21.1	2026-09-01T20:49:09.468538	Recipes
+// 1.21.1	2026-09-02T22:13:15.3433111	Recipes
 d58ef6a3d9798d94b972bf074fd3c3ac7ea03568 data/farmersdelight/advancement/recipes/building_blocks/apple_crate.json
 0053d4db6868789324c8ab586cbfc9b588ce30ff data/farmersdelight/advancement/recipes/building_blocks/beetroot_crate.json
 f083a039ac59355cbd19e1e02f8453a8f4fde37b data/farmersdelight/advancement/recipes/building_blocks/brown_mushroom_crate.json
@@ -582,3 +582,5 @@ b324bcaaeccbfbacd0e71ee8d6ed454204399a19 data/farmersdelight/recipe/white_canvas
 784ea1ac6f792f4df23553694497a1027447123e data/farmersdelight/recipe/wooden_basket.json
 342623834798ecfd6159d3d9db68dee4e42dd28d data/farmersdelight/recipe/yellow_canvas_sign.json
 76af29b4bf74ff47dea7db4ddb17d136426ed1f1 data/farmersdelight/recipe/yellow_hanging_canvas_sign.json
+d55b6d32e390f345e915e43427f36171c7f87207 data/minecraft/recipe/fluid_emptying/water_bottle.json
+ec3a93d9bfe0a6e30526433527506933e8adcac2 data/minecraft/recipe/fluid_filling/water_bottle.json

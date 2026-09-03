@@ -1,0 +1,19 @@
+{
+  "type": "farmersdelight:fluid_filling",
+  "empty_input": {
+    "item": "minecraft:glass_bottle"
+  },
+  "filled_result": {
+    "components": {
+      "minecraft:potion_contents": {
+        "potion": "minecraft:water"
+      }
+    },
+    "count": 1,
+    "id": "minecraft:potion"
+  },
+  "fluid": {
+    "amount": 250,
+    "tag": "c:water"
+  }
+}

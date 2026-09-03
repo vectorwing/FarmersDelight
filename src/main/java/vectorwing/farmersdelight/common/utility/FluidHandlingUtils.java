@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.common.utility;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
@@ -17,10 +18,13 @@ import vectorwing.farmersdelight.common.crafting.input.FluidHandlingInput;
 
 import java.util.Optional;
 
-public class FluidUtils
+public class FluidHandlingUtils
 {
+	public static final int MB_BOTTLE = 250;
+	public static final int MB_BUCKET = 1000;
+
 	public static int getBucketAmount(int millibuckets) {
-		return millibuckets / 1000;
+		return millibuckets / MB_BUCKET;
 	}
 
 	public static int getBottleAmount(int millibuckets) {
