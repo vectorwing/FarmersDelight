@@ -7,6 +7,7 @@
   - **Jug** - A large, yet portable fluid container! It can hold up to 16 buckets (or 64 bottles) of any registered fluid:
     - It comes in two variants: a fully opaque **metal** jug, and a **glass** jug which displays its contents on the block;
     - It has an interface to view its contents, and slots for filling/emptying the Jug using fluid containers (buckets, bottles, other jugs etc);
+      - Fluid-holding items can also be used directly against the block to transfer fluids with it;
     - Jugs will keep their fluids when mined, letting you carry it with you somewhere else. However, any items on its input/output slots will be dropped;
     - Jugs can interact with both item (top input, bottom output) and fluid (any direction) automation from other mods;
   - Added a multitude of **storage blocks** for various farmable items. This includes:
@@ -16,6 +17,14 @@
     - **Meat Skewer**: Can be made from any 2 pieces of meat or fish. Can be either crafted raw to cook later, or crafted from cooked meats/fishes directly;
     - **Vegetable Skewer:**  A vegetarian variant, made from any 2 vegetables or mushrooms. Must be crafted raw and then cooked;
     - Raw skewers can be used near heat sources to roast them over it. It takes 6 seconds to fully roast, and you do so one-by-one;
+- New recipes:
+  - **Soaking** - Players can use **Jugs** to soak items in their stored fluid, turning it into a different item!
+    - Inputs and outputs are singular. An amount of the specified fluid is consumed per operation, unless `consume_fluid` is defined as false;
+    - By default, Farmer's Delight adds a few water-based recipes, most of which do not consume any water:
+      - Wheat -> Wheat Dough;
+      - Concrete Powder -> Concrete;
+      - Dirt -> Mud;
+      - Sponge -> Wet Sponge (consumes 250 mB of water);
 
 ### Updates
 - Tweaked the Egg Sandwich texture slightly;
