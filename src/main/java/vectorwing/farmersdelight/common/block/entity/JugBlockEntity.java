@@ -10,6 +10,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.Nameable;
@@ -17,19 +20,27 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.BottleItem;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.common.SoundAction;
+import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.fluids.FluidActionResult;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.SimpleFluidContent;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
@@ -203,6 +214,9 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 
 		if (!resultFluid.isEmpty()) {
 			fluidTank.fill(resultFluid, IFluidHandler.FluidAction.EXECUTE);
+			if (level != null) {
+				playFluidEmptySound(level, resultFluid.getFluidType(), resultStack.getItem());
+			}
 			return getFluidResultAndStoreRemainder(stack, resultStack, player);
 		}
 
@@ -211,11 +225,36 @@ public class JugBlockEntity extends SyncedBlockEntity implements MenuProvider, N
 		resultStack = testFilling.getSecond();
 
 		if (resultAmount > 0) {
+			if (level != null) {
+				playFluidFillSound(level, fluidTank.getFluid().getFluidType(), stack.getItem());
+			}
 			fluidTank.drain(resultAmount, IFluidHandler.FluidAction.EXECUTE);
 			return getFluidResultAndStoreRemainder(stack, resultStack, player);
 		}
 
 		return FluidActionResult.FAILURE;
+	}
+
+	public void playFluidFillSound(Level level, FluidType fluid, ItemLike item) {
+		if (item.equals(Items.GLASS_BOTTLE)) {
+			level.playSound(null, getBlockPos(), SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1, 1);
+		} else {
+			SoundEvent sound = fluid.getSound(SoundActions.BUCKET_FILL);
+			if (sound != null) {
+				level.playSound(null, getBlockPos(), sound, SoundSource.BLOCKS, 1, 1);
+			}
+		}
+	}
+
+	public void playFluidEmptySound(Level level, FluidType fluid, ItemLike item) {
+		if (item.equals(Items.GLASS_BOTTLE)) {
+			level.playSound(null, getBlockPos(), SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1, 1);
+		} else {
+			SoundEvent sound = fluid.getSound(SoundActions.BUCKET_EMPTY);
+			if (sound != null) {
+				level.playSound(null, getBlockPos(), sound, SoundSource.BLOCKS, 1, 1);
+			}
+		}
 	}
 
 	public FluidActionResult getFluidResultAndStoreRemainder(ItemStack inputStack, ItemStack resultStack, Player player) {
