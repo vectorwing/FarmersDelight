@@ -383,6 +383,8 @@
   "jei.farmersdelight.decomposition.light": "Sped up by sunlight",
   "jei.farmersdelight.decomposition.fluid": "Sped up by adjacent water",
   "jei.farmersdelight.decomposition.accelerators": "Sped up by adjacent activators (see below)",
+  "jei.farmersdelight.soaking.fluid_consumed": "Consumes fluid",
+  "jei.farmersdelight.soaking.fluid_not_consumed": "Does not consume fluid",
 
   "jei.farmersdelight.info.dough": "Wheat can be turned into Dough by crafting it with a Water Bucket. But don't worry, the bucket's water won't be depleted!",
   "jei.farmersdelight.info.straw": "A dry plant fiber used in crafting. Obtained by cutting grassy crops and plants with a Knife.",
@@ -398,6 +400,7 @@
 
   "emi.category.farmersdelight.cooking": "Cooking",
   "emi.category.farmersdelight.cutting": "Cutting Board",
+  "emi.category.farmersdelight.soaking": "Soaking",
   "emi.category.farmersdelight.decomposition": "Decomposition",
 
   "tag.item.c.crops.cabbage": "Cabbage Crops",

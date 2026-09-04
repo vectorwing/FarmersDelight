@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ExtraCodecs;
@@ -37,6 +38,13 @@ public class SoakingRecipe implements Recipe<SoakingRecipeInput>
 	@Override
 	public boolean matches(SoakingRecipeInput input, Level level) {
 		return this.ingredient.test(input.getInput()) && this.fluid.test(input.getFluid());
+	}
+
+	@Override
+	public NonNullList<Ingredient> getIngredients() {
+		NonNullList<Ingredient> nonnulllist = NonNullList.create();
+		nonnulllist.add(this.ingredient);
+		return nonnulllist;
 	}
 
 	public SizedFluidIngredient getFluid() {
