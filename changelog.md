@@ -18,6 +18,11 @@
     - **Vegetable Skewer:**  A vegetarian variant, made from any 2 vegetables or mushrooms. Must be crafted raw and then cooked;
     - Raw skewers can be used near heat sources to roast them over it. It takes 6 seconds to fully roast, and you do so one-by-one;
 - New recipes:
+  - **Fluid Filling/Emptying** - Technical recipes which define item-fluid conversions for items which don't have NeoForge capabilities:
+    - **Emptying:** Filled Input -> Empty Output + Fluid (specific)
+    - **Filling:** Empty Input + Fluid (tag or specific) -> Filled Output
+    - Both recipes are designed for static and absolute item transfers (bucket-like). A fixed amount of fluid is processed, and the item is converted into a fully empty form, without any fluid remainder;
+    - If the recipe source is also adding the item, it should ideally be given a NeoForge fluid capability. Recipes will override existing capabilities, if valid for the item;
   - **Soaking** - Players can use **Jugs** to soak items in their stored fluid, turning it into a different item!
     - Inputs and outputs are singular. An amount of the specified fluid is consumed per operation, unless `consume_fluid` is defined as false;
     - By default, Farmer's Delight adds a few water-based recipes, most of which do not consume any water:
