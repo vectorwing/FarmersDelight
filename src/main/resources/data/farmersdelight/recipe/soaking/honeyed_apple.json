@@ -1,0 +1,21 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:item_exists",
+      "item": "create:honeyed_apple"
+    }
+  ],
+  "type": "farmersdelight:soaking",
+  "fluid": {
+    "amount": 250,
+    "tag": "c:honey"
+  },
+  "ingredient": {
+    "item": "minecraft:apple"
+  },
+  "processing_time": 40,
+  "result": {
+    "count": 1,
+    "id": "create:honeyed_apple"
+  }
+}
