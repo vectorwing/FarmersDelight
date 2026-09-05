@@ -7,7 +7,6 @@ import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.common.block.entity.JugBlockEntity;
 import vectorwing.farmersdelight.common.utility.ClientRenderUtils;

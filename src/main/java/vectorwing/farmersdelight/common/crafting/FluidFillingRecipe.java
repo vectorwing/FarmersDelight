@@ -3,6 +3,7 @@ package vectorwing.farmersdelight.common.crafting;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
@@ -38,6 +39,13 @@ public class FluidFillingRecipe implements Recipe<FluidHandlingInput>
 		return emptyInput.test(input.getInput()) && fluid.test(input.getFluidTank().getFluid());
 	}
 
+	@Override
+	public NonNullList<Ingredient> getIngredients() {
+		NonNullList<Ingredient> nonnulllist = NonNullList.create();
+		nonnulllist.add(this.emptyInput);
+		return nonnulllist;
+	}
+
 	public SizedFluidIngredient getFluid() {
 		return this.fluid;
 	}
@@ -65,6 +73,11 @@ public class FluidFillingRecipe implements Recipe<FluidHandlingInput>
 	@Override
 	public RecipeType<?> getType() {
 		return ModRecipeTypes.FLUID_FILLING.get();
+	}
+
+	@Override
+	public boolean isSpecial() {
+		return true;
 	}
 
 	public static class Serializer implements RecipeSerializer<FluidFillingRecipe>

@@ -4,6 +4,7 @@ import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiCraftingRecipe;
+import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import net.minecraft.client.Minecraft;
@@ -17,16 +18,14 @@ import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.common.crafting.FluidEmptyingRecipe;
 import vectorwing.farmersdelight.common.crafting.SoakingRecipe;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModMenuTypes;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.utility.RecipeUtils;
 import vectorwing.farmersdelight.integration.emi.handler.CookingPotEmiRecipeHandler;
-import vectorwing.farmersdelight.integration.emi.recipe.CookingPotEmiRecipe;
-import vectorwing.farmersdelight.integration.emi.recipe.CuttingEmiRecipe;
-import vectorwing.farmersdelight.integration.emi.recipe.DecompositionEmiRecipe;
-import vectorwing.farmersdelight.integration.emi.recipe.SoakingEmiRecipe;
+import vectorwing.farmersdelight.integration.emi.recipe.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -73,7 +72,15 @@ public class EMIPlugin implements EmiPlugin
 
 		registry.addRecipe(new DecompositionEmiRecipe());
 
+		addFluidHandlingRecipes(registry, registryAccess);
 		addSpecialRecipes(registry);
+	}
+
+	public void addFluidHandlingRecipes(EmiRegistry registry, RegistryAccess provider) {
+		for (RecipeHolder<FluidEmptyingRecipe> recipeHolder : registry.getRecipeManager().getAllRecipesFor(ModRecipeTypes.FLUID_EMPTYING.get())) {
+			FluidEmptyingRecipe recipe = recipeHolder.value();
+			registry.addRecipe(new FluidEmptyingEmiRecipe(recipeHolder.id(), EmiIngredient.of(recipe.getIngredients().getFirst()), EmiStack.of(recipe.getFluid().getFluid(), recipe.getFluid().getAmount()), EmiStack.of(recipe.getResultItem(provider))));
+		}
 	}
 
 	public void addSpecialRecipes(EmiRegistry registry) {

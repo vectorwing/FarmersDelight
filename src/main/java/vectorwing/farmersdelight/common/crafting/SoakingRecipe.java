@@ -84,6 +84,11 @@ public class SoakingRecipe implements Recipe<SoakingRecipeInput>
 		return ModRecipeTypes.SOAKING.get();
 	}
 
+	@Override
+	public boolean isSpecial() {
+		return true;
+	}
+
 	public static class Serializer implements RecipeSerializer<SoakingRecipe>
 	{
 		public static final StreamCodec<RegistryFriendlyByteBuf, SoakingRecipe> STREAM_CODEC =

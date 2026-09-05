@@ -402,6 +402,8 @@
   "emi.category.farmersdelight.cutting": "Cutting Board",
   "emi.category.farmersdelight.soaking": "Soaking",
   "emi.category.farmersdelight.decomposition": "Decomposition",
+  "emi.category.farmersdelight.fluid_emptying": "Fluid Emptying",
+  "emi.category.farmersdelight.fluid_filling": "Fluid Filling",
 
   "tag.item.c.crops.cabbage": "Cabbage Crops",
   "tag.item.c.crops.grain": "Grain Crops",
