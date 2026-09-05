@@ -12,6 +12,7 @@ import vectorwing.farmersdelight.common.utility.RecipeUtils;
  */
 public class FDTankWidget extends TankWidget
 {
+	private static final ResourceLocation FLUID_SLOT = RecipeUtils.FDLocation("textures/gui/sprites/fluid_slot.png");
 	private static final ResourceLocation FLUID_SLOT_OVERLAY = RecipeUtils.FDLocation("textures/gui/sprites/fluid_slot_overlay.png");
 
 	public FDTankWidget(EmiIngredient stack, int x, int y, long capacity) {
@@ -22,5 +23,12 @@ public class FDTankWidget extends TankWidget
 	public void drawStack(GuiGraphics draw, int mouseX, int mouseY, float delta) {
 		super.drawStack(draw, mouseX, mouseY, delta);
 		draw.blit(FLUID_SLOT_OVERLAY, bounds.x(), bounds.y(), 0, 0, bounds.width(), bounds.height(), 18, 18);
+	}
+
+	@Override
+	public void drawBackground(GuiGraphics draw, int mouseX, int mouseY, float delta) {
+		if (drawBack) {
+			draw.blit(FLUID_SLOT, bounds.x(), bounds.y(), 0, 0, bounds.width(), bounds.height(), 18, 18);
+		}
 	}
 }

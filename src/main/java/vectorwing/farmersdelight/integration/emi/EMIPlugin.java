@@ -16,10 +16,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
-import vectorwing.farmersdelight.common.crafting.FluidEmptyingRecipe;
-import vectorwing.farmersdelight.common.crafting.SoakingRecipe;
+import vectorwing.farmersdelight.common.crafting.*;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModMenuTypes;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
@@ -80,6 +77,11 @@ public class EMIPlugin implements EmiPlugin
 		for (RecipeHolder<FluidEmptyingRecipe> recipeHolder : registry.getRecipeManager().getAllRecipesFor(ModRecipeTypes.FLUID_EMPTYING.get())) {
 			FluidEmptyingRecipe recipe = recipeHolder.value();
 			registry.addRecipe(new FluidEmptyingEmiRecipe(recipeHolder.id(), EmiIngredient.of(recipe.getIngredients().getFirst()), EmiStack.of(recipe.getFluid().getFluid(), recipe.getFluid().getAmount()), EmiStack.of(recipe.getResultItem(provider))));
+		}
+
+		for (RecipeHolder<FluidFillingRecipe> recipeHolder : registry.getRecipeManager().getAllRecipesFor(ModRecipeTypes.FLUID_FILLING.get())) {
+			FluidFillingRecipe recipe = recipeHolder.value();
+			registry.addRecipe(new FluidFillingEmiRecipe(recipeHolder.id(), EmiIngredient.of(recipe.getIngredients().getFirst()), getFluidIngredient(recipe.getFluid()), EmiStack.of(recipe.getResultItem(provider))));
 		}
 	}
 
