@@ -4,6 +4,7 @@ import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.widget.TankWidget;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
+import vectorwing.farmersdelight.common.utility.FluidHandlingUtils;
 import vectorwing.farmersdelight.common.utility.RecipeUtils;
 
 /**
@@ -16,7 +17,7 @@ public class FDTankWidget extends TankWidget
 	private static final ResourceLocation FLUID_SLOT_OVERLAY = RecipeUtils.FDLocation("textures/gui/sprites/fluid_slot_overlay.png");
 
 	public FDTankWidget(EmiIngredient stack, int x, int y, long capacity) {
-		super(stack, x, y, 18, 18, capacity);
+		super(stack, x, y, 18, 18, capacity > FluidHandlingUtils.MB_BUCKET ? FluidHandlingUtils.MB_BUCKET : capacity);
 	}
 
 	@Override
