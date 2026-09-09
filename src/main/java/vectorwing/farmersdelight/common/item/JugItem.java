@@ -44,7 +44,7 @@ public class JugItem extends BlockItem
 		SimpleFluidContent fluid = getFluid(stack);
 		if (!fluid.isEmpty()) {
 			tooltipComponents.add(TextUtils.tooltip("jug.contains").withStyle(ChatFormatting.GRAY));
-			tooltipComponents.add(TextUtils.tooltip("jug.fluid", fluid.getFluidType().getDescription(), fluid.getAmount()).withStyle(ChatFormatting.GRAY));
+			tooltipComponents.add(TextUtils.tooltip("jug.fluid", fluid.copy().getHoverName().copy(), fluid.getAmount()).withStyle(ChatFormatting.GRAY));
 		} else {
 			tooltipComponents.add(TextUtils.tooltip("jug.empty").withStyle(ChatFormatting.GRAY));
 		}

@@ -35,7 +35,7 @@ public class GlassJugItemRenderer extends BlockEntityWithoutLevelRenderer
 		if (!content.isEmpty()) {
 			IClientFluidTypeExtensions fluidExtension = IClientFluidTypeExtensions.of(content.getFluid());
 			ResourceLocation fluidTexture = fluidExtension.getStillTexture();
-			int tint = fluidExtension.getTintColor();
+			int tint = fluidExtension.getTintColor(content.copy());
 			RenderType renderType = ItemBlockRenderTypes.getRenderLayer(content.getFluid().defaultFluidState());
 			float fillPercentage = (float) content.getAmount() / JugBlockEntity.JUG_CAPACITY;
 

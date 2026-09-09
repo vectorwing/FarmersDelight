@@ -54,7 +54,7 @@ public class JugScreen extends AbstractContainerScreen<JugMenu>
 	private void renderFluidMeterTooltip(GuiGraphics gui, int mouseX, int mouseY) {
 		if (this.isHovering(FLUID_RULER.x, FLUID_RULER.y, FLUID_RULER.width, FLUID_RULER.height, mouseX, mouseY)) {
 			FluidStack fluid = this.menu.fluidTank.getFluid();
-			gui.renderTooltip(this.font, TextUtils.container(fluid.isEmpty() ? "jug.empty" : "jug.fluid", fluid.getFluidType().getDescription(), fluid.getAmount()), mouseX, mouseY);
+			gui.renderTooltip(this.font, TextUtils.container(fluid.isEmpty() ? "jug.empty" : "jug.fluid", fluid.getHoverName().copy(), fluid.getAmount()), mouseX, mouseY);
 		}
 	}
 

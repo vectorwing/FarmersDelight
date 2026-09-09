@@ -33,7 +33,7 @@ public class GlassJugRenderer implements BlockEntityRenderer<JugBlockEntity>
 
 		FluidState fluidState = fluid.getFluid().defaultFluidState();
 		IClientFluidTypeExtensions fluidExtension = IClientFluidTypeExtensions.of(fluid.getFluid());
-		int tint = fluidExtension.getTintColor(fluidState, level, jug.getBlockPos());
+		int tint = fluidExtension.getTintColor(fluid);
 		ResourceLocation fluidTexture = fluidExtension.getStillTexture(fluidState, level, jug.getBlockPos());
 		RenderType renderType = ItemBlockRenderTypes.getRenderLayer(fluidState);
 
