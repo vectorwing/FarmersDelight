@@ -9,7 +9,9 @@ import net.minecraft.world.item.Item;
  * <p>Datamap for defining that an item should leave behind a container when used in crafting.</p>
  *
  * <p>This exists as an alternative for items which should leave a craft remainder, but aren't programmed to do so, such as
- * several items from Minecraft. If the item is from your mod, I suggest registering the craft remainder as an
+ * several items from Minecraft. It will also <b>override an existing craft remainder</b>, if the given item has one defined in code.</p>
+ *
+ * <p>If the item is from your mod, I suggest registering the craft remainder as an
  * item property instead (see {@link Item.Properties#craftRemainder}).</p>
  *
  * <p>Used by the following workstations:</p>

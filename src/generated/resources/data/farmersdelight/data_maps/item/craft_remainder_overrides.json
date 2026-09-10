@@ -1,5 +1,8 @@
 {
   "values": {
+    "farmersdelight:milk_bottle": {
+      "remainder_item": "minecraft:bucket"
+    },
     "minecraft:axolotl_bucket": {
       "remainder_item": "minecraft:bucket"
     },

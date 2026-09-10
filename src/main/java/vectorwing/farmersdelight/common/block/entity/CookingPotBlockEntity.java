@@ -301,13 +301,11 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 
 		for (int i = 0; i < MEAL_DISPLAY_SLOT; ++i) {
 			ItemStack slotStack = inventory.getStackInSlot(i);
-			if (slotStack.hasCraftingRemainingItem()) {
+			CraftRemainderOverride override = slotStack.getItem().builtInRegistryHolder().getData(ModDataMaps.CRAFT_REMAINDER_OVERRIDES);
+			if (override != null) {
+				ejectIngredientRemainder(override.remainderItem().getDefaultInstance());
+			} else if (slotStack.hasCraftingRemainingItem()) {
 				ejectIngredientRemainder(slotStack.getCraftingRemainingItem());
-			} else {
-				CraftRemainderOverride override = slotStack.getItem().builtInRegistryHolder().getData(ModDataMaps.CRAFT_REMAINDER_OVERRIDES);
-				if (override != null) {
-					ejectIngredientRemainder(override.remainderItem().getDefaultInstance());
-				}
 			}
 			if (!slotStack.isEmpty())
 				slotStack.shrink(1);

@@ -17,6 +17,7 @@
 #### Datamaps
 - `mushroom_colonies`: Defines that a given mushroom should turn into a given Mushroom Colony if planted on Rich Soil;
 - `craft_remainder_overrides`: Defines that an item should leave a remainder when used in crafting:
+  - As the name suggests, entries in this datamap will **override an item's existing craft remainder**, if it has one;
   - Used by the Cooking Pot to create remainders from ingredients, if they don't have one defined;
   - If the item belongs to your mod, you should prefer using Item.Properties instead;
 
