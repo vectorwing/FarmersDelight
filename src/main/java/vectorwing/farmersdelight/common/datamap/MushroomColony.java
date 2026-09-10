@@ -5,6 +5,13 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
 
+/**
+ * <p>Datamap for defining a mushroom capable of becoming a Mushroom Colony.</p>
+ *
+ * <p>Used by Rich Soil to convert the mushroom into the specified colony on a random tick, if planted on it.</p>
+ *
+ * @param colonyBlock The block representing the Mushroom Colony
+ */
 public record MushroomColony(Block colonyBlock)
 {
 	public static final Codec<MushroomColony> MUSHROOM_COLONY_CODEC = BuiltInRegistries.BLOCK.byNameCodec()
