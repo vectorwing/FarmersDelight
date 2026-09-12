@@ -292,7 +292,8 @@ public class ModItems
 		() -> new Item(foodItem(FoodValues.TOMATO)));
 	public static final Supplier<Item> ONION = registerWithTab("onion",
 		() -> new ItemNameBlockItem(ModBlocks.ONION_CROP.get(), foodItem(FoodValues.ONION)));
-	public static final Supplier<Item> RICE_PANICLE = registerWithTab("rice_panicle", () -> new Item(basicItem()));
+	public static final Supplier<Item> RICE_PANICLE = registerWithTab("rice_panicle",
+		() -> new Item(basicItem()));
 	public static final Supplier<Item> RICE = registerWithTab("rice",
 		() -> new RiceItem(ModBlocks.RICE_CROP.get(), basicItem()));
 	public static final Supplier<Item> CABBAGE_SEEDS = registerWithTab("cabbage_seeds", () -> new ItemNameBlockItem(ModBlocks.CABBAGE_CROP.get(), basicItem()));
@@ -309,6 +310,7 @@ public class ModItems
 			}
 		}
 
+		// TODO: Verify if there are any consequences to removing this (mod interactions etc).
 		@Override
 		public void removeFromBlockToItemMap(Map<Block, Item> blockToItemMap, Item itemIn) {
 			super.removeFromBlockToItemMap(blockToItemMap, itemIn);
@@ -335,7 +337,7 @@ public class ModItems
 	public static final Supplier<Item> MELON_JUICE = registerWithTab("melon_juice",
 		() -> new MelonJuiceItem(drinkItem()));
 	public static final Supplier<Item> TOMATO_SAUCE = registerWithTab("tomato_sauce",
-		() -> new ConsumableItem(foodItem(FoodValues.TOMATO_SAUCE).craftRemainder(Items.BOWL)));
+		() -> new Item(foodItem(FoodValues.TOMATO_SAUCE).craftRemainder(Items.BOWL)));
 	public static final Supplier<Item> WHEAT_DOUGH = registerWithTab("wheat_dough",
 		() -> new Item(foodItem(FoodValues.WHEAT_DOUGH)));
 	public static final Supplier<Item> RAW_PASTA = registerWithTab("raw_pasta",
@@ -383,15 +385,15 @@ public class ModItems
 	public static final Supplier<Item> CHOCOLATE_PIE = registerWithTab("chocolate_pie",
 		() -> new PlaceableItem(ModBlocks.CHOCOLATE_PIE.get(), basicItem()));
 	public static final Supplier<Item> CAKE_SLICE = registerWithTab("cake_slice",
-		() -> new ConsumableItem(foodItem(FoodValues.CAKE_SLICE)));
+		() -> new FoodItem(foodItem(FoodValues.CAKE_SLICE)));
 	public static final Supplier<Item> APPLE_PIE_SLICE = registerWithTab("apple_pie_slice",
-		() -> new ConsumableItem(foodItem(FoodValues.PIE_SLICE)));
+		() -> new FoodItem(foodItem(FoodValues.PIE_SLICE)));
 	public static final Supplier<Item> SWEET_BERRY_CHEESECAKE_SLICE = registerWithTab("sweet_berry_cheesecake_slice",
-		() -> new ConsumableItem(foodItem(FoodValues.PIE_SLICE)));
+		() -> new FoodItem(foodItem(FoodValues.PIE_SLICE)));
 	public static final Supplier<Item> CHOCOLATE_PIE_SLICE = registerWithTab("chocolate_pie_slice",
-		() -> new ConsumableItem(foodItem(FoodValues.PIE_SLICE)));
+		() -> new FoodItem(foodItem(FoodValues.PIE_SLICE)));
 	public static final Supplier<Item> PUMPKIN_PIE_SLICE = registerWithTab("pumpkin_pie_slice",
-		() -> new ConsumableItem(foodItem(FoodValues.PIE_SLICE)));
+		() -> new FoodItem(foodItem(FoodValues.PIE_SLICE)));
 	public static final Supplier<Item> SWEET_BERRY_COOKIE = registerWithTab("sweet_berry_cookie",
 		() -> new Item(foodItem(FoodValues.COOKIES)));
 	public static final Supplier<Item> HONEY_COOKIE = registerWithTab("honey_cookie",
@@ -399,15 +401,15 @@ public class ModItems
 	public static final Supplier<Item> MELON_POPSICLE = registerWithTab("melon_popsicle",
 		() -> new PopsicleItem(foodItem(FoodValues.POPSICLE)));
 	public static final Supplier<Item> GLOW_BERRY_CUSTARD = registerWithTab("glow_berry_custard",
-		() -> new ConsumableItem(foodItem(FoodValues.GLOW_BERRY_CUSTARD).craftRemainder(Items.GLASS_BOTTLE).stacksTo(16)));
+		() -> new FoodItem(foodItem(FoodValues.GLOW_BERRY_CUSTARD).craftRemainder(Items.GLASS_BOTTLE).stacksTo(16)));
 	public static final Supplier<Item> FRUIT_SALAD = registerWithTab("fruit_salad",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.FRUIT_SALAD)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.FRUIT_SALAD)));
 
 	// Basic Meals
 	public static final Supplier<Item> MIXED_SALAD = registerWithTab("mixed_salad",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.MIXED_SALAD)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.MIXED_SALAD)));
 	public static final Supplier<Item> NETHER_SALAD = registerWithTab("nether_salad",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.NETHER_SALAD), false));
+		() -> new FoodItem(bowlFoodItem(FoodValues.NETHER_SALAD), false));
 
 	public static final Supplier<Item> MEAT_SKEWER = registerWithTab("meat_skewer",
 		() -> new HandCookedItem(foodItem(FoodValues.RAW_SKEWER)));
@@ -445,75 +447,75 @@ public class ModItems
 
 	// Soups and Stews
 	public static final Supplier<Item> COOKED_RICE = registerWithTab("cooked_rice",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.COOKED_RICE)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.COOKED_RICE)));
 	public static final Supplier<Item> BONE_BROTH = registerWithTab("bone_broth",
-		() -> new DrinkableItem(bowlFoodItem(FoodValues.BONE_BROTH)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.BONE_BROTH)));
 	public static final Supplier<Item> BEEF_STEW = registerWithTab("beef_stew",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.BEEF_STEW)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.BEEF_STEW)));
 	public static final Supplier<Item> CHICKEN_SOUP = registerWithTab("chicken_soup",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.CHICKEN_SOUP)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.CHICKEN_SOUP)));
 	public static final Supplier<Item> VEGETABLE_SOUP = registerWithTab("vegetable_soup",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.VEGETABLE_SOUP)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.VEGETABLE_SOUP)));
 	public static final Supplier<Item> FISH_STEW = registerWithTab("fish_stew",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.FISH_STEW)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.FISH_STEW)));
 	public static final Supplier<Item> FRIED_RICE = registerWithTab("fried_rice",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.FRIED_RICE)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.FRIED_RICE)));
 	public static final Supplier<Item> PUMPKIN_SOUP = registerWithTab("pumpkin_soup",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.PUMPKIN_SOUP)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.PUMPKIN_SOUP)));
 	public static final Supplier<Item> BAKED_COD_STEW = registerWithTab("baked_cod_stew",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.BAKED_COD_STEW)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.BAKED_COD_STEW)));
 	public static final Supplier<Item> NOODLE_SOUP = registerWithTab("noodle_soup",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.NOODLE_SOUP)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.NOODLE_SOUP)));
 	public static final Supplier<Item> ONION_SOUP = registerWithTab("onion_soup",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.ONION_SOUP)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.ONION_SOUP)));
 
 	// Plated Meals
 	public static final Supplier<Item> BACON_AND_EGGS = registerWithTab("bacon_and_eggs",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.BACON_AND_EGGS)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.BACON_AND_EGGS)));
 	public static final Supplier<Item> PASTA_WITH_MEATBALLS = registerWithTab("pasta_with_meatballs",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.PASTA_WITH_MEATBALLS)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.PASTA_WITH_MEATBALLS)));
 	public static final Supplier<Item> PASTA_WITH_MUTTON_CHOP = registerWithTab("pasta_with_mutton_chop",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.PASTA_WITH_MUTTON_CHOP)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.PASTA_WITH_MUTTON_CHOP)));
 	public static final Supplier<Item> MUSHROOM_RICE = registerWithTab("mushroom_rice",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.MUSHROOM_RICE)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.MUSHROOM_RICE)));
 	public static final Supplier<Item> ROASTED_MUTTON_CHOPS = registerWithTab("roasted_mutton_chops",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.ROASTED_MUTTON_CHOPS)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.ROASTED_MUTTON_CHOPS)));
 	public static final Supplier<Item> VEGETABLE_NOODLES = registerWithTab("vegetable_noodles",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.VEGETABLE_NOODLES)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.VEGETABLE_NOODLES)));
 	public static final Supplier<Item> STEAK_AND_POTATOES = registerWithTab("steak_and_potatoes",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.STEAK_AND_POTATOES)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.STEAK_AND_POTATOES)));
 	public static final Supplier<Item> RATATOUILLE = registerWithTab("ratatouille",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.RATATOUILLE)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.RATATOUILLE)));
 	public static final Supplier<Item> SQUID_INK_PASTA = registerWithTab("squid_ink_pasta",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.SQUID_INK_PASTA)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.SQUID_INK_PASTA)));
 	public static final Supplier<Item> GRILLED_SALMON = registerWithTab("grilled_salmon",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.GRILLED_SALMON)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.GRILLED_SALMON)));
 
 	// Feasts
 	public static final Supplier<Item> ROAST_CHICKEN_BLOCK = registerWithTab("roast_chicken_block",
 		() -> new PlaceableItem(ModBlocks.ROAST_CHICKEN_BLOCK.get(), basicItem().stacksTo(1)));
 	public static final Supplier<Item> ROAST_CHICKEN = registerWithTab("roast_chicken",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.ROAST_CHICKEN)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.ROAST_CHICKEN)));
 
 	public static final Supplier<Item> STUFFED_PUMPKIN_BLOCK = registerWithTab("stuffed_pumpkin_block",
 		() -> new PlaceableItem(ModBlocks.STUFFED_PUMPKIN_BLOCK.get(), basicItem().stacksTo(1)));
 	public static final Supplier<Item> STUFFED_PUMPKIN = registerWithTab("stuffed_pumpkin",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.STUFFED_PUMPKIN)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.STUFFED_PUMPKIN)));
 
 	public static final Supplier<Item> HONEY_GLAZED_HAM_BLOCK = registerWithTab("honey_glazed_ham_block",
 		() -> new PlaceableItem(ModBlocks.HONEY_GLAZED_HAM_BLOCK.get(), basicItem().stacksTo(1)));
 	public static final Supplier<Item> HONEY_GLAZED_HAM = registerWithTab("honey_glazed_ham",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.HONEY_GLAZED_HAM)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.HONEY_GLAZED_HAM)));
 
 	public static final Supplier<Item> SHEPHERDS_PIE_BLOCK = registerWithTab("shepherds_pie_block",
 		() -> new PlaceableItem(ModBlocks.SHEPHERDS_PIE_BLOCK.get(), basicItem().stacksTo(1)));
 	public static final Supplier<Item> SHEPHERDS_PIE = registerWithTab("shepherds_pie",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.SHEPHERDS_PIE)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.SHEPHERDS_PIE)));
 
 	public static final Supplier<Item> GLEAMING_SALAD_BLOCK = registerWithTab("gleaming_salad_block",
 		() -> new PlaceableItem(ModBlocks.GLEAMING_SALAD_BLOCK.get(), basicItem().stacksTo(1)));
 	public static final Supplier<Item> GLEAMING_SALAD = registerWithTab("gleaming_salad",
-		() -> new ConsumableItem(bowlFoodItem(FoodValues.GLEAMING_SALAD)));
+		() -> new FoodItem(bowlFoodItem(FoodValues.GLEAMING_SALAD)));
 
 	public static final Supplier<Item> RICE_ROLL_MEDLEY_BLOCK = registerWithTab("rice_roll_medley_block",
 		() -> new PlaceableItem(ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get(), basicItem().stacksTo(1)));
