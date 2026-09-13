@@ -23,6 +23,11 @@
 
 ### Updates
 - Tweaked the Egg Sandwich texture slightly;
+- Some foods were slightly rebalanced:
+  - Pie slices are more nutritious, except for Pumpkin Pie Slice, to roughly match the full pie;
+  - Some FD foods now define their saturation directly. This means their values may round upward or downward a bit;
+  - Most sweets can now be eaten even when not hungry;
+  - Grilled Salmon was nerfed to "tier 2" (3 minutes of Nourishment and middling meal stats);
 
 ### Fixes
 - Fix broken Skillet interactions when swapping slots while cooking an item;

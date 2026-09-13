@@ -393,7 +393,7 @@ public class ModItems
 	public static final Supplier<Item> CHOCOLATE_PIE_SLICE = registerWithTab("chocolate_pie_slice",
 		() -> new FoodItem(foodItem(FoodValues.PIE_SLICE)));
 	public static final Supplier<Item> PUMPKIN_PIE_SLICE = registerWithTab("pumpkin_pie_slice",
-		() -> new FoodItem(foodItem(FoodValues.PIE_SLICE)));
+		() -> new FoodItem(foodItem(FoodValues.PUMPKIN_PIE_SLICE)));
 	public static final Supplier<Item> SWEET_BERRY_COOKIE = registerWithTab("sweet_berry_cookie",
 		() -> new Item(foodItem(FoodValues.COOKIES)));
 	public static final Supplier<Item> HONEY_COOKIE = registerWithTab("honey_cookie",

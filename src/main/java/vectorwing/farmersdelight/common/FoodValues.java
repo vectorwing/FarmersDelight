@@ -34,25 +34,27 @@ public class FoodValues
 
 	// Basic Foods
 	public static final FoodProperties FRIED_EGG =
-		food().nutrition(4).saturationModifier(0.4f).build();
+		food().nutrition(4).saturation(3.5F).build();
 	public static final FoodProperties TOMATO_SAUCE =
-		food().nutrition(4).saturationModifier(0.4f).usingConvertsTo(Items.BOWL).build();
+		food().nutrition(4).saturation(3.5F).usingConvertsTo(Items.BOWL).build();
 	public static final FoodProperties WHEAT_DOUGH =
-		unsafeFood().nutrition(2).saturationModifier(0.3f).build();
+		unsafeFood().nutrition(2).saturation(1.5F).build();
 	public static final FoodProperties RAW_PASTA =
-		unsafeFood().nutrition(2).saturationModifier(0.3F).build();
+		unsafeFood().nutrition(2).saturation(1.5F).build();
 	public static final FoodProperties PIE_CRUST =
-		food().nutrition(2).saturationModifier(0.2f).build();
+		food().nutrition(2).saturation(1).build();
 	public static final FoodProperties PUMPKIN_SLICE =
-		food().nutrition(3).saturationModifier(0.3f).build();
+		food().nutrition(3).saturation(2).build();
 	public static final FoodProperties CABBAGE_LEAF =
 		food().nutrition(2).saturation(1.0F).fast().build();
+
+	// Meat cuts (modifiers based on vanilla items)
 	public static final FoodProperties MINCED_BEEF =
 		food().nutrition(2).saturationModifier(0.3f).fast().build();
 	public static final FoodProperties BEEF_PATTY =
 		food().nutrition(4).saturationModifier(0.8f).fast().build();
 	public static final FoodProperties CHICKEN_CUTS =
-		unsafeFood().nutrition(1).saturation(0.5F).fast().build();
+		unsafeFood().nutrition(1).saturationModifier(0.15F).fast().build();
 	public static final FoodProperties COOKED_CHICKEN_CUTS =
 		food().nutrition(3).saturationModifier(0.6f).fast().build();
 	public static final FoodProperties BACON =
@@ -78,20 +80,23 @@ public class FoodValues
 
 	// Sweets
 	public static final FoodProperties POPSICLE =
-		food().nutrition(3).saturationModifier(0.2f).fast().alwaysEdible().build();
+		food().nutrition(3).saturation(1.5F).fast().alwaysEdible().build();
 	public static final FoodProperties COOKIES =
-		food().nutrition(2).saturationModifier(0.1f).fast().build();
+		food().nutrition(2).saturationModifier(0.1f).alwaysEdible().fast().build();
 	public static final FoodProperties CAKE_SLICE =
-		food().nutrition(2).saturationModifier(0.1f).fast()
+		food().nutrition(3).saturation(3).alwaysEdible().fast()
 			.effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 400, 0, false, false), 1.0F).build();
 	public static final FoodProperties PIE_SLICE =
-		food().nutrition(3).saturationModifier(0.3f).fast()
+		food().nutrition(5).saturation(5).alwaysEdible().fast()
+			.effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600, 0, false, false), 1.0F).build();
+	public static final FoodProperties PUMPKIN_PIE_SLICE =
+		food().nutrition(3).saturation(2).alwaysEdible().fast()
 			.effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600, 0, false, false), 1.0F).build();
 	public static final FoodProperties FRUIT_SALAD =
-		food().nutrition(6).saturationModifier(0.6f).usingConvertsTo(Items.BOWL)
+		food().nutrition(8).saturation(8).usingConvertsTo(Items.BOWL)
 			.effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 100, 0), 1.0F).build();
 	public static final FoodProperties GLOW_BERRY_CUSTARD =
-		food().nutrition(7).saturationModifier(0.6f).alwaysEdible().usingConvertsTo(Items.GLASS_BOTTLE)
+		food().nutrition(8).saturation(9).alwaysEdible().usingConvertsTo(Items.GLASS_BOTTLE)
 			.effect(() -> new MobEffectInstance(MobEffects.GLOWING, 100, 0), 1.0F).build();
 
 	// Snacks
@@ -124,7 +129,7 @@ public class FoodValues
 	public static final FoodProperties KELP_ROLL_SLICE =
 		food().nutrition(6).saturation(6).fast().build();
 
-	
+	// Salads
 	public static final FoodProperties MIXED_SALAD =
 		food().nutrition(6).saturationModifier(0.6f).usingConvertsTo(Items.BOWL)
 			.effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 100, 0), 1.0F).build();
@@ -223,11 +228,17 @@ public class FoodValues
 			return this;
 		}
 
+		/**
+		 * Defines the saturation value directly.
+		 */
 		public FoodBuilder saturation(float saturation) {
 			this.saturation = saturation;
 			return this;
 		}
 
+		/**
+		 * Calculates saturation by multiplying the nutrition value (nutrition * modifier * 2).
+		 */
 		public FoodBuilder saturationModifier(float saturationModifier) {
 			this.saturation = FoodConstants.saturationByModifier(this.nutrition, saturationModifier);
 			return this;
