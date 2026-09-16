@@ -30,7 +30,7 @@ public class FoodValues
 	// Drinks (mostly for effects)
 	public static final FoodProperties APPLE_CIDER =
 		food().alwaysEdible()
-			.effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 1200, 0), 1.0F).build();
+			.effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, MEDIUM_DURATION, 0), 1.0F).build();
 
 	// Basic Foods
 	public static final FoodProperties FRIED_EGG =
@@ -93,8 +93,7 @@ public class FoodValues
 		food().nutrition(3).saturation(2).alwaysEdible().fast()
 			.effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600, 0, false, false), 1.0F).build();
 	public static final FoodProperties FRUIT_SALAD =
-		food().nutrition(8).saturation(8).usingConvertsTo(Items.BOWL)
-			.effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 100, 0), 1.0F).build();
+		food().nutrition(8).saturation(10).usingConvertsTo(Items.BOWL).build();
 	public static final FoodProperties GLOW_BERRY_CUSTARD =
 		food().nutrition(8).saturation(9).alwaysEdible().usingConvertsTo(Items.GLASS_BOTTLE)
 			.effect(() -> new MobEffectInstance(MobEffects.GLOWING, 100, 0), 1.0F).build();
@@ -131,8 +130,7 @@ public class FoodValues
 
 	// Salads
 	public static final FoodProperties MIXED_SALAD =
-		food().nutrition(6).saturationModifier(0.6f).usingConvertsTo(Items.BOWL)
-			.effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 100, 0), 1.0F).build();
+		food().nutrition(8).saturation(10).usingConvertsTo(Items.BOWL).build();
 	public static final FoodProperties NETHER_SALAD =
 		food().nutrition(5).saturationModifier(0.4f).usingConvertsTo(Items.BOWL)
 			.effect(() -> new MobEffectInstance(MobEffects.CONFUSION, 240, 0), 0.3F).build();
