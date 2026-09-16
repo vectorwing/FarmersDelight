@@ -1,13 +1,16 @@
 package vectorwing.farmersdelight.common.item;
 
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import vectorwing.farmersdelight.common.utility.TextUtils;
 
-public class MelonJuiceItem extends DrinkableItem
+public class MelonJuiceItem extends DrinkItem
 {
 	public MelonJuiceItem(Properties properties) {
-		super(properties, false, true);
+		super(properties, TextUtils.tooltip("melon_juice").withStyle(ChatFormatting.BLUE));
 	}
 
 	@Override

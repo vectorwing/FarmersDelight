@@ -331,11 +331,11 @@ public class ModItems
 	public static final Supplier<Item> MILK_BOTTLE = registerWithTab("milk_bottle",
 		() -> new MilkBottleItem(drinkItem()));
 	public static final Supplier<Item> HOT_COCOA = registerWithTab("hot_cocoa",
-		() -> new HotCocoaItem(drinkItem()));
+		() -> new HotCocoaItem(drinkItem().food(FoodValues.HOT_COCOA)));
 	public static final Supplier<Item> APPLE_CIDER = registerWithTab("apple_cider",
-		() -> new DrinkableItem(drinkItem().food(FoodValues.APPLE_CIDER), true, false));
+		() -> new DrinkItem(drinkItem().food(FoodValues.APPLE_CIDER)));
 	public static final Supplier<Item> MELON_JUICE = registerWithTab("melon_juice",
-		() -> new MelonJuiceItem(drinkItem()));
+		() -> new MelonJuiceItem(drinkItem().food(FoodValues.MELON_JUICE)));
 	public static final Supplier<Item> TOMATO_SAUCE = registerWithTab("tomato_sauce",
 		() -> new Item(foodItem(FoodValues.TOMATO_SAUCE).craftRemainder(Items.BOWL)));
 	public static final Supplier<Item> WHEAT_DOUGH = registerWithTab("wheat_dough",

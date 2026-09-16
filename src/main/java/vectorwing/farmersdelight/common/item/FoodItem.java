@@ -22,8 +22,8 @@ import java.util.List;
 public class FoodItem extends Item
 {
 	@Nullable
-	private final MutableComponent customTooltip;
-	private final boolean isEffectSecret;
+	protected MutableComponent customTooltip;
+	protected boolean isEffectSecret;
 
 	public FoodItem(Properties properties) {
 		super(properties);

@@ -28,8 +28,12 @@ public class FoodValues
 	public static final FoodProperties ONION = food().nutrition(2).saturation(1).build();
 
 	// Drinks (mostly for effects)
+	public static final FoodProperties MELON_JUICE =
+		food().nutrition(1).saturation(4).alwaysEdible().build();
+	public static final FoodProperties HOT_COCOA =
+		food().nutrition(3).saturation(6).alwaysEdible().build();
 	public static final FoodProperties APPLE_CIDER =
-		food().alwaysEdible()
+		food().nutrition(1).saturation(4).alwaysEdible()
 			.effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, MEDIUM_DURATION, 0), 1.0F).build();
 
 	// Basic Foods
