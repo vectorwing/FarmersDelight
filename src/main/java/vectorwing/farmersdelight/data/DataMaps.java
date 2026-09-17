@@ -5,6 +5,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.DataMapProvider;
@@ -12,6 +13,7 @@ import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 import org.jetbrains.annotations.NotNull;
+import vectorwing.farmersdelight.common.datamap.CraftRemainderOverride;
 import vectorwing.farmersdelight.common.datamap.MushroomColony;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModDataMaps;
@@ -19,7 +21,6 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")
 public class DataMaps extends DataMapProvider
@@ -30,9 +31,32 @@ public class DataMaps extends DataMapProvider
 
 	@Override
 	protected void gather(HolderLookup.@NotNull Provider provider) {
+		dataMapsFromMinecraft();
+		dataMapsFromFD();
+	}
+
+	private void dataMapsFromFD() {
 		builder(ModDataMaps.MUSHROOM_COLONIES)
 			.add(block(Blocks.BROWN_MUSHROOM), new MushroomColony(ModBlocks.BROWN_MUSHROOM_COLONY.get()), false)
 			.add(block(Blocks.RED_MUSHROOM), new MushroomColony(ModBlocks.RED_MUSHROOM_COLONY.get()), false);
+		builder(ModDataMaps.CRAFT_REMAINDER_OVERRIDES)
+			.add(item(Items.POWDER_SNOW_BUCKET), new CraftRemainderOverride(Items.BUCKET), false)
+			.add(item(Items.AXOLOTL_BUCKET), new CraftRemainderOverride(Items.BUCKET), false)
+			.add(item(Items.COD_BUCKET), new CraftRemainderOverride(Items.BUCKET), false)
+			.add(item(Items.PUFFERFISH_BUCKET), new CraftRemainderOverride(Items.BUCKET), false)
+			.add(item(Items.SALMON_BUCKET), new CraftRemainderOverride(Items.BUCKET), false)
+			.add(item(Items.TROPICAL_FISH_BUCKET), new CraftRemainderOverride(Items.BUCKET), false)
+			.add(item(Items.SUSPICIOUS_STEW), new CraftRemainderOverride(Items.BOWL), false)
+			.add(item(Items.MUSHROOM_STEW), new CraftRemainderOverride(Items.BOWL), false)
+			.add(item(Items.RABBIT_STEW), new CraftRemainderOverride(Items.BOWL), false)
+			.add(item(Items.BEETROOT_SOUP), new CraftRemainderOverride(Items.BOWL), false)
+			.add(item(Items.POTION), new CraftRemainderOverride(Items.GLASS_BOTTLE), false)
+			.add(item(Items.SPLASH_POTION), new CraftRemainderOverride(Items.GLASS_BOTTLE), false)
+			.add(item(Items.LINGERING_POTION), new CraftRemainderOverride(Items.GLASS_BOTTLE), false)
+			.add(item(Items.EXPERIENCE_BOTTLE), new CraftRemainderOverride(Items.GLASS_BOTTLE), false);
+	}
+
+	private void dataMapsFromMinecraft() {
 		builder(NeoForgeDataMaps.FURNACE_FUELS)
 			// 0.5 items
 			.add(item(ModItems.HALF_TATAMI_MAT.get()), new FurnaceFuel(100), false)

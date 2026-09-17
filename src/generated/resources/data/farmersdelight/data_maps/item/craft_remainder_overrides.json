@@ -1,0 +1,46 @@
+{
+  "values": {
+    "minecraft:axolotl_bucket": {
+      "remainder_item": "minecraft:bucket"
+    },
+    "minecraft:beetroot_soup": {
+      "remainder_item": "minecraft:bowl"
+    },
+    "minecraft:cod_bucket": {
+      "remainder_item": "minecraft:bucket"
+    },
+    "minecraft:experience_bottle": {
+      "remainder_item": "minecraft:glass_bottle"
+    },
+    "minecraft:lingering_potion": {
+      "remainder_item": "minecraft:glass_bottle"
+    },
+    "minecraft:mushroom_stew": {
+      "remainder_item": "minecraft:bowl"
+    },
+    "minecraft:potion": {
+      "remainder_item": "minecraft:glass_bottle"
+    },
+    "minecraft:powder_snow_bucket": {
+      "remainder_item": "minecraft:bucket"
+    },
+    "minecraft:pufferfish_bucket": {
+      "remainder_item": "minecraft:bucket"
+    },
+    "minecraft:rabbit_stew": {
+      "remainder_item": "minecraft:bowl"
+    },
+    "minecraft:salmon_bucket": {
+      "remainder_item": "minecraft:bucket"
+    },
+    "minecraft:splash_potion": {
+      "remainder_item": "minecraft:glass_bottle"
+    },
+    "minecraft:suspicious_stew": {
+      "remainder_item": "minecraft:bowl"
+    },
+    "minecraft:tropical_fish_bucket": {
+      "remainder_item": "minecraft:bucket"
+    }
+  }
+}

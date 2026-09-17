@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "farmersdelight:block/egg_carton"
+    },
+    "type=double": {
+      "model": "farmersdelight:block/egg_carton_double"
+    },
+    "type=top": {
+      "model": "farmersdelight:block/egg_carton_top"
+    }
+  }
+}

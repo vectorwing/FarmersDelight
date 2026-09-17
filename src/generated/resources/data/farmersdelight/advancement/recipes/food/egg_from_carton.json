@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_egg_carton": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:egg_carton"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "farmersdelight:egg_from_carton"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_egg_carton"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "farmersdelight:egg_from_carton"
+    ]
+  }
+}

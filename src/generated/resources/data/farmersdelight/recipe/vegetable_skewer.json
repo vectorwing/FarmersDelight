@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:stick"
+    },
+    [
+      {
+        "tag": "c:foods/vegetable"
+      },
+      {
+        "tag": "c:mushrooms"
+      }
+    ],
+    [
+      {
+        "tag": "c:foods/vegetable"
+      },
+      {
+        "tag": "c:mushrooms"
+      }
+    ]
+  ],
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:vegetable_skewer"
+  }
+}

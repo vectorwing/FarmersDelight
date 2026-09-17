@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "farmersdelight:block/glow_berries_bag_bottom",
+    "east": "farmersdelight:block/glow_berries_bag_side",
+    "north": "farmersdelight:block/glow_berries_bag_side_tied",
+    "particle": "farmersdelight:block/glow_berries_bag_top",
+    "south": "farmersdelight:block/glow_berries_bag_side_tied",
+    "up": "farmersdelight:block/glow_berries_bag_top",
+    "west": "farmersdelight:block/glow_berries_bag_side"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:stick"
+    },
+    [
+      {
+        "tag": "c:foods/raw_meat"
+      },
+      {
+        "tag": "c:foods/safe_raw_fish"
+      }
+    ],
+    [
+      {
+        "tag": "c:foods/raw_meat"
+      },
+      {
+        "tag": "c:foods/safe_raw_fish"
+      }
+    ]
+  ],
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:meat_skewer"
+  }
+}

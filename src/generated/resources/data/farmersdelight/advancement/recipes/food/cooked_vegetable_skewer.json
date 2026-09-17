@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "cooked_vegetable_skewer": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:vegetable_skewer"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "farmersdelight:cooked_vegetable_skewer"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "cooked_vegetable_skewer"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "farmersdelight:cooked_vegetable_skewer"
+    ]
+  }
+}

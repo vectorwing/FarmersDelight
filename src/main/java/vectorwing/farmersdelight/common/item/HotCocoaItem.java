@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight.common.item;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -9,14 +10,15 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.EffectCures;
+import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class HotCocoaItem extends DrinkableItem
+public class HotCocoaItem extends DrinkItem
 {
 	public HotCocoaItem(Item.Properties properties) {
-		super(properties, false, true);
+		super(properties, TextUtils.tooltip("hot_cocoa").withStyle(ChatFormatting.BLUE));
 	}
 
 	@Override

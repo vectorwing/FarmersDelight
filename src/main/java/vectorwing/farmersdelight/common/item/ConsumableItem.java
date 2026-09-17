@@ -20,8 +20,8 @@ import java.util.List;
 
 public class ConsumableItem extends Item
 {
-	private final boolean hasFoodEffectTooltip;
-	private final boolean hasCustomTooltip;
+	protected final boolean hasFoodEffectTooltip;
+	protected final boolean hasCustomTooltip;
 
 	/**
 	 * Items that can be consumed by an entity.

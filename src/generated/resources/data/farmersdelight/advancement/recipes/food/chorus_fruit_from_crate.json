@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chorus_fruit_crate": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:chorus_fruit_crate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "farmersdelight:chorus_fruit_from_crate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_chorus_fruit_crate"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "farmersdelight:chorus_fruit_from_crate"
+    ]
+  }
+}

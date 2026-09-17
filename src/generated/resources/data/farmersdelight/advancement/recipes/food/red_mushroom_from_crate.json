@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_red_mushroom_crate": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:red_mushroom_crate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "farmersdelight:red_mushroom_from_crate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_red_mushroom_crate"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "farmersdelight:red_mushroom_from_crate"
+    ]
+  }
+}

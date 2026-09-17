@@ -1,5 +1,5 @@
 {
-  "type": "neoforge:add_table",
+  "type": "farmersdelight:add_loot_table",
   "conditions": [
     {
       "condition": "neoforge:loot_table_id",

@@ -21,6 +21,7 @@ public class CommonModBusEvents
 	@SubscribeEvent
 	public static void registerDataMapTypes(RegisterDataMapTypesEvent event) {
 		event.register(ModDataMaps.MUSHROOM_COLONIES);
+		event.register(ModDataMaps.CRAFT_REMAINDER_OVERRIDES);
 	}
 
 	@SubscribeEvent
