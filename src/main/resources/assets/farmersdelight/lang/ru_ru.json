@@ -34,9 +34,19 @@
   "block.farmersdelight.cabbage_crate": "Ящик с капустой",
   "block.farmersdelight.tomato_crate": "Ящик с томатами",
   "block.farmersdelight.onion_crate": "Ящик с луком",
+  "block.farmersdelight.apple_crate": "Ящик с яблоками",
+  "block.farmersdelight.golden_apple_crate": "Ящик с золотыми яблоками",
+  "block.farmersdelight.golden_carrot_crate": "Ящик с золотой морковью",
+  "block.farmersdelight.chorus_fruit_crate": "Ящик с плодами хоруса",
+  "block.farmersdelight.brown_mushroom_crate": "Ящик с коричневыми грибами",
+  "block.farmersdelight.red_mushroom_crate": "Ящик с красными грибами",
+  "block.farmersdelight.egg_carton": "Упаковка яиц",
+  "block.farmersdelight.straw_bale": "Тюк соломы",
   "block.farmersdelight.rice_bale": "Рисовый тюк",
   "block.farmersdelight.rice_bag": "Мешок риса",
-  "block.farmersdelight.straw_bale": "Тюк соломы",
+  "block.farmersdelight.sweet_berries_bag": "Мешок сладких ягод",
+  "block.farmersdelight.glow_berries_bag": "Мешок светящихся ягод",
+  "block.farmersdelight.cocoa_beans_bag": "Мешок какао-бобов",
 
   "block.farmersdelight.canvas_sign": "Холщовая табличка",
   "block.farmersdelight.white_canvas_sign": "Белая холщовая табличка",
@@ -145,7 +155,7 @@
 
   "item.farmersdelight.straw": "Солома",
   "item.farmersdelight.canvas": "Холст",
-  "item.farmersdelight.tree_bark": "Кора дерева",
+  "item.farmersdelight.tree_bark": "Древесная кора",
 
   "item.farmersdelight.tomato_sauce": "Томатный соус",
   "item.farmersdelight.fried_egg": "Яичница",
@@ -192,7 +202,10 @@
   "item.farmersdelight.diamond_knife": "Алмазный нож",
   "item.farmersdelight.netherite_knife": "Незеритовый нож",
 
-  "item.farmersdelight.barbecue_stick": "Барбекю на палочке",
+  "item.farmersdelight.meat_skewer": "Сырой мясной шашлык",
+  "item.farmersdelight.cooked_meat_skewer": "Жареный мясной шашлык",
+  "item.farmersdelight.vegetable_skewer": "Сырой овощной шашлык",
+  "item.farmersdelight.cooked_vegetable_skewer": "Жареный овощной шашлык",
   "item.farmersdelight.egg_sandwich": "Сэндвич с яйцом",
   "item.farmersdelight.chicken_sandwich": "Сэндвич с курицей",
   "item.farmersdelight.hamburger": "Гамбургер",
@@ -231,8 +244,8 @@
   "item.farmersdelight.grilled_salmon": "Лосось на гриле",
   "item.farmersdelight.mushroom_rice": "Рис с грибами",
 
-  "block.farmersdelight.roast_chicken_block": "Обжареная курица",
-  "item.farmersdelight.roast_chicken": "Тарелка обжареной курицы",
+  "block.farmersdelight.roast_chicken_block": "Обжаренная курица",
+  "item.farmersdelight.roast_chicken": "Тарелка обжаренной курицы",
   "block.farmersdelight.stuffed_pumpkin_block": "Фаршированная тыква",
   "item.farmersdelight.stuffed_pumpkin": "Тарелка фаршированной тыквы",
   "block.farmersdelight.honey_glazed_ham_block": "Ветчина в медовой глазури",
@@ -486,7 +499,7 @@
   "farmersdelight.configuration.richSoilBoostChance": "Шанс бонуса плодородной почвы",
   "farmersdelight.configuration.richSoilBoostChance.tooltip": "Шанс (в десятичных долях) того, что плодородная почва даст бонус костной муки культуре, посаженной на ней. Установите 0.0, чтобы отключить.",
   "farmersdelight.configuration.enableTomatoVineClimbingTaggedRopes": "Томатная лоза вьётся по верёвкам в теге",
-  "farmersdelight.configuration.enableTomatoVineClimbingTaggedRopes.tooltip": "Если включено, томатные культуры смогут виться по любой верёвке с тегом farmersdelight:ropes. Если отключено, лоза будет ограничена только верёвкой из этого мода.\n\n§lВнимание: это преобразует такие блоки в блок, указанный в defaultTomatoVineRope.§r",
+  "farmersdelight.configuration.enableTomatoVineClimbingTaggedRopes.tooltip": "Если включено, томатные культуры смогут виться по любой верёвке с тегом farmersdelight:ropes. Если отключено, лоза будет ограничена только верёвкой из этого мода.\n\n§lВнимание: это преобразует такие блоки в блок, указанный в «Верёвке для томатной лозы по умолчанию».§r",
   "farmersdelight.configuration.defaultTomatoVineRope": "Верёвка для томатной лозы по умолчанию",
   "farmersdelight.configuration.defaultTomatoVineRope.tooltip": "Какую верёвку должна оставлять после себя томатная лоза при разрушении?",
 
@@ -507,9 +520,9 @@
   "farmersdelight.configuration.enableCuttingBoardDispenserBehavior.tooltip": "Если включено, раздатчик сможет использовать разделочную доску перед собой, применяя хранящиеся в нём предметы как режущие инструменты.",
 
   "farmersdelight.configuration.enableStackableSoupItems": "Складываемые супы",
-  "farmersdelight.configuration.enableStackableSoupItems.tooltip": "Если включено, любые BowlFoodItem из следующего списка будут складываться до 16 штук, как и блюда из этого мода.",
+  "farmersdelight.configuration.enableStackableSoupItems.tooltip": "Если включено, любые предметы в миске класса BowlFoodItem из следующего списка будут складываться до 16 штук, как и блюда из этого мода.",
   "farmersdelight.configuration.soupItemList": "Предметы-супы",
-  "farmersdelight.configuration.soupItemList.tooltip": "Список целевых продуктов питания. Для применения эффекта они должны расширять класс BowlFoodItem в коде. По умолчанию — ванильные супы и похлёбки.",
+  "farmersdelight.configuration.soupItemList.tooltip": "Список целевых продуктов питания. Для применения эффекта они должны наследовать класс BowlFoodItem в коде. По умолчанию — ванильные супы и похлёбки.",
 
   "farmersdelight.configuration.generateFDChestLoot": "Генерация добычи из мода в ванильных сундуках",
   "farmersdelight.configuration.generateFDChestLoot.tooltip": "Если включено, в таблицы добычи сундуков по всему миру будут добавлены новые пулы, содержащие предметы из этого мода (верёвки, культуры, инструменты и т.д.).",
