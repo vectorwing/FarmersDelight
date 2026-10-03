@@ -13,6 +13,7 @@
     "PlacePumpkinPieMixin",
     "RabbitsEatCabbageMixin",
     "RopeFenceConnectionMixin",
+    "ShareToolActionItemsMixin",
     "SoupItemMixin",
     "VillagersTargetRichSoilMixin",
     "accessor.RecipeManagerAccessor"
