@@ -10,7 +10,7 @@ import net.minecraft.world.food.FoodData;
 import net.minecraft.world.level.GameRules;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
-import net.minecraftforge.client.gui.overlay.GuiOverlayManager;
+import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -33,11 +33,9 @@ public class NourishmentHungerOverlay
 		MinecraftForge.EVENT_BUS.register(new NourishmentHungerOverlay());
 	}
 
-	static ResourceLocation FOOD_LEVEL_ELEMENT = new ResourceLocation("minecraft", "food_level");
-
 	@SubscribeEvent
 	public void onRenderGuiOverlayPost(RenderGuiOverlayEvent.Post event) {
-		if (event.getOverlay() == GuiOverlayManager.findOverlay(FOOD_LEVEL_ELEMENT)) {
+		if (event.getOverlay() == VanillaGuiOverlay.FOOD_LEVEL.type()) {
 			Minecraft mc = Minecraft.getInstance();
 			ForgeGui gui = (ForgeGui) mc.gui;
 			boolean isMounted = mc.player != null && mc.player.getVehicle() instanceof LivingEntity;

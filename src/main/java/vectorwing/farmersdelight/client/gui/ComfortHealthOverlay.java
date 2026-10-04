@@ -12,7 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
-import net.minecraftforge.client.gui.overlay.GuiOverlayManager;
+import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -30,11 +30,9 @@ public class ComfortHealthOverlay
 		MinecraftForge.EVENT_BUS.register(new ComfortHealthOverlay());
 	}
 
-	static ResourceLocation PLAYER_HEALTH_ELEMENT = new ResourceLocation("minecraft", "player_health");
-
 	@SubscribeEvent
 	public void onRenderGuiOverlayPost(RenderGuiOverlayEvent.Post event) {
-		if (event.getOverlay() == GuiOverlayManager.findOverlay(PLAYER_HEALTH_ELEMENT)) {
+		if (event.getOverlay() == VanillaGuiOverlay.PLAYER_HEALTH.type()) {
 			Minecraft mc = Minecraft.getInstance();
 			ForgeGui gui = (ForgeGui) mc.gui;
 			if (!mc.options.hideGui && gui.shouldDrawSurvivalElements()) {
