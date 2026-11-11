@@ -5,6 +5,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.StandingSignBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import vectorwing.farmersdelight.common.block.state.CanvasSign;
@@ -16,8 +17,8 @@ public class StandingCanvasSignBlock extends StandingSignBlock implements Canvas
 {
 	private final @Nullable DyeColor backgroundColor;
 
-	public StandingCanvasSignBlock(@Nullable DyeColor backgroundColor) {
-		super(WoodType.SPRUCE, Properties.ofFullCopy(Blocks.SPRUCE_SIGN));
+	public StandingCanvasSignBlock(BlockBehaviour.Properties properties, @Nullable DyeColor backgroundColor) {
+		super(WoodType.SPRUCE, properties);
 		this.backgroundColor = backgroundColor;
 	}
 
