@@ -44,8 +44,8 @@ public class DataGenerators
 		event.createProvider(LootTables::new);
 		event.addProvider(new StructureUpdater("structures/village/houses", FarmersDelight.MODID, output, event.getResourceManager(PackType.SERVER_DATA)));
 
-		BlockStates blockStates = new BlockStates(output);
-		generator.addProvider(true, blockStates);
+//		BlockStates blockStates = new BlockStates(output);
+//		generator.addProvider(true, blockStates);
 		generator.addProvider(true, new ItemModels(output));
 		event.createProvider(SoundDefinitions::new);
 	}

@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.*;
+import net.minecraft.world.item.enchantment.Repairable;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -89,7 +90,7 @@ public class ModItems
 	public static Item.Properties knifeItem(ToolMaterial material) {
 		return new Item.Properties()
 			.durability(material.durability())
-			.repairable(material.repairItems())
+			.delayedComponent(DataComponents.REPAIRABLE, h-> new Repairable(h.getOrThrow(material.repairItems())))
 			.enchantable(material.enchantmentValue())
 			.attributes(KnifeItem.createAttributes(material, 0.5F, -2.0F))
 			.delayedComponent(DataComponents.TOOL, holderGetter-> new Tool(
@@ -138,7 +139,7 @@ public class ModItems
 	public static final Supplier<BlockItem> SKILLET = registerBlockWithTab("skillet",
 		SkilletItem::new, ModBlocks.SKILLET, basicItem().stacksTo(1)
 			.durability(SkilletItem.SKILLET_MATERIAL.durability())
-			.repairable(SkilletItem.SKILLET_MATERIAL.repairItems())
+			.delayedComponent(DataComponents.REPAIRABLE, h-> new Repairable(h.getOrThrow(SkilletItem.SKILLET_MATERIAL.repairItems())))
 			.enchantable(SkilletItem.SKILLET_MATERIAL.enchantmentValue())
 			.attributes(SkilletItem.createAttributes(SkilletItem.SKILLET_MATERIAL, 5.0F, -3.1F))
 			.component(DataComponents.TOOL, new Tool(Collections.emptyList(), 1.0F, 1, false))

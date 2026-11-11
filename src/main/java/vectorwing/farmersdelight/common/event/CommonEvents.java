@@ -50,12 +50,12 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+	public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
 		sendPayload((ServerPlayer) event.getEntity(), new NaturalRegenerationGameRulePayload(NATURAL_REGENERATION));
 	}
 
 	@SubscribeEvent
-	public void onServerWorldTick(ServerTickEvent.Post event) {
+	public static void onServerWorldTick(ServerTickEvent.Post event) {
 		boolean currentNaturalRegen = event.getServer().getGameRules().get(GameRules.NATURAL_HEALTH_REGENERATION);
 		if (NATURAL_REGENERATION != currentNaturalRegen) {
 			NATURAL_REGENERATION = currentNaturalRegen;
@@ -68,7 +68,7 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public void sendSyncedRecipes(OnDatapackSyncEvent event) {
+	public static void sendSyncedRecipes(OnDatapackSyncEvent event) {
 		event.sendRecipes(ModRecipeTypes.COOKING.get(), ModRecipeTypes.CUTTING.get());
 	}
 
