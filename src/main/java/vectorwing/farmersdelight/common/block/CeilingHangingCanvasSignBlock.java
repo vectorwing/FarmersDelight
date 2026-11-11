@@ -17,8 +17,8 @@ public class CeilingHangingCanvasSignBlock extends CeilingHangingSignBlock imple
 {
 	private final DyeColor backgroundColor;
 
-	public CeilingHangingCanvasSignBlock(Properties properties, @Nullable DyeColor backgroundColor) {
-		super(WoodType.SPRUCE, properties);
+	public CeilingHangingCanvasSignBlock(@Nullable DyeColor backgroundColor) {
+		super(WoodType.SPRUCE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_HANGING_SIGN));
 		this.backgroundColor = backgroundColor;
 	}
 

@@ -12,7 +12,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import vectorwing.farmersdelight.FarmersDelight;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 public class ModRecipeCategories
@@ -25,7 +24,7 @@ public class ModRecipeCategories
 	public static DeferredHolder<RecipeBookCategory, RecipeBookCategory> COOKING_MISC = register("FARMERSDELIGHT_COOKING_MISC");
 
 	private static DeferredHolder<RecipeBookCategory, RecipeBookCategory> register(String id) {
-		return RECIPE_BOOK_CATEGORIES.register(id.toLowerCase(Locale.ROOT), RecipeBookCategory::new);
+		return RECIPE_BOOK_CATEGORIES.register(id, RecipeBookCategory::new);
 	}
 
 	// We can't do this as a static field, or it'll try to access the holders before they're bound.
