@@ -1,63 +1,64 @@
 package vectorwing.farmersdelight.common.block.entity.inventory;
 
 import net.minecraft.core.Direction;
-import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.transaction.TransactionContext;
+import org.jspecify.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-public class CookingPotItemHandler implements IItemHandler
+public class CookingPotItemHandler implements ResourceHandler<ItemResource>
 {
 	private static final int SLOTS_INPUT = 6;
 	private static final int SLOT_CONTAINER_INPUT = 7;
 	private static final int SLOT_MEAL_OUTPUT = 8;
-	private final IItemHandler itemHandler;
+	private final ResourceHandler<ItemResource> itemHandler;
 	private final Direction side;
 
-	public CookingPotItemHandler(IItemHandler itemHandler, @Nullable Direction side) {
+	public CookingPotItemHandler(ResourceHandler<ItemResource> itemHandler, @Nullable Direction side) {
 		this.itemHandler = itemHandler;
 		this.side = side;
 	}
 
 	@Override
-	public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-		return itemHandler.isItemValid(slot, stack);
+	public int size() {
+		return itemHandler.size();
 	}
 
 	@Override
-	public int getSlots() {
-		return itemHandler.getSlots();
+	public ItemResource getResource(int index) {
+		return itemHandler.getResource(index);
 	}
 
 	@Override
-	@Nonnull
-	public ItemStack getStackInSlot(int slot) {
-		return itemHandler.getStackInSlot(slot);
+	public long getAmountAsLong(int index) {
+		return itemHandler.getAmountAsLong(index);
 	}
 
 	@Override
-	@Nonnull
-	public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+	public long getCapacityAsLong(int index, ItemResource resource) {
+		return itemHandler.getCapacityAsLong(index, resource);
+	}
+
+	@Override
+	public boolean isValid(int index, ItemResource resource) {
+		return false;
+	}
+
+	@Override
+	public int insert(int index, ItemResource resource, int amount, TransactionContext transaction) {
 		if (side == null || side.equals(Direction.UP)) {
-			return slot < SLOTS_INPUT ? itemHandler.insertItem(slot, stack, simulate) : stack;
+			return index < SLOTS_INPUT ? itemHandler.insert(index, resource, amount, transaction) : 0;
 		} else {
-			return slot == SLOT_CONTAINER_INPUT ? itemHandler.insertItem(slot, stack, simulate) : stack;
+			return index == SLOT_CONTAINER_INPUT ? itemHandler.insert(index, resource, amount, transaction) : 0;
 		}
 	}
 
 	@Override
-	@Nonnull
-	public ItemStack extractItem(int slot, int amount, boolean simulate) {
+	public int extract(int index, ItemResource resource, int amount, TransactionContext transaction) {
 		if (side == null || side.equals(Direction.UP)) {
-			return slot < SLOTS_INPUT ? itemHandler.extractItem(slot, amount, simulate) : ItemStack.EMPTY;
+			return index < SLOTS_INPUT ? itemHandler.extract(index, resource, amount, transaction) : 0;
 		} else {
-			return slot == SLOT_MEAL_OUTPUT ? itemHandler.extractItem(slot, amount, simulate) : ItemStack.EMPTY;
+			return index == SLOT_MEAL_OUTPUT ? itemHandler.extract(index, resource, amount, transaction) : 0;
 		}
-	}
-
-	@Override
-	public int getSlotLimit(int slot) {
-		return itemHandler.getSlotLimit(slot);
 	}
 }

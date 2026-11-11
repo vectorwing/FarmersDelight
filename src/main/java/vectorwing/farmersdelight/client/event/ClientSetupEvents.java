@@ -2,6 +2,7 @@ package vectorwing.farmersdelight.client.event;
 
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,7 +24,7 @@ import vectorwing.farmersdelight.client.gui.HUDOverlays;
 import vectorwing.farmersdelight.client.particle.SparkleParticle;
 import vectorwing.farmersdelight.client.particle.StarParticle;
 import vectorwing.farmersdelight.client.particle.SteamParticle;
-import vectorwing.farmersdelight.client.recipebook.RecipeCategories;
+import vectorwing.farmersdelight.common.registry.ModRecipeCategories;
 import vectorwing.farmersdelight.client.renderer.*;
 import vectorwing.farmersdelight.common.EnumParameters;
 import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
@@ -33,23 +34,18 @@ import vectorwing.farmersdelight.common.registry.*;
 @EventBusSubscriber(modid = FarmersDelight.MODID, value = Dist.CLIENT)
 public class ClientSetupEvents
 {
-	public static void init(final FMLClientSetupEvent event) {
-		event.enqueueWork(() -> ItemProperties.register(ModItems.SKILLET.get(), Identifier.withDefaultNamespace("cooking"),
-			(stack, world, entity, s) -> stack.getOrDefault(ModDataComponents.SKILLET_INGREDIENT, ItemStackWrapper.EMPTY).getStack().isEmpty() ? 0 : 1)
-		);
-	}
+	// TODO unnecessary? data component covers this.
+//	public static void init(final FMLClientSetupEvent event) {
+//
+//		event.enqueueWork(() -> ItemProperties.register(ModItems.SKILLET.get(), Identifier.withDefaultNamespace("cooking"),
+//			(stack, world, entity, s) -> stack.getOrDefault(ModDataComponents.SKILLET_INGREDIENT, ItemStackWrapper.EMPTY).getStack().isEmpty() ? 0 : 1)
+//		);
+//	}
 
 	@SubscribeEvent
 	public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
 		event.registerItem(new IClientItemExtensions()
 		{
-			BlockEntityWithoutLevelRenderer renderer = new SkilletItemRenderer();
-
-			@Override
-			public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
-				return renderer;
-			}
-
 			@Override
 			public HumanoidModel.@Nullable ArmPose getArmPose(LivingEntity living, InteractionHand hand, ItemStack stack) {
 				return stack.has(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get()) ? EnumParameters.PROXY_SKILLET_FLIP.getValue() : null;
@@ -58,8 +54,16 @@ public class ClientSetupEvents
 	}
 
 	@SubscribeEvent
+	public static void registerSpecialRenderers(RegisterSpecialModelRendererEvent event) {
+		event.register(
+			Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "skillet_special"),
+			SkilletItemRenderer.Unbaked.MAP_CODEC
+		);
+	}
+
+	@SubscribeEvent
 	public static void registerRecipeBookCategories(RegisterRecipeBookSearchCategoriesEvent event) {
-		RecipeCategories.init(event);
+		ModRecipeCategories.init(event);
 	}
 
 	@SubscribeEvent

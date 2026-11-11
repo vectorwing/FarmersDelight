@@ -1,5 +1,59 @@
 # Changelog
 
+## 1.3.3
+
+### Fixes
+- Fixed Rope reeling not working if the rope is touching the void layer (minimum build height);
+- Fixed suppressed packet error due to an unsafe property check in TomatoBlock;
+- Fixed Canvas Signs not keeping text color when NBT-copied (such as CTRL + middle-click);
+- (1.21+) Fixed Cooking Pot not comparing data components when merging meal output stacks (deciding to cook, meal slot to output slot etc);
+
+## 1.3.2
+
+### Updates
+- Fried Rice and Chicken Soup have been nerfed down to the 3-minute tier of meals, due to their ease of cooking;
+- Rice Bag has been removed from the `straw_blocks` tag, due to not being actually made with Straw.
+  - Instead, it has been directly added to `mineable/knife`, which is the main use of the tag above.
+- Added fuel values to the following items:
+  - Straw Bale: Smelts 5 items;
+  - Rope Fence and Rope Fence Gate: Smelts 1 item each;
+- (1.21+) Added Sable weight tagging to FD blocks which aren't covered by default tagging;
+- (1.21+) TomatoBlock now has broader compatibility checks for integration with different supports (thanks, MehVahdJukaar!);
+- (1.21+) Fuel values have been moved into a NeoForge datamap, `furnace_fuels.json`:
+  - The `FuelItem` and `FuelBlockItem` classes have been deprecated, and will be removed in the next major/minor update;
+
+### Fixes
+- Fixed occasional crash with a tag reference load order;
+- (1.21+) Fixed Rope Fences not being able to hold leashed animals in some circumstances;
+- (1.21+) Fixed Pumpkins having inverted slicing logic with the Silk Touch enchantment;
+- (1.21+) Fixed Cutting Board crash when the Fortune enchantment is disabled through datapacks;
+
+### Translations
+- Added:
+  - bg_bg (thanks, OmegaSleepy and friends!);
+- Updated:
+  - es_ar (thanks, MilanesaGG!);
+  - ja_jp (thanks, Abbage230!);
+  - ko_kr (thanks, Kardane!);
+  - ru_ru (thanks, mpustovoi!);
+  - zh_cn, zh_tw, zh_hk and lzh;
+    - Thanks to BoredYukolin, deemsss2, MechtaSnezhevna and Kaohaaa for this translation batch!;
+
+## 1.3.1
+
+### Updates
+- Re-introduced deprecated references in code, to alleviate crashes with add-ons which depended on them:
+  - Tag references;
+  - Configuration;
+  - Block and item fields for BASKET now point to BAMBOO_BASKET;
+
+### Fixes
+- (1.20) Fixed MixinExtras dependency not being present as a jar-jar in the mod file;
+
+### Translations:
+- Updated:
+  - fr_fr (thanks, ChilAchilles!);
+
 ## 1.3.0
 
 ### Additions

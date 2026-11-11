@@ -125,6 +125,7 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock
 	protected InteractionResult tryToPlaceFoodItem(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (isStoveTopCovered(level, pos, state)) return InteractionResult.PASS;
 		if (!(level.getBlockEntity(pos) instanceof AbstractStoveBlockEntity stoveEntity)) return InteractionResult.PASS;
+		if (!(level instanceof ServerLevel)) return InteractionResult.PASS;
 
 		var maybeRecipe = stoveEntity.getCookingRecipe(heldStack);
 		if (maybeRecipe.isEmpty()) return InteractionResult.PASS;
@@ -132,7 +133,7 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock
 		boolean placeFoodSuccess = stoveEntity.placeFood(player, player.getAbilities().instabuild ? heldStack.copy() : heldStack, maybeRecipe.get());
 		if (!placeFoodSuccess) return InteractionResult.CONSUME;
 		level.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundSource.BLOCKS, 0.5F, 1.0F);
-		return InteractionResult.SUCCESS;
+		return InteractionResult.SUCCESS_SERVER;
 	}
 
 	public void ignite(@Nullable Entity entity, LevelAccessor level, BlockPos pos, BlockState state) {

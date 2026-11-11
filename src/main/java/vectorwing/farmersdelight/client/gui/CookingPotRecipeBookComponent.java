@@ -1,58 +1,78 @@
 package vectorwing.farmersdelight.client.gui;
 
 import net.minecraft.client.gui.components.WidgetSprites;
+import net.minecraft.client.gui.screens.recipebook.GhostSlots;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
+import net.minecraft.client.gui.screens.recipebook.RecipeCollection;
+import net.minecraft.client.gui.screens.recipebook.SearchRecipeBookCategory;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.context.ContextMap;
+import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
+import org.jspecify.annotations.NonNull;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
+import vectorwing.farmersdelight.client.recipe.CookingPotRecipeDisplay;
+import vectorwing.farmersdelight.common.block.entity.container.CookingPotMenu;
+import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.registry.ModRecipeCategories;
+import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
-public class CookingPotRecipeBookComponent extends RecipeBookComponent
+public class CookingPotRecipeBookComponent extends RecipeBookComponent<CookingPotMenu>
 {
+
 	protected static final WidgetSprites RECIPE_BOOK_BUTTONS = new WidgetSprites(
-			Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "recipe_book/cooking_pot_enabled"),
-			Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "recipe_book/cooking_pot_disabled"),
-			Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "recipe_book/cooking_pot_enabled_highlighted"),
-			Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "recipe_book/cooking_pot_disabled_highlighted"));
+		Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "recipe_book/cooking_pot_enabled"),
+		Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "recipe_book/cooking_pot_disabled"),
+		Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "recipe_book/cooking_pot_enabled_highlighted"),
+		Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "recipe_book/cooking_pot_disabled_highlighted"));
+	private static final List<TabInfo> TABS = ModRecipeCategories.createCookingPotTabInfo();
 
-	@Override
-	protected void initFilterButtonTextures() {
-		this.filterButton.initTextureValues(RECIPE_BOOK_BUTTONS);
-	}
-
-	public void hide() {
-		this.setVisible(false);
+	public CookingPotRecipeBookComponent(CookingPotMenu menu) {
+		super(menu, TABS);
 	}
 
 	@Override
-	@Nonnull
+	protected WidgetSprites getFilterButtonTextures() {
+		return RECIPE_BOOK_BUTTONS;
+	}
+
+	@Override
+	protected boolean isCraftingSlot(Slot slot) {
+		return switch (slot.index) {
+			case 0, 1, 2, 3, 4, 5 -> true;
+			default -> false;
+		};
+	}
+
+	@Override
+	protected void selectMatchingRecipes(RecipeCollection possibleRecipes, StackedItemContents stackedItemContents) {
+		possibleRecipes.selectRecipes(stackedItemContents, recipeDisplay -> recipeDisplay instanceof CookingPotRecipeDisplay);
+	}
+
+	@Override
+	@NonNull
 	protected Component getRecipeFilterName() {
 		return TextUtils.container("recipe_book.cookable");
 	}
 
 	@Override
-	public void setupGhostRecipe(RecipeHolder<?> recipe, List<Slot> slots) {
-		ItemStack resultStack = recipe.value().getResultItem(this.minecraft.level.registryAccess());
-		this.ghostRecipe.setRecipe(recipe);
-		if (slots.get(6).getItem().isEmpty()) {
-			this.ghostRecipe.addIngredient(Ingredient.of(resultStack), (slots.get(6)).x, (slots.get(6)).y);
-		}
+	protected void fillGhostRecipe(GhostSlots ghostSlots, RecipeDisplay recipeDisplay, ContextMap contextMap) {
+		ghostSlots.setResult(this.menu.getSlot(6), contextMap, recipeDisplay.result());
+		if (recipeDisplay instanceof CookingPotRecipeDisplay cookingPotRecipeDisplay) {
+			for (int i = 0; i < cookingPotRecipeDisplay.ingredients().size(); ++i) {
+				SlotDisplay display = cookingPotRecipeDisplay.ingredients().get(i);
+				ghostSlots.setInput(menu.getSlot(i), contextMap, display);
+			}
 
-		if (recipe.value() instanceof CookingPotRecipe cookingRecipe) {
-			ItemStack containerStack = cookingRecipe.getOutputContainer();
-			if (!containerStack.isEmpty()) {
-				this.ghostRecipe.addIngredient(Ingredient.of(containerStack), (slots.get(7)).x, (slots.get(7)).y);
+			if (menu.getSlot(7).getItem().isEmpty() && cookingPotRecipeDisplay.container().isPresent()) {
+				ghostSlots.setInput(menu.getSlot(7), contextMap, cookingPotRecipeDisplay.container().get());
 			}
 		}
-
-		this.placeRecipe(this.menu.getGridWidth(), this.menu.getGridHeight(), this.menu.getResultSlotIndex(), recipe, recipe.value().getIngredients().iterator(), 0);
 	}
 }

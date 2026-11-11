@@ -30,8 +30,8 @@ public class FDAddTableLootModifier extends AddTableLootModifier
 
 	private final ResourceKey<LootTable> lootTable;
 
-	protected FDAddTableLootModifier(LootItemCondition[] conditionsIn, ResourceKey<LootTable> lootTable) {
-		super(conditionsIn, lootTable);
+	protected FDAddTableLootModifier(LootItemCondition[] conditionsIn, int priority, ResourceKey<LootTable> lootTable) {
+		super(conditionsIn, priority, lootTable);
 		this.lootTable = lootTable;
 	}
 
@@ -39,7 +39,7 @@ public class FDAddTableLootModifier extends AddTableLootModifier
 	@Override
 	protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
 		if (Configuration.GENERATE_FD_CHEST_LOOT.get()) {
-			context.getResolver().get(Registries.LOOT_TABLE, this.lootTable).ifPresent((extraTable) -> {
+			context.getResolver().get(this.lootTable).ifPresent((extraTable) -> {
 				extraTable.value().getRandomItemsRaw(context, createStackSplitter(context.getLevel(), generatedLoot::add));
 			});
 		}

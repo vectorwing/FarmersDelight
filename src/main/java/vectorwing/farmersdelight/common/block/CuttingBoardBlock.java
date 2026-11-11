@@ -92,7 +92,7 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 			return InteractionResult.SUCCESS;
 		} else {
 			if (cuttingBoard.processStoredItemUsingTool(mainHandStack, player)) {
-				return InteractionResult.SUCCESS;
+				return InteractionResult.SUCCESS_SERVER;
 			}
 		}
 		return InteractionResult.CONSUME;

@@ -89,7 +89,8 @@ public class CookingRecipeCategory implements IRecipeCategory<RecipeHolder<Cooki
 	public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<CookingPotRecipe> holder, IFocusGroup focusGroup) {
 		CookingPotRecipe recipe = holder.value();
 		NonNullList<Ingredient> recipeIngredients = recipe.getIngredients();
-		ItemStack resultStack = RecipeUtils.getResultItem(recipe);
+		ItemStack resultStack = recipe.assemble(null); // This is usually very bad, but CookingPotRecipe always
+		                                               // has the same output, so it's fine to pass null in this case.
 		ItemStack containerStack = recipe.getOutputContainer();
 
 		int borderSlotSize = 18;

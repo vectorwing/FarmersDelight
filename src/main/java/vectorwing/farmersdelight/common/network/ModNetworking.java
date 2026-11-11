@@ -10,6 +10,7 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.item.SkilletItem;
 import vectorwing.farmersdelight.common.network.payload.FlipSkilletPayload;
+import vectorwing.farmersdelight.common.network.payload.NaturalRegenerationGameRulePayload;
 import vectorwing.farmersdelight.common.network.payload.RichSoilBoostParticlesPayload;
 import vectorwing.farmersdelight.common.registry.ModDataComponents;
 
@@ -21,12 +22,17 @@ public class ModNetworking
 		final PayloadRegistrar registrar = event.registrar("1");
 		registrar.playToClient(RichSoilBoostParticlesPayload.TYPE, RichSoilBoostParticlesPayload.STREAM_CODEC, ClientPayloadHandler::handleRichSoilBoostParticles);
 		registrar.playToServer(FlipSkilletPayload.TYPE, FlipSkilletPayload.STREAM_CODEC, ServerPayloadHandler::handleFlipSkillet);
+		registrar.playToClient(NaturalRegenerationGameRulePayload.TYPE, NaturalRegenerationGameRulePayload.STREAM_CODEC, ClientPayloadHandler::handleNaturalRegenerationPayload);
 	}
 
 	public static class ClientPayloadHandler
 	{
 		public static void handleRichSoilBoostParticles(RichSoilBoostParticlesPayload payload, IPayloadContext context) {
 			BoneMealItem.addGrowthParticles(context.player().level(), payload.pos(), 15);
+		}
+
+		public static void handleNaturalRegenerationPayload(NaturalRegenerationGameRulePayload payload, IPayloadContext context) {
+			NaturalRegenerationGameRulePayload.NATURAL_REGENERATION = payload.value();
 		}
 	}
 

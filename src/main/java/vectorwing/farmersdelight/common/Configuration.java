@@ -132,4 +132,24 @@ public class Configuration
 
 		CLIENT_CONFIG = CLIENT_BUILDER.build();
 	}
+
+	// Backwards compatibility configs.
+	@Deprecated(forRemoval = true)
+	public static ModConfigSpec.BooleanValue FARMERS_BUY_FD_CROPS = (ModConfigSpec.BooleanValue) ENABLE_FARMERS_BUY_FD_CROPS;
+	@Deprecated(forRemoval = true)
+	public static ModConfigSpec.BooleanValue WANDERING_TRADER_SELLS_FD_ITEMS = (ModConfigSpec.BooleanValue) ENABLE_WANDERING_TRADER_SELLS_FD_ITEMS;
+	@Deprecated(forRemoval = true)
+	public static ModConfigSpec.BooleanValue ENABLE_RECIPE_BOOK_COOKING_POT = (ModConfigSpec.BooleanValue) ENABLE_COOKING_POT_RECIPE_BOOK;
+	@Deprecated(forRemoval = true)
+	public static ModConfigSpec.BooleanValue VANILLA_SOUP_EXTRA_EFFECTS = (ModConfigSpec.BooleanValue) ENABLE_VANILLA_SOUP_EXTRA_EFFECTS;
+	@Deprecated(forRemoval = true)
+	public static ModConfigSpec.BooleanValue RABBIT_STEW_BUFF = (ModConfigSpec.BooleanValue) ENABLE_RABBIT_STEW_BUFF;
+	@Deprecated(forRemoval = true)
+	public static ModConfigSpec.BooleanValue DISPENSER_TOOLS_CUTTING_BOARD = (ModConfigSpec.BooleanValue) ENABLE_DISPENSER_TOOLS_CUTTING_BOARD;
+	@Deprecated(forRemoval = true)
+	public static ModConfigSpec.BooleanValue NOURISHMENT_HUNGER_OVERLAY = (ModConfigSpec.BooleanValue) ENABLE_NOURISHMENT_HUNGER_OVERLAY;
+	@Deprecated(forRemoval = true)
+	public static ModConfigSpec.BooleanValue COMFORT_HEALTH_OVERLAY = (ModConfigSpec.BooleanValue) ENABLE_COMFORT_HEALTH_OVERLAY;
+	@Deprecated(forRemoval = true)
+	public static ModConfigSpec.BooleanValue FOOD_EFFECT_TOOLTIP = (ModConfigSpec.BooleanValue) ENABLE_FOOD_EFFECT_TOOLTIP;
 }

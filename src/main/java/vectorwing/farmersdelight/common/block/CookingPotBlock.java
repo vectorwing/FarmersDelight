@@ -36,6 +36,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.block.state.CookingPotSupport;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
@@ -193,7 +194,7 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 	@Override
 	protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction) {
 		if (level.getBlockEntity(pos) instanceof CookingPotBlockEntity cookingPot) {
-			ItemStackHandler inventory = cookingPot.getInventory();
+			ItemStacksResourceHandler inventory = cookingPot.getInventory();
 			return MathUtils.calcRedstoneFromItemHandler(inventory);
 		}
 		return 0;
@@ -212,10 +213,11 @@ public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, En
 
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntity) {
-		if (level.isClientSide()) {
-			return createTickerHelper(blockEntity, ModBlockEntityTypes.COOKING_POT.get(), CookingPotBlockEntity::animationTick);
-		}
-		return createTickerHelper(blockEntity, ModBlockEntityTypes.COOKING_POT.get(), CookingPotBlockEntity::cookingTick);
+		return level instanceof ServerLevel serverLevel ? createTickerHelper(blockEntity, ModBlockEntityTypes.COOKING_POT.get(),
+			(commonLevel, blockPos, blockState, be) -> {
+				CookingPotBlockEntity.cookingTick(serverLevel, blockPos, blockState, be);
+			}) :
+			createTickerHelper(blockEntity, ModBlockEntityTypes.COOKING_POT.get(), CookingPotBlockEntity::animationTick);
 	}
 
 	@Nullable

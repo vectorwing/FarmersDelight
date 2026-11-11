@@ -35,6 +35,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
 import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModSounds;
@@ -81,13 +82,17 @@ public class SkilletBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 				}
 				return InteractionResult.SUCCESS;
 			}
-			ItemStack remainderStack = skillet.addItemToCook(heldStack, player);
-			if (remainderStack.getCount() != heldStack.getCount()) {
-				if (!player.isCreative()) {
-					player.setItemSlot(heldSlot, remainderStack);
+			if (level instanceof ServerLevel sLevel) {
+				ItemStack remainderStack = skillet.addItemToCook(heldStack, player, sLevel);
+				if (remainderStack.getCount() != heldStack.getCount()) {
+					if (!player.isCreative()) {
+						player.setItemSlot(heldSlot, remainderStack);
+					}
+					level.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundSource.BLOCKS, 0.7F, 1.0F);
+					return InteractionResult.SUCCESS;
 				}
-				level.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundSource.BLOCKS, 0.7F, 1.0F);
-				return InteractionResult.SUCCESS;
+			} else {
+				return InteractionResult.SUCCESS_SERVER;
 			}
 		}
 		return InteractionResult.PASS;
@@ -101,7 +106,8 @@ public class SkilletBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 	@Override
 	public void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston) {
 		if (level.getBlockEntity(pos) instanceof SkilletBlockEntity skillet) {
-			Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), skillet.getInventory().getStackInSlot(0));
+			ItemStacksResourceHandler inventory = skillet.getInventory();
+			Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), inventory.getResource(0).toStack(inventory.getAmountAsInt(0)));
 		}
 
 		super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);

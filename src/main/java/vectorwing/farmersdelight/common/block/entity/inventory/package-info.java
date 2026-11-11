@@ -2,6 +2,6 @@
 @MethodsReturnNonnullByDefault
 package vectorwing.farmersdelight.common.block.entity.inventory;
 
-import net.minecraft.MethodsReturnNonnullByDefault;
+import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;

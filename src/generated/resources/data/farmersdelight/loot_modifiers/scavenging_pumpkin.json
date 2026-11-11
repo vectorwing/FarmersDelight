@@ -7,19 +7,33 @@
       "condition": "minecraft:block_state_property"
     },
     {
-      "condition": "minecraft:match_tool",
-      "predicate": {
-        "predicates": {
-          "minecraft:enchantments": [
-            {
-              "enchantments": "minecraft:silk_touch",
-              "levels": {
-                "min": 1
+      "condition": "minecraft:all_of",
+      "terms": [
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "items": "#farmersdelight:tools/knives"
+          }
+        },
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "predicates": {
+                "minecraft:enchantments": [
+                  {
+                    "enchantments": "minecraft:silk_touch",
+                    "levels": {
+                      "min": 1
+                    }
+                  }
+                ]
               }
             }
-          ]
+          }
         }
-      }
+      ]
     }
   ],
   "count": 4,

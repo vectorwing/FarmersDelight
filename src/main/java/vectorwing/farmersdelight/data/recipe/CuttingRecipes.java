@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.data.recipe;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
@@ -26,11 +27,11 @@ import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 public class CuttingRecipes
 {
 	public static Ingredient KNIVES = matchesTool(KnifeItem.KNIFE_DIG, CommonTags.Items.TOOLS_KNIFE);
-	public static Ingredient PICKAXES = matchesTool(ItemAbilities.PICKAXE_DIG, ItemTags.PICKAXES);
-	public static Ingredient AXES = matchesTool(ItemAbilities.AXE_DIG, ItemTags.AXES);
+	public static Ingredient PICKAXES = matchesTool(ItemTags.PICKAXES);
+	public static Ingredient AXES = matchesTool(ItemTags.AXES);
 	public static Ingredient AXES_STRIP = matchesTool(ItemAbilities.AXE_STRIP, ItemTags.AXES);
-	public static Ingredient SHOVELS = matchesTool(ItemAbilities.SHOVEL_DIG, ItemTags.SHOVELS);
-	public static Ingredient HOES = matchesTool(ItemAbilities.HOE_DIG, ItemTags.HOES);
+	public static Ingredient SHOVELS = matchesTool(ItemTags.SHOVELS);
+	public static Ingredient HOES = matchesTool(ItemTags.HOES);
 	public static Ingredient SHEARS = matchesTool(ItemAbilities.SHEARS_DIG, Tags.Items.TOOLS_SHEAR);
 
 	public static void register(HolderLookup.Provider registries, RecipeOutput output) {
@@ -111,7 +112,7 @@ public class CuttingRecipes
 	}
 
 	private static void cuttingFoods(RecipeOutput output) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(CommonTags.Items.FOODS_DOUGH), KNIVES, ModItems.RAW_PASTA.get(), 1)
+		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(BuiltInRegistries.ITEM.getOrThrow(CommonTags.Items.FOODS_DOUGH)), KNIVES, ModItems.RAW_PASTA.get(), 1)
 				.save(output, RecipeUtils.FDLocation("cutting/tag_dough"));
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.KELP_ROLL.get()), KNIVES, ModItems.KELP_ROLL_SLICE.get(), 3)
 				.saveToFD(output);
@@ -366,7 +367,11 @@ public class CuttingRecipes
 	}
 
 	private static Ingredient matchesTool(ItemAbility toolAction, TagKey<Item> fallbackTag) {
-		return CompoundIngredient.of(new ItemAbilityIngredient(toolAction).toVanilla(), Ingredient.of(fallbackTag));
+		return CompoundIngredient.of(new ItemAbilityIngredient(toolAction).toVanilla(), matchesTool(fallbackTag));
+	}
+
+	private static Ingredient matchesTool(TagKey<Item> fallbackTag) {
+		return Ingredient.of(BuiltInRegistries.ITEM.getOrThrow(fallbackTag));
 	}
 
 	private static Identifier salvagingRecipe(String name) {

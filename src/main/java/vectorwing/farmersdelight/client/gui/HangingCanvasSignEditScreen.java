@@ -1,18 +1,18 @@
 package vectorwing.farmersdelight.client.gui;
 
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.AbstractSignEditScreen;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.screens.inventory.HangingSignEditScreen;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
 import org.joml.Vector3f;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.state.CanvasSign;
 
-public class HangingCanvasSignEditScreen extends AbstractSignEditScreen
+public class HangingCanvasSignEditScreen extends HangingSignEditScreen
 {
 	private static final Vector3f TEXT_SCALE = new Vector3f(0.9F, 0.9F, 0.9F);
 
@@ -20,7 +20,7 @@ public class HangingCanvasSignEditScreen extends AbstractSignEditScreen
 	private final Identifier texture;
 
 	public HangingCanvasSignEditScreen(SignBlockEntity signBlockEntity, boolean isFrontText, boolean isTextFilteringEnabled) {
-		super(signBlockEntity, isFrontText, isTextFilteringEnabled, Component.translatable("hanging_sign.edit"));
+		super(signBlockEntity, isFrontText, isTextFilteringEnabled);
 		Block block = signBlockEntity.getBlockState().getBlock();
 		if (block instanceof CanvasSign canvasSign) {
 			this.dye = canvasSign.getBackgroundColor();
@@ -30,15 +30,10 @@ public class HangingCanvasSignEditScreen extends AbstractSignEditScreen
 	}
 
 	@Override
-	protected void offsetSign(GuiGraphics gui, BlockState state) {
-		gui.pose().translate((float) this.width / 2.0F, 125.0F, 50.0F);
-	}
-
-	@Override
-	protected void renderSignBackground(GuiGraphics gui, BlockState p_250054_) {
-		gui.pose().translate(0.0F, -13.0F, 0.0F);
-		gui.pose().scale(4.5F, 4.5F, 1.0F);
-		gui.blit(this.texture, -8, -8, 0.0F, 0.0F, 16, 16, 16, 16);
+	protected void extractSignBackground(GuiGraphicsExtractor graphics) {
+		graphics.pose().translate(0.0F, -13.0F);
+		graphics.pose().scale(4.5F, 4.5F);
+		graphics.blit(RenderPipelines.GUI_TEXTURED, this.texture, -8, -8, 0.0F, 0.0F, 16, 16, 16, 16);
 	}
 
 	@Override

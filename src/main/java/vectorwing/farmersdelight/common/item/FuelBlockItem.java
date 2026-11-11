@@ -5,9 +5,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.FuelValues;
+import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 
 import javax.annotation.Nullable;
 
+/**
+ * Deprecated - Fuel is now defined in a NeoForge datamap: {@link NeoForgeDataMaps#FURNACE_FUELS}.
+ */
+@Deprecated(forRemoval = true)
 public class FuelBlockItem extends BlockItem
 {
 	public final int burnTime;

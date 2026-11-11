@@ -42,6 +42,7 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.ClientRenderUtils;
+import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import javax.annotation.Nullable;
@@ -141,11 +142,7 @@ public class SkilletItem extends BlockItem
 
 	@Override
 	public int getUseDuration(ItemStack stack, LivingEntity entity) {
-		Optional<Holder.Reference<Enchantment>> fireAspect = entity.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).get(Enchantments.FIRE_ASPECT);
-		if (fireAspect.isEmpty()) {
-			return 0;
-		}
-		int fireAspectLevel = fireAspect.map(stack::getEnchantmentLevel).orElse(0);
+		int fireAspectLevel = ItemUtils.getValidatedEnchantmentLevel(Enchantments.FIRE_ASPECT, entity.level().registryAccess(), stack);
 		int cookingTime = stack.getOrDefault(ModDataComponents.COOKING_TIME_LENGTH, 0);
 		return SkilletBlock.getSkilletCookingTime(cookingTime, fireAspectLevel);
 	}
